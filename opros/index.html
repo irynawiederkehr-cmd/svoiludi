@@ -1,0 +1,501 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<link rel="icon" href="../fav/favicon.svg" type="image/svg+xml"><link rel="icon" href="../fav/icon-32.png" sizes="32x32"><link rel="apple-touch-icon" href="../fav/apple-touch-icon.png"><link rel="manifest" href="../fav/site.webmanifest">
+<title>Кого не хватает — опрос «Свои люди в Швейцарии»</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Короткий анонимный опрос: каких русскоязычных специалистов вам не хватает в Швейцарии. По ответам мы приглашаем специалистов в справочник.">
+<meta property="og:type" content="website"><meta property="og:locale" content="ru_RU"><meta property="og:site_name" content="Свои люди в Швейцарии">
+<meta property="og:title" content="Каких специалистов вам не хватает?">
+<meta property="og:description" content="Минута на ответ, анонимно. По вашим ответам мы приглашаем в справочник нужных специалистов.">
+<meta property="og:url" content="https://svoiludi.ch/opros/"><meta property="og:image" content="https://svoiludi.ch/fav/og-svoi-ludi.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image"><meta name="theme-color" content="#4F5E3E">
+<link rel="stylesheet" href="../assets/fonts.css">
+<style>
+[hidden]{display:none!important}
+
+[hidden]{display:none!important}
+/* Layout: тёплая страница-письмо. Слева слово, справа шерстяная картина; дальше «двери» — фразы, в которых она узнаёт себя */
+:root{
+  --bg:#F4EDE3;       /* бежевый фон коучинга, как в тестах */
+  --paper:#FFFCF8;
+  --ink:#2F2924;
+  --muted:#7A6E62;
+  --line:#E5D9C9;
+  --brown:#6E4F3C;    /* главный акцент, как в тестах */
+  --mustard:#B98324;  /* шарф героини */
+  --mustard-soft:#F3E3C2;
+  --sage:#66704F;     /* пальто героини */
+  --sage-soft:#E3E6D6;
+  --soft:#EADFCF;
+  --blue:#2E5A88;     /* тесты о паре — голубой, как в тестах */
+  --blue-soft:#EAF2FA;
+  --blue-line:#D3E1EE;
+  --display:"Forum","Cormorant Garamond",Georgia,serif;
+  --body:"Manrope","Segoe UI",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#221D19; --paper:#2C2621; --ink:#F1E9DF; --muted:#B4A796; --line:#3E362F; --brown:#E1C2A6;
+  --mustard:#E2B45C; --mustard-soft:#3D321F; --sage:#B4BF97; --sage-soft:#2E3226; --soft:#3A3129; --blue:#9CC2EA; --blue-soft:#1D2733; --blue-line:#2C3A4A; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#221D19; --paper:#2C2621; --ink:#F1E9DF; --muted:#B4A796; --line:#3E362F; --brown:#E1C2A6;
+  --mustard:#E2B45C; --mustard-soft:#3D321F; --sage:#B4BF97; --sage-soft:#2E3226; --soft:#3A3129; --blue:#9CC2EA; --blue-soft:#1D2733; --blue-line:#2C3A4A; color-scheme:dark}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16.5px;line-height:1.65;margin:0}
+.page{max-width:1120px;margin:0 auto;padding-inline:20px}
+h1,h2,h3{font-family:var(--display);font-weight:400;line-height:1.12;margin:0;text-wrap:balance}
+p{margin:0}
+a{color:inherit}
+.eyebrow{font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;font-weight:700;color:var(--muted)}
+:focus-visible{outline:3px solid var(--mustard);outline-offset:3px;border-radius:6px}
+
+/* ---------- шапка ---------- */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.top .page{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:12px}
+.mark{display:flex;align-items:center;gap:10px;text-decoration:none}
+.mono{width:38px;height:38px;border-radius:50%;border:1.5px solid var(--brown);display:grid;place-items:center;font-family:var(--display);font-size:1.05rem;color:var(--brown);letter-spacing:.02em}
+.mark b{font-family:var(--display);font-weight:400;font-size:1.25rem;line-height:1}
+.mark small{display:block;font-size:.72rem;color:var(--muted);letter-spacing:.04em;margin-top:3px}
+nav{display:flex;gap:22px;font-size:.88rem;font-weight:600}
+nav a{text-decoration:none;color:var(--muted)}
+nav a:hover{color:var(--ink)}
+.navcta{font-size:.86rem;font-weight:700;text-decoration:none;border:1.5px solid var(--brown);color:var(--brown);border-radius:999px;padding:8px 16px;white-space:nowrap}
+@media (max-width:860px){
+  .top .page{flex-wrap:wrap;row-gap:6px}
+  nav{order:3;width:100%;gap:16px;overflow-x:auto;scrollbar-width:none;padding-bottom:4px}
+  nav::-webkit-scrollbar{display:none}
+  nav a{white-space:nowrap}
+}
+@media (max-width:420px){.mark small{display:none}.navcta{padding:7px 12px}}
+
+/* ---------- первый экран ---------- */
+.hero{display:grid;grid-template-columns:1.25fr .75fr;gap:56px;align-items:center;padding-block:48px 40px}
+.hero-text{display:flex;flex-direction:column;gap:22px;min-width:0}
+.hero h1{font-size:clamp(2.5rem,6.2vw,4.4rem);color:var(--ink)}
+.hero h1 em{font-style:normal;color:var(--brown)}
+.hero .lead{font-size:1.14rem;max-width:34ch;color:var(--ink)}
+.who{font-size:.86rem;color:var(--muted);display:flex;flex-wrap:wrap;gap:6px 14px}
+.who span+span::before{content:"·";margin-right:14px;color:var(--line)}
+@media (max-width:520px){.who span+span::before{content:none}.who{gap:4px 12px}}
+.hero-actions{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.btn{font:inherit;font-weight:700;font-size:.95rem;border:none;border-radius:999px;padding:14px 24px;cursor:pointer;background:var(--brown);color:var(--paper);text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:transform .15s}
+.btn:hover{transform:translateY(-1px)}
+.btn.ghost{background:transparent;color:var(--brown);border:1.5px solid var(--brown)}
+.hero-art{position:relative;min-width:0}
+.hero-art img{display:block;width:100%;max-width:100%;height:auto;aspect-ratio:941/1672;border-radius:26px;box-shadow:0 24px 50px -24px rgba(60,40,20,.45)}
+.hero-art figcaption{margin-top:14px;background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:12px 16px;font-size:.84rem}
+.hero-art figcaption b{display:block;font-family:var(--display);font-weight:400;font-size:1.1rem;color:var(--brown)}
+@media (max-width:860px){.hero{grid-template-columns:1fr;gap:28px;padding-block:32px 24px}.hero-art{max-width:360px;margin:0 auto;width:100%}}
+
+/* ---------- двери ---------- */
+section{padding-block:56px}
+.sec-head{display:flex;flex-direction:column;gap:10px;max-width:640px;margin-bottom:28px}
+.sec-head h2{font-size:clamp(2rem,4.6vw,2.9rem)}
+.sec-head p{color:var(--muted);font-size:1.02rem}
+.doors{background:var(--paper);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.door-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+@media (max-width:980px){.door-grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:520px){.door-grid{grid-template-columns:1fr}}
+.door{font:inherit;text-align:left;cursor:pointer;color:var(--ink);background:var(--bg);border:1.5px solid var(--line);border-radius:18px;padding:22px 20px 18px;display:flex;flex-direction:column;gap:14px;min-height:150px;transition:border-color .15s,transform .15s,background .15s;min-width:0}
+.door:hover{border-color:var(--brown);transform:translateY(-2px)}
+.door q{font-family:var(--display);font-size:1.5rem;line-height:1.15;quotes:"«" "»"}
+.door small{margin-top:auto;font-size:.8rem;color:var(--muted);display:flex;justify-content:space-between;gap:8px}
+.door[aria-expanded="true"]{background:var(--mustard-soft);border-color:var(--mustard)}
+.door[aria-expanded="true"] small span:last-child{transform:rotate(90deg)}
+.door small span:last-child{transition:transform .2s}
+.more-link{margin-top:22px;font:inherit;font-weight:700;color:var(--brown);background:none;border:none;padding:6px 0;cursor:pointer;font-size:.98rem;text-decoration:underline;text-underline-offset:5px;text-decoration-thickness:1px}
+.spheres{margin-top:18px}
+.sphere-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+@media (max-width:820px){.sphere-grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:480px){.sphere-grid{grid-template-columns:1fr}}
+.sphere{font:inherit;text-align:left;cursor:pointer;color:var(--ink);background:var(--paper);border:1.5px solid var(--line);border-radius:14px;padding:14px 16px;font-weight:600;font-size:.98rem;display:flex;justify-content:space-between;gap:10px;align-items:center;min-width:0}
+.sphere:hover{border-color:var(--brown)}
+.sphere[aria-expanded="true"]{background:var(--sage-soft);border-color:var(--sage)}
+.panel{margin-top:18px;background:var(--bg);border:1.5px solid var(--mustard);border-radius:20px;padding:28px;display:grid;grid-template-columns:1.1fr 1fr;gap:28px;animation:rise .25s ease-out}
+.panel.sage{border-color:var(--sage)}
+@keyframes rise{from{transform:translateY(8px)}}
+@media (max-width:820px){.panel{grid-template-columns:1fr;padding:22px 18px;gap:20px}}
+.panel h3{font-size:1.75rem;margin-bottom:12px}
+.panel .say{display:flex;flex-direction:column;gap:12px;min-width:0}
+.panel .say p{max-width:60ch}
+.todo{display:flex;flex-direction:column;gap:10px;min-width:0}
+.todo .eyebrow{margin-bottom:2px}
+.act{display:flex;flex-direction:column;gap:4px;background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:14px 16px;text-decoration:none;color:var(--ink);transition:border-color .15s}
+a.act:hover{border-color:var(--brown)}
+.act b{font-weight:700;font-size:.98rem;display:flex;justify-content:space-between;gap:10px}
+.act span{font-size:.88rem;color:var(--muted)}
+.edge{font-size:.86rem;color:var(--muted);border-left:3px solid var(--line);padding-left:12px}
+.next{font-size:.92rem}
+.next b{color:var(--brown)}
+.notme{font-size:.86rem;color:var(--muted)}
+.notme button{font:inherit;color:var(--brown);background:none;border:none;padding:0;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+
+
+/* ---------- всплывающее окно ---------- */
+dialog.qm{border:0;padding:0;background:transparent;width:min(100% - 24px,1080px);max-height:92vh;color:var(--ink)}
+dialog.qm[open]{animation:qmIn .28s cubic-bezier(.2,.8,.2,1)}
+@keyframes qmIn{from{opacity:0;transform:translateY(14px) scale(.98)}}
+dialog.qm::backdrop{background:rgba(47,41,36,.62);backdrop-filter:blur(3px)}
+.qm-card{background:var(--paper);border-radius:28px;padding:clamp(20px,3.4vw,40px);display:flex;flex-direction:column;gap:clamp(18px,2.6vw,28px);max-height:92vh;overflow-y:auto;box-shadow:0 30px 80px -30px rgba(40,25,10,.6)}
+.qm-top{display:flex;align-items:flex-start;gap:16px}
+.qm-head{flex:1;display:flex;flex-direction:column;gap:6px;min-width:0}
+.qm-title{font-size:clamp(1.8rem,4.4vw,3.2rem);line-height:1.04}
+.qm-close{flex:none;width:44px;height:44px;border-radius:50%;border:1.5px solid var(--line);background:var(--paper);color:var(--ink);font-size:1.05rem;cursor:pointer;display:grid;place-items:center;transition:background .15s,border-color .15s}
+.qm-close:hover{background:var(--mustard-soft);border-color:var(--mustard)}
+.qm-panel{background:var(--mustard-soft);border-radius:20px;padding:clamp(18px,2.8vw,32px);display:grid;grid-template-columns:.9fr 1.2fr 1fr;gap:clamp(18px,2.6vw,32px)}
+.qm-panel.sage{background:var(--sage-soft)}
+@media (max-width:900px){.qm-panel{grid-template-columns:1fr}}
+.qm-col{display:flex;flex-direction:column;gap:12px;min-width:0}
+.qm-col h3{font-size:1.4rem;line-height:1.15}
+.qm-col p{font-size:.95rem}
+.pain{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+.pain li{font-family:var(--display);font-size:1.12rem;line-height:1.3;padding-left:16px;border-left:2px solid var(--mustard)}
+.qm-panel.sage .pain li{border-color:var(--sage)}
+.qm-col .act{background:var(--paper)}
+.qm-foot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px 24px;align-items:baseline}
+.qm-foot .next{max-width:60ch}
+.qm-foot .notme button{font:inherit;color:var(--brown);background:none;border:none;padding:0;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+
+/* ---------- обо мне ---------- */
+.about{display:grid;grid-template-columns:.75fr 1.25fr;gap:56px;align-items:center}
+@media (max-width:860px){.about{grid-template-columns:1fr;gap:28px}.about img{max-width:360px;margin:0 auto}}
+.about img{display:block;width:100%;max-width:100%;height:auto;aspect-ratio:941/1672;border-radius:26px;box-shadow:0 24px 50px -24px rgba(60,40,20,.4)}
+.about-text{display:flex;flex-direction:column;gap:16px;min-width:0}
+.about-text h2{font-size:clamp(2rem,4.6vw,2.9rem)}
+.about-text p{max-width:60ch}
+.creds{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
+.creds span{font-size:.8rem;font-weight:600;background:var(--paper);border:1px solid var(--line);border-radius:999px;padding:6px 12px}
+.how-i{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:6px}
+@media (max-width:520px){.how-i{grid-template-columns:1fr}}
+.how-i div{background:var(--paper);border-radius:14px;padding:14px 16px;font-size:.9rem;color:var(--muted)}
+.how-i b{display:block;font-family:var(--display);font-weight:400;font-size:1.2rem;color:var(--ink);margin-bottom:2px}
+
+.two{display:flex;flex-direction:column;gap:12px;margin-top:8px}
+.two-lead{font-weight:600}
+.two-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:560px){.two-grid{grid-template-columns:1fr}}
+.prac{border-radius:16px;padding:16px 18px;display:flex;flex-direction:column;gap:6px;min-width:0;border:1.5px solid var(--line);background:var(--paper)}
+.prac.psy{background:var(--blue-soft);border-color:var(--blue-line)}
+.prac .tag{font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--sage)}
+.prac.psy .tag{color:var(--blue)}
+.prac b{font-family:var(--display);font-weight:400;font-size:1.3rem;line-height:1.2}
+.prac p{font-size:.9rem;color:var(--muted)}
+.prac .links{font-size:.86rem;font-weight:700;margin-top:auto}
+.prac .links a{color:var(--brown)}
+.prac.psy .links a{color:var(--blue)}
+.two-note{font-size:.82rem;color:var(--muted)}
+
+.ic{flex:none;display:grid;place-items:center;width:58px;height:58px;border-radius:50%;background:var(--paper);border:1.5px solid var(--line)}
+.ic.sm{width:46px;height:46px}
+.tcard .ic{width:56px;height:56px}
+.door .ic{background:var(--paper)}
+.door-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.sphere .lbl{display:flex;align-items:center;gap:12px}
+.step-top{display:flex;align-items:center;gap:14px}
+.tcard .t-top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.prac .p-top{display:flex;align-items:center;gap:10px}
+.limits .l-top{display:flex;align-items:center;gap:14px}
+.clist .c-l{display:flex;align-items:center;gap:10px}
+
+/* ---------- как начать ---------- */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1.5px solid var(--brown)}
+@media (max-width:820px){.steps{grid-template-columns:1fr}}
+.step{padding:22px 24px 6px 0;display:flex;flex-direction:column;gap:8px;min-width:0}
+.step+.step{padding-left:24px;border-left:1px solid var(--line)}
+@media (max-width:820px){.step+.step{padding-left:0;border-left:none;border-top:1px solid var(--line)}}
+.step i{font-style:normal;font-family:var(--display);font-size:2.6rem;line-height:1;color:var(--mustard)}
+.step h3{font-size:1.4rem}
+.step p{color:var(--muted);font-size:.95rem}
+.codeword{display:inline-block;font-weight:700;letter-spacing:.12em;color:var(--brown);background:var(--mustard-soft);border-radius:6px;padding:0 6px}
+
+/* ---------- бесплатно ---------- */
+.free{background:var(--paper);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.free-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+@media (max-width:980px){.free-grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:520px){.free-grid{grid-template-columns:1fr}}
+.fcard{display:flex;flex-direction:column;gap:10px;text-decoration:none;color:var(--ink);background:var(--bg);border-radius:18px;padding:20px;border:1.5px solid transparent;transition:border-color .15s;min-width:0}
+.fcard:hover{border-color:var(--brown)}
+.fcard .tag{font-size:.74rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--sage)}
+.fcard h3{font-size:1.45rem}
+.fcard p{font-size:.9rem;color:var(--muted)}
+.fcard .go{margin-top:auto;font-weight:700;font-size:.88rem;color:var(--brown)}
+
+
+.tgroup{display:flex;flex-direction:column;gap:12px;margin-bottom:26px}
+.tgroup-h{font-size:1.3rem;color:var(--muted)}
+.test-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+@media (max-width:700px){.test-grid{grid-template-columns:1fr}}
+.tcard{display:flex;flex-direction:column;gap:8px;text-decoration:none;color:var(--ink);background:var(--bg);border-radius:20px;padding:22px 22px 18px;border:1.5px solid var(--line);transition:border-color .15s,transform .15s;min-width:0}
+.tcard:hover{border-color:var(--brown);transform:translateY(-2px)}
+.tcard.pair{background:var(--blue-soft);border-color:var(--blue-line)}
+.tcard.pair:hover{border-color:var(--blue)}
+.tcard .tag{font-size:.74rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--sage)}
+.tcard.pair .tag,.tcard.pair .go{color:var(--blue)}
+.tcard h3{font-size:1.65rem}
+.tcard .slog{font-family:var(--display);font-size:1.08rem;color:var(--brown);line-height:1.3}
+.tcard.pair .slog{color:var(--blue)}
+.tcard p{font-size:.92rem;color:var(--muted)}
+.tcard .go{margin-top:auto;padding-top:6px;font-weight:700;font-size:.9rem;color:var(--brown)}
+.also{display:grid;grid-template-columns:auto 1fr 1fr;gap:12px;align-items:stretch}
+@media (max-width:820px){.also{grid-template-columns:1fr}}
+.also .btn{justify-content:center;align-self:center}
+.mini{display:flex;flex-direction:column;gap:2px;text-decoration:none;color:var(--ink);border:1px solid var(--line);border-radius:14px;padding:12px 16px;min-width:0}
+.mini:hover{border-color:var(--brown)}
+.mini b{font-size:.95rem}
+.mini span{font-size:.84rem;color:var(--muted)}
+/* ---------- граница и контакт ---------- */
+.limits{display:grid;grid-template-columns:1fr 1.4fr;gap:40px;align-items:start}
+@media (max-width:820px){.limits{grid-template-columns:1fr;gap:16px}}
+.limits h2{font-size:clamp(1.7rem,3.6vw,2.2rem)}
+.limits p{color:var(--muted);max-width:62ch}
+.contact{background:linear-gradient(160deg,var(--soft) 0%,var(--bg) 100%);border-radius:28px;padding:44px 40px;display:grid;grid-template-columns:1.2fr 1fr;gap:32px;align-items:center}
+@media (max-width:820px){.contact{grid-template-columns:1fr;padding:30px 22px}}
+.contact h2{font-size:clamp(2rem,4.6vw,2.9rem);margin-bottom:12px}
+.contact p{max-width:46ch}
+.clist{display:flex;flex-direction:column;gap:10px}
+.clist a,.clist div{display:flex;justify-content:space-between;gap:12px;align-items:center;background:var(--paper);border-radius:14px;padding:14px 16px;text-decoration:none;color:var(--ink);font-weight:600;font-size:.95rem;min-width:0}
+.clist span{color:var(--muted);font-weight:500;font-size:.85rem;overflow-wrap:anywhere;text-align:right}
+footer{padding-block:28px 40px;font-size:.82rem;color:var(--muted);display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
+footer a{color:var(--muted)}
+
+/* ---------- полоса-ссылка на страницу «Путь» ---------- */
+.pathband{margin-top:40px;display:flex;align-items:center;gap:18px;flex-wrap:wrap;text-decoration:none;color:var(--ink);background:var(--paper);border:1.5px solid var(--line);border-radius:22px;padding:20px 24px;transition:border-color .15s}
+.pathband:hover{border-color:var(--brown)}
+.pb-txt{flex:1 1 300px;display:flex;flex-direction:column;gap:4px;min-width:0}
+.pb-txt b{font-family:var(--display);font-weight:400;font-size:1.5rem;line-height:1.15}
+.pb-txt span{font-size:.92rem;color:var(--muted)}
+.pb-go{font-weight:700;color:var(--brown);white-space:nowrap}
+
+.mono.av{border:none;padding:0}
+.mono.av svg{width:100%;height:100%;display:block}
+
+.act b{align-items:center}
+.act-ic{flex:none;width:32px;height:32px;border-radius:50%;background:var(--bg);display:grid;place-items:center;margin-right:2px}
+.act b > .act-ic + *{flex:1}
+.mini{flex-direction:row;flex-wrap:wrap;align-items:center;column-gap:10px}
+.mini .ic.sm{width:38px;height:38px}
+.mini b{flex:1 1 auto}
+.mini span:not(.ic){flex-basis:100%}
+.act-t{flex:1;min-width:0}
+.act b{justify-content:flex-start;gap:10px}
+
+/* ---- бот: ссылка и всплывающая подсказка (data-tip) ---- */
+a.bot{color:inherit;font-weight:600;text-decoration:underline dotted;text-decoration-thickness:1.5px;text-underline-offset:3px}
+a.bot:hover{color:#B98324}
+[data-tip]{position:relative}
+[data-tip]::after{content:attr(data-tip);position:absolute;left:50%;bottom:calc(100% + 10px);transform:translate(-50%,4px);width:max-content;max-width:min(280px,80vw);padding:9px 13px;border-radius:12px;background:#3B2C22;color:#FFFCF8;font:500 13px/1.45 Manrope,system-ui,sans-serif;letter-spacing:0;text-align:left;text-transform:none;white-space:normal;box-shadow:0 10px 26px -10px rgba(40,25,10,.55);opacity:0;visibility:hidden;pointer-events:none;transition:opacity .15s,transform .15s,visibility .15s;z-index:60}
+[data-tip]:not(:hover):not(:focus-visible)::after{display:none} /* скрытая подсказка не должна давать горизонтальную прокрутку */
+[data-tip]:hover::after,[data-tip]:focus-visible::after{opacity:1;visibility:visible;transform:translate(-50%,0)}
+@media (hover:none){[data-tip]::after{display:none!important}}
+@media print{[data-tip]::after{display:none}}
+
+:root{--bg:#EEF1E6;--brown:#4F5E3E;--soft:#E3E8D6;--line:#D9DFCB;--sage-soft:#E3E8D6}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#1C2019;--brown:#B9C69F;--soft:#283023;--line:#353D2E}}
+:root[data-theme="dark"]{--bg:#1C2019;--brown:#B9C69F;--soft:#283023;--line:#353D2E}
+/* ---------- опрос «Кого не хватает» (04.10.2026): анонимные галочки → Google Таблица; сводка «чаще всего ищут» ---------- */
+.top nav{min-width:0;max-width:100%}
+.o-hero{display:flex;flex-direction:column;gap:14px;padding-block:44px 18px;max-width:780px}
+.o-hero h1{font-size:clamp(2.2rem,5vw,3.5rem)} .o-hero h1 em{font-style:normal;color:var(--brown)} .o-hero .lead{font-size:1.08rem;max-width:60ch}
+.trial{border:1.5px dashed var(--mustard);background:var(--mustard-soft);border-radius:16px;padding:12px 16px;font-size:.9rem;margin-bottom:14px}
+form.o{display:flex;flex-direction:column;gap:18px;margin-bottom:10px}
+.q{background:var(--paper);border:1.5px solid var(--line);border-radius:22px;padding:clamp(16px,2.6vw,24px);display:flex;flex-direction:column;gap:12px}
+.q h2{font-size:1.45rem;display:flex;gap:10px;align-items:baseline}
+.q h2 i{font:700 .78rem var(--body);font-style:normal;width:26px;height:26px;border-radius:50%;background:var(--brown);color:var(--paper);display:grid;place-items:center;flex:none;position:relative;top:-2px}
+.q .hint{color:var(--muted);font-size:.92rem;margin:-4px 0 0}
+.dirs{display:flex;flex-direction:column;gap:10px}
+.dir{border:1.5px solid var(--line);border-radius:16px;overflow:hidden}
+.dir>button{width:100%;display:flex;justify-content:space-between;align-items:center;gap:10px;font:inherit;font-weight:700;text-align:left;background:var(--bg);color:var(--ink);border:0;padding:12px 16px;cursor:pointer}
+.dir>button span{display:flex;align-items:center;gap:10px}
+.dir>button i{font-style:normal;width:12px;height:12px;border-radius:50%;background:var(--lc);flex:none}
+.dir>button b{font-weight:600;color:var(--muted);font-size:.86rem}
+.dir .opts{padding:12px 14px 14px;display:flex;flex-wrap:wrap;gap:8px}
+.chk{display:inline-flex;align-items:center;gap:8px;font-size:.92rem;font-weight:600;background:var(--bg);border:1.5px solid var(--line);border-radius:999px;padding:7px 13px;cursor:pointer}
+.chk input{accent-color:var(--brown);margin:0;width:16px;height:16px}
+.chk:has(input:checked){border-color:var(--brown);background:var(--soft)}
+.row{display:flex;flex-wrap:wrap;gap:8px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px} @media (max-width:640px){.grid2{grid-template-columns:1fr}}
+.f{display:flex;flex-direction:column;gap:6px;min-width:0}
+.f label{font-size:.78rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.f input,.f select,.f textarea{width:100%;box-sizing:border-box;font:inherit;font-size:1rem;color:var(--ink);background:var(--bg);border:1.5px solid var(--line);border-radius:14px;padding:12px 14px;min-height:50px}
+.f textarea{min-height:90px;resize:vertical}
+.f input:focus,.f select:focus,.f textarea:focus{border-color:var(--brown);outline:none}
+.consent{display:flex;gap:10px;align-items:flex-start;font-size:.88rem;color:var(--muted)}
+.consent input{margin-top:3px;accent-color:var(--brown)}
+.send{display:flex;flex-wrap:wrap;gap:12px 18px;align-items:center}
+.send .btn{font-size:1rem}
+.status{font-size:.92rem;color:var(--muted)}
+.thanks{background:var(--soft);border-radius:22px;padding:clamp(18px,3vw,28px);display:flex;flex-direction:column;gap:10px}
+.thanks h2{font-size:1.8rem}
+.top{background:var(--paper);border:1.5px solid var(--line);border-radius:22px;padding:clamp(16px,2.6vw,24px);display:flex;flex-direction:column;gap:12px;margin-top:18px}
+.top h2{font-size:1.5rem}
+.bars{display:flex;flex-direction:column;gap:8px}
+.bar{display:grid;grid-template-columns:minmax(0,1fr) 46px;gap:10px;align-items:center;font-size:.92rem}
+.bar span{position:relative;padding:6px 10px;border-radius:10px;overflow:hidden;z-index:0}
+.bar span::before{content:"";position:absolute;inset:0;width:var(--w);background:color-mix(in srgb,var(--lc) 22%,transparent);z-index:-1;border-radius:10px}
+.bar b{text-align:right;font-variant-numeric:tabular-nums}
+.fine{font-size:.84rem;color:var(--muted);max-width:80ch;padding-block:22px 8px}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="page">
+    <a class="mark" href="../" aria-label="Свои люди в Швейцарии — в начало">
+      <span class="mono av"><svg aria-hidden="true" viewBox="0 0 100 100"><circle cx="50" cy="50" r="46" fill="#FFFCF8" stroke="#4F5E3E" stroke-width="3"/><g transform="rotate(0.0 50 50)"><path d="M50 47 C42 41 40.5 33 44 31 C47 29.5 53 29.5 56 31 C59.5 33 58 41 50 47Z" fill="#E3E8D6" stroke="#5E6B48" stroke-width="2"/><circle cx="50" cy="24" r="6.2" fill="#5E6B48"/></g><g transform="rotate(60.0 50 50)"><path d="M50 47 C42 41 40.5 33 44 31 C47 29.5 53 29.5 56 31 C59.5 33 58 41 50 47Z" fill="#E3E8D6" stroke="#5E6B48" stroke-width="2"/><circle cx="50" cy="24" r="6.2" fill="#5E6B48"/></g><g transform="rotate(120.0 50 50)"><path d="M50 47 C42 41 40.5 33 44 31 C47 29.5 53 29.5 56 31 C59.5 33 58 41 50 47Z" fill="#E3E8D6" stroke="#5E6B48" stroke-width="2"/><circle cx="50" cy="24" r="6.2" fill="#5E6B48"/></g><g transform="rotate(180.0 50 50)"><path d="M50 47 C42 41 40.5 33 44 31 C47 29.5 53 29.5 56 31 C59.5 33 58 41 50 47Z" fill="#E3E8D6" stroke="#5E6B48" stroke-width="2"/><circle cx="50" cy="24" r="6.2" fill="#5E6B48"/></g><g transform="rotate(240.0 50 50)"><path d="M50 47 C42 41 40.5 33 44 31 C47 29.5 53 29.5 56 31 C59.5 33 58 41 50 47Z" fill="#E3E8D6" stroke="#5E6B48" stroke-width="2"/><circle cx="50" cy="24" r="6.2" fill="#5E6B48"/></g><g transform="rotate(300.0 50 50)"><path d="M50 47 C42 41 40.5 33 44 31 C47 29.5 53 29.5 56 31 C59.5 33 58 41 50 47Z" fill="#E3E8D6" stroke="#5E6B48" stroke-width="2"/><circle cx="50" cy="24" r="6.2" fill="#5E6B48"/></g><circle cx="50" cy="50" r="7" fill="#B98324"/></svg></span>
+      <span><b>Свои люди</b><small>в Швейцарии</small></span>
+    </a>
+    <nav aria-label="Разделы">
+      <a href="../">Специалисты</a>
+      <a href="../events/">События</a>
+      <a href="./" aria-current="page" style="color:var(--ink)">Кого не хватает</a>
+      <a href="../join/">Как разместиться</a>
+    </nav>
+    <a class="navcta" href="#form">Ответить</a>
+  </div>
+</header>
+
+<main class="page">
+  <section class="o-hero">
+    <div class="eyebrow">Опрос · Свои люди в Швейцарии</div>
+    <h1>Кого вам <em>не хватает?</em></h1>
+    <p class="lead">Отметьте специалистов, которых вы искали и не нашли — на своём языке и рядом с домом. Это займёт минуту и анонимно. По вашим ответам мы приглашаем в справочник тех, кто нужен больше всего, а специалисты видят, каких услуг ждут.</p>
+  </section>
+  <div class="trial" id="trial"><b>Пробная версия.</b> Опрос уже работает, ответы сохраняются.</div>
+
+  <form class="o" id="form" novalidate>
+    <section class="q"><h2><i>1</i>Где вы живёте?</h2>
+      <div class="grid2">
+        <div class="f"><label for="canton">Кантон</label><select id="canton"></select></div>
+        <div class="f"><label for="city">Город или община (по желанию)</label><input id="city" type="text" autocomplete="address-level2" placeholder="например, Winterthur"></div>
+      </div>
+    </section>
+    <section class="q"><h2><i>2</i>Каких специалистов вам не хватает?</h2>
+      <p class="hint">Откройте направление и отметьте всё, что искали. Можно несколько.</p>
+      <div class="dirs" id="dirs"></div>
+      <div class="f"><label for="other">Кого ещё не хватает</label><textarea id="other" maxlength="400" placeholder="например, ортодонт для ребёнка, говорящий по-русски, в Цуге"></textarea></div>
+    </section>
+    <section class="q"><h2><i>3</i>На каком языке?</h2>
+      <div class="row" id="langs"></div>
+    </section>
+    <section class="q"><h2><i>4</i>Как удобнее?</h2>
+      <div class="row" id="format"></div>
+    </section>
+    <section class="q"><h2><i>5</i>Готовы ли вы платить за такую помощь?</h2>
+      <div class="row" id="pay"></div>
+    </section>
+    <section class="q"><h2><i>6</i>Насколько срочно?</h2>
+      <div class="row" id="when"></div>
+    </section>
+    <section class="q"><h2><i>7</i>Сообщить вам, когда такой специалист появится?</h2>
+      <p class="hint">По желанию. Без e-mail ответ остаётся полностью анонимным.</p>
+      <div class="f"><label for="email">E-mail</label><input id="email" type="email" autocomplete="email" placeholder="name@example.ch"></div>
+      <label class="consent"><input type="checkbox" id="consent"> <span>Согласна(сен), чтобы мне написали, когда появится нужный специалист. E-mail хранится не дольше 12 месяцев и используется только для этого; удалить его можно письмом на voznesenskaya.iryna@gmail.com.</span></label>
+    </section>
+    <div class="send"><button class="btn" type="submit" id="submit">Отправить ответ</button><span class="status" id="status" aria-live="polite"></span></div>
+  </form>
+
+  <section class="thanks" id="thanks" hidden>
+    <h2>Спасибо!</h2>
+    <p>Ваш ответ сохранён. Мы смотрим ответы каждый месяц и приглашаем специалистов, которых ищут чаще всего.</p>
+    <p><a class="btn ghost" href="../">Вернуться к справочнику</a></p>
+  </section>
+
+  <section class="top" id="top" hidden>
+    <h2>Чаще всего ищут</h2>
+    <p class="hint" id="topNote"></p>
+    <div class="bars" id="bars"></div>
+  </section>
+
+  <p class="fine">Ответы анонимны: сохраняются кантон, город, отмеченные специалисты, язык, формат, готовность платить и срочность. Обобщённые итоги (например, «в Цюрихе 40 человек ищут детского логопеда») мы показываем на этой странице и передаём специалистам справочника. Ответы хранятся в Google Таблице. Подробнее — в <a href="https://voznesenskaya.ch/privacy/">политике конфиденциальности</a>.</p>
+
+  <footer>
+    <span>© 2026 Свои люди в Швейцарии · проект <a href="https://voznesenskaya.ch/">Ирины Вознесенской</a></span>
+    <span><a href="../">Специалисты</a> · <a href="../events/">События</a> · <a href="https://voznesenskaya.ch/privacy/">Политика конфиденциальности</a> · <a href="https://voznesenskaya.ch/impressum/">Выходные данные</a></span>
+  </footer>
+</main>
+
+<script>
+const TRIAL = true;
+const ENDPOINT = 'https://script.google.com/macros/s/AKfycbyizp1XjzNdrUj4WHgj4Vyj81QhjY2D7puqyeY3LaweWB4mePxPhfHCx5fIsfaJy9hV/exec';
+const CATS = {   // направление → цвет, значок и список специализаций (порядок = порядок в списках)
+  status: { t: 'Документы и статус',        c: '#3F6FBF', i: 'dirStatus',      s: ['Разрешения и статус', 'Натурализация', 'Письма и формы', 'Заверенные переводы', 'Устный перевод', 'Социальные вопросы и пособия', 'Нотариус'] },
+  law:    { t: 'Юристы',                    c: '#4F6D7A', i: 'dirLaw',      s: ['Миграционное право', 'Семейное право', 'Трудовое право', 'Аренда', 'Долги и взыскания', 'Наследство и завещания', 'Права потребителей', 'Медиация'] },
+  money:  { t: 'Налоги и финансы',          c: '#C97E52', i: 'dirMoney', s: ['Налоговая декларация', 'Бухгалтерия и Treuhand', 'Финансовое планирование', 'Ипотека и банки', 'Консультации по долгам'] },
+  insure: { t: 'Страхование и пенсия',      c: '#A99A2E', i: 'dirInsure',   s: ['Страховой брокер', 'Пенсия AHV и BVG'] },
+  health: { t: 'Врачи и здоровье',          c: '#C25468', i: 'dirHealth',    s: ['Семейный врач', 'Педиатр', 'Гинеколог', 'Стоматолог', 'Другие врачи-специалисты', 'Физиотерапия', 'Остеопатия', 'Акушерка', 'Диетолог', 'Уход на дому (Spitex)'] },
+  psy:    { t: 'Психологическая помощь',    c: '#6A5FB8', i: 'dirPsy',   s: ['Психотерапевт', 'Психиатр', 'Психолог'] },   // только с признанным дипломом / разрешением
+  coach:  { t: 'Коучинг и личное развитие', c: '#8E5A86', i: 'dirCoach',  s: ['Коуч', 'Семейный консультант', 'Консультант по адаптации'] },
+  body:   { t: 'Тело и красота',            c: '#4E9A70', i: 'dirBody',    s: ['Массаж', 'Косметолог', 'Парикмахер', 'Маникюр', 'Фитнес и йога'] },
+  kids:   { t: 'Дети и семья',              c: '#B5648E', i: 'dirKids',   s: ['Логопед', 'Детский психолог', 'Репетитор', 'Подготовка к гимназии', 'Русская школа и билингвизм', 'Ясли и детский сад', 'Няня', 'Кружки и занятия', 'Уход за пожилыми'] },
+  learn:  { t: 'Язык, учёба и работа',      c: '#2894A0', i: 'dirLearn',   s: ['Немецкий язык', 'Французский язык', 'Итальянский язык', 'Подготовка к fide', 'Признание дипломов', 'Карьера и резюме', 'Поиск работы и рекрутинг', 'Курсы и переквалификация', 'Открытие своего дела'] },
+  home:   { t: 'Дом, быт и транспорт',      c: '#8E8470', i: 'dirHome',     s: ['Риелтор', 'Переезд', 'Международный переезд и таможня', 'Уборка со сдачей квартиры', 'Уборка и помощь по дому', 'Ремонт', 'Электрик и сантехник', 'Компьютерная помощь', 'Автошкола', 'Автосервис', 'Ветеринар и уход за животными'] },
+  events: { t: 'Праздники, фото и еда',     c: '#C0663A', i: 'dirEvents',      s: ['Фотограф и видеограф', 'Организация праздников', 'Торты и домашняя кухня', 'Флорист и декор'] }
+};
+const CANTONS = {
+  'Aargau': ['AG', 'Аргау'], 'Appenzell Ausserrhoden': ['AR', 'Аппенцелль-Ауссерроден'], 'Appenzell Innerrhoden': ['AI', 'Аппенцелль-Иннерроден'],
+  'Basel-Landschaft': ['BL', 'Базель-Ланд'], 'Basel-Stadt': ['BS', 'Базель-Штадт'], 'Bern': ['BE', 'Берн'], 'Fribourg': ['FR', 'Фрибур'],
+  'Genève': ['GE', 'Женева'], 'Glarus': ['GL', 'Гларус'], 'Graubünden': ['GR', 'Граубюнден'], 'Jura': ['JU', 'Юра'], 'Luzern': ['LU', 'Люцерн'],
+  'Neuchâtel': ['NE', 'Невшатель'], 'Nidwalden': ['NW', 'Нидвальден'], 'Obwalden': ['OW', 'Обвальден'], 'Schaffhausen': ['SH', 'Шаффхаузен'],
+  'Schwyz': ['SZ', 'Швиц'], 'Solothurn': ['SO', 'Золотурн'], 'St. Gallen': ['SG', 'Санкт-Галлен'], 'Thurgau': ['TG', 'Тургау'], 'Ticino': ['TI', 'Тичино'],
+  'Uri': ['UR', 'Ури'], 'Valais': ['VS', 'Вале'], 'Vaud': ['VD', 'Во'], 'Zug': ['ZG', 'Цуг'], 'Zürich': ['ZH', 'Цюрих']
+};
+const ktRu = c => (CANTONS[c] || [, c])[1];
+const kt = c => (CANTONS[c] || [c])[0];
+const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+const LANGS = ['русский', 'украинский', 'немецкий', 'французский', 'итальянский', 'английский'];
+const FORMAT = ['очно, рядом с домом', 'онлайн', 'неважно'];
+const PAY = ['да, по обычной цене', 'да, если цена разумная', 'только бесплатно или через страховку', 'пока не знаю'];
+const WHEN = ['нужно сейчас', 'в ближайшие месяцы', 'на будущее'];
+const chips = (name, list, type = 'checkbox') => list.map(v => `<label class="chk"><input type="${type}" name="${name}" value="${esc(v)}"> ${esc(v)}</label>`).join('');
+document.getElementById('canton').innerHTML = '<option value="">Выберите кантон</option>' + Object.keys(CANTONS).sort((a, b) => ktRu(a).localeCompare(ktRu(b), 'ru')).map(c => `<option value="${esc(c)}">${esc(ktRu(c))} (${kt(c)})</option>`).join('');
+document.getElementById('dirs').innerHTML = Object.entries(CATS).map(([k, c]) => `<div class="dir" style="--lc:${c.c}"><button type="button" aria-expanded="false" data-dir="${k}"><span><i></i>${esc(c.t)}</span><b data-n="${k}"></b></button><div class="opts" hidden>${chips('spec', c.s)}</div></div>`).join('');
+document.getElementById('langs').innerHTML = chips('lang', LANGS);
+document.getElementById('format').innerHTML = chips('format', FORMAT, 'radio');
+document.getElementById('pay').innerHTML = chips('pay', PAY, 'radio');
+document.getElementById('when').innerHTML = chips('when', WHEN, 'radio');
+document.getElementById('dirs').addEventListener('click', e => { const b = e.target.closest('[data-dir]'); if (!b) return; const o = b.nextElementSibling; o.hidden = !o.hidden; b.setAttribute('aria-expanded', String(!o.hidden)); });
+document.getElementById('dirs').addEventListener('change', e => { const d = e.target.closest('.dir'); if (!d) return; const n = d.querySelectorAll('input:checked').length; d.querySelector('[data-n]').textContent = n ? `отмечено: ${n}` : ''; });
+const vals = n => [...document.querySelectorAll(`input[name="${n}"]:checked`)].map(i => i.value);
+const specDir = sp => { for (const [k, c] of Object.entries(CATS)) if (c.s.includes(sp)) return c.t; return ''; };
+let sent = false;
+try { sent = localStorage.getItem('svoiOprosSent') === '1'; } catch (_) {}
+document.getElementById('form').addEventListener('submit', async e => {
+  e.preventDefault();
+  const st = document.getElementById('status'), specs = vals('spec'), other = document.getElementById('other').value.trim();
+  if (!specs.length && !other){ st.textContent = 'Отметьте хотя бы одного специалиста или напишите, кого не хватает.'; return; }
+  const email = document.getElementById('email').value.trim(), consent = document.getElementById('consent').checked;
+  if (email && !consent){ st.textContent = 'Чтобы мы могли написать вам, поставьте галочку согласия — или оставьте поле e-mail пустым.'; return; }
+  const payload = { kind: 'need', canton: document.getElementById('canton').value, city: document.getElementById('city').value.trim(),
+    dirs: [...new Set(specs.map(specDir))].join(', '), specs: specs.join(', '), other, langs: vals('lang').join(', '), format: vals('format').join(''),
+    pay: vals('pay').join(''), when: vals('when').join(''), email: consent ? email : '', consent: !!(consent && email), repeat: sent, source: document.referrer ? new URL(document.referrer).hostname : '' };
+  const btn = document.getElementById('submit'); btn.disabled = true; st.textContent = 'Отправляю…';
+  try {
+    if (!ENDPOINT) throw new Error('no endpoint');
+    await fetch(ENDPOINT, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(payload) });
+    try { localStorage.setItem('svoiOprosSent', '1'); } catch (_) {}
+    document.getElementById('form').hidden = true; document.getElementById('thanks').hidden = false; window.scrollTo({ top: document.getElementById('thanks').offsetTop - 90, behavior: 'smooth' });
+    loadTop(payload.canton);
+  } catch (err){ btn.disabled = false; st.textContent = 'Не получилось отправить. Проверьте интернет и попробуйте ещё раз.'; }
+});
+async function loadTop(canton){   // обобщённые итоги из таблицы: только числа, без ответов отдельных людей
+  if (!ENDPOINT) return;
+  try {
+    const r = await fetch(ENDPOINT + '?what=needs' + (canton ? '&canton=' + encodeURIComponent(canton) : ''));
+    const d = await r.json(); if (!d || !d.top || !d.top.length || d.total < 5) return;   // итоги показываем, когда ответов хотя бы 5
+    const max = d.top[0].count;
+    document.getElementById('topNote').textContent = `По ${d.total} ${d.total % 10 === 1 && d.total % 100 !== 11 ? 'ответу' : 'ответам'}${canton && d.canton ? ' · в кантоне ' + ktRu(canton) : ''}.`;
+    document.getElementById('bars').innerHTML = d.top.slice(0, 10).map(t => { const c = Object.values(CATS).find(x => x.s.includes(t.name)); return `<div class="bar" style="--lc:${c ? c.c : '#4F5E3E'}"><span style="--w:${Math.round(t.count / max * 100)}%">${esc(t.name)}</span><b>${t.count}</b></div>`; }).join('');
+    document.getElementById('top').hidden = false;
+  } catch (_) {}
+}
+document.getElementById('trial').hidden = !TRIAL;
+loadTop('');
+</script>
+
+</body>
+</html>
