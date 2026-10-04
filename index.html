@@ -481,6 +481,10 @@ a.bot:hover{color:#B98324}
 .evs .t{font-weight:600;font-size:.92rem;line-height:1.3}
 .evs .t small{display:block;font-weight:500;color:var(--muted);font-size:.8rem}
 .report{font-size:.8rem;color:var(--muted)}
+/* пока TRIAL — на каждой карточке пометка «Образец» (04.10.2026) */
+.sample{position:absolute;top:-10px;left:16px;z-index:1;font:700 .66rem/1 var(--sans,Manrope),system-ui,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:var(--paper);background:var(--brown);border-radius:999px;padding:5px 10px;box-shadow:0 2px 6px rgba(40,50,30,.25)}
+.sp{position:relative}
+.qm-sample{display:inline-block;font:700 .7rem/1 var(--sans,Manrope),system-ui,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:var(--paper);background:var(--brown);border-radius:999px;padding:6px 11px;margin-bottom:6px;align-self:flex-start}
 .report a{color:var(--muted)}
 </style>
 </head>
@@ -1112,7 +1116,7 @@ function card(s, lvl = ''){
   const k = CATS[s.cat] || CATS.status, why = hiddenReason(s);
   const flag = why ? `<span class="badge warn">${esc(why)}</span>` : lvl === 'vip' ? '<span class="badge tier">VIP-партнёр ТОП</span>' : lvl === 'партнёр' || lvl === 'vip+' ? '<span class="badge tier">VIP-партнёр</span>' : '';
   return `<article class="sp${why ? ' off' : ''}${lvl === 'vip' ? ' vip' : lvl === 'партнёр' || lvl === 'vip+' ? ' partner' : ''}" style="--lc:${k.c}">
-    <div class="sp-sub">${ico(k.i, k.c, null, 16)}<span>${esc(k.t)}</span>${flag}</div>
+    ${TRIAL ? '<span class="sample" title="Вымышленный специалист — так будет выглядеть ваша карточка">Образец</span>' : ''}<div class="sp-sub">${ico(k.i, k.c, null, 16)}<span>${esc(k.t)}</span>${flag}</div>
     <div class="sp-id">${photo(s)}<div>
       <h3>${esc(s.name)}${isNew(s) ? '<span class="new" title="Новый в справочнике">новый</span>' : ''}</h3>
       <div class="role">${esc(s.role)}</div>${s.firm ? `<div class="firm">${esc(s.firm)}</div>` : ''}
@@ -1280,7 +1284,7 @@ function openCard(id){
     const [t, h, v] = LINK[x](c[x]); return `<li><span>${t}</span><a href="${esc(h)}" ${x === 'phone' || x === 'email' ? '' : ext}>${esc(v)}</a></li>`; }).join('');
   const box = document.getElementById('qmCard');
   box.style.setProperty('--lc', k.c); box.style.setProperty('--lf', `color-mix(in srgb,${k.c} 13%,var(--paper))`);
-  box.innerHTML = `<div class="qm-top"><div class="qm-ph">${photo(s)}</div><div class="qm-head"><span class="sp-sub" style="color:${k.c}">${ico(k.i, k.c, null, 16)}${esc(k.t)}${(() => { const l = state.canton ? tierIn(s, state.canton) : tierBest(s); return l === 'vip' ? ' · VIP-партнёр ТОП' : l === 'партнёр' ? ' · VIP-партнёр' : ''; })()}</span>
+  box.innerHTML = `<div class="qm-top"><div class="qm-ph">${photo(s)}</div><div class="qm-head">${TRIAL ? '<span class="qm-sample">Образец карточки · специалист вымышленный</span>' : ''}<span class="sp-sub" style="color:${k.c}">${ico(k.i, k.c, null, 16)}${esc(k.t)}${(() => { const l = state.canton ? tierIn(s, state.canton) : tierBest(s); return l === 'vip' ? ' · VIP-партнёр ТОП' : l === 'партнёр' ? ' · VIP-партнёр' : ''; })()}</span>
       <h2 class="qm-title" id="qmTitle">${esc(s.name)}</h2><div style="font-family:var(--display);font-size:1.25rem;color:var(--brown)">${esc(s.role)}</div>${s.firm ? `<div class="firm" style="font-size:.95rem;margin-top:4px">${esc(s.firm)}</div>` : ''}</div>
       <button class="qm-close" type="button" aria-label="Закрыть">✕</button></div>
     <div class="d-body">
@@ -1335,7 +1339,7 @@ function qrImg(text){   // QR-код (библиотека qrcode-generator); н
 }
 function cardPage(s){
   const k = CATS[s.cat] || CATS.status;
-  return `${pdfHead()}<div class="pp-card">${pdfImg(s)}<div style="display:flex;flex-direction:column;gap:14px">
+  return `${pdfHead(TRIAL ? 'ОБРАЗЕЦ — специалист вымышленный' : '')}<div class="pp-card">${pdfImg(s)}<div style="display:flex;flex-direction:column;gap:14px">
       <div><div class="pp-cat" style="color:${k.c}">${esc(k.t)}${s.specs && s.specs.length ? ' · ' + esc(s.specs.join(', ')) : ''}</div><div class="pp-name">${esc(s.name)}</div><div class="pp-role">${esc(s.role)}</div>${s.firm ? `<div style="font-size:13px;color:#7A6E62;margin-top:3px">${esc(s.firm)}</div>` : ''}</div>
       <div class="pp-sec"><h4>Где принимает</h4>${livePlaces(s).map(p => `<div><a data-href="${esc(maps(p.address))}">${esc(p.address)}</a> · кантон ${esc(ktRu(p.canton))}</div>`).join('')}${s.online ? '<div>и онлайн по видеосвязи</div>' : ''}</div>
       <div class="pp-sec"><h4>Контакты</h4><div class="pp-ct">${pdfContacts(s)}</div></div></div></div>
