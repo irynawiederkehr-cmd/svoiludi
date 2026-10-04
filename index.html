@@ -356,6 +356,12 @@ a.bot:hover{color:#B98324}
 .sp.partner .sp-acts,.sp.vip .sp-acts{border-top-color:color-mix(in srgb,var(--mustard) 35%,var(--line))}
 .badge.tier{background:var(--paper);border:1px solid var(--mustard);color:var(--ink)}
 .sp.vip .badge.tier{background:var(--mustard);border-color:var(--mustard);color:var(--paper)}
+/* VIP-партнёр ТОП: мягкое золотое свечение карточки и блик на плашке (04.10.2026); при «уменьшить движение» в системе — без анимации */
+.sp.vip{animation:vipGlow 3.2s ease-in-out infinite}
+@keyframes vipGlow{0%,100%{box-shadow:0 14px 30px -20px color-mix(in srgb,var(--mustard) 70%,transparent),0 0 0 0 color-mix(in srgb,var(--mustard) 0%,transparent)}50%{box-shadow:0 18px 36px -18px color-mix(in srgb,var(--mustard) 80%,transparent),0 0 0 6px color-mix(in srgb,var(--mustard) 22%,transparent)}}
+.sp.vip .badge.tier{background:linear-gradient(110deg,var(--mustard) 38%,#F6DFA0 50%,var(--mustard) 62%);background-size:260% 100%;animation:vipShine 3.2s linear infinite}
+@keyframes vipShine{0%{background-position:130% 0}60%,100%{background-position:-30% 0}}
+@media (prefers-reduced-motion: reduce){.sp.vip,.sp.vip .badge.tier{animation:none}}
 .sp.off{opacity:.55;border-style:dashed}
 .sp-sub{display:flex;align-items:center;gap:7px;font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--lc)}
 .sp-sub svg{flex:none}
