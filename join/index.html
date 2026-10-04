@@ -1,0 +1,468 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<link rel="icon" href="../fav/favicon.svg" type="image/svg+xml"><link rel="icon" href="../fav/icon-32.png" sizes="32x32"><link rel="apple-touch-icon" href="../fav/apple-touch-icon.png"><link rel="manifest" href="../fav/site.webmanifest">
+<title>Как разместиться — Свои люди в Швейцарии</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Как специалисту разместиться в справочнике «Свои люди в Швейцарии»: короткая форма, анкета с вашими данными, отправка по e-mail.">
+<meta property="og:type" content="website"><meta property="og:locale" content="ru_RU"><meta property="og:site_name" content="Свои люди в Швейцарии">
+<meta property="og:title" content="Разместиться в справочнике «Свои люди в Швейцарии»">
+<meta property="og:description" content="Для русскоязычных специалистов, которые работают в Швейцарии официально. Базовое размещение сейчас бесплатно.">
+<meta property="og:url" content="https://svoiludi.ch/join/"><meta property="og:image" content="https://svoiludi.ch/fav/og-svoi-ludi.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image"><meta name="theme-color" content="#4F5E3E">
+<link rel="stylesheet" href="../assets/fonts.css">
+<style>
+[hidden]{display:none!important}
+
+[hidden]{display:none!important}
+/* Layout: тёплая страница-письмо. Слева слово, справа шерстяная картина; дальше «двери» — фразы, в которых она узнаёт себя */
+:root{
+  --bg:#F4EDE3;       /* бежевый фон коучинга, как в тестах */
+  --paper:#FFFCF8;
+  --ink:#2F2924;
+  --muted:#7A6E62;
+  --line:#E5D9C9;
+  --brown:#6E4F3C;    /* главный акцент, как в тестах */
+  --mustard:#B98324;  /* шарф героини */
+  --mustard-soft:#F3E3C2;
+  --sage:#66704F;     /* пальто героини */
+  --sage-soft:#E3E6D6;
+  --soft:#EADFCF;
+  --blue:#2E5A88;     /* тесты о паре — голубой, как в тестах */
+  --blue-soft:#EAF2FA;
+  --blue-line:#D3E1EE;
+  --display:"Forum","Cormorant Garamond",Georgia,serif;
+  --body:"Manrope","Segoe UI",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#221D19; --paper:#2C2621; --ink:#F1E9DF; --muted:#B4A796; --line:#3E362F; --brown:#E1C2A6;
+  --mustard:#E2B45C; --mustard-soft:#3D321F; --sage:#B4BF97; --sage-soft:#2E3226; --soft:#3A3129; --blue:#9CC2EA; --blue-soft:#1D2733; --blue-line:#2C3A4A; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#221D19; --paper:#2C2621; --ink:#F1E9DF; --muted:#B4A796; --line:#3E362F; --brown:#E1C2A6;
+  --mustard:#E2B45C; --mustard-soft:#3D321F; --sage:#B4BF97; --sage-soft:#2E3226; --soft:#3A3129; --blue:#9CC2EA; --blue-soft:#1D2733; --blue-line:#2C3A4A; color-scheme:dark}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16.5px;line-height:1.65;margin:0}
+.page{max-width:1120px;margin:0 auto;padding-inline:20px}
+h1,h2,h3{font-family:var(--display);font-weight:400;line-height:1.12;margin:0;text-wrap:balance}
+p{margin:0}
+a{color:inherit}
+.eyebrow{font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;font-weight:700;color:var(--muted)}
+:focus-visible{outline:3px solid var(--mustard);outline-offset:3px;border-radius:6px}
+
+/* ---------- шапка ---------- */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.top .page{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:12px}
+.mark{display:flex;align-items:center;gap:10px;text-decoration:none}
+.mono{width:38px;height:38px;border-radius:50%;border:1.5px solid var(--brown);display:grid;place-items:center;font-family:var(--display);font-size:1.05rem;color:var(--brown);letter-spacing:.02em}
+.mark b{font-family:var(--display);font-weight:400;font-size:1.25rem;line-height:1}
+.mark small{display:block;font-size:.72rem;color:var(--muted);letter-spacing:.04em;margin-top:3px}
+nav{display:flex;gap:22px;font-size:.88rem;font-weight:600}
+nav a{text-decoration:none;color:var(--muted)}
+nav a:hover{color:var(--ink)}
+.navcta{font-size:.86rem;font-weight:700;text-decoration:none;border:1.5px solid var(--brown);color:var(--brown);border-radius:999px;padding:8px 16px;white-space:nowrap}
+@media (max-width:860px){
+  .top .page{flex-wrap:wrap;row-gap:6px}
+  nav{order:3;width:100%;gap:16px;overflow-x:auto;scrollbar-width:none;padding-bottom:4px}
+  nav::-webkit-scrollbar{display:none}
+  nav a{white-space:nowrap}
+}
+@media (max-width:420px){.mark small{display:none}.navcta{padding:7px 12px}}
+
+/* ---------- первый экран ---------- */
+.hero{display:grid;grid-template-columns:1.25fr .75fr;gap:56px;align-items:center;padding-block:48px 40px}
+.hero-text{display:flex;flex-direction:column;gap:22px;min-width:0}
+.hero h1{font-size:clamp(2.5rem,6.2vw,4.4rem);color:var(--ink)}
+.hero h1 em{font-style:normal;color:var(--brown)}
+.hero .lead{font-size:1.14rem;max-width:34ch;color:var(--ink)}
+.who{font-size:.86rem;color:var(--muted);display:flex;flex-wrap:wrap;gap:6px 14px}
+.who span+span::before{content:"·";margin-right:14px;color:var(--line)}
+@media (max-width:520px){.who span+span::before{content:none}.who{gap:4px 12px}}
+.hero-actions{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.btn{font:inherit;font-weight:700;font-size:.95rem;border:none;border-radius:999px;padding:14px 24px;cursor:pointer;background:var(--brown);color:var(--paper);text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:transform .15s}
+.btn:hover{transform:translateY(-1px)}
+.btn.ghost{background:transparent;color:var(--brown);border:1.5px solid var(--brown)}
+.hero-art{position:relative;min-width:0}
+.hero-art img{display:block;width:100%;max-width:100%;height:auto;aspect-ratio:941/1672;border-radius:26px;box-shadow:0 24px 50px -24px rgba(60,40,20,.45)}
+.hero-art figcaption{margin-top:14px;background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:12px 16px;font-size:.84rem}
+.hero-art figcaption b{display:block;font-family:var(--display);font-weight:400;font-size:1.1rem;color:var(--brown)}
+@media (max-width:860px){.hero{grid-template-columns:1fr;gap:28px;padding-block:32px 24px}.hero-art{max-width:360px;margin:0 auto;width:100%}}
+
+/* ---------- двери ---------- */
+section{padding-block:56px}
+.sec-head{display:flex;flex-direction:column;gap:10px;max-width:640px;margin-bottom:28px}
+.sec-head h2{font-size:clamp(2rem,4.6vw,2.9rem)}
+.sec-head p{color:var(--muted);font-size:1.02rem}
+.doors{background:var(--paper);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.door-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+@media (max-width:980px){.door-grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:520px){.door-grid{grid-template-columns:1fr}}
+.door{font:inherit;text-align:left;cursor:pointer;color:var(--ink);background:var(--bg);border:1.5px solid var(--line);border-radius:18px;padding:22px 20px 18px;display:flex;flex-direction:column;gap:14px;min-height:150px;transition:border-color .15s,transform .15s,background .15s;min-width:0}
+.door:hover{border-color:var(--brown);transform:translateY(-2px)}
+.door q{font-family:var(--display);font-size:1.5rem;line-height:1.15;quotes:"«" "»"}
+.door small{margin-top:auto;font-size:.8rem;color:var(--muted);display:flex;justify-content:space-between;gap:8px}
+.door[aria-expanded="true"]{background:var(--mustard-soft);border-color:var(--mustard)}
+.door[aria-expanded="true"] small span:last-child{transform:rotate(90deg)}
+.door small span:last-child{transition:transform .2s}
+.more-link{margin-top:22px;font:inherit;font-weight:700;color:var(--brown);background:none;border:none;padding:6px 0;cursor:pointer;font-size:.98rem;text-decoration:underline;text-underline-offset:5px;text-decoration-thickness:1px}
+.spheres{margin-top:18px}
+.sphere-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+@media (max-width:820px){.sphere-grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:480px){.sphere-grid{grid-template-columns:1fr}}
+.sphere{font:inherit;text-align:left;cursor:pointer;color:var(--ink);background:var(--paper);border:1.5px solid var(--line);border-radius:14px;padding:14px 16px;font-weight:600;font-size:.98rem;display:flex;justify-content:space-between;gap:10px;align-items:center;min-width:0}
+.sphere:hover{border-color:var(--brown)}
+.sphere[aria-expanded="true"]{background:var(--sage-soft);border-color:var(--sage)}
+.panel{margin-top:18px;background:var(--bg);border:1.5px solid var(--mustard);border-radius:20px;padding:28px;display:grid;grid-template-columns:1.1fr 1fr;gap:28px;animation:rise .25s ease-out}
+.panel.sage{border-color:var(--sage)}
+@keyframes rise{from{transform:translateY(8px)}}
+@media (max-width:820px){.panel{grid-template-columns:1fr;padding:22px 18px;gap:20px}}
+.panel h3{font-size:1.75rem;margin-bottom:12px}
+.panel .say{display:flex;flex-direction:column;gap:12px;min-width:0}
+.panel .say p{max-width:60ch}
+.todo{display:flex;flex-direction:column;gap:10px;min-width:0}
+.todo .eyebrow{margin-bottom:2px}
+.act{display:flex;flex-direction:column;gap:4px;background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:14px 16px;text-decoration:none;color:var(--ink);transition:border-color .15s}
+a.act:hover{border-color:var(--brown)}
+.act b{font-weight:700;font-size:.98rem;display:flex;justify-content:space-between;gap:10px}
+.act span{font-size:.88rem;color:var(--muted)}
+.edge{font-size:.86rem;color:var(--muted);border-left:3px solid var(--line);padding-left:12px}
+.next{font-size:.92rem}
+.next b{color:var(--brown)}
+.notme{font-size:.86rem;color:var(--muted)}
+.notme button{font:inherit;color:var(--brown);background:none;border:none;padding:0;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+
+
+/* ---------- всплывающее окно ---------- */
+dialog.qm{border:0;padding:0;background:transparent;width:min(100% - 24px,1080px);max-height:92vh;color:var(--ink)}
+dialog.qm[open]{animation:qmIn .28s cubic-bezier(.2,.8,.2,1)}
+@keyframes qmIn{from{opacity:0;transform:translateY(14px) scale(.98)}}
+dialog.qm::backdrop{background:rgba(47,41,36,.62);backdrop-filter:blur(3px)}
+.qm-card{background:var(--paper);border-radius:28px;padding:clamp(20px,3.4vw,40px);display:flex;flex-direction:column;gap:clamp(18px,2.6vw,28px);max-height:92vh;overflow-y:auto;box-shadow:0 30px 80px -30px rgba(40,25,10,.6)}
+.qm-top{display:flex;align-items:flex-start;gap:16px}
+.qm-head{flex:1;display:flex;flex-direction:column;gap:6px;min-width:0}
+.qm-title{font-size:clamp(1.8rem,4.4vw,3.2rem);line-height:1.04}
+.qm-close{flex:none;width:44px;height:44px;border-radius:50%;border:1.5px solid var(--line);background:var(--paper);color:var(--ink);font-size:1.05rem;cursor:pointer;display:grid;place-items:center;transition:background .15s,border-color .15s}
+.qm-close:hover{background:var(--mustard-soft);border-color:var(--mustard)}
+.qm-panel{background:var(--mustard-soft);border-radius:20px;padding:clamp(18px,2.8vw,32px);display:grid;grid-template-columns:.9fr 1.2fr 1fr;gap:clamp(18px,2.6vw,32px)}
+.qm-panel.sage{background:var(--sage-soft)}
+@media (max-width:900px){.qm-panel{grid-template-columns:1fr}}
+.qm-col{display:flex;flex-direction:column;gap:12px;min-width:0}
+.qm-col h3{font-size:1.4rem;line-height:1.15}
+.qm-col p{font-size:.95rem}
+.pain{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+.pain li{font-family:var(--display);font-size:1.12rem;line-height:1.3;padding-left:16px;border-left:2px solid var(--mustard)}
+.qm-panel.sage .pain li{border-color:var(--sage)}
+.qm-col .act{background:var(--paper)}
+.qm-foot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px 24px;align-items:baseline}
+.qm-foot .next{max-width:60ch}
+.qm-foot .notme button{font:inherit;color:var(--brown);background:none;border:none;padding:0;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+
+/* ---------- обо мне ---------- */
+.about{display:grid;grid-template-columns:.75fr 1.25fr;gap:56px;align-items:center}
+@media (max-width:860px){.about{grid-template-columns:1fr;gap:28px}.about img{max-width:360px;margin:0 auto}}
+.about img{display:block;width:100%;max-width:100%;height:auto;aspect-ratio:941/1672;border-radius:26px;box-shadow:0 24px 50px -24px rgba(60,40,20,.4)}
+.about-text{display:flex;flex-direction:column;gap:16px;min-width:0}
+.about-text h2{font-size:clamp(2rem,4.6vw,2.9rem)}
+.about-text p{max-width:60ch}
+.creds{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
+.creds span{font-size:.8rem;font-weight:600;background:var(--paper);border:1px solid var(--line);border-radius:999px;padding:6px 12px}
+.how-i{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:6px}
+@media (max-width:520px){.how-i{grid-template-columns:1fr}}
+.how-i div{background:var(--paper);border-radius:14px;padding:14px 16px;font-size:.9rem;color:var(--muted)}
+.how-i b{display:block;font-family:var(--display);font-weight:400;font-size:1.2rem;color:var(--ink);margin-bottom:2px}
+
+.two{display:flex;flex-direction:column;gap:12px;margin-top:8px}
+.two-lead{font-weight:600}
+.two-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:560px){.two-grid{grid-template-columns:1fr}}
+.prac{border-radius:16px;padding:16px 18px;display:flex;flex-direction:column;gap:6px;min-width:0;border:1.5px solid var(--line);background:var(--paper)}
+.prac.psy{background:var(--blue-soft);border-color:var(--blue-line)}
+.prac .tag{font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--sage)}
+.prac.psy .tag{color:var(--blue)}
+.prac b{font-family:var(--display);font-weight:400;font-size:1.3rem;line-height:1.2}
+.prac p{font-size:.9rem;color:var(--muted)}
+.prac .links{font-size:.86rem;font-weight:700;margin-top:auto}
+.prac .links a{color:var(--brown)}
+.prac.psy .links a{color:var(--blue)}
+.two-note{font-size:.82rem;color:var(--muted)}
+
+.ic{flex:none;display:grid;place-items:center;width:58px;height:58px;border-radius:50%;background:var(--paper);border:1.5px solid var(--line)}
+.ic.sm{width:46px;height:46px}
+.tcard .ic{width:56px;height:56px}
+.door .ic{background:var(--paper)}
+.door-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.sphere .lbl{display:flex;align-items:center;gap:12px}
+.step-top{display:flex;align-items:center;gap:14px}
+.tcard .t-top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.prac .p-top{display:flex;align-items:center;gap:10px}
+.limits .l-top{display:flex;align-items:center;gap:14px}
+.clist .c-l{display:flex;align-items:center;gap:10px}
+
+/* ---------- как начать ---------- */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1.5px solid var(--brown)}
+@media (max-width:820px){.steps{grid-template-columns:1fr}}
+.step{padding:22px 24px 6px 0;display:flex;flex-direction:column;gap:8px;min-width:0}
+.step+.step{padding-left:24px;border-left:1px solid var(--line)}
+@media (max-width:820px){.step+.step{padding-left:0;border-left:none;border-top:1px solid var(--line)}}
+.step i{font-style:normal;font-family:var(--display);font-size:2.6rem;line-height:1;color:var(--mustard)}
+.step h3{font-size:1.4rem}
+.step p{color:var(--muted);font-size:.95rem}
+.codeword{display:inline-block;font-weight:700;letter-spacing:.12em;color:var(--brown);background:var(--mustard-soft);border-radius:6px;padding:0 6px}
+
+/* ---------- бесплатно ---------- */
+.free{background:var(--paper);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.free-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+@media (max-width:980px){.free-grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:520px){.free-grid{grid-template-columns:1fr}}
+.fcard{display:flex;flex-direction:column;gap:10px;text-decoration:none;color:var(--ink);background:var(--bg);border-radius:18px;padding:20px;border:1.5px solid transparent;transition:border-color .15s;min-width:0}
+.fcard:hover{border-color:var(--brown)}
+.fcard .tag{font-size:.74rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--sage)}
+.fcard h3{font-size:1.45rem}
+.fcard p{font-size:.9rem;color:var(--muted)}
+.fcard .go{margin-top:auto;font-weight:700;font-size:.88rem;color:var(--brown)}
+
+
+.tgroup{display:flex;flex-direction:column;gap:12px;margin-bottom:26px}
+.tgroup-h{font-size:1.3rem;color:var(--muted)}
+.test-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+@media (max-width:700px){.test-grid{grid-template-columns:1fr}}
+.tcard{display:flex;flex-direction:column;gap:8px;text-decoration:none;color:var(--ink);background:var(--bg);border-radius:20px;padding:22px 22px 18px;border:1.5px solid var(--line);transition:border-color .15s,transform .15s;min-width:0}
+.tcard:hover{border-color:var(--brown);transform:translateY(-2px)}
+.tcard.pair{background:var(--blue-soft);border-color:var(--blue-line)}
+.tcard.pair:hover{border-color:var(--blue)}
+.tcard .tag{font-size:.74rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--sage)}
+.tcard.pair .tag,.tcard.pair .go{color:var(--blue)}
+.tcard h3{font-size:1.65rem}
+.tcard .slog{font-family:var(--display);font-size:1.08rem;color:var(--brown);line-height:1.3}
+.tcard.pair .slog{color:var(--blue)}
+.tcard p{font-size:.92rem;color:var(--muted)}
+.tcard .go{margin-top:auto;padding-top:6px;font-weight:700;font-size:.9rem;color:var(--brown)}
+.also{display:grid;grid-template-columns:auto 1fr 1fr;gap:12px;align-items:stretch}
+@media (max-width:820px){.also{grid-template-columns:1fr}}
+.also .btn{justify-content:center;align-self:center}
+.mini{display:flex;flex-direction:column;gap:2px;text-decoration:none;color:var(--ink);border:1px solid var(--line);border-radius:14px;padding:12px 16px;min-width:0}
+.mini:hover{border-color:var(--brown)}
+.mini b{font-size:.95rem}
+.mini span{font-size:.84rem;color:var(--muted)}
+/* ---------- граница и контакт ---------- */
+.limits{display:grid;grid-template-columns:1fr 1.4fr;gap:40px;align-items:start}
+@media (max-width:820px){.limits{grid-template-columns:1fr;gap:16px}}
+.limits h2{font-size:clamp(1.7rem,3.6vw,2.2rem)}
+.limits p{color:var(--muted);max-width:62ch}
+.contact{background:linear-gradient(160deg,var(--soft) 0%,var(--bg) 100%);border-radius:28px;padding:44px 40px;display:grid;grid-template-columns:1.2fr 1fr;gap:32px;align-items:center}
+@media (max-width:820px){.contact{grid-template-columns:1fr;padding:30px 22px}}
+.contact h2{font-size:clamp(2rem,4.6vw,2.9rem);margin-bottom:12px}
+.contact p{max-width:46ch}
+.clist{display:flex;flex-direction:column;gap:10px}
+.clist a,.clist div{display:flex;justify-content:space-between;gap:12px;align-items:center;background:var(--paper);border-radius:14px;padding:14px 16px;text-decoration:none;color:var(--ink);font-weight:600;font-size:.95rem;min-width:0}
+.clist span{color:var(--muted);font-weight:500;font-size:.85rem;overflow-wrap:anywhere;text-align:right}
+footer{padding-block:28px 40px;font-size:.82rem;color:var(--muted);display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
+footer a{color:var(--muted)}
+
+/* ---------- полоса-ссылка на страницу «Путь» ---------- */
+.pathband{margin-top:40px;display:flex;align-items:center;gap:18px;flex-wrap:wrap;text-decoration:none;color:var(--ink);background:var(--paper);border:1.5px solid var(--line);border-radius:22px;padding:20px 24px;transition:border-color .15s}
+.pathband:hover{border-color:var(--brown)}
+.pb-txt{flex:1 1 300px;display:flex;flex-direction:column;gap:4px;min-width:0}
+.pb-txt b{font-family:var(--display);font-weight:400;font-size:1.5rem;line-height:1.15}
+.pb-txt span{font-size:.92rem;color:var(--muted)}
+.pb-go{font-weight:700;color:var(--brown);white-space:nowrap}
+
+.mono.av{border:none;padding:0}
+.mono.av svg{width:100%;height:100%;display:block}
+
+.act b{align-items:center}
+.act-ic{flex:none;width:32px;height:32px;border-radius:50%;background:var(--bg);display:grid;place-items:center;margin-right:2px}
+.act b > .act-ic + *{flex:1}
+.mini{flex-direction:row;flex-wrap:wrap;align-items:center;column-gap:10px}
+.mini .ic.sm{width:38px;height:38px}
+.mini b{flex:1 1 auto}
+.mini span:not(.ic){flex-basis:100%}
+.act-t{flex:1;min-width:0}
+.act b{justify-content:flex-start;gap:10px}
+
+/* ---- бот: ссылка и всплывающая подсказка (data-tip) ---- */
+a.bot{color:inherit;font-weight:600;text-decoration:underline dotted;text-decoration-thickness:1.5px;text-underline-offset:3px}
+a.bot:hover{color:#B98324}
+[data-tip]{position:relative}
+[data-tip]::after{content:attr(data-tip);position:absolute;left:50%;bottom:calc(100% + 10px);transform:translate(-50%,4px);width:max-content;max-width:min(280px,80vw);padding:9px 13px;border-radius:12px;background:#3B2C22;color:#FFFCF8;font:500 13px/1.45 Manrope,system-ui,sans-serif;letter-spacing:0;text-align:left;text-transform:none;white-space:normal;box-shadow:0 10px 26px -10px rgba(40,25,10,.55);opacity:0;visibility:hidden;pointer-events:none;transition:opacity .15s,transform .15s,visibility .15s;z-index:60}
+[data-tip]:not(:hover):not(:focus-visible)::after{display:none} /* скрытая подсказка не должна давать горизонтальную прокрутку */
+[data-tip]:hover::after,[data-tip]:focus-visible::after{opacity:1;visibility:visible;transform:translate(-50%,0)}
+@media (hover:none){[data-tip]::after{display:none!important}}
+@media print{[data-tip]::after{display:none}}
+
+/* ---------- «Свои люди» — своя гамма: шалфей (решено 04.10.2026); горчица общая с сайтами Ирины ---------- */
+:root{--bg:#EEF1E6;--brown:#4F5E3E;--soft:#E3E8D6;--line:#D9DFCB;--sage-soft:#E3E8D6}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#1C2019;--brown:#B9C69F;--soft:#283023;--line:#353D2E}}
+:root[data-theme="dark"]{--bg:#1C2019;--brown:#B9C69F;--soft:#283023;--line:#353D2E}
+
+/* ---------- «Как разместиться»: пояснение, форма, анкета с данными ---------- */
+.j-hero{display:flex;flex-direction:column;gap:14px;padding-block:44px 18px;max-width:780px}
+.j-hero h1{font-size:clamp(2.2rem,5vw,3.5rem)} .j-hero h1 em{font-style:normal;color:var(--brown)} .j-hero .lead{font-size:1.08rem;max-width:60ch}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:18px 0 8px}
+@media (max-width:820px){.steps{grid-template-columns:1fr}}
+.step{background:var(--paper);border:1.5px solid var(--line);border-radius:20px;padding:18px 18px 20px;display:flex;flex-direction:column;gap:8px}
+.step i{font-family:var(--body);font-size:1rem;font-style:normal;width:34px;height:34px;border-radius:50%;background:var(--brown);color:var(--paper);display:grid;place-items:center;font-weight:700}
+.step b{font-family:var(--display);font-weight:400;font-size:1.35rem} .step p{margin:0;color:var(--muted);font-size:.95rem}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:14px 0} @media (max-width:820px){.cols{grid-template-columns:1fr}}
+.box{background:var(--soft);border-radius:20px;padding:18px 20px} .box h3{margin:0 0 8px;font-family:var(--display);font-weight:400;font-size:1.3rem} .box p{margin:0 0 8px;font-size:.95rem}
+.box p:last-child{margin:0} .box a{color:var(--ink);font-weight:600;text-decoration:underline;text-decoration-color:var(--mustard);text-underline-offset:3px}
+.form{background:var(--paper);border:1.5px solid var(--line);border-radius:24px;padding:clamp(18px,3vw,30px);margin:22px 0 10px;scroll-margin-top:90px}
+.form h2{margin:0 0 4px} .form .hint{color:var(--muted);margin:0 0 18px;font-size:.95rem}
+.fg{display:grid;grid-template-columns:1fr 1fr;gap:14px} @media (max-width:640px){.fg{grid-template-columns:1fr}}
+.fg .wide{grid-column:1/-1}
+.f{display:flex;flex-direction:column;gap:6px;min-width:0}
+.f label{font-size:.78rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)} .f label s{text-decoration:none;color:var(--mustard)}
+.f input,.f select{width:100%;box-sizing:border-box;font:inherit;font-size:1rem;color:var(--ink);background:var(--bg);border:1.5px solid var(--line);border-radius:14px;padding:12px 14px;min-height:50px}
+.f input:focus,.f select:focus{border-color:var(--brown);outline:none} .f small{color:var(--muted);font-size:.82rem} .f small a{color:var(--ink);font-weight:600}
+.chk{display:flex;flex-wrap:wrap;gap:8px} .chk label{text-transform:none;letter-spacing:0;font-size:.92rem;font-weight:600;color:var(--ink);background:var(--bg);border:1.5px solid var(--line);border-radius:999px;padding:7px 13px;cursor:pointer;display:inline-flex;gap:7px;align-items:center}
+.chk input{accent-color:var(--brown);width:auto;min-height:0;padding:0;margin:0} .chk label:has(input:checked){border-color:var(--brown);background:var(--soft)}
+.acts{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px} .acts .btn.ghost{background:transparent}
+.msg{margin-top:12px;font-size:.92rem;color:var(--brown);font-weight:600}
+.note{font-size:.85rem;color:var(--muted);margin-top:14px}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="page">
+    <a class="mark" href="../" aria-label="Свои люди в Швейцарии — в начало">
+      <span class="mono av"><svg aria-hidden="true" viewBox="0 0 100 100"><circle cx="50" cy="50" r="46" fill="#FFFCF8" stroke="#4F5E3E" stroke-width="3"/><g transform="rotate(0.0 50 50)"><path d="M50 47 C42 41 40.5 33 44 31 C47 29.5 53 29.5 56 31 C59.5 33 58 41 50 47Z" fill="#E3E8D6" stroke="#5E6B48" stroke-width="2"/><circle cx="50" cy="24" r="6.2" fill="#5E6B48"/></g><g transform="rotate(60.0 50 50)"><path d="M50 47 C42 41 40.5 33 44 31 C47 29.5 53 29.5 56 31 C59.5 33 58 41 50 47Z" fill="#E3E8D6" stroke="#5E6B48" stroke-width="2"/><circle cx="50" cy="24" r="6.2" fill="#5E6B48"/></g><g transform="rotate(120.0 50 50)"><path d="M50 47 C42 41 40.5 33 44 31 C47 29.5 53 29.5 56 31 C59.5 33 58 41 50 47Z" fill="#E3E8D6" stroke="#5E6B48" stroke-width="2"/><circle cx="50" cy="24" r="6.2" fill="#5E6B48"/></g><g transform="rotate(180.0 50 50)"><path d="M50 47 C42 41 40.5 33 44 31 C47 29.5 53 29.5 56 31 C59.5 33 58 41 50 47Z" fill="#E3E8D6" stroke="#5E6B48" stroke-width="2"/><circle cx="50" cy="24" r="6.2" fill="#5E6B48"/></g><g transform="rotate(240.0 50 50)"><path d="M50 47 C42 41 40.5 33 44 31 C47 29.5 53 29.5 56 31 C59.5 33 58 41 50 47Z" fill="#E3E8D6" stroke="#5E6B48" stroke-width="2"/><circle cx="50" cy="24" r="6.2" fill="#5E6B48"/></g><g transform="rotate(300.0 50 50)"><path d="M50 47 C42 41 40.5 33 44 31 C47 29.5 53 29.5 56 31 C59.5 33 58 41 50 47Z" fill="#E3E8D6" stroke="#5E6B48" stroke-width="2"/><circle cx="50" cy="24" r="6.2" fill="#5E6B48"/></g><circle cx="50" cy="50" r="7" fill="#B98324"/></svg></span>
+      <span><b>Свои люди</b><small>в Швейцарии</small></span>
+    </a>
+    <nav aria-label="Разделы">
+      <a href="../">Специалисты</a>
+      <a href="../events/">События</a>
+      <a href="./" aria-current="page" style="color:var(--ink)">Как разместиться</a>
+      <a href="https://voznesenskaya.ch/">Сайт Ирины</a>
+    </nav>
+    <a class="navcta" href="#form">Заполнить анкету</a>
+  </div>
+</header>
+<main class="page">
+  <section class="j-hero">
+    <div class="eyebrow">Свои люди в Швейцарии · для специалистов</div>
+    <h1>Разместиться <em>в справочнике</em></h1>
+    <p class="lead">Если вы работаете в Швейцарии официально и помогаете людям на русском, украинском или другом родном для них языке, приглашаем в справочник. Базовое размещение в период запуска бесплатное. Вся регистрация занимает около пятнадцати минут.</p>
+  </section>
+
+  <div class="steps">
+    <div class="step"><i>1</i><b>Заполните форму</b><p>Ниже на этой странице — только основное: имя, профессия, кантон, контакты. Нажмите «Скачать анкету», и анкета скачается уже с вашими данными.</p></div>
+    <div class="step"><i>2</i><b>Дополните и отправьте</b><p>Допишите в Word профиль и услуги, выберите услуги размещения и отправьте анкету вместе с портретным фото на voznesenskaya.iryna@gmail.com. Подпись не нужна: отправка анкеты — это согласие и заявка.</p></div>
+    <div class="step"><i>3</i><b>Получите ссылку</b><p>Мы проверим регистрацию в официальных реестрах, разместим карточку и пришлём вам ссылку на неё. Исправить что-то можно в любой момент одним письмом.</p></div>
+  </div>
+
+  <div class="cols">
+    <div class="box"><h3>Что понадобится</h3>
+      <p>Регистрационный номер UID (CHE-…): найти себя можно в <a href="https://www.uid.admin.ch/Search.aspx" target="_blank" rel="noopener">официальном реестре uid.admin.ch</a>. Если UID нет, подойдёт письмо AHV-кассы о самозанятости.</p>
+      <p>Портретное фото: вертикальное (4:5), от 800 × 1000 пикселей, лицо по центру, светлый фон.</p>
+      <p>Для регулируемых профессий — номер в реестре: врачи в <a href="https://www.healthreg-public.admin.ch/medreg/search" target="_blank" rel="noopener">MedReg</a>, психологи и психотерапевты в <a href="https://www.healthreg-public.admin.ch/psyreg/search" target="_blank" rel="noopener">PsyReg</a>, физиотерапевты, остеопаты и акушерки в <a href="https://www.gesreg.admin.ch" target="_blank" rel="noopener">GesReg</a>.</p></div>
+    <div class="box"><h3>Что бесплатно, а что платно</h3>
+      <p>Бесплатно сейчас: карточка с фото и всеми контактами, адреса в кантоне основного адреса, пометка «онлайн» и показ в своём городе.</p>
+      <p>Платно: «VIP-партнёр» (карточка выделена цветом, сразу за первым рядом), «VIP-партнёр ТОП» (первый ряд, не больше трёх мест в кантоне) и показ онлайн по всему кантону или по всей Швейцарии. Счёт приходит только после вашего подтверждения.</p></div>
+  </div>
+
+  <section class="form" id="form" aria-labelledby="form-h">
+    <h2 id="form-h">Основные данные для анкеты</h2>
+    <p class="hint">Данные остаются у вас на устройстве и никуда не отправляются, пока вы сами не отправите письмо. Обязательные поля отмечены звёздочкой.</p>
+    <div class="fg">
+      <div class="f"><label for="v-name">Имя и фамилия <s>*</s></label><input id="v-name" data-a="Имя и фамилия" autocomplete="name" placeholder="как показывать на сайте"></div>
+      <div class="f"><label for="v-latin">Фамилия и имя латиницей</label><input id="v-latin" data-a="Фамилия и имя латиницей" placeholder="как в банке, например Marti Olga"></div>
+      <div class="f"><label for="v-role">Профессия <s>*</s></label><input id="v-role" data-a="Профессия" placeholder="например «Семейный врач»"></div>
+      <div class="f"><label for="v-firm">Название фирмы</label><input id="v-firm" data-a="Название фирмы" autocomplete="organization" placeholder="точно как в реестре, если есть"></div>
+      <div class="f"><label for="v-dir">Направление <s>*</s></label><select id="v-dir" data-a="Главное направление"></select></div>
+      <div class="f wide" id="specs-wrap" hidden><label>Специализация — отметьте одну или несколько</label><div class="chk" id="v-specs"></div></div>
+      <div class="f"><label for="v-kant">Кантон основного адреса <s>*</s></label><select id="v-kant" data-a="Кантон основного адреса"></select></div>
+      <div class="f"><label for="v-addr">Основной адрес</label><input id="v-addr" data-a="Основной адрес" autocomplete="street-address" placeholder="улица и номер, индекс, город"></div>
+      <div class="f wide"><label>Языки, на которых вы работаете</label><div class="chk" id="v-langs"></div></div>
+      <div class="f"><label for="v-email">E-mail <s>*</s></label><input id="v-email" type="email" data-a="E-mail" autocomplete="email" placeholder="name@example.ch"></div>
+      <div class="f"><label for="v-phone">Телефон</label><input id="v-phone" type="tel" data-a="Телефон" autocomplete="tel" placeholder="+41 …"></div>
+      <div class="f"><label for="v-tg">Telegram</label><input id="v-tg" data-a="Telegram" placeholder="https://t.me/ваш_ник"></div>
+      <div class="f"><label for="v-wa">WhatsApp</label><input id="v-wa" data-a="WhatsApp" placeholder="https://wa.me/41791234567"></div>
+      <div class="f"><label for="v-ig">Instagram</label><input id="v-ig" data-a="Instagram" placeholder="https://www.instagram.com/ваш_ник"></div>
+      <div class="f"><label for="v-site">Сайт</label><input id="v-site" data-a="Сайт" placeholder="https://www.…"></div>
+      <div class="f wide"><label for="v-uid">Регистрационный номер (UID)</label><input id="v-uid" data-a="Регистрационный номер (UID)" placeholder="CHE-123.456.789"><small>Найдите себя в <a href="https://www.uid.admin.ch/Search.aspx" target="_blank" rel="noopener">реестре uid.admin.ch</a> по фамилии или названию фирмы.</small></div>
+    </div>
+    <div class="acts">
+      <button class="btn" type="button" id="dl">Скачать анкету с моими данными</button>
+      <button class="btn ghost" type="button" id="mail">Открыть письмо</button>
+      <a class="btn ghost" href="files/anketa.docx" download="Анкета специалиста — Свои люди в Швейцарии.docx">Скачать пустую анкету</a>
+    </div>
+    <div class="msg" id="msg" role="status" hidden></div>
+    <p class="note">Анкета — файл Word. В ней есть всё остальное: профиль, услуги, выбор услуг размещения и данные для счёта. Если Word нет, анкету можно открыть в Google Документах или Pages.</p>
+  </section>
+  <footer>
+    <span>© 2026 Свои люди в Швейцарии · проект <a href="https://voznesenskaya.ch/">Ирины Вознесенской</a></span>
+    <span><a href="../">Специалисты</a> · <a href="../events/">События</a> · <a href="https://voznesenskaya.ch/privacy/">Политика конфиденциальности</a> · <a href="https://voznesenskaya.ch/impressum/">Выходные данные</a></span>
+  </footer>
+</main>
+
+<script src="../assets/lib/jszip.min.js"></script>
+<script>
+const CATS = [{"t": "Документы и статус", "s": ["Разрешения и статус", "Натурализация", "Письма и формы", "Заверенные переводы", "Устный перевод", "Социальные вопросы и пособия", "Нотариус"]}, {"t": "Юристы", "s": ["Миграционное право", "Семейное право", "Трудовое право", "Аренда", "Долги и взыскания", "Наследство и завещания", "Права потребителей", "Медиация"]}, {"t": "Налоги и финансы", "s": ["Налоговая декларация", "Бухгалтерия и Treuhand", "Финансовое планирование", "Ипотека и банки", "Консультации по долгам"]}, {"t": "Страхование и пенсия", "s": ["Страховой брокер", "Пенсия AHV и BVG"]}, {"t": "Врачи и здоровье", "s": ["Семейный врач", "Педиатр", "Гинеколог", "Стоматолог", "Другие врачи-специалисты", "Физиотерапия", "Остеопатия", "Акушерка", "Диетолог", "Уход на дому (Spitex)"]}, {"t": "Психологическая помощь", "s": ["Психотерапевт", "Психиатр", "Психолог"]}, {"t": "Коучинг и личное развитие", "s": ["Коуч", "Семейный консультант", "Консультант по адаптации"]}, {"t": "Тело и красота", "s": ["Массаж", "Косметолог", "Парикмахер", "Маникюр", "Фитнес и йога"]}, {"t": "Дети и семья", "s": ["Логопед", "Детский психолог", "Репетитор", "Подготовка к гимназии", "Русская школа и билингвизм", "Ясли и детский сад", "Няня", "Кружки и занятия", "Уход за пожилыми"]}, {"t": "Язык, учёба и работа", "s": ["Немецкий язык", "Французский язык", "Итальянский язык", "Подготовка к fide", "Признание дипломов", "Карьера и резюме", "Поиск работы и рекрутинг", "Курсы и переквалификация", "Открытие своего дела"]}, {"t": "Дом, быт и транспорт", "s": ["Риелтор", "Переезд", "Международный переезд и таможня", "Уборка со сдачей квартиры", "Уборка и помощь по дому", "Ремонт", "Электрик и сантехник", "Компьютерная помощь", "Автошкола", "Автосервис", "Ветеринар и уход за животными"]}, {"t": "Праздники, фото и еда", "s": ["Фотограф и видеограф", "Организация праздников", "Торты и домашняя кухня", "Флорист и декор"]}];
+const KANT = ["Аппенцелль-Ауссерроден (AR) — Appenzell Ausserrhoden", "Аппенцелль-Иннерроден (AI) — Appenzell Innerrhoden", "Аргау (AG) — Aargau", "Базель-Ланд (BL) — Basel-Landschaft", "Базель-Штадт (BS) — Basel-Stadt", "Берн (BE) — Bern", "Вале (VS) — Valais", "Во (VD) — Vaud", "Гларус (GL) — Glarus", "Граубюнден (GR) — Graubünden", "Женева (GE) — Genève", "Золотурн (SO) — Solothurn", "Люцерн (LU) — Luzern", "Невшатель (NE) — Neuchâtel", "Нидвальден (NW) — Nidwalden", "Обвальден (OW) — Obwalden", "Санкт-Галлен (SG) — St. Gallen", "Тичино (TI) — Ticino", "Тургау (TG) — Thurgau", "Ури (UR) — Uri", "Фрибур (FR) — Fribourg", "Цуг (ZG) — Zug", "Цюрих (ZH) — Zürich", "Шаффхаузен (SH) — Schaffhausen", "Швиц (SZ) — Schwyz", "Юра (JU) — Jura"];
+const LANGS = ['русский', 'украинский', 'немецкий', 'французский', 'итальянский', 'английский'];
+const MAIL = 'voznesenskaya.iryna@gmail.com', ANKETA = 'files/anketa.docx';
+const $ = id => document.getElementById(id), esc = t => String(t).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const opt = (v, t) => `<option value="${esc(v)}">${esc(t)}</option>`;
+$('v-dir').innerHTML = opt('', 'Выберите направление') + CATS.map(c => opt(c.t, c.t)).join('');
+$('v-kant').innerHTML = opt('', 'Выберите кантон') + KANT.map(k => opt(k, k)).join('');
+const chk = (name, v) => `<label><input type="checkbox" name="${name}" value="${esc(v)}">${esc(v)}</label>`;
+$('v-langs').innerHTML = LANGS.map(l => chk('lang', l)).join('');
+$('v-dir').addEventListener('change', e => { const c = CATS.find(x => x.t === e.target.value);
+  $('specs-wrap').hidden = !c; $('v-specs').innerHTML = c ? c.s.map(s => chk('spec', s)).join('') : ''; });
+// черновик формы остаётся на этом устройстве (если браузер разрешает)
+const KEY = 'svoi-join';
+const save = () => { try { const d = {}; document.querySelectorAll('[data-a]').forEach(el => d[el.id] = el.value);
+  d.langs = [...document.querySelectorAll('input[name=lang]:checked')].map(i => i.value); d.specs = [...document.querySelectorAll('input[name=spec]:checked')].map(i => i.value);
+  localStorage.setItem(KEY, JSON.stringify(d)); } catch (_) {} };
+try { const d = JSON.parse(localStorage.getItem(KEY) || 'null'); if (d) { Object.entries(d).forEach(([k, v]) => { if ($(k) && typeof v === 'string') $(k).value = v; });
+  $('v-dir').dispatchEvent(new Event('change')); (d.langs || []).forEach(v => { const i = document.querySelector(`input[name=lang][value="${CSS.escape(v)}"]`); if (i) i.checked = true; });
+  (d.specs || []).forEach(v => { const i = document.querySelector(`input[name=spec][value="${CSS.escape(v)}"]`); if (i) i.checked = true; }); } } catch (_) {}
+document.querySelector('.form').addEventListener('input', save); document.querySelector('.form').addEventListener('change', save);
+
+const say = t => { const m = $('msg'); m.textContent = t; m.hidden = !t; };
+const need = () => { const miss = [['v-name', 'имя'], ['v-role', 'профессию'], ['v-dir', 'направление'], ['v-kant', 'кантон'], ['v-email', 'e-mail']].filter(([id]) => !$(id).value.trim()).map(x => x[1]);
+  if (miss.length) { say('Заполните, пожалуйста: ' + miss.join(', ') + '.'); return false; } return true; };
+const xe = t => String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+// заполняет поле Word (content control) по его имени: текст или выбор из списка
+function fill(xml, alias, value){
+  if (!value) return xml;
+  const i = xml.indexOf(`<w:alias w:val="${xe(alias)}"/>`); if (i < 0) return xml;
+  const st = xml.lastIndexOf('<w:sdt>', i), en = xml.indexOf('</w:sdt>', i) + 8;
+  let sdt = xml.slice(st, en);
+  if (sdt.includes('<w:dropDownList>') && !sdt.includes(`w:value="${xe(value)}"`)) return xml;
+  sdt = sdt.replace('<w:showingPlcHdr/>', '');
+  const runs = String(value).split(/\n/).map(x => `<w:t xml:space="preserve">${xe(x)}</w:t>`).join('<w:br/>');
+  sdt = sdt.replace(/<w:sdtContent>[\s\S]*<\/w:sdtContent>/, `<w:sdtContent><w:r>${runs}</w:r></w:sdtContent>`);
+  return xml.slice(0, st) + sdt + xml.slice(en);
+}
+// ставит галочку перед подписью (языки, специализации)
+function tick(xml, label){
+  const re = /<w:sdt><w:sdtPr><w:tag w:val="cb\d+"\/>[\s\S]*?<\/w:sdt>(?=<w:r>(?:(?!<\/w:r>)[\s\S])*?<w:t[^>]*>([^<]*)<\/w:t>)/g;
+  return xml.replace(re, (m, txt) => txt.replace(/\u00a0/g, ' ').trim() === label ? m.replace('w14:val="0"', 'w14:val="1"').replace('<w:t>☐</w:t>', '<w:t>☒</w:t>') : m);
+}
+$('dl').addEventListener('click', async () => {
+  say(''); if (!need()) return;
+  try {
+    const buf = await (await fetch(ANKETA)).arrayBuffer(); const zip = await JSZip.loadAsync(buf);
+    let xml = await zip.file('word/document.xml').async('string');
+    document.querySelectorAll('[data-a]').forEach(el => { xml = fill(xml, el.dataset.a, el.value.trim()); });
+    document.querySelectorAll('input[name=lang]:checked, input[name=spec]:checked').forEach(i => { xml = tick(xml, i.value); });
+    zip.file('word/document.xml', xml);
+    const blob = await zip.generateAsync({ type: 'blob', mimeType: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' });
+    const a = document.createElement('a'); a.href = URL.createObjectURL(blob);
+    a.download = `Анкета — ${$('v-name').value.trim()} — Свои люди в Швейцарии.docx`; document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 4000);
+    say('Анкета скачана. Дополните её в Word и отправьте вместе с фото — кнопка «Открыть письмо».');
+  } catch (e) { say('Не получилось подготовить анкету. Скачайте пустую анкету и заполните её в Word.'); }
+});
+$('mail').addEventListener('click', () => {
+  const name = $('v-name').value.trim();
+  const body = ['Здравствуйте!', '', 'Хочу разместиться в справочнике «Свои люди в Швейцарии».', name && `Имя: ${name}`, $('v-role').value && `Профессия: ${$('v-role').value}`, $('v-kant').value && `Кантон: ${$('v-kant').value}`, '', 'Во вложении: заполненная анкета и портретное фото.', ''].filter(x => x !== false && x !== undefined && x !== '' || x === '').join('\n');
+  location.href = `mailto:${MAIL}?subject=${encodeURIComponent('Размещение в справочнике' + (name ? ' — ' + name : ''))}&body=${encodeURIComponent(body)}`;
+});
+</script>
+</body>
+</html>

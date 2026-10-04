@@ -1,0 +1,608 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<link rel="icon" href="../fav/favicon.svg" type="image/svg+xml"><link rel="icon" href="../fav/icon-32.png" sizes="32x32"><link rel="apple-touch-icon" href="../fav/apple-touch-icon.png"><link rel="manifest" href="../fav/site.webmanifest">
+<title>Значок «Я в справочнике» — Свои люди в Швейцарии</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="stylesheet" href="../assets/fonts.css">
+<style>
+[hidden]{display:none!important}
+
+[hidden]{display:none!important}
+/* Layout: тёплая страница-письмо. Слева слово, справа шерстяная картина; дальше «двери» — фразы, в которых она узнаёт себя */
+:root{
+  --bg:#F4EDE3;       /* бежевый фон коучинга, как в тестах */
+  --paper:#FFFCF8;
+  --ink:#2F2924;
+  --muted:#7A6E62;
+  --line:#E5D9C9;
+  --brown:#6E4F3C;    /* главный акцент, как в тестах */
+  --mustard:#B98324;  /* шарф героини */
+  --mustard-soft:#F3E3C2;
+  --sage:#66704F;     /* пальто героини */
+  --sage-soft:#E3E6D6;
+  --soft:#EADFCF;
+  --blue:#2E5A88;     /* тесты о паре — голубой, как в тестах */
+  --blue-soft:#EAF2FA;
+  --blue-line:#D3E1EE;
+  --display:"Forum","Cormorant Garamond",Georgia,serif;
+  --body:"Manrope","Segoe UI",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#221D19; --paper:#2C2621; --ink:#F1E9DF; --muted:#B4A796; --line:#3E362F; --brown:#E1C2A6;
+  --mustard:#E2B45C; --mustard-soft:#3D321F; --sage:#B4BF97; --sage-soft:#2E3226; --soft:#3A3129; --blue:#9CC2EA; --blue-soft:#1D2733; --blue-line:#2C3A4A; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#221D19; --paper:#2C2621; --ink:#F1E9DF; --muted:#B4A796; --line:#3E362F; --brown:#E1C2A6;
+  --mustard:#E2B45C; --mustard-soft:#3D321F; --sage:#B4BF97; --sage-soft:#2E3226; --soft:#3A3129; --blue:#9CC2EA; --blue-soft:#1D2733; --blue-line:#2C3A4A; color-scheme:dark}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16.5px;line-height:1.65;margin:0}
+.page{max-width:1120px;margin:0 auto;padding-inline:20px}
+h1,h2,h3{font-family:var(--display);font-weight:400;line-height:1.12;margin:0;text-wrap:balance}
+p{margin:0}
+a{color:inherit}
+.eyebrow{font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;font-weight:700;color:var(--muted)}
+:focus-visible{outline:3px solid var(--mustard);outline-offset:3px;border-radius:6px}
+
+/* ---------- шапка ---------- */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.top .page{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:12px}
+.mark{display:flex;align-items:center;gap:10px;text-decoration:none}
+.mono{width:38px;height:38px;border-radius:50%;border:1.5px solid var(--brown);display:grid;place-items:center;font-family:var(--display);font-size:1.05rem;color:var(--brown);letter-spacing:.02em}
+.mark b{font-family:var(--display);font-weight:400;font-size:1.25rem;line-height:1}
+.mark small{display:block;font-size:.72rem;color:var(--muted);letter-spacing:.04em;margin-top:3px}
+nav{display:flex;gap:22px;font-size:.88rem;font-weight:600}
+nav a{text-decoration:none;color:var(--muted)}
+nav a:hover{color:var(--ink)}
+.navcta{font-size:.86rem;font-weight:700;text-decoration:none;border:1.5px solid var(--brown);color:var(--brown);border-radius:999px;padding:8px 16px;white-space:nowrap}
+@media (max-width:860px){
+  .top .page{flex-wrap:wrap;row-gap:6px}
+  nav{order:3;width:100%;gap:16px;overflow-x:auto;scrollbar-width:none;padding-bottom:4px}
+  nav::-webkit-scrollbar{display:none}
+  nav a{white-space:nowrap}
+}
+@media (max-width:420px){.mark small{display:none}.navcta{padding:7px 12px}}
+
+/* ---------- первый экран ---------- */
+.hero{display:grid;grid-template-columns:1.25fr .75fr;gap:56px;align-items:center;padding-block:48px 40px}
+.hero-text{display:flex;flex-direction:column;gap:22px;min-width:0}
+.hero h1{font-size:clamp(2.5rem,6.2vw,4.4rem);color:var(--ink)}
+.hero h1 em{font-style:normal;color:var(--brown)}
+.hero .lead{font-size:1.14rem;max-width:34ch;color:var(--ink)}
+.who{font-size:.86rem;color:var(--muted);display:flex;flex-wrap:wrap;gap:6px 14px}
+.who span+span::before{content:"·";margin-right:14px;color:var(--line)}
+@media (max-width:520px){.who span+span::before{content:none}.who{gap:4px 12px}}
+.hero-actions{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.btn{font:inherit;font-weight:700;font-size:.95rem;border:none;border-radius:999px;padding:14px 24px;cursor:pointer;background:var(--brown);color:var(--paper);text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:transform .15s}
+.btn:hover{transform:translateY(-1px)}
+.btn.ghost{background:transparent;color:var(--brown);border:1.5px solid var(--brown)}
+.hero-art{position:relative;min-width:0}
+.hero-art img{display:block;width:100%;max-width:100%;height:auto;aspect-ratio:941/1672;border-radius:26px;box-shadow:0 24px 50px -24px rgba(60,40,20,.45)}
+.hero-art figcaption{margin-top:14px;background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:12px 16px;font-size:.84rem}
+.hero-art figcaption b{display:block;font-family:var(--display);font-weight:400;font-size:1.1rem;color:var(--brown)}
+@media (max-width:860px){.hero{grid-template-columns:1fr;gap:28px;padding-block:32px 24px}.hero-art{max-width:360px;margin:0 auto;width:100%}}
+
+/* ---------- двери ---------- */
+section{padding-block:56px}
+.sec-head{display:flex;flex-direction:column;gap:10px;max-width:640px;margin-bottom:28px}
+.sec-head h2{font-size:clamp(2rem,4.6vw,2.9rem)}
+.sec-head p{color:var(--muted);font-size:1.02rem}
+.doors{background:var(--paper);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.door-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+@media (max-width:980px){.door-grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:520px){.door-grid{grid-template-columns:1fr}}
+.door{font:inherit;text-align:left;cursor:pointer;color:var(--ink);background:var(--bg);border:1.5px solid var(--line);border-radius:18px;padding:22px 20px 18px;display:flex;flex-direction:column;gap:14px;min-height:150px;transition:border-color .15s,transform .15s,background .15s;min-width:0}
+.door:hover{border-color:var(--brown);transform:translateY(-2px)}
+.door q{font-family:var(--display);font-size:1.5rem;line-height:1.15;quotes:"«" "»"}
+.door small{margin-top:auto;font-size:.8rem;color:var(--muted);display:flex;justify-content:space-between;gap:8px}
+.door[aria-expanded="true"]{background:var(--mustard-soft);border-color:var(--mustard)}
+.door[aria-expanded="true"] small span:last-child{transform:rotate(90deg)}
+.door small span:last-child{transition:transform .2s}
+.more-link{margin-top:22px;font:inherit;font-weight:700;color:var(--brown);background:none;border:none;padding:6px 0;cursor:pointer;font-size:.98rem;text-decoration:underline;text-underline-offset:5px;text-decoration-thickness:1px}
+.spheres{margin-top:18px}
+.sphere-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+@media (max-width:820px){.sphere-grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:480px){.sphere-grid{grid-template-columns:1fr}}
+.sphere{font:inherit;text-align:left;cursor:pointer;color:var(--ink);background:var(--paper);border:1.5px solid var(--line);border-radius:14px;padding:14px 16px;font-weight:600;font-size:.98rem;display:flex;justify-content:space-between;gap:10px;align-items:center;min-width:0}
+.sphere:hover{border-color:var(--brown)}
+.sphere[aria-expanded="true"]{background:var(--sage-soft);border-color:var(--sage)}
+.panel{margin-top:18px;background:var(--bg);border:1.5px solid var(--mustard);border-radius:20px;padding:28px;display:grid;grid-template-columns:1.1fr 1fr;gap:28px;animation:rise .25s ease-out}
+.panel.sage{border-color:var(--sage)}
+@keyframes rise{from{transform:translateY(8px)}}
+@media (max-width:820px){.panel{grid-template-columns:1fr;padding:22px 18px;gap:20px}}
+.panel h3{font-size:1.75rem;margin-bottom:12px}
+.panel .say{display:flex;flex-direction:column;gap:12px;min-width:0}
+.panel .say p{max-width:60ch}
+.todo{display:flex;flex-direction:column;gap:10px;min-width:0}
+.todo .eyebrow{margin-bottom:2px}
+.act{display:flex;flex-direction:column;gap:4px;background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:14px 16px;text-decoration:none;color:var(--ink);transition:border-color .15s}
+a.act:hover{border-color:var(--brown)}
+.act b{font-weight:700;font-size:.98rem;display:flex;justify-content:space-between;gap:10px}
+.act span{font-size:.88rem;color:var(--muted)}
+.edge{font-size:.86rem;color:var(--muted);border-left:3px solid var(--line);padding-left:12px}
+.next{font-size:.92rem}
+.next b{color:var(--brown)}
+.notme{font-size:.86rem;color:var(--muted)}
+.notme button{font:inherit;color:var(--brown);background:none;border:none;padding:0;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+
+
+/* ---------- всплывающее окно ---------- */
+dialog.qm{border:0;padding:0;background:transparent;width:min(100% - 24px,1080px);max-height:92vh;color:var(--ink)}
+dialog.qm[open]{animation:qmIn .28s cubic-bezier(.2,.8,.2,1)}
+@keyframes qmIn{from{opacity:0;transform:translateY(14px) scale(.98)}}
+dialog.qm::backdrop{background:rgba(47,41,36,.62);backdrop-filter:blur(3px)}
+.qm-card{background:var(--paper);border-radius:28px;padding:clamp(20px,3.4vw,40px);display:flex;flex-direction:column;gap:clamp(18px,2.6vw,28px);max-height:92vh;overflow-y:auto;box-shadow:0 30px 80px -30px rgba(40,25,10,.6)}
+.qm-top{display:flex;align-items:flex-start;gap:16px}
+.qm-head{flex:1;display:flex;flex-direction:column;gap:6px;min-width:0}
+.qm-title{font-size:clamp(1.8rem,4.4vw,3.2rem);line-height:1.04}
+.qm-close{flex:none;width:44px;height:44px;border-radius:50%;border:1.5px solid var(--line);background:var(--paper);color:var(--ink);font-size:1.05rem;cursor:pointer;display:grid;place-items:center;transition:background .15s,border-color .15s}
+.qm-close:hover{background:var(--mustard-soft);border-color:var(--mustard)}
+.qm-panel{background:var(--mustard-soft);border-radius:20px;padding:clamp(18px,2.8vw,32px);display:grid;grid-template-columns:.9fr 1.2fr 1fr;gap:clamp(18px,2.6vw,32px)}
+.qm-panel.sage{background:var(--sage-soft)}
+@media (max-width:900px){.qm-panel{grid-template-columns:1fr}}
+.qm-col{display:flex;flex-direction:column;gap:12px;min-width:0}
+.qm-col h3{font-size:1.4rem;line-height:1.15}
+.qm-col p{font-size:.95rem}
+.pain{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+.pain li{font-family:var(--display);font-size:1.12rem;line-height:1.3;padding-left:16px;border-left:2px solid var(--mustard)}
+.qm-panel.sage .pain li{border-color:var(--sage)}
+.qm-col .act{background:var(--paper)}
+.qm-foot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px 24px;align-items:baseline}
+.qm-foot .next{max-width:60ch}
+.qm-foot .notme button{font:inherit;color:var(--brown);background:none;border:none;padding:0;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+
+/* ---------- обо мне ---------- */
+.about{display:grid;grid-template-columns:.75fr 1.25fr;gap:56px;align-items:center}
+@media (max-width:860px){.about{grid-template-columns:1fr;gap:28px}.about img{max-width:360px;margin:0 auto}}
+.about img{display:block;width:100%;max-width:100%;height:auto;aspect-ratio:941/1672;border-radius:26px;box-shadow:0 24px 50px -24px rgba(60,40,20,.4)}
+.about-text{display:flex;flex-direction:column;gap:16px;min-width:0}
+.about-text h2{font-size:clamp(2rem,4.6vw,2.9rem)}
+.about-text p{max-width:60ch}
+.creds{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
+.creds span{font-size:.8rem;font-weight:600;background:var(--paper);border:1px solid var(--line);border-radius:999px;padding:6px 12px}
+.how-i{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:6px}
+@media (max-width:520px){.how-i{grid-template-columns:1fr}}
+.how-i div{background:var(--paper);border-radius:14px;padding:14px 16px;font-size:.9rem;color:var(--muted)}
+.how-i b{display:block;font-family:var(--display);font-weight:400;font-size:1.2rem;color:var(--ink);margin-bottom:2px}
+
+.two{display:flex;flex-direction:column;gap:12px;margin-top:8px}
+.two-lead{font-weight:600}
+.two-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:560px){.two-grid{grid-template-columns:1fr}}
+.prac{border-radius:16px;padding:16px 18px;display:flex;flex-direction:column;gap:6px;min-width:0;border:1.5px solid var(--line);background:var(--paper)}
+.prac.psy{background:var(--blue-soft);border-color:var(--blue-line)}
+.prac .tag{font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--sage)}
+.prac.psy .tag{color:var(--blue)}
+.prac b{font-family:var(--display);font-weight:400;font-size:1.3rem;line-height:1.2}
+.prac p{font-size:.9rem;color:var(--muted)}
+.prac .links{font-size:.86rem;font-weight:700;margin-top:auto}
+.prac .links a{color:var(--brown)}
+.prac.psy .links a{color:var(--blue)}
+.two-note{font-size:.82rem;color:var(--muted)}
+
+.ic{flex:none;display:grid;place-items:center;width:58px;height:58px;border-radius:50%;background:var(--paper);border:1.5px solid var(--line)}
+.ic.sm{width:46px;height:46px}
+.tcard .ic{width:56px;height:56px}
+.door .ic{background:var(--paper)}
+.door-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.sphere .lbl{display:flex;align-items:center;gap:12px}
+.step-top{display:flex;align-items:center;gap:14px}
+.tcard .t-top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.prac .p-top{display:flex;align-items:center;gap:10px}
+.limits .l-top{display:flex;align-items:center;gap:14px}
+.clist .c-l{display:flex;align-items:center;gap:10px}
+
+/* ---------- как начать ---------- */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1.5px solid var(--brown)}
+@media (max-width:820px){.steps{grid-template-columns:1fr}}
+.step{padding:22px 24px 6px 0;display:flex;flex-direction:column;gap:8px;min-width:0}
+.step+.step{padding-left:24px;border-left:1px solid var(--line)}
+@media (max-width:820px){.step+.step{padding-left:0;border-left:none;border-top:1px solid var(--line)}}
+.step i{font-style:normal;font-family:var(--display);font-size:2.6rem;line-height:1;color:var(--mustard)}
+.step h3{font-size:1.4rem}
+.step p{color:var(--muted);font-size:.95rem}
+.codeword{display:inline-block;font-weight:700;letter-spacing:.12em;color:var(--brown);background:var(--mustard-soft);border-radius:6px;padding:0 6px}
+
+/* ---------- бесплатно ---------- */
+.free{background:var(--paper);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.free-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+@media (max-width:980px){.free-grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:520px){.free-grid{grid-template-columns:1fr}}
+.fcard{display:flex;flex-direction:column;gap:10px;text-decoration:none;color:var(--ink);background:var(--bg);border-radius:18px;padding:20px;border:1.5px solid transparent;transition:border-color .15s;min-width:0}
+.fcard:hover{border-color:var(--brown)}
+.fcard .tag{font-size:.74rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--sage)}
+.fcard h3{font-size:1.45rem}
+.fcard p{font-size:.9rem;color:var(--muted)}
+.fcard .go{margin-top:auto;font-weight:700;font-size:.88rem;color:var(--brown)}
+
+
+.tgroup{display:flex;flex-direction:column;gap:12px;margin-bottom:26px}
+.tgroup-h{font-size:1.3rem;color:var(--muted)}
+.test-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+@media (max-width:700px){.test-grid{grid-template-columns:1fr}}
+.tcard{display:flex;flex-direction:column;gap:8px;text-decoration:none;color:var(--ink);background:var(--bg);border-radius:20px;padding:22px 22px 18px;border:1.5px solid var(--line);transition:border-color .15s,transform .15s;min-width:0}
+.tcard:hover{border-color:var(--brown);transform:translateY(-2px)}
+.tcard.pair{background:var(--blue-soft);border-color:var(--blue-line)}
+.tcard.pair:hover{border-color:var(--blue)}
+.tcard .tag{font-size:.74rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--sage)}
+.tcard.pair .tag,.tcard.pair .go{color:var(--blue)}
+.tcard h3{font-size:1.65rem}
+.tcard .slog{font-family:var(--display);font-size:1.08rem;color:var(--brown);line-height:1.3}
+.tcard.pair .slog{color:var(--blue)}
+.tcard p{font-size:.92rem;color:var(--muted)}
+.tcard .go{margin-top:auto;padding-top:6px;font-weight:700;font-size:.9rem;color:var(--brown)}
+.also{display:grid;grid-template-columns:auto 1fr 1fr;gap:12px;align-items:stretch}
+@media (max-width:820px){.also{grid-template-columns:1fr}}
+.also .btn{justify-content:center;align-self:center}
+.mini{display:flex;flex-direction:column;gap:2px;text-decoration:none;color:var(--ink);border:1px solid var(--line);border-radius:14px;padding:12px 16px;min-width:0}
+.mini:hover{border-color:var(--brown)}
+.mini b{font-size:.95rem}
+.mini span{font-size:.84rem;color:var(--muted)}
+/* ---------- граница и контакт ---------- */
+.limits{display:grid;grid-template-columns:1fr 1.4fr;gap:40px;align-items:start}
+@media (max-width:820px){.limits{grid-template-columns:1fr;gap:16px}}
+.limits h2{font-size:clamp(1.7rem,3.6vw,2.2rem)}
+.limits p{color:var(--muted);max-width:62ch}
+.contact{background:linear-gradient(160deg,var(--soft) 0%,var(--bg) 100%);border-radius:28px;padding:44px 40px;display:grid;grid-template-columns:1.2fr 1fr;gap:32px;align-items:center}
+@media (max-width:820px){.contact{grid-template-columns:1fr;padding:30px 22px}}
+.contact h2{font-size:clamp(2rem,4.6vw,2.9rem);margin-bottom:12px}
+.contact p{max-width:46ch}
+.clist{display:flex;flex-direction:column;gap:10px}
+.clist a,.clist div{display:flex;justify-content:space-between;gap:12px;align-items:center;background:var(--paper);border-radius:14px;padding:14px 16px;text-decoration:none;color:var(--ink);font-weight:600;font-size:.95rem;min-width:0}
+.clist span{color:var(--muted);font-weight:500;font-size:.85rem;overflow-wrap:anywhere;text-align:right}
+footer{padding-block:28px 40px;font-size:.82rem;color:var(--muted);display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
+footer a{color:var(--muted)}
+
+/* ---------- полоса-ссылка на страницу «Путь» ---------- */
+.pathband{margin-top:40px;display:flex;align-items:center;gap:18px;flex-wrap:wrap;text-decoration:none;color:var(--ink);background:var(--paper);border:1.5px solid var(--line);border-radius:22px;padding:20px 24px;transition:border-color .15s}
+.pathband:hover{border-color:var(--brown)}
+.pb-txt{flex:1 1 300px;display:flex;flex-direction:column;gap:4px;min-width:0}
+.pb-txt b{font-family:var(--display);font-weight:400;font-size:1.5rem;line-height:1.15}
+.pb-txt span{font-size:.92rem;color:var(--muted)}
+.pb-go{font-weight:700;color:var(--brown);white-space:nowrap}
+
+.mono.av{border:none;padding:0}
+.mono.av svg{width:100%;height:100%;display:block}
+
+.act b{align-items:center}
+.act-ic{flex:none;width:32px;height:32px;border-radius:50%;background:var(--bg);display:grid;place-items:center;margin-right:2px}
+.act b > .act-ic + *{flex:1}
+.mini{flex-direction:row;flex-wrap:wrap;align-items:center;column-gap:10px}
+.mini .ic.sm{width:38px;height:38px}
+.mini b{flex:1 1 auto}
+.mini span:not(.ic){flex-basis:100%}
+.act-t{flex:1;min-width:0}
+.act b{justify-content:flex-start;gap:10px}
+
+/* ---- бот: ссылка и всплывающая подсказка (data-tip) ---- */
+a.bot{color:inherit;font-weight:600;text-decoration:underline dotted;text-decoration-thickness:1.5px;text-underline-offset:3px}
+a.bot:hover{color:#B98324}
+[data-tip]{position:relative}
+[data-tip]::after{content:attr(data-tip);position:absolute;left:50%;bottom:calc(100% + 10px);transform:translate(-50%,4px);width:max-content;max-width:min(280px,80vw);padding:9px 13px;border-radius:12px;background:#3B2C22;color:#FFFCF8;font:500 13px/1.45 Manrope,system-ui,sans-serif;letter-spacing:0;text-align:left;text-transform:none;white-space:normal;box-shadow:0 10px 26px -10px rgba(40,25,10,.55);opacity:0;visibility:hidden;pointer-events:none;transition:opacity .15s,transform .15s,visibility .15s;z-index:60}
+[data-tip]:not(:hover):not(:focus-visible)::after{display:none} /* скрытая подсказка не должна давать горизонтальную прокрутку */
+[data-tip]:hover::after,[data-tip]:focus-visible::after{opacity:1;visibility:visible;transform:translate(-50%,0)}
+@media (hover:none){[data-tip]::after{display:none!important}}
+@media print{[data-tip]::after{display:none}}
+
+:root{--bg:#EEF1E6;--brown:#4F5E3E;--soft:#E3E8D6;--line:#D9DFCB;--sage-soft:#E3E8D6}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#1C2019;--brown:#B9C69F;--soft:#283023;--line:#353D2E}}
+:root[data-theme="dark"]{--bg:#1C2019;--brown:#B9C69F;--soft:#283023;--line:#353D2E}
+/* ---------- значок «Я в справочнике» (04.10.2026): картинка и QR-код со ссылкой на карточку — для сайта, Instagram, визитки, двери кабинета ---------- */
+.b-hero{display:flex;flex-direction:column;gap:12px;padding-block:40px 18px;max-width:760px}
+.b-hero h1{font-size:clamp(2.1rem,5vw,3.3rem)} .b-hero h1 em{font-style:normal;color:var(--brown)}
+.b-wrap{display:grid;grid-template-columns:minmax(0,440px) 1fr;gap:28px;align-items:start;margin-top:10px}
+@media (max-width:820px){.b-wrap{grid-template-columns:1fr}}
+.b-prev{background:var(--paper);border:1.5px solid var(--line);border-radius:24px;padding:16px}
+.b-prev canvas{width:100%;height:auto;display:block;border-radius:14px}
+.b-side{display:flex;flex-direction:column;gap:16px}
+.b-box{background:var(--paper);border:1.5px solid var(--line);border-radius:20px;padding:18px 20px;display:flex;flex-direction:column;gap:10px}
+.b-box h3{margin:0;font-family:var(--display);font-weight:400;font-size:1.3rem}
+.b-box p{margin:0;font-size:.94rem;color:var(--muted)}
+.b-acts{display:flex;flex-wrap:wrap;gap:8px}
+.b-acts .btn{font-size:.88rem;padding:10px 16px}
+.b-box textarea{width:100%;min-height:110px;box-sizing:border-box;font:13px/1.45 ui-monospace,Menlo,Consolas,monospace;border:1.5px solid var(--line);border-radius:12px;padding:10px;background:var(--bg);color:var(--ink)}
+.fld select{width:100%;font:inherit;font-size:1rem;color:var(--ink);background:var(--bg);border:1.5px solid var(--line);border-radius:14px;padding:12px 14px;min-height:50px}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:60;background:var(--ink);color:var(--bg);border-radius:14px;padding:12px 18px;font-size:.9rem;max-width:min(92vw,520px)}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="page">
+    <a class="mark" href="../" aria-label="Свои люди в Швейцарии — в начало">
+      <span class="mono av"><svg aria-hidden="true" viewBox="0 0 100 100"><circle cx="50" cy="50" r="46" fill="#FFFCF8" stroke="#4F5E3E" stroke-width="3"/><g transform="rotate(0.0 50 50)"><path d="M50 47 C42 41 40.5 33 44 31 C47 29.5 53 29.5 56 31 C59.5 33 58 41 50 47Z" fill="#E3E8D6" stroke="#5E6B48" stroke-width="2"/><circle cx="50" cy="24" r="6.2" fill="#5E6B48"/></g><g transform="rotate(60.0 50 50)"><path d="M50 47 C42 41 40.5 33 44 31 C47 29.5 53 29.5 56 31 C59.5 33 58 41 50 47Z" fill="#E3E8D6" stroke="#5E6B48" stroke-width="2"/><circle cx="50" cy="24" r="6.2" fill="#5E6B48"/></g><g transform="rotate(120.0 50 50)"><path d="M50 47 C42 41 40.5 33 44 31 C47 29.5 53 29.5 56 31 C59.5 33 58 41 50 47Z" fill="#E3E8D6" stroke="#5E6B48" stroke-width="2"/><circle cx="50" cy="24" r="6.2" fill="#5E6B48"/></g><g transform="rotate(180.0 50 50)"><path d="M50 47 C42 41 40.5 33 44 31 C47 29.5 53 29.5 56 31 C59.5 33 58 41 50 47Z" fill="#E3E8D6" stroke="#5E6B48" stroke-width="2"/><circle cx="50" cy="24" r="6.2" fill="#5E6B48"/></g><g transform="rotate(240.0 50 50)"><path d="M50 47 C42 41 40.5 33 44 31 C47 29.5 53 29.5 56 31 C59.5 33 58 41 50 47Z" fill="#E3E8D6" stroke="#5E6B48" stroke-width="2"/><circle cx="50" cy="24" r="6.2" fill="#5E6B48"/></g><g transform="rotate(300.0 50 50)"><path d="M50 47 C42 41 40.5 33 44 31 C47 29.5 53 29.5 56 31 C59.5 33 58 41 50 47Z" fill="#E3E8D6" stroke="#5E6B48" stroke-width="2"/><circle cx="50" cy="24" r="6.2" fill="#5E6B48"/></g><circle cx="50" cy="50" r="7" fill="#B98324"/></svg></span>
+      <span><b>Свои люди</b><small>в Швейцарии</small></span>
+    </a>
+    <nav aria-label="Разделы"><a href="../">Специалисты</a><a href="../events/">События</a><a href="../join/">Как разместиться</a></nav>
+    <a class="navcta" href="../">К справочнику</a>
+  </div>
+</header>
+
+<main class="page">
+  <section class="b-hero">
+    <div class="eyebrow">Для специалистов</div>
+    <h1>Значок <em>«Я в справочнике»</em></h1>
+    <p class="lead">Покажите клиентам, что вас можно найти среди своих. Картинку можно поставить в Instagram и на сайт, распечатать для визитки или двери кабинета. QR-код ведёт прямо на вашу карточку.</p>
+  </section>
+  <div class="fld" id="pickwrap" style="max-width:440px"><label for="pick" style="font-size:.78rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">Специалист</label><select id="pick"></select></div>
+  <div class="b-wrap">
+    <div class="b-prev"><canvas id="cv" width="1080" height="1080" aria-label="Значок «Я в справочнике»"></canvas></div>
+    <div class="b-side">
+      <div class="b-box"><h3>Картинка</h3><p>Квадрат 1080 × 1080 — для постов и сторис в Instagram, для сайта и печати.</p><div class="b-acts"><button class="btn" type="button" id="png">Скачать картинку</button><button class="btn ghost" type="button" id="qr">Скачать только QR-код</button></div></div>
+      <div class="b-box"><h3>Ссылка на карточку</h3><p id="url"></p><div class="b-acts"><button class="btn ghost" type="button" id="copy">Скопировать ссылку</button></div></div>
+      <div class="b-box"><h3>Кнопка для сайта</h3><p>Вставьте этот код на свой сайт — появится аккуратная кнопка со ссылкой на вашу карточку.</p><textarea id="code" readonly></textarea><div class="b-acts"><button class="btn ghost" type="button" id="copycode">Скопировать код</button></div></div>
+    </div>
+  </div>
+  <footer>
+    <span>© 2026 Свои люди в Швейцарии · проект <a href="https://voznesenskaya.ch/">Ирины Вознесенской</a></span>
+    <span><a href="../">Специалисты</a> · <a href="../events/">События</a> · <a href="https://voznesenskaya.ch/privacy/">Политика конфиденциальности</a></span>
+  </footer>
+</main>
+<div class="toast" id="toast" role="status" hidden></div>
+
+<script src="../assets/lib/qrcode.js"></script>
+<script>
+window.IMG_BASE = '../img/';
+/* =====================================================================
+   СПРАВОЧНИК СПЕЦИАЛИСТОВ — единственное место, где хранятся карточки.
+   Добавляет и меняет Claude по скриншоту/тексту карточки из бота.
+
+   uid — регистрационный номер UID (CHE-123.456.789) из uid.admin.ch: виден в полной карточке со ссылкой на запись в реестре
+         и служит ID специалиста в назначении платежа («CHE-123.456.789 Marti Olga»). Решено 03.10.2026.
+   firm — название фирмы точно как в реестре (если есть): видно под профессией, в полной карточке и PDF; ищется поиском (04.10.2026)
+   num — внутренний номер из «Реестра специалистов.xlsx» (SG-0001 …): запасной ID, если UID нет или он общий
+         (несколько специалистов одной фирмы с одним UID фирмы).
+
+   Управление размещением (поля в начале каждой карточки):
+     status    — 'активен' | 'пауза' | 'черновик'   (на сайте видны только «активен»)
+     paidUntil — 'ГГГГ-ММ-ДД' оплачено до; после этой даты карточка сама исчезает с сайта
+                 ('' = без срока, например бесплатно до конца 2026)
+     ОПЛАТА ПО КАНТОНАМ (решено 03.10.2026):
+     paidUntil — базовое размещение: включает кантон ОСНОВНОГО адреса (первый в places; другие адреса в том же кантоне — тоже)
+     places[].paidUntil — у адреса в ДРУГОМ кантоне своё «оплачено до»; без него этот кантон не показывается
+     tiers     — уровень покупается на кантон: [{ canton: 'Zürich', level: 'vip' | 'партнёр', until: 'ГГГГ-ММ-ДД' }]
+                 vip: на сайте «VIP-партнёр ТОП» — один ряд сверху (макс. 3; если больше — случайный выбор при каждом открытии), яркая карточка
+                 партнёр: на сайте «VIP-партнёр» — сразу после ряда ТОП, карточка выделена цветом
+     online    — true, если работает онлайн (пометка «онлайн» на карточке)
+     onlineCanton — опция «Онлайн по кантону»: оплачено до; пока действует — специалист виден в блоке «Онлайн» во всех городах своего кантона
+                 (без неё онлайн-специалист показывается только в своём городе; решено 04.10.2026)
+     onlineCH  — опция «Онлайн по всей Швейцарии»: оплачено до; пока действует — специалист в блоке «Онлайн, из других кантонов»
+     photo     — портретное фото (обязательно!): файл в папке specialisty/img/, имя = id, например 'anna-keller.jpg'.
+                 Без фото карточка на сайт не попадает. Формат: вертикальное 4:5, от 800×1000 px, лицо по центру, светлый фон.
+     added     — дата добавления (первые 30 дней на карточке значок «Новый»), checked — когда данные проверены последний раз
+     tags      — пометки с фильтром (только с подтверждением специалиста; страховки — по реестру), коды:
+                 emr — «оплачивает доп. страховка (EMR/ASCA)», basic — «покрывает базовая страховка», free1 — «первая встреча бесплатно»,
+                 kids — «работает с детьми», evening — «вечером и в выходные», access — «доступно с коляской»
+     places[].geo — координаты адреса [широта, долгота] для карты (Claude проставляет при добавлении карточки)
+
+   cat   — направление (одно): status, law, money, insure, health, psy, coach, body, kids, learn, home, events
+   specs — 1–2 специализации из списка направления (список — в index.html, CATS)
+   Документы специалиста (разрешения, согласие, счета) сюда НЕ кладутся — они хранятся в закрытой папке
+   «01 Swiss Guide — бесплатный бот\Специалисты — документы (не для сайта)» и в «Реестре специалистов.xlsx».
+   Кантоны — как в Швейцарии: Zürich, Bern, Aargau, Zug, Luzern, Basel-Stadt, St. Gallen, Genève, Vaud, Ticino …
+
+   ВНИМАНИЕ: сейчас здесь только ВЫМЫШЛЕННЫЕ специалисты для пробной страницы, вместо фото — силуэты-заглушки.
+   ===================================================================== */
+const SPECIALISTS = [
+  {
+    id: 'anna-keller', firm: 'Keller Integration GmbH', num: 'SG-0001', uid: 'CHE-999.000.001', status: 'активен', paidUntil: '2026-12-31', tiers: [{ canton: 'Zürich', level: 'vip', until: '2026-12-31' }], onlineCH: '2026-12-31', tags: ['free1', 'evening'], added: '2026-08-12', checked: '2026-10-03',
+    photo: 'anna-keller.jpg',
+    name: 'Анна Келлер', role: 'Консультант по адаптации', cat: 'status', specs: ['Письма и формы'],
+    places: [
+      { canton: 'Zürich', address: 'Bahnhofstrasse 10, 8001 Zürich', geo: [47.3686, 8.5392] }
+    ],
+    online: true, format: 'Онлайн (Zoom, телефон) и очно, по записи',
+    about: 'Помогаю новым жителям с документами, жильём, школами, страховками и повседневными процедурами. Объясняю, как устроена система, и иду рядом, пока всё не встанет на места.',
+    services: ['Индивидуальные консультации по адаптации', 'Сопровождение при переезде', 'Помощь с письмами и формами', 'Ориентация в системе школ и коммун'],
+    langs: ['русский', 'украинский', 'немецкий', 'английский'],
+    contacts: { phone: '+41 44 555 23 89', email: 'anna.keller@example.ch', site: 'example.ch', instagram: 'swiss.adapt', telegram: 'annakeller_ch', whatsapp: '+41 44 555 23 89' }
+  },
+  {
+    id: 'olga-marti', firm: 'Praxis Marti GmbH', num: 'SG-0002', uid: 'CHE-999.000.002', status: 'активен', paidUntil: '2026-12-31', tiers: [{ canton: 'Zürich', level: 'партнёр', until: '2026-12-31' }], onlineCH: '', tags: ['emr', 'evening', 'access'], added: '2026-08-20', checked: '2026-10-03',
+    photo: 'olga-marti.jpg',
+    name: 'Ольга Марти', role: 'Массажист, телесная терапия', cat: 'body', specs: ['Массаж'],
+    places: [
+      { canton: 'Zürich', address: 'Seefeldstrasse 40, 8008 Zürich', geo: [47.3594, 8.55] },
+      { canton: 'Zürich', address: 'Marktgasse 12, 8400 Winterthur', geo: [47.4996, 8.729], extra: true }
+    ],
+    online: false, format: 'По предварительной записи',
+    about: 'Работаю с восстановлением тела, мышечным напряжением и болевыми ощущениями. Подбираю программу под человека: что болит, как вы живёте и сколько у вас сил.',
+    services: ['Миофасциальный массаж тела и лица', 'Глубокотканный массаж', 'Расслабляющий массаж', 'Массаж для беременных', 'Детский массаж от 2 месяцев'],
+    langs: ['русский', 'украинский', 'немецкий'],
+    contacts: { phone: '+41 77 555 10 20', email: 'olga.marti@example.ch', instagram: 'olga.marti.body', telegram: 'olgamarti_ch', whatsapp: '+41 77 555 10 20' }
+  },
+  {
+    id: 'dmitri-huber', num: 'SG-0003', uid: 'CHE-999.000.003', status: 'активен', paidUntil: '2027-03-31', tiers: [], onlineCH: '2026-12-31', tags: ['free1'], added: '2026-09-01', checked: '2026-10-03',
+    photo: 'dmitri-huber.jpg',
+    name: 'Дмитрий Хубер', role: 'Налоговый консультант', cat: 'money', specs: ['Налоговая декларация', 'Бухгалтерия и Treuhand'],
+    places: [
+      { canton: 'Zug', address: 'Baarerstrasse 8, 6300 Zug', geo: [47.1702, 8.516] },
+      { canton: 'Luzern', address: 'Hertensteinstrasse 20, 6004 Luzern', geo: [47.0532, 8.308], extra: true, paidUntil: '2026-12-31' }
+    ],
+    online: true, format: 'Онлайн и очно',
+    about: 'Налоговые декларации для частных лиц и самозанятых, квеленштойер и переход на обычную декларацию, вопросы 3-го столпа.',
+    services: ['Налоговая декларация под ключ', 'Проверка квеленштойера', 'Консультация для самозанятых', 'Столп 3a: что выгодно именно вам'],
+    langs: ['русский', 'немецкий', 'английский'],
+    contacts: { phone: '+41 41 555 33 44', email: 'd.huber@example.ch', site: 'example.ch', telegram: 'huber_tax' }
+  },
+  {
+    id: 'natalia-bianchi', num: 'SG-0004', uid: 'CHE-999.000.004', status: 'активен', paidUntil: '2026-12-31', tiers: [], onlineCH: '', tags: ['basic', 'kids', 'access'], added: '2026-10-03', checked: '2026-10-03',
+    photo: 'natalia-bianchi.jpg',
+    name: 'Наталья Бьянки', role: 'Семейный врач', cat: 'health', specs: ['Семейный врач'],
+    places: [
+      { canton: 'Ticino', address: 'Via Nassa 5, 6900 Lugano', geo: [46.0046, 8.9506] }
+    ],
+    online: false, format: 'Приём в кабинете, по записи',
+    about: 'Принимаю взрослых и детей. Помогаю разобраться, как устроена медицина в Швейцарии: когда к семейному врачу, когда к специалисту, что покрывает базовая страховка.',
+    services: ['Первичный приём и диагностика', 'Направления к специалистам', 'Профилактические осмотры', 'Справки для школы и работы'],
+    langs: ['русский', 'итальянский', 'немецкий'],
+    contacts: { phone: '+41 91 555 77 88', email: 'praxis.bianchi@example.ch', site: 'example.ch' }
+  },
+  {
+    id: 'svetlana-meier', num: 'SG-0005', uid: 'CHE-999.000.005', status: 'активен', paidUntil: '', tiers: [], onlineCH: '', tags: ['free1'], added: '2026-08-28', checked: '2026-10-03',
+    photo: 'svetlana-meier.jpg',
+    name: 'Светлана Майер', role: 'Юрист по семейному праву', cat: 'law', specs: ['Семейное право'],
+    places: [
+      { canton: 'Bern', address: 'Marktgasse 30, 3011 Bern', geo: [46.948, 7.4446] }
+    ],
+    online: true, format: 'Онлайн и очно',
+    about: 'Брак, развод, опека, алименты, признание иностранных документов. Объясняю простым языком, какие у вас права и какие шаги впереди.',
+    services: ['Первичная консультация', 'Развод и раздел имущества', 'Опека и алименты', 'Признание иностранных документов'],
+    langs: ['русский', 'немецкий', 'французский'],
+    contacts: { phone: '+41 31 555 12 34', email: 's.meier@example.ch', whatsapp: '+41 79 555 12 34' }
+  },
+  {
+    id: 'irina-frei', num: 'SG-0006', uid: 'CHE-999.000.006', status: 'активен', paidUntil: '2026-12-31', tiers: [{ canton: 'Aargau', level: 'vip', until: '2026-12-31' }], onlineCH: '2026-12-31', tags: ['evening'], added: '2026-10-03', checked: '2026-10-03',
+    photo: 'irina-frei.jpg',
+    name: 'Ирина Фрай', role: 'Преподаватель немецкого', cat: 'learn', specs: ['Немецкий язык', 'Подготовка к fide'],
+    places: [
+      { canton: 'Aargau', address: 'Bahnhofstrasse 2, 5000 Aarau', geo: [47.3913, 8.0496] }
+    ],
+    online: true, format: 'Онлайн, мини-группы и индивидуально',
+    about: 'Немецкий для жизни: врач, школа, коммуна, собеседование. Готовлю к экзаменам fide и Goethe. Швейцарский немецкий на слух.',
+    services: ['Индивидуальные уроки', 'Мини-группы А1–B2', 'Подготовка к fide', 'Разговорный клуб'],
+    langs: ['русский', 'украинский', 'немецкий'],
+    contacts: { email: 'irina.frei@example.ch', instagram: 'deutsch.mit.irina', telegram: 'deutsch_irina' }
+  },
+  {
+    id: 'oksana-roth', num: 'SG-0007', uid: 'CHE-999.000.007', status: 'активен', paidUntil: '2026-12-31', tiers: [], onlineCH: '2026-12-31', tags: ['kids', 'basic'], added: '2026-10-03', checked: '2026-10-03',
+    photo: 'oksana-roth.jpg',
+    name: 'Оксана Рот', role: 'Детский логопед', cat: 'kids', specs: ['Логопед'],
+    places: [
+      { canton: 'Luzern', address: 'Pilatusstrasse 15, 6003 Luzern', geo: [47.0494, 8.307] }
+    ],
+    online: true, format: 'Очно и онлайн, по записи',
+    about: 'Работаю с детьми-билингвами от 3 лет. Помогаю, когда ребёнок путает языки, молчит в садике или школа советует логопеда.',
+    services: ['Диагностика речи', 'Занятия с детьми-билингвами', 'Консультация родителей', 'Подготовка к школе'],
+    langs: ['русский', 'украинский', 'немецкий'],
+    contacts: { phone: '+41 41 555 66 00', email: 'oksana.roth@example.ch', whatsapp: '+41 76 555 66 00' }
+  },
+  {
+    id: 'elena-schmid', num: 'SG-0008', uid: 'CHE-999.000.008', status: 'активен', paidUntil: '2026-12-31', tiers: [{ canton: 'Basel-Stadt', level: 'vip', until: '2026-12-31' }], onlineCH: '2026-12-31', tags: ['basic', 'evening'], added: '2026-09-02', checked: '2026-10-03',
+    photo: 'elena-schmid.jpg',
+    name: 'Елена Шмид', role: 'Психотерапевт, федеральный титул', cat: 'psy', specs: ['Психотерапевт'],
+    places: [
+      { canton: 'Basel-Stadt', address: 'Steinenvorstadt 22, 4051 Basel', geo: [47.553, 7.588] }
+    ],
+    online: true, format: 'Онлайн и очно; часть расходов может покрыть страховка',
+    about: 'Тревога, депрессия, кризисы после переезда, отношения в паре. Работаю в когнитивно-поведенческом подходе.',
+    services: ['Индивидуальная психотерапия', 'Терапия пар', 'Кризисная консультация'],
+    langs: ['русский', 'немецкий', 'английский'],
+    contacts: { phone: '+41 61 555 90 90', email: 'e.schmid@example.ch', site: 'example.ch' }
+  },
+  {
+    id: 'viktor-baumann', num: 'SG-0009', uid: 'CHE-999.000.009', status: 'активен', paidUntil: '2026-12-31', tiers: [{ canton: 'St. Gallen', level: 'vip', until: '2026-12-31' }], onlineCH: '2026-12-31', tags: ['free1'], added: '2026-08-15', checked: '2026-10-03',
+    photo: 'viktor-baumann.jpg',
+    name: 'Виктор Бауманн', role: 'Страховой брокер', cat: 'insure', specs: ['Страховой брокер'],
+    places: [
+      { canton: 'St. Gallen', address: 'Multergasse 4, 9000 St. Gallen', geo: [47.4245, 9.3747] }
+    ],
+    online: true, format: 'Онлайн и очно',
+    about: 'Подбираю медицинскую страховку, страхование жилья и ответственности. Сравниваю предложения разных компаний и объясняю, за что вы платите.',
+    services: ['Подбор базовой и дополнительной медстраховки', 'Страхование жилья и ответственности', 'Проверка ваших полисов'],
+    langs: ['русский', 'немецкий'],
+    contacts: { phone: '+41 71 555 45 45', email: 'v.baumann@example.ch', telegram: 'baumann_insure', whatsapp: '+41 79 555 45 45' }
+  },
+  {
+    id: 'alina-shteuber', num: 'SG-0012', uid: 'CHE-999.000.012', status: 'активен', paidUntil: '2026-12-31', tiers: [], onlineCH: '2026-12-31', tags: ['free1', 'evening'], added: '2026-10-03', checked: '2026-10-03',
+    photo: 'alina-shteuber.jpg',
+    name: 'Алина Штойбер', role: 'Коуч ICF', cat: 'coach', specs: ['Коуч', 'Консультант по адаптации'],
+    places: [
+      { canton: 'Zürich', address: 'Limmatquai 70, 8001 Zürich', geo: [47.374, 8.544] }
+    ],
+    online: true, format: 'Онлайн и очно, по записи',
+    about: 'Помогаю найти опору и направление после переезда: что для меня важно здесь, чем заниматься, как выстроить новую жизнь. Работаю с целями, ценностями и решениями.',
+    services: ['Индивидуальные коуч-сессии', 'Программа адаптации на 3 месяца', 'Разбор жизненного баланса'],
+    langs: ['русский', 'украинский', 'немецкий'],
+    contacts: { email: 'alina.shteuber@example.ch', telegram: 'alina_coach_ch', instagram: 'alina.coach.ch' }
+  },
+  /* --- ниже примеры скрытых карточек: на сайте их нет --- */
+  {
+    id: 'maria-weber', num: 'SG-0010', uid: 'CHE-999.000.010', status: 'пауза', paidUntil: '2026-12-31', tiers: [], onlineCH: '', added: '2026-10-03', checked: '2026-10-03',
+    photo: 'maria-weber.jpg',
+    name: 'Мария Вебер', role: 'Риелтор', cat: 'home', specs: ['Риелтор'],
+    places: [{ canton: 'Zürich', address: 'Badenerstrasse 100, 8004 Zürich', geo: [47.377, 8.524] }],
+    online: false, format: 'Очно',
+    about: 'Поиск квартиры, досье для арендодателя, передача квартиры при выезде.',
+    services: ['Поиск квартиры', 'Подготовка досье', 'Сопровождение при сдаче квартиры'],
+    langs: ['русский', 'немецкий'],
+    contacts: { phone: '+41 44 555 00 11' }
+  },
+  {
+    id: 'pavel-graf', num: 'SG-0011', uid: 'CHE-999.000.011', status: 'активен', paidUntil: '2026-09-30', tiers: [], onlineCH: '', added: '2026-07-01', checked: '2026-07-01',
+    photo: '',
+    name: 'Павел Граф', role: 'Мастер по ремонту', cat: 'home', specs: ['Ремонт'],
+    places: [{ canton: 'Zug', address: 'Industriestrasse 3, 6300 Zug', geo: [47.176, 8.515] }],
+    online: false, format: 'Выезд на дом',
+    about: 'Мелкий ремонт, сборка мебели, подготовка квартиры к сдаче.',
+    services: ['Мелкий ремонт', 'Сборка мебели', 'Ремонт перед выездом'],
+    langs: ['русский', 'украинский'],
+    contacts: { phone: '+41 78 555 22 33' }
+  }
+];
+
+</script>
+<script>
+const LOGO_SVG = '<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400" viewBox="0 0 100 100"><circle cx="50" cy="50" r="46" fill="#FFFCF8" stroke="#4F5E3E" stroke-width="3"/><g transform="rotate(0.0 50 50)"><path d="M50 47 C42 41 40.5 33 44 31 C47 29.5 53 29.5 56 31 C59.5 33 58 41 50 47Z" fill="#E3E8D6" stroke="#5E6B48" stroke-width="2"/><circle cx="50" cy="24" r="6.2" fill="#5E6B48"/></g><g transform="rotate(60.0 50 50)"><path d="M50 47 C42 41 40.5 33 44 31 C47 29.5 53 29.5 56 31 C59.5 33 58 41 50 47Z" fill="#E3E8D6" stroke="#5E6B48" stroke-width="2"/><circle cx="50" cy="24" r="6.2" fill="#5E6B48"/></g><g transform="rotate(120.0 50 50)"><path d="M50 47 C42 41 40.5 33 44 31 C47 29.5 53 29.5 56 31 C59.5 33 58 41 50 47Z" fill="#E3E8D6" stroke="#5E6B48" stroke-width="2"/><circle cx="50" cy="24" r="6.2" fill="#5E6B48"/></g><g transform="rotate(180.0 50 50)"><path d="M50 47 C42 41 40.5 33 44 31 C47 29.5 53 29.5 56 31 C59.5 33 58 41 50 47Z" fill="#E3E8D6" stroke="#5E6B48" stroke-width="2"/><circle cx="50" cy="24" r="6.2" fill="#5E6B48"/></g><g transform="rotate(240.0 50 50)"><path d="M50 47 C42 41 40.5 33 44 31 C47 29.5 53 29.5 56 31 C59.5 33 58 41 50 47Z" fill="#E3E8D6" stroke="#5E6B48" stroke-width="2"/><circle cx="50" cy="24" r="6.2" fill="#5E6B48"/></g><g transform="rotate(300.0 50 50)"><path d="M50 47 C42 41 40.5 33 44 31 C47 29.5 53 29.5 56 31 C59.5 33 58 41 50 47Z" fill="#E3E8D6" stroke="#5E6B48" stroke-width="2"/><circle cx="50" cy="24" r="6.2" fill="#5E6B48"/></g><circle cx="50" cy="50" r="7" fill="#B98324"/></svg>';
+const SL_BASE = 'https://svoiludi.ch/';
+const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+const cardLink = s => SL_BASE + '#' + s.id;
+function toast(t){ const el = document.getElementById('toast'); el.textContent = t; el.hidden = false; clearTimeout(toast.t); toast.t = setTimeout(() => el.hidden = true, 4000); }
+const copyText = t => { try { return navigator.clipboard.writeText(t).then(() => true, () => false); } catch (_) { return Promise.resolve(false); } };
+const list = SPECIALISTS.filter(s => s.status === 'активен').sort((a, b) => a.name.localeCompare(b.name, 'ru'));
+const pick = document.getElementById('pick');
+pick.innerHTML = list.map(s => `<option value="${esc(s.id)}">${esc(s.name)} — ${esc(s.role)}</option>`).join('');
+let CUR = null;
+function qrModules(text){ qrcode.stringToBytes = qrcode.stringToBytesFuncs['UTF-8']; const q = qrcode(0, 'M'); q.addData(text, 'Byte'); q.make(); return q; }
+function drawQr(ctx, q, x, y, size){
+  const n = q.getModuleCount(), c = size / n; ctx.fillStyle = '#2F2924';
+  for (let r = 0; r < n; r++) for (let k = 0; k < n; k++) if (q.isDark(r, k)) ctx.fillRect(Math.floor(x + k * c), Math.floor(y + r * c), Math.ceil(c), Math.ceil(c));
+}
+function wrap(ctx, text, max){ const w = String(text).split(' '), lines = []; let l = ''; w.forEach(x => { const t = l ? l + ' ' + x : x; if (ctx.measureText(t).width > max && l){ lines.push(l); l = x; } else l = t; }); if (l) lines.push(l); return lines; }
+async function draw(){
+  const s = CUR, cv = document.getElementById('cv'), ctx = cv.getContext('2d'), W = 1080;
+  try { await document.fonts.ready; await Promise.all([document.fonts.load('80px Forum'), document.fonts.load('700 40px Manrope'), document.fonts.load('500 40px Manrope')]); } catch (_) {}
+  ctx.fillStyle = '#EEF1E6'; ctx.fillRect(0, 0, W, W);
+  ctx.fillStyle = '#FFFCF8'; ctx.beginPath(); ctx.roundRect(60, 60, W - 120, W - 120, 48); ctx.fill();
+  ctx.strokeStyle = '#D9DFCB'; ctx.lineWidth = 3; ctx.stroke();
+  const img = new Image(); img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(LOGO_SVG);
+  await new Promise(r => { img.onload = r; img.onerror = r; });
+  try { ctx.drawImage(img, 120, 120, 150, 150); } catch (_) {}
+  ctx.fillStyle = '#4F5E3E'; ctx.font = '400 62px Forum, Georgia, serif'; ctx.fillText('Свои люди', 300, 188);
+  ctx.fillStyle = '#7A6E62'; ctx.font = '500 34px Manrope, Arial, sans-serif'; ctx.fillText('в Швейцарии', 302, 240);
+  ctx.fillStyle = '#B98324'; ctx.font = '700 30px Manrope, Arial, sans-serif'; ctx.fillText('Я В СПРАВОЧНИКЕ', 120, 360);
+  ctx.fillStyle = '#2F2924'; ctx.font = '400 74px Forum, Georgia, serif';
+  const nl = wrap(ctx, s.name, 520); nl.slice(0, 2).forEach((l, i) => ctx.fillText(l, 120, 450 + i * 80));
+  ctx.fillStyle = '#4F5E3E'; ctx.font = '400 46px Forum, Georgia, serif';
+  const y0 = 450 + Math.min(nl.length, 2) * 80 + 6; wrap(ctx, s.role, 480).slice(0, 3).forEach((l, i) => ctx.fillText(l, 120, y0 + 8 + i * 54));
+  // QR справа внизу
+  const q = qrModules(cardLink(s)), qs = 300, qx = W - 120 - qs, qy = W - 120 - qs - 70;
+  ctx.fillStyle = '#FFFFFF'; ctx.beginPath(); ctx.roundRect(qx - 20, qy - 20, qs + 40, qs + 40, 24); ctx.fill(); ctx.strokeStyle = '#D9DFCB'; ctx.lineWidth = 2; ctx.stroke();
+  drawQr(ctx, q, qx, qy, qs);
+  ctx.fillStyle = '#7A6E62'; ctx.font = '600 26px Manrope, Arial, sans-serif'; ctx.textAlign = 'center'; ctx.fillText('Наведите камеру', qx + qs / 2, qy + qs + 56); ctx.textAlign = 'left';
+  ctx.fillStyle = '#2F2924'; ctx.font = '700 40px Manrope, Arial, sans-serif'; ctx.fillText('svoiludi.ch', 120, W - 236);
+  ctx.fillStyle = '#7A6E62'; ctx.font = '500 27px Manrope, Arial, sans-serif'; ctx.fillText('русскоязычные специалисты', 120, W - 186);
+  ctx.fillText('по всей Швейцарии', 120, W - 150);
+}
+function save(canvas, name){ canvas.toBlob(b => { const u = URL.createObjectURL(b), a = document.createElement('a'); a.href = u; a.download = name; document.body.appendChild(a); a.click(); setTimeout(() => { a.remove(); URL.revokeObjectURL(u); }, 4000); toast('Картинка скачана.'); }, 'image/png'); }
+function select(id){
+  CUR = list.find(s => s.id === id) || list[0]; if (!CUR) return; pick.value = CUR.id;
+  document.getElementById('url').textContent = cardLink(CUR);
+  document.getElementById('code').value = `<a href="${cardLink(CUR)}" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border-radius:999px;background:#4F5E3E;color:#fff;font:600 15px/1 Arial,sans-serif;text-decoration:none">Я в справочнике «Свои люди в Швейцарии»</a>`;
+  draw();
+  if (location.hash.slice(1) !== CUR.id) history.replaceState(null, '', '#' + CUR.id);
+}
+pick.addEventListener('change', () => select(pick.value));
+document.getElementById('png').onclick = () => save(document.getElementById('cv'), `Я в справочнике — ${CUR.name}.png`);
+document.getElementById('qr').onclick = () => { const q = qrModules(cardLink(CUR)), c = document.createElement('canvas'); c.width = c.height = 1000; const x = c.getContext('2d'); x.fillStyle = '#fff'; x.fillRect(0, 0, 1000, 1000); drawQr(x, q, 60, 60, 880); save(c, `QR — ${CUR.name}.png`); };
+document.getElementById('copy').onclick = async () => toast((await copyText(cardLink(CUR))) ? 'Ссылка скопирована.' : cardLink(CUR));
+document.getElementById('copycode').onclick = async () => toast((await copyText(document.getElementById('code').value)) ? 'Код скопирован.' : 'Выделите код и скопируйте вручную.');
+select(decodeURIComponent(location.hash.slice(1)));
+</script>
+
+</body>
+</html>
