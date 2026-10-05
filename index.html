@@ -824,14 +824,14 @@ window.IMG_BASE = 'img/';
 const SPECIALISTS = [
   {
     id: 'tetiana-aleksandrova', key: '2fuajkoh', num: 'SG-0015', uid: '', status: 'на подтверждении', paidUntil: '', tiers: [], onlineCH: '', tags: [], added: '2026-10-05', checked: '',
-    todo: ['Портретное фото: на скриншоте из бота лица не видно — нужен портрет', 'UID: в UID-реестре не нашлась (Aleksandrova, Alexandrova, Tetiana Aleksandrova) — запросить UID или письмо AHV-кассы о самозанятости', 'Телефона и Telegram в боте нет. E-mail tetiana.alek@gmx.ch взят с её сайта — подтвердить', 'Цюрих и Санкт-Галлен — дополнительные кантоны, они платные и пока не показываются. Бесплатно — кантон Тургау. Спросить, нужны ли', 'Имя на сайте: Татьяна или Тетяна — уточнить', 'Согласие: письмо «Подтверждаю» с её e-mail'],
+    todo: ['Портретное фото: на скриншоте из бота лица не видно — нужен портрет', 'UID: в UID-реестре не нашлась (Aleksandrova, Alexandrova, Tetiana Aleksandrova) — запросить UID или письмо AHV-кассы о самозанятости', 'Телефона и Telegram в боте нет. E-mail tetiana.alek@gmx.ch взят с её сайта — подтвердить', 'Цюрих и Санкт-Галлен — выездные съёмки, отмечены кантонами по решению Ирины 05.10.2026, показ до 31.12.2026 (paidUntil) — условия уточнить', 'Имя на сайте: Татьяна или Тетяна — уточнить', 'Согласие: письмо «Подтверждаю» с её e-mail'],
     name: 'Татьяна Александрова', role: 'Фотограф и видеограф', cat: 'events', specs: ['Фотограф и видеограф'],
     places: [
       { canton: 'Thurgau', address: 'Romanshorn', geo: [47.5655, 9.3790] },
-      { canton: 'Zürich', address: 'Выездные съёмки, кантон Цюрих', geo: [47.3769, 8.5417], extra: true, paidUntil: '' },
-      { canton: 'St. Gallen', address: 'Выездные съёмки, кантон Санкт-Галлен', geo: [47.4245, 9.3767], extra: true, paidUntil: '' }
+      { canton: 'Zürich', area: true, note: 'выездные съёмки', address: '', extra: true, paidUntil: '2026-12-31' },
+      { canton: 'St. Gallen', area: true, note: 'выездные съёмки', address: '', extra: true, paidUntil: '2026-12-31' }
     ],
-    online: false, format: 'Выездные съёмки и индивидуальные проекты. Онлайн — только консультации по подготовке к фотосессии',
+    online: false, format: 'Выездные съёмки в кантонах Тургау, Цюрих и Санкт-Галлен, индивидуальные проекты. Онлайн — только консультации по подготовке к фотосессии',
     about: 'Профессиональный фотограф и видеограф. Специализируюсь на женских портретах, семейных съёмках, love story, беременности, personal branding и контенте для социальных сетей. Создаю живые, эмоциональные фотографии с акцентом на естественность, красоту и индивидуальность каждого человека. Каждая клиентка получает все удачные фотографии в лёгкой цветокоррекции без дополнительной оплаты. Я считаю, что красивые моменты не должны оставаться на жёстком диске фотографа.',
     services: ['Индивидуальные фотосессии', 'Семейные фотосессии', 'Love story и пары', 'Съёмки беременности', 'Personal branding и бизнес-портреты', 'Контент для Instagram и социальных сетей', 'Фото и видео для мероприятий', 'Помощь в подборе образов и локаций', 'Консультации по подготовке к фотосессии (онлайн)'],
     langs: ['русский', 'украинский', 'немецкий'],
@@ -1214,10 +1214,12 @@ const ext = 'target="_blank" rel="noopener"';
 const route = a => 'https://www.google.com/maps/dir/?api=1&destination=' + encodeURIComponent(a);
 const PIN = '<svg class="pin" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z" fill="none" stroke="currentColor" stroke-width="2.2"/><circle cx="12" cy="10" r="2.6" fill="currentColor"/></svg>';
 // полная карточка: весь адрес нажимается (карта), рядом «На карте», «Маршрут» и «Скопировать адрес»
-const placeFull = p => `<div class="pl"><a class="pl-addr" href="${maps(p.address)}" ${ext} data-tip="Открыть адрес на Google Maps">${PIN}<span>${esc(p.address)}</span></a>
+// выезд по кантону (area: true): без адреса и ссылок, только отметка кантона
+const areaNote = p => p.note || 'выезд к клиенту';
+const placeFull = p => p.area ? `<div class="pl"><div class="pl-meta"><span class="kt" title="кантон ${esc(ktRu(p.canton))}">${esc(kt(p.canton))}</span><span>кантон ${esc(ktRu(p.canton))} · ${esc(areaNote(p))}</span></div></div>` : `<div class="pl"><a class="pl-addr" href="${maps(p.address)}" ${ext} data-tip="Открыть адрес на Google Maps">${PIN}<span>${esc(p.address)}</span></a>
   <div class="pl-meta"><span class="kt" title="кантон ${esc(ktRu(p.canton))}">${esc(kt(p.canton))}</span><span>кантон ${esc(ktRu(p.canton))}${p.extra ? ' · дополнительный адрес' : ''}</span></div>
   <div class="pl-act"><a href="${maps(p.address)}" ${ext}>На карте</a><a href="${route(p.address)}" ${ext}>Маршрут</a><button type="button" data-copy="${esc(p.address)}">Скопировать адрес</button></div></div>`;
-const placeLink = (p, full) => `<a class="place" href="${maps(p.address)}" ${ext} data-tip="${esc(p.address)} — открыть на карте">${PIN}<b>${esc(city(p.address))}</b><span class="kt" title="кантон ${esc(ktRu(p.canton))}">${esc(kt(p.canton))}</span>${full ? `<u>${esc(street(p.address))}</u>` : ''}${full && p.extra ? '<u>доп. адрес</u>' : ''}</a>`;
+const placeLink = (p, full) => p.area ? `<span class="place area" data-tip="кантон ${esc(ktRu(p.canton))} · ${esc(areaNote(p))}"><span class="kt">${esc(kt(p.canton))}</span></span>` : `<a class="place" href="${maps(p.address)}" ${ext} data-tip="${esc(p.address)} — открыть на карте">${PIN}<b>${esc(city(p.address))}</b><span class="kt" title="кантон ${esc(ktRu(p.canton))}">${esc(kt(p.canton))}</span>${full ? `<u>${esc(street(p.address))}</u>` : ''}${full && p.extra ? '<u>доп. адрес</u>' : ''}</a>`;
 
 const state = { q: '', cat: '', spec: '', canton: '', city: '', lang: '', tags: [], hidden: false, fav: false, shared: null, view: 'list' };
 const VIP_ROW = 3;   // VIP занимают максимум один ряд сверху; если VIP больше — каждый раз случайный выбор
@@ -1233,7 +1235,7 @@ const onlineCH = s => s.online && (state.hidden || live(s.onlineCH));
 const pool = () => SPECIALISTS.filter(s => state.hidden || !hiddenReason(s));
 const hay = s => norm([s.name, s.role, s.firm, s.about, s.format, ...(s.tags || []).map(t => TAGS[t]), CATS[s.cat]?.t, ...(s.specs || []), ...(s.services || []), ...(s.langs || []), ...s.places.map(p => p.canton + ' ' + ktRu(p.canton) + ' ' + p.address)].join(' '));
 // фильтр «Кантон → Город» (04.10.2026): город берётся из адреса; в списке городов только те, где в кантоне уже есть специалисты
-const inCanton = s => !state.canton || livePlaces(s).some(p => p.canton === state.canton && (!state.city || city(p.address) === state.city));
+const inCanton = s => !state.canton || livePlaces(s).some(p => p.canton === state.canton && (!state.city || (!p.area && city(p.address) === state.city)));
 // «Онлайн по кантону» (onlineCanton — оплачено до): виден во всех городах своего кантона; «Онлайн по всей Швейцарии» (onlineCH) — везде
 const onlineCanton = s => s.online && (state.hidden || live(s.onlineCanton)) && livePlaces(s).some(p => p.canton === state.canton);
 
@@ -1372,7 +1374,7 @@ function renderCats(){   // выпадающие списки «Направле
 function fillCities(){   // города выбранного кантона, только где уже есть специалисты, с числом рядом
   const el = document.getElementById('city'), opt = (v, t) => `<option value="${esc(v)}">${esc(t)}</option>`;
   if (!state.canton){ el.disabled = true; el.innerHTML = opt('', 'Сначала выбери кантон'); state.city = ''; return; }
-  const n = {}; pool().forEach(s => new Set(livePlaces(s).filter(p => p.canton === state.canton).map(p => city(p.address))).forEach(c => n[c] = (n[c] || 0) + 1));
+  const n = {}; pool().forEach(s => new Set(livePlaces(s).filter(p => p.canton === state.canton && !p.area).map(p => city(p.address))).forEach(c => n[c] = (n[c] || 0) + 1));
   const list = Object.keys(n).sort((a, b) => a.localeCompare(b, 'de'));
   if (!list.includes(state.city)) state.city = '';
   el.disabled = !list.length;
@@ -1411,7 +1413,7 @@ function vcard(s, photoB64){
   if (c.site) L.push(`URL:${LINK.site(c.site)[1]}`);
   if (c.telegram) L.push(`X-SOCIALPROFILE;TYPE=telegram:${LINK.telegram(c.telegram)[1]}`);
   if (c.instagram) L.push(`X-SOCIALPROFILE;TYPE=instagram:${LINK.instagram(c.instagram)[1]}`);
-  livePlaces(s).forEach(p => { const m = String(p.address).match(/^(.*?),?\s*(\d{4})\s+(.+)$/); L.push(`ADR;TYPE=WORK:;;${e(m ? m[1] : p.address)};${e(m ? m[3] : '')};;${m ? m[2] : ''};${e('Schweiz')}`); });
+  livePlaces(s).filter(p => !p.area).forEach(p => { const m = String(p.address).match(/^(.*?),?\s*(\d{4})\s+(.+)$/); L.push(`ADR;TYPE=WORK:;;${e(m ? m[1] : p.address)};${e(m ? m[3] : '')};;${m ? m[2] : ''};${e('Schweiz')}`); });
   L.push(`NOTE:${e('Свои люди в Швейцарии: ' + cardUrl(s))}`);
   if (photoB64) L.push(`PHOTO;ENCODING=b;TYPE=JPEG:${photoB64}`);
   L.push('END:VCARD');
@@ -1525,7 +1527,7 @@ function cardPage(s){
   const k = CATS[s.cat] || CATS.status;
   return `${pdfHead(s.sample ? 'ОБРАЗЕЦ — специалист вымышленный' : '')}<div class="pp-card">${pdfImg(s)}<div style="display:flex;flex-direction:column;gap:14px">
       <div><div class="pp-cat" style="color:${k.c}">${esc(k.t)}${s.specs && s.specs.length ? ' · ' + esc(s.specs.join(', ')) : ''}</div><div class="pp-name">${esc(s.name)}</div><div class="pp-role">${esc(s.role)}</div>${s.firm ? `<div style="font-size:13px;color:#7A6E62;margin-top:3px">${esc(s.firm)}</div>` : ''}</div>
-      <div class="pp-sec"><h4>Где принимает</h4>${livePlaces(s).map(p => `<div><a data-href="${esc(maps(p.address))}">${esc(p.address)}</a> · кантон ${esc(ktRu(p.canton))}</div>`).join('')}${s.online ? '<div>и онлайн по видеосвязи</div>' : ''}</div>
+      <div class="pp-sec"><h4>Где принимает</h4>${livePlaces(s).map(p => p.area ? `<div>кантон ${esc(ktRu(p.canton))} · ${esc(areaNote(p))}</div>` : `<div><a data-href="${esc(maps(p.address))}">${esc(p.address)}</a> · кантон ${esc(ktRu(p.canton))}</div>`).join('')}${s.online ? '<div>и онлайн по видеосвязи</div>' : ''}</div>
       <div class="pp-sec"><h4>Контакты</h4><div class="pp-ct">${pdfContacts(s)}</div></div></div></div>
     <div class="pp-grid"><div class="pp-sec"><h4>Профиль</h4><p>${esc(s.about)}</p></div><div class="pp-sec"><h4>Услуги</h4><p>${esc(s.services.join(' · '))}</p></div>
       <div class="pp-sec"><h4>Формат</h4><p>${esc(s.format)}</p></div><div class="pp-sec"><h4>Языки</h4><p>${esc(s.langs.join(', '))}</p></div></div>
