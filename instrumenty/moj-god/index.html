@@ -1,0 +1,789 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<link rel="icon" href="/fav/favicon.svg" type="image/svg+xml"><link rel="icon" href="/fav/icon-32.png" sizes="32x32"><link rel="apple-touch-icon" href="/fav/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/fonts.css">
+<meta name="description" content="Распиши повторяющиеся дела и важные сроки один раз, и они встанут на весь год. Бесплатно, данные только в твоём браузере.">
+<link rel="canonical" href="https://svoiludi.ch/instrumenty/moj-god/">
+<meta property="og:type" content="website"><meta property="og:locale" content="ru_RU"><meta property="og:site_name" content="Свои люди в Швейцарии">
+<meta property="og:title" content="Мой год · годовой календарь рутины"><meta property="og:description" content="Распиши повторяющиеся дела и важные сроки один раз, и они встанут на весь год. Бесплатно, данные только в твоём браузере.">
+<meta property="og:url" content="https://svoiludi.ch/instrumenty/moj-god/"><meta property="og:image" content="https://svoiludi.ch/fav/og-svoi-ludi.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="robots" content="noindex, nofollow">
+<title>Мой год</title>
+
+<style>
+/* Layout: a printable year sheet — 12 month rows, weekdays aligned in 37 columns, thin routine lanes under each day number; editor above. Brand of Irina's site. */
+:root{
+  --bg:#F4EDE3; --paper:#FFFCF8; --ink:#2F2924; --muted:#7A6E62; --line:#E5D9C9; --soft:#EFE5D7;
+  --brown:#6E4F3C; --mustard:#B98324; --mustard-soft:#F3E3C2; --sage:#4F5E3E; --weekend:#F6EEE3; --sage-soft:#E3E8D6;
+  --display:"Forum","Georgia",serif; --sans:"Manrope","Segoe UI",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#221D19; --paper:#2C2621; --ink:#F1E9DF; --muted:#B4A796; --line:#3E362F; --soft:#352E28;
+  --brown:#E1C2A6; --mustard:#E2B45C; --mustard-soft:#3D321F; --sage:#B4BF97; --weekend:#302923; --sage-soft:#2E3226; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#221D19; --paper:#2C2621; --ink:#F1E9DF; --muted:#B4A796; --line:#3E362F; --soft:#352E28;
+  --brown:#E1C2A6; --mustard:#E2B45C; --mustard-soft:#3D321F; --sage:#B4BF97; --weekend:#302923; --sage-soft:#2E3226; color-scheme:dark}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--ink);font:15px/1.55 var(--sans);margin:0}
+.wrap{max-width:1240px;margin:0 auto;padding-inline:16px;padding-block:28px 48px;display:flex;flex-direction:column;gap:24px}
+.eyebrow{font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+h1{font-family:var(--display);font-weight:400;font-size:clamp(2.4rem,6vw,3.6rem);line-height:1;margin:4px 0 10px;text-wrap:balance}
+h2{font-family:var(--display);font-weight:400;font-size:1.6rem;margin:0}
+.lead{max-width:64ch;color:var(--muted);margin:0}
+.bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.bar label{font-weight:600;font-size:.9rem;display:flex;align-items:center;gap:8px}
+select,input[type=text]{font:inherit;color:var(--ink);background:var(--paper);border:1.5px solid var(--line);border-radius:12px;padding:8px 12px}
+select:focus-visible,input:focus-visible,button:focus-visible{outline:2px solid var(--mustard);outline-offset:2px}
+.btn{font:inherit;font-weight:700;font-size:.9rem;border:0;border-radius:999px;padding:10px 18px;cursor:pointer;color:#fff;
+  background:linear-gradient(110deg,#6E4F3C 38%,#C9A27E 50%,#6E4F3C 62%);background-size:260% 100%;animation:shine 3.2s linear infinite;box-shadow:0 8px 18px -8px rgba(110,79,60,.6)}
+.btn.gold{background:linear-gradient(110deg,#B98324 38%,#F6DFA0 50%,#B98324 62%);background-size:260% 100%;box-shadow:0 8px 18px -8px rgba(185,131,36,.7)}
+.btn.ghost{animation:none;background:transparent;color:var(--brown);border:1.5px solid var(--line);box-shadow:none}
+.btn.danger{animation:none;background:#A0523D;box-shadow:none}
+.btn[disabled]{animation:none;background:var(--soft);color:var(--muted);box-shadow:none;cursor:not-allowed}
+@keyframes shine{0%{background-position:130% 0}60%,100%{background-position:-30% 0}}
+@media (prefers-reduced-motion: reduce){.btn{animation:none}}
+.spacer{flex:1 1 auto}
+.confirm{display:flex;gap:8px;align-items:center;background:var(--paper);border:1.5px solid var(--line);border-radius:999px;padding:4px 4px 4px 14px;font-size:.88rem;font-weight:600}
+.status{font-size:.86rem;color:var(--muted);min-height:1.3em}
+
+.panel{background:var(--paper);border:1.5px solid var(--line);border-radius:22px;padding:18px 20px;display:flex;flex-direction:column;gap:12px}
+.panel-head{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:baseline;justify-content:space-between}
+.panel-head p{margin:0;font-size:.88rem;color:var(--muted)}
+.routines{display:flex;flex-direction:column;gap:10px}
+.rt{display:grid;grid-template-columns:auto minmax(140px,1fr) auto auto auto;gap:10px 12px;align-items:center;padding:10px 0;border-top:1px dashed var(--line)}
+.rt:first-child{border-top:0}
+@media (max-width:820px){.rt{grid-template-columns:auto 1fr auto}.rt .days{grid-column:1 / -1}.rt .period{grid-column:1 / span 2}}
+.sw{width:30px;height:30px;border-radius:50%;border:2px solid var(--paper);box-shadow:0 0 0 1.5px var(--line);cursor:pointer;padding:0}
+.days{display:flex;gap:4px;flex-wrap:wrap}
+.day{font:inherit;font-size:.78rem;font-weight:700;width:36px;height:32px;border-radius:10px;border:1.5px solid var(--line);background:transparent;color:var(--muted);cursor:pointer}
+.day.on{color:#fff;border-color:transparent}
+.period{display:flex;gap:6px;align-items:center;font-size:.82rem;color:var(--muted)}
+.period select{padding:6px 8px;font-size:.84rem;border-radius:10px}
+.del{font:inherit;width:34px;height:34px;border-radius:50%;border:1.5px solid var(--line);background:transparent;color:var(--muted);cursor:pointer;font-size:1rem}
+.palette{display:flex;gap:6px;flex-wrap:wrap;padding:6px 0 0}
+.palette button{width:24px;height:24px;border-radius:50%;border:2px solid var(--paper);box-shadow:0 0 0 1.5px var(--line);cursor:pointer;padding:0}
+.example{display:inline-block;font-size:.68rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--mustard);background:var(--mustard-soft);border-radius:999px;padding:3px 9px}
+
+/* лист года */
+.sheet-scroll{overflow-x:auto;border-radius:22px;border:1.5px solid var(--line);background:var(--paper)}
+.sheet{min-width:900px;padding:14px 16px 16px}
+.grid{display:grid;grid-template-columns:62px repeat(37,minmax(0,1fr));column-gap:2px}
+.wd{font-size:.66rem;font-weight:700;color:var(--muted);text-align:center;padding:4px 0 8px;letter-spacing:.02em}
+.wd.we{color:var(--brown)}
+.mname{font-family:var(--display);font-size:1.02rem;padding-top:3px;align-self:start}
+.month{display:contents}
+.cell{border-top:1px solid var(--line);padding:3px 1px 6px;display:flex;flex-direction:column;gap:3px;min-height:34px}
+.cell.we{background:var(--weekend)}
+.cell.empty{background:transparent}
+.dn{font-size:.62rem;font-variant-numeric:tabular-nums;color:var(--muted);text-align:center;line-height:1.2;margin-bottom:1px}
+.cell.today .dn{color:#fff;background:var(--mustard);border-radius:6px}
+.lane{height:8px;border-radius:4px;cursor:pointer;background:transparent}
+.lane:hover{outline:1px solid var(--line)}
+.lane.x{opacity:1}
+.lane.add{background-image:repeating-linear-gradient(90deg,currentColor 0 3px,transparent 3px 5px)}
+.legend{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:.84rem;margin-top:12px}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:18px;height:6px;border-radius:3px;display:inline-block}
+.hint{font-size:.84rem;color:var(--muted);margin:0}
+/* описание */
+.guide{display:flex;flex-direction:column;gap:28px;padding-top:8px}
+.guide h2{font-size:clamp(1.7rem,3.6vw,2.3rem);text-wrap:balance}
+.guide .intro{max-width:64ch;font-size:1.02rem;margin:0}
+.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px}
+.steps li{background:var(--paper);border:1.5px solid var(--line);border-radius:20px;padding:16px 18px;display:flex;flex-direction:column;gap:6px}
+.steps .n{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;border:2px solid var(--mustard);color:var(--mustard);font-family:var(--display);font-size:1.4rem;margin-bottom:4px}
+.steps h3,.effects h3{font-family:var(--display);font-weight:400;font-size:1.25rem;line-height:1.2;margin:0}
+.steps p,.effects p{margin:0;font-size:.93rem;color:var(--muted)}
+.effects{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,320px),1fr));gap:16px 28px}
+.effects li{position:relative;padding-left:32px;display:flex;flex-direction:column;gap:4px}
+.effects li::before{content:"";position:absolute;left:0;top:2px;width:22px;height:22px;background:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2020%2020%22%3E%3Ccircle%20cx%3D%2210.00%22%20cy%3D%225.00%22%20r%3D%223.6%22%20fill%3D%22%23E3E6D6%22%20stroke%3D%22%2366704F%22%20stroke-width%3D%221.3%22/%3E%3Ccircle%20cx%3D%2214.76%22%20cy%3D%228.45%22%20r%3D%223.6%22%20fill%3D%22%23E3E6D6%22%20stroke%3D%22%2366704F%22%20stroke-width%3D%221.3%22/%3E%3Ccircle%20cx%3D%2212.94%22%20cy%3D%2214.05%22%20r%3D%223.6%22%20fill%3D%22%23E3E6D6%22%20stroke%3D%22%2366704F%22%20stroke-width%3D%221.3%22/%3E%3Ccircle%20cx%3D%227.06%22%20cy%3D%2214.05%22%20r%3D%223.6%22%20fill%3D%22%23E3E6D6%22%20stroke%3D%22%2366704F%22%20stroke-width%3D%221.3%22/%3E%3Ccircle%20cx%3D%225.24%22%20cy%3D%228.45%22%20r%3D%223.6%22%20fill%3D%22%23E3E6D6%22%20stroke%3D%22%2366704F%22%20stroke-width%3D%221.3%22/%3E%3Ccircle%20cx%3D%2210%22%20cy%3D%2210%22%20r%3D%222.6%22%20fill%3D%22%23B98324%22/%3E%3C/svg%3E") center/contain no-repeat}
+.cta{display:flex;flex-wrap:wrap;gap:12px 20px;align-items:center;justify-content:space-between;background:var(--mustard-soft);border-radius:22px;padding:18px 22px}
+.cta p{margin:0;max-width:60ch;font-family:var(--display);font-size:1.2rem;line-height:1.35}
+.btn.free{background:linear-gradient(110deg,#4F5E3E 38%,#9DB07A 50%,#4F5E3E 62%);background-size:260% 100%;box-shadow:0 8px 18px -8px rgba(79,94,62,.6);text-decoration:none;display:inline-flex}
+.jump{font-weight:700;color:var(--brown);text-underline-offset:4px}
+
+.rt input{width:100%;min-width:0}
+.rt>*{min-width:0}
+@media (max-width:560px){.panel{padding:14px}.days{flex-wrap:nowrap}.day{flex:1 1 0;width:auto;min-width:0}}
+
+/* периоды, праздники, подсказки */
+.pr{display:grid;grid-template-columns:auto minmax(140px,1fr) auto auto auto;gap:10px 12px;align-items:center;padding:10px 0;border-top:1px dashed var(--line)}
+.pr:first-child{border-top:0}
+.pr>*{min-width:0}
+.pr input[type=text]{width:100%;min-width:0}
+.dates{display:flex;gap:6px;align-items:center;font-size:.82rem;color:var(--muted);flex-wrap:wrap}
+input[type=date]{font:inherit;font-size:.86rem;color:var(--ink);background:var(--paper);border:1.5px solid var(--line);border-radius:10px;padding:6px 8px}
+.flagc{display:flex;gap:6px;align-items:center;font-size:.82rem;color:var(--muted);white-space:nowrap}
+@media (max-width:820px){.pr{grid-template-columns:auto 1fr auto}.pr .dates,.pr .flagc{grid-column:1 / -1}}
+.mode{font-size:.82rem;padding:6px 8px;border-radius:10px}
+.rt .when{display:flex;gap:8px;align-items:center;flex-wrap:wrap;min-width:0}
+.toggles{display:flex;flex-wrap:wrap;gap:10px 22px;font-size:.9rem}
+.toggles label{display:flex;gap:8px;align-items:center;cursor:pointer}
+.toggles small{color:var(--muted)}
+.ideas{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,250px),1fr));gap:14px 20px}
+.idea h3{font-family:var(--display);font-weight:400;font-size:1.15rem;margin:0 0 6px}
+.idea p{margin:0 0 8px;font-size:.86rem;color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font:inherit;font-size:.82rem;font-weight:600;border:1.5px solid var(--line);background:var(--bg);color:var(--ink);border-radius:999px;padding:5px 11px;cursor:pointer}
+.chip:hover{border-color:var(--brown)}
+.chip::before{content:"+ ";color:var(--mustard);font-weight:700}
+.lane.per{position:relative}
+.lane.per.fin::after{content:"";position:absolute;right:50%;transform:translateX(50%);top:-4px;width:16px;height:16px;border-radius:50%;background:inherit;border:2px solid var(--paper)}
+.cell.hol{background:color-mix(in srgb,#D81B78 18%,var(--paper))}
+.cell.hol.part{background:color-mix(in srgb,#D81B78 9%,var(--paper))}
+.cell.hol .dn{color:#fff;background:#D81B78;border-radius:6px;font-weight:800}
+.cell.hol.part .dn{color:#D81B78;background:transparent;box-shadow:inset 0 0 0 1.5px #D81B78}
+.legend .holsw{width:18px;height:12px;border-radius:3px;display:inline-block;background:#D81B78;border:1px solid #D81B78}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.cell.sch{background-image:repeating-linear-gradient(135deg,transparent 0 4px,color-mix(in srgb,var(--sage) 14%,transparent) 4px 6px)}
+.legend .hol{color:#A0523D;font-weight:800}
+.legend .sch{width:18px;height:12px;border-radius:3px;display:inline-block;background-image:repeating-linear-gradient(135deg,transparent 0 3px,color-mix(in srgb,var(--sage) 35%,transparent) 3px 5px);border:1px solid var(--line)}
+.share{display:flex;flex-direction:column;gap:10px;background:var(--paper);border:1.5px solid var(--line);border-radius:22px;padding:16px 18px}
+.share textarea{font:inherit;color:var(--ink);background:var(--bg);border:1.5px solid var(--line);border-radius:14px;padding:10px 12px;min-height:96px;resize:vertical;width:100%}
+.share .row{display:flex;flex-wrap:wrap;gap:8px}
+.btn.free{background:linear-gradient(110deg,#4F5E3E 38%,#9DB07A 50%,#4F5E3E 62%);background-size:260% 100%;box-shadow:0 8px 18px -8px rgba(79,94,62,.6)}
+a.btn{text-decoration:none;display:inline-flex;align-items:center}
+.callist{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px;font-size:.88rem}
+.callist li{display:flex;gap:10px;justify-content:space-between;flex-wrap:wrap;border-top:1px dashed var(--line);padding-top:6px}
+.callist a{color:var(--brown);font-weight:700;white-space:nowrap}
+.privnote{margin-top:14px;max-width:80ch;background:var(--sage-soft,#E3E8D6);border-radius:16px;padding:12px 16px;font-size:.9rem}
+.credit{font-size:.84rem;color:var(--muted);display:flex;flex-wrap:wrap;gap:4px 14px}
+.credit a{color:var(--brown)}
+
+/* телефон: кнопки ровными рядами, заголовки в одну колонку */
+@media (max-width:640px){
+  h2{line-height:1.15}
+  .panel-head{flex-direction:column;align-items:flex-start;gap:4px}
+  .bar{gap:8px}
+  .bar>label{width:100%;justify-content:space-between}
+  .bar>label select{flex:1;min-width:0}
+  .bar .spacer{display:none}
+  .bar>.btn{display:inline-flex;align-items:center;justify-content:center;text-align:center;flex:1 1 calc(50% - 4px);padding:10px 8px}
+  .bar>#shareBtn,.bar>#calBtn{flex-basis:100%}
+  #clearBox{display:flex;gap:8px;width:100%;flex-wrap:wrap}
+  #clearBox>.btn{display:inline-flex;justify-content:center;flex:1 1 calc(50% - 4px);padding:9px 6px;font-size:.8rem;white-space:nowrap}
+  #clearBox .confirm{border-radius:16px;width:100%;flex-wrap:wrap}
+  .daynav{width:100%}
+  .daynav input[type=date]{flex:1;min-width:0}
+}
+
+@media (max-width:820px){
+  .rt .when{grid-column:1 / -1}
+  .rt .when .days{flex:1 1 100%}
+  .rt .period select{flex:1;min-width:0}
+  .pr .flagc{grid-column:1 / span 2}
+  .rt>input[data-act=name],.pr>input[data-act=name]{grid-column:2 / -1}
+  .dates{display:grid;grid-template-columns:auto minmax(0,1fr);gap:6px 8px}
+  .dates input[type=date]{width:100%;min-width:0}
+  .toggles label{flex-wrap:wrap}
+}
+.mobnote{display:none}
+@media (max-width:900px){.mobnote{display:block}}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header>
+    <p style="margin:0 0 14px"><a class="jump" href="https://svoiludi.ch/instrumenty/">← Все полезные инструменты · Свои люди в Швейцарии</a></p>
+    <div class="eyebrow">Годовой план · рутина на весь год</div>
+    <h1>Мой год</h1>
+    <p class="lead">Распиши повторяющиеся дела и важные сроки один раз, и они встанут на весь год. Каждая полоска под датой — одно дело или период. Нажми на полоску дела в любой день, чтобы убрать его на этот день или добавить.</p>
+    <p style="margin:10px 0 0"><a class="jump" href="#guide">Зачем это тебе и как с этим работать ↓</a></p>
+    <div class="privnote"><b>Твои данные только у тебя.</b> Всё, что ты вписываешь, хранится только в твоём браузере на этом устройстве. Никто кроме тебя это не видит, даже я. Регистрация не нужна. На другом устройстве твоего плана не будет, поэтому сохраняй его в PDF или в свой календарь. Кнопка «Удалить историю» полностью стирает твой план с этого устройства.</div>
+  </header>
+
+  <div class="bar">
+    <label for="year">Год <select id="year"></select></label>
+    <span class="spacer"></span>
+    <button class="btn gold" id="dlPng" type="button">Скачать PNG</button>
+    <button class="btn" id="dlPdf" type="button">Скачать PDF</button>
+    <button class="btn" id="calBtn" type="button" aria-expanded="false" aria-controls="calPanel">В мой календарь</button>
+    <button class="btn free" id="shareBtn" type="button" aria-expanded="false" aria-controls="sharePanel">Поделиться с друзьями</button>
+    <span id="clearBox"></span>
+  </div>
+  <div class="status" id="status" role="status"></div>
+  <div class="share" id="calPanel" hidden>
+    <h2 style="font-size:1.4rem">Перенести год в свой календарь</h2>
+    <p class="hint">Дела станут повторяющимися событиями на весь день, периоды и сроки — событиями с датами. Дни, где дело убрано, в календарь не попадут. Файл подходит для iPhone, Outlook и Google. Для Google Календаря можно добавить каждое дело отдельно по ссылке.</p>
+    <div><button class="btn gold" id="calIcs" type="button">Скачать файл для календаря</button></div>
+    <ul class="callist" id="calList"></ul>
+  </div>
+  <div class="share" id="sharePanel" hidden>
+    <label for="shareText" style="font-weight:700">Сообщение для друзей</label>
+    <textarea id="shareText"></textarea>
+    <div class="row">
+      <button class="btn gold" id="copyMsg" type="button">Скопировать сообщение</button>
+      <a class="btn" id="tgShare" href="#" target="_blank" rel="noopener">Отправить в Telegram</a>
+      <a class="btn" id="waShare" href="#" target="_blank" rel="noopener">Отправить в WhatsApp</a>
+    </div>
+  </div>
+
+  <section class="panel" aria-labelledby="rt-h">
+    <div class="panel-head">
+      <h2 id="rt-h">Мои дела на каждую неделю и месяц</h2>
+      <p id="exampleNote"><span class="example">Пример</span> Поменяй дела и дни под себя.</p>
+    </div>
+    <div class="routines" id="routines"></div>
+    <div><button class="btn ghost" id="addBtn" type="button">+ Добавить дело</button></div>
+  </section>
+
+  <section class="panel" aria-labelledby="pr-h">
+    <div class="panel-head">
+      <h2 id="pr-h">Периоды и сроки</h2>
+      <p>Отпуск, курс немецкого, испытательный срок, срок подачи документов. Если начало и конец совпадают, это один день.</p>
+    </div>
+    <div class="routines" id="periods"></div>
+    <div><button class="btn ghost" id="addPer" type="button">+ Добавить период</button></div>
+    <div class="toggles">
+      <label for="tHol"><input type="checkbox" id="tHol"> Праздники кантона</label><label for="canton" style="cursor:default"><span class="sr">Кантон</span><select id="canton" class="mode"></select></label>
+      <label for="tSch"><input type="checkbox" id="tSch"> Школьные каникулы <small>город Цюрих, проверь даты своей общины</small></label>
+    </div>
+  </section>
+
+  <section class="panel" aria-labelledby="id-h">
+    <div class="panel-head">
+      <h2 id="id-h">Что стоит внести после переезда</h2>
+      <p>Нажми на подсказку, и она появится в твоём плане. Потом поправь дни и даты.</p>
+    </div>
+    <div class="ideas" id="ideas"></div>
+  </section>
+
+  <section aria-label="Лист года">
+    <p class="hint mobnote" style="margin:0 0 8px">Лист года шире экрана телефона, листай его пальцем вбок. Целиком его удобно смотреть в PDF или PNG.</p>
+    <div class="sheet-scroll"><div class="sheet" id="sheet"></div></div>
+    <div class="legend" id="legend"></div>
+  </section>
+  <p class="hint">Полоска с пунктиром — дело, добавленное в этот день вручную. Пустое место на линии дела — день, когда дело убрано. Кружок на конце периода — финиш, например экзамен.</p>
+  <section class="guide" id="guide" aria-labelledby="g-why">
+    <div>
+      <div class="eyebrow">Зачем это тебе</div>
+      <h2 id="g-why">Ритм, который держит тебя весь год</h2>
+    </div>
+    <p class="intro">Когда переезжаешь, привычный ритм рассыпается. Старые опоры остались дома, а новые ещё не выросли. Дни то похожи один на другой, то рвутся на части. Этот лист возвращает тебе ритм. Ты видишь свой год целиком и решаешь, на что в нём есть место.</p>
+
+    <div>
+      <div class="eyebrow">Как с этим работать</div>
+      <h2 id="g-how">Пять шагов к своему году</h2>
+    </div>
+    <ol class="steps" aria-labelledby="g-how">
+      <li><span class="n">1</span><h3>Выпиши, что уже держит тебя</h3><p>Начни с того, что уже есть в твоей неделе и что тебе важно сохранить. Спорт, курс немецкого, встреча с друзьями, звонок маме. На первый раз хватит пяти дел.</p></li>
+      <li><span class="n">2</span><h3>Отметь дни и сроки</h3><p>Для каждого дела выбери дни недели или число месяца. Курс, отпуск или срок подачи документов внеси как период с датами. Так ты сразу видишь, когда закончишь B1 и когда начнётся B2.</p></li>
+      <li><span class="n">3</span><h3>Посмотри на год целиком</h3><p>Где неделя переполнена, а где пусто? Есть ли день, который остаётся только для тебя? Часто уже здесь становится видно, куда уходят силы.</p></li>
+      <li><span class="n">4</span><h3>Сделай план честным</h3><p>Праздники кантона уже отмечены. Если в какой-то день дело отменяется, нажми на его полоску и убери его. Хороший план живой, он не обязан быть идеальным.</p></li>
+      <li><span class="n">5</span><h3>Держи его перед глазами</h3><p>Скачай PDF или PNG, распечатай или поставь на заставку телефона. Раз в месяц смотри на лист и замечай, что у тебя уже получается.</p></li>
+    </ol>
+
+    <div>
+      <div class="eyebrow">Что это даёт в коучинге</div>
+      <h2 id="g-coach">Что меняется для тебя</h2>
+    </div>
+    <ul class="effects" aria-labelledby="g-coach">
+      <li><h3>Ритм вместо хаоса</h3><p>Повторяющиеся дела снимают нагрузку с мозга. Тебе не нужно каждый день заново решать, что делать, и силы остаются на главное.</p></li>
+      <li><h3>Фокус на том, что уже есть</h3><p>Когда год перед глазами, внимание переходит с того, чего не хватает, на то, что ты уже делаешь для себя. Это мы и тренируем в коучинге.</p></li>
+      <li><h3>Опора в новой стране</h3><p>Тело, язык, свои люди, отдых. Регулярные дела становятся ступенями устойчивости и держат тебя, пока всё остальное ещё меняется.</p></li>
+      <li><h3>Новое закрепляется</h3><p>Привычка рождается из повторения. Полоска, которая идёт через весь год, превращает твоё решение в часть жизни.</p></li>
+      <li><h3>Честный разговор с собой</h3><p>Лист показывает, сколько места в твоём году остаётся для тебя самой. Это хороший материал для нашей встречи. Мы смотрим на него вместе и решаем, что убрать, а что добавить.</p></li>
+    </ul>
+
+    <div class="cta">
+      <p>Хочешь разобрать свой год вместе со мной? Знакомство длится 30 минут, онлайн и бесплатно.</p>
+      <a class="btn free" href="https://t.me/IrynaNeuroCoach" target="_blank" rel="noopener">Написать «ВСТРЕЧА» в Telegram</a>
+    </div>
+  </section>
+  <p class="credit"><span>Ирина Вознесенская · коуч</span><a href="https://www.instagram.com/iryna.voznesenskaya/" target="_blank" rel="noopener">Instagram @iryna.voznesenskaya</a><a href="https://voznesenskaya.ch/" target="_blank" rel="noopener">voznesenskaya.ch</a><a href="https://svoiludi.ch/" target="_blank" rel="noopener">Свои люди в Швейцарии · svoiludi.ch</a></p>
+</div>
+
+<script src="/assets/lib/jspdf.umd.min.js"></script>
+<script src="/assets/lib/jszip.min.js"></script>
+<script>
+const MONTHS = ['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'];
+const MSHORT = ['Янв','Фев','Мар','Апр','Май','Июн','Июл','Авг','Сен','Окт','Ноя','Дек'];
+const WD = ['Пн','Вт','Ср','Чт','Пт','Сб','Вс'];
+/* цвета по спиральной динамике: бежевый, фиолетовый, красный, синий, оранжевый, зелёный, жёлтый, бирюзовый */
+const COLORS = ['#A88457','#7B4FA0','#D03A2F','#2F5FB8','#EE7A12','#3A9A48','#E2B007','#16A3A8'];
+const SHARE_URL = 'https://svoiludi.ch/instrumenty/moj-god/';
+const SHARE_MSG = 'Привет! Смотри, какой интересный календарь. В нём можно спланировать свой год наперёд. Спорт, курсы немецкого, отпуск, важные сроки — всё на одном листе, и его можно скачать. Хочешь попробовать?\n' + SHARE_URL;
+const CREDIT_PARTS = [
+  {t:'Ирина Вознесенская · коуч', u:'https://voznesenskaya.ch/'},
+  {t:'Instagram @iryna.voznesenskaya', u:'https://www.instagram.com/iryna.voznesenskaya/'},
+  {t:'voznesenskaya.ch', u:'https://voznesenskaya.ch/'},
+  {t:'Свои люди в Швейцарии · svoiludi.ch', u:'https://svoiludi.ch/'},
+];
+const CREDIT = 'Ирина Вознесенская · коуч · Instagram @iryna.voznesenskaya · voznesenskaya.ch · Свои люди в Швейцарии · svoiludi.ch';
+const KEY = 'mojGodPlanner.v3';
+const now = new Date();
+const pad = n => String(n).padStart(2,'0');
+const iso = (y,m,d) => y + '-' + pad(m+1) + '-' + pad(d);
+const uid = () => 'x' + Math.random().toString(36).slice(2, 9);
+
+/* школьные каникулы город Цюрих (feiertagskalender.ch, без гарантии) */
+const SCHOOL = [
+  ['2026-12-21','2027-01-01','Рождественские каникулы'],['2027-02-15','2027-02-26','Спортивные каникулы'],
+  ['2027-03-25','2027-03-29','Пасха'],['2027-04-26','2027-05-07','Весенние каникулы'],
+  ['2027-07-19','2027-08-20','Летние каникулы'],['2027-10-11','2027-10-22','Осенние каникулы'],
+  ['2027-12-20','2028-01-02','Рождественские каникулы'],
+];
+function easter(y){ const a=y%19,b=Math.floor(y/100),c=y%100,d=Math.floor(b/4),e=b%4,f=Math.floor((b+8)/25),g=Math.floor((b-f+1)/3),h=(19*a+b-d-g+15)%30,i=Math.floor(c/4),k=c%4,l=(32+2*e+2*i-h-k)%7,m=Math.floor((a+11*h+22*l)/451),mo=Math.floor((h+l-7*m+114)/31),da=((h+l-7*m+114)%31)+1; return new Date(y,mo-1,da); }
+const CANTONS = {ZH:'Цюрих',BE:'Берн',LU:'Люцерн',UR:'Ури',SZ:'Швиц',OW:'Обвальден',NW:'Нидвальден',GL:'Гларус',ZG:'Цуг',FR:'Фрибур',SO:'Золотурн',BS:'Базель-Штадт',BL:'Базель-Ланд',SH:'Шаффхаузен',AR:'Аппенцелль-Ауссерроден',AI:'Аппенцелль-Иннерроден',SG:'Санкт-Галлен',GR:'Граубюнден',AG:'Аргау',TG:'Тургау',TI:'Тичино',VD:'Во',VS:'Вале',NE:'Невшатель',GE:'Женева',JU:'Юра'};
+/* праздники по кантонам — Федеральное ведомство юстиции (BJ), «Kantonale Feiertage»; * = только в части общин */
+const CH = {
+  ZH:'NY BE KF OM AR AU PM WN ST', BE:'NY BE KF OM AU PM WN ST', LU:'NY BE KF OM AU PM FL MH AH ME WN ST',
+  UR:'NY DK JO KF OM AU PM FL MH AH ME WN ST', SZ:'NY DK JO KF OM AU PM FL MH AH ME WN ST', OW:'NY KF AU FL MH BK AH ME WN',
+  NW:'NY JO KF AU FL MH AH ME WN', GL:'NY KF OM NF AU PM AH WN ST', ZG:'NY KF AU FL MH AH ME WN', FR:'NY KF AU FL* MH* AH* ME* WN',
+  SO:'NY JO* KF AR AU FL* MH* AH* WN', BS:'NY KF OM AR AU PM WN ST', BL:'NY KF OM AR AU PM WN ST', SH:'NY KF OM AR AU PM WN ST',
+  AR:'NY KF OM AU PM WN ST', AI:'NY KF OM AU PM FL MH MT* AH ME WN ST', SG:'NY KF OM AU PM AH WN ST', GR:'NY OM AU PM WN ST',
+  AG:'NY BE KF OM AR AU PM FL MH AH ME WN ST', TG:'NY BE KF OM AR AU PM WN ST', TI:'NY DK JO OM AR AU PM FL PP MH AH ME WN ST',
+  VD:'NY BE KF OM AU PM LJ WN', VS:'NY JO AU FL MH AH ME WN', NE:'NY IR KF AU FL* WN AR', GE:'NY KF OM AU PM JG WN RR',
+  JU:'NY BE KF OM AR AU PM FL PJ MH AH WN'
+};
+const HNAME = {NY:'Новый год',BE:'2 января',DK:'Богоявление',JO:'День святого Иосифа',KF:'Страстная пятница',OM:'Пасхальный понедельник',AR:'День труда',AU:'Вознесение',PM:'Духов понедельник',FL:'Праздник Тела Христова',PP:'Петра и Павла',MH:'Успение Богородицы',BK:'День святого Николая из Флюэ',MT:'День святого Маврикия',AH:'День всех святых',ME:'Непорочное зачатие',WN:'Рождество',ST:'День святого Стефана',NF:'Нефельсская битва',LJ:'Понедельник после Дня покаяния',JG:'Женевский пост',RR:'Восстановление республики',IR:'День республики',PJ:'Годовщина плебисцита Юры',BF:'День Швейцарии'};
+function holidays(y, canton){
+  const e = easter(y), dd = (dt,n) => { const x = new Date(dt); x.setDate(x.getDate()+n); return x; }, f = x => iso(x.getFullYear(), x.getMonth(), x.getDate());
+  const nthWd = (m, wd, n) => { const x = new Date(y, m, 1); while ((x.getDay()) !== wd) x.setDate(x.getDate()+1); x.setDate(x.getDate() + 7*(n-1)); return x; };
+  const D = {NY:iso(y,0,1), BE:iso(y,0,2), DK:iso(y,0,6), JO:iso(y,2,19), KF:f(dd(e,-2)), OM:f(dd(e,1)), AR:iso(y,4,1), AU:f(dd(e,39)), PM:f(dd(e,50)), FL:f(dd(e,60)),
+    PP:iso(y,5,29), MH:iso(y,7,15), BK:iso(y,8,25), MT:iso(y,8,22), AH:iso(y,10,1), ME:iso(y,11,8), WN:iso(y,11,25), ST:iso(y,11,26),
+    NF:f(nthWd(3,4,1)), LJ:f(dd(nthWd(8,0,3),1)), JG:f(dd(nthWd(8,0,1),4)), RR:iso(y,11,31), IR:iso(y,2,1), PJ:iso(y,5,23), BF:iso(y,7,1)};
+  const out = {}; out[D.BF] = {n: HNAME.BF};
+  for (const tok of (CH[canton] || CH.ZH).split(' ')){ const k = tok.replace('*',''), part = tok.endsWith('*'); out[D[k]] = {n: HNAME[k] + (part ? ' (в части общин)' : ''), part}; }
+  return out;
+}
+
+function example(){
+  const y = now.getMonth() >= 9 ? now.getFullYear() + 1 : now.getFullYear();
+  return {year: y, example: true, hol: true, canton: 'ZH', sch: false, ov: {},
+    routines: [
+      {id:'r1', name:'Фитнес', color:'#D03A2F', mode:'week', days:[0,3,4], mday:1, from:1, to:12},
+      {id:'r2', name:'Курс немецкого', color:'#2F5FB8', mode:'week', days:[1,3], mday:1, from:1, to:12},
+      {id:'r3', name:'Звонок родным', color:'#7B4FA0', mode:'week', days:[6], mday:1, from:1, to:12},
+      {id:'r4', name:'Оплата счетов', color:'#A88457', mode:'month', days:[], mday:25, from:1, to:12},
+    ],
+    periods: [
+      {id:'p1', name:'Немецкий B1', color:'#16A3A8', start:y+'-01-11', end:y+'-06-25', fin:true},
+      {id:'p2', name:'Немецкий B2', color:'#3A9A48', start:y+'-08-23', end:y+'-12-17', fin:true},
+      {id:'p3', name:'Отпуск', color:'#E2B007', start:y+'-07-19', end:y+'-08-06', fin:false},
+      {id:'p4', name:'Налоговая декларация', color:'#EE7A12', start:y+'-03-31', end:y+'-03-31', fin:true},
+    ]};
+}
+let S;
+try { S = JSON.parse(localStorage.getItem(KEY)); } catch(e) { S = null; }
+if (!S || !Array.isArray(S.routines)) S = example();
+S.ov = S.ov || {}; S.periods = S.periods || [];
+function save(){ try { localStorage.setItem(KEY, JSON.stringify(S)); } catch(e) {} }
+
+const $ = id => document.getElementById(id);
+const esc = s => String(s).replace(/[&<>"]/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]));
+const wdOf = (y,m,d) => (new Date(y,m,d).getDay() + 6) % 7;
+const dim = (y,m) => new Date(y, m + 1, 0).getDate();
+function planned(r, y, m, d){
+  if (m + 1 < r.from || m + 1 > r.to) return false;
+  if (r.mode === 'month') return d === Math.min(r.mday, dim(y,m));
+  return r.days.includes(wdOf(y,m,d));
+}
+function state(r, y, m, d){
+  const o = S.ov[r.id + '|' + iso(y,m,d)], p = planned(r,y,m,d);
+  if (p) return o === 0 ? 'off' : 'on';
+  return o === 1 ? 'add' : '';
+}
+function perState(p, ds){ if (!p.start || !p.end) return ''; const a = p.start <= p.end ? p.start : p.end, b = p.start <= p.end ? p.end : p.start; if (ds < a || ds > b) return ''; return (ds === a ? ' first' : '') + (ds === b ? ' last' + (p.fin ? ' fin' : '') : '') || ' mid'; }
+function schoolOf(ds){ for (const [a,b,n] of SCHOOL) if (ds >= a && ds <= b) return n; return ''; }
+const fmt = s => s ? s.slice(8,10) + '.' + s.slice(5,7) : '';
+function whenText(r){ return r.mode === 'month' ? 'каждое ' + r.mday + ' число' : (r.days.length ? r.days.map(d => WD[d]).join(', ') : 'дни не выбраны'); }
+
+/* ---------- год ---------- */
+(function(){
+  const sel = $('year'), y0 = now.getFullYear();
+  for (let y = y0 - 1; y <= y0 + 4; y++) sel.insertAdjacentHTML('beforeend', `<option value="${y}">${y}</option>`);
+  if (![...sel.options].some(o => +o.value === S.year)) sel.insertAdjacentHTML('beforeend', `<option value="${S.year}">${S.year}</option>`);
+  sel.value = S.year;
+  sel.addEventListener('change', () => { S.year = +sel.value; save(); renderSheet(); });
+  S.canton = S.canton || 'ZH';
+  $('canton').innerHTML = Object.entries(CANTONS).sort((a,b)=>a[1].localeCompare(b[1],'ru')).map(([k,n]) => `<option value="${k}"${k===S.canton?' selected':''}>${n} (${k})</option>`).join('');
+  $('canton').addEventListener('change', e => { S.canton = e.target.value; save(); renderSheet(); });
+  $('tHol').checked = !!S.hol; $('tSch').checked = !!S.sch;
+  $('tHol').addEventListener('change', e => { S.hol = e.target.checked; save(); renderSheet(); });
+  $('tSch').addEventListener('change', e => { S.sch = e.target.checked; save(); renderSheet(); });
+})();
+
+/* ---------- дела ---------- */
+function monthOpts(v){ return MONTHS.map((n,i) => `<option value="${i+1}"${i+1===v?' selected':''}>${n.toLowerCase()}</option>`).join(''); }
+function palette(){ return `<div class="palette" data-pal hidden style="grid-column:1 / -1">${COLORS.map(c => `<button type="button" data-act="pick" data-c="${c}" style="background:${c}" aria-label="Выбрать цвет"></button>`).join('')}</div>`; }
+function renderRoutines(){
+  $('exampleNote').hidden = !S.example;
+  $('routines').innerHTML = S.routines.length ? S.routines.map((r, i) => `
+    <div class="rt" data-i="${i}">
+      <button class="sw" type="button" data-act="color" style="background:${r.color}" aria-label="Цвет для «${esc(r.name)}»"></button>
+      <input type="text" id="name-${r.id}" data-act="name" value="${esc(r.name)}" placeholder="Например, бассейн" aria-label="Название дела">
+      <div class="when">
+        <select class="mode" id="mode-${r.id}" data-act="mode" aria-label="Как часто"><option value="week"${r.mode!=='month'?' selected':''}>по дням недели</option><option value="month"${r.mode==='month'?' selected':''}>раз в месяц</option></select>
+        ${r.mode === 'month'
+          ? `<select class="mode" id="mday-${r.id}" data-act="mday" aria-label="Какого числа">${Array.from({length:31},(_,k)=>`<option value="${k+1}"${k+1===r.mday?' selected':''}>${k+1} число</option>`).join('')}</select>`
+          : `<div class="days" role="group" aria-label="Дни недели">${WD.map((w, d) => `<button type="button" class="day${r.days.includes(d)?' on':''}" data-act="day" data-d="${d}" aria-pressed="${r.days.includes(d)}" style="${r.days.includes(d)?'background:'+r.color:''}">${w}</button>`).join('')}</div>`}
+      </div>
+      <div class="period"><span>с</span><select id="from-${r.id}" data-act="from" aria-label="С какого месяца">${monthOpts(r.from)}</select><span>по</span><select id="to-${r.id}" data-act="to" aria-label="По какой месяц">${monthOpts(r.to)}</select></div>
+      <button class="del" type="button" data-act="del" aria-label="Удалить «${esc(r.name)}»">✕</button>
+      ${palette()}
+    </div>`).join('') : '<p class="hint">Дел пока нет. Нажми «Добавить дело» или выбери подсказку ниже.</p>';
+  $('addBtn').disabled = S.routines.length >= 8;
+}
+function touched(){ if (S.example){ S.example = false; $('exampleNote').hidden = true; } save(); }
+function rowOf(e, list){ const row = e.target.closest('[data-i]'); return row ? [row, S[list][+row.dataset.i]] : [null, null]; }
+$('routines').addEventListener('click', e => {
+  const b = e.target.closest('[data-act]'); const [row, r] = rowOf(e, 'routines'); if (!b || !r) return;
+  const act = b.dataset.act;
+  if (act === 'day'){ const d = +b.dataset.d; r.days = r.days.includes(d) ? r.days.filter(x => x !== d) : [...r.days, d].sort(); }
+  else if (act === 'color'){ const p = row.querySelector('[data-pal]'); p.hidden = !p.hidden; return; }
+  else if (act === 'pick'){ r.color = b.dataset.c; }
+  else if (act === 'del'){ S.routines.splice(+row.dataset.i, 1); for (const k in S.ov) if (k.startsWith(r.id + '|')) delete S.ov[k]; }
+  else return;
+  touched(); renderRoutines(); renderSheet();
+});
+$('routines').addEventListener('input', e => { const [, r] = rowOf(e, 'routines'); if (r && e.target.dataset.act === 'name'){ r.name = e.target.value; touched(); renderLegend(); } });
+$('routines').addEventListener('change', e => {
+  const [, r] = rowOf(e, 'routines'), act = e.target.dataset.act; if (!r) return;
+  if (act === 'from'){ r.from = +e.target.value; if (r.to < r.from) r.to = r.from; }
+  else if (act === 'to'){ r.to = +e.target.value; if (r.from > r.to) r.from = r.to; }
+  else if (act === 'mode'){ r.mode = e.target.value; }
+  else if (act === 'mday'){ r.mday = +e.target.value; }
+  else return;
+  touched(); renderRoutines(); renderSheet();
+});
+function freeColor(list){ const used = list.map(r => r.color); return COLORS.find(c => !used.includes(c)) || COLORS[list.length % COLORS.length]; }
+function addRoutine(o){ if (S.routines.length >= 8){ say('Можно до восьми дел. Удали одно, чтобы добавить новое.'); return; }
+  S.routines.push(Object.assign({id: uid(), name: '', color: freeColor(S.routines), mode:'week', days: [], mday: 1, from: 1, to: 12}, o)); touched(); renderRoutines(); renderSheet(); }
+$('addBtn').addEventListener('click', () => { addRoutine({}); const inp = $('routines').querySelector('.rt:last-child input'); if (inp) inp.focus(); });
+
+/* ---------- периоды ---------- */
+function renderPeriods(){
+  $('periods').innerHTML = S.periods.length ? S.periods.map((p, i) => `
+    <div class="pr" data-i="${i}">
+      <button class="sw" type="button" data-act="color" style="background:${p.color}" aria-label="Цвет для «${esc(p.name)}»"></button>
+      <input type="text" id="pname-${p.id}" data-act="name" value="${esc(p.name)}" placeholder="Например, отпуск или курс B1" aria-label="Название периода">
+      <div class="dates"><span>с</span><input type="date" id="ps-${p.id}" data-act="start" value="${p.start}" aria-label="Начало"><span>по</span><input type="date" id="pe-${p.id}" data-act="end" value="${p.end}" aria-label="Конец"></div>
+      <label class="flagc" for="pf-${p.id}"><input type="checkbox" id="pf-${p.id}" data-act="fin"${p.fin?' checked':''}> финиш</label>
+      <button class="del" type="button" data-act="del" aria-label="Удалить «${esc(p.name)}»">✕</button>
+      ${palette()}
+    </div>`).join('') : '<p class="hint">Периодов пока нет. Добавь отпуск, курс или важный срок.</p>';
+  $('addPer').disabled = S.periods.length >= 8;
+}
+$('periods').addEventListener('click', e => {
+  const b = e.target.closest('[data-act]'); const [row, p] = rowOf(e, 'periods'); if (!b || !p) return;
+  if (b.dataset.act === 'color'){ const pl = row.querySelector('[data-pal]'); pl.hidden = !pl.hidden; return; }
+  if (b.dataset.act === 'pick'){ p.color = b.dataset.c; }
+  else if (b.dataset.act === 'del'){ S.periods.splice(+row.dataset.i, 1); }
+  else return;
+  touched(); renderPeriods(); renderSheet();
+});
+$('periods').addEventListener('input', e => { const [, p] = rowOf(e, 'periods'); if (p && e.target.dataset.act === 'name'){ p.name = e.target.value; touched(); renderLegend(); } });
+$('periods').addEventListener('change', e => {
+  const [, p] = rowOf(e, 'periods'), act = e.target.dataset.act; if (!p) return;
+  if (act === 'start'){ p.start = e.target.value; if (!p.end || p.end < p.start) p.end = p.start; }
+  else if (act === 'end'){ p.end = e.target.value; if (!p.start || p.start > p.end) p.start = p.end; }
+  else if (act === 'fin'){ p.fin = e.target.checked; }
+  else return;
+  touched(); renderPeriods(); renderSheet();
+});
+function addPeriod(o){ if (S.periods.length >= 8){ say('Можно до восьми периодов. Удали один, чтобы добавить новый.'); return; }
+  const y = S.year; S.periods.push(Object.assign({id: uid(), name: '', color: freeColor(S.periods), start: y + '-01-01', end: y + '-01-31', fin: false}, o)); touched(); renderPeriods(); renderSheet(); }
+$('addPer').addEventListener('click', () => { addPeriod({}); const inp = $('periods').querySelector('.pr:last-child input[type=text]'); if (inp) inp.focus(); });
+
+/* ---------- подсказки для эмигрантки ---------- */
+const IDEAS = [
+  {h:'Язык', t:'Курс по уровням показывает, когда ты закончишь B1 и сможешь идти на B2.', items:[
+    ['Курс B1', 'per', y => ({name:'Немецкий B1', start:y+'-01-11', end:y+'-06-25', fin:true})],
+    ['Курс B2', 'per', y => ({name:'Немецкий B2', start:y+'-08-23', end:y+'-12-17', fin:true})],
+    ['Экзамен', 'per', y => ({name:'Экзамен по немецкому', start:y+'-06-26', end:y+'-06-26', fin:true})],
+    ['Разговорный клуб', 'rt', () => ({name:'Разговорный клуб', days:[2]})] ]},
+  {h:'Тело и силы', t:'Регулярное движение держит, когда всё остальное ещё меняется.', items:[
+    ['Спорт', 'rt', () => ({name:'Спорт', days:[0,3]})], ['Прогулка на природе', 'rt', () => ({name:'Прогулка на природе', days:[5]})],
+    ['Время для себя', 'rt', () => ({name:'Время для себя', days:[6]})] ]},
+  {h:'Свои люди', t:'Связи не появляются сами. Им нужно место в неделе.', items:[
+    ['Звонок родным', 'rt', () => ({name:'Звонок родным', days:[6]})], ['Встреча с друзьями', 'rt', () => ({name:'Встреча с друзьями', days:[4]})],
+    ['Встреча «Свои люди»', 'rt', () => ({name:'Встреча «Свои люди»', mode:'month', mday:15})] ]},
+  {h:'Документы и деньги', t:'Бумаги перестают пугать, когда у них есть свой день.', items:[
+    ['Оплата счетов', 'rt', () => ({name:'Оплата счетов', mode:'month', mday:25})], ['Разбор почты и бумаг', 'rt', () => ({name:'Разбор почты и бумаг', days:[5]})],
+    ['Налоговая декларация', 'per', y => ({name:'Налоговая декларация', start:y+'-03-31', end:y+'-03-31', fin:true})],
+    ['Продление разрешения', 'per', y => ({name:'Продление разрешения', start:y+'-09-30', end:y+'-09-30', fin:true})] ]},
+  {h:'Работа и своё дело', t:'Маленький регулярный шаг к своей цели важнее большого рывка раз в год.', items:[
+    ['Час на своё дело', 'rt', () => ({name:'Час на своё дело', days:[2]})], ['Поиск работы', 'rt', () => ({name:'Поиск работы', days:[0,2]})],
+    ['Испытательный срок', 'per', y => ({name:'Испытательный срок', start:y+'-02-01', end:y+'-04-30', fin:true})] ]},
+  {h:'Отдых и итоги', t:'Отпуск и короткий итог месяца помогают замечать, что уже получилось.', items:[
+    ['Отпуск', 'per', y => ({name:'Отпуск', start:y+'-07-19', end:y+'-08-06', fin:false})], ['Итог месяца', 'rt', () => ({name:'Итог месяца', mode:'month', mday:28})] ]},
+];
+$('ideas').innerHTML = IDEAS.map((g, gi) => `<div class="idea"><h3>${g.h}</h3><p>${g.t}</p><div class="chips">${g.items.map((it, ii) => `<button type="button" class="chip" data-g="${gi}" data-i="${ii}">${it[0]}</button>`).join('')}</div></div>`).join('');
+$('ideas').addEventListener('click', e => {
+  const b = e.target.closest('.chip'); if (!b) return;
+  const it = IDEAS[+b.dataset.g].items[+b.dataset.i], o = it[2](S.year);
+  if (it[1] === 'rt') addRoutine(o); else addPeriod(o);
+  say('«' + o.name + '» добавлено. Поправь дни и даты под себя.');
+});
+
+/* ---------- лист года ---------- */
+function renderSheet(){
+  const y = S.year, rs = S.routines, ps = S.periods, t = new Date(), H = S.hol ? holidays(y, S.canton) : {};
+  let h = '<div class="grid"><div></div>';
+  for (let c = 0; c < 37; c++) h += `<div class="wd${c % 7 > 4 ? ' we' : ''}">${WD[c % 7]}</div>`;
+  for (let m = 0; m < 12; m++){
+    const off = wdOf(y, m, 1), n = dim(y, m);
+    h += `<div class="mname">${MSHORT[m]}</div>`;
+    for (let c = 0; c < 37; c++){
+      const d = c - off + 1;
+      if (d < 1 || d > n){ h += '<div class="cell empty"></div>'; continue; }
+      const ds = iso(y,m,d), today = t.getFullYear() === y && t.getMonth() === m && t.getDate() === d;
+      const holo = H[ds], hol = holo && holo.n, sch = S.sch ? schoolOf(ds) : '';
+      const tip = [hol, sch].filter(Boolean).join(' · ');
+      h += `<div class="cell${c % 7 > 4 ? ' we' : ''}${today ? ' today' : ''}${hol ? ' hol' + (holo.part ? ' part' : '') : ''}${sch ? ' sch' : ''}"${tip ? ` title="${esc(tip)}"` : ''}><span class="dn">${d}</span>`;
+      for (const r of rs){
+        const st = state(r, y, m, d);
+        const style = st === 'on' ? `background:${r.color}` : st === 'add' ? `color:${r.color}` : '';
+        h += `<span class="lane${st === 'add' ? ' add' : ''}" data-r="${r.id}" data-m="${m}" data-d="${d}" style="${style}" title="${esc(r.name || 'Дело')} · ${d} ${MONTHS[m].toLowerCase()}"></span>`;
+      }
+      for (const p of ps){
+        const st = perState(p, ds);
+        h += st ? `<span class="lane per${st}" style="background:${p.color}" title="${esc(p.name || 'Период')} · ${fmt(p.start)}–${fmt(p.end)}"></span>` : '<span class="lane" style="cursor:default"></span>';
+      }
+      h += '</div>';
+    }
+  }
+  $('sheet').innerHTML = h + '</div>';
+  renderLegend();
+}
+function legendItems(){
+  const out = S.routines.map(r => ({c: r.color, t: (r.name || 'Без названия') + ' · ' + whenText(r) + (r.from !== 1 || r.to !== 12 ? ' · ' + MSHORT[r.from-1].toLowerCase() + '–' + MSHORT[r.to-1].toLowerCase() : '')}));
+  for (const p of S.periods) out.push({c: p.color, per: true, t: (p.name || 'Период') + ' · ' + (p.start === p.end ? fmt(p.start) : fmt(p.start) + '–' + fmt(p.end)) + (p.fin ? ' ●' : '')});
+  return out;
+}
+function renderLegend(){
+  $('legend').innerHTML = legendItems().map(x => `<span><i style="background:${x.c};"></i>${esc(x.t)}</span>`).join('')
+    + (S.hol ? '<span><i class="holsw"></i>праздник · кантон ' + CANTONS[S.canton] + '</span>' : '') + (S.sch ? '<span><i class="sch"></i>школьные каникулы</span>' : '');
+}
+$('sheet').addEventListener('click', e => {
+  const l = e.target.closest('.lane[data-r]'); if (!l) return;
+  const r = S.routines.find(x => x.id === l.dataset.r); if (!r) return;
+  const y = S.year, m = +l.dataset.m, d = +l.dataset.d, k = r.id + '|' + iso(y,m,d);
+  if (planned(r, y, m, d)) { if (S.ov[k] === 0) delete S.ov[k]; else S.ov[k] = 0; }
+  else { if (S.ov[k] === 1) delete S.ov[k]; else S.ov[k] = 1; }
+  touched(); renderSheet();
+});
+
+/* ---------- очистить ---------- */
+function clearIdle(){ $('clearBox').innerHTML = '<button class="btn ghost" id="clearBtn" type="button">Очистить лист</button> <button class="btn ghost" id="wipeBtn" type="button">Удалить историю</button>'; }
+clearIdle();
+$('clearBox').addEventListener('click', e => {
+  const id = e.target.id;
+  if (id === 'clearBtn') $('clearBox').innerHTML = '<span class="confirm">Удалить все дела, периоды и отметки?<button class="btn danger" id="clearYes" type="button">Да, очистить</button><button class="btn ghost" id="clearNo" type="button">Отмена</button></span>';
+  if (id === 'clearNo') clearIdle();
+  if (id === 'clearYes'){ S.routines = []; S.periods = []; S.ov = {}; S.example = false; save(); clearIdle(); renderRoutines(); renderPeriods(); renderSheet(); say('Лист очищен. Добавь свои дела или выбери подсказки.'); }
+  if (id === 'wipeBtn') $('clearBox').innerHTML = '<span class="confirm">Удалить все твои дела, периоды, отметки и настройки с этого устройства? Вернуть их будет нельзя.<button class="btn danger" id="wipeYes" type="button">Да, удалить историю</button><button class="btn ghost" id="clearNo" type="button">Отмена</button></span>';
+  if (id === 'wipeYes'){
+    try { ['mojGodPlanner.v1','mojGodPlanner.v2','mojGodPlanner.v3'].forEach(k => localStorage.removeItem(k)); } catch(e) {}
+    const y = S.year; S = {year: y, example: false, hol: true, sch: false, canton: 'ZH', ov: {}, routines: [], periods: []}; save();
+    clearIdle(); $('tHol').checked = true; $('tSch').checked = false; $('canton').value = 'ZH'; renderRoutines(); renderPeriods(); renderSheet(); say('Вся история удалена с этого устройства.');
+  }
+});
+function say(t){ $('status').textContent = t; }
+
+/* ---------- рисунок листа для PNG и PDF ---------- */
+function roundRect(c, x, y, w, h, r){ r = Math.min(r, h/2, w/2); c.beginPath(); c.moveTo(x+r,y); c.arcTo(x+w,y,x+w,y+h,r); c.arcTo(x+w,y+h,x,y+h,r); c.arcTo(x,y+h,x,y,r); c.arcTo(x,y,x+w,y,r); c.closePath(); }
+function drawSheet(){
+  const W = 3508, H = 2480, cv = document.createElement('canvas'); cv.width = W; cv.height = H;
+  const c = cv.getContext('2d'), y = S.year, rs = S.routines, ps = S.periods, HOL = S.hol ? holidays(y, S.canton) : {};
+  const C = {bg:'#FFFCF8', ink:'#2F2924', muted:'#7A6E62', line:'#E5D9C9', we:'#F6EEE3', brown:'#6E4F3C', hol:'#D81B78', holBg:'#FAD3E5', holPart:'#FDEAF2', sch:'rgba(79,94,62,.16)'};
+  c.fillStyle = C.bg; c.fillRect(0,0,W,H);
+  const M = 120;
+  c.fillStyle = C.ink; c.font = '140px Forum, Georgia, serif'; c.textBaseline = 'alphabetic'; c.textAlign = 'left';
+  c.fillText('Мой год ' + y, M, M + 100);
+  let lx = M, ly = M + 185;
+  c.font = '600 40px Manrope, sans-serif';
+  const items = legendItems();
+  if (S.hol) items.push({hol: true, t: 'праздник · кантон ' + CANTONS[S.canton]});
+  if (S.sch) items.push({sch: true, t: 'школьные каникулы'});
+  for (const it of items){
+    const w = 66 + c.measureText(it.t).width + 60;
+    if (lx + w > W - M){ lx = M; ly += 62; }
+    if (it.hol){ c.fillStyle = C.hol; roundRect(c, lx, ly - 34, 50, 34, 8); c.fill(); c.fillStyle = '#FFFFFF'; c.font = '800 30px Manrope, sans-serif'; c.textAlign = 'center'; c.fillText('12', lx + 25, ly - 6); c.textAlign = 'left'; c.font = '600 40px Manrope, sans-serif'; }
+    else if (it.sch){ c.fillStyle = C.sch; c.fillRect(lx, ly - 34, 50, 34); }
+    else { c.fillStyle = it.c; roundRect(c, lx, ly - 22, 50, 16, 8); c.fill(); }
+    c.fillStyle = C.ink; c.fillText(it.t, lx + 66, ly);
+    lx += w;
+  }
+  const top = ly + 56, labelW = 190, gridW = W - 2*M - labelW, colW = gridW / 37, headH = 62, foot = 110;
+  const rowH = (H - foot - top - headH) / 12;
+  c.font = '700 32px Manrope, sans-serif'; c.textAlign = 'center';
+  for (let k = 0; k < 37; k++){ c.fillStyle = k % 7 > 4 ? C.brown : C.muted; c.fillText(WD[k % 7], M + labelW + colW*k + colW/2, top + 42); }
+  const lanes = rs.length + ps.length, laneH = Math.max(11, Math.min(30, (rowH - 46) / Math.max(lanes, 1) - 3));
+  for (let m = 0; m < 12; m++){
+    const ry = top + headH + rowH*m, off = wdOf(y, m, 1), n = dim(y, m);
+    c.textAlign = 'left'; c.fillStyle = C.ink; c.font = '54px Forum, Georgia, serif'; c.fillText(MSHORT[m], M, ry + 54);
+    for (let k = 0; k < 37; k++){
+      const d = k - off + 1; if (d < 1 || d > n) continue;
+      const x = M + labelW + colW*k, ds = iso(y,m,d);
+      if (k % 7 > 4){ c.fillStyle = C.we; c.fillRect(x + 1, ry, colW - 2, rowH); }
+      const holo = HOL[ds], hol = holo && holo.n;
+      if (hol){ c.fillStyle = holo.part ? C.holPart : C.holBg; c.fillRect(x + 1, ry, colW - 2, rowH); }
+      if (S.sch && schoolOf(ds)){ c.fillStyle = C.sch; c.fillRect(x + 1, ry, colW - 2, rowH); }
+      c.fillStyle = C.line; c.fillRect(x + 1, ry, colW - 2, 3);
+      if (hol && !holo.part){ c.fillStyle = C.hol; roundRect(c, x + 6, ry + 8, colW - 12, 40, 10); c.fill(); }
+      c.fillStyle = hol ? (holo.part ? C.hol : '#FFFFFF') : C.muted; c.font = (hol ? '800 ' : '500 ') + '30px Manrope, sans-serif'; c.textAlign = 'center'; c.fillText(String(d), x + colW/2, ry + 38);
+      rs.forEach((r, i) => {
+        const st = state(r, y, m, d); if (!st || st === 'off') return;
+        const lyy = ry + 44 + i*(laneH + 3); c.fillStyle = r.color;
+        if (st === 'on'){ roundRect(c, x + 5, lyy, colW - 10, laneH, laneH/2); c.fill(); }
+        else { for (let dx = x + 5; dx < x + colW - 8; dx += 14) c.fillRect(dx, lyy, 8, laneH); }
+      });
+      ps.forEach((p, j) => {
+        const st = perState(p, ds); if (!st) return;
+        const lyy = ry + 44 + (rs.length + j)*(laneH + 3);
+        c.fillStyle = p.color; roundRect(c, x + 5, lyy, colW - 10, laneH, laneH/2); c.fill();
+        if (st.includes('fin')){ c.beginPath(); c.arc(x + colW/2, lyy + laneH/2, laneH * 1.15, 0, Math.PI*2); c.fill(); c.strokeStyle = C.bg; c.lineWidth = 4; c.stroke(); }
+      });
+    }
+  }
+  // подпись со ссылками (в PDF они активные)
+  c.textAlign = 'left'; c.font = '600 34px Manrope, sans-serif'; cv.links = [];
+  let fx = M; const fy = H - 55;
+  CREDIT_PARTS.forEach((part, i) => {
+    if (i){ c.fillStyle = C.muted; c.fillText(' · ', fx, fy); fx += c.measureText(' · ').width; }
+    const w = c.measureText(part.t).width;
+    c.fillStyle = C.brown; c.fillText(part.t, fx, fy);
+    if (part.u){ c.fillRect(fx, fy + 6, w, 2); cv.links.push({x: fx, y: fy - 34, w, h: 46, url: part.u}); }
+    fx += w;
+  });
+  return cv;
+}
+
+/* ---------- скачивание ---------- */
+let downloads = null;
+async function offer(filename, data){
+  if (!downloads){                                            // на сайте — обычное скачивание файла
+    try { const url = URL.createObjectURL(data), a = document.createElement('a'); a.href = url; a.download = filename; document.body.appendChild(a); a.click();
+      setTimeout(() => { a.remove(); URL.revokeObjectURL(url); }, 4000); say('Файл «' + filename + '» скачан.'); }
+    catch(e){ say('Не получилось сохранить файл. Попробуй ещё раз позже.'); }
+    return;
+  }
+  try { await downloads.save({filename, data}); say('Файл «' + filename + '» сохранён.'); }
+  catch(err){
+    const code = err && err.code;
+    if (code === 'declined') say('Скачивание отменено.');
+    else if (code === 'rate_limited') say('Окно сохранения уже открыто. Подтверди его или подожди немного.');
+    else say('Не получилось сохранить файл. Попробуй ещё раз позже.');
+  }
+}
+$('dlPng').addEventListener('click', async () => {
+  say('Готовлю PNG…'); try { await document.fonts.ready; } catch(e) {}
+  const cv = drawSheet(); cv.toBlob(b => offer('Мой год ' + S.year + '.png', b), 'image/png');
+});
+$('dlPdf').addEventListener('click', async () => {
+  if (!window.jspdf){ say('PDF сейчас недоступен. Скачай PNG.'); return; }
+  say('Готовлю PDF…'); try { await document.fonts.ready; } catch(e) {}
+  const cv = drawSheet(), doc = new window.jspdf.jsPDF({orientation:'landscape', unit:'mm', format:'a4'});
+  doc.addImage(cv.toDataURL('image/jpeg', 0.92), 'JPEG', 0, 0, 297, 210);
+  const k = 297 / cv.width;
+  for (const l of cv.links || []) doc.link(l.x * k, l.y * k, l.w * k, l.h * k, {url: l.url});
+  offer('Мой год ' + S.year + '.pdf', doc.output('blob'));
+});
+(async () => {
+  try { downloads = window.claude && window.claude.use ? await window.claude.use('downloads') : null; } catch(e) { downloads = null; }
+})();
+
+/* ---------- в свой календарь: файл .ics (iPhone, Outlook, Google) и ссылки Google Календаря ---------- */
+const VTZ = 'BEGIN:VTIMEZONE\r\nTZID:Europe/Zurich\r\nBEGIN:DAYLIGHT\r\nTZOFFSETFROM:+0100\r\nTZOFFSETTO:+0200\r\nTZNAME:CEST\r\nDTSTART:19700329T020000\r\nRRULE:FREQ=YEARLY;BYMONTH=3;BYDAY=-1SU\r\nEND:DAYLIGHT\r\nBEGIN:STANDARD\r\nTZOFFSETFROM:+0200\r\nTZOFFSETTO:+0100\r\nTZNAME:CET\r\nDTSTART:19701025T030000\r\nRRULE:FREQ=YEARLY;BYMONTH=10;BYDAY=-1SU\r\nEND:STANDARD\r\nEND:VTIMEZONE';
+const icsEsc = v => String(v).replace(/\\/g, '\\\\').replace(/\n/g, '\\n').replace(/([,;])/g, '\\$1');
+const ymd = d => d.replace(/-/g, '');
+function addDaysIso(d, n){ const x = new Date(d + 'T12:00:00'); x.setDate(x.getDate() + n); return x.getFullYear() + '-' + String(x.getMonth()+1).padStart(2,'0') + '-' + String(x.getDate()).padStart(2,'0'); }
+function icsCalendar(name, events){
+  const stamp = new Date().toISOString().replace(/[-:]/g, '').slice(0, 15) + 'Z';
+  const L = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Irina Voznesenskaya//' + name + '//RU', 'CALSCALE:GREGORIAN', 'METHOD:PUBLISH', 'X-WR-CALNAME:' + icsEsc(name), VTZ];
+  events.forEach((e, i) => {
+    L.push('BEGIN:VEVENT', 'UID:' + (e.uid || ('ev' + i + '-' + Date.now())) + '@svoiludi.ch', 'DTSTAMP:' + stamp);
+    if (e.allDay){ L.push('DTSTART;VALUE=DATE:' + ymd(e.start), 'DTEND;VALUE=DATE:' + ymd(addDaysIso(e.end || e.start, 1))); }
+    else L.push('DTSTART;TZID=Europe/Zurich:' + e.start, 'DTEND;TZID=Europe/Zurich:' + e.end);
+    if (e.rrule) L.push(e.rrule);
+    if (e.exdates && e.exdates.length) L.push('EXDATE;VALUE=DATE:' + e.exdates.map(ymd).join(','));
+    L.push('SUMMARY:' + icsEsc(e.title));
+    if (e.details) L.push('DESCRIPTION:' + icsEsc(e.details));
+    L.push('END:VEVENT');
+  });
+  L.push('END:VCALENDAR');
+  return L.join('\r\n').split('\r\n').map(line => { let o = '', s = line; while (s.length > 74){ o += s.slice(0, 74) + '\r\n '; s = s.slice(74); } return o + s; }).join('\r\n') + '\r\n';
+}
+function gcalLink(e){
+  const dates = e.allDay ? ymd(e.start) + '/' + ymd(addDaysIso(e.end || e.start, 1)) : e.start + '/' + e.end;
+  const p = new URLSearchParams({action:'TEMPLATE', text:e.title, dates, ctz:'Europe/Zurich', details:e.details || ''});
+  if (e.rrule) p.set('recur', e.rrule);
+  return 'https://calendar.google.com/calendar/render?' + p.toString();
+}
+async function saveIcs(filename, text, say, downloads){
+  if (window.claude && window.claude.use){                      // внутри предпросмотра Claude файл .ics отдаём в архиве
+    if (!downloads){ say('Скачивание здесь недоступно.'); return; }
+    if (!window.JSZip){ say('Сейчас файл недоступен. Попробуй ссылки Google Календаря ниже.'); return; }
+    const zip = new JSZip(); zip.file(filename + '.ics', text);
+    const blob = await zip.generateAsync({type:'blob'});
+    try { await downloads.save({filename: filename + ' (календарь).zip', data: blob}); say('Архив сохранён. Открой его и нажми на файл «' + filename + '.ics», календарь предложит добавить события.'); }
+    catch(err){ say(err && err.code === 'declined' ? 'Скачивание отменено.' : 'Не получилось сохранить файл. Попробуй ещё раз позже.'); }
+    return;
+  }
+  const url = URL.createObjectURL(new Blob([text], {type:'text/calendar;charset=utf-8'}));   // на сайте — обычный файл .ics
+  const a = document.createElement('a'); a.href = url; a.download = filename + '.ics'; document.body.appendChild(a); a.click();
+  setTimeout(() => { a.remove(); URL.revokeObjectURL(url); }, 4000);
+  say('Файл скачан. Открой его, и календарь предложит добавить события.');
+}
+
+const ICS_WD = ['MO','TU','WE','TH','FR','SA','SU'];
+function yearEvents(){
+  const y = S.year, out = [];
+  for (const r of S.routines){
+    if (r.mode !== 'month' && !r.days.length) continue;
+    let first = null, last = null; const ex = [], add = [];
+    for (let m = r.from - 1; m <= r.to - 1; m++) for (let d = 1; d <= dim(y, m); d++){
+      const ds = iso(y,m,d), st = state(r, y, m, d);
+      if (planned(r, y, m, d)){ if (!first) first = ds; last = ds; if (st === 'off') ex.push(ds); }
+    }
+    for (const k in S.ov) if (k.startsWith(r.id + '|') && S.ov[k] === 1 && k.slice(r.id.length + 1, r.id.length + 5) === String(y)) add.push(k.slice(r.id.length + 1));
+    if (first){
+      const until = ';UNTIL=' + ymd(last);
+      const rule = r.mode === 'month' ? 'RRULE:FREQ=MONTHLY;BYMONTHDAY=' + r.mday + until : 'RRULE:FREQ=WEEKLY;BYDAY=' + r.days.map(d => ICS_WD[d]).join(',') + until;
+      out.push({uid:'mojgod-' + r.id + '-' + y, title: r.name || 'Дело', allDay:true, start:first, rrule:rule, exdates:ex, details:whenText(r) + ' · план «Мой год» · svoiludi.ch', kind:'Дело · ' + whenText(r)});
+    }
+    add.forEach(ds => out.push({uid:'mojgod-' + r.id + '-' + ds, title: r.name || 'Дело', allDay:true, start:ds, details:'добавлено вручную · план «Мой год»', kind:'Отдельный день · ' + fmt(ds)}));
+  }
+  for (const p of S.periods){
+    if (!p.start) continue;
+    out.push({uid:'mojgod-' + p.id, title: p.name || 'Период', allDay:true, start:p.start, end:p.end || p.start, details:'период · план «Мой год» · svoiludi.ch', kind: p.start === p.end ? 'Срок · ' + fmt(p.start) : 'Период · ' + fmt(p.start) + '–' + fmt(p.end)});
+  }
+  return out;
+}
+function renderCal(){
+  const ev = yearEvents();
+  $('calList').innerHTML = ev.length ? ev.map(e => `<li><span><b>${esc(e.title)}</b> · ${esc(e.kind)}</span><a href="${esc(gcalLink(e))}" target="_blank" rel="noopener">в Google Календарь</a></li>`).join('') : '<li class="hint">В плане пока нет дел и периодов.</li>';
+}
+$('calBtn').addEventListener('click', () => { const p = $('calPanel'); p.hidden = !p.hidden; $('calBtn').setAttribute('aria-expanded', String(!p.hidden)); if (!p.hidden) renderCal(); });
+$('calIcs').addEventListener('click', () => { const ev = yearEvents(); if (!ev.length){ say('В плане пока нет дел и периодов.'); return; } saveIcs('Мой год ' + S.year, icsCalendar('Мой год ' + S.year, ev), say, downloads); });
+
+/* ---------- поделиться ---------- */
+function shareLinks(){
+  const t = $('shareText').value;
+  $('tgShare').href = 'https://t.me/share/url?url=' + encodeURIComponent(SHARE_URL) + '&text=' + encodeURIComponent(t.replace(SHARE_URL, '').trim());
+  $('waShare').href = 'https://wa.me/?text=' + encodeURIComponent(t);
+}
+$('shareText').value = SHARE_MSG; shareLinks();
+$('shareText').addEventListener('input', shareLinks);
+$('shareBtn').addEventListener('click', () => {
+  const p = $('sharePanel'); p.hidden = !p.hidden; $('shareBtn').setAttribute('aria-expanded', String(!p.hidden));
+  if (!p.hidden) $('shareText').focus();
+});
+$('copyMsg').addEventListener('click', () => {
+  const t = $('shareText').value;
+  const fallback = () => { $('shareText').select(); say('Выдели текст и скопируй его вручную.'); };
+  try { navigator.clipboard.writeText(t).then(() => say('Сообщение скопировано. Вставь его в чат друзьям.'), fallback); } catch(e) { fallback(); }
+});
+
+renderRoutines(); renderPeriods(); renderSheet();
+</script>
+</body>
+</html>

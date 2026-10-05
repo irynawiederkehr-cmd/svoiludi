@@ -437,6 +437,19 @@ a.bot:hover{color:#B98324}
 .fine{font-size:.84rem;color:var(--muted);max-width:80ch;padding-block:28px 8px}
 #digest{margin-top:18px;background:var(--paper);border:1.5px solid var(--mustard);border-radius:20px;padding:18px;display:flex;flex-direction:column;gap:10px}
 #digest textarea{width:100%;min-height:340px;font:14px/1.5 var(--body,Manrope),system-ui,sans-serif;border:1.5px solid var(--line);border-radius:12px;padding:12px;background:var(--bg);color:var(--ink);box-sizing:border-box}
+
+/* телефон: шапка в две строки, все разделы видны */
+@media (max-width:860px){
+  nav{flex-wrap:wrap;overflow-x:visible;gap:2px 14px;padding-bottom:2px}
+}
+@media (max-width:420px){
+  .top .page{padding-block:8px;gap:8px}
+  .mono{width:32px;height:32px}
+  .mark{gap:8px}
+  .mark b{font-size:1.06rem}
+  .navcta{font-size:.8rem;padding:6px 11px}
+  nav{font-size:.82rem}
+}
 </style>
 </head>
 <body>
@@ -450,6 +463,7 @@ a.bot:hover{color:#B98324}
     <nav aria-label="Разделы">
       <a href="../">Специалисты</a>
       <a href="./" aria-current="page" style="color:var(--ink)">События</a>
+      <a href="../instrumenty/">Полезные инструменты</a>
       <a href="../join/">Как разместиться</a>
       <a href="https://voznesenskaya.ch/">Сайт Ирины</a>
     </nav>

@@ -338,6 +338,19 @@ form.o{display:flex;flex-direction:column;gap:18px;margin-bottom:10px}
 .bar span::before{content:"";position:absolute;inset:0;width:var(--w);background:color-mix(in srgb,var(--lc) 22%,transparent);z-index:-1;border-radius:10px}
 .bar b{text-align:right;font-variant-numeric:tabular-nums}
 .fine{font-size:.84rem;color:var(--muted);max-width:80ch;padding-block:22px 8px}
+
+/* телефон: шапка в две строки, все разделы видны */
+@media (max-width:860px){
+  nav{flex-wrap:wrap;overflow-x:visible;gap:2px 14px;padding-bottom:2px}
+}
+@media (max-width:420px){
+  .top .page{padding-block:8px;gap:8px}
+  .mono{width:32px;height:32px}
+  .mark{gap:8px}
+  .mark b{font-size:1.06rem}
+  .navcta{font-size:.8rem;padding:6px 11px}
+  nav{font-size:.82rem}
+}
 </style>
 </head>
 <body>
@@ -351,6 +364,7 @@ form.o{display:flex;flex-direction:column;gap:18px;margin-bottom:10px}
     <nav aria-label="Разделы">
       <a href="../">Специалисты</a>
       <a href="../events/">События</a>
+      <a href="../instrumenty/">Полезные инструменты</a>
       <a href="./" aria-current="page" style="color:var(--ink)">Кого не хватает</a>
       <a href="../join/">Как разместиться</a>
     </nav>
