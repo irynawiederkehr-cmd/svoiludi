@@ -507,19 +507,23 @@ a.bot:hover{color:#B98324}
 }
 
 /* о проекте */
-.about{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:28px 40px;align-items:start;padding:12px 0 8px}
-@media (max-width:860px){.about{grid-template-columns:1fr}}
-.about h2{font-size:clamp(1.9rem,4vw,2.6rem);line-height:1.12;margin:6px 0 14px;text-wrap:balance}
-.about .txt p{margin:0 0 14px;font-size:1.02rem;line-height:1.65}
-.about .vals{display:flex;flex-direction:column;gap:12px}
-.about .val{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:16px 18px;display:grid;grid-template-columns:40px 1fr;gap:4px 14px;align-items:start}
-.about .val svg{width:40px;height:40px;grid-row:span 2}
+.about{display:flex;flex-direction:column;gap:26px;padding:44px 0 8px}
+.about .ab-head{align-self:center;border-left:4px solid var(--sage,#4F5E3E);padding:4px 0 6px 22px}
+@media (max-width:860px){.about{padding-top:28px}.about .ab-head{padding-left:16px}}
+.about .txt{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:14px 56px;align-items:start}
+.about h2{font-size:clamp(1.9rem,4vw,2.6rem);line-height:1.12;margin:6px 0 0;text-wrap:balance}
+.about .ab-body p{margin:0 0 14px;font-size:1.02rem;line-height:1.65}
+.about .ab-body p:last-child{margin-bottom:0}
+.about .vals{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.about .val{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:18px;display:flex;flex-direction:column;gap:8px}
+.about .val svg{width:40px;height:40px}
 .about .val b{font-family:var(--display);font-weight:400;font-size:1.3rem;line-height:1.2}
-.about .val p{margin:0;font-size:.93rem;color:var(--muted)}
-.about .creed{grid-column:1 / -1;background:var(--paper);border-left:4px solid var(--mustard,#B98324);border-radius:0 18px 18px 0;padding:18px 22px;font-family:var(--display);font-size:1.3rem;line-height:1.45;margin:4px 0 0}
+.about .val p{margin:0;font-size:.93rem;line-height:1.55;color:var(--muted)}
+@media (max-width:860px){.about .txt{grid-template-columns:1fr}.about .vals{grid-template-columns:1fr}.about .val{display:grid;grid-template-columns:40px 1fr;gap:4px 14px}.about .val svg{grid-row:span 2}}
+.about .creed{background:var(--paper);border-left:4px solid var(--mustard,#B98324);border-radius:0 18px 18px 0;padding:18px 22px;font-family:var(--display);font-size:1.3rem;line-height:1.45;margin:4px 0 0}
 @media (max-width:640px){.about .creed{font-size:1.12rem;padding:16px 18px}}
 #about{scroll-margin-top:150px}
-.about .circle{grid-column:1 / -1;margin:10px 0 0}
+.about .circle{margin:4px 0 0}
 .about .circle h3{font-family:var(--display);font-weight:400;font-size:clamp(1.55rem,3.2vw,2rem);line-height:1.2;margin:0 0 8px}
 .about .circle-lead{margin:0 0 18px;max-width:68ch;font-size:1.02rem;line-height:1.65}
 .steps3{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;counter-reset:none}
@@ -609,11 +613,12 @@ a.bot:hover{color:#B98324}
 
   <section class="about" id="about" aria-labelledby="about-h">
     <div class="txt">
-      <div class="eyebrow">О проекте</div>
-      <h2 id="about-h">Чтобы в новой стране было на кого опереться</h2>
-      <p>Переезд — это много нового сразу. Другой язык, другие правила, письма из ведомств, школа, врачи, работа. И всё это в то время, когда рядом ещё нет привычного круга людей, которым можно позвонить и просто спросить.</p>
+      <div class="ab-head"><div class="eyebrow">О проекте</div>
+      <h2 id="about-h">Чтобы в новой стране было на кого опереться</h2></div>
+      <div class="ab-body"><p>Переезд — это много нового сразу. Другой язык, другие правила, письма из ведомств, школа, врачи, работа. И всё это в то время, когда рядом ещё нет привычного круга людей, которым можно позвонить и просто спросить.</p>
       <p>Период адаптации часто сопровождается одиночеством, растерянностью и чувством, что всё приходится решать в одиночку. Иногда не хватает даже не информации, а человека, который говорит на твоём языке и понимает, через что ты проходишь, потому что сам когда-то прошёл этот путь.</p>
       <p>Мы создали «Свои люди в Швейцарии», чтобы этот путь стал легче. Здесь можно быстро найти врача, юриста, психолога, мастера или встречу, где говорят по-русски и по-украински. Но справочник не только про удобство. Он про то, чтобы в чужой стране поддерживать друг друга и пройти адаптацию спокойнее, с меньшим стрессом.</p>
+    </div>
     </div>
     <div class="vals">
       <div class="val"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19c0-8 5-13 14-14-1 9-6 14-14 14z" fill="#E3E8D6" stroke="#4F5E3E" stroke-width="1.6" stroke-linejoin="round"/><path d="M5 19 13 11" fill="none" stroke="#4F5E3E" stroke-width="1.6" stroke-linecap="round"/></svg><b>Быстрее освоиться</b><p>Не нужно неделями искать по чатам и спрашивать знакомых. Проверенные специалисты по кантонам и городам собраны в одном месте.</p></div>
