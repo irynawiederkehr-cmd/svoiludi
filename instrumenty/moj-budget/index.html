@@ -45,7 +45,7 @@ select,input[type=text],input[type=number],textarea{font:inherit;color:var(--ink
 textarea{width:100%;resize:vertical;min-height:60px}
 select:focus-visible,input:focus-visible,button:focus-visible,textarea:focus-visible,a:focus-visible{outline:2px solid var(--mustard);outline-offset:2px}
 .btn{font:inherit;font-weight:700;font-size:.9rem;border:0;border-radius:999px;padding:10px 18px;cursor:pointer;color:#fff;text-decoration:none;display:inline-flex;align-items:center;gap:6px;
-  background:linear-gradient(110deg,#6E4F3C 38%,#C9A27E 50%,#6E4F3C 62%);background-size:260% 100%;animation:shine 3.2s linear infinite;box-shadow:0 8px 18px -8px rgba(110,79,60,.6)}
+  background:linear-gradient(110deg,#6E4F3C 38%,#C9A27E 50%,#6E4F3C 62%);background-size:260% 100%;animation:none;box-shadow:0 8px 18px -8px rgba(110,79,60,.6)}
 .btn.gold{background:linear-gradient(110deg,#B98324 38%,#F6DFA0 50%,#B98324 62%);background-size:260% 100%;box-shadow:0 8px 18px -8px rgba(185,131,36,.7)}
 .btn.free{background:linear-gradient(110deg,#4F5E3E 38%,#9DB07A 50%,#4F5E3E 62%);background-size:260% 100%;box-shadow:0 8px 18px -8px rgba(79,94,62,.6)}
 .btn.ghost{animation:none;background:transparent;color:var(--brown);border:1.5px solid var(--line);box-shadow:none}
@@ -442,8 +442,17 @@ body:not(.duo) .r .who,body:not(.duo) .rh .whoh{display:none}
     <div class="txout" id="txOut"></div>
     <p class="hint">Ставки общин взяты из открытых источников на 2026 год, ставки на 2027 год общины утверждают в декабре. Расчёт сделан только по тарифу кантона Цюрих. Для других кантонов он будет неточным.</p>
     <div class="txsave">
-      <h3>Сколько реально откладывать на налоги</h3>
+      <h3 id="txSaveH">Сколько реально откладывать на налоги</h3>
       <div class="setup">
+        <label>Как платишь налоги<select id="txPay">
+          <option value="one">одним счётом в срок</option>
+          <option value="m">частями каждый месяц</option>
+          <option value="q">частями раз в квартал</option>
+          <option value="h">частями два раза в год</option>
+        </select></label>
+      </div>
+      <p class="hint">Налоги не обязательно платить одним платежом. Предварительный счёт кантона, общины и церкви можно оплачивать частями в течение года, бланки или QR-счета для этого даёт налоговая служба общины, во многих общинах можно подключить eBill. Федеральный налог тоже можно платить частями заранее. Если заплатить в срок трудно, напиши в налоговую службу своей общины (Steueramt) и попроси рассрочку (Ratenzahlung). Вместе с ними можно составить свой план платежей, обычно на просроченную сумму начисляются проценты. Свой план потом можно вписать в строки налогов в бюджете.</p>
+      <div class="setup" id="txSaveSetup">
         <label>Уже отложено на налоги, CHF<input type="text" inputmode="decimal" id="txSaved" placeholder="0"></label>
         <label>Начинаю откладывать с<select id="txStart"></select></label>
       </div>
@@ -704,7 +713,7 @@ const CATS = [
     ['press','Газеты и журналы', 120,'y',0,'cut'],
     ['post','Почта, посылки, пересылка писем', 10,'m',0,'imp'],
   ]},
-  {id:'tax', n:'Налоги и взносы', c:'#3A598D', hint:'В Швейцарии налог на доход и имущество платится на трёх уровнях. Кантон берёт кантональный налог (Staatssteuer). Община берёт свой налог (Gemeindesteuer) как процент от кантонального, этот процент называется Steuerfuss и у каждой общины свой. Если ты член церкви, добавляется церковный налог. Отдельно платится федеральный налог (direkte Bundessteuer). В Цюрихе налоги кантона, общины и церкви приходят одним счётом, срок оплаты 30 сентября, а федеральный налог отдельным счётом, до 31 марта следующего года. Сначала приходят предварительные счета, а окончательный приходит после проверки декларации, и его нужно оплатить в течение 30 дней. Поэтому на доплату стоит откладывать заранее. Чтобы не посчитать налоги дважды, выбери один способ. Или впиши сами налоги по счетам, или одну строку «Откладываю на налоги каждый месяц».', items:[
+  {id:'tax', n:'Налоги и взносы', c:'#3A598D', hint:'В Швейцарии налог на доход и имущество платится на трёх уровнях. Кантон берёт кантональный налог (Staatssteuer). Община берёт свой налог (Gemeindesteuer) как процент от кантонального, этот процент называется Steuerfuss и у каждой общины свой. Если ты член церкви, добавляется церковный налог. Отдельно платится федеральный налог (direkte Bundessteuer). В Цюрихе налоги кантона, общины и церкви приходят одним счётом, срок оплаты 30 сентября, а федеральный налог отдельным счётом, до 31 марта следующего года. Сначала приходят предварительные счета, а окончательный приходит после проверки декларации, и его нужно оплатить в течение 30 дней. Поэтому на доплату стоит откладывать заранее. Платить не обязательно одним платежом. Предварительный счёт можно оплачивать частями, каждый месяц или раз в квартал, а если заплатить в срок трудно, можно договориться с налоговой службой общины о рассрочке и своём плане платежей. Чтобы не посчитать налоги дважды, выбери один способ. Или впиши сами налоги по счетам, или одну строку «Откладываю на налоги каждый месяц».', items:[
     ['#','Налоги на доход и имущество'],
     ['taxSt','Кантональный налог (Staatssteuer)', 3000,'y',8,'must'],
     ['taxG','Налог общины (Gemeindesteuer)', 2500,'y',8,'must'],
@@ -1468,7 +1477,25 @@ function taxSavePlan(R){
   const steady = (R.taxes + selfSoc) / 12, pct = R.gross ? (R.taxes + selfSoc) / R.gross * 100 : 0;
   return {m0, nK, nF, mK, mF, mS: selfSoc / 12, now: mK + mF + selfSoc / 12, steady, pct, kgc, fed, selfSoc};
 }
+const PAYQ = {m:{n:12, f:'m', m:0, t:'каждый месяц'}, q:{n:4, f:'q', m:2, t:'раз в квартал, в марте, июне, сентябре и декабре'}, h:{n:2, f:'h', m:2, t:'два раза в год, в марте и сентябре'}};
 function renderTaxSave(R){
+  const pay = S.tax.pay || 'one'; $('txPay').value = pay; $('txSaveSetup').hidden = pay !== 'one';
+  $('txSaveH').textContent = pay === 'one' ? 'Сколько реально откладывать на налоги' : 'Сколько платить частями';
+  if (pay !== 'one' && R.gross){
+    const Q = PAYQ[pay], kgc = R.st + R.gem + R.ch + R.pers, selfSoc = R.ahv + R.adm + R.fak, pct = (R.taxes + selfSoc) / R.gross * 100;
+    $('txSaveOut').innerHTML = `<div class="svgrid">
+      <div class="sv main"><b>${chf(R.taxes / Q.n)} CHF</b><span>платить ${Q.t}</span></div>
+      <div class="sv"><b>${chf(R.taxes)} CHF</b><span>все налоги за год</span></div>
+      <div class="sv"><b>${(Math.round(pct * 10) / 10).toLocaleString('ru-RU')}%</b><span>${R.self ? 'с каждого поступления от клиентов' : 'с каждой зарплаты брутто'} уходит на налоги${R.self ? ' и AHV' : ''}</span></div>
+    </div>
+    <ul class="svplan">
+      <li><span>Кантон, община, церковь и личный налог</span><b>${chf(kgc / Q.n)} CHF × ${Q.n}</b></li>
+      <li><span>Федеральный налог</span><b>${chf(R.fed / Q.n)} CHF × ${Q.n}</b></li>
+      ${R.self ? `<li><span>AHV, сбор кассы и FAK, счета каждый квартал</span><b>${chf(selfSoc / 4)} CHF × 4</b></li>` : ''}
+    </ul>
+    <p class="hint">Когда придёт окончательный счёт, из него вычтут всё, что уже оплачено частями. Если оплачено больше, разницу вернут. Кнопка ниже перенесёт налоги в бюджет так, как ты платишь.</p>`;
+    return;
+  }
   $('txStart').innerHTML = MONTHS.map((m, i) => opt(i, MGEN[i], i === (S.tax.start === undefined || S.tax.start === '' ? new Date().getMonth() : +S.tax.start))).join('');
   $('txSaved').value = S.tax.saved || '';
   if (!R.gross){ $('txSaveOut').innerHTML = '<p class="hint">Сначала впиши доход выше.</p>'; return; }
@@ -1515,6 +1542,7 @@ function renderTax(){
 ['txType','txMar','txChurch','txCommune','txAge','txType2','txAge2'].forEach(id => $(id).addEventListener('change', e => { S.tax[{txType:'type', txMar:'mar', txChurch:'church', txCommune:'commune', txAge:'age', txType2:'type2', txAge2:'age2'}[id]] = e.target.value; save(); renderTax(); }));
 ['txEmp','txSelf','txFuss','tx3a','txSaved','txEmp2','txSelf2','tx3a2'].forEach(id => $(id).addEventListener('input', e => { S.tax[{txEmp:'emp', txSelf:'self', txFuss:'fuss', tx3a:'p3a', txSaved:'saved', txEmp2:'emp2', txSelf2:'self2', tx3a2:'p3a2'}[id]] = e.target.value; save(); renderTax(); }));
 $('txStart').addEventListener('change', e => { S.tax.start = e.target.value; save(); renderTax(); });
+$('txPay').addEventListener('change', e => { S.tax.pay = e.target.value; save(); renderTax(); });
 let exNote = false;
 function applyTaxRows(R){
   const TAXK = ['taxSt','taxG','church','taxB','pers','taxK'], SOCK = ['ahvE','alvE','nbuE','bvgE','ahvS','ahvAdm','famS'];
@@ -1526,7 +1554,8 @@ function applyTaxRows(R){
     if (!r){ r = mk(k, ''); r.who = who; S.rows.push(r); } r.amt = String(Math.round(amt)); r.f = f; r.m = m; r.note = note; };
   const N = exNote ? 'пример' : 'примерный расчёт';
   set('taxK', 0);
-  R.parts.forEach(t => { set('taxSt', t.st, 'y', 8, N, t.who); set('taxG', t.gem, 'y', 8, N, t.who); set('church', t.ch, 'y', 8, N, t.who); set('taxB', t.fed, 'y', 2, N, t.who); set('pers', t.pers, 'y', 8, N, t.who); });
+  const Q = PAYQ[S.tax.pay], tx = (k, v, m, who) => Q ? set(k, v / Q.n, Q.f, Q.m, N + ', частями', who) : set(k, v, 'y', m, N, who);
+  R.parts.forEach(t => { tx('taxSt', t.st, 8, t.who); tx('taxG', t.gem, 8, t.who); tx('church', t.ch, 8, t.who); tx('taxB', t.fed, 2, t.who); tx('pers', t.pers, 8, t.who); });
   R.P.forEach((p, i) => { const w = R.duo ? 'p' + (i + 1) : 'c';
     set('ahvE', p.ahvE / 12, 'm', 0, N, w); set('alvE', p.alvE / 12, 'm', 0, N, w); set('nbuE', p.nbu / 12, 'm', 0, N, w); set('bvgE', p.bvg / 12, 'm', 0, N, w);
     set('ahvS', p.ahv / 4, 'q', 2, N, w); set('ahvAdm', p.adm / 4, 'q', 2, N, w); set('famS', p.fak / 4, 'q', 2, N, w); });

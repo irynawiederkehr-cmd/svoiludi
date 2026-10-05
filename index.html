@@ -519,6 +519,18 @@ a.bot:hover{color:#B98324}
 .about .creed{grid-column:1 / -1;background:var(--paper);border-left:4px solid var(--mustard,#B98324);border-radius:0 18px 18px 0;padding:18px 22px;font-family:var(--display);font-size:1.3rem;line-height:1.45;margin:4px 0 0}
 @media (max-width:640px){.about .creed{font-size:1.12rem;padding:16px 18px}}
 #about{scroll-margin-top:150px}
+.about .circle{grid-column:1 / -1;margin:10px 0 0}
+.about .circle h3{font-family:var(--display);font-weight:400;font-size:clamp(1.55rem,3.2vw,2rem);line-height:1.2;margin:0 0 8px}
+.about .circle-lead{margin:0 0 18px;max-width:68ch;font-size:1.02rem;line-height:1.65}
+.steps3{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;counter-reset:none}
+.steps3 li{position:relative;background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:18px 18px 16px;display:flex;flex-direction:column;gap:6px}
+.steps3 li:not(:last-child)::after{content:"→";position:absolute;right:-13px;top:22px;width:24px;height:24px;border-radius:50%;background:var(--mustard-soft,#F3E3C2);color:var(--brown,#6E4F3C);font-weight:700;font-size:.85rem;display:grid;place-items:center;z-index:1}
+.steps3 .n{width:30px;height:30px;border-radius:50%;background:#E3E8D6;color:#4F5E3E;font-weight:700;display:grid;place-items:center;font-size:.95rem}
+.steps3 li:last-child .n{background:var(--mustard-soft,#F3E3C2);color:#7A5A12}
+.steps3 b{font-family:var(--display);font-weight:400;font-size:1.25rem;line-height:1.2}
+.steps3 p{margin:0;font-size:.93rem;line-height:1.55;color:var(--muted)}
+.steps3 a{margin-top:auto;padding-top:6px;font-weight:700;font-size:.92rem;color:var(--brown);text-underline-offset:4px}
+@media (max-width:860px){.steps3{grid-template-columns:1fr}.steps3 li:not(:last-child)::after{content:"↓";right:auto;left:22px;top:auto;bottom:-13px}}
 .about-link{margin:12px 0 0}
 .about-link a{font-weight:700;color:var(--brown);text-underline-offset:4px}
 </style>
@@ -608,7 +620,16 @@ a.bot:hover{color:#B98324}
       <div class="val"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="8" cy="7.5" r="2.6" fill="#E3E8D6" stroke="#4F5E3E" stroke-width="1.6"/><circle cx="16" cy="7.5" r="2.6" fill="#E3E8D6" stroke="#4F5E3E" stroke-width="1.6"/><path d="M3.5 19c0-3.2 2-5.5 4.5-5.5s4 1.4 4 1.4 1.5-1.4 4-1.4 4.5 2.3 4.5 5.5" fill="#E3E8D6" stroke="#4F5E3E" stroke-width="1.6" stroke-linejoin="round"/></svg><b>Найти своих</b><p>Встречи, разговорные клубы и праздники помогают познакомиться с теми, кто тоже строит здесь новую жизнь.</p></div>
       <div class="val"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7.5-4.6-7.5-10A4.3 4.3 0 0 1 12 7.6 4.3 4.3 0 0 1 19.5 10C19.5 15.4 12 20 12 20z" fill="#F3E3C2" stroke="#B98324" stroke-width="1.6" stroke-linejoin="round"/></svg><b>Поддержать друг друга</b><p>Когда ты обращаешься к своим специалистам и советуешь их друзьям, ты помогаешь им работать, а другим быстрее найти помощь.</p></div>
     </div>
-    <p class="creed">Быть частью «Своих людей» значит помнить, как непросто было в начале, и протягивать руку тем, кто только приехал. Каждый, кто советует своего специалиста, приходит на встречу или делится справочником с другом, делает это сообщество сильнее. Вместе мы превращаем чужую страну в место, где у тебя есть свои.</p>
+    <div class="circle" aria-labelledby="circle-h">
+      <h3 id="circle-h">Так растёт круг своих</h3>
+      <p class="circle-lead">Почти каждый из нас приходит сюда сначала за помощью. А потом, встав на ноги, начинает помогать тем, кто приехал позже. Так из отдельных историй складывается сообщество.</p>
+      <ol class="steps3">
+        <li><span class="n">1</span><b>Тебе помогают свои</b><p>В первые месяцы ты находишь здесь врача, юриста, мастера или встречу. Люди, которые говорят на твоём языке, помогают разобраться в новой жизни и почувствовать опору.</p></li>
+        <li><span class="n">2</span><b>Ты встаёшь на ноги</b><p>Появляются язык, работа, знакомые, своё дело. То, что когда-то казалось чужим и сложным, становится понятным и своим.</p></li>
+        <li><span class="n">3</span><b>Ты помогаешь тем, кто приехал позже</b><p>Однажды уже ты предлагаешь свои услуги, проводишь встречу или советуешь проверенного специалиста. И теперь тебя находит тот, кто только начинает этот путь.</p><a href="/join/">Как разместиться в справочнике →</a></li>
+      </ol>
+    </div>
+    <p class="creed">Тот, кто когда-то получил помощь, однажды передаёт её дальше. Специалисты находят своих клиентов, новые люди находят своих специалистов, и с каждым таким кругом мы всё глубже пускаем корни в новой стране. Быть частью «Своих людей» значит помнить, как непросто было в начале, и протягивать руку тем, кто только приехал. Вместе мы превращаем чужую страну в место, где у каждого есть свои.</p>
   </section>
 
   <section class="join" id="join" aria-labelledby="join-h">

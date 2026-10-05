@@ -335,7 +335,6 @@ a.bot:hover{color:#B98324}
 .count-acts{display:flex;gap:18px;flex-wrap:wrap}
 .pdfbtn{align-self:flex-start;font-size:.88rem;padding:10px 18px}
 .toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:60;background:var(--ink);color:var(--bg);border-radius:14px;padding:12px 18px;font-size:.9rem;max-width:min(92vw,520px);box-shadow:0 10px 30px -10px rgba(0,0,0,.4)}
-.count button{font:inherit;color:var(--brown);background:none;border:0;padding:0;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
 .group{display:flex;flex-direction:column;gap:14px;padding-block:18px 8px}
 .group-h{display:flex;flex-direction:column;gap:2px}
 .group-h h2{font-size:1.7rem}
@@ -346,6 +345,10 @@ a.bot:hover{color:#B98324}
 .count{font-size:.92rem;color:var(--muted);padding-block:22px 4px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
 .count button.lnk{font:inherit;color:var(--brown);background:none;border:0;padding:0;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
 .count-acts{display:flex;gap:18px;align-items:center;flex-wrap:wrap}
+.count .monthics{font:inherit;font-size:.86rem;font-weight:700;color:var(--brown);background:var(--paper);border:1.5px solid var(--line);border-radius:999px;padding:7px 14px;cursor:pointer;display:inline-flex;align-items:center;gap:7px}
+.count .monthics:hover{border-color:var(--brown)}
+.monthics svg{width:18px;height:18px;flex:none}
+@media (max-width:520px){.count-acts{width:100%;gap:10px 14px}.count .monthics{width:100%;justify-content:center}}
 .viewsw{display:inline-flex;border:1.5px solid var(--line);border-radius:999px;padding:2px;background:var(--paper)}
 .viewsw button{font:inherit;font-size:.86rem;font-weight:700;border:0;background:none;color:var(--muted);padding:6px 14px;border-radius:999px;cursor:pointer}
 .viewsw button[aria-pressed="true"]{background:var(--brown);color:var(--paper)}
@@ -494,7 +497,7 @@ a.yours:hover{background:#EBD3A3}
     </div>
   </section>
 
-  <div class="count"><span id="count" aria-live="polite"></span><span class="count-acts"><button type="button" class="lnk" id="reset" hidden>Сбросить выбор</button><span class="viewsw" role="group" aria-label="Вид"><button type="button" data-view="list" aria-pressed="true">Список</button><button type="button" data-view="month" aria-pressed="false">Месяц</button><button type="button" data-view="year" aria-pressed="false">Год</button></span></span></div>
+  <div class="count"><span id="count" aria-live="polite"></span><span class="count-acts"><button type="button" class="lnk" id="reset" hidden>Сбросить выбор</button><button type="button" class="monthics" id="monthIcs"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="3" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M3.5 9.5h17M8 3v4M16 3v4M12 12.5v5m-2.3-2.2L12 17.5l2.3-2.2" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg><span></span></button><span class="viewsw" role="group" aria-label="Вид"><button type="button" data-view="list" aria-pressed="true">Список</button><button type="button" data-view="month" aria-pressed="false">Месяц</button><button type="button" data-view="year" aria-pressed="false">Год</button></span></span></div>
   <div class="toast" id="toast" role="status" hidden></div>
   <div id="results"></div>
   <div id="digest" hidden></div>
@@ -835,6 +838,7 @@ const CANTONS = {
 };
 const LANG_FIRST = ['русский', 'украинский', 'немецкий', 'французский', 'итальянский', 'английский'];
 const MON = ['январь', 'февраль', 'март', 'апрель', 'май', 'июнь', 'июль', 'август', 'сентябрь', 'октябрь', 'ноябрь', 'декабрь'];
+const MON_P = ['январе', 'феврале', 'марте', 'апреле', 'мае', 'июне', 'июле', 'августе', 'сентябре', 'октябре', 'ноябре', 'декабре'];
 const MON_G = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'];
 const MON_S = ['янв', 'фев', 'мар', 'апр', 'мая', 'июн', 'июл', 'авг', 'сен', 'окт', 'ноя', 'дек'];
 const WD_S = ['вс', 'пн', 'вт', 'ср', 'чт', 'пт', 'сб'];
@@ -966,6 +970,7 @@ function render(){
   document.getElementById('results').innerHTML = v.html;
   document.getElementById('count').textContent = state.view === 'list' ? `${v.n} ${plural(v.n, 'событие', 'события', 'событий')}` : state.view === 'month' ? `В этом месяце: ${v.n}` : `За 12 месяцев: ${v.n}`;
   document.getElementById('reset').hidden = !(state.canton || state.city || state.type || state.lang || state.when);
+  document.querySelector('#monthIcs span').textContent = `Скачать ${MON[+state.month.slice(5) - 1]} в свой календарь`;
   document.querySelectorAll('.viewsw button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.view === state.view)));
   document.getElementById('when').disabled = state.view !== 'list';
   ['canton', 'city', 'type', 'lang', 'when'].forEach(id => document.getElementById(id).classList.toggle('set', !!state[id]));
@@ -1028,6 +1033,28 @@ function ics(e, d){
   const ex = (e.repeat && e.repeat.except || []).filter(z => z > d); if (ex.length) L.push(e.time ? `EXDATE;TZID=Europe/Zurich:${ex.map(z => compact(z, e.time)).join(',')}` : `EXDATE;VALUE=DATE:${ex.map(z => compact(z)).join(',')}`);
   L.push(`SUMMARY:${x(e.title)}`, `DESCRIPTION:${x(details(e))}`, `LOCATION:${x(placeText(e))}`, `URL:${e.link || evUrl(e)}`, 'END:VEVENT', 'END:VCALENDAR');
   return L.join('\r\n').split('\r\n').map(line => { let o = '', s = line; while (s.length > 74){ o += s.slice(0, 74) + '\r\n '; s = s.slice(74); } return o + s; }).join('\r\n') + '\r\n';
+}
+/* весь месяц одним файлом: каждое событие месяца отдельной записью, с учётом выбранного кантона, города, типа и языка */
+function monthIcs(){
+  const [y, m] = state.month.split('-').map(Number), from = [state.month + '-01', today].sort()[1], to = iso(new Date(Date.UTC(y, m, 0, 12)));
+  const items = pool().filter(shown).flatMap(e => occurrences(e, from, to).map(d => ({ e, d }))).sort((a, b) => a.d.localeCompare(b.d) || (a.e.time || '').localeCompare(b.e.time || ''));
+  if (!items.length){ toast(`В ${MON_P[m - 1]} по твоему выбору событий пока нет.`); return; }
+  const x = v => String(v).replace(/\\/g, '\\\\').replace(/\n/g, '\\n').replace(/([,;])/g, '\\$1');
+  const stamp = new Date().toISOString().replace(/[-:]/g, '').slice(0, 15) + 'Z';
+  const L = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Svoi ludi v Shveicarii//Events//RU', 'CALSCALE:GREGORIAN', 'METHOD:PUBLISH', `X-WR-CALNAME:Свои люди · ${MON[m - 1]} ${y}`, VTZ];
+  items.forEach(({ e, d }) => {
+    const end = e.dateEnd && !e.repeat ? e.dateEnd : d;
+    L.push('BEGIN:VEVENT', `UID:${e.id}-${d}@svoiludi.ch`, `DTSTAMP:${stamp}`);
+    if (e.time) L.push(`DTSTART;TZID=Europe/Zurich:${compact(d, e.time)}`, `DTEND;TZID=Europe/Zurich:${compact(end, e.timeEnd || e.time)}`);
+    else L.push(`DTSTART;VALUE=DATE:${compact(d)}`, `DTEND;VALUE=DATE:${compact(addDays(end, 1))}`);
+    L.push(`SUMMARY:${x((TRIAL ? '[Образец] ' : '') + e.title)}`, `DESCRIPTION:${x(details(e))}`, `LOCATION:${x(placeText(e))}`, `URL:${e.link || evUrl(e)}`, 'END:VEVENT');
+  });
+  L.push('END:VCALENDAR');
+  const txt = L.join('\r\n').split('\r\n').map(line => { let o = '', s = line; while (s.length > 74){ o += s.slice(0, 74) + '\r\n '; s = s.slice(74); } return o + s; }).join('\r\n') + '\r\n';
+  const url = URL.createObjectURL(new Blob([txt], { type: 'text/calendar;charset=utf-8' }));
+  const a = document.createElement('a'); a.href = url; a.download = `Свои люди — события, ${MON[m - 1]} ${y}.ics`; document.body.appendChild(a); a.click();
+  setTimeout(() => { a.remove(); URL.revokeObjectURL(url); }, 4000);
+  toast(`Скачано событий: ${items.length}. Открой файл, и они добавятся в твой календарь.`);
 }
 function saveIcs(e, d){
   const url = URL.createObjectURL(new Blob([ics(e, d)], { type: 'text/calendar;charset=utf-8' }));
@@ -1099,6 +1126,7 @@ document.getElementById('results').addEventListener('click', e => {
   const m = e.target.closest('[data-mo]'); if (m){ const [y, mo] = state.month.split('-').map(Number), x = new Date(Date.UTC(y, mo - 1 + Number(m.dataset.mo), 1, 12)); state.month = iso(x).slice(0, 7); render(); return; }
   const y = e.target.closest('[data-month]'); if (y){ state.month = y.dataset.month; state.view = 'month'; render(); }
 });
+document.getElementById('monthIcs').addEventListener('click', monthIcs);
 document.querySelector('.viewsw').addEventListener('click', e => { const b = e.target.closest('[data-view]'); if (b){ state.view = b.dataset.view; if (b.dataset.view === 'month') state.month = state.month || today.slice(0, 7); render(); } });
 document.getElementById('canton').addEventListener('change', e => { state.canton = e.target.value; state.city = ''; fillCities(); render(); });
 document.getElementById('city').addEventListener('change', e => { state.city = e.target.value; render(); });
