@@ -579,7 +579,7 @@ a.bot:hover{color:#B98324}
   </section>
 
   <div class="trial" id="trial">
-    <span><b>Пробная версия.</b> Все специалисты вымышленные, вместо фото силуэты. Страница скрыта от поисковиков.</span>
+    <span><b>Видишь только ты.</b> Карточки с пометкой «Образец» вымышленные и остаются как пример. Настоящие специалисты стоят выше образцов. Выключить этот режим на устройстве: svoiludi.ch/?ira=0</span>
     <label><input type="checkbox" id="showHidden"> Показать скрытые карточки</label>
   </div>
 
@@ -808,11 +808,11 @@ window.IMG_BASE = 'img/';
    «01 Swiss Guide — бесплатный бот\Специалисты — документы (не для сайта)» и в «Реестре специалистов.xlsx».
    Кантоны — как в Швейцарии: Zürich, Bern, Aargau, Zug, Luzern, Basel-Stadt, St. Gallen, Genève, Vaud, Ticino …
 
-   ВНИМАНИЕ: сейчас здесь только ВЫМЫШЛЕННЫЕ специалисты для пробной страницы, вместо фото — силуэты-заглушки.
+   ВНИМАНИЕ: карточки с sample: true — вымышленные образцы, они остаются на сайте как пример с пометкой «Образец». Настоящий специалист добавляется БЕЗ sample и только по правилам размещения (согласие, фото, проверка) — он показывается выше образцов.
    ===================================================================== */
 const SPECIALISTS = [
   {
-    id: 'anna-keller', firm: 'Keller Integration GmbH', num: 'SG-0001', uid: 'CHE-999.000.001', status: 'активен', paidUntil: '2026-12-31', tiers: [{ canton: 'Zürich', level: 'vip', until: '2026-12-31' }], onlineCH: '2026-12-31', tags: ['free1', 'evening'], added: '2026-08-12', checked: '2026-10-03',
+    sample: true, id: 'anna-keller', firm: 'Keller Integration GmbH', num: 'SG-0001', uid: 'CHE-999.000.001', status: 'активен', paidUntil: '2026-12-31', tiers: [{ canton: 'Zürich', level: 'vip', until: '2026-12-31' }], onlineCH: '2026-12-31', tags: ['free1', 'evening'], added: '2026-08-12', checked: '2026-10-03',
     photo: 'anna-keller.jpg',
     name: 'Анна Келлер', role: 'Консультант по адаптации', cat: 'status', specs: ['Письма и формы'],
     places: [
@@ -825,7 +825,7 @@ const SPECIALISTS = [
     contacts: { phone: '+41 44 555 23 89', email: 'anna.keller@example.ch', site: 'example.ch', instagram: 'swiss.adapt', telegram: 'annakeller_ch', whatsapp: '+41 44 555 23 89' }
   },
   {
-    id: 'olga-marti', firm: 'Praxis Marti GmbH', num: 'SG-0002', uid: 'CHE-999.000.002', status: 'активен', paidUntil: '2026-12-31', tiers: [{ canton: 'Zürich', level: 'партнёр', until: '2026-12-31' }], onlineCH: '', tags: ['emr', 'evening', 'access'], added: '2026-08-20', checked: '2026-10-03',
+    sample: true, id: 'olga-marti', firm: 'Praxis Marti GmbH', num: 'SG-0002', uid: 'CHE-999.000.002', status: 'активен', paidUntil: '2026-12-31', tiers: [{ canton: 'Zürich', level: 'партнёр', until: '2026-12-31' }], onlineCH: '', tags: ['emr', 'evening', 'access'], added: '2026-08-20', checked: '2026-10-03',
     photo: 'olga-marti.jpg',
     name: 'Ольга Марти', role: 'Массажист, телесная терапия', cat: 'body', specs: ['Массаж'],
     places: [
@@ -839,7 +839,7 @@ const SPECIALISTS = [
     contacts: { phone: '+41 77 555 10 20', email: 'olga.marti@example.ch', instagram: 'olga.marti.body', telegram: 'olgamarti_ch', whatsapp: '+41 77 555 10 20' }
   },
   {
-    id: 'dmitri-huber', num: 'SG-0003', uid: 'CHE-999.000.003', status: 'активен', paidUntil: '2027-03-31', tiers: [], onlineCH: '2026-12-31', tags: ['free1'], added: '2026-09-01', checked: '2026-10-03',
+    sample: true, id: 'dmitri-huber', num: 'SG-0003', uid: 'CHE-999.000.003', status: 'активен', paidUntil: '2027-03-31', tiers: [], onlineCH: '2026-12-31', tags: ['free1'], added: '2026-09-01', checked: '2026-10-03',
     photo: 'dmitri-huber.jpg',
     name: 'Дмитрий Хубер', role: 'Налоговый консультант', cat: 'money', specs: ['Налоговая декларация', 'Бухгалтерия и Treuhand'],
     places: [
@@ -853,7 +853,7 @@ const SPECIALISTS = [
     contacts: { phone: '+41 41 555 33 44', email: 'd.huber@example.ch', site: 'example.ch', telegram: 'huber_tax' }
   },
   {
-    id: 'natalia-bianchi', num: 'SG-0004', uid: 'CHE-999.000.004', status: 'активен', paidUntil: '2026-12-31', tiers: [], onlineCH: '', tags: ['basic', 'kids', 'access'], added: '2026-10-03', checked: '2026-10-03',
+    sample: true, id: 'natalia-bianchi', num: 'SG-0004', uid: 'CHE-999.000.004', status: 'активен', paidUntil: '2026-12-31', tiers: [], onlineCH: '', tags: ['basic', 'kids', 'access'], added: '2026-10-03', checked: '2026-10-03',
     photo: 'natalia-bianchi.jpg',
     name: 'Наталья Бьянки', role: 'Семейный врач', cat: 'health', specs: ['Семейный врач'],
     places: [
@@ -866,7 +866,7 @@ const SPECIALISTS = [
     contacts: { phone: '+41 91 555 77 88', email: 'praxis.bianchi@example.ch', site: 'example.ch' }
   },
   {
-    id: 'svetlana-meier', num: 'SG-0005', uid: 'CHE-999.000.005', status: 'активен', paidUntil: '', tiers: [], onlineCH: '', tags: ['free1'], added: '2026-08-28', checked: '2026-10-03',
+    sample: true, id: 'svetlana-meier', num: 'SG-0005', uid: 'CHE-999.000.005', status: 'активен', paidUntil: '', tiers: [], onlineCH: '', tags: ['free1'], added: '2026-08-28', checked: '2026-10-03',
     photo: 'svetlana-meier.jpg',
     name: 'Светлана Майер', role: 'Юрист по семейному праву', cat: 'law', specs: ['Семейное право'],
     places: [
@@ -879,7 +879,7 @@ const SPECIALISTS = [
     contacts: { phone: '+41 31 555 12 34', email: 's.meier@example.ch', whatsapp: '+41 79 555 12 34' }
   },
   {
-    id: 'irina-frei', num: 'SG-0006', uid: 'CHE-999.000.006', status: 'активен', paidUntil: '2026-12-31', tiers: [{ canton: 'Aargau', level: 'vip', until: '2026-12-31' }], onlineCH: '2026-12-31', tags: ['evening'], added: '2026-10-03', checked: '2026-10-03',
+    sample: true, id: 'irina-frei', num: 'SG-0006', uid: 'CHE-999.000.006', status: 'активен', paidUntil: '2026-12-31', tiers: [{ canton: 'Aargau', level: 'vip', until: '2026-12-31' }], onlineCH: '2026-12-31', tags: ['evening'], added: '2026-10-03', checked: '2026-10-03',
     photo: 'irina-frei.jpg',
     name: 'Ирина Фрай', role: 'Преподаватель немецкого', cat: 'learn', specs: ['Немецкий язык', 'Подготовка к fide'],
     places: [
@@ -892,7 +892,7 @@ const SPECIALISTS = [
     contacts: { email: 'irina.frei@example.ch', instagram: 'deutsch.mit.irina', telegram: 'deutsch_irina' }
   },
   {
-    id: 'oksana-roth', num: 'SG-0007', uid: 'CHE-999.000.007', status: 'активен', paidUntil: '2026-12-31', tiers: [], onlineCH: '2026-12-31', tags: ['kids', 'basic'], added: '2026-10-03', checked: '2026-10-03',
+    sample: true, id: 'oksana-roth', num: 'SG-0007', uid: 'CHE-999.000.007', status: 'активен', paidUntil: '2026-12-31', tiers: [], onlineCH: '2026-12-31', tags: ['kids', 'basic'], added: '2026-10-03', checked: '2026-10-03',
     photo: 'oksana-roth.jpg',
     name: 'Оксана Рот', role: 'Детский логопед', cat: 'kids', specs: ['Логопед'],
     places: [
@@ -905,7 +905,7 @@ const SPECIALISTS = [
     contacts: { phone: '+41 41 555 66 00', email: 'oksana.roth@example.ch', whatsapp: '+41 76 555 66 00' }
   },
   {
-    id: 'elena-schmid', num: 'SG-0008', uid: 'CHE-999.000.008', status: 'активен', paidUntil: '2026-12-31', tiers: [{ canton: 'Basel-Stadt', level: 'vip', until: '2026-12-31' }], onlineCH: '2026-12-31', tags: ['basic', 'evening'], added: '2026-09-02', checked: '2026-10-03',
+    sample: true, id: 'elena-schmid', num: 'SG-0008', uid: 'CHE-999.000.008', status: 'активен', paidUntil: '2026-12-31', tiers: [{ canton: 'Basel-Stadt', level: 'vip', until: '2026-12-31' }], onlineCH: '2026-12-31', tags: ['basic', 'evening'], added: '2026-09-02', checked: '2026-10-03',
     photo: 'elena-schmid.jpg',
     name: 'Елена Шмид', role: 'Психотерапевт, федеральный титул', cat: 'psy', specs: ['Психотерапевт'],
     places: [
@@ -918,7 +918,7 @@ const SPECIALISTS = [
     contacts: { phone: '+41 61 555 90 90', email: 'e.schmid@example.ch', site: 'example.ch' }
   },
   {
-    id: 'viktor-baumann', num: 'SG-0009', uid: 'CHE-999.000.009', status: 'активен', paidUntil: '2026-12-31', tiers: [{ canton: 'St. Gallen', level: 'vip', until: '2026-12-31' }], onlineCH: '2026-12-31', tags: ['free1'], added: '2026-08-15', checked: '2026-10-03',
+    sample: true, id: 'viktor-baumann', num: 'SG-0009', uid: 'CHE-999.000.009', status: 'активен', paidUntil: '2026-12-31', tiers: [{ canton: 'St. Gallen', level: 'vip', until: '2026-12-31' }], onlineCH: '2026-12-31', tags: ['free1'], added: '2026-08-15', checked: '2026-10-03',
     photo: 'viktor-baumann.jpg',
     name: 'Виктор Бауманн', role: 'Страховой брокер', cat: 'insure', specs: ['Страховой брокер'],
     places: [
@@ -931,7 +931,7 @@ const SPECIALISTS = [
     contacts: { phone: '+41 71 555 45 45', email: 'v.baumann@example.ch', telegram: 'baumann_insure', whatsapp: '+41 79 555 45 45' }
   },
   {
-    id: 'alina-shteuber', num: 'SG-0012', uid: 'CHE-999.000.012', status: 'активен', paidUntil: '2026-12-31', tiers: [], onlineCH: '2026-12-31', tags: ['free1', 'evening'], added: '2026-10-03', checked: '2026-10-03',
+    sample: true, id: 'alina-shteuber', num: 'SG-0012', uid: 'CHE-999.000.012', status: 'активен', paidUntil: '2026-12-31', tiers: [], onlineCH: '2026-12-31', tags: ['free1', 'evening'], added: '2026-10-03', checked: '2026-10-03',
     photo: 'alina-shteuber.jpg',
     name: 'Алина Штойбер', role: 'Коуч ICF', cat: 'coach', specs: ['Коуч', 'Консультант по адаптации'],
     places: [
@@ -945,7 +945,7 @@ const SPECIALISTS = [
   },
   /* --- ниже примеры скрытых карточек: на сайте их нет --- */
   {
-    id: 'maria-weber', num: 'SG-0010', uid: 'CHE-999.000.010', status: 'пауза', paidUntil: '2026-12-31', tiers: [], onlineCH: '', added: '2026-10-03', checked: '2026-10-03',
+    sample: true, id: 'maria-weber', num: 'SG-0010', uid: 'CHE-999.000.010', status: 'пауза', paidUntil: '2026-12-31', tiers: [], onlineCH: '', added: '2026-10-03', checked: '2026-10-03',
     photo: 'maria-weber.jpg',
     name: 'Мария Вебер', role: 'Риелтор', cat: 'home', specs: ['Риелтор'],
     places: [{ canton: 'Zürich', address: 'Badenerstrasse 100, 8004 Zürich', geo: [47.377, 8.524] }],
@@ -956,7 +956,7 @@ const SPECIALISTS = [
     contacts: { phone: '+41 44 555 00 11' }
   },
   {
-    id: 'pavel-graf', num: 'SG-0011', uid: 'CHE-999.000.011', status: 'активен', paidUntil: '2026-09-30', tiers: [], onlineCH: '', added: '2026-07-01', checked: '2026-07-01',
+    sample: true, id: 'pavel-graf', num: 'SG-0011', uid: 'CHE-999.000.011', status: 'активен', paidUntil: '2026-09-30', tiers: [], onlineCH: '', added: '2026-07-01', checked: '2026-07-01',
     photo: '',
     name: 'Павел Граф', role: 'Мастер по ремонту', cat: 'home', specs: ['Ремонт'],
     places: [{ canton: 'Zug', address: 'Industriestrasse 3, 6300 Zug', geo: [47.176, 8.515] }],
@@ -1063,7 +1063,10 @@ const EVENTS = [
 
 </script>
 <script>
-const TRIAL = true;   // пробная версия: показывает плашку и переключатель скрытых карточек
+const ADMIN = (() => {   // режим Ирины: svoiludi.ch/?ira=1 включает на этом устройстве, ?ira=0 выключает
+  try { const q = location.search; if (/[?&]ira=1/.test(q)) localStorage.setItem('svoiludi-admin', '1'); if (/[?&]ira=0/.test(q)) localStorage.removeItem('svoiludi-admin'); return localStorage.getItem('svoiludi-admin') === '1'; }
+  catch (e) { return /[?&]ira=1/.test(location.search); } })();
+const TRIAL = false;  // устарело: образцы теперь помечаются в карточке (sample: true), плашка «Пробная версия» видна только в режиме Ирины
 const CATS = {   // направление → цвет, значок и список специализаций (порядок = порядок в списках)
   status: { t: 'Документы и статус',        c: '#3F6FBF', i: 'dirStatus',      s: ['Разрешения и статус', 'Натурализация', 'Письма и формы', 'Заверенные переводы', 'Устный перевод', 'Социальные вопросы и пособия', 'Нотариус'] },
   law:    { t: 'Юристы',                    c: '#4F6D7A', i: 'dirLaw',      s: ['Миграционное право', 'Семейное право', 'Трудовое право', 'Аренда', 'Долги и взыскания', 'Наследство и завещания', 'Права потребителей', 'Медиация'] },
@@ -1137,7 +1140,7 @@ function hiddenReason(s){
 }
 const photoSrc = f => (window.SP_IMG && SP_IMG[f]) || (window.IMG_BASE || 'img/') + f;
 // пока на странице образцы (TRIAL), на силуэтах подпись «Ваше фото» — специалисты видят, где будет их портрет
-const photo = s => s.photo ? (TRIAL ? `<span class="phw"><img class="ph" src="${esc(photoSrc(s.photo))}" alt="Здесь будет ваше фото" loading="lazy"><span class="ph-tag">Ваше фото</span></span>` : `<img class="ph" src="${esc(photoSrc(s.photo))}" alt="${esc(s.name)}, портрет" loading="lazy">`) : `<span class="ph none">нет фото</span>`;
+const photo = s => s.photo ? (s.sample ? `<span class="phw"><img class="ph" src="${esc(photoSrc(s.photo))}" alt="Здесь будет ваше фото" loading="lazy"><span class="ph-tag">Ваше фото</span></span>` : `<img class="ph" src="${esc(photoSrc(s.photo))}" alt="${esc(s.name)}, портрет" loading="lazy">`) : `<span class="ph none">нет фото</span>`;
 const city = a => (String(a).match(/\d{4}\s+(.+)$/) || [, a])[1];
 const street = a => String(a).replace(/,?\s*\d{4}\s+.+$/, '');
 const digits = p => String(p).replace(/[^\d+]/g, '');
@@ -1189,12 +1192,13 @@ function base(s, skipCat){        // всё, кроме кантона
 const visible = (s, skipCat) => base(s, skipCat) && (inCanton(s) || onlineCH(s) || (state.city && onlineCanton(s)));
 const SEED = {}; const rnd = s => SEED[s.id] ??= Math.random();
 const alpha = (a, b) => a.name.localeCompare(b.name, 'ru');
+const alphaS = (a, b) => (a.sample ? 1 : 0) - (b.sample ? 1 : 0) || alpha(a, b);   // настоящие специалисты раньше образцов
 // порядок (решено 03.10.2026): ТОП с опцией «онлайн по всей Швейцарии» → ТОП без онлайна → VIP-партнёр с онлайном → VIP-партнёр без онлайна → остальные.
 // Карточки идут сплошным потоком: если в первом ряду меньше трёх ТОП, свободные места занимают VIP-партнёры; если ряд занят — они со второго ряда.
 // Внутри ТОП порядок случайный при каждом открытии, у остальных — по алфавиту.
 const rank = (s, lvl) => { const l = lvl(s); return l === 'vip' ? (onlineCH(s) ? 0 : 1) : l === 'партнёр' ? (onlineCH(s) ? 2 : 3) : 4; };
 function arrange(list, lvl){
-  return list.slice().sort((a, b) => rank(a, lvl) - rank(b, lvl) || (rank(a, lvl) < 2 ? rnd(a) - rnd(b) : alpha(a, b)));
+  return list.slice().sort((a, b) => (a.sample ? 1 : 0) - (b.sample ? 1 : 0) || rank(a, lvl) - rank(b, lvl) || (rank(a, lvl) < 2 ? rnd(a) - rnd(b) : alpha(a, b)));
 }
 
 function quick(s){   // одна главная кнопка связи: Telegram → WhatsApp → телефон
@@ -1209,7 +1213,7 @@ function card(s, lvl = ''){
   const k = CATS[s.cat] || CATS.status, why = hiddenReason(s);
   const flag = why ? `<span class="badge warn">${esc(why)}</span>` : lvl === 'vip' ? '<span class="badge tier">VIP-партнёр ТОП</span>' : lvl === 'партнёр' || lvl === 'vip+' ? '<span class="badge tier">VIP-партнёр</span>' : '';
   return `<article class="sp${why ? ' off' : ''}${lvl === 'vip' ? ' vip' : lvl === 'партнёр' || lvl === 'vip+' ? ' partner' : ''}" style="--lc:${k.c}">
-    ${TRIAL ? '<span class="sample" title="Вымышленный специалист — так будет выглядеть ваша карточка">Образец</span>' : ''}<div class="sp-sub">${ico(k.i, k.c, null, 16)}<span>${esc(k.t)}</span>${flag}</div>
+    ${s.sample ? '<span class="sample" title="Вымышленный специалист — так будет выглядеть ваша карточка">Образец</span>' : ''}<div class="sp-sub">${ico(k.i, k.c, null, 16)}<span>${esc(k.t)}</span>${flag}</div>
     <div class="sp-id">${photo(s)}<div>
       <h3>${esc(s.name)}${isNew(s) ? '<span class="new" title="Новый в справочнике">новый</span>' : ''}</h3>
       <div class="role">${esc(s.role)}</div>${s.firm ? `<div class="firm">${esc(s.firm)}</div>` : ''}
@@ -1224,7 +1228,7 @@ function card(s, lvl = ''){
 const plural = (n, a, b, c) => n % 10 === 1 && n % 100 !== 11 ? a : [2, 3, 4].includes(n % 10) && ![12, 13, 14].includes(n % 100) ? b : c;
 
 let CURRENT = [];
-const plainList = ids => SPECIALISTS.filter(s => ids.has(s.id) && (state.hidden || TRIAL || !hiddenReason(s))).sort(alpha);
+const plainList = ids => SPECIALISTS.filter(s => ids.has(s.id) && (state.hidden || s.sample || !hiddenReason(s))).sort(alphaS);
 function renderListbar(){   // «Мой список» и чужой список по ссылке
   const el = document.getElementById('listbar');
   if (state.shared){ const n = plainList(state.shared).length;
@@ -1238,7 +1242,7 @@ function render(){
   const list = listMode ? plainList(state.shared || FAV) : pool().filter(s => visible(s));
   const lv = s => state.canton ? tierIn(s, state.canton) : tierBest(s);
   const local = listMode ? list : arrange(list.filter(inCanton), lv);
-  const remote = listMode ? [] : list.filter(s => !inCanton(s)).sort(alpha);
+  const remote = listMode ? [] : list.filter(s => !inCanton(s)).sort(alphaS);
   const row = new Set(local.filter(s => lv(s) === 'vip').slice(0, VIP_ROW).map(s => s.id));
   const lvView = s => listMode ? '' : lv(s) === 'vip' && !row.has(s.id) ? 'vip+' : lv(s);   // ТОП вне первого ряда (бывает только в общем списке без кантона) показываются как обычный «VIP-партнёр»
   CURRENT = local.concat(remote);
@@ -1377,7 +1381,7 @@ function openCard(id){
     const [t, h, v] = LINK[x](c[x]); return `<li><span>${t}</span><a href="${esc(h)}" ${x === 'phone' || x === 'email' ? '' : ext}>${esc(v)}</a></li>`; }).join('');
   const box = document.getElementById('qmCard');
   box.style.setProperty('--lc', k.c); box.style.setProperty('--lf', `color-mix(in srgb,${k.c} 13%,var(--paper))`);
-  box.innerHTML = `<div class="qm-top"><div class="qm-ph">${photo(s)}</div><div class="qm-head">${TRIAL ? '<span class="qm-sample">Образец карточки · специалист вымышленный</span>' : ''}<span class="sp-sub" style="color:${k.c}">${ico(k.i, k.c, null, 16)}${esc(k.t)}${(() => { const l = state.canton ? tierIn(s, state.canton) : tierBest(s); return l === 'vip' ? ' · VIP-партнёр ТОП' : l === 'партнёр' ? ' · VIP-партнёр' : ''; })()}</span>
+  box.innerHTML = `<div class="qm-top"><div class="qm-ph">${photo(s)}</div><div class="qm-head">${s.sample ? '<span class="qm-sample">Образец карточки · специалист вымышленный</span>' : ''}<span class="sp-sub" style="color:${k.c}">${ico(k.i, k.c, null, 16)}${esc(k.t)}${(() => { const l = state.canton ? tierIn(s, state.canton) : tierBest(s); return l === 'vip' ? ' · VIP-партнёр ТОП' : l === 'партнёр' ? ' · VIP-партнёр' : ''; })()}</span>
       <h2 class="qm-title" id="qmTitle">${esc(s.name)}</h2><div style="font-family:var(--display);font-size:1.25rem;color:var(--brown)">${esc(s.role)}</div>${s.firm ? `<div class="firm" style="font-size:.95rem;margin-top:4px">${esc(s.firm)}</div>` : ''}</div>
       <button class="qm-close" type="button" aria-label="Закрыть">✕</button></div>
     <div class="d-body">
@@ -1424,7 +1428,7 @@ function pdfHead(sub){
   const av = (document.querySelector('.mark .av') || {}).innerHTML || '';
   return `<div class="pp-h"><span class="av">${av}</span><span><b>Свои люди в Швейцарии</b><small>Справочник Ирины Вознесенской${sub ? ' · ' + esc(sub) : ''}</small></span><span class="dt">${fmtDate(today)}</span></div>`;
 }
-const pdfImg = s => s.photo ? (TRIAL ? `<span style="position:relative;display:block;align-self:start;width:190px;height:238px"><img src="${esc(photoSrc(s.photo))}" alt=""><span style="position:absolute;left:50%;bottom:9%;transform:translateX(-50%);background:rgba(255,252,248,.94);color:#4F5E3E;font-weight:700;font-size:15px;padding:6px 14px;border-radius:999px;white-space:nowrap">Ваше фото</span></span>` : `<img src="${esc(photoSrc(s.photo))}" alt="">`) : '<span class="noph"></span>';
+const pdfImg = s => s.photo ? (s.sample ? `<span style="position:relative;display:block;align-self:start;width:190px;height:238px"><img src="${esc(photoSrc(s.photo))}" alt=""><span style="position:absolute;left:50%;bottom:9%;transform:translateX(-50%);background:rgba(255,252,248,.94);color:#4F5E3E;font-weight:700;font-size:15px;padding:6px 14px;border-radius:999px;white-space:nowrap">Ваше фото</span></span>` : `<img src="${esc(photoSrc(s.photo))}" alt="">`) : '<span class="noph"></span>';
 const pdfContacts = (s, cls) => { const c = s.contacts || {}; return ['phone', 'email', 'site', 'instagram', 'telegram', 'whatsapp'].filter(x => c[x]).map(x => { const [t, h, v] = LINK[x](c[x]); return cls ? `<span><a data-href="${esc(h)}">${esc(v)}</a></span>` : `<span>${t}</span><a data-href="${esc(h)}">${esc(v)}</a>`; }).join(''); };
 const pdfFoot = `<div class="pp-f">Справочник носит информационный характер. Договорённости — напрямую со специалистом. ${esc(PAGE_URL)}</div>`;
 function qrImg(text){   // QR-код (библиотека qrcode-generator); не вышло — без кода
@@ -1432,7 +1436,7 @@ function qrImg(text){   // QR-код (библиотека qrcode-generator); н
 }
 function cardPage(s){
   const k = CATS[s.cat] || CATS.status;
-  return `${pdfHead(TRIAL ? 'ОБРАЗЕЦ — специалист вымышленный' : '')}<div class="pp-card">${pdfImg(s)}<div style="display:flex;flex-direction:column;gap:14px">
+  return `${pdfHead(s.sample ? 'ОБРАЗЕЦ — специалист вымышленный' : '')}<div class="pp-card">${pdfImg(s)}<div style="display:flex;flex-direction:column;gap:14px">
       <div><div class="pp-cat" style="color:${k.c}">${esc(k.t)}${s.specs && s.specs.length ? ' · ' + esc(s.specs.join(', ')) : ''}</div><div class="pp-name">${esc(s.name)}</div><div class="pp-role">${esc(s.role)}</div>${s.firm ? `<div style="font-size:13px;color:#7A6E62;margin-top:3px">${esc(s.firm)}</div>` : ''}</div>
       <div class="pp-sec"><h4>Где принимает</h4>${livePlaces(s).map(p => `<div><a data-href="${esc(maps(p.address))}">${esc(p.address)}</a> · кантон ${esc(ktRu(p.canton))}</div>`).join('')}${s.online ? '<div>и онлайн по видеосвязи</div>' : ''}</div>
       <div class="pp-sec"><h4>Контакты</h4><div class="pp-ct">${pdfContacts(s)}</div></div></div></div>
@@ -1497,14 +1501,14 @@ document.getElementById('reset').addEventListener('click', () => {
   Object.assign(state, { q: '', cat: '', spec: '', canton: '', city: '', lang: '', tags: [] });
   document.getElementById('q').value = ''; fillSelects(); render();
 });
-document.getElementById('trial').hidden = !TRIAL;
+document.getElementById('trial').hidden = !ADMIN;
 
 fillSelects(); render();
 // ссылки для бота: …/specialisty/#anna-keller открывает карточку, …/specialisty/#k-health — направление
 const openFromHash = () => { const id = decodeURIComponent(location.hash.slice(1));
   if (id.startsWith('list=')){ state.shared = new Set(id.slice(5).split(',').filter(x => SPECIALISTS.some(s => s.id === x))); state.fav = false; render(); return; }
   if (id.startsWith('k-') && CATS[id.slice(2)]){ state.cat = id.slice(2); state.spec = ''; render(); document.querySelector('.finder').scrollIntoView(); return; }
-  if (id && SPECIALISTS.some(s => s.id === id && (TRIAL || !hiddenReason(s)))) openCard(id); };
+  if (id && SPECIALISTS.some(s => s.id === id && (s.sample || !hiddenReason(s)))) openCard(id); };
 openFromHash(); addEventListener('hashchange', openFromHash);
 </script>
 
