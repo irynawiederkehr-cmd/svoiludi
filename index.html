@@ -671,6 +671,7 @@ a.bot:hover{color:#B98324}
       <div class="jc">
         <b>Как мы проверяем</b>
         <p>Регистрацию смотрим в федеральном реестре <a href="https://www.uid.admin.ch" target="_blank" rel="noopener">uid.admin.ch</a> или в торговом реестре <a href="https://www.zefix.ch" target="_blank" rel="noopener">zefix.ch</a>. Разрешения врачей проверяем в <a href="https://www.healthreg-public.admin.ch/medreg/search" target="_blank" rel="noopener">MedReg</a>, психологов и психотерапевтов — в <a href="https://www.healthreg-public.admin.ch/psyreg/search" target="_blank" rel="noopener">PsyReg</a>, физиотерапевтов, остеопатов, акушерок, диетологов и медсестёр — в <a href="https://www.gesreg.admin.ch" target="_blank" rel="noopener">GesReg</a>, другие медицинские профессии — в <a href="https://www.nareg.ch" target="_blank" rel="noopener">NAREG</a>.</p>
+        <p>Мы проверяем только то, что специалист работает официально и числится в реестре. Дипломы, сертификаты, награды и опыт специалист указывает сам и сам за них отвечает.</p>
       </div>
       <div class="jc">
         <b>Как разместиться</b>
@@ -680,7 +681,7 @@ a.bot:hover{color:#B98324}
     </div>
   </section>
 
-  <p class="fine">Справочник носит информационный характер. Выбор специалиста, обращение к нему и договорённости происходят напрямую между тобой и специалистом. Автор справочника не отвечает за качество услуг, действия специалистов и возможные споры. Карточки с пометками «VIP-партнёр ТОП» и «VIP-партнёр» размещены на платной основе.</p>
+  <p class="fine">Справочник носит информационный характер. Выбор специалиста, обращение к нему и договорённости происходят напрямую между тобой и специалистом. Справочник проверяет только официальную регистрацию специалиста и запись в реестре. Дипломы, сертификаты и другие сведения о квалификации предоставляет сам специалист, автор справочника за них ответственности не несёт. Автор справочника не отвечает за качество услуг, действия специалистов и возможные споры. Карточки с пометками «VIP-партнёр ТОП» и «VIP-партнёр» размещены на платной основе.</p>
 
   <div class="share-slot" data-url="https://svoiludi.ch/" data-lead="Знаешь кого-то, кому пригодятся свои специалисты в Швейцарии? Перешли справочник, сообщение уже готово." data-text="Привет! Смотри, есть справочник русскоязычных специалистов в Швейцарии «Свои люди». Врачи, юристы, психологи, мастера, всё по кантонам и городам. Сохрани, может пригодиться."></div>
 
@@ -1466,7 +1467,7 @@ function openCard(id){
         <div class="d-block"><h4>Где принимает</h4><div style="display:flex;flex-direction:column;gap:10px">${livePlaces(s).map(placeFull).join('')}${s.online ? '<span>и онлайн по видеосвязи</span>' : ''}</div></div>
         <div class="d-block"><h4>Контакты</h4><ul class="ctl">${contacts}</ul></div>
         <div class="card-acts"><button class="btn" type="button" data-vcf="${esc(s.id)}" data-tip="Сохранить телефон, e-mail и адрес в контакты телефона или компьютера">В контакты</button><button class="btn ghost" type="button" data-share="${esc(s.id)}">Поделиться</button><button class="btn ghost" type="button" data-pdf-card="${esc(s.id)}">PDF</button></div>
-        <p class="d-note">${s.uid ? `Регистрационный номер ${s.firm ? 'фирмы ' : ''}(UID): <a class="uid" href="${uidUrl(s.uid)}" ${ext} data-tip="Открыть запись в официальном реестре предприятий Швейцарии (uid.admin.ch)">${esc(s.uid)}</a>. ` : ''}${s.checked ? `Данные проверены ${fmtDate(s.checked)}. ` : ''}Договорённости — напрямую со специалистом.</p>
+        <p class="d-note">${s.uid ? `Регистрационный номер ${s.firm ? 'фирмы ' : ''}(UID): <a class="uid" href="${uidUrl(s.uid)}" ${ext} data-tip="Открыть запись в официальном реестре предприятий Швейцарии (uid.admin.ch)">${esc(s.uid)}</a>. ` : ''}${s.checked ? `Данные проверены ${fmtDate(s.checked)}. ` : ''}Справочник проверяет только официальную регистрацию. Дипломы и сертификаты указывает сам специалист. Договорённости — напрямую со специалистом.</p>
         <p class="report">Нашли ошибку в карточке? <a href="${esc(reportLink(s))}">Сообщить</a></p>
         ${PREVIEW === s.id ? previewBox(s) : ''}${ADMIN ? adminBox(s) : ''}
       </div>
@@ -1500,7 +1501,7 @@ function pdfHead(sub){
 }
 const pdfImg = s => s.photo ? (s.sample ? `<span style="position:relative;display:block;align-self:start;width:190px;height:238px"><img src="${esc(photoSrc(s.photo))}" alt=""><span style="position:absolute;left:50%;bottom:9%;transform:translateX(-50%);background:rgba(255,252,248,.94);color:#4F5E3E;font-weight:700;font-size:15px;padding:6px 14px;border-radius:999px;white-space:nowrap">Ваше фото</span></span>` : `<img src="${esc(photoSrc(s.photo))}" alt="">`) : '<span class="noph"></span>';
 const pdfContacts = (s, cls) => { const c = s.contacts || {}; return ['phone', 'email', 'site', 'instagram', 'telegram', 'whatsapp'].filter(x => c[x]).map(x => { const [t, h, v] = LINK[x](c[x]); return cls ? `<span><a data-href="${esc(h)}">${esc(v)}</a></span>` : `<span>${t}</span><a data-href="${esc(h)}">${esc(v)}</a>`; }).join(''); };
-const pdfFoot = `<div class="pp-f">Справочник носит информационный характер. Договорённости — напрямую со специалистом. ${esc(PAGE_URL)}</div>`;
+const pdfFoot = `<div class="pp-f">Справочник носит информационный характер и проверяет только официальную регистрацию. Дипломы и сертификаты указывает сам специалист. Договорённости — напрямую со специалистом. ${esc(PAGE_URL)}</div>`;
 function qrImg(text){   // QR-код (библиотека qrcode-generator); не вышло — без кода
   try { qrcode.stringToBytes = qrcode.stringToBytesFuncs['UTF-8']; const q = qrcode(0, 'L'); q.addData(text, 'Byte'); q.make(); return `<img src="${q.createDataURL(4, 0)}" alt="">`; } catch (_) { return ''; }
 }
