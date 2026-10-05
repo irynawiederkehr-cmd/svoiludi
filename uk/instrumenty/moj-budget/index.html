@@ -1,0 +1,2237 @@
+<!doctype html>
+<html lang="uk">
+<head><!--i18n--><base href="/instrumenty/moj-budget/"><!--i18n-->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<link rel="icon" href="/fav/favicon.svg" type="image/svg+xml"><link rel="icon" href="/fav/icon-32.png" sizes="32x32"><link rel="apple-touch-icon" href="/fav/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/fonts.css">
+<meta name="description" content="Усі обов’язкові витрати у Швейцарії на одному аркуші, приблизний розрахунок податків і бюджет для двох. Безкоштовно, з Excel і PDF.">
+<link rel="canonical" href="https://svoiludi.ch/uk/instrumenty/moj-budget/">
+<meta property="og:type" content="website"><meta property="og:locale" content="uk_UA"><meta property="og:site_name" content="Свої люди у Швейцарії">
+<meta property="og:title" content="Мій бюджет · обов’язкові витрати у Швейцарії"><meta property="og:description" content="Усі обов’язкові витрати у Швейцарії на одному аркуші, приблизний розрахунок податків і бюджет для двох. Безкоштовно, з Excel і PDF.">
+<meta property="og:url" content="https://svoiludi.ch/uk/instrumenty/moj-budget/"><meta property="og:image" content="https://svoiludi.ch/instrumenty/moj-budget/og-image.uk.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="robots" content="noindex, nofollow">
+<title>Мій бюджет</title>
+
+<style>
+/* Layout: a budget sheet. Settings and totals on top, then one block per sphere with rows of dropdowns (item, how often, month, importance), then the year of bills, often forgotten items, the guide. Brand of Irina's site, colours of spiral dynamics. */
+:root{
+  --bg:#F4EDE3; --paper:#FFFCF8; --ink:#2F2924; --muted:#7A6E62; --line:#E5D9C9; --soft:#EFE5D7;
+  --brown:#6E4F3C; --mustard:#B98324; --mustard-soft:#F3E3C2; --sage:#4F5E3E; --sage-soft:#E3E8D6;
+  --display:"Forum","Georgia",serif; --sans:"Manrope","Segoe UI",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .txbig,:root:not([data-theme="light"]) .taxline{background:#1F2C3E}:root:not([data-theme="light"]) .rg.neg{background:#3C2329}:root:not([data-theme="light"]){
+  --bg:#221D19; --paper:#2C2621; --ink:#F1E9DF; --muted:#B4A796; --line:#3E362F; --soft:#352E28;
+  --brown:#E1C2A6; --mustard:#E2B45C; --mustard-soft:#3D321F; --sage:#B4BF97; --sage-soft:#2E3226; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#221D19; --paper:#2C2621; --ink:#F1E9DF; --muted:#B4A796; --line:#3E362F; --soft:#352E28;
+  --brown:#E1C2A6; --mustard:#E2B45C; --mustard-soft:#3D321F; --sage:#B4BF97; --sage-soft:#2E3226; color-scheme:dark}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--ink);font:15px/1.55 var(--sans);margin:0}
+.wrap{max-width:1240px;margin:0 auto;padding-inline:16px;padding-block:28px 48px;display:flex;flex-direction:column;gap:24px}
+.eyebrow{font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+h1{font-family:var(--display);font-weight:400;font-size:clamp(2.4rem,6vw,3.6rem);line-height:1;margin:4px 0 10px;text-wrap:balance}
+h2{font-family:var(--display);font-weight:400;font-size:1.6rem;margin:0;text-wrap:balance}
+h3{font-family:var(--display);font-weight:400;font-size:1.25rem;line-height:1.2;margin:0}
+.lead{max-width:68ch;color:var(--muted);margin:0}
+.jump{font-weight:700;color:var(--brown);text-underline-offset:4px}
+.bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.bar label{font-weight:600;font-size:.9rem;display:flex;align-items:center;gap:8px;flex-wrap:wrap;max-width:100%}
+.bar label select{max-width:100%}
+.spacer{flex:1 1 auto}
+select,input[type=text],input[type=number],textarea{font:inherit;color:var(--ink);background:var(--paper);border:1.5px solid var(--line);border-radius:12px;padding:8px 12px;min-width:0}
+textarea{width:100%;resize:vertical;min-height:60px}
+select:focus-visible,input:focus-visible,button:focus-visible,textarea:focus-visible,a:focus-visible{outline:2px solid var(--mustard);outline-offset:2px}
+.btn{font:inherit;font-weight:700;font-size:.9rem;border:0;border-radius:999px;padding:10px 18px;cursor:pointer;color:#fff;text-decoration:none;display:inline-flex;align-items:center;gap:6px;
+  background:linear-gradient(110deg,#6E4F3C 38%,#C9A27E 50%,#6E4F3C 62%);background-size:260% 100%;animation:none;box-shadow:0 8px 18px -8px rgba(110,79,60,.6)}
+.btn.gold{background:linear-gradient(110deg,#B98324 38%,#F6DFA0 50%,#B98324 62%);background-size:260% 100%;box-shadow:0 8px 18px -8px rgba(185,131,36,.7)}
+.btn.free{background:linear-gradient(110deg,#4F5E3E 38%,#9DB07A 50%,#4F5E3E 62%);background-size:260% 100%;box-shadow:0 8px 18px -8px rgba(79,94,62,.6)}
+.btn.ghost{animation:none;background:transparent;color:var(--brown);border:1.5px solid var(--line);box-shadow:none}
+.btn.danger{animation:none;background:#A0523D;box-shadow:none}
+.btn.sm{font-size:.82rem;padding:7px 13px}
+.btn[disabled]{animation:none;background:var(--soft);color:var(--muted);box-shadow:none;cursor:not-allowed}
+@keyframes shine{0%{background-position:130% 0}60%,100%{background-position:-30% 0}}
+@media (prefers-reduced-motion: reduce){.btn{animation:none}}
+.confirm{display:flex;gap:8px;align-items:center;background:var(--paper);border:1.5px solid var(--line);border-radius:999px;padding:4px 4px 4px 14px;font-size:.88rem;font-weight:600;flex-wrap:wrap}
+.status{font-size:.86rem;color:var(--muted);min-height:1.3em}
+.panel{background:var(--paper);border:1.5px solid var(--line);border-radius:22px;padding:18px 20px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.panel-head{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:baseline;justify-content:space-between}
+.panel-head p{margin:0;font-size:.86rem;color:var(--muted)}
+.example{display:inline-block;font-size:.68rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--mustard);background:var(--mustard-soft);border-radius:999px;padding:3px 9px}
+.share{display:flex;flex-direction:column;gap:10px}
+.share .row{display:flex;flex-wrap:wrap;gap:8px}
+.hint{font-size:.84rem;color:var(--muted);margin:0}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+
+/* дисклеймер */
+.disc{display:flex;gap:12px;align-items:flex-start;background:var(--mustard-soft);border-radius:16px;padding:12px 16px;font-size:.88rem}
+.disc b{flex:none;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mustard);padding-top:2px}
+.disc span{color:var(--ink)}
+
+/* как пользоваться */
+.howto{display:flex;flex-direction:column;gap:12px}
+.hsteps{margin:0;padding:0;list-style:none;counter-reset:s;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,210px),1fr));gap:10px}
+.hsteps li{counter-increment:s;background:var(--paper);border:1.5px solid var(--line);border-radius:18px;padding:14px 16px 14px 52px;position:relative;font-size:.9rem;color:var(--muted)}
+.hsteps li::before{content:counter(s);position:absolute;left:14px;top:12px;width:28px;height:28px;border-radius:50%;border:2px solid var(--mustard);color:var(--mustard);display:grid;place-items:center;font-family:var(--display);font-size:1rem}
+.hsteps b{color:var(--ink);display:block;margin-bottom:2px}
+.howgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:10px}
+.note{background:var(--sage-soft);border-radius:18px;padding:14px 18px}
+.note h3{margin-bottom:6px}
+.note p{margin:0 0 6px;font-size:.9rem}
+
+/* настройки и итоги */
+.setup{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,170px),1fr));gap:12px;align-items:end}
+.setup label{display:flex;flex-direction:column;gap:4px;font-size:.8rem;font-weight:700;color:var(--muted)}
+.setup select,.setup input{width:100%}
+.sum{display:flex;flex-direction:column;gap:10px}
+.sum-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,170px),1fr));gap:10px}
+.sum-row > div{background:var(--bg);border-radius:16px;padding:12px 16px;display:flex;flex-direction:column}
+.sum b{font-family:var(--display);font-size:2rem;font-weight:400;font-variant-numeric:tabular-nums;line-height:1.1}
+.sum span{font-size:.8rem;color:var(--muted)}
+.sum .good b{color:#2F7F3B} .sum .bad b{color:#B5322A}
+.split{display:flex;height:16px;border-radius:8px;overflow:hidden;background:var(--bg)}
+.split i{display:block;height:100%}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:.8rem;color:var(--muted)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:11px;height:11px;border-radius:50%}
+
+/* сферы и строки */
+.cats{display:flex;flex-direction:column;gap:14px}
+.cat{background:var(--paper);border:1.5px solid var(--line);border-left:8px solid var(--c);border-radius:20px;padding:14px 16px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.cat-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 14px;justify-content:space-between}
+.cat-head h3{display:flex;align-items:center;gap:10px}
+.cat-head h3 i{width:14px;height:14px;border-radius:50%;background:var(--c)}
+.cat-tot{font-size:.86rem;color:var(--muted);font-variant-numeric:tabular-nums}
+.cat-tot b{color:var(--ink)}
+.rows{display:flex;flex-direction:column;gap:6px}
+.rh,.r{display:grid;grid-template-columns:minmax(150px,2.1fr) 104px minmax(118px,1fr) minmax(108px,.9fr) minmax(120px,1fr) 84px minmax(110px,1.2fr) 34px;gap:6px;align-items:center}
+.rh{font-size:.68rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);padding:0 2px}
+.rh .num,.r .pm{text-align:right}
+.r select,.r input{padding:6px 8px;border-radius:10px;font-size:.86rem;width:100%}
+.r input.amt{text-align:right;font-variant-numeric:tabular-nums}
+.r .item{display:flex;flex-direction:column;gap:4px;min-width:0}
+.r .pm{font-variant-numeric:tabular-nums;font-weight:700;font-size:.9rem}
+.r .pm small{display:block;font-weight:500;color:var(--muted);font-size:.72rem}
+.r.cut .pm{color:var(--muted)}
+.del{font:inherit;width:30px;height:30px;border-radius:50%;border:1.5px solid var(--line);background:transparent;color:var(--muted);cursor:pointer}
+.addrow{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.addrow select{width:min(100%,380px)}
+@media (max-width:900px){
+  .rh{display:none}
+  .r{grid-template-columns:1fr 1fr;background:var(--bg);border-radius:14px;padding:8px}
+  .r .del{align-self:center}
+  .r .item{grid-column:1 / -1}
+  .r .cm{grid-column:1 / -1;order:9}
+  .r .pm{text-align:left;order:10}
+  .r .del{order:11;justify-self:end}
+}
+
+/* год счетов */
+.months{display:flex;flex-direction:column;gap:6px}
+.mo{display:grid;grid-template-columns:76px minmax(0,1fr) 78px;gap:10px;align-items:center}
+.mo span{font-size:.84rem;font-weight:700}
+.mo .track{height:22px;border-radius:11px;background:var(--bg);overflow:hidden}
+.mo .stack{height:100%;display:flex;border-radius:11px;overflow:hidden;min-width:3px}
+.mo .stack i{display:block;height:100%}
+.mo b{font-size:.86rem;font-variant-numeric:tabular-nums;font-weight:700;text-align:right;white-space:nowrap}
+.mo.peak b,.mo.peak span{color:#B5322A}
+.big{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.big li{display:flex;gap:10px;align-items:flex-start;font-size:.88rem}
+.big li::before{content:"";flex:none;width:14px;height:14px;margin-top:4px;background:var(--mustard);border-radius:0 70% 0 70%;transform:rotate(-8deg)}
+
+/* инфографика */
+.viz{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,330px),1fr));gap:14px}
+.vcard{background:var(--paper);border:1.5px solid var(--line);border-radius:22px;padding:18px 20px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.vcard p{margin:0;font-size:.88rem;color:var(--muted)}
+.wfbox{display:grid;grid-template-columns:minmax(0,280px) minmax(0,1fr);gap:28px;align-items:center}
+@media (max-width:900px){.wfbox{grid-template-columns:1fr}.waffle{max-width:300px;justify-self:center}}
+.waffle{display:grid;grid-template-columns:repeat(10,1fr);gap:4px;width:100%}
+.waffle i{aspect-ratio:1;border-radius:5px;background:var(--soft)}
+.wlegend{display:grid;grid-template-columns:1fr;gap:3px 14px;font-size:.8rem}
+.vcard.wide{grid-column:1 / -1}
+.wlegend.many{display:block;column-count:3;column-gap:28px}
+.wlegend.many span{margin-bottom:4px}
+@media (max-width:900px){.wlegend.many{column-count:2}}
+@media (max-width:560px){.wlegend.many{column-count:1}}
+.wlegend span{display:grid;grid-template-columns:12px minmax(0,1fr) 26px;gap:8px;align-items:center;height:26px;break-inside:avoid}
+.wlegend em{font-style:normal;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.wlegend b{text-align:right}
+.wlegend i{width:12px;height:12px;border-radius:3px}
+.wlegend b{font-variant-numeric:tabular-nums}
+.rule{display:flex;flex-direction:column;gap:12px}
+.rl{display:flex;flex-direction:column;gap:5px}
+.rl .top{display:flex;justify-content:space-between;gap:8px;font-size:.86rem;font-weight:700}
+.rl .top em{font-style:normal;font-weight:600;color:var(--muted)}
+.rl .tr{position:relative;height:16px;border-radius:8px;background:var(--soft)}
+.rl .tr i{position:absolute;left:0;top:0;bottom:0;border-radius:8px}
+.rl .tr u{position:absolute;top:-4px;bottom:-4px;width:3px;border-radius:2px;background:var(--ink);opacity:.55}
+.rl small{font-size:.78rem;color:var(--muted)}
+.cush{display:grid;grid-template-columns:repeat(6,1fr);gap:5px}
+.cush i{height:34px;border-radius:8px;background:var(--soft);position:relative;overflow:hidden}
+.cush i b{position:absolute;inset:0 auto 0 0;background:#4E9A70}
+.cush-l{display:grid;grid-template-columns:repeat(6,1fr);gap:5px;font-size:.72rem;color:var(--muted);text-align:center}
+.cush-in{display:flex;gap:8px;align-items:center;flex-wrap:wrap;font-size:.86rem;font-weight:600}
+.cush-in input{width:130px}
+.big-n{font-family:var(--display);font-size:2.2rem;line-height:1}
+.pillrows{display:flex;flex-direction:column;gap:14px}
+.pr{display:grid;grid-template-columns:34px minmax(0,1fr) auto;gap:4px 12px;align-items:center}
+.pr .no{grid-row:1 / span 2;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;color:#fff;font-family:var(--display);font-size:1.15rem}
+.pr .nm{font-weight:700;font-size:.9rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pr .nm small{display:block;font-weight:500;font-size:.76rem;color:var(--muted)}
+.pr .am{font-family:var(--display);font-size:1.35rem;line-height:1;text-align:right;white-space:nowrap}
+.pr .tr{grid-column:2 / -1;height:10px;border-radius:5px;background:var(--soft);overflow:hidden}
+.pr .tr i{display:block;height:100%;border-radius:5px}
+.pr.zero .am{color:var(--muted)}
+
+/* месяцы карточками */
+.mgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+@media (max-width:900px){.mgrid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:560px){.mgrid{grid-template-columns:1fr}.mc li{font-size:.8rem}}
+.mc{background:var(--bg);border:1.5px solid transparent;border-radius:18px;padding:12px 14px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.mc.peak{border-color:#C25468;background:color-mix(in srgb,#C25468 6%,var(--paper))}
+.mc .mh{display:flex;justify-content:space-between;align-items:baseline;gap:6px}
+.mc .mh span{font-weight:800;font-size:.86rem;text-transform:capitalize}
+.mc .mh b{font-family:var(--display);font-weight:400;font-size:1.55rem;line-height:1;font-variant-numeric:tabular-nums}
+.mc.peak .mh b,.mc.peak .mh span{color:#B5322A}
+.mc .mbar{height:10px;border-radius:5px;background:var(--soft);display:flex;overflow:hidden}
+.mc .mbar i{display:block;height:100%}
+.mc ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:3px}
+.mc li{display:grid;grid-template-columns:8px minmax(0,1fr) auto;gap:6px;align-items:center;font-size:.76rem}
+.mc li i{width:8px;height:8px;border-radius:50%}
+.mc li em{font-style:normal;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.mc li b{font-variant-numeric:tabular-nums}
+.mc .calm{font-size:.76rem;color:var(--muted)}
+.mkey{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:.78rem;color:var(--muted)}
+.mkey span{display:inline-flex;align-items:center;gap:6px}
+.mkey i{width:16px;height:8px;border-radius:4px;display:inline-block}
+.mkey .kb{background:#B1A998} .mkey .kx{background:linear-gradient(90deg,#3F6FBF,#C97E52,#2894A0)} .mkey .kp{background:transparent;border:1.5px solid #C25468;height:10px}
+
+/* доходы и расходы по месяцам: кольца */
+.rings{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px}
+@media (max-width:900px){.rings{grid-template-columns:repeat(4,minmax(0,1fr))}}
+@media (max-width:560px){.rings{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}}
+.rg{background:var(--bg);border-radius:20px;padding:12px 8px 12px;display:flex;flex-direction:column;align-items:center;gap:6px;min-width:0}
+.rg.neg{background:#FBEDEF}
+.rg .trk{stroke:var(--soft)} .rg .sub{fill:var(--muted)}
+.rg svg{width:100%;max-width:118px;height:auto;display:block}
+.rg .mn{font-weight:800;font-size:.84rem;text-transform:capitalize}
+.rg.neg .mn{color:#B5322A}
+.rg .tx{font-size:.7rem;color:#3A598D;font-weight:700;font-variant-numeric:tabular-nums;min-height:1em}
+.taxline{display:flex;flex-wrap:wrap;gap:8px 18px;align-items:baseline;background:#E6ECF5;border-radius:14px;padding:10px 14px}
+.taxline b{font-family:var(--display);font-weight:400;font-size:1.6rem;color:#3A598D;line-height:1}
+.taxline span{font-size:.84rem;color:var(--muted)}
+.bkey{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:.78rem;color:var(--muted)}
+.bkey span{display:inline-flex;align-items:center;gap:6px}
+.bkey i{width:16px;height:12px;border-radius:4px;display:inline-block}
+.bkey .ki{background:#4E9A70}
+.bkey .ke{background:#B1A998}
+.bkey .kt{background:#3A598D}
+.bkey .ko{background:#C25468}
+@media (max-width:640px){.chart{padding-left:0}.chart .grid{left:0}.chart .grid span{display:none}.bal{gap:3px;height:220px}.bal .bm .inc{left:0;right:0;border-radius:8px 8px 2px 2px}.bal .bm .exp,.bal .bm .ovr,.bal .bm .tax{left:18%;right:18%}.bal .bm .tax em{display:none}.bal .bm b{font-size:.5rem;padding:1px 3px}.bal .bm b .full{display:none}.bal .bm b .short{display:inline}.bal .bm span.mn{font-size:.58rem}}
+
+/* калькулятор налогов */
+.txout{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));gap:10px}
+.txg{background:var(--bg);border-radius:16px;padding:12px 16px;display:flex;flex-direction:column;gap:4px}
+.txg h4{margin:0 0 4px;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.txg div{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:10px;font-size:.86rem;align-items:baseline}
+.txg div span{color:var(--muted);font-size:.78rem;text-align:right;font-variant-numeric:tabular-nums}
+.txg div b{font-variant-numeric:tabular-nums;text-align:right;min-width:62px}
+.txg .tot{border-top:1.5px solid var(--line);padding-top:6px;margin-top:4px}
+.txg .tot b{color:#3A598D;font-size:1rem}
+.txbig{background:#E6ECF5;border-radius:16px;padding:12px 16px;display:flex;flex-direction:column;gap:4px}
+.txbig b{font-family:var(--display);font-weight:400;font-size:2rem;color:#3A598D;line-height:1}
+.txbig span{font-size:.84rem;color:var(--muted)}
+
+/* сколько откладывать на налоги */
+.txsave{background:var(--bg);border-radius:18px;padding:14px 16px;display:flex;flex-direction:column;gap:10px}
+.txsave h3{margin:0}
+.svgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,210px),1fr));gap:10px}
+.sv{background:var(--paper);border-radius:14px;padding:12px 14px;display:flex;flex-direction:column;gap:4px}
+.sv b{font-family:var(--display);font-weight:400;font-size:1.9rem;line-height:1;color:#3A598D}
+.sv.main{background:#3A598D}.sv.main b,.sv.main span{color:#fff}
+.sv span{font-size:.8rem;color:var(--muted)}
+.svplan{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:4px;font-size:.86rem}
+.svplan li{display:grid;grid-template-columns:14px 1fr auto;gap:8px;align-items:baseline}
+.svplan li::before{content:"";width:10px;height:10px;border-radius:3px;background:#3A598D;transform:translateY(1px)}
+.svplan li b{font-variant-numeric:tabular-nums}
+
+/* двое взрослых */
+body:not(.duo) .duoOnly{display:none!important}
+body:not(.duo) .r .who,body:not(.duo) .rh .whoh{display:none}
+.duo .rh,.duo .r{grid-template-columns:minmax(140px,2fr) 92px minmax(108px,1fr) minmax(96px,.85fr) minmax(108px,1fr) minmax(96px,.85fr) 80px minmax(96px,1fr) 34px}
+@media (max-width:900px){.duo .rh,.duo .r{grid-template-columns:1fr 1fr}.duo .r .cm{grid-column:auto}}
+.duo-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:10px}
+.dp{background:var(--bg);border-radius:16px;padding:14px 16px;display:flex;flex-direction:column;gap:6px}
+.dp h3{margin:0 0 2px}
+.dp div{display:flex;justify-content:space-between;gap:10px;font-size:.86rem}
+.dp div span{color:var(--muted)}
+.dp div b{font-variant-numeric:tabular-nums}
+.dp .big{border-top:1.5px solid var(--line);padding-top:8px;margin-top:2px}
+.dp .big b{font-family:var(--display);font-weight:400;font-size:1.5rem}
+.dp .mut span,.dp .mut b{color:var(--faint,#9A8F82);font-weight:500;font-size:.8rem}
+.dp .tr{background:var(--paper);border-radius:12px;padding:8px 10px;font-size:.84rem}
+.dp .tr b{font-family:var(--display);font-weight:400;font-size:1.2rem;color:#3A598D}
+.txp{font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:700;margin:6px 0 -4px}
+
+/* часто забывают */
+.forgot{display:flex;flex-wrap:wrap;gap:8px}
+.fg{font:inherit;font-size:.84rem;font-weight:600;border-radius:999px;padding:6px 12px 6px 10px;border:1.5px dashed var(--mustard);background:transparent;color:var(--ink);cursor:pointer;display:inline-flex;gap:6px;align-items:center}
+.fg.on{border-style:solid;border-color:var(--sage);background:var(--sage-soft);cursor:default}
+.fg em{font-style:normal;font-weight:800;color:var(--mustard)}
+.fg.on em{color:var(--sage)}
+
+/* советы */
+.tech{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,340px),1fr));gap:14px}
+.tq{background:var(--paper);border:1.5px solid var(--line);border-radius:20px;padding:16px 18px;display:flex;flex-direction:column;gap:6px}
+.tq .k{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;color:#fff;font-weight:800;font-size:.9rem}
+.tq p{margin:0;font-size:.92rem;color:var(--muted)}
+.guide{display:flex;flex-direction:column;gap:22px}
+.cta{display:flex;flex-wrap:wrap;gap:12px 20px;align-items:center;justify-content:space-between;background:var(--mustard-soft);border-radius:22px;padding:18px 22px}
+.cta p{margin:0;max-width:60ch;font-family:var(--display);font-size:1.2rem;line-height:1.35}
+.src{font-size:.8rem;color:var(--muted);margin:0}
+.src a{color:var(--brown)}
+.credit{font-size:.84rem;color:var(--muted);display:flex;flex-wrap:wrap;gap:4px 14px}
+.credit a{color:var(--brown)}
+
+/* телефон: всё в одну аккуратную колонку */
+.fg{text-align:left}
+@media (max-width:640px){
+  .bar>label{flex-direction:column;align-items:stretch;width:100%;gap:6px}
+  .bar>label select{width:100%}
+  .bar .spacer{display:none}
+  .bar>.btn{flex:1 1 calc(50% - 5px);justify-content:center;padding:11px 10px}
+  .bar>#shareBtn{flex-basis:100%}
+  #clearBox{display:flex;gap:10px;width:100%;flex-wrap:wrap}
+  #clearBox>.btn{flex:1 1 calc(50% - 5px);justify-content:center;padding:10px 8px}
+  #clearBox .confirm{display:flex;flex-wrap:wrap;gap:8px;align-items:center;width:100%}
+  .panel-head{flex-direction:column;align-items:flex-start;gap:4px}
+  .panel-head p{text-align:left}
+  .disc{flex-direction:column;gap:4px}
+  .txg div{grid-template-columns:minmax(0,1fr) auto;row-gap:0}
+  .txg div span{grid-column:1;grid-row:2;text-align:left;font-size:.74rem}
+  .txg div b{grid-column:2;grid-row:1 / span 2;align-self:center}
+  .svplan{gap:8px}
+  .svplan li{grid-template-columns:14px 1fr;row-gap:2px}
+  .svplan li b{grid-column:2}
+  .fg{border-radius:14px;align-items:flex-start}
+  .setup{grid-template-columns:1fr 1fr;gap:10px}
+  .setup label:has(#canton){grid-column:span 1}
+  .setup label:has(#bmode),.setup label:has(#brule){grid-column:1 / -1}
+  #taxCalc .setup{grid-template-columns:1fr}
+  h1,h2{line-height:1.15}
+  .dp div b{white-space:nowrap}
+  .sum-row{grid-template-columns:1fr 1fr;gap:8px}
+  .sum-row > div{padding:10px 12px}
+  .sum b{font-size:1.6rem}
+  .sum span{font-size:.74rem;line-height:1.3}
+  .sum-row > div:last-child:nth-child(odd){grid-column:1 / -1}
+  .rl .top{flex-direction:column;gap:0}
+  .fg em{line-height:1.35}
+}
+</style>
+<!--i18n--><link rel="alternate" hreflang="ru" href="https://svoiludi.ch/instrumenty/moj-budget/"><link rel="alternate" hreflang="uk" href="https://svoiludi.ch/uk/instrumenty/moj-budget/"><!--i18n--></head>
+<body>
+
+<div class="wrap">
+  <header>
+    <p style="margin:0 0 14px"><a class="jump" href="https://svoiludi.ch/uk/instrumenty/">← Усі корисні інструменти · Свої люди у Швейцарії</a></p>
+    <div class="eyebrow">Обов’язкові витрати у Швейцарії · гроші під контролем</div>
+    <h1>Мій бюджет</h1>
+    <p class="lead">Усі обов’язкові витрати на одному аркуші, і жодних сюрпризів. Житло в оренду або власне, комунальні послуги, усі поширені страховки, здоров’я, абонементи, машина, зв’язок, податки, діти, кредити й власна справа, загалом понад двісті статей. Впиши й свої доходи, разом із допомогою на дітей і соціальними виплатами, і одразу видно, скільки залишається. Обирай статті зі списків, вписуй свої суми й дивись, скільки йде на місяць і на рік і в які місяці приходять великі рахунки. Потім завантаж бюджет в Excel або гарним звітом у PDF.</p>
+    <p style="margin:10px 0 0"><a class="jump" href="/uk/instrumenty/moj-budget/#guide">Як навести лад у грошах ↓</a></p>
+  </header>
+
+  <div class="disc" role="note"><b>Важливо</b><span>Це орієнтир, а не точний розрахунок. Суми, податки й внески тут приблизні й залежать від кантону, громади, твоїх відрахувань і договорів. Усі цифри уточнюй за своїми рахунками й договорами, у податковій службі, у касі AHV або в податкового консультанта. Інструмент не замінює фінансової та податкової консультації. Автор не несе відповідальності за достовірність даних. Усі суми, ставки й відсотки обов’язково перевір і впиши сама чи сам за своїми документами.</span></div>
+
+  <section class="howto" aria-labelledby="ht-h">
+    <h2 id="ht-h">Як користуватися</h2>
+    <ol class="hsteps">
+      <li><b>Почни з налаштувань і доходів.</b> Обери рік, кантон і скільки вас у родині. Потім впиши доходи, зарплату, дитячу допомогу й соціальні виплати. Якщо якусь виплату платять одразу за тебе, відзнач «за мене напряму».</li>
+      <li><b>Заповни витрати.</b> У кожній сфері обери статтю зі списку, впиши суму одного платежу і як часто ти платиш. Пенсійні внески, які відраховують із зарплати, відзнач «відраховано із зарплати». Якщо потрібної статті немає, обери «Своя стаття».</li>
+      <li><b>Відзнач місяць оплати.</b> Для платежів раз на рік або на квартал вкажи місяць. Так ти заздалегідь побачиш місяці, коли приходять великі рахунки.</li>
+      <li><b>Перевір, що нічого не забуто.</b> Унизу є список того, що нові мешканці Швейцарії часто пропускають. Натисни на пункт, і він з’явиться в бюджеті.</li>
+      <li><b>Збережи собі.</b> Завантаж таблицю Excel, у ній уже є формули й випадні списки, або звіт у PDF, щоб обговорити його вдома.</li>
+    </ol>
+    <div class="howgrid">
+      <div class="note"><h3>Твої дані тільки в тебе</h3><p>Усе, що ти вписуєш, зберігається лише у твоєму браузері на цьому пристрої. Ніхто, крім тебе, цих цифр не бачить, реєстрація не потрібна. Кнопка «Видалити історію» стирає все повністю.</p></div>
+      <div class="note"><h3>Суми в прикладі орієнтовні</h3><p>Приблизні суми взято з відкритих даних на 2026 і 2027 роки. Твої страховки, оренда й податки можуть відрізнятися, тому заміни їх цифрами зі своїх договорів і рахунків.</p></div>
+    </div>
+  </section>
+
+  <section class="panel" aria-labelledby="set-h">
+    <div class="panel-head"><h2 id="set-h">Мої налаштування</h2><p id="exampleNote"><span class="example">Приклад</span> Заміни суми на свої.</p></div>
+    <div class="setup">
+      <label>Рік<select id="year"></select></label>
+      <label>Кантон<select id="canton"></select></label>
+      <label>Дорослих<select id="adults"></select></label>
+      <label>Дітей<select id="kids"></select></label>
+      <label class="duoOnly">Перший дорослий<input type="text" id="name1" placeholder="ім’я, наприклад Персона 1" maxlength="20"></label>
+      <label class="duoOnly">Другий дорослий<input type="text" id="name2" placeholder="ім’я, наприклад Персона 2" maxlength="20"></label>
+      <label class="duoOnly">Як ви ведете бюджет<select id="bmode"><option value="joint">спільний</option><option value="split">роздільний</option></select></label>
+      <label class="duoOnly">Спільні витрати ділимо<select id="brule"><option value="income">пропорційно доходам</option><option value="half">порівну</option></select></label>
+    </div>
+    <p class="hint duoOnly">У кожному рядку можна обрати, хто платить: спільне, перший чи другий дорослий. Так видно, скільки кожен витрачає на себе і скільки вносить у спільні витрати.</p>
+  </section>
+
+  <div class="bar">
+    <label for="fill">Почати <select id="fill">
+      <option value="">обери варіант</option>
+      <option value="ex">Заповнити прикладом для моєї родини</option>
+      <option value="min">Лише найнеобхідніше</option>
+    </select></label>
+    <span class="spacer"></span>
+    <button class="btn gold" id="dlXlsx" type="button">Завантажити Excel</button>
+    <button class="btn" id="dlPdf" type="button">Завантажити звіт PDF</button>
+    <button class="btn free" id="shareBtn" type="button" aria-expanded="false" aria-controls="sharePanel">Поділитися з друзями</button>
+    <span id="clearBox"></span>
+  </div>
+  <div class="status" id="status" role="status"></div>
+  <div class="panel share" id="sharePanel" hidden>
+    <label for="shareText" style="font-weight:700">Повідомлення для друзів</label>
+    <textarea id="shareText"></textarea>
+    <div class="row">
+      <button class="btn gold sm" id="copyMsg" type="button">Скопіювати повідомлення</button>
+      <a class="btn sm" id="tgShare" href="/uk/instrumenty/moj-budget/#" target="_blank" rel="noopener">Надіслати в Telegram</a>
+      <a class="btn sm" id="waShare" href="/uk/instrumenty/moj-budget/#" target="_blank" rel="noopener">Надіслати в WhatsApp</a>
+    </div>
+  </div>
+
+  <section class="panel" aria-labelledby="tot-h">
+    <div class="panel-head"><h2 id="tot-h">Разом</h2><p id="totNote"></p></div>
+    <div class="sum" id="sum"></div>
+    <div class="split" id="split"></div>
+    <div class="legend" id="legend"></div>
+  </section>
+
+  <section class="panel duoOnly" id="duoBox" aria-labelledby="duo-h">
+    <div class="panel-head"><h2 id="duo-h">Хто скільки платить</h2><p id="duoLead"></p></div>
+    <div class="duo-grid" id="duoGrid"></div>
+  </section>
+
+  <section class="cat" style="--c:#4E9A70" id="incBox" aria-labelledby="inc-h">
+    <div class="cat-head"><h3 id="inc-h"><i></i>Мої доходи</h3><span class="cat-tot" id="incTot"></span></div>
+    <p class="hint">Впиши всі гроші, які надходять у родину. Зарплату зручніше вписувати нетто, як вона приходить на рахунок. Допомогу, яку платять не тобі, а одразу за тебе, у колонці «Як надходить» відзнач «за мене напряму». Наприклад, знижку на медстраховку, яку кантон перераховує прямо в касу, або субсидію, яку отримує дитячий садок. Тоді витрата в бюджеті залишається повною, а виплата видна як твій дохід.</p>
+    <div class="rows" id="incRows"></div>
+    <div class="addrow"><label class="sr" for="add-inc">Додати дохід</label><select id="add-inc"></select></div>
+  </section>
+
+  <section class="panel" id="taxCalc" aria-labelledby="tc-h">
+    <div class="panel-head"><h2 id="tc-h">Скільки податків і внесків приблизно</h2><p>Розрахунок за тарифами <span id="tcYear">2026</span> року (рік обирається в налаштуваннях), для роботи за наймом і для самозайнятих.</p></div>
+    <div class="setup">
+      <p class="txp duoOnly" style="grid-column:1 / -1" id="txP1">Особа 1</p>
+      <label>Як ти заробляєш<select id="txType"><option value="emp">робота за наймом</option><option value="self">самозайнятість</option><option value="both">і те, і інше</option></select></label>
+      <label id="lEmp">Зарплата брутто за рік, CHF<input type="text" inputmode="decimal" id="txEmp" placeholder="наприклад, 90000"></label>
+      <label id="lSelf">Прибуток власної справи за рік, CHF<input type="text" inputmode="decimal" id="txSelf" placeholder="дохід мінус витрати справи"></label>
+      <label id="lAge">Вік (для пенсійної каси)<select id="txAge"><option value="0">до 25 років</option><option value="1">25–34</option><option value="2">35–44</option><option value="3">45–54</option><option value="4">55–65</option></select></label>
+      <label>Внесок у 3a за рік, CHF<input type="text" inputmode="decimal" id="tx3a" placeholder="наприклад, 7258"></label>
+      <p class="txp duoOnly" style="grid-column:1 / -1" id="txP2">Особа 2</p>
+      <label class="duoOnly">Як заробляє<select id="txType2"><option value="emp">робота за наймом</option><option value="self">самозайнятість</option><option value="both">і те, і інше</option><option value="none">немає доходу</option></select></label>
+      <label class="duoOnly" id="lEmp2">Зарплата брутто за рік, CHF<input type="text" inputmode="decimal" id="txEmp2" placeholder="наприклад, 56000"></label>
+      <label class="duoOnly" id="lSelf2">Прибуток власної справи за рік, CHF<input type="text" inputmode="decimal" id="txSelf2" placeholder="дохід мінус витрати справи"></label>
+      <label class="duoOnly" id="lAge2">Вік (для пенсійної каси)<select id="txAge2"><option value="0">до 25 років</option><option value="1">25–34</option><option value="2">35–44</option><option value="3">45–54</option><option value="4">55–65</option></select></label>
+      <label class="duoOnly">Внесок у 3a за рік, CHF<input type="text" inputmode="decimal" id="tx3a2" placeholder="наприклад, 7258"></label>
+      <p class="txp duoOnly" style="grid-column:1 / -1">Для обох</p>
+      <label>Сімейний стан<select id="txMar"><option value="single">одна або один</option><option value="married">у шлюбі</option></select></label>
+      <label>Громада (кантон Цюрих)<select id="txCommune"></select></label>
+      <label id="lFuss">Steuerfuss своєї громади, %<input type="text" inputmode="decimal" id="txFuss" placeholder="наприклад, 105"></label>
+      <label>Церковний податок<select id="txChurch"><option value="0">не член церкви</option><option value="10">член церкви, близько 10%</option><option value="13">член церкви, близько 13%</option><option value="17">член церкви, близько 17%</option></select></label>
+    </div>
+    <p class="hint">Розрахунок приблизний. Пенсійну касу пораховано за законним мінімумом BVG, у багатьох кас внески вищі. Внесок NBU в кожної страхової свій, зазвичай близько 1%. Точні суми видно в розрахунковому листку. Розрахунок не знає твоїх особистих відрахувань, наприклад дороги на роботу, догляду за дітьми чи відсотків за боргами. Точну суму покаже податковий рахунок або калькулятор податкової служби кантону.</p>
+    <div class="txout" id="txOut"></div>
+    <p class="hint">Ставки громад узято з відкритих джерел на 2026 рік, ставки на 2027 рік громади затверджують у грудні. Розрахунок зроблено лише за тарифом кантону Цюрих. Для інших кантонів він буде неточним.</p>
+    <div class="txsave">
+      <h3 id="txSaveH">Скільки насправді відкладати на податки</h3>
+      <div class="setup">
+        <label>Як сплачуєш податки<select id="txPay">
+          <option value="one">одним рахунком у строк</option>
+          <option value="m">частинами щомісяця</option>
+          <option value="q">частинами раз на квартал</option>
+          <option value="h">частинами двічі на рік</option>
+        </select></label>
+      </div>
+      <p class="hint">Податки не обов’язково сплачувати одним платежем. Попередній рахунок кантону, громади та церкви можна оплачувати частинами протягом року, бланки або QR-рахунки для цього дає податкова служба громади, у багатьох громадах можна підключити eBill. Федеральний податок теж можна сплачувати частинами заздалегідь. Якщо сплатити в строк важко, напиши до податкової служби своєї громади (Steueramt) і попроси розстрочку (Ratenzahlung). Разом із ними можна скласти свій план платежів, зазвичай на прострочену суму нараховуються відсотки. Свій план потім можна вписати в рядки податків у бюджеті.</p>
+      <div class="setup" id="txSaveSetup">
+        <label>Уже відкладено на податки, CHF<input type="text" inputmode="decimal" id="txSaved" placeholder="0"></label>
+        <label>Починаю відкладати з<select id="txStart"></select></label>
+      </div>
+      <div id="txSaveOut"></div>
+    </div>
+    <div class="bar"><button class="btn gold" id="txApply" type="button">Перенести в мій бюджет</button><span class="hint" id="txNote"></span></div>
+    <div class="disc" role="note"><b>Перевір</b><span>Це приблизний розрахунок. Обов’язково уточни й перевір усі суми за своїм податковим рахунком, у податковій службі своєї громади або в податкового консультанта. Автор не несе відповідальності за достовірність даних. Усі суми, ставки й відсотки обов’язково перевір і впиши сама або сам за своїми документами.</span></div>
+  </section>
+
+  <div class="eyebrow" style="margin-top:6px">Мої витрати</div>
+  <div class="cats" id="cats"></div>
+
+  <section class="panel" aria-labelledby="mo-h">
+    <div class="panel-head"><h2 id="mo-h">Коли йдуть гроші</h2><p id="moLead"></p></div>
+    <div class="mkey"><span><i class="kb"></i>постійні витрати щомісяця</span><span><i class="kx"></i>рахунки цього місяця, раз на квартал, пів року або рік</span><span><i class="kp"></i>важкий місяць</span></div>
+    <div class="mgrid" id="months"></div>
+  </section>
+
+  <section class="panel" aria-labelledby="bal-h" id="balBox">
+    <div class="panel-head"><h2 id="bal-h">Доходи й витрати кожного місяця</h2><p>Кожне кільце — це дохід місяця. У центрі те, що залишається.</p></div>
+    <div class="bkey"><span><i class="kt"></i>податки</span><span><i class="ke"></i>інші витрати</span><span><i class="ki"></i>залишається тобі</span><span><i class="ko"></i>не вистачає</span></div>
+    <div class="taxline" id="taxLine"></div>
+    <div class="rings" id="bal"></div>
+    <p class="hint" id="balText"></p>
+  </section>
+
+  <section aria-labelledby="viz-h" style="display:flex;flex-direction:column;gap:14px">
+    <div><div class="eyebrow">Мої гроші в картинках</div><h2 id="viz-h" style="margin-top:4px">Куди йдуть твої гроші і що тебе захищає</h2></div>
+    <div class="viz">
+      <article class="vcard wide"><h3 id="wfTitle">З кожних 100 франків</h3><div class="wfbox"><div class="waffle" id="waffle" aria-hidden="true"></div><div class="wlegend" id="wfLegend"></div></div></article>
+      <article class="vcard"><h3>Правило 50, 30, 20</h3><p>Орієнтир для спокійного бюджету. До половини доходу на обов’язкове, до третини на важливе й бажання, від п’ятої частини на заощадження й майбутнє.</p><div class="rule" id="rule"></div></article>
+      <article class="vcard"><h3>Подушка безпеки</h3><p>Запас на три обов’язкові місяці дає свободу й спокій. Шість місяців — це вже справжня опора.</p>
+        <label class="cush-in">Уже відкладено, CHF <input type="text" inputmode="decimal" id="savings" placeholder="наприклад, 5000"></label>
+        <div class="cush" id="cush"></div><div class="cush-l"><span>1 міс</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6 міс</span></div>
+        <p id="cushText"></p></article>
+      <article class="vcard"><h3>Три опори твоєї пенсії</h3><p>У Швейцарії пенсія стоїть на трьох опорах. Тут видно, скільки на місяць ти вкладаєш у кожну.</p><div class="pillrows" id="pillars"></div><p id="pillText"></p></article>
+    </div>
+  </section>
+
+  <section class="panel" aria-labelledby="fg-h">
+    <div class="panel-head"><h2 id="fg-h">Нічого не забуто?</h2><p>Те, що нові мешканці Швейцарії часто пропускають. Натисни, щоб додати.</p></div>
+    <div class="forgot" id="forgot"></div>
+  </section>
+
+  <section class="guide" id="guide" aria-labelledby="g-h">
+    <div>
+      <div class="eyebrow">Як навести лад у грошах</div>
+      <h2 id="g-h" style="font-size:clamp(1.7rem,3.6vw,2.3rem)">Фінансова грамотність для життя в новій країні</h2>
+    </div>
+    <p class="lead" style="color:var(--ink)">У Швейцарії багато витрат приходять не щомісяця, а раз на рік або на квартал. Податки, Serafe, страхування житла, франшиза, абонемент. Якщо не бачити їх заздалегідь, один місяць раптом з’їдає всі заощадження. Коли весь рік перед очима, гроші перестають лякати.</p>
+    <div class="tech" id="tech"></div>
+    <div>
+      <div class="eyebrow">Що це дає в коучингу</div>
+      <h2 style="margin-top:4px">Гроші перестають шуміти в голові</h2>
+    </div>
+    <p class="lead" style="color:var(--ink)">Поки витрати живуть у голові, вони перетворюються на фонову тривогу. Чи вистачить, що я забула, що прийде наступним. Коли вони лежать на аркуші, у уваги з’являється опора. Ти бачиш, що вже під контролем, де є запас і де можна вибрати інакше. Сили, що звільнилися, йдуть на те, заради чого ти сюди приїхала, на мову, роботу, свою справу і на себе.</p>
+    <div class="cta">
+      <p>Хочеш розібрати свій бюджет разом зі мною? Напиши в Telegram слово ПОРЯДОК і «Мій бюджет».</p>
+      <a class="btn free" href="https://t.me/IrynaNeuroCoach" target="_blank" rel="noopener">Написати в Telegram</a>
+    </div>
+    <p class="src">Орієнтири для прикладу: середні премії медичного страхування 2026 і 2027 за даними <a href="https://www.bag.admin.ch/de/newnsb/BfuGvedj0OOX" target="_blank" rel="noopener">BAG</a>, збір Serafe 335 CHF у 2026 і 312 CHF з 2027 року, ціни GA і Halbtax з грудня 2026 за даними <a href="https://www.mobilityblog.ch/oev-preise-2027-ga-steigt/" target="_blank" rel="noopener">галузі громадського транспорту</a>. Це не фінансова й не податкова консультація, а інструмент для твого власного планування. Усі суми уточнюй за своїми рахунками та в офіційних службах. Автор не несе відповідальності за достовірність даних. Усі суми, ставки й відсотки обов’язково перевір і впиши сама або сам за своїми документами.</p>
+  </section>
+
+  <div class="disc" role="note"><b>Важливо</b><span>Усі дані на цій сторінці орієнтовні. Уточнюй і перевіряй їх. Автор не несе відповідальності за достовірність даних. Усі суми, ставки й відсотки обов’язково перевір і впиши сама або сам за своїми документами.</span></div>
+
+  <p class="credit"><span>Ірина Вознесенська · коуч</span><a href="https://www.instagram.com/iryna.voznesenskaya/" target="_blank" rel="noopener">Instagram @iryna.voznesenskaya</a><a href="https://voznesenskaya.ch/uk/" target="_blank" rel="noopener">voznesenskaya.ch</a><a href="https://svoiludi.ch/uk/" target="_blank" rel="noopener">Свої люди у Швейцарії · svoiludi.ch</a></p>
+</div>
+
+<script src="/assets/lib/jspdf.umd.min.js"></script>
+<script src="/assets/lib/exceljs.min.js"></script>
+<script>
+const $ = id => document.getElementById(id);
+const esc = s => String(s).replace(/[&<>"]/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]));
+const KEY = 'mojBudget.v1';
+const CANTONS = {ZH:'Цюрих',BE:'Берн',LU:'Люцерн',UR:'Урі',SZ:'Швіц',OW:'Обвальден',NW:'Нідвальден',GL:'Гларус',ZG:'Цуг',FR:'Фрібур',SO:'Золотурн',BS:'Базель-Штадт',BL:'Базель-Ланд',SH:'Шаффгаузен',AR:'Аппенцелль-Ауссерроден',AI:'Аппенцелль-Іннерроден',SG:'Санкт-Галлен',GR:'Граубюнден',AG:'Ааргау',TG:'Тургау',TI:'Тічино',VD:'Во',VS:'Вале',NE:'Невшатель',GE:'Женева',JU:'Юра'};
+const MONTHS = ['січень','лютий','березень','квітень','травень','червень','липень','серпень','вересень','жовтень','листопад','грудень'];
+const MGEN = ['січня','лютого','березня','квітня','трав','червня','липня','серпня','вересня','жовтня','листопада','грудня'];
+const MPREP = ['січні','лютому','березні','квітні','травні','червні','липні','серпні','вересні','жовтні','листопаді','грудні'];
+const MSHORT = ['січ','лют','бер','квіт','травень','черв','лип','серп','вер','жовт','лист','груд'];
+const FREQ = [
+  {k:'m', n:'щомісяця', y:12},
+  {k:'w', n:'щотижня', y:52},
+  {k:'q', n:'раз на квартал', y:4},
+  {k:'h', n:'раз на пів року', y:2},
+  {k:'y', n:'раз на рік', y:1},
+  {k:'o', n:'одноразово цього року', y:1},
+];
+const FQ = Object.fromEntries(FREQ.map(f => [f.k, f]));
+const PRIO = [
+  {k:'must', n:'обов’язково', c:'#3A598D'},
+  {k:'imp',  n:'важливо', c:'#C97E52'},
+  {k:'cut',  n:'можна скоротити', c:'#8E8470'},
+  {k:'ded',  n:'утримано із зарплати', c:'#2894A0'},
+];
+const PQ = Object.fromEntries(PRIO.map(p => [p.k, p]));
+const SERAFE = y => y >= 2027 ? 312 : 335;
+
+/* Сферы и статьи. a — ориентир суммы одного платежа (CHF), f — как часто, m — месяц оплаты (0–11), p — важность */
+const CATS = [
+  {id:'home', n:'Орендоване житло', c:'#706758', items:[
+    ['rent','Оренда квартири або будинку (без дод. витрат)', 1900,'m',0,'must'],
+    ['nk','Додаткові витрати (Nebenkosten), аванс', 200,'m',0,'must'],
+    ['nkA','Доплата за річним розрахунком Nebenkosten', 300,'y',5,'must'],
+    ['park','Паркування або гараж біля будинку', 120,'m',0,'imp'],
+    ['store','Комора, бокс для зберігання', 60,'m',0,'cut'],
+    ['depo','Застава за квартиру (Mietkaution)', 5700,'o',0,'must'],
+    ['depoI','Страхування застави замість депозиту', 250,'y',0,'must'],
+    ['move','Чищення й ремонт при виїзді, резерв', 50,'m',0,'imp'],
+    ['moving','Переїзд, вантажники, прибирання квартири', 1500,'o',0,'imp'],
+    ['furn','Меблі й техніка', 500,'y',0,'cut'],
+    ['repairH','Дрібний ремонт і господарські дрібниці', 30,'m',0,'imp'],
+  ]},
+  {id:'own', n:'Власне житло', c:'#8E8470', items:[
+    ['mortI','Відсотки за іпотекою', 900,'q',2,'must'],
+    ['mortA','Амортизація іпотеки (обов’язкова або через 3a)', 500,'m',0,'must'],
+    ['bldI','Страхування будівлі (Gebäudeversicherung)', 400,'y',2,'must'],
+    ['bldH','Страхування відповідальності власника будівлі', 200,'y',0,'must'],
+    ['bldW','Страхування від протікань і стихії (Gebäudewasser)', 250,'y',0,'imp'],
+    ['stweg','Внески до спільного фонду будинку (STWEG, Erneuerungsfonds)', 300,'m',0,'must'],
+    ['hoa','Витрати на будинок і керуючого (Verwaltung, Hauswart)', 250,'m',0,'must'],
+    ['propTax','Податок на нерухомість (Liegenschaftssteuer)', 400,'y',5,'must'],
+    ['maint','Ремонт і оновлення будинку, резерв', 300,'m',0,'imp'],
+    ['heatS','Обслуговування опалення й бойлера', 300,'y',8,'must'],
+    ['chim','Сажотрус (Kaminfeger)', 150,'y',9,'must'],
+    ['garden','Сад і прибирання снігу', 50,'m',0,'cut'],
+  ]},
+  {id:'util', n:'Комунальні послуги', c:'#58B3BB', items:[
+    ['power','Електрика', 150,'q',2,'must'],
+    ['gas','Газ', 100,'m',0,'must'],
+    ['oil','Опалення, рідке паливо або пелети', 1800,'y',8,'must'],
+    ['heat','Опалення й гаряча вода за окремим рахунком', 600,'y',5,'must'],
+    ['water','Вода й каналізація', 400,'y',5,'must'],
+    ['waste','Базовий збір за сміття (Grundgebühr)', 100,'y',2,'must'],
+    ['bags','Платні мішки для сміття', 15,'m',0,'must'],
+    ['green','Вивезення зелених відходів', 80,'y',3,'imp'],
+  ]},
+  {id:'ins', n:'Страхування', c:'#3F6FBF', items:[
+    ['#','Медичні'],
+    ['kvgA','Медичне страхування базове (KVG), дорослий', 488,'m',0,'must'],
+    ['kvgY','Медичне страхування базове (KVG), 19–25 років', 339,'m',0,'must'],
+    ['kvgK','Медичне страхування базове (KVG), дитина', 128,'m',0,'must'],
+    ['vvg','Додаткове медичне страхування, амбулаторно (VVG)', 30,'m',0,'imp'],
+    ['vvgH','Лікарня, напівприватна або приватна палата', 80,'m',0,'imp'],
+    ['vvgD','Стоматологічне страхування', 30,'m',0,'imp'],
+    ['vvgA','Альтернативна медицина', 15,'m',0,'cut'],
+    ['acc','Страхування від нещасного випадку, якщо не працюєш', 0,'m',0,'must'],
+    ['rega','Rega, рятувальна авіація (Gönner), 40 CHF за дорослого, діти безкоштовно', 40,'y',0,'imp'],
+    ['air','Air Zermatt, Alpine Air Ambulance та інші', 30,'y',0,'cut'],
+    ['#','Дім і відповідальність'],
+    ['hr','Страхування домашнього майна (Hausrat)', 180,'y',0,'must'],
+    ['ph','Приватна відповідальність (Privathaftpflicht)', 120,'y',0,'must'],
+    ['hh','Hausrat і Privathaftpflicht одним полісом', 300,'y',0,'must'],
+    ['glass','Страхування від розбитого скла (Glasbruch)', 50,'y',0,'cut'],
+    ['theft','Крадіжка поза домом (einfacher Diebstahl auswärts)', 40,'y',0,'cut'],
+    ['valu','Прикраси й цінні речі', 100,'y',0,'cut'],
+    ['eq','Страхування від землетрусу', 100,'y',0,'cut'],
+    ['cyber','Захист від інтернет-шахрайства (Cyber)', 60,'y',0,'cut'],
+    ['#','Право'],
+    ['legal','Юридичне страхування, приватне (Rechtsschutz)', 300,'y',0,'imp'],
+    ['legalV','Юридичне страхування, транспорт (Verkehrsrechtsschutz)', 100,'y',0,'imp'],
+    ['#','Життя й дохід'],
+    ['risk','Страхування життя на випадок смерті', 40,'m',0,'imp'],
+    ['life','Накопичувальне страхування життя', 200,'m',0,'imp'],
+    ['life3a','Страхування життя в 3-й колоні (3a)', 300,'m',0,'imp'],
+    ['disab','Страхування на випадок втрати працездатності', 60,'m',0,'imp'],
+    ['ktg','Страхування денних допомог через хворобу (Krankentaggeld)', 80,'m',0,'imp'],
+    ['mortRisk','Страхування іпотеки на випадок смерті', 50,'m',0,'imp'],
+    ['#','Подорожі й речі'],
+    ['travel','Страхування в подорожах', 150,'y',5,'imp'],
+    ['cancel','Страхування скасування поїздки (Annullierung)', 80,'y',0,'imp'],
+    ['tcsL','Допомога в дорозі та за кордоном (TCS Livret ETI та інші)', 120,'y',0,'imp'],
+    ['phoneI','Страхування телефону й техніки', 10,'m',0,'cut'],
+    ['bikeI','Страхування велосипеда або електровелосипеда', 80,'y',3,'cut'],
+    ['pet','Страхування тварини', 30,'m',0,'cut'],
+    ['horse','Відповідальність за коня або собаку окремо', 80,'y',0,'imp'],
+  ]},
+  {id:'health', n:'Здоров’я', c:'#2894A0', items:[
+    ['fr','Франшиза, резерв на рік (Franchise)', 300,'y',0,'must'],
+    ['sb','Частка 10% понад франшизу (Selbstbehalt)', 300,'y',0,'must'],
+    ['spital','Внесок за день у лікарні (Spitalbeitrag)', 75,'o',0,'imp'],
+    ['dent','Стоматолог і гігієна зубів', 400,'y',2,'imp'],
+    ['ortho','Брекети й ортодонт для дітей', 150,'m',0,'imp'],
+    ['glasses','Окуляри й лінзи', 300,'y',8,'imp'],
+    ['meds','Ліки та аптека без рецепта', 30,'m',0,'imp'],
+    ['physio','Фізіотерапія й масаж', 80,'m',0,'imp'],
+    ['ther','Психотерапія й консультації', 120,'m',0,'imp'],
+    ['altmed','Альтернативна медицина (остеопатія, акупунктура)', 100,'m',0,'cut'],
+    ['vacc','Щеплення й аналізи, які не покриває каса', 150,'y',3,'imp'],
+    ['hear','Слуховий апарат, медичні прилади', 300,'y',0,'imp'],
+  ]},
+  {id:'move', n:'Громадський транспорт і велосипед', c:'#2A7278', items:[
+    ['ht','Половинний проїзний (Halbtax)', 195,'y',0,'imp'],
+    ['ga','Генеральний абонемент (GA), 2 клас', 4095,'y',0,'imp'],
+    ['ga1','Генеральний абонемент (GA), 1 клас', 6770,'y',0,'imp'],
+    ['gaY','GA для молоді, сім’ї або пенсіонерів', 2900,'y',0,'imp'],
+    ['local','Місцевий абонемент (ZVV, Libero, Mobilis та інші)', 90,'m',0,'must'],
+    ['route','Абонемент на маршрут (Streckenabo)', 150,'m',0,'must'],
+    ['junior','Дитяча карта Junior-Karte або Enkel-Karte', 30,'y',0,'imp'],
+    ['day','Денні квитки та Sparbillette', 30,'m',0,'imp'],
+    ['tix','Разові квитки понад абонемент', 40,'m',0,'imp'],
+    ['night','Нічний транспорт і доплати', 10,'m',0,'cut'],
+    ['bike','Велосипед, ремонт і сервіс', 150,'y',3,'cut'],
+    ['ebike','Електровелосипед, акумулятор і сервіс', 300,'y',3,'cut'],
+    ['vignE','Номер для мопеда або електровелосипеда (Vignette)', 50,'y',0,'must'],
+    ['scooter','Прокат самокатів і велосипедів', 15,'m',0,'cut'],
+    ['taxi','Таксі та Uber', 30,'m',0,'cut'],
+    ['share','Каршеринг Mobility', 20,'m',0,'cut'],
+  ]},
+  {id:'car', n:'Машина', c:'#986343', items:[
+    ['#','Купівля й фінансування'],
+    ['lease','Лізинг машини', 450,'m',0,'must'],
+    ['carLoan','Кредит на машину, погашення', 400,'m',0,'must'],
+    ['carInt','Відсотки за кредитом на машину', 60,'m',0,'must'],
+    ['carRes','Резерв на наступну машину (амортизація)', 300,'m',0,'imp'],
+    ['#','Страхування й податки'],
+    ['carH','Страхування відповідальності (Haftpflicht), обов’язкове', 500,'y',0,'must'],
+    ['carTK','Часткове каско (Teilkasko)', 300,'y',0,'imp'],
+    ['carVK','Повне каско (Vollkasko)', 900,'y',0,'imp'],
+    ['carIns','Страхування машини одним полісом', 1200,'y',0,'must'],
+    ['carPI','Страхування пасажирів і водія', 60,'y',0,'cut'],
+    ['carT','Податок на машину (Verkehrssteuer)', 400,'y',2,'must'],
+    ['vig','Віньєтка на автобан', 40,'y',0,'must'],
+    ['vigA','Віньєтки й платні дороги за кордоном', 80,'y',5,'imp'],
+    ['#','Їзда й догляд'],
+    ['fuel','Бензин або дизель', 150,'m',0,'must'],
+    ['charge','Заряджання електромобіля', 60,'m',0,'must'],
+    ['serv','Плановий сервіс', 500,'y',3,'must'],
+    ['repair','Ремонт, резерв', 600,'y',0,'imp'],
+    ['tires','Шини, сезонна заміна', 120,'h',3,'must'],
+    ['tireS','Зберігання шин (Reifenhotel)', 80,'y',9,'imp'],
+    ['newTires','Нові шини, резерв', 300,'y',9,'imp'],
+    ['mfk','Техогляд (MFK)', 80,'o',0,'must'],
+    ['wash','Миття й догляд', 20,'m',0,'cut'],
+    ['#','Паркування та інше'],
+    ['parkW','Паркування біля роботи', 100,'m',0,'imp'],
+    ['parkC','Паркування в місті й паркомати', 30,'m',0,'imp'],
+    ['parkL','Дозвіл на паркування (Anwohnerparkkarte)', 400,'y',0,'imp'],
+    ['tcs','Допомога на дорозі (TCS, ACS, Touring)', 130,'y',0,'imp'],
+    ['fines','Штрафи', 10,'m',0,'cut'],
+    ['license','Права, обмін прав, курси водіння', 150,'o',0,'imp'],
+    ['rentCar','Оренда машини', 300,'y',6,'cut'],
+  ]},
+  {id:'comm', n:'Зв’язок і підписки', c:'#DA9C76', items:[
+    ['serafe','Збір за радіо й ТБ (Serafe)', 312,'y',0,'must'],
+    ['net','Інтернет', 50,'m',0,'must'],
+    ['tv','ТБ-пакет', 25,'m',0,'cut'],
+    ['bundle','Інтернет, ТБ і телефон одним пакетом', 80,'m',0,'must'],
+    ['mob','Мобільний зв’язок', 30,'m',0,'must'],
+    ['mobK','Мобільний зв’язок дітей', 15,'m',0,'imp'],
+    ['phoneBuy','Телефон у розстрочку', 30,'m',0,'imp'],
+    ['land','Стаціонарний телефон', 25,'m',0,'cut'],
+    ['roam','Роумінг і дзвінки за кордон', 15,'m',0,'cut'],
+    ['stream','Стрімінг (Netflix, Disney+ та інші)', 15,'m',0,'cut'],
+    ['music','Музика (Spotify, Apple Music)', 13,'m',0,'cut'],
+    ['apps','Хмара й застосунки', 10,'m',0,'cut'],
+    ['soft','Програми (Office, антивірус)', 100,'y',0,'cut'],
+    ['ai','Підписки на ШІ та сервіси', 20,'m',0,'cut'],
+    ['press','Газети й журнали', 120,'y',0,'cut'],
+    ['post','Пошта, посилки, пересилання листів', 10,'m',0,'imp'],
+  ]},
+  {id:'tax', n:'Податки й внески', c:'#3A598D', hint:'У Швейцарії податок на дохід і майно сплачується на трьох рівнях. Кантон бере кантональний податок (Staatssteuer). Громада бере свій податок (Gemeindesteuer) як відсоток від кантонального, цей відсоток називається Steuerfuss і в кожної громади свій. Якщо ти член церкви, додається церковний податок. Окремо сплачується федеральний податок (direkte Bundessteuer). У Цюриху податки кантону, громади та церкви приходять одним рахунком, строк оплати 30 вересня, а федеральний податок окремим рахунком, до 31 березня наступного року. Спочатку приходять попередні рахунки, а остаточний приходить після перевірки декларації, і його потрібно оплатити протягом 30 днів. Тому на доплату варто відкладати заздалегідь. Платити не обов’язково одним платежем. Попередній рахунок можна оплачувати частинами, щомісяця або раз на квартал, а якщо сплатити в строк важко, можна домовитися з податковою службою громади про розстрочку і свій план платежів. Щоб не порахувати податки двічі, обери один спосіб. Або впиши самі податки за рахунками, або один рядок «Відкладаю на податки щомісяця».', items:[
+    ['#','Податки на дохід і майно'],
+    ['taxSt','Кантональний податок (Staatssteuer)', 3000,'y',8,'must'],
+    ['taxG','Податок громади (Gemeindesteuer)', 2500,'y',8,'must'],
+    ['church','Церковний податок (Kirchensteuer)', 300,'y',8,'must'],
+    ['taxK','Податки кантону, громади та церкви одним рахунком', 5800,'y',8,'must'],
+    ['taxB','Федеральний податок (direkte Bundessteuer)', 800,'y',2,'must'],
+    ['vermTax','Податок на майно (Vermögenssteuer), якщо є заощадження', 200,'y',8,'must'],
+    ['pers','Особистий податок (Personalsteuer)', 24,'y',8,'must'],
+    ['qst','Податок біля джерела (Quellensteuer), утримання із зарплати', 400,'m',0,'must'],
+    ['#','Як сплачуються податки'],
+    ['taxP','Попередні рахунки (provisorische Rechnung), частинами', 500,'m',0,'must'],
+    ['taxRes','Відкладаю на податки щомісяця', 400,'m',0,'must'],
+    ['taxF','Доплата за остаточним рахунком (Schlussrechnung)', 1000,'y',5,'must'],
+    ['taxInt','Відсотки за прострочення (Verzugszins)', 50,'y',9,'imp'],
+    ['taxAdv','Податковий консультант, заповнення декларації', 300,'y',2,'imp'],
+    ['taxSoft','Програма для декларації або продовження строку подання', 30,'y',2,'cut'],
+    ['#','Інші податки й збори'],
+    ['dog','Податок на собаку', 150,'y',3,'must'],
+    ['mil','Податок замість армії (Wehrpflichtersatz)', 400,'y',5,'must'],
+    ['gainTax','Податок на прибуток від продажу нерухомості (Grundstückgewinnsteuer)', 5000,'o',0,'must'],
+    ['handTax','Податок під час купівлі нерухомості (Handänderungssteuer)', 3000,'o',0,'must'],
+    ['inherit','Податок на спадщину або дарування', 1000,'o',0,'must'],
+    ['permit','Продовження дозволу на проживання', 100,'o',0,'must'],
+    ['gemFees','Збори громади й довідки', 50,'y',0,'imp'],
+  ]},
+  {id:'kids', n:'Діти', c:'#6A5FB8', items:[
+    ['kita','Дитячий садок і ясла (Kita)', 1500,'m',0,'must'],
+    ['tagesf','Денна сім’я (Tagesfamilie)', 800,'m',0,'must'],
+    ['hort','Група продовженого дня й обіди (Hort, Mittagstisch)', 400,'m',0,'imp'],
+    ['nanny','Няня', 200,'m',0,'imp'],
+    ['club','Гуртки й спорт', 80,'m',0,'imp'],
+    ['musics','Музична школа', 120,'m',0,'imp'],
+    ['tutor','Репетитор і підготовка до гімназії', 150,'m',0,'imp'],
+    ['school','Шкільні речі, табір, екскурсії', 400,'y',7,'imp'],
+    ['camp','Табори на канікулах', 500,'y',6,'imp'],
+    ['kidsCl','Одяг і взуття дітей', 80,'m',0,'must'],
+    ['toys','Іграшки, книжки, свята дітей', 40,'m',0,'cut'],
+    ['pocket','Кишенькові гроші', 20,'m',0,'cut'],
+    ['russian','Російська школа або заняття рідною мовою', 80,'m',0,'imp'],
+    ['study','Навчання й гуртожиток дорослих дітей', 500,'m',0,'imp'],
+  ]},
+  {id:'life', n:'Їжа й побут', c:'#B1A998', items:[
+    ['food','Продукти', 600,'m',0,'must'],
+    ['drinks','Напої', 40,'m',0,'cut'],
+    ['hyg','Гігієна й побутова хімія', 60,'m',0,'must'],
+    ['laundry','Прання, якщо пральня платна', 20,'m',0,'must'],
+    ['cloth','Одяг і взуття', 100,'m',0,'imp'],
+    ['lunch','Обіди на роботі', 150,'m',0,'imp'],
+    ['out','Кафе й ресторани', 120,'m',0,'cut'],
+    ['deliv','Доставка їжі', 40,'m',0,'cut'],
+    ['clean','Допомога по дому (прибирання), із внесками AHV', 200,'m',0,'cut'],
+    ['tools','Побутова техніка, ремонт і заміна', 300,'y',0,'imp'],
+    ['petfood','Корм і наповнювач', 60,'m',0,'imp'],
+    ['vet','Ветеринар і щеплення тварин', 300,'y',3,'imp'],
+    ['petCare','Перетримка й вигул тварин', 40,'m',0,'cut'],
+  ]},
+  {id:'beauty', n:'Краса й догляд', c:'#D47888', items:[
+    ['hair','Перукар, стрижка й фарбування', 80,'m',0,'cut'],
+    ['mani','Манікюр', 60,'m',0,'cut'],
+    ['pedi','Педикюр', 70,'m',0,'cut'],
+    ['massage','Масаж для себе', 120,'m',0,'cut'],
+    ['depil','Депіляція й епіляція', 80,'m',0,'cut'],
+    ['body','Догляд за тілом (креми, скраби, процедури)', 40,'m',0,'cut'],
+    ['face','Косметолог і догляд за обличчям', 120,'m',0,'cut'],
+    ['brows','Брови й вії', 50,'m',0,'cut'],
+    ['cosm','Косметика й парфуми', 50,'m',0,'cut'],
+    ['spa','Сауна, спа, терми', 40,'m',0,'cut'],
+    ['nails','Нігті вдома, матеріали', 15,'m',0,'cut'],
+    ['barber','Барбер, гоління', 40,'m',0,'cut'],
+  ]},
+  {id:'lang', n:'Мова й інтеграція', c:'#934652', items:[
+    ['course','Курс німецької або французької', 600,'q',0,'imp'],
+    ['private','Приватні уроки мови', 200,'m',0,'imp'],
+    ['exam','Іспит з мови (telc, Goethe, fide)', 300,'o',5,'imp'],
+    ['transl','Переклади й засвідчення документів', 200,'o',0,'imp'],
+    ['apost','Апостиль і документи з рідної країни', 150,'o',0,'imp'],
+    ['diploma','Визнання диплома', 550,'o',0,'imp'],
+    ['passport','Закордонний паспорт і консульські збори', 200,'o',0,'must'],
+    ['natur','Натуралізація, збори й тести', 1500,'o',0,'imp'],
+    ['books','Підручники й застосунки', 100,'y',0,'cut'],
+    ['edu','Курси й підвищення кваліфікації', 1500,'y',0,'imp'],
+  ]},
+  {id:'pens', n:'Пенсія й соцвнески', c:'#6A93D4', hint:'Внески, які утримують із зарплати, познач у колонці важливості як «утримано із зарплати». Вони видні в бюджеті, але не зменшують залишок, адже зарплату ти вписуєш нетто, уже без них. До пенсійної каси (BVG) внески обов’язкові лише із зарплати від 22 680 CHF на рік в одного роботодавця (з 2027 року від 23 040 CHF). Страхується частина зарплати понад 26 460 CHF (з 2027 року понад 26 880 CHF), а розмір внеску залежить від віку.', items:[
+    ['#','Утримують із зарплати'],
+    ['ahvE','AHV, IV, EO, утримання із зарплати (5,3%)', 320,'m',0,'ded'],
+    ['alvE','Страхування від безробіття ALV, утримання (1,1%)', 66,'m',0,'ded'],
+    ['bvgE','Пенсійна каса, друга колона (BVG), утримання', 350,'m',0,'ded'],
+    ['nbuE','Страхування від нещасного випадку поза роботою (NBU), утримання', 60,'m',0,'ded'],
+    ['ktgE','Страхування денних допомог через хворобу (KTG), утримання', 30,'m',0,'ded'],
+    ['famE','Внесок до каси сімейних допомог, утримання (якщо є в кантоні)', 8,'m',0,'ded'],
+    ['#','Сплачуєш сама або сам'],
+    ['ahv','AHV, якщо не працюєш (мінімум 530 CHF у 2026, 541 CHF у 2027)', 530,'y',2,'must'],
+    ['ahvGap','Доплата AHV за пропущені роки', 500,'o',0,'imp'],
+    ['ahvAbroad','Добровільна пенсія в іншій країні', 100,'m',0,'imp'],
+    ['#','Добровільні накопичення на пенсію'],
+    ['p3a','Третя колона (Säule 3a), до 7 258 CHF у 2026, до 7 373 у 2027', 605,'m',0,'imp'],
+    ['p3aY','Третя колона (Säule 3a), один внесок у грудні', 7258,'y',11,'imp'],
+    ['p3b','Вільні накопичення на пенсію (3b)', 100,'m',0,'cut'],
+    ['bvg','Добровільний викуп у другу колону (BVG)', 2000,'y',11,'cut'],
+  ]},
+  {id:'debt', n:'Кредити й борги', c:'#82762B', items:[
+    ['loan','Споживчий кредит, погашення', 300,'m',0,'must'],
+    ['loanI','Відсотки за кредитом', 50,'m',0,'must'],
+    ['cc','Кредитна картка, річна плата', 100,'y',0,'imp'],
+    ['ccI','Відсотки за кредитною карткою', 30,'m',0,'must'],
+    ['instal','Розстрочка (меблі, техніка)', 100,'m',0,'must'],
+    ['leaseO','Лізинг техніки або меблів', 80,'m',0,'must'],
+    ['bnpl','Покупки «плати потім» (Klarna, Twint та інші)', 50,'m',0,'must'],
+    ['family','Борг рідним або друзям', 100,'m',0,'imp'],
+    ['debtH','Борг на батьківщині, кредит в іншій країні', 150,'m',0,'must'],
+    ['alim','Аліменти', 600,'m',0,'must'],
+  ]},
+  {id:'save', n:'Резерв і заощадження', c:'#A99A2E', items:[
+    ['res','Резерв на непередбачене', 200,'m',0,'must'],
+    ['invest','Інвестиції й накопичення', 200,'m',0,'cut'],
+    ['kidsS','Накопичення на дітей', 100,'m',0,'imp'],
+    ['vac','Відпустка', 2000,'y',6,'imp'],
+    ['gifts','Подарунки й свята', 600,'y',11,'cut'],
+    ['xmas','Різдво й Новий рік', 500,'y',11,'cut'],
+    ['home','Поїздки на батьківщину', 1500,'y',6,'imp'],
+    ['big','Великі покупки, резерв', 100,'m',0,'cut'],
+  ]},
+  {id:'give', n:'Допомога близьким і благодійність', c:'#77B692', items:[
+    ['help','Допомога рідним, перекази на батьківщину', 150,'m',0,'imp'],
+    ['parents','Допомога батькам', 200,'m',0,'imp'],
+    ['kidsAbroad','Допомога дітям або онукам, які живуть окремо', 200,'m',0,'imp'],
+    ['transfer','Комісії за перекази грошей за кордон', 10,'m',0,'imp'],
+    ['friends','Допомога друзям', 50,'m',0,'cut'],
+    ['godchild','Хрещеники й подарунки родичам', 300,'y',11,'cut'],
+    ['charity','Пожертви', 20,'m',0,'cut'],
+    ['fund','Регулярний внесок у благодійний фонд', 30,'m',0,'cut'],
+    ['sponsor','Опікунство над дитиною або твариною', 40,'m',0,'cut'],
+    ['humanit','Гуманітарні збори й допомога постраждалим', 50,'m',0,'cut'],
+    ['church2','Внески в громаду, парафію', 30,'m',0,'cut'],
+    ['volunteer','Витрати на волонтерство', 20,'m',0,'cut'],
+  ]},
+  {id:'habits', n:'Звички', c:'#C25468', hint:'Тут просто чесно видно, скільки йде на звички на місяць і на рік. Без оцінок. Іноді одна ця цифра вже допомагає вирішити, що залишити, а що змінити.', items:[
+    ['cig','Сигарети й тютюн', 9,'w',0,'cut'],
+    ['vape','Вейп і картриджі', 25,'w',0,'cut'],
+    ['iqos','Тютюн для нагрівання (IQOS та інші)', 30,'w',0,'cut'],
+    ['hookah','Кальян', 40,'m',0,'cut'],
+    ['alc','Алкоголь додому', 80,'m',0,'cut'],
+    ['bar','Бари й алкоголь поза домом', 80,'m',0,'cut'],
+    ['energy','Енергетики й солодкі напої', 20,'m',0,'cut'],
+    ['coffee','Кава з собою', 40,'m',0,'cut'],
+    ['sweets','Солодощі й перекуси', 40,'m',0,'cut'],
+    ['lotto','Лотереї та ставки', 20,'m',0,'cut'],
+    ['games','Покупки в іграх і застосунках', 15,'m',0,'cut'],
+    ['impulse','Спонтанні покупки онлайн', 100,'m',0,'cut'],
+  ]},
+  {id:'biz', n:'Своя справа й самозайнятість', c:'#C97E52', hint:'Самозайняті самі сплачують внески, які в найманих працівників утримує роботодавець. AHV, IV і EO становлять від 5,371% до 10% доходу, плюс адміністративний збір каси й внесок до каси сімейних допомог (у Цюриху 1,025%). Каса надсилає попередні рахунки щокварталу, а через пару років перераховує за податковою декларацією, тому відкладай на доплату. ПДВ обов’язковий, якщо оборот більший за 100 000 CHF на рік.', items:[
+    ['#','Обов’язкові внески'],
+    ['ahvS','AHV, IV, EO для самозайнятих, попередній рахунок', 1000,'q',2,'must'],
+    ['ahvAdm','Адміністративний збір каси AHV (до 5% від внесків)', 50,'q',2,'must'],
+    ['famS','Внесок до каси сімейних допомог (FAK)', 100,'q',2,'must'],
+    ['ahvNach','Доплата AHV після перерахунку за податками, резерв', 150,'m',0,'must'],
+    ['taxS','Податки на дохід своєї справи, відкладаю', 600,'m',0,'must'],
+    ['vatB','ПДВ (MWST), якщо оборот більший за 100 000 CHF', 2000,'h',1,'must'],
+    ['corpTax','Податок на прибуток і капітал (GmbH, AG)', 1500,'y',8,'must'],
+    ['#','Свій захист (у найманих це робить роботодавець)'],
+    ['uvgS','Страхування від нещасного випадку для самозайнятих (UVG)', 60,'m',0,'must'],
+    ['ktgS','Страхування денних допомог через хворобу (KTG)', 80,'m',0,'imp'],
+    ['incomeIns','Страхування доходу в разі втрати працездатності', 70,'m',0,'imp'],
+    ['bvgS','Пенсійна каса для самозайнятих (добровільна BVG)', 400,'m',0,'imp'],
+    ['p3aS','Велика третя колона (3a), до 20% доходу, максимум 36 288 CHF у 2026, 36 864 у 2027', 1000,'m',0,'imp'],
+    ['bufferS','Резерв на місяці без замовлень', 300,'m',0,'must'],
+    ['#','Страхування бізнесу'],
+    ['bhaft','Професійна відповідальність (Berufshaftpflicht)', 300,'y',0,'imp'],
+    ['bethaft','Відповідальність підприємства (Betriebshaftpflicht)', 400,'y',0,'imp'],
+    ['inv','Страхування майна й обладнання бізнесу', 200,'y',0,'imp'],
+    ['bint','Страхування від простою (Betriebsunterbruch)', 300,'y',0,'cut'],
+    ['cyberB','Захист від кібератак для бізнесу', 300,'y',0,'imp'],
+    ['legalB','Юридичне страхування бізнесу', 400,'y',0,'imp'],
+    ['#','Реєстрація, облік, право'],
+    ['hreg','Торговий реєстр, запис і зміни', 120,'o',0,'must'],
+    ['found','Відкриття GmbH або AG (нотаріус, реєстр)', 1500,'o',0,'must'],
+    ['permitB','Дозволи й ліцензії на професію', 200,'o',0,'must'],
+    ['acct','Бухгалтер і річний звіт (Treuhand)', 1500,'y',2,'imp'],
+    ['taxDecl','Податкова декларація своєї справи', 500,'y',2,'imp'],
+    ['audit','Ревізія для AG або GmbH', 2000,'y',4,'imp'],
+    ['bookSoft','Програма обліку й рахунків (Bexio та інші)', 35,'m',0,'imp'],
+    ['legalAdv','Юрист, договори й загальні умови', 500,'y',0,'imp'],
+    ['dataP','Захист даних і політика конфіденційності', 200,'o',0,'imp'],
+    ['#','Робота щодня'],
+    ['office','Оренда кабінету або коворкінгу', 400,'m',0,'imp'],
+    ['officeNK','Додаткові витрати й прибирання кабінету', 80,'m',0,'imp'],
+    ['equip','Комп’ютер, телефон, техніка (резерв на заміну)', 100,'m',0,'imp'],
+    ['softB','Програми й підписки (Zoom, Canva, CRM)', 50,'m',0,'imp'],
+    ['phoneB','Робочий телефон та інтернет', 50,'m',0,'imp'],
+    ['travelB','Робочі поїздки', 80,'m',0,'imp'],
+    ['carB','Робоча частка машини', 150,'m',0,'imp'],
+    ['material','Матеріали й витратні засоби', 50,'m',0,'imp'],
+    ['books3','Професійна література', 20,'m',0,'cut'],
+    ['bankB','Бізнес-рахунок і банківські збори', 15,'m',0,'must'],
+    ['payFees','Комісії платіжних сервісів (Twint, картки, Stripe)', 40,'m',0,'must'],
+    ['postB','Пошта, кур’єр, абонентська скринька', 20,'m',0,'imp'],
+    ['#','Клієнти й просування'],
+    ['web','Сайт, хостинг, домен', 300,'y',0,'imp'],
+    ['mail','Розсилки й поштовий сервіс', 20,'m',0,'imp'],
+    ['ads','Реклама й просування', 150,'m',0,'cut'],
+    ['print','Візитки, флаєри, друк', 200,'y',0,'cut'],
+    ['photo','Фото й відео для роботи', 400,'y',0,'cut'],
+    ['events','Нетворкінг, ярмарки, заходи', 50,'m',0,'cut'],
+    ['listing','Каталоги й платформи для фахівців', 30,'m',0,'cut'],
+    ['#','Зростання й професія'],
+    ['eduB','Навчання, курси, конференції', 1500,'y',0,'imp'],
+    ['superv','Супервізія й менторство', 100,'m',0,'imp'],
+    ['cert','Сертифікація та її продовження (ICF та інші)', 300,'y',0,'imp'],
+    ['member','Професійні асоціації (ICF, Gewerbeverein)', 300,'y',0,'imp'],
+    ['#','Якщо є працівники'],
+    ['wages','Зарплати працівників', 3000,'m',0,'must'],
+    ['ahvEmp','Внески роботодавця AHV, ALV, FAK (близько 7%)', 210,'m',0,'must'],
+    ['bvgEmp','Пенсійна каса працівників, частка роботодавця', 150,'m',0,'must'],
+    ['uvgEmp','Страхування працівників від нещасного випадку', 40,'m',0,'must'],
+    ['payroll','Розрахунок зарплат', 50,'m',0,'imp'],
+    ['freel','Фрилансери й помічники', 300,'m',0,'imp'],
+  ]},
+  {id:'other', n:'Відпочинок та інше', c:'#447658', items:[
+    ['bank','Банк, плата за рахунок і картку', 5,'m',0,'must'],
+    ['fit','Фітнес і спорт', 70,'m',0,'cut'],
+    ['ski','Лижний абонемент і прокат', 600,'y',11,'cut'],
+    ['hobby','Хобі й творчість', 50,'m',0,'cut'],
+    ['culture','Кіно, театр, музеї, концерти', 40,'m',0,'cut'],
+    ['museum','Музейний пас і абонементи (Museumspass)', 177,'y',0,'cut'],
+    ['books2','Книжки', 20,'m',0,'cut'],
+    ['club2','Членські внески (ферайн, громада)', 100,'y',0,'cut'],
+    ['weekend','Поїздки на вихідні', 100,'m',0,'cut'],
+  ]},
+];
+// логический порядок сфер: дом, быт, защита, государство, дорога, связь, семья, жизнь, долги и запас, своё дело
+const CAT_ORDER = ['home','own','util','life','ins','health','tax','pens','move','car','comm','kids','lang','beauty','other','habits','give','debt','save','biz'];
+CATS.sort((a, b) => CAT_ORDER.indexOf(a.id) - CAT_ORDER.indexOf(b.id));
+const SHORT = {move:'Громадський транспорт', give:'Допомога близьким', biz:'Своя справа', pens:'Пенсія й внески', other:'Відпочинок та інше'};
+const CAT = Object.fromEntries(CATS.map(c => [c.id, c]));
+const ITEM = {}; let itemPos = 0; CATS.forEach(c => c.items.forEach(([k, n, a, f, m, p]) => { if (k !== '#') ITEM[k] = {k, n, a, f, m, p, cat:c.id, pos:itemPos++}; }));
+const byItemOrder = (a, b) => (ITEM[a.item] ? ITEM[a.item].pos : 1e6) - (ITEM[b.item] ? ITEM[b.item].pos : 1e6);
+/* доходы. a — ориентир, f — как часто, m — месяц, v — как приходит */
+const INC = {id:'inc', n:'Мої доходи', c:'#4E9A70', items:[
+  ['#','Робота'],
+  ['salN','Зарплата нетто, на рахунок', 5000,'m',0,'acct'],
+  ['salP','Зарплата партнера, нетто', 4000,'m',0,'acct'],
+  ['sal13','Тринадцята зарплата', 5000,'y',11,'acct'],
+  ['bonus','Бонус', 2000,'y',2,'acct'],
+  ['side','Підробіток', 500,'m',0,'acct'],
+  ['bizInc','Дохід своєї справи', 2000,'m',0,'acct'],
+  ['#','Сім’я й діти'],
+  ['kz','Дитяча допомога (Kinderzulage), у Цюриху 215 CHF, з 12 років 268 CHF', 215,'m',0,'acct'],
+  ['az','Допомога на навчання (Ausbildungszulage), з 16 років', 268,'m',0,'acct'],
+  ['birth','Допомога при народженні (Geburtszulage)', 2000,'o',0,'acct'],
+  ['mat','Декретні (Mutterschaftsentschädigung)', 4000,'m',0,'acct'],
+  ['pat','Відпустка батька або другого з батьків', 2000,'o',0,'acct'],
+  ['alimR','Аліменти, які отримуєш', 800,'m',0,'acct'],
+  ['alimV','Аванс аліментів від громади (Alimentenbevorschussung)', 600,'m',0,'acct'],
+  ['#','Соціальні виплати'],
+  ['ipv','Знижка на медстраховку (Prämienverbilligung)', 150,'m',0,'direct'],
+  ['kitaS','Субсидія на Kita (Betreuungsgutschein)', 600,'m',0,'direct'],
+  ['rentS','Допомога з оплатою житла', 300,'m',0,'direct'],
+  ['soz','Соціальна допомога (Sozialhilfe)', 1000,'m',0,'acct'],
+  ['sozD','Соціальна допомога, яку служба сплачує за тебе', 1500,'m',0,'direct'],
+  ['alv','Допомога з безробіття (ALV)', 4000,'m',0,'acct'],
+  ['krank','Денні допомоги через хворобу або нещасний випадок', 3000,'m',0,'acct'],
+  ['iv','Пенсія по інвалідності (IV)', 1500,'m',0,'acct'],
+  ['el','Додаткові виплати (Ergänzungsleistungen)', 800,'m',0,'acct'],
+  ['ahvR','Пенсія AHV', 2000,'m',0,'acct'],
+  ['ahv13','Тринадцята пенсія AHV', 2000,'y',11,'acct'],
+  ['pk','Пенсія з пенсійної каси', 1500,'m',0,'acct'],
+  ['stip','Стипендія', 3000,'y',8,'acct'],
+  ['#','Інше'],
+  ['rentIn','Здавання житла або кімнати', 800,'m',0,'acct'],
+  ['taxBack','Повернення податку', 500,'o',5,'acct'],
+  ['familyIn','Допомога рідних', 200,'m',0,'acct'],
+  ['otherIn','Інші доходи', 100,'m',0,'acct'],
+]};
+const IITEM = {}; INC.items.forEach(([k, n, a, f, m, v], i) => { if (k !== '#') IITEM[k] = {k, n, a, f, m, v, pos:i}; });
+const byIncOrder = (a, b) => (IITEM[a.item] ? IITEM[a.item].pos : 1e6) - (IITEM[b.item] ? IITEM[b.item].pos : 1e6);
+const INC_GROUPS = [{n:'Робота', c:'#4E9A70'}, {n:'Сім’я й діти', c:'#6A5FB8'}, {n:'Соціальні виплати', c:'#2894A0'}, {n:'Інше', c:'#A99A2E'}];
+const INC_GROUP = {}; (() => { let g = -1; INC.items.forEach(([k]) => { if (k === '#') g++; else INC_GROUP[k] = g; }); })();
+const incGroup = r => r.item === 'own' ? 3 : (INC_GROUP[r.item] ?? 3);
+const VIA = [{k:'acct', n:'на мій рахунок'}, {k:'direct', n:'за мене напряму'}];
+const VQ = Object.fromEntries(VIA.map(v => [v.k, v]));
+const incName = r => r.item === 'own' ? (r.own || 'Свій дохід') : (IITEM[r.item] ? IITEM[r.item].n : '');
+function itemOpts(c, sel){                        // список статей сферы с группами
+  let h = '', open = false;
+  for (const [k, n] of c.items){
+    if (k === '#'){ if (open) h += '</optgroup>'; h += `<optgroup label="${esc(n)}">`; open = true; }
+    else h += opt(k, n, sel === k);
+  }
+  if (open) h += '</optgroup>';
+  return h + opt('own', 'Своя стаття…', sel === 'own');
+}
+const itemName = r => r.item === 'own' ? (r.own || 'Своя стаття') : (ITEM[r.item] ? ITEM[r.item].n : '');
+const hintAmt = k => k === 'serafe' ? SERAFE(S.year) : (ITEM[k] ? ITEM[k].a : '');
+
+/* что часто забывают */
+const FORGOT = [
+  ['serafe','Збір Serafe за радіо й ТБ, він обов’язковий для кожного домогосподарства'],
+  ['hh','Страхування майна й відповідальності'],
+  ['fr','Франшиза, резерв на рахунки лікарів'],
+  ['sb','Частка 10% понад франшизу'],
+  ['taxRes','Відкладати на податки щомісяця'],
+  ['ahv','Внесок AHV, якщо ти не працюєш'],
+  ['bags','Платні мішки для сміття'],
+  ['move','Резерв на прибирання й ремонт при виїзді'],
+  ['permit','Продовження дозволу на проживання'],
+  ['res','Резерв на непередбачене'],
+  ['dent','Стоматолог, його не покриває базове страхування'],
+  ['ht','Півпроїзний Halbtax'],
+  ['rega','Rega, рятувальна авіація, близько 40 CHF на рік'],
+  ['nkA','Доплата за річним розрахунком Nebenkosten'],
+  ['waste','Базовий збір за сміття'],
+  ['taxF','Доплата за остаточним податковим рахунком'],
+  ['mfk','Техогляд машини (MFK), якщо є машина'],
+  ['tires','Заміна шин навесні й восени, якщо є машина'],
+  ['bldI','Страхування будівлі, якщо житло своє'],
+  ['passport','Паспорт і консульські збори'],
+  ['p3a','Третя колона 3a, вона ще й зменшує податки'],
+];
+
+const CREDIT_PARTS = [
+  {t:'Ірина Вознесенська · коуч', u:'https://voznesenskaya.ch/uk/'},
+  {t:'Instagram @iryna.voznesenskaya', u:'https://www.instagram.com/iryna.voznesenskaya/'},
+  {t:'voznesenskaya.ch', u:'https://voznesenskaya.ch/uk/'},
+  {t:'Свої люди у Швейцарії · svoiludi.ch', u:'https://svoiludi.ch/uk/'},
+];
+const SHARE_URL = 'https://svoiludi.ch/uk/instrumenty/moj-budget/';
+const SHARE_MSG = 'Привіт! Дивись, який зручний бюджет обов’язкових витрат у Швейцарії. Страховки, оренда, абонементи, транспорт, податки, усе за списками, і видно, в які місяці приходять великі рахунки. Можна завантажити в Excel і PDF. Хочеш спробувати?\n' + SHARE_URL;
+
+/* ---------- состояние ---------- */
+let uid = 1; const nid = () => 'r' + Date.now().toString(36) + (uid++);
+const fresh = () => ({v:1, example:false, year: new Date().getMonth() >= 9 ? new Date().getFullYear() + 1 : new Date().getFullYear(), canton:'ZH', adults:1, kids:0, rows:[], inc:[], savings:'', tax:{}, names:['',''], bmode:'joint', brule:'income'});
+function mk(k, amt, extra){ const it = ITEM[k]; return Object.assign({id:nid(), cat:it.cat, item:k, own:'', amt: amt == null ? hintAmt(k) : amt, f:it.f, m:it.m, p:it.p, note:''}, extra || {}); }
+function exampleRows(st, minimal){
+  const A = st.adults, K = st.kids, P = A + K, R = [];
+  const add = (k, amt, ex) => R.push(mk(k, amt, ex));
+  add('rent', P <= 1 ? 1600 : P <= 3 ? 2200 : 2700); add('nk', P <= 1 ? 160 : 230);
+  if (!minimal) add('power', 120);
+  add('bags', 15); if (!minimal) add('waste', 100);
+  if (!minimal) add('move', 40);
+  for (let i = 0; i < A; i++) add('kvgA', 488, A > 1 && i < 2 ? {who:'p' + (i + 1)} : {note: A > 1 ? 'Дорослий ' + (i + 1) : ''});
+  for (let i = 0; i < K; i++) add('kvgK', 128, {note: K > 1 ? 'Дитина ' + (i + 1) : ''});
+  if (!minimal) add('vvg', 40 * A);
+  add('hh', 300); if (!minimal) add('rega', 40 * A, {note: A > 1 ? 'По 40 CHF за дорослого' : ''});
+  add('fr', 300 * A); add('sb', 200 * A);
+  if (!minimal) add('dent', 300 * P);
+  add('local', 90, {note: A > 1 ? 'Один абонемент' : ''});
+  if (!minimal) add('ht', 195 * A, {f:'y', m:0});
+  add('serafe', SERAFE(st.year)); add('net', 60); add('mob', 30 * A);
+  if (!minimal) add('stream', 15);
+  if (K && !minimal) { add('club', 80 * K); add('school', 300 * K); }
+  add('food', 450 + 250 * (P - 1)); add('hyg', 50 + 15 * (P - 1));
+  if (!minimal) { add('cloth', 60 * P); add('out', 100); }
+  if (!minimal) { add('course', 600, {f:'q', m:0}); add('transl', 200, {m:2}); }
+  add('res', 200);
+  if (!minimal) { add('vac', 1500 * Math.max(1, A) + 600 * K, {m:6}); add('gifts', 400, {m:11}); add('help', 150); }
+  add('bank', 5);
+  return R;
+}
+function exampleInc(st){                        // примерные доходы, чтобы были видны приход и остаток
+  const R = [], mkI = (k, amt, note) => { const it = IITEM[k]; R.push({id:nid(), item:k, own:'', amt, f:it.f, m:it.m, v:it.v, note:note || ''}); };
+  mkI('salN', 6000, 'Приклад, впиши свою зарплату');
+  if (st.adults > 1) mkI('salP', 4000, 'Приклад');
+  if (st.adults > 1){ R[0].who = 'p1'; R[1].who = 'p2'; }
+  if (st.kids) mkI('kz', 215 * st.kids, st.kids > 1 ? 'На ' + st.kids + ' дітей' : '');
+  return R;
+}
+let S;
+try { S = JSON.parse(localStorage.getItem(KEY) || 'null'); } catch(e) { S = null; }
+if (!S || S.v !== 1){ S = fresh(); S.example = true; S.rows = exampleRows(S, false); S.inc = exampleInc(S); }
+else S.rows.forEach(r => {                       // старые строки после расширения списков
+  if (r.item === 'wash' && r.cat === 'life') r.item = 'laundry';
+  if (r.item === 'glass' && r.cat === 'health') r.item = 'glasses';
+  if (r.item === 'carI') r.item = 'carIns';
+  if (ITEM[r.item]) r.cat = ITEM[r.item].cat;
+});
+if (!S.inc) S.inc = [];
+if (!S.tax) S.tax = {};
+if (!S.names) S.names = ['', '']; if (!S.bmode) S.bmode = 'joint'; if (!S.brule) S.brule = 'income';
+if (S.example && !S.inc.length) S.inc = exampleInc(S);
+if (S.income && !S.inc.length) S.inc.push({id:nid(), item:'salN', own:'', amt:S.income, f:'m', m:0, v:'acct', note:''});
+delete S.income;
+function mkInc(k, amt){ const it = IITEM[k]; return {id:nid(), item:k, own:'', amt: amt == null ? it.a : amt, f:it.f, m:it.m, v:it.v, note:''}; }
+function save(){ try { localStorage.setItem(KEY, JSON.stringify(S)); } catch(e) {} }
+const nm = i => (S.names && S.names[i] && S.names[i].trim()) || ('Персона ' + (i + 1));
+const whoName = w => w === 'p1' ? nm(0) : w === 'p2' ? nm(1) : 'спільне';
+const whoOf = r => S.adults > 1 ? (r.who || 'c') : 'c';
+const whoOpts = w => [['c','спільне'],['p1',nm(0)],['p2',nm(1)]].map(([k, n]) => opt(k, n, (w || 'c') === k)).join('');
+const say = t => { $('status').textContent = t; };
+
+/* ---------- расчёты ---------- */
+const num = v => { const x = parseFloat(String(v == null ? '' : v).replace(/[’'\s]/g, '').replace(',', '.')); return isFinite(x) ? x : 0; };
+const perYear = r => num(r.amt) * FQ[r.f].y;
+const perMonth = r => perYear(r) / 12;
+function monthSpread(r){                       // сколько этот платёж забирает в каждый месяц года
+  const a = num(r.amt), out = new Array(12).fill(0), m = +r.m || 0;
+  if (r.f === 'm') out.fill(a);
+  else if (r.f === 'w') out.fill(a * 52 / 12);
+  else if (r.f === 'q') for (let i = 0; i < 4; i++) out[(m + 3*i) % 12] += a;
+  else if (r.f === 'h') { out[m] += a; out[(m + 6) % 12] += a; }
+  else out[m] += a;
+  return out;
+}
+const isCash = r => r.p !== 'ded';                // «уже вычтено из зарплаты» не уменьшает остаток
+function calc(){
+  const byCat = CATS.map(c => { const rows = S.rows.filter(r => r.cat === c.id).sort(byItemOrder);
+    return {c, rows, y: rows.filter(isCash).reduce((s, r) => s + perYear(r), 0), d: rows.filter(r => !isCash(r)).reduce((s, r) => s + perYear(r), 0)}; });
+  const year = byCat.reduce((s, x) => s + x.y, 0), ded = byCat.reduce((s, x) => s + x.d, 0);
+  const byPrio = Object.fromEntries(PRIO.map(p => [p.k, S.rows.filter(r => r.p === p.k).reduce((s, r) => s + perYear(r), 0)]));
+  const months = new Array(12).fill(0), monthsCat = CATS.map(() => new Array(12).fill(0));
+  S.rows.filter(isCash).forEach(r => { const ci = CATS.findIndex(c => c.id === r.cat); monthSpread(r).forEach((v, i) => { months[i] += v; monthsCat[ci][i] += v; }); });
+  const incY = S.inc.reduce((s, r) => s + perYear(r), 0), incDirY = S.inc.filter(r => r.v === 'direct').reduce((s, r) => s + perYear(r), 0);
+  const incMonths = new Array(12).fill(0); S.inc.forEach(r => monthSpread(r).forEach((v, i) => { incMonths[i] += v; }));
+  const inc = incY / 12;
+  return {byCat, year, month: year / 12, ded, byPrio, months, monthsCat, incY, inc, incDir: incDirY / 12, incMonths, left: S.inc.length ? inc - year / 12 : null};
+}
+const chf = (v, d = 0) => (Math.round(v * Math.pow(10, d)) / Math.pow(10, d)).toLocaleString('de-CH', {minimumFractionDigits:d, maximumFractionDigits:d});
+const householdLabel = () => {
+  const a = S.adults, k = S.kids;
+  const aw = a === 1 ? '1 дорослий' : a + ' дорослих';
+  const kw = !k ? '' : k === 1 ? ', 1 дитина' : k < 5 ? ', ' + k + ' дитини' : ', ' + k + ' дітей';
+  return aw + kw;
+};
+
+/* ---------- настройки ---------- */
+function renderSetup(){
+  const y0 = new Date().getFullYear();
+  $('year').innerHTML = [y0 - 1, y0, y0 + 1, y0 + 2].map(y => `<option${y === S.year ? ' selected' : ''}>${y}</option>`).join('');
+  $('canton').innerHTML = Object.entries(CANTONS).sort((a,b) => a[1].localeCompare(b[1], 'uk')).map(([k, n]) => `<option value="${k}"${k === S.canton ? ' selected' : ''}>${n} (${k})</option>`).join('');
+  $('adults').innerHTML = [1,2,3,4].map(n => `<option${n === S.adults ? ' selected' : ''}>${n}</option>`).join('');
+  $('kids').innerHTML = [0,1,2,3,4,5].map(n => `<option${n === S.kids ? ' selected' : ''}>${n}</option>`).join('');
+  $('exampleNote').hidden = !S.example;
+  document.body.classList.toggle('duo', S.adults > 1);
+  $('name1').value = S.names[0] || ''; $('name2').value = S.names[1] || ''; $('bmode').value = S.bmode; $('brule').value = S.brule;
+}
+$('year').addEventListener('change', e => { S.year = +e.target.value; S.rows.forEach(r => { if (r.item === 'serafe' && (num(r.amt) === 312 || num(r.amt) === 335)) r.amt = SERAFE(S.year); }); reExample(); save(); renderAll(); });
+$('canton').addEventListener('change', e => { S.canton = e.target.value; save(); renderTotals(); });
+const reExample = () => { if (!S.example) return; S.rows = exampleRows(S, false); S.inc = exampleInc(S); S.tax = {}; ensureExampleTax(); };   // пример пересчитывается под новую семью
+$('adults').addEventListener('change', e => { S.adults = +e.target.value; reExample(); save(); renderAll(); });
+$('kids').addEventListener('change', e => { S.kids = +e.target.value; if (S.example){ reExample(); save(); renderAll(); } else { save(); renderTax(); } });
+['name1','name2'].forEach((id, i) => $(id).addEventListener('change', e => { S.names[i] = e.target.value; save(); renderAll(); }));
+$('bmode').addEventListener('change', e => { S.bmode = e.target.value; save(); renderDuo(); });
+$('brule').addEventListener('change', e => { S.brule = e.target.value; save(); renderDuo(); });
+$('fill').addEventListener('change', e => {
+  const v = e.target.value; e.target.value = ''; if (!v) return;
+  if (S.rows.length && !S.example){ pendingFill = v; renderClear('fill'); return; }
+  doFill(v);
+});
+let pendingFill = '';
+function doFill(v){
+  S.rows = exampleRows(S, v === 'min'); if (!S.inc.length || S.example) S.inc = exampleInc(S); S.example = true; S.tax = {}; ensureExampleTax(); save(); renderAll();
+  say(v === 'min' ? 'Додано найобов’язковіше для твоєї сім’ї. Заміни суми на свої.' : 'Бюджет заповнено прикладом для твоєї сім’ї. Заміни суми на свої.');
+}
+
+/* ---------- сферы и строки ---------- */
+const opt = (v, n, sel) => `<option value="${v}"${sel ? ' selected' : ''}>${esc(n)}</option>`;
+function rowHtml(r){
+  const c = CAT[r.cat], pm = perMonth(r);
+  const items = itemOpts(c, r.item);
+  const fr = FREQ.map(f => opt(f.k, f.n, r.f === f.k)).join('');
+  const mo = (r.f === 'm' || r.f === 'w') ? `<select data-k="m" disabled aria-label="Місяць оплати"><option>щоразу</option></select>`
+    : `<select data-k="m" aria-label="${r.f === 'q' || r.f === 'h' ? 'Перший місяць оплати' : 'Місяць оплати'}">${MONTHS.map((m, i) => opt(i, (r.f === 'q' || r.f === 'h') ? 'з ' + MGEN[i] : m, +r.m === i)).join('')}</select>`;
+  const pr = PRIO.map(p => opt(p.k, p.n, r.p === p.k)).join('');
+  return `<div class="r${r.p === 'cut' || r.p === 'ded' ? ' cut' : ''}" data-id="${r.id}">
+    <div class="item"><select data-k="item" aria-label="Стаття" title="${esc(itemName(r))}">${items}</select>${r.item === 'own' ? `<input type="text" data-k="own" value="${esc(r.own)}" placeholder="Назва статті" aria-label="Назва своєї статті">` : ''}</div>
+    <input class="amt" type="text" inputmode="decimal" data-k="amt" value="${esc(r.amt)}" placeholder="${hintAmt(r.item) ? 'напр. ' + hintAmt(r.item) : 'сума'}" aria-label="Сума одного платежу, CHF">
+    <select data-k="f" aria-label="Як часто">${fr}</select>
+    ${mo}
+    <select data-k="p" aria-label="Важливість">${pr}</select>
+    <select class="who" data-k="who" aria-label="Хто платить">${whoOpts(r.who)}</select>
+    <div class="pm">${chf(pm)}<small>${chf(perYear(r))} на рік</small></div>
+    <input class="cm" type="text" data-k="note" value="${esc(r.note)}" placeholder="Коментар" aria-label="Коментар">
+    <button class="del" type="button" data-del="${r.id}" aria-label="Видалити рядок">✕</button>
+  </div>`;
+}
+function renderCats(){
+  const T = calc();
+  $('cats').innerHTML = T.byCat.map(({c, rows, y, d}) => `<section class="cat" style="--c:${c.c}" data-cat="${c.id}" aria-label="${esc(c.n)}">
+    <div class="cat-head"><h3><i></i>${esc(c.n)}</h3><span class="cat-tot" data-tot="${c.id}">${catTotText(rows, y, d)}</span></div>
+    ${c.hint ? `<p class="hint">${esc(c.hint)}</p>` : ''}
+    ${rows.length ? `<div class="rows"><div class="rh"><span>Стаття</span><span class="num">Сума, CHF</span><span>Як часто</span><span>Місяць оплати</span><span>Важливість</span><span class="whoh">Хто платить</span><span class="num">На місяць</span><span>Коментар</span><span></span></div>${rows.map(rowHtml).join('')}</div>` : ''}
+    <div class="addrow"><label class="sr" for="add-${c.id}">Додати статтю у сферу ${esc(c.n)}</label>
+      <select id="add-${c.id}" data-add="${c.id}"><option value="">+ Додати статтю</option>${itemOpts(c, '')}</select></div>
+  </section>`).join('');
+}
+function findRow(el){ const box = el.closest('.r'); return box ? S.rows.find(r => r.id === box.dataset.id) : null; }
+function touch(){ if (S.example){ S.example = false; $('exampleNote').hidden = true; } }
+$('cats').addEventListener('change', e => {
+  const t = e.target;
+  if (t.dataset.add){ const c = t.dataset.add, k = t.value; t.value = ''; if (!k) return;
+    const r = k === 'own' ? {id:nid(), cat:c, item:'own', own:'', amt:'', f:'m', m:0, p:'must', note:''} : mk(k, null, {note:'приклад'});
+    S.rows.push(r); touch(); save(); renderCats(); renderTotals();
+    const el = document.querySelector(`.r[data-id="${r.id}"] ${k === 'own' ? 'input[data-k=own]' : 'input.amt'}`); if (el) el.focus();
+    return; }
+  const r = findRow(t); if (!r || !t.dataset.k) return;
+  const k = t.dataset.k;
+  if (k === 'item'){ r.item = t.value; const it = ITEM[r.item]; if (it){ r.f = it.f; r.m = it.m; r.p = it.p; } }
+  else if (k === 'f' || k === 'p' || k === 'who') r[k] = t.value;
+  else if (k === 'm') r.m = +t.value;
+  else return;
+  touch(); save(); renderCats(); renderTotals();
+});
+$('cats').addEventListener('input', e => {
+  const t = e.target, r = findRow(t); if (!r || !t.dataset.k) return;
+  if (['amt','own','note'].includes(t.dataset.k)){ r[t.dataset.k] = t.value; touch(); save();
+    if (t.dataset.k === 'amt'){ const pm = t.closest('.r').querySelector('.pm'); pm.innerHTML = `${chf(perMonth(r))}<small>${chf(perYear(r))} на рік</small>`; renderCatTot(r.cat); renderTotals(); } }
+});
+$('cats').addEventListener('click', e => {
+  const b = e.target.closest('[data-del]'); if (!b) return;
+  S.rows = S.rows.filter(r => r.id !== b.dataset.del); touch(); save(); renderCats(); renderTotals();
+});
+function catTotText(rows, y, d){
+  if (!rows.length) return 'поки порожньо';
+  return (y || !d ? `<b>${chf(y / 12)} CHF</b> на місяць · ${chf(y)} CHF на рік` : '') + (d ? `${y ? ' · ' : ''}<b>${chf(d / 12)} CHF</b> на місяць уже утримано із зарплати` : '');
+}
+function renderCatTot(cid){ const x = calc().byCat.find(b => b.c.id === cid);
+  const el = document.querySelector(`[data-tot="${cid}"]`); if (el) el.innerHTML = catTotText(x.rows, x.y, x.d); }
+
+/* ---------- доходы ---------- */
+function incRowHtml(r){
+  const items = itemOpts(INC, r.item).replace('Своя стаття…', 'Свій дохід…');
+  const fr = FREQ.map(f => opt(f.k, f.n, r.f === f.k)).join('');
+  const mo = (r.f === 'm' || r.f === 'w') ? `<select data-k="m" disabled aria-label="Місяць"><option>щоразу</option></select>`
+    : `<select data-k="m" aria-label="Місяць">${MONTHS.map((m, i) => opt(i, (r.f === 'q' || r.f === 'h') ? 'з ' + MGEN[i] : m, +r.m === i)).join('')}</select>`;
+  const vi = VIA.map(v => opt(v.k, v.n, r.v === v.k)).join('');
+  const hint = r.item !== 'own' && IITEM[r.item] ? IITEM[r.item].a : '';
+  return `<div class="r" data-id="${r.id}">
+    <div class="item"><select data-k="item" aria-label="Дохід" title="${esc(incName(r))}">${items}</select>${r.item === 'own' ? `<input type="text" data-k="own" value="${esc(r.own)}" placeholder="Назва доходу" aria-label="Назва свого доходу">` : ''}</div>
+    <input class="amt" type="text" inputmode="decimal" data-k="amt" value="${esc(r.amt)}" placeholder="${hint ? 'напр. ' + hint : 'сума'}" aria-label="Сума однієї виплати, CHF">
+    <select data-k="f" aria-label="Як часто">${fr}</select>
+    ${mo}
+    <select data-k="v" aria-label="Як надходить">${vi}</select>
+    <select class="who" data-k="who" aria-label="Чий дохід">${whoOpts(r.who)}</select>
+    <div class="pm">${chf(perMonth(r))}<small>${chf(perYear(r))} на рік</small></div>
+    <input class="cm" type="text" data-k="note" value="${esc(r.note)}" placeholder="Коментар" aria-label="Коментар">
+    <button class="del" type="button" data-del="${r.id}" aria-label="Видалити рядок">✕</button>
+  </div>`;
+}
+function renderInc(){
+  $('incRows').innerHTML = S.inc.length ? `<div class="rh"><span>Дохід</span><span class="num">Сума, CHF</span><span>Як часто</span><span>Місяць</span><span>Як надходить</span><span class="whoh">Чий дохід</span><span class="num">На місяць</span><span>Коментар</span><span></span></div>` + S.inc.slice().sort(byIncOrder).map(incRowHtml).join('') : '';
+  $('add-inc').innerHTML = '<option value="">+ Додати дохід</option>' + itemOpts(INC, '').replace('Своя стаття…', 'Свій дохід…');
+  renderIncTot();
+}
+function renderIncTot(){ const T = calc();
+  $('incTot').innerHTML = S.inc.length ? `<b>${chf(T.inc)} CHF</b> на місяць · ${chf(T.incY)} CHF на рік` + (T.incDir ? ` · з них ${chf(T.incDir)} CHF сплачують за тебе напряму` : '') : 'додай доходи, щоб побачити залишок'; }
+const findInc = el => { const b = el.closest('.r'); return b ? S.inc.find(r => r.id === b.dataset.id) : null; };
+$('incBox').addEventListener('change', e => {
+  const t = e.target;
+  if (t.id === 'add-inc'){ const k = t.value; t.value = ''; if (!k) return;
+    const r = k === 'own' ? {id:nid(), item:'own', own:'', amt:'', f:'m', m:0, v:'acct', note:''} : mkInc(k, '');
+    S.inc.push(r); touch(); save(); renderInc(); renderTotals();
+    const el = document.querySelector(`#incRows .r[data-id="${r.id}"] ${k === 'own' ? 'input[data-k=own]' : 'input.amt'}`); if (el) el.focus(); return; }
+  const r = findInc(t); if (!r || !t.dataset.k) return;
+  const k = t.dataset.k;
+  if (k === 'item'){ r.item = t.value; const it = IITEM[r.item]; if (it){ r.f = it.f; r.m = it.m; r.v = it.v; } }
+  else if (k === 'f' || k === 'v' || k === 'who') r[k] = t.value;
+  else if (k === 'm') r.m = +t.value;
+  else return;
+  touch(); save(); renderInc(); renderTotals();
+});
+$('incBox').addEventListener('input', e => {
+  const t = e.target, r = findInc(t); if (!r || !['amt','own','note'].includes(t.dataset.k)) return;
+  r[t.dataset.k] = t.value; touch(); save();
+  if (t.dataset.k === 'amt'){ t.closest('.r').querySelector('.pm').innerHTML = `${chf(perMonth(r))}<small>${chf(perYear(r))} на рік</small>`; renderIncTot(); renderTotals(); }
+});
+$('incBox').addEventListener('click', e => { const b = e.target.closest('[data-del]'); if (!b) return;
+  S.inc = S.inc.filter(r => r.id !== b.dataset.del); touch(); save(); renderInc(); renderTotals(); });
+
+const niceStep = x => { const p = Math.pow(10, Math.floor(Math.log10(Math.max(x, 1)))), n = x / p; return (n <= 1 ? 1 : n <= 2 ? 2 : n <= 2.5 ? 2.5 : n <= 5 ? 5 : 10) * p; };
+/* кольцо месяца: налоги, остальные расходы, остаток или нехватка */
+function ringSegs(inc, ex, tax){
+  const tx = Math.min(tax, ex), total = Math.max(inc, ex, 1), segs = [];
+  if (ex > inc){ segs.push(['#3A598D', Math.min(tx, inc)], ['#B1A998', Math.max(0, inc - tx)], ['#C25468', ex - inc]); }
+  else segs.push(['#3A598D', tx], ['#B1A998', ex - tx], ['#4E9A70', inc - ex]);
+  return segs.filter(x => x[1] > 0).map(([c, v]) => [c, v / total]);
+}
+function ringHtml(i, inc, ex, tax, v){
+  const r = 40, C = 2 * Math.PI * r, gap = 1.2; let off = 0;
+  const arcs = ringSegs(inc, ex, tax).map(([c, f]) => { const len = Math.max(0, f * C - (f < 1 ? gap : 0)); const el = `<circle cx="50" cy="50" r="${r}" fill="none" stroke="${c}" stroke-width="11" stroke-dasharray="${len} ${C - len}" stroke-dashoffset="${-off}" transform="rotate(-90 50 50)"/>`; off += f * C; return el; }).join('');
+  const sg = v < 0 ? '−' : '+', a = Math.abs(v), big = a >= 10000 ? (Math.round(a / 100) / 10).toLocaleString('uk-UA') + 'к' : chf(a);
+  return `<div class="rg${v < 0 ? ' neg' : ''}" title="${MONTHS[i]} · дохід ${chf(inc)} · витрати ${chf(ex)}${tax ? ' · податки ' + chf(tax) : ''}">`
+    + `<svg viewBox="0 0 100 100" role="img" aria-label="${MONTHS[i]}: ${v < 0 ? 'не вистачає' : 'залишається'} ${chf(a)} CHF"><circle class="trk" cx="50" cy="50" r="${r}" fill="none" stroke-width="11"/>${arcs}`
+    + `<text x="50" y="50" text-anchor="middle" font-family="Forum, Georgia, serif" font-size="${big.length > 6 ? 15 : 17}" fill="${v < 0 ? '#B5322A' : '#2F6E4B'}">${sg}${big}</text>`
+    + `<text x="50" y="65" text-anchor="middle" font-family="Manrope, sans-serif" font-size="8" class="sub">з ${chf(inc)}</text></svg>`
+    + `<span class="mn">${MONTHS[i]}</span><span class="tx">${tax ? 'податки ' + chf(tax) : ''}</span></div>`;
+}
+/* налоги по месяцам */
+const TAX_EXTRA = new Set(['taxS','corpTax','vatB','propTax','carT']);
+const isTax = r => r.cat === 'tax' || TAX_EXTRA.has(r.item);
+function taxMonths(){ const m = new Array(12).fill(0); S.rows.filter(r => isCash(r) && isTax(r)).forEach(r => monthSpread(r).forEach((v, i) => { m[i] += v; })); return m; }
+
+/* постоянная часть и счета каждого месяца */
+function monthBreak(){
+  const cash = S.rows.filter(isCash), base = cash.filter(r => r.f === 'm' || r.f === 'w').reduce((a, r) => a + perMonth(r), 0);
+  const extras = Array.from({length:12}, () => []);
+  cash.filter(r => r.f !== 'm' && r.f !== 'w' && num(r.amt)).forEach(r => monthSpread(r).forEach((v, i) => { if (v) extras[i].push({n:itemName(r), a:v, c:CAT[r.cat].c}); }));
+  extras.forEach(l => l.sort((x, y) => y.a - x.a));
+  return {base, extras};
+}
+
+/* ---------- кто сколько платит ---------- */
+function duoCalc(){
+  const W = {c:0, p1:0, p2:0}, I = {c:0, p1:0, p2:0}, D = {c:0, p1:0, p2:0};
+  S.rows.forEach(r => { const w = whoOf(r); if (isCash(r)) W[w] += perMonth(r); else D[w] += perMonth(r); });
+  S.inc.forEach(r => { I[whoOf(r)] += perMonth(r); });
+  const commonNet = W.c - I.c, base = I.p1 + I.p2;
+  const sh1 = S.brule === 'half' || !base ? .5 : I.p1 / base, sh = {p1:sh1, p2:1 - sh1};
+  const P = ['p1','p2'].map(w => ({w, inc:I[w], own:W[w], ded:D[w], share:sh[w], contrib:commonNet * sh[w], left:I[w] - W[w] - commonNet * sh[w]}));
+  return {W, I, D, commonNet, P};
+}
+function renderDuo(){
+  if (S.adults < 2){ return; }
+  const Q = duoCalc(), split = S.bmode === 'split';
+  $('duoLead').textContent = split ? 'Окремий бюджет. Кожен сплачує свої витрати й переказує свою частку на спільні.' : 'Спільний бюджет. Усе складається в спільний котел, а тут видно, хто скільки в нього вносить.';
+  const line = (l, v, cls) => `<div${cls ? ' class="' + cls + '"' : ''}><span>${l}</span><b>${v}</b></div>`;
+  const cards = Q.P.map((p, i) => `<div class="dp"><h3>${esc(nm(i))}</h3>
+      ${line('Доходи на місяць', chf(p.inc) + ' CHF')}
+      ${line('Свої витрати', '−' + chf(p.own) + ' CHF')}
+      ${line('Частка спільних витрат, ' + Math.round(p.share * 100) + '%', '−' + chf(Math.max(0, p.contrib)) + ' CHF')}
+      ${p.ded ? line('Уже утримано із зарплати, до залишку не входить', chf(p.ded) + ' CHF', 'mut') : ''}
+      ${line(p.left < 0 ? 'Не вистачає' : 'Залишається собі', `<span style="color:${p.left < 0 ? '#B5322A' : '#2F7F3B'}">${p.left < 0 ? '−' : ''}${chf(Math.abs(p.left))} CHF</span>`, 'big')}
+      ${split ? `<div class="tr"><span>Переказувати на спільний рахунок</span><b>${chf(Math.max(0, p.contrib))} CHF</b></div>` : ''}</div>`).join('');
+  const common = `<div class="dp"><h3>Спільне</h3>
+      ${line('Спільні витрати', chf(Q.W.c) + ' CHF')}
+      ${Q.I.c ? line('Спільні доходи й допомоги', '−' + chf(Q.I.c) + ' CHF') : ''}
+      ${line('Потрібно внести вдвох', chf(Math.max(0, Q.commonNet)) + ' CHF', 'big')}
+      <div><span>${S.brule === 'half' ? 'Ділиться порівну' : 'Ділиться пропорційно доходам'}. ${split ? '' : 'Підсумок сім’ї: ' + chf(Q.P[0].left + Q.P[1].left) + ' CHF на місяць.'}</span></div></div>`;
+  $('duoGrid').innerHTML = cards + common;
+}
+
+/* ---------- итоги, месяцы, забытое ---------- */
+function renderTotals(){
+  const T = calc();
+  const cells = [
+    [chf(T.month), 'CHF витрат на місяць у середньому'],
+    [chf(T.year), 'CHF витрат на рік'],
+    [chf(T.byPrio.must / 12), 'CHF на місяць обов’язково'],
+    [chf(T.byPrio.cut / 12), 'CHF на місяць можна скоротити'],
+  ];
+  if (T.ded) cells.push([chf(T.ded / 12), 'CHF на місяць уже утримано із зарплати']);
+  let html = '<div class="sum-row">' + cells.map(([b, s]) => `<div><b>${b}</b><span>${s}</span></div>`).join('') + '</div>';
+  if (S.inc.length){ const ok = T.left >= 0;
+    html += `<div class="sum-row"><div><b>${chf(T.inc)}</b><span>CHF доходів на місяць${T.incDir ? ', з них ' + chf(T.incDir) + ' сплачують за тебе напряму' : ''}</span></div>`
+      + `<div class="${ok ? 'good' : 'bad'}"><b>${ok ? '' : '−'}${chf(Math.abs(T.left))}</b><span>${ok ? 'CHF залишається на місяць' : 'CHF не вистачає на місяць'}${T.inc ? ' · витрати ' + Math.round(T.month / T.inc * 100) + '% доходу' : ''}</span></div></div>`; }
+  $('sum').innerHTML = html;
+  $('totNote').textContent = S.year + ' · кантон ' + CANTONS[S.canton] + ' · ' + householdLabel();
+  $('split').innerHTML = T.year ? T.byCat.filter(x => x.y).map(x => `<i style="width:${x.y / T.year * 100}%;background:${x.c.c}" title="${esc(x.c.n)} · ${Math.round(x.y / T.year * 100)}%"></i>`).join('') : '';
+  $('legend').innerHTML = T.byCat.filter(x => x.y).map(x => `<span><i style="background:${x.c.c}"></i>${esc(x.c.n)} ${Math.round(x.y / T.year * 100)}%</span>`).join('');
+  // месяцы: доходы и расходы в одном масштабе
+  const max = Math.max(...T.months, ...T.incMonths, 1), avg = T.year / 12;
+  const incG = INC_GROUPS.map(() => new Array(12).fill(0)); S.inc.forEach(r => monthSpread(r).forEach((v, i) => { incG[incGroup(r)][i] += v; }));
+
+  const lbl = v => { const sg = v < 0 ? '−' : '+', a = Math.abs(v); return `<em class="full">${sg}${chf(a)}</em><em class="short">${sg}${a >= 1000 ? (Math.round(a / 100) / 10).toLocaleString('uk-UA') + 'к' : chf(a)}</em>`; };
+  const bal = T.incMonths.map((v, i) => v - T.months[i]), bmax = Math.max(...bal.map(Math.abs), 1);
+  $('bal').hidden = !S.inc.length;
+  const hmax = Math.max(...T.incMonths, ...T.months, 1) * 1.12, pc = v => v / hmax * 100, TM = taxMonths(), taxY = TM.reduce((a, b) => a + b, 0);
+  const tmax = Math.max(...TM), tmaxI = TM.indexOf(tmax);
+  $('taxLine').innerHTML = taxY ? `<b>${chf(taxY / 12)} CHF</b><span>у середньому на місяць забирають податки${T.inc ? ', це ' + Math.round(taxY / 12 / T.inc * 100) + '% доходу' : ''}. За рік ${chf(taxY)} CHF${tmax > taxY / 12 * 1.5 ? ', найбільше у ' + MPREP[tmaxI] + ' (' + chf(tmax) + ' CHF)' : ''}.</span>`
+    : '<span>Податки поки не вписані. Додай їх у сфері «Податки та внески», і тут буде видно, скільки вони забирають щомісяця.</span>';
+  $('bal').innerHTML = bal.map((v, i) => ringHtml(i, T.incMonths[i], T.months[i], TM[i], v)).join('');
+  const neg = bal.map((v, i) => [v, i]).filter(([v]) => v < 0);
+  $('balText').textContent = !S.inc.length ? 'Тут з’явиться залишок кожного місяця, коли ти впишеш доходи.' : neg.length ? 'Не вистачає у ' + neg.map(([, i]) => MPREP[i]).join(', ') + '. Відклади на ці місяці заздалегідь із місяців із плюсом. За рік ' + (T.left >= 0 ? 'залишається ' : 'не вистачає ') + chf(Math.abs(T.left * 12)) + ' CHF.'
+    : 'Щомісяця залишається плюс. За рік ' + chf(T.left * 12) + ' CHF, які можна спрямувати на подушку безпеки й заощадження.';
+  const MB = monthBreak();
+  $('moLead').textContent = T.year ? 'Щомісяця йде ' + chf(MB.base) + ' CHF постійних витрат. Зверху приходять рахунки цього місяця.' : 'Заповни витрати, і тут з’явиться рік по місяцях.';
+  const mmax = Math.max(...T.months, 1);
+  $('months').innerHTML = T.months.map((v, i) => { const ex = MB.extras[i], peak = v > avg * 1.25;
+    const bar = `<i style="width:${MB.base / mmax * 100}%;background:#B1A998"></i>` + ex.map(e => `<i style="width:${e.a / mmax * 100}%;background:${e.c}"></i>`).join('');
+    const list = ex.length ? '<ul>' + ex.slice(0, 4).map(e => `<li><i style="background:${e.c}"></i><em title="${esc(e.n)}">${esc(e.n)}</em><b>${chf(e.a)}</b></li>`).join('') + (ex.length > 4 ? `<li><i style="background:var(--muted)"></i><em>і ще ${ex.length - 4}</em><b>${chf(ex.slice(4).reduce((x, e) => x + e.a, 0))}</b></li>` : '') + '</ul>'
+      : '<span class="calm">Тільки постійні витрати</span>';
+    return `<div class="mc${peak ? ' peak' : ''}"><div class="mh"><span>${MONTHS[i]}</span><b>${chf(v)}</b></div><div class="mbar">${bar}</div>${list}</div>`; }).join('');
+  // забытое
+  renderViz(); renderDuo();
+  $('forgot').innerHTML = FORGOT.map(([k, t]) => { const on = S.rows.some(r => r.item === k);
+    return `<button type="button" class="fg${on ? ' on' : ''}" data-fg="${k}"${on ? ' aria-disabled="true"' : ''}><em>${on ? '✓' : '+'}</em>${esc(t)}</button>`; }).join('');
+}
+$('forgot').addEventListener('click', e => {
+  const b = e.target.closest('[data-fg]'); if (!b || b.classList.contains('on')) return;
+  const r = mk(b.dataset.fg); S.rows.push(r); touch(); save(); renderCats(); renderTotals();
+  say('«' + ITEM[b.dataset.fg].n + '» додано у сферу «' + CAT[r.cat].n + '». Перевір суму, це орієнтир.');
+});
+
+/* ---------- примерный расчёт налогов (тарифы 2026) ---------- */
+// федеральный налог, ст. 36 DBG: [порог, налог на пороге, ставка выше порога]
+// Федеральный налог, ст. 36 DBG: [с какого дохода, налог на этом пороге, ставка дальше]. ESTV Rundschreiben Nr. 215 (2026) и Nr. 220 (2027), проверено 04.10.2026
+const DBG_T = {
+  2026: {s:[[15200,0,.0077],[33200,138.60,.0088],[43500,229.20,.0264],[58000,612.00,.0297],[76200,1152.50,.0594],[82100,1502.95,.066],[108900,3271.75,.088],[141500,6140.55,.11],[185100,10936.55,.132]], sTop:794000,
+         m:[[29700,0,.01],[53400,237,.02],[61300,395,.03],[79100,929,.04],[94900,1561,.05],[108700,2251,.06],[120600,2965,.07],[130500,3658,.08],[138400,4290,.09],[144300,4821,.10],[148300,5221,.11],[150400,5452,.12],[152400,5692,.13]], mTop:941400, child:263},
+  2027: {s:[[15300,0,.0077],[33400,139.35,.0088],[43700,229.95,.0264],[58300,615.35,.0297],[76500,1155.85,.0594],[82400,1506.30,.066],[109400,3288.30,.088],[142200,6174.70,.11],[185900,10981.70,.132]], sTop:797500,
+         m:[[29900,0,.01],[53700,238,.02],[61600,396,.03],[79500,933,.04],[95400,1569,.05],[109200,2259,.06],[121200,2979,.07],[131100,3672,.08],[139100,4312,.09],[145000,4843,.10],[149000,5243,.11],[151100,5474,.12],[153100,5714,.13]], mTop:946000, child:264}
+};
+const taxYear = () => S.year >= 2027 ? 2027 : 2026;
+function dbg(inc, married, kids){
+  const D = DBG_T[taxYear()], T = married ? D.m : D.s, top = married ? D.mTop : D.sTop;
+  let t = inc >= top ? inc * .115 : 0;
+  if (inc < top) for (const [th, base, r] of T) if (inc > th) t = base + (inc - th) * r;
+  if (married) t -= kids * D.child;
+  return Math.max(0, Math.round(t * 100) / 100);
+}
+// простой налог кантона Цюрих, § 35 StG: ступени [ширина, ставка]
+const ZH_GT = [[7000,0],[5000,.02],[4800,.03],[8000,.04],[9700,.05],[11200,.06],[13100,.07],[17600,.08],[34000,.09],[33700,.10],[53300,.11],[69300,.12],[Infinity,.13]];   // с 2026 года, проверено 04.10.2026
+const ZH_VT = [[14100,0],[6400,.02],[8100,.03],[9800,.04],[11200,.05],[14500,.06],[32200,.07],[32400,.08],[48500,.09],[57900,.10],[62900,.11],[72600,.12],[Infinity,.13]];
+function zhSimple(inc, vt){ let t = 0, rest = Math.max(0, inc); for (const [w, r] of (vt ? ZH_VT : ZH_GT)){ const part = Math.min(rest, w); t += part * r; rest -= part; if (rest <= 0) break; } return t; }
+function ahvSelfRate(inc){ if (inc <= 10100) return null; if (inc >= 60500) return .10; return .05371 + (inc - 10100) / (60500 - 10100) * (.10 - .05371); }
+// Steuerfuss общин кантона Цюрих на 2026 год (без церкви), по данным общин и kantonsvergleich.ch, проверено 04.10.2026
+const COMMUNES = [['Адлісвіль (Adliswil)',104],['Аффольтерн-ам-Альбіс (Affoltern a. A.)',122],['Бюлах (Bülach)',114],['Ваденсвіль (Wädenswil)',102],['Валлізеллен (Wallisellen)',93],['Ветцікон (Wetzikon)',119],['Вінтертур (Winterthur)',125],['Волькетсвіль (Volketswil)',101],['Грайфензее (Greifensee)',85],['Дітікон (Dietikon)',121],['Дюбендорф (Dübendorf)',92],['Ілльнау-Еффретікон (Illnau-Effretikon)',113],['Кільхберг (Kilchberg)',72],['Клотен (Kloten)',100],['Кюснахт (Küsnacht)',73],['Луфінген (Lufingen)',97],['Маур (Maur)',83],['Майлен (Meilen)',79],['Опфікон (Opfikon)',94],['Пфеффікон (Pfäffikon ZH)',110],['Регенсдорф (Regensdorf)',117],['Ріхтерсвіль (Richterswil)',99],['Рюті (Rüti ZH)',119],['Тальвіль (Thalwil)',78],['Устер (Uster)',112],['Фехральторф (Fehraltorf)',111],['Гінвіль (Hinwil)',116],['Горген (Horgen)',90],['Цоллікон (Zollikon)',76],['Цумікон (Zumikon)',71],['Цюрих, місто (Zürich)',119],['Шлірен (Schlieren)',111],['Штефа (Stäfa)',83],['Егг (Egg)',101],['Геррліберг (Herrliberg)',73],['Рюшлікон (Rüschlikon)',75]].sort((a, b) => a[0].localeCompare(b[0], 'uk'));
+const fussOf = X => X.commune && X.commune !== 'own' ? (COMMUNES.find(c => c[0] === X.commune) || [0, 119])[1] : (num(X.fuss) || 119);
+// BVG: 2026 порог 22 680, вычет 26 460, верх 90 720, минимум 3 780. С 2027 по решению Бундесрата от 02.10.2026 порог 23 040 и вычет 26 880, верх и минимум по формуле закона 92 160 и 3 840.
+// Доля работника = половина возрастного взноса (7/10/15/18%) плюс около 0,75% на риск. Это законный минимум, у многих касс больше.
+const BVG_Y = {2026:{entry:22680, coord:26460, upper:90720, minCoord:3780}, 2027:{entry:23040, coord:26880, upper:92160, minCoord:3840}};
+const SOC_Y = {2026:{ahvMin:530, p3a:7258, p3aBig:36288}, 2027:{ahvMin:541, p3a:7373, p3aBig:36864}};
+const BVG = {rates:[0, .07, .10, .15, .18]};
+const bvgY = () => BVG_Y[taxYear()], socY = () => SOC_Y[taxYear()];
+const ALV_CAP = 148200, NBU_RATE = .01;   // NBU у каждой страховой своя ставка, обычно около 1%
+function bvgEmployee(gross, age){
+  const BVG = Object.assign({}, bvgY(), {rates:[0, .07, .10, .15, .18]});
+  if (gross < BVG.entry) return 0;
+  const coord = Math.max(BVG.minCoord, Math.min(gross, BVG.upper) - BVG.coord);
+  return coord * (BVG.rates[age] / 2 + .0075);
+}
+function personSoc(type, emp, self, age){
+  emp = type === 'self' || type === 'none' ? 0 : emp; self = type === 'emp' || type === 'none' ? 0 : self;
+  const ahvE = emp * .053, alvE = Math.min(emp, ALV_CAP) * .011, nbu = Math.min(emp, ALV_CAP) * NBU_RATE, empSoc = ahvE + alvE + nbu, bvg = bvgEmployee(emp, age);
+  const r = ahvSelfRate(self), ahv = self ? (r === null ? socY().ahvMin : self * r) : 0, adm = ahv * .03, fak = Math.min(self, 148200) * .01025;
+  const prof = emp ? Math.min(4000, Math.max(2000, (emp - empSoc - bvg) * .03)) : 0, net = emp - empSoc - bvg + self - ahv - adm - fak;
+  return {type, emp, self, ahvE, alvE, nbu, empSoc, bvg, ahv, adm, fak, net, prof, earned: Math.max(0, net - prof), gross: emp + self};
+}
+// Вычеты 2026 и 2027. Цюрих: страховки 2 900 / 5 800 и 1 300 на ребёнка, на ребёнка 9 400, двое работающих в браке 6 200.
+// Федеральный: страховки 1 800 / 3 700 и 700 на ребёнка, на ребёнка 6 800, супругам 2 800, двое работающих 50% меньшего дохода, от 8 600 до 14 100.
+// Без пенсионной кассы и 3a вычет за страховки больше в полтора раза.
+function taxOn(net, prof, p3a, married, kids, fuss, church, persons, o){
+  o = o || {}; const k = o.noPens ? 1.5 : 1, low = o.lowEarned || 0;
+  const zv = married && low > 0 ? Math.min(low, 6200) : 0, zvCH = married && low > 0 ? Math.min(low, Math.max(8600, Math.min(14100, low * .5))) : 0;
+  const taxZH = Math.max(0, net - prof - p3a - (married ? 5800 : 2900) * k - kids * 1300 - kids * 9400 - zv);
+  const taxCH = Math.max(0, net - prof - p3a - (married ? 3700 : 1800) * k - kids * 700 - kids * 6800 - (married ? 2800 : 0) - zvCH);
+  const simple = zhSimple(taxZH, married || kids > 0);
+  return {taxZH, st: simple * .95, gem: simple * fuss / 100, ch: simple * church / 100, fed: dbg(taxCH, married || kids > 0, kids), pers: 24 * persons};
+}
+function calcTax(){
+  const X = S.tax, duo = S.adults > 1, married = (X.mar || (duo ? 'married' : 'single')) === 'married', kids = S.kids || 0;
+  const fuss = fussOf(X), church = num(X.church), ageOf = v => v === undefined || v === '' ? 2 : +v;
+  const P = [personSoc(X.type || 'emp', num(X.emp), num(X.self), ageOf(X.age))];
+  if (duo) P.push(personSoc(X.type2 || 'emp', num(X.emp2), num(X.self2), ageOf(X.age2)));
+  const p3 = [num(X.p3a), num(X.p3a2)];
+  let parts;
+  if (!duo || married){
+    const noPens = P.every((p, i) => !p.bvg && !p3[i]), lowEarned = duo && married && P[0].earned > 0 && P[1].earned > 0 ? Math.min(P[0].earned, P[1].earned) : 0;
+    const t = taxOn(P.reduce((a, p) => a + p.net, 0), P.reduce((a, p) => a + p.prof, 0), p3[0] + (duo ? p3[1] : 0), married, kids, fuss, church, duo ? 2 : 1, {noPens, lowEarned});
+    parts = [Object.assign({who:'c'}, t)];
+  } else parts = P.map((p, i) => Object.assign({who:'p' + (i + 1)}, taxOn(p.net, p.prof, p3[i], false, i === 0 ? kids : 0, fuss, church, 1, {noPens: !p.bvg && !p3[i]})));
+  const sum = (arr, k) => arr.reduce((a, x) => a + x[k], 0);
+  const out = {P, parts, joint: parts.length === 1, duo, married};
+  ['emp','self','empSoc','bvg','ahv','adm','fak','net','gross'].forEach(k => { out[k] = sum(P, k); });
+  ['st','gem','ch','fed','pers','taxZH'].forEach(k => { out[k] = sum(parts, k); });
+  out.taxes = out.st + out.gem + out.ch + out.fed + out.pers; out.soc = out.empSoc + out.bvg + out.ahv + out.adm + out.fak;
+  return out;
+}
+function taxSavePlan(R){
+  const m0 = S.tax.start === undefined || S.tax.start === '' ? new Date().getMonth() : +S.tax.start, saved = num(S.tax.saved);
+  const kgc = R.st + R.gem + R.ch + R.pers, fed = R.fed, selfSoc = R.ahv + R.adm + R.fak;
+  const nK = m0 <= 8 ? 9 - m0 : 21 - m0, nF = 15 - m0;   // месяцев до 30 сентября и до 31 марта
+  const usedForK = Math.min(saved, kgc), mK = Math.max(0, kgc - usedForK) / nK, mF = Math.max(0, fed - Math.max(0, saved - kgc)) / nF;
+  const steady = (R.taxes + selfSoc) / 12, pct = R.gross ? (R.taxes + selfSoc) / R.gross * 100 : 0;
+  return {m0, nK, nF, mK, mF, mS: selfSoc / 12, now: mK + mF + selfSoc / 12, steady, pct, kgc, fed, selfSoc};
+}
+const PAYQ = {m:{n:12, f:'m', m:0, t:'щомісяця'}, q:{n:4, f:'q', m:2, t:'раз на квартал, у березні, червні, вересні та грудні'}, h:{n:2, f:'h', m:2, t:'двічі на рік, у березні та вересні'}};
+function renderTaxSave(R){
+  const pay = S.tax.pay || 'one'; $('txPay').value = pay; $('txSaveSetup').hidden = pay !== 'one';
+  $('txSaveH').textContent = pay === 'one' ? 'Скільки насправді відкладати на податки' : 'Скільки сплачувати частинами';
+  if (pay !== 'one' && R.gross){
+    const Q = PAYQ[pay], kgc = R.st + R.gem + R.ch + R.pers, selfSoc = R.ahv + R.adm + R.fak, pct = (R.taxes + selfSoc) / R.gross * 100;
+    $('txSaveOut').innerHTML = `<div class="svgrid">
+      <div class="sv main"><b>${chf(R.taxes / Q.n)} CHF</b><span>сплачувати ${Q.t}</span></div>
+      <div class="sv"><b>${chf(R.taxes)} CHF</b><span>усі податки за рік</span></div>
+      <div class="sv"><b>${(Math.round(pct * 10) / 10).toLocaleString('uk-UA')}%</b><span>${R.self ? 'з кожного надходження від клієнтів' : 'з кожної зарплати брутто'} іде на податки${R.self ? ' і AHV' : ''}</span></div>
+    </div>
+    <ul class="svplan">
+      <li><span>Кантон, громада, церква й особистий податок</span><b>${chf(kgc / Q.n)} CHF × ${Q.n}</b></li>
+      <li><span>Федеральний податок</span><b>${chf(R.fed / Q.n)} CHF × ${Q.n}</b></li>
+      ${R.self ? `<li><span>AHV, збір каси й FAK, рахунки щокварталу</span><b>${chf(selfSoc / 4)} CHF × 4</b></li>` : ''}
+    </ul>
+    <p class="hint">Коли прийде остаточний рахунок, із нього вирахують усе, що вже сплачено частинами. Якщо сплачено більше, різницю повернуть. Кнопка нижче перенесе податки в бюджет так, як ти сплачуєш.</p>`;
+    return;
+  }
+  $('txStart').innerHTML = MONTHS.map((m, i) => opt(i, MGEN[i], i === (S.tax.start === undefined || S.tax.start === '' ? new Date().getMonth() : +S.tax.start))).join('');
+  $('txSaved').value = S.tax.saved || '';
+  if (!R.gross){ $('txSaveOut').innerHTML = '<p class="hint">Спочатку впиши дохід вище.</p>'; return; }
+  const P = taxSavePlan(R), late = P.now > P.steady * 1.05;
+  $('txSaveOut').innerHTML = `<div class="svgrid">
+      <div class="sv main"><b>${chf(P.now)} CHF</b><span>відкладати щомісяця, починаючи з ${MGEN[P.m0]}, щоб спокійно оплатити рахунки вчасно</span></div>
+      <div class="sv"><b>${chf(P.steady)} CHF</b><span>у звичайний місяць, якщо відкладати весь рік із січня</span></div>
+      <div class="sv"><b>${(Math.round(P.pct * 10) / 10).toLocaleString('uk-UA')}%</b><span>${R.self ? 'з кожного надходження від клієнтів' : 'з кожної зарплати брутто'} іде на податки${R.self ? ' і AHV' : ''}</span></div>
+    </div>
+    <ul class="svplan">
+      <li><span>Кантон, громада, церква й особистий податок, рахунок до 30 вересня</span><b>${chf(P.mK)} CHF × ${P.nK} міс.</b></li>
+      <li><span>Федеральний податок, рахунок до 31 березня наступного року</span><b>${chf(P.mF)} CHF × ${P.nF} міс.</b></li>
+      ${R.self ? `<li><span>AHV, збір каси й FAK, рахунки щокварталу</span><b>${chf(P.mS)} CHF на місяць</b></li>` : ''}
+    </ul>
+    <p class="hint">${late ? 'Ти починаєш пізніше за січень, тому до першого рахунку треба відкладати більше, ніж зазвичай. Після нього сума знову стане звичайною. ' : ''}Відкрий окремий рахунок для податків і налаштуй на цю суму постійне доручення в день ${R.self ? 'надходження грошей' : 'зарплати'}.</p>`;
+}
+function renderTax(){
+  const X = S.tax; $('txType').value = X.type || 'emp'; $('txEmp').value = X.emp || ''; $('txSelf').value = X.self || '';
+  $('txCommune').innerHTML = COMMUNES.map(([n, f]) => opt(n, n + ' · ' + f + '%', (X.commune || 'Цюрих, місто (Zürich)') === n)).join('') + opt('own', 'Інша громада, впишу сама або сам', X.commune === 'own');
+  $('lFuss').hidden = X.commune !== 'own'; $('txAge').value = X.age === undefined || X.age === '' ? '2' : X.age; $('lAge').hidden = (X.type || 'emp') === 'self';
+  $('txMar').value = X.mar || (S.adults > 1 ? 'married' : 'single'); $('txFuss').value = X.fuss || ''; $('txChurch').value = X.church || '0'; $('tx3a').value = X.p3a || '';
+  const type = X.type || 'emp'; $('lEmp').hidden = type === 'self'; $('lSelf').hidden = type === 'emp';
+  const type2 = X.type2 || 'emp'; $('txType2').value = type2; $('txEmp2').value = X.emp2 || ''; $('txSelf2').value = X.self2 || ''; $('tx3a2').value = X.p3a2 || '';
+  $('txAge2').value = X.age2 === undefined || X.age2 === '' ? '2' : X.age2;
+  $('lEmp2').hidden = type2 === 'self' || type2 === 'none'; $('lSelf2').hidden = type2 === 'emp' || type2 === 'none'; $('lAge2').hidden = type2 === 'self' || type2 === 'none';
+  $('txP1').textContent = nm(0); $('txP2').textContent = nm(1);
+  $('tx3a').placeholder = $('tx3a2').placeholder = 'максимум ' + chf(socY().p3a) + ' у ' + taxYear();
+  $('tcYear').textContent = taxYear();
+  const R = calcTax(); if (!R.gross){ renderTaxSave(R); $('txOut').innerHTML = '<p class="hint">Впиши дохід до податків за рік, і тут з’явиться приблизний розрахунок по місяцях.</p>'; $('txApply').disabled = true; $('txNote').textContent = ''; return; }
+  $('txApply').disabled = false;
+  const row = (n, v) => `<div><em style="font-style:normal">${n}</em><span>${chf(v)} на рік</span><b>${chf(v / 12)}</b></div>`;
+  const who = i => R.duo ? ' · ' + esc(nm(i)) : '';
+  const soc = R.P.map((p, i) => (p.emp ? row('AHV, IV, EO із зарплати (5,3%)' + who(i), p.ahvE) + row('Страхування від безробіття ALV (1,1%)' + who(i), p.alvE) + row('Нещасний випадок поза роботою NBU, близько 1%' + who(i), p.nbu)
+      + (p.bvg ? row('Пенсійна каса, мінімум за BVG' + who(i), p.bvg) : '<div><em style="font-style:normal">Пенсійна каса не обов’язкова' + who(i) + ', зарплата нижча за ' + chf(bvgY().entry) + ' CHF</em><span></span><b>0</b></div>') : '')
+    + (p.self ? row('AHV, IV, EO для самозайнятих' + who(i) + ' (' + (ahvSelfRate(p.self) ? (Math.round(ahvSelfRate(p.self) * 1000) / 10).toLocaleString('uk-UA') + '%' : 'мінімум') + ')', p.ahv) + row('Збір каси AHV, близько 3%' + who(i), p.adm) + row('Каса сімейних допомог FAK' + who(i), p.fak) : '')).join('');
+  const taxRows = R.parts.map(t => { const w = t.who === 'p1' ? who(0) : t.who === 'p2' ? who(1) : '';
+    return row('Кантональний податок (95%)' + w, t.st) + row('Податок громади (' + fussOf(S.tax) + '%)' + w, t.gem) + (t.ch ? row('Церковний податок' + w, t.ch) : '') + row('Федеральний податок' + w, t.fed) + row('Особистий податок' + w, t.pers); }).join('');
+  $('txOut').innerHTML = `<div class="txbig"><b>${chf((R.taxes + R.soc) / 12)} CHF</b><span>на місяць іде на податки й внески, це ${Math.round((R.taxes + R.soc) / R.gross * 100)}% доходу до податків. З них податки ${chf(R.taxes / 12)} CHF на місяць.</span></div>`
+    + `<div class="txg"><h4>Податки, на місяць${R.duo ? (R.joint ? ' · у шлюбі, один спільний рахунок' : ' · кожен платить сам') : ''}</h4>${taxRows}<div class="tot"><em style="font-style:normal">Разом податки</em><span>${chf(R.taxes)} на рік</span><b>${chf(R.taxes / 12)}</b></div></div>`
+    + `<div class="txg"><h4>Соцвнески, на місяць</h4>${soc}<div class="tot"><em style="font-style:normal">Разом внески</em><span>${chf(R.soc)} на рік</span><b>${chf(R.soc / 12)}</b></div></div>`;
+  renderTaxSave(R);
+  $('txNote').textContent = (S.canton !== 'ZH' ? 'Пораховано за тарифом кантону Цюрих, у кантоні ' + CANTONS[S.canton] + ' сума буде іншою. ' : '') + (R.duo ? (R.joint ? 'У шлюбі у Швейцарії податок рахують із загального доходу сім’ї, рахунок приходить один на двох. ' : 'Без шлюбу кожен платить податок окремо, зі свого доходу. ') : '') + 'Це приблизний розрахунок. Оподатковуваний дохід ' + chf(R.taxZH) + ' CHF після стандартних відрахувань.';
+}
+['txType','txMar','txChurch','txCommune','txAge','txType2','txAge2'].forEach(id => $(id).addEventListener('change', e => { S.tax[{txType:'type', txMar:'mar', txChurch:'church', txCommune:'commune', txAge:'age', txType2:'type2', txAge2:'age2'}[id]] = e.target.value; save(); renderTax(); }));
+['txEmp','txSelf','txFuss','tx3a','txSaved','txEmp2','txSelf2','tx3a2'].forEach(id => $(id).addEventListener('input', e => { S.tax[{txEmp:'emp', txSelf:'self', txFuss:'fuss', tx3a:'p3a', txSaved:'saved', txEmp2:'emp2', txSelf2:'self2', tx3a2:'p3a2'}[id]] = e.target.value; save(); renderTax(); }));
+$('txStart').addEventListener('change', e => { S.tax.start = e.target.value; save(); renderTax(); });
+$('txPay').addEventListener('change', e => { S.tax.pay = e.target.value; save(); renderTax(); });
+let exNote = false;
+function applyTaxRows(R){
+  const TAXK = ['taxSt','taxG','church','taxB','pers','taxK'], SOCK = ['ahvE','alvE','nbuE','bvgE','ahvS','ahvAdm','famS'];
+  const keepWho = R.duo ? (R.joint ? ['c'] : ['p1','p2']) : ['c'];
+  S.rows = S.rows.filter(r => !(TAXK.includes(r.item) && !keepWho.includes(r.who || 'c')));   // старая раскладка налогов убирается
+  S.rows = S.rows.filter(r => !(SOCK.includes(r.item) && (r.who || 'c') !== 'c' && !R.duo));
+  const set = (k, amt, f, m, note, who) => { who = who || 'c'; let r = S.rows.find(x => x.item === k && (x.who || 'c') === who);
+    if (amt <= 0){ if (r) S.rows = S.rows.filter(x => x !== r); return; }
+    if (!r){ r = mk(k, ''); r.who = who; S.rows.push(r); } r.amt = String(Math.round(amt)); r.f = f; r.m = m; r.note = note; };
+  const N = exNote ? 'приклад' : 'приблизний розрахунок';
+  set('taxK', 0);
+  const Q = PAYQ[S.tax.pay], tx = (k, v, m, who) => Q ? set(k, v / Q.n, Q.f, Q.m, N + ', частинами', who) : set(k, v, 'y', m, N, who);
+  R.parts.forEach(t => { tx('taxSt', t.st, 8, t.who); tx('taxG', t.gem, 8, t.who); tx('church', t.ch, 8, t.who); tx('taxB', t.fed, 2, t.who); tx('pers', t.pers, 8, t.who); });
+  R.P.forEach((p, i) => { const w = R.duo ? 'p' + (i + 1) : 'c';
+    set('ahvE', p.ahvE / 12, 'm', 0, N, w); set('alvE', p.alvE / 12, 'm', 0, N, w); set('nbuE', p.nbu / 12, 'm', 0, N, w); set('bvgE', p.bvg / 12, 'm', 0, N, w);
+    set('ahvS', p.ahv / 4, 'q', 2, N, w); set('ahvAdm', p.adm / 4, 'q', 2, N, w); set('famS', p.fak / 4, 'q', 2, N, w); });
+  S.rows.filter(r => ['ahvE','alvE','nbuE','bvgE'].includes(r.item)).forEach(r => { r.p = 'ded'; });
+}
+function ensureExampleTax(){                     // пример сразу с налогами из калькулятора
+  const hasTax = S.rows.some(r => ['taxSt','taxG','taxB','taxK'].includes(r.item) && num(r.amt) > 0);
+  const firstRun = S.taxEx !== 2 && !hasTax;    // налоги примером, если своих сумм налогов ещё нет
+  S.taxEx = 2;
+  if (!(S.example || firstRun) || num(S.tax.emp) || num(S.tax.self)) return;
+  const A = S.adults;
+  S.tax = A > 1 ? {type:'emp', emp:'84000', type2:'emp', emp2:'56000', mar:'married', church:'10'} : {type:'emp', emp:'84000', mar:'single', church:'10'};
+  S.rows = S.rows.filter(r => r.item !== 'taxRes');
+  const R = calcTax(); exNote = true; applyTaxRows(R); exNote = false;
+  S.rows = S.rows.filter(r => !(r.cat === 'tax' && !num(r.amt)));   // пустые налоговые строки убираем, чтобы не было двойного счёта
+  const r10 = v => String(Math.round(v / 10) * 10), netOf = p => p.emp - p.empSoc - p.bvg;
+  const sal = S.inc.find(r => r.item === 'salN'), par = S.inc.find(r => r.item === 'salP');
+  if (!S.example) return;
+  if (sal){ sal.amt = r10(netOf(R.P[0]) / 12); if (A > 1) sal.who = 'p1'; }
+  if (par && R.P[1]){ par.amt = r10(netOf(R.P[1]) / 12); par.who = 'p2'; }
+}
+$('txApply').addEventListener('click', () => {
+  applyTaxRows(calcTax());
+  touch(); save(); renderCats(); renderTotals();
+  const dbl = S.rows.some(r => r.item === 'taxRes' || r.item === 'taxP' || r.item === 'qst');
+  say('Податки та внески перенесено в бюджет.' + (dbl ? ' У сфері «Податки та внески» залишився рядок «Відкладаю на податки», «Попередні рахунки» або «Податок у джерела». Видали його, щоб не порахувати податки двічі.' : ''));
+});
+
+/* ---------- инфографика ---------- */
+const SAVE_KEYS = new Set(['res','invest','kidsS','p3a','p3aY','p3b','bvg','p3aS','bvgS','bufferS','life3a']);
+const PILLARS = [
+  {n:'1 опора', t:'AHV, державна', c:'#3F6FBF', keys:['ahvE','ahv','ahvS','ahvAdm','ahvGap','ahvNach','alvE']},
+  {n:'2 опора', t:'пенсійна каса BVG', c:'#4E9A70', keys:['bvgE','bvgS','bvg']},
+  {n:'3 опора', t:'твої заощадження 3a і 3b', c:'#C97E52', keys:['p3a','p3aY','p3aS','p3b','life3a']},
+];
+function vizData(){
+  const T = calc(), cash = S.rows.filter(isCash);
+  const sumY = f => cash.filter(f).reduce((a, r) => a + perYear(r), 0);
+  const save = sumY(r => SAVE_KEYS.has(r.item)), must = sumY(r => !SAVE_KEYS.has(r.item) && r.p === 'must'), want = sumY(r => !SAVE_KEYS.has(r.item) && r.p !== 'must');
+  const base = T.incY || T.year;
+  const pill = PILLARS.map(p => S.rows.filter(r => p.keys.includes(r.item)).reduce((a, r) => a + perYear(r), 0) / 12);
+  const mustM = T.byPrio.must / 12, have = num(S.savings), resM = cash.filter(r => r.item === 'res' || r.item === 'bufferS').reduce((a, r) => a + perMonth(r), 0);
+  return {T, save, must, want, base, pill, mustM, have, resM, months: mustM ? have / mustM : 0};
+}
+function waffleParts(V){                         // 100 клеток по методу наибольших остатков; легенда = ровно эти клетки
+  const T = V.T, base = T.incY || T.year; if (!base) return [];
+  let parts = T.byCat.filter(x => x.y).map(x => ({c:x.c.c, n:SHORT[x.c.id] || x.c.n, v:x.y / base * 100}));
+  if (T.incY && T.incY > T.year) parts.push({c:'#B0DCC0', n:'Залишається тобі', v:(T.incY - T.year) / base * 100, rest:true});
+  const total = parts.reduce((a, p) => a + p.v, 0), scale = total > 100 ? 100 / total : 1;
+  parts.forEach(p => { p.v *= scale; p.k = Math.floor(p.v); });
+  let left = 100 - parts.reduce((a, p) => a + p.k, 0);
+  parts.slice().sort((a, b) => (b.v - b.k) - (a.v - a.k)).forEach(p => { if (left > 0){ p.k++; left--; } });
+  return parts.filter(p => p.k > 0);
+}
+function waffleCells(V){ const cells = []; waffleParts(V).forEach(p => { for (let i = 0; i < p.k; i++) cells.push(p.c); }); return cells; }
+function renderViz(){
+  const V = vizData(), T = V.T, cells = waffleCells(V);
+  $('wfTitle').textContent = T.incY ? 'З кожних 100 франків доходу' : 'З кожних 100 франків витрат';
+  $('waffle').innerHTML = Array.from({length:100}, (_, i) => `<i style="background:${cells[i] || 'var(--soft)'}"></i>`).join('');
+  const top = T.byCat.filter(x => x.y).sort((a, b) => b.y - a.y), baseW = T.incY || T.year || 1;
+  let leg = waffleParts(V).map(p => `<span title="${esc(p.n)} · ${p.k}"><i style="background:${p.c}"></i><em>${esc(p.n)}</em><b>${p.k}</b></span>`).join('');
+  if (T.incY && T.left < 0) leg += `<span><i style="background:#C25468"></i><em>Витрати більші за дохід на</em><b>${Math.round(-T.left / T.inc * 100)}%</b></span>`;
+  $('wfLegend').classList.toggle('many', waffleParts(V).length > 9);
+  $('wfLegend').innerHTML = T.year ? leg : '<span>Заповни бюджет, і тут з’явиться картинка.</span>';
+  // 50/30/20
+  const rl = (name, val, target, color, hint, more) => { const pct = V.base ? val / V.base * 100 : 0, ok = more ? pct >= target : pct <= target;
+    return `<div class="rl"><div class="top"><span>${name}</span><em>${Math.round(pct)}% · орієнтир ${more ? 'від' : 'до'} ${target}%</em></div>
+      <div class="tr"><i style="width:${Math.min(100, pct)}%;background:${color}"></i><u style="left:${target}%"></u></div><small>${ok ? '✓ ' : ''}${hint(ok)}</small></div>`; };
+  $('rule').innerHTML = V.base ? [
+    rl('Обов’язкове', V.must, 50, '#3F6FBF', ok => ok ? 'У межах орієнтира.' : 'Більше половини, звична справа в перші роки. Почни з найбільших статей.', false),
+    rl('Важливе й бажання', V.want, 30, '#C97E52', ok => ok ? 'Є місце для радості, і воно під контролем.' : 'Подивися статті з важливістю «можна скоротити».', false),
+    rl('Заощадження й майбутнє', V.save, 20, '#4E9A70', ok => ok ? 'Ти будуєш свою опору.' : 'Навіть 5% щомісяця вже змінюють картину через рік.', true),
+  ].join('') + (T.incY ? '' : '<small>Впиши доходи, і відсотки рахуватимуться від доходу, а не від витрат.</small>') : '<small>Заповни бюджет, і тут з’явиться розрахунок.</small>';
+  // подушка
+  $('savings').value = S.savings || '';
+  $('cush').innerHTML = Array.from({length:6}, (_, i) => `<i><b style="width:${Math.max(0, Math.min(1, V.months - i)) * 100}%"></b></i>`).join('');
+  const target = V.mustM * 3;
+  $('cushText').innerHTML = !V.mustM ? 'Познач обов’язкові витрати, і тут з’явиться твоя мета.'
+    : `Мета на три місяці <b>${chf(target)} CHF</b>. ` + (V.have ? `Зараз у тебе запас на <b>${(Math.round(V.months * 10) / 10).toLocaleString('uk-UA')} міс.</b> ` : '')
+      + (V.have >= target ? 'Подушка на місці, наступний крок — шість місяців.' : V.resM ? `Якщо відкладати ${chf(V.resM)} CHF на місяць, до мети приблизно <b>${Math.ceil((target - V.have) / V.resM)} міс.</b>` : 'Додай у «Резерв і заощадження» рядок «Резерв на непередбачене», і тут буде видно, коли ти дійдеш до мети.');
+  // опоры
+  const pmax = Math.max(...V.pill, 1);
+  $('pillars').innerHTML = PILLARS.map((p, i) => `<div class="pr${V.pill[i] ? '' : ' zero'}"><span class="no" style="background:${p.c}">${i + 1}</span>
+      <span class="nm">${['Державна, AHV','Пенсійна каса, BVG','Особиста, 3a і 3b'][i]}<small>${['для всіх мешканців','через роботодавця','за бажанням, зменшує податки'][i]}</small></span>
+      <span class="am" style="color:${V.pill[i] ? p.c : ''}">${chf(V.pill[i])} CHF</span>
+      <span class="tr"><i style="width:${V.pill[i] / pmax * 100}%;background:${p.c}"></i></span></div>`).join('');
+  const tot = V.pill.reduce((a, b) => a + b, 0);
+  $('pillText').innerHTML = tot ? `Усього на пенсію <b>${chf(tot)} CHF</b> на місяць. ${V.pill[2] ? 'Третя опора ще й зменшує твої податки.' : 'Третя опора 3a ще й зменшує податки. Подумай, чи можна почати з невеликої суми.'}`
+    : 'Додай пенсійні внески у сфері «Пенсія та соцвнески», і стовпчики виростуть.';
+}
+$('savings').addEventListener('input', e => { S.savings = e.target.value; save(); renderViz(); });
+
+/* ---------- очистить и удалить историю ---------- */
+function renderClear(mode){
+  const box = $('clearBox');
+  if (mode === 'sheet') box.innerHTML = `<span class="confirm">Очистити всі рядки бюджету, доходи й витрати? <button class="btn danger sm" id="clrYes" type="button">Так, очистити</button><button class="btn ghost sm" id="clrNo" type="button">Скасувати</button></span>`;
+  else if (mode === 'fill') box.innerHTML = `<span class="confirm">Замінити твої рядки прикладом? <button class="btn danger sm" id="fillYes" type="button">Так, замінити</button><button class="btn ghost sm" id="clrNo" type="button">Скасувати</button></span>`;
+  else if (mode === 'all') box.innerHTML = `<span class="confirm">Видалити з браузера всі твої дані цього бюджету? <button class="btn danger sm" id="delYes" type="button">Так, видалити історію</button><button class="btn ghost sm" id="clrNo" type="button">Скасувати</button></span>`;
+  else box.innerHTML = `<button class="btn ghost" id="clrSheet" type="button">Очистити аркуш</button> <button class="btn ghost" id="delAll" type="button">Видалити історію</button>`;
+}
+$('clearBox').addEventListener('click', e => {
+  const id = e.target.id;
+  if (id === 'clrSheet') renderClear('sheet');
+  else if (id === 'delAll') renderClear('all');
+  else if (id === 'clrNo') renderClear();
+  else if (id === 'fillYes'){ renderClear(); doFill(pendingFill); }
+  else if (id === 'clrYes'){ S.rows = []; S.inc = []; S.savings = ''; S.tax = {}; S.example = false; save(); renderClear(); renderAll(); say('Аркуш очищено. Додавай статті у сфери або вибери варіант «Почати».'); }
+  else if (id === 'delYes'){ try { localStorage.removeItem(KEY); } catch(err) {} S = fresh(); renderClear(); renderAll(); say('Історію видалено. У браузері більше немає твоїх даних цього бюджету.'); }
+});
+
+/* ---------- поделиться ---------- */
+function shareLinks(){ const t = $('shareText').value;
+  $('tgShare').href = 'https://t.me/share/url?url=' + encodeURIComponent(SHARE_URL) + '&text=' + encodeURIComponent(t.replace(SHARE_URL, '').trim());
+  $('waShare').href = 'https://wa.me/?text=' + encodeURIComponent(t); }
+$('shareText').value = SHARE_MSG; shareLinks();
+$('shareText').addEventListener('input', shareLinks);
+$('shareBtn').addEventListener('click', () => { const p = $('sharePanel'); p.hidden = !p.hidden; $('shareBtn').setAttribute('aria-expanded', String(!p.hidden)); });
+$('copyMsg').addEventListener('click', () => {
+  const fb = () => { $('shareText').select(); say('Виділи текст і скопіюй його вручну.'); };
+  try { navigator.clipboard.writeText($('shareText').value).then(() => say('Повідомлення скопійовано. Встав його в чат друзям.'), fb); } catch(e) { fb(); }
+});
+
+/* ---------- советы ---------- */
+const TECH = [
+  ['#8E8470','Спершу обов’язкове','Почни з того, без чого тут не прожити. Житло, медстраховка, податки, транспорт до роботи чи на курс. Усе інше потім.'],
+  ['#4E9A70','Спершу заплати собі','У день зарплати одразу переказуй частину на заощадження, а не те, що залишиться наприкінці місяця. Навіть 5% стають звичкою, а звичка стає опорою.'],
+  ['#3F6FBF','Три рахунки замість одного','Перший рахунок для життя на місяць. Другий для річних рахунків, туди щомісяця йде дванадцята частина податків, Serafe і страховок. Третій для резерву, його не чіпаєш.'],
+  ['#3A598D','Податок забирає більше, ніж здається','У Швейцарії податки не завжди віднімають із зарплати. У багатьох мешканців і в усіх самозайнятих рахунок приходить потім, однією великою сумою за цілий рік. Кантон, громада, церква й федерація разом часто забирають від 10 до 20% доходу, а в самозайнятих ще близько 10% іде на AHV.'],
+  ['#3A598D','Перший рік — найнебезпечніший','Коли ти переходиш із податку у джерела на звичайну декларацію або починаєш свою справу, перші рахунки приходять із запізненням. Іноді за один рік приходять податки одразу за два. Якщо не відкладати від самого початку, цей момент може з’їсти всі заощадження.'],
+  ['#3A598D','Окремий рахунок для податків','Відкрий окремий рахунок тільки для податків і налаштуй постійне доручення на день зарплати. Самозайнятим зручніше відкладати відсоток із кожного надходження. Скільки саме, покаже калькулятор податків вище.'],
+  ['#3A598D','Податки відкладай одразу','Якщо податок не віднімають із зарплати, відкладай його з кожного доходу. Попередні рахунки приходять протягом року, а остаточний буває більшим.'],
+  ['#2894A0','Франшиза — це теж витрата','Що вища франшиза, то дешевша страховка, але то більше ти платиш сама або сам у лікаря. Тримай франшизу в резерві на рік.'],
+  ['#A99A2E','Переглядай щоосені','Восени оголошують нові премії медстраховки, і до кінця листопада можна змінити касу або франшизу. Добрий момент перевірити весь бюджет.'],
+  ['#C97E52','Третя опора працює двічі','Внесок у 3a зменшує податок уже цього року і накопичує на пенсію. Почати можна з невеликої суми, а поповнити до кінця грудня.'],
+  ['#C25468','Кредит коштує дорого','Споживчий кредит і розстрочка у Швейцарії можуть коштувати до 10% на рік. Лізинг машини теж кредит. Перш ніж підписати, порахуй повну суму, яку віддаси.'],
+  ['#706758','Бережи чисту виписку','У Швейцарії орендодавці й роботодавці дивляться виписку з реєстру боргів (Betreibungsregister). Неоплачений рахунок може туди потрапити. Якщо не можеш заплатити, одразу телефонуй і домовляйся про розстрочку.'],
+  ['#2A7278','Порахуй свій абонемент','Halbtax окуповується вже за невеликих поїздок. GA вигідний, коли ти їздиш багато щодня. Порівняй зі своїми реальними квитками за місяць.'],
+  ['#6A5FB8','Говоріть про гроші вдома','Раз на місяць сідайте разом із бюджетом. Що вийшло, що здивувало, на що збираємо. Гроші, про які говорять, перестають бути джерелом сварок.'],
+  ['#77B692','Познач, що можна скоротити','Важливість «можна скоротити» не означає відмовитися. Це твій запас для маневру, якщо місяць виявиться важким.'],
+];
+$('tech').innerHTML = TECH.map(([c, t, p], i) => `<article class="tq"><span class="k" style="background:${c}">${i + 1}</span><h3>${t}</h3><p>${p}</p></article>`).join('');
+
+/* ---------- отчёт PDF: листы A4 на холсте ---------- */
+const PW = 2480, PH = 3508, PM = 150;
+const PC = {bg:'#FFFCF8', ink:'#2F2924', muted:'#7A6E62', line:'#E5D9C9', soft:'#F4EDE3', brown:'#6E4F3C', sage:'#4F5E3E', mustard:'#B98324', red:'#B5322A', green:'#2F7F3B'};
+function roundRect(c, x, y, w, h, r){ r = Math.min(r, h/2, w/2); c.beginPath(); c.moveTo(x+r,y); c.arcTo(x+w,y,x+w,y+h,r); c.arcTo(x+w,y+h,x,y+h,r); c.arcTo(x,y+h,x,y,r); c.arcTo(x,y,x+w,y,r); c.closePath(); }
+function fit(c, text, w){ text = String(text); if (c.measureText(text).width <= w) return text; while (text.length > 1 && c.measureText(text + '…').width > w) text = text.slice(0, -1); return text + '…'; }
+function newPage(n){
+  const cv = document.createElement('canvas'); cv.width = PW; cv.height = PH; const c = cv.getContext('2d');
+  c.fillStyle = PC.bg; c.fillRect(0, 0, PW, PH); c.textBaseline = 'alphabetic'; cv.links = []; cv.n = n; return cv;
+}
+function footer(cv, n, total){
+  const c = cv.getContext('2d'); c.font = '600 32px Manrope, sans-serif'; let fx = PM; const fy = PH - 90;
+  c.fillStyle = PC.line; c.fillRect(PM, fy - 70, PW - 2*PM, 3);
+  CREDIT_PARTS.forEach((part, i) => {
+    if (i){ c.fillStyle = PC.muted; c.fillText(' · ', fx, fy); fx += c.measureText(' · ').width; }
+    const w = c.measureText(part.t).width; c.fillStyle = PC.brown; c.fillText(part.t, fx, fy); c.fillRect(fx, fy + 6, w, 2);
+    cv.links.push({x: fx, y: fy - 32, w, h: 44, url: part.u}); fx += w;
+  });
+  c.fillStyle = PC.muted; c.textAlign = 'right'; c.fillText(n + ' / ' + total, PW - PM, fy); c.textAlign = 'left';
+}
+function drawVizPage(c, y0){
+  const V = vizData(), T = V.T; let y = y0;
+  c.fillStyle = PC.ink; c.font = '90px Forum, Georgia, serif'; c.fillText('Мої гроші в картинках', PM, y + 50); y += 160;
+  // вафля
+  const cells = waffleCells(V), sz = 92, gp = 12;
+  c.font = '56px Forum, Georgia, serif'; c.fillText(T.incY ? 'З кожних 100 франків доходу' : 'З кожних 100 франків витрат', PM, y); y += 50;
+  for (let i = 0; i < 100; i++){ c.fillStyle = cells[i] || PC.soft; roundRect(c, PM + (i % 10) * (sz + gp), y + Math.floor(i / 10) * (sz + gp), sz, sz, 16); c.fill(); }
+  const top = T.byCat.filter(x => x.y).sort((a, b) => b.y - a.y), baseW = T.incY || T.year || 1, lx = PM + 10 * (sz + gp) + 80; let ly = y + 40;
+  const legRows = waffleParts(V).map(p => [p.c, p.n, p.k]);
+  legRows.forEach(([col, n, pc]) => { c.fillStyle = col; roundRect(c, lx, ly - 30, 34, 34, 8); c.fill(); c.fillStyle = PC.ink; c.font = '600 36px Manrope, sans-serif'; c.fillText(fit(c, n, PW - PM - lx - 200), lx + 56, ly); c.textAlign = 'right'; c.font = '800 36px Manrope, sans-serif'; c.fillText(pc + '%', PW - PM, ly); c.textAlign = 'left'; ly += legRows.length > 15 ? 48 : 58; });
+  y += 10 * (sz + gp) + 100;
+  // 50/30/20
+  c.fillStyle = PC.ink; c.font = '56px Forum, Georgia, serif'; c.fillText('Правило 50, 30, 20', PM, y); y += 30;
+  [['Обов’язкове', V.must, 50, '#3F6FBF', false], ['Важливе й бажання', V.want, 30, '#C97E52', false], ['Заощадження й майбутнє', V.save, 20, '#4E9A70', true]].forEach(([n, v, t, col, more]) => {
+    const pct = V.base ? v / V.base * 100 : 0, bw = PW - 2*PM; y += 80;
+    c.fillStyle = PC.ink; c.font = '700 36px Manrope, sans-serif'; c.fillText(n, PM, y);
+    c.fillStyle = PC.muted; c.font = '600 32px Manrope, sans-serif'; c.textAlign = 'right'; c.fillText(Math.round(pct) + '% · орієнтир ' + (more ? 'від ' : 'до ') + t + '%', PW - PM, y); c.textAlign = 'left';
+    y += 24; c.fillStyle = PC.soft; roundRect(c, PM, y, bw, 40, 20); c.fill();
+    c.fillStyle = col; roundRect(c, PM, y, Math.max(40, bw * Math.min(100, pct) / 100), 40, 20); c.fill();
+    c.fillStyle = PC.ink; c.globalAlpha = .6; c.fillRect(PM + bw * t / 100 - 3, y - 12, 6, 64); c.globalAlpha = 1; y += 40; });
+  y += 110;
+  // подушка и опоры в две колонны
+  const half = (PW - 2*PM - 80) / 2, x2 = PM + half + 80, yTop = y;
+  c.fillStyle = PC.ink; c.font = '56px Forum, Georgia, serif'; c.fillText('Подушка безпеки', PM, y); y += 50;
+  const sw = (half - 5 * 14) / 6;
+  for (let i = 0; i < 6; i++){ const x = PM + i * (sw + 14); c.fillStyle = PC.soft; roundRect(c, x, y, sw, 80, 16); c.fill();
+    const f = Math.max(0, Math.min(1, V.months - i)); if (f){ c.save(); roundRect(c, x, y, sw, 80, 16); c.clip(); c.fillStyle = '#4E9A70'; c.fillRect(x, y, sw * f, 80); c.restore(); }
+    c.fillStyle = PC.muted; c.font = '600 28px Manrope, sans-serif'; c.textAlign = 'center'; c.fillText((i + 1) + ' міс', x + sw / 2, y + 125); c.textAlign = 'left'; }
+  y += 200; c.fillStyle = PC.ink; c.font = '500 34px Manrope, sans-serif';
+  const cl = [V.mustM ? 'Мета на три місяці ' + chf(V.mustM * 3) + ' CHF.' : 'Познач обов’язкові витрати.'];
+  if (V.have) cl.push('Відкладено ' + chf(V.have) + ' CHF, це ' + (Math.round(V.months * 10) / 10).toLocaleString('uk-UA') + ' міс.');
+  if (V.mustM && V.have < V.mustM * 3 && V.resM) cl.push('По ' + chf(V.resM) + ' CHF на місяць, до мети близько ' + Math.ceil((V.mustM * 3 - V.have) / V.resM) + ' міс.');
+  cl.forEach(t => { c.fillText(fit(c, t, half), PM, y); y += 50; });
+  // опоры
+  let py = yTop; c.fillStyle = PC.ink; c.font = '56px Forum, Georgia, serif'; c.fillText('Три опори пенсії', x2, py); py += 50;
+  const pmax = Math.max(...V.pill, 1);
+  ['Державна, AHV','Пенсійна каса, BVG','Особиста, 3a і 3b'].forEach((n, i) => { const p = PILLARS[i], yy = py + i * 120;
+    c.fillStyle = p.c; c.beginPath(); c.arc(x2 + 28, yy + 26, 28, 0, Math.PI * 2); c.fill();
+    c.fillStyle = '#FFFFFF'; c.font = '36px Forum, Georgia, serif'; c.textAlign = 'center'; c.fillText(String(i + 1), x2 + 28, yy + 38);
+    c.fillStyle = PC.ink; c.font = '700 30px Manrope, sans-serif'; c.textAlign = 'left'; c.fillText(n, x2 + 76, yy + 36);
+    c.fillStyle = V.pill[i] ? p.c : PC.muted; c.font = '48px Forum, Georgia, serif'; c.textAlign = 'right'; c.fillText(chf(V.pill[i]) + ' CHF', x2 + half, yy + 40); c.textAlign = 'left';
+    c.fillStyle = PC.soft; roundRect(c, x2 + 76, yy + 62, half - 76, 18, 9); c.fill();
+    if (V.pill[i]){ c.fillStyle = p.c; roundRect(c, x2 + 76, yy + 62, Math.max(18, (half - 76) * V.pill[i] / pmax), 18, 9); c.fill(); } });
+  py += 3 * 120;
+  const baseY = py;
+  c.fillStyle = PC.muted; c.font = '500 28px Manrope, sans-serif'; c.fillText('на місяць, CHF · усього ' + chf(V.pill.reduce((a, b) => a + b, 0)), x2, baseY + 30);
+  return Math.max(y, baseY + 60);
+}
+function drawIncomePage(c, y){
+  const T = calc(), bal = T.incMonths.map((v, i) => v - T.months[i]), TM = taxMonths(), taxY = TM.reduce((a, b) => a + b, 0);
+  c.fillStyle = PC.ink; c.font = '90px Forum, Georgia, serif'; c.fillText('Доходи й витрати кожного місяця', PM, y + 50); y += 120;
+  if (taxY){ c.fillStyle = '#3A598D'; c.font = '64px Forum, Georgia, serif'; const t1 = chf(taxY / 12) + ' CHF'; c.fillText(t1, PM, y + 10); const w1 = c.measureText(t1).width;
+    c.fillStyle = PC.muted; c.font = '500 32px Manrope, sans-serif'; c.fillText(fit(c, 'у середньому на місяць забирають податки' + (T.inc ? ', це ' + Math.round(taxY / 12 / T.inc * 100) + '% доходу' : '') + ' · за рік ' + chf(taxY) + ' CHF', PW - 2*PM - w1 - 30), PM + 30 + w1, y); y += 90; }
+  // легенда
+  let lx = PM; c.font = '600 30px Manrope, sans-serif';
+  [['податки','#3A598D'],['інші витрати','#B1A998'],['залишається тобі','#4E9A70'],['не вистачає','#C25468']].forEach(([t, col]) => {
+    c.fillStyle = col; c.beginPath(); c.arc(lx + 16, y - 11, 16, 0, Math.PI * 2); c.fill(); c.fillStyle = PC.muted; c.fillText(t, lx + 44, y); lx += 100 + c.measureText(t).width; });
+  y += 60;
+  const cols = 4, gap = 30, cw = (PW - 2*PM - gap * (cols - 1)) / cols, ch = 520;
+  bal.forEach((v, i) => { const x = PM + (i % cols) * (cw + gap), yy = y + Math.floor(i / cols) * (ch + gap), inc = T.incMonths[i], ex = T.months[i];
+    c.fillStyle = v < 0 ? '#FBEDEF' : PC.soft; roundRect(c, x, yy, cw, ch, 36); c.fill();
+    const cx = x + cw / 2, cy = yy + 210, R = 150, lw = 42;
+    c.lineWidth = lw; c.strokeStyle = '#EFE5D7'; c.beginPath(); c.arc(cx, cy, R, 0, Math.PI * 2); c.stroke();
+    let st = -Math.PI / 2; ringSegs(inc, ex, TM[i]).forEach(([col, f]) => { const en = st + f * Math.PI * 2; c.strokeStyle = col; c.beginPath(); c.arc(cx, cy, R, st + (f < 1 ? .012 : 0), en - (f < 1 ? .012 : 0)); c.stroke(); st = en; });
+    const sg = v < 0 ? '−' : '+'; c.textAlign = 'center';
+    c.fillStyle = v < 0 ? PC.red : '#2F6E4B'; c.font = '64px Forum, Georgia, serif'; c.fillText(sg + chf(Math.abs(v)), cx, cy + 12);
+    c.fillStyle = PC.muted; c.font = '500 26px Manrope, sans-serif'; c.fillText('з ' + chf(inc), cx, cy + 56);
+    c.fillStyle = v < 0 ? PC.red : PC.ink; c.font = '800 34px Manrope, sans-serif'; c.fillText(MONTHS[i][0].toUpperCase() + MONTHS[i].slice(1), cx, yy + 440);
+    c.fillStyle = '#3A598D'; c.font = '700 26px Manrope, sans-serif'; if (TM[i]) c.fillText('податки ' + chf(TM[i]), cx, yy + 482);
+    c.textAlign = 'left'; });
+  const base = y + 3 * ch + 2 * gap - 120;
+  y = base + 220; c.fillStyle = PC.ink; c.font = '500 34px Manrope, sans-serif';
+  const neg = bal.map((v, i) => [v, i]).filter(([v]) => v < 0);
+  c.fillText(fit(c, neg.length ? 'Не вистачає у ' + neg.map(([, i]) => MPREP[i]).join(', ') + '. Відклади на ці місяці заздалегідь із місяців із плюсом.' : 'Щомісяця залишається плюс, за рік ' + chf(T.left * 12) + ' CHF.', PW - 2*PM), PM, y);
+}
+function WM(cv, t){ const c = cv.getContext('2d'), w = cv.width, h = cv.height, fs = Math.round(Math.max(w, h) * 0.032); c.save(); c.font = '700 ' + fs + 'px Manrope, sans-serif'; c.fillStyle = 'rgba(110,79,60,0.075)'; c.textAlign = 'center'; c.textBaseline = 'middle'; c.translate(w / 2, h / 2); c.rotate(-Math.PI / 7); const sx = fs * 9, sy = fs * 5, R = Math.hypot(w, h) / 2 + sx; for (let y = -R, r = 0; y <= R; y += sy, r++) for (let x = -R + (r % 2) * sx / 2; x <= R; x += sx) c.fillText(t, x, y); c.restore(); return cv; }   // водяной знак с адресом сайта
+function drawReport(){
+  const T = calc(), pages = [];
+  let cv = newPage(1), c = cv.getContext('2d'); pages.push(cv);
+  const next = () => { cv = newPage(pages.length + 1); c = cv.getContext('2d'); pages.push(cv); y = PM + 40; };
+  c.fillStyle = PC.ink; c.font = '150px Forum, Georgia, serif'; c.fillText('Мій бюджет', PM, PM + 120);
+  c.fillStyle = PC.muted; c.font = '600 46px Manrope, sans-serif';
+  c.fillText('Обов’язкові витрати у Швейцарії · ' + S.year + ' · кантон ' + CANTONS[S.canton] + ' · ' + householdLabel(), PM, PM + 200);
+
+  // карточки
+  const cards = [[chf(T.month), 'CHF витрат на місяць'], [chf(T.year), 'CHF витрат на рік'], [chf(T.byPrio.must / 12), 'CHF на місяць обов’язково'], [chf(T.byPrio.cut / 12), 'CHF на місяць можна скоротити']];
+  if (S.inc.length){ cards.push([chf(T.inc), 'CHF доходів на місяць']); cards.push([(T.left < 0 ? '−' : '') + chf(Math.abs(T.left)), T.left < 0 ? 'CHF не вистачає на місяць' : 'CHF залишається на місяць']); }
+  const leftIdx = S.inc.length ? cards.length - 1 : -1;
+  const cw = (PW - 2*PM - (cards.length - 1) * 30) / cards.length; let y = PM + 280;
+  cards.forEach(([b, s], i) => { const x = PM + i * (cw + 30);
+    c.fillStyle = PC.soft; roundRect(c, x, y, cw, 250, 30); c.fill();
+    c.fillStyle = i === leftIdx ? (T.left < 0 ? PC.red : PC.green) : PC.ink; c.font = (cards.length > 5 ? 72 : cards.length > 4 ? 84 : 100) + 'px Forum, Georgia, serif'; c.fillText(fit(c, b, cw - 60), x + 36, y + 115);
+    c.fillStyle = PC.muted; c.font = '600 30px Manrope, sans-serif';
+    const words = s.split(' '); let line = '', ly = y + 172;
+    for (const w of words){ const t = line ? line + ' ' + w : w; if (c.measureText(t).width > cw - 60 && line){ c.fillText(line, x + 36, ly); ly += 38; line = w; } else line = t; }
+    c.fillText(line, x + 36, ly); });
+  const notes = [];
+  if (T.inc) notes.push('Витрати ' + Math.round(T.month / T.inc * 100) + '% доходу');
+  if (T.incDir) notes.push('з доходів ' + chf(T.incDir) + ' CHF на місяць платять за тебе напряму');
+  if (T.ded) notes.push('окремо ' + chf(T.ded / 12) + ' CHF на місяць уже віднято із зарплати на пенсію та соцстрахування');
+  if (notes.length){ c.fillStyle = PC.muted; c.font = '500 34px Manrope, sans-serif'; c.fillText(fit(c, notes.join(' · '), PW - 2*PM), PM, y + 300); y += 60; }
+  // по сферам
+  y += 360; c.fillStyle = PC.ink; c.font = '80px Forum, Georgia, serif'; c.fillText('За сферами', PM, y); y += 70;
+  const cats = T.byCat.filter(x => x.y), maxY = Math.max(...cats.map(x => x.y), 1), labW = 560, valW = 520, barW = PW - 2*PM - labW - valW - 40;
+  cats.forEach(x => { y += 82;
+    c.fillStyle = x.c.c; c.beginPath(); c.arc(PM + 16, y - 14, 16, 0, Math.PI*2); c.fill();
+    c.fillStyle = PC.ink; c.font = '600 38px Manrope, sans-serif'; c.fillText(fit(c, x.c.n, labW - 60), PM + 50, y);
+    c.fillStyle = PC.soft; roundRect(c, PM + labW, y - 40, barW, 40, 20); c.fill();
+    c.fillStyle = x.c.c; roundRect(c, PM + labW, y - 40, Math.max(40, barW * x.y / maxY), 40, 20); c.fill();
+    c.fillStyle = PC.ink; c.font = '700 36px Manrope, sans-serif'; c.textAlign = 'right';
+    c.fillText(chf(x.y / 12) + ' на міс · ' + chf(x.y) + ' на рік', PW - PM, y);
+    c.fillStyle = PC.muted; c.font = '600 30px Manrope, sans-serif'; c.fillText(Math.round(x.y / T.year * 100) + '%', PM + labW + barW + 30 + 70, y); c.textAlign = 'left'; });
+  if (!cats.length){ y += 70; c.fillStyle = PC.muted; c.font = '500 38px Manrope, sans-serif'; c.fillText('Бюджет поки порожній.', PM, y); }
+  // месяцы
+  y += 150; c.fillStyle = PC.ink; c.font = '80px Forum, Georgia, serif'; c.fillText('Коли йдуть гроші', PM, y);
+  { const MB = monthBreak(), top0 = y + 40, gap = 24, cols = 4, cw = (PW - 2*PM - gap * (cols - 1)) / cols, ch = Math.min(420, (PH - 340 - top0 - gap * 2) / 3), mMax = Math.max(...T.months, 1), avg = T.year / 12;
+    T.months.forEach((v, i) => { const x = PM + (i % cols) * (cw + gap), yy = top0 + Math.floor(i / cols) * (ch + gap), peak = v > avg * 1.25;
+      c.fillStyle = peak ? '#FBEDEF' : PC.soft; roundRect(c, x, yy, cw, ch, 26); c.fill();
+      if (peak){ c.strokeStyle = '#C25468'; c.lineWidth = 4; roundRect(c, x, yy, cw, ch, 26); c.stroke(); }
+      c.fillStyle = peak ? PC.red : PC.ink; c.font = '800 32px Manrope, sans-serif'; c.fillText(MONTHS[i][0].toUpperCase() + MONTHS[i].slice(1), x + 26, yy + 54);
+      c.font = '60px Forum, Georgia, serif'; c.textAlign = 'right'; c.fillText(chf(v), x + cw - 26, yy + 60); c.textAlign = 'left';
+      const bx = x + 26, bw = cw - 52, by = yy + 84; c.fillStyle = '#E9E0D2'; roundRect(c, bx, by, bw, 18, 9); c.fill();
+      c.save(); roundRect(c, bx, by, bw, 18, 9); c.clip(); let xx = bx;
+      c.fillStyle = '#B1A998'; c.fillRect(xx, by, MB.base / mMax * bw, 18); xx += MB.base / mMax * bw;
+      MB.extras[i].forEach(e => { const w = e.a / mMax * bw; c.fillStyle = e.c; c.fillRect(xx, by, w, 18); xx += w; }); c.restore();
+      const ex = MB.extras[i], maxL = Math.max(0, Math.floor((ch - 140) / 44)); let ly = by + 66;
+      if (!ex.length){ c.fillStyle = PC.muted; c.font = '500 28px Manrope, sans-serif'; c.fillText('Тільки постійні', bx, ly); }
+      const show = ex.length > maxL ? ex.slice(0, Math.max(0, maxL - 1)) : ex;
+      show.forEach(e => { c.fillStyle = e.c; c.beginPath(); c.arc(bx + 9, ly - 10, 9, 0, Math.PI*2); c.fill();
+        c.fillStyle = PC.ink; c.font = '500 27px Manrope, sans-serif'; c.fillText(fit(c, e.n, bw - 170), bx + 30, ly);
+        c.font = '700 27px Manrope, sans-serif'; c.textAlign = 'right'; c.fillText(chf(e.a), bx + bw, ly); c.textAlign = 'left'; ly += 44; });
+      if (ex.length > show.length){ c.fillStyle = PC.muted; c.font = '500 27px Manrope, sans-serif'; c.fillText('і ще ' + (ex.length - show.length), bx + 30, ly); }
+    });
+    c.fillStyle = PC.muted; c.font = '500 28px Manrope, sans-serif'; c.fillText('Постійні витрати кожного місяця ' + chf(MB.base) + ' CHF (сіра частина смуги), кольором — рахунки цього місяця.', PM, top0 + 3 * ch + 2 * gap + 50);
+  }
+  // страница с инфографикой
+  next(); drawVizPage(c, y);
+  if (S.inc.length){ next(); drawIncomePage(c, y); }
+  // таблица по статьям
+  const DUO = S.adults > 1, whoCol = {t:'Хто', w:190, who:1};
+  const withWho = arr => { if (!DUO) return arr; const a = arr.slice(); a[0] = Object.assign({}, a[0], {w:a[0].w - whoCol.w}); a.splice(5, 0, whoCol); return a; };
+  const cols = withWho([{t:'Стаття', w:800}, {t:'Сума', w:200, r:1}, {t:'Як часто', w:340}, {t:'Місяць', w:250}, {t:'Важливість', w:270, tag:1}, {t:'На місяць', w:170, r:1, b:1}, {t:'На рік', w:150, r:1, b:1, last:1}]);
+  const cellRow = (cs, vals, base, colorOf) => { let cx = PM;
+    vals.forEach((v, i) => { const col = cs[i], small = col.tag || col.who;
+      c.fillStyle = colorOf(col); c.font = (i === 0 || col.b ? '600 ' : '500 ') + (small ? '27px' : '32px') + ' Manrope, sans-serif';
+      const t = fit(c, v, col.w - (small ? 8 : 24));
+      if (col.r){ c.textAlign = 'right'; c.fillText(t, cx + col.w - (col.last ? 0 : 50), base); c.textAlign = 'left'; } else c.fillText(t, cx, base);
+      cx += col.w; }); };
+  const withWhoV = (vals, r) => { if (!DUO) return vals; const a = vals.slice(); a.splice(5, 0, whoName(whoOf(r))); return a; };
+  const tableHead = () => { c.fillStyle = PC.muted; c.font = '800 28px Manrope, sans-serif'; let x = PM;
+    cols.forEach(col => { if (col.r){ c.textAlign = 'right'; c.fillText(col.t.toUpperCase(), x + col.w - (col.last ? 0 : 50), y); c.textAlign = 'left'; } else c.fillText(col.t.toUpperCase(), x, y); x += col.w; }); y += 30; };
+  next();
+  const bottom = PH - 230;
+  if (S.inc.length){
+    c.fillStyle = PC.ink; c.font = '90px Forum, Georgia, serif'; c.fillText('Мої доходи', PM, y + 50); y += 140;
+    const icols = withWho([{t:'Дохід', w:800}, {t:'Сума', w:200, r:1}, {t:'Як часто', w:340}, {t:'Місяць', w:250}, {t:'Як надходить', w:270, tag:1}, {t:'На місяць', w:170, r:1, b:1}, {t:'На рік', w:150, r:1, b:1, last:1}]);
+    c.fillStyle = PC.muted; c.font = '800 28px Manrope, sans-serif'; let hx = PM;
+    icols.forEach(col => { if (col.r){ c.textAlign = 'right'; c.fillText(col.t.toUpperCase(), hx + col.w - (col.last ? 0 : 50), y); c.textAlign = 'left'; } else c.fillText(col.t.toUpperCase(), hx, y); hx += col.w; }); y += 30;
+    S.inc.forEach(r => {
+      const hasNote = !!(r.note && r.note.trim()), rh = hasNote ? 100 : 70;
+      if (y + rh > bottom) next();
+      const base = y + 50;
+      const vals = withWhoV([incName(r), chf(num(r.amt), num(r.amt) % 1 ? 2 : 0), FQ[r.f].n, (r.f === 'm' || r.f === 'w') ? '—' : ((r.f === 'q' || r.f === 'h') ? 'з ' + MGEN[+r.m] : MONTHS[+r.m]), VQ[r.v].n, chf(perMonth(r)), chf(perYear(r))], r);
+      cellRow(icols, vals, base, col => col.tag && r.v === 'direct' ? PC.sage : col.who && whoOf(r) !== 'c' ? '#3A598D' : col.who ? PC.muted : PC.ink);
+      if (hasNote){ c.fillStyle = PC.muted; c.font = 'italic 500 27px Manrope, sans-serif'; c.fillText(fit(c, r.note, 1400), PM, base + 36); }
+      y += rh; c.fillStyle = PC.line; c.fillRect(PM, y - 4, PW - 2*PM, 2);
+    });
+    y += 30; c.fillStyle = '#4E9A70'; c.font = '700 34px Manrope, sans-serif'; c.textAlign = 'right';
+    c.fillText('Разом доходів ' + chf(T.inc) + ' на місяць · ' + chf(T.incY) + ' на рік', PW - PM, y + 20); c.textAlign = 'left'; y += 110;
+    if (y + 400 > bottom) next();
+  }
+  c.fillStyle = PC.ink; c.font = '90px Forum, Georgia, serif'; c.fillText('Мої витрати', PM, y + 50); y += 140; tableHead();
+  T.byCat.filter(x => x.rows.length).forEach(x => {
+    if (y + 170 > bottom){ next(); tableHead(); }
+    y += 30; c.fillStyle = x.c.c; c.globalAlpha = .14; roundRect(c, PM, y, PW - 2*PM, 76, 16); c.fill(); c.globalAlpha = 1;
+    c.fillStyle = x.c.c; roundRect(c, PM, y, 14, 76, 7); c.fill();
+    c.fillStyle = PC.ink; c.font = '50px Forum, Georgia, serif'; c.fillText(x.c.n, PM + 36, y + 54);
+    c.font = '700 32px Manrope, sans-serif'; c.textAlign = 'right'; c.fillText(x.y || !x.d ? chf(x.y / 12) + ' на місяць · ' + chf(x.y) + ' на рік' + (x.d ? ' · віднято ' + chf(x.d / 12) + ' на міс' : '') : 'віднято із зарплати ' + chf(x.d / 12) + ' на місяць', PW - PM - 24, y + 50); c.textAlign = 'left';
+    y += 76;
+    x.rows.forEach(r => {
+      const hasNote = !!(r.note && r.note.trim()), rh = hasNote ? 100 : 70;
+      if (y + rh > bottom){ next(); tableHead(); }
+      const base = y + 50;
+      const vals = withWhoV([itemName(r), chf(num(r.amt), num(r.amt) % 1 ? 2 : 0), FQ[r.f].n, (r.f === 'm' || r.f === 'w') ? '—' : ((r.f === 'q' || r.f === 'h') ? 'з ' + MGEN[+r.m] : MONTHS[+r.m]), PQ[r.p].n, chf(perMonth(r)), chf(perYear(r))], r);
+      cellRow(cols, vals, base, col => col.tag ? PQ[r.p].c : col.who && whoOf(r) !== 'c' ? '#3A598D' : col.who ? PC.muted : PC.ink);
+      if (hasNote){ c.fillStyle = PC.muted; c.font = 'italic 500 27px Manrope, sans-serif'; c.fillText(fit(c, r.note, 1400), PM, base + 36); }
+      y += rh; c.fillStyle = PC.line; c.fillRect(PM, y - 4, PW - 2*PM, 2);
+    });
+  });
+  // итог и забытое
+  if (y + 300 > bottom) next();
+  y += 60; c.fillStyle = PC.ink; c.font = '64px Forum, Georgia, serif'; c.fillText('Витрати ' + chf(T.month) + ' CHF на місяць · ' + chf(T.year) + ' CHF на рік', PM, y + 40); y += 100;
+  if (S.inc.length){ c.fillStyle = T.left < 0 ? PC.red : PC.green; c.font = '56px Forum, Georgia, serif';
+    c.fillText('Доходи ' + chf(T.inc) + ' CHF на місяць · ' + (T.left < 0 ? 'не вистачає ' : 'залишається ') + chf(Math.abs(T.left)) + ' CHF на місяць', PM, y + 30); y += 90; }
+  if (T.ded){ c.fillStyle = PC.muted; c.font = '500 32px Manrope, sans-serif'; c.fillText('Окремо вже віднято із зарплати ' + chf(T.ded / 12) + ' CHF на місяць, у залишку це не враховано.', PM, y + 10); y += 60; }
+  y += 20;
+  if (DUO){
+    const Q = duoCalc(), split = S.bmode === 'split', bh = 470;
+    if (y + bh + 160 > bottom) next();
+    c.fillStyle = PC.ink; c.font = '64px Forum, Georgia, serif'; c.fillText('Хто скільки платить', PM, y + 40);
+    c.fillStyle = PC.muted; c.font = '500 30px Manrope, sans-serif';
+    c.fillText((split ? 'Роздільний бюджет' : 'Спільний бюджет') + ', спільні витрати ' + (S.brule === 'half' ? 'діляться порівну' : 'діляться пропорційно доходам') + '. Суми на місяць, CHF.', PM, y + 90); y += 130;
+    const gap = 30, bw = (PW - 2*PM - 2 * gap) / 3;
+    const box = (i, title, lines, big, bigCol, tr) => { const x = PM + i * (bw + gap);
+      c.fillStyle = PC.soft; roundRect(c, x, y, bw, bh, 28); c.fill();
+      c.fillStyle = PC.ink; c.font = '48px Forum, Georgia, serif'; c.fillText(fit(c, title, bw - 60), x + 30, y + 64);
+      let ly = y + 120; lines.forEach(([l, v]) => { c.fillStyle = PC.muted; c.font = '500 28px Manrope, sans-serif'; c.fillText(fit(c, l, bw - 230), x + 30, ly);
+        c.fillStyle = PC.ink; c.font = '700 28px Manrope, sans-serif'; c.textAlign = 'right'; c.fillText(v, x + bw - 30, ly); c.textAlign = 'left'; ly += 46; });
+      c.fillStyle = PC.line; c.fillRect(x + 30, y + 300, bw - 60, 2);
+      c.fillStyle = PC.muted; c.font = '500 28px Manrope, sans-serif'; c.fillText(big[0], x + 30, y + 345);
+      c.fillStyle = bigCol; c.font = '60px Forum, Georgia, serif'; c.textAlign = 'right'; c.fillText(big[1], x + bw - 30, y + 352); c.textAlign = 'left';
+      if (tr){ c.fillStyle = PC.muted; c.font = '500 28px Manrope, sans-serif'; c.fillText(tr[0], x + 30, y + 420); c.fillStyle = '#3A598D'; c.font = '700 32px Manrope, sans-serif'; c.textAlign = 'right'; c.fillText(tr[1], x + bw - 30, y + 420); c.textAlign = 'left'; } };
+    Q.P.forEach((p, i) => box(i, nm(i), [['Доходи', chf(p.inc)], ['Свої витрати', '−' + chf(p.own)], ['Частка спільних, ' + Math.round(p.share * 100) + '%', '−' + chf(Math.max(0, p.contrib))]],
+      [p.left < 0 ? 'Не вистачає' : 'Залишається собі', (p.left < 0 ? '−' : '') + chf(Math.abs(p.left))], p.left < 0 ? PC.red : PC.green, split ? ['На спільний рахунок', chf(Math.max(0, p.contrib))] : null));
+    box(2, 'Спільне', [['Спільні витрати', chf(Q.W.c)]].concat(Q.I.c ? [['Спільні доходи', '−' + chf(Q.I.c)]] : []), ['Внести вдвох', chf(Math.max(0, Q.commonNet))], PC.ink, split ? null : ['Підсумок сім’ї', chf(Q.P[0].left + Q.P[1].left)]);
+    y += bh + 60;
+  }
+  const miss = FORGOT.filter(([k]) => !S.rows.some(r => r.item === k));
+  if (miss.length){
+    if (y + 120 + miss.length * 52 > bottom) next();
+    c.fillStyle = PC.ink; c.font = '56px Forum, Georgia, serif'; c.fillText('Перевір, чи потрібно тобі це', PM, y + 30); y += 90;
+    c.font = '500 34px Manrope, sans-serif';
+    miss.forEach(([k, t]) => { c.fillStyle = PC.mustard; c.save(); c.translate(PM + 14, y - 12); c.rotate(-.14); c.beginPath(); c.moveTo(-12, 0); c.quadraticCurveTo(-12, -12, 0, -12); c.quadraticCurveTo(12, -12, 12, 0); c.quadraticCurveTo(12, 12, 0, 12); c.quadraticCurveTo(-12, 12, -12, 0); c.fill(); c.restore();
+      c.fillStyle = PC.ink; c.fillText(fit(c, t, PW - 2*PM - 60), PM + 50, y); y += 52; });
+  }
+  y += 40; c.fillStyle = PC.muted; c.font = '500 28px Manrope, sans-serif';
+  if (y < bottom) c.fillText('Суми-орієнтири взято з відкритих даних. Це інструмент для твого планування, а не фінансова консультація.', PM, y);
+  pages.forEach(p => { const cc = p.getContext('2d'); cc.fillStyle = '#7A6E62'; cc.font = 'italic 500 26px Manrope, sans-serif';
+    cc.fillText('Орієнтир, а не точний розрахунок. Усе уточнюй і перевіряй. Автор не несе відповідальності за достовірність даних.', PM, PH - 175); });
+  pages.forEach((p, i) => footer(p, i + 1, pages.length));
+  pages.forEach(p => WM(p, 'svoiludi.ch'));
+  return pages;
+}
+
+/* ---------- Excel ---------- */
+const argb = h => 'FF' + h.replace('#', '').toUpperCase();
+const tint = (h, k) => { const n = parseInt(h.slice(1), 16), r = n >> 16, g = (n >> 8) & 255, b = n & 255, m = v => Math.round(v + (255 - v) * k);
+  return 'FF' + [m(r), m(g), m(b)].map(v => v.toString(16).padStart(2, '0')).join('').toUpperCase(); };
+async function buildXlsx(){
+  const T = calc(), wb = new ExcelJS.Workbook(); wb.creator = 'Мій бюджет · svoiludi.ch'; wb.created = new Date();
+  const C = {ink:'FF2F2924', muted:'FF7A6E62', faint:'FFB4A796', line:'FFEDE5D8', brand:'FF6E4F3C', sand:'FFF8F4EE', gold:'FFF6ECD6', blue:'FF3A598D', green:'FF447658', red:'FFB5322A', white:'FFFFFFFF'};
+  const F = (o = {}) => Object.assign({name:'Calibri', size:11, color:{argb:C.ink}}, o);
+  const fill = a => ({type:'pattern', pattern:'solid', fgColor:{argb:a}});
+  const hair = {style:'thin', color:{argb:C.line}};
+  const NUM = '#,##0;[Red]-#,##0;"–"';
+  const DED = PQ.ded.n, DIRECT = VQ.direct.n;
+  const ALLITEMS = Object.values(ITEM).map(it => it.n), INCNAMES = Object.values(IITEM).map(it => it.n);
+  const fRange = "'Списки'!$A$2:$A$" + (FREQ.length + 1), fTable = "'Списки'!$A$2:$B$" + (FREQ.length + 1);
+  const DISCLAIMER = 'Це орієнтир, а не точний розрахунок. Суми, податки й внески приблизні та залежать від кантону, громади, твоїх відрахувань і договорів. Усі цифри уточнюй за своїми рахунками, у податковій службі, у касі AHV або в податкового консультанта. Автор не несе відповідальності за достовірність даних. Усі суми, ставки й відсотки обов’язково перевір і впиши сама або сам за своїми документами.';
+  const head = (ws, title, sub, lastCol) => {
+    ws.mergeCells(`A1:${lastCol}1`); ws.getCell('A1').value = title; ws.getCell('A1').font = F({name:'Georgia', size:22, color:{argb:C.brand}}); ws.getRow(1).height = 38; ws.getCell('A1').alignment = {vertical:'middle'};
+    ws.mergeCells(`A2:${lastCol}2`); ws.getCell('A2').value = sub; ws.getCell('A2').font = F({color:{argb:C.muted}});
+    ws.mergeCells(`A3:${lastCol}3`); ws.getCell('A3').value = DISCLAIMER; ws.getCell('A3').font = F({size:9, italic:true, color:{argb:C.muted}});
+    ws.getCell('A3').alignment = {wrapText:true, vertical:'middle'}; ws.getCell('A3').fill = fill(C.sand); ws.getRow(3).height = 44;
+  };
+  const tableHead = (row, labels, rightCols) => { row.height = 22;
+    labels.forEach((t, i) => { if (t === null) return; const c = row.getCell(i + 1);
+      if (t !== '') c.value = t; c.font = F({bold:true, size:10, color:{argb:C.muted}}); c.border = {bottom:{style:'medium', color:{argb:C.brand}}}; c.alignment = {vertical:'middle', horizontal: rightCols.includes(i + 1) ? 'right' : 'left'}; }); };
+  const subtitle = S.year + ' · кантон ' + CANTONS[S.canton] + ' · ' + householdLabel() + (S.example ? ' · суми-приклади' : '');
+
+  // листы в порядке вкладок
+  const sum = wb.addWorksheet('Підсумки', {views:[{showGridLines:false}], properties:{tabColor:{argb:C.brand}}, pageSetup:{paperSize:9, orientation:'landscape', fitToPage:true, fitToWidth:1, fitToHeight:1}});
+  const ws = wb.addWorksheet('Витрати', {views:[{state:'frozen', ySplit:5, showGridLines:false}], properties:{tabColor:{argb:'FFA79E8B'}}, pageSetup:{paperSize:9, orientation:'landscape', fitToPage:true, fitToWidth:1, fitToHeight:0}});
+  const is = wb.addWorksheet('Доходи', {views:[{state:'frozen', ySplit:5, showGridLines:false}], properties:{tabColor:{argb:'FF4E9A70'}}, pageSetup:{paperSize:9, orientation:'landscape', fitToPage:true, fitToWidth:1, fitToHeight:0}});
+  const ms = wb.addWorksheet('По місяцях', {views:[{state:'frozen', xSplit:1, ySplit:5, showGridLines:false}], properties:{tabColor:{argb:C.blue}}, pageSetup:{paperSize:9, orientation:'landscape', fitToPage:true, fitToWidth:1, fitToHeight:0}});
+  const L = wb.addWorksheet('Списки', {state:'hidden'});
+
+  // ---------- Расходы ----------
+  ws.columns = [{width:3},{width:46},{width:13},{width:21},{width:14},{width:22},{width:13},{width:13},{width:30},{width:2},{width:20}];
+  const DUO = S.adults > 1, WHO_RANGE = "'Списки'!$P$2:$P$4";
+  head(ws, 'Мої витрати', subtitle, DUO ? 'J' : 'I');
+  tableHead(ws.getRow(5), ['', 'Стаття', 'Сума', 'Як часто', 'Місяць', 'Важливість', 'На місяць', 'На рік', 'Коментар'].concat(DUO ? ['Хто платить'] : []), [3,7,8]);
+  if (DUO) ws.getColumn(10).width = 18;
+  ws.getColumn(11).hidden = true;                // служебная колонка со сферой для формул
+  let rn = 6; const first = 6;
+  const itemRow = (r, catName) => {
+    const row = ws.getRow(rn);
+    row.values = ['', r ? itemName(r) : null, r ? num(r.amt) : null, r ? FQ[r.f].n : null, r ? ((r.f === 'm' || r.f === 'w') ? '—' : MONTHS[+r.m]) : null, r ? PQ[r.p].n : null, null, null, r ? (r.note || '') : null, null, catName || null];
+    row.getCell(8).value = {formula:`IFERROR(C${rn}*VLOOKUP(D${rn},${fTable},2,FALSE),0)`, result: r ? perYear(r) : 0};
+    row.getCell(7).value = {formula:`H${rn}/12`, result: r ? perYear(r) / 12 : 0};
+    for (let c = 2; c <= 9; c++){ const cell = row.getCell(c); cell.font = F(); cell.border = {bottom:hair}; cell.alignment = [3,7,8].includes(c) ? {vertical:'middle', horizontal:'right', indent:1} : {vertical:'middle', indent: c === 4 || c === 9 ? 2 : c === 2 ? 1 : 0}; }
+    [3,7,8].forEach(c => { row.getCell(c).numFmt = NUM; });
+    row.getCell(7).font = F({bold:true});
+    if (r){ row.getCell(6).font = F({color:{argb: argb(PQ[r.p].c)}}); if (r.p === 'ded' || r.p === 'cut') [7,8].forEach(c => { row.getCell(c).font = F({bold: c === 7, color:{argb:C.muted}}); }); }
+    row.getCell(9).font = F({color:{argb:C.muted}, size:10});
+    row.height = 20;
+    ws.getCell('B' + rn).dataValidation = {type:'list', allowBlank:true, showErrorMessage:false, formulae:["'Списки'!$J$2:$J$" + (ALLITEMS.length + 1)]};
+    ws.getCell('D' + rn).dataValidation = {type:'list', allowBlank:true, formulae:[fRange]};
+    ws.getCell('E' + rn).dataValidation = {type:'list', allowBlank:true, formulae:["'Списки'!$D$2:$D$14"]};
+    ws.getCell('F' + rn).dataValidation = {type:'list', allowBlank:true, formulae:["'Списки'!$F$2:$F$" + (PRIO.length + 1)]};
+    ws.getCell('K' + rn).dataValidation = {type:'list', allowBlank:true, formulae:["'Списки'!$H$2:$H$" + (CATS.length + 1)]};
+    if (DUO){ const w = row.getCell(10); w.value = r ? whoName(whoOf(r)) : null; w.font = F({size:10, color:{argb: r && whoOf(r) !== 'c' ? C.blue : C.muted}}); w.border = {bottom:hair}; w.alignment = {vertical:'middle', indent:1};
+      w.dataValidation = {type:'list', allowBlank:true, formulae:[WHO_RANGE]}; }
+    rn++;
+  };
+  T.byCat.filter(x => x.rows.length).forEach(x => {
+    const h = ws.getRow(rn), hr = rn; rn++;
+    x.rows.forEach(r => itemRow(r, x.c.n));
+    const a = hr + 1, b = rn - 1;
+    h.getCell(1).fill = fill(argb(x.c.c)); h.getCell(2).value = x.c.n;
+    h.getCell(2).font = F({name:'Georgia', size:13, color:{argb:C.ink}});
+    h.getCell(7).value = {formula:`H${hr}/12`, result:x.y / 12};
+    h.getCell(8).value = {formula:`SUMIF(F${a}:F${b},"<>${DED}",H${a}:H${b})`, result:x.y};
+    for (let c = 2; c <= (DUO ? 10 : 9); c++){ h.getCell(c).fill = fill(C.sand); }
+    [7,8].forEach(c => { h.getCell(c).numFmt = NUM; h.getCell(c).font = F({bold:true, color:{argb:C.brand}}); });
+    h.height = 26; h.getCell(2).alignment = {vertical:'middle'};
+    rn++;                                        // воздух между сферами
+  });
+  const nh = ws.getRow(rn); nh.getCell(2).value = 'Нові статті'; nh.getCell(2).font = F({name:'Georgia', size:13, color:{argb:C.muted}});
+  nh.getCell(9).value = 'Сферу вибери в колонці K'; nh.getCell(9).font = F({size:9, italic:true, color:{argb:C.faint}}); nh.height = 24; rn++;
+  ws.getColumn(11).hidden = false; ws.getColumn(11).width = 22;  // колонка «Сфера» нужна и для новых строк
+  ws.getCell('K5').value = 'Сфера'; ws.getCell('K5').font = F({bold:true, size:10, color:{argb:C.muted}}); ws.getCell('K5').border = {bottom:{style:'medium', color:{argb:C.brand}}};
+  for (let i = 0; i < 10; i++) itemRow(null, null);
+  for (let r = first; r < rn; r++){ const k = ws.getCell('K' + r); if (k.value) k.font = F({size:9, color:{argb:C.faint}}); }
+  const last = rn - 1; rn++;
+  const tr = ws.getRow(rn), totalRow = rn;
+  tr.getCell(2).value = 'Разом витрат'; tr.getCell(2).font = F({name:'Georgia', size:14, bold:true});
+  tr.getCell(8).value = {formula:`SUMIFS(H${first}:H${last},F${first}:F${last},"<>${DED}",K${first}:K${last},"<>")`, result:T.year};
+  tr.getCell(7).value = {formula:`H${rn}/12`, result:T.month};
+  for (let c = 2; c <= (DUO ? 10 : 9); c++) tr.getCell(c).fill = fill(C.gold);
+  [7,8].forEach(c => { tr.getCell(c).numFmt = NUM; tr.getCell(c).font = F({name:'Georgia', size:14, bold:true}); });
+  tr.height = 30;
+  const dr = ws.getRow(rn + 1); dr.getCell(2).value = 'Окремо: віднято із зарплати'; dr.getCell(2).font = F({size:10, color:{argb:C.muted}});
+  dr.getCell(8).value = {formula:`SUMIF(F${first}:F${last},"${DED}",H${first}:H${last})`, result:T.ded}; dr.getCell(7).value = {formula:`H${rn + 1}/12`, result:T.ded / 12};
+  [7,8].forEach(c => { dr.getCell(c).numFmt = NUM; dr.getCell(c).font = F({size:10, color:{argb:C.muted}}); });
+  ws.autoFilter = {from:'B5', to:(DUO ? 'J' : 'I') + last};
+
+  // ---------- Доходы ----------
+  is.columns = [{width:3},{width:46},{width:13},{width:21},{width:14},{width:26},{width:13},{width:13},{width:30}];
+  head(is, 'Мої доходи', subtitle, DUO ? 'J' : 'I');
+  tableHead(is.getRow(5), ['', 'Дохід', 'Сума', 'Як часто', 'Місяць', 'Як надходить', 'На місяць', 'На рік', 'Коментар'].concat(DUO ? ['Чий дохід'] : []), [3,7,8]);
+  if (DUO) is.getColumn(10).width = 18;
+  let ir = 6;
+  S.inc.concat(new Array(6).fill(null)).forEach(r => { const row = is.getRow(ir);
+    row.values = ['', r ? incName(r) : null, r ? num(r.amt) : null, r ? FQ[r.f].n : null, r ? ((r.f === 'm' || r.f === 'w') ? '—' : MONTHS[+r.m]) : null, r ? VQ[r.v].n : null, null, null, r ? (r.note || '') : null];
+    row.getCell(8).value = {formula:`IFERROR(C${ir}*VLOOKUP(D${ir},${fTable},2,FALSE),0)`, result: r ? perYear(r) : 0};
+    row.getCell(7).value = {formula:`H${ir}/12`, result: r ? perYear(r) / 12 : 0};
+    for (let c = 2; c <= 9; c++){ const cell = row.getCell(c); cell.font = F(); cell.border = {bottom:hair}; cell.alignment = [3,7,8].includes(c) ? {vertical:'middle', horizontal:'right', indent:1} : {vertical:'middle', indent: c === 4 || c === 9 ? 2 : c === 2 ? 1 : 0}; }
+    [3,7,8].forEach(c => { row.getCell(c).numFmt = NUM; }); row.getCell(7).font = F({bold:true}); row.getCell(9).font = F({size:10, color:{argb:C.muted}});
+    if (r && r.v === 'direct') row.getCell(6).font = F({color:{argb:C.green}});
+    row.height = 20;
+    is.getCell('B' + ir).dataValidation = {type:'list', allowBlank:true, showErrorMessage:false, formulae:["'Списки'!$L$2:$L$" + (INCNAMES.length + 1)]};
+    is.getCell('D' + ir).dataValidation = {type:'list', allowBlank:true, formulae:[fRange]};
+    is.getCell('E' + ir).dataValidation = {type:'list', allowBlank:true, formulae:["'Списки'!$D$2:$D$14"]};
+    is.getCell('F' + ir).dataValidation = {type:'list', allowBlank:true, formulae:["'Списки'!$N$2:$N$3"]};
+    if (DUO){ const w = row.getCell(10); w.value = r ? whoName(whoOf(r)) : null; w.font = F({size:10, color:{argb: r && whoOf(r) !== 'c' ? C.blue : C.muted}}); w.border = {bottom:hair}; w.alignment = {vertical:'middle', indent:1};
+      w.dataValidation = {type:'list', allowBlank:true, formulae:[WHO_RANGE]}; }
+    ir++; });
+  const incLast = ir - 1, itr = is.getRow(ir + 1), incTot = ir + 1;
+  itr.getCell(2).value = 'Разом доходів'; itr.getCell(2).font = F({name:'Georgia', size:14, bold:true});
+  itr.getCell(8).value = {formula:`SUM(H6:H${incLast})`, result:T.incY}; itr.getCell(7).value = {formula:`H${incTot}/12`, result:T.inc};
+  for (let c = 2; c <= (DUO ? 10 : 9); c++) itr.getCell(c).fill = fill('FFE7F5EC');
+  [7,8].forEach(c => { itr.getCell(c).numFmt = NUM; itr.getCell(c).font = F({name:'Georgia', size:14, bold:true, color:{argb:C.green}}); }); itr.height = 30;
+  is.getCell('B' + (incTot + 2)).value = '«' + DIRECT + '» — виплата йде не тобі на рахунок, а одразу в касу, дитячий садок або орендодавцю. Витрата в бюджеті при цьому залишається повною.';
+  is.getCell('B' + (incTot + 2)).font = F({size:9, italic:true, color:{argb:C.muted}});
+
+  // ---------- Итоги ----------
+  sum.columns = [{width:3},{width:34},{width:16},{width:16},{width:12},{width:3},{width:34},{width:16}];
+  head(sum, 'Мій бюджет', subtitle, 'H');
+  const TM = taxMonths(), taxY = TM.reduce((a, b) => a + b, 0);
+  const kpi = [
+    ['Доходи на місяць', {formula:`'Доходи'!G${incTot}`, result:T.inc}, C.green],
+    ['Витрати на місяць', {formula:`'Витрати'!G${totalRow}`, result:T.month}, C.ink],
+    ['Залишається на місяць', {formula:`C6-C7`, result:T.inc - T.month}, (T.inc - T.month) < 0 ? C.red : C.green],
+    ['Із витрат податки на місяць', taxY / 12, C.blue],
+  ];
+  kpi.forEach(([n, v, col], i) => { const row = sum.getRow(6 + i); row.height = 30;
+    row.getCell(2).value = n; row.getCell(2).font = F({color:{argb:C.muted}}); row.getCell(2).alignment = {vertical:'middle', indent:1};
+    row.getCell(3).value = v; row.getCell(3).numFmt = NUM + ' "CHF"'; row.getCell(3).font = F({name:'Georgia', size:18, color:{argb:col}}); row.getCell(3).alignment = {vertical:'middle', horizontal:'right'};
+    [2,3].forEach(c => { row.getCell(c).fill = fill(C.sand); row.getCell(c).border = {bottom:{style:'thin', color:{argb:C.white}}}; }); });
+  sum.getCell('D9').value = 'за планом на рік, без відрахувань із зарплати'; sum.getCell('D9').font = F({size:9, italic:true, color:{argb:C.faint}});
+  // по сферам
+  let sr = 12; tableHead(sum.getRow(sr), ['', 'Сфера', 'На місяць', 'На рік', 'Частка'], [3,4,5]); sr++;
+  const sFirst = sr;
+  T.byCat.filter(x => x.y).sort((a, b) => b.y - a.y).forEach(x => { const row = sum.getRow(sr);
+    row.getCell(1).fill = fill(argb(x.c.c)); row.getCell(2).value = x.c.n;
+    row.getCell(4).value = {formula:`SUMIFS('Витрати'!$H$${first}:$H$${last},'Витрати'!$K$${first}:$K$${last},B${sr},'Витрати'!$F$${first}:$F$${last},"<>${DED}")`, result:x.y};
+    row.getCell(3).value = {formula:`D${sr}/12`, result:x.y / 12};
+    row.getCell(5).value = {formula:`IF('Витрати'!$H$${totalRow}=0,0,D${sr}/'Витрати'!$H$${totalRow})`, result: T.year ? x.y / T.year : 0};
+    for (let c = 2; c <= 5; c++){ const cell = row.getCell(c); cell.font = F(); cell.border = {bottom:hair}; cell.alignment = {vertical:'middle', indent: c === 2 ? 1 : 0}; }
+    [3,4].forEach(c => { row.getCell(c).numFmt = NUM; }); row.getCell(5).numFmt = '0%'; row.height = 20; sr++; });
+  if (sr > sFirst) sum.addConditionalFormatting({ref:`E${sFirst}:E${sr - 1}`, rules:[{type:'dataBar', minLength:0, maxLength:100, cfvo:[{type:'num', value:0}, {type:'num', value:1}], color:{argb:'FFB1A998'}, gradient:false}]});
+  // важность и пенсия справа
+  let pr = 12; tableHead(sum.getRow(pr), [null, null, null, null, null, null, 'Важливість', 'На місяць'], [8]); pr++;
+  PRIO.forEach(p => { const row = sum.getRow(pr);
+    row.getCell(7).value = p.k === 'ded' ? 'віднято із зарплати (окремо)' : p.n; row.getCell(7).font = F({color:{argb: argb(p.c)}});
+    row.getCell(8).value = {formula:`SUMIF('Витрати'!$F$${first}:$F$${last},"${p.n}",'Витрати'!$H$${first}:$H$${last})/12`, result:T.byPrio[p.k] / 12};
+    row.getCell(8).numFmt = NUM; [7,8].forEach(c => { row.getCell(c).border = {bottom:hair}; }); row.height = 20; pr++; });
+  pr += 1; tableHead(sum.getRow(pr), [null, null, null, null, null, null, 'Податки й внески', 'На місяць'], [8]); pr++;
+  const V = vizData();
+  [['Податки', taxY / 12], ['1 опора, AHV', V.pill[0]], ['2 опора, пенсійна каса', V.pill[1]], ['3 опора, 3a і 3b', V.pill[2]]].forEach(([n, v]) => { const row = sum.getRow(pr);
+    row.getCell(7).value = n; row.getCell(8).value = Math.round(v); row.getCell(8).numFmt = NUM; [7,8].forEach(c => { row.getCell(c).border = {bottom:hair}; row.getCell(c).font = F(); }); row.height = 20; pr++; });
+  let credRow = Math.max(sr, pr) + 2;
+  if (DUO){
+    const Q = duoCalc(), n1 = nm(0), n2 = nm(1), q = v => '"' + String(v).replace(/"/g, '""') + '"';
+    let dr0 = credRow; sum.mergeCells(`B${dr0}:H${dr0}`);
+    sum.getCell('B' + dr0).value = 'Хто скільки платить · ' + (S.bmode === 'split' ? 'роздільний бюджет' : 'спільний бюджет') + ', спільні витрати ' + (S.brule === 'half' ? 'порівну' : 'пропорційно доходам');
+    sum.getCell('B' + dr0).font = F({name:'Georgia', size:14, color:{argb:C.brand}}); sum.getRow(dr0).height = 26; dr0 += 1;
+    tableHead(sum.getRow(dr0), ['', 'На місяць, CHF', n1, n2, 'Спільне'], [3,4,5]); dr0++;
+    const r0 = dr0, xs = `'Витрати'!$H$${first}:$H$${last}`, xw = `'Витрати'!$J$${first}:$J$${last}`, xf = `'Витрати'!$F$${first}:$F$${last}`, xk = `'Витрати'!$K$${first}:$K$${last}`;
+    const ins = `'Доходи'!$H$6:$H$${incLast}`, inw = `'Доходи'!$J$6:$J$${incLast}`;
+    const own = n => `SUMIFS(${xs},${xw},${q(n)},${xf},"<>${DED}",${xk},"<>")/12`, incF = n => `SUMIF(${inw},${q(n)},${ins})/12`;
+    const lines = [
+      ['Доходи', {formula:incF(n1), result:Q.I.p1}, {formula:incF(n2), result:Q.I.p2}, {formula:`'Доходи'!G${incTot}-C${r0}-D${r0}`, result:Q.I.c}],
+      ['Свої витрати', {formula:own(n1), result:Q.W.p1}, {formula:own(n2), result:Q.W.p2}, {formula:`'Витрати'!G${totalRow}-C${r0 + 1}-D${r0 + 1}`, result:Q.W.c}],
+      ['Частка спільних витрат', {formula: S.brule === 'half' ? '0.5' : `IF(C${r0}+D${r0}=0,0.5,C${r0}/(C${r0}+D${r0}))`, result:Q.P[0].share}, {formula:`1-C${r0 + 2}`, result:Q.P[1].share}, null],
+      [S.bmode === 'split' ? 'Переказувати на спільний рахунок' : 'Вносить у спільні витрати', {formula:`MAX(0,$E$${r0 + 3})*C${r0 + 2}`, result:Math.max(0, Q.P[0].contrib)}, {formula:`MAX(0,$E$${r0 + 3})*D${r0 + 2}`, result:Math.max(0, Q.P[1].contrib)}, {formula:`E${r0 + 1}-E${r0}`, result:Q.commonNet}],
+      ['Залишається собі', {formula:`C${r0}-C${r0 + 1}-$E$${r0 + 3}*C${r0 + 2}`, result:Q.P[0].left}, {formula:`D${r0}-D${r0 + 1}-$E$${r0 + 3}*D${r0 + 2}`, result:Q.P[1].left}, {formula:`C${r0 + 4}+D${r0 + 4}`, result:Q.P[0].left + Q.P[1].left}],
+    ];
+    lines.forEach(([l, a, b, c], i) => { const row = sum.getRow(dr0); row.height = i === 4 ? 26 : 20;
+      row.getCell(2).value = l; row.getCell(3).value = a; row.getCell(4).value = b; if (c) row.getCell(5).value = c;
+      for (let k = 2; k <= 5; k++){ const cell = row.getCell(k); cell.border = {bottom:hair}; cell.font = F(i === 4 ? {name:'Georgia', size:13, color:{argb:C.green}} : {}); cell.alignment = {vertical:'middle', horizontal: k === 2 ? 'left' : 'right', indent: k === 2 ? 1 : 0};
+        if (k > 2) cell.numFmt = i === 2 && k < 5 ? '0%' : NUM; }
+      row.getCell(2).font = F({color:{argb:C.muted}});
+      dr0++; });
+    sum.getCell('E' + (r0 + 3)).note = 'Спільні витрати мінус спільні доходи. Цю суму потрібно внести вдвох.';
+    const nt = sum.getCell('B' + dr0); sum.mergeCells(`B${dr0}:E${dr0}`); nt.value = 'Хто платить, вибирається в колонці J на аркушах «Витрати» і «Доходи». Імена мають збігатися із заголовками цієї таблиці.'; nt.font = F({size:9, italic:true, color:{argb:C.faint}}); nt.alignment = {wrapText:true};
+    sum.getRow(dr0).height = 26;
+    credRow = dr0 + 2;
+  }
+  CREDIT_PARTS.forEach((p, i) => { const cell = sum.getCell(credRow + i, 2); cell.value = {text:p.t, hyperlink:p.u}; cell.font = F({size:10, color:{argb:C.brand}, underline:true}); });
+
+  // ---------- По месяцам ----------
+  ms.columns = [{width:30}].concat(MSHORT.map(() => ({width:10}))).concat([{width:12}]);
+  head(ms, 'По місяцях', subtitle, 'N');
+  tableHead(ms.getRow(5), ['Сфера'].concat(MSHORT).concat(['Рік']), Array.from({length:13}, (_, i) => i + 2));
+  let mr = 6; const mFirst = mr;
+  CATS.forEach((cat, ci) => { if (!T.monthsCat[ci].some(Boolean)) return; const row = ms.getRow(mr);
+    row.values = [cat.n].concat(T.monthsCat[ci].map(v => Math.round(v)));
+    row.getCell(14).value = {formula:`SUM(B${mr}:M${mr})`, result:T.monthsCat[ci].reduce((a, b) => a + b, 0)};
+    row.eachCell({includeEmpty:true}, cell => { cell.font = F(cell.col === 14 ? {bold:true} : {}); cell.border = {bottom:hair}; if (cell.col > 1) cell.numFmt = NUM; });
+    row.getCell(1).border = {left:{style:'thick', color:{argb: argb(cat.c)}}, bottom:hair}; row.getCell(1).alignment = {indent:1}; row.height = 20;
+    mr++; });
+  const avg = T.year / 12, col = i => String.fromCharCode(65 + i);
+  const totR = ms.getRow(mr); totR.getCell(1).value = 'Витрати за місяць';
+  for (let i = 2; i <= 14; i++) totR.getCell(i).value = {formula:`SUM(${col(i - 1)}${mFirst}:${col(i - 1)}${mr - 1})`, result: i <= 13 ? T.months[i - 2] : T.year};
+  for (let i = 1; i <= 14; i++){ const c = totR.getCell(i); c.fill = fill(C.gold); c.font = F({bold:true}); if (i > 1) c.numFmt = NUM; } totR.height = 24;
+  T.months.forEach((v, i) => { if (v > avg * 1.25) totR.getCell(i + 2).font = F({bold:true, color:{argb:C.red}}); });
+  const totIdx = mr; mr++;
+  if (S.inc.length){
+    const ri = ms.getRow(mr), rb = ms.getRow(mr + 1), rt = ms.getRow(mr + 2);
+    ri.getCell(1).value = 'Доходи за місяць'; rb.getCell(1).value = 'Залишок місяця'; rt.getCell(1).value = 'Із витрат податки';
+    T.incMonths.forEach((v, i) => { ri.getCell(i + 2).value = Math.round(v); rb.getCell(i + 2).value = {formula:`${col(i + 1)}${mr}-${col(i + 1)}${totIdx}`, result: v - T.months[i]}; rt.getCell(i + 2).value = Math.round(TM[i]); });
+    ri.getCell(14).value = {formula:`SUM(B${mr}:M${mr})`, result:T.incY}; rb.getCell(14).value = {formula:`N${mr}-N${totIdx}`, result:T.incY - T.year}; rt.getCell(14).value = {formula:`SUM(B${mr + 2}:M${mr + 2})`, result:taxY};
+    for (let i = 1; i <= 14; i++){
+      ri.getCell(i).font = F({color:{argb:C.green}}); ri.getCell(i).border = {bottom:hair};
+      rb.getCell(i).font = F({bold:true}); rb.getCell(i).fill = fill(C.sand); rb.getCell(i).border = {bottom:hair};
+      rt.getCell(i).font = F({color:{argb:C.blue}, size:10});
+      if (i > 1){ ri.getCell(i).numFmt = NUM; rb.getCell(i).numFmt = NUM; rt.getCell(i).numFmt = NUM; } }
+    [ri, rb, rt].forEach(r => { r.height = 22; r.getCell(1).alignment = {indent:1}; });
+    mr += 3; }
+  ms.getCell('A' + (mr + 1)).value = 'Червоним позначено важкі місяці та місяці з мінусом. Пораховано на день завантаження.'; ms.getCell('A' + (mr + 1)).font = F({size:9, italic:true, color:{argb:C.muted}});
+
+  // ---------- Списки ----------
+  L.getCell('A1').value = 'Як часто'; L.getCell('B1').value = 'Раз на рік';
+  FREQ.forEach((f, i) => { L.getCell('A' + (i + 2)).value = f.n; L.getCell('B' + (i + 2)).value = f.y; });
+  L.getCell('D1').value = 'Місяць'; ['—'].concat(MONTHS).forEach((m, i) => { L.getCell('D' + (i + 2)).value = m; });
+  L.getCell('F1').value = 'Важливість'; PRIO.forEach((p, i) => { L.getCell('F' + (i + 2)).value = p.n; });
+  L.getCell('H1').value = 'Сфера'; CATS.forEach((c, i) => { L.getCell('H' + (i + 2)).value = c.n; });
+  L.getCell('J1').value = 'Стаття'; ALLITEMS.forEach((n, i) => { L.getCell('J' + (i + 2)).value = n; });
+  L.getCell('L1').value = 'Дохід'; INCNAMES.forEach((n, i) => { L.getCell('L' + (i + 2)).value = n; });
+  L.getCell('N1').value = 'Як надходить'; VIA.forEach((v, i) => { L.getCell('N' + (i + 2)).value = v.n; });
+  L.getCell('P1').value = 'Хто платить'; ['спільне', nm(0), nm(1)].forEach((v, i) => { L.getCell('P' + (i + 2)).value = v; });
+
+  wb.views = [{activeTab:0}];
+  wb.worksheets.forEach(w => { if (w.name !== 'Списки') w.headerFooter = {oddFooter:'&L&8Мій бюджет · орієнтир, не точний розрахунок · https://svoiludi.ch · https://voznesenskaya.ch&R&8&P / &N'}; });
+  try {                                                  // водяной знак на листах Excel (виден на экране)
+    const wc = document.createElement('canvas'); wc.width = 900; wc.height = 560; WM(wc, 'svoiludi.ch');
+    const wid = wb.addImage({base64: wc.toDataURL('image/png'), extension: 'png'});
+    wb.worksheets.forEach(w => { if (w.name !== 'Списки') w.addBackgroundImage(wid); });
+  } catch(e) {}
+  return wb.xlsx.writeBuffer();
+}
+
+/* ---------- скачивание ---------- */
+let downloads = null;
+async function offer(filename, data){
+  if (window.claude && window.claude.use){
+    if (!downloads){ say('Завантаження тут недоступне.'); return; }
+    try { await downloads.save({filename, data}); say('Файл «' + filename + '» збережено.'); }
+    catch(err){ const code = err && err.code;
+      if (code === 'declined') say('Завантаження скасовано.'); else if (code === 'rate_limited') say('Вікно збереження вже відкрите. Підтверди його або зачекай трохи.'); else say('Не вдалося зберегти файл. Спробуй ще раз.'); }
+    return;
+  }
+  const url = URL.createObjectURL(data), a = document.createElement('a'); a.href = url; a.download = filename; document.body.appendChild(a); a.click();
+  setTimeout(() => { a.remove(); URL.revokeObjectURL(url); }, 4000); say('Файл «' + filename + '» завантажено.');
+}
+const fname = ext => 'Мій бюджет ' + S.year + '.' + ext;
+$('dlXlsx').addEventListener('click', async () => {
+  if (!window.ExcelJS){ say('Excel зараз недоступний. Завантаж звіт PDF.'); return; }
+  say('Готую таблицю Excel…');
+  try { const buf = await buildXlsx(); offer(fname('xlsx'), new Blob([buf], {type:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'})); }
+  catch(e){ console.error(e); say('Не вдалося зібрати таблицю. Спробуй ще раз.'); }
+});
+$('dlPdf').addEventListener('click', async () => {
+  if (!window.jspdf){ say('PDF зараз недоступний.'); return; }
+  say('Готую звіт PDF…'); try { await document.fonts.ready; } catch(e) {}
+  const pages = drawReport(), doc = new window.jspdf.jsPDF({orientation:'portrait', unit:'mm', format:'a4'}), k = 210 / PW;
+  pages.forEach((cv, i) => { if (i) doc.addPage('a4', 'portrait'); doc.addImage(cv.toDataURL('image/jpeg', 0.9), 'JPEG', 0, 0, 210, 297);
+    for (const l of cv.links) doc.link(l.x * k, l.y * k, l.w * k, l.h * k, {url: l.url}); });
+  offer(fname('pdf'), doc.output('blob'));
+});
+(async () => {
+  if (!(window.claude && window.claude.use)) return;
+  try { downloads = await window.claude.use('downloads'); } catch(e) { downloads = null; }
+  if (!downloads){ $('dlXlsx').disabled = true; $('dlPdf').disabled = true; say('Завантаження відкриється на опублікованій сторінці.'); }
+})();
+
+function renderAll(){ renderSetup(); renderInc(); renderTax(); renderCats(); renderTotals(); }
+if (S.example && S.calcV !== 2) reExample();   // пример пересчитывается по тарифам, проверенным 04.10.2026
+S.calcV = 2;
+ensureExampleTax();
+if (S.fillEx !== 1){ S.rows.forEach(r => { if (!num(r.amt) && r.item !== 'own' && hintAmt(r.item)){ r.amt = String(hintAmt(r.item)); if (!r.note) r.note = 'приклад'; } }); S.fillEx = 1; }
+save(); renderClear(); renderAll();
+</script>
+<script src="/assets/samesite.js"></script>
+<!--i18n--><style>#langbar.langbar{position:fixed;bottom:14px;right:14px;z-index:60;display:flex;gap:2px;background:rgba(255,255,255,.92);border:1px solid rgba(0,0,0,.08);border-radius:999px;padding:3px;font:600 12px Manrope,system-ui,sans-serif;box-shadow:0 2px 8px rgba(0,0,0,.08)}#langbar.langbar a{color:#5d554d;padding:5px 9px;border-radius:999px;text-decoration:none;font:inherit;display:inline-block}#langbar.langbar a[aria-current="true"]{background:#2f2924;color:#fff}@media print{.langbar{display:none!important}}</style><div class="langbar" id="langbar" role="navigation" aria-label="Мова / Язык"><a href="/instrumenty/moj-budget/" hreflang="ru" data-lang="ru">RU</a><a href="/uk/instrumenty/moj-budget/" hreflang="uk" data-lang="uk" aria-current="true">UA</a></div><script>(function(){var b=document.getElementById('langbar');if(!b)return;b.addEventListener('click',function(e){var a=e.target.closest('a[data-lang]');if(a){try{localStorage.setItem('svoiludiLang',a.dataset.lang)}catch(x){}a.href=a.getAttribute('href').split('#')[0]+location.hash;}});})();</script><!--i18n--></body>
+</html>
