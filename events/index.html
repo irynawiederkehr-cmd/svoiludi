@@ -450,6 +450,8 @@ a.bot:hover{color:#B98324}
   .navcta{font-size:.8rem;padding:6px 11px}
   nav{font-size:.82rem}
 }
+.yours{display:inline-block;align-self:flex-start;width:max-content;max-width:100%;font:700 .78rem/1.3 var(--body,Manrope),system-ui,sans-serif;color:#7A5A12;background:#F3E3C2;border-radius:999px;padding:4px 11px;margin:0 0 6px;text-decoration:none}
+a.yours:hover{background:#EBD3A3}
 </style>
 </head>
 <body>
@@ -915,7 +917,7 @@ function row(e, d){
   const where = isRemote(e) ? 'онлайн' : `${esc(city(e.address))} · ${esc(kt(e.canton))}${e.online ? ' · и онлайн' : ''}`;
   return `<button class="ev" type="button" data-ev="${esc(e.id)}" data-d="${d}" style="--lc:${k.c}">${TRIAL ? '<span class="sample">Образец</span>' : ''}
     <span class="ev-d"><small>${WD_S[dd.getUTCDay()]}</small><b>${dd.getUTCDate()}</b><small>${MON_S[dd.getUTCMonth()]}</small></span>
-    <span class="ev-m"><span class="ev-k">${esc(k.t)}</span><span class="ev-t">${esc(e.title)}</span>
+    <span class="ev-m">${TRIAL ? '<span class="yours">Здесь может быть твоё событие!</span>' : ''}<span class="ev-k">${esc(k.t)}</span><span class="ev-t">${esc(e.title)}</span>
       <span class="ev-i">${timeStr(e) ? `<b>${esc(timeStr(e))}</b>` : e.dateEnd ? `<b>до ${D(e.dateEnd).getUTCDate()} ${MON_G[D(e.dateEnd).getUTCMonth()]}</b>` : ''}<span>${where}</span>${e.repeat ? `<span>${esc(repeatText(e))}</span>` : ''}<span>${esc((e.langs || []).join(', '))}</span></span>${orgFaces(e)}</span>
     <span class="ev-p">${esc(e.price || '')}</span></button>`;
 }
@@ -1046,7 +1048,7 @@ function openEvent(id, d){
     if (s) return `<a class="org" href="../#${esc(s.id)}">${s.photo ? `<img src="${esc(photoSrc(s.photo))}" alt="${esc(s.name)}">` : `<span class="ini">${esc(s.name[0])}</span>`}<span><b>${esc(s.name)}</b><small>${esc(s.role)}</small><br><u>Карточка в справочнике →</u></span></a>`;
     return `<${o.link ? `a href="${esc(o.link)}" ${ext}` : 'div'} class="org"><span class="ini">${esc((o.name || '?')[0])}</span><span><b>${esc(o.name || '')}</b><small>сообщество</small></span></${o.link ? 'a' : 'div'}>`; }).join('');
   const past = d < today;
-  box.innerHTML = `<div class="qm-top"><div class="qm-head">${TRIAL ? '<span class="ev-k" style="color:var(--brown)">Образец события · всё вымышленное</span>' : ''}<span class="ev-k" style="color:${k.c}">${esc(k.t)}</span><h2 class="qm-title" id="qmTitle">${esc(e.title)}</h2></div><button class="qm-close" type="button" aria-label="Закрыть">✕</button></div>
+  box.innerHTML = `<div class="qm-top"><div class="qm-head">${TRIAL ? '<span class="ev-k" style="color:var(--brown)">Образец события · всё вымышленное</span><a class="yours" href="#add">Здесь может быть твоё событие! Как добавить →</a>' : ''}<span class="ev-k" style="color:${k.c}">${esc(k.t)}</span><h2 class="qm-title" id="qmTitle">${esc(e.title)}</h2></div><button class="qm-close" type="button" aria-label="Закрыть">✕</button></div>
     <div class="d-body">
       <div class="d-col">
         <div class="d-block"><h4>О событии</h4><p>${esc(e.about)}</p></div>

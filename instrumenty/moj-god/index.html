@@ -590,6 +590,7 @@ function say(t){ $('status').textContent = t; }
 
 /* ---------- рисунок листа для PNG и PDF ---------- */
 function roundRect(c, x, y, w, h, r){ r = Math.min(r, h/2, w/2); c.beginPath(); c.moveTo(x+r,y); c.arcTo(x+w,y,x+w,y+h,r); c.arcTo(x+w,y+h,x,y+h,r); c.arcTo(x,y+h,x,y,r); c.arcTo(x,y,x+w,y,r); c.closePath(); }
+function WM(cv, t){ const c = cv.getContext('2d'), w = cv.width, h = cv.height, fs = Math.round(Math.max(w, h) * 0.032); c.save(); c.font = '700 ' + fs + 'px Manrope, sans-serif'; c.fillStyle = 'rgba(110,79,60,0.075)'; c.textAlign = 'center'; c.textBaseline = 'middle'; c.translate(w / 2, h / 2); c.rotate(-Math.PI / 7); const sx = fs * 9, sy = fs * 5, R = Math.hypot(w, h) / 2 + sx; for (let y = -R, r = 0; y <= R; y += sy, r++) for (let x = -R + (r % 2) * sx / 2; x <= R; x += sx) c.fillText(t, x, y); c.restore(); return cv; }   // водяной знак с адресом сайта
 function drawSheet(){
   const W = 3508, H = 2480, cv = document.createElement('canvas'); cv.width = W; cv.height = H;
   const c = cv.getContext('2d'), y = S.year, rs = S.routines, ps = S.periods, HOL = S.hol ? holidays(y, S.canton) : {};
@@ -654,7 +655,7 @@ function drawSheet(){
     if (part.u){ c.fillRect(fx, fy + 6, w, 2); cv.links.push({x: fx, y: fy - 34, w, h: 46, url: part.u}); }
     fx += w;
   });
-  return cv;
+  return WM(cv, 'svoiludi.ch');
 }
 
 /* ---------- скачивание ---------- */

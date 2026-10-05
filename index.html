@@ -1411,6 +1411,7 @@ async function makePdf(pages, file){
     const node = document.createElement('div'); node.className = 'pp'; node.innerHTML = pages[i]; document.body.appendChild(node);
     await Promise.all([...node.querySelectorAll('img')].map(im => im.complete ? 0 : new Promise(r => { im.onload = im.onerror = r; })));
     const canvas = await html2canvas(node, { scale: 2, backgroundColor: '#FFFCF8', useCORS: true });
+    (function(cv, t){ const c = cv.getContext('2d'), w = cv.width, h = cv.height, fs = Math.round(Math.max(w, h) * 0.032); c.save(); c.font = '700 ' + fs + 'px Manrope, sans-serif'; c.fillStyle = 'rgba(79,94,62,0.08)'; c.textAlign = 'center'; c.textBaseline = 'middle'; c.translate(w / 2, h / 2); c.rotate(-Math.PI / 7); const sx = fs * 9, sy = fs * 5, R = Math.hypot(w, h) / 2 + sx; for (let y = -R, r = 0; y <= R; y += sy, r++) for (let x = -R + (r % 2) * sx / 2; x <= R; x += sx) c.fillText(t, x, y); c.restore(); })(canvas, 'svoiludi.ch');   // водяной знак
     if (i) pdf.addPage();
     const k = 210 / node.offsetWidth;
     pdf.addImage(canvas.toDataURL('image/jpeg', .9), 'JPEG', 0, 0, 210, canvas.height / canvas.width * 210);

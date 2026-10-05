@@ -591,6 +591,7 @@ function wrapText(c, text, x, y, maxW, lh, maxLines){
   for (const w of words){ const t = line ? line + ' ' + w : w; if (c.measureText(t).width > maxW && line){ c.fillText(line, x, y); y += lh; line = w; n++; if (n >= maxLines){ return y; } } else line = t; }
   if (line){ c.fillText(line, x, y); y += lh; } return y;
 }
+function WM(cv, t){ const c = cv.getContext('2d'), w = cv.width, h = cv.height, fs = Math.round(Math.max(w, h) * 0.032); c.save(); c.font = '700 ' + fs + 'px Manrope, sans-serif'; c.fillStyle = 'rgba(110,79,60,0.075)'; c.textAlign = 'center'; c.textBaseline = 'middle'; c.translate(w / 2, h / 2); c.rotate(-Math.PI / 7); const sx = fs * 9, sy = fs * 5, R = Math.hypot(w, h) / 2 + sx; for (let y = -R, r = 0; y <= R; y += sy, r++) for (let x = -R + (r % 2) * sx / 2; x <= R; x += sx) c.fillText(t, x, y); c.restore(); return cv; }   // водяной знак с адресом сайта
 function drawSheet(){
   const W = 2480, H = 3508, cv = document.createElement('canvas'); cv.width = W; cv.height = H;
   const c = cv.getContext('2d'), C = {bg:'#FFFCF8', ink:'#2F2924', muted:'#7A6E62', line:'#E5D9C9', brown:'#6E4F3C', soft:'#F4EDE3'};
@@ -641,7 +642,7 @@ function drawSheet(){
     const w = c.measureText(part.t).width; c.fillStyle = C.brown; c.fillText(part.t, fx, fy); c.fillRect(fx, fy + 6, w, 2);
     cv.links.push({x: fx, y: fy - 32, w, h: 44, url: part.u}); fx += w;
   });
-  return cv;
+  return WM(cv, 'svoiludi.ch');
 }
 
 /* ---------- скачивание ---------- */

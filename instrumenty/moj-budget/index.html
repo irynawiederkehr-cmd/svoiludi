@@ -1763,6 +1763,7 @@ function drawIncomePage(c, y){
   const neg = bal.map((v, i) => [v, i]).filter(([v]) => v < 0);
   c.fillText(fit(c, neg.length ? 'Не хватает в ' + neg.map(([, i]) => MPREP[i]).join(', ') + '. Отложи на эти месяцы заранее из месяцев с плюсом.' : 'Каждый месяц остаётся плюс, за год ' + chf(T.left * 12) + ' CHF.', PW - 2*PM), PM, y);
 }
+function WM(cv, t){ const c = cv.getContext('2d'), w = cv.width, h = cv.height, fs = Math.round(Math.max(w, h) * 0.032); c.save(); c.font = '700 ' + fs + 'px Manrope, sans-serif'; c.fillStyle = 'rgba(110,79,60,0.075)'; c.textAlign = 'center'; c.textBaseline = 'middle'; c.translate(w / 2, h / 2); c.rotate(-Math.PI / 7); const sx = fs * 9, sy = fs * 5, R = Math.hypot(w, h) / 2 + sx; for (let y = -R, r = 0; y <= R; y += sy, r++) for (let x = -R + (r % 2) * sx / 2; x <= R; x += sx) c.fillText(t, x, y); c.restore(); return cv; }   // водяной знак с адресом сайта
 function drawReport(){
   const T = calc(), pages = [];
   let cv = newPage(1), c = cv.getContext('2d'); pages.push(cv);
@@ -1917,6 +1918,7 @@ function drawReport(){
   pages.forEach(p => { const cc = p.getContext('2d'); cc.fillStyle = '#7A6E62'; cc.font = 'italic 500 26px Manrope, sans-serif';
     cc.fillText('Ориентир, а не точный расчёт. Всё уточняй и перепроверяй. Автор не несёт ответственности за достоверность данных.', PM, PH - 175); });
   pages.forEach((p, i) => footer(p, i + 1, pages.length));
+  pages.forEach(p => WM(p, 'svoiludi.ch'));
   return pages;
 }
 
@@ -2152,6 +2154,11 @@ async function buildXlsx(){
 
   wb.views = [{activeTab:0}];
   wb.worksheets.forEach(w => { if (w.name !== 'Списки') w.headerFooter = {oddFooter:'&L&8Мой бюджет · ориентир, не точный расчёт · svoiludi.ch · voznesenskaya.ch&R&8&P / &N'}; });
+  try {                                                  // водяной знак на листах Excel (виден на экране)
+    const wc = document.createElement('canvas'); wc.width = 900; wc.height = 560; WM(wc, 'svoiludi.ch');
+    const wid = wb.addImage({base64: wc.toDataURL('image/png'), extension: 'png'});
+    wb.worksheets.forEach(w => { if (w.name !== 'Списки') w.addBackgroundImage(wid); });
+  } catch(e) {}
   return wb.xlsx.writeBuffer();
 }
 
