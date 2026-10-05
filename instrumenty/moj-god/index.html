@@ -749,13 +749,13 @@ function yearEvents(){
     if (first){
       const until = ';UNTIL=' + ymd(last);
       const rule = r.mode === 'month' ? 'RRULE:FREQ=MONTHLY;BYMONTHDAY=' + r.mday + until : 'RRULE:FREQ=WEEKLY;BYDAY=' + r.days.map(d => ICS_WD[d]).join(',') + until;
-      out.push({uid:'mojgod-' + r.id + '-' + y, title: r.name || 'Дело', allDay:true, start:first, rrule:rule, exdates:ex, details:whenText(r) + ' · план «Мой год» · svoiludi.ch', kind:'Дело · ' + whenText(r)});
+      out.push({uid:'mojgod-' + r.id + '-' + y, title: r.name || 'Дело', allDay:true, start:first, rrule:rule, exdates:ex, details:whenText(r) + ' · план «Мой год» · https://svoiludi.ch/instrumenty/moj-god/', kind:'Дело · ' + whenText(r)});
     }
     add.forEach(ds => out.push({uid:'mojgod-' + r.id + '-' + ds, title: r.name || 'Дело', allDay:true, start:ds, details:'добавлено вручную · план «Мой год»', kind:'Отдельный день · ' + fmt(ds)}));
   }
   for (const p of S.periods){
     if (!p.start) continue;
-    out.push({uid:'mojgod-' + p.id, title: p.name || 'Период', allDay:true, start:p.start, end:p.end || p.start, details:'период · план «Мой год» · svoiludi.ch', kind: p.start === p.end ? 'Срок · ' + fmt(p.start) : 'Период · ' + fmt(p.start) + '–' + fmt(p.end)});
+    out.push({uid:'mojgod-' + p.id, title: p.name || 'Период', allDay:true, start:p.start, end:p.end || p.start, details:'период · план «Мой год» · https://svoiludi.ch/instrumenty/moj-god/', kind: p.start === p.end ? 'Срок · ' + fmt(p.start) : 'Период · ' + fmt(p.start) + '–' + fmt(p.end)});
   }
   return out;
 }

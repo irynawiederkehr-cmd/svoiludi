@@ -1039,7 +1039,7 @@ const CREDIT_PARTS = [
   {t:'Свои люди в Швейцарии · svoiludi.ch', u:'https://svoiludi.ch/'},
 ];
 const SHARE_URL = 'https://svoiludi.ch/instrumenty/moj-budget/';
-const SHARE_MSG = 'Привет! Нашла удобный бюджет обязательных расходов в Швейцарии. Страховки, аренда, абонементы, транспорт, налоги, всё по спискам, и видно, в какие месяцы приходят большие счета. Можно скачать в Excel и PDF. Хочешь попробовать?\n' + SHARE_URL;
+const SHARE_MSG = 'Привет! Смотри, какой удобный бюджет обязательных расходов в Швейцарии. Страховки, аренда, абонементы, транспорт, налоги, всё по спискам, и видно, в какие месяцы приходят большие счета. Можно скачать в Excel и PDF. Хочешь попробовать?\n' + SHARE_URL;
 
 /* ---------- состояние ---------- */
 let uid = 1; const nid = () => 'r' + Date.now().toString(36) + (uid++);
@@ -2182,7 +2182,7 @@ async function buildXlsx(){
   L.getCell('P1').value = 'Кто платит'; ['общее', nm(0), nm(1)].forEach((v, i) => { L.getCell('P' + (i + 2)).value = v; });
 
   wb.views = [{activeTab:0}];
-  wb.worksheets.forEach(w => { if (w.name !== 'Списки') w.headerFooter = {oddFooter:'&L&8Мой бюджет · ориентир, не точный расчёт · svoiludi.ch · voznesenskaya.ch&R&8&P / &N'}; });
+  wb.worksheets.forEach(w => { if (w.name !== 'Списки') w.headerFooter = {oddFooter:'&L&8Мой бюджет · ориентир, не точный расчёт · https://svoiludi.ch · https://voznesenskaya.ch&R&8&P / &N'}; });
   try {                                                  // водяной знак на листах Excel (виден на экране)
     const wc = document.createElement('canvas'); wc.width = 900; wc.height = 560; WM(wc, 'svoiludi.ch');
     const wid = wb.addImage({base64: wc.toDataURL('image/png'), extension: 'png'});
