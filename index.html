@@ -505,6 +505,22 @@ a.bot:hover{color:#B98324}
   .navcta{font-size:.8rem;padding:6px 11px}
   nav{font-size:.82rem}
 }
+
+/* о проекте */
+.about{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:28px 40px;align-items:start;padding:12px 0 8px}
+@media (max-width:860px){.about{grid-template-columns:1fr}}
+.about h2{font-size:clamp(1.9rem,4vw,2.6rem);line-height:1.12;margin:6px 0 14px;text-wrap:balance}
+.about .txt p{margin:0 0 14px;font-size:1.02rem;line-height:1.65}
+.about .vals{display:flex;flex-direction:column;gap:12px}
+.about .val{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:16px 18px;display:grid;grid-template-columns:40px 1fr;gap:4px 14px;align-items:start}
+.about .val svg{width:40px;height:40px;grid-row:span 2}
+.about .val b{font-family:var(--display);font-weight:400;font-size:1.3rem;line-height:1.2}
+.about .val p{margin:0;font-size:.93rem;color:var(--muted)}
+.about .creed{grid-column:1 / -1;background:var(--paper);border-left:4px solid var(--mustard,#B98324);border-radius:0 18px 18px 0;padding:18px 22px;font-family:var(--display);font-size:1.3rem;line-height:1.45;margin:4px 0 0}
+@media (max-width:640px){.about .creed{font-size:1.12rem;padding:16px 18px}}
+#about{scroll-margin-top:150px}
+.about-link{margin:12px 0 0}
+.about-link a{font-weight:700;color:var(--brown);text-underline-offset:4px}
 </style>
 </head>
 <body>
@@ -531,6 +547,7 @@ a.bot:hover{color:#B98324}
     <div class="eyebrow">Специалисты · справочник Swiss Guide</div>
     <h1 id="h1">Свои люди <em>в Швейцарии</em></h1>
     <p class="lead">Врачи, юристы, налоговые консультанты, преподаватели и мастера, которые говорят на твоём языке и работают официально, по швейцарским правилам. Выбери свой кантон и язык, и увидишь, к кому можно обратиться.</p>
+    <p class="about-link"><a href="#about">Зачем мы создали этот проект ↓</a></p>
   </section>
 
   <div class="trial" id="trial">
@@ -578,10 +595,26 @@ a.bot:hover{color:#B98324}
     <span style="display:flex;flex-wrap:wrap;gap:10px"><a class="btn" href="opros/">Отметить, кого не хватает</a><a class="btn ghost" id="nfbtn" href="mailto:voznesenskaya.iryna@gmail.com">Написать письмо</a></span>
   </div>
 
+  <section class="about" id="about" aria-labelledby="about-h">
+    <div class="txt">
+      <div class="eyebrow">О проекте</div>
+      <h2 id="about-h">Чтобы в новой стране было на кого опереться</h2>
+      <p>Переезд — это много нового сразу. Другой язык, другие правила, письма из ведомств, школа, врачи, работа. И всё это в то время, когда рядом ещё нет привычного круга людей, которым можно позвонить и просто спросить.</p>
+      <p>Период адаптации часто сопровождается одиночеством, растерянностью и чувством, что всё приходится решать в одиночку. Иногда не хватает даже не информации, а человека, который говорит на твоём языке и понимает, через что ты проходишь, потому что сам когда-то прошёл этот путь.</p>
+      <p>Мы создали «Свои люди в Швейцарии», чтобы этот путь стал легче. Здесь можно быстро найти врача, юриста, психолога, мастера или встречу, где говорят по-русски и по-украински. Но справочник не только про удобство. Он про то, чтобы в чужой стране поддерживать друг друга и пройти адаптацию спокойнее, с меньшим стрессом.</p>
+    </div>
+    <div class="vals">
+      <div class="val"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19c0-8 5-13 14-14-1 9-6 14-14 14z" fill="#E3E8D6" stroke="#4F5E3E" stroke-width="1.6" stroke-linejoin="round"/><path d="M5 19 13 11" fill="none" stroke="#4F5E3E" stroke-width="1.6" stroke-linecap="round"/></svg><b>Быстрее освоиться</b><p>Не нужно неделями искать по чатам и спрашивать знакомых. Проверенные специалисты по кантонам и городам собраны в одном месте.</p></div>
+      <div class="val"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="8" cy="7.5" r="2.6" fill="#E3E8D6" stroke="#4F5E3E" stroke-width="1.6"/><circle cx="16" cy="7.5" r="2.6" fill="#E3E8D6" stroke="#4F5E3E" stroke-width="1.6"/><path d="M3.5 19c0-3.2 2-5.5 4.5-5.5s4 1.4 4 1.4 1.5-1.4 4-1.4 4.5 2.3 4.5 5.5" fill="#E3E8D6" stroke="#4F5E3E" stroke-width="1.6" stroke-linejoin="round"/></svg><b>Найти своих</b><p>Встречи, разговорные клубы и праздники помогают познакомиться с теми, кто тоже строит здесь новую жизнь.</p></div>
+      <div class="val"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7.5-4.6-7.5-10A4.3 4.3 0 0 1 12 7.6 4.3 4.3 0 0 1 19.5 10C19.5 15.4 12 20 12 20z" fill="#F3E3C2" stroke="#B98324" stroke-width="1.6" stroke-linejoin="round"/></svg><b>Поддержать друг друга</b><p>Когда ты обращаешься к своим специалистам и советуешь их друзьям, ты помогаешь им работать, а другим быстрее найти помощь.</p></div>
+    </div>
+    <p class="creed">Быть частью «Своих людей» значит помнить, как непросто было в начале, и протягивать руку тем, кто только приехал. Каждый, кто советует своего специалиста, приходит на встречу или делится справочником с другом, делает это сообщество сильнее. Вместе мы превращаем чужую страну в место, где у тебя есть свои.</p>
+  </section>
+
   <section class="join" id="join" aria-labelledby="join-h">
     <div class="join-head">
       <h2 id="join-h">Ты специалист?</h2>
-      <p>Если ты работаешь в Швейцарии официально и помогаешь людям на их языке, присоединяйся. Пока справочник запускается, размещение бесплатное, а <a class="bot" href="https://t.me/swisscompass_bot" target="_blank" rel="noopener" data-tip="Swiss Guide — мой бесплатный Telegram-бот на русском. Ответы о жизни в Швейцарии по шагам: документы, страховки, налоги, школа, врачи. Откроется в Telegram.">бот Swiss Guide</a> ведёт людей прямо сюда.</p>
+      <p>Если ты работаешь в Швейцарии официально и помогаешь людям на русском или украинском, присоединяйся. Пока справочник запускается, размещение бесплатное, а <a class="bot" href="https://t.me/swisscompass_bot" target="_blank" rel="noopener" data-tip="Swiss Guide — мой бесплатный Telegram-бот на русском. Ответы о жизни в Швейцарии по шагам: документы, страховки, налоги, школа, врачи. Откроется в Telegram.">бот Swiss Guide</a> ведёт людей прямо сюда.</p>
     </div>
     <div class="join-cols">
       <div class="jc">
