@@ -553,6 +553,7 @@ a.bot:hover{color:#B98324}
 .adm-box{background:#E3E8D6;border:1.5px dashed #4F5E3E}
 .pv-acts{display:flex;flex-wrap:wrap;gap:8px}
 .pv-small{font-size:.8rem;color:var(--muted)}
+.adm-todo{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:4px;font-size:.86rem}
 </style>
 </head>
 <body>
@@ -819,6 +820,19 @@ window.IMG_BASE = 'img/';
    ВНИМАНИЕ: карточки с sample: true — вымышленные образцы, они остаются на сайте как пример с пометкой «Образец». Настоящий специалист добавляется БЕЗ sample и только по правилам размещения (согласие, фото, проверка) — он показывается выше образцов.
    ===================================================================== */
 const SPECIALISTS = [
+  {
+    id: 'irina-andreeva', key: 'hlm54ex4', num: 'SG-0013', uid: '', status: 'на подтверждении', paidUntil: '', tiers: [], onlineCH: '', tags: [], added: '2026-10-05', checked: '',
+    todo: ['Адреса: в боте они на кнопках, текста нет — нужен адрес основного места в кантоне Цюрих и дополнительного', 'Instagram: ник на кнопке в боте — уточнить', 'Портретное фото (без фото карточка не публикуется)', 'UID (CHE-…) или письмо AHV-кассы о самозанятости', 'Эстетическая акупунктура лица: в большинстве кантонов нужно разрешение или диплом. Запросить документ или убрать услугу до публикации', 'Текст профиля смягчён: убраны медицинские обещания (уменьшение боли, оздоровление) — правила справочника', 'Согласие: письмо «Подтверждаю» с её e-mail'],
+    name: 'Ирина Андреева', role: 'Массажист', cat: 'body', specs: ['Массаж'],
+    places: [
+      { canton: 'Zürich', address: 'Адрес уточняется, кантон Цюрих' }
+    ],
+    online: false, format: 'По предварительной записи',
+    about: 'Массажист с индивидуальным подходом к каждому клиенту. Работаю с мышечным напряжением, подвижностью тканей и общим самочувствием. Сочетаю современные массажные техники и подбираю программу под потребности и состояние каждого человека.',
+    services: ['Миофасциальный массаж тела и лица', 'Глубокотканный массаж тела', 'Расслабляющий массаж тела', 'Висцеральный массаж (правка живота)', 'Массаж для беременных', 'Эстетическая акупунктура лица', 'Аппаратный массаж с биоэнергомассажёром (БЭМ)', 'Инфракрасная SPA-капсула', 'Детский массаж от 2 месяцев'],
+    langs: ['русский', 'украинский', 'болгарский'],
+    contacts: { phone: '+41 77 281 51 07', email: 'andreeva.massagen@gmail.com', telegram: 'AndreevaArisha_gg', whatsapp: '+41 77 281 51 07' }
+  },
   {
     sample: true, id: 'anna-keller', firm: 'Keller Integration GmbH', num: 'SG-0001', uid: 'CHE-999.000.001', status: 'активен', paidUntil: '2026-12-31', tiers: [{ canton: 'Zürich', level: 'vip', until: '2026-12-31' }], onlineCH: '2026-12-31', tags: ['free1', 'evening'], added: '2026-08-12', checked: '2026-10-03',
     photo: 'anna-keller.jpg',
@@ -1407,7 +1421,7 @@ function previewBox(s){
 function adminBox(s){
   const to = (s.contacts && s.contacts.email) || '', L = ownerLetter(s), why = hiddenReason(s);
   return `<div class="adm-box"><b>Видишь только ты</b><span>Статус: ${esc(s.status || '—')}${why ? ' · на сайте не видна (' + esc(why) + ')' : ' · видна на сайте'}${s.key ? '' : ' · нет ключа предпросмотра (key)'}</span>
-    <div class="pv-acts">${to ? `<a class="btn" href="${esc(mailto(to, L.su, L.body))}">Отправить на подтверждение</a><a class="btn ghost" href="${esc(gmail(to, L.su, L.body))}" target="_blank" rel="noopener">Через Gmail</a>` : '<span>У специалиста нет e-mail в карточке</span>'}<button class="btn ghost" type="button" data-copyprev="${esc(s.id)}">Скопировать ссылку для Telegram</button></div></div>`;
+    ${(s.todo || []).length ? `<ul class="adm-todo">${s.todo.map(x => `<li>${esc(x)}</li>`).join('')}</ul>` : ''}<div class="pv-acts">${to ? `<a class="btn" href="${esc(mailto(to, L.su, L.body))}">Отправить на подтверждение</a><a class="btn ghost" href="${esc(gmail(to, L.su, L.body))}" target="_blank" rel="noopener">Через Gmail</a>` : '<span>У специалиста нет e-mail в карточке</span>'}<button class="btn ghost" type="button" data-copyprev="${esc(s.id)}">Скопировать ссылку для Telegram</button></div></div>`;
 }
 document.addEventListener('click', async e => { const b = e.target.closest('[data-copyprev]'); if (!b) return;
   const s = SPECIALISTS.find(x => x.id === b.dataset.copyprev); const t = `Здравствуйте! Я подготовила вашу карточку для справочника «Свои люди в Швейцарии». Пока её видите только вы. Посмотрите, пожалуйста, всё ли верно.\n\n${previewUrl(s)}\n\nВнизу карточки есть кнопки «Всё верно, подтверждаю» и «Нужно исправить». Они открывают письмо в вашей почте — отправьте его, пожалуйста, именно по e-mail на ${MAIL}. Подтверждение мне нужно письменно по почте, ответ в Telegram, к сожалению, не подойдёт. Спасибо!`;
