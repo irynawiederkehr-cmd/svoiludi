@@ -1236,7 +1236,7 @@ const onlineCH = s => s.online && (state.hidden || live(s.onlineCH));
 const pool = () => SPECIALISTS.filter(s => state.hidden || !hiddenReason(s));
 const hay = s => norm([s.name, s.role, s.firm, s.about, s.format, ...(s.tags || []).map(t => TAGS[t]), CATS[s.cat]?.t, ...(s.specs || []), ...(s.services || []), ...(s.langs || []), ...s.places.map(p => p.canton + ' ' + ktRu(p.canton) + ' ' + p.address)].join(' '));
 // фильтр «Кантон → Город» (04.10.2026): город берётся из адреса; в списке городов только те, где в кантоне уже есть специалисты
-const inCanton = s => !state.canton || livePlaces(s).some(p => p.canton === state.canton && (!state.city || (!p.area && city(p.address) === state.city)));
+const inCanton = s => !state.canton || livePlaces(s).some(p => p.canton === state.canton && (!state.city || p.area || city(p.address) === state.city));
 // «Онлайн по кантону» (onlineCanton — оплачено до): виден во всех городах своего кантона; «Онлайн по всей Швейцарии» (onlineCH) — везде
 const onlineCanton = s => s.online && (state.hidden || live(s.onlineCanton)) && livePlaces(s).some(p => p.canton === state.canton);
 
