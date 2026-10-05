@@ -545,6 +545,13 @@ a.bot:hover{color:#B98324}
 .has-art .hero-txt{gap:16px}
 .hero-art svg{display:block;width:100%;height:auto}
 @media (max-width:900px){.has-art{grid-template-columns:1fr}.hero-art{display:none}}
+
+/* предпросмотр и подтверждение карточки (05.10.2026) */
+.pv-box,.adm-box{margin-top:14px;border-radius:16px;padding:14px 16px;display:flex;flex-direction:column;gap:8px;font-size:.92rem}
+.pv-box{background:var(--mustard-soft,#F3E3C2);border:1.5px solid var(--mustard,#B98324)}
+.adm-box{background:#E3E8D6;border:1.5px dashed #4F5E3E}
+.pv-acts{display:flex;flex-wrap:wrap;gap:8px}
+.pv-small{font-size:.8rem;color:var(--muted)}
 </style>
 </head>
 <body>
@@ -1133,6 +1140,7 @@ const ktRu = c => (CANTONS[c] || [, c])[1];
 // что скрывает карточку с сайта (пусто — карточка видна)
 function hiddenReason(s){
   if (s.status === 'пауза') return 'Пауза';
+  if (s.status === 'на подтверждении') return 'Ждёт подтверждения';
   if (s.status !== 'активен') return 'Черновик';
   if (!s.photo) return 'Нет фото';
   if (s.paidUntil && s.paidUntil < today) return 'Оплата до ' + fmtDate(s.paidUntil) + ' закончилась';
@@ -1374,6 +1382,36 @@ async function shareCard(s){
   if (navigator.share){ try { await navigator.share({ title, text: title + ' · Свои люди в Швейцарии', url }); track('share/' + s.id); return; } catch (e){ if (e && e.name === 'AbortError') return; } }
   const ok = await copyText(url); track('share/' + s.id); toast(ok ? 'Ссылка на карточку скопирована — вставьте её в WhatsApp, Telegram или письмо.' : url);
 }
+
+/* ---------- подтверждение карточки специалистом (05.10.2026) ----------
+   Ирина (режим ?ira=1) в окне карточки нажимает «Отправить на подтверждение»: письмо специалисту со ссылкой предпросмотра.
+   Специалист открывает https://svoiludi.ch/#preview=<id>.<key>, видит свою карточку (даже если она ещё скрыта)
+   и нажимает «Подтверждаю» или «Нужно исправить» — письмо с его адреса приходит Ирине. Это и есть письменное подтверждение. */
+const SITE = 'https://svoiludi.ch/';
+const previewUrl = s => `${SITE}#preview=${encodeURIComponent(s.id)}.${encodeURIComponent(s.key || '')}`;
+const mailto = (to, su, body) => `mailto:${to}?subject=${encodeURIComponent(su)}&body=${encodeURIComponent(body)}`;
+const gmail = (to, su, body) => `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(to)}&su=${encodeURIComponent(su)}&body=${encodeURIComponent(body)}`;
+const ownerLetter = s => ({ su: 'Ваша карточка в «Своих людях в Швейцарии» — посмотрите, пожалуйста',
+  body: `Здравствуйте!\n\nЯ подготовила вашу карточку для справочника «Свои люди в Швейцарии». Пока её видите только вы. Посмотрите, пожалуйста, всё ли верно: фото, профиль, услуги, адреса и контакты.\n\n${previewUrl(s)}\n\nВнизу карточки есть две кнопки. «Всё верно, подтверждаю» — и я сразу опубликую карточку. «Нужно исправить» — и напишите, что поменять.\n\nС теплом,\nИрина Вознесенская\n${MAIL}` });
+const confirmLetter = s => ({ su: `Подтверждаю карточку — ${s.name}${s.num ? ' (' + s.num + ')' : ''}`,
+  body: `Здравствуйте, Ирина!\n\nВсё верно, подтверждаю публикацию своей карточки на сайте «Свои люди в Швейцарии».\n\n${previewUrl(s)}\n\n${s.name}` });
+const fixLetter = s => ({ su: `Исправления в карточку — ${s.name}${s.num ? ' (' + s.num + ')' : ''}`,
+  body: `Здравствуйте, Ирина!\n\nВ моей карточке, пожалуйста, исправьте\n\n— \n\n${previewUrl(s)}\n\n${s.name}` });
+function previewBox(s){
+  const c = confirmLetter(s), f = fixLetter(s);
+  return `<div class="pv-box"><b>Это предпросмотр вашей карточки.</b><span>Пока её видите только вы. Если всё верно, подтвердите, и карточка появится на сайте. Если что-то нужно поменять, напишите, что именно.</span>
+    <div class="pv-acts"><a class="btn" href="${esc(mailto(MAIL, c.su, c.body))}">Всё верно, подтверждаю</a><a class="btn ghost" href="${esc(mailto(MAIL, f.su, f.body))}">Нужно исправить</a></div>
+    <span class="pv-small">Кнопки открывают письмо в вашей почте, его нужно только отправить. Если почта не открылась, напишите на ${MAIL}.</span></div>`;
+}
+function adminBox(s){
+  const to = (s.contacts && s.contacts.email) || '', L = ownerLetter(s), why = hiddenReason(s);
+  return `<div class="adm-box"><b>Видишь только ты</b><span>Статус: ${esc(s.status || '—')}${why ? ' · на сайте не видна (' + esc(why) + ')' : ' · видна на сайте'}${s.key ? '' : ' · нет ключа предпросмотра (key)'}</span>
+    <div class="pv-acts">${to ? `<a class="btn" href="${esc(mailto(to, L.su, L.body))}">Отправить на подтверждение</a><a class="btn ghost" href="${esc(gmail(to, L.su, L.body))}" target="_blank" rel="noopener">Через Gmail</a>` : '<span>У специалиста нет e-mail в карточке</span>'}<button class="btn ghost" type="button" data-copyprev="${esc(s.id)}">Скопировать ссылку для Telegram</button></div></div>`;
+}
+document.addEventListener('click', async e => { const b = e.target.closest('[data-copyprev]'); if (!b) return;
+  const s = SPECIALISTS.find(x => x.id === b.dataset.copyprev); const t = `Здравствуйте! Я подготовила вашу карточку для справочника «Свои люди в Швейцарии». Посмотрите, пожалуйста, всё ли верно, и нажмите внизу «Подтверждаю» или «Нужно исправить»:\n${previewUrl(s)}`;
+  try { await navigator.clipboard.writeText(t); b.textContent = 'Скопировано'; } catch (x) { prompt('Скопируйте текст', t); } });
+let PREVIEW = '';   // id карточки, открытой по ссылке предпросмотра
 function openCard(id){
   const s = SPECIALISTS.find(x => x.id === id); if (!s) return;
   const k = CATS[s.cat] || CATS.status, c = s.contacts || {};
@@ -1399,11 +1437,12 @@ function openCard(id){
         <div class="card-acts"><button class="btn" type="button" data-vcf="${esc(s.id)}" data-tip="Сохранить телефон, e-mail и адрес в контакты телефона или компьютера">В контакты</button><button class="btn ghost" type="button" data-share="${esc(s.id)}">Поделиться</button><button class="btn ghost" type="button" data-pdf-card="${esc(s.id)}">PDF</button></div>
         <p class="d-note">${s.uid ? `Регистрационный номер ${s.firm ? 'фирмы ' : ''}(UID): <a class="uid" href="${uidUrl(s.uid)}" ${ext} data-tip="Открыть запись в официальном реестре предприятий Швейцарии (uid.admin.ch)">${esc(s.uid)}</a>. ` : ''}Данные проверены ${fmtDate(s.checked)}. Договорённости — напрямую со специалистом.</p>
         <p class="report">Нашли ошибку в карточке? <a href="${esc(reportLink(s))}">Сообщить</a></p>
+        ${PREVIEW === s.id ? previewBox(s) : ''}${ADMIN ? adminBox(s) : ''}
       </div>
     </div>`;
   box.querySelector('.qm-close').onclick = () => qm.close();
   if (!qm.open){ qm.showModal(); track('card/' + s.id); }
-  if (location.hash.slice(1) !== s.id) history.replaceState(null, '', '#' + s.id);
+  if (PREVIEW !== s.id && location.hash.slice(1) !== s.id) history.replaceState(null, '', '#' + s.id);
 }
 /* ---------- PDF: карточка и список (библиотеки — те же, что у PDF-отчётов тестов) ---------- */
 const PDF_LIBS = ['assets/lib/html2canvas.min.js', 'assets/lib/jspdf.umd.min.js', 'assets/lib/qrcode.js'];
@@ -1506,6 +1545,7 @@ document.getElementById('trial').hidden = !ADMIN;
 fillSelects(); render();
 // ссылки для бота: …/specialisty/#anna-keller открывает карточку, …/specialisty/#k-health — направление
 const openFromHash = () => { const id = decodeURIComponent(location.hash.slice(1));
+  if (id.startsWith('preview=')){ const [pid, key] = id.slice(8).split('.'); const sp = SPECIALISTS.find(x => x.id === pid); if (sp && sp.key && key === sp.key){ PREVIEW = pid; openCard(pid); setTimeout(() => { const b = document.querySelector('.pv-box'); if (b) b.scrollIntoView({ block: 'center' }); }, 300); } return; }
   if (id.startsWith('list=')){ state.shared = new Set(id.slice(5).split(',').filter(x => SPECIALISTS.some(s => s.id === x))); state.fav = false; render(); return; }
   if (id.startsWith('k-') && CATS[id.slice(2)]){ state.cat = id.slice(2); state.spec = ''; render(); document.querySelector('.finder').scrollIntoView(); return; }
   if (id && SPECIALISTS.some(s => s.id === id && (s.sample || !hiddenReason(s)))) openCard(id); };
