@@ -789,6 +789,8 @@ window.IMG_BASE = 'img/';
    uid — регистрационный номер UID (CHE-123.456.789) из uid.admin.ch: виден в полной карточке со ссылкой на запись в реестре
          и служит ID специалиста в назначении платежа («CHE-123.456.789 Marti Olga»). Решено 03.10.2026.
    firm — название фирмы точно как в реестре (если есть): видно под профессией, в полной карточке и PDF; ищется поиском (04.10.2026)
+   prices — прайс-лист (необязательно, только если специалист сам его прислал): [{ t: 'Услуга', p: '120 CHF', n: '60 минут' }, …];
+            pricesDate — 'ГГГГ-ММ-ДД', на какую дату цены. Есть prices — в карточке появляется кнопка «Прайс-лист PNG» (05.10.2026)
    num — внутренний номер из «Реестра специалистов.xlsx» (SG-0001 …): запасной ID, если UID нет или он общий
          (несколько специалистов одной фирмы с одним UID фирмы).
 
@@ -892,7 +894,16 @@ const SPECIALISTS = [
     about: 'Допомагаю новим мешканцям із документами, житлом, школами, страховками та повсякденними процедурами. Пояснюю, як влаштована система, і йду поруч, поки все не стане на свої місця.',
     services: ['Індивідуальні консультації з адаптації', 'Супровід під час переїзду', 'Допомога з листами та формами', 'Орієнтація в системі шкіл і комун'],
     langs: ['російська', 'українська', 'німецька', 'англійська'],
-    contacts: { phone: '+41 44 555 23 89', email: 'anna.keller@example.ch', site: 'example.ch', instagram: 'swiss.adapt', telegram: 'annakeller_ch', whatsapp: '+41 44 555 23 89' }
+    contacts: { phone: '+41 44 555 23 89', email: 'anna.keller@example.ch', site: 'example.ch', instagram: 'swiss.adapt', telegram: 'annakeller_ch', whatsapp: '+41 44 555 23 89' },
+    pricesDate: '2026-10-01',
+    prices: [
+      { t: 'Знайомство й розбір ситуації', n: '20 хвилин, онлайн', p: 'безкоштовно' },
+      { t: 'Індивідуальна консультація', n: '60 хвилин, онлайн або очно', p: '120 CHF' },
+      { t: 'Допомога з листом або формою', n: 'один лист або анкета', p: 'від 60 CHF' },
+      { t: 'Супровід до громади або школи', n: 'до 2 годин, Цюрих', p: '220 CHF' },
+      { t: 'Пакет «Перший місяць після переїзду»', n: '4 зустрічі по 60 хвилин і підтримка в месенджері', p: '420 CHF' },
+      { t: 'Орієнтація в системі шкіл', n: '90 хвилин, для батьків', p: '160 CHF' }
+    ]
   },
   {
     sample: true, id: 'olga-marti', firm: 'Praxis Marti GmbH', num: 'SG-0002', uid: 'CHE-999.000.002', status: 'активен', paidUntil: '2026-12-31', tiers: [{ canton: 'Zürich', level: 'партнёр', until: '2026-12-31' }], onlineCH: '', tags: ['emr', 'evening', 'access'], added: '2026-08-20', checked: '2026-10-03',
@@ -1501,7 +1512,7 @@ function openCard(id){
       <div class="d-side">
         <div class="d-block"><h4>Де приймає</h4><div style="display:flex;flex-direction:column;gap:10px">${livePlaces(s).map(placeFull).join('')}${s.online ? '<span>і онлайн через відеозв’язок</span>' : ''}</div></div>
         <div class="d-block"><h4>Контакти</h4><ul class="ctl">${contacts}</ul></div>
-        <div class="card-acts"><button class="btn" type="button" data-vcf="${esc(s.id)}" data-tip="Зберегти телефон, e-mail і адресу в контакти телефона або комп’ютера">До контактів</button><button class="btn ghost" type="button" data-share="${esc(s.id)}">Поділитися</button><button class="btn ghost" type="button" data-pdf-card="${esc(s.id)}">PDF</button></div>
+        <div class="card-acts"><button class="btn" type="button" data-vcf="${esc(s.id)}" data-tip="Зберегти телефон, e-mail і адресу в контакти телефона або комп’ютера">До контактів</button><button class="btn ghost" type="button" data-share="${esc(s.id)}">Поділитися</button><button class="btn ghost" type="button" data-png-card="${esc(s.id)}" data-tip="Візитка-картинка PNG: збережеться в галерею телефона, її зручно показати або переслати">Візитка PNG</button>${(s.prices || []).length ? `<button class="btn ghost" type="button" data-png-price="${esc(s.id)}" data-tip="Прайс-лист картинкою PNG: збережеться в галерею телефона">Прайс-лист PNG</button>` : ''}<button class="btn ghost" type="button" data-pdf-card="${esc(s.id)}" data-tip="Повна картка для друку й пошти">PDF</button></div>
         <p class="d-note">${s.uid ? `Реєстраційний номер${s.firm ? 'фірми ' : ''}(UID): <a class="uid" href="${uidUrl(s.uid)}" ${ext} data-tip="Відкрити запис в офіційному реєстрі підприємств Швейцарії (uid.admin.ch)">${esc(s.uid)}</a>. ` : ''}${s.checked ? `Дані перевірено ${fmtDate(s.checked)}. ` : ''}Довідник перевіряє тільки офіційну реєстрацію. Дипломи й сертифікати вказує сам фахівець. Домовленості — напряму з фахівцем.</p>
         <p class="report">Знайшли помилку в картці? <a href="${esc(reportLink(s))}">Повідомити</a></p>
         ${PREVIEW === s.id ? previewBox(s) : ''}${ADMIN ? adminBox(s) : ''}
@@ -1561,18 +1572,112 @@ async function makePdf(pages, file){
     const canvas = await html2canvas(node, { scale: 2, backgroundColor: '#FFFCF8', useCORS: true });
     (function(cv, t){ const c = cv.getContext('2d'), w = cv.width, h = cv.height, fs = Math.round(Math.max(w, h) * 0.032); c.save(); c.font = '700 ' + fs + 'px Manrope, sans-serif'; c.fillStyle = 'rgba(79,94,62,0.08)'; c.textAlign = 'center'; c.textBaseline = 'middle'; c.translate(w / 2, h / 2); c.rotate(-Math.PI / 7); const sx = fs * 9, sy = fs * 5, R = Math.hypot(w, h) / 2 + sx; for (let y = -R, r = 0; y <= R; y += sy, r++) for (let x = -R + (r % 2) * sx / 2; x <= R; x += sx) c.fillText(t, x, y); c.restore(); })(canvas, 'svoiludi.ch');   // водяной знак
     if (i) pdf.addPage();
-    const k = 210 / node.offsetWidth;
-    pdf.addImage(canvas.toDataURL('image/jpeg', .9), 'JPEG', 0, 0, 210, canvas.height / canvas.width * 210);
+    const k0 = 210 / node.offsetWidth;
+    // длинная карточка не обрезается: уменьшаем, чтобы влезла на страницу A4
+    let W = 210, H = canvas.height / canvas.width * 210; const fit = H > 297 ? 297 / H : 1; W *= fit; H *= fit; const X = (210 - W) / 2;
+    if (fit < 1){ pdf.setFillColor(255, 252, 248); pdf.rect(0, 0, 210, 297, 'F'); }
+    pdf.addImage(canvas.toDataURL('image/jpeg', .9), 'JPEG', X, 0, W, H);
     const base = node.getBoundingClientRect();   // ссылки в PDF остаются кликабельными
-    node.querySelectorAll('a[data-href]').forEach(a => { const r = a.getBoundingClientRect(); pdf.link((r.left - base.left) * k, (r.top - base.top) * k, r.width * k, r.height * k, { url: a.dataset.href }); });
+    const k = k0 * fit; node.querySelectorAll('a[data-href]').forEach(a => { const r = a.getBoundingClientRect(); pdf.link(X + (r.left - base.left) * k, (r.top - base.top) * k, r.width * k, r.height * k, { url: a.dataset.href }); });
     node.remove();
   }
   pdf.save(file); toast('PDF збережено.');
 }
 const stamp = today.replace(/-/g, '');
 async function pdfCard(id){ const s = SPECIALISTS.find(x => x.id === id); if (!s) return; try { await loadLibs(); } catch (e){ toast('PDF зберігається на сайті. У цьому перегляді завантаження недоступне.'); return; } track('pdf/' + s.id); makePdf([cardPage(s)], `${s.num || 'SG'} ${s.name} — ${stamp}.pdf`); }
+/* ---------- Визитка и прайс-лист PNG: картинки 1080×1920 (формат экрана телефона) — сохранить в галерею, показать, переслать ---------- */
+const VZ_CSS = `.vz{position:fixed;left:-10000px;top:0;width:540px;min-height:960px;box-sizing:border-box;display:flex;flex-direction:column;background:#FFFCF8;color:#2F2924;font:15px/1.45 Manrope,"Segoe UI",system-ui,sans-serif;overflow:hidden}
+.vz *{box-sizing:border-box}.vz-top{height:12px;flex:none}
+.vz-h{display:flex;align-items:center;gap:10px;padding:16px 28px 12px}.vz-h .av{width:34px;height:34px;flex:none}.vz-h .av svg{width:100%;height:100%}
+.vz-h b{font:400 20px/1.1 Forum,Georgia,serif;display:block}.vz-h b em{font-style:normal;color:#4F5E3E}.vz-h small{color:#7A6E62;font-size:11.5px}
+.vz-c{position:relative;margin:0 20px;flex:1;display:flex;flex-direction:column;gap:13px;background:#FFFCF8;border-radius:28px;padding:22px 24px 18px;border:1.5px solid #E5D9C9}
+.vz-c::before{content:"";position:absolute;inset:0;border-radius:28px;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22360%22%20height%3D%22200%22%3E%3Ctext%20x%3D%2210%22%20y%3D%22115%22%20transform%3D%22rotate%28-24%20180%20100%29%22%20font-family%3D%22Manrope%2CArial%2Csans-serif%22%20font-size%3D%2212%22%20font-weight%3D%22700%22%20fill%3D%22%234F5E3E%22%20fill-opacity%3D%220.07%22%3E%D0%A1%D0%B2%D0%BE%D0%B8%20%D0%BB%D1%8E%D0%B4%D0%B8%20%C2%B7%20svoiludi.ch%20%C2%B7%20%D0%A1%D0%B2%D0%BE%D0%B8%20%D0%BB%D1%8E%D0%B4%D0%B8%3C%2Ftext%3E%3C%2Fsvg%3E");background-repeat:repeat}
+.vz-p{display:flex;gap:20px;align-items:flex-end}.vz-ph{position:relative;width:132px;height:165px;flex:none;border-radius:20px;overflow:hidden;background:#E5D9C9}.vz-ph img{width:100%;height:100%;object-fit:cover;display:block}
+.vz-ph i{position:absolute;left:50%;bottom:10px;transform:translateX(-50%);background:rgba(255,252,248,.94);color:#6E4F3C;font:700 12px/1 Manrope,sans-serif;font-style:normal;padding:6px 11px;border-radius:999px;white-space:nowrap}
+.vz-p.sm{align-items:center;gap:16px}.vz-p.sm .vz-ph{width:72px;height:90px;border-radius:14px}.vz-p.sm .vz-ph i{display:none}.vz-p.sm .vz-name{font-size:30px}
+.vz-cat{font-size:10.5px;font-weight:800;letter-spacing:.13em;text-transform:uppercase;line-height:1.35}
+.vz-name{font:400 34px/1.02 Forum,Georgia,serif;margin:6px 0 6px}.vz-role{font:400 18px/1.22 Forum,Georgia,serif;color:#6E4F3C}.vz-firm{font-size:12.5px;color:#7A6E62;margin-top:5px}
+.vz-s h4{margin:0 0 6px;font-size:10px;font-weight:800;letter-spacing:.15em;text-transform:uppercase;color:#7A6E62}.vz-s>div{font-size:14px}
+.vz-ct{display:grid;grid-template-columns:70px 1fr;gap:4px 8px}.vz-ct b{font-size:13px !important}.vz-ct span{color:#7A6E62;font-size:12.5px;padding-top:1px}.vz-ct b{font-weight:600;font-size:14px;word-break:break-word}
+.vz-sv{column-count:2;column-gap:22px;font-size:12.5px;line-height:1.3;color:#2F2924}.vz-sv span{display:block;position:relative;padding:0 0 0 14px;margin:0 0 5px;break-inside:avoid}.vz-sv span::before{content:"";position:absolute;left:1px;top:.42em;width:5px;height:5px;background:#B9A58E;transform:rotate(45deg)}
+.vz-ln{height:1.5px;background:#E5D9C9;flex:none}.vz-c.pr{gap:8px}.vz-c.pr .vz-pt{font-size:27px;margin-top:2px}
+.vz-pt{font:400 30px/1 Forum,Georgia,serif;color:#2F2924;display:flex;align-items:baseline;gap:10px}.vz-pt small{font:600 12px/1 Manrope,sans-serif;color:#7A6E62}
+.vz-pl{display:flex;flex-direction:column}.vz-pl div{display:flex;align-items:baseline;gap:10px;padding:5px 0;border-bottom:1px dashed #E5D9C9}.vz-pl div:last-child{border-bottom:0}
+.vz-pl b{font-weight:600;font-size:14.5px;flex:1;line-height:1.3}.vz-pl b small{display:block;font-weight:400;color:#7A6E62;font-size:12px;margin-top:2px}.vz-pl span{font:400 19px/1.1 Forum,Georgia,serif;color:#6E4F3C;white-space:nowrap}
+.vz-pl.two{display:block;column-count:2;column-gap:22px}.vz-pl.two div{break-inside:avoid;gap:8px;padding:5px 0}.vz-pl.two b{font-size:12.5px;line-height:1.25}.vz-pl.two b small{font-size:10.5px;margin-top:1px}.vz-pl.two span{font-size:15px}.vz-pl.two div:last-child{border-bottom:1px dashed #E5D9C9}
+.vz-pn{font-size:11.5px;color:#7A6E62;line-height:1.4}
+.vz-cq{display:flex;gap:14px;align-items:flex-start}.vz-cq>.vz-s{flex:1;min-width:0}.vz-cq .vz-q{flex:none;width:132px;text-align:center;background:#F4EDE3;border-radius:16px;padding:9px 9px 8px}.vz-cq .vz-q img{width:114px;height:114px;display:block;image-rendering:pixelated;background:#fff;padding:6px;border-radius:10px}.vz-cq .vz-q b{display:block;font:400 15px/1.1 Forum,Georgia,serif;margin-top:6px}.vz-cq .vz-q small{display:block;font-size:10px;line-height:1.3;color:#5C5248;margin-top:2px}
+.vz-lang{font-size:12.5px;color:#5C5248;margin-top:6px}.vz-lang b{font-weight:700;color:#66704F}
+.vz-qr{margin-top:auto;display:flex;gap:16px;align-items:center;background:#F4EDE3;border-radius:20px;padding:14px}.vz-qr img{width:150px;height:150px;flex:none;image-rendering:pixelated;background:#fff;padding:7px;border-radius:12px}
+.vz-qr.sm{padding:10px}.vz-qr.sm img{width:104px;height:104px}
+.vz-qr b{font:400 20px/1.15 Forum,Georgia,serif;display:block;margin-bottom:5px}.vz-qr small{display:block;color:#5C5248;font-size:12.5px;line-height:1.4}
+.vz-inv{margin:12px 20px 0;background:#F4EDE3;color:#2F2924;border-radius:22px;padding:13px 18px 14px}
+.vz-inv .k{font-size:10px;font-weight:800;letter-spacing:.13em;text-transform:uppercase;color:#4F5E3E}
+.vz-inv b{display:block;font:400 20px/1.15 Forum,Georgia,serif;margin:5px 0 4px}.vz-inv p{margin:0;font-size:12.5px;line-height:1.45;color:#4A413A}
+.vz-inv .u{display:inline-block;margin-top:8px;background:#6E4F3C;color:#FFFCF8;font-weight:800;font-size:13px;padding:7px 14px;border-radius:999px}
+.vz-f{padding:8px 24px 12px;font-size:10.5px;color:#7A6E62;text-align:center;line-height:1.4}
+.vz-smp{position:absolute;top:16px;right:18px;background:#6E4F3C;color:#fff;font:800 10.5px/1 Manrope,sans-serif;letter-spacing:.12em;text-transform:uppercase;padding:7px 11px;border-radius:999px}`;
+// услуги идут сплошным списком и показываются все (05.10.2026)
+// короткая визитка для QR (имя, фирма, профессия, телефон, e-mail, сайт): код крупнее и считывается даже с экрана
+const vcardShort = s => vcard(s).replace(/\r\n /g, '').split('\r\n').filter(l => !/^(NOTE|ADR|X-SOCIALPROFILE|PHOTO)/.test(l)).join('\r\n');
+function vizitkaNode(s, kind){
+  const price = kind === 'price', k = CATS[s.cat] || CATS.status, c = s.contacts || {};
+  const av = (document.querySelector('.mark .av') || {}).innerHTML || '';
+  const where = livePlaces(s).map(p => p.area ? `кантон ${esc(ktRu(p.canton))} · ${esc(areaNote(p))}` : esc(p.address)).concat(s.online ? ['онлайн через відеозв’язок'] : []);
+  const ct = ['phone', 'whatsapp', 'email', 'telegram', 'instagram', 'site'].filter(x => c[x] && !(x === 'whatsapp' && digits(c.whatsapp) === digits(c.phone || ''))).map(x => { const [t, , v] = LINK[x](c[x]); return `<span>${t}</span><b>${esc(v)}</b>`; });
+  if (c.whatsapp && c.phone && digits(c.whatsapp) === digits(c.phone)) ct[0] = `<span>Телефон</span><b>${esc(c.phone)} · є WhatsApp</b>`;
+  // QR — короткая визитка (имя, фирма, профессия, телефон, e-mail, сайт): код крупнее и считывается даже с экрана
+  const short = vcardShort(s);
+  const sv = s.services || [];
+  const head = `<div class="vz-p${price ? ' sm' : ''}"><span class="vz-ph">${s.photo ? `<img src="${esc(photoSrc(s.photo))}" alt="">${s.sample ? '<i>Ваше фото</i>' : ''}` : ''}</span>
+        <div><div class="vz-cat" style="color:${k.c}">${esc(k.t)}</div><div class="vz-name">${esc(s.name)}</div><div class="vz-role">${esc(s.role)}</div>${s.firm ? `<div class="vz-firm">${esc(s.firm)}</div>` : ''}${price ? '' : `<div class="vz-lang"><b>Мови:</b> ${esc(s.langs.join(', '))}</div>`}</div></div>`;
+  const body = price
+    ? `<div class="vz-pt">Прайс-лист</div>
+      <div class="vz-pl">${(s.prices || []).map(r => `<div><b>${esc(r.t)}${r.n ? `<small>${esc(r.n)}</small>` : ''}</b><span>${esc(r.p)}</span></div>`).join('')}</div>
+      <div class="vz-pn">Ціни вказав сам фахівець${s.pricesDate ? ` ${fmtDate(s.pricesDate)}` : ''}. Точну вартість уточнюйте під час запису.</div>
+      <div class="vz-qr sm">${qrImg(short)}<div><b>Записатися</b><small>${ct.length ? ct.slice(0, 2).map(x => x.replace(/<span>.*?<\/span><b>(.*?)<\/b>/, '$1')).join('<br>') + '<br>' : ''}Наведи камеру — контакт збережеться.</small></div></div>`
+    : `${where.length ? `<div class="vz-s"><h4>Де приймає</h4>${where.map(w => `<div>${w}</div>`).join('')}</div>` : ''}
+      ${sv.length ? `<div class="vz-s"><h4>Послуги</h4><div class="vz-sv">${sv.map(x => `<span>${esc(x)}</span>`).join('')}</div></div>` : ''}
+      <div class="vz-cq"><div class="vz-s"><h4>Контакти</h4><div class="vz-ct">${ct.join('')}</div></div>
+        <div class="vz-q">${qrImg(short)}<b>Збережи контакт</b><small>Наведи камеру — контакт збережеться</small></div></div>`;
+  const node = document.createElement('div'); node.className = 'vz wm';
+  node.innerHTML = `<div class="vz-top" style="background:${k.c}"></div>
+    <div class="vz-h"><span class="av">${av}</span><span><b><em>Свої люди</em> у Швейцарії</b><small>Довідник російсько- та україномовних фахівців</small></span></div>
+    <div class="vz-c${price ? ' pr' : ''}">${s.sample ? '<span class="vz-smp">Зразок</span>' : ''}${head}<div class="vz-ln"></div>${body}</div>
+    <div class="vz-inv"><div class="k">${price ? 'Прайс-лист створено' : 'Картку створено'} сервісом проєкту «Свої люди у Швейцарії»</div>
+      <b>Ви фахівець? Розмістіть свою анкету</b>
+      <p>Картка з фото, послугами й контактами, така візитка й прайс-лист для телефона, PDF і QR-код. Вас знайдуть ті, кому потрібна допомога російською або українською. Зараз — безкоштовно.</p>
+      <span class="u">https://svoiludi.ch/uk/join/</span></div>
+    <div class="vz-f">Довідник перевіряє тільки офіційну реєстрацію. Домовленості — напряму з фахівцем.</div>`;
+  return node;
+}
+function vzFit(node){   // все услуги видны всегда, в два столбика: сначала чуть уменьшаем шрифт списка, а если и так не влезает — картинка становится длиннее экрана
+  const pl = node.querySelector('.vz-pl');   // прайс-лист: длинный — в два столбика (05.10.2026)
+  if (pl && node.scrollHeight > 960) pl.classList.add('two');
+  const box = node.querySelector('.vz-sv'); if (!box) return;
+  for (const fs of [12.5, 12, 11.5, 11]){ box.style.fontSize = fs + 'px'; if (node.scrollHeight <= 960) return; }
+}
+async function cardPng(s, kind, opts){
+  try { await loadLibs(); } catch (e){ toast('Картинка зберігається на сайті. У цьому перегляді завантаження недоступне.'); return; }
+  if (!opts) toast(kind === 'price' ? 'Готую прайс-лист…' : 'Готую візитку…');
+  if (!document.getElementById('vzcss')){ const st = document.createElement('style'); st.id = 'vzcss'; st.textContent = VZ_CSS; document.head.appendChild(st); }
+  const node = vizitkaNode(s, kind); document.body.appendChild(node);
+  await Promise.all([...node.querySelectorAll('img')].map(im => im.complete ? 0 : new Promise(r => { im.onload = im.onerror = r; })));
+  try { await document.fonts.ready; } catch (_) {}
+  vzFit(node);
+  const canvas = await html2canvas(node, { scale: 1080 / 540, backgroundColor: '#FFFCF8', useCORS: true, logging: false });
+  node.remove();
+  if (opts && opts.dataUrl) return canvas.toDataURL('image/png');
+  const file = `${s.num || 'SG'} ${s.name} — ${kind === 'price' ? 'прайс-лист' : 'візитка'}.png`;
+  const blob = await new Promise(r => canvas.toBlob(r, 'image/png'));
+  track((kind === 'price' ? 'price/' : 'png/') + s.id);
+  // на телефоне — системное окно: «Сохранить изображение» кладёт картинку прямо в галерею (Фото)
+  try { const f = new File([blob], file, { type: 'image/png' }); if (navigator.canShare && navigator.canShare({ files: [f] }) && matchMedia('(pointer:coarse)').matches){ await navigator.share({ files: [f], title: s.name }); return; } } catch (e){ if (e && e.name === 'AbortError') return; }
+  const url = URL.createObjectURL(blob), a = document.createElement('a'); a.href = url; a.download = file; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(url), 4000);
+  toast(kind === 'price' ? 'Прайс-лист збережено картинкою.' : 'Візитку збережено картинкою.');
+}
 // PDF всего списка намеренно нет: чтобы базу нельзя было скачать целиком (решение 03.10.2026)
-document.getElementById('qmCard').addEventListener('click', e => { const b = e.target.closest('[data-pdf-card]'); if (b) pdfCard(b.dataset.pdfCard);
+document.getElementById('qmCard').addEventListener('click', e => { const b = e.target.closest('[data-pdf-card]'); if (b) pdfCard(b.dataset.pdfCard); const g = e.target.closest('[data-png-card]'); if (g){ const s = SPECIALISTS.find(x => x.id === g.dataset.pngCard); if (s) cardPng(s); } const pr = e.target.closest('[data-png-price]'); if (pr){ const s = SPECIALISTS.find(x => x.id === pr.dataset.pngPrice); if (s) cardPng(s, 'price'); }
   const v = e.target.closest('[data-vcf]'); if (v){ const s = SPECIALISTS.find(x => x.id === v.dataset.vcf); if (s) saveVcf(s); }
   const sh = e.target.closest('[data-share]'); if (sh){ const s = SPECIALISTS.find(x => x.id === sh.dataset.share); if (s) shareCard(s); }
   const a = e.target.closest('a[href]'); if (a){ const id = (location.hash || '').slice(1), h = a.getAttribute('href');
