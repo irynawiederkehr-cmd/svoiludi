@@ -1613,7 +1613,7 @@ const VZ_CSS = `.vz{position:fixed;left:-10000px;top:0;width:540px;min-height:96
 .vz-qr b{font:400 20px/1.15 Forum,Georgia,serif;display:block;margin-bottom:5px}.vz-qr small{display:block;color:#5C5248;font-size:12.5px;line-height:1.4}
 .vz-inv{margin:12px 20px 0;background:#F4EDE3;color:#2F2924;border-radius:22px;padding:13px 18px 14px}
 .vz-inv .k{font-size:10px;font-weight:800;letter-spacing:.13em;text-transform:uppercase;color:#4F5E3E}
-.vz-inv b{display:block;font:400 20px/1.15 Forum,Georgia,serif;margin:5px 0 4px}.vz-inv p{margin:0;font-size:12.5px;line-height:1.45;color:#4A413A}
+.vz-inv b{display:block;font:400 18px/1.2 Forum,Georgia,serif;margin:5px 0 2px}.vz-inv p{margin:0;font-size:12.5px;line-height:1.45;color:#4A413A}
 .vz-inv .u{display:inline-block;margin-top:8px;background:#6E4F3C;color:#FFFCF8;font-weight:800;font-size:13px;padding:7px 14px;border-radius:999px}
 .vz-f{padding:8px 24px 12px;font-size:10.5px;color:#7A6E62;text-align:center;line-height:1.4}
 .vz-smp{position:absolute;top:16px;right:18px;background:#6E4F3C;color:#fff;font:800 10.5px/1 Manrope,sans-serif;letter-spacing:.12em;text-transform:uppercase;padding:7px 11px;border-radius:999px}`;
@@ -1644,9 +1644,8 @@ function vizitkaNode(s, kind){
   node.innerHTML = `<div class="vz-top" style="background:${k.c}"></div>
     <div class="vz-h"><span class="av">${av}</span><span><b><em>Свои люди</em> в Швейцарии</b><small>Справочник русско- и украиноязычных специалистов</small></span></div>
     <div class="vz-c${price ? ' pr' : ''}">${s.sample ? '<span class="vz-smp">Образец</span>' : ''}${head}<div class="vz-ln"></div>${body}</div>
-    <div class="vz-inv"><div class="k">${price ? 'Прайс-лист создан' : 'Карточка создана'} сервисом проекта «Свои люди в Швейцарии»</div>
-      <b>Вы специалист? Разместите свою анкету</b>
-      <p>Карточка с фото, услугами и контактами, такая визитка и прайс-лист для телефона, PDF и QR-код. Вас найдут те, кому нужна помощь на русском или украинском. Сейчас — бесплатно.</p>
+    <div class="vz-inv"><div class="k">Создано сервисом «Свои люди в Швейцарии»</div>
+      <b>Вы специалист? Разместите свою анкету — сейчас бесплатно</b>
       <span class="u">https://svoiludi.ch/join/</span></div>
     <div class="vz-f">Справочник проверяет только официальную регистрацию. Договорённости — напрямую со специалистом.</div>`;
   return node;
