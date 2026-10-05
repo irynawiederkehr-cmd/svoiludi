@@ -1409,7 +1409,7 @@ function adminBox(s){
     <div class="pv-acts">${to ? `<a class="btn" href="${esc(mailto(to, L.su, L.body))}">Отправить на подтверждение</a><a class="btn ghost" href="${esc(gmail(to, L.su, L.body))}" target="_blank" rel="noopener">Через Gmail</a>` : '<span>У специалиста нет e-mail в карточке</span>'}<button class="btn ghost" type="button" data-copyprev="${esc(s.id)}">Скопировать ссылку для Telegram</button></div></div>`;
 }
 document.addEventListener('click', async e => { const b = e.target.closest('[data-copyprev]'); if (!b) return;
-  const s = SPECIALISTS.find(x => x.id === b.dataset.copyprev); const t = `Здравствуйте! Я подготовила вашу карточку для справочника «Свои люди в Швейцарии». Посмотрите, пожалуйста, всё ли верно, и нажмите внизу «Подтверждаю» или «Нужно исправить»:\n${previewUrl(s)}`;
+  const s = SPECIALISTS.find(x => x.id === b.dataset.copyprev); const t = `Здравствуйте! Я подготовила вашу карточку для справочника «Свои люди в Швейцарии». Пока её видите только вы. Посмотрите, пожалуйста, всё ли верно.\n\n${previewUrl(s)}\n\nВнизу карточки есть кнопки «Всё верно, подтверждаю» и «Нужно исправить». Они открывают письмо в вашей почте — отправьте его, пожалуйста, именно по e-mail на ${MAIL}. Подтверждение мне нужно письменно по почте, ответ в Telegram, к сожалению, не подойдёт. Спасибо!`;
   try { await navigator.clipboard.writeText(t); b.textContent = 'Скопировано'; } catch (x) { prompt('Скопируйте текст', t); } });
 let PREVIEW = '';   // id карточки, открытой по ссылке предпросмотра
 function openCard(id){
