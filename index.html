@@ -555,6 +555,7 @@ a.bot:hover{color:#B98324}
 .adm-box{background:#E3E8D6;border:1.5px dashed #4F5E3E}
 .pv-acts{display:flex;flex-wrap:wrap;gap:8px}
 .pv-small{font-size:.8rem;color:var(--muted)}
+.pv-pl{list-style:none;margin:0;padding:0;background:var(--paper,#FFFCF8);border-radius:12px;padding:6px 12px}.pv-pl li{display:flex;gap:12px;align-items:baseline;padding:6px 0;border-bottom:1px dashed var(--line)}.pv-pl li:last-child{border-bottom:0}.pv-pl span{flex:1}.pv-pl small{display:block;color:var(--muted);font-size:.8rem}.pv-pl b{white-space:nowrap;font-family:var(--display);font-weight:400;font-size:1.05rem}
 .adm-todo{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:4px;font-size:.86rem}
 </style>
 <!--i18n--><link rel="alternate" hreflang="ru" href="https://svoiludi.ch/"><link rel="alternate" hreflang="uk" href="https://svoiludi.ch/uk/"><script>(function(){try{if(localStorage.getItem('svoiludiLang')==='uk'&&!/[?&]lang=ru/.test(location.search))location.replace('/uk/'+location.search+location.hash);}catch(e){}})();</script><!--i18n--></head>
@@ -791,6 +792,8 @@ window.IMG_BASE = 'img/';
    firm — название фирмы точно как в реестре (если есть): видно под профессией, в полной карточке и PDF; ищется поиском (04.10.2026)
    prices — прайс-лист (необязательно, только если специалист сам его прислал): [{ t: 'Услуга', p: '120 CHF', n: '60 минут' }, …];
             pricesDate — 'ГГГГ-ММ-ДД', на какую дату цены. Есть prices — в карточке появляется кнопка «Прайс-лист PNG» (05.10.2026)
+            pricesOk — 'ГГГГ-ММ-ДД', когда специалист подтвердил прайс-лист письмом по e-mail. Без pricesOk прайс-лист видят
+                       только Ирина (?ira=1) и сам специалист по ссылке #price=<id>.<key> (решение Ирины 05.10.2026)
    num — внутренний номер из «Реестра специалистов.xlsx» (SG-0001 …): запасной ID, если UID нет или он общий
          (несколько специалистов одной фирмы с одним UID фирмы).
 
@@ -1481,10 +1484,44 @@ function previewBox(s){
     <div class="pv-acts"><a class="btn" href="${esc(mailto(MAIL, c.su, c.body))}">Всё верно, подтверждаю</a><a class="btn ghost" href="${esc(mailto(MAIL, f.su, f.body))}">Нужно исправить</a></div>
     <span class="pv-small">Кнопки открывают письмо в вашей почте, его нужно только отправить. Если почта не открылась, напишите на ${MAIL}.</span></div>`;
 }
+/* ---------- прайс-лист: отдельный запрос и отдельное подтверждение по e-mail (решение Ирины 05.10.2026) ----------
+   Ирина в окне карточки: «Запросить прайс-лист» (письмо специалисту), потом «Отправить прайс-лист на подтверждение».
+   Специалист открывает https://svoiludi.ch/#price=<id>.<key>, видит свой прайс-лист и нажимает «Подтверждаю» или «Нужно исправить» —
+   письмо с его адреса приходит Ирине. После письма Ирина ставит pricesOk — и кнопка «Прайс-лист PNG» появляется на сайте. */
+let PRICEVIEW = '';   // id карточки, открытой по ссылке подтверждения прайс-листа
+const priceShown = s => (s.prices || []).length > 0 && (!!s.pricesOk || !!s.sample || ADMIN || PRICEVIEW === s.id);
+const priceUrl = s => `${SITE}#price=${encodeURIComponent(s.id)}.${encodeURIComponent(s.key || '')}`;
+const priceAsk = s => ({ su: 'Прайс-лист для вашей карточки в «Своих людях в Швейцарии»',
+  body: `Здравствуйте!\n\nВ справочнике «Свои люди в Швейцарии» у вашей карточки может быть прайс-лист. Его можно сохранить картинкой на телефон и переслать клиентам.\n\nЕсли хотите, пришлите, пожалуйста, ответным письмом ваши цены, по одной услуге в строке:\nуслуга — цена — пояснение, если нужно (например, длительность)\n\nНапример:\nМаникюр с гель-лаком — 60 CHF — 60 минут\n\nПеред публикацией я пришлю вам прайс-лист на проверку, и он появится на сайте только после вашего подтверждения по e-mail.\n\nС теплом,\nИрина Вознесенская\n${MAIL}` });
+const priceLetter = s => ({ su: 'Ваш прайс-лист в «Своих людях в Швейцарии» — посмотрите, пожалуйста',
+  body: `Здравствуйте!\n\nЯ подготовила ваш прайс-лист для справочника «Свои люди в Швейцарии». Пока его видите только вы. Посмотрите, пожалуйста, всё ли верно: услуги, цены и пояснения.\n\n${priceUrl(s)}\n\nВнизу есть две кнопки. «Прайс-лист верный, подтверждаю» — и я сразу его опубликую. «Нужно исправить» — и напишите, что поменять.\n\nС теплом,\nИрина Вознесенская\n${MAIL}` });
+const priceTxt = s => (s.prices || []).map(r => `${r.t}${r.n ? ' (' + r.n + ')' : ''} — ${r.p}`).join('\n');
+const priceConfirm = s => ({ su: `Подтверждаю прайс-лист — ${s.name}${s.num ? ' (' + s.num + ')' : ''}`,
+  body: `Здравствуйте, Ирина!\n\nВсё верно, подтверждаю публикацию своего прайс-листа на сайте «Свои люди в Швейцарии»${s.pricesDate ? ' (цены на ' + fmtDate(s.pricesDate) + ')' : ''}:\n\n${priceTxt(s)}\n\n${priceUrl(s)}\n\n${s.name}` });
+const priceFix = s => ({ su: `Исправления в прайс-лист — ${s.name}${s.num ? ' (' + s.num + ')' : ''}`,
+  body: `Здравствуйте, Ирина!\n\nВ моём прайс-листе, пожалуйста, исправьте\n\n— \n\n${priceUrl(s)}\n\n${s.name}` });
+function priceBox(s){
+  const c = priceConfirm(s), f = priceFix(s);
+  return `<div class="pv-box" id="pvPrice"><b>Это предпросмотр вашего прайс-листа.</b><span>Пока его видите только вы. Если всё верно, подтвердите, и прайс-лист появится в вашей карточке на сайте. Если что-то нужно поменять, напишите, что именно.</span>
+    <ul class="pv-pl">${(s.prices || []).map(r => `<li><span>${esc(r.t)}${r.n ? `<small>${esc(r.n)}</small>` : ''}</span><b>${esc(r.p)}</b></li>`).join('')}</ul>
+    <div class="pv-acts"><button class="btn ghost" type="button" data-png-price="${esc(s.id)}">Посмотреть картинкой</button><a class="btn" href="${esc(mailto(MAIL, c.su, c.body))}">Прайс-лист верный, подтверждаю</a><a class="btn ghost" href="${esc(mailto(MAIL, f.su, f.body))}">Нужно исправить</a></div>
+    <span class="pv-small">Кнопки открывают письмо в вашей почте, его нужно только отправить. Если почта не открылась, напишите на ${MAIL}.</span></div>`;
+}
+function priceAdmin(s, to){
+  const pr = (s.prices || []).length, A = priceAsk(s), L = priceLetter(s);
+  const st = !pr ? 'нет' : s.pricesOk ? `подтверждён письмом ${fmtDate(s.pricesOk)} · виден на сайте` : 'ждёт подтверждения по e-mail · на сайте не виден';
+  const btns = !to ? '' : !pr
+    ? `<a class="btn ghost" href="${esc(mailto(to, A.su, A.body))}">Запросить прайс-лист</a><a class="btn ghost" href="${esc(gmail(to, A.su, A.body))}" target="_blank" rel="noopener">Через Gmail</a>`
+    : s.pricesOk ? '' : `<a class="btn ghost" href="${esc(mailto(to, L.su, L.body))}">Отправить прайс-лист на подтверждение</a><a class="btn ghost" href="${esc(gmail(to, L.su, L.body))}" target="_blank" rel="noopener">Через Gmail</a><button class="btn ghost" type="button" data-copyprice="${esc(s.id)}">Скопировать ссылку для Telegram</button>`;
+  return `<span><b>Прайс-лист:</b> ${st}</span>${btns ? `<div class="pv-acts">${btns}</div>` : ''}`;
+}
+document.addEventListener('click', async e => { const b = e.target.closest('[data-copyprice]'); if (!b) return;
+  const s = SPECIALISTS.find(x => x.id === b.dataset.copyprice); const t = `Здравствуйте! Я подготовила ваш прайс-лист для справочника «Свои люди в Швейцарии». Пока его видите только вы. Посмотрите, пожалуйста, всё ли верно.\n\n${priceUrl(s)}\n\nВнизу есть кнопки «Прайс-лист верный, подтверждаю» и «Нужно исправить». Они открывают письмо в вашей почте — отправьте его, пожалуйста, именно по e-mail на ${MAIL}. Подтверждение мне нужно письменно по почте, ответ в Telegram, к сожалению, не подойдёт. Спасибо!`;
+  try { await navigator.clipboard.writeText(t); b.textContent = 'Скопировано'; } catch (x) { prompt('Скопируйте текст', t); } });
 function adminBox(s){
   const to = (s.contacts && s.contacts.email) || '', L = ownerLetter(s), why = hiddenReason(s);
   return `<div class="adm-box"><b>Видишь только ты</b><span>Статус: ${esc(s.status || '—')}${why ? ' · на сайте не видна (' + esc(why) + ')' : ' · видна на сайте'}${s.key ? '' : ' · нет ключа предпросмотра (key)'}</span>
-    ${(s.todo || []).length ? `<ul class="adm-todo">${s.todo.map(x => `<li>${esc(x)}</li>`).join('')}</ul>` : ''}<div class="pv-acts">${to ? `<a class="btn" href="${esc(mailto(to, L.su, L.body))}">Отправить на подтверждение</a><a class="btn ghost" href="${esc(gmail(to, L.su, L.body))}" target="_blank" rel="noopener">Через Gmail</a>` : '<span>У специалиста нет e-mail в карточке</span>'}<button class="btn ghost" type="button" data-copyprev="${esc(s.id)}">Скопировать ссылку для Telegram</button></div></div>`;
+    ${(s.todo || []).length ? `<ul class="adm-todo">${s.todo.map(x => `<li>${esc(x)}</li>`).join('')}</ul>` : ''}<div class="pv-acts">${to ? `<a class="btn" href="${esc(mailto(to, L.su, L.body))}">Отправить на подтверждение</a><a class="btn ghost" href="${esc(gmail(to, L.su, L.body))}" target="_blank" rel="noopener">Через Gmail</a>` : '<span>У специалиста нет e-mail в карточке</span>'}<button class="btn ghost" type="button" data-copyprev="${esc(s.id)}">Скопировать ссылку для Telegram</button></div>${priceAdmin(s, to)}</div>`;
 }
 document.addEventListener('click', async e => { const b = e.target.closest('[data-copyprev]'); if (!b) return;
   const s = SPECIALISTS.find(x => x.id === b.dataset.copyprev); const t = `Здравствуйте! Я подготовила вашу карточку для справочника «Свои люди в Швейцарии». Пока её видите только вы. Посмотрите, пожалуйста, всё ли верно.\n\n${previewUrl(s)}\n\nВнизу карточки есть кнопки «Всё верно, подтверждаю» и «Нужно исправить». Они открывают письмо в вашей почте — отправьте его, пожалуйста, именно по e-mail на ${MAIL}. Подтверждение мне нужно письменно по почте, ответ в Telegram, к сожалению, не подойдёт. Спасибо!`;
@@ -1512,10 +1549,10 @@ function openCard(id){
       <div class="d-side">
         <div class="d-block"><h4>Где принимает</h4><div style="display:flex;flex-direction:column;gap:10px">${livePlaces(s).map(placeFull).join('')}${s.online ? '<span>и онлайн по видеосвязи</span>' : ''}</div></div>
         <div class="d-block"><h4>Контакты</h4><ul class="ctl">${contacts}</ul></div>
-        <div class="card-acts"><button class="btn" type="button" data-vcf="${esc(s.id)}" data-tip="Сохранить телефон, e-mail и адрес в контакты телефона или компьютера">В контакты</button><button class="btn ghost" type="button" data-share="${esc(s.id)}">Поделиться</button><button class="btn ghost" type="button" data-png-card="${esc(s.id)}" data-tip="Визитка-картинка PNG: сохранится в галерею телефона, её удобно показать или переслать">Визитка PNG</button>${(s.prices || []).length ? `<button class="btn ghost" type="button" data-png-price="${esc(s.id)}" data-tip="Прайс-лист картинкой PNG: сохранится в галерею телефона">Прайс-лист PNG</button>` : ''}<button class="btn ghost" type="button" data-pdf-card="${esc(s.id)}" data-tip="Полная карточка для печати и почты">PDF</button></div>
+        <div class="card-acts"><button class="btn" type="button" data-vcf="${esc(s.id)}" data-tip="Сохранить телефон, e-mail и адрес в контакты телефона или компьютера">В контакты</button><button class="btn ghost" type="button" data-share="${esc(s.id)}">Поделиться</button><button class="btn ghost" type="button" data-png-card="${esc(s.id)}" data-tip="Визитка-картинка PNG: сохранится в галерею телефона, её удобно показать или переслать">Визитка PNG</button>${priceShown(s) ? `<button class="btn ghost" type="button" data-png-price="${esc(s.id)}" data-tip="Прайс-лист картинкой PNG: сохранится в галерею телефона">Прайс-лист PNG</button>` : ''}<button class="btn ghost" type="button" data-pdf-card="${esc(s.id)}" data-tip="Полная карточка для печати и почты">PDF</button></div>
         <p class="d-note">${s.uid ? `Регистрационный номер ${s.firm ? 'фирмы ' : ''}(UID): <a class="uid" href="${uidUrl(s.uid)}" ${ext} data-tip="Открыть запись в официальном реестре предприятий Швейцарии (uid.admin.ch)">${esc(s.uid)}</a>. ` : ''}${s.checked ? `Данные проверены ${fmtDate(s.checked)}. ` : ''}Справочник проверяет только официальную регистрацию. Дипломы и сертификаты указывает сам специалист. Договорённости — напрямую со специалистом.</p>
         <p class="report">Нашли ошибку в карточке? <a href="${esc(reportLink(s))}">Сообщить</a></p>
-        ${PREVIEW === s.id ? previewBox(s) : ''}${ADMIN ? adminBox(s) : ''}
+        ${PREVIEW === s.id ? previewBox(s) : ''}${PRICEVIEW === s.id ? priceBox(s) : ''}${ADMIN ? adminBox(s) : ''}
       </div>
     </div>`;
   box.querySelector('.qm-close').onclick = () => qm.close();
@@ -1718,6 +1755,7 @@ fillSelects(); render();
 // ссылки для бота: …/specialisty/#anna-keller открывает карточку, …/specialisty/#k-health — направление
 const openFromHash = () => { const id = decodeURIComponent(location.hash.slice(1));
   if (id.startsWith('preview=')){ const [pid, key] = id.slice(8).split('.'); const sp = SPECIALISTS.find(x => x.id === pid); if (sp && sp.key && key === sp.key){ PREVIEW = pid; openCard(pid); setTimeout(() => { const b = document.querySelector('.pv-box'); if (b) b.scrollIntoView({ block: 'center' }); }, 300); } return; }
+  if (id.startsWith('price=')){ const [pid, key] = id.slice(6).split('.'); const sp = SPECIALISTS.find(x => x.id === pid); if (sp && sp.key && key === sp.key){ PRICEVIEW = pid; openCard(pid); setTimeout(() => { const b = document.getElementById('pvPrice'); if (b) b.scrollIntoView({ block: 'center' }); }, 300); } return; }
   if (id.startsWith('list=')){ state.shared = new Set(id.slice(5).split(',').filter(x => SPECIALISTS.some(s => s.id === x))); state.fav = false; render(); return; }
   if (id.startsWith('k-') && CATS[id.slice(2)]){ state.cat = id.slice(2); state.spec = ''; render(); document.querySelector('.finder').scrollIntoView(); return; }
   if (id && SPECIALISTS.some(s => s.id === id && (s.sample || !hiddenReason(s)))) openCard(id); };
