@@ -563,6 +563,15 @@ a.bot:hover{color:#B98324}
 .pv-box .pv-done{font-size:.98rem;font-weight:600;color:inherit;opacity:1}
 .pv-small{font-size:.8rem;color:var(--muted)}
 .pv-pl{list-style:none;margin:0;padding:0;background:var(--paper,#FFFCF8);border-radius:12px;padding:6px 12px}.pv-pl li{display:flex;gap:12px;align-items:baseline;padding:6px 0;border-bottom:1px dashed var(--line)}.pv-pl li:last-child{border-bottom:0}.pv-pl span{flex:1}.pv-pl small{display:block;color:var(--muted);font-size:.8rem}.pv-pl b{white-space:nowrap;font-family:var(--display);font-weight:400;font-size:1.05rem}
+.adm-sec{display:flex;flex-direction:column;gap:6px;padding-top:6px}
+.adm-sec+.adm-sec{border-top:1px dashed #4F5E3E;margin-top:4px;padding-top:10px}
+.adm-acts{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:8px}
+.adm-act{display:flex;flex-direction:column;gap:4px;text-align:left;padding:11px 13px;border-radius:8px;border:1.5px solid #4F5E3E;background:#FFFCF8;color:inherit;text-decoration:none;font:inherit;cursor:pointer;line-height:1.35}
+.adm-act:hover{background:#F4F6EE}
+.adm-act b{font-size:.9rem;color:#4F5E3E}
+.adm-act span{font-size:.79rem;color:var(--muted)}
+.adm-act.main{border-width:2.5px}
+.adm-act.off{opacity:.6;cursor:default;border-style:dashed}
 .adm-todo{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:4px;font-size:.86rem}
 </style>
 <!--i18n--><link rel="alternate" hreflang="ru" href="https://svoiludi.ch/"><link rel="alternate" hreflang="uk" href="https://svoiludi.ch/uk/"><script>(function(){try{if(localStorage.getItem('svoiludiLang')==='uk'&&!/[?&]lang=ru/.test(location.search))location.replace('/uk/'+location.search+location.hash);}catch(e){}})();</script><!--i18n--></head>
@@ -1280,28 +1289,52 @@ document.addEventListener('click', async e => {
     msg.innerHTML = `${PV_T.fail} <a href="${esc(mailto(MAIL, L.su, body))}">${PV_T.mail}</a> (${esc(MAIL)}).`;
   }
 });
+function admAct(attrs, title, desc, main){
+  const tag = attrs.startsWith('href') ? 'a' : 'button';
+  return `<${tag} class="adm-act${main ? ' main' : ''}" ${tag === 'button' ? 'type="button" ' : ''}${attrs}><b>${title}</b><span>${desc}</span></${tag}>`;
+}
 function priceAdmin(s, to){
-  const pr = (s.prices || []).length, A = priceAsk(s), L = priceLetter(s);
+  const pr = (s.prices || []).length, n = (s.services || []).length, A = priceAsk(s), L = priceLetter(s);
   const st = !pr ? 'нет' : s.pricesOk ? `подтверждён ${fmtDate(s.pricesOk)} · виден на сайте` : 'ждёт подтверждения · на сайте не виден';
-  const btns = !to ? '' : !pr
-    ? `<a class="btn ghost" href="${esc(mailto(to, A.su, A.body))}">Запросить прайс-лист</a><a class="btn ghost" href="${esc(gmail(to, A.su, A.body))}" target="_blank" rel="noopener">Через Gmail</a><button class="btn ghost" type="button" data-copyask="${esc(s.id)}">Скопировать запрос для Telegram</button>`
-    : s.pricesOk ? '' : `<a class="btn ghost" href="${esc(mailto(to, L.su, L.body))}">Отправить прайс-лист на подтверждение</a><a class="btn ghost" href="${esc(gmail(to, L.su, L.body))}" target="_blank" rel="noopener">Через Gmail</a><button class="btn ghost" type="button" data-copyprice="${esc(s.id)}">Скопировать ссылку для Telegram</button>`;
-  return `<span><b>Прайс-лист:</b> ${st}</span>${btns ? `<div class="pv-acts">${btns}</div>` : ''}`;
+  let acts = '';
+  if (!pr){
+    acts = (to ? admAct(`href="${esc(mailto(to, A.su, A.body))}"`, 'Запросить прайс-лист — письмом',
+        `Откроется готовое письмо на ${esc(to)} в твоей почтовой программе. В нём ${n ? 'все ' + n + ' услуг из карточки, у каждой «___ CHF»' : 'просьба прислать цены по одной услуге в строке'} — специалист вписывает цены и отвечает. Письмо нужно только отправить. Ответ перешли Claude: он внесёт цены и подготовит прайс-лист.`, true)
+      + admAct(`href="${esc(gmail(to, A.su, A.body))}" target="_blank" rel="noopener"`, 'То же письмо — в Gmail',
+        'Открывает это письмо в Gmail в новой вкладке, если почтовая программа не настроена. Проверь, что отправляешь с voznesenskaya.iryna@gmail.com. Если список услуг длинный и письмо открылось не целиком — используй копирование.') : '')
+      + admAct(`data-copyask="${esc(s.id)}"`, 'Скопировать запрос',
+        'Весь текст запроса со списком услуг копируется в буфер. Вставь его в Telegram, WhatsApp или в письмо вручную.');
+  } else if (!s.pricesOk){
+    acts = (to ? admAct(`href="${esc(mailto(to, L.su, L.body))}"`, 'Отправить прайс-лист на подтверждение',
+        `Откроется письмо на ${esc(to)} со ссылкой на предпросмотр прайс-листа. Специалист ставит галочку и нажимает «Прайс-лист верный, подтверждаю». Тебе придёт письмо «🌿 Свои люди: Прайс-лист подтверждён», после этого Claude включает прайс-лист на сайте.`, true)
+      + admAct(`href="${esc(gmail(to, L.su, L.body))}" target="_blank" rel="noopener"`, 'То же письмо — в Gmail',
+        'Открывает это письмо в Gmail в новой вкладке. Проверь, что отправляешь с voznesenskaya.iryna@gmail.com.') : '')
+      + admAct(`data-copyprice="${esc(s.id)}"`, 'Скопировать ссылку для Telegram',
+        'Текст со ссылкой на предпросмотр прайс-листа копируется в буфер. Вставь его специалисту в Telegram или WhatsApp — подтверждение он сделает кнопкой на сайте.');
+  }
+  return `<div class="adm-sec"><span><b>Прайс-лист:</b> ${st}</span>${acts ? `<div class="adm-acts">${acts}</div>` : ''}</div>`;
 }
 document.addEventListener('click', async e => { const b = e.target.closest('[data-copyask]'); if (!b) return;
   const t = priceAsk(SPECIALISTS.find(x => x.id === b.dataset.copyask)).body;
-  try { await navigator.clipboard.writeText(t); b.textContent = 'Скопировано'; } catch (x) { prompt('Скопируйте текст', t); } });
+  try { await navigator.clipboard.writeText(t); (b.querySelector('b') || b).textContent = 'Скопировано ✓'; } catch (x) { prompt('Скопируйте текст', t); } });
 document.addEventListener('click', async e => { const b = e.target.closest('[data-copyprice]'); if (!b) return;
   const s = SPECIALISTS.find(x => x.id === b.dataset.copyprice); const t = `Здравствуйте! Я подготовила ваш прайс-лист для справочника «Свои люди в Швейцарии». Пока его видите только вы. Посмотрите, пожалуйста, всё ли верно.\n\n${priceUrl(s)}\n\nЕсли всё верно, внизу отметьте галочку и нажмите «Прайс-лист верный, подтверждаю» — это одно нажатие. Если что-то не так, нажмите «Нужно исправить» и напишите прямо там. Спасибо!`;
-  try { await navigator.clipboard.writeText(t); b.textContent = 'Скопировано'; } catch (x) { prompt('Скопируйте текст', t); } });
+  try { await navigator.clipboard.writeText(t); (b.querySelector('b') || b).textContent = 'Скопировано ✓'; } catch (x) { prompt('Скопируйте текст', t); } });
 function adminBox(s){
   const to = (s.contacts && s.contacts.email) || '', L = ownerLetter(s), why = hiddenReason(s);
-  return `<div class="adm-box"><b>Видишь только ты</b><span>Статус: ${esc(s.status || '—')}${why ? ' · на сайте не видна (' + esc(why) + ')' : ' · видна на сайте'}${s.key ? '' : ' · нет ключа предпросмотра (key)'}</span>
-    ${(s.todo || []).length ? `<ul class="adm-todo">${s.todo.map(x => `<li>${esc(x)}</li>`).join('')}</ul>` : ''}<div class="pv-acts">${to ? `<a class="btn" href="${esc(mailto(to, L.su, L.body))}">Отправить на подтверждение</a><a class="btn ghost" href="${esc(gmail(to, L.su, L.body))}" target="_blank" rel="noopener">Через Gmail</a>` : '<span>У специалиста нет e-mail в карточке</span>'}<button class="btn ghost" type="button" data-copyprev="${esc(s.id)}">Скопировать ссылку для Telegram</button></div>${priceAdmin(s, to)}</div>`;
+  const acts = (to ? admAct(`href="${esc(mailto(to, L.su, L.body))}"`, 'Отправить карточку на подтверждение — письмом',
+      `Откроется готовое письмо на ${esc(to)} в твоей почтовой программе: ссылка на предпросмотр карточки и просьба нажать «Подтверждаю». Письмо нужно только отправить. Когда специалист подтвердит, тебе придёт письмо «🌿 Свои люди: Карточка подтверждена», и Claude сделает карточку активной.`, true)
+    + admAct(`href="${esc(gmail(to, L.su, L.body))}" target="_blank" rel="noopener"`, 'То же письмо — в Gmail',
+      'Открывает это письмо в Gmail в новой вкладке, если почтовая программа не настроена. Проверь, что отправляешь с voznesenskaya.iryna@gmail.com.')
+    : `<div class="adm-act off"><b>Письмом не получится</b><span>У специалиста нет e-mail в карточке. Отправь ссылку через Telegram или WhatsApp.</span></div>`)
+    + admAct(`data-copyprev="${esc(s.id)}"`, 'Скопировать ссылку для Telegram',
+      'Текст со ссылкой на предпросмотр копируется в буфер. Вставь его специалисту в Telegram или WhatsApp. Подтверждение он сделает кнопкой на сайте — e-mail не нужен.');
+  return `<div class="adm-box"><b>Видишь только ты</b><div class="adm-sec"><span><b>Карточка:</b> ${esc(s.status || '—')}${why ? ' · на сайте не видна (' + esc(why) + ')' : ' · видна на сайте'}${s.key ? '' : ' · нет ключа предпросмотра (key)'}</span>
+    ${(s.todo || []).length ? `<ul class="adm-todo">${s.todo.map(x => `<li>${esc(x)}</li>`).join('')}</ul>` : ''}<div class="adm-acts">${acts}</div></div>${priceAdmin(s, to)}</div>`;
 }
 document.addEventListener('click', async e => { const b = e.target.closest('[data-copyprev]'); if (!b) return;
   const s = SPECIALISTS.find(x => x.id === b.dataset.copyprev); const t = `Здравствуйте! Я подготовила вашу карточку для справочника «Свои люди в Швейцарии». Пока её видите только вы. Посмотрите, пожалуйста, всё ли верно.\n\n${previewUrl(s)}\n\nЕсли всё верно, внизу карточки отметьте галочку и нажмите «Подтверждаю» — это одно нажатие. Если что-то не так, нажмите «Нужно исправить» и напишите прямо там. Спасибо!`;
-  try { await navigator.clipboard.writeText(t); b.textContent = 'Скопировано'; } catch (x) { prompt('Скопируйте текст', t); } });
+  try { await navigator.clipboard.writeText(t); (b.querySelector('b') || b).textContent = 'Скопировано ✓'; } catch (x) { prompt('Скопируйте текст', t); } });
 let PREVIEW = '';   // id карточки, открытой по ссылке предпросмотра
 function openCard(id){
   const s = SPECIALISTS.find(x => x.id === id); if (!s) return;
