@@ -554,6 +554,13 @@ a.bot:hover{color:#B98324}
 .pv-box{background:var(--mustard-soft,#F3E3C2);border:1.5px solid var(--mustard,#B98324)}
 .adm-box{background:#E3E8D6;border:1.5px dashed #4F5E3E}
 .pv-acts{display:flex;flex-wrap:wrap;gap:8px}
+.pv-box [hidden]{display:none!important}
+.pv-ok{display:flex;gap:10px;align-items:flex-start;cursor:pointer;line-height:1.4}
+.pv-ok input{width:20px;height:20px;flex:none;margin-top:1px;accent-color:var(--mustard,#B98324)}
+.pv-fix{display:flex;flex-direction:column;gap:8px}
+.pv-fix textarea{width:100%;box-sizing:border-box;font:inherit;padding:10px 12px;border-radius:12px;border:1.5px solid var(--mustard,#B98324);background:#fff;resize:vertical}
+.pv-box button[disabled]{opacity:.5;cursor:not-allowed}
+.pv-box .pv-done{font-size:.98rem;font-weight:600;color:inherit;opacity:1}
 .pv-small{font-size:.8rem;color:var(--muted)}
 .pv-pl{list-style:none;margin:0;padding:0;background:var(--paper,#FFFCF8);border-radius:12px;padding:6px 12px}.pv-pl li{display:flex;gap:12px;align-items:baseline;padding:6px 0;border-bottom:1px dashed var(--line)}.pv-pl li:last-child{border-bottom:0}.pv-pl span{flex:1}.pv-pl small{display:block;color:var(--muted);font-size:.8rem}.pv-pl b{white-space:nowrap;font-family:var(--display);font-weight:400;font-size:1.05rem}
 .adm-todo{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:4px;font-size:.86rem}
@@ -1467,22 +1474,25 @@ async function shareCard(s){
 /* ---------- подтверждение карточки специалистом (05.10.2026) ----------
    Ирина (режим ?ira=1) в окне карточки нажимает «Отправить на подтверждение»: письмо специалисту со ссылкой предпросмотра.
    Специалист открывает https://svoiludi.ch/uk/#preview=<id>.<key>, видит свою карточку (даже если она ещё скрыта)
-   и нажимает «Подтверждаю» или «Нужно исправить» — письмо с его адреса приходит Ирине. Это и есть письменное подтверждение. */
+   ставит галочку и нажимает «Подтверждаю» или пишет исправления прямо на странице. Запрос уходит в Google Apps Script
+   (22 Тесты\Code_Google_Sheets.gs, ?what=confirm, с 06.10.2026): запись со снимком карточки на лист «Свои люди — подтверждения»,
+   письмо Ирине и копия специалисту на e-mail из карточки. Если скрипт недоступен — запасной вариант: письмо через почту. */
 const SITE = 'https://svoiludi.ch/uk/';
 const previewUrl = s => `${SITE}#preview=${encodeURIComponent(s.id)}.${encodeURIComponent(s.key || '')}`;
 const mailto = (to, su, body) => `mailto:${to}?subject=${encodeURIComponent(su)}&body=${encodeURIComponent(body)}`;
 const gmail = (to, su, body) => `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(to)}&su=${encodeURIComponent(su)}&body=${encodeURIComponent(body)}`;
 const ownerLetter = s => ({ su: 'Ваша картка у «Своїх людях у Швейцарії» — перегляньте, будь ласка',
-  body: `Добрий день!\n\nЯ підготувала вашу картку для довідника «Свої люди у Швейцарії». Поки її бачите тільки ви. Перегляньте, будь ласка, чи все правильно: фото, профіль, послуги, адреси й контакти.\n\n${previewUrl(s)}\n\nВнизу картки є дві кнопки. «Все правильно, підтверджую» — і я одразу опублікую картку. «Потрібно виправити» — і напишіть, що змінити.\n\nЗ теплом,\nІрина Вознесенська\n${MAIL}` });
+  body: `Добрий день!\n\nЯ підготувала вашу картку для довідника «Свої люди у Швейцарії». Поки її бачите тільки ви. Перегляньте, будь ласка, чи все правильно: фото, профіль, послуги, адреси й контакти.\n\n${previewUrl(s)}\n\nЯкщо все правильно, внизу картки поставте позначку й натисніть «Підтверджую» — і я одразу опублікую картку. Якщо щось не так, натисніть «Потрібно виправити» й напишіть прямо там, що змінити.\n\nЗ теплом,\nІрина Вознесенська\n${MAIL}` });
 const confirmLetter = s => ({ su: `Підтверджую картку — ${s.name}${s.num ? ' (' + s.num + ')' : ''}`,
   body: `Добрий день, Ірино!\n\nВсе правильно, підтверджую публікацію своєї картки на сайті «Свої люди у Швейцарії».\n\n${previewUrl(s)}\n\n${s.name}` });
 const fixLetter = s => ({ su: `Виправлення до картки — ${s.name}${s.num ? ' (' + s.num + ')' : ''}`,
   body: `Добрий день, Ірино!\n\nУ моїй картці, будь ласка, виправте\n\n— \n\n${previewUrl(s)}\n\n${s.name}` });
 function previewBox(s){
-  const c = confirmLetter(s), f = fixLetter(s);
-  return `<div class="pv-box"><b>Це попередній перегляд вашої картки.</b><span>Поки її бачите тільки ви. Якщо все правильно, підтвердьте, і картка з’явиться на сайті. Якщо щось потрібно змінити, напишіть, що саме.</span>
-    <div class="pv-acts"><a class="btn" href="${esc(mailto(MAIL, c.su, c.body))}">Все правильно, підтверджую</a><a class="btn ghost" href="${esc(mailto(MAIL, f.su, f.body))}">Потрібно виправити</a></div>
-    <span class="pv-small">Кнопки відкривають лист у вашій пошті, його потрібно лише надіслати. Якщо пошта не відкрилася, напишіть на ${MAIL}.</span></div>`;
+  return `<div class="pv-box" id="pvCard" data-pv="${esc(s.id)}"><b>Це попередній перегляд вашої картки.</b><span>Поки її бачите тільки ви. Якщо все правильно, поставте позначку й натисніть «Підтверджую» — картка з’явиться на сайті. Якщо щось потрібно змінити, натисніть «Потрібно виправити».</span>
+    <label class="pv-ok"><input type="checkbox" data-pv-agree> <span>Дані в картці правильні. Я даю згоду на публікацію картки та фото на сайті svoiludi.ch.</span></label>
+    <div class="pv-acts"><button class="btn" type="button" data-pv-send="card" disabled>Підтверджую</button><button class="btn ghost" type="button" data-pv-fixopen>Потрібно виправити</button></div>
+    <div class="pv-fix" hidden><textarea data-pv-text rows="4" maxlength="1500" placeholder="Що виправити: наприклад, телефон, адресу чи послугу"></textarea><div class="pv-acts"><button class="btn" type="button" data-pv-send="fix">Надіслати виправлення</button></div></div>
+    <span class="pv-small" data-pv-msg>Одне натискання — і готово. Копія прийде на e-mail з вашої картки.</span></div>`;
 }
 /* ---------- прайс-лист: отдельный запрос и отдельное подтверждение по e-mail (решение Ирины 05.10.2026) ----------
    Ирина в окне карточки: «Запросить прайс-лист» (письмо специалисту), потом «Отправить прайс-лист на подтверждение».
@@ -1492,31 +1502,59 @@ let PRICEVIEW = '';   // id карточки, открытой по ссылке
 const priceShown = s => (s.prices || []).length > 0 && (!!s.pricesOk || !!s.sample || ADMIN || PRICEVIEW === s.id);
 const priceUrl = s => `${SITE}#price=${encodeURIComponent(s.id)}.${encodeURIComponent(s.key || '')}`;
 const priceAsk = s => ({ su: 'Прайс-лист для вашої картки у «Своїх людях у Швейцарії»',
-  body: `Добрий день!\n\nУ довіднику «Свої люди у Швейцарії» у вашої картки може бути прайс-лист. Його можна зберегти картинкою на телефон і переслати клієнтам.\n\nЯкщо хочете, надішліть, будь ласка, листом у відповідь ваші ціни, по одній послузі в рядку:\nпослуга — ціна — пояснення, якщо потрібно (наприклад, тривалість)\n\nНаприклад:\nМанікюр з гель-лаком — 60 CHF — 60 хвилин\n\nПеред публікацією я надішлю вам прайс-лист на перевірку, і він з’явиться на сайті тільки після вашого підтвердження по e-mail.\n\nЗ теплом,\nІрина Вознесенська\n${MAIL}` });
+  body: `Добрий день!\n\nУ довіднику «Свої люди у Швейцарії» у вашої картки може бути прайс-лист. Його можна зберегти картинкою на телефон і переслати клієнтам.\n\nЯкщо хочете, надішліть, будь ласка, листом у відповідь ваші ціни, по одній послузі в рядку:\nпослуга — ціна — пояснення, якщо потрібно (наприклад, тривалість)\n\nНаприклад:\nМанікюр з гель-лаком — 60 CHF — 60 хвилин\n\nПеред публікацією я надішлю вам прайс-лист на перевірку, і він з’явиться на сайті тільки після вашого підтвердження.\n\nЗ теплом,\nІрина Вознесенська\n${MAIL}` });
 const priceLetter = s => ({ su: 'Ваш прайс-лист у «Своїх людях у Швейцарії» — перегляньте, будь ласка',
-  body: `Добрий день!\n\nЯ підготувала ваш прайс-лист для довідника «Свої люди у Швейцарії». Поки його бачите тільки ви. Перегляньте, будь ласка, чи все правильно: послуги, ціни й пояснення.\n\n${priceUrl(s)}\n\nВнизу є дві кнопки. «Прайс-лист правильний, підтверджую» — і я одразу його опублікую. «Потрібно виправити» — і напишіть, що змінити.\n\nЗ теплом,\nІрина Вознесенська\n${MAIL}` });
+  body: `Добрий день!\n\nЯ підготувала ваш прайс-лист для довідника «Свої люди у Швейцарії». Поки його бачите тільки ви. Перегляньте, будь ласка, чи все правильно: послуги, ціни й пояснення.\n\n${priceUrl(s)}\n\nЯкщо все правильно, внизу поставте позначку й натисніть «Прайс-лист правильний, підтверджую» — і я одразу його опублікую. Якщо щось не так, натисніть «Потрібно виправити» й напишіть прямо там, що змінити.\n\nЗ теплом,\nІрина Вознесенська\n${MAIL}` });
 const priceTxt = s => (s.prices || []).map(r => `${r.t}${r.n ? ' (' + r.n + ')' : ''} — ${r.p}`).join('\n');
 const priceConfirm = s => ({ su: `Підтверджую прайс-лист — ${s.name}${s.num ? ' (' + s.num + ')' : ''}`,
   body: `Добрий день, Ірино!\n\nУсе правильно, підтверджую публікацію свого прайс-листа на сайті «Свої люди у Швейцарії»${s.pricesDate ? ' (ціни на ' + fmtDate(s.pricesDate) + ')' : ''}:\n\n${priceTxt(s)}\n\n${priceUrl(s)}\n\n${s.name}` });
 const priceFix = s => ({ su: `Виправлення в прайс-лист — ${s.name}${s.num ? ' (' + s.num + ')' : ''}`,
   body: `Добрий день, Ірино!\n\nУ моєму прайс-листі, будь ласка, виправте\n\n— \n\n${priceUrl(s)}\n\n${s.name}` });
 function priceBox(s){
-  const c = priceConfirm(s), f = priceFix(s);
-  return `<div class="pv-box" id="pvPrice"><b>Це попередній перегляд вашого прайс-листа.</b><span>Поки його бачите тільки ви. Якщо все правильно, підтвердіть, і прайс-лист з’явиться у вашій картці на сайті. Якщо щось потрібно змінити, напишіть, що саме.</span>
+  return `<div class="pv-box" id="pvPrice" data-pv="${esc(s.id)}"><b>Це попередній перегляд вашого прайс-листа.</b><span>Поки його бачите тільки ви. Якщо все правильно, поставте позначку й натисніть «Прайс-лист правильний, підтверджую» — прайс-лист з’явиться у вашій картці на сайті. Якщо щось потрібно змінити, натисніть «Потрібно виправити».</span>
     <ul class="pv-pl">${(s.prices || []).map(r => `<li><span>${esc(r.t)}${r.n ? `<small>${esc(r.n)}</small>` : ''}</span><b>${esc(r.p)}</b></li>`).join('')}</ul>
-    <div class="pv-acts"><button class="btn ghost" type="button" data-png-price="${esc(s.id)}">Переглянути картинкою</button><a class="btn" href="${esc(mailto(MAIL, c.su, c.body))}">Прайс-лист правильний, підтверджую</a><a class="btn ghost" href="${esc(mailto(MAIL, f.su, f.body))}">Потрібно виправити</a></div>
-    <span class="pv-small">Кнопки відкривають лист у вашій пошті, його потрібно тільки надіслати. Якщо пошта не відкрилася, напишіть на ${MAIL}.</span></div>`;
+    <label class="pv-ok"><input type="checkbox" data-pv-agree> <span>Послуги, ціни та пояснення правильні. Я даю згоду на публікацію прайс-листа на сайті svoiludi.ch.</span></label>
+    <div class="pv-acts"><button class="btn ghost" type="button" data-png-price="${esc(s.id)}">Переглянути картинкою</button><button class="btn" type="button" data-pv-send="price" disabled>Прайс-лист правильний, підтверджую</button><button class="btn ghost" type="button" data-pv-fixopen>Потрібно виправити</button></div>
+    <div class="pv-fix" hidden><textarea data-pv-text rows="4" maxlength="1500" placeholder="Що виправити: наприклад, ціну чи назву послуги"></textarea><div class="pv-acts"><button class="btn" type="button" data-pv-send="fix">Надіслати виправлення</button></div></div>
+    <span class="pv-small" data-pv-msg>Одне натискання — і готово. Копія прийде на e-mail з вашої картки.</span></div>`;
 }
+/* подтверждение одним нажатием (06.10.2026): GET в Apps Script, при ошибке — запасной вариант письмом */
+const CONFIRM_URL = 'https://script.google.com/macros/s/AKfycbyizp1XjzNdrUj4WHgj4Vyj81QhjY2D7puqyeY3LaweWB4mePxPhfHCx5fIsfaJy9hV/exec';
+const PV_T = { sending: 'Надсилаю…', ok: (t, c) => `Дякую! Підтвердження отримано ${t}.` + (c ? ' Копія прийде на e-mail з вашої картки.' : ''), fixok: t => `Дякую! Виправлення отримано ${t}. Я внесу їх і надішлю посилання ще раз.`, empty: 'Напишіть, будь ласка, що виправити.', fail: 'Не вдалося надіслати. Будь ласка,', mail: 'надішліть листом' };
+document.addEventListener('change', e => { const c = e.target.closest('[data-pv-agree]'); if (!c) return;
+  const b = c.closest('.pv-box').querySelector('[data-pv-send="card"],[data-pv-send="price"]'); if (b) b.disabled = !c.checked; });
+document.addEventListener('click', async e => {
+  const o = e.target.closest('[data-pv-fixopen]');
+  if (o){ const f = o.closest('.pv-box').querySelector('.pv-fix'); f.hidden = !f.hidden; if (!f.hidden) f.querySelector('textarea').focus(); return; }
+  const b = e.target.closest('[data-pv-send]'); if (!b) return;
+  const box = b.closest('.pv-box'), s = SPECIALISTS.find(x => x.id === box.dataset.pv); if (!s) return;
+  const price = box.id === 'pvPrice', fix = b.dataset.pvSend === 'fix';
+  const kind = price ? (fix ? 'pricefix' : 'price') : (fix ? 'fix' : 'card');
+  const msg = box.querySelector('[data-pv-msg]'), text = fix ? box.querySelector('[data-pv-text]').value.trim() : '';
+  if (fix && !text){ msg.textContent = PV_T.empty; return; }
+  b.disabled = true; msg.textContent = PV_T.sending;
+  try {
+    const u = `${CONFIRM_URL}?what=confirm&kind=${kind}&id=${encodeURIComponent(s.id)}&key=${encodeURIComponent(s.key || '')}&lang=uk${text ? '&text=' + encodeURIComponent(text) : ''}`;
+    const j = await (await fetch(u)).json(); if (!j.ok) throw new Error(j.error || 'error');
+    box.querySelectorAll('.pv-ok,.pv-acts,.pv-fix').forEach(x => x.hidden = true);
+    msg.textContent = fix ? PV_T.fixok(j.time) : PV_T.ok(j.time, j.copy); msg.classList.add('pv-done');
+  } catch (x) {
+    b.disabled = false;
+    const L = price ? (fix ? priceFix(s) : priceConfirm(s)) : (fix ? fixLetter(s) : confirmLetter(s));
+    const body = fix ? L.body.replace('\n\n— \n\n', '\n\n' + text + '\n\n') : L.body;
+    msg.innerHTML = `${PV_T.fail} <a href="${esc(mailto(MAIL, L.su, body))}">${PV_T.mail}</a> (${esc(MAIL)}).`;
+  }
+});
 function priceAdmin(s, to){
   const pr = (s.prices || []).length, A = priceAsk(s), L = priceLetter(s);
-  const st = !pr ? 'немає' : s.pricesOk ? `підтверджено листом ${fmtDate(s.pricesOk)} · видно на сайті` : 'чекає на підтвердження по e-mail · на сайті не видно';
+  const st = !pr ? 'немає' : s.pricesOk ? `підтверджено ${fmtDate(s.pricesOk)} · видно на сайті` : 'чекає на підтвердження · на сайті не видно';
   const btns = !to ? '' : !pr
     ? `<a class="btn ghost" href="${esc(mailto(to, A.su, A.body))}">Запросити прайс-лист</a><a class="btn ghost" href="${esc(gmail(to, A.su, A.body))}" target="_blank" rel="noopener">Через Gmail</a>`
     : s.pricesOk ? '' : `<a class="btn ghost" href="${esc(mailto(to, L.su, L.body))}">Надіслати прайс-лист на підтвердження</a><a class="btn ghost" href="${esc(gmail(to, L.su, L.body))}" target="_blank" rel="noopener">Через Gmail</a><button class="btn ghost" type="button" data-copyprice="${esc(s.id)}">Скопіювати посилання для Telegram</button>`;
   return `<span><b>Прайс-лист:</b> ${st}</span>${btns ? `<div class="pv-acts">${btns}</div>` : ''}`;
 }
 document.addEventListener('click', async e => { const b = e.target.closest('[data-copyprice]'); if (!b) return;
-  const s = SPECIALISTS.find(x => x.id === b.dataset.copyprice); const t = `Добрий день! Я підготувала ваш прайс-лист для довідника «Свої люди у Швейцарії». Поки його бачите тільки ви. Перегляньте, будь ласка, чи все правильно.\n\n${priceUrl(s)}\n\nВнизу є кнопки «Прайс-лист правильний, підтверджую» і «Потрібно виправити». Вони відкривають лист у вашій пошті — надішліть його, будь ласка, саме по e-mail на ${MAIL}. Підтвердження мені потрібне письмово поштою, відповідь у Telegram, на жаль, не підійде. Дякую!`;
+  const s = SPECIALISTS.find(x => x.id === b.dataset.copyprice); const t = `Добрий день! Я підготувала ваш прайс-лист для довідника «Свої люди у Швейцарії». Поки його бачите тільки ви. Перегляньте, будь ласка, чи все правильно.\n\n${priceUrl(s)}\n\nЯкщо все правильно, внизу поставте позначку й натисніть «Прайс-лист правильний, підтверджую» — це одне натискання. Якщо щось не так, натисніть «Потрібно виправити» й напишіть прямо там. Дякую!`;
   try { await navigator.clipboard.writeText(t); b.textContent = 'Скопійовано'; } catch (x) { prompt('Скопіюйте текст', t); } });
 function adminBox(s){
   const to = (s.contacts && s.contacts.email) || '', L = ownerLetter(s), why = hiddenReason(s);
@@ -1524,7 +1562,7 @@ function adminBox(s){
     ${(s.todo || []).length ? `<ul class="adm-todo">${s.todo.map(x => `<li>${esc(x)}</li>`).join('')}</ul>` : ''}<div class="pv-acts">${to ? `<a class="btn" href="${esc(mailto(to, L.su, L.body))}">Надіслати на підтвердження</a><a class="btn ghost" href="${esc(gmail(to, L.su, L.body))}" target="_blank" rel="noopener">Через Gmail</a>` : '<span>У фахівця немає e-mail у картці</span>'}<button class="btn ghost" type="button" data-copyprev="${esc(s.id)}">Скопіювати посилання для Telegram</button></div>${priceAdmin(s, to)}</div>`;
 }
 document.addEventListener('click', async e => { const b = e.target.closest('[data-copyprev]'); if (!b) return;
-  const s = SPECIALISTS.find(x => x.id === b.dataset.copyprev); const t = `Добрий день! Я підготувала вашу картку для довідника «Свої люди у Швейцарії». Поки її бачите тільки ви. Перегляньте, будь ласка, чи все правильно.\n\n${previewUrl(s)}\n\nВнизу картки є кнопки «Все правильно, підтверджую» і «Потрібно виправити». Вони відкривають лист у вашій пошті — надішліть його, будь ласка, саме через e-mail на ${MAIL}. Підтвердження мені потрібне письмово поштою, відповідь у Telegram, на жаль, не підійде. Дякую!`;
+  const s = SPECIALISTS.find(x => x.id === b.dataset.copyprev); const t = `Добрий день! Я підготувала вашу картку для довідника «Свої люди у Швейцарії». Поки її бачите тільки ви. Перегляньте, будь ласка, чи все правильно.\n\n${previewUrl(s)}\n\nЯкщо все правильно, внизу картки поставте позначку й натисніть «Підтверджую» — це одне натискання. Якщо щось не так, натисніть «Потрібно виправити» й напишіть прямо там. Дякую!`;
   try { await navigator.clipboard.writeText(t); b.textContent = 'Скопійовано'; } catch (x) { prompt('Скопіюйте текст', t); } });
 let PREVIEW = '';   // id карточки, открытой по ссылке предпросмотра
 function openCard(id){
