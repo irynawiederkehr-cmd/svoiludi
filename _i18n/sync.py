@@ -8,21 +8,21 @@ import sys, os, re, json
 sys.path.insert(0, os.path.dirname(__file__))
 import pages
 ROOT = pages.ROOT; I18N = pages.I18N
-KNOWN = {'uk', 'assets', 'img', 'fav', 'files', '_i18n'} | {p.strip('/').split('/')[0] for _, p in pages.PAGES if p != '/'}
+KNOWN = {'uk', 'assets', 'data', 'img', 'fav', 'files', '_i18n'} | {p.strip('/').split('/')[0] for _, p in pages.PAGES if p != '/'}
 
 def new_pages():
     known = {src for src, _ in pages.PAGES}
     res = []
     for dp, dn, fn in os.walk(ROOT):
         rel = os.path.relpath(dp, ROOT)
-        if rel.split(os.sep)[0] in ('uk', '_i18n', '.git', 'assets'): continue
+        if rel.split(os.sep)[0] in ('uk', '_i18n', '.git', 'assets', 'data'): continue
         if 'index.html' in fn:
             src = 'index.html' if rel == '.' else rel.replace(os.sep, '/') + '/index.html'
             if src not in known: res.append(src)
     return sorted(res)
 
 def ctx_of(u):
-    for src, _ in pages.PAGES:
+    for src in [src for src, _ in pages.PAGES] + ['data/specialists.js']:
         s = open(os.path.join(ROOT, src), encoding='utf-8').read()
         probe = u.split('⟦')[0][:60] or u[:60]
         k = s.find(probe)

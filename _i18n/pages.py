@@ -90,17 +90,18 @@ def body_inject(html, extra):
     i = html.rfind('</body>'); return html[:i] + extra + html[i:]
 
 def localize_assets(html, tr, missing):
-    """общие файлы с русским текстом → украинские копии: share.js → share.uk.js, wm.css → wm.uk.css"""
+    """общие файлы с русским текстом → украинские копии: share.js → share.uk.js, wm.css → wm.uk.css,
+    data/specialists.js → data/specialists.uk.js (карточки специалистов, одна копия на весь сайт — с 06.10.2026)"""
     def rep(m):
-        name = m.group(2)
-        code = open(os.path.join(ROOT, 'assets', name + '.js'), encoding='utf-8').read()
+        folder, name = m.group(2), m.group(3)
+        code = open(os.path.join(ROOT, folder, name + '.js'), encoding='utf-8').read()
         units = list(dict.fromkeys(js_units(code)))
         if not units: return m.group(0)
         miss = [u for u in units if u not in tr]
-        if miss: missing += [u for u in miss if u not in missing]; return m.group(0)
-        open(os.path.join(ROOT, 'assets', f'{name}.uk.js'), 'w', encoding='utf-8').write(js_apply(code, tr))
-        return f'{m.group(1)}/assets/{name}.uk.js"'
-    html = re.sub(r'(<script src=")/assets/([a-z]+)\.js"', rep, html)
+        if miss: missing.extend(u for u in miss if u not in missing); return m.group(0)
+        open(os.path.join(ROOT, folder, f'{name}.uk.js'), 'w', encoding='utf-8').write(js_apply(code, tr))
+        return f'{m.group(1)}/{folder}/{name}.uk.js"'
+    html = re.sub(r'(<script src=")/(assets|data)/([a-z]+)\.js"', rep, html)
     css = os.path.join(ROOT, 'assets', 'wm.css')
     if os.path.exists(css):
         s = open(css, encoding='utf-8').read()
@@ -120,6 +121,8 @@ def post(html, src):
     html = re.sub(r"(localeCompare\([^()]*?,\s*)'ru'", r"\1'uk'", html)           # сортировка по украинскому алфавиту
     if src == 'opros/index.html':
         html = opros_keep_russian_payload(html)
+    if src == 'index.html':   # подтверждение карточки/прайс-листа: ответ специалисту — на языке страницы (как на сайте с 05.10.2026)
+        html = html.replace('&lang=ru${text', '&lang=uk${text')
     if src == 'join/index.html':   # украинская анкета в Word (собирается _i18n/docx.py)
         html = html.replace("ANKETA = 'files/anketa.docx'", "ANKETA = 'files/anketa.uk.docx'")
         html = html.replace('href="files/anketa.docx" download="Анкета специалиста — Свои люди в Швейцарии.docx"',
