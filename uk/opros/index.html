@@ -328,6 +328,9 @@ form.o{display:flex;flex-direction:column;gap:18px;margin-bottom:10px}
 .consent input{margin-top:3px;accent-color:var(--brown)}
 .send{display:flex;flex-wrap:wrap;gap:12px 18px;align-items:center}
 .send .btn{font-size:1rem}
+.draft{font-size:.88rem;color:var(--muted,#6b6b6b);margin:14px 0 0;line-height:1.5}
+.draft .lnk{font:inherit;font-weight:700;background:none;border:none;padding:0;color:var(--brown);text-decoration:underline;cursor:pointer}
+.draft .lnk + .lnk{margin-left:12px}
 .status{font-size:.92rem;color:var(--muted)}
 .thanks{background:var(--soft);border-radius:22px;padding:clamp(18px,3vw,28px);display:flex;flex-direction:column;gap:10px}
 .thanks h2{font-size:1.8rem}
@@ -420,6 +423,7 @@ form.o{display:flex;flex-direction:column;gap:18px;margin-bottom:10px}
       <label class="consent"><input type="checkbox" id="consent"> <span>Згодна(ен), щоб мені написали, коли з’явиться потрібний фахівець. E-mail зберігається не довше 12 місяців і використовується тільки для цього; видалити його можна листом на voznesenskaya.iryna@gmail.com.</span></label>
     </section>
     <div class="send"><button class="btn" type="submit" id="submit">Надіслати відповідь</button><span class="status" id="status" aria-live="polite"></span></div>
+    <p class="draft" id="draftBox">Ваші відповіді зберігаються лише на цьому пристрої, доки ви їх не надішлете. Можна закрити сторінку й продовжити пізніше. <button class="lnk" type="button" id="wipeBtn">Видалити історію</button></p>
   </form>
 
   <section class="thanks" id="thanks" hidden>
@@ -491,6 +495,26 @@ document.getElementById('dirs').addEventListener('change', e => { const d = e.ta
 const vals = n => [...document.querySelectorAll(`input[name="${n}"]:checked`)].map(i => i.value);
 const specDir = sp => { for (const [k, c] of Object.entries(CATS)) if (c.s.includes(sp)) return c.t; return ''; };
 let sent = false;
+// черновик опроса остаётся на этом устройстве, пока ответ не отправлен
+const DKEY = 'svoiOprosDraft';
+const form = document.getElementById('form');
+const saveDraft = () => { try { const d = { canton: document.getElementById('canton').value, city: document.getElementById('city').value, other: document.getElementById('other').value,
+  email: document.getElementById('email').value, consent: document.getElementById('consent').checked, checked: [...form.querySelectorAll('input[name]:checked')].map(i => i.name + '|' + i.value) };
+  localStorage.setItem(DKEY, JSON.stringify(d)); } catch (_) {} };
+const countDirs = () => document.querySelectorAll('#dirs .dir').forEach(d => { const n = d.querySelectorAll('input:checked').length; d.querySelector('[data-n]').textContent = n ? `позначено: ${n}` : ''; });
+try { const d = JSON.parse(localStorage.getItem(DKEY) || 'null'); if (d) {
+  ['canton', 'city', 'other', 'email'].forEach(k => { if (typeof d[k] === 'string') document.getElementById(k).value = d[k]; });
+  document.getElementById('consent').checked = !!d.consent;
+  (d.checked || []).forEach(x => { const j = x.indexOf('|'), i = form.querySelector(`input[name="${CSS.escape(x.slice(0, j))}"][value="${CSS.escape(x.slice(j + 1))}"]`); if (i) i.checked = true; });
+  countDirs(); } } catch (_) {}
+form.addEventListener('input', saveDraft); form.addEventListener('change', saveDraft);
+const draftIdle = () => { document.getElementById('draftBox').innerHTML = 'Ваші відповіді зберігаються лише на цьому пристрої, доки ви їх не надішлете. Можна закрити сторінку й продовжити пізніше. <button class="lnk" type="button" id="wipeBtn">Видалити історію</button>'; };
+document.getElementById('draftBox').addEventListener('click', e => { const id = e.target.id;
+  if (id === 'wipeBtn') document.getElementById('draftBox').innerHTML = 'Видалити всі ваші відповіді з цього пристрою? Повернути їх буде неможливо. <button class="lnk" type="button" id="wipeYes">Так, видалити історію</button><button class="lnk" type="button" id="wipeNo">Скасувати</button>';
+  if (id === 'wipeNo') draftIdle();
+  if (id === 'wipeYes'){ try { localStorage.removeItem(DKEY); localStorage.removeItem('svoiOprosSent'); } catch (_) {} form.reset(); countDirs(); draftIdle(); sent = false; document.getElementById('status').textContent = 'Усю історію видалено з цього пристрою.'; }
+});
+
 try { sent = localStorage.getItem('svoiOprosSent') === '1'; } catch (_) {}
 document.getElementById('form').addEventListener('submit', async e => {
   e.preventDefault();
@@ -505,7 +529,7 @@ document.getElementById('form').addEventListener('submit', async e => {
   try {
     if (!ENDPOINT) throw new Error('no endpoint');
     await fetch(ENDPOINT, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(payload) });
-    try { localStorage.setItem('svoiOprosSent', '1'); } catch (_) {}
+    try { localStorage.setItem('svoiOprosSent', '1'); localStorage.removeItem(DKEY); } catch (_) {}
     document.getElementById('form').hidden = true; document.getElementById('thanks').hidden = false; window.scrollTo({ top: document.getElementById('thanks').offsetTop - 90, behavior: 'smooth' });
     loadTop(payload.canton);
   } catch (err){ btn.disabled = false; st.textContent = 'Не вдалося надіслати. Перевірте інтернет і спробуйте ще раз.'; }

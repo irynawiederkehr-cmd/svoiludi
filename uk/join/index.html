@@ -314,6 +314,9 @@ a.bot:hover{color:#B98324}
 .chk{display:flex;flex-wrap:wrap;gap:8px} .chk label{text-transform:none;letter-spacing:0;font-size:.92rem;font-weight:600;color:var(--ink);background:var(--bg);border:1.5px solid var(--line);border-radius:999px;padding:7px 13px;cursor:pointer;display:inline-flex;gap:7px;align-items:center}
 .chk input{accent-color:var(--brown);width:auto;min-height:0;padding:0;margin:0} .chk label:has(input:checked){border-color:var(--brown);background:var(--soft)}
 .acts{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px} .acts .btn.ghost{background:transparent}
+.draft{font-size:.88rem;color:var(--muted,#6b6b6b);margin:14px 0 0;line-height:1.5}
+.draft .lnk{font:inherit;font-weight:700;background:none;border:none;padding:0;color:var(--brown);text-decoration:underline;cursor:pointer}
+.draft .lnk + .lnk{margin-left:12px}
 .msg{margin-top:12px;font-size:.92rem;color:var(--brown);font-weight:600}
 .note{font-size:.85rem;color:var(--muted);margin-top:14px}
 
@@ -412,6 +415,7 @@ a.bot:hover{color:#B98324}
       <a class="btn ghost" href="files/anketa.uk.docx" download="Анкета фахівця — Свої люди у Швейцарії.docx">Завантажити порожню анкету</a>
     </div>
     <div class="msg" id="msg" role="status" hidden></div>
+    <p class="draft" id="draftBox">Усе, що ви ввели, зберігається лише на цьому пристрої. Можна закрити сторінку й продовжити пізніше. <button class="lnk" type="button" id="wipeBtn">Видалити історію</button></p>
     <p class="note">Анкета — файл Word. У ній є все інше: профіль, послуги, прайс-лист, вибір послуг розміщення й дані для рахунку. Якщо Word немає, анкету можна відкрити в Google Документах або Pages.</p>
   </section>
   <div class="share-slot" data-url="https://svoiludi.ch/uk/join/" data-lead="Знаєте колегу, який допомагає людям російською або українською? Перешліть запрошення, повідомлення вже готове." data-text="Привіт! Запускається довідник російськомовних фахівців у Швейцарії «Свої люди». Зараз розміститися можна безкоштовно, реєстрація займає хвилин п’ятнадцять. Мені здається, тобі туди варто потрапити."></div>
@@ -447,6 +451,14 @@ try { const d = JSON.parse(localStorage.getItem(KEY) || 'null'); if (d) { Object
 document.querySelector('.form').addEventListener('input', save); document.querySelector('.form').addEventListener('change', save);
 
 const say = t => { const m = $('msg'); m.textContent = t; m.hidden = !t; };
+const draftIdle = () => { $('draftBox').innerHTML = 'Усе, що ви ввели, зберігається лише на цьому пристрої. Можна закрити сторінку й продовжити пізніше. <button class="lnk" type="button" id="wipeBtn">Видалити історію</button>'; };
+$('draftBox').addEventListener('click', e => { const id = e.target.id;
+  if (id === 'wipeBtn') $('draftBox').innerHTML = 'Видалити всі введені дані з цього пристрою? Повернути їх буде неможливо. <button class="lnk" type="button" id="wipeYes">Так, видалити історію</button><button class="lnk" type="button" id="wipeNo">Скасувати</button>';
+  if (id === 'wipeNo') draftIdle();
+  if (id === 'wipeYes'){ try { localStorage.removeItem(KEY); } catch (_) {}
+    document.querySelectorAll('.f [data-a]').forEach(el => { el.value = ''; }); document.querySelectorAll('input[name=lang], input[name=spec]').forEach(i => { i.checked = false; });
+    $('v-dir').dispatchEvent(new Event('change')); draftIdle(); say('Усю історію видалено з цього пристрою.'); }
+});
 const need = () => { const miss = [['v-name', 'ім’я'], ['v-role', 'професію'], ['v-dir', 'напрям'], ['v-kant', 'кантон'], ['v-email', 'e-mail']].filter(([id]) => !$(id).value.trim()).map(x => x[1]);
   if (miss.length) { say('Заповніть, будь ласка: ' + miss.join(', ') + '.'); return false; } return true; };
 const xe = t => String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');

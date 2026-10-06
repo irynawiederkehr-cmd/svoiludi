@@ -873,7 +873,7 @@ const SPECIALISTS = [
     ],
     photo: 'larisa-medvedeva.jpg',
     online: false, format: 'За попереднім записом',
-    about: 'Майстер нігтьового сервісу та перманентного макіяжу з досвідом понад 20 років, призер міжнародного чемпіонату Swiss Nail Championship. Займаюся естетичним доглядом за руками й ногами, нарощуванням і дизайном нігтів, а також роблю перманентний макіяж.',
+    about: 'Майстриня нігтьового сервісу та перманентного макіяжу з досвідом понад 20 років, призерка міжнародного чемпіонату Swiss Nail Championship. Займаюся естетичним доглядом за руками й ногами, нарощуванням і дизайном нігтів, а також роблю перманентний макіяж.',
     services: ['Манікюр зі звичайним лаком', 'Манікюр із гель-лаком і френч', 'Комбінований манікюр', 'Японський манікюр', 'SPA-манікюр із парафінотерапією', 'Зміцнення натуральних нігтів гелем', 'Нарощування нігтів гелем і акригелем', 'Корекція нарощених нігтів', 'Зняття гель-лаку, гелю, акригелю та полігелю', 'Дизайн нігтів: френч, хром, «бебі бумер»', 'Естетичний педикюр із лаком, гель-лаком або френч', 'Апаратний педикюр Pododisk', 'SPA-педикюр із парафінотерапією', 'Чоловічий педикюр із масажем стоп', 'Догляд за стопами, видалення мозолів, тріщин і гіперкератозу', 'Консультації з догляду за стопами', 'Манікюр і педикюр за одне відвідування', 'Перманентний макіяж брів, пудрове напилення', 'Перманентний макіяж губ, акварельні губи', 'Міжвійкова стрілка і класична стрілка з розтушовуванням', 'Моделювання та фарбування брів', 'Воскова депіляція обличчя'],
     langs: ['російська', 'українська', 'німецька'],
     contacts: { phone: '+41 79 791 67 83', email: 'lm-zone@outlook.com', site: 'lmzone.ch', instagram: 'manicure_zurich_nagelstudio', telegram: 'BeautyZone_LM', whatsapp: '+41 79 791 67 83' }
@@ -1482,17 +1482,17 @@ const previewUrl = s => `${SITE}#preview=${encodeURIComponent(s.id)}.${encodeURI
 const mailto = (to, su, body) => `mailto:${to}?subject=${encodeURIComponent(su)}&body=${encodeURIComponent(body)}`;
 const gmail = (to, su, body) => `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(to)}&su=${encodeURIComponent(su)}&body=${encodeURIComponent(body)}`;
 const ownerLetter = s => ({ su: 'Ваша картка у «Своїх людях у Швейцарії» — перегляньте, будь ласка',
-  body: `Добрий день!\n\nЯ підготувала вашу картку для довідника «Свої люди у Швейцарії». Поки її бачите тільки ви. Перегляньте, будь ласка, чи все правильно: фото, профіль, послуги, адреси й контакти.\n\n${previewUrl(s)}\n\nЯкщо все правильно, внизу картки поставте позначку й натисніть «Підтверджую» — і я одразу опублікую картку. Якщо щось не так, натисніть «Потрібно виправити» й напишіть прямо там, що змінити.\n\nЗ теплом,\nІрина Вознесенська\n${MAIL}` });
+  body: `Добрий день!\n\nЯ підготувала вашу картку для довідника «Свої люди у Швейцарії». Поки її бачите тільки ви. Подивіться, будь ласка, чи все правильно: фото, профіль, послуги, адреси й контакти.\n\n${previewUrl(s)}\n\nЯкщо все правильно, унизу картки поставте галочку й натисніть «Підтверджую» — і я одразу опублікую картку. Якщо щось не так, натисніть «Потрібно виправити» й напишіть просто там, що змінити.\n\nЗ теплом,\nІрина Вознесенська\n${MAIL}` });
 const confirmLetter = s => ({ su: `Підтверджую картку — ${s.name}${s.num ? ' (' + s.num + ')' : ''}`,
   body: `Добрий день, Ірино!\n\nВсе правильно, підтверджую публікацію своєї картки на сайті «Свої люди у Швейцарії».\n\n${previewUrl(s)}\n\n${s.name}` });
 const fixLetter = s => ({ su: `Виправлення до картки — ${s.name}${s.num ? ' (' + s.num + ')' : ''}`,
   body: `Добрий день, Ірино!\n\nУ моїй картці, будь ласка, виправте\n\n— \n\n${previewUrl(s)}\n\n${s.name}` });
 function previewBox(s){
-  return `<div class="pv-box" id="pvCard" data-pv="${esc(s.id)}"><b>Це попередній перегляд вашої картки.</b><span>Поки її бачите тільки ви. Якщо все правильно, поставте позначку й натисніть «Підтверджую» — картка з’явиться на сайті. Якщо щось потрібно змінити, натисніть «Потрібно виправити».</span>
-    <label class="pv-ok"><input type="checkbox" data-pv-agree> <span>Дані в картці правильні. Я даю згоду на публікацію картки та фото на сайті svoiludi.ch.</span></label>
+  return `<div class="pv-box" id="pvCard" data-pv="${esc(s.id)}"><b>Це попередній перегляд вашої картки.</b><span>Поки її бачите тільки ви. Якщо все правильно, поставте галочку й натисніть «Підтверджую» — картка з’явиться на сайті. Якщо щось потрібно змінити, натисніть «Потрібно виправити».</span>
+    <label class="pv-ok"><input type="checkbox" data-pv-agree> <span>Дані в картці правильні. Я даю згоду на публікацію картки й фото на сайті svoiludi.ch.</span></label>
     <div class="pv-acts"><button class="btn" type="button" data-pv-send="card" disabled>Підтверджую</button><button class="btn ghost" type="button" data-pv-fixopen>Потрібно виправити</button></div>
-    <div class="pv-fix" hidden><textarea data-pv-text rows="4" maxlength="1500" placeholder="Що виправити: наприклад, телефон, адресу чи послугу"></textarea><div class="pv-acts"><button class="btn" type="button" data-pv-send="fix">Надіслати виправлення</button></div></div>
-    <span class="pv-small" data-pv-msg>Одне натискання — і готово. Копія прийде на e-mail з вашої картки.</span></div>`;
+    <div class="pv-fix" hidden><textarea data-pv-text rows="4" maxlength="1500" placeholder="Що виправити: наприклад, телефон, адресу або послугу"></textarea><div class="pv-acts"><button class="btn" type="button" data-pv-send="fix">Надіслати виправлення</button></div></div>
+    <span class="pv-small" data-pv-msg>Одне натискання — і готово. Копія прийде на e-mail із вашої картки.</span></div>`;
 }
 /* ---------- прайс-лист: отдельный запрос и отдельное подтверждение по e-mail (решение Ирины 05.10.2026) ----------
    Ирина в окне карточки: «Запросить прайс-лист» (письмо специалисту), потом «Отправить прайс-лист на подтверждение».
@@ -1502,25 +1502,25 @@ let PRICEVIEW = '';   // id карточки, открытой по ссылке
 const priceShown = s => (s.prices || []).length > 0 && (!!s.pricesOk || !!s.sample || ADMIN || PRICEVIEW === s.id);
 const priceUrl = s => `${SITE}#price=${encodeURIComponent(s.id)}.${encodeURIComponent(s.key || '')}`;
 const priceAsk = s => ({ su: 'Прайс-лист для вашої картки у «Своїх людях у Швейцарії»',
-  body: `Добрий день!\n\nУ довіднику «Свої люди у Швейцарії» у вашої картки може бути прайс-лист. Його можна зберегти картинкою на телефон і переслати клієнтам.\n\nЯкщо хочете, надішліть, будь ласка, листом у відповідь ваші ціни, по одній послузі в рядку:\nпослуга — ціна — пояснення, якщо потрібно (наприклад, тривалість)\n\nНаприклад:\nМанікюр з гель-лаком — 60 CHF — 60 хвилин\n\nПеред публікацією я надішлю вам прайс-лист на перевірку, і він з’явиться на сайті тільки після вашого підтвердження.\n\nЗ теплом,\nІрина Вознесенська\n${MAIL}` });
+  body: `Добрий день!\n\nУ довіднику «Свої люди у Швейцарії» у вашої картки може бути прайс-лист. Його можна зберегти картинкою на телефон і переслати клієнтам.\n\nЯкщо хочете, надішліть, будь ласка, листом-відповіддю ваші ціни, по одній послузі в рядку:\nпослуга — ціна — пояснення, якщо потрібно (наприклад, тривалість)\n\nНаприклад:\nМанікюр із гель-лаком — 60 CHF — 60 хвилин\n\nПеред публікацією я надішлю вам прайс-лист на перевірку, і він з’явиться на сайті тільки після вашого підтвердження.\n\nЗ теплом,\nІрина Вознесенська\n${MAIL}` });
 const priceLetter = s => ({ su: 'Ваш прайс-лист у «Своїх людях у Швейцарії» — перегляньте, будь ласка',
-  body: `Добрий день!\n\nЯ підготувала ваш прайс-лист для довідника «Свої люди у Швейцарії». Поки його бачите тільки ви. Перегляньте, будь ласка, чи все правильно: послуги, ціни й пояснення.\n\n${priceUrl(s)}\n\nЯкщо все правильно, внизу поставте позначку й натисніть «Прайс-лист правильний, підтверджую» — і я одразу його опублікую. Якщо щось не так, натисніть «Потрібно виправити» й напишіть прямо там, що змінити.\n\nЗ теплом,\nІрина Вознесенська\n${MAIL}` });
+  body: `Добрий день!\n\nЯ підготувала ваш прайс-лист для довідника «Свої люди у Швейцарії». Поки його бачите тільки ви. Подивіться, будь ласка, чи все правильно: послуги, ціни й пояснення.\n\n${priceUrl(s)}\n\nЯкщо все правильно, унизу поставте галочку й натисніть «Прайс-лист правильний, підтверджую» — і я одразу його опублікую. Якщо щось не так, натисніть «Потрібно виправити» й напишіть просто там, що змінити.\n\nЗ теплом,\nІрина Вознесенська\n${MAIL}` });
 const priceTxt = s => (s.prices || []).map(r => `${r.t}${r.n ? ' (' + r.n + ')' : ''} — ${r.p}`).join('\n');
 const priceConfirm = s => ({ su: `Підтверджую прайс-лист — ${s.name}${s.num ? ' (' + s.num + ')' : ''}`,
   body: `Добрий день, Ірино!\n\nУсе правильно, підтверджую публікацію свого прайс-листа на сайті «Свої люди у Швейцарії»${s.pricesDate ? ' (ціни на ' + fmtDate(s.pricesDate) + ')' : ''}:\n\n${priceTxt(s)}\n\n${priceUrl(s)}\n\n${s.name}` });
 const priceFix = s => ({ su: `Виправлення в прайс-лист — ${s.name}${s.num ? ' (' + s.num + ')' : ''}`,
   body: `Добрий день, Ірино!\n\nУ моєму прайс-листі, будь ласка, виправте\n\n— \n\n${priceUrl(s)}\n\n${s.name}` });
 function priceBox(s){
-  return `<div class="pv-box" id="pvPrice" data-pv="${esc(s.id)}"><b>Це попередній перегляд вашого прайс-листа.</b><span>Поки його бачите тільки ви. Якщо все правильно, поставте позначку й натисніть «Прайс-лист правильний, підтверджую» — прайс-лист з’явиться у вашій картці на сайті. Якщо щось потрібно змінити, натисніть «Потрібно виправити».</span>
+  return `<div class="pv-box" id="pvPrice" data-pv="${esc(s.id)}"><b>Це попередній перегляд вашого прайс-листа.</b><span>Поки його бачите тільки ви. Якщо все правильно, поставте галочку й натисніть «Прайс-лист правильний, підтверджую» — прайс-лист з’явиться у вашій картці на сайті. Якщо щось потрібно змінити, натисніть «Потрібно виправити».</span>
     <ul class="pv-pl">${(s.prices || []).map(r => `<li><span>${esc(r.t)}${r.n ? `<small>${esc(r.n)}</small>` : ''}</span><b>${esc(r.p)}</b></li>`).join('')}</ul>
-    <label class="pv-ok"><input type="checkbox" data-pv-agree> <span>Послуги, ціни та пояснення правильні. Я даю згоду на публікацію прайс-листа на сайті svoiludi.ch.</span></label>
-    <div class="pv-acts"><button class="btn ghost" type="button" data-png-price="${esc(s.id)}">Переглянути картинкою</button><button class="btn" type="button" data-pv-send="price" disabled>Прайс-лист правильний, підтверджую</button><button class="btn ghost" type="button" data-pv-fixopen>Потрібно виправити</button></div>
-    <div class="pv-fix" hidden><textarea data-pv-text rows="4" maxlength="1500" placeholder="Що виправити: наприклад, ціну чи назву послуги"></textarea><div class="pv-acts"><button class="btn" type="button" data-pv-send="fix">Надіслати виправлення</button></div></div>
-    <span class="pv-small" data-pv-msg>Одне натискання — і готово. Копія прийде на e-mail з вашої картки.</span></div>`;
+    <label class="pv-ok"><input type="checkbox" data-pv-agree> <span>Послуги, ціни й пояснення правильні. Я даю згоду на публікацію прайс-листа на сайті svoiludi.ch.</span></label>
+    <div class="pv-acts"><button class="btn ghost" type="button" data-png-price="${esc(s.id)}">Подивитися картинкою</button><button class="btn" type="button" data-pv-send="price" disabled>Прайс-лист правильний, підтверджую</button><button class="btn ghost" type="button" data-pv-fixopen>Потрібно виправити</button></div>
+    <div class="pv-fix" hidden><textarea data-pv-text rows="4" maxlength="1500" placeholder="Що виправити: наприклад, ціну або назву послуги"></textarea><div class="pv-acts"><button class="btn" type="button" data-pv-send="fix">Надіслати виправлення</button></div></div>
+    <span class="pv-small" data-pv-msg>Одне натискання — і готово. Копія прийде на e-mail із вашої картки.</span></div>`;
 }
 /* подтверждение одним нажатием (06.10.2026): GET в Apps Script, при ошибке — запасной вариант письмом */
 const CONFIRM_URL = 'https://script.google.com/macros/s/AKfycbyizp1XjzNdrUj4WHgj4Vyj81QhjY2D7puqyeY3LaweWB4mePxPhfHCx5fIsfaJy9hV/exec';
-const PV_T = { sending: 'Надсилаю…', ok: (t, c) => `Дякую! Підтвердження отримано ${t}.` + (c ? ' Копія прийде на e-mail з вашої картки.' : ''), fixok: t => `Дякую! Виправлення отримано ${t}. Я внесу їх і надішлю посилання ще раз.`, empty: 'Напишіть, будь ласка, що виправити.', fail: 'Не вдалося надіслати. Будь ласка,', mail: 'надішліть листом' };
+const PV_T = { sending: 'Надсилаю…', ok: (t, c) => `Дякую! Підтвердження отримано ${t}.` + (c ? ' Копія прийде на e-mail із вашої картки.' : ''), fixok: t => `Дякую! Виправлення отримано ${t}. Я внесу їх і надішлю посилання ще раз.`, empty: 'Напишіть, будь ласка, що виправити.', fail: 'Не вдалося надіслати. Будь ласка,', mail: 'надішліть листом' };
 document.addEventListener('change', e => { const c = e.target.closest('[data-pv-agree]'); if (!c) return;
   const b = c.closest('.pv-box').querySelector('[data-pv-send="card"],[data-pv-send="price"]'); if (b) b.disabled = !c.checked; });
 document.addEventListener('click', async e => {
@@ -1534,7 +1534,7 @@ document.addEventListener('click', async e => {
   if (fix && !text){ msg.textContent = PV_T.empty; return; }
   b.disabled = true; msg.textContent = PV_T.sending;
   try {
-    const u = `${CONFIRM_URL}?what=confirm&kind=${kind}&id=${encodeURIComponent(s.id)}&key=${encodeURIComponent(s.key || '')}&lang=uk${text ? '&text=' + encodeURIComponent(text) : ''}`;
+    const u = `${CONFIRM_URL}?what=confirm&kind=${kind}&id=${encodeURIComponent(s.id)}&key=${encodeURIComponent(s.key || '')}&lang=ru${text ? '&text=' + encodeURIComponent(text) : ''}`;
     const j = await (await fetch(u)).json(); if (!j.ok) throw new Error(j.error || 'error');
     box.querySelectorAll('.pv-ok,.pv-acts,.pv-fix').forEach(x => x.hidden = true);
     msg.textContent = fix ? PV_T.fixok(j.time) : PV_T.ok(j.time, j.copy); msg.classList.add('pv-done');
@@ -1554,7 +1554,7 @@ function priceAdmin(s, to){
   return `<span><b>Прайс-лист:</b> ${st}</span>${btns ? `<div class="pv-acts">${btns}</div>` : ''}`;
 }
 document.addEventListener('click', async e => { const b = e.target.closest('[data-copyprice]'); if (!b) return;
-  const s = SPECIALISTS.find(x => x.id === b.dataset.copyprice); const t = `Добрий день! Я підготувала ваш прайс-лист для довідника «Свої люди у Швейцарії». Поки його бачите тільки ви. Перегляньте, будь ласка, чи все правильно.\n\n${priceUrl(s)}\n\nЯкщо все правильно, внизу поставте позначку й натисніть «Прайс-лист правильний, підтверджую» — це одне натискання. Якщо щось не так, натисніть «Потрібно виправити» й напишіть прямо там. Дякую!`;
+  const s = SPECIALISTS.find(x => x.id === b.dataset.copyprice); const t = `Добрий день! Я підготувала ваш прайс-лист для довідника «Свої люди у Швейцарії». Поки його бачите тільки ви. Подивіться, будь ласка, чи все правильно.\n\n${priceUrl(s)}\n\nЯкщо все правильно, унизу поставте галочку й натисніть «Прайс-лист правильний, підтверджую» — це одне натискання. Якщо щось не так, натисніть «Потрібно виправити» й напишіть просто там. Дякую!`;
   try { await navigator.clipboard.writeText(t); b.textContent = 'Скопійовано'; } catch (x) { prompt('Скопіюйте текст', t); } });
 function adminBox(s){
   const to = (s.contacts && s.contacts.email) || '', L = ownerLetter(s), why = hiddenReason(s);
@@ -1562,7 +1562,7 @@ function adminBox(s){
     ${(s.todo || []).length ? `<ul class="adm-todo">${s.todo.map(x => `<li>${esc(x)}</li>`).join('')}</ul>` : ''}<div class="pv-acts">${to ? `<a class="btn" href="${esc(mailto(to, L.su, L.body))}">Надіслати на підтвердження</a><a class="btn ghost" href="${esc(gmail(to, L.su, L.body))}" target="_blank" rel="noopener">Через Gmail</a>` : '<span>У фахівця немає e-mail у картці</span>'}<button class="btn ghost" type="button" data-copyprev="${esc(s.id)}">Скопіювати посилання для Telegram</button></div>${priceAdmin(s, to)}</div>`;
 }
 document.addEventListener('click', async e => { const b = e.target.closest('[data-copyprev]'); if (!b) return;
-  const s = SPECIALISTS.find(x => x.id === b.dataset.copyprev); const t = `Добрий день! Я підготувала вашу картку для довідника «Свої люди у Швейцарії». Поки її бачите тільки ви. Перегляньте, будь ласка, чи все правильно.\n\n${previewUrl(s)}\n\nЯкщо все правильно, внизу картки поставте позначку й натисніть «Підтверджую» — це одне натискання. Якщо щось не так, натисніть «Потрібно виправити» й напишіть прямо там. Дякую!`;
+  const s = SPECIALISTS.find(x => x.id === b.dataset.copyprev); const t = `Добрий день! Я підготувала вашу картку для довідника «Свої люди у Швейцарії». Поки її бачите тільки ви. Подивіться, будь ласка, чи все правильно.\n\n${previewUrl(s)}\n\nЯкщо все правильно, унизу картки поставте галочку й натисніть «Підтверджую» — це одне натискання. Якщо щось не так, натисніть «Потрібно виправити» й напишіть просто там. Дякую!`;
   try { await navigator.clipboard.writeText(t); b.textContent = 'Скопійовано'; } catch (x) { prompt('Скопіюйте текст', t); } });
 let PREVIEW = '';   // id карточки, открытой по ссылке предпросмотра
 function openCard(id){
