@@ -1237,7 +1237,7 @@ let PRICEVIEW = '';   // id карточки, открытой по ссылке
 const priceShown = s => (s.prices || []).length > 0 && (!!s.pricesOk || !!s.sample || ADMIN || PRICEVIEW === s.id);
 const priceUrl = s => `${SITE}#price=${encodeURIComponent(s.id)}.${encodeURIComponent(s.key || '')}`;
 const priceAsk = s => ({ su: 'Прайс-лист для вашої картки у «Своїх людях у Швейцарії»',
-  body: `Добрий день!\n\nУ довіднику «Свої люди у Швейцарії» у вашої картки може бути прайс-лист. Його можна зберегти картинкою на телефон і переслати клієнтам.\n\nЯкщо хочете, надішліть, будь ласка, листом у відповідь ваші ціни, по одній послузі в рядку:\nпослуга — ціна — пояснення, якщо потрібно (наприклад, тривалість)\n\nНаприклад:\nМанікюр з гель-лаком — 60 CHF — 60 хвилин\n\nПеред публікацією я надішлю вам прайс-лист на перевірку, і він з’явиться на сайті тільки після вашого підтвердження.\n\nЗ теплом,\nІрина Вознесенська\n${MAIL}` });
+  body: `Добрий день!\n\nУ довіднику «Свої люди у Швейцарії» у вашої картки може бути прайс-лист. Його можна зберегти картинкою на телефон і переслати клієнтам.\n\n${(s.services || []).length ? `Нижче — послуги з вашої картки. Впишіть, будь ласка, ціни замість ___ і надішліть листом у відповідь. Послугу можна видалити, додати свою або дописати пояснення, наприклад тривалість (Манікюр з гель-лаком — 60 CHF — 60 хвилин).\n\n${s.services.map(x => x + ' — ___ CHF').join('\n')}` : `Якщо хочете, надішліть, будь ласка, листом у відповідь ваші ціни, по одній послузі в рядку:\nпослуга — ціна — пояснення, якщо потрібно (наприклад, тривалість)\n\nНаприклад:\nМанікюр з гель-лаком — 60 CHF — 60 хвилин`}\n\nПеред публікацією я надішлю вам прайс-лист на перевірку, і він з’явиться на сайті тільки після вашого підтвердження.\n\nЗ теплом,\nІрина Вознесенська\n${MAIL}` });
 const priceLetter = s => ({ su: 'Ваш прайс-лист у «Своїх людях у Швейцарії» — перегляньте, будь ласка',
   body: `Добрий день!\n\nЯ підготувала ваш прайс-лист для довідника «Свої люди у Швейцарії». Поки його бачите тільки ви. Перегляньте, будь ласка, чи все правильно: послуги, ціни й пояснення.\n\n${priceUrl(s)}\n\nЯкщо все правильно, внизу поставте галочку й натисніть «Прайс-лист правильний, підтверджую» — і я одразу його опублікую. Якщо щось не так, натисніть «Потрібно виправити» й напишіть прямо там, що змінити.\n\nЗ теплом,\nІрина Вознесенська\n${MAIL}` });
 const priceTxt = s => (s.prices || []).map(r => `${r.t}${r.n ? ' (' + r.n + ')' : ''} — ${r.p}`).join('\n');
@@ -1284,10 +1284,13 @@ function priceAdmin(s, to){
   const pr = (s.prices || []).length, A = priceAsk(s), L = priceLetter(s);
   const st = !pr ? 'немає' : s.pricesOk ? `підтверджено ${fmtDate(s.pricesOk)} · видно на сайті` : 'чекає на підтвердження · на сайті не видно';
   const btns = !to ? '' : !pr
-    ? `<a class="btn ghost" href="${esc(mailto(to, A.su, A.body))}">Запросити прайс-лист</a><a class="btn ghost" href="${esc(gmail(to, A.su, A.body))}" target="_blank" rel="noopener">Через Gmail</a>`
+    ? `<a class="btn ghost" href="${esc(mailto(to, A.su, A.body))}">Запросити прайс-лист</a><a class="btn ghost" href="${esc(gmail(to, A.su, A.body))}" target="_blank" rel="noopener">Через Gmail</a><button class="btn ghost" type="button" data-copyask="${esc(s.id)}">Скопіювати запит для Telegram</button>`
     : s.pricesOk ? '' : `<a class="btn ghost" href="${esc(mailto(to, L.su, L.body))}">Надіслати прайс-лист на підтвердження</a><a class="btn ghost" href="${esc(gmail(to, L.su, L.body))}" target="_blank" rel="noopener">Через Gmail</a><button class="btn ghost" type="button" data-copyprice="${esc(s.id)}">Скопіювати посилання для Telegram</button>`;
   return `<span><b>Прайс-лист:</b> ${st}</span>${btns ? `<div class="pv-acts">${btns}</div>` : ''}`;
 }
+document.addEventListener('click', async e => { const b = e.target.closest('[data-copyask]'); if (!b) return;
+  const t = priceAsk(SPECIALISTS.find(x => x.id === b.dataset.copyask)).body;
+  try { await navigator.clipboard.writeText(t); b.textContent = 'Скопійовано'; } catch (x) { prompt('Скопіюйте текст', t); } });
 document.addEventListener('click', async e => { const b = e.target.closest('[data-copyprice]'); if (!b) return;
   const s = SPECIALISTS.find(x => x.id === b.dataset.copyprice); const t = `Добрий день! Я підготувала ваш прайс-лист для довідника «Свої люди у Швейцарії». Поки його бачите тільки ви. Перегляньте, будь ласка, чи все правильно.\n\n${priceUrl(s)}\n\nЯкщо все правильно, внизу поставте галочку й натисніть «Прайс-лист правильний, підтверджую» — це одне натискання. Якщо щось не так, натисніть «Потрібно виправити» й напишіть прямо там. Дякую!`;
   try { await navigator.clipboard.writeText(t); b.textContent = 'Скопійовано'; } catch (x) { prompt('Скопіюйте текст', t); } });
