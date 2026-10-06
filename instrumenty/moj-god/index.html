@@ -209,7 +209,7 @@ a.btn{text-decoration:none;display:inline-flex;align-items:center}
   </div>
   <div class="status" id="status" role="status"></div>
   <div class="share" id="calPanel" hidden>
-    <h2 style="font-size:1.4rem">Перенести год в свой календарь</h2>
+    <h2 style="font-size:1.4rem">Перенести год в свой календарь<button type="button" class="qh" data-help="cal" aria-label="Подсказка: Перенести год в свой календарь" aria-expanded="false">?</button></h2>
     <p class="hint">Дела станут повторяющимися событиями на весь день, периоды и сроки — событиями с датами. Дни, где дело убрано, в календарь не попадут. Файл подходит для iPhone, Outlook и Google. Для Google Календаря можно добавить каждое дело отдельно по ссылке.</p>
     <div><button class="btn gold" id="calIcs" type="button">Скачать файл для календаря</button></div>
     <ul class="callist" id="calList"></ul>
@@ -226,7 +226,7 @@ a.btn{text-decoration:none;display:inline-flex;align-items:center}
 
   <section class="panel" aria-labelledby="rt-h">
     <div class="panel-head">
-      <h2 id="rt-h">Мои дела на каждую неделю и месяц</h2>
+      <h2 id="rt-h">Мои дела на каждую неделю и месяц<button type="button" class="qh" data-help="routines" aria-label="Подсказка: Мои дела на каждую неделю и месяц" aria-expanded="false">?</button></h2>
       <p id="exampleNote"><span class="example">Пример</span> Поменяй дела и дни под себя.</p>
     </div>
     <div class="routines" id="routines"></div>
@@ -235,14 +235,14 @@ a.btn{text-decoration:none;display:inline-flex;align-items:center}
 
   <section class="panel" aria-labelledby="pr-h">
     <div class="panel-head">
-      <h2 id="pr-h">Периоды и сроки</h2>
+      <h2 id="pr-h">Периоды и сроки<button type="button" class="qh" data-help="periods" aria-label="Подсказка: Периоды и сроки" aria-expanded="false">?</button></h2>
       <p>Отпуск, курс немецкого, испытательный срок, срок подачи документов. Если начало и конец совпадают, это один день.</p>
     </div>
     <div class="routines" id="periods"></div>
     <div><button class="btn ghost" id="addPer" type="button">+ Добавить период</button></div>
     <div class="toggles">
-      <label for="tHol"><input type="checkbox" id="tHol"> Праздники кантона</label><label for="canton" style="cursor:default"><span class="sr">Кантон</span><select id="canton" class="mode"></select></label>
-      <label for="tSch"><input type="checkbox" id="tSch"> Школьные каникулы <small>город Цюрих, проверь даты своей общины</small></label>
+      <label for="tHol"><input type="checkbox" id="tHol"> Праздники кантона<button type="button" class="qh" data-help="hol" aria-label="Подсказка: Праздники кантона" aria-expanded="false">?</button></label><label for="canton" style="cursor:default"><span class="sr">Кантон</span><select id="canton" class="mode"></select></label>
+      <label for="tSch"><input type="checkbox" id="tSch"> Школьные каникулы<button type="button" class="qh" data-help="sch" aria-label="Подсказка: Школьные каникулы" aria-expanded="false">?</button> <small>город Цюрих, проверь даты своей общины</small></label>
     </div>
   </section>
 
@@ -296,7 +296,7 @@ a.btn{text-decoration:none;display:inline-flex;align-items:center}
       <a class="btn free" href="https://t.me/IrynaNeuroCoach" target="_blank" rel="noopener">Написать «ВСТРЕЧА» в Telegram</a>
     </div>
   </section>
-  <p class="credit"><span>Ирина Вознесенская · коуч</span><a href="https://www.instagram.com/iryna.voznesenskaya/" target="_blank" rel="noopener">Instagram @iryna.voznesenskaya</a><a href="https://voznesenskaya.ch/" target="_blank" rel="noopener">voznesenskaya.ch</a><a href="https://svoiludi.ch/" target="_blank" rel="noopener">Свои люди в Швейцарии · svoiludi.ch</a></p>
+  <p class="credit"><span>Ирина Вознесенская · коуч</span><a href="https://www.instagram.com/iryna.voznesenskaya/" target="_blank" rel="noopener">Instagram @iryna.voznesenskaya</a><a href="https://voznesenskaya.ch/" target="_blank" rel="noopener">voznesenskaya.ch</a><a href="https://svoiludi.ch/" target="_blank" rel="noopener">Свои люди в Швейцарии · svoiludi.ch</a><a href="https://svoiludi.ch/privacy/">Политика конфиденциальности</a></p>
 </div>
 
 <script src="/assets/lib/jspdf.umd.min.js"></script>
@@ -786,6 +786,17 @@ $('copyMsg').addEventListener('click', () => {
 
 renderRoutines(); renderPeriods(); renderSheet();
 </script>
+<script>/* тексты подсказок «?» */
+window.HELP = {
+"routines": "<p>Здесь дела, которые повторяются. Спорт, курс, звонок родным, оплата счетов.<\/p><ul><li><b>По дням недели.<\/b> Нажми на дни, когда ты этим занимаешься. Например, фитнес по понедельникам и четвергам.<\/li><li><b>Раз в месяц.<\/b> Выбери число. Например, оплата счетов 25-го. Если в месяце нет такого числа, дело встанет на последний день.<\/li><\/ul><p>«С … по …» — месяцы, когда дело идёт, например бассейн с мая по сентябрь. Кружок с цветом меняет цвет полоски. Можно до восьми дел.<\/p><p>Если в какой-то день дело отменяется, нажми на его полоску в листе года.<\/p>",
+"periods": "<p>Период — то, что идёт подряд от одной даты до другой. Отпуск, курс B1, испытательный срок. Если начало и конец совпадают, это один день, например срок подачи налоговой декларации.<\/p><p>Галочка «финиш» ставит кружок на последний день. Ставь её, когда в конце что-то важное, например экзамен или подача документов. Для отпуска она не нужна.<\/p>",
+"hol": "<p>Праздники в Швейцарии свои в каждом кантоне. Выбери кантон, где ты живёшь или работаешь, и праздники отметятся розовым. Праздник, который отмечают только в части общин, выделен светлее.<\/p><p>Дела в праздник сами не убираются. Если в этот день спортзал или курс закрыт, нажми на полоску дела в этот день.<\/p>",
+"sch": "<p>Школьные каникулы показаны штриховкой, чтобы ты заранее видела, когда дети дома, и могла планировать отпуск.<\/p><p>Встроены только даты города Цюрих, с Рождества 2026 до Рождества 2027. В других общинах даты другие. Свои каникулы внеси как периоды, даты есть на сайте школы или общины.<\/p>",
+"cal": "<p>Кнопка «Скачать файл для календаря» сохраняет файл .ics. Дела станут повторяющимися событиями на весь день, периоды и сроки — событиями с датами.<\/p><ul><li><b>iPhone.<\/b> Открой файл, и календарь предложит добавить события.<\/li><li><b>Outlook.<\/b> Открой файл в Outlook.<\/li><li><b>Google.<\/b> С телефона проще нажимать ссылки «в Google Календарь» у каждого дела. На компьютере файл добавляется в настройках Google Календаря, в разделе «Импорт и экспорт».<\/li><\/ul><p>Если потом поменяешь план и добавишь файл ещё раз, события могут задвоиться. Тогда сначала удали старые.<\/p>"
+};
+</script>
+<script src="/assets/help.js"></script>
+<script src="/assets/backup.js"></script>
 <script src="/assets/samesite.js"></script>
 <!--i18n--><style>#langbar.langbar{position:fixed;bottom:14px;right:14px;z-index:60;display:flex;gap:2px;background:rgba(255,255,255,.92);border:1px solid rgba(0,0,0,.08);border-radius:999px;padding:3px;font:600 12px Manrope,system-ui,sans-serif;box-shadow:0 2px 8px rgba(0,0,0,.08)}#langbar.langbar a{color:#5d554d;padding:5px 9px;border-radius:999px;text-decoration:none;font:inherit;display:inline-block}#langbar.langbar a[aria-current="true"]{background:#2f2924;color:#fff}@media print{.langbar{display:none!important}}</style><div class="langbar" id="langbar" role="navigation" aria-label="Мова / Язык"><a href="/instrumenty/moj-god/" hreflang="ru" data-lang="ru" aria-current="true">RU</a><a href="/uk/instrumenty/moj-god/" hreflang="uk" data-lang="uk">UA</a></div><script>(function(){var b=document.getElementById('langbar');if(!b)return;b.addEventListener('click',function(e){var a=e.target.closest('a[data-lang]');if(a){try{localStorage.setItem('svoiludiLang',a.dataset.lang)}catch(x){}a.href=a.getAttribute('href').split('#')[0]+location.hash;}});})();</script><!--i18n--></body>
 </html>

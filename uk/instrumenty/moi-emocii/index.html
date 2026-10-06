@@ -249,12 +249,12 @@ select:focus-visible,input:focus-visible,button:focus-visible,textarea:focus-vis
       <div class="panel-head"><h2 id="f-h">Що я зараз відчуваю</h2><p id="formMode">Новий запис</p></div>
       <div class="two">
         <div class="field"><label for="fTime">Час</label><input type="time" id="fTime"></div>
-        <div class="field"><span class="lbl">Сила</span><div class="int"><input type="range" id="fInt" min="1" max="10" value="5" aria-label="Сила емоції від 1 до 10"><b id="fIntV">5</b></div></div>
+        <div class="field"><span class="lbl qfl">Сила<button type="button" class="qh" data-help="int" aria-label="Підказка: Сила" aria-expanded="false">?</button></span><div class="int"><input type="range" id="fInt" min="1" max="10" value="5" aria-label="Сила емоції від 1 до 10"><b id="fIntV">5</b></div></div>
       </div>
-      <div class="field"><span class="lbl">Емоція</span><div class="fams" id="fams"></div></div>
-      <div class="field" id="shadeBox" hidden><span class="lbl">Який відтінок ближчий</span><div class="chips" id="shades"></div><input type="text" id="fWord" placeholder="Або своє слово" aria-label="Своє слово для емоції"></div>
+      <div class="field"><span class="lbl qfl">Емоція<button type="button" class="qh" data-help="fam" aria-label="Підказка: Емоція" aria-expanded="false">?</button></span><div class="fams" id="fams"></div></div>
+      <div class="field" id="shadeBox" hidden><span class="lbl qfl">Який відтінок ближчий<button type="button" class="qh" data-help="shade" aria-label="Підказка: Який відтінок ближчий" aria-expanded="false">?</button></span><div class="chips" id="shades"></div><input type="text" id="fWord" placeholder="Або своє слово" aria-label="Своє слово для емоції"></div>
       <div class="field">
-        <span class="lbl">Де це в тілі й куди рухається</span>
+        <span class="lbl qfl">Де це в тілі й куди рухається<button type="button" class="qh" data-help="body" aria-label="Підказка: Де це в тілі й куди рухається" aria-expanded="false">?</button></span>
         <p class="hint" style="margin:0">Емоція — це рух. Натисни на місце в тілі, де ти її відчуваєш, і обери, куди вона рухається. Можна відзначити кілька місць.</p>
         <div class="bodywrap">
           <svg class="fig" id="fig" viewBox="0 0 120 240" role="group" aria-label="Тіло. Натисни на місце, де відчуваєш емоцію"></svg>
@@ -265,12 +265,12 @@ select:focus-visible,input:focus-visible,button:focus-visible,textarea:focus-vis
           </div>
         </div>
       </div>
-      <div class="field"><span class="lbl">Що хочеться зробити тілом</span><div class="chips" id="motor"></div></div>
-      <div class="field"><label for="fSit">Що сталося</label><input type="text" id="fSit" placeholder="Наприклад, лист від відомства, розмова з колегою"></div>
-      <div class="field"><label for="fThought">Яка думка прийшла</label><input type="text" id="fThought" placeholder="Наприклад, «я знову не впораюся»"></div>
-      <div class="field"><span class="lbl">Що мені зараз потрібно</span><div class="chips" id="needs"></div></div>
-      <div class="field"><span class="lbl">Що я з цим роблю</span><div class="chips" id="acts"></div></div>
-      <div class="field"><span class="lbl">Допомогло?</span><div class="chips" id="okc"></div></div>
+      <div class="field"><span class="lbl qfl">Що хочеться зробити тілом<button type="button" class="qh" data-help="motor" aria-label="Підказка: Що хочеться зробити тілом" aria-expanded="false">?</button></span><div class="chips" id="motor"></div></div>
+      <div class="field"><label for="fSit" class="qfl">Що сталося<button type="button" class="qh" data-help="sit" aria-label="Підказка: Що сталося" aria-expanded="false">?</button></label><input type="text" id="fSit" placeholder="Наприклад, лист від відомства, розмова з колегою"></div>
+      <div class="field"><label for="fThought" class="qfl">Яка думка прийшла<button type="button" class="qh" data-help="thought" aria-label="Підказка: Яка думка прийшла" aria-expanded="false">?</button></label><input type="text" id="fThought" placeholder="Наприклад, «я знову не впораюся»"></div>
+      <div class="field"><span class="lbl qfl">Що мені зараз потрібно<button type="button" class="qh" data-help="need" aria-label="Підказка: Що мені зараз потрібно" aria-expanded="false">?</button></span><div class="chips" id="needs"></div></div>
+      <div class="field"><span class="lbl qfl">Що я з цим роблю<button type="button" class="qh" data-help="act" aria-label="Підказка: Що я з цим роблю" aria-expanded="false">?</button></span><div class="chips" id="acts"></div></div>
+      <div class="field"><span class="lbl qfl">Допомогло?<button type="button" class="qh" data-help="ok" aria-label="Підказка: Допомогло?" aria-expanded="false">?</button></span><div class="chips" id="okc"></div></div>
       <div class="formact">
         <button class="btn free" id="fSave" type="button">Зберегти запис</button>
         <button class="btn ghost" id="fDel" type="button" hidden>Видалити запис</button>
@@ -280,19 +280,19 @@ select:focus-visible,input:focus-visible,button:focus-visible,textarea:focus-vis
 
     <div style="display:flex;flex-direction:column;gap:16px;min-width:0">
       <section class="panel" aria-labelledby="d-h">
-        <div class="panel-head"><h2 id="d-h">Мій день в емоціях</h2><p id="exampleNote"><span class="example">Приклад</span> Так виглядає заповнений день.</p></div>
+        <div class="panel-head"><h2 id="d-h">Мій день в емоціях<button type="button" class="qh" data-help="day" aria-label="Підказка: Мій день в емоціях" aria-expanded="false">?</button></h2><p id="exampleNote"><span class="example">Приклад</span> Так виглядає заповнений день.</p></div>
         <div class="ribbon" id="ribbon" aria-label="Емоції дня за часом"></div>
         <div class="entries" id="entries"></div>
       </section>
       <section class="panel dayfoot" aria-labelledby="ev-h">
-        <div class="panel-head"><h2 id="ev-h">Увечері</h2><p>Дві хвилини перед сном.</p></div>
+        <div class="panel-head"><h2 id="ev-h">Увечері<button type="button" class="qh" data-help="evening" aria-label="Підказка: Увечері" aria-expanded="false">?</button></h2><p>Дві хвилини перед сном.</p></div>
         <div class="two">
           <div class="field"><label for="ev1">Що сьогодні повторювалося</label><textarea id="ev1"></textarea></div>
           <div class="field"><label for="ev2">Що мені допомогло повернутися до себе</label><textarea id="ev2"></textarea></div>
         </div>
       </section>
       <section class="panel" aria-labelledby="br-h">
-        <div class="panel-head"><h2 id="br-h">Хвилина дихання</h2><p>Дихання квадратом. Вдих, пауза, видих, пауза, по 4 рахунки.</p></div>
+        <div class="panel-head"><h2 id="br-h">Хвилина дихання<button type="button" class="qh" data-help="breath" aria-label="Підказка: Хвилина дихання" aria-expanded="false">?</button></h2><p>Дихання квадратом. Вдих, пауза, видих, пауза, по 4 рахунки.</p></div>
         <div class="breath">
           <div class="circle" id="circle" aria-live="polite">Почнемо?</div>
           <div style="display:flex;flex-direction:column;gap:8px"><button class="btn free sm" id="brStart" type="button">Почати хвилину</button><span class="hint" id="brLeft">60 секунд</span></div>
@@ -302,7 +302,7 @@ select:focus-visible,input:focus-visible,button:focus-visible,textarea:focus-vis
   </div>
 
   <section class="panel" aria-labelledby="wk-h">
-    <div class="panel-head"><h2 id="wk-h">Мої тижні</h2><p>Останні 14 днів до вибраного. Натисни на день, щоб відкрити його.</p></div>
+    <div class="panel-head"><h2 id="wk-h">Мої тижні<button type="button" class="qh" data-help="weeks" aria-label="Підказка: Мої тижні" aria-expanded="false">?</button></h2><p>Останні 14 днів до вибраного. Натисни на день, щоб відкрити його.</p></div>
     <div class="ssum" id="statSum"></div>
     <div class="stats" id="statRows"></div>
   </section>
@@ -330,7 +330,7 @@ select:focus-visible,input:focus-visible,button:focus-visible,textarea:focus-vis
     </div>
   </section>
 
-  <p class="credit"><span>Ірина Вознесенська · коуч</span><a href="https://www.instagram.com/iryna.voznesenskaya/" target="_blank" rel="noopener">Instagram @iryna.voznesenskaya</a><a href="https://voznesenskaya.ch/uk/" target="_blank" rel="noopener">voznesenskaya.ch</a><a href="https://svoiludi.ch/uk/" target="_blank" rel="noopener">Свої люди у Швейцарії · svoiludi.ch</a></p>
+  <p class="credit"><span>Ірина Вознесенська · коуч</span><a href="https://www.instagram.com/iryna.voznesenskaya/" target="_blank" rel="noopener">Instagram @iryna.voznesenskaya</a><a href="https://voznesenskaya.ch/uk/" target="_blank" rel="noopener">voznesenskaya.ch</a><a href="https://svoiludi.ch/uk/" target="_blank" rel="noopener">Свої люди у Швейцарії · svoiludi.ch</a><a href="https://svoiludi.ch/uk/privacy/">Політика конфіденційності</a></p>
 </div>
 
 <script src="/assets/lib/jspdf.umd.min.js"></script>
@@ -678,6 +678,26 @@ function renderAll(){
 }
 F = blank(); clearIdle(); renderAll();
 </script>
+<script>/* тексты подсказок «?» */
+window.HELP = {
+"int": "<p>Оціни, наскільки сильно ти це відчуваєш, від 1 до 10.<\/p><ul><li><b>1–3.<\/b> Ледь помітно, справи йдуть спокійно.<\/li><li><b>4–6.<\/b> Помітно, думки повертаються до цього.<\/li><li><b>7–8.<\/b> Сильно, важко думати про інше.<\/li><li><b>9–10.<\/b> Накриває, складно зупинитися.<\/li><\/ul><p>Що сильніша емоція, то більший кружечок у стрічці дня.<\/p>",
+"fam": "<p>Обери те, що найближче до твого почуття просто зараз. Якщо почуттів кілька, обери найсильніше, а для другого зроби окремий запис.<\/p><p>Не знаєш, як назвати, почни з тіла. Стискається й тягне назад — часто тривога. Тягне вниз — часто смуток. Штовхає вперед — часто злість.<\/p><p>Радість, спокій, інтерес і тепло рахуються в тижнях як приємні емоції.<\/p>",
+"shade": "<p>Відтінок робить назву точнішою. «Мені погано» і «туга за домом» — різні стани, і допомагає їм різне.<\/p><p>Натисни на слово, яке пасує найкраще. Якщо жодне не пасує, впиши своє в поле «Або своє слово».<\/p>",
+"body": "<p>Натисни на місце на фігурі, де ти відчуваєш емоцію, і обери, куди вона рухається. Наприклад, тривога часто стискає груди, а смуток тягне вниз. Можна позначити кілька місць.<\/p><p>Щоб зняти позначку, натисни на вибране місце ще раз. Для спини й усього тіла є окремі кнопки. Якщо в тілі нічого не відчуваєш, обери «не відчуваю», це теж відповідь.<\/p>",
+"motor": "<p>Який імпульс є в тілі, навіть якщо ти нічого не робиш. Наприклад, хочеться піти із зустрічі або обійняти дитину.<\/p><p>Помітити імпульс означає отримати вибір, іти за ним чи ні. Можна обрати кілька.<\/p>",
+"sit": "<p>Коротко й за фактами, ніби це зняла камера. «Прийшов лист із Gemeinde», «колега не відповіла на запитання».<\/p><p>Оцінки й думки запиши в наступному полі.<\/p>",
+"thought": "<p>Фраза, яка промайнула в голові, своїми словами. «Я знову не впораюся», «мене тут не розуміють».<\/p><p>За кілька тижнів стане видно, які думки повторюються і які почуття вони приносять.<\/p>",
+"need": "<p>Кожна емоція говорить про потребу. Тривога часто просить ясності чи безпеки, втома — відпочинку, самотність — близькості.<\/p><p>Обери, що тобі потрібно зараз, можна кілька. Це підказка, що ти можеш для себе зробити.<\/p>",
+"act": "<p>Що ти робиш, щоб подбати про себе просто зараз. Дихання, пауза, рух, розмова. «Поки нічого» — теж чесна відповідь.<\/p><p>У «Моїх тижнях» потім видно, що допомагає тобі найкраще.<\/p>",
+"ok": "<p>Чи стало легше після того, що ти зробила. Часто це видно не одразу.<\/p><p>Можна повернутися пізніше. Натисни на запис у блоці «Мій день в емоціях», обери «Так», «Трохи» або «Ні» й збережи запис.<\/p>",
+"day": "<p>Стрічка — твій день із 6 ранку до півночі. Кожен кружечок — один запис. Колір показує емоцію, розмір — силу.<\/p><p>Натисни на кружечок або на запис під стрічкою, щоб його відкрити, виправити чи видалити.<\/p>",
+"evening": "<p>Дві короткі фрази перед сном.<\/p><ul><li><b>Що сьогодні повторювалося.<\/b> Наприклад, «тривога через папери зранку й увечері».<\/li><li><b>Що допомогло повернутися до себе.<\/b> «Прогулянка», «розмова з мамою».<\/li><\/ul>",
+"breath": "<p>Натисни «Почати хвилину» й дихай разом із колом. Коло росте — вдих, залишається великим — пауза. Потім видих і знову пауза, кожна фаза на 4 рахунки.<\/p><p>Допомагає, коли емоція сильна й важко думати. Якщо паморочиться в голові, дихай м’якше.<\/p>",
+"weeks": "<p>Картки рахують останні 7 днів до вибраного. Скільки було записів, середня сила, частка приємних емоцій, яке слово було найчастіше і що допомагає найкраще.<\/p><p>Нижче 14 днів, по рядку на день. Смужка показує емоції дня, поруч кількість записів, середня сила й частка приємних. Натисни на день, щоб його відкрити.<\/p>"
+};
+</script>
+<script src="/assets/help.uk.js"></script>
+<script src="/assets/backup.uk.js"></script>
 <script src="/assets/samesite.js"></script>
 <!--i18n--><style>#langbar.langbar{position:fixed;bottom:14px;right:14px;z-index:60;display:flex;gap:2px;background:rgba(255,255,255,.92);border:1px solid rgba(0,0,0,.08);border-radius:999px;padding:3px;font:600 12px Manrope,system-ui,sans-serif;box-shadow:0 2px 8px rgba(0,0,0,.08)}#langbar.langbar a{color:#5d554d;padding:5px 9px;border-radius:999px;text-decoration:none;font:inherit;display:inline-block}#langbar.langbar a[aria-current="true"]{background:#2f2924;color:#fff}@media print{.langbar{display:none!important}}</style><div class="langbar" id="langbar" role="navigation" aria-label="Мова / Язык"><a href="/instrumenty/moi-emocii/" hreflang="ru" data-lang="ru">RU</a><a href="/uk/instrumenty/moi-emocii/" hreflang="uk" data-lang="uk" aria-current="true">UA</a></div><script>(function(){var b=document.getElementById('langbar');if(!b)return;b.addEventListener('click',function(e){var a=e.target.closest('a[data-lang]');if(a){try{localStorage.setItem('svoiludiLang',a.dataset.lang)}catch(x){}a.href=a.getAttribute('href').split('#')[0]+location.hash;}});})();</script><!--i18n--></body>
 </html>

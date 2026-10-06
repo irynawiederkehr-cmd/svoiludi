@@ -249,12 +249,12 @@ select:focus-visible,input:focus-visible,button:focus-visible,textarea:focus-vis
       <div class="panel-head"><h2 id="f-h">Что я сейчас чувствую</h2><p id="formMode">Новая запись</p></div>
       <div class="two">
         <div class="field"><label for="fTime">Время</label><input type="time" id="fTime"></div>
-        <div class="field"><span class="lbl">Сила</span><div class="int"><input type="range" id="fInt" min="1" max="10" value="5" aria-label="Сила эмоции от 1 до 10"><b id="fIntV">5</b></div></div>
+        <div class="field"><span class="lbl qfl">Сила<button type="button" class="qh" data-help="int" aria-label="Подсказка: Сила" aria-expanded="false">?</button></span><div class="int"><input type="range" id="fInt" min="1" max="10" value="5" aria-label="Сила эмоции от 1 до 10"><b id="fIntV">5</b></div></div>
       </div>
-      <div class="field"><span class="lbl">Эмоция</span><div class="fams" id="fams"></div></div>
-      <div class="field" id="shadeBox" hidden><span class="lbl">Какой оттенок ближе</span><div class="chips" id="shades"></div><input type="text" id="fWord" placeholder="Или своё слово" aria-label="Своё слово для эмоции"></div>
+      <div class="field"><span class="lbl qfl">Эмоция<button type="button" class="qh" data-help="fam" aria-label="Подсказка: Эмоция" aria-expanded="false">?</button></span><div class="fams" id="fams"></div></div>
+      <div class="field" id="shadeBox" hidden><span class="lbl qfl">Какой оттенок ближе<button type="button" class="qh" data-help="shade" aria-label="Подсказка: Какой оттенок ближе" aria-expanded="false">?</button></span><div class="chips" id="shades"></div><input type="text" id="fWord" placeholder="Или своё слово" aria-label="Своё слово для эмоции"></div>
       <div class="field">
-        <span class="lbl">Где это в теле и куда движется</span>
+        <span class="lbl qfl">Где это в теле и куда движется<button type="button" class="qh" data-help="body" aria-label="Подсказка: Где это в теле и куда движется" aria-expanded="false">?</button></span>
         <p class="hint" style="margin:0">Эмоция — это движение. Нажми на место в теле, где ты её чувствуешь, и выбери, куда она движется. Можно отметить несколько мест.</p>
         <div class="bodywrap">
           <svg class="fig" id="fig" viewBox="0 0 120 240" role="group" aria-label="Тело. Нажми на место, где чувствуешь эмоцию"></svg>
@@ -265,12 +265,12 @@ select:focus-visible,input:focus-visible,button:focus-visible,textarea:focus-vis
           </div>
         </div>
       </div>
-      <div class="field"><span class="lbl">Что хочется сделать телом</span><div class="chips" id="motor"></div></div>
-      <div class="field"><label for="fSit">Что произошло</label><input type="text" id="fSit" placeholder="Например, письмо из ведомства, разговор с коллегой"></div>
-      <div class="field"><label for="fThought">Какая мысль пришла</label><input type="text" id="fThought" placeholder="Например, «я опять не справлюсь»"></div>
-      <div class="field"><span class="lbl">Что мне сейчас нужно</span><div class="chips" id="needs"></div></div>
-      <div class="field"><span class="lbl">Что я делаю с этим</span><div class="chips" id="acts"></div></div>
-      <div class="field"><span class="lbl">Помогло?</span><div class="chips" id="okc"></div></div>
+      <div class="field"><span class="lbl qfl">Что хочется сделать телом<button type="button" class="qh" data-help="motor" aria-label="Подсказка: Что хочется сделать телом" aria-expanded="false">?</button></span><div class="chips" id="motor"></div></div>
+      <div class="field"><label for="fSit" class="qfl">Что произошло<button type="button" class="qh" data-help="sit" aria-label="Подсказка: Что произошло" aria-expanded="false">?</button></label><input type="text" id="fSit" placeholder="Например, письмо из ведомства, разговор с коллегой"></div>
+      <div class="field"><label for="fThought" class="qfl">Какая мысль пришла<button type="button" class="qh" data-help="thought" aria-label="Подсказка: Какая мысль пришла" aria-expanded="false">?</button></label><input type="text" id="fThought" placeholder="Например, «я опять не справлюсь»"></div>
+      <div class="field"><span class="lbl qfl">Что мне сейчас нужно<button type="button" class="qh" data-help="need" aria-label="Подсказка: Что мне сейчас нужно" aria-expanded="false">?</button></span><div class="chips" id="needs"></div></div>
+      <div class="field"><span class="lbl qfl">Что я делаю с этим<button type="button" class="qh" data-help="act" aria-label="Подсказка: Что я делаю с этим" aria-expanded="false">?</button></span><div class="chips" id="acts"></div></div>
+      <div class="field"><span class="lbl qfl">Помогло?<button type="button" class="qh" data-help="ok" aria-label="Подсказка: Помогло?" aria-expanded="false">?</button></span><div class="chips" id="okc"></div></div>
       <div class="formact">
         <button class="btn free" id="fSave" type="button">Сохранить запись</button>
         <button class="btn ghost" id="fDel" type="button" hidden>Удалить запись</button>
@@ -280,19 +280,19 @@ select:focus-visible,input:focus-visible,button:focus-visible,textarea:focus-vis
 
     <div style="display:flex;flex-direction:column;gap:16px;min-width:0">
       <section class="panel" aria-labelledby="d-h">
-        <div class="panel-head"><h2 id="d-h">Мой день в эмоциях</h2><p id="exampleNote"><span class="example">Пример</span> Так выглядит заполненный день.</p></div>
+        <div class="panel-head"><h2 id="d-h">Мой день в эмоциях<button type="button" class="qh" data-help="day" aria-label="Подсказка: Мой день в эмоциях" aria-expanded="false">?</button></h2><p id="exampleNote"><span class="example">Пример</span> Так выглядит заполненный день.</p></div>
         <div class="ribbon" id="ribbon" aria-label="Эмоции дня по времени"></div>
         <div class="entries" id="entries"></div>
       </section>
       <section class="panel dayfoot" aria-labelledby="ev-h">
-        <div class="panel-head"><h2 id="ev-h">Вечером</h2><p>Две минуты перед сном.</p></div>
+        <div class="panel-head"><h2 id="ev-h">Вечером<button type="button" class="qh" data-help="evening" aria-label="Подсказка: Вечером" aria-expanded="false">?</button></h2><p>Две минуты перед сном.</p></div>
         <div class="two">
           <div class="field"><label for="ev1">Что сегодня повторялось</label><textarea id="ev1"></textarea></div>
           <div class="field"><label for="ev2">Что мне помогло вернуться к себе</label><textarea id="ev2"></textarea></div>
         </div>
       </section>
       <section class="panel" aria-labelledby="br-h">
-        <div class="panel-head"><h2 id="br-h">Минута дыхания</h2><p>Дыхание квадратом. Вдох, пауза, выдох, пауза, по 4 счёта.</p></div>
+        <div class="panel-head"><h2 id="br-h">Минута дыхания<button type="button" class="qh" data-help="breath" aria-label="Подсказка: Минута дыхания" aria-expanded="false">?</button></h2><p>Дыхание квадратом. Вдох, пауза, выдох, пауза, по 4 счёта.</p></div>
         <div class="breath">
           <div class="circle" id="circle" aria-live="polite">Начнём?</div>
           <div style="display:flex;flex-direction:column;gap:8px"><button class="btn free sm" id="brStart" type="button">Начать минуту</button><span class="hint" id="brLeft">60 секунд</span></div>
@@ -302,7 +302,7 @@ select:focus-visible,input:focus-visible,button:focus-visible,textarea:focus-vis
   </div>
 
   <section class="panel" aria-labelledby="wk-h">
-    <div class="panel-head"><h2 id="wk-h">Мои недели</h2><p>Последние 14 дней до выбранного. Нажми на день, чтобы открыть его.</p></div>
+    <div class="panel-head"><h2 id="wk-h">Мои недели<button type="button" class="qh" data-help="weeks" aria-label="Подсказка: Мои недели" aria-expanded="false">?</button></h2><p>Последние 14 дней до выбранного. Нажми на день, чтобы открыть его.</p></div>
     <div class="ssum" id="statSum"></div>
     <div class="stats" id="statRows"></div>
   </section>
@@ -330,7 +330,7 @@ select:focus-visible,input:focus-visible,button:focus-visible,textarea:focus-vis
     </div>
   </section>
 
-  <p class="credit"><span>Ирина Вознесенская · коуч</span><a href="https://www.instagram.com/iryna.voznesenskaya/" target="_blank" rel="noopener">Instagram @iryna.voznesenskaya</a><a href="https://voznesenskaya.ch/" target="_blank" rel="noopener">voznesenskaya.ch</a><a href="https://svoiludi.ch/" target="_blank" rel="noopener">Свои люди в Швейцарии · svoiludi.ch</a></p>
+  <p class="credit"><span>Ирина Вознесенская · коуч</span><a href="https://www.instagram.com/iryna.voznesenskaya/" target="_blank" rel="noopener">Instagram @iryna.voznesenskaya</a><a href="https://voznesenskaya.ch/" target="_blank" rel="noopener">voznesenskaya.ch</a><a href="https://svoiludi.ch/" target="_blank" rel="noopener">Свои люди в Швейцарии · svoiludi.ch</a><a href="https://svoiludi.ch/privacy/">Политика конфиденциальности</a></p>
 </div>
 
 <script src="/assets/lib/jspdf.umd.min.js"></script>
@@ -678,6 +678,26 @@ function renderAll(){
 }
 F = blank(); clearIdle(); renderAll();
 </script>
+<script>/* тексты подсказок «?» */
+window.HELP = {
+"int": "<p>Оцени, насколько сильно ты это чувствуешь, от 1 до 10.<\/p><ul><li><b>1–3.<\/b> Едва заметно, дела идут спокойно.<\/li><li><b>4–6.<\/b> Заметно, мысли возвращаются к этому.<\/li><li><b>7–8.<\/b> Сильно, трудно думать о другом.<\/li><li><b>9–10.<\/b> Захлёстывает, сложно остановиться.<\/li><\/ul><p>Чем сильнее эмоция, тем больше кружок в ленте дня.<\/p>",
+"fam": "<p>Выбери то, что ближе всего к твоему чувству прямо сейчас. Если чувств несколько, выбери самое сильное, а для второго сделай отдельную запись.<\/p><p>Не знаешь, как назвать, начни с тела. Сжимается и тянет назад — часто тревога. Тянет вниз — часто грусть. Толкает вперёд — часто злость.<\/p><p>Радость, спокойствие, интерес и тепло считаются в неделях приятными эмоциями.<\/p>",
+"shade": "<p>Оттенок делает название точнее. «Мне плохо» и «тоска по дому» — разные состояния, и помогает им разное.<\/p><p>Нажми на слово, которое подходит лучше всего. Если ни одно не подходит, впиши своё в поле «Или своё слово».<\/p>",
+"body": "<p>Нажми на место на фигуре, где ты чувствуешь эмоцию, и выбери, куда она движется. Например, тревога часто сжимает грудь, а грусть тянет вниз. Можно отметить несколько мест.<\/p><p>Чтобы снять отметку, нажми на выбранное место ещё раз. Для спины и всего тела есть отдельные кнопки. Если в теле ничего не чувствуешь, выбери «не чувствую», это тоже ответ.<\/p>",
+"motor": "<p>Какой импульс есть в теле, даже если ты ничего не делаешь. Например, хочется уйти со встречи или обнять ребёнка.<\/p><p>Заметить импульс значит получить выбор, идти за ним или нет. Можно выбрать несколько.<\/p>",
+"sit": "<p>Коротко и по фактам, как будто это сняла камера. «Пришло письмо из Gemeinde», «коллега не ответила на вопрос».<\/p><p>Оценки и мысли запиши в следующем поле.<\/p>",
+"thought": "<p>Фраза, которая мелькнула в голове, своими словами. «Я опять не справлюсь», «меня здесь не понимают».<\/p><p>Через пару недель станет видно, какие мысли повторяются и какие чувства они приносят.<\/p>",
+"need": "<p>Каждая эмоция говорит о потребности. Тревога часто просит ясности или безопасности, усталость — отдыха, одиночество — близости.<\/p><p>Выбери, что тебе нужно сейчас, можно несколько. Это подсказка, что ты можешь для себя сделать.<\/p>",
+"act": "<p>Что ты делаешь, чтобы позаботиться о себе прямо сейчас. Дыхание, пауза, движение, разговор. «Пока ничего» — тоже честный ответ.<\/p><p>В «Моих неделях» потом видно, что помогает тебе лучше всего.<\/p>",
+"ok": "<p>Стало ли легче после того, что ты сделала. Часто это видно не сразу.<\/p><p>Можно вернуться позже. Нажми на запись в блоке «Мой день в эмоциях», выбери «Да», «Немного» или «Нет» и сохрани запись.<\/p>",
+"day": "<p>Лента — твой день с 6 утра до полуночи. Каждый кружок — одна запись. Цвет показывает эмоцию, размер — силу.<\/p><p>Нажми на кружок или на запись под лентой, чтобы её открыть, поправить или удалить.<\/p>",
+"evening": "<p>Две короткие фразы перед сном.<\/p><ul><li><b>Что сегодня повторялось.<\/b> Например, «тревога из-за бумаг утром и вечером».<\/li><li><b>Что помогло вернуться к себе.<\/b> «Прогулка», «разговор с мамой».<\/li><\/ul>",
+"breath": "<p>Нажми «Начать минуту» и дыши вместе с кругом. Круг растёт — вдох, остаётся большим — пауза. Потом выдох и снова пауза, каждая фаза на 4 счёта.<\/p><p>Помогает, когда эмоция сильная и трудно думать. Если кружится голова, дыши мягче.<\/p>",
+"weeks": "<p>Карточки считают последние 7 дней до выбранного. Сколько было записей, средняя сила, доля приятных эмоций, какое слово было чаще всего и что помогает лучше всего.<\/p><p>Ниже 14 дней, по строке на день. Полоска показывает эмоции дня, рядом число записей, средняя сила и доля приятных. Нажми на день, чтобы его открыть.<\/p>"
+};
+</script>
+<script src="/assets/help.js"></script>
+<script src="/assets/backup.js"></script>
 <script src="/assets/samesite.js"></script>
 <!--i18n--><style>#langbar.langbar{position:fixed;bottom:14px;right:14px;z-index:60;display:flex;gap:2px;background:rgba(255,255,255,.92);border:1px solid rgba(0,0,0,.08);border-radius:999px;padding:3px;font:600 12px Manrope,system-ui,sans-serif;box-shadow:0 2px 8px rgba(0,0,0,.08)}#langbar.langbar a{color:#5d554d;padding:5px 9px;border-radius:999px;text-decoration:none;font:inherit;display:inline-block}#langbar.langbar a[aria-current="true"]{background:#2f2924;color:#fff}@media print{.langbar{display:none!important}}</style><div class="langbar" id="langbar" role="navigation" aria-label="Мова / Язык"><a href="/instrumenty/moi-emocii/" hreflang="ru" data-lang="ru" aria-current="true">RU</a><a href="/uk/instrumenty/moi-emocii/" hreflang="uk" data-lang="uk">UA</a></div><script>(function(){var b=document.getElementById('langbar');if(!b)return;b.addEventListener('click',function(e){var a=e.target.closest('a[data-lang]');if(a){try{localStorage.setItem('svoiludiLang',a.dataset.lang)}catch(x){}a.href=a.getAttribute('href').split('#')[0]+location.hash;}});})();</script><!--i18n--></body>
 </html>

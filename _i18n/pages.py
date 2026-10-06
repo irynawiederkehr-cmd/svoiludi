@@ -13,7 +13,8 @@ KEY = 'svoiludiLang'
 PAGES = [('index.html', '/'), ('events/index.html', '/events/'), ('join/index.html', '/join/'), ('opros/index.html', '/opros/'),
          ('badge/index.html', '/badge/'), ('instrumenty/index.html', '/instrumenty/'), ('instrumenty/moj-den/index.html', '/instrumenty/moj-den/'),
          ('instrumenty/moj-god/index.html', '/instrumenty/moj-god/'), ('instrumenty/moi-emocii/index.html', '/instrumenty/moi-emocii/'),
-         ('instrumenty/moj-budget/index.html', '/instrumenty/moj-budget/')]
+         ('instrumenty/moj-budget/index.html', '/instrumenty/moj-budget/'),
+         ('instrumenty/uchet-vremeni/index.html', '/instrumenty/uchet-vremeni/'), ('privacy/index.html', '/privacy/')]
 OWN = sorted({p for _, p in PAGES}, key=len, reverse=True)
 CODE_WORDS = ['ВСТРЕЧА', 'ОТЗЫВ', 'ЗАЯВКА', 'РАССЫЛКА', 'ПОРЯДОК']
 
@@ -60,7 +61,7 @@ def fix_links(html, base):
     # 4) абсолютные ссылки https://svoiludi.ch/страница (в разметке, скриптах и готовых сообщениях)
     def absu(m):
         return SITE + (own_uk(m.group(1) or '/') or (m.group(1) or '/'))
-    html = re.sub(r'https://svoiludi\.ch(/(?:events/|join/|opros/|badge/|instrumenty/(?:[a-z-]+/)?)?)(?=["\'`#?<)\s]|$)', absu, html)
+    html = re.sub(r'https://svoiludi\.ch(/(?:events/|join/|opros/|badge/|privacy/|instrumenty/(?:[a-z-]+/)?)?)(?=["\'`#?<)\s]|$)', absu, html)
     # 4б) ссылки на сайт Ирины — на его украинскую версию
     html = re.sub(r'https://voznesenskaya\.ch/(#[\w-]*)?(?=["\'`<)\s])', lambda m: 'https://voznesenskaya.ch/uk/' + (m.group(1) or ''), html)
     html = re.sub(r'https://voznesenskaya\.ch/(privacy|impressum)/(?=["\'`<)\s])', lambda m: f'https://voznesenskaya.ch/{m.group(1)}/#lang=uk', html)

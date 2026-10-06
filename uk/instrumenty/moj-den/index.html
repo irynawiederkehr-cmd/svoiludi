@@ -228,7 +228,7 @@ select:focus-visible,input:focus-visible,button:focus-visible,textarea:focus-vis
       <button class="btn ghost sm" id="todayBtn" type="button">Сьогодні</button>
       <span class="dayname" id="dayName"></span>
     </div>
-    <label for="tpl">Шаблон <select id="tpl">
+    <label for="tpl"><span class="qfl">Шаблон<button type="button" class="qh" data-help="tpl" aria-label="Підказка: Шаблон" aria-expanded="false">?</button></span> <select id="tpl">
       <option value="">вибери шаблон</option>
       <option value="kids">Будній день, діти в школі</option>
       <option value="course">День із курсом німецької</option>
@@ -245,7 +245,7 @@ select:focus-visible,input:focus-visible,button:focus-visible,textarea:focus-vis
   </div>
   <div class="status" id="status" role="status"></div>
   <div class="panel" id="calPanel" hidden>
-    <h2 style="font-size:1.4rem">Перенести день у свій календар</h2>
+    <h2 style="font-size:1.4rem">Перенести день у свій календар<button type="button" class="qh" data-help="cal" aria-label="Підказка: Перенести день у свій календар" aria-expanded="false">?</button></h2>
     <p class="hint">Файл підходить для календаря на iPhone, в Outlook і в Google. Відкрий його, і календар запропонує додати всі блоки дня. Для Google Календаря можна додати кожен блок окремо за посиланням.</p>
     <div><button class="btn gold sm" id="calIcs" type="button">Завантажити файл для календаря</button></div>
     <ul class="items callist" id="calList"></ul>
@@ -262,13 +262,13 @@ select:focus-visible,input:focus-visible,button:focus-visible,textarea:focus-vis
 
   <div class="panel emptyhint" id="emptyHint" hidden>
     <p><b>Цей день поки порожній.</b> Вибери шаблон угорі або перенеси незакрите з попереднього дня.</p>
-    <div><button class="btn free sm" id="carry" type="button">Перенести з попереднього дня</button></div>
+    <div><button class="btn free sm" id="carry" type="button">Перенести з попереднього дня</button><button type="button" class="qh" data-help="carry" aria-label="Підказка: Перенести з попереднього дня" aria-expanded="false">?</button></div>
   </div>
 
   <div class="day">
     <section class="panel" aria-labelledby="tl-h">
       <div class="panel-head">
-        <h2 id="tl-h">Мій день по годинах</h2>
+        <h2 id="tl-h">Мій день по годинах<button type="button" class="qh" data-help="tl" aria-label="Підказка: Мій день по годинах" aria-expanded="false">?</button></h2>
         <p id="exampleNote"><span class="example">Приклад</span> Зміни під свій день.</p>
       </div>
       <div class="cats" id="cats"></div>
@@ -292,28 +292,28 @@ select:focus-visible,input:focus-visible,button:focus-visible,textarea:focus-vis
         <div class="tl" id="tl"></div>
         <div class="blocks" id="blocks"></div>
       </div>
-      <p class="hint">Натисни на порожнє місце в потрібну годину, щоб додати блок. Натисни на блок, щоб його виправити. Вузька смужка зліва — твоя енергія. Натискай на неї, щоб позначити, коли сил багато, а коли мало.</p>
+      <p class="hint">Натисни на порожнє місце в потрібну годину, щоб додати блок. Натисни на блок, щоб його виправити. Вузька смужка зліва — твоя енергія. Натискай на неї, щоб позначити, коли сил багато, а коли мало.<button type="button" class="qh" data-help="energy" aria-label="Підказка: енергія" aria-expanded="false">?</button></p>
     </section>
 
     <div style="display:flex;flex-direction:column;gap:16px;min-width:0">
       <section class="panel" aria-labelledby="t3-h">
-        <div class="panel-head"><h2 id="t3-h">Три головні справи</h2><p>Якщо зробиш тільки їх, день вдався.</p></div>
+        <div class="panel-head"><h2 id="t3-h">Три головні справи<button type="button" class="qh" data-help="top3" aria-label="Підказка: Три головні справи" aria-expanded="false">?</button></h2><p>Якщо зробиш тільки їх, день вдався.</p></div>
         <div class="top3" id="top3"></div>
       </section>
 
       <section class="panel" aria-labelledby="mx-h">
-        <div class="panel-head"><h2 id="mx-h">Важливо й терміново</h2><p>Розклади справи, щоб побачити, що можна відкласти або віддати.</p></div>
+        <div class="panel-head"><h2 id="mx-h">Важливо й терміново<button type="button" class="qh" data-help="mx" aria-label="Підказка: Важливо й терміново" aria-expanded="false">?</button></h2><p>Розклади справи, щоб побачити, що можна відкласти або віддати.</p></div>
         <div class="mx" id="mx"></div>
       </section>
 
       <section class="panel" aria-labelledby="st-h">
-        <div class="panel-head"><h2 id="st-h">Стоп-лист</h2><p>Що я сьогодні не роблю, відкладаю або віддаю.</p></div>
+        <div class="panel-head"><h2 id="st-h">Стоп-лист<button type="button" class="qh" data-help="stop" aria-label="Підказка: Стоп-лист" aria-expanded="false">?</button></h2><p>Що я сьогодні не роблю, відкладаю або віддаю.</p></div>
         <ul class="items" id="stopList"></ul>
         <div class="add"><input type="text" id="stopIn" placeholder="Наприклад, не перевіряю пошту кожні пів години" aria-label="Новий пункт стоп-листа"><button class="btn ghost sm" id="stopAdd" type="button">Додати</button></div>
       </section>
 
       <section class="panel" aria-labelledby="po-h">
-        <div class="panel-head"><h2 id="po-h">Фокус 25 хвилин</h2><p>25 хвилин одна справа, потім 5 хвилин відпочинку.</p></div>
+        <div class="panel-head"><h2 id="po-h">Фокус 25 хвилин<button type="button" class="qh" data-help="pomo" aria-label="Підказка: Фокус 25 хвилин" aria-expanded="false">?</button></h2><p>25 хвилин одна справа, потім 5 хвилин відпочинку.</p></div>
         <div class="pomo">
           <div><div class="mode" id="poMode">Фокус</div><div class="clock" id="poClock" aria-live="polite">25:00</div></div>
           <button class="btn free sm" id="poStart" type="button">Старт</button>
@@ -323,7 +323,7 @@ select:focus-visible,input:focus-visible,button:focus-visible,textarea:focus-vis
       </section>
 
       <section class="panel ref" aria-labelledby="ev-h">
-        <div class="panel-head"><h2 id="ev-h">Вечірній підсумок</h2><p>Десять хвилин перед сном.</p></div>
+        <div class="panel-head"><h2 id="ev-h">Вечірній підсумок<button type="button" class="qh" data-help="ev" aria-label="Підказка: Вечірній підсумок" aria-expanded="false">?</button></h2><p>Десять хвилин перед сном.</p></div>
         <div><label for="ev1">Що в мене сьогодні вийшло</label><textarea id="ev1"></textarea></div>
         <div><label for="ev2">За що я кажу собі дякую</label><textarea id="ev2"></textarea></div>
         <div><label for="ev3">Що переношу на завтра</label><textarea id="ev3"></textarea></div>
@@ -332,7 +332,7 @@ select:focus-visible,input:focus-visible,button:focus-visible,textarea:focus-vis
   </div>
 
   <section class="panel" id="weeks" aria-labelledby="wk-h">
-    <div class="panel-head"><h2 id="wk-h">Мої тижні</h2><p>Останні 14 днів до вибраного. Натисни на день, щоб відкрити його.</p></div>
+    <div class="panel-head"><h2 id="wk-h">Мої тижні<button type="button" class="qh" data-help="weeks" aria-label="Підказка: Мої тижні" aria-expanded="false">?</button></h2><p>Останні 14 днів до вибраного. Натисни на день, щоб відкрити його.</p></div>
     <div class="ssum" id="statSum"></div>
     <div class="stats" id="statRows"></div>
   </section>
@@ -355,7 +355,7 @@ select:focus-visible,input:focus-visible,button:focus-visible,textarea:focus-vis
     </div>
   </section>
 
-  <p class="credit"><span>Ірина Вознесенська · коуч</span><a href="https://www.instagram.com/iryna.voznesenskaya/" target="_blank" rel="noopener">Instagram @iryna.voznesenskaya</a><a href="https://voznesenskaya.ch/uk/" target="_blank" rel="noopener">voznesenskaya.ch</a><a href="https://svoiludi.ch/uk/" target="_blank" rel="noopener">Свої люди у Швейцарії · svoiludi.ch</a></p>
+  <p class="credit"><span>Ірина Вознесенська · коуч</span><a href="https://www.instagram.com/iryna.voznesenskaya/" target="_blank" rel="noopener">Instagram @iryna.voznesenskaya</a><a href="https://voznesenskaya.ch/uk/" target="_blank" rel="noopener">voznesenskaya.ch</a><a href="https://svoiludi.ch/uk/" target="_blank" rel="noopener">Свої люди у Швейцарії · svoiludi.ch</a><a href="https://svoiludi.ch/uk/privacy/">Політика конфіденційності</a></p>
 </div>
 
 <script src="/assets/lib/jspdf.umd.min.js"></script>
@@ -815,6 +815,23 @@ function renderAll(){
 }
 renderAll();
 </script>
+<script>/* тексты подсказок «?» */
+window.HELP = {
+"tpl": "<p>Шаблон заповнює блоки дня й шкалу енергії. Блоки цього дня заміняться. Три головні справи, стоп-лист і вечірній підсумок не змінюються.<\/p><ul><li><b>Будній день, діти в школі.<\/b> Ти вдома з дітьми, а ранок вільний, поки вони в школі.<\/li><li><b>День із курсом німецької.<\/b> Зранку курс, потім домашнє завдання й свої справи.<\/li><li><b>Робочий день.<\/b> Повний день на роботі.<\/li><li><b>Вихідний.<\/b> Спокійний день із родиною й для себе.<\/li><li><b>Порожній день.<\/b> Прибирає всі блоки, щоб розписати день з нуля.<\/li><\/ul><p>Потім виправ час і назви під себе.<\/p>",
+"carry": "<p>Переносить із попереднього дня блоки, шкалу енергії, головні справи, які не позначені зробленими, і стоп-лист.<\/p><p>Зручно, якщо дні схожі. Потім виправ те, що сьогодні інакше.<\/p>",
+"tl": "<p>Розпиши день блоками з 6 ранку до 11 вечора. Натисни на порожнє місце в потрібну годину, впиши, що ти робиш, і обери сферу, початок і кінець. Натисни на готовий блок, щоб його виправити або видалити.<\/p><p>Колір блоку — це сфера життя. Так видно, скільки дня йде на роботу, родину й на тебе саму. Кнопка «✎ Змінити сфери» дає змогу назвати сфери своїми словами й додати свої.<\/p>",
+"energy": "<p>Вузька смужка біля годин — твоя енергія. Натискай на неї в потрібну годину. Одне натискання — мало сил, два — середньо, три — багато, четверте очищає позначку.<\/p><p>Познач, коли тобі зазвичай легко, а коли важко. Найважчу справу став на години, де сил багато, а папери й дзвінки туди, де їх менше.<\/p>",
+"top3": "<p>Обери три справи, після яких ти скажеш, що день вдався. Не все, що треба, а найважливіше. Наприклад, надіслати заявку на курс, зателефонувати в громаду, година на свою справу.<\/p><p>Коли справу зроблено, натисни на її номер, з’явиться галочка. Незроблене можна взяти в наступний день кнопкою «Перенести з попереднього дня», вона з’являється, поки наступний день порожній.<\/p>",
+"mx": "<ul><li><b>Важливо й терміново.<\/b> Зроби сьогодні. Термін подання документів, хвора дитина.<\/li><li><b>Важливо, не терміново.<\/b> Постав блоком у день. Мова, здоров’я, своя справа. Тут твоє майбутнє.<\/li><li><b>Терміново, не важливо.<\/b> Віддай або зроби коротко. Багато дзвінків і повідомлень у чатах.<\/li><li><b>Не важливо, не терміново.<\/b> Прибери. Стрічка в телефоні, зайві покупки.<\/li><\/ul><p>Впиши справу в поле потрібного квадрата й натисни Enter або «Ввід» на клавіатурі телефона.<\/p>",
+"stop": "<p>Те, що ти сьогодні свідомо не робиш, відкладаєш або віддаєш іншому. Так звільняється час для головного.<\/p><p>Наприклад, «не перевіряю пошту частіше ніж двічі», «прасування відкладаю на суботу», «посуд миє чоловік».<\/p>",
+"pomo": "<p>Обери одну справу, прибери телефон і натисни «Старт». 25 хвилин займаєшся лише нею, потім таймер сам перемкнеться на 5 хвилин відпочинку.<\/p><p>Кожні повні 25 хвилин фокусу зараховуються як підхід і видні в «Моїх тижнях». Тримай сторінку відкритою. На заблокованому телефоні таймер може зупинитися.<\/p>",
+"ev": "<p>Три короткі відповіді перед сном, по одній-дві фрази.<\/p><ul><li><b>Що вийшло.<\/b> Навіть маленьке. «Зателефонувала в банк німецькою».<\/li><li><b>За що дякую собі.<\/b> «Що не зірвалася на дітей, хоч і втомилася».<\/li><li><b>Що на завтра.<\/b> Те, що не встигла, без докорів собі.<\/li><\/ul>",
+"weeks": "<p>Картки рахують останні 7 днів до вибраного. «На день для себе» — скільки годин у середньому стоїть у сфері «Для себе» в дні з планом.<\/p><p>Нижче 14 днів, по рядку на день. Смужка — час за сферами. «Головні» — скільки головних справ зроблено з уписаних. «Фокус» — підходи по 25 хвилин. «Підсумок» — чи є вечірній підсумок. Натисни на день, щоб його відкрити.<\/p>",
+"cal": "<p>Кнопка «Завантажити файл для календаря» зберігає файл .ics із блоками цього дня, у кожного блоку свій час.<\/p><ul><li><b>iPhone.<\/b> Відкрий файл, і календар запропонує додати події.<\/li><li><b>Outlook.<\/b> Відкрий файл в Outlook.<\/li><li><b>Google.<\/b> З телефона простіше натискати посилання «у Google Календар» біля кожного блоку. На комп’ютері файл додається в налаштуваннях Google Календаря, у розділі «Імпорт і експорт».<\/li><\/ul>"
+};
+</script>
+<script src="/assets/help.uk.js"></script>
+<script src="/assets/backup.uk.js"></script>
 <script src="/assets/samesite.js"></script>
 <!--i18n--><style>#langbar.langbar{position:fixed;bottom:14px;right:14px;z-index:60;display:flex;gap:2px;background:rgba(255,255,255,.92);border:1px solid rgba(0,0,0,.08);border-radius:999px;padding:3px;font:600 12px Manrope,system-ui,sans-serif;box-shadow:0 2px 8px rgba(0,0,0,.08)}#langbar.langbar a{color:#5d554d;padding:5px 9px;border-radius:999px;text-decoration:none;font:inherit;display:inline-block}#langbar.langbar a[aria-current="true"]{background:#2f2924;color:#fff}@media print{.langbar{display:none!important}}</style><div class="langbar" id="langbar" role="navigation" aria-label="Мова / Язык"><a href="/instrumenty/moj-den/" hreflang="ru" data-lang="ru">RU</a><a href="/uk/instrumenty/moj-den/" hreflang="uk" data-lang="uk" aria-current="true">UA</a></div><script>(function(){var b=document.getElementById('langbar');if(!b)return;b.addEventListener('click',function(e){var a=e.target.closest('a[data-lang]');if(a){try{localStorage.setItem('svoiludiLang',a.dataset.lang)}catch(x){}a.href=a.getAttribute('href').split('#')[0]+location.hash;}});})();</script><!--i18n--></body>
 </html>

@@ -1,0 +1,1303 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<link rel="icon" href="/fav/favicon.svg" type="image/svg+xml"><link rel="icon" href="/fav/icon-32.png" sizes="32x32"><link rel="apple-touch-icon" href="/fav/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/fonts.css">
+<meta name="description" content="Записывай, сколько времени уходит на работу, учёбу или своё дело, и сразу видь план, переработку, отпуск, праздники кантона и школьные каникулы за месяц. Бесплатно, с PDF, данные только в твоём браузере.">
+<link rel="canonical" href="https://svoiludi.ch/instrumenty/uchet-vremeni/">
+<meta property="og:type" content="website"><meta property="og:locale" content="ru_RU"><meta property="og:site_name" content="Свои люди в Швейцарии">
+<meta property="og:title" content="Учёт моего времени · работа, учёба или своё дело за месяц"><meta property="og:description" content="Записывай, сколько времени уходит на работу, учёбу или своё дело, и сразу видь итог месяца. Бесплатно, с PDF.">
+<meta property="og:url" content="https://svoiludi.ch/instrumenty/uchet-vremeni/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="robots" content="noindex, nofollow">
+<title>Учёт моего времени</title>
+
+<style>
+/* Учёт рабочего времени за один месяц. Стиль сайта «Свои люди»: бежевая бумага, Forum + Manrope, кнопки с переливом. */
+:root{
+  --bg:#F4EDE3; --paper:#FFFCF8; --ink:#2F2924; --muted:#7A6E62; --line:#E5D9C9; --soft:#EFE5D7;
+  --brown:#6E4F3C; --mustard:#B98324; --mustard-soft:#F3E3C2; --sage:#4F5E3E; --weekend:#F6EEE3; --sage-soft:#E3E8D6;
+  --plus:#2F7F3B; --minus:#B5322A; --hol:#D81B78;
+  --display:"Forum","Georgia",serif; --sans:"Manrope","Segoe UI",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#221D19; --paper:#2C2621; --ink:#F1E9DF; --muted:#B4A796; --line:#3E362F; --soft:#352E28;
+  --brown:#E1C2A6; --mustard:#E2B45C; --mustard-soft:#3D321F; --sage:#B4BF97; --weekend:#302923; --sage-soft:#2E3226;
+  --plus:#7CC48A; --minus:#EE8A7E; --hol:#F07AB4; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#221D19; --paper:#2C2621; --ink:#F1E9DF; --muted:#B4A796; --line:#3E362F; --soft:#352E28;
+  --brown:#E1C2A6; --mustard:#E2B45C; --mustard-soft:#3D321F; --sage:#B4BF97; --weekend:#302923; --sage-soft:#2E3226;
+  --plus:#7CC48A; --minus:#EE8A7E; --hol:#F07AB4; color-scheme:dark}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--ink);font:15px/1.55 var(--sans);margin:0}
+.wrap{max-width:1240px;margin:0 auto;padding-inline:16px;padding-block:28px 48px;display:flex;flex-direction:column;gap:24px}
+.eyebrow{font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+h1{font-family:var(--display);font-weight:400;font-size:clamp(2.4rem,6vw,3.6rem);line-height:1;margin:4px 0 10px;text-wrap:balance}
+h2{font-family:var(--display);font-weight:400;font-size:1.6rem;margin:0;line-height:1.15}
+h3{font-family:var(--display);font-weight:400;font-size:1.2rem;margin:0}
+.lead{max-width:64ch;color:var(--muted);margin:0}
+.bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+select,input[type=text],input[type=number],input[type=time]{font:inherit;color:var(--ink);background:var(--paper);border:1.5px solid var(--line);border-radius:12px;padding:8px 12px;min-width:0}
+input[type=time]{padding:6px 8px;font-variant-numeric:tabular-nums}
+select:focus-visible,input:focus-visible,button:focus-visible,a:focus-visible{outline:2px solid var(--mustard);outline-offset:2px}
+.btn{font:inherit;font-weight:700;font-size:.9rem;border:0;border-radius:999px;padding:10px 18px;cursor:pointer;color:#fff;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;
+  background:linear-gradient(110deg,#6E4F3C 38%,#C9A27E 50%,#6E4F3C 62%);background-size:260% 100%;animation:none;box-shadow:0 8px 18px -8px rgba(110,79,60,.6)}
+.btn.gold{background:linear-gradient(110deg,#B98324 38%,#F6DFA0 50%,#B98324 62%);background-size:260% 100%;box-shadow:0 8px 18px -8px rgba(185,131,36,.7)}
+.btn.free{background:linear-gradient(110deg,#4F5E3E 38%,#9DB07A 50%,#4F5E3E 62%);background-size:260% 100%;box-shadow:0 8px 18px -8px rgba(79,94,62,.6)}
+.btn.ghost{animation:none;background:transparent;color:var(--brown);border:1.5px solid var(--line);box-shadow:none}
+.btn.danger{animation:none;background:#A0523D;box-shadow:none}
+.btn[disabled]{animation:none;background:var(--soft);color:var(--muted);box-shadow:none;cursor:not-allowed}
+@keyframes shine{0%{background-position:130% 0}60%,100%{background-position:-30% 0}}
+@media (prefers-reduced-motion: reduce){.btn{animation:none}}
+.spacer{flex:1 1 auto}
+.confirm{display:flex;gap:8px;align-items:center;flex-wrap:wrap;background:var(--paper);border:1.5px solid var(--line);border-radius:18px;padding:6px 6px 6px 14px;font-size:.88rem;font-weight:600}
+.status{font-size:.86rem;color:var(--muted);min-height:1.3em}
+.jump{font-weight:700;color:var(--brown);text-underline-offset:4px}
+.privnote{margin-top:14px;max-width:80ch;background:var(--sage-soft);border-radius:16px;padding:12px 16px;font-size:.9rem}
+.hint{font-size:.84rem;color:var(--muted);margin:0}
+.disc{display:flex;gap:12px;align-items:flex-start;background:var(--mustard-soft);border-radius:16px;padding:12px 16px;font-size:.88rem}
+.disc b{flex:none;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mustard);padding-top:2px}
+
+.panel{background:var(--paper);border:1.5px solid var(--line);border-radius:22px;padding:18px 20px;display:flex;flex-direction:column;gap:14px}
+.panel-head{display:flex;flex-wrap:wrap;gap:6px 16px;align-items:baseline;justify-content:space-between}
+.panel-head p{margin:0;font-size:.88rem;color:var(--muted)}
+.fields{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,250px),1fr));gap:14px 20px}
+.field{display:flex;flex-direction:column;gap:6px;font-size:.9rem;font-weight:600;min-width:0}
+.field small{font-weight:500;color:var(--muted);font-size:.8rem}
+.field.wide{grid-column:1 / -1}
+.days{display:flex;gap:4px;flex-wrap:wrap}
+.day{font:inherit;font-size:.8rem;font-weight:700;width:40px;height:34px;border-radius:10px;border:1.5px solid var(--line);background:transparent;color:var(--muted);cursor:pointer}
+.day.on{color:#fff;background:var(--brown);border-color:transparent}
+.quick{display:flex;flex-wrap:wrap;gap:10px 14px;align-items:end}
+.quick .field{flex:0 0 auto}
+.quick input[type=number]{width:110px}
+
+/* переключатель месяцев */
+.monthnav{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.monthnav .cur{font-family:var(--display);font-size:1.7rem;min-width:9ch;text-align:center}
+.mbtn{font:inherit;font-weight:700;font-size:.86rem;border:1.5px solid var(--line);background:var(--paper);color:var(--brown);border-radius:999px;padding:8px 14px;cursor:pointer}
+
+/* итоги */
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,170px),1fr));gap:12px}
+.card{background:var(--paper);border:1.5px solid var(--line);border-radius:18px;padding:12px 16px;display:flex;flex-direction:column;gap:2px}
+.card b{font-family:var(--display);font-weight:400;font-size:1.9rem;line-height:1.1;font-variant-numeric:tabular-nums}
+.card span{font-size:.82rem;color:var(--muted);font-weight:600}
+.card.main{background:var(--mustard-soft);border-color:transparent}
+.pos{color:var(--plus)} .neg{color:var(--minus)}
+
+/* дни месяца */
+.month{background:var(--paper);border:1.5px solid var(--line);border-radius:22px;padding:6px 14px 10px}
+.dr{display:grid;grid-template-columns:62px 175px 470px 58px 58px 66px minmax(150px,1fr);gap:8px 10px;align-items:center;padding:7px 0;border-top:1px solid var(--line)}
+.dr.head{border-top:0;font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);padding:10px 0 6px}
+.dr.head .num{font-size:.72rem}
+.dr.we{background:var(--weekend);margin-inline:-14px;padding-inline:14px}
+.dr.today .dd b{background:var(--mustard);color:#fff;border-radius:8px;padding:0 6px}
+.dd{display:flex;flex-direction:column;line-height:1.15}
+.dd b{font-family:var(--display);font-weight:400;font-size:1.35rem;align-self:flex-start}
+.dd span{font-size:.76rem;font-weight:700;color:var(--muted)}
+.dd small{font-size:.68rem;color:var(--hol);font-weight:700;line-height:1.2;margin-top:2px}
+.dd small.schn,.mi small.schn,.mrow.hol .mi small.schn{color:var(--sage)}
+.dr.sch{box-shadow:inset 5px 0 0 var(--sage);margin-inline:-14px;padding-inline:14px}
+.mrow.sch{box-shadow:inset 5px 0 0 var(--sage)}
+.chk{display:flex;gap:8px;align-items:baseline;font-weight:600;cursor:pointer;flex-wrap:wrap}
+.chk small{flex-basis:100%;padding-left:24px}
+.hollist{font-size:.86rem}
+.hollist .hh{flex-basis:100%;color:var(--muted);font-weight:600}
+.hchip{font:inherit;font-size:.82rem;font-weight:600;color:var(--ink);cursor:pointer;display:inline-flex;gap:6px;align-items:baseline;padding:4px 10px;border-radius:999px;background:color-mix(in srgb,var(--hol) 10%,var(--paper));border:1px solid color-mix(in srgb,var(--hol) 35%,var(--line))}
+.hchip b{color:var(--hol);font-variant-numeric:tabular-nums}
+.hchip i{font-style:normal;font-weight:800;font-size:.72rem;width:16px;height:16px;border-radius:50%;display:inline-grid;place-items:center;background:var(--hol);color:#fff;align-self:center}
+.hchip.on{outline:2px solid var(--hol);outline-offset:1px}
+.hinfo{background:color-mix(in srgb,var(--hol) 8%,var(--paper));border:1.5px solid color-mix(in srgb,var(--hol) 30%,var(--line));border-radius:16px;padding:12px 14px;font-size:.9rem;max-width:80ch;margin-bottom:10px}
+.hinfo p{margin:4px 0 0}
+.dr.holr{background:color-mix(in srgb,var(--hol) 7%,var(--paper));margin-inline:-14px;padding-inline:14px}
+.mrow.holr{background:color-mix(in srgb,var(--hol) 8%,var(--paper))}
+.mrow.holr.open{background:var(--mustard-soft)}
+.minfo{margin:0 0 10px;font-size:.88rem}
+.hdet{background:var(--paper);border:1.5px solid var(--line);border-radius:16px;padding:8px 12px}
+.hdet summary{list-style:none;display:flex;justify-content:space-between;align-items:center;gap:10px;cursor:pointer;font-weight:600;color:var(--ink)}
+.hdet summary::-webkit-details-marker{display:none}
+.hdet summary .tog{width:28px;height:28px}
+.hdet[open] > summary .tog::before{top:58%;transform:translate(-50%,-50%) rotate(-135deg)}
+.hchips{display:flex;flex-wrap:wrap;gap:6px 8px;padding:10px 0 4px;align-items:center}
+.minfo .lab{font-weight:700}
+.schip{display:inline-flex;gap:6px;align-items:baseline;padding:4px 10px;border-radius:999px;background:var(--sage-soft);border:1px solid color-mix(in srgb,var(--sage) 35%,var(--line))}
+.schip b{color:var(--sage)}
+.minfo .none{color:var(--muted)}
+.kids{display:flex;flex-direction:column;gap:8px}
+.kid{display:flex;flex-wrap:wrap;gap:6px 8px;align-items:center;font-size:.86rem;color:var(--muted)}
+.kid input[type=date]{font:inherit;color:var(--ink);background:var(--paper);border:1.5px solid var(--line);border-radius:10px;padding:6px 8px}
+.dr select{padding:6px 8px;font-size:.86rem;border-radius:10px;width:100%}
+.blocks{display:flex;flex-direction:column;gap:6px;min-width:0}
+.blk{display:flex;gap:6px;align-items:center;flex-wrap:nowrap}
+.blk .dash{color:var(--muted)}
+.blk input[type=number]{width:62px;padding:6px 8px;border-radius:10px}
+.addb.inl{align-self:center;white-space:nowrap;text-decoration:none;border:1.5px dashed var(--line);border-radius:999px;padding:4px 10px}
+.muted{color:var(--muted);font-weight:600}
+.tt,.pz{display:flex;gap:6px;align-items:center}
+.blk input[type=time]{flex:0 0 auto;width:8.4em}
+@media (min-width:1181px){.pz .pl{display:none}}
+.blk .pl{font-size:.74rem;color:var(--muted);font-weight:600}
+.x{font:inherit;width:30px;height:30px;border-radius:50%;border:1.5px solid var(--line);background:transparent;color:var(--muted);cursor:pointer;font-size:.85rem;padding:0;flex:none}
+.addb{font:inherit;font-size:.78rem;font-weight:700;color:var(--brown);background:none;border:0;padding:2px 0;cursor:pointer;align-self:flex-start;text-decoration:underline;text-underline-offset:3px}
+.cred{font-size:.84rem;color:var(--muted)}
+.num{text-align:right;font-variant-numeric:tabular-nums;font-weight:700;font-size:.92rem}
+.num .lbl{display:none}
+.note{width:100%;padding:6px 10px!important;font-size:.86rem!important;border-radius:10px!important}
+.dr.t-hol .blocks{color:var(--muted)}
+.hourly .col-n,.hourly .col-d{visibility:hidden}
+.sum{display:grid;grid-template-columns:62px 175px 470px 58px 58px 66px minmax(150px,1fr);gap:8px 10px;border-top:2px solid var(--ink);padding:10px 0 4px;font-weight:800}
+.sum .lab{grid-column:1 / 4;font-family:var(--display);font-weight:400;font-size:1.2rem}
+
+/* условия: раскрывающийся блок */
+.setd summary{list-style:none;display:flex;justify-content:space-between;align-items:center;gap:12px;cursor:pointer}
+.setd summary::-webkit-details-marker{display:none}
+.setd .sh{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 14px;min-width:0}
+.ssum{font-size:.86rem;color:var(--muted);font-weight:600}
+.tog{flex:none;width:34px;height:34px;border-radius:50%;border:1.5px solid var(--line);position:relative}
+.tog::before{content:"";position:absolute;left:50%;top:45%;width:9px;height:9px;border-right:2px solid var(--brown);border-bottom:2px solid var(--brown);transform:translate(-50%,-50%) rotate(45deg)}
+.setd[open] > summary .tog::before{top:58%;transform:translate(-50%,-50%) rotate(-135deg)}
+.setd:not([open]){gap:0}
+
+/* телефон: компактный список дней, день раскрывается для заполнения */
+.ml{background:var(--paper);border:1.5px solid var(--line);border-radius:22px;overflow:hidden}
+.mrow{display:grid;grid-template-columns:44px minmax(0,1fr) auto 14px;gap:12px;align-items:center;width:100%;padding:11px 14px;border:0;border-top:1px solid var(--line);background:transparent;color:var(--ink);font:inherit;text-align:left;cursor:pointer;scroll-margin-top:10px}
+.mrow:first-child{border-top:0}
+.mrow.we{background:var(--weekend)}
+.mrow.hol .mi small{color:var(--hol)}
+.mrow.open{background:var(--mustard-soft)}
+.md{display:flex;flex-direction:column;align-items:center;line-height:1.05}
+.md b{font-family:var(--display);font-weight:400;font-size:1.5rem}
+.md span{font-size:.72rem;font-weight:700;color:var(--muted)}
+.mrow.today .md b{background:var(--mustard);color:#fff;border-radius:8px;padding:0 6px}
+.mi{display:flex;flex-direction:column;min-width:0;line-height:1.3}
+.mi small{font-size:.72rem;font-weight:700}
+.mt{font-weight:700;font-size:.95rem;font-variant-numeric:tabular-nums}
+.ms{font-size:.8rem;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.mrow.t-off .mt,.mrow.t-hol .mt{font-weight:600;color:var(--muted)}
+.mh{display:flex;flex-direction:column;align-items:flex-end;font-weight:800;font-variant-numeric:tabular-nums;line-height:1.2}
+.mh small{font-size:.76rem;font-weight:700}
+.chev{width:9px;height:9px;border-right:2px solid var(--muted);border-bottom:2px solid var(--muted);transform:rotate(-45deg)}
+.mrow.open .chev{transform:rotate(45deg)}
+.med{display:flex;flex-direction:column;gap:14px;padding:6px 14px 18px;background:var(--mustard-soft)}
+.tchips{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.tchips .tchip{padding:8px 8px;font-size:.82rem;line-height:1.2;border-radius:12px;text-align:center}
+.pchips{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+.pchips .tchip{padding:9px 2px;font-size:.84rem;border-radius:12px;text-align:center;white-space:nowrap}
+.tchip{font:inherit;font-size:.88rem;font-weight:700;padding:9px 13px;border-radius:999px;border:1.5px solid var(--line);background:var(--paper);color:var(--ink);cursor:pointer}
+.tchip.on{background:var(--brown);border-color:var(--brown);color:#fff}
+.mblk{display:flex;flex-direction:column;gap:10px;background:var(--paper);border-radius:16px;padding:12px}
+.mbh{display:flex;justify-content:space-between;align-items:center}
+.tpair{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.tpair label,.pown{display:flex;flex-direction:column;gap:4px;font-size:.82rem;font-weight:700;color:var(--muted)}
+.tpair label{min-width:0}
+.tin{position:relative;display:block;min-width:0}
+.tpair input[type=time]{-webkit-appearance:none;appearance:none;display:block;box-sizing:border-box;width:100%;min-width:0;-webkit-min-logical-width:0;max-width:100%;height:54px;line-height:54px;margin:0;font-size:1.15rem!important;font-weight:700;padding:0 10px;border-radius:14px;text-align:left;color:var(--ink);background:var(--paper)}
+.tpair input[type=time]::-webkit-date-and-time-value{text-align:left;margin:0}
+.tpair input[type=time]::-webkit-calendar-picker-indicator{opacity:.55}
+.ios .tin.empty::after{content:"--:--";position:absolute;left:11px;top:50%;transform:translateY(-50%);font-size:1.15rem;font-weight:700;color:var(--muted);opacity:.6;pointer-events:none}
+.plbl{font-size:.82rem;font-weight:700;color:var(--muted);margin-bottom:-4px}
+.pown{flex-direction:row;align-items:center;gap:6px}
+.pown{grid-column:1 / -1}
+.pown input{flex:1;min-width:0;width:auto;padding:8px 10px;border-radius:12px}
+.mrowbtns{display:flex;flex-wrap:wrap;gap:8px}
+.pzsum{font:inherit;font-size:.9rem;font-weight:600;color:var(--muted);background:none;border:0;padding:2px 0;text-align:left;cursor:pointer}
+.pzsum u{color:var(--brown);text-underline-offset:3px}
+.addper{font:inherit;font-weight:700;font-size:.92rem;color:var(--brown);background:var(--paper);border:1.5px dashed var(--brown);border-radius:16px;padding:12px;cursor:pointer}
+.mrowbtns .btn{flex:1 1 calc(50% - 4px);padding:12px 8px;white-space:nowrap;font-size:.86rem}
+.med .field input{font-size:16px}
+.clr{font:inherit;font-weight:700;font-size:.9rem;color:#A0523D;background:var(--paper);border:1.5px solid color-mix(in srgb,#A0523D 45%,var(--line));border-radius:999px;padding:11px 14px;cursor:pointer}
+.ddclr{font:inherit;font-size:.7rem;font-weight:700;color:var(--muted);background:none;border:0;padding:0;margin-top:2px;cursor:pointer;text-decoration:underline;text-underline-offset:2px;align-self:flex-start}
+.msum{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;padding:14px;border-top:2px solid var(--ink)}
+.msum .lab{grid-column:1 / -1;font-family:var(--display);font-size:1.2rem}
+.msum .num{text-align:left;align-items:flex-start}
+.msum .num .lbl{display:block}
+@media (max-width:900px){ input,select,textarea{font-size:16px!important} }
+
+/* учёты, резервная копия, части дня */
+.profs{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.profs .pl{font-size:.82rem;font-weight:700;color:var(--muted);margin-right:4px}
+.pchip{font:inherit;font-size:.9rem;font-weight:700;padding:9px 16px;border-radius:999px;border:1.5px solid var(--line);background:var(--paper);color:var(--ink);cursor:pointer}
+.pchip.on{background:var(--brown);border-color:var(--brown);color:#fff}
+.pnew{font:inherit;font-size:.86rem;font-weight:700;padding:8px 14px;border-radius:999px;border:1.5px dashed var(--brown);background:transparent;color:var(--brown);cursor:pointer}
+.backup{display:flex;flex-direction:column;gap:8px;background:var(--paper);border:1.5px solid var(--line);border-radius:18px;padding:12px 16px;font-size:.88rem}
+.backup.due{border-color:var(--mustard);background:var(--mustard-soft)}
+.backup .row{display:flex;flex-wrap:wrap;gap:8px}
+.backup .btn{padding:8px 14px;font-size:.84rem}
+.warn{background:#A0523D;color:#fff;border-radius:16px;padding:12px 16px;font-size:.92rem}
+.wdgrid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px}
+.wdi{display:flex;flex-direction:column;gap:4px;font-size:.78rem;font-weight:700;color:var(--muted);text-align:center}
+.wdi input{text-align:center;padding:8px 2px!important;border-radius:10px!important;width:100%}
+@media (max-width:640px){.wdgrid{grid-template-columns:repeat(4,minmax(0,1fr))}}
+.absrow{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center}
+.absrow select{width:auto!important}
+.ptin{width:80px;padding:6px 8px!important;border-radius:10px!important}
+.partchips{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.partchips .tchip{padding:8px 4px;font-size:.82rem;border-radius:12px;text-align:center}
+.ptrow{display:flex;gap:8px;align-items:center;font-size:.86rem;font-weight:700;color:var(--muted)}
+.ptrow input{width:110px}
+
+/* подсказки «?» */
+.fl{display:inline-flex;align-items:center;gap:6px;flex-wrap:wrap}
+.qh{font:inherit;font-size:.74rem;font-weight:800;width:22px;height:22px;border-radius:50%;border:1.5px solid var(--brown);background:var(--paper);color:var(--brown);cursor:pointer;padding:0;display:inline-grid;place-items:center;margin-left:6px;vertical-align:middle;line-height:1;flex:none;text-transform:none;letter-spacing:0}
+.qh[aria-expanded="true"]{background:var(--brown);color:var(--paper)}
+.fl .qh{margin-left:0}
+h2 .qh{vertical-align:.25em}
+.qpop{position:absolute;z-index:80;background:var(--paper);color:var(--ink);border:1.5px solid var(--brown);border-radius:14px;padding:12px 38px 12px 14px;font:500 .88rem/1.5 var(--sans);box-shadow:0 14px 34px -14px rgba(47,41,36,.5);text-transform:none;letter-spacing:0}
+.qpop p{margin:0 0 6px}.qpop p:last-of-type{margin-bottom:0}
+.qpop ul{margin:0 0 6px;padding-left:18px}.qpop li{margin:0 0 5px}
+.qclose{position:absolute;top:6px;right:6px;width:28px;height:28px;border:0;border-radius:50%;background:none;color:var(--muted);cursor:pointer;font-size:.9rem}
+.addrow{display:flex;gap:8px;align-items:center}.addrow .addper{flex:1}
+.plbl{display:flex;align-items:center}
+@media (max-width:640px){.qh{width:26px;height:26px;font-size:.8rem}}
+/* поделиться */
+.share{display:flex;flex-direction:column;gap:10px;background:var(--paper);border:1.5px solid var(--line);border-radius:22px;padding:16px 18px}
+.share textarea{font:inherit;color:var(--ink);background:var(--bg);border:1.5px solid var(--line);border-radius:14px;padding:10px 12px;min-height:96px;resize:vertical;width:100%}
+.share .row{display:flex;flex-wrap:wrap;gap:8px}
+
+/* описание */
+.guide{display:flex;flex-direction:column;gap:28px;padding-top:8px}
+.guide h2{font-size:clamp(1.7rem,3.6vw,2.3rem);text-wrap:balance}
+.guide .intro{max-width:64ch;font-size:1.02rem;margin:0}
+.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px}
+.steps li{background:var(--paper);border:1.5px solid var(--line);border-radius:20px;padding:16px 18px;display:flex;flex-direction:column;gap:6px}
+.steps .n{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;border:2px solid var(--mustard);color:var(--mustard);font-family:var(--display);font-size:1.4rem;margin-bottom:4px}
+.steps h3,.effects h3{font-size:1.25rem;line-height:1.2}
+.steps p,.effects p{margin:0;font-size:.93rem;color:var(--muted)}
+.effects{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,320px),1fr));gap:16px 28px}
+.effects li{position:relative;padding-left:32px;display:flex;flex-direction:column;gap:4px}
+.effects li::before{content:"";position:absolute;left:0;top:2px;width:22px;height:22px;background:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2020%2020%22%3E%3Ccircle%20cx%3D%2210.00%22%20cy%3D%225.00%22%20r%3D%223.6%22%20fill%3D%22%23E3E6D6%22%20stroke%3D%22%2366704F%22%20stroke-width%3D%221.3%22/%3E%3Ccircle%20cx%3D%2214.76%22%20cy%3D%228.45%22%20r%3D%223.6%22%20fill%3D%22%23E3E6D6%22%20stroke%3D%22%2366704F%22%20stroke-width%3D%221.3%22/%3E%3Ccircle%20cx%3D%2212.94%22%20cy%3D%2214.05%22%20r%3D%223.6%22%20fill%3D%22%23E3E6D6%22%20stroke%3D%22%2366704F%22%20stroke-width%3D%221.3%22/%3E%3Ccircle%20cx%3D%227.06%22%20cy%3D%2214.05%22%20r%3D%223.6%22%20fill%3D%22%23E3E6D6%22%20stroke%3D%22%2366704F%22%20stroke-width%3D%221.3%22/%3E%3Ccircle%20cx%3D%225.24%22%20cy%3D%228.45%22%20r%3D%223.6%22%20fill%3D%22%23E3E6D6%22%20stroke%3D%22%2366704F%22%20stroke-width%3D%221.3%22/%3E%3Ccircle%20cx%3D%2210%22%20cy%3D%2210%22%20r%3D%222.6%22%20fill%3D%22%23B98324%22/%3E%3C/svg%3E") center/contain no-repeat}
+.cta{display:flex;flex-wrap:wrap;gap:12px 20px;align-items:center;justify-content:space-between;background:var(--mustard-soft);border-radius:22px;padding:18px 22px}
+.cta p{margin:0;max-width:60ch;font-family:var(--display);font-size:1.2rem;line-height:1.35}
+.credit{font-size:.84rem;color:var(--muted);display:flex;flex-wrap:wrap;gap:4px 14px}
+.credit a{color:var(--brown)}
+.facts{margin:0;padding-left:0;list-style:none;display:flex;flex-direction:column;gap:8px;max-width:80ch}
+.facts li{position:relative;padding-left:22px;font-size:.93rem}
+.facts li::before{content:"";position:absolute;left:2px;top:.55em;width:9px;height:9px;border-radius:3px;background:var(--mustard);transform:rotate(45deg)}
+
+/* планшет и телефон: день превращается в карточку */
+@media (max-width:1180px){
+  .blk{flex-wrap:wrap}
+  .tt{flex:1 1 100%}.tt input[type=time]{flex:1 1 0;width:auto;min-width:0}
+  .dr.t-hol .blocks{display:none}
+  .dr.t-hol{grid-template-areas:"dd t t t"}
+  .dr.head{display:none}
+  .dr{grid-template-columns:auto minmax(0,1fr) minmax(0,1fr) minmax(0,1fr);grid-template-areas:"dd t t t" "bl bl bl bl" ". h n df" "note note note note";padding:12px 0}
+  .dr .dd{grid-area:dd;flex-direction:row;align-items:baseline;gap:6px;min-width:58px;flex-wrap:wrap}
+  .dr .dd small{flex-basis:100%}
+  .dr select{grid-area:t}
+  .dr .blocks{grid-area:bl}
+  .dr .col-h{grid-area:h}.dr .col-n{grid-area:n}.dr .col-d{grid-area:df}
+  .dr .note{grid-area:note}
+  .num{display:flex;flex-direction:column;align-items:flex-end;line-height:1.2}
+  .num .lbl{display:block;font-size:.66rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+  .dr.t-hol .col-h,.dr.t-hol .col-d{display:none}
+  .sum{grid-template-columns:minmax(0,1fr) minmax(0,1fr) minmax(0,1fr)}
+  .sum .lab{grid-column:1 / -1}
+}
+@media (max-width:640px){
+  .panel{padding:14px}
+  .bar{gap:8px}
+  .bar .spacer{display:none}
+  .bar>.btn{flex:1 1 calc(50% - 4px);padding:10px 8px;text-align:center}
+  .bar>#shareBtn{flex-basis:100%}
+  #clearBox{display:flex;gap:8px;width:100%;flex-wrap:wrap}
+  #clearBox>.btn{flex:1 1 calc(50% - 4px);padding:9px 6px;font-size:.8rem;white-space:nowrap}
+  .monthnav{width:100%;display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .monthnav .cur{grid-column:1 / -1;grid-row:1;font-size:1.7rem;min-width:0}
+  .mbtn{padding:9px 6px;font-size:.82rem}
+  .disc{flex-direction:column;gap:4px}
+  .days{flex-wrap:nowrap}.day{flex:1 1 0;width:auto;min-width:0}
+  .blk input[type=time]{flex:1 1 92px}
+  .card b{font-size:1.6rem}
+}
+</style>
+<!--i18n--><link rel="alternate" hreflang="ru" href="https://svoiludi.ch/instrumenty/uchet-vremeni/"><link rel="alternate" hreflang="uk" href="https://svoiludi.ch/uk/instrumenty/uchet-vremeni/"><script>(function(){try{if(localStorage.getItem('svoiludiLang')==='uk'&&!/[?&]lang=ru/.test(location.search))location.replace('/uk/instrumenty/uchet-vremeni/'+location.search+location.hash);}catch(e){}})();</script><!--i18n--></head>
+<body>
+
+<div class="wrap">
+  <div class="warn" id="inappWarn" hidden><b>Открой страницу в браузере.</b> Сейчас она открыта внутри приложения (Instagram, Telegram или другого). Записи сохранятся только здесь, и в Safari или Chrome их не будет. Нажми ⋯ или значок вверху и выбери «Открыть в браузере».</div>
+  <header>
+    <p style="margin:0 0 14px"><a class="jump" href="https://svoiludi.ch/instrumenty/">← Все полезные инструменты · Свои люди в Швейцарии</a></p>
+    <div class="eyebrow">Учёт времени · один месяц</div>
+    <h1>Учёт моего времени</h1>
+    <p class="lead">Записывай, сколько времени уходит на работу, учёбу, курс немецкого, своё дело или волонтёрство. Часы за месяц, план, переработка, отпуск и болезнь считаются сами. Праздники кантона и школьные каникулы видно прямо в месяце. В конце месяца скачай PDF и отдай работодателю или сохрани для себя.</p>
+    <p style="margin:10px 0 0"><a class="jump" href="#guide">Зачем это тебе и как с этим работать ↓</a></p>
+    <div class="privnote"><b>Твои данные только у тебя.</b> Всё, что ты вписываешь, хранится только в твоём браузере на этом устройстве. Никто кроме тебя это не видит, даже я. Регистрация не нужна. Ты можешь закрыть страницу и вернуться позже, записи останутся. На другом устройстве их не будет. На iPhone Safari сам стирает записи сайтов, на которые долго не заходили. Поэтому раз в месяц сохраняй резервную копию, а лучше добавь страницу на экран «Домой» (в Safari кнопка «Поделиться», потом «На экран Домой»). Кнопка «Удалить историю» полностью стирает все твои месяцы с этого устройства.</div>
+  </header>
+
+  <div class="bar">
+    <div class="monthnav">
+      <button class="mbtn" id="prevM" type="button">← Прошлый месяц</button>
+      <span class="cur" id="curM" aria-live="polite"></span>
+      <button class="mbtn" id="nextM" type="button">Следующий месяц →</button>
+    </div>
+    <span class="spacer"></span>
+    <button class="btn gold" id="dlPdf" type="button">Скачать PDF</button>
+    <button class="btn" id="dlXlsx" type="button" hidden style="display:none" data-vip="1" aria-expanded="false" aria-controls="vipPanel">Excel для VIP</button>
+    <button class="btn free" id="shareBtn" type="button" aria-expanded="false" aria-controls="sharePanel">Поделиться с друзьями</button>
+    <span id="clearBox"></span>
+  </div>
+  <div class="status" id="status" role="status"></div>
+  <div class="backup" id="backupBox">
+    <div class="bk-text"><b>Резервная копия</b><button type="button" class="qh" data-help="backup" aria-label="Подсказка: резервная копия" aria-expanded="false">?</button> <span id="bkInfo"></span></div>
+    <div class="row"><button class="btn ghost" id="bkSave" type="button">Сохранить резервную копию</button><button class="btn ghost" id="bkLoad" type="button">Загрузить из резервной копии</button><input type="file" id="bkFile" accept=".json,application/json" hidden></div>
+    <div id="bkConfirm"></div>
+  </div>
+  <div class="share" id="vipPanel" hidden>
+    <h2 style="font-size:1.4rem">Выгрузка в Excel для VIP-партнёров</h2>
+    <p class="hint" style="font-size:.92rem;color:var(--ink)">Таблица Excel со всеми днями месяца и суммами по формулам доступна VIP-партнёрам справочника «Свои люди в Швейцарии». PDF для подписи остаётся бесплатным для всех.</p>
+    <div class="row"><a class="btn gold" href="https://svoiludi.ch/join/">Узнать, как стать VIP-партнёром</a></div>
+  </div>
+  <div class="share" id="sharePanel" hidden>
+    <label for="shareText" style="font-weight:700">Сообщение для друзей</label>
+    <textarea id="shareText"></textarea>
+    <div class="row">
+      <button class="btn gold" id="copyMsg" type="button">Скопировать сообщение</button>
+      <a class="btn" id="tgShare" href="#" target="_blank" rel="noopener">Отправить в Telegram</a>
+      <a class="btn" id="waShare" href="#" target="_blank" rel="noopener">Отправить в WhatsApp</a>
+    </div>
+  </div>
+
+  <div class="profs" id="profs"></div>
+  <details class="panel setd" id="setBox">
+    <summary><span class="sh"><h2 id="set-h">Что я учитываю и мои условия</h2><span class="ssum" id="setSum"></span></span><span class="tog" aria-hidden="true"></span></summary>
+    <p class="hint">Впиши один раз, они сохранятся для всех месяцев.</p>
+    <div class="fields">
+      <label class="field wide"><span class="fl">Что я учитываю<button type="button" class="qh" data-help="what" aria-label="Подсказка: Что я учитываю" aria-expanded="false">?</button></span> <small>например работа, учёба, курс немецкого, своё дело, волонтёрство</small><input type="text" id="fWhat" placeholder="Работа"></label>
+      <label class="field"><span class="fl">Моё имя для PDF<button type="button" class="qh" data-help="name" aria-label="Подсказка: Моё имя для PDF" aria-expanded="false">?</button></span> <small>необязательно</small><input type="text" id="fName" autocomplete="name" placeholder="Имя и фамилия"></label>
+      <label class="field"><span class="fl">Для кого или где<button type="button" class="qh" data-help="emp" aria-label="Подсказка: Для кого или где" aria-expanded="false">?</button></span> <small>необязательно. Если вписано, в PDF появятся места для подписей</small><input type="text" id="fEmp" placeholder="Работодатель, клиент, школа или проект"></label>
+      <label class="field"><span class="fl">Есть ли план часов<button type="button" class="qh" data-help="mode" aria-label="Подсказка: Есть ли план часов" aria-expanded="false">?</button></span> <small>по договору или своя цель</small>
+        <select id="fMode">
+          <option value="fix">Есть план часов в день</option>
+          <option value="hour">Без плана, просто считаю часы</option>
+        </select>
+      </label>
+      <label class="field" id="pmBox"><span class="fl">Часы в разные дни<button type="button" class="qh" data-help="perday" aria-label="Подсказка: Часы в разные дни" aria-expanded="false">?</button></span> <small>одинаково каждый день или по-разному</small>
+        <select id="fPlanMode"><option value="same">Одинаково каждый день</option><option value="per">Разные часы по дням недели</option></select>
+      </label>
+      <label class="field" id="wtBox"><span class="fl">План часов в день<button type="button" class="qh" data-help="wt" aria-label="Подсказка: План часов в день" aria-expanded="false">?</button></span> <small>например 8:24 при 42 часах в неделю или 2:00 для своей цели</small><input type="text" id="fWt" inputmode="decimal" placeholder="8:24"></label>
+      <div class="field wide" id="daysBox"><span class="fl"><span id="daysLbl">В какие дни недели я этим занимаюсь</span><button type="button" class="qh" data-help="days" aria-label="Подсказка: рабочие дни" aria-expanded="false">?</button></span><div class="days" id="fDays" role="group" aria-labelledby="daysLbl"></div></div>
+      <div class="field wide" id="wdBox" hidden><span><span class="fl">План часов по дням недели<button type="button" class="qh" data-help="wd" aria-label="Подсказка: План часов по дням недели" aria-expanded="false">?</button></span> <small>впиши часы для каждого дня, пустой день — выходной</small></span><div class="wdgrid" id="fWd"></div><small id="wdSum"></small></div>
+      <div class="field wide"><label class="field" style="max-width:420px"><span class="fl">Кантон для праздников и каникул<button type="button" class="qh" data-help="canton" aria-label="Подсказка: Кантон для праздников и каникул" aria-expanded="false">?</button></span> <select id="fCanton"></select></label><label class="chk"><input type="checkbox" id="fShowHol"> Показывать праздники кантона<button type="button" class="qh" data-help="hol" aria-label="Подсказка: праздники" aria-expanded="false">?</button> <small>отмечены розовым, в эти дни план не считается. Нажми на праздник, чтобы узнать, что это за день</small></label><div class="hollist" id="holList"></div><div class="hinfo" id="holInfo" hidden></div></div>
+      <div class="field wide"><span class="fl">Школьные каникулы<button type="button" class="qh" data-help="sch" aria-label="Подсказка: школьные каникулы" aria-expanded="false">?</button></span>
+        <label class="chk"><input type="checkbox" id="fSchZh"> Показывать школьные каникулы кантона <small id="schNote"></small></label>
+        <div class="kids" id="kidsList"></div>
+        <div><button class="btn ghost" id="addKids" type="button">+ Добавить свои даты каникул</button></div>
+      </div>
+      <label class="field" id="rateBox"><span class="fl">Ставка в час, CHF<button type="button" class="qh" data-help="rate" aria-label="Подсказка: Ставка в час, CHF" aria-expanded="false">?</button></span> <small>необязательно, если за эти часы платят</small><input type="text" id="fRate" inputmode="decimal" placeholder="например 28.50"></label>
+      <label class="field" id="fzBox"><span class="fl">Надбавка за отпуск при почасовой оплате<button type="button" class="qh" data-help="fz" aria-label="Подсказка: Надбавка за отпуск при почасовой оплате" aria-expanded="false">?</button></span>
+        <select id="fFz">
+          <option value="0">Без надбавки</option>
+          <option value="8.33">8,33% · 4 недели отпуска в год</option>
+          <option value="10.64">10,64% · 5 недель отпуска в год</option>
+          <option value="13.04">13,04% · 6 недель отпуска в год</option>
+        </select>
+      </label>
+      <label class="field" id="carryBox"><span class="fl">Часы, перенесённые с прошлого месяца<button type="button" class="qh" data-help="carry" aria-label="Подсказка: Часы, перенесённые с прошлого месяца" aria-expanded="false">?</button></span> <small>плюс, если было больше плана, минус, если меньше, например +3:30</small><input type="text" id="fCarry" inputmode="text" placeholder="0:00"></label>
+      <label class="field" id="vacYBox"><span class="fl">Дней отпуска в год<button type="button" class="qh" data-help="vacY" aria-label="Подсказка: Дней отпуска в год" aria-expanded="false">?</button></span> <small>необязательно, например 20 или 25 по договору</small><input type="text" id="fVacY" inputmode="decimal" placeholder="например 25"></label>
+      <label class="field" id="vacPBox"><span class="fl">Дней отпуска перенесено с прошлого года<button type="button" class="qh" data-help="vacP" aria-label="Подсказка: Дней отпуска перенесено с прошлого года" aria-expanded="false">?</button></span> <small>необязательно</small><input type="text" id="fVacP" inputmode="decimal" placeholder="0"></label>
+      <div class="field wide" id="delProfBox"></div>
+    </div>
+  </details>
+
+  <section class="panel" aria-labelledby="q-h">
+    <div class="panel-head">
+      <h2 id="q-h">Заполнить обычный день одним нажатием<button type="button" class="qh" data-help="quick" aria-label="Подсказка: заполнить обычный день" aria-expanded="false">?</button></h2>
+      <p>Время встанет во все твои дни этого месяца, которые ещё пустые. Потом поправь дни, когда было иначе.</p>
+    </div>
+    <div class="quick">
+      <label class="field">Начало<input type="time" id="qS" value="08:00"></label>
+      <label class="field">Конец<input type="time" id="qE" value="17:00"></label>
+      <label class="field"><span class="fl">Перерыв в минутах<button type="button" class="qh" data-help="pause" aria-label="Подсказка: Перерыв в минутах" aria-expanded="false">?</button></span><input type="number" id="qP" min="0" step="5" value="60"></label>
+      <button class="btn ghost" id="qFill" type="button">Заполнить пустые дни</button>
+    </div>
+  </section>
+
+  <section aria-labelledby="sum-h" style="display:flex;flex-direction:column;gap:12px">
+    <h2 id="sum-h">Итог месяца<button type="button" class="qh" data-help="cards" aria-label="Подсказка: что означают цифры" aria-expanded="false">?</button></h2>
+    <div class="cards" id="cards"></div>
+  </section>
+
+  <section aria-label="Дни месяца">
+    <div class="minfo" id="monthInfo"></div>
+    <div class="hinfo" id="monthHolInfo" hidden></div>
+    <div class="month" id="month"></div>
+    <p class="hint" style="margin-top:10px">Если в один день было несколько заходов, например утром, днём и вечером, нажми «+ Ещё период» столько раз, сколько нужно. Часы всех периодов сложатся. Время после полуночи считается правильно, например с 22:00 до 06:00. Отпуск, болезнь и оплачиваемое отсутствие засчитываются как обычный день по плану. Если тебя не было только полдня или пару часов, выбери «Полдня» или «Часть дня» и впиши время, когда ты работала или работал. Розовым отмечены праздники кантона, зелёной полосой слева школьные каникулы.</p>
+  </section>
+
+  <div class="disc" role="note"><b>Важно</b><span>Это ориентир, а не точный расчёт. План часов, сверхурочные, надбавка за отпуск и сумма к оплате зависят от твоего договора, коллективного договора (GAV) и закона. Все цифры сверяй со своим договором и расчётным листом, уточняй у работодателя, в профсоюзе или у консультанта. Автор не несёт ответственности за достоверность данных. Все часы, ставки и проценты обязательно проверь и впиши сама или сам по своим документам.</span></div>
+
+  <section class="guide" id="guide" aria-labelledby="g-why">
+    <div>
+      <div class="eyebrow">Зачем это тебе</div>
+      <h2 id="g-why">Твоё время — это твои силы</h2>
+    </div>
+    <p class="intro">В новой стране время утекает незаметно. Работа занимает больше, чем договаривались, учёба растягивается, своё дело съедает вечера. Когда часы записаны каждый день, ты точно знаешь, сколько ушло на работу, учёбу или свой проект, что тебе должны и где пора остановиться. Это уже не ощущение «я ничего не успеваю», а цифры, с которыми можно спокойно решать.</p>
+
+    <div>
+      <div class="eyebrow">Как с этим работать</div>
+      <h2 id="g-how">Пять шагов к ясному месяцу</h2>
+    </div>
+    <ol class="steps" aria-labelledby="g-how">
+      <li><span class="n">1</span><h3>Реши, что ты учитываешь</h3><p>Работу, учёбу, курс немецкого, своё дело или волонтёрство. Впиши план часов в день, если он есть, свои дни недели и кантон. Праздники и школьные каникулы встанут в месяц сами.</p></li>
+      <li><span class="n">2</span><h3>Записывай каждый день</h3><p>Начало, конец и перерыв. Лучше сразу, пока помнишь. Обычный день можно заполнить одним нажатием и потом поправить.</p></li>
+      <li><span class="n">3</span><h3>Отмечай дни, когда тебя не было</h3><p>Отпуск, болезнь, визит к врачу, праздник или отгул за переработку, целым днём, полдня или на пару часов. Так видно, что план выполнен, и сколько дней отпуска у тебя осталось.</p></li>
+      <li><span class="n">4</span><h3>Сверь итог месяца</h3><p>Сколько часов набралось, больше или меньше плана и сколько переходит в следующий месяц. Остаток перенесётся сам, когда ты откроешь новый месяц.</p></li>
+      <li><span class="n">5</span><h3>Сохрани и сравни</h3><p>Скачай PDF для подписи или для себя. Сравни с расчётным листом или со своей целью. Если цифры не сходятся, у тебя есть записи по каждому дню.</p></li>
+    </ol>
+
+    <div>
+      <div class="eyebrow">Если ты учитываешь работу</div>
+      <h2 id="g-ch">Что стоит знать о рабочем времени в Швейцарии</h2>
+    </div>
+    <ul class="facts" aria-labelledby="g-ch">
+      <li>Работодатель обязан вести учёт рабочего времени и перерывов. Твоя собственная запись помогает сверить его расчёт со своим.</li>
+      <li>По закону отпуск составляет не меньше четырёх недель в год, а до 20 лет не меньше пяти недель.</li>
+      <li>При почасовой оплате отпуск часто платят надбавкой к каждому часу. При четырёх неделях это 8,33%, при пяти неделях 10,64%. Надбавка должна стоять в расчётном листе отдельной строкой.</li>
+      <li>Как оплачиваются сверхурочные, временем или деньгами и с какой надбавкой, зависит от твоего договора и коллективного договора (GAV). Проверь, что написано у тебя.</li>
+      <li>Храни свои записи и расчётные листы. Они пригодятся при спорах, при подаче налоговой декларации и при получении пособия.</li>
+    </ul>
+
+    <div>
+      <div class="eyebrow">Что это даёт в коучинге</div>
+      <h2 id="g-coach">Что меняется для тебя</h2>
+    </div>
+    <ul class="effects" aria-labelledby="g-coach">
+      <li><h3>Ясность вместо догадок</h3><p>Ты больше не держишь часы в голове. Цифры говорят за тебя, и мозг освобождается для главного.</p></li>
+      <li><h3>Твои границы видны</h3><p>Когда переработка записана, проще сказать «нет» лишней смене и попросить отгул. Ты видишь, где заканчивается дело и начинаешься ты.</p></li>
+      <li><h3>Спокойный разговор о деньгах</h3><p>С записями по каждому дню легче говорить с работодателем о часах, оплате и повышении. Ты опираешься на факты, а не на чувство неловкости.</p></li>
+      <li><h3>Уважение к своему труду</h3><p>Каждая записанная строка напоминает, сколько ты уже делаешь. Это хорошая опора, когда кажется, что ты делаешь мало.</p></li>
+      <li><h3>Баланс дела и жизни</h3><p>Месяц на одном листе показывает, сколько места остаётся для тебя, твоих близких и отдыха. Это хороший материал для нашей встречи.</p></li>
+    </ul>
+
+    <div class="cta">
+      <p>Хочешь разобраться, куда уходит твоё время и как жить без перегрузки? Знакомство длится 30 минут, онлайн и бесплатно.</p>
+      <a class="btn free" href="https://t.me/IrynaNeuroCoach" target="_blank" rel="noopener">Написать «ВСТРЕЧА» в Telegram</a>
+    </div>
+  </section>
+
+  <div class="disc" role="note"><b>Важно</b><span>Все данные на этой странице ориентировочные. Уточняй и перепроверяй их. Автор не несёт ответственности за достоверность данных. Все часы, ставки и проценты обязательно проверь и впиши сама или сам по своим документам.</span></div>
+  <p class="credit"><span>Ирина Вознесенская · коуч</span><a href="https://www.instagram.com/iryna.voznesenskaya/" target="_blank" rel="noopener">Instagram @iryna.voznesenskaya</a><a href="https://voznesenskaya.ch/" target="_blank" rel="noopener">voznesenskaya.ch</a><a href="https://svoiludi.ch/" target="_blank" rel="noopener">Свои люди в Швейцарии · svoiludi.ch</a><a href="https://svoiludi.ch/privacy/">Политика конфиденциальности</a></p>
+</div>
+
+<script src="/assets/lib/jspdf.umd.min.js"></script>
+<script src="/assets/lib/exceljs.min.js"></script>
+<script>
+const $ = id => document.getElementById(id);
+if (/iP(hone|ad|od)/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)) document.documentElement.classList.add('ios');
+const KEY = 'uchetVremeni.v1';
+const SHARE_URL = 'https://svoiludi.ch/instrumenty/uchet-vremeni/';
+const SHARE_MSG = 'Привет! Смотри, какой удобный учёт времени на месяц. Для работы, учёбы или своего дела. Записываешь начало, конец и перерыв, а план, переработка, отпуск, праздники кантона и школьные каникулы видны сами. Можно скачать PDF. Хочешь попробовать?\n' + SHARE_URL;
+const CREDIT_PARTS = [
+  {t:'Ирина Вознесенская · коуч', u:'https://voznesenskaya.ch/'},
+  {t:'Instagram @iryna.voznesenskaya', u:'https://www.instagram.com/iryna.voznesenskaya/'},
+  {t:'voznesenskaya.ch', u:'https://voznesenskaya.ch/'},
+  {t:'svoiludi.ch', u:'https://svoiludi.ch/'},
+];
+const MONTHS = ['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'];
+const MONTHS_GEN = ['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря'];
+const WD = ['Вс','Пн','Вт','Ср','Чт','Пт','Сб'];
+const WD_ORDER = [1,2,3,4,5,6,0];
+const TYPES = {
+  work:  {n:'Работа'},
+  vac:   {n:'Отпуск', cred:true},
+  sick:  {n:'Болезнь или несчастный случай', cred:true},
+  paid:  {n:'Оплачиваемое отсутствие', cred:true},
+  comp:  {n:'Отгул за переработку'},
+  unpaid:{n:'Неоплачиваемый отпуск'},
+  hol:   {n:'Праздник'},
+  off:   {n:'Выходной'},
+};
+const TIMED = t => t === 'work' || t === 'off';
+const what = () => (S.set.what || '').trim();
+const tname = k => k === 'work' ? (what() || 'Работа') : TYPES[k].n;
+const tshort = k => k === 'work' ? (what() || 'Работа') : SHORT[k];
+const SHORT = {work:'Работа', vac:'Отпуск', sick:'Болезнь', paid:'Опл. отсутствие', comp:'Отгул', unpaid:'Неопл. отпуск', hol:'Праздник', off:'Выходной'};
+
+/* ---------- праздники кантонов (как в «Мой год») ---------- */
+const iso = (y, m, d) => y + '-' + String(m + 1).padStart(2, '0') + '-' + String(d).padStart(2, '0');
+function easter(y){ const a=y%19,b=Math.floor(y/100),c=y%100,d=Math.floor(b/4),e=b%4,f=Math.floor((b+8)/25),g=Math.floor((b-f+1)/3),h=(19*a+b-d-g+15)%30,i=Math.floor(c/4),k=c%4,l=(32+2*e+2*i-h-k)%7,m=Math.floor((a+11*h+22*l)/451),mo=Math.floor((h+l-7*m+114)/31),da=((h+l-7*m+114)%31)+1; return new Date(y,mo-1,da); }
+const CANTONS = {ZH:'Цюрих',BE:'Берн',LU:'Люцерн',UR:'Ури',SZ:'Швиц',OW:'Обвальден',NW:'Нидвальден',GL:'Гларус',ZG:'Цуг',FR:'Фрибур',SO:'Золотурн',BS:'Базель-Штадт',BL:'Базель-Ланд',SH:'Шаффхаузен',AR:'Аппенцелль-Ауссерроден',AI:'Аппенцелль-Иннерроден',SG:'Санкт-Галлен',GR:'Граубюнден',AG:'Аргау',TG:'Тургау',TI:'Тичино',VD:'Во',VS:'Вале',NE:'Невшатель',GE:'Женева',JU:'Юра'};
+/* праздники по кантонам — Федеральное ведомство юстиции (BJ), «Kantonale Feiertage»; * = только в части общин */
+const CH = {
+  ZH:'NY BE KF OM AR AU PM WN ST', BE:'NY BE KF OM AU PM WN ST', LU:'NY BE KF OM AU PM FL MH AH ME WN ST',
+  UR:'NY DK JO KF OM AU PM FL MH AH ME WN ST', SZ:'NY DK JO KF OM AU PM FL MH AH ME WN ST', OW:'NY KF AU FL MH BK AH ME WN',
+  NW:'NY JO KF AU FL MH AH ME WN', GL:'NY KF OM NF AU PM AH WN ST', ZG:'NY KF AU FL MH AH ME WN', FR:'NY KF AU FL* MH* AH* ME* WN',
+  SO:'NY JO* KF AR AU FL* MH* AH* WN', BS:'NY KF OM AR AU PM WN ST', BL:'NY KF OM AR AU PM WN ST', SH:'NY KF OM AR AU PM WN ST',
+  AR:'NY KF OM AU PM WN ST', AI:'NY KF OM AU PM FL MH MT* AH ME WN ST', SG:'NY KF OM AU PM AH WN ST', GR:'NY OM AU PM WN ST',
+  AG:'NY BE KF OM AR AU PM FL MH AH ME WN ST', TG:'NY BE KF OM AR AU PM WN ST', TI:'NY DK JO OM AR AU PM FL PP MH AH ME WN ST',
+  VD:'NY BE KF OM AU PM LJ WN', VS:'NY JO AU FL MH AH ME WN', NE:'NY IR KF AU FL* WN AR', GE:'NY KF OM AU PM JG WN RR',
+  JU:'NY BE KF OM AR AU PM FL PJ MH AH WN'
+};
+const HNAME = {NY:'Новый год',BE:'Берхтольдов день',DK:'Богоявление',JO:'День святого Иосифа',KF:'Страстная пятница',OM:'Пасхальный понедельник',AR:'День труда',AU:'Вознесение',PM:'Духов понедельник',FL:'Праздник Тела Христова',PP:'Петра и Павла',MH:'Успение Богородицы',BK:'День святого Николая из Флюэ',MT:'День святого Маврикия',AH:'День всех святых',ME:'Непорочное зачатие',WN:'Рождество',ST:'День святого Стефана',NF:'Нефельсская битва',LJ:'Понедельник после Дня покаяния',JG:'Женевский пост',RR:'Восстановление республики',IR:'День республики',PJ:'Годовщина плебисцита Юры',BF:'День Швейцарии'};
+/* короткие подсказки к праздникам: что за день, аналог у нас, как празднуют в Швейцарии */
+const HINFO = {
+  NY:'Первый день года, как и у нас. Но главный зимний праздник здесь Рождество, а Новый год встречают с друзьями. В полночь звонят колокола и запускают фейерверки, в Цюрихе большой салют над озером.',
+  BE:'Второй выходной после Нового года. У нас такого отдельного праздника нет. Это спокойный день для семьи и прогулок, кое-где проходят местные народные праздники.',
+  DK:'Праздник трёх королей, 6 января. Близок к нашему Крещению, которое православные отмечают 19 января. В Швейцарии в этот день едят пирог трёх королей: в один кусочек запечена фигурка, и кто её найдёт, становится королём дня.',
+  JO:'День святого Иосифа, покровителя семьи и ремесленников. У нас аналога-выходного нет. В католических кантонах это выходной, люди идут в церковь и проводят день с семьёй.',
+  KF:'Страстная пятница, день памяти распятия Христа перед Пасхой. У православных она тоже есть, но наша Пасха часто бывает в другие даты. В Швейцарии это тихий день: многие магазины закрыты, шумные мероприятия не проводят.',
+  OM:'Второй день Пасхи, у нас его называют Светлым понедельником. В Швейцарии дети ищут спрятанные шоколадные яйца, семьи гуляют. В Берне на площади бьются крашеными яйцами, как у нас в «битки».',
+  AR:'День труда, как наш Первомай. В Цюрихе и других городах проходят демонстрации профсоюзов. Выходной не во всех кантонах.',
+  AU:'Вознесение, 40-й день после Пасхи, всегда четверг. У православных тоже есть Вознесение, по своему календарю. Многие берут пятницу и уезжают на длинные выходные.',
+  PM:'Понедельник после Троицы (Пфингстен). У православных это Духов день, тоже на следующий день после Троицы. В Швейцарии это длинные выходные и время поездок.',
+  FL:'Праздник Тела Христова, католический праздник через 60 дней после Пасхи. У нас аналога нет. В католических кантонах проходят процессии с цветами, флагами и музыкой.',
+  PP:'День апостолов Петра и Павла, 29 июня. У православных он тоже есть, 12 июля. В кантоне Тичино это выходной.',
+  MH:'Успение Богородицы, 15 августа. У православных Успение отмечают 28 августа. В католических кантонах выходной, проходят службы и местные праздники.',
+  BK:'День брата Клауса, Николая из Флюэ, покровителя Швейцарии. У нас аналога нет. В Обвальдене в этот день идут паломничеством к его келье во Флюэли-Ранфте.',
+  MT:'День святого Маврикия, покровителя солдат. У нас аналога-выходного нет. Отмечают в части общин Аппенцелля-Иннерродена.',
+  AH:'День всех святых, 1 ноября. Близок к нашим поминальным дням. В католических кантонах ходят на кладбища и ставят свечи на могилы близких.',
+  ME:'Непорочное зачатие Девы Марии, 8 декабря, католический праздник. У православных похожий праздник 22 декабря, но он не выходной. В католических кантонах это выходной день.',
+  WN:'У православных Рождество празднуют 7 января. Здесь это главный семейный праздник: ёлку наряжают заранее, подарки дарят вечером 24 декабря после праздничного ужина, по всей стране работают рождественские рынки.',
+  ST:'Второй день Рождества. У нас аналога нет. Это день для семьи и гостей, многие едут в горы кататься.',
+  NF:'Нефельсская битва, первый четверг апреля. Кантон Гларус вспоминает победу 1388 года над Габсбургами. Люди идут процессией к месту битвы.',
+  LJ:'Понедельник после Дня благодарения, покаяния и молитвы, который вся Швейцария отмечает в третье воскресенье сентября. У нас аналога нет. В эти дни традиционно пекут сливовый пирог.',
+  JG:'Женевский пост, четверг после первого воскресенья сентября. Женева вспоминает трудные времена в своей истории. Традиционно едят сливовый пирог.',
+  RR:'Восстановление Женевской республики, 31 декабря. Память о том, как в 1813 году Женева вернула себе независимость.',
+  IR:'День республики Невшатель, 1 марта. Годовщина 1848 года, когда Невшатель перестал быть прусским княжеством и стал республикой.',
+  PJ:'Годовщина плебисцита 23 июня 1974 года, после которого появился кантон Юра. Это праздник независимости кантона.',
+  BF:'День Швейцарии, 1 августа, национальный праздник, как наш день независимости. Вечером зажигают костры и фейерверки, дети ходят с бумажными фонариками, на фермах устраивают праздничные завтраки.'
+};
+function holidays(y, canton){
+  const e = easter(y), dd = (dt,n) => { const x = new Date(dt); x.setDate(x.getDate()+n); return x; }, f = x => iso(x.getFullYear(), x.getMonth(), x.getDate());
+  const nthWd = (m, wd, n) => { const x = new Date(y, m, 1); while ((x.getDay()) !== wd) x.setDate(x.getDate()+1); x.setDate(x.getDate() + 7*(n-1)); return x; };
+  const D = {NY:iso(y,0,1), BE:iso(y,0,2), DK:iso(y,0,6), JO:iso(y,2,19), KF:f(dd(e,-2)), OM:f(dd(e,1)), AR:iso(y,4,1), AU:f(dd(e,39)), PM:f(dd(e,50)), FL:f(dd(e,60)),
+    PP:iso(y,5,29), MH:iso(y,7,15), BK:iso(y,8,25), MT:iso(y,8,22), AH:iso(y,10,1), ME:iso(y,11,8), WN:iso(y,11,25), ST:iso(y,11,26),
+    NF:f(nthWd(3,4,1)), LJ:f(dd(nthWd(8,0,3),1)), JG:f(dd(nthWd(8,0,1),4)), RR:iso(y,11,31), IR:iso(y,2,1), PJ:iso(y,5,23), BF:iso(y,7,1)};
+  const out = {}; out[D.BF] = {n: HNAME.BF, k: 'BF'};
+  for (const tok of (CH[canton] || CH.ZH).split(' ')){ const k = tok.replace('*',''), part = tok.endsWith('*'); out[D[k]] = {n: HNAME[k] + (part ? ' (в части общин)' : ''), part, k}; }
+  return out;
+}
+
+/* школьные каникулы города Цюрих: недели по правилу Stadt Zürich (спортивные 7–8, весенние 17–18, летние 29–33, осенние 41–42), рождественские 2 недели с понедельника недели 21 декабря */
+function isoMonday(y, w){ const j4 = new Date(y, 0, 4), m = new Date(j4); m.setDate(j4.getDate() - ((j4.getDay() + 6) % 7) + (w - 1) * 7); return m; }
+function zhSchool(y){
+  const out = [], add = (a, days, n) => { const e = new Date(a); e.setDate(e.getDate() + days); out.push([a, e, n]); };
+  add(isoMonday(y, 7), 13, 'Спортивные каникулы'); add(isoMonday(y, 17), 13, 'Весенние каникулы');
+  add(isoMonday(y, 29), 34, 'Летние каникулы'); add(isoMonday(y, 41), 13, 'Осенние каникулы');
+  [y - 1, y].forEach(yy => { const d = new Date(yy, 11, 21); d.setDate(d.getDate() - ((d.getDay() + 6) % 7)); add(d, 13, 'Рождественские каникулы'); });
+  return out;
+}
+/* школьные каникулы всех кантонов, 2026–2027 (часть дат до 2028): официальные планы кантонов, городов и общин, собраны 06.10.2026. Для кантонов, где даты назначает община, — главный город. Каникулы, которые начинаются в понедельник или заканчиваются в пятницу, показаны вместе с выходными. */
+const SCH = {"ZH":{"p":"город Цюрих","d":[["2025-12-20","2026-01-03","Рождественские каникулы"],["2026-02-07","2026-02-21","Спортивные каникулы"],["2026-04-18","2026-05-02","Весенние каникулы"],["2026-07-11","2026-08-15","Летние каникулы"],["2026-10-03","2026-10-17","Осенние каникулы"],["2026-12-19","2027-01-02","Рождественские каникулы"],["2027-02-13","2027-02-27","Спортивные каникулы"],["2027-04-24","2027-05-08","Весенние каникулы"],["2027-07-17","2027-08-21","Летние каникулы"],["2027-10-09","2027-10-23","Осенние каникулы"],["2027-12-18","2028-01-01","Рождественские каникулы"]]},"BE":{"p":"город Берн","d":[["2025-12-20","2026-01-04","Рождественские каникулы"],["2026-01-31","2026-02-08","Зимние каникулы"],["2026-04-02","2026-04-19","Весенние каникулы"],["2026-07-03","2026-08-09","Летние каникулы"],["2026-09-19","2026-10-11","Осенние каникулы"],["2026-12-24","2027-01-10","Рождественские каникулы"],["2027-02-06","2027-02-14","Зимние каникулы"],["2027-04-10","2027-04-25","Весенние каникулы"],["2027-07-02","2027-08-15","Летние каникулы"],["2027-09-25","2027-10-17","Осенние каникулы"],["2027-12-24","2028-01-09","Рождественские каникулы"]]},"LU":{"p":"город Люцерн","d":[["2025-12-20","2026-01-04","Рождественские каникулы"],["2026-02-07","2026-02-22","Карнавальные каникулы (Fasnacht)"],["2026-04-03","2026-04-19","Пасхальные каникулы"],["2026-07-04","2026-08-16","Летние каникулы"],["2026-09-26","2026-10-11","Осенние каникулы"],["2026-12-19","2027-01-03","Рождественские каникулы"],["2027-01-30","2027-02-14","Карнавальные каникулы (Fasnacht)"],["2027-03-26","2027-04-11","Пасхальные каникулы"],["2027-05-06","2027-05-07","Вознесение, свободные дни"],["2027-05-27","2027-05-28","Праздник Тела Христова, свободные дни"],["2027-07-03","2027-08-15","Летние каникулы"],["2027-09-25","2027-10-10","Осенние каникулы"],["2027-12-18","2028-01-02","Рождественские каникулы"]]},"UR":{"p":"Альтдорф","d":[["2025-12-20","2026-01-06","Рождественские каникулы"],["2026-02-28","2026-03-08","Спортивные каникулы"],["2026-05-02","2026-05-17","Весенние каникулы"],["2026-07-04","2026-08-16","Летние каникулы"],["2026-10-03","2026-10-18","Осенние каникулы"],["2026-12-05","2026-12-08","Непорочное зачатие, свободные дни"],["2026-12-24","2027-01-10","Рождественские каникулы"],["2027-02-04","2027-02-10","Карнавальные каникулы (Fasnacht)"],["2027-02-27","2027-03-07","Спортивные каникулы"],["2027-05-01","2027-05-17","Весенние каникулы"],["2027-05-27","2027-05-30","Праздник Тела Христова, свободные дни"],["2027-07-03","2027-08-15","Летние каникулы"],["2027-10-02","2027-10-17","Осенние каникулы"],["2027-12-24","2028-01-09","Рождественские каникулы"]]},"SZ":{"p":"община Швиц","d":[["2026-02-21","2026-03-01","Спортивные каникулы"],["2026-04-25","2026-05-10","Весенние каникулы"],["2026-09-26","2026-10-11","Осенние каникулы"],["2026-12-19","2027-01-06","Рождественские каникулы"],["2027-02-27","2027-03-07","Спортивные каникулы"],["2027-05-01","2027-05-16","Весенние каникулы"]],"m":{"2027":"летние, осенние и рождественские каникулы 2027 года"}},"OW":{"p":"весь кантон Обвальден","d":[["2025-12-24","2026-01-06","Рождественские каникулы"],["2026-02-07","2026-02-22","Карнавальные каникулы (Fasnacht)"],["2026-04-03","2026-04-19","Пасхальные каникулы"],["2026-07-04","2026-08-16","Летние каникулы"],["2026-09-25","2026-10-11","Осенние каникулы"],["2026-12-24","2027-01-06","Рождественские каникулы"],["2027-01-30","2027-02-14","Карнавальные каникулы (Fasnacht)"],["2027-03-26","2027-04-11","Пасхальные каникулы"],["2027-05-07","2027-05-07","Вознесение, свободные дни"],["2027-05-28","2027-05-28","Праздник Тела Христова, свободные дни"],["2027-07-03","2027-08-15","Летние каникулы"],["2027-09-25","2027-10-10","Осенние каникулы"],["2027-12-24","2028-01-06","Рождественские каникулы"]]},"NW":{"p":"весь кантон Нидвальден","d":[["2026-02-07","2026-02-22","Карнавальные каникулы (Fasnacht)"],["2026-04-03","2026-04-19","Пасхальные каникулы"],["2026-07-04","2026-08-16","Летние каникулы"],["2026-09-26","2026-10-11","Осенние каникулы"],["2026-12-19","2027-01-03","Рождественские каникулы"],["2027-01-30","2027-02-14","Карнавальные каникулы (Fasnacht)"],["2027-03-26","2027-04-11","Пасхальные каникулы"],["2027-05-06","2027-05-09","Вознесение, свободные дни"],["2027-05-27","2027-05-30","Праздник Тела Христова, свободные дни"],["2027-07-03","2027-08-15","Летние каникулы"],["2027-09-25","2027-10-10","Осенние каникулы"],["2027-12-18","2028-01-02","Рождественские каникулы"]],"m":{"2026":"рождественские каникулы в начале 2026 года"}},"GL":{"p":"весь кантон Гларус","d":[["2025-12-20","2026-01-04","Рождественские каникулы"],["2026-01-24","2026-02-01","Спортивные каникулы"],["2026-04-03","2026-04-19","Весенние каникулы"],["2026-06-27","2026-08-09","Летние каникулы"],["2026-10-03","2026-10-18","Осенние каникулы"],["2026-12-24","2027-01-10","Рождественские каникулы"],["2027-01-30","2027-02-07","Спортивные каникулы"],["2027-04-01","2027-04-18","Весенние каникулы"],["2027-07-03","2027-08-15","Летние каникулы"],["2027-10-09","2027-10-24","Осенние каникулы"],["2027-12-24","2028-01-09","Рождественские каникулы"]]},"ZG":{"p":"весь кантон Цуг","d":[["2025-12-20","2026-01-04","Рождественские каникулы"],["2026-01-31","2026-02-15","Спортивные каникулы"],["2026-04-11","2026-04-26","Весенние каникулы"],["2026-05-14","2026-05-17","Вознесение, свободные дни"],["2026-07-04","2026-08-16","Летние каникулы"],["2026-10-03","2026-10-18","Осенние каникулы"],["2026-12-19","2027-01-03","Рождественские каникулы"],["2027-02-06","2027-02-21","Спортивные каникулы"],["2027-04-17","2027-05-02","Весенние каникулы"],["2027-05-06","2027-05-09","Вознесение, свободные дни"],["2027-07-03","2027-08-15","Летние каникулы"],["2027-10-02","2027-10-17","Осенние каникулы"],["2027-12-23","2028-01-05","Рождественские каникулы"]]},"FR":{"p":"кантон Фрибур (кроме района Муртен и Керцерса)","d":[["2026-07-11","2026-08-26","Летние каникулы"],["2026-10-10","2026-10-25","Осенние каникулы"],["2026-12-19","2027-01-03","Рождественские каникулы"],["2027-02-06","2027-02-14","Карнавальные каникулы (Fasnacht)"],["2027-03-26","2027-04-11","Пасхальные каникулы"],["2027-07-10","2027-08-25","Летние каникулы"],["2027-10-16","2027-10-31","Осенние каникулы"],["2027-12-18","2028-01-02","Рождественские каникулы"]],"m":{"2026":"рождественские, карнавальные и пасхальные каникулы до лета 2026 года"}},"SO":{"p":"город Золотурн","d":[["2025-12-20","2026-01-04","Рождественские каникулы"],["2026-01-31","2026-02-15","Зимние каникулы"],["2026-04-04","2026-04-19","Весенние каникулы"],["2026-07-04","2026-08-09","Летние каникулы"],["2026-09-26","2026-10-18","Осенние каникулы"],["2026-12-19","2027-01-03","Рождественские каникулы"],["2027-02-06","2027-02-21","Зимние каникулы"],["2027-04-10","2027-04-25","Весенние каникулы"],["2027-07-10","2027-08-15","Летние каникулы"],["2027-10-02","2027-10-24","Осенние каникулы"],["2027-12-25","2028-01-09","Рождественские каникулы"]]},"BS":{"p":"весь кантон Базель-Штадт","d":[["2025-12-20","2026-01-04","Рождественские каникулы"],["2026-02-14","2026-03-01","Карнавальные каникулы (Fasnacht)"],["2026-03-28","2026-04-12","Весенние каникулы"],["2026-06-27","2026-08-09","Летние каникулы"],["2026-09-26","2026-10-11","Осенние каникулы"],["2026-12-19","2027-01-03","Рождественские каникулы"],["2027-02-06","2027-02-21","Карнавальные каникулы (Fasnacht)"],["2027-03-20","2027-04-04","Весенние каникулы"],["2027-07-03","2027-08-15","Летние каникулы"],["2027-10-02","2027-10-17","Осенние каникулы"],["2027-12-18","2028-01-02","Рождественские каникулы"]]},"BL":{"p":"весь кантон Базель-Ланд","d":[["2025-12-20","2026-01-04","Рождественские каникулы"],["2026-02-14","2026-03-01","Карнавальные каникулы (Fasnacht)"],["2026-03-28","2026-04-12","Весенние каникулы"],["2026-06-27","2026-08-09","Летние каникулы"],["2026-09-26","2026-10-11","Осенние каникулы"],["2026-12-19","2027-01-03","Рождественские каникулы"],["2027-02-06","2027-02-21","Карнавальные каникулы (Fasnacht)"],["2027-03-20","2027-04-04","Весенние каникулы"],["2027-07-03","2027-08-15","Летние каникулы"],["2027-10-02","2027-10-17","Осенние каникулы"],["2027-12-18","2028-01-02","Рождественские каникулы"]]},"SH":{"p":"весь кантон Шаффхаузен","d":[["2026-09-26","2026-10-18","Осенние каникулы"],["2026-12-24","2027-01-03","Рождественские каникулы"],["2027-01-30","2027-02-14","Спортивные каникулы"],["2027-04-17","2027-05-02","Весенние каникулы"],["2027-07-10","2027-08-15","Летние каникулы"],["2027-10-02","2027-10-24","Осенние каникулы"],["2027-12-24","2028-01-02","Рождественские каникулы"],["2028-01-29","2028-02-13","Спортивные каникулы"]],"m":{"2026":"каникулы первой половины 2026 года"}},"AR":{"p":"весь кантон Аппенцелль-Ауссерроден, без спортивных каникул (их назначает община)","d":[["2025-12-20","2026-01-04","Рождественские каникулы"],["2026-04-03","2026-04-19","Весенние каникулы"],["2026-07-04","2026-08-09","Летние каникулы"],["2026-10-03","2026-10-18","Осенние каникулы"],["2026-12-19","2027-01-03","Рождественские каникулы"],["2027-04-10","2027-04-25","Весенние каникулы"],["2027-07-10","2027-08-15","Летние каникулы"],["2027-10-09","2027-10-24","Осенние каникулы"],["2027-12-18","2028-01-02","Рождественские каникулы"]],"m":{"2026":"спортивные каникулы (их назначает каждая община)","2027":"спортивные каникулы (их назначает каждая община)"}},"AI":{"p":"Аппенцелль (внутренняя часть кантона)","d":[["2025-12-20","2026-01-04","Рождественские каникулы"],["2026-02-13","2026-02-22","Спортивные каникулы"],["2026-04-03","2026-04-19","Весенние каникулы"],["2026-07-04","2026-08-16","Летние каникулы"],["2026-10-03","2026-10-18","Осенние каникулы"],["2026-12-19","2027-01-03","Рождественские каникулы"],["2027-02-05","2027-02-14","Спортивные каникулы"],["2027-04-10","2027-04-25","Весенние каникулы"],["2027-07-03","2027-08-15","Летние каникулы"],["2027-10-02","2027-10-17","Осенние каникулы"],["2027-12-18","2028-01-02","Рождественские каникулы"],["2028-02-25","2028-03-05","Спортивные каникулы"],["2028-04-08","2028-04-23","Весенние каникулы"]]},"SG":{"p":"город Санкт-Галлен","d":[["2026-04-05","2026-04-19","Весенние каникулы"],["2026-07-05","2026-08-09","Летние каникулы"],["2026-09-27","2026-10-18","Осенние каникулы"],["2026-12-20","2027-01-03","Рождественские каникулы"],["2027-01-31","2027-02-07","Зимние каникулы"],["2027-04-11","2027-04-25","Весенние каникулы"],["2027-07-11","2027-08-15","Летние каникулы"],["2027-10-03","2027-10-24","Осенние каникулы"],["2027-12-19","2028-01-02","Рождественские каникулы"],["2028-01-30","2028-02-06","Зимние каникулы"],["2028-04-09","2028-04-23","Весенние каникулы"],["2028-07-09","2028-08-13","Летние каникулы"]],"m":{"2026":"зимние каникулы 2026 года"}},"GR":{"p":"Кур","d":[["2026-10-10","2026-10-25","Осенние каникулы"],["2026-12-23","2027-01-05","Рождественские каникулы"],["2027-02-27","2027-03-07","Спортивные каникулы"],["2027-04-17","2027-05-02","Весенние каникулы"],["2027-05-06","2027-05-07","Вознесение, свободные дни"],["2027-07-03","2027-08-15","Летние каникулы"],["2027-10-09","2027-10-24","Осенние каникулы"],["2027-12-23","2028-01-05","Рождественские каникулы"],["2028-02-26","2028-03-05","Спортивные каникулы"],["2028-04-15","2028-04-30","Весенние каникулы"]],"m":{"2026":"каникулы первой половины 2026 года"}},"AG":{"p":"Аарау","d":[["2026-09-26","2026-10-11","Осенние каникулы"],["2026-12-19","2027-01-03","Рождественские каникулы"],["2027-01-30","2027-02-14","Спортивные каникулы"],["2027-04-10","2027-04-25","Весенние каникулы"],["2027-07-03","2027-08-08","Летние каникулы"],["2027-10-02","2027-10-17","Осенние каникулы"],["2027-12-24","2028-01-09","Рождественские каникулы"],["2028-01-29","2028-02-13","Спортивные каникулы"],["2028-04-08","2028-04-23","Весенние каникулы"],["2028-07-08","2028-08-13","Летние каникулы"]],"m":{"2026":"каникулы первой половины 2026 года"}},"TG":{"p":"весь кантон Тургау","d":[["2025-12-20","2026-01-04","Рождественские каникулы"],["2026-01-24","2026-02-01","Спортивные каникулы"],["2026-04-03","2026-04-19","Весенние каникулы"],["2026-05-14","2026-05-25","Каникулы на Троицу"],["2026-07-04","2026-08-09","Летние каникулы"],["2026-10-03","2026-10-18","Осенние каникулы"],["2026-12-19","2027-01-03","Рождественские каникулы"],["2027-01-31","2027-02-07","Спортивные каникулы"],["2027-03-26","2027-04-11","Весенние каникулы"],["2027-05-06","2027-05-17","Каникулы на Троицу"],["2027-07-10","2027-08-15","Летние каникулы"],["2027-10-09","2027-10-24","Осенние каникулы"],["2027-12-18","2028-01-02","Рождественские каникулы"],["2028-01-29","2028-02-06","Спортивные каникулы"]]},"TI":{"p":"весь кантон Тичино","d":[["2025-12-24","2026-01-06","Рождественские каникулы"],["2026-02-14","2026-02-22","Карнавальные каникулы (Fasnacht)"],["2026-04-03","2026-04-12","Пасхальные каникулы"],["2026-05-14","2026-05-15","Вознесение, свободные дни"],["2026-06-18","2026-08-30","Летние каникулы"],["2026-10-31","2026-11-08","Осенние каникулы"],["2026-12-24","2027-01-06","Рождественские каникулы"],["2027-02-06","2027-02-14","Карнавальные каникулы (Fasnacht)"],["2027-03-26","2027-04-04","Пасхальные каникулы"],["2027-05-06","2027-05-07","Вознесение, свободные дни"],["2027-06-17","2027-08-29","Летние каникулы"],["2027-10-30","2027-11-07","Осенние каникулы"],["2027-12-24","2028-01-09","Рождественские каникулы"]]},"VD":{"p":"весь кантон Во","d":[["2025-12-20","2026-01-04","Рождественские каникулы"],["2026-02-14","2026-02-22","Спортивные каникулы"],["2026-04-03","2026-04-19","Пасхальные каникулы"],["2026-05-14","2026-05-15","Вознесение, свободные дни"],["2026-06-27","2026-08-16","Летние каникулы"],["2026-10-10","2026-10-25","Осенние каникулы"],["2026-12-24","2027-01-10","Рождественские каникулы"],["2027-02-06","2027-02-14","Спортивные каникулы"],["2027-03-26","2027-04-11","Пасхальные каникулы"],["2027-05-06","2027-05-07","Вознесение, свободные дни"],["2027-07-03","2027-08-22","Летние каникулы"],["2027-10-09","2027-10-24","Осенние каникулы"],["2027-12-24","2028-01-09","Рождественские каникулы"]]},"VS":{"p":"франкоязычный Вале (Сьон)","d":[["2025-12-20","2026-01-04","Рождественские каникулы"],["2026-02-14","2026-02-22","Карнавальные каникулы (Fasnacht)"],["2026-04-03","2026-04-12","Пасхальные каникулы"],["2026-05-13","2026-05-17","Вознесение, свободные дни"],["2026-06-27","2026-08-19","Летние каникулы"],["2026-10-14","2026-10-25","Осенние каникулы"],["2026-12-05","2026-12-08","Непорочное зачатие, свободные дни"],["2026-12-23","2027-01-10","Рождественские каникулы"],["2027-02-06","2027-02-14","Карнавальные каникулы (Fasnacht)"],["2027-03-19","2027-03-21","День святого Иосифа, свободные дни"],["2027-03-26","2027-04-04","Пасхальные каникулы"],["2027-05-05","2027-05-09","Вознесение, свободные дни"],["2027-05-15","2027-05-17","Троица, свободные дни"],["2027-05-26","2027-05-30","Праздник Тела Христова, свободные дни"]],"m":{"2027":"конец летних каникул, осенние и рождественские каникулы 2027 года"}},"NE":{"p":"весь кантон Невшатель","d":[["2025-12-20","2026-01-04","Рождественские каникулы"],["2026-02-21","2026-03-01","Зимние каникулы"],["2026-04-03","2026-04-19","Пасхальные каникулы"],["2026-07-04","2026-08-16","Летние каникулы"],["2026-10-03","2026-10-18","Осенние каникулы"],["2026-12-19","2027-01-03","Рождественские каникулы"],["2027-02-27","2027-03-07","Зимние каникулы"],["2027-03-26","2027-04-11","Пасхальные каникулы"],["2027-07-03","2027-08-15","Летние каникулы"],["2027-10-02","2027-10-17","Осенние каникулы"],["2027-12-23","2028-01-09","Рождественские каникулы"]]},"GE":{"p":"весь кантон Женева","d":[["2025-12-20","2026-01-04","Рождественские каникулы"],["2026-02-21","2026-03-01","Зимние каникулы"],["2026-04-03","2026-04-19","Пасхальные каникулы"],["2026-05-14","2026-05-15","Вознесение, свободные дни"],["2026-06-27","2026-08-16","Летние каникулы"],["2026-10-17","2026-10-25","Осенние каникулы"],["2026-12-24","2027-01-10","Рождественские каникулы"],["2027-02-13","2027-02-21","Зимние каникулы"],["2027-03-26","2027-04-11","Пасхальные каникулы"],["2027-05-06","2027-05-07","Вознесение, свободные дни"],["2027-07-03","2027-08-25","Летние каникулы"],["2027-09-09","2027-09-10","Пост, свободные дни"],["2027-10-23","2027-10-31","Осенние каникулы"],["2027-12-24","2028-01-09","Рождественские каникулы"]]},"JU":{"p":"весь кантон Юра","d":[["2025-12-20","2026-01-04","Рождественские каникулы"],["2026-02-14","2026-02-22","Зимние каникулы"],["2026-04-03","2026-04-19","Пасхальные каникулы"],["2026-05-14","2026-05-15","Вознесение, свободные дни"],["2026-07-04","2026-08-16","Летние каникулы"],["2026-10-03","2026-10-18","Осенние каникулы"],["2026-12-24","2027-01-10","Рождественские каникулы"],["2027-02-13","2027-02-21","Зимние каникулы"],["2027-03-26","2027-04-11","Пасхальные каникулы"],["2027-07-03","2027-08-15","Летние каникулы"],["2027-10-02","2027-10-17","Осенние каникулы"],["2027-12-24","2028-01-09","Рождественские каникулы"]]}};
+function cantonSchool(y){
+  const c = S.set.canton, a0 = new Date(y, 0, 1), b0 = new Date(y, 11, 31);
+  const L = ((SCH[c] || {}).d || []).map(([a, b, n]) => [new Date(a + 'T00:00'), new Date(b + 'T00:00'), n]).filter(([a, b]) => b >= a0 && a <= b0);
+  if (!L.length && c === 'ZH') return zhSchool(y);
+  return L;
+}
+function schHasYear(y){ return cantonSchool(y).length > 0; }
+function renderSchNote(){
+  const y = ym().y, c = S.set.canton, P = (SCH[c] || {}).p || CANTONS[c];
+  const miss = ((SCH[c] || {}).m || {})[y];
+  $('schNote').innerHTML = `Даты каникул: ${esc(P)}. Отмечены зелёной полосой. В твоей общине даты могут отличаться, свои можно добавить ниже.` + (!schHasYear(y) ? `<br><b>Даты на ${y} год ещё не внесены.</b>` : miss ? `<br><b>Пока не опубликованы: ${esc(miss)}.</b>` : '');
+}
+function schoolMap(y, m){
+  const map = {}, first = new Date(y, m, 1), last = new Date(y, m + 1, 0);
+  const ranges = (S.set.schZh ? cantonSchool(y) : []).concat(S.set.kids.filter(k => k.a && k.b).map(k => [new Date(k.a + 'T00:00'), new Date(k.b + 'T00:00'), 'Каникулы']));
+  for (const [a, b, n] of ranges){ for (let d = new Date(Math.max(a, first)); d <= b && d <= last; d.setDate(d.getDate() + 1)) map[d.getDate()] = map[d.getDate()] || n; }
+  return map;
+}
+
+const MON_S = ['янв.','февр.','марта','апр.','мая','июня','июля','авг.','сент.','окт.','нояб.','дек.'];
+function holSorted(y){ return Object.entries(S.set.showHol ? holidays(y, S.set.canton) : {}).sort((a, b) => a[0] < b[0] ? -1 : 1).map(([ds, h]) => { const [yy, mm, dd] = ds.split('-').map(Number); return {m: mm - 1, d: dd, n: h.n, k: h.k}; }); }
+let holOpen = false, monOpen = false;
+const plHol = n => n + ' ' + (n % 10 === 1 && n % 100 !== 11 ? 'праздник' : [2,3,4].includes(n % 10) && ![12,13,14].includes(n % 100) ? 'праздника' : 'праздников');
+function renderHolList(){
+  const y = ym().y, L = holSorted(y);
+  $('holList').hidden = !S.set.showHol; if (!S.set.showHol) $('holInfo').hidden = true;
+  $('holList').innerHTML = `<details class="hdet"${holOpen ? ' open' : ''}><summary><span>Праздники кантона ${CANTONS[S.set.canton]} в ${y} году · ${plHol(L.length)}</span><span class="tog" aria-hidden="true"></span></summary><div class="hchips">` + L.map(h => `<button type="button" class="hchip" data-hk="${h.k}" data-hd="${h.d} ${MONTHS_GEN[h.m]}" data-hn="${esc(h.n)}" data-box="holInfo"><b>${h.d} ${MON_S[h.m]}</b>${esc(h.n)}<i aria-hidden="true">?</i></button>`).join('') + '</div></details>';
+  const det = $('holList').querySelector('details'); det.addEventListener('toggle', () => { holOpen = det.open; if (!det.open) $('holInfo').hidden = true; });
+}
+document.addEventListener('click', e => {
+  const b = e.target.closest('.hchip[data-hk]'); if (!b) return;
+  const box = $(b.dataset.box), same = !box.hidden && box.dataset.k === b.dataset.hk;
+  document.querySelectorAll('.hchip.on').forEach(x => x.classList.remove('on'));
+  if (same){ box.hidden = true; return; }
+  box.dataset.k = b.dataset.hk; b.classList.add('on');
+  box.innerHTML = `<b>${b.dataset.hn} · ${b.dataset.hd}</b><p>${HINFO[b.dataset.hk] || ''}</p>`; box.hidden = false;
+});
+function renderMonthInfo(){ $('monthHolInfo').hidden = true;
+  const {y, m} = ym(), hs = holSorted(y).filter(h => h.m === m), sm = schoolMap(y, m), runs = [];
+  Object.keys(sm).map(Number).sort((a, b) => a - b).forEach(d => { const last = runs[runs.length - 1]; if (last && last.b === d - 1 && last.n === sm[d]) last.b = d; else runs.push({a: d, b: d, n: sm[d]}); });
+  const sumTxt = (!S.set.showHol ? 'праздники скрыты' : hs.length ? plHol(hs.length) + ' кантона' : 'праздников кантона нет') + (runs.length ? ' · школьные каникулы' : '');
+  $('monthInfo').innerHTML = `<details class="hdet"${monOpen ? ' open' : ''}><summary><span><b>${MONTHS[m]} ${y}</b> · ${sumTxt}</span><span class="tog" aria-hidden="true"></span></summary><div class="hchips">`
+    + (!S.set.showHol ? '<span class="none">праздники скрыты</span>' : hs.length ? hs.map(h => `<button type="button" class="hchip" data-hk="${h.k}" data-hd="${h.d} ${MONTHS_GEN[m]}" data-hn="${esc(h.n)}" data-box="monthHolInfo"><b>${h.d} ${MONTHS_GEN[m]}</b>${esc(h.n)}<i aria-hidden="true">?</i></button>`).join('') : `<span class="none">праздников кантона ${CANTONS[S.set.canton]} нет</span>`)
+    + (runs.length ? runs.map(r => `<span class="schip"><b>${r.a === r.b ? r.a : r.a + '–' + r.b} ${MONTHS_GEN[m]}</b>${esc(r.n)}</span>`).join('') : '<span class="none">школьных каникул нет</span>') + '</div></details>';
+  const det = $('monthInfo').querySelector('details'); det.addEventListener('toggle', () => { monOpen = det.open; if (!det.open) $('monthHolInfo').hidden = true; });
+}
+
+/* ---------- время ---------- */
+function parseHM(v){                                   // «8:24», «8,4», «+3:30», «-1.5» → минуты
+  v = String(v == null ? '' : v).trim().replace(/\s/g, '').replace('−', '-'); if (!v) return 0;
+  let sign = 1; if (v[0] === '-' || v[0] === '+'){ if (v[0] === '-') sign = -1; v = v.slice(1); }
+  let m;
+  if (/^\d{1,3}:\d{1,2}$/.test(v)){ const [h, mm] = v.split(':').map(Number); m = h * 60 + mm; }
+  else if (/^\d+([.,]\d+)?$/.test(v)) m = Math.round(parseFloat(v.replace(',', '.')) * 60);
+  else return null;
+  return sign * m;
+}
+const tmin = t => { if (!t || !/^\d{1,2}:\d{2}$/.test(t)) return null; const [h, m] = t.split(':').map(Number); return h * 60 + m; };
+function fmt(m, signed){
+  if (m == null || isNaN(m)) return '';
+  const s = m < 0 ? '−' : (signed && m > 0 ? '+' : ''); m = Math.abs(Math.round(m));
+  return s + Math.floor(m / 60) + ':' + String(m % 60).padStart(2, '0');
+}
+const num = v => { const n = parseFloat(String(v || '').replace(/[’'\s]/g, '').replace(',', '.')); return isNaN(n) ? 0 : n; };
+const chf = v => (Math.round(v * 20) / 20).toLocaleString('de-CH', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+/* ---------- состояние ---------- */
+const now = new Date();
+const mkey = (y, m) => y + '-' + String(m + 1).padStart(2, '0');
+function newId(){ return 'p' + Date.now().toString(36) + Math.random().toString(36).slice(2, 5); }
+function fresh(base){ const b = base || {}; return {id: newId(), set:{what:'', name: b.name || '', emp:'', schZh: b.schZh != null ? b.schZh : true, showHol: b.showHol != null ? b.showHol : true, kids: b.kids ? JSON.parse(JSON.stringify(b.kids)) : [], mode:'fix', wt:'8:24', days:[1,2,3,4,5], perDay:false, wd:{0:'', 1:'8:24', 2:'8:24', 3:'8:24', 4:'8:24', 5:'8:24', 6:''}, canton: b.canton || 'ZH', rate:'', fz:'0', vacYear:'', vacPrev:''}, cur: mkey(now.getFullYear(), now.getMonth()), months:{}}; }
+function freshRoot(){ return {v:2, profiles:[fresh()], active:0, lastBackup:null}; }
+function fixProfile(p){
+  const st = p.set || (p.set = fresh().set);
+  if (!Array.isArray(st.kids)) st.kids = []; if (st.schZh == null) st.schZh = true; if (st.showHol == null) st.showHol = true; if (st.what == null) st.what = '';
+  if (!Array.isArray(st.days)) st.days = [1,2,3,4,5]; if (st.wt == null) st.wt = '8:24';
+  if (!st.wd){ st.wd = {}; [0,1,2,3,4,5,6].forEach(d => { st.wd[d] = st.days.includes(d) ? st.wt : ''; }); }
+  if (st.perDay == null) st.perDay = false; if (st.vacYear == null) st.vacYear = ''; if (st.vacPrev == null) st.vacPrev = '';
+  if (!p.id) p.id = newId(); if (!p.cur) p.cur = mkey(now.getFullYear(), now.getMonth()); if (!p.months) p.months = {};
+  return p;
+}
+function loadRoot(raw){
+  if (raw && raw.set && raw.months) raw = {v:2, profiles:[raw], active:0, lastBackup:null};
+  if (!raw || !Array.isArray(raw.profiles) || !raw.profiles.length) return null;
+  raw.profiles.forEach(fixProfile); if (!(raw.active >= 0 && raw.active < raw.profiles.length)) raw.active = 0;
+  return raw;
+}
+let R, S;
+try { R = loadRoot(JSON.parse(localStorage.getItem(KEY))); } catch(e) { R = null; }
+if (!R) R = freshRoot();
+S = R.profiles[R.active];
+function save(){ try { localStorage.setItem(KEY, JSON.stringify(R)); } catch(e) {} }
+const ym = () => { const [y, m] = S.cur.split('-').map(Number); return {y, m: m - 1}; };
+const prevKey = k => { let [y, m] = k.split('-').map(Number); m -= 2; if (m < 0){ m = 11; y--; } return mkey(y, m); };
+const nextKey = k => { let [y, m] = k.split('-').map(Number); if (m === 12){ m = 0; y++; } return mkey(y, m); };
+function monthData(k){
+  if (!S.months[k]) S.months[k] = {carry: null, d: {}};
+  return S.months[k];
+}
+const fixed = () => S.set.mode !== 'hour';
+const wtMin = () => { const v = parseHM(S.set.wt); return fixed() && v > 0 ? v : 0; };
+function planFor(dow){ if (!fixed()) return 0; if (S.set.perDay){ const v = parseHM(S.set.wd[dow]); return v > 0 ? v : 0; } return S.set.days.includes(dow) ? wtMin() : 0; }
+const isSched = dow => fixed() && S.set.perDay ? planFor(dow) > 0 : S.set.days.includes(dow);
+const ABS = ['vac','sick','paid','comp','unpaid'];
+const fmtDays = n => (Math.round(n * 100) / 100).toLocaleString('ru-RU');
+function weekPlan(){ return [0,1,2,3,4,5,6].reduce((a, d) => a + planFor(d), 0); }
+
+/* один день: тип по умолчанию, часы, норма, зачёт */
+function dayInfo(k, d){
+  const [y, m] = k.split('-').map(Number), dt = new Date(y, m - 1, d), dow = dt.getDay(), ds = iso(y, m - 1, d);
+  const H = S.set.showHol ? holidays(y, S.set.canton) : {}, hol = H[ds], sched = isSched(dow);
+  const rec = (S.months[k] && S.months[k].d[d]) || {};
+  const type = rec.t || (hol && !hol.part && sched ? 'hol' : sched ? 'work' : 'off');
+  const blocks = rec.b || [];
+  const part = ABS.includes(type) ? (rec.part || 'full') : 'full';
+  const timed = TIMED(type) || part !== 'full';
+  let worked = 0;
+  if (timed) for (const b of blocks){
+    const s = tmin(b.s), e = tmin(b.e); if (s == null || e == null) continue;
+    let w = e - s; if (w <= 0) w += 1440; w -= Math.max(0, num(b.p)); worked += Math.max(0, w);
+  }
+  const isHolDay = hol && !hol.part, counts = sched && !isHolDay;
+  const plan = counts ? planFor(dow) : 0;
+  let amt = part === 'half' ? plan / 2 : part === 'time' ? Math.max(0, parseHM(rec.pt) || 0) : plan;
+  if (plan && amt > plan) amt = plan;
+  const frac = !counts || !ABS.includes(type) ? 0 : part === 'full' ? 1 : part === 'half' ? .5 : plan ? amt / plan : 0;
+  let norm = 0;
+  if (['work','vac','sick','paid','comp'].includes(type)) norm = plan;
+  else if (type === 'unpaid') norm = part === 'full' ? 0 : Math.max(0, plan - amt);
+  const cred = fixed() && TYPES[type].cred ? amt : 0;
+  const sch = schoolMap(y, m - 1)[d] || '';
+  return {dt, dow, ds, hol, sch, sched, type, part, pt: rec.pt || '', amt, frac, timed, blocks, worked, norm, cred, diff: fixed() ? worked + cred - norm : 0, note: rec.n || ''};
+}
+function daysIn(k){ const [y, m] = k.split('-').map(Number); return new Date(y, m, 0).getDate(); }
+function calc(k){
+  const T = {norm:0, worked:0, cred:0, diff:0, workDays:0, vac:0, sick:0, paid:0, comp:0, unpaid:0, hol:0, rows:[]};
+  for (let d = 1; d <= daysIn(k); d++){
+    const I = dayInfo(k, d); T.rows.push(I);
+    T.norm += I.norm; T.worked += I.worked; T.cred += I.cred; T.diff += I.diff;
+    if (I.worked > 0) T.workDays++;
+    if (ABS.includes(I.type)) T[I.type] += I.frac;
+  }
+  const md = S.months[k]; let carry = md && md.carry != null ? parseHM(md.carry) : null;
+  if (carry == null){ const pk = prevKey(k); carry = S.months[pk] && Object.keys(S.months[pk].d).length ? calc(pk).bal : 0; T.carryAuto = true; }
+  T.carry = fixed() ? (carry || 0) : 0;
+  T.bal = T.carry + T.diff;
+  const rate = num(S.set.rate), fz = num(S.set.fz);
+  T.pay = !fixed() && rate ? T.worked / 60 * rate : 0;
+  T.fzPay = T.pay * fz / 100;
+  return T;
+}
+
+/* ---------- условия ---------- */
+function vacTaken(y){
+  let t = 0;
+  Object.keys(S.months).filter(k => k.startsWith(y + '-')).forEach(k => { Object.entries(S.months[k].d).forEach(([d, rr]) => { if (rr.t === 'vac') t += dayInfo(k, +d).frac; }); });
+  return t;
+}
+function vacInfo(){ const tot = num(S.set.vacYear) + num(S.set.vacPrev); if (!num(S.set.vacYear)) return null; const y = ym().y, taken = vacTaken(y); return {y, tot, taken, left: tot - taken}; }
+function renderSet(){
+  const st = S.set;
+  $('fWhat').value = st.what || ''; $('fSchZh').checked = !!st.schZh; $('fShowHol').checked = !!st.showHol; renderKids();
+  $('fName').value = st.name; $('fEmp').value = st.emp; $('fMode').value = st.mode; $('fWt').value = st.wt; $('fRate').value = st.rate; $('fFz').value = st.fz;
+  $('fCanton').innerHTML = Object.entries(CANTONS).sort((a, b) => a[1].localeCompare(b[1], 'ru')).map(([k, n]) => `<option value="${k}"${k === st.canton ? ' selected' : ''}>${n} (${k})</option>`).join('');
+  $('fDays').innerHTML = WD_ORDER.map(d => `<button type="button" class="day${st.days.includes(d) ? ' on' : ''}" data-d="${d}" aria-pressed="${st.days.includes(d)}">${WD[d]}</button>`).join('');
+  const dl = WD_ORDER.filter(d => isSched(d)).map(d => WD[d]).join(' ');
+  $('setSum').textContent = [what() || 'Работа', fixed() ? (st.perDay ? 'по дням, ' + fmt(weekPlan()) + ' ч в неделю' : parseHM(st.wt) ? fmt(parseHM(st.wt)) + ' ч в день' : 'план не вписан') : 'без плана' + (num(st.rate) ? ' ' + chf(num(st.rate)) + ' CHF' : ''), dl, CANTONS[st.canton]].filter(Boolean).join(' · ');
+  $('fPlanMode').value = st.perDay ? 'per' : 'same'; $('fVacY').value = st.vacYear || ''; $('fVacP').value = st.vacPrev || '';
+  $('pmBox').hidden = !fixed(); $('daysBox').hidden = fixed() && st.perDay; $('wdBox').hidden = !(fixed() && st.perDay);
+  $('fWd').innerHTML = WD_ORDER.map(d => `<label class="wdi"><span>${WD[d]}</span><input type="text" inputmode="decimal" data-wd="${d}" value="${esc(st.wd[d] || '')}" placeholder="—" aria-label="${WD[d]}, план часов"></label>`).join('');
+  renderWdSum(); renderDelProf(); renderProfs();
+  $('wtBox').hidden = !fixed() || st.perDay; $('carryBox').hidden = !fixed();
+  $('rateBox').hidden = fixed(); $('fzBox').hidden = fixed();
+  renderCarry();
+}
+function renderCarry(){
+  const md = S.months[S.cur], T = calc(S.cur);
+  $('fCarry').value = md && md.carry != null ? md.carry : (T.carry ? fmt(T.carry, true) : '');
+  $('fCarry').placeholder = '0:00';
+}
+[['fWhat','what'],['fName','name'],['fEmp','emp'],['fWt','wt'],['fRate','rate']].forEach(([id, k]) => $(id).addEventListener('input', e => { S.set[k] = e.target.value; save(); if (k === 'wt' || k === 'rate' || k === 'what') refresh(); }));
+$('fShowHol').addEventListener('change', e => { S.set.showHol = e.target.checked; save(); refresh(); });
+$('fSchZh').addEventListener('change', e => { S.set.schZh = e.target.checked; save(); refresh(); });
+function renderKids(){ $('kidsList').innerHTML = S.set.kids.map((k, i) => `<div class="kid"><label>с <input type="date" data-k="${i}" data-f="a" value="${esc(k.a)}"></label><label>по <input type="date" data-k="${i}" data-f="b" value="${esc(k.b)}"></label><button class="x" type="button" data-k="${i}" data-act="delk" aria-label="Убрать эти каникулы">✕</button></div>`).join(''); }
+$('addKids').addEventListener('click', () => { S.set.kids.push({a:'', b:''}); save(); renderKids(); });
+$('kidsList').addEventListener('change', e => { const el = e.target; if (el.dataset.k == null) return; S.set.kids[+el.dataset.k][el.dataset.f] = el.value; save(); refresh(); });
+$('kidsList').addEventListener('click', e => { const b = e.target.closest('[data-act=delk]'); if (!b) return; S.set.kids.splice(+b.dataset.k, 1); save(); renderKids(); refresh(); });
+$('fWt').addEventListener('change', () => { if (parseHM(S.set.wt) == null) say('Не получилось прочитать часы. Впиши, например, 8:24 или 8,4.'); });
+$('fMode').addEventListener('change', e => { S.set.mode = e.target.value; save(); renderSet(); renderMonth(); });
+['fWhat','fName','fEmp','fWt','fRate'].forEach(id => $(id).addEventListener('change', renderSet));
+$('fFz').addEventListener('change', e => { S.set.fz = e.target.value; save(); renderCards(); });
+$('fCanton').addEventListener('change', e => { S.set.canton = e.target.value; $('holInfo').hidden = true; save(); renderMonth(); });
+$('fDays').addEventListener('click', e => { const b = e.target.closest('[data-d]'); if (!b) return; const d = +b.dataset.d, a = S.set.days;
+  S.set.days = a.includes(d) ? a.filter(x => x !== d) : a.concat(d); save(); renderSet(); renderMonth(); });
+$('fCarry').addEventListener('input', e => { const v = e.target.value.trim(); monthData(S.cur).carry = v === '' ? null : v; save(); renderCards(); renderSum(); });
+function renderWdSum(){ $('wdSum').textContent = 'В неделю по плану: ' + fmt(weekPlan()) + ' ч'; }
+$('fPlanMode').addEventListener('change', e => { S.set.perDay = e.target.value === 'per';
+  if (S.set.perDay && ![0,1,2,3,4,5,6].some(d => parseHM(S.set.wd[d]) > 0)) [0,1,2,3,4,5,6].forEach(d => { S.set.wd[d] = S.set.days.includes(d) ? S.set.wt : ''; });
+  save(); renderSet(); renderMonth(); });
+$('fWd').addEventListener('input', e => { const el = e.target; if (el.dataset.wd == null) return; S.set.wd[el.dataset.wd] = el.value; save(); renderWdSum(); refresh(); });
+$('fWd').addEventListener('focusout', () => { const st = S.set, dl = WD_ORDER.filter(d => isSched(d)).map(d => WD[d]).join(' '); $('setSum').textContent = [what() || 'Работа', 'по дням, ' + fmt(weekPlan()) + ' ч в неделю', dl, CANTONS[st.canton]].join(' · '); });
+
+$('fVacY').addEventListener('input', e => { S.set.vacYear = e.target.value; save(); renderCards(); });
+$('fVacP').addEventListener('input', e => { S.set.vacPrev = e.target.value; save(); renderCards(); });
+$('fCarry').addEventListener('change', e => { if (parseHM(e.target.value) == null) say('Не получилось прочитать перенос. Впиши, например, +3:30 или −1:15.'); });
+
+
+/* ---------- подсказки «?» ---------- */
+const HELP = {
+  what: '<p>Напиши, что ты хочешь считать. Например «Работа в кафе», «Курс немецкого» или «Свой проект».</p><p>Это название будет у обычного дня и в заголовке PDF. Для второй работы или учёбы лучше создать отдельный учёт.</p>',
+  name: '<p>Имя появится в шапке PDF. Если ты отдаёшь лист работодателю, впиши имя так, как в договоре. Если лист нужен только тебе, поле можно оставить пустым.</p>',
+  emp: '<p>Работодатель, клиент, школа или проект.</p><p>Если поле заполнено, внизу PDF появятся места для двух подписей, твоей и этого человека или фирмы. Если лист нужен только тебе, оставь поле пустым.</p>',
+  mode: '<p><b>«Есть план часов в день»</b> выбирай, если в договоре написано, сколько часов в неделю ты работаешь, например 42, или если ты ставишь себе цель. Тогда видно, сделала ты больше или меньше плана.</p><p><b>«Без плана»</b> выбирай, если тебе платят за каждый час и нормы нет. Тогда часы просто складываются, и можно посчитать примерную сумму.</p>',
+  perday: '<p><b>«Одинаково каждый день»</b> подходит, если ты работаешь одинаковые часы, например по 8:24 с понедельника по пятницу.</p><p><b>«Разные часы по дням недели»</b> нужен при неполной занятости. Например, в понедельник 8 часов, в среду 4, в пятницу 6.</p>',
+  wt: '<p>Сколько часов в день ты должна работать по договору. Обычно это часы в неделю, делённые на число рабочих дней.</p><ul><li>42 часа в неделю за 5 дней — 8:24</li><li>40 часов за 5 дней — 8:00</li><li>50% от 42 часов — 4:12</li></ul><p>Можно писать 8:24 или 8,4.</p>',
+  days: '<p>Отметь дни, в которые ты обычно работаешь или занимаешься этим делом. В эти дни считается план.</p><p>Остальные дни станут выходными. В них тоже можно вписать время, оно пойдёт сверх плана.</p>',
+  wd: '<p>Впиши план часов для каждого дня недели. Пустой день считается выходным.</p><p>Внизу видно, сколько получается в неделю. Сверь это число с договором.</p>',
+  canton: '<p>Праздники в Швейцарии свои в каждом кантоне. Выбери кантон, где ты работаешь.</p><p>В праздник план не считается. Если ты всё-таки работала, часы пойдут сверх плана.</p><p>По этому же кантону показываются школьные каникулы. Если дети ходят в школу в другом кантоне, добавь их даты кнопкой «+ Добавить свои даты каникул».</p>',
+  hol: '<p>Если галочка стоит, праздники кантона отмечены розовым, и в эти дни план не считается.</p><p>Сними галочку, если ты обычно работаешь и в праздники, например в магазине, больнице или ресторане.</p>',
+  sch: '<p>Школьные каникулы не выходные для взрослых. Они показаны, чтобы ты заранее видела, когда дети дома, и могла планировать отпуск.</p><p>Даты встроены для всех 26 кантонов на 2026 и 2027 годы. Где кантон назначает каникулы сам, даты общие для всего кантона. Где их назначает община, взяты даты главного города кантона.</p><p>В твоей общине или школе даты могут отличаться. Тогда выключи эту галочку и добавь свои даты кнопкой «+ Добавить свои даты каникул».</p>',
+  rate: '<p>Сколько тебе платят за час до вычетов, в франках. Тогда видна примерная сумма брутто за месяц.</p><p>Это ориентир. Точную сумму смотри в своём расчётном листе.</p>',
+  fz: '<p>При почасовой оплате отпуск часто платят не днями, а надбавкой к каждому часу.</p><ul><li>4 недели отпуска в год (минимум по закону) — 8,33%</li><li>5 недель — 10,64%</li><li>6 недель — 13,04%</li></ul><p>Посмотри в договоре или в расчётном листе, есть ли такая строка.</p>',
+  carry: '<p>Часы, которые остались с прошлого месяца. Плюс, если ты работала больше плана, минус, если меньше.</p><p>Если прошлый месяц заполнен здесь же, перенос подставится сам. Если ты начинаешь учёт в середине года, впиши остаток из своего расчётного листа.</p>',
+  vacY: '<p>Сколько дней отпуска в год у тебя по договору. По закону это не меньше 4 недель, то есть 20 дней при пятидневке, а до 20 лет не меньше 5 недель.</p><p>Тогда в итоге видно, сколько дней ты уже взяла и сколько осталось.</p>',
+  vacP: '<p>Дни отпуска, которые ты не успела взять в прошлом году и которые работодатель разрешил перенести. Если таких нет, оставь поле пустым.</p>',
+  quick: '<p>Впиши своё обычное время, и оно встанет во все твои дни этого месяца, которые ещё пустые. Уже заполненные дни не меняются.</p><p>Потом поправь дни, когда было иначе.</p>',
+  pause: '<p>Впиши перерыв, который не оплачивается, например обед. Короткие оплачиваемые паузы не вписывай.</p><p>По закону перерыв должен быть не меньше 15 минут при работе дольше 5,5 часа, не меньше 30 минут дольше 7 часов и не меньше часа дольше 9 часов.</p>',
+  periods: '<p>Если в один день было несколько заходов, например утром, днём и вечером, добавь ещё период. Часы всех периодов сложатся.</p>',
+  part: '<ul><li><b>Целый день.</b> Тебя не было весь день.</li><li><b>Полдня.</b> Засчитывается половина плана этого дня.</li><li><b>Часть дня.</b> Впиши, сколько часов тебя не было, например 2:00 у врача.</li></ul><p>Если в остальное время дня ты работала, впиши это время, и всё сложится.</p>',
+  types: '<ul><li><b>Работа</b> или твоё название. Обычный день, впиши время.</li><li><b>Отпуск.</b> Оплачиваемый отпуск. Засчитывается как выполненный план и уменьшает остаток отпуска.</li><li><b>Болезнь или несчастный случай.</b> Засчитывается как выполненный план. Часто с третьего дня работодатель просит справку врача.</li><li><b>Оплачиваемое отсутствие.</b> Врач, переезд, свадьба, похороны, рождение ребёнка и другие дни, которые работодатель оплачивает. Засчитывается как план.</li><li><b>Отгул за переработку.</b> Ты отдыхаешь за накопленные часы. План остаётся, поэтому переработка уменьшается.</li><li><b>Неоплачиваемый отпуск.</b> День без оплаты, план в этот день не считается.</li><li><b>Праздник.</b> Праздник кантона, план не считается.</li><li><b>Выходной.</b> День не по графику. Если ты всё же работала, впиши время, оно пойдёт сверх плана.</li></ul>',
+  cards: '<ul><li><b>План часов на месяц.</b> Сколько нужно по договору или по твоей цели.</li><li><b>Часов записано.</b> Сколько ты вписала.</li><li><b>Засчитано.</b> Часы за отпуск, болезнь и оплачиваемое отсутствие.</li><li><b>Сверх плана или меньше плана.</b> Разница этого месяца.</li><li><b>Перенесено.</b> Остаток с прошлого месяца.</li><li><b>Итог с переносом.</b> Твоя переработка или недоработка на сегодня, она переходит дальше.</li></ul>',
+  profiles: '<p>Если у тебя две работы или работа и учёба, создай отдельный учёт для каждой. У каждого учёта свои условия, месяцы и PDF.</p><p>Переключайся между ними плашками «Мои учёты».</p>',
+  backup: '<p>Записи хранятся только в браузере на этом устройстве. На iPhone Safari сам стирает записи сайтов, на которые долго не заходили.</p><p>Резервная копия — это файл на твоём устройстве. Из него записи можно вернуть здесь или на другом телефоне и компьютере. Храни его бережно, в нём твои личные записи.</p>'
+};
+let qPop = null, qBtn = null;
+function closeHelp(){ if (qPop){ qPop.remove(); qPop = null; } if (qBtn){ qBtn.setAttribute('aria-expanded', 'false'); qBtn = null; } }
+document.addEventListener('click', e => {
+  const b = e.target.closest('.qh');
+  if (b){ e.preventDefault(); e.stopPropagation();
+    if (qBtn === b){ closeHelp(); return; }
+    closeHelp();
+    qPop = document.createElement('div'); qPop.className = 'qpop'; qPop.setAttribute('role', 'dialog');
+    qPop.innerHTML = (HELP[b.dataset.help] || '') + '<button type="button" class="qclose" aria-label="Закрыть подсказку">✕</button>';
+    document.body.appendChild(qPop);
+    const rc = b.getBoundingClientRect(), w = Math.min(340, window.innerWidth - 32);
+    qPop.style.width = w + 'px';
+    const left = Math.max(16, Math.min(rc.left + rc.width / 2 - w / 2, window.innerWidth - 16 - w));
+    qPop.style.left = (left + window.scrollX) + 'px'; qPop.style.top = (rc.bottom + window.scrollY + 8) + 'px';
+    qBtn = b; b.setAttribute('aria-expanded', 'true'); return;
+  }
+  if (qPop && (!e.target.closest('.qpop') || e.target.closest('.qclose'))){ if (e.target.closest('.qclose')) { e.preventDefault(); } closeHelp(); }
+}, true);
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeHelp(); });
+window.addEventListener('resize', closeHelp);
+
+/* ---------- несколько учётов ---------- */
+const pname = (p, i) => (p.set.what || '').trim() || (i === 0 ? 'Работа' : 'Учёт ' + (i + 1));
+function renderProfs(){
+  const P = R.profiles;
+  $('profs').innerHTML = (P.length > 1 ? '<span class="pl">Мои учёты</span>' + P.map((p, i) => `<button type="button" class="pchip${i === R.active ? ' on' : ''}" data-prof="${i}" aria-pressed="${i === R.active}">${esc(pname(p, i))}</button>`).join('') : '')
+    + `<button type="button" class="pnew" id="newProf">${P.length > 1 ? '+ Новый учёт' : '+ Ещё один учёт, например вторая работа или учёба'}</button><button type="button" class="qh" data-help="profiles" aria-label="Подсказка: несколько учётов" aria-expanded="false">?</button>`;
+}
+function renderDelProf(){
+  $('delProfBox').innerHTML = R.profiles.length > 1 ? '<div><button class="btn ghost" type="button" id="delProf">Удалить этот учёт</button></div>' : '';
+}
+function switchProf(i){ R.active = i; S = R.profiles[i]; openDay = null; save(); renderAll(); }
+$('profs').addEventListener('click', e => {
+  const b = e.target.closest('[data-prof]'); if (b){ switchProf(+b.dataset.prof); return; }
+  if (e.target.closest('#newProf')){ const p = fresh(S.set); R.profiles.push(p); switchProf(R.profiles.length - 1); $('setBox').open = true; $('fWhat').focus(); say('Новый учёт создан. Впиши, что ты учитываешь, и свой план часов.'); }
+});
+$('delProfBox').addEventListener('click', e => {
+  const id = e.target.id;
+  if (id === 'delProf') $('delProfBox').innerHTML = `<span class="confirm">Удалить учёт «${esc(pname(S, R.active))}» со всеми месяцами? Вернуть будет нельзя.<button class="btn danger" id="delProfYes" type="button">Да, удалить учёт</button><button class="btn ghost" id="delProfNo" type="button">Отмена</button></span>`;
+  else if (id === 'delProfNo') renderDelProf();
+  else if (id === 'delProfYes'){ const n = pname(S, R.active); R.profiles.splice(R.active, 1); switchProf(0); say('Учёт «' + n + '» удалён.'); }
+});
+
+/* ---------- резервная копия ---------- */
+const hasData = () => R.profiles.some(p => Object.values(p.months).some(m => Object.keys(m.d || {}).length));
+function renderBackup(){
+  const lb = R.lastBackup ? new Date(R.lastBackup) : null, days = lb ? (Date.now() - lb) / 864e5 : Infinity;
+  $('bkInfo').textContent = (lb ? 'Последняя копия ' + lb.toLocaleDateString('ru-RU') + '. ' : 'Копии ещё нет. ') + 'Сохраняй её раз в месяц. В файле все твои учёты и месяцы, его можно загрузить обратно на этом или другом устройстве.';
+  $('backupBox').classList.toggle('due', hasData() && days > 30);
+}
+let pendingRoot = null;
+$('bkSave').addEventListener('click', async () => {
+  const d = new Date(), stamp = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+  const data = JSON.stringify({app:'svoiludi-uchet-vremeni', v:2, saved: d.toISOString(), data: R});
+  const ok = await offer('Учёт моего времени — резервная копия ' + stamp + '.json', new Blob([data], {type:'application/json'}));
+  if (ok){ R.lastBackup = d.toISOString(); save(); renderBackup(); }
+});
+$('bkLoad').addEventListener('click', () => $('bkFile').click());
+$('bkFile').addEventListener('change', e => {
+  const f = e.target.files && e.target.files[0]; if (!f) return; const fr = new FileReader();
+  fr.onload = () => { let obj = null; try { obj = JSON.parse(fr.result); } catch(err) {}
+    const root = obj ? loadRoot(JSON.parse(JSON.stringify(obj.data || obj))) : null;
+    if (!root){ say('Этот файл не похож на резервную копию учёта времени.'); return; }
+    if (obj.saved) root.lastBackup = root.lastBackup || obj.saved; pendingRoot = root; const when = obj.saved ? new Date(obj.saved).toLocaleDateString('ru-RU') : '';
+    $('bkConfirm').innerHTML = `<span class="confirm">В файле ${root.profiles.length > 1 ? root.profiles.length + ' учёта' : 'один учёт'}${when ? ', копия от ' + when : ''}. Заменить записи на этом устройстве?<button class="btn danger" id="bkYes" type="button">Да, загрузить</button><button class="btn ghost" id="bkNo" type="button">Отмена</button></span>`; };
+  fr.readAsText(f); e.target.value = '';
+});
+$('bkConfirm').addEventListener('click', e => {
+  if (e.target.id === 'bkNo'){ pendingRoot = null; $('bkConfirm').innerHTML = ''; }
+  if (e.target.id === 'bkYes' && pendingRoot){ R = pendingRoot; pendingRoot = null; S = R.profiles[R.active]; save(); $('bkConfirm').innerHTML = ''; openDay = null; renderAll(); say('Записи загружены из резервной копии.'); }
+});
+if (/Instagram|FBAN|FBAV|FB_IAB|Line\/|Telegram|WhatsApp|; wv\)/i.test(navigator.userAgent)) $('inappWarn').hidden = false;
+function renderAll(){ renderProfs(); renderSet(); renderMonth(); clearIdle(); renderBackup(); }
+
+/* ---------- месяц ---------- */
+function renderMonthName(){ const {y, m} = ym(); $('curM').textContent = MONTHS[m] + ' ' + y; }
+function typeOptions(sel){ return Object.entries(TYPES).map(([k, t]) => `<option value="${k}"${k === sel ? ' selected' : ''}>${esc(tname(k))}</option>`).join(''); }
+function blkInputs(I, d){
+  const bl = I.blocks.length ? I.blocks : [{s:'', e:'', p:''}];
+  return bl.map((b, i) => `<div class="blk">
+      <span class="tt"><input type="time" data-d="${d}" data-b="${i}" data-f="s" value="${esc(b.s)}" aria-label="${d} число, начало">
+      <span class="dash">–</span>
+      <input type="time" data-d="${d}" data-b="${i}" data-f="e" value="${esc(b.e)}" aria-label="${d} число, конец"></span>
+      <span class="pz"><span class="pl">перерыв</span><input type="number" min="0" step="5" data-d="${d}" data-b="${i}" data-f="p" value="${esc(b.p)}" placeholder="0" aria-label="${d} число, перерыв в минутах"><span class="pl">мин</span></span>
+      ${bl.length > 1 ? `<button class="x" type="button" data-act="delb" data-d="${d}" data-b="${i}" aria-label="Убрать этот период">✕</button>` : ''}
+      ${i === bl.length - 1 ? `<button class="addb inl" type="button" data-act="addb" data-d="${d}" title="Добавить ещё один период в этот день">+ Ещё период</button>` : ''}
+    </div>`).join('');
+}
+function partSel(I, d){
+  return `<button type="button" class="qh" data-help="part" aria-label="Подсказка: сколько длилось" aria-expanded="false">?</button><select class="partsel" data-d="${d}" data-f="part" aria-label="${d} число, сколько длилось отсутствие"><option value="full"${I.part === 'full' ? ' selected' : ''}>Целый день</option><option value="half"${I.part === 'half' ? ' selected' : ''}>Полдня</option><option value="time"${I.part === 'time' ? ' selected' : ''}>Часть дня, часы</option></select>${I.part === 'time' ? `<input type="text" class="ptin" inputmode="decimal" data-d="${d}" data-f="pt" value="${esc(I.pt)}" placeholder="2:00" aria-label="${d} число, сколько часов отсутствия">` : ''}`;
+}
+function blocksHtml(I, d){
+  if (ABS.includes(I.type)){
+    const note = I.cred ? `засчитано ${fmt(I.cred)}` : I.type === 'comp' && I.norm && I.part === 'full' ? `план ${fmt(I.norm)} уходит из переработки` : '';
+    return `<div class="absrow">${partSel(I, d)}${note ? `<span class="cred">${note}</span>` : ''}</div>` + (I.part !== 'full' ? blkInputs(I, d) : '');
+  }
+  if (!TIMED(I.type)) return '<div class="cred">—</div>';
+  return blkInputs(I, d);
+}
+function rowCls(I){ const t = new Date(); return 'dr t-' + I.type + (I.sch ? ' sch' : '') + (I.hol ? ' holr' : '') + (I.dow === 0 || I.dow === 6 ? ' we' : '') + (I.dt.toDateString() === t.toDateString() ? ' today' : ''); }
+function numsHtml(I){
+  const dcls = I.diff > 0 ? 'pos' : I.diff < 0 ? 'neg' : '';
+  return `<div class="num col-h" id="h${I.dt.getDate()}"><span class="lbl">Часы</span>${I.worked ? fmt(I.worked + I.cred) : I.cred ? `<span class="muted" title="засчитано по плану">${fmt(I.cred)}</span>` : '–'}</div>
+    <div class="num col-n" id="n${I.dt.getDate()}"><span class="lbl">План</span>${I.norm ? fmt(I.norm) : '–'}</div>
+    <div class="num col-d ${dcls}" id="f${I.dt.getDate()}"><span class="lbl">Разница</span>${I.diff ? fmt(I.diff, true) : '–'}</div>`;
+}
+const MQ = window.matchMedia('(max-width:900px)'); let isM = MQ.matches;
+try { MQ.addEventListener('change', e => { isM = e.matches; renderMonth(); }); } catch(e) {}
+let openDay = null;
+function mSummary(I){
+  const times = I.blocks.filter(b => b.s || b.e).map(b => (b.s || '?') + '–' + (b.e || '?')).join(', ');
+  if (TIMED(I.type) && (I.type === 'work' || I.worked)){
+    const p = I.blocks.reduce((a, b) => a + Math.max(0, num(b.p)), 0);
+    return times ? `<span class="mt">${times}</span><span class="ms">${I.type === 'off' ? 'работа в выходной · ' : ''}${p ? `перерыв ${p} мин` : 'без перерыва'}</span>` : `<span class="ms">${esc(tname('work'))} · время не вписано</span>`;
+  }
+  const pl = I.part === 'half' ? ' · полдня' : I.part === 'time' ? ' · ' + (I.pt ? esc(I.pt) + ' ч' : 'часы не вписаны') : '';
+  return `<span class="mt">${esc(tname(I.type))}${pl}</span>${times && I.part !== 'full' ? `<span class="ms">работа ${times}</span>` : ''}${I.cred ? `<span class="ms">засчитано ${fmt(I.cred)}</span>` : ''}`;
+}
+function mRowHtml(I, d){
+  const open = openDay === d, t = new Date();
+  return `<button type="button" class="mrow t-${I.worked ? "work" : I.type}${I.sch ? ' sch' : ''}${I.hol ? ' holr' : ''}${I.dow === 0 || I.dow === 6 ? ' we' : ''}${I.hol ? ' hol' : ''}${open ? ' open' : ''}${I.dt.toDateString() === t.toDateString() ? ' today' : ''}" data-act="open" data-d="${d}" aria-expanded="${open}" id="mr${d}">
+    <span class="md"><b>${d}</b><span>${WD[I.dow]}</span></span>
+    <span class="mi">${I.hol ? `<small>${esc(I.hol.n)}</small>` : ''}${I.sch ? `<small class="schn">${esc(I.sch)}</small>` : ''}${mSummary(I)}${I.note ? `<span class="ms">${esc(I.note)}</span>` : ''}</span>
+    <span class="mh">${I.worked + I.cred ? fmt(I.worked + I.cred) : ''}${fixed() && I.diff && (I.worked || !TIMED(I.type)) ? `<small class="${I.diff > 0 ? 'pos' : 'neg'}">${fmt(I.diff, true)}</small>` : ''}</span>
+    <span class="chev" aria-hidden="true"></span></button>`;
+}
+const PZ = [0, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60];
+const pzOpen = new Set();
+function mPeriods(I, d){
+  const bl = I.blocks.length ? I.blocks : [{s:'', e:'', p:''}];
+  return bl.map((b, i) => { const pv = b.p === '' || b.p == null ? null : num(b.p);
+    return `<div class="mblk">${bl.length > 1 ? `<div class="mbh"><b>Период ${i + 1}</b><button type="button" class="addb" data-act="delb" data-d="${d}" data-b="${i}">Убрать этот период</button></div>` : ''}
+    <div class="tpair"><label>Начало<span class="tin${b.s ? '' : ' empty'}"><input type="time" data-d="${d}" data-b="${i}" data-f="s" value="${esc(b.s)}"></span></label><label>Конец<span class="tin${b.e ? '' : ' empty'}"><input type="time" data-d="${d}" data-b="${i}" data-f="e" value="${esc(b.e)}"></span></label></div>
+    ${bl.length > 1 && !pzOpen.has(d + '-' + i) ? `<button type="button" class="pzsum" data-act="pzopen" data-d="${d}" data-b="${i}">Перерыв ${pv ? pv + ' мин' : 'нет'} · <u>изменить</u></button>` : `<div class="plbl">Перерыв в минутах<button type="button" class="qh" data-help="pause" aria-label="Подсказка: перерыв" aria-expanded="false">?</button></div>
+    <div class="pchips">${PZ.map(v => `<button type="button" class="tchip${pv === v ? ' on' : ''}" data-act="pz" data-v="${v}" data-d="${d}" data-b="${i}">${v}</button>`).join('')}<label class="pown">Другое число минут<input type="number" min="0" step="5" inputmode="numeric" data-d="${d}" data-b="${i}" data-f="p" value="${pv != null && !PZ.includes(pv) ? esc(b.p) : ''}" placeholder="мин" aria-label="Перерыв, другое число минут"></label></div>`}</div>`; }).join('')
+    + `<div class="addrow"><button type="button" class="addper" data-act="addb" data-d="${d}">+ Ещё период в этот день</button><button type="button" class="qh" data-help="periods" aria-label="Подсказка: несколько периодов" aria-expanded="false">?</button></div>`;
+}
+function mEditHtml(I, d){
+  const types = Object.entries(TYPES).map(([k, t]) => `<button type="button" class="tchip${k === I.type ? ' on' : ''}" data-act="type" data-t="${k}" data-d="${d}" aria-pressed="${k === I.type}">${esc(tname(k))}</button>`).join('');
+  let body = '';
+  if (TIMED(I.type)){
+    body = mPeriods(I, d) + `${I.type === 'off' ? '<p class="hint">Если в выходной ты этим занималась или занимался, впиши время. Все часы этого дня пойдут сверх плана.</p>' : ''}<div class="mrowbtns"><button type="button" class="btn ghost" data-act="usual" data-d="${d}">Как обычно ${esc($('qS').value)}–${esc($('qE').value)}</button></div>`;
+  } else if (ABS.includes(I.type)){
+    body = `<div class="plbl">Сколько длилось<button type="button" class="qh" data-help="part" aria-label="Подсказка: сколько длилось" aria-expanded="false">?</button></div><div class="partchips">${[['full','Целый день'],['half','Полдня'],['time','Часть дня']].map(([v, l]) => `<button type="button" class="tchip${I.part === v ? ' on' : ''}" data-act="part" data-v="${v}" data-d="${d}">${l}</button>`).join('')}</div>`
+      + (I.part === 'time' ? `<label class="ptrow">Сколько часов<input type="text" inputmode="decimal" data-d="${d}" data-f="pt" value="${esc(I.pt)}" placeholder="например 2:00"></label>` : '')
+      + `<p class="hint">${I.cred ? 'Засчитывается по плану ' + fmt(I.cred) + '.' : I.type === 'comp' && I.norm && I.part === 'full' ? 'План ' + fmt(I.norm) + ' уходит из твоей переработки.' : I.type === 'unpaid' ? 'Эти часы не оплачиваются и уменьшают план дня.' : ''}${I.part !== 'full' ? ' Если в остальное время ты работала или работал, впиши это время ниже.' : ''}</p>`
+      + (I.part !== 'full' ? mPeriods(I, d) : '');
+  } else body = '<p class="hint">В этот день часы не считаются.</p>';
+  const hi = I.hol && HINFO[I.hol.k] ? `<div class="hinfo"><b>${esc(I.hol.n)}</b><p>${HINFO[I.hol.k]}</p></div>` : '';
+  return `<div class="med" id="me${d}">${hi}<div class="plbl">Что за день<button type="button" class="qh" data-help="types" aria-label="Подсказка: типы дней" aria-expanded="false">?</button></div><div class="tchips" role="group" aria-label="Что за день">${types}</div>${body}
+    <label class="field">Заметка или проект<input type="text" data-d="${d}" data-f="n" value="${esc(I.note)}" placeholder="например, инвентаризация"></label>
+    <button type="button" class="clr" data-act="clr" data-d="${d}">Очистить этот день</button>
+    <div class="mrowbtns"><button type="button" class="btn gold" data-act="next" data-d="${d}">${d < daysIn(S.cur) ? 'Следующий день →' : 'Готово'}</button><button type="button" class="btn ghost" data-act="done" data-d="${d}">Закрыть</button></div></div>`;
+}
+function renderMobile(){
+  const k = S.cur; let h = '';
+  for (let d = 1; d <= daysIn(k); d++){ const I = dayInfo(k, d); h += mRowHtml(I, d) + (openDay === d ? mEditHtml(I, d) : ''); }
+  $('month').className = 'ml';
+  $('month').innerHTML = h + '<div class="msum" id="sumRow"></div>';
+  renderSum(); renderCards(); renderCarry();
+}
+function afterEdit(d, full){
+  const I = dayInfo(S.cur, d);
+  if (isM){ $('mr' + d).outerHTML = mRowHtml(I, d); if (full && $('me' + d)) $('me' + d).outerHTML = mEditHtml(I, d); }
+  else { if (full) $('b' + d).innerHTML = blocksHtml(I, d); updateRow(d); }
+  renderSum(); renderCards();
+}
+function renderMonth(){
+  closeHelp(); renderMonthName(); renderMonthInfo(); renderHolList(); renderSchNote();
+  if (isM) return renderMobile();
+  $('month').className = 'month';
+  const k = S.cur, n = daysIn(k);
+  let h = `<div class="dr head"><div>День</div><div>Что за день<button type="button" class="qh" data-help="types" aria-label="Подсказка: типы дней" aria-expanded="false">?</button></div><div>Начало, конец и перерыв в минутах<button type="button" class="qh" data-help="pause" aria-label="Подсказка: перерыв" aria-expanded="false">?</button></div><div class="num col-h">Часы</div><div class="num col-n">План</div><div class="num col-d">Разница</div><div>Заметка или проект</div></div>`;
+  for (let d = 1; d <= n; d++){
+    const I = dayInfo(k, d);
+    h += `<div class="${rowCls(I)}" id="r${d}">
+      <div class="dd"><b>${d}</b><span>${WD[I.dow]}</span>${I.hol ? `<small title="${esc(HINFO[I.hol.k] || '')}">${esc(I.hol.n)}</small>` : ''}${I.sch ? `<small class="schn">${esc(I.sch)}</small>` : ''}<button type="button" class="ddclr" data-act="clr" data-d="${d}" aria-label="Очистить ${d} число">очистить</button></div>
+      <select data-d="${d}" data-f="t" aria-label="${d} ${MONTHS_GEN[I.dt.getMonth()]}, что за день">${typeOptions(I.type)}</select>
+      <div class="blocks" id="b${d}">${blocksHtml(I, d)}</div>
+      ${numsHtml(I)}
+      <input type="text" class="note" data-d="${d}" data-f="n" value="${esc(I.note)}" placeholder="Заметка или проект" aria-label="${d} число, заметка или проект">
+    </div>`;
+  }
+  h += '<div class="sum" id="sumRow"></div>';
+  $('month').innerHTML = h;
+  $('month').classList.toggle('hourly', !fixed());
+  renderSum(); renderCards(); renderCarry();
+}
+function updateRow(d){
+  const I = dayInfo(S.cur, d), r = $('r' + d); if (!r) return;
+  r.className = rowCls(I);
+  ['h','n','f'].forEach(x => $(x + d).remove());
+  $('b' + d).insertAdjacentHTML('afterend', numsHtml(I));
+}
+function renderSum(){
+  const T = calc(S.cur), dc = T.diff > 0 ? 'pos' : T.diff < 0 ? 'neg' : '';
+  if (isM){ $('sumRow').innerHTML = `<div class="lab">Всего за месяц</div><div class="num"><span class="lbl">Часы</span>${fmt(T.worked + T.cred)}</div>` + (fixed() ? `<div class="num"><span class="lbl">План</span>${fmt(T.norm)}</div><div class="num ${dc}"><span class="lbl">Разница</span>${fmt(T.diff, true)}</div>` : ''); return; }
+  $('sumRow').innerHTML = `<div class="lab">Всего за месяц</div><div class="num col-h"><span class="lbl">Часы</span>${fmt(T.worked + T.cred)}</div><div class="num col-n"><span class="lbl">План</span>${fmt(T.norm)}</div><div class="num col-d ${dc}"><span class="lbl">Разница</span>${fmt(T.diff, true)}</div><div></div>`;
+}
+function renderCards(){
+  const T = calc(S.cur), c = [];
+  const cls = v => v > 0 ? 'pos' : v < 0 ? 'neg' : '';
+  if (fixed()){
+    c.push([fmt(T.norm), 'план часов на месяц']);
+    c.push([fmt(T.worked), 'часов записано']);
+    if (T.cred) c.push([fmt(T.cred), 'часов засчитано за отпуск, болезнь и отсутствие']);
+    c.push([fmt(T.diff, true), T.diff >= 0 ? 'сверх плана в этом месяце' : 'меньше плана в этом месяце', cls(T.diff)]);
+    c.push([fmt(T.carry, true), 'перенесено с прошлого месяца']);
+    c.push([fmt(T.bal, true), T.bal >= 0 ? 'итог с переносом, переходит дальше' : 'не хватает с переносом, переходит дальше', cls(T.bal), true]);
+  } else {
+    c.push([fmt(T.worked), 'часов записано', '', true]);
+    c.push([String(T.workDays), 'дней с записями']);
+    if (T.pay){ c.push([chf(T.pay), 'CHF брутто за часы, ориентир']);
+      if (T.fzPay) c.push([chf(T.fzPay), 'CHF надбавка за отпуск ' + String(S.set.fz).replace('.', ',') + '%']);
+      c.push([chf(T.pay + T.fzPay), 'CHF брутто всего, до вычетов', '', true]); }
+  }
+  const days = [['vac','дней отпуска'],['sick','дней болезни'],['paid','дней оплачиваемого отсутствия'],['comp','дней отгула'],['unpaid','дней неоплачиваемого отпуска']].filter(([k]) => T[k]);
+  days.forEach(([k, l]) => c.push([fmtDays(T[k]), l]));
+  const V = vacInfo(); if (V) c.push([fmtDays(V.left), `дней отпуска осталось в ${V.y} году, взято ${fmtDays(V.taken)} из ${fmtDays(V.tot)}`, V.left < 0 ? 'neg' : '']);
+  $('cards').innerHTML = c.map(([b, s, k, main]) => `<div class="card${main ? ' main' : ''}"><b class="${k || ''}">${b}</b><span>${s}</span></div>`).join('');
+}
+function refresh(){ renderMonth(); }
+
+/* ввод в днях: время и заметки обновляют только свою строку, чтобы не терять фокус */
+function rec(d){ const md = monthData(S.cur); if (!md.d[d]) md.d[d] = {}; return md.d[d]; }
+$('month').addEventListener('input', e => {
+  const el = e.target, d = +el.dataset.d, f = el.dataset.f; if (!d || !f) return;
+  const r = rec(d);
+  if (f === 'n'){ r.n = el.value; save(); if (isM) afterEdit(d, false); return; }
+  if (f === 't' || f === 'part') return;
+  if (f === 'pt'){ if (!r.t) r.t = dayInfo(S.cur, d).type; r.pt = el.value; save(); afterEdit(d, false); return; }
+  const i = +el.dataset.b; if (!r.b) r.b = []; while (r.b.length <= i) r.b.push({s:'', e:'', p:''});
+  if (!r.t) r.t = dayInfo(S.cur, d).type;
+  r.b[i][f] = el.value; save(); afterEdit(d, false);
+  if (el.parentNode.classList.contains('tin')) el.parentNode.classList.toggle('empty', !el.value);
+  if (isM && f === 'p') $('me' + d).querySelectorAll(`[data-act=pz][data-b="${i}"]`).forEach(c => c.classList.toggle('on', el.value !== '' && num(el.value) === +c.dataset.v));
+});
+$('month').addEventListener('change', e => {
+  const el = e.target, d = +el.dataset.d; if (!d) return;
+  if (el.dataset.f === 'part'){ const rr = rec(d); if (!rr.t) rr.t = dayInfo(S.cur, d).type; rr.part = el.value; save(); afterEdit(d, true); return; }
+  if (el.dataset.f !== 't') return;
+  rec(d).t = el.value; save();
+  const I = dayInfo(S.cur, d); $('b' + d).innerHTML = blocksHtml(I, d); updateRow(d); renderSum(); renderCards();
+});
+$('month').addEventListener('click', e => {
+  const b = e.target.closest('[data-act]'); if (!b) return; const d = +b.dataset.d, act = b.dataset.act;
+  if (act === 'open' || act === 'done' || act === 'next'){
+    openDay = act === 'open' ? (openDay === d ? null : d) : act === 'next' && d < daysIn(S.cur) ? d + 1 : null;
+    renderMonth();
+    const tgt = $('mr' + (openDay || d)); if (tgt && (openDay || act !== 'open')) tgt.scrollIntoView({block: openDay ? 'start' : 'nearest', behavior: 'smooth'});
+    return;
+  }
+  const r = rec(d);
+  if (act === 'clr'){ delete monthData(S.cur).d[d]; save(); if (isM) afterEdit(d, true); else renderMonth(); say(d + ' число очищено.'); return; }
+  if (act === 'type'){ r.t = b.dataset.t; save(); afterEdit(d, true); return; }
+  if (act === 'part'){ if (!r.t) r.t = dayInfo(S.cur, d).type; r.part = b.dataset.v; save(); afterEdit(d, true); return; }
+  if (act === 'usual'){ r.t = dayInfo(S.cur, d).type === 'off' ? 'off' : 'work'; r.b = [{s: $('qS').value, e: $('qE').value, p: $('qP').value}]; save(); afterEdit(d, true); return; }
+  if (!r.t) r.t = dayInfo(S.cur, d).type;
+  if (!r.b || !r.b.length) r.b = [{s:'', e:'', p:''}];
+  if (act === 'pzopen'){ pzOpen.add(d + '-' + b.dataset.b); afterEdit(d, true); return; }
+  if (act === 'pz') r.b[+b.dataset.b].p = b.dataset.v;
+  if (act === 'addb') r.b.push({s:'', e:'', p:''});
+  if (act === 'delb') r.b.splice(+b.dataset.b, 1);
+  save(); afterEdit(d, true);
+  if (act === 'addb'){ const box = isM ? $('me' + d) : $('b' + d), ins = box.querySelectorAll('input[data-f=s]'); ins[ins.length - 1].focus(); }
+});
+
+$('prevM').addEventListener('click', () => { S.cur = prevKey(S.cur); openDay = null; save(); renderMonth(); });
+$('nextM').addEventListener('click', () => { S.cur = nextKey(S.cur); openDay = null; save(); renderMonth(); });
+
+$('qFill').addEventListener('click', () => {
+  const s = $('qS').value, en = $('qE').value, p = $('qP').value;
+  if (!s || !en){ say('Впиши начало и конец работы.'); return; }
+  let cnt = 0;
+  for (let d = 1; d <= daysIn(S.cur); d++){
+    const I = dayInfo(S.cur, d);
+    if (I.type !== 'work' || I.blocks.some(b => b.s || b.e)) continue;
+    const r = rec(d); r.t = 'work'; r.b = [{s, e: en, p}]; cnt++;
+  }
+  save(); renderMonth();
+  say(cnt ? 'Заполнено рабочих дней ' + cnt + '. Проверь дни, когда было иначе.' : 'Пустых рабочих дней не осталось.');
+});
+
+/* ---------- очистить и удалить ---------- */
+let sayT; function say(t){ $('status').textContent = t; clearTimeout(sayT); sayT = setTimeout(() => { $('status').textContent = ''; }, 6000); }
+function clearIdle(){ $('clearBox').innerHTML = '<button class="btn ghost" id="clearBtn" type="button">Очистить этот месяц</button> <button class="btn ghost" id="wipeBtn" type="button">Удалить историю</button>'; }
+$('clearBox').addEventListener('click', e => {
+  const id = e.target.id; const {y, m} = ym();
+  if (id === 'clearBtn') $('clearBox').innerHTML = `<span class="confirm">Стереть все записи за ${MONTHS[m].toLowerCase()} ${y}?<button class="btn danger" id="clearYes" type="button">Да, очистить месяц</button><button class="btn ghost" id="cNo" type="button">Отмена</button></span>`;
+  else if (id === 'wipeBtn') $('clearBox').innerHTML = '<span class="confirm">Удалить все твои учёты, месяцы и условия с этого устройства? Вернуть их будет нельзя.<button class="btn danger" id="wipeYes" type="button">Да, удалить историю</button><button class="btn ghost" id="cNo" type="button">Отмена</button></span>';
+  else if (id === 'cNo') clearIdle();
+  else if (id === 'clearYes'){ delete S.months[S.cur]; save(); clearIdle(); renderMonth(); say('Месяц очищен.'); }
+  else if (id === 'wipeYes'){ try { localStorage.removeItem(KEY); } catch(err) {} R = freshRoot(); S = R.profiles[0]; openDay = null; renderAll(); say('История удалена. В браузере больше нет твоих записей.'); }
+});
+
+/* ---------- поделиться ---------- */
+function shareLinks(){ const t = $('shareText').value;
+  $('tgShare').href = 'https://t.me/share/url?url=' + encodeURIComponent(SHARE_URL) + '&text=' + encodeURIComponent(t.replace(SHARE_URL, '').trim());
+  $('waShare').href = 'https://wa.me/?text=' + encodeURIComponent(t); }
+$('shareText').value = SHARE_MSG; shareLinks();
+$('shareText').addEventListener('input', shareLinks);
+$('shareBtn').addEventListener('click', () => { const p = $('sharePanel'); p.hidden = !p.hidden; $('shareBtn').setAttribute('aria-expanded', String(!p.hidden)); });
+$('copyMsg').addEventListener('click', () => {
+  const fb = () => { $('shareText').select(); say('Выдели текст и скопируй его вручную.'); };
+  try { navigator.clipboard.writeText($('shareText').value).then(() => say('Сообщение скопировано. Вставь его в чат друзьям.'), fb); } catch(e) { fb(); }
+});
+
+/* ---------- PDF: лист A4 на холсте, как в других инструментах ---------- */
+const PW = 2480, PH = 3508, PM = 150;
+const PC = {sage:'#4F5E3E', bg:'#FFFCF8', ink:'#2F2924', muted:'#7A6E62', line:'#E5D9C9', soft:'#F4EDE3', weekend:'#F6EEE3', brown:'#6E4F3C', mustard:'#B98324', mustardSoft:'#F3E3C2', red:'#B5322A', green:'#2F7F3B', hol:'#D81B78'};
+function roundRect(c, x, y, w, h, r){ r = Math.min(r, h/2, w/2); c.beginPath(); c.moveTo(x+r,y); c.arcTo(x+w,y,x+w,y+h,r); c.arcTo(x+w,y+h,x,y+h,r); c.arcTo(x,y+h,x,y,r); c.arcTo(x,y,x+w,y,r); c.closePath(); }
+function fit(c, text, w){ text = String(text); if (c.measureText(text).width <= w) return text; while (text.length > 1 && c.measureText(text + '…').width > w) text = text.slice(0, -1); return text + '…'; }
+function WM(cv, t){ const c = cv.getContext('2d'), w = cv.width, h = cv.height, fs = Math.round(Math.max(w, h) * 0.032); c.save(); c.font = '700 ' + fs + 'px Manrope, sans-serif'; c.fillStyle = 'rgba(110,79,60,0.075)'; c.textAlign = 'center'; c.textBaseline = 'middle'; c.translate(w / 2, h / 2); c.rotate(-Math.PI / 7); const sx = fs * 9, sy = fs * 5, R = Math.hypot(w, h) / 2 + sx; for (let y = -R, r = 0; y <= R; y += sy, r++) for (let x = -R + (r % 2) * sx / 2; x <= R; x += sx) c.fillText(t, x, y); c.restore(); return cv; }
+function footer(cv){
+  const c = cv.getContext('2d'); c.font = '600 32px Manrope, sans-serif'; let fx = PM; const fy = PH - 90;
+  c.fillStyle = PC.line; c.fillRect(PM, fy - 70, PW - 2*PM, 3);
+  CREDIT_PARTS.forEach((part, i) => {
+    if (i){ c.fillStyle = PC.muted; c.fillText(' · ', fx, fy); fx += c.measureText(' · ').width; }
+    const w = c.measureText(part.t).width; c.fillStyle = PC.brown; c.fillText(part.t, fx, fy); c.fillRect(fx, fy + 6, w, 2);
+    cv.links.push({x: fx, y: fy - 32, w, h: 44, url: part.u}); fx += w;
+  });
+}
+function blockText(I){ return I.timed ? I.blocks.filter(b => b.s || b.e).map(b => (b.s || '?') + '–' + (b.e || '?')).join(', ') : ''; }
+function pauseText(I){ if (!I.timed) return ''; const p = I.blocks.reduce((a, b) => a + Math.max(0, num(b.p)), 0); return p ? fmt(p) : ''; }
+function drawSheet(){
+  const k = S.cur, {y: Y, m: M} = ym(), T = calc(k), fx = fixed();
+  const cv = document.createElement('canvas'); cv.width = PW; cv.height = PH; cv.links = []; const c = cv.getContext('2d');
+  c.fillStyle = PC.bg; c.fillRect(0, 0, PW, PH); c.textBaseline = 'alphabetic';
+  c.fillStyle = PC.ink; c.font = '120px Forum, Georgia, serif'; c.fillText(what() ? 'Учёт времени · ' + what() : 'Учёт моего времени', PM, PM + 100);
+  c.textAlign = 'right'; c.font = '90px Forum, Georgia, serif'; c.fillStyle = PC.brown; c.fillText(MONTHS[M] + ' ' + Y, PW - PM, PM + 100); c.textAlign = 'left';
+  const sub = [S.set.name, S.set.emp, fx ? (S.set.perDay ? 'план ' + fmt(weekPlan()) + ' в неделю' : 'план ' + fmt(wtMin()) + ' в день') : 'без плана', 'кантон ' + CANTONS[S.set.canton]].filter(Boolean).join(' · ');
+  c.fillStyle = PC.muted; c.font = '600 40px Manrope, sans-serif'; c.fillText(fit(c, sub, PW - 2*PM), PM, PM + 175);
+  // карточки
+  let cards;
+  if (fx) cards = [[fmt(T.norm), 'план на месяц'], [fmt(T.worked), 'записано'], [fmt(T.cred), 'засчитано'], [fmt(T.diff, true), 'разница за месяц', T.diff], [fmt(T.carry, true), 'перенос'], [fmt(T.bal, true), 'итог с переносом', T.bal]];
+  else { cards = [[fmt(T.worked), 'часов записано'], [String(T.workDays), 'дней с записями']];
+    if (T.pay){ cards.push([chf(T.pay), 'CHF за часы']); if (T.fzPay) cards.push([chf(T.fzPay), 'CHF надбавка за отпуск']); cards.push([chf(T.pay + T.fzPay), 'CHF брутто, ориентир']); } }
+  const cw = (PW - 2*PM - (cards.length - 1) * 24) / cards.length; let y = PM + 230;
+  cards.forEach(([b, s, v], i) => { const x = PM + i * (cw + 24);
+    c.fillStyle = i === cards.length - 1 ? PC.mustardSoft : PC.soft; roundRect(c, x, y, cw, 170, 24); c.fill();
+    c.fillStyle = v > 0 ? PC.green : v < 0 ? PC.red : PC.ink; c.font = '68px Forum, Georgia, serif'; c.fillText(fit(c, b, cw - 50), x + 28, y + 82);
+    c.fillStyle = PC.muted; c.font = '600 28px Manrope, sans-serif'; c.fillText(fit(c, s, cw - 50), x + 28, y + 132); });
+  y += 240;
+  const extra = [['vac','отпуск'],['sick','болезнь'],['paid','оплач. отсутствие'],['comp','отгул'],['unpaid','неоплач. отпуск'],['hol','праздники']].filter(([kk]) => T[kk]).map(([kk, l]) => l + ' ' + fmtDays(T[kk]) + ' дн.');
+  const VV = vacInfo(); if (VV) extra.push('отпуск в ' + VV.y + ' году: взято ' + fmtDays(VV.taken) + ' из ' + fmtDays(VV.tot) + ', осталось ' + fmtDays(VV.left));
+  if (extra.length){ c.fillStyle = PC.ink; c.font = '600 32px Manrope, sans-serif'; c.fillText('Дни без записей по плану · ' + extra.join(' · '), PM, y); y += 30; }
+  // таблица
+  const cols = fx
+    ? [['Дата',150],['День',330],['Начало и конец',400],['Перерыв',150],['Часы',150],['План',150],['Разница',170],['Заметка',0]]
+    : [['Дата',150],['День',260],['Начало и конец',560],['Перерыв',170],['Часы',170],['Заметка',0]];
+  const tw = PW - 2*PM, fixedW = cols.reduce((a, cc) => a + cc[1], 0); cols[cols.length - 1][1] = tw - fixedW;
+  const numCols = ['Перерыв','Часы','План','Разница'];
+  y += 40; const rh = Math.min(64, Math.floor((PH - 560 - y - 120) / (T.rows.length + 2)));
+  c.fillStyle = PC.brown; c.fillRect(PM, y, tw, rh); c.fillStyle = '#FFFFFF'; c.font = '700 26px Manrope, sans-serif';
+  let x = PM; cols.forEach(([n, w]) => { if (numCols.includes(n)){ c.textAlign = 'right'; c.fillText(n, x + w - 18, y + rh * .64); c.textAlign = 'left'; } else c.fillText(n, x + 18, y + rh * .64); x += w; });
+  y += rh;
+  T.rows.forEach(I => {
+    const we = I.dow === 0 || I.dow === 6;
+    if (we || I.type === 'hol'){ c.fillStyle = I.type === 'hol' ? 'rgba(216,27,120,0.08)' : PC.weekend; c.fillRect(PM, y, tw, rh); }
+    c.fillStyle = PC.line; c.fillRect(PM, y + rh - 2, tw, 2);
+    if (I.sch){ c.fillStyle = PC.sage; c.fillRect(PM, y, 9, rh - 2); }
+    const cells = fx
+      ? [String(I.dt.getDate()).padStart(2, '0') + '.' + String(M + 1).padStart(2, '0') + '.', WD[I.dow] + ' · ' + tshort(I.type) + (I.part === 'half' ? ' ½' : I.part === 'time' ? ' ' + I.pt : ''), blockText(I), pauseText(I), I.worked + I.cred ? fmt(I.worked + I.cred) : '', I.norm ? fmt(I.norm) : '', I.diff ? fmt(I.diff, true) : '', I.note || (I.hol ? I.hol.n : '') || I.sch]
+      : [String(I.dt.getDate()).padStart(2, '0') + '.' + String(M + 1).padStart(2, '0') + '.', WD[I.dow] + ' · ' + tshort(I.type) + (I.part === 'half' ? ' ½' : I.part === 'time' ? ' ' + I.pt : ''), blockText(I), pauseText(I), I.worked ? fmt(I.worked) : '', I.note || (I.hol ? I.hol.n : '')];
+    let xx = PM;
+    cells.forEach((t, i) => { const [n, w] = cols[i];
+      c.font = (n === 'Часы' ? '700 ' : '500 ') + '27px Manrope, sans-serif';
+      c.fillStyle = n === 'Разница' ? (I.diff > 0 ? PC.green : PC.red) : (n === 'День' && I.type !== 'work' && I.type !== 'off' ? PC.brown : PC.ink);
+      if (n === 'Заметка' && !I.note && I.hol) c.fillStyle = PC.hol;
+      else if (n === 'Заметка' && !I.note && I.sch) c.fillStyle = PC.sage;
+      if (numCols.includes(n)){ c.textAlign = 'right'; c.fillText(fit(c, t, w - 30), xx + w - 18, y + rh * .64); c.textAlign = 'left'; }
+      else if (n === 'Начало и конец' && c.measureText(t).width > w - 30){
+        const parts = t.split(', '), half = Math.ceil(parts.length / 2); c.font = '500 21px Manrope, sans-serif';
+        c.fillText(fit(c, parts.slice(0, half).join(', '), w - 30), xx + 18, y + rh * .42); c.fillText(fit(c, parts.slice(half).join(', '), w - 30), xx + 18, y + rh * .82);
+      }
+      else { if (c.measureText(t).width > w - 30) c.font = '500 22px Manrope, sans-serif'; c.fillText(fit(c, t, w - 30), xx + 18, y + rh * .64); }
+      xx += w; });
+    y += rh;
+  });
+  // строка итогов
+  c.fillStyle = PC.ink; c.fillRect(PM, y, tw, 4); y += 4;
+  c.font = '800 28px Manrope, sans-serif'; c.fillText('Всего за месяц', PM + 18, y + rh * .64);
+  const tot = fx ? {Часы: fmt(T.worked + T.cred), План: fmt(T.norm), Разница: fmt(T.diff, true)} : {Часы: fmt(T.worked)};
+  let xx = PM; cols.forEach(([n, w]) => { if (tot[n]){ c.textAlign = 'right'; c.fillStyle = n === 'Разница' ? (T.diff > 0 ? PC.green : T.diff < 0 ? PC.red : PC.ink) : PC.ink; c.fillText(tot[n], xx + w - 18, y + rh * .64); c.textAlign = 'left'; } xx += w; });
+  y += rh + 30;
+  c.fillStyle = PC.muted; c.font = '500 28px Manrope, sans-serif';
+  if (fx){ c.fillText('В «Часы» за дни отпуска, болезни и оплачиваемого отсутствия входит время, засчитанное по плану.', PM, y); y += 44; }
+  c.fillText('Розовым отмечены праздники кантона, зелёной полосой слева школьные каникулы.', PM, y);
+  // подписи
+  const sy = PH - 330, sw = (tw - 120) / 2;
+  if (S.set.emp.trim()) [['Подпись', S.set.name], ['Подпись · ' + S.set.emp.trim(), '']].forEach(([l, nm], i) => { const sx = PM + i * (sw + 120);
+    c.fillStyle = PC.ink; c.fillRect(sx, sy, sw, 3); c.fillStyle = PC.muted; c.font = '600 28px Manrope, sans-serif'; c.fillText(l + (nm ? ' · ' + nm : '') + ' · дата', sx, sy + 44); });
+  c.fillStyle = PC.muted; c.font = 'italic 500 26px Manrope, sans-serif';
+  c.fillText('Ориентир, а не точный расчёт. Всё уточняй и перепроверяй. Автор не несёт ответственности за достоверность данных.', PM, PH - 200);
+  footer(cv); WM(cv, 'svoiludi.ch');
+  return cv;
+}
+
+/* ---------- Excel ---------- */
+async function buildXlsx(){
+  const k = S.cur, {y: Y, m: M} = ym(), T = calc(k), fx = fixed();
+  const wb = new ExcelJS.Workbook(); wb.creator = 'Учёт моего времени · svoiludi.ch'; wb.created = new Date();
+  const C = {ink:'FF2F2924', muted:'FF7A6E62', line:'FFEDE5D8', brand:'FF6E4F3C', sand:'FFF8F4EE', gold:'FFF6ECD6', green:'FF2F7F3B', red:'FFB5322A', white:'FFFFFFFF', hol:'FFFBE3EE'};
+  const F = (o = {}) => Object.assign({name:'Calibri', size:11, color:{argb:C.ink}}, o);
+  const fill = a => ({type:'pattern', pattern:'solid', fgColor:{argb:a}});
+  const hair = {style:'thin', color:{argb:C.line}};
+  const ws = wb.addWorksheet((MONTHS[M] + ' ' + Y).slice(0, 31), {views:[{state:'frozen', ySplit:6, showGridLines:false}], pageSetup:{paperSize:9, orientation:'portrait', fitToPage:true, fitToWidth:1, fitToHeight:0, margins:{left:.4, right:.4, top:.5, bottom:.6, header:.2, footer:.3}}});
+  const heads = fx ? ['Дата','День','Что за день','Начало и конец','Перерыв','Часы','Засчитано','План','Разница в часах','Заметка или проект']
+                   : ['Дата','День','Что за день','Начало и конец','Перерыв','Часы','Заметка или проект'];
+  const widths = fx ? [11,6,22,24,10,10,11,10,11,34] : [11,6,22,28,10,10,40];
+  ws.columns = widths.map(w => ({width: w}));
+  const last = String.fromCharCode(64 + heads.length);
+  ws.mergeCells('A1:' + last + '1'); ws.getCell('A1').value = (what() ? 'Учёт времени · ' + what() : 'Учёт моего времени') + ' · ' + MONTHS[M] + ' ' + Y; ws.getCell('A1').font = F({name:'Georgia', size:20, color:{argb:C.brand}}); ws.getRow(1).height = 34;
+  ws.mergeCells('A2:' + last + '2'); ws.getCell('A2').value = [S.set.name, S.set.emp, fx ? (S.set.perDay ? 'план ' + fmt(weekPlan()) + ' ч в неделю' : 'план ' + fmt(wtMin()) + ' ч в день') : 'без плана', 'кантон ' + CANTONS[S.set.canton]].filter(Boolean).join(' · '); ws.getCell('A2').font = F({color:{argb:C.muted}});
+  if (fx){ ws.mergeCells('A3:' + last + '3'); ws.getCell('A3').value = 'Перенос с прошлого месяца ' + fmt(T.carry, true) + ' ч · итог с переносом ' + fmt(T.bal, true) + ' ч'; ws.getCell('A3').font = F({bold:true}); }
+  else if (T.pay){ ws.mergeCells('A3:' + last + '3'); ws.getCell('A3').value = 'Ставка ' + chf(num(S.set.rate)) + ' CHF в час · за часы ' + chf(T.pay) + ' CHF' + (T.fzPay ? ' · надбавка за отпуск ' + chf(T.fzPay) + ' CHF' : '') + ' · брутто ' + chf(T.pay + T.fzPay) + ' CHF, ориентир'; ws.getCell('A3').font = F({bold:true}); }
+  ws.mergeCells('A4:' + last + '4'); ws.getCell('A4').value = 'Время в часах и минутах, разница в десятичных часах (0,50 = 30 минут). Это ориентир, всё сверяй со своим договором и расчётным листом.'; ws.getCell('A4').font = F({size:9, italic:true, color:{argb:C.muted}});
+  const hr = ws.getRow(6); hr.values = heads; hr.height = 22;
+  hr.eachCell(cl => { cl.font = F({bold:true, color:{argb:C.white}}); cl.fill = fill(C.brand); cl.alignment = {vertical:'middle', wrapText:true}; });
+  const D = v => v ? v / 1440 : null, TF = '[h]:mm;-[h]:mm;"–"';
+  T.rows.forEach((I, i) => {
+    const r = ws.getRow(7 + i);
+    const base = [new Date(Date.UTC(Y, M, I.dt.getDate())), WD[I.dow], tname(I.type) + (I.part === 'half' ? ', полдня' : I.part === 'time' ? ', ' + I.pt + ' ч' : '') + (I.hol ? ' · ' + I.hol.n : '') + (I.sch ? ' · ' + I.sch : ''), blockText(I), D(I.timed ? I.blocks.reduce((a, b) => a + Math.max(0, num(b.p)), 0) : 0), D(I.worked)];
+    r.values = fx ? base.concat([D(I.cred), D(I.norm), I.diff ? Math.round(I.diff / 60 * 100) / 100 : null, I.note]) : base.concat([I.note]);
+    r.getCell(1).numFmt = 'dd.mm.yyyy';
+    [5, 6, 7, 8].forEach(n => { if (n <= heads.length - 1) r.getCell(n).numFmt = TF; }); if (fx) r.getCell(9).numFmt = '+0.00;-0.00;"–"';
+    r.eachCell({includeEmpty:true}, cl => { cl.font = F(); cl.border = {bottom: hair}; if (I.dow === 0 || I.dow === 6) cl.fill = fill(C.sand); if (I.type === 'hol') cl.fill = fill(C.hol); });
+    if (fx && I.diff) r.getCell(9).font = F({color:{argb: I.diff > 0 ? C.green : C.red}});
+  });
+  const s = 7, e = 6 + T.rows.length, tr = ws.getRow(e + 1);
+  tr.getCell(1).value = 'Всего за месяц';
+  const sumCols = fx ? ['E','F','G','H','I'] : ['E','F'];
+  sumCols.forEach(col => { const cl = ws.getCell(col + (e + 1)); cl.value = {formula: `SUM(${col}${s}:${col}${e})`}; cl.numFmt = col === 'I' ? '+0.00;-0.00;"–"' : TF; });
+  tr.eachCell({includeEmpty:true}, cl => { cl.font = F({bold:true}); cl.fill = fill(C.gold); cl.border = {top:{style:'medium', color:{argb:C.ink}}}; });
+  const dr = e + 3;
+  ws.mergeCells(`A${dr}:${last}${dr}`); const dc = ws.getCell('A' + dr);
+  dc.value = 'Это ориентир, а не точный расчёт. План часов, сверхурочные, надбавка за отпуск и сумма к оплате зависят от твоего договора, коллективного договора (GAV) и закона. Все цифры сверяй со своим договором и расчётным листом. Автор не несёт ответственности за достоверность данных. Все часы, ставки и проценты обязательно проверь и впиши сама или сам по своим документам.';
+  dc.font = F({size:9, italic:true, color:{argb:C.muted}}); dc.alignment = {wrapText:true, vertical:'top'}; ws.getRow(dr).height = 48;
+  ws.getCell('A' + (dr + 2)).value = 'Подпись, дата'; ws.getCell((fx ? 'F' : 'E') + (dr + 2)).value = 'Подпись' + (S.set.emp.trim() ? ' · ' + S.set.emp.trim() : '') + ', дата';
+  [ws.getCell('A' + (dr + 2)), ws.getCell((fx ? 'F' : 'E') + (dr + 2))].forEach(cl => { cl.font = F({color:{argb:C.muted}}); cl.border = {top:{style:'thin', color:{argb:C.ink}}}; });
+  ws.headerFooter = {oddFooter:'&L&8Учёт моего времени · ориентир, не точный расчёт · https://svoiludi.ch · https://voznesenskaya.ch&R&8&P / &N'};
+  try { const wc = document.createElement('canvas'); wc.width = 900; wc.height = 560; WM(wc, 'svoiludi.ch');
+    const wid = wb.addImage({base64: wc.toDataURL('image/png'), extension: 'png'}); ws.addBackgroundImage(wid); } catch(e) {}
+  return wb.xlsx.writeBuffer();
+}
+
+/* ---------- скачивание ---------- */
+let downloads = null;
+async function offer(filename, data){
+  if (window.claude && window.claude.use){
+    if (!downloads){ say('Скачивание здесь недоступно.'); return; }
+    try { await downloads.save({filename, data}); say('Файл «' + filename + '» сохранён.'); return true; }
+    catch(err){ const code = err && err.code;
+      if (code === 'declined') say('Скачивание отменено.'); else if (code === 'rate_limited') say('Окно сохранения уже открыто. Подтверди его или подожди немного.'); else say('Не получилось сохранить файл. Попробуй ещё раз.'); }
+    return;
+  }
+  const url = URL.createObjectURL(data), a = document.createElement('a'); a.href = url; a.download = filename; document.body.appendChild(a); a.click();
+  setTimeout(() => { a.remove(); URL.revokeObjectURL(url); }, 4000); say('Файл «' + filename + '» скачан.'); return true;
+}
+const fname = ext => { const {y, m} = ym(); return 'Учёт моего времени ' + MONTHS[m] + ' ' + y + '.' + ext; };
+$('dlPdf').addEventListener('click', async () => {
+  if (!window.jspdf){ say('PDF сейчас недоступен. Попробуй ещё раз позже.'); return; }
+  say('Готовлю PDF…'); try { await document.fonts.ready; } catch(e) {}
+  const cv = drawSheet(), doc = new window.jspdf.jsPDF({orientation:'portrait', unit:'mm', format:'a4'}), k = 210 / PW;
+  doc.addImage(cv.toDataURL('image/jpeg', 0.92), 'JPEG', 0, 0, 210, 297);
+  for (const l of cv.links) doc.link(l.x * k, l.y * k, l.w * k, l.h * k, {url: l.url});
+  offer(fname('pdf'), doc.output('blob'));
+});
+$('dlXlsx').addEventListener('click', () => { const p = $('vipPanel'); p.hidden = !p.hidden; $('dlXlsx').setAttribute('aria-expanded', String(!p.hidden)); });
+/* Excel готов (buildXlsx) и включится для VIP-партнёров, когда будет решено, как они его открывают */
+(async () => {
+  if (!(window.claude && window.claude.use)) return;
+  try { downloads = await window.claude.use('downloads'); } catch(e) { downloads = null; }
+  if (!downloads){ $('dlPdf').disabled = true; say('Скачивание откроется на опубликованной странице.'); }
+})();
+
+if (!Object.keys(S.months).length) $('setBox').open = true;
+if (S.cur === mkey(now.getFullYear(), now.getMonth()) && isM) openDay = now.getDate();
+renderAll();
+</script>
+<script src="/assets/samesite.js"></script>
+<!--i18n--><style>#langbar.langbar{position:fixed;bottom:14px;right:14px;z-index:60;display:flex;gap:2px;background:rgba(255,255,255,.92);border:1px solid rgba(0,0,0,.08);border-radius:999px;padding:3px;font:600 12px Manrope,system-ui,sans-serif;box-shadow:0 2px 8px rgba(0,0,0,.08)}#langbar.langbar a{color:#5d554d;padding:5px 9px;border-radius:999px;text-decoration:none;font:inherit;display:inline-block}#langbar.langbar a[aria-current="true"]{background:#2f2924;color:#fff}@media print{.langbar{display:none!important}}</style><div class="langbar" id="langbar" role="navigation" aria-label="Мова / Язык"><a href="/instrumenty/uchet-vremeni/" hreflang="ru" data-lang="ru" aria-current="true">RU</a><a href="/uk/instrumenty/uchet-vremeni/" hreflang="uk" data-lang="uk">UA</a></div><script>(function(){var b=document.getElementById('langbar');if(!b)return;b.addEventListener('click',function(e){var a=e.target.closest('a[data-lang]');if(a){try{localStorage.setItem('svoiludiLang',a.dataset.lang)}catch(x){}a.href=a.getAttribute('href').split('#')[0]+location.hash;}});})();</script><!--i18n--></body>
+</html>
