@@ -326,6 +326,7 @@ h2 .qh{vertical-align:.25em}
     <p class="lead">Записывай, сколько времени уходит на работу, учёбу, курс немецкого, своё дело или волонтёрство. Часы за месяц, план, переработка, отпуск и болезнь считаются сами. Праздники кантона и школьные каникулы видно прямо в месяце. В конце месяца скачай PDF и отдай работодателю или сохрани для себя.</p>
     <p style="margin:10px 0 0"><a class="jump" href="#guide">Зачем это тебе и как с этим работать ↓</a></p>
     <div class="privnote"><b>Твои данные только у тебя.</b> Всё, что ты вписываешь, хранится только в твоём браузере на этом устройстве. Никто кроме тебя это не видит, даже я. Регистрация не нужна. Ты можешь закрыть страницу и вернуться позже, записи останутся. На другом устройстве их не будет. На iPhone Safari сам стирает записи сайтов, на которые долго не заходили. Поэтому раз в месяц сохраняй резервную копию, а лучше добавь страницу на экран «Домой» (в Safari кнопка «Поделиться», потом «На экран Домой»). Кнопка «Удалить историю» полностью стирает все твои месяцы с этого устройства.</div>
+    <div data-fan="uchet-vremeni"></div>
   </header>
 
   <div class="bar">
@@ -1298,6 +1299,7 @@ if (!Object.keys(S.months).length) $('setBox').open = true;
 if (S.cur === mkey(now.getFullYear(), now.getMonth()) && isM) openDay = now.getDate();
 renderAll();
 </script>
+<script src="/assets/pdffan.js" defer></script>
 <script src="/assets/samesite.js"></script>
 <!--i18n--><style>#langbar.langbar{position:fixed;bottom:14px;right:14px;z-index:60;display:flex;gap:2px;background:rgba(255,255,255,.92);border:1px solid rgba(0,0,0,.08);border-radius:999px;padding:3px;font:600 12px Manrope,system-ui,sans-serif;box-shadow:0 2px 8px rgba(0,0,0,.08)}#langbar.langbar a{color:#5d554d;padding:5px 9px;border-radius:999px;text-decoration:none;font:inherit;display:inline-block}#langbar.langbar a[aria-current="true"]{background:#2f2924;color:#fff}@media print{.langbar{display:none!important}}</style><div class="langbar" id="langbar" role="navigation" aria-label="Мова / Язык"><a href="/instrumenty/uchet-vremeni/" hreflang="ru" data-lang="ru" aria-current="true">RU</a><a href="/uk/instrumenty/uchet-vremeni/" hreflang="uk" data-lang="uk">UA</a></div><script>(function(){var b=document.getElementById('langbar');if(!b)return;b.addEventListener('click',function(e){var a=e.target.closest('a[data-lang]');if(a){try{localStorage.setItem('svoiludiLang',a.dataset.lang)}catch(x){}a.href=a.getAttribute('href').split('#')[0]+location.hash;}});})();</script><!--i18n--></body>
 </html>
