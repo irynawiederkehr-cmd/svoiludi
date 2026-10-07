@@ -16,9 +16,9 @@ header=header.replace('<a href="./" aria-current="page" style="color:var(--ink)"
 header=header.replace('\n      <a href="../vakansii/">Вакансии</a>','')
 header=header.replace('<a class="navcta" href="#add">Добавить событие</a>','<a class="navcta" href="#add">Разместить</a>')
 h=h.replace('<title>События — Свои люди в Швейцарии: встречи, клубы, ретриты по кантонам</title>','<title>Вакансии и партнёрство — Свои люди в Швейцарии</title>').replace('https://svoiludi.ch/events/','https://svoiludi.ch/vakansii/')
-h=re.sub(r'<meta name="description" content="[^"]*">','<meta name="description" content="Вакансии и предложения о партнёрстве от русско- и украиноязычных специалистов в Швейцарии. Бесплатно для членов сообщества «Свои люди».">',h)
+h=re.sub(r'<meta name="description" content="[^"]*">','<meta name="description" content="Вакансии и предложения о партнёрстве от русско- и украиноязычных специалистов в Швейцарии. Бесплатно, для поддержки сообщества «Свои люди».">',h)
 h=h.replace('<meta property="og:title" content="События — Свои люди в Швейцарии">','<meta property="og:title" content="Вакансии и партнёрство — Свои люди в Швейцарии">')
-h=re.sub(r'<meta property="og:description" content="[^"]*">','<meta property="og:description" content="Кого ищут свои: сотрудники в команду и партнёры для общего дела. Бесплатно для членов сообщества.">',h)
+h=re.sub(r'<meta property="og:description" content="[^"]*">','<meta property="og:description" content="Кого ищут свои: сотрудники в команду и партнёры для общего дела. Бесплатно, для поддержки сообщества.">',h)
 h=h.replace('og:image" content="https://svoiludi.ch/vakansii/og-image.jpg"','og:image" content="https://svoiludi.ch/events/og-image.jpg"')
 extra=open(S+'/vak_extra.css',encoding='utf-8').read()
 style=style+extra
