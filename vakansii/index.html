@@ -504,6 +504,15 @@ a.yours:hover{background:#EBD3A3}
 .cf-term{font-size:.88rem;background:var(--mustard-soft,#F3E3C2);border-radius:12px;padding:10px 14px;margin:0}
 [hidden]{display:none!important}
 
+/* блок «Ищешь сотрудника или партнёра?»: два вида объявлений рядом, «Как это работает» во всю ширину под ними (07.10.2026) */
+.vac-add{display:flex;flex-direction:column;gap:16px}
+.vac-kinds{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media (max-width:700px){.vac-kinds{grid-template-columns:1fr}}
+.jc-how .steps{display:block;columns:2 300px;column-gap:36px;padding-left:22px}
+.jc-how .steps li{break-inside:avoid;margin-bottom:8px}
+.jc-how .acts{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px;margin-top:4px}
+.jc-how .acts .btn{margin:0}
+
 </style>
 </head>
 <body>
@@ -583,10 +592,12 @@ a.yours:hover{background:#EBD3A3}
 
   <section class="join" id="add" aria-labelledby="add-h">
     <div><h2 id="add-h">Ищешь сотрудника или партнёра?</h2><p style="max-width:66ch">Размести объявление — это бесплатно, и так будет всегда. Карточка в справочнике и покупка пакета для этого не нужны.</p></div>
-    <div class="join-cols">
+    <div class="vac-add">
+      <div class="vac-kinds">
       <div class="jc"><b>Ищу сотрудника</b><p>Работа по найму: по договору, с зарплатой и отчислениями. Подходит, если человек будет работать у тебя, по твоему графику и твоим указаниям.</p></div>
       <div class="jc"><b>Ищу партнёра</b><p>Сотрудничество самостоятельных специалистов: субподряд, совместный проект, аренда кабинета, обмен клиентами. Каждый работает на себя.</p></div>
-      <div class="jc"><b>Как это работает</b>
+      </div>
+      <div class="jc jc-how"><b>Как это работает</b>
         <ol class="steps">
           <li>Напиши Ирине в Telegram, кого ищешь, где и на каких условиях. Шаблон сообщения можно скопировать кнопкой ниже.</li>
           <li>Ирина подготовит объявление и пришлёт тебе ссылку на него.</li>
@@ -594,8 +605,7 @@ a.yours:hover{background:#EBD3A3}
           <li>После твоего подтверждения объявление появится здесь и в твоей карточке на 60 дней. В день окончания срока оно само исчезнет с сайта, и тебе придёт письмо.</li>
           <li>Нужно продлить — напиши Ирине до окончания срока. Добавь адрес voznesenskaya.iryna@gmail.com в контакты и проверяй папку «Спам», чтобы письма не потерялись.</li>
         </ol>
-        <div class="acts"><a class="btn" href="https://t.me/IrynaNeuroCoach" target="_blank" rel="noopener">Написать Ирине в Telegram</a><button class="btn ghost" type="button" id="askCopy">Скопировать шаблон</button></div>
-        <span class="note">Telegram: @IrynaNeuroCoach</span>
+        <div class="acts"><a class="btn" href="https://t.me/IrynaNeuroCoach" target="_blank" rel="noopener">Написать Ирине в Telegram</a><button class="btn ghost" type="button" id="askCopy">Скопировать шаблон</button><span class="note">Telegram: @IrynaNeuroCoach</span></div>
       </div>
     </div>
   </section>
