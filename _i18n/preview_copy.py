@@ -30,6 +30,7 @@ def fix(html, depth):
     html = re.sub(r'((?:href="|`)(?:\.\./)?)(vakansii|kursy|events|join)/(#\$\{)', dirlink, html)
     html = html.replace('href="./"', 'href="index.html"').replace('href="../"', 'href="../index.html"').replace('href="../#', 'href="../index.html#')
     html = html.replace('`../#${', '`../index.html#${')
+    html = re.sub(r"'((?:\.\./)?)(vakansii|kursy|events|join)/#'", lambda m: f"'{m.group(1)}{m.group(2)}/index.html#'", html)   # ссылки афиши в карточке
     # всё, чего нет в предпросмотре, — на живой сайт
     for d in ['instrumenty', 'opros', 'badge', 'privacy']:
         html = re.sub(rf'href="(?:\.\./|\./)?{d}/', f'href="{LIVE}{d}/', html)
