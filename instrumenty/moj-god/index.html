@@ -152,6 +152,9 @@ a.btn{text-decoration:none;display:inline-flex;align-items:center}
 .callist li{display:flex;gap:10px;justify-content:space-between;flex-wrap:wrap;border-top:1px dashed var(--line);padding-top:6px}
 .callist a{color:var(--brown);font-weight:700;white-space:nowrap}
 .privnote{margin-top:14px;max-width:80ch;background:var(--sage-soft,#E3E8D6);border-radius:16px;padding:12px 16px;font-size:.9rem}
+.disc{display:flex;gap:12px;align-items:flex-start;background:var(--mustard-soft);border-radius:16px;padding:12px 16px;font-size:.88rem}
+.disc b{flex:none;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mustard);padding-top:2px}
+@media (max-width:640px){.disc{flex-direction:column;gap:4px}}
 .credit{font-size:.84rem;color:var(--muted);display:flex;flex-wrap:wrap;gap:4px 14px}
 .credit a{color:var(--brown)}
 
@@ -297,6 +300,7 @@ a.btn{text-decoration:none;display:inline-flex;align-items:center}
       <a class="btn free" href="https://t.me/IrynaNeuroCoach" target="_blank" rel="noopener">Написать «ВСТРЕЧА» в Telegram</a>
     </div>
   </section>
+  <div class="disc" role="note"><b>Важно</b><span>Это образец для примера и личного использования, а не официальный документ. Даты праздников и школьных каникул ориентировочные, уточняй их в своём кантоне и общине. Автор не несёт ответственности за достоверность данных.</span></div>
   <p class="credit"><span>Ирина Вознесенская · коуч</span><a href="https://www.instagram.com/iryna.voznesenskaya/" target="_blank" rel="noopener">Instagram @iryna.voznesenskaya</a><a href="https://voznesenskaya.ch/" target="_blank" rel="noopener">voznesenskaya.ch</a><a href="https://svoiludi.ch/" target="_blank" rel="noopener">Свои люди в Швейцарии · svoiludi.ch</a><a href="https://svoiludi.ch/privacy/">Политика конфиденциальности</a></p>
 </div>
 
@@ -614,7 +618,7 @@ function drawSheet(){
     c.fillStyle = C.ink; c.fillText(it.t, lx + 66, ly);
     lx += w;
   }
-  const top = ly + 56, labelW = 190, gridW = W - 2*M - labelW, colW = gridW / 37, headH = 62, foot = 110;
+  const top = ly + 56, labelW = 190, gridW = W - 2*M - labelW, colW = gridW / 37, headH = 62, foot = 160;
   const rowH = (H - foot - top - headH) / 12;
   c.font = '700 32px Manrope, sans-serif'; c.textAlign = 'center';
   for (let k = 0; k < 37; k++){ c.fillStyle = k % 7 > 4 ? C.brown : C.muted; c.fillText(WD[k % 7], M + labelW + colW*k + colW/2, top + 42); }
@@ -646,6 +650,8 @@ function drawSheet(){
       });
     }
   }
+  // оговорка: образец, не официальный документ
+  c.textAlign = 'left'; c.fillStyle = C.muted; c.font = 'italic 500 30px Manrope, sans-serif'; c.fillText('Это образец для примера и личного использования, а не официальный документ. Всё проверяй и перепроверяй сама или сам. Автор не несёт ответственности за достоверность данных.', M, H - 112);
   // подпись со ссылками (в PDF они активные)
   c.textAlign = 'left'; c.font = '600 34px Manrope, sans-serif'; cv.links = [];
   let fx = M; const fy = H - 55;
