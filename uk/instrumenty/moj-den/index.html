@@ -161,6 +161,9 @@ select:focus-visible,input:focus-visible,button:focus-visible,textarea:focus-vis
 .sbar{display:flex;height:12px;border-radius:6px;overflow:hidden;background:var(--bg)}
 .sbar i{display:block;height:100%}
 .sbar em{font-size:.72rem;color:var(--muted);font-style:normal;padding-left:6px;line-height:12px}
+.disc{display:flex;gap:12px;align-items:flex-start;background:var(--mustard-soft);border-radius:16px;padding:12px 16px;font-size:.88rem}
+.disc b{flex:none;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mustard);padding-top:2px}
+@media (max-width:640px){.disc{flex-direction:column;gap:4px}}
 .credit{font-size:.84rem;color:var(--muted);display:flex;flex-wrap:wrap;gap:4px 14px}
 .credit a{color:var(--brown)}
 
@@ -356,6 +359,7 @@ select:focus-visible,input:focus-visible,button:focus-visible,textarea:focus-vis
     </div>
   </section>
 
+  <div class="disc" role="note"><b>Важливо</b><span>Це зразок для прикладу й особистого користування, а не офіційний документ. Усе, що ти вписуєш, перевіряй сама або сам. Автор не несе відповідальності за достовірність даних.</span></div>
   <p class="credit"><span>Ірина Вознесенська · коуч</span><a href="https://www.instagram.com/iryna.voznesenskaya/" target="_blank" rel="noopener">Instagram @iryna.voznesenskaya</a><a href="https://voznesenskaya.ch/uk/" target="_blank" rel="noopener">voznesenskaya.ch</a><a href="https://svoiludi.ch/uk/" target="_blank" rel="noopener">Свої люди у Швейцарії · svoiludi.ch</a><a href="https://svoiludi.ch/uk/privacy/">Політика конфіденційності</a></p>
 </div>
 
@@ -731,7 +735,7 @@ function drawSheet(){
   let lx = M, ly = M + 280; c.font = '600 36px Manrope, sans-serif';
   for (const k of S.cats){ const w = 50 + c.measureText(k.n).width + 44; if (lx + w > W - M){ lx = M; ly += 56; } c.fillStyle = k.c; c.beginPath(); c.arc(lx + 14, ly - 12, 14, 0, Math.PI*2); c.fill(); c.fillStyle = C.ink; c.fillText(k.n, lx + 40, ly); lx += w; }
   // таймлайн
-  const top = ly + 70, bottom = H - 190, tlX = M, tlW = 1260, rowH = (bottom - top) / ((DAY1 - DAY0) / STEP);
+  const top = ly + 70, bottom = H - 230, tlX = M, tlW = 1260, rowH = (bottom - top) / ((DAY1 - DAY0) / STEP);
   for (let m = DAY0; m <= DAY1; m += STEP){
     const y = top + (m - DAY0) / STEP * rowH;
     c.fillStyle = m % 60 ? '#F1E8DB' : C.line; c.fillRect(tlX + 150, y, tlW - 150, m % 60 ? 2 : 3);
@@ -771,6 +775,8 @@ function drawSheet(){
     c.fillStyle = C.ink; c.font = '500 34px Manrope, sans-serif';
     if (S.ev[i]) ry = wrap(c, S.ev[i], rx, ry, rw, 44, 3) + 14; else { c.fillStyle = C.line; c.fillRect(rx, ry + 10, rw, 3); c.fillRect(rx, ry + 70, rw, 3); ry += 110; }
   });
+  // оговорка: образец, не официальный документ
+  c.fillStyle = C.muted; c.font = 'italic 500 26px Manrope, sans-serif'; c.fillText('Це зразок для прикладу й особистого користування, а не офіційний документ.', M, H - 172); c.fillText('Усе перевіряй і перепровіряй сама або сам. Автор не несе відповідальності за достовірність даних.', M, H - 136);
   // подпись со ссылками
   c.font = '600 32px Manrope, sans-serif'; cv.links = []; let fx = M; const fy = H - 80;
   CREDIT_PARTS.forEach((part, i) => {

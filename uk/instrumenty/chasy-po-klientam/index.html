@@ -457,6 +457,7 @@ h2 .qh,h3 .qh{vertical-align:.25em}
         <h3>Звіт про роботу для клієнта<button type="button" class="qh" data-help="pdfClient" aria-label="Підказка: звіт для клієнта" aria-expanded="false">?</button></h3>
         <p class="hint">Усі записи в одного клієнта за обраний місяць, підсумок і місця для двох підписів.</p>
         <label class="field">Клієнт<select id="pdfCli"></select></label>
+        <label class="field"><span class="fl">Мова звіту для клієнта<button type="button" class="qh" data-help="pdfLang" aria-label="Підказка: мова звіту" aria-expanded="false">?</button></span><select id="fPdfLang"></select></label>
         <button class="btn gold" id="dlCli" type="button">Завантажити звіт для клієнта в PDF</button>
       </div>
       <div class="pdfc">
@@ -468,7 +469,7 @@ h2 .qh,h3 .qh{vertical-align:.25em}
     </div>
   </section>
 
-  <div class="disc" role="note"><b>Важливо</b><span>Це орієнтир, а не точний розрахунок. Суми рахуються лише з того, що ти вписуєш. Податки, внески AHV і MWST залежать від твоєї ситуації, кантону та рішення твоєї каси AHV. Усі цифри звіряй зі своїми рахунками й виписками, уточнюй у податковій службі, у касі AHV (SVA) або в консультанта. Автор не несе відповідальності за достовірність даних. Усі години, ставки й суми обов’язково перевір і впиши сама або сам за своїми документами.</span></div>
+  <div class="disc" role="note"><b>Важливо</b><span>Це орієнтир, а не точний розрахунок. Суми рахуються лише з того, що ти вписуєш. Податки, внески AHV і MWST залежать від твоєї ситуації, кантону та рішення твоєї каси AHV. Усі цифри звіряй зі своїми рахунками й виписками, уточнюй у податковій службі, у касі AHV (SVA) або в консультанта. Автор не несе відповідальності за достовірність даних. Усі години, ставки й суми обов’язково перевір і впиши сама або сам за своїми документами. Це зразок для прикладу й особистого користування, а не офіційний документ.</span></div>
 
   <section class="guide" id="guide" aria-labelledby="g-why">
     <div>
@@ -517,7 +518,7 @@ h2 .qh,h3 .qh{vertical-align:.25em}
     </div>
   </section>
 
-  <div class="disc" role="note"><b>Важливо</b><span>Цифри на цій сторінці орієнтовні. Уточнюй і перевіряй їх. Автор не несе відповідальності за достовірність даних. Усі години, ставки й суми обов’язково перевір і впиши сама або сам за своїми документами.</span></div>
+  <div class="disc" role="note"><b>Важливо</b><span>Цифри на цій сторінці орієнтовні. Уточнюй і перевіряй їх. Автор не несе відповідальності за достовірність даних. Усі години, ставки й суми обов’язково перевір і впиши сама або сам за своїми документами. Це зразок для прикладу й особистого користування, а не офіційний документ.</span></div>
   <p class="credit"><span>Ірина Вознесенська · коуч</span><a href="https://www.instagram.com/iryna.voznesenskaya/" target="_blank" rel="noopener">Instagram @iryna.voznesenskaya</a><a href="https://voznesenskaya.ch/uk/" target="_blank" rel="noopener">voznesenskaya.ch</a><a href="https://svoiludi.ch/uk/" target="_blank" rel="noopener">Свої люди у Швейцарії · svoiludi.ch</a><a href="https://svoiludi.ch/uk/privacy/">Політика конфіденційності</a></p>
 </div>
 
@@ -675,6 +676,58 @@ const plural = (n, f) => f[n % 10 === 1 && n % 100 !== 11 ? 0 : [2,3,4].includ
 const P_ENT = ['запис','записи','записів'], P_VIS = ['візит','візити','візитів'], P_DAY = ['день','дні','днів'], P_CLI = ['клієнт','клієнти','клієнтів'];
 const fromCli = n => n + ' ' + (n % 10 === 1 && n % 100 !== 11 ? 'клієнти' : 'клієнтів');
 
+/* ---------- язык документа для работодателя или клиента (PDF) ----------
+   По умолчанию язык кантона. Немецкий, французский и итальянский — для документов, которые читают в Швейцарии. */
+const CANT_LANG = {FR:'fr', VS:'fr', GE:'fr', VD:'fr', NE:'fr', JU:'fr', TI:'it'};
+const cantLang = c => CANT_LANG[c] || 'de';
+const PDF_LANGS = {site:'Мовою сайту · українська', de:'Deutsch · німецька', fr:'Français · французька', it:'Italiano · італійська'};
+const PDF_LANG_CANT = ', мова кантону';
+const PDF_LANG_SAY = {site:'мовою сайту', de:'німецькою', fr:'французькою', it:'італійською'};
+const DOCL = {
+  de: {loc:'de-CH', months:['Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'], wd:['So','Mo','Di','Mi','Do','Fr','Sa'],
+    canton:{ZH:'Kanton Zürich',BE:'Kanton Bern',LU:'Kanton Luzern',UR:'Kanton Uri',SZ:'Kanton Schwyz',OW:'Kanton Obwalden',NW:'Kanton Nidwalden',GL:'Kanton Glarus',ZG:'Kanton Zug',FR:'Kanton Freiburg',SO:'Kanton Solothurn',BS:'Kanton Basel-Stadt',BL:'Kanton Basel-Landschaft',SH:'Kanton Schaffhausen',AR:'Kanton Appenzell Ausserrhoden',AI:'Kanton Appenzell Innerrhoden',SG:'Kanton St. Gallen',GR:'Kanton Graubünden',AG:'Kanton Aargau',TG:'Kanton Thurgau',TI:'Kanton Tessin',VD:'Kanton Waadt',VS:'Kanton Wallis',NE:'Kanton Neuenburg',GE:'Kanton Genf',JU:'Kanton Jura'},
+    hol:{NY:'Neujahr',BE:'Berchtoldstag',DK:'Dreikönigstag',JO:'Josefstag',KF:'Karfreitag',OM:'Ostermontag',AR:'Tag der Arbeit',AU:'Auffahrt',PM:'Pfingstmontag',FL:'Fronleichnam',PP:'Peter und Paul',MH:'Mariä Himmelfahrt',BK:'Bruder Klaus',MT:'Mauritiustag',AH:'Allerheiligen',ME:'Mariä Empfängnis',WN:'Weihnachten',ST:'Stephanstag',NF:'Näfelser Fahrt',LJ:'Bettagsmontag',JG:'Genfer Bettag',RR:'Restauration der Republik',IR:'Jahrestag der Republik',PJ:'Jahrestag des Plebiszits',BF:'Bundesfeier'},
+    part:' (in einigen Gemeinden)', sch:'Schulferien', credit:'Iryna Voznesenskaya · Coach', cont:'Fortsetzung', page:(i, n) => 'Seite ' + i + ' von ' + n,
+    disc:['Muster zur Orientierung und für den persönlichen Gebrauch, kein amtliches Dokument. Angaben ohne Gewähr, bitte selbst prüfen.']},
+  fr: {loc:'fr-CH', months:['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre'], wd:['di','lu','ma','me','je','ve','sa'],
+    canton:{ZH:'canton de Zurich',BE:'canton de Berne',LU:'canton de Lucerne',UR:'canton d’Uri',SZ:'canton de Schwytz',OW:'canton d’Obwald',NW:'canton de Nidwald',GL:'canton de Glaris',ZG:'canton de Zoug',FR:'canton de Fribourg',SO:'canton de Soleure',BS:'canton de Bâle-Ville',BL:'canton de Bâle-Campagne',SH:'canton de Schaffhouse',AR:'canton d’Appenzell Rhodes-Extérieures',AI:'canton d’Appenzell Rhodes-Intérieures',SG:'canton de Saint-Gall',GR:'canton des Grisons',AG:'canton d’Argovie',TG:'canton de Thurgovie',TI:'canton du Tessin',VD:'canton de Vaud',VS:'canton du Valais',NE:'canton de Neuchâtel',GE:'canton de Genève',JU:'canton du Jura'},
+    hol:{NY:'Nouvel An',BE:'Saint-Berchtold',DK:'Épiphanie',JO:'Saint-Joseph',KF:'Vendredi saint',OM:'Lundi de Pâques',AR:'Fête du travail',AU:'Ascension',PM:'Lundi de Pentecôte',FL:'Fête-Dieu',PP:'Saint-Pierre et Saint-Paul',MH:'Assomption',BK:'Saint-Nicolas de Flüe',MT:'Saint-Maurice',AH:'Toussaint',ME:'Immaculée Conception',WN:'Noël',ST:'Saint-Étienne',NF:'Bataille de Näfels',LJ:'Lundi du Jeûne fédéral',JG:'Jeûne genevois',RR:'Restauration de la République',IR:'Instauration de la République',PJ:'Commémoration du plébiscite jurassien',BF:'Fête nationale'},
+    part:' (dans certaines communes)', sch:'Vacances scolaires', credit:'Iryna Voznesenskaya · coach', cont:'suite', page:(i, n) => 'Page ' + i + ' sur ' + n,
+    disc:['Modèle indicatif pour usage personnel, pas un document officiel. Données sans garantie, à vérifier soi-même.']},
+  it: {loc:'it-CH', months:['Gennaio','Febbraio','Marzo','Aprile','Maggio','Giugno','Luglio','Agosto','Settembre','Ottobre','Novembre','Dicembre'], wd:['do','lu','ma','me','gi','ve','sa'],
+    canton:{ZH:'Cantone di Zurigo',BE:'Cantone di Berna',LU:'Cantone di Lucerna',UR:'Cantone di Uri',SZ:'Cantone di Svitto',OW:'Cantone di Obvaldo',NW:'Cantone di Nidvaldo',GL:'Cantone di Glarona',ZG:'Cantone di Zugo',FR:'Cantone di Friburgo',SO:'Cantone di Soletta',BS:'Cantone di Basilea Città',BL:'Cantone di Basilea Campagna',SH:'Cantone di Sciaffusa',AR:'Cantone di Appenzello Esterno',AI:'Cantone di Appenzello Interno',SG:'Cantone di San Gallo',GR:'Cantone dei Grigioni',AG:'Cantone di Argovia',TG:'Cantone di Turgovia',TI:'Cantone Ticino',VD:'Cantone di Vaud',VS:'Cantone del Vallese',NE:'Cantone di Neuchâtel',GE:'Cantone di Ginevra',JU:'Cantone del Giura'},
+    hol:{NY:'Capodanno',BE:'San Berchtoldo',DK:'Epifania',JO:'San Giuseppe',KF:'Venerdì santo',OM:'Lunedì di Pasqua',AR:'Festa del lavoro',AU:'Ascensione',PM:'Lunedì di Pentecoste',FL:'Corpus Domini',PP:'San Pietro e Paolo',MH:'Assunzione',BK:'San Nicolao della Flüe',MT:'San Maurizio',AH:'Ognissanti',ME:'Immacolata Concezione',WN:'Natale',ST:'Santo Stefano',NF:'Battaglia di Näfels',LJ:'Lunedì del Digiuno federale',JG:'Digiuno ginevrino',RR:'Restaurazione della Repubblica',IR:'Instaurazione della Repubblica',PJ:'Anniversario del plebiscito giurassiano',BF:'Festa nazionale'},
+    part:' (in alcuni comuni)', sch:'Vacanze scolastiche', credit:'Iryna Voznesenskaya · coach', cont:'continua', page:(i, n) => 'Pagina ' + i + ' di ' + n,
+    disc:['Modello indicativo per uso personale, non un documento ufficiale. Dati senza garanzia, da verificare personalmente.']}
+};
+/* тексты отчёта о работе для клиента на каждом языке PDF */
+const CPL = {
+  site: {title:'Звіт про роботу', file:'Звіт про роботу', rate: v => 'Stundenrapport · ставка ' + v + ' CHF за годину', visit: v => 'Stundenrapport · ціна за візит ' + v + ' CHF',
+    client:'Клієнт · ', by:'Виконавець · ', hours:'годин роботи', count: (n, vis) => plural(n, vis ? P_VIS : P_ENT), work:'CHF за роботу', exMw:'CHF без MWST', mw: r => 'CHF MWST ' + r, incMw:'CHF з MWST', exp:'CHF витрати',
+    col:{date:'Дата', time:'Час', what:'Що зроблено', hours:'Години', amt:'Сума, CHF', vis:'Візит, CHF', on:'На що'}, pause: n => ', перерва ' + n + ' хв', total:'Усього за місяць',
+    lExMw:'Сума без MWST', lMw: r => 'MWST ' + r, lIncMw:'Сума з MWST', expH:'Витрати', expTotal:'Усього витрат',
+    sign1: nm => 'Підпис виконавця' + (nm ? ' · ' + nm : '') + ' · дата', sign2: cl => 'Підпис клієнта · ' + cl + ' · дата'},
+  de: {title:'Stundenrapport', file:'Stundenrapport', rate: v => 'Ansatz ' + v + ' CHF pro Stunde', visit: v => 'Preis pro Besuch ' + v + ' CHF',
+    client:'Kunde · ', by:'Erbracht von · ', hours:'Arbeitsstunden', count: (n, vis) => vis ? (n === 1 ? 'Besuch' : 'Besuche') : (n === 1 ? 'Einsatz' : 'Einsätze'), work:'CHF für die Arbeit', exMw:'CHF exkl. MWST', mw: r => 'CHF MWST ' + r, incMw:'CHF inkl. MWST', exp:'CHF Spesen',
+    col:{date:'Datum', time:'Zeit', what:'Ausgeführte Arbeiten', hours:'Stunden', amt:'Betrag, CHF', vis:'Besuch, CHF', on:'Beschreibung'}, pause: n => ', Pause ' + n + ' Min.', total:'Total Monat',
+    lExMw:'Betrag exkl. MWST', lMw: r => 'MWST ' + r, lIncMw:'Total inkl. MWST', expH:'Spesen', expTotal:'Total Spesen',
+    sign1: nm => 'Datum, Unterschrift Auftragnehmer/in' + (nm ? ' · ' + nm : ''), sign2: cl => 'Datum, Unterschrift Kunde · ' + cl},
+  fr: {title:'Rapport d’heures', file:'Rapport d’heures', rate: v => 'Tarif ' + v + ' CHF de l’heure', visit: v => 'Prix par visite ' + v + ' CHF',
+    client:'Client · ', by:'Prestataire · ', hours:'heures de travail', count: (n, vis) => vis ? (n === 1 ? 'visite' : 'visites') : (n === 1 ? 'intervention' : 'interventions'), work:'CHF pour le travail', exMw:'CHF hors TVA', mw: r => 'CHF TVA ' + r, incMw:'CHF TVA comprise', exp:'CHF frais',
+    col:{date:'Date', time:'Horaire', what:'Travaux effectués', hours:'Heures', amt:'Montant, CHF', vis:'Visite, CHF', on:'Description'}, pause: n => ', pause ' + n + ' min', total:'Total du mois',
+    lExMw:'Montant hors TVA', lMw: r => 'TVA ' + r, lIncMw:'Total TVA comprise', expH:'Frais', expTotal:'Total des frais',
+    sign1: nm => 'Date, signature du prestataire' + (nm ? ' · ' + nm : ''), sign2: cl => 'Date, signature du client · ' + cl},
+  it: {title:'Rapporto ore', file:'Rapporto ore', rate: v => 'Tariffa ' + v + ' CHF all’ora', visit: v => 'Prezzo per visita ' + v + ' CHF',
+    client:'Cliente · ', by:'Prestatore · ', hours:'ore di lavoro', count: (n, vis) => vis ? (n === 1 ? 'visita' : 'visite') : (n === 1 ? 'intervento' : 'interventi'), work:'CHF per il lavoro', exMw:'CHF IVA esclusa', mw: r => 'CHF IVA ' + r, incMw:'CHF IVA inclusa', exp:'CHF spese',
+    col:{date:'Data', time:'Orario', what:'Lavori eseguiti', hours:'Ore', amt:'Importo, CHF', vis:'Visita, CHF', on:'Descrizione'}, pause: n => ', pausa ' + n + ' min', total:'Totale del mese',
+    lExMw:'Importo IVA esclusa', lMw: r => 'IVA ' + r, lIncMw:'Totale IVA inclusa', expH:'Spese', expTotal:'Totale spese',
+    sign1: nm => 'Data, firma del prestatore' + (nm ? ' · ' + nm : ''), sign2: cl => 'Data, firma del cliente · ' + cl}
+};
+const SITE_DOC = {lang:'site', loc:'de-CH', months: MONTHS, credit: null, cont:'продовження', page:(i, n) => 'Сторінка ' + i + ' із ' + n,
+  disc:['Орієнтир, а не точний розрахунок. Усе уточнюй і перевіряй. Автор не несе відповідальності за достовірність даних.', 'Це зразок для прикладу й особистого користування, а не офіційний документ.']};
+const pdfLang = () => S.set.pdfLang && PDF_LANGS[S.set.pdfLang] ? S.set.pdfLang : cantLang(S.set.canton);
+function docL(){ const g = pdfLang(); return g === 'site' ? Object.assign({}, SITE_DOC, CPL.site) : Object.assign({lang: g}, DOCL[g], CPL[g]); }
+
 /* ---------- состояние ---------- */
 const now = new Date();
 const mkey = (y, m) => y + '-' + String(m + 1).padStart(2, '0');
@@ -769,7 +822,7 @@ function renderSet(){
   $('fKm').checked = !!st.km; $('fKmRate').value = st.kmRate; $('kmRateBox').hidden = !st.km;
   $('fShowHol').checked = !!st.showHol; $('fSchZh').checked = !!st.schZh; renderKids();
   $('fCanton').innerHTML = Object.entries(CANTONS).sort((a, b) => a[1].localeCompare(b[1], 'uk')).map(([k, n]) => `<option value="${k}"${k === st.canton ? ' selected' : ''}>${n} (${k})</option>`).join('');
-  renderSetSum();
+  renderSetSum(); renderPdfLang();
 }
 function renderSetSum(){ const st = S.set; $('setSum').textContent = [st.name, 'кантон ' + CANTONS[st.canton], st.mwst ? 'MWST ' + String(st.mwstRate).replace('.', ',') + ' %' : 'без MWST', st.km ? 'км по ' + chf(num(st.kmRate)) + ' CHF' : ''].filter(Boolean).join(' · '); }
 $('fName').addEventListener('input', e => { S.set.name = e.target.value; save(); renderSetSum(); });
@@ -780,7 +833,9 @@ $('fKm').addEventListener('change', e => { S.set.km = e.target.checked; save(); 
 $('fKmRate').addEventListener('input', e => { S.set.kmRate = e.target.value; save(); renderSetSum(); renderStats(); });
 $('fShowHol').addEventListener('change', e => { S.set.showHol = e.target.checked; save(); renderMonth(); });
 $('fSchZh').addEventListener('change', e => { S.set.schZh = e.target.checked; save(); renderMonth(); });
-$('fCanton').addEventListener('change', e => { S.set.canton = e.target.value; $('holInfo').hidden = true; save(); renderSetSum(); renderMonth(); });
+$('fCanton').addEventListener('change', e => { S.set.canton = e.target.value; S.set.pdfLang = ''; $('holInfo').hidden = true; save(); renderSetSum(); renderPdfLang(); renderMonth(); });
+function renderPdfLang(){ const cur = pdfLang(), cl = cantLang(S.set.canton); $('fPdfLang').innerHTML = Object.entries(PDF_LANGS).map(([k, n]) => `<option value="${k}"${k === cur ? ' selected' : ''}>${n}${k === cl ? PDF_LANG_CANT : ''}</option>`).join(''); }
+$('fPdfLang').addEventListener('change', e => { S.set.pdfLang = e.target.value; save(); });
 function renderKids(){ $('kidsList').innerHTML = S.set.kids.map((k, i) => `<div class="kid"><label>з <input type="date" data-k="${i}" data-f="a" value="${esc(k.a)}"></label><label>по <input type="date" data-k="${i}" data-f="b" value="${esc(k.b)}"></label><button class="x" type="button" data-k="${i}" data-act="delk" aria-label="Прибрати ці канікули">✕</button></div>`).join(''); }
 $('addKids').addEventListener('click', () => { S.set.kids.push({a:'', b:''}); save(); renderKids(); });
 $('kidsList').addEventListener('change', e => { const el = e.target; if (el.dataset.k == null) return; S.set.kids[+el.dataset.k][el.dataset.f] = el.value; save(); renderMonth(); });
@@ -878,6 +933,7 @@ const HELP = {
   year: '<p>Години й заробіток по місяцях цього року та головні клієнти року. Це основа для податкової декларації.</p><p>Рік змінюється разом із місяцем угорі сторінки.</p>',
   risk: '<p>Самозайнятим у Швейцарії важливо працювати на кількох замовників. Якщо майже весь дохід дає один клієнт, каса AHV може вважати роботу роботою за наймом (Scheinselbständigkeit).</p><p>Якщо так складається не перший місяць, уточни свій статус у своїй касі AHV (Ausgleichskasse, SVA).</p>',
   pdfClient: '<p>Аркуш A4 з усіма записами в одного клієнта за місяць. Дата, час, що зроблено, години й сума. Внизу підсумок і місця для твого підпису та підпису клієнта.</p><p>Його можна додати до рахунку або дати клієнтові підписати. У німецькомовній Швейцарії такий аркуш називають Stundenrapport.</p>',
+  pdfLang: '<p>Клієнт у Швейцарії читає документи мовою свого кантону. Тому звіт про роботу одразу виходить мовою кантону, який ти обрала в налаштуваннях. У Цюриху й Берні німецькою, у Женеві та Во французькою, у Тічино італійською.</p><p>У Вале й Фрібурі говорять двома мовами. Там спершу стоїть французька, німецьку можна обрати тут.</p><p>Що зроблено й назви клієнтів потраплять у звіт так, як ти їх написала. «Мій звіт» для тебе завжди мовою сайту.</p>',
   pdfMine: '<p>Звіт для себе. За місяць у ньому підсумки, всі клієнти й усі записи по днях. За рік у ньому суми по місяцях і по клієнтах.</p><p>Стане в пригоді для податкової декларації.</p>',
   backup: '<p>Записи зберігаються лише в браузері на цьому пристрої. На iPhone Safari сам стирає записи сайтів, на які довго не заходили.</p><p>Резервна копія — це файл на твоєму пристрої. З нього клієнтів і записи можна повернути тут або на іншому телефоні чи комп’ютері. Бережи його, у ньому твої особисті записи.</p>'
 };
@@ -1190,22 +1246,22 @@ $('copyMsg').addEventListener('click', () => {
 /* ---------- PDF: листы A4 на холсте, как в других инструментах ---------- */
 const PW = 2480, PH = 3508, PM = 150, LIM = PH - 290;
 const PC = {sage:'#4F5E3E', bg:'#FFFCF8', ink:'#2F2924', muted:'#7A6E62', line:'#E5D9C9', soft:'#F4EDE3', weekend:'#F6EEE3', brown:'#6E4F3C', mustard:'#B98324', mustardSoft:'#F3E3C2', red:'#B5322A', green:'#2F7F3B', hol:'#D81B78'};
-const PDISC = 'Орієнтир, а не точний розрахунок. Усе уточнюй і перевіряй. Автор не несе відповідальності за достовірність даних.';
 function roundRect(c, x, y, w, h, r){ r = Math.min(r, h/2, w/2); c.beginPath(); c.moveTo(x+r,y); c.arcTo(x+w,y,x+w,y+h,r); c.arcTo(x+w,y+h,x,y+h,r); c.arcTo(x,y+h,x,y,r); c.arcTo(x,y,x+w,y,r); c.closePath(); }
 function fit(c, text, w){ text = String(text); if (c.measureText(text).width <= w) return text; while (text.length > 1 && c.measureText(text + '…').width > w) text = text.slice(0, -1); return text + '…'; }
 function wrap2(c, t, w){ const words = String(t).split(' '); let a = '', i = 0; for (; i < words.length; i++){ const n = a ? a + ' ' + words[i] : words[i]; if (c.measureText(n).width > w) break; a = n; } if (!a) return [fit(c, t, w)]; return i < words.length ? [a, fit(c, words.slice(i).join(' '), w)] : [a]; }
 function WM(cv, t){ const c = cv.getContext('2d'), w = cv.width, h = cv.height, fs = Math.round(Math.max(w, h) * 0.032); c.save(); c.font = '700 ' + fs + 'px Manrope, sans-serif'; c.fillStyle = 'rgba(110,79,60,0.075)'; c.textAlign = 'center'; c.textBaseline = 'middle'; c.translate(w / 2, h / 2); c.rotate(-Math.PI / 7); const sx = fs * 9, sy = fs * 5, R = Math.hypot(w, h) / 2 + sx; for (let y = -R, r = 0; y <= R; y += sy, r++) for (let x = -R + (r % 2) * sx / 2; x <= R; x += sx) c.fillText(t, x, y); c.restore(); return cv; }
-function footer(cv){
+function footer(cv, L){
   const c = cv.getContext('2d'); c.font = '600 32px Manrope, sans-serif'; let fx = PM; const fy = PH - 90;
   c.fillStyle = PC.line; c.fillRect(PM, fy - 70, PW - 2*PM, 3);
   CREDIT_PARTS.forEach((part, i) => {
     if (i){ c.fillStyle = PC.muted; c.fillText(' · ', fx, fy); fx += c.measureText(' · ').width; }
-    const w = c.measureText(part.t).width; c.fillStyle = PC.brown; c.fillText(part.t, fx, fy); c.fillRect(fx, fy + 6, w, 2);
+    const t = i === 0 && L && L.credit ? L.credit : part.t;
+    const w = c.measureText(t).width; c.fillStyle = PC.brown; c.fillText(t, fx, fy); c.fillRect(fx, fy + 6, w, 2);
     cv.links.push({x: fx, y: fy - 32, w, h: 44, url: part.u}); fx += w;
   });
 }
 class PDoc {
-  constructor(title, right, subs){ this.title = title; this.right = right; this.subs = subs.filter(Boolean); this.pages = []; this.add(true); }
+  constructor(title, right, subs, L){ this.L = L || SITE_DOC; this.title = title; this.right = right; this.subs = subs.filter(Boolean); this.pages = []; this.add(true); }
   add(first){
     const cv = document.createElement('canvas'); cv.width = PW; cv.height = PH; cv.links = []; const c = cv.getContext('2d');
     c.fillStyle = PC.bg; c.fillRect(0, 0, PW, PH); c.textBaseline = 'alphabetic'; this.cv = cv; this.c = c; this.pages.push(cv);
@@ -1216,7 +1272,7 @@ class PDoc {
       let y = PM + 175; this.subs.forEach((s, i) => { c.fillStyle = i ? PC.ink : PC.muted; c.font = (i ? '600 ' : '600 ') + '40px Manrope, sans-serif'; c.fillText(fit(c, s, PW - 2*PM), PM, y); y += 58; });
       this.y = y + 10;
     } else {
-      c.fillStyle = PC.muted; c.font = '600 34px Manrope, sans-serif'; c.fillText(fit(c, this.title + ' · ' + this.right + ' · продовження', PW - 2*PM), PM, PM + 40);
+      c.fillStyle = PC.muted; c.font = '600 34px Manrope, sans-serif'; c.fillText(fit(c, this.title + ' · ' + this.right + ' · ' + this.L.cont, PW - 2*PM), PM, PM + 40);
       c.fillStyle = PC.line; c.fillRect(PM, PM + 70, PW - 2*PM, 3); this.y = PM + 120;
     }
   }
@@ -1275,30 +1331,32 @@ class PDoc {
   finish(){
     const n = this.pages.length;
     this.pages.forEach((cv, i) => { const c = cv.getContext('2d');
-      c.fillStyle = PC.muted; c.font = 'italic 500 26px Manrope, sans-serif'; c.fillText(PDISC, PM, PH - 200);
-      footer(cv);
-      if (n > 1){ c.textAlign = 'right'; c.font = '600 30px Manrope, sans-serif'; c.fillStyle = PC.muted; c.fillText('Сторінка ' + (i + 1) + ' із ' + n, PW - PM, PH - 90); c.textAlign = 'left'; }
+      c.fillStyle = PC.muted; c.font = 'italic 500 26px Manrope, sans-serif'; const dl = this.L.disc; dl.forEach((t, j) => c.fillText(fit(c, t, PW - 2*PM), PM, PH - 185 - (dl.length - 1 - j) * 36));
+      footer(cv, this.L);
+      if (n > 1){ c.textAlign = 'right'; c.font = '600 30px Manrope, sans-serif'; c.fillStyle = PC.muted; c.fillText(this.L.page(i + 1, n), PW - PM, PH - 90); c.textAlign = 'left'; }
       WM(cv, 'svoiludi.ch'); });
     return this.pages;
   }
 }
 const dmy = ds => ds.slice(8, 10) + '.' + ds.slice(5, 7) + '.';
-function timeText(e){ if (hasTimes(e)) return e.from + '–' + e.to + (num(e.pause) ? ', перерва ' + num(e.pause) + ' хв' : ''); return e.dur ? '–' : ''; }
+function timeText(e, L){ if (hasTimes(e)) return e.from + '–' + e.to + (num(e.pause) ? (L ? L.pause(num(e.pause)) : ', перерва ' + num(e.pause) + ' хв') : ''); return e.dur ? '–' : ''; }
 const mwTxt = () => String(S.set.mwstRate).replace('.', ',') + ' %';
 function pdfClient(cid){
-  const k = S.cur, {y, m} = ym(), cl = cById(cid), T = stats(k), b = T.by[cid], mw = mwR(), vis = cl.mode === 'visit';
+  const k = S.cur, {y, m} = ym(), cl = cById(cid), T = stats(k), b = T.by[cid], mw = mwR(), vis = cl.mode === 'visit', L = docL();
+  const money = v => (Math.round(v * 20) / 20).toLocaleString(L.loc, {minimumFractionDigits: 2, maximumFractionDigits: 2});
+  const rateTxt = L.lang === 'site' ? mwTxt() : num(S.set.mwstRate).toLocaleString(L.loc) + ' %';
   const rows = T.list.filter(r => r.e.client === cid);
-  const D = new PDoc('Звіт про роботу', MONTHS[m] + ' ' + y, ['Stundenrapport · ' + (vis ? 'ціна за візит ' + chf(num(cl.visit)) + ' CHF' : 'ставка ' + chf(num(cl.rate)) + ' CHF за годину'), 'Клієнт · ' + cname(cl) + (cl.place ? ', ' + cl.place : ''), S.set.name ? 'Виконавець · ' + S.set.name : '']);
-  const cards = [[fmt(b.min), 'годин роботи'], [String(b.n), plural(b.n, vis ? P_VIS : P_ENT)], [chf(b.amt), mw ? 'CHF без MWST' : 'CHF за роботу', !mw]];
-  if (mw) cards.push([chf(b.amt * mw), 'CHF MWST ' + mwTxt()], [chf(b.amt * (1 + mw)), 'CHF з MWST', true]);
-  if (b.ex) cards.push([chf(b.ex), 'CHF витрати']);
+  const D = new PDoc(L.title, L.months[m] + ' ' + y, [vis ? L.visit(money(num(cl.visit))) : L.rate(money(num(cl.rate))), L.client + cname(cl) + (cl.place ? ', ' + cl.place : ''), S.set.name ? L.by + S.set.name : ''], L);
+  const cards = [[fmt(b.min), L.hours], [String(b.n), L.count(b.n, vis)], [money(b.amt), mw ? L.exMw : L.work, !mw]];
+  if (mw) cards.push([money(b.amt * mw), L.mw(rateTxt)], [money(b.amt * (1 + mw)), L.incMw, true]);
+  if (b.ex) cards.push([money(b.ex), L.exp]);
   D.cards(cards);
-  const cols = [{t:'Дата', w:170}, {t:'Час', w:470}, {t:'Що зроблено', w:0, wrap:true}, {t:'Години', w:160, r:true}, {t: vis ? 'Візит, CHF' : 'Сума, CHF', w:240, r:true}];
-  D.table(cols, rows.map(r => ({cells:[dmy(r.ds), timeText(r.e), r.e.what || '', r.m ? fmt(r.m) : '', chf(r.a)]})), ['Усього за місяць', '', '', fmt(b.min), chf(b.amt)]);
-  if (mw) D.lines([['Сума без MWST', chf(b.amt) + ' CHF'], ['MWST ' + mwTxt(), chf(b.amt * mw) + ' CHF'], ['Сума з MWST', chf(b.amt * (1 + mw)) + ' CHF', true]]);
+  const cols = [{t: L.col.date, w:170}, {t: L.col.time, w:470}, {t: L.col.what, w:0, wrap:true}, {t: L.col.hours, w:160, r:true}, {t: vis ? L.col.vis : L.col.amt, w:240, r:true}];
+  D.table(cols, rows.map(r => ({cells:[dmy(r.ds), timeText(r.e, L), r.e.what || '', r.m ? fmt(r.m) : '', money(r.a)]})), [L.total, '', '', fmt(b.min), money(b.amt)]);
+  if (mw) D.lines([[L.lExMw, money(b.amt) + ' CHF'], [L.lMw(rateTxt), money(b.amt * mw) + ' CHF'], [L.lIncMw, money(b.amt * (1 + mw)) + ' CHF', true]]);
   const ex = rows.filter(r => num(r.e.exp));
-  if (ex.length){ D.h2('Витрати'); D.table([{t:'Дата', w:170}, {t:'На що', w:0}, {t:'CHF', w:240, r:true}], ex.map(r => ({cells:[dmy(r.ds), r.e.expNote || '', chf(num(r.e.exp))]})), ['Усього витрат', '', chf(b.ex)]); }
-  D.sign(['Підпис виконавця' + (S.set.name ? ' · ' + S.set.name : '') + ' · дата', 'Підпис клієнта · ' + cname(cl) + ' · дата']);
+  if (ex.length){ D.h2(L.expH); D.table([{t: L.col.date, w:170}, {t: L.col.on, w:0}, {t:'CHF', w:240, r:true}], ex.map(r => ({cells:[dmy(r.ds), r.e.expNote || '', money(num(r.e.exp))]})), [L.expTotal, '', money(b.ex)]); }
+  D.sign([L.sign1(S.set.name), L.sign2(cname(cl))]);
   return D.finish();
 }
 function pdfMonth(){
@@ -1335,13 +1393,13 @@ function pdfYear(){
     ['Усього', fmt(T.min), String(T.n), chf(T.amt), '', chf(T.ex)]);
   return D.finish();
 }
-async function pdfOut(make, filename){
+async function pdfOut(make, filename, how){
   if (!window.jspdf){ say('PDF зараз недоступний. Спробуй ще раз пізніше.'); return; }
   say('Готую PDF…');
   try { await Promise.all(['120px Forum', '500 30px Manrope', '600 30px Manrope', '700 30px Manrope', '800 30px Manrope'].map(f => document.fonts.load(f))); await document.fonts.ready; } catch(e) {}
   const pages = make(), doc = new window.jspdf.jsPDF({orientation:'portrait', unit:'mm', format:'a4'}), k = 210 / PW;
   pages.forEach((cv, i) => { if (i) doc.addPage(); doc.addImage(cv.toDataURL('image/jpeg', 0.92), 'JPEG', 0, 0, 210, 297); for (const l of cv.links) doc.link(l.x * k, l.y * k, l.w * k, l.h * k, {url: l.url}); });
-  return offer(filename, doc.output('blob'));
+  return offer(filename, doc.output('blob'), how);
 }
 const safe = s => String(s).replace(/[\\/:*?"<>|]+/g, ' ').replace(/\s+/g, ' ').trim();
 function renderPdfSel(){
@@ -1350,22 +1408,23 @@ function renderPdfSel(){
   sel.disabled = !T.order.length; $('dlCli').disabled = !T.order.length || !downloadsOk; $('dlMine').disabled = !T.n || !downloadsOk;
   $('dlYear').disabled = !stats(String(ym().y)).n || !downloadsOk;
 }
-$('dlCli').addEventListener('click', () => { const cid = $('pdfCli').value, cl = cById(cid); if (!cl) return; const {y, m} = ym(); pdfOut(() => pdfClient(cid), safe('Звіт про роботу ' + cname(cl) + ' ' + MONTHS[m] + ' ' + y) + '.pdf'); });
+$('dlCli').addEventListener('click', () => { const cid = $('pdfCli').value, cl = cById(cid); if (!cl) return; const {y, m} = ym(), L = docL(); pdfOut(() => pdfClient(cid), safe(L.file + ' ' + cname(cl) + ' ' + L.months[m] + ' ' + y) + '.pdf', PDF_LANG_SAY[pdfLang()]); });
 $('dlMine').addEventListener('click', () => { const {y, m} = ym(); pdfOut(pdfMonth, 'Години за клієнтами ' + MONTHS[m] + ' ' + y + '.pdf'); });
 $('dlYear').addEventListener('click', () => { const {y} = ym(); pdfOut(pdfYear, 'Години за клієнтами за ' + y + ' рік.pdf'); });
 
 /* ---------- скачивание ---------- */
 let downloads = null, downloadsOk = true;
-async function offer(filename, data){
+async function offer(filename, data, how){
+  const tail = how ? ' Документ ' + how + '.' : '';
   if (window.claude && window.claude.use){
     if (!downloads){ say('Завантаження тут недоступне.'); return; }
-    try { await downloads.save({filename, data}); say('Файл «' + filename + '» збережено.'); return true; }
+    try { await downloads.save({filename, data}); say('Файл «' + filename + '» збережено.' + tail); return true; }
     catch(err){ const code = err && err.code;
       if (code === 'declined') say('Завантаження скасовано.'); else if (code === 'rate_limited') say('Вікно збереження вже відкрите. Підтверди його або зачекай трохи.'); else say('Не вдалося зберегти файл. Спробуй ще раз.'); }
     return;
   }
   const url = URL.createObjectURL(data), a = document.createElement('a'); a.href = url; a.download = filename; document.body.appendChild(a); a.click();
-  setTimeout(() => { a.remove(); URL.revokeObjectURL(url); }, 4000); say('Файл «' + filename + '» завантажено.'); return true;
+  setTimeout(() => { a.remove(); URL.revokeObjectURL(url); }, 4000); say('Файл «' + filename + '» завантажено.' + tail); return true;
 }
 $('dlXlsx').addEventListener('click', () => { const p = $('vipPanel'); p.hidden = !p.hidden; $('dlXlsx').setAttribute('aria-expanded', String(!p.hidden)); });
 /* Excel откроется для VIP-партнёров вместе с проверкой VIP; сейчас кнопка скрыта и недостижима */
