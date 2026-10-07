@@ -103,7 +103,7 @@ window.SPECIALISTS = [
     "key": "v8kq3zte",
     "num": "SG-0016",
     "uid": "CHE-100.616.561",
-    "status": "на підтвердженні",
+    "status": "активен",
     "paidUntil": "",
     "tiers": [],
     "onlineCH": "2026-12-31",
