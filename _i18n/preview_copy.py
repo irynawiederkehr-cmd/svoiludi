@@ -5,12 +5,12 @@
 Запуск: python3 preview_site.py <repo> <out>"""
 import sys, os, re, shutil, json, datetime
 REPO, OUT = sys.argv[1], sys.argv[2]
-PAGES = ['index.html', 'vakansii/index.html', 'events/index.html', 'join/index.html']
-INSET = {'vakansii', 'events', 'join'}
+PAGES = ['index.html', 'vakansii/index.html', 'kursy/index.html', 'events/index.html', 'join/index.html']
+INSET = {'vakansii', 'kursy', 'events', 'join'}
 LIVE = 'https://svoiludi.ch/'
 ASSETS = ['assets/fonts.css', 'assets/wm.css', 'assets/help.js', 'assets/share.js', 'assets/samesite.js',
           'assets/lib/html2canvas.min.js', 'assets/lib/jspdf.umd.min.js', 'assets/lib/qrcode.js', 'assets/lib/jszip.min.js',
-          'assets/lib/leaflet/leaflet.css', 'assets/lib/leaflet/leaflet.js', 'data/specialists.js', 'data/vacancies.js', 'fav/favicon.svg']
+          'assets/lib/leaflet/leaflet.css', 'assets/lib/leaflet/leaflet.js', 'data/specialists.js', 'data/vacancies.js', 'data/afisha.js', 'fav/favicon.svg']
 ASSETS += ['assets/fonts/' + f for f in os.listdir(os.path.join(REPO, 'assets/fonts'))]
 ASSETS += ['img/' + f for f in os.listdir(os.path.join(REPO, 'img'))]
 BANNER = ('<div style="position:sticky;top:0;z-index:999;background:#2f2924;color:#FFFCF8;font:600 13px/1.45 Manrope,system-ui,sans-serif;'
@@ -20,14 +20,14 @@ def fix(html, depth):
     up = '../' * depth
     html = re.sub(r'<!--i18n-->.*?<!--i18n-->', '', html, flags=re.S)
     html = re.sub(r'(src|href)="/(data|assets|img|fav)/', lambda m: f'{m.group(1)}="{up}{m.group(2)}/', html)
-    html = re.sub(r'href="/(vakansii|events|join)/', lambda m: f'href="{up}{m.group(1)}/index.html', html)
+    html = re.sub(r'href="/(vakansii|kursy|events|join)/', lambda m: f'href="{up}{m.group(1)}/index.html', html)
     # каталоги внутри предпросмотра → явный index.html
     def dirlink(m):
         pre, d, rest = m.group(1), m.group(2), m.group(3)
         if d in INSET: return f'{pre}{d}/index.html{rest}'
         return f'{pre}{d}/{rest}'
-    html = re.sub(r'((?:href="|`)(?:\.\./|\./)?)(vakansii|events|join)/(#|"|`)', dirlink, html)
-    html = re.sub(r'((?:href="|`)(?:\.\./)?)(vakansii|events|join)/(#\$\{)', dirlink, html)
+    html = re.sub(r'((?:href="|`)(?:\.\./|\./)?)(vakansii|kursy|events|join)/(#|"|`)', dirlink, html)
+    html = re.sub(r'((?:href="|`)(?:\.\./)?)(vakansii|kursy|events|join)/(#\$\{)', dirlink, html)
     html = html.replace('href="./"', 'href="index.html"').replace('href="../"', 'href="../index.html"').replace('href="../#', 'href="../index.html#')
     html = html.replace('`../#${', '`../index.html#${')
     # всё, чего нет в предпросмотре, — на живой сайт
