@@ -986,7 +986,9 @@ const LINK = {
   telegram:  v => ['Telegram', 'https://t.me/' + v.replace(/^@/, '').replace(/\s/g, ''), /^\+/.test(v) ? v : '@' + v.replace(/^@/, '')],   // ник или номер телефона (+380 …), 07.10.2026
   instagram: v => ['Instagram', 'https://www.instagram.com/' + v.replace(/^@/, '') + '/', '@' + v.replace(/^@/, '')],
   email:     v => ['E-mail', 'mailto:' + v, v],
-  site:      v => ['Сайт', /^https?:/.test(v) ? v : 'https://' + v, v.replace(/^https?:\/\//, '')]
+  site:      v => ['Сайт', /^https?:/.test(v) ? v : 'https://' + v, v.replace(/^https?:\/\//, '')],
+  site2:     v => LINK.site(v),   // второй сайт (07.10.2026)
+  bot:       v => ['Telegram-бот', 'https://t.me/' + v.replace(/^@/, ''), '@' + v.replace(/^@/, '')]   // свой Telegram-бот специалиста (07.10.2026)
 };
 const uidUrl = u => 'https://www.uid.admin.ch/Detail.aspx?uid_id=' + String(u).replace(/[^A-Z0-9]/gi, '').toUpperCase();
 const maps = a => 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(a);
@@ -1193,6 +1195,7 @@ function vcard(s, photoB64){
   if (c.whatsapp && digits(c.whatsapp) !== digits(c.phone || '')) L.push(`TEL;TYPE=CELL:${digits(c.whatsapp)}`);
   if (c.email) L.push(`EMAIL;TYPE=INTERNET,WORK:${c.email}`);
   if (c.site) L.push(`URL:${LINK.site(c.site)[1]}`);
+  if (c.site2) L.push(`URL:${LINK.site(c.site2)[1]}`);
   if (c.telegram) L.push(`X-SOCIALPROFILE;TYPE=telegram:${LINK.telegram(c.telegram)[1]}`);
   if (c.instagram) L.push(`X-SOCIALPROFILE;TYPE=instagram:${LINK.instagram(c.instagram)[1]}`);
   livePlaces(s).filter(p => !p.area).forEach(p => { const m = String(p.address).match(/^(.*?),?\s*(\d{4})\s+(.+)$/); L.push(`ADR;TYPE=WORK:;;${e(m ? m[1] : p.address)};${e(m ? m[3] : '')};;${m ? m[2] : ''};${e('Schweiz')}`); });
@@ -1339,7 +1342,7 @@ let PREVIEW = '';   // id карточки, открытой по ссылке �
 function openCard(id){
   const s = SPECIALISTS.find(x => x.id === id); if (!s) return;
   const k = CATS[s.cat] || CATS.status, c = s.contacts || {};
-  const contacts = ['phone', 'email', 'site', 'instagram', 'telegram', 'whatsapp'].filter(x => c[x]).map(x => {
+  const contacts = ['phone', 'email', 'site', 'site2', 'instagram', 'telegram', 'bot', 'whatsapp'].filter(x => c[x]).map(x => {
     const [t, h, v] = LINK[x](c[x]); return `<li><span>${t}</span><a href="${esc(h)}" ${x === 'phone' || x === 'email' ? '' : ext}>${esc(v)}</a></li>`; }).join('');
   const box = document.getElementById('qmCard');
   box.style.setProperty('--lc', k.c); box.style.setProperty('--lf', `color-mix(in srgb,${k.c} 13%,var(--paper))`);
@@ -1392,7 +1395,7 @@ function pdfHead(sub){
   return `<div class="pp-h"><span class="av">${av}</span><span><b>Свои люди в Швейцарии</b><small>Справочник Ирины Вознесенской${sub ? ' · ' + esc(sub) : ''}</small></span><span class="dt">${fmtDate(today)}</span></div>`;
 }
 const pdfImg = s => s.photo ? (s.sample ? `<span style="position:relative;display:block;align-self:start;width:190px;height:238px"><img src="${esc(photoSrc(s.photo))}" alt=""><span style="position:absolute;left:50%;bottom:9%;transform:translateX(-50%);background:rgba(255,252,248,.94);color:#4F5E3E;font-weight:700;font-size:15px;padding:6px 14px;border-radius:999px;white-space:nowrap">Ваше фото</span></span>` : `<img src="${esc(photoSrc(s.photo))}" alt="">`) : '<span class="noph"></span>';
-const pdfContacts = (s, cls) => { const c = s.contacts || {}; return ['phone', 'email', 'site', 'instagram', 'telegram', 'whatsapp'].filter(x => c[x]).map(x => { const [t, h, v] = LINK[x](c[x]); return cls ? `<span><a data-href="${esc(h)}">${esc(v)}</a></span>` : `<span>${t}</span><a data-href="${esc(h)}">${esc(v)}</a>`; }).join(''); };
+const pdfContacts = (s, cls) => { const c = s.contacts || {}; return ['phone', 'email', 'site', 'site2', 'instagram', 'telegram', 'bot', 'whatsapp'].filter(x => c[x]).map(x => { const [t, h, v] = LINK[x](c[x]); return cls ? `<span><a data-href="${esc(h)}">${esc(v)}</a></span>` : `<span>${t}</span><a data-href="${esc(h)}">${esc(v)}</a>`; }).join(''); };
 const pdfFoot = `<div class="pp-f">Справочник носит информационный характер и проверяет только официальную регистрацию. Дипломы и сертификаты указывает сам специалист. Договорённости — напрямую со специалистом. ${esc(PAGE_URL)}</div>`;
 function qrImg(text){   // QR-код (библиотека qrcode-generator); не вышло — без кода
   try { qrcode.stringToBytes = qrcode.stringToBytesFuncs['UTF-8']; const q = qrcode(0, 'L'); q.addData(text, 'Byte'); q.make(); return `<img src="${q.createDataURL(4, 0)}" alt="">`; } catch (_) { return ''; }
@@ -1470,7 +1473,7 @@ function vizitkaNode(s, kind){
   const price = kind === 'price', k = CATS[s.cat] || CATS.status, c = s.contacts || {};
   const av = (document.querySelector('.mark .av') || {}).innerHTML || '';
   const where = livePlaces(s).map(p => p.area ? `кантон ${esc(ktRu(p.canton))} · ${esc(areaNote(p))}` : esc(p.address)).concat(s.online ? ['онлайн по видеосвязи'] : []);
-  const ct = ['phone', 'whatsapp', 'email', 'telegram', 'instagram', 'site'].filter(x => c[x] && !(x === 'whatsapp' && digits(c.whatsapp) === digits(c.phone || ''))).map(x => { const [t, , v] = LINK[x](c[x]); return `<span>${t}</span><b>${esc(v)}</b>`; });
+  const ct = ['phone', 'whatsapp', 'email', 'telegram', 'bot', 'instagram', 'site', 'site2'].filter(x => c[x] && !(x === 'whatsapp' && digits(c.whatsapp) === digits(c.phone || ''))).map(x => { const [t, , v] = LINK[x](c[x]); return `<span>${t}</span><b>${esc(v)}</b>`; });
   if (c.whatsapp && c.phone && digits(c.whatsapp) === digits(c.phone)) ct[0] = `<span>Телефон</span><b>${esc(c.phone)} · есть WhatsApp</b>`;
   // QR — короткая визитка (имя, фирма, профессия, телефон, e-mail, сайт): код крупнее и считывается даже с экрана
   const short = vcardShort(s);
