@@ -7,6 +7,8 @@ const path = require('path'); const fs = require('fs');
 const ROOT = path.resolve(__dirname, '..'); const PORT = 8897; const BASE = `http://localhost:${PORT}`;
 const TOOLS = 'СВОЇ ЛЮДИ У ШВЕЙЦАРІЇ · ІНСТРУМЕНТИ';
 const CARDS = [
+  { out: 'kursy/og-image.jpg', url: '/kursy/', sel: '#results', eyebrow: 'СВОИ ЛЮДИ В ШВЕЙЦАРИИ', title: 'Курсы и занятия на своём языке', desc: 'Йога, немецкий, кружки для детей, мастер-классы и вебинары по кантонам Швейцарии.', chip: 'Видно, кто ведёт каждый курс' },
+  { out: 'kursy/og-image.uk.jpg', url: '/uk/kursy/', sel: '#results', eyebrow: 'СВОЇ ЛЮДИ У ШВЕЙЦАРІЇ', title: 'Курси й заняття своєю мовою', desc: 'Йога, німецька, гуртки для дітей, майстер-класи та вебінари по кантонах Швейцарії.', chip: 'Видно, хто веде кожен курс' },
   { out: 'events/og-image.uk.jpg', url: '/uk/events/', sel: '.finder', eyebrow: 'СВОЇ ЛЮДИ У ШВЕЙЦАРІЇ', title: 'Зустрічі поруч із тобою', desc: 'Розмовні клуби, зустрічі мам, свята для дітей, лекції та ретрити російською.', chip: 'По всіх кантонах' },
   { out: 'instrumenty/og-image.uk.jpg', url: '/uk/instrumenty/', sel: '.tools', eyebrow: 'СВОЇ ЛЮДИ У ШВЕЙЦАРІЇ', title: 'Корисні інструменти', desc: 'Річний план, план дня, щоденник емоцій і бюджет для життя у Швейцарії.', chip: 'Безкоштовно й українською' },
   { out: 'instrumenty/moj-budget/og-image.uk.jpg', url: '/uk/instrumenty/moj-budget/', sel: '.panel', eyebrow: TOOLS, title: 'Мій бюджет', desc: 'Усі обов’язкові витрати у Швейцарії, податки й бюджет для двох.', chip: 'Безкоштовно · Excel і PDF' },
