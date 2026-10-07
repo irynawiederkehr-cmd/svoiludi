@@ -1,0 +1,961 @@
+<!doctype html>
+<html lang="uk">
+<head><!--i18n--><base href="/instrumenty/zarplata/"><!--i18n-->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<link rel="icon" href="/fav/favicon.svg" type="image/svg+xml"><link rel="icon" href="/fav/icon-32.png" sizes="32x32"><link rel="apple-touch-icon" href="/fav/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/fonts.css">
+<meta name="description" content="Розрахунок зарплати за місяць у Швейцарії. Погодинна оплата або фіксований оклад, надбавки за відпустку та свята, внески AHV, ALV, NBU, KTG, BVG і податок у джерела. Брутто, нетто й сума до виплати, розрахунковий лист у PDF українською або німецькою. Безкоштовно, дані тільки у твоєму браузері.">
+<link rel="canonical" href="https://svoiludi.ch/uk/instrumenty/zarplata/">
+<meta property="og:type" content="website"><meta property="og:locale" content="uk_UA"><meta property="og:site_name" content="Свої люди у Швейцарії">
+<meta property="og:title" content="Розрахунок зарплати · за місяць"><meta property="og:description" content="Погодинно або з окладом. Усі внески, податок у джерела й сума до виплати. Безкоштовно, з розрахунковим листом у PDF.">
+<meta property="og:url" content="https://svoiludi.ch/uk/instrumenty/zarplata/"><meta property="og:image" content="https://svoiludi.ch/instrumenty/zarplata/og-image.uk.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="robots" content="noindex, nofollow">
+<title>Розрахунок зарплати · Свої люди у Швейцарії</title>
+
+<style>
+/* Расчёт зарплаты за месяц. Стиль сайта «Свои люди»: бежевая бумага, Forum + Manrope, кнопки ровного цвета. */
+:root{
+  --bg:#F4EDE3; --paper:#FFFCF8; --ink:#2F2924; --muted:#7A6E62; --line:#E5D9C9; --soft:#EFE5D7;
+  --brown:#6E4F3C; --mustard:#B98324; --mustard-soft:#F3E3C2; --sage:#4F5E3E; --weekend:#F6EEE3; --sage-soft:#E3E8D6;
+  --plus:#2F7F3B; --minus:#B5322A; --hol:#D81B78;
+  --display:"Forum","Georgia",serif; --sans:"Manrope","Segoe UI",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#221D19; --paper:#2C2621; --ink:#F1E9DF; --muted:#B4A796; --line:#3E362F; --soft:#352E28;
+  --brown:#E1C2A6; --mustard:#E2B45C; --mustard-soft:#3D321F; --sage:#B4BF97; --weekend:#302923; --sage-soft:#2E3226;
+  --plus:#7CC48A; --minus:#EE8A7E; --hol:#F07AB4; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#221D19; --paper:#2C2621; --ink:#F1E9DF; --muted:#B4A796; --line:#3E362F; --soft:#352E28;
+  --brown:#E1C2A6; --mustard:#E2B45C; --mustard-soft:#3D321F; --sage:#B4BF97; --weekend:#302923; --sage-soft:#2E3226;
+  --plus:#7CC48A; --minus:#EE8A7E; --hol:#F07AB4; color-scheme:dark}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--ink);font:15px/1.55 var(--sans);margin:0}
+.wrap{max-width:1240px;margin:0 auto;padding-inline:16px;padding-block:28px 48px;display:flex;flex-direction:column;gap:24px}
+.eyebrow{font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+h1{font-family:var(--display);font-weight:400;font-size:clamp(2.4rem,6vw,3.6rem);line-height:1;margin:4px 0 10px;text-wrap:balance}
+h2{font-family:var(--display);font-weight:400;font-size:1.6rem;margin:0;line-height:1.15}
+h3{font-family:var(--display);font-weight:400;font-size:1.2rem;margin:0}
+.lead{max-width:66ch;color:var(--muted);margin:0}
+.bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+select,input[type=text],input[type=number],input[type=time]{font:inherit;color:var(--ink);background:var(--paper);border:1.5px solid var(--line);border-radius:12px;padding:8px 12px;min-width:0}
+input[type=time]{padding:6px 8px;font-variant-numeric:tabular-nums}
+input[disabled]{background:var(--soft);color:var(--muted)}
+select:focus-visible,input:focus-visible,button:focus-visible,a:focus-visible,summary:focus-visible{outline:2px solid var(--mustard);outline-offset:2px}
+/* кнопки ровного цвета, без перелива */
+.btn{font:inherit;font-weight:700;font-size:.9rem;border:0;border-radius:999px;padding:10px 18px;cursor:pointer;color:#fff;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;text-align:center;background:#6E4F3C;box-shadow:0 8px 18px -8px rgba(110,79,60,.6)}
+.btn.gold{background:#B98324;box-shadow:0 8px 18px -8px rgba(185,131,36,.7)}
+.btn.free{background:#4F5E3E;box-shadow:0 8px 18px -8px rgba(79,94,62,.6)}
+.btn.ghost{background:transparent;color:var(--brown);border:1.5px solid var(--line);box-shadow:none}
+.btn.danger{background:#A0523D;box-shadow:none}
+.btn[disabled]{background:var(--soft);color:var(--muted);box-shadow:none;cursor:not-allowed}
+.spacer{flex:1 1 auto}
+.confirm{display:flex;gap:8px;align-items:center;flex-wrap:wrap;background:var(--paper);border:1.5px solid var(--line);border-radius:18px;padding:6px 6px 6px 14px;font-size:.88rem;font-weight:600}
+.status{font-size:.86rem;min-height:0}
+.status:not(:empty){position:fixed;left:50%;bottom:18px;transform:translateX(-50%);z-index:90;width:max-content;max-width:calc(100vw - 32px);background:var(--ink);color:var(--paper);border-radius:14px;padding:10px 16px;font-weight:600;box-shadow:0 14px 34px -14px rgba(47,41,36,.6)}
+.jump{font-weight:700;color:var(--brown);text-underline-offset:4px}
+.jumps{display:flex;flex-wrap:wrap;gap:6px 22px;margin:0}
+.privnote{margin-top:14px;max-width:80ch;background:var(--sage-soft);border-radius:16px;padding:12px 16px;font-size:.9rem}
+.hint{font-size:.84rem;color:var(--muted);margin:0}
+.disc{display:flex;gap:12px;align-items:flex-start;background:var(--mustard-soft);border-radius:16px;padding:12px 16px;font-size:.88rem}
+.disc b{flex:none;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mustard);padding-top:2px}
+
+.panel{background:var(--paper);border:1.5px solid var(--line);border-radius:22px;padding:18px 20px;display:flex;flex-direction:column;gap:14px}
+.panel-head{display:flex;flex-wrap:wrap;gap:6px 16px;align-items:baseline;justify-content:space-between}
+.panel-head p{margin:0;font-size:.88rem;color:var(--muted)}
+.fields{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,250px),1fr));gap:14px 20px}
+.field{display:flex;flex-direction:column;gap:6px;font-size:.9rem;font-weight:600;min-width:0}
+.field small{font-weight:500;color:var(--muted);font-size:.8rem}
+.field.wide{grid-column:1 / -1}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+
+/* переключатель месяцев */
+.monthnav{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.monthnav .cur{font-family:var(--display);font-size:1.7rem;min-width:9ch;text-align:center}
+.mbtn{font:inherit;font-weight:700;font-size:.86rem;border:1.5px solid var(--line);background:var(--paper);color:var(--brown);border-radius:999px;padding:8px 14px;cursor:pointer}
+
+/* итоги */
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,170px),1fr));gap:12px}
+.card{background:var(--paper);border:1.5px solid var(--line);border-radius:18px;padding:12px 16px;display:flex;flex-direction:column;gap:2px;min-width:0}
+.card b{font-family:var(--display);font-weight:400;font-size:1.9rem;line-height:1.1;font-variant-numeric:tabular-nums;white-space:nowrap}
+.card span{font-size:.82rem;color:var(--muted);font-weight:600}
+.card.main{background:var(--mustard-soft);border-color:transparent}
+.pos{color:var(--plus)} .neg{color:var(--minus)}
+
+/* раскрывающиеся блоки */
+.setd summary{list-style:none;display:flex;justify-content:space-between;align-items:center;gap:12px;cursor:pointer}
+.setd summary::-webkit-details-marker{display:none}
+.setd .sh{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 14px;min-width:0}
+.ssum{font-size:.86rem;color:var(--muted);font-weight:600}
+.tog{flex:none;width:34px;height:34px;border-radius:50%;border:1.5px solid var(--line);position:relative}
+.tog::before{content:"";position:absolute;left:50%;top:45%;width:9px;height:9px;border-right:2px solid var(--brown);border-bottom:2px solid var(--brown);transform:translate(-50%,-50%) rotate(45deg)}
+.setd[open] > summary .tog::before{top:58%;transform:translate(-50%,-50%) rotate(-135deg)}
+.setd:not([open]){gap:0}
+
+.addper{font:inherit;font-weight:700;font-size:.92rem;color:var(--brown);background:var(--paper);border:1.5px dashed var(--brown);border-radius:16px;padding:12px;cursor:pointer}
+.addrow{display:flex;gap:8px;align-items:center}.addrow .addper{flex:1}
+.med .field input{font-size:16px}
+.clr{font:inherit;font-weight:700;font-size:.9rem;color:#A0523D;background:var(--paper);border:1.5px solid color-mix(in srgb,#A0523D 45%,var(--line));border-radius:999px;padding:11px 14px;cursor:pointer}
+.msum{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;padding:14px;border-top:2px solid var(--ink)}
+.msum .lab{grid-column:1 / -1;font-family:var(--display);font-size:1.2rem}
+.msum .num{text-align:left;display:flex;flex-direction:column}
+.lbl{font-size:.66rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+@media (max-width:900px){ input,select,textarea{font-size:16px!important} }
+
+/* статистика */
+.stack{display:flex;flex-direction:column;gap:12px}
+.pdfgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:14px}
+.pdfc{display:flex;flex-direction:column;gap:10px;background:var(--bg);border-radius:18px;padding:14px 16px}
+.pdfc .btn{align-self:flex-start}
+
+/* резервная копия, поделиться */
+.backup{display:flex;flex-direction:column;gap:8px;background:var(--paper);border:1.5px solid var(--line);border-radius:18px;padding:12px 16px;font-size:.88rem}
+.backup.due{border-color:var(--mustard);background:var(--mustard-soft)}
+.backup .btn{padding:8px 14px;font-size:.84rem}
+.warn{background:#A0523D;color:#fff;border-radius:16px;padding:12px 16px;font-size:.92rem}
+.share{display:flex;flex-direction:column;gap:10px;background:var(--paper);border:1.5px solid var(--line);border-radius:22px;padding:16px 18px}
+.share textarea{font:inherit;color:var(--ink);background:var(--bg);border:1.5px solid var(--line);border-radius:14px;padding:10px 12px;min-height:96px;resize:vertical;width:100%}
+
+/* подсказки «?» */
+.fl{display:inline-flex;align-items:center;gap:6px;flex-wrap:wrap}
+.qh{font:inherit;font-size:.74rem;font-weight:800;width:22px;height:22px;border-radius:50%;border:1.5px solid var(--brown);background:var(--paper);color:var(--brown);cursor:pointer;padding:0;display:inline-grid;place-items:center;margin-left:6px;vertical-align:middle;line-height:1;flex:none;text-transform:none;letter-spacing:0}
+.qh[aria-expanded="true"]{background:var(--brown);color:var(--paper)}
+.fl .qh{margin-left:0}
+h2 .qh,h3 .qh{vertical-align:.25em}
+.qpop{position:absolute;z-index:80;background:var(--paper);color:var(--ink);border:1.5px solid var(--brown);border-radius:14px;padding:12px 38px 12px 14px;font:500 .88rem/1.5 var(--sans);box-shadow:0 14px 34px -14px rgba(47,41,36,.5);text-transform:none;letter-spacing:0}
+.qpop p{margin:0 0 6px}.qpop p:last-of-type{margin-bottom:0}
+.qclose{position:absolute;top:6px;right:6px;width:28px;height:28px;border:0;border-radius:50%;background:none;color:var(--muted);cursor:pointer;font-size:.9rem}
+@media (max-width:640px){.qh{width:26px;height:26px;font-size:.8rem}}
+
+/* описание */
+.guide{display:flex;flex-direction:column;gap:28px;padding-top:8px}
+.guide h2{font-size:clamp(1.7rem,3.6vw,2.3rem);text-wrap:balance}
+.guide .intro{max-width:64ch;font-size:1.02rem;margin:0}
+.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px}
+.steps li{background:var(--paper);border:1.5px solid var(--line);border-radius:20px;padding:16px 18px;display:flex;flex-direction:column;gap:6px}
+.steps .n{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;border:2px solid var(--mustard);color:var(--mustard);font-family:var(--display);font-size:1.4rem;margin-bottom:4px}
+.steps h3,.effects h3{font-size:1.25rem;line-height:1.2}
+.steps p,.effects p{margin:0;font-size:.93rem;color:var(--muted)}
+.effects{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,320px),1fr));gap:16px 28px}
+.effects li{position:relative;padding-left:32px;display:flex;flex-direction:column;gap:4px}
+.effects li::before{content:"";position:absolute;left:0;top:2px;width:22px;height:22px;background:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2020%2020%22%3E%3Ccircle%20cx%3D%2210.00%22%20cy%3D%225.00%22%20r%3D%223.6%22%20fill%3D%22%23E3E6D6%22%20stroke%3D%22%2366704F%22%20stroke-width%3D%221.3%22/%3E%3Ccircle%20cx%3D%2214.76%22%20cy%3D%228.45%22%20r%3D%223.6%22%20fill%3D%22%23E3E6D6%22%20stroke%3D%22%2366704F%22%20stroke-width%3D%221.3%22/%3E%3Ccircle%20cx%3D%2212.94%22%20cy%3D%2214.05%22%20r%3D%223.6%22%20fill%3D%22%23E3E6D6%22%20stroke%3D%22%2366704F%22%20stroke-width%3D%221.3%22/%3E%3Ccircle%20cx%3D%227.06%22%20cy%3D%2214.05%22%20r%3D%223.6%22%20fill%3D%22%23E3E6D6%22%20stroke%3D%22%2366704F%22%20stroke-width%3D%221.3%22/%3E%3Ccircle%20cx%3D%225.24%22%20cy%3D%228.45%22%20r%3D%223.6%22%20fill%3D%22%23E3E6D6%22%20stroke%3D%22%2366704F%22%20stroke-width%3D%221.3%22/%3E%3Ccircle%20cx%3D%2210%22%20cy%3D%2210%22%20r%3D%222.6%22%20fill%3D%22%23B98324%22/%3E%3C/svg%3E") center/contain no-repeat}
+.cta{display:flex;flex-wrap:wrap;gap:12px 20px;align-items:center;justify-content:space-between;background:var(--mustard-soft);border-radius:22px;padding:18px 22px}
+.cta p{margin:0;max-width:60ch;font-family:var(--display);font-size:1.2rem;line-height:1.35}
+.credit{font-size:.84rem;color:var(--muted);display:flex;flex-wrap:wrap;gap:4px 14px}
+.credit a{color:var(--brown)}
+.facts{margin:0;padding-left:0;list-style:none;display:flex;flex-direction:column;gap:8px;max-width:80ch}
+.facts li{position:relative;padding-left:22px;font-size:.93rem}
+.facts li::before{content:"";position:absolute;left:2px;top:.55em;width:9px;height:9px;border-radius:3px;background:var(--mustard);transform:rotate(45deg)}
+
+@media (max-width:1180px){
+  .el select{width:100%;flex:1 1 100%}
+}
+@media (max-width:640px){
+  .panel{padding:14px}
+  .bar{gap:8px}
+  .bar .spacer{display:none}
+  .bar>.btn{flex:1 1 100%;padding:10px 8px}
+  #clearBox{display:flex;gap:8px;width:100%;flex-wrap:wrap}
+  #clearBox>.btn{flex:1 1 calc(50% - 4px);padding:9px 6px;font-size:.8rem;white-space:nowrap}
+  .monthnav{width:100%;display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .monthnav .cur{grid-column:1 / -1;grid-row:1;font-size:1.7rem;min-width:0}
+  .mbtn{padding:9px 6px;font-size:.82rem}
+  .disc{flex-direction:column;gap:4px}
+  .card b{font-size:1.6rem}
+  .pdfc .btn,.backup .btn{align-self:stretch;flex:1 1 100%}
+  .hb{grid-template-columns:62px minmax(0,1fr) auto}
+  .hb.top{grid-template-columns:minmax(0,96px) minmax(0,1fr) auto}
+}
+/* расчёт зарплаты */
+.wrap{max-width:1100px}
+.calcbar{display:flex;flex-wrap:wrap;gap:8px 10px;align-items:center;background:var(--paper);border:1.5px solid var(--line);border-radius:18px;padding:10px 14px}
+.calcbar label{display:flex;align-items:center;gap:8px;font-weight:700;font-size:.9rem;flex:1 1 280px;min-width:0}
+.calcbar select{flex:1 1 auto;min-width:0}
+.calcbar .btn{padding:8px 14px;font-size:.84rem}
+.seg{display:grid;grid-template-columns:1fr 1fr;gap:8px;max-width:560px}
+.segb{font:inherit;font-weight:700;font-size:.92rem;padding:12px 14px;border-radius:16px;border:1.5px solid var(--line);background:var(--paper);color:var(--ink);cursor:pointer;display:flex;flex-direction:column;align-items:flex-start;gap:2px;text-align:left}
+.segb small{font-weight:500;color:var(--muted);font-size:.8rem}
+.segb.on{background:var(--brown);border-color:var(--brown);color:#fff}
+.segb.on small{color:rgba(255,255,255,.85)}
+.checks{display:flex;flex-wrap:wrap;gap:6px 16px;font-weight:600;font-size:.9rem}
+.checks label{display:inline-flex;align-items:center;gap:6px}
+.inst{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px 14px;align-items:end;background:var(--soft);border:1.5px solid var(--line);border-radius:18px;padding:14px 16px}
+.inst-st{grid-column:1 / -1;margin:0;font-size:.9rem}
+.inst .btn{justify-self:start}
+.danger-t{color:#A0523D;border-color:color-mix(in srgb,#A0523D 45%,var(--line))}
+.help-src{font-size:.85em;color:var(--muted)}
+.unit{display:flex;align-items:center;gap:8px}
+.unit input{flex:1 1 auto;width:100%}
+.unit span{flex:none;font-size:.84rem;font-weight:700;color:var(--muted)}
+.sub{font-family:var(--sans);font-size:.78rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:4px 0 -4px}
+.calcnote{font-size:.84rem;color:var(--muted);margin:0;font-variant-numeric:tabular-nums}
+.res{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);gap:18px;align-items:start}
+.cards.k4{grid-template-columns:repeat(2,minmax(0,1fr))}
+.slip{background:var(--paper);border:1.5px solid var(--line);border-radius:22px;padding:16px 18px;display:flex;flex-direction:column;gap:4px;font-variant-numeric:tabular-nums}
+.slip h3{font-size:1.35rem;margin-bottom:4px}
+.sl{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 14px;padding:7px 0;border-top:1px solid var(--line);font-size:.92rem}
+.sl small{grid-column:1 / -1;color:var(--muted);font-size:.78rem;font-weight:600;margin-top:-2px}
+.sl b{font-weight:700;white-space:nowrap;text-align:right}
+.sl.tot{border-top:2px solid var(--ink);font-weight:800}
+.sl.tot b{font-weight:800}
+.sl.pay{border-top:0;background:var(--mustard-soft);border-radius:14px;padding:10px 12px;margin-top:8px;font-size:1.05rem;font-weight:800}
+.sl.minus b{color:var(--minus)}
+.slh{font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:10px}
+.alert{background:var(--mustard-soft);border-radius:14px;padding:10px 14px;font-size:.88rem;margin:0}
+.alert b{display:block}
+.pdfrow{display:flex;flex-wrap:wrap;gap:10px 14px;align-items:flex-end}
+.pdfrow .field{flex:0 1 260px}
+@media (max-width:860px){ .res{grid-template-columns:1fr} }
+@media (max-width:640px){
+  .calcbar .btn{flex:1 1 calc(50% - 4px)}
+  .seg{grid-template-columns:1fr}
+  .cards.k4 .card b{font-size:1.45rem}
+  .pdfrow .btn{flex:1 1 100%}
+}
+</style>
+<!--i18n--><link rel="alternate" hreflang="ru" href="https://svoiludi.ch/instrumenty/zarplata/"><link rel="alternate" hreflang="uk" href="https://svoiludi.ch/uk/instrumenty/zarplata/"><!--i18n--></head>
+<body>
+
+<div class="wrap">
+  <header>
+    <p style="margin:0 0 14px"><a class="jump" href="https://svoiludi.ch/uk/instrumenty/">← Усі корисні інструменти · Свої люди у Швейцарії</a></p>
+    <div class="eyebrow">Для працівників і роботодавців · зарплата за місяць</div>
+    <h1>Розрахунок зарплати</h1>
+    <p class="lead">Скільки із зарплати йде на внески й податок і скільки прийде на рахунок. Погодинна оплата або фіксований оклад, надбавки за відпустку та свята, понаднормові й 13-та зарплата. Перевір свій розрахунковий лист (Lohnabrechnung) або порахуй зарплату няні, помічниці по дому чи працівникові. Готовий розрахунковий лист можна завантажити в PDF українською або німецькою.</p>
+    <p style="margin:10px 0 0"><a class="jump" href="/uk/instrumenty/zarplata/#guide">Навіщо це тобі і як із цим працювати ↓</a></p>
+    <div class="privnote"><b>Твої дані тільки в тебе.</b> Усе, що ти вписуєш, зберігається тільки у твоєму браузері на цьому пристрої. Ніхто, крім тебе, цього не бачить, навіть я. Реєстрація не потрібна. Ти можеш закрити сторінку й повернутися пізніше, записи залишаться. На іншому пристрої їх не буде. На iPhone Safari сам стирає записи сайтів, на які довго не заходили, тому раз на місяць зберігай резервну копію. Щоб відкривати сторінку як застосунок, додай її на екран «Додому».</div>
+    <div data-fan="zarplata"></div>
+  </header>
+
+  <div class="bar">
+    <button class="btn" id="dlXlsx" type="button" hidden style="display:none" data-vip="1" aria-expanded="false" aria-controls="vipPanel">Excel для VIP</button>
+    <button class="btn free" id="shareBtn" type="button" aria-expanded="false" aria-controls="sharePanel">Поділитися з друзями</button>
+    <button class="btn ghost" id="exampleBtn" type="button">Подивитися на прикладі</button>
+    <span class="spacer"></span>
+    <span id="clearBox"></span>
+  </div>
+  <p class="jumps"><a class="jump" href="/uk/instrumenty/zarplata/#resBox">До підсумку й розрахункового листа ↓</a><a class="jump" href="/uk/instrumenty/zarplata/#pdfBox">До розрахункового листа в PDF ↓</a></p>
+  <div class="status" id="status" role="status"></div>
+  <div class="share" id="vipPanel" hidden>
+    <h2 style="font-size:1.4rem">Вивантаження в Excel для VIP-партнерів</h2>
+    <p class="hint" style="font-size:.92rem;color:var(--ink)">Таблиця Excel доступна VIP-партнерам довідника «Свої люди у Швейцарії». PDF залишається безкоштовним для всіх.</p>
+    <div class="row"><a class="btn gold" href="https://svoiludi.ch/uk/join/">Дізнатися, як стати VIP-партнером</a></div>
+  </div>
+  <div class="share" id="sharePanel" hidden>
+    <label for="shareText" style="font-weight:700">Повідомлення для друзів</label>
+    <textarea id="shareText"></textarea>
+    <div class="row">
+      <button class="btn gold" id="copyMsg" type="button">Скопіювати повідомлення</button>
+      <a class="btn" id="tgShare" href="/uk/instrumenty/zarplata/#" target="_blank" rel="noopener">Надіслати в Telegram</a>
+      <a class="btn" id="waShare" href="/uk/instrumenty/zarplata/#" target="_blank" rel="noopener">Надіслати у WhatsApp</a>
+    </div>
+  </div>
+
+  <div class="calcbar">
+    <label for="calcSel">Розрахунок<button type="button" class="qh" data-help="calcs" aria-label="Підказка: кілька розрахунків" aria-expanded="false">?</button><select id="calcSel"></select></label>
+    <button class="btn ghost" id="newCalc" type="button">+ Новий розрахунок</button>
+    <button class="btn ghost" id="nextCalc" type="button">Скопіювати на наступний місяць</button>
+    <button class="btn ghost" id="delCalc" type="button">Видалити цей розрахунок</button>
+    <div id="calcConfirm" style="flex-basis:100%" hidden></div>
+  </div>
+
+  <section class="panel" aria-labelledby="who-h">
+    <div class="panel-head"><h2 id="who-h">Хто і за який місяць</h2><p>Для розрахунку потрібен тільки місяць. Імена й адреси потрібні для PDF.</p></div>
+    <div class="fields">
+      <label class="field"><span class="fl">Назва розрахунку<button type="button" class="qh" data-help="title" aria-label="Підказка: назва розрахунку" aria-expanded="false">?</button></span> <small>необов’язково, наприклад «Наталія, прибирання»</small><input type="text" data-k="title" placeholder="Наприклад «Моя зарплата»"></label>
+      <label class="field"><span class="fl">Місяць<button type="button" class="qh" data-help="month" aria-label="Підказка: місяць" aria-expanded="false">?</button></span> <small>за який місяць зарплата</small><span class="row" style="flex-wrap:nowrap"><select data-k="mm" id="fMonth" style="flex:1"></select><select data-k="yy" id="fYear"></select></span></label>
+      <label class="field"><span class="fl">Кантон, де працюєш<button type="button" class="qh" data-help="canton" aria-label="Підказка: кантон" aria-expanded="false">?</button></span> <small>від нього залежать податок у джерела, допомоги, внески й мова розрахункового листа</small><select data-k="canton" id="fCanton"></select></label>
+    </div>
+    <p class="sub">Роботодавець</p>
+    <div class="fields">
+      <label class="field"><span class="fl">Ім’я або фірма<button type="button" class="qh" data-help="employer" aria-label="Підказка: роботодавець" aria-expanded="false">?</button></span><input type="text" data-k="er.name" autocomplete="organization" placeholder="Наприклад «Familie Müller» або «Muster GmbH»"></label>
+      <label class="field">Вулиця й номер<input type="text" data-k="er.a1" placeholder="Bahnhofstrasse 1"></label>
+      <label class="field">Індекс і місто<input type="text" data-k="er.a2" placeholder="8001 Zürich"></label>
+    </div>
+    <p class="sub">Працівник</p>
+    <div class="fields">
+      <label class="field">Ім’я та прізвище<input type="text" data-k="ee.name" autocomplete="name" placeholder="Ім’я та прізвище"></label>
+      <label class="field">Вулиця й номер<input type="text" data-k="ee.a1"></label>
+      <label class="field">Індекс і місто<input type="text" data-k="ee.a2"></label>
+      <label class="field"><span class="fl">Номер AHV<button type="button" class="qh" data-help="ahvnr" aria-label="Підказка: номер AHV" aria-expanded="false">?</button></span> <small>необов’язково</small><input type="text" data-k="ee.ahv" inputmode="numeric" placeholder="756.0000.0000.00"></label>
+      <label class="field"><span class="fl">Дата народження<button type="button" class="qh" data-help="birth" aria-label="Підказка: дата народження" aria-expanded="false">?</button></span> <small>необов’язково</small><input type="text" data-k="ee.birth" inputmode="numeric" placeholder="ДД.ММ.РРРР"></label>
+      <label class="field"><span class="fl">Дозвіл на перебування<button type="button" class="qh" data-help="permit" aria-label="Підказка: дозвіл на перебування" aria-expanded="false">?</button></span> <small>необов’язково</small><select data-k="ee.permit"><option value="">не вказувати</option><option value="CH">Громадянство Швейцарії</option><option value="C">C</option><option value="B">B</option><option value="L">L</option><option value="S">S</option><option value="F">F</option><option value="G">G</option><option value="N">N</option></select></label>
+      <label class="field"><span class="fl">IBAN для виплати<button type="button" class="qh" data-help="iban" aria-label="Підказка: IBAN" aria-expanded="false">?</button></span> <small>необов’язково</small><input type="text" data-k="ee.iban" placeholder="CH00 0000 0000 0000 0000 0"></label>
+    </div>
+  </section>
+
+  <section class="panel" aria-labelledby="pay-h">
+    <div class="panel-head"><h2 id="pay-h">Як платять<button type="button" class="qh" data-help="mode" aria-label="Підказка: погодинно або оклад" aria-expanded="false">?</button></h2><p>Дивись у трудовому договорі.</p></div>
+    <div class="seg" role="group" aria-label="Вид оплати">
+      <button type="button" class="segb" data-mode="hour" aria-pressed="false">Погодинна оплата<small>платять за кожну годину роботи</small></button>
+      <button type="button" class="segb" data-mode="fix" aria-pressed="false">Фіксований оклад<small>одна сума на місяць</small></button>
+    </div>
+    <p class="sub">Яку суму ти знаєш<button type="button" class="qh" data-help="basis" aria-label="Підказка: брутто або нетто" aria-expanded="false">?</button></p>
+    <div class="seg" role="group" aria-label="Брутто або нетто">
+      <button type="button" class="segb" data-basis="brutto" aria-pressed="false">Я знаю брутто<small>до відрахувань, як у договорі</small></button>
+      <button type="button" class="segb" data-basis="netto" aria-pressed="false">Я знаю нетто<small>сума на руки, брутто порахується саме</small></button>
+    </div>
+    <div class="fields" id="hourBox">
+      <label class="field"><span class="fl">Годин за місяць<button type="button" class="qh" data-help="hours" aria-label="Підказка: години за місяць" aria-expanded="false">?</button></span> <small>наприклад 67:20 або 67,5</small><input type="text" data-k="h.hours" inputmode="decimal" placeholder="67:20"></label>
+      <label class="field"><span class="fl"><span id="rateLbl">Ставка за годину брутто</span><button type="button" class="qh" data-help="rate" aria-label="Підказка: ставка за годину" aria-expanded="false">?</button></span> <small id="rateSub">з договору, без надбавок</small><span class="unit"><input type="text" data-k="h.rate" inputmode="decimal" placeholder="наприклад 25"><span>CHF</span></span></label>
+      <label class="field"><span class="fl">Надбавка за відпустку<button type="button" class="qh" data-help="fer" aria-label="Підказка: надбавка за відпустку" aria-expanded="false">?</button></span> <small>4 тижні відпустки 8,33 %, 5 тижнів 10,64 %</small><select data-k="h.ferSel" id="ferSel"><option value="0">ні, відпустка оплачується окремо</option><option value="8.33">8,33 % · 4 тижні</option><option value="10.64">10,64 % · 5 тижнів</option><option value="13.04">13,04 % · 6 тижнів</option><option value="own">інша</option></select><span class="unit" id="ferOwn"><input type="text" data-k="h.fer" inputmode="decimal" placeholder="наприклад 9,5"><span>%</span></span></label>
+      <label class="field"><span class="fl">Надбавка за свята<button type="button" class="qh" data-help="fei" aria-label="Підказка: надбавка за свята" aria-expanded="false">?</button></span> <small>тільки якщо вона є в договорі</small><span class="unit"><input type="text" data-k="h.fei" inputmode="decimal" placeholder="0"><span>%</span></span></label>
+    </div>
+    <div class="fields" id="fixBox">
+      <label class="field"><span class="fl"><span id="salLbl">Оклад при 100 % брутто</span><button type="button" class="qh" data-help="sal" aria-label="Підказка: оклад" aria-expanded="false">?</button></span> <small>на місяць, з договору</small><span class="unit"><input type="text" data-k="f.sal" inputmode="decimal" placeholder="наприклад 5200"><span>CHF</span></span></label>
+      <label class="field"><span class="fl">Відсоток зайнятості<button type="button" class="qh" data-help="pensum" aria-label="Підказка: відсоток зайнятості" aria-expanded="false">?</button></span> <small>Pensum, повна ставка 100 %</small><span class="unit"><input type="text" data-k="f.pensum" inputmode="decimal" placeholder="100"><span>%</span></span></label>
+      <label class="field"><span class="fl">Неоплачувані дні<button type="button" class="qh" data-help="unpaid" aria-label="Підказка: неоплачувані дні" aria-expanded="false">?</button></span> <small>початок або кінець роботи в середині місяця, відпустка за свій рахунок</small><span class="unit"><input type="text" data-k="f.unpaid" inputmode="decimal" placeholder="0"><span id="dimTxt">днів</span></span></label>
+      <label class="field"><span class="fl">Понаднормові години<button type="button" class="qh" data-help="ot" aria-label="Підказка: понаднормові" aria-expanded="false">?</button></span> <small>тільки ті, що оплачуються грошима, наприклад 3:30</small><input type="text" data-k="f.ot" inputmode="decimal" placeholder="0"></label>
+      <label class="field"><span class="fl">Годин на тиждень при 100 %<button type="button" class="qh" data-help="week" aria-label="Підказка: годин на тиждень" aria-expanded="false">?</button></span> <small>потрібно для ціни понаднормової години</small><span class="unit"><input type="text" data-k="f.week" inputmode="decimal" placeholder="42"><span>годин</span></span></label>
+      <label class="field"><span class="fl">Надбавка за понаднормові<button type="button" class="qh" data-help="otPct" aria-label="Підказка: надбавка за понаднормові" aria-expanded="false">?</button></span> <small>зазвичай 25 %</small><span class="unit"><input type="text" data-k="f.otPct" inputmode="decimal" placeholder="25"><span>%</span></span></label>
+      <label class="field"><span class="fl">13-та зарплата<button type="button" class="qh" data-help="m13" aria-label="Підказка: 13-та зарплата" aria-expanded="false">?</button></span> <small>тільки якщо вона є в договорі</small><select data-k="f.m13"><option value="none">ні або не в цьому місяці</option><option value="monthly">щомісяця по 1/12</option><option value="paid">виплачується в цьому місяці</option></select></label>
+      <label class="field" id="m13mBox"><span class="fl">За скільки місяців<button type="button" class="qh" data-help="m13m" aria-label="Підказка: за скільки місяців" aria-expanded="false">?</button></span> <small>12, якщо працювала або працював увесь рік</small><span class="unit"><input type="text" data-k="f.m13m" inputmode="decimal" placeholder="12"><span>місяців</span></span></label>
+    </div>
+  </section>
+
+  <section class="panel" aria-labelledby="ex-h">
+    <div class="panel-head"><h2 id="ex-h">Доплати</h2><p>Якщо нічого такого немає, залиш порожнім.</p></div>
+    <div class="fields">
+      <label class="field"><span class="fl">Інші виплати з внесками<button type="button" class="qh" data-help="bonus" aria-label="Підказка: інші виплати" aria-expanded="false">?</button></span> <small>бонус, надбавка за ніч або вихідні</small><input type="text" data-k="x.bonusT" placeholder="Назва, наприклад «Бонус»"><span class="unit"><input type="text" data-k="x.bonus" inputmode="decimal" placeholder="0"><span>CHF</span></span></label>
+      <label class="field"><span class="fl">Надбавки за ніч, неділю, зміни<button type="button" class="qh" data-help="zul" aria-label="Підказка: надбавки за ніч і неділю" aria-expanded="false">?</button></span> <small>з внесками</small><input type="text" data-k="x.zulT" placeholder="Назва, наприклад «Нічна надбавка»"><span class="unit"><input type="text" data-k="x.zul" inputmode="decimal" placeholder="0"><span>CHF</span></span></label>
+      <label class="field"><span class="fl">Виплата за невикористану відпустку<button type="button" class="qh" data-help="ferPay" aria-label="Підказка: виплата за відпустку" aria-expanded="false">?</button></span> <small>зазвичай при звільненні, з внесками</small><span class="unit"><input type="text" data-k="x.ferPay" inputmode="decimal" placeholder="0"><span>CHF</span></span></label>
+      <div class="field"><span class="fl">Їжа й житло від роботодавця<button type="button" class="qh" data-help="nat" aria-label="Підказка: їжа й житло" aria-expanded="false">?</button></span> <small>Naturallohn, вважається зарплатою</small><select data-k="x.nat" aria-label="Їжа й житло від роботодавця"><option value="none">немає</option><option value="full">повний пансіон і житло</option><option value="parts">окремо, вибрати нижче</option></select>
+        <span class="checks" id="natParts"><label><input type="checkbox" data-c="x.natB"> сніданок</label><label><input type="checkbox" data-c="x.natL"> обід</label><label><input type="checkbox" data-c="x.natD"> вечеря</label><label><input type="checkbox" data-c="x.natR"> житло</label></span></div>
+      <label class="field"><span class="fl">Дитячі допомоги<button type="button" class="qh" data-help="kinder" aria-label="Підказка: дитячі допомоги" aria-expanded="false">?</button></span> <small>Kinderzulagen, якщо їх платять разом із зарплатою</small><span class="unit"><input type="text" data-k="x.kinder" inputmode="decimal" placeholder="0"><span>CHF</span></span></label>
+      <label class="field"><span class="fl">Виплати страховки при хворобі або нещасному випадку<button type="button" class="qh" data-help="tagg" aria-label="Підказка: виплати страховки" aria-expanded="false">?</button></span> <small>Taggeld, без внесків AHV</small><span class="unit"><input type="text" data-k="x.tagg" inputmode="decimal" placeholder="0"><span>CHF</span></span></label>
+      <label class="field"><span class="fl">Відшкодування витрат<button type="button" class="qh" data-help="spesen" aria-label="Підказка: відшкодування витрат" aria-expanded="false">?</button></span> <small>Spesen, без внесків</small><span class="unit"><input type="text" data-k="x.spesen" inputmode="decimal" placeholder="0"><span>CHF</span></span></label>
+    </div>
+  </section>
+
+  <section class="panel" aria-labelledby="ded-h">
+    <div class="panel-head"><h2 id="ded-h">Внески й податок<button type="button" class="qh" data-help="rates" aria-label="Підказка: внески й податок" aria-expanded="false">?</button></h2><p>Тільки частка працівника. Ставки дивись у договорі або в минулому розрахунковому листі.</p></div>
+    <div class="fields">
+      <label class="field"><span class="fl">AHV/IV/EO<button type="button" class="qh" data-help="rAhv" aria-label="Підказка: AHV" aria-expanded="false">?</button></span> <small>пенсія, інвалідність, допомога з догляду за дитиною</small><span class="unit"><input type="text" data-k="r.ahv" inputmode="decimal" placeholder="5.3"><span>%</span></span></label>
+      <label class="field"><span class="fl">ALV<button type="button" class="qh" data-help="rAlv" aria-label="Підказка: ALV" aria-expanded="false">?</button></span> <small>страхування на випадок безробіття</small><span class="unit"><input type="text" data-k="r.alv" inputmode="decimal" placeholder="1.1"><span>%</span></span></label>
+      <label class="field"><span class="fl">NBU<button type="button" class="qh" data-help="rNbu" aria-label="Підказка: NBU" aria-expanded="false">?</button></span> <small>нещасний випадок поза роботою</small><span class="unit"><input type="text" data-k="r.nbu" inputmode="decimal" placeholder="0"><span>%</span></span></label>
+      <label class="field"><span class="fl">KTG<button type="button" class="qh" data-help="rKtg" aria-label="Підказка: KTG" aria-expanded="false">?</button></span> <small>страховка зарплати при хворобі</small><span class="unit"><input type="text" data-k="r.ktg" inputmode="decimal" placeholder="0"><span>%</span></span></label>
+      <label class="field"><span class="fl">BVG, пенсійна каса<button type="button" class="qh" data-help="rBvg" aria-label="Підказка: BVG" aria-expanded="false">?</button></span> <small>друга пенсія</small><select data-k="r.bvgMode"><option value="none">немає внеску</option><option value="pct">відсоток від брутто</option><option value="chf">сума в CHF</option></select><span class="unit" id="bvgVal"><input type="text" data-k="r.bvg" inputmode="decimal" placeholder="0"><span id="bvgUnit">%</span></span></label>
+      <label class="field" id="kantBox"><span class="fl">Кантональний внесок<button type="button" class="qh" data-help="rKant" aria-label="Підказка: кантональний внесок" aria-expanded="false">?</button></span> <small id="kantSub">є тільки в деяких кантонах</small><span class="unit"><input type="text" data-k="r.kant" inputmode="decimal" placeholder="0"><span>%</span></span></label>
+      <label class="field"><span class="fl">Податок у джерела<button type="button" class="qh" data-help="rQst" aria-label="Підказка: податок у джерела" aria-expanded="false">?</button></span> <small>Quellensteuer, відсоток із таблиці кантону</small><span class="unit"><input type="text" data-k="r.qst" inputmode="decimal" placeholder="0"><span>%</span></span><input type="text" data-k="r.qstCode" placeholder="Код тарифу, наприклад A0N" aria-label="Код тарифу податку у джерела"></label>
+    </div>
+  </section>
+
+  <section class="panel" aria-labelledby="minus-h">
+    <div class="panel-head"><h2 id="minus-h">Утримання з нетто</h2><p>Якщо нічого такого немає, залиш порожнім.</p></div>
+    <div class="fields">
+      <label class="field"><span class="fl">Аванс<button type="button" class="qh" data-help="adv" aria-label="Підказка: аванс" aria-expanded="false">?</button></span> <small>уже виплачено в цьому місяці</small><span class="unit"><input type="text" data-k="d.adv" inputmode="decimal" placeholder="0"><span>CHF</span></span></label>
+      <label class="field"><span class="fl">Інше утримання<button type="button" class="qh" data-help="other" aria-label="Підказка: інше утримання" aria-expanded="false">?</button></span> <small>наприклад обід або проїзний від фірми</small><input type="text" data-k="d.otherT" placeholder="Назва, наприклад «Обіди»"><span class="unit"><input type="text" data-k="d.other" inputmode="decimal" placeholder="0"><span>CHF</span></span></label>
+      <label class="field"><span class="fl">Утримання за рішенням Betreibungsamt<button type="button" class="qh" data-help="pf" aria-label="Підказка: утримання за рішенням Betreibungsamt" aria-expanded="false">?</button></span> <small>Lohnpfändung, сума з листа відомства</small><span class="unit"><input type="text" data-k="d.pf" inputmode="decimal" placeholder="0"><span>CHF</span></span></label>
+    </div>
+    <p class="sub">Утримується частинами<button type="button" class="qh" data-help="inst" aria-label="Підказка: утримання частинами" aria-expanded="false">?</button></p>
+    <p class="hint" style="margin:0">Аванс, позика або борг роботодавцеві, що повертається частинами із зарплати. Залишок рахується сам від місяця до місяця.</p>
+    <div id="instBox" class="stack" style="gap:10px"></div>
+    <button class="btn ghost" id="instAdd" type="button" style="align-self:flex-start">+ Додати утримання частинами</button>
+  </section>
+
+  <section class="stack" id="resBox" aria-labelledby="res-h">
+    <h2 id="res-h">Підсумок за <span id="resMonth"></span><button type="button" class="qh" data-help="cards" aria-label="Підказка: що означають цифри" aria-expanded="false">?</button></h2>
+    <div id="alerts" class="stack" style="gap:8px"></div>
+    <div class="res">
+      <div class="cards k4" id="cards"></div>
+      <div class="slip" id="slip"></div>
+    </div>
+  </section>
+
+  <section class="panel" id="pdfBox" aria-labelledby="pdf-h">
+    <div class="panel-head"><h2 id="pdf-h">Розрахунковий лист у PDF<button type="button" class="qh" data-help="pdf" aria-label="Підказка: розрахунковий лист у PDF" aria-expanded="false">?</button></h2><p>Безкоштовно. Файл збережеться на твоєму пристрої.</p></div>
+    <p class="hint">Один аркуш A4. Роботодавець і працівник, усі рядки розрахунку, внески, сума до виплати й місця для підписів. Мова розрахункового листа ставиться сама за кантоном, її можна змінити. Це зразок для прикладу й особистого використання, а не офіційний документ.</p>
+    <div class="pdfrow">
+      <label class="field"><span class="fl">Мова розрахункового листа<button type="button" class="qh" data-help="lang" aria-label="Підказка: мова розрахункового листа" aria-expanded="false">?</button></span><select data-k="lang"><option value="ru">Мовою сайту</option><option value="de">Deutsch · німецькою</option><option value="fr">Français · французькою</option><option value="it">Italiano · італійською</option></select></label>
+      <label class="field"><span class="fl">Місце й дата<button type="button" class="qh" data-help="place" aria-label="Підказка: місце й дата" aria-expanded="false">?</button></span> <small>необов’язково</small><input type="text" data-k="place" placeholder="Zürich, 30.09.2026"></label>
+      <button class="btn gold" id="dlPdf" type="button">Завантажити розрахунковий лист у PDF</button>
+    </div>
+  </section>
+
+  <div class="disc" role="note"><b>Важливо</b><span>Це орієнтир, а не точний розрахунок. Суми рахуються тільки з того, що ти вписуєш. Ставки внесків, податок у джерела й правила залежать від договору, страховок роботодавця, кантону й твоєї ситуації. Усі цифри звіряй із договором, розрахунковими листами й виписками, уточнюй у роботодавця, у касі AHV (SVA), у податковій службі або в консультанта. Автор не несе відповідальності за достовірність даних. Це зразок для прикладу й особистого використання, а не офіційний документ.</span></div>
+
+  <section class="guide" id="guide" aria-labelledby="g-why">
+    <div>
+      <div class="eyebrow">Навіщо це тобі</div>
+      <h2 id="g-why">Розрахунковий лист без загадок</h2>
+    </div>
+    <p class="intro">Розрахунковий лист у Швейцарії повний скорочень. AHV, ALV, NBU, KTG, BVG, Quellensteuer, і наприкінці сума, помітно менша за ту, про яку домовлялися. Тут видно кожен рядок. Скільки ти заробила або заробив до відрахувань, що й скільки пішло на страховки й податок і чому на рахунок прийшло саме стільки. А якщо ти сама платиш зарплату, наприклад няні або помічниці по дому, ти одразу бачиш, що вказати в розрахунковому листі, і можеш його роздрукувати.</p>
+
+    <div>
+      <div class="eyebrow">Як із цим працювати</div>
+      <h2 id="g-how">Чотири кроки до зрозумілої зарплати</h2>
+    </div>
+    <ol class="steps" aria-labelledby="g-how">
+      <li><span class="n">1</span><h3>Вибери місяць і вид оплати</h3><p>Погодинна оплата або фіксований оклад. Якщо в договорі оклад, а години просто записуються, вибирай оклад.</p></li>
+      <li><span class="n">2</span><h3>Впиши цифри з договору</h3><p>Ставку або оклад, надбавки, години за місяць. Ставки внесків візьми з договору або минулого розрахункового листа.</p></li>
+      <li><span class="n">3</span><h3>Звір із розрахунковим листом</h3><p>Якщо сума не сходиться, порівняй рядок за рядком. Найчастіше відрізняються ставки NBU, KTG, BVG або податку у джерела.</p></li>
+      <li><span class="n">4</span><h3>Завантаж PDF</h3><p>Розрахунковий лист українською, щоб зрозуміти самій або самому, або німецькою, щоб віддати працівникові чи додати до документів.</p></li>
+    </ol>
+
+    <div>
+      <div class="eyebrow">Якщо ти працюєш за наймом у Швейцарії</div>
+      <h2 id="g-ch">Що варто знати</h2>
+    </div>
+    <ul class="facts" aria-labelledby="g-ch">
+      <li>Брутто — зарплата до відрахувань. Нетто — те, що залишається після внесків і податку. Роботодавець зобов’язаний щомісяця давати письмовий розрахунковий лист.</li>
+      <li>Внески AHV/IV/EO та ALV діляться навпіл. Ту саму суму, що знімають із тебе, роботодавець платить зверху зі своєї кишені.</li>
+      <li>Страхування від нещасного випадку поза роботою (NBU) обов’язкове, якщо ти працюєш в одного роботодавця 8 годин на тиждень або більше. Ставку визначає страхова роботодавця.</li>
+      <li>До пенсійної каси (BVG) платять, якщо річна зарплата в одного роботодавця вища за поріг закону. Нижче порога внесок зазвичай не обов’язковий. Точну суму показує довідка пенсійної каси.</li>
+      <li>Податок у джерела (Quellensteuer) утримують у тих, хто не має дозволу C і швейцарського громадянства, наприклад із дозволом B, L, S або F. Відсоток залежить від кантону, сімейного стану й дітей і стоїть у таблиці кантону.</li>
+      <li>При погодинній оплаті відпустку часто оплачують надбавкою до кожної години. За 4 тижні відпустки це 8,33 %, за 5 тижнів 10,64 %. Надбавка має стояти в договорі й окремим рядком у кожному розрахунковому листі.</li>
+      <li>13-та зарплата належить, тільки якщо вона записана в договорі. Понаднормові оплачуються з надбавкою 25 %, якщо в договорі не домовилися інакше.</li>
+      <li>Якщо ти платиш зарплату в себе вдома, наприклад няні, прибиральниці або помічниці з догляду, ти роботодавець. Працівника потрібно зареєструвати в касі AHV і застрахувати від нещасного випадку. Багато кас пропонують для цього спрощену процедуру.</li>
+      <li>Зберігай розрахункові листи. Вони потрібні для податкової декларації, RAV, продовження дозволу, оренди квартири й кредиту.</li>
+    </ul>
+
+    <div>
+      <div class="eyebrow">Що це дає в коучингу</div>
+      <h2 id="g-coach">Що змінюється для тебе</h2>
+    </div>
+    <ul class="effects" aria-labelledby="g-coach">
+      <li><h3>Спокій замість здогадок</h3><p>Коли зрозумілий кожен рядок, зникає тривога «мене обрахували» і відчуття, що гроші зникають самі.</p></li>
+      <li><h3>Розмова про гроші на рівних</h3><p>З розрахунком на руках простіше поставити запитання роботодавцеві, обговорити ставку або домовитися про нові умови.</p></li>
+      <li><h3>Видно ціну твоєї праці</h3><p>Брутто, нетто й те, що платить роботодавець, показують, скільки насправді коштує твоя година.</p></li>
+      <li><h3>Порядок, який дає сили</h3><p>Гроші, які ти розумієш, легше планувати. Це добра опора для бюджету, відпустки й великих рішень і добрий матеріал для нашої зустрічі.</p></li>
+    </ul>
+
+    <div class="cta">
+      <p>Хочеш почуватися у Швейцарії впевненіше, у роботі й у грошах? Знайомство триває 30 хвилин, онлайн і безкоштовно.</p>
+      <a class="btn free" href="https://t.me/IrynaNeuroCoach" target="_blank" rel="noopener">Написати «ВСТРЕЧА» у Telegram</a>
+    </div>
+  </section>
+
+  <div class="disc" role="note"><b>Важливо</b><span>Цифри на цій сторінці орієнтовні. Уточнюй і перевіряй їх. Автор не несе відповідальності за достовірність даних. Усі години, ставки й суми обов’язково перевір і впиши сама або сам за своїми документами. Це зразок для прикладу й особистого використання, а не офіційний документ.</span></div>
+  <p class="credit"><span>Ірина Вознесенська · коуч</span><a href="https://www.instagram.com/iryna.voznesenskaya/" target="_blank" rel="noopener">Instagram @iryna.voznesenskaya</a><a href="https://voznesenskaya.ch/uk/" target="_blank" rel="noopener">voznesenskaya.ch</a><a href="https://svoiludi.ch/uk/" target="_blank" rel="noopener">Свої люди у Швейцарії · svoiludi.ch</a><a href="https://svoiludi.ch/uk/privacy/">Політика конфіденційності</a></p>
+</div>
+
+<script src="/assets/lib/jspdf.umd.min.js"></script>
+<script>
+const $ = id => document.getElementById(id);
+const KEY = 'zarplata.v1';
+const SHARE_URL = 'https://svoiludi.ch/uk/instrumenty/zarplata/';
+const SHARE_MSG = 'Привіт! Дивись, який зрозумілий розрахунок зарплати за місяць. Погодинно або з окладом, із внесками AHV, ALV, NBU, BVG і податком у джерела. Одразу видно брутто, нетто й скільки прийде на рахунок, а розрахунковий лист можна завантажити в PDF українською або німецькою. Знадобиться і щоб перевірити свою зарплату, і щоб порахувати її няні або помічниці по дому. Хочеш спробувати?\n' + SHARE_URL;
+const CREDIT = {
+  ru: [{t:'Ірина Вознесенська · коуч', u:'https://voznesenskaya.ch/uk/'}, {t:'Instagram @iryna.voznesenskaya', u:'https://www.instagram.com/iryna.voznesenskaya/'}, {t:'voznesenskaya.ch', u:'https://voznesenskaya.ch/uk/'}, {t:'svoiludi.ch', u:'https://svoiludi.ch/uk/'}],
+  fr: [{t:'Iryna Voznesenskaya · Coach', u:'https://voznesenskaya.ch/uk/'}, {t:'Instagram @iryna.voznesenskaya', u:'https://www.instagram.com/iryna.voznesenskaya/'}, {t:'voznesenskaya.ch', u:'https://voznesenskaya.ch/uk/'}, {t:'svoiludi.ch', u:'https://svoiludi.ch/uk/'}],
+  it: [{t:'Iryna Voznesenskaya · Coach', u:'https://voznesenskaya.ch/uk/'}, {t:'Instagram @iryna.voznesenskaya', u:'https://www.instagram.com/iryna.voznesenskaya/'}, {t:'voznesenskaya.ch', u:'https://voznesenskaya.ch/uk/'}, {t:'svoiludi.ch', u:'https://svoiludi.ch/uk/'}],
+  de: [{t:'Iryna Voznesenskaya · Coach', u:'https://voznesenskaya.ch/uk/'}, {t:'Instagram @iryna.voznesenskaya', u:'https://www.instagram.com/iryna.voznesenskaya/'}, {t:'voznesenskaya.ch', u:'https://voznesenskaya.ch/uk/'}, {t:'svoiludi.ch', u:'https://svoiludi.ch/uk/'}]
+};
+const MONTHS = ['Січень','Лютий','Березень','Квітень','Травень','Червень','Липень','Серпень','Вересень','Жовтень','Листопад','Грудень'];
+const MONTHS_IN = ['січень','лютий','березень','квітень','травень','червень','липень','серпень','вересень','жовтень','листопад','грудень'];
+const MONTHS_DE = ['Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'];
+const MONTHS_FR = ['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'];
+const MONTHS_IT = ['gennaio','febbraio','marzo','aprile','maggio','giugno','luglio','agosto','settembre','ottobre','novembre','dicembre'];
+const MON_L = {ru: MONTHS, de: MONTHS_DE, fr: MONTHS_FR, it: MONTHS_IT};
+const LOC = {ru: 'uk-UA', de: 'de-CH', fr: 'fr-CH', it: 'it-CH'};
+
+/* ---------- кантоны: язык расчётки, кантональный взнос работника, минимальная зарплата (проверено 07.10.2026, источники в подсказках) ---------- */
+const CANTONS = [
+  ['AG','Ааргау','Aargau','Argovie','Argovia','de'], ['AI','Аппенцелль-Іннерроден','Appenzell Innerrhoden','Appenzell Rhodes-Intérieures','Appenzello Interno','de'],
+  ['AR','Аппенцелль-Ауссерроден','Appenzell Ausserrhoden','Appenzell Rhodes-Extérieures','Appenzello Esterno','de'], ['BE','Берн','Bern','Berne','Berna','de'],
+  ['BL','Базель-Ланд','Basel-Landschaft','Bâle-Campagne','Basilea Campagna','de'], ['BS','Базель-Штадт','Basel-Stadt','Bâle-Ville','Basilea Città','de'],
+  ['FR','Фрібур','Freiburg','Fribourg','Friburgo','fr'], ['GE','Женева','Genf','Genève','Ginevra','fr'], ['GL','Гларус','Glarus','Glaris','Glarona','de'],
+  ['GR','Граубюнден','Graubünden','Grisons','Grigioni','de'], ['JU','Юра','Jura','Jura','Giura','fr'], ['LU','Люцерн','Luzern','Lucerne','Lucerna','de'],
+  ['NE','Невшатель','Neuenburg','Neuchâtel','Neuchâtel','fr'], ['NW','Нідвальден','Nidwalden','Nidwald','Nidvaldo','de'], ['OW','Обвальден','Obwalden','Obwald','Obvaldo','de'],
+  ['SG','Санкт-Галлен','St. Gallen','Saint-Gall','San Gallo','de'], ['SH','Шаффгаузен','Schaffhausen','Schaffhouse','Sciaffusa','de'], ['SO','Золотурн','Solothurn','Soleure','Soletta','de'],
+  ['SZ','Швіц','Schwyz','Schwytz','Svitto','de'], ['TG','Тургау','Thurgau','Thurgovie','Turgovia','de'], ['TI','Тічино','Tessin','Tessin','Ticino','it'],
+  ['UR','Урі','Uri','Uri','Uri','de'], ['VD','Во','Waadt','Vaud','Vaud','fr'], ['VS','Вале','Wallis','Valais','Vallese','fr'], ['ZG','Цуг','Zug','Zoug','Zugo','de'], ['ZH','Цюрих','Zürich','Zurich','Zurigo','de']];
+const KT = Object.fromEntries(CANTONS.map(x => [x[0], {ru: x[1], de: x[2], fr: x[3], it: x[4], lang: x[5]}]));
+/* взнос работника сверх федеральных: VS — семейные пособия 0,13 %; GE — страхование материнства 0,029 %; VD — PC Familles / rente-pont 0,09 % (2026) */
+const KANT = {VS: {p: '0.13', ru: 'сімейні допомоги (FAK)', de: 'Familienzulagen (FAK)', fr: 'allocations familiales', it: 'assegni familiari'},
+  GE: {p: '0.029', ru: 'страхування материнства', de: 'Mutterschaftsversicherung', fr: 'assurance maternité', it: 'assicurazione maternità'},
+  VD: {p: '0.09', ru: 'PC Familles і rente-pont', de: 'PC Familles und rente-pont', fr: 'PC Familles et rente-pont', it: 'PC Familles e rente-pont'}};
+/* кантональная минимальная зарплата брутто, CHF в час, 2026 */
+const MINW = {GE: [24.59, 'Женева'], BS: [22.20, 'Базель-Штадт'], JU: [21.40, 'Юра'], NE: [21.35, 'Невшатель'], TI: [20.00, 'Тічино']};
+/* еда и жильё (Naturallohn) по нормам AHV 2026, CHF в месяц */
+const NAT = {B: 105, L: 300, D: 240, R: 345, full: 990};
+
+/* ---------- данные ---------- */
+const pad = n => String(n).padStart(2, '0');
+const uid = () => Math.random().toString(36).slice(2, 9);
+function blank(){
+  const d = new Date();
+  return {id: uid(), title: '', mm: String(d.getMonth() + 1), yy: String(d.getFullYear()), place: '', lang: 'ru', canton: 'ZH', basis: 'brutto',
+    er: {name: '', a1: '', a2: ''}, ee: {name: '', a1: '', a2: '', ahv: '', birth: '', permit: '', iban: ''},
+    mode: 'hour', h: {hours: '', rate: '', ferSel: '8.33', fer: '', fei: ''},
+    f: {sal: '', pensum: '100', unpaid: '', ot: '', week: '42', otPct: '25', m13: 'none', m13m: '12'},
+    x: {bonusT: '', bonus: '', zulT: '', zul: '', ferPay: '', nat: 'none', natB: '', natL: '', natD: '', natR: '', tagg: '', kinder: '', spesen: ''},
+    r: {ahv: '5.3', alv: '1.1', nbu: '', ktg: '', bvgMode: 'none', bvg: '', kant: '', qst: '', qstCode: ''},
+    d: {adv: '', otherT: '', other: '', pf: ''}, inst: []};
+}
+function merge(base, o){ for (const k in o){ if (o[k] && typeof o[k] === 'object' && !Array.isArray(o[k]) && base[k] && typeof base[k] === 'object') merge(base[k], o[k]); else if (k in base) base[k] = Array.isArray(base[k]) ? (Array.isArray(o[k]) ? o[k] : base[k]) : o[k]; } return base; }
+function freshS(){ const c = blank(); return {v: 1, cur: c.id, calcs: [c]}; }
+let S;
+try { S = JSON.parse(localStorage.getItem(KEY) || 'null'); } catch(e) { S = null; }
+if (!S || !Array.isArray(S.calcs) || !S.calcs.length) S = freshS();
+S.calcs = S.calcs.map(c => merge(blank(), c));
+if (!S.calcs.some(c => c.id === S.cur)) S.cur = S.calcs[0].id;
+function save(){ try { localStorage.setItem(KEY, JSON.stringify(S)); } catch(e) {} }
+const cur = () => S.calcs.find(c => c.id === S.cur);
+const getP = (o, p) => p.split('.').reduce((a, k) => a == null ? a : a[k], o);
+const setP = (o, p, v) => { const ks = p.split('.'), last = ks.pop(); ks.reduce((a, k) => a[k], o)[last] = v; };
+
+/* ---------- числа ---------- */
+const num = v => { const n = parseFloat(String(v == null ? '' : v).replace(/[’'\s]/g, '').replace(',', '.')); return isNaN(n) ? 0 : n; };
+const r2 = v => Math.round((v + Number.EPSILON) * 100) / 100;
+const chf = v => (Math.round(v * 100) / 100).toLocaleString('de-CH', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+function hrs(v){ const s = String(v || '').trim(), t = s.match(/^(\d+)\s*:\s*(\d{1,2})$/); if (t) return +t[1] + Math.min(59, +t[2]) / 60; return num(s); }
+const hm = h => { const t = Math.round(h * 60); return Math.floor(t / 60) + ':' + pad(t % 60); };
+const pctTxt = (v, lang) => (Math.round(v * 1000) / 1000).toLocaleString(LOC[lang] || 'uk-UA', {maximumFractionDigits: 3}) + ' %';
+const dec = (v, lang) => String(v).replace('.', lang === 'de' ? '.' : ',');
+const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[ch]));
+const ferPct = c => c.h.ferSel === 'own' ? num(c.h.fer) : num(c.h.ferSel);
+
+/* ---------- подписи строк: на языке сайта, на немецком, французском и итальянском ---------- */
+const LBL = {
+  ru: {title: 'Розрахунок зарплати', base: 'Оплата за години', fer: 'Надбавка за відпустку', fei: 'Надбавка за свята', sal: 'Оклад', unp: 'Неоплачувані дні', ot: 'Понаднормові', otz: 'з надбавкою', m13: '13-та зарплата', m13a: '1/12 щомісяця', m13b: 'виплата за', bonus: 'Інші виплати', zul: 'Надбавки за ніч, неділю, зміни', ferPay: 'Виплата за невикористану відпустку', nat: 'Їжа й житло від роботодавця', natAfter: 'Їжа й житло, отримано натурою', brutto: 'Брутто', ahv: 'AHV/IV/EO', alv: 'ALV', nbu: 'NBU, нещасний випадок поза роботою', ktg: 'KTG, страховка при хворобі', bvg: 'BVG, пенсійна каса', kant: 'Кантональний внесок', qst: 'Податок у джерела', qstCode: 'код тарифу', ded: 'Усього внесків і податку', netto: 'Нетто', kinder: 'Дитячі допомоги', tagg: 'Виплати страховки (Taggeld)', spesen: 'Відшкодування витрат', adv: 'Аванс', other: 'Інше утримання', pf: 'Утримання за рішенням Betreibungsamt', inst: 'Утримання частинами', rest: 'залишок', ofTot: 'з', pay: 'До виплати',
+    h: 'год', days: 'дн.', of: 'з', perDay: 'на день', from: 'від', months: 'міс.', perH: 'за годину', perM: 'на місяць',
+    er: 'Роботодавець', ee: 'Працівник', ahvnr: 'Номер AHV', birth: 'Дата народження', permit: 'Дозвіл', permitCH: 'громадянство Швейцарії', iban: 'Виплата на рахунок', modeH: 'Погодинна оплата', modeF: 'Фіксований оклад', pensum: 'зайнятість', rate: 'ставка', canton: 'кантон', netAgreed: 'домовленість про нетто',
+    colItem: 'Позиція', colQty: 'Кількість', colBase: 'Ставка або база', colAmt: 'CHF', secPay: 'Зарплата', secDed: 'Внески й податок', colPct: 'Відсоток', colDed: 'Внесок або податок', secAfter: 'Після нетто', place: 'Місце й дата', signEr: 'Підпис роботодавця', signEe: 'Отримано, підпис працівника',
+    disc: 'Орієнтир, а не точний розрахунок. Усе уточнюй і перевіряй. Автор не несе відповідальності за достовірність даних.', disc2: 'Зразок для прикладу й особистого використання, а не офіційний документ.', page: 'Сторінка', basis: 'із суми', colB2: 'Із суми', kBr: 'Брутто', kDed: 'Внески й податок', kNet: 'Нетто', kPay: 'До виплати'},
+  de: {title: 'Lohnabrechnung', base: 'Stundenlohn', fer: 'Ferienentschädigung', fei: 'Feiertagsentschädigung', sal: 'Monatslohn', unp: 'Lohnabzug unbezahlte Tage', ot: 'Überstunden', otz: 'inkl. Zuschlag', m13: '13. Monatslohn', m13a: 'monatlich 1/12', m13b: 'Auszahlung für', bonus: 'Weitere Zulagen', zul: 'Nacht-, Sonntags- und Schichtzulagen', ferPay: 'Auszahlung Ferienguthaben', nat: 'Naturallohn (Kost und Logis)', natAfter: 'Naturallohn, bereits bezogen', brutto: 'Bruttolohn', ahv: 'AHV/IV/EO', alv: 'ALV', nbu: 'NBU, Nichtberufsunfall', ktg: 'KTG, Krankentaggeld', bvg: 'BVG, Pensionskasse', kant: 'Kantonaler Beitrag', qst: 'Quellensteuer', qstCode: 'Tarif', ded: 'Total Abzüge', netto: 'Nettolohn', kinder: 'Kinder- und Ausbildungszulagen', tagg: 'Taggeld Versicherung', spesen: 'Spesen', adv: 'Vorschuss', other: 'Weiterer Abzug', pf: 'Lohnpfändung (Betreibungsamt)', inst: 'Rückzahlung in Raten', rest: 'Restbetrag', ofTot: 'von', pay: 'Auszahlung',
+    h: 'Std.', days: 'Tage', of: 'von', perDay: 'pro Tag', from: 'von', months: 'Monate', perH: 'pro Std.', perM: 'pro Monat',
+    er: 'Arbeitgeber', ee: 'Arbeitnehmer/in', ahvnr: 'AHV-Nr.', birth: 'Geburtsdatum', permit: 'Bewilligung', permitCH: 'Schweizer Bürger/in', iban: 'Auszahlung auf Konto', modeH: 'Stundenlohn', modeF: 'Monatslohn', pensum: 'Pensum', rate: 'Ansatz', canton: 'Kanton', netAgreed: 'Nettolohnvereinbarung',
+    colItem: 'Lohnart', colQty: 'Menge', colBase: 'Ansatz oder Basis', colAmt: 'CHF', secPay: 'Lohn', secDed: 'Abzüge Sozialversicherungen und Steuern', colPct: 'Satz', colDed: 'Abzug', secAfter: 'Zulagen und Abzüge nach Netto', place: 'Ort und Datum', signEr: 'Unterschrift Arbeitgeber', signEe: 'Erhalten, Unterschrift Arbeitnehmer/in',
+    disc: 'Orientierungshilfe, keine verbindliche Berechnung. Angaben ohne Gewähr, bitte selbst prüfen. Keine Haftung für die Richtigkeit der Daten.', disc2: 'Muster zur Orientierung und für den persönlichen Gebrauch, kein amtliches Dokument.', page: 'Seite', basis: 'von', colB2: 'Basis', kBr: 'Bruttolohn', kDed: 'Abzüge', kNet: 'Nettolohn', kPay: 'Auszahlung'},
+  fr: {title: 'Décompte de salaire', base: 'Salaire horaire', fer: 'Indemnité de vacances', fei: 'Indemnité jours fériés', sal: 'Salaire mensuel', unp: 'Jours non payés', ot: 'Heures supplémentaires', otz: 'majoration incluse', m13: '13e salaire', m13a: '1/12 chaque mois', m13b: 'versement pour', bonus: 'Autres indemnités', zul: 'Indemnités de nuit, dimanche et équipe', ferPay: 'Paiement du solde de vacances', nat: 'Salaire en nature (nourriture et logement)', natAfter: 'Salaire en nature, déjà perçu', brutto: 'Salaire brut', ahv: 'AVS/AI/APG', alv: 'AC', nbu: 'AANP, accidents non professionnels', ktg: 'IJM, indemnités journalières maladie', bvg: 'LPP, caisse de pension', kant: 'Cotisation cantonale', qst: 'Impôt à la source', qstCode: 'barème', ded: 'Total des déductions', netto: 'Salaire net', kinder: 'Allocations familiales', tagg: 'Indemnités journalières d’assurance', spesen: 'Frais', adv: 'Avance', other: 'Autre déduction', pf: 'Saisie de salaire (office des poursuites)', inst: 'Remboursement par acomptes', rest: 'solde', ofTot: 'sur', pay: 'Montant versé',
+    h: 'h', days: 'jours', of: 'sur', perDay: 'par jour', from: 'de', months: 'mois', perH: 'par heure', perM: 'par mois',
+    er: 'Employeur', ee: 'Employé·e', ahvnr: 'N° AVS', birth: 'Date de naissance', permit: 'Permis', permitCH: 'nationalité suisse', iban: 'Versement sur le compte', modeH: 'Salaire horaire', modeF: 'Salaire mensuel', pensum: 'taux d’activité', rate: 'taux', canton: 'canton', netAgreed: 'salaire net convenu',
+    colItem: 'Élément de salaire', colQty: 'Quantité', colBase: 'Taux ou base', colAmt: 'CHF', secPay: 'Salaire', secDed: 'Déductions sociales et impôts', colPct: 'Taux', colDed: 'Déduction', secAfter: 'Allocations et déductions après le net', place: 'Lieu et date', signEr: 'Signature de l’employeur', signEe: 'Reçu, signature de l’employé·e',
+    disc: 'Calcul indicatif, sans valeur contractuelle. Données sans garantie, à vérifier soi-même. Aucune responsabilité quant à l’exactitude des données.', disc2: 'Modèle indicatif pour usage personnel, pas un document officiel.', page: 'Page', basis: 'sur', colB2: 'Base', kBr: 'Salaire brut', kDed: 'Déductions', kNet: 'Salaire net', kPay: 'Montant versé'},
+  it: {title: 'Conteggio salario', base: 'Salario orario', fer: 'Indennità per vacanze', fei: 'Indennità per giorni festivi', sal: 'Salario mensile', unp: 'Giorni non pagati', ot: 'Ore straordinarie', otz: 'incl. supplemento', m13: '13a mensilità', m13a: '1/12 ogni mese', m13b: 'pagamento per', bonus: 'Altre indennità', zul: 'Indennità notturne, domenicali e a turni', ferPay: 'Pagamento saldo vacanze', nat: 'Salario in natura (vitto e alloggio)', natAfter: 'Salario in natura, già percepito', brutto: 'Salario lordo', ahv: 'AVS/AI/IPG', alv: 'AD', nbu: 'AINP, infortuni non professionali', ktg: 'IGM, indennità giornaliera malattia', bvg: 'LPP, cassa pensione', kant: 'Contributo cantonale', qst: 'Imposta alla fonte', qstCode: 'tariffa', ded: 'Totale deduzioni', netto: 'Salario netto', kinder: 'Assegni familiari', tagg: 'Indennità giornaliere assicurazione', spesen: 'Spese', adv: 'Anticipo', other: 'Altra deduzione', pf: 'Pignoramento del salario (ufficio esecuzioni)', inst: 'Rimborso a rate', rest: 'saldo', ofTot: 'di', pay: 'Importo versato',
+    h: 'ore', days: 'giorni', of: 'su', perDay: 'al giorno', from: 'su', months: 'mesi', perH: 'all’ora', perM: 'al mese',
+    er: 'Datore di lavoro', ee: 'Lavoratore/lavoratrice', ahvnr: 'N. AVS', birth: 'Data di nascita', permit: 'Permesso', permitCH: 'cittadinanza svizzera', iban: 'Versamento sul conto', modeH: 'Salario orario', modeF: 'Salario mensile', pensum: 'grado di occupazione', rate: 'tariffa', canton: 'cantone', netAgreed: 'salario netto concordato',
+    colItem: 'Voce salariale', colQty: 'Quantità', colBase: 'Tariffa o base', colAmt: 'CHF', secPay: 'Salario', secDed: 'Deduzioni sociali e imposte', colPct: 'Aliquota', colDed: 'Deduzione', secAfter: 'Assegni e deduzioni dopo il netto', place: 'Luogo e data', signEr: 'Firma del datore di lavoro', signEe: 'Ricevuto, firma del lavoratore/della lavoratrice',
+    disc: 'Calcolo indicativo, non vincolante. Dati senza garanzia, da verificare personalmente. Nessuna responsabilità per l’esattezza dei dati.', disc2: 'Modello indicativo per uso personale, non un documento ufficiale.', page: 'Pagina', basis: 'su', colB2: 'Base', kBr: 'Salario lordo', kDed: 'Deduzioni', kNet: 'Salario netto', kPay: 'Importo versato'}
+};
+
+/* ---------- расчёт ---------- */
+const ymIdx = (y, m) => +y * 12 + (+m - 1);
+/* удержание частями: сколько в этом месяце и какой остаток (по плану: с месяца начала по сумме в месяц) */
+function instPart(it, c){
+  const tot = num(it.total), per = num(it.per), k = ymIdx(c.yy, c.mm) - ymIdx(it.sy || c.yy, it.sm || c.mm);
+  if (!tot || !per || k < 0) return {a: 0, rest: tot, n: 0, all: tot && per ? Math.ceil(tot / per) : 0};
+  const before = Math.min(tot, per * k), a = r2(Math.min(per, tot - before));
+  return {a, rest: r2(tot - before - a), n: a ? k + 1 : 0, all: Math.ceil(tot / per)};
+}
+function natSum(c){ if (c.x.nat === 'full') return NAT.full; if (c.x.nat === 'parts') return ['B', 'L', 'D', 'R'].reduce((s, k) => s + (c.x['nat' + k] ? NAT[k] : 0), 0); return 0; }
+function calcRaw(c, lang, k){   // k — множитель ставки или оклада (при «я знаю нетто» подбирается)
+  const L = LBL[lang] || LBL.ru, Y = +c.yy, M = +c.mm, dim = new Date(Y, M, 0).getDate();
+  const lines = [], ded = [], after = [];
+  if (c.mode === 'hour'){
+    const h = hrs(c.h.hours), rate = num(c.h.rate) * k, base = r2(h * rate);
+    lines.push({k: 'base', t: L.base, q: h ? hm(h) + ' ' + L.h : '', b: rate ? chf(rate) + ' CHF ' + L.perH : '', a: base});
+    const fer = ferPct(c); if (fer) lines.push({k: 'fer', t: L.fer, q: pctTxt(fer, lang), b: L.from + ' ' + chf(base), a: r2(base * fer / 100)});
+    const fei = num(c.h.fei); if (fei) lines.push({k: 'fei', t: L.fei, q: pctTxt(fei, lang), b: L.from + ' ' + chf(base), a: r2(base * fei / 100)});
+  } else {
+    const sal = num(c.f.sal) * k, pen = c.f.pensum === '' ? 100 : num(c.f.pensum), mon = r2(sal * pen / 100);
+    lines.push({k: 'sal', t: L.sal, q: pctTxt(pen, lang), b: L.from + ' ' + chf(sal) + ' (100 %)', a: mon});
+    const ud = Math.min(dim, num(c.f.unpaid)), day = mon / dim;
+    if (ud) lines.push({k: 'unp', t: L.unp, q: dec(ud, lang) + ' ' + L.of + ' ' + dim + ' ' + L.days, b: chf(day) + ' CHF ' + L.perDay, a: -r2(day * ud)});
+    const ot = hrs(c.f.ot), wk = num(c.f.week), otp = c.f.otPct === '' ? 25 : num(c.f.otPct);
+    if (ot && wk && sal){ const oh = sal / (wk * 52 / 12) * (1 + otp / 100); lines.push({k: 'ot', t: L.ot + ' (' + L.otz + ' ' + pctTxt(otp, lang) + ')', q: hm(ot) + ' ' + L.h, b: chf(oh) + ' CHF ' + L.perH, a: r2(ot * oh)}); }
+    if (c.f.m13 === 'monthly'){ const b = mon + (lines.find(x => x.k === 'unp') || {a: 0}).a; lines.push({k: 'm13', t: L.m13, q: L.m13a, b: L.from + ' ' + chf(b), a: r2(b / 12)}); }
+    if (c.f.m13 === 'paid'){ const m = Math.min(12, c.f.m13m === '' ? 12 : num(c.f.m13m)); lines.push({k: 'm13', t: L.m13, q: L.m13b + ' ' + dec(m, lang) + ' ' + L.months, b: chf(mon) + ' × ' + dec(m, lang) + '/12', a: r2(mon * m / 12)}); }
+  }
+  const bonus = num(c.x.bonus); if (bonus) lines.push({k: 'bonus', t: c.x.bonusT.trim() || L.bonus, q: '', b: '', a: r2(bonus)});
+  const zul = num(c.x.zul); if (zul) lines.push({k: 'zul', t: c.x.zulT.trim() || L.zul, q: '', b: '', a: r2(zul)});
+  const fp = num(c.x.ferPay); if (fp) lines.push({k: 'ferPay', t: L.ferPay, q: '', b: '', a: r2(fp)});
+  const nat = natSum(c); if (nat) lines.push({k: 'nat', t: L.nat, q: '', b: chf(nat) + ' CHF ' + L.perM, a: nat});
+  const brutto = r2(lines.reduce((s, x) => s + x.a, 0));
+  const kinder = r2(num(c.x.kinder)), tagg = r2(num(c.x.tagg));
+  [['ahv', c.r.ahv], ['alv', c.r.alv], ['nbu', c.r.nbu], ['ktg', c.r.ktg]].forEach(([kk, v]) => { const p = num(v); if (p) ded.push({k: kk, t: L[kk], q: pctTxt(p, lang), b: chf(brutto), a: r2(brutto * p / 100)}); });
+  if (c.r.bvgMode === 'pct' && num(c.r.bvg)) ded.push({k: 'bvg', t: L.bvg, q: pctTxt(num(c.r.bvg), lang), b: chf(brutto), a: r2(brutto * num(c.r.bvg) / 100)});
+  if (c.r.bvgMode === 'chf' && num(c.r.bvg)) ded.push({k: 'bvg', t: L.bvg, q: '', b: '', a: r2(num(c.r.bvg))});
+  const kp = num(c.r.kant); if (kp){ const kn = KANT[c.canton]; ded.push({k: 'kant', t: L.kant + (kn ? ', ' + kn[lang] : '') + ' (' + c.canton + ')', q: pctTxt(kp, lang), b: chf(brutto), a: r2(brutto * kp / 100)}); }
+  const qst = num(c.r.qst); if (qst){ const qb = brutto + kinder + tagg; ded.push({k: 'qst', t: L.qst + (c.r.qstCode.trim() ? ', ' + L.qstCode + ' ' + c.r.qstCode.trim().toUpperCase() : ''), q: pctTxt(qst, lang), b: chf(qb), a: r2(qb * qst / 100)}); }
+  const dsum = r2(ded.reduce((s, x) => s + x.a, 0)), netto = r2(brutto - dsum);
+  if (kinder) after.push({k: 'kinder', t: L.kinder, a: kinder});
+  if (tagg) after.push({k: 'tagg', t: L.tagg, a: tagg});
+  const sp = r2(num(c.x.spesen)); if (sp) after.push({k: 'spesen', t: L.spesen, a: sp});
+  if (nat) after.push({k: 'natAfter', t: L.natAfter, a: -nat});
+  const adv = r2(num(c.d.adv)); if (adv) after.push({k: 'adv', t: L.adv, a: -adv});
+  (c.inst || []).forEach(it => { const p = instPart(it, c); if (p.a) after.push({k: 'inst', t: (it.t.trim() || L.inst) + ' · ' + p.n + '/' + p.all + ', ' + L.rest + ' ' + chf(p.rest), a: -p.a}); });
+  const pf = r2(num(c.d.pf)); if (pf) after.push({k: 'pf', t: L.pf, a: -pf});
+  const oth = r2(num(c.d.other)); if (oth) after.push({k: 'other', t: c.d.otherT.trim() || L.other, a: -oth});
+  const pay = r2(netto + after.reduce((s, x) => s + x.a, 0));
+  return {lines, ded, after, brutto, dsum, netto, pay, dim, kinder, k, has: brutto !== 0 || after.length > 0};
+}
+/* «Я знаю нетто»: вписанная ставка или оклад — это нетто. Подбираем брутто так, чтобы после взносов и налога вышло столько же */
+function calc(c, lang = 'ru'){
+  if (c.basis !== 'netto') return calcRaw(c, lang, 1);
+  const target = calcRaw(Object.assign({}, c, {r: {ahv: '', alv: '', nbu: '', ktg: '', bvgMode: 'none', bvg: '', kant: '', qst: '', qstCode: ''}}), lang, 1).netto;
+  if (!target) return Object.assign(calcRaw(c, lang, 1), {target});
+  let lo = 1, hi = 3;
+  for (let i = 0; i < 60; i++){ const mid = (lo + hi) / 2; if (calcRaw(c, lang, mid).netto < target) lo = mid; else hi = mid; }
+  return Object.assign(calcRaw(c, lang, hi), {target});
+}
+
+/* ---------- экран ---------- */
+const MODE_LBL = {hour: 'погодинно', fix: 'оклад'};
+function calcName(c, i){ const t = c.title.trim() || c.ee.name.trim() || ('Розрахунок ' + (i + 1)); return t + ' · ' + MONTHS_IN[+c.mm - 1] + ' ' + c.yy; }
+function renderSel(){
+  $('calcSel').innerHTML = S.calcs.map((c, i) => `<option value="${c.id}"${c.id === S.cur ? ' selected' : ''}>${esc(calcName(c, i))}</option>`).join('');
+  $('delCalc').hidden = S.calcs.length < 2;
+}
+function fillYears(){ const y0 = new Date().getFullYear(), c = cur(), ys = new Set([y0 - 2, y0 - 1, y0, y0 + 1, +c.yy]); $('fYear').innerHTML = [...ys].sort().map(y => `<option value="${y}">${y}</option>`).join(''); }
+$('fMonth').innerHTML = MONTHS.map((m, i) => `<option value="${i + 1}">${m}</option>`).join('');
+$('fCanton').innerHTML = CANTONS.slice().sort((a, b) => a[1].localeCompare(b[1], 'uk')).map(x => `<option value="${x[0]}">${x[1]} (${x[0]})</option>`).join('');
+function fill(){
+  const c = cur(); fillYears();
+  document.querySelectorAll('[data-k]').forEach(el => { const v = getP(c, el.dataset.k); el.value = v == null ? '' : v; });
+  document.querySelectorAll('[data-c]').forEach(el => { el.checked = !!getP(c, el.dataset.c); });
+  renderMode(); renderInst();
+}
+function renderMode(){
+  const c = cur();
+  document.querySelectorAll('.segb').forEach(b => { const on = b.dataset.mode ? b.dataset.mode === c.mode : b.dataset.basis === (c.basis || 'brutto'); b.classList.toggle('on', on); b.setAttribute('aria-pressed', String(on)); });
+  const net = c.basis === 'netto';
+  $('rateLbl').textContent = net ? 'Ставка за годину нетто' : 'Ставка за годину брутто';
+  $('rateSub').textContent = net ? 'скільки залишається на руки за годину, без надбавок' : 'з договору, без надбавок';
+  $('salLbl').textContent = net ? 'Оклад при 100 % нетто' : 'Оклад при 100 % брутто';
+  $('natParts').hidden = c.x.nat !== 'parts';
+  const kn = KANT[c.canton]; $('kantBox').hidden = !kn && !num(c.r.kant);
+  $('kantSub').textContent = kn ? 'у кантоні ' + KT[c.canton].ru + ': ' + kn.ru + ', ' + kn.p.replace('.', ',') + ' %' : 'у цьому кантоні зазвичай немає';
+  $('hourBox').hidden = c.mode !== 'hour'; $('fixBox').hidden = c.mode !== 'fix';
+  $('ferOwn').hidden = c.h.ferSel !== 'own';
+  $('m13mBox').hidden = c.f.m13 !== 'paid';
+  $('bvgVal').hidden = c.r.bvgMode === 'none'; $('bvgUnit').textContent = c.r.bvgMode === 'chf' ? 'CHF' : '%';
+  $('dimTxt').textContent = 'з ' + new Date(+c.yy, +c.mm, 0).getDate() + ' днів';
+}
+const slRow = (t, sub, a, cls = '') => `<div class="sl ${cls}${a < 0 && !cls ? ' minus' : ''}"><span>${esc(t)}</span><b>${a < 0 ? '−' : ''}${chf(Math.abs(a))}</b>${sub ? `<small>${esc(sub)}</small>` : ''}</div>`;
+function update(){
+  const c = cur(), R = calc(c), mn = MONTHS_IN[+c.mm - 1] + ' ' + c.yy;
+  $('resMonth').textContent = mn;
+  $('cards').innerHTML = [
+    [chf(R.brutto), 'CHF брутто, до відрахувань'],
+    [(R.dsum ? '−' : '') + chf(R.dsum), 'CHF внески й податок'],
+    [chf(R.netto), 'CHF нетто'],
+    [chf(R.pay), 'CHF до виплати на рахунок', true]
+  ].map(([b, s, m]) => `<div class="card${m ? ' main' : ''}"><b>${b}</b><span>${s}</span></div>`).join('')
+    + (R.brutto > 0 ? `<p class="calcnote" style="grid-column:1 / -1">З кожних 100 франків брутто на внески й податок іде ${chf(R.dsum / R.brutto * 100)} CHF.</p>` : '');
+  let h = `<h3>Розрахунковий лист за ${esc(mn)}</h3>`;
+  if (!R.has){ h += '<p class="hint">Впиши години й ставку або оклад, і тут з’явиться розрахунок рядок за рядком.</p>'; }
+  else {
+    if (c.basis === 'netto' && R.target) h += `<p class="calcnote">Ти вписала або вписав нетто. Брутто підібрано так, щоб після внесків і податку залишилося ${chf(R.target)} CHF. ${c.mode === 'hour' ? 'Ставка брутто ' + chf(num(c.h.rate) * R.k) + ' CHF за годину.' : 'Оклад брутто при 100 % ' + chf(num(c.f.sal) * R.k) + ' CHF.'}</p>`;
+    h += '<div class="slh">Зарплата</div>' + R.lines.map(x => slRow(x.t, [x.q, x.b].filter(Boolean).join(' · '), x.a)).join('') + slRow('Брутто', '', R.brutto, 'tot');
+    if (R.ded.length) h += '<div class="slh">Внески й податок</div>' + R.ded.map(x => slRow(x.t, [x.q, x.b ? 'із суми ' + x.b : ''].filter(Boolean).join(' · '), -x.a)).join('') + slRow('Усього внесків і податку', '', -R.dsum, 'tot');
+    h += slRow('Нетто', '', R.netto, 'tot');
+    if (R.after.length) h += '<div class="slh">Після нетто</div>' + R.after.map(x => slRow(x.t, '', x.a)).join('');
+    h += slRow('До виплати', '', R.pay, 'pay');
+  }
+  $('slip').innerHTML = h;
+  const al = [];
+  if (R.pay < 0) al.push('<b>Сума до виплати менша за нуль</b>Утримання більші за нетто. Перевір аванс та інші утримання.');
+  if (/^[BLSFGN]$/.test(c.ee.permit) && !num(c.r.qst)) al.push('<b>Податок у джерела не вказано</b>З дозволом ' + esc(c.ee.permit) + ' зазвичай утримується податок у джерела. Відсоток дивись у таблиці свого кантону або в минулому розрахунковому листі.');
+  if ((c.ee.permit === 'C' || c.ee.permit === 'CH') && num(c.r.qst)) al.push('<b>Перевір податок у джерела</b>З дозволом C і швейцарським громадянством податок у джерела зазвичай не утримують, податок сплачується за декларацією. Бувають винятки, наприклад у прикордонних працівників.');
+  if (c.r.bvgMode !== 'none' && num(c.r.bvg) && R.brutto > 0 && R.brutto * 12 < 22680) al.push('<b>Перевір внесок до BVG</b>При такій зарплаті за рік виходить менше ніж 22 680 CHF. Нижче цього порога пенсійна каса зазвичай не обов’язкова, якщо роботодавець не застрахував тебе добровільно.');
+  const mw = MINW[c.canton], hr = c.mode === 'hour' ? num(c.h.rate) * R.k : (num(c.f.week) ? num(c.f.sal) * R.k / (num(c.f.week) * 52 / 12) : 0);
+  if (mw && hr && hr < mw[0]) al.push('<b>Нижче мінімальної зарплати кантону</b>У кантоні ' + mw[1] + ' мінімальна зарплата у 2026 році ' + chf(mw[0]) + (c.canton === 'TI' ? '–20,50' : '') + ' CHF брутто за годину. Зараз виходить ' + chf(hr) + ' CHF. Бувають винятки, наприклад для учнів, стажерів і в сільському господарстві. Уточни в кантоні.');
+  if (c.canton === 'ZH' && hr && hr < 23.9) al.push('<b>Мінімальна зарплата в містах Цюрих і Вінтертур</b>Її ухвалили (Цюрих 23,90 CHF, Вінтертур 23 CHF за годину), але на 07.10.2026 вона ще не діє. Якщо робота в цих містах, стеж за новинами міста.');
+  if (num(c.d.pf)) al.push('<b>Утримання за рішенням Betreibungsamt</b>Суму й строк визначає відомство у своєму листі. Роботодавець зобов’язаний перераховувати її туди, а не залишати собі.');
+  if (c.mode === 'hour' && !ferPct(c) && hrs(c.h.hours)) al.push('<b>Без надбавки за відпустку</b>При погодинній оплаті відпустка зазвичай оплачується надбавкою. Якщо в договорі написано, що відпустка оплачується окремо, усе гаразд.');
+  $('alerts').innerHTML = al.map(t => `<p class="alert">${t}</p>`).join('');
+  $('dlPdf').disabled = !R.has || !downloadsOk;
+  renderSel();
+}
+function renderAll(){ fill(); update(); clearIdle(); }
+
+document.addEventListener('input', e => { const k = e.target.dataset && e.target.dataset.k; if (!k) return; setP(cur(), k, e.target.value); save(); if (/^(h\.ferSel|f\.m13|r\.bvgMode|mm|yy)$/.test(k)) renderMode(); update(); });
+document.addEventListener('change', e => {
+  const ck = e.target.dataset && e.target.dataset.c; if (ck){ setP(cur(), ck, e.target.checked ? '1' : ''); save(); update(); return; }
+  const k = e.target.dataset && e.target.dataset.k; if (!k || e.target.tagName !== 'SELECT') return; setP(cur(), k, e.target.value);
+  if (k === 'canton'){ const c = cur(), kn = KANT[c.canton]; c.lang = KT[c.canton].lang; c.r.kant = kn ? kn.p : ''; fill(); say('Кантон ' + KT[c.canton].ru + '. Мова розрахункового листа й кантональний внесок поставлені за кантоном, їх можна змінити.'); }
+  save(); renderMode(); update(); });
+document.querySelectorAll('.segb').forEach(b => b.addEventListener('click', () => { const c = cur(); if (b.dataset.mode) c.mode = b.dataset.mode; else c.basis = b.dataset.basis; save(); renderMode(); update(); }));
+
+/* ---------- удержание частями ---------- */
+function renderInst(){
+  const c = cur(), yN = new Date().getFullYear(), ys = [yN - 2, yN - 1, yN, yN + 1, yN + 2];
+  $('instBox').innerHTML = (c.inst || []).map((it, i) => { const p = instPart(it, c);
+    return `<div class="inst" data-i="${i}">
+      <label class="field">Що утримується<input type="text" data-ik="t" value="${esc(it.t)}" placeholder="Наприклад «Аванс за серпень»"></label>
+      <label class="field">Уся сума<span class="unit"><input type="text" data-ik="total" inputmode="decimal" value="${esc(it.total)}" placeholder="1200"><span>CHF</span></span></label>
+      <label class="field">Скільки на місяць<span class="unit"><input type="text" data-ik="per" inputmode="decimal" value="${esc(it.per)}" placeholder="300"><span>CHF</span></span></label>
+      <label class="field">З якого місяця<span class="row" style="flex-wrap:nowrap"><select data-ik="sm" style="flex:1">${MONTHS.map((m, j) => `<option value="${j + 1}"${String(j + 1) === String(it.sm) ? ' selected' : ''}>${m}</option>`).join('')}</select><select data-ik="sy">${ys.map(y => `<option value="${y}"${String(y) === String(it.sy) ? ' selected' : ''}>${y}</option>`).join('')}</select></span></label>
+      <p class="inst-st">${num(it.total) && num(it.per) ? (p.a ? `Цього місяця утримується <b>${chf(p.a)} CHF</b>, це частина ${p.n} з ${p.all}. Залишиться ${chf(p.rest)} CHF.` : (p.rest > 0 ? 'Цього місяця утримання немає, воно почнеться пізніше.' : 'Усе вже повернуто.')) : 'Впиши всю суму й скільки утримувати на місяць.'}</p>
+      <button class="btn ghost danger-t" type="button" data-idel="${i}">Прибрати</button></div>`; }).join('');
+}
+$('instAdd').addEventListener('click', () => { const c = cur(); c.inst = c.inst || []; c.inst.push({t: '', total: '', per: '', sm: c.mm, sy: c.yy}); save(); renderInst(); update(); });
+$('instBox').addEventListener('input', e => { const k = e.target.dataset.ik; if (!k) return; const i = +e.target.closest('.inst').dataset.i; cur().inst[i][k] = e.target.value; save(); update();
+  const st = e.target.closest('.inst').querySelector('.inst-st'), it = cur().inst[i], p = instPart(it, cur());
+  st.innerHTML = num(it.total) && num(it.per) ? (p.a ? `Цього місяця утримується <b>${chf(p.a)} CHF</b>, це частина ${p.n} з ${p.all}. Залишиться ${chf(p.rest)} CHF.` : (p.rest > 0 ? 'Цього місяця утримання немає, воно почнеться пізніше.' : 'Усе вже повернуто.')) : 'Впиши всю суму й скільки утримувати на місяць.'; });
+$('instBox').addEventListener('change', e => { if (e.target.tagName === 'SELECT') renderInst(); });
+$('instBox').addEventListener('click', e => { const d = e.target.closest('[data-idel]'); if (!d) return; cur().inst.splice(+d.dataset.idel, 1); save(); renderInst(); update(); });
+$('calcSel').addEventListener('change', () => { S.cur = $('calcSel').value; save(); renderAll(); });
+$('newCalc').addEventListener('click', () => { const c = blank(), o = cur(); c.er = Object.assign({}, o.er); c.mm = o.mm; c.yy = o.yy; c.canton = o.canton; c.lang = o.lang; c.r.kant = o.r.kant; S.calcs.push(c); S.cur = c.id; save(); renderAll(); say('Новий розрахунок створено. Дані роботодавця перенесено, решту впиши заново.'); });
+$('nextCalc').addEventListener('click', () => { const o = cur(), c = JSON.parse(JSON.stringify(o)); c.id = uid(); let m = +o.mm + 1, y = +o.yy; if (m > 12){ m = 1; y++; } c.mm = String(m); c.yy = String(y); c.h.hours = ''; c.f.unpaid = ''; c.f.ot = ''; if (c.f.m13 === 'paid') c.f.m13 = 'none'; c.x.bonus = ''; c.x.bonusT = ''; c.x.zul = ''; c.x.zulT = ''; c.x.ferPay = ''; c.x.tagg = ''; c.x.spesen = ''; c.d.adv = ''; c.d.other = ''; c.d.otherT = ''; c.place = ''; S.calcs.push(c); S.cur = c.id; save(); renderAll(); say('Розрахунок на ' + MONTHS_IN[m - 1] + ' ' + y + ' створено. Години, понаднормові, бонус, надбавки, витрати й утримання очищено, впиши їх за новий місяць. Утримання частинами перенесено, залишок пораховано автоматично.'); });
+$('delCalc').addEventListener('click', () => { const b = $('calcConfirm'); b.hidden = false; b.innerHTML = '<span class="confirm">Видалити розрахунок «' + esc(calcName(cur(), S.calcs.indexOf(cur()))) + '»? Повернути його буде неможливо.<button class="btn danger" id="delYes" type="button">Так, видалити розрахунок</button><button class="btn ghost" id="delNo" type="button">Скасувати</button></span>'; });
+$('calcConfirm').addEventListener('click', e => { const b = $('calcConfirm');
+  if (e.target.id === 'delNo'){ b.hidden = true; b.innerHTML = ''; }
+  if (e.target.id === 'delYes'){ S.calcs = S.calcs.filter(c => c.id !== S.cur); S.cur = S.calcs[0].id; save(); b.hidden = true; b.innerHTML = ''; renderAll(); say('Розрахунок видалено.'); } });
+
+/* ---------- пример ---------- */
+function exampleCalc(mode){
+  const c = blank(); c.mm = '9'; c.yy = '2026'; c.place = 'Zürich, 30.09.2026';
+  c.er = {name: 'Muster AG', a1: 'Bahnhofstrasse 1', a2: '8001 Zürich'}; c.canton = 'ZH'; c.lang = 'ru';
+  c.ee = {name: 'Анна Петренко', a1: 'Seeweg 5', a2: '8400 Winterthur', ahv: '756.1234.5678.97', birth: '12.03.1988', permit: 'S', iban: 'CH93 0076 2011 6238 5295 7'};
+  if (mode === 'hour'){ c.title = 'Приклад · погодинна оплата'; c.mode = 'hour'; c.h = {hours: '67:20', rate: '25', ferSel: '8.33', fer: '', fei: '2.27'}; c.r = {ahv: '5.3', alv: '1.1', nbu: '1.344', ktg: '0.9', bvgMode: 'none', bvg: '', kant: '', qst: '4.8', qstCode: 'A0N'}; c.x.spesen = '42.60'; c.x.zulT = 'Надбавка за неділю'; c.x.zul = '45'; }
+  else { c.title = 'Приклад · оклад'; c.mode = 'fix'; c.f = {sal: '5200', pensum: '80', unpaid: '', ot: '3:30', week: '42', otPct: '25', m13: 'monthly', m13m: '12'}; c.r = {ahv: '5.3', alv: '1.1', nbu: '1.344', ktg: '0.9', bvgMode: 'chf', bvg: '186.40', kant: '', qst: '7.2', qstCode: 'C1N'}; c.x.kinder = '215'; c.inst = [{t: 'Аванс за серпень', total: '1200', per: '300', sm: '8', sy: '2026'}]; }
+  return c;
+}
+$('exampleBtn').addEventListener('click', () => {
+  const o = cur(), mode = o.mode, empty = !calc(o).has && !o.ee.name && !o.er.name;
+  const c = exampleCalc(mode);
+  if (empty){ c.id = o.id; S.calcs[S.calcs.indexOf(o)] = c; } else { S.calcs.push(c); S.cur = c.id; }
+  save(); renderAll(); say('Приклад заповнено. Зміни цифри на свої або створи новий розрахунок.');
+  $('resBox').scrollIntoView({behavior: 'smooth', block: 'start'});
+});
+
+/* ---------- очистить и удалить ---------- */
+let sayT; function say(t){ $('status').textContent = t; clearTimeout(sayT); sayT = setTimeout(() => { $('status').textContent = ''; }, 5000); }
+function clearIdle(){ $('clearBox').innerHTML = '<button class="btn ghost" id="clearBtn" type="button">Очистити цей розрахунок</button> <button class="btn ghost" id="wipeBtn" type="button">Видалити історію</button>'; }
+$('clearBox').addEventListener('click', e => {
+  const id = e.target.id;
+  if (id === 'clearBtn') $('clearBox').innerHTML = '<span class="confirm">Стерти всі цифри й імена в цьому розрахунку?<button class="btn danger" id="clearYes" type="button">Так, очистити розрахунок</button><button class="btn ghost" id="cNo" type="button">Скасувати</button></span>';
+  else if (id === 'wipeBtn') $('clearBox').innerHTML = '<span class="confirm">Видалити всі розрахунки з цього пристрою? Повернути їх буде неможливо.<button class="btn danger" id="wipeYes" type="button">Так, видалити історію</button><button class="btn ghost" id="cNo" type="button">Скасувати</button></span>';
+  else if (id === 'cNo') clearIdle();
+  else if (id === 'clearYes'){ const o = cur(), c = blank(); c.id = o.id; c.mode = o.mode; S.calcs[S.calcs.indexOf(o)] = c; save(); renderAll(); say('Розрахунок очищено.'); }
+  else if (id === 'wipeYes'){ try { localStorage.removeItem(KEY); } catch(err) {} S = freshS(); renderAll(); say('Історію видалено. У браузері більше немає твоїх розрахунків.'); }
+});
+
+/* ---------- поделиться ---------- */
+function shareLinks(){ const t = $('shareText').value;
+  $('tgShare').href = 'https://t.me/share/url?url=' + encodeURIComponent(SHARE_URL) + '&text=' + encodeURIComponent(t.replace(SHARE_URL, '').trim());
+  $('waShare').href = 'https://wa.me/?text=' + encodeURIComponent(t); }
+$('shareText').value = SHARE_MSG; shareLinks();
+$('shareText').addEventListener('input', shareLinks);
+$('shareBtn').addEventListener('click', () => { const p = $('sharePanel'); p.hidden = !p.hidden; $('shareBtn').setAttribute('aria-expanded', String(!p.hidden)); });
+$('copyMsg').addEventListener('click', () => {
+  const fb = () => { $('shareText').select(); say('Виділи текст і скопіюй його вручну.'); };
+  try { navigator.clipboard.writeText($('shareText').value).then(() => say('Повідомлення скопійовано. Встав його в чат друзям.'), fb); } catch(e) { fb(); }
+});
+
+/* ---------- PDF: лист A4 на холсте, как в других инструментах ---------- */
+const PW = 2480, PH = 3508, PM = 150, LIM = PH - 330;
+const PC = {sage:'#4F5E3E', bg:'#FFFCF8', ink:'#2F2924', muted:'#7A6E62', line:'#E5D9C9', soft:'#F4EDE3', brown:'#6E4F3C', mustard:'#B98324', mustardSoft:'#F3E3C2', red:'#B5322A', green:'#2F7F3B', sageSoft:'#E3E8D6', redSoft:'#F6E4DE', zebra:'#FAF4EC'};
+function roundRect(c, x, y, w, h, r){ r = Math.min(r, h/2, w/2); c.beginPath(); c.moveTo(x+r,y); c.arcTo(x+w,y,x+w,y+h,r); c.arcTo(x+w,y+h,x,y+h,r); c.arcTo(x,y+h,x,y,r); c.arcTo(x,y,x+w,y,r); c.closePath(); }
+function fit(c, text, w){ text = String(text); if (c.measureText(text).width <= w) return text; while (text.length > 1 && c.measureText(text + '…').width > w) text = text.slice(0, -1); return text + '…'; }
+function WM(cv, t){ const c = cv.getContext('2d'), w = cv.width, h = cv.height, fs = Math.round(Math.max(w, h) * 0.032); c.save(); c.font = '700 ' + fs + 'px Manrope, sans-serif'; c.fillStyle = 'rgba(110,79,60,0.075)'; c.textAlign = 'center'; c.textBaseline = 'middle'; c.translate(w / 2, h / 2); c.rotate(-Math.PI / 7); const sx = fs * 9, sy = fs * 5, R = Math.hypot(w, h) / 2 + sx; for (let y = -R, r = 0; y <= R; y += sy, r++) for (let x = -R + (r % 2) * sx / 2; x <= R; x += sx) c.fillText(t, x, y); c.restore(); return cv; }
+function footer(cv, lang){
+  const c = cv.getContext('2d'); c.font = '600 32px Manrope, sans-serif'; let fx = PM; const fy = PH - 90;
+  c.fillStyle = PC.line; c.fillRect(PM, fy - 70, PW - 2*PM, 3);
+  CREDIT[lang].forEach((part, i) => {
+    if (i){ c.fillStyle = PC.muted; c.fillText(' · ', fx, fy); fx += c.measureText(' · ').width; }
+    const w = c.measureText(part.t).width; c.fillStyle = PC.brown; c.fillText(part.t, fx, fy); c.fillRect(fx, fy + 6, w, 2);
+    cv.links.push({x: fx, y: fy - 32, w, h: 44, url: part.u}); fx += w;
+  });
+}
+class PDoc {
+  constructor(title, right, subs, lang){ this.title = title; this.right = right; this.subs = subs.filter(Boolean); this.lang = lang; this.pages = []; this.add(true); }
+  add(first){
+    const cv = document.createElement('canvas'); cv.width = PW; cv.height = PH; cv.links = []; const c = cv.getContext('2d');
+    c.fillStyle = PC.bg; c.fillRect(0, 0, PW, PH); c.textBaseline = 'alphabetic'; this.cv = cv; this.c = c; this.pages.push(cv);
+    if (first){
+      const bh = PM + 170 + this.subs.length * 58;
+      c.fillStyle = PC.sageSoft; c.fillRect(0, 0, PW, bh);
+      c.fillStyle = PC.mustard; c.fillRect(0, bh, PW, 10);
+      c.fillStyle = PC.sage; c.font = '700 30px Manrope, sans-serif'; c.fillText('SVOILUDI.CH', PM, PM - 40);
+      c.font = '700 44px Manrope, sans-serif'; const rw = c.measureText(this.right).width + 80;
+      c.fillStyle = PC.ink; c.font = '120px Forum, Georgia, serif'; c.fillText(fit(c, this.title, PW - 2*PM - rw - 60), PM, PM + 100);
+      c.fillStyle = PC.brown; roundRect(c, PW - PM - rw, PM + 22, rw, 96, 48); c.fill();
+      c.fillStyle = '#FFFFFF'; c.font = '700 44px Manrope, sans-serif'; c.textAlign = 'center'; c.fillText(this.right, PW - PM - rw / 2, PM + 85); c.textAlign = 'left';
+      let y = PM + 175; this.subs.forEach((s, i) => { c.fillStyle = i ? PC.ink : PC.sage; c.font = '600 40px Manrope, sans-serif'; c.fillText(fit(c, s, PW - 2*PM), PM, y); y += 58; });
+      this.y = bh + 70;
+    } else {
+      c.fillStyle = PC.muted; c.font = '600 34px Manrope, sans-serif'; c.fillText(fit(c, this.title + ' · ' + this.right, PW - 2*PM), PM, PM + 40);
+      c.fillStyle = PC.line; c.fillRect(PM, PM + 70, PW - 2*PM, 3); this.y = PM + 120;
+    }
+  }
+  ensure(h){ if (this.y + h > LIM){ this.add(false); return true; } return false; }
+  parties(cols){ // [[заголовок, [строки]], …]
+    const c = this.c, gap = 60, cw = (PW - 2*PM - gap) / cols.length, rows = Math.max(...cols.map(x => x[1].length)), h = 76 + rows * 46 + 30;
+    this.ensure(h);
+    cols.forEach(([head, list], i) => { const x = PM + i * (cw + gap);
+      c.fillStyle = PC.soft; roundRect(c, x, this.y, cw, h, 24); c.fill();
+      c.fillStyle = i ? PC.mustard : PC.sage; roundRect(c, x, this.y, 14, h, 7); c.fill();
+      c.fillStyle = i ? PC.brown : PC.sage; c.font = '700 26px Manrope, sans-serif'; c.fillText(head.toUpperCase(), x + 40, this.y + 56);
+      list.forEach((t, j) => { c.fillStyle = PC.ink; c.font = (j ? '500 ' : '700 ') + '32px Manrope, sans-serif'; c.fillText(fit(c, t, cw - 72), x + 40, this.y + 104 + j * 46); });
+    });
+    this.y += h + 30;
+  }
+  tiles(list){   // [[подпись, значение, фон, цвет]]
+    const c = this.c, gap = 30, n = list.length, w = (PW - 2*PM - gap * (n - 1)) / n, h = 140; this.ensure(h + 40);
+    list.forEach(([l, v, bg, fg], i) => { const x = PM + i * (w + gap);
+      c.fillStyle = bg; roundRect(c, x, this.y, w, h, 24); c.fill();
+      c.fillStyle = fg; c.font = '800 50px Manrope, sans-serif'; c.fillText(fit(c, v, w - 60), x + 30, this.y + 68);
+      c.fillStyle = PC.muted; c.font = '700 26px Manrope, sans-serif'; c.fillText(fit(c, l.toUpperCase(), w - 60), x + 30, this.y + 112); });
+    this.y += h + 34;
+  }
+  h2(t, col){ this.ensure(160); const c = this.c; c.fillStyle = col || PC.mustard; c.beginPath(); c.arc(PM + 14, this.y + 36, 14, 0, Math.PI * 2); c.fill(); c.fillStyle = PC.ink; c.font = '60px Forum, Georgia, serif'; c.fillText(t, PM + 46, this.y + 50); this.y += 74; }
+  table(cols, rows, total){
+    const tw = PW - 2*PM, rh = 56; cols = cols.map(x => Object.assign({}, x)); const fl = cols.find(x => !x.w); if (fl) fl.w = tw - cols.reduce((a, x) => a + (x.w || 0), 0);
+    const head = () => { const C = this.c; C.fillStyle = this.hc || PC.sage; roundRect(C, PM, this.y, tw, rh, 14); C.fill(); C.fillRect(PM, this.y + rh / 2, tw, rh / 2); C.fillStyle = '#FFFFFF'; C.font = '700 26px Manrope, sans-serif'; let x = PM;
+      cols.forEach(col => { if (col.r){ C.textAlign = 'right'; C.fillText(col.t, x + col.w - 18, this.y + rh * .64); C.textAlign = 'left'; } else C.fillText(fit(C, col.t, col.w - 30), x + 18, this.y + rh * .64); x += col.w; }); this.y += rh; };
+    this.ensure(rh * 3); head();
+    rows.forEach((row, ri) => {
+      if (this.ensure(rh)) head();
+      const C = this.c, y = this.y; if (ri % 2){ C.fillStyle = PC.zebra; C.fillRect(PM, y, tw, rh); } C.fillStyle = PC.line; C.fillRect(PM, y + rh - 2, tw, 2);
+      let x = PM;
+      row.forEach((t, i) => { const col = cols[i]; t = t == null ? '' : String(t); C.font = '500 28px Manrope, sans-serif'; C.fillStyle = t.startsWith('−') ? PC.red : PC.ink;
+        const avail = col.w - 30;
+        if (col.r){ C.textAlign = 'right'; C.fillText(fit(C, t, avail), x + col.w - 18, y + rh * .64); C.textAlign = 'left'; }
+        else { if (C.measureText(t).width > avail) C.font = '500 23px Manrope, sans-serif'; C.fillText(fit(C, t, avail), x + 18, y + rh * .64); }
+        x += col.w; });
+      this.y += rh;
+    });
+    if (total){ this.ensure(rh + 4); const C = this.c; C.fillStyle = PC.soft; C.fillRect(PM, this.y, tw, rh + 4); C.fillStyle = PC.ink; C.fillRect(PM, this.y, tw, 4); this.y += 4; C.font = '800 29px Manrope, sans-serif'; let x = PM;
+      total.forEach((t, i) => { const col = cols[i]; if (t){ C.fillStyle = String(t).startsWith('−') ? PC.red : PC.ink; if (col.r){ C.textAlign = 'right'; C.fillText(t, x + col.w - 18, this.y + rh * .64); C.textAlign = 'left'; } else C.fillText(t, x + 18, this.y + rh * .64); } x += col.w; });
+      this.y += rh; }
+    this.y += 30;
+  }
+  bigline(label, value, sub, bg, bar){
+    this.ensure(190); const c = this.c, h = sub ? 170 : 130;
+    c.fillStyle = bg || PC.mustardSoft; roundRect(c, PM, this.y, PW - 2*PM, h, 26); c.fill();
+    c.fillStyle = bar || PC.mustard; roundRect(c, PM, this.y, 16, h, 8); c.fill();
+    c.fillStyle = PC.ink; c.font = '72px Forum, Georgia, serif'; c.fillText(label, PM + 40, this.y + 88);
+    c.textAlign = 'right'; c.font = '800 64px Manrope, sans-serif'; c.fillText(value, PW - PM - 40, this.y + 88); c.textAlign = 'left';
+    if (sub){ c.fillStyle = PC.muted; c.font = '600 30px Manrope, sans-serif'; c.fillText(fit(c, sub, PW - 2*PM - 80), PM + 40, this.y + 140); }
+    this.y += h + 30;
+  }
+  sign(labels, place){
+    this.ensure(260); const c = this.c, tw = PW - 2*PM, sw = (tw - 120) / 2;
+    if (place){ c.fillStyle = PC.ink; c.font = '600 32px Manrope, sans-serif'; c.fillText(fit(c, place, tw), PM, this.y + 40); this.y += 40; }
+    const sy = this.y + 150;
+    labels.forEach((l, i) => { const sx = PM + i * (sw + 120); c.fillStyle = PC.ink; c.fillRect(sx, sy, sw, 3); c.fillStyle = PC.muted; c.font = '600 28px Manrope, sans-serif'; c.fillText(fit(c, l, sw), sx, sy + 44); });
+    this.y = sy + 90;
+  }
+  finish(){
+    const n = this.pages.length, L = LBL[this.lang];
+    this.pages.forEach((cv, i) => { const c = cv.getContext('2d');
+      c.fillStyle = PC.muted; c.font = 'italic 500 26px Manrope, sans-serif'; c.fillText(fit(c, L.disc, PW - 2*PM), PM, PH - 238); c.fillText(fit(c, L.disc2, PW - 2*PM), PM, PH - 200);
+      footer(cv, this.lang);
+      if (n > 1){ c.textAlign = 'right'; c.font = '600 30px Manrope, sans-serif'; c.fillStyle = PC.muted; c.fillText(L.page + ' ' + (i + 1) + ' / ' + n, PW - PM, PH - 90); c.textAlign = 'left'; }
+      WM(cv, 'svoiludi.ch'); });
+    return this.pages;
+  }
+}
+const sgn = a => (a < 0 ? '−' : '') + chf(Math.abs(a));
+function makePdf(c, lang){
+  const L = LBL[lang], R = calc(c, lang), mn = MON_L[lang][+c.mm - 1] + ' ' + c.yy;
+  const ktN = KT[c.canton] ? (KT[c.canton][lang] || KT[c.canton].ru) : '';
+  const modeTxt = (c.mode === 'hour' ? L.modeH + (num(c.h.rate) ? ', ' + L.rate + ' ' + chf(num(c.h.rate) * R.k) + ' CHF ' + L.perH : '') : L.modeF + ', ' + L.pensum + ' ' + pctTxt(c.f.pensum === '' ? 100 : num(c.f.pensum), lang))
+    + (ktN ? ' · ' + L.canton + ' ' + ktN : '') + (c.basis === 'netto' ? ' · ' + L.netAgreed : '');
+  const D = new PDoc(L.title, mn, [modeTxt], lang);
+  const er = [c.er.name, c.er.a1, c.er.a2].filter(x => x.trim());
+  const permit = c.ee.permit === 'CH' ? L.permitCH : c.ee.permit;
+  const ee = [c.ee.name, c.ee.a1, c.ee.a2, c.ee.ahv ? L.ahvnr + ' ' + c.ee.ahv : '', c.ee.birth ? L.birth + ' ' + c.ee.birth : '', permit ? L.permit + ' ' + permit : ''].filter(x => x && x.trim());
+  if (er.length || ee.length) D.parties([[L.er, er.length ? er : ['–']], [L.ee, ee.length ? ee : ['–']]]);
+  D.tiles([[L.kBr, chf(R.brutto), PC.soft, PC.ink], [L.kDed, '−' + chf(R.dsum), PC.redSoft, PC.red], [L.kNet, chf(R.netto), PC.sageSoft, PC.sage], [L.kPay, chf(R.pay), PC.mustardSoft, PC.brown]]);
+  const cols = [{t: L.colItem, w: 0}, {t: L.colQty, w: 420}, {t: L.colBase, w: 520}, {t: L.colAmt, w: 300, r: true}];
+  D.h2(L.secPay, PC.sage); D.hc = PC.sage;
+  D.table(cols, R.lines.map(x => [x.t, x.q, x.b, sgn(x.a)]), [L.brutto, '', '', chf(R.brutto)]);
+  if (R.ded.length){ D.h2(L.secDed, PC.red); D.hc = PC.brown; D.table([{t: L.colDed, w: 0}, {t: L.colPct, w: 300}, {t: L.colB2, w: 420}, {t: L.colAmt, w: 300, r: true}], R.ded.map(x => [x.t, x.q, x.b, '−' + chf(x.a)]), [L.ded, '', '', '−' + chf(R.dsum)]); }
+  D.bigline(L.netto, chf(R.netto) + ' CHF', '', PC.sageSoft, PC.sage);
+  if (R.after.length){ D.h2(L.secAfter, PC.mustard); D.hc = PC.mustard; D.table([{t: L.colItem, w: 0}, {t: L.colAmt, w: 300, r: true}], R.after.map(x => [x.t, sgn(x.a)])); }
+  D.bigline(L.pay, chf(R.pay) + ' CHF', c.ee.iban.trim() ? L.iban + ' ' + c.ee.iban.trim() : '');
+  D.sign([L.signEr, L.signEe], c.place.trim() ? L.place + ': ' + c.place.trim() : '');
+  return D.finish();
+}
+window.ZP = {makePdf, exampleCalc, calc};
+async function pdfOut(make, filename){
+  if (!window.jspdf){ say('PDF зараз недоступний. Спробуй ще раз пізніше.'); return; }
+  say('Готую PDF…');
+  try { await Promise.all(['120px Forum', '500 30px Manrope', '600 30px Manrope', '700 30px Manrope', '800 30px Manrope'].map(f => document.fonts.load(f))); await document.fonts.ready; } catch(e) {}
+  const pages = make(), doc = new window.jspdf.jsPDF({orientation:'portrait', unit:'mm', format:'a4'}), k = 210 / PW;
+  pages.forEach((cv, i) => { if (i) doc.addPage(); doc.addImage(cv.toDataURL('image/jpeg', 0.92), 'JPEG', 0, 0, 210, 297); for (const l of cv.links) doc.link(l.x * k, l.y * k, l.w * k, l.h * k, {url: l.url}); });
+  return offer(filename, doc.output('blob'));
+}
+const safe = s => String(s).replace(/[\\/:*?"<>|]+/g, ' ').replace(/\s+/g, ' ').trim();
+$('dlPdf').addEventListener('click', () => {
+  const c = cur(), lang = LBL[c.lang] ? c.lang : 'ru', who = c.ee.name.trim() || c.title.trim();
+  const name = LBL[lang].title + ' ' + (who ? who + ' ' : '') + (lang === 'ru' ? MONTHS_IN : MON_L[lang])[+c.mm - 1] + ' ' + c.yy;
+  pdfOut(() => makePdf(c, lang), safe(name) + '.pdf');
+});
+
+/* ---------- скачивание ---------- */
+let downloads = null, downloadsOk = true;
+async function offer(filename, data){
+  if (window.claude && window.claude.use){
+    if (!downloads){ say('Завантаження тут недоступне.'); return; }
+    try { await downloads.save({filename, data}); say('Файл «' + filename + '» збережено.'); return true; }
+    catch(err){ const code = err && err.code;
+      if (code === 'declined') say('Завантаження скасовано.'); else if (code === 'rate_limited') say('Вікно збереження вже відкрите. Підтверди його або зачекай трохи.'); else say('Не вдалося зберегти файл. Спробуй ще раз.'); }
+    return;
+  }
+  const url = URL.createObjectURL(data), a = document.createElement('a'); a.href = url; a.download = filename; document.body.appendChild(a); a.click();
+  setTimeout(() => { a.remove(); URL.revokeObjectURL(url); }, 4000); say('Файл «' + filename + '» завантажено.'); return true;
+}
+$('dlXlsx').addEventListener('click', () => { const p = $('vipPanel'); p.hidden = !p.hidden; $('dlXlsx').setAttribute('aria-expanded', String(!p.hidden)); });
+/* Excel откроется для VIP-партнёров вместе с проверкой VIP; сейчас кнопка скрыта и недостижима */
+(async () => {
+  if (!(window.claude && window.claude.use)) return;
+  try { downloads = await window.claude.use('downloads'); } catch(e) { downloads = null; }
+  if (!downloads){ downloadsOk = false; update(); say('Завантаження відкриється на опублікованій сторінці.'); }
+})();
+
+renderAll();
+</script>
+<script>
+window.HELP = {
+"inst": "<p>Аванс, позика від роботодавця або борг, що повертається із зарплати частинами. Впиши всю суму, скільки утримувати на місяць і з якого місяця. Залишок рахується сам. З кожним наступним місяцем він зменшується.</p><p>За законом роботодавець може утримувати свої борги із зарплати тільки в тій частині, на яку можна накласти арешт під час стягнення. Сума, потрібна на життя, залишається працівникові. Домовся про суму на місяць письмово.</p><p class=\"help-src\">Джерело: <a href=\"https://www.fedlex.admin.ch/eli/cc/27/317_321_377/de#art_323_b\" target=\"_blank\" rel=\"noopener\">OR, стаття 323b</a>; про аванс — <a href=\"https://www.fedlex.admin.ch/eli/cc/27/317_321_377/de#art_323\" target=\"_blank\" rel=\"noopener\">стаття 323</a>.</p>",
+"pf": "<p>Якщо в працівника є борги й відомство зі стягнення (Betreibungsamt) наклало арешт на частину зарплати (Lohnpfändung), роботодавець отримує лист. У ньому зазначено суму на місяць і до якого часу її утримувати.</p><p>Ці гроші роботодавець переказує відомству. Частина зарплати, потрібна на життя, залишається в працівника, її розмір визначає відомство.</p>",
+"rKant": "<p>Невеликий внесок працівника, який є тільки в деяких кантонах. У 2026 році це Вале 0,13 % (сімейні допомоги), Женева 0,029 % (страхування материнства), Во 0,09 % (PC Familles і rente-pont). Під час вибору кантону він ставиться сам.</p><p>Де перевірити: у минулому розрахунковому листі або в касі AHV свого кантону (Ausgleichskasse).</p><p class=\"help-src\">Джерело: <a href=\"https://www.bsv.admin.ch/fr/allocations-familiales-financement\" target=\"_blank\" rel=\"noopener\">BSV, фінансування сімейних допомог</a>, <a href=\"https://silgeneve.ch/legis/program/books/rsg/htm/rsg_j5_07p01.htm\" target=\"_blank\" rel=\"noopener\">закон Женеви про страхування материнства</a>.</p>",
+"tagg": "<p>Гроші від страховки за дні хвороби (KTG) або після нещасного випадку (UVG), які роботодавець передає тобі разом із зарплатою. Суму пише страхова у своєму розрахунку (Taggeldabrechnung).</p><p>З цих виплат не знімаються внески AHV. Податок у джерела з них зазвичай утримується. Якщо роботодавець сам продовжує платити зарплату за дні хвороби, це звичайна зарплата, впиши її в години або оклад.</p><p class=\"help-src\">Джерело: <a href=\"https://www.ahv-iv.ch/p/2.01.d\" target=\"_blank\" rel=\"noopener\">пам’ятка AHV 2.01</a>.</p>",
+"nat": "<p>Якщо роботодавець дає їжу й житло, наприклад няні або помічниці по дому з проживанням, це частина зарплати (Naturallohn). З неї сплачуються внески, але грошима вона не виплачується.</p><p>Тому сума спочатку додається до брутто, а після нетто віднімається як уже отримана. За нормами AHV на 2026 рік це на місяць: сніданок 105, обід 300, вечеря 240, житло 345, усе разом 990 CHF.</p><p class=\"help-src\">Джерело: <a href=\"https://www.ahv-iv.ch/p/2.01.d\" target=\"_blank\" rel=\"noopener\">пам’ятка AHV 2.01</a>, розділ про натуральну зарплату.</p>",
+"ferPay": "<p>Гроші за відпустку, яку ти не встигла або не встиг узяти. Зазвичай їх платять при звільненні, коли відпустку вже не можна використати.</p><p>Це зарплата, з неї знімаються всі внески. Суму рахує роботодавець за днями відпустки, перевір її за своїм обліком відпустки.</p>",
+"zul": "<p>Надбавки за роботу вночі, у неділю, у свято або позмінно. Відсоток і правила стоять у договорі або в колективному договорі галузі (GAV).</p><p>З них знімаються всі внески, як із зарплати. Впиши назву й суму брутто за місяць.</p>",
+"basis": "<p><b>Я знаю брутто.</b> У договорі стоїть ставка або оклад до відрахувань. Так буває майже завжди.</p><p><b>Я знаю нетто.</b> Ви домовилися про суму на руки, наприклад «25 франків за годину чистими». Тоді внески й податок усе одно сплачуються, їх бере на себе роботодавець. Інструмент сам підбере брутто, а в розрахунковому листі стоятимуть брутто й усі відрахування, як належить.</p><p>Нетто тут означає суму після внесків і податку, до допомог, витрат і утримань.</p>",
+"canton": "<p>Кантон, де ти працюєш. Від нього залежать податок у джерела, дитячі допомоги, кантональний внесок, мінімальна зарплата й мова розрахункового листа.</p><p>Мова розрахункового листа ставиться за кантоном сама. У Женеві, Во, Невшателі, Юрі, Фрібурі та Вале — французька, у Тічино — італійська, в інших — німецька. Її можна змінити внизу, перед завантаженням.</p>",
+"calcs": "<p>Можна вести кілька розрахунків на одній сторінці. Наприклад свою зарплату й зарплату няні або один розрахунок на кожен місяць.</p><p>«+ Новий розрахунок» починає чистий розрахунок і переносить тільки роботодавця. «Скопіювати на наступний місяць» бере всі умови цього розрахунку й очищає те, що змінюється щомісяця. Це години, понаднормові, бонус, витрати й утримання.</p>",
+"title": "<p>Коротке ім’я, за яким ти знайдеш цей розрахунок у списку. Наприклад «Моя зарплата» або «Наталія, прибирання».</p><p>У PDF воно не потрапляє.</p>",
+"month": "<p>Місяць, за який нараховується зарплата. Від нього залежать назва в PDF і кількість днів у місяці, якщо є неоплачувані дні.</p>",
+"employer": "<p>Хто платить зарплату. Фірма або приватна особа, наприклад «Familie Müller».</p><p>Якщо ти сама або сам платиш няні чи помічниці по дому, роботодавець тут ти.</p>",
+"ahvnr": "<p>Номер соціального страхування з 13 цифр, він починається з 756. Він стоїть на картці медичної страховки й у кожному розрахунковому листі.</p><p>Для розрахунку він не потрібен, тільки для PDF.</p>",
+"birth": "<p>Потрібна тільки для PDF. На розрахунок вона ні на що не впливає.</p><p>Пам’ятай, що від віку залежать деякі внески. Наприклад внески до пенсійної каси зростають із віком, а для працівників молодших за 18 років і пенсіонерів внески рахуються за особливими правилами. Якщо тебе це стосується, уточни ставки в роботодавця або в касі AHV.</p>",
+"permit": "<p>Вид дозволу на перебування. Від нього залежить, чи утримується податок у джерела.</p><p>З дозволом B, L, S, F, G або N податок зазвичай утримує роботодавець. З дозволом C і швейцарським громадянством податок сплачується за декларацією, і в розрахунковому листі його немає.</p>",
+"iban": "<p>Рахунок, на який приходить зарплата. Він з’явиться в PDF під сумою до виплати.</p>",
+"mode": "<p><b>Погодинна оплата.</b> Тобі платять за кожну відпрацьовану годину, і сума змінюється від місяця до місяця. Відпустка й свята часто оплачуються надбавкою до кожної години.</p><p><b>Фіксований оклад.</b> Щомісяця одна й та сама сума, навіть якщо в місяці були свята або відпустка. Її ставлять у договорі за повну ставку або одразу за твій відсоток зайнятості.</p>",
+"hours": "<p>Скільки годин ти відпрацювала або відпрацював за місяць. Візьми підсумок зі свого обліку годин.</p><p>Можна писати годинами й хвилинами через двокрапку, наприклад 67:20, або десятковим числом, наприклад 67,5.</p><p>Години зручно записувати в інструменті «Облік мого часу» на цьому сайті.</p>",
+"rate": "<p>Ставка брутто за одну годину з договору, без надбавок за відпустку та свята. Брутто означає до відрахування внесків і податку.</p><p>Якщо в договорі стоїть ставка вже разом із надбавкою за відпустку, впиши її сюди, а надбавку за відпустку постав «ні».</p>",
+"fer": "<p>При погодинній оплаті відпустка часто оплачується надбавкою до кожної години. Тоді у відпустці ти грошей не отримуєш, вони вже прийшли разом із зарплатою.</p><p>За 4 тижні відпустки на рік надбавка 8,33 %, за 5 тижнів 10,64 %, за 6 тижнів 13,04 %. Працівникам молодшим за 20 років належить не менше 5 тижнів.</p><p>Якщо відпустка оплачується окремо, вибери «ні».</p>",
+"fei": "<p>Деякі договори з погодинною оплатою передбачають надбавку за святкові дні, у які ти не працюєш. Відсоток стоїть у договорі.</p><p>Якщо в договорі такої надбавки немає, залиш порожнім.</p>",
+"sal": "<p>Оклад брутто на місяць за повну ставку, тобто при зайнятості 100 %. Брутто означає до відрахування внесків і податку.</p><p>Якщо в договорі стоїть сума вже за твій відсоток, наприклад «4 160 CHF при 80 %», впиши її сюди й постав відсоток зайнятості 100.</p>",
+"pensum": "<p>Яку частину повної ставки ти працюєш. Повна ставка 100 %, чотири дні на тиждень зазвичай 80 %.</p><p>Оклад множиться на цей відсоток.</p>",
+"unpaid": "<p>Дні, за які цього місяця оклад не платиться. Наприклад ти почала працювати 10-го числа, пішла з роботи в середині місяця або взяла відпустку за свій рахунок.</p><p>Оклад ділиться на кількість днів у місяці й множиться на ці дні. Роботодавці рахують по-різному, іноді за 30 днями або за робочими днями. Якщо в розрахунковому листі сума інша, запитай, як рахує твій роботодавець.</p>",
+"ot": "<p>Години понад договір, які оплачуються грошима цього місяця. Пиши годинами й хвилинами, наприклад 3:30, або десятковим числом.</p><p>Якщо переробіток компенсують вільним часом, сюди його не пиши.</p>",
+"week": "<p>Скільки годин на тиждень працюють при повній ставці. Ця цифра стоїть у договорі або в правилах фірми, часто 40–42 години.</p><p>З неї рахується ціна однієї години. Оклад за 100 % ділиться на години на місяць, а це години на тиждень × 52 тижні ÷ 12 місяців.</p>",
+"otPct": "<p>Надбавка до ціни години за понаднормову роботу. За законом це 25 %, якщо в договорі письмово не домовилися інакше.</p><p>Якщо за договором понаднормові оплачуються без надбавки, постав 0.</p>",
+"m13": "<p>13-та зарплата належить, тільки якщо вона є в договорі.</p><p><b>Щомісяця по 1/12.</b> Частина 13-ї зарплати приходить щомісяця разом з окладом.</p><p><b>Виплачується в цьому місяці.</b> Уся сума приходить один раз, зазвичай у листопаді або грудні. Вибери, якщо зараз цей місяць.</p><p>Якщо 13-та зарплата виплачується в іншому місяці, вибери «ні або не в цьому місяці».</p>",
+"m13m": "<p>Якщо ти працювала або працював у цього роботодавця весь рік, це 12. Якщо почала у квітні, то з квітня до грудня 9 місяців, і 13-та зарплата буде 9/12 окладу.</p>",
+"bonus": "<p>Усе, що платиться разом із зарплатою і з чого теж знімаються внески. Бонус, надбавка за нічну роботу або вихідні, разова премія.</p><p>Впиши назву, вона з’явиться в розрахунковому листі, і суму брутто.</p>",
+"kinder": "<p>Дитячі допомоги й допомоги на навчання (Kinderzulagen, Ausbildungszulagen). Їх зазвичай платить роботодавець разом із зарплатою.</p><p>Мінімум за законом у 2026 році 215 CHF на місяць на дитину до 16 років і 268 CHF на дитину, що навчається, до 25 років. Багато кантонів платять більше. Свою суму дивись у рішенні каси сімейних допомог (Familienausgleichskasse) або в таблиці кантонів.</p><p>З допомог не знімаються внески AHV, тому вони додаються після нетто. Податок у джерела з них утримується.</p><p class=\"help-src\">Джерело: <a href=\"https://www.bsv.admin.ch/de/familienzulagen-leistungen-und-voraussetzungen\" target=\"_blank\" rel=\"noopener\">BSV, сімейні допомоги</a>, <a href=\"https://www.bsv.admin.ch/dam/de/sd-web/acU7RgJgeisY/Arten%20und%20Ans%C3%A4tze%20der%20Familienzulagen_2026.pdf\" target=\"_blank\" rel=\"noopener\">таблиця кантонів на 2026 рік</a>.</p>",
+"spesen": "<p>Гроші, які роботодавець повертає за витрати по роботі. Поїздки, матеріали, обід у відрядженні. Суми стоять у чеках або в правилах фірми щодо витрат (Spesenreglement).</p><p>Це не зарплата, тому внески з неї не знімаються. Вона додається до суми до виплати.</p>",
+"rates": "<p>Тут тільки частка працівника. Стільки ж за AHV/IV/EO та ALV платить зверху роботодавець, але це не зменшує твою зарплату.</p><p>Де знайти ставки: у минулому розрахунковому листі, у трудовому договорі або в роботодавця. У кожного рядка є свій «?» з підказкою, де шукати. Якщо чогось немає у твоєму розрахунковому листі, залиш поле порожнім.</p>",
+"rAhv": "<p>Пенсія за віком, страхування на випадок інвалідності й компенсація заробітку (наприклад на час армії, відпустки у зв’язку з народженням дитини). Частка працівника за законом 5,3 % від брутто у 2026 році.</p><p>Де перевірити: у минулому розрахунковому листі, рядок AHV/IV/EO. Ставку зазвичай змінювати не потрібно.</p><p class=\"help-src\">Джерело: <a href=\"https://www.ahv-iv.ch/p/2.01.d\" target=\"_blank\" rel=\"noopener\">пам’ятка AHV 2.01</a>.</p>",
+"rAlv": "<p>Страхування на випадок безробіття. Частка працівника 1,1 % від брутто. З частини річної зарплати понад 148 200 CHF цей внесок не знімається.</p><p>Де перевірити: у минулому розрахунковому листі, рядок ALV.</p><p class=\"help-src\">Джерело: <a href=\"https://www.ahv-iv.ch/p/2.08.d\" target=\"_blank\" rel=\"noopener\">пам’ятка AHV 2.08</a>.</p>",
+"rNbu": "<p>Страхування від нещасного випадку поза роботою, наприклад удома або в спорті. Воно обов’язкове, якщо ти працюєш в одного роботодавця 8 годин на тиждень або більше. Якщо менше, ця страховка не потрібна й поле залишається порожнім.</p><p>Де знайти ставку: у минулому розрахунковому листі, рядок NBU або UVG/NBU, або запитай роботодавця, він знає її з поліса страхової (Suva або приватна страхова). Часто це 1–2 %. Іноді її частково або повністю платить роботодавець.</p>",
+"rKtg": "<p>Страховка, яка платить зарплату, якщо ти довго хворієш (Krankentaggeld). Її укладають не всі роботодавці.</p><p>Де знайти ставку: у минулому розрахунковому листі, рядок KTG, або в договорі. Якщо такого рядка немає, залиш порожнім.</p>",
+"rBvg": "<p>Друга пенсія через пенсійну касу. Вона обов’язкова, якщо річна зарплата в одного роботодавця вища за поріг закону. У 2026 році це 22 680 CHF на рік.</p><p>Внесок залежить від віку й правил каси. Де знайти суму: у минулому розрахунковому листі, рядок BVG або Pensionskasse, або в довідці каси (Vorsorgeausweis), її надсилають раз на рік. Надійніше вибрати «сума в CHF».</p><p class=\"help-src\">Джерело: <a href=\"https://www.bsv.admin.ch/dam/de/sd-web/3jZGqTLgADbl/BPP_Zahlen_85_2026.pdf\" target=\"_blank\" rel=\"noopener\">BSV, цифри BVG на 2026 рік</a>.</p>",
+"rQst": "<p>Податок, який роботодавець знімає одразу із зарплати, якщо в тебе немає дозволу C і швейцарського громадянства. Наприклад із дозволом B, L, S або F.</p><p>Де знайти: код тарифу й відсоток стоять у кожному розрахунковому листі. Відсоток можна знайти в таблиці податку у джерела свого кантону на сайті кантональної податкової служби (Steueramt, Quellensteuer). Код тарифу: літера — сімейний стан (A — самотня людина, B — у шлюбі й працює один, C — у шлюбі й працюють обоє, H — самотня людина з дітьми), цифра — кількість дітей, Y або N — із церковним податком або без.</p><p class=\"help-src\">Джерело: <a href=\"https://www.estv.admin.ch/de/quellensteuertarife-import-in-lohnbuchhaltungssysteme\" target=\"_blank\" rel=\"noopener\">ESTV, тарифи кантонів на 2026 рік</a>.</p>",
+"adv": "<p>Гроші, які ти вже отримала або отримав цього місяця раніше за зарплату. Вони віднімаються від суми до виплати.</p><p>Якщо аванс повертається частинами в різні місяці, впиши його нижче, у «Утримується частинами».</p><p class=\"help-src\">Закон про аванс: <a href=\"https://www.fedlex.admin.ch/eli/cc/27/317_321_377/de#art_323\" target=\"_blank\" rel=\"noopener\">OR, стаття 323</a>.</p>",
+"other": "<p>Інші суми, які роботодавець утримує з нетто. Наприклад обіди в їдальні, проїзний, оренда службової квартири або утримання за рішенням відомства.</p><p>Впиши назву, вона з’явиться в розрахунковому листі, і суму.</p>",
+"cards": "<p><b>Брутто.</b> Уся зарплата до відрахувань, разом із надбавками.</p><p><b>Внески й податок.</b> Усе, що знімається з брутто. AHV, ALV, NBU, KTG, пенсійна каса й податок у джерела.</p><p><b>Нетто.</b> Брутто мінус внески й податок.</p><p><b>До виплати.</b> Скільки прийде на рахунок. Це нетто плюс дитячі допомоги й відшкодування витрат, мінус аванс та інші утримання.</p><p>Кожен рядок округлюється до раппена, як у звичайному розрахунковому листі.</p>",
+"pdf": "<p>Розрахунковий лист на одному аркуші A4. Роботодавець і працівник, усі рядки зарплати, внески з відсотками, нетто, сума до виплати й місця для двох підписів.</p><p>Це зразок для прикладу й особистого використання, а не офіційний документ. Усі цифри перевір за договором, полісами й минулими розрахунковими листами.</p><p>Якщо ти платиш зарплату сама або сам, роздрукуй його, підпиши й віддай працівникові разом із зарплатою.</p>",
+"lang": "<p>Мовою сайту, щоб самій або самому зрозуміти кожен рядок.</p><p>Німецькою, французькою або італійською, щоб віддати розрахунковий лист працівникові, роботодавцю або додати до документів. У Швейцарії документи читають мовою кантону, тому мова ставиться за кантоном сама.</p><p>Те, що ти вписуєш сама або сам (імена, назви), потрапляє в розрахунковий лист як є, без перекладу.</p>",
+"place": "<p>Місто й дата розрахунку, наприклад «Zürich, 30.09.2026». Вони з’являться в PDF над місцями для підписів.</p>"
+};
+</script>
+<script src="/assets/help.uk.js"></script>
+<script src="/assets/backup.uk.js"></script>
+<script src="/assets/pdffan.uk.js" defer></script>
+<script src="/assets/samesite.js"></script>
+<!--i18n--><style>#langbar.langbar{position:fixed;bottom:14px;right:14px;z-index:60;display:flex;gap:2px;background:rgba(255,255,255,.92);border:1px solid rgba(0,0,0,.08);border-radius:999px;padding:3px;font:600 12px Manrope,system-ui,sans-serif;box-shadow:0 2px 8px rgba(0,0,0,.08)}#langbar.langbar a{color:#5d554d;padding:5px 9px;border-radius:999px;text-decoration:none;font:inherit;display:inline-block}#langbar.langbar a[aria-current="true"]{background:#2f2924;color:#fff}@media print{.langbar{display:none!important}}</style><div class="langbar" id="langbar" role="navigation" aria-label="Мова / Язык"><a href="/instrumenty/zarplata/" hreflang="ru" data-lang="ru">RU</a><a href="/uk/instrumenty/zarplata/" hreflang="uk" data-lang="uk" aria-current="true">UA</a></div><script>(function(){var b=document.getElementById('langbar');if(!b)return;b.addEventListener('click',function(e){var a=e.target.closest('a[data-lang]');if(a){try{localStorage.setItem('svoiludiLang',a.dataset.lang)}catch(x){}a.href=a.getAttribute('href').split('#')[0]+location.hash;}});})();</script><!--i18n--></body>
+</html>

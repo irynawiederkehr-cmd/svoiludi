@@ -1,0 +1,961 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<link rel="icon" href="/fav/favicon.svg" type="image/svg+xml"><link rel="icon" href="/fav/icon-32.png" sizes="32x32"><link rel="apple-touch-icon" href="/fav/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/fonts.css">
+<meta name="description" content="Расчёт зарплаты за месяц в Швейцарии. Почасовая оплата или фиксированный оклад, надбавки за отпуск и праздники, взносы AHV, ALV, NBU, KTG, BVG и налог у источника. Брутто, нетто и сумма к выплате, расчётка в PDF на русском или немецком. Бесплатно, данные только в твоём браузере.">
+<link rel="canonical" href="https://svoiludi.ch/instrumenty/zarplata/">
+<meta property="og:type" content="website"><meta property="og:locale" content="ru_RU"><meta property="og:site_name" content="Свои люди в Швейцарии">
+<meta property="og:title" content="Расчёт зарплаты · за месяц"><meta property="og:description" content="Почасово или с окладом. Все взносы, налог у источника и сумма к выплате. Бесплатно, с расчёткой в PDF.">
+<meta property="og:url" content="https://svoiludi.ch/instrumenty/zarplata/"><meta property="og:image" content="https://svoiludi.ch/instrumenty/zarplata/og-image.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="robots" content="noindex, nofollow">
+<title>Расчёт зарплаты · Свои люди в Швейцарии</title>
+
+<style>
+/* Расчёт зарплаты за месяц. Стиль сайта «Свои люди»: бежевая бумага, Forum + Manrope, кнопки ровного цвета. */
+:root{
+  --bg:#F4EDE3; --paper:#FFFCF8; --ink:#2F2924; --muted:#7A6E62; --line:#E5D9C9; --soft:#EFE5D7;
+  --brown:#6E4F3C; --mustard:#B98324; --mustard-soft:#F3E3C2; --sage:#4F5E3E; --weekend:#F6EEE3; --sage-soft:#E3E8D6;
+  --plus:#2F7F3B; --minus:#B5322A; --hol:#D81B78;
+  --display:"Forum","Georgia",serif; --sans:"Manrope","Segoe UI",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#221D19; --paper:#2C2621; --ink:#F1E9DF; --muted:#B4A796; --line:#3E362F; --soft:#352E28;
+  --brown:#E1C2A6; --mustard:#E2B45C; --mustard-soft:#3D321F; --sage:#B4BF97; --weekend:#302923; --sage-soft:#2E3226;
+  --plus:#7CC48A; --minus:#EE8A7E; --hol:#F07AB4; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#221D19; --paper:#2C2621; --ink:#F1E9DF; --muted:#B4A796; --line:#3E362F; --soft:#352E28;
+  --brown:#E1C2A6; --mustard:#E2B45C; --mustard-soft:#3D321F; --sage:#B4BF97; --weekend:#302923; --sage-soft:#2E3226;
+  --plus:#7CC48A; --minus:#EE8A7E; --hol:#F07AB4; color-scheme:dark}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--ink);font:15px/1.55 var(--sans);margin:0}
+.wrap{max-width:1240px;margin:0 auto;padding-inline:16px;padding-block:28px 48px;display:flex;flex-direction:column;gap:24px}
+.eyebrow{font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+h1{font-family:var(--display);font-weight:400;font-size:clamp(2.4rem,6vw,3.6rem);line-height:1;margin:4px 0 10px;text-wrap:balance}
+h2{font-family:var(--display);font-weight:400;font-size:1.6rem;margin:0;line-height:1.15}
+h3{font-family:var(--display);font-weight:400;font-size:1.2rem;margin:0}
+.lead{max-width:66ch;color:var(--muted);margin:0}
+.bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+select,input[type=text],input[type=number],input[type=time]{font:inherit;color:var(--ink);background:var(--paper);border:1.5px solid var(--line);border-radius:12px;padding:8px 12px;min-width:0}
+input[type=time]{padding:6px 8px;font-variant-numeric:tabular-nums}
+input[disabled]{background:var(--soft);color:var(--muted)}
+select:focus-visible,input:focus-visible,button:focus-visible,a:focus-visible,summary:focus-visible{outline:2px solid var(--mustard);outline-offset:2px}
+/* кнопки ровного цвета, без перелива */
+.btn{font:inherit;font-weight:700;font-size:.9rem;border:0;border-radius:999px;padding:10px 18px;cursor:pointer;color:#fff;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;text-align:center;background:#6E4F3C;box-shadow:0 8px 18px -8px rgba(110,79,60,.6)}
+.btn.gold{background:#B98324;box-shadow:0 8px 18px -8px rgba(185,131,36,.7)}
+.btn.free{background:#4F5E3E;box-shadow:0 8px 18px -8px rgba(79,94,62,.6)}
+.btn.ghost{background:transparent;color:var(--brown);border:1.5px solid var(--line);box-shadow:none}
+.btn.danger{background:#A0523D;box-shadow:none}
+.btn[disabled]{background:var(--soft);color:var(--muted);box-shadow:none;cursor:not-allowed}
+.spacer{flex:1 1 auto}
+.confirm{display:flex;gap:8px;align-items:center;flex-wrap:wrap;background:var(--paper);border:1.5px solid var(--line);border-radius:18px;padding:6px 6px 6px 14px;font-size:.88rem;font-weight:600}
+.status{font-size:.86rem;min-height:0}
+.status:not(:empty){position:fixed;left:50%;bottom:18px;transform:translateX(-50%);z-index:90;width:max-content;max-width:calc(100vw - 32px);background:var(--ink);color:var(--paper);border-radius:14px;padding:10px 16px;font-weight:600;box-shadow:0 14px 34px -14px rgba(47,41,36,.6)}
+.jump{font-weight:700;color:var(--brown);text-underline-offset:4px}
+.jumps{display:flex;flex-wrap:wrap;gap:6px 22px;margin:0}
+.privnote{margin-top:14px;max-width:80ch;background:var(--sage-soft);border-radius:16px;padding:12px 16px;font-size:.9rem}
+.hint{font-size:.84rem;color:var(--muted);margin:0}
+.disc{display:flex;gap:12px;align-items:flex-start;background:var(--mustard-soft);border-radius:16px;padding:12px 16px;font-size:.88rem}
+.disc b{flex:none;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mustard);padding-top:2px}
+
+.panel{background:var(--paper);border:1.5px solid var(--line);border-radius:22px;padding:18px 20px;display:flex;flex-direction:column;gap:14px}
+.panel-head{display:flex;flex-wrap:wrap;gap:6px 16px;align-items:baseline;justify-content:space-between}
+.panel-head p{margin:0;font-size:.88rem;color:var(--muted)}
+.fields{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,250px),1fr));gap:14px 20px}
+.field{display:flex;flex-direction:column;gap:6px;font-size:.9rem;font-weight:600;min-width:0}
+.field small{font-weight:500;color:var(--muted);font-size:.8rem}
+.field.wide{grid-column:1 / -1}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+
+/* переключатель месяцев */
+.monthnav{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.monthnav .cur{font-family:var(--display);font-size:1.7rem;min-width:9ch;text-align:center}
+.mbtn{font:inherit;font-weight:700;font-size:.86rem;border:1.5px solid var(--line);background:var(--paper);color:var(--brown);border-radius:999px;padding:8px 14px;cursor:pointer}
+
+/* итоги */
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,170px),1fr));gap:12px}
+.card{background:var(--paper);border:1.5px solid var(--line);border-radius:18px;padding:12px 16px;display:flex;flex-direction:column;gap:2px;min-width:0}
+.card b{font-family:var(--display);font-weight:400;font-size:1.9rem;line-height:1.1;font-variant-numeric:tabular-nums;white-space:nowrap}
+.card span{font-size:.82rem;color:var(--muted);font-weight:600}
+.card.main{background:var(--mustard-soft);border-color:transparent}
+.pos{color:var(--plus)} .neg{color:var(--minus)}
+
+/* раскрывающиеся блоки */
+.setd summary{list-style:none;display:flex;justify-content:space-between;align-items:center;gap:12px;cursor:pointer}
+.setd summary::-webkit-details-marker{display:none}
+.setd .sh{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 14px;min-width:0}
+.ssum{font-size:.86rem;color:var(--muted);font-weight:600}
+.tog{flex:none;width:34px;height:34px;border-radius:50%;border:1.5px solid var(--line);position:relative}
+.tog::before{content:"";position:absolute;left:50%;top:45%;width:9px;height:9px;border-right:2px solid var(--brown);border-bottom:2px solid var(--brown);transform:translate(-50%,-50%) rotate(45deg)}
+.setd[open] > summary .tog::before{top:58%;transform:translate(-50%,-50%) rotate(-135deg)}
+.setd:not([open]){gap:0}
+
+.addper{font:inherit;font-weight:700;font-size:.92rem;color:var(--brown);background:var(--paper);border:1.5px dashed var(--brown);border-radius:16px;padding:12px;cursor:pointer}
+.addrow{display:flex;gap:8px;align-items:center}.addrow .addper{flex:1}
+.med .field input{font-size:16px}
+.clr{font:inherit;font-weight:700;font-size:.9rem;color:#A0523D;background:var(--paper);border:1.5px solid color-mix(in srgb,#A0523D 45%,var(--line));border-radius:999px;padding:11px 14px;cursor:pointer}
+.msum{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;padding:14px;border-top:2px solid var(--ink)}
+.msum .lab{grid-column:1 / -1;font-family:var(--display);font-size:1.2rem}
+.msum .num{text-align:left;display:flex;flex-direction:column}
+.lbl{font-size:.66rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+@media (max-width:900px){ input,select,textarea{font-size:16px!important} }
+
+/* статистика */
+.stack{display:flex;flex-direction:column;gap:12px}
+.pdfgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:14px}
+.pdfc{display:flex;flex-direction:column;gap:10px;background:var(--bg);border-radius:18px;padding:14px 16px}
+.pdfc .btn{align-self:flex-start}
+
+/* резервная копия, поделиться */
+.backup{display:flex;flex-direction:column;gap:8px;background:var(--paper);border:1.5px solid var(--line);border-radius:18px;padding:12px 16px;font-size:.88rem}
+.backup.due{border-color:var(--mustard);background:var(--mustard-soft)}
+.backup .btn{padding:8px 14px;font-size:.84rem}
+.warn{background:#A0523D;color:#fff;border-radius:16px;padding:12px 16px;font-size:.92rem}
+.share{display:flex;flex-direction:column;gap:10px;background:var(--paper);border:1.5px solid var(--line);border-radius:22px;padding:16px 18px}
+.share textarea{font:inherit;color:var(--ink);background:var(--bg);border:1.5px solid var(--line);border-radius:14px;padding:10px 12px;min-height:96px;resize:vertical;width:100%}
+
+/* подсказки «?» */
+.fl{display:inline-flex;align-items:center;gap:6px;flex-wrap:wrap}
+.qh{font:inherit;font-size:.74rem;font-weight:800;width:22px;height:22px;border-radius:50%;border:1.5px solid var(--brown);background:var(--paper);color:var(--brown);cursor:pointer;padding:0;display:inline-grid;place-items:center;margin-left:6px;vertical-align:middle;line-height:1;flex:none;text-transform:none;letter-spacing:0}
+.qh[aria-expanded="true"]{background:var(--brown);color:var(--paper)}
+.fl .qh{margin-left:0}
+h2 .qh,h3 .qh{vertical-align:.25em}
+.qpop{position:absolute;z-index:80;background:var(--paper);color:var(--ink);border:1.5px solid var(--brown);border-radius:14px;padding:12px 38px 12px 14px;font:500 .88rem/1.5 var(--sans);box-shadow:0 14px 34px -14px rgba(47,41,36,.5);text-transform:none;letter-spacing:0}
+.qpop p{margin:0 0 6px}.qpop p:last-of-type{margin-bottom:0}
+.qclose{position:absolute;top:6px;right:6px;width:28px;height:28px;border:0;border-radius:50%;background:none;color:var(--muted);cursor:pointer;font-size:.9rem}
+@media (max-width:640px){.qh{width:26px;height:26px;font-size:.8rem}}
+
+/* описание */
+.guide{display:flex;flex-direction:column;gap:28px;padding-top:8px}
+.guide h2{font-size:clamp(1.7rem,3.6vw,2.3rem);text-wrap:balance}
+.guide .intro{max-width:64ch;font-size:1.02rem;margin:0}
+.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px}
+.steps li{background:var(--paper);border:1.5px solid var(--line);border-radius:20px;padding:16px 18px;display:flex;flex-direction:column;gap:6px}
+.steps .n{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;border:2px solid var(--mustard);color:var(--mustard);font-family:var(--display);font-size:1.4rem;margin-bottom:4px}
+.steps h3,.effects h3{font-size:1.25rem;line-height:1.2}
+.steps p,.effects p{margin:0;font-size:.93rem;color:var(--muted)}
+.effects{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,320px),1fr));gap:16px 28px}
+.effects li{position:relative;padding-left:32px;display:flex;flex-direction:column;gap:4px}
+.effects li::before{content:"";position:absolute;left:0;top:2px;width:22px;height:22px;background:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2020%2020%22%3E%3Ccircle%20cx%3D%2210.00%22%20cy%3D%225.00%22%20r%3D%223.6%22%20fill%3D%22%23E3E6D6%22%20stroke%3D%22%2366704F%22%20stroke-width%3D%221.3%22/%3E%3Ccircle%20cx%3D%2214.76%22%20cy%3D%228.45%22%20r%3D%223.6%22%20fill%3D%22%23E3E6D6%22%20stroke%3D%22%2366704F%22%20stroke-width%3D%221.3%22/%3E%3Ccircle%20cx%3D%2212.94%22%20cy%3D%2214.05%22%20r%3D%223.6%22%20fill%3D%22%23E3E6D6%22%20stroke%3D%22%2366704F%22%20stroke-width%3D%221.3%22/%3E%3Ccircle%20cx%3D%227.06%22%20cy%3D%2214.05%22%20r%3D%223.6%22%20fill%3D%22%23E3E6D6%22%20stroke%3D%22%2366704F%22%20stroke-width%3D%221.3%22/%3E%3Ccircle%20cx%3D%225.24%22%20cy%3D%228.45%22%20r%3D%223.6%22%20fill%3D%22%23E3E6D6%22%20stroke%3D%22%2366704F%22%20stroke-width%3D%221.3%22/%3E%3Ccircle%20cx%3D%2210%22%20cy%3D%2210%22%20r%3D%222.6%22%20fill%3D%22%23B98324%22/%3E%3C/svg%3E") center/contain no-repeat}
+.cta{display:flex;flex-wrap:wrap;gap:12px 20px;align-items:center;justify-content:space-between;background:var(--mustard-soft);border-radius:22px;padding:18px 22px}
+.cta p{margin:0;max-width:60ch;font-family:var(--display);font-size:1.2rem;line-height:1.35}
+.credit{font-size:.84rem;color:var(--muted);display:flex;flex-wrap:wrap;gap:4px 14px}
+.credit a{color:var(--brown)}
+.facts{margin:0;padding-left:0;list-style:none;display:flex;flex-direction:column;gap:8px;max-width:80ch}
+.facts li{position:relative;padding-left:22px;font-size:.93rem}
+.facts li::before{content:"";position:absolute;left:2px;top:.55em;width:9px;height:9px;border-radius:3px;background:var(--mustard);transform:rotate(45deg)}
+
+@media (max-width:1180px){
+  .el select{width:100%;flex:1 1 100%}
+}
+@media (max-width:640px){
+  .panel{padding:14px}
+  .bar{gap:8px}
+  .bar .spacer{display:none}
+  .bar>.btn{flex:1 1 100%;padding:10px 8px}
+  #clearBox{display:flex;gap:8px;width:100%;flex-wrap:wrap}
+  #clearBox>.btn{flex:1 1 calc(50% - 4px);padding:9px 6px;font-size:.8rem;white-space:nowrap}
+  .monthnav{width:100%;display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .monthnav .cur{grid-column:1 / -1;grid-row:1;font-size:1.7rem;min-width:0}
+  .mbtn{padding:9px 6px;font-size:.82rem}
+  .disc{flex-direction:column;gap:4px}
+  .card b{font-size:1.6rem}
+  .pdfc .btn,.backup .btn{align-self:stretch;flex:1 1 100%}
+  .hb{grid-template-columns:62px minmax(0,1fr) auto}
+  .hb.top{grid-template-columns:minmax(0,96px) minmax(0,1fr) auto}
+}
+/* расчёт зарплаты */
+.wrap{max-width:1100px}
+.calcbar{display:flex;flex-wrap:wrap;gap:8px 10px;align-items:center;background:var(--paper);border:1.5px solid var(--line);border-radius:18px;padding:10px 14px}
+.calcbar label{display:flex;align-items:center;gap:8px;font-weight:700;font-size:.9rem;flex:1 1 280px;min-width:0}
+.calcbar select{flex:1 1 auto;min-width:0}
+.calcbar .btn{padding:8px 14px;font-size:.84rem}
+.seg{display:grid;grid-template-columns:1fr 1fr;gap:8px;max-width:560px}
+.segb{font:inherit;font-weight:700;font-size:.92rem;padding:12px 14px;border-radius:16px;border:1.5px solid var(--line);background:var(--paper);color:var(--ink);cursor:pointer;display:flex;flex-direction:column;align-items:flex-start;gap:2px;text-align:left}
+.segb small{font-weight:500;color:var(--muted);font-size:.8rem}
+.segb.on{background:var(--brown);border-color:var(--brown);color:#fff}
+.segb.on small{color:rgba(255,255,255,.85)}
+.checks{display:flex;flex-wrap:wrap;gap:6px 16px;font-weight:600;font-size:.9rem}
+.checks label{display:inline-flex;align-items:center;gap:6px}
+.inst{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px 14px;align-items:end;background:var(--soft);border:1.5px solid var(--line);border-radius:18px;padding:14px 16px}
+.inst-st{grid-column:1 / -1;margin:0;font-size:.9rem}
+.inst .btn{justify-self:start}
+.danger-t{color:#A0523D;border-color:color-mix(in srgb,#A0523D 45%,var(--line))}
+.help-src{font-size:.85em;color:var(--muted)}
+.unit{display:flex;align-items:center;gap:8px}
+.unit input{flex:1 1 auto;width:100%}
+.unit span{flex:none;font-size:.84rem;font-weight:700;color:var(--muted)}
+.sub{font-family:var(--sans);font-size:.78rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:4px 0 -4px}
+.calcnote{font-size:.84rem;color:var(--muted);margin:0;font-variant-numeric:tabular-nums}
+.res{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);gap:18px;align-items:start}
+.cards.k4{grid-template-columns:repeat(2,minmax(0,1fr))}
+.slip{background:var(--paper);border:1.5px solid var(--line);border-radius:22px;padding:16px 18px;display:flex;flex-direction:column;gap:4px;font-variant-numeric:tabular-nums}
+.slip h3{font-size:1.35rem;margin-bottom:4px}
+.sl{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 14px;padding:7px 0;border-top:1px solid var(--line);font-size:.92rem}
+.sl small{grid-column:1 / -1;color:var(--muted);font-size:.78rem;font-weight:600;margin-top:-2px}
+.sl b{font-weight:700;white-space:nowrap;text-align:right}
+.sl.tot{border-top:2px solid var(--ink);font-weight:800}
+.sl.tot b{font-weight:800}
+.sl.pay{border-top:0;background:var(--mustard-soft);border-radius:14px;padding:10px 12px;margin-top:8px;font-size:1.05rem;font-weight:800}
+.sl.minus b{color:var(--minus)}
+.slh{font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:10px}
+.alert{background:var(--mustard-soft);border-radius:14px;padding:10px 14px;font-size:.88rem;margin:0}
+.alert b{display:block}
+.pdfrow{display:flex;flex-wrap:wrap;gap:10px 14px;align-items:flex-end}
+.pdfrow .field{flex:0 1 260px}
+@media (max-width:860px){ .res{grid-template-columns:1fr} }
+@media (max-width:640px){
+  .calcbar .btn{flex:1 1 calc(50% - 4px)}
+  .seg{grid-template-columns:1fr}
+  .cards.k4 .card b{font-size:1.45rem}
+  .pdfrow .btn{flex:1 1 100%}
+}
+</style>
+<!--i18n--><link rel="alternate" hreflang="ru" href="https://svoiludi.ch/instrumenty/zarplata/"><link rel="alternate" hreflang="uk" href="https://svoiludi.ch/uk/instrumenty/zarplata/"><script>(function(){try{if(localStorage.getItem('svoiludiLang')==='uk'&&!/[?&]lang=ru/.test(location.search))location.replace('/uk/instrumenty/zarplata/'+location.search+location.hash);}catch(e){}})();</script><!--i18n--></head>
+<body>
+
+<div class="wrap">
+  <header>
+    <p style="margin:0 0 14px"><a class="jump" href="https://svoiludi.ch/instrumenty/">← Все полезные инструменты · Свои люди в Швейцарии</a></p>
+    <div class="eyebrow">Для работников и работодателей · зарплата за месяц</div>
+    <h1>Расчёт зарплаты</h1>
+    <p class="lead">Сколько из зарплаты уходит на взносы и налог и сколько придёт на счёт. Почасовая оплата или фиксированный оклад, надбавки за отпуск и праздники, сверхурочные и 13-я зарплата. Проверь свою расчётку (Lohnabrechnung) или посчитай зарплату няне, помощнице по дому или сотруднику. Готовую расчётку можно скачать в PDF на русском или на немецком.</p>
+    <p style="margin:10px 0 0"><a class="jump" href="#guide">Зачем это тебе и как с этим работать ↓</a></p>
+    <div class="privnote"><b>Твои данные только у тебя.</b> Всё, что ты вписываешь, хранится только в твоём браузере на этом устройстве. Никто кроме тебя это не видит, даже я. Регистрация не нужна. Ты можешь закрыть страницу и вернуться позже, записи останутся. На другом устройстве их не будет. На iPhone Safari сам стирает записи сайтов, на которые долго не заходили, поэтому раз в месяц сохраняй резервную копию. Чтобы открывать страницу как приложение, добавь её на экран «Домой».</div>
+    <div data-fan="zarplata"></div>
+  </header>
+
+  <div class="bar">
+    <button class="btn" id="dlXlsx" type="button" hidden style="display:none" data-vip="1" aria-expanded="false" aria-controls="vipPanel">Excel для VIP</button>
+    <button class="btn free" id="shareBtn" type="button" aria-expanded="false" aria-controls="sharePanel">Поделиться с друзьями</button>
+    <button class="btn ghost" id="exampleBtn" type="button">Посмотреть на примере</button>
+    <span class="spacer"></span>
+    <span id="clearBox"></span>
+  </div>
+  <p class="jumps"><a class="jump" href="#resBox">К итогу и расчётке ↓</a><a class="jump" href="#pdfBox">К расчётке в PDF ↓</a></p>
+  <div class="status" id="status" role="status"></div>
+  <div class="share" id="vipPanel" hidden>
+    <h2 style="font-size:1.4rem">Выгрузка в Excel для VIP-партнёров</h2>
+    <p class="hint" style="font-size:.92rem;color:var(--ink)">Таблица Excel доступна VIP-партнёрам справочника «Свои люди в Швейцарии». PDF остаётся бесплатным для всех.</p>
+    <div class="row"><a class="btn gold" href="https://svoiludi.ch/join/">Узнать, как стать VIP-партнёром</a></div>
+  </div>
+  <div class="share" id="sharePanel" hidden>
+    <label for="shareText" style="font-weight:700">Сообщение для друзей</label>
+    <textarea id="shareText"></textarea>
+    <div class="row">
+      <button class="btn gold" id="copyMsg" type="button">Скопировать сообщение</button>
+      <a class="btn" id="tgShare" href="#" target="_blank" rel="noopener">Отправить в Telegram</a>
+      <a class="btn" id="waShare" href="#" target="_blank" rel="noopener">Отправить в WhatsApp</a>
+    </div>
+  </div>
+
+  <div class="calcbar">
+    <label for="calcSel">Расчёт<button type="button" class="qh" data-help="calcs" aria-label="Подсказка: несколько расчётов" aria-expanded="false">?</button><select id="calcSel"></select></label>
+    <button class="btn ghost" id="newCalc" type="button">+ Новый расчёт</button>
+    <button class="btn ghost" id="nextCalc" type="button">Скопировать на следующий месяц</button>
+    <button class="btn ghost" id="delCalc" type="button">Удалить этот расчёт</button>
+    <div id="calcConfirm" style="flex-basis:100%" hidden></div>
+  </div>
+
+  <section class="panel" aria-labelledby="who-h">
+    <div class="panel-head"><h2 id="who-h">Кто и за какой месяц</h2><p>Для расчёта нужен только месяц. Имена и адреса нужны для PDF.</p></div>
+    <div class="fields">
+      <label class="field"><span class="fl">Название расчёта<button type="button" class="qh" data-help="title" aria-label="Подсказка: название расчёта" aria-expanded="false">?</button></span> <small>необязательно, например «Наталья, уборка»</small><input type="text" data-k="title" placeholder="Например «Моя зарплата»"></label>
+      <label class="field"><span class="fl">Месяц<button type="button" class="qh" data-help="month" aria-label="Подсказка: месяц" aria-expanded="false">?</button></span> <small>за какой месяц зарплата</small><span class="row" style="flex-wrap:nowrap"><select data-k="mm" id="fMonth" style="flex:1"></select><select data-k="yy" id="fYear"></select></span></label>
+      <label class="field"><span class="fl">Кантон, где работаешь<button type="button" class="qh" data-help="canton" aria-label="Подсказка: кантон" aria-expanded="false">?</button></span> <small>от него зависят налог у источника, пособия, взносы и язык расчётки</small><select data-k="canton" id="fCanton"></select></label>
+    </div>
+    <p class="sub">Работодатель</p>
+    <div class="fields">
+      <label class="field"><span class="fl">Имя или фирма<button type="button" class="qh" data-help="employer" aria-label="Подсказка: работодатель" aria-expanded="false">?</button></span><input type="text" data-k="er.name" autocomplete="organization" placeholder="Например «Familie Müller» или «Muster GmbH»"></label>
+      <label class="field">Улица и номер<input type="text" data-k="er.a1" placeholder="Bahnhofstrasse 1"></label>
+      <label class="field">Индекс и город<input type="text" data-k="er.a2" placeholder="8001 Zürich"></label>
+    </div>
+    <p class="sub">Работник</p>
+    <div class="fields">
+      <label class="field">Имя и фамилия<input type="text" data-k="ee.name" autocomplete="name" placeholder="Имя и фамилия"></label>
+      <label class="field">Улица и номер<input type="text" data-k="ee.a1"></label>
+      <label class="field">Индекс и город<input type="text" data-k="ee.a2"></label>
+      <label class="field"><span class="fl">Номер AHV<button type="button" class="qh" data-help="ahvnr" aria-label="Подсказка: номер AHV" aria-expanded="false">?</button></span> <small>необязательно</small><input type="text" data-k="ee.ahv" inputmode="numeric" placeholder="756.0000.0000.00"></label>
+      <label class="field"><span class="fl">Дата рождения<button type="button" class="qh" data-help="birth" aria-label="Подсказка: дата рождения" aria-expanded="false">?</button></span> <small>необязательно</small><input type="text" data-k="ee.birth" inputmode="numeric" placeholder="ДД.ММ.ГГГГ"></label>
+      <label class="field"><span class="fl">Разрешение на пребывание<button type="button" class="qh" data-help="permit" aria-label="Подсказка: разрешение на пребывание" aria-expanded="false">?</button></span> <small>необязательно</small><select data-k="ee.permit"><option value="">не указывать</option><option value="CH">Гражданство Швейцарии</option><option value="C">C</option><option value="B">B</option><option value="L">L</option><option value="S">S</option><option value="F">F</option><option value="G">G</option><option value="N">N</option></select></label>
+      <label class="field"><span class="fl">IBAN для выплаты<button type="button" class="qh" data-help="iban" aria-label="Подсказка: IBAN" aria-expanded="false">?</button></span> <small>необязательно</small><input type="text" data-k="ee.iban" placeholder="CH00 0000 0000 0000 0000 0"></label>
+    </div>
+  </section>
+
+  <section class="panel" aria-labelledby="pay-h">
+    <div class="panel-head"><h2 id="pay-h">Как платят<button type="button" class="qh" data-help="mode" aria-label="Подсказка: почасово или оклад" aria-expanded="false">?</button></h2><p>Смотри в трудовом договоре.</p></div>
+    <div class="seg" role="group" aria-label="Вид оплаты">
+      <button type="button" class="segb" data-mode="hour" aria-pressed="false">Почасовая оплата<small>платят за каждый час работы</small></button>
+      <button type="button" class="segb" data-mode="fix" aria-pressed="false">Фиксированный оклад<small>одна сумма в месяц</small></button>
+    </div>
+    <p class="sub">Какую сумму ты знаешь<button type="button" class="qh" data-help="basis" aria-label="Подсказка: брутто или нетто" aria-expanded="false">?</button></p>
+    <div class="seg" role="group" aria-label="Брутто или нетто">
+      <button type="button" class="segb" data-basis="brutto" aria-pressed="false">Я знаю брутто<small>до вычетов, как в договоре</small></button>
+      <button type="button" class="segb" data-basis="netto" aria-pressed="false">Я знаю нетто<small>сумма на руки, брутто посчитается само</small></button>
+    </div>
+    <div class="fields" id="hourBox">
+      <label class="field"><span class="fl">Часов за месяц<button type="button" class="qh" data-help="hours" aria-label="Подсказка: часы за месяц" aria-expanded="false">?</button></span> <small>например 67:20 или 67,5</small><input type="text" data-k="h.hours" inputmode="decimal" placeholder="67:20"></label>
+      <label class="field"><span class="fl"><span id="rateLbl">Ставка в час брутто</span><button type="button" class="qh" data-help="rate" aria-label="Подсказка: ставка в час" aria-expanded="false">?</button></span> <small id="rateSub">из договора, без надбавок</small><span class="unit"><input type="text" data-k="h.rate" inputmode="decimal" placeholder="например 25"><span>CHF</span></span></label>
+      <label class="field"><span class="fl">Надбавка за отпуск<button type="button" class="qh" data-help="fer" aria-label="Подсказка: надбавка за отпуск" aria-expanded="false">?</button></span> <small>4 недели отпуска 8,33 %, 5 недель 10,64 %</small><select data-k="h.ferSel" id="ferSel"><option value="0">нет, отпуск оплачивается отдельно</option><option value="8.33">8,33 % · 4 недели</option><option value="10.64">10,64 % · 5 недель</option><option value="13.04">13,04 % · 6 недель</option><option value="own">другая</option></select><span class="unit" id="ferOwn"><input type="text" data-k="h.fer" inputmode="decimal" placeholder="например 9,5"><span>%</span></span></label>
+      <label class="field"><span class="fl">Надбавка за праздники<button type="button" class="qh" data-help="fei" aria-label="Подсказка: надбавка за праздники" aria-expanded="false">?</button></span> <small>только если она есть в договоре</small><span class="unit"><input type="text" data-k="h.fei" inputmode="decimal" placeholder="0"><span>%</span></span></label>
+    </div>
+    <div class="fields" id="fixBox">
+      <label class="field"><span class="fl"><span id="salLbl">Оклад при 100 % брутто</span><button type="button" class="qh" data-help="sal" aria-label="Подсказка: оклад" aria-expanded="false">?</button></span> <small>в месяц, из договора</small><span class="unit"><input type="text" data-k="f.sal" inputmode="decimal" placeholder="например 5200"><span>CHF</span></span></label>
+      <label class="field"><span class="fl">Процент занятости<button type="button" class="qh" data-help="pensum" aria-label="Подсказка: процент занятости" aria-expanded="false">?</button></span> <small>Pensum, полная ставка 100 %</small><span class="unit"><input type="text" data-k="f.pensum" inputmode="decimal" placeholder="100"><span>%</span></span></label>
+      <label class="field"><span class="fl">Неоплачиваемые дни<button type="button" class="qh" data-help="unpaid" aria-label="Подсказка: неоплачиваемые дни" aria-expanded="false">?</button></span> <small>начало или конец работы в середине месяца, отпуск за свой счёт</small><span class="unit"><input type="text" data-k="f.unpaid" inputmode="decimal" placeholder="0"><span id="dimTxt">дней</span></span></label>
+      <label class="field"><span class="fl">Сверхурочные часы<button type="button" class="qh" data-help="ot" aria-label="Подсказка: сверхурочные" aria-expanded="false">?</button></span> <small>только оплачиваемые деньгами, например 3:30</small><input type="text" data-k="f.ot" inputmode="decimal" placeholder="0"></label>
+      <label class="field"><span class="fl">Часов в неделю при 100 %<button type="button" class="qh" data-help="week" aria-label="Подсказка: часов в неделю" aria-expanded="false">?</button></span> <small>нужно для цены сверхурочного часа</small><span class="unit"><input type="text" data-k="f.week" inputmode="decimal" placeholder="42"><span>часов</span></span></label>
+      <label class="field"><span class="fl">Надбавка за сверхурочные<button type="button" class="qh" data-help="otPct" aria-label="Подсказка: надбавка за сверхурочные" aria-expanded="false">?</button></span> <small>обычно 25 %</small><span class="unit"><input type="text" data-k="f.otPct" inputmode="decimal" placeholder="25"><span>%</span></span></label>
+      <label class="field"><span class="fl">13-я зарплата<button type="button" class="qh" data-help="m13" aria-label="Подсказка: 13-я зарплата" aria-expanded="false">?</button></span> <small>только если она есть в договоре</small><select data-k="f.m13"><option value="none">нет или не в этом месяце</option><option value="monthly">каждый месяц по 1/12</option><option value="paid">выплачивается в этом месяце</option></select></label>
+      <label class="field" id="m13mBox"><span class="fl">За сколько месяцев<button type="button" class="qh" data-help="m13m" aria-label="Подсказка: за сколько месяцев" aria-expanded="false">?</button></span> <small>12, если работал весь год</small><span class="unit"><input type="text" data-k="f.m13m" inputmode="decimal" placeholder="12"><span>месяцев</span></span></label>
+    </div>
+  </section>
+
+  <section class="panel" aria-labelledby="ex-h">
+    <div class="panel-head"><h2 id="ex-h">Доплаты</h2><p>Если ничего такого нет, оставь пустым.</p></div>
+    <div class="fields">
+      <label class="field"><span class="fl">Другие выплаты со взносами<button type="button" class="qh" data-help="bonus" aria-label="Подсказка: другие выплаты" aria-expanded="false">?</button></span> <small>бонус, надбавка за ночь или выходные</small><input type="text" data-k="x.bonusT" placeholder="Название, например «Бонус»"><span class="unit"><input type="text" data-k="x.bonus" inputmode="decimal" placeholder="0"><span>CHF</span></span></label>
+      <label class="field"><span class="fl">Надбавки за ночь, воскресенье, смены<button type="button" class="qh" data-help="zul" aria-label="Подсказка: надбавки за ночь и воскресенье" aria-expanded="false">?</button></span> <small>со взносами</small><input type="text" data-k="x.zulT" placeholder="Название, например «Ночная надбавка»"><span class="unit"><input type="text" data-k="x.zul" inputmode="decimal" placeholder="0"><span>CHF</span></span></label>
+      <label class="field"><span class="fl">Выплата неиспользованного отпуска<button type="button" class="qh" data-help="ferPay" aria-label="Подсказка: выплата отпуска" aria-expanded="false">?</button></span> <small>обычно при увольнении, со взносами</small><span class="unit"><input type="text" data-k="x.ferPay" inputmode="decimal" placeholder="0"><span>CHF</span></span></label>
+      <div class="field"><span class="fl">Еда и жильё от работодателя<button type="button" class="qh" data-help="nat" aria-label="Подсказка: еда и жильё" aria-expanded="false">?</button></span> <small>Naturallohn, считается как зарплата</small><select data-k="x.nat" aria-label="Еда и жильё от работодателя"><option value="none">нет</option><option value="full">полный пансион и жильё</option><option value="parts">отдельно, выбрать ниже</option></select>
+        <span class="checks" id="natParts"><label><input type="checkbox" data-c="x.natB"> завтрак</label><label><input type="checkbox" data-c="x.natL"> обед</label><label><input type="checkbox" data-c="x.natD"> ужин</label><label><input type="checkbox" data-c="x.natR"> жильё</label></span></div>
+      <label class="field"><span class="fl">Детские пособия<button type="button" class="qh" data-help="kinder" aria-label="Подсказка: детские пособия" aria-expanded="false">?</button></span> <small>Kinderzulagen, если их платят вместе с зарплатой</small><span class="unit"><input type="text" data-k="x.kinder" inputmode="decimal" placeholder="0"><span>CHF</span></span></label>
+      <label class="field"><span class="fl">Выплаты страховки при болезни или несчастном случае<button type="button" class="qh" data-help="tagg" aria-label="Подсказка: выплаты страховки" aria-expanded="false">?</button></span> <small>Taggeld, без взносов AHV</small><span class="unit"><input type="text" data-k="x.tagg" inputmode="decimal" placeholder="0"><span>CHF</span></span></label>
+      <label class="field"><span class="fl">Возмещение расходов<button type="button" class="qh" data-help="spesen" aria-label="Подсказка: возмещение расходов" aria-expanded="false">?</button></span> <small>Spesen, без взносов</small><span class="unit"><input type="text" data-k="x.spesen" inputmode="decimal" placeholder="0"><span>CHF</span></span></label>
+    </div>
+  </section>
+
+  <section class="panel" aria-labelledby="ded-h">
+    <div class="panel-head"><h2 id="ded-h">Взносы и налог<button type="button" class="qh" data-help="rates" aria-label="Подсказка: взносы и налог" aria-expanded="false">?</button></h2><p>Только доля работника. Ставки смотри в договоре или в прошлой расчётке.</p></div>
+    <div class="fields">
+      <label class="field"><span class="fl">AHV/IV/EO<button type="button" class="qh" data-help="rAhv" aria-label="Подсказка: AHV" aria-expanded="false">?</button></span> <small>пенсия, инвалидность, пособие по уходу за ребёнком</small><span class="unit"><input type="text" data-k="r.ahv" inputmode="decimal" placeholder="5.3"><span>%</span></span></label>
+      <label class="field"><span class="fl">ALV<button type="button" class="qh" data-help="rAlv" aria-label="Подсказка: ALV" aria-expanded="false">?</button></span> <small>страхование по безработице</small><span class="unit"><input type="text" data-k="r.alv" inputmode="decimal" placeholder="1.1"><span>%</span></span></label>
+      <label class="field"><span class="fl">NBU<button type="button" class="qh" data-help="rNbu" aria-label="Подсказка: NBU" aria-expanded="false">?</button></span> <small>несчастный случай вне работы</small><span class="unit"><input type="text" data-k="r.nbu" inputmode="decimal" placeholder="0"><span>%</span></span></label>
+      <label class="field"><span class="fl">KTG<button type="button" class="qh" data-help="rKtg" aria-label="Подсказка: KTG" aria-expanded="false">?</button></span> <small>страховка зарплаты при болезни</small><span class="unit"><input type="text" data-k="r.ktg" inputmode="decimal" placeholder="0"><span>%</span></span></label>
+      <label class="field"><span class="fl">BVG, пенсионная касса<button type="button" class="qh" data-help="rBvg" aria-label="Подсказка: BVG" aria-expanded="false">?</button></span> <small>вторая пенсия</small><select data-k="r.bvgMode"><option value="none">нет взноса</option><option value="pct">процент от брутто</option><option value="chf">сумма в CHF</option></select><span class="unit" id="bvgVal"><input type="text" data-k="r.bvg" inputmode="decimal" placeholder="0"><span id="bvgUnit">%</span></span></label>
+      <label class="field" id="kantBox"><span class="fl">Кантональный взнос<button type="button" class="qh" data-help="rKant" aria-label="Подсказка: кантональный взнос" aria-expanded="false">?</button></span> <small id="kantSub">есть только в некоторых кантонах</small><span class="unit"><input type="text" data-k="r.kant" inputmode="decimal" placeholder="0"><span>%</span></span></label>
+      <label class="field"><span class="fl">Налог у источника<button type="button" class="qh" data-help="rQst" aria-label="Подсказка: налог у источника" aria-expanded="false">?</button></span> <small>Quellensteuer, процент из таблицы кантона</small><span class="unit"><input type="text" data-k="r.qst" inputmode="decimal" placeholder="0"><span>%</span></span><input type="text" data-k="r.qstCode" placeholder="Код тарифа, например A0N" aria-label="Код тарифа налога у источника"></label>
+    </div>
+  </section>
+
+  <section class="panel" aria-labelledby="minus-h">
+    <div class="panel-head"><h2 id="minus-h">Удержания из нетто</h2><p>Если ничего такого нет, оставь пустым.</p></div>
+    <div class="fields">
+      <label class="field"><span class="fl">Аванс<button type="button" class="qh" data-help="adv" aria-label="Подсказка: аванс" aria-expanded="false">?</button></span> <small>уже выплачено в этом месяце</small><span class="unit"><input type="text" data-k="d.adv" inputmode="decimal" placeholder="0"><span>CHF</span></span></label>
+      <label class="field"><span class="fl">Другое удержание<button type="button" class="qh" data-help="other" aria-label="Подсказка: другое удержание" aria-expanded="false">?</button></span> <small>например обед или проездной от фирмы</small><input type="text" data-k="d.otherT" placeholder="Название, например «Обеды»"><span class="unit"><input type="text" data-k="d.other" inputmode="decimal" placeholder="0"><span>CHF</span></span></label>
+      <label class="field"><span class="fl">Удержание по решению Betreibungsamt<button type="button" class="qh" data-help="pf" aria-label="Подсказка: удержание по решению Betreibungsamt" aria-expanded="false">?</button></span> <small>Lohnpfändung, сумма из письма ведомства</small><span class="unit"><input type="text" data-k="d.pf" inputmode="decimal" placeholder="0"><span>CHF</span></span></label>
+    </div>
+    <p class="sub">Удерживается частями<button type="button" class="qh" data-help="inst" aria-label="Подсказка: удержание частями" aria-expanded="false">?</button></p>
+    <p class="hint" style="margin:0">Аванс, ссуда или долг работодателю, который возвращается по частям из зарплаты. Остаток считается сам от месяца к месяцу.</p>
+    <div id="instBox" class="stack" style="gap:10px"></div>
+    <button class="btn ghost" id="instAdd" type="button" style="align-self:flex-start">+ Добавить удержание частями</button>
+  </section>
+
+  <section class="stack" id="resBox" aria-labelledby="res-h">
+    <h2 id="res-h">Итог за <span id="resMonth"></span><button type="button" class="qh" data-help="cards" aria-label="Подсказка: что означают цифры" aria-expanded="false">?</button></h2>
+    <div id="alerts" class="stack" style="gap:8px"></div>
+    <div class="res">
+      <div class="cards k4" id="cards"></div>
+      <div class="slip" id="slip"></div>
+    </div>
+  </section>
+
+  <section class="panel" id="pdfBox" aria-labelledby="pdf-h">
+    <div class="panel-head"><h2 id="pdf-h">Расчётка в PDF<button type="button" class="qh" data-help="pdf" aria-label="Подсказка: расчётка в PDF" aria-expanded="false">?</button></h2><p>Бесплатно. Файл сохранится на твоём устройстве.</p></div>
+    <p class="hint">Один лист A4. Работодатель и работник, все строки расчёта, взносы, сумма к выплате и места для подписей. Язык расчётки сам ставится по кантону, его можно поменять. Это образец для примера и личного использования, а не официальный документ.</p>
+    <div class="pdfrow">
+      <label class="field"><span class="fl">Язык расчётки<button type="button" class="qh" data-help="lang" aria-label="Подсказка: язык расчётки" aria-expanded="false">?</button></span><select data-k="lang"><option value="ru">На языке сайта</option><option value="de">Deutsch · на немецком</option><option value="fr">Français · на французском</option><option value="it">Italiano · на итальянском</option></select></label>
+      <label class="field"><span class="fl">Место и дата<button type="button" class="qh" data-help="place" aria-label="Подсказка: место и дата" aria-expanded="false">?</button></span> <small>необязательно</small><input type="text" data-k="place" placeholder="Zürich, 30.09.2026"></label>
+      <button class="btn gold" id="dlPdf" type="button">Скачать расчётку в PDF</button>
+    </div>
+  </section>
+
+  <div class="disc" role="note"><b>Важно</b><span>Это ориентир, а не точный расчёт. Суммы считаются только из того, что ты вписываешь. Ставки взносов, налог у источника и правила зависят от договора, страховок работодателя, кантона и твоей ситуации. Все цифры сверяй с договором, расчётками и выписками, уточняй у работодателя, в кассе AHV (SVA), в налоговой службе или у консультанта. Автор не несёт ответственности за достоверность данных. Это образец для примера и личного использования, а не официальный документ.</span></div>
+
+  <section class="guide" id="guide" aria-labelledby="g-why">
+    <div>
+      <div class="eyebrow">Зачем это тебе</div>
+      <h2 id="g-why">Расчётка без загадок</h2>
+    </div>
+    <p class="intro">Расчётка в Швейцарии полна сокращений. AHV, ALV, NBU, KTG, BVG, Quellensteuer, и в конце сумма, которая заметно меньше той, о которой договаривались. Здесь видно каждую строку. Сколько ты заработала или заработал до вычетов, что и сколько ушло на страховки и налог и почему на счёт пришло именно столько. А если ты сама платишь зарплату, например няне или помощнице по дому, ты сразу видишь, что указать в расчётке, и можешь её распечатать.</p>
+
+    <div>
+      <div class="eyebrow">Как с этим работать</div>
+      <h2 id="g-how">Четыре шага к понятной зарплате</h2>
+    </div>
+    <ol class="steps" aria-labelledby="g-how">
+      <li><span class="n">1</span><h3>Выбери месяц и вид оплаты</h3><p>Почасовая оплата или фиксированный оклад. Если в договоре оклад, а часы просто записываются, выбирай оклад.</p></li>
+      <li><span class="n">2</span><h3>Впиши цифры из договора</h3><p>Ставку или оклад, надбавки, часы за месяц. Ставки взносов возьми из договора или прошлой расчётки.</p></li>
+      <li><span class="n">3</span><h3>Сверь с расчёткой</h3><p>Если сумма не сходится, сравни строку за строкой. Чаще всего отличаются ставки NBU, KTG, BVG или налога у источника.</p></li>
+      <li><span class="n">4</span><h3>Скачай PDF</h3><p>Расчётка на русском, чтобы понять самой или самому, или на немецком, чтобы отдать работнику или приложить к документам.</p></li>
+    </ol>
+
+    <div>
+      <div class="eyebrow">Если ты работаешь по найму в Швейцарии</div>
+      <h2 id="g-ch">Что стоит знать</h2>
+    </div>
+    <ul class="facts" aria-labelledby="g-ch">
+      <li>Брутто — зарплата до вычетов. Нетто — то, что остаётся после взносов и налога. Работодатель обязан каждый месяц давать письменную расчётку.</li>
+      <li>Взносы AHV/IV/EO и ALV делятся пополам. Ту же сумму, что снимают с тебя, работодатель платит сверху из своего кармана.</li>
+      <li>Страхование от несчастного случая вне работы (NBU) обязательно, если ты работаешь у одного работодателя 8 часов в неделю или больше. Ставку определяет страховая работодателя.</li>
+      <li>В пенсионную кассу (BVG) платят, если годовая зарплата у одного работодателя выше порога закона. Ниже порога взнос обычно не обязателен. Точную сумму показывает справка пенсионной кассы.</li>
+      <li>Налог у источника (Quellensteuer) удерживают у тех, у кого нет разрешения C и швейцарского гражданства, например с разрешением B, L, S или F. Процент зависит от кантона, семейного положения и детей и стоит в таблице кантона.</li>
+      <li>При почасовой оплате отпуск часто платят надбавкой к каждому часу. За 4 недели отпуска это 8,33 %, за 5 недель 10,64 %. Надбавка должна стоять в договоре и отдельной строкой в каждой расчётке.</li>
+      <li>13-я зарплата положена, только если она записана в договоре. Сверхурочные оплачиваются с надбавкой 25 %, если в договоре не договорились иначе.</li>
+      <li>Если ты платишь зарплату у себя дома, например няне, уборщице или помощнице по уходу, ты работодатель. Работника нужно зарегистрировать в кассе AHV и застраховать от несчастного случая. Многие кассы предлагают для этого упрощённую процедуру.</li>
+      <li>Храни расчётки. Они нужны для налоговой декларации, RAV, продления разрешения, аренды квартиры и кредита.</li>
+    </ul>
+
+    <div>
+      <div class="eyebrow">Что это даёт в коучинге</div>
+      <h2 id="g-coach">Что меняется для тебя</h2>
+    </div>
+    <ul class="effects" aria-labelledby="g-coach">
+      <li><h3>Спокойствие вместо догадок</h3><p>Когда понятна каждая строка, уходит тревога «меня обсчитали» и чувство, что деньги исчезают сами.</p></li>
+      <li><h3>Разговор о деньгах на равных</h3><p>С расчётом на руках проще задать вопрос работодателю, обсудить ставку или договориться о новых условиях.</p></li>
+      <li><h3>Видна цена твоего труда</h3><p>Брутто, нетто и то, что платит работодатель, показывают, сколько на самом деле стоит твой час.</p></li>
+      <li><h3>Порядок, который даёт силы</h3><p>Деньги, которые ты понимаешь, легче планировать. Это хорошая опора для бюджета, отпуска и больших решений, и хороший материал для нашей встречи.</p></li>
+    </ul>
+
+    <div class="cta">
+      <p>Хочешь чувствовать себя в Швейцарии увереннее, в работе и в деньгах? Знакомство длится 30 минут, онлайн и бесплатно.</p>
+      <a class="btn free" href="https://t.me/IrynaNeuroCoach" target="_blank" rel="noopener">Написать «ВСТРЕЧА» в Telegram</a>
+    </div>
+  </section>
+
+  <div class="disc" role="note"><b>Важно</b><span>Цифры на этой странице ориентировочные. Уточняй и перепроверяй их. Автор не несёт ответственности за достоверность данных. Все часы, ставки и суммы обязательно проверь и впиши сама или сам по своим документам. Это образец для примера и личного использования, а не официальный документ.</span></div>
+  <p class="credit"><span>Ирина Вознесенская · коуч</span><a href="https://www.instagram.com/iryna.voznesenskaya/" target="_blank" rel="noopener">Instagram @iryna.voznesenskaya</a><a href="https://voznesenskaya.ch/" target="_blank" rel="noopener">voznesenskaya.ch</a><a href="https://svoiludi.ch/" target="_blank" rel="noopener">Свои люди в Швейцарии · svoiludi.ch</a><a href="https://svoiludi.ch/privacy/">Политика конфиденциальности</a></p>
+</div>
+
+<script src="/assets/lib/jspdf.umd.min.js"></script>
+<script>
+const $ = id => document.getElementById(id);
+const KEY = 'zarplata.v1';
+const SHARE_URL = 'https://svoiludi.ch/instrumenty/zarplata/';
+const SHARE_MSG = 'Привет! Смотри, какой понятный расчёт зарплаты за месяц. Почасово или с окладом, со взносами AHV, ALV, NBU, BVG и налогом у источника. Сразу видно брутто, нетто и сколько придёт на счёт, а расчётку можно скачать в PDF на русском или немецком. Пригодится и чтобы проверить свою зарплату, и чтобы посчитать её няне или помощнице по дому. Хочешь попробовать?\n' + SHARE_URL;
+const CREDIT = {
+  ru: [{t:'Ирина Вознесенская · коуч', u:'https://voznesenskaya.ch/'}, {t:'Instagram @iryna.voznesenskaya', u:'https://www.instagram.com/iryna.voznesenskaya/'}, {t:'voznesenskaya.ch', u:'https://voznesenskaya.ch/'}, {t:'svoiludi.ch', u:'https://svoiludi.ch/'}],
+  fr: [{t:'Iryna Voznesenskaya · Coach', u:'https://voznesenskaya.ch/'}, {t:'Instagram @iryna.voznesenskaya', u:'https://www.instagram.com/iryna.voznesenskaya/'}, {t:'voznesenskaya.ch', u:'https://voznesenskaya.ch/'}, {t:'svoiludi.ch', u:'https://svoiludi.ch/'}],
+  it: [{t:'Iryna Voznesenskaya · Coach', u:'https://voznesenskaya.ch/'}, {t:'Instagram @iryna.voznesenskaya', u:'https://www.instagram.com/iryna.voznesenskaya/'}, {t:'voznesenskaya.ch', u:'https://voznesenskaya.ch/'}, {t:'svoiludi.ch', u:'https://svoiludi.ch/'}],
+  de: [{t:'Iryna Voznesenskaya · Coach', u:'https://voznesenskaya.ch/'}, {t:'Instagram @iryna.voznesenskaya', u:'https://www.instagram.com/iryna.voznesenskaya/'}, {t:'voznesenskaya.ch', u:'https://voznesenskaya.ch/'}, {t:'svoiludi.ch', u:'https://svoiludi.ch/'}]
+};
+const MONTHS = ['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'];
+const MONTHS_IN = ['январь','февраль','март','апрель','май','июнь','июль','август','сентябрь','октябрь','ноябрь','декабрь'];
+const MONTHS_DE = ['Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'];
+const MONTHS_FR = ['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'];
+const MONTHS_IT = ['gennaio','febbraio','marzo','aprile','maggio','giugno','luglio','agosto','settembre','ottobre','novembre','dicembre'];
+const MON_L = {ru: MONTHS, de: MONTHS_DE, fr: MONTHS_FR, it: MONTHS_IT};
+const LOC = {ru: 'ru-RU', de: 'de-CH', fr: 'fr-CH', it: 'it-CH'};
+
+/* ---------- кантоны: язык расчётки, кантональный взнос работника, минимальная зарплата (проверено 07.10.2026, источники в подсказках) ---------- */
+const CANTONS = [
+  ['AG','Ааргау','Aargau','Argovie','Argovia','de'], ['AI','Аппенцелль-Иннерроден','Appenzell Innerrhoden','Appenzell Rhodes-Intérieures','Appenzello Interno','de'],
+  ['AR','Аппенцелль-Ауссерроден','Appenzell Ausserrhoden','Appenzell Rhodes-Extérieures','Appenzello Esterno','de'], ['BE','Берн','Bern','Berne','Berna','de'],
+  ['BL','Базель-Ланд','Basel-Landschaft','Bâle-Campagne','Basilea Campagna','de'], ['BS','Базель-Штадт','Basel-Stadt','Bâle-Ville','Basilea Città','de'],
+  ['FR','Фрибур','Freiburg','Fribourg','Friburgo','fr'], ['GE','Женева','Genf','Genève','Ginevra','fr'], ['GL','Гларус','Glarus','Glaris','Glarona','de'],
+  ['GR','Граубюнден','Graubünden','Grisons','Grigioni','de'], ['JU','Юра','Jura','Jura','Giura','fr'], ['LU','Люцерн','Luzern','Lucerne','Lucerna','de'],
+  ['NE','Невшатель','Neuenburg','Neuchâtel','Neuchâtel','fr'], ['NW','Нидвальден','Nidwalden','Nidwald','Nidvaldo','de'], ['OW','Обвальден','Obwalden','Obwald','Obvaldo','de'],
+  ['SG','Санкт-Галлен','St. Gallen','Saint-Gall','San Gallo','de'], ['SH','Шаффхаузен','Schaffhausen','Schaffhouse','Sciaffusa','de'], ['SO','Золотурн','Solothurn','Soleure','Soletta','de'],
+  ['SZ','Швиц','Schwyz','Schwytz','Svitto','de'], ['TG','Тургау','Thurgau','Thurgovie','Turgovia','de'], ['TI','Тичино','Tessin','Tessin','Ticino','it'],
+  ['UR','Ури','Uri','Uri','Uri','de'], ['VD','Во','Waadt','Vaud','Vaud','fr'], ['VS','Вале','Wallis','Valais','Vallese','fr'], ['ZG','Цуг','Zug','Zoug','Zugo','de'], ['ZH','Цюрих','Zürich','Zurich','Zurigo','de']];
+const KT = Object.fromEntries(CANTONS.map(x => [x[0], {ru: x[1], de: x[2], fr: x[3], it: x[4], lang: x[5]}]));
+/* взнос работника сверх федеральных: VS — семейные пособия 0,13 %; GE — страхование материнства 0,029 %; VD — PC Familles / rente-pont 0,09 % (2026) */
+const KANT = {VS: {p: '0.13', ru: 'семейные пособия (FAK)', de: 'Familienzulagen (FAK)', fr: 'allocations familiales', it: 'assegni familiari'},
+  GE: {p: '0.029', ru: 'страхование материнства', de: 'Mutterschaftsversicherung', fr: 'assurance maternité', it: 'assicurazione maternità'},
+  VD: {p: '0.09', ru: 'PC Familles и rente-pont', de: 'PC Familles und rente-pont', fr: 'PC Familles et rente-pont', it: 'PC Familles e rente-pont'}};
+/* кантональная минимальная зарплата брутто, CHF в час, 2026 */
+const MINW = {GE: [24.59, 'Женева'], BS: [22.20, 'Базель-Штадт'], JU: [21.40, 'Юра'], NE: [21.35, 'Невшатель'], TI: [20.00, 'Тичино']};
+/* еда и жильё (Naturallohn) по нормам AHV 2026, CHF в месяц */
+const NAT = {B: 105, L: 300, D: 240, R: 345, full: 990};
+
+/* ---------- данные ---------- */
+const pad = n => String(n).padStart(2, '0');
+const uid = () => Math.random().toString(36).slice(2, 9);
+function blank(){
+  const d = new Date();
+  return {id: uid(), title: '', mm: String(d.getMonth() + 1), yy: String(d.getFullYear()), place: '', lang: 'ru', canton: 'ZH', basis: 'brutto',
+    er: {name: '', a1: '', a2: ''}, ee: {name: '', a1: '', a2: '', ahv: '', birth: '', permit: '', iban: ''},
+    mode: 'hour', h: {hours: '', rate: '', ferSel: '8.33', fer: '', fei: ''},
+    f: {sal: '', pensum: '100', unpaid: '', ot: '', week: '42', otPct: '25', m13: 'none', m13m: '12'},
+    x: {bonusT: '', bonus: '', zulT: '', zul: '', ferPay: '', nat: 'none', natB: '', natL: '', natD: '', natR: '', tagg: '', kinder: '', spesen: ''},
+    r: {ahv: '5.3', alv: '1.1', nbu: '', ktg: '', bvgMode: 'none', bvg: '', kant: '', qst: '', qstCode: ''},
+    d: {adv: '', otherT: '', other: '', pf: ''}, inst: []};
+}
+function merge(base, o){ for (const k in o){ if (o[k] && typeof o[k] === 'object' && !Array.isArray(o[k]) && base[k] && typeof base[k] === 'object') merge(base[k], o[k]); else if (k in base) base[k] = Array.isArray(base[k]) ? (Array.isArray(o[k]) ? o[k] : base[k]) : o[k]; } return base; }
+function freshS(){ const c = blank(); return {v: 1, cur: c.id, calcs: [c]}; }
+let S;
+try { S = JSON.parse(localStorage.getItem(KEY) || 'null'); } catch(e) { S = null; }
+if (!S || !Array.isArray(S.calcs) || !S.calcs.length) S = freshS();
+S.calcs = S.calcs.map(c => merge(blank(), c));
+if (!S.calcs.some(c => c.id === S.cur)) S.cur = S.calcs[0].id;
+function save(){ try { localStorage.setItem(KEY, JSON.stringify(S)); } catch(e) {} }
+const cur = () => S.calcs.find(c => c.id === S.cur);
+const getP = (o, p) => p.split('.').reduce((a, k) => a == null ? a : a[k], o);
+const setP = (o, p, v) => { const ks = p.split('.'), last = ks.pop(); ks.reduce((a, k) => a[k], o)[last] = v; };
+
+/* ---------- числа ---------- */
+const num = v => { const n = parseFloat(String(v == null ? '' : v).replace(/[’'\s]/g, '').replace(',', '.')); return isNaN(n) ? 0 : n; };
+const r2 = v => Math.round((v + Number.EPSILON) * 100) / 100;
+const chf = v => (Math.round(v * 100) / 100).toLocaleString('de-CH', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+function hrs(v){ const s = String(v || '').trim(), t = s.match(/^(\d+)\s*:\s*(\d{1,2})$/); if (t) return +t[1] + Math.min(59, +t[2]) / 60; return num(s); }
+const hm = h => { const t = Math.round(h * 60); return Math.floor(t / 60) + ':' + pad(t % 60); };
+const pctTxt = (v, lang) => (Math.round(v * 1000) / 1000).toLocaleString(LOC[lang] || 'ru-RU', {maximumFractionDigits: 3}) + ' %';
+const dec = (v, lang) => String(v).replace('.', lang === 'de' ? '.' : ',');
+const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[ch]));
+const ferPct = c => c.h.ferSel === 'own' ? num(c.h.fer) : num(c.h.ferSel);
+
+/* ---------- подписи строк: на языке сайта, на немецком, французском и итальянском ---------- */
+const LBL = {
+  ru: {title: 'Расчёт зарплаты', base: 'Оплата по часам', fer: 'Надбавка за отпуск', fei: 'Надбавка за праздники', sal: 'Оклад', unp: 'Неоплачиваемые дни', ot: 'Сверхурочные', otz: 'с надбавкой', m13: '13-я зарплата', m13a: '1/12 каждый месяц', m13b: 'выплата за', bonus: 'Другие выплаты', zul: 'Надбавки за ночь, воскресенье, смены', ferPay: 'Выплата неиспользованного отпуска', nat: 'Еда и жильё от работодателя', natAfter: 'Еда и жильё, получено натурой', brutto: 'Брутто', ahv: 'AHV/IV/EO', alv: 'ALV', nbu: 'NBU, несчастный случай вне работы', ktg: 'KTG, страховка при болезни', bvg: 'BVG, пенсионная касса', kant: 'Кантональный взнос', qst: 'Налог у источника', qstCode: 'код тарифа', ded: 'Всего взносов и налога', netto: 'Нетто', kinder: 'Детские пособия', tagg: 'Выплаты страховки (Taggeld)', spesen: 'Возмещение расходов', adv: 'Аванс', other: 'Другое удержание', pf: 'Удержание по решению Betreibungsamt', inst: 'Удержание частями', rest: 'остаток', ofTot: 'из', pay: 'К выплате',
+    h: 'ч', days: 'дн.', of: 'из', perDay: 'в день', from: 'от', months: 'мес.', perH: 'в час', perM: 'в месяц',
+    er: 'Работодатель', ee: 'Работник', ahvnr: 'Номер AHV', birth: 'Дата рождения', permit: 'Разрешение', permitCH: 'гражданство Швейцарии', iban: 'Выплата на счёт', modeH: 'Почасовая оплата', modeF: 'Фиксированный оклад', pensum: 'занятость', rate: 'ставка', canton: 'кантон', netAgreed: 'договорённость о нетто',
+    colItem: 'Позиция', colQty: 'Количество', colBase: 'Ставка или база', colAmt: 'CHF', secPay: 'Зарплата', secDed: 'Взносы и налог', colPct: 'Процент', colDed: 'Взнос или налог', secAfter: 'После нетто', place: 'Место и дата', signEr: 'Подпись работодателя', signEe: 'Получено, подпись работника',
+    disc: 'Ориентир, а не точный расчёт. Всё уточняй и перепроверяй. Автор не несёт ответственности за достоверность данных.', disc2: 'Образец для примера и личного использования, а не официальный документ.', page: 'Страница', basis: 'с суммы', colB2: 'С суммы', kBr: 'Брутто', kDed: 'Взносы и налог', kNet: 'Нетто', kPay: 'К выплате'},
+  de: {title: 'Lohnabrechnung', base: 'Stundenlohn', fer: 'Ferienentschädigung', fei: 'Feiertagsentschädigung', sal: 'Monatslohn', unp: 'Lohnabzug unbezahlte Tage', ot: 'Überstunden', otz: 'inkl. Zuschlag', m13: '13. Monatslohn', m13a: 'monatlich 1/12', m13b: 'Auszahlung für', bonus: 'Weitere Zulagen', zul: 'Nacht-, Sonntags- und Schichtzulagen', ferPay: 'Auszahlung Ferienguthaben', nat: 'Naturallohn (Kost und Logis)', natAfter: 'Naturallohn, bereits bezogen', brutto: 'Bruttolohn', ahv: 'AHV/IV/EO', alv: 'ALV', nbu: 'NBU, Nichtberufsunfall', ktg: 'KTG, Krankentaggeld', bvg: 'BVG, Pensionskasse', kant: 'Kantonaler Beitrag', qst: 'Quellensteuer', qstCode: 'Tarif', ded: 'Total Abzüge', netto: 'Nettolohn', kinder: 'Kinder- und Ausbildungszulagen', tagg: 'Taggeld Versicherung', spesen: 'Spesen', adv: 'Vorschuss', other: 'Weiterer Abzug', pf: 'Lohnpfändung (Betreibungsamt)', inst: 'Rückzahlung in Raten', rest: 'Restbetrag', ofTot: 'von', pay: 'Auszahlung',
+    h: 'Std.', days: 'Tage', of: 'von', perDay: 'pro Tag', from: 'von', months: 'Monate', perH: 'pro Std.', perM: 'pro Monat',
+    er: 'Arbeitgeber', ee: 'Arbeitnehmer/in', ahvnr: 'AHV-Nr.', birth: 'Geburtsdatum', permit: 'Bewilligung', permitCH: 'Schweizer Bürger/in', iban: 'Auszahlung auf Konto', modeH: 'Stundenlohn', modeF: 'Monatslohn', pensum: 'Pensum', rate: 'Ansatz', canton: 'Kanton', netAgreed: 'Nettolohnvereinbarung',
+    colItem: 'Lohnart', colQty: 'Menge', colBase: 'Ansatz oder Basis', colAmt: 'CHF', secPay: 'Lohn', secDed: 'Abzüge Sozialversicherungen und Steuern', colPct: 'Satz', colDed: 'Abzug', secAfter: 'Zulagen und Abzüge nach Netto', place: 'Ort und Datum', signEr: 'Unterschrift Arbeitgeber', signEe: 'Erhalten, Unterschrift Arbeitnehmer/in',
+    disc: 'Orientierungshilfe, keine verbindliche Berechnung. Angaben ohne Gewähr, bitte selbst prüfen. Keine Haftung für die Richtigkeit der Daten.', disc2: 'Muster zur Orientierung und für den persönlichen Gebrauch, kein amtliches Dokument.', page: 'Seite', basis: 'von', colB2: 'Basis', kBr: 'Bruttolohn', kDed: 'Abzüge', kNet: 'Nettolohn', kPay: 'Auszahlung'},
+  fr: {title: 'Décompte de salaire', base: 'Salaire horaire', fer: 'Indemnité de vacances', fei: 'Indemnité jours fériés', sal: 'Salaire mensuel', unp: 'Jours non payés', ot: 'Heures supplémentaires', otz: 'majoration incluse', m13: '13e salaire', m13a: '1/12 chaque mois', m13b: 'versement pour', bonus: 'Autres indemnités', zul: 'Indemnités de nuit, dimanche et équipe', ferPay: 'Paiement du solde de vacances', nat: 'Salaire en nature (nourriture et logement)', natAfter: 'Salaire en nature, déjà perçu', brutto: 'Salaire brut', ahv: 'AVS/AI/APG', alv: 'AC', nbu: 'AANP, accidents non professionnels', ktg: 'IJM, indemnités journalières maladie', bvg: 'LPP, caisse de pension', kant: 'Cotisation cantonale', qst: 'Impôt à la source', qstCode: 'barème', ded: 'Total des déductions', netto: 'Salaire net', kinder: 'Allocations familiales', tagg: 'Indemnités journalières d’assurance', spesen: 'Frais', adv: 'Avance', other: 'Autre déduction', pf: 'Saisie de salaire (office des poursuites)', inst: 'Remboursement par acomptes', rest: 'solde', ofTot: 'sur', pay: 'Montant versé',
+    h: 'h', days: 'jours', of: 'sur', perDay: 'par jour', from: 'de', months: 'mois', perH: 'par heure', perM: 'par mois',
+    er: 'Employeur', ee: 'Employé·e', ahvnr: 'N° AVS', birth: 'Date de naissance', permit: 'Permis', permitCH: 'nationalité suisse', iban: 'Versement sur le compte', modeH: 'Salaire horaire', modeF: 'Salaire mensuel', pensum: 'taux d’activité', rate: 'taux', canton: 'canton', netAgreed: 'salaire net convenu',
+    colItem: 'Élément de salaire', colQty: 'Quantité', colBase: 'Taux ou base', colAmt: 'CHF', secPay: 'Salaire', secDed: 'Déductions sociales et impôts', colPct: 'Taux', colDed: 'Déduction', secAfter: 'Allocations et déductions après le net', place: 'Lieu et date', signEr: 'Signature de l’employeur', signEe: 'Reçu, signature de l’employé·e',
+    disc: 'Calcul indicatif, sans valeur contractuelle. Données sans garantie, à vérifier soi-même. Aucune responsabilité quant à l’exactitude des données.', disc2: 'Modèle indicatif pour usage personnel, pas un document officiel.', page: 'Page', basis: 'sur', colB2: 'Base', kBr: 'Salaire brut', kDed: 'Déductions', kNet: 'Salaire net', kPay: 'Montant versé'},
+  it: {title: 'Conteggio salario', base: 'Salario orario', fer: 'Indennità per vacanze', fei: 'Indennità per giorni festivi', sal: 'Salario mensile', unp: 'Giorni non pagati', ot: 'Ore straordinarie', otz: 'incl. supplemento', m13: '13a mensilità', m13a: '1/12 ogni mese', m13b: 'pagamento per', bonus: 'Altre indennità', zul: 'Indennità notturne, domenicali e a turni', ferPay: 'Pagamento saldo vacanze', nat: 'Salario in natura (vitto e alloggio)', natAfter: 'Salario in natura, già percepito', brutto: 'Salario lordo', ahv: 'AVS/AI/IPG', alv: 'AD', nbu: 'AINP, infortuni non professionali', ktg: 'IGM, indennità giornaliera malattia', bvg: 'LPP, cassa pensione', kant: 'Contributo cantonale', qst: 'Imposta alla fonte', qstCode: 'tariffa', ded: 'Totale deduzioni', netto: 'Salario netto', kinder: 'Assegni familiari', tagg: 'Indennità giornaliere assicurazione', spesen: 'Spese', adv: 'Anticipo', other: 'Altra deduzione', pf: 'Pignoramento del salario (ufficio esecuzioni)', inst: 'Rimborso a rate', rest: 'saldo', ofTot: 'di', pay: 'Importo versato',
+    h: 'ore', days: 'giorni', of: 'su', perDay: 'al giorno', from: 'su', months: 'mesi', perH: 'all’ora', perM: 'al mese',
+    er: 'Datore di lavoro', ee: 'Lavoratore/lavoratrice', ahvnr: 'N. AVS', birth: 'Data di nascita', permit: 'Permesso', permitCH: 'cittadinanza svizzera', iban: 'Versamento sul conto', modeH: 'Salario orario', modeF: 'Salario mensile', pensum: 'grado di occupazione', rate: 'tariffa', canton: 'cantone', netAgreed: 'salario netto concordato',
+    colItem: 'Voce salariale', colQty: 'Quantità', colBase: 'Tariffa o base', colAmt: 'CHF', secPay: 'Salario', secDed: 'Deduzioni sociali e imposte', colPct: 'Aliquota', colDed: 'Deduzione', secAfter: 'Assegni e deduzioni dopo il netto', place: 'Luogo e data', signEr: 'Firma del datore di lavoro', signEe: 'Ricevuto, firma del lavoratore/della lavoratrice',
+    disc: 'Calcolo indicativo, non vincolante. Dati senza garanzia, da verificare personalmente. Nessuna responsabilità per l’esattezza dei dati.', disc2: 'Modello indicativo per uso personale, non un documento ufficiale.', page: 'Pagina', basis: 'su', colB2: 'Base', kBr: 'Salario lordo', kDed: 'Deduzioni', kNet: 'Salario netto', kPay: 'Importo versato'}
+};
+
+/* ---------- расчёт ---------- */
+const ymIdx = (y, m) => +y * 12 + (+m - 1);
+/* удержание частями: сколько в этом месяце и какой остаток (по плану: с месяца начала по сумме в месяц) */
+function instPart(it, c){
+  const tot = num(it.total), per = num(it.per), k = ymIdx(c.yy, c.mm) - ymIdx(it.sy || c.yy, it.sm || c.mm);
+  if (!tot || !per || k < 0) return {a: 0, rest: tot, n: 0, all: tot && per ? Math.ceil(tot / per) : 0};
+  const before = Math.min(tot, per * k), a = r2(Math.min(per, tot - before));
+  return {a, rest: r2(tot - before - a), n: a ? k + 1 : 0, all: Math.ceil(tot / per)};
+}
+function natSum(c){ if (c.x.nat === 'full') return NAT.full; if (c.x.nat === 'parts') return ['B', 'L', 'D', 'R'].reduce((s, k) => s + (c.x['nat' + k] ? NAT[k] : 0), 0); return 0; }
+function calcRaw(c, lang, k){   // k — множитель ставки или оклада (при «я знаю нетто» подбирается)
+  const L = LBL[lang] || LBL.ru, Y = +c.yy, M = +c.mm, dim = new Date(Y, M, 0).getDate();
+  const lines = [], ded = [], after = [];
+  if (c.mode === 'hour'){
+    const h = hrs(c.h.hours), rate = num(c.h.rate) * k, base = r2(h * rate);
+    lines.push({k: 'base', t: L.base, q: h ? hm(h) + ' ' + L.h : '', b: rate ? chf(rate) + ' CHF ' + L.perH : '', a: base});
+    const fer = ferPct(c); if (fer) lines.push({k: 'fer', t: L.fer, q: pctTxt(fer, lang), b: L.from + ' ' + chf(base), a: r2(base * fer / 100)});
+    const fei = num(c.h.fei); if (fei) lines.push({k: 'fei', t: L.fei, q: pctTxt(fei, lang), b: L.from + ' ' + chf(base), a: r2(base * fei / 100)});
+  } else {
+    const sal = num(c.f.sal) * k, pen = c.f.pensum === '' ? 100 : num(c.f.pensum), mon = r2(sal * pen / 100);
+    lines.push({k: 'sal', t: L.sal, q: pctTxt(pen, lang), b: L.from + ' ' + chf(sal) + ' (100 %)', a: mon});
+    const ud = Math.min(dim, num(c.f.unpaid)), day = mon / dim;
+    if (ud) lines.push({k: 'unp', t: L.unp, q: dec(ud, lang) + ' ' + L.of + ' ' + dim + ' ' + L.days, b: chf(day) + ' CHF ' + L.perDay, a: -r2(day * ud)});
+    const ot = hrs(c.f.ot), wk = num(c.f.week), otp = c.f.otPct === '' ? 25 : num(c.f.otPct);
+    if (ot && wk && sal){ const oh = sal / (wk * 52 / 12) * (1 + otp / 100); lines.push({k: 'ot', t: L.ot + ' (' + L.otz + ' ' + pctTxt(otp, lang) + ')', q: hm(ot) + ' ' + L.h, b: chf(oh) + ' CHF ' + L.perH, a: r2(ot * oh)}); }
+    if (c.f.m13 === 'monthly'){ const b = mon + (lines.find(x => x.k === 'unp') || {a: 0}).a; lines.push({k: 'm13', t: L.m13, q: L.m13a, b: L.from + ' ' + chf(b), a: r2(b / 12)}); }
+    if (c.f.m13 === 'paid'){ const m = Math.min(12, c.f.m13m === '' ? 12 : num(c.f.m13m)); lines.push({k: 'm13', t: L.m13, q: L.m13b + ' ' + dec(m, lang) + ' ' + L.months, b: chf(mon) + ' × ' + dec(m, lang) + '/12', a: r2(mon * m / 12)}); }
+  }
+  const bonus = num(c.x.bonus); if (bonus) lines.push({k: 'bonus', t: c.x.bonusT.trim() || L.bonus, q: '', b: '', a: r2(bonus)});
+  const zul = num(c.x.zul); if (zul) lines.push({k: 'zul', t: c.x.zulT.trim() || L.zul, q: '', b: '', a: r2(zul)});
+  const fp = num(c.x.ferPay); if (fp) lines.push({k: 'ferPay', t: L.ferPay, q: '', b: '', a: r2(fp)});
+  const nat = natSum(c); if (nat) lines.push({k: 'nat', t: L.nat, q: '', b: chf(nat) + ' CHF ' + L.perM, a: nat});
+  const brutto = r2(lines.reduce((s, x) => s + x.a, 0));
+  const kinder = r2(num(c.x.kinder)), tagg = r2(num(c.x.tagg));
+  [['ahv', c.r.ahv], ['alv', c.r.alv], ['nbu', c.r.nbu], ['ktg', c.r.ktg]].forEach(([kk, v]) => { const p = num(v); if (p) ded.push({k: kk, t: L[kk], q: pctTxt(p, lang), b: chf(brutto), a: r2(brutto * p / 100)}); });
+  if (c.r.bvgMode === 'pct' && num(c.r.bvg)) ded.push({k: 'bvg', t: L.bvg, q: pctTxt(num(c.r.bvg), lang), b: chf(brutto), a: r2(brutto * num(c.r.bvg) / 100)});
+  if (c.r.bvgMode === 'chf' && num(c.r.bvg)) ded.push({k: 'bvg', t: L.bvg, q: '', b: '', a: r2(num(c.r.bvg))});
+  const kp = num(c.r.kant); if (kp){ const kn = KANT[c.canton]; ded.push({k: 'kant', t: L.kant + (kn ? ', ' + kn[lang] : '') + ' (' + c.canton + ')', q: pctTxt(kp, lang), b: chf(brutto), a: r2(brutto * kp / 100)}); }
+  const qst = num(c.r.qst); if (qst){ const qb = brutto + kinder + tagg; ded.push({k: 'qst', t: L.qst + (c.r.qstCode.trim() ? ', ' + L.qstCode + ' ' + c.r.qstCode.trim().toUpperCase() : ''), q: pctTxt(qst, lang), b: chf(qb), a: r2(qb * qst / 100)}); }
+  const dsum = r2(ded.reduce((s, x) => s + x.a, 0)), netto = r2(brutto - dsum);
+  if (kinder) after.push({k: 'kinder', t: L.kinder, a: kinder});
+  if (tagg) after.push({k: 'tagg', t: L.tagg, a: tagg});
+  const sp = r2(num(c.x.spesen)); if (sp) after.push({k: 'spesen', t: L.spesen, a: sp});
+  if (nat) after.push({k: 'natAfter', t: L.natAfter, a: -nat});
+  const adv = r2(num(c.d.adv)); if (adv) after.push({k: 'adv', t: L.adv, a: -adv});
+  (c.inst || []).forEach(it => { const p = instPart(it, c); if (p.a) after.push({k: 'inst', t: (it.t.trim() || L.inst) + ' · ' + p.n + '/' + p.all + ', ' + L.rest + ' ' + chf(p.rest), a: -p.a}); });
+  const pf = r2(num(c.d.pf)); if (pf) after.push({k: 'pf', t: L.pf, a: -pf});
+  const oth = r2(num(c.d.other)); if (oth) after.push({k: 'other', t: c.d.otherT.trim() || L.other, a: -oth});
+  const pay = r2(netto + after.reduce((s, x) => s + x.a, 0));
+  return {lines, ded, after, brutto, dsum, netto, pay, dim, kinder, k, has: brutto !== 0 || after.length > 0};
+}
+/* «Я знаю нетто»: вписанная ставка или оклад — это нетто. Подбираем брутто так, чтобы после взносов и налога вышло столько же */
+function calc(c, lang = 'ru'){
+  if (c.basis !== 'netto') return calcRaw(c, lang, 1);
+  const target = calcRaw(Object.assign({}, c, {r: {ahv: '', alv: '', nbu: '', ktg: '', bvgMode: 'none', bvg: '', kant: '', qst: '', qstCode: ''}}), lang, 1).netto;
+  if (!target) return Object.assign(calcRaw(c, lang, 1), {target});
+  let lo = 1, hi = 3;
+  for (let i = 0; i < 60; i++){ const mid = (lo + hi) / 2; if (calcRaw(c, lang, mid).netto < target) lo = mid; else hi = mid; }
+  return Object.assign(calcRaw(c, lang, hi), {target});
+}
+
+/* ---------- экран ---------- */
+const MODE_LBL = {hour: 'почасово', fix: 'оклад'};
+function calcName(c, i){ const t = c.title.trim() || c.ee.name.trim() || ('Расчёт ' + (i + 1)); return t + ' · ' + MONTHS_IN[+c.mm - 1] + ' ' + c.yy; }
+function renderSel(){
+  $('calcSel').innerHTML = S.calcs.map((c, i) => `<option value="${c.id}"${c.id === S.cur ? ' selected' : ''}>${esc(calcName(c, i))}</option>`).join('');
+  $('delCalc').hidden = S.calcs.length < 2;
+}
+function fillYears(){ const y0 = new Date().getFullYear(), c = cur(), ys = new Set([y0 - 2, y0 - 1, y0, y0 + 1, +c.yy]); $('fYear').innerHTML = [...ys].sort().map(y => `<option value="${y}">${y}</option>`).join(''); }
+$('fMonth').innerHTML = MONTHS.map((m, i) => `<option value="${i + 1}">${m}</option>`).join('');
+$('fCanton').innerHTML = CANTONS.slice().sort((a, b) => a[1].localeCompare(b[1], 'ru')).map(x => `<option value="${x[0]}">${x[1]} (${x[0]})</option>`).join('');
+function fill(){
+  const c = cur(); fillYears();
+  document.querySelectorAll('[data-k]').forEach(el => { const v = getP(c, el.dataset.k); el.value = v == null ? '' : v; });
+  document.querySelectorAll('[data-c]').forEach(el => { el.checked = !!getP(c, el.dataset.c); });
+  renderMode(); renderInst();
+}
+function renderMode(){
+  const c = cur();
+  document.querySelectorAll('.segb').forEach(b => { const on = b.dataset.mode ? b.dataset.mode === c.mode : b.dataset.basis === (c.basis || 'brutto'); b.classList.toggle('on', on); b.setAttribute('aria-pressed', String(on)); });
+  const net = c.basis === 'netto';
+  $('rateLbl').textContent = net ? 'Ставка в час нетто' : 'Ставка в час брутто';
+  $('rateSub').textContent = net ? 'сколько остаётся на руки за час, без надбавок' : 'из договора, без надбавок';
+  $('salLbl').textContent = net ? 'Оклад при 100 % нетто' : 'Оклад при 100 % брутто';
+  $('natParts').hidden = c.x.nat !== 'parts';
+  const kn = KANT[c.canton]; $('kantBox').hidden = !kn && !num(c.r.kant);
+  $('kantSub').textContent = kn ? 'в кантоне ' + KT[c.canton].ru + ': ' + kn.ru + ', ' + kn.p.replace('.', ',') + ' %' : 'в этом кантоне обычно нет';
+  $('hourBox').hidden = c.mode !== 'hour'; $('fixBox').hidden = c.mode !== 'fix';
+  $('ferOwn').hidden = c.h.ferSel !== 'own';
+  $('m13mBox').hidden = c.f.m13 !== 'paid';
+  $('bvgVal').hidden = c.r.bvgMode === 'none'; $('bvgUnit').textContent = c.r.bvgMode === 'chf' ? 'CHF' : '%';
+  $('dimTxt').textContent = 'из ' + new Date(+c.yy, +c.mm, 0).getDate() + ' дней';
+}
+const slRow = (t, sub, a, cls = '') => `<div class="sl ${cls}${a < 0 && !cls ? ' minus' : ''}"><span>${esc(t)}</span><b>${a < 0 ? '−' : ''}${chf(Math.abs(a))}</b>${sub ? `<small>${esc(sub)}</small>` : ''}</div>`;
+function update(){
+  const c = cur(), R = calc(c), mn = MONTHS_IN[+c.mm - 1] + ' ' + c.yy;
+  $('resMonth').textContent = mn;
+  $('cards').innerHTML = [
+    [chf(R.brutto), 'CHF брутто, до вычетов'],
+    [(R.dsum ? '−' : '') + chf(R.dsum), 'CHF взносы и налог'],
+    [chf(R.netto), 'CHF нетто'],
+    [chf(R.pay), 'CHF к выплате на счёт', true]
+  ].map(([b, s, m]) => `<div class="card${m ? ' main' : ''}"><b>${b}</b><span>${s}</span></div>`).join('')
+    + (R.brutto > 0 ? `<p class="calcnote" style="grid-column:1 / -1">Из каждых 100 франков брутто на взносы и налог уходит ${chf(R.dsum / R.brutto * 100)} CHF.</p>` : '');
+  let h = `<h3>Расчётка за ${esc(mn)}</h3>`;
+  if (!R.has){ h += '<p class="hint">Впиши часы и ставку или оклад, и здесь появится расчёт строка за строкой.</p>'; }
+  else {
+    if (c.basis === 'netto' && R.target) h += `<p class="calcnote">Ты вписала или вписал нетто. Брутто подобрано так, чтобы после взносов и налога осталось ${chf(R.target)} CHF. ${c.mode === 'hour' ? 'Ставка брутто ' + chf(num(c.h.rate) * R.k) + ' CHF в час.' : 'Оклад брутто при 100 % ' + chf(num(c.f.sal) * R.k) + ' CHF.'}</p>`;
+    h += '<div class="slh">Зарплата</div>' + R.lines.map(x => slRow(x.t, [x.q, x.b].filter(Boolean).join(' · '), x.a)).join('') + slRow('Брутто', '', R.brutto, 'tot');
+    if (R.ded.length) h += '<div class="slh">Взносы и налог</div>' + R.ded.map(x => slRow(x.t, [x.q, x.b ? 'с суммы ' + x.b : ''].filter(Boolean).join(' · '), -x.a)).join('') + slRow('Всего взносов и налога', '', -R.dsum, 'tot');
+    h += slRow('Нетто', '', R.netto, 'tot');
+    if (R.after.length) h += '<div class="slh">После нетто</div>' + R.after.map(x => slRow(x.t, '', x.a)).join('');
+    h += slRow('К выплате', '', R.pay, 'pay');
+  }
+  $('slip').innerHTML = h;
+  const al = [];
+  if (R.pay < 0) al.push('<b>Сумма к выплате меньше нуля</b>Удержания больше нетто. Проверь аванс и другие удержания.');
+  if (/^[BLSFGN]$/.test(c.ee.permit) && !num(c.r.qst)) al.push('<b>Налог у источника не указан</b>С разрешением ' + esc(c.ee.permit) + ' обычно удерживается налог у источника. Процент смотри в таблице своего кантона или в прошлой расчётке.');
+  if ((c.ee.permit === 'C' || c.ee.permit === 'CH') && num(c.r.qst)) al.push('<b>Проверь налог у источника</b>С разрешением C и швейцарским гражданством налог у источника обычно не удерживают, налог платится по декларации. Исключения бывают, например у пограничников.');
+  if (c.r.bvgMode !== 'none' && num(c.r.bvg) && R.brutto > 0 && R.brutto * 12 < 22680) al.push('<b>Проверь взнос в BVG</b>При такой зарплате за год получается меньше 22 680 CHF. Ниже этого порога пенсионная касса обычно не обязательна, если работодатель не застраховал тебя добровольно.');
+  const mw = MINW[c.canton], hr = c.mode === 'hour' ? num(c.h.rate) * R.k : (num(c.f.week) ? num(c.f.sal) * R.k / (num(c.f.week) * 52 / 12) : 0);
+  if (mw && hr && hr < mw[0]) al.push('<b>Ниже минимальной зарплаты кантона</b>В кантоне ' + mw[1] + ' минимальная зарплата в 2026 году ' + chf(mw[0]) + (c.canton === 'TI' ? '–20,50' : '') + ' CHF брутто в час. Сейчас получается ' + chf(hr) + ' CHF. Бывают исключения, например для учеников, стажёров и в сельском хозяйстве. Уточни в кантоне.');
+  if (c.canton === 'ZH' && hr && hr < 23.9) al.push('<b>Минимальная зарплата в городах Цюрих и Винтертур</b>Её приняли (Цюрих 23,90 CHF, Винтертур 23 CHF в час), но на 07.10.2026 она ещё не действует. Если работа в этих городах, следи за новостями города.');
+  if (num(c.d.pf)) al.push('<b>Удержание по решению Betreibungsamt</b>Сумму и срок определяет ведомство в своём письме. Работодатель обязан перечислять её туда, а не оставлять себе.');
+  if (c.mode === 'hour' && !ferPct(c) && hrs(c.h.hours)) al.push('<b>Без надбавки за отпуск</b>При почасовой оплате отпуск обычно оплачивается надбавкой. Если в договоре написано, что отпуск оплачивается отдельно, всё в порядке.');
+  $('alerts').innerHTML = al.map(t => `<p class="alert">${t}</p>`).join('');
+  $('dlPdf').disabled = !R.has || !downloadsOk;
+  renderSel();
+}
+function renderAll(){ fill(); update(); clearIdle(); }
+
+document.addEventListener('input', e => { const k = e.target.dataset && e.target.dataset.k; if (!k) return; setP(cur(), k, e.target.value); save(); if (/^(h\.ferSel|f\.m13|r\.bvgMode|mm|yy)$/.test(k)) renderMode(); update(); });
+document.addEventListener('change', e => {
+  const ck = e.target.dataset && e.target.dataset.c; if (ck){ setP(cur(), ck, e.target.checked ? '1' : ''); save(); update(); return; }
+  const k = e.target.dataset && e.target.dataset.k; if (!k || e.target.tagName !== 'SELECT') return; setP(cur(), k, e.target.value);
+  if (k === 'canton'){ const c = cur(), kn = KANT[c.canton]; c.lang = KT[c.canton].lang; c.r.kant = kn ? kn.p : ''; fill(); say('Кантон ' + KT[c.canton].ru + '. Язык расчётки и кантональный взнос поставлены по кантону, их можно поменять.'); }
+  save(); renderMode(); update(); });
+document.querySelectorAll('.segb').forEach(b => b.addEventListener('click', () => { const c = cur(); if (b.dataset.mode) c.mode = b.dataset.mode; else c.basis = b.dataset.basis; save(); renderMode(); update(); }));
+
+/* ---------- удержание частями ---------- */
+function renderInst(){
+  const c = cur(), yN = new Date().getFullYear(), ys = [yN - 2, yN - 1, yN, yN + 1, yN + 2];
+  $('instBox').innerHTML = (c.inst || []).map((it, i) => { const p = instPart(it, c);
+    return `<div class="inst" data-i="${i}">
+      <label class="field">Что удерживается<input type="text" data-ik="t" value="${esc(it.t)}" placeholder="Например «Аванс за август»"></label>
+      <label class="field">Вся сумма<span class="unit"><input type="text" data-ik="total" inputmode="decimal" value="${esc(it.total)}" placeholder="1200"><span>CHF</span></span></label>
+      <label class="field">Сколько в месяц<span class="unit"><input type="text" data-ik="per" inputmode="decimal" value="${esc(it.per)}" placeholder="300"><span>CHF</span></span></label>
+      <label class="field">С какого месяца<span class="row" style="flex-wrap:nowrap"><select data-ik="sm" style="flex:1">${MONTHS.map((m, j) => `<option value="${j + 1}"${String(j + 1) === String(it.sm) ? ' selected' : ''}>${m}</option>`).join('')}</select><select data-ik="sy">${ys.map(y => `<option value="${y}"${String(y) === String(it.sy) ? ' selected' : ''}>${y}</option>`).join('')}</select></span></label>
+      <p class="inst-st">${num(it.total) && num(it.per) ? (p.a ? `В этом месяце удерживается <b>${chf(p.a)} CHF</b>, это часть ${p.n} из ${p.all}. Останется ${chf(p.rest)} CHF.` : (p.rest > 0 ? 'В этом месяце удержания нет, оно начнётся позже.' : 'Всё уже возвращено.')) : 'Впиши всю сумму и сколько удерживать в месяц.'}</p>
+      <button class="btn ghost danger-t" type="button" data-idel="${i}">Убрать</button></div>`; }).join('');
+}
+$('instAdd').addEventListener('click', () => { const c = cur(); c.inst = c.inst || []; c.inst.push({t: '', total: '', per: '', sm: c.mm, sy: c.yy}); save(); renderInst(); update(); });
+$('instBox').addEventListener('input', e => { const k = e.target.dataset.ik; if (!k) return; const i = +e.target.closest('.inst').dataset.i; cur().inst[i][k] = e.target.value; save(); update();
+  const st = e.target.closest('.inst').querySelector('.inst-st'), it = cur().inst[i], p = instPart(it, cur());
+  st.innerHTML = num(it.total) && num(it.per) ? (p.a ? `В этом месяце удерживается <b>${chf(p.a)} CHF</b>, это часть ${p.n} из ${p.all}. Останется ${chf(p.rest)} CHF.` : (p.rest > 0 ? 'В этом месяце удержания нет, оно начнётся позже.' : 'Всё уже возвращено.')) : 'Впиши всю сумму и сколько удерживать в месяц.'; });
+$('instBox').addEventListener('change', e => { if (e.target.tagName === 'SELECT') renderInst(); });
+$('instBox').addEventListener('click', e => { const d = e.target.closest('[data-idel]'); if (!d) return; cur().inst.splice(+d.dataset.idel, 1); save(); renderInst(); update(); });
+$('calcSel').addEventListener('change', () => { S.cur = $('calcSel').value; save(); renderAll(); });
+$('newCalc').addEventListener('click', () => { const c = blank(), o = cur(); c.er = Object.assign({}, o.er); c.mm = o.mm; c.yy = o.yy; c.canton = o.canton; c.lang = o.lang; c.r.kant = o.r.kant; S.calcs.push(c); S.cur = c.id; save(); renderAll(); say('Новый расчёт создан. Данные работодателя перенесены, остальное впиши заново.'); });
+$('nextCalc').addEventListener('click', () => { const o = cur(), c = JSON.parse(JSON.stringify(o)); c.id = uid(); let m = +o.mm + 1, y = +o.yy; if (m > 12){ m = 1; y++; } c.mm = String(m); c.yy = String(y); c.h.hours = ''; c.f.unpaid = ''; c.f.ot = ''; if (c.f.m13 === 'paid') c.f.m13 = 'none'; c.x.bonus = ''; c.x.bonusT = ''; c.x.zul = ''; c.x.zulT = ''; c.x.ferPay = ''; c.x.tagg = ''; c.x.spesen = ''; c.d.adv = ''; c.d.other = ''; c.d.otherT = ''; c.place = ''; S.calcs.push(c); S.cur = c.id; save(); renderAll(); say('Расчёт на ' + MONTHS_IN[m - 1] + ' ' + y + ' создан. Часы, сверхурочные, бонус, надбавки, расходы и удержания очищены, впиши их за новый месяц. Удержания частями перенесены, остаток посчитан сам.'); });
+$('delCalc').addEventListener('click', () => { const b = $('calcConfirm'); b.hidden = false; b.innerHTML = '<span class="confirm">Удалить расчёт «' + esc(calcName(cur(), S.calcs.indexOf(cur()))) + '»? Вернуть его будет нельзя.<button class="btn danger" id="delYes" type="button">Да, удалить расчёт</button><button class="btn ghost" id="delNo" type="button">Отмена</button></span>'; });
+$('calcConfirm').addEventListener('click', e => { const b = $('calcConfirm');
+  if (e.target.id === 'delNo'){ b.hidden = true; b.innerHTML = ''; }
+  if (e.target.id === 'delYes'){ S.calcs = S.calcs.filter(c => c.id !== S.cur); S.cur = S.calcs[0].id; save(); b.hidden = true; b.innerHTML = ''; renderAll(); say('Расчёт удалён.'); } });
+
+/* ---------- пример ---------- */
+function exampleCalc(mode){
+  const c = blank(); c.mm = '9'; c.yy = '2026'; c.place = 'Zürich, 30.09.2026';
+  c.er = {name: 'Muster AG', a1: 'Bahnhofstrasse 1', a2: '8001 Zürich'}; c.canton = 'ZH'; c.lang = 'ru';
+  c.ee = {name: 'Анна Петренко', a1: 'Seeweg 5', a2: '8400 Winterthur', ahv: '756.1234.5678.97', birth: '12.03.1988', permit: 'S', iban: 'CH93 0076 2011 6238 5295 7'};
+  if (mode === 'hour'){ c.title = 'Пример · почасовая оплата'; c.mode = 'hour'; c.h = {hours: '67:20', rate: '25', ferSel: '8.33', fer: '', fei: '2.27'}; c.r = {ahv: '5.3', alv: '1.1', nbu: '1.344', ktg: '0.9', bvgMode: 'none', bvg: '', kant: '', qst: '4.8', qstCode: 'A0N'}; c.x.spesen = '42.60'; c.x.zulT = 'Надбавка за воскресенье'; c.x.zul = '45'; }
+  else { c.title = 'Пример · оклад'; c.mode = 'fix'; c.f = {sal: '5200', pensum: '80', unpaid: '', ot: '3:30', week: '42', otPct: '25', m13: 'monthly', m13m: '12'}; c.r = {ahv: '5.3', alv: '1.1', nbu: '1.344', ktg: '0.9', bvgMode: 'chf', bvg: '186.40', kant: '', qst: '7.2', qstCode: 'C1N'}; c.x.kinder = '215'; c.inst = [{t: 'Аванс за август', total: '1200', per: '300', sm: '8', sy: '2026'}]; }
+  return c;
+}
+$('exampleBtn').addEventListener('click', () => {
+  const o = cur(), mode = o.mode, empty = !calc(o).has && !o.ee.name && !o.er.name;
+  const c = exampleCalc(mode);
+  if (empty){ c.id = o.id; S.calcs[S.calcs.indexOf(o)] = c; } else { S.calcs.push(c); S.cur = c.id; }
+  save(); renderAll(); say('Пример заполнен. Поменяй цифры на свои или создай новый расчёт.');
+  $('resBox').scrollIntoView({behavior: 'smooth', block: 'start'});
+});
+
+/* ---------- очистить и удалить ---------- */
+let sayT; function say(t){ $('status').textContent = t; clearTimeout(sayT); sayT = setTimeout(() => { $('status').textContent = ''; }, 5000); }
+function clearIdle(){ $('clearBox').innerHTML = '<button class="btn ghost" id="clearBtn" type="button">Очистить этот расчёт</button> <button class="btn ghost" id="wipeBtn" type="button">Удалить историю</button>'; }
+$('clearBox').addEventListener('click', e => {
+  const id = e.target.id;
+  if (id === 'clearBtn') $('clearBox').innerHTML = '<span class="confirm">Стереть все цифры и имена в этом расчёте?<button class="btn danger" id="clearYes" type="button">Да, очистить расчёт</button><button class="btn ghost" id="cNo" type="button">Отмена</button></span>';
+  else if (id === 'wipeBtn') $('clearBox').innerHTML = '<span class="confirm">Удалить все расчёты с этого устройства? Вернуть их будет нельзя.<button class="btn danger" id="wipeYes" type="button">Да, удалить историю</button><button class="btn ghost" id="cNo" type="button">Отмена</button></span>';
+  else if (id === 'cNo') clearIdle();
+  else if (id === 'clearYes'){ const o = cur(), c = blank(); c.id = o.id; c.mode = o.mode; S.calcs[S.calcs.indexOf(o)] = c; save(); renderAll(); say('Расчёт очищен.'); }
+  else if (id === 'wipeYes'){ try { localStorage.removeItem(KEY); } catch(err) {} S = freshS(); renderAll(); say('История удалена. В браузере больше нет твоих расчётов.'); }
+});
+
+/* ---------- поделиться ---------- */
+function shareLinks(){ const t = $('shareText').value;
+  $('tgShare').href = 'https://t.me/share/url?url=' + encodeURIComponent(SHARE_URL) + '&text=' + encodeURIComponent(t.replace(SHARE_URL, '').trim());
+  $('waShare').href = 'https://wa.me/?text=' + encodeURIComponent(t); }
+$('shareText').value = SHARE_MSG; shareLinks();
+$('shareText').addEventListener('input', shareLinks);
+$('shareBtn').addEventListener('click', () => { const p = $('sharePanel'); p.hidden = !p.hidden; $('shareBtn').setAttribute('aria-expanded', String(!p.hidden)); });
+$('copyMsg').addEventListener('click', () => {
+  const fb = () => { $('shareText').select(); say('Выдели текст и скопируй его вручную.'); };
+  try { navigator.clipboard.writeText($('shareText').value).then(() => say('Сообщение скопировано. Вставь его в чат друзьям.'), fb); } catch(e) { fb(); }
+});
+
+/* ---------- PDF: лист A4 на холсте, как в других инструментах ---------- */
+const PW = 2480, PH = 3508, PM = 150, LIM = PH - 330;
+const PC = {sage:'#4F5E3E', bg:'#FFFCF8', ink:'#2F2924', muted:'#7A6E62', line:'#E5D9C9', soft:'#F4EDE3', brown:'#6E4F3C', mustard:'#B98324', mustardSoft:'#F3E3C2', red:'#B5322A', green:'#2F7F3B', sageSoft:'#E3E8D6', redSoft:'#F6E4DE', zebra:'#FAF4EC'};
+function roundRect(c, x, y, w, h, r){ r = Math.min(r, h/2, w/2); c.beginPath(); c.moveTo(x+r,y); c.arcTo(x+w,y,x+w,y+h,r); c.arcTo(x+w,y+h,x,y+h,r); c.arcTo(x,y+h,x,y,r); c.arcTo(x,y,x+w,y,r); c.closePath(); }
+function fit(c, text, w){ text = String(text); if (c.measureText(text).width <= w) return text; while (text.length > 1 && c.measureText(text + '…').width > w) text = text.slice(0, -1); return text + '…'; }
+function WM(cv, t){ const c = cv.getContext('2d'), w = cv.width, h = cv.height, fs = Math.round(Math.max(w, h) * 0.032); c.save(); c.font = '700 ' + fs + 'px Manrope, sans-serif'; c.fillStyle = 'rgba(110,79,60,0.075)'; c.textAlign = 'center'; c.textBaseline = 'middle'; c.translate(w / 2, h / 2); c.rotate(-Math.PI / 7); const sx = fs * 9, sy = fs * 5, R = Math.hypot(w, h) / 2 + sx; for (let y = -R, r = 0; y <= R; y += sy, r++) for (let x = -R + (r % 2) * sx / 2; x <= R; x += sx) c.fillText(t, x, y); c.restore(); return cv; }
+function footer(cv, lang){
+  const c = cv.getContext('2d'); c.font = '600 32px Manrope, sans-serif'; let fx = PM; const fy = PH - 90;
+  c.fillStyle = PC.line; c.fillRect(PM, fy - 70, PW - 2*PM, 3);
+  CREDIT[lang].forEach((part, i) => {
+    if (i){ c.fillStyle = PC.muted; c.fillText(' · ', fx, fy); fx += c.measureText(' · ').width; }
+    const w = c.measureText(part.t).width; c.fillStyle = PC.brown; c.fillText(part.t, fx, fy); c.fillRect(fx, fy + 6, w, 2);
+    cv.links.push({x: fx, y: fy - 32, w, h: 44, url: part.u}); fx += w;
+  });
+}
+class PDoc {
+  constructor(title, right, subs, lang){ this.title = title; this.right = right; this.subs = subs.filter(Boolean); this.lang = lang; this.pages = []; this.add(true); }
+  add(first){
+    const cv = document.createElement('canvas'); cv.width = PW; cv.height = PH; cv.links = []; const c = cv.getContext('2d');
+    c.fillStyle = PC.bg; c.fillRect(0, 0, PW, PH); c.textBaseline = 'alphabetic'; this.cv = cv; this.c = c; this.pages.push(cv);
+    if (first){
+      const bh = PM + 170 + this.subs.length * 58;
+      c.fillStyle = PC.sageSoft; c.fillRect(0, 0, PW, bh);
+      c.fillStyle = PC.mustard; c.fillRect(0, bh, PW, 10);
+      c.fillStyle = PC.sage; c.font = '700 30px Manrope, sans-serif'; c.fillText('SVOILUDI.CH', PM, PM - 40);
+      c.font = '700 44px Manrope, sans-serif'; const rw = c.measureText(this.right).width + 80;
+      c.fillStyle = PC.ink; c.font = '120px Forum, Georgia, serif'; c.fillText(fit(c, this.title, PW - 2*PM - rw - 60), PM, PM + 100);
+      c.fillStyle = PC.brown; roundRect(c, PW - PM - rw, PM + 22, rw, 96, 48); c.fill();
+      c.fillStyle = '#FFFFFF'; c.font = '700 44px Manrope, sans-serif'; c.textAlign = 'center'; c.fillText(this.right, PW - PM - rw / 2, PM + 85); c.textAlign = 'left';
+      let y = PM + 175; this.subs.forEach((s, i) => { c.fillStyle = i ? PC.ink : PC.sage; c.font = '600 40px Manrope, sans-serif'; c.fillText(fit(c, s, PW - 2*PM), PM, y); y += 58; });
+      this.y = bh + 70;
+    } else {
+      c.fillStyle = PC.muted; c.font = '600 34px Manrope, sans-serif'; c.fillText(fit(c, this.title + ' · ' + this.right, PW - 2*PM), PM, PM + 40);
+      c.fillStyle = PC.line; c.fillRect(PM, PM + 70, PW - 2*PM, 3); this.y = PM + 120;
+    }
+  }
+  ensure(h){ if (this.y + h > LIM){ this.add(false); return true; } return false; }
+  parties(cols){ // [[заголовок, [строки]], …]
+    const c = this.c, gap = 60, cw = (PW - 2*PM - gap) / cols.length, rows = Math.max(...cols.map(x => x[1].length)), h = 76 + rows * 46 + 30;
+    this.ensure(h);
+    cols.forEach(([head, list], i) => { const x = PM + i * (cw + gap);
+      c.fillStyle = PC.soft; roundRect(c, x, this.y, cw, h, 24); c.fill();
+      c.fillStyle = i ? PC.mustard : PC.sage; roundRect(c, x, this.y, 14, h, 7); c.fill();
+      c.fillStyle = i ? PC.brown : PC.sage; c.font = '700 26px Manrope, sans-serif'; c.fillText(head.toUpperCase(), x + 40, this.y + 56);
+      list.forEach((t, j) => { c.fillStyle = PC.ink; c.font = (j ? '500 ' : '700 ') + '32px Manrope, sans-serif'; c.fillText(fit(c, t, cw - 72), x + 40, this.y + 104 + j * 46); });
+    });
+    this.y += h + 30;
+  }
+  tiles(list){   // [[подпись, значение, фон, цвет]]
+    const c = this.c, gap = 30, n = list.length, w = (PW - 2*PM - gap * (n - 1)) / n, h = 140; this.ensure(h + 40);
+    list.forEach(([l, v, bg, fg], i) => { const x = PM + i * (w + gap);
+      c.fillStyle = bg; roundRect(c, x, this.y, w, h, 24); c.fill();
+      c.fillStyle = fg; c.font = '800 50px Manrope, sans-serif'; c.fillText(fit(c, v, w - 60), x + 30, this.y + 68);
+      c.fillStyle = PC.muted; c.font = '700 26px Manrope, sans-serif'; c.fillText(fit(c, l.toUpperCase(), w - 60), x + 30, this.y + 112); });
+    this.y += h + 34;
+  }
+  h2(t, col){ this.ensure(160); const c = this.c; c.fillStyle = col || PC.mustard; c.beginPath(); c.arc(PM + 14, this.y + 36, 14, 0, Math.PI * 2); c.fill(); c.fillStyle = PC.ink; c.font = '60px Forum, Georgia, serif'; c.fillText(t, PM + 46, this.y + 50); this.y += 74; }
+  table(cols, rows, total){
+    const tw = PW - 2*PM, rh = 56; cols = cols.map(x => Object.assign({}, x)); const fl = cols.find(x => !x.w); if (fl) fl.w = tw - cols.reduce((a, x) => a + (x.w || 0), 0);
+    const head = () => { const C = this.c; C.fillStyle = this.hc || PC.sage; roundRect(C, PM, this.y, tw, rh, 14); C.fill(); C.fillRect(PM, this.y + rh / 2, tw, rh / 2); C.fillStyle = '#FFFFFF'; C.font = '700 26px Manrope, sans-serif'; let x = PM;
+      cols.forEach(col => { if (col.r){ C.textAlign = 'right'; C.fillText(col.t, x + col.w - 18, this.y + rh * .64); C.textAlign = 'left'; } else C.fillText(fit(C, col.t, col.w - 30), x + 18, this.y + rh * .64); x += col.w; }); this.y += rh; };
+    this.ensure(rh * 3); head();
+    rows.forEach((row, ri) => {
+      if (this.ensure(rh)) head();
+      const C = this.c, y = this.y; if (ri % 2){ C.fillStyle = PC.zebra; C.fillRect(PM, y, tw, rh); } C.fillStyle = PC.line; C.fillRect(PM, y + rh - 2, tw, 2);
+      let x = PM;
+      row.forEach((t, i) => { const col = cols[i]; t = t == null ? '' : String(t); C.font = '500 28px Manrope, sans-serif'; C.fillStyle = t.startsWith('−') ? PC.red : PC.ink;
+        const avail = col.w - 30;
+        if (col.r){ C.textAlign = 'right'; C.fillText(fit(C, t, avail), x + col.w - 18, y + rh * .64); C.textAlign = 'left'; }
+        else { if (C.measureText(t).width > avail) C.font = '500 23px Manrope, sans-serif'; C.fillText(fit(C, t, avail), x + 18, y + rh * .64); }
+        x += col.w; });
+      this.y += rh;
+    });
+    if (total){ this.ensure(rh + 4); const C = this.c; C.fillStyle = PC.soft; C.fillRect(PM, this.y, tw, rh + 4); C.fillStyle = PC.ink; C.fillRect(PM, this.y, tw, 4); this.y += 4; C.font = '800 29px Manrope, sans-serif'; let x = PM;
+      total.forEach((t, i) => { const col = cols[i]; if (t){ C.fillStyle = String(t).startsWith('−') ? PC.red : PC.ink; if (col.r){ C.textAlign = 'right'; C.fillText(t, x + col.w - 18, this.y + rh * .64); C.textAlign = 'left'; } else C.fillText(t, x + 18, this.y + rh * .64); } x += col.w; });
+      this.y += rh; }
+    this.y += 30;
+  }
+  bigline(label, value, sub, bg, bar){
+    this.ensure(190); const c = this.c, h = sub ? 170 : 130;
+    c.fillStyle = bg || PC.mustardSoft; roundRect(c, PM, this.y, PW - 2*PM, h, 26); c.fill();
+    c.fillStyle = bar || PC.mustard; roundRect(c, PM, this.y, 16, h, 8); c.fill();
+    c.fillStyle = PC.ink; c.font = '72px Forum, Georgia, serif'; c.fillText(label, PM + 40, this.y + 88);
+    c.textAlign = 'right'; c.font = '800 64px Manrope, sans-serif'; c.fillText(value, PW - PM - 40, this.y + 88); c.textAlign = 'left';
+    if (sub){ c.fillStyle = PC.muted; c.font = '600 30px Manrope, sans-serif'; c.fillText(fit(c, sub, PW - 2*PM - 80), PM + 40, this.y + 140); }
+    this.y += h + 30;
+  }
+  sign(labels, place){
+    this.ensure(260); const c = this.c, tw = PW - 2*PM, sw = (tw - 120) / 2;
+    if (place){ c.fillStyle = PC.ink; c.font = '600 32px Manrope, sans-serif'; c.fillText(fit(c, place, tw), PM, this.y + 40); this.y += 40; }
+    const sy = this.y + 150;
+    labels.forEach((l, i) => { const sx = PM + i * (sw + 120); c.fillStyle = PC.ink; c.fillRect(sx, sy, sw, 3); c.fillStyle = PC.muted; c.font = '600 28px Manrope, sans-serif'; c.fillText(fit(c, l, sw), sx, sy + 44); });
+    this.y = sy + 90;
+  }
+  finish(){
+    const n = this.pages.length, L = LBL[this.lang];
+    this.pages.forEach((cv, i) => { const c = cv.getContext('2d');
+      c.fillStyle = PC.muted; c.font = 'italic 500 26px Manrope, sans-serif'; c.fillText(fit(c, L.disc, PW - 2*PM), PM, PH - 238); c.fillText(fit(c, L.disc2, PW - 2*PM), PM, PH - 200);
+      footer(cv, this.lang);
+      if (n > 1){ c.textAlign = 'right'; c.font = '600 30px Manrope, sans-serif'; c.fillStyle = PC.muted; c.fillText(L.page + ' ' + (i + 1) + ' / ' + n, PW - PM, PH - 90); c.textAlign = 'left'; }
+      WM(cv, 'svoiludi.ch'); });
+    return this.pages;
+  }
+}
+const sgn = a => (a < 0 ? '−' : '') + chf(Math.abs(a));
+function makePdf(c, lang){
+  const L = LBL[lang], R = calc(c, lang), mn = MON_L[lang][+c.mm - 1] + ' ' + c.yy;
+  const ktN = KT[c.canton] ? (KT[c.canton][lang] || KT[c.canton].ru) : '';
+  const modeTxt = (c.mode === 'hour' ? L.modeH + (num(c.h.rate) ? ', ' + L.rate + ' ' + chf(num(c.h.rate) * R.k) + ' CHF ' + L.perH : '') : L.modeF + ', ' + L.pensum + ' ' + pctTxt(c.f.pensum === '' ? 100 : num(c.f.pensum), lang))
+    + (ktN ? ' · ' + L.canton + ' ' + ktN : '') + (c.basis === 'netto' ? ' · ' + L.netAgreed : '');
+  const D = new PDoc(L.title, mn, [modeTxt], lang);
+  const er = [c.er.name, c.er.a1, c.er.a2].filter(x => x.trim());
+  const permit = c.ee.permit === 'CH' ? L.permitCH : c.ee.permit;
+  const ee = [c.ee.name, c.ee.a1, c.ee.a2, c.ee.ahv ? L.ahvnr + ' ' + c.ee.ahv : '', c.ee.birth ? L.birth + ' ' + c.ee.birth : '', permit ? L.permit + ' ' + permit : ''].filter(x => x && x.trim());
+  if (er.length || ee.length) D.parties([[L.er, er.length ? er : ['–']], [L.ee, ee.length ? ee : ['–']]]);
+  D.tiles([[L.kBr, chf(R.brutto), PC.soft, PC.ink], [L.kDed, '−' + chf(R.dsum), PC.redSoft, PC.red], [L.kNet, chf(R.netto), PC.sageSoft, PC.sage], [L.kPay, chf(R.pay), PC.mustardSoft, PC.brown]]);
+  const cols = [{t: L.colItem, w: 0}, {t: L.colQty, w: 420}, {t: L.colBase, w: 520}, {t: L.colAmt, w: 300, r: true}];
+  D.h2(L.secPay, PC.sage); D.hc = PC.sage;
+  D.table(cols, R.lines.map(x => [x.t, x.q, x.b, sgn(x.a)]), [L.brutto, '', '', chf(R.brutto)]);
+  if (R.ded.length){ D.h2(L.secDed, PC.red); D.hc = PC.brown; D.table([{t: L.colDed, w: 0}, {t: L.colPct, w: 300}, {t: L.colB2, w: 420}, {t: L.colAmt, w: 300, r: true}], R.ded.map(x => [x.t, x.q, x.b, '−' + chf(x.a)]), [L.ded, '', '', '−' + chf(R.dsum)]); }
+  D.bigline(L.netto, chf(R.netto) + ' CHF', '', PC.sageSoft, PC.sage);
+  if (R.after.length){ D.h2(L.secAfter, PC.mustard); D.hc = PC.mustard; D.table([{t: L.colItem, w: 0}, {t: L.colAmt, w: 300, r: true}], R.after.map(x => [x.t, sgn(x.a)])); }
+  D.bigline(L.pay, chf(R.pay) + ' CHF', c.ee.iban.trim() ? L.iban + ' ' + c.ee.iban.trim() : '');
+  D.sign([L.signEr, L.signEe], c.place.trim() ? L.place + ': ' + c.place.trim() : '');
+  return D.finish();
+}
+window.ZP = {makePdf, exampleCalc, calc};
+async function pdfOut(make, filename){
+  if (!window.jspdf){ say('PDF сейчас недоступен. Попробуй ещё раз позже.'); return; }
+  say('Готовлю PDF…');
+  try { await Promise.all(['120px Forum', '500 30px Manrope', '600 30px Manrope', '700 30px Manrope', '800 30px Manrope'].map(f => document.fonts.load(f))); await document.fonts.ready; } catch(e) {}
+  const pages = make(), doc = new window.jspdf.jsPDF({orientation:'portrait', unit:'mm', format:'a4'}), k = 210 / PW;
+  pages.forEach((cv, i) => { if (i) doc.addPage(); doc.addImage(cv.toDataURL('image/jpeg', 0.92), 'JPEG', 0, 0, 210, 297); for (const l of cv.links) doc.link(l.x * k, l.y * k, l.w * k, l.h * k, {url: l.url}); });
+  return offer(filename, doc.output('blob'));
+}
+const safe = s => String(s).replace(/[\\/:*?"<>|]+/g, ' ').replace(/\s+/g, ' ').trim();
+$('dlPdf').addEventListener('click', () => {
+  const c = cur(), lang = LBL[c.lang] ? c.lang : 'ru', who = c.ee.name.trim() || c.title.trim();
+  const name = LBL[lang].title + ' ' + (who ? who + ' ' : '') + (lang === 'ru' ? MONTHS_IN : MON_L[lang])[+c.mm - 1] + ' ' + c.yy;
+  pdfOut(() => makePdf(c, lang), safe(name) + '.pdf');
+});
+
+/* ---------- скачивание ---------- */
+let downloads = null, downloadsOk = true;
+async function offer(filename, data){
+  if (window.claude && window.claude.use){
+    if (!downloads){ say('Скачивание здесь недоступно.'); return; }
+    try { await downloads.save({filename, data}); say('Файл «' + filename + '» сохранён.'); return true; }
+    catch(err){ const code = err && err.code;
+      if (code === 'declined') say('Скачивание отменено.'); else if (code === 'rate_limited') say('Окно сохранения уже открыто. Подтверди его или подожди немного.'); else say('Не получилось сохранить файл. Попробуй ещё раз.'); }
+    return;
+  }
+  const url = URL.createObjectURL(data), a = document.createElement('a'); a.href = url; a.download = filename; document.body.appendChild(a); a.click();
+  setTimeout(() => { a.remove(); URL.revokeObjectURL(url); }, 4000); say('Файл «' + filename + '» скачан.'); return true;
+}
+$('dlXlsx').addEventListener('click', () => { const p = $('vipPanel'); p.hidden = !p.hidden; $('dlXlsx').setAttribute('aria-expanded', String(!p.hidden)); });
+/* Excel откроется для VIP-партнёров вместе с проверкой VIP; сейчас кнопка скрыта и недостижима */
+(async () => {
+  if (!(window.claude && window.claude.use)) return;
+  try { downloads = await window.claude.use('downloads'); } catch(e) { downloads = null; }
+  if (!downloads){ downloadsOk = false; update(); say('Скачивание откроется на опубликованной странице.'); }
+})();
+
+renderAll();
+</script>
+<script>
+window.HELP = {
+"inst": "<p>Аванс, ссуда от работодателя или долг, который возвращается из зарплаты по частям. Впиши всю сумму, сколько удерживать в месяц и с какого месяца. Остаток считается сам. В каждом следующем месяце он уменьшается.</p><p>По закону работодатель может удерживать свои долги из зарплаты только в той части, которую можно арестовать при взыскании. Сумма, нужная на жизнь, остаётся работнику. Договорись о сумме в месяц письменно.</p><p class=\"help-src\">Источник: <a href=\"https://www.fedlex.admin.ch/eli/cc/27/317_321_377/de#art_323_b\" target=\"_blank\" rel=\"noopener\">OR, статья 323b</a>; про аванс — <a href=\"https://www.fedlex.admin.ch/eli/cc/27/317_321_377/de#art_323\" target=\"_blank\" rel=\"noopener\">статья 323</a>.</p>",
+"pf": "<p>Если у работника долги и ведомство по взысканию (Betreibungsamt) наложило арест на часть зарплаты (Lohnpfändung), работодатель получает письмо. В нём стоит сумма в месяц и до какого времени её удерживать.</p><p>Эти деньги работодатель переводит ведомству. Часть зарплаты, нужная на жизнь, остаётся у работника, её размер определяет ведомство.</p>",
+"rKant": "<p>Небольшой взнос работника, который есть только в некоторых кантонах. В 2026 году это Вале 0,13 % (семейные пособия), Женева 0,029 % (страхование материнства), Во 0,09 % (PC Familles и rente-pont). При выборе кантона он ставится сам.</p><p>Где проверить: в прошлой расчётке или у кассы AHV своего кантона (Ausgleichskasse).</p><p class=\"help-src\">Источник: <a href=\"https://www.bsv.admin.ch/fr/allocations-familiales-financement\" target=\"_blank\" rel=\"noopener\">BSV, финансирование семейных пособий</a>, <a href=\"https://silgeneve.ch/legis/program/books/rsg/htm/rsg_j5_07p01.htm\" target=\"_blank\" rel=\"noopener\">закон Женевы о страховании материнства</a>.</p>",
+"tagg": "<p>Деньги от страховки за дни болезни (KTG) или после несчастного случая (UVG), которые работодатель передаёт тебе вместе с зарплатой. Сумму пишет страховая в своём расчёте (Taggeldabrechnung).</p><p>С этих выплат не снимаются взносы AHV. Налог у источника с них обычно удерживается. Если работодатель сам продолжает платить зарплату за дни болезни, это обычная зарплата, впиши её в часы или оклад.</p><p class=\"help-src\">Источник: <a href=\"https://www.ahv-iv.ch/p/2.01.d\" target=\"_blank\" rel=\"noopener\">памятка AHV 2.01</a>.</p>",
+"nat": "<p>Если работодатель даёт еду и жильё, например у няни или помощницы по дому с проживанием, это часть зарплаты (Naturallohn). С неё платятся взносы, но деньгами она не выплачивается.</p><p>Поэтому сумма сначала прибавляется к брутто, а после нетто вычитается как уже полученная. По нормам AHV на 2026 год это в месяц: завтрак 105, обед 300, ужин 240, жильё 345, всё вместе 990 CHF.</p><p class=\"help-src\">Источник: <a href=\"https://www.ahv-iv.ch/p/2.01.d\" target=\"_blank\" rel=\"noopener\">памятка AHV 2.01</a>, раздел о натуральной зарплате.</p>",
+"ferPay": "<p>Деньги за отпуск, который ты не успела или не успел взять. Обычно их платят при увольнении, когда отпуск уже нельзя использовать.</p><p>Это зарплата, с неё снимаются все взносы. Сумму считает работодатель по дням отпуска, проверь её по своему учёту отпуска.</p>",
+"zul": "<p>Надбавки за работу ночью, в воскресенье, в праздник или посменно. Процент и правила стоят в договоре или в коллективном договоре отрасли (GAV).</p><p>С них снимаются все взносы, как с зарплаты. Впиши название и сумму брутто за месяц.</p>",
+"basis": "<p><b>Я знаю брутто.</b> В договоре стоит ставка или оклад до вычетов. Так бывает почти всегда.</p><p><b>Я знаю нетто.</b> Вы договорились о сумме на руки, например «25 франков в час чистыми». Тогда взносы и налог всё равно платятся, их берёт на себя работодатель. Инструмент сам подберёт брутто, а в расчётке будет стоять брутто и все вычеты, как положено.</p><p>Нетто здесь значит сумму после взносов и налога, до пособий, расходов и удержаний.</p>",
+"canton": "<p>Кантон, где ты работаешь. От него зависят налог у источника, детские пособия, кантональный взнос, минимальная зарплата и язык расчётки.</p><p>Язык расчётки ставится по кантону сам. В Женеве, Во, Невшателе, Юре, Фрибуре и Вале — французский, в Тичино — итальянский, в остальных — немецкий. Его можно поменять внизу, перед скачиванием.</p>",
+"calcs": "<p>Можно вести несколько расчётов на одной странице. Например свою зарплату и зарплату няни, или один расчёт на каждый месяц.</p><p>«+ Новый расчёт» начинает чистый расчёт и переносит только работодателя. «Скопировать на следующий месяц» берёт все условия этого расчёта и очищает то, что меняется каждый месяц. Это часы, сверхурочные, бонус, расходы и удержания.</p>",
+"title": "<p>Короткое имя, по которому ты найдёшь этот расчёт в списке. Например «Моя зарплата» или «Наталья, уборка».</p><p>В PDF оно не попадает.</p>",
+"month": "<p>Месяц, за который начисляется зарплата. От него зависят название в PDF и число дней в месяце, если есть неоплачиваемые дни.</p>",
+"employer": "<p>Кто платит зарплату. Фирма или частное лицо, например «Familie Müller».</p><p>Если ты сама или сам платишь няне или помощнице по дому, работодатель здесь ты.</p>",
+"ahvnr": "<p>Номер социального страхования из 13 цифр, он начинается с 756. Он стоит на карточке медицинской страховки и в каждой расчётке.</p><p>Для расчёта он не нужен, только для PDF.</p>",
+"birth": "<p>Нужна только для PDF. В расчёте она ни на что не влияет.</p><p>Помни, что от возраста зависят некоторые взносы. Например взносы в пенсионную кассу растут с возрастом, а с работников моложе 18 лет и пенсионеров взносы считаются по особым правилам. Если тебя это касается, уточни ставки у работодателя или в кассе AHV.</p>",
+"permit": "<p>Вид разрешения на пребывание. От него зависит, удерживается ли налог у источника.</p><p>С разрешением B, L, S, F, G или N налог обычно удерживает работодатель. С разрешением C и швейцарским гражданством налог платится по декларации, и в расчётке его нет.</p>",
+"iban": "<p>Счёт, на который приходит зарплата. Он появится в PDF под суммой к выплате.</p>",
+"mode": "<p><b>Почасовая оплата.</b> Тебе платят за каждый отработанный час, и сумма меняется от месяца к месяцу. Отпуск и праздники часто оплачиваются надбавкой к каждому часу.</p><p><b>Фиксированный оклад.</b> Каждый месяц одна и та же сумма, даже если в месяце были праздники или отпуск. Её ставят в договоре за полную ставку или сразу за твой процент занятости.</p>",
+"hours": "<p>Сколько часов ты отработала или отработал за месяц. Возьми итог из своего учёта часов.</p><p>Можно писать часами и минутами через двоеточие, например 67:20, или десятичным числом, например 67,5.</p><p>Часы удобно записывать в инструменте «Учёт моего времени» на этом сайте.</p>",
+"rate": "<p>Ставка брутто за один час из договора, без надбавок за отпуск и праздники. Брутто значит до вычета взносов и налога.</p><p>Если в договоре стоит ставка уже вместе с надбавкой за отпуск, впиши её сюда, а надбавку за отпуск поставь «нет».</p>",
+"fer": "<p>При почасовой оплате отпуск часто оплачивается надбавкой к каждому часу. Тогда в отпуске ты денег не получаешь, они уже пришли вместе с зарплатой.</p><p>За 4 недели отпуска в год надбавка 8,33 %, за 5 недель 10,64 %, за 6 недель 13,04 %. Работникам моложе 20 лет положено не меньше 5 недель.</p><p>Если отпуск оплачивается отдельно, выбери «нет».</p>",
+"fei": "<p>Некоторые договоры с почасовой оплатой платят надбавку за праздничные дни, в которые ты не работаешь. Процент стоит в договоре.</p><p>Если в договоре такой надбавки нет, оставь пустым.</p>",
+"sal": "<p>Оклад брутто в месяц за полную ставку, то есть при занятости 100 %. Брутто значит до вычета взносов и налога.</p><p>Если в договоре стоит сумма уже за твой процент, например «4 160 CHF при 80 %», впиши её сюда и поставь процент занятости 100.</p>",
+"pensum": "<p>Какую часть полной ставки ты работаешь. Полная ставка 100 %, четыре дня в неделю обычно 80 %.</p><p>Оклад умножается на этот процент.</p>",
+"unpaid": "<p>Дни, за которые в этом месяце оклад не платится. Например ты начала работать 10-го числа, ушла с работы в середине месяца или взяла отпуск за свой счёт.</p><p>Оклад делится на число дней в месяце и умножается на эти дни. Работодатели считают по-разному, иногда по 30 дням или по рабочим дням. Если в расчётке сумма другая, спроси, как считает твой работодатель.</p>",
+"ot": "<p>Часы сверх договора, которые оплачиваются деньгами в этом месяце. Пиши часами и минутами, например 3:30, или десятичным числом.</p><p>Если переработку возмещают свободным временем, сюда её не пиши.</p>",
+"week": "<p>Сколько часов в неделю работают при полной ставке. Эта цифра стоит в договоре или в правилах фирмы, часто 40–42 часа.</p><p>Из неё считается цена одного часа. Оклад за 100 % делится на часы в месяц, а это часы в неделю × 52 недели ÷ 12 месяцев.</p>",
+"otPct": "<p>Надбавка к цене часа за сверхурочную работу. По закону это 25 %, если в договоре письменно не договорились иначе.</p><p>Если по договору сверхурочные платятся без надбавки, поставь 0.</p>",
+"m13": "<p>13-я зарплата положена, только если она есть в договоре.</p><p><b>Каждый месяц по 1/12.</b> Часть 13-й зарплаты приходит каждый месяц вместе с окладом.</p><p><b>Выплачивается в этом месяце.</b> Вся сумма приходит один раз, обычно в ноябре или декабре. Выбери, если сейчас этот месяц.</p><p>Если 13-я зарплата выплачивается в другом месяце, выбери «нет или не в этом месяце».</p>",
+"m13m": "<p>Если ты работала или работал у этого работодателя весь год, это 12. Если начала в апреле, то с апреля по декабрь 9 месяцев, и 13-я зарплата будет 9/12 оклада.</p>",
+"bonus": "<p>Всё, что платится вместе с зарплатой и с чего тоже снимаются взносы. Бонус, надбавка за ночную работу или выходные, разовая премия.</p><p>Впиши название, оно появится в расчётке, и сумму брутто.</p>",
+"kinder": "<p>Детские пособия и пособия на учёбу (Kinderzulagen, Ausbildungszulagen). Их обычно платит работодатель вместе с зарплатой.</p><p>Минимум по закону в 2026 году 215 CHF в месяц на ребёнка до 16 лет и 268 CHF на ребёнка в учёбе до 25 лет. Многие кантоны платят больше. Свою сумму смотри в решении кассы семейных пособий (Familienausgleichskasse) или в таблице кантонов.</p><p>С пособий не снимаются взносы AHV, поэтому они прибавляются после нетто. Налог у источника с них удерживается.</p><p class=\"help-src\">Источник: <a href=\"https://www.bsv.admin.ch/de/familienzulagen-leistungen-und-voraussetzungen\" target=\"_blank\" rel=\"noopener\">BSV, семейные пособия</a>, <a href=\"https://www.bsv.admin.ch/dam/de/sd-web/acU7RgJgeisY/Arten%20und%20Ans%C3%A4tze%20der%20Familienzulagen_2026.pdf\" target=\"_blank\" rel=\"noopener\">таблица кантонов на 2026 год</a>.</p>",
+"spesen": "<p>Деньги, которые работодатель возвращает за расходы по работе. Поездки, материалы, обед в командировке. Суммы стоят в чеках или в правилах фирмы о расходах (Spesenreglement).</p><p>Это не зарплата, поэтому взносы с неё не снимаются. Она прибавляется к сумме к выплате.</p>",
+"rates": "<p>Здесь только доля работника. Столько же по AHV/IV/EO и ALV платит сверху работодатель, но это не уменьшает твою зарплату.</p><p>Где найти ставки: в прошлой расчётке, в трудовом договоре или у работодателя. У каждой строки есть свой «?» с подсказкой, где искать. Если чего-то нет в твоей расчётке, оставь поле пустым.</p>",
+"rAhv": "<p>Пенсия по старости, страхование по инвалидности и компенсация заработка (например на время армии, отпуска по рождению ребёнка). Доля работника по закону 5,3 % от брутто в 2026 году.</p><p>Где проверить: в прошлой расчётке, строка AHV/IV/EO. Ставку обычно менять не нужно.</p><p class=\"help-src\">Источник: <a href=\"https://www.ahv-iv.ch/p/2.01.d\" target=\"_blank\" rel=\"noopener\">памятка AHV 2.01</a>.</p>",
+"rAlv": "<p>Страхование по безработице. Доля работника 1,1 % от брутто. С части годовой зарплаты выше 148 200 CHF этот взнос не снимается.</p><p>Где проверить: в прошлой расчётке, строка ALV.</p><p class=\"help-src\">Источник: <a href=\"https://www.ahv-iv.ch/p/2.08.d\" target=\"_blank\" rel=\"noopener\">памятка AHV 2.08</a>.</p>",
+"rNbu": "<p>Страхование от несчастного случая вне работы, например дома или в спорте. Оно обязательно, если ты работаешь у одного работодателя 8 часов в неделю или больше. Если меньше, эта страховка не нужна и поле остаётся пустым.</p><p>Где найти ставку: в прошлой расчётке, строка NBU или UVG/NBU, или спроси работодателя, он знает её из полиса страховой (Suva или частная страховая). Часто это 1–2 %. Иногда её частично или целиком платит работодатель.</p>",
+"rKtg": "<p>Страховка, которая платит зарплату, если ты долго болеешь (Krankentaggeld). Её заключают не все работодатели.</p><p>Где найти ставку: в прошлой расчётке, строка KTG, или в договоре. Если такой строки нет, оставь пустым.</p>",
+"rBvg": "<p>Вторая пенсия через пенсионную кассу. Она обязательна, если годовая зарплата у одного работодателя выше порога закона. В 2026 году это 22 680 CHF в год.</p><p>Взнос зависит от возраста и правил кассы. Где найти сумму: в прошлой расчётке, строка BVG или Pensionskasse, или в справке кассы (Vorsorgeausweis), её присылают раз в год. Надёжнее выбрать «сумма в CHF».</p><p class=\"help-src\">Источник: <a href=\"https://www.bsv.admin.ch/dam/de/sd-web/3jZGqTLgADbl/BPP_Zahlen_85_2026.pdf\" target=\"_blank\" rel=\"noopener\">BSV, цифры BVG на 2026 год</a>.</p>",
+"rQst": "<p>Налог, который работодатель снимает сразу с зарплаты, если у тебя нет разрешения C и швейцарского гражданства. Например с разрешением B, L, S или F.</p><p>Где найти: код тарифа и процент стоят в каждой расчётке. Процент можно найти в таблице налога у источника своего кантона на сайте кантональной налоговой службы (Steueramt, Quellensteuer). Код тарифа: буква — семейное положение (A — один, B — в браке и работает один, C — в браке и работают оба, H — один с детьми), цифра — число детей, Y или N — с церковным налогом или без.</p><p class=\"help-src\">Источник: <a href=\"https://www.estv.admin.ch/de/quellensteuertarife-import-in-lohnbuchhaltungssysteme\" target=\"_blank\" rel=\"noopener\">ESTV, тарифы кантонов на 2026 год</a>.</p>",
+"adv": "<p>Деньги, которые ты уже получила или получил в этом месяце раньше зарплаты. Они вычитаются из суммы к выплате.</p><p>Если аванс возвращается по частям в разные месяцы, впиши его ниже, в «Удерживается частями».</p><p class=\"help-src\">Закон об авансе: <a href=\"https://www.fedlex.admin.ch/eli/cc/27/317_321_377/de#art_323\" target=\"_blank\" rel=\"noopener\">OR, статья 323</a>.</p>",
+"other": "<p>Другие суммы, которые работодатель удерживает из нетто. Например обеды в столовой, проездной, аренда служебной квартиры или удержание по решению ведомства.</p><p>Впиши название, оно появится в расчётке, и сумму.</p>",
+"cards": "<p><b>Брутто.</b> Вся зарплата до вычетов, вместе с надбавками.</p><p><b>Взносы и налог.</b> Всё, что снимается с брутто. AHV, ALV, NBU, KTG, пенсионная касса и налог у источника.</p><p><b>Нетто.</b> Брутто минус взносы и налог.</p><p><b>К выплате.</b> Сколько придёт на счёт. Это нетто плюс детские пособия и возмещение расходов, минус аванс и другие удержания.</p><p>Каждая строка округляется до раппена, как в обычной расчётке.</p>",
+"pdf": "<p>Расчётка на одном листе A4. Работодатель и работник, все строки зарплаты, взносы с процентами, нетто, сумма к выплате и места для двух подписей.</p><p>Это образец для примера и личного использования, а не официальный документ. Все цифры перепроверь по договору, полисам и прошлым расчёткам.</p><p>Если ты платишь зарплату сама или сам, распечатай её, подпиши и отдай работнику вместе с зарплатой.</p>",
+"lang": "<p>На языке сайта, чтобы самой или самому понять каждую строку.</p><p>На немецком, французском или итальянском, чтобы отдать расчётку работнику, работодателю или приложить к документам. В Швейцарии документы читают на языке кантона, поэтому язык ставится по кантону сам.</p><p>То, что ты вписываешь сама или сам (имена, названия), попадает в расчётку как есть, без перевода.</p>",
+"place": "<p>Город и дата расчёта, например «Zürich, 30.09.2026». Они появятся в PDF над местами для подписей.</p>"
+};
+</script>
+<script src="/assets/help.js"></script>
+<script src="/assets/backup.js"></script>
+<script src="/assets/pdffan.js" defer></script>
+<script src="/assets/samesite.js"></script>
+<!--i18n--><style>#langbar.langbar{position:fixed;bottom:14px;right:14px;z-index:60;display:flex;gap:2px;background:rgba(255,255,255,.92);border:1px solid rgba(0,0,0,.08);border-radius:999px;padding:3px;font:600 12px Manrope,system-ui,sans-serif;box-shadow:0 2px 8px rgba(0,0,0,.08)}#langbar.langbar a{color:#5d554d;padding:5px 9px;border-radius:999px;text-decoration:none;font:inherit;display:inline-block}#langbar.langbar a[aria-current="true"]{background:#2f2924;color:#fff}@media print{.langbar{display:none!important}}</style><div class="langbar" id="langbar" role="navigation" aria-label="Мова / Язык"><a href="/instrumenty/zarplata/" hreflang="ru" data-lang="ru" aria-current="true">RU</a><a href="/uk/instrumenty/zarplata/" hreflang="uk" data-lang="uk">UA</a></div><script>(function(){var b=document.getElementById('langbar');if(!b)return;b.addEventListener('click',function(e){var a=e.target.closest('a[data-lang]');if(a){try{localStorage.setItem('svoiludiLang',a.dataset.lang)}catch(x){}a.href=a.getAttribute('href').split('#')[0]+location.hash;}});})();</script><!--i18n--></body>
+</html>
