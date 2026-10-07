@@ -10,7 +10,7 @@ I18N = os.path.join(ROOT, '_i18n')
 SITE = 'https://svoiludi.ch'
 L = 'uk'
 KEY = 'svoiludiLang'
-PAGES = [('index.html', '/'), ('events/index.html', '/events/'), ('join/index.html', '/join/'), ('opros/index.html', '/opros/'),
+PAGES = [('index.html', '/'), ('events/index.html', '/events/'), ('kursy/index.html', '/kursy/'), ('join/index.html', '/join/'), ('opros/index.html', '/opros/'),
          ('badge/index.html', '/badge/'), ('instrumenty/index.html', '/instrumenty/'), ('instrumenty/moj-den/index.html', '/instrumenty/moj-den/'),
          ('instrumenty/moj-god/index.html', '/instrumenty/moj-god/'), ('instrumenty/moi-emocii/index.html', '/instrumenty/moi-emocii/'),
          ('instrumenty/moj-budget/index.html', '/instrumenty/moj-budget/'),
@@ -58,11 +58,11 @@ def fix_links(html, base):
         q, url, rest = m.group(1), m.group(2), m.group(3)
         uk = own_uk(resolve(base, url))
         return q + (uk or url) + rest
-    html = re.sub(r"(['\"`])((?:\.\./)*(?:events|join|opros|badge|instrumenty(?:/[a-z-]+)?)/)(#|\1)", js, html)
+    html = re.sub(r"(['\"`])((?:\.\./)*(?:events|kursy|join|opros|badge|instrumenty(?:/[a-z-]+)?)/)(#|\1)", js, html)
     # 4) абсолютные ссылки https://svoiludi.ch/страница (в разметке, скриптах и готовых сообщениях)
     def absu(m):
         return SITE + (own_uk(m.group(1) or '/') or (m.group(1) or '/'))
-    html = re.sub(r'https://svoiludi\.ch(/(?:events/|join/|opros/|badge/|privacy/|instrumenty/(?:[a-z-]+/)?)?)(?=["\'`#?<)\s]|$)', absu, html)
+    html = re.sub(r'https://svoiludi\.ch(/(?:events/|kursy/|join/|opros/|badge/|privacy/|instrumenty/(?:[a-z-]+/)?)?)(?=["\'`#?<)\s]|$)', absu, html)
     # 4б) ссылки на сайт Ирины — на его украинскую версию
     html = re.sub(r'https://voznesenskaya\.ch/(#[\w-]*)?(?=["\'`<)\s])', lambda m: 'https://voznesenskaya.ch/uk/' + (m.group(1) or ''), html)
     html = re.sub(r'https://voznesenskaya\.ch/(privacy|impressum)/(?=["\'`<)\s])', lambda m: f'https://voznesenskaya.ch/{m.group(1)}/#lang=uk', html)
@@ -93,7 +93,7 @@ def body_inject(html, extra):
 
 def localize_assets(html, tr, missing):
     """общие файлы с русским текстом → украинские копии: share.js → share.uk.js, wm.css → wm.uk.css,
-    data/specialists.js → data/specialists.uk.js (карточки специалистов, одна копия на весь сайт — с 06.10.2026)"""
+    data/specialists.js, data/events.js, data/kursy.js → *.uk.js (карточки, события, курсы — одна копия на весь сайт)"""
     def rep(m):
         folder, name = m.group(2), m.group(3)
         code = open(os.path.join(ROOT, folder, name + '.js'), encoding='utf-8').read()
@@ -159,9 +159,11 @@ def opros_keep_russian_payload(html):
 
 def ver(text): return hashlib.md5(text.encode('utf-8')).hexdigest()[:8]
 def stamp_data(html):
-    """данные карточек подключаются с ?v=<отпечаток файла>: браузер сразу берёт новую версию после правки (07.10.2026)"""
-    v = ver(open(os.path.join(ROOT, 'data', 'specialists.js'), encoding='utf-8').read())
-    return re.sub(r'(<script src="/data/specialists\.js)(?:\?v=\w+)?"', rf'\1?v={v}"', html)
+    """данные (карточки, события, курсы) подключаются с ?v=<отпечаток файла>: браузер сразу берёт новую версию после правки (07.10.2026)"""
+    def rep(m):
+        p = os.path.join(ROOT, 'data', m.group(2) + '.js')
+        return f'{m.group(1)}?v={ver(open(p, encoding="utf-8").read())}"' if os.path.exists(p) else m.group(0)
+    return re.sub(r'(<script src="/data/([a-z]+)\.js)(?:\?v=\w+)?"', rep, html)
 
 def build():
     TM, TMP = tm(); missing = []
