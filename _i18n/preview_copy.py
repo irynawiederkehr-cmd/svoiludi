@@ -5,7 +5,8 @@
 Запуск: python3 preview_site.py <repo> <out>"""
 import sys, os, re, shutil, json, datetime
 REPO, OUT = sys.argv[1], sys.argv[2]
-PAGES = ['index.html', 'vakansii/index.html', 'kursy/index.html', 'events/index.html', 'join/index.html']
+TOOLS = ['zarplata', 'uchet-vremeni', 'chasy-po-klientam', 'moj-budget', 'moj-den', 'moj-god', 'moi-emocii']
+PAGES = ['index.html', 'vakansii/index.html', 'kursy/index.html', 'events/index.html', 'join/index.html', 'instrumenty/index.html'] + ['instrumenty/' + t + '/index.html' for t in TOOLS]
 INSET = {'vakansii', 'kursy', 'events', 'join'}
 LIVE = 'https://svoiludi.ch/'
 ASSETS = ['assets/fonts.css', 'assets/wm.css', 'assets/help.js', 'assets/share.js', 'assets/samesite.js',
@@ -13,6 +14,9 @@ ASSETS = ['assets/fonts.css', 'assets/wm.css', 'assets/help.js', 'assets/share.j
           'assets/lib/leaflet/leaflet.css', 'assets/lib/leaflet/leaflet.js', 'data/specialists.js', 'data/vacancies.js', 'data/afisha.js', 'fav/favicon.svg']
 ASSETS += ['assets/fonts/' + f for f in os.listdir(os.path.join(REPO, 'assets/fonts'))]
 ASSETS += ['img/' + f for f in os.listdir(os.path.join(REPO, 'img'))]
+ASSETS += [a for a in ['assets/pdffan.js', 'assets/backup.js', 'assets/lib/exceljs.min.js'] if os.path.exists(os.path.join(REPO, a))]
+for dp, dn, fn in os.walk(os.path.join(REPO, 'instrumenty/preview')):
+    ASSETS += [os.path.relpath(os.path.join(dp, f), REPO) for f in fn if f.endswith('.jpg')]
 BANNER = ('<div style="position:sticky;top:0;z-index:999;background:#2f2924;color:#FFFCF8;font:600 13px/1.45 Manrope,system-ui,sans-serif;'
           'padding:8px 16px;text-align:center">Предпросмотр КОПИИ · на сайт не выложено · {date}. Карты и часть ссылок здесь не работают.</div>')
 
@@ -31,8 +35,11 @@ def fix(html, depth):
     html = html.replace('href="./"', 'href="index.html"').replace('href="../"', 'href="../index.html"').replace('href="../#', 'href="../index.html#')
     html = html.replace('`../#${', '`../index.html#${')
     html = re.sub(r"'((?:\.\./)?)(vakansii|kursy|events|join)/#'", lambda m: f"'{m.group(1)}{m.group(2)}/index.html#'", html)   # ссылки афиши в карточке
+    # инструменты — внутри предпросмотра
+    html = re.sub(r'href="(?:https://svoiludi\.ch)?/instrumenty/((?:[a-z-]+/)?)(#[^"]*)?"', lambda m: f'href="{up}instrumenty/{m.group(1)}index.html{m.group(2) or ""}"', html)
+    html = html.replace('<head>', '<head><script>window.PV_BASE = ' + repr(up) + ';</script>', 1)
     # всё, чего нет в предпросмотре, — на живой сайт
-    for d in ['instrumenty', 'opros', 'badge', 'privacy']:
+    for d in ['opros', 'badge', 'privacy']:
         html = re.sub(rf'href="(?:\.\./|\./)?{d}/', f'href="{LIVE}{d}/', html)
     html = html.replace('href="files/anketa', f'href="{LIVE}join/files/anketa')
     html = html.replace('<body>', '<body>\n' + BANNER.format(date=datetime.date.today().strftime('%d.%m.%Y')), 1)
@@ -46,6 +53,9 @@ for p in PAGES:
 for a in ASSETS:
     dst = os.path.join(OUT, 'site', a); os.makedirs(os.path.dirname(dst), exist_ok=True)
     shutil.copy(os.path.join(REPO, a), dst)
+    if a == 'assets/pdffan.js':   # картинки веера — от папки предпросмотра, а не от корня сайта
+        t = open(dst, encoding='utf-8').read().replace("it.img = '/instrumenty/preview/'", "it.img = (window.PV_BASE || '/') + 'instrumenty/preview/'")
+        open(dst, 'w', encoding='utf-8').write(t)
 files = {}
 for root, _, fs in os.walk(os.path.join(OUT, 'site')):
     for f in fs:
