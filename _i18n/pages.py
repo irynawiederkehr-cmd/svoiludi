@@ -14,7 +14,8 @@ PAGES = [('index.html', '/'), ('events/index.html', '/events/'), ('join/index.ht
          ('badge/index.html', '/badge/'), ('instrumenty/index.html', '/instrumenty/'), ('instrumenty/moj-den/index.html', '/instrumenty/moj-den/'),
          ('instrumenty/moj-god/index.html', '/instrumenty/moj-god/'), ('instrumenty/moi-emocii/index.html', '/instrumenty/moi-emocii/'),
          ('instrumenty/moj-budget/index.html', '/instrumenty/moj-budget/'),
-         ('instrumenty/uchet-vremeni/index.html', '/instrumenty/uchet-vremeni/'), ('privacy/index.html', '/privacy/')]
+         ('instrumenty/uchet-vremeni/index.html', '/instrumenty/uchet-vremeni/'), ('privacy/index.html', '/privacy/'),
+         ('instrumenty/chasy-po-klientam/index.html', '/instrumenty/chasy-po-klientam/')]
 OWN = sorted({p for _, p in PAGES}, key=len, reverse=True)
 CODE_WORDS = ['ВСТРЕЧА', 'ОТЗЫВ', 'ЗАЯВКА', 'РАССЫЛКА', 'ПОРЯДОК']
 

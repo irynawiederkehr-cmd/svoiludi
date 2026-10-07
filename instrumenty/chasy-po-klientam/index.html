@@ -1,0 +1,1384 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<link rel="icon" href="/fav/favicon.svg" type="image/svg+xml"><link rel="icon" href="/fav/icon-32.png" sizes="32x32"><link rel="apple-touch-icon" href="/fav/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/fonts.css">
+<meta name="description" content="Учёт часов по клиентам для тех, кто работает на себя. Уборка, ремонт, няни, мастера, репетиторы, переводчики, бьюти и коучи. Часы и сумма по каждому клиенту, кто ещё не заплатил, отчёт о работе для клиента в PDF. Бесплатно, данные только в твоём браузере.">
+<link rel="canonical" href="https://svoiludi.ch/instrumenty/chasy-po-klientam/">
+<meta property="og:type" content="website"><meta property="og:locale" content="ru_RU"><meta property="og:site_name" content="Свои люди в Швейцарии">
+<meta property="og:title" content="Часы по клиентам · учёт для самозанятых"><meta property="og:description" content="У кого ты работаешь, сколько часов, сколько это принесло и кто ещё не заплатил. Бесплатно, с PDF для клиента.">
+<meta property="og:url" content="https://svoiludi.ch/instrumenty/chasy-po-klientam/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="robots" content="noindex, nofollow">
+<title>Часы по клиентам · Свои люди в Швейцарии</title>
+
+<style>
+/* Часы по клиентам. Стиль сайта «Свои люди»: бежевая бумага, Forum + Manrope, кнопки ровного цвета. */
+:root{
+  --bg:#F4EDE3; --paper:#FFFCF8; --ink:#2F2924; --muted:#7A6E62; --line:#E5D9C9; --soft:#EFE5D7;
+  --brown:#6E4F3C; --mustard:#B98324; --mustard-soft:#F3E3C2; --sage:#4F5E3E; --weekend:#F6EEE3; --sage-soft:#E3E8D6;
+  --plus:#2F7F3B; --minus:#B5322A; --hol:#D81B78;
+  --display:"Forum","Georgia",serif; --sans:"Manrope","Segoe UI",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#221D19; --paper:#2C2621; --ink:#F1E9DF; --muted:#B4A796; --line:#3E362F; --soft:#352E28;
+  --brown:#E1C2A6; --mustard:#E2B45C; --mustard-soft:#3D321F; --sage:#B4BF97; --weekend:#302923; --sage-soft:#2E3226;
+  --plus:#7CC48A; --minus:#EE8A7E; --hol:#F07AB4; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#221D19; --paper:#2C2621; --ink:#F1E9DF; --muted:#B4A796; --line:#3E362F; --soft:#352E28;
+  --brown:#E1C2A6; --mustard:#E2B45C; --mustard-soft:#3D321F; --sage:#B4BF97; --weekend:#302923; --sage-soft:#2E3226;
+  --plus:#7CC48A; --minus:#EE8A7E; --hol:#F07AB4; color-scheme:dark}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--ink);font:15px/1.55 var(--sans);margin:0}
+.wrap{max-width:1240px;margin:0 auto;padding-inline:16px;padding-block:28px 48px;display:flex;flex-direction:column;gap:24px}
+.eyebrow{font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+h1{font-family:var(--display);font-weight:400;font-size:clamp(2.4rem,6vw,3.6rem);line-height:1;margin:4px 0 10px;text-wrap:balance}
+h2{font-family:var(--display);font-weight:400;font-size:1.6rem;margin:0;line-height:1.15}
+h3{font-family:var(--display);font-weight:400;font-size:1.2rem;margin:0}
+.lead{max-width:66ch;color:var(--muted);margin:0}
+.bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+select,input[type=text],input[type=number],input[type=time]{font:inherit;color:var(--ink);background:var(--paper);border:1.5px solid var(--line);border-radius:12px;padding:8px 12px;min-width:0}
+input[type=time]{padding:6px 8px;font-variant-numeric:tabular-nums}
+input[disabled]{background:var(--soft);color:var(--muted)}
+select:focus-visible,input:focus-visible,button:focus-visible,a:focus-visible,summary:focus-visible{outline:2px solid var(--mustard);outline-offset:2px}
+/* кнопки ровного цвета, без перелива */
+.btn{font:inherit;font-weight:700;font-size:.9rem;border:0;border-radius:999px;padding:10px 18px;cursor:pointer;color:#fff;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;text-align:center;background:#6E4F3C;box-shadow:0 8px 18px -8px rgba(110,79,60,.6)}
+.btn.gold{background:#B98324;box-shadow:0 8px 18px -8px rgba(185,131,36,.7)}
+.btn.free{background:#4F5E3E;box-shadow:0 8px 18px -8px rgba(79,94,62,.6)}
+.btn.ghost{background:transparent;color:var(--brown);border:1.5px solid var(--line);box-shadow:none}
+.btn.danger{background:#A0523D;box-shadow:none}
+.btn[disabled]{background:var(--soft);color:var(--muted);box-shadow:none;cursor:not-allowed}
+.spacer{flex:1 1 auto}
+.confirm{display:flex;gap:8px;align-items:center;flex-wrap:wrap;background:var(--paper);border:1.5px solid var(--line);border-radius:18px;padding:6px 6px 6px 14px;font-size:.88rem;font-weight:600}
+.status{font-size:.86rem;min-height:0}
+.status:not(:empty){position:fixed;left:50%;bottom:18px;transform:translateX(-50%);z-index:90;width:max-content;max-width:calc(100vw - 32px);background:var(--ink);color:var(--paper);border-radius:14px;padding:10px 16px;font-weight:600;box-shadow:0 14px 34px -14px rgba(47,41,36,.6)}
+.jump{font-weight:700;color:var(--brown);text-underline-offset:4px}
+.jumps{display:flex;flex-wrap:wrap;gap:6px 22px;margin:0}
+.privnote{margin-top:14px;max-width:80ch;background:var(--sage-soft);border-radius:16px;padding:12px 16px;font-size:.9rem}
+.hint{font-size:.84rem;color:var(--muted);margin:0}
+.disc{display:flex;gap:12px;align-items:flex-start;background:var(--mustard-soft);border-radius:16px;padding:12px 16px;font-size:.88rem}
+.disc b{flex:none;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mustard);padding-top:2px}
+
+.panel{background:var(--paper);border:1.5px solid var(--line);border-radius:22px;padding:18px 20px;display:flex;flex-direction:column;gap:14px}
+.panel-head{display:flex;flex-wrap:wrap;gap:6px 16px;align-items:baseline;justify-content:space-between}
+.panel-head p{margin:0;font-size:.88rem;color:var(--muted)}
+.fields{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,250px),1fr));gap:14px 20px}
+.field{display:flex;flex-direction:column;gap:6px;font-size:.9rem;font-weight:600;min-width:0}
+.field small{font-weight:500;color:var(--muted);font-size:.8rem}
+.field.wide{grid-column:1 / -1}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+
+/* переключатель месяцев */
+.monthnav{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.monthnav .cur{font-family:var(--display);font-size:1.7rem;min-width:9ch;text-align:center}
+.mbtn{font:inherit;font-weight:700;font-size:.86rem;border:1.5px solid var(--line);background:var(--paper);color:var(--brown);border-radius:999px;padding:8px 14px;cursor:pointer}
+
+/* итоги */
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,170px),1fr));gap:12px}
+.card{background:var(--paper);border:1.5px solid var(--line);border-radius:18px;padding:12px 16px;display:flex;flex-direction:column;gap:2px;min-width:0}
+.card b{font-family:var(--display);font-weight:400;font-size:1.9rem;line-height:1.1;font-variant-numeric:tabular-nums;white-space:nowrap}
+.card span{font-size:.82rem;color:var(--muted);font-weight:600}
+.card.main{background:var(--mustard-soft);border-color:transparent}
+.pos{color:var(--plus)} .neg{color:var(--minus)}
+
+/* праздники и каникулы */
+.dd{display:flex;flex-direction:column;line-height:1.15;min-width:0}
+.dd b{font-family:var(--display);font-weight:400;font-size:1.35rem;align-self:flex-start}
+.dd span{font-size:.76rem;font-weight:700;color:var(--muted)}
+.dd small{font-size:.68rem;color:var(--hol);font-weight:700;line-height:1.2;margin-top:2px}
+.dd small.schn,.mi small.schn,.mrow.hol .mi small.schn{color:var(--sage)}
+.chk{display:flex;gap:8px;align-items:baseline;font-weight:600;cursor:pointer;flex-wrap:wrap}
+.chk small{flex-basis:100%;padding-left:24px}
+.chk > span{flex:1 1 200px;min-width:0}
+.hollist{font-size:.86rem}
+.hchip{font:inherit;font-size:.82rem;font-weight:600;color:var(--ink);cursor:pointer;display:inline-flex;gap:6px;align-items:baseline;padding:4px 10px;border-radius:999px;background:color-mix(in srgb,var(--hol) 10%,var(--paper));border:1px solid color-mix(in srgb,var(--hol) 35%,var(--line))}
+.hchip b{color:var(--hol);font-variant-numeric:tabular-nums}
+.hchip i{font-style:normal;font-weight:800;font-size:.72rem;width:16px;height:16px;border-radius:50%;display:inline-grid;place-items:center;background:var(--hol);color:#fff;align-self:center}
+.hchip.on{outline:2px solid var(--hol);outline-offset:1px}
+.hinfo{background:color-mix(in srgb,var(--hol) 8%,var(--paper));border:1.5px solid color-mix(in srgb,var(--hol) 30%,var(--line));border-radius:16px;padding:12px 14px;font-size:.9rem;max-width:80ch;margin-bottom:10px}
+.hinfo p{margin:4px 0 0}
+.minfo{margin:0 0 10px;font-size:.88rem}
+.hdet{background:var(--paper);border:1.5px solid var(--line);border-radius:16px;padding:8px 12px}
+.hdet summary{list-style:none;display:flex;justify-content:space-between;align-items:center;gap:10px;cursor:pointer;font-weight:600;color:var(--ink)}
+.hdet summary::-webkit-details-marker{display:none}
+.hdet summary .tog{width:28px;height:28px}
+.hdet[open] > summary .tog::before{top:58%;transform:translate(-50%,-50%) rotate(-135deg)}
+.hchips{display:flex;flex-wrap:wrap;gap:6px 8px;padding:10px 0 4px;align-items:center}
+.minfo .lab{font-weight:700}
+.schip{display:inline-flex;gap:6px;align-items:baseline;padding:4px 10px;border-radius:999px;background:var(--sage-soft);border:1px solid color-mix(in srgb,var(--sage) 35%,var(--line))}
+.schip b{color:var(--sage)}
+.minfo .none{color:var(--muted)}
+.kids{display:flex;flex-direction:column;gap:8px}
+.kid{display:flex;flex-wrap:wrap;gap:6px 8px;align-items:center;font-size:.86rem;color:var(--muted)}
+.kid input[type=date]{font:inherit;color:var(--ink);background:var(--paper);border:1.5px solid var(--line);border-radius:10px;padding:6px 8px}
+
+/* раскрывающиеся блоки */
+.setd summary{list-style:none;display:flex;justify-content:space-between;align-items:center;gap:12px;cursor:pointer}
+.setd summary::-webkit-details-marker{display:none}
+.setd .sh{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 14px;min-width:0}
+.ssum{font-size:.86rem;color:var(--muted);font-weight:600}
+.tog{flex:none;width:34px;height:34px;border-radius:50%;border:1.5px solid var(--line);position:relative}
+.tog::before{content:"";position:absolute;left:50%;top:45%;width:9px;height:9px;border-right:2px solid var(--brown);border-bottom:2px solid var(--brown);transform:translate(-50%,-50%) rotate(45deg)}
+.setd[open] > summary .tog::before{top:58%;transform:translate(-50%,-50%) rotate(-135deg)}
+.setd:not([open]){gap:0}
+
+/* клиенты */
+.clis{display:flex;flex-direction:column;gap:10px}
+.cl{border:1.5px solid var(--line);border-left:6px solid var(--cc);border-radius:16px;padding:10px 14px;background:var(--paper)}
+.cl > summary{list-style:none;display:flex;align-items:center;gap:10px;cursor:pointer}
+.cl > summary::-webkit-details-marker{display:none}
+.cl > summary .tog{width:28px;height:28px;margin-left:auto}
+.cl[open] > summary .tog::before{top:58%;transform:translate(-50%,-50%) rotate(-135deg)}
+.cl[open]{display:flex;flex-direction:column;gap:12px}
+.clt{display:flex;flex-direction:column;min-width:0}
+.clt b{font-size:1rem;overflow-wrap:anywhere}
+.clt span{font-size:.82rem;color:var(--muted);font-weight:600}
+.cdot{flex:none;width:14px;height:14px;border-radius:50%;background:var(--cc)}
+.swatches{display:flex;flex-wrap:wrap;gap:8px}
+.sw{width:34px;height:34px;border-radius:50%;border:3px solid var(--paper);background:var(--cc);cursor:pointer;box-shadow:0 0 0 1.5px var(--line);padding:0}
+.sw.on{box-shadow:0 0 0 2.5px var(--ink)}
+.empty{display:flex;flex-direction:column;gap:10px;align-items:flex-start;background:var(--mustard-soft);border-radius:22px;padding:18px 20px}
+.empty p{margin:0;max-width:62ch}
+.empty b{font-family:var(--display);font-weight:400;font-size:1.4rem}
+.archl{display:flex;flex-direction:column;gap:6px;padding-top:8px}
+.archr{display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center;justify-content:space-between;font-weight:600}
+
+/* записи: компьютер */
+.month{background:var(--paper);border:1.5px solid var(--line);border-radius:22px;padding:6px 14px 10px}
+.dr{display:grid;grid-template-columns:74px minmax(0,1fr) 64px 96px;gap:8px 12px;align-items:start;padding:9px 0;border-top:1px solid var(--line)}
+.dr.head{border-top:0;font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);padding:10px 0 6px;align-items:center}
+.dr.we{background:var(--weekend);margin-inline:-14px;padding-inline:14px}
+.dr.today .dd b{background:var(--mustard);color:#fff;border-radius:8px;padding:0 6px}
+.dr.sch{box-shadow:inset 5px 0 0 var(--sage);margin-inline:-14px;padding-inline:14px}
+.dr.holr{background:color-mix(in srgb,var(--hol) 7%,var(--paper));margin-inline:-14px;padding-inline:14px}
+.ents{display:flex;flex-direction:column;gap:8px;min-width:0}
+.ent{display:flex;flex-direction:column;gap:4px;padding-left:10px;border-left:4px solid var(--cc)}
+.el{display:flex;flex-wrap:wrap;gap:6px 8px;align-items:center}
+.el select{width:200px;padding:6px 8px;border-radius:10px;font-size:.88rem}
+.el input[type=time]{width:8.4em}
+.el input[type=number]{width:64px;padding:6px 8px;border-radius:10px}
+.el .dur{width:74px;padding:6px 8px;border-radius:10px;font-variant-numeric:tabular-nums}
+.el .what{flex:1 1 160px;padding:6px 10px;border-radius:10px;font-size:.88rem}
+.tt,.pz{display:flex;gap:6px;align-items:center}
+.dash{color:var(--muted)}
+.pl{font-size:.74rem;color:var(--muted);font-weight:600}
+.eopt{display:flex;flex-wrap:wrap;gap:4px 16px;align-items:baseline}
+.ehs{font-size:.8rem;color:var(--muted);font-weight:700;font-variant-numeric:tabular-nums}
+.ex{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center;font-size:.8rem;font-weight:600;color:var(--muted)}
+.ex label{display:flex;gap:6px;align-items:center}
+.ex input{width:80px;padding:5px 8px;border-radius:10px;font-size:.86rem}
+.ex .exn{width:auto;flex:1 1 180px}
+.dadd{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center}
+.dadd select{padding:4px 8px;border-radius:999px;font-size:.8rem;font-weight:700;color:var(--brown);border-style:dashed}
+.x{font:inherit;width:30px;height:30px;border-radius:50%;border:1.5px solid var(--line);background:transparent;color:var(--muted);cursor:pointer;font-size:.85rem;padding:0;flex:none}
+.addb{font:inherit;font-size:.78rem;font-weight:700;color:var(--brown);background:none;border:0;padding:2px 0;cursor:pointer;align-self:flex-start;text-decoration:underline;text-underline-offset:3px}
+.addb.inl{text-decoration:none;border:1.5px dashed var(--brown);border-radius:999px;padding:4px 12px}
+.num{text-align:right;font-variant-numeric:tabular-nums;font-weight:700;font-size:.92rem;white-space:nowrap}
+.dr .num{padding-top:6px}
+.ddclr{font:inherit;font-size:.7rem;font-weight:700;color:var(--muted);background:none;border:0;padding:0;margin-top:4px;cursor:pointer;text-decoration:underline;text-underline-offset:2px;align-self:flex-start}
+.sum{display:grid;grid-template-columns:74px minmax(0,1fr) 64px 96px;gap:8px 12px;border-top:2px solid var(--ink);padding:10px 0 4px;font-weight:800}
+.sum .lab{grid-column:1 / 3;font-family:var(--display);font-weight:400;font-size:1.2rem}
+
+/* чипы клиентов */
+.cchip{display:inline-flex;align-items:center;gap:6px;max-width:100%;padding:2px 9px;border-radius:999px;font-size:.78rem;font-weight:700;background:color-mix(in srgb,var(--cc) 14%,var(--paper));border:1px solid color-mix(in srgb,var(--cc) 45%,var(--line));color:var(--ink);white-space:nowrap}
+.cchip::before{content:"";flex:none;width:9px;height:9px;border-radius:50%;background:var(--cc)}
+.cchip i{font-style:normal;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.cchip em{font-style:normal;color:var(--muted);font-variant-numeric:tabular-nums}
+.chips{display:flex;flex-wrap:wrap;gap:4px 6px;min-width:0}
+
+/* телефон: компактный список дней, день раскрывается для заполнения */
+.ml{background:var(--paper);border:1.5px solid var(--line);border-radius:22px;overflow:hidden}
+.mrow{display:grid;grid-template-columns:44px minmax(0,1fr) auto 14px;gap:12px;align-items:center;width:100%;padding:11px 14px;border:0;border-top:1px solid var(--line);background:transparent;color:var(--ink);font:inherit;text-align:left;cursor:pointer;scroll-margin-top:10px}
+.mrow:first-child{border-top:0}
+.mrow.we{background:var(--weekend)}
+.mrow.sch{box-shadow:inset 5px 0 0 var(--sage)}
+.mrow.holr{background:color-mix(in srgb,var(--hol) 8%,var(--paper))}
+.mrow.hol .mi small{color:var(--hol)}
+.mrow.open,.mrow.holr.open{background:var(--mustard-soft)}
+.md{display:flex;flex-direction:column;align-items:center;line-height:1.05}
+.md b{font-family:var(--display);font-weight:400;font-size:1.5rem}
+.md span{font-size:.72rem;font-weight:700;color:var(--muted)}
+.mrow.today .md b{background:var(--mustard);color:#fff;border-radius:8px;padding:0 6px}
+.mi{display:flex;flex-direction:column;gap:3px;min-width:0;line-height:1.3}
+.mi small{font-size:.72rem;font-weight:700}
+.ms{font-size:.8rem;color:var(--muted)}
+.mh{display:flex;flex-direction:column;align-items:flex-end;font-weight:800;font-variant-numeric:tabular-nums;line-height:1.2;white-space:nowrap}
+.mh small{font-size:.76rem;font-weight:700;color:var(--muted)}
+.chev{width:9px;height:9px;border-right:2px solid var(--muted);border-bottom:2px solid var(--muted);transform:rotate(-45deg)}
+.mrow.open .chev{transform:rotate(45deg)}
+.med{display:flex;flex-direction:column;gap:14px;padding:6px 14px 18px;background:var(--mustard-soft)}
+.mblk{display:flex;flex-direction:column;gap:10px;background:var(--paper);border-radius:16px;padding:12px;border-left:6px solid var(--cc)}
+.mbh{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap}
+.cpick{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.tchip{font:inherit;font-size:.88rem;font-weight:700;padding:9px 13px;border-radius:999px;border:1.5px solid var(--line);background:var(--paper);color:var(--ink);cursor:pointer}
+.tchip.on{background:var(--brown);border-color:var(--brown);color:#fff}
+.cp{display:flex;align-items:center;gap:8px;border-radius:12px;padding:9px 10px;font-size:.84rem;line-height:1.2;text-align:left;min-width:0;border-color:color-mix(in srgb,var(--cc) 45%,var(--line))}
+.cp::before{content:"";flex:none;width:11px;height:11px;border-radius:50%;background:var(--cc)}
+.cp span{overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow-wrap:anywhere;min-width:0}
+.cp.on{background:var(--cc);border-color:var(--cc);color:#fff}
+.cp.on::before{background:#fff}
+.partchips{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.partchips .tchip{padding:8px 4px;font-size:.82rem;border-radius:12px;text-align:center}
+.pchips{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+.pchips .tchip{padding:9px 2px;font-size:.84rem;border-radius:12px;text-align:center;white-space:nowrap}
+.tpair{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.tpair label,.pown{display:flex;flex-direction:column;gap:4px;font-size:.82rem;font-weight:700;color:var(--muted)}
+.tpair label{min-width:0}
+.tin{position:relative;display:block;min-width:0}
+.tpair input[type=time]{-webkit-appearance:none;appearance:none;display:block;box-sizing:border-box;width:100%;min-width:0;-webkit-min-logical-width:0;max-width:100%;height:54px;line-height:54px;margin:0;font-size:1.15rem!important;font-weight:700;padding:0 10px;border-radius:14px;text-align:left;color:var(--ink);background:var(--paper)}
+.tpair input[type=time]::-webkit-date-and-time-value{text-align:left;margin:0}
+.tpair input[type=time]::-webkit-calendar-picker-indicator{opacity:.55}
+.ios .tin.empty::after{content:"--:--";position:absolute;left:11px;top:50%;transform:translateY(-50%);font-size:1.15rem;font-weight:700;color:var(--muted);opacity:.6;pointer-events:none}
+.plbl{display:flex;align-items:center;font-size:.82rem;font-weight:700;color:var(--muted);margin-bottom:-4px}
+.pown{grid-column:1 / -1;flex-direction:row;align-items:center;gap:6px}
+.pown input{flex:1;min-width:0;width:auto;padding:8px 10px;border-radius:12px}
+.ptrow{display:flex;gap:8px;align-items:center;flex-wrap:wrap;font-size:.86rem;font-weight:700;color:var(--muted)}
+.ptrow input{width:130px}
+.xdet{border:1.5px solid var(--line);border-radius:14px;padding:8px 12px}
+.xdet summary{list-style:none;display:flex;justify-content:space-between;align-items:center;gap:10px;cursor:pointer;font-size:.88rem;font-weight:700;color:var(--brown)}
+.xdet summary::-webkit-details-marker{display:none}
+.xdet summary .tog{width:26px;height:26px}
+.xdet[open] > summary .tog::before{top:58%;transform:translate(-50%,-50%) rotate(-135deg)}
+.xgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding-top:10px}
+.xgrid label{display:flex;flex-direction:column;gap:4px;font-size:.8rem;font-weight:700;color:var(--muted);min-width:0}
+.xgrid .wide{grid-column:1 / -1}
+.xgrid input{width:100%}
+.mrowbtns{display:flex;flex-wrap:wrap;gap:8px}
+.mrowbtns .btn{flex:1 1 calc(50% - 4px);padding:12px 8px;white-space:nowrap;font-size:.86rem}
+.mrowbtns .btn.wbtn{flex-basis:100%;white-space:normal}
+.addper{font:inherit;font-weight:700;font-size:.92rem;color:var(--brown);background:var(--paper);border:1.5px dashed var(--brown);border-radius:16px;padding:12px;cursor:pointer}
+.addrow{display:flex;gap:8px;align-items:center}.addrow .addper{flex:1}
+.med .field input{font-size:16px}
+.clr{font:inherit;font-weight:700;font-size:.9rem;color:#A0523D;background:var(--paper);border:1.5px solid color-mix(in srgb,#A0523D 45%,var(--line));border-radius:999px;padding:11px 14px;cursor:pointer}
+.msum{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;padding:14px;border-top:2px solid var(--ink)}
+.msum .lab{grid-column:1 / -1;font-family:var(--display);font-size:1.2rem}
+.msum .num{text-align:left;display:flex;flex-direction:column}
+.lbl{font-size:.66rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+@media (max-width:900px){ input,select,textarea{font-size:16px!important} }
+
+/* статистика */
+.stack{display:flex;flex-direction:column;gap:12px}
+.ccards{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr));gap:12px}
+.cc{background:var(--paper);border:1.5px solid var(--line);border-top:6px solid var(--cc);border-radius:18px;padding:12px 16px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.cc.paid{border-color:color-mix(in srgb,var(--plus) 40%,var(--line));border-top-color:var(--cc)}
+.cch{display:flex;align-items:baseline;justify-content:space-between;gap:10px}
+.cch b{font-size:1rem;overflow-wrap:anywhere}
+.cch span{font-size:.8rem;color:var(--muted);font-weight:600;white-space:nowrap}
+.ccn{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.ccn div{display:flex;flex-direction:column;font-variant-numeric:tabular-nums;font-weight:800;white-space:nowrap}
+.mwl{display:flex;flex-direction:column;gap:2px;font-size:.84rem;font-variant-numeric:tabular-nums}
+.mwl div{display:flex;justify-content:space-between;gap:10px}
+.shbar{height:10px;border-radius:999px;background:var(--soft);overflow:hidden}
+.shbar i{display:block;height:100%;border-radius:999px;background:var(--cc)}
+.payr{display:flex;flex-wrap:wrap;gap:6px 16px}
+.paychk{display:flex;gap:8px;align-items:center;font-size:.88rem;font-weight:700;cursor:pointer}
+.paychk input{width:20px;height:20px;accent-color:var(--sage)}
+.waitl{background:var(--paper);border:1.5px solid var(--mustard);border-radius:16px;padding:10px 14px;font-weight:600}
+.waitl.ok{border-color:color-mix(in srgb,var(--plus) 45%,var(--line))}
+.riskn{background:var(--mustard-soft);border-radius:16px;padding:12px 16px;font-size:.9rem;max-width:90ch}
+.riskn p{margin:0}
+.riskn b{display:block;margin-bottom:4px}
+.hbars{display:flex;flex-direction:column;gap:6px}
+.hb{display:grid;grid-template-columns:76px minmax(0,1fr) auto;gap:10px;align-items:center;font-size:.84rem}
+.hb .hn{font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.hb .ht{height:14px;border-radius:999px;background:var(--soft);overflow:hidden}
+.hb .ht i{display:block;height:100%;border-radius:4px 999px 999px 4px;background:var(--cc,var(--mustard));min-width:0}
+.hb .hv{font-variant-numeric:tabular-nums;font-weight:700;text-align:right;white-space:nowrap}
+.hb .hv small{display:block;font-weight:600;color:var(--muted);font-size:.74rem}
+.hb.cur .hn{color:var(--mustard)}
+.hb.top{grid-template-columns:minmax(0,150px) minmax(0,1fr) auto}
+.ybody{display:flex;flex-direction:column;gap:16px;padding-top:10px}
+.pdfgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:14px}
+.pdfc{display:flex;flex-direction:column;gap:10px;background:var(--bg);border-radius:18px;padding:14px 16px}
+.pdfc .btn{align-self:flex-start}
+
+/* резервная копия, поделиться */
+.backup{display:flex;flex-direction:column;gap:8px;background:var(--paper);border:1.5px solid var(--line);border-radius:18px;padding:12px 16px;font-size:.88rem}
+.backup.due{border-color:var(--mustard);background:var(--mustard-soft)}
+.backup .btn{padding:8px 14px;font-size:.84rem}
+.warn{background:#A0523D;color:#fff;border-radius:16px;padding:12px 16px;font-size:.92rem}
+.share{display:flex;flex-direction:column;gap:10px;background:var(--paper);border:1.5px solid var(--line);border-radius:22px;padding:16px 18px}
+.share textarea{font:inherit;color:var(--ink);background:var(--bg);border:1.5px solid var(--line);border-radius:14px;padding:10px 12px;min-height:96px;resize:vertical;width:100%}
+
+/* подсказки «?» */
+.fl{display:inline-flex;align-items:center;gap:6px;flex-wrap:wrap}
+.qh{font:inherit;font-size:.74rem;font-weight:800;width:22px;height:22px;border-radius:50%;border:1.5px solid var(--brown);background:var(--paper);color:var(--brown);cursor:pointer;padding:0;display:inline-grid;place-items:center;margin-left:6px;vertical-align:middle;line-height:1;flex:none;text-transform:none;letter-spacing:0}
+.qh[aria-expanded="true"]{background:var(--brown);color:var(--paper)}
+.fl .qh{margin-left:0}
+h2 .qh,h3 .qh{vertical-align:.25em}
+.qpop{position:absolute;z-index:80;background:var(--paper);color:var(--ink);border:1.5px solid var(--brown);border-radius:14px;padding:12px 38px 12px 14px;font:500 .88rem/1.5 var(--sans);box-shadow:0 14px 34px -14px rgba(47,41,36,.5);text-transform:none;letter-spacing:0}
+.qpop p{margin:0 0 6px}.qpop p:last-of-type{margin-bottom:0}
+.qclose{position:absolute;top:6px;right:6px;width:28px;height:28px;border:0;border-radius:50%;background:none;color:var(--muted);cursor:pointer;font-size:.9rem}
+@media (max-width:640px){.qh{width:26px;height:26px;font-size:.8rem}}
+
+/* описание */
+.guide{display:flex;flex-direction:column;gap:28px;padding-top:8px}
+.guide h2{font-size:clamp(1.7rem,3.6vw,2.3rem);text-wrap:balance}
+.guide .intro{max-width:64ch;font-size:1.02rem;margin:0}
+.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px}
+.steps li{background:var(--paper);border:1.5px solid var(--line);border-radius:20px;padding:16px 18px;display:flex;flex-direction:column;gap:6px}
+.steps .n{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;border:2px solid var(--mustard);color:var(--mustard);font-family:var(--display);font-size:1.4rem;margin-bottom:4px}
+.steps h3,.effects h3{font-size:1.25rem;line-height:1.2}
+.steps p,.effects p{margin:0;font-size:.93rem;color:var(--muted)}
+.effects{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,320px),1fr));gap:16px 28px}
+.effects li{position:relative;padding-left:32px;display:flex;flex-direction:column;gap:4px}
+.effects li::before{content:"";position:absolute;left:0;top:2px;width:22px;height:22px;background:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2020%2020%22%3E%3Ccircle%20cx%3D%2210.00%22%20cy%3D%225.00%22%20r%3D%223.6%22%20fill%3D%22%23E3E6D6%22%20stroke%3D%22%2366704F%22%20stroke-width%3D%221.3%22/%3E%3Ccircle%20cx%3D%2214.76%22%20cy%3D%228.45%22%20r%3D%223.6%22%20fill%3D%22%23E3E6D6%22%20stroke%3D%22%2366704F%22%20stroke-width%3D%221.3%22/%3E%3Ccircle%20cx%3D%2212.94%22%20cy%3D%2214.05%22%20r%3D%223.6%22%20fill%3D%22%23E3E6D6%22%20stroke%3D%22%2366704F%22%20stroke-width%3D%221.3%22/%3E%3Ccircle%20cx%3D%227.06%22%20cy%3D%2214.05%22%20r%3D%223.6%22%20fill%3D%22%23E3E6D6%22%20stroke%3D%22%2366704F%22%20stroke-width%3D%221.3%22/%3E%3Ccircle%20cx%3D%225.24%22%20cy%3D%228.45%22%20r%3D%223.6%22%20fill%3D%22%23E3E6D6%22%20stroke%3D%22%2366704F%22%20stroke-width%3D%221.3%22/%3E%3Ccircle%20cx%3D%2210%22%20cy%3D%2210%22%20r%3D%222.6%22%20fill%3D%22%23B98324%22/%3E%3C/svg%3E") center/contain no-repeat}
+.cta{display:flex;flex-wrap:wrap;gap:12px 20px;align-items:center;justify-content:space-between;background:var(--mustard-soft);border-radius:22px;padding:18px 22px}
+.cta p{margin:0;max-width:60ch;font-family:var(--display);font-size:1.2rem;line-height:1.35}
+.credit{font-size:.84rem;color:var(--muted);display:flex;flex-wrap:wrap;gap:4px 14px}
+.credit a{color:var(--brown)}
+.facts{margin:0;padding-left:0;list-style:none;display:flex;flex-direction:column;gap:8px;max-width:80ch}
+.facts li{position:relative;padding-left:22px;font-size:.93rem}
+.facts li::before{content:"";position:absolute;left:2px;top:.55em;width:9px;height:9px;border-radius:3px;background:var(--mustard);transform:rotate(45deg)}
+
+@media (max-width:1180px){
+  .el select{width:100%;flex:1 1 100%}
+}
+@media (max-width:640px){
+  .panel{padding:14px}
+  .bar{gap:8px}
+  .bar .spacer{display:none}
+  .bar>.btn{flex:1 1 100%;padding:10px 8px}
+  #clearBox{display:flex;gap:8px;width:100%;flex-wrap:wrap}
+  #clearBox>.btn{flex:1 1 calc(50% - 4px);padding:9px 6px;font-size:.8rem;white-space:nowrap}
+  .monthnav{width:100%;display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .monthnav .cur{grid-column:1 / -1;grid-row:1;font-size:1.7rem;min-width:0}
+  .mbtn{padding:9px 6px;font-size:.82rem}
+  .disc{flex-direction:column;gap:4px}
+  .card b{font-size:1.6rem}
+  .pdfc .btn,.backup .btn{align-self:stretch;flex:1 1 100%}
+  .hb{grid-template-columns:62px minmax(0,1fr) auto}
+  .hb.top{grid-template-columns:minmax(0,96px) minmax(0,1fr) auto}
+}
+</style>
+<!--i18n--><link rel="alternate" hreflang="ru" href="https://svoiludi.ch/instrumenty/chasy-po-klientam/"><link rel="alternate" hreflang="uk" href="https://svoiludi.ch/uk/instrumenty/chasy-po-klientam/"><script>(function(){try{if(localStorage.getItem('svoiludiLang')==='uk'&&!/[?&]lang=ru/.test(location.search))location.replace('/uk/instrumenty/chasy-po-klientam/'+location.search+location.hash);}catch(e){}})();</script><!--i18n--></head>
+<body>
+
+<div class="wrap">
+  <div class="warn" id="inappWarn" hidden><b>Открой страницу в браузере.</b> Сейчас она открыта внутри приложения (Instagram, Telegram или другого). Записи сохранятся только здесь, и в Safari или Chrome их не будет. Нажми ⋯ или значок вверху и выбери «Открыть в браузере».</div>
+  <header>
+    <p style="margin:0 0 14px"><a class="jump" href="https://svoiludi.ch/instrumenty/">← Все полезные инструменты · Свои люди в Швейцарии</a></p>
+    <div class="eyebrow">Для самозанятых · клиенты и часы</div>
+    <h1>Часы по клиентам</h1>
+    <p class="lead">Для тех, кто работает на себя. Уборка, ремонт, няня, мастер, репетитор, переводчик, бьюти или коучинг. Записывай, у кого ты работаешь и сколько часов. Ты сразу видишь, сколько часов ушло на каждого клиента и каждый объект, сколько это принесло денег, какая у тебя на деле ставка в час и кто ещё не заплатил. В конце месяца скачай отчёт о работе для клиента и свой отчёт за месяц или за год для налоговой декларации.</p>
+    <p style="margin:10px 0 0"><a class="jump" href="#guide">Зачем это тебе и как с этим работать ↓</a></p>
+    <div class="privnote"><b>Твои данные только у тебя.</b> Всё, что ты вписываешь, хранится только в твоём браузере на этом устройстве. Никто кроме тебя это не видит, даже я. Регистрация не нужна. Ты можешь закрыть страницу и вернуться позже, записи останутся. На другом устройстве их не будет. На iPhone Safari сам стирает записи сайтов, на которые долго не заходили. Поэтому раз в месяц сохраняй резервную копию, а лучше добавь страницу на экран «Домой» (в Safari кнопка «Поделиться», потом «На экран Домой»). Кнопка «Удалить историю» полностью стирает всех клиентов и записи с этого устройства.</div>
+  </header>
+
+  <div class="bar">
+    <div class="monthnav">
+      <button class="mbtn" id="prevM" type="button">← Прошлый месяц</button>
+      <span class="cur" id="curM" aria-live="polite"></span>
+      <button class="mbtn" id="nextM" type="button">Следующий месяц →</button>
+    </div>
+    <span class="spacer"></span>
+    <button class="btn" id="dlXlsx" type="button" hidden style="display:none" data-vip="1" aria-expanded="false" aria-controls="vipPanel">Excel для VIP</button>
+    <button class="btn free" id="shareBtn" type="button" aria-expanded="false" aria-controls="sharePanel">Поделиться с друзьями</button>
+    <span id="clearBox"></span>
+  </div>
+  <p class="jumps"><a class="jump" href="#stats">К итогам месяца ↓</a><a class="jump" href="#pdfBox">К отчётам в PDF ↓</a></p>
+  <div class="status" id="status" role="status"></div>
+  <div class="backup" id="backupBox">
+    <div class="bk-text"><b>Резервная копия</b><button type="button" class="qh" data-help="backup" aria-label="Подсказка: резервная копия" aria-expanded="false">?</button> <span id="bkInfo"></span></div>
+    <div class="row"><button class="btn ghost" id="bkSave" type="button">Сохранить резервную копию</button><button class="btn ghost" id="bkLoad" type="button">Загрузить из резервной копии</button><input type="file" id="bkFile" accept=".json,application/json" hidden></div>
+    <div id="bkConfirm"></div>
+  </div>
+  <div class="share" id="vipPanel" hidden>
+    <h2 style="font-size:1.4rem">Выгрузка в Excel для VIP-партнёров</h2>
+    <p class="hint" style="font-size:.92rem;color:var(--ink)">Таблица Excel со всеми записями доступна VIP-партнёрам справочника «Свои люди в Швейцарии». PDF остаётся бесплатным для всех.</p>
+    <div class="row"><a class="btn gold" href="https://svoiludi.ch/join/">Узнать, как стать VIP-партнёром</a></div>
+  </div>
+  <div class="share" id="sharePanel" hidden>
+    <label for="shareText" style="font-weight:700">Сообщение для друзей</label>
+    <textarea id="shareText"></textarea>
+    <div class="row">
+      <button class="btn gold" id="copyMsg" type="button">Скопировать сообщение</button>
+      <a class="btn" id="tgShare" href="#" target="_blank" rel="noopener">Отправить в Telegram</a>
+      <a class="btn" id="waShare" href="#" target="_blank" rel="noopener">Отправить в WhatsApp</a>
+    </div>
+  </div>
+
+  <details class="panel setd" id="cliBox">
+    <summary><span class="sh"><h2 id="cli-h">Мои клиенты и объекты<button type="button" class="qh" data-help="clients" aria-label="Подсказка: клиенты и объекты" aria-expanded="false">?</button></h2><span class="ssum" id="cliSum"></span></span><span class="tog" aria-hidden="true"></span></summary>
+    <p class="hint">Впиши один раз, клиенты сохранятся для всех месяцев. Нажми на клиента, чтобы поменять ставку, цвет или заметку.</p>
+    <div class="clis" id="cliList"></div>
+    <div class="addrow"><button type="button" class="addper" id="addCli">+ Добавить клиента или объект</button></div>
+    <div id="cliArch"></div>
+  </details>
+
+  <details class="panel setd" id="setBox">
+    <summary><span class="sh"><h2 id="set-h">Мои настройки</h2><span class="ssum" id="setSum"></span></span><span class="tog" aria-hidden="true"></span></summary>
+    <p class="hint">Впиши один раз, они сохранятся для всех месяцев.</p>
+    <div class="fields">
+      <label class="field"><span class="fl">Моё имя или название для PDF<button type="button" class="qh" data-help="name" aria-label="Подсказка: имя для PDF" aria-expanded="false">?</button></span> <small>необязательно</small><input type="text" id="fName" autocomplete="name" placeholder="Имя и фамилия"></label>
+      <label class="field"><span class="fl">Ставка для новых клиентов, CHF в час<button type="button" class="qh" data-help="defRate" aria-label="Подсказка: ставка для новых клиентов" aria-expanded="false">?</button></span> <small>необязательно, например 35</small><input type="text" id="fDefRate" inputmode="decimal" placeholder="например 35"></label>
+      <div class="field wide"><label class="chk"><input type="checkbox" id="fMwst"> <span>Я плачу MWST<button type="button" class="qh" data-help="mwst" aria-label="Подсказка: MWST" aria-expanded="false">?</button></span> <small>нужно, только если оборот больше 100 000 CHF в год</small></label>
+        <label class="field" id="mwstRateBox" style="max-width:260px">Ставка MWST, %<input type="text" id="fMwstRate" inputmode="decimal" placeholder="8.1"></label></div>
+      <div class="field wide"><label class="chk"><input type="checkbox" id="fKm"> <span>Учитывать расходы на дорогу по километрам<button type="button" class="qh" data-help="km" aria-label="Подсказка: расходы на дорогу" aria-expanded="false">?</button></span> <small>считаются отдельно и не прибавляются к заработку</small></label>
+        <label class="field" id="kmRateBox" style="max-width:260px">CHF за километр<input type="text" id="fKmRate" inputmode="decimal" placeholder="0.70"></label></div>
+      <div class="field wide"><label class="field" style="max-width:420px"><span class="fl">Кантон для праздников и каникул<button type="button" class="qh" data-help="canton" aria-label="Подсказка: Кантон для праздников и каникул" aria-expanded="false">?</button></span> <select id="fCanton"></select></label><label class="chk"><input type="checkbox" id="fShowHol"> Показывать праздники кантона<button type="button" class="qh" data-help="hol" aria-label="Подсказка: праздники" aria-expanded="false">?</button> <small>отмечены розовым. Нажми на праздник, чтобы узнать, что это за день</small></label><div class="hollist" id="holList"></div><div class="hinfo" id="holInfo" hidden></div></div>
+      <div class="field wide"><span class="fl">Школьные каникулы<button type="button" class="qh" data-help="sch" aria-label="Подсказка: школьные каникулы" aria-expanded="false">?</button></span>
+        <label class="chk"><input type="checkbox" id="fSchZh"> Показывать школьные каникулы кантона <small id="schNote"></small></label>
+        <div class="kids" id="kidsList"></div>
+        <div><button class="btn ghost" id="addKids" type="button">+ Добавить свои даты каникул</button></div>
+      </div>
+    </div>
+  </details>
+
+  <section aria-label="Записи по дням" class="stack" style="gap:0">
+    <div class="empty" id="emptyCli" hidden style="margin-bottom:14px"><b>Добавь первого клиента</b><p>Например «Семья Мюллер», «Фрау Шмид» или «Квартира Bahnhofstr. 12». Укажи ставку в час или цену за визит. Потом записывай по дням, у кого и сколько часов, и итоги посчитаются сами.</p><button class="btn" type="button" id="addFirst">+ Добавить первого клиента</button></div>
+    <div class="minfo" id="monthInfo"></div>
+    <div class="hinfo" id="monthHolInfo" hidden></div>
+    <div class="month" id="month"></div>
+    <p class="hint" style="margin-top:10px">В один день можно сделать сколько угодно записей, по одной на каждого клиента или каждый заход. Если время не важно, впиши только сколько часов, например 2:30. «Как в прошлый раз» повторяет последнюю запись у клиента, а «Повторить каждую неделю до конца месяца» ставит запись на тот же день недели. Розовым отмечены праздники кантона, зелёной полосой школьные каникулы.</p>
+  </section>
+
+  <section id="stats" aria-labelledby="st-h" class="stack">
+    <h2 id="st-h">Итог месяца<button type="button" class="qh" data-help="cards" aria-label="Подсказка: что означают цифры" aria-expanded="false">?</button></h2>
+    <div class="cards" id="cards"></div>
+    <div id="wait"></div>
+    <div id="riskM"></div>
+    <h3 id="cc-h" style="font-size:1.35rem;margin-top:6px">По клиентам за месяц<button type="button" class="qh" data-help="perclient" aria-label="Подсказка: итоги по клиентам" aria-expanded="false">?</button></h3>
+    <div class="ccards" id="ccards"></div>
+    <details class="panel setd" id="yearBox">
+      <summary><span class="sh"><h2 id="y-h">Весь год<button type="button" class="qh" data-help="year" aria-label="Подсказка: весь год" aria-expanded="false">?</button></h2><span class="ssum" id="ySum"></span></span><span class="tog" aria-hidden="true"></span></summary>
+      <div class="ybody" id="yBody"></div>
+    </details>
+  </section>
+
+  <section class="panel" id="pdfBox" aria-labelledby="pdf-h">
+    <div class="panel-head"><h2 id="pdf-h">Отчёты в PDF</h2><p>Бесплатно. Файл сохранится на твоём устройстве.</p></div>
+    <div class="pdfgrid">
+      <div class="pdfc">
+        <h3>Отчёт о работе для клиента<button type="button" class="qh" data-help="pdfClient" aria-label="Подсказка: отчёт для клиента" aria-expanded="false">?</button></h3>
+        <p class="hint">Все записи у одного клиента за выбранный месяц, итог и места для двух подписей.</p>
+        <label class="field">Клиент<select id="pdfCli"></select></label>
+        <button class="btn gold" id="dlCli" type="button">Скачать отчёт для клиента в PDF</button>
+      </div>
+      <div class="pdfc">
+        <h3>Мой отчёт<button type="button" class="qh" data-help="pdfMine" aria-label="Подсказка: мой отчёт" aria-expanded="false">?</button></h3>
+        <p class="hint">Все клиенты, суммы и дни. Пригодится для налоговой декларации.</p>
+        <button class="btn gold" id="dlMine" type="button">Скачать мой отчёт за месяц в PDF</button>
+        <button class="btn gold" id="dlYear" type="button">Скачать мой отчёт за год в PDF</button>
+      </div>
+    </div>
+  </section>
+
+  <div class="disc" role="note"><b>Важно</b><span>Это ориентир, а не точный расчёт. Суммы считаются только из того, что ты вписываешь. Налоги, взносы AHV и MWST зависят от твоей ситуации, кантона и решения твоей кассы AHV. Все цифры сверяй со своими счетами и выписками, уточняй в налоговой службе, в кассе AHV (SVA) или у консультанта. Автор не несёт ответственности за достоверность данных. Все часы, ставки и суммы обязательно проверь и впиши сама или сам по своим документам.</span></div>
+
+  <section class="guide" id="guide" aria-labelledby="g-why">
+    <div>
+      <div class="eyebrow">Зачем это тебе</div>
+      <h2 id="g-why">Твой час стоит денег</h2>
+    </div>
+    <p class="intro">Когда работаешь на себя, часы расползаются. Тут уборка подольше, там лишняя поездка, здесь клиент заплатит потом. В конце месяца трудно сказать, сколько ты на самом деле работала и сколько заработала. Когда каждая работа записана, видно всё. У кого ты бываешь чаще всего, кто платит лучше, сколько съедает дорога и кто ещё должен. Это уже не ощущение «я всё время работаю, а денег мало», а цифры, с которыми можно спокойно решать.</p>
+
+    <div>
+      <div class="eyebrow">Как с этим работать</div>
+      <h2 id="g-how">Четыре шага к ясному месяцу</h2>
+    </div>
+    <ol class="steps" aria-labelledby="g-how">
+      <li><span class="n">1</span><h3>Заведи клиентов</h3><p>Семьи, фирмы и объекты. Для каждого ставка в час или цена за визит, цвет и заметка, например где лежит ключ.</p></li>
+      <li><span class="n">2</span><h3>Записывай каждую работу</h3><p>Клиент, время и что сделано. Лучше сразу, пока помнишь. Постоянных клиентов ставь кнопками «Как в прошлый раз» и «Повторить каждую неделю до конца месяца».</p></li>
+      <li><span class="n">3</span><h3>Отмечай счета и оплату</h3><p>Кому счёт уже ушёл и кто заплатил. Сумма «Ждёт оплаты» сразу показывает, сколько тебе ещё должны.</p></li>
+      <li><span class="n">4</span><h3>Скачай отчёты</h3><p>Отчёт о работе для клиента с местами для подписей и свой отчёт за месяц или год для налоговой декларации.</p></li>
+    </ol>
+
+    <div>
+      <div class="eyebrow">Если ты работаешь на себя в Швейцарии</div>
+      <h2 id="g-ch">Что стоит знать</h2>
+    </div>
+    <ul class="facts" aria-labelledby="g-ch">
+      <li>Самозанятые сами платят взносы AHV, IV и EO через свою кассу (Ausgleichskasse, SVA). Касса и решает, признаёт ли она тебя самозанятой или самозанятым.</li>
+      <li>Если почти весь доход даёт один заказчик, касса может посчитать работу работой по найму (Scheinselbständigkeit). Поэтому полезно видеть, какую долю дохода даёт каждый клиент.</li>
+      <li>MWST нужно платить, только если оборот больше 100 000 CHF в год. Обычная ставка 8,1 %.</li>
+      <li>Для налоговой декларации нужны доходы и расходы на работу за год. Храни отчёты, счета, чеки за материалы и записи о поездках.</li>
+      <li>Отчёт о работе, подписанный клиентом, помогает, если позже возникнет спор о часах или сумме.</li>
+    </ul>
+
+    <div>
+      <div class="eyebrow">Что это даёт в коучинге</div>
+      <h2 id="g-coach">Что меняется для тебя</h2>
+    </div>
+    <ul class="effects" aria-labelledby="g-coach">
+      <li><h3>Настоящая цена твоего часа</h3><p>Средняя ставка вместе с визитами по фиксированной цене показывает, сколько ты на деле получаешь за час. С этим проще решить, где поднять цену.</p></li>
+      <li><h3>Видно, на ком всё держится</h3><p>Доля каждого клиента в доходе показывает, где ты зависишь от одного человека, и где пора искать новых.</p></li>
+      <li><h3>Спокойный разговор о деньгах</h3><p>С записями по каждому дню легче напомнить об оплате или обсудить новую ставку. Ты опираешься на факты, а не на чувство неловкости.</p></li>
+      <li><h3>Уважение к своему труду</h3><p>Месяц на одном листе показывает, сколько ты уже делаешь. Это хорошая опора, когда кажется, что ты делаешь мало, и хороший материал для нашей встречи.</p></li>
+    </ul>
+
+    <div class="cta">
+      <p>Хочешь выстроить своё дело так, чтобы денег хватало, а сил оставалось на жизнь? Знакомство длится 30 минут, онлайн и бесплатно.</p>
+      <a class="btn free" href="https://t.me/IrynaNeuroCoach" target="_blank" rel="noopener">Написать «ВСТРЕЧА» в Telegram</a>
+    </div>
+  </section>
+
+  <div class="disc" role="note"><b>Важно</b><span>Цифры на этой странице ориентировочные. Уточняй и перепроверяй их. Автор не несёт ответственности за достоверность данных. Все часы, ставки и суммы обязательно проверь и впиши сама или сам по своим документам.</span></div>
+  <p class="credit"><span>Ирина Вознесенская · коуч</span><a href="https://www.instagram.com/iryna.voznesenskaya/" target="_blank" rel="noopener">Instagram @iryna.voznesenskaya</a><a href="https://voznesenskaya.ch/" target="_blank" rel="noopener">voznesenskaya.ch</a><a href="https://svoiludi.ch/" target="_blank" rel="noopener">Свои люди в Швейцарии · svoiludi.ch</a><a href="https://svoiludi.ch/privacy/">Политика конфиденциальности</a></p>
+</div>
+
+<script src="/assets/lib/jspdf.umd.min.js"></script>
+<script>
+const $ = id => document.getElementById(id);
+if (/iP(hone|ad|od)/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)) document.documentElement.classList.add('ios');
+const KEY = 'chasyPoKlientam.v1';
+const SHARE_URL = 'https://svoiludi.ch/instrumenty/chasy-po-klientam/';
+const SHARE_MSG = 'Привет! Смотри, какой удобный учёт часов по клиентам для тех, кто работает на себя. Уборка, ремонт, няня, репетитор, бьюти или коучинг. Записываешь, у кого и сколько часов, а сумма по каждому клиенту и кто ещё не заплатил видны сами. Есть отчёт о работе для клиента в PDF. Хочешь попробовать?\n' + SHARE_URL;
+const CREDIT_PARTS = [
+  {t:'Ирина Вознесенская · коуч', u:'https://voznesenskaya.ch/'},
+  {t:'Instagram @iryna.voznesenskaya', u:'https://www.instagram.com/iryna.voznesenskaya/'},
+  {t:'voznesenskaya.ch', u:'https://voznesenskaya.ch/'},
+  {t:'svoiludi.ch', u:'https://svoiludi.ch/'},
+];
+const MONTHS = ['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'];
+const MONTHS_GEN = ['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря'];
+const MONTHS_IN = ['январе','феврале','марте','апреле','мае','июне','июле','августе','сентябре','октябре','ноябре','декабре'];
+const WD = ['Вс','Пн','Вт','Ср','Чт','Пт','Сб'];
+const COLORS = [['#C0603A','терракотовый'],['#4F7A5A','зелёный'],['#3F6FBF','синий'],['#B98324','горчичный'],['#8E5BA8','сливовый'],['#2E8A8A','бирюзовый'],['#C25468','розовый'],['#6E4F3C','коричневый'],['#7A8B2E','оливковый'],['#D07A2E','оранжевый']];
+
+/* ---------- праздники кантонов (как в «Мой год») ---------- */
+const iso = (y, m, d) => y + '-' + String(m + 1).padStart(2, '0') + '-' + String(d).padStart(2, '0');
+function easter(y){ const a=y%19,b=Math.floor(y/100),c=y%100,d=Math.floor(b/4),e=b%4,f=Math.floor((b+8)/25),g=Math.floor((b-f+1)/3),h=(19*a+b-d-g+15)%30,i=Math.floor(c/4),k=c%4,l=(32+2*e+2*i-h-k)%7,m=Math.floor((a+11*h+22*l)/451),mo=Math.floor((h+l-7*m+114)/31),da=((h+l-7*m+114)%31)+1; return new Date(y,mo-1,da); }
+const CANTONS = {ZH:'Цюрих',BE:'Берн',LU:'Люцерн',UR:'Ури',SZ:'Швиц',OW:'Обвальден',NW:'Нидвальден',GL:'Гларус',ZG:'Цуг',FR:'Фрибур',SO:'Золотурн',BS:'Базель-Штадт',BL:'Базель-Ланд',SH:'Шаффхаузен',AR:'Аппенцелль-Ауссерроден',AI:'Аппенцелль-Иннерроден',SG:'Санкт-Галлен',GR:'Граубюнден',AG:'Аргау',TG:'Тургау',TI:'Тичино',VD:'Во',VS:'Вале',NE:'Невшатель',GE:'Женева',JU:'Юра'};
+/* праздники по кантонам — Федеральное ведомство юстиции (BJ), «Kantonale Feiertage»; * = только в части общин */
+const CH = {
+  ZH:'NY BE KF OM AR AU PM WN ST', BE:'NY BE KF OM AU PM WN ST', LU:'NY BE KF OM AU PM FL MH AH ME WN ST',
+  UR:'NY DK JO KF OM AU PM FL MH AH ME WN ST', SZ:'NY DK JO KF OM AU PM FL MH AH ME WN ST', OW:'NY KF AU FL MH BK AH ME WN',
+  NW:'NY JO KF AU FL MH AH ME WN', GL:'NY KF OM NF AU PM AH WN ST', ZG:'NY KF AU FL MH AH ME WN', FR:'NY KF AU FL* MH* AH* ME* WN',
+  SO:'NY JO* KF AR AU FL* MH* AH* WN', BS:'NY KF OM AR AU PM WN ST', BL:'NY KF OM AR AU PM WN ST', SH:'NY KF OM AR AU PM WN ST',
+  AR:'NY KF OM AU PM WN ST', AI:'NY KF OM AU PM FL MH MT* AH ME WN ST', SG:'NY KF OM AU PM AH WN ST', GR:'NY OM AU PM WN ST',
+  AG:'NY BE KF OM AR AU PM FL MH AH ME WN ST', TG:'NY BE KF OM AR AU PM WN ST', TI:'NY DK JO OM AR AU PM FL PP MH AH ME WN ST',
+  VD:'NY BE KF OM AU PM LJ WN', VS:'NY JO AU FL MH AH ME WN', NE:'NY IR KF AU FL* WN AR', GE:'NY KF OM AU PM JG WN RR',
+  JU:'NY BE KF OM AR AU PM FL PJ MH AH WN'
+};
+const HNAME = {NY:'Новый год',BE:'Берхтольдов день',DK:'Богоявление',JO:'День святого Иосифа',KF:'Страстная пятница',OM:'Пасхальный понедельник',AR:'День труда',AU:'Вознесение',PM:'Духов понедельник',FL:'Праздник Тела Христова',PP:'Петра и Павла',MH:'Успение Богородицы',BK:'День святого Николая из Флюэ',MT:'День святого Маврикия',AH:'День всех святых',ME:'Непорочное зачатие',WN:'Рождество',ST:'День святого Стефана',NF:'Нефельсская битва',LJ:'Понедельник после Дня покаяния',JG:'Женевский пост',RR:'Восстановление республики',IR:'День республики',PJ:'Годовщина плебисцита Юры',BF:'День Швейцарии'};
+/* короткие подсказки к праздникам: что за день, аналог у нас, как празднуют в Швейцарии */
+const HINFO = {
+  NY:'Первый день года, как и у нас. Но главный зимний праздник здесь Рождество, а Новый год встречают с друзьями. В полночь звонят колокола и запускают фейерверки, в Цюрихе большой салют над озером.',
+  BE:'Второй выходной после Нового года. У нас такого отдельного праздника нет. Это спокойный день для семьи и прогулок, кое-где проходят местные народные праздники.',
+  DK:'Праздник трёх королей, 6 января. Близок к нашему Крещению, которое православные отмечают 19 января. В Швейцарии в этот день едят пирог трёх королей: в один кусочек запечена фигурка, и кто её найдёт, становится королём дня.',
+  JO:'День святого Иосифа, покровителя семьи и ремесленников. У нас аналога-выходного нет. В католических кантонах это выходной, люди идут в церковь и проводят день с семьёй.',
+  KF:'Страстная пятница, день памяти распятия Христа перед Пасхой. У православных она тоже есть, но наша Пасха часто бывает в другие даты. В Швейцарии это тихий день: многие магазины закрыты, шумные мероприятия не проводят.',
+  OM:'Второй день Пасхи, у нас его называют Светлым понедельником. В Швейцарии дети ищут спрятанные шоколадные яйца, семьи гуляют. В Берне на площади бьются крашеными яйцами, как у нас в «битки».',
+  AR:'День труда, как наш Первомай. В Цюрихе и других городах проходят демонстрации профсоюзов. Выходной не во всех кантонах.',
+  AU:'Вознесение, 40-й день после Пасхи, всегда четверг. У православных тоже есть Вознесение, по своему календарю. Многие берут пятницу и уезжают на длинные выходные.',
+  PM:'Понедельник после Троицы (Пфингстен). У православных это Духов день, тоже на следующий день после Троицы. В Швейцарии это длинные выходные и время поездок.',
+  FL:'Праздник Тела Христова, католический праздник через 60 дней после Пасхи. У нас аналога нет. В католических кантонах проходят процессии с цветами, флагами и музыкой.',
+  PP:'День апостолов Петра и Павла, 29 июня. У православных он тоже есть, 12 июля. В кантоне Тичино это выходной.',
+  MH:'Успение Богородицы, 15 августа. У православных Успение отмечают 28 августа. В католических кантонах выходной, проходят службы и местные праздники.',
+  BK:'День брата Клауса, Николая из Флюэ, покровителя Швейцарии. У нас аналога нет. В Обвальдене в этот день идут паломничеством к его келье во Флюэли-Ранфте.',
+  MT:'День святого Маврикия, покровителя солдат. У нас аналога-выходного нет. Отмечают в части общин Аппенцелля-Иннерродена.',
+  AH:'День всех святых, 1 ноября. Близок к нашим поминальным дням. В католических кантонах ходят на кладбища и ставят свечи на могилы близких.',
+  ME:'Непорочное зачатие Девы Марии, 8 декабря, католический праздник. У православных похожий праздник 22 декабря, но он не выходной. В католических кантонах это выходной день.',
+  WN:'У православных Рождество празднуют 7 января. Здесь это главный семейный праздник: ёлку наряжают заранее, подарки дарят вечером 24 декабря после праздничного ужина, по всей стране работают рождественские рынки.',
+  ST:'Второй день Рождества. У нас аналога нет. Это день для семьи и гостей, многие едут в горы кататься.',
+  NF:'Нефельсская битва, первый четверг апреля. Кантон Гларус вспоминает победу 1388 года над Габсбургами. Люди идут процессией к месту битвы.',
+  LJ:'Понедельник после Дня благодарения, покаяния и молитвы, который вся Швейцария отмечает в третье воскресенье сентября. У нас аналога нет. В эти дни традиционно пекут сливовый пирог.',
+  JG:'Женевский пост, четверг после первого воскресенья сентября. Женева вспоминает трудные времена в своей истории. Традиционно едят сливовый пирог.',
+  RR:'Восстановление Женевской республики, 31 декабря. Память о том, как в 1813 году Женева вернула себе независимость.',
+  IR:'День республики Невшатель, 1 марта. Годовщина 1848 года, когда Невшатель перестал быть прусским княжеством и стал республикой.',
+  PJ:'Годовщина плебисцита 23 июня 1974 года, после которого появился кантон Юра. Это праздник независимости кантона.',
+  BF:'День Швейцарии, 1 августа, национальный праздник, как наш день независимости. Вечером зажигают костры и фейерверки, дети ходят с бумажными фонариками, на фермах устраивают праздничные завтраки.'
+};
+function holidays(y, canton){
+  const e = easter(y), dd = (dt,n) => { const x = new Date(dt); x.setDate(x.getDate()+n); return x; }, f = x => iso(x.getFullYear(), x.getMonth(), x.getDate());
+  const nthWd = (m, wd, n) => { const x = new Date(y, m, 1); while ((x.getDay()) !== wd) x.setDate(x.getDate()+1); x.setDate(x.getDate() + 7*(n-1)); return x; };
+  const D = {NY:iso(y,0,1), BE:iso(y,0,2), DK:iso(y,0,6), JO:iso(y,2,19), KF:f(dd(e,-2)), OM:f(dd(e,1)), AR:iso(y,4,1), AU:f(dd(e,39)), PM:f(dd(e,50)), FL:f(dd(e,60)),
+    PP:iso(y,5,29), MH:iso(y,7,15), BK:iso(y,8,25), MT:iso(y,8,22), AH:iso(y,10,1), ME:iso(y,11,8), WN:iso(y,11,25), ST:iso(y,11,26),
+    NF:f(nthWd(3,4,1)), LJ:f(dd(nthWd(8,0,3),1)), JG:f(dd(nthWd(8,0,1),4)), RR:iso(y,11,31), IR:iso(y,2,1), PJ:iso(y,5,23), BF:iso(y,7,1)};
+  const out = {}; out[D.BF] = {n: HNAME.BF, k: 'BF'};
+  for (const tok of (CH[canton] || CH.ZH).split(' ')){ const k = tok.replace('*',''), part = tok.endsWith('*'); out[D[k]] = {n: HNAME[k] + (part ? ' (в части общин)' : ''), part, k}; }
+  return out;
+}
+
+/* школьные каникулы города Цюрих: недели по правилу Stadt Zürich (спортивные 7–8, весенние 17–18, летние 29–33, осенние 41–42), рождественские 2 недели с понедельника недели 21 декабря */
+function isoMonday(y, w){ const j4 = new Date(y, 0, 4), m = new Date(j4); m.setDate(j4.getDate() - ((j4.getDay() + 6) % 7) + (w - 1) * 7); return m; }
+function zhSchool(y){
+  const out = [], add = (a, days, n) => { const e = new Date(a); e.setDate(e.getDate() + days); out.push([a, e, n]); };
+  add(isoMonday(y, 7), 13, 'Спортивные каникулы'); add(isoMonday(y, 17), 13, 'Весенние каникулы');
+  add(isoMonday(y, 29), 34, 'Летние каникулы'); add(isoMonday(y, 41), 13, 'Осенние каникулы');
+  [y - 1, y].forEach(yy => { const d = new Date(yy, 11, 21); d.setDate(d.getDate() - ((d.getDay() + 6) % 7)); add(d, 13, 'Рождественские каникулы'); });
+  return out;
+}
+/* школьные каникулы всех кантонов, 2026–2027 (часть дат до 2028): официальные планы кантонов, городов и общин, собраны 06.10.2026. Для кантонов, где даты назначает община, — главный город. Каникулы, которые начинаются в понедельник или заканчиваются в пятницу, показаны вместе с выходными. */
+const SCH = {"ZH":{"p":"город Цюрих","d":[["2025-12-20","2026-01-03","Рождественские каникулы"],["2026-02-07","2026-02-21","Спортивные каникулы"],["2026-04-18","2026-05-02","Весенние каникулы"],["2026-07-11","2026-08-15","Летние каникулы"],["2026-10-03","2026-10-17","Осенние каникулы"],["2026-12-19","2027-01-02","Рождественские каникулы"],["2027-02-13","2027-02-27","Спортивные каникулы"],["2027-04-24","2027-05-08","Весенние каникулы"],["2027-07-17","2027-08-21","Летние каникулы"],["2027-10-09","2027-10-23","Осенние каникулы"],["2027-12-18","2028-01-01","Рождественские каникулы"]]},"BE":{"p":"город Берн","d":[["2025-12-20","2026-01-04","Рождественские каникулы"],["2026-01-31","2026-02-08","Зимние каникулы"],["2026-04-02","2026-04-19","Весенние каникулы"],["2026-07-03","2026-08-09","Летние каникулы"],["2026-09-19","2026-10-11","Осенние каникулы"],["2026-12-24","2027-01-10","Рождественские каникулы"],["2027-02-06","2027-02-14","Зимние каникулы"],["2027-04-10","2027-04-25","Весенние каникулы"],["2027-07-02","2027-08-15","Летние каникулы"],["2027-09-25","2027-10-17","Осенние каникулы"],["2027-12-24","2028-01-09","Рождественские каникулы"]]},"LU":{"p":"город Люцерн","d":[["2025-12-20","2026-01-04","Рождественские каникулы"],["2026-02-07","2026-02-22","Карнавальные каникулы (Fasnacht)"],["2026-04-03","2026-04-19","Пасхальные каникулы"],["2026-07-04","2026-08-16","Летние каникулы"],["2026-09-26","2026-10-11","Осенние каникулы"],["2026-12-19","2027-01-03","Рождественские каникулы"],["2027-01-30","2027-02-14","Карнавальные каникулы (Fasnacht)"],["2027-03-26","2027-04-11","Пасхальные каникулы"],["2027-05-06","2027-05-07","Вознесение, свободные дни"],["2027-05-27","2027-05-28","Праздник Тела Христова, свободные дни"],["2027-07-03","2027-08-15","Летние каникулы"],["2027-09-25","2027-10-10","Осенние каникулы"],["2027-12-18","2028-01-02","Рождественские каникулы"]]},"UR":{"p":"Альтдорф","d":[["2025-12-20","2026-01-06","Рождественские каникулы"],["2026-02-28","2026-03-08","Спортивные каникулы"],["2026-05-02","2026-05-17","Весенние каникулы"],["2026-07-04","2026-08-16","Летние каникулы"],["2026-10-03","2026-10-18","Осенние каникулы"],["2026-12-05","2026-12-08","Непорочное зачатие, свободные дни"],["2026-12-24","2027-01-10","Рождественские каникулы"],["2027-02-04","2027-02-10","Карнавальные каникулы (Fasnacht)"],["2027-02-27","2027-03-07","Спортивные каникулы"],["2027-05-01","2027-05-17","Весенние каникулы"],["2027-05-27","2027-05-30","Праздник Тела Христова, свободные дни"],["2027-07-03","2027-08-15","Летние каникулы"],["2027-10-02","2027-10-17","Осенние каникулы"],["2027-12-24","2028-01-09","Рождественские каникулы"]]},"SZ":{"p":"община Швиц","d":[["2026-02-21","2026-03-01","Спортивные каникулы"],["2026-04-25","2026-05-10","Весенние каникулы"],["2026-09-26","2026-10-11","Осенние каникулы"],["2026-12-19","2027-01-06","Рождественские каникулы"],["2027-02-27","2027-03-07","Спортивные каникулы"],["2027-05-01","2027-05-16","Весенние каникулы"]],"m":{"2027":"летние, осенние и рождественские каникулы 2027 года"}},"OW":{"p":"весь кантон Обвальден","d":[["2025-12-24","2026-01-06","Рождественские каникулы"],["2026-02-07","2026-02-22","Карнавальные каникулы (Fasnacht)"],["2026-04-03","2026-04-19","Пасхальные каникулы"],["2026-07-04","2026-08-16","Летние каникулы"],["2026-09-25","2026-10-11","Осенние каникулы"],["2026-12-24","2027-01-06","Рождественские каникулы"],["2027-01-30","2027-02-14","Карнавальные каникулы (Fasnacht)"],["2027-03-26","2027-04-11","Пасхальные каникулы"],["2027-05-07","2027-05-07","Вознесение, свободные дни"],["2027-05-28","2027-05-28","Праздник Тела Христова, свободные дни"],["2027-07-03","2027-08-15","Летние каникулы"],["2027-09-25","2027-10-10","Осенние каникулы"],["2027-12-24","2028-01-06","Рождественские каникулы"]]},"NW":{"p":"весь кантон Нидвальден","d":[["2026-02-07","2026-02-22","Карнавальные каникулы (Fasnacht)"],["2026-04-03","2026-04-19","Пасхальные каникулы"],["2026-07-04","2026-08-16","Летние каникулы"],["2026-09-26","2026-10-11","Осенние каникулы"],["2026-12-19","2027-01-03","Рождественские каникулы"],["2027-01-30","2027-02-14","Карнавальные каникулы (Fasnacht)"],["2027-03-26","2027-04-11","Пасхальные каникулы"],["2027-05-06","2027-05-09","Вознесение, свободные дни"],["2027-05-27","2027-05-30","Праздник Тела Христова, свободные дни"],["2027-07-03","2027-08-15","Летние каникулы"],["2027-09-25","2027-10-10","Осенние каникулы"],["2027-12-18","2028-01-02","Рождественские каникулы"]],"m":{"2026":"рождественские каникулы в начале 2026 года"}},"GL":{"p":"весь кантон Гларус","d":[["2025-12-20","2026-01-04","Рождественские каникулы"],["2026-01-24","2026-02-01","Спортивные каникулы"],["2026-04-03","2026-04-19","Весенние каникулы"],["2026-06-27","2026-08-09","Летние каникулы"],["2026-10-03","2026-10-18","Осенние каникулы"],["2026-12-24","2027-01-10","Рождественские каникулы"],["2027-01-30","2027-02-07","Спортивные каникулы"],["2027-04-01","2027-04-18","Весенние каникулы"],["2027-07-03","2027-08-15","Летние каникулы"],["2027-10-09","2027-10-24","Осенние каникулы"],["2027-12-24","2028-01-09","Рождественские каникулы"]]},"ZG":{"p":"весь кантон Цуг","d":[["2025-12-20","2026-01-04","Рождественские каникулы"],["2026-01-31","2026-02-15","Спортивные каникулы"],["2026-04-11","2026-04-26","Весенние каникулы"],["2026-05-14","2026-05-17","Вознесение, свободные дни"],["2026-07-04","2026-08-16","Летние каникулы"],["2026-10-03","2026-10-18","Осенние каникулы"],["2026-12-19","2027-01-03","Рождественские каникулы"],["2027-02-06","2027-02-21","Спортивные каникулы"],["2027-04-17","2027-05-02","Весенние каникулы"],["2027-05-06","2027-05-09","Вознесение, свободные дни"],["2027-07-03","2027-08-15","Летние каникулы"],["2027-10-02","2027-10-17","Осенние каникулы"],["2027-12-23","2028-01-05","Рождественские каникулы"]]},"FR":{"p":"кантон Фрибур (кроме района Муртен и Керцерса)","d":[["2026-07-11","2026-08-26","Летние каникулы"],["2026-10-10","2026-10-25","Осенние каникулы"],["2026-12-19","2027-01-03","Рождественские каникулы"],["2027-02-06","2027-02-14","Карнавальные каникулы (Fasnacht)"],["2027-03-26","2027-04-11","Пасхальные каникулы"],["2027-07-10","2027-08-25","Летние каникулы"],["2027-10-16","2027-10-31","Осенние каникулы"],["2027-12-18","2028-01-02","Рождественские каникулы"]],"m":{"2026":"рождественские, карнавальные и пасхальные каникулы до лета 2026 года"}},"SO":{"p":"город Золотурн","d":[["2025-12-20","2026-01-04","Рождественские каникулы"],["2026-01-31","2026-02-15","Зимние каникулы"],["2026-04-04","2026-04-19","Весенние каникулы"],["2026-07-04","2026-08-09","Летние каникулы"],["2026-09-26","2026-10-18","Осенние каникулы"],["2026-12-19","2027-01-03","Рождественские каникулы"],["2027-02-06","2027-02-21","Зимние каникулы"],["2027-04-10","2027-04-25","Весенние каникулы"],["2027-07-10","2027-08-15","Летние каникулы"],["2027-10-02","2027-10-24","Осенние каникулы"],["2027-12-25","2028-01-09","Рождественские каникулы"]]},"BS":{"p":"весь кантон Базель-Штадт","d":[["2025-12-20","2026-01-04","Рождественские каникулы"],["2026-02-14","2026-03-01","Карнавальные каникулы (Fasnacht)"],["2026-03-28","2026-04-12","Весенние каникулы"],["2026-06-27","2026-08-09","Летние каникулы"],["2026-09-26","2026-10-11","Осенние каникулы"],["2026-12-19","2027-01-03","Рождественские каникулы"],["2027-02-06","2027-02-21","Карнавальные каникулы (Fasnacht)"],["2027-03-20","2027-04-04","Весенние каникулы"],["2027-07-03","2027-08-15","Летние каникулы"],["2027-10-02","2027-10-17","Осенние каникулы"],["2027-12-18","2028-01-02","Рождественские каникулы"]]},"BL":{"p":"весь кантон Базель-Ланд","d":[["2025-12-20","2026-01-04","Рождественские каникулы"],["2026-02-14","2026-03-01","Карнавальные каникулы (Fasnacht)"],["2026-03-28","2026-04-12","Весенние каникулы"],["2026-06-27","2026-08-09","Летние каникулы"],["2026-09-26","2026-10-11","Осенние каникулы"],["2026-12-19","2027-01-03","Рождественские каникулы"],["2027-02-06","2027-02-21","Карнавальные каникулы (Fasnacht)"],["2027-03-20","2027-04-04","Весенние каникулы"],["2027-07-03","2027-08-15","Летние каникулы"],["2027-10-02","2027-10-17","Осенние каникулы"],["2027-12-18","2028-01-02","Рождественские каникулы"]]},"SH":{"p":"весь кантон Шаффхаузен","d":[["2026-09-26","2026-10-18","Осенние каникулы"],["2026-12-24","2027-01-03","Рождественские каникулы"],["2027-01-30","2027-02-14","Спортивные каникулы"],["2027-04-17","2027-05-02","Весенние каникулы"],["2027-07-10","2027-08-15","Летние каникулы"],["2027-10-02","2027-10-24","Осенние каникулы"],["2027-12-24","2028-01-02","Рождественские каникулы"],["2028-01-29","2028-02-13","Спортивные каникулы"]],"m":{"2026":"каникулы первой половины 2026 года"}},"AR":{"p":"весь кантон Аппенцелль-Ауссерроден, без спортивных каникул (их назначает община)","d":[["2025-12-20","2026-01-04","Рождественские каникулы"],["2026-04-03","2026-04-19","Весенние каникулы"],["2026-07-04","2026-08-09","Летние каникулы"],["2026-10-03","2026-10-18","Осенние каникулы"],["2026-12-19","2027-01-03","Рождественские каникулы"],["2027-04-10","2027-04-25","Весенние каникулы"],["2027-07-10","2027-08-15","Летние каникулы"],["2027-10-09","2027-10-24","Осенние каникулы"],["2027-12-18","2028-01-02","Рождественские каникулы"]],"m":{"2026":"спортивные каникулы (их назначает каждая община)","2027":"спортивные каникулы (их назначает каждая община)"}},"AI":{"p":"Аппенцелль (внутренняя часть кантона)","d":[["2025-12-20","2026-01-04","Рождественские каникулы"],["2026-02-13","2026-02-22","Спортивные каникулы"],["2026-04-03","2026-04-19","Весенние каникулы"],["2026-07-04","2026-08-16","Летние каникулы"],["2026-10-03","2026-10-18","Осенние каникулы"],["2026-12-19","2027-01-03","Рождественские каникулы"],["2027-02-05","2027-02-14","Спортивные каникулы"],["2027-04-10","2027-04-25","Весенние каникулы"],["2027-07-03","2027-08-15","Летние каникулы"],["2027-10-02","2027-10-17","Осенние каникулы"],["2027-12-18","2028-01-02","Рождественские каникулы"],["2028-02-25","2028-03-05","Спортивные каникулы"],["2028-04-08","2028-04-23","Весенние каникулы"]]},"SG":{"p":"город Санкт-Галлен","d":[["2026-04-05","2026-04-19","Весенние каникулы"],["2026-07-05","2026-08-09","Летние каникулы"],["2026-09-27","2026-10-18","Осенние каникулы"],["2026-12-20","2027-01-03","Рождественские каникулы"],["2027-01-31","2027-02-07","Зимние каникулы"],["2027-04-11","2027-04-25","Весенние каникулы"],["2027-07-11","2027-08-15","Летние каникулы"],["2027-10-03","2027-10-24","Осенние каникулы"],["2027-12-19","2028-01-02","Рождественские каникулы"],["2028-01-30","2028-02-06","Зимние каникулы"],["2028-04-09","2028-04-23","Весенние каникулы"],["2028-07-09","2028-08-13","Летние каникулы"]],"m":{"2026":"зимние каникулы 2026 года"}},"GR":{"p":"Кур","d":[["2026-10-10","2026-10-25","Осенние каникулы"],["2026-12-23","2027-01-05","Рождественские каникулы"],["2027-02-27","2027-03-07","Спортивные каникулы"],["2027-04-17","2027-05-02","Весенние каникулы"],["2027-05-06","2027-05-07","Вознесение, свободные дни"],["2027-07-03","2027-08-15","Летние каникулы"],["2027-10-09","2027-10-24","Осенние каникулы"],["2027-12-23","2028-01-05","Рождественские каникулы"],["2028-02-26","2028-03-05","Спортивные каникулы"],["2028-04-15","2028-04-30","Весенние каникулы"]],"m":{"2026":"каникулы первой половины 2026 года"}},"AG":{"p":"Аарау","d":[["2026-09-26","2026-10-11","Осенние каникулы"],["2026-12-19","2027-01-03","Рождественские каникулы"],["2027-01-30","2027-02-14","Спортивные каникулы"],["2027-04-10","2027-04-25","Весенние каникулы"],["2027-07-03","2027-08-08","Летние каникулы"],["2027-10-02","2027-10-17","Осенние каникулы"],["2027-12-24","2028-01-09","Рождественские каникулы"],["2028-01-29","2028-02-13","Спортивные каникулы"],["2028-04-08","2028-04-23","Весенние каникулы"],["2028-07-08","2028-08-13","Летние каникулы"]],"m":{"2026":"каникулы первой половины 2026 года"}},"TG":{"p":"весь кантон Тургау","d":[["2025-12-20","2026-01-04","Рождественские каникулы"],["2026-01-24","2026-02-01","Спортивные каникулы"],["2026-04-03","2026-04-19","Весенние каникулы"],["2026-05-14","2026-05-25","Каникулы на Троицу"],["2026-07-04","2026-08-09","Летние каникулы"],["2026-10-03","2026-10-18","Осенние каникулы"],["2026-12-19","2027-01-03","Рождественские каникулы"],["2027-01-31","2027-02-07","Спортивные каникулы"],["2027-03-26","2027-04-11","Весенние каникулы"],["2027-05-06","2027-05-17","Каникулы на Троицу"],["2027-07-10","2027-08-15","Летние каникулы"],["2027-10-09","2027-10-24","Осенние каникулы"],["2027-12-18","2028-01-02","Рождественские каникулы"],["2028-01-29","2028-02-06","Спортивные каникулы"]]},"TI":{"p":"весь кантон Тичино","d":[["2025-12-24","2026-01-06","Рождественские каникулы"],["2026-02-14","2026-02-22","Карнавальные каникулы (Fasnacht)"],["2026-04-03","2026-04-12","Пасхальные каникулы"],["2026-05-14","2026-05-15","Вознесение, свободные дни"],["2026-06-18","2026-08-30","Летние каникулы"],["2026-10-31","2026-11-08","Осенние каникулы"],["2026-12-24","2027-01-06","Рождественские каникулы"],["2027-02-06","2027-02-14","Карнавальные каникулы (Fasnacht)"],["2027-03-26","2027-04-04","Пасхальные каникулы"],["2027-05-06","2027-05-07","Вознесение, свободные дни"],["2027-06-17","2027-08-29","Летние каникулы"],["2027-10-30","2027-11-07","Осенние каникулы"],["2027-12-24","2028-01-09","Рождественские каникулы"]]},"VD":{"p":"весь кантон Во","d":[["2025-12-20","2026-01-04","Рождественские каникулы"],["2026-02-14","2026-02-22","Спортивные каникулы"],["2026-04-03","2026-04-19","Пасхальные каникулы"],["2026-05-14","2026-05-15","Вознесение, свободные дни"],["2026-06-27","2026-08-16","Летние каникулы"],["2026-10-10","2026-10-25","Осенние каникулы"],["2026-12-24","2027-01-10","Рождественские каникулы"],["2027-02-06","2027-02-14","Спортивные каникулы"],["2027-03-26","2027-04-11","Пасхальные каникулы"],["2027-05-06","2027-05-07","Вознесение, свободные дни"],["2027-07-03","2027-08-22","Летние каникулы"],["2027-10-09","2027-10-24","Осенние каникулы"],["2027-12-24","2028-01-09","Рождественские каникулы"]]},"VS":{"p":"франкоязычный Вале (Сьон)","d":[["2025-12-20","2026-01-04","Рождественские каникулы"],["2026-02-14","2026-02-22","Карнавальные каникулы (Fasnacht)"],["2026-04-03","2026-04-12","Пасхальные каникулы"],["2026-05-13","2026-05-17","Вознесение, свободные дни"],["2026-06-27","2026-08-19","Летние каникулы"],["2026-10-14","2026-10-25","Осенние каникулы"],["2026-12-05","2026-12-08","Непорочное зачатие, свободные дни"],["2026-12-23","2027-01-10","Рождественские каникулы"],["2027-02-06","2027-02-14","Карнавальные каникулы (Fasnacht)"],["2027-03-19","2027-03-21","День святого Иосифа, свободные дни"],["2027-03-26","2027-04-04","Пасхальные каникулы"],["2027-05-05","2027-05-09","Вознесение, свободные дни"],["2027-05-15","2027-05-17","Троица, свободные дни"],["2027-05-26","2027-05-30","Праздник Тела Христова, свободные дни"]],"m":{"2027":"конец летних каникул, осенние и рождественские каникулы 2027 года"}},"NE":{"p":"весь кантон Невшатель","d":[["2025-12-20","2026-01-04","Рождественские каникулы"],["2026-02-21","2026-03-01","Зимние каникулы"],["2026-04-03","2026-04-19","Пасхальные каникулы"],["2026-07-04","2026-08-16","Летние каникулы"],["2026-10-03","2026-10-18","Осенние каникулы"],["2026-12-19","2027-01-03","Рождественские каникулы"],["2027-02-27","2027-03-07","Зимние каникулы"],["2027-03-26","2027-04-11","Пасхальные каникулы"],["2027-07-03","2027-08-15","Летние каникулы"],["2027-10-02","2027-10-17","Осенние каникулы"],["2027-12-23","2028-01-09","Рождественские каникулы"]]},"GE":{"p":"весь кантон Женева","d":[["2025-12-20","2026-01-04","Рождественские каникулы"],["2026-02-21","2026-03-01","Зимние каникулы"],["2026-04-03","2026-04-19","Пасхальные каникулы"],["2026-05-14","2026-05-15","Вознесение, свободные дни"],["2026-06-27","2026-08-16","Летние каникулы"],["2026-10-17","2026-10-25","Осенние каникулы"],["2026-12-24","2027-01-10","Рождественские каникулы"],["2027-02-13","2027-02-21","Зимние каникулы"],["2027-03-26","2027-04-11","Пасхальные каникулы"],["2027-05-06","2027-05-07","Вознесение, свободные дни"],["2027-07-03","2027-08-25","Летние каникулы"],["2027-09-09","2027-09-10","Пост, свободные дни"],["2027-10-23","2027-10-31","Осенние каникулы"],["2027-12-24","2028-01-09","Рождественские каникулы"]]},"JU":{"p":"весь кантон Юра","d":[["2025-12-20","2026-01-04","Рождественские каникулы"],["2026-02-14","2026-02-22","Зимние каникулы"],["2026-04-03","2026-04-19","Пасхальные каникулы"],["2026-05-14","2026-05-15","Вознесение, свободные дни"],["2026-07-04","2026-08-16","Летние каникулы"],["2026-10-03","2026-10-18","Осенние каникулы"],["2026-12-24","2027-01-10","Рождественские каникулы"],["2027-02-13","2027-02-21","Зимние каникулы"],["2027-03-26","2027-04-11","Пасхальные каникулы"],["2027-07-03","2027-08-15","Летние каникулы"],["2027-10-02","2027-10-17","Осенние каникулы"],["2027-12-24","2028-01-09","Рождественские каникулы"]]}};
+function cantonSchool(y){
+  const c = S.set.canton, a0 = new Date(y, 0, 1), b0 = new Date(y, 11, 31);
+  const L = ((SCH[c] || {}).d || []).map(([a, b, n]) => [new Date(a + 'T00:00'), new Date(b + 'T00:00'), n]).filter(([a, b]) => b >= a0 && a <= b0);
+  if (!L.length && c === 'ZH') return zhSchool(y);
+  return L;
+}
+function schHasYear(y){ return cantonSchool(y).length > 0; }
+function renderSchNote(){
+  const y = ym().y, c = S.set.canton, P = (SCH[c] || {}).p || CANTONS[c];
+  const miss = ((SCH[c] || {}).m || {})[y];
+  $('schNote').innerHTML = `Даты каникул: ${esc(P)}. Отмечены зелёной полосой. В твоей общине даты могут отличаться, свои можно добавить ниже.` + (!schHasYear(y) ? `<br><b>Даты на ${y} год ещё не внесены.</b>` : miss ? `<br><b>Пока не опубликованы: ${esc(miss)}.</b>` : '');
+}
+function schoolMap(y, m){
+  const map = {}, first = new Date(y, m, 1), last = new Date(y, m + 1, 0);
+  const ranges = (S.set.schZh ? cantonSchool(y) : []).concat(S.set.kids.filter(k => k.a && k.b).map(k => [new Date(k.a + 'T00:00'), new Date(k.b + 'T00:00'), 'Каникулы']));
+  for (const [a, b, n] of ranges){ for (let d = new Date(Math.max(a, first)); d <= b && d <= last; d.setDate(d.getDate() + 1)) map[d.getDate()] = map[d.getDate()] || n; }
+  return map;
+}
+
+const MON_S = ['янв.','февр.','марта','апр.','мая','июня','июля','авг.','сент.','окт.','нояб.','дек.'];
+function holSorted(y){ return Object.entries(S.set.showHol ? holidays(y, S.set.canton) : {}).sort((a, b) => a[0] < b[0] ? -1 : 1).map(([ds, h]) => { const [yy, mm, dd] = ds.split('-').map(Number); return {m: mm - 1, d: dd, n: h.n, k: h.k}; }); }
+let holOpen = false, monOpen = false;
+const plHol = n => n + ' ' + (n % 10 === 1 && n % 100 !== 11 ? 'праздник' : [2,3,4].includes(n % 10) && ![12,13,14].includes(n % 100) ? 'праздника' : 'праздников');
+function renderHolList(){
+  const y = ym().y, L = holSorted(y);
+  $('holList').hidden = !S.set.showHol; if (!S.set.showHol) $('holInfo').hidden = true;
+  $('holList').innerHTML = `<details class="hdet"${holOpen ? ' open' : ''}><summary><span>Праздники кантона ${CANTONS[S.set.canton]} в ${y} году · ${plHol(L.length)}</span><span class="tog" aria-hidden="true"></span></summary><div class="hchips">` + L.map(h => `<button type="button" class="hchip" data-hk="${h.k}" data-hd="${h.d} ${MONTHS_GEN[h.m]}" data-hn="${esc(h.n)}" data-box="holInfo"><b>${h.d} ${MON_S[h.m]}</b>${esc(h.n)}<i aria-hidden="true">?</i></button>`).join('') + '</div></details>';
+  const det = $('holList').querySelector('details'); det.addEventListener('toggle', () => { holOpen = det.open; if (!det.open) $('holInfo').hidden = true; });
+}
+document.addEventListener('click', e => {
+  const b = e.target.closest('.hchip[data-hk]'); if (!b) return;
+  const box = $(b.dataset.box), same = !box.hidden && box.dataset.k === b.dataset.hk;
+  document.querySelectorAll('.hchip.on').forEach(x => x.classList.remove('on'));
+  if (same){ box.hidden = true; return; }
+  box.dataset.k = b.dataset.hk; b.classList.add('on');
+  box.innerHTML = `<b>${b.dataset.hn} · ${b.dataset.hd}</b><p>${HINFO[b.dataset.hk] || ''}</p>`; box.hidden = false;
+});
+function renderMonthInfo(){ $('monthHolInfo').hidden = true;
+  const {y, m} = ym(), hs = holSorted(y).filter(h => h.m === m), sm = schoolMap(y, m), runs = [];
+  Object.keys(sm).map(Number).sort((a, b) => a - b).forEach(d => { const last = runs[runs.length - 1]; if (last && last.b === d - 1 && last.n === sm[d]) last.b = d; else runs.push({a: d, b: d, n: sm[d]}); });
+  const sumTxt = (!S.set.showHol ? 'праздники скрыты' : hs.length ? plHol(hs.length) + ' кантона' : 'праздников кантона нет') + (runs.length ? ' · школьные каникулы' : '');
+  $('monthInfo').innerHTML = `<details class="hdet"${monOpen ? ' open' : ''}><summary><span><b>${MONTHS[m]} ${y}</b> · ${sumTxt}</span><span class="tog" aria-hidden="true"></span></summary><div class="hchips">`
+    + (!S.set.showHol ? '<span class="none">праздники скрыты</span>' : hs.length ? hs.map(h => `<button type="button" class="hchip" data-hk="${h.k}" data-hd="${h.d} ${MONTHS_GEN[m]}" data-hn="${esc(h.n)}" data-box="monthHolInfo"><b>${h.d} ${MONTHS_GEN[m]}</b>${esc(h.n)}<i aria-hidden="true">?</i></button>`).join('') : `<span class="none">праздников кантона ${CANTONS[S.set.canton]} нет</span>`)
+    + (runs.length ? runs.map(r => `<span class="schip"><b>${r.a === r.b ? r.a : r.a + '–' + r.b} ${MONTHS_GEN[m]}</b>${esc(r.n)}</span>`).join('') : '<span class="none">школьных каникул нет</span>') + '</div></details>';
+  const det = $('monthInfo').querySelector('details'); det.addEventListener('toggle', () => { monOpen = det.open; if (!det.open) $('monthHolInfo').hidden = true; });
+}
+
+/* ---------- время и числа ---------- */
+function parseHM(v){                                   // «2:30», «2,5» → минуты
+  v = String(v == null ? '' : v).trim().replace(/\s/g, '').replace('−', '-'); if (!v) return 0;
+  let sign = 1; if (v[0] === '-' || v[0] === '+'){ if (v[0] === '-') sign = -1; v = v.slice(1); }
+  let m;
+  if (/^\d{1,3}:\d{1,2}$/.test(v)){ const [h, mm] = v.split(':').map(Number); m = h * 60 + mm; }
+  else if (/^\d+([.,]\d+)?$/.test(v)) m = Math.round(parseFloat(v.replace(',', '.')) * 60);
+  else return null;
+  return sign * m;
+}
+const tmin = t => { if (!t || !/^\d{1,2}:\d{2}$/.test(t)) return null; const [h, m] = t.split(':').map(Number); return h * 60 + m; };
+function fmt(m){ if (m == null || isNaN(m)) return ''; const s = m < 0 ? '−' : ''; m = Math.abs(Math.round(m)); return s + Math.floor(m / 60) + ':' + String(m % 60).padStart(2, '0'); }
+const num = v => { const n = parseFloat(String(v == null ? '' : v).replace(/[’'\s]/g, '').replace(',', '.')); return isNaN(n) ? 0 : n; };
+const chf = v => (Math.round(v * 20) / 20).toLocaleString('de-CH', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+const chf0 = v => Math.round(v).toLocaleString('de-CH');
+const kmf = v => (Math.round(v * 10) / 10).toLocaleString('ru-RU');
+const pct = v => Math.round(v * 100);
+const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const plural = (n, f) => f[n % 10 === 1 && n % 100 !== 11 ? 0 : [2,3,4].includes(n % 10) && ![12,13,14].includes(n % 100) ? 1 : 2];
+const P_ENT = ['запись','записи','записей'], P_VIS = ['визит','визита','визитов'], P_DAY = ['день','дня','дней'], P_CLI = ['клиент','клиента','клиентов'];
+const fromCli = n => n + ' ' + (n % 10 === 1 && n % 100 !== 11 ? 'клиента' : 'клиентов');
+
+/* ---------- состояние ---------- */
+const now = new Date();
+const mkey = (y, m) => y + '-' + String(m + 1).padStart(2, '0');
+function newId(){ return 'c' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6); }
+function freshS(){ return {v:1, set:{name:'', canton:'ZH', showHol:true, schZh:true, kids:[], defRate:'', mwst:false, mwstRate:'8.1', km:false, kmRate:'0.70', lastClient:''}, clients:[], entries:{}, pay:{}, cur: mkey(now.getFullYear(), now.getMonth()), lastBackup:null}; }
+function fixS(s){
+  if (!s || typeof s !== 'object' || !s.set || typeof s.set !== 'object') return null;
+  const f = freshS(); s.set = Object.assign(f.set, s.set);
+  if (!Array.isArray(s.set.kids)) s.set.kids = [];
+  if (!Array.isArray(s.clients)) s.clients = [];
+  s.clients = s.clients.filter(c => c && c.id).map(c => Object.assign({name:'', place:'', mode:'hour', rate:'', visit:'', color: COLORS[0][0], note:'', archived:false}, c));
+  if (!s.entries || typeof s.entries !== 'object') s.entries = {};
+  Object.keys(s.entries).forEach(k => { if (!/^\d{4}-\d{2}-\d{2}$/.test(k) || !Array.isArray(s.entries[k])) delete s.entries[k]; else s.entries[k] = s.entries[k].filter(e => e && e.id); });
+  if (!s.pay || typeof s.pay !== 'object') s.pay = {};
+  if (!/^\d{4}-\d{2}$/.test(s.cur || '')) s.cur = f.cur;
+  s.v = 1; return s;
+}
+let S;
+try { S = fixS(JSON.parse(localStorage.getItem(KEY))); } catch(e) { S = null; }
+if (!S) S = freshS();
+function save(){ try { localStorage.setItem(KEY, JSON.stringify(S)); } catch(e) {} }
+const ym = () => { const [y, m] = S.cur.split('-').map(Number); return {y, m: m - 1}; };
+const prevKey = k => { let [y, m] = k.split('-').map(Number); m -= 2; if (m < 0){ m = 11; y--; } return mkey(y, m); };
+const nextKey = k => { let [y, m] = k.split('-').map(Number); if (m === 12){ m = 0; y++; } return mkey(y, m); };
+function daysIn(k){ const [y, m] = k.split('-').map(Number); return new Date(y, m, 0).getDate(); }
+const dkey = (k, d) => k + '-' + String(d).padStart(2, '0');
+
+/* ---------- клиенты и записи ---------- */
+const cById = id => S.clients.find(c => c.id === id);
+const cname = c => c ? ((c.name || '').trim() || 'Клиент без названия') : 'Клиент удалён';
+const ccol = c => c ? c.color : '#7A6E62';
+const active = () => S.clients.filter(c => !c.archived);
+const hasEntries = cid => Object.values(S.entries).some(L => L.some(e => e.client === cid));
+function cSummary(c){ return (c.mode === 'visit' ? (num(c.visit) ? chf(num(c.visit)) + ' CHF за визит' : 'цена за визит не вписана') : (num(c.rate) ? chf(num(c.rate)) + ' CHF в час' : 'ставка не вписана')) + (c.place ? ' · ' + c.place : ''); }
+function entMin(e){
+  if (!e.byDur){ const s = tmin(e.from), t = tmin(e.to); if (s != null && t != null){ let w = t - s; if (w <= 0) w += 1440; return Math.max(0, w - Math.max(0, num(e.pause))); } }
+  const v = parseHM(e.dur); return v > 0 ? v : 0;
+}
+const hasTimes = e => !e.byDur && tmin(e.from) != null && tmin(e.to) != null;
+function entAmt(e){ const c = cById(e.client); if (!c) return 0; return c.mode === 'visit' ? num(c.visit) : entMin(e) / 60 * num(c.rate); }
+const hasExtra = e => !!(String(e.travelMin || '') + String(e.km || '') + String(e.exp || '') + String(e.expNote || '')).trim();
+const mwR = () => S.set.mwst ? num(S.set.mwstRate) / 100 : 0;
+const kmR = () => S.set.km ? num(S.set.kmRate) : 0;
+function stats(prefix){
+  const T = {min:0, amt:0, n:0, days:0, tm:0, km:0, ex:0, by:{}, list:[]};
+  Object.keys(S.entries).filter(ds => ds.startsWith(prefix + '-')).sort().forEach(ds => {
+    let any = false;
+    S.entries[ds].forEach(e => {
+      if (!e.client) return; any = true;
+      const m = entMin(e), a = entAmt(e), b = T.by[e.client] || (T.by[e.client] = {min:0, amt:0, n:0, ex:0, km:0, tm:0});
+      T.min += m; T.amt += a; T.n++; T.tm += num(e.travelMin); T.km += num(e.km); T.ex += num(e.exp);
+      b.min += m; b.amt += a; b.n++; b.ex += num(e.exp); b.km += num(e.km); b.tm += num(e.travelMin);
+      T.list.push({ds, e, m, a});
+    });
+    if (any) T.days++;
+  });
+  T.order = Object.keys(T.by).sort((a, b) => T.by[b].amt - T.by[a].amt || T.by[b].min - T.by[a].min);
+  return T;
+}
+function newEntry(cid){ return {id: newId(), client: cid, from:'', to:'', pause:'', dur:'', byDur:false, what:'', travelMin:'', km:'', exp:'', expNote:''}; }
+function defClient(){ const a = active(); if (!a.length) return null; return a.find(c => c.id === S.set.lastClient) ? S.set.lastClient : a[0].id; }
+function findEnt(ds, id){ return (S.entries[ds] || []).find(e => e.id === id); }
+function lastFor(cid, ds){
+  const keys = Object.keys(S.entries).sort().reverse();
+  let fallback = null;
+  for (const k of keys){ const L = S.entries[k].filter(e => e.client === cid); if (!L.length) continue; const e = L[L.length - 1]; if (k < ds) return e; if (!fallback) fallback = e; }
+  return fallback;
+}
+const withHistory = () => S.clients.filter(c => !c.archived && hasEntries(c.id));
+function addEntry(ds, cid, copy){
+  const e = newEntry(cid);
+  if (copy) ['from','to','pause','dur','byDur','what','travelMin','km'].forEach(f => { e[f] = copy[f] == null ? e[f] : copy[f]; });
+  (S.entries[ds] = S.entries[ds] || []).push(e); S.set.lastClient = cid; save(); return e;
+}
+function delEntry(ds, id){ const L = S.entries[ds]; if (!L) return; const i = L.findIndex(e => e.id === id); if (i >= 0) L.splice(i, 1); if (!L.length) delete S.entries[ds]; save(); }
+function repeatWeekly(ds, id){
+  const e = findEnt(ds, id); if (!e) return [];
+  const k = ds.slice(0, 7), d0 = +ds.slice(8), n = daysIn(k), done = [];
+  for (let d = d0 + 7; d <= n; d += 7){
+    const t = dkey(k, d), L = S.entries[t] || [];
+    if (L.some(x => x.client === e.client && x.from === e.from && x.to === e.to && x.dur === e.dur && !!x.byDur === !!e.byDur)) continue;
+    const c = JSON.parse(JSON.stringify(e)); c.id = newId(); (S.entries[t] = L).push(c); done.push(d);
+  }
+  save(); return done;
+}
+
+/* ---------- настройки ---------- */
+function renderSet(){
+  const st = S.set;
+  $('fName').value = st.name; $('fDefRate').value = st.defRate || '';
+  $('fMwst').checked = !!st.mwst; $('fMwstRate').value = st.mwstRate; $('mwstRateBox').hidden = !st.mwst;
+  $('fKm').checked = !!st.km; $('fKmRate').value = st.kmRate; $('kmRateBox').hidden = !st.km;
+  $('fShowHol').checked = !!st.showHol; $('fSchZh').checked = !!st.schZh; renderKids();
+  $('fCanton').innerHTML = Object.entries(CANTONS).sort((a, b) => a[1].localeCompare(b[1], 'ru')).map(([k, n]) => `<option value="${k}"${k === st.canton ? ' selected' : ''}>${n} (${k})</option>`).join('');
+  renderSetSum();
+}
+function renderSetSum(){ const st = S.set; $('setSum').textContent = [st.name, 'кантон ' + CANTONS[st.canton], st.mwst ? 'MWST ' + String(st.mwstRate).replace('.', ',') + ' %' : 'без MWST', st.km ? 'км по ' + chf(num(st.kmRate)) + ' CHF' : ''].filter(Boolean).join(' · '); }
+$('fName').addEventListener('input', e => { S.set.name = e.target.value; save(); renderSetSum(); });
+$('fDefRate').addEventListener('input', e => { S.set.defRate = e.target.value; save(); });
+$('fMwst').addEventListener('change', e => { S.set.mwst = e.target.checked; save(); $('mwstRateBox').hidden = !S.set.mwst; renderSetSum(); renderStats(); });
+$('fMwstRate').addEventListener('input', e => { S.set.mwstRate = e.target.value; save(); renderSetSum(); renderStats(); });
+$('fKm').addEventListener('change', e => { S.set.km = e.target.checked; save(); $('kmRateBox').hidden = !S.set.km; renderSetSum(); renderStats(); });
+$('fKmRate').addEventListener('input', e => { S.set.kmRate = e.target.value; save(); renderSetSum(); renderStats(); });
+$('fShowHol').addEventListener('change', e => { S.set.showHol = e.target.checked; save(); renderMonth(); });
+$('fSchZh').addEventListener('change', e => { S.set.schZh = e.target.checked; save(); renderMonth(); });
+$('fCanton').addEventListener('change', e => { S.set.canton = e.target.value; $('holInfo').hidden = true; save(); renderSetSum(); renderMonth(); });
+function renderKids(){ $('kidsList').innerHTML = S.set.kids.map((k, i) => `<div class="kid"><label>с <input type="date" data-k="${i}" data-f="a" value="${esc(k.a)}"></label><label>по <input type="date" data-k="${i}" data-f="b" value="${esc(k.b)}"></label><button class="x" type="button" data-k="${i}" data-act="delk" aria-label="Убрать эти каникулы">✕</button></div>`).join(''); }
+$('addKids').addEventListener('click', () => { S.set.kids.push({a:'', b:''}); save(); renderKids(); });
+$('kidsList').addEventListener('change', e => { const el = e.target; if (el.dataset.k == null) return; S.set.kids[+el.dataset.k][el.dataset.f] = el.value; save(); renderMonth(); });
+$('kidsList').addEventListener('click', e => { const b = e.target.closest('[data-act=delk]'); if (!b) return; S.set.kids.splice(+b.dataset.k, 1); save(); renderKids(); renderMonth(); });
+
+/* ---------- клиенты ---------- */
+const cliOpen = new Set();
+function cliCard(c){
+  const used = hasEntries(c.id), q = (k, l) => `<button type="button" class="qh" data-help="${k}" aria-label="Подсказка: ${l}" aria-expanded="false">?</button>`;
+  return `<details class="cl" style="--cc:${c.color}" data-cid="${c.id}" id="cl${c.id}"${cliOpen.has(c.id) ? ' open' : ''}>
+    <summary><span class="cdot" aria-hidden="true"></span><span class="clt"><b>${esc(cname(c))}</b><span>${esc(cSummary(c))}</span></span><span class="tog" aria-hidden="true"></span></summary>
+    <div class="fields">
+      <label class="field"><span class="fl">Имя или название${q('cname', 'имя клиента')}</span><input type="text" data-cf="name" value="${esc(c.name)}" placeholder="например Семья Мюллер"></label>
+      <label class="field"><span class="fl">Адрес или место${q('cplace', 'адрес')}</span><small>необязательно</small><input type="text" data-cf="place" value="${esc(c.place)}" placeholder="например Bahnhofstr. 12, Zürich"></label>
+      <label class="field"><span class="fl">Как ты берёшь деньги${q('cmode', 'как ты берёшь деньги')}</span><select data-cf="mode"><option value="hour"${c.mode !== 'visit' ? ' selected' : ''}>Почасово, своя ставка в час</option><option value="visit"${c.mode === 'visit' ? ' selected' : ''}>Фиксированная цена за визит</option></select></label>
+      ${c.mode === 'visit'
+        ? `<label class="field"><span class="fl">Цена за один визит, CHF${q('cvisit', 'цена за визит')}</span><input type="text" inputmode="decimal" data-cf="visit" value="${esc(c.visit)}" placeholder="например 120"></label>`
+        : `<label class="field"><span class="fl">Ставка в час, CHF${q('crate', 'ставка в час')}</span><input type="text" inputmode="decimal" data-cf="rate" value="${esc(c.rate)}" placeholder="например 35"></label>`}
+      <div class="field wide"><span class="fl">Цвет${q('ccolor', 'цвет клиента')}</span><div class="swatches" role="group" aria-label="Цвет клиента">${COLORS.map(([h, n]) => `<button type="button" class="sw${h === c.color ? ' on' : ''}" style="--cc:${h}" data-cact="color" data-v="${h}" aria-label="Цвет ${n}" aria-pressed="${h === c.color}"></button>`).join('')}</div></div>
+      <label class="field wide"><span class="fl">Заметка для себя${q('cnote', 'заметка')}</span><small>например «ключ у консьержа»</small><input type="text" data-cf="note" value="${esc(c.note)}" placeholder="Видна только тебе"></label>
+    </div>
+    <div class="row"><button class="btn ghost" type="button" data-cact="arch">Убрать клиента в архив</button>${used ? '' : '<button class="btn ghost" type="button" data-cact="del">Удалить клиента</button>'}${q('carch', 'архив')}</div>
+  </details>`;
+}
+function renderClients(){
+  const A = active(), Ar = S.clients.filter(c => c.archived);
+  $('cliList').innerHTML = A.map(cliCard).join('');
+  $('cliArch').innerHTML = Ar.length ? `<details class="hdet"><summary><span>Архив · ${Ar.length} ${plural(Ar.length, P_CLI)}</span><span class="tog" aria-hidden="true"></span></summary><div class="archl">${Ar.map(c => `<div class="archr" data-cid="${c.id}"><span class="cchip" style="--cc:${c.color}"><i>${esc(cname(c))}</i></span><button class="btn ghost" type="button" data-cact="unarch">Вернуть из архива</button></div>`).join('')}</div></details>` : '';
+  $('cliSum').textContent = A.length ? A.length + ' ' + plural(A.length, P_CLI) + (Ar.length ? ' · в архиве ' + Ar.length : '') : 'пока нет клиентов';
+  $('emptyCli').hidden = A.length > 0;
+}
+function addClient(){
+  const used = S.clients.map(c => c.color), col = (COLORS.find(([h]) => !used.includes(h)) || COLORS[S.clients.length % COLORS.length])[0];
+  const c = {id: newId(), name:'', place:'', mode:'hour', rate: S.set.defRate || '', visit:'', color: col, note:'', archived:false};
+  S.clients.push(c); save(); cliOpen.add(c.id); $('cliBox').open = true; renderClients(); renderAfterClients();
+  const inp = $('cl' + c.id).querySelector('[data-cf=name]'); inp.focus(); $('cl' + c.id).scrollIntoView({block:'center'});
+}
+function renderAfterClients(){ renderMonth(); }
+$('addCli').addEventListener('click', addClient);
+$('addFirst').addEventListener('click', addClient);
+$('cliList').addEventListener('toggle', e => { const d = e.target.closest && e.target.closest('details.cl'); if (!d || d !== e.target) return; if (d.open) cliOpen.add(d.dataset.cid); else cliOpen.delete(d.dataset.cid); }, true);
+$('cliList').addEventListener('input', e => {
+  const el = e.target, f = el.dataset.cf; if (!f || f === 'mode') return;
+  const box = el.closest('[data-cid]'), c = cById(box.dataset.cid); c[f] = el.value; save();
+  box.querySelector('.clt b').textContent = cname(c); box.querySelector('.clt span').textContent = cSummary(c);
+  renderStats();
+});
+$('cliList').addEventListener('change', e => {
+  const el = e.target, f = el.dataset.cf; if (!f) return;
+  const c = cById(el.closest('[data-cid]').dataset.cid);
+  if (f === 'mode'){ c.mode = el.value; save(); renderClients(); }
+  renderMonth();
+});
+function cliClick(e){
+  const b = e.target.closest('[data-cact]'); if (!b) return;
+  const c = cById(b.closest('[data-cid]').dataset.cid), a = b.dataset.cact; if (!c) return;
+  if (a === 'color'){ c.color = b.dataset.v; save(); renderClients(); renderMonth(); return; }
+  if (a === 'arch'){ c.archived = true; cliOpen.delete(c.id); save(); say('«' + cname(c) + '» в архиве. Записи остались в итогах и отчётах.'); }
+  if (a === 'unarch'){ c.archived = false; save(); say('«' + cname(c) + '» снова в списке клиентов.'); }
+  if (a === 'del'){ if (hasEntries(c.id)) return; S.clients = S.clients.filter(x => x !== c); save(); say('Клиент удалён.'); }
+  renderClients(); renderMonth();
+}
+$('cliList').addEventListener('click', cliClick);
+$('cliArch').addEventListener('click', cliClick);
+
+/* ---------- подсказки «?» ---------- */
+const HELP = {
+  clients: '<p>Клиент — это тот, у кого ты работаешь. Семья, фирма, человек или объект, например «Квартира Bahnhofstr. 12».</p><p>У каждого клиента своя ставка или цена за визит и свой цвет, по которому его видно в днях месяца.</p><p>Если ты больше не работаешь с клиентом, убери его в архив. Его записи останутся в итогах и в годовом отчёте.</p>',
+  cname: '<p>Как ты называешь этого клиента или объект. Например «Семья Мюллер», «Фрау Шмид» или «Офис Novatech».</p><p>Это название стоит в отчёте о работе для клиента.</p>',
+  cplace: '<p>Адрес или место работы. Удобно, если у одного клиента несколько объектов.</p><p>Адрес появится в отчёте для клиента под его названием.</p>',
+  cmode: '<p><b>«Почасово»</b> выбирай, если клиент платит за каждый час. Сумма считается как часы, умноженные на ставку.</p><p><b>«Фиксированная цена за визит»</b> подходит, если за один приход цена одна, например уборка квартиры за 120 CHF, сколько бы она ни длилась. Тогда каждая запись считается одним визитом.</p><p>Часы всё равно записывай. Так видно, сколько на деле стоит твой час.</p>',
+  crate: '<p>Сколько клиент платит тебе за час, в франках.</p><p>Если ставку поменять, пересчитаются и прошлые месяцы этого клиента. Чтобы старые суммы остались, заведи клиента заново, например «Семья Мюллер с 2027», а прежнего убери в архив.</p>',
+  cvisit: '<p>Сколько стоит один визит, в франках. Например 120 за уборку квартиры или 80 за урок с выездом.</p><p>Каждая запись у этого клиента считается одним визитом, сколько бы часов она ни длилась.</p>',
+  ccolor: '<p>Цвет, по которому ты сразу узнаешь клиента в днях месяца и в итогах. Это просто для удобства.</p>',
+  cnote: '<p>Всё, что важно помнить об этом клиенте. Например «ключ у консьержа», «кошка, не выпускать» или «оплата наличными».</p><p>Заметка видна только тебе и не попадает в отчёт для клиента.</p>',
+  carch: '<p>Клиент в архиве не появляется при выборе клиента в днях. Все его записи остаются и считаются в итогах и отчётах. Вернуть его можно в любой момент.</p><p>Удалить совсем можно только клиента, у которого ещё нет ни одной записи.</p>',
+  name: '<p>Имя появится в шапке PDF и у места для твоей подписи. Если у тебя есть название своего дела, впиши его.</p><p>Если отчёт нужен только тебе, поле можно оставить пустым.</p>',
+  defRate: '<p>Ставка в час, которая подставится каждому новому клиенту. У каждого клиента её потом можно поменять отдельно.</p>',
+  mwst: '<p>MWST (налог на добавленную стоимость) нужно платить, только если оборот за год больше 100 000 CHF. У большинства самозанятых оборот меньше, тогда галочку не ставь.</p><p>Если ты платишь MWST, впиши ставки клиентов без MWST. Тогда в итогах и в PDF видно три суммы. Без MWST, сам MWST и с MWST. Обычная ставка 8,1 %.</p>',
+  km: '<p>Если ты ездишь к клиентам на своей машине, поставь галочку и впиши ставку за километр. Тогда видно, во сколько обходится дорога.</p><p>К заработку эти деньги не прибавляются. Это ориентир для себя и для налоговой декларации. Какую ставку признаёт налоговая, уточни в своём кантоне.</p>',
+  canton: '<p>Праздники в Швейцарии свои в каждом кантоне. Выбери кантон, где ты обычно работаешь.</p><p>Праздники и школьные каникулы просто видны в месяце, на суммы они не влияют. Удобно заранее видеть, когда клиенты уезжают и когда дети дома.</p>',
+  hol: '<p>Если галочка стоит, праздники кантона отмечены розовым. Нажми на праздник, чтобы узнать, что это за день.</p><p>Работать в праздник можно, такие записи считаются как обычно.</p>',
+  sch: '<p>Школьные каникулы отмечены зелёной полосой. Многие семьи в это время уезжают, и у нянь, репетиторов и уборки часто меняется график.</p><p>Даты встроены для всех 26 кантонов на 2026 и 2027 годы. Где каникулы назначает община, взяты даты главного города кантона.</p><p>Если в твоей общине иначе, выключи галочку и добавь свои даты кнопкой «+ Добавить свои даты каникул».</p>',
+  entry: '<p>Одна запись — это одна работа у одного клиента. Если за день ты была у трёх клиентов, сделай три записи.</p><p>Впиши начало, конец и перерыв в минутах. Если время не важно, впиши только сколько часов, например 2:30 или 2,5.</p><p>«Как в прошлый раз» повторяет последнюю запись у выбранного клиента. «Повторить каждую неделю до конца месяца» ставит запись на тот же день недели во все следующие недели месяца.</p>',
+  dur: '<p>Сколько длилась работа, если ты не записываешь начало и конец. Можно писать 2:30 или 2,5, это одно и то же.</p>',
+  pause: '<p>Перерыв, который клиент не оплачивает, в минутах. Если перерыва не было, оставь 0.</p>',
+  what: '<p>Коротко, что было сделано. Например «генеральная уборка», «урок немецкого» или «покраска двери».</p><p>Это клиент увидит в отчёте о работе.</p>',
+  travel: '<p>Сколько минут ушло на дорогу туда и обратно и сколько вышло километров. Дорога не прибавляется к часам работы и к сумме клиента.</p><p>Так видно, сколько времени на деле съедают поездки. Если в настройках включены расходы на дорогу, километры пересчитаются в франки.</p>',
+  exp: '<p>Деньги, потраченные на эту работу. Например материалы, средства для уборки или парковка. Впиши сумму и коротко, на что.</p><p>Расходы не входят в заработок. Они видны отдельно в итогах и в отчёте для клиента.</p>',
+  last: '<p>Повторяет последнюю запись у этого клиента. Время, перерыв, что сделано и дорога подставятся сами. Расходы не копируются.</p><p>Удобно, если ты приходишь к клиенту всегда в одно и то же время.</p>',
+  repeat: '<p>Копирует эту запись на тот же день недели во все следующие недели этого месяца. Например уборка каждый вторник.</p><p>Если в какой-то из этих дней работы не было, удали там запись.</p>',
+  cards: '<p><b>Часов работы.</b> Все записи месяца, без дороги.</p><p><b>Заработано.</b> Часы, умноженные на ставку, и визиты по своей цене. Расходы и дорога сюда не входят.</p><p><b>В среднем за час.</b> Заработок, делённый на часы работы. Это твоя настоящая ставка вместе с визитами по фиксированной цене.</p><p><b>Рабочих дней.</b> Дни, где есть хотя бы одна запись.</p><p><b>Дорога.</b> Время и километры в пути.</p><p><b>Расходы.</b> Материалы, парковка и другие траты на работу.</p>',
+  perclient: '<p>Сколько часов, записей и денег за месяц у каждого клиента и какую долю твоего дохода он даёт. Для клиентов с ценой за визит каждая запись — один визит.</p><p>Отметки «Счёт отправлен» и «Оплачено» хранятся отдельно для каждого месяца.</p>',
+  wait: '<p>Сумма за этот месяц от клиентов, у которых ещё нет отметки «Оплачено». Отдельно видно, кому счёт ещё даже не отправлен.</p>',
+  year: '<p>Часы и заработок по месяцам этого года и главные клиенты года. Это основа для налоговой декларации.</p><p>Год меняется вместе с месяцем вверху страницы.</p>',
+  risk: '<p>Самозанятым в Швейцарии важно работать на нескольких заказчиков. Если почти весь доход даёт один клиент, касса AHV может посчитать работу работой по найму (Scheinselbständigkeit).</p><p>Если так складывается не первый месяц, уточни свой статус в своей кассе AHV (Ausgleichskasse, SVA).</p>',
+  pdfClient: '<p>Лист A4 со всеми записями у одного клиента за месяц. Дата, время, что сделано, часы и сумма. Внизу итог и места для твоей подписи и подписи клиента.</p><p>Его можно приложить к счёту или дать клиенту подписать. В немецкоязычной Швейцарии такой лист называют Stundenrapport.</p>',
+  pdfMine: '<p>Отчёт для себя. За месяц в нём итоги, все клиенты и все записи по дням. За год в нём суммы по месяцам и по клиентам.</p><p>Пригодится для налоговой декларации.</p>',
+  backup: '<p>Записи хранятся только в браузере на этом устройстве. На iPhone Safari сам стирает записи сайтов, на которые долго не заходили.</p><p>Резервная копия — это файл на твоём устройстве. Из него клиентов и записи можно вернуть здесь или на другом телефоне и компьютере. Храни его бережно, в нём твои личные записи.</p>'
+};
+const qh = (k, l) => `<button type="button" class="qh" data-help="${k}" aria-label="Подсказка: ${l}" aria-expanded="false">?</button>`;
+let qPop = null, qBtn = null;
+function closeHelp(){ if (qPop){ qPop.remove(); qPop = null; } if (qBtn){ qBtn.setAttribute('aria-expanded', 'false'); qBtn = null; } }
+document.addEventListener('click', e => {
+  const b = e.target.closest('.qh');
+  if (b){ e.preventDefault(); e.stopPropagation();
+    if (qBtn === b){ closeHelp(); return; }
+    closeHelp();
+    qPop = document.createElement('div'); qPop.className = 'qpop'; qPop.setAttribute('role', 'dialog');
+    qPop.innerHTML = (HELP[b.dataset.help] || '') + '<button type="button" class="qclose" aria-label="Закрыть подсказку">✕</button>';
+    document.body.appendChild(qPop);
+    const rc = b.getBoundingClientRect(), w = Math.min(340, window.innerWidth - 32);
+    qPop.style.width = w + 'px';
+    const left = Math.max(16, Math.min(rc.left + rc.width / 2 - w / 2, window.innerWidth - 16 - w));
+    const h = qPop.offsetHeight, below = rc.bottom + 8, above = rc.top - 8 - h;
+    const top = below + h > window.innerHeight - 8 && above >= 8 ? above : below;
+    qPop.style.left = (left + window.scrollX) + 'px'; qPop.style.top = (top + window.scrollY) + 'px';
+    qBtn = b; b.setAttribute('aria-expanded', 'true'); return;
+  }
+  if (qPop && (!e.target.closest('.qpop') || e.target.closest('.qclose'))){ if (e.target.closest('.qclose')) { e.preventDefault(); } closeHelp(); }
+}, true);
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeHelp(); });
+window.addEventListener('resize', closeHelp);
+
+/* ---------- резервная копия ---------- */
+const hasData = () => S.clients.length > 0 || Object.keys(S.entries).length > 0;
+function renderBackup(){
+  const lb = S.lastBackup ? new Date(S.lastBackup) : null, days = lb ? (Date.now() - lb) / 864e5 : Infinity;
+  $('bkInfo').textContent = (lb ? 'Последняя копия ' + lb.toLocaleDateString('ru-RU') + '. ' : 'Копии ещё нет. ') + 'Сохраняй её раз в месяц. В файле все твои клиенты, записи и отметки об оплате, его можно загрузить обратно на этом или другом устройстве.';
+  $('backupBox').classList.toggle('due', hasData() && days > 30);
+}
+let pendingS = null;
+$('bkSave').addEventListener('click', async () => {
+  const d = new Date(), stamp = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+  const keep = S.lastBackup; S.lastBackup = d.toISOString();
+  const data = JSON.stringify({app:'svoiludi-chasy-po-klientam', v:1, saved: d.toISOString(), data: S});
+  S.lastBackup = keep;
+  const ok = await offer('Часы по клиентам — резервная копия ' + stamp + '.json', new Blob([data], {type:'application/json'}));
+  if (ok){ S.lastBackup = d.toISOString(); save(); renderBackup(); }
+});
+$('bkLoad').addEventListener('click', () => $('bkFile').click());
+$('bkFile').addEventListener('change', e => {
+  const f = e.target.files && e.target.files[0]; if (!f) return; const fr = new FileReader();
+  fr.onload = () => { let obj = null; try { obj = JSON.parse(fr.result); } catch(err) {}
+    const s = obj ? fixS(JSON.parse(JSON.stringify(obj.data || obj))) : null;
+    if (!s || !Array.isArray((obj.data || obj).clients)){ say('Этот файл не похож на резервную копию «Часы по клиентам».'); return; }
+    if (obj.saved) s.lastBackup = s.lastBackup || obj.saved; pendingS = s; const when = obj.saved ? new Date(obj.saved).toLocaleDateString('ru-RU') : '';
+    const nE = Object.values(s.entries).reduce((a, L) => a + L.length, 0);
+    $('bkConfirm').innerHTML = `<span class="confirm">В файле ${s.clients.length} ${plural(s.clients.length, P_CLI)} и ${nE} ${plural(nE, P_ENT)}${when ? ', копия от ' + when : ''}. Заменить записи на этом устройстве?<button class="btn danger" id="bkYes" type="button">Да, загрузить</button><button class="btn ghost" id="bkNo" type="button">Отмена</button></span>`; };
+  fr.readAsText(f); e.target.value = '';
+});
+$('bkConfirm').addEventListener('click', e => {
+  if (e.target.id === 'bkNo'){ pendingS = null; $('bkConfirm').innerHTML = ''; }
+  if (e.target.id === 'bkYes' && pendingS){ S = pendingS; pendingS = null; save(); $('bkConfirm').innerHTML = ''; openDay = null; renderAll(); say('Клиенты и записи загружены из резервной копии.'); }
+});
+if (/Instagram|FBAN|FBAV|FB_IAB|Line\/|Telegram|WhatsApp|; wv\)/i.test(navigator.userAgent)) $('inappWarn').hidden = false;
+
+/* ---------- месяц ---------- */
+function renderMonthName(){ const {y, m} = ym(); $('curM').textContent = MONTHS[m] + ' ' + y; }
+function dayInfo(d){
+  const k = S.cur, {y, m} = ym(), dt = new Date(y, m, d), ds = dkey(k, d);
+  const H = S.set.showHol ? holidays(y, S.set.canton) : {}, hol = H[iso(y, m, d)];
+  const L = S.entries[ds] || []; let min = 0, amt = 0; const by = {};
+  L.forEach(e => { const mm = entMin(e), a = entAmt(e); min += mm; amt += a; (by[e.client] = by[e.client] || {min:0, amt:0, n:0}); by[e.client].min += mm; by[e.client].amt += a; by[e.client].n++; });
+  return {d, dt, dow: dt.getDay(), ds, hol, sch: schoolMap(y, m)[d] || '', L, min, amt, by};
+}
+const isToday = I => I.dt.toDateString() === new Date().toDateString();
+function entLine(e){ const c = cById(e.client), m = entMin(e), a = entAmt(e); return (m ? fmt(m) + ' ч' : 'время не вписано') + (c && c.mode === 'visit' ? ' · визит ' + chf(a) + ' CHF' : a ? ' · ' + chf(a) + ' CHF' : ''); }
+function cOpts(sel){ return S.clients.filter(c => !c.archived || c.id === sel).map(c => `<option value="${c.id}"${c.id === sel ? ' selected' : ''}>${esc(cname(c))}${c.archived ? ' (в архиве)' : ''}</option>`).join(''); }
+function chipsHtml(I){ return Object.entries(I.by).map(([cid, b]) => { const c = cById(cid); return `<span class="cchip" style="--cc:${ccol(c)}"><i>${esc(cname(c))}</i><em>${b.min ? fmt(b.min) : ''}${c && c.mode === 'visit' && !b.min ? b.n + ' ' + plural(b.n, P_VIS) : ''}</em></span>`; }).join(''); }
+const MQ = window.matchMedia('(max-width:900px)'); let isM = MQ.matches;
+try { MQ.addEventListener('change', e => { isM = e.matches; renderMonth(); }); } catch(e) {}
+let openDay = null; const xOpen = new Set();
+
+/* компьютер */
+function entD(e, I){
+  const c = cById(e.client), d = I.d, ds = I.ds, ht = hasTimes(e), da = `data-id="${e.id}" data-ds="${ds}" data-d="${d}"`, ext = xOpen.has(e.id) || hasExtra(e);
+  return `<div class="ent" style="--cc:${ccol(c)}" id="en${e.id}">
+    <div class="el">
+      <select ${da} data-f="client" aria-label="${d} число, клиент">${cOpts(e.client)}</select>
+      <span class="tt"><input type="time" ${da} data-f="from" value="${esc(e.from)}" aria-label="${d} число, начало"><span class="dash">–</span><input type="time" ${da} data-f="to" value="${esc(e.to)}" aria-label="${d} число, конец"></span>
+      <span class="pz"><input type="number" min="0" step="5" ${da} data-f="pause" value="${esc(e.pause)}" placeholder="0" aria-label="${d} число, перерыв в минутах"><span class="pl">мин</span></span>
+      <span class="pl">или</span>
+      <input type="text" class="dur" inputmode="decimal" ${da} data-f="dur" value="${ht ? fmt(entMin(e)) : esc(e.dur)}"${ht ? ' disabled title="Считается из начала и конца"' : ''} placeholder="2:30" aria-label="${d} число, сколько часов">
+      <input type="text" class="what" ${da} data-f="what" value="${esc(e.what)}" placeholder="Что сделано" aria-label="${d} число, что сделано">
+    </div>
+    <div class="eopt"><span class="ehs" id="eh${e.id}">${entLine(e)}</span><button type="button" class="addb" data-act="more" ${da} aria-expanded="${ext}">Дорога и расходы</button><button type="button" class="addb" data-act="rep" ${da}>Повторить каждую неделю до конца месяца</button><button type="button" class="addb" data-act="del" ${da}>Удалить эту запись</button></div>
+    ${ext ? `<div class="ex"><label>Дорога, мин<input type="number" min="0" step="5" ${da} data-f="travelMin" value="${esc(e.travelMin)}" placeholder="0"></label><label>Км<input type="text" inputmode="decimal" ${da} data-f="km" value="${esc(e.km)}" placeholder="0"></label><label>Расходы, CHF<input type="text" inputmode="decimal" ${da} data-f="exp" value="${esc(e.exp)}" placeholder="0"></label><input type="text" class="exn" ${da} data-f="expNote" value="${esc(e.expNote)}" placeholder="На что, например парковка" aria-label="На что потрачено">${qh('travel', 'дорога')}${qh('exp', 'расходы')}</div>` : ''}
+  </div>`;
+}
+function rowCls(I){ return 'dr' + (I.sch ? ' sch' : '') + (I.hol ? ' holr' : '') + (I.dow === 0 || I.dow === 6 ? ' we' : '') + (isToday(I) ? ' today' : ''); }
+function dRowHtml(d){
+  const I = dayInfo(d), H = withHistory();
+  return `<div class="${rowCls(I)}" id="r${d}">
+    <div class="dd"><b>${d}</b><span>${WD[I.dow]}</span>${I.hol ? `<small title="${esc(HINFO[I.hol.k] || '')}">${esc(I.hol.n)}</small>` : ''}${I.sch ? `<small class="schn">${esc(I.sch)}</small>` : ''}${I.L.length ? `<button type="button" class="ddclr" data-act="clr" data-d="${d}" aria-label="Очистить ${d} число">очистить</button>` : ''}</div>
+    <div class="ents" id="b${d}">${I.L.map(e => entD(e, I)).join('')}
+      <div class="dadd"><button type="button" class="addb inl" data-act="add" data-d="${d}">+ Запись</button>${H.length ? `<select class="lastsel" data-d="${d}" aria-label="${d} число, как в прошлый раз"><option value="">Как в прошлый раз…</option>${H.map(c => `<option value="${c.id}">${esc(cname(c))}</option>`).join('')}</select>` : ''}</div></div>
+    <div class="num" id="h${d}">${I.min ? fmt(I.min) : '–'}</div>
+    <div class="num" id="a${d}">${I.amt ? chf(I.amt) : '–'}</div>
+  </div>`;
+}
+/* телефон */
+function mRowHtml(d){
+  const I = dayInfo(d), open = openDay === d;
+  return `<button type="button" class="mrow${I.sch ? ' sch' : ''}${I.hol ? ' holr hol' : ''}${I.dow === 0 || I.dow === 6 ? ' we' : ''}${open ? ' open' : ''}${isToday(I) ? ' today' : ''}" data-act="open" data-d="${d}" aria-expanded="${open}" id="mr${d}">
+    <span class="md"><b>${d}</b><span>${WD[I.dow]}</span></span>
+    <span class="mi">${I.hol ? `<small>${esc(I.hol.n)}</small>` : ''}${I.sch ? `<small class="schn">${esc(I.sch)}</small>` : ''}${I.L.length ? `<span class="chips">${chipsHtml(I)}</span>` : '<span class="ms">нет записей</span>'}</span>
+    <span class="mh">${I.min ? fmt(I.min) : ''}${I.amt ? `<small>${chf(I.amt)}</small>` : ''}</span>
+    <span class="chev" aria-hidden="true"></span></button>`;
+}
+const PZ = [0, 10, 15, 20, 30, 45, 60];
+function mEntry(e, I, i){
+  const c = cById(e.client), d = I.d, da = `data-id="${e.id}" data-ds="${I.ds}" data-d="${d}"`, pv = e.pause === '' || e.pause == null ? null : num(e.pause);
+  const list = S.clients.filter(x => !x.archived || x.id === e.client), ext = xOpen.has(e.id) || hasExtra(e);
+  return `<div class="mblk" style="--cc:${ccol(c)}" id="en${e.id}">
+    <div class="mbh"><b>Запись ${i + 1}</b><span class="ehs" id="eh${e.id}">${entLine(e)}</span></div>
+    <div class="plbl">Клиент${qh('entry', 'как заполнить запись')}</div>
+    <div class="cpick" role="group" aria-label="Клиент">${list.map(x => `<button type="button" class="tchip cp${x.id === e.client ? ' on' : ''}" style="--cc:${x.color}" data-act="cpick" data-c="${x.id}" ${da} aria-pressed="${x.id === e.client}"><span>${esc(cname(x))}</span></button>`).join('')}</div>
+    <div class="partchips" role="group" aria-label="Как записать время"><button type="button" class="tchip${e.byDur ? '' : ' on'}" data-act="bydur" data-v="0" ${da} aria-pressed="${!e.byDur}">Начало и конец</button><button type="button" class="tchip${e.byDur ? ' on' : ''}" data-act="bydur" data-v="1" ${da} aria-pressed="${!!e.byDur}">Только сколько часов</button></div>
+    ${e.byDur
+      ? `<label class="ptrow">Сколько часов<input type="text" inputmode="decimal" ${da} data-f="dur" value="${esc(e.dur)}" placeholder="например 2:30">${qh('dur', 'сколько часов')}</label>`
+      : `<div class="tpair"><label>Начало<span class="tin${e.from ? '' : ' empty'}"><input type="time" ${da} data-f="from" value="${esc(e.from)}"></span></label><label>Конец<span class="tin${e.to ? '' : ' empty'}"><input type="time" ${da} data-f="to" value="${esc(e.to)}"></span></label></div>
+        <div class="plbl">Перерыв в минутах${qh('pause', 'перерыв')}</div>
+        <div class="pchips">${PZ.map(v => `<button type="button" class="tchip${pv === v ? ' on' : ''}" data-act="pz" data-v="${v}" ${da}>${v}</button>`).join('')}<label class="pown">Другое число минут<input type="number" min="0" step="5" inputmode="numeric" ${da} data-f="pause" value="${pv != null && !PZ.includes(pv) ? esc(e.pause) : ''}" placeholder="мин" aria-label="Перерыв, другое число минут"></label></div>`}
+    <label class="field"><span class="fl">Что сделано${qh('what', 'что сделано')}</span><input type="text" ${da} data-f="what" value="${esc(e.what)}" placeholder="например генеральная уборка"></label>
+    <details class="xdet" data-x="${e.id}"${ext ? ' open' : ''}><summary>Дорога и расходы<span class="tog" aria-hidden="true"></span></summary>
+      <div class="xgrid"><label><span class="fl">Дорога, минут${qh('travel', 'дорога')}</span><input type="number" min="0" step="5" inputmode="numeric" ${da} data-f="travelMin" value="${esc(e.travelMin)}" placeholder="0"></label><label>Километров<input type="text" inputmode="decimal" ${da} data-f="km" value="${esc(e.km)}" placeholder="0"></label>
+      <label><span class="fl">Расходы, CHF${qh('exp', 'расходы')}</span><input type="text" inputmode="decimal" ${da} data-f="exp" value="${esc(e.exp)}" placeholder="0"></label><label>На что<input type="text" ${da} data-f="expNote" value="${esc(e.expNote)}" placeholder="например парковка"></label></div></details>
+    <div class="addrow"><button type="button" class="btn ghost" style="flex:1" data-act="rep" ${da}>Повторить каждую неделю до конца месяца</button>${qh('repeat', 'повторить каждую неделю')}</div>
+    <button type="button" class="addb" style="align-self:flex-end" data-act="del" ${da}>Удалить эту запись</button>
+  </div>`;
+}
+function mEditHtml(d){
+  const I = dayInfo(d), H = withHistory(), n = daysIn(S.cur);
+  const hi = I.hol && HINFO[I.hol.k] ? `<div class="hinfo"><b>${esc(I.hol.n)}</b><p>${HINFO[I.hol.k]}</p></div>` : '';
+  const body = active().length || I.L.length
+    ? I.L.map((e, i) => mEntry(e, I, i)).join('') + `<div class="addrow"><button type="button" class="addper" data-act="add" data-d="${d}">${I.L.length ? '+ Ещё запись в этот день' : '+ Запись в этот день'}</button>${qh('entry', 'как заполнить запись')}</div>`
+      + (H.length ? `<div class="plbl">Как в прошлый раз${qh('last', 'как в прошлый раз')}</div><div class="cpick">${H.map(c => `<button type="button" class="tchip cp" style="--cc:${c.color}" data-act="last" data-c="${c.id}" data-d="${d}"><span>${esc(cname(c))}</span></button>`).join('')}</div>` : '')
+      + (I.L.length ? `<button type="button" class="clr" data-act="clr" data-d="${d}">Очистить этот день</button>` : '')
+    : `<p class="hint">Сначала добавь клиента в блоке «Мои клиенты и объекты».</p><div class="mrowbtns"><button type="button" class="btn wbtn" data-act="firstcli">+ Добавить первого клиента</button></div>`;
+  return `<div class="med" id="me${d}">${hi}${body}
+    <div class="mrowbtns"><button type="button" class="btn gold" data-act="next" data-d="${d}">${d < n ? 'Следующий день →' : 'Готово'}</button><button type="button" class="btn ghost" data-act="done" data-d="${d}">Закрыть</button></div></div>`;
+}
+function renderMonth(){
+  closeHelp(); renderMonthName(); renderMonthInfo(); renderHolList(); renderSchNote();
+  const n = daysIn(S.cur); let h = '';
+  if (isM){
+    for (let d = 1; d <= n; d++) h += mRowHtml(d) + (openDay === d ? mEditHtml(d) : '');
+    $('month').className = 'ml'; $('month').innerHTML = h + '<div class="msum" id="sumRow"></div>';
+  } else {
+    h = `<div class="dr head"><div>День</div><div>Клиент, начало и конец, перерыв в минутах или сколько часов, что сделано${qh('entry', 'как заполнить запись')}</div><div class="num">Часы</div><div class="num">CHF</div></div>`;
+    for (let d = 1; d <= n; d++) h += dRowHtml(d);
+    $('month').className = 'month'; $('month').innerHTML = h + '<div class="sum" id="sumRow"></div>';
+  }
+  renderStats(); renderPdfSel();
+}
+function renderSum(T){
+  if (isM) $('sumRow').innerHTML = `<div class="lab">Всего за месяц</div><div class="num"><span class="lbl">Часы</span>${fmt(T.min)}</div><div class="num"><span class="lbl">CHF</span>${chf(T.amt)}</div>`;
+  else $('sumRow').innerHTML = `<div class="lab">Всего за месяц</div><div class="num">${fmt(T.min)}</div><div class="num">${chf(T.amt)}</div>`;
+}
+/* после ввода: обновить строку дня, не трогая поле с фокусом */
+function updDay(d){
+  const I = dayInfo(d);
+  if (isM){ $('mr' + d).outerHTML = mRowHtml(d); }
+  else { $('h' + d).textContent = I.min ? fmt(I.min) : '–'; $('a' + d).textContent = I.amt ? chf(I.amt) : '–';
+    I.L.forEach(e => { const box = $('en' + e.id); if (!box) return; box.style.setProperty('--cc', ccol(cById(e.client)));
+      const du = box.querySelector('[data-f=dur]'), ht = hasTimes(e); if (du && du !== document.activeElement){ du.disabled = ht; du.value = ht ? fmt(entMin(e)) : e.dur; } }); }
+  I.L.forEach(e => { const eh = $('eh' + e.id); if (eh) eh.textContent = entLine(e); });
+  renderStats(); renderPdfSel();
+}
+function reDay(d){ if (isM){ $('mr' + d).outerHTML = mRowHtml(d); if ($('me' + d)) $('me' + d).outerHTML = mEditHtml(d); } else $('r' + d).outerHTML = dRowHtml(d); renderStats(); renderPdfSel(); }
+$('month').addEventListener('input', e => {
+  const el = e.target, f = el.dataset.f, id = el.dataset.id; if (!f || !id || f === 'client') return;
+  const en = findEnt(el.dataset.ds, id); if (!en) return;
+  en[f] = el.value;
+  if (f === 'from' || f === 'to') en.byDur = false;
+  if (f === 'dur' && !isM) en.byDur = true;
+  save(); updDay(+el.dataset.d);
+  if (el.parentNode.classList.contains('tin')) el.parentNode.classList.toggle('empty', !el.value);
+  if (isM && f === 'pause') $('en' + id).querySelectorAll('[data-act=pz]').forEach(c => c.classList.toggle('on', el.value !== '' && num(el.value) === +c.dataset.v));
+});
+$('month').addEventListener('change', e => {
+  const el = e.target;
+  if (el.classList.contains('lastsel')){ const cid = el.value, d = +el.dataset.d; if (!cid) return; const ds = dkey(S.cur, d), src = lastFor(cid, ds); addEntry(ds, cid, src); reDay(d); say('Запись у «' + cname(cById(cid)) + '» добавлена как в прошлый раз.'); return; }
+  if (el.dataset.f !== 'client') return;
+  const en = findEnt(el.dataset.ds, el.dataset.id); if (!en) return; en.client = el.value; S.set.lastClient = el.value; save(); reDay(+el.dataset.d);
+});
+$('month').addEventListener('toggle', e => { const x = e.target.dataset && e.target.dataset.x; if (!x) return; if (e.target.open) xOpen.add(x); else xOpen.delete(x); }, true);
+$('month').addEventListener('click', e => {
+  const b = e.target.closest('[data-act]'); if (!b) return; const d = +b.dataset.d, act = b.dataset.act, ds = b.dataset.ds || (d ? dkey(S.cur, d) : '');
+  if (act === 'open' || act === 'done' || act === 'next'){
+    openDay = act === 'open' ? (openDay === d ? null : d) : act === 'next' && d < daysIn(S.cur) ? d + 1 : null;
+    renderMonth();
+    const tgt = $('mr' + (openDay || d)); if (tgt && (openDay || act !== 'open')) tgt.scrollIntoView({block: openDay ? 'start' : 'nearest', behavior: 'smooth'});
+    return;
+  }
+  if (act === 'firstcli'){ addClient(); return; }
+  if (act === 'add'){
+    const cid = defClient(); if (!cid){ say('Сначала добавь первого клиента.'); addClient(); return; }
+    const en = addEntry(ds, cid); reDay(d);
+    const box = $('en' + en.id); if (box){ const f = box.querySelector(isM ? '[data-act=cpick]' : 'select'); if (f) f.focus(); } return;
+  }
+  if (act === 'last'){ const cid = b.dataset.c, src = lastFor(cid, ds); addEntry(ds, cid, src); reDay(d); say('Запись у «' + cname(cById(cid)) + '» добавлена как в прошлый раз.'); return; }
+  if (act === 'clr'){ delete S.entries[ds]; save(); reDay(d); say(d + ' число очищено.'); return; }
+  const en = findEnt(ds, b.dataset.id); if (!en) return;
+  if (act === 'del'){ delEntry(ds, en.id); reDay(d); say('Запись удалена.'); return; }
+  if (act === 'more'){ if (xOpen.has(en.id) && !hasExtra(en)) xOpen.delete(en.id); else xOpen.add(en.id); reDay(d); return; }
+  if (act === 'rep'){ const L = repeatWeekly(ds, en.id); renderMonth(); say(L.length ? 'Запись повторена ' + L.map(x => x + ' числа').join(', ').replace(/ числа(?=,)/g, '') + '.' : 'До конца месяца такие записи уже стоят.'); return; }
+  if (act === 'cpick'){ en.client = b.dataset.c; S.set.lastClient = en.client; save(); reDay(d); return; }
+  if (act === 'bydur'){ en.byDur = b.dataset.v === '1'; if (en.byDur && !en.dur && hasTimes(Object.assign({}, en, {byDur:false}))) en.dur = fmt(entMin(Object.assign({}, en, {byDur:false}))); save(); reDay(d); return; }
+  if (act === 'pz'){ en.pause = b.dataset.v; save(); reDay(d); return; }
+});
+$('prevM').addEventListener('click', () => { S.cur = prevKey(S.cur); openDay = null; save(); renderMonth(); });
+$('nextM').addEventListener('click', () => { S.cur = nextKey(S.cur); openDay = null; save(); renderMonth(); });
+
+/* ---------- статистика ---------- */
+function payOf(k, cid){ return ((S.pay[k] || {})[cid]) || {sent:false, paid:false}; }
+function riskHtml(T, period){
+  if (!T.amt || !T.order.length) return '';
+  const top = T.order[0], sh = T.by[top].amt / T.amt; if (sh <= 0.5) return '';
+  return `<div class="riskn" role="note"><b>Один клиент даёт больше половины дохода ${period}${qh('risk', 'зависимость от одного клиента')}</b><p>«${esc(cname(cById(top)))}» приносит ${pct(sh)} % твоего дохода ${period}. Для самозанятых в Швейцарии это риск. Если этот клиент уйдёт, доход резко упадёт. Кроме того, касса AHV может посчитать такую работу не самостоятельной, а работой по найму (Scheinselbständigkeit). Если так складывается не первый месяц, уточни свой статус в своей кассе AHV (Ausgleichskasse, SVA).</p></div>`;
+}
+function renderStats(){
+  const k = S.cur, T = stats(k), mw = mwR(), {y, m} = ym();
+  if ($('sumRow')) renderSum(T);
+  const c = [[fmt(T.min), 'часов работы'], [chf(T.amt), mw ? 'CHF заработано, без MWST' : 'CHF заработано', true]];
+  if (mw) c.push([chf(T.amt * (1 + mw)), 'CHF с MWST ' + String(S.set.mwstRate).replace('.', ',') + ' %']);
+  c.push([T.min ? chf(T.amt / (T.min / 60)) : '–', 'CHF в среднем за час']);
+  c.push([String(T.days), plural(T.days, ['рабочий день','рабочих дня','рабочих дней'])]);
+  c.push([fmt(T.tm) + ' · ' + kmf(T.km) + ' км', 'дорога, часы и километры' + (kmR() && T.km ? ', расходы на дорогу ' + chf(T.km * kmR()) + ' CHF' : '')]);
+  c.push([chf(T.ex), 'CHF расходов на материалы и другое']);
+  $('cards').innerHTML = c.map(([b, s, main]) => `<div class="card${main ? ' main' : ''}"><b>${b}</b><span>${s}</span></div>`).join('');
+  // ждёт оплаты
+  const unpaid = T.order.filter(cid => T.by[cid].amt > 0 && !payOf(k, cid).paid), notSent = unpaid.filter(cid => !payOf(k, cid).sent);
+  const due = unpaid.reduce((a, cid) => a + T.by[cid].amt, 0) * (1 + mw);
+  $('wait').innerHTML = !T.amt ? '' : unpaid.length
+    ? `<div class="waitl" id="waitLine">Ждёт оплаты ${chf(due)} CHF от ${fromCli(unpaid.length)}${mw ? ', с MWST' : ''}.${notSent.length ? ' Счёт ещё не отправлен ' + notSent.length + ' ' + plural(notSent.length, ['клиенту','клиентам','клиентам']) + '.' : ''}${qh('wait', 'ждёт оплаты')}</div>`
+    : `<div class="waitl ok" id="waitLine">Все клиенты за ${MONTHS[m].toLowerCase()} заплатили.${qh('wait', 'ждёт оплаты')}</div>`;
+  $('riskM').innerHTML = riskHtml(T, 'в этом месяце');
+  $('ccards').innerHTML = T.order.length ? T.order.map(cid => {
+    const cl = cById(cid), b = T.by[cid], p = payOf(k, cid), sh = T.amt ? b.amt / T.amt : 0, vis = cl && cl.mode === 'visit';
+    return `<div class="cc${p.paid ? ' paid' : ''}" style="--cc:${ccol(cl)}" data-pc="${cid}">
+      <div class="cch"><b>${esc(cname(cl))}</b><span>${cl ? esc(cSummary(cl).split(' · ')[0]) : ''}</span></div>
+      <div class="ccn"><div><span class="lbl">Часы</span>${fmt(b.min)}</div><div><span class="lbl">${vis ? 'Визиты' : 'Записи'}</span>${b.n}</div><div><span class="lbl">CHF</span>${chf(b.amt)}</div></div>
+      ${mw ? `<div class="mwl"><div><span>Без MWST</span><b>${chf(b.amt)}</b></div><div><span>MWST ${String(S.set.mwstRate).replace('.', ',')} %</span><b>${chf(b.amt * mw)}</b></div><div><span>С MWST</span><b>${chf(b.amt * (1 + mw))}</b></div></div>` : ''}
+      ${b.ex || b.km || b.tm ? `<div class="hint">${[b.tm ? 'дорога ' + fmt(b.tm) + ' ч' : '', b.km ? kmf(b.km) + ' км' : '', b.ex ? 'расходы ' + chf(b.ex) + ' CHF' : ''].filter(Boolean).join(' · ')}</div>` : ''}
+      <div><div class="row" style="justify-content:space-between;font-size:.82rem;font-weight:700;color:var(--muted)"><span>Доля дохода за месяц</span><span>${pct(sh)} %</span></div><div class="shbar" role="img" aria-label="Доля дохода ${pct(sh)} процентов"><i style="width:${(sh * 100).toFixed(1)}%"></i></div></div>
+      <div class="payr"><label class="paychk"><input type="checkbox" data-pay="sent" data-c="${cid}"${p.sent ? ' checked' : ''}> Счёт отправлен</label><label class="paychk"><input type="checkbox" data-pay="paid" data-c="${cid}"${p.paid ? ' checked' : ''}> Оплачено</label></div>
+    </div>`; }).join('') : `<p class="hint">В ${MONTHS_IN[m]} записей пока нет. Добавь первую запись в днях месяца.</p>`;
+  renderYear();
+}
+$('ccards').addEventListener('change', e => {
+  const el = e.target, f = el.dataset.pay; if (!f) return;
+  const k = S.cur, P = S.pay[k] = S.pay[k] || {}, p = P[el.dataset.c] = P[el.dataset.c] || {sent:false, paid:false};
+  p[f] = el.checked; if (f === 'paid' && el.checked) p.sent = true; save(); renderStats();
+});
+let yOpen = false;
+$('yearBox').addEventListener('toggle', () => { yOpen = $('yearBox').open; });
+function yearData(y){
+  const months = []; for (let i = 0; i < 12; i++) months.push(stats(mkey(y, i)));
+  return {months, T: stats(String(y))};
+}
+function renderYear(){
+  const {y, m} = ym(), Y = yearData(y), T = Y.T, mw = mwR();
+  $('y-h').firstChild.textContent = 'Весь ' + y + ' год';
+  $('ySum').textContent = T.n ? fmt(T.min) + ' ч · ' + chf(T.amt) + ' CHF' : 'записей пока нет';
+  if (!$('yearBox').open) { $('yBody').innerHTML = ''; return; }
+  const max = Math.max(1, ...Y.months.map(x => x.amt));
+  const cards = [[fmt(T.min), 'часов работы за год'], [chf(T.amt), mw ? 'CHF заработано, без MWST' : 'CHF заработано за год', true]];
+  if (mw) cards.push([chf(T.amt * (1 + mw)), 'CHF с MWST']);
+  cards.push([T.min ? chf(T.amt / (T.min / 60)) : '–', 'CHF в среднем за час'], [String(T.days), plural(T.days, ['рабочий день','рабочих дня','рабочих дней'])], [chf(T.ex), 'CHF расходов']);
+  const bars = Y.months.map((x, i) => `<div class="hb${i === m ? ' cur' : ''}" title="${MONTHS[i]} ${y}: ${chf(x.amt)} CHF, ${fmt(x.min)} ч"><span class="hn">${MONTHS[i].slice(0, 3)}</span><span class="ht"><i style="width:${(x.amt / max * 100).toFixed(1)}%"></i></span><span class="hv">${x.amt ? chf0(x.amt) + ' CHF' : '–'}<small>${x.min ? fmt(x.min) + ' ч' : ''}</small></span></div>`).join('');
+  const top = T.order.slice(0, 8).map(cid => { const cl = cById(cid), b = T.by[cid], sh = T.amt ? b.amt / T.amt : 0;
+    return `<div class="hb top" style="--cc:${ccol(cl)}"><span class="hn">${esc(cname(cl))}</span><span class="ht"><i style="width:${(sh * 100).toFixed(1)}%"></i></span><span class="hv">${chf0(b.amt)} CHF · ${pct(sh)} %<small>${fmt(b.min)} ч · ${b.n} ${plural(b.n, P_ENT)}</small></span></div>`; }).join('');
+  const label = Y.months.map((x, i) => MONTHS[i] + ' ' + chf0(x.amt) + ' CHF').join(', ');
+  $('yBody').innerHTML = `<div class="cards">${cards.map(([b, s, main]) => `<div class="card${main ? ' main' : ''}"><b>${b}</b><span>${s}</span></div>`).join('')}</div>
+    <div class="stack" style="gap:8px"><h3>Заработок и часы по месяцам</h3><div class="hbars" role="img" aria-label="Заработок по месяцам ${y} года. ${esc(label)}">${bars}</div></div>
+    ${top ? `<div class="stack" style="gap:8px"><h3>Главные клиенты года</h3><div class="hbars">${top}</div></div>` : ''}
+    ${riskHtml(T, 'за этот год')}`;
+}
+$('yearBox').addEventListener('toggle', renderYear);
+
+/* ---------- очистить и удалить ---------- */
+let sayT; function say(t){ $('status').textContent = t; clearTimeout(sayT); sayT = setTimeout(() => { $('status').textContent = ''; }, 5000); }
+function clearIdle(){ $('clearBox').innerHTML = '<button class="btn ghost" id="clearBtn" type="button">Очистить этот месяц</button> <button class="btn ghost" id="wipeBtn" type="button">Удалить историю</button>'; }
+$('clearBox').addEventListener('click', e => {
+  const id = e.target.id; const {y, m} = ym();
+  if (id === 'clearBtn') $('clearBox').innerHTML = `<span class="confirm">Стереть все записи за ${MONTHS[m].toLowerCase()} ${y}? Клиенты останутся.<button class="btn danger" id="clearYes" type="button">Да, очистить месяц</button><button class="btn ghost" id="cNo" type="button">Отмена</button></span>`;
+  else if (id === 'wipeBtn') $('clearBox').innerHTML = '<span class="confirm">Удалить всех клиентов, все записи и настройки с этого устройства? Вернуть их будет нельзя.<button class="btn danger" id="wipeYes" type="button">Да, удалить историю</button><button class="btn ghost" id="cNo" type="button">Отмена</button></span>';
+  else if (id === 'cNo') clearIdle();
+  else if (id === 'clearYes'){ Object.keys(S.entries).filter(k => k.startsWith(S.cur + '-')).forEach(k => delete S.entries[k]); delete S.pay[S.cur]; save(); clearIdle(); renderMonth(); say('Месяц очищен.'); }
+  else if (id === 'wipeYes'){ try { localStorage.removeItem(KEY); } catch(err) {} S = freshS(); openDay = null; renderAll(); $('cliBox').open = true; say('История удалена. В браузере больше нет твоих записей.'); }
+});
+
+/* ---------- поделиться ---------- */
+function shareLinks(){ const t = $('shareText').value;
+  $('tgShare').href = 'https://t.me/share/url?url=' + encodeURIComponent(SHARE_URL) + '&text=' + encodeURIComponent(t.replace(SHARE_URL, '').trim());
+  $('waShare').href = 'https://wa.me/?text=' + encodeURIComponent(t); }
+$('shareText').value = SHARE_MSG; shareLinks();
+$('shareText').addEventListener('input', shareLinks);
+$('shareBtn').addEventListener('click', () => { const p = $('sharePanel'); p.hidden = !p.hidden; $('shareBtn').setAttribute('aria-expanded', String(!p.hidden)); });
+$('copyMsg').addEventListener('click', () => {
+  const fb = () => { $('shareText').select(); say('Выдели текст и скопируй его вручную.'); };
+  try { navigator.clipboard.writeText($('shareText').value).then(() => say('Сообщение скопировано. Вставь его в чат друзьям.'), fb); } catch(e) { fb(); }
+});
+
+/* ---------- PDF: листы A4 на холсте, как в других инструментах ---------- */
+const PW = 2480, PH = 3508, PM = 150, LIM = PH - 290;
+const PC = {sage:'#4F5E3E', bg:'#FFFCF8', ink:'#2F2924', muted:'#7A6E62', line:'#E5D9C9', soft:'#F4EDE3', weekend:'#F6EEE3', brown:'#6E4F3C', mustard:'#B98324', mustardSoft:'#F3E3C2', red:'#B5322A', green:'#2F7F3B', hol:'#D81B78'};
+const PDISC = 'Ориентир, а не точный расчёт. Всё уточняй и перепроверяй. Автор не несёт ответственности за достоверность данных.';
+function roundRect(c, x, y, w, h, r){ r = Math.min(r, h/2, w/2); c.beginPath(); c.moveTo(x+r,y); c.arcTo(x+w,y,x+w,y+h,r); c.arcTo(x+w,y+h,x,y+h,r); c.arcTo(x,y+h,x,y,r); c.arcTo(x,y,x+w,y,r); c.closePath(); }
+function fit(c, text, w){ text = String(text); if (c.measureText(text).width <= w) return text; while (text.length > 1 && c.measureText(text + '…').width > w) text = text.slice(0, -1); return text + '…'; }
+function wrap2(c, t, w){ const words = String(t).split(' '); let a = '', i = 0; for (; i < words.length; i++){ const n = a ? a + ' ' + words[i] : words[i]; if (c.measureText(n).width > w) break; a = n; } if (!a) return [fit(c, t, w)]; return i < words.length ? [a, fit(c, words.slice(i).join(' '), w)] : [a]; }
+function WM(cv, t){ const c = cv.getContext('2d'), w = cv.width, h = cv.height, fs = Math.round(Math.max(w, h) * 0.032); c.save(); c.font = '700 ' + fs + 'px Manrope, sans-serif'; c.fillStyle = 'rgba(110,79,60,0.075)'; c.textAlign = 'center'; c.textBaseline = 'middle'; c.translate(w / 2, h / 2); c.rotate(-Math.PI / 7); const sx = fs * 9, sy = fs * 5, R = Math.hypot(w, h) / 2 + sx; for (let y = -R, r = 0; y <= R; y += sy, r++) for (let x = -R + (r % 2) * sx / 2; x <= R; x += sx) c.fillText(t, x, y); c.restore(); return cv; }
+function footer(cv){
+  const c = cv.getContext('2d'); c.font = '600 32px Manrope, sans-serif'; let fx = PM; const fy = PH - 90;
+  c.fillStyle = PC.line; c.fillRect(PM, fy - 70, PW - 2*PM, 3);
+  CREDIT_PARTS.forEach((part, i) => {
+    if (i){ c.fillStyle = PC.muted; c.fillText(' · ', fx, fy); fx += c.measureText(' · ').width; }
+    const w = c.measureText(part.t).width; c.fillStyle = PC.brown; c.fillText(part.t, fx, fy); c.fillRect(fx, fy + 6, w, 2);
+    cv.links.push({x: fx, y: fy - 32, w, h: 44, url: part.u}); fx += w;
+  });
+}
+class PDoc {
+  constructor(title, right, subs){ this.title = title; this.right = right; this.subs = subs.filter(Boolean); this.pages = []; this.add(true); }
+  add(first){
+    const cv = document.createElement('canvas'); cv.width = PW; cv.height = PH; cv.links = []; const c = cv.getContext('2d');
+    c.fillStyle = PC.bg; c.fillRect(0, 0, PW, PH); c.textBaseline = 'alphabetic'; this.cv = cv; this.c = c; this.pages.push(cv);
+    if (first){
+      c.font = '90px Forum, Georgia, serif'; const rw = c.measureText(this.right).width;
+      c.fillStyle = PC.ink; c.font = '120px Forum, Georgia, serif'; c.fillText(fit(c, this.title, PW - 2*PM - rw - 60), PM, PM + 100);
+      c.textAlign = 'right'; c.font = '90px Forum, Georgia, serif'; c.fillStyle = PC.brown; c.fillText(this.right, PW - PM, PM + 100); c.textAlign = 'left';
+      let y = PM + 175; this.subs.forEach((s, i) => { c.fillStyle = i ? PC.ink : PC.muted; c.font = (i ? '600 ' : '600 ') + '40px Manrope, sans-serif'; c.fillText(fit(c, s, PW - 2*PM), PM, y); y += 58; });
+      this.y = y + 10;
+    } else {
+      c.fillStyle = PC.muted; c.font = '600 34px Manrope, sans-serif'; c.fillText(fit(c, this.title + ' · ' + this.right + ' · продолжение', PW - 2*PM), PM, PM + 40);
+      c.fillStyle = PC.line; c.fillRect(PM, PM + 70, PW - 2*PM, 3); this.y = PM + 120;
+    }
+  }
+  ensure(h){ if (this.y + h > LIM){ this.add(false); return true; } return false; }
+  cards(list){
+    this.ensure(200); const c = this.c, gap = 24, cw = (PW - 2*PM - (list.length - 1) * gap) / list.length, y = this.y;
+    const mi = Math.max(0, list.findIndex(x => x[2]));
+    list.forEach(([b, s], i) => { const x = PM + i * (cw + gap);
+      c.fillStyle = i === mi ? PC.mustardSoft : PC.soft; roundRect(c, x, y, cw, 170, 24); c.fill();
+      c.fillStyle = PC.ink; c.font = (list.length > 5 ? '58px' : '68px') + ' Forum, Georgia, serif'; c.fillText(fit(c, b, cw - 50), x + 28, y + 82);
+      c.fillStyle = PC.muted; c.font = '600 28px Manrope, sans-serif'; c.fillText(fit(c, s, cw - 50), x + 28, y + 132); });
+    this.y += 220;
+  }
+  h2(t){ this.ensure(260); const c = this.c; c.fillStyle = PC.ink; c.font = '64px Forum, Georgia, serif'; c.fillText(t, PM, this.y + 56); this.y += 96; }
+  text(t, o = {}){ this.ensure(50); const c = this.c; c.fillStyle = o.color || PC.ink; c.font = (o.w || '500') + ' ' + (o.size || 30) + 'px Manrope, sans-serif'; c.fillText(fit(c, t, PW - 2*PM), PM, this.y + 32); this.y += (o.size || 30) + 18; }
+  lines(rows){ // [label, value, bold]
+    rows.forEach(([l, v, b]) => { this.ensure(56); const c = this.c; c.font = (b ? '800 ' : '600 ') + '32px Manrope, sans-serif'; c.fillStyle = b ? PC.ink : PC.muted; c.fillText(l, PM + 18, this.y + 38); c.textAlign = 'right'; c.fillStyle = PC.ink; c.fillText(v, PW - PM - 18, this.y + 38); c.textAlign = 'left'; c.fillStyle = PC.line; c.fillRect(PM, this.y + 54, PW - 2*PM, 2); this.y += 58; });
+    this.y += 20;
+  }
+  table(cols, rows, total){
+    const tw = PW - 2*PM, rh = 64; cols = cols.map(x => Object.assign({}, x)); const fl = cols.find(x => !x.w); if (fl) fl.w = tw - cols.reduce((a, x) => a + (x.w || 0), 0);
+    const head = () => { const C = this.c; C.fillStyle = PC.brown; C.fillRect(PM, this.y, tw, rh); C.fillStyle = '#FFFFFF'; C.font = '700 26px Manrope, sans-serif'; let x = PM;
+      cols.forEach(col => { if (col.r){ C.textAlign = 'right'; C.fillText(col.t, x + col.w - 18, this.y + rh * .64); C.textAlign = 'left'; } else C.fillText(fit(C, col.t, col.w - 30), x + 18, this.y + rh * .64); x += col.w; }); this.y += rh; };
+    this.ensure(rh * 3); head();
+    rows.forEach(row => {
+      if (this.ensure(rh)) head();
+      const C = this.c, y = this.y;
+      if (row.bg){ C.fillStyle = row.bg; C.fillRect(PM, y, tw, rh); }
+      C.fillStyle = PC.line; C.fillRect(PM, y + rh - 2, tw, 2);
+      if (row.bar){ C.fillStyle = row.bar; C.fillRect(PM, y, 9, rh - 2); }
+      let x = PM;
+      row.cells.forEach((cell, i) => { const col = cols[i]; let t = cell == null ? '' : cell, dot = null, color = PC.ink;
+        if (typeof t === 'object'){ dot = t.dot; color = t.color || color; t = t.t; } t = String(t);
+        const wt = row.bold || col.b ? '700 ' : '500 '; C.font = wt + '27px Manrope, sans-serif';
+        let tx = x + 18, avail = col.w - 30;
+        if (dot){ C.fillStyle = dot; C.beginPath(); C.arc(x + 30, y + rh / 2, 11, 0, Math.PI * 2); C.fill(); tx += 30; avail -= 30; }
+        C.fillStyle = color;
+        if (col.r){ C.textAlign = 'right'; C.fillText(fit(C, t, avail), x + col.w - 18, y + rh * .64); C.textAlign = 'left'; }
+        else if (C.measureText(t).width > avail){ C.font = wt + '22px Manrope, sans-serif';
+          if (col.wrap && C.measureText(t).width > avail){ const L = wrap2(C, t, avail); if (L.length > 1){ C.fillText(L[0], tx, y + rh * .42); C.fillText(L[1], tx, y + rh * .82); } else C.fillText(L[0], tx, y + rh * .64); }
+          else C.fillText(fit(C, t, avail), tx, y + rh * .64); }
+        else C.fillText(t, tx, y + rh * .64);
+        x += col.w; });
+      this.y += rh;
+    });
+    if (total){ this.ensure(rh + 4); const C = this.c; C.fillStyle = PC.ink; C.fillRect(PM, this.y, tw, 4); this.y += 4; C.font = '800 28px Manrope, sans-serif'; let x = PM;
+      total.forEach((t, i) => { const col = cols[i]; if (t){ if (col.r){ C.textAlign = 'right'; C.fillText(t, x + col.w - 18, this.y + rh * .64); C.textAlign = 'left'; } else C.fillText(t, x + 18, this.y + rh * .64); } x += col.w; });
+      this.y += rh; }
+    this.y += 36;
+  }
+  sign(labels){
+    this.ensure(250); const c = this.c, tw = PW - 2*PM, sw = (tw - 120) / 2, sy = this.y + 150;
+    labels.forEach((l, i) => { const sx = PM + i * (sw + 120); c.fillStyle = PC.ink; c.fillRect(sx, sy, sw, 3); c.fillStyle = PC.muted; c.font = '600 28px Manrope, sans-serif'; c.fillText(fit(c, l, sw), sx, sy + 44); });
+    this.y = sy + 90;
+  }
+  finish(){
+    const n = this.pages.length;
+    this.pages.forEach((cv, i) => { const c = cv.getContext('2d');
+      c.fillStyle = PC.muted; c.font = 'italic 500 26px Manrope, sans-serif'; c.fillText(PDISC, PM, PH - 200);
+      footer(cv);
+      if (n > 1){ c.textAlign = 'right'; c.font = '600 30px Manrope, sans-serif'; c.fillStyle = PC.muted; c.fillText('Страница ' + (i + 1) + ' из ' + n, PW - PM, PH - 90); c.textAlign = 'left'; }
+      WM(cv, 'svoiludi.ch'); });
+    return this.pages;
+  }
+}
+const dmy = ds => ds.slice(8, 10) + '.' + ds.slice(5, 7) + '.';
+function timeText(e){ if (hasTimes(e)) return e.from + '–' + e.to + (num(e.pause) ? ', перерыв ' + num(e.pause) + ' мин' : ''); return e.dur ? '–' : ''; }
+const mwTxt = () => String(S.set.mwstRate).replace('.', ',') + ' %';
+function pdfClient(cid){
+  const k = S.cur, {y, m} = ym(), cl = cById(cid), T = stats(k), b = T.by[cid], mw = mwR(), vis = cl.mode === 'visit';
+  const rows = T.list.filter(r => r.e.client === cid);
+  const D = new PDoc('Отчёт о работе', MONTHS[m] + ' ' + y, ['Stundenrapport · ' + (vis ? 'цена за визит ' + chf(num(cl.visit)) + ' CHF' : 'ставка ' + chf(num(cl.rate)) + ' CHF в час'), 'Клиент · ' + cname(cl) + (cl.place ? ', ' + cl.place : ''), S.set.name ? 'Исполнитель · ' + S.set.name : '']);
+  const cards = [[fmt(b.min), 'часов работы'], [String(b.n), plural(b.n, vis ? P_VIS : P_ENT)], [chf(b.amt), mw ? 'CHF без MWST' : 'CHF за работу', !mw]];
+  if (mw) cards.push([chf(b.amt * mw), 'CHF MWST ' + mwTxt()], [chf(b.amt * (1 + mw)), 'CHF с MWST', true]);
+  if (b.ex) cards.push([chf(b.ex), 'CHF расходы']);
+  D.cards(cards);
+  const cols = [{t:'Дата', w:170}, {t:'Время', w:470}, {t:'Что сделано', w:0, wrap:true}, {t:'Часы', w:160, r:true}, {t: vis ? 'Визит, CHF' : 'Сумма, CHF', w:240, r:true}];
+  D.table(cols, rows.map(r => ({cells:[dmy(r.ds), timeText(r.e), r.e.what || '', r.m ? fmt(r.m) : '', chf(r.a)]})), ['Всего за месяц', '', '', fmt(b.min), chf(b.amt)]);
+  if (mw) D.lines([['Сумма без MWST', chf(b.amt) + ' CHF'], ['MWST ' + mwTxt(), chf(b.amt * mw) + ' CHF'], ['Сумма с MWST', chf(b.amt * (1 + mw)) + ' CHF', true]]);
+  const ex = rows.filter(r => num(r.e.exp));
+  if (ex.length){ D.h2('Расходы'); D.table([{t:'Дата', w:170}, {t:'На что', w:0}, {t:'CHF', w:240, r:true}], ex.map(r => ({cells:[dmy(r.ds), r.e.expNote || '', chf(num(r.e.exp))]})), ['Всего расходов', '', chf(b.ex)]); }
+  D.sign(['Подпись исполнителя' + (S.set.name ? ' · ' + S.set.name : '') + ' · дата', 'Подпись клиента · ' + cname(cl) + ' · дата']);
+  return D.finish();
+}
+function pdfMonth(){
+  const k = S.cur, {y, m} = ym(), T = stats(k), mw = mwR();
+  const D = new PDoc('Мой отчёт за месяц', MONTHS[m] + ' ' + y, [['Часы по клиентам', S.set.name, 'кантон ' + CANTONS[S.set.canton], mw ? 'MWST ' + mwTxt() : ''].filter(Boolean).join(' · ')]);
+  D.cards([[fmt(T.min), 'часов работы'], [chf(T.amt), mw ? 'CHF без MWST' : 'CHF заработано', true], [T.min ? chf(T.amt / (T.min / 60)) : '–', 'CHF в среднем за час'], [String(T.days), 'рабочих дней'], [fmt(T.tm) + ' · ' + kmf(T.km) + ' км', 'дорога'], [chf(T.ex), 'CHF расходы']]);
+  const extra = []; if (mw) extra.push(['MWST ' + mwTxt(), chf(T.amt * mw) + ' CHF'], ['Заработано с MWST', chf(T.amt * (1 + mw)) + ' CHF', true]);
+  if (kmR() && T.km) extra.push(['Расходы на дорогу, ' + kmf(T.km) + ' км по ' + chf(kmR()) + ' CHF', chf(T.km * kmR()) + ' CHF']);
+  if (extra.length) D.lines(extra);
+  D.h2('По клиентам');
+  D.table([{t:'Клиент', w:0}, {t:'Часы', w:170, r:true}, {t:'Записей', w:170, r:true}, {t:'Сумма, CHF', w:260, r:true}, {t:'Доля', w:150, r:true}, {t:'Счёт и оплата', w:330}],
+    T.order.map(cid => { const cl = cById(cid), b = T.by[cid], p = payOf(k, cid); return {cells:[{t: cname(cl), dot: ccol(cl)}, fmt(b.min), String(b.n), chf(b.amt), (T.amt ? pct(b.amt / T.amt) : 0) + ' %', {t: p.paid ? 'оплачено' : p.sent ? 'счёт отправлен' : 'счёт не отправлен', color: p.paid ? PC.green : PC.muted}]}; }),
+    ['Всего', fmt(T.min), String(T.n), chf(T.amt), '', '']);
+  D.h2('Все записи');
+  D.table([{t:'Дата', w:150}, {t:'Клиент', w:420}, {t:'Время', w:400}, {t:'Что сделано', w:0, wrap:true}, {t:'Часы', w:140, r:true}, {t:'CHF', w:200, r:true}],
+    T.list.map(r => { const cl = cById(r.e.client), I = new Date(r.ds + 'T00:00'); return {bar: ccol(cl), bg: I.getDay() === 0 || I.getDay() === 6 ? PC.weekend : null, cells:[dmy(r.ds), cname(cl), timeText(r.e), r.e.what || '', r.m ? fmt(r.m) : '', chf(r.a)]}; }),
+    ['Всего', '', '', '', fmt(T.min), chf(T.amt)]);
+  return D.finish();
+}
+function pdfYear(){
+  const {y} = ym(), Y = yearData(y), T = Y.T, mw = mwR();
+  const D = new PDoc('Мой отчёт за год', String(y), [['Часы по клиентам', S.set.name, 'кантон ' + CANTONS[S.set.canton], mw ? 'MWST ' + mwTxt() : ''].filter(Boolean).join(' · ')]);
+  D.cards([[fmt(T.min), 'часов работы'], [chf(T.amt), mw ? 'CHF без MWST' : 'CHF заработано', true], [T.min ? chf(T.amt / (T.min / 60)) : '–', 'CHF в среднем за час'], [String(T.days), 'рабочих дней'], [fmt(T.tm) + ' · ' + kmf(T.km) + ' км', 'дорога'], [chf(T.ex), 'CHF расходы']]);
+  const extra = []; if (mw) extra.push(['MWST ' + mwTxt(), chf(T.amt * mw) + ' CHF'], ['Заработано с MWST', chf(T.amt * (1 + mw)) + ' CHF', true]);
+  if (kmR() && T.km) extra.push(['Расходы на дорогу, ' + kmf(T.km) + ' км по ' + chf(kmR()) + ' CHF', chf(T.km * kmR()) + ' CHF']);
+  if (extra.length) D.lines(extra);
+  D.h2('По месяцам');
+  D.table([{t:'Месяц', w:0}, {t:'Часы', w:200, r:true}, {t:'Записей', w:200, r:true}, {t:'Дней', w:160, r:true}, {t:'Заработано, CHF', w:330, r:true}, {t:'Дорога, км', w:240, r:true}, {t:'Расходы, CHF', w:280, r:true}],
+    Y.months.map((x, i) => ({cells:[MONTHS[i], x.min ? fmt(x.min) : '–', x.n ? String(x.n) : '–', x.days ? String(x.days) : '–', x.amt ? chf(x.amt) : '–', x.km ? kmf(x.km) : '–', x.ex ? chf(x.ex) : '–']})),
+    ['Всего за год', fmt(T.min), String(T.n), String(T.days), chf(T.amt), kmf(T.km), chf(T.ex)]);
+  D.h2('По клиентам');
+  D.table([{t:'Клиент', w:0}, {t:'Часы', w:200, r:true}, {t:'Записей', w:200, r:true}, {t:'Сумма, CHF', w:300, r:true}, {t:'Доля', w:170, r:true}, {t:'Расходы, CHF', w:280, r:true}],
+    T.order.map(cid => { const cl = cById(cid), b = T.by[cid]; return {cells:[{t: cname(cl) + (cl && cl.archived ? ' (в архиве)' : ''), dot: ccol(cl)}, fmt(b.min), String(b.n), chf(b.amt), (T.amt ? pct(b.amt / T.amt) : 0) + ' %', b.ex ? chf(b.ex) : '–']}; }),
+    ['Всего', fmt(T.min), String(T.n), chf(T.amt), '', chf(T.ex)]);
+  return D.finish();
+}
+async function pdfOut(make, filename){
+  if (!window.jspdf){ say('PDF сейчас недоступен. Попробуй ещё раз позже.'); return; }
+  say('Готовлю PDF…');
+  try { await Promise.all(['120px Forum', '500 30px Manrope', '600 30px Manrope', '700 30px Manrope', '800 30px Manrope'].map(f => document.fonts.load(f))); await document.fonts.ready; } catch(e) {}
+  const pages = make(), doc = new window.jspdf.jsPDF({orientation:'portrait', unit:'mm', format:'a4'}), k = 210 / PW;
+  pages.forEach((cv, i) => { if (i) doc.addPage(); doc.addImage(cv.toDataURL('image/jpeg', 0.92), 'JPEG', 0, 0, 210, 297); for (const l of cv.links) doc.link(l.x * k, l.y * k, l.w * k, l.h * k, {url: l.url}); });
+  return offer(filename, doc.output('blob'));
+}
+const safe = s => String(s).replace(/[\\/:*?"<>|]+/g, ' ').replace(/\s+/g, ' ').trim();
+function renderPdfSel(){
+  const T = stats(S.cur), sel = $('pdfCli'), keep = sel.value;
+  sel.innerHTML = T.order.length ? T.order.map(cid => `<option value="${cid}"${cid === keep ? ' selected' : ''}>${esc(cname(cById(cid)))}</option>`).join('') : '<option value="">В этом месяце записей нет</option>';
+  sel.disabled = !T.order.length; $('dlCli').disabled = !T.order.length || !downloadsOk; $('dlMine').disabled = !T.n || !downloadsOk;
+  $('dlYear').disabled = !stats(String(ym().y)).n || !downloadsOk;
+}
+$('dlCli').addEventListener('click', () => { const cid = $('pdfCli').value, cl = cById(cid); if (!cl) return; const {y, m} = ym(); pdfOut(() => pdfClient(cid), safe('Отчёт о работе ' + cname(cl) + ' ' + MONTHS[m] + ' ' + y) + '.pdf'); });
+$('dlMine').addEventListener('click', () => { const {y, m} = ym(); pdfOut(pdfMonth, 'Часы по клиентам ' + MONTHS[m] + ' ' + y + '.pdf'); });
+$('dlYear').addEventListener('click', () => { const {y} = ym(); pdfOut(pdfYear, 'Часы по клиентам за ' + y + ' год.pdf'); });
+
+/* ---------- скачивание ---------- */
+let downloads = null, downloadsOk = true;
+async function offer(filename, data){
+  if (window.claude && window.claude.use){
+    if (!downloads){ say('Скачивание здесь недоступно.'); return; }
+    try { await downloads.save({filename, data}); say('Файл «' + filename + '» сохранён.'); return true; }
+    catch(err){ const code = err && err.code;
+      if (code === 'declined') say('Скачивание отменено.'); else if (code === 'rate_limited') say('Окно сохранения уже открыто. Подтверди его или подожди немного.'); else say('Не получилось сохранить файл. Попробуй ещё раз.'); }
+    return;
+  }
+  const url = URL.createObjectURL(data), a = document.createElement('a'); a.href = url; a.download = filename; document.body.appendChild(a); a.click();
+  setTimeout(() => { a.remove(); URL.revokeObjectURL(url); }, 4000); say('Файл «' + filename + '» скачан.'); return true;
+}
+$('dlXlsx').addEventListener('click', () => { const p = $('vipPanel'); p.hidden = !p.hidden; $('dlXlsx').setAttribute('aria-expanded', String(!p.hidden)); });
+/* Excel откроется для VIP-партнёров вместе с проверкой VIP; сейчас кнопка скрыта и недостижима */
+(async () => {
+  if (!(window.claude && window.claude.use)) return;
+  try { downloads = await window.claude.use('downloads'); } catch(e) { downloads = null; }
+  if (!downloads){ downloadsOk = false; renderPdfSel(); say('Скачивание откроется на опубликованной странице.'); }
+})();
+
+function renderAll(){ renderSet(); renderClients(); renderMonth(); clearIdle(); renderBackup(); }
+if (!active().length) $('cliBox').open = true;
+if (S.cur === mkey(now.getFullYear(), now.getMonth()) && isM && active().length) openDay = now.getDate();
+renderAll();
+</script>
+<script src="/assets/samesite.js"></script>
+<!--i18n--><style>#langbar.langbar{position:fixed;bottom:14px;right:14px;z-index:60;display:flex;gap:2px;background:rgba(255,255,255,.92);border:1px solid rgba(0,0,0,.08);border-radius:999px;padding:3px;font:600 12px Manrope,system-ui,sans-serif;box-shadow:0 2px 8px rgba(0,0,0,.08)}#langbar.langbar a{color:#5d554d;padding:5px 9px;border-radius:999px;text-decoration:none;font:inherit;display:inline-block}#langbar.langbar a[aria-current="true"]{background:#2f2924;color:#fff}@media print{.langbar{display:none!important}}</style><div class="langbar" id="langbar" role="navigation" aria-label="Мова / Язык"><a href="/instrumenty/chasy-po-klientam/" hreflang="ru" data-lang="ru" aria-current="true">RU</a><a href="/uk/instrumenty/chasy-po-klientam/" hreflang="uk" data-lang="uk">UA</a></div><script>(function(){var b=document.getElementById('langbar');if(!b)return;b.addEventListener('click',function(e){var a=e.target.closest('a[data-lang]');if(a){try{localStorage.setItem('svoiludiLang',a.dataset.lang)}catch(x){}a.href=a.getAttribute('href').split('#')[0]+location.hash;}});})();</script><!--i18n--></body>
+</html>
