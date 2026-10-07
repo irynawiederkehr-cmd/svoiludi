@@ -52,7 +52,7 @@ window.SPECIALISTS = [
     "key": "f1z4gnyx",
     "num": "SG-0017",
     "uid": "CHE-321.897.450",
-    "status": "на підтвердженні",
+    "status": "активен",
     "paidUntil": "",
     "tiers": [],
     "onlineCH": "",
