@@ -573,6 +573,7 @@ a.bot:hover{color:#B98324}
 .adm-act.main{border-width:2.5px}
 .adm-act.off{opacity:.6;cursor:default;border-style:dashed}
 .adm-todo{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:4px;font-size:.86rem}
+.vacs{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}.vacs a{display:flex;flex-direction:column;gap:2px;text-decoration:none;color:inherit;border:1.5px solid var(--line);border-radius:14px;padding:10px 14px;background:var(--paper)}.vacs a:hover{border-color:var(--sage)}.vacs b{font-weight:700;font-size:.95rem}.vacs small{color:var(--muted);font-size:.8rem}.vac-note{font-size:.78rem;color:var(--muted);margin:8px 0 0;line-height:1.45}.vac-note b{color:var(--forest,#4F5E3E)}
 </style>
 <!--i18n--><link rel="alternate" hreflang="ru" href="https://svoiludi.ch/"><link rel="alternate" hreflang="uk" href="https://svoiludi.ch/uk/"><script>(function(){try{if(localStorage.getItem('svoiludiLang')==='uk'&&!/[?&]lang=ru/.test(location.search))location.replace('/uk/'+location.search+location.hash);}catch(e){}})();</script><!--i18n--></head>
 <body>
@@ -601,6 +602,7 @@ a.bot:hover{color:#B98324}
     <nav aria-label="Разделы">
       <a href="./" aria-current="page" style="color:var(--ink)">Специалисты</a>
       <a href="events/">События</a>
+      <a href="vakansii/">Вакансии и партнёрство</a>
       <a href="instrumenty/">Полезные инструменты</a>
       <a href="join/">Как разместиться</a>
       <a href="https://voznesenskaya.ch/">Сайт Ирины</a>
@@ -813,6 +815,7 @@ const AVATAR_SVG = '<svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50
 
 </script>
 <script src="/data/specialists.js?v=7fef69e3"></script>
+<script src="/data/vacancies.js"></script>
 <script>
 window.IMG_BASE = 'img/';
 /* карточки специалистов — в /data/specialists.js (одна копия на весь сайт) */
@@ -1371,6 +1374,8 @@ function openCard(id){
         <div class="d-block"><h4>Формат</h4><p>${esc(s.format)}</p></div>
         <div class="d-block"><h4>Языки</h4><div class="chips">${s.langs.map(l => `<span>${esc(l)}</span>`).join('')}</div></div>
         ${(s.tags || []).length ? `<div class="d-block"><h4>Особенности</h4><div class="d-tags">${s.tags.filter(t => TAGS[t]).map(t => `<span>${esc(TAGS[t])}</span>`).join('')}</div></div>` : ''}
+        ${(() => { const vs = (window.VACANCIES || []).filter(v => v.author === s.id && v.status === 'активен' && v.ok && (!v.until || v.until >= new Date().toISOString().slice(0, 10)));
+          return vs.length ? `<div class="d-block"><h4>Ищет в команду и в партнёры</h4><ul class="vacs">${vs.map(v => `<li><a href="vakansii/#${esc(v.id)}"><b>${esc(v.title)}</b><small>${v.kind === 'partner' ? 'Ищу партнёра' : 'Ищу сотрудника'}${v.sample ? ' · образец' : ''}</small></a></li>`).join('')}</ul><p class="vac-note"><b>Бесплатно для членов сообщества «Свои люди». Не коммерческая услуга.</b> Объявления размещает сам специалист и отвечает за их содержание. «Свои люди» не участвуют в найме и сотрудничестве, договаривайтесь напрямую с автором.</p></div>` : ''; })()}
         ${(() => { const ev = upcoming(s); return ev.length ? `<div class="d-block"><h4>Ближайшие мероприятия</h4><ul class="evs">${ev.map(({ e, d }) => `<li><a href="events/#${esc(e.id)}"><span class="dt"><span>${+d.slice(8)}</span><small>${MONTHS[+d.slice(5, 7) - 1]}</small></span><span class="t">${esc(e.title)}<small>${e.time ? esc(e.time) + ' · ' : ''}${e.online && !e.address ? 'онлайн' : esc(city(e.address || ''))}</small></span></a></li>`).join('')}</ul></div>` : ''; })()}
       </div>
       <div class="d-side">
