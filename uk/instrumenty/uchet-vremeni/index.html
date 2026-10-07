@@ -9,7 +9,7 @@
 <link rel="canonical" href="https://svoiludi.ch/uk/instrumenty/uchet-vremeni/">
 <meta property="og:type" content="website"><meta property="og:locale" content="uk_UA"><meta property="og:site_name" content="Свої люди у Швейцарії">
 <meta property="og:title" content="Облік мого часу · робота, навчання чи власна справа за місяць"><meta property="og:description" content="Записуй, скільки часу йде на роботу, навчання чи власну справу, і одразу бач підсумок місяця. Безкоштовно, з PDF.">
-<meta property="og:url" content="https://svoiludi.ch/uk/instrumenty/uchet-vremeni/">
+<meta property="og:url" content="https://svoiludi.ch/uk/instrumenty/uchet-vremeni/"><meta property="og:image" content="https://svoiludi.ch/instrumenty/uchet-vremeni/og-image.uk.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="robots" content="noindex, nofollow">
 <title>Облік мого часу</title>
@@ -1201,7 +1201,7 @@ function drawSheet(){
   // строка итогов
   c.fillStyle = PC.ink; c.fillRect(PM, y, tw, 4); y += 4;
   c.font = '800 28px Manrope, sans-serif'; c.fillText('Усього за місяць', PM + 18, y + rh * .64);
-  const tot = fx ? {Часы: fmt(T.worked + T.cred), План: fmt(T.norm), Разница: fmt(T.diff, true)} : {Часы: fmt(T.worked)};
+  const tot = {}; if (fx){ tot['Години'] = fmt(T.worked + T.cred); tot['План'] = fmt(T.norm); tot['Різниця'] = fmt(T.diff, true); } else tot['Години'] = fmt(T.worked);
   let xx = PM; cols.forEach(([n, w]) => { if (tot[n]){ c.textAlign = 'right'; c.fillStyle = n === 'Різниця' ? (T.diff > 0 ? PC.green : T.diff < 0 ? PC.red : PC.ink) : PC.ink; c.fillText(tot[n], xx + w - 18, y + rh * .64); c.textAlign = 'left'; } xx += w; });
   y += rh + 30;
   c.fillStyle = PC.muted; c.font = '500 28px Manrope, sans-serif';

@@ -1,23 +1,60 @@
-// Картинки-превью ссылок (og:image) для украинской версии: node _i18n/og.js
-// Слева текст, справа — снимок украинской страницы (как в русских картинках). Пишет {папка}/og-image.uk.jpg и fav/og-svoi-ludi.uk.jpg.
-// Локальный сервер скрипт поднимает сам. Запускать после python3 _i18n/pages.py, когда русские страницы или их вид заметно изменились.
+// Картинки-превью ссылок (og:image) svoiludi.ch — русские и украинские: NODE_PATH=$(npm root -g) node _i18n/og.js [часть пути…]
+// Правило Ирины (07.10.2026): у КАЖДОЙ страницы сайта есть своя картинка-превью 1200×630 на обоих языках.
+//   У инструментов на превью — пример: снимок заполненного инструмента или страницы готового PDF с примерными данными.
+//   Новую страницу сразу добавить сюда (CARDS) и прописать og:image в русской странице; `node _i18n/og.js check` найдёт страницы без превью.
+// Пишет {out}.jpg и {out}.uk.jpg. Без аргументов — все картинки; с аргументом — только те, где out содержит эту строку.
+// Локальный сервер скрипт поднимает сам. Запускать после python3 _i18n/pages.py, когда страницы или их вид заметно изменились.
 const { chromium } = require('playwright');
 const { spawn } = require('child_process');
 const path = require('path'); const fs = require('fs');
 const ROOT = path.resolve(__dirname, '..'); const PORT = 8897; const BASE = `http://localhost:${PORT}`;
-const TOOLS = 'СВОЇ ЛЮДИ У ШВЕЙЦАРІЇ · ІНСТРУМЕНТИ';
+const EB = { ru: 'СВОИ ЛЮДИ В ШВЕЙЦАРИИ', uk: 'СВОЇ ЛЮДИ У ШВЕЙЦАРІЇ' };
+const TOOLS = { ru: EB.ru + ' · ИНСТРУМЕНТЫ', uk: EB.uk + ' · ІНСТРУМЕНТИ' };
+// sel — что снять со страницы; fan — папка с картинками готового PDF (пример), вместо снимка страницы
 const CARDS = [
-  { out: 'kursy/og-image.jpg', url: '/kursy/', sel: '#results', eyebrow: 'СВОИ ЛЮДИ В ШВЕЙЦАРИИ', title: 'Курсы и занятия на своём языке', desc: 'Йога, немецкий, кружки для детей, мастер-классы и вебинары по кантонам Швейцарии.', chip: 'Видно, кто ведёт каждый курс' },
-  { out: 'kursy/og-image.uk.jpg', url: '/uk/kursy/', sel: '#results', eyebrow: 'СВОЇ ЛЮДИ У ШВЕЙЦАРІЇ', title: 'Курси й заняття своєю мовою', desc: 'Йога, німецька, гуртки для дітей, майстер-класи та вебінари по кантонах Швейцарії.', chip: 'Видно, хто веде кожен курс' },
-  { out: 'events/og-image.uk.jpg', url: '/uk/events/', sel: '.finder', eyebrow: 'СВОЇ ЛЮДИ У ШВЕЙЦАРІЇ', title: 'Зустрічі поруч із тобою', desc: 'Розмовні клуби, зустрічі мам, свята для дітей, лекції та ретрити російською.', chip: 'По всіх кантонах' },
-  { out: 'instrumenty/og-image.uk.jpg', url: '/uk/instrumenty/', sel: '.tools', eyebrow: 'СВОЇ ЛЮДИ У ШВЕЙЦАРІЇ', title: 'Корисні інструменти', desc: 'Річний план, план дня, щоденник емоцій і бюджет для життя у Швейцарії.', chip: 'Безкоштовно й українською' },
-  { out: 'instrumenty/moj-budget/og-image.uk.jpg', url: '/uk/instrumenty/moj-budget/', sel: '.panel', eyebrow: TOOLS, title: 'Мій бюджет', desc: 'Усі обов’язкові витрати у Швейцарії, податки й бюджет для двох.', chip: 'Безкоштовно · Excel і PDF' },
-  { out: 'join/og-image.uk.jpg', url: '/uk/join/', sel: '.steps', eyebrow: 'СВОЇ ЛЮДИ У ШВЕЙЦАРІЇ · ДЛЯ ФАХІВЦІВ', title: 'Розміститися в довіднику', desc: 'Для тих, хто офіційно працює у Швейцарії та допомагає людям російською чи українською.', chip: 'У період запуску безкоштовно' },
-  { out: 'opros/og-image.uk.jpg', url: '/uk/opros/', sel: '#form', eyebrow: 'СВОЇ ЛЮДИ У ШВЕЙЦАРІЇ', title: 'Кого вам бракує?', desc: 'Коротке анонімне опитування про те, яких російськомовних фахівців бракує поруч.', chip: 'Одна хвилина' },
-  { out: 'instrumenty/moj-den/og-image.uk.jpg', url: '/uk/instrumenty/moj-den/', sel: '.bar', eyebrow: TOOLS, title: 'Мій день', desc: 'Три головні справи, день по годинах, стоп-лист і таймер на 25 хвилин.', chip: 'Безкоштовно · PDF і PNG' },
-  { out: 'instrumenty/moj-god/og-image.uk.jpg', url: '/uk/instrumenty/moj-god/', sel: '.panel', eyebrow: TOOLS, title: 'Мій рік', desc: 'Повторювані справи й важливі терміни на одному аркуші на весь рік.', chip: 'Безкоштовно · PDF, PNG і календар' },
-  { out: 'instrumenty/moi-emocii/og-image.uk.jpg', url: '/uk/instrumenty/moi-emocii/', sel: '.main', eyebrow: TOOLS, title: 'Мої емоції', desc: 'Щоденник емоцій. За кілька тижнів видно, що повторюється і що допомагає.', chip: 'Безкоштовно · записи тільки в тебе' },
+  { out: 'events/og-image', url: '/events/', sel: '.finder',
+    ru: { eb: EB.ru, title: 'Встречи рядом с тобой', desc: 'Разговорные клубы, встречи мам, праздники для детей, лекции и ретриты на русском.', chip: 'По всем кантонам' },
+    uk: { eb: EB.uk, title: 'Зустрічі поруч із тобою', desc: 'Розмовні клуби, зустрічі мам, свята для дітей, лекції та ретрити російською.', chip: 'По всіх кантонах' } },
+  { out: 'kursy/og-image', url: '/kursy/', sel: '#results',
+    ru: { eb: EB.ru, title: 'Курсы и занятия на своём языке', desc: 'Йога, немецкий, кружки для детей, мастер-классы и вебинары по кантонам Швейцарии.', chip: 'Видно, кто ведёт каждый курс' },
+    uk: { eb: EB.uk, title: 'Курси й заняття своєю мовою', desc: 'Йога, німецька, гуртки для дітей, майстер-класи та вебінари по кантонах Швейцарії.', chip: 'Видно, хто веде кожен курс' } },
+  { out: 'instrumenty/og-image', url: '/instrumenty/', sel: '.tools',
+    ru: { eb: EB.ru, title: 'Полезные инструменты', desc: 'План дня и года, дневник эмоций, бюджет, учёт времени и часы по клиентам.', chip: 'Бесплатно и на русском' },
+    uk: { eb: EB.uk, title: 'Корисні інструменти', desc: 'План дня і року, щоденник емоцій, бюджет, облік часу й години за клієнтами.', chip: 'Безкоштовно й українською' } },
+  { out: 'instrumenty/moj-budget/og-image', url: '/instrumenty/moj-budget/', sel: '.panel',
+    ru: { eb: TOOLS.ru, title: 'Мой бюджет', desc: 'Все обязательные расходы в Швейцарии, налоги и бюджет для двоих.', chip: 'Бесплатно · PDF' },
+    uk: { eb: TOOLS.uk, title: 'Мій бюджет', desc: 'Усі обов’язкові витрати у Швейцарії, податки й бюджет для двох.', chip: 'Безкоштовно · PDF' } },
+  { out: 'instrumenty/moj-den/og-image', url: '/instrumenty/moj-den/', sel: '.bar',
+    ru: { eb: TOOLS.ru, title: 'Мой день', desc: 'Три главных дела, день по часам, стоп-лист и таймер на 25 минут.', chip: 'Бесплатно · PDF и PNG' },
+    uk: { eb: TOOLS.uk, title: 'Мій день', desc: 'Три головні справи, день по годинах, стоп-лист і таймер на 25 хвилин.', chip: 'Безкоштовно · PDF і PNG' } },
+  { out: 'instrumenty/moj-god/og-image', url: '/instrumenty/moj-god/', sel: '.panel',
+    ru: { eb: TOOLS.ru, title: 'Мой год', desc: 'Повторяющиеся дела и важные сроки на одном листе на весь год.', chip: 'Бесплатно · PDF, PNG и календарь' },
+    uk: { eb: TOOLS.uk, title: 'Мій рік', desc: 'Повторювані справи й важливі терміни на одному аркуші на весь рік.', chip: 'Безкоштовно · PDF, PNG і календар' } },
+  { out: 'instrumenty/moi-emocii/og-image', url: '/instrumenty/moi-emocii/', sel: '.main',
+    ru: { eb: TOOLS.ru, title: 'Мои эмоции', desc: 'Дневник эмоций. Через пару недель видно, что повторяется и что помогает.', chip: 'Бесплатно · записи только у тебя' },
+    uk: { eb: TOOLS.uk, title: 'Мої емоції', desc: 'Щоденник емоцій. За кілька тижнів видно, що повторюється і що допомагає.', chip: 'Безкоштовно · записи тільки в тебе' } },
+  { out: 'instrumenty/uchet-vremeni/og-image', url: '/instrumenty/uchet-vremeni/', fan: 'instrumenty/preview/uchet-vremeni',
+    ru: { eb: TOOLS.ru, title: 'Учёт моего времени', desc: 'Работа, учёба или своё дело за месяц: часы, отпуск, переработка и готовый отчёт.', chip: 'Бесплатно · PDF' },
+    uk: { eb: TOOLS.uk, title: 'Облік мого часу', desc: 'Робота, навчання чи власна справа за місяць: години, відпустка, переробка й готовий звіт.', chip: 'Безкоштовно · PDF' } },
+  { out: 'instrumenty/chasy-po-klientam/og-image', url: '/instrumenty/chasy-po-klientam/', fan: 'instrumenty/preview/chasy-po-klientam',
+    ru: { eb: TOOLS.ru, title: 'Часы по клиентам', desc: 'Для тех, кто работает на себя: часы и заработок по каждому клиенту и отчёт за месяц.', chip: 'Бесплатно · PDF' },
+    uk: { eb: TOOLS.uk, title: 'Години за клієнтами', desc: 'Для тих, хто працює на себе: години й заробіток за кожним клієнтом і звіт за місяць.', chip: 'Безкоштовно · PDF' } },
+  { out: 'join/og-image', url: '/join/', sel: '.steps',
+    ru: { eb: EB.ru + ' · ДЛЯ СПЕЦИАЛИСТОВ', title: 'Разместиться в справочнике', desc: 'Для тех, кто официально работает в Швейцарии и помогает людям на русском или украинском.', chip: 'В период запуска бесплатно' },
+    uk: { eb: EB.uk + ' · ДЛЯ ФАХІВЦІВ', title: 'Розміститися в довіднику', desc: 'Для тих, хто офіційно працює у Швейцарії та допомагає людям російською чи українською.', chip: 'У період запуску безкоштовно' } },
+  { out: 'opros/og-image', url: '/opros/', sel: '#form',
+    ru: { eb: EB.ru, title: 'Кого вам не хватает?', desc: 'Короткий анонимный опрос о том, каких русскоязычных специалистов не хватает рядом.', chip: 'Одна минута' },
+    uk: { eb: EB.uk, title: 'Кого вам бракує?', desc: 'Коротке анонімне опитування про те, яких російськомовних фахівців бракує поруч.', chip: 'Одна хвилина' } },
+  { out: 'privacy/og-image', url: '/privacy/', sel: '.wrap',
+    ru: { eb: EB.ru, title: 'Политика конфиденциальности', desc: 'Какие данные есть в справочнике и инструментах, где они хранятся и как их удалить.', chip: 'Простыми словами' },
+    uk: { eb: EB.uk, title: 'Політика конфіденційності', desc: 'Які дані є в довіднику та інструментах, де вони зберігаються і як їх видалити.', chip: 'Простими словами' } },
 ];
+// Главная: карта Швейцарии, города связаны нитями, плашки специалистов (вариант A, выбран Ириной 07.10.2026)
+const MAIN = {
+  out: 'fav/og-svoi-ludi',
+  ru: { eb: 'СПРАВОЧНИК · СООБЩЕСТВО', h1a: 'Свои люди', h1b: 'в Швейцарии', p: 'Врачи, юристы, психологи и мастера, которые говорят <nobr>по-русски</nobr> и <nobr>по-украински</nobr>. Рядом с вами, в каждом кантоне.', chips: ['26 кантонов', '12 направлений', 'встречи и события'], pins: ['Психолог', 'Юрист', 'Педиатр', 'Парикмахер', 'Массаж'] },
+  uk: { eb: 'ДОВІДНИК · СПІЛЬНОТА', h1a: 'Свої люди', h1b: 'у Швейцарії', p: 'Лікарі, юристи, психологи й майстри, які говорять російською та українською. Поруч із вами, у кожному кантоні.', chips: ['26 кантонів', '12 напрямів', 'зустрічі й події'], pins: ['Психолог', 'Юрист', 'Педіатр', 'Перукар', 'Масаж'] },
+};
 const CSS = `<link rel="stylesheet" href="${BASE}/assets/fonts.css"><style>
 *{box-sizing:border-box;margin:0}body{width:1200px;height:630px;overflow:hidden;background:linear-gradient(135deg,#eef1e8,#e6ebdf);font-family:Manrope,system-ui,sans-serif;color:#2f2924;position:relative}
 .l{position:absolute;left:64px;top:0;bottom:0;width:520px;display:flex;flex-direction:column;justify-content:center}
@@ -27,53 +64,76 @@ p{font-size:25px;line-height:1.45;color:#4F5E3E;font-weight:600;margin-bottom:28
 .chip{display:inline-block;border:2px solid #e3d6c3;background:#fffcf8;border-radius:999px;padding:10px 20px;font-size:20px;font-weight:600;align-self:flex-start}
 .foot{position:absolute;left:64px;bottom:40px;font-size:20px;color:#4F5E3E;font-weight:600}.foot:before{content:"";display:block;width:64px;height:5px;background:#B8862E;border-radius:3px;margin-bottom:18px}
 .shot{position:absolute;left:620px;top:90px;width:600px;height:460px;border-radius:18px;overflow:hidden;transform:rotate(2deg);box-shadow:0 18px 40px rgba(60,50,30,.18);border:6px solid #e7dccb;background:#fffcf8}
-.shot img{width:100%;display:block}</style>`;
-const MAIN = `<link rel="stylesheet" href="${BASE}/assets/fonts.css"><style>
-*{box-sizing:border-box;margin:0}body{width:1200px;height:630px;overflow:hidden;background:linear-gradient(135deg,#eef1e8,#e6ebdf);font-family:Manrope,system-ui,sans-serif;color:#2f2924;position:relative}
-.eb{position:absolute;left:70px;top:70px;display:flex;align-items:center;gap:16px;color:#B8862E;font-weight:700;font-size:20px;letter-spacing:.14em}.eb img{width:46px;height:46px}
-h1{position:absolute;left:70px;top:130px;font-family:Forum,Georgia,serif;font-weight:400;font-size:76px;line-height:1.02}h1 span{color:#4F5E3E;display:block}
-p{position:absolute;left:70px;top:300px;width:540px;font-size:25px;line-height:1.4;color:#5d554d}
-.chips{position:absolute;left:70px;top:434px;width:470px;display:flex;flex-wrap:wrap;gap:10px}.chips span{border:1.5px solid #e3d6c3;background:#fffcf8;border-radius:999px;padding:8px 16px;font-size:19px;font-weight:700;color:#5b4636}
-.foot{position:absolute;left:70px;top:566px;font-size:18px;color:#7a6e62}
-.c{position:absolute;width:330px;background:#fffcf8;border:2px solid var(--c);border-radius:18px;padding:16px;display:flex;gap:16px;align-items:center;box-shadow:0 10px 26px rgba(60,50,30,.14)}
-.c .av{width:80px;height:100px;border-radius:12px;background:var(--s);position:relative;overflow:hidden;flex:none}
-.c .av:before{content:"";position:absolute;left:28px;top:22px;width:24px;height:28px;border-radius:50%;background:var(--c);opacity:.75}
-.c .av:after{content:"";position:absolute;left:12px;top:50px;width:56px;height:60px;border-radius:28px 28px 0 0;background:var(--c)}
-.c b{font-family:Forum,Georgia,serif;font-weight:400;font-size:26px;display:block;line-height:1.1}.c i{font-style:normal;display:block;color:#7a6e62;font-size:17px;margin:4px 0 8px}.c u{text-decoration:none;font-weight:700;font-size:16px}</style>`;
+.shot img{width:100%;display:block}
+.pg{position:absolute;width:330px;border-radius:6px;background:#fff;box-shadow:0 14px 34px rgba(60,50,30,.22);border:1px solid #e7dccb;overflow:hidden}.pg img{width:100%;display:block}</style>`;
+function cardHtml(t, visual) {
+  return `<html><head><meta charset="utf-8">${CSS}</head><body><div class="l"><div class="eb">${t.eb}</div><h1${t.title.length > 22 ? ' style="font-size:50px"' : ''}>${t.title}</h1><p>${t.desc}</p>${t.chip ? `<span class="chip">${t.chip}</span>` : ''}</div><div class="foot">svoiludi.ch</div>${visual}</body></html>`;
+}
+function fanHtml(imgs) {   // до трёх страниц PDF веером
+  const pos = [[610, 115, -8], [725, 72, -1], [840, 100, 6]].slice(-imgs.length);
+  return imgs.map((src, i) => `<div class="pg" style="left:${pos[i][0]}px;top:${pos[i][1]}px;transform:rotate(${pos[i][2]}deg)"><img src="data:image/jpeg;base64,${fs.readFileSync(src).toString('base64')}"></div>`).join('');
+}
 function mainHtml(t) {
-  const card = (x, y, r, c, s, name, dir, city) => `<div class="c" style="left:${x}px;top:${y}px;transform:rotate(${r}deg);--c:${c};--s:${s}"><div class="av"></div><div><b>${name}</b><i>${dir}</i><u>📍 ${city}</u></div></div>`;
-  return `<html><head><meta charset="utf-8">${MAIN}</head><body>
-  <div class="eb"><img src="${BASE}/fav/logo-svoi-ludi.svg">ДОВІДНИК · ШВЕЙЦАРІЯ</div>
-  <h1>Свої люди<span>у Швейцарії</span></h1>
-  <p>Російськомовні фахівці поруч із вами: лікарі, юристи, психологи, майстри. За кантоном, містом і мовою.</p>
-  <div class="chips"><span>26 кантонів</span><span>12 напрямів</span><span>перевірена реєстрація</span></div>
-  <div class="foot">Проєкт Ірини Вознесенської · Instagram @iryna.voznesenskaya</div>
-  ${card(770, 70, -3, '#6A5FB8', '#ece9f6', 'Психотерапевт', t['Психологическая помощь'] || 'Психологічна допомога', 'Basel')}
-  ${card(822, 240, 2, '#4E9A70', '#e5f1ea', 'Масаж', t['Тело и красота'] || 'Тіло і краса', 'Zürich')}
-  ${card(760, 405, -2, '#A99A2E', '#f1eedb', 'Страховий брокер', t['Страхование и пенсия'] || 'Страхування і пенсія', 'St. Gallen')}
-  </body></html>`;
+  const { d: D, cities: C } = JSON.parse(fs.readFileSync(path.join(__dirname, 'og-switzerland.json'), 'utf8'));
+  const ox = 600, oy = 150, P = k => [C[k][0] + ox, C[k][1] + oy];
+  const links = [['Genève','Lausanne'],['Lausanne','Fribourg'],['Fribourg','Bern'],['Bern','Neuchâtel'],['Bern','Luzern'],['Basel','Aarau'],['Aarau','Zürich'],['Zürich','Winterthur'],['Winterthur','St. Gallen'],['Zürich','Zug'],['Zug','Luzern'],['Luzern','Lugano'],['St. Gallen','Chur'],['Sion','Lausanne'],['Zürich','Schaffhausen'],['Bern','Sion'],['Chur','Lugano'],['Basel','Bern']];
+  const lines = links.map(([a, b]) => { const [x1, y1] = P(a), [x2, y2] = P(b); return `<path d="M${x1} ${y1} Q${(x1 + x2) / 2 + 12} ${(y1 + y2) / 2 - 22} ${x2} ${y2}" fill="none" stroke="#B98324" stroke-width="1.6" stroke-dasharray="4 5" opacity=".75"/>`; }).join('');
+  const dots = Object.keys(C).map(k => `<circle cx="${P(k)[0]}" cy="${P(k)[1]}" r="5" fill="#FFFCF8" stroke="#4F5E3E" stroke-width="2.5"/>`).join('');
+  const pins = [['Zürich','#6A5FB8','#ECE9F6',-60,-62],['Genève','#2E5A88','#EAF2FA',-10,-70],['Basel','#4E9A70','#E5F1EA',-150,-34],['Lugano','#B05A7A','#F6E7EE',-70,30],['Chur','#B98324','#F3E3C2',-40,40]];
+  const tags = pins.map(([k, c, s, dx, dy], i) => {
+    const [x, y] = P(k), lab = t.pins[i], w = 56 + lab.length * 12.5;
+    return `<circle cx="${x}" cy="${y}" r="8" fill="${c}"/><circle cx="${x}" cy="${y}" r="15" fill="none" stroke="${c}" stroke-width="1.5" opacity=".45"/>
+<g transform="translate(${x + dx},${y + dy})"><rect width="${w}" height="46" rx="23" fill="#FFFCF8" stroke="${c}" stroke-width="2" filter="url(#sh)"/><g transform="translate(23,23) scale(.62)"><circle r="30" fill="${s}" stroke="${c}" stroke-width="2.5"/><circle cy="-8" r="9" fill="${c}"/><path d="M-17 20 C-17 4 17 4 17 20 Z" fill="${c}"/></g><text x="48" y="30" font-family="Manrope" font-weight="700" font-size="18" fill="#2F2924">${lab}</text></g>`;
+  }).join('');
+  const logo = fs.readFileSync(path.join(ROOT, 'fav/logo-svoi-ludi.svg'), 'utf8').replace(/<metadata>[\s\S]*?<\/metadata>/, '');
+  return `<html><head><meta charset="utf-8"><link rel="stylesheet" href="${BASE}/assets/fonts.css"><style>
+*{box-sizing:border-box;margin:0}body{width:1200px;height:630px;overflow:hidden;position:relative;font-family:Manrope,sans-serif;background:radial-gradient(circle at 78% 55%,#F7F5EC 0,#EEF1E6 45%,#E3E8D6 100%)}
+.eb{position:absolute;left:68px;top:66px;display:flex;align-items:center;gap:14px;color:#B98324;font-weight:800;font-size:18px;letter-spacing:.16em}.eb svg{width:48px;height:48px}
+h1{position:absolute;left:66px;top:136px;font-family:Forum,Georgia,serif;font-weight:400;font-size:84px;line-height:.98;color:#2F2924}h1 span{display:block;color:#4F5E3E}
+p{position:absolute;left:68px;top:326px;width:500px;font-size:24px;line-height:1.42;color:#5D554D;font-weight:500}
+.chips{position:absolute;left:68px;top:478px;display:flex;gap:10px}.chips span{border:1.5px solid #D9DFCB;background:#FFFCF8;border-radius:999px;padding:9px 17px;font-size:18px;font-weight:700;color:#4F5E3E}
+.url{position:absolute;left:68px;bottom:40px;font-size:19px;font-weight:700;color:#4F5E3E;display:flex;align-items:center;gap:14px}.url:before{content:"";width:46px;height:4px;border-radius:2px;background:#B98324}
+svg.map{position:absolute;left:0;top:0}</style></head><body>
+<svg class="map" width="1200" height="630"><defs><filter id="sh" x="-20%" y="-30%" width="140%" height="180%"><feDropShadow dx="0" dy="4" stdDeviation="5" flood-color="#3c321e" flood-opacity=".14"/></filter>
+<pattern id="dp" width="9" height="9" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1.3" fill="#4F5E3E" opacity=".22"/></pattern></defs>
+<g transform="translate(${ox},${oy})"><path d="${D}" fill="#E3E8D6" stroke="#4F5E3E" stroke-width="2.2" stroke-linejoin="round"/><path d="${D}" fill="url(#dp)"/></g>${lines}${dots}${tags}</svg>
+<div class="eb">${logo}${t.eb}</div><h1>${t.h1a}<span>${t.h1b}</span></h1><p>${t.p}</p><div class="chips">${t.chips.map(c => `<span>${c}</span>`).join('')}</div><div class="url">svoiludi.ch</div></body></html>`;
+}
+function check() {   // страницы без og:image
+  const miss = [];
+  const walk = d => { for (const f of fs.readdirSync(d, { withFileTypes: true })) { const p = path.join(d, f.name);
+    if (f.isDirectory()) { if (!/^(\.git|_i18n|node_modules|assets|data|fav|img)$/.test(f.name)) walk(p); }
+    else if (f.name === 'index.html') { const h = fs.readFileSync(p, 'utf8'); const m = h.match(/og:image" content="https:\/\/svoiludi\.ch\/([^"]+)"/);
+      if (!m) miss.push(path.relative(ROOT, p) + ' — нет og:image'); else if (!fs.existsSync(path.join(ROOT, m[1]))) miss.push(path.relative(ROOT, p) + ' — нет файла ' + m[1]); } } };
+  walk(ROOT); console.log(miss.length ? 'Без превью:\n' + miss.join('\n') : 'Превью есть у всех страниц'); process.exitCode = miss.length ? 1 : 0;
 }
 (async () => {
+  if (process.argv[2] === 'check') return check();
+  const only = process.argv.slice(2), want = o => !only.length || only.some(s => o.includes(s));
   const srv = spawn('python3', ['-m', 'http.server', String(PORT)], { cwd: ROOT, stdio: 'ignore' });
   await new Promise(r => setTimeout(r, 1200));
-  const tm = JSON.parse(fs.readFileSync(path.join(__dirname, 'tm_uk.json'), 'utf8'));
-  const b = await chromium.launch();
-  for (const c of CARDS) {
-    const pg = await (await b.newContext({ viewport: { width: 1100, height: 840 } })).newPage();
-    await pg.goto(BASE + c.url); await pg.waitForTimeout(1500);
-    await pg.evaluate(() => { const l = document.getElementById('langbar'); if (l) l.remove(); document.querySelectorAll('header').forEach(h => { h.style.position = 'static'; }); });
-    const el = await pg.$(c.sel); let png;
-    if (el) { await el.scrollIntoViewIfNeeded(); await pg.evaluate(s => { const e = document.querySelector(s); window.scrollTo(0, e.getBoundingClientRect().top + window.scrollY - 30); }, c.sel); await pg.waitForTimeout(300); }
-    png = await pg.screenshot({ type: 'png' });
-    const card = await (await b.newContext({ viewport: { width: 1200, height: 630 } })).newPage();
-    await card.setContent(`<html><head><meta charset="utf-8">${CSS}</head><body><div class="l"><div class="eb">${c.eyebrow}</div><h1>${c.title}</h1><p>${c.desc}</p><span class="chip">${c.chip}</span></div><div class="foot">svoiludi.ch</div><div class="shot"><img src="data:image/png;base64,${png.toString('base64')}"></div></body></html>`);
-    await card.waitForTimeout(600);
-    await card.screenshot({ path: path.join(ROOT, c.out), type: 'jpeg', quality: 88 });
-    console.log('ok', c.out);
+  const exe = ['/opt/pw-browsers/chromium-1194/chrome-linux/chrome'].find(f => fs.existsSync(f));
+  const b = await chromium.launch(exe ? { executablePath: exe } : {});
+  const shoot = async (html, out) => { const pg = await (await b.newContext({ viewport: { width: 1200, height: 630 } })).newPage();
+    await pg.setContent(html); await pg.evaluate(() => document.fonts.ready); await pg.waitForTimeout(500);
+    await pg.screenshot({ path: path.join(ROOT, out), type: 'jpeg', quality: 88 }); console.log('ok', out); };
+  for (const c of CARDS) for (const lang of ['ru', 'uk']) {
+    const out = c.out + (lang === 'uk' ? '.uk.jpg' : '.jpg'); if (!want(out)) continue;
+    let visual;
+    if (c.fan) {
+      const dir = path.join(ROOT, c.fan, lang === 'uk' ? 'uk' : '');
+      const imgs = fs.readdirSync(dir).filter(f => /^\d+\.jpg$/.test(f)).sort((a, b) => parseInt(a) - parseInt(b)).slice(0, 3).reverse().map(f => path.join(dir, f));
+      visual = fanHtml(imgs);
+    } else {
+      const pg = await (await b.newContext({ viewport: { width: 1100, height: 840 } })).newPage();
+      await pg.goto(BASE + (lang === 'uk' ? '/uk' : '') + c.url); await pg.waitForTimeout(1500);
+      await pg.evaluate(() => { const l = document.getElementById('langbar'); if (l) l.remove(); document.querySelectorAll('header').forEach(h => { h.style.position = 'static'; }); });
+      if (await pg.$(c.sel)) await pg.evaluate(s => { const e = document.querySelector(s); window.scrollTo(0, e.getBoundingClientRect().top + window.scrollY - 30); }, c.sel);
+      await pg.waitForTimeout(300);
+      visual = `<div class="shot"><img src="data:image/png;base64,${(await pg.screenshot({ type: 'png' })).toString('base64')}"></div>`;
+    }
+    await shoot(cardHtml(c[lang], visual), out);
   }
-  const m = await (await b.newContext({ viewport: { width: 1200, height: 630 } })).newPage();
-  await m.setContent(mainHtml(tm)); await m.waitForTimeout(800);
-  await m.screenshot({ path: path.join(ROOT, 'fav/og-svoi-ludi.uk.jpg'), type: 'jpeg', quality: 88 });
-  console.log('ok fav/og-svoi-ludi.uk.jpg');
+  for (const lang of ['ru', 'uk']) { const out = MAIN.out + (lang === 'uk' ? '.uk.jpg' : '.jpg'); if (want(out)) await shoot(mainHtml(MAIN[lang]), out); }
   await b.close(); srv.kill();
 })();
