@@ -983,7 +983,7 @@ const digits = p => String(p).replace(/[^\d+]/g, '');
 const LINK = {
   phone:     v => ['Телефон', 'tel:' + digits(v), v],
   whatsapp:  v => ['WhatsApp', 'https://wa.me/' + digits(v).replace('+', ''), v],
-  telegram:  v => ['Telegram', 'https://t.me/' + v.replace(/^@/, ''), '@' + v.replace(/^@/, '')],
+  telegram:  v => ['Telegram', 'https://t.me/' + v.replace(/^@/, '').replace(/\s/g, ''), /^\+/.test(v) ? v : '@' + v.replace(/^@/, '')],   // ник или номер телефона (+380 …), 07.10.2026
   instagram: v => ['Instagram', 'https://www.instagram.com/' + v.replace(/^@/, '') + '/', '@' + v.replace(/^@/, '')],
   email:     v => ['E-mail', 'mailto:' + v, v],
   site:      v => ['Сайт', /^https?:/.test(v) ? v : 'https://' + v, v.replace(/^https?:\/\//, '')]
