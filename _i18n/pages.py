@@ -1,7 +1,7 @@
 """Украинская версия svoiludi.ch — зеркало русской: /uk/… из русских страниц.
 Запуск из корня репозитория: python3 _i18n/pages.py — пишет uk/… и список непереведённого в _i18n/missing.json.
 Память переводов: _i18n/tm_uk.json {ru: uk}; отдельные значения для одной страницы — _i18n/tm_uk_pages.json {страница: {ru: uk}}."""
-import sys, os, re, json
+import sys, os, re, json, hashlib
 sys.path.insert(0, os.path.dirname(__file__))
 from htmlunits import page_units, translate_page
 from units import units_of as js_units, apply as js_apply
@@ -101,9 +101,11 @@ def localize_assets(html, tr, missing):
         if not units: return m.group(0)
         miss = [u for u in units if u not in tr]
         if miss: missing.extend(u for u in miss if u not in missing); return m.group(0)
-        open(os.path.join(ROOT, folder, f'{name}.uk.js'), 'w', encoding='utf-8').write(js_apply(code, tr))
-        return f'{m.group(1)}/{folder}/{name}.uk.js"'
-    html = re.sub(r'(<script src=")/(assets|data)/([a-z]+)\.js"', rep, html)
+        uk = js_apply(code, tr)
+        open(os.path.join(ROOT, folder, f'{name}.uk.js'), 'w', encoding='utf-8').write(uk)
+        v = f'?v={ver(uk)}' if folder == 'data' else ''
+        return f'{m.group(1)}/{folder}/{name}.uk.js{v}"'
+    html = re.sub(r'(<script src=")/(assets|data)/([a-z]+)\.js(?:\?v=\w+)?"', rep, html)
     css = os.path.join(ROOT, 'assets', 'wm.css')
     if os.path.exists(css):
         s = open(css, encoding='utf-8').read()
@@ -155,13 +157,19 @@ def opros_keep_russian_payload(html):
         else: print('opros patch not applied:', a[:70])
     return html
 
+def ver(text): return hashlib.md5(text.encode('utf-8')).hexdigest()[:8]
+def stamp_data(html):
+    """данные карточек подключаются с ?v=<отпечаток файла>: браузер сразу берёт новую версию после правки (07.10.2026)"""
+    v = ver(open(os.path.join(ROOT, 'data', 'specialists.js'), encoding='utf-8').read())
+    return re.sub(r'(<script src="/data/specialists\.js)(?:\?v=\w+)?"', rf'\1?v={v}"', html)
+
 def build():
     TM, TMP = tm(); missing = []
     import docx
     missing += docx.build(TM)
     for src, path in PAGES:
         sp = os.path.join(ROOT, src)
-        ru = strip_injected(open(sp, encoding='utf-8').read())
+        ru = stamp_data(strip_injected(open(sp, encoding='utf-8').read()))
         ru_out = head_inject(ru, MARK + alternates(path) + redirect_js(path) + MARK)
         ru_out = body_inject(ru_out, MARK + switcher('ru', path) + MARK)
         if ru_out != open(sp, encoding='utf-8').read(): open(sp, 'w', encoding='utf-8').write(ru_out)
