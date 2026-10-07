@@ -1071,7 +1071,7 @@ const HEART = '<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true
 const favBtn = s => `<button class="fav" type="button" data-fav="${esc(s.id)}" aria-pressed="${FAV.has(s.id)}" aria-label="${FAV.has(s.id) ? 'Убрать из моего списка' : 'Сохранить в мой список'}" title="${FAV.has(s.id) ? 'Убрать из моего списка' : 'Сохранить в мой список'}">${HEART}</button>`;
 /* объявления специалиста (вкладка «Вакансии», data/vacancies.js): только подтверждённые автором и не просроченные */
 const VAC_KIND = { staff: 'Ищет себе сотрудника', partner: 'Ищет себе партнёра' };
-const vacsOf = s => (window.VACANCIES || []).filter(v => v.author === s.id && v.status === 'активен' && v.confirm && v.confirm.date && (!v.until || v.until >= new Date().toISOString().slice(0, 10)));
+const vacsOf = s => (window.VACANCIES || []).filter(v => v.author === s.id && v.status === 'активен' && v.confirm && v.confirm.date && (!v.until || v.until > new Date().toISOString().slice(0, 10)));
 const vacChips = s => { const kinds = [...new Set(vacsOf(s).map(v => v.kind))]; return kinds.length ? `<div class="vac-chips">${kinds.map(k => `<a class="vac-chip" href="vakansii/#${esc(vacsOf(s).find(v => v.kind === k).id)}">${VAC_KIND[k]}</a>`).join('')}</div>` : ''; };
 function card(s, lvl = ''){
   const k = CATS[s.cat] || CATS.status, why = hiddenReason(s);

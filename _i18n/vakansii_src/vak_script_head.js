@@ -47,7 +47,7 @@ const copyText = t => { try { return navigator.clipboard.writeText(t).then(() =>
 
 const authorOf = v => v.author && typeof v.author === 'object' ? v.author : SPECIALISTS.find(s => s.id === v.author) || null;   // автор с карточкой — id; без карточки — { name, firm, role, contacts: { telegram, email } }
 const confirmed = v => !!(v.confirm && v.confirm.date);
-const pool = () => VACANCIES.filter(v => v.status === 'активен' && confirmed(v) && (!v.until || v.until >= today));
+const pool = () => VACANCIES.filter(v => v.status === 'активен' && confirmed(v) && (!v.until || v.until > today));
 const state = { kind: '', cat: '', canton: '', lang: '', remote: '' };
 function match(v, skip){
   return (skip === 'kind' || !state.kind || v.kind === state.kind)
@@ -120,7 +120,7 @@ function openV(id){
         ${ADMIN ? adminBox(v, a) : ''}
         <div class="disc-box"><b>Важно</b><p>${esc(DISC[v.kind] || DISC.staff)}</p><p class="free-line">${FREE_NOTE}</p></div>
         <div class="acts">${contactLinks(v, a)}<button class="btn ghost" type="button" data-share>Поделиться</button></div>
-        <p class="note">Опубликовано ${esc(fmtDate(v.posted))}${v.until ? ` · показывается до ${esc(fmtDate(v.until))}` : ''}. <a href="#terms" data-close>Условия раздела</a>. <a href="mailto:${MAIL}?subject=${encodeURIComponent('Сообщить об объявлении: ' + v.title)}&body=${encodeURIComponent('Ссылка: ' + vUrl(v) + '\n\nЧто не так:\n')}">Сообщить об объявлении</a></p>
+        <p class="note">Опубликовано ${esc(fmtDate(v.posted))}${v.until ? ` · снимется ${esc(fmtDate(v.until))}` : ''}. <a href="#terms" data-close>Условия раздела</a>. <a href="mailto:${MAIL}?subject=${encodeURIComponent('Сообщить об объявлении: ' + v.title)}&body=${encodeURIComponent('Ссылка: ' + vUrl(v) + '\n\nЧто не так:\n')}">Сообщить об объявлении</a></p>
       </div>
     </div>`;
   box.querySelector('.qm-close').onclick = () => qm.close();

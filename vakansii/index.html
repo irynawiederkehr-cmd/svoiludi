@@ -501,6 +501,7 @@ a.yours:hover{background:#EBD3A3}
 .checks label{display:flex;gap:10px;align-items:flex-start;font-size:.9rem;background:var(--paper);border:1.5px solid var(--line);border-radius:12px;padding:10px 12px;cursor:pointer}
 .checks label:has(input:checked){border-color:var(--sage);background:color-mix(in srgb,var(--sage) 10%,var(--paper))}
 .checks input{margin-top:3px;flex:none;width:18px;height:18px;accent-color:var(--forest,#4F5E3E)}
+.cf-term{font-size:.88rem;background:var(--mustard-soft,#F3E3C2);border-radius:12px;padding:10px 14px;margin:0}
 [hidden]{display:none!important}
 
 </style>
@@ -590,7 +591,8 @@ a.yours:hover{background:#EBD3A3}
           <li>Напиши Ирине в Telegram, кого ищешь, где и на каких условиях. Шаблон сообщения можно скопировать кнопкой ниже.</li>
           <li>Ирина подготовит объявление и пришлёт тебе ссылку на него.</li>
           <li>Ты проверяешь текст и галочками подтверждаешь условия: работа официальная и по законам Швейцарии, твоего кантона и общины.</li>
-          <li>После твоего подтверждения объявление появится здесь и в твоей карточке на 60 дней.</li>
+          <li>После твоего подтверждения объявление появится здесь и в твоей карточке на 60 дней. В день окончания срока оно само исчезнет с сайта, и тебе придёт письмо.</li>
+          <li>Нужно продлить — напиши Ирине до окончания срока. Добавь адрес voznesenskaya.iryna@gmail.com в контакты и проверяй папку «Спам», чтобы письма не потерялись.</li>
         </ol>
         <div class="acts"><a class="btn" href="https://t.me/IrynaNeuroCoach" target="_blank" rel="noopener">Написать Ирине в Telegram</a><button class="btn ghost" type="button" id="askCopy">Скопировать шаблон</button></div>
         <span class="note">Telegram: @IrynaNeuroCoach</span>
@@ -608,6 +610,8 @@ a.yours:hover{background:#EBD3A3}
     <p>Проект «Свои люди» и его организаторы не несут ответственности за содержание объявлений, условия работы или сотрудничества и последствия сотрудничества — в пределах, допустимых законом.</p>
     <h3>Что мы не публикуем</h3>
     <p>Работу без официального оформления, требования по полу, возрасту или национальности, объявления без имени автора и работу по найму под видом партнёрства. Работу за пределами Швейцарии. Объявления агентств по подбору и временному персоналу без разрешения по закону AVG. Места для учеников (Lehrstellen) — только от предприятий с разрешением на обучение. Язык (русский или украинский) можно указать, если он нужен для работы.</p>
+    <h3>Сколько висит объявление</h3>
+    <p>Объявление показывается 60 дней и в день окончания срока само исчезает с сайта. Автору приходит письмо на e-mail: за неделю до окончания и в день снятия. Продление — отдельная договорённость, о нём автор пишет Ирине до окончания срока.</p>
     <h3>Если что-то не так</h3>
     <p>Нажми «Сообщить об объявлении» в окне объявления. Мы проверим сообщение и, если объявление нарушает эти условия или закон, снимем его. Подтверждение условий от автора мы храним, пока объявление на сайте, и ещё год после снятия.</p>
   </section>
@@ -679,7 +683,7 @@ const copyText = t => { try { return navigator.clipboard.writeText(t).then(() =>
 
 const authorOf = v => v.author && typeof v.author === 'object' ? v.author : SPECIALISTS.find(s => s.id === v.author) || null;   // автор с карточкой — id; без карточки — { name, firm, role, contacts: { telegram, email } }
 const confirmed = v => !!(v.confirm && v.confirm.date);
-const pool = () => VACANCIES.filter(v => v.status === 'активен' && confirmed(v) && (!v.until || v.until >= today));
+const pool = () => VACANCIES.filter(v => v.status === 'активен' && confirmed(v) && (!v.until || v.until > today));
 const state = { kind: '', cat: '', canton: '', lang: '', remote: '' };
 function match(v, skip){
   return (skip === 'kind' || !state.kind || v.kind === state.kind)
@@ -752,7 +756,7 @@ function openV(id){
         ${ADMIN ? adminBox(v, a) : ''}
         <div class="disc-box"><b>Важно</b><p>${esc(DISC[v.kind] || DISC.staff)}</p><p class="free-line">${FREE_NOTE}</p></div>
         <div class="acts">${contactLinks(v, a)}<button class="btn ghost" type="button" data-share>Поделиться</button></div>
-        <p class="note">Опубликовано ${esc(fmtDate(v.posted))}${v.until ? ` · показывается до ${esc(fmtDate(v.until))}` : ''}. <a href="#terms" data-close>Условия раздела</a>. <a href="mailto:${MAIL}?subject=${encodeURIComponent('Сообщить об объявлении: ' + v.title)}&body=${encodeURIComponent('Ссылка: ' + vUrl(v) + '\n\nЧто не так:\n')}">Сообщить об объявлении</a></p>
+        <p class="note">Опубликовано ${esc(fmtDate(v.posted))}${v.until ? ` · снимется ${esc(fmtDate(v.until))}` : ''}. <a href="#terms" data-close>Условия раздела</a>. <a href="mailto:${MAIL}?subject=${encodeURIComponent('Сообщить об объявлении: ' + v.title)}&body=${encodeURIComponent('Ссылка: ' + vUrl(v) + '\n\nЧто не так:\n')}">Сообщить об объявлении</a></p>
       </div>
     </div>`;
   box.querySelector('.qm-close').onclick = () => qm.close();
@@ -784,6 +788,7 @@ const CHECKS = {
     { id: 'rav', t: 'Обязанность сообщать вакансии в RAV (Stellenmeldepflicht) я проверил: моей профессии нет в списке, или я сообщил вакансию в RAV и 5 рабочих дней уже прошли.' },
     { id: 'fair', t: 'В объявлении нет требований по полу, возрасту, происхождению, религии или семейному положению. Язык указан, только если он нужен для работы.' },
     { id: 'free', t: 'Я понимаю, что размещение бесплатно и не является коммерческой услугой. С соискателей я не беру денег — ни за работу, ни за обучение, ни за оформление.' },
+    { id: 'term', t: 'Я знаю: объявление показывается 60 дней и в день окончания срока само исчезает с сайта, об этом придёт письмо на мой e-mail. Продление — отдельная договорённость: о нём я напишу Ирине до окончания срока. Адрес voznesenskaya.iryna@gmail.com я добавил в контакты и проверяю папку «Спам».' },
     { id: 'remove', t: 'Если объявление не соответствует этим условиям или на него поступят жалобы, «Свои люди» вправе снять его.' }
   ],
   partner: [
@@ -793,6 +798,7 @@ const CHECKS = {
     { id: 'legal', t: 'Сотрудничество будет законным по правилам Швейцарии, моего кантона и общины (Gemeinde): у каждой стороны своя регистрация самозанятого, свои взносы AHV и налоги, нужные разрешения на профессию, а для аренды помещения — разрешение арендодателя и правила общины.' },
     { id: 'fair', t: 'В объявлении нет требований по полу, возрасту, происхождению, религии или семейному положению.' },
     { id: 'free', t: 'Я понимаю, что размещение бесплатно и не является коммерческой услугой.' },
+    { id: 'term', t: 'Я знаю: объявление показывается 60 дней и в день окончания срока само исчезает с сайта, об этом придёт письмо на мой e-mail. Продление — отдельная договорённость: о нём я напишу Ирине до окончания срока. Адрес voznesenskaya.iryna@gmail.com я добавил в контакты и проверяю папку «Спам».' },
     { id: 'remove', t: 'Если объявление не соответствует этим условиям или на него поступят жалобы, «Свои люди» вправе снять его.' }
   ]
 };
@@ -803,7 +809,7 @@ const gmail = (to, su, body) => `https://mail.google.com/mail/?view=cm&fs=1&to=$
 const adText = v => [`${(KINDS[v.kind] || KINDS.staff).t}: ${v.title}`, `Где: ${where(v)}`, v.workload ? `Занятость: ${v.workload}` : '', v.start ? `С какого времени: ${v.start}` : '',
   `Языки: ${(v.langs || []).join(', ')}`, `${v.kind === 'partner' ? 'О сотрудничестве' : 'О работе'}: ${v.about}`, v.offer ? `Что я предлагаю: ${v.offer}` : ''].filter(Boolean).join('\n');
 const askLetter = v => { const a = authorOf(v); return { su: 'Ваше объявление в «Своих людях в Швейцарии» — проверьте и подтвердите, пожалуйста',
-  body: `Здравствуйте${a ? ', ' + a.name : ''}!\n\nЯ подготовила ваше объявление для раздела «Вакансии и партнёрство» на сайте «Свои люди в Швейцарии». Размещение бесплатное. Пока объявление видите только вы.\n\nОткройте, пожалуйста, ссылку, проверьте текст и отметьте условия галочками. После вашего подтверждения объявление появится на сайте и в вашей карточке на 60 дней.\n\n${okUrl(v)}\n\nЕсли нужно что-то исправить — ответьте на это письмо.\n\nИрина Вознесенская\nСвои люди в Швейцарии` }; };
+  body: `Здравствуйте${a ? ', ' + a.name : ''}!\n\nЯ подготовила ваше объявление для раздела «Вакансии и партнёрство» на сайте «Свои люди в Швейцарии». Размещение бесплатное. Пока объявление видите только вы.\n\nОткройте, пожалуйста, ссылку, проверьте текст и отметьте условия галочками. После вашего подтверждения объявление появится на сайте и в вашей карточке на 60 дней. В день окончания срока оно само исчезнет с сайта, и вам придёт письмо. Если нужно продлить — напишите мне до окончания срока.\n\nПожалуйста, добавьте мой адрес voznesenskaya.iryna@gmail.com в контакты и проверяйте папку «Спам», чтобы письма о вашем объявлении не потерялись.\n\n${okUrl(v)}\n\nЕсли нужно что-то исправить — ответьте на это письмо.\n\nИрина Вознесенская\nСвои люди в Швейцарии` }; };
 const confirmLetter = v => { const a = authorOf(v), d = fmtDate(today); return { su: `Подтверждаю объявление — ${v.title}`,
   body: `Здравствуйте, Ирина!\n\n${d} я проверил(а) своё объявление для раздела «Вакансии и партнёрство» на сайте «Свои люди в Швейцарии» и подтверждаю его публикацию.\n\n${adText(v)}\n\nПодтверждаю каждое из условий:\n${checksFor(v).map(c => '☑ ' + c.t).join('\n')}\n\n${okUrl(v)}\n\n${a ? a.name + (a.firm ? ', ' + a.firm : '') : ''}` }; };
 const fixLetter = (v, text) => ({ su: `Исправления в объявление — ${v.title}`, body: `Здравствуйте, Ирина!\n\nВ моём объявлении, пожалуйста, исправьте:\n\n${text}\n\n${okUrl(v)}` });
@@ -814,6 +820,7 @@ function confirmView(v){
   box.innerHTML = `<div class="qm-top"><div class="qm-head"><span class="ev-k" style="color:var(--brown)">Предпросмотр · видите только вы</span><span class="ev-k" style="color:${k.c}">${esc(k.t)} · ${esc(k.s)}</span><h2 class="qm-title" id="qmTitle">${esc(v.title)}</h2><span class="free-line">${FREE_NOTE}</span></div><button class="qm-close" type="button" aria-label="Закрыть">✕</button></div>
     <div class="cf-view">
       <p>Здравствуйте${a ? ', ' + esc(a.name) : ''}! Это ваше объявление для раздела «Вакансии и партнёрство». Проверьте текст и подтвердите условия. Пока вы не подтвердите, на сайте его никто не видит.</p>
+      <p class="cf-term">Объявление показывается 60 дней и само исчезнет с сайта ${esc(fmtDate(v.until || today))}, и вам придёт письмо на e-mail. Продлить можно, если написать Ирине до окончания срока. Добавьте адрес <b>voznesenskaya.iryna@gmail.com</b> в контакты и проверяйте папку «Спам».</p>
       <div class="cf-ad"><pre>${esc(adText(v))}</pre></div>
       <h4>Подтвердите, пожалуйста, каждое условие</h4>
       <div class="checks" id="cfChecks">${checksFor(v).map(c => `<label><input type="checkbox" data-cf="${c.id}"> <span>${esc(c.t)}</span></label>`).join('')}</div>
