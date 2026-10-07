@@ -463,7 +463,6 @@ a.yours:hover{background:#EBD3A3}
 .has-art .hero-txt{gap:16px}
 .hero-art svg{display:block;width:100%;height:auto}
 @media (max-width:900px){.has-art{grid-template-columns:1fr}.hero-art{display:none}}
-
 /* ---------- вакансии и партнёрство (07.10.2026) ---------- */
 .free-badge{display:inline-flex;align-items:center;gap:8px;font-weight:700;font-size:.92rem;color:var(--forest,#4F5E3E);background:color-mix(in srgb,var(--sage) 22%,var(--paper));border:1.5px solid color-mix(in srgb,var(--sage) 55%,transparent);border-radius:999px;padding:8px 16px;margin-top:6px}
 .free-badge svg{width:18px;height:18px;flex:none}
@@ -474,9 +473,16 @@ a.yours:hover{background:#EBD3A3}
 .ev-d.vk b svg{width:30px;height:30px}
 .ev-d.vk small{font-size:.66rem;font-weight:700;line-height:1.15;color:var(--lc)}
 @media (max-width:620px){.vac{grid-template-columns:72px minmax(0,1fr)}.vac .ev-o{display:none}}
-.disc-box{border:1.5px solid var(--line);border-radius:16px;padding:14px 16px;background:var(--bg);display:flex;flex-direction:column;gap:6px}
-.disc-box b{font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;color:var(--brown)}
+.disc-box,.cf-box,.adm{border:1.5px solid var(--line);border-radius:16px;padding:14px 16px;background:var(--bg);display:flex;flex-direction:column;gap:6px}
+.disc-box b,.adm>b{font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;color:var(--brown)}
 .disc-box p{font-size:.86rem;margin:0}
+.cf-box summary{cursor:pointer;display:flex;flex-direction:column;gap:2px;list-style:none}
+.cf-box summary::-webkit-details-marker{display:none}
+.cf-box summary b{font-size:.86rem;color:var(--forest,#4F5E3E)}
+.cf-box summary span{font-size:.8rem;color:var(--brown);text-decoration:underline;text-underline-offset:3px}
+.cf-box .marks{margin-top:10px}.cf-box .marks li{font-size:.82rem}
+.adm{border-style:dashed;border-color:var(--mustard,#C9A13B);background:var(--mustard-soft,#F3E3C2)}
+.adm span{font-size:.84rem}.adm .acts .btn{font-size:.82rem;padding:8px 14px}
 .careful,.terms{margin-block:40px 0;background:var(--paper);border:1.5px solid var(--line);border-radius:24px;padding:clamp(20px,3.5vw,32px)}
 .careful h2,.terms h2{font-family:var(--display);font-weight:400;font-size:1.7rem;margin:0 0 12px}
 .terms h3{font-size:1rem;margin:18px 0 6px}
@@ -484,19 +490,17 @@ a.yours:hover{background:#EBD3A3}
 .marks{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
 .marks li{position:relative;padding-left:26px;font-size:.95rem;max-width:80ch}
 .marks li::before{content:"";position:absolute;left:4px;top:.45em;width:10px;height:10px;border:2px solid var(--mustard,#C9A13B);transform:rotate(45deg);border-radius:2px}
-.fm{display:flex;flex-direction:column;gap:14px}
-.fm fieldset{border:0;padding:0;margin:0;display:flex;flex-wrap:wrap;gap:10px}
-.fm legend{font-weight:700;font-size:.9rem;margin-bottom:8px;display:flex;align-items:center}
-.fm .kinds label{display:flex;align-items:center;gap:8px;border:1.5px solid var(--line);border-radius:14px;padding:10px 14px;cursor:pointer;font-weight:600}
-.fm .kinds small{color:var(--muted);font-weight:400}
-.fgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.fgrid label{display:flex;flex-direction:column;gap:5px;font-size:.84rem;font-weight:600}
-.fgrid .wide{grid-column:1/-1}
-.fgrid input,.fgrid select,.fgrid textarea{font:inherit;font-weight:400;font-size:.95rem;border:1.5px solid var(--line);border-radius:12px;padding:10px 12px;background:var(--paper);color:var(--ink);width:100%;box-sizing:border-box}
-@media (max-width:620px){.fgrid{grid-template-columns:1fr}}
+.steps{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px;font-size:.92rem}
+.steps li::marker{color:var(--brown);font-weight:800}
+.cf-view{display:flex;flex-direction:column;gap:14px;margin-top:14px}
+.cf-view h4{margin:4px 0 0;font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.cf-ad{background:var(--bg);border:1.5px solid var(--line);border-radius:14px;padding:14px 16px}
+.cf-ad pre{margin:0;white-space:pre-wrap;font:inherit;font-size:.92rem}
+.cf-fix textarea{font:inherit;width:100%;box-sizing:border-box;border:1.5px solid var(--line);border-radius:12px;padding:10px 12px;background:var(--paper);color:var(--ink)}
 .checks{display:flex;flex-direction:column;gap:10px}
-.checks label{display:flex;gap:10px;align-items:flex-start;font-size:.88rem}
-.checks input{margin-top:3px;flex:none;width:18px;height:18px}
+.checks label{display:flex;gap:10px;align-items:flex-start;font-size:.9rem;background:var(--paper);border:1.5px solid var(--line);border-radius:12px;padding:10px 12px;cursor:pointer}
+.checks label:has(input:checked){border-color:var(--sage);background:color-mix(in srgb,var(--sage) 10%,var(--paper))}
+.checks input{margin-top:3px;flex:none;width:18px;height:18px;accent-color:var(--forest,#4F5E3E)}
 [hidden]{display:none!important}
 
 </style>
@@ -529,6 +533,7 @@ a.yours:hover{background:#EBD3A3}
       <a href="../">Специалисты</a>
       <a href="../events/">События</a>
       <a href="./" aria-current="page" style="color:var(--ink)">Вакансии и партнёрство</a>
+      <a href="../vakansii/">Вакансии и партнёрство</a>
       <a href="../instrumenty/">Полезные инструменты</a>
       <a href="../join/">Как разместиться</a>
       <a href="https://voznesenskaya.ch/">Сайт Ирины</a>
@@ -542,7 +547,7 @@ a.yours:hover{background:#EBD3A3}
     <div class="hero-txt">
       <div class="eyebrow">Вакансии и партнёрство · Свои люди в Швейцарии</div>
       <h1 id="h1">Ищу своих — <em>в команду и в партнёры</em></h1>
-      <p class="lead">Здесь участники сообщества рассказывают, кого ищут: сотрудника в команду или партнёра для общего дела. Откликайся напрямую автору объявления, а если ищешь сам — размести своё объявление.</p>
+      <p class="lead">Здесь участники сообщества рассказывают, кого ищут: сотрудника в команду или партнёра для общего дела. Откликайся напрямую автору объявления. А если ищешь сам, напиши Ирине в Telegram — объявление разместим бесплатно.</p>
       <p class="free-badge"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-4.4-9.3-9A5.2 5.2 0 0 1 12 6.3 5.2 5.2 0 0 1 21.3 12C19 16.6 12 21 12 21z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>Бесплатно для членов сообщества «Свои люди». Не коммерческая услуга.</p>
     </div>
   </section>
@@ -581,7 +586,16 @@ a.yours:hover{background:#EBD3A3}
     <div class="join-cols">
       <div class="jc"><b>Ищу сотрудника</b><p>Работа по найму: по договору, с зарплатой и отчислениями. Подходит, если человек будет работать у тебя, по твоему графику и твоим указаниям.</p></div>
       <div class="jc"><b>Ищу партнёра</b><p>Сотрудничество самостоятельных специалистов: субподряд, совместный проект, аренда кабинета, обмен клиентами. Каждый работает на себя.</p></div>
-      <div class="jc"><b>Как это работает</b><p>Заполни короткую форму. Мы пришлём тебе объявление на проверку, и после твоего подтверждения одним нажатием оно появится здесь и в твоей карточке на 60 дней.</p><button class="btn" type="button" id="openForm">Разместить объявление</button></div>
+      <div class="jc"><b>Как это работает</b>
+        <ol class="steps">
+          <li>Напиши Ирине в Telegram, кого ищешь, где и на каких условиях. Шаблон сообщения можно скопировать кнопкой ниже.</li>
+          <li>Ирина подготовит объявление и пришлёт тебе ссылку на него.</li>
+          <li>Ты проверяешь текст и галочками подтверждаешь условия: работа официальная и по законам Швейцарии, твоего кантона и общины.</li>
+          <li>После твоего подтверждения объявление появится здесь и в твоей карточке на 60 дней.</li>
+        </ol>
+        <div class="acts"><a class="btn" href="https://t.me/IrynaNeuroCoach" target="_blank" rel="noopener">Написать Ирине в Telegram</a><button class="btn ghost" type="button" id="askCopy">Скопировать шаблон</button></div>
+        <span class="note">Telegram: @IrynaNeuroCoach</span>
+      </div>
     </div>
   </section>
 
@@ -607,37 +621,7 @@ a.yours:hover{background:#EBD3A3}
 
 <dialog class="qm" id="qm" aria-labelledby="qmTitle"><div class="qm-card" id="qmCard"></div></dialog>
 
-<dialog class="qm" id="fm" aria-labelledby="fmTitle"><form class="qm-card fm" id="fmForm" novalidate>
-  <div class="qm-top"><div class="qm-head"><span class="ev-k">Бесплатно для членов сообщества «Свои люди»</span><h2 class="qm-title" id="fmTitle">Разместить объявление</h2></div><button class="qm-close" type="button" data-close aria-label="Закрыть">✕</button></div>
-  <p class="note">Всё, что ты вводишь, сохраняется только в этом браузере, пока ты не отправишь письмо. Отправка открывает твою почту с готовым письмом.</p>
-  <fieldset class="kinds"><legend>Кого ищешь<button type="button" class="qh" data-help="kind" aria-label="Подсказка: Кого ищешь" aria-expanded="false">?</button></legend>
-    <label><input type="radio" name="kind" value="staff" checked> Ищу сотрудника <small>работа по найму</small></label>
-    <label><input type="radio" name="kind" value="partner"> Ищу партнёра <small>самостоятельные специалисты</small></label>
-  </fieldset>
-  <div class="fgrid">
-    <label class="wide">Твоё имя и фирма (как в справочнике)<input name="who" required autocomplete="organization"></label>
-    <label class="wide">Кого ищешь (заголовок)<input name="title" required placeholder="Например: ассистент по документам, 40–60 %"></label>
-    <label>Направление<select name="cat" id="fmCat"></select></label>
-    <label>Кантон<select name="canton" id="fmCanton"></select></label>
-    <label>Город<input name="city"></label>
-    <label>Можно удалённо<select name="online"><option>нет</option><option>да</option><option>частично</option></select></label>
-    <label data-staff>Занятость<input name="workload" placeholder="40–60 %, полная, по часам"></label>
-    <label>С какого времени<input name="start" placeholder="по договорённости"></label>
-    <label class="wide">Нужные языки<input name="langs" placeholder="русский, немецкий"></label>
-    <label class="wide">О работе или сотрудничестве (2–4 предложения)<textarea name="about" rows="3" required></textarea></label>
-    <label class="wide">Что ты предлагаешь<textarea name="offer" rows="2" placeholder="Договор, оплата, график, аренда по дням…"></textarea></label>
-    <label class="wide">Как откликнуться<input name="contact" placeholder="Telegram или e-mail (если пусто — контакты из твоей карточки)"></label>
-  </div>
-  <div class="checks">
-    <label><input type="checkbox" name="c_real" required> Я подтверждаю, что объявление настоящее, и сам отвечаю за его содержание, условия и договор. «Свои люди» не участвуют в найме и не отвечают за сотрудничество.</label>
-    <label data-staff><input type="checkbox" name="c_official"> Работа будет оформлена официально: письменный договор, отчисления AHV, разрешения на работу.</label>
-    <label data-staff><input type="checkbox" name="c_rav"> Моя профессия не в списке профессий с обязанностью сообщать вакансии в RAV, или 5 рабочих дней после сообщения в RAV уже прошли.<button type="button" class="qh" data-help="rav" aria-label="Подсказка: RAV" aria-expanded="false">?</button></label>
-    <label data-partner hidden><input type="checkbox" name="c_partner"> Это сотрудничество самостоятельных специалистов, не работа по найму.<button type="button" class="qh" data-help="partner" aria-label="Подсказка: партнёрство или найм" aria-expanded="false">?</button></label>
-  </div>
-  <p class="free-line">Бесплатно для членов сообщества «Свои люди». Не коммерческая услуга.</p>
-  <div class="acts"><button class="btn" type="submit">Отправить письмо</button><button class="btn ghost" type="button" id="fmClear">Удалить историю</button></div>
-  <p class="note" id="fmMsg" aria-live="polite"></p>
-</form></dialog>
+
 
 
 <script src="/data/specialists.js?v=7fef69e3"></script>
@@ -693,7 +677,8 @@ function toast(t){ const el = document.getElementById('toast'); el.textContent =
 const copyText = t => { try { return navigator.clipboard.writeText(t).then(() => true, () => false); } catch (_) { return Promise.resolve(false); } };
 
 const authorOf = v => SPECIALISTS.find(s => s.id === v.author) || null;
-const pool = () => VACANCIES.filter(v => v.status === 'активен' && v.ok && (!v.until || v.until >= today));
+const confirmed = v => !!(v.confirm && v.confirm.date);
+const pool = () => VACANCIES.filter(v => v.status === 'активен' && confirmed(v) && (!v.until || v.until >= today));
 const state = { kind: '', cat: '', canton: '', lang: '', remote: '' };
 function match(v, skip){
   return (skip === 'kind' || !state.kind || v.kind === state.kind)
@@ -762,6 +747,8 @@ function openV(id){
         <div class="d-block"><h4>Где</h4><span>${esc(where(v)) || '—'}</span></div>
         ${v.workload ? `<div class="d-block"><h4>Занятость</h4><span>${esc(v.workload)}</span></div>` : ''}
         ${v.start ? `<div class="d-block"><h4>С какого времени</h4><span>${esc(v.start)}</span></div>` : ''}
+        ${confirmed(v) ? `<details class="cf-box"><summary><b>Условия подтверждены автором</b><span>${esc(fmtDate(v.confirm.date))} · что именно подтверждено</span></summary><ul class="marks">${checksFor(v).map(c => `<li>${esc(c.t)}</li>`).join('')}</ul></details>` : ''}
+        ${ADMIN ? adminBox(v, a) : ''}
         <div class="disc-box"><b>Важно</b><p>${esc(DISC[v.kind] || DISC.staff)}</p><p class="free-line">${FREE_NOTE}</p></div>
         <div class="acts">${contactLinks(v, a)}<button class="btn ghost" type="button" data-share>Поделиться</button></div>
         <p class="note">Опубликовано ${esc(fmtDate(v.posted))}${v.until ? ` · показывается до ${esc(fmtDate(v.until))}` : ''}. <a href="#terms" data-close>Условия раздела</a>. <a href="mailto:${MAIL}?subject=${encodeURIComponent('Сообщить об объявлении: ' + v.title)}&body=${encodeURIComponent('Ссылка: ' + vUrl(v) + '\n\nЧто не так:\n')}">Сообщить об объявлении</a></p>
@@ -780,38 +767,81 @@ document.getElementById('qmCard').addEventListener('click', async ev => {
 qm.addEventListener('click', e => { if (e.target === qm) qm.close(); });
 qm.addEventListener('close', () => { if (location.hash && location.hash !== '#add' && location.hash !== '#terms') history.replaceState(null, '', location.pathname + location.search); });
 
-/* ---------- форма «Разместить объявление»: черновик в браузере, отправка — письмом Ирине ---------- */
-const fm = document.getElementById('fm'), form = document.getElementById('fmForm'), KEY = 'svoiludi-vakansii-draft';
-document.getElementById('fmCat').innerHTML = Object.entries(CATS).map(([id, t]) => `<option value="${id}">${esc(t)}</option>`).join('');
-document.getElementById('fmCanton').innerHTML = '<option value="">—</option>' + Object.keys(CANTONS).sort((a, b) => ktRu(a).localeCompare(ktRu(b), 'ru')).map(x => `<option value="${esc(x)}">${esc(ktRu(x))} (${kt(x)})</option>`).join('');
-function kindUI(){ const p = form.kind.value === 'partner';
-  form.querySelectorAll('[data-staff]').forEach(el => el.hidden = p); form.querySelectorAll('[data-partner]').forEach(el => el.hidden = !p); }
-function saveDraft(){ try { const d = {}; [...form.elements].forEach(el => { if (!el.name) return; if (el.type === 'checkbox') d[el.name] = el.checked; else if (el.type === 'radio'){ if (el.checked) d[el.name] = el.value; } else d[el.name] = el.value; }); localStorage.setItem(KEY, JSON.stringify(d)); } catch (e) {} }
-function loadDraft(){ try { const d = JSON.parse(localStorage.getItem(KEY) || 'null'); if (!d) return; [...form.elements].forEach(el => { if (!el.name || !(el.name in d)) return; if (el.type === 'checkbox') el.checked = !!d[el.name]; else if (el.type === 'radio') el.checked = el.value === d[el.name]; else el.value = d[el.name]; }); } catch (e) {} }
-form.addEventListener('input', () => { kindUI(); saveDraft(); });
-form.addEventListener('change', () => { kindUI(); saveDraft(); });
-document.getElementById('openForm').addEventListener('click', () => { loadDraft(); kindUI(); fm.showModal(); });
-fm.addEventListener('click', e => { if (e.target === fm || e.target.closest('[data-close]')) fm.close(); });
-document.getElementById('fmClear').addEventListener('click', () => { try { localStorage.removeItem(KEY); } catch (e) {} form.reset(); kindUI(); document.getElementById('fmMsg').textContent = 'Черновик удалён из этого браузера.'; });
-form.addEventListener('submit', e => {
-  e.preventDefault();
-  const f = form.elements, p = f.kind.value === 'partner', msg = document.getElementById('fmMsg');
-  const need = ['who', 'title', 'about'].filter(n => !f[n].value.trim());
-  if (need.length){ msg.textContent = 'Заполни, пожалуйста: имя и фирму, заголовок и описание.'; return; }
-  if (!f.c_real.checked){ msg.textContent = 'Отметь подтверждение, что объявление настоящее и ты сам отвечаешь за его содержание.'; return; }
-  if (p && !f.c_partner.checked){ msg.textContent = 'Для партнёрства отметь, что это сотрудничество самостоятельных специалистов, не работа по найму.'; return; }
-  if (!p && (!f.c_official.checked || !f.c_rav.checked)){ msg.textContent = 'Для вакансии отметь официальное оформление и пункт про RAV.'; return; }
-  const body = [`Здравствуйте!`, ``, `Хочу бесплатно разместить объявление в «Своих людях».`, ``,
-    `Тип: ${p ? 'Ищу партнёра (сотрудничество самостоятельных)' : 'Ищу сотрудника (работа по найму)'}`, `Автор: ${f.who.value}`, `Кого ищу: ${f.title.value}`,
-    `Направление: ${CATS[f.cat.value] || ''}`, `Где: ${[f.city.value, f.canton.value].filter(Boolean).join(', ')}; удалённо: ${f.online.value}`,
-    p ? '' : `Занятость: ${f.workload.value}`, `С какого времени: ${f.start.value}`, `Языки: ${f.langs.value}`, ``,
-    `О работе или сотрудничестве: ${f.about.value}`, `Что предлагаю: ${f.offer.value}`, `Как откликнуться: ${f.contact.value || 'контакты из моей карточки'}`, ``,
-    `Подтверждаю: объявление настоящее, я сам отвечаю за его содержание, условия и договор. «Свои люди» не участвуют в найме и не отвечают за сотрудничество.`,
-    p ? `Подтверждаю: это сотрудничество самостоятельных специалистов, не работа по найму.` : `Подтверждаю: работа будет оформлена официально (договор, AHV, разрешения), профессия не в списке RAV или 5 рабочих дней после сообщения в RAV прошли.`,
-    ``, FREE_NOTE].join('\n');
-  location.href = `mailto:${MAIL}?subject=${encodeURIComponent('Объявление для «Свои люди»: ' + f.title.value)}&body=${encodeURIComponent(body)}`;
-  msg.textContent = 'Открылось письмо в твоей почте. Отправь его — мы пришлём объявление тебе на проверку.';
+/* ---------- подтверждение объявления автором (решение Ирины 07.10.2026) ----------
+   Объявления пока вносит Ирина. Автор (тот, кто ищет сотрудника или партнёра) получает ссылку
+   https://svoiludi.ch/vakansii/#ok=<id>.<key>, видит своё объявление, отмечает ВСЕ галочки и нажимает «Подтверждаю».
+   Открывается письмо с его адреса Ирине: текст объявления, дата и каждое подтверждённое условие (это и есть доказательство).
+   Письмо Ирина сохраняет (ярлык «🌿 Свои люди»), Claude ставит в данных confirm: { date, via, checks } — и объявление появляется на сайте.
+   Без подтверждения объявление на сайте не видно. */
+const CHECKS = {
+  staff: [
+    { id: 'real', t: 'Объявление настоящее, данные в нём верны. Я согласен на его публикацию на svoiludi.ch.' },
+    { id: 'resp', t: 'Я работодатель и сам отвечаю за содержание объявления, отбор кандидатов, условия работы и договор с работником. Проект «Свои люди» и его организаторы не участвуют в найме и не несут за него ответственности.' },
+    { id: 'legal', t: 'Работа будет оформлена официально и по законам Швейцарии, моего кантона и общины (Gemeinde): письменный трудовой договор, зарплата не ниже обязательного минимума (минимальная зарплата кантона или города и отраслевой договор GAV, если они действуют), взносы AHV/IV/EO/ALV, страхование от несчастных случаев (UVG), пенсионная касса (BVG) и налог у источника — когда они положены по закону.' },
+    { id: 'permit', t: 'Я беру на работу только людей с правом работать в Швейцарии. Если нужно разрешение на работу, оно будет получено до начала работы.' },
+    { id: 'rav', t: 'Обязанность сообщать вакансии в RAV (Stellenmeldepflicht) я проверил: моей профессии нет в списке, или я сообщил вакансию в RAV и 5 рабочих дней уже прошли.' },
+    { id: 'fair', t: 'В объявлении нет требований по полу, возрасту, происхождению, религии или семейному положению. Язык указан, только если он нужен для работы.' },
+    { id: 'free', t: 'Я понимаю, что размещение бесплатно и не является коммерческой услугой. С соискателей я не беру денег — ни за работу, ни за обучение, ни за оформление.' },
+    { id: 'remove', t: 'Если объявление не соответствует этим условиям или на него поступят жалобы, «Свои люди» вправе снять его.' }
+  ],
+  partner: [
+    { id: 'real', t: 'Объявление настоящее, данные в нём верны. Я согласен на его публикацию на svoiludi.ch.' },
+    { id: 'resp', t: 'Я сам отвечаю за содержание объявления, выбор партнёра, условия и договор о сотрудничестве. Проект «Свои люди» и его организаторы не участвуют в сотрудничестве и не несут за него ответственности.' },
+    { id: 'self', t: 'Это сотрудничество самостоятельных специалистов, не работа по найму. Если человек фактически будет работать у меня по найму (в моё время, по моим указаниям, за регулярную оплату), я оформлю это как трудовой договор.' },
+    { id: 'legal', t: 'Сотрудничество будет законным по правилам Швейцарии, моего кантона и общины (Gemeinde): у каждой стороны своя регистрация самозанятого, свои взносы AHV и налоги, нужные разрешения на профессию, а для аренды помещения — разрешение арендодателя и правила общины.' },
+    { id: 'fair', t: 'В объявлении нет требований по полу, возрасту, происхождению, религии или семейному положению.' },
+    { id: 'free', t: 'Я понимаю, что размещение бесплатно и не является коммерческой услугой.' },
+    { id: 'remove', t: 'Если объявление не соответствует этим условиям или на него поступят жалобы, «Свои люди» вправе снять его.' }
+  ]
+};
+const checksFor = v => CHECKS[v.kind] || CHECKS.staff;
+const okUrl = v => `https://svoiludi.ch/vakansii/#ok=${encodeURIComponent(v.id)}.${encodeURIComponent(v.key || '')}`;
+const mailto = (to, su, body) => `mailto:${to}?subject=${encodeURIComponent(su)}&body=${encodeURIComponent(body)}`;
+const gmail = (to, su, body) => `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(to)}&su=${encodeURIComponent(su)}&body=${encodeURIComponent(body)}`;
+const adText = v => [`${(KINDS[v.kind] || KINDS.staff).t}: ${v.title}`, `Где: ${where(v)}`, v.workload ? `Занятость: ${v.workload}` : '', v.start ? `С какого времени: ${v.start}` : '',
+  `Языки: ${(v.langs || []).join(', ')}`, `${v.kind === 'partner' ? 'О сотрудничестве' : 'О работе'}: ${v.about}`, v.offer ? `Что я предлагаю: ${v.offer}` : ''].filter(Boolean).join('\n');
+const askLetter = v => { const a = authorOf(v); return { su: 'Ваше объявление в «Своих людях в Швейцарии» — проверьте и подтвердите, пожалуйста',
+  body: `Здравствуйте${a ? ', ' + a.name : ''}!\n\nЯ подготовила ваше объявление для раздела «Вакансии и партнёрство» на сайте «Свои люди в Швейцарии». Размещение бесплатное. Пока объявление видите только вы.\n\nОткройте, пожалуйста, ссылку, проверьте текст и отметьте условия галочками. После вашего подтверждения объявление появится на сайте и в вашей карточке на 60 дней.\n\n${okUrl(v)}\n\nЕсли нужно что-то исправить — ответьте на это письмо.\n\nИрина Вознесенская\nСвои люди в Швейцарии` }; };
+const confirmLetter = v => { const a = authorOf(v), d = fmtDate(today); return { su: `Подтверждаю объявление — ${v.title}`,
+  body: `Здравствуйте, Ирина!\n\n${d} я проверил(а) своё объявление для раздела «Вакансии и партнёрство» на сайте «Свои люди в Швейцарии» и подтверждаю его публикацию.\n\n${adText(v)}\n\nПодтверждаю каждое из условий:\n${checksFor(v).map(c => '☑ ' + c.t).join('\n')}\n\n${okUrl(v)}\n\n${a ? a.name + (a.firm ? ', ' + a.firm : '') : ''}` }; };
+const fixLetter = (v, text) => ({ su: `Исправления в объявление — ${v.title}`, body: `Здравствуйте, Ирина!\n\nВ моём объявлении, пожалуйста, исправьте:\n\n${text}\n\n${okUrl(v)}` });
+
+function confirmView(v){
+  const k = KINDS[v.kind] || KINDS.staff, a = authorOf(v), box = document.getElementById('qmCard');
+  box.style.setProperty('--lc', k.c); box.style.setProperty('--lf', `color-mix(in srgb,${k.c} 12%,var(--paper))`);
+  box.innerHTML = `<div class="qm-top"><div class="qm-head"><span class="ev-k" style="color:var(--brown)">Предпросмотр · видите только вы</span><span class="ev-k" style="color:${k.c}">${esc(k.t)} · ${esc(k.s)}</span><h2 class="qm-title" id="qmTitle">${esc(v.title)}</h2><span class="free-line">${FREE_NOTE}</span></div><button class="qm-close" type="button" aria-label="Закрыть">✕</button></div>
+    <div class="cf-view">
+      <p>Здравствуйте${a ? ', ' + esc(a.name) : ''}! Это ваше объявление для раздела «Вакансии и партнёрство». Проверьте текст и подтвердите условия. Пока вы не подтвердите, на сайте его никто не видит.</p>
+      <div class="cf-ad"><pre>${esc(adText(v))}</pre></div>
+      <h4>Подтвердите, пожалуйста, каждое условие</h4>
+      <div class="checks" id="cfChecks">${checksFor(v).map(c => `<label><input type="checkbox" data-cf="${c.id}"> <span>${esc(c.t)}</span></label>`).join('')}</div>
+      <p class="free-line">${FREE_NOTE}</p>
+      <div class="acts"><button class="btn" type="button" id="cfSend" disabled>Подтверждаю — отправить письмо Ирине</button><button class="btn ghost" type="button" id="cfFixOpen">Нужно исправить</button></div>
+      <div class="cf-fix" id="cfFix" hidden><textarea id="cfFixText" rows="4" maxlength="1500" placeholder="Что исправить в объявлении"></textarea><div class="acts"><button class="btn" type="button" id="cfFixSend">Отправить исправления</button></div></div>
+      <p class="note" id="cfMsg" aria-live="polite">Откроется письмо в вашей почте с текстом объявления и всеми условиями. Отправьте его — это и есть подтверждение. Отмечено: <b id="cfN">0</b> из ${checksFor(v).length}.</p>
+    </div>`;
+  box.querySelector('.qm-close').onclick = () => qm.close();
+  const all = [...box.querySelectorAll('[data-cf]')], send = box.querySelector('#cfSend');
+  box.querySelector('#cfChecks').addEventListener('change', () => { const n = all.filter(c => c.checked).length; box.querySelector('#cfN').textContent = n; send.disabled = n !== all.length; });
+  send.onclick = () => { const L = confirmLetter(v); location.href = mailto(MAIL, L.su, L.body);
+    box.querySelector('#cfMsg').innerHTML = `Письмо открылось в вашей почте — отправьте его. Если не открылось: <a href="${esc(gmail(MAIL, L.su, L.body))}" ${ext}>открыть в Gmail</a> или напишите на ${esc(MAIL)}.`; };
+  box.querySelector('#cfFixOpen').onclick = () => { const f = box.querySelector('#cfFix'); f.hidden = !f.hidden; };
+  box.querySelector('#cfFixSend').onclick = () => { const t = box.querySelector('#cfFixText').value.trim(); if (!t) return; const L = fixLetter(v, t); location.href = mailto(MAIL, L.su, L.body); };
+  if (!qm.open) qm.showModal();
+}
+/* блок для Ирины (режим ?ira=1) в окне объявления */
+function adminBox(v, a){
+  const to = a && a.contacts && a.contacts.email, L = askLetter(v);
+  const st = confirmed(v) ? `подтверждено ${fmtDate(v.confirm.date)} (${esc(v.confirm.via || '')}) · видно на сайте` : 'ждёт подтверждения автора · на сайте не видно';
+  return `<div class="adm"><b>Для Ирины</b><span>Статус: ${st}</span>${confirmed(v) ? '' : `<div class="acts">${to ? `<a class="btn" href="${esc(mailto(to, L.su, L.body))}">Отправить на подтверждение</a><a class="btn ghost" href="${esc(gmail(to, L.su, L.body))}" ${ext}>То же в Gmail</a>` : ''}<button class="btn ghost" type="button" data-copyask>Скопировать для Telegram</button></div><span class="note">Ссылка для автора: ${esc(okUrl(v))}</span>`}</div>`;
+}
+document.getElementById('qmCard').addEventListener('click', async e => {
+  if (!e.target.closest('[data-copyask]') || !OPEN) return; const L = askLetter(OPEN);
+  toast((await copyText(L.body)) ? 'Текст со ссылкой скопирован — вставь его автору в Telegram или WhatsApp.' : 'Выдели текст ссылки и скопируй вручную.');
 });
+/* «Скопировать шаблон» для сообщения Ирине в Telegram (объявления принимаются через Telegram, решение Ирины 07.10.2026) */
+const TPL = 'Здравствуйте, Ирина! Хочу бесплатно разместить объявление в «Своих людях».\nИщу: сотрудника (работа по найму) / партнёра (сотрудничество самостоятельных)\nКого ищу:\nГде (кантон, город, можно ли удалённо):\nЗанятость и с какого времени:\nНужные языки:\nО работе или сотрудничестве:\nЧто я предлагаю:\nКак откликнуться (Telegram или e-mail):\nМоя карточка в справочнике:';
+document.getElementById('askCopy').addEventListener('click', async () => toast((await copyText(TPL)) ? 'Шаблон скопирован — вставь его в сообщение Ирине в Telegram.' : 'Не получилось скопировать. Напиши Ирине в Telegram: @IrynaNeuroCoach'));
 
 /* ---------- события страницы ---------- */
 document.getElementById('results').addEventListener('click', e => { const b = e.target.closest('[data-v]'); if (b) openV(b.dataset.v); });
@@ -819,7 +849,9 @@ document.getElementById('results').addEventListener('click', e => { const b = e.
 document.getElementById('reset').addEventListener('click', () => { Object.keys(state).forEach(k => state[k] = ''); document.getElementById('remote').value = ''; render(); });
 document.getElementById('trial').hidden = !ADMIN;
 render();
-const fromHash = () => { const id = decodeURIComponent(location.hash.slice(1)); if (id && VACANCIES.some(v => v.id === id)) openV(id); };
+const fromHash = () => { const id = decodeURIComponent(location.hash.slice(1));
+  if (id.startsWith('ok=')){ const [vid, key] = id.slice(3).split('.'); const v = VACANCIES.find(x => x.id === vid); if (v && v.key && key === v.key) confirmView(v); return; }
+  if (id && pool().some(v => v.id === id) || (ADMIN && VACANCIES.some(v => v.id === id))) openV(id); };
 fromHash(); addEventListener('hashchange', fromHash);
 </script>
 <script src="/assets/help.js" defer></script>
