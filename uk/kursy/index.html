@@ -11,7 +11,7 @@
 <meta property="og:type" content="website"><meta property="og:locale" content="uk_UA"><meta property="og:site_name" content="Свої люди у Швейцарії">
 <meta property="og:title" content="Курси й заняття — Свої люди у Швейцарії">
 <meta property="og:description" content="Йога, німецька, гуртки для дітей, майстер-класи та вебінари твоєю мовою по кантонах Швейцарії. Видно, хто веде кожен курс.">
-<meta property="og:url" content="https://svoiludi.ch/uk/kursy/"><meta property="og:image" content="https://svoiludi.ch/kursy/og-image.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:url" content="https://svoiludi.ch/uk/kursy/"><meta property="og:image" content="https://svoiludi.ch/kursy/og-image.uk.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image"><meta name="theme-color" content="#4F5E3E">
 <link rel="stylesheet" href="../assets/fonts.css">
 <link rel="stylesheet" href="/assets/wm.uk.css">
@@ -564,8 +564,9 @@ window.IMG_BASE = '../img/';
 /* карточки специалистов — в /data/specialists.js (одна копия на весь сайт) */
 const SPECIALISTS = window.SPECIALISTS || [];
 </script>
-<script src="/data/kursy.uk.js?v=e5b694ee"></script>
-<script>const KURSY = window.KURSY || [];</script>
+<script src="/data/afisha.uk.js?v=eed84456"></script>
+<script>/* одна база афиши: здесь — записи раздела «Курсы»; у записи в обеих вкладках направление курса в ktype */
+const KURSY = (window.AFISHA || []).filter(e => (e.sections || []).includes('kursy')).map(e => e.ktype ? Object.assign({}, e, { type: e.ktype }) : e);</script>
 <script>
 const ADMIN = (() => {   // режим Ирины: ?ira=1 включает на этом устройстве, ?ira=0 выключает
   try { const q = location.search; if (/[?&]ira=1/.test(q)) localStorage.setItem('svoiludi-admin', '1'); if (/[?&]ira=0/.test(q)) localStorage.removeItem('svoiludi-admin'); return localStorage.getItem('svoiludi-admin') === '1'; }
@@ -647,6 +648,7 @@ function repeatText(e){   // «каждый вторник до 29 июня»
   if (r.freq === 'monthly'){ const n = Math.ceil(d.getUTCDate() / 7) - 1, fem = [3, 5, 6].includes(wd); return `кожн${fem ? 'у' : 'ий'} ${fem ? NTH[n] : NTH_M[n]} ${WD_ACC2[wd]} місяця${until}`; }
   return '';
 }
+const kindName = e => e.kind === 'once' ? (isRemote(e) ? 'Вебінар' : 'Майстер-клас') : (KINDS[e.kind] || KINDS.once).t;
 const priceText = e => e.price && e.price !== 'безкоштовно' ? `${e.price}${e.per ? ' ' + e.per : ''}` : 'безкоштовно';
 const started = e => e.kind === 'course' && e.date < today;
 /* «Начало 19 октября · 20 занятий» / «Курс уже идёт» / «Можно прийти на любое занятие» */
@@ -678,7 +680,7 @@ function row(e){
   const where = isRemote(e) ? 'онлайн' : `${esc(city(e.address))} · ${esc(kt(e.canton))}${e.online ? ' · і онлайн' : ''}`;
   return `<button class="ev" type="button" data-ev="${esc(e.id)}" style="--lc:${k.c}">${e.sample ? '<span class="sample">Зразок</span>' : ''}
     <span class="ev-d"><small>${e.kind === 'course' && !started(e) ? 'початок' : WD_S[dd.getUTCDay()]}</small><b>${dd.getUTCDate()}</b><small>${MON_S[dd.getUTCMonth()]}</small></span>
-    <span class="ev-m">${e.sample ? '<span class="yours">Тут може бути твій курс!</span>' : ''}<span class="ev-k">${esc(k.t)} · ${esc((KINDS[e.kind] || KINDS.once).t)}</span><span class="ev-t">${esc(e.title)}</span>
+    <span class="ev-m">${e.sample ? '<span class="yours">Тут може бути твій курс!</span>' : ''}<span class="ev-k">${esc(k.t)} · ${esc(kindName(e))}</span><span class="ev-t">${esc(e.title)}</span>
       <span class="ev-i">${timeStr(e) ? `<b>${esc(timeStr(e))}</b>` : ''}<span>${e.repeat ? esc(repeatText(e)) : esc(fmtFull(d))}</span><span>${where}</span><span>${esc((e.langs || []).join(', '))}</span>${e.level ? `<span>${esc(e.level)}</span>` : ''}</span>${orgFaces(e)}</span>
     <span class="ev-p">${esc(priceText(e))}</span></button>`;
 }
@@ -784,7 +786,7 @@ function openKurs(id){
     return `<${o.link ? `a href="${esc(o.link)}" ${ext}` : 'div'} class="org"><span class="ini">${esc((o.name || '?')[0])}</span><span><b>${esc(o.name || '')}</b><small>організатор</small></span></${o.link ? 'a' : 'div'}>`; }).join('');
   const when = e.kind === 'once' ? `${esc(fmtFull(e.date))}${timeStr(e) ? ' · ' + esc(timeStr(e)) : ''}${e.date < today ? '<small>Ця зустріч уже минула.</small>' : ''}`
     : `${esc(e.repeat ? repeatText(e) : fmtFull(e.date))}${timeStr(e) ? ' · ' + esc(timeStr(e)) : ''}<small>${esc(kindLine(e))}${e.kind === 'course' && !started(e) ? '' : nd ? `. Найближче заняття: ${esc(fmtDay(nd))}` : ''}</small>${e.repeat && e.repeat.except && e.repeat.except.some(x => x >= today) ? `<small>Без занять: ${e.repeat.except.filter(x => x >= today).map(fmtDate).join(', ')}</small>` : ''}`;
-  box.innerHTML = `<div class="qm-top"><div class="qm-head">${e.sample ? '<span class="ev-k" style="color:var(--brown)">Зразок курсу · усе вигадане</span><a class="yours" href="/uk/kursy/#add">Тут може бути твій курс! Як додати →</a>' : ''}<span class="ev-k" style="color:${k.c}">${esc(k.t)} · ${esc(kd.t)}</span><h2 class="qm-title" id="qmTitle">${esc(e.title)}</h2></div><button class="qm-close" type="button" aria-label="Закрити">✕</button></div>
+  box.innerHTML = `<div class="qm-top"><div class="qm-head">${e.sample ? '<span class="ev-k" style="color:var(--brown)">Зразок курсу · усе вигадане</span><a class="yours" href="/uk/kursy/#add">Тут може бути твій курс! Як додати →</a>' : ''}<span class="ev-k" style="color:${k.c}">${esc(k.t)} · ${esc(kindName(e))}</span><h2 class="qm-title" id="qmTitle">${esc(e.title)}</h2></div><button class="qm-close" type="button" aria-label="Закрити">✕</button></div>
     <div class="d-body">
       <div class="d-col">
         <div class="d-block"><h4>Про курс</h4><p>${esc(e.about)}</p></div>

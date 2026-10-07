@@ -93,7 +93,7 @@ def body_inject(html, extra):
 
 def localize_assets(html, tr, missing):
     """общие файлы с русским текстом → украинские копии: share.js → share.uk.js, wm.css → wm.uk.css,
-    data/specialists.js, data/events.js, data/kursy.js → *.uk.js (карточки, события, курсы — одна копия на весь сайт)"""
+    data/specialists.js, data/afisha.js → *.uk.js (карточки; афиша — события, курсы, вебинары одной базой)"""
     def rep(m):
         folder, name = m.group(2), m.group(3)
         code = open(os.path.join(ROOT, folder, name + '.js'), encoding='utf-8').read()

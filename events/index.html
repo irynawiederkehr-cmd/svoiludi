@@ -557,8 +557,9 @@ window.IMG_BASE = '../img/';
 const SPECIALISTS = window.SPECIALISTS || [];
 
 </script>
-<script src="/data/events.js?v=3d4fb260"></script>
-<script>const EVENTS = window.EVENTS || [];</script>
+<script src="/data/afisha.js?v=b2e3e970"></script>
+<script>/* одна база афиши: здесь — записи раздела «События» */
+const EVENTS = (window.AFISHA || []).filter(e => (e.sections || []).includes('events'));</script>
 <script>
 const ADMIN = (() => {   // режим Ирины: ?ira=1 включает на этом устройстве, ?ira=0 выключает
   try { const q = location.search; if (/[?&]ira=1/.test(q)) localStorage.setItem('svoiludi-admin', '1'); if (/[?&]ira=0/.test(q)) localStorage.removeItem('svoiludi-admin'); return localStorage.getItem('svoiludi-admin') === '1'; }

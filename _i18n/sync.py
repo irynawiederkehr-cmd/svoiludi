@@ -22,7 +22,7 @@ def new_pages():
     return sorted(res)
 
 def ctx_of(u):
-    for src in [src for src, _ in pages.PAGES] + ['data/specialists.js', 'data/events.js', 'data/kursy.js']:
+    for src in [src for src, _ in pages.PAGES] + ['data/specialists.js', 'data/afisha.js']:
         s = open(os.path.join(ROOT, src), encoding='utf-8').read()
         probe = u.split('⟦')[0][:60] or u[:60]
         k = s.find(probe)
