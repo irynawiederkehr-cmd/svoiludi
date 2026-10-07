@@ -573,7 +573,7 @@ a.bot:hover{color:#B98324}
 .adm-act.main{border-width:2.5px}
 .adm-act.off{opacity:.6;cursor:default;border-style:dashed}
 .adm-todo{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:4px;font-size:.86rem}
-.vacs{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}.vacs a{display:flex;flex-direction:column;gap:2px;text-decoration:none;color:inherit;border:1.5px solid var(--line);border-radius:14px;padding:10px 14px;background:var(--paper)}.vacs a:hover{border-color:var(--sage)}.vacs b{font-weight:700;font-size:.95rem}.vacs small{color:var(--muted);font-size:.8rem}.vac-note{font-size:.78rem;color:var(--muted);margin:8px 0 0;line-height:1.45}.vac-note b{color:var(--forest,#4F5E3E)}
+.vac-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}.vac-chip{display:inline-flex;align-items:center;font-size:.76rem;font-weight:700;color:var(--forest,#4F5E3E);background:color-mix(in srgb,var(--sage) 20%,var(--paper));border:1.5px solid color-mix(in srgb,var(--sage) 55%,transparent);border-radius:999px;padding:4px 10px;text-decoration:none}.vac-chip:hover{border-color:var(--sage)}.vac-block{display:flex;flex-direction:column;gap:14px}.vac-grp{display:flex;flex-direction:column;gap:8px}.vac-grp h4{margin:0}.vacs{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}.vacs a{display:flex;flex-direction:column;gap:2px;text-decoration:none;color:inherit;border:1.5px solid var(--line);border-radius:14px;padding:10px 14px;background:var(--paper)}.vacs a:hover{border-color:var(--sage)}.vacs b{font-weight:700;font-size:.95rem}.vacs small{color:var(--muted);font-size:.8rem}.vac-note{font-size:.78rem;color:var(--muted);margin:8px 0 0;line-height:1.45}.vac-note b{color:var(--forest,#4F5E3E)}
 </style>
 <!--i18n--><link rel="alternate" hreflang="ru" href="https://svoiludi.ch/"><link rel="alternate" hreflang="uk" href="https://svoiludi.ch/uk/"><script>(function(){try{if(localStorage.getItem('svoiludiLang')==='uk'&&!/[?&]lang=ru/.test(location.search))location.replace('/uk/'+location.search+location.hash);}catch(e){}})();</script><!--i18n--></head>
 <body>
@@ -1069,6 +1069,10 @@ function quick(s){   // одна главная кнопка связи: Telegra
 }
 const HEART = '<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-9.3-9.2C1.4 7.9 3.6 4.5 7 4.5c2 0 3.3 1.1 5 3 1.7-1.9 3-3 5-3 3.4 0 5.6 3.4 4.3 6.8-1.8 4.6-9.3 9.2-9.3 9.2z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>';
 const favBtn = s => `<button class="fav" type="button" data-fav="${esc(s.id)}" aria-pressed="${FAV.has(s.id)}" aria-label="${FAV.has(s.id) ? 'Убрать из моего списка' : 'Сохранить в мой список'}" title="${FAV.has(s.id) ? 'Убрать из моего списка' : 'Сохранить в мой список'}">${HEART}</button>`;
+/* объявления специалиста (вкладка «Вакансии», data/vacancies.js): только подтверждённые автором и не просроченные */
+const VAC_KIND = { staff: 'Ищет себе сотрудника', partner: 'Ищет себе партнёра' };
+const vacsOf = s => (window.VACANCIES || []).filter(v => v.author === s.id && v.status === 'активен' && v.confirm && v.confirm.date && (!v.until || v.until >= new Date().toISOString().slice(0, 10)));
+const vacChips = s => { const kinds = [...new Set(vacsOf(s).map(v => v.kind))]; return kinds.length ? `<div class="vac-chips">${kinds.map(k => `<a class="vac-chip" href="vakansii/#${esc(vacsOf(s).find(v => v.kind === k).id)}">${VAC_KIND[k]}</a>`).join('')}</div>` : ''; };
 function card(s, lvl = ''){
   const k = CATS[s.cat] || CATS.status, why = hiddenReason(s);
   const flag = why ? `<span class="badge warn">${esc(why)}</span>` : lvl === 'vip' ? '<span class="badge tier">VIP-партнёр ТОП</span>' : lvl === 'партнёр' || lvl === 'vip+' ? '<span class="badge tier">VIP-партнёр</span>' : '';
@@ -1076,7 +1080,7 @@ function card(s, lvl = ''){
     ${s.sample ? '<span class="sample" title="Вымышленный специалист — так будет выглядеть ваша карточка">Образец</span>' : ''}<div class="sp-sub">${ico(k.i, k.c, null, 16)}<span>${esc(k.t)}</span>${flag}</div>
     <div class="sp-id">${photo(s)}<div>
       <h3>${esc(s.name)}${isNew(s) ? '<span class="new" title="Новый в справочнике">новый</span>' : ''}</h3>
-      <div class="role">${esc(s.role)}</div>${s.firm ? `<div class="firm">${esc(s.firm)}</div>` : ''}
+      <div class="role">${esc(s.role)}</div>${s.firm ? `<div class="firm">${esc(s.firm)}</div>` : ''}${vacChips(s)}
     </div></div>
     <div class="facts">
       <div class="fact"><span>Где</span><div>${livePlaces(s).map(p => placeLink(p)).join('')}${s.online ? '<span class="onl">онлайн</span>' : ''}</div></div>
@@ -1374,8 +1378,9 @@ function openCard(id){
         <div class="d-block"><h4>Формат</h4><p>${esc(s.format)}</p></div>
         <div class="d-block"><h4>Языки</h4><div class="chips">${s.langs.map(l => `<span>${esc(l)}</span>`).join('')}</div></div>
         ${(s.tags || []).length ? `<div class="d-block"><h4>Особенности</h4><div class="d-tags">${s.tags.filter(t => TAGS[t]).map(t => `<span>${esc(TAGS[t])}</span>`).join('')}</div></div>` : ''}
-        ${(() => { const vs = (window.VACANCIES || []).filter(v => v.author === s.id && v.status === 'активен' && v.ok && (!v.until || v.until >= new Date().toISOString().slice(0, 10)));
-          return vs.length ? `<div class="d-block"><h4>Ищет в команду и в партнёры</h4><ul class="vacs">${vs.map(v => `<li><a href="vakansii/#${esc(v.id)}"><b>${esc(v.title)}</b><small>${v.kind === 'partner' ? 'Ищу партнёра' : 'Ищу сотрудника'}${v.sample ? ' · образец' : ''}</small></a></li>`).join('')}</ul><p class="vac-note"><b>Бесплатно для членов сообщества «Свои люди». Не коммерческая услуга.</b> Объявления размещает сам специалист и отвечает за их содержание. «Свои люди» не участвуют в найме и сотрудничестве, договаривайтесь напрямую с автором.</p></div>` : ''; })()}
+        ${(() => { const vs = vacsOf(s); if (!vs.length) return '';
+          const grp = kind => { const g = vs.filter(v => v.kind === kind); return g.length ? `<div class="vac-grp"><h4>${VAC_KIND[kind]}</h4><ul class="vacs">${g.map(v => `<li><a href="vakansii/#${esc(v.id)}"><b>${esc(v.title)}</b><small>${esc([v.city, v.workload].filter(Boolean).join(' · '))}${v.sample ? ' · образец' : ''}</small></a></li>`).join('')}</ul></div>` : ''; };
+          return `<div class="d-block vac-block">${grp('staff')}${grp('partner')}<p class="vac-note"><b>Бесплатно для членов сообщества «Свои люди». Не коммерческая услуга.</b> Объявления размещает сам специалист и отвечает за их содержание. «Свои люди» не участвуют в найме и сотрудничестве, договаривайтесь напрямую с автором.</p></div>`; })()}
         ${(() => { const ev = upcoming(s); return ev.length ? `<div class="d-block"><h4>Ближайшие мероприятия</h4><ul class="evs">${ev.map(({ e, d }) => `<li><a href="events/#${esc(e.id)}"><span class="dt"><span>${+d.slice(8)}</span><small>${MONTHS[+d.slice(5, 7) - 1]}</small></span><span class="t">${esc(e.title)}<small>${e.time ? esc(e.time) + ' · ' : ''}${e.online && !e.address ? 'онлайн' : esc(city(e.address || ''))}</small></span></a></li>`).join('')}</ul></div>` : ''; })()}
       </div>
       <div class="d-side">
