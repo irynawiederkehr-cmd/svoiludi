@@ -478,6 +478,21 @@ a.bot:hover{color:#B98324}
 @media (prefers-reduced-motion: reduce){.go-free{animation:none}}
 .mail{font-weight:700;color:var(--brown);user-select:all}
 </style>
+<style id="nav-chips">
+/* телефон: разделы сайта — заметные кнопки-«таблетки», текущий раздел залит шалфейным (07.10.2026) */
+@media (max-width:860px){
+  .top{position:static}
+  nav{display:flex;flex-wrap:wrap;gap:8px;overflow-x:visible;padding:4px 0 6px;font-size:.88rem}
+  nav a{display:inline-flex;align-items:center;gap:6px;padding:9px 15px;border-radius:999px;background:var(--paper);border:1.5px solid color-mix(in srgb,var(--sage) 45%,transparent);color:var(--ink)!important;font-weight:600;line-height:1.1;white-space:nowrap;box-shadow:0 2px 6px -3px rgba(60,70,40,.35)}
+  nav a:active{transform:translateY(1px)}
+  nav a[aria-current="page"]{background:var(--sage);border-color:var(--sage);color:var(--paper)!important}
+  nav a[href*="voznesenskaya.ch"]::after{content:"↗";font-size:.85em;opacity:.7}
+}
+@media (max-width:420px){
+  nav{gap:7px;font-size:.84rem}
+  nav a{padding:8px 13px}
+}
+</style>
 <header class="top">
   <div class="page">
     <a class="mark" href="https://svoiludi.ch/uk/" aria-label="Свои люди в Швейцарии — в начало">
