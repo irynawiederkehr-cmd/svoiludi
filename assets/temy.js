@@ -101,31 +101,14 @@
       dlg.showModal();
     };
     dlg.addEventListener('click', e => { if (e.target === dlg) dlg.close(); });
-    const card = () => {
-      const k = cur && M[cur] ? cur : '';
-      const sos = SOS.map(s => '<li><b>' + s[0] + '</b><span>' + s[1] + ' <i>' + s[2] + '</i></span></li>').join('');
-      const kl = k ? (M[k].l.length ? M[k].l.map(r => '<li><b>' + esc(r[1]) + '</b><span>' + esc(r[0]) + '</span></li>').join('') : '<li class="mc-line"><span>Номер своего региона: ____________________</span></li>') : '<li class="mc-line"><span>Кантон и номер: ____________________</span></li>';
-      const one = '<div class="mc"><h3>Экстренные номера <small>Notfallnummern Schweiz</small></h3><p class="mc-t">Угроза жизни</p><ul class="mc-sos">' + sos + '</ul>' +
-        '<p class="mc-t">Нужен врач, но не угроза жизни' + (k ? ' · ' + esc(K[k].n) : '') + '</p><ul class="mc-k">' + kl + '</ul>' +
-        '<p class="mc-t">Мои номера</p><ul class="mc-me"><li>Мой врач (Hausarzt): ____________________</li><li>Касса и номер страховки: ____________________</li><li>Телемедицина кассы: ____________________</li><li>Близкий человек: ____________________</li></ul>' +
-        '<p class="mc-f">Скажи по телефону: где ты, что случилось, сколько людей пострадало. Не клади трубку первой. · svoiludi.ch</p></div>';
-      let box = document.getElementById('medcard');
-      if (!box) { box = document.createElement('div'); box.id = 'medcard'; document.body.appendChild(box); }
-      box.innerHTML = '<div class="mc-row">' + one + one + '</div><p class="mc-cut">Вырежи по линии: одну карточку в кошелёк, другую на холодильник.</p>';
-      document.documentElement.classList.add('pc');
-      const done = () => { document.documentElement.classList.remove('pc'); window.removeEventListener('afterprint', done); };
-      window.addEventListener('afterprint', done);
-      setTimeout(() => window.print(), 50);
-    };
     med.forEach(box => {
       box.innerHTML = '<div class="kt-h"><b>Дежурный врач в твоём кантоне</b><select aria-label="Твой кантон">' + opts + '</select></div><div class="med-out"></div>' +
-        '<div class="med-btns"><button type="button" class="med-all">Все кантоны</button><button type="button" class="med-print">Распечатать карточку с номерами</button></div>';
+        '<div class="med-btns"><button type="button" class="med-all">Все кантоны</button><a class="med-print" href="' + (document.body.dataset.root || '/') + 'instrumenty/ekstrennye-nomera/">Сделать карточку с номерами (PDF)</a></div>';
       const sel = box.querySelector('select'), out = box.querySelector('.med-out');
       const draw = () => { out.innerHTML = cur && M[cur] ? rows(cur) : '<p class="kt-hint">Выбери кантон, и здесь появится номер дежурного врача. Его набирают, когда свой врач не отвечает, а в скорую не нужно.</p>'; };
       sel.value = cur; draw();
       sel.addEventListener('change', () => { cur = sel.value; try { localStorage.setItem(KEY, cur); } catch (e) {} med.forEach(b => { b.querySelector('select').value = cur; }); document.querySelectorAll('.med .med-out').forEach(o => { o.innerHTML = cur && M[cur] ? rows(cur) : ''; }); draw(); });
       box.querySelector('.med-all').addEventListener('click', openAll);
-      box.querySelector('.med-print').addEventListener('click', card);
     });
   }
 

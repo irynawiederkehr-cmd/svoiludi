@@ -146,32 +146,11 @@ a.tm-card:hover{border-color:var(--brown);transform:translateY(-1px)}
 .med-none{font-size:.94rem;color:var(--muted)}
 .med-src{font-size:.88rem;margin:4px 0 0!important}
 .med-btns{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
-.med-btns button{font:inherit;font-size:.9rem;font-weight:700;border:1.5px solid var(--brown);background:var(--paper);color:var(--brown);border-radius:999px;padding:8px 16px;cursor:pointer}
-.med-btns .med-print{background:var(--brown);color:#fff}
+.med-btns button,.med-btns a{font:inherit;font-size:.9rem;font-weight:700;border:1.5px solid var(--brown);background:var(--paper);color:var(--brown);border-radius:999px;padding:8px 16px;cursor:pointer}
+.med-btns .med-print{background:var(--brown);color:#fff;text-decoration:none;display:inline-block}
 .med-dlg{border:none;border-radius:20px;padding:0 20px 16px;width:min(560px,calc(100vw - 32px));max-height:85vh;overflow:auto;background:var(--bg);color:var(--ink)}
 .med-dlg::backdrop{background:rgba(0,0,0,.45)}
 .med-dh{position:sticky;top:0;background:var(--bg);display:flex;justify-content:space-between;align-items:center;padding:16px 0 8px;font-size:1.1rem}
 .med-x{font-size:1.6rem;line-height:1;border:none;background:none;cursor:pointer;color:var(--ink);padding:0 4px}
 .med-dlg details{border-top:1px solid var(--line);padding:8px 0}
 .med-dlg summary{cursor:pointer;font-weight:700}
-#medcard{display:none}
-@media print{
-  html.pc body>*:not(#medcard){display:none!important}
-  html.pc #medcard{display:block}
-  @page{size:A4;margin:10mm}
-  #medcard{font-family:Arial,Helvetica,sans-serif;color:#000}
-  .mc-row{display:flex;gap:0}
-  .mc{width:95mm;min-height:135mm;box-sizing:border-box;border:1px dashed #555;padding:5mm;font-size:8.5pt;line-height:1.25}
-  .mc h3{font-family:Arial,Helvetica,sans-serif;font-size:12pt;margin:0 0 2mm}
-  .mc h3 small{display:block;font-size:7.5pt;font-weight:400}
-  .mc-t{font-weight:700;margin:3mm 0 1mm;border-bottom:1px solid #000;font-size:8.5pt}
-  .mc ul{list-style:none;padding:0;margin:0}
-  .mc-sos{display:grid;grid-template-columns:1fr 1fr;gap:1mm 3mm}
-  .mc li{display:flex;gap:2mm;align-items:baseline}
-  .mc li b{font-size:11pt;min-width:11mm}
-  .mc-k li b{font-size:9.5pt;min-width:24mm;white-space:nowrap}
-  .mc li i{font-size:7pt}
-  .mc-me li{margin:2.2mm 0}
-  .mc-f{font-size:7pt;margin-top:3mm}
-  .mc-cut{font-size:8pt;margin-top:3mm}
-}
