@@ -28,6 +28,7 @@ TOOLS = {
     'strahovki-obyazatelnye': 'Обязательные страховки',
     'nalogi-shema': 'Как устроены налоги',
     'pensiya-shema': 'Как устроена пенсия',
+    'dogovor-nyani': 'Договор с няней',
     'dohody-rashody': 'Доходы и расходы',
     'schet-qr': 'Счёт клиенту с QR-кодом',
     'moi-dannye': 'Мои данные',
@@ -70,7 +71,7 @@ TOPICS = [
     T('strahovki', 'insure', '3.4', 'Нужные страховки', 'Ответственность, имущество, юрзащита, несчастный случай и машина.', ['strahovki-obyazatelnye', 'moj-budget', 'ekstrennye-nomera', 'pensiya-shema', 'franshiza-shema', 'kuda-obratitsya'], [('insure', ['Страховой брокер'])], ready=True),
     T('bolezn-travma', 'insure', '3.5', 'Заболел или травма: что делать', 'Чек-листы на болезнь, несчастный случай, ДТП и больного ребёнка.', ['ekstrennye-nomera', 'moj-god', 'strahovki-obyazatelnye', 'franshiza-shema', 'kuda-obratitsya'], [('health', ['Семейный врач', 'Педиатр']), ('insure', ['Страховой брокер'])], ready=True),
     # 4. Дети, учёба, профессия
-    T('kita-detsad', 'learn', '4.1', 'Ясли, детский сад и начальная школа', 'Сколько стоит, как работают субсидии и спецшколы.', ['put-obrazovaniya', 'moj-god', 'moj-budget', 'ekstrennye-nomera'], [('kids', ['Ясли и детский сад', 'Логопед', 'Няня'])], ['kursy'], ready=True),
+    T('kita-detsad', 'learn', '4.1', 'Ясли, детский сад и начальная школа', 'Сколько стоит, как работают субсидии и спецшколы.', ['put-obrazovaniya', 'moj-god', 'moj-budget', 'ekstrennye-nomera', 'dogovor-nyani'], [('kids', ['Ясли и детский сад', 'Логопед', 'Няня'])], ['kursy'], ready=True),
     T('shkola-lehre', 'learn', '4.2', 'Секундарная школа, гимназия, Lehre', 'Как выбирается путь подростка и почему Lehre — не «второй сорт».', ['put-obrazovaniya', 'moj-god', 'diplomy-shema'], [('kids', ['Подготовка к гимназии', 'Репетитор']), ('learn', ['Карьера и резюме'])], ready=True),
     T('vuz', 'learn', '4.3', 'Университет и PhD', 'Сколько стоит учёба для иностранцев и как устроена докторантура.', ['put-obrazovaniya', 'diplomy-shema'], [('learn', ['Курсы и переквалификация'])], ready=True),
     T('diplomy', 'learn', '4.4', 'Признание дипломов', 'Регламентируемые профессии, SBFI, ECUS и частые ошибки.', ['diplomy-shema', 'yazyk-trebovaniya', 'put-obrazovaniya', 'rezyume'], [('learn', ['Признание дипломов', 'Карьера и резюме']), ('status', ['Заверенные переводы'])], ready=True),
@@ -78,7 +79,7 @@ TOPICS = [
     T('professii-dom', 'learn', '4.5.2', 'Уборка, кейтеринг, домашняя кухня', 'Правила гигиены, регистрация и страховки.', ['chasy-po-klientam', 'zarplata', 'uchet-vremeni', 'strahovki-obyazatelnye', 'nalogi-shema', 'diplomy-shema', 'schet-qr', 'kuda-obratitsya', 'dohody-rashody'], [('home', ['Уборка и помощь по дому', 'Уборка со сдачей квартиры']), ('events', ['Торты и домашняя кухня'])], ready=True),
     T('professii-konsultirovanie', 'learn', '4.5.3', 'Коучинг, консультирование, психология', 'Какие звания защищены и что можно обещать клиенту.', ['chasy-po-klientam', 'diplomy-shema', 'nalogi-shema', 'strahovki-obyazatelnye', 'schet-qr', 'dohody-rashody'], [('coach', ['Коуч', 'Консультант по адаптации']), ('psy', ['Психолог'])], ready=True),
     T('professii-prepodavanie', 'learn', '4.5.5', 'Преподавание и онлайн-курсы', 'Что нужно, чтобы учить людей и брать за это деньги.', ['chasy-po-klientam', 'yazyk-trebovaniya', 'put-obrazovaniya', 'diplomy-shema', 'nalogi-shema', 'schet-qr', 'dohody-rashody'], [('learn', ['Открытие своего дела'])], ['kursy'], ready=True),
-    T('nyani', 'learn', '4.5.6', 'Няня и Tagesmutter', 'Когда нужен договор, разрешение и страховка.', ['ekstrennye-nomera', 'zarplata', 'chasy-po-klientam', 'uchet-vremeni', 'diplomy-shema', 'moi-dannye', 'kuda-obratitsya'], [('kids', ['Няня'])], ready=True),
+    T('nyani', 'learn', '4.5.6', 'Няня и Tagesmutter', 'Когда нужен договор, разрешение и страховка.', ['dogovor-nyani', 'ekstrennye-nomera', 'zarplata', 'chasy-po-klientam', 'uchet-vremeni', 'diplomy-shema', 'moi-dannye', 'kuda-obratitsya'], [('kids', ['Няня'])], ready=True),
     T('professii-avto', 'learn', '4.5.7', 'Автосервис, такси, Uber', 'Разрешения, лицензии и страховки для работы с машиной.', ['chasy-po-klientam', 'zarplata', 'strahovki-obyazatelnye', 'nalogi-shema', 'diplomy-shema', 'schet-qr', 'dohody-rashody'], [('home', ['Автосервис', 'Автошкола'])], ready=True),
     T('fide', 'learn', '4.6', 'Язык и fide', 'Какой уровень нужен для B, C и паспорта и как получить скидку на курс.', ['yazyk-trebovaniya', 'moj-den', 'grazhdanstvo-shema'], [('learn', ['Немецкий язык', 'Французский язык', 'Подготовка к fide'])], ['kursy'], ready=True),
     # 5. Работа и соцзащита
@@ -89,7 +90,7 @@ TOPICS = [
     T('profsoyuzy', 'work', '', 'Профсоюзы и консультации', 'Куда вступить за небольшой взнос, чтобы получать консультации и защиту, и где помогают бесплатно.', ['kuda-obratitsya'], [('law', ['Трудовое право'])], ready=True),
     T('bolezn-na-rabote', 'work', '5.3', 'Болезнь и травма на работе', 'Кто платит зарплату и чем Krankheit отличается от Unfall.', ['uchet-vremeni'], [('law', ['Трудовое право']), ('insure', ['Страховой брокер'])]),
     T('poterya-raboty', 'work', '5.4', 'Потеря работы и RAV', 'Что сделать в первые дни, чтобы не потерять деньги.', ['rezyume', 'moj-budget', 'moj-den', 'pensiya-shema', 'zarplata', 'kuda-obratitsya'], [('learn', ['Поиск работы и рекрутинг', 'Карьера и резюме']), ('law', ['Трудовое право'])], ready=True),
-    T('domashniy-personal', 'work', '5.5', 'Домашний персонал', 'Если нанимаешь няню или уборщицу — твои обязанности как работодателя.', ['zarplata', 'uchet-vremeni', 'strahovki-obyazatelnye', 'ekstrennye-nomera', 'kuda-obratitsya', 'moi-dannye'], [('money', ['Бухгалтерия и Treuhand'])], ready=True),
+    T('domashniy-personal', 'work', '5.5', 'Домашний персонал', 'Если нанимаешь няню или уборщицу — твои обязанности как работодателя.', ['dogovor-nyani', 'zarplata', 'uchet-vremeni', 'strahovki-obyazatelnye', 'ekstrennye-nomera', 'kuda-obratitsya', 'moi-dannye'], [('money', ['Бухгалтерия и Treuhand'])], ready=True),
     T('sozialhilfe', 'work', '5.6', 'Социальная помощь', 'Права, контроль, возврат и влияние на статус.', ['moj-budget'], [('status', ['Социальные вопросы и пособия']), ('law', ['Миграционное право'])]),
     # 6. Жильё и транспорт
     T('arenda', 'home', '6.1.1', 'Как снять квартиру', 'Поиск, досье арендатора и что хозяин не вправе требовать.', ['moj-budget'], [('home', ['Риелтор', 'Переезд'])]),
