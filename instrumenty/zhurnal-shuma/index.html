@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<link rel="icon" href="/fav/favicon.svg" type="image/svg+xml"><link rel="icon" href="/fav/icon-32.png" sizes="32x32"><link rel="apple-touch-icon" href="/fav/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/fonts.css">
+<meta name="description" content="Бесплатный журнал шума (Lärmprotokoll, journal du bruit) для Швейцарии: записывай на телефоне дату, время, вид шума, откуда и свидетелей — получи аккуратную таблицу на немецком, французском или итальянском с подписью для управляющей, союза арендаторов или примирительного органа. Пустой журнал можно распечатать и заполнять от руки. Данные только у тебя.">
+<link rel="canonical" href="https://svoiludi.ch/instrumenty/zhurnal-shuma/">
+<meta property="og:type" content="website"><meta property="og:locale" content="ru_RU"><meta property="og:site_name" content="Свои люди в Швейцарии">
+<meta property="og:title" content="Журнал шума для управляющей · бесплатно"><meta property="og:description" content="Записывай шум соседей на телефоне — получи таблицу на языке кантона с подписью для управляющей. Данные только у тебя.">
+<meta property="og:url" content="https://svoiludi.ch/instrumenty/zhurnal-shuma/"><meta property="og:image" content="https://svoiludi.ch/instrumenty/zhurnal-shuma/og-image.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="robots" content="noindex, nofollow">
+<title>Журнал шума для управляющей</title>
+<style>
+/* Журнал шума для управляющей (08.10.2026): анкета слева, живые листы справа, движок assets/shema.js. */
+:root{
+  --bg:#F4EDE3; --paper:#FFFCF8; --ink:#2F2924; --muted:#7A6E62; --line:#E5D9C9; --soft:#EFE5D7;
+  --brown:#6E4F3C; --mustard:#B98324; --mustard-soft:#F3E3C2; --sage:#4F5E3E; --sage-soft:#E3E8D6; --red:#A0523D;
+  --display:"Forum","Georgia",serif; --sans:"Manrope","Segoe UI",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#221D19; --paper:#2C2621; --ink:#F1E9DF; --muted:#B4A796; --line:#3E362F; --soft:#352E28;
+  --brown:#E1C2A6; --mustard:#E2B45C; --mustard-soft:#3D321F; --sage:#B4BF97; --sage-soft:#2E3226; --red:#E39A85; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#221D19; --paper:#2C2621; --ink:#F1E9DF; --muted:#B4A796; --line:#3E362F; --soft:#352E28;
+  --brown:#E1C2A6; --mustard:#E2B45C; --mustard-soft:#3D321F; --sage:#B4BF97; --sage-soft:#2E3226; --red:#E39A85; color-scheme:dark}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--ink);font:15px/1.55 var(--sans);margin:0}
+.wrap{max-width:1280px;margin:0 auto;padding-inline:16px;padding-block:28px 48px;display:flex;flex-direction:column;gap:24px}
+.eyebrow{font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+h1{font-family:var(--display);font-weight:400;font-size:clamp(2.4rem,6vw,3.6rem);line-height:1;margin:4px 0 10px;text-wrap:balance}
+h2{font-family:var(--display);font-weight:400;font-size:1.55rem;margin:0;text-wrap:balance}
+h3{font-family:var(--display);font-weight:400;font-size:1.22rem;line-height:1.2;margin:0}
+.lead{max-width:66ch;color:var(--muted);margin:0}
+.jump{font-weight:700;color:var(--brown);text-underline-offset:4px}
+.privnote{margin-top:14px;background:var(--sage-soft);border-radius:16px;padding:12px 16px;font-size:.9rem;max-width:90ch}
+.status{font-size:.86rem;color:var(--muted);min-height:1.3em}
+.btn{font:inherit;font-weight:700;font-size:.9rem;border:0;border-radius:999px;padding:10px 18px;cursor:pointer;color:#fff;text-decoration:none;display:inline-flex;align-items:center;gap:6px;background:#6E4F3C;box-shadow:0 8px 18px -8px rgba(110,79,60,.6)}
+.btn.gold{background:#B98324;box-shadow:0 8px 18px -8px rgba(185,131,36,.7)}
+.btn.free{background:#4F5E3E;box-shadow:0 8px 18px -8px rgba(79,94,62,.6)}
+.btn.ghost{background:transparent;color:var(--brown);border:1.5px solid var(--line);box-shadow:none}
+.btn.sm{font-size:.82rem;padding:7px 13px}
+.btn[disabled]{background:var(--soft);color:var(--muted);box-shadow:none;cursor:wait}
+select,input[type=text],input[type=tel],input[type=number],input[type=date],textarea{font:inherit;font-size:.95rem;color:var(--ink);background:var(--paper);border:1.5px solid var(--line);border-radius:12px;padding:9px 12px;width:100%;min-width:0}
+select:focus-visible,input:focus-visible,button:focus-visible,textarea:focus-visible,a:focus-visible{outline:2px solid var(--mustard);outline-offset:2px}
+::placeholder{color:color-mix(in srgb,var(--muted) 70%,transparent)}
+.setup{background:var(--paper);border:1.5px solid var(--line);border-radius:22px;padding:16px 18px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px 18px;align-items:start}
+@media (max-width:1000px){.setup{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.setup{grid-template-columns:1fr}}
+.fl{display:flex;flex-direction:column;gap:6px;min-width:0}
+.fl>.lb{font-size:.8rem;font-weight:700;color:var(--muted);display:flex;align-items:center}
+.seg{display:flex;flex-wrap:wrap;gap:6px}
+.seg button{font:inherit;font-size:.84rem;font-weight:700;border:1.5px solid var(--line);background:var(--paper);color:var(--ink);border-radius:999px;padding:6px 12px;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--sage);border-color:var(--sage);color:#fff}
+.acts{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.exbar{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;background:var(--mustard-soft);border-radius:16px;padding:10px 14px;font-size:.9rem;font-weight:600}
+.work{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:22px;align-items:start}
+@media (max-width:1040px){.work{grid-template-columns:1fr}}
+.form{display:flex;flex-direction:column;gap:14px;min-width:0}
+.sec{background:var(--paper);border:1.5px solid var(--line);border-radius:20px;padding:16px 18px;display:flex;flex-direction:column;gap:12px}
+.sec>h2{font-size:1.3rem;display:flex;align-items:center}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:560px){.g2{grid-template-columns:1fr}}
+.hint{font-size:.84rem;color:var(--muted);margin:0}
+.chk{display:flex;flex-direction:column;gap:8px}
+.chk label{display:flex;gap:10px;align-items:baseline;font-size:.92rem;cursor:pointer}
+.chk input{flex:none;width:18px;height:18px;accent-color:var(--sage);transform:translateY(3px)}
+.chk b{white-space:nowrap}
+.chk small{color:var(--muted)}
+.tog{display:flex;gap:10px;align-items:center;font-size:.92rem;cursor:pointer}
+.tog input{width:18px;height:18px;accent-color:var(--sage)}
+.sheetbox{position:sticky;top:12px;display:flex;flex-direction:column;gap:10px}
+@media (max-width:1040px){.sheetbox{position:static}}
+.sheet{background:#fff;border-radius:6px;box-shadow:0 18px 40px -22px rgba(47,41,36,.45);overflow:hidden}
+.sheet svg{display:block;width:100%;height:auto}
+.imp{background:var(--paper);border:1.5px dashed color-mix(in srgb,var(--sage) 55%,transparent);border-radius:16px;padding:14px 18px;font-size:.88rem;max-width:90ch;margin:0}
+.imp b{color:var(--sage)}
+.guide{display:flex;flex-direction:column;gap:14px;max-width:90ch}
+.guide ul{margin:0;padding-left:20px}
+.guide li{margin:4px 0}
+.credit{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:.8rem;color:var(--muted)}
+.credit a{color:var(--muted)}
+.qh{font:700 .72rem/1 var(--sans);width:20px;height:20px;border-radius:50%;border:1.5px solid var(--line);background:var(--paper);color:var(--brown);cursor:pointer;margin-left:6px;padding:0;flex:none}
+.sheets{display:flex;flex-direction:column;gap:14px}
+.goals{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+@media (max-width:560px){.goals{grid-template-columns:1fr}}
+.goals label{display:flex;gap:10px;align-items:flex-start;background:var(--bg);border:1.5px solid var(--line);border-radius:14px;padding:9px 12px;cursor:pointer;font-size:.92rem}
+.goals input{width:18px;height:18px;accent-color:var(--sage);flex:none;margin-top:2px}
+.goals small{display:block;color:var(--muted)}
+.steps{display:flex;flex-direction:column;gap:8px}
+.steps details{background:var(--paper);border:1.5px solid var(--line);border-radius:16px;padding:10px 16px}
+.steps summary{cursor:pointer;font-weight:700;display:flex;gap:10px;align-items:baseline}
+.steps summary small{font-weight:600;color:var(--muted);margin-left:auto;text-align:right}
+.steps details p,.steps details ul{margin:8px 0 2px;font-size:.93rem}
+.steps details ul{padding-left:20px}
+</style>
+</head>
+<body>
+<style>.form input,.form select{width:100%}#rows{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px}#rows li{background:var(--bg);border:1.5px solid var(--line);border-radius:12px;padding:8px 12px;font-size:.92rem}#rows small{color:var(--muted)}</style>
+<div class="wrap">
+  <header>
+    <p style="margin:0 0 14px"><a class="jump" href="https://svoiludi.ch/instrumenty/">← Все полезные инструменты · Свои люди в Швейцарии</a></p>
+    <div class="eyebrow">Правила дома · соседи</div>
+    <h1>Журнал шума для управляющей</h1>
+    <p class="lead">Шумят соседи — управляющая поможет, только если увидит записи: когда, сколько длилось, что было слышно и кто ещё слышал. Записывай каждый раз прямо в телефоне — получишь аккуратную таблицу на языке кантона с подписью. Пустой журнал можно распечатать и заполнять от руки. PDF бесплатно.</p>
+    <div class="privnote"><b>Твои данные только у тебя.</b> Записи хранятся только в твоём браузере на этом устройстве. Сделай резервную копию, если ведёшь журнал долго. Регистрация не нужна.</div>
+    <div data-fan="zhurnal-shuma"></div>
+  </header>
+  <div class="setup">
+    <div class="fl"><span class="lb">Язык журнала<button type="button" class="qh" data-help="lang" aria-label="Подсказка: язык журнала" aria-expanded="false">?</button></span><select id="lang"><option value="de">Deutsch</option><option value="fr">Français</option><option value="it">Italiano</option></select></div>
+    <div class="fl"><span class="lb">Печать</span><p class="hint" style="margin:0">Журнал и так чёрно-белый — для любой печати.</p></div>
+  </div>
+  <div class="exbar" id="exbar" hidden><span>Это пример. Так будет выглядеть твой журнал.</span><button type="button" class="btn sm" id="exOff">Вернуться к моим данным</button></div>
+  <div class="work">
+    <div class="form">
+      <section class="sec" id="addBox"><h2>Новая запись<button type="button" class="qh" data-help="log" aria-label="Подсказка: как записывать" aria-expanded="false">?</button></h2>
+        <div class="g2">
+          <div class="fl"><span class="lb">Дата</span><input type="date" id="date"></div>
+          <div class="fl"><span class="lb">Что было слышно</span><select id="kind"></select></div>
+          <div class="fl"><span class="lb">С (время)</span><input type="time" id="from"></div>
+          <div class="fl"><span class="lb">До (время)</span><input type="time" id="to"></div>
+          <div class="fl"><span class="lb">Откуда<button type="button" class="qh" data-help="src" aria-label="Подсказка: откуда" aria-expanded="false">?</button></span><input type="text" id="src" placeholder="Wohnung 4. OG links"></div>
+          <div class="fl"><span class="lb">Свидетели<button type="button" class="qh" data-help="wit" aria-label="Подсказка: свидетели" aria-expanded="false">?</button></span><input type="text" id="wit" placeholder="Andrii Kovalenko"></div>
+        </div>
+        <div class="fl"><span class="lb">Подробно (лучше на языке журнала)</span><input type="text" id="note" placeholder="Laute Musik, Kinder sind aufgewacht"></div>
+        <button type="button" class="btn gold" id="add">Добавить запись</button>
+      </section>
+      <section class="sec"><h2>Мои записи</h2><ul id="rows"></ul></section>
+      <section class="sec"><h2>Для шапки журнала</h2><div class="g2">
+        <div class="fl"><span class="lb">Имя и фамилия</span><input type="text" id="me" placeholder="Olena Kovalenko"></div>
+        <div class="fl"><span class="lb">Адрес</span><input type="text" id="addr" placeholder="Seestrasse 10, 8002 Zürich"></div>
+        <div class="fl"><span class="lb">Квартира (этаж, номер)</span><input type="text" id="obj" placeholder="3. OG links"></div>
+        <div class="fl"><span class="lb">Управляющая</span><input type="text" id="vm" placeholder="Muster Immobilien AG"></div>
+      </div></section>
+    </div>
+    <div class="sheetbox">
+      <div class="acts"><button type="button" class="btn gold" id="pdf">Скачать PDF</button><button type="button" class="btn ghost sm" id="share" hidden>Отправить</button><button type="button" class="btn ghost sm" id="exOn">Посмотреть на примере</button></div>
+      <div class="sheets" id="sheet" aria-label="Предпросмотр листов"></div>
+      <div class="status" id="status" role="status"></div>
+    </div>
+  </div>
+  <p class="imp"><b>Как использовать.</b> Сначала поговори с соседом. Не помогло — отправь журнал управляющей письмом, лучше заказным (Einschreiben), и сохрани копию и квитанцию. Ночью и при угрозе звони в полицию, 117. Если шум мешает постоянно, это может быть дефект квартиры — письмо поможет сделать «<a href="https://svoiludi.ch/instrumenty/pisma-arenda/">Письма управляющей</a>». Мы не юристы — в споре помогут союз арендаторов и примирительный орган. Подробно — в теме <a href="https://svoiludi.ch/shveycariya/pravila-doma/">«Тишина, прачечная и правила дома»</a>.</p>
+  <div class="share-slot" data-url="https://svoiludi.ch/instrumenty/zhurnal-shuma/" data-lead="Перешли тому, у кого шумные соседи. В ссылке нет твоих данных." data-text="Привет! Тут можно бесплатно вести журнал шума соседей и получить таблицу для управляющей на немецком или французском. https://svoiludi.ch/instrumenty/zhurnal-shuma/"></div>
+  <p class="credit"><span>Свои люди в Швейцарии · svoiludi.ch</span><a href="https://svoiludi.ch/privacy/">Политика конфиденциальности</a></p>
+</div>
+
+<script src="/assets/kantony.js"></script>
+<script src="/assets/lib/jspdf.umd.min.js"></script>
+<script src="/assets/shema.js"></script>
+<script>
+window.HELP = {
+  lang: '<p>Журнал отправляют управляющей на языке кантона. Заголовки и виды шума переводятся сами, а описание пиши сразу на языке управляющей или коротко — по-русски получится только для тебя.</p>',
+  src: '<p>Откуда шум: номер квартиры, этаж или «квартира надо мной». Не пиши догадки о соседях — только то, что слышишь.</p>',
+  wit: '<p>Кто ещё слышал: член семьи, другой сосед. Свидетели делают журнал сильнее.</p>',
+  log: '<p>Записывай каждый раз сразу: дату, время с и до, что именно было слышно. Управляющая и примирительный орган верят записям, сделанным в тот же день, больше, чем общим словам «шумят постоянно».</p>'
+};
+const KEY = 'zhurnalShuma.v1';
+const KINDS = {music: ['Громкая музыка', 'laute Musik', 'musique forte', 'musica alta'], party: ['Вечеринка, гости', 'Party, Gäste', 'fête, invités', 'festa, ospiti'], voices: ['Крики, ссора', 'Schreien, Streit', 'cris, dispute', 'urla, litigio'], steps: ['Топот, удары', 'Trampeln, Schläge', 'pas lourds, coups', 'calpestio, colpi'], tools: ['Ремонт, сверление', 'Bohren, Bauarbeiten', 'perceuse, travaux', 'trapano, lavori'], dog: ['Лай собаки', 'Hundegebell', 'aboiements', 'abbaiare'], wash: ['Стирка, техника ночью', 'Waschmaschine nachts', 'machine la nuit', 'lavatrice di notte'], other: ['Другое', 'Anderes', 'autre', 'altro']};
+const LI = {de: 1, fr: 2, it: 3};
+const HD = {de: ['Lärmprotokoll', 'Wohnung', 'Mieterin / Mieter', 'Verwaltung', 'Datum', 'Von–bis', 'Art des Lärms', 'Quelle', 'Zeugen', 'Bemerkungen', 'Ich bestätige, dass die Angaben der Wahrheit entsprechen.', 'Ort, Datum', 'Unterschrift', 'Einträge'],
+  fr: ['Journal du bruit', 'Logement', 'Locataire', 'Gérance', 'Date', 'De–à', 'Type de bruit', 'Source', 'Témoins', 'Remarques', 'Je confirme que ces indications sont conformes à la vérité.', 'Lieu, date', 'Signature', 'entrées'],
+  it: ['Protocollo del rumore', 'Appartamento', 'Inquilina / inquilino', 'Amministrazione', 'Data', 'Dalle–alle', 'Tipo di rumore', 'Fonte', 'Testimoni', 'Osservazioni', 'Confermo che le indicazioni corrispondono al vero.', 'Luogo, data', 'Firma', 'voci']};
+const today = () => { const t = new Date(); return t.getFullYear() + '-' + String(t.getMonth() + 1).padStart(2, '0') + '-' + String(t.getDate()).padStart(2, '0'); };
+function langOf(k){ const K = window.KANTONY || {}; return k && K[k] ? ({de: 'de', fr: 'fr', it: 'it'}[K[k].l] || 'de') : 'de'; }
+function blank(){ let k = ''; try { k = localStorage.getItem('svoiludi.kanton') || ''; } catch (e) {} return {lang: langOf(k), me: '', addr: '', obj: '', vm: '', rows: []}; }
+let S = load(), EX = null;
+function load(){ try { const s = JSON.parse(localStorage.getItem(KEY)); if (s && typeof s === 'object') return Object.assign(blank(), s); } catch (e) {} return blank(); }
+function save(){ if (EX) return; try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} }
+const D = () => EX || S;
+const dmy = s => { const [y, m, d] = String(s || '').split('-'); return d ? `${d}.${m}.${y}` : ''; };
+const nz = (s, p) => String(s || '').trim() || p;
+/* лист: документ от своего имени, поэтому без водяного знака (как письма) */
+function sheets(d){
+  const L = d.lang, H = HD[L], li = LI[L], C = SH.pal(true), X = 14, W = 269, ink = '#000000', mut = '#555555', pages = [];
+  const cols = [[H[4], 24], [H[5], 24], [H[6], 46], [H[7], 42], [H[8], 40], [H[9], W - 176]];
+  let P, y;
+  const np = () => { P = SH.page(297, 210, C); P.wm = false; P.credit = false; pages.push(P); y = 16;
+    P.text(H[0], X, y, 16, true, ink); y += 7;
+    P.text(H[2] + ': ' + nz(d.me, '______________') + (d.addr ? ', ' + d.addr : ''), X, y, 8.6, false, ink); P.text(H[3] + ': ' + nz(d.vm, '______________'), X + W, y, 8.6, false, ink, 'right'); y += 4.6;
+    P.text(H[1] + ': ' + nz(d.obj, '______________'), X, y, 8.6, false, ink); y += 6;
+    let x = X; P.line(X, y + 1.5, X + W, y + 1.5, '#000000', 0.4); cols.forEach(c => { P.text(c[0], x + 1, y, 8, true, ink); x += c[1]; }); y += 6; };
+  np();
+  const rows = (d.rows || []).slice().sort((a, b) => (a.date + a.from).localeCompare(b.date + b.from));
+  const list = rows.length ? rows : Array.from({length: 12}, () => ({}));
+  list.forEach(r => {
+    const vals = [dmy(r.date), r.from ? r.from + (r.to ? '–' + r.to : '') : '', r.kind ? KINDS[r.kind][li] : '', r.src || '', r.wit || '', r.note || ''];
+    const wr = vals.map((v, i) => SH.wrap(v, false, 8.2, cols[i][1] - 2)), h = Math.max(7, Math.max(1, ...wr.map(w => w.length)) * 3.7 + 3);
+    if (y + h > 178) np();
+    let x = X; wr.forEach((ls, i) => { ls.forEach((l, j) => P.text(l, x + 1, y + 3.6 + j * 3.7, 8.2, false, ink)); x += cols[i][1]; });
+    y += h; P.line(X, y, X + W, y, '#999999', 0.2);
+  });
+  pages.forEach((p, i) => {
+    p.text(H[10], X, 186, 8.4, false, ink);
+    p.line(X, 198, X + 80, 198, '#888888', 0.3); p.text(H[11], X, 202, 7.4, false, mut);
+    p.line(X + 110, 198, X + 200, 198, '#888888', 0.3); p.text(H[12] + (d.me ? ' ' + d.me : ''), X + 110, 202, 7.4, false, mut);
+    p.text((rows.length ? rows.length + ' ' + H[13] + ' · ' : '') + (i + 1) + ' / ' + pages.length, X + W, 202, 7, false, mut, 'right');
+  });
+  return pages;
+}
+function build(){ return sheets(D()); }
+const $ = id => document.getElementById(id);
+const esc = s => SH.esc(String(s == null ? '' : s));
+let UI;
+function list(){
+  const d = D(), rows = (d.rows || []).slice().sort((a, b) => (b.date + b.from).localeCompare(a.date + a.from));
+  $('rows').innerHTML = rows.length ? rows.map(r => `<li><b>${dmy(r.date)} ${esc(r.from)}${r.to ? '–' + esc(r.to) : ''}</b> · ${esc(KINDS[r.kind] ? KINDS[r.kind][0] : '')}${r.src ? ' · ' + esc(r.src) : ''}${r.note ? '<br><small>' + esc(r.note) + '</small>' : ''}${EX ? '' : ` <button type="button" class="btn ghost sm" data-del="${r.id}">Удалить</button>`}</li>`).join('') : '<li class="hint">Записей пока нет. Пустой журнал можно распечатать и заполнять от руки.</li>';
+}
+function fill(){ const d = D(); $('lang').value = d.lang; ['me', 'addr', 'obj', 'vm'].forEach(k => { $(k).value = d[k]; $(k).disabled = !!EX; }); $('addBox').hidden = !!EX; list(); $('exbar').hidden = !EX; $('exOn').hidden = !!EX; if (UI) UI.render(); }
+$('kind').innerHTML = Object.entries(KINDS).map(([k, v]) => `<option value="${k}">${v[0]}</option>`).join('');
+$('date').value = today();
+$('lang').addEventListener('change', e => { S.lang = e.target.value; if (EX) EX.lang = S.lang; save(); fill(); });
+['me', 'addr', 'obj', 'vm'].forEach(k => $(k).addEventListener('input', e => { if (EX) return; S[k] = e.target.value; save(); clearTimeout(window._t); window._t = setTimeout(() => UI && UI.render(), 400); }));
+$('add').addEventListener('click', () => {
+  if (EX) return; const r = {id: Date.now().toString(36), date: $('date').value || today(), from: $('from').value, to: $('to').value, kind: $('kind').value, src: $('src').value.trim(), wit: $('wit').value.trim(), note: $('note').value.trim()};
+  if (!r.from) { $('from').focus(); return; }
+  S.rows.push(r); save(); ['from', 'to', 'note'].forEach(k => $(k).value = ''); fill(); UI && UI.say('Запись добавлена.');
+});
+$('rows').addEventListener('click', e => { const b = e.target.closest('[data-del]'); if (!b || EX) return; S.rows = S.rows.filter(r => r.id !== b.dataset.del); save(); fill(); });
+const EXD = () => ({lang: 'de', me: 'Olena Kovalenko', addr: 'Seestrasse 10, 8002 Zürich', obj: '3. OG links', vm: 'Muster Immobilien AG', rows: [
+  {id: 'a', date: '2026-09-12', from: '23:40', to: '02:15', kind: 'party', src: 'Wohnung 4. OG links', wit: 'Andrii Kovalenko', note: 'Laute Musik und Stimmen, Bass im Schlafzimmer deutlich hörbar'},
+  {id: 'b', date: '2026-09-19', from: '00:30', to: '03:00', kind: 'music', src: 'Wohnung 4. OG links', wit: 'Andrii Kovalenko', note: 'Kinder sind aufgewacht'},
+  {id: 'c', date: '2026-09-21', from: '07:05', to: '08:00', kind: 'tools', src: 'Wohnung 4. OG links', wit: '', note: 'Bohren am Sonntag'},
+  {id: 'd', date: '2026-09-26', from: '23:15', to: '01:40', kind: 'party', src: 'Wohnung 4. OG links', wit: 'Nachbarin 3. OG rechts', note: 'Persönlich angesprochen um 23:30, keine Änderung'}]});
+$('exOn').addEventListener('click', () => { EX = EXD(); fill(); window.scrollTo({top: $('exbar').offsetTop - 12, behavior: 'smooth'}); });
+$('exOff').addEventListener('click', () => { EX = null; fill(); });
+if (/[?&]example\b/.test(location.search)) EX = EXD();
+UI = SH.mount({build, lang: () => D().lang, title: 'Lärmprotokoll', name: () => ({de: 'Laermprotokoll', fr: 'Journal-du-bruit', it: 'Protocollo-rumore'}[D().lang])});
+fill();
+
+</script>
+<script src="/assets/help.js"></script>
+<script src="/assets/backup.js"></script>
+<script src="/assets/pdffan.js" defer></script>
+<script src="/assets/share.js" defer></script>
+<script src="/assets/samesite.js"></script>
+</body>
+</html>

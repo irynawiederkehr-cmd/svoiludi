@@ -2885,7 +2885,7 @@ ARTICLES['dogovor-arendy'] = dict(
         'Уезжаешь — расторгай письменно за 3 месяца к местной дате или найди нового жильца.',
     ],
     pomosh=dict(ids=['mv', 'asloca', 'asi', 'schlicht', 'casafair'], k='mv,miet,adv', t='Почти все споры по аренде решаются через союз арендаторов и бесплатный примирительный орган — без суда.'),
-    tools={'pereezd-spisok': 'Уезжаешь — список дел с датами: расторжение, уборка, сдача, залог, община.', 'pisma-arenda': 'Снижение аренды, дефект, расторжение и залог — письмо на языке кантона с русским переводом, отправляй заказным.', 'moj-budget': 'Nebenkosten, доплата за год, страховки и аренда — все расходы на жильё в одном бюджете.', 'kuda-obratitsya': 'Союз арендаторов твоего кантона: взнос, телефон и когда помогут.'},
+    tools={'zhurnal-shuma': 'Шум как дефект квартиры — сначала журнал шума, потом письмо управляющей.', 'pereezd-spisok': 'Уезжаешь — список дел с датами: расторжение, уборка, сдача, залог, община.', 'pisma-arenda': 'Снижение аренды, дефект, расторжение и залог — письмо на языке кантона с русским переводом, отправляй заказным.', 'moj-budget': 'Nebenkosten, доплата за год, страховки и аренда — все расходы на жильё в одном бюджете.', 'kuda-obratitsya': 'Союз арендаторов твоего кантона: взнос, телефон и когда помогут.'},
     related=['arenda', 'profsoyuzy', 'strahovki', 'betreibung'],
     sources=[
         ('BWO — референтная процентная ставка', 'https://www.bwo.admin.ch/de/referenzzinssatz'),
@@ -3683,4 +3683,333 @@ ARTICLES['vereine'] = dict(
         ('Гражданский кодекс (ZGB), ст. 60 и далее — ферайн', 'https://www.fedlex.admin.ch/eli/cc/24/233_245_233/de'),
     ],
     terms=[('Deutsch', 'Verein, Vereinsmitglied, Mitgliederbeitrag, Statuten, Generalversammlung, Vorstand, Schnuppertraining, Turnverein, Elternverein, Freiwilligenarbeit, Freiwillige, Jugend+Sport'), ('Français', 'association, membre, cotisation, statuts, assemblée générale, comité, entraînement d’essai, société de gymnastique, association de parents, bénévolat, bénévole, Jeunesse+Sport'), ('Italiano', 'associazione, socio, quota sociale, statuto, assemblea generale, comitato, allenamento di prova, volontariato, volontario, Gioventù+Sport'), ('English', 'club, association, membership fee, statutes, general meeting, board, trial session, volunteering, volunteer')],
+)
+
+
+# ===== Правила дома, мусор, животные, горы (08.10.2026). Факты сверены 08.10.2026: ch.ch, город и кантон Цюрих, Mieterverband, Swiss Recycle, OBV (литтеринг), BLV, Rega, BFU, SAC, SLF, BAG, BAZL, Beobachter.
+ARTICLES['pravila-doma'] = dict(
+    h1='Тишина, прачечная и правила дома: <em>как жить с соседями в Швейцарии</em>',
+    seo='Правила дома в Швейцарии: ночная тишина (Nachtruhe), прачечная, Hausordnung, шум',
+    desc='Правила дома в Швейцарии простыми словами на русском: ночная тишина с 22:00 и тишина в обед и по воскресеньям (Nachtruhe, Mittagsruhe, Sonntagsruhe), что пишут в правилах дома (Hausordnung), общая прачечная и график стирки (Waschküche), музыка и дети, гриль на балконе, миф о запрете смывать ночью, что делать, если шумят соседи: разговор, письмо управляющей, журнал шума, полиция. По-немецки Nachtruhe, Hausordnung, Waschküche, Lärm, по-французски repos nocturne, règlement de maison, buanderie, по-итальянски quiete notturna, regolamento della casa, lavanderia.',
+    lead='Швейцарцы ценят тишину и порядок, и в многоквартирном доме это чувствуется сразу. Правил меньше, чем кажется, и многие «запреты» — мифы. Здесь — что действительно нужно соблюдать и как решать конфликты с соседями.',
+    body='''
+<nav class="toc" aria-label="Содержание"><b>В этой статье</b>
+<ul>
+  <li><a href="#tishina">Когда нужна тишина</a></li>
+  <li><a href="#hausordnung">Правила дома (Hausordnung)</a></li>
+  <li><a href="#prachechnaya">Общая прачечная</a></li>
+  <li><a href="#muzyka">Музыка, дети, гриль</a></li>
+  <li><a href="#mify">Мифы</a></li>
+  <li><a href="#shum">Если шумят соседи</a></li>
+</ul></nav>
+
+<h2 id="tishina">Когда нужна тишина</h2>
+<ul class="ul">
+  <li>Единого закона на всю Швейцарию нет: время тишины устанавливает полицейский регламент общины, детали — правила дома.</li>
+  <li><b>Ночная тишина (Nachtruhe)</b> — во многих местах <b>с 22:00 до 6:00</b> или до 7:00. Во многих общинах ещё <b>обеденная тишина</b> с 12:00 до 13:00 и тишина в <b>воскресенье и праздники</b> (<a href="https://www.ch.ch/de/wohnen/miete/larm--mangel--mietzins/">ch.ch</a>).</li>
+  <li><b>Пример Цюриха:</b> ночью с 22:00 до 7:00, летом в пятницу и субботу с 23:00. В обед с 12:00 до 13:00 и вечером с 20:00 — потише. В воскресенье и праздники — тишина весь день (<a href="https://www.stadt-zuerich.ch/de/stadtleben/zusammenleben/oeffentlicher-raum/nachbarschaft-nachtleben/was-ist-erlaubt.html">город Цюрих</a>).</li>
+  <li>Стекло в контейнеры не бросают вечером и в воскресенье, газон не косят и не сверлят в воскресенье.</li>
+  <li>Время тишины твоей общины — в её регламенте (Polizeireglement) на сайте общины, правила твоего дома — в Hausordnung.</li>
+</ul>
+
+<h2 id="hausordnung">Правила дома (Hausordnung)</h2>
+<ul class="ul">
+  <li>Правила дома обязательны, если ты получила их вместе с договором аренды. Попроси копию, если её нет.</li>
+  <li>Правила должны быть разумными: запрещать что-то «просто так» нельзя (<a href="https://www.mieterverband.ch/mietrecht/waehrend-der-miete/nachbarschaft-hausordnung/tipps/">Mieterverband</a>).</li>
+  <li>Обычно там: время тишины, график прачечной, уборка лестницы, где ставить велосипеды и коляски, мусор, гриль.</li>
+  <li>Если постоянно нарушать правила дома после письменного предупреждения, управляющая может расторгнуть договор досрочно.</li>
+</ul>
+
+<h2 id="prachechnaya">Общая прачечная (Waschküche)</h2>
+<ul class="ul">
+  <li>Во многих домах одна стиральная машина и сушилка на весь дом. Стирают по <b>графику</b> (Waschplan) или по записи — в табличке, приложении, ключом.</li>
+  <li>Свою одежду стирать можно, сколько нужно. Стирать постоянно и много для чужих людей — нельзя.</li>
+  <li>Правила хорошего тона: вовремя забирай бельё, после себя чисти фильтр и протирай машину, не стирай в чужое время без спроса, оставь сушилку свободной.</li>
+  <li>Своя стиральная машина в квартире — только с разрешения управляющей.</li>
+</ul>
+
+<h2 id="muzyka">Музыка, дети, гриль</h2>
+<ul class="ul">
+  <li><b>Музыка:</b> полный запрет играть на инструменте недействителен. Обычно принимают 2–3 часа в день вне времени тишины, но не барабаны и трубу. После 22:00 — только тихо.</li>
+  <li><b>Дети:</b> обычный детский шум соседи должны терпеть.</li>
+  <li><b>Гриль на балконе:</b> полностью запретить нельзя, но правила дома могут ограничить угольный гриль. Электрический и газовый обычно можно. Подумай о дыме для соседей.</li>
+</ul>
+
+<h2 id="mify">Мифы</h2>
+<ul class="ul">
+  <li><b>«Ночью нельзя смывать унитаз».</b> Неправда — такого запрета нет (<a href="https://www.blick.ch/schweiz/was-ist-am-mythos-dran-deutsche-denken-in-der-schweiz-herrsche-spuel-verbot-in-der-nacht-id18236059.html">Blick</a>).</li>
+  <li><b>«После 22:00 нельзя принимать душ».</b> Короткий душ можно, даже если в правилах дома написано иначе. Набирать ванну посреди ночи — уже слишком.</li>
+  <li><b>«В воскресенье нельзя стирать».</b> Зависит от правил твоего дома — проверь Hausordnung.</li>
+</ul>
+
+<h2 id="shum">Если шумят соседи</h2>
+<ol class="ol">
+  <li><b>Поговори</b> спокойно — часто сосед просто не знает, что его слышно.</li>
+  <li><b>Веди журнал шума</b>: дата, время, сколько длилось, что именно, кто ещё слышал. Без записей управляющей трудно помочь. Удобно — «Журнал шума для управляющей».</li>
+  <li><b>Напиши управляющей</b> — письменно, лучше заказным, приложи журнал.</li>
+  <li>Ночью и в серьёзных случаях — <b>полиция, 117</b>.</li>
+  <li>Если шум мешает жить постоянно (например, долгая стройка) — это может быть дефект квартиры: можно требовать устранения и снижения аренды, а через 30 дней без ответа — примирительный орган. Письмо поможет сделать «Письма управляющей». Подробно — в теме «Договор аренды и ловушки».</li>
+</ol>
+''',
+    steps=[
+        'Найди время тишины своей общины и прочитай правила своего дома.',
+        'Узнай график прачечной и убирай за собой фильтр и машину.',
+        'Шумят соседи — сначала поговори, потом веди журнал шума.',
+        'Не помогло — письмо управляющей заказным с журналом шума.',
+        'Ночью и при угрозе — полиция 117.',
+    ],
+    pomosh=dict(ids=['mv', 'schlicht', 'gemeinde'], t='В спорах с соседями и управляющей помогут союз арендаторов и бесплатный примирительный орган.'),
+    tools={'zhurnal-shuma': 'Шумят соседи — записывай каждый раз и отправь управляющей таблицу на языке кантона.', },
+    related=['dogovor-arendy', 'arenda', 'musor', 'gemeinde'],
+    sources=[
+        ('ch.ch — шум, дефекты и аренда', 'https://www.ch.ch/de/wohnen/miete/larm--mangel--mietzins/'),
+        ('Город Цюрих — что разрешено (тишина)', 'https://www.stadt-zuerich.ch/de/stadtleben/zusammenleben/oeffentlicher-raum/nachbarschaft-nachtleben/was-ist-erlaubt.html'),
+        ('Город Цюрих — бытовой шум', 'https://www.stadt-zuerich.ch/de/gesundheit/gesundheitsschutz/laerm/alltagslaerm.html'),
+        ('Mieterverband — соседи и правила дома', 'https://www.mieterverband.ch/mietrecht/waehrend-der-miete/nachbarschaft-hausordnung/tipps/'),
+        ('Blick — миф о запрете смывать ночью, 17.01.2023', 'https://www.blick.ch/schweiz/was-ist-am-mythos-dran-deutsche-denken-in-der-schweiz-herrsche-spuel-verbot-in-der-nacht-id18236059.html'),
+    ],
+    terms=[('Deutsch', 'Nachtruhe, Mittagsruhe, Sonntagsruhe, Ruhezeiten, Polizeireglement, Hausordnung, Waschküche, Waschplan, Lärm, Lärmprotokoll, Liegenschaftsverwaltung, Nachbarn'), ('Français', 'repos nocturne, pause de midi, repos dominical, règlement de police, règlement de maison, buanderie, planning de lessive, bruit, journal du bruit, gérance, voisins'), ('Italiano', 'quiete notturna, pausa di mezzogiorno, riposo domenicale, regolamento di polizia, regolamento della casa, lavanderia, rumore, amministrazione, vicini'), ('English', 'quiet hours, house rules, laundry room, laundry schedule, noise, noise log, property management, neighbours')],
+    post='Это жалоба управляющей на шум с журналом шума.',
+)
+
+ARTICLES['musor'] = dict(
+    h1='Мусор и сортировка в Швейцарии: <em>платные мешки, что куда сдавать и штрафы</em>',
+    seo='Мусор в Швейцарии: платный мешок (Gebührensack), сортировка, PET, стекло, штрафы',
+    desc='Мусор в Швейцарии простыми словами на русском: почему мусор выбрасывают только в платных мешках (Gebührensack, Züri-Sack), что сдают отдельно и бесплатно: PET, стекло по цветам, алюминий и жесть, бумага и картон, батарейки, электроника, зелёные отходы, текстиль; где узнать дни вывоза; штрафы за мусор не там — по всей Швейцарии с 1 августа 2026 от 80 франков. По-немецки Abfall, Kehricht, Recycling, Sammelstelle, по-французски déchets, sac taxé, tri, déchetterie, по-итальянски rifiuti, sacco tassato, raccolta differenziata.',
+    lead='В Швейцарии мусор — это почти наука: обычный мусор — только в платный мешок, остальное — в разные пункты сбора. Зато многое сдаётся бесплатно, а за мешок не в том месте могут оштрафовать. Здесь — как разобраться за один вечер.',
+    body='''
+<nav class="toc" aria-label="Содержание"><b>В этой статье</b>
+<ul>
+  <li><a href="#meshok">Платный мешок</a></li>
+  <li><a href="#sort">Что куда сдавать</a></li>
+  <li><a href="#vyvoz">Дни вывоза и пункты сбора</a></li>
+  <li><a href="#shtraf">Штрафы</a></li>
+</ul></nav>
+
+<h2 id="meshok">Платный мешок (Gebührensack)</h2>
+<ul class="ul">
+  <li>За вывоз мусора платит тот, кто его производит — так велит закон (<a href="https://www.fedlex.admin.ch/eli/cc/1984/1122_1122_1122/de#art_32_a">закон об охране окружающей среды, ст. 32a</a>). Поэтому в большинстве общин обычный мусор выбрасывают <b>только в официальных платных мешках</b> или с наклейкой (марка, Vignette).</li>
+  <li>Мешок покупают в супермаркете своего города или региона. В Цюрихе — синий <b>Züri-Sack</b> размером 10, 17, 35, 60 или 110 литров (<a href="https://www.stadt-zuerich.ch/de/umwelt-und-energie/entsorgung/zueri-sack.html">город Цюрих</a>). Мешок соседней общины может не подойти.</li>
+  <li>Часть стоимости вывоза платят ещё и через базовый сбор — он часто входит в дополнительные расходы за квартиру (Nebenkosten).</li>
+  <li>Чем больше сортируешь — тем меньше платных мешков нужно.</li>
+</ul>
+
+<h2 id="sort">Что куда сдавать</h2>
+<p>По <a href="https://swissrecycle.ch/de/wertstoffe-wissen/faq">Swiss Recycle</a> (правила в каждой общине немного свои):</p>
+<ul class="ul">
+  <li><b>PET</b> — только бутылки от напитков со знаком PET-Recycling, в магазин. Бутылки от масла, уксуса и моющих средств — в мусор.</li>
+  <li><b>Стекло</b> — по цветам: зелёное, белое, коричневое; другие цвета — к зелёному. Без крышек. Зеркала, оконное стекло и посуда — не сюда. Вечером и в воскресенье не бросать — шумно.</li>
+  <li><b>Алюминий и жесть</b> — вместе. Кофейные капсулы — отдельно, в магазин своей марки. Баллончики и банки из-под краски — опасные отходы, даже пустые.</li>
+  <li><b>Бумага и картон</b> — чистые, обычно связанные шнуром или в отдельный день. Грязный картон и коробки от напитков — в мусор.</li>
+  <li><b>Батарейки</b> — бесплатно в любом магазине, где их продают.</li>
+  <li><b>Электроника</b> — бесплатно в магазин, который продаёт такие же вещи, даже если купила не там. В мусор — запрещено.</li>
+  <li><b>Зелёные отходы</b> — в компост или зелёный контейнер общины. Без варёной еды, мяса, костей и кошачьего наполнителя.</li>
+  <li><b>Одежда и обувь</b> — чистые, в завязанном мешке в контейнер для текстиля.</li>
+  <li><b>Крупный мусор</b> (Sperrgut) — мебель и большие вещи: в пункт сбора общины или в день вывоза, часто платно.</li>
+</ul>
+
+<h2 id="vyvoz">Дни вывоза и пункты сбора</h2>
+<ul class="ul">
+  <li>Дни вывоза мусора, бумаги и зелёных отходов — в <b>календаре вывоза</b> (Abfallkalender) на сайте общины или в её приложении. Многие общины присылают его в почтовый ящик в конце года.</li>
+  <li>Мешки выставляют утром в день вывоза, в Цюрихе — до 7:00, не накануне вечером: ночью их разрывают лисы.</li>
+  <li>Пункт сбора (Sammelstelle, Recyclinghof, déchetterie) — где сдают всё сразу. Адрес и часы — на сайте общины.</li>
+  <li>Внеси дни вывоза в «Годовой календарь дел и сроков» — так не пропустишь бумагу и картон.</li>
+</ul>
+
+<h2 id="shtraf">Штрафы</h2>
+<ul class="ul">
+  <li>С 1 августа 2026 года штрафы за мусор не там (литтеринг) одинаковые по всей Швейцарии: <b>80 франков</b> за мелочь (окурок, банка), 100 — за несколько мелочей, 150 — за мешок до 35 литров, 250 — за мешок до 110 литров. Больше — уголовное дело (<a href="https://www.sz.ch/public/upload/assets/93393/Schweizweit_einheitliche_Littering-Busse.pdf?fp=2">кантон Швиц</a>).</li>
+  <li>Мусор в неправильном мешке или не в тот день — штраф общины, её «мусорная полиция» иногда ищет хозяина по содержимому.</li>
+</ul>
+''',
+    steps=[
+        'Купи официальные платные мешки своей общины в ближайшем супермаркете.',
+        'Скачай календарь вывоза и найди ближайший пункт сбора.',
+        'Поставь дома отдельные пакеты: PET, стекло, алюминий, бумага, батарейки.',
+        'Электронику и батарейки сдавай бесплатно в магазин.',
+        'Мешок выставляй утром в день вывоза, не накануне.',
+    ],
+    tools={'moj-god': 'Дни вывоза бумаги, картона и зелёных отходов — в календаре на год.'},
+    related=['gemeinde', 'pravila-doma', 'skrytye-rashody'],
+    sources=[
+        ('Swiss Recycle — вопросы и ответы о сортировке', 'https://swissrecycle.ch/de/wertstoffe-wissen/faq'),
+        ('Город Цюрих — Züri-Sack', 'https://www.stadt-zuerich.ch/de/umwelt-und-energie/entsorgung/zueri-sack.html'),
+        ('Город Цюрих — вывоз мусора', 'https://www.stadt-zuerich.ch/de/umwelt-und-energie/entsorgung/wo-und-wann-entsorgen/abfuhr-hauskehricht.html'),
+        ('Кантон Швиц — единые штрафы за литтеринг с 01.08.2026', 'https://www.sz.ch/public/upload/assets/93393/Schweizweit_einheitliche_Littering-Busse.pdf?fp=2'),
+        ('Закон об охране окружающей среды, ст. 32a', 'https://www.fedlex.admin.ch/eli/cc/1984/1122_1122_1122/de#art_32_a'),
+    ],
+    terms=[('Deutsch', 'Abfall, Kehricht, Gebührensack, Grundgebühr, Abfallkalender, Sammelstelle, Recyclinghof, PET, Altglas, Alu und Weissblech, Altpapier, Karton, Grüngut, Sperrgut, Sonderabfall, Littering'), ('Français', 'déchets, ordures ménagères, sac taxé, taxe de base, calendrier des déchets, déchetterie, PET, verre, alu et fer-blanc, papier, carton, déchets verts, encombrants, déchets spéciaux, littering'), ('Italiano', 'rifiuti, sacco tassato, tassa base, calendario dei rifiuti, ecocentro, PET, vetro, alluminio e latta, carta, cartone, scarti vegetali, ingombranti, rifiuti speciali'), ('English', 'waste, bag fee, waste calendar, collection point, recycling, glass, paper, cardboard, green waste, bulky waste, hazardous waste, littering')],
+)
+
+ARTICLES['zhivotnye'] = dict(
+    h1='Собака, кошка и другие животные в Швейцарии: <em>чип, регистрация, налог и ввоз</em>',
+    seo='Собака в Швейцарии: чип и AMICUS, налог на собаку (Hundesteuer), ввоз животных из Украины',
+    desc='Животные в Швейцарии простыми словами на русском: собаке обязательны чип и регистрация в AMICUS, налог на собаку в общине, страховка ответственности, поводок, курсы для владельцев (в Цюрихе обязательны с 2025 года), запрещённые породы в некоторых кантонах; кошки; морских свинок и кроликов нельзя держать по одному; как ввезти собаку или кошку из Украины: чип, прививка от бешенства, анализ на антитела, сертификат. По-немецки Hund, Hundesteuer, AMICUS, Tierschutz, по-французски chien, taxe des chiens, protection des animaux, по-итальянски cane, tassa sui cani, protezione degli animali.',
+    lead='В Швейцарии к животным относятся серьёзно: у собаки должны быть чип, регистрация и налог, а для некоторых зверьков закон требует компанию. Здесь — что сделать, если у тебя появилось животное или ты привезла его с собой.',
+    body='''
+<nav class="toc" aria-label="Содержание"><b>В этой статье</b>
+<ul>
+  <li><a href="#sobaka">Собака: чип, регистрация, налог</a></li>
+  <li><a href="#kursy">Курсы и запрещённые породы</a></li>
+  <li><a href="#progulka">Поводок и прогулки</a></li>
+  <li><a href="#koshka">Кошки и маленькие животные</a></li>
+  <li><a href="#vvoz">Ввоз животного</a></li>
+  <li><a href="#arenda">Животное в съёмной квартире</a></li>
+</ul></nav>
+
+<h2 id="sobaka">Собака: чип, регистрация, налог</h2>
+<ul class="ul">
+  <li><b>Чип и AMICUS.</b> Каждой собаке ветеринар ставит микрочип и регистрирует её в базе <a href="https://www.amicus.ch">AMICUS</a>. Привезла собаку из-за границы — в течение 10 дней к швейцарскому ветеринару (<a href="https://www.blv.admin.ch/blv/de/home/tiere/tierschutz/heim-und-wildtierhaltung/hunde.html">BLV</a>).</li>
+  <li><b>Регистрация в общине</b> — обычно в течение 10 дней. Переезд и смена адреса — тоже через общину.</li>
+  <li><b>Налог на собаку</b> (Hundesteuer) — каждый год в общине. В кантоне Цюрих — от 70 до 200 франков в зависимости от общины (<a href="https://www.zh.ch/de/umwelt-tiere/tiere/haustiere-heimtiere/hunde.html">кантон Цюрих</a>).</li>
+  <li><b>Страховка ответственности</b> — во многих кантонах обязательна, в Цюрихе — минимум на 1 миллион франков. Часто она уже входит в частную страховку ответственности — проверь полис.</li>
+  <li>Собаке нужна ежедневная прогулка на улице — это закон о защите животных.</li>
+</ul>
+
+<h2 id="kursy">Курсы и запрещённые породы</h2>
+<ul class="ul">
+  <li>Обязательного курса для владельцев собак по всей Швейцарии нет с 2017 года, но <b>кантоны могут ввести свои</b>.</li>
+  <li><b>Кантон Цюрих</b> с 1 июня 2025 года: теоретический курс для тех, у кого ещё не было собаки или не было больше 10 лет, и <b>практический курс для всех</b> — 6 уроков у тренера с разрешением ветеринарной службы, в течение 12 месяцев.</li>
+  <li><b>Запрещённые и ограниченные породы</b> — тоже решают кантоны. В Цюрихе нельзя заводить, например, питбуля, американского стаффордширского терьера, бультерьера, а с 2025 года — ротвейлера (<a href="https://www.zh.ch/de/umwelt-tiere/tiere/haustiere-heimtiere/hunde/verbotene-hunderassen.html">кантон Цюрих</a>). Ограничения есть и в Женеве, Вале и других кантонах.</li>
+  <li>Перед тем как завести собаку или переехать с ней в другой кантон, проверь правила ветеринарной службы (Veterinäramt) этого кантона.</li>
+</ul>
+
+<h2 id="progulka">Поводок и прогулки</h2>
+<ul class="ul">
+  <li>Правила поводка — кантона и общины. Обычно на поводке: в транспорте, на вокзале, на оживлённых улицах, в общественных зданиях.</li>
+  <li><b>В лесу и на краю леса весной</b> — во многих кантонах на поводке, в Цюрихе с 1 апреля по 31 июля: время выведения детёнышей у диких животных.</li>
+  <li>На кладбища, в бассейны, на школьные дворы и спортплощадки собакам обычно нельзя.</li>
+  <li>Убирай за собакой: пакеты (Robidog) почти на каждом углу.</li>
+</ul>
+
+<h2 id="koshka">Кошки и маленькие животные</h2>
+<ul class="ul">
+  <li>Для кошек чип и регистрация пока добровольны, но очень советуют: так потерявшаяся кошка вернётся домой.</li>
+  <li><b>Морских свинок нельзя держать по одной</b> — минимум вдвоём, кролик или человек компанией не считаются (<a href="https://www.blv.admin.ch/blv/de/home/tiere/tierschutz/heim-und-wildtierhaltung/meerschweinchen.html">BLV</a>). Кроликов тоже нельзя держать одних.</li>
+  <li>Попугаев, рыб, птиц и других животных — тоже по правилам о минимальном месте и компании. Проверь на сайте BLV перед покупкой.</li>
+</ul>
+
+<h2 id="vvoz">Ввоз животного</h2>
+<ul class="ul">
+  <li><b>Из ЕС</b> — паспорт животного ЕС, чип, действующая прививка от бешенства.</li>
+  <li><b>Из Украины</b> — облегчённые правила закончились 1 августа 2023 года. Нужны: чип, прививка от бешенства после чипа, <b>анализ на антитела</b> к бешенству в признанной ЕС лаборатории — не раньше чем через 30 дней после прививки и не позже чем за 3 месяца до въезда, ветеринарный сертификат государственного органа, декларация на таможне. Не выполнено — карантин за счёт владельца (<a href="https://www.gr.ch:443/DE/institutionen/verwaltung/djsg/afm/ukraine/info/Documents/Merkblatt%20Tiere%20Ukraine_DE_01.08.2023.pdf">памятка, 2023</a>).</li>
+  <li>Из других стран правила похожие, а иногда строже. Перед поездкой проверь актуальные правила на сайте ветеринарной службы <a href="https://www.blv.admin.ch">BLV</a> — они меняются.</li>
+</ul>
+
+<h2 id="arenda">Животное в съёмной квартире</h2>
+<ul class="ul">
+  <li>Маленьких животных в клетке и аквариуме (хомяк, рыбки) обычно можно без спроса.</li>
+  <li>Собаку и кошку — как написано в договоре. Часто нужно разрешение управляющей — спроси письменно до того, как заведёшь.</li>
+  <li>Ущерб от животного в квартире платишь ты — проверь страховку ответственности.</li>
+</ul>
+''',
+    steps=[
+        'Новая собака — к ветеринару за чипом и регистрацией в AMICUS, потом в общину в течение 10 дней.',
+        'Проверь, нужен ли в твоём кантоне курс для владельцев и не запрещена ли порода.',
+        'Проверь, покрывает ли твоя страховка ответственности ущерб от животного.',
+        'Снимаешь квартиру — спроси разрешение на собаку или кошку письменно.',
+        'Ввозишь животное — сделай анализ на антитела к бешенству заранее, за 3 месяца.',
+    ],
+    tools={},
+    related=['strahovki', 'gemeinde', 'tamozhnya', 'dogovor-arendy'],
+    sources=[
+        ('BLV — собаки', 'https://www.blv.admin.ch/blv/de/home/tiere/tierschutz/heim-und-wildtierhaltung/hunde.html'),
+        ('Кантон Цюрих — собаки (курсы, налог, страховка)', 'https://www.zh.ch/de/umwelt-tiere/tiere/haustiere-heimtiere/hunde.html'),
+        ('Кантон Цюрих — запрещённые породы', 'https://www.zh.ch/de/umwelt-tiere/tiere/haustiere-heimtiere/hunde/verbotene-hunderassen.html'),
+        ('Город Цюрих — собаки в городе', 'https://www.stadt-zuerich.ch/de/umwelt-und-energie/natur/tiere-in-der-stadt/hunde.html'),
+        ('BLV — морские свинки', 'https://www.blv.admin.ch/blv/de/home/tiere/tierschutz/heim-und-wildtierhaltung/meerschweinchen.html'),
+        ('Кантон Граубюнден — животные из Украины, 01.08.2023', 'https://www.gr.ch:443/DE/institutionen/verwaltung/djsg/afm/ukraine/info/Documents/Merkblatt%20Tiere%20Ukraine_DE_01.08.2023.pdf'),
+        ('Парламент — решение о чипах для кошек, 06.05.2025', 'https://www.parlament.ch/de/services/news/Seiten/2025/20250506131548476194158159026_bsd103.aspx'),
+    ],
+    terms=[('Deutsch', 'Hund, Hundehalter, Mikrochip, AMICUS, Hundesteuer, Hundekontrolle, Tierhalterhaftpflicht, Leinenpflicht, Hundekurs, Rassetypenliste, Veterinäramt, Tierarzt, Tollwutimpfung, Tollwut-Antikörpertest, Tierschutzverordnung'), ('Français', 'chien, puce électronique, taxe des chiens, responsabilité civile du détenteur, obligation de tenir en laisse, cours pour chiens, races interdites, service vétérinaire, vaccination contre la rage, titrage des anticorps, protection des animaux'), ('Italiano', 'cane, microchip, tassa sui cani, responsabilità civile del detentore, obbligo del guinzaglio, corso per cani, razze vietate, ufficio veterinario, vaccinazione antirabbica, protezione degli animali'), ('English', 'dog, microchip, dog tax, liability insurance, leash rules, dog training course, restricted breeds, veterinary office, rabies vaccination, rabies antibody test, animal welfare')],
+)
+
+ARTICLES['priroda'] = dict(
+    h1='Горы и хайкинг в Швейцарии: <em>как ходить без риска и кто спасает</em>',
+    seo='Хайкинг в Швейцарии: разметка троп, Rega 1414, клещи, погода и безопасность в горах',
+    desc='Горы и хайкинг в Швейцарии простыми словами на русском: что значат жёлтые, бело-красно-белые и бело-сине-белые указатели и шкала SAC T1–T6, как спланировать поход и время, что взять, номер спасателей Rega 1414 и приложение Rega, взнос Rega 40 франков, лавины и погода (SLF, MeteoSwiss), клещи и прививка от клещевого энцефалита, ночёвка в палатке, дроны. По-немецки Wandern, Bergwanderweg, Rega, Zecken, по-французски randonnée, sentier de montagne, tique, по-итальянски escursionismo, sentiero di montagna, zecca.',
+    lead='Горы — лучшее, что есть в Швейцарии, и самое частое место несчастных случаев: каждый год на пеших маршрутах гибнет около 50 человек. Почти всегда — из-за переоценки сил и маршрута. Здесь — как выбирать тропу, что взять и кому звонить.',
+    body='''
+<nav class="toc" aria-label="Содержание"><b>В этой статье</b>
+<ul>
+  <li><a href="#tropy">Цвет указателя = сложность</a></li>
+  <li><a href="#plan">Как спланировать поход</a></li>
+  <li><a href="#vzyat">Что взять</a></li>
+  <li><a href="#rega">Если что-то случилось</a></li>
+  <li><a href="#pogoda">Погода и лавины</a></li>
+  <li><a href="#kleshchi">Клещи</a></li>
+  <li><a href="#palatka">Палатка и дроны</a></li>
+</ul></nav>
+
+<h2 id="tropy">Цвет указателя = сложность</h2>
+<ul class="ul">
+  <li><b>Жёлтый указатель</b> (Wanderweg) — обычная тропа, подходит почти всем, в обычной обуви для прогулок.</li>
+  <li><b>Бело-красно-белая метка</b> (Bergwanderweg) — горная тропа: крутые, узкие участки, иногда цепи. Нужны уверенный шаг, хорошая форма, отсутствие страха высоты и треккинговые ботинки.</li>
+  <li><b>Бело-сине-белая метка</b> (Alpinwanderweg) — альпийская тропа: часто без тропы, через ледники и скалы. Только с опытом и снаряжением (<a href="https://swisshiking.ch/de/media/download/c815d6322c8c63151de17d244ad861228f1900da">Schweizer Wanderwege</a>).</li>
+  <li>В описаниях маршрутов сложность пишут по шкале Альпийского клуба <b>SAC: T1–T6</b>. T1 — лёгкая прогулка, T2–T3 — горная тропа, с T4 — альпийская (<a href="https://www.sac-cas.ch/fileadmin/Ausbildung_und_Sicherheit/Tourenplanung/Alpinmerkbl%C3%A4tter/20230601_SAC-Wanderskala_D.pdf">SAC</a>).</li>
+  <li>Розовые указатели — зимние тропы.</li>
+</ul>
+
+<h2 id="plan">Как спланировать поход</h2>
+<ul class="ul">
+  <li><b>Время:</b> на подъёме — 15 минут на каждые 100 м высоты плюс 15 минут на километр; на спуске — 15 минут на 200 м плюс 15 минут на километр. Время на указателях — для тренированных людей без остановок (<a href="https://www.bfu.ch/de/ratgeber/wandern-bergwandern">BFU</a>).</li>
+  <li>Посмотри маршрут в приложении <a href="https://www.swisstopo.admin.ch/de/swisstopo-app">swisstopo</a> и скачай карту офлайн — в горах часто нет связи.</li>
+  <li>Проверь, работают ли канатные дороги и последний автобус или поезд обратно.</li>
+  <li><b>Скажи кому-нибудь</b>, куда идёшь и когда вернёшься, особенно если идёшь одна. Удобно оставить близким «План похода: маршрут и время возвращения для близких».</li>
+  <li>Погода портится, устала или стало страшно — <b>разворачивайся</b>. Это не поражение.</li>
+</ul>
+
+<h2 id="vzyat">Что взять</h2>
+<p>Прочные ботинки с хорошей подошвой, одежду слоями и куртку от дождя и ветра (наверху холоднее на 6 градусов на каждые 1000 м), шапку, солнечные очки и крем, достаточно воды и еды, маленькую аптечку и спасательное одеяло, заряженный телефон и запасной аккумулятор, карту офлайн.</p>
+
+<h2 id="rega">Если что-то случилось</h2>
+<ul class="ul">
+  <li><b>Rega (вертолёт): 1414</b>, из-за границы +41 333 333 333. <b>Общий номер: 112</b> — если не дозвониться до Rega. Скорая: 144, полиция: 117.</li>
+  <li><b>Приложение Rega</b> — тревога одной кнопкой, приложение само передаёт твои координаты. Установи его до похода.</li>
+  <li><b>Взнос Rega</b> (Gönner) — 40 франков в год за взрослого, дети бесплатно. Это пожертвование, а не страховка, но если твоя страховка не покроет спасение (вертолёт стоит тысячи франков), Rega может не выставлять тебе счёт (<a href="https://www.rega.ch/en/rega-patron/become-a-patron">Rega</a>).</li>
+  <li>Проверь, покрывает ли спасение и поиск твоя медстраховка или страховка от несчастных случаев — суммы часто ограничены.</li>
+  <li>Все экстренные номера и дежурного врача на одной карточке — в «Карточка экстренных номеров и дежурного врача».</li>
+</ul>
+
+<h2 id="pogoda">Погода и лавины</h2>
+<ul class="ul">
+  <li>Погода в горах меняется быстро. Смотри прогноз и предупреждения в приложении <a href="https://www.meteoswiss.admin.ch/services-and-publications/service/weather-and-climate-products/meteoswiss-app.html">MeteoSwiss</a>. Летом после обеда часто бывают грозы — выходи рано.</li>
+  <li>Зимой и весной вне трасс — лавинный бюллетень <a href="https://slf.ch/en/avalanches/avalanche-warning.html">SLF</a> и приложение White Risk. Без знаний и снаряжения — только по открытым трассам и зимним тропам.</li>
+</ul>
+
+<h2 id="kleshchi">Клещи</h2>
+<ul class="ul">
+  <li>Клещи живут в траве и кустах почти по всей Швейцарии, с весны до осени. Длинные брюки, средство от клещей, после прогулки — осмотреть себя и детей.</li>
+  <li><b>Прививку от клещевого энцефалита (FSME)</b> рекомендуют взрослым и детям с 3 лет во всей Швейцарии, кроме Тичино. Три укола, потом раз в 10 лет. Её оплачивает базовая медстраховка (<a href="https://www.bag.admin.ch/de/fruehsommer-meningoenzephalitis-fsme">BAG</a>).</li>
+  <li>Клеща удаляй сразу. Покраснение вокруг укуса в следующие недели — к врачу (боррелиоз).</li>
+</ul>
+
+<h2 id="palatka">Палатка и дроны</h2>
+<ul class="ul">
+  <li><b>Палатка в природе</b> — правила кантона и общины. Почти везде запрещено в заповедниках, национальном парке и зонах покоя дичи. Выше границы леса на одну ночь часто терпят, в Аппенцелле Иннерроден и Юре запрещено везде. Штраф — от нескольких сотен франков. Проверь правила кантона (<a href="https://www.beobachter.ch/arbeit-bildung/freizeit/hier-ist-wildcamping-erlaubt-die-grosse-ubersicht-624417">Beobachter</a>).</li>
+  <li><b>Дрон</b> — по правилам, как в ЕС: регистрация, курс пилота, в прямой видимости, не над людьми, не у аэродромов и в заповедниках. Перед полётом проверь карту ограничений <a href="https://www.bazl.admin.ch/de/drohnen">BAZL</a>.</li>
+</ul>
+''',
+    steps=[
+        'Выбирай тропу по цвету указателя и шкале SAC, начинай с жёлтых и T1–T2.',
+        'Установи приложения Rega, MeteoSwiss и swisstopo с офлайн-картой.',
+        'Оставь близким план похода и время возвращения.',
+        'Оплати взнос Rega и проверь, что твоя страховка покрывает спасение.',
+        'Сделай прививку от клещевого энцефалита себе и детям с 3 лет.',
+    ],
+    tools={'plan-pohoda': 'Оставь близким маршрут, время возвращения и номера Rega — на русском и языке кантона.', 'ekstrennye-nomera': 'Rega 1414, 112, 144 и дежурный врач — на карточке в рюкзак.'},
+    tabs={'events': 'Походы и прогулки с группой на русском и украинском — во встречах рядом с тобой.'},
+    related=['bolezn-travma', 'strahovki', 'dop-strahovanie', 'vereine'],
+    sources=[
+        ('Schweizer Wanderwege — сигнализация троп', 'https://swisshiking.ch/de/media/download/c815d6322c8c63151de17d244ad861228f1900da'),
+        ('SAC — шкала сложности T1–T6, 01.06.2023', 'https://www.sac-cas.ch/fileadmin/Ausbildung_und_Sicherheit/Tourenplanung/Alpinmerkbl%C3%A4tter/20230601_SAC-Wanderskala_D.pdf'),
+        ('BFU — хайкинг и горные походы', 'https://www.bfu.ch/de/ratgeber/wandern-bergwandern'),
+        ('Rega — вопросы и ответы', 'https://www.rega.ch/en/questions-and-answers'),
+        ('Rega — стать донором (Gönner)', 'https://www.rega.ch/en/rega-patron/become-a-patron'),
+        ('SLF — лавинный бюллетень', 'https://slf.ch/en/avalanches/avalanche-warning.html'),
+        ('BAG — клещевой энцефалит (FSME)', 'https://www.bag.admin.ch/de/fruehsommer-meningoenzephalitis-fsme'),
+        ('Beobachter — где можно ставить палатку', 'https://www.beobachter.ch/arbeit-bildung/freizeit/hier-ist-wildcamping-erlaubt-die-grosse-ubersicht-624417'),
+        ('BAZL — дроны', 'https://www.bazl.admin.ch/de/drohnen'),
+    ],
+    terms=[('Deutsch', 'Wandern, Wanderweg, Bergwanderweg, Alpinwanderweg, Wegweiser, SAC-Wanderskala, Rega, Gönnerbeitrag, Notruf, Lawinenbulletin, Wetterwarnung, Zecken, FSME-Impfung, Wildcampen, Wildruhezone, Drohne'), ('Français', 'randonnée, chemin de randonnée, chemin de randonnée de montagne, sentier alpin, échelle SAC, REGA, donateur, bulletin d’avalanches, alerte météo, tiques, vaccination contre l’encéphalite à tiques, camping sauvage, zone de tranquillité, drone'), ('Italiano', 'escursionismo, sentiero escursionistico, sentiero di montagna, sentiero alpino, scala SAC, Rega, sostenitore, bollettino delle valanghe, allerta meteo, zecche, vaccinazione TBE, campeggio libero, zona di tranquillità, drone'), ('English', 'hiking, hiking trail, mountain trail, alpine trail, SAC scale, Rega patron, avalanche bulletin, weather warning, ticks, tick-borne encephalitis vaccination, wild camping, wildlife rest area, drone')],
 )
