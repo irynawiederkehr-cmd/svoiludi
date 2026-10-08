@@ -13,18 +13,34 @@
     let help = [];
     try { help = JSON.parse(box.dataset.help || '[]'); } catch (e) {}
     const all = (window.SPECIALISTS || []).filter(visible);
-    const hit = all.filter(s => help.some(([cat, specs]) => s.cat === cat && (!specs.length || (s.specs || []).some(x => specs.includes(x)))));
-    hit.sort((a, b) => (a.sample ? 1 : 0) - (b.sample ? 1 : 0));
-    const list = box.querySelector('.sp-list');
-    if (!hit.length) {
+    /* сначала точное совпадение по специализации темы, потом та же категория; настоящие раньше образцов.
+       Внутри — случайный порядок при каждом открытии, чтобы все специалисты по теме показывались по очереди.
+       Порядок по пакетам (VIP и т. п.) решим позже, пока у всех одинаково (08.10.2026). */
+    const shuffle = a => { for (let i = a.length - 1; i > 0; i--){ const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+    const exact = s => help.some(([cat, specs]) => s.cat === cat && (!specs.length || (s.specs || []).some(x => specs.includes(x))));
+    const near = s => help.some(([cat]) => s.cat === cat);
+    const tierOf = s => (exact(s) ? 0 : 2) + (s.sample ? 1 : 0);
+    const hit = all.filter(s => exact(s) || near(s));
+    const groups = [0, 1, 2, 3].map(t => shuffle(hit.filter(s => tierOf(s) === t)));
+    const order = [].concat(...groups);
+    const list = box.querySelector('.sp-list'), N = 3;
+    const card = s => {
+      const p = (s.places || [])[0];
+      const where = s.online && !p ? 'онлайн' : p ? city(p.address) : '';
+      return '<a class="sp" href="' + root + '#' + encodeURIComponent(s.id) + '"><img src="' + root + 'img/' + esc(s.photo) + '" alt="" loading="lazy">' +
+        '<span><b>' + esc(s.name) + (s.sample ? '<span class="smp">Образец</span>' : '') + '</b><small>' + esc(s.role) + (where ? ' · ' + esc(where) : '') + '</small></span></a>';
+    };
+    if (!order.length) {
       list.innerHTML = '<p class="sp-none">Пока в справочнике нет специалиста по этой теме. Знаешь хорошего — <a href="' + root + 'join/">расскажи ему о «Своих людях»</a>.</p>';
     } else {
-      list.innerHTML = hit.slice(0, 6).map(s => {
-        const p = (s.places || [])[0];
-        const where = s.online && !p ? 'онлайн' : p ? city(p.address) : '';
-        return '<a class="sp" href="' + root + '#' + encodeURIComponent(s.id) + '"><img src="' + root + 'img/' + esc(s.photo) + '" alt="" loading="lazy">' +
-          '<span><b>' + esc(s.name) + (s.sample ? '<span class="smp">Образец</span>' : '') + '</b><small>' + esc(s.role) + (where ? ' · ' + esc(where) : '') + '</small></span></a>';
-      }).join('');
+      let from = 0;
+      const draw = () => {
+        const part = order.slice(from, from + N); if (part.length < N && order.length > N) part.push(...order.slice(0, N - part.length));
+        list.innerHTML = '<p class="sp-cnt">' + (order.length === 1 ? 'По этой теме 1 специалист' : 'По этой теме ' + order.length + ' ' + (order.length < 5 ? 'специалиста' : 'специалистов')) + '</p>' + part.map(card).join('') +
+          (order.length > N ? '<button type="button" class="sp-next">Показать других →</button>' : '');
+        const nb = list.querySelector('.sp-next'); if (nb) nb.onclick = () => { from = (from + N) % order.length; draw(); };
+      };
+      draw();
     }
   }
 
