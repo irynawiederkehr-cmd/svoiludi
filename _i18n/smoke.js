@@ -5,7 +5,8 @@ const { chromium } = require('playwright');
 const { spawn } = require('child_process');
 const path = require('path');
 const ROOT = path.resolve(__dirname, '..'); const PORT = 8898; const BASE = `http://localhost:${PORT}`;
-const PAGES = ['/', '/events/', '/kursy/', '/join/', '/opros/', '/badge/', '/instrumenty/', '/instrumenty/moj-den/', '/instrumenty/moj-god/', '/instrumenty/moi-emocii/', '/instrumenty/moj-budget/', '/instrumenty/uchet-vremeni/', '/instrumenty/chasy-po-klientam/', '/instrumenty/zarplata/', '/privacy/'];
+const PAGES = ['/', '/events/', '/kursy/', '/join/', '/opros/', '/badge/', '/instrumenty/', '/instrumenty/moj-den/', '/instrumenty/moj-god/', '/instrumenty/moi-emocii/', '/instrumenty/moj-budget/', '/instrumenty/uchet-vremeni/', '/instrumenty/chasy-po-klientam/', '/instrumenty/zarplata/', '/privacy/', '/instrumenty/rezyume/'];
+const OWN = /^\/(events|kursy|join|opros|badge|instrumenty)?\/?/;
 (async () => {
   const srv = spawn('python3', ['-m', 'http.server', String(PORT)], { cwd: ROOT, stdio: 'ignore' });
   await new Promise(r => setTimeout(r, 1200));

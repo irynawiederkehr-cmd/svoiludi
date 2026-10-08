@@ -16,7 +16,8 @@ PAGES = [('index.html', '/'), ('events/index.html', '/events/'), ('kursy/index.h
          ('instrumenty/moj-budget/index.html', '/instrumenty/moj-budget/'),
          ('instrumenty/uchet-vremeni/index.html', '/instrumenty/uchet-vremeni/'), ('privacy/index.html', '/privacy/'),
          ('instrumenty/chasy-po-klientam/index.html', '/instrumenty/chasy-po-klientam/'),
-         ('instrumenty/zarplata/index.html', '/instrumenty/zarplata/')]
+         ('instrumenty/zarplata/index.html', '/instrumenty/zarplata/'),
+         ('instrumenty/rezyume/index.html', '/instrumenty/rezyume/')]
 OWN = sorted({p for _, p in PAGES}, key=len, reverse=True)
 CODE_WORDS = ['ВСТРЕЧА', 'ОТЗЫВ', 'ЗАЯВКА', 'РАССЫЛКА', 'ПОРЯДОК']
 
