@@ -132,6 +132,7 @@ def article(t):
   <div class="art">
     <article class="art-main">
       {a['body']}
+      {('<section class="terms" aria-labelledby="terms-h"><h2 id="terms-h">Как это называется в твоём кантоне</h2><p>В письмах и на сайтах ведомств ищи эти слова.</p><dl>' + ''.join(f'<div><dt>{l}</dt><dd lang="{ {"Deutsch":"de","Français":"fr","Italiano":"it","English":"en"}[l] }">{w}</dd></div>' for l, w in a['terms']) + '</dl></section>') if a.get('terms') else ''}
       <section class="todo" aria-labelledby="todo-h"><h2 id="todo-h">Что сделать</h2><ol>{steps}</ol></section>
     </article>
     <aside class="side" aria-label="Что поможет">

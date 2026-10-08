@@ -151,3 +151,26 @@ ARTICLES['betreibung'] = dict(
         ('Schuldenberatung Schweiz — бесплатные консультации по долгам', 'https://www.schulden.ch/'),
     ],
 )
+
+# Как это называется на языках кантонов (решение Ирины 08.10.2026: люди ищут и по-немецки, и по-французски, и по-итальянски, и по-английски)
+ARTICLES['permit-b']['terms'] = [
+    ('Deutsch', 'Aufenthaltsbewilligung B, Ausweis B'),
+    ('Français', 'permis B, autorisation de séjour'),
+    ('Italiano', 'permesso B, permesso di dimora'),
+    ('English', 'B permit, residence permit'),
+]
+ARTICLES['nalogovaya-deklaraciya']['terms'] = [
+    ('Deutsch', 'Quellensteuer, Steuererklärung, nachträgliche ordentliche Veranlagung (NOV)'),
+    ('Français', 'impôt à la source, déclaration d’impôt, taxation ordinaire ultérieure (TOU)'),
+    ('Italiano', 'imposta alla fonte, dichiarazione d’imposta, tassazione ordinaria ulteriore (TOU)'),
+    ('English', 'withholding tax, tax return'),
+]
+ARTICLES['betreibung']['terms'] = [
+    ('Deutsch', 'Betreibung, Zahlungsbefehl, Rechtsvorschlag, Betreibungsauszug, Betreibungsamt'),
+    ('Français', 'poursuites, commandement de payer, opposition, extrait du registre des poursuites, office des poursuites'),
+    ('Italiano', 'esecuzione, precetto esecutivo, opposizione, estratto del registro delle esecuzioni, ufficio di esecuzione'),
+    ('English', 'debt collection, payment order'),
+]
+ARTICLES['permit-b']['desc'] += ' По-французски permis B, по-итальянски permesso B.'
+ARTICLES['nalogovaya-deklaraciya']['desc'] += ' По-французски impôt à la source, по-итальянски imposta alla fonte.'
+ARTICLES['betreibung']['desc'] += ' По-французски poursuites и commandement de payer, по-итальянски esecuzione.'
