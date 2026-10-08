@@ -73,6 +73,38 @@
     });
   }
 
+
+  /* «Где помогут в твоём кантоне» (08.10.2026): союз арендаторов, справочная адвокатов, бесплатные справки по работе и аренде. Данные — assets/pomosh.js */
+  const pmk = document.querySelectorAll('.pmk');
+  if (pmk.length && window.POMOSH && window.KANTONY) {
+    const K = window.KANTONY, P = window.POMOSH.kant, KEY = 'svoiludi.kanton';
+    const e2 = s => String(s).replace(/[&<>"]/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'}[c]));
+    const T = {mv: 'Союз арендаторов', adv: 'Справочная адвокатов', arb: 'Бесплатно по трудовому праву', miet: 'Бесплатно по аренде', x: 'Ещё'};
+    let cur = ''; try { cur = localStorage.getItem(KEY) || ''; } catch (e) {}
+    const opts = '<option value="">Выбери свой кантон</option>' + Object.keys(K).sort((a, b) => K[a].n.localeCompare(K[b].n, 'ru')).map(k => '<option value="' + k + '">' + e2(K[k].n) + '</option>').join('');
+    const row = (k, v) => {
+      if (!v) return '';
+      if (k === 'mv') return '<div class="pmk-r"><b>' + T.mv + ' · ' + e2(v[0]) + '</b><p><span class="pmk-fee">' + e2(v[1]) + '.</span> ' + e2(v[2]) + '</p><a href="' + e2(v[3]) + '" target="_blank" rel="noopener">Вступить или узнать больше ↗</a></div>';
+      return '<div class="pmk-r"><b>' + T[k] + '</b><p>' + e2(v[0]) + '</p><a href="' + e2(v[1]) + '" target="_blank" rel="noopener">Источник ↗</a></div>';
+    };
+    const draw = box => {
+      const k = box.querySelector('select').value, out = box.querySelector('.pmk-out'), keys = (box.dataset.k || 'mv,adv,arb,miet').split(',').concat('x');
+      if (!k || !P[k]) { out.innerHTML = '<p class="kt-hint">Выбери кантон — и здесь появятся союз арендаторов с его взносом, справочная адвокатов и бесплатные справки по работе и аренде.</p>'; return; }
+      const html = keys.map(x => row(x, P[k][x])).join('');
+      out.innerHTML = (html || '<p class="kt-hint">Для этого кантона пока нет данных.</p>') + '<p class="kt-hint">Проверено ' + e2(window.POMOSH.checked) + '. Часы и цены меняются — перед визитом загляни на сайт.</p>';
+    };
+    pmk.forEach(box => {
+      box.innerHTML = '<div class="kt-h"><b>Где помогут в твоём кантоне</b><select aria-label="Твой кантон">' + opts + '</select></div><div class="pmk-out"></div>';
+      const sel = box.querySelector('select'); sel.value = cur; draw(box);
+      sel.addEventListener('change', () => { cur = sel.value; try { localStorage.setItem(KEY, cur); } catch (e) {} document.querySelectorAll('.pmk, .kt').forEach(b => { const s = b.querySelector('select'); if (s) { s.value = cur; s.dispatchEvent(new Event('sync')); } }); pmk.forEach(draw); });
+    });
+  }
+
+
+  /* ссылка на организацию (#org-…) сразу раскрывает её карточку */
+  const openOrg = () => { const h = location.hash; if (/^#org-/.test(h)) { const d = document.getElementById(h.slice(1)); if (d && d.tagName === 'DETAILS') { d.open = true; d.scrollIntoView({block: 'start'}); } } };
+  window.addEventListener('hashchange', openOrg); openOrg();
+
   const med = document.querySelectorAll('.med');
   if (med.length && window.KANTONY && window.KANTONY_MED) {
     const K = window.KANTONY, M = window.KANTONY_MED, KEY = 'svoiludi.kanton';

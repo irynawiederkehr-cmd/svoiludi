@@ -45,6 +45,13 @@ for m in re.finditer(r'<article class="tool(?! soon)[^"]*">(.*?)</article>', ih,
     if h and u and os.path.isfile(u.group(1).strip('/') + '/index.html'):
         items.append({'g': 'Инструменты', 't': strip(h.group(1)), 'u': u.group(1), 'd': strip(p.group(1) if p else '')[:150], 'k': lis})
 
+
+# Организации из темы «Профсоюзы и консультации» (Unia, Mieterverband, Beobachter…) — ведут прямо к карточке организации
+import pomosh as PM
+if any(tp['slug'] == 'profsoyuzy' and tp['ready'] for tp in TOPICS):
+    for o in PM.ORGS:
+        items.append({'g': 'Кто поможет', 't': o['name'], 'u': f"/shveycariya/profsoyuzy/#org-{o['id']}", 'd': o['short'], 'k': ' '.join([o['who'], o['help'], PM.AREAS[o['area']], 'профсоюз консультация юрист взнос членство'])})
+
 os.makedirs('data', exist_ok=True)
 out = '/* Индекс поиска по сайту — собирается _i18n/build_search.py, руками не править. */\nwindow.SVL_SEARCH = ' + json.dumps(items, ensure_ascii=False, separators=(',', ':')) + ';\n'
 open('data/search.js', 'w', encoding='utf-8').write(out)

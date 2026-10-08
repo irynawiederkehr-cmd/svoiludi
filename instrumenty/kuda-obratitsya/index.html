@@ -104,13 +104,14 @@ select:focus-visible,input:focus-visible,button:focus-visible,textarea:focus-vis
     <p style="margin:0 0 14px"><a class="jump" href="https://svoiludi.ch/instrumenty/">← Все полезные инструменты · Свои люди в Швейцарии</a></p>
     <div class="eyebrow">Список · консультации</div>
     <h1>Куда обратиться за помощью</h1>
-    <p class="lead">Профсоюзы и организации, где за небольшой взнос ты получаешь консультации и защиту: работа, аренда, покупки, страховки. И места, где помогают бесплатно без всякого членства. Отметь свои организации — получишь лист с местом для номера членства и телефона. PDF и PNG бесплатно.</p>
+    <p class="lead">Профсоюзы и организации, где за небольшой взнос ты получаешь консультации и защиту: работа, аренда, покупки, страховки. У каждой — взнос и через сколько после вступления помогут. Выбери кантон — первым листом будут союз арендаторов, справочная адвокатов и бесплатные справки по работе и аренде. И места, где помогают бесплатно без всякого членства. Отметь свои организации — получишь лист с местом для номера членства и телефона. PDF и PNG бесплатно.</p>
     <div class="privnote"><b>Твои данные только у тебя.</b> Отметки хранятся только в твоём браузере на этом устройстве. Регистрация не нужна.</div>
     <div data-fan="kuda-obratitsya"></div>
   </header>
   <div class="setup">
     <div class="fl"><span class="lb">Язык листов<button type="button" class="qh" data-help="lang" aria-label="Подсказка: язык листов" aria-expanded="false">?</button></span><select id="lang"><option value="de">Русский + немецкий</option><option value="fr">Русский + французский</option><option value="it">Русский + итальянский</option><option value="ru">Только русский</option></select></div>
-    <div class="fl"><span class="lb">Что в PDF</span><div class="chk"><label><input type="checkbox" id="p1" checked> С членством</label><label><input type="checkbox" id="p2" checked> Бесплатно</label><label><input type="checkbox" id="p3" checked> Как пользоваться</label><label><input type="checkbox" id="p4" checked> Мои организации</label></div></div>
+    <div class="fl"><span class="lb">Твой кантон<button type="button" class="qh" data-help="kt" aria-label="Подсказка: кантон" aria-expanded="false">?</button></span><select id="kt"></select></div>
+    <div class="fl"><span class="lb">Что в PDF</span><div class="chk"><label><input type="checkbox" id="p0" checked> Мой кантон</label><label><input type="checkbox" id="p1" checked> С членством</label><label><input type="checkbox" id="p2" checked> Бесплатно</label><label><input type="checkbox" id="p3" checked> Как пользоваться</label><label><input type="checkbox" id="p4" checked> Мои организации</label></div></div>
     <div class="fl"><span class="lb">Печать</span><label class="tog"><input type="checkbox" id="bw"> Без цвета, для дешёвой печати</label></div>
   </div>
   <div class="exbar" id="exbar" hidden><span>Это пример. Так будет выглядеть твой файл.</span><button type="button" class="btn sm" id="exOff">Вернуться к моим данным</button></div>
@@ -136,7 +137,7 @@ select:focus-visible,input:focus-visible,button:focus-visible,textarea:focus-vis
       <div class="status" id="status" role="status"></div>
     </div>
   </div>
-  <p class="imp"><b>Важно.</b> Это справочник для личного использования. Условия, взносы и сроки ожидания у организаций свои и меняются — проверяй на их сайтах. Список не полный: в твоей отрасли может быть свой профессиональный союз. «Свои люди» не связаны с этими организациями и не получают от них денег.</p>
+  <p class="imp"><b>Важно.</b> Данные с сайтов организаций, проверено 08.10.2026. Подробно о каждой — в теме <a href="https://svoiludi.ch/shveycariya/profsoyuzy/">«Профсоюзы и консультации»</a>. Это справочник для личного использования. Условия, взносы и сроки ожидания у организаций свои и меняются — проверяй на их сайтах. Список не полный: в твоей отрасли может быть свой профессиональный союз. «Свои люди» не связаны с этими организациями и не получают от них денег.</p>
   <div class="share-slot" data-url="https://svoiludi.ch/instrumenty/kuda-obratitsya/" data-lead="Перешли тем, кому может понадобиться консультация. Сообщение уже готово." data-text="Привет! Тут список, куда в Швейцарии обратиться за консультацией: профсоюзы, союзы арендаторов, защита покупателей и где помогают бесплатно. Можно отметить свои организации и скачать PDF. https://svoiludi.ch/instrumenty/kuda-obratitsya/"></div>
   <p class="credit"><span>Свои люди в Швейцарии · svoiludi.ch</span><a href="https://svoiludi.ch/privacy/">Политика конфиденциальности</a></p>
 </div>
@@ -144,61 +145,43 @@ select:focus-visible,input:focus-visible,button:focus-visible,textarea:focus-vis
 <script src="/assets/kantony.js"></script>
 <script src="/assets/lib/jspdf.umd.min.js"></script>
 <script src="/assets/shema.js"></script>
+<script src="/assets/pomosh.js"></script>
 <script>
 window.HELP = {
   lang: '<p><b>Русский + немецкий</b> (французский, итальянский) — подзаголовки ещё и на языке твоего кантона. Названия организаций всегда в оригинале, чтобы их легко найти.</p>',
   mine: '<p>Отметь организации, где ты уже член или хочешь вступить. Они попадут на лист «Мои организации» с местом для номера членства и телефона.</p>',
+  kt: '<p>Выбери кантон, где живёшь или снимаешь жильё. Первым листом будут союз арендаторов твоего кантона со взносом, справочная адвокатов с часами и ценой и бесплатные справки по работе и аренде.</p>',
   area: '<p>Выбери, какие темы показывать на первых листах. Например, если не снимаешь жильё, аренду можно убрать.</p>'
 };
 const KEY = 'kudaObratitsya.v1';
 const LOC = {
+  t0: {de: 'Hilfe in deinem Kanton', fr: 'Aide dans ton canton', it: 'Aiuto nel tuo cantone'},
   t1: {de: 'Mitgliedschaft mit Beratung', fr: 'Adhésion avec conseils', it: 'Adesione con consulenza'},
   t2: {de: 'Kostenlose Beratung ohne Mitgliedschaft', fr: 'Conseils gratuits sans adhésion', it: 'Consulenza gratuita senza adesione'},
   t3: {de: 'So nutzt du die Mitgliedschaft richtig', fr: 'Bien utiliser son adhésion', it: 'Usare bene l’adesione'},
   t4: {de: 'Meine Organisationen', fr: 'Mes organisations', it: 'Le mie organizzazioni'}
 };
-const AREAS = {work: ['Работа', 'blue'], rent: ['Аренда', 'mustard'], cons: ['Покупки и договоры', 'green'], all: ['Любые вопросы', 'sage'], health: ['Здоровье и страховки', 'pink'], money: ['Деньги и долги', 'brown'], life: ['Особые ситуации', 'red']};
-/* [id, область, название, для чего, сколько стоит / условия, сайт, членство?] */
-const ORG = [
-  ['unia', 'work', 'Unia', 'Самый большой профсоюз: стройка, промышленность, торговля, уход, сервис, гастрономия. Консультации и защита в трудовых спорах.', 'Взнос зависит от зарплаты. Защита — если член не меньше 3 месяцев к моменту проблемы.', 'unia.ch', true],
-  ['syna', 'work', 'Syna', 'Профсоюз разных отраслей (объединение Travail.Suisse).', 'Взнос зависит от зарплаты.', 'syna.ch', true],
-  ['vpod', 'work', 'VPOD / SSP', 'Государственная служба, больницы, соцсфера, школы, ясли.', 'Взнос зависит от зарплаты.', 'vpod.ch', true],
-  ['syndicom', 'work', 'syndicom', 'Почта, логистика, телеком, IT, медиа.', 'Взнос зависит от зарплаты.', 'syndicom.ch', true],
-  ['kfmv', 'work', 'Kaufmännischer Verband', 'Офис, продажи, торговля, банки: консультации по трудовому праву, курсы.', 'Взнос в год, для молодёжи дешевле.', 'kfmv.ch', true],
-  ['sgb', 'work', 'Gewerkschaftsbund (SGB)', 'Объединение профсоюзов: найти профсоюз своей отрасли.', 'Сам не принимает людей — подскажет, куда вступить.', 'sgb.ch', false],
-  ['mv', 'rent', 'Mieterinnen- und Mieterverband', 'Арендаторы в немецкой части: консультации по аренде, проверка повышения аренды и выезда.', 'Членский взнос в год. В Цюрихе представительство — через 60 дней после вступления.', 'mieterverband.ch', true],
-  ['asloca', 'rent', 'ASLOCA', 'Арендаторы во французской части.', 'Например, в регионах Во — 80 франков в год + 30 за вступление (2026); первая консультация в первые 3 месяца — 50.', 'asloca.ch', true],
-  ['schlicht', 'rent', 'Schlichtungsbehörde Miete', 'Государственная примирительная служба по аренде в твоём районе: бесплатная справка и примирение.', 'Бесплатно, членство не нужно.', 'на сайте кантона', false],
-  ['sks', 'cons', 'Stiftung für Konsumentenschutz', 'Защита прав покупателей в немецкой части: консультации, письма-образцы.', 'Бесплатно для тех, кто поддерживает фонд взносом.', 'konsumentenschutz.ch', true],
-  ['frc', 'cons', 'FRC', 'Защита прав покупателей во французской части.', 'Консультации для членов.', 'frc.ch', true],
-  ['ktipp', 'cons', 'K-Tipp, Saldo', 'Журналы о правах покупателей с консультациями.', 'Для подписчиков.', 'ktipp.ch · saldo.ch', true],
-  ['beob', 'all', 'Beobachter', 'Больше 30 юристов и экспертов: работа, аренда, семья, деньги, соседи, страховки.', 'С подпиской на полгода или год. Без подписки — одна консультация 60 франков.', 'beobachter.ch', true],
-  ['anwalt', 'all', 'Rechtsauskunft Anwaltsverband', 'Кантональные союзы адвокатов: короткая консультация 15–30 минут, обычно без записи.', 'Бесплатно или недорого.', 'sav-fsa.ch', false],
-  ['gemeinde', 'all', 'Gemeinde / Stadt', 'Многие общины проводят приёмные часы с юристом или платят консультационным центрам.', 'Первая консультация обычно бесплатно.', 'сайт твоей общины', false],
-  ['omkv', 'health', 'Ombudsstelle Krankenversicherung', 'Спор с медстраховкой: объяснит и поговорит с кассой.', 'Бесплатно (если ещё нет решения кассы).', 'om-kv.ch', false],
-  ['spo', 'health', 'SPO Patientenschutz', 'Права пациентов, ошибки лечения, счета.', 'Платно, для членов скидка.', 'spo.ch', true],
-  ['ombpv', 'health', 'Ombudsman Privatversicherung und Suva', 'Спор с частной страховой или Suva.', 'Бесплатно.', 'через beobachter.ch', false],
-  ['schulden', 'money', 'Schuldenberatung', 'Консультации по долгам: список центров в немецкой части.', 'Обычно бесплатно.', 'schulden.ch', false],
-  ['caritas', 'money', 'Caritas Schuldenberatung', 'Горячая линия по долгам по всей Швейцарии.', 'Бесплатно.', 'caritas-schuldenberatung.ch', false],
-  ['budget', 'money', 'Budgetberatung', 'Помогут составить бюджет семьи.', 'Недорого, у многих центров бесплатно.', 'budgetberatung.ch', false],
-  ['opfer', 'life', 'Opferhilfe', 'Если ты пострадала от насилия: консультации, защита, деньги на адвоката.', 'Бесплатно и конфиденциально.', 'opferhilfe-schweiz.ch', false],
-  ['prosen', 'life', 'Pro Senectute', 'Люди от 60 лет и их родные: деньги, жильё, уход, документы.', 'Консультации бесплатно.', 'на сайте кантона', false],
-  ['proinf', 'life', 'Pro Infirmis, Procap', 'Люди с инвалидностью и их семьи: соцстрахование, IV, права.', 'Pro Infirmis — бесплатно, Procap — для членов.', '', false]
-];
-const DISC = {ru: 'Справочник для личного использования. Условия и взносы организаций меняются — проверяй на их сайтах. Список не полный. svoiludi.ch', de: 'Übersicht für den persönlichen Gebrauch, ohne Gewähr. Bedingungen und Beiträge bitte bei den Organisationen prüfen.', fr: 'Aperçu pour usage personnel, sans garantie. Vérifier conditions et cotisations auprès des organisations.', it: 'Panoramica per uso personale, senza garanzia. Verificare condizioni e quote presso le organizzazioni.'};
+/* Данные организаций и кантонов — общие со статьями (assets/pomosh.js, собирается из _i18n/shveycariya_src/pomosh.py) */
+const PM = window.POMOSH || {orgs: [], kant: {}, areas: {}, checked: ''};
+const COL = {work: 'blue', care: 'pink', rent: 'mustard', cons: 'green', all: 'sage', health: 'pink', money: 'brown', biz: 'brown', car: 'blue', life: 'red'};
+const AREAS = Object.fromEntries(Object.entries(PM.areas).map(([k, n]) => [k, [n, COL[k] || 'sage']]));
+const host = u => String(u || '').replace(/^https?:\/\/(www\.)?/, '').replace(/\/.*$/, '');
+/* [id, область, название, для чего, взнос и сроки, сайт, членство?] — как раньше, чтобы остальной код не менялся */
+const ORG = PM.orgs.map(o => [o.id, o.area, o.name, o.short, 'Взнос: ' + o.fee + ' Когда помогут: ' + o.wait, host(o.url), !!o.m, o]);
+const DISC = {ru: 'Справочник для личного использования. Проверено ' + PM.checked + ', условия и взносы меняются — проверяй на сайтах организаций. Список не полный. svoiludi.ch', de: 'Übersicht für den persönlichen Gebrauch, ohne Gewähr (Stand ' + PM.checked + '). Bedingungen und Beiträge bitte bei den Organisationen prüfen.', fr: 'Aperçu pour usage personnel, sans garantie (état ' + PM.checked + '). Vérifier conditions et cotisations auprès des organisations.', it: 'Panoramica per uso personale, senza garanzia (stato ' + PM.checked + '). Verificare condizioni e quote presso le organizzazioni.'};
 let S = load(), EX = null;
-function blank(){ return {lang: 'de', bw: false, p: {1: true, 2: true, 3: true, 4: true}, mine: [], areas: Object.keys(AREAS)}; }
+function blank(){ let k = ''; try { k = localStorage.getItem('svoiludi.kanton') || ''; } catch (e) {} return {lang: 'de', bw: false, kt: k, p: {0: true, 1: true, 2: true, 3: true, 4: true}, mine: [], areas: Object.keys(AREAS)}; }
 function load(){ try { const s = JSON.parse(localStorage.getItem(KEY)); if (s && typeof s === 'object') return Object.assign(blank(), s); } catch (e) {} return blank(); }
 function save(){ if (EX) return; try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} }
 const D = () => EX || S, bi = d => d.lang !== 'ru', L = (d, k) => bi(d) ? LOC[k][d.lang] : '', disc = d => bi(d) ? DISC[d.lang] : DISC.ru;
 const site = o => o[5] && /\./.test(o[5]) && !/ /.test(o[5]) ? o[5] : o[5];
 
 function grid(P, C, list, y0, cols){
-  const c = C.c, X = 12, W = P.w - 24, g = 5, cw = (W - g * (cols - 1)) / cols, o = {bs: 8, ts: 9.8};
+  const c = C.c, X = 12, W = P.w - 24, g = 5, cw = (W - g * (cols - 1)) / cols, o = {bs: 7, ts: 9.4};
   let y = y0;
   for (let i = 0; i < list.length; i += cols) {
     const row = list.slice(i, i + cols);
-    const body = r => [r[3], r[4], r[5] ? '→ ' + r[5] : ''].filter(Boolean);
+    const body = r => [r[3], 'Взнос: ' + r[7].fee, 'Когда помогут: ' + r[7].wait, r[5] ? '→ ' + r[5] : ''].filter(Boolean);
     const h = Math.max(...row.map(r => P.card(0, 0, cw, c[AREAS[r[1]][1]], r[2], AREAS[r[1]][0], body(r), Object.assign({dry: true}, o))));
     if (y + h > P.h - 14) return {y, rest: list.slice(i)};
     row.forEach((r, k) => P.card(X + k * (cw + g), y, cw, c[AREAS[r[1]][1]], r[2], AREAS[r[1]][0], body(r), Object.assign({minH: h}, o)));
@@ -212,9 +195,26 @@ function pagesFor(d, title, sub, list){
     const C = SH.pal(d.bw), P = SH.page(297, 210, C);
     P.header(title + (n ? ' (продолжение)' : ''), sub, '');
     const r = grid(P, C, rest, 26, 3); rest = r.rest; P.foot(disc(d)); out.push(P); n++;
-    if (n > 4) break;
+    if (n > 8) break;
   }
   return out;
+}
+const KN = () => (window.KANTONY || {});
+function p0(d){
+  const k = d.kt, D0 = PM.kant[k]; if (!k || !D0) return [];
+  const C = SH.pal(d.bw), P = SH.page(297, 210, C), c = C.c, name = (KN()[k] || {}).n || k;
+  P.header('Где помогут в кантоне ' + name, L(d, 't0') + (bi(d) ? ' · ' + k : ''), '');
+  const T = [['mv', 'Союз арендаторов', c.mustard], ['adv', 'Справочная адвокатов', c.sage], ['arb', 'Бесплатно по трудовому праву', c.blue], ['miet', 'Бесплатно по аренде', c.green], ['x', 'Ещё', c.brown]];
+  const items = T.filter(t => D0[t[0]]).map(t => { const v = D0[t[0]]; return t[0] === 'mv' ? [t[2], t[1] + ' · ' + v[0], [v[1] + '.', v[2], '→ ' + host(v[3])]] : [t[2], t[1], [v[0], '→ ' + host(v[1])]]; });
+  items.push([c.red, 'Профсоюз — в любом кантоне', ['Вступи в профсоюз своей отрасли: Unia, Syna, VPOD, syndicom, Hotel & Gastro Union, KFMV' + (k === 'TI' ? ', OCST' : k === 'GE' ? ', SIT' : '') + '. Взносы и сроки — на следующих листах.']]);
+  const X = 12, cw = (273 - 10) / 2, o = {bs: 7.8, ts: 9.6}; let y = 26;
+  for (let i = 0; i < items.length; i += 2) {
+    const row = items.slice(i, i + 2), h = Math.max(...row.map(r => P.card(0, 0, cw, r[0], r[1], '', r[2], Object.assign({dry: true}, o))));
+    if (y + h > P.h - 14) break;
+    row.forEach((r, j) => P.card(X + j * (cw + 10), y, cw, r[0], r[1], '', r[2], Object.assign({minH: h}, o)));
+    y += h + 5;
+  }
+  P.foot(disc(d)); return [P];
 }
 function p1(d){ return pagesFor(d, 'Вступи — и получай консультации', L(d, 't1'), ORG.filter(o => o[6] && d.areas.includes(o[1]))); }
 function p2(d){ return pagesFor(d, 'Бесплатно, без членства', L(d, 't2'), ORG.filter(o => !o[6] && d.areas.includes(o[1]))); }
@@ -223,8 +223,8 @@ function p3(d){
   P.header('Как пользоваться членством правильно', L(d, 't3'), '');
   const X = 12, cw = (273 - 12) / 3, o = {bs: 8.6, ts: 10.2};
   const K = [
-    [c.red, 'Вступай заранее', ['Обычно помогают только с проблемами, которые начались после вступления. В профсоюзе Unia защита — если ты член не меньше 3 месяцев к моменту проблемы. В союзе арендаторов Цюриха представительство — через 60 дней.']],
-    [c.mustard, 'Плати взносы вовремя', ['С долгом по взносам помощь могут не дать. Взнос в профсоюз зависит от зарплаты, у союзов арендаторов и покупателей — обычно фиксированный в год.']],
+    [c.red, 'Вступай заранее', ['Помогают с проблемами, которые начались после вступления. Unia и syndicom — через 3 месяца, Syna — со 2-го года, Hotel & Gastro Union — суд через 2 года. Союзы арендаторов — консультация сразу, суд через 30 дней–3 месяца.']],
+    [c.mustard, 'Плати взносы вовремя', ['С долгом по взносам помощь могут не дать (в Unia — при долге больше 3 месяцев). При безработице или соцпомощи многие берут меньший взнос — спроси.']],
     [c.blue, 'Сначала — консультация', ['Не нанимай адвоката и не иди в суд, пока не поговорила со своей организацией: иначе они могут не оплатить. Принеси договор, письма, расчётки, переписку.']],
     [c.green, 'Что дают обычно', ['Консультацию по телефону, почте или лично, проверку договора и писем, письмо от имени организации, иногда адвоката и суд.']],
     [c.sage, 'Страховка юридической защиты', ['Rechtsschutzversicherung — отдельная страховка, которая платит юристов и суд. Если она есть, профсоюз часто сначала отправит к ней. Проверь, что уже покрыто, прежде чем платить дважды.']],
@@ -249,7 +249,7 @@ function p4(d){
     if (y > 250) return;
     const col = c[AREAS[o[1]][1]];
     P.rect(12, y - 4.5, 186, 26, col[0], col[1], 1.4);
-    P.text(o[2], 16, y + 1, 10, true, col[1]); P.text(AREAS[o[1]][0] + (o[5] ? ' · ' + o[5] : ''), 16, y + 6, 7.2, false, C.mut);
+    P.text(o[2], 16, y + 1, 10, true, col[1]); P.text(AREAS[o[1]][0] + (o[5] ? ' · ' + o[5] : '') + ' · ' + o[7].sfee, 16, y + 6, 7.2, false, C.mut);
     ['Номер членства', 'Телефон', 'Член с'].forEach((t, i) => { const x = 16 + i * 62; P.text(t, x, y + 13.5, 7, false, C.ink); P.line(x, y + 18.5, x + 56, y + 18.5, C.line, 0.4); });
     y += 31;
   });
@@ -258,17 +258,17 @@ function p4(d){
   P.foot(disc(d));
   return [P];
 }
-function build(){ const d = D(), p = []; [p1, p2, p3, p4].forEach((f, i) => { if (d.p[i + 1] !== false) p.push(...f(d)); }); return p; }
+function build(){ const d = D(), p = []; [p0, p1, p2, p3, p4].forEach((f, i) => { if (d.p[i] !== false) p.push(...f(d)); }); return p; }
 
 const $ = id => document.getElementById(id);
 $('areas').innerHTML = Object.entries(AREAS).map(([k, a]) => `<label><input type="checkbox" data-area="${k}"> <span>${SH.esc(a[0])}</span></label>`).join('');
 $('mineList').innerHTML = ORG.map(o => `<label><input type="checkbox" data-org="${o[0]}"> <span>${SH.esc(o[2])}<small>${SH.esc(AREAS[o[1]][0])}${o[6] ? ' · членство' : ' · бесплатно'}</small></span></label>`).join('');
-$('stepsList').innerHTML = [['Профсоюз', 'Защищает в трудовых спорах: проверит договор, увольнение, зарплату, напишет работодателю, при необходимости даст адвоката. Найти профсоюз своей отрасли — на sgb.ch или у Unia, Syna, VPOD, syndicom, KFMV.'], ['Аренда', 'Союз арендаторов (Mieterverband, ASLOCA) проверит повышение аренды, выезд, залог. Бесплатно — примирительная служба по аренде в твоём районе.'], ['Покупки', 'Konsumentenschutz, FRC, K-Tipp и Saldo — для своих членов или подписчиков.'], ['Вступай заранее', 'Обычно помогают только с проблемами, которые начались после вступления, часто — через 3 месяца членства.']].map(s => `<details><summary>${SH.esc(s[0])}</summary><p>${SH.esc(s[1])}</p></details>`).join('');
+$('stepsList').innerHTML = [['Профсоюз', 'Защищает в трудовых спорах: проверит договор, увольнение, зарплату, напишет работодателю, даст адвоката. Взнос в Unia — от 10.70 франков в месяц по зарплате, помощь через 3 месяца членства.'], ['Аренда', 'Союз арендаторов (Mieterverband, ASLOCA, ASI) — 54–100 франков в год, по кантону. Проверит повышение аренды, выезд, залог. Бесплатно — примирительная служба по аренде.'], ['Покупки', 'Konsumentenschutz, FRC, K-Tipp и Saldo — для своих членов или подписчиков.'], ['Вступай заранее', 'Обычно помогают только с проблемами, которые начались после вступления, часто — через 3 месяца членства.']].map(s => `<details><summary>${SH.esc(s[0])}</summary><p>${SH.esc(s[1])}</p></details>`).join('');
 let UI;
 function fill(){
   const d = D();
   $('lang').value = d.lang; $('bw').checked = !!d.bw;
-  [1, 2, 3, 4].forEach(n => $('p' + n).checked = d.p[n] !== false);
+  [0, 1, 2, 3, 4].forEach(n => $('p' + n).checked = d.p[n] !== false); $('kt').value = d.kt || '';
   document.querySelectorAll('[data-area]').forEach(i => { i.checked = d.areas.includes(i.dataset.area); i.disabled = !!EX; });
   document.querySelectorAll('[data-org]').forEach(i => { i.checked = d.mine.includes(i.dataset.org); i.disabled = !!EX; });
   $('meNote').textContent = d.mine.length ? `Выбрано: ${d.mine.length}. Они на листе «Мои организации».` : 'Отметь свои организации — они появятся на листе «Мои организации».';
@@ -278,13 +278,15 @@ function fill(){
 const set = f => { f(S); if (EX) f(EX); save(); fill(); };
 $('lang').addEventListener('change', e => set(s => s.lang = e.target.value));
 $('bw').addEventListener('change', e => set(s => s.bw = e.target.checked));
-[1, 2, 3, 4].forEach(n => $('p' + n).addEventListener('change', e => set(s => s.p[n] = e.target.checked)));
+[0, 1, 2, 3, 4].forEach(n => $('p' + n).addEventListener('change', e => set(s => s.p[n] = e.target.checked)));
+$('kt').innerHTML = '<option value="">Выбери кантон</option>' + Object.keys(PM.kant).sort((a, b) => ((KN()[a] || {}).n || a).localeCompare((KN()[b] || {}).n || b, 'ru')).map(k => `<option value="${k}">${SH.esc((KN()[k] || {}).n || k)}</option>`).join('');
+$('kt').addEventListener('change', e => { set(s => s.kt = e.target.value); try { localStorage.setItem('svoiludi.kanton', e.target.value); } catch (x) {} });
 document.addEventListener('change', e => {
   const t = e.target; if (EX) return;
   if (t.dataset && t.dataset.area) { S.areas = [...document.querySelectorAll('[data-area]:checked')].map(i => i.dataset.area); save(); fill(); }
   if (t.dataset && t.dataset.org) { S.mine = [...document.querySelectorAll('[data-org]:checked')].map(i => i.dataset.org); save(); fill(); }
 });
-const EXD = () => ({lang: 'de', bw: S.bw, p: {1: true, 2: true, 3: true, 4: true}, mine: ['unia', 'mv', 'beob', 'omkv'], areas: Object.keys(AREAS)});
+const EXD = () => ({lang: 'de', bw: S.bw, kt: 'ZH', p: {0: true, 1: true, 2: true, 3: true, 4: true}, mine: ['unia', 'mv', 'beob', 'omkv'], areas: Object.keys(AREAS)});
 $('exOn').addEventListener('click', () => { EX = EXD(); fill(); window.scrollTo({top: $('exbar').offsetTop - 12, behavior: 'smooth'}); });
 $('exOff').addEventListener('click', () => { EX = null; fill(); });
 if (/[?&]example\b/.test(location.search)) EX = EXD();
