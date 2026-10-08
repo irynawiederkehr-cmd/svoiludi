@@ -18,6 +18,20 @@ HEAD = src[:src.index('</head>')]
 TOP = src[src.index('<body>'):src.index('<main class="page">')]
 BYSLUG = {t['slug']: t for t in TOPICS}
 MODNAME = {m[0]: m[1] for m in MODULES}
+
+# Иконки разделов (08.10.2026, просьба Ирины): круг как у иконок инструментов, свой рисунок у каждого раздела
+_C = '<circle cx="50" cy="50" r="46" fill="#FFFCF8" stroke="#4F5E3E" stroke-width="3"/>'
+MODICON = {
+    'status': _C + '<rect x="22" y="30" width="56" height="40" rx="6" fill="#E1E8F5" stroke="#2F5FB8" stroke-width="3"/><circle cx="38" cy="47" r="6.5" fill="#FFFCF8" stroke="#2F5FB8" stroke-width="2.6"/><path d="M29 62c1.5-5 5-7 9-7s7.5 2 9 7" fill="none" stroke="#2F5FB8" stroke-width="2.6" stroke-linecap="round"/><path d="M53 44h17M53 52h17M53 60h11" stroke="#2F5FB8" stroke-width="3" stroke-linecap="round"/>',
+    'money': _C + '<ellipse cx="44" cy="66" rx="16" ry="5.5" fill="#F3E3C2" stroke="#B98324" stroke-width="2.6"/><path d="M28 66v-7c0 3 7 5.5 16 5.5s16-2.5 16-5.5v7" fill="#F3E3C2" stroke="#B98324" stroke-width="2.6"/><ellipse cx="44" cy="59" rx="16" ry="5.5" fill="#F3E3C2" stroke="#B98324" stroke-width="2.6"/><path d="M28 59v-7c0 3 7 5.5 16 5.5s16-2.5 16-5.5v7" fill="#F3E3C2" stroke="#B98324" stroke-width="2.6"/><ellipse cx="44" cy="52" rx="16" ry="5.5" fill="#FFF6DF" stroke="#B98324" stroke-width="2.6"/><circle cx="66" cy="36" r="11" fill="#FFF6DF" stroke="#B98324" stroke-width="2.6"/><path d="M63 41V31h7M63 36h5" fill="none" stroke="#B98324" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>',
+    'insure': _C + '<path d="M50 22l22 8v16c0 14-9 24-22 30-13-6-22-16-22-30V30z" fill="#E2F0E2" stroke="#3A8A48" stroke-width="3" stroke-linejoin="round"/><path d="M50 60c-8-5-13-9.5-13-15 0-4 3-7 6.5-7 3 0 5 1.8 6.5 4 1.5-2.2 3.5-4 6.5-4 3.5 0 6.5 3 6.5 7 0 5.5-5 10-13 15z" fill="#F6E0D9" stroke="#A0523D" stroke-width="2.4" stroke-linejoin="round"/>',
+    'learn': _C + '<path d="M50 38c-7-5-15-6-24-5v34c9-1 17 0 24 5 7-5 15-6 24-5V33c-9-1-17 0-24 5z" fill="#E3E8D6" stroke="#4F5E3E" stroke-width="3" stroke-linejoin="round"/><path d="M50 38v34" stroke="#4F5E3E" stroke-width="2.6"/><path d="M50 16l13 5.5-13 5.5-13-5.5z" fill="#4F5E3E"/><path d="M63 21.5v7" stroke="#B98324" stroke-width="2.2" stroke-linecap="round"/>',
+    'work': _C + '<rect x="22" y="36" width="56" height="34" rx="6" fill="#EFE5D7" stroke="#6E4F3C" stroke-width="3"/><path d="M40 36v-5c0-2.5 2-4 4.5-4h11c2.5 0 4.5 1.5 4.5 4v5" fill="none" stroke="#6E4F3C" stroke-width="3"/><path d="M22 51h56" stroke="#6E4F3C" stroke-width="3"/><rect x="45" y="47" width="10" height="8" rx="2" fill="#F3E3C2" stroke="#B98324" stroke-width="2.4"/>',
+    'home': _C + '<path d="M24 48L50 26l26 22" fill="none" stroke="#A0523D" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M30 44v28h40V44" fill="#F6E0D9" stroke="#A0523D" stroke-width="3" stroke-linejoin="round"/><rect x="44" y="55" width="12" height="17" rx="2" fill="#FFFCF8" stroke="#A0523D" stroke-width="2.6"/><rect x="62" y="28" width="6" height="10" fill="#F6E0D9" stroke="#A0523D" stroke-width="2.4"/>',
+    'life': _C + '<circle cx="37" cy="36" r="7" fill="#F7E1EC" stroke="#B5357A" stroke-width="2.6"/><circle cx="63" cy="36" r="7" fill="#F7E1EC" stroke="#B5357A" stroke-width="2.6"/><circle cx="50" cy="52" r="5.5" fill="#FFF6DF" stroke="#B98324" stroke-width="2.4"/><path d="M24 70c0-10 5.5-17 13-17 3 0 5.5 1 7.5 3M76 70c0-10-5.5-17-13-17-3 0-5.5 1-7.5 3" fill="none" stroke="#B5357A" stroke-width="2.6" stroke-linecap="round"/><path d="M41 72c0-6 4-10 9-10s9 4 9 10" fill="none" stroke="#B98324" stroke-width="2.6" stroke-linecap="round"/>',
+}
+def modicon(k, size):
+    return f'<svg class="tm-ic" viewBox="0 0 100 100" width="{size}" height="{size}" aria-hidden="true">{MODICON.get(k, _C)}</svg>'
 CATT = {}   # направление → название, из главной страницы
 for k, t in re.findall(r"^\s*(\w+):\s*\{ t: '([^']+)'", open('index.html', encoding='utf-8').read(), flags=re.M):
     CATT[k] = t
@@ -79,7 +93,7 @@ def hub():
     url = SITE + 'shveycariya/'
     title = 'Как устроена Швейцария — простые ответы на русском · Свои люди'
     desc = 'Пермиты, налоги, долги, страховки, школа, работа, жильё и быт в Швейцарии простыми словами на русском. К каждой теме — полезные инструменты и специалисты, которые помогут.'
-    mods = ''.join(f'<a href="#{m[0]}">{m[1]}</a>' for m in MODULES)
+    mods = ''.join(f'<a href="#{m[0]}">{modicon(m[0], 26)}<span>{m[1]}</span></a>' for m in MODULES)
     SCHEMES = ''.join(f'<a href="../instrumenty/{s}/"><img src="../instrumenty/preview/{s}/1.jpg" alt="" loading="lazy"><b>{t}</b></a>' for s, t in [('put-obrazovaniya', 'Путь образования'), ('yazyk-trebovaniya', 'Язык: что и где требуют'), ('nalogi-shema', 'Как устроены налоги'), ('pensiya-shema', 'Как устроена пенсия'), ('strahovki-obyazatelnye', 'Обязательные страховки'), ('grazhdanstvo-shema', 'Путь к гражданству'), ('diplomy-shema', 'Признание дипломов'), ('franshiza-shema', 'Франшиза медстраховки'), ('kuda-obratitsya', 'Куда обратиться за помощью')])
     body = []
     for key, name, lead in MODULES:
@@ -90,7 +104,7 @@ def hub():
                 cards.append(f'<a class="tm-card" href="{t["slug"]}/" data-k="{k}"><b>{t["title"]}</b><p>{t["lead"]}</p>{chips(t)}<span class="go">Читать →</span></a>')
             else:
                 cards.append(f'<div class="tm-card soon" data-k="{k}"><span class="soon-tag">Скоро</span><b>{t["title"]}</b><p>{t["lead"]}</p>{chips(t)}</div>')
-        body.append(f'<section class="tm-mod" id="{key}" aria-labelledby="h-{key}"><h2 id="h-{key}">{name}</h2><p>{lead}</p><div class="tm-grid">{"".join(cards)}</div></section>')
+        body.append(f'<section class="tm-mod" id="{key}" aria-labelledby="h-{key}"><h2 id="h-{key}" class="tm-modh">{modicon(key, 52)}<span>{name}</span></h2><p>{lead}</p><div class="tm-grid">{"".join(cards)}</div></section>')
     main = f'''<main class="page">
   <section class="s-hero" aria-labelledby="h1">
     <div class="eyebrow">Как устроена Швейцария · Свои люди в Швейцарии</div>
