@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<link rel="icon" href="/fav/favicon.svg" type="image/svg+xml"><link rel="icon" href="/fav/icon-32.png" sizes="32x32"><link rel="apple-touch-icon" href="/fav/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/fonts.css">
+<meta name="description" content="Бесплатная карточка питомца для Швейцарии: кличка, чип и AMICUS, прививки (бешенство), лекарства и аллергии, корм и прогулки, ветеринар и страховка, хозяйка и запасной контакт, разрешение на лечение до суммы. Лист PDF для того, кто присматривает за собакой или кошкой, на русском и немецком, французском или итальянском.">
+<link rel="canonical" href="https://svoiludi.ch/instrumenty/kartochka-pitomca/">
+<meta property="og:type" content="website"><meta property="og:locale" content="ru_RU"><meta property="og:site_name" content="Свои люди в Швейцарии">
+<meta property="og:title" content="Карточка питомца для передержки и ветеринара · бесплатно"><meta property="og:description" content="Чип, прививки, корм, лекарства и кому звонить — один лист для соседки, передержки и ветеринара.">
+<meta property="og:url" content="https://svoiludi.ch/instrumenty/kartochka-pitomca/"><meta property="og:image" content="https://svoiludi.ch/instrumenty/kartochka-pitomca/og-image.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="robots" content="noindex, nofollow">
+<title>Карточка питомца для передержки и ветеринара: чип, прививки, корм, кому звонить</title>
+<style>
+/* Карточка питомца для передержки и ветеринара: чип, прививки, корм, кому звонить (08.10.2026): анкета слева, живые листы справа, движок assets/shema.js. */
+:root{
+  --bg:#F4EDE3; --paper:#FFFCF8; --ink:#2F2924; --muted:#7A6E62; --line:#E5D9C9; --soft:#EFE5D7;
+  --brown:#6E4F3C; --mustard:#B98324; --mustard-soft:#F3E3C2; --sage:#4F5E3E; --sage-soft:#E3E8D6; --red:#A0523D;
+  --display:"Forum","Georgia",serif; --sans:"Manrope","Segoe UI",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#221D19; --paper:#2C2621; --ink:#F1E9DF; --muted:#B4A796; --line:#3E362F; --soft:#352E28;
+  --brown:#E1C2A6; --mustard:#E2B45C; --mustard-soft:#3D321F; --sage:#B4BF97; --sage-soft:#2E3226; --red:#E39A85; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#221D19; --paper:#2C2621; --ink:#F1E9DF; --muted:#B4A796; --line:#3E362F; --soft:#352E28;
+  --brown:#E1C2A6; --mustard:#E2B45C; --mustard-soft:#3D321F; --sage:#B4BF97; --sage-soft:#2E3226; --red:#E39A85; color-scheme:dark}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--ink);font:15px/1.55 var(--sans);margin:0}
+.wrap{max-width:1280px;margin:0 auto;padding-inline:16px;padding-block:28px 48px;display:flex;flex-direction:column;gap:24px}
+.eyebrow{font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+h1{font-family:var(--display);font-weight:400;font-size:clamp(2.4rem,6vw,3.6rem);line-height:1;margin:4px 0 10px;text-wrap:balance}
+h2{font-family:var(--display);font-weight:400;font-size:1.55rem;margin:0;text-wrap:balance}
+h3{font-family:var(--display);font-weight:400;font-size:1.22rem;line-height:1.2;margin:0}
+.lead{max-width:66ch;color:var(--muted);margin:0}
+.jump{font-weight:700;color:var(--brown);text-underline-offset:4px}
+.privnote{margin-top:14px;background:var(--sage-soft);border-radius:16px;padding:12px 16px;font-size:.9rem;max-width:90ch}
+.status{font-size:.86rem;color:var(--muted);min-height:1.3em}
+.btn{font:inherit;font-weight:700;font-size:.9rem;border:0;border-radius:999px;padding:10px 18px;cursor:pointer;color:#fff;text-decoration:none;display:inline-flex;align-items:center;gap:6px;background:#6E4F3C;box-shadow:0 8px 18px -8px rgba(110,79,60,.6)}
+.btn.gold{background:#B98324;box-shadow:0 8px 18px -8px rgba(185,131,36,.7)}
+.btn.free{background:#4F5E3E;box-shadow:0 8px 18px -8px rgba(79,94,62,.6)}
+.btn.ghost{background:transparent;color:var(--brown);border:1.5px solid var(--line);box-shadow:none}
+.btn.sm{font-size:.82rem;padding:7px 13px}
+.btn[disabled]{background:var(--soft);color:var(--muted);box-shadow:none;cursor:wait}
+select,input[type=text],input[type=tel],input[type=number],input[type=date],textarea{font:inherit;font-size:.95rem;color:var(--ink);background:var(--paper);border:1.5px solid var(--line);border-radius:12px;padding:9px 12px;width:100%;min-width:0}
+select:focus-visible,input:focus-visible,button:focus-visible,textarea:focus-visible,a:focus-visible{outline:2px solid var(--mustard);outline-offset:2px}
+::placeholder{color:color-mix(in srgb,var(--muted) 70%,transparent)}
+.setup{background:var(--paper);border:1.5px solid var(--line);border-radius:22px;padding:16px 18px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px 18px;align-items:start}
+@media (max-width:1000px){.setup{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.setup{grid-template-columns:1fr}}
+.fl{display:flex;flex-direction:column;gap:6px;min-width:0}
+.fl>.lb{font-size:.8rem;font-weight:700;color:var(--muted);display:flex;align-items:center}
+.seg{display:flex;flex-wrap:wrap;gap:6px}
+.seg button{font:inherit;font-size:.84rem;font-weight:700;border:1.5px solid var(--line);background:var(--paper);color:var(--ink);border-radius:999px;padding:6px 12px;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--sage);border-color:var(--sage);color:#fff}
+.acts{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.exbar{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;background:var(--mustard-soft);border-radius:16px;padding:10px 14px;font-size:.9rem;font-weight:600}
+.work{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:22px;align-items:start}
+@media (max-width:1040px){.work{grid-template-columns:1fr}}
+.form{display:flex;flex-direction:column;gap:14px;min-width:0}
+.sec{background:var(--paper);border:1.5px solid var(--line);border-radius:20px;padding:16px 18px;display:flex;flex-direction:column;gap:12px}
+.sec>h2{font-size:1.3rem;display:flex;align-items:center}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:560px){.g2{grid-template-columns:1fr}}
+.hint{font-size:.84rem;color:var(--muted);margin:0}
+.chk{display:flex;flex-direction:column;gap:8px}
+.chk label{display:flex;gap:10px;align-items:baseline;font-size:.92rem;cursor:pointer}
+.chk input{flex:none;width:18px;height:18px;accent-color:var(--sage);transform:translateY(3px)}
+.chk b{white-space:nowrap}
+.chk small{color:var(--muted)}
+.tog{display:flex;gap:10px;align-items:center;font-size:.92rem;cursor:pointer}
+.tog input{width:18px;height:18px;accent-color:var(--sage)}
+.sheetbox{position:sticky;top:12px;display:flex;flex-direction:column;gap:10px}
+@media (max-width:1040px){.sheetbox{position:static}}
+.sheet{background:#fff;border-radius:6px;box-shadow:0 18px 40px -22px rgba(47,41,36,.45);overflow:hidden}
+.sheet svg{display:block;width:100%;height:auto}
+.imp{background:var(--paper);border:1.5px dashed color-mix(in srgb,var(--sage) 55%,transparent);border-radius:16px;padding:14px 18px;font-size:.88rem;max-width:90ch;margin:0}
+.imp b{color:var(--sage)}
+.guide{display:flex;flex-direction:column;gap:14px;max-width:90ch}
+.guide ul{margin:0;padding-left:20px}
+.guide li{margin:4px 0}
+.credit{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:.8rem;color:var(--muted)}
+.credit a{color:var(--muted)}
+.qh{font:700 .72rem/1 var(--sans);width:20px;height:20px;border-radius:50%;border:1.5px solid var(--line);background:var(--paper);color:var(--brown);cursor:pointer;margin-left:6px;padding:0;flex:none}
+.sheets{display:flex;flex-direction:column;gap:14px}
+.goals{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+@media (max-width:560px){.goals{grid-template-columns:1fr}}
+.goals label{display:flex;gap:10px;align-items:flex-start;background:var(--bg);border:1.5px solid var(--line);border-radius:14px;padding:9px 12px;cursor:pointer;font-size:.92rem}
+.goals input{width:18px;height:18px;accent-color:var(--sage);flex:none;margin-top:2px}
+.goals small{display:block;color:var(--muted)}
+.steps{display:flex;flex-direction:column;gap:8px}
+.steps details{background:var(--paper);border:1.5px solid var(--line);border-radius:16px;padding:10px 16px}
+.steps summary{cursor:pointer;font-weight:700;display:flex;gap:10px;align-items:baseline}
+.steps summary small{font-weight:600;color:var(--muted);margin-left:auto;text-align:right}
+.steps details p,.steps details ul{margin:8px 0 2px;font-size:.93rem}
+.steps details ul{padding-left:20px}
+</style>
+</head>
+<body>
+<style>.form input,.form select,.form textarea{width:100%}.form textarea{min-height:64px;font:inherit;font-size:.95rem;border:1.5px solid var(--line);border-radius:12px;padding:9px 12px;background:var(--paper);color:var(--ink)}</style>
+<div class="wrap">
+  <header>
+    <p style="margin:0 0 14px"><a class="jump" href="https://svoiludi.ch/instrumenty/">← Все полезные инструменты · Свои люди в Швейцарии</a></p>
+    <div class="eyebrow">Животные · уход</div>
+    <h1>Карточка питомца для передержки и ветеринара: чип, прививки, корм, кому звонить</h1>
+    <p class="lead">Уезжаешь и оставляешь собаку или кошку соседке, на передержке (Tierpension) или у знакомых? Заполни карточку один раз — получишь лист со всем важным: чип, прививки, лекарства, корм и прогулки, ветеринар и кому звонить. Его поймёт и ветеринар: главные строки ещё и на языке кантона. PDF бесплатно.</p>
+    <div class="privnote"><b>Твои данные только у тебя.</b> Карточка хранится только в твоём браузере на этом устройстве. Регистрация не нужна.</div>
+    <div data-fan="kartochka-pitomca"></div>
+  </header>
+  <div class="setup">
+    <div class="fl"><span class="lb">Язык листа<button type="button" class="qh" data-help="lang" aria-label="Подсказка: язык листа" aria-expanded="false">?</button></span><select id="lang"><option value="de">Русский + немецкий</option><option value="fr">Русский + французский</option><option value="it">Русский + итальянский</option><option value="ru">Только русский</option></select></div>
+    <div class="fl"><span class="lb">Печать</span><label class="tog"><input type="checkbox" id="bw"> Без цвета, для дешёвой печати</label></div>
+  </div>
+  <div class="exbar" id="exbar" hidden><span>Это пример. Так будет выглядеть твоя карточка.</span><button type="button" class="btn sm" id="exOff">Вернуться к моим данным</button></div>
+  <div class="work">
+    <div class="form">
+      <section class="sec"><h2>Питомец</h2>
+        <div class="fl"><span class="lb">Кличка</span><input type="text" id="name" placeholder="Bella"></div>
+        <div class="fl"><span class="lb">Кто</span><select id="kind"><option value="dog">Собака</option><option value="cat">Кошка</option><option value="other">Другое животное</option></select></div>
+        <div class="fl"><span class="lb">Порода, окрас, приметы</span><input type="text" id="look" placeholder="Labrador-Mischling, schwarz, weisser Fleck an der Brust"></div>
+        <div class="g2">
+          <div class="fl"><span class="lb">Пол</span><select id="sex"><option value="f">Девочка</option><option value="m">Мальчик</option></select></div>
+          <div class="fl"><span class="lb">Кастрирован(а)</span><select id="neut"><option value="y">Да</option><option value="n">Нет</option></select></div>
+          <div class="fl"><span class="lb">Дата рождения</span><input type="text" id="born" placeholder="03.2019"></div>
+          <div class="fl"><span class="lb">Вес, кг</span><input type="text" inputmode="decimal" id="kg"></div>
+        </div>
+        <div class="fl"><span class="lb">Номер чипа<button type="button" class="qh" data-help="chip" aria-label="Подсказка: чип и AMICUS" aria-expanded="false">?</button></span><input type="text" id="chip" inputmode="numeric" placeholder="756 0000 0000 0000"></div>
+        <div class="fl"><span class="lb">Паспорт животного, номер<button type="button" class="qh" data-help="pass" aria-label="Подсказка: паспорт животного" aria-expanded="false">?</button></span><input type="text" id="pass" placeholder="CH-123456"></div>
+      </section>
+      <section class="sec"><h2>Здоровье</h2>
+          <div class="fl"><span class="lb">Бешенство, прививка до<button type="button" class="qh" data-help="rab" aria-label="Подсказка: прививка от бешенства" aria-expanded="false">?</button></span><input type="text" id="rab" placeholder="05.2027"></div>
+          <div class="fl"><span class="lb">Другие прививки до</span><input type="text" id="vac" placeholder="03.2027"></div>
+          <div class="fl"><span class="lb">От глистов, последний раз</span><input type="text" id="worm" placeholder="08.2026"></div>
+          <div class="fl"><span class="lb">От блох и клещей, последний раз</span><input type="text" id="flea" placeholder="09.2026"></div>
+        <div class="fl"><span class="lb">Лекарства: что, сколько, когда</span><textarea id="meds" placeholder="Vetmedin 2,5 mg — 1 Tablette morgens und abends mit Futter"></textarea></div>
+        <div class="fl"><span class="lb">Аллергии, болезни, чего нельзя</span><textarea id="ill" placeholder="keine Hühnerknochen; Allergie auf Flohhalsband"></textarea></div>
+      </section>
+      <section class="sec"><h2>Уход каждый день</h2>
+        <div class="fl"><span class="lb">Корм: что, сколько, когда</span><textarea id="food" placeholder="2× täglich 150 g Trockenfutter (7 und 18 Uhr), Wasser immer frisch"></textarea></div>
+        <div class="fl"><span class="lb">Прогулки или лоток</span><textarea id="walk" placeholder="3× täglich, morgens 45 Min.; im Wald an der Leine"></textarea></div>
+        <div class="fl"><span class="lb">Привычки и страхи</span><textarea id="habit" placeholder="Angst vor Gewitter, schläft im Körbchen im Flur, zieht an der Leine bei Katzen"></textarea></div>
+      </section>
+      <section class="sec"><h2>Кому звонить</h2>
+        <div class="fl"><span class="lb">Хозяйка: имя и телефон</span><input type="text" id="owner" placeholder="Olena Muster, 079 000 00 00"></div>
+        <div class="fl"><span class="lb">Запасной контакт: имя и телефон</span><input type="text" id="backup" placeholder="Nachbarin Frau Keller, 044 000 00 00"></div>
+        <div class="fl"><span class="lb">Ветеринар: практика, телефон, адрес</span><input type="text" id="vet" placeholder="Tierarztpraxis am Bach, 044 000 00 00, Bachstrasse 3, Uster"></div>
+        <div class="fl"><span class="lb">Ночью и в выходные (дежурная клиника)<button type="button" class="qh" data-help="night" aria-label="Подсказка: дежурный ветеринар" aria-expanded="false">?</button></span><input type="text" id="night" placeholder="Tierspital / Notfalldienst, Telefon"></div>
+        <div class="fl"><span class="lb">Страховка животного: компания и номер полиса</span><input type="text" id="ins" placeholder="по желанию"></div>
+        <div class="fl"><span class="lb">Разрешаю лечение без звонка мне до, франков<button type="button" class="qh" data-help="limit" aria-label="Подсказка: разрешение на лечение" aria-expanded="false">?</button></span><input type="text" inputmode="numeric" id="limit" placeholder="500"></div>
+      </section>
+      <section class="sec"><h2>Передержка</h2>
+        <div class="fl"><span class="lb">Кто присматривает</span><input type="text" id="sitter" placeholder="Tierpension Sonnenhof"></div>
+        <div class="g2">
+          <div class="fl"><span class="lb">С</span><input type="date" id="from"></div>
+          <div class="fl"><span class="lb">По</span><input type="date" id="to"></div>
+        </div>
+      </section>
+    </div>
+    <div class="sheetbox">
+      <div class="acts"><button type="button" class="btn gold" id="pdf">Скачать PDF</button><button type="button" class="btn ghost sm" id="share" hidden>Отправить</button><button type="button" class="btn ghost sm" id="exOn">Посмотреть на примере</button></div>
+      <div class="sheets" id="sheet" aria-label="Предпросмотр листа"></div>
+      <div class="status" id="status" role="status"></div>
+    </div>
+  </div>
+  <p class="imp"><b>Важно.</b> Карточка не заменяет паспорт животного и записи ветеринара — дай с собой и их. При отравлении, травме или если животное не дышит нормально — сразу к ветеринару или в дежурную клинику. Правила о чипе, регистрации и ввозе — в теме <a href="https://svoiludi.ch/shveycariya/zhivotnye/">«Животные: чип, налог на собаку, ввоз»</a>.</p>
+  <div class="share-slot" data-url="https://svoiludi.ch/instrumenty/kartochka-pitomca/" data-lead="Перешли тем, у кого есть собака или кошка. В ссылке нет твоих данных." data-text="Привет! Тут можно бесплатно сделать карточку питомца для передержки и ветеринара: чип, прививки, корм и кому звонить. PDF. https://svoiludi.ch/instrumenty/kartochka-pitomca/"></div>
+  <p class="credit"><span>Свои люди в Швейцарии · svoiludi.ch</span><a href="https://svoiludi.ch/privacy/">Политика конфиденциальности</a></p>
+</div>
+
+<script src="/assets/kantony.js"></script>
+<script src="/assets/lib/jspdf.umd.min.js"></script>
+<script src="/assets/shema.js"></script>
+<script>
+window.HELP = {
+  lang: '<p><b>Русский + немецкий</b> (французский, итальянский) — названия строк ещё и на языке кантона, чтобы лист понял ветеринар или сотрудник передержки (Tierpension). Что ты сама вписала, остаётся как есть — можно писать сразу по-немецки.</p>',
+  chip: '<p>Микрочип — 15 цифр, ставит ветеринар. Номер есть в паспорте животного и в базе <a href="https://www.amicus.ch" target="_blank" rel="noopener">AMICUS</a>. Собаку в Швейцарии обязательно чипируют и регистрируют в AMICUS, кошку — по желанию, но советуют. По чипу найдут хозяйку, если животное потеряется.</p>',
+  pass: '<p>Паспорт животного (Heimtierpass) выдаёт ветеринар. В нём чип и прививки. Возьми его с собой или отдай тому, кто присматривает: без него не пустят в некоторые передержки и за границу.</p>',
+  rab: '<p>До какого числа действует прививка от бешенства (Tollwut) — смотри в паспорте животного. Многие передержки и все поездки за границу требуют действующую прививку.</p>',
+  night: '<p>Вечером, ночью и в выходные работает дежурный ветеринар (tierärztlicher Notfalldienst) или ветеринарная клиника (Tierspital, Tierklinik). Номер узнай у своего ветеринара заранее — он часто на автоответчике практики — и впиши сюда.</p>',
+  limit: '<p>Если животное заболеет, а до тебя не дозвониться, ветеринар может не начать лечение без согласия хозяйки. Впиши сумму, до которой можно лечить без звонка тебе, — на листе появится разрешение с местом для подписи. Пусто — строки не будет.</p>'
+};
+const KEY = 'kartochkaPitomca.v1';
+const KIND = {dog: 'Собака', cat: 'Кошка', other: 'Животное'};
+const LOC = {
+  t: {de: 'Tierausweis für Betreuung und Tierarzt', fr: 'Fiche pour la garde et le vétérinaire', it: 'Scheda per la custodia e il veterinario'},
+  sex: {de: 'Geschlecht, kastriert', fr: 'Sexe, castré(e)', it: 'Sesso, castrato/a'},
+  born: {de: 'Geburtsdatum, Gewicht', fr: 'Date de naissance, poids', it: 'Data di nascita, peso'},
+  chip: {de: 'Chipnummer (AMICUS)', fr: 'Numéro de puce (AMICUS)', it: 'Numero microchip (AMICUS)'},
+  pass: {de: 'Heimtierpass', fr: 'Passeport pour animaux', it: 'Passaporto per animali'},
+  call: {de: 'Im Notfall anrufen', fr: 'En cas d’urgence, appeler', it: 'In caso di emergenza chiamare'},
+  owner: {de: 'Halterin', fr: 'Propriétaire', it: 'Proprietaria'}, backup: {de: 'Ersatzkontakt', fr: 'Autre contact', it: 'Altro contatto'},
+  vet: {de: 'Tierarzt', fr: 'Vétérinaire', it: 'Veterinario'}, night: {de: 'Notfalldienst nachts und am Wochenende', fr: 'Urgences la nuit et le week-end', it: 'Urgenze di notte e nel fine settimana'},
+  ins: {de: 'Tierversicherung, Police', fr: 'Assurance animal, police', it: 'Assicurazione animale, polizza'},
+  health: {de: 'Gesundheit', fr: 'Santé', it: 'Salute'}, rab: {de: 'Tollwutimpfung gültig bis', fr: 'Vaccin contre la rage valable jusqu’au', it: 'Vaccino antirabbico valido fino al'},
+  vac: {de: 'Weitere Impfungen gültig bis', fr: 'Autres vaccins valables jusqu’au', it: 'Altri vaccini validi fino al'},
+  worm: {de: 'Entwurmung, zuletzt', fr: 'Vermifuge, dernière fois', it: 'Sverminazione, ultima volta'}, flea: {de: 'Floh- und Zeckenschutz, zuletzt', fr: 'Antipuces et antitiques, dernière fois', it: 'Antipulci e antizecche, ultima volta'},
+  meds: {de: 'Medikamente', fr: 'Médicaments', it: 'Medicamenti'}, ill: {de: 'Allergien, Krankheiten, verboten', fr: 'Allergies, maladies, interdit', it: 'Allergie, malattie, vietato'},
+  care: {de: 'Tägliche Pflege', fr: 'Soins quotidiens', it: 'Cura quotidiana'}, food: {de: 'Futter', fr: 'Nourriture', it: 'Cibo'},
+  walk: {de: 'Spaziergänge, Katzenklo', fr: 'Promenades, litière', it: 'Passeggiate, lettiera'}, habit: {de: 'Gewohnheiten, Ängste', fr: 'Habitudes, peurs', it: 'Abitudini, paure'},
+  sit: {de: 'Betreuung', fr: 'Garde', it: 'Custodia'},
+  ok: {de: 'Ich erlaube der Betreuungsperson, mein Tier bis CHF {x} ohne Rückfrage tierärztlich behandeln zu lassen. Die Kosten übernehme ich.', fr: 'J’autorise la personne qui garde mon animal à le faire soigner par un vétérinaire jusqu’à CHF {x} sans me demander. Je prends les frais en charge.', it: 'Autorizzo la persona che custodisce il mio animale a farlo curare da un veterinario fino a CHF {x} senza chiedermi. Mi assumo le spese.'},
+  sign: {de: 'Datum, Unterschrift', fr: 'Date, signature', it: 'Data, firma'}
+};
+const iso = d => d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+function blank(){ return {lang: 'de', bw: false, name: '', kind: 'dog', look: '', sex: 'f', neut: 'y', born: '', kg: '', chip: '', pass: '', rab: '', vac: '', worm: '', flea: '', meds: '', ill: '', food: '', walk: '', habit: '', owner: '', backup: '', vet: '', night: '', ins: '', limit: '', sitter: '', from: '', to: ''}; }
+let S = load(), EX = null;
+function load(){ try { const s = JSON.parse(localStorage.getItem(KEY)); if (s && typeof s === 'object') return Object.assign(blank(), s); } catch (e) {} return blank(); }
+function save(){ if (EX) return; try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} }
+const D = () => EX || S, bi = d => d.lang !== 'ru', L = (d, k) => bi(d) ? LOC[k][d.lang] : '';
+const dmy = s => { const [y, m, d] = String(s || '').split('-'); return d ? `${d}.${m}.${y}` : ''; };
+const nz = (s, p) => String(s || '').trim() || p;
+const BL = '________________';
+function build(){
+  const d = D(), C = SH.pal(d.bw), c = C.c, X = 12, W = 186, pages = [];
+  const per = d.from || d.to ? (dmy(d.from) || '…') + ' – ' + (dmy(d.to) || '…') : '';
+  let P, y;
+  const newPage = () => { P = SH.page(210, 297, C); P.header('Карточка питомца', L(d, 't'), per); pages.push(P); y = 27; };
+  const need = h => { if (y + h > 280) newPage(); };
+  const row = (ru, k, val) => {
+    const ls = String(val).split('\n').flatMap(p => SH.wrap(p, false, 9.2, W - 64));
+    const h = Math.max(9, ls.length * 4.3 + 3.6); need(h);
+    P.text(ru, X, y, 7.8, true, C.head); if (k && bi(d)) P.text(LOC[k][d.lang], X, y + 3.5, 6.2, false, C.mut);
+    ls.forEach((l, i) => P.text(l, X + 62, y + i * 4.3, 9.2, false, C.ink)); y += h; P.line(X, y - 2.6, X + W, y - 2.6, C.line, 0.2);
+  };
+  const sec = (ru, k) => { need(16); y = P.sec(ru + (k && bi(d) ? ' · ' + LOC[k][d.lang] : ''), X, y, W); };
+  newPage();
+  /* кличка крупно */
+  P.text(nz(d.name, BL), X, y + 3, 20, true, C.ink);
+  P.text(KIND[d.kind] + (d.look ? ' · ' + d.look : ''), X, y + 9.5, 9.4, false, C.mut); y += 16;
+  if (d.sitter || per) { P.text('Присматривает' + (bi(d) ? ' · ' + LOC.sit[d.lang] : '') + ': ' + nz(d.sitter, '') + (per ? '  ' + per : ''), X, y, 8.4, false, C.ink); y += 6; }
+  const SX = {de: ['weiblich', 'männlich', 'ja', 'nein'], fr: ['femelle', 'mâle', 'oui', 'non'], it: ['femmina', 'maschio', 'sì', 'no']}[d.lang], lx = i => SX ? ' · ' + SX[i] : '';
+  row('Пол, кастрация', 'sex', (d.sex === 'm' ? 'мальчик' + lx(1) : 'девочка' + lx(0)) + ', ' + (d.neut === 'y' ? 'кастрирован(а)' + lx(2) : 'не кастрирован(а)' + lx(3)));
+  row('Родился(лась), вес', 'born', nz(d.born, '______') + (d.kg ? ', ' + d.kg + ' кг' : ''));
+  row('Чип', 'chip', nz(d.chip, BL));
+  row('Паспорт животного', 'pass', nz(d.pass, BL));
+  y += 2;
+  /* кому звонить */
+  const body = ['Ветеринар' + (bi(d) ? ' · ' + LOC.vet[d.lang] : '') + ': ' + nz(d.vet, BL),
+    'Ночью и в выходные' + (bi(d) ? ' · ' + LOC.night[d.lang] : '') + ': ' + nz(d.night, BL),
+    'Хозяйка' + (bi(d) ? ' · ' + LOC.owner[d.lang] : '') + ': ' + nz(d.owner, BL),
+    'Запасной контакт' + (bi(d) ? ' · ' + LOC.backup[d.lang] : '') + ': ' + nz(d.backup, BL)];
+  if (d.ins) body.push('Страховка' + (bi(d) ? ' · ' + LOC.ins[d.lang] : '') + ': ' + d.ins);
+  const hc = P.card(X, y, W, c.red, 'Если что-то случилось — звонить', L(d, 'call'), body, {ts: 11, bs: 8.6, dry: true}); need(hc + 4);
+  y += P.card(X, y, W, c.red, 'Если что-то случилось — звонить', L(d, 'call'), body, {ts: 11, bs: 8.6}) + 5;
+  sec('Здоровье', 'health');
+  row('Бешенство, прививка до', 'rab', nz(d.rab, '______'));
+  if (d.vac) row('Другие прививки до', 'vac', d.vac);
+  if (d.worm) row('От глистов, последний раз', 'worm', d.worm);
+  if (d.flea) row('От блох и клещей', 'flea', d.flea);
+  row('Лекарства', 'meds', nz(d.meds, 'нет'));
+  row('Аллергии, болезни, нельзя', 'ill', nz(d.ill, 'нет'));
+  sec('Уход каждый день', 'care');
+  row('Корм', 'food', nz(d.food, BL));
+  row(d.kind === 'cat' ? 'Лоток, прогулки' : 'Прогулки', 'walk', nz(d.walk, BL));
+  if (d.habit) row('Привычки и страхи', 'habit', d.habit);
+  /* разрешение на лечение */
+  const lim = String(d.limit || '').replace(/[^\d']/g, '');
+  if (lim) {
+    const ru = 'Разрешаю тому, кто присматривает, лечить моё животное у ветеринара до ' + lim + ' франков, не дозваниваясь до меня. Расходы оплачу я.';
+    const loc = bi(d) ? LOC.ok[d.lang].replace('{x}', lim) : '';
+    const h = SH.wrap(ru, false, 8.4, W - 6).length * 4 + (loc ? SH.wrap(loc, false, 7.4, W - 6).length * 3.6 : 0) + 20; need(h);
+    y += 2; P.rect(X, y - 3, W, h - 4, null, C.line, 1.6);
+    y = P.para(ru, X + 3, y + 2, 8.4, true, C.ink, W - 6, 4) + 1;
+    if (loc) y = P.para(loc, X + 3, y, 7.4, false, C.mut, W - 6, 3.6) + 1;
+    y += 6; P.line(X + 3, y, X + 90, y, C.ink, 0.3); P.text('Дата, подпись хозяйки' + (bi(d) ? ' · ' + LOC.sign[d.lang] : ''), X + 3, y + 3.4, 6.6, false, C.mut); y += 9;
+  }
+  pages.forEach(p => p.foot('Карточка для того, кто присматривает за животным. Не заменяет паспорт животного и записи ветеринара. svoiludi.ch'));
+  return pages;
+}
+const $ = id => document.getElementById(id);
+const TF = ['name', 'look', 'born', 'kg', 'chip', 'pass', 'rab', 'vac', 'worm', 'flea', 'meds', 'ill', 'food', 'walk', 'habit', 'owner', 'backup', 'vet', 'night', 'ins', 'limit', 'sitter'], SEL = ['kind', 'sex', 'neut', 'from', 'to'];
+let UI, tmr;
+function fill(){ const d = D(); $('lang').value = d.lang; $('bw').checked = !!d.bw; TF.concat(SEL).forEach(k => { $(k).value = d[k]; $(k).disabled = !!EX; });
+  $('exbar').hidden = !EX; $('exOn').hidden = !!EX; if (UI) UI.render(); }
+const set = f => { f(S); if (EX) f(EX); save(); fill(); };
+$('lang').addEventListener('change', e => { const v = e.target.value; S.lang = v; save(); if (EX) EX = EXD(v); fill(); });
+$('bw').addEventListener('change', e => set(s => s.bw = e.target.checked));
+TF.forEach(k => $(k).addEventListener('input', e => { if (EX) return; S[k] = e.target.value; save(); clearTimeout(tmr); tmr = setTimeout(() => UI && UI.render(), 400); }));
+SEL.forEach(k => $(k).addEventListener('change', e => { if (EX) return; S[k] = e.target.value; save(); fill(); }));
+/* пример на языке кантона: то, что вписала хозяйка, — по-немецки, по-французски или по-итальянски */
+const EXL = {
+  fr: {look: 'Croisé labrador, noir, tache blanche sur la poitrine', vac: '03.2027 (CHPPi, leptospirose)', flea: '09.2026 (comprimé, tous les 3 mois)', meds: 'Flexadin pour les articulations : 1 comprimé le matin avec la nourriture', ill: 'Pas d’os de poulet, pas de chocolat. Estomac sensible — pas d’autre nourriture.', food: '2× par jour 150 g de croquettes (7 h et 18 h). Toujours de l’eau fraîche.', walk: '3× par jour, le matin 45 minutes. En forêt et près de la route en laisse.', habit: 'Peur de l’orage — elle reste alors dans son panier dans le couloir. Tire en laisse quand elle voit des chats.', backup: 'Voisine Mme Keller, 021 000 00 00', vet: 'Cabinet vétérinaire du Lac, 021 000 00 00, rue du Lac 3, 1110 Morges', night: 'Service d’urgence via le numéro du cabinet (répondeur)', ins: 'Assurance animal, police 123456', sitter: 'Pension pour chiens Les Tilleuls'},
+  it: {look: 'Meticcio labrador, nero, macchia bianca sul petto', vac: '03.2027 (cimurro, parvovirosi, leptospirosi)', flea: '09.2026 (compressa, ogni 3 mesi)', meds: 'Flexadin per le articolazioni: 1 compressa al mattino con il cibo', ill: 'Niente ossa di pollo, niente cioccolato. Stomaco delicato — nessun altro cibo.', food: '2× al giorno 150 g di crocchette (ore 7 e 18). Sempre acqua fresca.', walk: '3× al giorno, al mattino 45 minuti. Nel bosco e vicino alla strada al guinzaglio.', habit: 'Paura dei temporali — allora resta nella cuccia nel corridoio. Tira al guinzaglio quando vede gatti.', backup: 'Vicina signora Keller, 091 000 00 00', vet: 'Studio veterinario del Lago, 091 000 00 00, via al Lago 3, 6900 Lugano', night: 'Servizio d’urgenza tramite il numero dello studio (segreteria)', ins: 'Assicurazione animale, polizza 123456', sitter: 'Pensione per cani I Tigli'}
+};
+const EXD = (lg) => { const t = new Date(), a = new Date(t.getFullYear(), t.getMonth(), t.getDate() + 14), b = new Date(a.getFullYear(), a.getMonth(), a.getDate() + 10);
+  return Object.assign(blank(), {lang: 'de', bw: S.bw, name: 'Bella', kind: 'dog', look: 'Labrador-Mischling, schwarz, weisser Fleck an der Brust', sex: 'f', neut: 'y', born: '03.2019', kg: '24', chip: '756 0981 0012 3456', pass: 'CH-0481236', rab: '05.2027', vac: '03.2027 (DHPPi, Leptospirose)', worm: '08.2026', flea: '09.2026 (Tablette, alle 3 Monate)',
+    meds: 'Gelenktabletten Flexadin: 1 Tablette morgens mit dem Futter', ill: 'Keine Hühnerknochen, keine Schokolade. Empfindlicher Magen — kein fremdes Futter.', food: '2× täglich 150 g Trockenfutter (7 und 18 Uhr). Wasser immer frisch.', walk: '3× täglich, morgens 45 Minuten. Im Wald und an der Strasse an der Leine.', habit: 'Angst vor Gewitter — dann bleibt sie im Körbchen im Flur. Zieht an der Leine, wenn sie Katzen sieht.',
+    owner: 'Olena Muster, 079 000 00 00', backup: 'Nachbarin Frau Keller, 044 000 00 00', vet: 'Tierarztpraxis am Bach, 044 000 00 00, Bachstrasse 3, 8610 Uster', night: 'Notfalldienst über die Praxisnummer (Ansage)', ins: 'Tierversicherung, Police 123456', limit: '500', sitter: 'Tierpension Sonnenhof', from: iso(a), to: iso(b)}, lg ? {lang: lg} : {}, EXL[lg] || {}); };
+$('exOn').addEventListener('click', () => { EX = EXD(S.lang); fill(); window.scrollTo({top: $('exbar').offsetTop - 12, behavior: 'smooth'}); });
+$('exOff').addEventListener('click', () => { EX = null; fill(); });
+if (/[?&]example\b/.test(location.search)) EX = EXD(S.lang);
+UI = SH.mount({build, title: 'Карточка питомца', name: () => 'Tierausweis-' + (D().name || 'Tier').replace(/[^\wÀ-ÿ-]/g, '')});
+fill();
+
+</script>
+<script src="/assets/help.js"></script>
+<script src="/assets/backup.js"></script>
+<script src="/assets/pdffan.js" defer></script>
+<script src="/assets/share.js" defer></script>
+<script src="/assets/samesite.js"></script>
+</body>
+</html>
