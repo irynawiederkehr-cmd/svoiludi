@@ -10,3 +10,13 @@ ADS = {
  'Свои люди': ['русские в цюрихе', 'украинцы в цюрихе', 'українці в швейцарії', 'русские в швейцарии', 'украинцы в швейцарии', 'помощь украинцам в швейцарии', 'допомога українцям у швейцарії', 'переезд в швейцарию'],
  'Коучинг (voznesenskaya.ch)': ['коуч на русском', 'коуч цюрих', 'лайф коуч', 'коучинг на русском онлайн', 'психолог на русском швейцария', 'психолог на русском цюрих', 'адаптация в эмиграции', 'эмиграция депрессия'],
 }
+
+# Вторая кампания (тест): немецкие/французские термины, которые ищут и наши, но показ только людям с русским/украинским языком
+# в Google (настройка языка кампании RU+UK) и объявление на русском — швейцарцы его не кликают, а платим только за клик.
+ADS_DE = {
+ 'Долги (DE/FR)': ['betreibung', 'zahlungsbefehl', 'rechtsvorschlag', 'betreibungsauszug', 'poursuites', 'commandement de payer'],
+ 'Налоги (DE/FR/IT)': ['quellensteuer', 'steuererklärung ausfüllen lassen', 'nachträgliche ordentliche veranlagung', 'impôt à la source', 'imposta alla fonte'],
+ 'Статус (DE/FR)': ['ausweis s', 'schutzstatus s', 'aufenthaltsbewilligung b', 'ausweis b', 'permis s', 'permis b'],
+ 'Работа и своё дело (DE/FR)': ['rav anmelden', 'arbeitslosenkasse', 'selbständig machen schweiz', 'einzelfirma gründen', 'chômage suisse'],
+ 'Специалисты (DE)': ['übersetzer russisch', 'übersetzer ukrainisch', 'beglaubigte übersetzung ukrainisch', 'steuerberater zürich', 'migrationsrecht anwalt'],
+}
