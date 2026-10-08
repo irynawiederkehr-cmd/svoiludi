@@ -1,0 +1,712 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<link rel="icon" href="/fav/favicon.svg" type="image/svg+xml"><link rel="icon" href="/fav/icon-32.png" sizes="32x32"><link rel="apple-touch-icon" href="/fav/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/fonts.css">
+<meta name="description" content="Резюме для Швейцарии онлайн и бесплатно. Lebenslauf, CV на немецком, французском, итальянском, английском, русском и украинском. Три красивых шаблона, фото, пермит, языки по уровням A1–C2. Готовый PDF для отправки работодателю.">
+<link rel="canonical" href="https://svoiludi.ch/instrumenty/rezyume/">
+<meta property="og:type" content="website"><meta property="og:locale" content="ru_RU"><meta property="og:site_name" content="Свои люди в Швейцарии">
+<meta property="og:title" content="Резюме по-швейцарски · Lebenslauf и CV онлайн"><meta property="og:description" content="Заполни один раз и получи резюме на немецком, французском, итальянском или английском. Три шаблона, PDF бесплатно.">
+<meta property="og:url" content="https://svoiludi.ch/instrumenty/rezyume/"><meta property="og:image" content="https://svoiludi.ch/instrumenty/rezyume/og-image.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="robots" content="noindex, nofollow">
+<title>Резюме по-швейцарски</title>
+
+<style>
+/* Резюме по-швейцарски (08.10.2026): слева анкета по разделам, справа живой лист A4, который совпадает с PDF.
+   Один «движок» раскладки рисует и предпросмотр (SVG), и PDF (jsPDF, настоящий текст, шрифты Manrope и Forum). */
+:root{
+  --bg:#F4EDE3; --paper:#FFFCF8; --ink:#2F2924; --muted:#7A6E62; --line:#E5D9C9; --soft:#EFE5D7;
+  --brown:#6E4F3C; --mustard:#B98324; --mustard-soft:#F3E3C2; --sage:#4F5E3E; --sage-soft:#E3E8D6;
+  --display:"Forum","Georgia",serif; --sans:"Manrope","Segoe UI",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#221D19; --paper:#2C2621; --ink:#F1E9DF; --muted:#B4A796; --line:#3E362F; --soft:#352E28;
+  --brown:#E1C2A6; --mustard:#E2B45C; --mustard-soft:#3D321F; --sage:#B4BF97; --sage-soft:#2E3226; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#221D19; --paper:#2C2621; --ink:#F1E9DF; --muted:#B4A796; --line:#3E362F; --soft:#352E28;
+  --brown:#E1C2A6; --mustard:#E2B45C; --mustard-soft:#3D321F; --sage:#B4BF97; --sage-soft:#2E3226; color-scheme:dark}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--ink);font:15px/1.55 var(--sans);margin:0}
+.wrap{max-width:1280px;margin:0 auto;padding-inline:16px;padding-block:28px 48px;display:flex;flex-direction:column;gap:24px}
+.eyebrow{font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+h1{font-family:var(--display);font-weight:400;font-size:clamp(2.4rem,6vw,3.6rem);line-height:1;margin:4px 0 10px;text-wrap:balance}
+h2{font-family:var(--display);font-weight:400;font-size:1.55rem;margin:0;text-wrap:balance}
+h3{font-family:var(--display);font-weight:400;font-size:1.22rem;line-height:1.2;margin:0}
+.lead{max-width:66ch;color:var(--muted);margin:0}
+.jump{font-weight:700;color:var(--brown);text-underline-offset:4px}
+.status{font-size:.86rem;color:var(--muted);min-height:1.3em}
+.btn{font:inherit;font-weight:700;font-size:.9rem;border:0;border-radius:999px;padding:10px 18px;cursor:pointer;color:#fff;text-decoration:none;display:inline-flex;align-items:center;gap:6px;background:#6E4F3C;box-shadow:0 8px 18px -8px rgba(110,79,60,.6)}
+.btn.gold{background:#B98324;box-shadow:0 8px 18px -8px rgba(185,131,36,.7)}
+.btn.free{background:#4F5E3E;box-shadow:0 8px 18px -8px rgba(79,94,62,.6)}
+.btn.ghost{background:transparent;color:var(--brown);border:1.5px solid var(--line);box-shadow:none}
+.btn.sm{font-size:.82rem;padding:7px 13px}
+.btn[disabled]{background:var(--soft);color:var(--muted);box-shadow:none;cursor:wait}
+select,input[type=text],input[type=email],input[type=tel],textarea{font:inherit;font-size:.95rem;color:var(--ink);background:var(--paper);border:1.5px solid var(--line);border-radius:12px;padding:9px 12px;width:100%;min-width:0}
+textarea{resize:vertical;min-height:84px;line-height:1.5}
+select:focus-visible,input:focus-visible,button:focus-visible,textarea:focus-visible,a:focus-visible{outline:2px solid var(--mustard);outline-offset:2px}
+::placeholder{color:color-mix(in srgb,var(--muted) 70%,transparent)}
+
+/* панель настроек */
+.setup{background:var(--paper);border:1.5px solid var(--line);border-radius:22px;padding:16px 18px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px 18px;align-items:start}
+@media (max-width:980px){.setup{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.setup{grid-template-columns:1fr}}
+.fl{display:flex;flex-direction:column;gap:6px;min-width:0}
+.fl>.lb{font-size:.8rem;font-weight:700;color:var(--muted);display:flex;align-items:center}
+.seg{display:flex;flex-wrap:wrap;gap:6px}
+.seg button{font:inherit;font-size:.84rem;font-weight:700;border:1.5px solid var(--line);background:var(--paper);color:var(--ink);border-radius:999px;padding:6px 12px;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--sage);border-color:var(--sage);color:#fff}
+.sw{display:flex;gap:8px;flex-wrap:wrap}
+.sw button{width:30px;height:30px;border-radius:50%;border:2px solid var(--paper);box-shadow:0 0 0 1.5px var(--line);cursor:pointer;padding:0}
+.sw button[aria-pressed="true"]{box-shadow:0 0 0 2.5px var(--ink)}
+.acts{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.exbar{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;background:var(--mustard-soft);border-radius:16px;padding:10px 14px;font-size:.9rem;font-weight:600}
+
+/* анкета + лист */
+.work{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:22px;align-items:start}
+@media (max-width:1040px){.work{grid-template-columns:1fr}}
+.form{display:flex;flex-direction:column;gap:14px;min-width:0}
+.sec{background:var(--paper);border:1.5px solid var(--line);border-radius:20px;overflow:hidden}
+.sec>summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:10px;padding:14px 18px;font-family:var(--display);font-size:1.22rem}
+.sec>summary::-webkit-details-marker{display:none}
+.sec>summary .num{font-family:var(--sans);font-size:.75rem;font-weight:800;width:26px;height:26px;border-radius:50%;background:var(--sage-soft);color:var(--sage);display:grid;place-items:center;flex:none}
+.sec>summary .cnt{margin-left:auto;font-family:var(--sans);font-size:.78rem;font-weight:700;color:var(--muted)}
+.sec>summary::after{content:"";width:9px;height:9px;border-right:2px solid var(--muted);border-bottom:2px solid var(--muted);transform:rotate(45deg);margin-left:12px;flex:none;transition:transform .2s}
+.sec[open]>summary::after{transform:rotate(-135deg)}
+.sec>summary:not(:has(.cnt))::after{margin-left:auto}
+.sec .body{padding:2px 18px 18px;display:flex;flex-direction:column;gap:12px}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+@media (max-width:560px){.g2,.g3{grid-template-columns:1fr}}
+.hint{font-size:.84rem;color:var(--muted);margin:0}
+.photo{display:grid;grid-template-columns:90px minmax(0,1fr);gap:14px;align-items:center}
+.photo .ph{width:90px;aspect-ratio:3/4;border-radius:10px;background:var(--soft);border:1.5px dashed var(--line);display:grid;place-items:center;overflow:hidden;color:var(--muted);font-size:.75rem;text-align:center}
+.photo .ph img{width:100%;height:100%;object-fit:cover;display:block}
+.photo .acts label{cursor:pointer}
+.ent{border:1.5px solid var(--line);border-radius:16px;padding:12px;display:flex;flex-direction:column;gap:10px;background:var(--bg)}
+.ent-h{display:flex;align-items:center;gap:6px}
+.ent-h b{font-size:.88rem;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ib{font:inherit;width:30px;height:30px;border-radius:50%;border:1.5px solid var(--line);background:var(--paper);color:var(--ink);cursor:pointer;padding:0;font-size:.9rem;line-height:1;flex:none}
+.ib:hover{border-color:var(--brown)}
+.chk{display:flex;align-items:center;gap:8px;font-size:.88rem;font-weight:600}
+.chk input{width:18px;height:18px;accent-color:var(--sage)}
+
+/* живой лист */
+.sheet{position:sticky;top:12px;display:flex;flex-direction:column;gap:10px;min-width:0}
+@media (max-width:1040px){.sheet{position:static}}
+.sheet-h{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px}
+.sheet-h .eyebrow{flex:1}
+.pages{display:flex;flex-direction:column;gap:14px;max-height:calc(100vh - 160px);overflow:auto;padding:4px 4px 10px;border-radius:16px}
+@media (max-width:1040px){.pages{max-height:none;overflow:visible}}
+.pages svg{display:block;flex:none;width:100%;height:auto;aspect-ratio:210/297;background:#fff;border-radius:4px;box-shadow:0 2px 4px rgba(40,30,20,.08),0 14px 34px -10px rgba(40,30,20,.32)}
+.pages svg text{font-kerning:none;font-variant-ligatures:none}
+.floatprev{position:fixed;right:14px;bottom:62px;z-index:40;display:none}
+@media (max-width:1040px){.floatprev{display:inline-flex}}
+
+.howto{display:flex;flex-direction:column;gap:12px}
+.hsteps{margin:0;padding-left:22px;display:flex;flex-direction:column;gap:6px;max-width:80ch}
+.guide{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+@media (max-width:900px){.guide{grid-template-columns:1fr}}
+.note{background:var(--paper);border:1.5px solid var(--line);border-radius:18px;padding:16px 18px;display:flex;flex-direction:column;gap:8px}
+.note p,.note ul{margin:0;font-size:.92rem}
+.note ul{padding-left:18px}
+.imp{background:var(--paper);border:1.5px dashed color-mix(in srgb,var(--sage) 55%,transparent);border-radius:16px;padding:14px 18px;font-size:.88rem;max-width:90ch}
+.imp b{color:var(--sage)}
+.confirm{display:inline-flex;gap:8px;align-items:center;background:var(--paper);border:1.5px solid var(--line);border-radius:999px;padding:4px 4px 4px 14px;font-size:.88rem;font-weight:600;flex-wrap:wrap}
+</style>
+<!--i18n--><link rel="alternate" hreflang="ru" href="https://svoiludi.ch/instrumenty/rezyume/"><link rel="alternate" hreflang="uk" href="https://svoiludi.ch/uk/instrumenty/rezyume/"><!--i18n--></head>
+<body>
+
+<div class="wrap">
+  <header>
+    <p style="margin:0 0 14px"><a class="jump" href="https://svoiludi.ch/instrumenty/">← Все полезные инструменты · Свои люди в Швейцарии</a></p>
+    <div class="eyebrow">Резюме · Lebenslauf · CV · бесплатно</div>
+    <h1>Резюме по-швейцарски</h1>
+    <p class="lead">Заполни один раз и получи резюме, какое ждут швейцарские работодатели. На немецком, французском, итальянском или английском, с фото, пермитом и языками по уровням. Готовый PDF отправишь по почте или загрузишь на сайт вакансий.</p>
+    <p style="margin:10px 0 0"><a class="jump" href="#guide">Как написать резюме для Швейцарии ↓</a> · <a class="jump" href="https://svoiludi.ch/shveycariya/rabota/">Где искать работу ↗</a></p>
+    <div data-fan="rezyume"></div>
+  </header>
+
+  <section class="howto" aria-labelledby="ht-h">
+    <h2 id="ht-h">Как пользоваться</h2>
+    <ol class="hsteps">
+      <li><b>Выбери язык резюме.</b> Пиши тексты сразу на этом языке. Заголовки, даты, уровни языков и пермит переведутся сами.</li>
+      <li><b>Заполни разделы.</b> Лист рядом меняется сразу, так будет выглядеть PDF.</li>
+      <li><b>Выбери шаблон и цвет.</b> Для банков и госслужбы подходит «Строгий», для остальных «С колонкой» или «Классика».</li>
+      <li><b>Скачай PDF</b> и прикрепи его к письму или к отклику на сайте вакансий. На телефоне кнопка «Отправить» сразу открывает почту и мессенджеры.</li>
+    </ol>
+  </section>
+
+  <section class="setup" aria-label="Настройки резюме">
+    <div class="fl"><span class="lb">Язык резюме<button type="button" class="qh" data-help="lang" aria-label="Подсказка: язык резюме" aria-expanded="false">?</button></span>
+      <select id="lang">
+        <option value="de">Deutsch — немецкий</option><option value="fr">Français — французский</option><option value="it">Italiano — итальянский</option>
+        <option value="en">English — английский</option><option value="ru">Русский</option><option value="uk">Українська</option>
+      </select></div>
+    <div class="fl"><span class="lb">Шаблон<button type="button" class="qh" data-help="tpl" aria-label="Подсказка: шаблон" aria-expanded="false">?</button></span>
+      <div class="seg" id="tpl"><button type="button" data-v="kolonka">С колонкой</button><button type="button" data-v="klassika">Классика</button><button type="button" data-v="strogiy">Строгий</button></div></div>
+    <div class="fl"><span class="lb">Цвет<button type="button" class="qh" data-help="color" aria-label="Подсказка: цвет" aria-expanded="false">?</button></span>
+      <div class="sw" id="color"></div></div>
+    <div class="fl"><span class="lb">Готовый файл</span>
+      <div class="acts"><button type="button" class="btn free" id="pdf">Скачать PDF</button><button type="button" class="btn ghost sm" id="share" hidden>Отправить</button></div></div>
+    <div class="acts" style="grid-column:1/-1">
+      <button type="button" class="btn ghost sm" id="exbtn">Посмотреть на примере</button>
+      <span id="clearwrap"><button type="button" class="btn ghost sm" id="clear">Удалить всё</button></span>
+      <span class="status" id="status" role="status"></span>
+    </div>
+  </section>
+
+  <div class="exbar" id="exbar" hidden><span>Сейчас показан пример. Твои данные никуда не делись.</span><button type="button" class="btn sm" id="exback">Вернуться к моему резюме</button></div>
+
+  <div class="work">
+    <div class="form" id="form">
+      <details class="sec" open><summary><span class="num">1</span>Личные данные</summary><div class="body">
+        <div class="photo">
+          <div class="ph" id="phbox">Фото<br>3 × 4</div>
+          <div class="fl">
+            <span class="lb">Фото<button type="button" class="qh" data-help="photo" aria-label="Подсказка: фото" aria-expanded="false">?</button></span>
+            <div class="acts"><label class="btn ghost sm" for="phfile">Загрузить фото</label><input type="file" id="phfile" accept="image/*" hidden><button type="button" class="btn ghost sm" id="phdel" hidden>Убрать фото</button></div>
+            <label class="chk"><input type="checkbox" id="phon" checked> Показывать фото в резюме</label>
+          </div>
+        </div>
+        <div class="g2">
+          <label class="fl"><span class="lb">Имя</span><input type="text" data-f="p.first" autocomplete="given-name" placeholder="Olena"></label>
+          <label class="fl"><span class="lb">Фамилия</span><input type="text" data-f="p.last" autocomplete="family-name" placeholder="Kovalenko"></label>
+        </div>
+        <label class="fl"><span class="lb">Профессия или должность<button type="button" class="qh" data-help="title" aria-label="Подсказка: профессия" aria-expanded="false">?</button></span><input type="text" data-f="p.title" placeholder="Finanzanalystin"></label>
+        <div class="g2">
+          <label class="fl"><span class="lb">Улица и номер дома</span><input type="text" data-f="p.street" autocomplete="street-address" placeholder="Musterstrasse 12"></label>
+          <label class="fl"><span class="lb">Индекс и город</span><input type="text" data-f="p.city" placeholder="8000 Zürich"></label>
+          <label class="fl"><span class="lb">Телефон</span><input type="tel" data-f="p.phone" autocomplete="tel" placeholder="+41 79 000 00 00"></label>
+          <label class="fl"><span class="lb">E-mail</span><input type="email" data-f="p.email" autocomplete="email" placeholder="vorname.name@gmail.com"></label>
+          <label class="fl"><span class="lb">LinkedIn или сайт (если есть)</span><input type="text" data-f="p.web" placeholder="linkedin.com/in/…"></label>
+          <label class="fl"><span class="lb">Дата рождения<button type="button" class="qh" data-help="birth" aria-label="Подсказка: дата рождения" aria-expanded="false">?</button></span><input type="text" data-f="p.birth" inputmode="numeric" placeholder="14.05.1990"></label>
+          <label class="fl"><span class="lb">Гражданство</span><input type="text" data-f="p.nat" placeholder="Ukrainisch"></label>
+          <label class="fl"><span class="lb">Разрешение в Швейцарии<button type="button" class="qh" data-help="permit" aria-label="Подсказка: разрешение" aria-expanded="false">?</button></span>
+            <select data-f="p.permit"><option value="">Не указывать</option><option value="CH">Гражданство Швейцарии</option><option value="C">Пермит C</option><option value="B">Пермит B</option><option value="L">Пермит L</option><option value="G">Пермит G</option><option value="S">Статус S</option><option value="F">Статус F</option></select></label>
+          <label class="fl"><span class="lb">Семейное положение (если хочешь)</span><input type="text" data-f="p.civil" placeholder="verheiratet, 2 Kinder"></label>
+          <label class="fl"><span class="lb">Водительские права (если есть)</span><input type="text" data-f="p.drive" placeholder="Kat. B"></label>
+        </div>
+      </div></details>
+
+      <details class="sec" open><summary><span class="num">2</span>Коротко о себе</summary><div class="body">
+        <label class="fl"><span class="lb">3–4 предложения о тебе как о специалисте<button type="button" class="qh" data-help="profile" aria-label="Подсказка: коротко о себе" aria-expanded="false">?</button></span>
+          <textarea data-f="profile" rows="4" placeholder="Finanzanalystin mit 8 Jahren Erfahrung in Budgetierung, Reporting und Controlling. …"></textarea></label>
+      </div></details>
+
+      <details class="sec" open><summary><span class="num">3</span>Опыт работы<span class="cnt" id="c-exp"></span></summary><div class="body">
+        <p class="hint">Сначала последняя работа. Даты пиши как 03.2021 или просто 2021.</p>
+        <div id="l-exp" class="fl"></div>
+        <div class="acts"><button type="button" class="btn ghost sm" data-add="exp">+ Добавить место работы</button></div>
+      </div></details>
+
+      <details class="sec"><summary><span class="num">4</span>Образование<span class="cnt" id="c-edu"></span></summary><div class="body">
+        <div id="l-edu" class="fl"></div>
+        <div class="acts"><button type="button" class="btn ghost sm" data-add="edu">+ Добавить образование</button></div>
+      </div></details>
+
+      <details class="sec"><summary><span class="num">5</span>Курсы и повышение квалификации<span class="cnt" id="c-trn"></span></summary><div class="body">
+        <p class="hint">Языковые курсы, сертификаты, интеграционные программы. В Швейцарии это ценят.</p>
+        <div id="l-trn" class="fl"></div>
+        <div class="acts"><button type="button" class="btn ghost sm" data-add="trn">+ Добавить курс</button></div>
+      </div></details>
+
+      <details class="sec"><summary><span class="num">6</span>Языки<span class="cnt" id="c-lng"></span></summary><div class="body">
+        <div id="l-lng" class="fl"></div>
+        <div class="acts"><button type="button" class="btn ghost sm" data-add="lng">+ Добавить язык</button></div>
+      </div></details>
+
+      <details class="sec"><summary><span class="num">7</span>Навыки и интересы</summary><div class="body">
+        <label class="fl"><span class="lb">Навыки, программы, сертификаты<button type="button" class="qh" data-help="skills" aria-label="Подсказка: навыки" aria-expanded="false">?</button></span>
+          <textarea data-f="skills" rows="3" placeholder="MS Excel (sehr gut), SAP FI/CO, Power BI&#10;Budgetierung, Forecasting, Reporting"></textarea></label>
+        <label class="fl"><span class="lb">Интересы (если хочешь)</span><input type="text" data-f="interests" placeholder="Wandern, Fotografie, Freiwilligenarbeit"></label>
+      </div></details>
+
+      <details class="sec"><summary><span class="num">8</span>Рекомендации</summary><div class="body">
+        <label class="chk"><input type="checkbox" id="refreq" checked> Написать «Рекомендации по запросу»<button type="button" class="qh" data-help="refs" aria-label="Подсказка: рекомендации" aria-expanded="false">?</button></label>
+        <div id="l-ref" class="fl"></div>
+        <div class="acts" id="refadd" hidden><button type="button" class="btn ghost sm" data-add="ref">+ Добавить рекомендателя</button></div>
+      </div></details>
+    </div>
+
+    <aside class="sheet" id="sheet" aria-label="Так выглядит резюме">
+      <div class="sheet-h"><span class="eyebrow" id="pginfo">Так выглядит PDF</span><button type="button" class="btn free sm" id="pdf2">Скачать PDF</button></div>
+      <div class="pages" id="pages"></div>
+    </aside>
+  </div>
+  <a class="btn gold sm floatprev" href="#sheet">Посмотреть резюме ↓</a>
+
+  <section class="guide" id="guide" aria-labelledby="g-h">
+    <h2 id="g-h" style="grid-column:1/-1">Как написать резюме для Швейцарии</h2>
+    <div class="note"><h3>Что ждут работодатели</h3><ul>
+      <li>Одна-две страницы, без лишнего.</li>
+      <li>Фото, дата рождения и пермит. В Швейцарии это пока обычно.</li>
+      <li>Сначала последняя работа, даты месяц и год.</li>
+      <li>Языки с уровнем от A1 до C2.</li>
+      <li>Копии дипломов и рекомендаций (Arbeitszeugnis) отдельным файлом.</li>
+    </ul></div>
+    <div class="note"><h3>На каком языке</h3><p>На языке вакансии. В Цюрихе, Базеле и Берне обычно немецкий, в Женеве и Лозанне французский, в Тичино итальянский. В международных фирмах часто английский. Если сомневаешься, пиши на языке объявления.</p></div>
+    <div class="note"><h3>Как отправить</h3><p>Файл назови «Lebenslauf_Имя_Фамилия.pdf», он так и скачается. В письме коротко напиши, на какую вакансию откликаешься, и приложи резюме, сопроводительное письмо и дипломы. На сайтах вакансий загрузи PDF в поле «Lebenslauf» или «CV».</p></div>
+    <div class="note"><h3>Твои данные только у тебя</h3><p>Всё, что ты вписываешь, и фото хранятся только в браузере на этом устройстве. Мы ничего не видим и никуда не отправляем. Сохраняй резервную копию, чтобы не потерять резюме.</p></div>
+    <div class="note"><h3>Нужна помощь</h3><p>Специалисты по карьере и резюме, преподаватели немецкого и переводчики есть в <a href="https://svoiludi.ch/">справочнике «Свои люди»</a>. Вакансии ищи по советам из статьи <a href="https://svoiludi.ch/shveycariya/rabota/">«Работа в Швейцарии»</a>.</p></div>
+  </section>
+
+  <p class="imp"><b>Важно.</b> Это образец для примера и личного использования, а не официальный документ. Содержание резюме ты пишешь сама и сама за него отвечаешь. Проверь даты и названия перед отправкой. В самом PDF никаких пометок сайта нет, это твоё резюме.</p>
+
+  <div class="share-slot" data-url="https://svoiludi.ch/instrumenty/rezyume/" data-lead="Перешли тем, кто ищет работу. Сообщение уже готово." data-text="Привет! Тут можно бесплатно сделать резюме для Швейцарии на немецком, французском, итальянском или английском, с фото и пермитом, и сразу скачать PDF. https://svoiludi.ch/instrumenty/rezyume/"></div>
+</div>
+
+<script src="/assets/lib/jspdf.umd.min.js" defer></script>
+<script>
+/* ===================== данные ===================== */
+const KEY = 'rezyumeCH.v1';
+const COLORS = {sage: ['#4F5E3E', '#E6EADD', 'Шалфей'], blue: ['#2E5A88', '#E3EBF4', 'Синий'], wine: ['#7A2E3A', '#F3E4E6', 'Бордо'], gold: ['#9A6B12', '#F5EBD6', 'Горчица'], ink: ['#2B2724', '#ECEAE7', 'Чёрно-белый']};
+const blank = () => ({lang: 'de', tpl: 'kolonka', color: 'sage', photoOn: true, photo: '', refReq: true,
+  p: {first: '', last: '', title: '', street: '', city: '', phone: '', email: '', web: '', birth: '', nat: '', permit: '', civil: '', drive: ''},
+  profile: '', exp: [], edu: [], trn: [], lng: [], skills: '', interests: '', ref: [], saved: ''});
+let S = load(), EX = null, showEx = false;
+function load(){ try { const d = JSON.parse(localStorage.getItem(KEY) || 'null'); if (d && d.p) return Object.assign(blank(), d); } catch (e) {} return blank(); }
+let saveT = 0;
+function save(){ clearTimeout(saveT); saveT = setTimeout(() => { try { S.saved = new Date().toISOString(); localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) { say('Не удалось сохранить на этом устройстве. Скачай PDF или сохрани резервную копию.'); } }, 250); }
+const say = t => { const s = document.getElementById('status'); s.textContent = t; clearTimeout(say.t); if (t) say.t = setTimeout(() => s.textContent = '', 6000); };
+const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'}[c]));
+const D = () => showEx ? EX : S;
+
+/* ===================== переводы для листа ===================== */
+const L = {
+ de: {doc: 'Lebenslauf', pers: 'Persönliche Angaben', contact: 'Kontakt', profile: 'Kurzprofil', exp: 'Berufserfahrung', edu: 'Ausbildung', trn: 'Weiterbildung', lng: 'Sprachen', skills: 'Kenntnisse', int: 'Interessen', ref: 'Referenzen', refReq: 'Referenzen auf Anfrage',
+   birth: 'Geburtsdatum', nat: 'Nationalität', permit: 'Bewilligung', civil: 'Zivilstand', drive: 'Führerausweis', addr: 'Adresse', phone: 'Telefon', email: 'E-Mail', web: 'Web', now: 'heute', page: (n, m) => `Seite ${n} von ${m}`, file: 'Lebenslauf',
+   lv: {native: 'Muttersprache', C2: 'C2 – ausgezeichnet', C1: 'C1 – sehr gut', B2: 'B2 – gut', B1: 'B1 – mittel', A2: 'A2 – Grundkenntnisse', A1: 'A1 – Anfänger'},
+   pm: {CH: 'Schweizer Bürgerrecht', C: 'Niederlassungsbewilligung C', B: 'Aufenthaltsbewilligung B', L: 'Kurzaufenthaltsbewilligung L', G: 'Grenzgängerbewilligung G', S: 'Schutzstatus S', F: 'Vorläufig aufgenommen (F)'}},
+ fr: {doc: 'Curriculum vitae', pers: 'Données personnelles', contact: 'Contact', profile: 'Profil', exp: 'Expérience professionnelle', edu: 'Formation', trn: 'Formation continue', lng: 'Langues', skills: 'Compétences', int: 'Centres d’intérêt', ref: 'Références', refReq: 'Références sur demande',
+   birth: 'Date de naissance', nat: 'Nationalité', permit: 'Permis', civil: 'État civil', drive: 'Permis de conduire', addr: 'Adresse', phone: 'Téléphone', email: 'E-mail', web: 'Web', now: 'aujourd’hui', page: (n, m) => `Page ${n} sur ${m}`, file: 'CV',
+   lv: {native: 'Langue maternelle', C2: 'C2 – excellent', C1: 'C1 – très bon', B2: 'B2 – bon', B1: 'B1 – moyen', A2: 'A2 – notions', A1: 'A1 – débutant'},
+   pm: {CH: 'Nationalité suisse', C: 'Permis C (établissement)', B: 'Permis B (séjour)', L: 'Permis L (courte durée)', G: 'Permis G (frontalier)', S: 'Permis S (protection)', F: 'Permis F (admission provisoire)'}},
+ it: {doc: 'Curriculum vitae', pers: 'Dati personali', contact: 'Contatto', profile: 'Profilo', exp: 'Esperienza professionale', edu: 'Formazione', trn: 'Formazione continua', lng: 'Lingue', skills: 'Competenze', int: 'Interessi', ref: 'Referenze', refReq: 'Referenze su richiesta',
+   birth: 'Data di nascita', nat: 'Nazionalità', permit: 'Permesso', civil: 'Stato civile', drive: 'Licenza di condurre', addr: 'Indirizzo', phone: 'Telefono', email: 'E-mail', web: 'Web', now: 'oggi', page: (n, m) => `Pagina ${n} di ${m}`, file: 'CV',
+   lv: {native: 'Madrelingua', C2: 'C2 – eccellente', C1: 'C1 – molto buono', B2: 'B2 – buono', B1: 'B1 – medio', A2: 'A2 – base', A1: 'A1 – principiante'},
+   pm: {CH: 'Cittadinanza svizzera', C: 'Permesso C (domicilio)', B: 'Permesso B (dimora)', L: 'Permesso L (breve durata)', G: 'Permesso G (frontaliero)', S: 'Permesso S (protezione)', F: 'Permesso F (ammissione provvisoria)'}},
+ en: {doc: 'Curriculum Vitae', pers: 'Personal details', contact: 'Contact', profile: 'Profile', exp: 'Work experience', edu: 'Education', trn: 'Further training', lng: 'Languages', skills: 'Skills', int: 'Interests', ref: 'References', refReq: 'References available on request',
+   birth: 'Date of birth', nat: 'Nationality', permit: 'Work permit', civil: 'Marital status', drive: 'Driving licence', addr: 'Address', phone: 'Phone', email: 'Email', web: 'Web', now: 'present', page: (n, m) => `Page ${n} of ${m}`, file: 'CV',
+   lv: {native: 'Native', C2: 'C2 – proficient', C1: 'C1 – advanced', B2: 'B2 – upper intermediate', B1: 'B1 – intermediate', A2: 'A2 – elementary', A1: 'A1 – beginner'},
+   pm: {CH: 'Swiss citizen', C: 'Permit C (settlement)', B: 'Permit B (residence)', L: 'Permit L (short-term)', G: 'Permit G (cross-border)', S: 'Permit S (protection status)', F: 'Permit F (provisional admission)'}},
+ ru: {doc: 'Резюме', pers: 'Личные данные', contact: 'Контакты', profile: 'О себе', exp: 'Опыт работы', edu: 'Образование', trn: 'Курсы и повышение квалификации', lng: 'Языки', skills: 'Навыки', int: 'Интересы', ref: 'Рекомендации', refReq: 'Рекомендации по запросу',
+   birth: 'Дата рождения', nat: 'Гражданство', permit: 'Разрешение', civil: 'Семейное положение', drive: 'Водительские права', addr: 'Адрес', phone: 'Телефон', email: 'E-mail', web: 'Сайт', now: 'по настоящее время', page: (n, m) => `Стр. ${n} из ${m}`, file: 'Rezyume',
+   lv: {native: 'родной', C2: 'C2 – в совершенстве', C1: 'C1 – свободно', B2: 'B2 – хорошо', B1: 'B1 – средний', A2: 'A2 – базовый', A1: 'A1 – начальный'},
+   pm: {CH: 'Гражданство Швейцарии', C: 'Пермит C', B: 'Пермит B', L: 'Пермит L', G: 'Пермит G', S: 'Статус S', F: 'Статус F'}},
+ uk: {doc: 'Резюме', pers: 'Особисті дані', contact: 'Контакти', profile: 'Про себе', exp: 'Досвід роботи', edu: 'Освіта', trn: 'Курси та підвищення кваліфікації', lng: 'Мови', skills: 'Навички', int: 'Інтереси', ref: 'Рекомендації', refReq: 'Рекомендації за запитом',
+   birth: 'Дата народження', nat: 'Громадянство', permit: 'Дозвіл', civil: 'Сімейний стан', drive: 'Посвідчення водія', addr: 'Адреса', phone: 'Телефон', email: 'E-mail', web: 'Сайт', now: 'дотепер', page: (n, m) => `Стор. ${n} з ${m}`, file: 'Rezyume',
+   lv: {native: 'рідна', C2: 'C2 – досконало', C1: 'C1 – вільно', B2: 'B2 – добре', B1: 'B1 – середній', A2: 'A2 – базовий', A1: 'A1 – початковий'},
+   pm: {CH: 'Громадянство Швейцарії', C: 'Дозвіл C', B: 'Дозвіл B', L: 'Дозвіл L', G: 'Дозвіл G', S: 'Статус S', F: 'Статус F'}}
+};
+/* названия языков на языке резюме */
+const LN = {
+ de: ['Deutsch', 'de', 'Deutsch', 'Allemand', 'Tedesco', 'German', 'Немецкий', 'Німецька'],
+ fr: ['Französisch', 'fr', 'Französisch', 'Français', 'Francese', 'French', 'Французский', 'Французька'],
+ it: ['Italienisch', 'it', 'Italienisch', 'Italien', 'Italiano', 'Italian', 'Итальянский', 'Італійська'],
+ en: ['Englisch', 'en', 'Englisch', 'Anglais', 'Inglese', 'English', 'Английский', 'Англійська'],
+ ru: ['Russisch', 'ru', 'Russisch', 'Russe', 'Russo', 'Russian', 'Русский', 'Російська'],
+ uk: ['Ukrainisch', 'uk', 'Ukrainisch', 'Ukrainien', 'Ucraino', 'Ukrainian', 'Украинский', 'Українська'],
+ es: ['Spanisch', 'es', 'Spanisch', 'Espagnol', 'Spagnolo', 'Spanish', 'Испанский', 'Іспанська'],
+ pt: ['Portugiesisch', 'pt', 'Portugiesisch', 'Portugais', 'Portoghese', 'Portuguese', 'Португальский', 'Португальська'],
+ pl: ['Polnisch', 'pl', 'Polnisch', 'Polonais', 'Polacco', 'Polish', 'Польский', 'Польська'],
+ ro: ['Rumänisch', 'ro', 'Rumänisch', 'Roumain', 'Rumeno', 'Romanian', 'Румынский', 'Румунська'],
+ tr: ['Türkisch', 'tr', 'Türkisch', 'Turc', 'Turco', 'Turkish', 'Турецкий', 'Турецька'],
+ ar: ['Arabisch', 'ar', 'Arabisch', 'Arabe', 'Arabo', 'Arabic', 'Арабский', 'Арабська']
+};
+const LNI = {de: 2, fr: 3, it: 4, en: 5, ru: 6, uk: 7};
+const LN_RU = {de: 'Немецкий', fr: 'Французский', it: 'Итальянский', en: 'Английский', ru: 'Русский', uk: 'Украинский', es: 'Испанский', pt: 'Португальский', pl: 'Польский', ro: 'Румынский', tr: 'Турецкий', ar: 'Арабский'};
+const langName = (code, other, cvl) => code === 'other' ? (other || '') : (LN[code] ? LN[code][LNI[cvl]] : '');
+
+/* ===================== раскладка листа (мм, pt) ===================== */
+const PW = 210, PH = 297, PT = 0.3528;
+const FONTS = {r: ['400', 'Manrope'], m: ['600', 'Manrope'], b: ['700', 'Manrope'], d: ['400', 'Forum']};
+const mctx = document.createElement('canvas').getContext('2d');
+try { mctx.fontKerning = 'none'; } catch (e) {}
+function tw(s, f, size){ mctx.font = `${FONTS[f][0]} ${size}px ${FONTS[f][1]}`; return mctx.measureText(s).width * PT; }
+function wrap(s, f, size, w){
+  const out = [];
+  String(s || '').split('\n').forEach(par => {
+    const words = par.trim().split(/\s+/).filter(Boolean); let line = '';
+    if (!words.length) return;
+    for (let wd of words){
+      while (tw(wd, f, size) > w && wd.length > 1){ // очень длинное слово (адрес сайта)
+        let k = wd.length; while (k > 1 && tw(wd.slice(0, k), f, size) > w) k--;
+        if (line){ out.push(line); line = ''; } out.push(wd.slice(0, k)); wd = wd.slice(k);
+      }
+      const t = line ? line + ' ' + wd : wd;
+      if (tw(t, f, size) <= w) line = t; else { if (line) out.push(line); line = wd; }
+    }
+    if (line) out.push(line);
+  });
+  return out;
+}
+const lh = (size, k = 1.38) => size * PT * k;
+function period(a, b, cur, l){
+  const f = x => String(x || '').trim().replace(/\s/g, '').replace(/^(\d)\.(\d{4})$/, '0$1.$2');
+  const A = f(a), B = cur ? l.now : f(b);
+  return A && B ? `${A} – ${B}` : (A || B);
+}
+
+function build(d, mode = 0, dense = 0){
+  const l = L[d.lang] || L.de, col = COLORS[d.color] || COLORS.sage, tpl = d.tpl;
+  const ACC = tpl === 'strogiy' ? '#1F1B18' : col[0], SOFT = tpl === 'strogiy' ? '#F1F0EE' : col[1];
+  const INK = '#1F1B18', MUT = '#6B625A', RULE = '#D9D3CA';
+  const pages = [[]]; let pg = 0; const G = dense ? 0.62 : 1;
+  const op = (o, p = pg) => { while (pages.length <= p) pages.push([]); pages[p].push(o); };
+  const T = (x, y, s, f, size, color = INK, align = 'left', p) => op({t: 'text', x, y, s, f, size, color, align}, p);
+  const R = (x, y, w, h, fill, p) => op({t: 'rect', x, y, w, h, fill}, p);
+  const LINE = (x1, y1, x2, y2, color = RULE, w = 0.3, p) => op({t: 'line', x1, y1, x2, y2, color, w}, p);
+  const name = [d.p.first, d.p.last].filter(Boolean).join(' ') || ' ';
+  const photo = d.photoOn && d.photo;
+  const pers = [[l.birth, d.p.birth], [l.nat, d.p.nat], [l.permit, d.p.permit ? l.pm[d.p.permit] : ''], [l.civil, d.p.civil], [l.drive, d.p.drive]].filter(r => r[1]);
+  const contacts = [[l.addr, [d.p.street, d.p.city].filter(Boolean).join(', ')], [l.phone, d.p.phone], [l.email, d.p.email], [l.web, d.p.web]].filter(r => r[1]);
+  const langs = d.lng.filter(x => x.code && (x.code !== 'other' || x.other));
+  const skills = String(d.skills || '').split('\n').map(s => s.trim()).filter(Boolean);
+  const exp = d.exp.filter(e => e.title || e.org), edu = d.edu.filter(e => e.title || e.org), trn = d.trn.filter(e => e.title);
+  const refs = d.ref.filter(r => r.name);
+
+  /* общий поток основной колонки */
+  let X0, W, y, TOP = 18, BOT = PH - 18;
+  const newPage = () => { pg++; y = TOP; if (tpl === 'kolonka') R(0, 0, 66, PH, SOFT, pg); };
+  const need = h => { if (y + h > BOT) newPage(); };
+  const heading = t => {
+    need(16);
+    y += 2 * G;
+    T(X0, y + 3.2, t.toUpperCase(), 'b', 8.6, ACC);
+    LINE(X0 + tw(t.toUpperCase(), 'b', 8.6) + 3, y + 2.2, X0 + W, y + 2.2, tpl === 'strogiy' ? '#9A938A' : RULE, 0.3);
+    y += 6 + 1.5 * G;
+  };
+  const para = (s, f = 'r', size = 9.2, color = INK, x = X0, w = W) => { wrap(s, f, size, w).forEach(ln => { need(lh(size)); T(x, y + size * PT, ln, f, size, color); y += lh(size); }); };
+  const DC = tpl === 'kolonka' ? 27 : 33; // колонка дат
+  const entry = (dates, title, sub, text, bullets = true) => {
+    const tx = X0 + DC, w = W - DC;
+    const tl = wrap(title, 'b', 9.8, w), sl = sub ? wrap(sub, 'r', 8.8, w) : [], body = [];
+    String(text || '').split('\n').map(s => s.trim().replace(/^[-•–·]\s*/, '')).filter(Boolean).forEach(b => wrap(b, 'r', 8.8, w - (bullets ? 3.2 : 0)).forEach((ln, i) => body.push([ln, i === 0])));
+    const h = tl.length * lh(9.8, 1.3) + sl.length * lh(8.8) + body.length * lh(8.8) + 3.6;
+    need(Math.min(h, BOT - TOP));
+    T(X0, y + 9.8 * PT, dates, 'm', 8.2, MUT);
+    tl.forEach(ln => { T(tx, y + 9.8 * PT, ln, 'b', 9.8, INK); y += lh(9.8, 1.3); });
+    sl.forEach(ln => { T(tx, y + 8.8 * PT, ln, 'r', 8.8, ACC === INK ? MUT : ACC); y += lh(8.8); });
+    body.forEach(([ln, first]) => { need(lh(8.8)); if (bullets && first) op({t: 'circle', cx: tx + 0.9, cy: y + 8.8 * PT - 1.05, r: 0.55, fill: ACC}, pg); T(tx + (bullets ? 3.2 : 0), y + 8.8 * PT, ln, 'r', 8.8, INK); y += lh(8.8); });
+    y += 3.6 * G;
+  };
+  const table = rows => { rows.forEach(([k, v]) => { const vl = wrap(v, 'r', 9, W - DC); need(vl.length * lh(9)); T(X0, y + 9 * PT, k, 'm', 8.4, MUT); vl.forEach(ln => { T(X0 + DC, y + 9 * PT, ln, 'r', 9, INK); y += lh(9); }); y += 0.8 * G; }); y += 2 * G; };
+  const mainSections = (withPers, withLangs, withSkills) => {
+    if (withPers && pers.length){ heading(l.pers);
+      const half = (W - 8) / 2, h2 = Math.ceil(pers.length / 2), LW = DC;
+      [pers.slice(0, h2), pers.slice(h2)].forEach((col, ci) => { let yy = y; col.forEach(([k, v]) => { const vl = wrap(v, 'r', 9, half - LW); T(X0 + ci * (half + 8), yy + 9 * PT, k, 'm', 8.4, MUT); vl.forEach(ln => { T(X0 + ci * (half + 8) + LW, yy + 9 * PT, ln, 'r', 9, INK); yy += lh(9); }); yy += 0.8 * G; }); col.yEnd = yy; });
+      y = Math.max(...[pers.slice(0, h2), pers.slice(h2)].map(c => y + c.reduce((a, [, v]) => a + wrap(v, 'r', 9, half - LW).length * lh(9) + 0.8 * G, 0))) + 2 * G; }
+    if (d.profile){ heading(l.profile); para(d.profile, 'r', 9.2); y += 3 * G; }
+    if (exp.length){ heading(l.exp); exp.forEach(e => entry(period(e.from, e.to, e.cur, l), e.title, [e.org, e.place].filter(Boolean).join(', '), e.text)); }
+    if (edu.length){ heading(l.edu); edu.forEach(e => entry(period(e.from, e.to, e.cur, l), e.title, [e.org, e.place].filter(Boolean).join(', '), e.text, false)); }
+    if (trn.length){ heading(l.trn); trn.forEach(e => entry(String(e.year || ''), e.title, e.org, '', false)); }
+    if (withLangs && withSkills && langs.length && (skills.length || d.interests)){
+      /* классика и строгий: языки слева, навыки и интересы справа, чтобы резюме чаще помещалось на одну страницу */
+      const half = (W - 8) / 2, xA = X0, xB = X0 + half + 8, LW = 30;
+      const lrows = langs.map(x => [langName(x.code, x.other, d.lang), l.lv[x.lvl] || '']);
+      const bl = []; skills.forEach(sv => wrap(sv, 'r', 9, half).forEach(ln => bl.push([ln, 'r', INK]))); if (d.interests){ if (bl.length) bl.push(['', 'r', INK]); bl.push([l.int, 'm', MUT]); wrap(d.interests, 'r', 9, half).forEach(ln => bl.push([ln, 'r', INK])); }
+      const ha = lrows.reduce((a, [, v]) => a + wrap(v, 'r', 9, half - LW).length * lh(9) + 0.8 * G, 0), hb = bl.length * lh(9);
+      need(16 + Math.max(ha, hb));
+      const y0 = y + 2 * G;
+      [[xA, l.lng], [xB, skills.length ? l.skills : l.int]].forEach(([hx, t]) => { T(hx, y0 + 3.2, t.toUpperCase(), 'b', 8.6, ACC); LINE(hx + tw(t.toUpperCase(), 'b', 8.6) + 3, y0 + 2.2, hx + half, y0 + 2.2, tpl === 'strogiy' ? '#9A938A' : RULE, 0.3); });
+      let ya = y0 + 6 + 1.5 * G, yb = ya;
+      lrows.forEach(([k, v]) => { const vl = wrap(v, 'r', 9, half - LW); T(xA, ya + 9 * PT, k, 'm', 8.4, MUT); vl.forEach(ln => { T(xA + LW, ya + 9 * PT, ln, 'r', 9, INK); ya += lh(9); }); ya += 0.8 * G; });
+      (skills.length ? bl : bl.slice(1)).forEach(([ln, f, c]) => { if (ln) T(xB, yb + 9 * PT, ln, f, f === 'm' ? 8.4 : 9, c); yb += lh(9); });
+      y = Math.max(ya, yb) + 3 * G;
+    } else {
+      if (withLangs && langs.length){ heading(l.lng); table(langs.map(x => [langName(x.code, x.other, d.lang), l.lv[x.lvl] || ''])); }
+      if (withSkills && skills.length){ heading(l.skills); skills.forEach(s => para(s, 'r', 9)); y += 3 * G; }
+      if (withSkills && d.interests){ heading(l.int); para(d.interests, 'r', 9); y += 3 * G; }
+    }
+    if (d.refReq || refs.length){ heading(l.ref); if (d.refReq && !refs.length) para(l.refReq, 'r', 9, MUT); refs.forEach(r => { const lines = [r.name, [r.role, r.org].filter(Boolean).join(', '), r.contact].filter(Boolean); need(lines.length * lh(9) + 2); lines.forEach((ln, i) => { T(X0, y + 9 * PT, ln, i ? 'r' : 'm', 9, i ? MUT : INK); y += lh(9); }); y += 2; }); }
+  };
+
+  if (tpl === 'kolonka'){
+    /* колонка слева: фото, контакты, данные, языки, навыки */
+    const SX = 12, SW = 66 - 24;
+    R(0, 0, 66, PH, SOFT, 0);
+    let sy = 16, sp = 0;
+    const sneed = h => { if (sy + h > BOT){ sp++; sy = TOP; } };
+    const PHW = mode ? 28 : 34, GAP = mode ? 1.2 : 2, SEC = mode ? 1.5 : 3;
+    if (photo){ op({t: 'img', x: SX + (SW - PHW) / 2, y: sy, w: PHW, h: PHW * 4 / 3, data: d.photo}, 0); sy += PHW * 4 / 3 + (mode ? 6 : 9); }
+    const sh = t => { sneed(12); T(SX, sy + 3, t.toUpperCase(), 'b', 8, ACC, 'left', sp); LINE(SX, sy + 5, SX + SW, sy + 5, ACC, 0.35, sp); sy += 9; };
+    const sk = (k, v) => { const vl = wrap(v, 'r', 8.6, SW); sneed(lh(7.6) + vl.length * lh(8.6) + 2); if (k){ T(SX, sy + 7.6 * PT, k, 'm', 7.6, MUT, 'left', sp); sy += lh(7.6); } vl.forEach(ln => { T(SX, sy + 8.6 * PT, ln, 'r', 8.6, INK, 'left', sp); sy += lh(8.6); }); sy += GAP; };
+    if (contacts.length){ sh(l.contact); contacts.forEach(([k, v]) => sk(k, v)); sy += SEC; }
+    if (pers.length){ sh(l.pers); pers.forEach(([k, v]) => sk(mode ? k : k, v)); sy += SEC; }
+    if (langs.length){ sh(l.lng); langs.forEach(x => { const nm = langName(x.code, x.other, d.lang), lvT = l.lv[x.lvl] || ''; sneed(13); T(SX, sy + 8.8 * PT, nm, 'm', 8.8, INK, 'left', sp); sy += lh(8.8);
+      const n = {native: 5, C2: 5, C1: 4, B2: 3, B1: 3, A2: 2, A1: 1}[x.lvl] || 0;
+      for (let i = 0; i < 5; i++) op({t: 'circle', cx: SX + 1.3 + i * 4, cy: sy + 1.4, r: 1.2, fill: i < n ? ACC : '#FFFFFF'}, sp);
+      if (lvT) T(SX + 22, sy + 2.4, lvT.replace(/^(C2|C1|B2|B1|A2|A1) – /, '$1 · '), 'r', 7.4, MUT, 'left', sp); sy += 6.5; }); sy += SEC; }
+    if (mode < 2){
+      if (skills.length){ sh(l.skills); skills.forEach(s => sk('', s)); sy += SEC; }
+      if (d.interests){ sh(l.int); sk('', d.interests); }
+    }
+    /* основная колонка */
+    X0 = 76; W = PW - X0 - 14; y = 20;
+    T(X0, y + 3, l.doc.toUpperCase(), 'b', 7.6, MUT); y += 6;
+    wrap(name, 'd', 30, W).forEach(ln => { T(X0, y + 30 * PT * 0.82, ln, 'd', 30, INK); y += lh(30, 1.05); });
+    if (d.p.title){ y += 1; wrap(d.p.title, 'm', 11, W).forEach(ln => { T(X0, y + 11 * PT, ln, 'm', 11, ACC); y += lh(11); }); }
+    y += 4; LINE(X0, y, X0 + W, y, ACC, 0.6); y += 6;
+    if (sp > 0 && mode < 2) return build(d, mode + 1, dense);
+    mainSections(false, false, mode === 2);
+    if (!dense && pages.length === 2 && sp === 0) { const t = build(d, mode, 1); if (t.length === 1) return t; }
+    while (pages.length <= sp) { pages.push([]); }
+    for (let p = 1; p < pages.length; p++) if (!pages[p].some(o => o.t === 'rect' && o.x === 0 && o.w === 66)) pages[p].unshift({t: 'rect', x: 0, y: 0, w: 66, h: PH, fill: SOFT});
+  } else {
+    /* классика и строгий: шапка во всю ширину */
+    X0 = 18; W = PW - 36; y = 18;
+    const pw = photo ? 31 : 0, hw = W - (photo ? pw + 8 : 0);
+    if (photo) op({t: 'img', x: X0 + W - pw, y: 16, w: pw, h: pw * 4 / 3, data: d.photo}, 0);
+    T(X0, y + 3, l.doc.toUpperCase(), 'b', 7.6, MUT); y += 6;
+    const nf = tpl === 'strogiy' ? 'b' : 'd', ns = tpl === 'strogiy' ? 22 : 30;
+    wrap(name, nf, ns, hw).forEach(ln => { T(X0, y + ns * PT * 0.82, ln, nf, ns, INK); y += lh(ns, 1.08); });
+    if (d.p.title){ y += 0.5; wrap(d.p.title, 'm', 11, hw).forEach(ln => { T(X0, y + 11 * PT, ln, 'm', 11, ACC); y += lh(11); }); }
+    y += 2.5;
+    const cl = contacts.map(r => r[1]);
+    wrap(cl.join('   ·   '), 'r', 8.8, hw).forEach(ln => { T(X0, y + 8.8 * PT, ln, 'r', 8.8, MUT); y += lh(8.8); });
+    y = Math.max(y + 5, photo ? 16 + pw * 4 / 3 + 5 : 0);
+    LINE(X0, y, X0 + W, y, ACC, tpl === 'strogiy' ? 0.5 : 0.8); y += 6 * G;
+    mainSections(true, true, true);
+    if (!dense && pages.length === 2) { const t = build(d, mode, 1); if (t.length === 1) return t; }
+  }
+  /* нижняя строка каждой страницы */
+  const n = pages.length;
+  pages.forEach((p, i) => { const fx = tpl === 'kolonka' ? 76 : 18; p.push({t: 'text', x: fx, y: PH - 9, s: `${name.trim()} · ${l.doc}` + (n > 1 ? ` · ${l.page(i + 1, n)}` : ''), f: 'r', size: 7, color: '#9A928A', align: 'left'}); });
+  return pages;
+}
+
+/* ===================== предпросмотр SVG ===================== */
+function svg(ops){
+  const parts = ops.map(o => {
+    if (o.t === 'rect') return `<rect x="${o.x}" y="${o.y}" width="${o.w}" height="${o.h}" fill="${o.fill}"/>`;
+    if (o.t === 'line') return `<line x1="${o.x1}" y1="${o.y1}" x2="${o.x2}" y2="${o.y2}" stroke="${o.color}" stroke-width="${o.w}"/>`;
+    if (o.t === 'circle') return `<circle cx="${o.cx}" cy="${o.cy}" r="${o.r}" fill="${o.fill}"${o.fill === '#FFFFFF' ? ' stroke="#B9B2A8" stroke-width="0.25"' : ''}/>`;
+    if (o.t === 'img') return `<image href="${o.data}" x="${o.x}" y="${o.y}" width="${o.w}" height="${o.h}" preserveAspectRatio="xMidYMid slice"/>`;
+    if (o.t === 'text') return `<text x="${o.x}" y="${o.y}" font-family="${FONTS[o.f][1]}" font-weight="${FONTS[o.f][0]}" font-size="${(o.size * PT).toFixed(3)}" fill="${o.color}"${o.align === 'right' ? ' text-anchor="end"' : ''}>${esc(o.s)}</text>`;
+    return '';
+  });
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${PW} ${PH}" width="${PW * 4}" height="${PH * 4}" role="img">${parts.join('')}</svg>`;
+}
+let rT = 0;
+function render(){ clearTimeout(rT); rT = setTimeout(() => {
+  const pages = build(D());
+  document.getElementById('pages').innerHTML = pages.map(svg).join('');
+  document.getElementById('pginfo').textContent = 'Так выглядит PDF · ' + (pages.length === 1 ? '1 страница' : pages.length + ' страницы') + (pages.length > 2 ? ' · лучше сократить до двух' : '');
+}, 60); }
+
+/* ===================== PDF ===================== */
+const FONT_FILES = {'Manrope-Regular': '/assets/lib/fonts-pdf/Manrope-Regular.ttf', 'Manrope-SemiBold': '/assets/lib/fonts-pdf/Manrope-SemiBold.ttf', 'Manrope-Bold': '/assets/lib/fonts-pdf/Manrope-Bold.ttf', 'Forum-Regular': '/assets/lib/fonts-pdf/Forum-Regular.ttf'};
+const PDFF = {r: 'Manrope-Regular', m: 'Manrope-SemiBold', b: 'Manrope-Bold', d: 'Forum-Regular'};
+let fontCache = null;
+async function fonts(){
+  if (fontCache) return fontCache;
+  const base = (window.PV_BASE || '/').replace(/\/$/, '');
+  const out = {};
+  for (const [k, u] of Object.entries(FONT_FILES)){
+    const r = await fetch(window.PV_BASE ? base + u : u); if (!r.ok) throw new Error('font');
+    const buf = new Uint8Array(await r.arrayBuffer()); let s = '';
+    for (let i = 0; i < buf.length; i += 0x8000) s += String.fromCharCode.apply(null, buf.subarray(i, i + 0x8000));
+    out[k] = btoa(s);
+  }
+  return fontCache = out;
+}
+const hex = h => [parseInt(h.slice(1, 3), 16), parseInt(h.slice(3, 5), 16), parseInt(h.slice(5, 7), 16)];
+async function makePdf(){
+  if (!window.jspdf) throw new Error('lib');
+  const F = await fonts(), doc = new window.jspdf.jsPDF({unit: 'mm', format: 'a4', compress: true});
+  for (const [k, b64] of Object.entries(F)){ doc.addFileToVFS(k + '.ttf', b64); doc.addFont(k + '.ttf', k, 'normal'); }
+  const d = D(), pages = build(d);
+  pages.forEach((ops, i) => {
+    if (i) doc.addPage();
+    ops.forEach(o => {
+      if (o.t === 'rect'){ doc.setFillColor(...hex(o.fill)); doc.rect(o.x, o.y, o.w, o.h, 'F'); }
+      else if (o.t === 'line'){ doc.setDrawColor(...hex(o.color)); doc.setLineWidth(o.w); doc.line(o.x1, o.y1, o.x2, o.y2); }
+      else if (o.t === 'circle'){ doc.setFillColor(...hex(o.fill)); if (o.fill === '#FFFFFF'){ doc.setDrawColor(185, 178, 168); doc.setLineWidth(0.25); doc.circle(o.cx, o.cy, o.r, 'FD'); } else doc.circle(o.cx, o.cy, o.r, 'F'); }
+      else if (o.t === 'img'){ try { doc.addImage(o.data, 'JPEG', o.x, o.y, o.w, o.h, undefined, 'MEDIUM'); } catch (e) {} }
+      else if (o.t === 'text'){ doc.setFont(PDFF[o.f], 'normal'); doc.setFontSize(o.size); doc.setTextColor(...hex(o.color)); doc.text(o.s, o.x, o.y, o.align === 'right' ? {align: 'right'} : undefined); }
+    });
+  });
+  const nm = [d.p.first, d.p.last].filter(Boolean).join('_').replace(/[^\p{L}\p{N}_-]+/gu, '') || 'Name';
+  doc.setProperties({title: `${(L[d.lang] || L.de).doc} ${[d.p.first, d.p.last].filter(Boolean).join(' ')}`.trim(), author: [d.p.first, d.p.last].filter(Boolean).join(' '), creator: 'svoiludi.ch'});
+  return {blob: doc.output('blob'), name: `${(L[d.lang] || L.de).file}_${nm}.pdf`};
+}
+async function doPdf(btns, share){
+  btns.forEach(b => b.disabled = true); say('Готовлю PDF…');
+  try {
+    const {blob, name} = await makePdf();
+    if (share){ const file = new File([blob], name, {type: 'application/pdf'}); await navigator.share({files: [file], title: name}); say('Готово.'); }
+    else { const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = name; document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 1500); say('PDF скачан: ' + name); }
+  } catch (e) { say(e && e.name === 'AbortError' ? '' : 'Не получилось сделать PDF. Проверь интернет и попробуй ещё раз.'); }
+  btns.forEach(b => b.disabled = false);
+}
+
+/* ===================== анкета ===================== */
+const LISTS = {
+  exp: {title: 'Место работы', make: () => ({from: '', to: '', cur: false, title: '', org: '', place: '', text: ''}), fields: e => `
+    <div class="g3"><label class="fl"><span class="lb">С</span><input type="text" data-k="from" value="${esc(e.from)}" placeholder="03.2021" inputmode="numeric"></label>
+    <label class="fl"><span class="lb">По</span><input type="text" data-k="to" value="${esc(e.to)}" placeholder="12.2024" inputmode="numeric" ${e.cur ? 'disabled' : ''}></label>
+    <label class="chk" style="align-self:end;padding-bottom:10px"><input type="checkbox" data-k="cur" ${e.cur ? 'checked' : ''}> работаю сейчас</label></div>
+    <label class="fl"><span class="lb">Должность</span><input type="text" data-k="title" value="${esc(e.title)}" placeholder="Finanzanalystin"></label>
+    <div class="g2"><label class="fl"><span class="lb">Фирма</span><input type="text" data-k="org" value="${esc(e.org)}" placeholder="Muster AG"></label>
+    <label class="fl"><span class="lb">Город, страна</span><input type="text" data-k="place" value="${esc(e.place)}" placeholder="Zürich"></label></div>
+    <label class="fl"><span class="lb">Что делала и чего добилась<button type="button" class="qh" data-help="bullets" aria-label="Подсказка: что делала" aria-expanded="false">?</button></span><textarea data-k="text" rows="3" placeholder="Monatliches Reporting für 5 Abteilungen&#10;Budget von CHF 12 Mio. betreut">${esc(e.text)}</textarea></label>`},
+  edu: {title: 'Образование', make: () => ({from: '', to: '', cur: false, title: '', org: '', place: '', text: ''}), fields: e => `
+    <div class="g2"><label class="fl"><span class="lb">С</span><input type="text" data-k="from" value="${esc(e.from)}" placeholder="2008" inputmode="numeric"></label>
+    <label class="fl"><span class="lb">По</span><input type="text" data-k="to" value="${esc(e.to)}" placeholder="2013" inputmode="numeric"></label></div>
+    <label class="fl"><span class="lb">Диплом и специальность</span><input type="text" data-k="title" value="${esc(e.title)}" placeholder="Master in Finanzen"></label>
+    <div class="g2"><label class="fl"><span class="lb">Учебное заведение</span><input type="text" data-k="org" value="${esc(e.org)}" placeholder="Universität"></label>
+    <label class="fl"><span class="lb">Город, страна</span><input type="text" data-k="place" value="${esc(e.place)}" placeholder="Kyjiw, Ukraine"></label></div>
+    <label class="fl"><span class="lb">Примечание<button type="button" class="qh" data-help="eduNote" aria-label="Подсказка: признание диплома" aria-expanded="false">?</button></span><input type="text" data-k="text" value="${esc(e.text)}" placeholder="Anerkannt durch das SBFI"></label>`},
+  trn: {title: 'Курс', make: () => ({year: '', title: '', org: ''}), fields: e => `
+    <div class="g3"><label class="fl"><span class="lb">Год</span><input type="text" data-k="year" value="${esc(e.year)}" placeholder="2025" inputmode="numeric"></label>
+    <label class="fl" style="grid-column:span 2"><span class="lb">Название курса или сертификата</span><input type="text" data-k="title" value="${esc(e.title)}" placeholder="Deutsch B2, fide-Zertifikat"></label></div>
+    <label class="fl"><span class="lb">Кто проводил</span><input type="text" data-k="org" value="${esc(e.org)}" placeholder="Klubschule Migros, Zürich"></label>`},
+  lng: {title: 'Язык', make: () => ({code: '', other: '', lvl: 'B1'}), fields: e => `
+    <div class="g2"><label class="fl"><span class="lb">Язык</span><select data-k="code"><option value="">Выбери язык</option>${Object.keys(LN_RU).map(c => `<option value="${c}" ${e.code === c ? 'selected' : ''}>${LN_RU[c]}</option>`).join('')}<option value="other" ${e.code === 'other' ? 'selected' : ''}>Другой…</option></select></label>
+    <label class="fl"><span class="lb">Уровень<button type="button" class="qh" data-help="lvl" aria-label="Подсказка: уровень языка" aria-expanded="false">?</button></span><select data-k="lvl">${['native', 'C2', 'C1', 'B2', 'B1', 'A2', 'A1'].map(v => `<option value="${v}" ${e.lvl === v ? 'selected' : ''}>${L.ru.lv[v]}</option>`).join('')}</select></label></div>
+    ${e.code === 'other' ? `<label class="fl"><span class="lb">Название языка на языке резюме</span><input type="text" data-k="other" value="${esc(e.other)}" placeholder="Georgisch"></label>` : ''}`},
+  ref: {title: 'Рекомендатель', make: () => ({name: '', role: '', org: '', contact: ''}), fields: e => `
+    <div class="g2"><label class="fl"><span class="lb">Имя и фамилия</span><input type="text" data-k="name" value="${esc(e.name)}" placeholder="Anna Muster"></label>
+    <label class="fl"><span class="lb">Должность</span><input type="text" data-k="role" value="${esc(e.role)}" placeholder="Leiterin Finanzen"></label>
+    <label class="fl"><span class="lb">Фирма</span><input type="text" data-k="org" value="${esc(e.org)}" placeholder="Muster AG"></label>
+    <label class="fl"><span class="lb">Телефон или e-mail</span><input type="text" data-k="contact" value="${esc(e.contact)}" placeholder="+41 44 000 00 00"></label></div>`}
+};
+function drawList(k){
+  const box = document.getElementById('l-' + k), arr = S[k], def = LISTS[k];
+  box.innerHTML = arr.map((e, i) => `<div class="ent" data-list="${k}" data-i="${i}"><div class="ent-h"><b>${esc(e.title || e.name || (k === 'lng' ? (e.code === 'other' ? e.other : LN_RU[e.code]) : '') || def.title + ' ' + (i + 1))}</b>
+    <button type="button" class="ib" data-mv="-1" aria-label="Выше" ${i ? '' : 'disabled'}>↑</button><button type="button" class="ib" data-mv="1" aria-label="Ниже" ${i < arr.length - 1 ? '' : 'disabled'}>↓</button><button type="button" class="ib" data-del aria-label="Удалить">✕</button></div>${def.fields(e)}</div>`).join('');
+  const c = document.getElementById('c-' + k); if (c) c.textContent = arr.length ? arr.length : '';
+}
+function drawAll(){
+  document.querySelectorAll('[data-f]').forEach(el => { const [a, b] = el.dataset.f.split('.'); el.value = b ? (S[a][b] || '') : (S[a] || ''); });
+  document.getElementById('lang').value = S.lang;
+  document.querySelectorAll('#tpl button').forEach(b => b.setAttribute('aria-pressed', b.dataset.v === S.tpl));
+  document.querySelectorAll('#color button').forEach(b => b.setAttribute('aria-pressed', b.dataset.v === S.color));
+  document.getElementById('phon').checked = S.photoOn;
+  document.getElementById('refreq').checked = S.refReq;
+  document.getElementById('refadd').hidden = S.refReq;
+  const ph = document.getElementById('phbox'); ph.innerHTML = S.photo ? `<img src="${S.photo}" alt="Твоё фото">` : 'Фото<br>3 × 4';
+  document.getElementById('phdel').hidden = !S.photo;
+  ['exp', 'edu', 'trn', 'lng', 'ref'].forEach(drawList);
+  render();
+}
+function touched(){ if (showEx) leaveEx(); save(); render(); }
+
+/* ===================== события ===================== */
+document.getElementById('color').innerHTML = Object.entries(COLORS).map(([k, c]) => `<button type="button" data-v="${k}" style="background:${c[0]}" aria-label="${c[2]}" title="${c[2]}"></button>`).join('');
+document.getElementById('form').addEventListener('input', e => {
+  const el = e.target;
+  if (el.dataset.f){ const [a, b] = el.dataset.f.split('.'); if (b) S[a][b] = el.value; else S[a] = el.value; touched(); return; }
+  const ent = el.closest('.ent'); if (!ent || !el.dataset.k) return;
+  const k = ent.dataset.list, i = +ent.dataset.i, item = S[k][i];
+  if (el.type === 'checkbox'){ item[el.dataset.k] = el.checked; if (el.dataset.k === 'cur'){ ent.querySelector('[data-k="to"]').disabled = el.checked; } }
+  else item[el.dataset.k] = el.value;
+  if (el.dataset.k === 'title' || el.dataset.k === 'name') ent.querySelector('.ent-h b').textContent = el.value || LISTS[k].title + ' ' + (i + 1);
+  if (k === 'lng' && el.dataset.k === 'code'){ drawList('lng'); }
+  touched();
+});
+document.getElementById('form').addEventListener('click', e => {
+  const add = e.target.closest('[data-add]');
+  if (add){ const k = add.dataset.add; S[k].push(LISTS[k].make()); drawList(k); touched(); const last = document.querySelector(`#l-${k} .ent:last-child input, #l-${k} .ent:last-child select`); if (last) last.focus(); return; }
+  const ent = e.target.closest('.ent'); if (!ent) return;
+  const k = ent.dataset.list, i = +ent.dataset.i, arr = S[k];
+  const mv = e.target.closest('[data-mv]');
+  if (mv){ const j = i + +mv.dataset.mv; if (j < 0 || j >= arr.length) return; [arr[i], arr[j]] = [arr[j], arr[i]]; drawList(k); touched(); return; }
+  if (e.target.closest('[data-del]')){ arr.splice(i, 1); drawList(k); touched(); }
+});
+document.getElementById('lang').addEventListener('change', e => { S.lang = e.target.value; touched(); });
+document.getElementById('tpl').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; S.tpl = b.dataset.v; drawAll(); save(); if (showEx) leaveEx(); });
+document.getElementById('color').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; S.color = b.dataset.v; drawAll(); save(); if (showEx) leaveEx(); });
+document.getElementById('phon').addEventListener('change', e => { S.photoOn = e.target.checked; touched(); });
+document.getElementById('refreq').addEventListener('change', e => { S.refReq = e.target.checked; document.getElementById('refadd').hidden = S.refReq; if (!S.refReq && !S.ref.length){ S.ref.push(LISTS.ref.make()); drawList('ref'); } touched(); });
+document.getElementById('phfile').addEventListener('change', async e => {
+  const f = e.target.files[0]; e.target.value = ''; if (!f) return;
+  try {
+    const url = URL.createObjectURL(f), img = new Image(); img.src = url; await img.decode();
+    const W = 450, H = 600, c = document.createElement('canvas'); c.width = W; c.height = H; const x = c.getContext('2d');
+    const r = Math.max(W / img.naturalWidth, H / img.naturalHeight), w = img.naturalWidth * r, h = img.naturalHeight * r;
+    x.fillStyle = '#fff'; x.fillRect(0, 0, W, H); x.drawImage(img, (W - w) / 2, (H - h) / 2.6, w, h); URL.revokeObjectURL(url);
+    S.photo = c.toDataURL('image/jpeg', 0.84); S.photoOn = true; drawAll(); touched(); say('Фото добавлено. Оно хранится только на этом устройстве.');
+  } catch (err) { say('Это фото не открылось. Попробуй JPG или PNG.'); }
+});
+document.getElementById('phdel').addEventListener('click', () => { S.photo = ''; drawAll(); touched(); });
+const pdfBtns = [document.getElementById('pdf'), document.getElementById('pdf2')];
+pdfBtns.forEach(b => b.addEventListener('click', () => doPdf(pdfBtns, false)));
+try { if (navigator.canShare && navigator.canShare({files: [new File(['x'], 'x.pdf', {type: 'application/pdf'})]}) && matchMedia('(pointer:coarse)').matches){ const sb = document.getElementById('share'); sb.hidden = false; sb.addEventListener('click', () => doPdf(pdfBtns.concat(sb), true)); } } catch (e) {}
+/* удалить всё — с подтверждением на странице */
+document.getElementById('clearwrap').addEventListener('click', e => {
+  const w = document.getElementById('clearwrap');
+  if (e.target.id === 'clear'){ w.innerHTML = '<span class="confirm">Удалить всё резюме на этом устройстве? <button type="button" class="btn sm" id="clyes">Да, удалить</button><button type="button" class="btn ghost sm" id="clno">Нет</button></span>'; return; }
+  if (e.target.id === 'clyes'){ S = blank(); try { localStorage.removeItem(KEY); } catch (x) {} drawAll(); say('Резюме удалено.'); }
+  if (e.target.id === 'clyes' || e.target.id === 'clno') w.innerHTML = '<button type="button" class="btn ghost sm" id="clear">Удалить всё</button>';
+});
+
+/* ===================== пример ===================== */
+function exPhoto(){
+  const c = document.createElement('canvas'); c.width = 450; c.height = 600; const x = c.getContext('2d');
+  const g = x.createLinearGradient(0, 0, 0, 600); g.addColorStop(0, '#DCE3D2'); g.addColorStop(1, '#C7D1BA'); x.fillStyle = g; x.fillRect(0, 0, 450, 600);
+  x.fillStyle = '#5B4636'; x.beginPath(); x.ellipse(225, 250, 118, 140, 0, 0, Math.PI * 2); x.fill();
+  x.fillStyle = '#E9C9AE'; x.beginPath(); x.ellipse(225, 262, 86, 106, 0, 0, Math.PI * 2); x.fill();
+  x.fillStyle = '#5B4636'; x.beginPath(); x.ellipse(225, 180, 96, 52, 0, Math.PI, 0); x.fill();
+  x.fillStyle = '#E9C9AE'; x.fillRect(196, 350, 58, 60);
+  x.fillStyle = '#2E3A4A'; x.beginPath(); x.moveTo(40, 600); x.quadraticCurveTo(60, 410, 225, 400); x.quadraticCurveTo(390, 410, 410, 600); x.fill();
+  x.fillStyle = '#F4F1EC'; x.beginPath(); x.moveTo(190, 402); x.lineTo(225, 470); x.lineTo(260, 402); x.fill();
+  return c.toDataURL('image/jpeg', 0.86);
+}
+function example(){
+  return Object.assign(blank(), {lang: S.lang, tpl: S.tpl, color: S.color, photo: exPhoto(), refReq: true,
+    p: {first: 'Olena', last: 'Kovalenko', title: {de: 'Finanzanalystin', fr: 'Analyste financière', it: 'Analista finanziaria', en: 'Financial Analyst', ru: 'Финансовый аналитик', uk: 'Фінансова аналітикиня'}[S.lang], street: 'Musterstrasse 12', city: '8000 Zürich', phone: '+41 79 000 00 00', email: 'olena.kovalenko@example.ch', web: 'linkedin.com/in/olena-kovalenko', birth: '14.05.1989', nat: {de: 'Ukrainisch', fr: 'Ukrainienne', it: 'Ucraina', en: 'Ukrainian', ru: 'Украина', uk: 'Україна'}[S.lang], permit: 'S', civil: '', drive: 'Kat. B'},
+    profile: {de: 'Finanzanalystin mit über 10 Jahren Erfahrung in Budgetierung, Reporting und Controlling in Banken und internationalen Unternehmen. Strukturiert, genau und gewohnt, komplexe Zahlen für das Management verständlich aufzubereiten.',
+      fr: 'Analyste financière avec plus de 10 ans d’expérience en budgétisation, reporting et contrôle de gestion dans des banques et des entreprises internationales. Structurée, précise et habituée à rendre les chiffres complexes compréhensibles pour la direction.',
+      it: 'Analista finanziaria con oltre 10 anni di esperienza in budget, reporting e controlling in banche e aziende internazionali. Precisa, strutturata e abituata a rendere comprensibili i numeri complessi per la direzione.',
+      en: 'Financial analyst with over 10 years of experience in budgeting, reporting and controlling at banks and international companies. Structured, precise and used to making complex figures clear for management.',
+      ru: 'Финансовый аналитик с опытом более 10 лет в бюджетировании, отчётности и контроллинге в банках и международных компаниях. Структурная, точная, умею объяснять сложные цифры руководству просто.',
+      uk: 'Фінансова аналітикиня з досвідом понад 10 років у бюджетуванні, звітності та контролінгу в банках і міжнародних компаніях. Структурна, точна, вмію пояснювати складні цифри керівництву просто.'}[S.lang],
+    exp: [
+      {from: '01.2024', to: '', cur: true, title: {de: 'Senior Finanzanalystin', fr: 'Analyste financière senior', it: 'Analista finanziaria senior', en: 'Senior Financial Analyst', ru: 'Старший финансовый аналитик', uk: 'Старша фінансова аналітикиня'}[S.lang], org: 'Muster Finanz AG', place: 'Zürich',
+        text: {de: 'Monatliches Reporting für 6 Geschäftsbereiche\nForecast und Budget von CHF 40 Mio. betreut\nNeues Power-BI-Dashboard für das Management eingeführt', fr: 'Reporting mensuel pour 6 divisions\nPrévisions et budget de CHF 40 mio.\nNouveau tableau de bord Power BI pour la direction', it: 'Reporting mensile per 6 divisioni\nPrevisioni e budget di CHF 40 mio.\nNuova dashboard Power BI per la direzione', en: 'Monthly reporting for 6 business units\nForecast and budget of CHF 40 million\nIntroduced a new Power BI dashboard for management', ru: 'Ежемесячная отчётность для 6 подразделений\nПрогноз и бюджет на 40 млн франков\nВнедрила дашборд Power BI для руководства', uk: 'Щомісячна звітність для 6 підрозділів\nПрогноз і бюджет на 40 млн франків\nЗапровадила дашборд Power BI для керівництва'}[S.lang]},
+      {from: '09.2015', to: '02.2022', cur: false, title: {de: 'Finanzanalystin', fr: 'Analyste financière', it: 'Analista finanziaria', en: 'Financial Analyst', ru: 'Финансовый аналитик', uk: 'Фінансова аналітикиня'}[S.lang], org: 'Beispiel Bank', place: {de: 'Kyjiw, Ukraine', fr: 'Kyiv, Ukraine', it: 'Kyiv, Ucraina', en: 'Kyiv, Ukraine', ru: 'Киев, Украина', uk: 'Київ, Україна'}[S.lang],
+        text: {de: 'Budgetplanung und Kostenkontrolle für 12 Filialen\nKennzahlenanalyse und Berichte für die Geschäftsleitung', fr: 'Planification budgétaire et contrôle des coûts pour 12 agences\nAnalyse des indicateurs et rapports pour la direction', it: 'Pianificazione del budget e controllo dei costi per 12 filiali\nAnalisi degli indicatori e rapporti per la direzione', en: 'Budget planning and cost control for 12 branches\nKPI analysis and reports for the executive board', ru: 'Планирование бюджета и контроль затрат 12 филиалов\nАнализ показателей и отчёты для правления', uk: 'Планування бюджету та контроль витрат 12 філій\nАналіз показників і звіти для правління'}[S.lang]}
+    ],
+    edu: [{from: '2009', to: '2014', title: {de: 'Master in Finanzen und Kredit', fr: 'Master en finance et crédit', it: 'Master in finanza e credito', en: 'Master in Finance and Credit', ru: 'Магистр финансов и кредита', uk: 'Магістр фінансів і кредиту'}[S.lang], org: {de: 'Wirtschaftsuniversität', fr: 'Université d’économie', it: 'Università di economia', en: 'University of Economics', ru: 'Экономический университет', uk: 'Економічний університет'}[S.lang], place: {de: 'Kyjiw, Ukraine', fr: 'Kyiv, Ukraine', it: 'Kyiv, Ucraina', en: 'Kyiv, Ukraine', ru: 'Киев, Украина', uk: 'Київ, Україна'}[S.lang], text: {de: 'Anerkannt durch das SBFI', fr: 'Reconnu par le SEFRI', it: 'Riconosciuto dalla SEFRI', en: 'Recognised by SERI', ru: 'Признан SBFI', uk: 'Визнаний SBFI'}[S.lang]}],
+    trn: [{year: '2025', title: {de: 'Deutsch B2, fide-Zertifikat', fr: 'Allemand B2, certificat fide', it: 'Tedesco B2, certificato fide', en: 'German B2, fide certificate', ru: 'Немецкий B2, сертификат fide', uk: 'Німецька B2, сертифікат fide'}[S.lang], org: 'Klubschule Migros, Zürich'}, {year: '2023', title: 'Power BI Data Analyst (PL-300)', org: 'Microsoft'}],
+    lng: [{code: 'uk', lvl: 'native', other: ''}, {code: 'ru', lvl: 'C2', other: ''}, {code: 'en', lvl: 'C1', other: ''}, {code: 'de', lvl: 'B2', other: ''}],
+    skills: 'MS Excel, Power BI, SAP FI/CO\n' + {de: 'Budgetierung · Forecast · Reporting · Controlling', fr: 'Budgétisation · prévisions · reporting · contrôle de gestion', it: 'Budgeting · forecast · reporting · controlling', en: 'Budgeting · forecasting · reporting · controlling', ru: 'Бюджетирование · прогноз · отчётность · контроллинг', uk: 'Бюджетування · прогноз · звітність · контролінг'}[S.lang], interests: {de: 'Wandern, Fotografie, Freiwilligenarbeit', fr: 'Randonnée, photographie, bénévolat', it: 'Escursionismo, fotografia, volontariato', en: 'Hiking, photography, volunteering', ru: 'Походы, фотография, волонтёрство', uk: 'Походи, фотографія, волонтерство'}[S.lang]});
+}
+function leaveEx(){ showEx = false; document.getElementById('exbar').hidden = true; render(); }
+document.getElementById('exbtn').addEventListener('click', () => { EX = example(); showEx = true; document.getElementById('exbar').hidden = false; render(); document.getElementById('sheet').scrollIntoView({behavior: 'smooth', block: 'start'}); });
+document.getElementById('exback').addEventListener('click', leaveEx);
+
+/* шрифты листа должны загрузиться до первой раскладки, иначе ширина строк посчитается не тем шрифтом */
+Promise.all(['400 10px Manrope', '600 10px Manrope', '700 10px Manrope', '400 10px Forum'].map(f => document.fonts.load(f))).catch(() => {}).then(() => drawAll());
+drawAll();
+if (/[?&]example\b/.test(location.search)) document.getElementById('exbtn').click();
+</script>
+<script>
+window.HELP = {
+"lang": "<p>Пиши резюме на языке вакансии. В Цюрихе, Базеле и Берне обычно немецкий, в Женеве и Лозанне французский, в Тичино итальянский, в международных фирмах английский.</p><p>Заголовки, даты, уровни языков и пермит переведутся сами. Тексты (должности, что делала) пиши сразу на выбранном языке.</p>",
+"tpl": "<ul><li><b>С колонкой.<\/b> Фото, контакты и языки в цветной колонке. Современно и легко читать. Подходит почти везде.<\/li><li><b>Классика.<\/b> Всё в одну колонку, крупное имя. Для любых отраслей.<\/li><li><b>Строгий.<\/b> Чёрно-белый, без украшений. Для банков, страховых, юристов и госслужбы.<\/li><\/ul>",
+"color": "<p>Цвет заголовков и колонки. Спокойные тона выглядят солидно. Если сомневаешься, выбирай синий или чёрно-белый.</p>",
+"photo": "<p>В Швейцарии фото в резюме пока обычно. Нужен деловой портрет на светлом фоне, плечи и лицо, без отпуска и селфи.</p><p>Фото обрезается до формата 3 × 4 и хранится только на этом устройстве. Если не хочешь фото, сними галочку.</p>",
+"title": "<p>Напиши профессию так, как она называется в вакансии, на языке резюме. Например, Pflegefachfrau, Buchhalterin, Software Engineer.</p>",
+"birth": "<p>В Швейцарии дату рождения обычно пишут. Если не хочешь, оставь поле пустым, и строки не будет.</p>",
+"permit": "<p>Работодатель сразу видит, нужно ли ему оформлять разрешение. Название переведётся на язык резюме. Например, «Aufenthaltsbewilligung B» или «Permis B (séjour)».</p><p>Со статусом S работать можно, работодатель только сообщает о начале работы.</p>",
+"profile": "<p>Три-четыре предложения. Кто ты, сколько лет опыта, в чём сильна и какую работу ищешь.</p><p>Например, «Buchhalterin mit 8 Jahren Erfahrung in KMU. Sicher in Abacus und MWST. Suche eine Teilzeitstelle 60–80 % in Zürich».</p>",
+"bullets": "<p>Каждая строка станет пунктом. Пиши коротко и с цифрами, что сделала, а не просто обязанности.</p><p>Например, «Budget von CHF 2 Mio. betreut», «Team von 6 Personen geführt», «Durchlaufzeit um 20 % reduziert».</p>",
+"eduNote": "<p>Если диплом признан в Швейцарии, напиши это. По-немецки «Anerkannt durch das SBFI», по-французски «Reconnu par le SEFRI».</p><p>Можно указать и швейцарский аналог, например «entspricht Master».</p>",
+"lvl": "<ul><li><b>Родной.<\/b> Твой первый язык.<\/li><li><b>C2 и C1.<\/b> Свободно работаешь на этом языке.<\/li><li><b>B2.<\/b> Уверенно говоришь на работе, иногда ищешь слова.<\/li><li><b>B1.<\/b> Справляешься в быту и на простых рабочих темах.<\/li><li><b>A2 и A1.<\/b> Начальный уровень.<\/li><\/ul><p>Если есть сертификат, например fide или Goethe, добавь его в раздел «Курсы».</p>",
+"skills": "<p>Каждая строка станет отдельной строкой в резюме. Программы, оборудование, водительская категория, сертификаты.</p><p>Пиши конкретно, например «MS Excel (sehr gut)», а не «компьютер».</p>",
+"refs": "<p>В Швейцарии обычно пишут «Referenzen auf Anfrage». Работодатель попросит контакты сам, если ты пройдёшь дальше.</p><p>Если хочешь указать рекомендателей сразу, сними галочку и добавь их. Сначала спроси у них согласие.</p>"
+};
+</script>
+<script src="/assets/help.js"></script>
+<script src="/assets/backup.js"></script>
+<script src="/assets/pdffan.js" defer></script>
+<script src="/assets/samesite.js"></script>
+<script src="/assets/share.js" defer></script>
+</body>
+</html>
