@@ -19,8 +19,11 @@ ASSETS += ['assets/lib/fonts-pdf/' + f for f in os.listdir(os.path.join(REPO, 'a
 ASSETS += [a for a in ['assets/pdffan.js', 'assets/backup.js', 'assets/lib/exceljs.min.js', 'assets/lib/pdf-lib.min.js', 'assets/lib/pdfjs/pdf.min.js', 'assets/lib/pdfjs/pdf.worker.min.js'] if os.path.exists(os.path.join(REPO, a))]
 for dp, dn, fn in os.walk(os.path.join(REPO, 'instrumenty/preview')):
     ASSETS += [os.path.relpath(os.path.join(dp, f), REPO) for f in fn if f.endswith('.jpg')]
-BANNER = ('<div style="position:sticky;top:0;z-index:999;background:#2f2924;color:#FFFCF8;font:600 13px/1.45 Manrope,system-ui,sans-serif;'
-          'padding:8px 16px;text-align:center">Предпросмотр КОПИИ · на сайт не выложено · {date}. Карты и часть ссылок здесь не работают.</div>')
+BANNER = ('<div style="position:fixed;left:0;right:0;top:0;z-index:2147483000;box-shadow:0 4px 14px rgba(0,0,0,.18);background:#2f2924;color:#FFFCF8;font:600 13px/1.45 Manrope,system-ui,sans-serif;'
+          'padding:8px 12px;display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;justify-content:center;text-align:center">'
+          '<a href="{home}" style="background:#FFFCF8;color:#2f2924;border-radius:999px;padding:5px 14px;text-decoration:none;font-weight:800;white-space:nowrap">← Список копии</a>'
+          '<a href="javascript:history.back()" style="color:#FFFCF8;text-decoration:underline;white-space:nowrap">Назад</a>'
+          '<span>Предпросмотр КОПИИ · на сайт не выложено · {date}</span></div><div style="height:44px"></div>')
 
 SHVD = set(p.split('/')[1] for p in SHV if p.count('/') == 2)
 
@@ -51,7 +54,7 @@ def fix(html, depth):
     for d in ['opros', 'badge', 'privacy']:
         html = re.sub(rf'href="(?:\.\./|\./)?{d}/', f'href="{LIVE}{d}/', html)
     html = html.replace('href="files/anketa', f'href="{LIVE}join/files/anketa')
-    html = html.replace('<body>', '<body>\n' + BANNER.format(date=datetime.date.today().strftime('%d.%m.%Y')), 1)
+    html = re.sub(r'(<body[^>]*>)', lambda m: m.group(1) + '\n' + BANNER.format(home=up + '../index.html', date=datetime.date.today().strftime('%d.%m.%Y')), html, count=1)
     return html
 
 if os.path.exists(OUT): shutil.rmtree(OUT)
