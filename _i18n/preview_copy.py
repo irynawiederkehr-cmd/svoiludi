@@ -5,7 +5,7 @@
 Запуск: python3 preview_site.py <repo> <out>"""
 import sys, os, re, shutil, json, datetime
 REPO, OUT = sys.argv[1], sys.argv[2]
-TOOLS = ['zarplata', 'ekstrennye-nomera', 'put-obrazovaniya', 'yazyk-trebovaniya', 'strahovki-obyazatelnye', 'nalogi-shema', 'pensiya-shema', 'rezyume', 'uchet-vremeni', 'chasy-po-klientam', 'moj-budget', 'moj-den', 'moj-god', 'moi-emocii']
+TOOLS = ['zarplata', 'ekstrennye-nomera', 'put-obrazovaniya', 'yazyk-trebovaniya', 'strahovki-obyazatelnye', 'nalogi-shema', 'pensiya-shema', 'grazhdanstvo-shema', 'diplomy-shema', 'rezyume', 'uchet-vremeni', 'chasy-po-klientam', 'moj-budget', 'moj-den', 'moj-god', 'moi-emocii']
 SHV = ['shveycariya/index.html'] + ['shveycariya/' + d + '/index.html' for d in sorted(os.listdir(os.path.join(REPO, 'shveycariya'))) if os.path.isdir(os.path.join(REPO, 'shveycariya', d))] if os.path.isdir(os.path.join(REPO, 'shveycariya')) else []
 PAGES = SHV + ['index.html', 'vakansii/index.html', 'kursy/index.html', 'events/index.html', 'join/index.html', 'instrumenty/index.html'] + ['instrumenty/' + t + '/index.html' for t in TOOLS]
 INSET = {'vakansii', 'kursy', 'events', 'join', 'shveycariya'}
