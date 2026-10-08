@@ -131,6 +131,38 @@ def hub():
 
 
 
+
+# «Кто поможет» (08.10.2026, просьба Ирины): профсоюзы, союзы арендаторов, защита покупателей, бесплатные консультации.
+# Данные — pomosh.py; в браузер уходят как assets/pomosh.js (блок «Твой кантон» и инструмент «Куда обратиться за помощью»).
+import pomosh as PM
+open('assets/pomosh.js', 'w', encoding='utf-8').write('/* Собирается _i18n/shveycariya_src/build.py из pomosh.py — руками не править. Проверено ' + PM.CHECKED + '. */\nwindow.POMOSH = ' + json.dumps({'checked': PM.CHECKED, 'areas': PM.AREAS, 'orgs': PM.ORGS, 'kant': PM.KANT}, ensure_ascii=False, separators=(',', ':')) + ';\n')
+def _host(u):
+    m = re.match(r'https?://(?:www\.)?([^/]+)', u); return m.group(1) if m else u
+def pm_org(o):
+    """Подробная карточка организации для статьи (раскрывается)."""
+    rows = [('Для кого', o['who']), ('Как поможет', o['help']), ('Взнос', o['fee']), ('Когда помогут', o['wait'])] + ([('Ещё', o['extra'])] if o.get('extra') else [])
+    srcs = ' · '.join(f'<a href="{html.escape(u)}">{html.escape(_host(u))}</a>' for u in o['src'])
+    return (f'<details class="pmo" id="org-{o["id"]}"><summary><b>{html.escape(o["name"])}</b><span class="pmo-chips"><span>{html.escape(o["sfee"])}</span><span>{html.escape(o["swait"])}</span></span></summary>'
+            + '<dl>' + ''.join(f'<dt>{k}</dt><dd>{html.escape(v)}</dd>' for k, v in rows) + '</dl>'
+            + f'<p class="pmo-go"><a href="{html.escape(o["url"])}">{"Вступить" if o["m"] else "Сайт"}: {html.escape(_host(o["url"]))} ↗</a></p><p class="pmo-src">Проверено {PM.CHECKED}: {srcs}</p></details>')
+def pm_table(ids):
+    rows = ''.join(f'<tr><th scope="row"><a href="#org-{i}">{html.escape(PM.BYID[i]["name"])}</a></th><td>{html.escape(PM.BYID[i]["sfee"])}</td><td>{html.escape(PM.BYID[i]["swait"])}</td></tr>' for i in ids)
+    return f'<div class="pm-tw"><table class="pm-t"><thead><tr><th>Организация</th><th>Взнос</th><th>Когда помогут</th></tr></thead><tbody>{rows}</tbody></table></div>'
+def pm_kt(keys):
+    return f'<section class="pmk" data-k="{keys}" aria-label="Где помогут в твоём кантоне"></section>'
+def pm_expand(body):
+    body = re.sub(r'<!--ORGS:([a-z,]+)-->', lambda m: ''.join(pm_org(o) for o in PM.ORGS if o['area'] in m.group(1).split(',')), body)
+    body = re.sub(r'<!--TABLE:([a-z0-9,-]+)-->', lambda m: pm_table(m.group(1).split(',')), body)
+    return re.sub(r'<!--PMK:([a-z,]+)-->', lambda m: pm_kt(m.group(1)), body)
+def pm_box(a):
+    """Блок «Кто поможет» в других статьях: короткие карточки + твой кантон + ссылки."""
+    p = a.get('pomosh')
+    if not p: return ''
+    cards = ''.join(f'<a class="pm-c" href="../profsoyuzy/#org-{i}"><b>{html.escape(PM.BYID[i]["name"])}</b><span>{html.escape(PM.BYID[i]["short"])}</span><em>{html.escape(PM.BYID[i]["sfee"])} · {html.escape(PM.BYID[i]["swait"])}</em></a>' for i in p['ids'])
+    return (f'<section class="pm" aria-labelledby="pm-h"><h2 id="pm-h">Кто поможет: за небольшой взнос и бесплатно</h2><p>{p["t"]}</p><div class="pm-g">{cards}</div>'
+            + (pm_kt(p['k']) if p.get('k') else '')
+            + '<p class="pm-more">Подробно о каждой организации, взносы и сроки — в теме <a href="../profsoyuzy/">«Профсоюзы и консультации»</a>. Свой список с номерами членства — в инструменте <a href="../../instrumenty/kuda-obratitsya/">«Куда обратиться за помощью»</a>.</p></section>')
+
 # Ссылки по названию (правило Ирины 08.10.2026): «Расчёт зарплаты», схема «Признание дипломов», тема «Домашний персонал»,
 # вкладка «Курсы» — в тексте статьи сразу активная ссылка. Тема без статьи остаётся текстом и станет ссылкой, когда статья будет готова.
 TOPIC_ALIAS = {'Домашний персонал': 'domashniy-personal', 'Психотерапия через страховку': 'psihoterapiya', 'Своё дело': 'samozanyatost',
@@ -193,7 +225,8 @@ def article(t):
   <div class="art">
     <article class="art-main">
       {('<section class="kt" data-k="' + ','.join(a['kanton']) + '" aria-label="Твой кантон"></section>') if a.get('kanton') else ''}
-      {autolink(a['body'])}
+      {autolink(pm_expand(a['body']))}
+      {pm_box(a)}
       {('<section class="terms" aria-labelledby="terms-h"><h2 id="terms-h">Как это называется в твоём кантоне</h2><p>В письмах и на сайтах ведомств ищи эти слова.</p><dl>' + ''.join(f'<div><dt>{l}</dt><dd lang="{ {"Deutsch":"de","Français":"fr","Italiano":"it","English":"en"}[l] }">{w}</dd></div>' for l, w in a['terms']) + '</dl></section>') if a.get('terms') else ''}
       {('<div class="warn post"><b>Важные письма — заказным (Einschreiben)</b><p>' + a['post'] + ' Отправляй такие письма на почте как <a href="https://www.post.ch/de/briefe-versenden/einschreiben">Einschreiben (R)</a>, сохраняй копию письма и квитанцию с номером отправления. По номеру на post.ch видно, когда письмо получили.</p><p>Для сроков ведомства обычно важно, что письмо сдано на почту до конца последнего дня. Для расторжения аренды или работы важно, когда его получили, поэтому отправляй заранее.' + (' ' + a['post2'] if a.get('post2') else '') + '</p></div>') if a.get('post') else ''}
       <section class="todo" aria-labelledby="todo-h"><h2 id="todo-h">Что сделать</h2><ol>{steps}</ol></section>
@@ -212,7 +245,7 @@ def article(t):
   {DISC}
   <div class="share-slot" data-url="{url}" data-lead="Перешли тому, кому это сейчас нужно. Сообщение уже готово." data-text="Привет! Тут коротко и по-русски про {html.escape(t['title'])}: что важно знать и что сделать. {url}"></div>
 '''
-    extra = '<script src="/data/specialists.js"></script>\n' + ('<script src="/assets/kantony.js"></script>\n' if (a.get('kanton') or 'class="med"' in a['body']) else '')
+    extra = '<script src="/data/specialists.js"></script>\n' + ('<script src="/assets/kantony.js"></script>\n' if (a.get('kanton') or 'class="med"' in a['body']) else '') + ('<script src="/assets/kantony.js"></script>\n<script src="/assets/pomosh.js"></script>\n' if ((a.get('pomosh') or {}).get('k') or '<!--PMK:' in a['body']) and not (a.get('kanton') or 'class="med"' in a['body']) else '<script src="/assets/pomosh.js"></script>\n' if ((a.get('pomosh') or {}).get('k') or '<!--PMK:' in a['body']) else '')
     out = head(title, a['desc'], url, 2) + '<body data-root="../../">' + top(2)[len('<body>'):] + main + foot(2, extra)
     os.makedirs(f'shveycariya/{t["slug"]}', exist_ok=True)
     open(f'shveycariya/{t["slug"]}/index.html', 'w', encoding='utf-8').write(out)
