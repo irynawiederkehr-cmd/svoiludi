@@ -82,6 +82,10 @@ select:focus-visible,input:focus-visible,button:focus-visible,textarea:focus-vis
 .g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
 @media (max-width:560px){.g2,.g3{grid-template-columns:1fr}}
 .hint{font-size:.84rem;color:var(--muted);margin:0}
+.langnote{margin:0;background:var(--mustard-soft);border-radius:16px;padding:12px 16px;font-size:.9rem;line-height:1.5}
+.langnote b{font-weight:800}
+.cyr{margin:2px 0 0;font-size:.8rem;font-weight:600;color:#9A5B12;background:var(--mustard-soft);border-radius:10px;padding:6px 10px}
+:root[data-theme="dark"] .cyr{color:var(--mustard)}
 .photo{display:grid;grid-template-columns:90px minmax(0,1fr);gap:14px;align-items:center}
 .photo .ph{width:90px;aspect-ratio:3/4;border-radius:10px;background:var(--soft);border:1.5px dashed var(--line);display:grid;place-items:center;overflow:hidden;color:var(--muted);font-size:.75rem;text-align:center}
 .photo .ph img{width:100%;height:100%;object-fit:cover;display:block}
@@ -162,7 +166,8 @@ input[type=range]{width:100%;accent-color:var(--sage)}
   <section class="howto" aria-labelledby="ht-h">
     <h2 id="ht-h">Как пользоваться</h2>
     <ol class="hsteps">
-      <li><b>Выбери кантон, где ищешь работу.</b> Язык резюме выберется сам. Пиши тексты сразу на этом языке. Заголовки, даты, уровни языков и пермит переведутся сами.</li>
+      <li><b>Выбери кантон, где ищешь работу.</b> Язык резюме выберется сам.</li>
+      <li><b>Что переводится само, а что нет.</b> Всё, что выбираешь из списков и кнопок (заголовки, даты, гражданство, уровни языков, навыки, интересы), само встаёт на язык резюме. То, что пишешь своими словами (должность, фирма, «что делала», свои навыки), попадает в резюме как есть, он не переводится. Поэтому пиши сразу на языке резюме. Если в поле окажутся русские или украинские буквы, под ним появится напоминание.</li>
       <li><b>Заполни разделы.</b> Почти всё выбирается из списков: даты, гражданство, семейное положение, права, уровень образования, языки и сертификаты. Лист рядом меняется сразу, так будет выглядеть PDF.</li>
       <li><b>Выбери шаблон и цвет.</b> Для банков и госслужбы подходит «Строгий», для остальных «С колонкой» или «Классика».</li>
       <li><b>Добавь приложения.</b> Сфотографируй дипломы и рекомендации с работы или загрузи PDF. Документ сам выровняется, лишний фон обрежется, и каждый встанет на свой лист A4 после резюме.</li>
@@ -195,6 +200,7 @@ input[type=range]{width:100%;accent-color:var(--sage)}
 
   <div class="work">
     <div class="form" id="form">
+      <p class="langnote" id="langnote"></p>
       <details class="sec" open><summary><span class="num">1</span>Личные данные</summary><div class="body">
         <div class="photo">
           <div class="ph" id="phbox">Фото<br>3 × 4</div>
@@ -263,15 +269,15 @@ input[type=range]{width:100%;accent-color:var(--sage)}
         <p class="hint">Найди навык поиском или открой группу и отметь, что умеешь. Лучше 10–20 главных для этой вакансии, чем всё подряд. В резюме навыки встанут по группам и сами переведутся на язык резюме.</p>
         <input type="search" class="find" data-find="skl" placeholder="Найти навык: Excel, уборка, Pflege, касса…" aria-label="Найти навык">
         <div id="skl" class="grps"></div>
-        <label class="fl"><span class="lb">Чего нет в списке, допиши сама<button type="button" class="qh" data-help="skills" aria-label="Подсказка: свои навыки" aria-expanded="false">?</button></span>
+        <label class="fl"><span class="lb">Чего нет в списке, допиши сама (на языке резюме)<button type="button" class="qh" data-help="skills" aria-label="Подсказка: свои навыки" aria-expanded="false">?</button></span>
           <textarea data-f="skills" rows="2" placeholder="Lohnbuchhaltung mit Swissdec&#10;Kassensystem Lightspeed"></textarea></label>
       </div></details>
 
       <details class="sec"><summary><span class="num">8</span>Интересы<span class="cnt" id="c-ints"></span></summary><div class="body">
-        <p class="hint">По желанию. Два-четыре интереса делают резюме живым. Отмеченное пишется на языке резюме.</p>
+        <p class="hint">По желанию. Два-четыре интереса делают резюме живым. Отмеченное кнопками само встанет на язык резюме, своё допиши сразу на этом языке.</p>
         <input type="search" class="find" data-find="intc" placeholder="Найти интерес: танцы, лыжи, фото…" aria-label="Найти интерес">
         <div id="intc" class="grps"></div>
-        <label class="fl"><span class="lb">Свои интересы (если нет в списке)</span><input type="text" data-f="interests" placeholder="Bergsteigen, Ukrainischer Chor Zürich"></label>
+        <label class="fl"><span class="lb">Свои интересы (на языке резюме)</span><input type="text" data-f="interests" placeholder="Bergsteigen, Ukrainischer Chor Zürich"></label>
       </div></details>
 
       <details class="sec"><summary><span class="num">9</span>Рекомендации</summary><div class="body">
@@ -785,9 +791,26 @@ function drawAll(){
   const ph = document.getElementById('phbox'); ph.innerHTML = S.photo ? `<img src="${S.photo}" alt="Твоё фото">` : 'Фото<br>3 × 4';
   document.getElementById('phdel').hidden = !S.photo;
   ['exp', 'edu', 'trn', 'lng', 'ref'].forEach(drawList);
-  vis(); render();
+  vis(); render(); langCheck();
 }
-function touched(){ if (showEx) leaveEx(); save(); vis(); render(); }
+const LANG_IN = {de: 'на немецком', fr: 'на французском', it: 'на итальянском', en: 'на английском', ru: 'по-русски', uk: 'по-украински'};
+const CYR = /[А-Яа-яЁёІіЇїЄєҐґ]/;
+/* подсказка у полей со своим текстом: что не переводится и на каком языке писать */
+function langCheck(){
+  const cv = S.lang, cyrOk = cv === 'ru' || cv === 'uk';
+  document.getElementById('langnote').innerHTML = cyrOk
+    ? `Резюме ${LANG_IN[cv]}. Списки и кнопки переводятся сами, свой текст пиши ${LANG_IN[cv]}.`
+    : `Резюме <b>${LANG_IN[cv]}</b>. Списки и кнопки переводятся сами. <b>Свой текст не переводится</b>, он попадёт в резюме как есть. Пиши его сразу ${LANG_IN[cv]}.`;
+  document.querySelectorAll('#form input[type=text], #form textarea, #l-att input[type=text]').forEach(el => {
+    const name = el.dataset.f === 'p.first' || el.dataset.f === 'p.last';
+    const bad = !!el.value && CYR.test(el.value) && !cyrOk;
+    let w = el.parentElement.querySelector(':scope > .cyr');
+    if (bad && !w){ w = document.createElement('p'); w.className = 'cyr'; w.setAttribute('role', 'status'); el.insertAdjacentElement('afterend', w); }
+    if (w) { if (bad) w.textContent = name ? 'Имя и фамилию пиши латиницей, как в паспорте или пермите.' : `Здесь русские или украинские буквы. Этот текст попадёт в резюме как есть, сам он не переводится. Напиши ${LANG_IN[cv]}.`; else w.remove(); }
+  });
+}
+let lcT = 0;
+function touched(){ if (showEx) leaveEx(); save(); vis(); render(); clearTimeout(lcT); lcT = setTimeout(langCheck, 400); }
 
 /* ===================== события ===================== */
 /* списки в анкете */
@@ -1154,7 +1177,7 @@ if (/[?&]example\b/.test(location.search)) document.getElementById('exbtn').clic
 </script>
 <script>
 window.HELP = {
-"lang": "<p>Пиши резюме на языке вакансии. В Цюрихе, Базеле и Берне обычно немецкий, в Женеве и Лозанне французский, в Тичино итальянский, в международных фирмах английский.</p><p>Заголовки, даты, уровни языков и пермит переведутся сами. Тексты (должности, что делала) пиши сразу на выбранном языке.</p>",
+"lang": "<p>Пиши резюме на языке вакансии. В Цюрихе, Базеле и Берне обычно немецкий, в Женеве и Лозанне французский, в Тичино итальянский, в международных фирмах английский.</p><p>Всё, что выбираешь из списков и кнопок, переведётся само. Свой текст (должность, фирма, «что делала», свои навыки) не переводится, он попадёт в резюме как есть. Пиши его сразу на выбранном языке. Если нужна помощь с переводом, в справочнике есть переводчики.</p>",
 "tpl": "<ul><li><b>С колонкой.<\/b> Фото, контакты и языки в цветной колонке. Современно и легко читать. Подходит почти везде.<\/li><li><b>Классика.<\/b> Всё в одну колонку, крупное имя. Для любых отраслей.<\/li><li><b>Строгий.<\/b> Чёрно-белый, без украшений. Для банков, страховых, юристов и госслужбы.<\/li><\/ul>",
 "color": "<p>Цвет заголовков и колонки. Спокойные тона выглядят солидно. Если сомневаешься, выбирай синий или чёрно-белый.</p>",
 "photo": "<p>В Швейцарии фото в резюме пока обычно. Нужен деловой портрет на светлом фоне, плечи и лицо, без отпуска и селфи.</p><p>Фото обрезается до формата 3 × 4 и хранится только на этом устройстве. Если не хочешь фото, сними галочку.</p>",
@@ -1178,7 +1201,7 @@ window.HELP = {
 "attList": "<p>Первым листом после резюме идёт список всех приложений с номерами (по-немецки Beilagen). Работодателю удобно, и сразу видно, что всё на месте.</p>",
 "attLook": "<ul><li><b>Как есть.<\/b> Фото без изменений.<\/li><li><b>Ярче и чётче.<\/b> Фон становится белым, текст тёмным, цвета печатей и подписей остаются. Подходит почти всегда.<\/li><li><b>Как скан.<\/b> Чёрно-белый, как из сканера. Файл получается легче.<\/li><\/ul>",
 "attSize": "<p>«Целый лист» — для обычных бумаг A4. «Половина листа» — для маленьких документов: карточки, удостоверения, сертификаты в половину страницы. Два таких подряд встанут на один лист.</p>",
-"skills": "<p>Если нужного нет в группах выше, допиши здесь. Каждая строка станет отдельной строкой в резюме, пиши сразу на языке резюме. Программы, оборудование, водительская категория, сертификаты.</p><p>Пиши конкретно, например «MS Excel (sehr gut)», а не «компьютер».</p>",
+"skills": "<p>Если нужного нет в группах выше, допиши здесь. Этот текст не переводится, он попадёт в резюме как есть. Каждая строка станет отдельной строкой в резюме, пиши сразу на языке резюме. Программы, оборудование, водительская категория, сертификаты.</p><p>Пиши конкретно, например «MS Excel (sehr gut)», а не «компьютер».</p>",
 "refs": "<p>В Швейцарии обычно пишут «Referenzen auf Anfrage». Работодатель попросит контакты сам, если ты пройдёшь дальше.</p><p>Если хочешь указать рекомендателей сразу, сними галочку и добавь их. Сначала спроси у них согласие.</p>"
 };
 </script>
