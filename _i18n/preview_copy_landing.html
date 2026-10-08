@@ -16,6 +16,10 @@ p{margin:0;line-height:1.6;color:var(--muted);max-width:60ch}
 .list a:hover,.list a:focus-visible{border-color:var(--sage);outline:none}
 .list b{font-weight:700;font-size:1.02rem}.list small{display:block;color:var(--muted);font-size:.84rem;margin-top:2px}
 .list a>span:first-child{min-width:0}.list small{overflow-wrap:anywhere}
+.list .st{font-size:.72rem;font-weight:700;border-radius:999px;padding:3px 9px;white-space:nowrap;flex:none}
+.list .st.no{color:#7A5A12;background:#F5E7C8;border:1.5px solid #E2B45C}
+.list .st.yes{color:var(--forest);border:1.5px solid var(--sage)}
+.status-all{background:var(--paper);border:1.5px solid #E2B45C;border-radius:16px;padding:12px 16px;font-size:.92rem;line-height:1.5;color:var(--ink);max-width:none}
 .list .new{font-size:.72rem;font-weight:700;color:var(--forest);border:1.5px solid var(--sage);border-radius:999px;padding:3px 9px;white-space:nowrap}
 .note{font-size:.84rem}
 </style>
@@ -23,22 +27,24 @@ p{margin:0;line-height:1.6;color:var(--muted);max-width:60ch}
   <div class="eyebrow">Свои люди в Швейцарии · копия сайта</div>
   <h1>Как это будет <em>на сайте</em></h1>
   <p>Здесь копия svoiludi.ch со всеми изменениями, которые ещё не выложены. Её видишь только ты. Открывай страницы и переходи по меню, как на настоящем сайте.</p>
+  <!-- Правило Ирины 08.10.2026: у каждой строки статус. «не размещено» — пока не выложено; после «публикуй» строка получает <span class="st yes">размещено ДД.ММ.ГГГГ</span>, через неделю её можно убрать из списка. -->
+  <p class="status-all"><b>Сейчас на сайте не размещено ничего из этого списка.</b> Посмотри и напиши «публикуй» и что именно, например «публикуй резюме». Я выложу и отмечу здесь «размещено» с датой.</p>
   <nav class="list" aria-label="Страницы копии">
-    <a href="site/shveycariya/index.html"><span><b>Как устроена Швейцария</b><small>новая вкладка: 51 тема, поиск; готовы 5 статей, остальные «Скоро»; вверху статей блок «Твой кантон» со ссылками на официальные страницы кантона</small></span><span class="new">новое</span></a>
-    <a href="site/shveycariya/grazhdanstvo/index.html"><span><b>Статья «Гражданство Швейцарии»</b><small>натурализация: 10 лет, пермит C, язык B1/A2, облегчённая для супругов, что добавляет твой кантон</small></span><span class="new">новое</span></a>
-    <a href="site/shveycariya/rabota/index.html"><span><b>Статья «Работа в Швейцарии»</b><small>для украинцев и русскоязычных: статус S, B, L, F, где искать вакансии для всех уровней, RAV, резюме, справа инструмент «Резюме»</small></span><span class="new">новое</span></a>
-    <a href="site/shveycariya/permit-b/index.html"><span><b>Статья «Пермит B»</b><small>образец статьи: коротко, «Что сделать», инструменты, кто поможет, источники</small></span><span class="new">новое</span></a>
-    <a href="site/shveycariya/nalogovaya-deklaraciya/index.html"><span><b>Статья «Налоговая декларация»</b><small>налог у источника и NOV: когда обязательно, когда выгодно</small></span><span class="new">новое</span></a>
-    <a href="site/shveycariya/betreibung/index.html"><span><b>Статья «Долги и Betreibung»</b><small>Zahlungsbefehl, 10 дней, как убрать запись из реестра</small></span><span class="new">новое</span></a>
-    <a href="site/instrumenty/rezyume/index.html"><span><b>Резюме по-швейцарски</b><small>новый инструмент: форма на русском с подсказками, резюме на немецком, французском, итальянском, английском, русском или украинском. Кантон сам выбирает язык, почти всё выбирается из списков: даты, гражданство, семья, права, образование, языки A1–C2 с сертификатом (fide, Goethe, DELF…), 389 навыков в 19 группах (прачечная, Pflege, уборка, проекты, финансы, фото, спорт…) и 105 интересов с поиском, всё переводится само. Приложения: фото дипломов и рекомендаций сами выравниваются и обрезаются, PDF добавляются как есть, всё в одном PDF после резюме. Три шаблона, пять цветов, фото. PDF с настоящим текстом, на телефоне кнопка «Отправить». Нажми «Посмотреть на примере»</small></span><span class="new">новое</span></a>
-    <a href="site/vakansii/index.html"><span><b>Вакансии и партнёрство</b><small>новая вкладка: объявления, условия, подтверждение автором</small></span><span class="new">новое</span></a>
-    <a href="site/instrumenty/zarplata/index.html"><span><b>Расчёт зарплаты</b><small>новый инструмент: зарплата за месяц почасово или с окладом, кантон, брутто или нетто, удержание частями, все взносы и налог у источника с подсказками, где их найти, цветная расчётка в PDF на русском, немецком, французском и итальянском. Нажми «Посмотреть на примере»</small></span><span class="new">новое</span></a>
-    <a href="site/instrumenty/uchet-vremeni/index.html"><span><b>Учёт моего времени</b><small>PDF для работодателя на языке кантона, дисклеймер</small></span></a>
-    <a href="site/instrumenty/chasy-po-klientam/index.html"><span><b>Часы по клиентам</b><small>отчёт для клиента на языке кантона, дисклеймер</small></span></a>
-    <a href="site/instrumenty/index.html"><span><b>Полезные инструменты</b><small>новая карточка «Расчёт зарплаты» с веером страниц PDF; во всех инструментах дисклеймер «образец, не официальный документ» на страницах и в файлах</small></span></a>
-    <a href="site/index.html#alina-shteuber"><span><b>Специалисты</b><small>в карточке блок «Ищет себе сотрудника»</small></span></a>
-    <a href="site/events/index.html"><span><b>События</b><small>пункт меню «Вакансии»</small></span></a>
-    <a href="site/join/index.html"><span><b>Как разместиться</b><small>пункт меню «Вакансии»</small></span></a>
+    <a href="site/shveycariya/index.html"><span><b>Как устроена Швейцария</b><small>новая вкладка: 51 тема, поиск; готовы 5 статей, остальные «Скоро»; вверху статей блок «Твой кантон» со ссылками на официальные страницы кантона</small></span><span class="st no">новое · не размещено</span></a>
+    <a href="site/shveycariya/grazhdanstvo/index.html"><span><b>Статья «Гражданство Швейцарии»</b><small>натурализация: 10 лет, пермит C, язык B1/A2, облегчённая для супругов, что добавляет твой кантон</small></span><span class="st no">новое · не размещено</span></a>
+    <a href="site/shveycariya/rabota/index.html"><span><b>Статья «Работа в Швейцарии»</b><small>для украинцев и русскоязычных: статус S, B, L, F, где искать вакансии для всех уровней, RAV, резюме, справа инструмент «Резюме»</small></span><span class="st no">новое · не размещено</span></a>
+    <a href="site/shveycariya/permit-b/index.html"><span><b>Статья «Пермит B»</b><small>образец статьи: коротко, «Что сделать», инструменты, кто поможет, источники</small></span><span class="st no">новое · не размещено</span></a>
+    <a href="site/shveycariya/nalogovaya-deklaraciya/index.html"><span><b>Статья «Налоговая декларация»</b><small>налог у источника и NOV: когда обязательно, когда выгодно</small></span><span class="st no">новое · не размещено</span></a>
+    <a href="site/shveycariya/betreibung/index.html"><span><b>Статья «Долги и Betreibung»</b><small>Zahlungsbefehl, 10 дней, как убрать запись из реестра</small></span><span class="st no">новое · не размещено</span></a>
+    <a href="site/instrumenty/rezyume/index.html"><span><b>Резюме по-швейцарски</b><small>новый инструмент: форма на русском с подсказками, резюме на немецком, французском, итальянском, английском, русском или украинском. Кантон сам выбирает язык, почти всё выбирается из списков: даты, гражданство, семья, права, образование, языки A1–C2 с сертификатом (fide, Goethe, DELF…), 389 навыков в 19 группах (прачечная, Pflege, уборка, проекты, финансы, фото, спорт…) и 105 интересов с поиском, всё переводится само. Приложения: фото дипломов и рекомендаций сами выравниваются и обрезаются, PDF добавляются как есть, всё в одном PDF после резюме. Три шаблона, пять цветов, фото. PDF с настоящим текстом, на телефоне кнопка «Отправить». Нажми «Посмотреть на примере»</small></span><span class="st no">новое · не размещено</span></a>
+    <a href="site/vakansii/index.html"><span><b>Вакансии и партнёрство</b><small>новая вкладка: объявления, условия, подтверждение автором</small></span><span class="st no">новое · не размещено</span></a>
+    <a href="site/instrumenty/zarplata/index.html"><span><b>Расчёт зарплаты</b><small>новый инструмент: зарплата за месяц почасово или с окладом, кантон, брутто или нетто, удержание частями, все взносы и налог у источника с подсказками, где их найти, цветная расчётка в PDF на русском, немецком, французском и итальянском. Нажми «Посмотреть на примере»</small></span><span class="st no">новое · не размещено</span></a>
+    <a href="site/instrumenty/uchet-vremeni/index.html"><span><b>Учёт моего времени</b><small>PDF для работодателя на языке кантона, дисклеймер</small></span><span class="st no">правка · не размещено</span></a>
+    <a href="site/instrumenty/chasy-po-klientam/index.html"><span><b>Часы по клиентам</b><small>отчёт для клиента на языке кантона, дисклеймер</small></span><span class="st no">правка · не размещено</span></a>
+    <a href="site/instrumenty/index.html"><span><b>Полезные инструменты</b><small>новая карточка «Расчёт зарплаты» с веером страниц PDF; во всех инструментах дисклеймер «образец, не официальный документ» на страницах и в файлах</small></span><span class="st no">правка · не размещено</span></a>
+    <a href="site/index.html#alina-shteuber"><span><b>Специалисты</b><small>в карточке блок «Ищет себе сотрудника»</small></span><span class="st no">правка · не размещено</span></a>
+    <a href="site/events/index.html"><span><b>События</b><small>пункт меню «Вакансии»</small></span><span class="st no">правка · не размещено</span></a>
+    <a href="site/join/index.html"><span><b>Как разместиться</b><small>пункт меню «Вакансии»</small></span><span class="st no">правка · не размещено</span></a>
   </nav>
   <p class="note">Карты, письма и ссылки на страницы, которых нет в копии (опрос, значок, политика), ведут на настоящий сайт или здесь не работают. Копию я обновляю после каждой правки.</p>
 </main>
