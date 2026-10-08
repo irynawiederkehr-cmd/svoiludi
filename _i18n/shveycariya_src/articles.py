@@ -2787,7 +2787,7 @@ ARTICLES['arenda'] = dict(
         'Аренда кажется завышенной — в течение 30 дней после получения ключей к союзу арендаторов или в примирительный орган.',
     ],
     pomosh=dict(ids=['mv', 'asloca', 'asi', 'schlicht'], k='mv,miet,adv', t='Союз арендаторов проверит договор и аренду, а примирительный орган бесплатно объяснит права.'),
-    tools={'dosye-arendatora': 'Письмо и анкета жильцов на языке кантона с переводом для себя — отправь управляющей в день осмотра.', 'pisma-arenda': 'Когда уже живёшь в квартире: письма управляющей о снижении аренды, дефекте, расторжении и залоге.', 'moj-budget': 'Посчитай, какая аренда тебе по карману вместе с Nebenkosten, страховками и налогами.'},
+    tools={'pereezd-spisok': 'Нашла квартиру — список дел для переезда с датами.', 'dosye-arendatora': 'Письмо и анкета жильцов на языке кантона с переводом для себя — отправь управляющей в день осмотра.', 'pisma-arenda': 'Когда уже живёшь в квартире: письма управляющей о снижении аренды, дефекте, расторжении и залоге.', 'moj-budget': 'Посчитай, какая аренда тебе по карману вместе с Nebenkosten, страховками и налогами.'},
     related=['dogovor-arendy', 'strahovki', 'betreibung', 'gemeinde', 'profsoyuzy'],
     sources=[
         ('ch.ch — заказать выписку из реестра долгов', 'https://www.ch.ch/de/wohnen/miete/betreibungsregisterauszug-bestellen/'),
@@ -2885,7 +2885,7 @@ ARTICLES['dogovor-arendy'] = dict(
         'Уезжаешь — расторгай письменно за 3 месяца к местной дате или найди нового жильца.',
     ],
     pomosh=dict(ids=['mv', 'asloca', 'asi', 'schlicht', 'casafair'], k='mv,miet,adv', t='Почти все споры по аренде решаются через союз арендаторов и бесплатный примирительный орган — без суда.'),
-    tools={'pisma-arenda': 'Снижение аренды, дефект, расторжение и залог — письмо на языке кантона с русским переводом, отправляй заказным.', 'moj-budget': 'Nebenkosten, доплата за год, страховки и аренда — все расходы на жильё в одном бюджете.', 'kuda-obratitsya': 'Союз арендаторов твоего кантона: взнос, телефон и когда помогут.'},
+    tools={'pereezd-spisok': 'Уезжаешь — список дел с датами: расторжение, уборка, сдача, залог, община.', 'pisma-arenda': 'Снижение аренды, дефект, расторжение и залог — письмо на языке кантона с русским переводом, отправляй заказным.', 'moj-budget': 'Nebenkosten, доплата за год, страховки и аренда — все расходы на жильё в одном бюджете.', 'kuda-obratitsya': 'Союз арендаторов твоего кантона: взнос, телефон и когда помогут.'},
     related=['arenda', 'profsoyuzy', 'strahovki', 'betreibung'],
     sources=[
         ('BWO — референтная процентная ставка', 'https://www.bwo.admin.ch/de/referenzzinssatz'),
@@ -3403,4 +3403,284 @@ ARTICLES['kesb'] = dict(
     terms=[('Deutsch', 'KESB, Gefährdungsmeldung, Kindesschutz, Erwachsenenschutz, Beistandschaft, Beistand, Aufenthaltsbestimmungsrecht, elterliche Sorge, Obhut, Kindesvertretung, Beschwerde, unentgeltliche Rechtspflege, fürsorgerische Unterbringung, Vorsorgeauftrag, Patientenverfügung'), ('Français', 'APEA, signalement, protection de l’enfant, curatelle, curateur, droit de déterminer le lieu de résidence, autorité parentale, garde, recours, assistance judiciaire, placement à des fins d’assistance, mandat pour cause d’inaptitude, directives anticipées'), ('Italiano', 'ARP, segnalazione, protezione dei minori, curatela, curatore, autorità parentale, custodia, ricorso, assistenza giudiziaria, mandato precauzionale, direttive del paziente'), ('English', 'child and adult protection authority, report of concern, deputyship, parental authority, custody, appeal, legal aid, advance care mandate, advance healthcare directive')],
     post='Это жалоба на решение KESB, ответ на её письмо и заявление о бесплатном юристе.',
     post2='Срок жалобы считается со дня, когда ты получила решение, поэтому храни конверт и квитанцию.',
+)
+
+
+# ===== Брак и развод, община и переезд, ферайны (08.10.2026). Факты сверены 08.10.2026: BJ, ch.ch, BSV, SEM, Serafe, кантоны ZH, AG, BS, SO, TG, BL, BGE 147 III 265.
+ARTICLES['brak-razvod'] = dict(
+    h1='Брак, развод и алименты в Швейцарии: <em>документы, имущество, дети и пермит</em>',
+    seo='Брак и развод в Швейцарии: документы для свадьбы, раздел имущества, алименты (Scheidung)',
+    desc='Брак и развод в Швейцарии простыми словами на русском: как пожениться иностранцам (подготовка в Zivilstandsamt, документы с апостилем, 300–400 франков), признание брака из-за границы, фамилия, раздел имущества по умолчанию, брачный договор у нотариуса; развод по совместному заявлению или через 2 года раздельной жизни, раздел пенсии и AHV, совместная опека и алименты на ребёнка, помощь кантона во взыскании и аванс алиментов; что будет с пермитом после развода (3 года брака, насилие); неженатые родители. По-немецки Heirat, Scheidung, Unterhalt, по-французски mariage, divorce, pension alimentaire, по-итальянски matrimonio, divorzio, alimenti.',
+    lead='Свадьба, развод или ребёнок без брака в Швейцарии — это не только чувства, но и документы, деньги и для иностранцев — пермит. Здесь — главное по шагам, без юридического языка.',
+    body='''
+<nav class="toc" aria-label="Содержание"><b>В этой статье</b>
+<ul>
+  <li><a href="#svadba">Пожениться в Швейцарии</a></li>
+  <li><a href="#zagranica">Брак из-за границы</a></li>
+  <li><a href="#familiya">Фамилия</a></li>
+  <li><a href="#imushchestvo">Имущество супругов</a></li>
+  <li><a href="#razvod">Развод</a></li>
+  <li><a href="#pensiya">Пенсия при разводе</a></li>
+  <li><a href="#deti">Дети и алименты</a></li>
+  <li><a href="#permit">Пермит после развода</a></li>
+  <li><a href="#bez-braka">Ребёнок без брака</a></li>
+</ul></nav>
+
+<h2 id="svadba">Пожениться в Швейцарии</h2>
+<ol class="ol">
+  <li><b>Подготовка (Ehevorbereitungsverfahren)</b> — в отделе записи актов гражданского состояния (Zivilstandsamt) по месту жительства одного из вас. Сначала спроси, какие документы нужны именно тебе: это зависит от страны (<a href="https://www.ch.ch/de/familie-und-partnerschaft/heirat--konkubinat--partenariat/heiraten/">ch.ch</a>).</li>
+  <li><b>Документы иностранца:</b> паспорт, справка о проживании, свидетельство о рождении, справка о семейном положении (что ты не замужем) или документы о разводе, подтверждение гражданства. Обычно не старше 6 месяцев, с апостилем или легализацией и переводом на немецкий, французский или итальянский (<a href="https://www.bj.admin.ch/de/faq-eheschliessung-ehe-fuer-alle">BJ</a>).</li>
+  <li><b>Законное пребывание</b> в Швейцарии до дня свадьбы — пермит или виза.</li>
+  <li>Оба подписываете заявление, что препятствий нет. После положительного решения у вас <b>3 месяца</b> на свадьбу.</li>
+  <li><b>Церемония</b> в Zivilstandsamt с двумя совершеннолетними свидетелями. Всего обычно 300–400 франков, в субботу дороже.</li>
+</ol>
+<p>С 1 июля 2022 года пожениться могут и однополые пары. Новые зарегистрированные партнёрства больше не заключают, прежние можно превратить в брак.</p>
+
+<h2 id="zagranica">Брак из-за границы</h2>
+<p>Брак, действительный в другой стране, в Швейцарии в принципе признаётся. Чтобы он был в швейцарском реестре, его регистрирует кантон: обычно через миграционную службу или Zivilstandsamt твоего кантона, документы — с апостилем и переводом (<a href="https://www.bj.admin.ch/dam/data/bj/gesellschaft/zivilstand/merkblaetter/ehe/auslandehe-d.pdf">BJ</a>).</p>
+
+<h2 id="familiya">Фамилия</h2>
+<ul class="ul">
+  <li>С 2013 года каждый оставляет свою фамилию. Можно выбрать одну общую фамилию семьи — заявить об этом при свадьбе.</li>
+  <li>Двойную фамилию без дефиса в реестр не вносят. Фамилию через дефис (Müller-Kovalenko) можно указать в паспорте, но это не официальная фамилия.</li>
+  <li>Дети получают общую фамилию, а при разных фамилиях — ту, которую вы выбрали при свадьбе.</li>
+  <li>После развода можно в любой момент вернуть фамилию до брака — заявлением в Zivilstandsamt.</li>
+</ul>
+
+<h2 id="imushchestvo">Имущество супругов</h2>
+<ul class="ul">
+  <li><b>По умолчанию</b> (Errungenschaftsbeteiligung): что было до брака, подарки и наследство — твоё. Что заработано в браке — при разводе делится пополам (<a href="https://www.ch.ch/de/familie-und-partnerschaft/heirat--konkubinat--partenariat/wirtschaftliche-folgen-der-ehe-guterstand/">ch.ch</a>).</li>
+  <li><b>Раздельное имущество</b> или <b>общее имущество</b> — только по брачному договору у нотариуса.</li>
+  <li>Налоги супруги платят вместе, независимо от режима имущества.</li>
+</ul>
+
+<h2 id="razvod">Развод</h2>
+<ul class="ul">
+  <li><b>По совместному заявлению</b> — оба согласны и договорились о детях, деньгах и имуществе. Подаёте в суд по месту жительства заявление и соглашение. Без ожидания, обычно 3–4 месяца (<a href="https://www.ch.ch/de/familie-und-partnerschaft/scheidung/scheidungsverfahren/">ch.ch</a>).</li>
+  <li><b>По иску одного</b> — если второй не согласен: после <b>2 лет раздельной жизни</b>, раньше — только по серьёзной причине, например при насилии. Суд решает всё сам, это может длиться долго.</li>
+  <li>Адвокат не обязателен, но при споре очень полезен. Суд стоит примерно 1000–4000 франков. Нет денег — можно попросить бесплатное ведение дела (unentgeltliche Rechtspflege).</li>
+  <li>Пока развод не начался, можно договориться о раздельной жизни через суд (Eheschutz) — например, о детях и алиментах.</li>
+</ul>
+
+<h2 id="pensiya">Пенсия при разводе</h2>
+<ul class="ul">
+  <li><b>Пенсионная касса (BVG):</b> то, что накоплено за брак, делится, как правило, пополам — на дату начала развода (<a href="https://www.bsv.admin.ch/de/scheidung">BSV</a>).</li>
+  <li><b>3a</b> — по режиму имущества: накопленное в браке обычно пополам.</li>
+  <li><b>AHV:</b> доходы обоих за годы брака делятся поровну (splitting). Подай заявление в свою кассу AHV сразу после развода.</li>
+</ul>
+
+<h2 id="deti">Дети и алименты</h2>
+<ul class="ul">
+  <li><b>Совместная опека</b> (elterliche Sorge) — правило и после развода. Это не значит, что ребёнок живёт у обоих поровну — где он живёт (Obhut), решаете вы или суд.</li>
+  <li><b>Алименты на ребёнка</b> — до совершеннолетия, при учёбе дольше. Считают по методу Федерального суда 2021 года: доходы, потребности, минимум каждого, потом остаток (<a href="https://servat.unibe.ch/dfr/bge/c3147265.html">BGE 147 III 265</a>). В алименты входит и плата за уход за ребёнком (Betreuungsunterhalt) — если из-за ребёнка ты работаешь меньше.</li>
+  <li><b>Алименты бывшему супругу</b> — не всегда: зависит от длины брака, возраста, детей и того, кто как зарабатывал.</li>
+  <li><b>Не платит?</b> В каждом кантоне есть служба, которая бесплатно помогает взыскать алименты (Inkassohilfe, с 2022 года по единым правилам). Кантон может выплачивать алименты на ребёнка <b>авансом</b> (Alimentenbevorschussung) — условия и суммы свои в каждом кантоне (<a href="https://www.zh.ch/alimentenhilfe">пример Цюриха</a>).</li>
+</ul>
+
+<h2 id="permit">Пермит после развода</h2>
+<ul class="ul">
+  <li>О разводе или раздельной жизни нужно сообщить в миграционную службу кантона.</li>
+  <li><b>Пермит C</b> остаётся.</li>
+  <li><b>Пермит B через брак</b> (не ЕС): продлят, если брак с совместной жизнью в Швейцарии длился <b>не меньше 3 лет</b> и ты интегрирована — работа или учёба, язык, соблюдение порядка. Или если есть <b>важные личные причины</b>: насилие в браке, принудительный брак, очень трудное возвращение на родину (<a href="https://www.sem.admin.ch/dam/sem/de/data/rechtsgrundlagen/weisungen/auslaender/chronologie/2025-01-01-weisungsaenderung-aig.pdf.download.pdf/2025-01-01-weisungsaenderung-aig-d.pdf">SEM, 2025</a>).</li>
+  <li>Пострадала от насилия — собирай доказательства (справки врача, полиции, консультаций) и обратись в <a href="https://www.opferhilfe-schweiz.ch">Opferhilfe</a>, телефон <a href="tel:142">142</a>.</li>
+</ul>
+
+<h2 id="bez-braka">Ребёнок без брака</h2>
+<ul class="ul">
+  <li>Отец признаёт ребёнка в Zivilstandsamt — лично, можно до рождения (<a href="https://www.bj.admin.ch/de/faq-kindesanerkennung">BJ</a>).</li>
+  <li>Совместную опеку вы заявляете вместе там же или позже в KESB. Если один против — решает KESB.</li>
+  <li>Договор об алиментах на ребёнка становится обязательным после одобрения KESB. Подробно — в теме «KESB».</li>
+  <li>Неженатые партнёры не наследуют друг друга и не получают алиментов друг от друга — подумайте о завещании и договоре о совместной жизни.</li>
+</ul>
+''',
+    steps=[
+        'Перед свадьбой спроси в Zivilstandsamt список документов именно для своей страны и закажи их с апостилем.',
+        'Брак из-за границы — зарегистрируй его в кантоне, чтобы он был в швейцарском реестре.',
+        'Расстаётесь — договоритесь о детях, деньгах и пенсии письменно, тогда развод быстрый и дешёвый.',
+        'Пермит через брак — посчитай, есть ли 3 года совместной жизни, и сообщи о разводе в миграционную службу.',
+        'Алименты не платят — обратись в кантональную службу взыскания и узнай об авансе алиментов.',
+    ],
+    pomosh=dict(ids=['anwalt', 'opfer', 'beob', 'gemeinde'], t='По разводу и алиментам бесплатно помогут справочные адвокатов, при насилии — Opferhilfe.'),
+    tools={'grazhdanstvo-shema': 'Брак со швейцарцем сокращает путь к паспорту — схема покажет, сколько лет осталось.'},
+    related=['kesb', 'grazhdanstvo', 'permit-b', 'pensiya'],
+    sources=[
+        ('ch.ch — пожениться', 'https://www.ch.ch/de/familie-und-partnerschaft/heirat--konkubinat--partenariat/heiraten/'),
+        ('BJ — вопросы о браке и браке для всех, 19.03.2026', 'https://www.bj.admin.ch/de/faq-eheschliessung-ehe-fuer-alle'),
+        ('BJ — признание брака из-за границы', 'https://www.bj.admin.ch/dam/data/bj/gesellschaft/zivilstand/merkblaetter/ehe/auslandehe-d.pdf'),
+        ('ch.ch — имущество супругов', 'https://www.ch.ch/de/familie-und-partnerschaft/heirat--konkubinat--partenariat/wirtschaftliche-folgen-der-ehe-guterstand/'),
+        ('ch.ch — процедура развода', 'https://www.ch.ch/de/familie-und-partnerschaft/scheidung/scheidungsverfahren/'),
+        ('ch.ch — последствия развода', 'https://www.ch.ch/de/familie-und-partnerschaft/scheidung/folgen-einer-scheidung/'),
+        ('BSV — развод и пенсия', 'https://www.bsv.admin.ch/de/scheidung'),
+        ('Федеральный суд — метод расчёта алиментов (BGE 147 III 265)', 'https://servat.unibe.ch/dfr/bge/c3147265.html'),
+        ('Кантон Цюрих — помощь с алиментами', 'https://www.zh.ch/alimentenhilfe'),
+        ('SEM — изменения указаний AIG с 01.01.2025', 'https://www.sem.admin.ch/dam/sem/de/data/rechtsgrundlagen/weisungen/auslaender/chronologie/2025-01-01-weisungsaenderung-aig.pdf.download.pdf/2025-01-01-weisungsaenderung-aig-d.pdf'),
+        ('BJ — признание ребёнка', 'https://www.bj.admin.ch/de/faq-kindesanerkennung'),
+    ],
+    terms=[('Deutsch', 'Zivilstandsamt, Ehevorbereitungsverfahren, Trauung, Trauzeugen, Eheurkunde, Familienname, Güterstand, Errungenschaftsbeteiligung, Ehevertrag, Scheidung auf gemeinsames Begehren, Scheidungsklage, Eheschutz, Vorsorgeausgleich, AHV-Splitting, elterliche Sorge, Obhut, Kindesunterhalt, Betreuungsunterhalt, Inkassohilfe, Alimentenbevorschussung, Kindesanerkennung, Konkubinat'), ('Français', 'office de l’état civil, procédure préparatoire, mariage, témoins, nom de famille, régime matrimonial, participation aux acquêts, contrat de mariage, divorce sur requête commune, mesures protectrices, partage de la prévoyance, splitting AVS, autorité parentale, garde, contribution d’entretien, aide au recouvrement, avance sur pensions alimentaires, reconnaissance d’enfant'), ('Italiano', 'ufficio dello stato civile, procedura preparatoria, matrimonio, regime dei beni, contratto matrimoniale, divorzio su richiesta comune, conguaglio della previdenza, autorità parentale, custodia, contributo di mantenimento, aiuto all’incasso, anticipo degli alimenti, riconoscimento del figlio'), ('English', 'civil registry office, marriage preparation, marital property regime, prenuptial agreement, divorce by mutual consent, pension splitting, parental authority, custody, child maintenance, collection assistance, advance on maintenance, paternity recognition')],
+    post='Это заявление о разводе, сообщение о раздельной жизни в миграционную службу и требования по алиментам.',
+)
+
+ARTICLES['gemeinde'] = dict(
+    h1='Община (Gemeinde) и переезд: <em>регистрация за 14 дней, смена кантона и кого известить</em>',
+    seo='Переезд в Швейцарии: регистрация в общине (Anmeldung), смена кантона, чек-лист',
+    desc='Община (Gemeinde) и переезд в Швейцарии простыми словами на русском: что делает община, как встать на учёт (Anmeldung) в течение 14 дней и сняться с учёта (Abmeldung), какие документы взять, когда переезд в другой кантон с пермитом B нужно согласовать заранее, онлайн-переезд eUmzugCH, кого ещё известить: работодателя, медстраховку, почту (Nachsendeauftrag), банк, дорожное ведомство, школу; сдача квартиры и Serafe. По-немецки Gemeinde, Einwohnerkontrolle, Anmeldung, Umzug, по-французски commune, contrôle des habitants, déménagement, по-итальянски comune, controllo abitanti, trasloco.',
+    lead='Община — первое ведомство, с которым ты встречаешься в Швейцарии, и место, куда идут почти со всеми бытовыми вопросами. Здесь — что она делает, как зарегистрироваться и как переехать, ничего не забыв.',
+    body='''
+<nav class="toc" aria-label="Содержание"><b>В этой статье</b>
+<ul>
+  <li><a href="#chto">Что делает община</a></li>
+  <li><a href="#anmeldung">Регистрация: 14 дней</a></li>
+  <li><a href="#kanton">Переезд в другой кантон</a></li>
+  <li><a href="#online">Переезд онлайн</a></li>
+  <li><a href="#kogo">Кого ещё известить</a></li>
+  <li><a href="#kvartira">Старая и новая квартира</a></li>
+</ul></nav>
+
+<h2 id="chto">Что делает община</h2>
+<ul class="ul">
+  <li><b>Учёт жителей</b> (Einwohnerkontrolle, Einwohnerdienste): регистрация, справки о проживании, для иностранцев — приём документов на пермит.</li>
+  <li>Школа и детский сад, вывоз мусора, регистрация собаки и налог на неё, социальная служба, часто — налоговое бюро.</li>
+  <li>Община сама решает часть налога (налоговый коэффициент, Steuerfuss) — поэтому в соседних деревнях налоги разные.</li>
+  <li>Во многих общинах есть приветственная встреча, курсы языка и консультация для новых жителей — спроси при регистрации.</li>
+</ul>
+
+<h2 id="anmeldung">Регистрация: 14 дней</h2>
+<ul class="ul">
+  <li>Переехала — <b>встань на учёт в новой общине</b>, как правило, <b>в течение 14 дней</b>, и <b>снимись с учёта в старой</b> (<a href="https://www.ch.ch/de/wohnen/umzug/ab-und-anmelden-bei-der-wohngemeinde/">ch.ch</a>).</li>
+  <li><b>Что взять:</b> паспорт и пермит, договор аренды, полис медстраховки, документы о браке и детях. Швейцарцы — Heimatschein. Иностранцам при первой регистрации — фото для пермита. Точный список — на сайте общины.</li>
+  <li>Регистрация обычно стоит от 0 до нескольких десятков франков.</li>
+  <li>Иностранцу нельзя начинать работу, пока не подано заявление на разрешение — уточни при регистрации.</li>
+</ul>
+
+<h2 id="kanton">Переезд в другой кантон</h2>
+<ul class="ul">
+  <li><b>Пермит L или B</b> — переезд в другой кантон нужно <b>согласовать заранее</b>: подать заявление в миграционную службу нового кантона и дождаться решения (<a href="https://so.ch/verwaltung/departement-des-innern/migrationsamt/aufenthalt-und-integration/kantonswechsel/">пример Золотурна</a>). Не переезжай до решения.</li>
+  <li>С пермитом B право на смену кантона есть, если ты не безработная и нет причин для отзыва пермита. С пермитом C — если нет серьёзных нарушений.</li>
+  <li><b>Обычно просят:</b> заявление, паспорт, трудовой договор или справку о доходе, выписку из реестра долгов не старше 3 месяцев, подтверждение, что не получаешь социальную помощь, иногда — письмо с объяснением (<a href="https://migrationsamt.tg.ch/public/upload/assets/143315/Merkblatt_Kantonswechsel_%2816.11.2023%29.pdf?fp=5">пример Тургау</a>).</li>
+  <li>Статус S, F или N — переезд в другой кантон особенно сложен, спрашивай в миграционной службе.</li>
+</ul>
+
+<h2 id="online">Переезд онлайн (eUmzugCH)</h2>
+<p>Во многих кантонах и общинах переезд можно оформить онлайн на <a href="https://www.eumzug.swiss">eumzug.swiss</a>: сняться и встать на учёт без визита. Но для иностранцев он часто недоступен: например, в Базеле онлайн только для граждан Швейцарии и ЕС/ЕАСТ, в некоторых общинах — не для статусов S, F, N. Не получилось онлайн — иди лично.</p>
+
+<h2 id="kogo">Кого ещё известить</h2>
+<p>По <a href="https://www.ch.ch/de/wohnen/umzug/checkliste-fur-den-umzug/">чек-листу ch.ch</a>:</p>
+<ul class="ul">
+  <li><b>Работодатель</b> — новый адрес; на переезд обычно положен один свободный день.</li>
+  <li><b>Медстраховка и другие страховки</b> — взнос медстраховки зависит от региона и может измениться.</li>
+  <li><b>Почта</b> — заказ на пересылку писем (Nachsendeauftrag), лучше заранее.</li>
+  <li><b>Банк, касса AHV, врач, школа и детский сад, электричество и интернет.</b></li>
+  <li><b>Дорожное ведомство</b> нового кантона — права и номера машины.</li>
+  <li><b>Собака</b> — снять с учёта в старой общине и зарегистрировать в новой.</li>
+  <li><b>Serafe</b> (сбор за радио и телевидение) получает адрес от общины сам, извещать не нужно. Сбор — 335 франков в год на домохозяйство (<a href="https://www.serafe.ch/">Serafe</a>).</li>
+  <li><b>Налоги</b> за весь год обычно платят там, где ты жила 31 декабря.</li>
+</ul>
+<p>Не держи всё в голове — «Переезд: кого известить и до какого числа» составит список с датами под твой переезд.</p>
+
+<h2 id="kvartira">Старая и новая квартира</h2>
+<ul class="ul">
+  <li>Расторгни старый договор письменно, заказным, в срок. Подробно — в теме «Договор аренды и ловушки».</li>
+  <li>При сдаче и при въезде — <b>протокол</b> квартиры со всеми дефектами и фото.</li>
+  <li>Уборка при сдаче — строгая. Многие заказывают уборочную фирму с гарантией приёмки (Abnahmegarantie): если управляющая не примет, фирма доубирает бесплатно.</li>
+  <li>Популярные даты переезда — конец марта и конец сентября: фирмы и машины тогда заняты, бронируй заранее.</li>
+</ul>
+''',
+    steps=[
+        'Встань на учёт в новой общине в течение 14 дней и снимись с учёта в старой.',
+        'Пермит L или B и переезд в другой кантон — сначала разрешение нового кантона, потом переезд.',
+        'Закажи пересылку писем на почте и сообщи адрес работодателю, страховкам и банку.',
+        'Составь список дел по переезду с датами, чтобы ничего не забыть.',
+        'Сделай протокол сдачи и въезда с фото — это защищает залог.',
+    ],
+    pomosh=dict(ids=['gemeinde', 'mv'], t='С регистрацией поможет учёт жителей твоей общины, со сдачей квартиры — союз арендаторов.'),
+    tools={'pereezd-spisok': 'Все дела переезда с датами под твой день переезда — PDF с галочками.', 'moj-god': 'Даты переезда, регистрации и расторжения — в календаре на год.', 'moi-dannye': 'Все номера и адреса семьи на одном листе — пригодится, когда сообщаешь новый адрес.'},
+    related=['arenda', 'dogovor-arendy', 'permit-b', 'musor'],
+    sources=[
+        ('ch.ch — регистрация в общине', 'https://www.ch.ch/de/wohnen/umzug/ab-und-anmelden-bei-der-wohngemeinde/'),
+        ('ch.ch — чек-лист переезда', 'https://www.ch.ch/de/wohnen/umzug/checkliste-fur-den-umzug/'),
+        ('Кантон Золотурн — смена кантона', 'https://so.ch/verwaltung/departement-des-innern/migrationsamt/aufenthalt-und-integration/kantonswechsel/'),
+        ('Кантон Тургау — памятка о смене кантона, 16.11.2023', 'https://migrationsamt.tg.ch/public/upload/assets/143315/Merkblatt_Kantonswechsel_%2816.11.2023%29.pdf?fp=5'),
+        ('Кантон Базель-Штадт — переезд и регистрация', 'https://www.bs.ch/node/13849'),
+        ('Serafe — сбор за радио и телевидение', 'https://www.serafe.ch/'),
+    ],
+    terms=[('Deutsch', 'Gemeinde, Einwohnerkontrolle, Einwohnerdienste, Anmeldung, Abmeldung, Wohnsitzbestätigung, Heimatschein, Kantonswechsel, eUmzug, Nachsendeauftrag, Umzug, Zügeltermin, Wohnungsabgabe, Abnahmegarantie, Steuerfuss, Gemeindeversammlung'), ('Français', 'commune, contrôle des habitants, annonce d’arrivée, annonce de départ, attestation de domicile, changement de canton, ordre de réexpédition, déménagement, remise de l’appartement, garantie de réception, coefficient d’impôt, assemblée communale'), ('Italiano', 'comune, controllo abitanti, notifica d’arrivo, notifica di partenza, cambiamento di cantone, ordine di rispedizione, trasloco, riconsegna dell’appartamento, moltiplicatore d’imposta'), ('English', 'municipality, residents’ registration office, registration, deregistration, change of canton, mail forwarding, moving, apartment handover')],
+)
+
+ARTICLES['vereine'] = dict(
+    h1='Ферайны, волонтёрство и свои люди: <em>как найти круг общения в Швейцарии</em>',
+    seo='Ферайны в Швейцарии (Verein): клубы, волонтёрство (Freiwilligenarbeit), свои люди',
+    desc='Ферайны и волонтёрство в Швейцарии простыми словами на русском: что такое Verein и почему через него здесь знакомятся, какие бывают клубы (спорт, хор, родители, культура, общины земляков), как вступить и сколько стоит, как найти волонтёрство и зачем оно для работы и интеграции, как основать свой ферайн. По-немецки Verein, Freiwilligenarbeit, Mitgliederbeitrag, по-французски association, bénévolat, по-итальянски associazione, volontariato.',
+    lead='В Швейцарии друзей заводят не на улице, а в ферайнах: в спортивном клубе, хоре, родительском кружке, у пожарных-добровольцев. Это лучший способ выучить язык, понять местную жизнь и перестать чувствовать себя чужой. Здесь — с чего начать.',
+    body='''
+<nav class="toc" aria-label="Содержание"><b>В этой статье</b>
+<ul>
+  <li><a href="#chto">Что такое ферайн</a></li>
+  <li><a href="#kakie">Какие бывают</a></li>
+  <li><a href="#kak">Как вступить</a></li>
+  <li><a href="#volonter">Волонтёрство</a></li>
+  <li><a href="#svoi">Свои люди</a></li>
+  <li><a href="#osnovat">Как основать свой ферайн</a></li>
+</ul></nav>
+
+<h2 id="chto">Что такое ферайн (Verein)</h2>
+<p>Ферайн — это объединение людей с общим интересом: от футбольного клуба до общества любителей кактусов. Почти у каждой деревни есть десятки ферайнов. Через них устроена большая часть общественной жизни: праздники, турниры, рынки, концерты. Для швейцарцев ферайн — место, где знакомятся надолго.</p>
+<p>По закону ферайн — простая форма: достаточно устава и собрания членов (Гражданский кодекс, ZGB ст. 60 и далее).</p>
+
+<h2 id="kakie">Какие бывают</h2>
+<ul class="ul">
+  <li><b>Спорт:</b> гимнастика (Turnverein), футбол, бег, волейбол, лыжи, альпинизм (Альпийский клуб SAC). Для детей и подростков курсы часто дешевле благодаря государственной программе «Молодёжь и спорт» (Jugend+Sport).</li>
+  <li><b>Музыка и культура:</b> хоры, оркестры, театр, танцы.</li>
+  <li><b>Родители и дети:</b> родительские ферайны (Elternverein, Familienverein), игровые группы, встречи мам.</li>
+  <li><b>Деревня и помощь:</b> добровольные пожарные, самаритяне (первая помощь), ферайны для пожилых.</li>
+  <li><b>Земляки и язык:</b> ферайны русско- и украиноязычных, школы родного языка, церковные общины.</li>
+</ul>
+
+<h2 id="kak">Как вступить</h2>
+<ul class="ul">
+  <li>Список ферайнов обычно есть на сайте общины (раздел Vereine) — или спроси в общине при регистрации.</li>
+  <li>Почти везде можно прийти на <b>пробную тренировку или репетицию</b> (Schnuppertraining) бесплатно.</li>
+  <li><b>Взнос</b> (Mitgliederbeitrag) — от нескольких десятков до нескольких сотен франков в год, для детей обычно дешевле. Есть трудности с деньгами — спроси, бывают скидки.</li>
+  <li>Язык не идеальный — не страшно. Скажи прямо, что учишь язык: обычно помогают.</li>
+  <li>Ферайн живёт за счёт членов: помогать на празднике или в кассе турнира — нормально и лучший способ подружиться.</li>
+</ul>
+
+<h2 id="volonter">Волонтёрство</h2>
+<ul class="ul">
+  <li>Волонтёрство (Freiwilligenarbeit) в Швейцарии ценят очень высоко. Помогать можно в доме престарелых, на мероприятиях, с переводами для новичков, в продуктовом банке, в спортивном клубе.</li>
+  <li>Найти место помогут региональные бюро Benevol и платформы вроде <a href="https://www.benevol-jobs.ch">benevol-jobs.ch</a>.</li>
+  <li><b>Для работы:</b> волонтёрство даёт местный опыт, язык и рекомендации. Попроси подтверждение — <a href="https://www.dossier-freiwillig-engagiert.ch">«Dossier freiwillig engagiert»</a> — и добавь в «Резюме для Швейцарии (Lebenslauf)».</li>
+  <li>Получаешь пособие RAV или социальную помощь — сообщи о волонтёрстве и спроси, засчитают ли его.</li>
+</ul>
+
+<h2 id="svoi">Свои люди</h2>
+<ul class="ul">
+  <li>Встречи, разговорные клубы, праздники для детей на русском и украинском — на вкладке «Встречи».</li>
+  <li>Курсы и занятия — от йоги до немецкого — на вкладке «Курсы».</li>
+  <li>Самое лучшее — сочетать: свои люди для поддержки и местный ферайн для языка и новых друзей.</li>
+</ul>
+
+<h2 id="osnovat">Как основать свой ферайн</h2>
+<ul class="ul">
+  <li>Нужны минимум двое, письменный устав (цель, членство, взносы, правление, собрание) и собрание, которое его принимает.</li>
+  <li>Регистрация в торговом реестре не нужна, если ферайн не ведёт коммерческую деятельность.</li>
+  <li>Свой ферайн удобен для курсов и мероприятий: можно открыть счёт, арендовать зал, просить поддержку общины. Платные курсы на вкладке «Курсы» размещают от фирмы или ферайна.</li>
+</ul>
+''',
+    steps=[
+        'Открой список ферайнов на сайте своей общины и выбери два-три по интересу.',
+        'Сходи на бесплатную пробную тренировку или репетицию.',
+        'Запиши детей в спортивный клуб — через ферайн знакомятся и родители.',
+        'Найди волонтёрство на пару часов в месяц и попроси подтверждение для резюме.',
+        'Загляни на вкладку «Встречи» — там свои люди рядом с тобой.',
+    ],
+    tools={'moj-den': 'Тренировка, хор, волонтёрство — найди для них время в плане дня.'},
+    tabs={'events': 'Разговорные клубы, встречи мам и праздники на русском и украинском рядом с тобой.', 'kursy': 'Курсы и занятия на своём языке — от йоги до немецкого.'},
+    related=['fide', 'rabota', 'gemeinde', 'priroda'],
+    sources=[
+        ('Benevol — волонтёрство в Швейцарии', 'https://www.benevol-jobs.ch'),
+        ('Dossier freiwillig engagiert — подтверждение волонтёрства', 'https://www.dossier-freiwillig-engagiert.ch'),
+        ('Jugend+Sport — государственная программа спорта для детей', 'https://www.jugendundsport.ch'),
+        ('Гражданский кодекс (ZGB), ст. 60 и далее — ферайн', 'https://www.fedlex.admin.ch/eli/cc/24/233_245_233/de'),
+    ],
+    terms=[('Deutsch', 'Verein, Vereinsmitglied, Mitgliederbeitrag, Statuten, Generalversammlung, Vorstand, Schnuppertraining, Turnverein, Elternverein, Freiwilligenarbeit, Freiwillige, Jugend+Sport'), ('Français', 'association, membre, cotisation, statuts, assemblée générale, comité, entraînement d’essai, société de gymnastique, association de parents, bénévolat, bénévole, Jeunesse+Sport'), ('Italiano', 'associazione, socio, quota sociale, statuto, assemblea generale, comitato, allenamento di prova, volontariato, volontario, Gioventù+Sport'), ('English', 'club, association, membership fee, statutes, general meeting, board, trial session, volunteering, volunteer')],
 )

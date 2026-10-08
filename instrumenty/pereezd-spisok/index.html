@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<link rel="icon" href="/fav/favicon.svg" type="image/svg+xml"><link rel="icon" href="/fav/icon-32.png" sizes="32x32"><link rel="apple-touch-icon" href="/fav/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/fonts.css">
+<meta name="description" content="Бесплатный чек-лист переезда в Швейцарии с датами под твой день переезда: расторжение старой квартиры за 3 месяца, разрешение на смену кантона для пермита B и L, пересылка писем (Nachsendeauftrag), снятие с учёта (Abmeldung) и регистрация в новой общине за 14 дней (Anmeldung), протоколы квартиры, собака, машина, страховки, залог. На русском и немецком, французском или итальянском, PDF с галочками.">
+<link rel="canonical" href="https://svoiludi.ch/instrumenty/pereezd-spisok/">
+<meta property="og:type" content="website"><meta property="og:locale" content="ru_RU"><meta property="og:site_name" content="Свои люди в Швейцарии">
+<meta property="og:title" content="Переезд: кого известить и до какого числа · бесплатно"><meta property="og:description" content="Выбери дату переезда — получишь список дел с датами и названиями на языке кантона. PDF с галочками.">
+<meta property="og:url" content="https://svoiludi.ch/instrumenty/pereezd-spisok/"><meta property="og:image" content="https://svoiludi.ch/instrumenty/pereezd-spisok/og-image.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="robots" content="noindex, nofollow">
+<title>Переезд: кого известить и до какого числа</title>
+<style>
+/* Переезд: кого известить и до какого числа (08.10.2026): анкета слева, живые листы справа, движок assets/shema.js. */
+:root{
+  --bg:#F4EDE3; --paper:#FFFCF8; --ink:#2F2924; --muted:#7A6E62; --line:#E5D9C9; --soft:#EFE5D7;
+  --brown:#6E4F3C; --mustard:#B98324; --mustard-soft:#F3E3C2; --sage:#4F5E3E; --sage-soft:#E3E8D6; --red:#A0523D;
+  --display:"Forum","Georgia",serif; --sans:"Manrope","Segoe UI",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#221D19; --paper:#2C2621; --ink:#F1E9DF; --muted:#B4A796; --line:#3E362F; --soft:#352E28;
+  --brown:#E1C2A6; --mustard:#E2B45C; --mustard-soft:#3D321F; --sage:#B4BF97; --sage-soft:#2E3226; --red:#E39A85; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#221D19; --paper:#2C2621; --ink:#F1E9DF; --muted:#B4A796; --line:#3E362F; --soft:#352E28;
+  --brown:#E1C2A6; --mustard:#E2B45C; --mustard-soft:#3D321F; --sage:#B4BF97; --sage-soft:#2E3226; --red:#E39A85; color-scheme:dark}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--ink);font:15px/1.55 var(--sans);margin:0}
+.wrap{max-width:1280px;margin:0 auto;padding-inline:16px;padding-block:28px 48px;display:flex;flex-direction:column;gap:24px}
+.eyebrow{font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+h1{font-family:var(--display);font-weight:400;font-size:clamp(2.4rem,6vw,3.6rem);line-height:1;margin:4px 0 10px;text-wrap:balance}
+h2{font-family:var(--display);font-weight:400;font-size:1.55rem;margin:0;text-wrap:balance}
+h3{font-family:var(--display);font-weight:400;font-size:1.22rem;line-height:1.2;margin:0}
+.lead{max-width:66ch;color:var(--muted);margin:0}
+.jump{font-weight:700;color:var(--brown);text-underline-offset:4px}
+.privnote{margin-top:14px;background:var(--sage-soft);border-radius:16px;padding:12px 16px;font-size:.9rem;max-width:90ch}
+.status{font-size:.86rem;color:var(--muted);min-height:1.3em}
+.btn{font:inherit;font-weight:700;font-size:.9rem;border:0;border-radius:999px;padding:10px 18px;cursor:pointer;color:#fff;text-decoration:none;display:inline-flex;align-items:center;gap:6px;background:#6E4F3C;box-shadow:0 8px 18px -8px rgba(110,79,60,.6)}
+.btn.gold{background:#B98324;box-shadow:0 8px 18px -8px rgba(185,131,36,.7)}
+.btn.free{background:#4F5E3E;box-shadow:0 8px 18px -8px rgba(79,94,62,.6)}
+.btn.ghost{background:transparent;color:var(--brown);border:1.5px solid var(--line);box-shadow:none}
+.btn.sm{font-size:.82rem;padding:7px 13px}
+.btn[disabled]{background:var(--soft);color:var(--muted);box-shadow:none;cursor:wait}
+select,input[type=text],input[type=tel],input[type=number],input[type=date],textarea{font:inherit;font-size:.95rem;color:var(--ink);background:var(--paper);border:1.5px solid var(--line);border-radius:12px;padding:9px 12px;width:100%;min-width:0}
+select:focus-visible,input:focus-visible,button:focus-visible,textarea:focus-visible,a:focus-visible{outline:2px solid var(--mustard);outline-offset:2px}
+::placeholder{color:color-mix(in srgb,var(--muted) 70%,transparent)}
+.setup{background:var(--paper);border:1.5px solid var(--line);border-radius:22px;padding:16px 18px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px 18px;align-items:start}
+@media (max-width:1000px){.setup{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.setup{grid-template-columns:1fr}}
+.fl{display:flex;flex-direction:column;gap:6px;min-width:0}
+.fl>.lb{font-size:.8rem;font-weight:700;color:var(--muted);display:flex;align-items:center}
+.seg{display:flex;flex-wrap:wrap;gap:6px}
+.seg button{font:inherit;font-size:.84rem;font-weight:700;border:1.5px solid var(--line);background:var(--paper);color:var(--ink);border-radius:999px;padding:6px 12px;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--sage);border-color:var(--sage);color:#fff}
+.acts{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.exbar{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;background:var(--mustard-soft);border-radius:16px;padding:10px 14px;font-size:.9rem;font-weight:600}
+.work{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:22px;align-items:start}
+@media (max-width:1040px){.work{grid-template-columns:1fr}}
+.form{display:flex;flex-direction:column;gap:14px;min-width:0}
+.sec{background:var(--paper);border:1.5px solid var(--line);border-radius:20px;padding:16px 18px;display:flex;flex-direction:column;gap:12px}
+.sec>h2{font-size:1.3rem;display:flex;align-items:center}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:560px){.g2{grid-template-columns:1fr}}
+.hint{font-size:.84rem;color:var(--muted);margin:0}
+.chk{display:flex;flex-direction:column;gap:8px}
+.chk label{display:flex;gap:10px;align-items:baseline;font-size:.92rem;cursor:pointer}
+.chk input{flex:none;width:18px;height:18px;accent-color:var(--sage);transform:translateY(3px)}
+.chk b{white-space:nowrap}
+.chk small{color:var(--muted)}
+.tog{display:flex;gap:10px;align-items:center;font-size:.92rem;cursor:pointer}
+.tog input{width:18px;height:18px;accent-color:var(--sage)}
+.sheetbox{position:sticky;top:12px;display:flex;flex-direction:column;gap:10px}
+@media (max-width:1040px){.sheetbox{position:static}}
+.sheet{background:#fff;border-radius:6px;box-shadow:0 18px 40px -22px rgba(47,41,36,.45);overflow:hidden}
+.sheet svg{display:block;width:100%;height:auto}
+.imp{background:var(--paper);border:1.5px dashed color-mix(in srgb,var(--sage) 55%,transparent);border-radius:16px;padding:14px 18px;font-size:.88rem;max-width:90ch;margin:0}
+.imp b{color:var(--sage)}
+.guide{display:flex;flex-direction:column;gap:14px;max-width:90ch}
+.guide ul{margin:0;padding-left:20px}
+.guide li{margin:4px 0}
+.credit{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:.8rem;color:var(--muted)}
+.credit a{color:var(--muted)}
+.qh{font:700 .72rem/1 var(--sans);width:20px;height:20px;border-radius:50%;border:1.5px solid var(--line);background:var(--paper);color:var(--brown);cursor:pointer;margin-left:6px;padding:0;flex:none}
+.sheets{display:flex;flex-direction:column;gap:14px}
+.goals{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+@media (max-width:560px){.goals{grid-template-columns:1fr}}
+.goals label{display:flex;gap:10px;align-items:flex-start;background:var(--bg);border:1.5px solid var(--line);border-radius:14px;padding:9px 12px;cursor:pointer;font-size:.92rem}
+.goals input{width:18px;height:18px;accent-color:var(--sage);flex:none;margin-top:2px}
+.goals small{display:block;color:var(--muted)}
+.steps{display:flex;flex-direction:column;gap:8px}
+.steps details{background:var(--paper);border:1.5px solid var(--line);border-radius:16px;padding:10px 16px}
+.steps summary{cursor:pointer;font-weight:700;display:flex;gap:10px;align-items:baseline}
+.steps summary small{font-weight:600;color:var(--muted);margin-left:auto;text-align:right}
+.steps details p,.steps details ul{margin:8px 0 2px;font-size:.93rem}
+.steps details ul{padding-left:20px}
+</style>
+</head>
+<body>
+<style>.res{background:var(--paper);border:1.5px solid var(--line);border-radius:16px;padding:12px 14px;font-size:.95rem}.form input[type=date]{width:100%}</style>
+<div class="wrap">
+  <header>
+    <p style="margin:0 0 14px"><a class="jump" href="https://svoiludi.ch/instrumenty/">← Все полезные инструменты · Свои люди в Швейцарии</a></p>
+    <div class="eyebrow">Община · переезд</div>
+    <h1>Переезд: кого известить и до какого числа</h1>
+    <p class="lead">Переезд в Швейцарии — это два десятка дел с жёсткими сроками: расторгнуть квартиру за три месяца, получить разрешение на смену кантона, сняться с учёта и зарегистрироваться за 14 дней. Выбери дату переезда — получишь список дел с датами и названиями на языке кантона. PDF с галочками бесплатно.</p>
+    <div class="privnote"><b>Твои данные только у тебя.</b> Выбор хранится только в твоём браузере на этом устройстве. Регистрация не нужна.</div>
+    <div data-fan="pereezd-spisok"></div>
+  </header>
+  <div class="setup">
+    <div class="fl"><span class="lb">Язык списка<button type="button" class="qh" data-help="lang" aria-label="Подсказка: язык списка" aria-expanded="false">?</button></span><select id="lang"><option value="de">Русский + немецкий</option><option value="fr">Русский + французский</option><option value="it">Русский + итальянский</option><option value="ru">Только русский</option></select></div>
+    <div class="fl"><span class="lb">Печать</span><label class="tog"><input type="checkbox" id="bw"> Без цвета, для дешёвой печати</label></div>
+  </div>
+  <div class="exbar" id="exbar" hidden><span>Это пример. Так будет выглядеть твой список.</span><button type="button" class="btn sm" id="exOff">Вернуться к моим данным</button></div>
+  <div class="work">
+    <div class="form">
+      <section class="sec"><h2>Переезд</h2><div class="g2">
+        <div class="fl"><span class="lb">Дата переезда<button type="button" class="qh" data-help="date" aria-label="Подсказка: дата" aria-expanded="false">?</button></span><input type="date" id="date"></div>
+        <div class="fl"><span class="lb">Пермит<button type="button" class="qh" data-help="permit" aria-label="Подсказка: пермит" aria-expanded="false">?</button></span><select id="permit"></select></div>
+      </div>
+      <label class="tog"><input type="checkbox" id="other"> Переезжаю в другой кантон<button type="button" class="qh" data-help="kt" aria-label="Подсказка: другой кантон" aria-expanded="false">?</button></label>
+      <label class="tog"><input type="checkbox" id="rent"> Снимаю старую квартиру<button type="button" class="qh" data-help="rent" aria-label="Подсказка: старая квартира" aria-expanded="false">?</button></label>
+      <label class="tog"><input type="checkbox" id="kids"> Есть дети в школе или детском саду</label>
+      <label class="tog"><input type="checkbox" id="dog"> Есть собака</label>
+      <label class="tog"><input type="checkbox" id="car"> Есть машина или права</label></section>
+      <div class="res" id="res" role="status"></div>
+    </div>
+    <div class="sheetbox">
+      <div class="acts"><button type="button" class="btn gold" id="pdf">Скачать PDF</button><button type="button" class="btn ghost sm" id="share" hidden>Отправить</button><button type="button" class="btn ghost sm" id="exOn">Посмотреть на примере</button></div>
+      <div class="sheets" id="sheet" aria-label="Предпросмотр листов"></div>
+      <div class="status" id="status" role="status"></div>
+    </div>
+  </div>
+  <p class="imp"><b>Важно.</b> Это список для личного использования, сроки ориентировочные — по ch.ch и правилам кантонов на октябрь 2026. В твоём договоре аренды и в общине могут быть свои сроки. Расторжение квартиры и другие важные письма отправляй заказным (Einschreiben), храни копию и квитанцию — письмо поможет сделать «<a href="https://svoiludi.ch/instrumenty/pisma-arenda/">Письма управляющей</a>». Подробно — в теме <a href="https://svoiludi.ch/shveycariya/gemeinde/">«Община (Gemeinde)»</a>.</p>
+  <div class="share-slot" data-url="https://svoiludi.ch/instrumenty/pereezd-spisok/" data-lead="Перешли тому, кто переезжает. В ссылке нет твоих данных." data-text="Привет! Тут можно бесплатно получить список дел для переезда в Швейцарии с датами: квартира, община, почта, страховки. PDF. https://svoiludi.ch/instrumenty/pereezd-spisok/"></div>
+  <p class="credit"><span>Свои люди в Швейцарии · svoiludi.ch</span><a href="https://svoiludi.ch/privacy/">Политика конфиденциальности</a></p>
+</div>
+
+<script src="/assets/kantony.js"></script>
+<script src="/assets/lib/jspdf.umd.min.js"></script>
+<script src="/assets/shema.js"></script>
+<script>
+window.HELP = {
+  lang: '<p><b>Русский + немецкий</b> (французский, итальянский) — названия ведомств и документов ещё и на языке кантона, как их ищут на сайтах: Anmeldung, Nachsendeauftrag, Wohnungsabgabe.</p>',
+  date: '<p>День, когда ты переезжаешь. От него считаются все сроки: расторжение старой квартиры — за 3 месяца, регистрация в новой общине — в течение 14 дней.</p>',
+  kt: '<p>Переезжаешь в другой кантон? С пермитом L или B (и со статусами S, F, N) переезд в другой кантон нужно сначала согласовать с миграционной службой нового кантона и дождаться решения.</p>',
+  permit: '<p>Нужен, чтобы показать, надо ли просить разрешение на смену кантона. С пермитом C или гражданством ЕС/ЕАСТ и Швейцарии разрешение на смену кантона не нужно.</p>',
+  rent: '<p>Если ты снимаешь старую квартиру, в списке будут расторжение договора, уборка и сдача квартиры с протоколом и возврат залога.</p>'
+};
+const KEY = 'pereezdSpisok.v1';
+const PERM = {ch: 'Швейцария, ЕС или ЕАСТ', c: 'Пермит C', b: 'Пермит B', l: 'Пермит L', s: 'Статус S, F или N'};
+const T = {
+  kuend: ['Расторгнуть договор старой квартиры — письменно, заказным, в срок по договору', {de: 'Kündigung Mietvertrag', fr: 'résiliation du bail', it: 'disdetta del contratto'}, 'Обычно за 3 месяца к дате из договора. Раньше — только с новым жильцом.'],
+  kanton: ['Заявление о смене кантона в миграционную службу нового кантона — дождаться решения до переезда', {de: 'Gesuch Kantonswechsel', fr: 'demande de changement de canton', it: 'domanda di cambiamento di cantone'}, 'Обычно нужны: паспорт, справка о доходе или трудовой договор, выписка из реестра долгов, подтверждение, что нет соцпомощи.'],
+  firma: ['Забронировать фирму или машину для переезда', {de: 'Umzugsfirma', fr: 'entreprise de déménagement', it: 'ditta di traslochi'}, 'Конец марта и конец сентября — самые занятые дни.'],
+  reinig: ['Заказать уборку с гарантией приёмки', {de: 'Endreinigung mit Abnahmegarantie', fr: 'nettoyage avec garantie de remise', it: 'pulizia con garanzia di consegna'}, 'Если управляющая не примет, фирма доубирает бесплатно.'],
+  schule: ['Записать детей в школу или детский сад новой общины', {de: 'Schulanmeldung', fr: 'inscription scolaire', it: 'iscrizione scolastica'}, 'Через школьную администрацию новой общины.'],
+  post: ['Заказать пересылку писем на новый адрес', {de: 'Nachsendeauftrag (Post)', fr: 'ordre de réexpédition', it: 'ordine di rispedizione'}, 'На почте или на post.ch, платно.'],
+  arbeit: ['Сообщить работодателю дату и новый адрес', {de: 'Adressänderung Arbeitgeber', fr: 'changement d’adresse employeur', it: 'cambiamento d’indirizzo datore di lavoro'}, 'На переезд обычно положен один свободный день.'],
+  strom: ['Электричество, интернет, телефон — перенести или расторгнуть', {de: 'Strom, Internet', fr: 'électricité, internet', it: 'elettricità, internet'}, 'Счётчик записать в день выезда и въезда.'],
+  abmeld: ['Сняться с учёта в старой общине', {de: 'Abmeldung', fr: 'annonce de départ', it: 'notifica di partenza'}, 'Не позже дня выезда, иногда онлайн (eUmzugCH).'],
+  abgabe: ['Сдать старую квартиру с протоколом и фото', {de: 'Wohnungsabgabe, Abgabeprotokoll', fr: 'état des lieux de sortie', it: 'riconsegna, verbale'}, 'Подписывай только то, с чем согласна.'],
+  antritt: ['Новая квартира: протокол всех дефектов с фото', {de: 'Antrittsprotokoll, Mängelliste', fr: 'état des lieux d’entrée', it: 'verbale d’entrata'}, 'Что не записано сейчас, при выезде могут поставить в счёт тебе.'],
+  anmeld: ['Встать на учёт в новой общине', {de: 'Anmeldung Einwohnerkontrolle', fr: 'annonce d’arrivée', it: 'notifica d’arrivo'}, 'Паспорт и пермит, договор аренды, полис медстраховки.'],
+  hund: ['Зарегистрировать собаку в новой общине и изменить адрес в AMICUS', {de: 'Hundeanmeldung', fr: 'annonce du chien', it: 'notifica del cane'}, 'Налог на собаку — в новой общине.'],
+  auto: ['Права и машина: новый адрес в дорожном ведомстве, при смене кантона — новые номера', {de: 'Strassenverkehrsamt', fr: 'service des automobiles', it: 'ufficio della circolazione'}, 'Срок зависит от кантона — уточни.'],
+  vers: ['Медстраховка и другие страховки — новый адрес', {de: 'Krankenkasse, Versicherungen', fr: 'caisse maladie, assurances', it: 'cassa malati, assicurazioni'}, 'Взнос медстраховки зависит от региона и может измениться.'],
+  bank: ['Банк, касса AHV, врач, Twint и магазины — новый адрес', {de: 'Adressänderung', fr: 'changement d’adresse', it: 'cambiamento d’indirizzo'}, 'Serafe получает адрес от общины сам.'],
+  kaution: ['Вернуть залог старой квартиры', {de: 'Freigabe Mietkaution', fr: 'libération de la garantie', it: 'svincolo della cauzione'}, 'Попроси управляющую подписать разрешение банку.'],
+  steuer: ['Налоги: за весь год — там, где ты живёшь 31 декабря', {de: 'Steuerpflicht am 31.12.', fr: 'domicile fiscal au 31.12', it: 'domicilio fiscale al 31.12'}, 'Налог у источника: работодатель пересчитает по новому кантону.']
+};
+const iso = d => d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+let S = load(), EX = null;
+function blank(){ const t = new Date(); t.setDate(t.getDate() + 60); return {lang: 'de', bw: false, date: iso(t), other: false, permit: 'b', rent: true, kids: false, dog: false, car: false}; }
+function load(){ try { const s = JSON.parse(localStorage.getItem(KEY)); if (s && typeof s === 'object') return Object.assign(blank(), s); } catch (e) {} return blank(); }
+function save(){ if (EX) return; try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} }
+const D = () => EX || S, bi = d => d.lang !== 'ru';
+const dmy = dt => String(dt.getDate()).padStart(2, '0') + '.' + String(dt.getMonth() + 1).padStart(2, '0') + '.' + dt.getFullYear();
+function items(d){
+  const m = new Date(d.date + 'T12:00:00'), at = n => new Date(m.getTime() + n * 864e5), out = [];
+  const add = (k, n, label) => out.push({k, n, when: at(n), label});
+  if (d.rent) add('kuend', -100, 'до');
+  if (d.other && ['b', 'l', 's'].includes(d.permit)) add('kanton', -75, 'до');
+  add('firma', -60, 'до');
+  if (d.rent) add('reinig', -30, 'до');
+  if (d.kids) add('schule', -30, 'до');
+  add('post', -14, 'до'); add('arbeit', -14, 'до'); add('strom', -7, 'до');
+  add('abmeld', 0, 'до'); if (d.rent) add('abgabe', 0, ''); add('antritt', 0, '');
+  add('anmeld', 14, 'до');
+  if (d.dog) add('hund', 10, 'до');
+  if (d.car) add('auto', 14, 'до');
+  add('vers', 30, 'до'); add('bank', 30, 'до');
+  if (d.rent) add('kaution', 45, 'около');
+  add('steuer', 60, '');
+  return out.sort((a, b) => a.n - b.n);
+}
+const GROUP = n => n <= -60 ? 'За 2–3 месяца' : n < 0 ? 'В последний месяц' : n === 0 ? 'В день переезда' : n <= 14 ? 'В первые 2 недели' : 'Позже';
+function sheets(d){
+  const its = items(d), pages = []; let P, y; const C = SH.pal(d.bw), c = C.c, X = 12, W = 186;
+  const np = first => { P = SH.page(210, 297, C); pages.push(P); P.header(first ? 'Мой переезд' : 'Мой переезд (продолжение)', bi(d) ? {de: 'Umzug – Checkliste', fr: 'Déménagement – liste de contrôle', it: 'Trasloco – lista di controllo'}[d.lang] : '', 'переезд ' + dmy(new Date(d.date + 'T12:00:00'))); y = 26; };
+  np(true);
+  P.para('Что сделать, до какого числа и как это называется. Отмечай галочкой то, что сделано. Сроки ориентировочные — точные смотри в договоре аренды и на сайте своей общины.', X, y, 8.2, false, C.ink, W, 3.8); y += 10;
+  let g = '';
+  its.forEach(it => {
+    const t = T[it.k], h = 6 + SH.wrap(t[0], true, 8.6, W - 40).length * 3.8 + SH.wrap(t[2], false, 7, W - 40).length * 3.2 + (bi(d) ? 3.2 : 0);
+    if (GROUP(it.n) !== g) { if (y + 12 + h > 285) np(false); g = GROUP(it.n); y = P.sec(g, X, y + 1, W); }
+    if (y + h > 285) { np(false); y = P.sec(g, X, y + 1, W); }
+    P.rect(X, y - 3, 4, 4, null, d.bw ? '#000000' : c.sage[1], 0.6);
+    P.text((it.label ? it.label + ' ' : '') + dmy(it.when), X + 7, y, 8.2, true, it.n < 0 ? c.red[1] : C.head);
+    let yy = y; SH.wrap(t[0], true, 8.6, W - 40).forEach(l => { P.text(l, X + 36, yy, 8.6, true, C.ink); yy += 3.8; });
+    if (bi(d)) { P.text(t[1][d.lang], X + 36, yy, 7, false, C.head); yy += 3.2; }
+    SH.wrap(t[2], false, 7, W - 40).forEach(l => { P.text(l, X + 36, yy, 7, false, C.mut); yy += 3.2; });
+    y = yy + 3; P.line(X, y - 1.6, X + W, y - 1.6, C.line, 0.2); y += 1.4;
+  });
+  pages.forEach((p, i) => p.foot('Список для личного использования. Сроки — по ch.ch и правилам кантонов на 08.10.2026, в твоей общине и договоре могут быть свои. Важные письма — заказным (Einschreiben), храни копию и квитанцию. Стр. ' + (i + 1) + ' / ' + pages.length + ' · svoiludi.ch'));
+  return pages;
+}
+function build(){ return sheets(D()); }
+const $ = id => document.getElementById(id);
+$('permit').innerHTML = Object.entries(PERM).map(([k, v]) => `<option value="${k}">${v}</option>`).join('');
+let UI;
+function fill(){ const d = D(); $('lang').value = d.lang; $('bw').checked = !!d.bw; $('date').value = d.date; $('permit').value = d.permit; ['other', 'rent', 'kids', 'dog', 'car'].forEach(k => { $(k).checked = !!d[k]; $(k).disabled = !!EX; }); ['date', 'permit'].forEach(k => $(k).disabled = !!EX);
+  const its = items(d), nxt = its.find(i => i.when >= new Date()); $('res').innerHTML = `<b>${its.length} дел.</b> ` + (nxt ? `Ближайшее: ${T[nxt.k][0].split(' — ')[0].toLowerCase()} — ${nxt.label} ${dmy(nxt.when)}.` : '') + (d.other && ['b', 'l', 's'].includes(d.permit) ? ' <b>Сначала — разрешение на смену кантона.</b>' : '');
+  $('exbar').hidden = !EX; $('exOn').hidden = !!EX; if (UI) UI.render(); }
+const set = f => { f(S); if (EX) f(EX); save(); fill(); };
+$('lang').addEventListener('change', e => set(s => s.lang = e.target.value));
+$('bw').addEventListener('change', e => set(s => s.bw = e.target.checked));
+$('date').addEventListener('change', e => { if (EX || !e.target.value) return; S.date = e.target.value; save(); fill(); });
+$('permit').addEventListener('change', e => { if (EX) return; S.permit = e.target.value; save(); fill(); });
+['other', 'rent', 'kids', 'dog', 'car'].forEach(k => $(k).addEventListener('change', e => { if (EX) return; S[k] = e.target.checked; save(); fill(); }));
+const EXD = () => { const t = new Date(); t.setDate(t.getDate() + 130); return {lang: 'de', bw: S.bw, date: iso(t), other: true, permit: 'b', rent: true, kids: true, dog: false, car: true}; };
+$('exOn').addEventListener('click', () => { EX = EXD(); fill(); window.scrollTo({top: $('exbar').offsetTop - 12, behavior: 'smooth'}); });
+$('exOff').addEventListener('click', () => { EX = null; fill(); });
+if (/[?&]example\b/.test(location.search)) EX = EXD();
+UI = SH.mount({build, title: 'Переезд', name: () => 'Umzug-Checkliste'});
+fill();
+
+</script>
+<script src="/assets/help.js"></script>
+<script src="/assets/backup.js"></script>
+<script src="/assets/pdffan.js" defer></script>
+<script src="/assets/share.js" defer></script>
+<script src="/assets/samesite.js"></script>
+</body>
+</html>
