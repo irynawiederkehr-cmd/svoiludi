@@ -4013,3 +4013,196 @@ ARTICLES['priroda'] = dict(
     ],
     terms=[('Deutsch', 'Wandern, Wanderweg, Bergwanderweg, Alpinwanderweg, Wegweiser, SAC-Wanderskala, Rega, Gönnerbeitrag, Notruf, Lawinenbulletin, Wetterwarnung, Zecken, FSME-Impfung, Wildcampen, Wildruhezone, Drohne'), ('Français', 'randonnée, chemin de randonnée, chemin de randonnée de montagne, sentier alpin, échelle SAC, REGA, donateur, bulletin d’avalanches, alerte météo, tiques, vaccination contre l’encéphalite à tiques, camping sauvage, zone de tranquillité, drone'), ('Italiano', 'escursionismo, sentiero escursionistico, sentiero di montagna, sentiero alpino, scala SAC, Rega, sostenitore, bollettino delle valanghe, allerta meteo, zecche, vaccinazione TBE, campeggio libero, zona di tranquillità, drone'), ('English', 'hiking, hiking trail, mountain trail, alpine trail, SAC scale, Rega patron, avalanche bulletin, weather warning, ticks, tick-borne encephalitis vaccination, wild camping, wildlife rest area, drone')],
 )
+
+
+# ===== Таможня и права покупателя (08.10.2026). Факты сверены 08.10.2026: BAZG, BLV, ESTV, Post, DHL, admin.ch, OR (fedlex), SKS, FRC, ACSI.
+ARTICLES['tamozhnya'] = dict(
+    h1='Таможня и посылки в Швейцарии: <em>150 франков в день, мясо, алкоголь и что нельзя ввозить</em>',
+    seo='Таможня в Швейцарии: лимит 150 франков, мясо 1 кг, алкоголь, посылки и НДС (Zoll)',
+    desc='Таможня в Швейцарии простыми словами на русском: с 2025 года без НДС можно ввезти покупки только на 150 франков на человека в день, нормы без пошлины — мясо 1 кг, масло 1 кг, алкоголь 5 л и 1 л крепкого, 250 сигарет; мясо и молочное из Украины и России ввозить нельзя; лекарства на месяц; наличные от 10 000 франков; посылки из-за границы — НДС от 62 франков, подарки до 100 франков, плата Почты за оформление; переезд с вещами по форме 18.44. По-немецки Zoll, Wertfreigrenze, Freimengen, Verzollung, по-французски douane, franchise de valeur, dédouanement, по-итальянски dogana, franchigia di valore, sdoganamento.',
+    lead='Швейцария не в ЕС, и на границе — таможня. За покупки в Германии или Италии и за посылки из интернет-магазинов часто нужно доплатить НДС и пошлину. Здесь — сколько можно ввезти без доплаты, что нельзя ввозить совсем и как не переплатить за посылку.',
+    body='''
+<nav class="toc" aria-label="Содержание"><b>В этой статье</b>
+<ul>
+  <li><a href="#limit">150 франков в день</a></li>
+  <li><a href="#normy">Мясо, алкоголь, табак</a></li>
+  <li><a href="#nelzya">Что нельзя ввозить</a></li>
+  <li><a href="#deklaraciya">Как задекларировать</a></li>
+  <li><a href="#posylki">Посылки из-за границы</a></li>
+  <li><a href="#pereezd">Переезд с вещами</a></li>
+  <li><a href="#ukraina">Посылки в Украину</a></li>
+</ul></nav>
+
+<h2 id="limit">150 франков в день</h2>
+<ul class="ul">
+  <li>С 1 января 2025 года без швейцарского НДС можно ввезти покупки на <b>150 франков на человека в день</b> (раньше было 300), дети тоже считаются (<a href="https://www.bazg.admin.ch/de/wertfreigrenze-mehrwertsteuer-einreise-150-franken">BAZG</a>).</li>
+  <li><b>Важно:</b> если покупки дороже 150 франков, НДС платят <b>со всей суммы</b>, а не с разницы. Купила на 400 — НДС с 400.</li>
+  <li>Одна вещь дороже 150 франков облагается всегда, даже если вас в машине четверо.</li>
+  <li><b>НДС:</b> 8,1 % на обычные товары, 2,6 % на еду, напитки без алкоголя, книги и лекарства.</li>
+  <li>Немецкий или итальянский НДС можно вернуть в магазине по бланку возврата (Ausfuhrschein) — тогда покупка выходит дешевле.</li>
+</ul>
+
+<h2 id="normy">Мясо, алкоголь, табак</h2>
+<p>На эти товары, кроме лимита 150 франков, есть нормы без пошлины — на человека в день (<a href="https://www.bazg.admin.ch/bazg/en/home/information-individuals/travel-and-purchases--allowances/goods-in-travel/freimengen--lebensmittel--alkohol-und-tabak.html">BAZG</a>):</p>
+<div class="tbl"><table>
+<thead><tr><th>Товар</th><th>Без пошлины</th><th>Пошлина сверх нормы</th></tr></thead>
+<tbody>
+<tr><td>Мясо и колбаса (кроме дичи)</td><td>1 кг</td><td>17 франков за кг (больше 10 кг — 23)</td></tr>
+<tr><td>Сливочное масло, сливки</td><td>1 кг или 1 л</td><td>16 франков за кг</td></tr>
+<tr><td>Масло растительное, жиры, маргарин</td><td>5 кг или 5 л</td><td>2 франка за кг</td></tr>
+<tr><td>Алкоголь до 18 % (вино, пиво)</td><td>5 л</td><td>2 франка за литр</td></tr>
+<tr><td>Алкоголь выше 18 %</td><td>1 л</td><td>15 франков за литр</td></tr>
+<tr><td>Сигареты, сигары</td><td>250 штук</td><td>0,25 франка за штуку</td></tr>
+</tbody></table></div>
+<p>Алкоголь и табак — только с 17 лет. Посчитай свою поездку в «Что можно ввезти без пошлины: лимиты на границе».</p>
+
+<h2 id="nelzya">Что нельзя ввозить</h2>
+<ul class="ul">
+  <li><b>Мясо и молочное — только из стран ЕС</b>, Норвегии, Исландии и Северной Ирландии. <b>Из Украины, России, Беларуси, Молдовы — запрещено</b>, даже немного для себя (<a href="https://www.blv.admin.ch/de/lebensmittel-im-privaten-reiseverkehr">BLV</a>).</li>
+  <li>Из этих стран можно: хлеб и выпечку, шоколад и сладости, макароны без мяса, рыбу до 20 кг, икру до 125 г, мёд до 2 кг, детское питание в заводской упаковке до 2 кг.</li>
+  <li><b>Лекарства</b> — только для себя и не больше чем на месяц.</li>
+  <li><b>Наличные</b> — сколько угодно, но от 10 000 франков на вопрос таможни нужно сказать, откуда деньги и для чего (<a href="https://www.bazg.admin.ch/de/mitnahme-von-bargeld-in-die-schweiz">BAZG</a>).</li>
+  <li>Оружие, наркотики, поддельные брендовые вещи, редкие животные и растения — запрещены или только с разрешением.</li>
+</ul>
+
+<h2 id="deklaraciya">Как задекларировать</h2>
+<ul class="ul">
+  <li>Есть что декларировать — заранее в приложении <b>QuickZoll</b> или на границе по красному коридору.</li>
+  <li>Нечего декларировать — зелёный коридор.</li>
+  <li>Не задекларировала то, что нужно, — придётся доплатить НДС и пошлину и штраф.</li>
+  <li>Вопросы — в справочную таможни: +41 58 467 15 15 (пн–пт 8:00–11:30 и 13:30–17:00).</li>
+</ul>
+
+<h2 id="posylki">Посылки из-за границы</h2>
+<ul class="ul">
+  <li><b>НДС не берут, если его сумма до 5 франков</b>: это посылка с товарами до 62 франков (по ставке 8,1 %) или до 193 франков (книги, еда — по ставке 2,6 %), вместе с доставкой (<a href="https://www.bazg.admin.ch/de/empfangen-von-briefen-und-paketen">BAZG</a>). Лимит 150 франков к посылкам не относится.</li>
+  <li><b>Плата перевозчика за оформление.</b> Швейцарская почта берёт от 11,50 до 70 франков: основа 13 франков из ЕС или 16 из других стран (на 1,50 дешевле при оплате онлайн) плюс 3 % стоимости (<a href="https://www.post.ch/de/empfangen/importverzollung">Post</a>). Из-за этого дешёвая покупка может выйти намного дороже.</li>
+  <li><b>Подарок от частного лица</b> до 100 франков — без налогов и пошлин, кроме алкоголя и табака. На посылке должно быть написано «подарок» (<a href="https://www.bazg.admin.ch/de/geschenksendungen-in-die-schweiz">BAZG</a>). Покупки из интернета подарком не считаются.</li>
+  <li><b>Интернет-площадки</b> (Temu, AliExpress и другие): с 2025 года крупные площадки сами отвечают за швейцарский НДС. Смотри в корзине, включён ли НДС и таможня, — тогда при доставке доплачивать не надо.</li>
+  <li>Лекарства из зарубежных интернет-аптек — почти всегда нельзя.</li>
+  <li>Не согласна с суммой — заявление в таможню в течение 60 дней после решения.</li>
+</ul>
+
+<h2 id="pereezd">Переезд с вещами</h2>
+<ul class="ul">
+  <li>Свои вещи при переезде в Швейцарию ввозятся без пошлины и НДС, если ты пользовалась ими за границей <b>не меньше 6 месяцев</b>. Заполни онлайн форму <b>18.44</b> и покажи на границе. Вещи можно ввезти частями в течение 2 лет (<a href="https://www.bazg.admin.ch/de/faq-umzugsgut">BAZG</a>).</li>
+  <li>Машина — тоже по форме 18.44, подробно — в теме «Транспорт, машина и права». Алкоголь и оружие в переезде — отдельно.</li>
+</ul>
+
+<h2 id="ukraina">Посылки в Украину</h2>
+<p>Через Швейцарскую почту письма и мелкие пакеты до 2 кг отправляются приоритетной почтой, для тяжёлых посылок есть отдельные варианты, экспресс сейчас недоступен. Доставка в некоторые районы ограничена — проверь у Укрпошты (<a href="https://www.post.ch/en/help-and-contact/ukraine/briefe-und-paket-in-die-ukraine">Post</a>).</p>
+''',
+    steps=[
+        'Перед покупками за границей посчитай: больше 150 франков на человека — НДС со всей суммы.',
+        'Мясо и молочное вези только из ЕС, из Украины и России — нельзя.',
+        'Есть что декларировать — сделай это заранее в приложении QuickZoll.',
+        'Заказываешь из-за границы — проверь, включены ли НДС и таможня, и сколько возьмёт перевозчик.',
+        'Переезжаешь — заполни форму 18.44 для своих вещей.',
+    ],
+    tools={'tamozhnya-limity': 'Впиши покупки и сколько вас — увидишь НДС, пошлину и что ввозить нельзя.', },
+    related=['transport', 'zhivotnye', 'prava-pokupatelya', 'skrytye-rashody'],
+    sources=[
+        ('BAZG — лимит 150 франков', 'https://www.bazg.admin.ch/de/wertfreigrenze-mehrwertsteuer-einreise-150-franken'),
+        ('BAZG — нормы для еды, алкоголя и табака', 'https://www.bazg.admin.ch/bazg/en/home/information-individuals/travel-and-purchases--allowances/goods-in-travel/freimengen--lebensmittel--alkohol-und-tabak.html'),
+        ('BLV — еда в личном багаже', 'https://www.blv.admin.ch/de/lebensmittel-im-privaten-reiseverkehr'),
+        ('BAZG — лекарства', 'https://www.bazg.admin.ch/de/medikamente-import-schweiz-mengen-abgaben'),
+        ('BAZG — наличные', 'https://www.bazg.admin.ch/de/mitnahme-von-bargeld-in-die-schweiz'),
+        ('BAZG — письма и посылки', 'https://www.bazg.admin.ch/de/empfangen-von-briefen-und-paketen'),
+        ('BAZG — подарки', 'https://www.bazg.admin.ch/de/geschenksendungen-in-die-schweiz'),
+        ('Post — таможенное оформление', 'https://www.post.ch/de/empfangen/importverzollung'),
+        ('BAZG — переселенческое имущество', 'https://www.bazg.admin.ch/de/faq-umzugsgut'),
+        ('Post — письма и посылки в Украину', 'https://www.post.ch/en/help-and-contact/ukraine/briefe-und-paket-in-die-ukraine'),
+    ],
+    terms=[('Deutsch', 'Zoll, BAZG, Wertfreigrenze, Freimengen, Mehrwertsteuer (MWST), Verzollung, Zollabgaben, QuickZoll, Ausfuhrschein, Geschenksendung, Übersiedlungsgut, Formular 18.44, Barmittel'), ('Français', 'douane, OFDF, franchise de valeur, franchises quantitatives, TVA, dédouanement, redevances, envoi-cadeau, effets de déménagement, formulaire 18.44, argent liquide'), ('Italiano', 'dogana, UDSC, franchigia di valore, franchigie quantitative, IVA, sdoganamento, invio regalo, masserizie di trasloco, modulo 18.44, denaro contante'), ('English', 'customs, value limit, duty-free allowances, VAT, customs clearance, gift parcel, household effects, form 18.44, cash')],
+)
+
+ARTICLES['prava-pokupatelya'] = dict(
+    h1='Права покупателя в Швейцарии: <em>гарантия, возврат, подписки и счета, с которыми ты не согласна</em>',
+    seo='Права покупателя в Швейцарии: гарантия 2 года, возврат, отзыв договора, подписки (Konsumentenrecht)',
+    desc='Права покупателя в Швейцарии простыми словами на русском: общего права вернуть покупку из интернета нет — только по правилам магазина; отзыв договора за 14 дней при покупке у двери и по телефону; гарантия 2 года и как быстро сообщить о дефекте; что можно исключить в условиях магазина; неоплаченный заказ и товары, которые ты не заказывала; подписки и ловушки (Abofalle); несогласие со счётом и возражение против Betreibung за 10 дней; бесплатная помощь: Konsumentenschutz, FRC, ACSI, омбудсмены. По-немецки Garantie, Gewährleistung, Widerruf, Abofalle, по-французски garantie, droit de révocation, по-итальянски garanzia, diritto di revoca.',
+    lead='В Швейцарии права покупателя слабее, чем в ЕС: например, вернуть покупку из интернет-магазина можно только если магазин сам это разрешает. Но кое-что закон защищает твёрдо. Здесь — что именно и как этим пользоваться.',
+    body='''
+<nav class="toc" aria-label="Содержание"><b>В этой статье</b>
+<ul>
+  <li><a href="#vozvrat">Вернуть покупку</a></li>
+  <li><a href="#otzyv">Отозвать договор за 14 дней</a></li>
+  <li><a href="#garantiya">Гарантия и дефект</a></li>
+  <li><a href="#nezakaz">То, что ты не заказывала</a></li>
+  <li><a href="#podpiski">Подписки и ловушки</a></li>
+  <li><a href="#schet">Счёт, с которым ты не согласна</a></li>
+  <li><a href="#pomoshch">Кто поможет</a></li>
+</ul></nav>
+
+<h2 id="vozvrat">Вернуть покупку</h2>
+<ul class="ul">
+  <li>В Швейцарии <b>нет общего права</b> вернуть исправную покупку — ни в магазине, ни в интернете. Возврат — это <b>добрая воля магазина</b> (Kulanz): смотри его условия (AGB) до покупки.</li>
+  <li>Многие крупные магазины всё равно принимают возврат 14–30 дней — сохраняй чек и упаковку.</li>
+  <li>Покупаешь в интернет-магазине из ЕС — там часто действует право ЕС с 14 днями на возврат.</li>
+</ul>
+
+<h2 id="otzyv">Отозвать договор за 14 дней</h2>
+<ul class="ul">
+  <li>Право отозвать договор (Widerrufsrecht) есть, если договор заключён <b>у двери дома</b>, на работе, на улице или в транспорте, на рекламной поездке или <b>по телефону</b> — и сумма больше 100 франков (Обязательственное право, OR ст. 40a и далее).</li>
+  <li>Срок — <b>14 дней</b> с момента, когда ты подписала договор и узнала о праве отзыва. Отзыв — письменно, лучше заказным.</li>
+  <li>Для покупок в интернете и в обычном магазине это право не действует.</li>
+</ul>
+
+<h2 id="garantiya">Гарантия и дефект</h2>
+<ul class="ul">
+  <li><b>Гарантия по закону</b> (Gewährleistung) — <b>2 года</b> с получения товара, для подержанных вещей магазин может сократить до 1 года (OR ст. 210).</li>
+  <li><b>Но:</b> в своих условиях (AGB) продавец может заменить её своей гарантией или ограничить, например только ремонтом. Читай условия до покупки.</li>
+  <li><b>О дефекте сообщай сразу</b>, как обнаружила, письменно (Mängelrüge, OR ст. 201): что сломалось, когда купила, номер заказа, фото. Тянуть нельзя — можно потерять право.</li>
+  <li>Что можно требовать: ремонт или замену (если это позволяют условия), снижение цены или возврат денег при серьёзном дефекте.</li>
+  <li><b>Гарантия производителя</b> (Garantie) — это отдельное добровольное обещание, условия — в гарантийном талоне.</li>
+  <li>Письмо продавцу о дефекте поможет сделать «Письма продавцу: дефект, отмена подписки, отзыв договора, спор по счёту».</li>
+</ul>
+
+<h2 id="nezakaz">То, что ты не заказывала</h2>
+<p>Прислали товар, который ты не заказывала, — платить и отправлять его обратно не обязана (OR ст. 6a). Если это явная ошибка, сообщи отправителю. Счёт за то, что ты не заказывала, не оплачивай.</p>
+
+<h2 id="podpiski">Подписки и ловушки (Abofalle)</h2>
+<ul class="ul">
+  <li>Как отменить подписку — написано в договоре: срок и форма. Отменяй письменно и попроси подтверждение.</li>
+  <li><b>Ловушки:</b> «бесплатный пробный период», который сам превращается в платную подписку, мелкий шрифт, звонки «вы выиграли». Интернет-магазин обязан ясно показать, что заказ платный.</li>
+  <li>Заключила договор по телефону — у тебя 14 дней на отзыв.</li>
+  <li>Спор со связью, банком, страховкой или турагентством — сначала жалоба самой компании, потом бесплатный омбудсмен (например, <a href="https://www.ombudscom.ch">Ombudscom</a> для связи).</li>
+</ul>
+
+<h2 id="schet">Счёт, с которым ты не согласна</h2>
+<ol class="ol">
+  <li><b>Не молчи.</b> Напиши продавцу письменно, что и почему ты оспариваешь, и попроси исправить счёт. Оплати бесспорную часть, если она есть.</li>
+  <li><b>Напоминания</b> (Mahnung) и письма инкассо — это ещё не принудительное взыскание.</li>
+  <li><b>Пришёл платёжный приказ (Zahlungsbefehl)</b> от Betreibungsamt — если долг спорный, подай <b>возражение (Rechtsvorschlag) в течение 10 дней</b>, объяснять причину не нужно. Подробно — в теме «Долги в Швейцарии и Betreibung».</li>
+  <li>Дальше спор решает примирительный орган — это недорого и без адвоката.</li>
+</ol>
+
+<h2 id="pomoshch">Кто поможет</h2>
+<ul class="ul">
+  <li><b>Konsumentenschutz (SKS)</b> — немецкая Швейцария, консультация по телефону +41 31 370 24 24 (пн–пт).</li>
+  <li><b>FRC</b> — франкоязычная Швейцария: членство от 90 франков в год, нечленам — одна первая консультация бесплатно.</li>
+  <li><b>ACSI</b> — Тичино: +41 91 922 97 55.</li>
+  <li>Журналы K-Tipp и Beobachter консультируют своих подписчиков. Подробно — «Профсоюзы и консультации: взносы, сроки, телефоны».</li>
+</ul>
+''',
+    steps=[
+        'Перед покупкой прочитай условия магазина: возврат, гарантия, кто платит доставку.',
+        'Сохраняй чеки, номера заказов и упаковку, фотографируй дефекты.',
+        'Дефект — сообщи продавцу сразу и письменно.',
+        'Подписку отменяй письменно в срок и проси подтверждение.',
+        'Платёжный приказ за спорный долг — возражение в течение 10 дней.',
+    ],
+    pomosh=dict(ids=['sks', 'frc', 'acsi', 'ktipp', 'ombudscom'], t='Бесплатно или за небольшой взнос помогут организации потребителей и отраслевые омбудсмены.'),
+    tools={'pisma-prodavcu': 'Дефект, подписка, отзыв договора, спор по счёту — письмо на языке продавца с переводом, отправляй заказным.', 'kuda-obratitsya': 'Организации потребителей и омбудсмены: взносы, телефоны и когда помогут.'},
+    related=['betreibung', 'tamozhnya', 'profsoyuzy', 'skrytye-rashody'],
+    sources=[
+        ('Обязательственное право (OR): ст. 6a, 40a–40f, 197–210', 'https://www.fedlex.admin.ch/eli/cc/27/317_321_377/de'),
+        ('Закон о долговом взыскании (SchKG), ст. 74 — возражение', 'https://www.fedlex.admin.ch/eli/cc/11/529_488_529/de'),
+        ('Konsumentenschutz (SKS)', 'https://www.konsumentenschutz.ch'),
+        ('FRC — помощь потребителям', 'https://www.frc.ch/aide'),
+        ('ACSI — потребители Тичино', 'https://www.acsi.ch'),
+        ('Ombudscom — омбудсмен связи', 'https://www.ombudscom.ch'),
+    ],
+    terms=[('Deutsch', 'Gewährleistung, Garantie, Mangel, Mängelrüge, Nachbesserung, Ersatzlieferung, Minderung, Wandelung, Widerrufsrecht, Haustürgeschäft, Kulanz, AGB, unbestellte Ware, Abofalle, Kündigung, Mahnung, Zahlungsbefehl, Rechtsvorschlag, Ombudsstelle'), ('Français', 'garantie légale, garantie du fabricant, défaut, avis des défauts, réparation, remplacement, réduction du prix, résolution, droit de révocation, démarchage à domicile, geste commercial, conditions générales, marchandise non commandée, piège à abonnement, résiliation, rappel, commandement de payer, opposition, médiateur'), ('Italiano', 'garanzia legale, garanzia del produttore, difetto, notifica dei difetti, riparazione, sostituzione, riduzione del prezzo, diritto di revoca, vendita a domicilio, condizioni generali, merce non ordinata, trappola dell’abbonamento, disdetta, diffida, precetto esecutivo, opposizione'), ('English', 'statutory warranty, manufacturer’s guarantee, defect, notice of defect, repair, replacement, price reduction, right of withdrawal, doorstep sale, terms and conditions, unsolicited goods, subscription trap, cancellation, reminder, payment order, objection, ombudsman')],
+    post='Это сообщение о дефекте, отзыв договора, отмена подписки и возражение против счёта.',
+    post2='Для отзыва и возражения считается день отправки или получения — храни квитанцию.',
+)
