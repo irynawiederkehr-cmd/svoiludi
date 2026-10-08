@@ -30,6 +30,7 @@ KW = {
  'nyani': ['няня в швейцарии', 'няня швейцарія', 'tagesmutter', 'babysitter schweiz'],
  'professii-avto': ['водитель такси швейцария', 'uber швейцария', 'taxi bewilligung'],
  'fide': ['fide тест', 'fide швейцария', 'fide test', 'deutschkurs zürich', 'немецкий язык в швейцарии'],
+ 'rabota': ['работа в швейцарии', 'работа в швейцарии для украинцев', 'робота в швейцарії', 'jobs.ch', 'jobup', 'jobs zürich'],
  'samozanyatost': ['самозанятость в швейцарии', 'ип в швейцарии', 'открыть бизнес в швейцарии', 'самозайнятість швейцарія', 'selbständigkeit schweiz', 'einzelfirma gründen'],
  'trudovoe-pravo': ['трудовой договор швейцария', 'увольнение в швейцарии', 'kündigungsfrist', 'arbeitsvertrag schweiz'],
  'bolezn-na-rabote': ['больничный швейцария', 'krankheit arbeitgeber lohnfortzahlung', 'krankgeschrieben'],
