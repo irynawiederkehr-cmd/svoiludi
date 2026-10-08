@@ -45,7 +45,7 @@ def fix(html, depth):
     # инструменты — внутри предпросмотра
     html = re.sub(r'href="(?:https://svoiludi\.ch)?/instrumenty/((?:[a-z-]+/)?)(#[^"]*)?"', lambda m: f'href="{up}instrumenty/{m.group(1)}index.html{m.group(2) or ""}"', html)
     # «Как устроена Швейцария»: ссылки на папки внутри вкладки и на главную с карточкой → явный index.html
-    html = re.sub(r'href="((?:\.\./)*)([a-z0-9-]+)/"', lambda m: f'href="{m.group(1)}{m.group(2)}/index.html"' if m.group(2) in ('permit-b','betreibung','nalogovaya-deklaraciya') or m.group(2) in SHVD else m.group(0), html)
+    html = re.sub(r'href="((?:\.\./)*)([a-z0-9-]+)/(#[^"]*)?"', lambda m: f'href="{m.group(1)}{m.group(2)}/index.html{m.group(3) or ""}"' if m.group(2) in ('permit-b','betreibung','nalogovaya-deklaraciya') or m.group(2) in SHVD else m.group(0), html)
     html = re.sub(r'href="((?:\.\./)+)(events|join|kursy|vakansii|instrumenty|shveycariya)/((?:[a-z0-9-]+/)?)"', lambda m: f'href="{m.group(1)}{m.group(2)}/{m.group(3)}index.html"', html)
     html = re.sub(r'href="((?:\.\./)+)"', lambda m: f'href="{m.group(1)}index.html"', html)
     html = html.replace("'<a class=\"sp\" href=\"' + root + '#'", "'<a class=\"sp\" href=\"' + root + 'index.html#'")
