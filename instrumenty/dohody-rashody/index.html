@@ -1,0 +1,409 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<link rel="icon" href="/fav/favicon.svg" type="image/svg+xml"><link rel="icon" href="/fav/icon-32.png" sizes="32x32"><link rel="apple-touch-icon" href="/fav/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/fonts.css">
+<meta name="description" content="Бесплатная таблица доходов и расходов для самозанятых в Швейцарии (Einnahmen und Ausgaben, Milchbüchleinrechnung): записи с категориями и номером чека, наличные и кассовая книга, итоги по месяцам и категориям, что уменьшает налог, отчёт за год для налоговой декларации на русском, немецком, французском или итальянском и квитанции клиенту за наличные. Данные только у тебя.">
+<link rel="canonical" href="https://svoiludi.ch/instrumenty/dohody-rashody/">
+<meta property="og:type" content="website"><meta property="og:locale" content="ru_RU"><meta property="og:site_name" content="Свои люди в Швейцарии">
+<meta property="og:title" content="Доходы и расходы · бесплатно для своего дела"><meta property="og:description" content="Записывай доходы и расходы, получи отчёт за год для налоговой на языке кантона и квитанции за наличные. Данные только у тебя.">
+<meta property="og:url" content="https://svoiludi.ch/instrumenty/dohody-rashody/"><meta property="og:image" content="https://svoiludi.ch/instrumenty/dohody-rashody/og-image.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="robots" content="noindex, nofollow">
+<title>Доходы и расходы</title>
+<style>
+/* Доходы и расходы (08.10.2026): анкета слева, живые листы справа, движок assets/shema.js. */
+:root{
+  --bg:#F4EDE3; --paper:#FFFCF8; --ink:#2F2924; --muted:#7A6E62; --line:#E5D9C9; --soft:#EFE5D7;
+  --brown:#6E4F3C; --mustard:#B98324; --mustard-soft:#F3E3C2; --sage:#4F5E3E; --sage-soft:#E3E8D6; --red:#A0523D;
+  --display:"Forum","Georgia",serif; --sans:"Manrope","Segoe UI",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#221D19; --paper:#2C2621; --ink:#F1E9DF; --muted:#B4A796; --line:#3E362F; --soft:#352E28;
+  --brown:#E1C2A6; --mustard:#E2B45C; --mustard-soft:#3D321F; --sage:#B4BF97; --sage-soft:#2E3226; --red:#E39A85; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#221D19; --paper:#2C2621; --ink:#F1E9DF; --muted:#B4A796; --line:#3E362F; --soft:#352E28;
+  --brown:#E1C2A6; --mustard:#E2B45C; --mustard-soft:#3D321F; --sage:#B4BF97; --sage-soft:#2E3226; --red:#E39A85; color-scheme:dark}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--ink);font:15px/1.55 var(--sans);margin:0}
+.wrap{max-width:1280px;margin:0 auto;padding-inline:16px;padding-block:28px 48px;display:flex;flex-direction:column;gap:24px}
+.eyebrow{font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+h1{font-family:var(--display);font-weight:400;font-size:clamp(2.4rem,6vw,3.6rem);line-height:1;margin:4px 0 10px;text-wrap:balance}
+h2{font-family:var(--display);font-weight:400;font-size:1.55rem;margin:0;text-wrap:balance}
+h3{font-family:var(--display);font-weight:400;font-size:1.22rem;line-height:1.2;margin:0}
+.lead{max-width:66ch;color:var(--muted);margin:0}
+.jump{font-weight:700;color:var(--brown);text-underline-offset:4px}
+.privnote{margin-top:14px;background:var(--sage-soft);border-radius:16px;padding:12px 16px;font-size:.9rem;max-width:90ch}
+.status{font-size:.86rem;color:var(--muted);min-height:1.3em}
+.btn{font:inherit;font-weight:700;font-size:.9rem;border:0;border-radius:999px;padding:10px 18px;cursor:pointer;color:#fff;text-decoration:none;display:inline-flex;align-items:center;gap:6px;background:#6E4F3C;box-shadow:0 8px 18px -8px rgba(110,79,60,.6)}
+.btn.gold{background:#B98324;box-shadow:0 8px 18px -8px rgba(185,131,36,.7)}
+.btn.free{background:#4F5E3E;box-shadow:0 8px 18px -8px rgba(79,94,62,.6)}
+.btn.ghost{background:transparent;color:var(--brown);border:1.5px solid var(--line);box-shadow:none}
+.btn.sm{font-size:.82rem;padding:7px 13px}
+.btn[disabled]{background:var(--soft);color:var(--muted);box-shadow:none;cursor:wait}
+select,input[type=text],input[type=tel],input[type=number],input[type=date],textarea{font:inherit;font-size:.95rem;color:var(--ink);background:var(--paper);border:1.5px solid var(--line);border-radius:12px;padding:9px 12px;width:100%;min-width:0}
+select:focus-visible,input:focus-visible,button:focus-visible,textarea:focus-visible,a:focus-visible{outline:2px solid var(--mustard);outline-offset:2px}
+::placeholder{color:color-mix(in srgb,var(--muted) 70%,transparent)}
+.setup{background:var(--paper);border:1.5px solid var(--line);border-radius:22px;padding:16px 18px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px 18px;align-items:start}
+@media (max-width:1000px){.setup{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.setup{grid-template-columns:1fr}}
+.fl{display:flex;flex-direction:column;gap:6px;min-width:0}
+.fl>.lb{font-size:.8rem;font-weight:700;color:var(--muted);display:flex;align-items:center}
+.seg{display:flex;flex-wrap:wrap;gap:6px}
+.seg button{font:inherit;font-size:.84rem;font-weight:700;border:1.5px solid var(--line);background:var(--paper);color:var(--ink);border-radius:999px;padding:6px 12px;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--sage);border-color:var(--sage);color:#fff}
+.acts{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.exbar{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;background:var(--mustard-soft);border-radius:16px;padding:10px 14px;font-size:.9rem;font-weight:600}
+.work{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:22px;align-items:start}
+@media (max-width:1040px){.work{grid-template-columns:1fr}}
+.form{display:flex;flex-direction:column;gap:14px;min-width:0}
+.sec{background:var(--paper);border:1.5px solid var(--line);border-radius:20px;padding:16px 18px;display:flex;flex-direction:column;gap:12px}
+.sec>h2{font-size:1.3rem;display:flex;align-items:center}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:560px){.g2{grid-template-columns:1fr}}
+.hint{font-size:.84rem;color:var(--muted);margin:0}
+.chk{display:flex;flex-direction:column;gap:8px}
+.chk label{display:flex;gap:10px;align-items:baseline;font-size:.92rem;cursor:pointer}
+.chk input{flex:none;width:18px;height:18px;accent-color:var(--sage);transform:translateY(3px)}
+.chk b{white-space:nowrap}
+.chk small{color:var(--muted)}
+.tog{display:flex;gap:10px;align-items:center;font-size:.92rem;cursor:pointer}
+.tog input{width:18px;height:18px;accent-color:var(--sage)}
+.sheetbox{position:sticky;top:12px;display:flex;flex-direction:column;gap:10px}
+@media (max-width:1040px){.sheetbox{position:static}}
+.sheet{background:#fff;border-radius:6px;box-shadow:0 18px 40px -22px rgba(47,41,36,.45);overflow:hidden}
+.sheet svg{display:block;width:100%;height:auto}
+.imp{background:var(--paper);border:1.5px dashed color-mix(in srgb,var(--sage) 55%,transparent);border-radius:16px;padding:14px 18px;font-size:.88rem;max-width:90ch;margin:0}
+.imp b{color:var(--sage)}
+.guide{display:flex;flex-direction:column;gap:14px;max-width:90ch}
+.guide ul{margin:0;padding-left:20px}
+.guide li{margin:4px 0}
+.credit{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:.8rem;color:var(--muted)}
+.credit a{color:var(--muted)}
+.qh{font:700 .72rem/1 var(--sans);width:20px;height:20px;border-radius:50%;border:1.5px solid var(--line);background:var(--paper);color:var(--brown);cursor:pointer;margin-left:6px;padding:0;flex:none}
+.sheets{display:flex;flex-direction:column;gap:14px}
+.goals{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+@media (max-width:560px){.goals{grid-template-columns:1fr}}
+.goals label{display:flex;gap:10px;align-items:flex-start;background:var(--bg);border:1.5px solid var(--line);border-radius:14px;padding:9px 12px;cursor:pointer;font-size:.92rem}
+.goals input{width:18px;height:18px;accent-color:var(--sage);flex:none;margin-top:2px}
+.goals small{display:block;color:var(--muted)}
+.steps{display:flex;flex-direction:column;gap:8px}
+.steps details{background:var(--paper);border:1.5px solid var(--line);border-radius:16px;padding:10px 16px}
+.steps summary{cursor:pointer;font-weight:700;display:flex;gap:10px;align-items:baseline}
+.steps summary small{font-weight:600;color:var(--muted);margin-left:auto;text-align:right}
+.steps details p,.steps details ul{margin:8px 0 2px;font-size:.93rem}
+.steps details ul{padding-left:20px}
+</style>
+</head>
+<body>
+<style>#fields input,#fields select{width:100%}.typ{display:flex;gap:6px}.typ button{flex:1;font:inherit;font-weight:700;border:1.5px solid var(--line);background:var(--paper);border-radius:12px;padding:9px;cursor:pointer}.typ button.on[data-t="in"]{background:#E2F0E2;border-color:#3A8A48;color:#2C6B37}.typ button.on[data-t="ex"]{background:#F6E0D9;border-color:#A0523D;color:#8A3F2D}
+.sum3{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin:8px 0}.sum3 div{background:var(--bg);border-radius:12px;padding:8px 10px;font-size:.8rem;color:var(--muted)}.sum3 b{display:block;font-size:1.02rem;color:var(--ink)}
+.rows{display:flex;flex-direction:column;gap:6px;margin-top:8px}.row{display:grid;grid-template-columns:1fr auto;gap:2px 10px;background:var(--paper);border:1.5px solid var(--line);border-radius:12px;padding:8px 10px;font-size:.88rem}.row.on{border-color:var(--sage)}.row b{font-size:.92rem}.row small{color:var(--muted)}.row .am{font-weight:700;text-align:right;white-space:nowrap}.row .am.in{color:#2C6B37}.row .am.ex{color:#8A3F2D}.row .am.pv{color:var(--muted);text-decoration:line-through}.row .bt{grid-column:1/-1;display:flex;gap:6px;flex-wrap:wrap}.row .bt button{font:inherit;font-size:.8rem;border:1.5px solid var(--line);background:var(--bg);border-radius:999px;padding:3px 10px;cursor:pointer}.row .bt button.sel{background:#F3E3C2;border-color:#B98324}
+.edbar{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}</style>
+<div class="wrap">
+  <header>
+    <p style="margin:0 0 14px"><a class="jump" href="https://svoiludi.ch/instrumenty/">← Все полезные инструменты · Свои люди в Швейцарии</a></p>
+    <div class="eyebrow">Своё дело · учёт</div>
+    <h1>Доходы и расходы</h1>
+    <p class="lead">Простой учёт для своего дела. Записываешь каждый доход и расход с категорией и номером чека, а итоги по месяцам и категориям, наличные в кассе и прибыль за год считаются сами. В конце года — отчёт для налоговой декларации на русском, немецком, французском или итальянском. А если клиент платит наличными, здесь же можно сделать ему квитанцию. PDF бесплатно.</p>
+    <div class="privnote"><b>Твои данные только у тебя.</b> Записи хранятся только в твоём браузере на этом устройстве. Сохраняй резервную копию — внизу страницы. Регистрация не нужна.</div>
+    <div data-fan="dohody-rashody"></div>
+  </header>
+  <div class="setup">
+    <div class="fl"><span class="lb">Кантон<button type="button" class="qh" data-help="kt" aria-label="Подсказка: кантон" aria-expanded="false">?</button></span><select id="kt"></select></div>
+    <div class="fl"><span class="lb">Язык PDF<button type="button" class="qh" data-help="lang" aria-label="Подсказка: язык PDF" aria-expanded="false">?</button></span><select id="lang"><option value="ru">На языке сайта</option><option value="de">Deutsch</option><option value="fr">Français</option><option value="it">Italiano</option></select></div>
+    <div class="fl"><span class="lb">Год</span><select id="year"></select></div>
+    <div class="fl"><span class="lb">Что скачать<button type="button" class="qh" data-help="doc" aria-label="Подсказка: что скачать" aria-expanded="false">?</button></span><select id="doc"><option value="rep">Отчёт за год для налоговой</option><option value="quit">Квитанции за наличные</option></select></div>
+  </div>
+  <div class="exbar" id="exbar" hidden><span>Это пример. Так будет выглядеть твой файл.</span><button type="button" class="btn sm" id="exOff">Вернуться к моим данным</button></div>
+  <div class="work">
+    <div class="form" id="fields"></div>
+    <div class="sheetbox">
+      <div class="acts"><button type="button" class="btn gold" id="pdf">Скачать PDF</button><button type="button" class="btn ghost sm" id="share" hidden>Отправить</button><button type="button" class="btn ghost sm" id="exOn">Посмотреть на примере</button></div>
+      <div class="sheets" id="sheet" aria-label="Предпросмотр листов"></div>
+      <div class="status" id="status" role="status"></div>
+    </div>
+  </div>
+  <p class="imp"><b>Важно.</b> Это образец для примера и личного использования, а не официальный документ и не бухгалтерская программа. Цифры ориентировочные, правила вычетов зависят от кантона — уточняй их в инструкции к декларации своего кантона или у бухгалтера и перепроверяй сама. Автор не несёт ответственности за достоверность. Чеки и счета храни 10 лет.</p>
+  <div class="share-slot" data-url="https://svoiludi.ch/instrumenty/dohody-rashody/" data-lead="Перешли тем, кто работает на себя. В ссылке нет твоих данных." data-text="Привет! Тут бесплатная таблица доходов и расходов для своего дела в Швейцарии: итоги по месяцам, наличные, отчёт за год для налоговой на немецком или французском и квитанции клиентам. Данные остаются у тебя. https://svoiludi.ch/instrumenty/dohody-rashody/"></div>
+  <p class="credit"><span>Свои люди в Швейцарии · svoiludi.ch</span><a href="https://svoiludi.ch/privacy/">Политика конфиденциальности</a></p>
+</div>
+
+<script src="/assets/kantony.js"></script>
+<script src="/assets/lib/jspdf.umd.min.js"></script>
+<script src="/assets/shema.js"></script>
+<script>
+window.HELP = {
+  kt: '<p>Кантон, где ты платишь налоги. По нему сам ставится язык PDF: в Женеве, Во, Невшателе, Юре, Фрибуре и Вале — французский, в Тичино — итальянский, в остальных — немецкий.</p>',
+  lang: '<p>На каком языке отчёт для налоговой и квитанции. Если отдаёшь отчёт бухгалтеру или в налоговую, выбери язык кантона. Для себя можно на языке сайта. То, что ты вписываешь сама (описания), попадает в PDF как есть.</p>',
+  doc: '<p><b>Отчёт за год</b> — итоги по категориям и месяцам, наличные в кассе, журнал всех записей и кассовая книга. Его прикладывают к налоговой декларации или отдают бухгалтеру.</p><p><b>Квитанции за наличные</b> — для клиентов, которые заплатили наличными. Отметь нужные записи кнопкой «Квитанция».</p>',
+  cat: '<p><b>Уменьшают налог</b> расходы, которые нужны для работы (geschäftsmässig begründet): материалы и товары, аренда помещения, реклама и сайт, страховки дела, обучение по профессии, бухгалтер и банк, деловая часть телефона, интернета и машины.</p><p><b>Не уменьшают:</b> личные покупки, обычная одежда и еда, налог на доход, штрафы. Такие траты выбирай «Личное» — они не попадут в расходы.</p><p><b>Рабочее место дома и машина</b> — только деловая доля, правила кантона смотри в инструкции к декларации (Wegleitung). <b>Дорогие вещи</b> (компьютер, машина) часто списывают частями несколько лет — уточни у бухгалтера.</p>',
+  ahv: '<p>Взносы AHV/IV/EO, которые ты как самозанятая платишь в свою кассу (обычно частями, Akontobeiträge). В декларации их указывают отдельно — в какой строке, подскажет инструкция кантона или бухгалтер. Где найти сумму: счёт-уведомление твоей кассы AHV (Ausgleichskasse).</p>',
+  beleg: '<p>Номер чека или счёта. Напиши тот же номер на бумажном чеке и храни чеки по порядку. Документы учёта хранят 10 лет (<a href="https://www.fedlex.admin.ch/eli/cc/27/317_321_377/de#art_958_f" target="_blank" rel="noopener">OR ст. 958f</a>). Номер ставится сам, его можно поменять.</p>',
+  pay: '<p>Как прошли деньги. Всё, что «Наличные», попадает в кассовую книгу (Kassabuch): так видно, сколько наличных должно лежать в кассе.</p>',
+  cash0: '<p>Сколько наличных дела было в кассе на 1 января. Если отдельной кассы нет — оставь 0. Где найти: остаток кассовой книги на 31 декабря прошлого года.</p>',
+  quit: '<p>Клиент, который заплатил наличными, вправе попросить квитанцию (<a href="https://www.fedlex.admin.ch/eli/cc/27/317_321_377/de#art_88" target="_blank" rel="noopener">OR ст. 88</a>). На листе — оригинал для клиента и копия для тебя. Подпиши оригинал, копию храни вместе с чеками.</p>',
+  me: '<p>Твоё имя или название дела и адрес — для шапки отчёта и квитанций. Только латиницей, если PDF на немецком, французском или итальянском.</p>'
+};
+const KEY = 'dohodyRashody.v1';
+const CATS = {
+  in: {svc: ['Услуги', 'Dienstleistungen', 'Prestations de services', 'Prestazioni di servizi'], goods: ['Продажа товаров', 'Warenverkauf', 'Vente de marchandises', 'Vendita di merci'], oth_in: ['Другой доход', 'Übrige Einnahmen', 'Autres recettes', 'Altre entrate']},
+  ex: {mat: ['Материалы и товары', 'Material und Waren', 'Matériel et marchandises', 'Materiale e merci'], rent: ['Аренда помещения', 'Raummiete', 'Loyer des locaux', 'Affitto dei locali'], home: ['Рабочее место дома', 'Arbeitsplatz zu Hause', 'Bureau à domicile', 'Ufficio in casa'],
+    car: ['Машина и транспорт', 'Fahrzeug und Transport', 'Véhicule et transport', 'Veicolo e trasporti'], tel: ['Телефон и интернет', 'Telefon und Internet', 'Téléphone et internet', 'Telefono e internet'], ad: ['Реклама и сайт', 'Werbung und Website', 'Publicité et site web', 'Pubblicità e sito web'],
+    ins: ['Страховки дела', 'Betriebsversicherungen', 'Assurances professionnelles', 'Assicurazioni aziendali'], edu: ['Обучение по профессии', 'Weiterbildung', 'Formation continue', 'Formazione continua'], equip: ['Оборудование и инструменты', 'Geräte und Werkzeuge', 'Équipement et outils', 'Apparecchi e attrezzi'],
+    fees: ['Бухгалтер, банк, сборы', 'Treuhand, Bank, Gebühren', 'Fiduciaire, banque, frais', 'Fiduciaria, banca, spese'], ahv: ['Взносы AHV самозанятой', 'AHV-Beiträge Selbständige', 'Cotisations AVS indépendant·e', 'Contributi AVS indipendenti'], oth_ex: ['Прочие расходы дела', 'Übriger Geschäftsaufwand', 'Autres charges', 'Altri costi aziendali'],
+    priv: ['Личное (не расход дела)', 'Privat (kein Geschäftsaufwand)', 'Privé (pas une charge)', 'Privato (non è un costo)']}
+};
+const PAY = {bank: ['Банк', 'Bank', 'Banque', 'Banca'], cash: ['Наличные', 'Bar', 'Espèces', 'Contanti'], card: ['Карта', 'Karte', 'Carte', 'Carta'], twint: ['TWINT', 'TWINT', 'TWINT', 'TWINT']};
+const LI = {ru: 0, de: 1, fr: 2, it: 3};
+const T = {
+  title: ['Доходы и расходы', 'Einnahmen und Ausgaben', 'Recettes et dépenses', 'Entrate e uscite'], in: ['Доходы', 'Einnahmen', 'Recettes', 'Entrate'], ex: ['Расходы', 'Ausgaben', 'Dépenses', 'Uscite'],
+  res: ['Результат (прибыль)', 'Ergebnis (Gewinn)', 'Résultat (bénéfice)', 'Risultato (utile)'], loss: ['Результат (убыток)', 'Ergebnis (Verlust)', 'Résultat (perte)', 'Risultato (perdita)'],
+  bycat: ['По категориям', 'Nach Kategorien', 'Par catégorie', 'Per categoria'], bymon: ['По месяцам', 'Nach Monaten', 'Par mois', 'Per mese'], month: ['Месяц', 'Monat', 'Mois', 'Mese'],
+  cash: ['Касса (наличные)', 'Kasse (bar)', 'Caisse (espèces)', 'Cassa (contanti)'], cash0: ['Остаток на 1 января', 'Anfangsbestand 1.1.', 'Solde au 1.1.', 'Saldo al 1.1.'], cashIn: ['Получено наличными', 'Bareinnahmen', 'Recettes en espèces', 'Entrate in contanti'],
+  cashOut: ['Оплачено наличными', 'Barausgaben', 'Dépenses en espèces', 'Uscite in contanti'], cashEnd: ['Остаток на 31 декабря', 'Endbestand 31.12.', 'Solde au 31.12.', 'Saldo al 31.12.'],
+  priv: ['Личное, не входит в расходы', 'Privat, nicht im Aufwand enthalten', 'Privé, non compris dans les charges', 'Privato, non compreso nei costi'], ahvNote: ['Взносы AHV в декларации указывают отдельно — уточни строку в инструкции кантона.', 'AHV-Beiträge in der Steuererklärung separat angeben — siehe Wegleitung des Kantons.', 'Cotisations AVS à déclarer séparément — voir le guide du canton.', 'Contributi AVS da indicare separatamente — vedi istruzioni del cantone.'],
+  journal: ['Журнал записей', 'Journal', 'Journal', 'Giornale'], kassa: ['Кассовая книга', 'Kassabuch', 'Livre de caisse', 'Libro cassa'], cont: [' (продолжение)', ' (Fortsetzung)', ' (suite)', ' (continuazione)'],
+  beleg: ['Чек №', 'Beleg', 'Pièce', 'Giust.'], date: ['Дата', 'Datum', 'Date', 'Data'], txt: ['Описание', 'Text', 'Libellé', 'Descrizione'], cat: ['Категория', 'Kategorie', 'Catégorie', 'Categoria'], pay: ['Оплата', 'Zahlung', 'Paiement', 'Pagamento'],
+  bal: ['Остаток', 'Saldo', 'Solde', 'Saldo'], total: ['Итого', 'Total', 'Total', 'Totale'], none: ['Записей пока нет.', 'Keine Einträge.', 'Aucune écriture.', 'Nessuna registrazione.'],
+  q: ['Квитанция', 'Quittung', 'Quittance', 'Quietanza'], qFrom: ['Получено от', 'Erhalten von', 'Reçu de', 'Ricevuto da'], qAmt: ['Сумма', 'Betrag', 'Montant', 'Importo'], qFor: ['За', 'Für', 'Pour', 'Per'],
+  qCash: ['Сумма получена наличными.', 'Betrag bar erhalten.', 'Montant reçu en espèces.', 'Importo ricevuto in contanti.'], qPlace: ['Место и дата', 'Ort und Datum', 'Lieu et date', 'Luogo e data'], qSign: ['Подпись', 'Unterschrift', 'Signature', 'Firma'],
+  qOrig: ['Оригинал для клиента', 'Original für Kundin / Kunde', 'Original pour le client', 'Originale per il cliente'], qCopy: ['Копия для себя', 'Kopie', 'Copie', 'Copia'], qVat: ['Без НДС', 'Ohne MWST', 'Sans TVA', 'Senza IVA']
+};
+const DISC = ['Образец для личного учёта и примера, не официальный документ и не бухгалтерская программа. Данные без гарантии, проверяй сама. Вычеты зависят от кантона.', 'Muster zur Orientierung und für den persönlichen Gebrauch, kein amtliches Dokument. Angaben ohne Gewähr, bitte selbst prüfen.', 'Modèle indicatif pour usage personnel, pas un document officiel. Données sans garantie, à vérifier soi-même.', 'Modello indicativo per uso personale, non un documento ufficiale. Dati senza garanzia, da verificare personalmente.'];
+const YNOW = new Date().getFullYear(), TODAY = new Date().toISOString().slice(0, 10);
+let S = load(), EX = null, F = null, EDIT = null, FILT = '';
+function blank(){ let k = ''; try { k = localStorage.getItem('svoiludi.kanton') || ''; } catch (e) {} return {kt: k, lang: langOf(k), year: YNOW, doc: 'rep', me: {name: '', addr: '', city: ''}, copy: true, years: {}}; }
+function load(){ try { const s = JSON.parse(localStorage.getItem(KEY)); if (s && typeof s === 'object') return Object.assign(blank(), s); } catch (e) {} return blank(); }
+function save(){ if (EX) return; try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} }
+function langOf(k){ const K = window.KANTONY || {}; return k && K[k] ? ({de: 'de', fr: 'fr', it: 'it'}[K[k].l] || 'de') : 'ru'; }
+const D = () => EX || S;
+const Y = d => { d = d || D(); if (!d.years[d.year]) d.years[d.year] = {cash0: 0, e: []}; return d.years[d.year]; };
+const li = d => LI[d.lang] || 0, t = (d, k) => T[k][li(d)];
+const catName = (d, c) => { const x = CATS.in[c] || CATS.ex[c]; return x ? x[li(d)] : c; };
+const typeOf = c => CATS.in[c] ? 'in' : 'ex';
+const money = n => { const neg = n < 0, [a, b] = Math.abs(Math.round(n * 100) / 100).toFixed(2).split('.'); return (neg ? '−' : '') + a.replace(/\B(?=(\d{3})+(?!\d))/g, '’') + '.' + b; };
+const dmy = iso => { const [y, m, dd] = String(iso || '').split('-'); return dd ? `${dd}.${m}.${y}` : ''; };
+const MON = d => Array.from({length: 12}, (_, i) => new Date(2026, i, 1).toLocaleString({ru: 'ru-RU', de: 'de-CH', fr: 'fr-CH', it: 'it-CH'}[d.lang] || 'ru-RU', {month: 'long'})).map(s => s[0].toUpperCase() + s.slice(1));
+const sorted = y => y.e.slice().sort((a, b) => (a.d || '').localeCompare(b.d || '') || String(a.b).localeCompare(String(b.b), undefined, {numeric: true}));
+function calc(d){
+  const y = Y(d), c = {in: 0, ex: 0, priv: 0, cat: {}, mon: Array.from({length: 12}, () => ({in: 0, ex: 0})), cIn: 0, cOut: 0};
+  y.e.forEach(e => { const a = +e.a || 0, m = +String(e.d).slice(5, 7) - 1;
+    if (e.c === 'priv') { c.priv += a; if (e.p === 'cash') c.cOut += a; return; }
+    const ty = typeOf(e.c); c[ty] += a; c.cat[e.c] = (c.cat[e.c] || 0) + a; if (m >= 0 && m < 12) c.mon[m][ty] += a;
+    if (e.p === 'cash') { if (ty === 'in') c.cIn += a; else c.cOut += a; } });
+  c.res = c.in - c.ex; c.cash0 = +y.cash0 || 0; c.cashEnd = c.cash0 + c.cIn - c.cOut; return c;
+}
+function nextBeleg(y){ const n = y.e.map(e => parseInt(String(e.b).replace(/\D/g, ''), 10)).filter(x => !isNaN(x)); return String((n.length ? Math.max(...n) : 0) + 1); }
+
+/* ---------- листы ---------- */
+const fit = (s, b, size, w) => { s = String(s || ''); if (SH.tw(s, b, size) <= w) return s; while (s.length > 1 && SH.tw(s + '…', b, size) > w) s = s.slice(0, -1); return s + '…'; };
+function head(P, d, title){ P.header(title, [d.me.name, d.me.addr, d.me.city].filter(Boolean).join(' · '), ''); }
+function pRep(d){
+  const C = SH.pal(false), P = SH.page(210, 297, C), c = C.c, k = calc(d), X = 12, W = 186;
+  head(P, d, t(d, 'title') + ' ' + d.year);
+  const tiles = [[t(d, 'in'), k.in, c.green], [t(d, 'ex'), k.ex, c.red], [k.res >= 0 ? t(d, 'res') : t(d, 'loss'), k.res, c.sage]];
+  tiles.forEach((x, i) => { const tx = X + i * 63; P.rect(tx, 23, 60, 19, x[2][0], x[2][1], 2); P.text(x[0], tx + 4, 29.5, 7.6, false, C.mut); P.text('CHF ' + money(x[1]), tx + 4, 38, 13, true, x[2][1]); });
+  let y = P.sec(t(d, 'bycat'), X, 52, W);
+  const row = (a, b, bold, col) => { P.text(a, X + 2, y, 8, !!bold, col || C.ink); P.text(b, X + W - 2, y, 8, !!bold, col || C.ink, 'right'); y += 1.8; P.line(X, y, X + W, y, C.line, 0.2); y += 3.6; };
+  Object.keys(CATS.in).forEach(id => { if (k.cat[id]) row(catName(d, id), money(k.cat[id])); });
+  row(t(d, 'in'), money(k.in), true, c.green[1]); y += 1.5;
+  Object.keys(CATS.ex).forEach(id => { if (id !== 'priv' && k.cat[id]) row(catName(d, id) + (id === 'ahv' ? ' *' : ''), money(k.cat[id])); });
+  row(t(d, 'ex'), money(k.ex), true, c.red[1]); y += 1.5;
+  row(k.res >= 0 ? t(d, 'res') : t(d, 'loss'), 'CHF ' + money(k.res), true, c.sage[1]);
+  if (k.priv) row(t(d, 'priv'), money(k.priv), false, C.mut);
+  if (k.cat.ahv) { P.text('* ' + t(d, 'ahvNote'), X + 2, y, 6.6, false, C.mut); y += 4; }
+  y = P.sec(t(d, 'bymon'), X, y + 4, W);
+  const cx = [X + 2, X + 96, X + 141, X + W - 2];
+  P.text(t(d, 'month'), cx[0], y, 7, true, C.mut); P.text(t(d, 'in'), cx[1], y, 7, true, C.mut, 'right'); P.text(t(d, 'ex'), cx[2], y, 7, true, C.mut, 'right'); P.text(t(d, 'bal'), cx[3], y, 7, true, C.mut, 'right'); y += 4.6;
+  MON(d).forEach((m, i) => { const r = k.mon[i]; if (i % 2 === 0) P.rect(X, y - 3.4, W, 4.6, C.zebra); P.text(m, cx[0], y, 7.8); P.text(r.in ? money(r.in) : '–', cx[1], y, 7.8, false, C.ink, 'right'); P.text(r.ex ? money(r.ex) : '–', cx[2], y, 7.8, false, C.ink, 'right'); P.text(r.in || r.ex ? money(r.in - r.ex) : '–', cx[3], y, 7.8, false, C.ink, 'right'); y += 4.6; });
+  P.line(X, y - 2.6, X + W, y - 2.6, C.head, 0.3); y += 1.2;
+  P.text(t(d, 'total'), cx[0], y, 8, true); P.text(money(k.in), cx[1], y, 8, true, C.ink, 'right'); P.text(money(k.ex), cx[2], y, 8, true, C.ink, 'right'); P.text(money(k.res), cx[3], y, 8, true, C.ink, 'right'); y += 4;
+  y = P.sec(t(d, 'cash'), X, y + 4, W);
+  [[t(d, 'cash0'), k.cash0], [t(d, 'cashIn'), k.cIn], [t(d, 'cashOut'), -k.cOut]].forEach(r => row(r[0], money(r[1])));
+  row(t(d, 'cashEnd'), 'CHF ' + money(k.cashEnd), true, c.mustard[1]);
+  P.foot(DISC[li(d)] + ' svoiludi.ch');
+  return P;
+}
+function pJournal(d){
+  const out = [], rows = sorted(Y(d)), X = 12, W = 186, C = SH.pal(false);
+  const cols = [[X + 1, 'beleg', 'left', 14], [X + 16, 'date', 'left', 17], [X + 34, 'txt', 'left', 60], [X + 96, 'cat', 'left', 38], [X + 136, 'pay', 'left', 15], [X + 166, 'in', 'right', 0], [X + W - 1, 'ex', 'right', 0]];
+  let i = 0, n = 0;
+  do {
+    const P = SH.page(210, 297, C); head(P, d, t(d, 'journal') + ' ' + d.year + (n ? t(d, 'cont') : ''));
+    let y = 26; cols.forEach(cl => P.text(t(d, cl[1]), cl[0], y, 6.8, true, C.mut, cl[2])); y += 2; P.line(X, y, X + W, y, C.head, 0.3); y += 4;
+    if (!rows.length) P.text(t(d, 'none'), X + 1, y, 8, false, C.mut);
+    for (; i < rows.length && y < 280; i++) {
+      const e = rows[i], pv = e.c === 'priv', ty = typeOf(e.c);
+      if (i % 2 === 0) P.rect(X, y - 3.3, W, 4.5, C.zebra);
+      P.text(fit(e.b, false, 7.2, 14), cols[0][0], y, 7.2); P.text(dmy(e.d), cols[1][0], y, 7.2); P.text(fit(e.txt, false, 7.2, 60), cols[2][0], y, 7.2); P.text(fit(catName(d, e.c), false, 7.2, 38), cols[3][0], y, 7.2, false, pv ? C.mut : C.ink); P.text(fit(PAY[e.p] ? PAY[e.p][li(d)] : '', false, 7.2, 15), cols[4][0], y, 7.2);
+      P.text(money(+e.a || 0), ty === 'in' ? cols[5][0] : cols[6][0], y, 7.2, false, pv ? C.mut : C.ink, 'right'); y += 4.5;
+    }
+    if (i >= rows.length && rows.length) { const k = calc(d); P.line(X, y - 2.4, X + W, y - 2.4, C.head, 0.3); y += 1.5; P.text(t(d, 'total'), cols[2][0], y, 7.6, true); P.text(money(k.in), cols[5][0], y, 7.6, true, C.ink, 'right'); P.text(money(k.ex), cols[6][0], y, 7.6, true, C.ink, 'right'); if (k.priv) { y += 4.5; P.text(t(d, 'priv') + ': ' + money(k.priv), cols[2][0], y, 7, false, C.mut); } }
+    P.foot(DISC[li(d)] + ' svoiludi.ch'); out.push(P); n++;
+  } while (i < rows.length && n < 30);
+  return out;
+}
+function pKassa(d){
+  const rows = sorted(Y(d)).filter(e => e.p === 'cash'); if (!rows.length && !(+Y(d).cash0)) return [];
+  const out = [], X = 12, W = 186, C = SH.pal(false); let bal = +Y(d).cash0 || 0, i = 0, n = 0;
+  const cx = [X + 1, X + 18, X + 36, X + 136, X + 161, X + W - 1];
+  do {
+    const P = SH.page(210, 297, C); head(P, d, t(d, 'kassa') + ' ' + d.year + (n ? t(d, 'cont') : ''));
+    let y = 26; [['date', 0, 'left'], ['beleg', 1, 'left'], ['txt', 2, 'left'], ['in', 3, 'right'], ['ex', 4, 'right'], ['bal', 5, 'right']].forEach(h => P.text(t(d, h[0]), cx[h[1]], y, 6.8, true, C.mut, h[2])); y += 2; P.line(X, y, X + W, y, C.head, 0.3); y += 4;
+    if (!n) { P.text(t(d, 'cash0'), cx[2], y, 7.2, true); P.text(money(bal), cx[5], y, 7.2, true, C.ink, 'right'); y += 4.5; }
+    for (; i < rows.length && y < 280; i++) {
+      const e = rows[i], a = +e.a || 0, inc = typeOf(e.c) === 'in' && e.c !== 'priv'; bal += inc ? a : -a;
+      if (i % 2 === 0) P.rect(X, y - 3.3, W, 4.5, C.zebra);
+      P.text(dmy(e.d), cx[0], y, 7.2); P.text(fit(e.b, false, 7.2, 16), cx[1], y, 7.2); P.text(fit(e.txt || catName(d, e.c), false, 7.2, 96), cx[2], y, 7.2);
+      P.text(money(a), inc ? cx[3] : cx[4], y, 7.2, false, C.ink, 'right'); P.text(money(bal), cx[5], y, 7.2, false, C.ink, 'right'); y += 4.5;
+    }
+    if (i >= rows.length) { P.line(X, y - 2.4, X + W, y - 2.4, C.head, 0.3); y += 1.5; P.text(t(d, 'cashEnd'), cx[2], y, 7.6, true); P.text('CHF ' + money(bal), cx[5], y, 7.6, true, C.ink, 'right'); }
+    P.foot(DISC[li(d)] + ' svoiludi.ch'); out.push(P); n++;
+  } while (i < rows.length && n < 20);
+  return out;
+}
+/* квитанция — документ человека от своего имени: без дисклеймера и меток сайта */
+function quit(P, d, e, y0, label){
+  const X = 18, W = 174, C = P.C, ink = '#2F2924', mut = '#7A6E62';
+  P.text(t(d, 'q') + ' ' + (e.b || ''), X, y0 + 14, 16, true, ink); P.text(label, X + W, y0 + 14, 7, false, mut, 'right');
+  const me = [d.me.name, d.me.addr, d.me.city].filter(Boolean); me.forEach((s, i) => P.text(s, X, y0 + 22 + i * 4.2, 8, i === 0, ink));
+  let y = y0 + 40;
+  P.text(t(d, 'qAmt'), X, y, 8, false, mut); P.text('CHF ' + money(+e.a || 0), X + 40, y, 15, true, ink); y += 11;
+  P.text(t(d, 'qFrom'), X, y, 8, false, mut); if (e.cl) P.text(e.cl, X + 40, y, 9.5, false, ink); P.line(X + 40, y + 1.5, X + W, y + 1.5, '#C9BBA8', 0.3); y += 9;
+  P.text(t(d, 'qFor'), X, y, 8, false, mut); P.text(fit(e.txt || catName(d, e.c), false, 9.5, W - 40), X + 40, y, 9.5, false, ink); P.line(X + 40, y + 1.5, X + W, y + 1.5, '#C9BBA8', 0.3); y += 9;
+  P.text(t(d, 'qCash') + (d.vat ? '' : ''), X, y, 8, false, ink); y += 14;
+  P.text(t(d, 'qPlace'), X, y + 5, 7, false, mut); P.text((d.me.city ? d.me.city.replace(/^\d{4}\s*/, '') + ', ' : '') + dmy(e.d), X, y, 9.5, false, ink); P.line(X, y + 1.5, X + 80, y + 1.5, '#C9BBA8', 0.3);
+  P.line(X + 100, y + 1.5, X + W, y + 1.5, '#C9BBA8', 0.3); P.text(t(d, 'qSign'), X + 100, y + 5, 7, false, mut);
+}
+function pQuit(d){
+  const sel = Y(d).e.filter(e => e.q && e.p === 'cash' && typeOf(e.c) === 'in' && e.c !== 'priv'), out = [], C = SH.pal(false);
+  const items = []; sel.forEach(e => { items.push([e, t(d, 'qOrig')]); if (d.copy) items.push([e, t(d, 'qCopy')]); });
+  for (let i = 0; i < items.length; i += 2) {
+    const P = SH.page(210, 297, C); quit(P, d, items[i][0], 0, items[i][1]);
+    P.line(0, 148.5, 210, 148.5, '#999999', 0.3, true);
+    if (items[i + 1]) quit(P, d, items[i + 1][0], 148.5, items[i + 1][1]);
+    out.push(P);
+  }
+  return out;
+}
+function build(){ const d = D(); return d.doc === 'quit' ? pQuit(d) : [pRep(d), ...pJournal(d), ...pKassa(d)]; }
+
+/* ---------- форма ---------- */
+const $ = id => document.getElementById(id);
+const esc = s => SH.esc(String(s == null ? '' : s));
+const qh = (h, l) => `<button type="button" class="qh" data-help="${h}" aria-label="Подсказка: ${l}" aria-expanded="false">?</button>`;
+const opts = (o, v) => Object.entries(o).map(([k, x]) => `<option value="${k}"${k === v ? ' selected' : ''}>${esc(Array.isArray(x) ? x[0] : x)}</option>`).join('');
+function newF(){ return {d: TODAY.slice(0, 4) == D().year ? TODAY : D().year + '-01-01', ty: F ? F.ty : 'in', c: F ? F.c : 'svc', txt: '', a: '', p: F ? F.p : 'bank', b: nextBeleg(Y()), cl: ''}; }
+function renderForm(){
+  const d = D(), y = Y(d), k = calc(d), dis = EX ? 'disabled' : '';
+  if (!F) F = newF();
+  const catOpts = opts(CATS[F.ty], F.c);
+  const list = sorted(y).filter(e => !FILT || String(e.d).slice(5, 7) === FILT).reverse();
+  const mons = MON({lang: 'ru'});
+  $('fields').innerHTML = `
+  <section class="sec"><h2>Я${qh('me', 'мои данные')}</h2><div class="g2">
+    <div class="fl"><span class="lb">Имя или название дела</span><input type="text" data-me="name" value="${esc(d.me.name)}" ${dis}></div>
+    <div class="fl"><span class="lb">Улица и дом</span><input type="text" data-me="addr" value="${esc(d.me.addr)}" ${dis}></div>
+    <div class="fl"><span class="lb">Индекс и город</span><input type="text" data-me="city" value="${esc(d.me.city)}" ${dis}></div>
+    <div class="fl"><span class="lb">Наличные на 1 января, CHF${qh('cash0', 'наличные на 1 января')}</span><input type="number" step="0.05" min="0" id="cash0" value="${esc(y.cash0 || 0)}" ${dis}></div>
+  </div></section>
+  <section class="sec"><h2>${EDIT ? 'Изменить запись' : 'Новая запись'}</h2>
+    <div class="typ"><button type="button" data-t="in" class="${F.ty === 'in' ? 'on' : ''}" ${dis}>+ Доход</button><button type="button" data-t="ex" class="${F.ty === 'ex' ? 'on' : ''}" ${dis}>− Расход</button></div>
+    <div class="g2" style="margin-top:8px">
+      <div class="fl"><span class="lb">Дата</span><input type="date" data-f="d" value="${esc(F.d)}" min="${d.year}-01-01" max="${d.year}-12-31" ${dis}></div>
+      <div class="fl"><span class="lb">Сумма, CHF</span><input type="number" inputmode="decimal" step="0.05" min="0" data-f="a" value="${esc(F.a)}" placeholder="0.00" ${dis}></div>
+      <div class="fl"><span class="lb">Категория${qh(F.c === 'ahv' ? 'ahv' : 'cat', 'категория')}</span><select data-f="c" ${dis}>${catOpts}</select></div>
+      <div class="fl"><span class="lb">Как оплачено${qh('pay', 'как оплачено')}</span><select data-f="p" ${dis}>${opts(PAY, F.p)}</select></div>
+      <div class="fl"><span class="lb">Описание</span><input type="text" data-f="txt" value="${esc(F.txt)}" placeholder="${F.ty === 'in' ? 'например, Massage 60 Min.' : 'например, Massageöl, Migros'}" ${dis}></div>
+      <div class="fl"><span class="lb">Номер чека${qh('beleg', 'номер чека')}</span><input type="text" data-f="b" value="${esc(F.b)}" ${dis}></div>
+      ${F.ty === 'in' && F.p === 'cash' ? `<div class="fl"><span class="lb">Клиент (для квитанции)</span><input type="text" data-f="cl" value="${esc(F.cl)}" ${dis}></div>` : ''}
+    </div>
+    <div class="edbar"><button type="button" class="btn sm" id="addE" ${dis}>${EDIT ? 'Сохранить' : 'Добавить запись'}</button>${EDIT ? '<button type="button" class="btn ghost sm" id="cancelE">Отмена</button><button type="button" class="btn ghost sm" id="delE">Удалить запись</button>' : ''}</div>
+    <p class="hint" id="addMsg"></p>
+  </section>
+  <section class="sec"><h2>Записи ${d.year}</h2>
+    <div class="sum3"><div>Доходы<b>${money(k.in)}</b></div><div>Расходы<b>${money(k.ex)}</b></div><div>${k.res >= 0 ? 'Прибыль' : 'Убыток'}<b>${money(k.res)}</b></div></div>
+    <p class="hint" style="margin:0 0 6px">Наличные в кассе сейчас: <b>${money(k.cashEnd)} CHF</b>${k.priv ? ` · личное (не в расходах): ${money(k.priv)}` : ''}</p>
+    <div class="fl"><span class="lb">Показать</span><select id="filt"><option value="">Весь год (${y.e.length})</option>${mons.map((m, i) => { const mm = String(i + 1).padStart(2, '0'), n = y.e.filter(e => String(e.d).slice(5, 7) === mm).length; return n ? `<option value="${mm}"${mm === FILT ? ' selected' : ''}>${m} (${n})</option>` : ''; }).join('')}</select></div>
+    ${d.doc === 'quit' ? `<label class="tog" style="margin-top:6px"><input type="checkbox" id="copy" ${d.copy ? 'checked' : ''} ${dis}> На листе ещё копия квитанции для себя${qh('quit', 'квитанция')}</label>` : ''}
+    <div class="rows">${list.map(e => { const ty = typeOf(e.c), pv = e.c === 'priv', canQ = ty === 'in' && e.p === 'cash';
+      return `<div class="row${EDIT === e.id ? ' on' : ''}"><span><b>${esc(e.txt || catName({lang: 'ru'}, e.c))}</b><br><small>${dmy(e.d)} · ${esc(catName({lang: 'ru'}, e.c))} · ${esc(PAY[e.p] ? PAY[e.p][0] : '')}${e.b ? ' · чек ' + esc(e.b) : ''}</small></span><span class="am ${pv ? 'pv' : ty}">${ty === 'in' ? '+' : '−'}${money(+e.a || 0)}</span>
+        <span class="bt"><button type="button" data-ed="${e.id}" ${dis}>Изменить</button>${canQ ? `<button type="button" data-q="${e.id}" class="${e.q ? 'sel' : ''}" ${dis}>${e.q ? '✓ Квитанция' : 'Квитанция'}</button>` : ''}</span></div>`; }).join('') || '<p class="hint">Пока нет записей. Добавь первый доход или расход.</p>'}</div>
+  </section>`;
+}
+let UI;
+function fill(){ const d = D(); $('kt').value = d.kt || ''; $('lang').value = d.lang; $('doc').value = d.doc;
+  const ys = [...new Set([YNOW - 1, YNOW, YNOW + 1, ...Object.keys(d.years).map(Number), +d.year])].sort();
+  $('year').innerHTML = ys.map(x => `<option${x == d.year ? ' selected' : ''}>${x}</option>`).join('');
+  renderForm(); $('exbar').hidden = !EX; $('exOn').hidden = !!EX; if (UI) UI.render(); }
+const KN = window.KANTONY || {};
+$('kt').innerHTML = '<option value="">Выбери кантон</option>' + Object.keys(KN).sort((a, b) => KN[a].n.localeCompare(KN[b].n, 'ru')).map(k => `<option value="${k}">${esc(KN[k].n)}</option>`).join('');
+$('kt').addEventListener('change', e => { S.kt = e.target.value; S.lang = langOf(S.kt); try { localStorage.setItem('svoiludi.kanton', S.kt); } catch (x) {} if (EX) EX.lang = S.lang; save(); fill(); });
+$('lang').addEventListener('change', e => { S.lang = e.target.value; if (EX) EX.lang = S.lang; save(); fill(); });
+$('doc').addEventListener('change', e => { S.doc = e.target.value; if (EX) EX.doc = S.doc; save(); fill(); });
+$('year').addEventListener('change', e => { if (EX) return; S.year = +e.target.value; F = null; EDIT = null; FILT = ''; save(); fill(); });
+let tmr;
+document.addEventListener('input', e => {
+  const x = e.target; if (EX || !x.dataset) return;
+  if (x.dataset.me) { S.me[x.dataset.me] = x.value; save(); clearTimeout(tmr); tmr = setTimeout(() => UI && UI.render(), 450); }
+  if (x.dataset.f && x.tagName !== 'SELECT') F[x.dataset.f] = x.value;
+  if (x.id === 'cash0') { Y(S).cash0 = +x.value || 0; save(); clearTimeout(tmr); tmr = setTimeout(() => { UI && UI.render(); }, 450); }
+});
+document.addEventListener('change', e => {
+  const x = e.target; if (EX || !x.dataset) return;
+  if (x.dataset.f && x.tagName === 'SELECT') { F[x.dataset.f] = x.value; renderForm(); }
+  if (x.id === 'filt') { FILT = x.value; renderForm(); }
+  if (x.id === 'copy') { S.copy = x.checked; save(); UI && UI.render(); }
+  if (x.id === 'cash0') renderForm();
+});
+function msg(s){ const m = $('addMsg'); if (m) m.textContent = s; }
+document.addEventListener('click', e => {
+  if (EX) return; const b = e.target.closest && e.target.closest('button'); if (!b) return;
+  if (b.dataset.t) { F.ty = b.dataset.t; F.c = Object.keys(CATS[F.ty])[0]; renderForm(); }
+  if (b.id === 'addE') {
+    const a = Math.round((+String(F.a).replace(',', '.') || 0) * 100) / 100;
+    if (!a) { msg('Впиши сумму.'); return; }
+    if (!F.d || String(F.d).slice(0, 4) != S.year) { msg('Дата должна быть в ' + S.year + ' году.'); return; }
+    const y = Y(S), rec = {id: EDIT || Date.now(), d: F.d, c: F.c, txt: String(F.txt || '').trim(), a, p: F.p, b: String(F.b || '').trim(), cl: F.ty === 'in' && F.p === 'cash' ? String(F.cl || '').trim() : ''};
+    if (EDIT) { const i = y.e.findIndex(r => r.id === EDIT); if (i >= 0) { rec.q = y.e[i].q; y.e[i] = rec; } } else y.e.push(rec);
+    save(); const was = !!EDIT; EDIT = null; F = Object.assign(newF(), {ty: typeOf(rec.c), c: rec.c, p: rec.p, d: rec.d}); F.b = nextBeleg(y); fill(); msg(was ? 'Запись изменена.' : 'Запись добавлена.');
+  }
+  if (b.id === 'cancelE') { EDIT = null; F = null; renderForm(); }
+  if (b.id === 'delE') { const y = Y(S); y.e = y.e.filter(r => r.id !== EDIT); EDIT = null; F = null; save(); fill(); }
+  if (b.dataset.ed) { const r = Y(S).e.find(x => x.id == b.dataset.ed); if (r) { EDIT = r.id; F = {d: r.d, ty: typeOf(r.c), c: r.c, txt: r.txt, a: r.a, p: r.p, b: r.b, cl: r.cl || ''}; renderForm(); $('fields').querySelector('.typ').scrollIntoView({behavior: 'smooth', block: 'center'}); } }
+  if (b.dataset.q) { const r = Y(S).e.find(x => x.id == b.dataset.q); if (r) { r.q = !r.q; save(); if (r.q && S.doc !== 'quit') { S.doc = 'quit'; save(); } fill(); } }
+});
+function EXD(){
+  const e = [], id = (() => { let n = 1; return () => n++; })(); let nb = 1; const add = (d, c, txt, a, p, cl, q) => e.push({id: id(), d, c, txt, a, p, b: String(nb++), cl: cl || '', q: !!q});
+  const yr = YNOW;
+  for (let m = 1; m <= 9; m++) { const mm = String(m).padStart(2, '0');
+    add(`${yr}-${mm}-03`, 'rent', 'Raummiete Studio ' + mm + '/' + yr, 450, 'bank');
+    add(`${yr}-${mm}-08`, 'mat', 'Massageöl, Tücher', 60 + (m % 3) * 15, m % 2 ? 'card' : 'cash');
+    add(`${yr}-${mm}-12`, 'svc', 'Massagen, Rechnungen ' + mm + '/' + yr, 1650 + m * 70, 'bank');
+    add(`${yr}-${mm}-18`, 'svc', 'Massage 60 Min.', 120, 'cash', m === 9 ? 'Anna Müller' : '', m === 9);
+    add(`${yr}-${mm}-22`, 'svc', 'Massage 90 Min.', 165, 'twint');
+    add(`${yr}-${mm}-28`, 'tel', 'Swisscom Abo (50 % geschäftlich)', 35, 'bank'); }
+  add(`${yr}-01-15`, 'ins', 'Betriebshaftpflicht', 290, 'bank'); add(`${yr}-03-10`, 'ahv', 'AHV Akontobeitrag Q1', 980, 'bank'); add(`${yr}-06-10`, 'ahv', 'AHV Akontobeitrag Q2', 980, 'bank'); add(`${yr}-09-10`, 'ahv', 'AHV Akontobeitrag Q3', 980, 'bank');
+  add(`${yr}-03-20`, 'ad', 'Flyer und Website', 240, 'card'); add(`${yr}-04-05`, 'edu', 'Kurs Lymphdrainage', 480, 'bank'); add(`${yr}-05-14`, 'equip', 'Massageliege', 690, 'bank'); add(`${yr}-06-30`, 'fees', 'Bankgebühren 1. Halbjahr', 30, 'bank');
+  add(`${yr}-07-02`, 'priv', 'Einkauf privat', 85, 'cash'); add(`${yr}-08-15`, 'goods', 'Gutscheine verkauft', 300, 'twint');
+  e.sort((a, b) => a.d.localeCompare(b.d)).forEach((r, i) => { r.b = String(i + 1); });
+  return {kt: 'ZH', lang: 'de', year: yr, doc: S.doc, copy: true, me: {name: 'Olena Kovalenko', addr: 'Musterstrasse 12', city: '8000 Zürich'}, years: {[yr]: {cash0: 200, e}}};
+}
+$('exOn').addEventListener('click', () => { EX = EXD(); EX.doc = S.doc; F = null; EDIT = null; FILT = ''; fill(); window.scrollTo({top: $('exbar').offsetTop - 12, behavior: 'smooth'}); });
+$('exOff').addEventListener('click', () => { EX = null; F = null; fill(); });
+if (/[?&]example\b/.test(location.search)) EX = EXD();
+UI = SH.mount({build, title: 'Доходы и расходы', name: () => (D().doc === 'quit' ? 'Quittungen-' : 'Einnahmen-Ausgaben-') + D().year});
+fill();
+
+</script>
+<script src="/assets/help.js"></script>
+<script src="/assets/backup.js"></script>
+<script src="/assets/pdffan.js" defer></script>
+<script src="/assets/share.js" defer></script>
+<script src="/assets/samesite.js"></script>
+</body>
+</html>
