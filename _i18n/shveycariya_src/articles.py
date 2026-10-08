@@ -314,3 +314,12 @@ ARTICLES['permit-b']['kanton'] = ['migration']
 ARTICLES['nalogovaya-deklaraciya']['kanton'] = ['steuern', 'quellensteuer']
 ARTICLES['betreibung']['kanton'] = ['betreibung']
 ARTICLES['rabota']['kanton'] = ['migration', 'quellensteuer']
+
+# Важные письма заказным (правило Ирины, 08.10.2026): во всех статьях, где человек пишет ведомству, работодателю, арендодателю или кредитору.
+# post — с чего начинается рамка «Важные письма — заказным» в этой статье; дальше общий текст из build.py.
+ARTICLES['permit-b']['post'] = 'Это заявление о переезде в другой кантон, ответы миграционному ведомству и письмо о том, что ты надолго уезжаешь.'
+ARTICLES['nalogovaya-deklaraciya']['post'] = 'Это заявление на обычную декларацию (NOV) до 31 марта и возражение на налоговое решение.'
+ARTICLES['betreibung']['post'] = 'Это письменный Rechtsvorschlag, просьба убрать запись из реестра и письма кредитору.'
+ARTICLES['betreibung']['post2'] = 'Квитанции об оплате долга тоже храни, пока запись не удалят.'
+ARTICLES['rabota']['post'] = 'Это расторжение трудового договора (Kündigung) и письма в RAV или кассу по безработице.'
+ARTICLES['grazhdanstvo']['post'] = 'Это заявление о натурализации и документы, которые досылаешь потом.'
