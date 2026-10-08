@@ -1,6 +1,6 @@
 /* Официальные страницы кантонов для статей «Как устроена Швейцария» (проверено 08.10.2026 по спискам SEM и ESTV и сайтам кантонов).
    fb — для этих разделов ссылка ведёт на главную кантона (точную страницу проверить не удалось). einb — что кантон добавляет к натурализации.
-   stva, sozial, kesb добавлены 08.10.2026; stva у SO, BS, VD, GE, ZG, SG, GR, SH, VS уточнены поиском 08.10.2026 (часть ссылок помечена в claude/proverit-ssylki.md для перепроверки). Обновлять раз в год вместе с проверкой статей. */
+   stva, sozial, kesb добавлены 08.10.2026; stva у SO, BS, VD, GE, ZG, SG, GR, SH, VS, KESB у FR, BL, VD, VS и sozial у GR уточнены поиском 08.10.2026 (часть ссылок помечена в claude/proverit-ssylki.md для перепроверки). Обновлять раз в год вместе с проверкой статей. */
 window.KANTONY = {
 "ZH": {
 "n": "Цюрих",
@@ -177,11 +177,9 @@ window.KANTONY = {
 "betreibung": "https://www.fr.ch/etat-et-droit/poursuites-et-faillites/contacter-un-bureau-de-loffice-des-poursuites-et-des-faillites",
 "stva": "https://www.ocn.ch/de/ukraine",
 "sozial": "https://fr.ch/de/ksa/alltag/lebensverlauf/sozialhilfe",
-"kesb": "https://www.fr.ch/de"
+"kesb": "https://www.fr.ch/institutions-et-droits-politiques/justice/pouvoir-judiciaire-justices-de-paix"
 },
-"fb": [
-"kesb"
-],
+"fb": [],
 "einb": "3 года в кантоне (из них 2 за последние 5 лет), в общине 1–3 года, только с пермитом C"
 },
 "SO": {
@@ -226,11 +224,9 @@ window.KANTONY = {
 "betreibung": "https://www.baselland.ch/politik-und-behorden/direktionen/sicherheitsdirektion/zivilrechtsverwaltung/betreibungsamt/",
 "stva": "https://www.baselland.ch/politik-und-behorden/direktionen/sicherheitsdirektion/motorfahrzeugkontrolle/fuehrer-und-lernfahrausweise/fuehrerausweise/motorfahrzeugfuehrer-aus-dem-ausland",
 "sozial": "https://oslvb.bl.ch/Behoerdengang/393",
-"kesb": "https://www.baselland.ch"
+"kesb": "https://www.baselland.ch/politik-und-behorden/direktionen/sicherheitsdirektion/generalsekretariat/kindes-erwachsenenschutz"
 },
-"fb": [
-"kesb"
-]
+"fb": []
 },
 "SH": {
 "n": "Шаффхаузен",
@@ -313,12 +309,10 @@ window.KANTONY = {
 "einbuergerung": "https://www.gr.ch/DE/institutionen/verwaltung/djsg/afm/dienstleistungen/buergerrecht/Seiten/OrdentlicheEinbuergerungAuslaender.aspx",
 "betreibung": "https://www.justiz-gr.ch/schuldbetreibung-und-konkurs/ueber-uns/betreibungs-und-konkursaemter/",
 "stva": "https://www.gr.ch/IT/istituzioni/amministrazione/djsg/stva/chisiamo/Seiten/H%C3%A4ufige-Fragen.aspx",
-"sozial": "https://www.gr.ch/DE/Seiten/welcome.aspx",
+"sozial": "https://www.gr.ch/DE/institutionen/verwaltung/dvs/soa/beratung/Seiten/default.aspx",
 "kesb": "https://www.gr.ch/DE/institutionen/verwaltung/djsg/kesb/Seiten/Kontakt.aspx"
 },
-"fb": [
-"sozial"
-],
+"fb": [],
 "einb": "5 лет в общине, из них 2 прямо перед заявлением"
 },
 "AG": {
@@ -381,11 +375,9 @@ window.KANTONY = {
 "betreibung": "https://www.vd.ch/ojv/offices-des-poursuites",
 "stva": "https://www.vd.ch/mobilite/automobile-et-navigation/permis/echanger-un-permis-etranger",
 "sozial": "https://www.vd.ch/aides-financieres-et-soutien-social/aides-financieres-et-comment-les-demander/revenu-dinsertion-ri",
-"kesb": "https://www.vd.ch"
+"kesb": "https://www.vd.ch/ojv/justices-de-paix"
 },
-"fb": [
-"kesb"
-],
+"fb": [],
 "einb": "2 года в кантоне, включая год перед заявлением; некоторые общины просят ещё год у них"
 },
 "VS": {
@@ -399,10 +391,9 @@ window.KANTONY = {
 "betreibung": "https://www.vs.ch/web/spf/organisation-des-offices-de-poursuites-et-faillites",
 "stva": "https://www.vs.ch/de/web/scn/permis-de-conduire-%C3%A9tranger",
 "sozial": "https://www.vs.ch",
-"kesb": "https://www.vs.ch"
+"kesb": "https://www.vs.ch/web/sjsj/autorites-de-protection-de-l-enfant-et-de-l-adulte"
 },
 "fb": [
-"kesb",
 "sozial"
 ],
 "einb": "5 лет в кантоне, 3 года в общине"

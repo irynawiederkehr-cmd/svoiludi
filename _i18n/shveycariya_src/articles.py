@@ -3910,7 +3910,7 @@ ARTICLES['zhivotnye'] = dict(
         'Снимаешь квартиру — спроси разрешение на собаку или кошку письменно.',
         'Ввозишь животное — сделай анализ на антитела к бешенству заранее, за 3 месяца.',
     ],
-    tools={},
+    tools={'kartochka-pitomca': 'Уезжаешь? Оставь передержке и ветеринару чип, прививки, корм и кому звонить — на русском и языке кантона.', },
     related=['strahovki', 'gemeinde', 'tamozhnya', 'dogovor-arendy'],
     sources=[
         ('BLV — собаки', 'https://www.blv.admin.ch/blv/de/home/tiere/tierschutz/heim-und-wildtierhaltung/hunde.html'),
