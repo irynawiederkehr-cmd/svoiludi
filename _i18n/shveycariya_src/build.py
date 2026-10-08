@@ -116,7 +116,19 @@ def article(t):
     url = f'{SITE}shveycariya/{t["slug"]}/'
     title = a['seo'] + ' · Свои люди'
     steps = ''.join(f'<li><span>{s}</span></li>' for s in a['steps'])
-    tools = ''.join(f'<a class="tool" href="../../instrumenty/{x}/"><b>{TOOLS[x]}</b><span>{a["tools"].get(x, "")}</span></a>' for x in t['tools'])
+    def fan(x):
+        d = os.path.join('instrumenty', 'preview', x)
+        imgs = sorted([f for f in os.listdir(d) if f.endswith('.jpg')], key=lambda f: int(f.split('.')[0]))[:3] if os.path.isdir(d) else []
+        n = len([f for f in os.listdir(d) if f.endswith('.jpg')]) if imgs else 0
+        if not imgs: return ''
+        pics = ''.join(f'<img src="../../instrumenty/preview/{x}/{f}" alt="" loading="lazy" style="--i:{i - (len(imgs) - 1) / 2}">' for i, f in enumerate(imgs))
+        return f'<span class="tfan" aria-hidden="true">{pics}</span>'
+    def pages(x):
+        d = os.path.join('instrumenty', 'preview', x)
+        n = len([f for f in os.listdir(d) if f.endswith('.jpg')]) if os.path.isdir(d) else 0
+        return 'Бесплатно · PDF' if n else 'Бесплатно'
+    # веер страниц — тот же компонент, что на вкладке «Полезные инструменты» (assets/pdffan.js, картинки instrumenty/preview/)
+    tools = ''.join(f'<div class="tcard"><div data-fan="{x}"></div><a class="tool" href="../../instrumenty/{x}/"><span class="ttxt"><b>{TOOLS[x]}</b><span>{a["tools"].get(x, "")}</span><em>{pages(x)} · открыть →</em></span></a></div>' for x in t['tools'])
     tabs = ''.join(f'<a class="tool" href="{TABS[x][1]}"><b>{TABS[x][0]}</b><span>{a.get("tabs", {}).get(x, "")}</span></a>' for x in t['tabs'])
     rel = ''.join(f'<a href="../{s}/">{BYSLUG[s]["title"]}</a>' if BYSLUG[s]['ready'] else f'<span class="upd">{BYSLUG[s]["title"]} (скоро)</span>' for s in a['related'])
     srcs = ''.join(f'<li><a href="{u}">{html.escape(n)}</a></li>' for n, u in a['sources'])
@@ -149,7 +161,7 @@ def article(t):
   {DISC}
   <div class="share-slot" data-url="{url}" data-lead="Перешли тому, кому это сейчас нужно. Сообщение уже готово." data-text="Привет! Тут коротко и по-русски про {html.escape(t['title'])}: что важно знать и что сделать. {url}"></div>
 '''
-    extra = '<script src="/data/specialists.js"></script>\n'
+    extra = '<script src="/data/specialists.js"></script>\n' + ('<script src="/assets/pdffan.js" defer></script>\n' if t['tools'] else '')
     out = head(title, a['desc'], url, 2) + '<body data-root="../../">' + top(2)[len('<body>'):] + main + foot(2, extra)
     os.makedirs(f'shveycariya/{t["slug"]}', exist_ok=True)
     open(f'shveycariya/{t["slug"]}/index.html', 'w', encoding='utf-8').write(out)
