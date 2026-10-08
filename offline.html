@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#4F5E3E">
+<title>Нет интернета — Свои люди в Швейцарии</title>
+<link rel="stylesheet" href="/assets/fonts.css">
+<link rel="icon" href="/fav/favicon.svg" type="image/svg+xml">
+<style>
+:root{--bg:#F4EDE3;--paper:#FFFCF8;--ink:#2F2924;--muted:#7A6E62;--sage:#66704F;--brown:#6E4F3C;--line:#E5D9C9}
+@media (prefers-color-scheme: dark){:root{--bg:#221D19;--paper:#2C2621;--ink:#F1E9DF;--muted:#B4A796;--sage:#B4BF97;--brown:#E1C2A6;--line:#3E362F}}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;display:grid;place-items:center;background:var(--bg);color:var(--ink);font-family:"Manrope",system-ui,sans-serif;padding:24px 16px}
+.card{max-width:440px;width:100%;background:var(--paper);border:1px solid var(--line);border-radius:22px;padding:30px 24px;text-align:center}
+img{width:76px;height:76px}
+h1{font-family:"Forum",Georgia,serif;font-weight:400;font-size:2rem;margin:14px 0 8px}
+p{color:var(--muted);line-height:1.55;margin:0 0 12px}
+.btns{display:flex;flex-direction:column;gap:10px;margin-top:18px}
+a,button{font:inherit;font-weight:700;border-radius:999px;padding:12px 18px;text-decoration:none;cursor:pointer}
+button{background:var(--brown);color:var(--paper);border:0}
+a{border:1.5px solid var(--sage);color:var(--sage)}
+</style>
+</head>
+<body>
+<main class="card">
+  <img src="/fav/icon-192.png" alt="">
+  <h1 data-t="h">Нет интернета</h1>
+  <p data-t="p1">Эта страница ещё не сохранялась на телефоне, поэтому без интернета её не открыть.</p>
+  <p data-t="p2">Страницы и инструменты, которые уже открывались на этом телефоне, работают и без сети. Твои записи в инструментах на месте.</p>
+  <div class="btns">
+    <button type="button" onclick="location.reload()" data-t="b1">Попробовать ещё раз</button>
+    <a href="/instrumenty/" data-t="b2">Открыть полезные инструменты</a>
+  </div>
+</main>
+<script>
+(function(){
+  var uk = false; try { uk = localStorage.getItem('svoiludiLang') === 'uk' || /^\/uk\//.test(location.pathname); } catch (e) {}
+  if (!uk) return;
+  document.documentElement.lang = 'uk'; document.title = 'Немає інтернету — Свої люди у Швейцарії';
+  var T = { h:'Немає інтернету', p1:'Ця сторінка ще не зберігалася на телефоні, тому без інтернету її не відкрити.',
+    p2:'Сторінки та інструменти, які вже відкривалися на цьому телефоні, працюють і без мережі. Твої записи в інструментах на місці.',
+    b1:'Спробувати ще раз', b2:'Відкрити корисні інструменти' };
+  document.querySelectorAll('[data-t]').forEach(function(el){ el.textContent = T[el.dataset.t]; });
+  document.querySelector('a[data-t="b2"]').href = '/uk/instrumenty/';
+})();
+</script>
+</body>
+</html>

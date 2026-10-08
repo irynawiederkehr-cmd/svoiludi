@@ -150,7 +150,7 @@ input[type=range]{width:100%;accent-color:var(--sage)}
 .imp b{color:var(--sage)}
 .confirm{display:inline-flex;gap:8px;align-items:center;background:var(--paper);border:1.5px solid var(--line);border-radius:999px;padding:4px 4px 4px 14px;font-size:.88rem;font-weight:600;flex-wrap:wrap}
 </style>
-<!--i18n--><link rel="alternate" hreflang="ru" href="https://svoiludi.ch/instrumenty/rezyume/"><link rel="alternate" hreflang="uk" href="https://svoiludi.ch/uk/instrumenty/rezyume/"><!--i18n--></head>
+<!--pwa--><link rel="manifest" href="/fav/site.uk.webmanifest"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Свої люди"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="theme-color" content="#4F5E3E"><style id="pa-tiles">/* верхнее меню на телефоне и планшете: прямоугольные плитки с закруглением в два ряда, иконки ставит pwa-app.js (08.10.2026) */html header.top nav[aria-label] a .pa-ni{display:none}@media (max-width:1100px){html header.top .page{flex-wrap:wrap;row-gap:8px}html header.top nav[aria-label]{order:3;width:100%;display:grid!important;grid-template-columns:repeat(var(--pa-cols,3),minmax(0,1fr));gap:8px;overflow:visible;padding:4px 0 12px;margin:0}html header.top nav[aria-label] a{display:flex!important;flex-direction:column;align-items:center;justify-content:center;gap:5px;min-height:62px;padding:9px 6px;border-radius:14px;background:var(--paper,#FFFCF8);border:1px solid color-mix(in srgb,var(--sage,#66704F) 30%,transparent);box-shadow:0 3px 10px -6px rgba(60,70,40,.45);color:var(--ink,#2F2924)!important;font:600 .78rem/1.18 var(--body,system-ui);text-align:center;white-space:normal;text-decoration:none;-webkit-tap-highlight-color:transparent}html header.top nav[aria-label] a::after{content:none!important}html header.top nav[aria-label] a .pa-ni{display:block;width:22px;height:22px;fill:none;stroke:var(--sage,#66704F);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}html header.top nav[aria-label] a[aria-current="page"]{background:var(--sage,#66704F);border-color:var(--sage,#66704F);color:var(--paper,#FFFCF8)!important;box-shadow:0 4px 12px -6px rgba(60,70,40,.6)}html header.top nav[aria-label] a[aria-current="page"] .pa-ni{stroke:var(--paper,#FFFCF8)}html header.top nav[aria-label] a:active{transform:scale(.97)}}/* кнопки сайта — прямоугольные с закруглением, как плитки меню (решение Ирины 08.10.2026); значки-метки (образец, теги, «?») остаются круглыми */:is(.navcta,.btn,.shr-btn,.pl-act a,.pl-act button,.qa,.more,.listbar button,.leaflet-popup-content button,.calmenu a,.calmenu button,.go-free,.find,.confirm,.monthics,.addb,.mbtn,.example,.viewsw,#langbar.langbar,.pa-go,.pa-x,.pa-foot){border-radius:12px!important}:is(.viewsw button,.seg button,.chips button,#langbar.langbar a,.cal-nav button){border-radius:9px!important}</style><script src="/assets/pwa-app.js" defer></script><!--pwa--><!--i18n--><link rel="alternate" hreflang="ru" href="https://svoiludi.ch/instrumenty/rezyume/"><link rel="alternate" hreflang="uk" href="https://svoiludi.ch/uk/instrumenty/rezyume/"><!--i18n--></head>
 <body>
 
 <div class="wrap">
@@ -329,7 +329,10 @@ input[type=range]{width:100%;accent-color:var(--sage)}
 <script>
 /* ===================== данные ===================== */
 const KEY = 'rezyumeCH.v1';
-const COLORS = {sage: ['#4F5E3E', '#E6EADD', 'Шавлія'], blue: ['#2E5A88', '#E3EBF4', 'Синій'], wine: ['#7A2E3A', '#F3E4E6', 'Бордо'], gold: ['#9A6B12', '#F5EBD6', 'Гірчиця'], ink: ['#2B2724', '#ECEAE7', 'Чорно-білий']};
+const COLORS = {sage: ['#4F5E3E', '#E6EADD', 'Шавлія'], blue: ['#2E5A88', '#E3EBF4', 'Синій'], wine: ['#7A2E3A', '#F3E4E6', 'Бордо'], gold: ['#9A6B12', '#F5EBD6', 'Гірчиця'], ink: ['#2B2724', '#ECEAE7', 'Чорно-білий'], eco: ['#1F1B18', '#FFFFFF', 'Без кольору, для дешевого друку']};
+/* «Без цвета»: белая колонка с тонкой линией и фото в оттенках серого — меньше чернил при печати (08.10.2026) */
+let GP = {src: '', data: ''};
+function grayPhoto(src){ if (!src || GP.src === src) return; GP = {src, data: ''}; const im = new Image(); im.onload = () => { const c = document.createElement('canvas'); c.width = im.naturalWidth; c.height = im.naturalHeight; const x = c.getContext('2d'); x.drawImage(im, 0, 0); const d = x.getImageData(0, 0, c.width, c.height), p = d.data; for (let i = 0; i < p.length; i += 4){ const l = 0.299 * p[i] + 0.587 * p[i + 1] + 0.114 * p[i + 2]; p[i] = p[i + 1] = p[i + 2] = l; } x.putImageData(d, 0, 0); if (GP.src === src){ GP.data = c.toDataURL('image/jpeg', 0.9); render(); } }; im.src = src; }
 const blank = () => ({lang: 'de', canton: '', tpl: 'kolonka', color: 'sage', photoOn: true, photo: '', refReq: true,
   p: {first: '', last: '', title: '', street: '', zip: '', town: '', phone: '', email: '', web: '', birth: '', natc: '', natc2: '', nat: '', permit: '', civc: '', kids: '', sex: 'f', dk: [], car: false},
   profile: '', exp: [], edu: [], trn: [], lng: [], skl: [], skills: '', ints: [], interests: '', ref: [], att: [], attOn: true, attList: true, saved: ''});
@@ -381,7 +384,9 @@ function build(d, mode = 0, dense = 0){
   const R = (x, y, w, h, fill, p) => op({t: 'rect', x, y, w, h, fill}, p);
   const LINE = (x1, y1, x2, y2, color = RULE, w = 0.3, p) => op({t: 'line', x1, y1, x2, y2, color, w}, p);
   const name = [d.p.first, d.p.last].filter(Boolean).join(' ') || ' ';
-  const photo = d.photoOn && d.photo;
+  const ECO = d.color === 'eco' && tpl !== 'strogiy';
+  if (ECO && d.photoOn && d.photo) grayPhoto(d.photo);
+  const photo = d.photoOn && d.photo && (ECO ? GP.src === d.photo && GP.data : d.photo);
   const pers = [[l.birth, d.p.birth], [l.nat, d.p.nat], [l.permit, d.p.permit ? l.pm[d.p.permit] : ''], [l.civil, d.p.civil], [l.drive, d.p.drive]].filter(r => r[1]);
   const contacts = [[l.addr, [d.p.street, d.p.city].filter(Boolean).join(', ')], [l.phone, d.p.phone], [l.email, d.p.email], [l.web, d.p.web]].filter(r => r[1]);
   const langs = d.lng.filter(x => x.code && (x.code !== 'other' || x.other));
@@ -391,7 +396,7 @@ function build(d, mode = 0, dense = 0){
 
   /* общий поток основной колонки */
   let X0, W, y, TOP = 18, BOT = PH - 18;
-  const newPage = () => { pg++; y = TOP; if (tpl === 'kolonka') R(0, 0, 66, PH, SOFT, pg); };
+  const newPage = () => { pg++; y = TOP; if (tpl === 'kolonka'){ R(0, 0, 66, PH, SOFT, pg); if (ECO) LINE(66, 12, 66, PH - 12, '#BDB6AC', 0.3, pg); } };
   const need = h => { if (y + h > BOT) newPage(); };
   const heading = t => {
     need(16);
@@ -448,11 +453,11 @@ function build(d, mode = 0, dense = 0){
   if (tpl === 'kolonka'){
     /* колонка слева: фото, контакты, данные, языки, навыки */
     const SX = 12, SW = 66 - 24;
-    R(0, 0, 66, PH, SOFT, 0);
+    R(0, 0, 66, PH, SOFT, 0); if (ECO) LINE(66, 12, 66, PH - 12, '#BDB6AC', 0.3, 0);
     let sy = 16, sp = 0;
     const sneed = h => { if (sy + h > BOT){ sp++; sy = TOP; } };
     const PHW = mode ? 28 : 34, GAP = mode ? 1.2 : 2, SEC = mode ? 1.5 : 3;
-    if (photo){ op({t: 'img', x: SX + (SW - PHW) / 2, y: sy, w: PHW, h: PHW * 4 / 3, data: d.photo}, 0); sy += PHW * 4 / 3 + (mode ? 6 : 9); }
+    if (photo){ op({t: 'img', x: SX + (SW - PHW) / 2, y: sy, w: PHW, h: PHW * 4 / 3, data: photo}, 0); sy += PHW * 4 / 3 + (mode ? 6 : 9); }
     const sh = t => { sneed(12); T(SX, sy + 3, t.toUpperCase(), 'b', 8, ACC, 'left', sp); LINE(SX, sy + 5, SX + SW, sy + 5, ACC, 0.35, sp); sy += 9; };
     const sk = (k, v) => { const vl = wrap(v, 'r', 8.6, SW); sneed(lh(7.6) + vl.length * lh(8.6) + 2); if (k){ T(SX, sy + 7.6 * PT, k, 'm', 7.6, MUT, 'left', sp); sy += lh(7.6); } vl.forEach(ln => { T(SX, sy + 8.6 * PT, ln, 'r', 8.6, INK, 'left', sp); sy += lh(8.6); }); sy += GAP; };
     if (contacts.length){ sh(l.contact); contacts.forEach(([k, v]) => sk(k, v)); sy += SEC; }
@@ -476,12 +481,12 @@ function build(d, mode = 0, dense = 0){
     mainSections(false, false, mode === 2);
     if (!dense && pages.length === 2 && sp === 0) { const t = build(d, mode, 1); if (t.length === 1) return t; }
     while (pages.length <= sp) { pages.push([]); }
-    for (let p = 1; p < pages.length; p++) if (!pages[p].some(o => o.t === 'rect' && o.x === 0 && o.w === 66)) pages[p].unshift({t: 'rect', x: 0, y: 0, w: 66, h: PH, fill: SOFT});
+    for (let p = 1; p < pages.length; p++) if (!pages[p].some(o => o.t === 'rect' && o.x === 0 && o.w === 66)) { pages[p].unshift({t: 'rect', x: 0, y: 0, w: 66, h: PH, fill: SOFT}); if (ECO) pages[p].splice(1, 0, {t: 'line', x1: 66, y1: 12, x2: 66, y2: PH - 12, color: '#BDB6AC', w: 0.3}); }
   } else {
     /* классика и строгий: шапка во всю ширину */
     X0 = 18; W = PW - 36; y = 18;
     const pw = photo ? 31 : 0, hw = W - (photo ? pw + 8 : 0);
-    if (photo) op({t: 'img', x: X0 + W - pw, y: 16, w: pw, h: pw * 4 / 3, data: d.photo}, 0);
+    if (photo) op({t: 'img', x: X0 + W - pw, y: 16, w: pw, h: pw * 4 / 3, data: photo}, 0);
     T(X0, y + 3, l.doc.toUpperCase(), 'b', 7.6, MUT); y += 6;
     const nf = tpl === 'strogiy' ? 'b' : 'd', ns = tpl === 'strogiy' ? 22 : 30;
     wrap(name, nf, ns, hw).forEach(ln => { T(X0, y + ns * PT * 0.82, ln, nf, ns, INK); y += lh(ns, 1.08); });
@@ -708,7 +713,7 @@ document.getElementById('canton').addEventListener('change', e => {
   say(nl ? `Мова резюме: ${LANG_FORM[nl]}.` + (c && c[3] ? ` Тут також говорять мовою «${LANG_FORM[c[3]]}», її можна вибрати поруч.` : '') : '');
   touched();
 });
-document.getElementById('color').innerHTML = Object.entries(COLORS).map(([k, c]) => `<button type="button" data-v="${k}" style="background:${c[0]}" aria-label="${c[2]}" title="${c[2]}"></button>`).join('');
+document.getElementById('color').innerHTML = Object.entries(COLORS).map(([k, c]) => `<button type="button" data-v="${k}" style="${k === 'eco' ? 'background:#FFFFFF;border:2px dashed #6B625A' : 'background:' + c[0]}" aria-label="${c[2]}" title="${c[2]}"></button>`).join('');
 document.getElementById('form').addEventListener('input', e => {
   const el = e.target;
   if (el.dataset.f){ const [a, b] = el.dataset.f.split('.'); const v = el.type === 'checkbox' ? el.checked : el.value; if (b) S[a][b] = v; else S[a] = v; touched(); return; }
@@ -1010,7 +1015,7 @@ if (/[?&]example\b/.test(location.search)) document.getElementById('exbtn').clic
 window.HELP = {
 "lang": "<p>Пиши резюме мовою вакансії. У Цюриху, Базелі та Берні зазвичай німецька, у Женеві й Лозанні французька, у Тічино італійська, у міжнародних фірмах англійська.</p><p>Усе, що вибираєш зі списків і кнопок, перекладеться само. Свій текст (посада, фірма, «що робила», свої навички) не перекладається, він потрапить у резюме як є. Пиши його одразу вибраною мовою. Якщо потрібна допомога з перекладом, у довіднику є перекладачі.</p>",
 "tpl": "<ul><li><b>З колонкою.<\/b> Фото, контакти й мови в кольоровій колонці. Сучасно й легко читати. Підходить майже всюди.<\/li><li><b>Класика.<\/b> Усе в одну колонку, велике ім’я. Для будь-яких галузей.<\/li><li><b>Строгий.<\/b> Чорно-білий, без прикрас. Для банків, страхових, юристів і держслужби.<\/li><\/ul>",
-"color": "<p>Колір заголовків і колонки. Спокійні тони виглядають солідно. Якщо сумніваєшся, вибирай синій або чорно-білий.</p>",
+"color": "<p>Колір заголовків і колонки. Спокійні тони виглядають солідно. Якщо сумніваєшся, обирай синій або чорно-білий.</p><p><b>Без кольору, для дешевого друку</b> (білий кружок із пунктиром) — колонка біла, заголовки чорні, фото сіре: майже не витрачає кольорове чорнило й добре виходить на будь-якому принтері.</p>",
 "photo": "<p>У Швейцарії фото в резюме поки звичне. Потрібен діловий портрет на світлому тлі, плечі й обличчя, без відпустки та селфі.</p><p>Фото обрізається до формату 3 × 4 і зберігається лише на цьому пристрої. Якщо не хочеш фото, зніми галочку.</p>",
 "title": "<p>Напиши професію так, як вона називається у вакансії, мовою резюме. Наприклад, Pflegefachfrau, Buchhalterin, Software Engineer.</p>",
 "birth": "<p>У Швейцарії дату народження зазвичай пишуть. Якщо не хочеш, залиш поле порожнім, і рядка не буде.</p>",
