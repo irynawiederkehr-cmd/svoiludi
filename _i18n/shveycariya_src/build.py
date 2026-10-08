@@ -135,22 +135,27 @@ def hub():
 # «Кто поможет» (08.10.2026, просьба Ирины): профсоюзы, союзы арендаторов, защита покупателей, бесплатные консультации.
 # Данные — pomosh.py; в браузер уходят как assets/pomosh.js (блок «Твой кантон» и инструмент «Куда обратиться за помощью»).
 import pomosh as PM
-open('assets/pomosh.js', 'w', encoding='utf-8').write('/* Собирается _i18n/shveycariya_src/build.py из pomosh.py — руками не править. Проверено ' + PM.CHECKED + '. */\nwindow.POMOSH = ' + json.dumps({'checked': PM.CHECKED, 'areas': PM.AREAS, 'orgs': PM.ORGS, 'kant': PM.KANT}, ensure_ascii=False, separators=(',', ':')) + ';\n')
+open('assets/pomosh.js', 'w', encoding='utf-8').write('/* Собирается _i18n/shveycariya_src/build.py из pomosh.py — руками не править. Проверено ' + PM.CHECKED + '. */\nwindow.POMOSH = ' + json.dumps({'checked': PM.CHECKED, 'areas': PM.AREAS, 'info': PM.AREA_INFO, 'orgs': PM.ORGS, 'kant': PM.KANT}, ensure_ascii=False, separators=(',', ':')) + ';\n')
 def _host(u):
     m = re.match(r'https?://(?:www\.)?([^/]+)', u); return m.group(1) if m else u
 def pm_org(o):
     """Подробная карточка организации для статьи (раскрывается)."""
     rows = [('Для кого', o['who']), ('Как поможет', o['help']), ('Взнос', o['fee']), ('Когда помогут', o['wait'])] + ([('Ещё', o['extra'])] if o.get('extra') else [])
+    cont = ' · '.join(x for x in [html.escape(o.get('tel') or ''), (f'<a href="mailto:{html.escape(o["mail"])}">{html.escape(o["mail"])}</a>' if o.get('mail') else ''), (f'<a href="{html.escape(o["find"])}">найти офис рядом ↗</a>' if o.get('find') else '')] if x)
     srcs = ' · '.join(f'<a href="{html.escape(u)}">{html.escape(_host(u))}</a>' for u in o['src'])
     return (f'<details class="pmo" id="org-{o["id"]}"><summary><b>{html.escape(o["name"])}</b><span class="pmo-chips"><span>{html.escape(o["sfee"])}</span><span>{html.escape(o["swait"])}</span></span></summary>'
-            + '<dl>' + ''.join(f'<dt>{k}</dt><dd>{html.escape(v)}</dd>' for k, v in rows) + '</dl>'
+            + '<dl>' + ''.join(f'<dt>{k}</dt><dd>{html.escape(v)}</dd>' for k, v in rows) + (f'<dt>Контакты</dt><dd>{cont}</dd>' if cont else '') + '</dl>'
             + f'<p class="pmo-go"><a href="{html.escape(o["url"])}">{"Вступить" if o["m"] else "Сайт"}: {html.escape(_host(o["url"]))} ↗</a></p><p class="pmo-src">Проверено {PM.CHECKED}: {srcs}</p></details>')
 def pm_table(ids):
     rows = ''.join(f'<tr><th scope="row"><a href="#org-{i}">{html.escape(PM.BYID[i]["name"])}</a></th><td>{html.escape(PM.BYID[i]["sfee"])}</td><td>{html.escape(PM.BYID[i]["swait"])}</td></tr>' for i in ids)
     return f'<div class="pm-tw"><table class="pm-t"><thead><tr><th>Организация</th><th>Взнос</th><th>Когда помогут</th></tr></thead><tbody>{rows}</tbody></table></div>'
 def pm_kt(keys):
     return f'<section class="pmk" data-k="{keys}" aria-label="Где помогут в твоём кантоне"></section>'
+def pm_area(a):
+    h, ps = PM.AREA_INFO[a]
+    return f'<div class="pm-info"><b>Что это такое: {html.escape(h)}</b>' + ''.join(f'<p>{html.escape(x)}</p>' for x in ps) + '</div>'
 def pm_expand(body):
+    body = re.sub(r'<!--AREA:([a-z]+)-->', lambda m: pm_area(m.group(1)), body)
     body = re.sub(r'<!--ORGS:([a-z,]+)-->', lambda m: ''.join(pm_org(o) for o in PM.ORGS if o['area'] in m.group(1).split(',')), body)
     body = re.sub(r'<!--TABLE:([a-z0-9,-]+)-->', lambda m: pm_table(m.group(1).split(',')), body)
     return re.sub(r'<!--PMK:([a-z,]+)-->', lambda m: pm_kt(m.group(1)), body)
