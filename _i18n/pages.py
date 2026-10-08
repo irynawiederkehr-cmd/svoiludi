@@ -124,6 +124,7 @@ def post(html, src):
         rel = m.group(2); uk = rel[:-4] + '.uk.jpg'
         return m.group(1) + (uk if os.path.exists(os.path.join(ROOT, uk)) else rel)
     html = re.sub(r'(content="https://svoiludi\.ch/)([\w/.-]+?\.jpg)(?=")', ogimg, html)
+    html = html.replace('/fav/site.webmanifest', '/fav/site.uk.webmanifest').replace('name="apple-mobile-web-app-title" content="Свои люди"', 'name="apple-mobile-web-app-title" content="Свої люди"')   # сайт как приложение (_i18n/pwa.py)
     html = re.sub(r"(localeCompare\([^()]*?,\s*)'ru'", r"\1'uk'", html)           # сортировка по украинскому алфавиту
     if src == 'opros/index.html':
         html = opros_keep_russian_payload(html)
