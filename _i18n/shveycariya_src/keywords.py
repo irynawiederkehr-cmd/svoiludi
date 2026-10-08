@@ -4,6 +4,7 @@ KW = {
  'permit-l': ['пермит l швейцария', 'разрешение l швейцария', 'дозвіл l швейцарія', 'ausweis l', 'kurzaufenthaltsbewilligung'],
  'permit-b': ['внж швейцарии', 'вид на жительство в швейцарии', 'как получить внж в швейцарии', 'посвідка на проживання швейцарія', 'ausweis b', 'aufenthaltsbewilligung b'],
  'permit-c': ['пмж швейцарии', 'постоянный вид на жительство в швейцарии', 'пмж швейцарія', 'ausweis c', 'niederlassungsbewilligung c'],
+ 'grazhdanstvo': ['гражданство швейцарии', 'как получить гражданство швейцарии', 'паспорт швейцарии', 'натурализация в швейцарии', 'громадянство швейцарії', 'einbürgerung', 'einbürgerung voraussetzungen', 'erleichterte einbürgerung', 'naturalisation suisse'],
  'permit-g': ['пермит g', 'ausweis g', 'grenzgänger schweiz'],
  'status-s': ['статус s швейцария', 'статус s продление', 'статус s швейцарія', 'статус s 2026', 'schutzstatus s', 'ausweis s'],
  'status-f': ['статус f швейцария', 'ausweis f', 'vorläufig aufgenommen'],

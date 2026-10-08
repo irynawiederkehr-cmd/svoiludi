@@ -44,6 +44,33 @@
     }
   }
 
+  /* «Твой кантон»: ссылки на официальные страницы выбранного кантона; выбор запоминается для всех статей */
+  const kt = document.querySelectorAll('.kt');
+  if (kt.length && window.KANTONY) {
+    const K = window.KANTONY, KEY = 'svoiludi.kanton';
+    const LBL = {steuern: ['Налоговая: декларация', 'Steuererklärung', 'déclaration d’impôt', 'dichiarazione d’imposta'], quellensteuer: ['Налог у источника', 'Quellensteuer', 'impôt à la source', 'imposta alla fonte'],
+      migration: ['Миграционное ведомство: пермиты', 'Migrationsamt', 'service de la population', 'ufficio della migrazione'], einbuergerung: ['Натурализация в кантоне', 'Einbürgerung', 'naturalisation', 'naturalizzazione'],
+      betreibung: ['Где твой Betreibungsamt', 'Betreibungsamt', 'office des poursuites', 'ufficio di esecuzione']};
+    const LI2 = {de: 1, fr: 2, it: 3};
+    let cur = ''; try { cur = localStorage.getItem(KEY) || ''; } catch (e) {}
+    const opts = '<option value="">Выбери свой кантон</option>' + Object.entries(K).sort((a, b) => a[1].n.localeCompare(b[1].n, 'ru')).map(([k, v]) => '<option value="' + k + '">' + esc(v.n) + '</option>').join('');
+    const draw = box => {
+      const k = box.querySelector('select').value, out = box.querySelector('.kt-out'), keys = (box.dataset.k || '').split(',').filter(Boolean);
+      if (!k || !K[k]) { out.innerHTML = '<p class="kt-hint">Правила, сроки и бланки в каждом кантоне свои. Выбери кантон, и здесь появятся ссылки на его официальные страницы.</p>'; return; }
+      const c = K[k], li = LI2[c.l] || 1;
+      out.innerHTML = keys.map(x => {
+        const fb = (c.fb || []).includes(x);
+        return '<a class="kt-link" href="' + esc(c.u[x]) + '" target="_blank" rel="noopener"><b>' + LBL[x][0] + '</b><span>' + (fb ? 'сайт кантона, в поиске набери «' + LBL[x][li] + '»' : LBL[x][li] + ' · ' + esc(c.n)) + ' ↗</span></a>';
+      }).join('') + (keys.includes('einbuergerung') && c.einb ? '<p class="kt-note"><b>Кантон ' + esc(c.n) + ' добавляет:</b> ' + esc(c.einb) + '.</p>' : '') +
+        '<p class="kt-hint">Если что-то в статье расходится со страницей кантона, верь кантону.</p>';
+    };
+    kt.forEach(box => {
+      box.innerHTML = '<div class="kt-h"><b>Твой кантон</b><select aria-label="Твой кантон">' + opts + '</select></div><div class="kt-out"></div>';
+      const sel = box.querySelector('select'); sel.value = cur; draw(box);
+      sel.addEventListener('change', () => { cur = sel.value; try { localStorage.setItem(KEY, cur); } catch (e) {} kt.forEach(b => { b.querySelector('select').value = cur; draw(b); }); });
+    });
+  }
+
   const q = document.getElementById('tmq');
   if (q) {
     const norm = s => String(s).toLowerCase().replace(/ё/g, 'е');
