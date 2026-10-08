@@ -111,7 +111,7 @@ select:focus-visible,input:focus-visible,button:focus-visible,textarea:focus-vis
   <div class="setup">
     <div class="fl"><span class="lb">Твой кантон<button type="button" class="qh" data-help="kanton" aria-label="Подсказка: твой кантон" aria-expanded="false">?</button></span><select id="kanton"></select></div>
     <div class="fl"><span class="lb">Язык<button type="button" class="qh" data-help="lang" aria-label="Подсказка: язык" aria-expanded="false">?</button></span><select id="lang"><option value="bi">Русский + язык кантона</option><option value="ru">Только русский</option><option value="de">Deutsch</option><option value="fr">Français</option><option value="it">Italiano</option><option value="en">English</option></select></div>
-    <div class="fl"><span class="lb">Что в PDF<button type="button" class="qh" data-help="parts" aria-label="Подсказка: что в PDF" aria-expanded="false">?</button></span><div class="chk"><label><input type="checkbox" id="pScheme" checked> Схема</label><label><input type="checkbox" id="pGloss" checked> Словарь на 5 языках</label><label><input type="checkbox" id="pCmp" checked> Сравнение с нашим образованием</label><label><input type="checkbox" id="pKids" checked> Путь моих детей</label></div></div>
+    <div class="fl"><span class="lb">Что в PDF<button type="button" class="qh" data-help="parts" aria-label="Подсказка: что в PDF" aria-expanded="false">?</button></span><div class="chk"><label><input type="checkbox" id="pScheme" checked> Схема</label><label><input type="checkbox" id="pGloss" checked> Словарь на 5 языках</label><label><input type="checkbox" id="pTr" checked> Переходы: где само, где готовиться</label><label><input type="checkbox" id="pCmp" checked> Сравнение с нашим образованием</label><label><input type="checkbox" id="pKids" checked> Путь моих детей</label></div></div>
     <div class="fl"><span class="lb">Печать<button type="button" class="qh" data-help="bw" aria-label="Подсказка: печать" aria-expanded="false">?</button></span><label class="tog"><input type="checkbox" id="bw"> Без цвета, для дешёвой печати</label></div>
   </div>
 
@@ -124,6 +124,11 @@ select:focus-visible,input:focus-visible,button:focus-visible,textarea:focus-vis
         <div class="kids" id="kids"></div>
         <div><button type="button" class="btn ghost sm" id="addKid">+ Добавить ребёнка</button></div>
         <p class="hint" id="kidNote"></p>
+      </section>
+
+      <section class="sec" aria-labelledby="h-tr">
+        <h2 id="h-tr">Переходы: где само, а где готовиться</h2>
+        <div class="steps" id="trList"></div>
       </section>
 
       <section class="sec" aria-labelledby="h-cmp">
@@ -166,7 +171,7 @@ select:focus-visible,input:focus-visible,button:focus-visible,textarea:focus-vis
 window.HELP = {
   kanton: '<p>Выбери кантон, где учатся или будут учиться дети. От него зависит язык второй строки и то, как считаются классы: в Тичино начальная школа 5 лет, а средняя 4 года.</p>',
   lang: '<p><b>Русский + язык кантона</b> — каждое название на двух языках. Так ты сразу запоминаешь, как это говорят в школе. Советуем этот вариант.</p><p><b>Deutsch, Français, Italiano, English</b> — только один язык, например чтобы показать учителю или бабушке. Словарь в PDF всегда на всех пяти языках.</p>',
-  parts: '<p><b>Схема</b> — весь путь от яслей до докторантуры на одном листе.</p><p><b>Словарь</b> — школьные слова на русском, немецком, французском, итальянском и английском.</p><p><b>Сравнение</b> — как швейцарские ступени соотносятся с нашими: детский сад, школа, ПТУ и техникум, бакалавр, специалист, кандидат наук.</p><p><b>Путь моих детей</b> — для каждого ребёнка по учебным годам: когда сад, школа, конец обязательной школы и что дальше.</p>',
+  parts: '<p><b>Схема</b> — весь путь от яслей до докторантуры на одном листе.</p><p><b>Словарь</b> — школьные слова на русском, немецком, французском, итальянском и английском.</p><p><b>Переходы</b> — что происходит само, где решает школа, а где нужно заранее готовиться, сдавать экзамен или подавать заявку.</p><p><b>Сравнение</b> — как швейцарские ступени соотносятся с нашими: детский сад, школа, ПТУ и техникум, бакалавр, специалист, кандидат наук.</p><p><b>Путь моих детей</b> — для каждого ребёнка по учебным годам: когда сад, школа, конец обязательной школы и что дальше.</p>',
   bw: '<p>Если принтер чёрно-белый или краска дорогая, включи этот пункт. Цветные плашки станут белыми с рамкой.</p>',
   kids: '<p>Впиши имя (можно просто «Старший») и выбери месяц и год рождения. Важен месяц: дети, у которых день рождения до 31 июля, идут в детский сад в год, когда им исполняется 4. Дети, рождённые с августа по декабрь, — на год позже.</p><p>Если ребёнок уже пошёл в сад раньше или позже, классы сдвинутся. Тогда ориентируйся на свою школу.</p>'
 };
@@ -279,10 +284,10 @@ function yearName(i, lg, ti){
 }
 
 let S = load(), EX = null;
-function blank(){ return {k: '', lang: 'bi', bw: false, parts: {scheme: true, gloss: true, cmp: true, kids: true}, kids: []}; }
+function blank(){ return {k: '', lang: 'bi', bw: false, parts: {scheme: true, trans: true, gloss: true, cmp: true, kids: true}, kids: []}; }
 function load(){ try { const s = JSON.parse(localStorage.getItem(KEY)); if (s && typeof s === 'object') return Object.assign(blank(), s); } catch (e) {} const b = blank(); try { b.k = localStorage.getItem('svoiludi.kanton') || ''; } catch (e) {} return b; }
 function save(){ if (EX) return; try { localStorage.setItem(KEY, JSON.stringify(S)); if (S.k) localStorage.setItem('svoiludi.kanton', S.k); } catch (e) {} }
-function example(){ return {k: 'ZH', lang: S.lang, bw: S.bw, parts: {scheme: true, gloss: true, cmp: true, kids: true}, kids: [{n: 'София', m: 3, y: 2021}, {n: 'Марк', m: 10, y: 2016}]}; }
+function example(){ return {k: 'ZH', lang: S.lang, bw: S.bw, parts: {scheme: true, trans: true, gloss: true, cmp: true, kids: true}, kids: [{n: 'София', m: 3, y: 2021}, {n: 'Марк', m: 10, y: 2016}]}; }
 const D = () => EX || S;
 function langs(d){ const loc = LANG_OF[d.k] || 'de'; return d.lang === 'bi' ? ['ru', loc] : [d.lang, '']; }
 
@@ -387,6 +392,48 @@ function glossary(d){
 }
 
 
+
+/* переходы: a — само, d — решает школа вместе с родителями, e — экзамен, заявка или подготовка (текст на языке сайта, термины на языке кантона) */
+const TR = [
+  ['a', 'Ясли → детский сад', {de: 'Kindergarten', fr: 'école enfantine', it: 'scuola dell’infanzia', en: 'kindergarten'}, 'Само. Община пришлёт письмо, если ребёнку исполнится 4 года до 31 июля.', 'За полгода запиши на обед и продлёнку. Если ребёнок не готов, обсуди со школой, можно отложить на год.'],
+  ['a', 'Детский сад → начальная школа', {de: 'Primarschule', fr: 'école primaire', it: 'scuola elementare', en: 'primary school'}, 'Само, в той же школе или рядом.', 'Ничего особенного. Следи за письмами школы.'],
+  ['d', 'Начальная школа → средняя школа I', {de: 'Übertritt Sekundarstufe I', fr: 'passage au secondaire I', it: 'passaggio alla scuola media', en: 'transfer to lower secondary'}, 'Решает школа в последнем классе начальной: по оценкам, мнению учителя и беседе с родителями. От уровня зависит дорога дальше.', 'С 5-го класса следи за оценками и ходи на встречи с учителем. С решением можно не согласиться: попроси письменное решение и обжалуй в срок.'],
+  ['e', 'В гимназию', {de: 'Gymnasium · Aufnahmeprüfung', fr: 'gymnase · examen d’admission', it: 'liceo · ammissione', en: 'Gymnasium entrance'}, 'Экзамен или оценки, в зависимости от кантона. В части кантонов после 6-го класса (длинная гимназия, например Цюрих), в других после 2–3-го года средней школы.', 'Готовиться за 1–2 года: курсы или репетитор, старые экзамены (часто есть бесплатно на сайте кантона), хорошие оценки — они тоже считаются. Регистрация обычно зимой, экзамен весной, потом испытательный срок, часто полгода.'],
+  ['e', 'В Lehre', {de: 'Lehrstelle · Bewerbung', fr: 'place d’apprentissage', it: 'posto di tirocinio', en: 'apprenticeship place'}, 'Заявка на место на фирме. Место нужно найти самому, школа и консультация по профессии помогают.', '7-й класс — выбор профессии в BIZ. 8-й — пробные практики. С конца 8-го — заявки, многие фирмы раздают места за год. Иногда нужен тест (Multicheck, Basic-Check). Места нет — промежуточный год.'],
+  ['e', 'В FMS', {de: 'Fachmittelschule', fr: 'école de culture générale', it: 'scuola specializzata', en: 'specialised school'}, 'Экзамен или оценки, как в гимназию, по правилам кантона.', 'Узнай сроки в 8-м классе.'],
+  ['d', 'Гимназия → университет, ETH', {de: 'Matura → Universität', fr: 'maturité → université', it: 'maturità → università', en: 'Matura → university'}, 'Matura открывает почти все направления без экзамена. Нужно только записаться.', 'Запись обычно до 30 апреля на осенний семестр. Медицина в немецкоязычных вузах — отдельный тест: регистрация до середины февраля, тест летом.'],
+  ['e', 'В FH или педвуз', {de: 'Fachhochschule · PH', fr: 'HES · HEP', it: 'SUP · ASP', en: 'applied sciences · teacher education'}, 'С BM — без экзамена в своей области. С Matura — после года практики. С Fachmatura — в близкие направления.', 'В здоровье, дизайне, искусстве часто есть вступительные испытания. Узнай условия за год.'],
+  ['e', 'Из Lehre в университет', {de: 'BM + Passerelle', fr: 'MP + passerelle', it: 'MP + passerella', en: 'BM + Passerelle'}, 'Через Berufsmaturität и годичный курс с экзаменом Passerelle.', 'BM можно сделать во время Lehre или после неё. Passerelle — год подготовки и экзамен.'],
+  ['a', 'Бакалавр → магистр', {de: 'Bachelor → Master', fr: 'bachelor → master', it: 'bachelor → master', en: 'Bachelor → Master'}, 'В том же направлении обычно само.', 'В другой вуз или направление — проверь условия, иногда нужны дополнительные курсы.'],
+  ['e', 'Магистр → докторантура', {de: 'Doktorat · Bewerbung', fr: 'doctorat · candidature', it: 'dottorato · candidatura', en: 'doctorate · application'}, 'Заявка на конкретное место у профессора или в проекте, собеседование.', 'Ищи места на сайтах вузов и в проектах SNF за полгода-год.'],
+  ['d', 'Взрослым: диплом EFZ по опыту', {de: 'Berufsabschluss für Erwachsene', fr: 'certification pour adultes', it: 'qualificazione per adulti', en: 'diploma for adults'}, '5 лет работы, из них 2–4 в профессии, язык B1–B2.', 'Начни с бесплатной консультации по профессии (BIZ) своего кантона.']
+];
+const TRK = {a: ['само', '#3A8A48'], d: ['решает школа', '#B98324'], e: ['экзамен, заявка, подготовка', '#A0523D']};
+function transPage(d){
+  const ops = [], C = pal(d), [L1, L2] = langs(d), W = 297, tl = d.lang === 'bi' || d.lang === 'ru' ? (LANG_OF[d.k] || 'de') : d.lang;
+  const text = (s, x, y, size, b, color, align) => ops.push({t: 'text', s, x, y, size, b, color, align: align || 'left'});
+  ops.push({t: 'rect', x: 0, y: 0, w: W, h: 17, fill: C.band, stroke: C.bandLine});
+  text('Переходы: где само, а где готовиться', 12, 10.5, 16, true, C.bandTx);
+  text({de: 'Übertritte: was automatisch geht und wo man sich vorbereiten muss', fr: 'Passages : ce qui se fait tout seul et ce qui se prépare', it: 'Passaggi: cosa avviene da sé e cosa va preparato', en: 'Transitions: what happens automatically and what needs preparation'}[tl], 12, 15, 6.5, false, C.bandTx);
+  let lx = 12; Object.values(TRK).forEach(([t, c]) => { const col = d.bw ? '#000000' : c; ops.push({t: 'rect', x: lx, y: 21.5, w: 3.2, h: 3.2, fill: col, stroke: null, r: 1.6}); text(t, lx + 4.5, 24.3, 7, true, C.ink); lx += tw(t, true, 7) + 12; });
+  const x0 = 12, cw = [62, 98, 113], xs = [x0, x0 + cw[0], x0 + cw[0] + cw[1]];
+  let y = 31;
+  ['Переход', 'Как это происходит', 'Когда и как готовиться'].forEach((h, i) => text(h, xs[i] + 2, y, 7.5, true, C.head));
+  y += 2; ops.push({t: 'line', x1: x0, y1: y, x2: W - 12, y2: y, color: C.head, w: 0.5}); y += 0.6;
+  TR.forEach((r, ri) => {
+    const col = d.bw ? '#000000' : TRK[r[0]][1];
+    const c0 = wrap(r[1], true, 8.4, cw[0] - 8), c0b = wrap(r[2][tl] || r[2].de, false, 6.8, cw[0] - 8), c1 = wrap(r[3], false, 7.8, cw[1] - 4), c2 = wrap(r[4], false, 7.6, cw[2] - 4);
+    const h = Math.max(c0.length * 3.6 + c0b.length * 3, c1.length * 3.4, c2.length * 3.3) + 3;
+    if (ri % 2 === 0) ops.push({t: 'rect', x: x0, y, w: W - 24, h, fill: C.zebra, stroke: null});
+    ops.push({t: 'rect', x: x0 + 1.5, y: y + 1.9, w: 2.8, h: 2.8, fill: col, stroke: null, r: 1.4});
+    let yy = y + 4.2; c0.forEach(s => { text(s, xs[0] + 6, yy, 8.4, true, C.ink); yy += 3.6; }); c0b.forEach(s => { text(s, xs[0] + 6, yy - 0.3, 6.8, false, C.mut); yy += 3; });
+    c1.forEach((s, k) => text(s, xs[1] + 2, y + 4.2 + k * 3.4, 7.8, false, C.ink));
+    c2.forEach((s, k) => text(s, xs[2] + 2, y + 4.2 + k * 3.3, 7.6, false, C.ink));
+    y += h;
+  });
+  wrap(TX.disc[L2 || L1], false, 4.8, W - 24).forEach((l, i) => text(l, 12, 203 + i * 2, 4.8, false, C.mut));
+  return {w: 297, h: 210, ops};
+}
 /* сравнение с образованием в Украине, России и других постсоветских странах (текст на языке сайта; названия в Швейцарии — на языке кантона) */
 const CMP = [
   ['Ясли с 1–1,5 лет, детский сад до 6–7 лет', 'Ясли по желанию и платно, детский сад с 4 лет — уже школа, бесплатно, 2 года', {de: 'Kita · Kindergarten', fr: 'crèche · école enfantine', it: 'asilo nido · scuola dell’infanzia', en: 'daycare · kindergarten'}, 'Здешний детский сад — это 1-й и 2-й год школы. Ребёнок идёт туда в 4 года.'],
@@ -479,7 +526,7 @@ function kidsPages(d){
   pages.forEach(p => wrap(TX.disc[L2 || L1], false, 4.8, W - 24).forEach((l, i) => p.ops.push({t: 'text', s: l, x: 12, y: 290 + i * 2, size: 4.8, b: false, color: C.mut, align: 'left'})));
   return pages;
 }
-function build(d){ const p = []; if (d.parts.scheme) p.push(scheme(d)); if (d.parts.gloss) p.push(glossary(d)); if (d.parts.cmp !== false) p.push(compare(d)); if (d.parts.kids) p.push(...kidsPages(d)); return p; }
+function build(d){ const p = []; if (d.parts.scheme) p.push(scheme(d)); if (d.parts.trans !== false) p.push(transPage(d)); if (d.parts.gloss) p.push(glossary(d)); if (d.parts.cmp !== false) p.push(compare(d)); if (d.parts.kids) p.push(...kidsPages(d)); return p; }
 
 /* ---------- SVG ---------- */
 const esc = s => String(s).replace(/[&<>"]/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'}[c]));
@@ -583,17 +630,18 @@ function drawKids(){
 function fill(){
   const d = D();
   $('kanton').value = d.k; $('lang').value = d.lang; $('bw').checked = !!d.bw;
-  $('pScheme').checked = d.parts.scheme; $('pGloss').checked = d.parts.gloss; $('pCmp').checked = d.parts.cmp !== false; $('pKids').checked = d.parts.kids;
+  $('pScheme').checked = d.parts.scheme; $('pGloss').checked = d.parts.gloss; $('pCmp').checked = d.parts.cmp !== false; $('pTr').checked = d.parts.trans !== false; $('pKids').checked = d.parts.kids;
   $('exbar').hidden = !EX; $('exOn').hidden = !!EX;
   drawKids(); render();
 }
+function drawTr(){ const tl = LANG_OF[D().k] || 'de'; $('trList').innerHTML = TR.map(r => `<details><summary><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:${TRK[r[0]][1]};flex:none"></span>${esc(r[1])}<small>${TRK[r[0]][0]}</small></summary><p>${esc(r[3])}</p><p><b>Готовиться:</b> ${esc(r[4])}</p><p class="hint">${esc(r[2][tl] || r[2].de)}</p></details>`).join(''); }
 function drawCmp(){ const tl = LANG_OF[D().k] || 'de'; $('cmpList').innerHTML = CMP.map(r => `<details><summary>${esc(r[0])}<small>→ ${esc(r[2][tl] || r[2].de)}</small></summary><p><b>В Швейцарии:</b> ${esc(r[1])}.</p><p>${esc(r[3])}</p></details>`).join(''); }
-function render(){ drawCmp(); $('sheet').innerHTML = build(D()).map((p, i) => `<div class="sheet">${svg(p)}</div><div class="acts"><button type="button" class="btn ghost sm" data-png="${i}">Эту страницу в PNG</button></div>`).join('') || '<p class="hint">Отметь, что должно быть в PDF.</p>'; }
+function render(){ drawTr(); drawCmp(); $('sheet').innerHTML = build(D()).map((p, i) => `<div class="sheet">${svg(p)}</div><div class="acts"><button type="button" class="btn ghost sm" data-png="${i}">Эту страницу в PNG</button></div>`).join('') || '<p class="hint">Отметь, что должно быть в PDF.</p>'; }
 const set = (f) => { f(S); if (EX) f(EX); save(); render(); };
 $('kanton').addEventListener('change', e => set(s => s.k = e.target.value));
 $('lang').addEventListener('change', e => set(s => s.lang = e.target.value));
 $('bw').addEventListener('change', e => set(s => s.bw = e.target.checked));
-[['pScheme', 'scheme'], ['pGloss', 'gloss'], ['pCmp', 'cmp'], ['pKids', 'kids']].forEach(([id, k]) => $(id).addEventListener('change', e => set(s => s.parts[k] = e.target.checked)));
+[['pScheme', 'scheme'], ['pTr', 'trans'], ['pGloss', 'gloss'], ['pCmp', 'cmp'], ['pKids', 'kids']].forEach(([id, k]) => $(id).addEventListener('change', e => set(s => s.parts[k] = e.target.checked)));
 $('kids').addEventListener('input', e => { const r = e.target.closest('.kid'); if (!r || EX) return; const k = S.kids[+r.dataset.i], f = e.target.dataset.f; k[f] = f === 'n' ? e.target.value : +e.target.value || ''; save(); render(); if (f !== 'n') drawKids(); });
 $('kids').addEventListener('click', e => { const b = e.target.closest('[data-del]'); if (!b || EX) return; S.kids.splice(+b.dataset.del, 1); save(); fill(); });
 $('addKid').addEventListener('click', () => { if (EX) return; S.kids.push({n: '', m: '', y: ''}); save(); drawKids(); const ins = $('kids').querySelectorAll('input'); if (ins.length) ins[ins.length - 1].focus(); });
