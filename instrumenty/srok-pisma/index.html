@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<link rel="icon" href="/fav/favicon.svg" type="image/svg+xml"><link rel="icon" href="/fav/icon-32.png" sizes="32x32"><link rel="apple-touch-icon" href="/fav/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/fonts.css">
+<meta name="description" content="Бесплатный калькулятор срока по письму в Швейцарии: выбери письмо (Zahlungsbefehl, Strafbefehl, налоговое решение, расторжение или повышение аренды, штраф, решение соцстраховки) и как оно пришло — в руки, извещение на почте (7 дней) или A-Post Plus. Калькулятор посчитает последний день с учётом выходных, праздников кантона и «каникул» Betreibung и подскажет, что сделать. Лист PDF и PNG.">
+<link rel="canonical" href="https://svoiludi.ch/instrumenty/srok-pisma/">
+<meta property="og:type" content="website"><meta property="og:locale" content="ru_RU"><meta property="og:site_name" content="Свои люди в Швейцарии">
+<meta property="og:title" content="До какого числа ответить на письмо · калькулятор срока"><meta property="og:description" content="Срок по письму с выходными и праздниками кантона, 7 дней на почте и A-Post Plus — и что сделать до этой даты.">
+<meta property="og:url" content="https://svoiludi.ch/instrumenty/srok-pisma/"><meta property="og:image" content="https://svoiludi.ch/instrumenty/srok-pisma/og-image.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="robots" content="noindex, nofollow">
+<title>До какого числа ответить на письмо: калькулятор срока с праздниками кантона</title>
+<style>
+/* До какого числа ответить на письмо: калькулятор срока с праздниками кантона (08.10.2026): анкета слева, живые листы справа, движок assets/shema.js. */
+:root{
+  --bg:#F4EDE3; --paper:#FFFCF8; --ink:#2F2924; --muted:#7A6E62; --line:#E5D9C9; --soft:#EFE5D7;
+  --brown:#6E4F3C; --mustard:#B98324; --mustard-soft:#F3E3C2; --sage:#4F5E3E; --sage-soft:#E3E8D6; --red:#A0523D;
+  --display:"Forum","Georgia",serif; --sans:"Manrope","Segoe UI",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#221D19; --paper:#2C2621; --ink:#F1E9DF; --muted:#B4A796; --line:#3E362F; --soft:#352E28;
+  --brown:#E1C2A6; --mustard:#E2B45C; --mustard-soft:#3D321F; --sage:#B4BF97; --sage-soft:#2E3226; --red:#E39A85; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#221D19; --paper:#2C2621; --ink:#F1E9DF; --muted:#B4A796; --line:#3E362F; --soft:#352E28;
+  --brown:#E1C2A6; --mustard:#E2B45C; --mustard-soft:#3D321F; --sage:#B4BF97; --sage-soft:#2E3226; --red:#E39A85; color-scheme:dark}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--ink);font:15px/1.55 var(--sans);margin:0}
+.wrap{max-width:1280px;margin:0 auto;padding-inline:16px;padding-block:28px 48px;display:flex;flex-direction:column;gap:24px}
+.eyebrow{font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+h1{font-family:var(--display);font-weight:400;font-size:clamp(2.4rem,6vw,3.6rem);line-height:1;margin:4px 0 10px;text-wrap:balance}
+h2{font-family:var(--display);font-weight:400;font-size:1.55rem;margin:0;text-wrap:balance}
+h3{font-family:var(--display);font-weight:400;font-size:1.22rem;line-height:1.2;margin:0}
+.lead{max-width:66ch;color:var(--muted);margin:0}
+.jump{font-weight:700;color:var(--brown);text-underline-offset:4px}
+.privnote{margin-top:14px;background:var(--sage-soft);border-radius:16px;padding:12px 16px;font-size:.9rem;max-width:90ch}
+.status{font-size:.86rem;color:var(--muted);min-height:1.3em}
+.btn{font:inherit;font-weight:700;font-size:.9rem;border:0;border-radius:999px;padding:10px 18px;cursor:pointer;color:#fff;text-decoration:none;display:inline-flex;align-items:center;gap:6px;background:#6E4F3C;box-shadow:0 8px 18px -8px rgba(110,79,60,.6)}
+.btn.gold{background:#B98324;box-shadow:0 8px 18px -8px rgba(185,131,36,.7)}
+.btn.free{background:#4F5E3E;box-shadow:0 8px 18px -8px rgba(79,94,62,.6)}
+.btn.ghost{background:transparent;color:var(--brown);border:1.5px solid var(--line);box-shadow:none}
+.btn.sm{font-size:.82rem;padding:7px 13px}
+.btn[disabled]{background:var(--soft);color:var(--muted);box-shadow:none;cursor:wait}
+select,input[type=text],input[type=tel],input[type=number],input[type=date],textarea{font:inherit;font-size:.95rem;color:var(--ink);background:var(--paper);border:1.5px solid var(--line);border-radius:12px;padding:9px 12px;width:100%;min-width:0}
+select:focus-visible,input:focus-visible,button:focus-visible,textarea:focus-visible,a:focus-visible{outline:2px solid var(--mustard);outline-offset:2px}
+::placeholder{color:color-mix(in srgb,var(--muted) 70%,transparent)}
+.setup{background:var(--paper);border:1.5px solid var(--line);border-radius:22px;padding:16px 18px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px 18px;align-items:start}
+@media (max-width:1000px){.setup{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.setup{grid-template-columns:1fr}}
+.fl{display:flex;flex-direction:column;gap:6px;min-width:0}
+.fl>.lb{font-size:.8rem;font-weight:700;color:var(--muted);display:flex;align-items:center}
+.seg{display:flex;flex-wrap:wrap;gap:6px}
+.seg button{font:inherit;font-size:.84rem;font-weight:700;border:1.5px solid var(--line);background:var(--paper);color:var(--ink);border-radius:999px;padding:6px 12px;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--sage);border-color:var(--sage);color:#fff}
+.acts{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.exbar{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;background:var(--mustard-soft);border-radius:16px;padding:10px 14px;font-size:.9rem;font-weight:600}
+.work{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:22px;align-items:start}
+@media (max-width:1040px){.work{grid-template-columns:1fr}}
+.form{display:flex;flex-direction:column;gap:14px;min-width:0}
+.sec{background:var(--paper);border:1.5px solid var(--line);border-radius:20px;padding:16px 18px;display:flex;flex-direction:column;gap:12px}
+.sec>h2{font-size:1.3rem;display:flex;align-items:center}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:560px){.g2{grid-template-columns:1fr}}
+.hint{font-size:.84rem;color:var(--muted);margin:0}
+.chk{display:flex;flex-direction:column;gap:8px}
+.chk label{display:flex;gap:10px;align-items:baseline;font-size:.92rem;cursor:pointer}
+.chk input{flex:none;width:18px;height:18px;accent-color:var(--sage);transform:translateY(3px)}
+.chk b{white-space:nowrap}
+.chk small{color:var(--muted)}
+.tog{display:flex;gap:10px;align-items:center;font-size:.92rem;cursor:pointer}
+.tog input{width:18px;height:18px;accent-color:var(--sage)}
+.sheetbox{position:sticky;top:12px;display:flex;flex-direction:column;gap:10px}
+@media (max-width:1040px){.sheetbox{position:static}}
+.sheet{background:#fff;border-radius:6px;box-shadow:0 18px 40px -22px rgba(47,41,36,.45);overflow:hidden}
+.sheet svg{display:block;width:100%;height:auto}
+.imp{background:var(--paper);border:1.5px dashed color-mix(in srgb,var(--sage) 55%,transparent);border-radius:16px;padding:14px 18px;font-size:.88rem;max-width:90ch;margin:0}
+.imp b{color:var(--sage)}
+.guide{display:flex;flex-direction:column;gap:14px;max-width:90ch}
+.guide ul{margin:0;padding-left:20px}
+.guide li{margin:4px 0}
+.credit{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:.8rem;color:var(--muted)}
+.credit a{color:var(--muted)}
+.qh{font:700 .72rem/1 var(--sans);width:20px;height:20px;border-radius:50%;border:1.5px solid var(--line);background:var(--paper);color:var(--brown);cursor:pointer;margin-left:6px;padding:0;flex:none}
+.sheets{display:flex;flex-direction:column;gap:14px}
+.goals{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+@media (max-width:560px){.goals{grid-template-columns:1fr}}
+.goals label{display:flex;gap:10px;align-items:flex-start;background:var(--bg);border:1.5px solid var(--line);border-radius:14px;padding:9px 12px;cursor:pointer;font-size:.92rem}
+.goals input{width:18px;height:18px;accent-color:var(--sage);flex:none;margin-top:2px}
+.goals small{display:block;color:var(--muted)}
+.steps{display:flex;flex-direction:column;gap:8px}
+.steps details{background:var(--paper);border:1.5px solid var(--line);border-radius:16px;padding:10px 16px}
+.steps summary{cursor:pointer;font-weight:700;display:flex;gap:10px;align-items:baseline}
+.steps summary small{font-weight:600;color:var(--muted);margin-left:auto;text-align:right}
+.steps details p,.steps details ul{margin:8px 0 2px;font-size:.93rem}
+.steps details ul{padding-left:20px}
+</style>
+</head>
+<body>
+<style>.form input,.form select{width:100%}.big{font-size:1.6rem;font-weight:700;margin:4px 0 2px}.res{background:var(--paper);border:1.5px solid var(--line);border-radius:16px;padding:14px 16px;margin-top:6px}.res p{margin:4px 0}</style>
+<div class="wrap">
+  <header>
+    <p style="margin:0 0 14px"><a class="jump" href="https://svoiludi.ch/instrumenty/">← Все полезные инструменты · Свои люди в Швейцарии</a></p>
+    <div class="eyebrow">Письма · сроки</div>
+    <h1>До какого числа ответить на письмо: калькулятор срока с праздниками кантона</h1>
+    <p class="lead">Пришло письмо с требованием, штрафом или решением — и непонятно, до какого числа отвечать? Выбери, что за письмо и как оно пришло. Калькулятор посчитает последний день с учётом выходных и праздников твоего кантона и подскажет, что сделать. PDF и PNG бесплатно.</p>
+    <div class="privnote"><b>Твои данные только у тебя.</b> Всё хранится только в твоём браузере на этом устройстве. Регистрация не нужна.</div>
+    <div data-fan="srok-pisma"></div>
+  </header>
+  <div class="setup">
+    <div class="fl"><span class="lb">Печать</span><label class="tog"><input type="checkbox" id="bw"> Без цвета, для дешёвой печати</label></div>
+  </div>
+  <div class="exbar" id="exbar" hidden><span>Это пример. Так будет выглядеть твой расчёт.</span><button type="button" class="btn sm" id="exOff">Вернуться к моим данным</button></div>
+  <div class="work">
+    <div class="form">
+      <section class="sec"><h2>Письмо</h2>
+        <div class="fl"><span class="lb">Что за письмо<button type="button" class="qh" data-help="typ" aria-label="Подсказка: какое письмо" aria-expanded="false">?</button></span><select id="typ"></select></div>
+        <div class="fl" id="daysBox"><span class="lb">Сколько дней на ответ (смотри в письме)<button type="button" class="qh" data-help="days" aria-label="Подсказка: срок в письме" aria-expanded="false">?</button></span><input type="text" inputmode="numeric" id="days"></div>
+        <div class="fl"><span class="lb">От кого (по желанию)</span><input type="text" id="from" placeholder="Betreibungsamt Uster"></div>
+        <div class="fl"><span class="lb">Номер дела (по желанию)</span><input type="text" id="ref" placeholder="Betreibung Nr. 123456"></div>
+      </section>
+      <section class="sec"><h2>Как и когда пришло</h2>
+        <div class="fl"><span class="lb">Как пришло<button type="button" class="qh" data-help="how" aria-label="Подсказка: как пришло письмо" aria-expanded="false">?</button></span><select id="how"><option value="hand">Получила в руки или забрала на почте</option><option value="notice">В ящике извещение, письмо на почте</option><option value="apost">A-Post Plus — в ящике</option></select></div>
+        <div class="fl"><span class="lb" id="dateLbl">Дата получения</span><input type="date" id="date"></div>
+        <div class="fl"><span class="lb">Кантон (для праздников)</span><select id="kt"></select></div>
+      </section>
+      <div class="res" id="res" aria-live="polite"></div>
+    </div>
+    <div class="sheetbox">
+      <div class="acts"><button type="button" class="btn gold" id="pdf">Скачать PDF</button><button type="button" class="btn ghost sm" id="share" hidden>Отправить</button><button type="button" class="btn ghost sm" id="exOn">Посмотреть на примере</button></div>
+      <div class="sheets" id="sheet" aria-label="Предпросмотр листа"></div>
+      <div class="status" id="status" role="status"></div>
+    </div>
+  </div>
+  <p class="imp"><b>Важно.</b> Это помощник для расчёта, а не юридическая консультация: главнее всего срок, который написан в самом письме (Rechtsmittelbelehrung). Праздники — по кантону, в некоторых общинах есть свои. Не уверена — отправь ответ на несколько дней раньше и заказным письмом (Einschreiben), храни квитанцию. Как считаются сроки и что делать с письмом — в теме <a href="https://svoiludi.ch/shveycariya/pisma-sroki/">«Письма от ведомств и сроки»</a>.</p>
+  <div class="share-slot" data-url="https://svoiludi.ch/instrumenty/srok-pisma/" data-lead="Перешли тем, кому пришло важное письмо. В ссылке нет твоих данных." data-text="Привет! Тут можно посчитать, до какого числа ответить на письмо в Швейцарии, с выходными и праздниками кантона. Бесплатно. https://svoiludi.ch/instrumenty/srok-pisma/"></div>
+  <p class="credit"><span>Свои люди в Швейцарии · svoiludi.ch</span><a href="https://svoiludi.ch/privacy/">Политика конфиденциальности</a></p>
+</div>
+
+<script src="/assets/kantony.js"></script>
+<script src="/assets/lib/jspdf.umd.min.js"></script>
+<script src="/assets/shema.js"></script>
+<script>
+window.HELP = {
+  typ: '<p>Выбери, что пришло. Название обычно стоит вверху письма крупно: <i>Zahlungsbefehl</i>, <i>Strafbefehl</i>, <i>Veranlagungsverfügung</i>, <i>Kündigung</i>. Нет в списке — выбери «Другое» и впиши срок из письма.</p>',
+  days: '<p>Срок пишут внизу решения в разделе <i>Rechtsmittelbelehrung</i> (voies de droit, rimedi giuridici): «innert 30 Tagen», «dans les 30 jours», «entro 30 giorni». Если срок в письме другой, чем здесь, — впиши тот, что в письме.</p>',
+  how: '<p><b>В руки</b> — почтальон отдал письмо или ты забрала его на почте: срок считается со дня получения.</p><p><b>Извещение</b> — дома тебя не было, письмо 7 дней лежит на почте. Если ты знала, что идёт дело (налоги, суд, Betreibung, миграционная служба), письмо считается полученным на 7-й день, даже если ты его не забрала. Впиши дату с извещения, когда письмо можно забрать.</p><p><b>A-Post Plus</b> — письмо положили в ящик. Оно считается полученным в день, когда его положили, даже в субботу. Дату можно посмотреть на сайте почты по номеру на конверте.</p>'
+};
+const KEY = 'srokPisma.v1';
+/* [ключ, название, дней, что делать, примечание] */
+const TYP = [
+  ['betr', 'Zahlungsbefehl — требование об оплате долга (Betreibung)', 10, 'Не согласна с долгом — возражение (Rechtsvorschlag): сказать почтальону при вручении или письменно в Betreibungsamt. Причины писать не нужно.', 'Если срок кончается в «каникулы» Betreibung (7 дней до и после Пасхи и Рождества, 15–31 июля), он продлевается до третьего дня после них.'],
+  ['straf', 'Strafbefehl — приказ о наказании прокуратуры', 10, 'Не согласна — письменное возражение (Einsprache) в прокуратуру, которая прислала приказ. Причины писать не нужно.', 'Без возражения приказ становится приговором.'],
+  ['steuer', 'Решение о налоге (Veranlagung, Einschätzung)', 30, 'Не согласна — письменное возражение (Einsprache) в налоговое ведомство: что неверно и почему, с документами.', 'В некоторых кантонах срок другой — проверь в письме.'],
+  ['kuend', 'Расторжение аренды от управляющей — оспорить', 30, 'Оспорить — письменно в примирительную службу по аренде (Schlichtungsbehörde) своего округа.', 'Расторжение не по официальному бланку кантона может быть недействительным — спроси союз арендаторов.'],
+  ['miete', 'Повышение аренды — оспорить', 30, 'Оспорить — письменно в примирительную службу по аренде (Schlichtungsbehörde).', 'Повышение должно прийти на официальном бланке кантона.'],
+  ['busse', 'Мелкий штраф (Ordnungsbusse) — оплатить', 30, 'Оплатить целиком. Частями нельзя — иначе начнётся обычное дело, это дороже.', ''],
+  ['sv', 'Решение AHV, IV, RAV или медстраховки — возражение', 30, 'Не согласна — письменное возражение (Einsprache) туда, откуда пришло решение: что неверно и почему.', ''],
+  ['own', 'Другое письмо — срок впишу сама', 0, 'Ответь письменно туда и так, как написано в письме.', '']
+];
+const iso = d => d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+const parse = s => { const [y, m, d] = String(s || '').split('-').map(Number); return y ? new Date(y, m - 1, d) : null; };
+const add = (d, n) => { const x = new Date(d); x.setDate(x.getDate() + n); return x; };
+const WD = ['воскресенье', 'понедельник', 'вторник', 'среда', 'четверг', 'пятница', 'суббота'];
+const MON = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'];
+const nice = d => d.getDate() + ' ' + MON[d.getMonth()] + ' ' + d.getFullYear() + ', ' + WD[d.getDay()];
+/* праздники кантонов — как в «Годовом календаре дел и сроков» (BJ, «Kantonale Feiertage»); * = только в части общин */
+function easter(y){ const a=y%19,b=Math.floor(y/100),c=y%100,d=Math.floor(b/4),e=b%4,f=Math.floor((b+8)/25),g=Math.floor((b-f+1)/3),h=(19*a+b-d-g+15)%30,i=Math.floor(c/4),k=c%4,l=(32+2*e+2*i-h-k)%7,m=Math.floor((a+11*h+22*l)/451),mo=Math.floor((h+l-7*m+114)/31),da=((h+l-7*m+114)%31)+1; return new Date(y,mo-1,da); }
+const CH = {
+  ZH:'NY BE KF OM AR AU PM WN ST', BE:'NY BE KF OM AU PM WN ST', LU:'NY BE KF OM AU PM FL MH AH ME WN ST',
+  UR:'NY DK JO KF OM AU PM FL MH AH ME WN ST', SZ:'NY DK JO KF OM AU PM FL MH AH ME WN ST', OW:'NY KF AU FL MH BK AH ME WN',
+  NW:'NY JO KF AU FL MH AH ME WN', GL:'NY KF OM NF AU PM AH WN ST', ZG:'NY KF AU FL MH AH ME WN', FR:'NY KF AU FL* MH* AH* ME* WN',
+  SO:'NY JO* KF AR AU FL* MH* AH* WN', BS:'NY KF OM AR AU PM WN ST', BL:'NY KF OM AR AU PM WN ST', SH:'NY KF OM AR AU PM WN ST',
+  AR:'NY KF OM AU PM WN ST', AI:'NY KF OM AU PM FL MH MT* AH ME WN ST', SG:'NY KF OM AU PM AH WN ST', GR:'NY OM AU PM WN ST',
+  AG:'NY BE KF OM AR AU PM FL MH AH ME WN ST', TG:'NY BE KF OM AR AU PM WN ST', TI:'NY DK JO OM AR AU PM FL PP MH AH ME WN ST',
+  VD:'NY BE KF OM AU PM LJ WN', VS:'NY JO AU FL MH AH ME WN', NE:'NY IR KF AU FL* WN AR', GE:'NY KF OM AU PM JG WN RR',
+  JU:'NY BE KF OM AR AU PM FL PJ MH AH WN'
+};
+const HNAME = {NY:'Новый год',BE:'2 января',DK:'Богоявление',JO:'День святого Иосифа',KF:'Страстная пятница',OM:'Пасхальный понедельник',AR:'День труда',AU:'Вознесение',PM:'Духов понедельник',FL:'Праздник Тела Христова',PP:'Петра и Павла',MH:'Успение Богородицы',BK:'День святого Николая из Флюэ',MT:'День святого Маврикия',AH:'День всех святых',ME:'Непорочное зачатие',WN:'Рождество',ST:'День святого Стефана',NF:'Нефельсская битва',LJ:'Понедельник после Дня покаяния',JG:'Женевский пост',RR:'Восстановление республики',IR:'День республики',PJ:'Годовщина плебисцита Юры',BF:'День Швейцарии'};
+function holidays(y, kt){
+  const e = easter(y), I = (m, d) => iso(new Date(y, m, d)), nthWd = (m, wd, n) => { const x = new Date(y, m, 1); while (x.getDay() !== wd) x.setDate(x.getDate() + 1); x.setDate(x.getDate() + 7 * (n - 1)); return x; };
+  const D = {NY:I(0,1), BE:I(0,2), DK:I(0,6), JO:I(2,19), KF:iso(add(e,-2)), OM:iso(add(e,1)), AR:I(4,1), AU:iso(add(e,39)), PM:iso(add(e,50)), FL:iso(add(e,60)),
+    PP:I(5,29), MH:I(7,15), BK:I(8,25), MT:I(8,22), AH:I(10,1), ME:I(11,8), WN:I(11,25), ST:I(11,26),
+    NF:iso(nthWd(3,4,1)), LJ:iso(add(nthWd(8,0,3),1)), JG:iso(add(nthWd(8,0,1),4)), RR:I(11,31), IR:I(2,1), PJ:I(5,23), BF:I(7,1)};
+  const out = {}; out[D.BF] = {n: HNAME.BF};
+  (CH[kt] || CH.ZH).split(' ').forEach(t => { const k = t.replace('*', ''), part = t.endsWith('*'); out[D[k]] = {n: HNAME[k] + (part ? ' (в части общин)' : ''), part}; });
+  return out;
+}
+/* «каникулы» Betreibung (SchKG ст. 56): 7 дней до и после Пасхи и Рождества, 15–31 июля */
+function betrFerien(d){ const y = d.getFullYear(), e = easter(y), t = d.getTime();
+  const r = [[add(e, -7), add(e, 7)], [new Date(y, 11, 18), new Date(y, 11, 31)], [new Date(y, 0, 1), new Date(y, 0, 1)], [new Date(y, 6, 15), new Date(y, 6, 31)]];
+  for (const [a, b] of r) if (t >= a.getTime() && t <= b.getTime()) { let end = b; if (a.getMonth() === 11) end = new Date(y + 1, 0, 1); return end; }
+  return null; }
+function calc(d){
+  const t = TYP.find(x => x[0] === d.typ) || TYP[0], n = d.typ === 'own' ? (+d.days || 0) : t[2], dt = parse(d.date); if (!dt || !n) return null;
+  const notes = [];
+  let got = dt;
+  if (d.how === 'notice' && d.typ === 'betr') notes.push('Zahlungsbefehl не считается полученным «на 7-й день»: его вручают лично. Срок идёт со дня, когда ты его получила или забрала, — впиши эту дату.');
+  else if (d.how === 'notice') { got = add(dt, 6); notes.push('Письмо с извещения считается полученным на 7-й день хранения — ' + nice(got) + ' (если ты знала, что идёт дело). Забрала раньше — считай от дня, когда забрала.'); }
+  if (d.how === 'apost') notes.push('A-Post Plus считается полученным в день, когда его положили в ящик, даже в субботу.');
+  let end = add(got, n); const moved = [];
+  const step = () => { let ch = true; while (ch) { ch = false; const H = holidays(end.getFullYear(), d.kt || 'ZH'), k = iso(end);
+    if (end.getDay() === 6 || end.getDay() === 0) { moved.push(nice(end) + ' — выходной'); end = add(end, end.getDay() === 6 ? 2 : 1); ch = true; }
+    else if (H[k] && !H[k].part) { moved.push(nice(end) + ' — ' + H[k].n); end = add(end, 1); ch = true; } } };
+  step();
+  if (d.typ === 'betr') { const fe = betrFerien(end); if (fe) { moved.push('срок кончался в «каникулы» Betreibung'); end = add(fe, 3); step(); } }
+  const today = new Date(); today.setHours(0, 0, 0, 0);
+  const left = Math.round((end - today) / 864e5);
+  let send = add(end, -2); while (send.getDay() === 0 || send.getDay() === 6) send = add(send, -1); if (send < got) send = got;
+  return {t, n, got, end, moved, notes, left, send};
+}
+function blank(){ let k = ''; try { k = localStorage.getItem('svoiludi.kanton') || ''; } catch (e) {} return {bw: false, typ: 'betr', days: '', from: '', ref: '', how: 'hand', date: iso(new Date()), kt: k || 'ZH'}; }
+let S = load(), EX = null;
+function load(){ try { const s = JSON.parse(localStorage.getItem(KEY)); if (s && typeof s === 'object') return Object.assign(blank(), s); } catch (e) {} return blank(); }
+function save(){ if (EX) return; try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} }
+const D = () => EX || S;
+const KTN = k => ((window.KANTONY || {})[k] || {}).n || k;
+function build(){
+  const d = D(), C = SH.pal(d.bw), c = C.c, P = SH.page(210, 297, C), X = 12, W = 186, r = calc(d);
+  P.header('До какого числа ответить', 'Frist berechnen · délai · termine', KTN(d.kt));
+  let y = 28;
+  const t = TYP.find(x => x[0] === d.typ) || TYP[0];
+  P.text(t[1], X, y, 12, true, C.ink); y += 6;
+  if (d.from || d.ref) { P.text([d.from, d.ref].filter(Boolean).join(' · '), X, y, 9, false, C.mut); y += 6; }
+  y += 2;
+  if (!r) { P.text('Впиши дату и срок — здесь появится последний день.', X, y + 6, 11, false, C.mut); P.foot('Расчёт-помощник, не юридическая консультация. Главнее — срок в самом письме (Rechtsmittelbelehrung). svoiludi.ch'); return [P]; }
+  y += P.card(X, y, W, c.red, 'Последний день: ' + nice(r.end), 'Letzter Tag der Frist · dernier jour du délai · ultimo giorno del termine', ['Отправь не позже ' + nice(r.send) + ' — заказным письмом (Einschreiben), храни квитанцию.', 'В последний день достаточно сдать письмо на швейцарскую почту до её закрытия.'], {ts: 14, bs: 9.5}) + 6;
+  y = P.sec('Как посчитано', X, y, W);
+  const rows = [['Получено', nice(r.got)], ['Срок', r.n + ' дней, со следующего дня после получения'], ['Без переноса', nice(add(r.got, r.n))]];
+  rows.forEach(([k, v]) => { P.text(k, X, y, 8.5, true, C.head); P.text(v, X + 40, y, 9.5, false, C.ink); y += 6; });
+  if (r.moved.length) { P.text('Перенесено', X, y, 8.5, true, C.head); y = P.para(r.moved.join('; ') + ' → следующий рабочий день.', X + 40, y, 9.5, false, C.ink, W - 40, 4.6) + 1.5; }
+  r.notes.forEach(s => { y = P.para('• ' + s, X, y + 1, 8.8, false, C.ink, W, 4.3); });
+  y += 4;
+  y = P.sec('Что сделать', X, y, W);
+  y = P.para(t[3], X, y, 9.8, false, C.ink, W, 4.8) + 1;
+  if (t[4]) y = P.para(t[4], X, y, 8.8, false, C.mut, W, 4.3) + 1;
+  ['Отвечай письменно, на языке кантона, с подписью и номером дела.', 'Не понимаешь письмо — сразу иди в общину, к юристу или в консультацию, не жди последнего дня.', 'Не успеваешь — попроси продление (Fristerstreckung) письменно до конца срока. Сроки из закона, например 10 дней на возражение, не продлевают.'].forEach(s => { y = P.para('• ' + s, X, y + 1, 8.8, false, C.ink, W, 4.3); });
+  P.foot('Расчёт-помощник, не юридическая консультация. Главнее — срок в самом письме (Rechtsmittelbelehrung). Праздники — по кантону (BJ), в общинах бывают свои. svoiludi.ch');
+  return [P];
+}
+const $ = id => document.getElementById(id);
+function showRes(){ const d = D(), r = calc(d);
+  if (!r) { $('res').innerHTML = '<p>Впиши дату и срок — здесь появится последний день.</p>'; return; }
+  const lt = r.left < 0 ? '<p><b>Срок уже прошёл.</b> Всё равно сразу иди к юристу или в консультацию — иногда ещё можно что-то сделать.</p>' : r.left === 0 ? '<p><b>Сегодня последний день.</b> Сдай письмо на почту до закрытия.</p>' : '<p>Осталось <b>' + r.left + ' дн.</b></p>';
+  $('res').innerHTML = '<p>Последний день</p><p class="big">' + nice(r.end) + '</p>' + lt + '<p>Отправь заказным не позже: <b>' + nice(r.send) + '</b></p>'; }
+$('typ').innerHTML = TYP.map(t => `<option value="${t[0]}">${t[1]}</option>`).join('');
+$('kt').innerHTML = Object.keys(window.KANTONY || {ZH: 1}).sort((a, b) => KTN(a).localeCompare(KTN(b), 'ru')).map(k => `<option value="${k}">${KTN(k)}</option>`).join('');
+const F = ['typ', 'days', 'from', 'ref', 'how', 'date', 'kt'];
+let UI, tmr;
+function fill(){ const d = D(); $('bw').checked = !!d.bw; F.forEach(k => { $(k).value = d[k]; $(k).disabled = !!EX; });
+  $('daysBox').hidden = d.typ !== 'own'; $('dateLbl').textContent = {hand: 'Дата получения', notice: 'С какого дня можно забрать (дата с извещения)', apost: 'Дата, когда положили в ящик'}[d.how];
+  $('exbar').hidden = !EX; $('exOn').hidden = !!EX; showRes(); if (UI) UI.render(); }
+$('bw').addEventListener('change', e => { S.bw = e.target.checked; if (EX) EX.bw = S.bw; save(); fill(); });
+F.forEach(k => $(k).addEventListener(k === 'days' || k === 'from' || k === 'ref' ? 'input' : 'change', e => { if (EX) return; S[k] = e.target.value; if (k === 'kt') { try { localStorage.setItem('svoiludi.kanton', S.kt); } catch (er) {} } save(); clearTimeout(tmr); tmr = setTimeout(fill, k === 'days' || k === 'from' || k === 'ref' ? 400 : 0); }));
+const EXD = () => { const t = new Date(); t.setDate(t.getDate() - 3); return Object.assign(blank(), {bw: S.bw, typ: 'steuer', from: 'Kantonales Steueramt Zürich', ref: 'Veranlagung 2025', how: 'notice', date: iso(t), kt: 'ZH'}); };
+$('exOn').addEventListener('click', () => { EX = EXD(); fill(); window.scrollTo({top: $('exbar').offsetTop - 12, behavior: 'smooth'}); });
+$('exOff').addEventListener('click', () => { EX = null; fill(); });
+if (/[?&]example\b/.test(location.search)) EX = EXD();
+UI = SH.mount({build, title: 'До какого числа ответить', name: () => 'Frist-' + (D().date || '')});
+fill();
+
+</script>
+<script src="/assets/help.js"></script>
+<script src="/assets/backup.js"></script>
+<script src="/assets/pdffan.js" defer></script>
+<script src="/assets/share.js" defer></script>
+<script src="/assets/samesite.js"></script>
+</body>
+</html>

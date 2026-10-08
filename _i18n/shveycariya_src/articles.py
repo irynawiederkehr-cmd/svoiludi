@@ -145,7 +145,7 @@ ARTICLES['betreibung'] = dict(
         'Долгов много — обратись в <a href="https://www.schulden.ch/">бесплатную консультацию по долгам</a> своего кантона.',
     ],
     pomosh=dict(ids=['caritas', 'budget', 'anwalt', 'ufs'], k='adv', t='При долгах звони как можно раньше — консультации по долгам бесплатные.'),
-    tools={'kuda-obratitsya': 'Бесплатные консультации по долгам и другие адреса помощи — в одном списке.', 'nalogi-shema': 'Когда приходят налоговые счета и как не допустить долга — налоговый год на схеме.', 'moj-budget': 'Все счета, сроки и платежи месяца в одном месте, чтобы ни один счёт не дошёл до напоминания.'},
+    tools={'srok-pisma': 'Посчитай последний день для возражения против Zahlungsbefehl — с праздниками и «каникулами» Betreibung.', 'kuda-obratitsya': 'Бесплатные консультации по долгам и другие адреса помощи — в одном списке.', 'nalogi-shema': 'Когда приходят налоговые счета и как не допустить долга — налоговый год на схеме.', 'moj-budget': 'Все счета, сроки и платежи месяца в одном месте, чтобы ни один счёт не дошёл до напоминания.'},
     related=['skrytye-rashody', 'arenda', 'permit-b', 'nalogovaya-deklaraciya'],
     sources=[
         ('Закон о взыскании долгов SchKG, ст. 8a — реестр, 5 лет и Nichtbekanntgabe', 'https://www.fedlex.admin.ch/eli/cc/11/529_488_529/de#art_8_a'),
@@ -4264,4 +4264,266 @@ ARTICLES['prava-pokupatelya'] = dict(
     terms=[('Deutsch', 'Gewährleistung, Garantie, Mangel, Mängelrüge, Nachbesserung, Ersatzlieferung, Minderung, Wandelung, Widerrufsrecht, Haustürgeschäft, Kulanz, AGB, unbestellte Ware, Abofalle, Kündigung, Mahnung, Zahlungsbefehl, Rechtsvorschlag, Ombudsstelle'), ('Français', 'garantie légale, garantie du fabricant, défaut, avis des défauts, réparation, remplacement, réduction du prix, résolution, droit de révocation, démarchage à domicile, geste commercial, conditions générales, marchandise non commandée, piège à abonnement, résiliation, rappel, commandement de payer, opposition, médiateur'), ('Italiano', 'garanzia legale, garanzia del produttore, difetto, notifica dei difetti, riparazione, sostituzione, riduzione del prezzo, diritto di revoca, vendita a domicilio, condizioni generali, merce non ordinata, trappola dell’abbonamento, disdetta, diffida, precetto esecutivo, opposizione'), ('English', 'statutory warranty, manufacturer’s guarantee, defect, notice of defect, repair, replacement, price reduction, right of withdrawal, doorstep sale, terms and conditions, unsolicited goods, subscription trap, cancellation, reminder, payment order, objection, ombudsman')],
     post='Это сообщение о дефекте, отзыв договора, отмена подписки и возражение против счёта.',
     post2='Для отзыва и возражения считается день отправки или получения — храни квитанцию.',
+)
+
+ARTICLES['beremennost'] = dict(
+    h1='Беременность и роды в Швейцарии: <em>что оплачивает страховка, декрет (Mutterschaftsurlaub) и что сделать после родов</em>',
+    seo='Беременность и роды в Швейцарии: страховка, Hebamme, декрет (Mutterschaftsurlaub) 14 недель',
+    desc='Беременность и роды в Швейцарии простыми словами на русском: гинеколог и акушерка (Hebamme), что оплачивает базовая медстраховка (7 осмотров, 2 УЗИ, курс 150 франков, визиты акушерки после родов), без франшизы с 13-й недели; защита на работе и от увольнения; декрет 14 недель, 80 % зарплаты до 220 франков в день, 2 недели для отца; регистрация ребёнка, признание отцовства, медстраховка ребёнка за 3 месяца, детские пособия. По-немецки Schwangerschaft, Hebamme, Mutterschaftsurlaub, Vaterschaftsurlaub, по-французски grossesse, sage-femme, congé de maternité, по-итальянски gravidanza, levatrice, congedo di maternità.',
+    lead='Беременность в Швейцарии хорошо защищена: страховка оплачивает осмотры и роды, а после родов есть 14 недель оплачиваемого декрета. Но многое нужно сделать самой и вовремя — особенно медстраховку для ребёнка. Здесь всё по порядку.',
+    body='''
+<nav class="toc" aria-label="Содержание"><b>В этой статье</b>
+<ul>
+  <li><a href="#vrach">Гинеколог и акушерка</a></li>
+  <li><a href="#strahovka">Что оплачивает медстраховка</a></li>
+  <li><a href="#rabota">Работа во время беременности</a></li>
+  <li><a href="#dekret">Декрет: 14 недель для мамы, 2 — для папы</a></li>
+  <li><a href="#rebenok">После родов: документы и страховка ребёнка</a></li>
+</ul></nav>
+
+<h2 id="vrach">Гинеколог и акушерка (Hebamme)</h2>
+<ul class="ul">
+  <li>Беременность ведёт <b>гинеколог</b> или <b>акушерка</b> (Hebamme, sage-femme, levatrice) — при беременности без осложнений можно выбрать и акушерку. Базовая страховка оплачивает обоих.</li>
+  <li>Акушерку на время после родов (визиты домой) ищи заранее, лучше в первой половине беременности: свободных акушерок мало. Поиск — на сайте <a href="https://www.hebamme.ch">Швейцарской ассоциации акушерок</a>.</li>
+  <li>Где рожать — решаешь сама: больница твоего кантона, роддом (Geburtshaus) или дома с акушеркой. Базовая страховка оплачивает роды в общей палате в больнице из списка кантона. Отдельная палата и свободный выбор больницы по всей Швейцарии — только с дополнительной страховкой (смотри тему «Дополнительное страхование»).</li>
+  <li>Гинекологов и акушерок, которые говорят по-русски или по-украински, ищи в <a href="../../">справочнике «Свои люди»</a>.</li>
+</ul>
+
+<h2 id="strahovka">Что оплачивает медстраховка</h2>
+<p>По <a href="https://www.bag.admin.ch/de/krankenversicherung-leistungen-bei-mutterschaft">Федеральному ведомству здравоохранения (BAG)</a> базовая страховка оплачивает:</p>
+<ul class="ul">
+  <li><b>7 осмотров</b> при обычной беременности (при риске — сколько нужно) и <b>2 УЗИ</b>: на 12–14-й и на 20–23-й неделе.</li>
+  <li><b>150 франков</b> на курс подготовки к родам или консультацию акушерки.</li>
+  <li><b>Роды</b> — в больнице, роддоме или дома.</li>
+  <li><b>3 консультации</b> по грудному вскармливанию.</li>
+  <li><b>Визиты акушерки домой</b> в первые 56 дней: до 16 визитов после первых родов, кесарева сечения, двойни или преждевременных родов, иначе до 10. Осмотр у акушерки через 6–10 недель после родов.</li>
+  <li><b>Без франшизы и без 10 %</b>: с 13-й недели беременности до 8 недель после родов ты не платишь свою долю — даже за лечение, не связанное с беременностью (кроме прививок). Сами услуги по беременности бесплатны всегда.</li>
+  <li>Проверь счета врачей и больницы: иногда долю по ошибке всё же списывают — тогда напиши в кассу.</li>
+</ul>
+
+<h2 id="rabota">Работа во время беременности</h2>
+<ul class="ul">
+  <li><b>Уволить нельзя</b> во время беременности и <b>16 недель после родов</b> — увольнение в это время недействительно (OR ст. 336c). Исключение — испытательный срок. Работодателю сообщать о беременности ты не обязана, но защита сильнее, если он знает.</li>
+  <li>Беременная может не выходить на работу или уйти раньше, просто предупредив (без справки врача такие часы не оплачиваются; со справкой — как при болезни).</li>
+  <li><b>Защита на работе</b> (по <a href="https://www.weka.ch/themen/personal/arbeitszeit-und-absenzen/absenzen-und-ferien/article/mutterschutz-arbeitsrechtliche-regelungen-im-ueberblick/">закону о труде</a>): с 8-й недели до родов — без работы с 20 до 6 часов; с 4-го месяца — дополнительный 10-минутный перерыв каждые 2 часа при работе стоя, с 6-го месяца — стоя не больше 4 часов в день. Тяжёлую и опасную работу можно не выполнять. Нет подходящей замены — 80 % зарплаты.</li>
+  <li>Если работаешь у семьи (няня, уборка) — защита та же.</li>
+</ul>
+
+<h2 id="dekret">Декрет: 14 недель для мамы, 2 — для папы</h2>
+<ul class="ul">
+  <li><b>Декрет мамы</b> (Mutterschaftsurlaub, congé de maternité) — <b>14 недель (98 дней)</b> с дня родов, <b>80 % зарплаты, не больше 220 франков в день</b> (<a href="https://www.ch.ch/de/mutterschaftsurlaub">ch.ch</a>). Работодатель или договор могут давать больше.</li>
+  <li><b>Условия:</b> 9 месяцев до родов ты была застрахована в AHV, работала за время беременности хотя бы 5 месяцев и в день родов работаешь по найму, на себя или получаешь пособие по безработице. Время работы в ЕС тоже может засчитываться.</li>
+  <li><b>8 недель после родов работать нельзя</b>, до 16-й недели — только если ты сама хочешь.</li>
+  <li>Ребёнок после родов дольше 2 недель в больнице — декрет можно продлить до 56 дней.</li>
+  <li><b>Как получить:</b> заявление в кассу AHV (Ausgleichskasse) — обычно через работодателя, своё дело — сама в свою кассу.</li>
+  <li><b>Отец</b> (или жена мамы) — <b>2 недели</b> (10 рабочих дней) в течение 6 месяцев после родов, тоже 80 % до 220 франков в день. Можно брать по дням.</li>
+  <li><b>Кормление грудью</b> в первый год — оплачиваемое рабочее время: не меньше 30 минут при рабочем дне до 4 часов, 60 минут — больше 4 часов, 90 минут — больше 7 часов.</li>
+</ul>
+
+<h2 id="rebenok">После родов: документы и страховка ребёнка</h2>
+<ul class="ul">
+  <li><b>Регистрация рождения</b>: больница или роддом сами сообщают в отдел ЗАГС (Zivilstandsamt). Родила дома — сообщи в течение 3 дней. Свидетельство о рождении заказывают там же.</li>
+  <li><b>Не замужем</b> — отец признаёт ребёнка в Zivilstandsamt, можно ещё до родов (<a href="https://www.ch.ch/de/vaterschaftsanerkenung">ch.ch</a>: 75 франков). Там же можно сразу подать заявление о совместной опеке (gemeinsame elterliche Sorge).</li>
+  <li><b>Медстраховка ребёнка — в течение 3 месяцев</b> после родов, тогда она действует с первого дня. Лучше оформить ещё до родов, а дополнительную страховку — обязательно до родов: потом при болезни ребёнка могут отказать (<a href="https://www.beobachter.ch/geld/krankenkasse/krankenkassen-wann-kind-anmelden">Beobachter</a>).</li>
+  <li><b>Пермит ребёнка</b>: если родители иностранцы, ребёнку нужен свой пермит — спроси в общине, что подать.</li>
+  <li><b>Детские пособия</b> (Kinderzulagen) — не меньше 215 франков в месяц на ребёнка, в некоторых кантонах ещё разовое пособие при рождении. Подаёт работающий родитель через работодателя (смотри тему «Ясли, детский сад и начальная школа»).</li>
+  <li>Всё про ясли, места и субсидии — в теме «Ясли, детский сад и начальная школа». Номера экстренной помощи и детского врача на один лист — «Карточка экстренных номеров и дежурного врача».</li>
+</ul>
+''',
+    steps=[
+        'В первой половине беременности найди акушерку на время после родов.',
+        'Сообщи работодателю о беременности и спроси о правилах декрета по договору.',
+        'Проверь счета: с 13-й недели ты не платишь франшизу и 10 %.',
+        'До родов оформи медстраховку ребёнка — базовую и дополнительную.',
+        'Не замужем — признание отцовства в Zivilstandsamt ещё до родов.',
+        'После родов: заявление на декрет через работодателя, детские пособия, пермит ребёнка.',
+    ],
+    tools={'moj-god': 'Срок родов, конец декрета, визиты акушерки и сроки страховки — в календаре на год.', 'moj-budget': 'Бюджет семьи на время декрета: 80 % зарплаты, пособия, расходы на ребёнка.', 'ekstrennye-nomera': 'Номера экстренной помощи, дежурного и детского врача — на холодильник.'},
+    related=['medstrahovka', 'dop-strahovanie', 'kita-detsad', 'trudovoe-pravo'],
+    sources=[
+        ('BAG — медстраховка при беременности и родах', 'https://www.bag.admin.ch/de/krankenversicherung-leistungen-bei-mutterschaft'),
+        ('ch.ch — декрет (Mutterschaftsurlaub)', 'https://www.ch.ch/de/mutterschaftsurlaub'),
+        ('ch.ch — признание отцовства', 'https://www.ch.ch/de/vaterschaftsanerkenung'),
+        ('Beobachter — когда страховать ребёнка', 'https://www.beobachter.ch/geld/krankenkasse/krankenkassen-wann-kind-anmelden'),
+        ('WEKA — защита беременных на работе', 'https://www.weka.ch/themen/personal/arbeitszeit-und-absenzen/absenzen-und-ferien/article/mutterschutz-arbeitsrechtliche-regelungen-im-ueberblick/'),
+        ('Швейцарская ассоциация акушерок — поиск акушерки', 'https://www.hebamme.ch'),
+    ],
+    terms=[('Deutsch', 'Schwangerschaft, Frauenärztin, Gynäkologin, Hebamme, Geburtshaus, Geburtsvorbereitungskurs, Stillberatung, Wochenbett, Mutterschaftsurlaub, Mutterschaftsentschädigung, Vaterschaftsurlaub, Kündigungsschutz, Zivilstandsamt, Geburtsurkunde, Kindesanerkennung, gemeinsame elterliche Sorge, Kinderzulage, Geburtszulage'), ('Français', 'grossesse, gynécologue, sage-femme, maison de naissance, cours de préparation à la naissance, conseil en allaitement, congé de maternité, allocation de maternité, congé de paternité, protection contre le licenciement, état civil, reconnaissance de paternité, allocation familiale'), ('Italiano', 'gravidanza, ginecologa, levatrice, casa nascita, corso di preparazione al parto, consulenza per l’allattamento, congedo di maternità, indennità di maternità, congedo di paternità, stato civile, riconoscimento di paternità, assegni familiari'), ('English', 'pregnancy, gynaecologist, midwife, birth centre, antenatal class, breastfeeding advice, maternity leave, paternity leave, protection against dismissal, civil registry office, birth certificate, recognition of paternity, child allowance')],
+)
+
+ARTICLES['pisma-sroki'] = dict(
+    h1='Письма от ведомств и сроки: <em>заказное письмо (Einschreiben), 7 дней на почте и до какого числа ответить</em>',
+    seo='Письма и сроки в Швейцарии: Einschreiben, 7 дней на почте, срок возражения',
+    desc='Письма от ведомств в Швейцарии простыми словами на русском: что значат заказное письмо (Einschreiben), A-Post Plus и извещение «забрать на почте», когда письмо считается полученным, даже если ты его не забрала (7 дней), как считать срок и что если он кончается в субботу или в праздник, типичные сроки — 10 дней на возражение против Zahlungsbefehl и Strafbefehl, 30 дней на налоги и аренду, как ответить и попросить продление, что сделать перед отпуском. По-немецки Einschreiben, Frist, Rechtsmittelbelehrung, Einsprache, по-французски recommandé, délai, opposition, по-итальянски raccomandata, termine, opposizione.',
+    lead='В Швейцарии важное приходит письмом, и у ответа почти всегда есть срок. Пропустишь — решение вступит в силу, даже если письмо так и лежало на почте. Здесь — как считается срок и как ничего не пропустить.',
+    body='''
+<nav class="toc" aria-label="Содержание"><b>В этой статье</b>
+<ul>
+  <li><a href="#pochta">Как приходят важные письма</a></li>
+  <li><a href="#poluchila">Когда письмо считается полученным</a></li>
+  <li><a href="#schet">Как считать срок</a></li>
+  <li><a href="#tipichnye">Типичные сроки</a></li>
+  <li><a href="#otvet">Как ответить и попросить продление</a></li>
+  <li><a href="#otpusk">Если уезжаешь</a></li>
+</ul></nav>
+
+<h2 id="pochta">Как приходят важные письма</h2>
+<ul class="ul">
+  <li><b>Заказное письмо</b> (Einschreiben, recommandé, raccomandata) отдают под подпись. Нет дома — в ящике остаётся <b>извещение</b> (Abholungseinladung): письмо <b>7 дней</b> лежит на почте.</li>
+  <li><b>A-Post Plus</b> кладут прямо в ящик, но почта отмечает день доставки — его можно посмотреть по номеру отправления. Такие письма приходят и по субботам.</li>
+  <li>Внизу официального решения — <b>Rechtsmittelbelehrung</b> (voies de droit, rimedi giuridici): сколько дней на ответ, куда и в какой форме. Читай её первой.</li>
+</ul>
+
+<h2 id="poluchila">Когда письмо считается полученным</h2>
+<ul class="ul">
+  <li><b>Письмо от ведомства или суда</b>, когда у тебя идёт дело (налоги, миграционная служба, суд, прокуратура, RAV): если ты не забрала заказное письмо, оно всё равно считается полученным <b>на 7-й день</b> хранения на почте. Срок пошёл. Исключение — требование об оплате долга (Zahlungsbefehl): его вручают лично, и 10 дней идут со дня вручения.</li>
+  <li><b>Письмо от частного лица</b> — расторжение аренды или работы: считается полученным, как только его можно забрать на почте, даже если ты его не забрала (<a href="https://law.ch/2017/08/mieter-in-den-ferien">law.ch</a>). Срок, например 30 дней на оспаривание расторжения аренды, идёт с этого дня.</li>
+  <li><b>A-Post Plus</b> считается полученным в день, когда его положили в ящик — даже в субботу. По решениям федеральных ведомств срок тогда может начаться уже в воскресенье; закон, который переносит начало на понедельник, ещё обсуждает парламент (<a href="https://law.ch/lawnews/2025/02/a-post-plus-samstagzustellungen-fuehren-zum-beginn-des-fristenlaufs-am-sonntag/">law.ch</a>).</li>
+  <li>Поэтому <b>извещение в ящике не игнорируй</b>: забери письмо в тот же день или узнай на почте, от кого оно.</li>
+</ul>
+
+<h2 id="schet">Как считать срок</h2>
+<ul class="ul">
+  <li>День получения <b>не считается</b>. Срок 10 дней по письму, полученному в понедельник, начинается во вторник и кончается в четверг через неделю.</li>
+  <li>Последний день выпал на <b>субботу, воскресенье или праздник</b> — срок переносится на следующий рабочий день. Праздники считаются по кантону.</li>
+  <li><b>Ответ ведомству или суду</b>: достаточно сдать письмо на швейцарскую почту в последний день срока до её закрытия — важен штемпель. Возьми квитанцию.</li>
+  <li><b>Расторжение договора</b> (аренда, работа, страховка, подписка) — наоборот: письмо должно быть <b>получено</b> другой стороной до срока. Отправляй на несколько дней раньше.</li>
+  <li>Посчитать последний день с праздниками своего кантона поможет «<a href="https://svoiludi.ch/instrumenty/srok-pisma/">До какого числа ответить на письмо: калькулятор срока с праздниками кантона</a>», записать его — «Годовой календарь дел и сроков».</li>
+</ul>
+
+<h2 id="tipichnye">Типичные сроки</h2>
+<div class="tbl"><table>
+<thead><tr><th>Письмо</th><th>Срок на ответ</th></tr></thead>
+<tbody>
+<tr><td>Требование об оплате долга (Zahlungsbefehl) — возражение (Rechtsvorschlag)</td><td><b>10 дней</b></td></tr>
+<tr><td>Приказ о наказании прокуратуры (Strafbefehl) — возражение</td><td><b>10 дней</b></td></tr>
+<tr><td>Мелкий штраф (Ordnungsbusse) — оплатить</td><td>30 дней</td></tr>
+<tr><td>Решение о налоге (Veranlagung) — возражение (Einsprache)</td><td>30 дней</td></tr>
+<tr><td>Расторжение аренды или начальная аренда — оспорить</td><td>30 дней</td></tr>
+<tr><td>Повышение аренды — оспорить</td><td>30 дней</td></tr>
+<tr><td>Решение соцстраховок (AHV, IV, RAV, медстраховка) — возражение</td><td>обычно 30 дней</td></tr>
+<tr><td>Миграционная служба — письмо «можете высказаться» (rechtliches Gehör)</td><td>как указано в письме</td></tr>
+</tbody></table></div>
+<p>Всегда сверяй срок с Rechtsmittelbelehrung в своём письме — она главнее этой таблицы. Подробно: Betreibung — в теме «Долги в Швейцарии и Betreibung», штрафы — в теме «Штрафы и полиция», аренда — в теме «Договор аренды и ловушки».</p>
+
+<h2 id="otvet">Как ответить и попросить продление</h2>
+<ul class="ul">
+  <li>Отвечай <b>письменно</b>, на языке кантона, со своей подписью, указав номер дела (Referenz, Dossier-Nr.) из письма. Против Zahlungsbefehl и Strafbefehl причины писать не нужно; в других возражениях коротко объясни, с чем ты не согласна и почему.</li>
+  <li><b>Не понимаешь письмо</b> — сразу, не дожидаясь конца срока, иди с ним в общину, в социальную службу, к юристу или к переводчику. Специалистов, которые помогают с письмами и переводами, ищи в <a href="../../">справочнике «Свои люди»</a>.</li>
+  <li><b>Не успеваешь</b> — попроси продление (Fristerstreckung) письменно <b>до</b> конца срока. Это можно для сроков, которые назначило само ведомство; сроки из закона (например, 10 дней на Rechtsvorschlag) не продлевают.</li>
+  <li>Храни письмо, конверт с датой и копию ответа вместе.</li>
+</ul>
+
+<h2 id="otpusk">Если уезжаешь</h2>
+<ul class="ul">
+  <li>Уезжаешь дольше чем на неделю — дай доверенному человеку <b>почтовую доверенность</b> (Postvollmacht) или закажи <b>пересылку</b> или <b>хранение писем</b> на почте (<a href="https://www.post.ch">post.ch</a>).</li>
+  <li>Если у тебя открытое дело (налоги, суд, миграционная служба), сообщи заранее, что уезжаешь и куда писать, — иначе письмо может «считаться полученным» без тебя.</li>
+  <li>Важные адреса и номера дел семьи держи на одном листе — «Лист личных данных семьи: AHV, страховки, врачи».</li>
+</ul>
+''',
+    steps=[
+        'Увидела извещение в ящике — забери письмо в тот же день.',
+        'Найди в письме Rechtsmittelbelehrung: сколько дней и куда отвечать.',
+        'Посчитай последний день срока и запиши его в календарь.',
+        'Отвечай письменно и заказным, храни квитанцию и копию.',
+        'Не успеваешь — попроси продление до конца срока.',
+        'Перед отпуском — почтовая доверенность или хранение писем.',
+    ],
+    pomosh={'ids': ['anwalt', 'beob', 'gemeinde'], 't': 'С непонятным письмом бесплатно или недорого помогут справочная адвокатов, юридическая консультация Beobachter и община.'},
+    tools={'srok-pisma': 'Посчитай последний день срока по своему письму — с выходными и праздниками кантона.', 'moj-god': 'Сроки ответов на письма — в календаре на год, чтобы ничего не пропустить.', 'moi-dannye': 'Номера дел, страховок и ведомств семьи — на одном листе.'},
+    related=['betreibung', 'shtrafy', 'dogovor-arendy', 'nalogovaya-deklaraciya'],
+    sources=[
+        ('law.ch — письмо об отказе от аренды во время отпуска', 'https://law.ch/2017/08/mieter-in-den-ferien'),
+        ('law.ch — A-Post Plus и начало срока', 'https://law.ch/lawnews/2025/02/a-post-plus-samstagzustellungen-fuehren-zum-beginn-des-fristenlaufs-am-sonntag/'),
+        ('Швейцарская почта — заказные письма, доверенность, хранение', 'https://www.post.ch'),
+    ],
+    terms=[('Deutsch', 'Einschreiben, A-Post Plus, Abholungseinladung, Abholfrist, Zustellung, Frist, Fristbeginn, Fristerstreckung, Rechtsmittelbelehrung, Einsprache, Rekurs, Beschwerde, Verfügung, Entscheid, rechtliches Gehör, Poststempel, Postvollmacht, Nachsendeauftrag'), ('Français', 'recommandé, avis de retrait, délai de garde, notification, délai, prolongation de délai, voies de droit, opposition, recours, décision, droit d’être entendu, timbre postal, procuration postale, réexpédition'), ('Italiano', 'raccomandata, avviso di ritiro, notificazione, termine, proroga del termine, rimedi giuridici, opposizione, ricorso, decisione, diritto di essere sentito, timbro postale, procura postale'), ('English', 'registered mail, collection notice, service of documents, deadline, extension of time, notice of appeal rights, objection, appeal, decision, right to be heard, postmark, postal power of attorney, mail forwarding')],
+    post='Это возражения, расторжения и ответы ведомствам.',
+    post2='Для ответа ведомству важен день отправки — храни квитанцию; для расторжения — день получения, отправляй заранее.',
+)
+
+ARTICLES['shtrafy'] = dict(
+    h1='Штрафы и полиция в Швейцарии: <em>мелкие штрафы (Ordnungsbusse), скорость, Strafbefehl и пермит</em>',
+    seo='Штрафы в Швейцарии: Ordnungsbusse, превышение скорости, Strafbefehl — возражение за 10 дней',
+    desc='Штрафы в Швейцарии простыми словами на русском: мелкие штрафы (Ordnungsbusse) от 10 до 300 франков — оплатить за 30 дней, частями нельзя; таблица штрафов за превышение скорости в городе, за городом и на автобане; когда вместо штрафа заводят дело; приказ о наказании (Strafbefehl) — возражение за 10 дней; что попадает в реестр судимостей и как штрафы влияют на пермит и гражданство; права, если остановила полиция. По-немецки Busse, Ordnungsbusse, Strafbefehl, Einsprache, по-французски amende d’ordre, ordonnance pénale, opposition, по-итальянски multa disciplinare, decreto d’accusa, opposizione.',
+    lead='Большинство штрафов в Швейцарии — мелкие и без последствий, если заплатить вовремя. Но неоплаченный штраф дорожает, а приказ прокуратуры без возражения за 10 дней становится приговором. Здесь — как отличить одно от другого.',
+    body='''
+<nav class="toc" aria-label="Содержание"><b>В этой статье</b>
+<ul>
+  <li><a href="#melkie">Мелкие штрафы (Ordnungsbusse)</a></li>
+  <li><a href="#skorost">Превышение скорости</a></li>
+  <li><a href="#strafbefehl">Приказ о наказании (Strafbefehl)</a></li>
+  <li><a href="#posledstviya">Реестр, пермит и гражданство</a></li>
+  <li><a href="#politsiya">Если остановила полиция</a></li>
+</ul></nav>
+
+<h2 id="melkie">Мелкие штрафы (Ordnungsbusse)</h2>
+<ul class="ul">
+  <li>За мелкие нарушения — парковка, телефон за рулём, мусор не там, переход на красный — выписывают <b>фиксированный штраф от 10 до 300 франков</b> (<a href="https://www.beobachter.ch/gesetze-recht/so-werden-bagatelldelikte-geahndet-350890">Beobachter</a>).</li>
+  <li>Заплатить можно на месте или <b>в течение 30 дней</b>. <b>Частями нельзя.</b> Не заплатила вовремя — начинается обычное дело, и это дороже: добавляются расходы.</li>
+  <li>Несколько нарушений сразу на сумму больше 600 франков — тоже обычное дело.</li>
+  <li>Мелкие штрафы <b>никуда не записывают</b>, и прошлые штрафы не делают новые дороже.</li>
+  <li>Мусор не там (литтеринг) с 1 августа 2026 года по всей Швейцарии — 80 франков за мелочь, 150 и 250 — за мешок (смотри тему «Мусор и сортировка»). Проезд без билета — это не штраф полиции, а доплата транспортной компании (смотри тему «Транспорт, машина и права»).</li>
+</ul>
+
+<h2 id="skorost">Превышение скорости</h2>
+<p>Штрафы в франках после вычета допуска на погрешность прибора (<a href="https://www.ch.ch/de/geschwindigkeitsueberschreitungen">ch.ch</a>):</p>
+<div class="tbl"><table>
+<thead><tr><th>Больше разрешённого</th><th>В населённом пункте</th><th>За городом</th><th>Автобан</th></tr></thead>
+<tbody>
+<tr><td>1–5 км/ч</td><td>40</td><td>40</td><td>20</td></tr>
+<tr><td>6–10 км/ч</td><td>120</td><td>100</td><td>60</td></tr>
+<tr><td>11–15 км/ч</td><td>250</td><td>160</td><td>120</td></tr>
+<tr><td>16–20 км/ч</td><td>дело</td><td>240</td><td>180</td></tr>
+<tr><td>21–25 км/ч</td><td>дело</td><td>дело</td><td>260</td></tr>
+<tr><td>больше 25 км/ч</td><td>дело</td><td>дело</td><td>дело</td></tr>
+</tbody></table></div>
+<ul class="ul">
+  <li><b>«Дело»</b> (Anzeige) — штраф обычно от 400 франков плюс расходы, а дорожное ведомство может забрать права на время. За очень большое превышение (Raser) — уголовное дело, тюрьма до 4 лет и права на годы.</li>
+  <li>Пришло письмо о превышении, а за рулём была не ты — в письме есть форма, чтобы назвать водителя.</li>
+</ul>
+
+<h2 id="strafbefehl">Приказ о наказании (Strafbefehl)</h2>
+<ul class="ul">
+  <li>За более серьёзные нарушения прокуратура (Staatsanwaltschaft) выносит <b>Strafbefehl</b> — наказание без суда: штраф, денежное наказание (Geldstrafe) и расходы.</li>
+  <li><b>Возражение — в течение 10 дней</b>, письменно в прокуратуру, причины объяснять не обязательно. Нет возражения — Strafbefehl становится <b>приговором</b> (<a href="https://www.rechtsratgeber-rassismus.admin.ch/d292.pdf">справочник Федерации</a>).</li>
+  <li>Не согласна или не понимаешь — <b>подай возражение сразу</b>, а потом спокойно обсуди его с юристом: забрать возражение можно, а пропущенный срок не вернуть.</li>
+  <li>В уголовном деле у тебя есть право на бесплатного переводчика.</li>
+  <li><b>Не платить нельзя</b>: неоплаченный штраф может замениться днями ареста. Не можешь заплатить сразу — попроси рассрочку в ведомстве, которое прислало счёт.</li>
+</ul>
+
+<h2 id="posledstviya">Реестр, пермит и гражданство</h2>
+<ul class="ul">
+  <li>В реестр судимостей (Strafregister) <b>не попадают</b> штрафы за нарушения до 5000 франков — поэтому большинство дорожных штрафов там не видно (<a href="https://www.beobachter.ch/beratung/rechtsratgeber/strassenverkehr/strafen-fuer-verkehrsdelikte/strafverfahren-nach-verkehrsdelikten/verkehrsdelikte-im-strafregister">Beobachter</a>). Грубые нарушения — например, очень большое превышение или вождение с 0,8 промилле — записывают.</li>
+  <li><b>Пермит C и гражданство</b>: проверяют, соблюдаешь ли ты законы, — смотрят реестр, а при гражданстве ещё и неоплаченные штрафы и долги. Оплаченный мелкий штраф не мешает.</li>
+  <li>Серьёзные преступления могут стоить пермита. Получила Strafbefehl или повестку и у тебя пермит B, L, F или статус S — сразу к юристу по миграционному праву.</li>
+</ul>
+
+<h2 id="politsiya">Если остановила полиция</h2>
+<ul class="ul">
+  <li>Спокойно покажи документы. За рулём обязательно иметь при себе права и документы на машину. Пермит лучше всегда носить с собой: без документов полиция может задержать до выяснения личности.</li>
+  <li>Тест на алкоголь — обязателен. Отказ от теста наказывают как вождение в сильном опьянении.</li>
+  <li>На допросе ты вправе <b>молчать</b>, позвать адвоката и требовать переводчика. Ничего не подписывай, если не понимаешь текст.</li>
+  <li>Номера экстренной помощи — 117 (полиция), 112 — в «Карточка экстренных номеров и дежурного врача».</li>
+</ul>
+''',
+    steps=[
+        'Мелкий штраф — оплати целиком в течение 30 дней.',
+        'Получила Strafbefehl — возражение в прокуратуру в течение 10 дней, если не согласна.',
+        'Не понимаешь письмо — сразу к юристу, не жди конца срока.',
+        'Не можешь заплатить — попроси рассрочку, не игнорируй счёт.',
+        'У тебя пермит B, L, F или статус S и серьёзное дело — к юристу по миграционному праву.',
+    ],
+    pomosh={'ids': ['anwalt', 'beob', 'tcs', 'rs'], 't': 'Со Strafbefehl и дорожными делами помогут справочная адвокатов, Beobachter, автомобильные клубы и страховка юридической защиты.'},
+    tools={'srok-pisma': 'До какого числа возразить против Strafbefehl или оплатить штраф — с выходными и праздниками кантона.', 'moj-budget': 'Отложи деньги на штрафы и расходы машины — в бюджете на месяц.'},
+    related=['transport', 'pisma-sroki', 'permit-c', 'grazhdanstvo'],
+    sources=[
+        ('Beobachter — мелкие штрафы (Ordnungsbussen)', 'https://www.beobachter.ch/gesetze-recht/so-werden-bagatelldelikte-geahndet-350890'),
+        ('ch.ch — штрафы за превышение скорости', 'https://www.ch.ch/de/geschwindigkeitsueberschreitungen'),
+        ('Федеральный справочник — Strafbefehl и возражение', 'https://www.rechtsratgeber-rassismus.admin.ch/d292.pdf'),
+        ('Beobachter — дорожные нарушения в реестре судимостей', 'https://www.beobachter.ch/beratung/rechtsratgeber/strassenverkehr/strafen-fuer-verkehrsdelikte/strafverfahren-nach-verkehrsdelikten/verkehrsdelikte-im-strafregister'),
+    ],
+    terms=[('Deutsch', 'Busse, Ordnungsbusse, Parkbusse, Geschwindigkeitsübertretung, Anzeige, Verzeigung, Strafbefehl, Einsprache, Staatsanwaltschaft, Geldstrafe, Ersatzfreiheitsstrafe, Strafregister, Strafregisterauszug, Führerausweisentzug, Aussageverweigerungsrecht, Dolmetscher'), ('Français', 'amende, amende d’ordre, excès de vitesse, dénonciation, ordonnance pénale, opposition, ministère public, peine pécuniaire, casier judiciaire, extrait du casier judiciaire, retrait de permis, droit de se taire, interprète'), ('Italiano', 'multa, multa disciplinare, eccesso di velocità, denuncia, decreto d’accusa, opposizione, ministero pubblico, pena pecuniaria, casellario giudiziale, revoca della licenza di condurre, diritto di non rispondere, interprete'), ('English', 'fine, fixed penalty, speeding, report to the prosecutor, penalty order, objection, public prosecutor, monetary penalty, criminal record, driving licence withdrawal, right to remain silent, interpreter')],
+    post='Это возражение против Strafbefehl и ответы прокуратуре.',
+    post2='Для возражения важен день отправки — храни квитанцию.',
 )
