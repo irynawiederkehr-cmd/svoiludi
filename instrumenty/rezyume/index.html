@@ -51,8 +51,8 @@ select:focus-visible,input:focus-visible,button:focus-visible,textarea:focus-vis
 ::placeholder{color:color-mix(in srgb,var(--muted) 70%,transparent)}
 
 /* панель настроек */
-.setup{background:var(--paper);border:1.5px solid var(--line);border-radius:22px;padding:16px 18px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px 18px;align-items:start}
-@media (max-width:980px){.setup{grid-template-columns:1fr 1fr}}
+.setup{background:var(--paper);border:1.5px solid var(--line);border-radius:22px;padding:16px 18px;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px 18px;align-items:start}
+@media (max-width:1100px){.setup{grid-template-columns:1fr 1fr}}
 @media (max-width:560px){.setup{grid-template-columns:1fr}}
 .fl{display:flex;flex-direction:column;gap:6px;min-width:0}
 .fl>.lb{font-size:.8rem;font-weight:700;color:var(--muted);display:flex;align-items:center}
@@ -93,6 +93,14 @@ select:focus-visible,input:focus-visible,button:focus-visible,textarea:focus-vis
 .ib:hover{border-color:var(--brown)}
 .chk{display:flex;align-items:center;gap:8px;font-size:.88rem;font-weight:600}
 .chk input{width:18px;height:18px;accent-color:var(--sage)}
+input[type=date]{font:inherit;font-size:.95rem;color:var(--ink);background:var(--paper);border:1.5px solid var(--line);border-radius:12px;padding:8px 12px;width:100%;min-width:0}
+.dsel{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:6px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chips button{font:inherit;font-size:.8rem;font-weight:600;border:1.5px solid var(--line);background:var(--paper);color:var(--ink);border-radius:999px;padding:4px 10px;cursor:pointer}
+.chips button[aria-pressed="true"]{background:var(--sage-soft);border-color:var(--sage);color:var(--ink)}
+.chips button[aria-pressed="true"]::before{content:"✓ ";color:var(--sage)}
+.boxes{display:flex;flex-wrap:wrap;gap:6px 14px}
+.boxes .chk{font-weight:600}
 
 /* живой лист */
 .sheet{position:sticky;top:12px;display:flex;flex-direction:column;gap:10px;min-width:0}
@@ -133,14 +141,16 @@ select:focus-visible,input:focus-visible,button:focus-visible,textarea:focus-vis
   <section class="howto" aria-labelledby="ht-h">
     <h2 id="ht-h">Как пользоваться</h2>
     <ol class="hsteps">
-      <li><b>Выбери язык резюме.</b> Пиши тексты сразу на этом языке. Заголовки, даты, уровни языков и пермит переведутся сами.</li>
-      <li><b>Заполни разделы.</b> Лист рядом меняется сразу, так будет выглядеть PDF.</li>
+      <li><b>Выбери кантон, где ищешь работу.</b> Язык резюме выберется сам. Пиши тексты сразу на этом языке. Заголовки, даты, уровни языков и пермит переведутся сами.</li>
+      <li><b>Заполни разделы.</b> Почти всё выбирается из списков: даты, гражданство, семейное положение, права, уровень образования, языки и сертификаты. Лист рядом меняется сразу, так будет выглядеть PDF.</li>
       <li><b>Выбери шаблон и цвет.</b> Для банков и госслужбы подходит «Строгий», для остальных «С колонкой» или «Классика».</li>
       <li><b>Скачай PDF</b> и прикрепи его к письму или к отклику на сайте вакансий. На телефоне кнопка «Отправить» сразу открывает почту и мессенджеры.</li>
     </ol>
   </section>
 
   <section class="setup" aria-label="Настройки резюме">
+    <div class="fl"><span class="lb">Где ищешь работу<button type="button" class="qh" data-help="canton" aria-label="Подсказка: где ищешь работу" aria-expanded="false">?</button></span>
+      <select id="canton"><option value="">Выбери кантон</option></select></div>
     <div class="fl"><span class="lb">Язык резюме<button type="button" class="qh" data-help="lang" aria-label="Подсказка: язык резюме" aria-expanded="false">?</button></span>
       <select id="lang">
         <option value="de">Deutsch — немецкий</option><option value="fr">Français — французский</option><option value="it">Italiano — итальянский</option>
@@ -179,17 +189,25 @@ select:focus-visible,input:focus-visible,button:focus-visible,textarea:focus-vis
         <label class="fl"><span class="lb">Профессия или должность<button type="button" class="qh" data-help="title" aria-label="Подсказка: профессия" aria-expanded="false">?</button></span><input type="text" data-f="p.title" placeholder="Finanzanalystin"></label>
         <div class="g2">
           <label class="fl"><span class="lb">Улица и номер дома</span><input type="text" data-f="p.street" autocomplete="street-address" placeholder="Musterstrasse 12"></label>
-          <label class="fl"><span class="lb">Индекс и город</span><input type="text" data-f="p.city" placeholder="8000 Zürich"></label>
+          <div class="g2" style="grid-template-columns:minmax(0,.7fr) minmax(0,1.3fr);gap:8px">
+            <label class="fl"><span class="lb">Индекс</span><input type="text" data-f="p.zip" autocomplete="postal-code" inputmode="numeric" maxlength="6" placeholder="8000"></label>
+            <label class="fl"><span class="lb">Город</span><input type="text" data-f="p.town" list="dl-chtown" autocomplete="address-level2" placeholder="Zürich"></label>
+          </div>
           <label class="fl"><span class="lb">Телефон</span><input type="tel" data-f="p.phone" autocomplete="tel" placeholder="+41 79 000 00 00"></label>
-          <label class="fl"><span class="lb">E-mail</span><input type="email" data-f="p.email" autocomplete="email" placeholder="vorname.name@gmail.com"></label>
+          <label class="fl"><span class="lb">E-mail<button type="button" class="qh" data-help="email" aria-label="Подсказка: e-mail" aria-expanded="false">?</button></span><input type="email" data-f="p.email" autocomplete="email" placeholder="vorname.name@gmail.com"></label>
           <label class="fl"><span class="lb">LinkedIn или сайт (если есть)</span><input type="text" data-f="p.web" placeholder="linkedin.com/in/…"></label>
-          <label class="fl"><span class="lb">Дата рождения<button type="button" class="qh" data-help="birth" aria-label="Подсказка: дата рождения" aria-expanded="false">?</button></span><input type="text" data-f="p.birth" inputmode="numeric" placeholder="14.05.1990"></label>
-          <label class="fl"><span class="lb">Гражданство</span><input type="text" data-f="p.nat" placeholder="Ukrainisch"></label>
+          <label class="fl"><span class="lb">Дата рождения<button type="button" class="qh" data-help="birth" aria-label="Подсказка: дата рождения" aria-expanded="false">?</button></span><input type="date" data-f="p.birth" min="1940-01-01" max="2012-12-31"></label>
+          <label class="fl"><span class="lb">Гражданство</span><select data-f="p.natc" id="natc"></select></label>
+          <label class="fl" id="natc2w"><span class="lb">Второе гражданство (если есть)</span><select data-f="p.natc2" id="natc2"></select></label>
+          <label class="fl" id="natow" hidden><span class="lb">Гражданство на языке резюме</span><input type="text" data-f="p.nat" placeholder="Georgien"></label>
           <label class="fl"><span class="lb">Разрешение в Швейцарии<button type="button" class="qh" data-help="permit" aria-label="Подсказка: разрешение" aria-expanded="false">?</button></span>
             <select data-f="p.permit"><option value="">Не указывать</option><option value="CH">Гражданство Швейцарии</option><option value="C">Пермит C</option><option value="B">Пермит B</option><option value="L">Пермит L</option><option value="G">Пермит G</option><option value="S">Статус S</option><option value="F">Статус F</option></select></label>
-          <label class="fl"><span class="lb">Семейное положение (если хочешь)</span><input type="text" data-f="p.civil" placeholder="verheiratet, 2 Kinder"></label>
-          <label class="fl"><span class="lb">Водительские права (если есть)</span><input type="text" data-f="p.drive" placeholder="Kat. B"></label>
+          <label class="fl"><span class="lb">Семейное положение<button type="button" class="qh" data-help="civil" aria-label="Подсказка: семейное положение" aria-expanded="false">?</button></span><select data-f="p.civc" id="civc"></select></label>
+          <label class="fl"><span class="lb">Дети</span><select data-f="p.kids" id="kids"><option value="">Не указывать</option><option value="0">Нет детей</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option></select></label>
+          <label class="fl" id="sexw" hidden><span class="lb">Слова в резюме<button type="button" class="qh" data-help="sex" aria-label="Подсказка: род слов" aria-expanded="false">?</button></span><select data-f="p.sex"><option value="f">женский род (замужем)</option><option value="m">мужской род (женат)</option></select></label>
         </div>
+        <div class="fl"><span class="lb">Водительские права<button type="button" class="qh" data-help="drive" aria-label="Подсказка: права" aria-expanded="false">?</button></span>
+          <div class="boxes" id="dk"></div></div>
       </div></details>
 
       <details class="sec" open><summary><span class="num">2</span>Коротко о себе</summary><div class="body">
@@ -198,7 +216,7 @@ select:focus-visible,input:focus-visible,button:focus-visible,textarea:focus-vis
       </div></details>
 
       <details class="sec" open><summary><span class="num">3</span>Опыт работы<span class="cnt" id="c-exp"></span></summary><div class="body">
-        <p class="hint">Сначала последняя работа. Даты пиши как 03.2021 или просто 2021.</p>
+        <p class="hint">Сначала последняя работа. Месяц можно не выбирать, тогда будет только год.</p>
         <div id="l-exp" class="fl"></div>
         <div class="acts"><button type="button" class="btn ghost sm" data-add="exp">+ Добавить место работы</button></div>
       </div></details>
@@ -222,7 +240,9 @@ select:focus-visible,input:focus-visible,button:focus-visible,textarea:focus-vis
       <details class="sec"><summary><span class="num">7</span>Навыки и интересы</summary><div class="body">
         <label class="fl"><span class="lb">Навыки, программы, сертификаты<button type="button" class="qh" data-help="skills" aria-label="Подсказка: навыки" aria-expanded="false">?</button></span>
           <textarea data-f="skills" rows="3" placeholder="MS Excel (sehr gut), SAP FI/CO, Power BI&#10;Budgetierung, Forecasting, Reporting"></textarea></label>
+        <div class="fl"><span class="lb">Нажми, чтобы добавить или убрать</span><div class="chips" id="ch-skills"></div></div>
         <label class="fl"><span class="lb">Интересы (если хочешь)</span><input type="text" data-f="interests" placeholder="Wandern, Fotografie, Freiwilligenarbeit"></label>
+        <div class="fl"><span class="lb">Нажми, чтобы добавить на языке резюме</span><div class="chips" id="ch-int"></div></div>
       </div></details>
 
       <details class="sec"><summary><span class="num">8</span>Рекомендации</summary><div class="body">
@@ -232,6 +252,7 @@ select:focus-visible,input:focus-visible,button:focus-visible,textarea:focus-vis
       </div></details>
     </div>
 
+    <datalist id="dl-chtown"></datalist><datalist id="dl-place"></datalist><datalist id="dl-school"></datalist>
     <aside class="sheet" id="sheet" aria-label="Так выглядит резюме">
       <div class="sheet-h"><span class="eyebrow" id="pginfo">Так выглядит PDF</span><button type="button" class="btn free sm" id="pdf2">Скачать PDF</button></div>
       <div class="pages" id="pages"></div>
@@ -264,11 +285,11 @@ select:focus-visible,input:focus-visible,button:focus-visible,textarea:focus-vis
 /* ===================== данные ===================== */
 const KEY = 'rezyumeCH.v1';
 const COLORS = {sage: ['#4F5E3E', '#E6EADD', 'Шалфей'], blue: ['#2E5A88', '#E3EBF4', 'Синий'], wine: ['#7A2E3A', '#F3E4E6', 'Бордо'], gold: ['#9A6B12', '#F5EBD6', 'Горчица'], ink: ['#2B2724', '#ECEAE7', 'Чёрно-белый']};
-const blank = () => ({lang: 'de', tpl: 'kolonka', color: 'sage', photoOn: true, photo: '', refReq: true,
-  p: {first: '', last: '', title: '', street: '', city: '', phone: '', email: '', web: '', birth: '', nat: '', permit: '', civil: '', drive: ''},
+const blank = () => ({lang: 'de', canton: '', tpl: 'kolonka', color: 'sage', photoOn: true, photo: '', refReq: true,
+  p: {first: '', last: '', title: '', street: '', zip: '', town: '', phone: '', email: '', web: '', birth: '', natc: '', natc2: '', nat: '', permit: '', civc: '', kids: '', sex: 'f', dk: [], car: false},
   profile: '', exp: [], edu: [], trn: [], lng: [], skills: '', interests: '', ref: [], saved: ''});
 let S = load(), EX = null, showEx = false;
-function load(){ try { const d = JSON.parse(localStorage.getItem(KEY) || 'null'); if (d && d.p) return Object.assign(blank(), d); } catch (e) {} return blank(); }
+function load(){ try { const d = JSON.parse(localStorage.getItem(KEY) || 'null'); if (d && d.p){ const b = blank(); return Object.assign(b, d, {p: Object.assign(b.p, d.p)}); } } catch (e) {} return blank(); }
 let saveT = 0;
 function save(){ clearTimeout(saveT); saveT = setTimeout(() => { try { S.saved = new Date().toISOString(); localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) { say('Не удалось сохранить на этом устройстве. Скачай PDF или сохрани резервную копию.'); } }, 250); }
 const say = t => { const s = document.getElementById('status'); s.textContent = t; clearTimeout(say.t); if (t) say.t = setTimeout(() => s.textContent = '', 6000); };
@@ -320,6 +341,84 @@ const LN = {
 const LNI = {de: 2, fr: 3, it: 4, en: 5, ru: 6, uk: 7};
 const LN_RU = {de: 'Немецкий', fr: 'Французский', it: 'Итальянский', en: 'Английский', ru: 'Русский', uk: 'Украинский', es: 'Испанский', pt: 'Португальский', pl: 'Польский', ro: 'Румынский', tr: 'Турецкий', ar: 'Арабский'};
 const langName = (code, other, cvl) => code === 'other' ? (other || '') : (LN[code] ? LN[code][LNI[cvl]] : '');
+const LI = {de: 0, fr: 1, it: 2, en: 3, ru: 4, uk: 5};
+/* сертификаты по языку: названия не переводятся */
+const CERTS = {de: ['fide', 'Goethe-Zertifikat', 'telc', 'ÖSD', 'TestDaF', 'DSH'], fr: ['fide', 'DELF', 'DALF', 'TCF', 'TEF'], it: ['fide', 'CILS', 'CELI', 'PLIDA'], en: ['Cambridge English', 'IELTS', 'TOEFL', 'telc']};
+/* кантоны: язык резюме по умолчанию, второй язык для двуязычных */
+const CANTONS = [['ZH', 'Цюрих', 'de'], ['BE', 'Берн', 'de', 'fr'], ['LU', 'Люцерн', 'de'], ['UR', 'Ури', 'de'], ['SZ', 'Швиц', 'de'], ['OW', 'Обвальден', 'de'], ['NW', 'Нидвальден', 'de'], ['GL', 'Гларус', 'de'], ['ZG', 'Цуг', 'de'], ['FR', 'Фрибур', 'fr', 'de'], ['SO', 'Золотурн', 'de'], ['BS', 'Базель-Штадт', 'de'], ['BL', 'Базель-Ланд', 'de'], ['SH', 'Шаффхаузен', 'de'], ['AR', 'Аппенцелль-Ауссерроден', 'de'], ['AI', 'Аппенцелль-Иннерроден', 'de'], ['SG', 'Санкт-Галлен', 'de'], ['GR', 'Граубюнден', 'de', 'it'], ['AG', 'Аргау', 'de'], ['TG', 'Тургау', 'de'], ['TI', 'Тичино', 'it'], ['VD', 'Во (Лозанна)', 'fr'], ['VS', 'Вале', 'fr', 'de'], ['NE', 'Невшатель', 'fr'], ['GE', 'Женева', 'fr'], ['JU', 'Юра', 'fr']];
+const LANG_RU = {de: 'немецкий', fr: 'французский', it: 'итальянский', en: 'английский'};
+/* страны: ru-название в анкете, затем de, fr, it, en, ru, uk */
+const NAT = {
+ ua: ['Украина', 'Ukraine', 'Ukraine', 'Ucraina', 'Ukraine', 'Украина', 'Україна'], ru: ['Россия', 'Russland', 'Russie', 'Russia', 'Russia', 'Россия', 'Росія'],
+ by: ['Беларусь', 'Belarus', 'Biélorussie', 'Bielorussia', 'Belarus', 'Беларусь', 'Білорусь'], md: ['Молдова', 'Moldau', 'Moldavie', 'Moldavia', 'Moldova', 'Молдова', 'Молдова'],
+ kz: ['Казахстан', 'Kasachstan', 'Kazakhstan', 'Kazakistan', 'Kazakhstan', 'Казахстан', 'Казахстан'], ge: ['Грузия', 'Georgien', 'Géorgie', 'Georgia', 'Georgia', 'Грузия', 'Грузія'],
+ am: ['Армения', 'Armenien', 'Arménie', 'Armenia', 'Armenia', 'Армения', 'Вірменія'], az: ['Азербайджан', 'Aserbaidschan', 'Azerbaïdjan', 'Azerbaigian', 'Azerbaijan', 'Азербайджан', 'Азербайджан'],
+ uz: ['Узбекистан', 'Usbekistan', 'Ouzbékistan', 'Uzbekistan', 'Uzbekistan', 'Узбекистан', 'Узбекистан'], kg: ['Кыргызстан', 'Kirgisistan', 'Kirghizistan', 'Kirghizistan', 'Kyrgyzstan', 'Кыргызстан', 'Киргизстан'],
+ lv: ['Латвия', 'Lettland', 'Lettonie', 'Lettonia', 'Latvia', 'Латвия', 'Латвія'], lt: ['Литва', 'Litauen', 'Lituanie', 'Lituania', 'Lithuania', 'Литва', 'Литва'], ee: ['Эстония', 'Estland', 'Estonie', 'Estonia', 'Estonia', 'Эстония', 'Естонія'],
+ il: ['Израиль', 'Israel', 'Israël', 'Israele', 'Israel', 'Израиль', 'Ізраїль'], pl: ['Польша', 'Polen', 'Pologne', 'Polonia', 'Poland', 'Польша', 'Польща'],
+ de: ['Германия', 'Deutschland', 'Allemagne', 'Germania', 'Germany', 'Германия', 'Німеччина'], at: ['Австрия', 'Österreich', 'Autriche', 'Austria', 'Austria', 'Австрия', 'Австрія'],
+ it: ['Италия', 'Italien', 'Italie', 'Italia', 'Italy', 'Италия', 'Італія'], fr: ['Франция', 'Frankreich', 'France', 'Francia', 'France', 'Франция', 'Франція'],
+ es: ['Испания', 'Spanien', 'Espagne', 'Spagna', 'Spain', 'Испания', 'Іспанія'], pt: ['Португалия', 'Portugal', 'Portugal', 'Portogallo', 'Portugal', 'Португалия', 'Португалія'],
+ ch: ['Швейцария', 'Schweiz', 'Suisse', 'Svizzera', 'Switzerland', 'Швейцария', 'Швейцарія']
+};
+const natName = (c, cvl) => NAT[c] ? NAT[c][LI[cvl] + 1] : '';
+/* семейное положение: [анкета, de, en, fr ж/м, it ж/м, ru ж/м, uk ж/м] */
+const CIV = {
+ single: ['Не в браке', 'ledig', 'single', ['célibataire', 'célibataire'], ['nubile', 'celibe'], ['не замужем', 'не женат'], ['не заміжня', 'неодружений']],
+ married: ['В браке', 'verheiratet', 'married', ['mariée', 'marié'], ['coniugata', 'coniugato'], ['замужем', 'женат'], ['заміжня', 'одружений']],
+ partner: ['Зарегистрированное партнёрство', 'in eingetragener Partnerschaft', 'registered partnership', ['partenariat enregistré', 'partenariat enregistré'], ['unione domestica registrata', 'unione domestica registrata'], ['зарегистрированное партнёрство', 'зарегистрированное партнёрство'], ['зареєстроване партнерство', 'зареєстроване партнерство']],
+ divorced: ['В разводе', 'geschieden', 'divorced', ['divorcée', 'divorcé'], ['divorziata', 'divorziato'], ['в разводе', 'в разводе'], ['розлучена', 'розлучений']],
+ separated: ['Живём раздельно', 'getrennt', 'separated', ['séparée', 'séparé'], ['separata', 'separato'], ['живём раздельно', 'живём раздельно'], ['живемо окремо', 'живемо окремо']],
+ widowed: ['Вдова / вдовец', 'verwitwet', 'widowed', ['veuve', 'veuf'], ['vedova', 'vedovo'], ['вдова', 'вдовец'], ['вдова', 'вдівець']]
+};
+function civName(c, sex, cvl){ const r = CIV[c]; if (!r) return ''; const i = sex === 'm' ? 1 : 0; return {de: r[1], en: r[2], fr: r[3][i], it: r[4][i], ru: r[5][i], uk: r[6][i]}[cvl]; }
+function kidsName(n, cvl){
+  if (n === '' || n == null) return ''; n = +n;
+  const sl = (a, b, c) => { const m10 = n % 10, m100 = n % 100; return m10 === 1 && m100 !== 11 ? a : (m10 >= 2 && m10 <= 4 && (m100 < 12 || m100 > 14) ? b : c); };
+  if (!n) return {de: 'keine Kinder', fr: 'sans enfants', it: 'senza figli', en: 'no children', ru: 'без детей', uk: 'без дітей'}[cvl];
+  return {de: n === 1 ? '1 Kind' : n + ' Kinder', fr: n === 1 ? '1 enfant' : n + ' enfants', it: n === 1 ? '1 figlio' : n + ' figli', en: n === 1 ? '1 child' : n + ' children', ru: n + ' ' + sl('ребёнок', 'ребёнка', 'детей'), uk: n + ' ' + sl('дитина', 'дитини', 'дітей')}[cvl];
+}
+const DK = ['A1', 'A', 'B', 'BE', 'C1', 'C', 'CE', 'D1', 'D'];
+const DKP = {de: 'Kat.', fr: 'Cat.', it: 'Cat.', en: 'Category', ru: 'кат.', uk: 'кат.'};
+const CAR = {de: 'eigenes Auto', fr: 'véhicule personnel', it: 'auto propria', en: 'own car', ru: 'есть автомобиль', uk: 'є автомобіль'};
+/* вид работы и образование */
+const JOBT = {temp: ['Временная (через агентство)', 'Temporäreinsatz', 'mission temporaire', 'impiego temporaneo', 'temporary assignment', 'временная работа', 'тимчасова робота'],
+  intern: ['Стажировка, практика', 'Praktikum', 'stage', 'stage', 'internship', 'стажировка', 'стажування'],
+  self: ['Своё дело, самозанятость', 'selbständig', 'indépendante', 'lavoro autonomo', 'self-employed', 'своё дело', 'власна справа'],
+  vol: ['Волонтёрство', 'Freiwilligenarbeit', 'bénévolat', 'volontariato', 'volunteer work', 'волонтёрство', 'волонтерство'],
+  appr: ['Обучение профессии (Lehre)', 'Lehre', 'apprentissage', 'apprendistato', 'apprenticeship', 'обучение профессии (Lehre)', 'навчання професії (Lehre)']};
+const DEG = {school: ['Школа, аттестат', 'Schulabschluss', 'Diplôme de fin d’études secondaires', 'Diploma di scuola secondaria', 'Secondary school diploma', 'Среднее образование', 'Середня освіта'],
+  voc: ['Колледж, техникум, училище', 'Berufsausbildung', 'Formation professionnelle', 'Formazione professionale', 'Vocational training', 'Среднее специальное образование', 'Фахова освіта'],
+  efz: ['Швейцарская профессия (EFZ / CFC)', 'Eidg. Fähigkeitszeugnis (EFZ)', 'Certificat fédéral de capacité (CFC)', 'Attestato federale di capacità (AFC)', 'Federal VET Diploma (EFZ)', 'Швейцарский диплом профессии (EFZ)', 'Швейцарський диплом професії (EFZ)'],
+  bachelor: ['Бакалавр', 'Bachelor', 'Bachelor', 'Bachelor', 'Bachelor’s degree', 'Бакалавр', 'Бакалавр'],
+  spec: ['Специалист (5 лет)', 'Diplom (Spezialist)', 'Diplôme de spécialiste', 'Diploma di specialista', 'Specialist degree', 'Специалист', 'Спеціаліст'],
+  master: ['Магистр', 'Master', 'Master', 'Master', 'Master’s degree', 'Магистр', 'Магістр'],
+  phd: ['Кандидат или доктор наук, PhD', 'Doktorat (PhD)', 'Doctorat (PhD)', 'Dottorato (PhD)', 'PhD', 'Кандидат наук (PhD)', 'Кандидат наук (PhD)']};
+const tr = (row, cvl) => row ? row[LI[cvl] + 1] : '';
+const MON = ['январь', 'февраль', 'март', 'апрель', 'май', 'июнь', 'июль', 'август', 'сентябрь', 'октябрь', 'ноябрь', 'декабрь'];
+const YNOW = new Date().getFullYear();
+/* города: в адресе официальные названия, в опыте работы на языке резюме [de, fr, it, en, ru, uk] */
+const CH_TOWNS = ['Zürich', 'Genève', 'Basel', 'Lausanne', 'Bern', 'Winterthur', 'Luzern', 'St. Gallen', 'Lugano', 'Biel/Bienne', 'Thun', 'Köniz', 'La Chaux-de-Fonds', 'Fribourg', 'Schaffhausen', 'Chur', 'Vernier', 'Neuchâtel', 'Uster', 'Sion', 'Lancy', 'Emmen', 'Kriens', 'Yverdon-les-Bains', 'Zug', 'Dübendorf', 'Montreux', 'Dietikon', 'Rapperswil-Jona', 'Frauenfeld', 'Wetzikon', 'Baar', 'Meyrin', 'Wädenswil', 'Carouge', 'Kloten', 'Renens', 'Aarau', 'Wil', 'Baden', 'Bülach', 'Nyon', 'Vevey', 'Olten', 'Solothurn', 'Bellinzona', 'Locarno', 'Horgen', 'Thalwil', 'Opfikon', 'Wallisellen', 'Regensdorf', 'Adliswil', 'Liestal', 'Allschwil', 'Muttenz', 'Pratteln', 'Riehen', 'Herisau', 'Delémont', 'Martigny', 'Monthey', 'Sierre', 'Morges', 'Pully', 'Gland', 'Bulle', 'Burgdorf', 'Langenthal', 'Spiez', 'Interlaken', 'Glarus', 'Schwyz', 'Altdorf', 'Sarnen', 'Stans', 'Appenzell', 'Davos', 'St. Moritz', 'Mendrisio', 'Chiasso', 'Kreuzlingen', 'Arbon', 'Rorschach', 'Buchs', 'Wohlen', 'Zofingen', 'Brugg', 'Rheinfelden', 'Einsiedeln', 'Küsnacht', 'Meilen', 'Stäfa', 'Volketswil', 'Illnau-Effretikon', 'Lufingen', 'Embrach'];
+const PLACES = [['Zürich', 'Zurich', 'Zurigo', 'Zurich', 'Цюрих', 'Цюрих'], ['Genf', 'Genève', 'Ginevra', 'Geneva', 'Женева', 'Женева'], ['Bern', 'Berne', 'Berna', 'Bern', 'Берн', 'Берн'], ['Basel', 'Bâle', 'Basilea', 'Basel', 'Базель', 'Базель'], ['Lausanne', 'Lausanne', 'Losanna', 'Lausanne', 'Лозанна', 'Лозанна'], ['Luzern', 'Lucerne', 'Lucerna', 'Lucerne', 'Люцерн', 'Люцерн'], ['Winterthur', 'Winterthour', 'Winterthur', 'Winterthur', 'Винтертур', 'Вінтертур'], ['St. Gallen', 'Saint-Gall', 'San Gallo', 'St. Gallen', 'Санкт-Галлен', 'Санкт-Галлен'], ['Lugano', 'Lugano', 'Lugano', 'Lugano', 'Лугано', 'Лугано'], ['Zug', 'Zoug', 'Zugo', 'Zug', 'Цуг', 'Цуг'], ['Freiburg', 'Fribourg', 'Friburgo', 'Fribourg', 'Фрибур', 'Фрібур'], ['Neuenburg', 'Neuchâtel', 'Neuchâtel', 'Neuchâtel', 'Невшатель', 'Невшатель'], ['Sitten', 'Sion', 'Sion', 'Sion', 'Сьон', 'Сьйон'], ['Chur', 'Coire', 'Coira', 'Chur', 'Кур', 'Кур'], ['Schaffhausen', 'Schaffhouse', 'Sciaffusa', 'Schaffhausen', 'Шаффхаузен', 'Шаффгаузен'], ['Aarau', 'Aarau', 'Aarau', 'Aarau', 'Аарау', 'Аарау'], ['Solothurn', 'Soleure', 'Soletta', 'Solothurn', 'Золотурн', 'Золотурн'], ['Baden', 'Baden', 'Baden', 'Baden', 'Баден', 'Баден'], ['Biel/Bienne', 'Bienne', 'Bienne', 'Biel/Bienne', 'Биль', 'Біль'], ['Thun', 'Thoune', 'Thun', 'Thun', 'Тун', 'Тун'], ['Bellinzona', 'Bellinzone', 'Bellinzona', 'Bellinzona', 'Беллинцона', 'Беллінцона'], ['Montreux', 'Montreux', 'Montreux', 'Montreux', 'Монтрё', 'Монтре'], ['Nyon', 'Nyon', 'Nyon', 'Nyon', 'Ньон', 'Ньон'], ['Kloten', 'Kloten', 'Kloten', 'Kloten', 'Клотен', 'Клотен'],
+  ['Kyjiw, Ukraine', 'Kyiv, Ukraine', 'Kyiv, Ucraina', 'Kyiv, Ukraine', 'Киев, Украина', 'Київ, Україна'], ['Charkiw, Ukraine', 'Kharkiv, Ukraine', 'Kharkiv, Ucraina', 'Kharkiv, Ukraine', 'Харьков, Украина', 'Харків, Україна'], ['Odessa, Ukraine', 'Odessa, Ukraine', 'Odessa, Ucraina', 'Odesa, Ukraine', 'Одесса, Украина', 'Одеса, Україна'], ['Dnipro, Ukraine', 'Dnipro, Ukraine', 'Dnipro, Ucraina', 'Dnipro, Ukraine', 'Днепр, Украина', 'Дніпро, Україна'], ['Lwiw, Ukraine', 'Lviv, Ukraine', 'Leopoli, Ucraina', 'Lviv, Ukraine', 'Львов, Украина', 'Львів, Україна'], ['Saporischschja, Ukraine', 'Zaporijjia, Ukraine', 'Zaporižžja, Ucraina', 'Zaporizhzhia, Ukraine', 'Запорожье, Украина', 'Запоріжжя, Україна'], ['Winnyzja, Ukraine', 'Vinnytsia, Ukraine', 'Vinnycja, Ucraina', 'Vinnytsia, Ukraine', 'Винница, Украина', 'Вінниця, Україна'], ['Mykolajiw, Ukraine', 'Mykolaïv, Ukraine', 'Mykolaïv, Ucraina', 'Mykolaiv, Ukraine', 'Николаев, Украина', 'Миколаїв, Україна'], ['Cherson, Ukraine', 'Kherson, Ukraine', 'Cherson, Ucraina', 'Kherson, Ukraine', 'Херсон, Украина', 'Херсон, Україна'], ['Poltawa, Ukraine', 'Poltava, Ukraine', 'Poltava, Ucraina', 'Poltava, Ukraine', 'Полтава, Украина', 'Полтава, Україна'], ['Tschernihiw, Ukraine', 'Tchernihiv, Ukraine', 'Černihiv, Ucraina', 'Chernihiv, Ukraine', 'Чернигов, Украина', 'Чернігів, Україна'], ['Iwano-Frankiwsk, Ukraine', 'Ivano-Frankivsk, Ukraine', 'Ivano-Frankivs’k, Ucraina', 'Ivano-Frankivsk, Ukraine', 'Ивано-Франковск, Украина', 'Івано-Франківськ, Україна'], ['Sumy, Ukraine', 'Soumy, Ukraine', 'Sumy, Ucraina', 'Sumy, Ukraine', 'Сумы, Украина', 'Суми, Україна'], ['Ternopil, Ukraine', 'Ternopil, Ukraine', 'Ternopil’, Ucraina', 'Ternopil, Ukraine', 'Тернополь, Украина', 'Тернопіль, Україна'], ['Chmelnyzkyj, Ukraine', 'Khmelnytskyï, Ukraine', 'Chmel’nyc’kyj, Ucraina', 'Khmelnytskyi, Ukraine', 'Хмельницкий, Украина', 'Хмельницький, Україна'], ['Riwne, Ukraine', 'Rivne, Ukraine', 'Rivne, Ucraina', 'Rivne, Ukraine', 'Ровно, Украина', 'Рівне, Україна'], ['Luzk, Ukraine', 'Loutsk, Ukraine', 'Luc’k, Ucraina', 'Lutsk, Ukraine', 'Луцк, Украина', 'Луцьк, Україна'], ['Uschhorod, Ukraine', 'Oujhorod, Ukraine', 'Užhorod, Ucraina', 'Uzhhorod, Ukraine', 'Ужгород, Украина', 'Ужгород, Україна'], ['Tscherkassy, Ukraine', 'Tcherkassy, Ukraine', 'Čerkasy, Ucraina', 'Cherkasy, Ukraine', 'Черкассы, Украина', 'Черкаси, Україна'], ['Schytomyr, Ukraine', 'Jytomyr, Ukraine', 'Žytomyr, Ucraina', 'Zhytomyr, Ukraine', 'Житомир, Украина', 'Житомир, Україна'], ['Kropywnyzkyj, Ukraine', 'Kropyvnytskyï, Ukraine', 'Kropyvnyc’kyj, Ucraina', 'Kropyvnytskyi, Ukraine', 'Кропивницкий, Украина', 'Кропивницький, Україна'], ['Tscherniwzi, Ukraine', 'Tchernivtsi, Ukraine', 'Černivci, Ucraina', 'Chernivtsi, Ukraine', 'Черновцы, Украина', 'Чернівці, Україна'], ['Krywyj Rih, Ukraine', 'Kryvy Rih, Ukraine', 'Kryvyj Rih, Ucraina', 'Kryvyi Rih, Ukraine', 'Кривой Рог, Украина', 'Кривий Ріг, Україна'], ['Mariupol, Ukraine', 'Marioupol, Ukraine', 'Mariupol’, Ucraina', 'Mariupol, Ukraine', 'Мариуполь, Украина', 'Маріуполь, Україна'],
+  ['Moskau, Russland', 'Moscou, Russie', 'Mosca, Russia', 'Moscow, Russia', 'Москва, Россия', 'Москва, Росія'], ['St. Petersburg, Russland', 'Saint-Pétersbourg, Russie', 'San Pietroburgo, Russia', 'Saint Petersburg, Russia', 'Санкт-Петербург, Россия', 'Санкт-Петербург, Росія'], ['Minsk, Belarus', 'Minsk, Biélorussie', 'Minsk, Bielorussia', 'Minsk, Belarus', 'Минск, Беларусь', 'Мінськ, Білорусь'], ['Chișinău, Moldau', 'Chișinău, Moldavie', 'Chișinău, Moldavia', 'Chișinău, Moldova', 'Кишинёв, Молдова', 'Кишинів, Молдова'], ['Almaty, Kasachstan', 'Almaty, Kazakhstan', 'Almaty, Kazakistan', 'Almaty, Kazakhstan', 'Алматы, Казахстан', 'Алмати, Казахстан'], ['Tiflis, Georgien', 'Tbilissi, Géorgie', 'Tbilisi, Georgia', 'Tbilisi, Georgia', 'Тбилиси, Грузия', 'Тбілісі, Грузія'], ['Riga, Lettland', 'Riga, Lettonie', 'Riga, Lettonia', 'Riga, Latvia', 'Рига, Латвия', 'Рига, Латвія'], ['Warschau, Polen', 'Varsovie, Pologne', 'Varsavia, Polonia', 'Warsaw, Poland', 'Варшава, Польша', 'Варшава, Польща'], ['Berlin, Deutschland', 'Berlin, Allemagne', 'Berlino, Germania', 'Berlin, Germany', 'Берлин, Германия', 'Берлін, Німеччина'], ['Remote', 'à distance', 'da remoto', 'Remote', 'удалённо', 'віддалено']];
+const SCHOOLS = ['Klubschule Migros', 'ECAP', 'EB Zürich', 'inlingua', 'Benedict-Schule', 'Berlitz', 'Volkshochschule', 'AOZ', 'HEKS', 'Caritas', 'Schweizerisches Rotes Kreuz (SRK)', 'Croix-Rouge suisse', 'École-club Migros', 'Scuola Club Migros', 'Goethe-Institut', 'Alliance Française', 'WIFI', 'Coursera', 'LinkedIn Learning', 'Udemy', 'Google', 'Microsoft', 'Cisco', 'SIZ', 'KV Business School', 'ZHAW', 'FHNW', 'HSLU', 'HES-SO'];
+const SKILLS = ['MS Word', 'MS Excel', 'PowerPoint', 'Outlook', 'MS Teams', 'Google Workspace', 'SAP', 'Abacus', 'Bexio', 'Salesforce', 'Adobe Photoshop', 'Canva', 'AutoCAD', 'SQL', 'Python', 'Zoom'];
+const INTS = [['спорт', 'Sport', 'sport', 'sport', 'sports', 'спорт', 'спорт'], ['походы', 'Wandern', 'randonnée', 'escursionismo', 'hiking', 'походы', 'походи'], ['чтение', 'Lesen', 'lecture', 'lettura', 'reading', 'чтение', 'читання'], ['кулинария', 'Kochen', 'cuisine', 'cucina', 'cooking', 'кулинария', 'кулінарія'], ['путешествия', 'Reisen', 'voyages', 'viaggi', 'travel', 'путешествия', 'подорожі'], ['фотография', 'Fotografie', 'photographie', 'fotografia', 'photography', 'фотография', 'фотографія'], ['музыка', 'Musik', 'musique', 'musica', 'music', 'музыка', 'музика'], ['волонтёрство', 'Freiwilligenarbeit', 'bénévolat', 'volontariato', 'volunteering', 'волонтёрство', 'волонтерство'], ['йога', 'Yoga', 'yoga', 'yoga', 'yoga', 'йога', 'йога'], ['танцы', 'Tanzen', 'danse', 'danza', 'dancing', 'танцы', 'танці'], ['плавание', 'Schwimmen', 'natation', 'nuoto', 'swimming', 'плавание', 'плавання'], ['велосипед', 'Velofahren', 'vélo', 'bicicletta', 'cycling', 'велосипед', 'велосипед'], ['лыжи', 'Skifahren', 'ski', 'sci', 'skiing', 'лыжи', 'лижі'], ['сад', 'Gartenarbeit', 'jardinage', 'giardinaggio', 'gardening', 'садоводство', 'садівництво'], ['рисование', 'Malen', 'peinture', 'pittura', 'painting', 'рисование', 'малювання'], ['шахматы', 'Schach', 'échecs', 'scacchi', 'chess', 'шахматы', 'шахи']];
+const fmtDate = iso => { const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(iso || ''); return m ? `${m[3]}.${m[2]}.${m[1]}` : (iso || ''); };
+const cap = t => t ? t[0].toUpperCase() + t.slice(1) : t;
+/* из анкеты в готовые строки листа */
+function norm(d){
+  const l = d.lang, P = d.p, o = Object.assign({}, d);
+  const nat = [P.natc === 'other' ? P.nat : natName(P.natc, l), P.natc2 && P.natc2 !== P.natc ? natName(P.natc2, l) : ''].filter(Boolean).join(', ');
+  const civ = [cap(civName(P.civc, P.sex, l)), kidsName(P.kids, l)].filter(Boolean).join(', ');
+  const drive = [(P.dk || []).length ? DKP[l] + ' ' + DK.filter(k => P.dk.includes(k)).join(', ') : '', P.car ? CAR[l] : ''].filter(Boolean).join(', ');
+  o.p = Object.assign({}, P, {birth: fmtDate(P.birth), nat, civil: civ, drive, city: [P.zip, P.town].filter(Boolean).join(' ')});
+  o.exp = d.exp.map(e => Object.assign({}, e, {sub: [[e.org, e.place].filter(Boolean).join(', '), tr(JOBT[e.type], l), e.pct ? e.pct + (l === 'en' ? '%' : ' %') : ''].filter(Boolean).join(' · ')}));
+  o.edu = d.edu.map(e => Object.assign({}, e, {title: [tr(DEG[e.deg], l), e.title].filter(Boolean).join(' – ')}));
+  o.lng = d.lng.map(x => { const ct = x.lvl === 'native' ? '' : (x.cert === 'other' ? (x.certT || '') : (x.cert || '')); return Object.assign({}, x, {ct, lvT: [(L[l] || L.de).lv[x.lvl] || '', ct].filter(Boolean).join(', ')}); });
+  return o;
+}
 
 /* ===================== раскладка листа (мм, pt) ===================== */
 const PW = 210, PH = 297, PT = 0.3528;
@@ -401,13 +500,13 @@ function build(d, mode = 0, dense = 0){
       [pers.slice(0, h2), pers.slice(h2)].forEach((col, ci) => { let yy = y; col.forEach(([k, v]) => { const vl = wrap(v, 'r', 9, half - LW); T(X0 + ci * (half + 8), yy + 9 * PT, k, 'm', 8.4, MUT); vl.forEach(ln => { T(X0 + ci * (half + 8) + LW, yy + 9 * PT, ln, 'r', 9, INK); yy += lh(9); }); yy += 0.8 * G; }); col.yEnd = yy; });
       y = Math.max(...[pers.slice(0, h2), pers.slice(h2)].map(c => y + c.reduce((a, [, v]) => a + wrap(v, 'r', 9, half - LW).length * lh(9) + 0.8 * G, 0))) + 2 * G; }
     if (d.profile){ heading(l.profile); para(d.profile, 'r', 9.2); y += 3 * G; }
-    if (exp.length){ heading(l.exp); exp.forEach(e => entry(period(e.from, e.to, e.cur, l), e.title, [e.org, e.place].filter(Boolean).join(', '), e.text)); }
+    if (exp.length){ heading(l.exp); exp.forEach(e => entry(period(e.from, e.to, e.cur, l), e.title, e.sub, e.text)); }
     if (edu.length){ heading(l.edu); edu.forEach(e => entry(period(e.from, e.to, e.cur, l), e.title, [e.org, e.place].filter(Boolean).join(', '), e.text, false)); }
     if (trn.length){ heading(l.trn); trn.forEach(e => entry(String(e.year || ''), e.title, e.org, '', false)); }
     if (withLangs && withSkills && langs.length && (skills.length || d.interests)){
       /* классика и строгий: языки слева, навыки и интересы справа, чтобы резюме чаще помещалось на одну страницу */
       const half = (W - 8) / 2, xA = X0, xB = X0 + half + 8, LW = 30;
-      const lrows = langs.map(x => [langName(x.code, x.other, d.lang), l.lv[x.lvl] || '']);
+      const lrows = langs.map(x => [langName(x.code, x.other, d.lang), x.lvT]);
       const bl = []; skills.forEach(sv => wrap(sv, 'r', 9, half).forEach(ln => bl.push([ln, 'r', INK]))); if (d.interests){ if (bl.length) bl.push(['', 'r', INK]); bl.push([l.int, 'm', MUT]); wrap(d.interests, 'r', 9, half).forEach(ln => bl.push([ln, 'r', INK])); }
       const ha = lrows.reduce((a, [, v]) => a + wrap(v, 'r', 9, half - LW).length * lh(9) + 0.8 * G, 0), hb = bl.length * lh(9);
       need(16 + Math.max(ha, hb));
@@ -418,7 +517,7 @@ function build(d, mode = 0, dense = 0){
       (skills.length ? bl : bl.slice(1)).forEach(([ln, f, c]) => { if (ln) T(xB, yb + 9 * PT, ln, f, f === 'm' ? 8.4 : 9, c); yb += lh(9); });
       y = Math.max(ya, yb) + 3 * G;
     } else {
-      if (withLangs && langs.length){ heading(l.lng); table(langs.map(x => [langName(x.code, x.other, d.lang), l.lv[x.lvl] || ''])); }
+      if (withLangs && langs.length){ heading(l.lng); table(langs.map(x => [langName(x.code, x.other, d.lang), x.lvT])); }
       if (withSkills && skills.length){ heading(l.skills); skills.forEach(s => para(s, 'r', 9)); y += 3 * G; }
       if (withSkills && d.interests){ heading(l.int); para(d.interests, 'r', 9); y += 3 * G; }
     }
@@ -440,7 +539,8 @@ function build(d, mode = 0, dense = 0){
     if (langs.length){ sh(l.lng); langs.forEach(x => { const nm = langName(x.code, x.other, d.lang), lvT = l.lv[x.lvl] || ''; sneed(13); T(SX, sy + 8.8 * PT, nm, 'm', 8.8, INK, 'left', sp); sy += lh(8.8);
       const n = {native: 5, C2: 5, C1: 4, B2: 3, B1: 3, A2: 2, A1: 1}[x.lvl] || 0;
       for (let i = 0; i < 5; i++) op({t: 'circle', cx: SX + 1.3 + i * 4, cy: sy + 1.4, r: 1.2, fill: i < n ? ACC : '#FFFFFF'}, sp);
-      if (lvT) T(SX + 22, sy + 2.4, lvT.replace(/^(C2|C1|B2|B1|A2|A1) – /, '$1 · '), 'r', 7.4, MUT, 'left', sp); sy += 6.5; }); sy += SEC; }
+      if (lvT) T(SX + 22, sy + 2.4, lvT.replace(/^(C2|C1|B2|B1|A2|A1) – /, '$1 · '), 'r', 7.4, MUT, 'left', sp); sy += 6.5;
+      if (x.ct){ wrap(x.ct, 'r', 7.4, SW).forEach(ln => { T(SX, sy + 0.6, ln, 'r', 7.4, MUT, 'left', sp); sy += lh(7.4); }); sy += 1.2; } }); sy += SEC; }
     if (mode < 2){
       if (skills.length){ sh(l.skills); skills.forEach(s => sk('', s)); sy += SEC; }
       if (d.interests){ sh(l.int); sk('', d.interests); }
@@ -493,7 +593,7 @@ function svg(ops){
 }
 let rT = 0;
 function render(){ clearTimeout(rT); rT = setTimeout(() => {
-  const pages = build(D());
+  const pages = build(norm(D()));
   document.getElementById('pages').innerHTML = pages.map(svg).join('');
   document.getElementById('pginfo').textContent = 'Так выглядит PDF · ' + (pages.length === 1 ? '1 страница' : pages.length + ' страницы') + (pages.length > 2 ? ' · лучше сократить до двух' : '');
 }, 60); }
@@ -519,7 +619,7 @@ async function makePdf(){
   if (!window.jspdf) throw new Error('lib');
   const F = await fonts(), doc = new window.jspdf.jsPDF({unit: 'mm', format: 'a4', compress: true});
   for (const [k, b64] of Object.entries(F)){ doc.addFileToVFS(k + '.ttf', b64); doc.addFont(k + '.ttf', k, 'normal'); }
-  const d = D(), pages = build(d);
+  const d = norm(D()), pages = build(d);
   pages.forEach((ops, i) => {
     if (i) doc.addPage();
     ops.forEach(o => {
@@ -531,7 +631,7 @@ async function makePdf(){
     });
   });
   const nm = [d.p.first, d.p.last].filter(Boolean).join('_').replace(/[^\p{L}\p{N}_-]+/gu, '') || 'Name';
-  doc.setProperties({title: `${(L[d.lang] || L.de).doc} ${[d.p.first, d.p.last].filter(Boolean).join(' ')}`.trim(), author: [d.p.first, d.p.last].filter(Boolean).join(' '), creator: 'svoiludi.ch'});
+  doc.setProperties({title: `${(L[d.lang] || L.de).doc} ${[d.p.first, d.p.last].filter(Boolean).join(' ')}`.trim(), author: [d.p.first, d.p.last].filter(Boolean).join(' ')});
   return {blob: doc.output('blob'), name: `${(L[d.lang] || L.de).file}_${nm}.pdf`};
 }
 async function doPdf(btns, share){
@@ -545,30 +645,42 @@ async function doPdf(btns, share){
 }
 
 /* ===================== анкета ===================== */
+function dsel(k, val, month, dis){
+  const m = /^(\d{1,2})\.(\d{4})$/.exec(val || ''), y = m ? m[2] : (/^\d{4}$/.test(val || '') ? val : ''), mm = m ? m[1].padStart(2, '0') : '';
+  const ys = []; for (let i = YNOW + (k === 'to' ? 6 : 0); i >= 1960; i--) ys.push(i);
+  return `<span class="dsel" data-d="${k}"${month ? '' : ' style="grid-template-columns:1fr"'}>${month ? `<select data-part="m" aria-label="Месяц" ${dis ? 'disabled' : ''}><option value="">месяц</option>${MON.map((n, i) => { const v = String(i + 1).padStart(2, '0'); return `<option value="${v}" ${mm === v ? 'selected' : ''}>${v} · ${n}</option>`; }).join('')}</select>` : ''}<select data-part="y" aria-label="Год" ${dis ? 'disabled' : ''}><option value="">год</option>${ys.map(v => `<option ${y == v ? 'selected' : ''}>${v}</option>`).join('')}</select></span>`;
+}
+const opts = (obj, cur, first) => (first ? `<option value="">${first}</option>` : '') + Object.entries(obj).map(([k, r]) => `<option value="${k}" ${cur === k ? 'selected' : ''}>${r[0]}</option>`).join('');
 const LISTS = {
-  exp: {title: 'Место работы', make: () => ({from: '', to: '', cur: false, title: '', org: '', place: '', text: ''}), fields: e => `
-    <div class="g3"><label class="fl"><span class="lb">С</span><input type="text" data-k="from" value="${esc(e.from)}" placeholder="03.2021" inputmode="numeric"></label>
-    <label class="fl"><span class="lb">По</span><input type="text" data-k="to" value="${esc(e.to)}" placeholder="12.2024" inputmode="numeric" ${e.cur ? 'disabled' : ''}></label>
-    <label class="chk" style="align-self:end;padding-bottom:10px"><input type="checkbox" data-k="cur" ${e.cur ? 'checked' : ''}> работаю сейчас</label></div>
+  exp: {title: 'Место работы', make: () => ({from: '', to: '', cur: false, title: '', org: '', place: '', type: '', pct: '', text: ''}), fields: e => `
+    <div class="g2"><div class="fl"><span class="lb">С</span>${dsel('from', e.from, true)}</div>
+    <div class="fl"><span class="lb">По</span>${dsel('to', e.to, true, e.cur)}</div></div>
+    <label class="chk"><input type="checkbox" data-k="cur" ${e.cur ? 'checked' : ''}> работаю здесь сейчас</label>
     <label class="fl"><span class="lb">Должность</span><input type="text" data-k="title" value="${esc(e.title)}" placeholder="Finanzanalystin"></label>
     <div class="g2"><label class="fl"><span class="lb">Фирма</span><input type="text" data-k="org" value="${esc(e.org)}" placeholder="Muster AG"></label>
-    <label class="fl"><span class="lb">Город, страна</span><input type="text" data-k="place" value="${esc(e.place)}" placeholder="Zürich"></label></div>
+    <label class="fl"><span class="lb">Город, страна</span><input type="text" data-k="place" value="${esc(e.place)}" list="dl-place" placeholder="Zürich"></label>
+    <label class="fl"><span class="lb">Вид работы<button type="button" class="qh" data-help="jobtype" aria-label="Подсказка: вид работы" aria-expanded="false">?</button></span><select data-k="type">${opts(JOBT, e.type, 'Обычная работа')}</select></label>
+    <label class="fl"><span class="lb">Занятость<button type="button" class="qh" data-help="pct" aria-label="Подсказка: занятость" aria-expanded="false">?</button></span><select data-k="pct"><option value="">Не указывать</option>${[100, 90, 80, 70, 60, 50, 40, 30, 20].map(v => `<option value="${v}" ${+e.pct === v ? 'selected' : ''}>${v} %</option>`).join('')}</select></label></div>
     <label class="fl"><span class="lb">Что делала и чего добилась<button type="button" class="qh" data-help="bullets" aria-label="Подсказка: что делала" aria-expanded="false">?</button></span><textarea data-k="text" rows="3" placeholder="Monatliches Reporting für 5 Abteilungen&#10;Budget von CHF 12 Mio. betreut">${esc(e.text)}</textarea></label>`},
-  edu: {title: 'Образование', make: () => ({from: '', to: '', cur: false, title: '', org: '', place: '', text: ''}), fields: e => `
-    <div class="g2"><label class="fl"><span class="lb">С</span><input type="text" data-k="from" value="${esc(e.from)}" placeholder="2008" inputmode="numeric"></label>
-    <label class="fl"><span class="lb">По</span><input type="text" data-k="to" value="${esc(e.to)}" placeholder="2013" inputmode="numeric"></label></div>
-    <label class="fl"><span class="lb">Диплом и специальность</span><input type="text" data-k="title" value="${esc(e.title)}" placeholder="Master in Finanzen"></label>
-    <div class="g2"><label class="fl"><span class="lb">Учебное заведение</span><input type="text" data-k="org" value="${esc(e.org)}" placeholder="Universität"></label>
-    <label class="fl"><span class="lb">Город, страна</span><input type="text" data-k="place" value="${esc(e.place)}" placeholder="Kyjiw, Ukraine"></label></div>
+  edu: {title: 'Образование', make: () => ({from: '', to: '', cur: false, deg: '', title: '', org: '', place: '', text: ''}), fields: e => `
+    <div class="g2"><div class="fl"><span class="lb">С</span>${dsel('from', e.from, false)}</div>
+    <div class="fl"><span class="lb">По</span>${dsel('to', e.to, false, e.cur)}</div></div>
+    <label class="chk"><input type="checkbox" data-k="cur" ${e.cur ? 'checked' : ''}> учусь сейчас</label>
+    <div class="g2"><label class="fl"><span class="lb">Уровень<button type="button" class="qh" data-help="deg" aria-label="Подсказка: уровень образования" aria-expanded="false">?</button></span><select data-k="deg">${opts(DEG, e.deg, 'Выбери')}</select></label>
+    <label class="fl"><span class="lb">Специальность</span><input type="text" data-k="title" value="${esc(e.title)}" placeholder="Finanzen und Kredit"></label>
+    <label class="fl"><span class="lb">Учебное заведение</span><input type="text" data-k="org" value="${esc(e.org)}" placeholder="Wirtschaftsuniversität"></label>
+    <label class="fl"><span class="lb">Город, страна</span><input type="text" data-k="place" value="${esc(e.place)}" list="dl-place" placeholder="Kyjiw, Ukraine"></label></div>
     <label class="fl"><span class="lb">Примечание<button type="button" class="qh" data-help="eduNote" aria-label="Подсказка: признание диплома" aria-expanded="false">?</button></span><input type="text" data-k="text" value="${esc(e.text)}" placeholder="Anerkannt durch das SBFI"></label>`},
   trn: {title: 'Курс', make: () => ({year: '', title: '', org: ''}), fields: e => `
-    <div class="g3"><label class="fl"><span class="lb">Год</span><input type="text" data-k="year" value="${esc(e.year)}" placeholder="2025" inputmode="numeric"></label>
+    <div class="g3"><div class="fl"><span class="lb">Год</span>${dsel('year', e.year, false)}</div>
     <label class="fl" style="grid-column:span 2"><span class="lb">Название курса или сертификата</span><input type="text" data-k="title" value="${esc(e.title)}" placeholder="Deutsch B2, fide-Zertifikat"></label></div>
-    <label class="fl"><span class="lb">Кто проводил</span><input type="text" data-k="org" value="${esc(e.org)}" placeholder="Klubschule Migros, Zürich"></label>`},
-  lng: {title: 'Язык', make: () => ({code: '', other: '', lvl: 'B1'}), fields: e => `
+    <label class="fl"><span class="lb">Кто проводил</span><input type="text" data-k="org" value="${esc(e.org)}" list="dl-school" placeholder="Klubschule Migros, Zürich"></label>`},
+  lng: {title: 'Язык', make: () => ({code: '', other: '', lvl: 'B1', cert: '', certT: ''}), fields: e => `
     <div class="g2"><label class="fl"><span class="lb">Язык</span><select data-k="code"><option value="">Выбери язык</option>${Object.keys(LN_RU).map(c => `<option value="${c}" ${e.code === c ? 'selected' : ''}>${LN_RU[c]}</option>`).join('')}<option value="other" ${e.code === 'other' ? 'selected' : ''}>Другой…</option></select></label>
     <label class="fl"><span class="lb">Уровень<button type="button" class="qh" data-help="lvl" aria-label="Подсказка: уровень языка" aria-expanded="false">?</button></span><select data-k="lvl">${['native', 'C2', 'C1', 'B2', 'B1', 'A2', 'A1'].map(v => `<option value="${v}" ${e.lvl === v ? 'selected' : ''}>${L.ru.lv[v]}</option>`).join('')}</select></label></div>
-    ${e.code === 'other' ? `<label class="fl"><span class="lb">Название языка на языке резюме</span><input type="text" data-k="other" value="${esc(e.other)}" placeholder="Georgisch"></label>` : ''}`},
+    ${e.code === 'other' ? `<label class="fl"><span class="lb">Название языка на языке резюме</span><input type="text" data-k="other" value="${esc(e.other)}" placeholder="Georgisch"></label>` : ''}
+    ${e.lvl === 'native' ? '' : `<div class="g2"><label class="fl"><span class="lb">Сертификат<button type="button" class="qh" data-help="cert" aria-label="Подсказка: сертификат" aria-expanded="false">?</button></span><select data-k="cert"><option value="">Без сертификата</option>${(CERTS[e.code] || []).map(c => `<option ${e.cert === c ? 'selected' : ''}>${c}</option>`).join('')}<option value="other" ${e.cert === 'other' ? 'selected' : ''}>Другой…</option></select></label>
+    ${e.cert === 'other' ? `<label class="fl"><span class="lb">Название сертификата</span><input type="text" data-k="certT" value="${esc(e.certT)}" placeholder="Goethe-Zertifikat B1"></label>` : ''}</div>`}`},
   ref: {title: 'Рекомендатель', make: () => ({name: '', role: '', org: '', contact: ''}), fields: e => `
     <div class="g2"><label class="fl"><span class="lb">Имя и фамилия</span><input type="text" data-k="name" value="${esc(e.name)}" placeholder="Anna Muster"></label>
     <label class="fl"><span class="lb">Должность</span><input type="text" data-k="role" value="${esc(e.role)}" placeholder="Leiterin Finanzen"></label>
@@ -581,8 +693,26 @@ function drawList(k){
     <button type="button" class="ib" data-mv="-1" aria-label="Выше" ${i ? '' : 'disabled'}>↑</button><button type="button" class="ib" data-mv="1" aria-label="Ниже" ${i < arr.length - 1 ? '' : 'disabled'}>↓</button><button type="button" class="ib" data-del aria-label="Удалить">✕</button></div>${def.fields(e)}</div>`).join('');
   const c = document.getElementById('c-' + k); if (c) c.textContent = arr.length ? arr.length : '';
 }
+function vis(){
+  document.getElementById('natow').hidden = S.p.natc !== 'other';
+  document.getElementById('sexw').hidden = !S.p.civc || !['fr', 'it', 'ru', 'uk'].includes(S.lang);
+  document.querySelectorAll('#ch-skills button').forEach(b => b.setAttribute('aria-pressed', hasTok(S.skills, b.dataset.v)));
+  document.querySelectorAll('#ch-int button').forEach(b => b.setAttribute('aria-pressed', hasTok(S.interests, INTS[+b.dataset.i][LI[S.lang] + 1])));
+  const dl = document.getElementById('dl-place'); dl.innerHTML = PLACES.map(r => `<option value="${esc(r[LI[S.lang]])}">`).join('');
+}
+const toks = t => String(t || '').split(/[,\n]/).map(x => x.trim().toLowerCase()).filter(Boolean);
+const hasTok = (t, v) => toks(t).includes(String(v).toLowerCase());
+function toggleTok(t, v){
+  t = String(t || '');
+  if (hasTok(t, v)) return t.split('\n').map(line => line.split(',').map(x => x.trim()).filter(x => x && x.toLowerCase() !== v.toLowerCase()).join(', ')).filter(Boolean).join('\n');
+  const lines = t.split('\n'); let last = lines.pop() || '';
+  last = last.trim() ? last.trim().replace(/,$/, '') + ', ' + v : (lines.length || S.lang === 'de' ? v : cap(v));
+  return lines.concat(last).join('\n');
+}
 function drawAll(){
-  document.querySelectorAll('[data-f]').forEach(el => { const [a, b] = el.dataset.f.split('.'); el.value = b ? (S[a][b] || '') : (S[a] || ''); });
+  document.querySelectorAll('[data-f]').forEach(el => { const [a, b] = el.dataset.f.split('.'); const v = b ? S[a][b] : S[a]; if (el.type === 'checkbox') el.checked = !!v; else el.value = v == null ? '' : v; });
+  document.querySelectorAll('#dk input').forEach(el => el.checked = (S.p.dk || []).includes(el.value));
+  document.getElementById('canton').value = S.canton || '';
   document.getElementById('lang').value = S.lang;
   document.querySelectorAll('#tpl button').forEach(b => b.setAttribute('aria-pressed', b.dataset.v === S.tpl));
   document.querySelectorAll('#color button').forEach(b => b.setAttribute('aria-pressed', b.dataset.v === S.color));
@@ -592,21 +722,45 @@ function drawAll(){
   const ph = document.getElementById('phbox'); ph.innerHTML = S.photo ? `<img src="${S.photo}" alt="Твоё фото">` : 'Фото<br>3 × 4';
   document.getElementById('phdel').hidden = !S.photo;
   ['exp', 'edu', 'trn', 'lng', 'ref'].forEach(drawList);
-  render();
+  vis(); render();
 }
-function touched(){ if (showEx) leaveEx(); save(); render(); }
+function touched(){ if (showEx) leaveEx(); save(); vis(); render(); }
 
 /* ===================== события ===================== */
+/* списки в анкете */
+const natOpts = Object.entries(NAT).map(([k, r]) => `<option value="${k}">${r[0]}</option>`).join('');
+document.getElementById('natc').innerHTML = '<option value="">Не указывать</option>' + natOpts + '<option value="other">Другое…</option>';
+document.getElementById('natc2').innerHTML = '<option value="">Нет</option>' + natOpts;
+document.getElementById('civc').innerHTML = '<option value="">Не указывать</option>' + Object.entries(CIV).map(([k, r]) => `<option value="${k}">${r[0]}</option>`).join('');
+document.getElementById('dk').innerHTML = DK.map(k => `<label class="chk"><input type="checkbox" value="${k}"> ${k}</label>`).join('') + '<label class="chk"><input type="checkbox" data-f="p.car"> есть своя машина</label>';
+document.getElementById('canton').innerHTML += CANTONS.map(c => `<option value="${c[0]}">${c[1]}</option>`).join('') + '<option value="INT">Международная фирма, английский</option>';
+document.getElementById('dl-chtown').innerHTML = CH_TOWNS.map(t => `<option value="${t}">`).join('');
+document.getElementById('dl-school').innerHTML = SCHOOLS.map(t => `<option value="${t}">`).join('');
+document.getElementById('ch-skills').innerHTML = SKILLS.map(v => `<button type="button" data-v="${v}" aria-pressed="false">${v}</button>`).join('');
+document.getElementById('ch-int').innerHTML = INTS.map((r, i) => `<button type="button" data-i="${i}" aria-pressed="false">${r[0]}</button>`).join('');
+document.getElementById('ch-skills').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; S.skills = toggleTok(S.skills, b.dataset.v); document.querySelector('[data-f="skills"]').value = S.skills; touched(); });
+document.getElementById('ch-int').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; S.interests = toggleTok(S.interests, INTS[+b.dataset.i][LI[S.lang] + 1]); document.querySelector('[data-f="interests"]').value = S.interests; touched(); });
+document.getElementById('dk').addEventListener('change', e => { if (e.target.dataset.f) return; S.p.dk = [...document.querySelectorAll('#dk input:not([data-f])')].filter(x => x.checked).map(x => x.value); touched(); });
+document.getElementById('canton').addEventListener('change', e => {
+  S.canton = e.target.value; const c = CANTONS.find(x => x[0] === S.canton);
+  const nl = S.canton === 'INT' ? 'en' : (c ? c[2] : '');
+  if (nl){ S.lang = nl; document.getElementById('lang').value = nl; }
+  say(nl ? `Язык резюме: ${LANG_RU[nl]}.` + (c && c[3] ? ` Здесь говорят и на языке «${LANG_RU[c[3]]}», его можно выбрать рядом.` : '') : '');
+  touched();
+});
 document.getElementById('color').innerHTML = Object.entries(COLORS).map(([k, c]) => `<button type="button" data-v="${k}" style="background:${c[0]}" aria-label="${c[2]}" title="${c[2]}"></button>`).join('');
 document.getElementById('form').addEventListener('input', e => {
   const el = e.target;
-  if (el.dataset.f){ const [a, b] = el.dataset.f.split('.'); if (b) S[a][b] = el.value; else S[a] = el.value; touched(); return; }
-  const ent = el.closest('.ent'); if (!ent || !el.dataset.k) return;
+  if (el.dataset.f){ const [a, b] = el.dataset.f.split('.'); const v = el.type === 'checkbox' ? el.checked : el.value; if (b) S[a][b] = v; else S[a] = v; touched(); return; }
+  const ent = el.closest('.ent'); if (!ent) return;
+  if (el.dataset.part){ const w = el.closest('.dsel'), it = S[ent.dataset.list][+ent.dataset.i], m = w.querySelector('[data-part="m"]'), y = w.querySelector('[data-part="y"]').value;
+    it[w.dataset.d] = y ? (m && m.value ? m.value + '.' + y : y) : ''; touched(); return; }
+  if (!el.dataset.k) return;
   const k = ent.dataset.list, i = +ent.dataset.i, item = S[k][i];
-  if (el.type === 'checkbox'){ item[el.dataset.k] = el.checked; if (el.dataset.k === 'cur'){ ent.querySelector('[data-k="to"]').disabled = el.checked; } }
+  if (el.type === 'checkbox'){ item[el.dataset.k] = el.checked; if (el.dataset.k === 'cur'){ ent.querySelectorAll('.dsel[data-d="to"] select').forEach(x => x.disabled = el.checked); } }
   else item[el.dataset.k] = el.value;
   if (el.dataset.k === 'title' || el.dataset.k === 'name') ent.querySelector('.ent-h b').textContent = el.value || LISTS[k].title + ' ' + (i + 1);
-  if (k === 'lng' && el.dataset.k === 'code'){ drawList('lng'); }
+  if (k === 'lng' && ['code', 'lvl', 'cert'].includes(el.dataset.k)){ if (el.dataset.k === 'code') item.cert = ''; drawList('lng'); }
   touched();
 });
 document.getElementById('form').addEventListener('click', e => {
@@ -659,7 +813,7 @@ function exPhoto(){
 }
 function example(){
   return Object.assign(blank(), {lang: S.lang, tpl: S.tpl, color: S.color, photo: exPhoto(), refReq: true,
-    p: {first: 'Olena', last: 'Kovalenko', title: {de: 'Finanzanalystin', fr: 'Analyste financière', it: 'Analista finanziaria', en: 'Financial Analyst', ru: 'Финансовый аналитик', uk: 'Фінансова аналітикиня'}[S.lang], street: 'Musterstrasse 12', city: '8000 Zürich', phone: '+41 79 000 00 00', email: 'olena.kovalenko@example.ch', web: 'linkedin.com/in/olena-kovalenko', birth: '14.05.1989', nat: {de: 'Ukrainisch', fr: 'Ukrainienne', it: 'Ucraina', en: 'Ukrainian', ru: 'Украина', uk: 'Україна'}[S.lang], permit: 'S', civil: '', drive: 'Kat. B'},
+    p: {first: 'Olena', last: 'Kovalenko', title: {de: 'Finanzanalystin', fr: 'Analyste financière', it: 'Analista finanziaria', en: 'Financial Analyst', ru: 'Финансовый аналитик', uk: 'Фінансова аналітикиня'}[S.lang], street: 'Musterstrasse 12', zip: '8000', town: 'Zürich', phone: '+41 79 000 00 00', email: 'olena.kovalenko@example.ch', web: 'linkedin.com/in/olena-kovalenko', birth: '1989-05-14', natc: 'ua', natc2: '', nat: '', permit: 'S', civc: '', kids: '', sex: 'f', dk: ['B'], car: false},
     profile: {de: 'Finanzanalystin mit über 10 Jahren Erfahrung in Budgetierung, Reporting und Controlling in Banken und internationalen Unternehmen. Strukturiert, genau und gewohnt, komplexe Zahlen für das Management verständlich aufzubereiten.',
       fr: 'Analyste financière avec plus de 10 ans d’expérience en budgétisation, reporting et contrôle de gestion dans des banques et des entreprises internationales. Structurée, précise et habituée à rendre les chiffres complexes compréhensibles pour la direction.',
       it: 'Analista finanziaria con oltre 10 anni di esperienza in budget, reporting e controlling in banche e aziende internazionali. Precisa, strutturata e abituata a rendere comprensibili i numeri complessi per la direzione.',
@@ -667,14 +821,14 @@ function example(){
       ru: 'Финансовый аналитик с опытом более 10 лет в бюджетировании, отчётности и контроллинге в банках и международных компаниях. Структурная, точная, умею объяснять сложные цифры руководству просто.',
       uk: 'Фінансова аналітикиня з досвідом понад 10 років у бюджетуванні, звітності та контролінгу в банках і міжнародних компаніях. Структурна, точна, вмію пояснювати складні цифри керівництву просто.'}[S.lang],
     exp: [
-      {from: '01.2024', to: '', cur: true, title: {de: 'Senior Finanzanalystin', fr: 'Analyste financière senior', it: 'Analista finanziaria senior', en: 'Senior Financial Analyst', ru: 'Старший финансовый аналитик', uk: 'Старша фінансова аналітикиня'}[S.lang], org: 'Muster Finanz AG', place: 'Zürich',
+      {from: '01.2024', to: '', cur: true, title: {de: 'Senior Finanzanalystin', fr: 'Analyste financière senior', it: 'Analista finanziaria senior', en: 'Senior Financial Analyst', ru: 'Старший финансовый аналитик', uk: 'Старша фінансова аналітикиня'}[S.lang], org: 'Muster Finanz AG', place: 'Zürich', pct: '100', type: '',
         text: {de: 'Monatliches Reporting für 6 Geschäftsbereiche\nForecast und Budget von CHF 40 Mio. betreut\nNeues Power-BI-Dashboard für das Management eingeführt', fr: 'Reporting mensuel pour 6 divisions\nPrévisions et budget de CHF 40 mio.\nNouveau tableau de bord Power BI pour la direction', it: 'Reporting mensile per 6 divisioni\nPrevisioni e budget di CHF 40 mio.\nNuova dashboard Power BI per la direzione', en: 'Monthly reporting for 6 business units\nForecast and budget of CHF 40 million\nIntroduced a new Power BI dashboard for management', ru: 'Ежемесячная отчётность для 6 подразделений\nПрогноз и бюджет на 40 млн франков\nВнедрила дашборд Power BI для руководства', uk: 'Щомісячна звітність для 6 підрозділів\nПрогноз і бюджет на 40 млн франків\nЗапровадила дашборд Power BI для керівництва'}[S.lang]},
       {from: '09.2015', to: '02.2022', cur: false, title: {de: 'Finanzanalystin', fr: 'Analyste financière', it: 'Analista finanziaria', en: 'Financial Analyst', ru: 'Финансовый аналитик', uk: 'Фінансова аналітикиня'}[S.lang], org: 'Beispiel Bank', place: {de: 'Kyjiw, Ukraine', fr: 'Kyiv, Ukraine', it: 'Kyiv, Ucraina', en: 'Kyiv, Ukraine', ru: 'Киев, Украина', uk: 'Київ, Україна'}[S.lang],
         text: {de: 'Budgetplanung und Kostenkontrolle für 12 Filialen\nKennzahlenanalyse und Berichte für die Geschäftsleitung', fr: 'Planification budgétaire et contrôle des coûts pour 12 agences\nAnalyse des indicateurs et rapports pour la direction', it: 'Pianificazione del budget e controllo dei costi per 12 filiali\nAnalisi degli indicatori e rapporti per la direzione', en: 'Budget planning and cost control for 12 branches\nKPI analysis and reports for the executive board', ru: 'Планирование бюджета и контроль затрат 12 филиалов\nАнализ показателей и отчёты для правления', uk: 'Планування бюджету та контроль витрат 12 філій\nАналіз показників і звіти для правління'}[S.lang]}
     ],
-    edu: [{from: '2009', to: '2014', title: {de: 'Master in Finanzen und Kredit', fr: 'Master en finance et crédit', it: 'Master in finanza e credito', en: 'Master in Finance and Credit', ru: 'Магистр финансов и кредита', uk: 'Магістр фінансів і кредиту'}[S.lang], org: {de: 'Wirtschaftsuniversität', fr: 'Université d’économie', it: 'Università di economia', en: 'University of Economics', ru: 'Экономический университет', uk: 'Економічний університет'}[S.lang], place: {de: 'Kyjiw, Ukraine', fr: 'Kyiv, Ukraine', it: 'Kyiv, Ucraina', en: 'Kyiv, Ukraine', ru: 'Киев, Украина', uk: 'Київ, Україна'}[S.lang], text: {de: 'Anerkannt durch das SBFI', fr: 'Reconnu par le SEFRI', it: 'Riconosciuto dalla SEFRI', en: 'Recognised by SERI', ru: 'Признан SBFI', uk: 'Визнаний SBFI'}[S.lang]}],
-    trn: [{year: '2025', title: {de: 'Deutsch B2, fide-Zertifikat', fr: 'Allemand B2, certificat fide', it: 'Tedesco B2, certificato fide', en: 'German B2, fide certificate', ru: 'Немецкий B2, сертификат fide', uk: 'Німецька B2, сертифікат fide'}[S.lang], org: 'Klubschule Migros, Zürich'}, {year: '2023', title: 'Power BI Data Analyst (PL-300)', org: 'Microsoft'}],
-    lng: [{code: 'uk', lvl: 'native', other: ''}, {code: 'ru', lvl: 'C2', other: ''}, {code: 'en', lvl: 'C1', other: ''}, {code: 'de', lvl: 'B2', other: ''}],
+    edu: [{from: '2009', to: '2014', deg: 'master', title: {de: 'Finanzen und Kredit', fr: 'Finance et crédit', it: 'Finanza e credito', en: 'Finance and Credit', ru: 'финансы и кредит', uk: 'фінанси і кредит'}[S.lang], org: {de: 'Wirtschaftsuniversität', fr: 'Université d’économie', it: 'Università di economia', en: 'University of Economics', ru: 'Экономический университет', uk: 'Економічний університет'}[S.lang], place: {de: 'Kyjiw, Ukraine', fr: 'Kyiv, Ukraine', it: 'Kyiv, Ucraina', en: 'Kyiv, Ukraine', ru: 'Киев, Украина', uk: 'Київ, Україна'}[S.lang], text: {de: 'Anerkannt durch das SBFI', fr: 'Reconnu par le SEFRI', it: 'Riconosciuto dalla SEFRI', en: 'Recognised by SERI', ru: 'Признан SBFI', uk: 'Визнаний SBFI'}[S.lang]}],
+    trn: [{year: '2025', title: {de: 'Deutschkurs B2', fr: 'Cours d’allemand B2', it: 'Corso di tedesco B2', en: 'German course B2', ru: 'Курс немецкого B2', uk: 'Курс німецької B2'}[S.lang], org: 'Klubschule Migros, Zürich'}, {year: '2023', title: 'Power BI Data Analyst (PL-300)', org: 'Microsoft'}],
+    lng: [{code: 'uk', lvl: 'native', other: ''}, {code: 'ru', lvl: 'C2', other: ''}, {code: 'en', lvl: 'C1', other: '', cert: 'Cambridge English'}, {code: 'de', lvl: 'B2', other: '', cert: 'fide'}],
     skills: 'MS Excel, Power BI, SAP FI/CO\n' + {de: 'Budgetierung · Forecast · Reporting · Controlling', fr: 'Budgétisation · prévisions · reporting · contrôle de gestion', it: 'Budgeting · forecast · reporting · controlling', en: 'Budgeting · forecasting · reporting · controlling', ru: 'Бюджетирование · прогноз · отчётность · контроллинг', uk: 'Бюджетування · прогноз · звітність · контролінг'}[S.lang], interests: {de: 'Wandern, Fotografie, Freiwilligenarbeit', fr: 'Randonnée, photographie, bénévolat', it: 'Escursionismo, fotografia, volontariato', en: 'Hiking, photography, volunteering', ru: 'Походы, фотография, волонтёрство', uk: 'Походи, фотографія, волонтерство'}[S.lang]});
 }
 function leaveEx(){ showEx = false; document.getElementById('exbar').hidden = true; render(); }
@@ -698,7 +852,16 @@ window.HELP = {
 "profile": "<p>Три-четыре предложения. Кто ты, сколько лет опыта, в чём сильна и какую работу ищешь.</p><p>Например, «Buchhalterin mit 8 Jahren Erfahrung in KMU. Sicher in Abacus und MWST. Suche eine Teilzeitstelle 60–80 % in Zürich».</p>",
 "bullets": "<p>Каждая строка станет пунктом. Пиши коротко и с цифрами, что сделала, а не просто обязанности.</p><p>Например, «Budget von CHF 2 Mio. betreut», «Team von 6 Personen geführt», «Durchlaufzeit um 20 % reduziert».</p>",
 "eduNote": "<p>Если диплом признан в Швейцарии, напиши это. По-немецки «Anerkannt durch das SBFI», по-французски «Reconnu par le SEFRI».</p><p>Можно указать и швейцарский аналог, например «entspricht Master».</p>",
-"lvl": "<ul><li><b>Родной.<\/b> Твой первый язык.<\/li><li><b>C2 и C1.<\/b> Свободно работаешь на этом языке.<\/li><li><b>B2.<\/b> Уверенно говоришь на работе, иногда ищешь слова.<\/li><li><b>B1.<\/b> Справляешься в быту и на простых рабочих темах.<\/li><li><b>A2 и A1.<\/b> Начальный уровень.<\/li><\/ul><p>Если есть сертификат, например fide или Goethe, добавь его в раздел «Курсы».</p>",
+"lvl": "<ul><li><b>Родной.<\/b> Твой первый язык.<\/li><li><b>C2 и C1.<\/b> Свободно работаешь на этом языке.<\/li><li><b>B2.<\/b> Уверенно говоришь на работе, иногда ищешь слова.<\/li><li><b>B1.<\/b> Справляешься в быту и на простых рабочих темах.<\/li><li><b>A2 и A1.<\/b> Начальный уровень.<\/li><\/ul><p>Пиши честно. На собеседовании уровень обычно проверяют.</p>",
+"cert": "<p>Если уровень подтверждён экзаменом, выбери сертификат. Он появится рядом с уровнем, например «B2 – gut, Goethe-Zertifikat».</p><p><b>fide<\/b> — швейцарский тест, его знают все работодатели и ведомства. В нём два уровня, устный и письменный. Если они разные, выбери «Другой…» и напиши, например, «fide: mündlich B1, schriftlich A2».</p><p>Нет сертификата — это нормально, оставь «Без сертификата».</p>",
+"canton": "<p>Выбери кантон, где ищешь работу. Язык резюме выберется сам: немецкий, французский или итальянский. Для международных фирм выбери «Международная фирма», будет английский.</p><p>Во Фрибуре, Вале, Берне и Граубюндене говорят на двух языках. Смотри, на каком языке написана вакансия.</p>",
+"email": "<p>Адрес с именем и фамилией выглядит серьёзнее, например vorname.name@gmail.com. Без смайлов и прозвищ.</p>",
+"civil": "<p>В Швейцарии семейное положение в резюме пишут по желанию. Если не хочешь, оставь «Не указывать».</p>",
+"sex": "<p>Во французском, итальянском, русском и украинском слова «замужем», «mariée» зависят от рода. Выбери, как писать.</p>",
+"drive": "<p>Отметь категории, которые у тебя есть. Для многих профессий (уход на дому, уборка, сервис) права и своя машина — большой плюс.</p>",
+"jobtype": "<p>Обычно оставь «Обычная работа». Если это было через агентство, стажировка, своё дело или волонтёрство, выбери. Это появится маленькой строкой под фирмой.</p><p>Волонтёрство в Швейцарии тоже считается опытом, особенно в первые годы.</p>",
+"pct": "<p>В Швейцарии часто работают не полную неделю. 100 % — полная занятость, 80 % — четыре дня в неделю. Указывать не обязательно.</p>",
+"deg": "<p>Выбери уровень, он переведётся сам. Специальность напиши на языке резюме.</p><p>Если диплом признан в Швейцарии, напиши это в примечании.</p>",
 "skills": "<p>Каждая строка станет отдельной строкой в резюме. Программы, оборудование, водительская категория, сертификаты.</p><p>Пиши конкретно, например «MS Excel (sehr gut)», а не «компьютер».</p>",
 "refs": "<p>В Швейцарии обычно пишут «Referenzen auf Anfrage». Работодатель попросит контакты сам, если ты пройдёшь дальше.</p><p>Если хочешь указать рекомендателей сразу, сними галочку и добавь их. Сначала спроси у них согласие.</p>"
 };
