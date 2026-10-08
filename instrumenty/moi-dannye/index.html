@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<link rel="icon" href="/fav/favicon.svg" type="image/svg+xml"><link rel="icon" href="/fav/icon-32.png" sizes="32x32"><link rel="apple-touch-icon" href="/fav/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/fonts.css">
+<meta name="description" content="Карточка со всеми своими важными данными в Швейцарии: адрес и телефоны, номер AHV, пермит, медстраховка и номер полиса, другие страховки, врачи, работа, банк, управляющая, контакты близких. Для себя и всей семьи, на русском и языке кантона, плюс маленькие карточки в кошелёк. PDF и PNG бесплатно, данные только у тебя.">
+<link rel="canonical" href="https://svoiludi.ch/instrumenty/moi-dannye/">
+<meta property="og:type" content="website"><meta property="og:locale" content="ru_RU"><meta property="og:site_name" content="Свои люди в Швейцарии">
+<meta property="og:title" content="Мои данные · все важные номера на одном листе"><meta property="og:description" content="Адрес, номер AHV, пермит, медстраховка, страховки, врачи, банк и контакты близких — на одном листе для себя и семьи и карточкой в кошелёк. Данные только у тебя. Бесплатно, PDF и PNG.">
+<meta property="og:url" content="https://svoiludi.ch/instrumenty/moi-dannye/"><meta property="og:image" content="https://svoiludi.ch/instrumenty/moi-dannye/og-image.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="robots" content="noindex, nofollow">
+<title>Мои данные</title>
+<style>
+/* Мои данные (08.10.2026): анкета слева, живые листы справа, движок assets/shema.js. */
+:root{
+  --bg:#F4EDE3; --paper:#FFFCF8; --ink:#2F2924; --muted:#7A6E62; --line:#E5D9C9; --soft:#EFE5D7;
+  --brown:#6E4F3C; --mustard:#B98324; --mustard-soft:#F3E3C2; --sage:#4F5E3E; --sage-soft:#E3E8D6; --red:#A0523D;
+  --display:"Forum","Georgia",serif; --sans:"Manrope","Segoe UI",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#221D19; --paper:#2C2621; --ink:#F1E9DF; --muted:#B4A796; --line:#3E362F; --soft:#352E28;
+  --brown:#E1C2A6; --mustard:#E2B45C; --mustard-soft:#3D321F; --sage:#B4BF97; --sage-soft:#2E3226; --red:#E39A85; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#221D19; --paper:#2C2621; --ink:#F1E9DF; --muted:#B4A796; --line:#3E362F; --soft:#352E28;
+  --brown:#E1C2A6; --mustard:#E2B45C; --mustard-soft:#3D321F; --sage:#B4BF97; --sage-soft:#2E3226; --red:#E39A85; color-scheme:dark}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--ink);font:15px/1.55 var(--sans);margin:0}
+.wrap{max-width:1280px;margin:0 auto;padding-inline:16px;padding-block:28px 48px;display:flex;flex-direction:column;gap:24px}
+.eyebrow{font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+h1{font-family:var(--display);font-weight:400;font-size:clamp(2.4rem,6vw,3.6rem);line-height:1;margin:4px 0 10px;text-wrap:balance}
+h2{font-family:var(--display);font-weight:400;font-size:1.55rem;margin:0;text-wrap:balance}
+h3{font-family:var(--display);font-weight:400;font-size:1.22rem;line-height:1.2;margin:0}
+.lead{max-width:66ch;color:var(--muted);margin:0}
+.jump{font-weight:700;color:var(--brown);text-underline-offset:4px}
+.privnote{margin-top:14px;background:var(--sage-soft);border-radius:16px;padding:12px 16px;font-size:.9rem;max-width:90ch}
+.status{font-size:.86rem;color:var(--muted);min-height:1.3em}
+.btn{font:inherit;font-weight:700;font-size:.9rem;border:0;border-radius:999px;padding:10px 18px;cursor:pointer;color:#fff;text-decoration:none;display:inline-flex;align-items:center;gap:6px;background:#6E4F3C;box-shadow:0 8px 18px -8px rgba(110,79,60,.6)}
+.btn.gold{background:#B98324;box-shadow:0 8px 18px -8px rgba(185,131,36,.7)}
+.btn.free{background:#4F5E3E;box-shadow:0 8px 18px -8px rgba(79,94,62,.6)}
+.btn.ghost{background:transparent;color:var(--brown);border:1.5px solid var(--line);box-shadow:none}
+.btn.sm{font-size:.82rem;padding:7px 13px}
+.btn[disabled]{background:var(--soft);color:var(--muted);box-shadow:none;cursor:wait}
+select,input[type=text],input[type=tel],textarea{font:inherit;font-size:.95rem;color:var(--ink);background:var(--paper);border:1.5px solid var(--line);border-radius:12px;padding:9px 12px;width:100%;min-width:0}
+select:focus-visible,input:focus-visible,button:focus-visible,textarea:focus-visible,a:focus-visible{outline:2px solid var(--mustard);outline-offset:2px}
+::placeholder{color:color-mix(in srgb,var(--muted) 70%,transparent)}
+.setup{background:var(--paper);border:1.5px solid var(--line);border-radius:22px;padding:16px 18px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px 18px;align-items:start}
+@media (max-width:1000px){.setup{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.setup{grid-template-columns:1fr}}
+.fl{display:flex;flex-direction:column;gap:6px;min-width:0}
+.fl>.lb{font-size:.8rem;font-weight:700;color:var(--muted);display:flex;align-items:center}
+.seg{display:flex;flex-wrap:wrap;gap:6px}
+.seg button{font:inherit;font-size:.84rem;font-weight:700;border:1.5px solid var(--line);background:var(--paper);color:var(--ink);border-radius:999px;padding:6px 12px;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--sage);border-color:var(--sage);color:#fff}
+.acts{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.exbar{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;background:var(--mustard-soft);border-radius:16px;padding:10px 14px;font-size:.9rem;font-weight:600}
+.work{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:22px;align-items:start}
+@media (max-width:1040px){.work{grid-template-columns:1fr}}
+.form{display:flex;flex-direction:column;gap:14px;min-width:0}
+.sec{background:var(--paper);border:1.5px solid var(--line);border-radius:20px;padding:16px 18px;display:flex;flex-direction:column;gap:12px}
+.sec>h2{font-size:1.3rem;display:flex;align-items:center}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:560px){.g2{grid-template-columns:1fr}}
+.hint{font-size:.84rem;color:var(--muted);margin:0}
+.chk{display:flex;flex-direction:column;gap:8px}
+.chk label{display:flex;gap:10px;align-items:baseline;font-size:.92rem;cursor:pointer}
+.chk input{flex:none;width:18px;height:18px;accent-color:var(--sage);transform:translateY(3px)}
+.chk b{white-space:nowrap}
+.chk small{color:var(--muted)}
+.tog{display:flex;gap:10px;align-items:center;font-size:.92rem;cursor:pointer}
+.tog input{width:18px;height:18px;accent-color:var(--sage)}
+.sheetbox{position:sticky;top:12px;display:flex;flex-direction:column;gap:10px}
+@media (max-width:1040px){.sheetbox{position:static}}
+.sheet{background:#fff;border-radius:6px;box-shadow:0 18px 40px -22px rgba(47,41,36,.45);overflow:hidden}
+.sheet svg{display:block;width:100%;height:auto}
+.imp{background:var(--paper);border:1.5px dashed color-mix(in srgb,var(--sage) 55%,transparent);border-radius:16px;padding:14px 18px;font-size:.88rem;max-width:90ch;margin:0}
+.imp b{color:var(--sage)}
+.guide{display:flex;flex-direction:column;gap:14px;max-width:90ch}
+.guide ul{margin:0;padding-left:20px}
+.guide li{margin:4px 0}
+.credit{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:.8rem;color:var(--muted)}
+.credit a{color:var(--muted)}
+.qh{font:700 .72rem/1 var(--sans);width:20px;height:20px;border-radius:50%;border:1.5px solid var(--line);background:var(--paper);color:var(--brown);cursor:pointer;margin-left:6px;padding:0;flex:none}
+.sheets{display:flex;flex-direction:column;gap:14px}
+.goals{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+@media (max-width:560px){.goals{grid-template-columns:1fr}}
+.goals label{display:flex;gap:10px;align-items:flex-start;background:var(--bg);border:1.5px solid var(--line);border-radius:14px;padding:9px 12px;cursor:pointer;font-size:.92rem}
+.goals input{width:18px;height:18px;accent-color:var(--sage);flex:none;margin-top:2px}
+.goals small{display:block;color:var(--muted)}
+.steps{display:flex;flex-direction:column;gap:8px}
+.steps details{background:var(--paper);border:1.5px solid var(--line);border-radius:16px;padding:10px 16px}
+.steps summary{cursor:pointer;font-weight:700;display:flex;gap:10px;align-items:baseline}
+.steps summary small{font-weight:600;color:var(--muted);margin-left:auto;text-align:right}
+.steps details p,.steps details ul{margin:8px 0 2px;font-size:.93rem}
+.steps details ul{padding-left:20px}
+</style>
+</head>
+<body>
+<style>.people{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px}.pchip{font:inherit;font-size:.92rem;font-weight:600;border:1.5px solid var(--line);background:var(--paper);color:var(--ink);border-radius:999px;padding:7px 14px;cursor:pointer}.pchip.on{border-color:var(--sage);background:var(--sage);color:#fff}.pbtns{display:flex;flex-wrap:wrap;gap:8px}#fields .sec input{width:100%}</style>
+<div class="wrap">
+  <header>
+    <p style="margin:0 0 14px"><a class="jump" href="https://svoiludi.ch/instrumenty/">← Все полезные инструменты · Свои люди в Швейцарии</a></p>
+    <div class="eyebrow">Карточка · мои данные</div>
+    <h1>Мои данные</h1>
+    <p class="lead">Все номера и адреса, которые постоянно спрашивают, — на одном листе: адрес, номер AHV, пермит, медстраховка, страховки, врачи, работа, банк, управляющая, контакты близких. Для себя и для всей семьи, на русском и языке кантона. Плюс маленькие карточки в кошелёк. Можно распечатать или переслать — только то, что ты сама выберешь.</p>
+    <div class="privnote"><b>Твои данные только у тебя.</b> Всё, что ты впишешь, хранится только в твоём браузере на этом устройстве и никуда не отправляется. PDF собирается прямо на устройстве. Регистрация не нужна.</div>
+    <div data-fan="moi-dannye"></div>
+  </header>
+  <div class="setup">
+    <div class="fl"><span class="lb">Язык листов<button type="button" class="qh" data-help="lang" aria-label="Подсказка: язык листов" aria-expanded="false">?</button></span><select id="lang"><option value="de">Русский + немецкий</option><option value="fr">Русский + французский</option><option value="it">Русский + итальянский</option><option value="ru">Только русский</option></select></div>
+    <div class="fl"><span class="lb">Что в PDF</span><div class="chk"><label><input type="checkbox" id="pSheet" checked> Лист на каждого</label><label><input type="checkbox" id="pWallet" checked> Карточки в кошелёк</label></div></div>
+    <div class="fl"><span class="lb">Для пересылки<button type="button" class="qh" data-help="hide" aria-label="Подсказка: для пересылки" aria-expanded="false">?</button></span><label class="tog"><input type="checkbox" id="hide"> Скрыть номер AHV, паспорта и IBAN</label></div>
+    <div class="fl"><span class="lb">Печать</span><label class="tog"><input type="checkbox" id="bw"> Без цвета, для дешёвой печати</label></div>
+  </div>
+  <div class="exbar" id="exbar" hidden><span>Это пример. Так будет выглядеть твой файл.</span><button type="button" class="btn sm" id="exOff">Вернуться к моим данным</button></div>
+  <div class="work">
+    <div class="form">
+      <section class="sec" aria-labelledby="h-who">
+        <h2 id="h-who">Чьи данные<button type="button" class="qh" data-help="people" aria-label="Подсказка: члены семьи" aria-expanded="false">?</button></h2>
+        <div class="people" id="people"></div>
+        <div class="pbtns"><button type="button" class="btn ghost sm" id="addP">+ Добавить человека</button><button type="button" class="btn ghost sm" id="delP">Удалить этого человека</button></div>
+      </section>
+      <section class="sec" aria-labelledby="h-incl">
+        <h2 id="h-incl">Что показать на листе<button type="button" class="qh" data-help="incl" aria-label="Подсказка: что показать" aria-expanded="false">?</button></h2>
+        <div class="goals" id="incl"></div>
+      </section>
+      <div id="fields"></div>
+    </div>
+    <div class="sheetbox">
+      <div class="acts"><button type="button" class="btn gold" id="pdf">Скачать PDF</button><button type="button" class="btn ghost sm" id="share" hidden>Отправить</button><button type="button" class="btn ghost sm" id="exOn">Посмотреть на примере</button></div>
+      <div class="sheets" id="sheet" aria-label="Предпросмотр листов"></div>
+      <div class="status" id="status" role="status"></div>
+    </div>
+  </div>
+  <!--rel--><style>.relsh{margin:34px 0 8px}.relsh h2{font-size:1.35rem;margin:0 0 14px}.relsh-g{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:14px}.relsh-g a{display:flex;gap:12px;align-items:center;padding:12px;border:1.5px solid var(--line,#E4DCCF);border-radius:18px;background:var(--paper,#FFFCF8);color:inherit;text-decoration:none}.relsh-g a:hover{border-color:var(--sage,#5E6B48)}.relsh-g img{width:72px;height:auto;flex:none;border-radius:4px;box-shadow:0 2px 8px rgba(60,50,30,.18)}.relsh-g b{display:block;font-size:.98rem;margin-bottom:3px}.relsh-g span{font-size:.84rem;line-height:1.35;opacity:.85}</style><section class="relsh" aria-labelledby="h-rel"><h2 id="h-rel">Связанные схемы</h2><div class="relsh-g"><a href="/instrumenty/ekstrennye-nomera/"><img src="../preview/ekstrennye-nomera/1.jpg" alt="" loading="lazy"><span><b>Экстренные номера</b><span>Номера, дежурный врач кантона и твои контакты на одной карточке.</span></span></a><a href="/instrumenty/strahovki-obyazatelnye/"><img src="../preview/strahovki-obyazatelnye/1.jpg" alt="" loading="lazy"><span><b>Обязательные страховки</b><span>Что нельзя не оформить: медстраховка, AHV, Serafe, машина, дом.</span></span></a><a href="/instrumenty/franshiza-shema/"><img src="../preview/franshiza-shema/1.jpg" alt="" loading="lazy"><span><b>Франшиза медстраховки</b><span>Сколько платишь сама, какая франшиза выгоднее и до какого числа менять.</span></span></a></div></section><!--rel-->
+  <p class="imp"><b>Важно.</b> Номер AHV, паспорта и IBAN — личные данные. Пересылай их только тем, кому они действительно нужны (работодатель, касса, ведомство), лучше по почте или через защищённый канал, а не в общих чатах. Для пересылки можно включить «Скрыть номер AHV, паспорта и IBAN». Резервная копия тоже содержит все твои данные — храни её в надёжном месте.</p>
+  <div class="share-slot" data-url="https://svoiludi.ch/instrumenty/moi-dannye/" data-lead="Перешли тем, кому пригодится. В ссылке нет твоих данных — только сам инструмент." data-text="Привет! Тут можно собрать все важные данные на одном листе: адрес, номер AHV, медстраховку, страховки, врачей, банк и контакты близких — для себя и семьи, плюс карточки в кошелёк. Данные остаются только у тебя. Бесплатно, PDF. https://svoiludi.ch/instrumenty/moi-dannye/"></div>
+  <p class="credit"><span>Свои люди в Швейцарии · svoiludi.ch</span><a href="https://svoiludi.ch/privacy/">Политика конфиденциальности</a></p>
+</div>
+
+<script src="/assets/kantony.js"></script>
+<script src="/assets/lib/jspdf.umd.min.js"></script>
+<script src="/assets/shema.js"></script>
+<script>
+window.HELP = {
+  lang: '<p><b>Русский + немецкий</b> (французский, итальянский) — у каждой строки подпись ещё и на языке кантона: лист можно показать в больнице, в ведомстве или отдать няне.</p>',
+  hide: '<p>Если пересылаешь лист кому-то (например, няне или знакомому), включи — номер AHV, паспорта и IBAN на листе будут заменены точками. Для себя и для работодателя можно оставить.</p>',
+  people: '<p>Можно завести данные на каждого в семье: на себя, супруга, детей. Выбери человека, чтобы заполнять его данные. На каждого будет свой лист и своя карточка в кошелёк.</p>',
+  incl: '<p>Отметь, какие разделы попадут на лист. Пустые разделы на лист не попадают сами.</p>',
+  ahv: '<p>13 цифр, начинается с 756. Есть на карточке медстраховки, в расчётке и на сертификате AHV. Нужен на работе, в кассе, в ведомствах.</p>',
+  kk: '<p>Номер застрахованного (Versichertennummer) и номер карты есть на карточке медстраховки. Телефон телемедицины — на обороте карточки или в договоре.</p>',
+  iban: '<p>Номер счёта для получения денег: CH и 19 знаков. Его спрашивают работодатель, касса, налоговая для возврата денег.</p>'
+};
+const KEY = 'moiDannye.v1';
+const LOC = {de: 'Meine Angaben', fr: 'Mes données', it: 'I miei dati'};
+/* разделы: ключ, название, цвет, подпись на языке кантона, поля [ключ, по-русски, de, fr, it, подсказка, секретно] */
+const SEC = [
+  ['me', 'Обо мне', 'blue', {de: 'Persönliche Angaben', fr: 'Données personnelles', it: 'Dati personali'}, [
+    ['name', 'Имя и фамилия', 'Name, Vorname', 'Nom, prénom', 'Cognome, nome'], ['birth', 'Дата рождения', 'Geburtsdatum', 'Date de naissance', 'Data di nascita'], ['nat', 'Гражданство', 'Nationalität', 'Nationalité', 'Nazionalità'], ['addr', 'Адрес', 'Adresse', 'Adresse', 'Indirizzo'], ['tel', 'Телефон', 'Telefon', 'Téléphone', 'Telefono'], ['mail', 'E-mail', 'E-Mail', 'E-mail', 'E-mail'], ['langs', 'Языки', 'Sprachen', 'Langues', 'Lingue']]],
+  ['docs', 'Документы', 'sage', {de: 'Ausweise', fr: 'Documents', it: 'Documenti'}, [
+    ['permit', 'Пермит: тип и номер', 'Ausweis: Art und Nr.', 'Permis : type et n°', 'Permesso: tipo e n.'], ['permitTo', 'Пермит действует до', 'gültig bis', 'valable jusqu’au', 'valido fino al'], ['pass', 'Паспорт: номер, до', 'Pass: Nr., gültig bis', 'Passeport : n°, validité', 'Passaporto: n., validità', '', true], ['ahv', 'Номер AHV', 'AHV-Nummer', 'N° AVS', 'N. AVS', 'ahv', true], ['taxnr', 'Налоговая: община и номер', 'Steueramt, Steuer-Nr.', 'Impôts, n° de contribuable', 'Imposte, n. di contribuente']]],
+  ['kk', 'Медстраховка', 'green', {de: 'Krankenkasse', fr: 'Assurance maladie', it: 'Cassa malati'}, [
+    ['kkName', 'Касса и модель', 'Krankenkasse, Modell', 'Caisse, modèle', 'Cassa, modello', 'kk'], ['kkNr', 'Номер застрахованного', 'Versicherten-Nr.', 'N° d’assuré', 'N. d’assicurato', 'kk'], ['kkCard', 'Номер карты', 'Karten-Nr.', 'N° de carte', 'N. tessera'], ['kkTel', 'Телефон кассы, телемедицина', 'Telefon, Telemedizin', 'Téléphone, télémédecine', 'Telefono, telemedicina'], ['kkZus', 'Дополнительная страховка', 'Zusatzversicherung', 'Assurance complémentaire', 'Assicurazione complementare']]],
+  ['ins', 'Другие страховки', 'mustard', {de: 'Weitere Versicherungen', fr: 'Autres assurances', it: 'Altre assicurazioni'}, [
+    ['haft', 'Ответственность и Hausrat: компания, номер', 'Privathaftpflicht/Hausrat', 'RC privée / ménage', 'RC privata / economia domestica'], ['car', 'Машина: компания, номер, номерной знак', 'Motorfahrzeug, Kontrollschild', 'Véhicule, plaques', 'Veicolo, targa'], ['uvg', 'Несчастный случай (через работу)', 'Unfallversicherung', 'Assurance accidents', 'Assicurazione infortuni'], ['legal', 'Юридическая защита, союзы, профсоюз', 'Rechtsschutz, Mitgliedschaften', 'Protection juridique, adhésions', 'Protezione giuridica, adesioni']]],
+  ['med', 'Врачи и здоровье', 'pink', {de: 'Ärzte und Gesundheit', fr: 'Médecins et santé', it: 'Medici e salute'}, [
+    ['gp', 'Семейный врач: имя, телефон', 'Hausarzt/Hausärztin', 'Médecin de famille', 'Medico di famiglia'], ['dent', 'Стоматолог', 'Zahnarzt', 'Dentiste', 'Dentista'], ['spec', 'Педиатр, гинеколог, другой врач', 'Kinderarzt, Gynäkologin', 'Pédiatre, gynécologue', 'Pediatra, ginecologa'], ['allerg', 'Аллергии', 'Allergien', 'Allergies', 'Allergie'], ['meds', 'Лекарства постоянно', 'Medikamente', 'Médicaments', 'Medicamenti'], ['blood', 'Группа крови', 'Blutgruppe', 'Groupe sanguin', 'Gruppo sanguigno']]],
+  ['work', 'Работа или учёба', 'brown', {de: 'Arbeit / Ausbildung', fr: 'Travail / formation', it: 'Lavoro / formazione'}, [
+    ['emp', 'Работодатель или школа', 'Arbeitgeber / Schule', 'Employeur / école', 'Datore di lavoro / scuola'], ['empAddr', 'Адрес', 'Adresse', 'Adresse', 'Indirizzo'], ['empTel', 'Контакт и телефон', 'Kontaktperson, Telefon', 'Contact, téléphone', 'Contatto, telefono']]],
+  ['money', 'Банк', 'blue', {de: 'Bank', fr: 'Banque', it: 'Banca'}, [
+    ['bank', 'Банк', 'Bank', 'Banque', 'Banca'], ['iban', 'IBAN', 'IBAN', 'IBAN', 'IBAN', 'iban', true]]],
+  ['home', 'Жильё', 'red', {de: 'Wohnung', fr: 'Logement', it: 'Alloggio'}, [
+    ['verw', 'Управляющая или хозяин', 'Verwaltung / Vermieter', 'Gérance / bailleur', 'Amministrazione / locatore'], ['verwTel', 'Телефон, номер объекта', 'Telefon, Objekt-Nr.', 'Téléphone, n° d’objet', 'Telefono, n. oggetto'], ['hw', 'Дежурный мастер (Hauswart)', 'Hauswart', 'Concierge', 'Custode'], ['gem', 'Община (Gemeinde)', 'Gemeinde', 'Commune', 'Comune']]],
+  ['ice', 'Близкие на случай беды', 'red', {de: 'Notfallkontakte', fr: 'Contacts d’urgence', it: 'Contatti d’emergenza'}, [
+    ['ice1', 'Контакт 1: имя, кто, телефон', 'Kontakt 1', 'Contact 1', 'Contatto 1'], ['ice2', 'Контакт 2: имя, кто, телефон', 'Kontakt 2', 'Contact 2', 'Contatto 2']]],
+  ['other', 'Другое', 'sage', {de: 'Weiteres', fr: 'Autres', it: 'Altro'}, [
+    ['o1', 'Например: ветеринар, школа детей, автосервис', 'Weiteres', 'Autres', 'Altro'], ['o2', 'Ещё', 'Weiteres', 'Autres', 'Altro']]]
+];
+const LI = {de: 2, fr: 3, it: 4};
+const DISC = {ru: 'Личные данные. Храни и пересылай только тем, кому они нужны. svoiludi.ch', de: 'Persönliche Angaben. Nur an Personen weitergeben, die sie benötigen.', fr: 'Données personnelles. À ne transmettre qu’aux personnes qui en ont besoin.', it: 'Dati personali. Trasmettere solo a chi ne ha bisogno.'};
+let S = load(), EX = null;
+function person(n){ return {label: n || 'Я', d: {}}; }
+function blank(){ return {lang: 'de', bw: false, hide: false, sheet: true, wallet: true, cur: 0, people: [person('Я')], incl: SEC.map(s => s[0])}; }
+function load(){ try { const s = JSON.parse(localStorage.getItem(KEY)); if (s && typeof s === 'object' && Array.isArray(s.people) && s.people.length) return Object.assign(blank(), s); } catch (e) {} return blank(); }
+function save(){ if (EX) return; try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} }
+const D = () => EX || S, bi = d => d.lang !== 'ru', disc = d => bi(d) ? DISC[d.lang] : DISC.ru;
+const mask = v => v.replace(/[0-9A-Za-z]/g, (ch, i) => i < 4 ? ch : '•');
+const val = (d, f, v) => (d.hide && f[6] && v) ? mask(v) : v;
+const lbl = (d, f) => f[1] + (bi(d) ? ' · ' + f[LI[d.lang]] : '');
+
+function sheet(d, p){
+  const C = SH.pal(d.bw), P = SH.page(210, 297, C), c = C.c;
+  const nm = p.d.name || p.label || 'Мои данные';
+  P.header('Мои данные · ' + nm, bi(d) ? LOC[d.lang] : '', '');
+  const X = 12, cw = (186 - 6) / 2, cols = [28, 28];
+  const secs = SEC.filter(s => d.incl.includes(s[0]) && s[4].some(f => (p.d[f[0]] || '').trim()));
+  if (!secs.length) { P.para('Заполни данные на сайте — здесь появится твой лист.', X, 30, 9, false, C.ink, 186, 4.2); P.foot(disc(d)); return P; }
+  const box = (s, x, y, dry) => {
+    const col = c[s[2]], rows = s[4].filter(f => (p.d[f[0]] || '').trim()), iw = cw - 6;
+    let yy = y + 6.4;
+    if (!dry) { P.text(s[1], x + 3, yy, 10, true, col[1]); if (bi(d)) P.text(s[3][d.lang], x + cw - 3, yy, 6.4, false, C.mut, 'right'); }
+    yy += 5;
+    rows.forEach(f => {
+      const L = SH.wrap(lbl(d, f), false, 6.4, iw), V = SH.wrap(val(d, f, p.d[f[0]].trim()), true, 8.6, iw);
+      L.forEach(l => { if (!dry) P.text(l, x + 3, yy, 6.4, false, C.mut); yy += 2.9; });
+      V.forEach(l => { if (!dry) P.text(l, x + 3, yy + 0.6, 8.6, true, C.ink); yy += 4; });
+      yy += 1.6;
+    });
+    const h = yy - y + 1;
+    return h;
+  };
+  secs.forEach(s => {
+    const h = box(s, 0, 0, true), k = cols[0] <= cols[1] ? 0 : 1;
+    if (cols[k] + h > 285) return;
+    const col = c[s[2]];
+    P.rect(X + k * (cw + 6), cols[k], cw, h, col[0], col[1], 1.6);
+    box(s, X + k * (cw + 6), cols[k], false);
+    cols[k] += h + 5;
+  });
+  P.foot(disc(d));
+  return P;
+}
+/* карточки в кошелёк: 85×54 мм, по 8 на лист */
+function wallet(d){
+  const C = SH.pal(d.bw), P = SH.page(210, 297, C), c = C.c;
+  P.header('Карточки в кошелёк', bi(d) ? {de: 'Karten fürs Portemonnaie', fr: 'Cartes pour le porte-monnaie', it: 'Tessere per il portafoglio'}[d.lang] : '', 'вырежи по линии: себе, няне, в машину');
+  const W = 85, H = 54, gx = 12, gy = 24, gapX = 16, gapY = 6;
+  const ppl = []; for (let i = 0; i < 8; i++) ppl.push(d.people[i % d.people.length]);
+  ppl.forEach((p, i) => {
+    const x = gx + (i % 2) * (W + gapX), y = gy + Math.floor(i / 2) * (H + gapY);
+    P.rect(x, y, W, H, '#FFFFFF', C.line, 3, true);
+    P.rect(x, y, W, 8, c.red[0], null, 3); P.text((p.d.name || p.label || '').slice(0, 40), x + 3, y + 5.6, 8.4, true, c.red[1]);
+    const L = [['birth', 'Дата рождения'], ['ahv', 'AHV'], ['kkName', 'Касса'], ['kkNr', 'Номер в кассе'], ['allerg', 'Аллергии'], ['gp', 'Врач'], ['ice1', 'Близкий'], ['ice2', 'Близкий']];
+    let yy = y + 12.5;
+    L.forEach(([k, t]) => { const v = (p.d[k] || '').trim(); if (!v || yy > y + H - 3) return; const f = SEC.flatMap(s => s[4]).find(f => f[0] === k); P.text(t + ':', x + 3, yy, 6.4, true, C.head); P.text(SH.wrap(val(d, f, v), false, 6.6, W - 30)[0], x + 27, yy, 6.6, false, C.ink); yy += 4.6; });
+    P.text('Экстренно: 144 скорая · 117 полиция · 118 пожар', x + 3, y + H - 2.5, 5.6, false, C.mut);
+  });
+  P.foot(disc(d));
+  return P;
+}
+function build(){ const d = D(), p = []; if (d.sheet) d.people.forEach(pp => p.push(sheet(d, pp))); if (d.wallet) p.push(wallet(d)); if (!p.length) p.push(sheet(d, d.people[0])); return p; }
+
+const $ = id => document.getElementById(id);
+$('incl').innerHTML = SEC.map(s => `<label><input type="checkbox" data-incl="${s[0]}"> <span>${SH.esc(s[1])}</span></label>`).join('');
+function renderPeople(){
+  const d = D();
+  $('people').innerHTML = d.people.map((p, i) => `<button type="button" class="pchip${i === d.cur ? ' on' : ''}" data-p="${i}">${SH.esc(p.d.name || p.label || 'Человек ' + (i + 1))}</button>`).join('');
+  $('delP').hidden = d.people.length < 2 || !!EX; $('addP').hidden = d.people.length >= 8 || !!EX;
+}
+function renderFields(){
+  const d = D(), p = d.people[d.cur] || d.people[0];
+  $('fields').innerHTML = SEC.map(s => `<section class="sec"><h2>${SH.esc(s[1])}</h2><div class="g2">` + s[4].map(f => `<div class="fl"><span class="lb">${SH.esc(f[1])}${f[5] ? `<button type="button" class="qh" data-help="${f[5]}" aria-label="Подсказка" aria-expanded="false">?</button>` : ''}</span><input type="text" data-f="${f[0]}" value="${SH.esc(p.d[f[0]] || '')}" ${EX ? 'disabled' : ''} autocomplete="off"></div>`).join('') + '</div></section>').join('');
+  if (window.HELP_BIND) try { window.HELP_BIND(); } catch (e) {}
+}
+let UI;
+function fill(full){
+  const d = D();
+  $('lang').value = d.lang; $('bw').checked = !!d.bw; $('hide').checked = !!d.hide; $('pSheet').checked = !!d.sheet; $('pWallet').checked = !!d.wallet;
+  document.querySelectorAll('[data-incl]').forEach(i => { i.checked = d.incl.includes(i.dataset.incl); });
+  renderPeople(); if (full !== false) renderFields();
+  $('exbar').hidden = !EX; $('exOn').hidden = !!EX;
+  if (UI) UI.render();
+}
+const set = f => { f(S); if (EX) f(EX); save(); fill(); };
+$('lang').addEventListener('change', e => set(s => s.lang = e.target.value));
+$('bw').addEventListener('change', e => set(s => s.bw = e.target.checked));
+$('hide').addEventListener('change', e => set(s => s.hide = e.target.checked));
+$('pSheet').addEventListener('change', e => set(s => s.sheet = e.target.checked));
+$('pWallet').addEventListener('change', e => set(s => s.wallet = e.target.checked));
+document.addEventListener('change', e => { const t = e.target; if (t.dataset && t.dataset.incl) set(s => { s.incl = [...document.querySelectorAll('[data-incl]:checked')].map(i => i.dataset.incl); }); });
+let tmr;
+document.addEventListener('input', e => { const t = e.target; if (!t.dataset || !t.dataset.f || EX) return; const p = S.people[S.cur]; p.d[t.dataset.f] = t.value; if (t.dataset.f === 'name') renderPeople(); save(); clearTimeout(tmr); tmr = setTimeout(() => UI && UI.render(), 400); });
+$('people').addEventListener('click', e => { const b = e.target.closest('[data-p]'); if (!b) return; const i = +b.dataset.p; if (EX) { EX.cur = i; } else { S.cur = i; save(); } fill(); });
+$('addP').addEventListener('click', () => { if (EX) return; S.people.push(person('Человек ' + (S.people.length + 1))); S.cur = S.people.length - 1; save(); fill(); });
+$('delP').addEventListener('click', () => { if (EX || S.people.length < 2) return; if (!confirm('Удалить данные этого человека с этого устройства?')) return; S.people.splice(S.cur, 1); S.cur = 0; save(); fill(); });
+const EXD = () => ({lang: 'de', bw: S.bw, hide: false, sheet: true, wallet: true, cur: 0, incl: SEC.map(s => s[0]), people: [
+  {label: 'Я', d: {name: 'Olena Kovalenko', birth: '12.04.1986', nat: 'Украина', addr: 'Musterstrasse 12, 8000 Zürich', tel: '079 123 45 67', mail: 'olena.k@example.ch', langs: 'русский, украинский, немецкий B1', permit: 'B · E12345678', permitTo: '30.06.2027', pass: 'FX123456 · до 2031', ahv: '756.1234.5678.97', taxnr: 'Zürich · 123.456.789', kkName: 'Muster-Kasse · Hausarztmodell', kkNr: '80756000123456789', kkCard: '0123 4567 89', kkTel: '0800 000 000 (Telemedizin 24 h)', kkZus: 'Ambulant, Zahn', haft: 'Muster Versicherung · Police 12.345.678', uvg: 'через работодателя', gp: 'Dr. med. A. Muster · 044 000 00 00', dent: 'Zahnarztpraxis Muster · 044 000 00 01', allerg: 'пенициллин', blood: 'A+', emp: 'Muster AG', empAddr: 'Bahnhofstrasse 1, 8001 Zürich', empTel: 'HR, Frau Beispiel · 044 000 00 02', bank: 'Muster Bank', iban: 'CH93 0076 2011 6238 5295 7', verw: 'Muster Immobilien AG', verwTel: '044 000 00 03 · Objekt 4711', hw: 'Herr Beispiel · 079 000 00 04', gem: 'Stadt Zürich', ice1: 'Andriy (муж) · 079 765 43 21', ice2: 'Iryna (подруга) · 078 111 22 33'}},
+  {label: 'Дочь', d: {name: 'Sofia Kovalenko', birth: '03.09.2017', addr: 'Musterstrasse 12, 8000 Zürich', ahv: '756.9876.5432.10', kkName: 'Muster-Kasse', kkNr: '80756000987654321', spec: 'Kinderarztpraxis Muster · 044 000 00 05', allerg: 'нет', emp: 'Schulhaus Muster, 2. Klasse', empTel: 'Lehrerin Frau Beispiel · 044 000 00 06', ice1: 'Olena (мама) · 079 123 45 67', ice2: 'Andriy (папа) · 079 765 43 21'}}]});
+$('exOn').addEventListener('click', () => { EX = EXD(); fill(); window.scrollTo({top: $('exbar').offsetTop - 12, behavior: 'smooth'}); });
+$('exOff').addEventListener('click', () => { EX = null; fill(); });
+if (/[?&]example\b/.test(location.search)) EX = EXD();
+UI = SH.mount({build, title: 'Мои данные', name: () => 'Moi-dannye'});
+fill();
+
+</script>
+<script src="/assets/help.js"></script>
+<script src="/assets/backup.js"></script>
+<script src="/assets/pdffan.js" defer></script>
+<script src="/assets/share.js" defer></script>
+<script src="/assets/samesite.js"></script>
+</body>
+</html>

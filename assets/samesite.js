@@ -12,3 +12,8 @@
     e.preventDefault(); location.href = u.href;
   }, true);
 })();
+/* Поиск по сайту в шапке каждой страницы (правило Ирины, 08.10.2026): подгружаем assets/sitesearch.js рядом с этим файлом. */
+(function(){
+  var cs = document.currentScript; if (!cs || !cs.src || window.SVL_SITESEARCH) return;
+  var s = document.createElement('script'); s.src = cs.src.replace(/samesite\.js(\?.*)?$/, 'sitesearch.js'); document.head.appendChild(s);
+})();
