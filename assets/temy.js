@@ -114,7 +114,7 @@
     const tel = n => 'tel:' + n.replace(/\s/g, '');
     const codes = Object.keys(K).sort((a, b) => K[a].n.localeCompare(K[b].n, 'ru'));
     let cur = ''; try { cur = localStorage.getItem(KEY) || ''; } catch (e) {}
-    const SOS = [['144', 'Скорая помощь', 'Sanität'], ['117', 'Полиция', 'Polizei'], ['118', 'Пожарные', 'Feuerwehr'], ['112', 'Общий номер', 'Notruf'], ['1414', 'Rega, вертолёт', 'Rega'], ['145', 'Отравления', 'Tox Info'], ['143', 'Если тяжело на душе', 'Die Dargebotene Hand'], ['147', 'Детям и подросткам', 'Pro Juventute']];
+    const SOS = [['144', 'Скорая помощь', 'Sanität'], ['117', 'Полиция', 'Polizei'], ['118', 'Пожарные', 'Feuerwehr'], ['112', 'Общий номер', 'Notruf'], ['1414', 'Rega, вертолёт', 'Rega'], ['145', 'Отравления', 'Tox Info'], ['143', 'Если тяжело на душе', 'Die Dargebotene Hand'], ['147', 'Детям и подросткам', 'Pro Juventute'], ['142', 'Помощь пострадавшим от насилия', 'Opferhilfe']];
     const rows = k => {
       const m = M[k]; if (!m) return '';
       let h = m.l.map(r => '<li><a class="med-n" href="' + tel(r[1]) + '">' + esc(r[1]) + '</a><span><b>' + esc(r[0]) + '</b>' + (r[2] ? ' · ' + esc(r[2]) : '') + '</span></li>').join('');
