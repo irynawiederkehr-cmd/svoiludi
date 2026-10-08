@@ -65,7 +65,16 @@
     '.pa-tabs [aria-current="page"] svg{stroke-width:2.2}',
     '.pa-tabs [aria-current="page"]::before{content:"";display:block;width:26px;height:3px;border-radius:3px;background:var(--sage,#66704F);margin:-6px 0 3px}',
     '.pa-tabs a:active,.pa-tabs button:active{background:var(--sage-soft,#E3E6D6)}',
-    '@media (max-width:1100px){html.pa-app .pa-tabs{display:block}html.pa-app body{padding-bottom:calc(72px + env(safe-area-inset-bottom))}html.pa-app header.top nav{display:none!important}}',
+    '@media (max-width:1100px){html.pa-app .pa-tabs{display:block}html.pa-app body{padding-bottom:calc(72px + env(safe-area-inset-bottom))}}',
+    /* верхнее меню в приложении: прямоугольные плитки с закруглением, в два ряда (08.10.2026, по просьбе Ирины) */
+    '@media (max-width:1100px){html.pa-app header.top .page{flex-wrap:wrap;row-gap:8px}' +
+    'html.pa-app header.top nav[aria-label]{order:3;width:100%;display:grid!important;grid-template-columns:repeat(var(--pa-cols,3),minmax(0,1fr));gap:8px;overflow:visible;padding:4px 0 12px;margin:0}' +
+    'html.pa-app header.top nav[aria-label] a{display:flex!important;flex-direction:column;align-items:center;justify-content:center;gap:5px;min-height:62px;padding:9px 6px;border-radius:14px;background:var(--paper,#FFFCF8);border:1px solid color-mix(in srgb,var(--sage,#66704F) 30%,transparent);box-shadow:0 3px 10px -6px rgba(60,70,40,.45);color:var(--ink,#2F2924)!important;font:600 .78rem/1.18 var(--body,system-ui);text-align:center;white-space:normal;text-decoration:none;-webkit-tap-highlight-color:transparent}' +
+    'html.pa-app header.top nav[aria-label] a::after{content:none!important}' +
+    'html.pa-app header.top nav[aria-label] a .pa-ni{display:block;width:22px;height:22px;fill:none;stroke:var(--sage,#66704F);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}' +
+    'html.pa-app header.top nav[aria-label] a[aria-current="page"]{background:var(--sage,#66704F);border-color:var(--sage,#66704F);color:var(--paper,#FFFCF8)!important;box-shadow:0 4px 12px -6px rgba(60,70,40,.6)}' +
+    'html.pa-app header.top nav[aria-label] a[aria-current="page"] .pa-ni{stroke:var(--paper,#FFFCF8)}' +
+    'html.pa-app header.top nav[aria-label] a:active{transform:scale(.97)}}',
     'html.pa-app header.top{padding-top:env(safe-area-inset-top)}',
     '.pa-sheet,.pa-card{font-family:var(--body,system-ui);color:var(--ink,#2F2924)}',
     '.pa-back{position:fixed;inset:0;z-index:950;background:rgba(30,24,20,.38);display:flex;align-items:flex-end;justify-content:center}',
@@ -106,6 +115,8 @@
     kurs: '<svg viewBox="0 0 24 24"><path d="M2.5 9 12 4.5 21.5 9 12 13.5z"/><path d="M6.5 11v4.5c1.6 1.6 3.4 2.3 5.5 2.3s3.9-.7 5.5-2.3V11M21.5 9v5"/></svg>',
     tool: '<svg viewBox="0 0 24 24"><path d="M12 3.5v3M12 17.5v3M3.5 12h3M17.5 12h3"/><circle cx="12" cy="12" r="4.2"/><path d="m6 6 1.8 1.8M16.2 16.2 18 18M6 18l1.8-1.8M16.2 7.8 18 6"/></svg>',
     more: '<svg viewBox="0 0 24 24"><circle cx="5.5" cy="12" r="1.4"/><circle cx="12" cy="12" r="1.4"/><circle cx="18.5" cy="12" r="1.4"/></svg>',
+    swiss: '<svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="4"/><path d="M12 8v8M8 12h8"/></svg>',
+    job: '<svg viewBox="0 0 24 24"><rect x="3.5" y="7.5" width="17" height="12" rx="2.5"/><path d="M9 7.5V6a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v1.5M3.5 13h17"/></svg>',
     join: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 8v8M8 12h8"/></svg>',
     site: '<svg viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg>',
     lock: '<svg viewBox="0 0 24 24"><rect x="5" y="10.5" width="14" height="10" rx="2.5"/><path d="M8 10.5V8a4 4 0 0 1 8 0v2.5"/></svg>',
@@ -117,8 +128,24 @@
 
   /* 2. режим приложения: панель вкладок */
   function rel() { return location.pathname.replace(/^\/uk(?=\/|$)/, '') || '/'; }
+  function topTiles() {   /* иконки в плитках верхнего меню; число колонок — чтобы всегда было два ряда */
+    var nav = document.querySelector('header.top nav[aria-label]'); if (!nav) return;
+    var map = [[/voznesenskaya\.ch/, I.site], [/kursy\//, I.kurs], [/events\//, I.ev], [/instrumenty\//, I.tool], [/join\//, I.join],
+      [/shveycariya\//, I.swiss], [/vakansii\//, I.job], [/^\/(index\.html)?$/, I.spec]];
+    var links = nav.querySelectorAll('a');
+    links.forEach(function (a) {
+      if (a.querySelector('.pa-ni')) return;
+      var u = new URL(a.href, location.href), ic = I.more;
+      var h = (u.origin === location.origin || /(^|\.)svoiludi\.ch$/.test(u.hostname)) ? u.pathname.replace(/^\/uk(?=\/)/, '') : u.href;
+      for (var i = 0; i < map.length; i++) if (map[i][0].test(h)) { ic = map[i][1]; break; }
+      a.insertAdjacentHTML('afterbegin', ic.replace('<svg ', '<svg class="pa-ni" aria-hidden="true" '));
+      a.style.removeProperty('color');
+    });
+    nav.style.setProperty('--pa-cols', Math.max(2, Math.ceil(links.length / 2)));
+  }
   function tabBar() {
     document.documentElement.classList.add('pa-app');
+    topTiles();
     var r = rel(), cur = r === '/' || r === '/index.html' ? 0 : /^\/events\//.test(r) ? 1 : /^\/kursy\//.test(r) ? 2 : /^\/instrumenty\//.test(r) ? 3 : 4;
     var links = [['/', I.spec], ['/events/', I.ev], ['/kursy/', I.kurs], ['/instrumenty/', I.tool]];
     var h = '<div class="pa-tabs" role="navigation" aria-label="' + T.tabs.slice(0, 4).join(' · ') + '"><ul>';
