@@ -112,6 +112,7 @@ select:focus-visible,input:focus-visible,button:focus-visible,textarea:focus-vis
   <div class="setup">
     <div class="fl"><span class="lb">Кантон<button type="button" class="qh" data-help="kt" aria-label="Подсказка: кантон" aria-expanded="false">?</button></span><select id="kt"></select></div>
     <div class="fl"><span class="lb">Язык договора<button type="button" class="qh" data-help="lang" aria-label="Подсказка: язык договора" aria-expanded="false">?</button></span><select id="lang"><option value="de+ru">Deutsch + русский</option><option value="fr+ru">Français + русский</option><option value="it+ru">Italiano + русский</option><option value="de">Deutsch</option><option value="fr">Français</option><option value="it">Italiano</option></select></div>
+    <div class="fl"><span class="lb">Печать</span><label class="tog"><input type="checkbox" id="bw"> Без цвета, для дешёвой печати</label></div>
   </div>
   <div class="exbar" id="exbar" hidden><span>Это пример. Так будет выглядеть твой файл.</span><button type="button" class="btn sm" id="exOff">Вернуться к моим данным</button></div>
   <div class="work">
@@ -248,7 +249,7 @@ const HEAD = {de: ['Arbeitsvertrag', 'für die Kinderbetreuung im Privathaushalt
 
 /* ---------- лист ---------- */
 function build(){
-  const d = D(), L = d.lang, H = HEAD[L], R = d.ru ? HEAD.ru : null, C = SH.pal(false), ink = '#2F2924', mut = '#7A6E62';
+  const d = D(), L = d.lang, H = HEAD[L], R = d.ru ? HEAD.ru : null, C = SH.pal(!!d.bw), ink = d.bw ? '#000000' : '#2F2924', mut = d.bw ? '#444444' : '#7A6E62', acc = d.bw ? '#000000' : '#4F5E3E';
   const pages = []; let P, y; const X = 20, W = 170, BOT = 278;
   const np = () => { P = SH.page(210, 297, C); pages.push(P); y = 22; };
   const need = h => { if (y + h > BOT) np(); };
@@ -265,7 +266,7 @@ function build(){
   y += 2;
   const loc = txt(L, d), ru = R ? txt('ru', d) : null;
   loc.forEach((c, i) => {
-    need(14); P.text((i + 1) + '. ' + c[0] + (ru ? '  ·  ' + ru[i][0] : ''), X, y, 10, true, '#4F5E3E'); y += 5.2;
+    need(14); P.text((i + 1) + '. ' + c[0] + (ru ? '  ·  ' + ru[i][0] : ''), X, y, 10, true, acc); y += 5.2;
     para(c[1], 9.2, false, ink, 4.3);
     if (ru) { y += 0.8; para(ru[i][1], 7.8, false, mut, 3.7); }
     y += 3.2;
@@ -329,10 +330,11 @@ function renderForm(){
 let UI, tmr;
 const setPath = (o, p, v) => { const k = p.split('.'); if (k.length === 2) o[k[0]][k[1]] = v; else o[k[0]] = v; };
 const NUM = ['hours', 'rate', 'month', 'ferien', 'probe', 'ktgP', 'ktgW'];
-function fill(){ const d = D(); $('kt').value = d.kt || ''; $('lang').value = d.lang + (d.ru ? '+ru' : ''); renderForm(); $('exbar').hidden = !EX; $('exOn').hidden = !!EX; if (UI) UI.render(); }
+function fill(){ const d = D(); $('bw').checked = !!d.bw; $('kt').value = d.kt || ''; $('lang').value = d.lang + (d.ru ? '+ru' : ''); renderForm(); $('exbar').hidden = !EX; $('exOn').hidden = !!EX; if (UI) UI.render(); }
 const KN = window.KANTONY || {};
 $('kt').innerHTML = '<option value="">Выбери кантон</option>' + Object.keys(KN).sort((a, b) => KN[a].n.localeCompare(KN[b].n, 'ru')).map(k => `<option value="${k}">${esc(KN[k].n)}</option>`).join('');
 $('kt').addEventListener('change', e => { S.kt = e.target.value; S.lang = langOf(S.kt); try { localStorage.setItem('svoiludi.kanton', S.kt); } catch (x) {} if (EX) { EX.kt = S.kt; EX.lang = S.lang; } save(); fill(); });
+$('bw').addEventListener('change', e => { S.bw = e.target.checked; if (EX) EX.bw = S.bw; save(); UI && UI.render(); });
 $('lang').addEventListener('change', e => { const [l, r] = e.target.value.split('+'); S.lang = l; S.ru = !!r; if (EX) { EX.lang = l; EX.ru = !!r; } save(); fill(); });
 document.addEventListener('input', e => { const x = e.target; if (EX || !x.dataset || !x.dataset.k || x.type === 'checkbox' || x.tagName === 'SELECT') return;
   setPath(S, x.dataset.k, NUM.includes(x.dataset.k) ? (x.value === '' ? '' : +x.value) : x.value); save(); clearTimeout(tmr); tmr = setTimeout(() => { UI && UI.render(); }, 450); });

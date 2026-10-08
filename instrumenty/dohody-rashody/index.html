@@ -117,6 +117,7 @@ select:focus-visible,input:focus-visible,button:focus-visible,textarea:focus-vis
     <div class="fl"><span class="lb">Язык PDF<button type="button" class="qh" data-help="lang" aria-label="Подсказка: язык PDF" aria-expanded="false">?</button></span><select id="lang"><option value="ru">На языке сайта</option><option value="de">Deutsch</option><option value="fr">Français</option><option value="it">Italiano</option></select></div>
     <div class="fl"><span class="lb">Год</span><select id="year"></select></div>
     <div class="fl"><span class="lb">Что скачать<button type="button" class="qh" data-help="doc" aria-label="Подсказка: что скачать" aria-expanded="false">?</button></span><select id="doc"><option value="rep">Отчёт за год для налоговой</option><option value="quit">Квитанции за наличные</option></select></div>
+    <div class="fl"><span class="lb">Печать</span><label class="tog"><input type="checkbox" id="bw"> Без цвета, для дешёвой печати</label></div>
   </div>
   <div class="exbar" id="exbar" hidden><span>Это пример. Так будет выглядеть твой файл.</span><button type="button" class="btn sm" id="exOff">Вернуться к моим данным</button></div>
   <div class="work">
@@ -203,7 +204,7 @@ function nextBeleg(y){ const n = y.e.map(e => parseInt(String(e.b).replace(/\D/g
 const fit = (s, b, size, w) => { s = String(s || ''); if (SH.tw(s, b, size) <= w) return s; while (s.length > 1 && SH.tw(s + '…', b, size) > w) s = s.slice(0, -1); return s + '…'; };
 function head(P, d, title){ P.header(title, [d.me.name, d.me.addr, d.me.city].filter(Boolean).join(' · '), ''); }
 function pRep(d){
-  const C = SH.pal(false), P = SH.page(210, 297, C), c = C.c, k = calc(d), X = 12, W = 186;
+  const C = SH.pal(!!d.bw), P = SH.page(210, 297, C), c = C.c, k = calc(d), X = 12, W = 186;
   head(P, d, t(d, 'title') + ' ' + d.year);
   const tiles = [[t(d, 'in'), k.in, c.green], [t(d, 'ex'), k.ex, c.red], [k.res >= 0 ? t(d, 'res') : t(d, 'loss'), k.res, c.sage]];
   tiles.forEach((x, i) => { const tx = X + i * 63; P.rect(tx, 23, 60, 19, x[2][0], x[2][1], 2); P.text(x[0], tx + 4, 29.5, 7.6, false, C.mut); P.text('CHF ' + money(x[1]), tx + 4, 38, 13, true, x[2][1]); });
@@ -229,7 +230,7 @@ function pRep(d){
   return P;
 }
 function pJournal(d){
-  const out = [], rows = sorted(Y(d)), X = 12, W = 186, C = SH.pal(false);
+  const out = [], rows = sorted(Y(d)), X = 12, W = 186, C = SH.pal(!!d.bw);
   const cols = [[X + 1, 'beleg', 'left', 14], [X + 16, 'date', 'left', 17], [X + 34, 'txt', 'left', 60], [X + 96, 'cat', 'left', 38], [X + 136, 'pay', 'left', 15], [X + 166, 'in', 'right', 0], [X + W - 1, 'ex', 'right', 0]];
   let i = 0, n = 0;
   do {
@@ -249,7 +250,7 @@ function pJournal(d){
 }
 function pKassa(d){
   const rows = sorted(Y(d)).filter(e => e.p === 'cash'); if (!rows.length && !(+Y(d).cash0)) return [];
-  const out = [], X = 12, W = 186, C = SH.pal(false); let bal = +Y(d).cash0 || 0, i = 0, n = 0;
+  const out = [], X = 12, W = 186, C = SH.pal(!!d.bw); let bal = +Y(d).cash0 || 0, i = 0, n = 0;
   const cx = [X + 1, X + 18, X + 36, X + 136, X + 161, X + W - 1];
   do {
     const P = SH.page(210, 297, C); head(P, d, t(d, 'kassa') + ' ' + d.year + (n ? t(d, 'cont') : ''));
@@ -280,7 +281,7 @@ function quit(P, d, e, y0, label){
   P.line(X + 100, y + 1.5, X + W, y + 1.5, '#C9BBA8', 0.3); P.text(t(d, 'qSign'), X + 100, y + 5, 7, false, mut);
 }
 function pQuit(d){
-  const sel = Y(d).e.filter(e => e.q && e.p === 'cash' && typeOf(e.c) === 'in' && e.c !== 'priv'), out = [], C = SH.pal(false);
+  const sel = Y(d).e.filter(e => e.q && e.p === 'cash' && typeOf(e.c) === 'in' && e.c !== 'priv'), out = [], C = SH.pal(!!d.bw);
   const items = []; sel.forEach(e => { items.push([e, t(d, 'qOrig')]); if (d.copy) items.push([e, t(d, 'qCopy')]); });
   for (let i = 0; i < items.length; i += 2) {
     const P = SH.page(210, 297, C); quit(P, d, items[i][0], 0, items[i][1]);
@@ -336,13 +337,14 @@ function renderForm(){
   </section>`;
 }
 let UI;
-function fill(){ const d = D(); $('kt').value = d.kt || ''; $('lang').value = d.lang; $('doc').value = d.doc;
+function fill(){ const d = D(); $('bw').checked = !!d.bw; $('kt').value = d.kt || ''; $('lang').value = d.lang; $('doc').value = d.doc;
   const ys = [...new Set([YNOW - 1, YNOW, YNOW + 1, ...Object.keys(d.years).map(Number), +d.year])].sort();
   $('year').innerHTML = ys.map(x => `<option${x == d.year ? ' selected' : ''}>${x}</option>`).join('');
   renderForm(); $('exbar').hidden = !EX; $('exOn').hidden = !!EX; if (UI) UI.render(); }
 const KN = window.KANTONY || {};
 $('kt').innerHTML = '<option value="">Выбери кантон</option>' + Object.keys(KN).sort((a, b) => KN[a].n.localeCompare(KN[b].n, 'ru')).map(k => `<option value="${k}">${esc(KN[k].n)}</option>`).join('');
 $('kt').addEventListener('change', e => { S.kt = e.target.value; S.lang = langOf(S.kt); try { localStorage.setItem('svoiludi.kanton', S.kt); } catch (x) {} if (EX) EX.lang = S.lang; save(); fill(); });
+$('bw').addEventListener('change', e => { S.bw = e.target.checked; if (EX) EX.bw = S.bw; save(); UI && UI.render(); });
 $('lang').addEventListener('change', e => { S.lang = e.target.value; if (EX) EX.lang = S.lang; save(); fill(); });
 $('doc').addEventListener('change', e => { S.doc = e.target.value; if (EX) EX.doc = S.doc; save(); fill(); });
 $('year').addEventListener('change', e => { if (EX) return; S.year = +e.target.value; F = null; EDIT = null; FILT = ''; save(); fill(); });
