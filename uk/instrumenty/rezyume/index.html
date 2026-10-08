@@ -1,0 +1,1045 @@
+<!doctype html>
+<html lang="uk">
+<head><!--i18n--><base href="/instrumenty/rezyume/"><!--i18n-->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<link rel="icon" href="/fav/favicon.svg" type="image/svg+xml"><link rel="icon" href="/fav/icon-32.png" sizes="32x32"><link rel="apple-touch-icon" href="/fav/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/fonts.css">
+<meta name="description" content="Резюме для Швейцарії онлайн і безкоштовно. Lebenslauf, CV німецькою, французькою, італійською, англійською, російською та українською. Три гарні шаблони, фото, пермит, мови за рівнями A1–C2. Готовий PDF для надсилання роботодавцю.">
+<link rel="canonical" href="https://svoiludi.ch/uk/instrumenty/rezyume/">
+<meta property="og:type" content="website"><meta property="og:locale" content="uk_UA"><meta property="og:site_name" content="Свої люди у Швейцарії">
+<meta property="og:title" content="Резюме по-швейцарськи · Lebenslauf і CV онлайн"><meta property="og:description" content="Заповни один раз і отримай резюме німецькою, французькою, італійською або англійською. Три шаблони, PDF безкоштовно.">
+<meta property="og:url" content="https://svoiludi.ch/uk/instrumenty/rezyume/"><meta property="og:image" content="https://svoiludi.ch/instrumenty/rezyume/og-image.uk.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="robots" content="noindex, nofollow">
+<title>Резюме по-швейцарськи</title>
+
+<style>
+/* Резюме по-швейцарски (08.10.2026): слева анкета по разделам, справа живой лист A4, который совпадает с PDF.
+   Один «движок» раскладки рисует и предпросмотр (SVG), и PDF (jsPDF, настоящий текст, шрифты Manrope и Forum). */
+:root{
+  --bg:#F4EDE3; --paper:#FFFCF8; --ink:#2F2924; --muted:#7A6E62; --line:#E5D9C9; --soft:#EFE5D7;
+  --brown:#6E4F3C; --mustard:#B98324; --mustard-soft:#F3E3C2; --sage:#4F5E3E; --sage-soft:#E3E8D6;
+  --display:"Forum","Georgia",serif; --sans:"Manrope","Segoe UI",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#221D19; --paper:#2C2621; --ink:#F1E9DF; --muted:#B4A796; --line:#3E362F; --soft:#352E28;
+  --brown:#E1C2A6; --mustard:#E2B45C; --mustard-soft:#3D321F; --sage:#B4BF97; --sage-soft:#2E3226; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#221D19; --paper:#2C2621; --ink:#F1E9DF; --muted:#B4A796; --line:#3E362F; --soft:#352E28;
+  --brown:#E1C2A6; --mustard:#E2B45C; --mustard-soft:#3D321F; --sage:#B4BF97; --sage-soft:#2E3226; color-scheme:dark}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--ink);font:15px/1.55 var(--sans);margin:0}
+.wrap{max-width:1280px;margin:0 auto;padding-inline:16px;padding-block:28px 48px;display:flex;flex-direction:column;gap:24px}
+.eyebrow{font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+h1{font-family:var(--display);font-weight:400;font-size:clamp(2.4rem,6vw,3.6rem);line-height:1;margin:4px 0 10px;text-wrap:balance}
+h2{font-family:var(--display);font-weight:400;font-size:1.55rem;margin:0;text-wrap:balance}
+h3{font-family:var(--display);font-weight:400;font-size:1.22rem;line-height:1.2;margin:0}
+.lead{max-width:66ch;color:var(--muted);margin:0}
+.jump{font-weight:700;color:var(--brown);text-underline-offset:4px}
+.status{font-size:.86rem;color:var(--muted);min-height:1.3em}
+.btn{font:inherit;font-weight:700;font-size:.9rem;border:0;border-radius:999px;padding:10px 18px;cursor:pointer;color:#fff;text-decoration:none;display:inline-flex;align-items:center;gap:6px;background:#6E4F3C;box-shadow:0 8px 18px -8px rgba(110,79,60,.6)}
+.btn.gold{background:#B98324;box-shadow:0 8px 18px -8px rgba(185,131,36,.7)}
+.btn.free{background:#4F5E3E;box-shadow:0 8px 18px -8px rgba(79,94,62,.6)}
+.btn.ghost{background:transparent;color:var(--brown);border:1.5px solid var(--line);box-shadow:none}
+.btn.sm{font-size:.82rem;padding:7px 13px}
+.btn[disabled]{background:var(--soft);color:var(--muted);box-shadow:none;cursor:wait}
+select,input[type=text],input[type=email],input[type=tel],textarea{font:inherit;font-size:.95rem;color:var(--ink);background:var(--paper);border:1.5px solid var(--line);border-radius:12px;padding:9px 12px;width:100%;min-width:0}
+textarea{resize:vertical;min-height:84px;line-height:1.5}
+select:focus-visible,input:focus-visible,button:focus-visible,textarea:focus-visible,a:focus-visible{outline:2px solid var(--mustard);outline-offset:2px}
+::placeholder{color:color-mix(in srgb,var(--muted) 70%,transparent)}
+
+/* панель настроек */
+.setup{background:var(--paper);border:1.5px solid var(--line);border-radius:22px;padding:16px 18px;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px 18px;align-items:start}
+@media (max-width:1100px){.setup{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.setup{grid-template-columns:1fr}}
+.fl{display:flex;flex-direction:column;gap:6px;min-width:0}
+.fl>.lb{font-size:.8rem;font-weight:700;color:var(--muted);display:flex;align-items:center}
+.seg{display:flex;flex-wrap:wrap;gap:6px}
+.seg button{font:inherit;font-size:.84rem;font-weight:700;border:1.5px solid var(--line);background:var(--paper);color:var(--ink);border-radius:999px;padding:6px 12px;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--sage);border-color:var(--sage);color:#fff}
+.sw{display:flex;gap:8px;flex-wrap:wrap}
+.sw button{width:30px;height:30px;border-radius:50%;border:2px solid var(--paper);box-shadow:0 0 0 1.5px var(--line);cursor:pointer;padding:0}
+.sw button[aria-pressed="true"]{box-shadow:0 0 0 2.5px var(--ink)}
+.acts{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.exbar{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;background:var(--mustard-soft);border-radius:16px;padding:10px 14px;font-size:.9rem;font-weight:600}
+
+/* анкета + лист */
+.work{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:22px;align-items:start}
+@media (max-width:1040px){.work{grid-template-columns:1fr}}
+.form{display:flex;flex-direction:column;gap:14px;min-width:0}
+.sec{background:var(--paper);border:1.5px solid var(--line);border-radius:20px;overflow:hidden}
+.sec>summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:10px;padding:14px 18px;font-family:var(--display);font-size:1.22rem}
+.sec>summary::-webkit-details-marker{display:none}
+.sec>summary .num{font-family:var(--sans);font-size:.75rem;font-weight:800;width:26px;height:26px;border-radius:50%;background:var(--sage-soft);color:var(--sage);display:grid;place-items:center;flex:none}
+.sec>summary .cnt{margin-left:auto;font-family:var(--sans);font-size:.78rem;font-weight:700;color:var(--muted)}
+.sec>summary::after{content:"";width:9px;height:9px;border-right:2px solid var(--muted);border-bottom:2px solid var(--muted);transform:rotate(45deg);margin-left:12px;flex:none;transition:transform .2s}
+.sec[open]>summary::after{transform:rotate(-135deg)}
+.sec>summary:not(:has(.cnt))::after{margin-left:auto}
+.sec .body{padding:2px 18px 18px;display:flex;flex-direction:column;gap:12px}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+@media (max-width:560px){.g2,.g3{grid-template-columns:1fr}}
+.hint{font-size:.84rem;color:var(--muted);margin:0}
+.langnote{margin:0;background:var(--mustard-soft);border-radius:16px;padding:12px 16px;font-size:.9rem;line-height:1.5}
+.langnote b{font-weight:800}
+.cyr{margin:2px 0 0;font-size:.8rem;font-weight:600;color:#9A5B12;background:var(--mustard-soft);border-radius:10px;padding:6px 10px}
+:root[data-theme="dark"] .cyr{color:var(--mustard)}
+.photo{display:grid;grid-template-columns:90px minmax(0,1fr);gap:14px;align-items:center}
+.photo .ph{width:90px;aspect-ratio:3/4;border-radius:10px;background:var(--soft);border:1.5px dashed var(--line);display:grid;place-items:center;overflow:hidden;color:var(--muted);font-size:.75rem;text-align:center}
+.photo .ph img{width:100%;height:100%;object-fit:cover;display:block}
+.photo .acts label{cursor:pointer}
+.ent{border:1.5px solid var(--line);border-radius:16px;padding:12px;display:flex;flex-direction:column;gap:10px;background:var(--bg)}
+.ent-h{display:flex;align-items:center;gap:6px}
+.ent-h b{font-size:.88rem;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ib{font:inherit;width:30px;height:30px;border-radius:50%;border:1.5px solid var(--line);background:var(--paper);color:var(--ink);cursor:pointer;padding:0;font-size:.9rem;line-height:1;flex:none}
+.ib:hover{border-color:var(--brown)}
+.chk{display:flex;align-items:center;gap:8px;font-size:.88rem;font-weight:600}
+.chk input{width:18px;height:18px;accent-color:var(--sage)}
+input[type=date]{font:inherit;font-size:.95rem;color:var(--ink);background:var(--paper);border:1.5px solid var(--line);border-radius:12px;padding:8px 12px;width:100%;min-width:0}
+.dsel{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:6px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chips button{font:inherit;font-size:.8rem;font-weight:600;border:1.5px solid var(--line);background:var(--paper);color:var(--ink);border-radius:999px;padding:4px 10px;cursor:pointer}
+.chips button[aria-pressed="true"]{background:var(--sage-soft);border-color:var(--sage);color:var(--ink)}
+.chips button[aria-pressed="true"]::before{content:"✓ ";color:var(--sage)}
+.boxes{display:flex;flex-wrap:wrap;gap:6px 14px}
+.grps{display:flex;flex-direction:column;border:1.5px solid var(--line);border-radius:14px;overflow:hidden;background:var(--bg)}
+.grp+.grp{border-top:1.5px solid var(--line)}
+.grp[hidden]+.grp{border-top:0}
+.find{font:inherit;font-size:.95rem;color:var(--ink);background:var(--paper);border:1.5px solid var(--line);border-radius:999px;padding:9px 16px;width:100%}
+.chips button[hidden]{display:none}
+.grp>summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:8px;padding:10px 12px;font-weight:700;font-size:.9rem}
+.grp>summary::-webkit-details-marker{display:none}
+.grp>summary::after{content:"";width:7px;height:7px;border-right:2px solid var(--muted);border-bottom:2px solid var(--muted);transform:rotate(45deg);margin-left:auto;transition:transform .2s;flex:none}
+.grp[open]>summary::after{transform:rotate(-135deg)}
+.grp>summary .gc{font-size:.74rem;font-weight:800;color:#fff;background:var(--sage);border-radius:999px;padding:1px 8px}
+.grp>summary .gc:empty{display:none}
+.grp .chips{padding:0 12px 12px}
+.attrow{display:grid;grid-template-columns:118px minmax(0,1fr);gap:12px;align-items:start}
+@media (max-width:420px){.attrow{grid-template-columns:1fr}}
+.attth{width:118px;aspect-ratio:210/297;background:#fff;border:1.5px solid var(--line);border-radius:8px;display:grid;place-items:center;overflow:hidden;position:relative;padding:6px}
+.attth img{max-width:100%;max-height:100%;display:block;box-shadow:0 1px 3px rgba(0,0,0,.15)}
+.attth .pg{position:absolute;right:4px;bottom:4px;background:var(--brown);color:var(--paper);font-size:.66rem;font-weight:800;border-radius:999px;padding:1px 7px}
+.attctl{display:flex;flex-direction:column;gap:10px;min-width:0}
+input[type=range]{width:100%;accent-color:var(--sage)}
+.rng{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:6px 12px}
+.rng label{font-size:.76rem;font-weight:700;color:var(--muted);display:flex;flex-direction:column;gap:2px}
+.boxes .chk{font-weight:600}
+
+/* живой лист */
+.sheet{position:sticky;top:12px;display:flex;flex-direction:column;gap:10px;min-width:0}
+@media (max-width:1040px){.sheet{position:static}}
+.sheet-h{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px}
+.sheet-h .eyebrow{flex:1}
+.pages{display:flex;flex-direction:column;gap:14px;max-height:calc(100vh - 160px);overflow:auto;padding:4px 4px 10px;border-radius:16px}
+@media (max-width:1040px){.pages{max-height:none;overflow:visible}}
+.pages svg{display:block;flex:none;width:100%;height:auto;aspect-ratio:210/297;background:#fff;border-radius:4px;box-shadow:0 2px 4px rgba(40,30,20,.08),0 14px 34px -10px rgba(40,30,20,.32)}
+.pages svg text{font-kerning:none;font-variant-ligatures:none}
+.floatprev{position:fixed;right:14px;bottom:62px;z-index:40;display:none}
+@media (max-width:1040px){.floatprev{display:inline-flex}}
+
+.howto{display:flex;flex-direction:column;gap:12px}
+.hsteps{margin:0;padding-left:22px;display:flex;flex-direction:column;gap:6px;max-width:80ch}
+.guide{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+@media (max-width:900px){.guide{grid-template-columns:1fr}}
+.note{background:var(--paper);border:1.5px solid var(--line);border-radius:18px;padding:16px 18px;display:flex;flex-direction:column;gap:8px}
+.note p,.note ul{margin:0;font-size:.92rem}
+.note ul{padding-left:18px}
+.imp{background:var(--paper);border:1.5px dashed color-mix(in srgb,var(--sage) 55%,transparent);border-radius:16px;padding:14px 18px;font-size:.88rem;max-width:90ch}
+.imp b{color:var(--sage)}
+.confirm{display:inline-flex;gap:8px;align-items:center;background:var(--paper);border:1.5px solid var(--line);border-radius:999px;padding:4px 4px 4px 14px;font-size:.88rem;font-weight:600;flex-wrap:wrap}
+</style>
+<!--i18n--><link rel="alternate" hreflang="ru" href="https://svoiludi.ch/instrumenty/rezyume/"><link rel="alternate" hreflang="uk" href="https://svoiludi.ch/uk/instrumenty/rezyume/"><!--i18n--></head>
+<body>
+
+<div class="wrap">
+  <header>
+    <p style="margin:0 0 14px"><a class="jump" href="https://svoiludi.ch/uk/instrumenty/">← Усі корисні інструменти · Свої люди у Швейцарії</a></p>
+    <div class="eyebrow">Резюме · Lebenslauf · CV · безкоштовно</div>
+    <h1>Резюме по-швейцарськи</h1>
+    <p class="lead">Заповни один раз і отримай резюме, якого чекають швейцарські роботодавці. Німецькою, французькою, італійською або англійською, з фото, пермитом і мовами за рівнями. Готовий PDF надішлеш поштою або завантажиш на сайт вакансій.</p>
+    <p style="margin:10px 0 0"><a class="jump" href="/uk/instrumenty/rezyume/#guide">Як написати резюме для Швейцарії ↓</a></p>
+    <div data-fan="rezyume"></div>
+  </header>
+
+  <section class="howto" aria-labelledby="ht-h">
+    <h2 id="ht-h">Як користуватися</h2>
+    <ol class="hsteps">
+      <li><b>Вибери кантон, де шукаєш роботу.</b> Мова резюме вибереться сама.</li>
+      <li><b>Що перекладається само, а що ні.</b> Усе, що вибираєш зі списків і кнопок (заголовки, дати, громадянство, рівні мов, навички, інтереси), саме стає мовою резюме. Те, що пишеш своїми словами (посада, фірма, «що робила», свої навички), потрапляє в резюме як є, воно не перекладається. Тому пиши одразу мовою резюме. Якщо в полі опиняться російські чи українські літери, під ним з’явиться нагадування.</li>
+      <li><b>Заповни розділи.</b> Майже все вибирається зі списків: дати, громадянство, сімейний стан, права, рівень освіти, мови й сертифікати. Аркуш поруч змінюється одразу, так виглядатиме PDF.</li>
+      <li><b>Вибери шаблон і колір.</b> Для банків і держслужби підходить «Строгий», для решти «З колонкою» або «Класика».</li>
+      <li><b>Додай додатки.</b> Сфотографуй дипломи й рекомендації з роботи або завантаж PDF. Документ сам вирівняється, зайвий фон обріжеться, і кожен стане на свій аркуш A4 після резюме.</li>
+      <li><b>Завантаж PDF</b> і прикріпи його до листа або до відгуку на сайті вакансій. На телефоні кнопка «Надіслати» одразу відкриває пошту й месенджери.</li>
+    </ol>
+  </section>
+
+  <section class="setup" aria-label="Налаштування резюме">
+    <div class="fl"><span class="lb">Де шукаєш роботу<button type="button" class="qh" data-help="canton" aria-label="Підказка: де шукаєш роботу" aria-expanded="false">?</button></span>
+      <select id="canton"><option value="">Обери кантон</option></select></div>
+    <div class="fl"><span class="lb">Мова резюме<button type="button" class="qh" data-help="lang" aria-label="Підказка: мова резюме" aria-expanded="false">?</button></span>
+      <select id="lang">
+        <option value="de">Deutsch — німецька</option><option value="fr">Français — французька</option><option value="it">Italiano — італійська</option>
+        <option value="en">English — англійська</option><option value="ru">Російська</option><option value="uk">Українська</option>
+      </select></div>
+    <div class="fl"><span class="lb">Шаблон<button type="button" class="qh" data-help="tpl" aria-label="Підказка: шаблон" aria-expanded="false">?</button></span>
+      <div class="seg" id="tpl"><button type="button" data-v="kolonka">З колонкою</button><button type="button" data-v="klassika">Класика</button><button type="button" data-v="strogiy">Строгий</button></div></div>
+    <div class="fl"><span class="lb">Колір<button type="button" class="qh" data-help="color" aria-label="Підказка: колір" aria-expanded="false">?</button></span>
+      <div class="sw" id="color"></div></div>
+    <div class="fl"><span class="lb">Готовий файл</span>
+      <div class="acts"><button type="button" class="btn free" id="pdf">Завантажити PDF</button><button type="button" class="btn ghost sm" id="share" hidden>Надіслати</button></div></div>
+    <div class="acts" style="grid-column:1/-1">
+      <button type="button" class="btn ghost sm" id="exbtn">Подивитися на прикладі</button>
+      <span id="clearwrap"><button type="button" class="btn ghost sm" id="clear">Видалити все</button></span>
+      <span class="status" id="status" role="status"></span>
+    </div>
+  </section>
+
+  <div class="exbar" id="exbar" hidden><span>Зараз показано приклад. Твої дані нікуди не зникли.</span><button type="button" class="btn sm" id="exback">Повернутися до мого резюме</button></div>
+
+  <div class="work">
+    <div class="form" id="form">
+      <p class="langnote" id="langnote"></p>
+      <details class="sec" open><summary><span class="num">1</span>Особисті дані</summary><div class="body">
+        <div class="photo">
+          <div class="ph" id="phbox">Фото<br>3 × 4</div>
+          <div class="fl">
+            <span class="lb">Фото<button type="button" class="qh" data-help="photo" aria-label="Підказка: фото" aria-expanded="false">?</button></span>
+            <div class="acts"><label class="btn ghost sm" for="phfile">Завантажити фото</label><input type="file" id="phfile" accept="image/*" hidden><button type="button" class="btn ghost sm" id="phdel" hidden>Прибрати фото</button></div>
+            <label class="chk"><input type="checkbox" id="phon" checked> Показувати фото в резюме</label>
+          </div>
+        </div>
+        <div class="g2">
+          <label class="fl"><span class="lb">Ім’я</span><input type="text" data-f="p.first" autocomplete="given-name" placeholder="Olena"></label>
+          <label class="fl"><span class="lb">Прізвище</span><input type="text" data-f="p.last" autocomplete="family-name" placeholder="Kovalenko"></label>
+        </div>
+        <label class="fl"><span class="lb">Професія або посада<button type="button" class="qh" data-help="title" aria-label="Підказка: професія" aria-expanded="false">?</button></span><input type="text" data-f="p.title" placeholder="Finanzanalystin"></label>
+        <div class="g2">
+          <label class="fl"><span class="lb">Вулиця й номер будинку</span><input type="text" data-f="p.street" autocomplete="street-address" placeholder="Musterstrasse 12"></label>
+          <div class="g2" style="grid-template-columns:minmax(0,.7fr) minmax(0,1.3fr);gap:8px">
+            <label class="fl"><span class="lb">Індекс</span><input type="text" data-f="p.zip" autocomplete="postal-code" inputmode="numeric" maxlength="6" placeholder="8000"></label>
+            <label class="fl"><span class="lb">Місто</span><input type="text" data-f="p.town" list="dl-chtown" autocomplete="address-level2" placeholder="Zürich"></label>
+          </div>
+          <label class="fl"><span class="lb">Телефон</span><input type="tel" data-f="p.phone" autocomplete="tel" placeholder="+41 79 000 00 00"></label>
+          <label class="fl"><span class="lb">E-mail<button type="button" class="qh" data-help="email" aria-label="Підказка: e-mail" aria-expanded="false">?</button></span><input type="email" data-f="p.email" autocomplete="email" placeholder="vorname.name@gmail.com"></label>
+          <label class="fl"><span class="lb">LinkedIn або сайт (якщо є)</span><input type="text" data-f="p.web" placeholder="linkedin.com/in/…"></label>
+          <label class="fl"><span class="lb">Дата народження<button type="button" class="qh" data-help="birth" aria-label="Підказка: дата народження" aria-expanded="false">?</button></span><input type="date" data-f="p.birth" min="1940-01-01" max="2012-12-31"></label>
+          <label class="fl"><span class="lb">Громадянство</span><select data-f="p.natc" id="natc"></select></label>
+          <label class="fl" id="natc2w"><span class="lb">Друге громадянство (якщо є)</span><select data-f="p.natc2" id="natc2"></select></label>
+          <label class="fl" id="natow" hidden><span class="lb">Громадянство мовою резюме</span><input type="text" data-f="p.nat" placeholder="Georgien"></label>
+          <label class="fl"><span class="lb">Дозвіл у Швейцарії<button type="button" class="qh" data-help="permit" aria-label="Підказка: дозвіл" aria-expanded="false">?</button></span>
+            <select data-f="p.permit"><option value="">Не вказувати</option><option value="CH">Громадянство Швейцарії</option><option value="C">Пермит C</option><option value="B">Пермит B</option><option value="L">Пермит L</option><option value="G">Пермит G</option><option value="S">Статус S</option><option value="F">Статус F</option></select></label>
+          <label class="fl"><span class="lb">Сімейний стан<button type="button" class="qh" data-help="civil" aria-label="Підказка: сімейний стан" aria-expanded="false">?</button></span><select data-f="p.civc" id="civc"></select></label>
+          <label class="fl"><span class="lb">Діти</span><select data-f="p.kids" id="kids"><option value="">Не вказувати</option><option value="0">Немає дітей</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option></select></label>
+          <label class="fl" id="sexw" hidden><span class="lb">Слова в резюме<button type="button" class="qh" data-help="sex" aria-label="Підказка: рід слів" aria-expanded="false">?</button></span><select data-f="p.sex"><option value="f">жіночий рід (заміжня)</option><option value="m">чоловічий рід (одружений)</option></select></label>
+        </div>
+        <div class="fl"><span class="lb">Водійські права<button type="button" class="qh" data-help="drive" aria-label="Підказка: права" aria-expanded="false">?</button></span>
+          <div class="boxes" id="dk"></div></div>
+      </div></details>
+
+      <details class="sec" open><summary><span class="num">2</span>Коротко про себе</summary><div class="body">
+        <label class="fl"><span class="lb">3–4 речення про тебе як про фахівця<button type="button" class="qh" data-help="profile" aria-label="Підказка: коротко про себе" aria-expanded="false">?</button></span>
+          <textarea data-f="profile" rows="4" placeholder="Finanzanalystin mit 8 Jahren Erfahrung in Budgetierung, Reporting und Controlling. …"></textarea></label>
+      </div></details>
+
+      <details class="sec" open><summary><span class="num">3</span>Досвід роботи<span class="cnt" id="c-exp"></span></summary><div class="body">
+        <p class="hint">Спочатку остання робота. Місяць можна не вибирати, тоді буде лише рік.</p>
+        <div id="l-exp" class="fl"></div>
+        <div class="acts"><button type="button" class="btn ghost sm" data-add="exp">+ Додати місце роботи</button></div>
+      </div></details>
+
+      <details class="sec"><summary><span class="num">4</span>Освіта<span class="cnt" id="c-edu"></span></summary><div class="body">
+        <div id="l-edu" class="fl"></div>
+        <div class="acts"><button type="button" class="btn ghost sm" data-add="edu">+ Додати освіту</button></div>
+      </div></details>
+
+      <details class="sec"><summary><span class="num">5</span>Курси та підвищення кваліфікації<span class="cnt" id="c-trn"></span></summary><div class="body">
+        <p class="hint">Мовні курси, сертифікати, інтеграційні програми. У Швейцарії це цінують.</p>
+        <div id="l-trn" class="fl"></div>
+        <div class="acts"><button type="button" class="btn ghost sm" data-add="trn">+ Додати курс</button></div>
+      </div></details>
+
+      <details class="sec"><summary><span class="num">6</span>Мови<span class="cnt" id="c-lng"></span></summary><div class="body">
+        <div id="l-lng" class="fl"></div>
+        <div class="acts"><button type="button" class="btn ghost sm" data-add="lng">+ Додати мову</button></div>
+      </div></details>
+
+      <details class="sec"><summary><span class="num">7</span>Навички<span class="cnt" id="c-skl"></span></summary><div class="body">
+        <p class="hint">Знайди навичку пошуком або відкрий групу й відзнач, що вмієш. Краще 10–20 головних для цієї вакансії, ніж усе підряд. У резюме навички стануть за групами й самі перекладуться мовою резюме.</p>
+        <input type="search" class="find" data-find="skl" placeholder="Знайти навичку: Excel, прибирання, Pflege, каса…" aria-label="Знайти навичку">
+        <div id="skl" class="grps"></div>
+        <label class="fl"><span class="lb">Чого немає в списку, допиши сама (мовою резюме)<button type="button" class="qh" data-help="skills" aria-label="Підказка: свої навички" aria-expanded="false">?</button></span>
+          <textarea data-f="skills" rows="2" placeholder="Lohnbuchhaltung mit Swissdec&#10;Kassensystem Lightspeed"></textarea></label>
+      </div></details>
+
+      <details class="sec"><summary><span class="num">8</span>Інтереси<span class="cnt" id="c-ints"></span></summary><div class="body">
+        <p class="hint">За бажанням. Два-чотири інтереси роблять резюме живим. Відзначене кнопками саме стане мовою резюме, своє допиши одразу цією мовою.</p>
+        <input type="search" class="find" data-find="intc" placeholder="Знайти інтерес: танці, лижі, фото…" aria-label="Знайти інтерес">
+        <div id="intc" class="grps"></div>
+        <label class="fl"><span class="lb">Свої інтереси (мовою резюме)</span><input type="text" data-f="interests" placeholder="Bergsteigen, Ukrainischer Chor Zürich"></label>
+      </div></details>
+
+      <details class="sec"><summary><span class="num">9</span>Рекомендації</summary><div class="body">
+        <label class="chk"><input type="checkbox" id="refreq" checked> Написати «Рекомендації на запит»<button type="button" class="qh" data-help="refs" aria-label="Підказка: рекомендації" aria-expanded="false">?</button></label>
+        <div id="l-ref" class="fl"></div>
+        <div class="acts" id="refadd" hidden><button type="button" class="btn ghost sm" data-add="ref">+ Додати рекомендатора</button></div>
+      </div></details>
+
+      <details class="sec" id="attsec"><summary><span class="num">10</span>Додатки<span class="cnt" id="c-att"></span></summary><div class="body">
+        <p class="hint">Дипломи, рекомендації з роботи (Arbeitszeugnis), сертифікати. Сфотографуй папір або завантаж файл. Кожен документ стане рівно на свій аркуш A4 після резюме, у той самий PDF.</p>
+        <div class="acts"><label class="btn free sm" for="attfile" style="cursor:pointer">+ Додати фото або PDF</label><input type="file" id="attfile" accept="image/*,application/pdf" multiple hidden><button type="button" class="qh" data-help="att" aria-label="Підказка: додатки" aria-expanded="false">?</button></div>
+        <label class="chk"><input type="checkbox" data-f="attOn"> Додавати додатки до PDF резюме</label>
+        <label class="chk"><input type="checkbox" data-f="attList"> Перший аркуш — список додатків<button type="button" class="qh" data-help="attList" aria-label="Підказка: список додатків" aria-expanded="false">?</button></label>
+        <div id="l-att" class="fl"></div>
+        <p class="hint" id="attsize"></p>
+      </div></details>
+    </div>
+
+    <datalist id="dl-chtown"></datalist><datalist id="dl-place"></datalist><datalist id="dl-school"></datalist>
+    <aside class="sheet" id="sheet" aria-label="Так виглядає резюме">
+      <div class="sheet-h"><span class="eyebrow" id="pginfo">Так виглядає PDF</span><button type="button" class="btn free sm" id="pdf2">Завантажити PDF</button></div>
+      <div class="pages" id="pages"></div>
+    </aside>
+  </div>
+  <a class="btn gold sm floatprev" href="/uk/instrumenty/rezyume/#sheet">Подивитися резюме ↓</a>
+
+  <section class="guide" id="guide" aria-labelledby="g-h">
+    <h2 id="g-h" style="grid-column:1/-1">Як написати резюме для Швейцарії</h2>
+    <div class="note"><h3>Чого чекають роботодавці</h3><ul>
+      <li>Одна-дві сторінки, без зайвого.</li>
+      <li>Фото, дата народження й пермит. У Швейцарії це поки звично.</li>
+      <li>Спочатку остання робота, дати місяць і рік.</li>
+      <li>Мови з рівнем від A1 до C2.</li>
+      <li>Копії дипломів і рекомендацій (Arbeitszeugnis) окремим файлом.</li>
+    </ul></div>
+    <div class="note"><h3>Якою мовою</h3><p>Мовою вакансії. У Цюриху, Базелі та Берні зазвичай німецька, у Женеві й Лозанні французька, у Тічино італійська. У міжнародних фірмах часто англійська. Якщо сумніваєшся, пиши мовою оголошення.</p></div>
+    <div class="note"><h3>Як надіслати</h3><p>Файл назви «Lebenslauf_Ім’я_Прізвище.pdf», він так і завантажиться. У листі коротко напиши, на яку вакансію відгукуєшся, і додай резюме, супровідний лист і дипломи. На сайтах вакансій завантаж PDF у поле «Lebenslauf» або «CV».</p></div>
+    <div class="note"><h3>Твої дані тільки в тебе</h3><p>Усе, що ти вписуєш, і фото зберігаються лише в браузері на цьому пристрої. Ми нічого не бачимо й нікуди не надсилаємо. Зберігай резервну копію, щоб не втратити резюме.</p></div>
+    <div class="note"><h3>Потрібна допомога</h3><p>Фахівці з кар’єри та резюме, викладачі німецької й перекладачі є в <a href="https://svoiludi.ch/uk/">довіднику «Свої люди»</a>.</p></div>
+  </section>
+
+  <p class="imp"><b>Важливо.</b> Це зразок для прикладу й особистого використання, а не офіційний документ. Зміст резюме ти пишеш сама й сама за нього відповідаєш. Перевір дати й назви перед надсиланням. У самому PDF жодних позначок сайту немає, це твоє резюме.</p>
+
+  <div class="share-slot" data-url="https://svoiludi.ch/uk/instrumenty/rezyume/" data-lead="Перешли тим, хто шукає роботу. Повідомлення вже готове." data-text="Привіт! Тут можна безкоштовно зробити резюме для Швейцарії німецькою, французькою, італійською або англійською, з фото й пермитом, і одразу завантажити PDF. https://svoiludi.ch/uk/instrumenty/rezyume/"></div>
+</div>
+
+<script src="/assets/lib/jspdf.umd.min.js" defer></script>
+<script src="/assets/rezyume-data.js"></script>
+<script>
+/* ===================== данные ===================== */
+const KEY = 'rezyumeCH.v1';
+const COLORS = {sage: ['#4F5E3E', '#E6EADD', 'Шавлія'], blue: ['#2E5A88', '#E3EBF4', 'Синій'], wine: ['#7A2E3A', '#F3E4E6', 'Бордо'], gold: ['#9A6B12', '#F5EBD6', 'Гірчиця'], ink: ['#2B2724', '#ECEAE7', 'Чорно-білий']};
+const blank = () => ({lang: 'de', canton: '', tpl: 'kolonka', color: 'sage', photoOn: true, photo: '', refReq: true,
+  p: {first: '', last: '', title: '', street: '', zip: '', town: '', phone: '', email: '', web: '', birth: '', natc: '', natc2: '', nat: '', permit: '', civc: '', kids: '', sex: 'f', dk: [], car: false},
+  profile: '', exp: [], edu: [], trn: [], lng: [], skl: [], skills: '', ints: [], interests: '', ref: [], att: [], attOn: true, attList: true, saved: ''});
+let S = load(), EX = null, showEx = false;
+function load(){ try { const d = JSON.parse(localStorage.getItem(KEY) || 'null'); if (d && d.p){ const b = blank(); return Object.assign(b, d, {p: Object.assign(b.p, d.p)}); } } catch (e) {} return blank(); }
+let saveT = 0;
+function save(){ clearTimeout(saveT); saveT = setTimeout(() => { try { S.saved = new Date().toISOString(); localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) { say('Не вдалося зберегти на цьому пристрої. Завантаж PDF або збережи резервну копію.'); } }, 250); }
+const say = t => { const s = document.getElementById('status'); s.textContent = t; clearTimeout(say.t); if (t) say.t = setTimeout(() => s.textContent = '', 6000); };
+const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'}[c]));
+const D = () => showEx ? EX : S;
+
+/* ===================== раскладка листа (мм, pt) ===================== */
+const PW = 210, PH = 297, PT = 0.3528;
+const FONTS = {r: ['400', 'Manrope'], m: ['600', 'Manrope'], b: ['700', 'Manrope'], d: ['400', 'Forum']};
+const mctx = document.createElement('canvas').getContext('2d');
+try { mctx.fontKerning = 'none'; } catch (e) {}
+function tw(s, f, size){ mctx.font = `${FONTS[f][0]} ${size}px ${FONTS[f][1]}`; return mctx.measureText(s).width * PT; }
+function wrap(s, f, size, w){
+  const out = [];
+  String(s || '').split('\n').forEach(par => {
+    const words = par.trim().split(/\s+/).filter(Boolean); let line = '';
+    if (!words.length) return;
+    for (let wd of words){
+      while (tw(wd, f, size) > w && wd.length > 1){ // очень длинное слово (адрес сайта)
+        let k = wd.length; while (k > 1 && tw(wd.slice(0, k), f, size) > w) k--;
+        if (line){ out.push(line); line = ''; } out.push(wd.slice(0, k)); wd = wd.slice(k);
+      }
+      const t = line ? line + ' ' + wd : wd;
+      if (tw(t, f, size) <= w) line = t; else { if (line) out.push(line); line = wd; }
+    }
+    if (line) out.push(line);
+  });
+  return out;
+}
+const lh = (size, k = 1.38) => size * PT * k;
+function period(a, b, cur, l){
+  const f = x => String(x || '').trim().replace(/\s/g, '').replace(/^(\d)\.(\d{4})$/, '0$1.$2');
+  const A = f(a), B = cur ? l.now : f(b);
+  return A && B ? `${A} – ${B}` : (A || B);
+}
+
+function build(d, mode = 0, dense = 0){
+  const l = L[d.lang] || L.de, col = COLORS[d.color] || COLORS.sage, tpl = d.tpl;
+  const ACC = tpl === 'strogiy' ? '#1F1B18' : col[0], SOFT = tpl === 'strogiy' ? '#F1F0EE' : col[1];
+  const INK = '#1F1B18', MUT = '#6B625A', RULE = '#D9D3CA';
+  const pages = [[]]; let pg = 0; const G = dense ? 0.62 : 1;
+  const op = (o, p = pg) => { while (pages.length <= p) pages.push([]); pages[p].push(o); };
+  const T = (x, y, s, f, size, color = INK, align = 'left', p) => op({t: 'text', x, y, s, f, size, color, align}, p);
+  const R = (x, y, w, h, fill, p) => op({t: 'rect', x, y, w, h, fill}, p);
+  const LINE = (x1, y1, x2, y2, color = RULE, w = 0.3, p) => op({t: 'line', x1, y1, x2, y2, color, w}, p);
+  const name = [d.p.first, d.p.last].filter(Boolean).join(' ') || ' ';
+  const photo = d.photoOn && d.photo;
+  const pers = [[l.birth, d.p.birth], [l.nat, d.p.nat], [l.permit, d.p.permit ? l.pm[d.p.permit] : ''], [l.civil, d.p.civil], [l.drive, d.p.drive]].filter(r => r[1]);
+  const contacts = [[l.addr, [d.p.street, d.p.city].filter(Boolean).join(', ')], [l.phone, d.p.phone], [l.email, d.p.email], [l.web, d.p.web]].filter(r => r[1]);
+  const langs = d.lng.filter(x => x.code && (x.code !== 'other' || x.other));
+  const skills = d.skillRows || [];
+  const exp = d.exp.filter(e => e.title || e.org), edu = d.edu.filter(e => e.title || e.org), trn = d.trn.filter(e => e.title);
+  const refs = d.ref.filter(r => r.name);
+
+  /* общий поток основной колонки */
+  let X0, W, y, TOP = 18, BOT = PH - 18;
+  const newPage = () => { pg++; y = TOP; if (tpl === 'kolonka') R(0, 0, 66, PH, SOFT, pg); };
+  const need = h => { if (y + h > BOT) newPage(); };
+  const heading = t => {
+    need(16);
+    y += 2 * G;
+    T(X0, y + 3.2, t.toUpperCase(), 'b', 8.6, ACC);
+    LINE(X0 + tw(t.toUpperCase(), 'b', 8.6) + 3, y + 2.2, X0 + W, y + 2.2, tpl === 'strogiy' ? '#9A938A' : RULE, 0.3);
+    y += 6 + 1.5 * G;
+  };
+  const para = (s, f = 'r', size = 9.2, color = INK, x = X0, w = W) => { wrap(s, f, size, w).forEach(ln => { need(lh(size)); T(x, y + size * PT, ln, f, size, color); y += lh(size); }); };
+  const DC = tpl === 'kolonka' ? 27 : 33; // колонка дат
+  const entry = (dates, title, sub, text, bullets = true) => {
+    const tx = X0 + DC, w = W - DC;
+    const tl = wrap(title, 'b', 9.8, w), sl = sub ? wrap(sub, 'r', 8.8, w) : [], body = [];
+    String(text || '').split('\n').map(s => s.trim().replace(/^[-•–·]\s*/, '')).filter(Boolean).forEach(b => wrap(b, 'r', 8.8, w - (bullets ? 3.2 : 0)).forEach((ln, i) => body.push([ln, i === 0])));
+    const h = tl.length * lh(9.8, 1.3) + sl.length * lh(8.8) + body.length * lh(8.8) + 3.6;
+    need(Math.min(h, BOT - TOP));
+    T(X0, y + 9.8 * PT, dates, 'm', 8.2, MUT);
+    tl.forEach(ln => { T(tx, y + 9.8 * PT, ln, 'b', 9.8, INK); y += lh(9.8, 1.3); });
+    sl.forEach(ln => { T(tx, y + 8.8 * PT, ln, 'r', 8.8, ACC === INK ? MUT : ACC); y += lh(8.8); });
+    body.forEach(([ln, first]) => { need(lh(8.8)); if (bullets && first) op({t: 'circle', cx: tx + 0.9, cy: y + 8.8 * PT - 1.05, r: 0.55, fill: ACC}, pg); T(tx + (bullets ? 3.2 : 0), y + 8.8 * PT, ln, 'r', 8.8, INK); y += lh(8.8); });
+    y += 3.6 * G;
+  };
+  const table = rows => { rows.forEach(([k, v]) => { const vl = wrap(v, 'r', 9, W - DC); need(vl.length * lh(9)); T(X0, y + 9 * PT, k, 'm', 8.4, MUT); vl.forEach(ln => { T(X0 + DC, y + 9 * PT, ln, 'r', 9, INK); y += lh(9); }); y += 0.8 * G; }); y += 2 * G; };
+  const mainSections = (withPers, withLangs, withSkills) => {
+    if (withPers && pers.length){ heading(l.pers);
+      const half = (W - 8) / 2, h2 = Math.ceil(pers.length / 2), LW = DC;
+      [pers.slice(0, h2), pers.slice(h2)].forEach((col, ci) => { let yy = y; col.forEach(([k, v]) => { const vl = wrap(v, 'r', 9, half - LW); T(X0 + ci * (half + 8), yy + 9 * PT, k, 'm', 8.4, MUT); vl.forEach(ln => { T(X0 + ci * (half + 8) + LW, yy + 9 * PT, ln, 'r', 9, INK); yy += lh(9); }); yy += 0.8 * G; }); col.yEnd = yy; });
+      y = Math.max(...[pers.slice(0, h2), pers.slice(h2)].map(c => y + c.reduce((a, [, v]) => a + wrap(v, 'r', 9, half - LW).length * lh(9) + 0.8 * G, 0))) + 2 * G; }
+    if (d.profile){ heading(l.profile); para(d.profile, 'r', 9.2); y += 3 * G; }
+    if (exp.length){ heading(l.exp); exp.forEach(e => entry(period(e.from, e.to, e.cur, l), e.title, e.sub, e.text)); }
+    if (edu.length){ heading(l.edu); edu.forEach(e => entry(period(e.from, e.to, e.cur, l), e.title, [e.org, e.place].filter(Boolean).join(', '), e.text, false)); }
+    if (trn.length){ heading(l.trn); trn.forEach(e => entry(String(e.year || ''), e.title, e.org, '', false)); }
+    if (withLangs && withSkills && langs.length && (skills.length || d.interests)){
+      /* классика и строгий: языки слева, навыки и интересы справа, чтобы резюме чаще помещалось на одну страницу */
+      const half = (W - 8) / 2, xA = X0, xB = X0 + half + 8, LW = 30;
+      const lrows = langs.map(x => [langName(x.code, x.other, d.lang), x.lvT]);
+      const bl = []; skills.forEach(([k, sv]) => { const pre = k ? k + ': ' : ''; wrap(pre + sv, 'r', 9, half - 3).forEach((ln, i) => bl.push([ln, 'r', INK, i === 0 ? pre.length : 0])); }); if (d.interests){ if (bl.length) bl.push(['', 'r', INK]); bl.push([l.int, 'm', MUT]); wrap(d.interests, 'r', 9, half).forEach(ln => bl.push([ln, 'r', INK])); }
+      const ha = lrows.reduce((a, [, v]) => a + wrap(v, 'r', 9, half - LW).length * lh(9) + 0.8 * G, 0), hb = bl.length * lh(9);
+      need(16 + Math.max(ha, hb));
+      const y0 = y + 2 * G;
+      [[xA, l.lng], [xB, skills.length ? l.skills : l.int]].forEach(([hx, t]) => { T(hx, y0 + 3.2, t.toUpperCase(), 'b', 8.6, ACC); LINE(hx + tw(t.toUpperCase(), 'b', 8.6) + 3, y0 + 2.2, hx + half, y0 + 2.2, tpl === 'strogiy' ? '#9A938A' : RULE, 0.3); });
+      let ya = y0 + 6 + 1.5 * G, yb = ya;
+      lrows.forEach(([k, v]) => { const vl = wrap(v, 'r', 9, half - LW); T(xA, ya + 9 * PT, k, 'm', 8.4, MUT); vl.forEach(ln => { T(xA + LW, ya + 9 * PT, ln, 'r', 9, INK); ya += lh(9); }); ya += 0.8 * G; });
+      (skills.length ? bl : bl.slice(1)).forEach(([ln, f, c, pl]) => { if (ln && pl){ const lb = ln.slice(0, pl); T(xB, yb + 9 * PT, lb, 'm', 9, MUT); T(xB + tw(lb, 'm', 9), yb + 9 * PT, ln.slice(pl), 'r', 9, INK); } else if (ln) T(xB, yb + 9 * PT, ln, f, f === 'm' ? 8.4 : 9, c); yb += lh(9); });
+      y = Math.max(ya, yb) + 3 * G;
+    } else {
+      if (withLangs && langs.length){ heading(l.lng); table(langs.map(x => [langName(x.code, x.other, d.lang), x.lvT])); }
+      if (withSkills && skills.length){ heading(l.skills); table(skills.filter(r => r[0]).map(r => [r[0], r[1]])); skills.filter(r => !r[0]).forEach(r => para(r[1], 'r', 9)); y += 3 * G; }
+      if (withSkills && d.interests){ heading(l.int); para(d.interests, 'r', 9); y += 3 * G; }
+    }
+    if (d.refReq || refs.length){ heading(l.ref); if (d.refReq && !refs.length) para(l.refReq, 'r', 9, MUT); refs.forEach(r => { const lines = [r.name, [r.role, r.org].filter(Boolean).join(', '), r.contact].filter(Boolean); need(lines.length * lh(9) + 2); lines.forEach((ln, i) => { T(X0, y + 9 * PT, ln, i ? 'r' : 'm', 9, i ? MUT : INK); y += lh(9); }); y += 2; }); }
+  };
+
+  if (tpl === 'kolonka'){
+    /* колонка слева: фото, контакты, данные, языки, навыки */
+    const SX = 12, SW = 66 - 24;
+    R(0, 0, 66, PH, SOFT, 0);
+    let sy = 16, sp = 0;
+    const sneed = h => { if (sy + h > BOT){ sp++; sy = TOP; } };
+    const PHW = mode ? 28 : 34, GAP = mode ? 1.2 : 2, SEC = mode ? 1.5 : 3;
+    if (photo){ op({t: 'img', x: SX + (SW - PHW) / 2, y: sy, w: PHW, h: PHW * 4 / 3, data: d.photo}, 0); sy += PHW * 4 / 3 + (mode ? 6 : 9); }
+    const sh = t => { sneed(12); T(SX, sy + 3, t.toUpperCase(), 'b', 8, ACC, 'left', sp); LINE(SX, sy + 5, SX + SW, sy + 5, ACC, 0.35, sp); sy += 9; };
+    const sk = (k, v) => { const vl = wrap(v, 'r', 8.6, SW); sneed(lh(7.6) + vl.length * lh(8.6) + 2); if (k){ T(SX, sy + 7.6 * PT, k, 'm', 7.6, MUT, 'left', sp); sy += lh(7.6); } vl.forEach(ln => { T(SX, sy + 8.6 * PT, ln, 'r', 8.6, INK, 'left', sp); sy += lh(8.6); }); sy += GAP; };
+    if (contacts.length){ sh(l.contact); contacts.forEach(([k, v]) => sk(k, v)); sy += SEC; }
+    if (pers.length){ sh(l.pers); pers.forEach(([k, v]) => sk(mode ? k : k, v)); sy += SEC; }
+    if (langs.length){ sh(l.lng); langs.forEach(x => { const nm = langName(x.code, x.other, d.lang), lvT = l.lv[x.lvl] || ''; sneed(13); T(SX, sy + 8.8 * PT, nm, 'm', 8.8, INK, 'left', sp); sy += lh(8.8);
+      const n = {native: 5, C2: 5, C1: 4, B2: 3, B1: 3, A2: 2, A1: 1}[x.lvl] || 0;
+      for (let i = 0; i < 5; i++) op({t: 'circle', cx: SX + 1.3 + i * 4, cy: sy + 1.4, r: 1.2, fill: i < n ? ACC : '#FFFFFF'}, sp);
+      if (lvT) T(SX + 22, sy + 2.4, lvT.replace(/^(C2|C1|B2|B1|A2|A1) – /, '$1 · '), 'r', 7.4, MUT, 'left', sp); sy += 6.5;
+      if (x.ct){ wrap(x.ct, 'r', 7.4, SW).forEach(ln => { T(SX, sy + 0.6, ln, 'r', 7.4, MUT, 'left', sp); sy += lh(7.4); }); sy += 1.2; } }); sy += SEC; }
+    if (mode < 2){
+      if (skills.length){ sh(l.skills); skills.forEach(([k, v]) => sk(k, v)); sy += SEC; }
+      if (d.interests){ sh(l.int); sk('', d.interests); }
+    }
+    /* основная колонка */
+    X0 = 76; W = PW - X0 - 14; y = 20;
+    T(X0, y + 3, l.doc.toUpperCase(), 'b', 7.6, MUT); y += 6;
+    wrap(name, 'd', 30, W).forEach(ln => { T(X0, y + 30 * PT * 0.82, ln, 'd', 30, INK); y += lh(30, 1.05); });
+    if (d.p.title){ y += 1; wrap(d.p.title, 'm', 11, W).forEach(ln => { T(X0, y + 11 * PT, ln, 'm', 11, ACC); y += lh(11); }); }
+    y += 4; LINE(X0, y, X0 + W, y, ACC, 0.6); y += 6;
+    if (sp > 0 && mode < 2) return build(d, mode + 1, dense);
+    mainSections(false, false, mode === 2);
+    if (!dense && pages.length === 2 && sp === 0) { const t = build(d, mode, 1); if (t.length === 1) return t; }
+    while (pages.length <= sp) { pages.push([]); }
+    for (let p = 1; p < pages.length; p++) if (!pages[p].some(o => o.t === 'rect' && o.x === 0 && o.w === 66)) pages[p].unshift({t: 'rect', x: 0, y: 0, w: 66, h: PH, fill: SOFT});
+  } else {
+    /* классика и строгий: шапка во всю ширину */
+    X0 = 18; W = PW - 36; y = 18;
+    const pw = photo ? 31 : 0, hw = W - (photo ? pw + 8 : 0);
+    if (photo) op({t: 'img', x: X0 + W - pw, y: 16, w: pw, h: pw * 4 / 3, data: d.photo}, 0);
+    T(X0, y + 3, l.doc.toUpperCase(), 'b', 7.6, MUT); y += 6;
+    const nf = tpl === 'strogiy' ? 'b' : 'd', ns = tpl === 'strogiy' ? 22 : 30;
+    wrap(name, nf, ns, hw).forEach(ln => { T(X0, y + ns * PT * 0.82, ln, nf, ns, INK); y += lh(ns, 1.08); });
+    if (d.p.title){ y += 0.5; wrap(d.p.title, 'm', 11, hw).forEach(ln => { T(X0, y + 11 * PT, ln, 'm', 11, ACC); y += lh(11); }); }
+    y += 2.5;
+    const cl = contacts.map(r => r[1]);
+    wrap(cl.join('   ·   '), 'r', 8.8, hw).forEach(ln => { T(X0, y + 8.8 * PT, ln, 'r', 8.8, MUT); y += lh(8.8); });
+    y = Math.max(y + 5, photo ? 16 + pw * 4 / 3 + 5 : 0);
+    LINE(X0, y, X0 + W, y, ACC, tpl === 'strogiy' ? 0.5 : 0.8); y += 6 * G;
+    mainSections(true, true, true);
+    if (!dense && pages.length === 2) { const t = build(d, mode, 1); if (t.length === 1) return t; }
+  }
+  /* нижняя строка каждой страницы */
+  const n = pages.length;
+  pages.forEach((p, i) => { const fx = tpl === 'kolonka' ? 76 : 18; p.push({t: 'text', x: fx, y: PH - 9, s: `${name.trim()} · ${l.doc}` + (n > 1 ? ` · ${l.page(i + 1, n)}` : ''), f: 'r', size: 7, color: '#9A928A', align: 'left'}); });
+  return pages;
+}
+
+/* ===================== предпросмотр SVG ===================== */
+function svg(ops){
+  const parts = ops.map(o => {
+    if (o.t === 'rect') return `<rect x="${o.x}" y="${o.y}" width="${o.w}" height="${o.h}" fill="${o.fill}"/>`;
+    if (o.t === 'line') return `<line x1="${o.x1}" y1="${o.y1}" x2="${o.x2}" y2="${o.y2}" stroke="${o.color}" stroke-width="${o.w}"/>`;
+    if (o.t === 'circle') return `<circle cx="${o.cx}" cy="${o.cy}" r="${o.r}" fill="${o.fill}"${o.fill === '#FFFFFF' ? ' stroke="#B9B2A8" stroke-width="0.25"' : ''}/>`;
+    if (o.t === 'img') return `<image href="${o.data}" x="${o.x}" y="${o.y}" width="${o.w}" height="${o.h}" preserveAspectRatio="${o.fit ? 'xMidYMid meet' : 'xMidYMid slice'}"/>`;
+    if (o.t === 'text') return `<text x="${o.x}" y="${o.y}" font-family="${FONTS[o.f][1]}" font-weight="${FONTS[o.f][0]}" font-size="${(o.size * PT).toFixed(3)}" fill="${o.color}"${o.align === 'right' ? ' text-anchor="end"' : ''}>${esc(o.s)}</text>`;
+    return '';
+  });
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${PW} ${PH}" width="${PW * 4}" height="${PH * 4}" role="img">${parts.join('')}</svg>`;
+}
+let rT = 0;
+function render(){ clearTimeout(rT); rT = setTimeout(() => {
+  const nd = norm(D()), cvp = build(nd), pages = cvp.concat(attPages(nd));
+  document.getElementById('pages').innerHTML = pages.map(svg).join('');
+  const na = pages.length - cvp.length; document.getElementById('pginfo').textContent = 'Так виглядає PDF · резюме ' + (cvp.length === 1 ? '1 сторінка' : cvp.length + ' сторінки') + (cvp.length > 2 ? ', краще скоротити до двох' : '') + (na ? ` · додатки ${na} ${na === 1 ? 'аркуш' : na < 5 ? 'аркуші' : 'аркушів'}` : '');
+}, 60); }
+
+/* ===================== PDF ===================== */
+const FONT_FILES = {'Manrope-Regular': '/assets/lib/fonts-pdf/Manrope-Regular.ttf', 'Manrope-SemiBold': '/assets/lib/fonts-pdf/Manrope-SemiBold.ttf', 'Manrope-Bold': '/assets/lib/fonts-pdf/Manrope-Bold.ttf', 'Forum-Regular': '/assets/lib/fonts-pdf/Forum-Regular.ttf'};
+const PDFF = {r: 'Manrope-Regular', m: 'Manrope-SemiBold', b: 'Manrope-Bold', d: 'Forum-Regular'};
+let fontCache = null;
+async function fonts(){
+  if (fontCache) return fontCache;
+  const base = (window.PV_BASE || '/').replace(/\/$/, '');
+  const out = {};
+  for (const [k, u] of Object.entries(FONT_FILES)){
+    const r = await fetch(window.PV_BASE ? base + u : u); if (!r.ok) throw new Error('font');
+    const buf = new Uint8Array(await r.arrayBuffer()); let s = '';
+    for (let i = 0; i < buf.length; i += 0x8000) s += String.fromCharCode.apply(null, buf.subarray(i, i + 0x8000));
+    out[k] = btoa(s);
+  }
+  return fontCache = out;
+}
+const hex = h => [parseInt(h.slice(1, 3), 16), parseInt(h.slice(3, 5), 16), parseInt(h.slice(5, 7), 16)];
+async function makePdf(){
+  if (!window.jspdf) throw new Error('lib');
+  const F = await fonts(), doc = new window.jspdf.jsPDF({unit: 'mm', format: 'a4', compress: true});
+  for (const [k, b64] of Object.entries(F)){ doc.addFileToVFS(k + '.ttf', b64); doc.addFont(k + '.ttf', k, 'normal'); }
+  const d = norm(D()), cvp = build(d), pages = cvp.concat(attPages(d)), slots = [];
+  pages.forEach((ops, i) => {
+    if (i) doc.addPage();
+    if (ops[0] && ops[0].t === 'pdfpage'){ slots.push([i, ops[0].id, ops[0].i]); return; }
+    ops.forEach(o => {
+      if (o.t === 'rect'){ doc.setFillColor(...hex(o.fill)); doc.rect(o.x, o.y, o.w, o.h, 'F'); }
+      else if (o.t === 'line'){ doc.setDrawColor(...hex(o.color)); doc.setLineWidth(o.w); doc.line(o.x1, o.y1, o.x2, o.y2); }
+      else if (o.t === 'circle'){ doc.setFillColor(...hex(o.fill)); if (o.fill === '#FFFFFF'){ doc.setDrawColor(185, 178, 168); doc.setLineWidth(0.25); doc.circle(o.cx, o.cy, o.r, 'FD'); } else doc.circle(o.cx, o.cy, o.r, 'F'); }
+      else if (o.t === 'img'){ try { doc.addImage(o.data, 'JPEG', o.x, o.y, o.w, o.h, undefined, 'MEDIUM'); } catch (e) {} }
+      else if (o.t === 'text'){ doc.setFont(PDFF[o.f], 'normal'); doc.setFontSize(o.size); doc.setTextColor(...hex(o.color)); doc.text(o.s, o.x, o.y, o.align === 'right' ? {align: 'right'} : undefined); }
+    });
+  });
+  const nm = [d.p.first, d.p.last].filter(Boolean).join('_').replace(/[^\p{L}\p{N}_-]+/gu, '') || 'Name';
+  doc.setProperties({title: `${(L[d.lang] || L.de).doc} ${[d.p.first, d.p.last].filter(Boolean).join(' ')}`.trim(), author: [d.p.first, d.p.last].filter(Boolean).join(' ')});
+  const withAtt = pages.length > cvp.length, fname = `${withAtt ? (L[d.lang] || L.de).fileAll : (L[d.lang] || L.de).file}_${nm}.pdf`;
+  if (!slots.length) return {blob: doc.output('blob'), name: fname};
+  await loadScript('/assets/lib/pdf-lib.min.js');
+  const {PDFDocument} = window.PDFLib, main = await PDFDocument.load(doc.output('arraybuffer')), srcs = {};
+  for (const [idx, id, k] of slots){
+    srcs[id] = srcs[id] || await PDFDocument.load(PDFB[id], {ignoreEncryption: true});
+    const [cp] = await main.copyPages(srcs[id], [k]); main.removePage(idx); main.insertPage(idx, cp);
+  }
+  return {blob: new Blob([await main.save()], {type: 'application/pdf'}), name: fname};
+}
+async function doPdf(btns, share){
+  btns.forEach(b => b.disabled = true); say('Готую PDF…');
+  try {
+    const {blob, name} = await makePdf();
+    if (share){ const file = new File([blob], name, {type: 'application/pdf'}); await navigator.share({files: [file], title: name}); say('Готово.'); }
+    else { const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = name; document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 1500); say('PDF завантажено: ' + name); }
+  } catch (e) { say(e && e.name === 'AbortError' ? '' : 'Не вдалося зробити PDF. Перевір інтернет і спробуй ще раз.'); }
+  btns.forEach(b => b.disabled = false);
+}
+
+/* ===================== анкета ===================== */
+function dsel(k, val, month, dis){
+  const m = /^(\d{1,2})\.(\d{4})$/.exec(val || ''), y = m ? m[2] : (/^\d{4}$/.test(val || '') ? val : ''), mm = m ? m[1].padStart(2, '0') : '';
+  const ys = []; for (let i = YNOW + (k === 'to' ? 6 : 0); i >= 1960; i--) ys.push(i);
+  return `<span class="dsel" data-d="${k}"${month ? '' : ' style="grid-template-columns:1fr"'}>${month ? `<select data-part="m" aria-label="Місяць" ${dis ? 'disabled' : ''}><option value="">місяць</option>${MON_FORM.map((n, i) => { const v = String(i + 1).padStart(2, '0'); return `<option value="${v}" ${mm === v ? 'selected' : ''}>${v} · ${n}</option>`; }).join('')}</select>` : ''}<select data-part="y" aria-label="Рік" ${dis ? 'disabled' : ''}><option value="">рік</option>${ys.map(v => `<option ${y == v ? 'selected' : ''}>${v}</option>`).join('')}</select></span>`;
+}
+const opts = (obj, cur, first) => (first ? `<option value="">${first}</option>` : '') + Object.entries(obj).map(([k, r]) => `<option value="${k}" ${cur === k ? 'selected' : ''}>${fl(r)}</option>`).join('');
+const LISTS = {
+  exp: {title: 'Місце роботи', make: () => ({from: '', to: '', cur: false, title: '', org: '', place: '', type: '', pct: '', text: ''}), fields: e => `
+    <div class="g2"><div class="fl"><span class="lb">З</span>${dsel('from', e.from, true)}</div>
+    <div class="fl"><span class="lb">По</span>${dsel('to', e.to, true, e.cur)}</div></div>
+    <label class="chk"><input type="checkbox" data-k="cur" ${e.cur ? 'checked' : ''}> працюю тут зараз</label>
+    <label class="fl"><span class="lb">Посада</span><input type="text" data-k="title" value="${esc(e.title)}" placeholder="Finanzanalystin"></label>
+    <div class="g2"><label class="fl"><span class="lb">Фірма</span><input type="text" data-k="org" value="${esc(e.org)}" placeholder="Muster AG"></label>
+    <label class="fl"><span class="lb">Місто, країна</span><input type="text" data-k="place" value="${esc(e.place)}" list="dl-place" placeholder="Zürich"></label>
+    <label class="fl"><span class="lb">Вид роботи<button type="button" class="qh" data-help="jobtype" aria-label="Підказка: вид роботи" aria-expanded="false">?</button></span><select data-k="type">${opts(JOBT, e.type, 'Звичайна робота')}</select></label>
+    <label class="fl"><span class="lb">Зайнятість<button type="button" class="qh" data-help="pct" aria-label="Підказка: зайнятість" aria-expanded="false">?</button></span><select data-k="pct"><option value="">Не вказувати</option>${[100, 90, 80, 70, 60, 50, 40, 30, 20].map(v => `<option value="${v}" ${+e.pct === v ? 'selected' : ''}>${v} %</option>`).join('')}</select></label></div>
+    <label class="fl"><span class="lb">Що робила і чого досягла<button type="button" class="qh" data-help="bullets" aria-label="Підказка: що робила" aria-expanded="false">?</button></span><textarea data-k="text" rows="3" placeholder="Monatliches Reporting für 5 Abteilungen&#10;Budget von CHF 12 Mio. betreut">${esc(e.text)}</textarea></label>`},
+  edu: {title: 'Освіта', make: () => ({from: '', to: '', cur: false, deg: '', title: '', org: '', place: '', text: ''}), fields: e => `
+    <div class="g2"><div class="fl"><span class="lb">З</span>${dsel('from', e.from, false)}</div>
+    <div class="fl"><span class="lb">По</span>${dsel('to', e.to, false, e.cur)}</div></div>
+    <label class="chk"><input type="checkbox" data-k="cur" ${e.cur ? 'checked' : ''}> навчаюся зараз</label>
+    <div class="g2"><label class="fl"><span class="lb">Рівень<button type="button" class="qh" data-help="deg" aria-label="Підказка: рівень освіти" aria-expanded="false">?</button></span><select data-k="deg">${opts(DEG, e.deg, 'Вибери')}</select></label>
+    <label class="fl"><span class="lb">Спеціальність</span><input type="text" data-k="title" value="${esc(e.title)}" placeholder="Finanzen und Kredit"></label>
+    <label class="fl"><span class="lb">Навчальний заклад</span><input type="text" data-k="org" value="${esc(e.org)}" placeholder="Wirtschaftsuniversität"></label>
+    <label class="fl"><span class="lb">Місто, країна</span><input type="text" data-k="place" value="${esc(e.place)}" list="dl-place" placeholder="Kyjiw, Ukraine"></label></div>
+    <label class="fl"><span class="lb">Примітка<button type="button" class="qh" data-help="eduNote" aria-label="Підказка: визнання диплома" aria-expanded="false">?</button></span><input type="text" data-k="text" value="${esc(e.text)}" placeholder="Anerkannt durch das SBFI"></label>`},
+  trn: {title: 'Курс', make: () => ({year: '', title: '', org: ''}), fields: e => `
+    <div class="g3"><div class="fl"><span class="lb">Рік</span>${dsel('year', e.year, false)}</div>
+    <label class="fl" style="grid-column:span 2"><span class="lb">Назва курсу або сертифіката</span><input type="text" data-k="title" value="${esc(e.title)}" placeholder="Deutsch B2, fide-Zertifikat"></label></div>
+    <label class="fl"><span class="lb">Хто проводив</span><input type="text" data-k="org" value="${esc(e.org)}" list="dl-school" placeholder="Klubschule Migros, Zürich"></label>`},
+  lng: {title: 'Мова', make: () => ({code: '', other: '', lvl: 'B1', cert: '', certT: ''}), fields: e => `
+    <div class="g2"><label class="fl"><span class="lb">Мова</span><select data-k="code"><option value="">Вибери мову</option>${Object.keys(LN_RU).map(c => `<option value="${c}" ${e.code === c ? 'selected' : ''}>${LN_FORM[c]}</option>`).join('')}<option value="other" ${e.code === 'other' ? 'selected' : ''}>Інша…</option></select></label>
+    <label class="fl"><span class="lb">Рівень<button type="button" class="qh" data-help="lvl" aria-label="Підказка: рівень мови" aria-expanded="false">?</button></span><select data-k="lvl">${['native', 'C2', 'C1', 'B2', 'B1', 'A2', 'A1'].map(v => `<option value="${v}" ${e.lvl === v ? 'selected' : ''}>${L[FL].lv[v]}</option>`).join('')}</select></label></div>
+    ${e.code === 'other' ? `<label class="fl"><span class="lb">Назва мови мовою резюме</span><input type="text" data-k="other" value="${esc(e.other)}" placeholder="Georgisch"></label>` : ''}
+    ${e.lvl === 'native' ? '' : `<div class="g2"><label class="fl"><span class="lb">Сертифікат<button type="button" class="qh" data-help="cert" aria-label="Підказка: сертифікат" aria-expanded="false">?</button></span><select data-k="cert"><option value="">Без сертифіката</option>${(CERTS[e.code] || []).map(c => `<option ${e.cert === c ? 'selected' : ''}>${c}</option>`).join('')}<option value="other" ${e.cert === 'other' ? 'selected' : ''}>Інший…</option></select></label>
+    ${e.cert === 'other' ? `<label class="fl"><span class="lb">Назва сертифіката</span><input type="text" data-k="certT" value="${esc(e.certT)}" placeholder="Goethe-Zertifikat B1"></label>` : ''}</div>`}`},
+  ref: {title: 'Рекомендатор', make: () => ({name: '', role: '', org: '', contact: ''}), fields: e => `
+    <div class="g2"><label class="fl"><span class="lb">Ім’я та прізвище</span><input type="text" data-k="name" value="${esc(e.name)}" placeholder="Anna Muster"></label>
+    <label class="fl"><span class="lb">Посада</span><input type="text" data-k="role" value="${esc(e.role)}" placeholder="Leiterin Finanzen"></label>
+    <label class="fl"><span class="lb">Фірма</span><input type="text" data-k="org" value="${esc(e.org)}" placeholder="Muster AG"></label>
+    <label class="fl"><span class="lb">Телефон або e-mail</span><input type="text" data-k="contact" value="${esc(e.contact)}" placeholder="+41 44 000 00 00"></label></div>`}
+};
+function drawList(k){
+  const box = document.getElementById('l-' + k), arr = S[k], def = LISTS[k];
+  box.innerHTML = arr.map((e, i) => `<div class="ent" data-list="${k}" data-i="${i}"><div class="ent-h"><b>${esc(e.title || e.name || (k === 'lng' ? (e.code === 'other' ? e.other : LN_FORM[e.code]) : '') || def.title + ' ' + (i + 1))}</b>
+    <button type="button" class="ib" data-mv="-1" aria-label="Вище" ${i ? '' : 'disabled'}>↑</button><button type="button" class="ib" data-mv="1" aria-label="Нижче" ${i < arr.length - 1 ? '' : 'disabled'}>↓</button><button type="button" class="ib" data-del aria-label="Видалити">✕</button></div>${def.fields(e)}</div>`).join('');
+  const c = document.getElementById('c-' + k); if (c) c.textContent = arr.length ? arr.length : '';
+}
+function vis(){
+  document.getElementById('natow').hidden = S.p.natc !== 'other';
+  document.getElementById('sexw').hidden = !S.p.civc || !['fr', 'it', 'ru', 'uk'].includes(S.lang);
+  document.querySelectorAll('#skl button[data-s]').forEach(b => b.setAttribute('aria-pressed', (S.skl || []).includes(b.dataset.s)));
+  document.querySelectorAll('#intc button[data-s]').forEach(b => b.setAttribute('aria-pressed', (S.ints || []).includes(b.dataset.s)));
+  document.querySelectorAll('#skl .grp, #intc .grp').forEach(g => { g.querySelector('.gc').textContent = g.querySelectorAll('button[aria-pressed="true"]').length || ''; });
+  document.getElementById('c-skl').textContent = (S.skl || []).length || '';
+  document.getElementById('c-ints').textContent = (S.ints || []).length || '';
+  const dl = document.getElementById('dl-place'); dl.innerHTML = PLACES.map(r => `<option value="${esc(r[LI[S.lang]])}">`).join('');
+}
+const toks = t => String(t || '').split(/[,\n]/).map(x => x.trim().toLowerCase()).filter(Boolean);
+const hasTok = (t, v) => toks(t).includes(String(v).toLowerCase());
+function toggleTok(t, v){
+  t = String(t || '');
+  if (hasTok(t, v)) return t.split('\n').map(line => line.split(',').map(x => x.trim()).filter(x => x && x.toLowerCase() !== v.toLowerCase()).join(', ')).filter(Boolean).join('\n');
+  const lines = t.split('\n'); let last = lines.pop() || '';
+  last = last.trim() ? last.trim().replace(/,$/, '') + ', ' + v : (lines.length || S.lang === 'de' ? v : cap(v));
+  return lines.concat(last).join('\n');
+}
+function drawAll(){
+  document.querySelectorAll('[data-f]').forEach(el => { const [a, b] = el.dataset.f.split('.'); const v = b ? S[a][b] : S[a]; if (el.type === 'checkbox') el.checked = !!v; else el.value = v == null ? '' : v; });
+  document.querySelectorAll('#dk input').forEach(el => el.checked = (S.p.dk || []).includes(el.value));
+  document.getElementById('canton').value = S.canton || '';
+  document.getElementById('lang').value = S.lang;
+  document.querySelectorAll('#tpl button').forEach(b => b.setAttribute('aria-pressed', b.dataset.v === S.tpl));
+  document.querySelectorAll('#color button').forEach(b => b.setAttribute('aria-pressed', b.dataset.v === S.color));
+  document.getElementById('phon').checked = S.photoOn;
+  document.getElementById('refreq').checked = S.refReq;
+  document.getElementById('refadd').hidden = S.refReq;
+  const ph = document.getElementById('phbox'); ph.innerHTML = S.photo ? `<img src="${S.photo}" alt="Твоє фото">` : 'Фото<br>3 × 4';
+  document.getElementById('phdel').hidden = !S.photo;
+  ['exp', 'edu', 'trn', 'lng', 'ref'].forEach(drawList);
+  vis(); render(); langCheck();
+}
+const LANG_IN = {de: 'німецькою', fr: 'французькою', it: 'італійською', en: 'англійською', ru: 'російською', uk: 'українською'};
+const CYR = /[А-Яа-яЁёІіЇїЄєҐґ]/;
+/* подсказка у полей со своим текстом: что не переводится и на каком языке писать */
+function langCheck(){
+  const cv = S.lang, cyrOk = cv === 'ru' || cv === 'uk';
+  document.getElementById('langnote').innerHTML = cyrOk
+    ? `Резюме ${LANG_IN[cv]}. Списки й кнопки перекладаються самі, свій текст пиши ${LANG_IN[cv]}.`
+    : `Резюме <b>${LANG_IN[cv]}</b>. Списки й кнопки перекладаються самі. <b>Свій текст не перекладається</b>, він потрапить у резюме як є. Пиши його одразу ${LANG_IN[cv]}.`;
+  document.querySelectorAll('#form input[type=text], #form textarea, #l-att input[type=text]').forEach(el => {
+    const name = el.dataset.f === 'p.first' || el.dataset.f === 'p.last';
+    const bad = !!el.value && CYR.test(el.value) && !cyrOk;
+    let w = el.parentElement.querySelector(':scope > .cyr');
+    if (bad && !w){ w = document.createElement('p'); w.className = 'cyr'; w.setAttribute('role', 'status'); el.insertAdjacentElement('afterend', w); }
+    if (w) { if (bad) w.textContent = name ? 'Ім’я та прізвище пиши латиницею, як у паспорті чи пермиті.' : `Тут російські чи українські літери. Цей текст потрапить у резюме як є, сам він не перекладається. Напиши ${LANG_IN[cv]}.`; else w.remove(); }
+  });
+}
+let lcT = 0;
+function touched(){ if (showEx) leaveEx(); save(); vis(); render(); clearTimeout(lcT); lcT = setTimeout(langCheck, 400); }
+
+/* ===================== события ===================== */
+/* списки в анкете */
+document.getElementById('skl').innerHTML = SKC.map(c => `<details class="grp"><summary>${fl(c.t)}<span class="gc"></span></summary><div class="chips">${c.items.map(it => `<button type="button" data-s="${esc(sid(c.id, it))}" data-alt="${esc(typeof it === 'string' ? '' : it.slice(1).join(' '))}" aria-pressed="false">${esc(typeof it === 'string' ? it : fl(it))}</button>`).join('')}</div></details>`).join('');
+document.getElementById('intc').innerHTML = INC.map(c => `<details class="grp"><summary>${incTitle(c)}<span class="gc"></span></summary><div class="chips">${c.items.map(it => `<button type="button" data-s="${esc(c.id + '.' + it[1])}" data-alt="${esc(it.slice(1).join(' '))}" aria-pressed="false">${esc(fl(it))}</button>`).join('')}</div></details>`).join('');
+/* поиск: показываем только подходящие кнопки и раскрываем их группы; ищем по-русски и на языке резюме */
+document.querySelectorAll('.find').forEach(inp => inp.addEventListener('input', () => {
+  const q = inp.value.trim().toLowerCase(), box = document.getElementById(inp.dataset.find);
+  box.querySelectorAll('.grp').forEach(g => {
+    let n = 0; g.querySelectorAll('button[data-s]').forEach(b => { const hit = !q || (b.textContent + ' ' + b.dataset.s + ' ' + (b.dataset.alt || '')).toLowerCase().includes(q) || g.querySelector('summary').textContent.toLowerCase().includes(q); b.hidden = !hit; if (hit) n++; });
+    g.hidden = !n; g.open = !!q && n > 0;
+  });
+}));
+['skl', 'intc'].forEach(id => document.getElementById(id).addEventListener('click', e => {
+  const b = e.target.closest('button[data-s]'); if (!b) return; const key = id === 'skl' ? 'skl' : 'ints';
+  const arr = S[key] = S[key] || []; const i = arr.indexOf(b.dataset.s); if (i < 0) arr.push(b.dataset.s); else arr.splice(i, 1); touched();
+}));
+const natOpts = Object.entries(NAT).map(([k, r]) => `<option value="${k}">${fl(r)}</option>`).join('');
+document.getElementById('natc').innerHTML = '<option value="">Не вказувати</option>' + natOpts + '<option value="other">Інше…</option>';
+document.getElementById('natc2').innerHTML = '<option value="">Ні</option>' + natOpts;
+document.getElementById('civc').innerHTML = '<option value="">Не вказувати</option>' + Object.entries(CIV).map(([k, r]) => `<option value="${k}">${civForm(r)}</option>`).join('');
+document.getElementById('dk').innerHTML = DK.map(k => `<label class="chk"><input type="checkbox" value="${k}"> ${k}</label>`).join('') + '<label class="chk"><input type="checkbox" data-f="p.car"> є своя машина</label>';
+document.getElementById('canton').innerHTML += CANTONS.map(c => `<option value="${c[0]}">${cantonName(c)}</option>`).join('') + '<option value="INT">Міжнародна фірма, англійська</option>';
+document.getElementById('dl-chtown').innerHTML = CH_TOWNS.map(t => `<option value="${t}">`).join('');
+document.getElementById('dl-school').innerHTML = SCHOOLS.map(t => `<option value="${t}">`).join('');
+document.getElementById('dk').addEventListener('change', e => { if (e.target.dataset.f) return; S.p.dk = [...document.querySelectorAll('#dk input:not([data-f])')].filter(x => x.checked).map(x => x.value); touched(); });
+document.getElementById('canton').addEventListener('change', e => {
+  S.canton = e.target.value; const c = CANTONS.find(x => x[0] === S.canton);
+  const nl = S.canton === 'INT' ? 'en' : (c ? c[2] : '');
+  if (nl){ S.lang = nl; document.getElementById('lang').value = nl; }
+  say(nl ? `Мова резюме: ${LANG_FORM[nl]}.` + (c && c[3] ? ` Тут також говорять мовою «${LANG_FORM[c[3]]}», її можна вибрати поруч.` : '') : '');
+  touched();
+});
+document.getElementById('color').innerHTML = Object.entries(COLORS).map(([k, c]) => `<button type="button" data-v="${k}" style="background:${c[0]}" aria-label="${c[2]}" title="${c[2]}"></button>`).join('');
+document.getElementById('form').addEventListener('input', e => {
+  const el = e.target;
+  if (el.dataset.f){ const [a, b] = el.dataset.f.split('.'); const v = el.type === 'checkbox' ? el.checked : el.value; if (b) S[a][b] = v; else S[a] = v; touched(); return; }
+  const ent = el.closest('.ent'); if (!ent || !ent.dataset.list) return;
+  if (el.dataset.part){ const w = el.closest('.dsel'), it = S[ent.dataset.list][+ent.dataset.i], m = w.querySelector('[data-part="m"]'), y = w.querySelector('[data-part="y"]').value;
+    it[w.dataset.d] = y ? (m && m.value ? m.value + '.' + y : y) : ''; touched(); return; }
+  if (!el.dataset.k) return;
+  const k = ent.dataset.list, i = +ent.dataset.i, item = S[k][i];
+  if (el.type === 'checkbox'){ item[el.dataset.k] = el.checked; if (el.dataset.k === 'cur'){ ent.querySelectorAll('.dsel[data-d="to"] select').forEach(x => x.disabled = el.checked); } }
+  else item[el.dataset.k] = el.value;
+  if (el.dataset.k === 'title' || el.dataset.k === 'name') ent.querySelector('.ent-h b').textContent = el.value || LISTS[k].title + ' ' + (i + 1);
+  if (k === 'lng' && ['code', 'lvl', 'cert'].includes(el.dataset.k)){ if (el.dataset.k === 'code') item.cert = ''; drawList('lng'); }
+  touched();
+});
+document.getElementById('form').addEventListener('click', e => {
+  const add = e.target.closest('[data-add]');
+  if (add){ const k = add.dataset.add; S[k].push(LISTS[k].make()); drawList(k); touched(); const last = document.querySelector(`#l-${k} .ent:last-child input, #l-${k} .ent:last-child select`); if (last) last.focus(); return; }
+  const ent = e.target.closest('.ent'); if (!ent || !ent.dataset.list) return;
+  const k = ent.dataset.list, i = +ent.dataset.i, arr = S[k];
+  const mv = e.target.closest('[data-mv]');
+  if (mv){ const j = i + +mv.dataset.mv; if (j < 0 || j >= arr.length) return; [arr[i], arr[j]] = [arr[j], arr[i]]; drawList(k); touched(); return; }
+  if (e.target.closest('[data-del]')){ arr.splice(i, 1); drawList(k); touched(); }
+});
+document.getElementById('lang').addEventListener('change', e => { S.lang = e.target.value; touched(); });
+document.getElementById('tpl').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; S.tpl = b.dataset.v; drawAll(); save(); if (showEx) leaveEx(); });
+document.getElementById('color').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; S.color = b.dataset.v; drawAll(); save(); if (showEx) leaveEx(); });
+document.getElementById('phon').addEventListener('change', e => { S.photoOn = e.target.checked; touched(); });
+document.getElementById('refreq').addEventListener('change', e => { S.refReq = e.target.checked; document.getElementById('refadd').hidden = S.refReq; if (!S.refReq && !S.ref.length){ S.ref.push(LISTS.ref.make()); drawList('ref'); } touched(); });
+document.getElementById('phfile').addEventListener('change', async e => {
+  const f = e.target.files[0]; e.target.value = ''; if (!f) return;
+  try {
+    const url = URL.createObjectURL(f), img = new Image(); img.src = url; await img.decode();
+    const W = 450, H = 600, c = document.createElement('canvas'); c.width = W; c.height = H; const x = c.getContext('2d');
+    const r = Math.max(W / img.naturalWidth, H / img.naturalHeight), w = img.naturalWidth * r, h = img.naturalHeight * r;
+    x.fillStyle = '#fff'; x.fillRect(0, 0, W, H); x.drawImage(img, (W - w) / 2, (H - h) / 2.6, w, h); URL.revokeObjectURL(url);
+    S.photo = c.toDataURL('image/jpeg', 0.84); S.photoOn = true; drawAll(); touched(); say('Фото додано. Воно зберігається лише на цьому пристрої.');
+  } catch (err) { say('Це фото не відкрилося. Спробуй JPG або PNG.'); }
+});
+document.getElementById('phdel').addEventListener('click', () => { S.photo = ''; drawAll(); touched(); });
+const pdfBtns = [document.getElementById('pdf'), document.getElementById('pdf2')];
+pdfBtns.forEach(b => b.addEventListener('click', () => doPdf(pdfBtns, false)));
+try { if (navigator.canShare && navigator.canShare({files: [new File(['x'], 'x.pdf', {type: 'application/pdf'})]}) && matchMedia('(pointer:coarse)').matches){ const sb = document.getElementById('share'); sb.hidden = false; sb.addEventListener('click', () => doPdf(pdfBtns.concat(sb), true)); } } catch (e) {}
+/* удалить всё — с подтверждением на странице */
+document.getElementById('clearwrap').addEventListener('click', e => {
+  const w = document.getElementById('clearwrap');
+  if (e.target.id === 'clear'){ w.innerHTML = '<span class="confirm">Видалити все резюме на цьому пристрої? <button type="button" class="btn sm" id="clyes">Так, видалити</button><button type="button" class="btn ghost sm" id="clno">Ні</button></span>'; return; }
+  if (e.target.id === 'clyes'){ S = blank(); try { localStorage.removeItem(KEY); } catch (x) {} DB.clear(); drawAll(); drawAtt(); say('Резюме й додатки видалено.'); }
+  if (e.target.id === 'clyes' || e.target.id === 'clno') w.innerHTML = '<button type="button" class="btn ghost sm" id="clear">Видалити все</button>';
+});
+
+/* ===================== приложения ===================== */
+const LOOKS = {orig: 'Як є', clean: 'Яскравіше й чіткіше', bw: 'Як скан, чорно-білий'};
+const ORIG = {}, PDFB = {}, PROC = {}, PDFT = {}, MEM = {};
+const attTitle = (a, cvl) => [tr(ATT[a.type] || ATT.other, cvl), a.note].filter(Boolean).join(' – ');
+const DB = {
+  p: null,
+  open(){ return this.p || (this.p = new Promise((res, rej) => { const r = indexedDB.open('rezyumeCH', 1); r.onupgradeneeded = () => r.result.createObjectStore('att'); r.onsuccess = () => res(r.result); r.onerror = () => rej(r.error); })); },
+  async run(mode, fn){ const db = await this.open(); return new Promise((res, rej) => { const t = db.transaction('att', mode), st = t.objectStore('att'), rq = fn(st); t.oncomplete = () => res(rq && rq.result); t.onerror = () => rej(t.error); }); },
+  put(k, v){ MEM[k] = v; return this.run('readwrite', st => st.put(v, k)).catch(() => say('Файл додано, але на цьому пристрої він не збережеться після закриття сторінки.')); },
+  async get(k){ if (MEM[k]) return MEM[k]; try { return MEM[k] = await this.run('readonly', st => st.get(k)); } catch (e) { return null; } },
+  del(k){ delete MEM[k]; return this.run('readwrite', st => st.delete(k)).catch(() => {}); },
+  clear(){ return this.run('readwrite', st => st.clear()).catch(() => {}); }
+};
+const absUrl = u => window.PV_BASE ? (window.PV_BASE || '/').replace(/\/$/, '') + u : u;
+const scripts = {};
+function loadScript(u){ return scripts[u] || (scripts[u] = new Promise((res, rej) => { const el = document.createElement('script'); el.src = absUrl(u); el.onload = res; el.onerror = () => { delete scripts[u]; rej(new Error('script')); }; document.head.appendChild(el); })); }
+const loadImg = src => new Promise((res, rej) => { const i = new Image(); i.onload = () => res(i); i.onerror = rej; i.src = src; });
+/* поворот на 90° и мелкий наклон, тот же для листа и для автонастройки */
+function rotCanvas(img, rot, fine, max, fill = '#fff'){
+  rot = (((rot || 0) % 360) + 360) % 360; const sw = rot === 90 || rot === 270, sc = Math.min(1, max / Math.max(img.naturalWidth || img.width, img.naturalHeight || img.height));
+  const W0 = (img.naturalWidth || img.width) * sc, H0 = (img.naturalHeight || img.height) * sc, cw = Math.round(sw ? H0 : W0), ch = Math.round(sw ? W0 : H0);
+  const c = document.createElement('canvas'); c.width = cw; c.height = ch; const x = c.getContext('2d');
+  x.fillStyle = fill; x.fillRect(0, 0, cw, ch); x.translate(cw / 2, ch / 2); x.rotate((rot + (+fine || 0)) * Math.PI / 180); x.drawImage(img, -W0 / 2, -H0 / 2, W0, H0);
+  return c;
+}
+const lumData = c => { const d = c.getContext('2d').getImageData(0, 0, c.width, c.height).data, g = new Uint8Array(c.width * c.height); for (let i = 0, j = 0; i < d.length; i += 4, j++) g[j] = (d[i] * 77 + d[i + 1] * 150 + d[i + 2] * 29) >> 8; return g; };
+function otsu(g){ const h = new Float64Array(256); g.forEach(v => h[v]++); let sum = 0; for (let i = 0; i < 256; i++) sum += i * h[i]; let sb = 0, wb = 0, best = 0, th = 128; for (let t = 0; t < 256; t++){ wb += h[t]; if (!wb) continue; const wf = g.length - wb; if (!wf) break; sb += t * h[t]; const mb = sb / wb, mf = (sum - sb) / wf, v = wb * wf * (mb - mf) * (mb - mf); if (v > best){ best = v; th = t; } } return th; }
+/* найти наклон по строкам текста и краям листа, потом обрезать фон вокруг бумаги */
+function autoFix(img, rot){
+  const c0 = rotCanvas(img, rot, 0, 700), W = c0.width, H = c0.height, g = lumData(c0), th = otsu(g), pts = [];
+  for (let y = 1; y < H - 3; y += 1) for (let x = 1; x < W - 3; x += 1){ const v = g[y * W + x]; if (v < th && (g[(y + 2) * W + x] >= th || g[y * W + x + 2] >= th)) pts.push(x - W / 2, y - H / 2); }
+  let bestA = 0, bestS = -1;
+  if (pts.length > 200) for (let a = -12; a <= 12.001; a += 0.25){
+    const r = a * Math.PI / 180, sn = Math.sin(r), cs = Math.cos(r), bins = new Float64Array(H * 2 + 10);
+    for (let i = 0; i < pts.length; i += 2){ const yy = Math.round(pts[i] * sn + pts[i + 1] * cs + H); if (yy >= 0 && yy < bins.length) bins[yy]++; }
+    let sc = 0; for (let i = 0; i < bins.length; i++) sc += bins[i] * bins[i]; if (sc > bestS){ bestS = sc; bestA = a; }
+  }
+  const dd = c0.getContext('2d').getImageData(0, 0, W, H).data, rgb = [0, 0, 0]; let nb = 0;
+  for (let x = 0; x < W; x += 3) [0, H - 1].forEach(y => { const i = (y * W + x) * 4; rgb[0] += dd[i]; rgb[1] += dd[i + 1]; rgb[2] += dd[i + 2]; nb++; });
+  for (let y = 0; y < H; y += 3) [0, W - 1].forEach(x => { const i = (y * W + x) * 4; rgb[0] += dd[i]; rgb[1] += dd[i + 1]; rgb[2] += dd[i + 2]; nb++; });
+  const c1 = rotCanvas(img, rot, bestA, 700, `rgb(${rgb.map(v => Math.round(v / nb)).join(',')})`), W1 = c1.width, H1 = c1.height, g1 = lumData(c1), t1 = otsu(g1);
+  const row = new Float64Array(H1), col = new Float64Array(W1);
+  for (let y = 0; y < H1; y++) for (let x = 0; x < W1; x++) if (g1[y * W1 + x] >= t1){ row[y]++; col[x]++; }
+  const edge = (arr0, n, lim) => { const k = Math.max(2, Math.round(arr0.length * 0.03)), arr = arr0.map((_, i) => { let s2 = 0, c = 0; for (let j = i - k; j <= i + k; j++) if (j >= 0 && j < arr0.length){ s2 += arr0[j]; c++; } return s2 / c; });
+    let a = 0, b = arr.length - 1; while (a < b && arr[a] < lim * n) a++; while (b > a && arr[b] < lim * n) b--; const m = Math.round(arr.length * 0.006); return [a + m, b - m]; };
+  const [y0, y1] = edge(row, W1, 0.4), [x0, x1] = edge(col, H1, 0.4);
+  const pc = (v, n) => Math.max(0, Math.min(40, Math.round(v / n * 200) / 2));
+  const crop = (y1 - y0 > H1 * 0.3 && x1 - x0 > W1 * 0.3) ? [pc(y0, H1), pc(W1 - 1 - x1, W1), pc(H1 - 1 - y1, H1), pc(x0, W1)] : [0, 0, 0, 0];
+  return {fine: Math.round(bestA * 2) / 2, crop};
+}
+/* поворот, выравнивание, обрезка и «как скан» */
+function procImg(img, a){
+  const c1 = rotCanvas(img, a.rot, a.fine, 99999), cw = c1.width, ch = c1.height;
+  const c = a.crop || [0, 0, 0, 0], sx = cw * c[3] / 100, sy = ch * c[0] / 100, sw2 = Math.max(10, cw * (1 - (c[1] + c[3]) / 100)), sh2 = Math.max(10, ch * (1 - (c[0] + c[2]) / 100));
+  const sc = Math.min(1, 2000 / Math.max(sw2, sh2)), W = Math.round(sw2 * sc), H = Math.round(sh2 * sc);
+  const c2 = document.createElement('canvas'); c2.width = W; c2.height = H; const x2 = c2.getContext('2d');
+  x2.fillStyle = '#fff'; x2.fillRect(0, 0, W, H); x2.imageSmoothingQuality = 'high'; x2.drawImage(c1, sx, sy, sw2, sh2, 0, 0, W, H);
+  if (a.look === 'clean' || a.look === 'bw'){
+    const im = x2.getImageData(0, 0, W, H), d = im.data, hist = new Uint32Array(256);
+    for (let i = 0; i < d.length; i += 16) hist[(d[i] * 77 + d[i + 1] * 150 + d[i + 2] * 29) >> 8]++;
+    const tot = hist.reduce((p, v) => p + v, 0), pct = q => { let acc = 0; for (let v = 0; v < 256; v++){ acc += hist[v]; if (acc >= tot * q) return v; } return 255; };
+    const bw = a.look === 'bw', lo = pct(bw ? 0.03 : 0.01), hi = Math.max(lo + 30, pct(bw ? 0.55 : 0.6)), span = hi - lo;
+    const LO = [0, 0, 0], HI = [255, 255, 255];
+    if (!bw) for (let j = 0; j < 3; j++){ const h2 = new Uint32Array(256); let n2 = 0; for (let i = j; i < d.length; i += 16){ h2[d[i]]++; n2++; } let acc = 0, v = 0; for (; v < 256; v++){ acc += h2[v]; if (acc >= n2 * 0.01) break; } LO[j] = v; acc = 0; for (v = 0; v < 256; v++){ acc += h2[v]; if (acc >= n2 * 0.6) break; } HI[j] = Math.max(LO[j] + 30, v); }
+    for (let i = 0; i < d.length; i += 4){
+      if (bw){ let v = ((d[i] * 77 + d[i + 1] * 150 + d[i + 2] * 29) >> 8); v = Math.max(0, Math.min(255, (v - lo) * 255 / span)); v = 255 * Math.pow(v / 255, 1.25); d[i] = d[i + 1] = d[i + 2] = v; }
+      else for (let j = 0; j < 3; j++) d[i + j] = Math.max(0, Math.min(255, (d[i + j] - LO[j]) * 255 / (HI[j] - LO[j])));
+    }
+    x2.putImageData(im, 0, 0);
+  }
+  return {data: c2.toDataURL('image/jpeg', a.look === 'bw' ? 0.78 : 0.84), w: W, h: H};
+}
+async function prepAtt(a){
+  if (a.kind === 'pdf'){
+    if (PDFT[a.id]) return;
+    const rec = await DB.get(a.id); if (!rec) { a.missing = true; return; }
+    PDFB[a.id] = rec.bytes;
+    try {
+      await loadScript('/assets/lib/pdfjs/pdf.min.js');
+      window.pdfjsLib.GlobalWorkerOptions.workerSrc = absUrl('/assets/lib/pdfjs/pdf.worker.min.js');
+      const pdf = await window.pdfjsLib.getDocument({data: new Uint8Array(rec.bytes.slice(0))}).promise, out = [];
+      for (let i = 1; i <= pdf.numPages; i++){
+        const pg = await pdf.getPage(i), vp0 = pg.getViewport({scale: 1}), vp = pg.getViewport({scale: 900 / Math.max(vp0.width, vp0.height)});
+        const c = document.createElement('canvas'); c.width = vp.width; c.height = vp.height; const x = c.getContext('2d'); x.fillStyle = '#fff'; x.fillRect(0, 0, c.width, c.height);
+        await pg.render({canvasContext: x, viewport: vp}).promise; out.push({data: c.toDataURL('image/jpeg', 0.8), w: c.width, h: c.height, land: vp0.width > vp0.height});
+      }
+      PDFT[a.id] = out; a.pages = out.length;
+    } catch (e) { PDFT[a.id] = []; a.err = true; }
+    return;
+  }
+  if (!ORIG[a.id]){ const rec = await DB.get(a.id); if (!rec) { a.missing = true; return; } ORIG[a.id] = await loadImg(rec.orig); }
+  PROC[a.id] = procImg(ORIG[a.id], a);
+}
+async function addFiles(files){
+  for (const f of files){
+    const id = 'a' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
+    try {
+      if (f.type === 'application/pdf' || /\.pdf$/i.test(f.name)){
+        const bytes = await f.arrayBuffer(); await DB.put(id, {bytes});
+        const a = {id, kind: 'pdf', type: 'zeugnis', note: '', name: f.name}; S.att.push(a); await prepAtt(a);
+        if (a.err) say('Цей PDF не відкрився для перегляду. Він захищений або пошкоджений. Спробуй зберегти його заново або сфотографувати.');
+      } else {
+        const url = URL.createObjectURL(f); let img;
+        try { img = await loadImg(url); } catch (e) { URL.revokeObjectURL(url); say('Це фото не відкрилося. Якщо це HEIC з iPhone, зроби знімок екрана документа або вибери в налаштуваннях камери «Найсумісніший».'); continue; }
+        const sc = Math.min(1, 2400 / Math.max(img.naturalWidth, img.naturalHeight)), c = document.createElement('canvas'); c.width = Math.round(img.naturalWidth * sc); c.height = Math.round(img.naturalHeight * sc);
+        const x = c.getContext('2d'); x.fillStyle = '#fff'; x.fillRect(0, 0, c.width, c.height); x.drawImage(img, 0, 0, c.width, c.height); URL.revokeObjectURL(url);
+        const orig = c.toDataURL('image/jpeg', 0.9); await DB.put(id, {orig});
+        const a = {id, kind: 'img', type: 'zeugnis', note: '', name: f.name, rot: 0, fine: 0, crop: [0, 0, 0, 0], look: 'clean', size: c.width > c.height * 1.15 ? 'half' : 'full'};
+        ORIG[id] = await loadImg(orig); Object.assign(a, autoFix(ORIG[id], 0)); S.att.push(a); PROC[id] = procImg(ORIG[id], a);
+      }
+    } catch (e) { say('Файл «' + f.name + '» не вдалося додати.'); }
+  }
+  S.attOn = true; drawAtt(); touched(); document.getElementById('attsec').open = true;
+}
+function drawAtt(){
+  const box = document.getElementById('l-att'), arr = S.att;
+  box.innerHTML = arr.map((a, i) => {
+    const pr = a.kind === 'pdf' ? (PDFT[a.id] || [])[0] : PROC[a.id];
+    const th = pr ? `<img src="${pr.data}" alt="">` : `<span class="hint">${a.missing ? 'Файлу немає на цьому пристрої' : 'Завантажую…'}</span>`;
+    const head = `<div class="ent-h"><b>${i + 1}. ${esc(attTitle(a, FL) || 'Додаток')}</b><button type="button" class="ib" data-amv="-1" aria-label="Вище" ${i ? '' : 'disabled'}>↑</button><button type="button" class="ib" data-amv="1" aria-label="Нижче" ${i < arr.length - 1 ? '' : 'disabled'}>↓</button><button type="button" class="ib" data-adel aria-label="Видалити">✕</button></div>`;
+    const common = `<label class="fl"><span class="lb">Що це</span><select data-a="type">${Object.entries(ATT).map(([k, r]) => `<option value="${k}" ${a.type === k ? 'selected' : ''}>${fl(r)}</option>`).join('')}</select></label>
+      <label class="fl"><span class="lb">Уточнення (фірма, школа або рік)</span><input type="text" data-a="note" value="${esc(a.note)}" placeholder="Muster AG"></label>`;
+    const ctl = a.kind === 'pdf' ? `${common}<p class="hint">PDF · ${a.pages ? a.pages + ' стор.' : '…'} · додасться у файл без змін.</p>`
+      : `${common}<div class="acts"><button type="button" class="btn ghost sm" data-arot="-90">↺ Повернути</button><button type="button" class="btn ghost sm" data-arot="90">↻</button><button type="button" class="btn ghost sm" data-aauto>Вирівняти автоматично</button><button type="button" class="btn ghost sm" data-areset>Без обрізання</button></div>
+      <div class="rng"><label>Вирівняти нахил <input type="range" data-a="fine" min="-12" max="12" step="0.5" value="${a.fine || 0}"></label><label>Обрізати зверху <input type="range" data-a="c0" min="0" max="40" step="1" value="${a.crop[0]}"></label>
+      <label>Обрізати знизу <input type="range" data-a="c2" min="0" max="40" step="1" value="${a.crop[2]}"></label><label>Обрізати зліва <input type="range" data-a="c3" min="0" max="40" step="1" value="${a.crop[3]}"></label>
+      <label>Обрізати справа <input type="range" data-a="c1" min="0" max="40" step="1" value="${a.crop[1]}"></label></div>
+      <div class="g2"><label class="fl"><span class="lb">Вигляд<button type="button" class="qh" data-help="attLook" aria-label="Підказка: вигляд" aria-expanded="false">?</button></span><select data-a="look">${Object.entries(LOOKS).map(([k, v]) => `<option value="${k}" ${a.look === k ? 'selected' : ''}>${v}</option>`).join('')}</select></label>
+      <label class="fl"><span class="lb">На аркуші A4<button type="button" class="qh" data-help="attSize" aria-label="Підказка: розмір" aria-expanded="false">?</button></span><select data-a="size"><option value="full" ${a.size !== 'half' ? 'selected' : ''}>Цілий аркуш</option><option value="half" ${a.size === 'half' ? 'selected' : ''}>Половина аркуша</option></select></label></div>`;
+    return `<div class="ent" data-att="${a.id}">${head}<div class="attrow"><div class="attth">${th}${a.kind === 'pdf' && a.pages ? `<span class="pg">${a.pages} стор.</span>` : ''}</div><div class="attctl">${ctl}</div></div></div>`;
+  }).join('');
+  document.getElementById('c-att').textContent = arr.length || '';
+  attSize();
+}
+function attSize(){
+  let b = 0; S.att.forEach(a => { if (a.kind === 'pdf') b += (PDFB[a.id] || {byteLength: 0}).byteLength; else if (PROC[a.id]) b += PROC[a.id].data.length * 0.75; });
+  const mb = (b + 150000) / 1048576, el = document.getElementById('attsize');
+  el.textContent = S.att.length ? `Розмір PDF разом із додатками приблизно ${mb.toFixed(1).replace('.', ',')} МБ.` + (mb > 8 ? ' Багато поштових скриньок не приймають листи понад 10 МБ. Вибери «Як скан» або прибери зайве.' : '') : '';
+}
+let attT = 0;
+function attChanged(a, redraw){ clearTimeout(attT); attT = setTimeout(() => { if (a.kind === 'img' && ORIG[a.id]) PROC[a.id] = procImg(ORIG[a.id], a); const th = document.querySelector(`[data-att="${a.id}"] .attth img`); if (th && PROC[a.id]) th.src = PROC[a.id].data; if (redraw) drawAtt(); else attSize(); touched(); }, 120); }
+document.getElementById('attfile').addEventListener('change', e => { const fs = [...e.target.files]; e.target.value = ''; if (fs.length){ if (showEx) leaveEx(); say('Додаю…'); addFiles(fs).then(() => say('Готово. Перевір, чи рівно лежить документ.')); } });
+document.getElementById('l-att').addEventListener('input', e => {
+  const el = e.target, card = el.closest('[data-att]'); if (!card || !el.dataset.a) return;
+  const a = S.att.find(x => x.id === card.dataset.att); if (!a) return; const k = el.dataset.a;
+  if (k[0] === 'c' && k.length === 2) a.crop[+k[1]] = +el.value; else if (k === 'fine') a.fine = +el.value; else a[k] = el.value;
+  if (k === 'type' || k === 'note'){ card.querySelector('.ent-h b').textContent = (S.att.indexOf(a) + 1) + '. ' + attTitle(a, FL); touched(); return; }
+  attChanged(a, false);
+});
+document.getElementById('l-att').addEventListener('click', e => {
+  const card = e.target.closest('[data-att]'); if (!card) return; const i = S.att.findIndex(x => x.id === card.dataset.att), a = S.att[i];
+  const r = e.target.closest('[data-arot]'); if (r){ a.rot = ((a.rot || 0) + +r.dataset.arot + 360) % 360; if (ORIG[a.id]) Object.assign(a, autoFix(ORIG[a.id], a.rot)); attChanged(a, true); return; }
+  if (e.target.closest('[data-aauto]') && ORIG[a.id]){ Object.assign(a, autoFix(ORIG[a.id], a.rot)); attChanged(a, true); say('Готово. Якщо щось зайве обрізалося, посунь повзунки.'); return; }
+  if (e.target.closest('[data-areset]')){ a.fine = 0; a.crop = [0, 0, 0, 0]; attChanged(a, true); return; }
+  const mv = e.target.closest('[data-amv]'); if (mv){ const j = i + +mv.dataset.amv; if (j < 0 || j >= S.att.length) return; [S.att[i], S.att[j]] = [S.att[j], S.att[i]]; drawAtt(); touched(); return; }
+  if (e.target.closest('[data-adel]')){ S.att.splice(i, 1); DB.del(a.id); delete PROC[a.id]; delete ORIG[a.id]; delete PDFT[a.id]; delete PDFB[a.id]; drawAtt(); touched(); }
+});
+/* листы приложений: список и документы, ровно по центру листа */
+function attPages(d){
+  if (!d.attOn) return [];
+  const list = (d.att || []).filter(a => a.kind === 'pdf' ? (PDFT[a.id] || []).length : PROC[a.id]);
+  if (!list.length) return [];
+  const l = L[d.lang] || L.de, col = COLORS[d.color] || COLORS.sage, ACC = d.tpl === 'strogiy' ? '#1F1B18' : col[0], MUT = '#6B625A', INK = '#1F1B18', RULE = '#D9D3CA';
+  const name = [d.p.first, d.p.last].filter(Boolean).join(' ');
+  const pages = [], X0 = 18, W = PW - 36;
+  const foot = pg => pg.push({t: 'text', x: X0, y: PH - 9, s: [name, l.att].filter(Boolean).join(' · '), f: 'r', size: 7, color: '#9A928A', align: 'left'});
+  if (d.attList){
+    const pg = []; let y = 22;
+    pg.push({t: 'text', x: X0, y: y + 3, s: l.doc.toUpperCase(), f: 'b', size: 7.6, color: MUT, align: 'left'}); y += 6;
+    pg.push({t: 'text', x: X0, y: y + 30 * PT * 0.82, s: l.att, f: 'd', size: 30, color: INK, align: 'left'}); y += lh(30, 1.05) + 1;
+    if (name){ pg.push({t: 'text', x: X0, y: y + 11 * PT, s: name, f: 'm', size: 11, color: ACC, align: 'left'}); y += lh(11); }
+    y += 4; pg.push({t: 'line', x1: X0, y1: y, x2: X0 + W, y2: y, color: ACC, w: 0.6}); y += 9;
+    list.forEach((a, i) => {
+      const t = attTitle(a, d.lang) + (a.kind === 'pdf' && (PDFT[a.id] || []).length > 1 ? ` (${pagesWord(PDFT[a.id].length, d.lang)})` : '');
+      const ln = wrap(t, 'r', 10.5, W - 14);
+      pg.push({t: 'text', x: X0, y: y + 10.5 * PT, s: String(i + 1).padStart(2, '0'), f: 'b', size: 10.5, color: ACC, align: 'left'});
+      ln.forEach(s => { pg.push({t: 'text', x: X0 + 14, y: y + 10.5 * PT, s, f: 'r', size: 10.5, color: INK, align: 'left'}); y += lh(10.5, 1.4); });
+      y += 2.2; pg.push({t: 'line', x1: X0 + 14, y1: y, x2: X0 + W, y2: y, color: RULE, w: 0.25}); y += 4;
+    });
+    foot(pg); pages.push(pg);
+  }
+  let half = null;
+  const place = (pg, a, i, img, y0, hBox) => {
+    pg.push({t: 'text', x: X0, y: y0 + 3, s: `${l.attOne} ${i + 1}`.toUpperCase(), f: 'b', size: 7.6, color: ACC, align: 'left'});
+    wrap(attTitle(a, d.lang), 'm', 9.6, W).slice(0, 1).forEach(s => pg.push({t: 'text', x: X0, y: y0 + 8.4, s, f: 'm', size: 9.6, color: INK, align: 'left'}));
+    pg.push({t: 'line', x1: X0, y1: y0 + 11.5, x2: X0 + W, y2: y0 + 11.5, color: RULE, w: 0.3});
+    const by = y0 + 16, bh = hBox - 16, r = Math.min(W / img.w, bh / img.h), w = img.w * r, h = img.h * r, x = X0 + (W - w) / 2, yy = by + (bh - h) / 2;
+    pg.push({t: 'img', x, y: yy, w, h, data: img.data, fit: true});
+    [[x, yy, x + w, yy], [x, yy + h, x + w, yy + h], [x, yy, x, yy + h], [x + w, yy, x + w, yy + h]].forEach(([x1, y1, x2, y2]) => pg.push({t: 'line', x1, y1, x2, y2, color: '#CFC8BE', w: 0.2}));
+  };
+  list.forEach((a, i) => {
+    if (a.kind === 'pdf'){ half = null; PDFT[a.id].forEach((th, k) => pages.push([{t: 'pdfpage', id: a.id, i: k}, {t: 'img', x: 0, y: 0, w: PW, h: PH, data: th.data, fit: true}])); return; }
+    const img = PROC[a.id];
+    if (a.size === 'half'){
+      if (half){ place(half, a, i, img, 150, 132); half = null; return; }
+      const pg = []; place(pg, a, i, img, 16, 128); foot(pg); pages.push(pg); half = pg; return;
+    }
+    half = null; const pg = []; place(pg, a, i, img, 16, 266); foot(pg); pages.push(pg);
+  });
+  return pages;
+}
+async function loadAtts(){ for (const a of S.att) await prepAtt(a); drawAtt(); render(); }
+
+/* ===================== пример ===================== */
+function exPhoto(){
+  const c = document.createElement('canvas'); c.width = 450; c.height = 600; const x = c.getContext('2d');
+  const g = x.createLinearGradient(0, 0, 0, 600); g.addColorStop(0, '#DCE3D2'); g.addColorStop(1, '#C7D1BA'); x.fillStyle = g; x.fillRect(0, 0, 450, 600);
+  x.fillStyle = '#5B4636'; x.beginPath(); x.ellipse(225, 250, 118, 140, 0, 0, Math.PI * 2); x.fill();
+  x.fillStyle = '#E9C9AE'; x.beginPath(); x.ellipse(225, 262, 86, 106, 0, 0, Math.PI * 2); x.fill();
+  x.fillStyle = '#5B4636'; x.beginPath(); x.ellipse(225, 180, 96, 52, 0, Math.PI, 0); x.fill();
+  x.fillStyle = '#E9C9AE'; x.fillRect(196, 350, 58, 60);
+  x.fillStyle = '#2E3A4A'; x.beginPath(); x.moveTo(40, 600); x.quadraticCurveTo(60, 410, 225, 400); x.quadraticCurveTo(390, 410, 410, 600); x.fill();
+  x.fillStyle = '#F4F1EC'; x.beginPath(); x.moveTo(190, 402); x.lineTo(225, 470); x.lineTo(260, 402); x.fill();
+  return c.toDataURL('image/jpeg', 0.86);
+}
+function exDoc(kind){
+  const W = 1240, H = 1754, c = document.createElement('canvas'); c.width = W; c.height = H; const x = c.getContext('2d');
+  x.fillStyle = '#fff'; x.fillRect(0, 0, W, H); x.fillStyle = '#2B2724';
+  const line = (y, w, h = 14, col = '#C9C4BD') => { x.fillStyle = col; x.fillRect(150, y, w, h); };
+  if (kind === 'zeugnis'){
+    x.fillStyle = '#2E5A88'; x.fillRect(150, 150, 70, 70); x.fillStyle = '#2B2724'; x.font = '700 38px Manrope'; x.fillText('Muster Finanz AG', 245, 200);
+    x.font = '400 22px Manrope'; x.fillStyle = '#6B625A'; x.fillText('Bahnhofstrasse 1 · 8001 Zürich', 245, 232);
+    x.fillStyle = '#2B2724'; x.font = '700 54px Manrope'; x.fillText('Arbeitszeugnis', 150, 420);
+    for (let i = 0; i < 24; i++){ const y = 500 + i * 38 + (i > 8 ? 30 : 0) + (i > 17 ? 30 : 0); line(y, i % 9 === 8 ? 520 : 900 + (i * 37 % 40)); }
+    x.font = '400 24px Manrope'; x.fillStyle = '#2B2724'; x.fillText('Zürich, 31. März 2026', 150, 1600);
+    x.strokeStyle = '#1F3F7A'; x.lineWidth = 4; x.beginPath(); x.moveTo(760, 1600); x.bezierCurveTo(800, 1520, 840, 1640, 880, 1570); x.bezierCurveTo(920, 1510, 950, 1630, 1010, 1560); x.stroke();
+    x.fillStyle = '#6B625A'; x.font = '400 22px Manrope'; x.fillText('Anna Muster, Leiterin Finanzen', 760, 1650);
+  } else {
+    x.strokeStyle = '#9A6B12'; x.lineWidth = 10; x.strokeRect(70, 70, W - 140, H - 140); x.lineWidth = 2; x.strokeRect(95, 95, W - 190, H - 190);
+    x.textAlign = 'center'; x.fillStyle = '#2B2724'; x.font = '400 40px Forum'; x.fillText('UNIVERSITY OF ECONOMICS', W / 2, 330);
+    x.font = '400 120px Forum'; x.fillStyle = '#7A2E3A'; x.fillText('DIPLOMA', W / 2, 560);
+    x.font = '400 34px Manrope'; x.fillStyle = '#2B2724'; x.fillText('Master of Finance and Credit', W / 2, 700); x.font = '700 50px Manrope'; x.fillText('Olena Kovalenko', W / 2, 840);
+    x.textAlign = 'left'; for (let i = 0; i < 6; i++) { x.fillStyle = '#C9C4BD'; x.fillRect(250 + (i % 2) * 60, 960 + i * 40, 740 - (i % 2) * 120, 14); }
+    x.fillStyle = '#D9B45A'; x.beginPath(); x.arc(W / 2, 1450, 110, 0, Math.PI * 2); x.fill(); x.fillStyle = '#9A6B12'; x.beginPath(); x.arc(W / 2, 1450, 80, 0, Math.PI * 2); x.fill();
+  }
+  return {data: c.toDataURL('image/jpeg', 0.85), w: W, h: H};
+}
+function leaveEx(){ showEx = false; document.getElementById('exbar').hidden = true; render(); }
+document.getElementById('exbtn').addEventListener('click', () => { EX = example(); PROC.ex1 = exDoc('zeugnis'); PROC.ex2 = exDoc('diplom'); showEx = true; document.getElementById('exbar').hidden = false; render(); document.getElementById('sheet').scrollIntoView({behavior: 'smooth', block: 'start'}); });
+document.getElementById('exback').addEventListener('click', leaveEx);
+
+/* шрифты листа должны загрузиться до первой раскладки, иначе ширина строк посчитается не тем шрифтом */
+Promise.all(['400 10px Manrope', '600 10px Manrope', '700 10px Manrope', '400 10px Forum'].map(f => document.fonts.load(f))).catch(() => {}).then(() => drawAll());
+drawAll();
+drawAtt(); if (S.att.length) loadAtts();
+if (/[?&]example\b/.test(location.search)) document.getElementById('exbtn').click();
+</script>
+<script>
+window.HELP = {
+"lang": "<p>Пиши резюме мовою вакансії. У Цюриху, Базелі та Берні зазвичай німецька, у Женеві й Лозанні французька, у Тічино італійська, у міжнародних фірмах англійська.</p><p>Усе, що вибираєш зі списків і кнопок, перекладеться само. Свій текст (посада, фірма, «що робила», свої навички) не перекладається, він потрапить у резюме як є. Пиши його одразу вибраною мовою. Якщо потрібна допомога з перекладом, у довіднику є перекладачі.</p>",
+"tpl": "<ul><li><b>З колонкою.<\/b> Фото, контакти й мови в кольоровій колонці. Сучасно й легко читати. Підходить майже всюди.<\/li><li><b>Класика.<\/b> Усе в одну колонку, велике ім’я. Для будь-яких галузей.<\/li><li><b>Строгий.<\/b> Чорно-білий, без прикрас. Для банків, страхових, юристів і держслужби.<\/li><\/ul>",
+"color": "<p>Колір заголовків і колонки. Спокійні тони виглядають солідно. Якщо сумніваєшся, вибирай синій або чорно-білий.</p>",
+"photo": "<p>У Швейцарії фото в резюме поки звичне. Потрібен діловий портрет на світлому тлі, плечі й обличчя, без відпустки та селфі.</p><p>Фото обрізається до формату 3 × 4 і зберігається лише на цьому пристрої. Якщо не хочеш фото, зніми галочку.</p>",
+"title": "<p>Напиши професію так, як вона називається у вакансії, мовою резюме. Наприклад, Pflegefachfrau, Buchhalterin, Software Engineer.</p>",
+"birth": "<p>У Швейцарії дату народження зазвичай пишуть. Якщо не хочеш, залиш поле порожнім, і рядка не буде.</p>",
+"permit": "<p>Роботодавець одразу бачить, чи потрібно йому оформлювати дозвіл. Назва перекладеться мовою резюме. Наприклад, «Aufenthaltsbewilligung B» або «Permis B (séjour)».</p><p>Зі статусом S працювати можна, роботодавець лише повідомляє про початок роботи.</p>",
+"profile": "<p>Три-чотири речення. Хто ти, скільки років досвіду, у чому сильна і яку роботу шукаєш.</p><p>Наприклад, «Buchhalterin mit 8 Jahren Erfahrung in KMU. Sicher in Abacus und MWST. Suche eine Teilzeitstelle 60–80 % in Zürich».</p>",
+"bullets": "<p>Кожен рядок стане пунктом. Пиши коротко й із цифрами, що зробила, а не просто обов’язки.</p><p>Наприклад, «Budget von CHF 2 Mio. betreut», «Team von 6 Personen geführt», «Durchlaufzeit um 20 % reduziert».</p>",
+"eduNote": "<p>Якщо диплом визнано у Швейцарії, напиши це. Німецькою «Anerkannt durch das SBFI», французькою «Reconnu par le SEFRI».</p><p>Можна вказати й швейцарський аналог, наприклад «entspricht Master».</p>",
+"lvl": "<ul><li><b>Рідна.<\/b> Твоя перша мова.<\/li><li><b>C2 і C1.<\/b> Вільно працюєш цією мовою.<\/li><li><b>B2.<\/b> Упевнено говориш на роботі, іноді шукаєш слова.<\/li><li><b>B1.<\/b> Даєш раду в побуті й на простих робочих темах.<\/li><li><b>A2 і A1.<\/b> Початковий рівень.<\/li><\/ul><p>Пиши чесно. На співбесіді рівень зазвичай перевіряють.</p>",
+"cert": "<p>Якщо рівень підтверджено іспитом, вибери сертифікат. Він з’явиться поруч із рівнем, наприклад «B2 – gut, Goethe-Zertifikat».</p><p><b>fide<\/b> — швейцарський тест, його знають усі роботодавці й відомства. У ньому два рівні, усний і письмовий. Якщо вони різні, вибери «Інший…» і напиши, наприклад, «fide: mündlich B1, schriftlich A2».</p><p>Немає сертифіката — це нормально, залиш «Без сертифіката».</p>",
+"canton": "<p>Вибери кантон, де шукаєш роботу. Мова резюме вибереться сама: німецька, французька або італійська. Для міжнародних фірм вибери «Міжнародна фірма», буде англійська.</p><p>У Фрібурі, Вале, Берні та Граубюндені говорять двома мовами. Дивись, якою мовою написано вакансію.</p>",
+"email": "<p>Адреса з ім’ям і прізвищем виглядає серйозніше, наприклад vorname.name@gmail.com. Без смайлів і прізвиськ.</p>",
+"civil": "<p>У Швейцарії сімейний стан у резюме пишуть за бажанням. Якщо не хочеш, залиш «Не вказувати».</p>",
+"sex": "<p>У французькій, італійській, російській та українській мовах слова «заміжня», «mariée» залежать від роду. Вибери, як писати.</p>",
+"drive": "<p>Відзнач категорії, які в тебе є. Для багатьох професій (догляд удома, прибирання, сервіс) права й своя машина — великий плюс.</p>",
+"jobtype": "<p>Зазвичай залиш «Звичайна робота». Якщо це було через агентство, стажування, власна справа чи волонтерство, вибери. Це з’явиться маленьким рядком під фірмою.</p><p>Волонтерство у Швейцарії теж вважається досвідом, особливо в перші роки.</p>",
+"pct": "<p>У Швейцарії часто працюють не повний тиждень. 100 % — повна зайнятість, 80 % — чотири дні на тиждень. Вказувати не обов’язково.</p>",
+"deg": "<p>Вибери рівень, він перекладеться сам. Спеціальність напиши мовою резюме.</p><p>Якщо диплом визнано у Швейцарії, напиши це в примітці.</p>",
+"att": "<p>Зазвичай до резюме додають рекомендації з попередніх місць роботи (Arbeitszeugnis), дипломи з визнанням і мовні сертифікати. Спочатку найновіше й найважливіше.</p><p>Фотографуй при денному світлі, згори, папір на темному столі. Нахил і фон навколо аркуша прибираються самі. Якщо потрібно, поправ повзунками або поверни на 90°. «Яскравіше й чіткіше» робить фон білим, «Як скан» — чорно-білим і легким.</p><p>Копію пермиту й паспорта додавай лише якщо про це просять у вакансії.</p><p>Файли зберігаються лише на цьому пристрої й не входять до резервної копії. Їх легко додати знову.</p>",
+"attList": "<p>Першим аркушем після резюме йде список усіх додатків із номерами (німецькою Beilagen). Роботодавцю зручно, і одразу видно, що все на місці.</p>",
+"attLook": "<ul><li><b>Як є.<\/b> Фото без змін.<\/li><li><b>Яскравіше й чіткіше.<\/b> Фон стає білим, текст темним, кольори печаток і підписів залишаються. Підходить майже завжди.<\/li><li><b>Як скан.<\/b> Чорно-білий, як зі сканера. Файл виходить легшим.<\/li><\/ul>",
+"attSize": "<p>«Цілий аркуш» — для звичайних паперів A4. «Половина аркуша» — для маленьких документів: картки, посвідчення, сертифікати на пів сторінки. Два такі поспіль стануть на один аркуш.</p>",
+"skills": "<p>Якщо потрібного немає в групах вище, допиши тут. Цей текст не перекладається, він потрапить у резюме як є. Кожен рядок стане окремим рядком у резюме, пиши одразу мовою резюме. Програми, обладнання, водійська категорія, сертифікати.</p><p>Пиши конкретно, наприклад «MS Excel (sehr gut)», а не «комп’ютер».</p>",
+"refs": "<p>У Швейцарії зазвичай пишуть «Referenzen auf Anfrage». Роботодавець сам попросить контакти, якщо ти пройдеш далі.</p><p>Якщо хочеш указати рекомендаторів одразу, зніми галочку й додай їх. Спочатку спитай у них згоди.</p>"
+};
+</script>
+<script src="/assets/help.uk.js"></script>
+<script src="/assets/backup.uk.js"></script>
+<script src="/assets/pdffan.uk.js" defer></script>
+<script src="/assets/samesite.js"></script>
+<script src="/assets/share.uk.js" defer></script>
+<!--i18n--><style>#langbar.langbar{position:fixed;bottom:14px;right:14px;z-index:60;display:flex;gap:2px;background:rgba(255,255,255,.92);border:1px solid rgba(0,0,0,.08);border-radius:999px;padding:3px;font:600 12px Manrope,system-ui,sans-serif;box-shadow:0 2px 8px rgba(0,0,0,.08)}#langbar.langbar a{color:#5d554d;padding:5px 9px;border-radius:999px;text-decoration:none;font:inherit;display:inline-block}#langbar.langbar a[aria-current="true"]{background:#2f2924;color:#fff}@media print{.langbar{display:none!important}}</style><div class="langbar" id="langbar" role="navigation" aria-label="Мова / Язык"><a href="/instrumenty/rezyume/" hreflang="ru" data-lang="ru">RU</a><a href="/uk/instrumenty/rezyume/" hreflang="uk" data-lang="uk" aria-current="true">UA</a></div><script>(function(){var b=document.getElementById('langbar');if(!b)return;b.addEventListener('click',function(e){var a=e.target.closest('a[data-lang]');if(a){try{localStorage.setItem('svoiludiLang',a.dataset.lang)}catch(x){}a.href=a.getAttribute('href').split('#')[0]+location.hash;}});})();</script><!--i18n--></body>
+</html>
