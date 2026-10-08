@@ -674,6 +674,9 @@ const VTZ = 'BEGIN:VTIMEZONE\r\nTZID:Europe/Zurich\r\nBEGIN:DAYLIGHT\r\nTZOFFSET
 const icsEsc = v => String(v).replace(/\\/g, '\\\\').replace(/\n/g, '\\n').replace(/([,;])/g, '\\$1');
 const ymd = d => d.replace(/-/g, '');
 function addDaysIso(d, n){ const x = new Date(d + 'T12:00:00'); x.setDate(x.getDate() + n); return x.getFullYear() + '-' + String(x.getMonth()+1).padStart(2,'0') + '-' + String(x.getDate()).padStart(2,'0'); }
+/* в каждом событии — откуда оно (правило Ирины 08.10.2026): проект и страница, чтобы вернуться */
+const SRC_URL = /svoiludi\.ch$/.test(location.hostname) ? location.origin + location.pathname : 'https://svoiludi.ch/instrumenty/moj-den/';
+const withSrc = d => (d ? d + '\n\n' : '') + 'Свои люди в Швейцарии · из инструмента «Мой день»: ' + SRC_URL;
 function icsCalendar(name, events){
   const stamp = new Date().toISOString().replace(/[-:]/g, '').slice(0, 15) + 'Z';
   const L = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Irina Voznesenskaya//' + name + '//RU', 'CALSCALE:GREGORIAN', 'METHOD:PUBLISH', 'X-WR-CALNAME:' + icsEsc(name), VTZ];
@@ -684,7 +687,7 @@ function icsCalendar(name, events){
     if (e.rrule) L.push(e.rrule);
     if (e.exdates && e.exdates.length) L.push('EXDATE;VALUE=DATE:' + e.exdates.map(ymd).join(','));
     L.push('SUMMARY:' + icsEsc(e.title));
-    if (e.details) L.push('DESCRIPTION:' + icsEsc(e.details));
+    L.push('DESCRIPTION:' + icsEsc(withSrc(e.details)), 'URL:' + SRC_URL);
     L.push('END:VEVENT');
   });
   L.push('END:VCALENDAR');
@@ -692,7 +695,7 @@ function icsCalendar(name, events){
 }
 function gcalLink(e){
   const dates = e.allDay ? ymd(e.start) + '/' + ymd(addDaysIso(e.end || e.start, 1)) : e.start + '/' + e.end;
-  const p = new URLSearchParams({action:'TEMPLATE', text:e.title, dates, ctz:'Europe/Zurich', details:e.details || ''});
+  const p = new URLSearchParams({action:'TEMPLATE', text:e.title, dates, ctz:'Europe/Zurich', details:withSrc(e.details)});
   if (e.rrule) p.set('recur', e.rrule);
   return 'https://calendar.google.com/calendar/render?' + p.toString();
 }
