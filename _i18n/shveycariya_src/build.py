@@ -145,6 +145,7 @@ def article(t):
   </section>
   <div class="art">
     <article class="art-main">
+      {('<section class="kt" data-k="' + ','.join(a['kanton']) + '" aria-label="Твой кантон"></section>') if a.get('kanton') else ''}
       {a['body']}
       {('<section class="terms" aria-labelledby="terms-h"><h2 id="terms-h">Как это называется в твоём кантоне</h2><p>В письмах и на сайтах ведомств ищи эти слова.</p><dl>' + ''.join(f'<div><dt>{l}</dt><dd lang="{ {"Deutsch":"de","Français":"fr","Italiano":"it","English":"en"}[l] }">{w}</dd></div>' for l, w in a['terms']) + '</dl></section>') if a.get('terms') else ''}
       <section class="todo" aria-labelledby="todo-h"><h2 id="todo-h">Что сделать</h2><ol>{steps}</ol></section>
@@ -156,14 +157,14 @@ def article(t):
       {f'<div class="box"><h3>Ещё по теме</h3><div class="rel">{rel}</div></div>' if rel else ''}
     </aside>
     <div class="art-foot">
-      <p class="botlink">Подробнее эта тема разобрана в бесплатном боте «Гайд по Швейцарии», раздел {t['bot']}. <a href="{BOT}">Открыть бот →</a></p>
+      {f'<p class="botlink">Подробнее эта тема разобрана в бесплатном боте «Гайд по Швейцарии», раздел {t["bot"]}. <a href="{BOT}">Открыть бот →</a></p>' if t['bot'] else ''}
       <div class="src"><b>Источники</b> (проверено {UPD})<ol>{srcs}</ol></div>
     </div>
   </div>
   {DISC}
   <div class="share-slot" data-url="{url}" data-lead="Перешли тому, кому это сейчас нужно. Сообщение уже готово." data-text="Привет! Тут коротко и по-русски про {html.escape(t['title'])}: что важно знать и что сделать. {url}"></div>
 '''
-    extra = '<script src="/data/specialists.js"></script>\n'
+    extra = '<script src="/data/specialists.js"></script>\n' + ('<script src="/assets/kantony.js"></script>\n' if a.get('kanton') else '')
     out = head(title, a['desc'], url, 2) + '<body data-root="../../">' + top(2)[len('<body>'):] + main + foot(2, extra)
     os.makedirs(f'shveycariya/{t["slug"]}', exist_ok=True)
     open(f'shveycariya/{t["slug"]}/index.html', 'w', encoding='utf-8').write(out)
