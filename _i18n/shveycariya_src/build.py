@@ -30,9 +30,9 @@ def head(title, desc, url, depth):
     h = re.sub(r'<meta property="og:description" content="[^"]*">', f'<meta property="og:description" content="{html.escape(desc)}">', h)
     h = h.replace('content="https://svoiludi.ch/kursy/"', f'content="{url}"').replace('https://svoiludi.ch/kursy/og-image.jpg', url + 'og-image.jpg')
     h = h.replace('<meta property="og:type" content="website">', '<meta property="og:type" content="article">' if depth == 2 else '<meta property="og:type" content="website">')
-    h += '<link rel="stylesheet" href="' + ('../' * depth) + 'assets/temy.css">\n'
     if depth == 2:
         h = h.replace('href="../', 'href="../../')
+    h += '<link rel="stylesheet" href="' + ('../' * depth) + 'assets/temy.css">\n'
     return h + '</head>\n'
 
 
