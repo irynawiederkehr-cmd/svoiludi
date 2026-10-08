@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<link rel="icon" href="/fav/favicon.svg" type="image/svg+xml"><link rel="icon" href="/fav/icon-32.png" sizes="32x32"><link rel="apple-touch-icon" href="/fav/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/fonts.css">
+<meta name="description" content="Какие страховки и взносы в Швейцарии обязательны и чего нельзя избежать: медстраховка, AHV, безработица, несчастный случай, пенсионная касса, машина, дом, собака, Serafe. Кто платит и сколько, схема и твой список. Бесплатно, PDF и PNG.">
+<link rel="canonical" href="https://svoiludi.ch/instrumenty/strahovki-obyazatelnye/">
+<meta property="og:type" content="website"><meta property="og:locale" content="ru_RU"><meta property="og:site_name" content="Свои люди в Швейцарии">
+<meta property="og:title" content="Обязательные страховки в Швейцарии · чего нельзя избежать"><meta property="og:description" content="Медстраховка, AHV, безработица, несчастный случай, пенсионная касса, машина, дом и собака на одной схеме и твой список. Бесплатно, PDF и PNG.">
+<meta property="og:url" content="https://svoiludi.ch/instrumenty/strahovki-obyazatelnye/"><meta property="og:image" content="https://svoiludi.ch/instrumenty/strahovki-obyazatelnye/og-image.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="robots" content="noindex, nofollow">
+<title>Обязательные страховки</title>
+<style>
+/* Обязательные страховки (08.10.2026): анкета слева, живые листы справа, движок assets/shema.js. */
+:root{
+  --bg:#F4EDE3; --paper:#FFFCF8; --ink:#2F2924; --muted:#7A6E62; --line:#E5D9C9; --soft:#EFE5D7;
+  --brown:#6E4F3C; --mustard:#B98324; --mustard-soft:#F3E3C2; --sage:#4F5E3E; --sage-soft:#E3E8D6; --red:#A0523D;
+  --display:"Forum","Georgia",serif; --sans:"Manrope","Segoe UI",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#221D19; --paper:#2C2621; --ink:#F1E9DF; --muted:#B4A796; --line:#3E362F; --soft:#352E28;
+  --brown:#E1C2A6; --mustard:#E2B45C; --mustard-soft:#3D321F; --sage:#B4BF97; --sage-soft:#2E3226; --red:#E39A85; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#221D19; --paper:#2C2621; --ink:#F1E9DF; --muted:#B4A796; --line:#3E362F; --soft:#352E28;
+  --brown:#E1C2A6; --mustard:#E2B45C; --mustard-soft:#3D321F; --sage:#B4BF97; --sage-soft:#2E3226; --red:#E39A85; color-scheme:dark}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--ink);font:15px/1.55 var(--sans);margin:0}
+.wrap{max-width:1280px;margin:0 auto;padding-inline:16px;padding-block:28px 48px;display:flex;flex-direction:column;gap:24px}
+.eyebrow{font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+h1{font-family:var(--display);font-weight:400;font-size:clamp(2.4rem,6vw,3.6rem);line-height:1;margin:4px 0 10px;text-wrap:balance}
+h2{font-family:var(--display);font-weight:400;font-size:1.55rem;margin:0;text-wrap:balance}
+h3{font-family:var(--display);font-weight:400;font-size:1.22rem;line-height:1.2;margin:0}
+.lead{max-width:66ch;color:var(--muted);margin:0}
+.jump{font-weight:700;color:var(--brown);text-underline-offset:4px}
+.privnote{margin-top:14px;background:var(--sage-soft);border-radius:16px;padding:12px 16px;font-size:.9rem;max-width:90ch}
+.status{font-size:.86rem;color:var(--muted);min-height:1.3em}
+.btn{font:inherit;font-weight:700;font-size:.9rem;border:0;border-radius:999px;padding:10px 18px;cursor:pointer;color:#fff;text-decoration:none;display:inline-flex;align-items:center;gap:6px;background:#6E4F3C;box-shadow:0 8px 18px -8px rgba(110,79,60,.6)}
+.btn.gold{background:#B98324;box-shadow:0 8px 18px -8px rgba(185,131,36,.7)}
+.btn.free{background:#4F5E3E;box-shadow:0 8px 18px -8px rgba(79,94,62,.6)}
+.btn.ghost{background:transparent;color:var(--brown);border:1.5px solid var(--line);box-shadow:none}
+.btn.sm{font-size:.82rem;padding:7px 13px}
+.btn[disabled]{background:var(--soft);color:var(--muted);box-shadow:none;cursor:wait}
+select,input[type=text],input[type=tel],textarea{font:inherit;font-size:.95rem;color:var(--ink);background:var(--paper);border:1.5px solid var(--line);border-radius:12px;padding:9px 12px;width:100%;min-width:0}
+select:focus-visible,input:focus-visible,button:focus-visible,textarea:focus-visible,a:focus-visible{outline:2px solid var(--mustard);outline-offset:2px}
+::placeholder{color:color-mix(in srgb,var(--muted) 70%,transparent)}
+.setup{background:var(--paper);border:1.5px solid var(--line);border-radius:22px;padding:16px 18px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px 18px;align-items:start}
+@media (max-width:1000px){.setup{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.setup{grid-template-columns:1fr}}
+.fl{display:flex;flex-direction:column;gap:6px;min-width:0}
+.fl>.lb{font-size:.8rem;font-weight:700;color:var(--muted);display:flex;align-items:center}
+.seg{display:flex;flex-wrap:wrap;gap:6px}
+.seg button{font:inherit;font-size:.84rem;font-weight:700;border:1.5px solid var(--line);background:var(--paper);color:var(--ink);border-radius:999px;padding:6px 12px;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--sage);border-color:var(--sage);color:#fff}
+.acts{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.exbar{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;background:var(--mustard-soft);border-radius:16px;padding:10px 14px;font-size:.9rem;font-weight:600}
+.work{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:22px;align-items:start}
+@media (max-width:1040px){.work{grid-template-columns:1fr}}
+.form{display:flex;flex-direction:column;gap:14px;min-width:0}
+.sec{background:var(--paper);border:1.5px solid var(--line);border-radius:20px;padding:16px 18px;display:flex;flex-direction:column;gap:12px}
+.sec>h2{font-size:1.3rem;display:flex;align-items:center}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:560px){.g2{grid-template-columns:1fr}}
+.hint{font-size:.84rem;color:var(--muted);margin:0}
+.chk{display:flex;flex-direction:column;gap:8px}
+.chk label{display:flex;gap:10px;align-items:baseline;font-size:.92rem;cursor:pointer}
+.chk input{flex:none;width:18px;height:18px;accent-color:var(--sage);transform:translateY(3px)}
+.chk b{white-space:nowrap}
+.chk small{color:var(--muted)}
+.tog{display:flex;gap:10px;align-items:center;font-size:.92rem;cursor:pointer}
+.tog input{width:18px;height:18px;accent-color:var(--sage)}
+.sheetbox{position:sticky;top:12px;display:flex;flex-direction:column;gap:10px}
+@media (max-width:1040px){.sheetbox{position:static}}
+.sheet{background:#fff;border-radius:6px;box-shadow:0 18px 40px -22px rgba(47,41,36,.45);overflow:hidden}
+.sheet svg{display:block;width:100%;height:auto}
+.imp{background:var(--paper);border:1.5px dashed color-mix(in srgb,var(--sage) 55%,transparent);border-radius:16px;padding:14px 18px;font-size:.88rem;max-width:90ch;margin:0}
+.imp b{color:var(--sage)}
+.guide{display:flex;flex-direction:column;gap:14px;max-width:90ch}
+.guide ul{margin:0;padding-left:20px}
+.guide li{margin:4px 0}
+.credit{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:.8rem;color:var(--muted)}
+.credit a{color:var(--muted)}
+.qh{font:700 .72rem/1 var(--sans);width:20px;height:20px;border-radius:50%;border:1.5px solid var(--line);background:var(--paper);color:var(--brown);cursor:pointer;margin-left:6px;padding:0;flex:none}
+.sheets{display:flex;flex-direction:column;gap:14px}
+.goals{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+@media (max-width:560px){.goals{grid-template-columns:1fr}}
+.goals label{display:flex;gap:10px;align-items:flex-start;background:var(--bg);border:1.5px solid var(--line);border-radius:14px;padding:9px 12px;cursor:pointer;font-size:.92rem}
+.goals input{width:18px;height:18px;accent-color:var(--sage);flex:none;margin-top:2px}
+.goals small{display:block;color:var(--muted)}
+.steps{display:flex;flex-direction:column;gap:8px}
+.steps details{background:var(--paper);border:1.5px solid var(--line);border-radius:16px;padding:10px 16px}
+.steps summary{cursor:pointer;font-weight:700;display:flex;gap:10px;align-items:baseline}
+.steps summary small{font-weight:600;color:var(--muted);margin-left:auto;text-align:right}
+.steps details p,.steps details ul{margin:8px 0 2px;font-size:.93rem}
+.steps details ul{padding-left:20px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <p style="margin:0 0 14px"><a class="jump" href="https://svoiludi.ch/instrumenty/">← Все полезные инструменты · Свои люди в Швейцарии</a></p>
+    <div class="eyebrow">Схема · страховки и взносы</div>
+    <h1>Обязательные страховки</h1>
+    <p class="lead">Что в Швейцарии обязательно и чего нельзя избежать: медстраховка, AHV, безработица, несчастный случай, пенсионная касса, машина, дом, собака и сбор за радио и ТВ. Кто платит, сколько и как, на одной схеме. Отметь, что есть у тебя, — получишь свой список.</p>
+    <div class="privnote"><b>Твои данные только у тебя.</b> Отметки и номера полисов хранятся только в твоём браузере на этом устройстве. Никто кроме тебя их не видит. Регистрация не нужна.</div>
+    <div data-fan="strahovki-obyazatelnye"></div>
+  </header>
+  <div class="setup">
+    <div class="fl"><span class="lb">Твой кантон<button type="button" class="qh" data-help="kanton" aria-label="Подсказка: твой кантон" aria-expanded="false">?</button></span><select id="kanton"></select></div>
+    <div class="fl"><span class="lb">Язык листов<button type="button" class="qh" data-help="lang" aria-label="Подсказка: язык листов" aria-expanded="false">?</button></span><select id="lang"><option value="bi">Русский + язык кантона</option><option value="ru">Только русский</option></select></div>
+    <div class="fl"><span class="lb">Что в PDF</span><div class="chk"><label><input type="checkbox" id="p1" checked> Схема: что обязательно</label><label><input type="checkbox" id="p2" checked> Кто за что платит</label><label><input type="checkbox" id="p3" checked> Мой список</label></div></div>
+    <div class="fl"><span class="lb">Печать</span><label class="tog"><input type="checkbox" id="bw"> Без цвета, для дешёвой печати</label></div>
+  </div>
+  <div class="exbar" id="exbar" hidden><span>Это пример. Так будет выглядеть твой файл.</span><button type="button" class="btn sm" id="exOff">Вернуться к моим данным</button></div>
+  <div class="work">
+    <div class="form">
+      <section class="sec" aria-labelledby="h-me">
+        <h2 id="h-me">Про меня<button type="button" class="qh" data-help="me" aria-label="Подсказка: про меня" aria-expanded="false">?</button></h2>
+        <div class="goals" id="who"></div>
+      </section>
+      <section class="sec" aria-labelledby="h-list">
+        <h2 id="h-list">Что обязательно для меня</h2>
+        <div class="steps" id="myList"></div>
+      </section>
+    </div>
+    <div class="sheetbox">
+      <div class="acts"><button type="button" class="btn gold" id="pdf">Скачать PDF</button><button type="button" class="btn ghost sm" id="share" hidden>Отправить</button><button type="button" class="btn ghost sm" id="exOn">Посмотреть на примере</button></div>
+      <div class="sheets" id="sheet" aria-label="Предпросмотр листов"></div>
+      <div class="status" id="status" role="status"></div>
+    </div>
+  </div>
+  <p class="imp"><b>Важно.</b> Это образец для примера и личного использования, а не официальный документ. Ставки и суммы — на 2026 год по данным AHV, BSV и кантонов, они меняются каждые несколько лет. Точные суммы смотри в своей расчётке, полисах и на сайтах ведомств. Автор не несёт ответственности за достоверность.</p>
+  <div class="share-slot" data-url="https://svoiludi.ch/instrumenty/strahovki-obyazatelnye/" data-lead="Перешли тем, кто недавно переехал. Сообщение уже готово." data-text="Привет! Тут на одной схеме, какие страховки и взносы в Швейцарии обязательны, кто за что платит и сколько, и можно сделать свой список. Бесплатно, PDF. https://svoiludi.ch/instrumenty/strahovki-obyazatelnye/"></div>
+  <p class="credit"><span>Свои люди в Швейцарии · svoiludi.ch</span><a href="https://svoiludi.ch/privacy/">Политика конфиденциальности</a></p>
+</div>
+
+<script src="/assets/kantony.js"></script>
+<script src="/assets/lib/jspdf.umd.min.js"></script>
+<script src="/assets/shema.js"></script>
+<script>
+window.HELP = {
+  kanton: '<p>Выбери кантон, где ты живёшь. От него зависит, обязательна ли страховка имущества и как устроена страховка здания, и на каком языке вторые подписи.</p>',
+  lang: '<p><b>Русский + язык кантона</b> — у каждой страховки ещё и название на языке кантона, как оно стоит в письмах и полисах.</p>',
+  me: '<p>Отметь всё, что про тебя. В списке справа и в PDF останутся только страховки, которые обязательны именно для тебя, с пояснением почему.</p>'
+};
+const KEY = 'strahovkiObyazatelnye.v1';
+const K = window.KANTONY || {};
+const LOC = {GE: 'fr', VD: 'fr', NE: 'fr', JU: 'fr', FR: 'fr', VS: 'fr', TI: 'it'};
+const WHO = [
+  ['emp', 'Работаю по найму', 'даже немного, даже мини-джоб'], ['self', 'Работаю на себя', 'selbständig, своё дело'], ['none', 'Не работаю или учусь', 'дома с детьми, студентка, ищу работу'], ['ret', 'На пенсии', 'получаю пенсию AHV'],
+  ['car', 'Есть машина или мотоцикл', 'на моё имя'], ['own', 'Свой дом или квартира', 'в собственности'], ['dog', 'Есть собака', ''], ['help', 'Нанимаю уборщицу или няню', 'в свой дом']
+];
+const IT = [
+  {k: 'kvg', g: 1, col: 'blue', t: 'Медстраховка', term: {de: 'Krankenversicherung (KVG)', fr: 'assurance maladie (LAMal)', it: 'assicurazione malattie (LAMal)'}, who: 'Все, кто живёт в Швейцарии, с первого дня. Оформить нужно за 3 месяца.', pay: 'Сам, премия каждый месяц. При небольшом доходе кантон даёт скидку.', on: d => true, why: () => 'Ты живёшь в Швейцарии.'},
+  {k: 'ahv', g: 1, col: 'sage', t: 'AHV, IV, EO: пенсия, инвалидность, декрет', term: {de: 'AHV / IV / EO', fr: 'AVS / AI / APG', it: 'AVS / AI / IPG'}, who: 'Все от 18 лет, кто работает, и все от 21 года, кто не работает.', pay: 'Работаешь — 5,3% из зарплаты и столько же работодатель. Не работаешь — сам, по доходу и имуществу, минимум около 530 франков в год.', on: d => !(d.w.ret && !d.w.emp && !d.w.self), why: d => d.w.emp ? 'Платишь через зарплату.' : d.w.self ? 'Платишь сам в свою кассу AHV, около 10% от дохода.' : 'Не работаешь — платишь сам с 21 года, если супруг не платит за двоих.'},
+  {k: 'serafe', g: 1, col: 'mustard', t: 'Сбор за радио и ТВ', term: {de: 'Serafe', fr: 'Serafe', it: 'Serafe'}, who: 'Каждое домохозяйство, даже без телевизора.', pay: '335 франков в год на домохозяйство, счёт приходит сам.', on: d => true, why: () => 'Платит каждое домохозяйство.'},
+  {k: 'alv', g: 2, col: 'sage', t: 'Страхование от безработицы', term: {de: 'Arbeitslosenversicherung (ALV)', fr: 'assurance-chômage (AC)', it: 'assicurazione contro la disoccupazione (AD)'}, who: 'Все, кто работает по найму.', pay: '1,1% из зарплаты и столько же работодатель, до 148 200 франков в год.', on: d => d.w.emp, why: () => 'Ты работаешь по найму, взнос идёт из зарплаты.'},
+  {k: 'uvg', g: 2, col: 'green', t: 'Несчастный случай', term: {de: 'Unfallversicherung (UVG)', fr: 'assurance-accidents (LAA)', it: 'assicurazione contro gli infortuni (LAINF)'}, who: 'Работающие по найму. С 8 часов в неделю у одного работодателя — и в свободное время.', pay: 'На работе платит работодатель, в свободное время — из зарплаты. Кто не работает — через медстраховку.', on: d => true, why: d => d.w.emp ? 'Через работу. Меньше 8 часов в неделю — включи несчастный случай в медстраховку.' : 'Через медстраховку: проверь, что несчастный случай в ней включён.'},
+  {k: 'bvg', g: 2, col: 'blue', t: 'Пенсионная касса', term: {de: 'Pensionskasse (BVG)', fr: 'caisse de pension (LPP)', it: 'cassa pensioni (LPP)'}, who: 'Работающие по найму с зарплатой от 22 680 франков в год. Копят с 25 лет.', pay: 'Из зарплаты, работодатель платит минимум половину.', on: d => d.w.emp, why: () => 'Если зарплата у одного работодателя от 22 680 франков в год. Смотри строку BVG в расчётке.'},
+  {k: 'auto', g: 3, col: 'pink', t: 'Автогражданка', term: {de: 'Motorfahrzeughaftpflicht', fr: 'RC véhicules à moteur', it: 'RC veicoli a motore'}, who: 'Каждый владелец машины или мотоцикла.', pay: 'Сам, страховщика выбираешь сам. Минимум 5 миллионов франков на случай.', on: d => d.w.car, why: () => 'У тебя есть машина или мотоцикл.'},
+  {k: 'geb', g: 3, col: 'pink', t: 'Страховка здания', term: {de: 'Gebäudeversicherung', fr: 'assurance des bâtiments', it: 'assicurazione stabili'}, who: 'Владельцы дома или квартиры в большинстве кантонов.', pay: 'Сам. В 19 кантонах — кантональная страховая. В GE, UR, SZ, TI, AI, VS, OW выбираешь сам, а где-то она добровольная.', on: d => d.w.own, why: d => ['GE', 'UR', 'SZ', 'TI', 'AI', 'VS', 'OW'].includes(d.k) ? 'Ты владелец. В твоём кантоне страховщика выбираешь сам — проверь, обязательна ли она.' : 'Ты владелец жилья. Квартиру в доме сообщества обычно страхует сообщество.'},
+  {k: 'hausrat', g: 3, col: 'pink', t: 'Страховка имущества', term: {de: 'Hausratversicherung', fr: 'assurance ménage', it: 'assicurazione economia domestica'}, who: 'Обязательна от пожара и стихии в кантонах Нидвальден, Во, Фрибур и Юра.', pay: 'Сам. В других кантонах добровольная, но очень советуется.', on: d => ['NW', 'VD', 'FR', 'JU'].includes(d.k), why: () => 'В твоём кантоне она обязательна.'},
+  {k: 'dog', g: 3, col: 'pink', t: 'Ответственность за собаку', term: {de: 'Hundehaftpflicht', fr: 'RC détenteur de chien', it: 'RC detentore di cani'}, who: 'Владельцы собак во многих кантонах.', pay: 'Сам, часто как дополнение к своей страховке ответственности.', on: d => d.w.dog, why: () => 'У тебя есть собака. Проверь правила своего кантона.'},
+  {k: 'help', g: 3, col: 'pink', t: 'Страховка для уборщицы или няни', term: {de: 'UVG für Hausangestellte', fr: 'LAA pour personnel de maison', it: 'LAINF per personale domestico'}, who: 'Если нанимаешь человека в дом, даже на пару часов.', pay: 'Ты как работодатель: от несчастного случая, около 100 франков в год, и регистрация в AHV.', on: d => d.w.help, why: () => 'Ты нанимаешь человека — ты работодатель.'}
+];
+const GT = {1: 'Всем, кто живёт в Швейцарии', 2: 'Если работаешь по найму', 3: 'Если у тебя есть…'};
+const GTL = {1: {de: 'für alle Einwohner', fr: 'pour tous les habitants', it: 'per tutti gli abitanti'}, 2: {de: 'für Angestellte', fr: 'pour les salariés', it: 'per i dipendenti'}, 3: {de: 'je nach Situation', fr: 'selon la situation', it: 'secondo la situazione'}};
+const MX = [ // кто платит: по найму, на себя, не работаю/учусь, на пенсии
+  ['Медстраховка', 'сам', 'сам', 'сам', 'сам'],
+  ['AHV, IV, EO', '5,3% из зарплаты + 5,3% работодатель', 'сам, около 10% дохода', 'сам с 21 года, по доходу и имуществу', 'только если работаешь, с суммы больше 1400 франков в месяц'],
+  ['Безработица', '1,1% из зарплаты + 1,1% работодатель', 'не застрахована', 'нет', 'нет'],
+  ['Несчастный случай', 'на работе — работодатель, вне работы — из зарплаты (от 8 ч в неделю)', 'по желанию', 'через медстраховку', 'через медстраховку'],
+  ['Пенсионная касса', 'от 22 680 в год, работодатель — минимум половину', 'по желанию', 'нет', 'уже получаешь пенсию'],
+  ['Сбор за радио и ТВ', 'на домохозяйство', 'на домохозяйство', 'на домохозяйство', 'на домохозяйство'],
+  ['Машина, дом, собака', 'если есть — сам', 'если есть — сам', 'если есть — сам', 'если есть — сам']
+];
+const DISC = {ru: 'Образец для личного использования, не официальный документ. Суммы на 2026 год, перепроверяй в расчётке и полисах. svoiludi.ch', de: 'Muster zur Orientierung und für den persönlichen Gebrauch, kein amtliches Dokument. Angaben ohne Gewähr, bitte selbst prüfen.', fr: 'Modèle indicatif pour usage personnel, pas un document officiel. Données sans garantie, à vérifier soi-même.', it: 'Modello indicativo per uso personale, non un documento ufficiale. Dati senza garanzia, da verificare personalmente.'};
+
+let S = load(), EX = null;
+function blank(){ return {k: '', lang: 'bi', bw: false, p: {1: true, 2: true, 3: true}, w: {}, pol: {}}; }
+function load(){ try { const s = JSON.parse(localStorage.getItem(KEY)); if (s && typeof s === 'object') return Object.assign(blank(), s); } catch (e) {} const b = blank(); try { b.k = localStorage.getItem('svoiludi.kanton') || ''; } catch (e) {} return b; }
+function save(){ if (EX) return; try { localStorage.setItem(KEY, JSON.stringify(S)); if (S.k) localStorage.setItem('svoiludi.kanton', S.k); } catch (e) {} }
+const D = () => EX || S;
+const loc = d => LOC[d.k] || 'de', bi = d => d.lang === 'bi';
+const right = d => d.k && K[d.k] ? K[d.k].n + ' · ' + d.k : '';
+const disc = d => bi(d) ? DISC[loc(d)] : DISC.ru;
+
+function p1(d){
+  const C = SH.pal(d.bw), P = SH.page(297, 210, C), x0 = 12, W = 273;
+  P.header('Обязательные страховки: чего нельзя избежать', bi(d) ? {de: 'Obligatorische Versicherungen in der Schweiz', fr: 'Assurances obligatoires en Suisse', it: 'Assicurazioni obbligatorie in Svizzera'}[loc(d)] : '', right(d));
+  let y = 25;
+  [1, 2, 3].forEach(g => {
+    const items = IT.filter(i => i.g === g), n = items.length, gap = 3, cw = (W - gap * (n - 1)) / n;
+    P.text(GT[g], x0, y, 9, true, C.head); if (bi(d)) P.text(GTL[g][loc(d)], x0 + SH.tw(GT[g], true, 9) + 2.5, y, 6.5, false, C.mut);
+    y += 2.5;
+    const body = i => ['Кто: ' + i.who, 'Платит: ' + i.pay];
+    const hs = items.map(i => P.card(0, 0, cw, C.c[i.col], i.t, bi(d) ? i.term[loc(d)] : '', body(i), {dry: true, bs: n > 3 ? 6.9 : 7.6, ts: n > 3 ? 8.2 : 9.2}));
+    const h = Math.max(...hs);
+    items.forEach((i, j) => P.card(x0 + j * (cw + gap), y, cw, C.c[i.col], i.t, bi(d) ? i.term[loc(d)] : '', body(i), {minH: h, bs: n > 3 ? 6.9 : 7.6, ts: n > 3 ? 8.2 : 9.2, dash: g === 1 && i.k === 'serafe'}));
+    y += h + 6;
+  });
+  P.rect(x0, y - 2, W, 9, C.soft, C.line, 1.4);
+  P.text('Почти обязательно:', x0 + 3, y + 3.6, 7.2, true, C.head);
+  P.text('страховка ответственности (Privathaftpflicht) — закон её не требует, но арендодатель почти всегда просит подтверждение.', x0 + 3 + SH.tw('Почти обязательно:', true, 7.2) + 2, y + 3.6, 7.2, false, C.ink);
+  P.foot(disc(d));
+  return P;
+}
+function p2(d){
+  const C = SH.pal(d.bw), P = SH.page(297, 210, C), x0 = 12;
+  P.header('Кто за что платит', bi(d) ? {de: 'Wer bezahlt was', fr: 'Qui paie quoi', it: 'Chi paga cosa'}[loc(d)] : '', right(d));
+  const cw = [44, 59, 54, 58, 58], xs = cw.reduce((a, w, i) => (a.push(i ? a[i - 1] + cw[i - 1] : x0), a), []);
+  let y = 27;
+  ['', 'Работаю по найму', 'Работаю на себя', 'Не работаю или учусь', 'На пенсии'].forEach((h, i) => P.text(h, xs[i] + 2, y, 8, true, C.head));
+  y += 2; P.line(x0, y, 285, y, C.head, 0.5); y += 0.6;
+  MX.forEach((r, ri) => {
+    const cells = r.map((s, i) => SH.wrap(s, i === 0, 7.6, cw[i] - 4)), h = Math.max(...cells.map(c => c.length)) * 3.5 + 4;
+    if (ri % 2 === 0) P.rect(x0, y, 273, h, C.zebra, null);
+    cells.forEach((c, i) => c.forEach((s, k) => P.text(s, xs[i] + 2, y + 4.6 + k * 3.5, 7.6, i === 0, /^(нет|не застрахована)$/.test(r[i]) ? C.mut : C.ink)));
+    y += h;
+  });
+  y += 7;
+  y = P.sec('Как это выглядит в жизни', x0, y, 273);
+  ['Работаешь по найму — большинство взносов работодатель вычитает сам, ты видишь их в расчётке: AHV/IV/EO, ALV, NBU, BVG. Медстраховку и сбор за радио и ТВ платишь сама.',
+   'Работаешь на себя — взносы AHV платишь сама в свою кассу. От безработицы ты не застрахована, несчастный случай и пенсионная касса — по желанию, о них стоит подумать.',
+   'Не работаешь — платишь AHV сама с 21 года (если супруг работает и платит минимум вдвое больше минимального взноса, за тебя уже заплачено). Несчастный случай должен быть в медстраховке.',
+   'Сменилась жизнь — работа, развод, переезд, пенсия, — проверь каждую строку снова.'].forEach(s => { y = P.para('• ' + s, x0, y, 7.6, false, C.ink, 273, 3.5) + 1.5; });
+  P.foot(disc(d));
+  return P;
+}
+function p3(d){
+  const C = SH.pal(d.bw), list = IT.filter(i => i.on(d)), pages = []; let P, y;
+  const np = () => { P = SH.page(210, 297, C); P.header('Мои обязательные страховки', bi(d) ? {de: 'Meine obligatorischen Versicherungen', fr: 'Mes assurances obligatoires', it: 'Le mie assicurazioni obbligatorie'}[loc(d)] : '', right(d)); P.foot(disc(d)); pages.push(P); y = 27; };
+  np();
+  const me = WHO.filter(w => d.w[w[0]]).map(w => w[1].toLowerCase()).join(', '), x0 = 12;
+  y = P.para('Про меня: ' + (me || 'отметь на сайте, что про тебя') + (d.k && K[d.k] ? ', кантон ' + K[d.k].n : '') + '.', x0, y, 8, false, C.ink, 186, 3.7) + 3;
+  list.forEach((i, n) => {
+    const t = SH.wrap(i.t, true, 9, 170), wy = SH.wrap(i.why(d), false, 7.6, 170), h = t.length * 4 + wy.length * 3.5 + (bi(d) ? 3.2 : 0) + 11;
+    if (y + h > 284) np();
+    P.rect(x0, y, 186, h, n % 2 ? null : C.zebra, C.line, 1.4);
+    P.rect(x0 + 3, y + 3, 4, 4, '#FFFFFF', C.head, 0.8);
+    let yy = y + 6.4; t.forEach(s => { P.text(s, x0 + 10, yy, 9, true, C.c[i.col][1]); yy += 4; });
+    if (bi(d)) { P.text(i.term[loc(d)], x0 + 10, yy - 0.6, 6.6, false, C.mut); yy += 3.2; }
+    wy.forEach(s => { P.text(s, x0 + 10, yy, 7.6, false, C.ink); yy += 3.5; });
+    P.text('Где: ______________________   Номер полиса: ________________   Премия: __________', x0 + 10, y + h - 3, 7, false, C.mut);
+    y += h + 2;
+  });
+  return pages;
+}
+function build(){ const d = D(), p = []; if (d.p[1]) p.push(p1(d)); if (d.p[2]) p.push(p2(d)); if (d.p[3]) p.push(...p3(d)); return p; }
+
+const $ = id => document.getElementById(id);
+$('kanton').innerHTML = '<option value="">Выбери кантон</option>' + Object.keys(K).sort((a, b) => K[a].n.localeCompare(K[b].n, 'ru')).map(k => `<option value="${k}">${SH.esc(K[k].n)}</option>`).join('');
+$('who').innerHTML = WHO.map(w => `<label><input type="checkbox" data-w="${w[0]}"><span>${SH.esc(w[1])}${w[2] ? `<small>${SH.esc(w[2])}</small>` : ''}</span></label>`).join('');
+let UI;
+function drawList(){ const d = D(); $('myList').innerHTML = IT.filter(i => i.on(d)).map(i => `<details><summary>${SH.esc(i.t)}<small>${SH.esc(i.term[loc(d)])}</small></summary><p>${SH.esc(i.why(d))}</p><p><b>Кто:</b> ${SH.esc(i.who)}</p><p><b>Платит:</b> ${SH.esc(i.pay)}</p></details>`).join(''); }
+function fill(){
+  const d = D();
+  $('kanton').value = d.k; $('lang').value = d.lang; $('bw').checked = !!d.bw;
+  [1, 2, 3].forEach(n => $('p' + n).checked = d.p[n] !== false);
+  document.querySelectorAll('[data-w]').forEach(c => { c.checked = !!d.w[c.dataset.w]; c.disabled = !!EX; });
+  $('exbar').hidden = !EX; $('exOn').hidden = !!EX;
+  drawList(); if (UI) UI.render();
+}
+const set = f => { f(S); if (EX) f(EX); save(); fill(); };
+$('kanton').addEventListener('change', e => set(s => s.k = e.target.value));
+$('lang').addEventListener('change', e => set(s => s.lang = e.target.value));
+$('bw').addEventListener('change', e => set(s => s.bw = e.target.checked));
+[1, 2, 3].forEach(n => $('p' + n).addEventListener('change', e => set(s => s.p[n] = e.target.checked)));
+$('who').addEventListener('change', e => { const k = e.target.dataset.w; if (!k || EX) return; S.w[k] = e.target.checked; save(); fill(); });
+$('exOn').addEventListener('click', () => { EX = {k: 'VD', lang: 'bi', bw: S.bw, p: {1: true, 2: true, 3: true}, w: {emp: true, car: true, dog: true}, pol: {}}; fill(); window.scrollTo({top: $('exbar').offsetTop - 12, behavior: 'smooth'}); });
+$('exOff').addEventListener('click', () => { EX = null; fill(); });
+if (/[?&]example\b/.test(location.search)) EX = {k: 'VD', lang: 'bi', bw: false, p: {1: true, 2: true, 3: true}, w: {emp: true, car: true, dog: true}, pol: {}};
+UI = SH.mount({build, title: 'Обязательные страховки', name: () => 'Obyazatelnye-strahovki' + (D().k ? '-' + D().k : '')});
+fill();
+
+</script>
+<script src="/assets/help.js"></script>
+<script src="/assets/backup.js"></script>
+<script src="/assets/pdffan.js" defer></script>
+<script src="/assets/share.js" defer></script>
+<script src="/assets/samesite.js"></script>
+</body>
+</html>
