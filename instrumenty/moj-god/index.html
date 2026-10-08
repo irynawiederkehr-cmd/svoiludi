@@ -77,7 +77,21 @@ select:focus-visible,input:focus-visible,button:focus-visible{outline:2px solid 
 .wd.we{color:var(--brown)}
 .mname{font-family:var(--display);font-size:1.02rem;padding-top:3px;align-self:start}
 .month{display:contents}
-.cell{border-top:1px solid var(--line);padding:3px 1px 6px;display:flex;flex-direction:column;gap:3px;min-height:34px}
+.cell{border-top:1px solid var(--line);padding:3px 1px 6px;display:flex;flex-direction:column;gap:3px;min-height:34px;position:relative}
+.cell .sri{position:absolute;top:-1px;right:-1px;font-size:11px;line-height:1;cursor:help;letter-spacing:-3px}
+.cell.srd .dn{box-shadow:inset 0 0 0 1.5px #B98324;border-radius:6px}
+.srbox{margin-top:18px;background:var(--paper);border:1.5px solid var(--line);border-radius:18px;padding:14px 16px}
+.srbox h3{margin:0 0 4px;font-size:1.05rem}
+.srbox>p{margin:0 0 10px;font-size:.88rem;color:var(--muted)}
+.srl{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.srl>li{display:grid;grid-template-columns:28px 1fr;gap:4px 10px;align-items:start;border-top:1px solid var(--line);padding-top:6px}
+.srl .ic{font-size:1.25rem;line-height:1.2}
+.srl b{font-weight:700}
+.srl small{color:var(--muted)}
+.srl details{grid-column:2;font-size:.88rem}
+.srl summary{cursor:pointer;color:var(--sage);font-weight:600}
+.srl details ul{margin:4px 0;padding-left:18px}
+.srl .ln{display:flex;flex-wrap:wrap;gap:4px 14px;font-size:.85rem}
 .cell.we{background:var(--weekend)}
 .cell.empty{background:transparent}
 .dn{font-size:.62rem;font-variant-numeric:tabular-nums;color:var(--muted);text-align:center;line-height:1.2;margin-bottom:1px}
@@ -244,6 +258,7 @@ a.btn{text-decoration:none;display:inline-flex;align-items:center}
     <div class="toggles">
       <label for="tHol"><input type="checkbox" id="tHol"> Праздники кантона<button type="button" class="qh" data-help="hol" aria-label="Подсказка: Праздники кантона" aria-expanded="false">?</button></label><label for="canton" style="cursor:default"><span class="sr">Кантон</span><select id="canton" class="mode"></select></label>
       <label for="tSch"><input type="checkbox" id="tSch"> Школьные каникулы<button type="button" class="qh" data-help="sch" aria-label="Подсказка: Школьные каникулы" aria-expanded="false">?</button> <small>город Цюрих, проверь даты своей общины</small></label>
+      <label for="tSr"><input type="checkbox" id="tSr"> 🔔 Обязательные сроки Швейцарии<button type="button" class="qh" data-help="sr" aria-label="Подсказка: Обязательные сроки Швейцарии" aria-expanded="false">?</button> <small>налоги, медстраховка, 3a и другие · <a href="/instrumenty/sroki-goda/">настроить, что касается тебя</a></small></label>
     </div>
   </section>
 
@@ -259,6 +274,7 @@ a.btn{text-decoration:none;display:inline-flex;align-items:center}
     <p class="hint mobnote" style="margin:0 0 8px">Лист года шире экрана телефона, листай его пальцем вбок. Целиком его удобно смотреть в PDF или PNG.</p>
     <div class="sheet-scroll"><div class="sheet" id="sheet"></div></div>
     <div class="legend" id="legend"></div>
+    <div class="srbox" id="srBox" hidden></div>
   </section>
   <p class="hint">Полоска с пунктиром — дело, добавленное в этот день вручную. Пустое место на линии дела — день, когда дело убрано. Кружок на конце периода — финиш, например экзамен.</p>
   <section class="guide" id="guide" aria-labelledby="g-why">
@@ -303,6 +319,7 @@ a.btn{text-decoration:none;display:inline-flex;align-items:center}
 <script src="/assets/lib/jspdf.umd.min.js"></script>
 <script src="/assets/bwprint.js"></script>
 <script src="/assets/lib/jszip.min.js"></script>
+<script src="/assets/sroki.js"></script>
 <script>
 const MONTHS = ['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'];
 const MSHORT = ['Янв','Фев','Мар','Апр','Май','Июн','Июл','Авг','Сен','Окт','Ноя','Дек'];
@@ -369,7 +386,6 @@ function example(){
       {id:'p1', name:'Немецкий B1', color:'#16A3A8', start:y+'-01-11', end:y+'-06-25', fin:true},
       {id:'p2', name:'Немецкий B2', color:'#3A9A48', start:y+'-08-23', end:y+'-12-17', fin:true},
       {id:'p3', name:'Отпуск', color:'#E2B007', start:y+'-07-19', end:y+'-08-06', fin:false},
-      {id:'p4', name:'Налоговая декларация', color:'#EE7A12', start:y+'-03-31', end:y+'-03-31', fin:true},
     ]};
 }
 let S;
@@ -410,7 +426,24 @@ function whenText(r){ return r.mode === 'month' ? 'каждое ' + r.mday + ' �
   $('tHol').checked = !!S.hol; $('tSch').checked = !!S.sch;
   $('tHol').addEventListener('change', e => { S.hol = e.target.checked; save(); renderSheet(); });
   $('tSch').addEventListener('change', e => { S.sch = e.target.checked; save(); renderSheet(); });
+  $('tSr').checked = S.sr !== false;
+  $('tSr').addEventListener('change', e => { S.sr = e.target.checked; save(); renderSheet(); });
 })();
+
+/* ---------- обязательные сроки Швейцарии (assets/sroki.js, 08.10.2026) ----------
+   что касается человека — из инструмента «Обязательные сроки года» на этом же устройстве, иначе типичный набор; кантон — из листа года */
+function srOpts(){ let o = null; try { o = JSON.parse(localStorage.getItem('srokiGoda.v1')); } catch(e) {} o = o && typeof o === 'object' ? o : {};
+  return Object.assign({tax:'decl', emp:true, self:false, a3:false, rent:true, car:false, kids:[], own:[], off:{}, leads:[14, 1]}, o, {kt: S.canton || 'ZH'}); }
+function srList(){ if (S.sr === false || !window.SROKI) return []; const o = srOpts(); return SROKI.list(S.year, o).filter(it => !(o.off || {})[it.id + '@' + SROKI.iso(it.date)]); }
+function srMap(){ const m = {}; srList().forEach(it => { const k = SROKI.iso(it.date); (m[k] = m[k] || []).push(it); }); return m; }
+const srDate = it => it.date.getDate() + ' ' + MONTHS[it.date.getMonth()].toLowerCase().replace(/ь$/, 'я').replace(/й$/, 'я').replace(/т$/, 'та');
+function srDetails(it){ const L = [it.what]; if (it.todo && it.todo.length) L.push('Что сделать и подготовить:\n' + it.todo.map(x => '• ' + x).join('\n')); if (it.page) L.push('Подробно: ' + SROKI.SITE + it.page); return L.filter(Boolean).join('\n\n'); }
+function srEvents(){ const o = srOpts(); return srList().map(it => ({uid:'srok-' + it.id + '-' + SROKI.iso(it.date), title: it.ic + ' ' + it.t + ' · срок', allDay:true, start: SROKI.iso(it.date), details: srDetails(it), alarms: o.leads || [14, 1], kind:'обязательный срок · ' + fmt(SROKI.iso(it.date))})); }
+function renderSr(){
+  const box = $('srBox'), L = srList(); box.hidden = !L.length; if (!L.length){ box.innerHTML = ''; return; }
+  box.innerHTML = '<h3>🔔 Обязательные сроки ' + S.year + ' · кантон ' + esc(CANTONS[S.canton] || S.canton) + '</h3><p>Иконка в углу дня на листе — это срок. Что касается именно тебя и за сколько дней напомнить, отметь в инструменте <a href="/instrumenty/sroki-goda/">«Обязательные сроки года в Швейцарии»</a>. В файл календаря сроки попадут с напоминаниями.</p><ul class="srl">'
+    + L.map(it => { const e = {title: it.ic + ' ' + it.t + ' · срок', allDay:true, start: SROKI.iso(it.date), details: srDetails(it)}; return '<li><span class="ic" aria-hidden="true">' + it.ic + '</span><span><b>' + esc(srDate(it)) + '</b> · ' + esc(it.t) + '</span><details><summary>что это и что сделать</summary><p>' + esc(it.what) + '</p>' + (it.todo && it.todo.length ? '<ul>' + it.todo.map(x => '<li>' + esc(x) + '</li>').join('') + '</ul>' : '') + '<div class="ln">' + (it.page ? '<a href="' + SROKI.SITE + it.page + '" target="_blank" rel="noopener">Подробно на сайте →</a>' : '') + '<a href="' + esc(gcalLink(e)) + '" target="_blank" rel="noopener">в Google Календарь</a></div></details></li>'; }).join('') + '</ul>';
+}
 
 /* ---------- дела ---------- */
 function monthOpts(v){ return MONTHS.map((n,i) => `<option value="${i+1}"${i+1===v?' selected':''}>${n.toLowerCase()}</option>`).join(''); }
@@ -527,7 +560,7 @@ $('ideas').addEventListener('click', e => {
 
 /* ---------- лист года ---------- */
 function renderSheet(){
-  const y = S.year, rs = S.routines, ps = S.periods, t = new Date(), H = S.hol ? holidays(y, S.canton) : {};
+  const y = S.year, rs = S.routines, ps = S.periods, t = new Date(), H = S.hol ? holidays(y, S.canton) : {}, SR = srMap();
   let h = '<div class="grid"><div></div>';
   for (let c = 0; c < 37; c++) h += `<div class="wd${c % 7 > 4 ? ' we' : ''}">${WD[c % 7]}</div>`;
   for (let m = 0; m < 12; m++){
@@ -540,6 +573,7 @@ function renderSheet(){
       const holo = H[ds], hol = holo && holo.n, sch = S.sch ? schoolOf(ds) : '';
       const tip = [hol, sch].filter(Boolean).join(' · ');
       h += `<div class="cell${c % 7 > 4 ? ' we' : ''}${today ? ' today' : ''}${hol ? ' hol' + (holo.part ? ' part' : '') : ''}${sch ? ' sch' : ''}"${tip ? ` title="${esc(tip)}"` : ''}><span class="dn">${d}</span>`;
+      if (SR[ds]) h = h.replace(/<div class="cell([^"]*)"([^>]*)><span class="dn">(\d+)<\/span>$/, '<div class="cell$1 srd"$2><span class="dn">$3</span>') + `<span class="sri" title="${esc(SR[ds].map(it => it.ic + ' ' + it.t + ' · срок').join('\n'))}">${SR[ds].map(it => it.ic).slice(0, 2).join('')}</span>`;
       for (const r of rs){
         const st = state(r, y, m, d);
         const style = st === 'on' ? `background:${r.color}` : st === 'add' ? `color:${r.color}` : '';
@@ -553,7 +587,7 @@ function renderSheet(){
     }
   }
   $('sheet').innerHTML = h + '</div>';
-  renderLegend();
+  renderLegend(); renderSr();
 }
 function legendItems(){
   const out = S.routines.map(r => ({c: r.color, t: (r.name || 'Без названия') + ' · ' + whenText(r) + (r.from !== 1 || r.to !== 12 ? ' · ' + MSHORT[r.from-1].toLowerCase() + '–' + MSHORT[r.to-1].toLowerCase() : '')}));
@@ -562,7 +596,7 @@ function legendItems(){
 }
 function renderLegend(){
   $('legend').innerHTML = legendItems().map(x => `<span><i style="background:${x.c};"></i>${esc(x.t)}</span>`).join('')
-    + (S.hol ? '<span><i class="holsw"></i>праздник · кантон ' + CANTONS[S.canton] + '</span>' : '') + (S.sch ? '<span><i class="sch"></i>школьные каникулы</span>' : '');
+    + (S.hol ? '<span><i class="holsw"></i>праздник · кантон ' + CANTONS[S.canton] + '</span>' : '') + (S.sch ? '<span><i class="sch"></i>школьные каникулы</span>' : '') + (srList().length ? '<span>🔔 обязательный срок · список под листом</span>' : '');
 }
 $('sheet').addEventListener('click', e => {
   const l = e.target.closest('.lane[data-r]'); if (!l) return;
@@ -606,11 +640,13 @@ function drawSheet(){
   const items = legendItems();
   if (S.hol) items.push({hol: true, t: 'праздник · кантон ' + CANTONS[S.canton]});
   if (S.sch) items.push({sch: true, t: 'школьные каникулы'});
+  const SRM = srMap(); if (Object.keys(SRM).length) items.push({sr: true, t: 'обязательный срок Швейцарии (список — в PDF на второй странице и в инструменте «Мой год»)'});
   for (const it of items){
     const w = 66 + c.measureText(it.t).width + 60;
     if (lx + w > W - M){ lx = M; ly += 62; }
     if (it.hol){ c.fillStyle = C.hol; roundRect(c, lx, ly - 34, 50, 34, 8); c.fill(); c.fillStyle = '#FFFFFF'; c.font = '800 30px Manrope, sans-serif'; c.textAlign = 'center'; c.fillText('12', lx + 25, ly - 6); c.textAlign = 'left'; c.font = '600 40px Manrope, sans-serif'; }
     else if (it.sch){ c.fillStyle = C.sch; c.fillRect(lx, ly - 34, 50, 34); }
+    else if (it.sr){ c.font = '34px "Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif'; c.fillStyle = C.ink; c.fillText('🔔', lx + 6, ly); c.font = '600 40px Manrope, sans-serif'; }
     else { c.fillStyle = it.c; roundRect(c, lx, ly - 22, 50, 16, 8); c.fill(); }
     c.fillStyle = C.ink; c.fillText(it.t, lx + 66, ly);
     lx += w;
@@ -633,6 +669,7 @@ function drawSheet(){
       c.fillStyle = C.line; c.fillRect(x + 1, ry, colW - 2, 3);
       if (hol && !holo.part){ c.fillStyle = C.hol; roundRect(c, x + 6, ry + 8, colW - 12, 40, 10); c.fill(); }
       c.fillStyle = hol ? (holo.part ? C.hol : '#FFFFFF') : C.muted; c.font = (hol ? '800 ' : '500 ') + '30px Manrope, sans-serif'; c.textAlign = 'center'; c.fillText(String(d), x + colW/2, ry + 38);
+      if (SRM[ds]){ c.font = '24px "Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif'; c.textAlign = 'right'; c.fillStyle = C.ink; c.fillText(SRM[ds][0].ic, x + colW - 2, ry + rowH - 8); c.textAlign = 'center'; }
       rs.forEach((r, i) => {
         const st = state(r, y, m, d); if (!st || st === 'off') return;
         const lyy = ry + 44 + i*(laneH + 3); c.fillStyle = r.color;
@@ -657,6 +694,32 @@ function drawSheet(){
     if (part.u){ c.fillRect(fx, fy + 6, w, 2); cv.links.push({x: fx, y: fy - 34, w, h: 46, url: part.u}); }
     fx += w;
   });
+  return WM(cv, 'svoiludi.ch');
+}
+
+/* вторая страница PDF: обязательные сроки года с иконкой, что это и что сделать */
+function drawSrPage(){
+  const L = srList(); if (!L.length) return null;
+  const W = 3508, H = 2480, cv = document.createElement('canvas'); cv.width = W; cv.height = H; cv.links = [];
+  const c = cv.getContext('2d'), M = 120, EMO = '"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif';
+  c.fillStyle = '#FFFCF8'; c.fillRect(0, 0, W, H); c.textBaseline = 'alphabetic'; c.textAlign = 'left';
+  c.fillStyle = '#2F2924'; c.font = '120px Forum, Georgia, serif'; c.fillText('Обязательные сроки ' + S.year + ' · кантон ' + (CANTONS[S.canton] || S.canton), M, M + 90);
+  c.fillStyle = '#7A6E62'; c.font = '500 36px Manrope, sans-serif'; c.fillText('Даты — обычные для кантона; точный срок всегда в письме ведомства. Подробно о каждом сроке — на svoiludi.ch/instrumenty/sroki-goda/', M, M + 160);
+  const wrap = (t, w) => { const out = []; let cur = ''; for (const wd of String(t).split(' ')){ const n = cur ? cur + ' ' + wd : wd; if (c.measureText(n).width > w && cur){ out.push(cur); cur = wd; } else cur = n; } if (cur) out.push(cur); return out; };
+  const cols = 2, gap = 90, colW = (W - 2*M - gap) / cols, top = M + 240, bottom = H - 130; let col = 0, y = top;
+  for (const it of L){
+    c.font = '700 38px Manrope, sans-serif'; const tl = wrap(it.t, colW - 290).slice(0, 2);
+    c.font = '500 32px Manrope, sans-serif'; const todo = (it.todo || []).slice(0, 2).flatMap(x => wrap('• ' + x, colW - 290));
+    const th = tl.length * 46, h = 12 + th + todo.length * 40 + 26; if (y + h > bottom){ if (col + 1 >= cols) break; col++; y = top; }
+    const x = M + col * (colW + gap);
+    c.fillStyle = '#E5D9C9'; c.fillRect(x, y - 44, colW, 3);
+    c.font = '50px ' + EMO; c.fillStyle = '#2F2924'; c.fillText(it.ic, x, y + 14);
+    c.font = '800 38px Manrope, sans-serif'; c.fillStyle = '#6E4F3C'; c.fillText(fmt(SROKI.iso(it.date)), x + 90, y + 10);
+    c.font = '700 38px Manrope, sans-serif'; c.fillStyle = '#2F2924'; tl.forEach((ln, i) => c.fillText(ln, x + 290, y + 10 + i * 46));
+    c.font = '500 32px Manrope, sans-serif'; c.fillStyle = '#4A413A'; todo.forEach((ln, i) => c.fillText(ln, x + 290, y + 12 + th + i * 40));
+    y += h;
+  }
+  c.font = '600 34px Manrope, sans-serif'; c.fillStyle = '#6E4F3C'; const ft = 'Свои люди в Швейцарии · svoiludi.ch · инструменты «Мой год» и «Обязательные сроки года»'; c.fillText(ft, M, H - 55); cv.links.push({x: M, y: H - 89, w: c.measureText(ft).width, h: 46, url: 'https://svoiludi.ch/instrumenty/sroki-goda/'});
   return WM(cv, 'svoiludi.ch');
 }
 
@@ -688,6 +751,7 @@ $('dlPdf').addEventListener('click', async () => {
   doc.addImage(cv.toDataURL('image/jpeg', 0.92), 'JPEG', 0, 0, 297, 210);
   const k = 297 / cv.width;
   for (const l of cv.links || []) doc.link(l.x * k, l.y * k, l.w * k, l.h * k, {url: l.url});
+  const sp = drawSrPage(); if (sp){ doc.addPage('a4', 'landscape'); doc.addImage(sp.toDataURL('image/jpeg', 0.92), 'JPEG', 0, 0, 297, 210); for (const l of sp.links || []) doc.link(l.x * k, l.y * k, l.w * k, l.h * k, {url: l.url}); }
   offer('Мой год ' + S.year + '.pdf', doc.output('blob'));
 });
 (async () => {
@@ -713,10 +777,12 @@ function icsCalendar(name, events){
     if (e.exdates && e.exdates.length) L.push('EXDATE;VALUE=DATE:' + e.exdates.map(ymd).join(','));
     L.push('SUMMARY:' + icsEsc(e.title));
     L.push('DESCRIPTION:' + icsEsc(withSrc(e.details)), 'URL:' + SRC_URL);
+    (e.alarms || []).forEach(n => L.push('BEGIN:VALARM', 'ACTION:DISPLAY', 'DESCRIPTION:' + icsEsc(e.title), 'TRIGGER:' + (n > 0 ? '-PT' + (n * 24 - 9) + 'H' : 'PT9H'), 'END:VALARM'));   // напоминание в 9:00 за n дней
     L.push('END:VEVENT');
   });
   L.push('END:VCALENDAR');
-  return L.join('\r\n').split('\r\n').map(line => { let o = '', s = line; while (s.length > 74){ o += s.slice(0, 74) + '\r\n '; s = s.slice(74); } return o + s; }).join('\r\n') + '\r\n';
+  const enc = new TextEncoder();   // строки по 75 байт, не разрывая буквы и эмодзи
+  return L.join('\r\n').split('\r\n').map(line => { const out = []; let cur = '', b = 0; for (const ch of line){ const n = enc.encode(ch).length; if (b + n > 73){ out.push(cur); cur = ' ' + ch; b = 1 + n; } else { cur += ch; b += n; } } out.push(cur); return out.join('\r\n'); }).join('\r\n') + '\r\n';
 }
 function gcalLink(e){
   const dates = e.allDay ? ymd(e.start) + '/' + ymd(addDaysIso(e.end || e.start, 1)) : e.start + '/' + e.end;
@@ -762,7 +828,7 @@ function yearEvents(){
     if (!p.start) continue;
     out.push({uid:'mojgod-' + p.id, title: p.name || 'Период', allDay:true, start:p.start, end:p.end || p.start, details:'период · план «Мой год» · https://svoiludi.ch/instrumenty/moj-god/', kind: p.start === p.end ? 'Срок · ' + fmt(p.start) : 'Период · ' + fmt(p.start) + '–' + fmt(p.end)});
   }
-  return out;
+  return out.concat(srEvents());
 }
 function renderCal(){
   const ev = yearEvents();
@@ -797,6 +863,7 @@ window.HELP = {
 "periods": "<p>Период — то, что идёт подряд от одной даты до другой. Отпуск, курс B1, испытательный срок. Если начало и конец совпадают, это один день, например срок подачи налоговой декларации.<\/p><p>Галочка «финиш» ставит кружок на последний день. Ставь её, когда в конце что-то важное, например экзамен или подача документов. Для отпуска она не нужна.<\/p>",
 "hol": "<p>Праздники в Швейцарии свои в каждом кантоне. Выбери кантон, где ты живёшь или работаешь, и праздники отметятся розовым. Праздник, который отмечают только в части общин, выделен светлее.<\/p><p>Дела в праздник сами не убираются. Если в этот день спортзал или курс закрыт, нажми на полоску дела в этот день.<\/p>",
 "sch": "<p>Школьные каникулы показаны штриховкой, чтобы ты заранее видела, когда дети дома, и могла планировать отпуск.<\/p><p>Встроены только даты города Цюрих, с Рождества 2026 до Рождества 2027. В других общинах даты другие. Свои каникулы внеси как периоды, даты есть на сайте школы или общины.<\/p>",
+"sr": "<p>🔔 Обязательные сроки — то, что в Швейцарии нужно сделать каждый год: налоговая декларация, справка о зарплате, смена медстраховки до 30 ноября, взнос в 3a до 20 декабря, Serafe, виньетка, продление пермита и паспорта, справки и пособия на детей.<\/p><p>Иконка в углу дня показывает срок, под листом — список: что это за срок и что сделать. В файл календаря сроки попадают с напоминаниями заранее, а в каждом событии — ссылка на страницу с подробностями.<\/p><p>Что касается именно тебя (работа, своё дело, квартира, машина, дети, даты пермита и паспорта) и за сколько дней напоминать, отметь в инструменте «Обязательные сроки года в Швейцарии» на этом же устройстве. Без этого показаны обычные сроки для работающего по найму, который снимает квартиру. Кантон берётся из листа года.<\/p><p>Даты — обычные для кантона. Точный срок всегда в письме ведомства.<\/p>",
 "cal": "<p>Кнопка «Скачать файл для календаря» сохраняет файл .ics. Дела станут повторяющимися событиями на весь день, периоды и сроки — событиями с датами.<\/p><ul><li><b>iPhone.<\/b> Открой файл, и календарь предложит добавить события.<\/li><li><b>Outlook.<\/b> Открой файл в Outlook.<\/li><li><b>Google.<\/b> С телефона проще нажимать ссылки «в Google Календарь» у каждого дела. На компьютере файл добавляется в настройках Google Календаря, в разделе «Импорт и экспорт».<\/li><\/ul><p>Если потом поменяешь план и добавишь файл ещё раз, события могут задвоиться. Тогда сначала удали старые.<\/p>"
 };
 </script>

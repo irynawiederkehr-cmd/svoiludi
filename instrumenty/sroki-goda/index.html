@@ -160,7 +160,7 @@ select:focus-visible,input:focus-visible,button:focus-visible,textarea:focus-vis
       <div class="status" id="status" role="status"></div>
     </div>
   </div>
-  <p class="imp"><b>Важно.</b> Это напоминания по общим правилам на 2026 год, а не официальный календарь: точные даты — в письмах налогового ведомства, кассы и миграционной службы, в каждом кантоне бывают свои. Важные письма отправляй заказным (Einschreiben) и храни квитанцию. Как считать сроки по письмам — в теме <a href="https://svoiludi.ch/shveycariya/pisma-sroki/">«Письма от ведомств и сроки»</a>, все дела по дням — в «<a href="https://svoiludi.ch/instrumenty/moj-god/">Годовой календарь дел и сроков</a>».</p>
+  <p class="imp"><b>Важно.</b> Это напоминания по общим правилам на 2026 год, а не официальный календарь: точные даты — в письмах налогового ведомства, кассы и миграционной службы, в каждом кантоне бывают свои. Важные письма отправляй заказным (Einschreiben) и храни квитанцию. Как считать сроки по письмам — в теме <a href="https://svoiludi.ch/shveycariya/pisma-sroki/">«Письма от ведомств и сроки»</a>, эти же сроки с иконками видны в «<a href="https://svoiludi.ch/instrumenty/moj-god/">Годовой календарь дел и сроков</a>» и в «<a href="https://svoiludi.ch/instrumenty/moj-den/">План дня по часам</a>» — там учитывается то, что ты отметила здесь.</p>
   <div class="share-slot" data-url="https://svoiludi.ch/instrumenty/sroki-goda/" data-lead="Перешли тем, кто живёт в Швейцарии. В ссылке нет твоих данных." data-text="Привет! Тут можно собрать все обязательные сроки года в Швейцарии — налоги, медстраховка, 3a, пермит — и добавить их в свой календарь с напоминаниями. Бесплатно. https://svoiludi.ch/instrumenty/sroki-goda/"></div>
   <p class="credit"><span>Свои люди в Швейцарии · svoiludi.ch</span><a href="https://svoiludi.ch/privacy/">Политика конфиденциальности</a></p>
 </div>
@@ -216,7 +216,7 @@ function ics(list, leads){
   const stamp = new Date().toISOString().replace(/[-:]/g, '').slice(0, 15) + 'Z';
   const L = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Svoi ludi v Shveicarii//Sroki//RU', 'CALSCALE:GREGORIAN', 'METHOD:PUBLISH', 'X-WR-CALNAME:Сроки Швейцария · Свои люди'];
   list.forEach(it => {
-    const sum = it.ic + ' ' + it.t + ' — срок';
+    const sum = it.ic + ' ' + it.t + ' · срок';
     L.push('BEGIN:VEVENT', 'UID:' + it.id + '-' + ymd(it.date) + '@svoiludi.ch', 'DTSTAMP:' + stamp, 'DTSTART;VALUE=DATE:' + ymd(it.date), 'DTEND;VALUE=DATE:' + ymd(new Date(it.date.getFullYear(), it.date.getMonth(), it.date.getDate() + 1)),
       'SUMMARY:' + icsEsc(sum), 'DESCRIPTION:' + icsEsc(details(it)), 'URL:' + (it.page ? SR.SITE + it.page : TOOL_URL), 'CATEGORIES:' + icsEsc(SR.CAT[it.cat][0]), 'TRANSP:TRANSPARENT');
     leads.forEach(n => L.push('BEGIN:VALARM', 'ACTION:DISPLAY', 'DESCRIPTION:' + icsEsc(sum), 'TRIGGER:' + (n ? '-PT' + (n * 24 - 9) + 'H' : 'PT9H'), 'END:VALARM'));
@@ -225,7 +225,7 @@ function ics(list, leads){
   L.push('END:VCALENDAR');
   return L.map(fold).join('\r\n') + '\r\n';
 }
-function gcal(it){ const p = new URLSearchParams({action: 'TEMPLATE', text: it.ic + ' ' + it.t + ' — срок', dates: ymd(it.date) + '/' + ymd(new Date(it.date.getFullYear(), it.date.getMonth(), it.date.getDate() + 1)), ctz: 'Europe/Zurich', details: details(it)}); return 'https://calendar.google.com/calendar/render?' + p.toString(); }
+function gcal(it){ const p = new URLSearchParams({action: 'TEMPLATE', text: it.ic + ' ' + it.t + ' · срок', dates: ymd(it.date) + '/' + ymd(new Date(it.date.getFullYear(), it.date.getMonth(), it.date.getDate() + 1)), ctz: 'Europe/Zurich', details: details(it)}); return 'https://calendar.google.com/calendar/render?' + p.toString(); }
 function build(){
   const d = D(), C = SH.pal(d.bw), pages = [], list = items(d).filter(it => !d.off[keyOf(it)]);
   let P, y; const X = 12, W = 186, BOT = 282;

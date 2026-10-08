@@ -38,6 +38,16 @@ h3{font-family:var(--display);font-weight:400;font-size:1.25rem;line-height:1.2;
 .lead{max-width:66ch;color:var(--muted);margin:0}
 .jump{font-weight:700;color:var(--brown);text-underline-offset:4px}
 .bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.srday{background:var(--paper);border:1.5px solid #E7CF9C;border-radius:16px;padding:10px 14px;margin:0 0 12px;font-size:.92rem}
+.srday h3{margin:0 0 6px;font-size:.98rem}
+.srday ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.srday li>span{display:block}
+.srday .ic{font-size:1.1rem;margin-right:6px}
+.srday details{margin:2px 0 0 28px;font-size:.88rem}
+.srday summary{cursor:pointer;color:var(--sage);font-weight:600}
+.srday details ul{list-style:disc;padding-left:18px;gap:2px}
+.srday .ln{display:flex;flex-wrap:wrap;gap:4px 14px}
+.srday>p{margin:8px 0 0;font-size:.84rem;color:var(--muted)}
 .bar label{font-weight:600;font-size:.9rem;display:flex;align-items:center;gap:8px}
 .spacer{flex:1 1 auto}
 select,input[type=text],input[type=date],textarea{font:inherit;color:var(--ink);background:var(--paper);border:1.5px solid var(--line);border-radius:12px;padding:8px 12px}
@@ -221,6 +231,7 @@ select:focus-visible,input:focus-visible,button:focus-visible,textarea:focus-vis
     </div>
   </section>
 
+  <div class="srday" id="srDay" hidden></div>
   <div class="bar">
     <div class="daynav">
       <button class="nav" id="prevDay" type="button" aria-label="Предыдущий день">←</button>
@@ -362,6 +373,7 @@ select:focus-visible,input:focus-visible,button:focus-visible,textarea:focus-vis
 <script src="/assets/lib/jspdf.umd.min.js"></script>
 <script src="/assets/bwprint.js"></script>
 <script src="/assets/lib/jszip.min.js"></script>
+<script src="/assets/sroki.js"></script>
 <script>
 const $ = id => document.getElementById(id);
 const esc = s => String(s).replace(/[&<>"]/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]));
@@ -529,16 +541,31 @@ $('catReset').addEventListener('click', () => {
   S.cats = DEFAULT_CATS.map(c => Object.assign({}, c)); touched(); renderCats(); renderTL(); say('Сферы вернулись к исходным.');
 });
 
+/* ---------- обязательные сроки Швейцарии рядом с выбранным днём (assets/sroki.js, 08.10.2026) ----------
+   что касается человека — из инструмента «Обязательные сроки года» на этом устройстве, иначе типичный набор */
+function srOpts(){ let o = null, k = ''; try { o = JSON.parse(localStorage.getItem('srokiGoda.v1')); k = localStorage.getItem('svoiludi.kanton') || ''; } catch(e) {} o = o && typeof o === 'object' ? o : {};
+  return Object.assign({tax:'decl', emp:true, self:false, a3:false, rent:true, car:false, kids:[], own:[], off:{}, leads:[14, 1]}, o, {kt: o.kt || k || 'ZH'}); }
+function srNear(ds, days){ if (!window.SROKI || !ds) return []; const o = srOpts(), d0 = new Date(ds + 'T12:00:00'), a = new Date(d0.getFullYear(), d0.getMonth(), d0.getDate()), b = new Date(a); b.setDate(b.getDate() + days);
+  return SROKI.list(a.getFullYear(), o).concat(SROKI.list(a.getFullYear() + 1, o)).filter(it => it.date >= a && it.date <= b && !(o.off || {})[it.id + '@' + SROKI.iso(it.date)]); }
+function srDetails(it){ const L = [it.what]; if (it.todo && it.todo.length) L.push('Что сделать и подготовить:\n' + it.todo.map(x => '• ' + x).join('\n')); if (it.page) L.push('Подробно: ' + SROKI.SITE + it.page); return L.filter(Boolean).join('\n\n'); }
+const srEv = it => ({uid:'srok-' + it.id + '-' + SROKI.iso(it.date), title: it.ic + ' ' + it.t + ' · срок', allDay:true, start: SROKI.iso(it.date), details: srDetails(it)});
+function renderSrDay(){
+  const box = $('srDay'), ds = ALL.date, L = srNear(ds, 14); box.hidden = !L.length; if (!L.length){ box.innerHTML = ''; return; }
+  const d0 = new Date(ds + 'T12:00:00'), MG = ['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря'];
+  const when = it => { const n = Math.round((it.date - new Date(d0.getFullYear(), d0.getMonth(), d0.getDate())) / 864e5); return n === 0 ? 'в этот день' : n === 1 ? 'завтра' : 'через ' + n + (n < 5 ? ' дня' : ' дней'); };
+  box.innerHTML = '<h3>🔔 Обязательные сроки рядом</h3><ul>' + L.map(it => '<li><span><span class="ic" aria-hidden="true">' + it.ic + '</span><b>' + it.date.getDate() + ' ' + MG[it.date.getMonth()] + '</b> · ' + when(it) + ' · ' + esc(it.t) + '</span><details><summary>что это и что сделать</summary><p>' + esc(it.what) + '</p>' + (it.todo && it.todo.length ? '<ul>' + it.todo.map(x => '<li>' + esc(x) + '</li>').join('') + '</ul>' : '') + '<div class="ln">' + (it.page ? '<a href="' + SROKI.SITE + it.page + '" target="_blank" rel="noopener">Подробно на сайте →</a>' : '') + '<a href="' + esc(gcalLink(srEv(it))) + '" target="_blank" rel="noopener">в Google Календарь</a></div></details></li>').join('') + '</ul><p>Сроки на ближайшие две недели. Что касается именно тебя, отметь в инструменте <a href="/instrumenty/sroki-goda/">«Обязательные сроки года в Швейцарии»</a>. Сроки этого дня попадут в файл календаря.</p>';
+}
+
 /* ---------- в свой календарь ---------- */
 function dayEvents(){
   const d = S.date || new Date().toISOString().slice(0,10), dd = ymd(d);
   const hhmm = m => String(Math.floor(m/60)).padStart(2,'0') + String(m%60).padStart(2,'0') + '00';
   return S.blocks.slice().sort((a,b) => a.s - b.s).map(b => ({uid:'mojden-' + dd + '-' + b.id, title:(b.name || catOf(b.cat).n), start: dd + 'T' + hhmm(b.s), end: dd + 'T' + hhmm(b.e),
-    details: catOf(b.cat).n + ' · план «Мой день» · svoiludi.ch'}));
+    details: catOf(b.cat).n + ' · план «Мой день» · svoiludi.ch'})).concat(srNear(d, 0).map(srEv));
 }
 function renderCal(){
   const ev = dayEvents();
-  $('calList').innerHTML = ev.length ? ev.map(e => `<li><span>${e.start.slice(9,11)}:${e.start.slice(11,13)}–${e.end.slice(9,11)}:${e.end.slice(11,13)} · ${esc(e.title)}</span><a href="${esc(gcalLink(e))}" target="_blank" rel="noopener">в Google Календарь</a></li>`).join('') : '<li class="hint">В плане пока нет блоков.</li>';
+  $('calList').innerHTML = ev.length ? ev.map(e => `<li><span>${e.allDay ? 'весь день' : e.start.slice(9,11) + ':' + e.start.slice(11,13) + '–' + e.end.slice(9,11) + ':' + e.end.slice(11,13)} · ${esc(e.title)}</span><a href="${esc(gcalLink(e))}" target="_blank" rel="noopener">в Google Календарь</a></li>`).join('') : '<li class="hint">В плане пока нет блоков.</li>';
 }
 $('calBtn').addEventListener('click', () => { const p = $('calPanel'); p.hidden = !p.hidden; $('calBtn').setAttribute('aria-expanded', String(!p.hidden)); if (!p.hidden) renderCal(); });
 $('calIcs').addEventListener('click', () => { const ev = dayEvents(); if (!ev.length){ say('В плане пока нет блоков.'); return; } saveIcs('Мой день ' + (S.date || ''), icsCalendar('Мой день', ev), say, downloads); });
@@ -691,7 +718,8 @@ function icsCalendar(name, events){
     L.push('END:VEVENT');
   });
   L.push('END:VCALENDAR');
-  return L.join('\r\n').split('\r\n').map(line => { let o = '', s = line; while (s.length > 74){ o += s.slice(0, 74) + '\r\n '; s = s.slice(74); } return o + s; }).join('\r\n') + '\r\n';
+  const enc = new TextEncoder();   // строки по 75 байт, не разрывая буквы и эмодзи
+  return L.join('\r\n').split('\r\n').map(line => { const out = []; let cur = '', b = 0; for (const ch of line){ const n = enc.encode(ch).length; if (b + n > 73){ out.push(cur); cur = ' ' + ch; b = 1 + n; } else { cur += ch; b += n; } } out.push(cur); return out.join('\r\n'); }).join('\r\n') + '\r\n';
 }
 function gcalLink(e){
   const dates = e.allDay ? ymd(e.start) + '/' + ymd(addDaysIso(e.end || e.start, 1)) : e.start + '/' + e.end;
@@ -816,7 +844,7 @@ function renderAll(){
   $('exampleNote').hidden = !S.example; $('date').value = ALL.date;
   $('dayName').textContent = new Date(ALL.date + 'T12:00:00').toLocaleDateString('ru-RU', {weekday:'long'}) + (ALL.date === todayIso() ? ' · сегодня' : '');
   $('emptyHint').hidden = !isEmptyDay(day());
-  renderCats(); renderTL(); renderTop3(); renderMx(); renderStop(); renderEv(); poShow(); renderStats();
+  renderCats(); renderTL(); renderTop3(); renderMx(); renderStop(); renderEv(); poShow(); renderStats(); renderSrDay();
 }
 renderAll();
 </script>
