@@ -465,8 +465,10 @@ a.bot:hover{color:#B98324}
 .tools{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:18px;margin-top:8px}
 .tool{background:var(--paper);border:1.5px solid var(--line);border-radius:24px;padding:22px;display:flex;flex-direction:column;gap:12px;min-width:0}
 .tool.soon{border-style:dashed;background:transparent}
-.tool-top{display:flex;gap:14px;align-items:center}
+.tool-top{display:flex;gap:14px;align-items:flex-start}
+.tool-top>svg{flex:none;width:58px;height:58px}
 .tool h2{font-size:1.6rem;margin:0}
+@media (min-width:700px){.tool h2{min-height:2.25em}}
 .tool .tag{font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--sage)}
 .tool p{margin:0;color:var(--muted);font-size:.95rem}
 .tool ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px;font-size:.92rem}
@@ -612,7 +614,7 @@ a.bot:hover{color:#B98324}
       <a class="go-free" href="https://svoiludi.ch/instrumenty/rezyume/" target="_blank" rel="noopener">Открыть резюме</a>
     </article>
     <article class="tool">
-      <div class="tool-top"><svg viewBox="0 0 100 100" width="58" height="58" aria-hidden="true"><circle cx="50" cy="50" r="46" fill="#FFFCF8" stroke="#4F5E3E" stroke-width="3"/><rect x="24" y="28" width="52" height="40" rx="6" fill="#FFFCF8" stroke="#6E4F3C" stroke-width="3"/><rect x="24" y="28" width="52" height="11" rx="5" fill="#4F5E3E"/><path d="M31 49h10M31 58h10" stroke="#A0523D" stroke-width="3.5" stroke-linecap="round"/><path d="M48 49h20M48 58h16" stroke="#6E4F3C" stroke-width="3" stroke-linecap="round"/><path d="M40 75l6-5h8l6 5" stroke="#B98324" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg><div><span class="tag">Бесплатно · PDF</span><h2>Экстренные номера</h2></div></div>
+      <div class="tool-top"><svg viewBox="0 0 100 100" width="58" height="58" aria-hidden="true"><circle cx="50" cy="50" r="46" fill="#FFFCF8" stroke="#4F5E3E" stroke-width="3"/><rect x="26" y="22" width="48" height="56" rx="8" fill="#FFFCF8" stroke="#6E4F3C" stroke-width="3"/><path d="M50 31v20M40 41h20" stroke="#D03A2F" stroke-width="7" stroke-linecap="round"/><path d="M35 62h30M35 70h20" stroke="#6E4F3C" stroke-width="3" stroke-linecap="round"/></svg><div><span class="tag">Бесплатно · PDF и PNG</span><h2>Экстренные номера</h2></div></div>
       <div data-fan="ekstrennye-nomera"></div>
       <p>Карточка со всеми номерами, которые нужны, когда что-то случилось. Скорая, полиция, отравления, дежурный врач твоего кантона, твой врач, касса и близкие. На русском и на языке кантона, чтобы поняла и няня.</p>
       <ul>
@@ -625,7 +627,7 @@ a.bot:hover{color:#B98324}
       <a class="go-free" href="https://svoiludi.ch/instrumenty/ekstrennye-nomera/" target="_blank" rel="noopener">Сделать карточку</a>
     </article>
     <article class="tool">
-      <div class="tool-top"><svg viewBox="0 0 100 100" width="58" height="58" aria-hidden="true"><circle cx="50" cy="50" r="46" fill="#FFFCF8" stroke="#4F5E3E" stroke-width="3"/><rect x="26" y="66" width="48" height="10" rx="3" fill="#EFE5D7" stroke="#6E4F3C" stroke-width="2.5"/><rect x="26" y="50" width="22" height="12" rx="3" fill="#E1E8F5" stroke="#2F5FB8" stroke-width="2.5"/><rect x="52" y="50" width="22" height="12" rx="3" fill="#E2F0E2" stroke="#3A8A48" stroke-width="2.5"/><path d="M50 26l20 9-20 9-20-9z" fill="#F3E3C2" stroke="#6E4F3C" stroke-width="2.5" stroke-linejoin="round"/><path d="M68 36v8" stroke="#B98324" stroke-width="2.5" stroke-linecap="round"/></svg><div><span class="tag">Бесплатно · PDF</span><h2>Путь образования</h2></div></div>
+      <div class="tool-top"><svg viewBox="0 0 100 100" width="58" height="58" aria-hidden="true"><circle cx="50" cy="50" r="46" fill="#FFFCF8" stroke="#4F5E3E" stroke-width="3"/><rect x="26" y="66" width="48" height="10" rx="3" fill="#EFE5D7" stroke="#6E4F3C" stroke-width="2.5"/><rect x="26" y="50" width="22" height="12" rx="3" fill="#E1E8F5" stroke="#2F5FB8" stroke-width="2.5"/><rect x="52" y="50" width="22" height="12" rx="3" fill="#E2F0E2" stroke="#3A8A48" stroke-width="2.5"/><path d="M50 26l20 9-20 9-20-9z" fill="#F3E3C2" stroke="#6E4F3C" stroke-width="2.5" stroke-linejoin="round"/><path d="M68 36v8" stroke="#B98324" stroke-width="2.5" stroke-linecap="round"/></svg><div><span class="tag">Бесплатно · PDF и PNG</span><h2>Путь образования</h2></div></div>
       <div data-fan="put-obrazovaniya"></div>
       <p>Как устроена учёба в Швейцарии, на одной схеме: от яслей и детского сада через школу, гимназию или Lehre до вуза и докторантуры. Кто куда идёт, в каком возрасте и как переходят дальше.</p>
       <ul>
@@ -638,7 +640,7 @@ a.bot:hover{color:#B98324}
       <a class="go-free" href="https://svoiludi.ch/instrumenty/put-obrazovaniya/" target="_blank" rel="noopener">Открыть схему</a>
     </article>
     <article class="tool">
-      <div class="tool-top"><svg viewBox="0 0 100 100" width="58" height="58" aria-hidden="true"><circle cx="50" cy="50" r="46" fill="#FFFCF8" stroke="#4F5E3E" stroke-width="3"/><rect x="24" y="62" width="14" height="12" rx="2" fill="#E3E8D6" stroke="#4F5E3E" stroke-width="2.5"/><rect x="43" y="50" width="14" height="24" rx="2" fill="#E3E8D6" stroke="#4F5E3E" stroke-width="2.5"/><rect x="62" y="36" width="14" height="38" rx="2" fill="#F3E3C2" stroke="#B98324" stroke-width="2.5"/><path d="M28 40c6-8 16-10 24-6" stroke="#6E4F3C" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M50 30l3 4-5 1" stroke="#6E4F3C" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg><div><span class="tag">Бесплатно · PDF и PNG</span><h2>Язык: что и где требуют</h2></div></div>
+      <div class="tool-top"><svg viewBox="0 0 100 100" width="58" height="58" aria-hidden="true"><circle cx="50" cy="50" r="46" fill="#FFFCF8" stroke="#4F5E3E" stroke-width="3"/><path d="M30 24h24a8 8 0 0 1 8 8v10a8 8 0 0 1-8 8H38l-8 8v-8a8 8 0 0 1-8-8V32a8 8 0 0 1 8-8z" fill="#E3E8D6" stroke="#4F5E3E" stroke-width="3" stroke-linejoin="round"/><path d="M31 35h22M31 41h14" stroke="#4F5E3E" stroke-width="3" stroke-linecap="round"/><path d="M46 44h24a8 8 0 0 1 8 8v10a8 8 0 0 1-8 8h-8v8l-8-8h-8a8 8 0 0 1-8-8V52a8 8 0 0 1 8-8z" fill="#F3E3C2" stroke="#B98324" stroke-width="3" stroke-linejoin="round"/><path d="M47 55h22M47 61h14" stroke="#6E4F3C" stroke-width="3" stroke-linecap="round"/></svg><div><span class="tag">Бесплатно · PDF и PNG</span><h2>Язык: что и где требуют</h2></div></div>
       <div data-fan="yazyk-trebovaniya"></div>
       <p>Какой уровень немецкого, французского или итальянского нужен для воссоединения семьи, пермита C, паспорта, Lehre и вуза. И что требует для паспорта каждый из 26 кантонов.</p>
       <ul>
