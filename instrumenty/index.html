@@ -465,8 +465,10 @@ a.bot:hover{color:#B98324}
 .tools{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:18px;margin-top:8px}
 .tool{background:var(--paper);border:1.5px solid var(--line);border-radius:24px;padding:22px;display:flex;flex-direction:column;gap:12px;min-width:0}
 .tool.soon{border-style:dashed;background:transparent}
-.tool-top{display:flex;gap:14px;align-items:center}
+.tool-top{display:flex;gap:14px;align-items:flex-start}
+.tool-top>svg{flex:none;width:58px;height:58px}
 .tool h2{font-size:1.6rem;margin:0}
+@media (min-width:700px){.tool h2{min-height:2.25em}}
 .tool .tag{font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--sage)}
 .tool p{margin:0;color:var(--muted);font-size:.95rem}
 .tool ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px;font-size:.92rem}
@@ -597,7 +599,7 @@ a.bot:hover{color:#B98324}
       <a class="go-free" href="https://svoiludi.ch/instrumenty/chasy-po-klientam/" target="_blank" rel="noopener">Открыть учёт по клиентам</a>
     </article>
     <article class="tool">
-      <div class="tool-top"><svg viewBox="0 0 100 100" width="58" height="58" aria-hidden="true"><circle cx="50" cy="50" r="46" fill="#FFFCF8" stroke="#4F5E3E" stroke-width="3"/><rect x="24" y="24" width="38" height="50" rx="7" fill="#F3E3C2" stroke="#6E4F3C" stroke-width="3"/><path d="M31 36h24M31 45h24M31 54h14" stroke="#6E4F3C" stroke-width="3" stroke-linecap="round"/><circle cx="66" cy="63" r="14" fill="#FFFCF8" stroke="#4F5E3E" stroke-width="3"/><path d="M66 55v16M62 59.5c0-2 1.8-3 4-3s4 1 4 3-1.8 2.6-4 3.5-4 1.5-4 3.5 1.8 3 4 3 4-1 4-3" fill="none" stroke="#B98324" stroke-width="2.6" stroke-linecap="round"/></svg><div><span class="tag">Бесплатно · PDF</span><h2>Расчёт зарплаты</h2></div></div>
+      <div class="tool-top"><svg viewBox="0 0 100 100" width="58" height="58" aria-hidden="true"><circle cx="50" cy="50" r="46" fill="#FFFCF8" stroke="#4F5E3E" stroke-width="3"/><rect x="24" y="24" width="38" height="50" rx="7" fill="#F3E3C2" stroke="#6E4F3C" stroke-width="3"/><path d="M31 36h24M31 45h24M31 54h14" stroke="#6E4F3C" stroke-width="3" stroke-linecap="round"/><circle cx="66" cy="63" r="14" fill="#FFFCF8" stroke="#4F5E3E" stroke-width="3"/><path d="M62.5 56v14M62.5 56h8.5M62.5 63h6.5" fill="none" stroke="#B98324" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg><div><span class="tag">Бесплатно · PDF</span><h2>Расчёт зарплаты</h2></div></div>
       <div data-fan="zarplata"></div>
       <p>Сколько из зарплаты уходит на взносы и налог и сколько придёт на счёт. Чтобы проверить свою расчётку или посчитать зарплату няне, помощнице по дому или сотруднику.</p>
       <ul>
