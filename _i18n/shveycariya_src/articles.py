@@ -2566,7 +2566,7 @@ ARTICLES['trudovoe-pravo'] = dict(
         'Веди учёт часов, отпуска и больничных.',
     ],
     pomosh=dict(ids=['unia', 'syna', 'syndicom', 'hgu', 'kfmv', 'anwalt'], k='adv,arb', t='Не плачено за сверхурочные, уволили во время болезни, не дают отпуск — сначала звони в свой профсоюз. Нет членства — бесплатная справка адвокатов или кантона.'),
-    tools={'kuda-obratitsya': 'Профсоюзы и другие организации с консультациями — список с условиями и место для своих номеров.', 'uchet-vremeni': 'Часы, сверхурочные, отпуск и больничные — доказательство, если будет спор.', 'zarplata': 'Проверь расчётку: ставка, отпускные, сверхурочные, взносы.', 'rezyume': 'Резюме по-швейцарски, если ищешь новую работу.'},
+    tools={'bolezn-zarplata': 'Сколько недель зарплаты при болезни и когда нельзя увольнять — по твоему кантону.', 'kuda-obratitsya': 'Профсоюзы и другие организации с консультациями — список с условиями и место для своих номеров.', 'uchet-vremeni': 'Часы, сверхурочные, отпуск и больничные — доказательство, если будет спор.', 'zarplata': 'Проверь расчётку: ставка, отпускные, сверхурочные, взносы.', 'rezyume': 'Резюме по-швейцарски, если ищешь новую работу.'},
     related=['poterya-raboty', 'rabota', 'bolezn-na-rabote', 'domashniy-personal'],
     sources=[
         ('ch.ch — увольнение: сроки, форма, защита при болезни и беременности, причина письменно', 'https://ch.ch/de/kundigung-arbeitsvertrag'),
@@ -3118,4 +3118,289 @@ ARTICLES['transport'] = dict(
         ('ch.ch — виньетка', 'https://www.ch.ch/de/fahrzeuge-und-verkehr/autos-und-andere-fahrzeuge/autobahnvignette/'),
     ],
     terms=[('Deutsch', 'Halbtax, Generalabonnement (GA), Verbundabo, Sparbillett, Junior-Karte, Kinder-Mitfahrkarte, Zuschlag, Führerausweis, Umtausch, Kontrollfahrt, Sehtest, Strassenverkehrsamt, Übersiedlungsgut, Immatrikulation, Motorfahrzeugkontrolle (MFK), Vignette, Probeführerausweis'), ('Français', 'abonnement demi-tarif, abonnement général, billet dégriffé, carte junior, supplément, permis de conduire, échange, course de contrôle, service des automobiles, effets de déménagement, immatriculation, expertise, vignette'), ('Italiano', 'abbonamento metà-prezzo, abbonamento generale, biglietto risparmio, carta junior, licenza di condurre, conversione, corsa di controllo, ufficio della circolazione, masserizie di trasloco, immatricolazione, collaudo, contrassegno'), ('English', 'half-fare travelcard, general travelcard, supersaver ticket, driving licence exchange, control drive, road traffic office, household effects, vehicle registration, inspection, motorway vignette')],
+)
+
+
+# ===== Болезнь на работе, социальная помощь, KESB (08.10.2026). Факты сверены 08.10.2026: SECO, ch.ch, BAG, Suva, BSV, SKOS, SEM, кантоны ZH и AG, KOKES, KESCHA.
+ARTICLES['bolezn-na-rabote'] = dict(
+    h1='Заболела или травма на работе: <em>кто платит зарплату, сколько недель и когда нельзя увольнять</em>',
+    seo='Болезнь на работе в Швейцарии: зарплата (Lohnfortzahlung), Krankentaggeld, Arztzeugnis',
+    desc='Болезнь и несчастный случай на работе в Швейцарии простыми словами на русском: сколько недель работодатель платит зарплату при болезни (OR 324a, бернская, цюрихская и базельская шкала), страховка Krankentaggeld 80 % на 720 дней, когда нужна справка врача (Arztzeugnis), запрет увольнения при болезни (30, 90, 180 дней), несчастный случай по UVG — 80 % с третьего дня, беременность и декрет 14 недель. По-немецки Lohnfortzahlung, Krankentaggeld, Arztzeugnis, Sperrfrist, по-французски maintien du salaire, certificat médical, по-итальянски continuazione del salario.',
+    lead='Заболеть в Швейцарии — не значит остаться без денег. Но сколько и как долго тебе заплатят, зависит от того, сколько ты проработала, есть ли у работодателя страховка и болезнь это или несчастный случай. Здесь — по порядку и с примерами.',
+    body='''
+<nav class="toc" aria-label="Содержание"><b>В этой статье</b>
+<ul>
+  <li><a href="#pervoe">Заболела: что сделать сразу</a></li>
+  <li><a href="#zarplata">Кто платит зарплату при болезни</a></li>
+  <li><a href="#shkaly">Сколько недель: три шкалы</a></li>
+  <li><a href="#taggeld">Страховка Krankentaggeld</a></li>
+  <li><a href="#uvolnenie">Когда нельзя увольнять</a></li>
+  <li><a href="#neschastnyy">Несчастный случай (Unfall)</a></li>
+  <li><a href="#beremennost">Беременность и декрет</a></li>
+</ul></nav>
+
+<h2 id="pervoe">Заболела: что сделать сразу</h2>
+<ul class="ul">
+  <li><b>Сообщи работодателю в тот же день</b>, до начала работы — как принято у вас: звонок, сообщение, e-mail.</li>
+  <li><b>Справка врача (Arztzeugnis).</b> По закону её можно потребовать с первого дня, обычно — с третьего. Как у тебя, написано в договоре или правилах фирмы. В справке нет диагноза — только что ты не можешь работать и на сколько процентов (<a href="https://www.seco.admin.ch/seco/de/home/Arbeit/Personenfreizugigkeit_Arbeitsbeziehungen/Arbeitsrecht/FAQ_zum_privaten_Arbeitsrecht/verhinderung-des-arbeitnehmers-an-der-arbeitsleistung.html">SECO</a>).</li>
+  <li>Работаешь на нескольких работах — сообщи каждому работодателю.</li>
+  <li>Болеешь долго — присылай справки регулярно, не жди напоминаний.</li>
+</ul>
+
+<h2 id="zarplata">Кто платит зарплату при болезни (Lohnfortzahlung)</h2>
+<p>Если работа длится <b>больше трёх месяцев</b> или договор заключён больше чем на три месяца, работодатель платит зарплату во время болезни (Обязательственное право, OR ст. 324a). В первый год работы — <b>минимум 3 недели</b> полной зарплаты, потом дольше. Несколько болезней за год складываются. Отказаться от этого права договором нельзя (<a href="https://www.ch.ch/de/arbeit/arbeitsunfahigkeit/">ch.ch</a>).</p>
+<p>Сколько именно недель после первого года, закон не пишет. Суды разных регионов считают по своим шкалам — если в договоре или в коллективном договоре (GAV) нет условий лучше.</p>
+
+<h2 id="shkaly">Сколько недель: три шкалы</h2>
+<p>Шкала зависит от того, где работодатель. <b>Цюрихская</b> — кантоны Цюрих, Шаффхаузен, Тургау (в Граубюндене и Цуге уточняй). <b>Базельская</b> — Базель-Штадт и Базель-Ланд. <b>Бернская</b> — все остальные кантоны.</p>
+<div class="tbl"><table>
+<thead><tr><th>Год работы</th><th>Бернская</th><th>Цюрихская</th><th>Базельская</th></tr></thead>
+<tbody>
+<tr><td>1-й (после 3 месяцев)</td><td>3 недели</td><td>3 недели</td><td>3 недели</td></tr>
+<tr><td>2-й</td><td>1 месяц</td><td>8 недель</td><td>2 месяца</td></tr>
+<tr><td>3-й</td><td>2 месяца</td><td>9 недель</td><td>2 месяца</td></tr>
+<tr><td>4-й</td><td>2 месяца</td><td>10 недель</td><td>3 месяца</td></tr>
+<tr><td>5-й–9-й</td><td>3 месяца</td><td>11–15 недель</td><td>3 месяца</td></tr>
+<tr><td>10-й–14-й</td><td>4 месяца</td><td>16–20 недель</td><td>3–4 месяца</td></tr>
+<tr><td>15-й–19-й</td><td>5 месяцев</td><td>21–25 недель</td><td>4–5 месяцев</td></tr>
+<tr><td>20-й и дальше</td><td>6 месяцев</td><td>26 недель и +1 неделя за год</td><td>5–6 месяцев</td></tr>
+</tbody></table></div>
+<p>По базельской шкале источники расходятся — уточни в союзе своей профессии или профсоюзе. Свой случай посчитает «Сколько недель зарплаты при болезни: бернская, цюрихская, базельская шкала».</p>
+
+<h2 id="taggeld">Страховка Krankentaggeld</h2>
+<ul class="ul">
+  <li>Многие работодатели вместо шкалы страхуют сотрудников в <b>коллективной страховке на случай болезни</b> (Krankentaggeldversicherung). Обычно она платит <b>80 % зарплаты до 720 дней</b>.</li>
+  <li>Это заменяет шкалу, только если условия не хуже: 80 % на 720 дней и работодатель платит хотя бы половину взноса.</li>
+  <li>У страховки есть <b>дни ожидания</b> (Wartefrist) — например, 30 дней. Эти дни работодатель обычно платит сам. Условия — в договоре и полисе, попроси копию.</li>
+  <li>По закону такая страховка не обязательна. Нет её — действует шкала.</li>
+</ul>
+
+<h2 id="uvolnenie">Когда нельзя увольнять (Sperrfrist)</h2>
+<ul class="ul">
+  <li>После испытательного срока работодатель не может уволить тебя, пока ты болеешь: <b>30 дней</b> в первый год работы, <b>90 дней</b> со 2-го по 5-й год, <b>180 дней</b> с 6-го года (OR ст. 336c).</li>
+  <li>Увольнение в это время недействительно — его нужно повторить потом.</li>
+  <li>Если тебя уволили до болезни, срок увольнения на время болезни останавливается и продлевается.</li>
+  <li>В испытательный срок такой защиты нет. Сама уволиться ты можешь всегда.</li>
+  <li>Новая отдельная болезнь даёт новый срок защиты, возврат той же болезни — нет.</li>
+</ul>
+
+<h2 id="neschastnyy">Несчастный случай (Unfall)</h2>
+<ul class="ul">
+  <li>Каждого работника работодатель страхует от несчастных случаев по закону UVG — у Suva или у частной страховой.</li>
+  <li>Работаешь <b>8 часов в неделю и больше</b> у одного работодателя — застрахованы и несчастные случаи вне работы (на лыжах, дома). Меньше 8 часов — только на работе и по дороге на работу.</li>
+  <li><b>Пособие — 80 % зарплаты с третьего дня</b> после несчастного случая, лечение оплачивает страховка (<a href="https://www.suva.ch/de-ch/download/dokument/ihr-suva-versicherungsschutz-das-muessen-sie-wissen/ihr-suva-versicherungsschutz-das-muessen-sie-wissen--1807.d">Suva</a>).</li>
+  <li>Сразу сообщи работодателю — он заявляет о случае в страховую. Скажи врачу, что это несчастный случай: счёт тогда идёт не в медстраховку.</li>
+  <li>Не работай, если врач запретил: страховая может потребовать деньги назад.</li>
+</ul>
+
+<h2 id="beremennost">Беременность и декрет</h2>
+<ul class="ul">
+  <li>Во время беременности и <b>16 недель после родов</b> уволить нельзя (кроме испытательного срока).</li>
+  <li><b>Декретные (Mutterschaftsentschädigung):</b> 14 недель, 80 % среднего дохода, но не больше <b>220 франков в день</b>. Условия: до родов 9 месяцев была застрахована в AHV, из них минимум 5 месяцев работала (<a href="https://www.bsv.admin.ch/de/eo-bei-mutterschaft">BSV</a>).</li>
+  <li>8 недель после родов работать нельзя.</li>
+  <li>Кормишь грудью в первый год — часть времени на кормление засчитывается как рабочее: от 30 до 90 минут в день в зависимости от длины дня.</li>
+</ul>
+''',
+    steps=[
+        'Заболела — сообщи работодателю в тот же день и узнай, с какого дня нужна справка врача.',
+        'Посчитай, сколько недель тебе положено по шкале твоего кантона и году работы.',
+        'Попроси копию полиса Krankentaggeld: сколько процентов, сколько дней ожидания.',
+        'Пришло увольнение во время болезни — проверь срок защиты и обратись в профсоюз.',
+        'Несчастный случай — сразу сообщи работодателю и скажи врачу, что это Unfall.',
+    ],
+    pomosh=dict(ids=['unia', 'syna', 'vpod', 'ombpv', 'anwalt'], k='arb', t='По спорам о зарплате при болезни и увольнении помогут профсоюз и бесплатная правовая справка по трудовому праву.'),
+    tools={'bolezn-zarplata': 'Посчитай свои недели полной зарплаты и срок защиты от увольнения по кантону и году работы.', 'uchet-vremeni': 'Дни болезни и рабочие часы — в табеле за месяц, пригодится при споре.'},
+    related=['trudovoe-pravo', 'bolezn-travma', 'profsoyuzy', 'poterya-raboty'],
+    sources=[
+        ('SECO — работник не может работать (FAQ)', 'https://www.seco.admin.ch/seco/de/home/Arbeit/Personenfreizugigkeit_Arbeitsbeziehungen/Arbeitsrecht/FAQ_zum_privaten_Arbeitsrecht/verhinderung-des-arbeitnehmers-an-der-arbeitsleistung.html'),
+        ('ch.ch — нетрудоспособность', 'https://www.ch.ch/de/arbeit/arbeitsunfahigkeit/'),
+        ('BAG — добровольная страховка дневных пособий', 'https://www.bag.admin.ch/de/krankenversicherung-die-freiwillige-taggeldversicherung'),
+        ('Suva — страховая защита, 2026', 'https://www.suva.ch/de-ch/download/dokument/ihr-suva-versicherungsschutz-das-muessen-sie-wissen/ihr-suva-versicherungsschutz-das-muessen-sie-wissen--1807.d'),
+        ('BSV — пособие по материнству', 'https://www.bsv.admin.ch/de/eo-bei-mutterschaft'),
+        ('KMU-Portal — беременность и материнство на работе', 'https://www.kmu.admin.ch/kmu/de/home/praktisches-wissen/personal/arbeitsrecht/arbeitszeit/schwangerschaft-und-mutterschaft.html'),
+        ('law.ch — шкалы выплаты зарплаты (обзор)', 'https://law.ch/wp-content/uploads/2022/09/001_uebersicht-lohnfortzahlung-skalen.pdf'),
+    ],
+    terms=[('Deutsch', 'Lohnfortzahlung, Berner Skala, Zürcher Skala, Basler Skala, Krankentaggeldversicherung, Wartefrist, Arztzeugnis, Arbeitsunfähigkeit, Sperrfrist, Kündigungsschutz, Berufsunfall, Nichtberufsunfall, UVG-Taggeld, Mutterschaftsentschädigung'), ('Français', 'maintien du salaire, échelle bernoise, assurance indemnité journalière maladie, délai d’attente, certificat médical, incapacité de travail, délai de protection, accident professionnel, accident non professionnel, allocation de maternité'), ('Italiano', 'continuazione del pagamento del salario, scala bernese, indennità giornaliera di malattia, periodo d’attesa, certificato medico, incapacità lavorativa, periodo di protezione, infortunio professionale, indennità di maternità'), ('English', 'continued pay when sick, sickness daily allowance, waiting period, medical certificate, incapacity for work, protection period, occupational accident, maternity allowance')],
+)
+
+ARTICLES['sozialhilfe'] = dict(
+    h1='Социальная помощь в Швейцарии (Sozialhilfe): <em>кто получает, сколько, и что будет с пермитом</em>',
+    seo='Социальная помощь в Швейцарии (Sozialhilfe): сумма 2026, обязанности, пермит B и C',
+    desc='Социальная помощь в Швейцарии простыми словами на русском: кто решает (община и кантон), сколько дают на жизнь по нормам SKOS (1061 франк на одного человека), что оплачивают отдельно, обязанности и возврат, обязаны ли помогать родственники, как помощь влияет на пермит B и C и на натурализацию, что проверить до обращения: RAV, скидка на медстраховку, консультация по долгам, Caritas. По-немецки Sozialhilfe, Grundbedarf, Sozialamt, по-французски aide sociale, по-итальянски assistenza sociale.',
+    lead='Социальная помощь — последняя сеть безопасности, когда денег не хватает на самое необходимое и других выплат нет. Она помогает, но для иностранцев может иметь последствия для пермита. Здесь — как это устроено и что проверить раньше.',
+    kanton=['sozial'],
+    body='''
+<nav class="toc" aria-label="Содержание"><b>В этой статье</b>
+<ul>
+  <li><a href="#snachala">Что проверить раньше</a></li>
+  <li><a href="#kto">Кто решает и куда идти</a></li>
+  <li><a href="#skolko">Сколько дают</a></li>
+  <li><a href="#obyazannosti">Обязанности и возврат</a></li>
+  <li><a href="#rodstvenniki">Должны ли помогать родственники</a></li>
+  <li><a href="#permit">Что будет с пермитом</a></li>
+  <li><a href="#status-s">Статус S и F</a></li>
+</ul></nav>
+
+<h2 id="snachala">Что проверить раньше</h2>
+<p>Социальная помощь выплачивается, только если других денег нет. Поэтому сначала:</p>
+<ul class="ul">
+  <li><b>Пособие по безработице (ALV).</b> Работала 12 месяцев за последние 2 года — регистрируйся в RAV не позже первого дня без работы (<a href="https://www.ch.ch/de/versicherungen/arbeitslosenversicherung/">ch.ch</a>). Подробно — в теме «Потеря работы и RAV».</li>
+  <li><b>Скидка на медстраховку (Prämienverbilligung)</b> — при низком доходе кантон платит часть взноса. В одних кантонах автоматически, в других по заявлению (<a href="https://www.bag.admin.ch/de/krankenversicherung-praemienverbilligung">BAG</a>).</li>
+  <li><b>Алименты.</b> Бывший партнёр не платит — кантон может выплачивать алименты на ребёнка авансом (Alimentenbevorschussung).</li>
+  <li><b>Консультация по долгам</b> — бесплатно: <a href="https://schulden.ch/fachstellen/">Schuldenberatung Schweiz</a>, телефон 0800 708 708. Подробно — в теме «Долги в Швейцарии и Betreibung».</li>
+  <li><b>Разовая помощь</b> — Caritas, Winterhilfe, церковные общины помогают с отдельными счетами, продуктами (магазины Caritas-Markt).</li>
+</ul>
+
+<h2 id="kto">Кто решает и куда идти</h2>
+<p>Социальная помощь — дело кантона и общины. Обращаются в социальную службу (Sozialamt, Sozialdienst) своей общины. Суммы почти везде считают по нормам Конференции по социальной помощи <a href="https://skos.ch/">SKOS</a>, но каждый кантон решает сам. Ссылка на страницу твоего кантона — в блоке «Твой кантон» выше.</p>
+<p>Что взять с собой: пермит, договор аренды, выписки со счетов, справки о доходах, полис медстраховки, счета и долги. Тебя спросят обо всех доходах и имуществе.</p>
+
+<h2 id="skolko">Сколько дают</h2>
+<p>Деньги на жизнь (Grundbedarf) — на еду, одежду, электричество, связь, транспорт, гигиену. По нормам SKOS с 2025 года (<a href="https://skos.ch/skos-richtlinien/grundbedarf-fuer-den-lebensunterhalt">SKOS</a>, суммы в Цюрихе и Аргау):</p>
+<div class="tbl"><table>
+<thead><tr><th>Человек в семье</th><th>CHF в месяц</th></tr></thead>
+<tbody><tr><td>1</td><td>1061</td></tr><tr><td>2</td><td>1624</td></tr><tr><td>3</td><td>1974</td></tr><tr><td>4</td><td>2271</td></tr><tr><td>5</td><td>2568</td></tr></tbody></table></div>
+<p><b>Отдельно оплачивают:</b> аренду (до предела, который установила община), медстраховку, нужные расходы на врачей. В кантонах суммы могут отличаться.</p>
+
+<h2 id="obyazannosti">Обязанности и возврат</h2>
+<ul class="ul">
+  <li>Ты обязана сообщать обо всех доходах и изменениях: новая работа, наследство, переезд. Скрыть доход — это мошенничество, деньги потребуют назад и могут завести уголовное дело.</li>
+  <li>Обычно требуют искать работу, ходить на курсы и программы интеграции.</li>
+  <li><b>Возврат.</b> Если позже появятся большие деньги (наследство, выигрыш) или помощь получена неправомерно — её нужно вернуть. Из обычной зарплаты в большинстве кантонов не требуют, но правила разные — спроси в своём Sozialamt.</li>
+</ul>
+
+<h2 id="rodstvenniki">Должны ли помогать родственники</h2>
+<p>Только родственники по прямой линии — родители, дети, бабушки и дедушки — и <b>только если они состоятельны</b>. Например, в Цюрихе одинокий человек считается обязанным при налогооблагаемом доходе от 120 000 франков в год. Братья и сёстры, тёти и дяди не обязаны (<a href="https://www.zh.ch/de/soziales/sozialhilfe/sozialhilfehandbuch/flexdata-definition/17-ansprueche-gegenueber-dritten/17-3-verwandtenunterstuetzungspflicht/17-3-01-verwandtenunterstuetzungspflicht--allgemeine-ausfuehrungen.html">Кантон Цюрих</a>).</p>
+
+<h2 id="permit">Что будет с пермитом</h2>
+<ul class="ul">
+  <li><b>Автоматически пермит не отбирают.</b> Миграционная служба смотрит на всю ситуацию и причины: болезнь, кризис, маленький ребёнок (<a href="https://www.sem.admin.ch/sem/de/home/themen/aufenthalt/faq.html">SEM</a>).</li>
+  <li><b>Пермит B</b> могут не продлить или отозвать, если ты зависишь от помощи и это соразмерно. Миграционные службы получают сообщения от соцслужб: в Цюрихе — начиная примерно с 25 000 франков помощи.</li>
+  <li><b>Пермит C</b> — только при долгой и большой зависимости, ориентир — больше 80 000 франков за два-три года. Вместо отзыва C могут заменить на B.</li>
+  <li>Обычно не вредят: скидка на медстраховку, аванс алиментов, курсы интеграции.</li>
+  <li>После рождения ребёнка обычно ожидают, что в течение года ты снова будешь работать.</li>
+  <li><b>Натурализация:</b> подать заявление можно, если за последние 3 года не получала социальную помощь или всё вернула. Подробно — в теме «Гражданство Швейцарии и натурализация».</li>
+</ul>
+<p>Пермит под угрозой — сразу к юристу по миграционному праву или в консультацию UFS (право социальной помощи), до ответа миграционной службе.</p>
+
+<h2 id="status-s">Статус S и F</h2>
+<p>Для статуса S, беженцев и временно принятых (F) — отдельная помощь по линии убежища (Asylsozialhilfe). Ставки ниже обычных и зависят от кантона, жильё и медстраховка оплачиваются отдельно. Правила возврата похожи (<a href="https://skos.ch/themen/gefluechtete-aus-der-ukraine/fragen-und-antworten-zu-schutzstatus-s">SKOS</a>). Подробно — в теме «Статус S для украинцев».</p>
+''',
+    steps=[
+        'Сначала проверь RAV, скидку на медстраховку, аванс алиментов и бесплатную консультацию по долгам.',
+        'Не хватает на жизнь — иди в социальную службу своей общины с пермитом, договором аренды и выписками.',
+        'Сообщай обо всех доходах и изменениях — иначе потребуют вернуть деньги.',
+        'Пермит B или C — спроси юриста, как помощь скажется на продлении, до ответа миграционной службе.',
+        'Планируешь натурализацию — помни про 3 года без социальной помощи.',
+    ],
+    pomosh=dict(ids=['ufs', 'caritas', 'budget', 'gemeinde'], t='По праву социальной помощи бесплатно консультирует UFS, с долгами и бюджетом помогут Caritas и Budgetberatung.'),
+    tools={'moj-budget': 'Все обязательные расходы в месяц — чтобы увидеть, где можно сэкономить и чего не хватает.'},
+    related=['poterya-raboty', 'betreibung', 'permit-b', 'permit-c', 'status-s'],
+    sources=[
+        ('SKOS — основная сумма на жизнь', 'https://skos.ch/skos-richtlinien/grundbedarf-fuer-den-lebensunterhalt'),
+        ('Кантон Цюрих — справочник социальной помощи, суммы', 'https://www.zh.ch/de/soziales/sozialhilfe/sozialhilfehandbuch/flexdata-definition/7-materielle-grundsicherung-wsh/7-1-grundbedarf-gbl/7-1-05-betraege-fuer-den-grundbedarf-fuer-den-lebensunterhalt.html'),
+        ('Кантон Аргау — справочник, основная сумма', 'https://www.ag.ch/de/themen/soziales-gesellschaft/soziale-sicherheit/handbuch-soziales/7-materielle-grundsicherung/7-1-grundbedarf/7-1-1-grundbedarf'),
+        ('Кантон Цюрих — обязанность родственников', 'https://www.zh.ch/de/soziales/sozialhilfe/sozialhilfehandbuch/flexdata-definition/17-ansprueche-gegenueber-dritten/17-3-verwandtenunterstuetzungspflicht/17-3-01-verwandtenunterstuetzungspflicht--allgemeine-ausfuehrungen.html'),
+        ('SEM — вопросы о пребывании (социальная помощь)', 'https://www.sem.admin.ch/sem/de/home/themen/aufenthalt/faq.html'),
+        ('SKOS — статус S, вопросы и ответы', 'https://skos.ch/themen/gefluechtete-aus-der-ukraine/fragen-und-antworten-zu-schutzstatus-s'),
+        ('ch.ch — страхование по безработице', 'https://www.ch.ch/de/versicherungen/arbeitslosenversicherung/'),
+        ('BAG — скидка на взносы медстраховки', 'https://www.bag.admin.ch/de/krankenversicherung-praemienverbilligung'),
+        ('Schuldenberatung Schweiz — консультации', 'https://schulden.ch/fachstellen/'),
+    ],
+    terms=[('Deutsch', 'Sozialhilfe, Sozialamt, Sozialdienst, Grundbedarf für den Lebensunterhalt, Mietzinslimite, Mitwirkungspflicht, Rückerstattung, Verwandtenunterstützung, Prämienverbilligung, Alimentenbevorschussung, Asylsozialhilfe, Nothilfe'), ('Français', 'aide sociale, service social, forfait pour l’entretien, obligation de collaborer, remboursement, dette alimentaire des parents, réduction des primes, avance sur pensions alimentaires, aide d’urgence'), ('Italiano', 'assistenza sociale, servizio sociale, fabbisogno di base, obbligo di collaborare, restituzione, obbligo di assistenza dei parenti, riduzione dei premi, anticipo degli alimenti'), ('English', 'social assistance, social services, basic needs allowance, duty to cooperate, repayment, support obligation of relatives, premium reduction')],
+)
+
+ARTICLES['kesb'] = dict(
+    h1='KESB в Швейцарии: <em>что это за служба, когда она приходит и как защищать свои права</em>',
+    seo='KESB в Швейцарии: защита детей и взрослых, Beistandschaft, Vorsorgeauftrag',
+    desc='KESB (Kindes- und Erwachsenenschutzbehörde) простыми словами на русском: что это за ведомство, когда оно вмешивается (сообщение об угрозе ребёнку), какие бывают меры — от совета до куратора (Beistandschaft), права родителей, жалоба в течение 30 дней и бесплатный юрист, совместная опека для неженатых родителей, доверенность на случай недееспособности (Vorsorgeauftrag) и распоряжение пациента. Где бесплатно помогут: KESCHA. По-немецки KESB, Gefährdungsmeldung, Beistandschaft, по-французски APEA, curatelle, по-итальянски ARP, curatela.',
+    lead='О KESB в русскоязычных чатах рассказывают страшные истории. На деле это ведомство, которое защищает детей и взрослых, которые сами не справляются, — и в большинстве случаев оно помогает семье, а не забирает детей. Здесь — как оно работает и какие у тебя права.',
+    kanton=['kesb'],
+    body='''
+<nav class="toc" aria-label="Содержание"><b>В этой статье</b>
+<ul>
+  <li><a href="#chto">Что такое KESB</a></li>
+  <li><a href="#kogda">Когда KESB вмешивается</a></li>
+  <li><a href="#mery">Какие бывают меры</a></li>
+  <li><a href="#prava">Твои права</a></li>
+  <li><a href="#mify">Мифы</a></li>
+  <li><a href="#opeka">Совместная опека неженатых родителей</a></li>
+  <li><a href="#vorsorge">Доверенность на случай недееспособности</a></li>
+</ul></nav>
+
+<h2 id="chto">Что такое KESB</h2>
+<p>KESB (Kindes- und Erwachsenenschutzbehörde, во франкоязычных кантонах APEA, в Тичино ARP) — ведомство по защите детей и взрослых. Решения принимают три специалиста: юрист, социальный работник, психолог или педагог. В одних кантонах это суд, в других — отдельное ведомство (<a href="https://kescha.ch/de/kesr-abc/">KESCHA</a>). Ссылка на KESB твоего кантона — в блоке «Твой кантон» выше.</p>
+<p>Цель KESB в защите ребёнка — не наказать родителей, а сделать так, чтобы ребёнку было хорошо. Виноваты родители или нет — не важно (<a href="https://www.kokes.ch/application/files/9114/9390/8357/Merkblatt_Kindesschutz_normale_Sprache.pdf">KOKES</a>).</p>
+
+<h2 id="kogda">Когда KESB вмешивается</h2>
+<ul class="ul">
+  <li>Кто угодно может сообщить в KESB, что ребёнку или взрослому нужна помощь (Gefährdungsmeldung): школа, врач, соседи, родственники. Получив сообщение, KESB обязана проверить.</li>
+  <li>Вмешивается, если есть серьёзная возможность, что ребёнку плохо: насилие, заброшенность, тяжёлый конфликт родителей, зависимость, психическая болезнь родителя, которой не лечат.</li>
+  <li>Сначала KESB выясняет ситуацию: говорит с родителями и ребёнком, иногда просит социальную службу посмотреть. Если семья справляется сама или с добровольной помощью — мер не будет.</li>
+</ul>
+
+<h2 id="mery">Какие бывают меры — от мягкой к строгой</h2>
+<ol class="ol">
+  <li><b>Совет, указание, наблюдение</b> — например, ходить на консультацию.</li>
+  <li><b>Куратор (Beistandschaft)</b> — самая частая мера. Куратор помогает семье: с учёбой ребёнка, отношениями между родителями, контактами с отцом. Родители остаются родителями.</li>
+  <li><b>Лишение права решать, где живёт ребёнок</b> — ребёнка временно устраивают в другую семью или учреждение. Бывает нечасто.</li>
+  <li><b>Лишение родительских прав</b> — очень редко.</li>
+</ol>
+<p>KESB выбирает самую мягкую меру, которая помогает. Для взрослых бывают разные виды кураторства: от поддержки, при которой ты сама решаешь всё, до полного представительства.</p>
+
+<h2 id="prava">Твои права</h2>
+<ul class="ul">
+  <li><b>Право быть выслушанной</b> и посмотреть документы дела. Можно прийти с доверенным человеком и переводчиком — скажи заранее, что тебе нужен переводчик.</li>
+  <li><b>Ребёнка тоже слушают</b> — обычно с 6 лет, по зрелости и раньше. При споре о том, где он будет жить, ему могут назначить своего представителя.</li>
+  <li><b>Жалоба (Beschwerde)</b> — письменно в суд, который указан в решении, <b>в течение 30 дней</b> со дня получения, при принудительном помещении в учреждение — 10 дней. Сроки не продлевают. Юрист для жалобы не обязателен.</li>
+  <li><b>Бесплатный юрист</b> — если нет денег, можно попросить бесплатное ведение дела (unentgeltliche Rechtspflege).</li>
+  <li>Решения KESB могут быть платными, сумма зависит от кантона.</li>
+</ul>
+<p>Не согласна с KESB или не понимаешь, что происходит, — позвони в <a href="https://kescha.ch/de/kesr-abc/">KESCHA</a>: независимая бесплатная консультация по телефону +41 44 273 96 96 (пн–чт 9:00–11:30 и 14:00–16:30, пт 14:00–16:30).</p>
+
+<h2 id="mify">Мифы</h2>
+<ul class="ul">
+  <li><b>«KESB легко забирает детей».</b> Нет: это редкая и последняя мера. Чаще всего KESB назначает куратора, который помогает семье.</li>
+  <li><b>«Куратор — значит отберут ребёнка».</b> Нет: куратор поддерживает родителей.</li>
+  <li><b>«KESB наказывает родителей».</b> Нет: её задача — защита ребёнка, а не наказание.</li>
+  <li><b>«Лучше не открывать дверь и не отвечать».</b> Наоборот: сотрудничество — лучший способ показать, что ребёнку дома хорошо. Отвечай на письма, приходи на встречи, проси перевод.</li>
+</ul>
+
+<h2 id="opeka">Совместная опека неженатых родителей</h2>
+<ul class="ul">
+  <li>Если родители не женаты, при рождении опека только у матери. Отец признаёт ребёнка в отделе записи актов гражданского состояния (Zivilstandsamt), можно и до рождения.</li>
+  <li>Совместную опеку родители заявляют вместе — в Zivilstandsamt при признании или позже в KESB (<a href="https://www.ch.ch/de/familie-und-partnerschaft/mutterschaft-und-vaterschaft/schwangerschaft-und-geburt/elterliche-sorge-nicht-verheiratete-eltern/">ch.ch</a>).</li>
+  <li>Если один против — второй обращается в KESB, и она обычно назначает совместную опеку, если это не вредит ребёнку.</li>
+  <li>Договор об алиментах на ребёнка между неженатыми родителями становится обязательным после одобрения KESB. Подробно — в теме «Брак, развод и алименты».</li>
+</ul>
+
+<h2 id="vorsorge">Доверенность на случай недееспособности (Vorsorgeauftrag)</h2>
+<ul class="ul">
+  <li><b>Vorsorgeauftrag</b> — ты заранее решаешь, кто будет вести твои дела и деньги и представлять тебя, если ты не сможешь (болезнь, несчастный случай). Без неё решение может принимать KESB.</li>
+  <li><b>Форма:</b> целиком от руки, с датой и подписью, или у нотариуса. Напечатанный текст с подписью недействителен.</li>
+  <li>В отделе записи актов гражданского состояния можно зарегистрировать, что доверенность есть и где она хранится, — цену спроси там.</li>
+  <li><b>Распоряжение пациента (Patientenverfügung)</b> — какое лечение ты хочешь и не хочешь, если не сможешь сказать сама, и кто решает за тебя. Носи с собой карточку, что оно есть.</li>
+</ul>
+''',
+    steps=[
+        'Пришло письмо от KESB — не игнорируй: ответь, приходи на встречу, попроси переводчика.',
+        'Не понимаешь, что происходит, — позвони в KESCHA: бесплатно и независимо.',
+        'Не согласна с решением — жалоба в суд в течение 30 дней, можно попросить бесплатного юриста.',
+        'Не женаты — заявите совместную опеку при признании ребёнка в Zivilstandsamt.',
+        'Напиши от руки доверенность на случай недееспособности — для себя и пожилых родителей.',
+    ],
+    pomosh=dict(ids=['anwalt', 'beob', 'gemeinde'], t='Независимо и бесплатно по вопросам KESB консультирует KESCHA, по жалобе помогут юристы и справочные адвокатов.'),
+    tools={'moi-emocii': 'Записывай, что чувствуешь и что помогает, — пригодится для себя и в разговоре с психологом.'},
+    related=['brak-razvod', 'psihoterapiya', 'kita-detsad', 'sozialhilfe'],
+    sources=[
+        ('KESCHA — азбука защиты детей и взрослых', 'https://kescha.ch/de/kesr-abc/'),
+        ('KOKES — памятка о защите детей простым языком', 'https://www.kokes.ch/application/files/9114/9390/8357/Merkblatt_Kindesschutz_normale_Sprache.pdf'),
+        ('KOKES — ребёнок в процессе', 'https://www.kokes.ch/application/files/4614/6167/3624/Das_Kind_im_Verfahren.pdf'),
+        ('KOKES — новые инструменты: Vorsorgeauftrag и распоряжение пациента', 'https://www.kokes.ch/application/files/7814/6166/9124/Die_neuen_Instrumente.pdf'),
+        ('KESCHA — сколько стоит процедура и юрист', 'https://kescha.ch/de/erklaerungen-zum-kindes-und-erwachsenenschutz/erklaerungen-zum-kindesschutz/was-kostet-ein-verfahren-und-was-kostet-ein-anwalt.php'),
+        ('ch.ch — опека неженатых родителей', 'https://www.ch.ch/de/familie-und-partnerschaft/mutterschaft-und-vaterschaft/schwangerschaft-und-geburt/elterliche-sorge-nicht-verheiratete-eltern/'),
+    ],
+    terms=[('Deutsch', 'KESB, Gefährdungsmeldung, Kindesschutz, Erwachsenenschutz, Beistandschaft, Beistand, Aufenthaltsbestimmungsrecht, elterliche Sorge, Obhut, Kindesvertretung, Beschwerde, unentgeltliche Rechtspflege, fürsorgerische Unterbringung, Vorsorgeauftrag, Patientenverfügung'), ('Français', 'APEA, signalement, protection de l’enfant, curatelle, curateur, droit de déterminer le lieu de résidence, autorité parentale, garde, recours, assistance judiciaire, placement à des fins d’assistance, mandat pour cause d’inaptitude, directives anticipées'), ('Italiano', 'ARP, segnalazione, protezione dei minori, curatela, curatore, autorità parentale, custodia, ricorso, assistenza giudiziaria, mandato precauzionale, direttive del paziente'), ('English', 'child and adult protection authority, report of concern, deputyship, parental authority, custody, appeal, legal aid, advance care mandate, advance healthcare directive')],
+    post='Это жалоба на решение KESB, ответ на её письмо и заявление о бесплатном юристе.',
+    post2='Срок жалобы считается со дня, когда ты получила решение, поэтому храни конверт и квитанцию.',
 )

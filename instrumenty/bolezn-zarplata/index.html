@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<link rel="icon" href="/fav/favicon.svg" type="image/svg+xml"><link rel="icon" href="/fav/icon-32.png" sizes="32x32"><link rel="apple-touch-icon" href="/fav/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/fonts.css">
+<meta name="description" content="Бесплатный калькулятор для Швейцарии: сколько недель работодатель платит полную зарплату при болезни (Lohnfortzahlung, OR 324a) по бернской, цюрихской или базельской шкале в твоём кантоне и году работы, до какого числа и примерно сколько, что меняет страховка Krankentaggeld (80 % на 720 дней), сколько дней нельзя увольнять при болезни (Sperrfrist 30, 90, 180 дней). Лист PDF на русском и немецком, французском или итальянском.">
+<link rel="canonical" href="https://svoiludi.ch/instrumenty/bolezn-zarplata/">
+<meta property="og:type" content="website"><meta property="og:locale" content="ru_RU"><meta property="og:site_name" content="Свои люди в Швейцарии">
+<meta property="og:title" content="Сколько недель зарплаты при болезни: бернская, цюрихская, базельская шкала · бесплатно"><meta property="og:description" content="Выбери кантон и когда начала работать — увидишь, сколько недель тебе платят при болезни и когда нельзя увольнять.">
+<meta property="og:url" content="https://svoiludi.ch/instrumenty/bolezn-zarplata/"><meta property="og:image" content="https://svoiludi.ch/instrumenty/bolezn-zarplata/og-image.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="robots" content="noindex, nofollow">
+<title>Сколько недель зарплаты при болезни: бернская, цюрихская, базельская шкала</title>
+<style>
+/* Сколько недель зарплаты при болезни: бернская, цюрихская, базельская шкала (08.10.2026): анкета слева, живые листы справа, движок assets/shema.js. */
+:root{
+  --bg:#F4EDE3; --paper:#FFFCF8; --ink:#2F2924; --muted:#7A6E62; --line:#E5D9C9; --soft:#EFE5D7;
+  --brown:#6E4F3C; --mustard:#B98324; --mustard-soft:#F3E3C2; --sage:#4F5E3E; --sage-soft:#E3E8D6; --red:#A0523D;
+  --display:"Forum","Georgia",serif; --sans:"Manrope","Segoe UI",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#221D19; --paper:#2C2621; --ink:#F1E9DF; --muted:#B4A796; --line:#3E362F; --soft:#352E28;
+  --brown:#E1C2A6; --mustard:#E2B45C; --mustard-soft:#3D321F; --sage:#B4BF97; --sage-soft:#2E3226; --red:#E39A85; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#221D19; --paper:#2C2621; --ink:#F1E9DF; --muted:#B4A796; --line:#3E362F; --soft:#352E28;
+  --brown:#E1C2A6; --mustard:#E2B45C; --mustard-soft:#3D321F; --sage:#B4BF97; --sage-soft:#2E3226; --red:#E39A85; color-scheme:dark}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--ink);font:15px/1.55 var(--sans);margin:0}
+.wrap{max-width:1280px;margin:0 auto;padding-inline:16px;padding-block:28px 48px;display:flex;flex-direction:column;gap:24px}
+.eyebrow{font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+h1{font-family:var(--display);font-weight:400;font-size:clamp(2.4rem,6vw,3.6rem);line-height:1;margin:4px 0 10px;text-wrap:balance}
+h2{font-family:var(--display);font-weight:400;font-size:1.55rem;margin:0;text-wrap:balance}
+h3{font-family:var(--display);font-weight:400;font-size:1.22rem;line-height:1.2;margin:0}
+.lead{max-width:66ch;color:var(--muted);margin:0}
+.jump{font-weight:700;color:var(--brown);text-underline-offset:4px}
+.privnote{margin-top:14px;background:var(--sage-soft);border-radius:16px;padding:12px 16px;font-size:.9rem;max-width:90ch}
+.status{font-size:.86rem;color:var(--muted);min-height:1.3em}
+.btn{font:inherit;font-weight:700;font-size:.9rem;border:0;border-radius:999px;padding:10px 18px;cursor:pointer;color:#fff;text-decoration:none;display:inline-flex;align-items:center;gap:6px;background:#6E4F3C;box-shadow:0 8px 18px -8px rgba(110,79,60,.6)}
+.btn.gold{background:#B98324;box-shadow:0 8px 18px -8px rgba(185,131,36,.7)}
+.btn.free{background:#4F5E3E;box-shadow:0 8px 18px -8px rgba(79,94,62,.6)}
+.btn.ghost{background:transparent;color:var(--brown);border:1.5px solid var(--line);box-shadow:none}
+.btn.sm{font-size:.82rem;padding:7px 13px}
+.btn[disabled]{background:var(--soft);color:var(--muted);box-shadow:none;cursor:wait}
+select,input[type=text],input[type=tel],input[type=number],input[type=date],textarea{font:inherit;font-size:.95rem;color:var(--ink);background:var(--paper);border:1.5px solid var(--line);border-radius:12px;padding:9px 12px;width:100%;min-width:0}
+select:focus-visible,input:focus-visible,button:focus-visible,textarea:focus-visible,a:focus-visible{outline:2px solid var(--mustard);outline-offset:2px}
+::placeholder{color:color-mix(in srgb,var(--muted) 70%,transparent)}
+.setup{background:var(--paper);border:1.5px solid var(--line);border-radius:22px;padding:16px 18px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px 18px;align-items:start}
+@media (max-width:1000px){.setup{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.setup{grid-template-columns:1fr}}
+.fl{display:flex;flex-direction:column;gap:6px;min-width:0}
+.fl>.lb{font-size:.8rem;font-weight:700;color:var(--muted);display:flex;align-items:center}
+.seg{display:flex;flex-wrap:wrap;gap:6px}
+.seg button{font:inherit;font-size:.84rem;font-weight:700;border:1.5px solid var(--line);background:var(--paper);color:var(--ink);border-radius:999px;padding:6px 12px;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--sage);border-color:var(--sage);color:#fff}
+.acts{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.exbar{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;background:var(--mustard-soft);border-radius:16px;padding:10px 14px;font-size:.9rem;font-weight:600}
+.work{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:22px;align-items:start}
+@media (max-width:1040px){.work{grid-template-columns:1fr}}
+.form{display:flex;flex-direction:column;gap:14px;min-width:0}
+.sec{background:var(--paper);border:1.5px solid var(--line);border-radius:20px;padding:16px 18px;display:flex;flex-direction:column;gap:12px}
+.sec>h2{font-size:1.3rem;display:flex;align-items:center}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:560px){.g2{grid-template-columns:1fr}}
+.hint{font-size:.84rem;color:var(--muted);margin:0}
+.chk{display:flex;flex-direction:column;gap:8px}
+.chk label{display:flex;gap:10px;align-items:baseline;font-size:.92rem;cursor:pointer}
+.chk input{flex:none;width:18px;height:18px;accent-color:var(--sage);transform:translateY(3px)}
+.chk b{white-space:nowrap}
+.chk small{color:var(--muted)}
+.tog{display:flex;gap:10px;align-items:center;font-size:.92rem;cursor:pointer}
+.tog input{width:18px;height:18px;accent-color:var(--sage)}
+.sheetbox{position:sticky;top:12px;display:flex;flex-direction:column;gap:10px}
+@media (max-width:1040px){.sheetbox{position:static}}
+.sheet{background:#fff;border-radius:6px;box-shadow:0 18px 40px -22px rgba(47,41,36,.45);overflow:hidden}
+.sheet svg{display:block;width:100%;height:auto}
+.imp{background:var(--paper);border:1.5px dashed color-mix(in srgb,var(--sage) 55%,transparent);border-radius:16px;padding:14px 18px;font-size:.88rem;max-width:90ch;margin:0}
+.imp b{color:var(--sage)}
+.guide{display:flex;flex-direction:column;gap:14px;max-width:90ch}
+.guide ul{margin:0;padding-left:20px}
+.guide li{margin:4px 0}
+.credit{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:.8rem;color:var(--muted)}
+.credit a{color:var(--muted)}
+.qh{font:700 .72rem/1 var(--sans);width:20px;height:20px;border-radius:50%;border:1.5px solid var(--line);background:var(--paper);color:var(--brown);cursor:pointer;margin-left:6px;padding:0;flex:none}
+.sheets{display:flex;flex-direction:column;gap:14px}
+.goals{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+@media (max-width:560px){.goals{grid-template-columns:1fr}}
+.goals label{display:flex;gap:10px;align-items:flex-start;background:var(--bg);border:1.5px solid var(--line);border-radius:14px;padding:9px 12px;cursor:pointer;font-size:.92rem}
+.goals input{width:18px;height:18px;accent-color:var(--sage);flex:none;margin-top:2px}
+.goals small{display:block;color:var(--muted)}
+.steps{display:flex;flex-direction:column;gap:8px}
+.steps details{background:var(--paper);border:1.5px solid var(--line);border-radius:16px;padding:10px 16px}
+.steps summary{cursor:pointer;font-weight:700;display:flex;gap:10px;align-items:baseline}
+.steps summary small{font-weight:600;color:var(--muted);margin-left:auto;text-align:right}
+.steps details p,.steps details ul{margin:8px 0 2px;font-size:.93rem}
+.steps details ul{padding-left:20px}
+</style>
+</head>
+<body>
+<style>.form input[type=text]{width:100%}.res{background:var(--paper);border:1.5px solid var(--line);border-radius:16px;padding:12px 14px;font-size:.95rem}</style>
+<div class="wrap">
+  <header>
+    <p style="margin:0 0 14px"><a class="jump" href="https://svoiludi.ch/instrumenty/">← Все полезные инструменты · Свои люди в Швейцарии</a></p>
+    <div class="eyebrow">Работа · болезнь</div>
+    <h1>Сколько недель зарплаты при болезни: бернская, цюрихская, базельская шкала</h1>
+    <p class="lead">При болезни работодатель платит полную зарплату ограниченное время: в первый год работы 3 недели, потом дольше — по шкале твоего региона. Выбери кантон работы и когда ты начала работать — увидишь, сколько недель тебе положено, примерно до какого числа, и сколько дней тебя нельзя увольнять. PDF бесплатно.</p>
+    <div class="privnote"><b>Твои данные только у тебя.</b> Выбор хранится только в твоём браузере на этом устройстве. Регистрация не нужна.</div>
+    <div data-fan="bolezn-zarplata"></div>
+  </header>
+  <div class="setup">
+    <div class="fl"><span class="lb">Язык листа<button type="button" class="qh" data-help="lang" aria-label="Подсказка: язык листа" aria-expanded="false">?</button></span><select id="lang"><option value="de">Русский + немецкий</option><option value="fr">Русский + французский</option><option value="it">Русский + итальянский</option><option value="ru">Только русский</option></select></div>
+    <div class="fl"><span class="lb">Печать</span><label class="tog"><input type="checkbox" id="bw"> Без цвета, для дешёвой печати</label></div>
+  </div>
+  <div class="exbar" id="exbar" hidden><span>Это пример. Так будет выглядеть твой расчёт.</span><button type="button" class="btn sm" id="exOff">Вернуться к моим данным</button></div>
+  <div class="work">
+    <div class="form">
+      <section class="sec"><h2>Работа</h2><div class="g2">
+        <div class="fl"><span class="lb">Кантон работы<button type="button" class="qh" data-help="kt" aria-label="Подсказка: кантон" aria-expanded="false">?</button></span><select id="kt"></select></div>
+        <div class="fl"><span class="lb">Работаю с<button type="button" class="qh" data-help="start" aria-label="Подсказка: начало работы" aria-expanded="false">?</button></span><select id="start"></select></div>
+        <div class="fl"><span class="lb">Испытательный срок<button type="button" class="qh" data-help="probe" aria-label="Подсказка: испытательный срок" aria-expanded="false">?</button></span><select id="probe"></select></div>
+        <div class="fl"><span class="lb">Зарплата брутто в месяц, CHF<button type="button" class="qh" data-help="sal" aria-label="Подсказка: зарплата" aria-expanded="false">?</button></span><input type="text" inputmode="numeric" id="sal" placeholder="по желанию"></div>
+      </div></section>
+      <section class="sec"><h2>Болезнь</h2><div class="g2">
+        <div class="fl"><span class="lb">Болею с<button type="button" class="qh" data-help="sick" aria-label="Подсказка: начало болезни" aria-expanded="false">?</button></span><select id="sick"></select></div>
+        <div class="fl"><span class="lb">Уже болела в этом году работы<button type="button" class="qh" data-help="used" aria-label="Подсказка: уже болела" aria-expanded="false">?</button></span><select id="used"></select></div>
+        <div class="fl"><span class="lb">Страховка Krankentaggeld<button type="button" class="qh" data-help="ins" aria-label="Подсказка: страховка" aria-expanded="false">?</button></span><select id="ins"><option value="no">нет</option><option value="yes">есть</option><option value="dk">не знаю</option></select></div>
+        <div class="fl" id="waitBox"><span class="lb">Дни ожидания по полису</span><select id="wait"></select></div>
+      </div></section>
+      <div class="res" id="res" role="status"></div>
+    </div>
+    <div class="sheetbox">
+      <div class="acts"><button type="button" class="btn gold" id="pdf">Скачать PDF</button><button type="button" class="btn ghost sm" id="share" hidden>Отправить</button><button type="button" class="btn ghost sm" id="exOn">Посмотреть на примере</button></div>
+      <div class="sheets" id="sheet" aria-label="Предпросмотр листа"></div>
+      <div class="status" id="status" role="status"></div>
+    </div>
+  </div>
+  <p class="imp"><b>Важно.</b> Мы не юристы. Это расчёт для ориентира, а не юридическая консультация. Шкалы — это практика судов, в твоём договоре или коллективном договоре (GAV) могут быть условия лучше. По базельской шкале источники расходятся. Спор о зарплате или увольнение при болезни — в профсоюз или бесплатную правовую справку: список в «<a href="https://svoiludi.ch/shveycariya/profsoyuzy/">Профсоюзы и консультации</a>». Подробно — в теме <a href="https://svoiludi.ch/shveycariya/bolezn-na-rabote/">«Болезнь и травма на работе»</a>.</p>
+  <div class="share-slot" data-url="https://svoiludi.ch/instrumenty/bolezn-zarplata/" data-lead="Перешли тому, кто заболел. В ссылке нет твоих данных." data-text="Привет! Тут можно посчитать, сколько недель работодатель в Швейцарии платит зарплату при болезни и когда нельзя увольнять. Бесплатно, PDF. https://svoiludi.ch/instrumenty/bolezn-zarplata/"></div>
+  <p class="credit"><span>Свои люди в Швейцарии · svoiludi.ch</span><a href="https://svoiludi.ch/privacy/">Политика конфиденциальности</a></p>
+</div>
+
+<script src="/assets/kantony.js"></script>
+<script src="/assets/lib/jspdf.umd.min.js"></script>
+<script src="/assets/shema.js"></script>
+<script>
+window.HELP = {
+  lang: '<p><b>Русский + немецкий</b> (французский, итальянский) — главные слова ещё и на языке работодателя: Lohnfortzahlung, Arztzeugnis, Sperrfrist. С этим листом удобно говорить с HR или профсоюзом.</p>',
+  kt: '<p>Кантон, где находится работодатель (место работы). От него зависит шкала: цюрихская — Цюрих, Шаффхаузен, Тургау; базельская — оба Базеля; бернская — остальные. В Граубюндене и Цуге суды иногда считают по цюрихской — уточни.</p>',
+  start: '<p>Месяц и год, когда ты начала работать у этого работодателя. Год работы считается от этой даты: второй год начинается через 12 месяцев.</p>',
+  sick: '<p>Первый день болезни. Если ещё не болеешь и просто хочешь знать свои права — оставь сегодняшний месяц.</p>',
+  used: '<p>Сколько дней ты уже болела в этом году работы (не календарном). Болезни за год складываются: если в марте болела неделю, в октябре останется на неделю меньше.</p>',
+  sal: '<p>Брутто-зарплата в месяц без 13-й. Нужна только чтобы показать примерную сумму, которую работодатель должен заплатить. Можно оставить пустым.</p>',
+  ins: '<p>Есть ли у работодателя коллективная страховка на случай болезни (Krankentaggeld). Обычно она платит 80 % зарплаты до 720 дней после дней ожидания. Смотри трудовой договор, правила фирмы или спроси HR. Если не знаешь — выбери «не знаю».</p>',
+  probe: '<p>Испытательный срок (Probezeit) — обычно 1–3 месяца в начале работы. В это время защиты от увольнения при болезни нет.</p>'
+};
+const KEY = 'boleznZarplata.v1';
+const ZH = ['ZH', 'SH', 'TG'], BA = ['BS', 'BL'], UNSURE = ['GR', 'ZG'];
+const SCALE = {be: 'Бернская шкала', zh: 'Цюрихская шкала', ba: 'Базельская шкала'};
+const SCL = {be: {de: 'Berner Skala', fr: 'échelle bernoise', it: 'scala bernese'}, zh: {de: 'Zürcher Skala', fr: 'échelle zurichoise', it: 'scala zurighese'}, ba: {de: 'Basler Skala', fr: 'échelle bâloise', it: 'scala basilese'}};
+const LOC = {
+  t: {de: 'Lohnfortzahlung bei Krankheit (Art. 324a OR)', fr: 'Maintien du salaire en cas de maladie (art. 324a CO)', it: 'Continuazione del salario in caso di malattia (art. 324a CO)'},
+  sp: {de: 'Sperrfrist (Art. 336c OR)', fr: 'délai de protection (art. 336c CO)', it: 'periodo di protezione (art. 336c CO)'},
+  kt: {de: 'Krankentaggeldversicherung', fr: 'assurance indemnité journalière maladie', it: 'indennità giornaliera di malattia'},
+  az: {de: 'Arztzeugnis', fr: 'certificat médical', it: 'certificato medico'}
+};
+/* длительность в днях и как её назвать */
+function dur(sc, n){
+  if (sc === 'zh') { const w = n === 1 ? 3 : 6 + n, m10 = w % 10, m100 = w % 100; return [w * 7, w + (m10 === 1 && m100 !== 11 ? ' неделя' : m10 >= 2 && m10 <= 4 && (m100 < 12 || m100 > 14) ? ' недели' : ' недель')]; }
+  const M = sc === 'be' ? (n === 1 ? 0 : n === 2 ? 1 : n <= 4 ? 2 : n <= 9 ? 3 : n <= 14 ? 4 : n <= 19 ? 5 : 6)
+                        : (n === 1 ? 0 : n <= 3 ? 2 : n <= 10 ? 3 : n <= 15 ? 4 : n <= 20 ? 5 : 6);
+  if (!M) return [21, '3 недели'];
+  return [Math.round(M * 30.4), M + (M === 1 ? ' месяц' : M < 5 ? ' месяца' : ' месяцев')];
+}
+const scaleOf = k => ZH.includes(k) ? 'zh' : BA.includes(k) ? 'ba' : 'be';
+const ym = d => d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0');
+let S = load(), EX = null;
+function blank(){ let k = ''; try { k = localStorage.getItem('svoiludi.kanton') || ''; } catch (e) {} const t = new Date(); const s = new Date(t.getFullYear() - 2, t.getMonth(), 1); return {lang: 'de', bw: false, kt: k || 'ZH', start: ym(s), sick: ym(t), used: 0, sal: '', ins: 'no', wait: 30, probe: 3}; }
+function load(){ try { const s = JSON.parse(localStorage.getItem(KEY)); if (s && typeof s === 'object') return Object.assign(blank(), s); } catch (e) {} return blank(); }
+function save(){ if (EX) return; try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} }
+const D = () => EX || S, bi = d => d.lang !== 'ru', L = (d, k) => bi(d) ? LOC[k][d.lang] : '';
+const fmt = n => Math.round(n).toLocaleString('de-CH').replace(/[’']/g, ' ');
+const dmy = dt => dt.toLocaleDateString('de-CH');
+function calc(d){
+  const [sy, sm] = d.start.split('-').map(Number), [ky, km] = d.sick.split('-').map(Number);
+  const months = (ky - sy) * 12 + (km - sm), n = Math.max(1, Math.floor(months / 12) + 1);
+  const sc = scaleOf(d.kt), [days, label] = dur(sc, n), left = Math.max(0, days - (+d.used || 0));
+  const first = new Date(ky, km - 1, 1), until = new Date(first.getTime() + left * 864e5);
+  const prot = months < (+d.probe || 0) ? 0 : n === 1 ? 30 : n <= 5 ? 90 : 180;
+  const sal = +String(d.sal).replace(/[^\d]/g, '') || 0, amount = sal ? sal * 12 / 365 * left : 0;
+  return {months, n, sc, days, label, left, until, prot, sal, amount, early: months < 3, inProbe: months < (+d.probe || 0)};
+}
+function sheet(d){
+  const C = SH.pal(d.bw), P = SH.page(210, 297, C), c = C.c, X = 12, W = 186, r = calc(d);
+  P.header('Зарплата при болезни', L(d, 't'), (window.KANTONY && KANTONY[d.kt] ? KANTONY[d.kt].n : d.kt));
+  let y = 27;
+  P.para('Если работа длится больше трёх месяцев, работодатель при болезни платит полную зарплату — в первый год 3 недели, потом дольше по шкале региона. Болезни за год работы складываются. Если у работодателя есть страховка Krankentaggeld, вместо этого обычно платят 80 % до 720 дней.', X, y, 8.4, false, C.ink, W, 3.9); y += 17;
+  y = P.sec('Мой случай', X, y, W);
+  [['Работаю с', d.start.split('-').reverse().join('.')], ['Болею с', d.sick.split('-').reverse().join('.')], ['Год работы', r.n + '-й'], ['Шкала', SCALE[r.sc] + (bi(d) ? ' · ' + SCL[r.sc][d.lang] : '')], ['Уже болела в этом году работы', (+d.used || 0) + ' дн.'], ['Страховка Krankentaggeld', {yes: 'есть', no: 'нет', dk: 'не знаю'}[d.ins]]].forEach((row, i) => { const cx = X + (i % 2) * 95, yy = y + Math.floor(i / 2) * 6.2; P.text(row[0], cx, yy, 8, false, C.mut); P.text(row[1], cx + 90, yy, 8.4, true, C.ink, 'right'); });
+  y += 21;
+  const main = r.early ? ['Пока работа короче трёх месяцев', 'Если договор заключён больше чем на три месяца или бессрочно, право есть с начала — уточни в договоре. Иначе — с четвёртого месяца работы.']
+    : d.ins === 'yes' ? ['Страховка: 80 % зарплаты до 720 дней', 'После дней ожидания (' + d.wait + ' дней) платит страховая. Дни ожидания обычно оплачивает работодатель. Без страховки по шкале было бы ' + r.label + ' полной зарплаты.']
+    : ['Полная зарплата: ' + r.label + (r.left < r.days ? ' (осталось ' + r.left + ' дн.)' : ''), 'Примерно до ' + dmy(r.until) + ', если болеешь непрерывно.' + (r.sal ? ' Это около ' + fmt(r.amount) + ' франков брутто.' : '') + (r.sc === 'ba' ? ' По базельской шкале источники расходятся — уточни.' : '') + (UNSURE.includes(d.kt) ? ' В этом кантоне суды иногда считают по цюрихской шкале — уточни.' : '')];
+  y += P.card(X, y, W, c.green, main[0], d.ins === 'yes' ? L(d, 'kt') : '', main[1], {ts: 11, bs: 8.4}) + 4;
+  y += P.card(X, y, W, r.prot ? c.blue : c.red, r.prot ? 'Уволить нельзя ' + r.prot + ' дней болезни' : 'Защиты от увольнения пока нет', L(d, 'sp'), r.prot ? 'Пока ты болеешь, в ' + r.n + '-й год работы работодатель не может уволить тебя ' + r.prot + ' дней. Увольнение в это время недействительно. Если уволили раньше, срок увольнения на время болезни останавливается.' : 'В испытательный срок защиты от увольнения при болезни нет. Сама уволиться ты можешь всегда.', {ts: 10, bs: 8}) + 5;
+  y = P.sec('Шкала по годам работы', X, y, W, SCALE[r.sc]);
+  const yrs = [1, 2, 3, 4, 5, 10, 15, 20, 25];
+  const cw = W / yrs.length;
+  yrs.forEach((n, i) => { const on = n === r.n || (i < yrs.length - 1 && r.n > n && r.n < yrs[i + 1]) || (i === yrs.length - 1 && r.n >= n); const x = X + i * cw;
+    P.rect(x + 0.6, y, cw - 1.2, 14, on ? c.green[0] : C.soft, on ? c.green[1] : C.line, 1);
+    P.text(n + (i === yrs.length - 1 ? '+' : '') + '-й год', x + cw / 2, y + 5, 7, true, on ? c.green[1] : C.mut, 'center'); P.text(dur(r.sc, n)[1], x + cw / 2, y + 10.5, 7.4, true, C.ink, 'center'); });
+  y += 21;
+  y = P.sec('Что сделать', X, y, W);
+  ['Сообщи работодателю в тот же день, до начала работы.', 'Справка врача (' + (bi(d) ? L(d, 'az') : 'Arztzeugnis') + ') — когда её требуют, написано в договоре; по закону можно с первого дня, обычно с третьего.', 'Попроси копию полиса Krankentaggeld: сколько процентов и сколько дней ожидания.', 'Записывай даты болезни и сохраняй справки и расчётки.', 'Платят меньше, чем положено, или пришло увольнение — обратись в профсоюз или бесплатную правовую справку по трудовому праву.'].forEach(s => { y = P.para('• ' + s, X + 2, y, 8.2, false, C.ink, W - 4, 3.9) + 1.4; });
+  y += 3;
+  y = P.sec('Мои заметки', X, y, W, 'впиши от руки');
+  ['Справку отправила', 'Ответ работодателя', 'Профсоюз / консультация'].forEach(s => { if (y > 282) return; P.text(s, X + 2, y + 1, 8, false, C.ink); P.line(X + 60, y + 2, X + W, y + 2, C.line, 0.4); y += 7; });
+  P.foot('Расчёт для ориентира, не юридическая консультация. Закон: OR ст. 324a и 336c; шкалы — судебная практика, в договоре или коллективном договоре (GAV) могут быть условия лучше. Источники: SECO, ch.ch, обзоры шкал на 08.10.2026. svoiludi.ch');
+  return P;
+}
+function build(){ return [sheet(D())]; }
+const $ = id => document.getElementById(id);
+const KN = window.KANTONY || {};
+$('kt').innerHTML = Object.keys(KN).sort((a, b) => KN[a].n.localeCompare(KN[b].n, 'ru')).map(k => `<option value="${k}">${SH.esc(KN[k].n)} — ${SCALE[scaleOf(k)].replace(' шкала', '')}</option>`).join('');
+const monthsList = () => { const out = [], t = new Date(); for (let i = 0; i < 12 * 40; i++) { const d = new Date(t.getFullYear(), t.getMonth() - i, 1); out.push(ym(d)); } return out; };
+const MN = ['январь', 'февраль', 'март', 'апрель', 'май', 'июнь', 'июль', 'август', 'сентябрь', 'октябрь', 'ноябрь', 'декабрь'];
+const mlab = v => { const [y, m] = v.split('-'); return MN[+m - 1] + ' ' + y; };
+$('start').innerHTML = monthsList().map(v => `<option value="${v}">${mlab(v)}</option>`).join('');
+$('sick').innerHTML = monthsList().slice(0, 24).map(v => `<option value="${v}">${mlab(v)}</option>`).join('');
+$('used').innerHTML = [0, 3, 5, 7, 10, 14, 21, 30, 45, 60, 90].map(v => `<option value="${v}">${v ? v + ' дней' : 'не болела'}</option>`).join('');
+$('wait').innerHTML = [0, 2, 3, 14, 30, 60, 90].map(v => `<option value="${v}">${v} дней</option>`).join('');
+$('probe').innerHTML = [0, 1, 2, 3].map(v => `<option value="${v}">${v ? v + ' мес.' : 'нет'}</option>`).join('');
+let UI, tmr;
+function note(){ const d = D(), r = calc(d); $('res').innerHTML = r.early ? '<b>Работа пока короче трёх месяцев.</b> Право на зарплату при болезни есть, если договор больше чем на три месяца или бессрочный.' : d.ins === 'yes' ? `<b>Страховка: 80 % до 720 дней</b> после ${d.wait} дней ожидания. По шкале без страховки было бы ${r.label}.` : `<b>${r.n}-й год работы: ${r.label} полной зарплаты</b> по ${SCALE[r.sc].toLowerCase().replace('шкала', 'шкале')}. Уволить нельзя ${r.prot ? r.prot + ' дней болезни' : '— защиты пока нет (испытательный срок)'}.`; }
+function fill(){ const d = D(); ['lang', 'kt', 'start', 'sick', 'ins'].forEach(k => $(k).value = d[k]); ['used', 'wait', 'probe'].forEach(k => $(k).value = String(d[k])); $('sal').value = d.sal; $('bw').checked = !!d.bw;
+  ['kt', 'start', 'sick', 'ins', 'used', 'wait', 'probe', 'sal'].forEach(k => $(k).disabled = !!EX); $('waitBox').hidden = d.ins !== 'yes';
+  $('exbar').hidden = !EX; $('exOn').hidden = !!EX; note(); if (UI) UI.render(); }
+const set = f => { f(S); if (EX) f(EX); save(); fill(); };
+$('lang').addEventListener('change', e => set(s => s.lang = e.target.value));
+$('bw').addEventListener('change', e => set(s => s.bw = e.target.checked));
+['kt', 'start', 'sick', 'ins'].forEach(k => $(k).addEventListener('change', e => { if (EX) return; S[k] = e.target.value; if (k === 'kt') { try { localStorage.setItem('svoiludi.kanton', S.kt); } catch (x) {} } save(); fill(); }));
+['used', 'wait', 'probe'].forEach(k => $(k).addEventListener('change', e => { if (EX) return; S[k] = +e.target.value; save(); fill(); }));
+$('sal').addEventListener('input', e => { if (EX) return; S.sal = e.target.value.replace(/[^\d]/g, ''); save(); note(); clearTimeout(tmr); tmr = setTimeout(() => UI && UI.render(), 400); });
+const EXD = () => { const t = new Date(); return {lang: 'de', bw: S.bw, kt: 'BE', start: ym(new Date(t.getFullYear() - 3, 2, 1)), sick: ym(t), used: 7, sal: '5200', ins: 'no', wait: 30, probe: 3}; };
+$('exOn').addEventListener('click', () => { EX = EXD(); fill(); window.scrollTo({top: $('exbar').offsetTop - 12, behavior: 'smooth'}); });
+$('exOff').addEventListener('click', () => { EX = null; fill(); });
+if (/[?&]example\b/.test(location.search)) EX = EXD();
+UI = SH.mount({build, title: 'Зарплата при болезни', name: () => 'Lohnfortzahlung-Krankheit'});
+fill();
+
+</script>
+<script src="/assets/help.js"></script>
+<script src="/assets/backup.js"></script>
+<script src="/assets/pdffan.js" defer></script>
+<script src="/assets/share.js" defer></script>
+<script src="/assets/samesite.js"></script>
+</body>
+</html>
