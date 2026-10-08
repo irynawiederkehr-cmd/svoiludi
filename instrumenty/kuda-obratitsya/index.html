@@ -207,9 +207,9 @@ function p0(d){
   const T = [['mv', 'Союз арендаторов', c.mustard], ['adv', 'Справочная адвокатов', c.sage], ['arb', 'Бесплатно по трудовому праву', c.blue], ['miet', 'Бесплатно по аренде', c.green], ['x', 'Ещё', c.brown]];
   const items = T.filter(t => D0[t[0]]).map(t => { const v = D0[t[0]]; return t[0] === 'mv' ? [t[2], t[1] + ' · ' + v[0], [v[1] + '.', v[2], '→ ' + host(v[3])]] : [t[2], t[1], [v[0], '→ ' + host(v[1])]]; });
   items.push([c.red, 'Профсоюз — в любом кантоне', ['Вступи в профсоюз своей отрасли: Unia, Syna, VPOD, syndicom, Hotel & Gastro Union, KFMV' + (k === 'TI' ? ', OCST' : k === 'GE' ? ', SIT' : '') + '. Взносы и сроки — на следующих листах.']]);
-  const X = 12, cw = (273 - 10) / 2, o = {bs: 7.8, ts: 9.6}; let y = 26;
-  for (let i = 0; i < items.length; i += 2) {
-    const row = items.slice(i, i + 2), h = Math.max(...row.map(r => P.card(0, 0, cw, r[0], r[1], '', r[2], Object.assign({dry: true}, o))));
+  const X = 12, cw = 273, o = {bs: 7.8, ts: 9.6}; let y = 26;
+  for (let i = 0; i < items.length; i += 1) {
+    const row = items.slice(i, i + 1), h = Math.max(...row.map(r => P.card(0, 0, cw, r[0], r[1], '', r[2], Object.assign({dry: true}, o))));
     if (y + h > P.h - 14) break;
     row.forEach((r, j) => P.card(X + j * (cw + 10), y, cw, r[0], r[1], '', r[2], Object.assign({minH: h}, o)));
     y += h + 5;
@@ -241,15 +241,15 @@ function p1(d){
 }
 /* Что это за организации — пояснение для тех, кто здесь впервые */
 function p2(d){
-  const C = SH.pal(d.bw), c = C.c, out = []; let P, y, col = 0; const X = 12, cw = (273 - 8) / 2, FS = 7.2, LH = 3.2;
+  const C = SH.pal(d.bw), c = C.c, out = []; let P, y, col = 0; const X = 12, cw = 273, FS = 7.8, LH = 3.5;
   const np = () => { P = SH.page(297, 210, C); out.push(P); P.header('Что это за организации' + (out.length > 1 ? ' (продолжение)' : ''), L(d, 't2'), ''); y = 27; col = 0; };
   np(); const ys = [27, 27];
   Object.keys(PM.info).filter(a => d.areas.includes(a)).forEach(a => {
     const [h, ps] = PM.info[a], cc = c[COL[a] || 'sage'];
     const lines = []; ps.forEach((p, i) => { SH.wrap(p, false, FS, cw - 6).forEach(l => lines.push(l)); if (i < ps.length - 1) lines.push(''); });
     const hh = 9 + lines.length * LH + 3;
-    let k = ys[0] <= ys[1] ? 0 : 1; if (ys[k] + hh > 198) { k = 1 - k; if (ys[k] + hh > 198) { np(); ys[0] = ys[1] = 27; k = 0; } }
-    const x = X + k * (cw + 8), yy = ys[k];
+    const k = 0; if (ys[0] + hh > 198) { np(); ys[0] = 27; }
+    const x = X, yy = ys[0];
     P.rect(x, yy, cw, hh, cc[0], cc[1], 1.6); P.text(h, x + 3, yy + 5.6, 8.6, true, cc[1]);
     lines.forEach((l, i) => { if (l) P.text(l, x + 3, yy + 10.4 + i * LH, FS, false, C.ink); });
     ys[k] += hh + 4;
