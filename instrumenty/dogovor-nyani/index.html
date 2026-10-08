@@ -123,7 +123,7 @@ select:focus-visible,input:focus-visible,button:focus-visible,textarea:focus-vis
       <div class="status" id="status" role="status"></div>
     </div>
   </div>
-  <p class="imp"><b>Важно.</b> Это образец для примера и личного использования, а не официальный документ и не юридическая консультация. Цифры и ставки ориентировочные (2026) — уточняй и перепроверяй их сама: в кантоне, в своей кассе AHV и в типовом договоре кантона для домашнего персонала (Normalarbeitsvertrag). Автор не несёт ответственности за достоверность. Договор подписывают обе стороны, каждая хранит свой экземпляр. Что ещё оформляет семья — в теме <a href="https://svoiludi.ch/shveycariya/domashniy-personal/">«Домашний персонал»</a>, а зарплату с взносами посчитает «Расчёт зарплаты».</p>
+  <p class="imp"><b>Важно.</b> Мы не юристы. Это образец для примера и личного использования, а не официальный документ и не юридическая консультация, поэтому на каждой странице стоит штамп «Образец». Перед подписанием покажи договор юристу, в профсоюзе или в консультации для работодателей домашнего персонала — список в «<a href="https://svoiludi.ch/shveycariya/profsoyuzy/">Профсоюзы и консультации</a>». Цифры и ставки ориентировочные (2026) — уточняй и перепроверяй их сама: в кантоне, в своей кассе AHV и в типовом договоре кантона для домашнего персонала (Normalarbeitsvertrag). Автор не несёт ответственности за достоверность. Договор подписывают обе стороны, каждая хранит свой экземпляр. Что ещё оформляет семья — в теме <a href="https://svoiludi.ch/shveycariya/domashniy-personal/">«Домашний персонал»</a>, а зарплату с взносами посчитает «Расчёт зарплаты».</p>
   <div class="share-slot" data-url="https://svoiludi.ch/instrumenty/dogovor-nyani/" data-lead="Перешли семье или няне. В ссылке нет твоих данных." data-text="Привет! Тут можно бесплатно сделать договор с няней по швейцарским правилам: заполняешь на русском, получаешь на немецком или французском с русским переводом. https://svoiludi.ch/instrumenty/dogovor-nyani/"></div>
   <p class="credit"><span>Свои люди в Швейцарии · svoiludi.ch</span><a href="https://svoiludi.ch/privacy/">Политика конфиденциальности</a></p>
 </div>
@@ -251,7 +251,9 @@ const HEAD = {de: ['Arbeitsvertrag', 'für die Kinderbetreuung im Privathaushalt
 function build(){
   const d = D(), L = d.lang, H = HEAD[L], R = d.ru ? HEAD.ru : null, C = SH.pal(!!d.bw), ink = d.bw ? '#000000' : '#2F2924', mut = d.bw ? '#444444' : '#7A6E62', acc = d.bw ? '#000000' : '#4F5E3E';
   const pages = []; let P, y; const X = 20, W = 170, BOT = 278;
-  const np = () => { P = SH.page(210, 297, C); pages.push(P); y = 22; };
+  /* штамп «ОБРАЗЕЦ» на каждой странице: мы не юристы (просьба Ирины 08.10.2026) */
+  const STL = [[{de: 'MUSTER', fr: 'MODÈLE', it: 'MODELLO'}[L] + (R ? ' · ОБРАЗЕЦ' : ''), 13, true], [{de: 'Vorlage, keine Rechtsberatung', fr: 'Modèle, pas un conseil juridique', it: 'Modello, non una consulenza legale'}[L], 6, false]].concat(R ? [['Мы не юристы: проверь у юриста или в профсоюзе', 6, false]] : []);
+  const np = () => { const first = !pages.length; P = SH.page(210, 297, C); P.stamp = {cx: 162, cy: first ? 23 : 14, a: 7, color: d.bw ? '#000000' : '#B03A2E', lines: STL}; pages.push(P); y = first ? 22 : 33; };
   const need = h => { if (y + h > BOT) np(); };
   const para = (s, size, b, col, lh) => { const lines = SH.wrap(s, b, size, W); lines.forEach(l => { need(lh); P.text(l, X, y, size, b, col); y += lh; }); };
   np();
