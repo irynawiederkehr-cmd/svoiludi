@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<link rel="icon" href="/fav/favicon.svg" type="image/svg+xml"><link rel="icon" href="/fav/icon-32.png" sizes="32x32"><link rel="apple-touch-icon" href="/fav/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/fonts.css">
+<meta name="description" content="Бесплатный калькулятор ипотеки для Швейцарии (Tragbarkeitsrechner): сколько своих денег нужно (20 %, из них 10 % не из пенсионной кассы), пройдёшь ли проверку банка (5 % процентов, 1 % содержания, погашение — не больше трети дохода), максимальная цена жилья, расходы покупки с налогом на переход собственности твоего кантона и настоящий расход в месяц. Лист PDF на русском и немецком, французском или итальянском — с ним удобно идти в банк.">
+<link rel="canonical" href="https://svoiludi.ch/instrumenty/ipoteka-raschet/">
+<meta property="og:type" content="website"><meta property="og:locale" content="ru_RU"><meta property="og:site_name" content="Свои люди в Швейцарии">
+<meta property="og:title" content="Сколько стоит жильё, которое я потяну: расчёт ипотеки · бесплатно"><meta property="og:description" content="Свои деньги, проверка банка, максимальная цена и расход в месяц — на одном листе PDF. Данные только у тебя.">
+<meta property="og:url" content="https://svoiludi.ch/instrumenty/ipoteka-raschet/"><meta property="og:image" content="https://svoiludi.ch/instrumenty/ipoteka-raschet/og-image.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="robots" content="noindex, nofollow">
+<title>Сколько стоит жильё, которое я потяну: расчёт ипотеки</title>
+<style>
+/* Сколько стоит жильё, которое я потяну: расчёт ипотеки (08.10.2026): анкета слева, живые листы справа, движок assets/shema.js. */
+:root{
+  --bg:#F4EDE3; --paper:#FFFCF8; --ink:#2F2924; --muted:#7A6E62; --line:#E5D9C9; --soft:#EFE5D7;
+  --brown:#6E4F3C; --mustard:#B98324; --mustard-soft:#F3E3C2; --sage:#4F5E3E; --sage-soft:#E3E8D6; --red:#A0523D;
+  --display:"Forum","Georgia",serif; --sans:"Manrope","Segoe UI",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#221D19; --paper:#2C2621; --ink:#F1E9DF; --muted:#B4A796; --line:#3E362F; --soft:#352E28;
+  --brown:#E1C2A6; --mustard:#E2B45C; --mustard-soft:#3D321F; --sage:#B4BF97; --sage-soft:#2E3226; --red:#E39A85; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#221D19; --paper:#2C2621; --ink:#F1E9DF; --muted:#B4A796; --line:#3E362F; --soft:#352E28;
+  --brown:#E1C2A6; --mustard:#E2B45C; --mustard-soft:#3D321F; --sage:#B4BF97; --sage-soft:#2E3226; --red:#E39A85; color-scheme:dark}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--ink);font:15px/1.55 var(--sans);margin:0}
+.wrap{max-width:1280px;margin:0 auto;padding-inline:16px;padding-block:28px 48px;display:flex;flex-direction:column;gap:24px}
+.eyebrow{font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+h1{font-family:var(--display);font-weight:400;font-size:clamp(2.4rem,6vw,3.6rem);line-height:1;margin:4px 0 10px;text-wrap:balance}
+h2{font-family:var(--display);font-weight:400;font-size:1.55rem;margin:0;text-wrap:balance}
+h3{font-family:var(--display);font-weight:400;font-size:1.22rem;line-height:1.2;margin:0}
+.lead{max-width:66ch;color:var(--muted);margin:0}
+.jump{font-weight:700;color:var(--brown);text-underline-offset:4px}
+.privnote{margin-top:14px;background:var(--sage-soft);border-radius:16px;padding:12px 16px;font-size:.9rem;max-width:90ch}
+.status{font-size:.86rem;color:var(--muted);min-height:1.3em}
+.btn{font:inherit;font-weight:700;font-size:.9rem;border:0;border-radius:999px;padding:10px 18px;cursor:pointer;color:#fff;text-decoration:none;display:inline-flex;align-items:center;gap:6px;background:#6E4F3C;box-shadow:0 8px 18px -8px rgba(110,79,60,.6)}
+.btn.gold{background:#B98324;box-shadow:0 8px 18px -8px rgba(185,131,36,.7)}
+.btn.free{background:#4F5E3E;box-shadow:0 8px 18px -8px rgba(79,94,62,.6)}
+.btn.ghost{background:transparent;color:var(--brown);border:1.5px solid var(--line);box-shadow:none}
+.btn.sm{font-size:.82rem;padding:7px 13px}
+.btn[disabled]{background:var(--soft);color:var(--muted);box-shadow:none;cursor:wait}
+select,input[type=text],input[type=tel],input[type=number],input[type=date],textarea{font:inherit;font-size:.95rem;color:var(--ink);background:var(--paper);border:1.5px solid var(--line);border-radius:12px;padding:9px 12px;width:100%;min-width:0}
+select:focus-visible,input:focus-visible,button:focus-visible,textarea:focus-visible,a:focus-visible{outline:2px solid var(--mustard);outline-offset:2px}
+::placeholder{color:color-mix(in srgb,var(--muted) 70%,transparent)}
+.setup{background:var(--paper);border:1.5px solid var(--line);border-radius:22px;padding:16px 18px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px 18px;align-items:start}
+@media (max-width:1000px){.setup{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.setup{grid-template-columns:1fr}}
+.fl{display:flex;flex-direction:column;gap:6px;min-width:0}
+.fl>.lb{font-size:.8rem;font-weight:700;color:var(--muted);display:flex;align-items:center}
+.seg{display:flex;flex-wrap:wrap;gap:6px}
+.seg button{font:inherit;font-size:.84rem;font-weight:700;border:1.5px solid var(--line);background:var(--paper);color:var(--ink);border-radius:999px;padding:6px 12px;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--sage);border-color:var(--sage);color:#fff}
+.acts{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.exbar{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;background:var(--mustard-soft);border-radius:16px;padding:10px 14px;font-size:.9rem;font-weight:600}
+.work{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:22px;align-items:start}
+@media (max-width:1040px){.work{grid-template-columns:1fr}}
+.form{display:flex;flex-direction:column;gap:14px;min-width:0}
+.sec{background:var(--paper);border:1.5px solid var(--line);border-radius:20px;padding:16px 18px;display:flex;flex-direction:column;gap:12px}
+.sec>h2{font-size:1.3rem;display:flex;align-items:center}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:560px){.g2{grid-template-columns:1fr}}
+.hint{font-size:.84rem;color:var(--muted);margin:0}
+.chk{display:flex;flex-direction:column;gap:8px}
+.chk label{display:flex;gap:10px;align-items:baseline;font-size:.92rem;cursor:pointer}
+.chk input{flex:none;width:18px;height:18px;accent-color:var(--sage);transform:translateY(3px)}
+.chk b{white-space:nowrap}
+.chk small{color:var(--muted)}
+.tog{display:flex;gap:10px;align-items:center;font-size:.92rem;cursor:pointer}
+.tog input{width:18px;height:18px;accent-color:var(--sage)}
+.sheetbox{position:sticky;top:12px;display:flex;flex-direction:column;gap:10px}
+@media (max-width:1040px){.sheetbox{position:static}}
+.sheet{background:#fff;border-radius:6px;box-shadow:0 18px 40px -22px rgba(47,41,36,.45);overflow:hidden}
+.sheet svg{display:block;width:100%;height:auto}
+.imp{background:var(--paper);border:1.5px dashed color-mix(in srgb,var(--sage) 55%,transparent);border-radius:16px;padding:14px 18px;font-size:.88rem;max-width:90ch;margin:0}
+.imp b{color:var(--sage)}
+.guide{display:flex;flex-direction:column;gap:14px;max-width:90ch}
+.guide ul{margin:0;padding-left:20px}
+.guide li{margin:4px 0}
+.credit{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:.8rem;color:var(--muted)}
+.credit a{color:var(--muted)}
+.qh{font:700 .72rem/1 var(--sans);width:20px;height:20px;border-radius:50%;border:1.5px solid var(--line);background:var(--paper);color:var(--brown);cursor:pointer;margin-left:6px;padding:0;flex:none}
+.sheets{display:flex;flex-direction:column;gap:14px}
+.goals{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+@media (max-width:560px){.goals{grid-template-columns:1fr}}
+.goals label{display:flex;gap:10px;align-items:flex-start;background:var(--bg);border:1.5px solid var(--line);border-radius:14px;padding:9px 12px;cursor:pointer;font-size:.92rem}
+.goals input{width:18px;height:18px;accent-color:var(--sage);flex:none;margin-top:2px}
+.goals small{display:block;color:var(--muted)}
+.steps{display:flex;flex-direction:column;gap:8px}
+.steps details{background:var(--paper);border:1.5px solid var(--line);border-radius:16px;padding:10px 16px}
+.steps summary{cursor:pointer;font-weight:700;display:flex;gap:10px;align-items:baseline}
+.steps summary small{font-weight:600;color:var(--muted);margin-left:auto;text-align:right}
+.steps details p,.steps details ul{margin:8px 0 2px;font-size:.93rem}
+.steps details ul{padding-left:20px}
+</style>
+</head>
+<body>
+<style>#fields input,.form input[type=text]{width:100%}.res{background:var(--paper);border:1.5px solid var(--line);border-radius:16px;padding:12px 14px;font-size:.95rem}</style>
+<div class="wrap">
+  <header>
+    <p style="margin:0 0 14px"><a class="jump" href="https://svoiludi.ch/instrumenty/">← Все полезные инструменты · Свои люди в Швейцарии</a></p>
+    <div class="eyebrow">Покупка жилья</div>
+    <h1>Сколько стоит жильё, которое я потяну: расчёт ипотеки</h1>
+    <p class="lead">Банк в Швейцарии даёт ипотеку, только если проходят три проверки: хватает своих денег, 10 % из них не из пенсионной кассы и расходы по расчёту банка — не больше трети дохода. Впиши свои цифры — увидишь, проходит ли квартира, какую самую высокую цену ты потянешь и сколько жильё будет стоить тебе на самом деле в месяц. PDF бесплатно.</p>
+    <div class="privnote"><b>Твои данные только у тебя.</b> Цифры хранятся только в твоём браузере на этом устройстве. Регистрация не нужна.</div>
+    <div data-fan="ipoteka-raschet"></div>
+  </header>
+  <div class="setup">
+    <div class="fl"><span class="lb">Язык листа<button type="button" class="qh" data-help="lang" aria-label="Подсказка: язык листа" aria-expanded="false">?</button></span><select id="lang"><option value="de">Русский + немецкий</option><option value="fr">Русский + французский</option><option value="it">Русский + итальянский</option><option value="ru">Только русский</option></select></div>
+    <div class="fl"><span class="lb">Печать</span><label class="tog"><input type="checkbox" id="bw"> Без цвета, для дешёвой печати</label></div>
+  </div>
+  <div class="exbar" id="exbar" hidden><span>Это пример. Так будет выглядеть твой расчёт.</span><button type="button" class="btn sm" id="exOff">Вернуться к моим данным</button></div>
+  <div class="work">
+    <div class="form">
+      <section class="sec"><h2>Жильё</h2>
+        <div class="g2">
+          <div class="fl"><span class="lb">Цена, CHF<button type="button" class="qh" data-help="price" aria-label="Подсказка: цена" aria-expanded="false">?</button></span><input type="text" inputmode="numeric" id="price"></div>
+          <div class="fl"><span class="lb">Кантон<button type="button" class="qh" data-help="kt" aria-label="Подсказка: кантон" aria-expanded="false">?</button></span><select id="kt"></select></div>
+        </div></section>
+      <section class="sec"><h2>Доход и возраст</h2>
+        <div class="g2">
+          <div class="fl"><span class="lb">Брутто-доход в год, CHF<button type="button" class="qh" data-help="inc" aria-label="Подсказка: доход" aria-expanded="false">?</button></span><input type="text" inputmode="numeric" id="inc"></div>
+          <div class="fl"><span class="lb">Возраст<button type="button" class="qh" data-help="age" aria-label="Подсказка: возраст" aria-expanded="false">?</button></span><select id="age"></select></div>
+          <div class="fl"><span class="lb">Ставка банка сейчас<button type="button" class="qh" data-help="rate" aria-label="Подсказка: ставка" aria-expanded="false">?</button></span><select id="rate"></select></div>
+        </div></section>
+      <section class="sec"><h2>Свои деньги</h2>
+        <div class="g2">
+          <div class="fl"><span class="lb">Сбережения и подарки, CHF<button type="button" class="qh" data-help="sav" aria-label="Подсказка: сбережения" aria-expanded="false">?</button></span><input type="text" inputmode="numeric" id="sav"></div>
+          <div class="fl"><span class="lb">3a, CHF<button type="button" class="qh" data-help="s3a" aria-label="Подсказка: 3a" aria-expanded="false">?</button></span><input type="text" inputmode="numeric" id="s3a"></div>
+          <div class="fl"><span class="lb">Из пенсионной кассы, CHF<button type="button" class="qh" data-help="pk" aria-label="Подсказка: пенсионная касса" aria-expanded="false">?</button></span><input type="text" inputmode="numeric" id="pk"></div>
+        </div></section>
+      <div class="res" id="res" role="status"></div>
+    </div>
+    <div class="sheetbox">
+      <div class="acts"><button type="button" class="btn gold" id="pdf">Скачать PDF</button><button type="button" class="btn ghost sm" id="share" hidden>Отправить</button><button type="button" class="btn ghost sm" id="exOn">Посмотреть на примере</button></div>
+      <div class="sheets" id="sheet" aria-label="Предпросмотр листа"></div>
+      <div class="status" id="status" role="status"></div>
+    </div>
+  </div>
+  <p class="imp"><b>Важно.</b> Это расчёт для ориентира, а не предложение банка и не финансовая консультация. Правила — по надзору FINMA (2025) и ch.ch, у каждого банка могут быть свои детали. Налог на переход собственности ориентировочный, кто его платит — пишут в договоре. Купить жильё без разрешения можно не со всеми пермитами — подробно в теме <a href="https://svoiludi.ch/shveycariya/pokupka-zhilya/">«Покупка жилья»</a>. Автор не несёт ответственности за достоверность.</p>
+  <div class="share-slot" data-url="https://svoiludi.ch/instrumenty/ipoteka-raschet/" data-lead="Перешли тем, кто думает о покупке жилья. В ссылке нет твоих данных." data-text="Привет! Тут можно посчитать, какую квартиру в Швейцарии ты потянешь по правилам банка: свои деньги, треть дохода, максимальная цена. Бесплатно, PDF. https://svoiludi.ch/instrumenty/ipoteka-raschet/"></div>
+  <p class="credit"><span>Свои люди в Швейцарии · svoiludi.ch</span><a href="https://svoiludi.ch/privacy/">Политика конфиденциальности</a></p>
+</div>
+
+<script src="/assets/kantony.js"></script>
+<script src="/assets/lib/jspdf.umd.min.js"></script>
+<script src="/assets/shema.js"></script>
+<script>
+window.HELP = {
+  lang: '<p><b>Русский + немецкий</b> (французский, итальянский) — главные слова ещё и на языке, как их пишут банк и нотариус: Eigenkapital, Tragbarkeit, Amortisation. С этим листом удобно идти в банк.</p>',
+  inc: '<p>Брутто-доход за год всех, кто будет подписывать ипотеку: зарплата до вычетов, с 13-й зарплатой. Бонусы банк учитывает не всегда. Доход второго человека банк обычно считает, только если он тоже подписывает договор.</p>',
+  sav: '<p>Сбережения, подарок или наследство, ценные бумаги. Это «твёрдые» деньги: минимум 10 % цены должны быть именно такими, не из пенсионной кассы.</p>',
+  s3a: '<p>Деньги на счёте 3a можно снять на покупку своего жилья. Банки считают их «твёрдыми» деньгами, как сбережения. Со снятия платится налог на выплату капитала.</p>',
+  pk: '<p>Сколько ты хочешь взять из пенсионной кассы (вторая опора, Vorbezug). Минимум 20 000 франков, только на жильё, где живёшь сама, после 50 лет — меньше. Сколько можно, написано в справке кассы (Vorsorgeausweis).</p>',
+  age: '<p>Возраст старшего из тех, кто подписывает. Вторую часть ипотеки нужно погасить за 15 лет, но не позже пенсии — поэтому после 50 лет погашение в год выше.</p>',
+  price: '<p>Цена квартиры или дома из объявления. Банк считает от меньшего из цены и своей оценки.</p>',
+  kt: '<p>Кантон, где жильё. От него зависит налог на переход собственности (Handänderungssteuer): в Цюрихе, Цуге, Швице и ещё пяти кантонах его нет, в Женеве, Базеле и Невшателе — около 3 %.</p>',
+  rate: '<p>Ставка, которую банк предлагает сейчас. Осенью 2026 года ориентировочно 1–2 % в зависимости от срока. Банк проверяет посильность всё равно по 5 %, а эта ставка нужна, чтобы увидеть твой настоящий расход в месяц.</p>'
+};
+const KEY = 'ipotekaRaschet.v1';
+/* налог на переход собственности, % цены, ориентировочно (SSK 2022, Comparis, Walde 2025). Кто платит — по договору. */
+const HT = {AG: 0, GL: 0, SH: 0, SZ: 0, TI: 0, UR: 0, ZG: 0, ZH: 0, AI: 1, AR: 2, BE: 1.8, BL: 2.5, BS: 3, FR: 1.5, GE: 3, GR: 2, JU: 2.1, LU: 1.5, NE: 3.3, NW: 1, OW: 1.5, SG: 1, SO: 2.2, TG: 1, VD: 2.2, VS: 1.5};
+const FEES = 1.0;          // нотариус, Grundbuch, Schuldbrief — около 1 %, консервативно
+const R_CALC = 5, MAINT = 1, MAXQ = 1 / 3, OWN = 0.2, HARD = 0.1;
+const LOC = {
+  t: {de: 'Tragbarkeitsrechnung', fr: 'Calcul de la capacité financière', it: 'Calcolo della sostenibilità'},
+  own: {de: 'Eigenkapital', fr: 'fonds propres', it: 'capitale proprio'},
+  hard: {de: 'harte Eigenmittel', fr: 'fonds propres durs', it: 'mezzi propri effettivi'},
+  tr: {de: 'Tragbarkeit', fr: 'capacité financière', it: 'sostenibilità'},
+  hyp: {de: 'Hypothek', fr: 'hypothèque', it: 'ipoteca'},
+  zins: {de: 'kalkulatorischer Zins 5 %', fr: 'taux théorique 5 %', it: 'tasso teorico 5 %'},
+  nk: {de: 'Unterhalt und Nebenkosten 1 %', fr: 'entretien et frais 1 %', it: 'manutenzione e spese 1 %'},
+  am: {de: 'Amortisation', fr: 'amortissement', it: 'ammortamento'},
+  kn: {de: 'Kaufnebenkosten', fr: 'frais d’achat', it: 'spese d’acquisto'},
+  max: {de: 'maximaler Kaufpreis', fr: 'prix d’achat maximal', it: 'prezzo d’acquisto massimo'}
+};
+let S = load(), EX = null;
+function blank(){ let k = ''; try { k = localStorage.getItem('svoiludi.kanton') || ''; } catch (e) {} return {lang: 'de', bw: false, kt: k || 'ZH', inc: 140000, sav: 120000, s3a: 40000, pk: 50000, age: 40, price: 900000, rate: 1.5}; }
+function load(){ try { const s = JSON.parse(localStorage.getItem(KEY)); if (s && typeof s === 'object') return Object.assign(blank(), s); } catch (e) {} return blank(); }
+function save(){ if (EX) return; try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} }
+const D = () => EX || S, bi = d => d.lang !== 'ru', L = (d, k) => bi(d) ? LOC[k][d.lang] : '';
+const fmt = n => Math.round(n).toLocaleString('de-CH').replace(/[’']/g, ' ');
+const pct = n => (Math.round(n * 10) / 10).toString().replace('.', ',') + ' %';
+
+/* расчёт для цены P */
+function calc(d, P){
+  const hardAvail = (+d.sav || 0) + (+d.s3a || 0), pk = +d.pk || 0;
+  const costs = P * ((HT[d.kt] || 0) + FEES) / 100;         // из своих, сверх цены
+  const hardForPrice = Math.max(0, hardAvail - costs);       // сначала расходы покупки, остальное — в цену
+  const own = Math.min(P, hardForPrice + pk);
+  const loan = Math.max(0, P - own);
+  const years = Math.max(1, Math.min(15, 65 - (+d.age || 40)));
+  const amort = Math.max(0, loan - P * 2 / 3) / years;
+  const yCalc = loan * R_CALC / 100 + P * MAINT / 100 + amort;
+  const yReal = loan * (+d.rate || 0) / 100 + P * MAINT / 100 + amort;
+  const inc = +d.inc || 0;
+  return {P, costs, hardAvail, hardForPrice, pk, own, loan, amort, years, yCalc, yReal, q: inc ? yCalc / inc : 9,
+    okOwn: own >= OWN * P - 1, okHard: hardForPrice >= HARD * P - 1, okQ: inc ? yCalc / inc <= MAXQ + 1e-9 : false, okCost: hardAvail >= costs};
+}
+const ok = r => r.okOwn && r.okHard && r.okQ && r.okCost;
+function maxPrice(d){ let lo = 0, hi = 5e6; if (!ok(calc(d, 50000))) return 0; for (let i = 0; i < 60; i++) { const m = (lo + hi) / 2; if (ok(calc(d, m))) lo = m; else hi = m; } return Math.floor(lo / 1000) * 1000; }
+/* что ограничивает максимум */
+function limiter(d, P){ const r = calc(d, P + 2000); return !r.okQ ? 'доход' : !r.okHard ? 'твёрдые свои деньги' : !r.okOwn ? 'свои деньги' : 'расходы покупки'; }
+
+/* ЛИСТ */
+function sheet(d){
+  const C = SH.pal(d.bw), P = SH.page(210, 297, C), c = C.c, X = 12, W = 186, r = calc(d, +d.price || 0), mp = maxPrice(d);
+  P.header('Мой расчёт ипотеки', L(d, 't'), (window.KANTONY && KANTONY[d.kt] ? KANTONY[d.kt].n : d.kt));
+  let y = 27;
+  P.para('Так банк проверяет, потянешь ли ты жильё: проценты считает по 5 % (а не по нынешней ставке), содержание — 1 % цены в год, плюс погашение. Всё вместе — не больше трети брутто-дохода.', X, y, 8.4, false, C.ink, W, 3.9); y += 13;
+  // исходные данные
+  y = P.sec('Мои данные', X, y, W);
+  const rows = [['Цена жилья', fmt(r.P) + ' CHF'], ['Брутто-доход в год', fmt(+d.inc) + ' CHF'], ['Сбережения и подарки', fmt(+d.sav) + ' CHF'], ['3a', fmt(+d.s3a) + ' CHF'], ['Из пенсионной кассы', fmt(+d.pk) + ' CHF'], ['Возраст', String(d.age) + ' лет'], ['Ставка банка сейчас', pct(+d.rate)]];
+  rows.forEach((row, i) => { const cx = X + (i % 2) * 95, yy = y + Math.floor(i / 2) * 6.2; P.text(row[0], cx, yy, 8, false, C.mut); P.text(row[1], cx + 88, yy, 8.6, true, C.ink, 'right'); });
+  y += Math.ceil(rows.length / 2) * 6.2 + 4;
+  // три проверки
+  y = P.sec('Три проверки банка', X, y, W);
+  const chk = (good, title, sub, body) => { const h = P.card(X, y, W, good ? c.green : c.red, (good ? 'Проходит. ' : 'Не проходит. ') + title, sub, body, {ts: 9.4, bs: 7.8}); y += h + 3; };
+  chk(r.okOwn && r.okCost, 'Свои деньги: ' + fmt(r.own) + ' из нужных ' + fmt(OWN * r.P) + ' (20 %)', L(d, 'own'), 'Плюс расходы покупки около ' + fmt(r.costs) + ' франков (налог на переход собственности ' + pct(HT[d.kt] || 0) + ' и около ' + pct(FEES) + ' на нотариуса и Grundbuch) — их платишь из своих сверх 20 %.' + (r.okCost ? '' : ' Твоих сбережений и 3a на эти расходы не хватает.'));
+  chk(r.okHard, 'Не из пенсионной кассы: ' + fmt(r.hardForPrice) + ' из нужных ' + fmt(HARD * r.P) + ' (10 %)', L(d, 'hard'), 'Сбережения, подарки и 3a после оплаты расходов покупки.');
+  chk(r.okQ, 'Посильность: ' + pct(r.q * 100) + ' дохода (можно до 33 %)', L(d, 'tr'), 'Расчётные расходы банка ' + fmt(r.yCalc) + ' франков в год при доходе ' + fmt(+d.inc) + '.');
+  // полоса расходов
+  y = P.sec('Расчётные расходы в год — так считает банк', X, y, W);
+  const inc = +d.inc || 1, sc = W / Math.max(inc / 2, r.yCalc * 1.1), parts = [[r.loan * R_CALC / 100, c.blue, 'Проценты 5 % от ипотеки ' + fmt(r.loan), L(d, 'zins')], [r.P * MAINT / 100, c.mustard, 'Содержание 1 %', L(d, 'nk')], [r.amort, c.pink, 'Погашение за ' + r.years + ' лет', L(d, 'am')]];
+  let x = X; parts.forEach(p => { const w = p[0] * sc; if (w > 0.5) P.rect(x, y, w, 9, p[1][0], p[1][1], 1); x += w; });
+  const lim = X + inc * MAXQ * sc; P.line(lim, y - 2, lim, y + 11, c.red[1], 0.6); P.text('треть дохода ' + fmt(inc * MAXQ), lim, y + 14, 6.6, true, c.red[1], 'center');
+  y += 19;
+  parts.forEach(p => { P.rect(X, y - 2.6, 3, 3, p[1][0], p[1][1], 0.5); P.text(p[2] + ': ' + fmt(p[0]) + ' CHF', X + 5, y, 7.8, false, C.ink); if (p[3]) P.text(p[3], X + 120, y, 6.6, false, C.mut); y += 4.6; });
+  y += 3;
+  // реальные расходы
+  y += P.card(X, y, W, c.sage, 'По-настоящему в месяц: около ' + fmt(r.yReal / 12) + ' франков', '', 'При ставке ' + pct(+d.rate) + ': проценты ' + fmt(r.loan * (+d.rate || 0) / 100 / 12) + ', содержание ' + fmt(r.P * MAINT / 100 / 12) + ', погашение ' + fmt(r.amort / 12) + '. Ипотека ' + fmt(r.loan) + ' франков (' + pct(r.loan / (r.P || 1) * 100) + ' цены). Если ставка вырастет, расходы вырастут — банк поэтому и проверяет по 5 %.', {ts: 9.6, bs: 7.8}) + 3;
+  y += P.card(X, y, W, c.brown, 'Максимальная цена для тебя: около ' + fmt(mp) + ' франков', L(d, 'max'), mp ? 'При твоём доходе и своих деньгах. Что ограничивает: ' + limiter(d, mp) + '.' : 'При этих цифрах банк, скорее всего, не даст ипотеку: не хватает своих денег или дохода.', {ts: 9.6, bs: 7.8}) + 4;
+  y = P.sec('Что спросить в банке', X, y, W, 'впиши от руки');
+  ['Какую стоимость жилья банк признаёт (Belehnungswert)?', 'Какие ставки на 5 и 10 лет и SARON?', 'Учтёт ли банк бонус и доход второго человека?', 'Нужно ли погашать через 3a (косвенно)?'].forEach(s => { if (y > 280) return; P.text(s, X + 2, y + 1, 7.8, false, C.ink); P.line(X + 105, y + 2, X + W, y + 2, C.line, 0.4); y += 6.4; });
+  P.foot('Образец расчёта для личного использования, не предложение банка и не финансовая консультация. Правила банков по FINMA (2025) и ch.ch, налог на переход собственности ориентировочно — проверь в своём кантоне. svoiludi.ch');
+  return P;
+}
+function build(){ return [sheet(D())]; }
+
+/* форма */
+const $ = id => document.getElementById(id);
+const KN = window.KANTONY || {};
+$('kt').innerHTML = Object.keys(KN).sort((a, b) => KN[a].n.localeCompare(KN[b].n, 'ru')).map(k => `<option value="${k}">${SH.esc(KN[k].n)} — ${HT[k] ? pct(HT[k]) : 'без налога'}</option>`).join('');
+$('age').innerHTML = Array.from({length: 46}, (_, i) => 20 + i).map(v => `<option value="${v}">${v} лет</option>`).join('');
+$('rate').innerHTML = [0.8, 1, 1.2, 1.4, 1.5, 1.6, 1.8, 2, 2.5, 3, 4, 5].map(v => `<option value="${v}">${pct(v)}</option>`).join('');
+const NUM = ['inc', 'sav', 's3a', 'pk', 'price'];
+let UI, tmr;
+function note(){
+  const d = D(), r = calc(d, +d.price || 0), mp = maxPrice(d);
+  $('res').innerHTML = `<b>${ok(r) ? 'По расчёту банка эту цену ты потянешь.' : 'По расчёту банка эта цена пока не проходит.'}</b> Посильность ${pct(r.q * 100)} дохода (можно до 33 %), свои деньги ${fmt(r.own)} из ${fmt(r.P * OWN)}. Максимальная цена — около <b>${fmt(mp)}</b> франков. По-настоящему в месяц около ${fmt(r.yReal / 12)} франков.`;
+}
+function fill(){
+  const d = D(); $('lang').value = d.lang; $('bw').checked = !!d.bw; $('kt').value = d.kt; $('age').value = String(d.age); $('rate').value = String(d.rate);
+  NUM.forEach(k => { $(k).value = d[k]; $(k).disabled = !!EX; }); ['kt', 'age', 'rate'].forEach(k => $(k).disabled = !!EX);
+  $('exbar').hidden = !EX; $('exOn').hidden = !!EX; note(); if (UI) UI.render();
+}
+const set = f => { f(S); if (EX) f(EX); save(); fill(); };
+$('lang').addEventListener('change', e => set(s => s.lang = e.target.value));
+$('bw').addEventListener('change', e => set(s => s.bw = e.target.checked));
+['kt', 'age', 'rate'].forEach(k => $(k).addEventListener('change', e => { if (EX) return; S[k] = k === 'kt' ? e.target.value : +e.target.value; if (k === 'kt') { try { localStorage.setItem('svoiludi.kanton', S.kt); } catch (x) {} } save(); fill(); }));
+NUM.forEach(k => $(k).addEventListener('input', e => { if (EX) return; S[k] = Math.max(0, +String(e.target.value).replace(/[^\d]/g, '') || 0); save(); note(); clearTimeout(tmr); tmr = setTimeout(() => UI && UI.render(), 400); }));
+const EXD = () => ({lang: 'de', bw: S.bw, kt: 'ZH', inc: 150000, sav: 130000, s3a: 45000, pk: 60000, age: 38, price: 850000, rate: 1.5});
+$('exOn').addEventListener('click', () => { EX = EXD(); fill(); window.scrollTo({top: $('exbar').offsetTop - 12, behavior: 'smooth'}); });
+$('exOff').addEventListener('click', () => { EX = null; fill(); });
+if (/[?&]example\b/.test(location.search)) EX = EXD();
+UI = SH.mount({build, title: 'Расчёт ипотеки', name: () => 'Tragbarkeit-Hypothek'});
+fill();
+
+</script>
+<script src="/assets/help.js"></script>
+<script src="/assets/backup.js"></script>
+<script src="/assets/pdffan.js" defer></script>
+<script src="/assets/share.js" defer></script>
+<script src="/assets/samesite.js"></script>
+</body>
+</html>

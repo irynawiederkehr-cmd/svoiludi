@@ -2902,3 +2902,220 @@ ARTICLES['dogovor-arendy'] = dict(
     post='Это требование снизить аренду, претензия о дефекте, расторжение договора, предложение нового жильца и требование вернуть залог.',
     post2='Для расторжения важен день, когда письмо получили, поэтому отправляй его минимум за неделю до начала срока.',
 )
+
+
+# ===== Покупка жилья и транспорт (08.10.2026). Факты сверены 08.10.2026: BJ, ch.ch, FINMA, BSV, ESTV, admin.ch, SBB, Alliance SwissPass, BAZG, кантоны.
+ARTICLES['pokupka-zhilya'] = dict(
+    h1='Купить квартиру или дом в Швейцарии: <em>кто может, сколько нужно своих денег и как считает банк</em>',
+    seo='Купить квартиру в Швейцарии: Lex Koller, Eigenkapital 20 %, ипотека (Hypothek)',
+    desc='Как купить жильё в Швейцарии простыми словами на русском: кто может покупать по закону Lex Koller (пермит B, C, статус S), сколько нужно собственных денег (20 %, из них 10 % не из пенсионной кассы), как банк считает посильность ипотеки (5 %, 1 %, треть дохода), как взять деньги из второй опоры и 3a, сколько стоят нотариус, Grundbuch и налог на переход собственности по кантонам, что меняется после отмены Eigenmietwert с 2029 года. По-немецки Wohneigentum, Hypothek, Eigenkapital, Tragbarkeit, по-французски achat immobilier, hypothèque, fonds propres, по-итальянски acquisto di un immobile, ipoteca.',
+    lead='Своё жильё в Швейцарии — это большие суммы и строгие правила банков. Прежде чем смотреть квартиры, проверь три вещи: можно ли тебе покупать с твоим пермитом, хватает ли собственных денег и потянешь ли ты ипотеку по расчёту банка. Здесь — всё по порядку.',
+    body='''
+<nav class="toc" aria-label="Содержание"><b>В этой статье</b>
+<ul>
+  <li><a href="#kto">Кто может купить</a></li>
+  <li><a href="#svoi">Сколько нужно своих денег</a></li>
+  <li><a href="#tragbarkeit">Как банк считает, потянешь ли ты</a></li>
+  <li><a href="#pensiya">Деньги из пенсионной кассы и 3a</a></li>
+  <li><a href="#rashody">Расходы на покупку</a></li>
+  <li><a href="#shagi">Как проходит покупка</a></li>
+  <li><a href="#stwe">Квартира в доме (Stockwerkeigentum)</a></li>
+  <li><a href="#nalog">Налоги и отмена Eigenmietwert</a></li>
+  <li><a href="#moshenniki">Осторожно, мошенники</a></li>
+</ul></nav>
+
+<h2 id="kto">Кто может купить (закон Lex Koller)</h2>
+<p>Покупку жилья иностранцами регулирует федеральный закон о приобретении земельных участков лицами за границей (BewG, его называют Lex Koller). Подробно — у <a href="https://www.bj.admin.ch/de/grundstueckerwerb-durch-personen-im-ausland">Федерального ведомства юстиции (BJ)</a> и на <a href="https://www.ch.ch/de/wohnen/wohneigentum/immobilien-kaufen/als-auslanderin-oder-auslander-immobilien-kaufen/">ch.ch</a>.</p>
+<ul class="ul">
+  <li><b>Пермит C или гражданство ЕС/ЕАСТ и жизнь в Швейцарии</b> — можно покупать как швейцарцы, без разрешения.</li>
+  <li><b>Пермит B, гражданство не ЕС</b> — можно купить без разрешения одно жильё для себя (Hauptwohnung): ты сама в нём живёшь, не сдаёшь, покупаешь на своё имя, а не через фирму. Дача или вторая квартира — только с разрешением кантона.</li>
+  <li><b>Статус S</b> — по разъяснению BJ законного места жительства в смысле этого закона статус S не создаёт, поэтому купить квартиру для себя без разрешения нельзя.</li>
+  <li><b>Пермит L</b> (не ЕС) — покупка жилья, как правило, недоступна. Статус F — уточняй в кантоне.</li>
+  <li><b>Закон могут ужесточить.</b> В апреле 2026 года Федеральный совет вынес на обсуждение проект: граждане третьих стран с пермитом B должны будут получать разрешение и продавать жильё после отъезда. Пока это проект, не закон, — перед покупкой проверь на сайте BJ.</li>
+</ul>
+
+<h2 id="svoi">Сколько нужно своих денег (Eigenkapital)</h2>
+<ul class="ul">
+  <li>Банк обычно даёт в долг <b>не больше 80 % цены</b>. Значит, <b>минимум 20 % — свои деньги</b> (<a href="https://www.ch.ch/de/wohnen/wohneigentum/immobilien-kaufen/wohneigentum-finanzieren/">ch.ch</a>).</li>
+  <li>Из них <b>минимум 10 % — «твёрдые» деньги</b>: сбережения, 3a, подарок или наследство, но <b>не из пенсионной кассы</b> (вторая опора). Это правило банков, признанное надзором <a href="https://www.finma.ch/de/news/2025/05/20250522-mm-hypothekarrisiken/">FINMA</a>.</li>
+  <li>Остальные до 20 % можно взять из пенсионной кассы (подробно ниже).</li>
+  <li>Расходы на саму покупку (нотариус, Grundbuch, налог) банк не финансирует — их тоже платишь из своих.</li>
+</ul>
+<p><b>Пример.</b> Квартира за 800 000 франков: своих нужно 160 000, из них не меньше 80 000 не из пенсионной кассы, плюс около 2–5 % на расходы покупки.</p>
+
+<h2 id="tragbarkeit">Как банк считает, потянешь ли ты (Tragbarkeit)</h2>
+<p>Банк считает не по нынешней низкой ставке, а по «расчётной» — на случай, если ставки вырастут. Обычный расчёт (примеры <a href="https://www.finma.ch/de/news/2025/05/20250522-mm-hypothekarrisiken/">FINMA</a> и практика банков):</p>
+<ul class="ul">
+  <li><b>Проценты:</b> 5 % в год от суммы ипотеки (Kalkulatorischer Zinssatz).</li>
+  <li><b>Содержание и побочные расходы:</b> около 1 % стоимости жилья в год.</li>
+  <li><b>Погашение (Amortisation):</b> вторую часть ипотеки — всё, что больше двух третей стоимости, — нужно погасить за 15 лет или до пенсии.</li>
+  <li><b>Всё вместе — не больше трети брутто-дохода</b> домохозяйства. Доход второго человека банк учитывает, обычно если он тоже подписывает ипотеку.</li>
+</ul>
+<p>Посчитать свои цифры поможет «Сколько стоит жильё, которое я потяну: расчёт ипотеки» — он покажет максимальную цену, нужные свои деньги и расходы в месяц. Сегодняшние ставки ипотеки ниже расчётных (осенью 2026 года ориентировочно 1–2 % в зависимости от срока), но банк всё равно проверяет по 5 %.</p>
+
+<h2 id="pensiya">Деньги из пенсионной кассы и 3a</h2>
+<ul class="ul">
+  <li><b>Вторая опора (Vorbezug WEF)</b> — только на жильё, где ты живёшь сама. Минимум 20 000 франков, не чаще раза в 5 лет и не позже чем за 3 года до пенсии. После 50 лет — не больше, чем было в 50 лет, или половина нынешней суммы. Если ты замужем, нужно письменное согласие мужа или жены (<a href="https://www.bsv.admin.ch/de/wohneigentumsfoerderung-mit-mitteln-der-beruflichen-vorsorge">BSV</a>).</li>
+  <li>Снятые деньги уменьшают будущую пенсию и выплаты при инвалидности. При продаже жилья их нужно вернуть в кассу. Вместо снятия можно <b>заложить</b> (Verpfändung) — пенсия тогда не уменьшается.</li>
+  <li><b>3a</b> тоже можно снять на покупку своего жилья или погашение ипотеки, не чаще раза в 5 лет.</li>
+  <li>Со снятых денег платится <b>налог на выплату капитала</b> — отдельно и по сниженной ставке, сумма зависит от кантона. Спроси у кассы и в налоговой, сколько выйдет.</li>
+</ul>
+
+<h2 id="rashody">Расходы на покупку</h2>
+<p>Закладывай <b>до 5 % цены</b> сверху. Из чего они складываются:</p>
+<ul class="ul">
+  <li><b>Нотариус</b> — договор купли-продажи жилья в Швейцарии действителен только у нотариуса. В одних кантонах это государственный нотариат с твёрдыми ценами, в других — частные нотариусы, у них цену спроси заранее.</li>
+  <li><b>Земельная книга (Grundbuch)</b> — запись о новом владельце, обычно меньше 1 %.</li>
+  <li><b>Закладная (Schuldbrief)</b> для ипотеки — около 0,1–0,3 % суммы, если её нужно создавать заново.</li>
+  <li><b>Налог на переход собственности (Handänderungssteuer).</b> Не берут: Аргау, Гларус, Шаффхаузен, Швиц, Тичино, Ури, Цуг, Цюрих. Примерно 1 %: Аппенцелль Иннерроден, Нидвальден, Санкт-Галлен, Тургау; 1,5 %: Фрибур, Люцерн, Обвальден; около 2 %: Берн (1,8 %), Граубюнден, Аппенцелль Ауссерроден, Юра (2,1 %), Золотурн и Во (2,2 %, в Во ещё доля общины); 2,5 %: Базель-Ланд; 3 % и больше: Базель-Штадт, Женева, Невшатель. В Вале 1–1,5 %. Кто платит — покупатель, продавец или пополам — записывают в договор. Ставки ориентировочные, точную проверь в налоговой своего кантона.</li>
+</ul>
+
+<h2 id="shagi">Как проходит покупка</h2>
+<ol class="ol">
+  <li><b>Финансирование заранее.</b> Сходи в банк или к независимому ипотечному консультанту, получи подтверждение финансирования — без него продавец часто не станет говорить с тобой всерьёз.</li>
+  <li><b>Осмотр и документы:</b> выписка из земельной книги, планы, для квартиры — регламент дома, протоколы собраний и фонд ремонта.</li>
+  <li><b>Резервация.</b> Резервационный договор без нотариуса не обязывает, задаток — только на заблокированный счёт (Sperrkonto), не продавцу лично (<a href="https://www.ch.ch/de/wohnen/wohneigentum/immobilien-kaufen/kaufvertrag-fur-wohneigentum/">ch.ch</a>).</li>
+  <li><b>Договор у нотариуса</b> и оплата.</li>
+  <li><b>Запись в земельную книгу.</b> Владелицей ты становишься только после неё.</li>
+</ol>
+
+<h2 id="stwe">Квартира в доме (Stockwerkeigentum)</h2>
+<ul class="ul">
+  <li>Ты владеешь своей квартирой и долей общего: крыша, фасад, лестница, отопление. Твоя доля называется Wertquote.</li>
+  <li>Главное решает <b>собрание владельцев</b>, обычно раз в год: бюджет, ремонты, управляющий. Перед покупкой прочитай регламент и протоколы последних собраний — там видно, какие большие ремонты впереди.</li>
+  <li><b>Фонд ремонта (Erneuerungsfonds)</b> — копилка на большие ремонты. Если она пустая, крупный ремонт оплатят владельцы из своего кармана.</li>
+</ul>
+
+<h2 id="nalog">Налоги и отмена Eigenmietwert</h2>
+<ul class="ul">
+  <li>Сейчас владелец жилья, где живёт сам, платит налог с условной арендной платы (<b>Eigenmietwert</b>), но может вычитать проценты по ипотеке и расходы на содержание.</li>
+  <li>28 сентября 2025 года народ проголосовал за отмену. По решению Федерального совета <b>с 1 января 2029 года</b> Eigenmietwert отменяется, а вместе с ним — вычет расходов на содержание и, для своего жилья, вычет процентов (<a href="https://www.admin.ch/de/newnsb/yGTqBPowRqyVh0zPokW-q">admin.ch</a>).</li>
+  <li>Для первой покупки будет временный вычет процентов: до 10 000 франков для супругов и 5 000 для остальных, он уменьшается каждый год и действует 10 лет. Кантоны могут ввести отдельный налог на вторые квартиры и дачи.</li>
+</ul>
+
+<h2 id="moshenniki">Осторожно, мошенники</h2>
+<p>Признаки фальшивого объявления: цена заметно ниже рынка, «владелец за границей», просьба внести задаток до осмотра, оплата подарочными картами или криптовалютой, продавец не значится владельцем в земельной книге. Никаких денег до осмотра и до нотариуса, задаток — только на заблокированный счёт.</p>
+''',
+    steps=[
+        'Проверь, можно ли тебе покупать с твоим пермитом — статус S и пермит L, как правило, нет.',
+        'Посчитай свои деньги: 20 % цены, из них 10 % не из пенсионной кассы, плюс до 5 % на расходы.',
+        'Посчитай посильность по расчёту банка: 5 % процентов, 1 % содержания и погашение — не больше трети дохода.',
+        'Получи подтверждение финансирования в банке до резервации, задаток — только на заблокированный счёт.',
+        'Перед договором у нотариуса проверь выписку из земельной книги, регламент дома и фонд ремонта.',
+    ],
+    pomosh=dict(ids=['casafair', 'budget', 'anwalt'], t='Перед подписанием покажи договор и расчёт независимому консультанту — банк и продавец смотрят на сделку со своей стороны.'),
+    tools={'ipoteka-raschet': 'Свои деньги, треть дохода и максимальная цена — проверь до похода в банк.', 'moj-budget': 'Ипотека, содержание, налоги и страховки — все расходы на жильё в одном бюджете.'},
+    related=['arenda', 'pensiya', 'nalogi', 'bank'],
+    sources=[
+        ('BJ — покупка жилья лицами за границей (Lex Koller)', 'https://www.bj.admin.ch/de/grundstueckerwerb-durch-personen-im-ausland'),
+        ('BJ — вопросы и ответы о Lex Koller', 'https://www.bj.admin.ch/de/fragen-und-antworten'),
+        ('BJ — проект ужесточения Lex Koller, 15.04.2026', 'https://www.bj.admin.ch/de/newnsb/4mzivVX5Ko4dpap06YtuI'),
+        ('ch.ch — покупка жилья иностранцами', 'https://www.ch.ch/de/wohnen/wohneigentum/immobilien-kaufen/als-auslanderin-oder-auslander-immobilien-kaufen/'),
+        ('ch.ch — финансирование жилья', 'https://www.ch.ch/de/wohnen/wohneigentum/immobilien-kaufen/wohneigentum-finanzieren/'),
+        ('ch.ch — договор купли-продажи жилья', 'https://www.ch.ch/de/wohnen/wohneigentum/immobilien-kaufen/kaufvertrag-fur-wohneigentum/'),
+        ('FINMA — риски ипотеки, 22.05.2025', 'https://www.finma.ch/de/news/2025/05/20250522-mm-hypothekarrisiken/'),
+        ('BSV — жильё за счёт пенсионной кассы', 'https://www.bsv.admin.ch/de/wohneigentumsfoerderung-mit-mitteln-der-beruflichen-vorsorge'),
+        ('admin.ch — отмена Eigenmietwert с 2029, 01.04.2026', 'https://www.admin.ch/de/newnsb/yGTqBPowRqyVh0zPokW-q'),
+        ('Comparis — расходы при покупке и налог на переход собственности', 'https://www.comparis.ch/hypotheken/immobilienkauf/kaufnebenkosten-hauskauf'),
+    ],
+    terms=[('Deutsch', 'Wohneigentum, Eigenkapital, harte Eigenmittel, Hypothek, Festhypothek, SARON-Hypothek, Tragbarkeit, kalkulatorischer Zinssatz, Amortisation, Belehnung, Vorbezug, Verpfändung, Notar, Grundbuch, Schuldbrief, Handänderungssteuer, Stockwerkeigentum, Wertquote, Erneuerungsfonds, Eigenmietwert'), ('Français', 'propriété du logement, fonds propres, hypothèque, taux fixe, capacité financière, amortissement, versement anticipé (EPL), mise en gage, notaire, registre foncier, cédule hypothécaire, droits de mutation, propriété par étages (PPE), fonds de rénovation, valeur locative'), ('Italiano', 'proprietà d’abitazione, capitale proprio, ipoteca, sostenibilità, ammortamento, prelievo anticipato, costituzione in pegno, notaio, registro fondiario, cartella ipotecaria, tassa di mutazione, proprietà per piani, valore locativo'), ('English', 'home ownership, equity, mortgage, affordability, amortisation, early withdrawal, pledge, notary, land register, property transfer tax, condominium, imputed rental value')],
+)
+
+ARTICLES['transport'] = dict(
+    h1='Транспорт в Швейцарии: <em>проездные, обмен прав, машина после переезда и штрафы</em>',
+    seo='Транспорт в Швейцарии: Halbtax и GA, обмен прав (Führerausweis umtauschen), машина',
+    desc='Транспорт в Швейцарии простыми словами на русском: Halbtax и GA и сколько они стоят с 13.12.2026, Junior-Karte для детей, Sparbillette, штрафы за проезд без билета; обмен иностранных водительских прав за 12 месяцев и контрольная поездка (Kontrollfahrt) для украинских и других прав, что со статусом S; машина после переезда: растаможка как Übersiedlungsgut, номера, MFK, виньетка 40 франков; детское кресло, e-bike. По-немецки Halbtax, Generalabonnement, Führerausweis umtauschen, по-французски abonnement demi-tarif, échange du permis de conduire, по-итальянски metà-prezzo, conversione della licenza di condurre.',
+    lead='В Швейцарии отличный общественный транспорт, и многие обходятся без машины. Здесь — какой проездной выгоднее, как обменять водительские права до того, как они перестанут действовать, и что делать с машиной, которую ты привезла.',
+    kanton=['stva'],
+    body='''
+<nav class="toc" aria-label="Содержание"><b>В этой статье</b>
+<ul>
+  <li><a href="#proezd">Проездные: Halbtax и GA</a></li>
+  <li><a href="#deti">Дети и молодёжь</a></li>
+  <li><a href="#shtraf">Без билета: сколько стоит</a></li>
+  <li><a href="#prava">Обмен водительских прав</a></li>
+  <li><a href="#ukraina">Украинские права и статус S</a></li>
+  <li><a href="#mashina">Машина после переезда</a></li>
+  <li><a href="#doroga">На дороге: виньетка, кресло, e-bike</a></li>
+</ul></nav>
+
+<h2 id="proezd">Проездные: Halbtax и GA</h2>
+<ul class="ul">
+  <li><b>Halbtax</b> (абонемент на полцены) — год ездишь почти везде за половину цены билета: поезда, автобусы, трамваи, многие корабли и горные дороги. Взрослым 190 франков в первый год и 170 при продлении, молодёжи 16–25 лет — 120 и 100 (<a href="https://www.sbb.ch/de/billette-angebote/abos/halbtax.html">SBB</a>). С 13 декабря 2026 года взрослый Halbtax дорожает на 5 франков.</li>
+  <li><b>GA</b> (Generalabonnement) — год ездишь везде без билетов. Взрослым во 2-м классе 3995 франков, с 13 декабря 2026 года — 4095, в 1-м классе — 6520, с 13 декабря — 6770 (<a href="https://www.allianceswisspass.ch/de/asp/News/Newsmeldung?newsid=1049">Alliance SwissPass</a>). Есть GA для молодёжи, пожилых, семейные и помесячная оплата.</li>
+  <li><b>Что выгоднее.</b> Halbtax окупается уже после нескольких поездок, если ты ездишь дальше своего города. GA — если ты ездишь на работу в другой город каждый день. Сравни свои поездки в «Какой проездной выгоднее: Halbtax, GA или билеты».</li>
+  <li><b>Городской проездной</b> (Verbundabo) — для поездок внутри своего региона, например ZVV в Цюрихе. Он часто выгоднее, если ездишь только в своём городе.</li>
+  <li><b>Sparbillette</b> (Supersaver) — скидка до 50 % на конкретный поезд, количество ограничено. <b>Spartageskarte</b> — день по всей Швейцарии с Halbtax от 29 франков, если купить заранее.</li>
+</ul>
+
+<h2 id="deti">Дети и молодёжь</h2>
+<ul class="ul">
+  <li>Дети <b>до 6 лет</b> ездят бесплатно с взрослым.</li>
+  <li><b>Junior-Karte</b> — 30 франков в год за ребёнка 6–16 лет: с мамой или папой он ездит бесплатно. <b>Kinder-Mitfahrkarte</b> — то же самое с бабушкой, няней или соседкой, тоже 30 франков (<a href="https://www.sbb.ch/de/angebote/junior-karte">SBB</a>).</li>
+  <li>До 25 лет — <b>GA Night</b> за 99 франков в год: ночные поездки с 19:00 до 5:00 (в выходные до 7:00).</li>
+</ul>
+
+<h2 id="shtraf">Без билета: сколько стоит</h2>
+<p>В поездах SBB доплата без билета — 90 франков в первый раз, 130 во второй и 160 с третьего, плюс цена билета. Забыла абонемент дома — покажи его в течение 10 дней, тогда 5 франков (<a href="https://www.sbb.ch/de/bahnhof-services/nach-der-reise/reisen-ohne-gueltigen-fahrausweis.html">SBB</a>). В городских сетях свои суммы, в ZVV — от 100 франков. Билет нужно купить <b>до посадки</b>: в большинстве поездов купить его у кондуктора нельзя.</p>
+
+<h2 id="prava">Обмен водительских прав (Führerausweis umtauschen)</h2>
+<ul class="ul">
+  <li><b>Срок — 12 месяцев с переезда в Швейцарию.</b> Потом ездить с иностранными правами нельзя. Подавай заявление заранее, хотя бы за месяц до конца срока (<a href="https://www.ch.ch/de/fahrzeuge-und-verkehr/fuhrerausweis/fuhrerausweis-umtauschen/">ch.ch</a>).</li>
+  <li><b>Куда:</b> в дорожное ведомство своего кантона (Strassenverkehrsamt, во франкоязычных кантонах Service des automobiles) — ссылка в блоке «Твой кантон» выше.</li>
+  <li><b>Документы:</b> заявление с отметкой окулиста или оптика о проверке зрения (Sehtest), свежее цветное фото, оригинал прав, пермит. Права не латиницей — нужен перевод. В Цюрихе личность подтверждают лично (<a href="https://www.zh.ch/de/mobilitaet/fuehrerausweis-fahren-lernen/auslaendischer-fuehrerausweis.html">zh.ch</a>).</li>
+  <li><b>Контрольная поездка (Kontrollfahrt).</b> С правами из ЕС/ЕАСТ, США, Канады, Японии, Австралии, Израиля и ещё нескольких стран её нет. С правами из всех остальных стран, в том числе из Украины, — нужна. <b>Попытка одна:</b> если не сдала, в Швейцарии ездить нельзя, и права получают заново — курс первой помощи, теория, ученические права, практика.</li>
+  <li><b>Цена</b> зависит от кантона, обычно больше 100 франков, с контрольной поездкой — 200–300.</li>
+  <li><b>Опоздала с обменом</b> — правила разные: где-то возможен обмен со штрафом, где-то только полное получение прав заново. Узнай в своём ведомстве до конца срока.</li>
+  <li>Перед контрольной поездкой стоит взять 1–2 урока в автошколе: экзаменатор смотрит на швейцарские правила — приоритет справа, пешеходные переходы, круговое движение.</li>
+</ul>
+
+<h2 id="ukraina">Украинские права и статус S</h2>
+<ul class="ul">
+  <li>Для тех, кто получил статус S с 24.02.2022 по 05.04.2024, действовало исключение: обменять права можно было в течение 24 месяцев. <b>Оно закончилось 5 апреля 2026 года</b> (<a href="https://www.ocn.ch/de/ukraine">OCN Fribourg</a>). Продления не объявляли — уточни в своём кантоне, если сомневаешься.</li>
+  <li>Статус S с 06.04.2024 и позже — обычный срок 12 месяцев с даты получения.</li>
+  <li>Украинские права обмениваются только с контрольной поездкой. Электронные и просроченные права не принимают.</li>
+</ul>
+
+<h2 id="mashina">Машина после переезда</h2>
+<ul class="ul">
+  <li><b>Без пошлины (как переселенческое имущество)</b>, если ты сама пользовалась машиной за границей не меньше 6 месяцев. Задекларируй её на первой же границе по форме 18.44 (<a href="https://www.bazg.admin.ch/de/faq-umzugsgut">BAZG</a>).</li>
+  <li>Пользовалась меньше 6 месяцев — растаможка: пошлина по весу (из ЕС с документом о происхождении — без пошлины), 4 % налога на автомобили и НДС 8,1 %.</li>
+  <li>С 1 июля 2024 года обладатели статуса S считаются жителями Швейцарии: машину с украинскими номерами нужно растаможить и перерегистрировать (<a href="https://www.bazg.admin.ch/de/verzollung-fahrzeuge-personen-schutzstatus-s">BAZG</a>).</li>
+  <li><b>Швейцарские номера</b> — в дорожном ведомстве кантона, обычно в течение года после переезда: страховка ответственности (полис), техосмотр по форме 13.20A, растаможка, документ на машину (<a href="https://www.ch.ch/de/fahrzeuge-und-verkehr/autos-und-andere-fahrzeuge/fahrzeug-einlosen/">ch.ch</a>). Налог на машину каждый год, сумма зависит от кантона.</li>
+  <li><b>Техосмотр (MFK)</b> — новой машине через 5 лет, потом через 3 года и дальше каждые 2 года, около 60 франков.</li>
+</ul>
+
+<h2 id="doroga">На дороге: виньетка, кресло, e-bike</h2>
+<ul class="ul">
+  <li><b>Виньетка</b> для автобанов — 40 франков в год, наклейка или электронная на <a href="https://www.e-vignette.ch">e-vignette.ch</a>. Виньетка 2026 действует до 31 января 2027. Без неё — штраф 200 франков.</li>
+  <li><b>Детское кресло</b> — для детей до 12 лет и ростом ниже 150 см (<a href="https://www.ch.ch/de/fahrzeuge-und-verkehr/verhalten-im-strassenverkehr/sicherung-von-kindern-in-autos/">ch.ch</a>).</li>
+  <li><b>Медленный e-bike</b> (до 25 км/ч) — с 14 лет, шлем советуют. <b>Быстрый</b> (до 45 км/ч) — права категории M, шлем, жёлтый номер.</li>
+  <li><b>Алкоголь:</b> общий предел 0,5 промилле, с правами на пробу (первые 3 года) и при обучении — 0,1.</li>
+  <li>Штрафы за превышение скорости в Швейцарии высокие, за большое превышение — уголовное дело и лишение прав. Камер много, приходит письмо на адрес владельца машины.</li>
+</ul>
+''',
+    steps=[
+        'Купи Halbtax в первый же месяц — он окупается быстро, детям оформи Junior-Karte за 30 франков.',
+        'Запиши в календарь дату: 12 месяцев с переезда — до неё обменяй права.',
+        'Подай заявление на обмен заранее и возьми урок в автошколе перед контрольной поездкой.',
+        'Машину из-за границы задекларируй на первой границе по форме 18.44 и поставь на швейцарские номера.',
+        'Купи виньетку, проверь детское кресло и страховку ответственности.',
+    ],
+    pomosh=dict(ids=['tcs'], t='Клубы автомобилистов помогают с поломкой на дороге, юридическими вопросами о машине и штрафами.'),
+    tools={'proezdnoj-vybor': 'Сравни за год: билеты, Halbtax или GA — по твоим поездкам и ценам с 13.12.2026.', 'moj-budget': 'Проездной, машина, виньетка, страховка и налог — расходы на транспорт в бюджете.', 'moj-god': 'Дата обмена прав, техосмотр и виньетка — сроки в календаре на год.'},
+    related=['strahovki', 'skrytye-rashody', 'status-s', 'professii-avto'],
+    sources=[
+        ('SBB — Halbtax', 'https://www.sbb.ch/de/billette-angebote/abos/halbtax.html'),
+        ('Alliance SwissPass — цены с 13.12.2026, 04.08.2026', 'https://www.allianceswisspass.ch/de/asp/News/Newsmeldung?newsid=1049'),
+        ('SBB — Junior-Karte', 'https://www.sbb.ch/de/angebote/junior-karte'),
+        ('SBB — проезд без действительного билета', 'https://www.sbb.ch/de/bahnhof-services/nach-der-reise/reisen-ohne-gueltigen-fahrausweis.html'),
+        ('ch.ch — обмен иностранных прав', 'https://www.ch.ch/de/fahrzeuge-und-verkehr/fuhrerausweis/fuhrerausweis-umtauschen/'),
+        ('Кантон Цюрих — иностранные права', 'https://www.zh.ch/de/mobilitaet/fuehrerausweis-fahren-lernen/auslaendischer-fuehrerausweis.html'),
+        ('OCN Fribourg — украинские права', 'https://www.ocn.ch/de/ukraine'),
+        ('BAZG — машины лиц со статусом S', 'https://www.bazg.admin.ch/de/verzollung-fahrzeuge-personen-schutzstatus-s'),
+        ('BAZG — переселенческое имущество', 'https://www.bazg.admin.ch/de/faq-umzugsgut'),
+        ('ch.ch — регистрация машины', 'https://www.ch.ch/de/fahrzeuge-und-verkehr/autos-und-andere-fahrzeuge/fahrzeug-einlosen/'),
+        ('ch.ch — виньетка', 'https://www.ch.ch/de/fahrzeuge-und-verkehr/autos-und-andere-fahrzeuge/autobahnvignette/'),
+    ],
+    terms=[('Deutsch', 'Halbtax, Generalabonnement (GA), Verbundabo, Sparbillett, Junior-Karte, Kinder-Mitfahrkarte, Zuschlag, Führerausweis, Umtausch, Kontrollfahrt, Sehtest, Strassenverkehrsamt, Übersiedlungsgut, Immatrikulation, Motorfahrzeugkontrolle (MFK), Vignette, Probeführerausweis'), ('Français', 'abonnement demi-tarif, abonnement général, billet dégriffé, carte junior, supplément, permis de conduire, échange, course de contrôle, service des automobiles, effets de déménagement, immatriculation, expertise, vignette'), ('Italiano', 'abbonamento metà-prezzo, abbonamento generale, biglietto risparmio, carta junior, licenza di condurre, conversione, corsa di controllo, ufficio della circolazione, masserizie di trasloco, immatricolazione, collaudo, contrassegno'), ('English', 'half-fare travelcard, general travelcard, supersaver ticket, driving licence exchange, control drive, road traffic office, household effects, vehicle registration, inspection, motorway vignette')],
+)

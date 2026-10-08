@@ -50,7 +50,9 @@
     const K = window.KANTONY, KEY = 'svoiludi.kanton';
     const LBL = {steuern: ['Налоговая: декларация', 'Steuererklärung', 'déclaration d’impôt', 'dichiarazione d’imposta'], quellensteuer: ['Налог у источника', 'Quellensteuer', 'impôt à la source', 'imposta alla fonte'],
       migration: ['Миграционное ведомство: пермиты', 'Migrationsamt', 'service de la population', 'ufficio della migrazione'], einbuergerung: ['Натурализация в кантоне', 'Einbürgerung', 'naturalisation', 'naturalizzazione'],
-      betreibung: ['Где твой Betreibungsamt', 'Betreibungsamt', 'office des poursuites', 'ufficio di esecuzione']};
+      betreibung: ['Где твой Betreibungsamt', 'Betreibungsamt', 'office des poursuites', 'ufficio di esecuzione'],
+      stva: ['Дорожное ведомство: права и машина', 'Strassenverkehrsamt', 'service des automobiles', 'ufficio della circolazione'], sozial: ['Социальная помощь в кантоне', 'Sozialhilfe', 'aide sociale', 'assistenza sociale'],
+      kesb: ['Служба защиты детей и взрослых', 'KESB', 'APEA', 'ARP']};
     const LI2 = {de: 1, fr: 2, it: 3};
     let cur = ''; try { cur = localStorage.getItem(KEY) || ''; } catch (e) {}
     const opts = '<option value="">Выбери свой кантон</option>' + Object.entries(K).sort((a, b) => a[1].n.localeCompare(b[1].n, 'ru')).map(([k, v]) => '<option value="' + k + '">' + esc(v.n) + '</option>').join('');

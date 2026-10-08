@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<link rel="icon" href="/fav/favicon.svg" type="image/svg+xml"><link rel="icon" href="/fav/icon-32.png" sizes="32x32"><link rel="apple-touch-icon" href="/fav/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/fonts.css">
+<meta name="description" content="Бесплатный калькулятор проездного для Швейцарии: сравни за год поездки без абонемента, с Halbtax (абонемент на полцены) и с GA (Generalabonnement) по своим поездкам. Цены SBB до 12.12.2026 и с 13.12.2026 (GA 4095 франков), для взрослых, молодёжи и пожилых, 1-й и 2-й класс, Junior-Karte для детей. Лист PDF на русском и немецком, французском или итальянском.">
+<link rel="canonical" href="https://svoiludi.ch/instrumenty/proezdnoj-vybor/">
+<meta property="og:type" content="website"><meta property="og:locale" content="ru_RU"><meta property="og:site_name" content="Свои люди в Швейцарии">
+<meta property="og:title" content="Какой проездной выгоднее: Halbtax, GA или билеты · бесплатно"><meta property="og:description" content="Впиши свои поездки — увидишь, что дешевле за год: билеты, Halbtax или GA. Цены с 13.12.2026.">
+<meta property="og:url" content="https://svoiludi.ch/instrumenty/proezdnoj-vybor/"><meta property="og:image" content="https://svoiludi.ch/instrumenty/proezdnoj-vybor/og-image.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="robots" content="noindex, nofollow">
+<title>Какой проездной выгоднее: Halbtax, GA или билеты</title>
+<style>
+/* Какой проездной выгоднее: Halbtax, GA или билеты (08.10.2026): анкета слева, живые листы справа, движок assets/shema.js. */
+:root{
+  --bg:#F4EDE3; --paper:#FFFCF8; --ink:#2F2924; --muted:#7A6E62; --line:#E5D9C9; --soft:#EFE5D7;
+  --brown:#6E4F3C; --mustard:#B98324; --mustard-soft:#F3E3C2; --sage:#4F5E3E; --sage-soft:#E3E8D6; --red:#A0523D;
+  --display:"Forum","Georgia",serif; --sans:"Manrope","Segoe UI",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#221D19; --paper:#2C2621; --ink:#F1E9DF; --muted:#B4A796; --line:#3E362F; --soft:#352E28;
+  --brown:#E1C2A6; --mustard:#E2B45C; --mustard-soft:#3D321F; --sage:#B4BF97; --sage-soft:#2E3226; --red:#E39A85; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#221D19; --paper:#2C2621; --ink:#F1E9DF; --muted:#B4A796; --line:#3E362F; --soft:#352E28;
+  --brown:#E1C2A6; --mustard:#E2B45C; --mustard-soft:#3D321F; --sage:#B4BF97; --sage-soft:#2E3226; --red:#E39A85; color-scheme:dark}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--ink);font:15px/1.55 var(--sans);margin:0}
+.wrap{max-width:1280px;margin:0 auto;padding-inline:16px;padding-block:28px 48px;display:flex;flex-direction:column;gap:24px}
+.eyebrow{font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+h1{font-family:var(--display);font-weight:400;font-size:clamp(2.4rem,6vw,3.6rem);line-height:1;margin:4px 0 10px;text-wrap:balance}
+h2{font-family:var(--display);font-weight:400;font-size:1.55rem;margin:0;text-wrap:balance}
+h3{font-family:var(--display);font-weight:400;font-size:1.22rem;line-height:1.2;margin:0}
+.lead{max-width:66ch;color:var(--muted);margin:0}
+.jump{font-weight:700;color:var(--brown);text-underline-offset:4px}
+.privnote{margin-top:14px;background:var(--sage-soft);border-radius:16px;padding:12px 16px;font-size:.9rem;max-width:90ch}
+.status{font-size:.86rem;color:var(--muted);min-height:1.3em}
+.btn{font:inherit;font-weight:700;font-size:.9rem;border:0;border-radius:999px;padding:10px 18px;cursor:pointer;color:#fff;text-decoration:none;display:inline-flex;align-items:center;gap:6px;background:#6E4F3C;box-shadow:0 8px 18px -8px rgba(110,79,60,.6)}
+.btn.gold{background:#B98324;box-shadow:0 8px 18px -8px rgba(185,131,36,.7)}
+.btn.free{background:#4F5E3E;box-shadow:0 8px 18px -8px rgba(79,94,62,.6)}
+.btn.ghost{background:transparent;color:var(--brown);border:1.5px solid var(--line);box-shadow:none}
+.btn.sm{font-size:.82rem;padding:7px 13px}
+.btn[disabled]{background:var(--soft);color:var(--muted);box-shadow:none;cursor:wait}
+select,input[type=text],input[type=tel],input[type=number],input[type=date],textarea{font:inherit;font-size:.95rem;color:var(--ink);background:var(--paper);border:1.5px solid var(--line);border-radius:12px;padding:9px 12px;width:100%;min-width:0}
+select:focus-visible,input:focus-visible,button:focus-visible,textarea:focus-visible,a:focus-visible{outline:2px solid var(--mustard);outline-offset:2px}
+::placeholder{color:color-mix(in srgb,var(--muted) 70%,transparent)}
+.setup{background:var(--paper);border:1.5px solid var(--line);border-radius:22px;padding:16px 18px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px 18px;align-items:start}
+@media (max-width:1000px){.setup{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.setup{grid-template-columns:1fr}}
+.fl{display:flex;flex-direction:column;gap:6px;min-width:0}
+.fl>.lb{font-size:.8rem;font-weight:700;color:var(--muted);display:flex;align-items:center}
+.seg{display:flex;flex-wrap:wrap;gap:6px}
+.seg button{font:inherit;font-size:.84rem;font-weight:700;border:1.5px solid var(--line);background:var(--paper);color:var(--ink);border-radius:999px;padding:6px 12px;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--sage);border-color:var(--sage);color:#fff}
+.acts{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.exbar{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;background:var(--mustard-soft);border-radius:16px;padding:10px 14px;font-size:.9rem;font-weight:600}
+.work{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:22px;align-items:start}
+@media (max-width:1040px){.work{grid-template-columns:1fr}}
+.form{display:flex;flex-direction:column;gap:14px;min-width:0}
+.sec{background:var(--paper);border:1.5px solid var(--line);border-radius:20px;padding:16px 18px;display:flex;flex-direction:column;gap:12px}
+.sec>h2{font-size:1.3rem;display:flex;align-items:center}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:560px){.g2{grid-template-columns:1fr}}
+.hint{font-size:.84rem;color:var(--muted);margin:0}
+.chk{display:flex;flex-direction:column;gap:8px}
+.chk label{display:flex;gap:10px;align-items:baseline;font-size:.92rem;cursor:pointer}
+.chk input{flex:none;width:18px;height:18px;accent-color:var(--sage);transform:translateY(3px)}
+.chk b{white-space:nowrap}
+.chk small{color:var(--muted)}
+.tog{display:flex;gap:10px;align-items:center;font-size:.92rem;cursor:pointer}
+.tog input{width:18px;height:18px;accent-color:var(--sage)}
+.sheetbox{position:sticky;top:12px;display:flex;flex-direction:column;gap:10px}
+@media (max-width:1040px){.sheetbox{position:static}}
+.sheet{background:#fff;border-radius:6px;box-shadow:0 18px 40px -22px rgba(47,41,36,.45);overflow:hidden}
+.sheet svg{display:block;width:100%;height:auto}
+.imp{background:var(--paper);border:1.5px dashed color-mix(in srgb,var(--sage) 55%,transparent);border-radius:16px;padding:14px 18px;font-size:.88rem;max-width:90ch;margin:0}
+.imp b{color:var(--sage)}
+.guide{display:flex;flex-direction:column;gap:14px;max-width:90ch}
+.guide ul{margin:0;padding-left:20px}
+.guide li{margin:4px 0}
+.credit{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:.8rem;color:var(--muted)}
+.credit a{color:var(--muted)}
+.qh{font:700 .72rem/1 var(--sans);width:20px;height:20px;border-radius:50%;border:1.5px solid var(--line);background:var(--paper);color:var(--brown);cursor:pointer;margin-left:6px;padding:0;flex:none}
+.sheets{display:flex;flex-direction:column;gap:14px}
+.goals{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+@media (max-width:560px){.goals{grid-template-columns:1fr}}
+.goals label{display:flex;gap:10px;align-items:flex-start;background:var(--bg);border:1.5px solid var(--line);border-radius:14px;padding:9px 12px;cursor:pointer;font-size:.92rem}
+.goals input{width:18px;height:18px;accent-color:var(--sage);flex:none;margin-top:2px}
+.goals small{display:block;color:var(--muted)}
+.steps{display:flex;flex-direction:column;gap:8px}
+.steps details{background:var(--paper);border:1.5px solid var(--line);border-radius:16px;padding:10px 16px}
+.steps summary{cursor:pointer;font-weight:700;display:flex;gap:10px;align-items:baseline}
+.steps summary small{font-weight:600;color:var(--muted);margin-left:auto;text-align:right}
+.steps details p,.steps details ul{margin:8px 0 2px;font-size:.93rem}
+.steps details ul{padding-left:20px}
+</style>
+</head>
+<body>
+<style>.res{background:var(--paper);border:1.5px solid var(--line);border-radius:16px;padding:12px 14px;font-size:.95rem}</style>
+<div class="wrap">
+  <header>
+    <p style="margin:0 0 14px"><a class="jump" href="https://svoiludi.ch/instrumenty/">← Все полезные инструменты · Свои люди в Швейцарии</a></p>
+    <div class="eyebrow">Транспорт</div>
+    <h1>Какой проездной выгоднее: Halbtax, GA или билеты</h1>
+    <p class="lead">Halbtax — год ездишь за полцены, GA — год ездишь везде без билетов. Что из этого выгоднее, зависит от того, сколько ты ездишь. Выбери свои поездки — увидишь, сколько заплатишь за год в каждом случае и что выбрать. PDF бесплатно.</p>
+    <div class="privnote"><b>Твои данные только у тебя.</b> Выбор хранится только в твоём браузере на этом устройстве. Регистрация не нужна.</div>
+    <div data-fan="proezdnoj-vybor"></div>
+  </header>
+  <div class="setup">
+    <div class="fl"><span class="lb">Язык листа<button type="button" class="qh" data-help="lang" aria-label="Подсказка: язык листа" aria-expanded="false">?</button></span><select id="lang"><option value="de">Русский + немецкий</option><option value="fr">Русский + французский</option><option value="it">Русский + итальянский</option><option value="ru">Только русский</option></select></div>
+    <div class="fl"><span class="lb">Цены<button type="button" class="qh" data-help="per" aria-label="Подсказка: цены" aria-expanded="false">?</button></span><select id="per"><option value="new">с 13 декабря 2026</option><option value="now">до 12 декабря 2026</option></select></div>
+    <div class="fl"><span class="lb">Печать</span><label class="tog"><input type="checkbox" id="bw"> Без цвета, для дешёвой печати</label></div>
+  </div>
+  <div class="exbar" id="exbar" hidden><span>Это пример. Так будет выглядеть твой расчёт.</span><button type="button" class="btn sm" id="exOff">Вернуться к моим данным</button></div>
+  <div class="work">
+    <div class="form">
+      <section class="sec"><h2>Кто едет</h2><div class="g2">
+        <div class="fl"><span class="lb">Возраст<button type="button" class="qh" data-help="who" aria-label="Подсказка: возраст" aria-expanded="false">?</button></span><select id="who"></select></div>
+        <div class="fl"><span class="lb">Класс</span><select id="cls"><option value="2">2-й класс</option><option value="1">1-й класс</option></select></div>
+      </div><label class="tog"><input type="checkbox" id="ren"> У меня уже есть Halbtax (продление)<button type="button" class="qh" data-help="ren" aria-label="Подсказка: продление" aria-expanded="false">?</button></label></section>
+      <section class="sec"><h2>Мои поездки</h2><div class="g2">
+        <div class="fl"><span class="lb">Ежедневный путь, билет в одну сторону<button type="button" class="qh" data-help="com" aria-label="Подсказка: ежедневный путь" aria-expanded="false">?</button></span><select id="com"></select></div>
+        <div class="fl"><span class="lb">Дней в неделю<button type="button" class="qh" data-help="days" aria-label="Подсказка: дней в неделю" aria-expanded="false">?</button></span><select id="days"></select></div>
+        <div class="fl"><span class="lb">Другие поездки в месяц, по полной цене<button type="button" class="qh" data-help="oth" aria-label="Подсказка: другие поездки" aria-expanded="false">?</button></span><select id="oth"></select></div>
+      </div></section>
+      <div class="res" id="res" role="status"></div>
+    </div>
+    <div class="sheetbox">
+      <div class="acts"><button type="button" class="btn gold" id="pdf">Скачать PDF</button><button type="button" class="btn ghost sm" id="share" hidden>Отправить</button><button type="button" class="btn ghost sm" id="exOn">Посмотреть на примере</button></div>
+      <div class="sheets" id="sheet" aria-label="Предпросмотр листа"></div>
+      <div class="status" id="status" role="status"></div>
+    </div>
+  </div>
+  <p class="imp"><b>Важно.</b> Это расчёт для ориентира. Цены — по <a href="https://www.sbb.ch/de/billette-angebote/abos/halbtax.html">SBB</a> и <a href="https://www.allianceswisspass.ch/de/asp/News/Newsmeldung?newsid=1049">Alliance SwissPass</a> на 08.10.2026. С 13 декабря 2026 года подтверждены новые цены для взрослых; для молодёжи и пожилых пока стоят прежние. Обо всём транспорте — в теме <a href="https://svoiludi.ch/shveycariya/transport/">«Транспорт, машина и права»</a>. Автор не несёт ответственности за достоверность.</p>
+  <div class="share-slot" data-url="https://svoiludi.ch/instrumenty/proezdnoj-vybor/" data-lead="Перешли тем, кто выбирает проездной. В ссылке нет твоих данных." data-text="Привет! Тут можно посчитать, что выгоднее в Швейцарии — Halbtax, GA или обычные билеты. Бесплатно, PDF. https://svoiludi.ch/instrumenty/proezdnoj-vybor/"></div>
+  <p class="credit"><span>Свои люди в Швейцарии · svoiludi.ch</span><a href="https://svoiludi.ch/privacy/">Политика конфиденциальности</a></p>
+</div>
+
+<script src="/assets/kantony.js"></script>
+<script src="/assets/lib/jspdf.umd.min.js"></script>
+<script src="/assets/shema.js"></script>
+<script>
+window.HELP = {
+  lang: '<p><b>Русский + немецкий</b> (французский, итальянский) — названия проездных ещё и на языке, как их пишут на вокзале: Halbtax, Generalabonnement, abonnement demi-tarif.</p>',
+  who: '<p>От возраста зависит цена. Молодёжь — с 16 до 25 лет. Пожилые: женщины с 64, мужчины с 65 лет (для GA). Детям 6–16 лет нужен не абонемент, а Junior-Karte за 30 франков в год — тогда с родителями они едут бесплатно.</p>',
+  per: '<p>С 13 декабря 2026 года меняются цены: взрослый GA во 2-м классе 4095 франков вместо 3995, взрослый Halbtax на 5 франков дороже. Новые цены для молодёжи и пожилых пока не опубликованы — здесь стоят нынешние.</p>',
+  com: '<p>Цена билета в одну сторону без скидки (полная цена) на твой ежедневный путь, например на работу. Посмотри в приложении SBB, выбрав «без скидки». Если ездишь только в своём городе, сравни ещё с городским проездным (Verbundabo).</p>',
+  days: '<p>Сколько дней в неделю ты ездишь этим путём туда и обратно. Считаем 46 рабочих недель в году (без отпуска и праздников).</p>',
+  oth: '<p>Сколько в месяц стоили бы другие поездки по полной цене: в гости, на выходные, к врачу в другой город. Примерно, можно округлить.</p>',
+  ren: '<p>Первый Halbtax или после перерыва дороже, продление — дешевле на 20 франков.</p>'
+};
+const KEY = 'proezdnojVybor.v1';
+/* цены CHF в год. now — до 12.12.2026, new — с 13.12.2026 (подтверждено только для взрослых: Alliance SwissPass 04.08.2026; Halbtax продление 175 — расчётно) */
+const PR = {
+  now: {a: {hn: 190, hr: 170, g2: 3995, g1: 6520}, y: {hn: 120, hr: 100, g2: 2780, g1: 4450}, s: {hn: 190, hr: 170, g2: 3040, g1: 4950}},
+  new: {a: {hn: 195, hr: 175, g2: 4095, g1: 6770}, y: {hn: 120, hr: 100, g2: 2780, g1: 4450}, s: {hn: 195, hr: 175, g2: 3040, g1: 4950}}
+};
+const WHO = {a: 'Взрослый (25–64)', y: 'Молодёжь (16–25)', s: 'Пожилой (с 64/65)'};
+const LOC = {
+  t: {de: 'Welches Abo lohnt sich?', fr: 'Quel abonnement est avantageux ?', it: 'Quale abbonamento conviene?'},
+  ht: {de: 'Halbtax', fr: 'abonnement demi-tarif', it: 'abbonamento metà-prezzo'},
+  ga: {de: 'Generalabonnement (GA)', fr: 'abonnement général (AG)', it: 'abbonamento generale (AG)'},
+  ft: {de: 'Billette zum vollen Preis', fr: 'billets plein tarif', it: 'biglietti a prezzo intero'}
+};
+let S = load(), EX = null;
+function blank(){ return {lang: 'de', bw: false, who: 'a', cls: 2, per: 'new', ren: false, com: 12, days: 5, oth: 80}; }
+function load(){ try { const s = JSON.parse(localStorage.getItem(KEY)); if (s && typeof s === 'object') return Object.assign(blank(), s); } catch (e) {} return blank(); }
+function save(){ if (EX) return; try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} }
+const D = () => EX || S, bi = d => d.lang !== 'ru', L = (d, k) => bi(d) ? LOC[k][d.lang] : '';
+const fmt = n => Math.round(n).toLocaleString('de-CH').replace(/[’']/g, ' ');
+function calc(d){
+  const p = PR[d.per][d.who], k = d.cls === 1 ? 1.75 : 1;   // 1-й класс примерно в 1,75 раза дороже билета 2-го
+  const full = ((+d.com || 0) * 2 * (+d.days || 0) * 46 + (+d.oth || 0) * 12) * k;
+  const ht = (d.ren ? p.hr : p.hn), ga = d.cls === 1 ? p.g1 : p.g2;
+  const opts = [['none', 'Без абонемента', full, L(d, 'ft')], ['ht', 'Halbtax', ht + full / 2, L(d, 'ht')], ['ga', 'GA ' + d.cls + '-й класс', ga, L(d, 'ga')]];
+  const best = opts.reduce((a, b) => b[2] < a[2] ? b : a);
+  const beHT = ht * 2, beGA = (ga - ht) * 2;    // окупается Halbtax при полной цене > 2×Halbtax; GA лучше Halbtax при полной цене > 2×(GA−Halbtax)
+  return {p, full, ht, ga, opts, best, beHT, beGA};
+}
+function sheet(d){
+  const C = SH.pal(d.bw), P = SH.page(210, 297, C), c = C.c, X = 12, W = 186, r = calc(d);
+  P.header('Какой проездной выгоднее', L(d, 't'), WHO[d.who] + ', ' + d.cls + '-й класс');
+  let y = 27;
+  P.para('Сравнение за год: сколько ты заплатишь без абонемента, с Halbtax (все билеты за полцены) и с GA (ездишь везде без билетов). Цены ' + (d.per === 'new' ? 'с 13 декабря 2026 года' : 'до 12 декабря 2026 года') + '.', X, y, 8.4, false, C.ink, W, 3.9); y += 11;
+  y = P.sec('Мои поездки', X, y, W);
+  [['Ежедневный путь, билет в одну сторону', fmt(+d.com) + ' CHF'], ['Дней в неделю', String(d.days)], ['Другие поездки в месяц, полная цена', fmt(+d.oth) + ' CHF'], ['Всё по полной цене за год', fmt(r.full) + ' CHF']].forEach((row, i) => { P.text(row[0], X, y, 8.2, i === 3, i === 3 ? C.ink : C.mut); P.text(row[1], X + W, y, 8.6, true, C.ink, 'right'); y += 5.6; });
+  y += 3;
+  y = P.sec('Сколько это стоит за год', X, y, W);
+  const mx = Math.max(...r.opts.map(o => o[2]), 1), cols = [c.red, c.blue, c.green];
+  r.opts.forEach((o, i) => { const isB = o === r.best, w = Math.max(2, (W - 100) * o[2] / mx);
+    P.text(o[1], X, y + 5.2, 9.6, true, C.ink); if (o[3]) P.text(o[3], X, y + 9, 6.4, false, C.mut);
+    P.rect(X + 56, y, w, 9, cols[i][0], cols[i][1], 1.2); P.text(fmt(o[2]) + ' CHF' + (isB ? '  — выгоднее всего' : ''), X + 58 + w, y + 6, 8.8, true, isB ? cols[i][1] : C.ink); y += 15; });
+  y += 2;
+  y += P.card(X, y, W, c.green, 'Тебе выгоднее: ' + r.best[1], '', r.best[0] === 'none' ? 'Ты ездишь мало — абонемент не окупится. Покупай Sparbillette (скидка до 50 % на конкретный поезд) и Spartageskarte.' : r.best[0] === 'ht' ? 'Halbtax окупается, когда поездки по полной цене дороже ' + fmt(r.beHT) + ' франков в год. GA станет выгоднее, если по полной цене выйдет больше ' + fmt(r.beGA) + ' франков.' : 'GA выгоднее Halbtax, когда поездки по полной цене дороже ' + fmt(r.beGA) + ' франков в год. GA действует и в городском транспорте почти по всей Швейцарии, на многих кораблях, а на многие горные дороги даёт скидку.', {ts: 10, bs: 8}) + 5;
+  y = P.sec('Цены абонементов, CHF в год', X, y, W, d.per === 'new' ? 'с 13.12.2026' : 'до 12.12.2026');
+  const p = r.p; [['Halbtax, первый год', p.hn], ['Halbtax, продление', p.hr], ['GA 2-й класс', p.g2], ['GA 1-й класс', p.g1], ['Junior-Karte, ребёнок 6–16 с родителем', 30], ['Kinder-Mitfahrkarte, ребёнок с бабушкой, няней', 30]].forEach(row => { P.text(row[0], X + 2, y, 8.2, false, C.ink); P.text(fmt(row[1]), X + W, y, 8.6, true, C.ink, 'right'); P.line(X, y + 1.8, X + W, y + 1.8, C.line, 0.2); y += 5.8; });
+  y += 4;
+  y = P.sec('Советы', X, y, W);
+  ['Дети до 6 лет ездят бесплатно, 6–16 лет — с Junior-Karte бесплатно вместе с мамой или папой.', 'Ездишь только в своём городе — сравни с городским проездным (Verbundabo), он часто дешевле.', 'Билет покупай до посадки: без билета в поездах SBB доплата от 90 франков.', 'Halbtax продлевается автоматически — отменить можно до окончания срока.', 'До 25 лет — GA Night за 99 франков: ночные поездки по всей Швейцарии.'].forEach(s => { y = P.para('• ' + s, X + 2, y, 8, false, C.ink, W - 4, 3.8) + 1.2; });
+  P.foot('Расчёт для ориентира. Цены SBB и Alliance SwissPass на 08.10.2026; с 13.12.2026 подтверждены цены для взрослых, для молодёжи и пожилых — пока прежние. Билет 1-го класса считается примерно в 1,75 раза дороже 2-го. svoiludi.ch');
+  return P;
+}
+function build(){ return [sheet(D())]; }
+const $ = id => document.getElementById(id);
+$('who').innerHTML = Object.entries(WHO).map(([k, v]) => `<option value="${k}">${v}</option>`).join('');
+$('com').innerHTML = [0, 3, 4, 5, 6, 8, 10, 12, 15, 18, 20, 25, 30, 35, 40, 50, 60, 70, 80, 90, 100].map(v => `<option value="${v}">${v ? v + ' франков' : 'нет ежедневных поездок'}</option>`).join('');
+$('days').innerHTML = [0, 1, 2, 3, 4, 5, 6, 7].map(v => `<option value="${v}">${v}</option>`).join('');
+$('oth').innerHTML = [0, 20, 40, 60, 80, 100, 150, 200, 300, 400, 500].map(v => `<option value="${v}">${v} франков</option>`).join('');
+let UI;
+function fill(){ const d = D(); ['lang', 'who', 'per'].forEach(k => $(k).value = d[k]); $('cls').value = String(d.cls); $('com').value = String(d.com); $('days').value = String(d.days); $('oth').value = String(d.oth); $('bw').checked = !!d.bw; $('ren').checked = !!d.ren;
+  ['who', 'cls', 'per', 'com', 'days', 'oth', 'ren'].forEach(k => $(k).disabled = !!EX);
+  const r = calc(d); $('res').innerHTML = `<b>Выгоднее: ${r.best[1]}</b> — ${fmt(r.best[2])} франков в год. Без абонемента ${fmt(r.full)}, с Halbtax ${fmt(r.opts[1][2])}, GA ${fmt(r.ga)}.`;
+  $('exbar').hidden = !EX; $('exOn').hidden = !!EX; if (UI) UI.render(); }
+const set = f => { f(S); if (EX) f(EX); save(); fill(); };
+$('lang').addEventListener('change', e => set(s => s.lang = e.target.value));
+$('bw').addEventListener('change', e => set(s => s.bw = e.target.checked));
+['who', 'per'].forEach(k => $(k).addEventListener('change', e => { if (EX) return; S[k] = e.target.value; save(); fill(); }));
+['cls', 'com', 'days', 'oth'].forEach(k => $(k).addEventListener('change', e => { if (EX) return; S[k] = +e.target.value; save(); fill(); }));
+$('ren').addEventListener('change', e => { if (EX) return; S.ren = e.target.checked; save(); fill(); });
+const EXD = () => ({lang: 'de', bw: S.bw, who: 'a', cls: 2, per: 'new', ren: false, com: 12, days: 5, oth: 80});
+$('exOn').addEventListener('click', () => { EX = EXD(); fill(); window.scrollTo({top: $('exbar').offsetTop - 12, behavior: 'smooth'}); });
+$('exOff').addEventListener('click', () => { EX = null; fill(); });
+if (/[?&]example\b/.test(location.search)) EX = EXD();
+UI = SH.mount({build, title: 'Проездной', name: () => 'Halbtax-oder-GA'});
+fill();
+
+</script>
+<script src="/assets/help.js"></script>
+<script src="/assets/backup.js"></script>
+<script src="/assets/pdffan.js" defer></script>
+<script src="/assets/share.js" defer></script>
+<script src="/assets/samesite.js"></script>
+</body>
+</html>
