@@ -103,7 +103,7 @@
     dlg.addEventListener('click', e => { if (e.target === dlg) dlg.close(); });
     med.forEach(box => {
       box.innerHTML = '<div class="kt-h"><b>Дежурный врач в твоём кантоне</b><select aria-label="Твой кантон">' + opts + '</select></div><div class="med-out"></div>' +
-        '<div class="med-btns"><button type="button" class="med-all">Все кантоны</button><a class="med-print" href="' + (document.body.dataset.root || '/') + 'instrumenty/ekstrennye-nomera/">Сделать карточку с номерами (PDF)</a></div>';
+        '<div class="med-btns"><button type="button" class="med-all">Все кантоны</button><a class="med-print" href="' + (document.body.dataset.root || '/') + 'instrumenty/ekstrennye-nomera/' + (/index\.html$/.test(location.pathname) ? 'index.html' : '') + '">Сделать карточку с номерами (PDF)</a></div>';
       const sel = box.querySelector('select'), out = box.querySelector('.med-out');
       const draw = () => { out.innerHTML = cur && M[cur] ? rows(cur) : '<p class="kt-hint">Выбери кантон, и здесь появится номер дежурного врача. Его набирают, когда свой врач не отвечает, а в скорую не нужно.</p>'; };
       sel.value = cur; draw();
