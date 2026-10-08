@@ -58,10 +58,12 @@
       const k = box.querySelector('select').value, out = box.querySelector('.kt-out'), keys = (box.dataset.k || '').split(',').filter(Boolean);
       if (!k || !K[k]) { out.innerHTML = '<p class="kt-hint">Правила, сроки и бланки в каждом кантоне свои. Выбери кантон, и здесь появятся ссылки на его официальные страницы.</p>'; return; }
       const c = K[k], li = LI2[c.l] || 1;
-      out.innerHTML = keys.map(x => {
+      const FZ = window.KANTONY_FZ || {}, f = FZ[k];
+      out.innerHTML = keys.filter(x => LBL[x] && c.u && c.u[x]).map(x => {
         const fb = (c.fb || []).includes(x);
         return '<a class="kt-link" href="' + esc(c.u[x]) + '" target="_blank" rel="noopener"><b>' + LBL[x][0] + '</b><span>' + (fb ? 'сайт кантона, в поиске набери «' + LBL[x][li] + '»' : LBL[x][li] + ' · ' + esc(c.n)) + ' ↗</span></a>';
       }).join('') + (keys.includes('einbuergerung') && c.einb ? '<p class="kt-note"><b>Кантон ' + esc(c.n) + ' добавляет:</b> ' + esc(c.einb) + '.</p>' : '') +
+        (keys.includes('fz') && f ? '<p class="kt-note"><b>Семейные пособия · ' + esc(c.n) + ', 2026:</b> ' + ('на ребёнка до 16 лет ' + esc(f.k) + ' в месяц, на учащегося с 16 до 25 лет ' + esc(f.a) + ' в месяц' + (f.g ? ', при рождении один раз ' + esc(f.g) : '')).replace(/\.?$/, '.') + '</p>' : '') +
         '<p class="kt-hint">Если что-то в статье расходится со страницей кантона, верь кантону.</p>';
     };
     kt.forEach(box => {
