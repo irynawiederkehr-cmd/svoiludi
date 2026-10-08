@@ -5,7 +5,7 @@
 Запуск: python3 preview_site.py <repo> <out>"""
 import sys, os, re, shutil, json, datetime
 REPO, OUT = sys.argv[1], sys.argv[2]
-TOOLS = ['zarplata', 'srok-pisma', 'statuty-fereyna', 'musor-pamyatka', 'obyavlenie-pitomec', 'kartochka-pitomca', 'ekstrennye-nomera', 'put-obrazovaniya', 'yazyk-trebovaniya', 'strahovki-obyazatelnye', 'nalogi-shema', 'pensiya-shema', 'grazhdanstvo-shema', 'diplomy-shema', 'franshiza-shema', 'kuda-obratitsya', 'moi-dannye', 'schet-qr', 'dohody-rashody', 'dogovor-nyani', 'anketa-klienta', 'etiketka-eda', 'pisma-arenda', 'dosye-arendatora', 'ipoteka-raschet', 'proezdnoj-vybor', 'bolezn-zarplata', 'pereezd-spisok', 'zhurnal-shuma', 'plan-pohoda', 'tamozhnya-limity', 'pisma-prodavcu', 'rezyume', 'uchet-vremeni', 'chasy-po-klientam', 'moj-budget', 'moj-den', 'moj-god', 'moi-emocii']
+TOOLS = ['zarplata', 'sroki-goda', 'posobiya-raschet', 'srok-pisma', 'statuty-fereyna', 'musor-pamyatka', 'obyavlenie-pitomec', 'kartochka-pitomca', 'ekstrennye-nomera', 'put-obrazovaniya', 'yazyk-trebovaniya', 'strahovki-obyazatelnye', 'nalogi-shema', 'pensiya-shema', 'grazhdanstvo-shema', 'diplomy-shema', 'franshiza-shema', 'kuda-obratitsya', 'moi-dannye', 'schet-qr', 'dohody-rashody', 'dogovor-nyani', 'anketa-klienta', 'etiketka-eda', 'pisma-arenda', 'dosye-arendatora', 'ipoteka-raschet', 'proezdnoj-vybor', 'bolezn-zarplata', 'pereezd-spisok', 'zhurnal-shuma', 'plan-pohoda', 'tamozhnya-limity', 'pisma-prodavcu', 'rezyume', 'uchet-vremeni', 'chasy-po-klientam', 'moj-budget', 'moj-den', 'moj-god', 'moi-emocii']
 SHV = ['shveycariya/index.html'] + ['shveycariya/' + d + '/index.html' for d in sorted(os.listdir(os.path.join(REPO, 'shveycariya'))) if os.path.isdir(os.path.join(REPO, 'shveycariya', d))] if os.path.isdir(os.path.join(REPO, 'shveycariya')) else []
 PAGES = SHV + ['index.html', 'vakansii/index.html', 'kursy/index.html', 'events/index.html', 'join/index.html', 'instrumenty/index.html'] + ['instrumenty/' + t + '/index.html' for t in TOOLS]
 INSET = {'vakansii', 'kursy', 'events', 'join', 'shveycariya'}
@@ -16,7 +16,7 @@ ASSETS = ['assets/fonts.css', 'assets/wm.css', 'assets/help.js', 'assets/share.j
 ASSETS += ['assets/fonts/' + f for f in os.listdir(os.path.join(REPO, 'assets/fonts'))]
 ASSETS += ['img/' + f for f in os.listdir(os.path.join(REPO, 'img'))]
 ASSETS += ['assets/lib/fonts-pdf/' + f for f in os.listdir(os.path.join(REPO, 'assets/lib/fonts-pdf'))] if os.path.isdir(os.path.join(REPO, 'assets/lib/fonts-pdf')) else []
-ASSETS += [a for a in ['assets/pdffan.js', 'assets/backup.js', 'assets/lib/exceljs.min.js', 'assets/lib/pdf-lib.min.js', 'assets/lib/pdfjs/pdf.min.js', 'assets/lib/pdfjs/pdf.worker.min.js'] if os.path.exists(os.path.join(REPO, a))]
+ASSETS += [a for a in ['assets/pdffan.js', 'assets/backup.js', 'assets/sroki.js', 'assets/bwprint.js', 'assets/lib/exceljs.min.js', 'assets/lib/pdf-lib.min.js', 'assets/lib/pdfjs/pdf.min.js', 'assets/lib/pdfjs/pdf.worker.min.js'] if os.path.exists(os.path.join(REPO, a))]
 for dp, dn, fn in os.walk(os.path.join(REPO, 'instrumenty/preview')):
     ASSETS += [os.path.relpath(os.path.join(dp, f), REPO) for f in fn if f.endswith('.jpg')]
 BANNER = ('<div style="position:fixed;left:0;right:0;top:0;z-index:2147483000;box-shadow:0 4px 14px rgba(0,0,0,.18);background:#2f2924;color:#FFFCF8;font:600 13px/1.45 Manrope,system-ui,sans-serif;'
