@@ -2175,3 +2175,90 @@ ARTICLES['professii-avto'] = dict(
     terms=[('Deutsch', 'berufsmässiger Personentransport (BPT), Code 121, Führerausweis, Strassenverkehrsamt, Taxi, Limousinendienst, Plakette, Chauffeurverordnung ARV 2, Fahrlehrerausweis, Autowerkstatt, Sonderabfall'), ('Français', 'transport professionnel de personnes, permis de conduire, office de la circulation, taxi, VTC, OTR 2, moniteur d’auto-école, garage, déchets spéciaux'), ('Italiano', 'trasporto professionale di persone, licenza di condurre, ufficio della circolazione, taxi, noleggio con conducente, OLR 2, maestro conducente, officina'), ('English', 'professional passenger transport, driving licence, road traffic office, taxi, ride-hailing, driving instructor, garage')],
     post='Это заявление в Strassenverkehrsamt, регистрация в кантоне и согласие на гараж.',
 )
+
+ARTICLES['domashniy-personal'] = dict(
+    h1='Домашний персонал в Швейцарии: <em>как нанять няню, уборщицу или помощницу и оформить всё по закону</em>',
+    seo='Домашний персонал в Швейцарии: Hausangestellte anmelden, AHV, страховка, зарплата',
+    desc='Если нанимаешь няню, уборщицу или помощницу по дому в Швейцарии, ты работодатель. Регистрация в AHV за 30 дней, взносы с первого франка, упрощённая процедура, страховка от несчастного случая, пенсионная касса, договор, отпуск, больничные, минимальная зарплата, расчётка. По-немецки Hausangestellte anmelden, по-французски personnel de maison, по-итальянски personale domestico.',
+    lead='Кто нанимает няню, уборщицу или помощницу по дому, становится работодателем — даже если человек приходит на два часа в неделю. Оформить всё несложно, а без этого семья нарушает закон и рискует большими доплатами, если случится несчастный случай.',
+    body='''
+<nav class="toc" aria-label="Содержание"><b>В этой статье</b>
+<ul>
+  <li><a href="#ahv">Регистрация в AHV</a></li>
+  <li><a href="#strahovki">Страховки</a></li>
+  <li><a href="#zarplata">Зарплата, отпуск и больничные</a></li>
+  <li><a href="#dogovor">Договор и увольнение</a></li>
+  <li><a href="#bumagi">Расчётка и отчёт за год</a></li>
+  <li><a href="#uhod">Уход за пожилыми и помощница с проживанием</a></li>
+</ul></nav>
+
+<h2 id="ahv">Регистрация в AHV: в течение 30 дней</h2>
+<ul class="ul">
+  <li><b>Взносы с первого франка.</b> В частном доме взносы AHV, IV, EO и ALV платятся с любой зарплаты. Исключение — молодые люди до 25 лет, которые зарабатывают у тебя не больше 750 франков в год (<a href="https://www.seco.admin.ch/de/anleitung-anmeldung-arbeitsverhaeltnis-und-lohnabrechnung">SECO</a>).</li>
+  <li><b>Регистрация.</b> В течение 30 дней после начала работы зарегистрируйся работодателем в AHV-кассе (Ausgleichskasse) своего кантона и сообщи о работнике. Если у него нет номера AHV, касса выдаст.</li>
+  <li><b>Упрощённая процедура</b> (vereinfachtes Abrechnungsverfahren): если зарплата одного работника до 22 680 франков в год, а всех — до 60 480, рассчитываешься с кассой раз в год. Касса берёт и налог 5% — налог у источника отдельно оформлять не нужно.</li>
+  <li><b>Без упрощённой процедуры</b> работнику без пермита C удерживаешь налог у источника и регистрируешь его в налоговой кантона в течение 8 дней.</li>
+</ul>
+<div class="warn"><b>Помогут оформить «чеки»</b>В Женеве (<a href="https://www.chequeservice.ch/">Chèque service</a>), в Во, Невшателе и Вале (<a href="https://www.vaudfamille.ch/N6487/cheque-emploi.html">Chèque emploi</a>) организация делает регистрацию, взносы и страховки за тебя.</div>
+
+<h2 id="strahovki">Страховки</h2>
+<ul class="ul">
+  <li><b>От несчастного случая — обязательно</b> для любого работника, даже на час в неделю. Домашний персонал страхуют не в Suva, а в частной страховой. Без страховки работодатель нарушает закон и платит потом за всё сам.</li>
+  <li><b>От несчастных случаев вне работы (NBU)</b> — если человек работает у тебя 8 часов в неделю и больше. Взнос можно удерживать из зарплаты.</li>
+  <li><b>Пенсионная касса (BVG)</b> — если зарплата у тебя больше 22 680 франков в год.</li>
+  <li><b>Страховка на случай болезни</b> (Krankentaggeld) не обязательна, но без неё зарплату во время болезни платишь сама. В Женеве она обязательна с 2022 года.</li>
+</ul>
+<p>Какие страховки обязательны и кто за что платит — на схеме «Обязательные страховки».</p>
+
+<h2 id="zarplata">Зарплата, отпуск и больничные</h2>
+<ul class="ul">
+  <li><b>Минимум для домашнего персонала</b> (<a href="https://www.seco.admin.ch/de/normalarbeitsvertraege-bund">NAV Hauswirtschaft</a>) с 2026 года: 20.35 франка в час без опыта, 22.30 с опытом от 4 лет, 24.55 с дипломом EFZ. Действует, если человек работает у тебя в среднем от 5 часов в неделю. На нянь, у которых главное — дети, он не распространяется.</li>
+  <li><b>Минимальная зарплата кантона</b> — для всех: Женева 24.59, Базель-Штадт 22.20, Юра 21.40, Невшатель 21.35, Тичино 20.00–20.50 франка в час (2026).</li>
+  <li><b>Отпуск</b> не меньше 4 недель в год, до 20 лет — 5 недель. При почасовой оплате — отпускные 8,33% (или 10,64%) к ставке отдельной строкой.</li>
+  <li><b>Больничные.</b> Если работа длится больше 3 месяцев, при болезни ты платишь зарплату ограниченное время: в первый год работы не меньше 3 недель, дальше дольше. Поэтому и нужна страховка на случай болезни.</li>
+</ul>
+<p>Сколько стоит работник с взносами и сколько он получит на руки — посчитай в инструменте «Расчёт зарплаты».</p>
+
+<h2 id="dogovor">Договор и увольнение</h2>
+<ul class="ul">
+  <li>Договор лучше письменно: часы, ставка, отпуск, больничные, испытательный срок, сроки увольнения, ключи, что входит в работу.</li>
+  <li>В кантоне есть типовой договор для домашнего персонала (Normalarbeitsvertrag): он действует, если в договоре не написано иначе — про отдых, сверхурочные, отпуск.</li>
+  <li>Сроки увольнения по закону, если в договоре нет других: в испытательный срок — 7 дней, в первый год — 1 месяц, со 2-го по 9-й год — 2 месяца, дальше — 3 месяца, к концу месяца.</li>
+  <li>Увольнение и важные письма отправляй заказным (Einschreiben), храни копию и квитанцию.</li>
+</ul>
+
+<h2 id="bumagi">Расчётка и отчёт за год</h2>
+<ul class="ul">
+  <li>Каждый месяц — расчётка: брутто, взносы, сумма к выплате.</li>
+  <li>Раз в год — справка о зарплате (Lohnausweis) для налоговой декларации работника.</li>
+  <li>Зарплату за год сообщаешь в AHV-кассу до 30 января следующего года.</li>
+  <li>Веди учёт часов, отпуска и больничных — это защищает обе стороны при споре.</li>
+</ul>
+
+<h2 id="uhod">Уход за пожилыми и помощница с проживанием</h2>
+<ul class="ul">
+  <li><b>Медицинский уход</b> (например, базовый уход за телом) обычно требует разрешения кантона и признанного диплома медсестры. Помощь по дому и присмотр — нет.</li>
+  <li><b>С проживанием.</b> Еда и жильё — часть зарплаты: их стоимость учитывают во взносах AHV. Время, когда человек должен быть рядом, — рабочее время, даже ночью.</li>
+  <li><b>Через агентство</b> работодатель — агентство. Проверь, есть ли у него разрешение на подбор и прокат персонала (Personalverleih), и кто платит взносы.</li>
+</ul>
+''',
+    steps=[
+        'В течение 30 дней после начала работы зарегистрируйся работодателем в AHV-кассе кантона и сообщи о работнике.',
+        'Спроси об упрощённой процедуре, если зарплата небольшая.',
+        'Оформи страховку от несчастного случая до первого рабочего дня.',
+        'Подпиши письменный договор и сверь ставку с минимумом кантона.',
+        'Каждый месяц давай расчётку, веди учёт часов и отпуска.',
+        'До 30 января сообщи зарплату за год в AHV-кассу и выдай Lohnausweis.',
+    ],
+    tools={'zarplata': 'Сколько стоит работник с взносами и сколько он получит на руки, расчётка в PDF на русском или немецком.', 'uchet-vremeni': 'Часы, отпуск и больничные работника — для расчётки и спокойствия обеих сторон.', 'strahovki-obyazatelnye': 'Какие страховки обязательны, когда ты работодатель в частном доме.', 'ekstrennye-nomera': 'Карточка для няни или помощницы: экстренные номера, дежурный врач кантона, твои телефоны.'},
+    related=['nyani', 'professii-dom', 'trudovoe-pravo', 'nalogovaya-deklaraciya', 'strahovki'],
+    sources=[
+        ('SECO — как оформить работника и зарплату, в том числе в частном доме', 'https://www.seco.admin.ch/de/anleitung-anmeldung-arbeitsverhaeltnis-und-lohnabrechnung'),
+        ('Кантон Цюрих — NAV Hauswirtschaft 2026: минимальные зарплаты и уход', 'https://www.zh.ch/content/dam/zhweb/bilder-dokumente/themen/wirtschaft-arbeit/erwerbstaetigkeit-von-auslaendern/informationen-zu-einzelnen-branchen/26_01_01%20Informationen%20zum%20NAV%20Hauswirtschaft.pdf'),
+        ('Кантон Женева — как нанять домашний персонал', 'https://www.ge.ch/node/28399'),
+        ('Кантон Женева — минимальная зарплата 2026', 'https://www.ge.ch/actualite/salaire-minimum-genevois-2026-etablira-2459-fr-heure-1-10-2025'),
+        ('Vaud Famille — Chèque emploi', 'https://www.vaudfamille.ch/N6487/cheque-emploi.html'),
+    ],
+    terms=[('Deutsch', 'Hausangestellte, Haushaltshilfe, Ausgleichskasse, vereinfachtes Abrechnungsverfahren, Unfallversicherung, NBU, BVG, Krankentaggeld, Normalarbeitsvertrag, Lohnabrechnung, Lohnausweis, Kündigungsfrist'), ('Français', 'personnel de maison, employée domestique, caisse de compensation AVS, procédure simplifiée, assurance accidents, perte de gain maladie, contrat-type, fiche de salaire, certificat de salaire, délai de congé'), ('Italiano', 'personale domestico, cassa di compensazione AVS, procedura semplificata, assicurazione infortuni, indennità giornaliera di malattia, contratto normale, conteggio salariale, certificato di salario, termine di disdetta'), ('English', 'domestic staff, compensation office, simplified procedure, accident insurance, payslip, salary certificate, notice period')],
+    post='Это регистрация в AHV-кассе, договор с работником и его расторжение.',
+)
