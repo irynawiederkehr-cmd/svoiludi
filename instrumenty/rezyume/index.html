@@ -330,7 +330,7 @@ input[type=range]{width:100%;accent-color:var(--sage)}
 /* ===================== данные ===================== */
 const KEY = 'rezyumeCH.v1';
 const COLORS = {sage: ['#4F5E3E', '#E6EADD', 'Шалфей'], blue: ['#2E5A88', '#E3EBF4', 'Синий'], wine: ['#7A2E3A', '#F3E4E6', 'Бордо'], gold: ['#9A6B12', '#F5EBD6', 'Горчица'], ink: ['#2B2724', '#ECEAE7', 'Чёрно-белый'], eco: ['#1F1B18', '#FFFFFF', 'Без цвета, для дешёвой печати']};
-/* «Без цвета»: белая колонка с тонкой линией и фото в оттенках серого — меньше чернил при печати (09.10.2026) */
+/* «Без цвета»: белая колонка с тонкой линией и фото в оттенках серого — меньше чернил при печати (08.10.2026) */
 let GP = {src: '', data: ''};
 function grayPhoto(src){ if (!src || GP.src === src) return; GP = {src, data: ''}; const im = new Image(); im.onload = () => { const c = document.createElement('canvas'); c.width = im.naturalWidth; c.height = im.naturalHeight; const x = c.getContext('2d'); x.drawImage(im, 0, 0); const d = x.getImageData(0, 0, c.width, c.height), p = d.data; for (let i = 0; i < p.length; i += 4){ const l = 0.299 * p[i] + 0.587 * p[i + 1] + 0.114 * p[i + 2]; p[i] = p[i + 1] = p[i + 2] = l; } x.putImageData(d, 0, 0); if (GP.src === src){ GP.data = c.toDataURL('image/jpeg', 0.9); render(); } }; im.src = src; }
 const blank = () => ({lang: 'de', canton: '', tpl: 'kolonka', color: 'sage', photoOn: true, photo: '', refReq: true,
