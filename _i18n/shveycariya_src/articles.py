@@ -2349,3 +2349,145 @@ ARTICLES['samozanyatost'] = dict(
     terms=[('Deutsch', 'selbständig, Einzelfirma, Ausgleichskasse, Anerkennung der Selbständigkeit, Akontobeiträge, Handelsregister, MWST, Buchhaltung, Betriebshaftpflicht, Krankentaggeld, Säule 3a, QR-Rechnung, Treuhand'), ('Français', 'indépendant, raison individuelle, caisse de compensation AVS, acomptes, registre du commerce, TVA, comptabilité, responsabilité civile d’entreprise, perte de gain maladie, 3e pilier, QR-facture, fiduciaire'), ('Italiano', 'lavoratore indipendente, ditta individuale, cassa di compensazione AVS, acconti, registro di commercio, IVA, contabilità, responsabilità civile aziendale, terzo pilastro, QR-fattura, fiduciaria'), ('English', 'self-employed, sole proprietorship, compensation office, commercial register, VAT, bookkeeping, liability insurance, QR-bill')],
     post='Это регистрация в AHV-кассе, ответы кассе и налоговой, напоминания клиентам об оплате и заявление на разрешение кантона.',
 )
+
+ARTICLES['poterya-raboty'] = dict(
+    h1='Потеря работы в Швейцарии и RAV: <em>как получить пособие по безработице</em>',
+    seo='Пособие по безработице в Швейцарии: RAV, Arbeitslosenkasse, 70 или 80%',
+    desc='Что делать, если теряешь работу в Швейцарии. Регистрация в RAV не позже первого дня без работы, 12 месяцев взносов за 2 года, пособие 70 или 80% (до 12 350 франков в месяц застрахованного дохода), сколько дней платят, дни ожидания, поиск работы и штрафные дни. По-французски chômage, ORP, по-итальянски disoccupazione, URC.',
+    lead='Если ты теряешь работу, главное — не опоздать: зарегистрируйся в RAV ещё во время срока увольнения и не позже первого дня без работы. Пособие платят только с дня регистрации, задним числом его не дают.',
+    body='''
+<nav class="toc" aria-label="Содержание"><b>В этой статье</b>
+<ul>
+  <li><a href="#srazu">Что сделать сразу</a></li>
+  <li><a href="#pravo">Есть ли право на пособие</a></li>
+  <li><a href="#skolko">Сколько и как долго платят</a></li>
+  <li><a href="#poisk">Поиск работы и штрафные дни</a></li>
+  <li><a href="#den">Деньги, страховки и пенсия</a></li>
+</ul></nav>
+
+<h2 id="srazu">Что сделать сразу</h2>
+<ul class="ul">
+  <li><b>Проверь увольнение.</b> Если ты болела или была беременна, работодатель в это время не может уволить (подробнее в теме «Трудовой договор и увольнение»). Попроси причину увольнения письменно.</li>
+  <li><b>Зарегистрируйся в RAV</b> через <a href="https://www.job-room.ch/">Job-Room</a> или в своей общине — ещё во время срока увольнения, не позже первого дня без работы.</li>
+  <li><b>Ищи работу уже в срок увольнения</b> и записывай каждый отклик: RAV спросит о поиске и за этот период.</li>
+  <li><b>Выбери кассу по безработице</b> (Arbeitslosenkasse) — государственную кантона или кассу профсоюза. Она платит пособие, RAV помогает с поиском.</li>
+  <li><b>Не увольняйся сама без новой работы</b>, если можешь: тогда будут штрафные дни (ниже).</li>
+</ul>
+
+<h2 id="pravo">Есть ли право на пособие</h2>
+<p>Обычно нужно не меньше 12 месяцев взносов (работы) за последние 2 года, жить в Швейцарии, быть готовой и способной работать и каждый месяц показывать поиск работы (<a href="https://www.zh.ch/de/wirtschaft-arbeit/stellensuche-arbeitslosigkeit/arbeitslosenentschaedigung.html">кантон Цюрих</a>). Кто не платил взносы по уважительной причине (учёба, болезнь, развод), может получить пособие по фиксированной ставке на 90 дней. Работавшие на себя пособия по безработице не получают.</p>
+<p>Со статусом S, F или пермитом L право на пособие зависит от разрешения и условий — спроси в RAV при регистрации.</p>
+
+<h2 id="skolko">Сколько и как долго платят</h2>
+<ul class="ul">
+  <li><b>70% застрахованного дохода</b>, или <b>80%</b> — если содержишь детей до 25 лет, если доход был не выше 3797 франков в месяц или у тебя пенсия IV от 40%.</li>
+  <li>Застрахованный доход — средняя зарплата за последние 6 или 12 месяцев, максимум 12 350 франков в месяц.</li>
+  <li><b>Сколько дней</b> (рабочих): обычно 260 при 12–18 месяцах взносов и 400 при 18–24 месяцах; после 55 лет и при 22 месяцах взносов — до 520; за 4 года до пенсии — до 640. До 25 лет без детей — 200.</li>
+  <li><b>Дни ожидания</b> в начале: от 0 до 20 дней — чем выше доход и если нет детей, тем больше.</li>
+  <li>Из пособия удерживают AHV, страховку от несчастного случая и налог у источника, если он у тебя был.</li>
+</ul>
+
+<h2 id="poisk">Поиск работы и штрафные дни</h2>
+<ul class="ul">
+  <li>Каждый месяц сдаёшь в RAV список откликов (сколько — договоришься с консультантом). Опоздала или откликов мало — штрафные дни (Einstelltage), за них не платят.</li>
+  <li>Уволилась сама без уважительной причины — от 1 до 60 штрафных дней. Причину нужно объяснить письменно.</li>
+  <li>RAV может отправить на курсы (язык, компьютер, профессия) — бесплатно для тебя.</li>
+  <li>Временная работа во время безработицы — можно, часть дохода засчитывается.</li>
+</ul>
+
+<h2 id="den">Деньги, страховки и пенсия</h2>
+<ul class="ul">
+  <li>Пересчитай бюджет: пособие меньше зарплаты, а счета за медстраховку и налоги идут как раньше. Если не хватает — спроси о скидке на медстраховку (Prämienverbilligung) в кантоне.</li>
+  <li>Деньги из пенсионной кассы переводятся на счёт свободного перехода (Freizügigkeitskonto) — не трать их, это твоя пенсия.</li>
+  <li>Страховка от несчастного случая через кассу по безработице действует, пока получаешь пособие.</li>
+  <li>Важные письма в RAV и кассу — заказным (Einschreiben), с копией и квитанцией.</li>
+</ul>
+''',
+    steps=[
+        'Получила увольнение — проверь, нет ли запрета на увольнение (болезнь, беременность), и попроси причину письменно.',
+        'Зарегистрируйся в RAV через Job-Room во время срока увольнения, не позже первого дня без работы.',
+        'Ищи работу уже сейчас и записывай каждый отклик.',
+        'Выбери кассу по безработице и подай документы: договор, увольнение, расчётки.',
+        'Пересчитай бюджет и узнай о скидке на медстраховку.',
+        'Обнови резюме и попроси у работодателя рекомендацию (Arbeitszeugnis).',
+    ],
+    tools={'rezyume': 'Новое резюме по швейцарским правилам на языке вакансии — для откликов и RAV.', 'moj-budget': 'Пересчитай месяц на пособие: что платить обязательно и где сэкономить.', 'moj-den': 'Поиск работы — это работа: распиши день, чтобы были время на отклики, язык и отдых.', 'pensiya-shema': 'Что с пенсионной кассой при потере работы и как не потерять годы AHV.', 'zarplata': 'Проверь последнюю расчётку и сумму, от которой считают пособие.'},
+    related=['rabota', 'trudovoe-pravo', 'sozialhilfe', 'pensiya', 'medstrahovka'],
+    sources=[
+        ('Кантон Цюрих — пособие по безработице: регистрация, 70/80%, дни, ожидание, штрафные дни', 'https://www.zh.ch/de/wirtschaft-arbeit/stellensuche-arbeitslosigkeit/arbeitslosenentschaedigung.html'),
+        ('SECO — памятка о страховании по безработице', 'https://WWW.SECO.ADMIN.CH/dam/seco/de/dokumente/Arbeit/ALV/Grundlagen/Faktenblatt_Die_Arbeitslosenversicherung.pdf.download.pdf/DE_Faktenblatt_Die_Arbeitslosenversicherung.pdf'),
+        ('arbeit.swiss — финансы при безработице', 'https://www.arbeit.swiss/secoalv/de/home/menue/stellensuchende/arbeitslos-was-tun-/finanzielles.html'),
+    ],
+    terms=[('Deutsch', 'RAV, Arbeitslosenkasse, Arbeitslosenentschädigung, Taggeld, versicherter Verdienst, Wartetage, Einstelltage, Arbeitsbemühungen, Freizügigkeitskonto, Arbeitszeugnis'), ('Français', 'ORP, caisse de chômage, indemnité de chômage, gain assuré, délai d’attente, jours de suspension, recherches d’emploi, compte de libre passage, certificat de travail'), ('Italiano', 'URC, cassa disoccupazione, indennità di disoccupazione, guadagno assicurato, giorni di attesa, giorni di sospensione, ricerche di lavoro, conto di libero passaggio'), ('English', 'regional employment centre, unemployment fund, daily allowance, insured earnings, waiting days, suspension days, job search')],
+    post='Это объяснение увольнения для кассы, ответы RAV и возражения на штрафные дни.',
+)
+
+ARTICLES['trudovoe-pravo'] = dict(
+    h1='Трудовой договор и увольнение в Швейцарии: <em>сроки (Kündigungsfrist), защита и рекомендация</em>',
+    seo='Kündigungsfrist в Швейцарии: трудовой договор, увольнение, испытательный срок',
+    desc='Трудовой договор в Швейцарии простыми словами: испытательный срок, сроки увольнения (Kündigungsfrist) по закону, когда уволить нельзя (болезнь, беременность), причина письменно, отпуск, сверхурочные, 13-я зарплата, рекомендация (Arbeitszeugnis). По-французски contrat de travail, délai de congé, по-итальянски contratto di lavoro, termine di disdetta.',
+    lead='В Швейцарии уволить и уволиться проще, чем во многих странах: причина не нужна, важны только сроки и форма. Но есть периоды, когда работодатель уволить не может, и права, о которых стоит знать заранее.',
+    body='''
+<nav class="toc" aria-label="Содержание"><b>В этой статье</b>
+<ul>
+  <li><a href="#dogovor">Что должно быть в договоре</a></li>
+  <li><a href="#sroki">Сроки увольнения</a></li>
+  <li><a href="#zashita">Когда уволить нельзя</a></li>
+  <li><a href="#prava">Отпуск, сверхурочные, 13-я зарплата</a></li>
+  <li><a href="#zeugnis">Рекомендация и спор</a></li>
+</ul></nav>
+
+<h2 id="dogovor">Что должно быть в договоре</h2>
+<p>Договор может быть и устным, но лучше письменно: должность, место, часы, зарплата (и 13-я, если есть), отпуск, испытательный срок, сроки увольнения. Если в отрасли есть коллективный договор (GAV) — например, в строительстве, гастрономии, уборке, — он может давать больше прав, чем закон. Спроси работодателя, действует ли GAV.</p>
+
+<h2 id="sroki">Сроки увольнения (Kündigungsfrist)</h2>
+<p>Если в договоре или GAV не написано иначе, по закону (<a href="https://ch.ch/de/kundigung-arbeitsvertrag">ch.ch</a>):</p>
+<ul class="ul">
+  <li>в испытательный срок — 7 календарных дней;</li>
+  <li>в первый год работы — 1 месяц, к концу месяца;</li>
+  <li>со 2-го по 9-й год — 2 месяца, к концу месяца;</li>
+  <li>с 10-го года — 3 месяца, к концу месяца.</li>
+</ul>
+<p>Увольнение действует с момента, когда другая сторона его <b>получила</b>. Поэтому отправляй заказным письмом (Einschreiben) заранее или отдавай лично под подпись о получении. Причину называть не обязательно, но если другая сторона попросит, её нужно дать письменно.</p>
+
+<h2 id="zashita">Когда уволить нельзя</h2>
+<ul class="ul">
+  <li><b>Болезнь или несчастный случай</b> после испытательного срока: 30 дней в первый год работы, 90 дней со 2-го по 5-й год, 180 дней с 6-го года.</li>
+  <li><b>Беременность</b> и 16 недель после родов.</li>
+  <li>Увольнение в эти периоды недействительно. Если увольнение пришло до болезни, срок увольнения продлевается.</li>
+  <li>Уволиться сама ты можешь и в эти периоды.</li>
+  <li>Увольнение из мести (например, за то, что потребовала свои права) — злоупотребление: суд может присудить компенсацию. Возражение нужно отправить письменно до конца срока увольнения.</li>
+</ul>
+
+<h2 id="prava">Отпуск, сверхурочные, 13-я зарплата</h2>
+<ul class="ul">
+  <li><b>Отпуск</b> — не меньше 4 недель в год, до 20 лет — 5 недель.</li>
+  <li><b>Сверхурочные</b> оплачиваются с надбавкой 25% или компенсируются отгулом, если в договоре письменно не написано иначе.</li>
+  <li><b>13-я зарплата</b> — только если она есть в договоре или GAV.</li>
+  <li><b>Зарплата при болезни</b> — ограниченное время по закону или дольше по страховке работодателя (Krankentaggeld). Посмотри в договоре.</li>
+</ul>
+
+<h2 id="zeugnis">Рекомендация и спор</h2>
+<ul class="ul">
+  <li>Ты в любой момент можешь попросить рекомендацию (Arbeitszeugnis) — она важна для следующей работы. Если в ней ошибки или скрытые плохие формулировки, попроси исправить.</li>
+  <li>Споры о зарплате до 30 000 франков в суде бесплатны. Начни с письма работодателю, потом — консультация профсоюза или юриста по трудовому праву.</li>
+  <li>Веди учёт своих часов, отпуска и больничных — это главное доказательство в споре.</li>
+</ul>
+''',
+    steps=[
+        'Попроси письменный договор и узнай, действует ли коллективный договор (GAV).',
+        'Проверь в договоре испытательный срок и сроки увольнения.',
+        'Увольняешься — отправь письмо заказным заранее, чтобы оно пришло до начала срока.',
+        'Уволили во время болезни или беременности — увольнение недействительно, напиши об этом работодателю.',
+        'Попроси рекомендацию (Arbeitszeugnis) и сразу зарегистрируйся в RAV, если новой работы нет.',
+        'Веди учёт часов, отпуска и больничных.',
+    ],
+    tools={'uchet-vremeni': 'Часы, сверхурочные, отпуск и больничные — доказательство, если будет спор.', 'zarplata': 'Проверь расчётку: ставка, отпускные, сверхурочные, взносы.', 'rezyume': 'Резюме по-швейцарски, если ищешь новую работу.'},
+    related=['poterya-raboty', 'rabota', 'bolezn-na-rabote', 'domashniy-personal'],
+    sources=[
+        ('ch.ch — увольнение: сроки, форма, защита при болезни и беременности, причина письменно', 'https://ch.ch/de/kundigung-arbeitsvertrag'),
+        ('Суды кантона Цюрих — периоды запрета увольнения', 'https://www.gerichte-zh.ch/de/themen/arbeit/aufloesung-arbeitsverhaeltnis/ordentliche-kuendigung/sperrfristen'),
+    ],
+    terms=[('Deutsch', 'Arbeitsvertrag, Probezeit, Kündigung, Kündigungsfrist, Sperrfrist, missbräuchliche Kündigung, Überstunden, 13. Monatslohn, Arbeitszeugnis, Gesamtarbeitsvertrag (GAV)'), ('Français', 'contrat de travail, temps d’essai, résiliation, délai de congé, période de protection, congé abusif, heures supplémentaires, 13e salaire, certificat de travail, CCT'), ('Italiano', 'contratto di lavoro, periodo di prova, disdetta, termine di disdetta, periodo di protezione, disdetta abusiva, ore supplementari, tredicesima, certificato di lavoro, CCL'), ('English', 'employment contract, probation, notice period, protection period, unfair dismissal, overtime, reference letter, collective agreement')],
+    post='Это увольнение, возражение против увольнения и просьба о рекомендации.',
+)
