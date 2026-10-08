@@ -5,6 +5,8 @@
 import os, re, json, sys, html
 sys.path.insert(0, os.path.dirname(__file__))
 from topics import MODULES, TOPICS, TOOLS, TABS
+# инструмент показываем, только если его страница есть в этой ветке (например, «Расчёт зарплаты» живёт в своей копии)
+HAS = lambda x: os.path.isfile(os.path.join('instrumenty', x, 'index.html'))
 from articles import ARTICLES
 
 UPD = '08.10.2026'
@@ -68,7 +70,7 @@ DISC = ('<p class="fine"><b>Это общая информация, а не юр
 
 
 def chips(t):
-    out = [f'<span class="t">{TOOLS[x]}</span>' for x in t['tools']]
+    out = [f'<span class="t">{TOOLS[x]}</span>' for x in t['tools'] if HAS(x)]
     out += [f'<span>{CATT.get(c, c)}</span>' for c, _ in t['help'][:2]]
     return '<div class="tm-chips">' + ''.join(out) + '</div>' if out else ''
 
@@ -83,7 +85,7 @@ def hub():
     for key, name, lead in MODULES:
         cards = []
         for t in [t for t in TOPICS if t['mod'] == key]:
-            k = html.escape(' '.join([t['title'], t['lead']] + [TOOLS[x] for x in t['tools']] + [s for _, ss in t['help'] for s in ss]))
+            k = html.escape(' '.join([t['title'], t['lead']] + [TOOLS[x] for x in t['tools'] if HAS(x)] + [s for _, ss in t['help'] for s in ss]))
             if t['ready']:
                 cards.append(f'<a class="tm-card" href="{t["slug"]}/" data-k="{k}"><b>{t["title"]}</b><p>{t["lead"]}</p>{chips(t)}<span class="go">Читать →</span></a>')
             else:
@@ -133,7 +135,7 @@ def article(t):
         n = len([f for f in os.listdir(d) if f.endswith('.jpg')]) if os.path.isdir(d) else 0
         return 'Бесплатно · PDF' if n else 'Бесплатно'
     # компактная карточка: маленький веер из настоящих страниц примера слева, текст справа (08.10.2026, крупный веер в колонке был слишком большим)
-    tools = ''.join(f'<a class="tool tpv" href="../../instrumenty/{x}/">{fan(x)}<span class="ttxt"><b>{TOOLS[x]}</b><span>{a["tools"].get(x, "")}</span><em>{pages(x)} · открыть →</em></span></a>' for x in t['tools'])
+    tools = ''.join(f'<a class="tool tpv" href="../../instrumenty/{x}/">{fan(x)}<span class="ttxt"><b>{TOOLS[x]}</b><span>{a["tools"].get(x, "")}</span><em>{pages(x)} · открыть →</em></span></a>' for x in t['tools'] if HAS(x))
     tabs = ''.join(f'<a class="tool" href="{TABS[x][1]}"><b>{TABS[x][0]}</b><span>{a.get("tabs", {}).get(x, "")}</span></a>' for x in t['tabs'])
     rel = ''.join(f'<a href="../{s}/">{BYSLUG[s]["title"]}</a>' if BYSLUG[s]['ready'] else f'<span class="upd">{BYSLUG[s]["title"]} (скоро)</span>' for s in a['related'])
     srcs = ''.join(f'<li><a href="{u}">{html.escape(n)}</a></li>' for n, u in a['sources'])
