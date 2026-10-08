@@ -99,7 +99,7 @@ select:focus-visible,input:focus-visible,button:focus-visible,textarea:focus-vis
 </style>
 </head>
 <body>
-<style>.pos{display:grid;grid-template-columns:minmax(0,1fr) 70px 100px 34px;gap:6px;align-items:end;margin-bottom:6px}.pos input{width:100%}.pos .del{font:inherit;border:1.5px solid var(--line);background:var(--paper);border-radius:10px;height:42px;cursor:pointer}.chk-err{color:#A0523D;font-size:.88rem;margin:4px 0 0}.chk-ok{color:#3A8A48;font-size:.88rem;margin:4px 0 0}#fields input:not([type=checkbox]),#fields select{width:100%}@media (max-width:560px){.pos{grid-template-columns:1fr 60px 84px 34px}}</style>
+<style>.qrcheck{background:#FFF6DF;border:1.5px solid #B98324;border-radius:16px;padding:12px 14px;margin:0 0 12px;font-size:.9rem}.qrcheck.ok{background:#E2F0E2;border-color:#3A8A48}.qrcheck.warn{box-shadow:0 0 0 3px #F3E3C2}.qrcheck ol{margin:6px 0 8px;padding-left:20px}.qrcheck li{margin-bottom:4px}.qrst{margin:4px 0 0;font-size:.85rem}.pos{display:grid;grid-template-columns:minmax(0,1fr) 70px 100px 34px;gap:6px;align-items:end;margin-bottom:6px}.pos input{width:100%}.pos .del{font:inherit;border:1.5px solid var(--line);background:var(--paper);border-radius:10px;height:42px;cursor:pointer}.chk-err{color:#A0523D;font-size:.88rem;margin:4px 0 0}.chk-ok{color:#3A8A48;font-size:.88rem;margin:4px 0 0}#fields input:not([type=checkbox]),#fields select{width:100%}@media (max-width:560px){.pos{grid-template-columns:1fr 60px 84px 34px}}</style>
 <div class="wrap">
   <header>
     <p style="margin:0 0 14px"><a class="jump" href="https://svoiludi.ch/instrumenty/">← Все полезные инструменты · Свои люди в Швейцарии</a></p>
@@ -118,12 +118,19 @@ select:focus-visible,input:focus-visible,button:focus-visible,textarea:focus-vis
   <div class="work">
     <div class="form" id="fields"></div>
     <div class="sheetbox">
+      <div class="qrcheck" id="qrcheck"><b>Перед отправкой клиенту — проверь QR-счёт</b>
+        <ol><li>Скачай PDF и отсканируй QR-код своим банковским приложением — так же, как когда оплачиваешь счёт по QR-коду. Банк покажет получателя, IBAN, сумму и номер ссылки.</li>
+        <li>Сверь: твоё имя и адрес, IBAN, сумма, валюта CHF, номер ссылки или текст для клиента. Платёж не подтверждай — просто отмени.</li>
+        <li>Для первого счёта надёжнее всего оплатить себе 1 франк по этому коду и посмотреть, как платёж пришёл на счёт.</li>
+        <li>Печатай в масштабе 100 %, не «по размеру страницы»: QR-код — 46 × 46 мм, квитанция — внизу листа.</li></ol>
+        <label class="tog"><input type="checkbox" id="qrok"> Я проверила QR-код в банковском приложении</label>
+        <p class="qrst" id="qrst"></p></div>
       <div class="acts"><button type="button" class="btn gold" id="pdf">Скачать PDF</button><button type="button" class="btn ghost sm" id="share" hidden>Отправить</button><button type="button" class="btn ghost sm" id="exOn">Посмотреть на примере</button></div>
       <div class="sheets" id="sheet" aria-label="Предпросмотр листов"></div>
       <div class="status" id="status" role="status"></div>
     </div>
   </div>
-  <p class="imp"><b>Важно.</b> QR-код собирается по стандарту SIX (QR-счёт, версия 2.3, адреса раздельными полями). Перед первым счётом проверь его: оплати себе 1 франк из своего банка или загрузи PDF в проверку QR-счетов твоего банка. Если ты не платишь НДС, не указывай его в счёте. Это помощь, а не бухгалтерская программа; правила для твоего дела уточняй у бухгалтера. Автор не несёт ответственности за ошибки в счёте.</p>
+  <p class="imp"><b>Важно.</b> QR-код собирается по стандарту SIX (QR-счёт, версия 2.3, адреса раздельными полями). Перед отправкой клиенту обязательно проверь QR-код: отсканируй его своим банковским приложением и сверь данные, а перед первым счётом оплати себе 1 франк. Проверь снова, если поменяла IBAN, имя или адрес. Если ты не платишь НДС, не указывай его в счёте. Это помощь, а не бухгалтерская программа; правила для твоего дела уточняй у бухгалтера. Автор не несёт ответственности за ошибки в счёте.</p>
   <div class="share-slot" data-url="https://svoiludi.ch/instrumenty/schet-qr/" data-lead="Перешли тем, кто работает на себя. В ссылке нет твоих данных." data-text="Привет! Тут можно бесплатно сделать счёт клиенту с QR-кодом по швейцарскому стандарту: заполняешь на русском, получаешь PDF на немецком, французском или итальянском. Данные остаются у тебя. https://svoiludi.ch/instrumenty/schet-qr/"></div>
   <p class="credit"><span>Свои люди в Швейцарии · svoiludi.ch</span><a href="https://svoiludi.ch/privacy/">Политика конфиденциальности</a></p>
 </div>
@@ -271,13 +278,13 @@ function renderForm(){
   </section>`;
 }
 let UI, tmr;
-function fill(){ const d = D(); $('lang').value = d.lang; $('perf').checked = !!d.perf; renderForm(); $('exbar').hidden = !EX; $('exOn').hidden = !!EX; if (UI) UI.render(); }
+function fill(){ const d = D(); if (typeof qrState === 'function') qrState(); $('lang').value = d.lang; $('perf').checked = !!d.perf; renderForm(); $('exbar').hidden = !EX; $('exOn').hidden = !!EX; if (UI) UI.render(); }
 const setPath = (o, path, v) => { const k = path.split('.'); if (k.length === 2) o[k[0]][k[1]] = v; else o[k[0]] = v; };
 $('lang').addEventListener('change', e => { S.lang = e.target.value; if (EX) EX.lang = S.lang; save(); fill(); });
 $('perf').addEventListener('change', e => { S.perf = e.target.checked; if (EX) EX.perf = S.perf; save(); fill(); });
 document.addEventListener('input', e => {
   const t = e.target; if (EX) return;
-  if (t.dataset.k && t.type !== 'checkbox' && t.tagName !== 'SELECT') { setPath(S, t.dataset.k, t.value); save(); clearTimeout(tmr); tmr = setTimeout(() => { if (t.dataset.k === 'me.iban') { const pos = t.selectionStart; renderForm(); const n = document.querySelector('[data-k="me.iban"]'); if (n) { n.focus(); try { n.setSelectionRange(pos, pos); } catch (x) {} } } UI && UI.render(); }, 450); }
+  if (t.dataset.k && t.type !== 'checkbox' && t.tagName !== 'SELECT') { setPath(S, t.dataset.k, t.value); save(); qrState(); clearTimeout(tmr); tmr = setTimeout(() => { if (t.dataset.k === 'me.iban') { const pos = t.selectionStart; renderForm(); const n = document.querySelector('[data-k="me.iban"]'); if (n) { n.focus(); try { n.setSelectionRange(pos, pos); } catch (x) {} } } UI && UI.render(); }, 450); }
   if (t.dataset.pos) { S.pos[+t.dataset.pos][t.dataset.f] = t.dataset.f === 'd' ? t.value : +t.value; save(); clearTimeout(tmr); tmr = setTimeout(() => UI && UI.render(), 450); }
 });
 document.addEventListener('change', e => {
@@ -295,6 +302,13 @@ const EXD = () => ({lang: 'de', perf: false, me: {name: 'Olena Kovalenko', stree
 $('exOn').addEventListener('click', () => { EX = EXD(); fill(); window.scrollTo({top: $('exbar').offsetTop - 12, behavior: 'smooth'}); });
 $('exOff').addEventListener('click', () => { EX = null; fill(); });
 if (/[?&]example\b/.test(location.search)) EX = EXD();
+
+/* проверка QR-кода в банковском приложении (просьба Ирины 08.10.2026): отметка действует, пока не поменялись IBAN, имя и адрес */
+const qrSig = d => clean(d.me.iban) + '|' + [d.me.name, d.me.street, d.me.no, d.me.plz, d.me.city].join('|');
+function qrState(){ const d = D(), ok = !EX && S.qrok === qrSig(d) && !!clean(d.me.iban); $('qrok').checked = ok; $('qrok').disabled = !!EX; $('qrcheck').classList.toggle('ok', ok);
+  $('qrst').textContent = EX ? 'В примере проверка не нужна.' : ok ? 'Проверено для этого IBAN, имени и адреса. Если что-то из этого поменяешь, проверь снова.' : S.qrok ? 'Ты поменяла IBAN, имя или адрес — проверь QR-код ещё раз.' : 'Ещё не проверено.'; }
+$('qrok').addEventListener('change', e => { S.qrok = e.target.checked ? qrSig(S) : ''; save(); qrState(); });
+$('pdf').addEventListener('click', () => { if (!EX && S.qrok !== qrSig(S)) { $('qrcheck').classList.add('warn'); setTimeout(() => { const st = $('status'); if (st) st.textContent = 'PDF скачан. Перед отправкой клиенту отсканируй QR-код своим банковским приложением и сверь данные — шаги в жёлтом блоке.'; }, 1500); } });
 UI = SH.mount({build, title: 'Счёт с QR-кодом', name: () => 'Rechnung-' + String(D().nr || '').replace(/[^\w-]/g, '')});
 fill();
 
