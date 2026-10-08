@@ -96,6 +96,7 @@ def hub():
     <label class="tm-search"><input id="tmq" type="search" placeholder="Например, Betreibung, пермит B, Kita, 3a" aria-label="Поиск по темам"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg></label>
     <nav class="tm-mods" aria-label="Разделы тем">{mods}</nav>
   </section>
+  <a class="tm-sos" href="../instrumenty/ekstrennye-nomera/"><span class="tfan" aria-hidden="true"><img src="../instrumenty/preview/ekstrennye-nomera/1.jpg" alt="" loading="lazy" style="--i:-0.5"><img src="../instrumenty/preview/ekstrennye-nomera/2.jpg" alt="" loading="lazy" style="--i:0.5"></span><span><b>Сохрани сразу: экстренные номера</b><span>144, 117, 118, 145, дежурный врач твоего кантона и твои контакты на одной карточке, на русском и языке кантона. Распечатай: в кошелёк, на холодильник, няне.</span><em>Бесплатно · PDF · сделать карточку →</em></span></a>
   {''.join(body)}
   <p class="tm-empty" id="tmempty" hidden>Ничего не нашлось. Попробуй другое слово или спроси в боте.</p>
   <section class="tm-ask" aria-labelledby="ask-h">
