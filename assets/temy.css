@@ -37,6 +37,7 @@ a.tm-card:hover{border-color:var(--brown);transform:translateY(-1px)}
 .art-foot{grid-column:1;grid-row:2;max-width:72ch;min-width:0}
 @media (max-width:960px){.art-main,.art>.side,.art-foot{grid-column:1;grid-row:auto}}
 .art-main h2{font-size:clamp(1.55rem,3.2vw,2rem);margin:34px 0 12px}
+.art-main>h2:first-child{margin-top:0}
 .art-main p{margin:0 0 12px}
 .art-main .ul,.art-main .ol{margin:0 0 12px;padding-left:22px}
 .art-main li{margin-bottom:6px}
@@ -95,3 +96,11 @@ a.tm-card:hover{border-color:var(--brown);transform:translateY(-1px)}
 .tcard .pf{margin:0}
 .tcard+.tcard,.tcard+.tool{margin-top:6px}
 .art-main .h3{font-family:var(--body);font-weight:700;font-size:1rem;margin:18px 0 6px;color:var(--brown)}
+
+/* компактные карточки инструментов в колонке статьи (08.10.2026) */
+.tpv{flex-direction:row;align-items:center;gap:12px;padding:12px 12px 12px 6px}
+.tpv .tfan{flex:none;width:86px;height:96px}
+.tpv .tfan img{width:56px}
+.tpv .tfan img.land{width:80px;aspect-ratio:905/640}
+.tpv .ttxt>span{font-size:.84rem;line-height:1.4}
+.tpv+.tpv,.tpv+.tool{margin-top:2px}
