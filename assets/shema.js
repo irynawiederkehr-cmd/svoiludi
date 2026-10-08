@@ -16,7 +16,7 @@
   function page(w, h, C){
     const ops = [];
     const P = {w, h, ops, C,
-      text: (s, x, y, size, b, color, align) => { ops.push({t: 'text', s: String(s), x, y, size, b: !!b, color: color || C.ink, align: align || 'left'}); },
+      text: (s, x, y, size, b, color, align, font) => { ops.push({t: 'text', s: String(s), x, y, size, b: !!b, color: color || C.ink, align: align || 'left', f: font || ''}); },
       rect: (x, y, w2, h2, fill, stroke, r, dash) => ops.push({t: 'rect', x, y, w: w2, h: h2, fill: fill || null, stroke: stroke || null, r: r || 0, dash: !!dash}),
       line: (x1, y1, x2, y2, color, wd, dash) => ops.push({t: 'line', x1, y1, x2, y2, color: color || C.line, w: wd || 0.3, dash: !!dash}),
       tri: (p, fill) => ops.push({t: 'tri', p, fill}),
@@ -46,7 +46,7 @@
       if (p.t === 'rect') o += `<rect x="${p.x}" y="${p.y}" width="${p.w}" height="${p.h}"${p.r ? ` rx="${p.r}"` : ''} fill="${p.fill || 'none'}"${p.stroke ? ` stroke="${p.stroke}" stroke-width="0.35"${p.dash ? ' stroke-dasharray="1.4 1"' : ''}` : ''}/>`;
       else if (p.t === 'line') o += `<line x1="${p.x1}" y1="${p.y1}" x2="${p.x2}" y2="${p.y2}" stroke="${p.color}" stroke-width="${p.w}"${p.dash ? ' stroke-dasharray="1.2 0.9"' : ''}/>`;
       else if (p.t === 'tri') o += `<polygon points="${p.p.map(q => q.join(',')).join(' ')}" fill="${p.fill}"/>`;
-      else o += `<text x="${p.x}" y="${p.y}" font-family="Manrope" font-weight="${p.b ? 700 : 400}" font-size="${(p.size * PT).toFixed(3)}" fill="${p.color}" text-anchor="${p.align === 'right' ? 'end' : p.align === 'center' ? 'middle' : 'start'}">${esc(p.s)}</text>`;
+      else o += `<text x="${p.x}" y="${p.y}" font-family="${p.f === 'h' ? 'Helvetica, Arial, sans-serif' : 'Manrope'}" font-weight="${p.b ? 700 : 400}" font-size="${(p.size * PT).toFixed(3)}" fill="${p.color}" text-anchor="${p.align === 'right' ? 'end' : p.align === 'center' ? 'middle' : 'start'}">${esc(p.s)}</text>`;
     });
     return o + '</svg>';
   }
@@ -79,7 +79,7 @@
           doc.setLineDashPattern([], 0);
         } else if (o.t === 'line') { doc.setDrawColor(...hex(o.color)); doc.setLineWidth(o.w); doc.setLineDashPattern(o.dash ? [1.2, 0.9] : [], 0); doc.line(o.x1, o.y1, o.x2, o.y2); doc.setLineDashPattern([], 0); }
         else if (o.t === 'tri') { doc.setFillColor(...hex(o.fill)); doc.triangle(o.p[0][0], o.p[0][1], o.p[1][0], o.p[1][1], o.p[2][0], o.p[2][1], 'F'); }
-        else { doc.setFont(o.b ? 'Manrope-Bold' : 'Manrope-Regular', 'normal'); doc.setFontSize(o.size); doc.setTextColor(...hex(o.color)); doc.text(o.s, o.x, o.y, {align: o.align}); }
+        else { if (o.f === 'h') doc.setFont('helvetica', o.b ? 'bold' : 'normal'); else doc.setFont(o.b ? 'Manrope-Bold' : 'Manrope-Regular', 'normal'); doc.setFontSize(o.size); doc.setTextColor(...hex(o.color)); doc.text(o.s, o.x, o.y, {align: o.align}); }
       });
     });
     doc.setProperties({title});
@@ -93,7 +93,7 @@
       if (o.t === 'rect') { c.beginPath(); if (o.r && c.roundRect) c.roundRect(o.x, o.y, o.w, o.h, o.r); else c.rect(o.x, o.y, o.w, o.h); if (o.fill) { c.fillStyle = o.fill; c.fill(); } if (o.stroke) { c.strokeStyle = o.stroke; c.lineWidth = 0.35; c.setLineDash(o.dash ? [1.4, 1] : []); c.stroke(); c.setLineDash([]); } }
       else if (o.t === 'line') { c.beginPath(); c.moveTo(o.x1, o.y1); c.lineTo(o.x2, o.y2); c.strokeStyle = o.color; c.lineWidth = o.w; c.setLineDash(o.dash ? [1.2, 0.9] : []); c.stroke(); c.setLineDash([]); }
       else if (o.t === 'tri') { c.beginPath(); c.moveTo(o.p[0][0], o.p[0][1]); c.lineTo(o.p[1][0], o.p[1][1]); c.lineTo(o.p[2][0], o.p[2][1]); c.closePath(); c.fillStyle = o.fill; c.fill(); }
-      else { c.font = (o.b ? '700 ' : '400 ') + (o.size * PT) + 'px Manrope'; c.fillStyle = o.color; c.textAlign = o.align === 'right' ? 'right' : o.align === 'center' ? 'center' : 'left'; c.textBaseline = 'alphabetic'; c.fillText(o.s, o.x, o.y); }
+      else { c.font = (o.b ? '700 ' : '400 ') + (o.size * PT) + 'px ' + (o.f === 'h' ? 'Helvetica, Arial, sans-serif' : 'Manrope'); c.fillStyle = o.color; c.textAlign = o.align === 'right' ? 'right' : o.align === 'center' ? 'center' : 'left'; c.textBaseline = 'alphabetic'; c.fillText(o.s, o.x, o.y); }
     });
     return new Promise(r => cv.toBlob(r, 'image/png'));
   }
