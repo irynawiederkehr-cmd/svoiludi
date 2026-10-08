@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<link rel="icon" href="/fav/favicon.svg" type="image/svg+xml"><link rel="icon" href="/fav/icon-32.png" sizes="32x32"><link rel="apple-touch-icon" href="/fav/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/fonts.css">
+<meta name="description" content="Бесплатный расчёт семейных пособий в Швейцарии (Familienzulagen): впиши детей, кантоны работы и как работают родители — получишь сумму Kinderzulage и Ausbildungszulage в месяц и в год по кантону на 2026 год, кто из родителей подаёт по закону, доплату разницы, разовое пособие при рождении и что сообщать. Лист PDF и PNG.">
+<link rel="canonical" href="https://svoiludi.ch/instrumenty/posobiya-raschet/">
+<meta property="og:type" content="website"><meta property="og:locale" content="ru_RU"><meta property="og:site_name" content="Свои люди в Швейцарии">
+<meta property="og:title" content="Детские пособия: сколько положено семье и кто подаёт · бесплатно"><meta property="og:description" content="Kinderzulage и Ausbildungszulage по кантону 2026, кто из родителей подаёт и доплата разницы — на одном листе.">
+<meta property="og:url" content="https://svoiludi.ch/instrumenty/posobiya-raschet/"><meta property="og:image" content="https://svoiludi.ch/instrumenty/posobiya-raschet/og-image.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="robots" content="noindex, nofollow">
+<title>Детские пособия: сколько положено семье и кто из родителей подаёт</title>
+<style>
+/* Детские пособия: сколько положено семье и кто из родителей подаёт (08.10.2026): анкета слева, живые листы справа, движок assets/shema.js. */
+:root{
+  --bg:#F4EDE3; --paper:#FFFCF8; --ink:#2F2924; --muted:#7A6E62; --line:#E5D9C9; --soft:#EFE5D7;
+  --brown:#6E4F3C; --mustard:#B98324; --mustard-soft:#F3E3C2; --sage:#4F5E3E; --sage-soft:#E3E8D6; --red:#A0523D;
+  --display:"Forum","Georgia",serif; --sans:"Manrope","Segoe UI",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#221D19; --paper:#2C2621; --ink:#F1E9DF; --muted:#B4A796; --line:#3E362F; --soft:#352E28;
+  --brown:#E1C2A6; --mustard:#E2B45C; --mustard-soft:#3D321F; --sage:#B4BF97; --sage-soft:#2E3226; --red:#E39A85; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#221D19; --paper:#2C2621; --ink:#F1E9DF; --muted:#B4A796; --line:#3E362F; --soft:#352E28;
+  --brown:#E1C2A6; --mustard:#E2B45C; --mustard-soft:#3D321F; --sage:#B4BF97; --sage-soft:#2E3226; --red:#E39A85; color-scheme:dark}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--ink);font:15px/1.55 var(--sans);margin:0}
+.wrap{max-width:1280px;margin:0 auto;padding-inline:16px;padding-block:28px 48px;display:flex;flex-direction:column;gap:24px}
+.eyebrow{font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+h1{font-family:var(--display);font-weight:400;font-size:clamp(2.4rem,6vw,3.6rem);line-height:1;margin:4px 0 10px;text-wrap:balance}
+h2{font-family:var(--display);font-weight:400;font-size:1.55rem;margin:0;text-wrap:balance}
+h3{font-family:var(--display);font-weight:400;font-size:1.22rem;line-height:1.2;margin:0}
+.lead{max-width:66ch;color:var(--muted);margin:0}
+.jump{font-weight:700;color:var(--brown);text-underline-offset:4px}
+.privnote{margin-top:14px;background:var(--sage-soft);border-radius:16px;padding:12px 16px;font-size:.9rem;max-width:90ch}
+.status{font-size:.86rem;color:var(--muted);min-height:1.3em}
+.btn{font:inherit;font-weight:700;font-size:.9rem;border:0;border-radius:999px;padding:10px 18px;cursor:pointer;color:#fff;text-decoration:none;display:inline-flex;align-items:center;gap:6px;background:#6E4F3C;box-shadow:0 8px 18px -8px rgba(110,79,60,.6)}
+.btn.gold{background:#B98324;box-shadow:0 8px 18px -8px rgba(185,131,36,.7)}
+.btn.free{background:#4F5E3E;box-shadow:0 8px 18px -8px rgba(79,94,62,.6)}
+.btn.ghost{background:transparent;color:var(--brown);border:1.5px solid var(--line);box-shadow:none}
+.btn.sm{font-size:.82rem;padding:7px 13px}
+.btn[disabled]{background:var(--soft);color:var(--muted);box-shadow:none;cursor:wait}
+select,input[type=text],input[type=tel],input[type=number],input[type=date],textarea{font:inherit;font-size:.95rem;color:var(--ink);background:var(--paper);border:1.5px solid var(--line);border-radius:12px;padding:9px 12px;width:100%;min-width:0}
+select:focus-visible,input:focus-visible,button:focus-visible,textarea:focus-visible,a:focus-visible{outline:2px solid var(--mustard);outline-offset:2px}
+::placeholder{color:color-mix(in srgb,var(--muted) 70%,transparent)}
+.setup{background:var(--paper);border:1.5px solid var(--line);border-radius:22px;padding:16px 18px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px 18px;align-items:start}
+@media (max-width:1000px){.setup{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.setup{grid-template-columns:1fr}}
+.fl{display:flex;flex-direction:column;gap:6px;min-width:0}
+.fl>.lb{font-size:.8rem;font-weight:700;color:var(--muted);display:flex;align-items:center}
+.seg{display:flex;flex-wrap:wrap;gap:6px}
+.seg button{font:inherit;font-size:.84rem;font-weight:700;border:1.5px solid var(--line);background:var(--paper);color:var(--ink);border-radius:999px;padding:6px 12px;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--sage);border-color:var(--sage);color:#fff}
+.acts{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.exbar{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;background:var(--mustard-soft);border-radius:16px;padding:10px 14px;font-size:.9rem;font-weight:600}
+.work{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:22px;align-items:start}
+@media (max-width:1040px){.work{grid-template-columns:1fr}}
+.form{display:flex;flex-direction:column;gap:14px;min-width:0}
+.sec{background:var(--paper);border:1.5px solid var(--line);border-radius:20px;padding:16px 18px;display:flex;flex-direction:column;gap:12px}
+.sec>h2{font-size:1.3rem;display:flex;align-items:center}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:560px){.g2{grid-template-columns:1fr}}
+.hint{font-size:.84rem;color:var(--muted);margin:0}
+.chk{display:flex;flex-direction:column;gap:8px}
+.chk label{display:flex;gap:10px;align-items:baseline;font-size:.92rem;cursor:pointer}
+.chk input{flex:none;width:18px;height:18px;accent-color:var(--sage);transform:translateY(3px)}
+.chk b{white-space:nowrap}
+.chk small{color:var(--muted)}
+.tog{display:flex;gap:10px;align-items:center;font-size:.92rem;cursor:pointer}
+.tog input{width:18px;height:18px;accent-color:var(--sage)}
+.sheetbox{position:sticky;top:12px;display:flex;flex-direction:column;gap:10px}
+@media (max-width:1040px){.sheetbox{position:static}}
+.sheet{background:#fff;border-radius:6px;box-shadow:0 18px 40px -22px rgba(47,41,36,.45);overflow:hidden}
+.sheet svg{display:block;width:100%;height:auto}
+.imp{background:var(--paper);border:1.5px dashed color-mix(in srgb,var(--sage) 55%,transparent);border-radius:16px;padding:14px 18px;font-size:.88rem;max-width:90ch;margin:0}
+.imp b{color:var(--sage)}
+.guide{display:flex;flex-direction:column;gap:14px;max-width:90ch}
+.guide ul{margin:0;padding-left:20px}
+.guide li{margin:4px 0}
+.credit{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:.8rem;color:var(--muted)}
+.credit a{color:var(--muted)}
+.qh{font:700 .72rem/1 var(--sans);width:20px;height:20px;border-radius:50%;border:1.5px solid var(--line);background:var(--paper);color:var(--brown);cursor:pointer;margin-left:6px;padding:0;flex:none}
+.sheets{display:flex;flex-direction:column;gap:14px}
+.goals{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+@media (max-width:560px){.goals{grid-template-columns:1fr}}
+.goals label{display:flex;gap:10px;align-items:flex-start;background:var(--bg);border:1.5px solid var(--line);border-radius:14px;padding:9px 12px;cursor:pointer;font-size:.92rem}
+.goals input{width:18px;height:18px;accent-color:var(--sage);flex:none;margin-top:2px}
+.goals small{display:block;color:var(--muted)}
+.steps{display:flex;flex-direction:column;gap:8px}
+.steps details{background:var(--paper);border:1.5px solid var(--line);border-radius:16px;padding:10px 16px}
+.steps summary{cursor:pointer;font-weight:700;display:flex;gap:10px;align-items:baseline}
+.steps summary small{font-weight:600;color:var(--muted);margin-left:auto;text-align:right}
+.steps details p,.steps details ul{margin:8px 0 2px;font-size:.93rem}
+.steps details ul{padding-left:20px}
+</style>
+</head>
+<body>
+<style>.form input,.form select{width:100%}.kid{border:1.5px solid var(--line);border-radius:14px;padding:10px 12px;margin:8px 0;background:var(--bg)}.kid .row{display:flex;gap:8px;align-items:end}.kid .row .fl{flex:1}.res{background:var(--paper);border:1.5px solid var(--line);border-radius:16px;padding:14px 16px;margin-top:6px}.res p{margin:4px 0}.big{font-size:1.5rem;font-weight:700}</style>
+<div class="wrap">
+  <header>
+    <p style="margin:0 0 14px"><a class="jump" href="https://svoiludi.ch/instrumenty/">← Все полезные инструменты · Свои люди в Швейцарии</a></p>
+    <div class="eyebrow">Семья · пособия</div>
+    <h1>Детские пособия: сколько положено семье и кто из родителей подаёт</h1>
+    <p class="lead">Впиши детей и как работают родители — расчёт покажет, сколько семейных пособий (Kinderzulage и Ausbildungszulage) положено в месяц и в год, кто из родителей подаёт по закону и положена ли доплата разницы. Суммы всех 26 кантонов на 2026 год. PDF бесплатно.</p>
+    <div class="privnote"><b>Твои данные только у тебя.</b> Всё хранится только в твоём браузере на этом устройстве. Регистрация не нужна.</div>
+    <div data-fan="posobiya-raschet"></div>
+  </header>
+  <div class="setup">
+    <div class="fl"><span class="lb">Печать</span><label class="tog"><input type="checkbox" id="bw"> Без цвета, для дешёвой печати</label></div>
+  </div>
+  <div class="exbar" id="exbar" hidden><span>Это пример. Так будет выглядеть твой расчёт.</span><button type="button" class="btn sm" id="exOff">Вернуться к моим данным</button></div>
+  <div class="work">
+    <div class="form">
+      <section class="sec"><h2>Мама или первый родитель</h2>
+        <div class="fl"><span class="lb">Работа<button type="button" class="qh" data-help="job" aria-label="Подсказка: работа" aria-expanded="false">?</button></span><select id="aJob"><option value="emp">По найму, от 630 франков в месяц</option><option value="self">На себя (selbständig)</option><option value="low">По найму, меньше 630 франков в месяц</option><option value="none">Не работает</option></select></div>
+        <div class="fl"><span class="lb">Кантон работы (или жительства, если не работает)</span><select id="aKt"></select></div>
+      </section>
+      <section class="sec"><h2>Папа или второй родитель</h2>
+        <div class="fl"><span class="lb">Работа</span><select id="bJob"><option value="emp">По найму, от 630 франков в месяц</option><option value="self">На себя (selbständig)</option><option value="low">По найму, меньше 630 франков в месяц</option><option value="none">Не работает</option><option value="na">Нет второго родителя в Швейцарии</option></select></div>
+        <div class="fl"><span class="lb">Кантон работы (или жительства)</span><select id="bKt"></select></div>
+      </section>
+      <section class="sec"><h2>Семья</h2>
+        <div class="fl"><span class="lb">Опека<button type="button" class="qh" data-help="sorge" aria-label="Подсказка: опека" aria-expanded="false">?</button></span><select id="sorge"><option value="both">Совместная, живём вместе</option><option value="bothA">Совместная, дети живут с первым родителем</option><option value="bothB">Совместная, дети живут со вторым родителем</option><option value="a">Только у первого родителя</option><option value="b">Только у второго родителя</option></select></div>
+        <div class="fl"><span class="lb">Кантон, где живут дети</span><select id="home"></select></div>
+        <div class="fl"><span class="lb">Кто зарабатывает больше<button type="button" class="qh" data-help="more" aria-label="Подсказка: кто больше" aria-expanded="false">?</button></span><select id="more"><option value="a">Первый родитель</option><option value="b">Второй родитель</option></select></div>
+        <div class="fl"><span class="lb">Не работаете оба: доход семьи по федеральному налогу не больше 45 360 франков<button type="button" class="qh" data-help="low" aria-label="Подсказка: доход" aria-expanded="false">?</button></span><select id="lowInc"><option value="y">Да</option><option value="n">Нет</option></select></div>
+      </section>
+      <section class="sec"><h2>Дети</h2>
+        <div id="kids"></div>
+        <button type="button" class="btn ghost sm" id="addKid">+ Добавить ребёнка</button>
+      </section>
+      <div class="res" id="res" aria-live="polite"></div>
+    </div>
+    <div class="sheetbox">
+      <div class="acts"><button type="button" class="btn gold" id="pdf">Скачать PDF</button><button type="button" class="btn ghost sm" id="share" hidden>Отправить</button><button type="button" class="btn ghost sm" id="exOn">Посмотреть на примере</button></div>
+      <div class="sheets" id="sheet" aria-label="Предпросмотр листа"></div>
+      <div class="status" id="status" role="status"></div>
+    </div>
+  </div>
+  <p class="imp"><b>Важно.</b> Это примерный расчёт по закону о семейных пособиях и суммам кантонов на 2026 год (PwC по данным кантонов), а не решение кассы. Особые случаи (дети супруга, приёмные дети, ребёнок с инвалидностью, работа в сельском хозяйстве, работа в двух странах) решает касса. Подробно — в теме <a href="https://svoiludi.ch/shveycariya/detskie-posobiya/">«Детские пособия (Kinderzulagen)»</a>.</p>
+  <div class="share-slot" data-url="https://svoiludi.ch/instrumenty/posobiya-raschet/" data-lead="Перешли семьям с детьми. В ссылке нет твоих данных." data-text="Привет! Тут можно посчитать детские пособия в Швейцарии по кантону и узнать, кто из родителей подаёт. Бесплатно. https://svoiludi.ch/instrumenty/posobiya-raschet/"></div>
+  <p class="credit"><span>Свои люди в Швейцарии · svoiludi.ch</span><a href="https://svoiludi.ch/privacy/">Политика конфиденциальности</a></p>
+</div>
+
+<script src="/assets/kantony.js"></script>
+<script src="/assets/lib/jspdf.umd.min.js"></script>
+<script src="/assets/shema.js"></script>
+<script>
+window.HELP = {
+  job: '<p><b>По найму</b> — пособие полное, если зарплата не меньше 630 франков в месяц (7560 в год). Несколько работ — зарплаты складываются.</p><p><b>На себя</b> — право есть при любом доходе. <b>Не работает</b> — право есть только при небольшом доходе семьи.</p>',
+  sorge: '<p>Родительская опека (elterliche Sorge). У женатых родителей она совместная сама. Если не женаты — совместную опеку оформляют в ЗАГС (Zivilstandsamt) или через KESB.</p>',
+  more: '<p>Нужно, только если оба родителя работают в кантоне, где живут дети, или оба не работают в нём. Тогда пособие получает тот, у кого больше доход по AHV.</p>',
+  low: '<p>Для тех, кто не работает: право на пособие есть, если налогооблагаемый доход по федеральному налогу не больше 45 360 франков в год (в Во — 60 480, в Женеве, Юре и Тичино без предела) и нет дополнительных выплат к AHV или IV.</p>'
+};
+const KEY = 'posobiyaRaschet.v1';
+/* суммы 2026 (PwC «Familienzulagen 2026» по данным кантонов): k — до 16 лет, k12 — с 12 лет, k3 — с третьего ребёнка; a — учёба, a18 — с 18 лет, a3 — с третьего; g — при рождении */
+const FZ = {ZH:{k:215,k12:268,a:268}, BE:{k:250,a:310}, LU:{k:215,k12:260,a:268,g:1075}, UR:{k:240,a:290,g:1200}, SZ:{k:230,a:280,g:1000}, OW:{k:220,a:270}, NW:{k:258,a:311}, GL:{k:215,a:268},
+  ZG:{k:330,a:330,a18:385}, FR:{k:265,k3:285,a:325,a3:345,g:1500}, SO:{k:215,a:268}, BS:{k:275,a:325}, BL:{k:215,a:268}, SH:{k:230,a:290}, AR:{k:230,a:280}, AI:{k:245,a:298}, SG:{k:245,a:298},
+  GR:{k:240,a:290}, AG:{k:225,a:278}, TG:{k:215,a:280}, TI:{k:215,a:268}, VD:{k:322,k3:365,a:425,a3:468,g:1617}, VS:{k:327,k3:435,a:477,a3:585,g:2142}, NE:{k:240,k3:270,a:320,a3:350,g:1200},
+  GE:{k:311,k3:411,a:415,a3:515,g:2073}, JU:{k:275,a:325,g:1500}};
+const KTN = k => ((window.KANTONY || {})[k] || {}).n || k;
+const iso = d => d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0');
+function blank(){ let k = ''; try { k = localStorage.getItem('svoiludi.kanton') || ''; } catch (e) {} k = FZ[k] ? k : 'ZH';
+  return {bw: false, aJob: 'emp', aKt: k, bJob: 'emp', bKt: k, sorge: 'both', home: k, more: 'b', lowInc: 'y', kids: [{name: '', born: '', edu: 'y', where: 'ch'}]}; }
+let S = load(), EX = null;
+function load(){ try { const s = JSON.parse(localStorage.getItem(KEY)); if (s && typeof s === 'object') return Object.assign(blank(), s); } catch (e) {} return blank(); }
+function save(){ if (EX) return; try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} }
+const D = () => EX || S;
+const works = j => j === 'emp' || j === 'self';
+/* кто подаёт: очередь по закону (FamZG ст. 7) */
+function who(d){
+  const A = {id: 'a', job: d.aJob, kt: d.aKt}, B = {id: 'b', job: d.bJob, kt: d.bKt}, has2 = d.bJob !== 'na', why = [];
+  const ent = p => works(p.job) || ((p.job === 'none' || p.job === 'low') && d.lowInc === 'y');
+  const cands = [A].concat(has2 ? [B] : []).filter(ent);
+  if (!cands.length) return {p: null, why: ['Ни у кого из родителей нет права: нет работы по найму от 630 франков в месяц или на себя, а доход семьи выше предела для неработающих.']};
+  if (cands.length === 1) { why.push('Право есть только у одного родителя.'); return {p: cands[0], other: null, why}; }
+  const w = cands.filter(p => works(p.job));
+  if (w.length === 1) { why.push('1. Подаёт тот, кто работает.'); return {p: w[0], other: cands.find(p => p !== w[0]), why}; }
+  if (d.sorge === 'a' || d.sorge === 'b') { why.push('2. Подаёт тот, у кого родительская опека.'); const p = d.sorge === 'a' ? A : B; return {p, other: p === A ? B : A, why}; }
+  if (d.sorge === 'bothA' || d.sorge === 'bothB') { why.push('3. Совместная опека — подаёт тот, с кем живут дети.'); const p = d.sorge === 'bothA' ? A : B; return {p, other: p === A ? B : A, why}; }
+  const inHome = w.filter(p => p.kt === d.home);
+  if (w.length === 2 && inHome.length === 1) { why.push('4. Дети живут с обоими — подаёт тот, кто работает в кантоне, где живут дети.'); return {p: inHome[0], other: inHome[0] === A ? B : A, why}; }
+  why.push('5. Оба работают в кантоне, где живут дети (или оба нет) — подаёт тот, кто зарабатывает больше.');
+  const p = d.more === 'a' ? A : B; return {p, other: p === A ? B : A, why};
+}
+function ageAt(born, ref){ const [y, m] = String(born || '').split('-').map(Number); if (!y) return null; return (ref.getFullYear() - y) * 12 + (ref.getMonth() + 1 - m); }
+function amount(kt, k, idx, ref){
+  const f = FZ[kt] || FZ.ZH, m = ageAt(k.born, ref); if (m === null || m < 0) return {sum: 0, kind: '—'};
+  const yrs = Math.floor(m / 12), third = idx >= 2;
+  if (yrs < 16) { return {sum: third && f.k3 ? f.k3 : (yrs >= 12 && f.k12 ? f.k12 : f.k), kind: 'ребёнок'}; }
+  if (yrs < 25 && k.edu === 'y') return {sum: third && f.a3 ? f.a3 : (yrs >= 18 && f.a18 ? f.a18 : f.a), kind: 'учёба'};
+  return {sum: 0, kind: yrs < 25 ? 'не учится' : 'старше 25'};
+}
+function calc(d){
+  const ref = new Date(); const W = who(d);
+  const kids = d.kids.filter(k => k.born).slice().sort((a, b) => a.born.localeCompare(b.born));
+  const rows = kids.map((k, i) => {
+    if (!W.p) return {k, a: 0, kind: '—', diff: 0, note: ''};
+    if (k.where === 'other') return {k, a: 0, kind: 'за границей', diff: 0, note: 'Дети живут в стране без соглашения — пособия, как правило, нет.'};
+    const r = amount(W.p.kt, k, i, ref); let diff = 0;
+    if (W.other && works(W.other.job) && r.sum) { const r2 = amount(W.other.kt, k, i, ref); diff = Math.max(0, r2.sum - r.sum); }
+    return {k, a: r.sum, kind: r.kind, diff, note: k.where === 'eu' ? 'Дети в ЕС или ЕАСТ — пособие платят полностью, разовое при рождении — нет.' : ''};
+  });
+  const month = rows.reduce((s, r) => s + r.a + r.diff, 0);
+  const g = W.p ? (FZ[W.p.kt] || {}).g : 0;
+  return {W, rows, month, year: month * 12, g};
+}
+const fmt = n => Math.round(n).toLocaleString('de-CH').replace(/[’']/g, ' ');
+const JOB = {emp: 'по найму', self: 'на себя', low: 'по найму, меньше 630 фр. в месяц', none: 'не работает', na: '—'};
+function build(){
+  const d = D(), C = SH.pal(d.bw), c = C.c, P = SH.page(210, 297, C), X = 12, W = 186, r = calc(d);
+  P.header('Детские пособия: расчёт семьи', 'Familienzulagen · allocations familiales · assegni familiari', '2026');
+  let y = 28;
+  if (!r.W.p) { y += P.card(X, y, W, c.red, 'Права на пособие не видно', '', r.W.why, {ts: 12, bs: 9.5}) + 6; }
+  else {
+    const p = r.W.p, nm = p.id === 'a' ? 'Первый родитель (мама)' : 'Второй родитель (папа)';
+    y += P.card(X, y, W, c.green, fmt(r.month) + ' франков в месяц · ' + fmt(r.year) + ' в год', 'Familienzulagen pro Monat und Jahr', ['Подаёт: ' + nm + ', ' + JOB[p.job] + ', кантон ' + KTN(p.kt) + '.', r.W.why.join(' ')], {ts: 14, bs: 9.5}) + 6;
+  }
+  y = P.sec('Дети', X, y, W);
+  const cols = [X, X + 55, X + 95, X + 130, X + 158];
+  ['Ребёнок', 'Пособие', 'В месяц', 'Доплата разницы', ''].forEach((t, i) => P.text(t, cols[i], y, 8, true, C.head)); y += 2; P.line(X, y, X + W, y, C.line, 0.3); y += 5;
+  r.rows.forEach(row => { const k = row.k; P.text((k.name || 'Ребёнок') + ' · ' + k.born.split('-').reverse().join('.'), cols[0], y, 9, false, C.ink); P.text(row.kind, cols[1], y, 9, false, C.ink); P.text(row.a ? fmt(row.a) + ' фр.' : '—', cols[2], y, 9, true, C.ink); P.text(row.diff ? '+' + fmt(row.diff) + ' фр.' : '—', cols[3], y, 9, false, C.ink); y += 5.5;
+    if (row.note) { y = P.para(row.note, cols[0] + 2, y, 7.6, false, C.mut, W - 4, 3.6) + 1; } });
+  if (!r.rows.length) { P.text('Добавь детей с датой рождения.', X, y, 9, false, C.mut); y += 6; }
+  y += 4;
+  if (r.g) { y += P.card(X, y, W, c.mustard, 'При рождении в кантоне ' + KTN(r.W.p.kt) + ': ' + fmt(r.g) + ' франков разово', 'Geburtszulage', ['Подай вместе с анкетой на пособие после рождения ребёнка.'], {ts: 10, bs: 8.6}) + 5; }
+  y = P.sec('Как подать', X, y, W);
+  ['По найму — анкета у работодателя (Anmeldung Familienzulagen), пособие приходит с зарплатой. Приложи свидетельство о рождении.', 'На себя — в свою кассу семейных пособий (Familienausgleichskasse). Не работаешь — в кассу AHV своего кантона.', 'Не подавала раньше — можно задним числом до 5 лет.', 'С 16 лет — каждый учебный год справка об учёбе (Ausbildungsbestätigung).', 'Сообщай кассе: рождение, конец учёбы, брак, развод, смену работы второго родителя.'].forEach(s => { y = P.para('• ' + s, X, y + 1, 8.8, false, C.ink, W, 4.3); });
+  P.foot('Примерный расчёт по закону о семейных пособиях (FamZG) и суммам кантонов 2026 (PwC), не решение кассы. svoiludi.ch');
+  return [P];
+}
+const $ = id => document.getElementById(id);
+const kopts = Object.keys(FZ).sort((a, b) => KTN(a).localeCompare(KTN(b), 'ru')).map(k => `<option value="${k}">${KTN(k)}</option>`).join('');
+['aKt', 'bKt', 'home'].forEach(id => $(id).innerHTML = kopts);
+function kidsUI(){ const d = D();
+  $('kids').innerHTML = d.kids.map((k, i) => `<div class="kid"><div class="fl"><span class="lb">Имя (по желанию)</span><input type="text" data-k="${i}" data-f="name" value="${(k.name || '').replace(/"/g, '&quot;')}"></div><div class="row"><div class="fl"><span class="lb">Месяц и год рождения</span><input type="month" data-k="${i}" data-f="born" value="${k.born || ''}"></div></div><div class="fl"><span class="lb">После 15 лет учится (гимназия, Lehre, вуз)</span><select data-k="${i}" data-f="edu"><option value="y">Да</option><option value="n">Нет</option></select></div><div class="fl"><span class="lb">Где живёт</span><select data-k="${i}" data-f="where"><option value="ch">В Швейцарии</option><option value="eu">В стране ЕС или ЕАСТ</option><option value="other">В другой стране (например, в Украине)</option></select></div>${d.kids.length > 1 ? `<button type="button" class="btn ghost sm" data-del="${i}">Убрать</button>` : ''}</div>`).join('');
+  $('kids').querySelectorAll('select[data-f]').forEach(s => s.value = d.kids[+s.dataset.k][s.dataset.f]);
+  $('kids').querySelectorAll('input,select,button').forEach(x => x.disabled = !!EX); }
+function showRes(){ const r = calc(D());
+  $('res').innerHTML = !r.W.p ? '<p><b>Права на пособие не видно.</b></p><p>' + r.W.why.join(' ') + '</p>' : '<p>Примерно</p><p class="big">' + fmt(r.month) + ' фр. в месяц</p><p>' + fmt(r.year) + ' франков в год. Подаёт: <b>' + (r.W.p.id === 'a' ? 'первый родитель' : 'второй родитель') + '</b>, кантон ' + KTN(r.W.p.kt) + '.</p>'; }
+const F = ['aJob', 'aKt', 'bJob', 'bKt', 'sorge', 'home', 'more', 'lowInc'];
+let UI, tmr;
+function fill(){ const d = D(); $('bw').checked = !!d.bw; F.forEach(k => { $(k).value = d[k]; $(k).disabled = !!EX; }); $('addKid').hidden = !!EX; kidsUI(); $('exbar').hidden = !EX; $('exOn').hidden = !!EX; showRes(); if (UI) UI.render(); }
+$('bw').addEventListener('change', e => { S.bw = e.target.checked; if (EX) EX.bw = S.bw; save(); fill(); });
+F.forEach(k => $(k).addEventListener('change', e => { if (EX) return; S[k] = e.target.value; save(); fill(); }));
+$('kids').addEventListener('input', e => { const x = e.target; if (EX || !x.dataset.f) return; S.kids[+x.dataset.k][x.dataset.f] = x.value; save(); clearTimeout(tmr); tmr = setTimeout(() => { showRes(); UI && UI.render(); }, 300); });
+$('kids').addEventListener('change', e => { const x = e.target; if (EX || !x.dataset.f) return; S.kids[+x.dataset.k][x.dataset.f] = x.value; save(); showRes(); UI && UI.render(); });
+$('kids').addEventListener('click', e => { const b = e.target.closest('[data-del]'); if (!b || EX) return; S.kids.splice(+b.dataset.del, 1); save(); fill(); });
+$('addKid').addEventListener('click', () => { if (EX) return; S.kids.push({name: '', born: '', edu: 'y', where: 'ch'}); save(); fill(); });
+const EXD = () => { const y = new Date().getFullYear(); return Object.assign(blank(), {bw: S.bw, aJob: 'emp', aKt: 'ZH', bJob: 'emp', bKt: 'ZG', sorge: 'both', home: 'ZH', more: 'b', kids: [{name: 'Мария', born: (y - 17) + '-03', edu: 'y', where: 'ch'}, {name: 'Лев', born: (y - 13) + '-09', edu: 'y', where: 'ch'}, {name: 'Ника', born: (y - 4) + '-01', edu: 'y', where: 'ch'}]}); };
+$('exOn').addEventListener('click', () => { EX = EXD(); fill(); window.scrollTo({top: $('exbar').offsetTop - 12, behavior: 'smooth'}); });
+$('exOff').addEventListener('click', () => { EX = null; fill(); });
+if (/[?&]example\b/.test(location.search)) EX = EXD();
+UI = SH.mount({build, title: 'Детские пособия', name: () => 'Familienzulagen-2026'});
+fill();
+
+</script>
+<script src="/assets/help.js"></script>
+<script src="/assets/backup.js"></script>
+<script src="/assets/pdffan.js" defer></script>
+<script src="/assets/share.js" defer></script>
+<script src="/assets/samesite.js"></script>
+</body>
+</html>
