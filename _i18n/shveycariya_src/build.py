@@ -100,7 +100,7 @@ def hub():
   <p class="tm-empty" id="tmempty" hidden>Ничего не нашлось. Попробуй другое слово или спроси в боте.</p>
   <section class="tm-ask" aria-labelledby="ask-h">
     <h2 id="ask-h">Не нашла свой вопрос?</h2>
-    <p style="max-width:64ch">Ещё больше подробностей — в бесплатном боте «Гайд по Швейцарии». А если нужен человек, который разберётся именно в твоей ситуации, выбери специалиста в справочнике.</p>
+    <p style="max-width:64ch">Советы о жизни в Швейцарии можно получать и в Telegram, в бесплатном боте «Гайд по Швейцарии». А если нужен человек, который разберётся именно в твоей ситуации, выбери специалиста в справочнике.</p>
     <span class="addbtns"><a class="btn" href="{BOT}">Открыть бот в Telegram</a><a class="btn ghost" href="../">Найти специалиста</a></span>
   </section>
   {DISC}
@@ -158,7 +158,7 @@ def article(t):
       {f'<div class="box"><h3>Ещё по теме</h3><div class="rel">{rel}</div></div>' if rel else ''}
     </aside>
     <div class="art-foot">
-      {f'<p class="botlink">Подробнее эта тема разобрана в бесплатном боте «Гайд по Швейцарии», раздел {t["bot"]}. <a href="{BOT}">Открыть бот →</a></p>' if t['bot'] else ''}
+      <p class="botlink">Хочешь получать советы о жизни в Швейцарии прямо в Telegram? Можно подписаться на бесплатный бот «Гайд по Швейцарии». <a href="{BOT}">Открыть бот →</a></p>
       <div class="src"><b>Источники</b> (проверено {UPD})<ol>{srcs}</ol></div>
     </div>
   </div>
