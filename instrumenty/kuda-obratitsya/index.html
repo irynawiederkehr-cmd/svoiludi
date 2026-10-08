@@ -44,7 +44,7 @@ h3{font-family:var(--display);font-weight:400;font-size:1.22rem;line-height:1.2;
 .btn.ghost{background:transparent;color:var(--brown);border:1.5px solid var(--line);box-shadow:none}
 .btn.sm{font-size:.82rem;padding:7px 13px}
 .btn[disabled]{background:var(--soft);color:var(--muted);box-shadow:none;cursor:wait}
-select,input[type=text],input[type=tel],textarea{font:inherit;font-size:.95rem;color:var(--ink);background:var(--paper);border:1.5px solid var(--line);border-radius:12px;padding:9px 12px;width:100%;min-width:0}
+select,input[type=text],input[type=tel],input[type=number],input[type=date],textarea{font:inherit;font-size:.95rem;color:var(--ink);background:var(--paper);border:1.5px solid var(--line);border-radius:12px;padding:9px 12px;width:100%;min-width:0}
 select:focus-visible,input:focus-visible,button:focus-visible,textarea:focus-visible,a:focus-visible{outline:2px solid var(--mustard);outline-offset:2px}
 ::placeholder{color:color-mix(in srgb,var(--muted) 70%,transparent)}
 .setup{background:var(--paper);border:1.5px solid var(--line);border-radius:22px;padding:16px 18px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px 18px;align-items:start}
@@ -111,7 +111,7 @@ select:focus-visible,input:focus-visible,button:focus-visible,textarea:focus-vis
   <div class="setup">
     <div class="fl"><span class="lb">Язык листов<button type="button" class="qh" data-help="lang" aria-label="Подсказка: язык листов" aria-expanded="false">?</button></span><select id="lang"><option value="de">Русский + немецкий</option><option value="fr">Русский + французский</option><option value="it">Русский + итальянский</option><option value="ru">Только русский</option></select></div>
     <div class="fl"><span class="lb">Твой кантон<button type="button" class="qh" data-help="kt" aria-label="Подсказка: кантон" aria-expanded="false">?</button></span><select id="kt"></select></div>
-    <div class="fl"><span class="lb">Что в PDF</span><div class="chk"><label><input type="checkbox" id="p0" checked> Мой кантон</label><label><input type="checkbox" id="p1" checked> С членством</label><label><input type="checkbox" id="p2" checked> Бесплатно</label><label><input type="checkbox" id="p3" checked> Как пользоваться</label><label><input type="checkbox" id="p4" checked> Мои организации</label></div></div>
+    <div class="fl"><span class="lb">Что в PDF</span><div class="chk"><label><input type="checkbox" id="p0" checked> Мой кантон</label><label><input type="checkbox" id="p1" checked> Таблица организаций</label><label><input type="checkbox" id="p2" checked> Что это за организации</label><label><input type="checkbox" id="p3" checked> Как пользоваться</label><label><input type="checkbox" id="p4" checked> Мои организации</label></div></div>
     <div class="fl"><span class="lb">Печать</span><label class="tog"><input type="checkbox" id="bw"> Без цвета, для дешёвой печати</label></div>
   </div>
   <div class="exbar" id="exbar" hidden><span>Это пример. Так будет выглядеть твой файл.</span><button type="button" class="btn sm" id="exOff">Вернуться к моим данным</button></div>
@@ -216,8 +216,47 @@ function p0(d){
   }
   P.foot(disc(d)); return [P];
 }
-function p1(d){ return pagesFor(d, 'Вступи — и получай консультации', L(d, 't1'), ORG.filter(o => o[6] && d.areas.includes(o[1]))); }
-function p2(d){ return pagesFor(d, 'Бесплатно, без членства', L(d, 't2'), ORG.filter(o => !o[6] && d.areas.includes(o[1]))); }
+/* Таблица организаций (просьба Ирины 08.10.2026: таблицей проще и короче печатать) */
+const TC = [['Организация', 44], ['Для кого и чем поможет', 92], ['Взнос', 52], ['Когда помогут', 42], ['Контакты', 47]];
+function cellLines(s, w, size){ return SH.wrap(s, false, size, w - 3); }
+function p1(d){
+  const list = PM.orgs.filter(o => d.areas.includes(o.area)), out = [], X = 10, FS = 6.3, LH = 2.75;
+  const C = SH.pal(d.bw), c = C.c; let P, y, n = 0;
+  const head = () => { P = SH.page(297, 210, C); out.push(P); P.header('Куда обратиться: организации, взносы и контакты' + (n ? ' (продолжение)' : ''), L(d, 't1'), ''); n++; y = 25;
+    let x = X; P.rect(X, y - 4, 277, 6, C.hi); TC.forEach(([h, w]) => { P.text(h, x + 1.5, y, 6.8, true, C.ink); x += w; }); y += 3.6; };
+  head(); let area = null;
+  list.forEach(o => {
+    const col = c[COL[o.area] || 'sage'];
+    if (o.area !== area) { if (y > 190) head(); area = o.area; P.rect(X, y - 0.6, 277, 5.4, col[0]); P.text((PM.info[o.area] || [AREAS[o.area][0]])[0], X + 1.5, y + 3.3, 7.2, true, col[1]); y += 6.2; }
+    const cells = [[o.name, true], [o.who + ' ' + o.short, false], [o.fee, false], [o.wait, false], [[o.tel, o.mail, host(o.find || o.url)].filter(Boolean).join(' · '), false]];
+    const L2 = cells.map((cl, i) => SH.wrap(cl[0], cl[1], FS, TC[i][1] - 3));
+    if (!o.m) L2[0].push('бесплатно, без членства');
+    const h = Math.max(...L2.map(l => l.length)) * LH + 2;
+    if (y + h > 198) { head(); }
+    let x = X; L2.forEach((ls, i) => { ls.forEach((l, k) => P.text(l, x + 1.5, y + 2.6 + k * LH, i === 0 && k === ls.length - 1 && !o.m ? 5.6 : FS, i === 0 && (o.m || k < ls.length - 1), i === 0 && !o.m && k === ls.length - 1 ? col[1] : C.ink)); x += TC[i][1]; });
+    y += h; P.line(X, y - 0.4, X + 277, y - 0.4, C.line, 0.2);
+  });
+  out.forEach(pg => pg.foot(disc(d)));
+  return out;
+}
+/* Что это за организации — пояснение для тех, кто здесь впервые */
+function p2(d){
+  const C = SH.pal(d.bw), c = C.c, out = []; let P, y, col = 0; const X = 12, cw = (273 - 8) / 2, FS = 7.2, LH = 3.2;
+  const np = () => { P = SH.page(297, 210, C); out.push(P); P.header('Что это за организации' + (out.length > 1 ? ' (продолжение)' : ''), L(d, 't2'), ''); y = 27; col = 0; };
+  np(); const ys = [27, 27];
+  Object.keys(PM.info).filter(a => d.areas.includes(a)).forEach(a => {
+    const [h, ps] = PM.info[a], cc = c[COL[a] || 'sage'];
+    const lines = []; ps.forEach((p, i) => { SH.wrap(p, false, FS, cw - 6).forEach(l => lines.push(l)); if (i < ps.length - 1) lines.push(''); });
+    const hh = 9 + lines.length * LH + 3;
+    let k = ys[0] <= ys[1] ? 0 : 1; if (ys[k] + hh > 198) { k = 1 - k; if (ys[k] + hh > 198) { np(); ys[0] = ys[1] = 27; k = 0; } }
+    const x = X + k * (cw + 8), yy = ys[k];
+    P.rect(x, yy, cw, hh, cc[0], cc[1], 1.6); P.text(h, x + 3, yy + 5.6, 8.6, true, cc[1]);
+    lines.forEach((l, i) => { if (l) P.text(l, x + 3, yy + 10.4 + i * LH, FS, false, C.ink); });
+    ys[k] += hh + 4;
+  });
+  out.forEach(pg => pg.foot(disc(d)));
+  return out;
+}
 function p3(d){
   const C = SH.pal(d.bw), P = SH.page(297, 210, C), c = C.c;
   P.header('Как пользоваться членством правильно', L(d, 't3'), '');
@@ -249,7 +288,7 @@ function p4(d){
     if (y > 250) return;
     const col = c[AREAS[o[1]][1]];
     P.rect(12, y - 4.5, 186, 26, col[0], col[1], 1.4);
-    P.text(o[2], 16, y + 1, 10, true, col[1]); P.text(AREAS[o[1]][0] + (o[5] ? ' · ' + o[5] : '') + ' · ' + o[7].sfee, 16, y + 6, 7.2, false, C.mut);
+    P.text(o[2], 16, y + 1, 10, true, col[1]); P.text(AREAS[o[1]][0] + ' · ' + o[7].sfee + (o[7].tel ? ' · ' + o[7].tel.split(/[(;:]/)[0].trim() : (o[5] ? ' · ' + o[5] : '')), 16, y + 6, 7.2, false, C.mut);
     ['Номер членства', 'Телефон', 'Член с'].forEach((t, i) => { const x = 16 + i * 62; P.text(t, x, y + 13.5, 7, false, C.ink); P.line(x, y + 18.5, x + 56, y + 18.5, C.line, 0.4); });
     y += 31;
   });
@@ -261,8 +300,11 @@ function p4(d){
 function build(){ const d = D(), p = []; [p0, p1, p2, p3, p4].forEach((f, i) => { if (d.p[i] !== false) p.push(...f(d)); }); return p; }
 
 const $ = id => document.getElementById(id);
-$('areas').innerHTML = Object.entries(AREAS).map(([k, a]) => `<label><input type="checkbox" data-area="${k}"> <span>${SH.esc(a[0])}</span></label>`).join('');
-$('mineList').innerHTML = ORG.map(o => `<label><input type="checkbox" data-org="${o[0]}"> <span>${SH.esc(o[2])}<small>${SH.esc(AREAS[o[1]][0])}${o[6] ? ' · членство' : ' · бесплатно'}</small></span></label>`).join('');
+Object.entries(PM.info).forEach(([a, v]) => { window.HELP['a_' + a] = '<p><b>' + SH.esc(v[0]) + '</b></p>' + v[1].map(p => '<p>' + SH.esc(p) + '</p>').join(''); });
+PM.orgs.forEach(o => { window.HELP['o_' + o.id] = '<p><b>' + SH.esc(o.name) + '</b></p><p><b>Для кого.</b> ' + SH.esc(o.who) + '</p><p><b>Как поможет.</b> ' + SH.esc(o.help) + '</p><p><b>Взнос.</b> ' + SH.esc(o.fee) + '</p><p><b>Когда помогут.</b> ' + SH.esc(o.wait) + '</p>' + (o.extra ? '<p>' + SH.esc(o.extra) + '</p>' : '') + ((o.tel || o.mail) ? '<p><b>Контакты.</b> ' + SH.esc([o.tel, o.mail].filter(Boolean).join(' · ')) + '</p>' : '') + '<p><a href="' + SH.esc(o.find || o.url) + '" target="_blank" rel="noopener">' + SH.esc(host(o.find || o.url)) + ' ↗</a></p>'; });
+const QB = (k, l) => `<button type="button" class="qh" data-help="${k}" aria-label="Подсказка: ${SH.esc(l)}" aria-expanded="false">?</button>`;
+$('areas').innerHTML = Object.entries(AREAS).map(([k, a]) => `<label><input type="checkbox" data-area="${k}"> <span>${SH.esc(a[0])}${PM.info[k] ? QB('a_' + k, a[0]) : ''}</span></label>`).join('');
+$('mineList').innerHTML = ORG.map(o => `<label><input type="checkbox" data-org="${o[0]}"> <span>${SH.esc(o[2])}${QB('o_' + o[0], o[2])}<small>${SH.esc(o[7].short)} · ${o[6] ? 'взнос ' + SH.esc(o[7].sfee) : 'бесплатно'}</small></span></label>`).join('');
 $('stepsList').innerHTML = [['Профсоюз', 'Защищает в трудовых спорах: проверит договор, увольнение, зарплату, напишет работодателю, даст адвоката. Взнос в Unia — от 10.70 франков в месяц по зарплате, помощь через 3 месяца членства.'], ['Аренда', 'Союз арендаторов (Mieterverband, ASLOCA, ASI) — 54–100 франков в год, по кантону. Проверит повышение аренды, выезд, залог. Бесплатно — примирительная служба по аренде.'], ['Покупки', 'Konsumentenschutz, FRC, K-Tipp и Saldo — для своих членов или подписчиков.'], ['Вступай заранее', 'Обычно помогают только с проблемами, которые начались после вступления, часто — через 3 месяца членства.']].map(s => `<details><summary>${SH.esc(s[0])}</summary><p>${SH.esc(s[1])}</p></details>`).join('');
 let UI;
 function fill(){
