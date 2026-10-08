@@ -251,7 +251,7 @@ const EXD = () => ({lang: S.lang === 'ru' ? 'de' : S.lang, bw: S.bw, ru: true, p
 $('exOn').addEventListener('click', () => { EX = EXD(); fill(); window.scrollTo({top: $('exbar').offsetTop - 12, behavior: 'smooth'}); });
 $('exOff').addEventListener('click', () => { EX = null; fill(); });
 if (/[?&]example\b/.test(location.search)) EX = EXD();
-UI = SH.mount({build, title: 'Kundenformular', name: () => ({de: 'Kundenformular', fr: 'Fiche-client', it: 'Scheda-cliente', en: 'Client-form', ru: 'Anketa-klienta'}[D().lang])});
+UI = SH.mount({build, lang: () => D().lang, title: 'Kundenformular', name: () => ({de: 'Kundenformular', fr: 'Fiche-client', it: 'Scheda-cliente', en: 'Client-form', ru: 'Anketa-klienta'}[D().lang])});
 fill();
 
 </script>

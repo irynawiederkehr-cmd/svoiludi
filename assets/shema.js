@@ -15,7 +15,7 @@
   /* холст страницы с удобными функциями */
   function page(w, h, C){
     const ops = [];
-    const P = {w, h, ops, C,
+    const P = {w, h, ops, C, wm: true, wmMaxY: h, credit: true, creditY: h - 2.6,
       text: (s, x, y, size, b, color, align, font) => { ops.push({t: 'text', s: String(s), x, y, size, b: !!b, color: color || C.ink, align: align || 'left', f: font || ''}); },
       rect: (x, y, w2, h2, fill, stroke, r, dash) => ops.push({t: 'rect', x, y, w: w2, h: h2, fill: fill || null, stroke: stroke || null, r: r || 0, dash: !!dash}),
       line: (x1, y1, x2, y2, color, wd, dash) => ops.push({t: 'line', x1, y1, x2, y2, color: color || C.line, w: wd || 0.3, dash: !!dash}),
@@ -25,7 +25,7 @@
       /* абзац: возвращает новую y */
       para: (s, x, y, size, b, color, width, lh) => { wrap(s, b, size, width).forEach(l => { P.text(l, x, y, size, b, color); y += lh || size * PT * 1.45; }); return y; },
       header: (ru, local, right) => { P.rect(0, 0, w, 17, C.band, C.bandLine); P.text(ru, 12, 10.5, 16, true, C.bandTx); if (local) P.text(local, 12, 15, 7, false, C.bandTx); if (right) P.text(right, w - 12, 10.5, 8, false, C.bandTx, 'right'); },
-      foot: (s) => { wrap(s, false, 4.8, w - 24).forEach((l, i) => P.text(l, 12, h - 7 + i * 2, 4.8, false, C.mut)); },
+      foot: (s) => { wrap(s, false, 4.8, w - 24 - (P.credit && !vip() ? 50 : 0)).forEach((l, i) => P.text(l, 12, h - 7 + i * 2, 4.8, false, C.mut)); },
       sec: (t, x, y, width, sub) => { P.text(t, x, y, 9.5, true, C.head); if (sub) P.text(sub, x + tw(t, true, 9.5) + 2.5, y, 6.5, false, C.mut); y += 1.8; P.line(x, y, x + width, y, C.head, 0.4); return y + 4.6; },
       /* карточка с заголовком и текстом, высота по содержимому; возвращает высоту */
       card: (x, y, wd, col, title, sub, body, opts) => {
@@ -40,6 +40,16 @@
     };
     return P;
   }
+  /* Водяной знак «Свои люди · svoiludi.ch» и строка «Создано на сайте проекта «Свои люди»» (правило Ирины 08.10.2026).
+     Без них — только по будущей подписке (window.SVL_VIP). Исключения задаёт сама страница: pg.wm = false (этикетки),
+     pg.wmMaxY (QR-квитанция внизу листа остаётся чистой), pg.credit = false. Резюме сделано на другом движке и остаётся чистым. */
+  const vip = () => !!window.SVL_VIP;
+  const WMT = 'Свои люди · svoiludi.ch', WMS = 8.5, WMC = '#6E4F3C', WMA = 0.075;
+  const CREDIT = {ru: 'Создано на сайте проекта «Свои люди» · svoiludi.ch', uk: 'Створено на сайті проєкту «Свої люди» · svoiludi.ch', de: 'Erstellt mit svoiludi.ch', fr: 'Créé avec svoiludi.ch', it: 'Creato con svoiludi.ch', en: 'Made with svoiludi.ch'};
+  let CFG = {};
+  const credit = () => { const l = CFG.lang ? CFG.lang() : (document.documentElement.lang === 'uk' ? 'uk' : 'ru'); return CREDIT[l] || CREDIT.ru; };
+  function marks(pg){ if (!pg.wm || vip()) return []; const out = [], dx = 66, dy = 27; for (let r = 0, y = 14; y < pg.wmMaxY - 2; y += dy, r++) for (let x = (r % 2) * dx / 2 - 10; x < pg.w; x += dx) out.push([x, y]); return out; }
+  const showCredit = pg => pg.credit && !vip();
   function svg(pg){
     let o = `<svg viewBox="0 0 ${pg.w} ${pg.h}" xmlns="http://www.w3.org/2000/svg" role="img"><rect width="${pg.w}" height="${pg.h}" fill="#fff"/>`;
     pg.ops.forEach(p => {
@@ -48,6 +58,8 @@
       else if (p.t === 'tri') o += `<polygon points="${p.p.map(q => q.join(',')).join(' ')}" fill="${p.fill}"/>`;
       else o += `<text x="${p.x}" y="${p.y}" font-family="${p.f === 'h' ? 'Helvetica, Arial, sans-serif' : 'Manrope'}" font-weight="${p.b ? 700 : 400}" font-size="${(p.size * PT).toFixed(3)}" fill="${p.color}" text-anchor="${p.align === 'right' ? 'end' : p.align === 'center' ? 'middle' : 'start'}">${esc(p.s)}</text>`;
     });
+    const mk = marks(pg); if (mk.length) o += `<g fill="${WMC}" fill-opacity="${WMA}" font-family="Manrope" font-weight="700" font-size="${(WMS * PT).toFixed(3)}">` + mk.map(([x, y]) => `<text transform="translate(${x} ${y}) rotate(-24)">${esc(WMT)}</text>`).join('') + '</g>';
+    if (showCredit(pg)) o += `<text x="${pg.w - 8}" y="${pg.creditY}" font-family="Manrope" font-size="${(4.6 * PT).toFixed(3)}" fill="#7A6E62" text-anchor="end">${esc(credit())}</text>`;
     return o + '</svg>';
   }
   const FONT_FILES = {'Manrope-Regular': '/assets/lib/fonts-pdf/Manrope-Regular.ttf', 'Manrope-Bold': '/assets/lib/fonts-pdf/Manrope-Bold.ttf'};
@@ -81,6 +93,9 @@
         else if (o.t === 'tri') { doc.setFillColor(...hex(o.fill)); doc.triangle(o.p[0][0], o.p[0][1], o.p[1][0], o.p[1][1], o.p[2][0], o.p[2][1], 'F'); }
         else { if (o.f === 'h') doc.setFont('helvetica', o.b ? 'bold' : 'normal'); else doc.setFont(o.b ? 'Manrope-Bold' : 'Manrope-Regular', 'normal'); doc.setFontSize(o.size); doc.setTextColor(...hex(o.color)); doc.text(o.s, o.x, o.y, {align: o.align}); }
       });
+      const mk = marks(pg);
+      if (mk.length) { const gs = doc.GState ? a => doc.setGState(new doc.GState({opacity: a})) : null; if (gs) gs(WMA); doc.setFont('Manrope-Bold', 'normal'); doc.setFontSize(WMS); doc.setTextColor(...(gs ? hex(WMC) : [240, 235, 228])); mk.forEach(([x, y]) => doc.text(WMT, x, y, {angle: 24})); if (gs) gs(1); }
+      if (showCredit(pg)) { doc.setFont('Manrope-Regular', 'normal'); doc.setFontSize(4.6); doc.setTextColor(122, 110, 98); doc.text(credit(), pg.w - 8, pg.creditY, {align: 'right'}); }
     });
     doc.setProperties({title});
     return doc.output('blob');
@@ -95,11 +110,15 @@
       else if (o.t === 'tri') { c.beginPath(); c.moveTo(o.p[0][0], o.p[0][1]); c.lineTo(o.p[1][0], o.p[1][1]); c.lineTo(o.p[2][0], o.p[2][1]); c.closePath(); c.fillStyle = o.fill; c.fill(); }
       else { c.font = (o.b ? '700 ' : '400 ') + (o.size * PT) + 'px ' + (o.f === 'h' ? 'Helvetica, Arial, sans-serif' : 'Manrope'); c.fillStyle = o.color; c.textAlign = o.align === 'right' ? 'right' : o.align === 'center' ? 'center' : 'left'; c.textBaseline = 'alphabetic'; c.fillText(o.s, o.x, o.y); }
     });
+    const mk = marks(pg);
+    if (mk.length) { c.save(); c.globalAlpha = WMA; c.fillStyle = WMC; c.font = '700 ' + (WMS * PT) + 'px Manrope'; c.textAlign = 'left'; mk.forEach(([x, y]) => { c.save(); c.translate(x, y); c.rotate(-24 * Math.PI / 180); c.fillText(WMT, 0, 0); c.restore(); }); c.restore(); }
+    if (showCredit(pg)) { c.font = '400 ' + (4.6 * PT) + 'px Manrope'; c.fillStyle = '#7A6E62'; c.textAlign = 'right'; c.fillText(credit(), pg.w - 8, pg.creditY); }
     return new Promise(r => cv.toBlob(r, 'image/png'));
   }
   function save(blob, name){ const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = name; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 4000); }
   /* подключение страницы: кнопки PDF/PNG, предпросмотр */
   function mount(cfg){
+    CFG = cfg;
     const $ = id => document.getElementById(id), st = $('status'), say = t => { if (st) st.textContent = t; };
     const render = () => { const pages = cfg.build(); $('sheet').innerHTML = pages.map((p, i) => `<div class="sheet">${svg(p)}</div><div class="acts"><button type="button" class="btn ghost sm" data-png="${i}">Эту страницу в PNG</button></div>`).join('') || '<p class="hint">Отметь, что должно быть в PDF.</p>'; };
     async function pdf(btns, share){
@@ -116,5 +135,5 @@
     render(); if (document.fonts && document.fonts.ready) document.fonts.ready.then(render);
     return {render, say};
   }
-  window.SH = {PT, tw, wrap, esc, pal, page, svg, makePdf, pagePng, mount};
+  window.SH = {PT, tw, wrap, esc, pal, page, svg, makePdf, pagePng, mount, CREDIT};
 })();

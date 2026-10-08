@@ -209,12 +209,12 @@ function label(P, d, it, X, Y, sz, draw){
     }
     return y;
   };
-  let s = sz.w > 80 ? 11 : 8; while (s > 3.6 && fit(s, false) > Y + sz.h - pad + 0.5) s -= 0.2;
-  if (draw) { fit(s, true); if (d.cut) P.rect(X, Y, sz.w, sz.h, null, '#BBBBBB', 2, true); }
+  let s = sz.w > 80 ? 11 : 8; while (s > 3.6 && fit(s, false) > Y + sz.h - pad - 0.8) s -= 0.2;
+  if (draw) { fit(s, true); if (d.cut) P.rect(X, Y, sz.w, sz.h, null, '#BBBBBB', 2, true); if (!window.SVL_VIP) P.text('svoiludi.ch', X + sz.w - 2.2, Y + sz.h - 1.6, 3.4, false, '#9A9086', 'right'); }
   return s;
 }
 function build(){
-  const d = D(), it = IT(d), sz = SIZES[d.size], C = SH.pal(!!d.bw), P = SH.page(210, 297, C);
+  const d = D(), it = IT(d), sz = SIZES[d.size], C = SH.pal(!!d.bw), P = SH.page(210, 297, C); P.wm = false; P.credit = false; // этикетка должна легко читаться (LIV): без водяного знака, только маленькое «svoiludi.ch» в углу
   const ox = (210 - sz.cols * sz.w) / 2, oy = (297 - sz.rows * sz.h) / 2;
   for (let r = 0; r < sz.rows; r++) for (let c = 0; c < sz.cols; c++) label(P, d, it, ox + c * sz.w, oy + r * sz.h, sz, true);
   return [P];
@@ -284,7 +284,7 @@ const EXD = () => ({lang: 'de', size: S.size, cut: true, bw: S.bw, me: {name: 'O
 $('exOn').addEventListener('click', () => { EX = EXD(); fill(); window.scrollTo({top: $('exbar').offsetTop - 12, behavior: 'smooth'}); });
 $('exOff').addEventListener('click', () => { EX = null; fill(); });
 if (/[?&]example\b/.test(location.search)) EX = EXD();
-UI = SH.mount({build, title: 'Etiketten', name: () => 'Etiketten-' + String(IT(D()).name || 'Produkt').replace(/[^\wÀ-ž-]+/g, '-').slice(0, 30)});
+UI = SH.mount({build, lang: () => D().lang, title: 'Etiketten', name: () => 'Etiketten-' + String(IT(D()).name || 'Produkt').replace(/[^\wÀ-ž-]+/g, '-').slice(0, 30)});
 fill();
 
 </script>
