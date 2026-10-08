@@ -142,7 +142,7 @@ ARTICLES['betreibung'] = dict(
         'Перед поиском квартиры закажи свою выписку и проверь, что в ней нет старых записей.',
         'Долгов много — обратись в <a href="https://www.schulden.ch/">бесплатную консультацию по долгам</a> своего кантона.',
     ],
-    tools={'nalogi-shema': 'Когда приходят налоговые счета и как не допустить долга — налоговый год на схеме.', 'moj-budget': 'Все счета, сроки и платежи месяца в одном месте, чтобы ни один счёт не дошёл до напоминания.'},
+    tools={'kuda-obratitsya': 'Бесплатные консультации по долгам и другие адреса помощи — в одном списке.', 'nalogi-shema': 'Когда приходят налоговые счета и как не допустить долга — налоговый год на схеме.', 'moj-budget': 'Все счета, сроки и платежи месяца в одном месте, чтобы ни один счёт не дошёл до напоминания.'},
     related=['skrytye-rashody', 'arenda', 'permit-b', 'nalogovaya-deklaraciya'],
     sources=[
         ('Закон о взыскании долгов SchKG, ст. 8a — реестр, 5 лет и Nichtbekanntgabe', 'https://www.fedlex.admin.ch/eli/cc/11/529_488_529/de#art_8_a'),
@@ -288,7 +288,7 @@ ARTICLES['rabota'] = dict(
         'Откликайся регулярно и записывай, куда и когда отправила. Это пригодится и для RAV.',
         'Параллельно учи язык кантона. Даже уровень A2 заметно расширяет выбор, а для многих позиций специалистов нужен B2 или английский.',
     ],
-    tools={'diplomy-shema': 'Нужно ли признавать твой диплом, кто это делает, сколько ждать — на схеме и твой план.', 
+    tools={'kuda-obratitsya': 'Вступи в профсоюз своей отрасли заранее — список профсоюзов и бесплатных консультаций.', 'diplomy-shema': 'Нужно ли признавать твой диплом, кто это делает, сколько ждать — на схеме и твой план.', 
         'rezyume': 'Резюме по швейцарским правилам на языке вакансии: три шаблона, фото, пермит и языки по шкале A1–C2. Готовый PDF прикрепляешь к письму.',
         'uchet-vremeni': 'Когда начнёшь работать, веди учёт часов, отпуска и больничных и распечатывай его для работодателя на языке кантона.',
         'moj-den': 'Поиск работы — это тоже работа. Распиши день так, чтобы на отклики и язык было отдельное время.', 'yazyk-trebovaniya': 'Какой уровень языка нужен для работы, пермита и паспорта и сколько тебе не хватает.', 'pensiya-shema': 'Что с твоей зарплаты уходит в AHV и пенсионную кассу и что ты за это получишь.', 'strahovki-obyazatelnye': 'Что за тебя страхует работодатель: AHV, ALV, страховка от несчастного случая, пенсионная касса.', 'zarplata': 'Посчитай зарплату за месяц: брутто и нетто, все взносы и налог у источника, расчётка в PDF.'},
@@ -2252,7 +2252,7 @@ ARTICLES['domashniy-personal'] = dict(
         'Каждый месяц давай расчётку, веди учёт часов и отпуска.',
         'До 30 января сообщи зарплату за год в AHV-кассу и выдай Lohnausweis.',
     ],
-    tools={'zarplata': 'Сколько стоит работник с взносами и сколько он получит на руки, расчётка в PDF на русском или немецком.', 'uchet-vremeni': 'Часы, отпуск и больничные работника — для расчётки и спокойствия обеих сторон.', 'strahovki-obyazatelnye': 'Какие страховки обязательны, когда ты работодатель в частном доме.', 'ekstrennye-nomera': 'Карточка для няни или помощницы: экстренные номера, дежурный врач кантона, твои телефоны.'},
+    tools={'kuda-obratitsya': 'Куда обратиться, если спор с работником или семьёй: профсоюзы и бесплатные консультации.', 'zarplata': 'Сколько стоит работник с взносами и сколько он получит на руки, расчётка в PDF на русском или немецком.', 'uchet-vremeni': 'Часы, отпуск и больничные работника — для расчётки и спокойствия обеих сторон.', 'strahovki-obyazatelnye': 'Какие страховки обязательны, когда ты работодатель в частном доме.', 'ekstrennye-nomera': 'Карточка для няни или помощницы: экстренные номера, дежурный врач кантона, твои телефоны.'},
     related=['nyani', 'professii-dom', 'trudovoe-pravo', 'nalogovaya-deklaraciya', 'strahovki'],
     sources=[
         ('SECO — как оформить работника и зарплату, в том числе в частном доме', 'https://www.seco.admin.ch/de/anleitung-anmeldung-arbeitsverhaeltnis-und-lohnabrechnung'),
@@ -2364,7 +2364,8 @@ ARTICLES['poterya-raboty'] = dict(
   <li><a href="#pravo">Есть ли право на пособие</a></li>
   <li><a href="#skolko">Сколько и как долго платят</a></li>
   <li><a href="#poisk">Поиск работы и штрафные дни</a></li>
-  <li><a href="#den">Деньги, страховки и пенсия</a></li>
+  <li><a href="#den">Деньги и страховки</a></li>
+  <li><a href="#pensiya">Пенсионная касса и AHV</a></li>
 </ul></nav>
 
 <h2 id="srazu">Что сделать сразу</h2>
@@ -2397,13 +2398,29 @@ ARTICLES['poterya-raboty'] = dict(
   <li>Временная работа во время безработицы — можно, часть дохода засчитывается.</li>
 </ul>
 
-<h2 id="den">Деньги, страховки и пенсия</h2>
+<h2 id="den">Деньги и страховки</h2>
 <ul class="ul">
   <li>Пересчитай бюджет: пособие меньше зарплаты, а счета за медстраховку и налоги идут как раньше. Если не хватает — спроси о скидке на медстраховку (Prämienverbilligung) в кантоне.</li>
-  <li>Деньги из пенсионной кассы переводятся на счёт свободного перехода (Freizügigkeitskonto) — не трать их, это твоя пенсия.</li>
   <li>Страховка от несчастного случая через кассу по безработице действует, пока получаешь пособие.</li>
   <li>Важные письма в RAV и кассу — заказным (Einschreiben), с копией и квитанцией.</li>
 </ul>
+
+<h2 id="pensiya">Пенсионная касса и AHV: что будет с твоей пенсией</h2>
+<p>Когда работа заканчивается, а новой нет, ты выходишь из пенсионной кассы работодателя (Pensionskasse). Твои накопления там — это <b>твоя будущая пенсия</b>, они не пропадают, но их нужно правильно «припарковать».</p>
+<ul class="ul">
+  <li><b>Скажи кассе, куда перевести деньги.</b> Касса пришлёт письмо о выходе. Ответь письменно (заказным), куда перевести накопления: на счёт свободного перехода в банке (Freizügigkeitskonto) или в полис свободного перехода у страховой (Freizügigkeitspolice).</li>
+  <li><b>Если не ответишь</b>, касса через 6 месяцев — 2 года после ухода переведёт деньги в государственный фонд <a href="https://aeis.ch/application/files/7816/9502/6700/Merkblatt_FZK.pdf">Stiftung Auffangeinrichtung BVG</a>. Там они тоже в сохранности, но лучше выбрать самой.</li>
+  <li><b>Не больше двух счетов</b> у разных банков. Разделить деньги можно только сразу, потом уже нельзя (<a href="https://www.comparis.ch/altersvorsorge/bvg/freizuegigkeitskonto">comparis</a>).</li>
+  <li><b>Обычный счёт или фонды.</b> На обычном счёте — небольшой процент. В фондах (Wertschriften) деньги могут вырасти больше, но могут и упасть — это для тех, кому до пенсии ещё далеко.</li>
+  <li><b>Новая работа</b> — накопления нужно перевести в пенсионную кассу нового работодателя, а счёт свободного перехода закрыть. Сообщи новой кассе, где лежат деньги.</li>
+</ul>
+<div class="warn"><b>Снять эти деньги просто так нельзя</b>Только если: уезжаешь из Швейцарии навсегда (при переезде в страну ЕС или ЕАСТ обычно выдают не всё — обязательная часть остаётся до пенсии), начинаешь своё дело как главную работу, покупаешь жильё для себя, получаешь пенсию по инвалидности, сумма меньше годового взноса — или с 60 лет. Остальное время это твоя пенсия: не планируй жить на неё во время безработицы.</div>
+<ul class="ul">
+  <li><b>Пока получаешь пособие</b>, ты застрахована в пенсионной системе только на случай смерти и инвалидности (если дневной доход больше 84.70 франка), а накопления на старость не растут (<a href="https://aeis.ch/application/files/5117/2657/1525/Merkblatt_Obligatorische_ALV-DE_2024.pdf">Auffangeinrichtung BVG</a>). Продолжать копить можно добровольно и за свой счёт — заявление в течение 3 месяцев после конца работы.</li>
+  <li><b>AHV.</b> Пока получаешь пособие, взносы AHV удерживают из него — годы для пенсии AHV идут дальше. Если пособие закончилось, а работы нет, сообщи о себе в AHV-кассу как неработающая и плати взнос (минимум 530 франков в год), иначе будет пробел и меньше пенсия.</li>
+  <li><b>3a.</b> Пока получаешь пособие, платить в 3a можно — пособие считается доходом с взносами AHV. Когда пособие закончилось и дохода нет, платить нельзя; то, что уже лежит на счёте 3a, остаётся.</li>
+</ul>
+<p>Как связаны AHV, пенсионная касса и 3a — на схеме «Как устроена пенсия».</p>
 ''',
     steps=[
         'Получила увольнение — проверь, нет ли запрета на увольнение (болезнь, беременность), и попроси причину письменно.',
@@ -2411,14 +2428,18 @@ ARTICLES['poterya-raboty'] = dict(
         'Ищи работу уже сейчас и записывай каждый отклик.',
         'Выбери кассу по безработице и подай документы: договор, увольнение, расчётки.',
         'Пересчитай бюджет и узнай о скидке на медстраховку.',
+        'Напиши пенсионной кассе, на какой счёт свободного перехода перевести накопления.',
         'Обнови резюме и попроси у работодателя рекомендацию (Arbeitszeugnis).',
     ],
-    tools={'rezyume': 'Новое резюме по швейцарским правилам на языке вакансии — для откликов и RAV.', 'moj-budget': 'Пересчитай месяц на пособие: что платить обязательно и где сэкономить.', 'moj-den': 'Поиск работы — это работа: распиши день, чтобы были время на отклики, язык и отдых.', 'pensiya-shema': 'Что с пенсионной кассой при потере работы и как не потерять годы AHV.', 'zarplata': 'Проверь последнюю расчётку и сумму, от которой считают пособие.'},
+    tools={'kuda-obratitsya': 'Если спор с работодателем или кассой — куда обратиться: профсоюзы и бесплатные консультации.', 'rezyume': 'Новое резюме по швейцарским правилам на языке вакансии — для откликов и RAV.', 'moj-budget': 'Пересчитай месяц на пособие: что платить обязательно и где сэкономить.', 'moj-den': 'Поиск работы — это работа: распиши день, чтобы были время на отклики, язык и отдых.', 'pensiya-shema': 'Пенсионная касса, счёт свободного перехода и AHV на одной схеме — как не потерять годы и накопления.', 'zarplata': 'Проверь последнюю расчётку и сумму, от которой считают пособие.'},
     related=['rabota', 'trudovoe-pravo', 'sozialhilfe', 'pensiya', 'medstrahovka'],
     sources=[
         ('Кантон Цюрих — пособие по безработице: регистрация, 70/80%, дни, ожидание, штрафные дни', 'https://www.zh.ch/de/wirtschaft-arbeit/stellensuche-arbeitslosigkeit/arbeitslosenentschaedigung.html'),
         ('SECO — памятка о страховании по безработице', 'https://WWW.SECO.ADMIN.CH/dam/seco/de/dokumente/Arbeit/ALV/Grundlagen/Faktenblatt_Die_Arbeitslosenversicherung.pdf.download.pdf/DE_Faktenblatt_Die_Arbeitslosenversicherung.pdf'),
         ('arbeit.swiss — финансы при безработице', 'https://www.arbeit.swiss/secoalv/de/home/menue/stellensuchende/arbeitslos-was-tun-/finanzielles.html'),
+        ('Stiftung Auffangeinrichtung BVG — счёт свободного перехода', 'https://aeis.ch/application/files/7816/9502/6700/Merkblatt_FZK.pdf'),
+        ('Stiftung Auffangeinrichtung BVG — пенсионная страховка при безработице (смерть и инвалидность)', 'https://aeis.ch/application/files/5117/2657/1525/Merkblatt_Obligatorische_ALV-DE_2024.pdf'),
+        ('comparis — счёт свободного перехода: два счёта, снятие, фонды', 'https://www.comparis.ch/altersvorsorge/bvg/freizuegigkeitskonto'),
     ],
     terms=[('Deutsch', 'RAV, Arbeitslosenkasse, Arbeitslosenentschädigung, Taggeld, versicherter Verdienst, Wartetage, Einstelltage, Arbeitsbemühungen, Freizügigkeitskonto, Arbeitszeugnis'), ('Français', 'ORP, caisse de chômage, indemnité de chômage, gain assuré, délai d’attente, jours de suspension, recherches d’emploi, compte de libre passage, certificat de travail'), ('Italiano', 'URC, cassa disoccupazione, indennità di disoccupazione, guadagno assicurato, giorni di attesa, giorni di sospensione, ricerche di lavoro, conto di libero passaggio'), ('English', 'regional employment centre, unemployment fund, daily allowance, insured earnings, waiting days, suspension days, job search')],
     post='Это объяснение увольнения для кассы, ответы RAV и возражения на штрафные дни.',
@@ -2472,7 +2493,7 @@ ARTICLES['trudovoe-pravo'] = dict(
 <h2 id="zeugnis">Рекомендация и спор</h2>
 <ul class="ul">
   <li>Ты в любой момент можешь попросить рекомендацию (Arbeitszeugnis) — она важна для следующей работы. Если в ней ошибки или скрытые плохие формулировки, попроси исправить.</li>
-  <li>Споры о зарплате до 30 000 франков в суде бесплатны. Начни с письма работодателю, потом — консультация профсоюза или юриста по трудовому праву.</li>
+  <li>Споры о зарплате до 30 000 франков в суде бесплатны. Начни с письма работодателю, потом — консультация профсоюза или юриста по трудовому праву. Где их найти и сколько стоит членство — в теме «Профсоюзы и консультации».</li>
   <li>Веди учёт своих часов, отпуска и больничных — это главное доказательство в споре.</li>
 </ul>
 ''',
@@ -2484,7 +2505,7 @@ ARTICLES['trudovoe-pravo'] = dict(
         'Попроси рекомендацию (Arbeitszeugnis) и сразу зарегистрируйся в RAV, если новой работы нет.',
         'Веди учёт часов, отпуска и больничных.',
     ],
-    tools={'uchet-vremeni': 'Часы, сверхурочные, отпуск и больничные — доказательство, если будет спор.', 'zarplata': 'Проверь расчётку: ставка, отпускные, сверхурочные, взносы.', 'rezyume': 'Резюме по-швейцарски, если ищешь новую работу.'},
+    tools={'kuda-obratitsya': 'Профсоюзы и другие организации с консультациями — список с условиями и место для своих номеров.', 'uchet-vremeni': 'Часы, сверхурочные, отпуск и больничные — доказательство, если будет спор.', 'zarplata': 'Проверь расчётку: ставка, отпускные, сверхурочные, взносы.', 'rezyume': 'Резюме по-швейцарски, если ищешь новую работу.'},
     related=['poterya-raboty', 'rabota', 'bolezn-na-rabote', 'domashniy-personal'],
     sources=[
         ('ch.ch — увольнение: сроки, форма, защита при болезни и беременности, причина письменно', 'https://ch.ch/de/kundigung-arbeitsvertrag'),
@@ -2492,4 +2513,89 @@ ARTICLES['trudovoe-pravo'] = dict(
     ],
     terms=[('Deutsch', 'Arbeitsvertrag, Probezeit, Kündigung, Kündigungsfrist, Sperrfrist, missbräuchliche Kündigung, Überstunden, 13. Monatslohn, Arbeitszeugnis, Gesamtarbeitsvertrag (GAV)'), ('Français', 'contrat de travail, temps d’essai, résiliation, délai de congé, période de protection, congé abusif, heures supplémentaires, 13e salaire, certificat de travail, CCT'), ('Italiano', 'contratto di lavoro, periodo di prova, disdetta, termine di disdetta, periodo di protezione, disdetta abusiva, ore supplementari, tredicesima, certificato di lavoro, CCL'), ('English', 'employment contract, probation, notice period, protection period, unfair dismissal, overtime, reference letter, collective agreement')],
     post='Это увольнение, возражение против увольнения и просьба о рекомендации.',
+)
+
+ARTICLES['profsoyuzy'] = dict(
+    h1='Профсоюзы в Швейцарии и консультации за членство: <em>куда вступить, чтобы получать помощь</em>',
+    seo='Профсоюз в Швейцарии (Gewerkschaft): Unia, юридическая консультация за членство',
+    desc='Профсоюзы в Швейцарии (Gewerkschaft): Unia, Syna, VPOD, syndicom, Kaufmännischer Verband — что они дают и как вступить. Организации, где за небольшой взнос получаешь консультации: союзы арендаторов (Mieterverband, ASLOCA), защита покупателей, Beobachter. И где помогают бесплатно без членства. По-французски syndicat, conseil juridique, по-итальянски sindacato, consulenza giuridica.',
+    lead='В Швейцарии принято решать споры не сразу через адвоката, а через организацию, в которой ты член: профсоюз, союз арендаторов, защиту покупателей. Взнос небольшой, а взамен — консультации, письма от имени организации и иногда адвокат и суд. Главное — вступить заранее, до того как случилась проблема.',
+    body='''
+<nav class="toc" aria-label="Содержание"><b>В этой статье</b>
+<ul>
+  <li><a href="#profsoyuz">Что даёт профсоюз</a></li>
+  <li><a href="#kakoy">Какой профсоюз выбрать</a></li>
+  <li><a href="#drugie">Аренда, покупки и любые вопросы</a></li>
+  <li><a href="#besplatno">Бесплатно, без членства</a></li>
+  <li><a href="#pravilno">Как вступить правильно</a></li>
+</ul></nav>
+
+<h2 id="profsoyuz">Что даёт профсоюз (Gewerkschaft)</h2>
+<ul class="ul">
+  <li><b>Консультации</b> по трудовому праву: договор, зарплата, сверхурочные, отпуск, болезнь, увольнение.</li>
+  <li><b>Письма работодателю</b> от имени профсоюза — часто этого хватает, чтобы спор решился.</li>
+  <li><b>Защита в суде</b> и адвокат — по правилам профсоюза. Например, в Unia — если ты член не меньше 3 месяцев к моменту, когда случилась проблема (<a href="https://ostschweiz-graubuenden.unia.ch/fileadmin/user_upload/Mitglider-Service/Unia-Rechtsschutz-Reglement-2018.pdf">регламент Unia</a>). Часто помогают и со спорами со страховками и пермитом, если они связаны с работой.</li>
+  <li><b>Коллективные договоры (GAV).</b> Профсоюзы договариваются с работодателями о минимальных зарплатах и условиях в отрасли и знают эти правила лучше всех.</li>
+  <li><b>Вступить может любой работник</b> — с любым пермитом и гражданством. Взнос обычно зависит от зарплаты. Увольнение за членство в профсоюзе — злоупотребление, за него суд присуждает компенсацию.</li>
+</ul>
+
+<h2 id="kakoy">Какой профсоюз выбрать</h2>
+<ul class="ul">
+  <li><b><a href="https://www.unia.ch/">Unia</a></b> — самый большой: стройка, промышленность, торговля, уход, уборка, сервис, гастрономия.</li>
+  <li><b><a href="https://www.syna.ch/">Syna</a></b> — разные отрасли, входит в объединение Travail.Suisse.</li>
+  <li><b><a href="https://www.vpod.ch/">VPOD / SSP</a></b> — государственная служба, больницы, соцсфера, школы и ясли.</li>
+  <li><b><a href="https://syndicom.ch/">syndicom</a></b> — почта, логистика, телеком, IT, медиа.</li>
+  <li><b><a href="https://www.kfmv.ch/">Kaufmännischer Verband</a></b> — офис, продажи, торговля, банки.</li>
+  <li><b>Профессиональные союзы</b> медсестёр, учителей, врачей, инженеров и других — тоже дают консультации своим членам.</li>
+  <li>Не знаешь, какой нужен — объединение профсоюзов <a href="https://www.sgb.ch/">SGB</a> подскажет профсоюз твоей отрасли.</li>
+</ul>
+
+<h2 id="drugie">Аренда, покупки и любые вопросы</h2>
+<ul class="ul">
+  <li><b>Союз арендаторов</b> — <a href="https://www.mieterverband.ch/">Mieterverband</a> в немецкой части, <a href="https://vaud.asloca.ch/sites/vaud.asloca.ch/files/2026-01/LISTE%20DES%20TARIFS%202026.pdf">ASLOCA</a> во французской. Проверят повышение аренды, выезд, залог, дефекты. Например, ASLOCA в регионах Во — 80 франков в год и 30 за вступление (2026), консультации для членов бесплатно.</li>
+  <li><b>Защита покупателей</b> — <a href="https://www.konsumentenschutz.ch/">Konsumentenschutz</a> (для тех, кто поддерживает фонд), <a href="https://www.frc.ch/">FRC</a> во французской части, журналы <a href="https://www.ktipp.ch/">K-Tipp</a> и <a href="https://www.saldo.ch/">Saldo</a> — для подписчиков.</li>
+  <li><b><a href="https://www.beobachter.ch/">Beobachter</a></b> — с подпиской больше 30 юристов и экспертов отвечают на любые вопросы: работа, аренда, семья, деньги, соседи. Без подписки — одна консультация 60 франков.</li>
+  <li><b>Владельцы жилья</b> — союзы домовладельцев (HEV, Casafair) консультируют своих членов.</li>
+  <li><b>Пациенты</b> — <a href="https://www.spo.ch/">SPO Patientenschutz</a>: права пациентов и счета, для членов дешевле.</li>
+</ul>
+
+<h2 id="besplatno">Бесплатно, без членства</h2>
+<ul class="ul">
+  <li><b>Справочная адвокатов</b> — кантональные союзы адвокатов дают короткую консультацию 15–30 минут, бесплатно или недорого, обычно без записи.</li>
+  <li><b>Община</b> — во многих общинах есть приёмные часы с юристом. Первая консультация обычно бесплатна.</li>
+  <li><b>Аренда</b> — примирительная служба по аренде (Schlichtungsbehörde) твоего района бесплатно объяснит права и попробует помирить.</li>
+  <li><b>Медстраховка</b> — <a href="https://www.om-kv.ch/">омбудсмен медстраховки</a> бесплатно поможет в споре с кассой.</li>
+  <li><b>Долги</b> — <a href="https://www.schulden.ch/">Schuldenberatung</a>, <a href="https://www.caritas-schuldenberatung.ch/">горячая линия Caritas</a>, <a href="https://www.budgetberatung.ch/">Budgetberatung</a>.</li>
+  <li><b>Особые ситуации</b> — Pro Senectute (от 60 лет), Pro Infirmis (инвалидность), Opferhilfe (насилие), Швейцарская помощь беженцам.</li>
+</ul>
+<p>Полный список с условиями — в инструменте «Куда обратиться за помощью»: отметь свои организации и скачай лист с местом для номера членства и телефона. Ещё больше адресов собрал <a href="https://www.beobachter.ch/justiz/gesetze-recht/rechtsstreitigkeiten-rechtsberatung-zum-nulltarif">Beobachter</a>.</p>
+
+<h2 id="pravilno">Как вступить правильно</h2>
+<ul class="ul">
+  <li><b>Заранее.</b> Обычно помогают только с проблемами, которые начались после вступления, а суд и адвоката — часто после срока ожидания. В профсоюзе Unia — 3 месяца, в союзе арендаторов Цюриха представительство — через 60 дней (<a href="https://revamp.mieterverband.ch/site/assets/files/18681/reglement-rechtsdienstleistungen.pdf">регламент MV Zürich</a>).</li>
+  <li><b>Плати взносы вовремя</b> — с долгом по взносам в помощи могут отказать.</li>
+  <li><b>Сначала консультация, потом адвокат.</b> Если наймёшь адвоката сама, организация может не оплатить.</li>
+  <li><b>Страховка юридической защиты</b> (Rechtsschutzversicherung) — отдельная страховка, платит юристов и суд. Если она есть, профсоюз часто сначала отправит к ней. Проверь, что уже покрыто, прежде чем платить дважды.</li>
+  <li><b>Язык.</b> Спроси, на каком языке можно получить консультацию. Можно прийти с человеком, который поможет перевести.</li>
+  <li><b>Письма</b> работодателю, арендодателю или кассе — заказным (Einschreiben), копию и квитанцию храни.</li>
+</ul>
+''',
+    steps=[
+        'Найди профсоюз своей отрасли (или узнай на sgb.ch) и вступи, пока всё спокойно.',
+        'Снимаешь жильё — вступи в союз арендаторов своего региона.',
+        'Сохрани номер членства и телефон консультаций — в инструменте «Куда обратиться за помощью» есть лист для этого.',
+        'Проблема — сначала звони в свою организацию, а не адвокату.',
+        'Нет членства — начни с бесплатной справочной адвокатов, общины или омбудсмена.',
+    ],
+    tools={'kuda-obratitsya': 'Профсоюзы, союзы арендаторов, защита покупателей и бесплатные консультации — список с условиями и сайтами, лист для своих организаций.'},
+    related=['trudovoe-pravo', 'poterya-raboty', 'rabota', 'betreibung', 'medstrahovka'],
+    sources=[
+        ('Beobachter — где получить бесплатную или недорогую юридическую консультацию', 'https://www.beobachter.ch/justiz/gesetze-recht/rechtsstreitigkeiten-rechtsberatung-zum-nulltarif'),
+        ('Unia — регламент юридической защиты членов (3 месяца членства)', 'https://ostschweiz-graubuenden.unia.ch/fileadmin/user_upload/Mitglider-Service/Unia-Rechtsschutz-Reglement-2018.pdf'),
+        ('Mieterverband Zürich — регламент юридических услуг (60 дней)', 'https://revamp.mieterverband.ch/site/assets/files/18681/reglement-rechtsdienstleistungen.pdf'),
+        ('ASLOCA Vaud — тарифы 2026', 'https://vaud.asloca.ch/sites/vaud.asloca.ch/files/2026-01/LISTE%20DES%20TARIFS%202026.pdf'),
+        ('SRF Kassensturz — полезные адреса консультаций', 'https://www.srf.ch/sendungen/kassensturz-espresso/nuetzliche-adressen-von-beratungsstellen-2'),
+    ],
+    terms=[('Deutsch', 'Gewerkschaft, Mitgliedschaft, Mitgliederbeitrag, Rechtsberatung, Rechtsschutz, Gesamtarbeitsvertrag (GAV), Mieterverband, Konsumentenschutz, Rechtsauskunft, Schlichtungsbehörde, Ombudsstelle, Rechtsschutzversicherung'), ('Français', 'syndicat, adhésion, cotisation, conseil juridique, protection juridique, CCT, ASLOCA, FRC, permanence juridique, autorité de conciliation, médiateur, assurance protection juridique'), ('Italiano', 'sindacato, adesione, quota, consulenza giuridica, protezione giuridica, CCL, associazione inquilini, autorità di conciliazione, mediatore, assicurazione protezione giuridica'), ('English', 'trade union, membership, legal advice, legal protection, collective agreement, tenants’ association, ombudsman, legal expenses insurance')],
+    post='Это письма работодателю, арендодателю и кассе — и заявление о вступлении или выходе из организации.',
 )
