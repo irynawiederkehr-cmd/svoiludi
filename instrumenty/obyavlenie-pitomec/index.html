@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<link rel="icon" href="/fav/favicon.svg" type="image/svg+xml"><link rel="icon" href="/fav/icon-32.png" sizes="32x32"><link rel="apple-touch-icon" href="/fav/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/fonts.css">
+<meta name="description" content="Бесплатная листовка, если потерялась кошка или собака в Швейцарии (или ты нашла животное): крупное фото, приметы, где и когда видели, есть ли чип, телефон и отрывные полоски с номером. На немецком, французском или итальянском — для соседей, магазинов и подъездов — с переводом на русский. PDF и PNG для чатов. И что делать сразу: STMZ, AMICUS, приюты, ветеринары.">
+<link rel="canonical" href="https://svoiludi.ch/instrumenty/obyavlenie-pitomec/">
+<meta property="og:type" content="website"><meta property="og:locale" content="ru_RU"><meta property="og:site_name" content="Свои люди в Швейцарии">
+<meta property="og:title" content="Объявление о пропаже питомца: листовка с фото · бесплатно"><meta property="og:description" content="Крупное фото, приметы, телефон и отрывные полоски — на языке кантона, PDF и PNG для чатов.">
+<meta property="og:url" content="https://svoiludi.ch/instrumenty/obyavlenie-pitomec/"><meta property="og:image" content="https://svoiludi.ch/instrumenty/obyavlenie-pitomec/og-image.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="robots" content="noindex, nofollow">
+<title>Объявление «Пропала кошка» или «Пропала собака»: листовка с фото и отрывными телефонами</title>
+<style>
+/* Объявление «Пропала кошка» или «Пропала собака»: листовка с фото и отрывными телефонами (08.10.2026): анкета слева, живые листы справа, движок assets/shema.js. */
+:root{
+  --bg:#F4EDE3; --paper:#FFFCF8; --ink:#2F2924; --muted:#7A6E62; --line:#E5D9C9; --soft:#EFE5D7;
+  --brown:#6E4F3C; --mustard:#B98324; --mustard-soft:#F3E3C2; --sage:#4F5E3E; --sage-soft:#E3E8D6; --red:#A0523D;
+  --display:"Forum","Georgia",serif; --sans:"Manrope","Segoe UI",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#221D19; --paper:#2C2621; --ink:#F1E9DF; --muted:#B4A796; --line:#3E362F; --soft:#352E28;
+  --brown:#E1C2A6; --mustard:#E2B45C; --mustard-soft:#3D321F; --sage:#B4BF97; --sage-soft:#2E3226; --red:#E39A85; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#221D19; --paper:#2C2621; --ink:#F1E9DF; --muted:#B4A796; --line:#3E362F; --soft:#352E28;
+  --brown:#E1C2A6; --mustard:#E2B45C; --mustard-soft:#3D321F; --sage:#B4BF97; --sage-soft:#2E3226; --red:#E39A85; color-scheme:dark}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--ink);font:15px/1.55 var(--sans);margin:0}
+.wrap{max-width:1280px;margin:0 auto;padding-inline:16px;padding-block:28px 48px;display:flex;flex-direction:column;gap:24px}
+.eyebrow{font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+h1{font-family:var(--display);font-weight:400;font-size:clamp(2.4rem,6vw,3.6rem);line-height:1;margin:4px 0 10px;text-wrap:balance}
+h2{font-family:var(--display);font-weight:400;font-size:1.55rem;margin:0;text-wrap:balance}
+h3{font-family:var(--display);font-weight:400;font-size:1.22rem;line-height:1.2;margin:0}
+.lead{max-width:66ch;color:var(--muted);margin:0}
+.jump{font-weight:700;color:var(--brown);text-underline-offset:4px}
+.privnote{margin-top:14px;background:var(--sage-soft);border-radius:16px;padding:12px 16px;font-size:.9rem;max-width:90ch}
+.status{font-size:.86rem;color:var(--muted);min-height:1.3em}
+.btn{font:inherit;font-weight:700;font-size:.9rem;border:0;border-radius:999px;padding:10px 18px;cursor:pointer;color:#fff;text-decoration:none;display:inline-flex;align-items:center;gap:6px;background:#6E4F3C;box-shadow:0 8px 18px -8px rgba(110,79,60,.6)}
+.btn.gold{background:#B98324;box-shadow:0 8px 18px -8px rgba(185,131,36,.7)}
+.btn.free{background:#4F5E3E;box-shadow:0 8px 18px -8px rgba(79,94,62,.6)}
+.btn.ghost{background:transparent;color:var(--brown);border:1.5px solid var(--line);box-shadow:none}
+.btn.sm{font-size:.82rem;padding:7px 13px}
+.btn[disabled]{background:var(--soft);color:var(--muted);box-shadow:none;cursor:wait}
+select,input[type=text],input[type=tel],input[type=number],input[type=date],textarea{font:inherit;font-size:.95rem;color:var(--ink);background:var(--paper);border:1.5px solid var(--line);border-radius:12px;padding:9px 12px;width:100%;min-width:0}
+select:focus-visible,input:focus-visible,button:focus-visible,textarea:focus-visible,a:focus-visible{outline:2px solid var(--mustard);outline-offset:2px}
+::placeholder{color:color-mix(in srgb,var(--muted) 70%,transparent)}
+.setup{background:var(--paper);border:1.5px solid var(--line);border-radius:22px;padding:16px 18px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px 18px;align-items:start}
+@media (max-width:1000px){.setup{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.setup{grid-template-columns:1fr}}
+.fl{display:flex;flex-direction:column;gap:6px;min-width:0}
+.fl>.lb{font-size:.8rem;font-weight:700;color:var(--muted);display:flex;align-items:center}
+.seg{display:flex;flex-wrap:wrap;gap:6px}
+.seg button{font:inherit;font-size:.84rem;font-weight:700;border:1.5px solid var(--line);background:var(--paper);color:var(--ink);border-radius:999px;padding:6px 12px;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--sage);border-color:var(--sage);color:#fff}
+.acts{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.exbar{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;background:var(--mustard-soft);border-radius:16px;padding:10px 14px;font-size:.9rem;font-weight:600}
+.work{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:22px;align-items:start}
+@media (max-width:1040px){.work{grid-template-columns:1fr}}
+.form{display:flex;flex-direction:column;gap:14px;min-width:0}
+.sec{background:var(--paper);border:1.5px solid var(--line);border-radius:20px;padding:16px 18px;display:flex;flex-direction:column;gap:12px}
+.sec>h2{font-size:1.3rem;display:flex;align-items:center}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:560px){.g2{grid-template-columns:1fr}}
+.hint{font-size:.84rem;color:var(--muted);margin:0}
+.chk{display:flex;flex-direction:column;gap:8px}
+.chk label{display:flex;gap:10px;align-items:baseline;font-size:.92rem;cursor:pointer}
+.chk input{flex:none;width:18px;height:18px;accent-color:var(--sage);transform:translateY(3px)}
+.chk b{white-space:nowrap}
+.chk small{color:var(--muted)}
+.tog{display:flex;gap:10px;align-items:center;font-size:.92rem;cursor:pointer}
+.tog input{width:18px;height:18px;accent-color:var(--sage)}
+.sheetbox{position:sticky;top:12px;display:flex;flex-direction:column;gap:10px}
+@media (max-width:1040px){.sheetbox{position:static}}
+.sheet{background:#fff;border-radius:6px;box-shadow:0 18px 40px -22px rgba(47,41,36,.45);overflow:hidden}
+.sheet svg{display:block;width:100%;height:auto}
+.imp{background:var(--paper);border:1.5px dashed color-mix(in srgb,var(--sage) 55%,transparent);border-radius:16px;padding:14px 18px;font-size:.88rem;max-width:90ch;margin:0}
+.imp b{color:var(--sage)}
+.guide{display:flex;flex-direction:column;gap:14px;max-width:90ch}
+.guide ul{margin:0;padding-left:20px}
+.guide li{margin:4px 0}
+.credit{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:.8rem;color:var(--muted)}
+.credit a{color:var(--muted)}
+.qh{font:700 .72rem/1 var(--sans);width:20px;height:20px;border-radius:50%;border:1.5px solid var(--line);background:var(--paper);color:var(--brown);cursor:pointer;margin-left:6px;padding:0;flex:none}
+.sheets{display:flex;flex-direction:column;gap:14px}
+.goals{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+@media (max-width:560px){.goals{grid-template-columns:1fr}}
+.goals label{display:flex;gap:10px;align-items:flex-start;background:var(--bg);border:1.5px solid var(--line);border-radius:14px;padding:9px 12px;cursor:pointer;font-size:.92rem}
+.goals input{width:18px;height:18px;accent-color:var(--sage);flex:none;margin-top:2px}
+.goals small{display:block;color:var(--muted)}
+.steps{display:flex;flex-direction:column;gap:8px}
+.steps details{background:var(--paper);border:1.5px solid var(--line);border-radius:16px;padding:10px 16px}
+.steps summary{cursor:pointer;font-weight:700;display:flex;gap:10px;align-items:baseline}
+.steps summary small{font-weight:600;color:var(--muted);margin-left:auto;text-align:right}
+.steps details p,.steps details ul{margin:8px 0 2px;font-size:.93rem}
+.steps details ul{padding-left:20px}
+</style>
+</head>
+<body>
+<style>.form input,.form select,.form textarea{width:100%}.form textarea{min-height:64px;font:inherit;font-size:.95rem;border:1.5px solid var(--line);border-radius:12px;padding:9px 12px;background:var(--paper);color:var(--ink)}.ph{display:flex;gap:12px;align-items:center;flex-wrap:wrap}.ph img{width:120px;height:90px;object-fit:cover;border-radius:10px;border:1.5px solid var(--line)}.todo{margin:0;padding-left:20px}.todo li{margin:4px 0}</style>
+<div class="wrap">
+  <header>
+    <p style="margin:0 0 14px"><a class="jump" href="https://svoiludi.ch/instrumenty/">← Все полезные инструменты · Свои люди в Швейцарии</a></p>
+    <div class="eyebrow">Животные · пропало или найдено</div>
+    <h1>Объявление «Пропала кошка» или «Пропала собака»: листовка с фото и отрывными телефонами</h1>
+    <p class="lead">Потерялась кошка или собака — или ты нашла чужую? Загрузи фото, впиши приметы и телефон — получишь листовку на языке кантона для подъездов, магазинов и ветеринаров, с переводом на русский и отрывными полосками с номером. PNG — чтобы сразу отправить в чаты общины и соседей. PDF бесплатно.</p>
+    <div class="privnote"><b>Твои данные только у тебя.</b> Фото и текст хранятся только в твоём браузере на этом устройстве и никуда не отправляются. Регистрация не нужна.</div>
+    <div data-fan="obyavlenie-pitomec"></div>
+  </header>
+  <section class="sec" style="margin-bottom:18px"><h2>Что сделать сразу</h2>
+    <ol class="todo">
+      <li><b>Сообщи в STMZ</b> — Швейцарскую службу учёта пропавших и найденных животных (<a href="https://www.stmz.ch" target="_blank" rel="noopener">stmz.ch</a>, «Vermisstmeldung»). Там же посмотри, не нашли ли его уже.<button type="button" class="qh" data-help="stmz" aria-label="Подсказка: STMZ" aria-expanded="false">?</button></li>
+      <li><b>Собака:</b> отметь пропажу в <a href="https://www.amicus.ch" target="_blank" rel="noopener">AMICUS</a> или в бесплатном приложении animundo — по чипу тебя найдут быстрее.</li>
+      <li><b>Позвони</b> в ближайшие приюты (Tierheim, refuge), ветеринарам и в полицию общины — туда часто приносят найденных животных.</li>
+      <li><b>Кошка:</b> попроси соседей проверить гаражи, подвалы и садовые домики — кошки часто оказываются там запертыми.</li>
+      <li><b>Повесь листовку</b> у дома, в магазинах и у ветеринаров и отправь PNG в чаты.</li>
+    </ol>
+  </section>
+  <div class="setup">
+    <div class="fl"><span class="lb">Язык листовки<button type="button" class="qh" data-help="lang" aria-label="Подсказка: язык листовки" aria-expanded="false">?</button></span><select id="lang"><option value="de">Немецкий + русский</option><option value="fr">Французский + русский</option><option value="it">Итальянский + русский</option><option value="de1">Только немецкий</option><option value="fr1">Только французский</option><option value="it1">Только итальянский</option></select></div>
+    <div class="fl"><span class="lb">Печать</span><label class="tog"><input type="checkbox" id="bw"> Без цвета, для дешёвой печати</label></div>
+  </div>
+  <div class="exbar" id="exbar" hidden><span>Это пример. Так будет выглядеть твоя листовка.</span><button type="button" class="btn sm" id="exOff">Вернуться к моим данным</button></div>
+  <div class="work">
+    <div class="form">
+      <section class="sec"><h2>Что случилось</h2>
+        <div class="fl"><span class="lb">Объявление</span><select id="mode"><option value="lost">Пропало моё животное</option><option value="found">Я нашла животное</option></select></div>
+        <div class="fl"><span class="lb">Кто</span><select id="kind"><option value="cat">Кошка</option><option value="dog">Собака</option><option value="other">Другое животное</option></select></div>
+        <div class="fl" id="otherBox" hidden><span class="lb">Какое животное (на языке листовки)</span><input type="text" id="other" placeholder="Kaninchen"></div>
+        <div class="fl"><span class="lb">Пол</span><select id="sex"><option value="f">Девочка</option><option value="m">Мальчик</option><option value="u">Не знаю</option></select></div>
+        <div class="fl" id="nameBox"><span class="lb">Кличка</span><input type="text" id="name" placeholder="Mia"></div>
+        <div class="fl"><span class="lb">Фото<button type="button" class="qh" data-help="photo" aria-label="Подсказка: фото" aria-expanded="false">?</button></span><div class="ph"><img id="phImg" alt="" hidden><input type="file" id="photo" accept="image/*"><button type="button" class="btn ghost sm" id="phDel" hidden>Убрать фото</button></div></div>
+      </section>
+      <section class="sec"><h2>Приметы и где видели</h2>
+        <div class="fl"><span class="lb">Приметы (на языке листовки)<button type="button" class="qh" data-help="look" aria-label="Подсказка: приметы" aria-expanded="false">?</button></span><textarea id="look" placeholder="Getigert, weisse Pfoten, rotes Halsband mit Glöckchen, 4 kg"></textarea></div>
+        <div class="fl"><span class="lb">Где видели последний раз</span><input type="text" id="where" placeholder="Bahnhofstrasse / Parkplatz Migros, 8610 Uster"></div>
+        <div class="fl"><span class="lb">Когда</span><input type="date" id="when"></div>
+        <div class="fl"><span class="lb">Чип</span><select id="chip"><option value="y">Есть чип</option><option value="n">Нет чипа</option><option value="u">Не знаю</option></select></div>
+        <div class="fl" id="shyBox"><span class="lb">Характер</span><select id="shy"><option value="y">Пугливая, не ловить — сразу звонить</option><option value="n">Ручная, можно взять</option></select></div>
+        <div class="fl" id="rewBox"><span class="lb">Вознаграждение (по желанию)</span><input type="text" id="reward" placeholder="CHF 100"></div>
+      </section>
+      <section class="sec"><h2>Как связаться</h2>
+        <div class="fl"><span class="lb">Телефон<button type="button" class="qh" data-help="tel" aria-label="Подсказка: телефон" aria-expanded="false">?</button></span><input type="text" id="tel" inputmode="tel" placeholder="079 000 00 00"></div>
+        <div class="fl"><span class="lb">Имя (по желанию)</span><input type="text" id="who" placeholder="Olena"></div>
+        <div class="fl"><span class="lb">Сообщила в STMZ</span><select id="stmz"><option value="y">Да, написать на листовке</option><option value="n">Нет</option></select></div>
+        <div class="fl"><span class="lb">Отрывные полоски с телефоном</span><select id="strips"><option value="8">8 полосок</option><option value="6">6 полосок</option><option value="0">Без полосок</option></select></div>
+      </section>
+    </div>
+    <div class="sheetbox">
+      <div class="acts"><button type="button" class="btn gold" id="pdf">Скачать PDF</button><button type="button" class="btn ghost sm" id="share" hidden>Отправить</button><button type="button" class="btn ghost sm" id="exOn">Посмотреть на примере</button></div>
+      <div class="sheets" id="sheet" aria-label="Предпросмотр листовки"></div>
+      <div class="status" id="status" role="status"></div>
+    </div>
+  </div>
+  <p class="imp"><b>Важно.</b> Нашла животное — по закону о нём нужно сообщить (ZGB, ст. 720a): в STMZ или в ветеринарную службу кантона. Можно держать у себя, если хорошо за ним ухаживаешь, иначе — отвезти в приют. Вешать листовки на чужие двери, столбы и в магазинах — спроси разрешения у хозяина или управляющей и сними, когда животное найдётся. Подробно — в теме <a href="https://svoiludi.ch/shveycariya/zhivotnye/">«Собака, кошка и другие животные в Швейцарии: чип, налог, выгул, права животного и что делать, если потерялось»</a>. Карточку для передержки и ветеринара сделаешь в «<a href="https://svoiludi.ch/instrumenty/kartochka-pitomca/">Карточка питомца для передержки и ветеринара</a>».</p>
+  <div class="share-slot" data-url="https://svoiludi.ch/instrumenty/obyavlenie-pitomec/" data-lead="Перешли тем, у кого потерялась кошка или собака. В ссылке нет твоих данных." data-text="Привет! Тут можно бесплатно сделать листовку «Пропала кошка/собака» с фото и отрывными телефонами на немецком, французском или итальянском. https://svoiludi.ch/instrumenty/obyavlenie-pitomec/"></div>
+  <p class="credit"><span>Свои люди в Швейцарии · svoiludi.ch</span><a href="https://svoiludi.ch/privacy/">Политика конфиденциальности</a></p>
+</div>
+
+<script src="/assets/kantony.js"></script>
+<script src="/assets/lib/jspdf.umd.min.js"></script>
+<script src="/assets/shema.js"></script>
+<script>
+window.HELP = {
+  stmz: '<p>STMZ (Schweizerische Tiermeldezentrale) — общая служба для всей Швейцарии: туда сообщают и о пропавших, и о найденных животных, и там сравнивают объявления. Сообщить можно онлайн на <a href="https://www.stmz.ch" target="_blank" rel="noopener">stmz.ch</a>. Кто нашёл животное, по закону обязан о нём сообщить — поэтому найденных часто ищут именно там.</p>',
+  lang: '<p>Листовку читают соседи, продавцы и ветеринары — поэтому главный текст на языке кантона, а строчки на русском помельче, для своих. «Только немецкий» (французский, итальянский) — без русского.</p>',
+  photo: '<p>Возьми чёткое фото, где видно морду и окрас целиком. Фото обрежется до формата 4 : 3 по центру. Оно хранится только в твоём браузере.</p>',
+  look: '<p>Что отличает твоё животное: окрас, пятна, хвост, ошейник, вес, хромает ли. Пиши сразу на языке листовки — так соседи поймут. Например: <i>getigert, weisse Pfoten, rotes Halsband</i> (немецкий), <i>tigré, pattes blanches, collier rouge</i> (французский).</p>',
+  tel: '<p>Номер, по которому ты точно ответишь. Он стоит на листовке крупно и на отрывных полосках внизу. Адрес на листовке не пиши.</p>'
+};
+const KEY = 'obyavleniePitomec.v1';
+const T = {
+  de: {lost: 'VERMISST', found: 'GEFUNDEN', kind: {cat: 'Katze', dog: 'Hund', other: 'Tier'}, sex: {f: 'weiblich', m: 'männlich', u: ''}, where: 'Zuletzt gesehen', whereF: 'Gefunden', when: 'am', look: 'Merkmale', chip: {y: 'gechipt', n: 'nicht gechipt', u: ''},
+    shy: 'Scheu — bitte nicht einfangen oder verfolgen, sondern sofort anrufen!', tame: 'Zutraulich — bitte festhalten und sofort anrufen!', check: 'Bitte Garagen, Keller und Gartenhäuschen kontrollieren!', reward: 'Finderlohn', call: 'Bitte melden Sie sich', callF: 'Ist das Ihr Tier? Bitte melden Sie sich', stmz: 'Gemeldet bei der Schweizerischen Tiermeldezentrale (STMZ)', thanks: 'Vielen Dank!'},
+  fr: {lost: 'PERDU', found: 'TROUVÉ', kind: {cat: 'chat', dog: 'chien', other: 'animal'}, sex: {f: 'femelle', m: 'mâle', u: ''}, where: 'Vu pour la dernière fois', whereF: 'Trouvé', when: 'le', look: 'Signes particuliers', chip: {y: 'pucé', n: 'pas de puce', u: ''},
+    shy: 'Craintif — merci de ne pas le poursuivre, appelez-moi tout de suite !', tame: 'Sociable — merci de le garder et de m’appeler tout de suite !', check: 'Merci de vérifier garages, caves et cabanons de jardin !', reward: 'Récompense', call: 'Merci de m’appeler', callF: 'C’est votre animal ? Appelez-moi', stmz: 'Signalé au service suisse STMZ (Schweizerische Tiermeldezentrale)', thanks: 'Merci beaucoup !'},
+  it: {lost: 'SCOMPARSO', found: 'TROVATO', kind: {cat: 'gatto', dog: 'cane', other: 'animale'}, sex: {f: 'femmina', m: 'maschio', u: ''}, where: 'Visto l’ultima volta', whereF: 'Trovato', when: 'il', look: 'Segni particolari', chip: {y: 'con microchip', n: 'senza microchip', u: ''},
+    shy: 'Pauroso — per favore non inseguirlo, chiamatemi subito!', tame: 'Socievole — per favore trattenetelo e chiamatemi subito!', check: 'Per favore controllate garage, cantine e casette da giardino!', reward: 'Ricompensa', call: 'Per favore chiamatemi', callF: 'È il vostro animale? Chiamatemi', stmz: 'Segnalato al servizio svizzero STMZ (Schweizerische Tiermeldezentrale)', thanks: 'Grazie mille!'}
+};
+const RU = {lost: {cat: 'Пропала кошка', dog: 'Пропала собака', other: 'Пропало животное'}, found: {cat: 'Найдена кошка', dog: 'Найдена собака', other: 'Найдено животное'},
+  where: 'Где видели последний раз', whereF: 'Где нашли', look: 'Приметы', shy: 'Пугливая — не ловите и не гонитесь, сразу позвоните!', tame: 'Ручная — подержите и сразу позвоните!', check: 'Проверьте гаражи, подвалы и садовые домики!', call: 'Позвоните, пожалуйста', callF: 'Это ваше животное? Позвоните', reward: 'Вознаграждение', stmz: 'Сообщено в STMZ'};
+const iso = d => d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+function blank(){ return {lang: 'de', bw: false, mode: 'lost', kind: 'cat', other: '', sex: 'f', name: '', photo: '', photoG: '', look: '', where: '', when: iso(new Date()), chip: 'y', shy: 'y', reward: '', tel: '', who: '', stmz: 'y', strips: '8'}; }
+let S = load(), EX = null;
+function load(){ try { const s = JSON.parse(localStorage.getItem(KEY)); if (s && typeof s === 'object') return Object.assign(blank(), s); } catch (e) {} return blank(); }
+function save(){ if (EX) return; try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) { say('Фото слишком большое для памяти браузера — выбери другое.'); } }
+const D = () => EX || S, say = t => { const s = document.getElementById('status'); if (s) s.textContent = t; };
+const dmy = s => { const [y, m, d] = String(s || '').split('-'); return d ? `${d}.${m}.${y}` : ''; };
+/* фото: обрезать до 4:3 по центру, сжать, сделать серую копию */
+function prepPhoto(file){ return new Promise((res, rej) => { const r = new FileReader(); r.onerror = rej; r.onload = () => { const im = new Image(); im.onerror = rej; im.onload = () => {
+  const W = 1000, H = 750, c = document.createElement('canvas'); c.width = W; c.height = H; const x = c.getContext('2d');
+  const k = Math.max(W / im.naturalWidth, H / im.naturalHeight), w = im.naturalWidth * k, h = im.naturalHeight * k; x.drawImage(im, (W - w) / 2, (H - h) / 2, w, h);
+  const col = c.toDataURL('image/jpeg', 0.8); const d = x.getImageData(0, 0, W, H), p = d.data; for (let i = 0; i < p.length; i += 4) { const l = 0.299 * p[i] + 0.587 * p[i + 1] + 0.114 * p[i + 2]; p[i] = p[i + 1] = p[i + 2] = l; } x.putImageData(d, 0, 0);
+  res([col, c.toDataURL('image/jpeg', 0.8)]); }; im.src = r.result; }; r.readAsDataURL(file); }); }
+function build(){
+  const d = D(), C = SH.pal(d.bw), c = C.c, lg = d.lang.slice(0, 2), ru = d.lang.length === 2, L = T[lg], P = SH.page(210, 297, C), X = 12, W = 186;
+  const found = d.mode === 'found', kindL = d.kind === 'other' ? (d.other || L.kind.other) : L.kind[d.kind];
+  const red = d.bw ? '#000000' : '#A0523D';
+  /* крупный заголовок без полосы: ПРОПАЛ — Katze «Mia» */
+  P.rect(0, 0, 210, 30, red, null);
+  P.text((found ? L.found : L.lost) + ': ' + kindL.toUpperCase(), 105, 15, 30, true, '#FFFFFF', 'center');
+  if (ru) P.text((found ? RU.found : RU.lost)[d.kind] + (d.name && !found ? ' «' + d.name + '»' : ''), 105, 24.5, 11, false, '#FFFFFF', 'center');
+  let y = 36;
+  const ph = d.bw ? d.photoG : d.photo, pw = 150, phh = pw * 3 / 4, px = (210 - pw) / 2;
+  if (ph) { P.img(ph, px, y, pw, phh); P.rect(px, y, pw, phh, null, C.line); }
+  else { P.rect(px, y, pw, phh, C.soft, C.line, 2, true); P.text('Фото · Foto · Photo', 105, y + phh / 2, 12, false, C.mut, 'center'); }
+  y += phh + 9;
+  if (d.name && !found) { P.text('«' + d.name + '»', 105, y, 22, true, C.ink, 'center'); y += 8; }
+  const meta = [L.sex[d.sex], L.chip[d.chip]].filter(Boolean).join(' · ');
+  if (meta) { P.text(meta, 105, y, 11, false, C.ink, 'center'); y += 7; }
+  const line = (lab, ruLab, val) => { if (!val) return; P.text(lab + (ru ? ' · ' + ruLab : ''), X, y, 8, true, C.head); y += 4.6; y = P.para(val, X, y + 0.6, 11, false, C.ink, W, 5) + 2.5; };
+  line(L.look, RU.look, d.look);
+  line(found ? L.whereF : L.where, found ? RU.whereF : RU.where, [d.where, d.when ? L.when + ' ' + dmy(d.when) : ''].filter(Boolean).join(', '));
+  if (!found) { y = P.para(d.shy === 'y' ? L.shy : L.tame, X, y + 1, 11, true, red, W, 5) + 0.5; if (ru) y = P.para(d.shy === 'y' ? RU.shy : RU.tame, X, y, 8, false, C.mut, W, 3.8) + 1;
+    if (d.kind === 'cat') { y = P.para(L.check, X, y + 1, 10, false, C.ink, W, 4.6); if (ru) y = P.para(RU.check, X, y, 8, false, C.mut, W, 3.8); y += 1; } }
+  if (d.reward && !found) { P.text(L.reward + ': ' + d.reward + (ru ? ' · ' + RU.reward : ''), X, y + 4, 12, true, C.ink); y += 8; }
+  /* телефон крупно */
+  const strips = +d.strips || 0, stripH = strips ? 30 : 0, telY = 297 - 10 - stripH - 34;
+  y = Math.max(y + 2, telY - 2);
+  P.text((found ? L.callF : L.call) + (ru ? ' · ' + (found ? RU.callF : RU.call) : ''), 105, y + 3, 10, false, C.ink, 'center');
+  P.text(d.tel || '079 ___ __ __', 105, y + 15, 30, true, C.ink, 'center');
+  if (d.who) P.text(d.who, 105, y + 21, 10, false, C.mut, 'center');
+  if (d.stmz === 'y') P.text(L.stmz + ' · ' + L.thanks, 105, y + (d.who ? 26 : 22), 7, false, C.mut, 'center');
+  /* отрывные полоски */
+  if (strips) { const top = 297 - 10 - stripH, sw = W / strips; P.line(X, top, X + W, top, C.ink, 0.3, true);
+    for (let i = 0; i < strips; i++) { const sx = X + i * sw; if (i) P.line(sx, top, sx, top + stripH, C.ink, 0.25, true);
+      const nm = (found ? L.found : (d.name || kindL)), t1 = SH.wrap(nm, true, 7, sw - 3)[0] || '';
+      P.text(t1, sx + sw / 2, top + 9, 7, true, C.ink, 'center'); P.text(d.tel || '', sx + sw / 2, top + 16, sw > 28 ? 8.4 : 7.4, true, C.ink, 'center'); P.text(kindL, sx + sw / 2, top + 22, 6.4, false, C.mut, 'center'); } }
+  P.creditY = 297 - 4; P.foot('');
+  return [P];
+}
+const $ = id => document.getElementById(id);
+const TF = ['other', 'name', 'look', 'where', 'reward', 'tel', 'who'], SEL = ['mode', 'kind', 'sex', 'when', 'chip', 'shy', 'stmz', 'strips'];
+let UI, tmr;
+function fill(){ const d = D(); $('lang').value = d.lang; $('bw').checked = !!d.bw; TF.concat(SEL).forEach(k => { $(k).value = d[k]; $(k).disabled = !!EX; });
+  $('otherBox').hidden = d.kind !== 'other'; const f = d.mode === 'found'; $('nameBox').hidden = f; $('shyBox').hidden = f; $('rewBox').hidden = f;
+  $('phImg').hidden = !d.photo; if (d.photo) $('phImg').src = d.photo; $('phDel').hidden = !d.photo || !!EX; $('photo').disabled = !!EX;
+  $('exbar').hidden = !EX; $('exOn').hidden = !!EX; if (UI) UI.render(); }
+$('lang').addEventListener('change', e => { S.lang = e.target.value; if (EX) EX.lang = S.lang; save(); fill(); });
+$('bw').addEventListener('change', e => { S.bw = e.target.checked; if (EX) EX.bw = S.bw; save(); fill(); });
+TF.forEach(k => $(k).addEventListener('input', e => { if (EX) return; S[k] = e.target.value; save(); clearTimeout(tmr); tmr = setTimeout(() => UI && UI.render(), 400); }));
+SEL.forEach(k => $(k).addEventListener('change', e => { if (EX) return; S[k] = e.target.value; save(); fill(); }));
+$('photo').addEventListener('change', async e => { const f = e.target.files && e.target.files[0]; if (!f || EX) return; try { [S.photo, S.photoG] = await prepPhoto(f); save(); fill(); say('Фото добавлено.'); } catch (er) { say('Не получилось открыть фото. Попробуй другой файл (JPG или PNG).'); } e.target.value = ''; });
+$('phDel').addEventListener('click', () => { S.photo = S.photoG = ''; save(); fill(); });
+/* пример: рисованная кошка вместо фото */
+function exPhoto(){ const c = document.createElement('canvas'); c.width = 1000; c.height = 750; const x = c.getContext('2d');
+  const g = x.createLinearGradient(0, 0, 0, 750); g.addColorStop(0, '#E9DCC8'); g.addColorStop(1, '#CDB89A'); x.fillStyle = g; x.fillRect(0, 0, 1000, 750);
+  x.fillStyle = '#9C7A55'; x.beginPath(); x.ellipse(500, 470, 230, 200, 0, 0, 7); x.fill();
+  x.beginPath(); x.moveTo(320, 360); x.lineTo(350, 160); x.lineTo(460, 300); x.fill(); x.beginPath(); x.moveTo(680, 360); x.lineTo(650, 160); x.lineTo(540, 300); x.fill();
+  x.strokeStyle = '#6E4F3C'; x.lineWidth = 18; [[380, 330, 420, 420], [620, 330, 580, 420], [500, 290, 500, 380]].forEach(([a, b, cc, dd]) => { x.beginPath(); x.moveTo(a, b); x.lineTo(cc, dd); x.stroke(); });
+  x.fillStyle = '#F4EDE3'; x.beginPath(); x.ellipse(500, 560, 110, 80, 0, 0, 7); x.fill();
+  x.fillStyle = '#3E5A2E'; [[420, 440], [580, 440]].forEach(([a, b]) => { x.beginPath(); x.ellipse(a, b, 26, 32, 0, 0, 7); x.fill(); });
+  x.fillStyle = '#C0392B'; x.fillRect(330, 640, 340, 26);
+  const col = c.toDataURL('image/jpeg', 0.85); const d = x.getImageData(0, 0, 1000, 750), p = d.data; for (let i = 0; i < p.length; i += 4) { const l = 0.299 * p[i] + 0.587 * p[i + 1] + 0.114 * p[i + 2]; p[i] = p[i + 1] = p[i + 2] = l; } x.putImageData(d, 0, 0);
+  return [col, c.toDataURL('image/jpeg', 0.85)]; }
+const EXL = {de: {look: 'Getigert, weisse Pfoten und weisse Brust, rotes Halsband, ca. 4 kg', where: 'Bahnhofstrasse / Parkplatz Migros, 8610 Uster'}, fr: {look: 'Tigrée, pattes et poitrail blancs, collier rouge, env. 4 kg', where: 'Rue de la Gare / parking Migros, 1110 Morges'}, it: {look: 'Tigrata, zampe e petto bianchi, collare rosso, circa 4 kg', where: 'Via Stazione / parcheggio Migros, 6900 Lugano'}};
+const EXD = () => { const [a, b] = exPhoto(), t = new Date(); t.setDate(t.getDate() - 2); return Object.assign(blank(), {lang: S.lang, bw: S.bw, mode: 'lost', kind: 'cat', sex: 'f', name: 'Mia', photo: a, photoG: b, when: iso(t), chip: 'y', shy: 'y', reward: 'CHF 100', tel: '079 000 00 00', who: 'Olena', stmz: 'y', strips: '8'}, EXL[S.lang.slice(0, 2)]); };
+$('exOn').addEventListener('click', () => { EX = EXD(); fill(); window.scrollTo({top: $('exbar').offsetTop - 12, behavior: 'smooth'}); });
+$('exOff').addEventListener('click', () => { EX = null; fill(); });
+if (/[?&]example\b/.test(location.search)) EX = EXD();
+UI = SH.mount({build, title: 'Объявление о пропаже питомца', name: () => { const d = D(); return (d.mode === 'found' ? 'Gefunden-' : 'Vermisst-') + (d.name || T.de.kind[d.kind] || 'Tier').replace(/[^\wÀ-ÿ-]/g, ''); }});
+fill();
+
+</script>
+<script src="/assets/help.js"></script>
+<script src="/assets/backup.js"></script>
+<script src="/assets/pdffan.js" defer></script>
+<script src="/assets/share.js" defer></script>
+<script src="/assets/samesite.js"></script>
+</body>
+</html>

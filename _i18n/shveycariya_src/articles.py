@@ -3842,10 +3842,10 @@ ARTICLES['musor'] = dict(
 )
 
 ARTICLES['zhivotnye'] = dict(
-    h1='Собака, кошка и другие животные в Швейцарии: <em>чип, регистрация, налог и ввоз</em>',
-    seo='Собака в Швейцарии: чип и AMICUS, налог на собаку (Hundesteuer), ввоз животных из Украины',
-    desc='Животные в Швейцарии простыми словами на русском: собаке обязательны чип и регистрация в AMICUS, налог на собаку в общине, страховка ответственности, поводок, курсы для владельцев (в Цюрихе обязательны с 2025 года), запрещённые породы в некоторых кантонах; кошки; морских свинок и кроликов нельзя держать по одному; как ввезти собаку или кошку из Украины: чип, прививка от бешенства, анализ на антитела, сертификат. По-немецки Hund, Hundesteuer, AMICUS, Tierschutz, по-французски chien, taxe des chiens, protection des animaux, по-итальянски cane, tassa sui cani, protezione degli animali.',
-    lead='В Швейцарии к животным относятся серьёзно: у собаки должны быть чип, регистрация и налог, а для некоторых зверьков закон требует компанию. Здесь — что сделать, если у тебя появилось животное или ты привезла его с собой.',
+    h1='Собака, кошка и другие животные в Швейцарии: <em>чип, налог, выгул, права животного и что делать, если потерялось</em>',
+    seo='Собака и кошка в Швейцарии: чип и AMICUS, налог (Hundesteuer), поводок (Leinenpflicht), пропало животное (Tier vermisst)',
+    desc='Животные в Швейцарии простыми словами на русском: собаке обязательны чип и регистрация в AMICUS, налог на собаку в общине, страховка ответственности, поводок, курсы для владельцев (в Цюрихе обязательны с 2025 года), запрещённые породы в некоторых кантонах; как по закону держать собаку и кошку: ежедневный выгул, общение, запрещённые строгие и электрические ошейники, что обязательно кошке; права животного и куда сообщить о жестоком обращении; что делать, если животное потерялось или ты его нашла (STMZ, AMICUS, приюты); морских свинок и кроликов нельзя держать по одному; как ввезти собаку или кошку из Украины: чип, прививка от бешенства, анализ на антитела, сертификат. По-немецки Hund, Hundesteuer, AMICUS, Tierschutz, Leinenpflicht, Tier vermisst, по-французски chien, taxe des chiens, protection des animaux, по-итальянски cane, tassa sui cani, protezione degli animali.',
+    lead='В Швейцарии к животным относятся серьёзно: у собаки должны быть чип, регистрация и налог, а для некоторых зверьков закон требует компанию. Здесь — что сделать, если у тебя появилось животное или ты привезла его с собой, как его держать по закону и что делать, если оно потерялось.',
     body='''
 <nav class="toc" aria-label="Содержание"><b>В этой статье</b>
 <ul>
@@ -3853,8 +3853,12 @@ ARTICLES['zhivotnye'] = dict(
   <li><a href="#kursy">Курсы и запрещённые породы</a></li>
   <li><a href="#progulka">Поводок и прогулки</a></li>
   <li><a href="#koshka">Кошки и маленькие животные</a></li>
+  <li><a href="#uhod">Как держать собаку и кошку по закону</a></li>
   <li><a href="#vvoz">Ввоз животного</a></li>
   <li><a href="#arenda">Животное в съёмной квартире</a></li>
+  <li><a href="#prava">Права животного и жестокое обращение</a></li>
+  <li><a href="#poteryalos">Если животное потерялось</a></li>
+  <li><a href="#nashla">Если ты нашла животное</a></li>
 </ul></nav>
 
 <h2 id="sobaka">Собака: чип, регистрация, налог</h2>
@@ -3880,6 +3884,8 @@ ARTICLES['zhivotnye'] = dict(
   <li><b>В лесу и на краю леса весной</b> — во многих кантонах на поводке, в Цюрихе с 1 апреля по 31 июля: время выведения детёнышей у диких животных.</li>
   <li>На кладбища, в бассейны, на школьные дворы и спортплощадки собакам обычно нельзя.</li>
   <li>Убирай за собакой: пакеты (Robidog) почти на каждом углу.</li>
+  <li><b>Собака всегда под твоим контролем.</b> Если она пугает людей, гоняет диких животных или кусается, отвечаешь ты. О серьёзных укусах людей и животных ветеринары и врачи сообщают в ветеринарную службу кантона — она может назначить курс или ограничения.</li>
+  <li>Где точно нужен поводок у тебя, смотри на сайте общины и кантона (запрос «Leinenpflicht» и название общины).</li>
 </ul>
 
 <h2 id="koshka">Кошки и маленькие животные</h2>
@@ -3887,6 +3893,24 @@ ARTICLES['zhivotnye'] = dict(
   <li>Для кошек чип и регистрация пока добровольны, но очень советуют: так потерявшаяся кошка вернётся домой.</li>
   <li><b>Морских свинок нельзя держать по одной</b> — минимум вдвоём, кролик или человек компанией не считаются (<a href="https://www.blv.admin.ch/blv/de/home/tiere/tierschutz/heim-und-wildtierhaltung/meerschweinchen.html">BLV</a>). Кроликов тоже нельзя держать одних.</li>
   <li>Попугаев, рыб, птиц и других животных — тоже по правилам о минимальном месте и компании. Проверь на сайте BLV перед покупкой.</li>
+</ul>
+
+<h2 id="uhod">Как держать собаку и кошку по закону</h2>
+<p>Правила — в федеральной <a href="https://www.fedlex.admin.ch/eli/cc/2008/416/de">Tierschutzverordnung</a> (постановление о защите животных) и в памятках <a href="https://www.blv.admin.ch/blv/de/home/tiere/tierschutz/heim-und-wildtierhaltung/hunde.html">BLV</a>. Они касаются всех, кто держит животное, — и тех, кто присматривает за ним.</p>
+<h3>Собака</h3>
+<ul class="ul">
+  <li><b>Каждый день на улицу</b> — столько, сколько нужно этой собаке, и по возможности без поводка. Время в вольере или на цепи прогулкой не считается.</li>
+  <li><b>Каждый день общение</b> с людьми и по возможности с другими собаками. Собаку на привязи нужно отпускать свободно двигаться минимум на 5 часов в день.</li>
+  <li><b>Запрещено:</b> строгие ошейники с шипами (Stachelhalsband), удавки без ограничителя, электрошоковые ошейники и «антилай» с током, звуком или спреем, наказание выстрелами, удары. Намордник должен давать собаке дышать с открытой пастью.</li>
+  <li><b>Купировать уши и хвост нельзя</b>, ввозить собак с купированными ушами или хвостом тоже нельзя.</li>
+  <li>Щенка можно забрать у матери не раньше 56 дней. Кто продаёт собаку в объявлении, обязан указать своё полное имя и адрес и откуда собака.</li>
+</ul>
+<h3>Кошка</h3>
+<ul class="ul">
+  <li><b>Обязательно по закону:</b> возвышенное место для лежания, укрытие, где кошка может спрятаться, когтеточка и где лазить, игрушки или занятие и <b>лоток на каждую кошку</b> (по <a href="https://www.blv.admin.ch/blv/de/home/tiere/tierschutz/heim-und-wildtierhaltung/katzen.html">BLV</a>).</li>
+  <li>Кошке, которая живёт одна, нужен каждый день контакт с людьми или хотя бы видеть других кошек.</li>
+  <li>Кошка с выгулом должна всегда иметь доступ домой (дверца, окно). Стерилизацию BLV очень советует — чтобы не было нежеланных котят.</li>
+  <li>Уезжаешь — договорись, кто будет приходить каждый день. Всё важное для соседки или передержки собери в «<a href="https://svoiludi.ch/instrumenty/kartochka-pitomca/">Карточка питомца для передержки и ветеринара</a>».</li>
 </ul>
 
 <h2 id="vvoz">Ввоз животного</h2>
@@ -3902,6 +3926,29 @@ ARTICLES['zhivotnye'] = dict(
   <li>Собаку и кошку — как написано в договоре. Часто нужно разрешение управляющей — спроси письменно до того, как заведёшь.</li>
   <li>Ущерб от животного в квартире платишь ты — проверь страховку ответственности.</li>
 </ul>
+
+<h2 id="prava">Права животного и жестокое обращение</h2>
+<ul class="ul">
+  <li>В Швейцарии <b>животное — не вещь</b> (<a href="https://www.fedlex.admin.ch/eli/cc/24/233_245_233/de#art_641_a">ZGB, ст. 641a</a>), а закон о защите животных (<a href="https://www.fedlex.admin.ch/eli/cc/2008/414/de">Tierschutzgesetz</a>) защищает его достоинство и благополучие. Мучить, бросать, оставлять без еды, воды и ухода — наказуемо.</li>
+  <li><b>Видишь, что с животным плохо обращаются</b> — сначала, если можно, поговори с хозяином. Не помогло — сообщи в ветеринарную службу кантона (Veterinäramt). Хочешь анонимно — через форму <a href="https://www.tierschutz.com">Schweizer Tierschutz STS</a>. Сфотографируй, запиши место, дату и свидетелей (по <a href="https://www.srf.ch/radio-srf-1/notlage-erkennen-tierschutz-so-handeln-sie-richtig-bei-verdacht-auf-tierquaelerei">SRF</a>).</li>
+  <li>Животное в опасности прямо сейчас (например, собака в раскалённой машине) — звони в полицию <b>117</b>.</li>
+</ul>
+
+<h2 id="poteryalos">Если животное потерялось</h2>
+<ol class="ol">
+  <li><b>Сообщи в STMZ</b> — Швейцарскую службу учёта пропавших и найденных животных (<a href="https://www.stmz.ch">stmz.ch</a>, «Vermisstmeldung»). Сначала посмотри там список найденных: может, его уже нашли.</li>
+  <li><b>Собака:</b> отметь пропажу в <a href="https://www.amicus.ch">AMICUS</a> или в бесплатном приложении animundo. По чипу ветеринар или приют найдёт тебя сразу — проверь, что там твой актуальный телефон.</li>
+  <li><b>Позвони</b> в ближайшие приюты (Tierheim, refuge, rifugio), ветеринарам и в полицию общины.</li>
+  <li><b>Кошка:</b> попроси соседей проверить гаражи, подвалы и садовые домики — кошки часто оказываются там запертыми. Обойди район вечером и рано утром.</li>
+  <li><b>Повесь объявление</b> с фото у дома, в магазинах и у ветеринаров и разошли его в чаты. Листовку на языке кантона с отрывными телефонами сделаешь в «<a href="https://svoiludi.ch/instrumenty/obyavlenie-pitomec/">Объявление «Пропала кошка» или «Пропала собака»</a>».</li>
+</ol>
+
+<h2 id="nashla">Если ты нашла животное</h2>
+<ul class="ul">
+  <li><b>О найденном животном нужно сообщить</b> — это обязанность по закону (ZGB, ст. 720a): онлайн в <a href="https://www.stmz.ch">STMZ</a> («Fundmeldung») или в службу кантона, которая принимает такие сообщения (например, в <a href="https://www.zh.ch/de/umwelt-tiere/tiere/haustiere-heimtiere/gefundenes-tier-melden.html">кантоне Цюрих</a>, <a href="https://www.fr.ch/de/lsvw/energie-landwirtschaft-und-umwelt/landwirtschaft-und-nutztiere/gefundeneverlorene-tiere">кантоне Фрибур</a>).</li>
+  <li>Собаку или кошку отнеси к ветеринару или в приют — там бесплатно проверят чип и найдут хозяина.</li>
+  <li>Можно оставить животное у себя, пока ищут хозяина, если ты хорошо за ним ухаживаешь. Не можешь — отвези в приют. Если хозяин не нашёлся за 2 месяца, животное можно оставить себе (так пишет кантон Цюрих).</li>
+</ul>
 ''',
     steps=[
         'Новая собака — к ветеринару за чипом и регистрацией в AMICUS, потом в общину в течение 10 дней.',
@@ -3909,8 +3956,10 @@ ARTICLES['zhivotnye'] = dict(
         'Проверь, покрывает ли твоя страховка ответственности ущерб от животного.',
         'Снимаешь квартиру — спроси разрешение на собаку или кошку письменно.',
         'Ввозишь животное — сделай анализ на антитела к бешенству заранее, за 3 месяца.',
+        'Животное пропало — сразу сообщи в STMZ, собаку отметь в AMICUS, обзвони приюты и повесь объявление с фото.',
+        'Нашла животное — сообщи в STMZ или кантону и отнеси к ветеринару проверить чип.',
     ],
-    tools={'kartochka-pitomca': 'Уезжаешь? Оставь передержке и ветеринару чип, прививки, корм и кому звонить — на русском и языке кантона.', },
+    tools={'obyavlenie-pitomec': 'Пропала кошка или собака? Листовка с фото, приметами и отрывными телефонами на языке кантона, PNG для чатов.', 'kartochka-pitomca': 'Уезжаешь? Оставь передержке и ветеринару чип, прививки, корм и кому звонить — на русском и языке кантона.', },
     related=['strahovki', 'gemeinde', 'tamozhnya', 'dogovor-arendy'],
     sources=[
         ('BLV — собаки', 'https://www.blv.admin.ch/blv/de/home/tiere/tierschutz/heim-und-wildtierhaltung/hunde.html'),
@@ -3919,9 +3968,15 @@ ARTICLES['zhivotnye'] = dict(
         ('Город Цюрих — собаки в городе', 'https://www.stadt-zuerich.ch/de/umwelt-und-energie/natur/tiere-in-der-stadt/hunde.html'),
         ('BLV — морские свинки', 'https://www.blv.admin.ch/blv/de/home/tiere/tierschutz/heim-und-wildtierhaltung/meerschweinchen.html'),
         ('Кантон Граубюнден — животные из Украины, 01.08.2023', 'https://www.gr.ch:443/DE/institutionen/verwaltung/djsg/afm/ukraine/info/Documents/Merkblatt%20Tiere%20Ukraine_DE_01.08.2023.pdf'),
+        ('BLV — памятка о правилах для владельцев собак (TSchV)', 'https://www.blv.admin.ch/dam/de/sd-web/vKfzFO-JKRNp/merkblatt-hunde-recht-de.pdf'),
+        ('BLV — кошки', 'https://www.blv.admin.ch/blv/de/home/tiere/tierschutz/heim-und-wildtierhaltung/katzen.html'),
+        ('Кантон Цюрих — нашла животное: сообщить', 'https://www.zh.ch/de/umwelt-tiere/tiere/haustiere-heimtiere/gefundenes-tier-melden.html'),
+        ('Кантон Фрибур — найденные и пропавшие животные', 'https://www.fr.ch/de/lsvw/energie-landwirtschaft-und-umwelt/landwirtschaft-und-nutztiere/gefundeneverlorene-tiere'),
+        ('STMZ — пропавшие и найденные животные', 'https://www.stmz.ch'),
+        ('SRF — как действовать при подозрении на жестокое обращение', 'https://www.srf.ch/radio-srf-1/notlage-erkennen-tierschutz-so-handeln-sie-richtig-bei-verdacht-auf-tierquaelerei'),
         ('Парламент — решение о чипах для кошек, 06.05.2025', 'https://www.parlament.ch/de/services/news/Seiten/2025/20250506131548476194158159026_bsd103.aspx'),
     ],
-    terms=[('Deutsch', 'Hund, Hundehalter, Mikrochip, AMICUS, Hundesteuer, Hundekontrolle, Tierhalterhaftpflicht, Leinenpflicht, Hundekurs, Rassetypenliste, Veterinäramt, Tierarzt, Tollwutimpfung, Tollwut-Antikörpertest, Tierschutzverordnung'), ('Français', 'chien, puce électronique, taxe des chiens, responsabilité civile du détenteur, obligation de tenir en laisse, cours pour chiens, races interdites, service vétérinaire, vaccination contre la rage, titrage des anticorps, protection des animaux'), ('Italiano', 'cane, microchip, tassa sui cani, responsabilità civile del detentore, obbligo del guinzaglio, corso per cani, razze vietate, ufficio veterinario, vaccinazione antirabbica, protezione degli animali'), ('English', 'dog, microchip, dog tax, liability insurance, leash rules, dog training course, restricted breeds, veterinary office, rabies vaccination, rabies antibody test, animal welfare')],
+    terms=[('Deutsch', 'Hund, Hundehalter, Mikrochip, AMICUS, Hundesteuer, Hundekontrolle, Tierhalterhaftpflicht, Leinenpflicht, Hundekurs, Rassetypenliste, Veterinäramt, Tierarzt, Tollwutimpfung, Tollwut-Antikörpertest, Tierschutzverordnung, Stachelhalsband, Katzentoilette, Tierquälerei, Schweizerische Tiermeldezentrale (STMZ), Vermisstmeldung, Fundtier, Tierheim'), ('Français', 'chien, puce électronique, taxe des chiens, responsabilité civile du détenteur, obligation de tenir en laisse, cours pour chiens, races interdites, service vétérinaire, vaccination contre la rage, titrage des anticorps, protection des animaux, maltraitance, animal perdu, animal trouvé, refuge'), ('Italiano', 'cane, microchip, tassa sui cani, responsabilità civile del detentore, obbligo del guinzaglio, corso per cani, razze vietate, ufficio veterinario, vaccinazione antirabbica, protezione degli animali, maltrattamento, animale smarrito, animale trovato, rifugio'), ('English', 'dog, microchip, dog tax, liability insurance, leash rules, dog training course, restricted breeds, veterinary office, rabies vaccination, rabies antibody test, animal welfare, animal cruelty, lost pet, found animal, animal shelter')],
 )
 
 ARTICLES['priroda'] = dict(

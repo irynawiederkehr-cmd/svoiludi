@@ -20,6 +20,8 @@
       rect: (x, y, w2, h2, fill, stroke, r, dash) => ops.push({t: 'rect', x, y, w: w2, h: h2, fill: fill || null, stroke: stroke || null, r: r || 0, dash: !!dash}),
       line: (x1, y1, x2, y2, color, wd, dash) => ops.push({t: 'line', x1, y1, x2, y2, color: color || C.line, w: wd || 0.3, dash: !!dash}),
       tri: (p, fill) => ops.push({t: 'tri', p, fill}),
+      /* фото (dataURL JPEG, уже обрезанное под нужные пропорции) */
+      img: (data, x, y, w2, h2) => { if (data) ops.push({t: 'img', data, x, y, w: w2, h: h2}); },
       arrowDown: (x, y1, y2, color) => { ops.push({t: 'line', x1: x, y1, x2: x, y2: y2 - 2, color, w: 0.6}); ops.push({t: 'tri', p: [[x, y2 - 0.3], [x - 1.3, y2 - 2.3], [x + 1.3, y2 - 2.3]], fill: color}); },
       arrowRight: (x1, x2, y, color) => { ops.push({t: 'line', x1, y1: y, x2: x2 - 2, y2: y, color, w: 0.6}); ops.push({t: 'tri', p: [[x2 - 0.3, y], [x2 - 2.3, y - 1.3], [x2 - 2.3, y + 1.3]], fill: color}); },
       /* абзац: возвращает новую y */
@@ -62,6 +64,7 @@
       if (p.t === 'rect') o += `<rect x="${p.x}" y="${p.y}" width="${p.w}" height="${p.h}"${p.r ? ` rx="${p.r}"` : ''} fill="${p.fill || 'none'}"${p.stroke ? ` stroke="${p.stroke}" stroke-width="0.35"${p.dash ? ' stroke-dasharray="1.4 1"' : ''}` : ''}/>`;
       else if (p.t === 'line') o += `<line x1="${p.x1}" y1="${p.y1}" x2="${p.x2}" y2="${p.y2}" stroke="${p.color}" stroke-width="${p.w}"${p.dash ? ' stroke-dasharray="1.2 0.9"' : ''}/>`;
       else if (p.t === 'tri') o += `<polygon points="${p.p.map(q => q.join(',')).join(' ')}" fill="${p.fill}"/>`;
+      else if (p.t === 'img') o += `<image href="${p.data}" x="${p.x}" y="${p.y}" width="${p.w}" height="${p.h}" preserveAspectRatio="xMidYMid slice"/>`;
       else o += `<text x="${p.x}" y="${p.y}" font-family="${p.f === 'h' ? 'Helvetica, Arial, sans-serif' : 'Manrope'}" font-weight="${p.b ? 700 : 400}" font-size="${(p.size * PT).toFixed(3)}" fill="${p.color}" text-anchor="${p.align === 'right' ? 'end' : p.align === 'center' ? 'middle' : 'start'}">${esc(p.s)}</text>`;
     });
     const mk = marks(pg); if (mk.length) o += `<g fill="${WMC}" fill-opacity="${WMA}" font-family="Manrope" font-weight="700" font-size="${(WMS * PT).toFixed(3)}">` + mk.map(([x, y]) => `<text transform="translate(${x} ${y}) rotate(-24)">${esc(WMT)}</text>`).join('') + '</g>';
@@ -100,6 +103,7 @@
           doc.setLineDashPattern([], 0);
         } else if (o.t === 'line') { doc.setDrawColor(...hex(o.color)); doc.setLineWidth(o.w); doc.setLineDashPattern(o.dash ? [1.2, 0.9] : [], 0); doc.line(o.x1, o.y1, o.x2, o.y2); doc.setLineDashPattern([], 0); }
         else if (o.t === 'tri') { doc.setFillColor(...hex(o.fill)); doc.triangle(o.p[0][0], o.p[0][1], o.p[1][0], o.p[1][1], o.p[2][0], o.p[2][1], 'F'); }
+        else if (o.t === 'img') { try { doc.addImage(o.data, 'JPEG', o.x, o.y, o.w, o.h, undefined, 'MEDIUM'); } catch (e) {} }
         else { if (o.f === 'h') doc.setFont('helvetica', o.b ? 'bold' : 'normal'); else doc.setFont(o.b ? 'Manrope-Bold' : 'Manrope-Regular', 'normal'); doc.setFontSize(o.size); doc.setTextColor(...hex(o.color)); doc.text(o.s, o.x, o.y, {align: o.align}); }
       });
       const mk = marks(pg);
@@ -118,7 +122,9 @@
     try { await Promise.all([document.fonts.load('400 20px Manrope'), document.fonts.load('700 20px Manrope')]); } catch (e) {}
     const k = 8, cv = document.createElement('canvas'); cv.width = Math.round(pg.w * k); cv.height = Math.round(pg.h * k);
     const c = cv.getContext('2d'); c.scale(k, k); c.fillStyle = '#FFFFFF'; c.fillRect(0, 0, pg.w, pg.h);
+    const IM = new Map(); await Promise.all(pg.ops.filter(o => o.t === 'img').map(o => new Promise(r => { const im = new Image(); im.onload = () => { IM.set(o, im); r(); }; im.onerror = r; im.src = o.data; })));
     pg.ops.forEach(o => {
+      if (o.t === 'img') { const im = IM.get(o); if (im) c.drawImage(im, o.x, o.y, o.w, o.h); return; }
       if (o.t === 'rect') { c.beginPath(); if (o.r && c.roundRect) c.roundRect(o.x, o.y, o.w, o.h, o.r); else c.rect(o.x, o.y, o.w, o.h); if (o.fill) { c.fillStyle = o.fill; c.fill(); } if (o.stroke) { c.strokeStyle = o.stroke; c.lineWidth = 0.35; c.setLineDash(o.dash ? [1.4, 1] : []); c.stroke(); c.setLineDash([]); } }
       else if (o.t === 'line') { c.beginPath(); c.moveTo(o.x1, o.y1); c.lineTo(o.x2, o.y2); c.strokeStyle = o.color; c.lineWidth = o.w; c.setLineDash(o.dash ? [1.2, 0.9] : []); c.stroke(); c.setLineDash([]); }
       else if (o.t === 'tri') { c.beginPath(); c.moveTo(o.p[0][0], o.p[0][1]); c.lineTo(o.p[1][0], o.p[1][1]); c.lineTo(o.p[2][0], o.p[2][1]); c.closePath(); c.fillStyle = o.fill; c.fill(); }
