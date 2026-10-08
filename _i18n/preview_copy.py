@@ -12,7 +12,7 @@ INSET = {'vakansii', 'kursy', 'events', 'join', 'shveycariya'}
 LIVE = 'https://svoiludi.ch/'
 ASSETS = ['assets/fonts.css', 'assets/wm.css', 'assets/help.js', 'assets/share.js', 'assets/samesite.js',
           'assets/lib/html2canvas.min.js', 'assets/lib/jspdf.umd.min.js', 'assets/lib/qrcode.js', 'assets/lib/jszip.min.js',
-          'assets/lib/leaflet/leaflet.css', 'assets/lib/leaflet/leaflet.js', 'data/specialists.js', 'data/vacancies.js', 'data/afisha.js', 'fav/favicon.svg', 'assets/temy.css', 'assets/temy.js']
+          'assets/lib/leaflet/leaflet.css', 'assets/lib/leaflet/leaflet.js', 'data/specialists.js', 'data/vacancies.js', 'data/afisha.js', 'fav/favicon.svg', 'assets/temy.css', 'assets/temy.js', 'assets/kantony.js']
 ASSETS += ['assets/fonts/' + f for f in os.listdir(os.path.join(REPO, 'assets/fonts'))]
 ASSETS += ['img/' + f for f in os.listdir(os.path.join(REPO, 'img'))]
 ASSETS += ['assets/lib/fonts-pdf/' + f for f in os.listdir(os.path.join(REPO, 'assets/lib/fonts-pdf'))] if os.path.isdir(os.path.join(REPO, 'assets/lib/fonts-pdf')) else []
