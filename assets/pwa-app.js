@@ -66,15 +66,7 @@
     '.pa-tabs [aria-current="page"]::before{content:"";display:block;width:26px;height:3px;border-radius:3px;background:var(--sage,#66704F);margin:-6px 0 3px}',
     '.pa-tabs a:active,.pa-tabs button:active{background:var(--sage-soft,#E3E6D6)}',
     '@media (max-width:1100px){html.pa-app .pa-tabs{display:block}html.pa-app body{padding-bottom:calc(72px + env(safe-area-inset-bottom))}}',
-    /* верхнее меню в приложении: прямоугольные плитки с закруглением, в два ряда (08.10.2026, по просьбе Ирины) */
-    '@media (max-width:1100px){html.pa-app header.top .page{flex-wrap:wrap;row-gap:8px}' +
-    'html.pa-app header.top nav[aria-label]{order:3;width:100%;display:grid!important;grid-template-columns:repeat(var(--pa-cols,3),minmax(0,1fr));gap:8px;overflow:visible;padding:4px 0 12px;margin:0}' +
-    'html.pa-app header.top nav[aria-label] a{display:flex!important;flex-direction:column;align-items:center;justify-content:center;gap:5px;min-height:62px;padding:9px 6px;border-radius:14px;background:var(--paper,#FFFCF8);border:1px solid color-mix(in srgb,var(--sage,#66704F) 30%,transparent);box-shadow:0 3px 10px -6px rgba(60,70,40,.45);color:var(--ink,#2F2924)!important;font:600 .78rem/1.18 var(--body,system-ui);text-align:center;white-space:normal;text-decoration:none;-webkit-tap-highlight-color:transparent}' +
-    'html.pa-app header.top nav[aria-label] a::after{content:none!important}' +
-    'html.pa-app header.top nav[aria-label] a .pa-ni{display:block;width:22px;height:22px;fill:none;stroke:var(--sage,#66704F);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}' +
-    'html.pa-app header.top nav[aria-label] a[aria-current="page"]{background:var(--sage,#66704F);border-color:var(--sage,#66704F);color:var(--paper,#FFFCF8)!important;box-shadow:0 4px 12px -6px rgba(60,70,40,.6)}' +
-    'html.pa-app header.top nav[aria-label] a[aria-current="page"] .pa-ni{stroke:var(--paper,#FFFCF8)}' +
-    'html.pa-app header.top nav[aria-label] a:active{transform:scale(.97)}}',
+    /* верхнее меню плитками (телефон и планшет, в браузере и в приложении) — стили в <head>, блок <!--pwa--> (_i18n/pwa.py) */
     'html.pa-app header.top{padding-top:env(safe-area-inset-top)}',
     '.pa-sheet,.pa-card{font-family:var(--body,system-ui);color:var(--ink,#2F2924)}',
     '.pa-back{position:fixed;inset:0;z-index:950;background:rgba(30,24,20,.38);display:flex;align-items:flex-end;justify-content:center}',
@@ -145,7 +137,6 @@
   }
   function tabBar() {
     document.documentElement.classList.add('pa-app');
-    topTiles();
     var r = rel(), cur = r === '/' || r === '/index.html' ? 0 : /^\/events\//.test(r) ? 1 : /^\/kursy\//.test(r) ? 2 : /^\/instrumenty\//.test(r) ? 3 : 4;
     var links = [['/', I.spec], ['/events/', I.ev], ['/kursy/', I.kurs], ['/instrumenty/', I.tool]];
     var h = '<div class="pa-tabs" role="navigation" aria-label="' + T.tabs.slice(0, 4).join(' · ') + '"><ul>';
@@ -219,6 +210,7 @@
   }
 
   function start() {
+    topTiles();
     if (STANDALONE) { tabBar(); return; }
     if (!(TOUCH || force)) return;
     footerLink();
