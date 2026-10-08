@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<link rel="icon" href="/fav/favicon.svg" type="image/svg+xml"><link rel="icon" href="/fav/icon-32.png" sizes="32x32"><link rel="apple-touch-icon" href="/fav/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/fonts.css">
+<meta name="description" content="Бесплатный список всех обязательных сроков года для жизни в Швейцарии с напоминаниями: налоговая декларация и налог у источника, смена медстраховки до 30 ноября и франшиза, 3a до конца года, виньетка, референсная ставка по аренде, продление пермита и паспорта, детские пособия и справки об учёбе, AHV для взрослых детей, свои сроки. У каждого срока — иконка, что это и что подготовить. Файл для календаря Google, Apple и Outlook с напоминаниями и лист PDF.">
+<link rel="canonical" href="https://svoiludi.ch/instrumenty/sroki-goda/">
+<meta property="og:type" content="website"><meta property="og:locale" content="ru_RU"><meta property="og:site_name" content="Свои люди в Швейцарии">
+<meta property="og:title" content="Обязательные сроки года в Швейцарии: напоминания в календарь · бесплатно"><meta property="og:description" content="Налоги, медстраховка, 3a, пермит, виньетка и дети — все сроки года с напоминаниями в твой календарь.">
+<meta property="og:url" content="https://svoiludi.ch/instrumenty/sroki-goda/"><meta property="og:image" content="https://svoiludi.ch/instrumenty/sroki-goda/og-image.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="robots" content="noindex, nofollow">
+<title>Обязательные сроки года в Швейцарии: напоминания в календарь Google и Apple</title>
+<style>
+/* Обязательные сроки года в Швейцарии: напоминания в календарь Google и Apple (08.10.2026): анкета слева, живые листы справа, движок assets/shema.js. */
+:root{
+  --bg:#F4EDE3; --paper:#FFFCF8; --ink:#2F2924; --muted:#7A6E62; --line:#E5D9C9; --soft:#EFE5D7;
+  --brown:#6E4F3C; --mustard:#B98324; --mustard-soft:#F3E3C2; --sage:#4F5E3E; --sage-soft:#E3E8D6; --red:#A0523D;
+  --display:"Forum","Georgia",serif; --sans:"Manrope","Segoe UI",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#221D19; --paper:#2C2621; --ink:#F1E9DF; --muted:#B4A796; --line:#3E362F; --soft:#352E28;
+  --brown:#E1C2A6; --mustard:#E2B45C; --mustard-soft:#3D321F; --sage:#B4BF97; --sage-soft:#2E3226; --red:#E39A85; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#221D19; --paper:#2C2621; --ink:#F1E9DF; --muted:#B4A796; --line:#3E362F; --soft:#352E28;
+  --brown:#E1C2A6; --mustard:#E2B45C; --mustard-soft:#3D321F; --sage:#B4BF97; --sage-soft:#2E3226; --red:#E39A85; color-scheme:dark}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--ink);font:15px/1.55 var(--sans);margin:0}
+.wrap{max-width:1280px;margin:0 auto;padding-inline:16px;padding-block:28px 48px;display:flex;flex-direction:column;gap:24px}
+.eyebrow{font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+h1{font-family:var(--display);font-weight:400;font-size:clamp(2.4rem,6vw,3.6rem);line-height:1;margin:4px 0 10px;text-wrap:balance}
+h2{font-family:var(--display);font-weight:400;font-size:1.55rem;margin:0;text-wrap:balance}
+h3{font-family:var(--display);font-weight:400;font-size:1.22rem;line-height:1.2;margin:0}
+.lead{max-width:66ch;color:var(--muted);margin:0}
+.jump{font-weight:700;color:var(--brown);text-underline-offset:4px}
+.privnote{margin-top:14px;background:var(--sage-soft);border-radius:16px;padding:12px 16px;font-size:.9rem;max-width:90ch}
+.status{font-size:.86rem;color:var(--muted);min-height:1.3em}
+.btn{font:inherit;font-weight:700;font-size:.9rem;border:0;border-radius:999px;padding:10px 18px;cursor:pointer;color:#fff;text-decoration:none;display:inline-flex;align-items:center;gap:6px;background:#6E4F3C;box-shadow:0 8px 18px -8px rgba(110,79,60,.6)}
+.btn.gold{background:#B98324;box-shadow:0 8px 18px -8px rgba(185,131,36,.7)}
+.btn.free{background:#4F5E3E;box-shadow:0 8px 18px -8px rgba(79,94,62,.6)}
+.btn.ghost{background:transparent;color:var(--brown);border:1.5px solid var(--line);box-shadow:none}
+.btn.sm{font-size:.82rem;padding:7px 13px}
+.btn[disabled]{background:var(--soft);color:var(--muted);box-shadow:none;cursor:wait}
+select,input[type=text],input[type=tel],input[type=number],input[type=date],textarea{font:inherit;font-size:.95rem;color:var(--ink);background:var(--paper);border:1.5px solid var(--line);border-radius:12px;padding:9px 12px;width:100%;min-width:0}
+select:focus-visible,input:focus-visible,button:focus-visible,textarea:focus-visible,a:focus-visible{outline:2px solid var(--mustard);outline-offset:2px}
+::placeholder{color:color-mix(in srgb,var(--muted) 70%,transparent)}
+.setup{background:var(--paper);border:1.5px solid var(--line);border-radius:22px;padding:16px 18px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px 18px;align-items:start}
+@media (max-width:1000px){.setup{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.setup{grid-template-columns:1fr}}
+.fl{display:flex;flex-direction:column;gap:6px;min-width:0}
+.fl>.lb{font-size:.8rem;font-weight:700;color:var(--muted);display:flex;align-items:center}
+.seg{display:flex;flex-wrap:wrap;gap:6px}
+.seg button{font:inherit;font-size:.84rem;font-weight:700;border:1.5px solid var(--line);background:var(--paper);color:var(--ink);border-radius:999px;padding:6px 12px;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--sage);border-color:var(--sage);color:#fff}
+.acts{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.exbar{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;background:var(--mustard-soft);border-radius:16px;padding:10px 14px;font-size:.9rem;font-weight:600}
+.work{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:22px;align-items:start}
+@media (max-width:1040px){.work{grid-template-columns:1fr}}
+.form{display:flex;flex-direction:column;gap:14px;min-width:0}
+.sec{background:var(--paper);border:1.5px solid var(--line);border-radius:20px;padding:16px 18px;display:flex;flex-direction:column;gap:12px}
+.sec>h2{font-size:1.3rem;display:flex;align-items:center}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:560px){.g2{grid-template-columns:1fr}}
+.hint{font-size:.84rem;color:var(--muted);margin:0}
+.chk{display:flex;flex-direction:column;gap:8px}
+.chk label{display:flex;gap:10px;align-items:baseline;font-size:.92rem;cursor:pointer}
+.chk input{flex:none;width:18px;height:18px;accent-color:var(--sage);transform:translateY(3px)}
+.chk b{white-space:nowrap}
+.chk small{color:var(--muted)}
+.tog{display:flex;gap:10px;align-items:center;font-size:.92rem;cursor:pointer}
+.tog input{width:18px;height:18px;accent-color:var(--sage)}
+.sheetbox{position:sticky;top:12px;display:flex;flex-direction:column;gap:10px}
+@media (max-width:1040px){.sheetbox{position:static}}
+.sheet{background:#fff;border-radius:6px;box-shadow:0 18px 40px -22px rgba(47,41,36,.45);overflow:hidden}
+.sheet svg{display:block;width:100%;height:auto}
+.imp{background:var(--paper);border:1.5px dashed color-mix(in srgb,var(--sage) 55%,transparent);border-radius:16px;padding:14px 18px;font-size:.88rem;max-width:90ch;margin:0}
+.imp b{color:var(--sage)}
+.guide{display:flex;flex-direction:column;gap:14px;max-width:90ch}
+.guide ul{margin:0;padding-left:20px}
+.guide li{margin:4px 0}
+.credit{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:.8rem;color:var(--muted)}
+.credit a{color:var(--muted)}
+.qh{font:700 .72rem/1 var(--sans);width:20px;height:20px;border-radius:50%;border:1.5px solid var(--line);background:var(--paper);color:var(--brown);cursor:pointer;margin-left:6px;padding:0;flex:none}
+.sheets{display:flex;flex-direction:column;gap:14px}
+.goals{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+@media (max-width:560px){.goals{grid-template-columns:1fr}}
+.goals label{display:flex;gap:10px;align-items:flex-start;background:var(--bg);border:1.5px solid var(--line);border-radius:14px;padding:9px 12px;cursor:pointer;font-size:.92rem}
+.goals input{width:18px;height:18px;accent-color:var(--sage);flex:none;margin-top:2px}
+.goals small{display:block;color:var(--muted)}
+.steps{display:flex;flex-direction:column;gap:8px}
+.steps details{background:var(--paper);border:1.5px solid var(--line);border-radius:16px;padding:10px 16px}
+.steps summary{cursor:pointer;font-weight:700;display:flex;gap:10px;align-items:baseline}
+.steps summary small{font-weight:600;color:var(--muted);margin-left:auto;text-align:right}
+.steps details p,.steps details ul{margin:8px 0 2px;font-size:.93rem}
+.steps details ul{padding-left:20px}
+</style>
+</head>
+<body>
+<style>.form input,.form select{width:100%}.form .chk input{width:18px}label.chk{flex-direction:row;align-items:baseline;gap:10px;margin:6px 0}.kid,.own{border:1.5px solid var(--line);border-radius:14px;padding:10px 12px;margin:8px 0;background:var(--bg)}
+.sl-m{margin:18px 0 6px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;font-size:.78rem}
+.sl{display:flex;gap:12px;background:var(--paper);border:1.5px solid var(--line);border-radius:16px;padding:12px 14px;margin:8px 0}
+.sl .ic{font-size:1.6rem;line-height:1;flex:none;width:2rem;text-align:center}
+.sl .bd{flex:1;min-width:0}.sl .dt{font-size:.82rem;font-weight:700;color:var(--sage)}.sl h3{margin:2px 0 4px;font-size:1rem}
+.sl p{margin:4px 0;font-size:.9rem}.sl ul{margin:4px 0 6px;padding-left:18px;font-size:.88rem}.sl .ln{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:6px}
+.sl .ln a{font-size:.85rem}.sl label.inc{display:flex;gap:6px;align-items:center;font-size:.84rem;color:var(--muted)}
+.leads{display:flex;flex-wrap:wrap;gap:6px 14px}.leads label{display:flex;gap:6px;align-items:center;font-size:.92rem}
+.calbar{position:sticky;bottom:0;background:var(--bg);padding:10px 0;display:flex;flex-wrap:wrap;gap:8px;align-items:center;border-top:1.5px solid var(--line);z-index:5}</style>
+<div class="wrap">
+  <header>
+    <p style="margin:0 0 14px"><a class="jump" href="https://svoiludi.ch/instrumenty/">← Все полезные инструменты · Свои люди в Швейцарии</a></p>
+    <div class="eyebrow">Сроки · напоминания</div>
+    <h1>Обязательные сроки года в Швейцарии: напоминания в календарь Google и Apple</h1>
+    <p class="lead">Налоговая декларация, смена медстраховки до 30 ноября, 3a до конца года, виньетка, продление пермита — в Швейцарии много обязательных сроков, и пропустить их дорого. Отметь, что касается тебя, — получишь свои сроки на год: с иконкой, что это и что подготовить. Одним файлом добавь их в свой календарь с напоминаниями.</p>
+    <div class="privnote"><b>Твои данные только у тебя.</b> Всё хранится только в твоём браузере на этом устройстве. Регистрация не нужна.</div>
+    <div data-fan="sroki-goda"></div>
+  </header>
+  <div class="setup">
+    <div class="fl"><span class="lb">Год</span><select id="year"></select></div>
+    <div class="fl"><span class="lb">Кантон<button type="button" class="qh" data-help="kt" aria-label="Подсказка: кантон" aria-expanded="false">?</button></span><select id="kt"></select></div>
+    <div class="fl"><span class="lb">Печать</span><label class="tog"><input type="checkbox" id="bw"> Без цвета, для дешёвой печати</label></div>
+  </div>
+  <div class="exbar" id="exbar" hidden><span>Это пример. Так будут выглядеть твои сроки.</span><button type="button" class="btn sm" id="exOff">Вернуться к моим данным</button></div>
+  <div class="work">
+    <div class="form">
+      <section class="sec"><h2>Что касается тебя</h2>
+        <div class="fl"><span class="lb">Налог<button type="button" class="qh" data-help="tax" aria-label="Подсказка: налог" aria-expanded="false">?</button></span><select id="tax"><option value="decl">Подаю налоговую декларацию</option><option value="qst">Налог вычитают из зарплаты (налог у источника)</option></select></div>
+        <label class="chk"><input type="checkbox" id="emp"> <span>Работаю по найму</span></label>
+        <label class="chk"><input type="checkbox" id="self"> <span>Работаю на себя (своё дело)</span></label>
+        <label class="chk"><input type="checkbox" id="a3"> <span>Плачу в 3-ю колонну (3a)<button type="button" class="qh" data-help="a3" aria-label="Подсказка: 3a" aria-expanded="false">?</button></span></label>
+        <label class="chk"><input type="checkbox" id="rent"> <span>Снимаю квартиру</span></label>
+        <label class="chk"><input type="checkbox" id="car"> <span>Есть машина</span></label>
+      </section>
+      <section class="sec"><h2>Мои даты<button type="button" class="qh" data-help="dates" aria-label="Подсказка: мои даты" aria-expanded="false">?</button></h2>
+        <div class="fl"><span class="lb">Пермит действует до</span><input type="date" id="permit"></div>
+        <div class="fl"><span class="lb">Паспорт действует до</span><input type="date" id="pass"></div>
+        <div class="fl"><span class="lb">Halbtax или GA действует до</span><input type="date" id="halbtax"></div>
+        <div class="fl"><span class="lb">Срок оплаты налогового счёта</span><input type="date" id="steuer"></div>
+        <div class="fl"><span class="lb">Срок оплаты Serafe</span><input type="date" id="serafe"></div>
+        <div class="fl"><span class="lb">Заявление на скидку к медстраховке до<button type="button" class="qh" data-help="ipv" aria-label="Подсказка: скидка к медстраховке" aria-expanded="false">?</button></span><input type="date" id="ipv"></div>
+        <div class="fl"><span class="lb">Налог на собаку — срок оплаты</span><input type="date" id="hund"></div>
+        <div class="fl"><span class="lb">Налог на машину — срок оплаты</span><input type="date" id="mfz"></div>
+      </section>
+      <section class="sec"><h2>Дети<button type="button" class="qh" data-help="kids" aria-label="Подсказка: дети" aria-expanded="false">?</button></h2>
+        <div id="kids"></div><button type="button" class="btn ghost sm" id="addKid">+ Добавить ребёнка</button>
+      </section>
+      <section class="sec"><h2>Мои сроки</h2>
+        <div id="own"></div><button type="button" class="btn ghost sm" id="addOwn">+ Добавить свой срок</button>
+      </section>
+      <section class="sec"><h2>Напоминания в календаре<button type="button" class="qh" data-help="leads" aria-label="Подсказка: напоминания" aria-expanded="false">?</button></h2>
+        <div class="leads" id="leads"></div>
+      </section>
+    </div>
+    <div class="sheetbox">
+      <div class="calbar"><button type="button" class="btn gold" id="ics">Добавить в мой календарь (.ics)</button><button type="button" class="qh" data-help="ics" aria-label="Подсказка: как добавить в календарь" aria-expanded="false">?</button><button type="button" class="btn ghost sm" id="pdf">Скачать PDF</button><button type="button" class="btn ghost sm" id="share" hidden>Отправить</button><button type="button" class="btn ghost sm" id="exOn">Посмотреть на примере</button></div>
+      <div id="list" aria-live="polite"></div>
+      <div class="sheets" id="sheet" aria-label="Предпросмотр листа" style="margin-top:18px"></div>
+      <div class="status" id="status" role="status"></div>
+    </div>
+  </div>
+  <p class="imp"><b>Важно.</b> Это напоминания по общим правилам на 2026 год, а не официальный календарь: точные даты — в письмах налогового ведомства, кассы и миграционной службы, в каждом кантоне бывают свои. Важные письма отправляй заказным (Einschreiben) и храни квитанцию. Как считать сроки по письмам — в теме <a href="https://svoiludi.ch/shveycariya/pisma-sroki/">«Письма от ведомств и сроки»</a>, все дела по дням — в «<a href="https://svoiludi.ch/instrumenty/moj-god/">Годовой календарь дел и сроков</a>».</p>
+  <div class="share-slot" data-url="https://svoiludi.ch/instrumenty/sroki-goda/" data-lead="Перешли тем, кто живёт в Швейцарии. В ссылке нет твоих данных." data-text="Привет! Тут можно собрать все обязательные сроки года в Швейцарии — налоги, медстраховка, 3a, пермит — и добавить их в свой календарь с напоминаниями. Бесплатно. https://svoiludi.ch/instrumenty/sroki-goda/"></div>
+  <p class="credit"><span>Свои люди в Швейцарии · svoiludi.ch</span><a href="https://svoiludi.ch/privacy/">Политика конфиденциальности</a></p>
+</div>
+
+<script src="/assets/kantony.js"></script>
+<script src="/assets/lib/jspdf.umd.min.js"></script>
+<script src="/assets/shema.js"></script>
+<script src="/assets/sroki.js"></script>
+<script>
+window.HELP = {
+  kt: '<p>Кантон, где ты живёшь. От него зависит срок налоговой декларации: в Берне и Во — 15 марта, в Тичино — 30 апреля, в других кантонах обычно 31 марта.</p>',
+  tax: '<p><b>Декларация</b> — пермит C, гражданство, брак со швейцарцем или человеком с пермитом C, своё дело или большой доход. <b>Налог у источника</b> — работодатель вычитает налог из зарплаты (пермиты B, L, S, F, G). Тогда важен другой срок — заявление на декларацию до 31 марта.</p>',
+  a3: '<p>3-я колонна (Säule 3a) — пенсионный счёт или страховка, взносы в которые уменьшают налог. Взнос считается за год, только если пришёл до 31 декабря.</p>',
+  dates: '<p>Впиши даты, которые знаешь: срок пермита и паспорта — на документе, сроки счетов — в самих счетах. Пустые поля не попадут в список. Даты счетов повторяются каждый год в тот же день.</p>',
+  ipv: '<p>Скидка к медстраховке при небольшом доходе (Prämienverbilligung, IPV). В одних кантонах её дают сами, в других нужно заявление до определённой даты — смотри на сайте кантона.</p>',
+  kids: '<p>По дню рождения ребёнка калькулятор добавит: 16 лет — пособие на учёбу, справку об учёбе каждый сентябрь, взносы AHV после 20 лет, конец пособия в 25.</p>',
+  leads: '<p>За сколько дней до срока календарь напомнит. Напоминания приходят в 9 утра. Они работают, если календарь на телефоне разрешил уведомления.</p>',
+  ics: '<p><b>iPhone, iPad, Mac</b>: открой скачанный файл — Календарь предложит добавить все сроки.</p><p><b>Google Календарь</b>: на компьютере открой calendar.google.com → шестерёнка «Настройки» → «Импорт и экспорт» → выбери файл. Удобно сначала создать отдельный календарь «Сроки Швейцария». На Android файл можно открыть приложением «Google Календарь».</p><p><b>Outlook</b>: открой файл двойным щелчком.</p><p>Кнопка «В Google Календарь» у каждого срока добавляет его по одному, но без напоминаний — их настрой в самом календаре. При нажатии текст этого события (название, дата, что сделать, а у детских сроков — имя ребёнка, если ты его вписала) уходит в Google в адресе страницы. Не хочешь — пользуйся файлом .ics: он собирается прямо на твоём устройстве.</p><p>В каждом событии внизу — ссылка на страницу сайта с подробностями и на этот инструмент, чтобы ты могла вернуться.</p>'
+};
+const KEY = 'srokiGoda.v1';
+const SR = window.SROKI;
+const TOOL_URL = /svoiludi\.ch$/.test(location.hostname) ? location.origin + location.pathname : 'https://svoiludi.ch/instrumenty/sroki-goda/';
+const KTN = k => ((window.KANTONY || {})[k] || {}).n || k;
+const LEADS = [[30, 'за 30 дней'], [14, 'за 14 дней'], [7, 'за неделю'], [1, 'за день'], [0, 'в сам день']];
+const WD = ['вс', 'пн', 'вт', 'ср', 'чт', 'пт', 'сб'], MON = ['январь', 'февраль', 'март', 'апрель', 'май', 'июнь', 'июль', 'август', 'сентябрь', 'октябрь', 'ноябрь', 'декабрь'], MONG = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'];
+const nice = d => d.getDate() + ' ' + MONG[d.getMonth()] + ', ' + WD[d.getDay()];
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'}[c]));
+function blank(){ let k = ''; try { k = localStorage.getItem('svoiludi.kanton') || ''; } catch (e) {} const n = new Date();
+  return {bw: false, year: 'n12', kt: k || 'ZH', tax: 'decl', emp: true, self: false, a3: false, rent: true, car: false,
+    permit: '', pass: '', halbtax: '', steuer: '', serafe: '', ipv: '', hund: '', mfz: '', kids: [], own: [], leads: [14, 1], off: {}}; }
+let S = load(), EX = null;
+function load(){ try { const s = JSON.parse(localStorage.getItem(KEY)); if (s && typeof s === 'object') return Object.assign(blank(), s); } catch (e) {} return blank(); }
+function save(){ if (EX) return; try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} }
+const D = () => EX || S;
+/* «Ближайшие 12 месяцев» (по умолчанию): сроки с сегодняшнего дня на год вперёд, через границу года */
+const T0 = () => { const n = new Date(); return new Date(n.getFullYear(), n.getMonth(), n.getDate()); };
+const items = d => { if (d.year !== 'n12') return SR.list(+d.year, d); const a = T0(), b = new Date(a.getFullYear() + 1, a.getMonth(), a.getDate()); return SR.list(a.getFullYear(), d).concat(SR.list(a.getFullYear() + 1, d)).filter(x => x.date >= a && x.date < b); };
+const yLabel = d => d.year === 'n12' ? 'на 12 месяцев' : String(d.year);
+const yFile = d => d.year === 'n12' ? 'na-god' : String(d.year);
+const keyOf = it => it.id + '@' + SR.iso(it.date);
+/* текст события: что это, что сделать, где подробно, откуда (правило Ирины 08.10.2026) */
+function details(it){
+  const L = [it.what];
+  if (it.todo && it.todo.length) L.push('', 'Что сделать и подготовить:', ...it.todo.map(t => '• ' + t));
+  if (it.page) L.push('', 'Подробно: ' + SR.SITE + it.page);
+  L.push('', 'Свои люди в Швейцарии · напоминание из инструмента «Обязательные сроки года в Швейцарии»: ' + TOOL_URL);
+  return L.join('\n');
+}
+const ymd = d => SR.iso(d).replace(/-/g, '');
+const icsEsc = v => String(v).replace(/\\/g, '\\\\').replace(/\n/g, '\\n').replace(/([,;])/g, '\\$1');
+function fold(line){ const out = []; let cur = '', bytes = 0; for (const ch of line) { const b = new TextEncoder().encode(ch).length; if (bytes + b > 73) { out.push(cur); cur = ' ' + ch; bytes = 1 + b; } else { cur += ch; bytes += b; } } out.push(cur); return out.join('\r\n'); }
+function ics(list, leads){
+  const stamp = new Date().toISOString().replace(/[-:]/g, '').slice(0, 15) + 'Z';
+  const L = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Svoi ludi v Shveicarii//Sroki//RU', 'CALSCALE:GREGORIAN', 'METHOD:PUBLISH', 'X-WR-CALNAME:Сроки Швейцария · Свои люди'];
+  list.forEach(it => {
+    const sum = it.ic + ' ' + it.t + ' — срок';
+    L.push('BEGIN:VEVENT', 'UID:' + it.id + '-' + ymd(it.date) + '@svoiludi.ch', 'DTSTAMP:' + stamp, 'DTSTART;VALUE=DATE:' + ymd(it.date), 'DTEND;VALUE=DATE:' + ymd(new Date(it.date.getFullYear(), it.date.getMonth(), it.date.getDate() + 1)),
+      'SUMMARY:' + icsEsc(sum), 'DESCRIPTION:' + icsEsc(details(it)), 'URL:' + (it.page ? SR.SITE + it.page : TOOL_URL), 'CATEGORIES:' + icsEsc(SR.CAT[it.cat][0]), 'TRANSP:TRANSPARENT');
+    leads.forEach(n => L.push('BEGIN:VALARM', 'ACTION:DISPLAY', 'DESCRIPTION:' + icsEsc(sum), 'TRIGGER:' + (n ? '-PT' + (n * 24 - 9) + 'H' : 'PT9H'), 'END:VALARM'));
+    L.push('END:VEVENT');
+  });
+  L.push('END:VCALENDAR');
+  return L.map(fold).join('\r\n') + '\r\n';
+}
+function gcal(it){ const p = new URLSearchParams({action: 'TEMPLATE', text: it.ic + ' ' + it.t + ' — срок', dates: ymd(it.date) + '/' + ymd(new Date(it.date.getFullYear(), it.date.getMonth(), it.date.getDate() + 1)), ctz: 'Europe/Zurich', details: details(it)}); return 'https://calendar.google.com/calendar/render?' + p.toString(); }
+function build(){
+  const d = D(), C = SH.pal(d.bw), pages = [], list = items(d).filter(it => !d.off[keyOf(it)]);
+  let P, y; const X = 12, W = 186, BOT = 282;
+  const np = () => { P = SH.page(210, 297, C); P.header('Обязательные сроки ' + yLabel(d), 'Fristen · délais · scadenze — ' + KTN(d.kt), ''); pages.push(P); y = 26; };
+  np();
+  if (!list.length) { P.text('Отметь, что касается тебя, — здесь появятся сроки.', X, y + 6, 11, false, C.mut); }
+  let mo = -1;
+  list.forEach(it => {
+    const what = SH.wrap(it.what, false, 7.6, W - 32), h = 9 + Math.min(what.length, 3) * 3.4;
+    if (it.date.getMonth() !== mo) { if (y + 12 + h > BOT) np(); mo = it.date.getMonth(); y += 2; P.text(MON[mo].toUpperCase(), X, y + 3, 9, true, C.head); y += 4; P.line(X, y, X + W, y, C.line, 0.3); y += 4; }
+    if (y + h > BOT) np();
+    const col = d.bw ? '#000000' : SR.CAT[it.cat][1];
+    P.rect(X, y - 3.6, 1.6, h - 1.5, col, null);
+    P.text(String(it.date.getDate()).padStart(2, '0') + '.' + String(it.date.getMonth() + 1).padStart(2, '0'), X + 4, y, 10, true, C.ink);
+    P.text(WD[it.date.getDay()], X + 4, y + 4, 7, false, C.mut);
+    P.text(it.t, X + 22, y, 9.4, true, C.ink);
+    what.slice(0, 3).forEach((l, i) => P.text(l, X + 22, y + 4.2 + i * 3.4, 7.6, false, C.mut));
+    y += h;
+  });
+  pages.forEach(pg => pg.foot('Напоминания по общим правилам 2026, не официальный календарь: точные даты — в письмах ведомств. Подробно о каждом сроке — на svoiludi.ch/instrumenty/sroki-goda/'));
+  return pages;
+}
+const $ = id => document.getElementById(id);
+function renderList(){
+  const d = D(), list = items(d);
+  if (!list.length) { $('list').innerHTML = '<p class="hint">Отметь, что касается тебя, — здесь появятся сроки.</p>'; return; }
+  let mo = -1, h = '';
+  list.forEach(it => {
+    if (it.date.getMonth() !== mo) { mo = it.date.getMonth(); h += '<div class="sl-m">' + MON[mo] + ' ' + it.date.getFullYear() + '</div>'; }
+    const k = keyOf(it), on = !d.off[k];
+    h += '<article class="sl"><div class="ic" aria-hidden="true">' + it.ic + '</div><div class="bd"><div class="dt">' + nice(it.date) + ' · ' + esc(SR.CAT[it.cat][0]) + '</div><h3>' + esc(it.t) + '</h3>' + (it.what ? '<p>' + esc(it.what) + '</p>' : '') +
+      (it.todo && it.todo.length ? '<ul>' + it.todo.map(t => '<li>' + esc(t) + '</li>').join('') + '</ul>' : '') +
+      '<div class="ln">' + (it.page ? '<a href="' + SR.SITE + it.page + '" target="_blank" rel="noopener">Подробно на сайте →</a>' : '') + '<a href="' + esc(gcal(it)) + '" target="_blank" rel="noopener">В Google Календарь</a><label class="inc"><input type="checkbox" data-inc="' + esc(k) + '"' + (on ? ' checked' : '') + (EX ? ' disabled' : '') + '> в мой файл календаря</label></div></div></article>';
+  });
+  $('list').innerHTML = h;
+}
+const TF = ['permit', 'pass', 'halbtax', 'steuer', 'serafe', 'ipv', 'hund', 'mfz'], SEL = ['year', 'kt', 'tax'], CB = ['emp', 'self', 'a3', 'rent', 'car'];
+const y0 = new Date().getFullYear();
+$('year').innerHTML = '<option value="n12">Ближайшие 12 месяцев</option>' + [y0, y0 + 1].map(y => `<option value="${y}">${y}</option>`).join('');
+$('kt').innerHTML = Object.keys(window.KANTONY || {ZH: 1}).sort((a, b) => KTN(a).localeCompare(KTN(b), 'ru')).map(k => `<option value="${k}">${KTN(k)}</option>`).join('');
+$('leads').innerHTML = LEADS.map(([n, t]) => `<label><input type="checkbox" data-lead="${n}"> ${t}</label>`).join('');
+function subUI(){ const d = D(), dis = EX ? ' disabled' : '';
+  $('kids').innerHTML = d.kids.map((k, i) => `<div class="kid"><div class="fl"><span class="lb">Имя (по желанию)</span><input type="text" data-k="${i}" data-f="name" value="${esc(k.name || '')}"${dis}></div><div class="fl"><span class="lb">Дата рождения</span><input type="date" data-k="${i}" data-f="born" value="${k.born || ''}"${dis}></div><div class="fl"><span class="lb">После 16 лет учится</span><select data-k="${i}" data-f="edu"${dis}><option value="y">Да</option><option value="n">Нет</option></select></div>${EX ? '' : `<button type="button" class="btn ghost sm" data-kdel="${i}">Убрать</button>`}</div>`).join('');
+  $('kids').querySelectorAll('select[data-f]').forEach(s => s.value = d.kids[+s.dataset.k].edu || 'y');
+  $('own').innerHTML = d.own.map((o, i) => `<div class="own"><div class="fl"><span class="lb">Что</span><input type="text" data-o="${i}" data-f="t" value="${esc(o.t || '')}" placeholder="Продлить страховку квартиры"${dis}></div><div class="fl"><span class="lb">Дата</span><input type="date" data-o="${i}" data-f="date" value="${o.date || ''}"${dis}></div><div class="fl"><span class="lb">Что подготовить (по желанию)</span><input type="text" data-o="${i}" data-f="note" value="${esc(o.note || '')}"${dis}></div>${EX ? '' : `<button type="button" class="btn ghost sm" data-odel="${i}">Убрать</button>`}</div>`).join('');
+  $('addKid').hidden = $('addOwn').hidden = !!EX;
+  $('leads').querySelectorAll('[data-lead]').forEach(c => { c.checked = d.leads.includes(+c.dataset.lead); c.disabled = !!EX; }); }
+let UI, tmr;
+function fill(){ const d = D(); $('bw').checked = !!d.bw; SEL.concat(TF).forEach(k => { $(k).value = d[k]; $(k).disabled = !!EX; }); CB.forEach(k => { $(k).checked = !!d[k]; $(k).disabled = !!EX; });
+  subUI(); renderList(); $('exbar').hidden = !EX; $('exOn').hidden = !!EX; if (UI) UI.render(); }
+const upd = () => { save(); renderList(); clearTimeout(tmr); tmr = setTimeout(() => UI && UI.render(), 300); };
+$('bw').addEventListener('change', e => { S.bw = e.target.checked; if (EX) EX.bw = S.bw; save(); fill(); });
+SEL.forEach(k => $(k).addEventListener('change', e => { if (EX) { if (k === 'year') { EX.year = e.target.value === 'n12' ? 'n12' : +e.target.value; fill(); } return; } S[k] = k === 'year' ? (e.target.value === 'n12' ? 'n12' : +e.target.value) : e.target.value; if (k === 'kt') { try { localStorage.setItem('svoiludi.kanton', S.kt); } catch (er) {} } upd(); }));
+TF.forEach(k => $(k).addEventListener('change', e => { if (EX) return; S[k] = e.target.value; upd(); }));
+CB.forEach(k => $(k).addEventListener('change', e => { if (EX) return; S[k] = e.target.checked; upd(); }));
+$('leads').addEventListener('change', e => { const c = e.target; if (EX || !c.dataset.lead) return; const n = +c.dataset.lead; S.leads = S.leads.filter(x => x !== n); if (c.checked) S.leads.push(n); S.leads.sort((a, b) => b - a); save(); });
+$('kids').addEventListener('change', e => { const x = e.target; if (EX || !x.dataset.f) return; S.kids[+x.dataset.k][x.dataset.f] = x.value; upd(); });
+$('own').addEventListener('change', e => { const x = e.target; if (EX || !x.dataset.f) return; S.own[+x.dataset.o][x.dataset.f] = x.value; upd(); });
+document.addEventListener('click', e => { const a = e.target.closest('[data-kdel]'), b = e.target.closest('[data-odel]'); if (EX) return;
+  if (a) { S.kids.splice(+a.dataset.kdel, 1); save(); fill(); } if (b) { S.own.splice(+b.dataset.odel, 1); save(); fill(); } });
+$('addKid').addEventListener('click', () => { S.kids.push({name: '', born: '', edu: 'y'}); save(); fill(); });
+$('addOwn').addEventListener('click', () => { S.own.push({t: '', date: '', note: ''}); save(); fill(); });
+$('list').addEventListener('change', e => { const c = e.target; if (!c.dataset.inc || EX) return; if (c.checked) delete S.off[c.dataset.inc]; else S.off[c.dataset.inc] = 1; save(); clearTimeout(tmr); tmr = setTimeout(() => UI && UI.render(), 300); });
+$('ics').addEventListener('click', () => { const d = D(), list = items(d).filter(it => !d.off[keyOf(it)]); const st = $('status');
+  if (!list.length) { st.textContent = 'Нет сроков для календаря — отметь, что касается тебя.'; return; }
+  const blob = new Blob([ics(list, d.leads)], {type: 'text/calendar;charset=utf-8'}), a = document.createElement('a');
+  a.href = URL.createObjectURL(blob); a.download = 'Сроки-Швейцария-' + yFile(d) + '.ics'; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 4000);
+  st.textContent = 'Файл скачан: ' + list.length + ' сроков. Открой его — календарь предложит добавить. Как это сделать в Google — нажми «?» рядом с кнопкой.'; });
+const EXD = () => { const y = +D().year || new Date().getFullYear() + (new Date().getMonth() >= 9 ? 1 : 0); return Object.assign(blank(), {bw: S.bw, year: y, kt: 'ZH', tax: 'decl', emp: true, a3: true, rent: true, car: true, permit: (y) + '-08-31', pass: (y + 1) + '-02-15', steuer: y + '-09-30', serafe: y + '-04-20',
+  kids: [{name: 'Мария', born: (y - 16) + '-05-12', edu: 'y'}, {name: 'Лев', born: (y - 9) + '-11-03', edu: 'y'}], own: [{t: 'Продлить страховку квартиры (Hausrat)', date: y + '-06-30', note: 'Сравнить цены до расторжения'}], leads: [14, 1]}); };
+$('exOn').addEventListener('click', () => { EX = EXD(); fill(); window.scrollTo({top: $('exbar').offsetTop - 12, behavior: 'smooth'}); });
+$('exOff').addEventListener('click', () => { EX = null; fill(); });
+if (/[?&]example\b/.test(location.search)) EX = EXD();
+UI = SH.mount({build, title: 'Обязательные сроки года', name: () => 'Sroki-' + yFile(D())});
+fill();
+
+</script>
+<script src="/assets/help.js"></script>
+<script src="/assets/backup.js"></script>
+<script src="/assets/pdffan.js" defer></script>
+<script src="/assets/share.js" defer></script>
+<script src="/assets/samesite.js"></script>
+</body>
+</html>
