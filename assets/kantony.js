@@ -355,3 +355,34 @@ window.KANTONY = {
 "fb": []
 }
 };
+
+/* Дежурный врач, когда не угроза жизни (проверено 08.10.2026 по сайтам кантонов и врачебных обществ).
+   l — номера [название, номер, пометка]; r — номер зависит от региона; u — официальная страница. Обновлять раз в год. */
+window.KANTONY_MED = {
+"ZH": {"l": [["Ärztefon", "0800 33 66 55", "бесплатно, круглосуточно, там же дежурный стоматолог и аптека"]], "u": "https://www.zh.ch/de/gesundheit/notfall-rettung.html"},
+"BE": {"l": [["Medphone", "0900 57 67 47", "платный, 3.23 фр. в минуту"]], "u": "https://www.medphone.ch/home/"},
+"LU": {"l": [["Medphone", "0900 11 14 14", "платный, 3.23 фр. в минуту"]], "u": "https://www.medphone.ch/home/"},
+"UR": {"l": [["Hausärztlicher Notfalldienst", "041 870 03 03", "скажут, какой врач дежурит, ночью соединят с больницей Uri"]], "u": "https://www.ur.ch/_doc/311728"},
+"SZ": {"r": 1, "l": [["Küssnacht", "0840 61 61 61", ""], ["Arth, Goldau, Lauerz, Steinen, Steinerberg", "0840 71 71 71", ""], ["Schwyz, Ingenbohl, Gersau, Muotathal, Morschach, Sattel", "0840 31 31 31", ""], ["Einsiedeln, Iberg, Alpthal, Rothenthurm", "0840 41 41 41", ""], ["Freienbach, Wollerau, Feusisberg", "0840 81 81 81", ""], ["Lachen, Altendorf, Galgenen, Wangen, Tuggen, Reichenburg", "0840 51 51 51", ""], ["Стоматолог, Ausserschwyz", "0840 840 810", ""], ["Стоматолог, Innerschwyz", "0840 800 810", ""]], "u": "https://www.sz.ch/notfall"},
+"OW": {"l": [], "u": "https://www.ow.ch/familie/210"},
+"NW": {"l": [["Hausärztlicher Notfalldienst", "041 610 81 61", "соединят с дежурной практикой"]], "u": "https://www.spital-nidwalden.ch/standorte/hausarzt-notfallpraxis"},
+"GL": {"r": 1, "l": [["Glarus Nord", "0844 33 66 33", ""], ["Glarus", "0844 44 66 44", ""], ["Glarus Süd", "0844 55 66 55", ""]], "u": "https://www.gl.ch/public/upload/assets/20963/190626%20Medienmitteilung%20Neuerungen%20im%20Glarner%20Gesundheitswesen.pdf"},
+"ZG": {"l": [["Ärztlicher Notfalldienst", "0900 008 008", "платный, 3.23 фр. в минуту"], ["Стоматолог", "0844 22 40 44", "вечером, в выходные и праздники"]], "u": "https://zg.ch/de/gesundheit/notfall-und-rettungsdienst/verhalten-im-notfall"},
+"FR": {"l": [["Médecin de garde", "0800 170 171", "один номер для всех округов"], ["Дети", "0900 268 001", "платный, 3 фр. в минуту"]], "u": "https://www.fr.ch/hello-fribourg/la-sante/les-numeros-durgence-et-les-medecins"},
+"SO": {"l": [["Kantonale Notfallzentrale", "0848 112 112", "если свой врач недоступен"]], "u": "https://gaeso.ch/notfallnummern-2/"},
+"BS": {"l": [["Medizinische Notrufzentrale", "061 261 15 15", "бесплатная медицинская консультация"]], "u": "https://www.bs.ch/themen/gesundheit/krank-sein-und-medizinischer-notfall/wohin-wende-ich-mich-wenn-ich-krank-bin"},
+"BL": {"l": [["Medizinische Notrufzentrale", "061 261 15 15", ""]], "u": "https://www.baselland.ch/politik-und-behorden/direktionen/volkswirtschafts-und-gesundheitsdirektion/amt-fur-gesundheit/medizinische-dienste/kantonsaerztlicher-dienst/im-notfall"},
+"SH": {"l": [["Ärztlicher Notfalldienst", "052 634 34 00", "назовут дежурного врача, стоматолога и аптеку"]], "u": "https://aerzte-schaffhausen.ch/notfalldienst/"},
+"AR": {"l": [["Медицинская консультация", "0844 55 00 55", "подскажут, куда обратиться"]], "u": "https://ar.ch/verwaltung/departement-gesundheit-und-soziales/amt-fuer-soziales/abteilung-chancengleichheit/willkommen-im-kanton-appenzell-ausserrhoden/gesundheit/notfallnummern"},
+"AI": {"l": [["Ärztlicher Notfalldienst", "071 788 73 34", "круглосуточно"], ["Oberegg", "0844 00 11 22", ""]], "u": "https://www.ai.ch/verwaltung/gesundheits-und-sozialdepartement/aktuelles/neue-telefonnummer-fuer-den-aerztlichen-notfalldienst-im-inneren-landesteil"},
+"SG": {"r": 1, "l": [["St. Gallen, Gossau, Rorschach", "0900 144 144", "платный"], ["Rheintal", "0842 144 441", ""], ["Werdenberg", "0900 740 742", "платный"], ["Sarganserland", "0900 740 743", "платный"], ["Wil, Uzwil, Flawil", "071 914 61 11", ""], ["Toggenburg", "071 987 33 00", ""], ["Rapperswil-Jona", "0848 144 111", ""], ["Uznach, Kaltbrunn, Amden", "0848 144 222", ""], ["Дети, весь кантон", "0900 144 100", "платный"], ["Стоматолог", "0844 144 001", "круглосуточно"]], "u": "https://www.hallo.sg.ch/de/gesundheit/medizinische-hilfe.html"},
+"GR": {"r": 1, "l": [], "u": "https://www.buendneraerzteverein.ch/de/patienten/notfallnummern.htm"},
+"AG": {"l": [["Ärztlicher Notfalldienst", "0900 401 501", "медицинская консультация"]], "u": ""},
+"TG": {"r": 1, "l": [["Восток кантона", "058 345 28 58", "Kantonale Notrufzentrale"], ["Запад, Frauenfeld", "058 144 77 77", "Notfallpraxis Frauenfeld"]], "u": "https://www.aerzte-tg.ch/de/notfalldienst/regionale-notfallkreise.html/90"},
+"TI": {"l": [["Ticino Soccorso", "091 800 18 28", "медицинский совет ночью, с 19 до 7"]], "u": "https://www.eoc.ch/en/patients/emergency-information.html"},
+"VD": {"l": [["Centrale des médecins de garde", "0848 133 133", "врач, педиатр, аптека, психиатрия, стоматолог"]], "u": "https://www.vd.ch/toutes-les-actualites/communiques-de-presse/detail/communique/le-canton-de-vaud-introduit-le-numero-centralise-0848-133-133-1133200018/"},
+"VS": {"l": [["Urgences non vitales", "0848 200 300", "с 1.9.2025, по обычному тарифу"]], "u": "https://latele.ch/articles/un-numero-unique-pour-les-urgences-medicales-non-vitales-en-valais"},
+"NE": {"l": [["Médecin de garde", "0848 134 134", "врач, аптека, стоматолог"]], "u": "https://www.vaudfamille.ch/N210072/urgences.html"},
+"GE": {"l": [["SOS Médecins", "022 748 49 50", "врач приедет домой, круглосуточно"], ["HUG, взрослые", "022 372 81 20", "отделение срочной помощи, круглосуточно"], ["HUG, дети до 15 лет", "022 372 45 55", "круглосуточно"]], "u": "https://www.ge.ch/document/4185/telecharger"},
+"JU": {"l": [["Médecin de garde", "058 733 00 00", "один номер на весь кантон"], ["Стоматолог", "032 466 34 34", ""]], "u": "https://www.jura.ch/fr/Autorites/Administration/CHA/SIC/Urgences/Numeros-d-urgence-Urgence.html"}
+};
