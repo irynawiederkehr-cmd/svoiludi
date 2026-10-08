@@ -350,7 +350,7 @@ const EXD = () => Object.assign(blank(), {kt: S.kt || 'ZH', lang: S.kt ? langOf(
 $('exOn').addEventListener('click', () => { EX = EXD(); fill(); window.scrollTo({top: $('exbar').offsetTop - 12, behavior: 'smooth'}); });
 $('exOff').addEventListener('click', () => { EX = null; fill(); });
 if (/[?&]example\b/.test(location.search)) EX = EXD();
-UI = SH.mount({build, title: 'Arbeitsvertrag', name: () => ({de: 'Arbeitsvertrag-Kinderbetreuung', fr: 'Contrat-garde-enfants', it: 'Contratto-custodia-bambini'}[D().lang] || 'Arbeitsvertrag')});
+UI = SH.mount({build, lang: () => D().lang, title: 'Arbeitsvertrag', name: () => ({de: 'Arbeitsvertrag-Kinderbetreuung', fr: 'Contrat-garde-enfants', it: 'Contratto-custodia-bambini'}[D().lang] || 'Arbeitsvertrag')});
 fill();
 
 </script>

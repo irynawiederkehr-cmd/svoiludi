@@ -398,7 +398,7 @@ function EXD(){
 $('exOn').addEventListener('click', () => { EX = EXD(); EX.doc = S.doc; F = null; EDIT = null; FILT = ''; fill(); window.scrollTo({top: $('exbar').offsetTop - 12, behavior: 'smooth'}); });
 $('exOff').addEventListener('click', () => { EX = null; F = null; fill(); });
 if (/[?&]example\b/.test(location.search)) EX = EXD();
-UI = SH.mount({build, title: 'Доходы и расходы', name: () => (D().doc === 'quit' ? 'Quittungen-' : 'Einnahmen-Ausgaben-') + D().year});
+UI = SH.mount({build, lang: () => D().lang, title: 'Доходы и расходы', name: () => (D().doc === 'quit' ? 'Quittungen-' : 'Einnahmen-Ausgaben-') + D().year});
 fill();
 
 </script>

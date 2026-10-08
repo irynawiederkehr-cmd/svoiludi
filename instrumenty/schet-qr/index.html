@@ -185,7 +185,7 @@ function qrMatrix(text){ if (!window.qrcode) return null; qrcode.stringToBytes =
 
 /* ---------- лист: счёт сверху, QR-квитанция внизу (105 мм) ---------- */
 function sheet(d){
-  const C = SH.pal(false), P = SH.page(210, 297, C), L = LBL[d.lang], m = d.me, c = d.cl, t = totals(d), H = 'h', ink = '#000000';
+  const C = SH.pal(false), P = SH.page(210, 297, C), L = LBL[d.lang], m = d.me, c = d.cl, t = totals(d), H = 'h', ink = '#000000'; P.wmMaxY = 186; P.creditY = 187;
   const tx = (s, x, y, size, b, align) => P.text(s, x, y, size, b, ink, align, H);
   // отправитель
   let y = 20;
@@ -309,7 +309,7 @@ function qrState(){ const d = D(), ok = !EX && S.qrok === qrSig(d) && !!clean(d.
   $('qrst').textContent = EX ? 'В примере проверка не нужна.' : ok ? 'Проверено для этого IBAN, имени и адреса. Если что-то из этого поменяешь, проверь снова.' : S.qrok ? 'Ты поменяла IBAN, имя или адрес — проверь QR-код ещё раз.' : 'Ещё не проверено.'; }
 $('qrok').addEventListener('change', e => { S.qrok = e.target.checked ? qrSig(S) : ''; save(); qrState(); });
 $('pdf').addEventListener('click', () => { if (!EX && S.qrok !== qrSig(S)) { $('qrcheck').classList.add('warn'); setTimeout(() => { const st = $('status'); if (st) st.textContent = 'PDF скачан. Перед отправкой клиенту отсканируй QR-код своим банковским приложением и сверь данные — шаги в жёлтом блоке.'; }, 1500); } });
-UI = SH.mount({build, title: 'Счёт с QR-кодом', name: () => 'Rechnung-' + String(D().nr || '').replace(/[^\w-]/g, '')});
+UI = SH.mount({build, lang: () => D().lang, title: 'Счёт с QR-кодом', name: () => 'Rechnung-' + String(D().nr || '').replace(/[^\w-]/g, '')});
 fill();
 
 </script>
