@@ -186,22 +186,22 @@ const FIELDS = ['arzt','arztTel','kid','kidTel','kasse','nr','tele','apo','p1','
 /* Тексты карточки на всех языках. ru — язык сайта (на украинской странице переводится). */
 const L = {
   ru: {title:'Экстренные номера', sos:'Угроза жизни — звони сразу', doc:'Нужен врач, но не угроза жизни', me:'Мои номера', kt:'Кантон',
-    s144:'Скорая помощь', s117:'Полиция', s118:'Пожарные', s112:'Общий экстренный номер', s1414:'Rega, вертолёт', s145:'Отравления', s143:'Если тяжело на душе', s147:'Детям и подросткам',
+    s144:'Скорая помощь', s117:'Полиция', s118:'Пожарные', s112:'Общий экстренный номер', s1414:'Rega, вертолёт', s145:'Отравления', s143:'Если тяжело на душе', s142:'Помощь пострадавшим от насилия', s147:'Детям и подросткам',
     arzt:'Семейный врач', kid:'Педиатр', kasse:'Касса и номер', tele:'Телемедицина кассы', apo:'Аптека', p:'Близкий человек', adr:'Адрес', allerg:'Аллергии, лекарства', region:'Номер своего региона',
     say:'Скажи: где ты, что случилось, сколько пострадавших, кто звонит. Не клади трубку первой.', cut:'Вырежи по пунктиру: в кошелёк, на холодильник, няне, в машину.',
     disc:'Образец для личного использования, не официальный документ. Номера проверены 08.10.2026, перепроверяй сама. svoiludi.ch'},
   de: {title:'Notfallnummern', sos:'Lebensgefahr – sofort anrufen', doc:'Arzt nötig, keine Lebensgefahr', me:'Meine Kontakte', kt:'Kanton',
-    s144:'Sanität', s117:'Polizei', s118:'Feuerwehr', s112:'Euro-Notruf', s1414:'Rega, Helikopter', s145:'Vergiftung (Tox Info)', s143:'Die Dargebotene Hand', s147:'Pro Juventute, Kinder und Jugendliche',
+    s144:'Sanität', s117:'Polizei', s118:'Feuerwehr', s112:'Euro-Notruf', s1414:'Rega, Helikopter', s145:'Vergiftung (Tox Info)', s143:'Die Dargebotene Hand', s142:'Opferhilfe bei Gewalt', s147:'Pro Juventute, Kinder und Jugendliche',
     arzt:'Hausarzt', kid:'Kinderarzt', kasse:'Krankenkasse und Nr.', tele:'Telemedizin der Kasse', apo:'Apotheke', p:'Kontaktperson', adr:'Adresse', allerg:'Allergien, Medikamente', region:'Nummer meiner Region',
     say:'Sagen: Wo? Was ist passiert? Wie viele Verletzte? Wer ruft an? Nicht zuerst auflegen.', cut:'Entlang der gestrichelten Linie ausschneiden.',
     disc:'Muster zur Orientierung und für den persönlichen Gebrauch, kein amtliches Dokument. Angaben ohne Gewähr, bitte selbst prüfen.'},
   fr: {title:'Numéros d’urgence', sos:'Danger de mort – appeler tout de suite', doc:'Besoin d’un médecin, pas de danger de mort', me:'Mes contacts', kt:'Canton',
-    s144:'Ambulance', s117:'Police', s118:'Pompiers', s112:'Numéro d’urgence européen', s1414:'Rega, hélicoptère', s145:'Intoxication (Tox Info)', s143:'La Main Tendue', s147:'Pro Juventute, enfants et jeunes',
+    s144:'Ambulance', s117:'Police', s118:'Pompiers', s112:'Numéro d’urgence européen', s1414:'Rega, hélicoptère', s145:'Intoxication (Tox Info)', s143:'La Main Tendue', s142:'Aide aux victimes de violence', s147:'Pro Juventute, enfants et jeunes',
     arzt:'Médecin de famille', kid:'Pédiatre', kasse:'Caisse maladie et n°', tele:'Télémédecine de la caisse', apo:'Pharmacie', p:'Personne de contact', adr:'Adresse', allerg:'Allergies, médicaments', region:'Numéro de ma région',
     say:'Dire : Où ? Que s’est-il passé ? Combien de blessés ? Qui appelle ? Ne pas raccrocher en premier.', cut:'Découper le long des pointillés.',
     disc:'Modèle indicatif pour usage personnel, pas un document officiel. Données sans garantie, à vérifier soi-même.'},
   it: {title:'Numeri d’emergenza', sos:'Pericolo di vita – chiamare subito', doc:'Serve un medico, nessun pericolo di vita', me:'I miei contatti', kt:'Cantone',
-    s144:'Ambulanza', s117:'Polizia', s118:'Pompieri', s112:'Numero d’emergenza europeo', s1414:'Rega, elicottero', s145:'Avvelenamento (Tox Info)', s143:'Telefono Amico', s147:'Pro Juventute, bambini e giovani',
+    s144:'Ambulanza', s117:'Polizia', s118:'Pompieri', s112:'Numero d’emergenza europeo', s1414:'Rega, elicottero', s145:'Avvelenamento (Tox Info)', s143:'Telefono Amico', s142:'Aiuto alle vittime di violenza', s147:'Pro Juventute, bambini e giovani',
     arzt:'Medico di famiglia', kid:'Pediatra', kasse:'Cassa malati e n.', tele:'Telemedicina della cassa', apo:'Farmacia', p:'Persona di contatto', adr:'Indirizzo', allerg:'Allergie, medicamenti', region:'Numero della mia regione',
     say:'Dire: Dove? Cosa è successo? Quanti feriti? Chi chiama? Non riattaccare per primi.', cut:'Ritagliare lungo la linea tratteggiata.',
     disc:'Modello indicativo per uso personale, non un documento ufficiale. Dati senza garanzia, da verificare personalmente.'}
@@ -211,7 +211,7 @@ const TR = [['Дети, весь кантон', ['Kinder, ganzer Kanton', 'Enfan
   ['Восток кантона', ['Thurgau Ost', 'Thurgovie est', 'Turgovia est']], ['Запад', ['West', 'Ouest', 'Ovest']], ['Медицинская консультация', ['Medizinische Beratung', 'Conseil médical', 'Consulenza medica']],
   ['взрослые', ['Erwachsene', 'adultes', 'adulti']], ['дети до 15 лет', ['Kinder bis 15', 'enfants jusqu’à 15 ans', 'bambini fino a 15 anni']]];
 const tr = (s, lg) => { const i = {de: 0, fr: 1, it: 2}[lg]; if (i === undefined) return s; TR.forEach(([a, b]) => { s = s.split(a).join(b[i]); }); return s; };
-const SOS = ['144', '117', '118', '112', '1414', '145', '143', '147'];
+const SOS = ['144', '117', '118', '112', '1414', '145', '143', '147', '142'];
 
 let S = load(), EX = null;
 function blank(){ return {k: '', lang: 'bi', fmt: 'four', bw: false, blank: true, rows: {}, me: {}}; }
@@ -251,10 +251,10 @@ function card(d, x, y, w, sc, big){
   // угроза жизни: две колонки
   head('sos');
   const colW = iw / 2, nW = tw('1414', true, 10.5 * sc) + 2.2 * sc;
-  for (let r = 0; r < 4; r++) {
+  for (let r = 0; r < Math.ceil(SOS.length / 2); r++) {
     let rowH = 0;
     [0, 1].forEach(c => {
-      const num = SOS[r * 2 + c], xx = x + pad + c * colW;
+      const num = SOS[r * 2 + c], xx = x + pad + c * colW; if (!num) return;
       text(num, xx, cy + 1 * sc, (num.length > 3 ? 10.5 : 12.5) * sc, true, num === '144' || num === '112' ? C.red : C.num);
       const l1 = wrap(t1('s' + num), true, 6.6 * sc, colW - nW - 2 * sc), l2 = two ? wrap(t2('s' + num), false, 5.8 * sc, colW - nW - 2 * sc) : [];
       let yy = cy - 1.0 * sc;
