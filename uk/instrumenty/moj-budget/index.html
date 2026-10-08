@@ -344,7 +344,7 @@ body:not(.duo) .r .who,body:not(.duo) .rh .whoh{display:none}
     <div data-fan="moj-budget"></div>
   </header>
 
-  <div class="disc" role="note"><b>Важливо</b><span>Це орієнтир, а не точний розрахунок. Суми, податки й внески тут приблизні й залежать від кантону, громади, твоїх відрахувань і договорів. Усі цифри уточнюй за своїми рахунками й договорами, у податковій службі, у касі AHV або в податкового консультанта. Інструмент не замінює фінансової та податкової консультації. Автор не несе відповідальності за достовірність даних. Усі суми, ставки й відсотки обов’язково перевір і впиши сама чи сам за своїми документами.</span></div>
+  <div class="disc" role="note"><b>Важливо</b><span>Це орієнтир, а не точний розрахунок. Суми, податки й внески тут приблизні й залежать від кантону, громади, твоїх відрахувань і договорів. Усі цифри уточнюй за своїми рахунками й договорами, у податковій службі, у касі AHV або в податкового консультанта. Інструмент не замінює фінансової та податкової консультації. Автор не несе відповідальності за достовірність даних. Усі суми, ставки й відсотки обов’язково перевір і впиши сама чи сам за своїми документами. Це зразок для прикладу й особистого користування, а не офіційний документ.</span></div>
 
   <section class="howto" aria-labelledby="ht-h">
     <h2 id="ht-h">Як користуватися</h2>
@@ -522,7 +522,7 @@ body:not(.duo) .r .who,body:not(.duo) .rh .whoh{display:none}
     <p class="src">Орієнтири для прикладу: середні премії медичного страхування 2026 і 2027 за даними <a href="https://www.bag.admin.ch/de/newnsb/BfuGvedj0OOX" target="_blank" rel="noopener">BAG</a>, збір Serafe 335 CHF у 2026 і 312 CHF з 2027 року, ціни GA і Halbtax з грудня 2026 за даними <a href="https://www.mobilityblog.ch/oev-preise-2027-ga-steigt/" target="_blank" rel="noopener">галузі громадського транспорту</a>. Це не фінансова й не податкова консультація, а інструмент для твого власного планування. Усі суми уточнюй за своїми рахунками та в офіційних службах. Автор не несе відповідальності за достовірність даних. Усі суми, ставки й відсотки обов’язково перевір і впиши сама або сам за своїми документами.</p>
   </section>
 
-  <div class="disc" role="note"><b>Важливо</b><span>Усі дані на цій сторінці орієнтовні. Уточнюй і перевіряй їх. Автор не несе відповідальності за достовірність даних. Усі суми, ставки й відсотки обов’язково перевір і впиши сама або сам за своїми документами.</span></div>
+  <div class="disc" role="note"><b>Важливо</b><span>Усі дані на цій сторінці орієнтовні. Уточнюй і перевіряй їх. Автор не несе відповідальності за достовірність даних. Усі суми, ставки й відсотки обов’язково перевір і впиши сама або сам за своїми документами. Це зразок для прикладу й особистого користування, а не офіційний документ.</span></div>
 
   <p class="credit"><span>Ірина Вознесенська · коуч</span><a href="https://www.instagram.com/iryna.voznesenskaya/" target="_blank" rel="noopener">Instagram @iryna.voznesenskaya</a><a href="https://voznesenskaya.ch/uk/" target="_blank" rel="noopener">voznesenskaya.ch</a><a href="https://svoiludi.ch/uk/" target="_blank" rel="noopener">Свої люди у Швейцарії · svoiludi.ch</a><a href="https://svoiludi.ch/uk/privacy/">Політика конфіденційності</a></p>
 </div>
@@ -1876,7 +1876,7 @@ function drawReport(){
   const tableHead = () => { c.fillStyle = PC.muted; c.font = '800 28px Manrope, sans-serif'; let x = PM;
     cols.forEach(col => { if (col.r){ c.textAlign = 'right'; c.fillText(col.t.toUpperCase(), x + col.w - (col.last ? 0 : 50), y); c.textAlign = 'left'; } else c.fillText(col.t.toUpperCase(), x, y); x += col.w; }); y += 30; };
   next();
-  const bottom = PH - 230;
+  const bottom = PH - 260;
   if (S.inc.length){
     c.fillStyle = PC.ink; c.font = '90px Forum, Georgia, serif'; c.fillText('Мої доходи', PM, y + 50); y += 140;
     const icols = withWho([{t:'Дохід', w:800}, {t:'Сума', w:200, r:1}, {t:'Як часто', w:340}, {t:'Місяць', w:250}, {t:'Як надходить', w:270, tag:1}, {t:'На місяць', w:170, r:1, b:1}, {t:'На рік', w:150, r:1, b:1, last:1}]);
@@ -1952,7 +1952,8 @@ function drawReport(){
   y += 40; c.fillStyle = PC.muted; c.font = '500 28px Manrope, sans-serif';
   if (y < bottom) c.fillText('Суми-орієнтири взято з відкритих даних. Це інструмент для твого планування, а не фінансова консультація.', PM, y);
   pages.forEach(p => { const cc = p.getContext('2d'); cc.fillStyle = '#7A6E62'; cc.font = 'italic 500 26px Manrope, sans-serif';
-    cc.fillText('Орієнтир, а не точний розрахунок. Усе уточнюй і перевіряй. Автор не несе відповідальності за достовірність даних.', PM, PH - 175); });
+    cc.fillText('Орієнтир, а не точний розрахунок. Усе уточнюй і перевіряй. Автор не несе відповідальності за достовірність даних.', PM, PH - 205);
+    cc.fillText('Це зразок для прикладу й особистого користування, а не офіційний документ.', PM, PH - 172); });
   pages.forEach((p, i) => footer(p, i + 1, pages.length));
   pages.forEach(p => WM(p, 'svoiludi.ch'));
   return pages;

@@ -53,6 +53,8 @@ select:focus-visible,input:focus-visible,button:focus-visible,a:focus-visible{ou
 @keyframes shine{0%{background-position:130% 0}60%,100%{background-position:-30% 0}}
 @media (prefers-reduced-motion: reduce){.btn{animation:none}}
 .spacer{flex:1 1 auto}
+.plang{display:flex;align-items:center;gap:8px;font-size:.86rem;font-weight:700;color:var(--muted)}
+.plang select{padding:7px 10px;font-size:.88rem;max-width:100%}
 .confirm{display:flex;gap:8px;align-items:center;flex-wrap:wrap;background:var(--paper);border:1.5px solid var(--line);border-radius:18px;padding:6px 6px 6px 14px;font-size:.88rem;font-weight:600}
 .status{font-size:.86rem;color:var(--muted);min-height:1.3em}
 .jump{font-weight:700;color:var(--brown);text-underline-offset:4px}
@@ -303,6 +305,7 @@ h2 .qh{vertical-align:.25em}
   .bar .spacer{display:none}
   .bar>.btn{flex:1 1 calc(50% - 4px);padding:10px 8px;text-align:center}
   .bar>#shareBtn{flex-basis:100%}
+  .plang{flex:1 1 100%;min-width:0;flex-wrap:wrap;gap:6px}.plang select{flex:1 1 100%;width:100%;min-width:0}
   #clearBox{display:flex;gap:8px;width:100%;flex-wrap:wrap}
   #clearBox>.btn{flex:1 1 calc(50% - 4px);padding:9px 6px;font-size:.8rem;white-space:nowrap}
   .monthnav{width:100%;display:grid;grid-template-columns:1fr 1fr;gap:8px}
@@ -336,6 +339,7 @@ h2 .qh{vertical-align:.25em}
       <button class="mbtn" id="nextM" type="button">Наступний місяць →</button>
     </div>
     <span class="spacer"></span>
+    <label class="plang"><span class="fl">Мова PDF<button type="button" class="qh" data-help="pdfLang" aria-label="Підказка: Мова PDF" aria-expanded="false">?</button></span><select id="fPdfLang"></select></label>
     <button class="btn gold" id="dlPdf" type="button">Завантажити PDF</button>
     <button class="btn" id="dlXlsx" type="button" hidden style="display:none" data-vip="1" aria-expanded="false" aria-controls="vipPanel">Excel для VIP</button>
     <button class="btn free" id="shareBtn" type="button" aria-expanded="false" aria-controls="sharePanel">Поділитися з друзями</button>
@@ -429,7 +433,7 @@ h2 .qh{vertical-align:.25em}
     <p class="hint" style="margin-top:10px">Якщо в один день було кілька підходів, наприклад зранку, вдень і ввечері, натисни «+ Ще період» стільки разів, скільки треба. Години всіх періодів додадуться. Час після півночі рахується правильно, наприклад з 22:00 до 06:00. Відпустка, хвороба й оплачувана відсутність зараховуються як звичайний день за планом. Якщо тебе не було лише пів дня чи кілька годин, обери «Пів дня» або «Частина дня» й впиши час, коли ти працювала або працював. Рожевим позначені свята кантону, зеленою смужкою ліворуч шкільні канікули.</p>
   </section>
 
-  <div class="disc" role="note"><b>Важливо</b><span>Це орієнтир, а не точний розрахунок. План годин, надурочні, надбавка за відпустку й сума до виплати залежать від твого договору, колективного договору (GAV) та закону. Усі цифри звіряй зі своїм договором і розрахунковим листком, уточнюй у роботодавця, у профспілці або в консультанта. Автор не відповідає за достовірність даних. Усі години, ставки й відсотки обов’язково перевір і впиши сама або сам за своїми документами.</span></div>
+  <div class="disc" role="note"><b>Важливо</b><span>Це орієнтир, а не точний розрахунок. План годин, надурочні, надбавка за відпустку й сума до виплати залежать від твого договору, колективного договору (GAV) та закону. Усі цифри звіряй зі своїм договором і розрахунковим листком, уточнюй у роботодавця, у профспілці або в консультанта. Автор не відповідає за достовірність даних. Усі години, ставки й відсотки обов’язково перевір і впиши сама або сам за своїми документами. Це зразок для прикладу й особистого користування, а не офіційний документ.</span></div>
 
   <section class="guide" id="guide" aria-labelledby="g-why">
     <div>
@@ -480,7 +484,7 @@ h2 .qh{vertical-align:.25em}
     </div>
   </section>
 
-  <div class="disc" role="note"><b>Важливо</b><span>Усі дані на цій сторінці орієнтовні. Уточнюй і перевіряй їх. Автор не несе відповідальності за достовірність даних. Усі години, ставки й відсотки обов’язково перевір і впиши сама або сам за своїми документами.</span></div>
+  <div class="disc" role="note"><b>Важливо</b><span>Усі дані на цій сторінці орієнтовні. Уточнюй і перевіряй їх. Автор не несе відповідальності за достовірність даних. Усі години, ставки й відсотки обов’язково перевір і впиши сама або сам за своїми документами. Це зразок для прикладу й особистого користування, а не офіційний документ.</span></div>
   <p class="credit"><span>Ірина Вознесенська · коуч</span><a href="https://www.instagram.com/iryna.voznesenskaya/" target="_blank" rel="noopener">Instagram @iryna.voznesenskaya</a><a href="https://voznesenskaya.ch/uk/" target="_blank" rel="noopener">voznesenskaya.ch</a><a href="https://svoiludi.ch/uk/" target="_blank" rel="noopener">Свої люди у Швейцарії · svoiludi.ch</a><a href="https://svoiludi.ch/uk/privacy/">Політика конфіденційності</a></p>
 </div>
 
@@ -518,6 +522,69 @@ const what = () => (S.set.what || '').trim();
 const tname = k => k === 'work' ? (what() || 'Робота') : TYPES[k].n;
 const tshort = k => k === 'work' ? (what() || 'Робота') : SHORT[k];
 const SHORT = {work:'Робота', vac:'Відпустка', sick:'Хвороба', paid:'Оплач. відсутність', comp:'Відгул', unpaid:'Неоплач. відпустка', hol:'Свято', off:'Вихідний'};
+
+/* ---------- язык документа для работодателя или клиента (PDF) ----------
+   По умолчанию язык кантона. Немецкий, французский и итальянский — для документов, которые читают в Швейцарии. */
+const CANT_LANG = {FR:'fr', VS:'fr', GE:'fr', VD:'fr', NE:'fr', JU:'fr', TI:'it'};
+const cantLang = c => CANT_LANG[c] || 'de';
+const PDF_LANGS = {site:'Мовою сайту · українська', de:'Deutsch · німецька', fr:'Français · французька', it:'Italiano · італійська'};
+const PDF_LANG_CANT = ', мова кантону';
+const PDF_LANG_SAY = {site:'мовою сайту', de:'німецькою', fr:'французькою', it:'італійською'};
+const DOCL = {
+  de: {loc:'de-CH', months:['Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'], wd:['So','Mo','Di','Mi','Do','Fr','Sa'],
+    canton:{ZH:'Kanton Zürich',BE:'Kanton Bern',LU:'Kanton Luzern',UR:'Kanton Uri',SZ:'Kanton Schwyz',OW:'Kanton Obwalden',NW:'Kanton Nidwalden',GL:'Kanton Glarus',ZG:'Kanton Zug',FR:'Kanton Freiburg',SO:'Kanton Solothurn',BS:'Kanton Basel-Stadt',BL:'Kanton Basel-Landschaft',SH:'Kanton Schaffhausen',AR:'Kanton Appenzell Ausserrhoden',AI:'Kanton Appenzell Innerrhoden',SG:'Kanton St. Gallen',GR:'Kanton Graubünden',AG:'Kanton Aargau',TG:'Kanton Thurgau',TI:'Kanton Tessin',VD:'Kanton Waadt',VS:'Kanton Wallis',NE:'Kanton Neuenburg',GE:'Kanton Genf',JU:'Kanton Jura'},
+    hol:{NY:'Neujahr',BE:'Berchtoldstag',DK:'Dreikönigstag',JO:'Josefstag',KF:'Karfreitag',OM:'Ostermontag',AR:'Tag der Arbeit',AU:'Auffahrt',PM:'Pfingstmontag',FL:'Fronleichnam',PP:'Peter und Paul',MH:'Mariä Himmelfahrt',BK:'Bruder Klaus',MT:'Mauritiustag',AH:'Allerheiligen',ME:'Mariä Empfängnis',WN:'Weihnachten',ST:'Stephanstag',NF:'Näfelser Fahrt',LJ:'Bettagsmontag',JG:'Genfer Bettag',RR:'Restauration der Republik',IR:'Jahrestag der Republik',PJ:'Jahrestag des Plebiszits',BF:'Bundesfeier'},
+    part:' (in einigen Gemeinden)', sch:'Schulferien', credit:'Iryna Voznesenskaya · Coach', cont:'Fortsetzung', page:(i, n) => 'Seite ' + i + ' von ' + n,
+    disc:['Muster zur Orientierung und für den persönlichen Gebrauch, kein amtliches Dokument. Angaben ohne Gewähr, bitte selbst prüfen.']},
+  fr: {loc:'fr-CH', months:['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre'], wd:['di','lu','ma','me','je','ve','sa'],
+    canton:{ZH:'canton de Zurich',BE:'canton de Berne',LU:'canton de Lucerne',UR:'canton d’Uri',SZ:'canton de Schwytz',OW:'canton d’Obwald',NW:'canton de Nidwald',GL:'canton de Glaris',ZG:'canton de Zoug',FR:'canton de Fribourg',SO:'canton de Soleure',BS:'canton de Bâle-Ville',BL:'canton de Bâle-Campagne',SH:'canton de Schaffhouse',AR:'canton d’Appenzell Rhodes-Extérieures',AI:'canton d’Appenzell Rhodes-Intérieures',SG:'canton de Saint-Gall',GR:'canton des Grisons',AG:'canton d’Argovie',TG:'canton de Thurgovie',TI:'canton du Tessin',VD:'canton de Vaud',VS:'canton du Valais',NE:'canton de Neuchâtel',GE:'canton de Genève',JU:'canton du Jura'},
+    hol:{NY:'Nouvel An',BE:'Saint-Berchtold',DK:'Épiphanie',JO:'Saint-Joseph',KF:'Vendredi saint',OM:'Lundi de Pâques',AR:'Fête du travail',AU:'Ascension',PM:'Lundi de Pentecôte',FL:'Fête-Dieu',PP:'Saint-Pierre et Saint-Paul',MH:'Assomption',BK:'Saint-Nicolas de Flüe',MT:'Saint-Maurice',AH:'Toussaint',ME:'Immaculée Conception',WN:'Noël',ST:'Saint-Étienne',NF:'Bataille de Näfels',LJ:'Lundi du Jeûne fédéral',JG:'Jeûne genevois',RR:'Restauration de la République',IR:'Instauration de la République',PJ:'Commémoration du plébiscite jurassien',BF:'Fête nationale'},
+    part:' (dans certaines communes)', sch:'Vacances scolaires', credit:'Iryna Voznesenskaya · coach', cont:'suite', page:(i, n) => 'Page ' + i + ' sur ' + n,
+    disc:['Modèle indicatif pour usage personnel, pas un document officiel. Données sans garantie, à vérifier soi-même.']},
+  it: {loc:'it-CH', months:['Gennaio','Febbraio','Marzo','Aprile','Maggio','Giugno','Luglio','Agosto','Settembre','Ottobre','Novembre','Dicembre'], wd:['do','lu','ma','me','gi','ve','sa'],
+    canton:{ZH:'Cantone di Zurigo',BE:'Cantone di Berna',LU:'Cantone di Lucerna',UR:'Cantone di Uri',SZ:'Cantone di Svitto',OW:'Cantone di Obvaldo',NW:'Cantone di Nidvaldo',GL:'Cantone di Glarona',ZG:'Cantone di Zugo',FR:'Cantone di Friburgo',SO:'Cantone di Soletta',BS:'Cantone di Basilea Città',BL:'Cantone di Basilea Campagna',SH:'Cantone di Sciaffusa',AR:'Cantone di Appenzello Esterno',AI:'Cantone di Appenzello Interno',SG:'Cantone di San Gallo',GR:'Cantone dei Grigioni',AG:'Cantone di Argovia',TG:'Cantone di Turgovia',TI:'Cantone Ticino',VD:'Cantone di Vaud',VS:'Cantone del Vallese',NE:'Cantone di Neuchâtel',GE:'Cantone di Ginevra',JU:'Cantone del Giura'},
+    hol:{NY:'Capodanno',BE:'San Berchtoldo',DK:'Epifania',JO:'San Giuseppe',KF:'Venerdì santo',OM:'Lunedì di Pasqua',AR:'Festa del lavoro',AU:'Ascensione',PM:'Lunedì di Pentecoste',FL:'Corpus Domini',PP:'San Pietro e Paolo',MH:'Assunzione',BK:'San Nicolao della Flüe',MT:'San Maurizio',AH:'Ognissanti',ME:'Immacolata Concezione',WN:'Natale',ST:'Santo Stefano',NF:'Battaglia di Näfels',LJ:'Lunedì del Digiuno federale',JG:'Digiuno ginevrino',RR:'Restaurazione della Repubblica',IR:'Instaurazione della Repubblica',PJ:'Anniversario del plebiscito giurassiano',BF:'Festa nazionale'},
+    part:' (in alcuni comuni)', sch:'Vacanze scolastiche', credit:'Iryna Voznesenskaya · coach', cont:'continua', page:(i, n) => 'Pagina ' + i + ' di ' + n,
+    disc:['Modello indicativo per uso personale, non un documento ufficiale. Dati senza garanzia, da verificare personalmente.']}
+};
+/* тексты листа «Учёт моего времени» на каждом языке PDF */
+const UVL = {
+  site: {title: () => what() ? 'Облік часу · ' + what() : 'Облік мого часу', file:'Облік мого часу',
+    planW: t => 'план ' + t + ' на тиждень', planD: t => 'план ' + t + ' на день', noPlan:'без плану', canton: c => 'кантон ' + CANTONS[c],
+    c:{norm:'план на місяць', worked:'записано', cred:'зараховано', diff:'різниця за місяць', carry:'перенесення', bal:'підсумок з перенесенням', hWorked:'годин записано', days:'днів із записами', pay:'CHF за години', fz:'CHF надбавка за відпустку', brutto:'CHF брутто, орієнтир'},
+    ab:{vac:'відпустка', sick:'хвороба', paid:'оплач. відсутність', comp:'відгул', unpaid:'неоплач. відпустка', hol:'свята'}, dn:' дн.', absHead:'Дні без записів за планом · ',
+    vacInfo: (y, a, b, l) => 'відпустка у ' + y + ' році: взято ' + a + ' із ' + b + ', залишилось ' + l,
+    col:{date:'Дата', day:'День', time:'Початок і кінець', pause:'Перерва', hours:'Години', plan:'План', diff:'Різниця', note:'Нотатка'},
+    total:'Усього за місяць', credNote:'У «Години» за дні відпустки, хвороби й оплачуваної відсутності входить час, зарахований за планом.', legend:'Рожевим позначено свята кантону, зеленою смужкою ліворуч шкільні канікули.',
+    sign1: nm => 'Підпис' + (nm ? ' · ' + nm : '') + ' · дата', sign2: e => 'Підпис · ' + e + ' · дата'},
+  de: {title: () => 'Arbeitszeitnachweis', file:'Arbeitszeitnachweis', type:{work:'Arbeit', vac:'Ferien', sick:'Krankheit/Unfall', paid:'bez. Absenz', comp:'Kompensation', unpaid:'unbez. Urlaub', hol:'Feiertag', off:'frei'},
+    planW: t => 'Sollzeit ' + t + ' pro Woche', planD: t => 'Sollzeit ' + t + ' pro Tag', noPlan:'ohne Sollzeit', canton: c => DOCL.de.canton[c],
+    c:{norm:'Sollzeit Monat', worked:'erfasst', cred:'angerechnet', diff:'Saldo Monat', carry:'Übertrag Vormonat', bal:'Saldo inkl. Übertrag', hWorked:'Stunden erfasst', days:'Tage mit Einträgen', pay:'CHF für Stunden', fz:'CHF Ferienentschädigung', brutto:'CHF brutto, Richtwert'},
+    ab:{vac:'Ferien', sick:'Krankheit', paid:'bez. Absenz', comp:'Kompensation', unpaid:'unbez. Urlaub', hol:'Feiertage'}, dn:' Tg.', absHead:'Absenzen · ',
+    vacInfo: (y, a, b, l) => 'Ferien ' + y + ': bezogen ' + a + ' von ' + b + ', Rest ' + l,
+    col:{date:'Datum', day:'Tag', time:'Beginn–Ende', pause:'Pause', hours:'Stunden', plan:'Soll', diff:'Differenz', note:'Bemerkung'},
+    total:'Total Monat', credNote:'Bei Ferien, Krankheit und bezahlter Absenz ist in «Stunden» die Sollzeit angerechnet.', legend:'Rosa: kantonale Feiertage. Grüner Streifen: Schulferien.',
+    sign1: nm => 'Datum, Unterschrift' + (nm ? ' · ' + nm : ''), sign2: e => 'Datum, Unterschrift · ' + e},
+  fr: {title: () => 'Relevé des heures de travail', file:'Relevé des heures de travail', type:{work:'Travail', vac:'Vacances', sick:'Maladie/accident', paid:'Absence payée', comp:'Compensation', unpaid:'Congé non payé', hol:'Jour férié', off:'Libre'},
+    planW: t => 'horaire prévu ' + t + ' par semaine', planD: t => 'horaire prévu ' + t + ' par jour', noPlan:'sans horaire prévu', canton: c => DOCL.fr.canton[c],
+    c:{norm:'heures prévues', worked:'heures saisies', cred:'heures imputées', diff:'solde du mois', carry:'report', bal:'solde avec report', hWorked:'heures saisies', days:'jours saisis', pay:'CHF pour les heures', fz:'CHF indemnité de vacances', brutto:'CHF brut, indicatif'},
+    ab:{vac:'vacances', sick:'maladie', paid:'absence payée', comp:'compensation', unpaid:'congé non payé', hol:'jours fériés'}, dn:' j', absHead:'Absences · ',
+    vacInfo: (y, a, b, l) => 'vacances ' + y + ' : prises ' + a + ' sur ' + b + ', solde ' + l,
+    col:{date:'Date', day:'Jour', time:'Début–fin', pause:'Pause', hours:'Heures', plan:'Prévu', diff:'Écart', note:'Remarque'},
+    total:'Total du mois', credNote:'Pour les vacances, la maladie et les absences payées, la colonne « Heures » comprend les heures prévues.', legend:'En rose : jours fériés cantonaux. Bande verte : vacances scolaires.',
+    sign1: nm => 'Date, signature' + (nm ? ' · ' + nm : ''), sign2: e => 'Date, signature · ' + e},
+  it: {title: () => 'Rapporto delle ore di lavoro', file:'Rapporto delle ore di lavoro', type:{work:'Lavoro', vac:'Vacanze', sick:'Malattia/infortunio', paid:'Assenza pagata', comp:'Compensazione', unpaid:'Congedo non pagato', hol:'Giorno festivo', off:'Libero'},
+    planW: t => 'orario previsto ' + t + ' a settimana', planD: t => 'orario previsto ' + t + ' al giorno', noPlan:'senza orario previsto', canton: c => DOCL.it.canton[c],
+    c:{norm:'ore previste nel mese', worked:'registrate', cred:'computate', diff:'saldo del mese', carry:'riporto', bal:'saldo con riporto', hWorked:'ore registrate', days:'giorni registrati', pay:'CHF per le ore', fz:'CHF indennità per vacanze', brutto:'CHF lordo, indicativo'},
+    ab:{vac:'vacanze', sick:'malattia', paid:'assenza pagata', comp:'compensazione', unpaid:'congedo non pagato', hol:'giorni festivi'}, dn:' g', absHead:'Assenze · ',
+    vacInfo: (y, a, b, l) => 'vacanze ' + y + ': godute ' + a + ' su ' + b + ', residuo ' + l,
+    col:{date:'Data', day:'Giorno', time:'Inizio–fine', pause:'Pausa', hours:'Ore', plan:'Previste', diff:'Differenza', note:'Nota'},
+    total:'Totale del mese', credNote:'Per vacanze, malattia e assenze pagate la colonna «Ore» comprende le ore previste.', legend:'In rosa: giorni festivi cantonali. Striscia verde: vacanze scolastiche.',
+    sign1: nm => 'Data, firma' + (nm ? ' · ' + nm : ''), sign2: e => 'Data, firma · ' + e}
+};
+const SITE_DOC = {loc:'de-CH', dloc:'uk-UA', months: MONTHS, wd: WD, credit: null, disc:['Орієнтир, а не точний розрахунок. Усе уточнюй і перевіряй. Автор не несе відповідальності за достовірність даних.', 'Це зразок для прикладу й особистого користування, а не офіційний документ.']};
+const pdfLang = () => S.set.pdfLang && PDF_LANGS[S.set.pdfLang] ? S.set.pdfLang : cantLang(S.set.canton);
+function docL(){ const g = pdfLang(); return g === 'site' ? Object.assign({lang: g}, SITE_DOC, UVL.site) : Object.assign({lang: g, dloc: DOCL[g].loc}, DOCL[g], UVL[g]); }
 
 /* ---------- праздники кантонов (как в «Мой год») ---------- */
 const iso = (y, m, d) => y + '-' + String(m + 1).padStart(2, '0') + '-' + String(d).padStart(2, '0');
@@ -750,6 +817,7 @@ function renderSet(){
   $('fWhat').value = st.what || ''; $('fSchZh').checked = !!st.schZh; $('fShowHol').checked = !!st.showHol; renderKids();
   $('fName').value = st.name; $('fEmp').value = st.emp; $('fMode').value = st.mode; $('fWt').value = st.wt; $('fRate').value = st.rate; $('fFz').value = st.fz;
   $('fCanton').innerHTML = Object.entries(CANTONS).sort((a, b) => a[1].localeCompare(b[1], 'uk')).map(([k, n]) => `<option value="${k}"${k === st.canton ? ' selected' : ''}>${n} (${k})</option>`).join('');
+  renderPdfLang();
   $('fDays').innerHTML = WD_ORDER.map(d => `<button type="button" class="day${st.days.includes(d) ? ' on' : ''}" data-d="${d}" aria-pressed="${st.days.includes(d)}">${WD[d]}</button>`).join('');
   const dl = WD_ORDER.filter(d => isSched(d)).map(d => WD[d]).join(' ');
   $('setSum').textContent = [what() || 'Робота', fixed() ? (st.perDay ? 'по днях, ' + fmt(weekPlan()) + ' год на тиждень' : parseHM(st.wt) ? fmt(parseHM(st.wt)) + ' год на день' : 'план не вписано') : 'без плану' + (num(st.rate) ? ' ' + chf(num(st.rate)) + ' CHF' : ''), dl, CANTONS[st.canton]].filter(Boolean).join(' · ');
@@ -777,7 +845,9 @@ $('fWt').addEventListener('change', () => { if (parseHM(S.set.wt) == null) say('
 $('fMode').addEventListener('change', e => { S.set.mode = e.target.value; save(); renderSet(); renderMonth(); });
 ['fWhat','fName','fEmp','fWt','fRate'].forEach(id => $(id).addEventListener('change', renderSet));
 $('fFz').addEventListener('change', e => { S.set.fz = e.target.value; save(); renderCards(); });
-$('fCanton').addEventListener('change', e => { S.set.canton = e.target.value; $('holInfo').hidden = true; save(); renderMonth(); });
+$('fCanton').addEventListener('change', e => { S.set.canton = e.target.value; S.set.pdfLang = ''; $('holInfo').hidden = true; save(); renderPdfLang(); renderMonth(); });
+function renderPdfLang(){ const cur = pdfLang(), cl = cantLang(S.set.canton); $('fPdfLang').innerHTML = Object.entries(PDF_LANGS).map(([k, n]) => `<option value="${k}"${k === cur ? ' selected' : ''}>${n}${k === cl ? PDF_LANG_CANT : ''}</option>`).join(''); }
+$('fPdfLang').addEventListener('change', e => { S.set.pdfLang = e.target.value; save(); });
 $('fDays').addEventListener('click', e => { const b = e.target.closest('[data-d]'); if (!b) return; const d = +b.dataset.d, a = S.set.days;
   S.set.days = a.includes(d) ? a.filter(x => x !== d) : a.concat(d); save(); renderSet(); renderMonth(); });
 $('fCarry').addEventListener('input', e => { const v = e.target.value.trim(); monthData(S.cur).carry = v === '' ? null : v; save(); renderCards(); renderSum(); });
@@ -818,6 +888,7 @@ const HELP = {
   types: '<ul><li><b>Робота</b> або твоя назва. Звичайний день, впиши час.</li><li><b>Відпустка.</b> Оплачувана відпустка. Зараховується як виконаний план і зменшує залишок відпустки.</li><li><b>Хвороба або нещасний випадок.</b> Зараховується як виконаний план. Часто з третього дня роботодавець просить довідку від лікаря.</li><li><b>Оплачувана відсутність.</b> Лікар, переїзд, весілля, похорон, народження дитини та інші дні, які роботодавець оплачує. Зараховується як план.</li><li><b>Відгул за переробку.</b> Ти відпочиваєш за накопичені години. План залишається, тому переробка зменшується.</li><li><b>Неоплачувана відпустка.</b> День без оплати, план у цей день не рахується.</li><li><b>Свято.</b> Свято кантону, план не рахується.</li><li><b>Вихідний.</b> День не за графіком. Якщо ти все ж працювала, впиши час, він піде понад план.</li></ul>',
   cards: '<ul><li><b>План годин на місяць.</b> Скільки потрібно за договором або за твоєю метою.</li><li><b>Годин записано.</b> Скільки ти вписала.</li><li><b>Зараховано.</b> Години за відпустку, хворобу й оплачувану відсутність.</li><li><b>Понад план або менше плану.</b> Різниця цього місяця.</li><li><b>Перенесено.</b> Залишок з минулого місяця.</li><li><b>Підсумок з перенесенням.</b> Твоя переробка або недоробка на сьогодні, вона переходить далі.</li></ul>',
   profiles: '<p>Якщо в тебе дві роботи або робота й навчання, створи окремий облік для кожної. У кожного обліку свої умови, місяці й PDF.</p><p>Перемикайся між ними плашками «Мої обліки».</p>',
+  pdfLang: '<p>Роботодавець у Швейцарії читає документи мовою свого кантону. Тому PDF одразу виходить мовою кантону, який ти обрала в умовах. У Цюриху й Берні німецькою, у Женеві та Во французькою, у Тічино італійською.</p><p>У Вале й Фрібурі говорять двома мовами. Там спершу стоїть французька, німецьку можна обрати тут.</p><p>Якщо аркуш потрібен лише тобі, обери «Мовою сайту». Твої нотатки й назви потраплять у PDF так, як ти їх написала.</p>',
   backup: '<p>Записи зберігаються лише в браузері на цьому пристрої. На iPhone Safari сам стирає записи сайтів, на які довго не заходили.</p><p>Резервна копія — це файл на твоєму пристрої. З нього записи можна повернути тут або на іншому телефоні чи комп’ютері. Бережи його, у ньому твої особисті записи.</p>'
 };
 let qPop = null, qBtn = null;
@@ -1133,65 +1204,76 @@ const PC = {sage:'#4F5E3E', bg:'#FFFCF8', ink:'#2F2924', muted:'#7A6E62', line:'
 function roundRect(c, x, y, w, h, r){ r = Math.min(r, h/2, w/2); c.beginPath(); c.moveTo(x+r,y); c.arcTo(x+w,y,x+w,y+h,r); c.arcTo(x+w,y+h,x,y+h,r); c.arcTo(x,y+h,x,y,r); c.arcTo(x,y,x+w,y,r); c.closePath(); }
 function fit(c, text, w){ text = String(text); if (c.measureText(text).width <= w) return text; while (text.length > 1 && c.measureText(text + '…').width > w) text = text.slice(0, -1); return text + '…'; }
 function WM(cv, t){ const c = cv.getContext('2d'), w = cv.width, h = cv.height, fs = Math.round(Math.max(w, h) * 0.032); c.save(); c.font = '700 ' + fs + 'px Manrope, sans-serif'; c.fillStyle = 'rgba(110,79,60,0.075)'; c.textAlign = 'center'; c.textBaseline = 'middle'; c.translate(w / 2, h / 2); c.rotate(-Math.PI / 7); const sx = fs * 9, sy = fs * 5, R = Math.hypot(w, h) / 2 + sx; for (let y = -R, r = 0; y <= R; y += sy, r++) for (let x = -R + (r % 2) * sx / 2; x <= R; x += sx) c.fillText(t, x, y); c.restore(); return cv; }
-function footer(cv){
+function footer(cv, L){
   const c = cv.getContext('2d'); c.font = '600 32px Manrope, sans-serif'; let fx = PM; const fy = PH - 90;
   c.fillStyle = PC.line; c.fillRect(PM, fy - 70, PW - 2*PM, 3);
   CREDIT_PARTS.forEach((part, i) => {
     if (i){ c.fillStyle = PC.muted; c.fillText(' · ', fx, fy); fx += c.measureText(' · ').width; }
-    const w = c.measureText(part.t).width; c.fillStyle = PC.brown; c.fillText(part.t, fx, fy); c.fillRect(fx, fy + 6, w, 2);
+    const t = i === 0 && L && L.credit ? L.credit : part.t;
+    const w = c.measureText(t).width; c.fillStyle = PC.brown; c.fillText(t, fx, fy); c.fillRect(fx, fy + 6, w, 2);
     cv.links.push({x: fx, y: fy - 32, w, h: 44, url: part.u}); fx += w;
   });
 }
+/* оговорка внизу каждого листа: ориентир, образец, не официальный документ */
+function discLines(c, L){ c.fillStyle = PC.muted; c.font = 'italic 500 26px Manrope, sans-serif'; const n = L.disc.length; L.disc.forEach((t, i) => c.fillText(fit(c, t, PW - 2*PM), PM, PH - 185 - (n - 1 - i) * 36)); }
 function blockText(I){ return I.timed ? I.blocks.filter(b => b.s || b.e).map(b => (b.s || '?') + '–' + (b.e || '?')).join(', ') : ''; }
 function pauseText(I){ if (!I.timed) return ''; const p = I.blocks.reduce((a, b) => a + Math.max(0, num(b.p)), 0); return p ? fmt(p) : ''; }
 function drawSheet(){
-  const k = S.cur, {y: Y, m: M} = ym(), T = calc(k), fx = fixed();
+  const k = S.cur, {y: Y, m: M} = ym(), T = calc(k), fx = fixed(), L = docL(), site = L.lang === 'site';
+  const money = v => (Math.round(v * 20) / 20).toLocaleString(L.loc, {minimumFractionDigits: 2, maximumFractionDigits: 2});
+  const days = n => (Math.round(n * 100) / 100).toLocaleString(L.dloc);
+  const tShort = t => site ? tshort(t) : L.type[t];
+  const holName = h => site ? h.n : (L.hol[h.k] || h.n) + (h.part ? L.part : '');
+  const schName = n => site ? n : L.sch;
   const cv = document.createElement('canvas'); cv.width = PW; cv.height = PH; cv.links = []; const c = cv.getContext('2d');
   c.fillStyle = PC.bg; c.fillRect(0, 0, PW, PH); c.textBaseline = 'alphabetic';
-  c.fillStyle = PC.ink; c.font = '120px Forum, Georgia, serif'; c.fillText(what() ? 'Облік часу · ' + what() : 'Облік мого часу', PM, PM + 100);
-  c.textAlign = 'right'; c.font = '90px Forum, Georgia, serif'; c.fillStyle = PC.brown; c.fillText(MONTHS[M] + ' ' + Y, PW - PM, PM + 100); c.textAlign = 'left';
-  const sub = [S.set.name, S.set.emp, fx ? (S.set.perDay ? 'план ' + fmt(weekPlan()) + ' на тиждень' : 'план ' + fmt(wtMin()) + ' на день') : 'без плану', 'кантон ' + CANTONS[S.set.canton]].filter(Boolean).join(' · ');
+  const right = L.months[M] + ' ' + Y; c.font = '90px Forum, Georgia, serif'; const rw = c.measureText(right).width;
+  c.fillStyle = PC.ink; c.font = '120px Forum, Georgia, serif'; c.fillText(fit(c, L.title(), PW - 2*PM - rw - 60), PM, PM + 100);
+  c.textAlign = 'right'; c.font = '90px Forum, Georgia, serif'; c.fillStyle = PC.brown; c.fillText(right, PW - PM, PM + 100); c.textAlign = 'left';
+  const sub = [S.set.name, S.set.emp, site || /[\u0400-\u04FF]/.test(what()) ? '' : what(), fx ? (S.set.perDay ? L.planW(fmt(weekPlan())) : L.planD(fmt(wtMin()))) : L.noPlan, L.canton(S.set.canton)].filter(Boolean).join(' · ');
   c.fillStyle = PC.muted; c.font = '600 40px Manrope, sans-serif'; c.fillText(fit(c, sub, PW - 2*PM), PM, PM + 175);
   // карточки
   let cards;
-  if (fx) cards = [[fmt(T.norm), 'план на місяць'], [fmt(T.worked), 'записано'], [fmt(T.cred), 'зараховано'], [fmt(T.diff, true), 'різниця за місяць', T.diff], [fmt(T.carry, true), 'перенесення'], [fmt(T.bal, true), 'підсумок з перенесенням', T.bal]];
-  else { cards = [[fmt(T.worked), 'годин записано'], [String(T.workDays), 'днів із записами']];
-    if (T.pay){ cards.push([chf(T.pay), 'CHF за години']); if (T.fzPay) cards.push([chf(T.fzPay), 'CHF надбавка за відпустку']); cards.push([chf(T.pay + T.fzPay), 'CHF брутто, орієнтир']); } }
+  if (fx) cards = [[fmt(T.norm), L.c.norm], [fmt(T.worked), L.c.worked], [fmt(T.cred), L.c.cred], [fmt(T.diff, true), L.c.diff, T.diff], [fmt(T.carry, true), L.c.carry], [fmt(T.bal, true), L.c.bal, T.bal]];
+  else { cards = [[fmt(T.worked), L.c.hWorked], [String(T.workDays), L.c.days]];
+    if (T.pay){ cards.push([money(T.pay), L.c.pay]); if (T.fzPay) cards.push([money(T.fzPay), L.c.fz]); cards.push([money(T.pay + T.fzPay), L.c.brutto]); } }
   const cw = (PW - 2*PM - (cards.length - 1) * 24) / cards.length; let y = PM + 230;
   cards.forEach(([b, s, v], i) => { const x = PM + i * (cw + 24);
     c.fillStyle = i === cards.length - 1 ? PC.mustardSoft : PC.soft; roundRect(c, x, y, cw, 170, 24); c.fill();
     c.fillStyle = v > 0 ? PC.green : v < 0 ? PC.red : PC.ink; c.font = '68px Forum, Georgia, serif'; c.fillText(fit(c, b, cw - 50), x + 28, y + 82);
     c.fillStyle = PC.muted; c.font = '600 28px Manrope, sans-serif'; c.fillText(fit(c, s, cw - 50), x + 28, y + 132); });
   y += 240;
-  const extra = [['vac','відпустка'],['sick','хвороба'],['paid','оплач. відсутність'],['comp','відгул'],['unpaid','неоплач. відпустка'],['hol','свята']].filter(([kk]) => T[kk]).map(([kk, l]) => l + ' ' + fmtDays(T[kk]) + ' дн.');
-  const VV = vacInfo(); if (VV) extra.push('відпустка у ' + VV.y + ' році: взято ' + fmtDays(VV.taken) + ' із ' + fmtDays(VV.tot) + ', залишилось ' + fmtDays(VV.left));
-  if (extra.length){ c.fillStyle = PC.ink; c.font = '600 32px Manrope, sans-serif'; c.fillText('Дні без записів за планом · ' + extra.join(' · '), PM, y); y += 30; }
+  const extra = ['vac','sick','paid','comp','unpaid','hol'].filter(kk => T[kk]).map(kk => L.ab[kk] + ' ' + days(T[kk]) + L.dn);
+  const VV = vacInfo(); if (VV) extra.push(L.vacInfo(VV.y, days(VV.taken), days(VV.tot), days(VV.left)));
+  if (extra.length){ c.fillStyle = PC.ink; c.font = '600 32px Manrope, sans-serif'; c.fillText(fit(c, L.absHead + extra.join(' · '), PW - 2*PM), PM, y); y += 30; }
   // таблица
   const cols = fx
-    ? [['Дата',150],['День',330],['Початок і кінець',400],['Перерва',150],['Години',150],['План',150],['Різниця',170],['Нотатка',0]]
-    : [['Дата',150],['День',260],['Початок і кінець',560],['Перерва',170],['Години',170],['Нотатка',0]];
+    ? [['date',150],['day',330],['time',400],['pause',150],['hours',150],['plan',150],['diff',170],['note',0]]
+    : [['date',150],['day',260],['time',560],['pause',170],['hours',170],['note',0]];
   const tw = PW - 2*PM, fixedW = cols.reduce((a, cc) => a + cc[1], 0); cols[cols.length - 1][1] = tw - fixedW;
-  const numCols = ['Перерва','Години','План','Різниця'];
+  const numCols = ['pause','hours','plan','diff'];
   y += 40; const rh = Math.min(64, Math.floor((PH - 560 - y - 120) / (T.rows.length + 2)));
   c.fillStyle = PC.brown; c.fillRect(PM, y, tw, rh); c.fillStyle = '#FFFFFF'; c.font = '700 26px Manrope, sans-serif';
-  let x = PM; cols.forEach(([n, w]) => { if (numCols.includes(n)){ c.textAlign = 'right'; c.fillText(n, x + w - 18, y + rh * .64); c.textAlign = 'left'; } else c.fillText(n, x + 18, y + rh * .64); x += w; });
+  let x = PM; cols.forEach(([n, w]) => { const t = fit(c, L.col[n], w - 30); if (numCols.includes(n)){ c.textAlign = 'right'; c.fillText(t, x + w - 18, y + rh * .64); c.textAlign = 'left'; } else c.fillText(t, x + 18, y + rh * .64); x += w; });
   y += rh;
   T.rows.forEach(I => {
     const we = I.dow === 0 || I.dow === 6;
     if (we || I.type === 'hol'){ c.fillStyle = I.type === 'hol' ? 'rgba(216,27,120,0.08)' : PC.weekend; c.fillRect(PM, y, tw, rh); }
     c.fillStyle = PC.line; c.fillRect(PM, y + rh - 2, tw, 2);
     if (I.sch){ c.fillStyle = PC.sage; c.fillRect(PM, y, 9, rh - 2); }
+    const dayTxt = L.wd[I.dow] + ' · ' + tShort(I.type) + (I.part === 'half' ? ' ½' : I.part === 'time' ? ' ' + I.pt : '');
+    const noteTxt = I.note || (I.hol ? holName(I.hol) : '') || (I.sch ? schName(I.sch) : '');
     const cells = fx
-      ? [String(I.dt.getDate()).padStart(2, '0') + '.' + String(M + 1).padStart(2, '0') + '.', WD[I.dow] + ' · ' + tshort(I.type) + (I.part === 'half' ? ' ½' : I.part === 'time' ? ' ' + I.pt : ''), blockText(I), pauseText(I), I.worked + I.cred ? fmt(I.worked + I.cred) : '', I.norm ? fmt(I.norm) : '', I.diff ? fmt(I.diff, true) : '', I.note || (I.hol ? I.hol.n : '') || I.sch]
-      : [String(I.dt.getDate()).padStart(2, '0') + '.' + String(M + 1).padStart(2, '0') + '.', WD[I.dow] + ' · ' + tshort(I.type) + (I.part === 'half' ? ' ½' : I.part === 'time' ? ' ' + I.pt : ''), blockText(I), pauseText(I), I.worked ? fmt(I.worked) : '', I.note || (I.hol ? I.hol.n : '')];
+      ? [String(I.dt.getDate()).padStart(2, '0') + '.' + String(M + 1).padStart(2, '0') + '.', dayTxt, blockText(I), pauseText(I), I.worked + I.cred ? fmt(I.worked + I.cred) : '', I.norm ? fmt(I.norm) : '', I.diff ? fmt(I.diff, true) : '', noteTxt]
+      : [String(I.dt.getDate()).padStart(2, '0') + '.' + String(M + 1).padStart(2, '0') + '.', dayTxt, blockText(I), pauseText(I), I.worked ? fmt(I.worked) : '', I.note || (I.hol ? holName(I.hol) : '')];
     let xx = PM;
     cells.forEach((t, i) => { const [n, w] = cols[i];
-      c.font = (n === 'Години' ? '700 ' : '500 ') + '27px Manrope, sans-serif';
-      c.fillStyle = n === 'Різниця' ? (I.diff > 0 ? PC.green : PC.red) : (n === 'День' && I.type !== 'work' && I.type !== 'off' ? PC.brown : PC.ink);
-      if (n === 'Нотатка' && !I.note && I.hol) c.fillStyle = PC.hol;
-      else if (n === 'Нотатка' && !I.note && I.sch) c.fillStyle = PC.sage;
+      c.font = (n === 'hours' ? '700 ' : '500 ') + '27px Manrope, sans-serif';
+      c.fillStyle = n === 'diff' ? (I.diff > 0 ? PC.green : PC.red) : (n === 'day' && I.type !== 'work' && I.type !== 'off' ? PC.brown : PC.ink);
+      if (n === 'note' && !I.note && I.hol) c.fillStyle = PC.hol;
+      else if (n === 'note' && !I.note && I.sch) c.fillStyle = PC.sage;
       if (numCols.includes(n)){ c.textAlign = 'right'; c.fillText(fit(c, t, w - 30), xx + w - 18, y + rh * .64); c.textAlign = 'left'; }
-      else if (n === 'Початок і кінець' && c.measureText(t).width > w - 30){
+      else if (n === 'time' && c.measureText(t).width > w - 30){
         const parts = t.split(', '), half = Math.ceil(parts.length / 2); c.font = '500 21px Manrope, sans-serif';
         c.fillText(fit(c, parts.slice(0, half).join(', '), w - 30), xx + 18, y + rh * .42); c.fillText(fit(c, parts.slice(half).join(', '), w - 30), xx + 18, y + rh * .82);
       }
@@ -1201,20 +1283,19 @@ function drawSheet(){
   });
   // строка итогов
   c.fillStyle = PC.ink; c.fillRect(PM, y, tw, 4); y += 4;
-  c.font = '800 28px Manrope, sans-serif'; c.fillText('Усього за місяць', PM + 18, y + rh * .64);
-  const tot = {}; if (fx){ tot['Години'] = fmt(T.worked + T.cred); tot['План'] = fmt(T.norm); tot['Різниця'] = fmt(T.diff, true); } else tot['Години'] = fmt(T.worked);
-  let xx = PM; cols.forEach(([n, w]) => { if (tot[n]){ c.textAlign = 'right'; c.fillStyle = n === 'Різниця' ? (T.diff > 0 ? PC.green : T.diff < 0 ? PC.red : PC.ink) : PC.ink; c.fillText(tot[n], xx + w - 18, y + rh * .64); c.textAlign = 'left'; } xx += w; });
+  c.font = '800 28px Manrope, sans-serif'; c.fillText(L.total, PM + 18, y + rh * .64);
+  const tot = {}; if (fx){ tot.hours = fmt(T.worked + T.cred); tot.plan = fmt(T.norm); tot.diff = fmt(T.diff, true); } else tot.hours = fmt(T.worked);
+  let xx = PM; cols.forEach(([n, w]) => { if (tot[n]){ c.textAlign = 'right'; c.fillStyle = n === 'diff' ? (T.diff > 0 ? PC.green : T.diff < 0 ? PC.red : PC.ink) : PC.ink; c.fillText(tot[n], xx + w - 18, y + rh * .64); c.textAlign = 'left'; } xx += w; });
   y += rh + 30;
   c.fillStyle = PC.muted; c.font = '500 28px Manrope, sans-serif';
-  if (fx){ c.fillText('У «Години» за дні відпустки, хвороби й оплачуваної відсутності входить час, зарахований за планом.', PM, y); y += 44; }
-  c.fillText('Рожевим позначено свята кантону, зеленою смужкою ліворуч шкільні канікули.', PM, y);
+  if (fx){ c.fillText(fit(c, L.credNote, tw), PM, y); y += 44; }
+  c.fillText(fit(c, L.legend, tw), PM, y);
   // подписи
   const sy = PH - 330, sw = (tw - 120) / 2;
-  if (S.set.emp.trim()) [['Підпис', S.set.name], ['Підпис · ' + S.set.emp.trim(), '']].forEach(([l, nm], i) => { const sx = PM + i * (sw + 120);
-    c.fillStyle = PC.ink; c.fillRect(sx, sy, sw, 3); c.fillStyle = PC.muted; c.font = '600 28px Manrope, sans-serif'; c.fillText(l + (nm ? ' · ' + nm : '') + ' · дата', sx, sy + 44); });
-  c.fillStyle = PC.muted; c.font = 'italic 500 26px Manrope, sans-serif';
-  c.fillText('Орієнтир, а не точний розрахунок. Усе уточнюй і перевіряй. Автор не несе відповідальності за достовірність даних.', PM, PH - 200);
-  footer(cv); WM(cv, 'svoiludi.ch');
+  if (S.set.emp.trim()) [L.sign1(S.set.name), L.sign2(S.set.emp.trim())].forEach((l, i) => { const sx = PM + i * (sw + 120);
+    c.fillStyle = PC.ink; c.fillRect(sx, sy, sw, 3); c.fillStyle = PC.muted; c.font = '600 28px Manrope, sans-serif'; c.fillText(fit(c, l, sw), sx, sy + 44); });
+  discLines(c, L);
+  footer(cv, L); WM(cv, 'svoiludi.ch');
   return cv;
 }
 
@@ -1268,25 +1349,27 @@ async function buildXlsx(){
 
 /* ---------- скачивание ---------- */
 let downloads = null;
-async function offer(filename, data){
+async function offer(filename, data, how){
+  const tail = how ? ' Документ ' + how + '.' : '';
   if (window.claude && window.claude.use){
     if (!downloads){ say('Завантаження тут недоступне.'); return; }
-    try { await downloads.save({filename, data}); say('Файл «' + filename + '» збережено.'); return true; }
+    try { await downloads.save({filename, data}); say('Файл «' + filename + '» збережено.' + tail); return true; }
     catch(err){ const code = err && err.code;
       if (code === 'declined') say('Завантаження скасовано.'); else if (code === 'rate_limited') say('Вікно збереження вже відкрите. Підтверди його або зачекай трохи.'); else say('Не вдалося зберегти файл. Спробуй ще раз.'); }
     return;
   }
   const url = URL.createObjectURL(data), a = document.createElement('a'); a.href = url; a.download = filename; document.body.appendChild(a); a.click();
-  setTimeout(() => { a.remove(); URL.revokeObjectURL(url); }, 4000); say('Файл «' + filename + '» завантажено.'); return true;
+  setTimeout(() => { a.remove(); URL.revokeObjectURL(url); }, 4000); say('Файл «' + filename + '» завантажено.' + tail); return true;
 }
 const fname = ext => { const {y, m} = ym(); return 'Облік мого часу ' + MONTHS[m] + ' ' + y + '.' + ext; };
+const pdfName = () => { const {y, m} = ym(), L = docL(); return L.file + ' ' + L.months[m] + ' ' + y + '.pdf'; };
 $('dlPdf').addEventListener('click', async () => {
   if (!window.jspdf){ say('PDF зараз недоступний. Спробуй ще раз пізніше.'); return; }
   say('Готую PDF…'); try { await document.fonts.ready; } catch(e) {}
   const cv = drawSheet(), doc = new window.jspdf.jsPDF({orientation:'portrait', unit:'mm', format:'a4'}), k = 210 / PW;
   doc.addImage(cv.toDataURL('image/jpeg', 0.92), 'JPEG', 0, 0, 210, 297);
   for (const l of cv.links) doc.link(l.x * k, l.y * k, l.w * k, l.h * k, {url: l.url});
-  offer(fname('pdf'), doc.output('blob'));
+  offer(pdfName(), doc.output('blob'), PDF_LANG_SAY[pdfLang()]);
 });
 $('dlXlsx').addEventListener('click', () => { const p = $('vipPanel'); p.hidden = !p.hidden; $('dlXlsx').setAttribute('aria-expanded', String(!p.hidden)); });
 /* Excel готов (buildXlsx) и включится для VIP-партнёров, когда будет решено, как они его открывают */
