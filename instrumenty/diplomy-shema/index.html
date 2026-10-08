@@ -1,0 +1,404 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<link rel="icon" href="/fav/favicon.svg" type="image/svg+xml"><link rel="icon" href="/fav/icon-32.png" sizes="32x32"><link rel="apple-touch-icon" href="/fav/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/fonts.css">
+<meta name="description" content="Признание диплома в Швейцарии на схеме: регламентируемая профессия или нет, какое ведомство (SBFI, SRK, MEBEKO, PsyKo, EDK, Swiss ENIC), сколько стоит и сколько ждать, язык, документы и переводы, выравнивающие меры, EFZ для взрослых, языковые сертификаты и водительские права. Свой план по месяцам, PDF и PNG бесплатно.">
+<link rel="canonical" href="https://svoiludi.ch/instrumenty/diplomy-shema/">
+<meta property="og:type" content="website"><meta property="og:locale" content="ru_RU"><meta property="og:site_name" content="Свои люди в Швейцарии">
+<meta property="og:title" content="Признание дипломов в Швейцарии · схема, сроки и твой план"><meta property="og:description" content="Нужно ли признавать диплом, кто признаёт, сколько стоит и сколько ждать, какой нужен язык — на схемах и твой план по месяцам. Бесплатно, PDF и PNG.">
+<meta property="og:url" content="https://svoiludi.ch/instrumenty/diplomy-shema/"><meta property="og:image" content="https://svoiludi.ch/instrumenty/diplomy-shema/og-image.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="robots" content="noindex, nofollow">
+<title>Признание дипломов</title>
+<style>
+/* Признание дипломов (08.10.2026): анкета слева, живые листы справа, движок assets/shema.js. */
+:root{
+  --bg:#F4EDE3; --paper:#FFFCF8; --ink:#2F2924; --muted:#7A6E62; --line:#E5D9C9; --soft:#EFE5D7;
+  --brown:#6E4F3C; --mustard:#B98324; --mustard-soft:#F3E3C2; --sage:#4F5E3E; --sage-soft:#E3E8D6; --red:#A0523D;
+  --display:"Forum","Georgia",serif; --sans:"Manrope","Segoe UI",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#221D19; --paper:#2C2621; --ink:#F1E9DF; --muted:#B4A796; --line:#3E362F; --soft:#352E28;
+  --brown:#E1C2A6; --mustard:#E2B45C; --mustard-soft:#3D321F; --sage:#B4BF97; --sage-soft:#2E3226; --red:#E39A85; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#221D19; --paper:#2C2621; --ink:#F1E9DF; --muted:#B4A796; --line:#3E362F; --soft:#352E28;
+  --brown:#E1C2A6; --mustard:#E2B45C; --mustard-soft:#3D321F; --sage:#B4BF97; --sage-soft:#2E3226; --red:#E39A85; color-scheme:dark}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--ink);font:15px/1.55 var(--sans);margin:0}
+.wrap{max-width:1280px;margin:0 auto;padding-inline:16px;padding-block:28px 48px;display:flex;flex-direction:column;gap:24px}
+.eyebrow{font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+h1{font-family:var(--display);font-weight:400;font-size:clamp(2.4rem,6vw,3.6rem);line-height:1;margin:4px 0 10px;text-wrap:balance}
+h2{font-family:var(--display);font-weight:400;font-size:1.55rem;margin:0;text-wrap:balance}
+h3{font-family:var(--display);font-weight:400;font-size:1.22rem;line-height:1.2;margin:0}
+.lead{max-width:66ch;color:var(--muted);margin:0}
+.jump{font-weight:700;color:var(--brown);text-underline-offset:4px}
+.privnote{margin-top:14px;background:var(--sage-soft);border-radius:16px;padding:12px 16px;font-size:.9rem;max-width:90ch}
+.status{font-size:.86rem;color:var(--muted);min-height:1.3em}
+.btn{font:inherit;font-weight:700;font-size:.9rem;border:0;border-radius:999px;padding:10px 18px;cursor:pointer;color:#fff;text-decoration:none;display:inline-flex;align-items:center;gap:6px;background:#6E4F3C;box-shadow:0 8px 18px -8px rgba(110,79,60,.6)}
+.btn.gold{background:#B98324;box-shadow:0 8px 18px -8px rgba(185,131,36,.7)}
+.btn.free{background:#4F5E3E;box-shadow:0 8px 18px -8px rgba(79,94,62,.6)}
+.btn.ghost{background:transparent;color:var(--brown);border:1.5px solid var(--line);box-shadow:none}
+.btn.sm{font-size:.82rem;padding:7px 13px}
+.btn[disabled]{background:var(--soft);color:var(--muted);box-shadow:none;cursor:wait}
+select,input[type=text],input[type=tel],textarea{font:inherit;font-size:.95rem;color:var(--ink);background:var(--paper);border:1.5px solid var(--line);border-radius:12px;padding:9px 12px;width:100%;min-width:0}
+select:focus-visible,input:focus-visible,button:focus-visible,textarea:focus-visible,a:focus-visible{outline:2px solid var(--mustard);outline-offset:2px}
+::placeholder{color:color-mix(in srgb,var(--muted) 70%,transparent)}
+.setup{background:var(--paper);border:1.5px solid var(--line);border-radius:22px;padding:16px 18px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px 18px;align-items:start}
+@media (max-width:1000px){.setup{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.setup{grid-template-columns:1fr}}
+.fl{display:flex;flex-direction:column;gap:6px;min-width:0}
+.fl>.lb{font-size:.8rem;font-weight:700;color:var(--muted);display:flex;align-items:center}
+.seg{display:flex;flex-wrap:wrap;gap:6px}
+.seg button{font:inherit;font-size:.84rem;font-weight:700;border:1.5px solid var(--line);background:var(--paper);color:var(--ink);border-radius:999px;padding:6px 12px;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--sage);border-color:var(--sage);color:#fff}
+.acts{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.exbar{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;background:var(--mustard-soft);border-radius:16px;padding:10px 14px;font-size:.9rem;font-weight:600}
+.work{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:22px;align-items:start}
+@media (max-width:1040px){.work{grid-template-columns:1fr}}
+.form{display:flex;flex-direction:column;gap:14px;min-width:0}
+.sec{background:var(--paper);border:1.5px solid var(--line);border-radius:20px;padding:16px 18px;display:flex;flex-direction:column;gap:12px}
+.sec>h2{font-size:1.3rem;display:flex;align-items:center}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:560px){.g2{grid-template-columns:1fr}}
+.hint{font-size:.84rem;color:var(--muted);margin:0}
+.chk{display:flex;flex-direction:column;gap:8px}
+.chk label{display:flex;gap:10px;align-items:baseline;font-size:.92rem;cursor:pointer}
+.chk input{flex:none;width:18px;height:18px;accent-color:var(--sage);transform:translateY(3px)}
+.chk b{white-space:nowrap}
+.chk small{color:var(--muted)}
+.tog{display:flex;gap:10px;align-items:center;font-size:.92rem;cursor:pointer}
+.tog input{width:18px;height:18px;accent-color:var(--sage)}
+.sheetbox{position:sticky;top:12px;display:flex;flex-direction:column;gap:10px}
+@media (max-width:1040px){.sheetbox{position:static}}
+.sheet{background:#fff;border-radius:6px;box-shadow:0 18px 40px -22px rgba(47,41,36,.45);overflow:hidden}
+.sheet svg{display:block;width:100%;height:auto}
+.imp{background:var(--paper);border:1.5px dashed color-mix(in srgb,var(--sage) 55%,transparent);border-radius:16px;padding:14px 18px;font-size:.88rem;max-width:90ch;margin:0}
+.imp b{color:var(--sage)}
+.guide{display:flex;flex-direction:column;gap:14px;max-width:90ch}
+.guide ul{margin:0;padding-left:20px}
+.guide li{margin:4px 0}
+.credit{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:.8rem;color:var(--muted)}
+.credit a{color:var(--muted)}
+.qh{font:700 .72rem/1 var(--sans);width:20px;height:20px;border-radius:50%;border:1.5px solid var(--line);background:var(--paper);color:var(--brown);cursor:pointer;margin-left:6px;padding:0;flex:none}
+.sheets{display:flex;flex-direction:column;gap:14px}
+.goals{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+@media (max-width:560px){.goals{grid-template-columns:1fr}}
+.goals label{display:flex;gap:10px;align-items:flex-start;background:var(--bg);border:1.5px solid var(--line);border-radius:14px;padding:9px 12px;cursor:pointer;font-size:.92rem}
+.goals input{width:18px;height:18px;accent-color:var(--sage);flex:none;margin-top:2px}
+.goals small{display:block;color:var(--muted)}
+.steps{display:flex;flex-direction:column;gap:8px}
+.steps details{background:var(--paper);border:1.5px solid var(--line);border-radius:16px;padding:10px 16px}
+.steps summary{cursor:pointer;font-weight:700;display:flex;gap:10px;align-items:baseline}
+.steps summary small{font-weight:600;color:var(--muted);margin-left:auto;text-align:right}
+.steps details p,.steps details ul{margin:8px 0 2px;font-size:.93rem}
+.steps details ul{padding-left:20px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <p style="margin:0 0 14px"><a class="jump" href="https://svoiludi.ch/instrumenty/">← Все полезные инструменты · Свои люди в Швейцарии</a></p>
+    <div class="eyebrow">Схема · дипломы и сертификаты</div>
+    <h1>Признание дипломов</h1>
+    <p class="lead">Нужно ли признавать твой диплом, кто это делает, сколько стоит и сколько ждать, какой нужен язык и какие документы. Что делать, если диплома нет, но есть опыт, и что с другими сертификатами — языковыми, водительскими правами, курсами. Выбери свою профессию — получишь план по месяцам. PDF и PNG бесплатно.</p>
+    <div class="privnote"><b>Твои данные только у тебя.</b> Выбор хранится только в твоём браузере на этом устройстве. Регистрация не нужна.</div>
+    <div data-fan="diplomy-shema"></div>
+  </header>
+  <div class="setup">
+    <div class="fl"><span class="lb">Язык листов<button type="button" class="qh" data-help="lang" aria-label="Подсказка: язык листов" aria-expanded="false">?</button></span><select id="lang"><option value="de">Русский + немецкий</option><option value="fr">Русский + французский</option><option value="it">Русский + итальянский</option><option value="ru">Только русский</option></select></div>
+    <div class="fl"><span class="lb">Что в PDF</span><div class="chk"><label><input type="checkbox" id="p1" checked> Путь признания</label><label><input type="checkbox" id="p2" checked> Сроки и деньги</label><label><input type="checkbox" id="p3" checked> Документы и сертификаты</label><label><input type="checkbox" id="p4" checked> Мой план</label></div></div>
+    <div class="fl"><span class="lb">Печать</span><label class="tog"><input type="checkbox" id="bw"> Без цвета, для дешёвой печати</label></div>
+  </div>
+  <div class="exbar" id="exbar" hidden><span>Это пример. Так будет выглядеть твой файл.</span><button type="button" class="btn sm" id="exOff">Вернуться к моим данным</button></div>
+  <div class="work">
+    <div class="form">
+      <section class="sec" aria-labelledby="h-me">
+        <h2 id="h-me">Моя профессия<button type="button" class="qh" data-help="reg" aria-label="Подсказка: регламентируемая профессия" aria-expanded="false">?</button></h2>
+        <div class="fl"><span class="lb">Кем я работала или училась</span><select id="grp"></select></div>
+        <label class="tog"><input type="checkbox" id="eu"> Диплом из страны ЕС или ЕАСТ<button type="button" class="qh" data-help="eu" aria-label="Подсказка: диплом из ЕС" aria-expanded="false">?</button></label>
+        <div class="g2">
+          <div class="fl"><span class="lb">Мой язык сейчас<button type="button" class="qh" data-help="lvl" aria-label="Подсказка: уровень языка" aria-expanded="false">?</button></span><select id="lvl"></select></div>
+          <div class="fl"><span class="lb">Начинаю в</span><div class="g2"><select id="sm" aria-label="Месяц"></select><select id="sy" aria-label="Год"></select></div></div>
+        </div>
+        <p class="hint" id="meNote"></p>
+      </section>
+      <section class="sec" aria-labelledby="h-st">
+        <h2 id="h-st">Коротко</h2>
+        <div class="steps" id="stepsList"></div>
+      </section>
+    </div>
+    <div class="sheetbox">
+      <div class="acts"><button type="button" class="btn gold" id="pdf">Скачать PDF</button><button type="button" class="btn ghost sm" id="share" hidden>Отправить</button><button type="button" class="btn ghost sm" id="exOn">Посмотреть на примере</button></div>
+      <div class="sheets" id="sheet" aria-label="Предпросмотр листов"></div>
+      <div class="status" id="status" role="status"></div>
+    </div>
+  </div>
+  <p class="imp"><b>Важно.</b> Это образец для примера и личного использования, а не официальный документ. Цены и сроки — по сайтам ведомств на октябрь 2026 года, они меняются; точные условия для твоей профессии проверяй у своего ведомства. Сроки в плане — ориентир. Автор не несёт ответственности за достоверность.</p>
+  <div class="share-slot" data-url="https://svoiludi.ch/instrumenty/diplomy-shema/" data-lead="Перешли тем, кто думает о признании диплома. Сообщение уже готово." data-text="Привет! Тут на схеме всё про признание диплома в Швейцарии: нужно ли оно, кто признаёт, сколько стоит и сколько ждать, какой язык нужен, и можно сделать свой план по месяцам. Бесплатно, PDF. https://svoiludi.ch/instrumenty/diplomy-shema/"></div>
+  <p class="credit"><span>Свои люди в Швейцарии · svoiludi.ch</span><a href="https://svoiludi.ch/privacy/">Политика конфиденциальности</a></p>
+</div>
+
+<script src="/assets/kantony.js"></script>
+<script src="/assets/lib/jspdf.umd.min.js"></script>
+<script src="/assets/shema.js"></script>
+<script>
+window.HELP = {
+  lang: '<p><b>Русский + немецкий</b> (французский, итальянский) — названия ведомств и документов ещё и на языке, на котором ты будешь с ними переписываться. Выбери язык своего кантона.</p>',
+  reg: '<p><b>Регламентируемая профессия</b> — та, в которой по закону нельзя работать без признанного диплома: врач, медсестра, учитель, психотерапевт и некоторые другие. В остальных профессиях работодатель сам решает, подходит ли твоё образование. Точно проверить можно на сайте SBFI anerkennung.swiss.</p>',
+  eu: '<p>Для дипломов из ЕС и ЕАСТ процедура часто проще и быстрее. Для дипломов из Украины, России, Беларуси, Казахстана и других стран — дольше, а у врачей прямого признания обычно нет.</p>',
+  lvl: '<p>Твой уровень немецкого, французского или итальянского сейчас. A1–A2 — начальный, B1–B2 — средний, C1–C2 — свободный. Если не знаешь, посмотри схему «Язык: что и где требуют».</p>'
+};
+const KEY = 'diplomyShema.v1';
+const LV = ['нет', 'A1', 'A2', 'B1', 'B2', 'C1', 'C2'];
+const MON = ['январь', 'февраль', 'март', 'апрель', 'май', 'июнь', 'июль', 'август', 'сентябрь', 'октябрь', 'ноябрь', 'декабрь'];
+const MS = ['янв', 'фев', 'мар', 'апр', 'май', 'июн', 'июл', 'авг', 'сен', 'окт', 'ноя', 'дек'];
+/* названия на языке переписки */
+const LOC = {
+  t1: {de: 'Anerkennung ausländischer Diplome', fr: 'Reconnaissance des diplômes étrangers', it: 'Riconoscimento dei diplomi esteri'},
+  t2: {de: 'Dauer und Kosten', fr: 'Durée et coûts', it: 'Durata e costi'},
+  t3: {de: 'Unterlagen und andere Zertifikate', fr: 'Documents et autres certificats', it: 'Documenti e altri certificati'},
+  t4: {de: 'Mein Plan', fr: 'Mon plan', it: 'Il mio piano'},
+  reg: {de: 'reglementierter Beruf', fr: 'profession réglementée', it: 'professione regolamentata'},
+  free: {de: 'nicht reglementierter Beruf', fr: 'profession non réglementée', it: 'professione non regolamentata'},
+  efz: {de: 'Berufsabschluss für Erwachsene', fr: 'certification professionnelle pour adultes', it: 'qualifica professionale per adulti'},
+  nb: {de: 'Niveaubestätigung', fr: 'attestation de niveau', it: 'attestazione di livello'},
+  sbfi: {de: 'SBFI', fr: 'SEFRI', it: 'SEFRI'},
+  srk: {de: 'Schweizerisches Rotes Kreuz (SRK)', fr: 'Croix-Rouge suisse (CRS)', it: 'Croce Rossa Svizzera (CRS)'},
+  med: {de: 'MEBEKO, BAG', fr: 'MEBEKO, OFSP', it: 'MEBEKO, UFSP'},
+  psy: {de: 'PsyKo, BAG', fr: 'PsyCo, OFSP', it: 'PsiCo, UFSP'},
+  edk: {de: 'EDK', fr: 'CDIP', it: 'CDPE'},
+  enic: {de: 'Swiss ENIC (swissuniversities)', fr: 'Swiss ENIC (swissuniversities)', it: 'Swiss ENIC (swissuniversities)'},
+  am: {de: 'Ausgleichsmassnahmen', fr: 'mesures de compensation', it: 'provvedimenti di compensazione'},
+  bb: {de: 'Berufsberatung', fr: 'orientation professionnelle', it: 'orientamento professionale'}
+};
+/* группы профессий: ведомство, цена, срок (мес), язык (индекс в LV) */
+const G = {
+  free: {n: 'Обычная профессия: экономист, бухгалтер, IT, инженер, продавец, дизайнер…', s: 'Обычная профессия', a: 'Признание не нужно', ak: 'free', fee: 'По желанию: Niveaubestätigung SBFI — 350 франков', mon: 10, mt: 'до 10 месяцев (по желанию)', lv: 0, lt: 'решает работодатель', col: 'green'},
+  sbfi: {n: 'Другая регламентируемая: электромонтажник, инструктор по вождению, юрист…', s: 'Регламентируемая (SBFI)', a: 'SBFI', ak: 'sbfi', fee: '550 франков', mon: 4, mt: 'в среднем около 4 месяцев', lv: 0, lt: 'зависит от профессии', col: 'blue'},
+  srk: {n: 'Здравоохранение: медсестра, акушерка, физиотерапевт, фельдшер…', s: 'Здравоохранение (SRK)', a: 'Красный Крест', ak: 'srk', fee: '550, 930 или 1000 франков, регистрация +130', mon: 5, mt: 'PreCheck до 4 недель, потом до 4 месяцев', lv: 4, lt: 'B2', col: 'red'},
+  med: {n: 'Врач, стоматолог, фармацевт, ветеринар', s: 'Врач, стоматолог, фармацевт', a: 'MEBEKO, BAG', ak: 'med', fee: '800–1200 франков за заявку, экзамен отдельно', mon: 5, mt: 'до 5 месяцев на заявку, потом экзамен', lv: 4, lt: 'B2', col: 'pink'},
+  psy: {n: 'Психолог, психотерапевт', s: 'Психолог, психотерапевт', a: 'PsyKo, BAG', ak: 'psy', fee: 'по тарифу BAG — уточни', mon: 0, mt: 'уточни на сайте BAG', lv: 0, lt: 'язык работы — уточни', col: 'mustard'},
+  edk: {n: 'Учитель, логопед, специальный педагог', s: 'Учитель, логопед', a: 'EDK', ak: 'edk', fee: 'около 1000 франков, можно попросить снизить', mon: 12, mt: 'до 12 месяцев (из ЕС — до 4)', lv: 6, lt: 'C2', col: 'sage'},
+  efz: {n: 'Диплома нет или он не подходит, но есть опыт работы', s: 'Опыт без диплома', a: 'Berufsberatung кантона', ak: 'bb', fee: 'консультация бесплатно', mon: 0, mt: 'зависит от пути — спроси Berufsberatung', lv: 3, lt: 'B1–B2', col: 'brown'}
+};
+const DISC = {ru: 'Образец для личного использования, не официальный документ. Цены и сроки по сайтам ведомств на 10.2026, проверяй у своего ведомства. svoiludi.ch', de: 'Muster zur Orientierung und für den persönlichen Gebrauch, kein amtliches Dokument. Angaben ohne Gewähr, bitte selbst prüfen.', fr: 'Modèle indicatif pour usage personnel, pas un document officiel. Données sans garantie, à vérifier soi-même.', it: 'Modello indicativo per uso personale, non un documento ufficiale. Dati senza garanzia, da verificare personalmente.'};
+const NOW = new Date();
+let S = load(), EX = null;
+function blank(){ return {lang: 'de', bw: false, p: {1: true, 2: true, 3: true, 4: true}, g: '', eu: false, lvl: 0, sm: NOW.getMonth(), sy: NOW.getFullYear()}; }
+function load(){ try { const s = JSON.parse(localStorage.getItem(KEY)); if (s && typeof s === 'object') return Object.assign(blank(), s); } catch (e) {} return blank(); }
+function save(){ if (EX) return; try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} }
+const D = () => EX || S, bi = d => d.lang !== 'ru', L = (d, k) => bi(d) ? LOC[k][d.lang] : '', disc = d => bi(d) ? DISC[d.lang] : DISC.ru;
+const gOf = d => { const g = G[d.g]; if (!g) return null; if (d.g === 'edk' && d.eu) return Object.assign({}, g, {mon: 4, mt: 'до 4 месяцев'}); return g; };
+
+/* ЛИСТ 1: путь признания */
+function p1(d){
+  const C = SH.pal(d.bw), P = SH.page(297, 210, C), c = C.c;
+  P.header('Признание диплома: путь', L(d, 't1'), '');
+  const X = 12, W = 273, g = 6;
+  // старт и вопрос
+  const sw = 74, qx = X + sw + 12, qw = 120;
+  const hS = P.card(X, 24, sw, c.brown, 'У меня диплом или сертификат из-за границы', '', 'Сначала узнай, нужно ли его признавать.', {bs: 8.4, ts: 10, dry: true});
+  const hQ = P.card(qx, 24, qw, c.mustard, 'Профессия регламентируемая?', '', 'То есть по закону без признания в ней работать нельзя. Проверь на сайте SBFI anerkennung.swiss: там список профессий и кто их признаёт.', {bs: 8.4, ts: 10, dry: true});
+  const hT = Math.max(hS, hQ);
+  P.card(X, 24, sw, c.brown, 'У меня диплом или сертификат из-за границы', '', 'Сначала узнай, нужно ли его признавать.', {bs: 8.4, ts: 10, minH: hT});
+  P.arrowRight(X + sw + 0.5, qx - 0.5, 24 + hT / 2, C.head);
+  P.card(qx, 24, qw, c.mustard, 'Профессия регламентируемая?', '', 'То есть по закону без признания в ней работать нельзя. Проверь на сайте SBFI anerkennung.swiss: там список профессий и кто их признаёт.', {bs: 8.4, ts: 10, minH: hT});
+  // три дороги
+  const y = 24 + hT + 14, wA = 74, wC = 74, wB = W - wA - wC - 2 * g, xB = X + wA + g, xC = xB + wB + g;
+  const qmid = qx + qw / 2;
+  [[X + wA / 2, 'нет'], [xB + wB / 2, 'да'], [xC + wC / 2, 'нет диплома']].forEach(([xm, t]) => {
+    P.line(qmid, 24 + hT, qmid, y - 7, C.head, 0.6); P.line(Math.min(qmid, xm), y - 7, Math.max(qmid, xm), y - 7, C.head, 0.6); P.arrowDown(xm, y - 7, y - 0.5, C.head);
+    P.text(t, xm + 2, y - 2.6, 6.6, true, C.head);
+  });
+  const o = {bs: 8.3, ts: 10};
+  const A = ['Работодатель сам решает, подходит ли твоё образование. Можно сразу искать работу.', 'По желанию: Niveaubestätigung SBFI — какому швейцарскому диплому соответствует твой (350 франков, до 10 месяцев).', 'Для вуза — справка Swiss ENIC (swissuniversities).', 'В резюме пиши диплом по-швейцарски и прикладывай перевод.'];
+  const B = ['Без признания работать нельзя. Признаёт ведомство твоей профессии:', '• SBFI — большинство профессий', '• Красный Крест (SRK) — медсестра, акушерка, физиотерапевт и ещё 16 профессий здоровья', '• MEBEKO, BAG — врачи, стоматологи, фармацевты, ветеринары. С дипломом не из ЕС прямое признание обычно невозможно — федеральный экзамен', '• PsyKo, BAG — психологи и психотерапевты', '• EDK — учителя, логопеды, специальные педагоги'];
+  const Cc = ['Швейцарский диплом EFZ или EBA взрослым: обычно 5 лет работы, из них 2–4 года в профессии, язык B1–B2.', 'Пути: экзамен с прямым допуском, подтверждение опыта (Validierung), сокращённая Lehre.', 'Начни с бесплатной консультации Berufsberatung кантона.'];
+  const hh = Math.max(P.card(0, 0, wA, c.green, 'Нет — обычная профессия', L(d, 'free'), A, Object.assign({dry: true}, o)), P.card(0, 0, wB, c.red, 'Да — нужно признание', L(d, 'reg'), B, Object.assign({dry: true}, o)), P.card(0, 0, wC, c.brown, 'Диплома нет, есть опыт', L(d, 'efz'), Cc, Object.assign({dry: true}, o)));
+  P.card(X, y, wA, c.green, 'Нет — обычная профессия', L(d, 'free'), A, Object.assign({minH: hh}, o));
+  P.card(xB, y, wB, c.red, 'Да — нужно признание', L(d, 'reg'), B, Object.assign({minH: hh}, o));
+  P.card(xC, y, wC, c.brown, 'Диплома нет, есть опыт', L(d, 'efz'), Cc, Object.assign({minH: hh}, o));
+  // как идёт процедура
+  let yy = P.sec('Как идёт признание', X, y + hh + 12, W, 'для регламентируемых профессий');
+  const ST = [['Документы', 'Диплом, приложение с предметами и часами, справки о работе, переводы.', 'brown'], ['Язык', 'Часто нужен сертификат: B2, у учителей C2. Иногда его ждут уже в заявке.', 'blue'], ['Заявка', 'Онлайн, со счётом. Срок идёт, когда досье полное и счёт оплачен.', 'mustard'], ['Решение', 'Признано — или выравнивающие меры: экзамен, курс или практика. Отказ можно обжаловать в срок из письма.', 'red'], ['Работа', 'Часто ещё запись в реестр (MedReg, GesReg, NAREG) и разрешение кантона.', 'green']];
+  const sw2 = (W - 4 * g) / 5, os = {bs: 8, ts: 9.8};
+  const hs = Math.max(...ST.map(s => P.card(0, 0, sw2, c[s[2]], s[0], '', s[1], Object.assign({dry: true}, os))));
+  ST.forEach((s, i) => { const x = X + i * (sw2 + g); P.card(x, yy, sw2, c[s[2]], (i + 1) + ' · ' + s[0], '', s[1], Object.assign({minH: hs}, os)); if (i < 4) P.arrowRight(x + sw2 + 0.5, x + sw2 + g - 0.5, yy + hs / 2, C.head); });
+  P.foot(disc(d));
+  return P;
+}
+
+/* ЛИСТ 2: сроки и деньги */
+function p2(d){
+  const C = SH.pal(d.bw), P = SH.page(297, 210, C), c = C.c;
+  P.header('Сколько ждать и сколько стоит', L(d, 't2'), '');
+  const X = 12, W = 273;
+  const cN = X, cF = X + 70, cB = X + 128, bw = 108, cL = cB + bw + 6;
+  const M = 12, mw = bw / M;
+  let y = 27;
+  P.text('Кто признаёт', cN, y, 7.4, true, C.head); P.text('Сколько стоит', cF, y, 7.4, true, C.head); P.text('Сколько ждать, месяцев', cB, y, 7.4, true, C.head); P.text('Язык', cL, y, 7.4, true, C.head);
+  y += 2; P.line(X, y, X + W, y, C.head, 0.4);
+  for (let m = 0; m <= M; m += 2) { P.text(String(m), cB + m * mw, y + 4, 6, false, C.mut, 'center'); }
+  y += 6;
+  const R = [
+    ['SBFI', 'большинство регламентируемых профессий', '550 франков', [[0, 4, 'blue', 'в среднем ~4']], true, 'зависит от профессии'],
+    ['SBFI · Niveaubestätigung', 'по желанию, для обычных профессий', '350 франков', [[0, 10, 'green', 'до 10']], false, '—'],
+    ['Красный Крест (SRK)', 'медсестра и ещё 18 профессий здоровья; сначала бесплатный PreCheck до 4 недель', '550, 930 или 1000; регистрация +130', [[0, 1, 'sage', ''], [1, 5, 'red', 'до 4']], true, 'B2'],
+    ['MEBEKO, BAG', 'врачи, стоматологи, фармацевты', '800–1200 за заявку, экзамен отдельно', [[0, 5, 'pink', 'до 5']], 'exam', 'B2'],
+    ['EDK', 'учителя, логопеды', 'около 1000, можно попросить снизить', [[0, 4, 'sage', 'ЕС до 4'], [0, 12, 'mustard', 'другие страны до 12', 1]], true, 'C2'],
+    ['PsyKo, BAG', 'психологи, психотерапевты', 'по тарифу BAG — уточни', null, false, 'уточни'],
+    ['Swiss ENIC', 'справка о вузовском дипломе', 'уточни на swissuniversities', null, false, '—']
+  ];
+  R.forEach(r => {
+    const h0 = Math.max(SH.wrap(r[1], false, 7, 66).length * 3.2 + 5, SH.wrap(r[2], false, 7.8, 54).length * 3.6, r[3] && r[3].some(b => b[4]) ? 15 : 9) + 4;
+    P.text(r[0], cN, y + 3.4, 8.8, true, C.ink); P.para(r[1], cN, y + 7.4, 7, false, C.mut, 66, 3.2);
+    P.para(r[2], cF, y + 3.4, 7.8, false, C.ink, 54, 3.6);
+    // сетка
+    P.rect(cB, y, bw, h0 - 4, C.soft, null, 0.8);
+    for (let m = 1; m < M; m++) P.line(cB + m * mw, y, cB + m * mw, y + h0 - 4, '#FFFFFF', 0.3);
+    if (r[3]) r[3].forEach(b => { const by = y + 1.2 + (b[4] || 0) * 7, col = c[b[2]]; P.rect(cB + b[0] * mw, by, (b[1] - b[0]) * mw, 6, col[0], col[1], 1.2); if (b[3]) P.text(b[3], cB + b[0] * mw + 1.6, by + 4.1, 6.6, true, col[1]); });
+    else P.text('срок не публикуют — уточни у ведомства', cB + 2, y + 5, 7, false, C.mut);
+    if (r[4] === true) { const last = Math.max(...r[3].map(b => b[1])); if (last < M) { P.rect(cB + last * mw, y + 1.2, (M - last) * mw, 6, null, c.red[1], 1.2, true); P.text('+ выравнивающие меры', cB + last * mw + 1.6, y + 5.1, 6.2, false, c.red[1]); } }
+    if (r[4] === 'exam') { P.rect(cB + 5 * mw, y + 1.2, 7 * mw, 6, null, c.pink[1], 1.2, true); P.text('+ федеральный экзамен', cB + 5 * mw + 1.6, y + 5.1, 6.2, false, c.pink[1]); }
+    P.text(r[5], cL, y + 3.4, r[5].length < 4 ? 9 : 7.8, r[5].length < 4, C.ink);
+    y += h0; P.line(X, y - 1.5, X + W, y - 1.5, C.line, 0.25);
+  });
+  y += 5;
+  const N = ['Срок идёт с момента, когда досье полное и счёт оплачен. Неполное досье — первая причина задержек.', 'Выравнивающие меры (экзамен, курс, практика) оплачиваются отдельно и удлиняют путь на месяцы.', 'В трудной ситуации у SBFI и EDK можно попросить снизить плату.', 'Пока идёт признание, можно работать ниже по уровню, например ассистенткой: это опыт и язык.', 'Врачи с дипломом не из ЕС: прямой допуск к федеральному экзамену после 36 месяцев клинической работы в Швейцарии, после 60 месяцев — только теоретическая часть. Запись на экзамен до 31 марта.'];
+  const hw = (W - 6) / 2;
+  const n1 = N.slice(0, 3), n2 = N.slice(3);
+  const hN = Math.max(P.card(0, 0, hw, c.mustard, 'Важно знать', L(d, 'am'), n1, {bs: 8, ts: 9.8, dry: true}), P.card(0, 0, hw, c.blue, 'Пока ждёшь', '', n2, {bs: 8, ts: 9.8, dry: true}));
+  P.card(X, y, hw, c.mustard, 'Важно знать', L(d, 'am'), n1, {bs: 8, ts: 9.8, minH: hN});
+  P.card(X + hw + 6, y, hw, c.blue, 'Пока ждёшь', '', n2, {bs: 8, ts: 9.8, minH: hN});
+  P.foot(disc(d));
+  return P;
+}
+
+/* ЛИСТ 3: документы и другие сертификаты */
+function p3(d){
+  const C = SH.pal(d.bw), P = SH.page(297, 210, C), c = C.c;
+  P.header('Документы и другие сертификаты', L(d, 't3'), '');
+  const X = 12, lw = 112, rx = X + lw + 8, rw = 273 - lw - 8;
+  let y = P.sec('Что обычно нужно для признания', X, 27, lw, 'точный список — у ведомства');
+  const DOC = ['Паспорт или ID', 'Диплом — копия, иногда заверенная', 'Приложение к диплому: предметы и часы', 'Справки о работе в профессии', 'Разрешение работать в стране диплома, если оно было', 'Языковой сертификат: B2, у учителей C2', 'Официальный перевод, если документ не на немецком, французском, итальянском или английском', 'Апостиль — если ведомство просит', 'Новая фамилия — свидетельство о браке'];
+  DOC.forEach(s => { P.rect(X + 2, y - 3, 3.6, 3.6, '#FFFFFF', C.head, 0.6); y = P.para(s, X + 8, y, 8.8, false, C.ink, lw - 8, 4) + 2.2; });
+  y += 2;
+  y += P.card(X, y, lw, c.brown, 'Отправляешь бумаги по почте', '', ['Оригиналы не отправляй, если их прямо не просят. Посылай заказным письмом (Einschreiben), сохрани копию всего и квитанцию.'], {bs: 8.4, ts: 10}) + 4;
+  P.card(X, y, lw, c.red, 'Если отказали или назначили меры', '', ['В письме с решением написано, сколько дней на возражение и куда его подать — обычно 30 дней. Не пропусти срок, отправь заказным.', 'Можно спросить ведомство, что именно не хватает, и доучиться.'], {bs: 8.4, ts: 10});
+  let yr = P.sec('Другие сертификаты', rx, 27, rw);
+  const cw = (rw - 5) / 2;
+  const K = [
+    ['Языковые сертификаты', 'Goethe, telc, ÖSD, DELF/DALF, CILS, CELI, fide — признавать не нужно. Для разных целей нужны разные: для пермита и паспорта — fide или признанный тест. Для реестра врачей — не старше 6 лет.', 'blue'],
+    ['Водительские права', 'Обменять на швейцарские в течение 12 месяцев после приезда, в Strassenverkehrsamt кантона. Иногда нужна контрольная поездка. Потом с иностранными ездить нельзя.', 'red'],
+    ['Аттестат и учёба в вузе', 'Для поступления решает сам вуз: какие документы, нужен ли экзамен и язык. Для работы школьный аттестат не признают.', 'sage'],
+    ['Курсы и повышение квалификации', 'Признания нет, решает работодатель. Помогает перевод и короткое описание: сколько часов, что умеешь.', 'mustard'],
+    ['Свидетельства о рождении, браке', 'Это не признание диплома: их вносит в реестр ведомство гражданского состояния (Zivilstandsamt). Часто нужен апостиль и перевод.', 'brown'],
+    ['Профессии без регламента', 'Справка Swiss ENIC о вузовском дипломе или Niveaubestätigung SBFI помогает работодателю понять твой уровень.', 'green']
+  ];
+  const ok = {bs: 8.4, ts: 10};
+  for (let i = 0; i < K.length; i += 2) {
+    const a = K[i], b = K[i + 1];
+    const h = Math.max(P.card(0, 0, cw, c[a[2]], a[0], '', a[1], Object.assign({dry: true}, ok)), P.card(0, 0, cw, c[b[2]], b[0], '', b[1], Object.assign({dry: true}, ok)));
+    P.card(rx, yr, cw, c[a[2]], a[0], '', a[1], Object.assign({minH: h}, ok));
+    P.card(rx + cw + 5, yr, cw, c[b[2]], b[0], '', b[1], Object.assign({minH: h}, ok));
+    yr += h + 5;
+  }
+  P.foot(disc(d));
+  return P;
+}
+
+/* расчёт плана */
+function plan(d){
+  const g = gOf(d); if (!g) return null;
+  const gap = Math.max(0, g.lv - (+d.lvl || 0));
+  const langM = gap * 4; // ориентир: 3–4 месяца на уровень при интенсивном курсе
+  const docsM = 2, needLangFirst = ['srk', 'med'].includes(d.g), sub = needLangFirst ? Math.max(docsM, langM) : docsM, dec = g.mon ? sub + g.mon : 0;
+  const end = Math.max(dec ? dec + (d.g === 'free' ? 0 : 4) : sub + 4, langM, 12);
+  return {g, gap, langM, docsM, sub, dec, H: Math.min(36, end + 1)};
+}
+const mName = (d, k) => { const t = (+d.sm || 0) + k; return MON[((t % 12) + 12) % 12] + ' ' + ((+d.sy || NOW.getFullYear()) + Math.floor(t / 12)); };
+
+/* ЛИСТ 4: мой план */
+function p4(d){
+  const C = SH.pal(d.bw), P = SH.page(210, 297, C), c = C.c, r = plan(d);
+  P.header('Мой план признания', L(d, 't4'), '');
+  let y = 28;
+  if (!r) { P.para('Выбери на сайте свою профессию, и здесь появится твой план по месяцам.', 12, y, 9, false, C.ink, 186, 4.2); P.foot(disc(d)); return P; }
+  const g = r.g, col = c[g.col];
+  const lk = bi(d) && LOC[g.ak] ? LOC[g.ak][d.lang] : '';
+  const info = ['Кто: ' + g.a + (lk && lk !== g.a ? ' — ' + lk : ''), 'Сколько стоит: ' + g.fee, 'Сколько ждать: ' + g.mt, 'Язык: ' + g.lt + (g.lv ? (r.gap ? ' — у тебя ' + LV[+d.lvl || 0] + ', не хватает ' + r.gap + (r.gap === 1 ? ' уровня' : ' уровней') + ' (примерно ' + r.gap * 150 + ' уроков)' : ' — у тебя уже есть') : '')];
+  if (d.g === 'med' && !d.eu) info.push('С дипломом не из ЕС прямое признание обычно невозможно: путь — федеральный экзамен.');
+  if (d.g === 'edk' && !d.eu) info.push('Со статусом S языковой диплом C2 можно досдать в течение 2 лет после заявки.');
+  if (['srk', 'med'].includes(d.g) && r.gap) info.push('Сертификат языка обычно нужен уже в заявке, поэтому в плане заявка — после языка.');
+  y += P.card(12, y, 186, col, g.s, d.eu ? 'диплом из ЕС или ЕАСТ' : '', info, {bs: 9, ts: 11}) + 8;
+  // шкала по месяцам
+  y = P.sec('План по месяцам', 12, y, 186, 'ориентир, начало — ' + mName(d, 0));
+  const H = r.H, lx = 50, gw = 148, mw = gw / H;
+  for (let k = 0; k < H; k++) { const t = (+d.sm || 0) + k, mi = ((t % 12) + 12) % 12; P.rect(lx + k * mw + 0.2, y, mw - 0.4, 5, mi === 0 ? C.soft : '#FFFFFF', C.line, 0.6); if (mw > 4.4 || k % 2 === 0) P.text(MS[mi], lx + k * mw + mw / 2, y + 3.4, Math.min(5.2, mw * 1.1), false, C.mut, 'center'); if (mi === 0 || k === 0) P.text(String((+d.sy || NOW.getFullYear()) + Math.floor(t / 12)), lx + k * mw + 0.4, y - 1.2, 5.6, true, C.head); }
+  y += 8;
+  const bar = (label, a, b, cl, dash, note) => { P.para(label, 12, y + 4, 8.2, true, C.ink, 37, 3.4); if (b > a) { P.rect(lx + a * mw, y, Math.min(b, H) * mw - a * mw, 6.4, dash ? null : cl[0], cl[1], 1.2, dash); } if (note) P.text(note, lx + Math.min(b, H - 1) * mw + 1.5, y + 4.4, 6.8, false, cl[1]); y += 11; };
+  bar('Документы и переводы', 0, r.docsM, c.brown);
+  if (r.gap) bar('Язык до ' + LV[g.lv], 0, r.langM, c.blue, false, r.langM < H - 6 ? '~' + r.langM + ' мес.' : '');
+  if (d.g === 'free') bar('Niveaubestätigung, по желанию', r.sub, r.dec, c.green, false, '');
+  else if (d.g === 'efz') bar('Berufsberatung', 0, 1, c.brown, false, 'дальше по плану консультации');
+  else if (d.g === 'psy') bar('Заявка в BAG', r.sub, r.sub + 1, col, false, 'срок уточни');
+  else { bar('Заявка → решение', r.sub, r.dec, col, false, ''); bar(d.g === 'med' ? 'Федеральный экзамен' : 'Если назначат меры', r.dec, r.dec + 4, c.red, true, d.g === 'med' ? 'дольше' : ''); }
+  y += 2;
+  const KEYD = [['Начало', 0]].concat(r.gap ? [['Язык ' + LV[g.lv] + ' — ориентир', r.langM]] : []).concat(d.g === 'efz' || d.g === 'psy' ? [] : [['Заявка подана', r.sub]]).concat(r.dec ? [['Решение — ожидаю', r.dec]] : []);
+  KEYD.forEach(([t, k]) => { P.text(t, 14, y, 9, false, C.ink); P.text(mName(d, k), 80, y, 9, true, C.head); y += 6.2; });
+  y += 3;
+  y = P.sec('Мои шаги', 12, y, 186);
+  const SS = d.g === 'free' ? ['Проверь на anerkennung.swiss, что профессия не регламентируемая.', 'Переведи диплом и приложение, впиши их в резюме по-швейцарски.', 'По желанию: закажи Niveaubestätigung SBFI или справку Swiss ENIC.', 'Ищи работу, не дожидаясь справки.']
+    : d.g === 'efz' ? ['Запишись в Berufsberatung кантона — консультация бесплатная.', 'Собери справки о работе: где, кем, сколько лет и что делала.', 'Подтяни язык до B1–B2.', 'Выбери путь: экзамен с прямым допуском, Validierung или сокращённая Lehre.']
+    : ['Проверь на anerkennung.swiss своё ведомство и список документов.', 'Закажи переводы и копии, собери справки о работе.', g.lv ? 'Сдай языковой экзамен ' + LV[g.lv] + ' (Goethe, telc, ÖSD, DELF/DALF, CILS или другой признанный).' : 'Узнай, нужен ли сертификат языка для твоей профессии.', 'Подай заявку онлайн и оплати счёт — срок пойдёт только после этого.', 'Пока ждёшь, ищи работу ниже по уровню, чтобы набрать опыт и язык.'];
+  SS.forEach(s => { P.rect(14, y - 3, 3.6, 3.6, '#FFFFFF', C.head, 0.6); y = P.para(s, 20, y, 9, false, C.ink, 176, 4.1) + 2.2; });
+  y = P.sec('Мои даты', 12, y + 3, 186, 'впиши от руки');
+  ['Номер заявки', 'Заявка подана', 'Счёт оплачен', 'Язык сдан', 'Решение пришло', 'Возражение — до'].forEach(s => { if (y > 280) return; P.text(s, 14, y + 1, 9, false, C.ink); P.line(60, y + 2, 198, y + 2, C.line, 0.4); y += 8.4; });
+  P.foot(disc(d));
+  return P;
+}
+function build(){ const d = D(), p = []; [p1, p2, p3, p4].forEach((f, i) => { if (d.p[i + 1] !== false) p.push(f(d)); }); return p; }
+
+const $ = id => document.getElementById(id);
+$('grp').innerHTML = '<option value="">Выбери</option>' + Object.keys(G).map(k => `<option value="${k}">${SH.esc(G[k].n)}</option>`).join('');
+$('lvl').innerHTML = LV.map((l, i) => `<option value="${i}">${i ? l : 'ещё не учила'}</option>`).join('');
+$('sm').innerHTML = MON.map((m, i) => `<option value="${i}">${m}</option>`).join('');
+{ let o = ''; for (let y = NOW.getFullYear(); y <= NOW.getFullYear() + 3; y++) o += `<option value="${y}">${y}</option>`; $('sy').innerHTML = o; }
+$('stepsList').innerHTML = [['Нужно ли признавать', 'Только в регламентируемых профессиях: медицина и уход, школа, психотерапия, право и некоторые технические. В остальных решает работодатель. Проверка — anerkennung.swiss.'], ['Кто признаёт', 'SBFI — большинство профессий; Красный Крест (SRK) — профессии здоровья; MEBEKO и BAG — врачи, стоматологи, фармацевты; PsyKo — психологи; EDK — учителя.'], ['Сколько стоит и сколько ждать', 'SBFI — 550 франков, в среднем около 4 месяцев; Niveaubestätigung — 350 и до 10 месяцев; SRK — 550–1000 и до 4 месяцев; EDK — около 1000 и до года для дипломов не из ЕС; MEBEKO — 800–1200 за заявку и до 5 месяцев.'], ['Язык', 'Для профессий здоровья обычно B2, для учителей C2.'], ['Нет диплома, но есть опыт', 'Швейцарский диплом EFZ для взрослых: обычно 5 лет работы, язык B1–B2. Начни с Berufsberatung.']].map(s => `<details><summary>${SH.esc(s[0])}</summary><p>${SH.esc(s[1])}</p></details>`).join('');
+let UI;
+function fill(){
+  const d = D();
+  $('lang').value = d.lang; $('bw').checked = !!d.bw; $('grp').value = d.g; $('eu').checked = !!d.eu; $('lvl').value = String(d.lvl || 0); $('sm').value = String(d.sm); $('sy').value = String(d.sy);
+  [1, 2, 3, 4].forEach(n => $('p' + n).checked = d.p[n] !== false);
+  ['grp', 'eu', 'lvl', 'sm', 'sy'].forEach(id => $(id).disabled = !!EX);
+  const r = plan(d);
+  $('meNote').textContent = r ? `${r.g.a}: ${r.g.fee}; ${r.g.mt}.` + (r.gap ? ` Язык: нужен ${LV[r.g.lv]}, не хватает ${r.gap} ${r.gap === 1 ? 'уровня' : 'уровней'}.` : '') : 'Выбери профессию, и появится твой план по месяцам.';
+  $('exbar').hidden = !EX; $('exOn').hidden = !!EX;
+  if (UI) UI.render();
+}
+const set = f => { f(S); if (EX) f(EX); save(); fill(); };
+$('lang').addEventListener('change', e => set(s => s.lang = e.target.value));
+$('bw').addEventListener('change', e => set(s => s.bw = e.target.checked));
+[1, 2, 3, 4].forEach(n => $('p' + n).addEventListener('change', e => set(s => s.p[n] = e.target.checked)));
+$('grp').addEventListener('change', e => { if (EX) return; S.g = e.target.value; save(); fill(); });
+$('eu').addEventListener('change', e => { if (EX) return; S.eu = e.target.checked; save(); fill(); });
+[['lvl', 'lvl'], ['sm', 'sm'], ['sy', 'sy']].forEach(([id, k]) => $(id).addEventListener('change', e => { if (EX) return; S[k] = +e.target.value; save(); fill(); }));
+const EXD = () => ({lang: 'de', bw: S.bw, p: {1: true, 2: true, 3: true, 4: true}, g: 'srk', eu: false, lvl: 3, sm: 10, sy: 2026});
+$('exOn').addEventListener('click', () => { EX = EXD(); fill(); window.scrollTo({top: $('exbar').offsetTop - 12, behavior: 'smooth'}); });
+$('exOff').addEventListener('click', () => { EX = null; fill(); });
+if (/[?&]example\b/.test(location.search)) EX = EXD();
+UI = SH.mount({build, title: 'Признание дипломов', name: () => 'Diplomy-shema' + (D().g ? '-' + D().g : '')});
+fill();
+
+</script>
+<script src="/assets/help.js"></script>
+<script src="/assets/backup.js"></script>
+<script src="/assets/pdffan.js" defer></script>
+<script src="/assets/share.js" defer></script>
+<script src="/assets/samesite.js"></script>
+</body>
+</html>
