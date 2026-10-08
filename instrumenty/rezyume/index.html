@@ -100,6 +100,24 @@ input[type=date]{font:inherit;font-size:.95rem;color:var(--ink);background:var(-
 .chips button[aria-pressed="true"]{background:var(--sage-soft);border-color:var(--sage);color:var(--ink)}
 .chips button[aria-pressed="true"]::before{content:"✓ ";color:var(--sage)}
 .boxes{display:flex;flex-wrap:wrap;gap:6px 14px}
+.grps{display:flex;flex-direction:column;border:1.5px solid var(--line);border-radius:14px;overflow:hidden;background:var(--bg)}
+.grp+.grp{border-top:1.5px solid var(--line)}
+.grp>summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:8px;padding:10px 12px;font-weight:700;font-size:.9rem}
+.grp>summary::-webkit-details-marker{display:none}
+.grp>summary::after{content:"";width:7px;height:7px;border-right:2px solid var(--muted);border-bottom:2px solid var(--muted);transform:rotate(45deg);margin-left:auto;transition:transform .2s;flex:none}
+.grp[open]>summary::after{transform:rotate(-135deg)}
+.grp>summary .gc{font-size:.74rem;font-weight:800;color:#fff;background:var(--sage);border-radius:999px;padding:1px 8px}
+.grp>summary .gc:empty{display:none}
+.grp .chips{padding:0 12px 12px}
+.attrow{display:grid;grid-template-columns:118px minmax(0,1fr);gap:12px;align-items:start}
+@media (max-width:420px){.attrow{grid-template-columns:1fr}}
+.attth{width:118px;aspect-ratio:210/297;background:#fff;border:1.5px solid var(--line);border-radius:8px;display:grid;place-items:center;overflow:hidden;position:relative;padding:6px}
+.attth img{max-width:100%;max-height:100%;display:block;box-shadow:0 1px 3px rgba(0,0,0,.15)}
+.attth .pg{position:absolute;right:4px;bottom:4px;background:var(--brown);color:var(--paper);font-size:.66rem;font-weight:800;border-radius:999px;padding:1px 7px}
+.attctl{display:flex;flex-direction:column;gap:10px;min-width:0}
+input[type=range]{width:100%;accent-color:var(--sage)}
+.rng{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:6px 12px}
+.rng label{font-size:.76rem;font-weight:700;color:var(--muted);display:flex;flex-direction:column;gap:2px}
 .boxes .chk{font-weight:600}
 
 /* живой лист */
@@ -144,6 +162,7 @@ input[type=date]{font:inherit;font-size:.95rem;color:var(--ink);background:var(-
       <li><b>Выбери кантон, где ищешь работу.</b> Язык резюме выберется сам. Пиши тексты сразу на этом языке. Заголовки, даты, уровни языков и пермит переведутся сами.</li>
       <li><b>Заполни разделы.</b> Почти всё выбирается из списков: даты, гражданство, семейное положение, права, уровень образования, языки и сертификаты. Лист рядом меняется сразу, так будет выглядеть PDF.</li>
       <li><b>Выбери шаблон и цвет.</b> Для банков и госслужбы подходит «Строгий», для остальных «С колонкой» или «Классика».</li>
+      <li><b>Добавь приложения.</b> Сфотографируй дипломы и рекомендации с работы или загрузи PDF. Документ сам выровняется, лишний фон обрежется, и каждый встанет на свой лист A4 после резюме.</li>
       <li><b>Скачай PDF</b> и прикрепи его к письму или к отклику на сайте вакансий. На телефоне кнопка «Отправить» сразу открывает почту и мессенджеры.</li>
     </ol>
   </section>
@@ -237,18 +256,32 @@ input[type=date]{font:inherit;font-size:.95rem;color:var(--ink);background:var(-
         <div class="acts"><button type="button" class="btn ghost sm" data-add="lng">+ Добавить язык</button></div>
       </div></details>
 
-      <details class="sec"><summary><span class="num">7</span>Навыки и интересы</summary><div class="body">
-        <label class="fl"><span class="lb">Навыки, программы, сертификаты<button type="button" class="qh" data-help="skills" aria-label="Подсказка: навыки" aria-expanded="false">?</button></span>
-          <textarea data-f="skills" rows="3" placeholder="MS Excel (sehr gut), SAP FI/CO, Power BI&#10;Budgetierung, Forecasting, Reporting"></textarea></label>
-        <div class="fl"><span class="lb">Нажми, чтобы добавить или убрать</span><div class="chips" id="ch-skills"></div></div>
-        <label class="fl"><span class="lb">Интересы (если хочешь)</span><input type="text" data-f="interests" placeholder="Wandern, Fotografie, Freiwilligenarbeit"></label>
-        <div class="fl"><span class="lb">Нажми, чтобы добавить на языке резюме</span><div class="chips" id="ch-int"></div></div>
+      <details class="sec"><summary><span class="num">7</span>Навыки<span class="cnt" id="c-skl"></span></summary><div class="body">
+        <p class="hint">Открой нужные группы и отметь всё, что умеешь. В резюме навыки встанут по группам и сами переведутся на язык резюме.</p>
+        <div id="skl" class="grps"></div>
+        <label class="fl"><span class="lb">Чего нет в списке, допиши сама<button type="button" class="qh" data-help="skills" aria-label="Подсказка: свои навыки" aria-expanded="false">?</button></span>
+          <textarea data-f="skills" rows="2" placeholder="Lohnbuchhaltung mit Swissdec&#10;Kassensystem Lightspeed"></textarea></label>
       </div></details>
 
-      <details class="sec"><summary><span class="num">8</span>Рекомендации</summary><div class="body">
+      <details class="sec"><summary><span class="num">8</span>Интересы<span class="cnt" id="c-ints"></span></summary><div class="body">
+        <p class="hint">По желанию. Два-четыре интереса делают резюме живым. Отмеченное пишется на языке резюме.</p>
+        <div id="intc" class="grps"></div>
+        <label class="fl"><span class="lb">Свои интересы (если нет в списке)</span><input type="text" data-f="interests" placeholder="Bergsteigen, Ukrainischer Chor Zürich"></label>
+      </div></details>
+
+      <details class="sec"><summary><span class="num">9</span>Рекомендации</summary><div class="body">
         <label class="chk"><input type="checkbox" id="refreq" checked> Написать «Рекомендации по запросу»<button type="button" class="qh" data-help="refs" aria-label="Подсказка: рекомендации" aria-expanded="false">?</button></label>
         <div id="l-ref" class="fl"></div>
         <div class="acts" id="refadd" hidden><button type="button" class="btn ghost sm" data-add="ref">+ Добавить рекомендателя</button></div>
+      </div></details>
+
+      <details class="sec" id="attsec"><summary><span class="num">10</span>Приложения<span class="cnt" id="c-att"></span></summary><div class="body">
+        <p class="hint">Дипломы, рекомендации с работы (Arbeitszeugnis), сертификаты. Сфотографируй бумагу или загрузи файл. Каждый документ встанет ровно на свой лист A4 после резюме, в тот же PDF.</p>
+        <div class="acts"><label class="btn free sm" for="attfile" style="cursor:pointer">+ Добавить фото или PDF</label><input type="file" id="attfile" accept="image/*,application/pdf" multiple hidden><button type="button" class="qh" data-help="att" aria-label="Подсказка: приложения" aria-expanded="false">?</button></div>
+        <label class="chk"><input type="checkbox" data-f="attOn"> Добавлять приложения в PDF резюме</label>
+        <label class="chk"><input type="checkbox" data-f="attList"> Первый лист — список приложений<button type="button" class="qh" data-help="attList" aria-label="Подсказка: список приложений" aria-expanded="false">?</button></label>
+        <div id="l-att" class="fl"></div>
+        <p class="hint" id="attsize"></p>
       </div></details>
     </div>
 
@@ -287,7 +320,7 @@ const KEY = 'rezyumeCH.v1';
 const COLORS = {sage: ['#4F5E3E', '#E6EADD', 'Шалфей'], blue: ['#2E5A88', '#E3EBF4', 'Синий'], wine: ['#7A2E3A', '#F3E4E6', 'Бордо'], gold: ['#9A6B12', '#F5EBD6', 'Горчица'], ink: ['#2B2724', '#ECEAE7', 'Чёрно-белый']};
 const blank = () => ({lang: 'de', canton: '', tpl: 'kolonka', color: 'sage', photoOn: true, photo: '', refReq: true,
   p: {first: '', last: '', title: '', street: '', zip: '', town: '', phone: '', email: '', web: '', birth: '', natc: '', natc2: '', nat: '', permit: '', civc: '', kids: '', sex: 'f', dk: [], car: false},
-  profile: '', exp: [], edu: [], trn: [], lng: [], skills: '', interests: '', ref: [], saved: ''});
+  profile: '', exp: [], edu: [], trn: [], lng: [], skl: [], skills: '', ints: [], interests: '', ref: [], att: [], attOn: true, attList: true, saved: ''});
 let S = load(), EX = null, showEx = false;
 function load(){ try { const d = JSON.parse(localStorage.getItem(KEY) || 'null'); if (d && d.p){ const b = blank(); return Object.assign(b, d, {p: Object.assign(b.p, d.p)}); } } catch (e) {} return blank(); }
 let saveT = 0;
@@ -298,27 +331,27 @@ const D = () => showEx ? EX : S;
 
 /* ===================== переводы для листа ===================== */
 const L = {
- de: {doc: 'Lebenslauf', pers: 'Persönliche Angaben', contact: 'Kontakt', profile: 'Kurzprofil', exp: 'Berufserfahrung', edu: 'Ausbildung', trn: 'Weiterbildung', lng: 'Sprachen', skills: 'Kenntnisse', int: 'Interessen', ref: 'Referenzen', refReq: 'Referenzen auf Anfrage',
+ de: {att: 'Beilagen', attOne: 'Beilage', fileAll: 'Bewerbungsunterlagen', doc: 'Lebenslauf', pers: 'Persönliche Angaben', contact: 'Kontakt', profile: 'Kurzprofil', exp: 'Berufserfahrung', edu: 'Ausbildung', trn: 'Weiterbildung', lng: 'Sprachen', skills: 'Kenntnisse', int: 'Interessen', ref: 'Referenzen', refReq: 'Referenzen auf Anfrage',
    birth: 'Geburtsdatum', nat: 'Nationalität', permit: 'Bewilligung', civil: 'Zivilstand', drive: 'Führerausweis', addr: 'Adresse', phone: 'Telefon', email: 'E-Mail', web: 'Web', now: 'heute', page: (n, m) => `Seite ${n} von ${m}`, file: 'Lebenslauf',
    lv: {native: 'Muttersprache', C2: 'C2 – ausgezeichnet', C1: 'C1 – sehr gut', B2: 'B2 – gut', B1: 'B1 – mittel', A2: 'A2 – Grundkenntnisse', A1: 'A1 – Anfänger'},
    pm: {CH: 'Schweizer Bürgerrecht', C: 'Niederlassungsbewilligung C', B: 'Aufenthaltsbewilligung B', L: 'Kurzaufenthaltsbewilligung L', G: 'Grenzgängerbewilligung G', S: 'Schutzstatus S', F: 'Vorläufig aufgenommen (F)'}},
- fr: {doc: 'Curriculum vitae', pers: 'Données personnelles', contact: 'Contact', profile: 'Profil', exp: 'Expérience professionnelle', edu: 'Formation', trn: 'Formation continue', lng: 'Langues', skills: 'Compétences', int: 'Centres d’intérêt', ref: 'Références', refReq: 'Références sur demande',
+ fr: {att: 'Annexes', attOne: 'Annexe', fileAll: 'Dossier_de_candidature', doc: 'Curriculum vitae', pers: 'Données personnelles', contact: 'Contact', profile: 'Profil', exp: 'Expérience professionnelle', edu: 'Formation', trn: 'Formation continue', lng: 'Langues', skills: 'Compétences', int: 'Centres d’intérêt', ref: 'Références', refReq: 'Références sur demande',
    birth: 'Date de naissance', nat: 'Nationalité', permit: 'Permis', civil: 'État civil', drive: 'Permis de conduire', addr: 'Adresse', phone: 'Téléphone', email: 'E-mail', web: 'Web', now: 'aujourd’hui', page: (n, m) => `Page ${n} sur ${m}`, file: 'CV',
    lv: {native: 'Langue maternelle', C2: 'C2 – excellent', C1: 'C1 – très bon', B2: 'B2 – bon', B1: 'B1 – moyen', A2: 'A2 – notions', A1: 'A1 – débutant'},
    pm: {CH: 'Nationalité suisse', C: 'Permis C (établissement)', B: 'Permis B (séjour)', L: 'Permis L (courte durée)', G: 'Permis G (frontalier)', S: 'Permis S (protection)', F: 'Permis F (admission provisoire)'}},
- it: {doc: 'Curriculum vitae', pers: 'Dati personali', contact: 'Contatto', profile: 'Profilo', exp: 'Esperienza professionale', edu: 'Formazione', trn: 'Formazione continua', lng: 'Lingue', skills: 'Competenze', int: 'Interessi', ref: 'Referenze', refReq: 'Referenze su richiesta',
+ it: {att: 'Allegati', attOne: 'Allegato', fileAll: 'Documenti_candidatura', doc: 'Curriculum vitae', pers: 'Dati personali', contact: 'Contatto', profile: 'Profilo', exp: 'Esperienza professionale', edu: 'Formazione', trn: 'Formazione continua', lng: 'Lingue', skills: 'Competenze', int: 'Interessi', ref: 'Referenze', refReq: 'Referenze su richiesta',
    birth: 'Data di nascita', nat: 'Nazionalità', permit: 'Permesso', civil: 'Stato civile', drive: 'Licenza di condurre', addr: 'Indirizzo', phone: 'Telefono', email: 'E-mail', web: 'Web', now: 'oggi', page: (n, m) => `Pagina ${n} di ${m}`, file: 'CV',
    lv: {native: 'Madrelingua', C2: 'C2 – eccellente', C1: 'C1 – molto buono', B2: 'B2 – buono', B1: 'B1 – medio', A2: 'A2 – base', A1: 'A1 – principiante'},
    pm: {CH: 'Cittadinanza svizzera', C: 'Permesso C (domicilio)', B: 'Permesso B (dimora)', L: 'Permesso L (breve durata)', G: 'Permesso G (frontaliero)', S: 'Permesso S (protezione)', F: 'Permesso F (ammissione provvisoria)'}},
- en: {doc: 'Curriculum Vitae', pers: 'Personal details', contact: 'Contact', profile: 'Profile', exp: 'Work experience', edu: 'Education', trn: 'Further training', lng: 'Languages', skills: 'Skills', int: 'Interests', ref: 'References', refReq: 'References available on request',
+ en: {att: 'Attachments', attOne: 'Attachment', fileAll: 'Application', doc: 'Curriculum Vitae', pers: 'Personal details', contact: 'Contact', profile: 'Profile', exp: 'Work experience', edu: 'Education', trn: 'Further training', lng: 'Languages', skills: 'Skills', int: 'Interests', ref: 'References', refReq: 'References available on request',
    birth: 'Date of birth', nat: 'Nationality', permit: 'Work permit', civil: 'Marital status', drive: 'Driving licence', addr: 'Address', phone: 'Phone', email: 'Email', web: 'Web', now: 'present', page: (n, m) => `Page ${n} of ${m}`, file: 'CV',
    lv: {native: 'Native', C2: 'C2 – proficient', C1: 'C1 – advanced', B2: 'B2 – upper intermediate', B1: 'B1 – intermediate', A2: 'A2 – elementary', A1: 'A1 – beginner'},
    pm: {CH: 'Swiss citizen', C: 'Permit C (settlement)', B: 'Permit B (residence)', L: 'Permit L (short-term)', G: 'Permit G (cross-border)', S: 'Permit S (protection status)', F: 'Permit F (provisional admission)'}},
- ru: {doc: 'Резюме', pers: 'Личные данные', contact: 'Контакты', profile: 'О себе', exp: 'Опыт работы', edu: 'Образование', trn: 'Курсы и повышение квалификации', lng: 'Языки', skills: 'Навыки', int: 'Интересы', ref: 'Рекомендации', refReq: 'Рекомендации по запросу',
+ ru: {att: 'Приложения', attOne: 'Приложение', fileAll: 'Dokumenty', doc: 'Резюме', pers: 'Личные данные', contact: 'Контакты', profile: 'О себе', exp: 'Опыт работы', edu: 'Образование', trn: 'Курсы и повышение квалификации', lng: 'Языки', skills: 'Навыки', int: 'Интересы', ref: 'Рекомендации', refReq: 'Рекомендации по запросу',
    birth: 'Дата рождения', nat: 'Гражданство', permit: 'Разрешение', civil: 'Семейное положение', drive: 'Водительские права', addr: 'Адрес', phone: 'Телефон', email: 'E-mail', web: 'Сайт', now: 'по настоящее время', page: (n, m) => `Стр. ${n} из ${m}`, file: 'Rezyume',
    lv: {native: 'родной', C2: 'C2 – в совершенстве', C1: 'C1 – свободно', B2: 'B2 – хорошо', B1: 'B1 – средний', A2: 'A2 – базовый', A1: 'A1 – начальный'},
    pm: {CH: 'Гражданство Швейцарии', C: 'Пермит C', B: 'Пермит B', L: 'Пермит L', G: 'Пермит G', S: 'Статус S', F: 'Статус F'}},
- uk: {doc: 'Резюме', pers: 'Особисті дані', contact: 'Контакти', profile: 'Про себе', exp: 'Досвід роботи', edu: 'Освіта', trn: 'Курси та підвищення кваліфікації', lng: 'Мови', skills: 'Навички', int: 'Інтереси', ref: 'Рекомендації', refReq: 'Рекомендації за запитом',
+ uk: {att: 'Додатки', attOne: 'Додаток', fileAll: 'Dokumenty', doc: 'Резюме', pers: 'Особисті дані', contact: 'Контакти', profile: 'Про себе', exp: 'Досвід роботи', edu: 'Освіта', trn: 'Курси та підвищення кваліфікації', lng: 'Мови', skills: 'Навички', int: 'Інтереси', ref: 'Рекомендації', refReq: 'Рекомендації за запитом',
    birth: 'Дата народження', nat: 'Громадянство', permit: 'Дозвіл', civil: 'Сімейний стан', drive: 'Посвідчення водія', addr: 'Адреса', phone: 'Телефон', email: 'E-mail', web: 'Сайт', now: 'дотепер', page: (n, m) => `Стор. ${n} з ${m}`, file: 'Rezyume',
    lv: {native: 'рідна', C2: 'C2 – досконало', C1: 'C1 – вільно', B2: 'B2 – добре', B1: 'B1 – середній', A2: 'A2 – базовий', A1: 'A1 – початковий'},
    pm: {CH: 'Громадянство Швейцарії', C: 'Дозвіл C', B: 'Дозвіл B', L: 'Дозвіл L', G: 'Дозвіл G', S: 'Статус S', F: 'Статус F'}}
@@ -403,6 +436,121 @@ const PLACES = [['Zürich', 'Zurich', 'Zurigo', 'Zurich', 'Цюрих', 'Цюр�
   ['Kyjiw, Ukraine', 'Kyiv, Ukraine', 'Kyiv, Ucraina', 'Kyiv, Ukraine', 'Киев, Украина', 'Київ, Україна'], ['Charkiw, Ukraine', 'Kharkiv, Ukraine', 'Kharkiv, Ucraina', 'Kharkiv, Ukraine', 'Харьков, Украина', 'Харків, Україна'], ['Odessa, Ukraine', 'Odessa, Ukraine', 'Odessa, Ucraina', 'Odesa, Ukraine', 'Одесса, Украина', 'Одеса, Україна'], ['Dnipro, Ukraine', 'Dnipro, Ukraine', 'Dnipro, Ucraina', 'Dnipro, Ukraine', 'Днепр, Украина', 'Дніпро, Україна'], ['Lwiw, Ukraine', 'Lviv, Ukraine', 'Leopoli, Ucraina', 'Lviv, Ukraine', 'Львов, Украина', 'Львів, Україна'], ['Saporischschja, Ukraine', 'Zaporijjia, Ukraine', 'Zaporižžja, Ucraina', 'Zaporizhzhia, Ukraine', 'Запорожье, Украина', 'Запоріжжя, Україна'], ['Winnyzja, Ukraine', 'Vinnytsia, Ukraine', 'Vinnycja, Ucraina', 'Vinnytsia, Ukraine', 'Винница, Украина', 'Вінниця, Україна'], ['Mykolajiw, Ukraine', 'Mykolaïv, Ukraine', 'Mykolaïv, Ucraina', 'Mykolaiv, Ukraine', 'Николаев, Украина', 'Миколаїв, Україна'], ['Cherson, Ukraine', 'Kherson, Ukraine', 'Cherson, Ucraina', 'Kherson, Ukraine', 'Херсон, Украина', 'Херсон, Україна'], ['Poltawa, Ukraine', 'Poltava, Ukraine', 'Poltava, Ucraina', 'Poltava, Ukraine', 'Полтава, Украина', 'Полтава, Україна'], ['Tschernihiw, Ukraine', 'Tchernihiv, Ukraine', 'Černihiv, Ucraina', 'Chernihiv, Ukraine', 'Чернигов, Украина', 'Чернігів, Україна'], ['Iwano-Frankiwsk, Ukraine', 'Ivano-Frankivsk, Ukraine', 'Ivano-Frankivs’k, Ucraina', 'Ivano-Frankivsk, Ukraine', 'Ивано-Франковск, Украина', 'Івано-Франківськ, Україна'], ['Sumy, Ukraine', 'Soumy, Ukraine', 'Sumy, Ucraina', 'Sumy, Ukraine', 'Сумы, Украина', 'Суми, Україна'], ['Ternopil, Ukraine', 'Ternopil, Ukraine', 'Ternopil’, Ucraina', 'Ternopil, Ukraine', 'Тернополь, Украина', 'Тернопіль, Україна'], ['Chmelnyzkyj, Ukraine', 'Khmelnytskyï, Ukraine', 'Chmel’nyc’kyj, Ucraina', 'Khmelnytskyi, Ukraine', 'Хмельницкий, Украина', 'Хмельницький, Україна'], ['Riwne, Ukraine', 'Rivne, Ukraine', 'Rivne, Ucraina', 'Rivne, Ukraine', 'Ровно, Украина', 'Рівне, Україна'], ['Luzk, Ukraine', 'Loutsk, Ukraine', 'Luc’k, Ucraina', 'Lutsk, Ukraine', 'Луцк, Украина', 'Луцьк, Україна'], ['Uschhorod, Ukraine', 'Oujhorod, Ukraine', 'Užhorod, Ucraina', 'Uzhhorod, Ukraine', 'Ужгород, Украина', 'Ужгород, Україна'], ['Tscherkassy, Ukraine', 'Tcherkassy, Ukraine', 'Čerkasy, Ucraina', 'Cherkasy, Ukraine', 'Черкассы, Украина', 'Черкаси, Україна'], ['Schytomyr, Ukraine', 'Jytomyr, Ukraine', 'Žytomyr, Ucraina', 'Zhytomyr, Ukraine', 'Житомир, Украина', 'Житомир, Україна'], ['Kropywnyzkyj, Ukraine', 'Kropyvnytskyï, Ukraine', 'Kropyvnyc’kyj, Ucraina', 'Kropyvnytskyi, Ukraine', 'Кропивницкий, Украина', 'Кропивницький, Україна'], ['Tscherniwzi, Ukraine', 'Tchernivtsi, Ukraine', 'Černivci, Ucraina', 'Chernivtsi, Ukraine', 'Черновцы, Украина', 'Чернівці, Україна'], ['Krywyj Rih, Ukraine', 'Kryvy Rih, Ukraine', 'Kryvyj Rih, Ucraina', 'Kryvyi Rih, Ukraine', 'Кривой Рог, Украина', 'Кривий Ріг, Україна'], ['Mariupol, Ukraine', 'Marioupol, Ukraine', 'Mariupol’, Ucraina', 'Mariupol, Ukraine', 'Мариуполь, Украина', 'Маріуполь, Україна'],
   ['Moskau, Russland', 'Moscou, Russie', 'Mosca, Russia', 'Moscow, Russia', 'Москва, Россия', 'Москва, Росія'], ['St. Petersburg, Russland', 'Saint-Pétersbourg, Russie', 'San Pietroburgo, Russia', 'Saint Petersburg, Russia', 'Санкт-Петербург, Россия', 'Санкт-Петербург, Росія'], ['Minsk, Belarus', 'Minsk, Biélorussie', 'Minsk, Bielorussia', 'Minsk, Belarus', 'Минск, Беларусь', 'Мінськ, Білорусь'], ['Chișinău, Moldau', 'Chișinău, Moldavie', 'Chișinău, Moldavia', 'Chișinău, Moldova', 'Кишинёв, Молдова', 'Кишинів, Молдова'], ['Almaty, Kasachstan', 'Almaty, Kazakhstan', 'Almaty, Kazakistan', 'Almaty, Kazakhstan', 'Алматы, Казахстан', 'Алмати, Казахстан'], ['Tiflis, Georgien', 'Tbilissi, Géorgie', 'Tbilisi, Georgia', 'Tbilisi, Georgia', 'Тбилиси, Грузия', 'Тбілісі, Грузія'], ['Riga, Lettland', 'Riga, Lettonie', 'Riga, Lettonia', 'Riga, Latvia', 'Рига, Латвия', 'Рига, Латвія'], ['Warschau, Polen', 'Varsovie, Pologne', 'Varsavia, Polonia', 'Warsaw, Poland', 'Варшава, Польша', 'Варшава, Польща'], ['Berlin, Deutschland', 'Berlin, Allemagne', 'Berlino, Germania', 'Berlin, Germany', 'Берлин, Германия', 'Берлін, Німеччина'], ['Remote', 'à distance', 'da remoto', 'Remote', 'удалённо', 'віддалено']];
 const SCHOOLS = ['Klubschule Migros', 'ECAP', 'EB Zürich', 'inlingua', 'Benedict-Schule', 'Berlitz', 'Volkshochschule', 'AOZ', 'HEKS', 'Caritas', 'Schweizerisches Rotes Kreuz (SRK)', 'Croix-Rouge suisse', 'École-club Migros', 'Scuola Club Migros', 'Goethe-Institut', 'Alliance Française', 'WIFI', 'Coursera', 'LinkedIn Learning', 'Udemy', 'Google', 'Microsoft', 'Cisco', 'SIZ', 'KV Business School', 'ZHAW', 'FHNW', 'HSLU', 'HES-SO'];
+/* навыки: группа [анкета, de, fr, it, en, ru, uk], пункты — имя собственное или [анкета, de, fr, it, en, ru, uk] */
+const SKC = [
+ {id: 'office', t: ['Офис и компьютер', 'EDV', 'Informatique', 'Informatica', 'IT', 'Компьютер', 'Комп’ютер'], items: ['MS Word', 'MS Excel', 'PowerPoint', 'Outlook', 'MS Teams', 'Microsoft 365', 'SharePoint', 'Google Workspace', 'Adobe Acrobat', 'Zoom', 'Windows', 'macOS',
+   ['10 пальцев вслепую', 'Zehnfingersystem', 'dactylographie à 10 doigts', 'dattilografia a 10 dita', 'touch typing', 'слепой набор', 'сліпий друк']]},
+ {id: 'fin', t: ['Финансы, бухгалтерия, ERP', 'Finanzen & ERP', 'Finances & ERP', 'Finanze & ERP', 'Finance & ERP', 'Финансы и ERP', 'Фінанси та ERP'], items: ['SAP FI/CO', 'SAP MM/SD', 'Abacus', 'Bexio', 'Banana', 'Sage', 'Microsoft Dynamics', 'Oracle', 'Power BI', 'Tableau', 'Swissdec',
+   ['Бухгалтерия', 'Buchhaltung', 'comptabilité', 'contabilità', 'accounting', 'бухгалтерия', 'бухгалтерія'],
+   ['Расчёт зарплат', 'Lohnbuchhaltung', 'gestion des salaires', 'contabilità salariale', 'payroll', 'расчёт зарплат', 'розрахунок зарплат'],
+   ['НДС (MWST)', 'MWST-Abrechnung', 'décompte TVA', 'conteggio IVA', 'VAT returns', 'НДС (MWST)', 'ПДВ (MWST)'],
+   ['Дебиторы и кредиторы', 'Kreditoren- und Debitorenbuchhaltung', 'comptabilité fournisseurs et clients', 'contabilità fornitori e clienti', 'accounts payable and receivable', 'дебиторы и кредиторы', 'дебітори та кредитори'],
+   ['Годовая отчётность', 'Jahresabschluss', 'bouclement annuel', 'chiusura annuale', 'year-end closing', 'годовая отчётность', 'річна звітність'],
+   ['Бюджет и контроллинг', 'Budgetierung und Controlling', 'budget et contrôle de gestion', 'budget e controlling', 'budgeting and controlling', 'бюджет и контроллинг', 'бюджет і контролінг'],
+   ['Банковские операции', 'Zahlungsverkehr', 'trafic des paiements', 'traffico dei pagamenti', 'payment processing', 'платёжные операции', 'платіжні операції']]},
+ {id: 'office2', t: ['Офис и администрация', 'Administration', 'Administration', 'Amministrazione', 'Administration', 'Администрирование', 'Адміністрування'], items: [
+   ['Корреспонденция', 'Korrespondenz', 'correspondance', 'corrispondenza', 'correspondence', 'деловая переписка', 'ділове листування'],
+   ['Ведение календаря и встреч', 'Terminplanung', 'gestion des agendas', 'gestione agende', 'scheduling', 'планирование встреч', 'планування зустрічей'],
+   ['Приём звонков и клиентов', 'Empfang und Telefon', 'accueil et téléphone', 'ricezione e telefono', 'reception and phone', 'приём звонков и посетителей', 'прийом дзвінків і відвідувачів'],
+   ['Архив и документы', 'Dokumentenverwaltung', 'gestion des documents', 'gestione documenti', 'document management', 'работа с документами', 'робота з документами'],
+   ['Организация мероприятий', 'Eventorganisation', 'organisation d’événements', 'organizzazione di eventi', 'event planning', 'организация мероприятий', 'організація заходів'],
+   ['Перевод и переводы документов', 'Übersetzungen', 'traductions', 'traduzioni', 'translation', 'переводы', 'переклади'],
+   ['Ведение проектов', 'Projektmanagement', 'gestion de projet', 'gestione progetti', 'project management', 'управление проектами', 'управління проєктами']]},
+ {id: 'design', t: ['Дизайн, медиа, маркетинг', 'Design & Marketing', 'Design & marketing', 'Design & marketing', 'Design & marketing', 'Дизайн и маркетинг', 'Дизайн і маркетинг'], items: ['Adobe Photoshop', 'Adobe Illustrator', 'Adobe InDesign', 'Adobe Premiere Pro', 'Figma', 'Canva', 'CorelDRAW', 'WordPress', 'Shopify', 'Google Ads', 'Google Analytics', 'SEO',
+   ['Соцсети', 'Social Media', 'réseaux sociaux', 'social media', 'social media', 'соцсети', 'соцмережі'],
+   ['Тексты и копирайтинг', 'Texten', 'rédaction', 'copywriting', 'copywriting', 'копирайтинг', 'копірайтинг'],
+   ['Фото и видео', 'Foto und Video', 'photo et vidéo', 'foto e video', 'photo and video', 'фото и видео', 'фото і відео']]},
+ {id: 'it', t: ['IT и программирование', 'IT & Entwicklung', 'IT & développement', 'IT & sviluppo', 'IT & development', 'IT и разработка', 'IT і розробка'], items: ['Python', 'JavaScript', 'TypeScript', 'Java', 'C#', 'C++', 'PHP', 'SQL', 'HTML/CSS', 'React', 'Angular', 'Node.js', 'Git', 'Docker', 'Kubernetes', 'Linux', 'AWS', 'Azure', 'Jira', 'Confluence', 'SAP ABAP', 'Scrum']},
+ {id: 'tech', t: ['Техника, стройка, производство', 'Technik & Bau', 'Technique & construction', 'Tecnica & edilizia', 'Engineering & construction', 'Техника и стройка', 'Техніка і будівництво'], items: ['AutoCAD', 'Revit', 'ArchiCAD', 'SolidWorks', 'Inventor', 'MATLAB', 'CNC',
+   ['Чтение чертежей', 'Pläne lesen', 'lecture de plans', 'lettura di disegni', 'reading technical drawings', 'чтение чертежей', 'читання креслень'],
+   ['Сварка', 'Schweissen', 'soudage', 'saldatura', 'welding', 'сварка', 'зварювання'],
+   ['Электромонтаж', 'Elektroinstallation', 'installation électrique', 'installazioni elettriche', 'electrical installation', 'электромонтаж', 'електромонтаж'],
+   ['Ремонт и отделка', 'Renovation und Innenausbau', 'rénovation et finitions', 'ristrutturazione e finiture', 'renovation and interior finishing', 'ремонт и отделка', 'ремонт і оздоблення'],
+   ['Контроль качества', 'Qualitätskontrolle', 'contrôle qualité', 'controllo qualità', 'quality control', 'контроль качества', 'контроль якості']]},
+ {id: 'care', t: ['Уход, медицина, дети', 'Pflege & Betreuung', 'Soins & accompagnement', 'Cure & assistenza', 'Care & support', 'Уход и забота', 'Догляд і турбота'], items: [
+   ['Базовый уход', 'Grundpflege', 'soins de base', 'cure di base', 'basic care', 'базовый уход', 'базовий догляд'],
+   ['Уход за пожилыми', 'Betreuung älterer Menschen', 'accompagnement des personnes âgées', 'assistenza agli anziani', 'elderly care', 'уход за пожилыми', 'догляд за літніми'],
+   ['Уход за людьми с деменцией', 'Betreuung bei Demenz', 'accompagnement de personnes atteintes de démence', 'assistenza a persone con demenza', 'dementia care', 'уход при деменции', 'догляд при деменції'],
+   ['Присмотр за детьми', 'Kinderbetreuung', 'garde d’enfants', 'custodia di bambini', 'childcare', 'присмотр за детьми', 'догляд за дітьми'],
+   ['Выдача лекарств', 'Medikamentenabgabe', 'distribution de médicaments', 'somministrazione di farmaci', 'medication administration', 'выдача лекарств', 'видача ліків'],
+   ['Документация ухода', 'Pflegedokumentation', 'documentation des soins', 'documentazione delle cure', 'care documentation', 'документация ухода', 'документація догляду'],
+   ['Медицинские анализы и уколы', 'Blutentnahme und Injektionen', 'prises de sang et injections', 'prelievi e iniezioni', 'blood sampling and injections', 'забор крови и уколы', 'забір крові та ін’єкції'],
+   ['Работа в аптеке', 'Apothekenpraxis', 'pratique en pharmacie', 'pratica in farmacia', 'pharmacy practice', 'работа в аптеке', 'робота в аптеці']]},
+ {id: 'hosp', t: ['Гастрономия и отели', 'Gastronomie & Hotellerie', 'Restauration & hôtellerie', 'Ristorazione & alberghiero', 'Hospitality', 'Гастрономия и отели', 'Гастрономія та готелі'], items: [
+   ['Обслуживание гостей', 'Service', 'service en salle', 'servizio in sala', 'table service', 'обслуживание гостей', 'обслуговування гостей'],
+   ['Работа на кухне', 'Küche', 'cuisine', 'cucina', 'kitchen', 'работа на кухне', 'робота на кухні'],
+   ['Выпечка и кондитерская', 'Bäckerei und Konditorei', 'boulangerie et pâtisserie', 'panetteria e pasticceria', 'bakery and pastry', 'выпечка и кондитерская', 'випічка і кондитерська'],
+   ['Бар и кофе', 'Bar und Barista', 'bar et barista', 'bar e barista', 'bar and barista', 'бар и кофе', 'бар і кава'],
+   ['Уборка номеров', 'Housekeeping', 'housekeeping', 'housekeeping', 'housekeeping', 'уборка номеров', 'прибирання номерів'],
+   ['Ресепшн', 'Réception', 'réception', 'reception', 'front desk', 'ресепшн', 'рецепція'],
+   ['Гигиена HACCP', 'Hygiene nach HACCP', 'hygiène HACCP', 'igiene HACCP', 'HACCP hygiene', 'гигиена HACCP', 'гігієна HACCP'],
+   ['Кассовые системы', 'Kassensysteme', 'systèmes de caisse', 'sistemi di cassa', 'POS systems', 'кассовые системы', 'касові системи']]},
+ {id: 'sales', t: ['Продажи, склад, логистика', 'Verkauf & Logistik', 'Vente & logistique', 'Vendita & logistica', 'Sales & logistics', 'Продажи и логистика', 'Продажі та логістика'], items: ['Salesforce', 'HubSpot', 'SAP SD',
+   ['Консультирование клиентов', 'Kundenberatung', 'conseil à la clientèle', 'consulenza alla clientela', 'customer advice', 'консультирование клиентов', 'консультування клієнтів'],
+   ['Касса', 'Kasse', 'caisse', 'cassa', 'cashier', 'касса', 'каса'],
+   ['Приём и выкладка товара', 'Warenbewirtschaftung', 'gestion des marchandises', 'gestione merci', 'merchandise management', 'приём и выкладка товара', 'приймання та викладка товару'],
+   ['Поиск клиентов и продажи', 'Akquisition und Verkauf', 'prospection et vente', 'acquisizione e vendita', 'business development', 'поиск клиентов и продажи', 'пошук клієнтів і продажі'],
+   ['Склад и комплектация', 'Lager und Kommissionierung', 'entrepôt et préparation de commandes', 'magazzino e preparazione ordini', 'warehouse and order picking', 'склад и комплектация', 'склад і комплектація'],
+   ['Закупки', 'Einkauf', 'achats', 'acquisti', 'purchasing', 'закупки', 'закупівлі'],
+   ['Доставка', 'Auslieferung', 'livraison', 'consegna', 'delivery', 'доставка', 'доставка'],
+   ['Клиентский сервис', 'Kundendienst', 'service client', 'servizio clienti', 'customer service', 'клиентский сервис', 'клієнтський сервіс']]},
+ {id: 'clean', t: ['Уборка и дом', 'Reinigung & Haushalt', 'Nettoyage & ménage', 'Pulizia & casa', 'Cleaning & household', 'Уборка и дом', 'Прибирання і дім'], items: [
+   ['Регулярная уборка', 'Unterhaltsreinigung', 'nettoyage d’entretien', 'pulizia di manutenzione', 'maintenance cleaning', 'регулярная уборка', 'регулярне прибирання'],
+   ['Уборка при сдаче квартиры', 'Endreinigung mit Abnahmegarantie', 'nettoyage de fin de bail avec garantie', 'pulizia finale con garanzia', 'end-of-tenancy cleaning', 'уборка при сдаче квартиры', 'прибирання при здачі квартири'],
+   ['Уборка офисов', 'Büroreinigung', 'nettoyage de bureaux', 'pulizia uffici', 'office cleaning', 'уборка офисов', 'прибирання офісів'],
+   ['Мытьё окон', 'Fensterreinigung', 'nettoyage de vitres', 'pulizia vetri', 'window cleaning', 'мытьё окон', 'миття вікон'],
+   ['Стирка и глажка', 'Wäsche und Bügeln', 'lessive et repassage', 'bucato e stiro', 'laundry and ironing', 'стирка и глажка', 'прання і прасування'],
+   ['Готовка для семьи', 'Kochen für Familien', 'cuisine familiale', 'cucina per famiglie', 'family cooking', 'готовка для семьи', 'приготування їжі для родини'],
+   ['Сад и уход за растениями', 'Gartenpflege', 'entretien de jardin', 'cura del giardino', 'gardening', 'уход за садом', 'догляд за садом']]},
+ {id: 'beauty', t: ['Красота и здоровье', 'Beauty & Wellness', 'Beauté & bien-être', 'Bellezza & benessere', 'Beauty & wellness', 'Красота и здоровье', 'Краса і здоров’я'], items: [
+   ['Маникюр и педикюр', 'Maniküre und Pediküre', 'manucure et pédicure', 'manicure e pedicure', 'manicure and pedicure', 'маникюр и педикюр', 'манікюр і педикюр'],
+   ['Косметология', 'Kosmetik', 'soins esthétiques', 'estetica', 'beauty treatments', 'косметология', 'косметологія'],
+   ['Парикмахер', 'Coiffeur', 'coiffure', 'parrucchiere', 'hairdressing', 'парикмахерское дело', 'перукарська справа'],
+   ['Массаж', 'Massage', 'massage', 'massaggio', 'massage', 'массаж', 'масаж'],
+   ['Макияж', 'Make-up', 'maquillage', 'trucco', 'make-up', 'макияж', 'макіяж'],
+   ['Фитнес-тренер', 'Fitnesstraining', 'coaching sportif', 'allenamento fitness', 'fitness training', 'фитнес-тренировки', 'фітнес-тренування']]},
+ {id: 'edu', t: ['Обучение и консультирование', 'Bildung & Beratung', 'Formation & conseil', 'Formazione & consulenza', 'Teaching & counselling', 'Обучение и консультирование', 'Навчання і консультування'], items: [
+   ['Преподавание', 'Unterrichten', 'enseignement', 'insegnamento', 'teaching', 'преподавание', 'викладання'],
+   ['Онлайн-уроки', 'Online-Unterricht', 'cours en ligne', 'lezioni online', 'online teaching', 'онлайн-уроки', 'онлайн-уроки'],
+   ['Тренинги и семинары', 'Trainings und Workshops', 'formations et ateliers', 'corsi e workshop', 'training and workshops', 'тренинги и семинары', 'тренінги та семінари'],
+   ['Коучинг', 'Coaching', 'coaching', 'coaching', 'coaching', 'коучинг', 'коучинг'],
+   ['Консультирование', 'Beratung', 'conseil', 'consulenza', 'counselling', 'консультирование', 'консультування'],
+   ['Работа с беженцами и мигрантами', 'Arbeit mit Geflüchteten', 'travail avec les réfugiés', 'lavoro con i rifugiati', 'work with refugees', 'работа с беженцами', 'робота з біженцями'],
+   ['Устный перевод', 'Dolmetschen', 'interprétariat', 'interpretariato', 'interpreting', 'устный перевод', 'усний переклад']]},
+ {id: 'soft', t: ['Личные качества', 'Persönliche Stärken', 'Qualités personnelles', 'Qualità personali', 'Personal strengths', 'Личные качества', 'Особисті якості'], items: [
+   ['Надёжность', 'Zuverlässigkeit', 'fiabilité', 'affidabilità', 'reliability', 'надёжность', 'надійність'],
+   ['Работа в команде', 'Teamfähigkeit', 'esprit d’équipe', 'spirito di squadra', 'teamwork', 'работа в команде', 'робота в команді'],
+   ['Самостоятельность', 'Selbständigkeit', 'autonomie', 'autonomia', 'independence', 'самостоятельность', 'самостійність'],
+   ['Организованность', 'Organisationstalent', 'sens de l’organisation', 'capacità organizzative', 'organisational skills', 'организованность', 'організованість'],
+   ['Стрессоустойчивость', 'Belastbarkeit', 'résistance au stress', 'resistenza allo stress', 'resilience under pressure', 'стрессоустойчивость', 'стресостійкість'],
+   ['Точность', 'Genauigkeit', 'précision', 'precisione', 'accuracy', 'точность', 'точність'],
+   ['Пунктуальность', 'Pünktlichkeit', 'ponctualité', 'puntualità', 'punctuality', 'пунктуальность', 'пунктуальність'],
+   ['Гибкость', 'Flexibilität', 'flexibilité', 'flessibilità', 'flexibility', 'гибкость', 'гнучкість'],
+   ['Коммуникабельность', 'Kommunikationsstärke', 'aisance relationnelle', 'capacità comunicative', 'communication skills', 'коммуникабельность', 'комунікабельність'],
+   ['Ориентация на клиента', 'Kundenorientierung', 'orientation client', 'orientamento al cliente', 'customer focus', 'ориентация на клиента', 'орієнтація на клієнта'],
+   ['Опыт руководства', 'Führungserfahrung', 'expérience de management', 'esperienza di gestione', 'leadership experience', 'опыт руководства', 'досвід керівництва'],
+   ['Аналитическое мышление', 'Analytisches Denken', 'esprit d’analyse', 'pensiero analitico', 'analytical thinking', 'аналитическое мышление', 'аналітичне мислення'],
+   ['Готовность учиться', 'Lernbereitschaft', 'envie d’apprendre', 'voglia di imparare', 'willingness to learn', 'готовность учиться', 'готовність вчитися'],
+   ['Эмпатия', 'Empathie', 'empathie', 'empatia', 'empathy', 'эмпатия', 'емпатія'],
+   ['Терпение', 'Geduld', 'patience', 'pazienza', 'patience', 'терпение', 'терпіння'],
+   ['Межкультурная компетентность', 'Interkulturelle Kompetenz', 'compétences interculturelles', 'competenze interculturali', 'intercultural skills', 'межкультурная компетентность', 'міжкультурна компетентність'],
+   ['Физическая выносливость', 'Körperliche Belastbarkeit', 'endurance physique', 'resistenza fisica', 'physical stamina', 'физическая выносливость', 'фізична витривалість']]},
+ {id: 'cert', t: ['Сертификаты и допуски', 'Zertifikate & Ausweise', 'Certificats & autorisations', 'Certificati & abilitazioni', 'Certificates & licences', 'Сертификаты и допуски', 'Сертифікати та допуски'], items: ['BLS-AED', 'PMP', 'PRINCE2', 'Scrum Master', 'ITIL', 'ISTQB', 'IPMA', 'CAS', 'MAS',
+   ['Курс первой помощи', 'Nothelferkurs', 'cours de premiers secours', 'corso di primo soccorso', 'first aid course', 'курс первой помощи', 'курс першої допомоги'],
+   ['Курс помощника по уходу SRK', 'Lehrgang Pflegehelfer/in SRK', 'cours d’auxiliaire de santé CRS', 'corso di ausiliario/a di cura CRS', 'SRK nursing assistant course', 'курс помощника по уходу SRK', 'курс помічника з догляду SRK'],
+   ['Права на погрузчик', 'Staplerfahrausweis', 'permis de cariste', 'patente per carrelli elevatori', 'forklift licence', 'допуск к погрузчику', 'допуск до навантажувача'],
+   ['Сертификат SVEB (преподаватель)', 'SVEB-Zertifikat', 'certificat FSEA', 'certificato FSEA', 'SVEB trainer certificate', 'сертификат SVEB', 'сертифікат SVEB'],
+   ['Гигиенический сертификат', 'Hygieneschulung', 'formation en hygiène', 'formazione in igiene', 'food hygiene training', 'обучение гигиене', 'навчання гігієні'],
+   ['Сертификат бухгалтера', 'Sachbearbeiter/in Rechnungswesen', 'spécialiste en comptabilité', 'specialista contabile', 'accounting certificate', 'сертификат бухгалтера', 'сертифікат бухгалтера']]}
+];
+const INC = [
+ {t: 'Спорт', items: [['фитнес', 'Fitness', 'fitness', 'fitness', 'fitness', 'фитнес', 'фітнес'], ['бег', 'Laufen', 'course à pied', 'corsa', 'running', 'бег', 'біг'], ['походы в горы', 'Wandern', 'randonnée', 'escursionismo', 'hiking', 'походы в горы', 'походи в гори'], ['велосипед', 'Velofahren', 'vélo', 'bicicletta', 'cycling', 'велосипед', 'велосипед'], ['плавание', 'Schwimmen', 'natation', 'nuoto', 'swimming', 'плавание', 'плавання'], ['лыжи и сноуборд', 'Ski und Snowboard', 'ski et snowboard', 'sci e snowboard', 'skiing and snowboarding', 'лыжи и сноуборд', 'лижі та сноуборд'], ['йога', 'Yoga', 'yoga', 'yoga', 'yoga', 'йога', 'йога'], ['танцы', 'Tanzen', 'danse', 'danza', 'dancing', 'танцы', 'танці'], ['теннис', 'Tennis', 'tennis', 'tennis', 'tennis', 'теннис', 'теніс'], ['футбол', 'Fussball', 'football', 'calcio', 'football', 'футбол', 'футбол'], ['волейбол', 'Volleyball', 'volley-ball', 'pallavolo', 'volleyball', 'волейбол', 'волейбол'], ['скалолазание', 'Klettern', 'escalade', 'arrampicata', 'climbing', 'скалолазание', 'скелелазіння']]},
+ {t: 'Культура и творчество', items: [['чтение', 'Lesen', 'lecture', 'lettura', 'reading', 'чтение', 'читання'], ['музыка', 'Musik', 'musique', 'musica', 'music', 'музыка', 'музика'], ['пение в хоре', 'Chorsingen', 'chant choral', 'canto corale', 'choir singing', 'пение в хоре', 'спів у хорі'], ['игра на фортепиано', 'Klavier', 'piano', 'pianoforte', 'piano', 'фортепиано', 'фортепіано'], ['рисование', 'Malen', 'peinture', 'pittura', 'painting', 'рисование', 'малювання'], ['фотография', 'Fotografie', 'photographie', 'fotografia', 'photography', 'фотография', 'фотографія'], ['театр', 'Theater', 'théâtre', 'teatro', 'theatre', 'театр', 'театр'], ['рукоделие', 'Handarbeit', 'travaux manuels', 'lavori manuali', 'crafts', 'рукоделие', 'рукоділля'], ['кулинария', 'Kochen', 'cuisine', 'cucina', 'cooking', 'кулинария', 'кулінарія'], ['выпечка', 'Backen', 'pâtisserie', 'pasticceria', 'baking', 'выпечка', 'випічка']]},
+ {t: 'Природа и путешествия', items: [['путешествия', 'Reisen', 'voyages', 'viaggi', 'travel', 'путешествия', 'подорожі'], ['природа', 'Natur', 'nature', 'natura', 'nature', 'природа', 'природа'], ['сад', 'Gartenarbeit', 'jardinage', 'giardinaggio', 'gardening', 'сад', 'сад'], ['животные', 'Tiere', 'animaux', 'animali', 'animals', 'животные', 'тварини'], ['собаки', 'Hunde', 'chiens', 'cani', 'dogs', 'собаки', 'собаки']]},
+ {t: 'Люди и знания', items: [['волонтёрство', 'Freiwilligenarbeit', 'bénévolat', 'volontariato', 'volunteering', 'волонтёрство', 'волонтерство'], ['работа в ферайне', 'Vereinsarbeit', 'vie associative', 'attività associativa', 'club activities', 'работа в ферайне', 'робота в ферайні'], ['изучение языков', 'Sprachen lernen', 'apprendre des langues', 'imparare le lingue', 'learning languages', 'изучение языков', 'вивчення мов'], ['психология', 'Psychologie', 'psychologie', 'psicologia', 'psychology', 'психология', 'психологія'], ['история', 'Geschichte', 'histoire', 'storia', 'history', 'история', 'історія'], ['технологии', 'Technologie', 'technologie', 'tecnologia', 'technology', 'технологии', 'технології'], ['шахматы', 'Schach', 'échecs', 'scacchi', 'chess', 'шахматы', 'шахи'], ['семья', 'Familie', 'famille', 'famiglia', 'family', 'семья', 'родина']]}
+];
+const sid = (cat, it) => cat + '.' + (typeof it === 'string' ? it : it[1]);
+const iname = (it, cvl) => typeof it === 'string' ? it : it[LI[cvl] + 1];
 const SKILLS = ['MS Word', 'MS Excel', 'PowerPoint', 'Outlook', 'MS Teams', 'Google Workspace', 'SAP', 'Abacus', 'Bexio', 'Salesforce', 'Adobe Photoshop', 'Canva', 'AutoCAD', 'SQL', 'Python', 'Zoom'];
 const INTS = [['спорт', 'Sport', 'sport', 'sport', 'sports', 'спорт', 'спорт'], ['походы', 'Wandern', 'randonnée', 'escursionismo', 'hiking', 'походы', 'походи'], ['чтение', 'Lesen', 'lecture', 'lettura', 'reading', 'чтение', 'читання'], ['кулинария', 'Kochen', 'cuisine', 'cucina', 'cooking', 'кулинария', 'кулінарія'], ['путешествия', 'Reisen', 'voyages', 'viaggi', 'travel', 'путешествия', 'подорожі'], ['фотография', 'Fotografie', 'photographie', 'fotografia', 'photography', 'фотография', 'фотографія'], ['музыка', 'Musik', 'musique', 'musica', 'music', 'музыка', 'музика'], ['волонтёрство', 'Freiwilligenarbeit', 'bénévolat', 'volontariato', 'volunteering', 'волонтёрство', 'волонтерство'], ['йога', 'Yoga', 'yoga', 'yoga', 'yoga', 'йога', 'йога'], ['танцы', 'Tanzen', 'danse', 'danza', 'dancing', 'танцы', 'танці'], ['плавание', 'Schwimmen', 'natation', 'nuoto', 'swimming', 'плавание', 'плавання'], ['велосипед', 'Velofahren', 'vélo', 'bicicletta', 'cycling', 'велосипед', 'велосипед'], ['лыжи', 'Skifahren', 'ski', 'sci', 'skiing', 'лыжи', 'лижі'], ['сад', 'Gartenarbeit', 'jardinage', 'giardinaggio', 'gardening', 'садоводство', 'садівництво'], ['рисование', 'Malen', 'peinture', 'pittura', 'painting', 'рисование', 'малювання'], ['шахматы', 'Schach', 'échecs', 'scacchi', 'chess', 'шахматы', 'шахи']];
 const fmtDate = iso => { const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(iso || ''); return m ? `${m[3]}.${m[2]}.${m[1]}` : (iso || ''); };
@@ -417,6 +565,14 @@ function norm(d){
   o.exp = d.exp.map(e => Object.assign({}, e, {sub: [[e.org, e.place].filter(Boolean).join(', '), tr(JOBT[e.type], l), e.pct ? e.pct + (l === 'en' ? '%' : ' %') : ''].filter(Boolean).join(' · ')}));
   o.edu = d.edu.map(e => Object.assign({}, e, {title: [tr(DEG[e.deg], l), e.title].filter(Boolean).join(' – ')}));
   o.lng = d.lng.map(x => { const ct = x.lvl === 'native' ? '' : (x.cert === 'other' ? (x.certT || '') : (x.cert || '')); return Object.assign({}, x, {ct, lvT: [(L[l] || L.de).lv[x.lvl] || '', ct].filter(Boolean).join(', ')}); });
+  const sel = new Set(d.skl || []), rows = [];
+  SKC.forEach(c => { const v = c.items.filter(it => sel.has(sid(c.id, it))).map(it => iname(it, l)); if (v.length) rows.push([c.t[LI[l] + 1], v.map((x, i) => i ? x : cap(x)).join(', ')]); });
+  String(d.skills || '').split('\n').map(x => x.trim()).filter(Boolean).forEach(x => rows.push(['', x]));
+  o.skillRows = rows;
+  const iset = new Set(d.ints || []), iv = [];
+  INC.forEach((c, ci) => c.items.forEach(it => { if (iset.has(ci + '.' + it[1])) iv.push(it[LI[l] + 1]); }));
+  const own = String(d.interests || '').trim();
+  o.interests = [iv.map((x, i) => i ? x : cap(x)).join(', '), own].filter(Boolean).join(', ');
   return o;
 }
 
@@ -464,7 +620,7 @@ function build(d, mode = 0, dense = 0){
   const pers = [[l.birth, d.p.birth], [l.nat, d.p.nat], [l.permit, d.p.permit ? l.pm[d.p.permit] : ''], [l.civil, d.p.civil], [l.drive, d.p.drive]].filter(r => r[1]);
   const contacts = [[l.addr, [d.p.street, d.p.city].filter(Boolean).join(', ')], [l.phone, d.p.phone], [l.email, d.p.email], [l.web, d.p.web]].filter(r => r[1]);
   const langs = d.lng.filter(x => x.code && (x.code !== 'other' || x.other));
-  const skills = String(d.skills || '').split('\n').map(s => s.trim()).filter(Boolean);
+  const skills = d.skillRows || [];
   const exp = d.exp.filter(e => e.title || e.org), edu = d.edu.filter(e => e.title || e.org), trn = d.trn.filter(e => e.title);
   const refs = d.ref.filter(r => r.name);
 
@@ -507,18 +663,18 @@ function build(d, mode = 0, dense = 0){
       /* классика и строгий: языки слева, навыки и интересы справа, чтобы резюме чаще помещалось на одну страницу */
       const half = (W - 8) / 2, xA = X0, xB = X0 + half + 8, LW = 30;
       const lrows = langs.map(x => [langName(x.code, x.other, d.lang), x.lvT]);
-      const bl = []; skills.forEach(sv => wrap(sv, 'r', 9, half).forEach(ln => bl.push([ln, 'r', INK]))); if (d.interests){ if (bl.length) bl.push(['', 'r', INK]); bl.push([l.int, 'm', MUT]); wrap(d.interests, 'r', 9, half).forEach(ln => bl.push([ln, 'r', INK])); }
+      const bl = []; skills.forEach(([k, sv]) => { const pre = k ? k + ': ' : ''; wrap(pre + sv, 'r', 9, half - 3).forEach((ln, i) => bl.push([ln, 'r', INK, i === 0 ? pre.length : 0])); }); if (d.interests){ if (bl.length) bl.push(['', 'r', INK]); bl.push([l.int, 'm', MUT]); wrap(d.interests, 'r', 9, half).forEach(ln => bl.push([ln, 'r', INK])); }
       const ha = lrows.reduce((a, [, v]) => a + wrap(v, 'r', 9, half - LW).length * lh(9) + 0.8 * G, 0), hb = bl.length * lh(9);
       need(16 + Math.max(ha, hb));
       const y0 = y + 2 * G;
       [[xA, l.lng], [xB, skills.length ? l.skills : l.int]].forEach(([hx, t]) => { T(hx, y0 + 3.2, t.toUpperCase(), 'b', 8.6, ACC); LINE(hx + tw(t.toUpperCase(), 'b', 8.6) + 3, y0 + 2.2, hx + half, y0 + 2.2, tpl === 'strogiy' ? '#9A938A' : RULE, 0.3); });
       let ya = y0 + 6 + 1.5 * G, yb = ya;
       lrows.forEach(([k, v]) => { const vl = wrap(v, 'r', 9, half - LW); T(xA, ya + 9 * PT, k, 'm', 8.4, MUT); vl.forEach(ln => { T(xA + LW, ya + 9 * PT, ln, 'r', 9, INK); ya += lh(9); }); ya += 0.8 * G; });
-      (skills.length ? bl : bl.slice(1)).forEach(([ln, f, c]) => { if (ln) T(xB, yb + 9 * PT, ln, f, f === 'm' ? 8.4 : 9, c); yb += lh(9); });
+      (skills.length ? bl : bl.slice(1)).forEach(([ln, f, c, pl]) => { if (ln && pl){ const lb = ln.slice(0, pl); T(xB, yb + 9 * PT, lb, 'm', 9, MUT); T(xB + tw(lb, 'm', 9), yb + 9 * PT, ln.slice(pl), 'r', 9, INK); } else if (ln) T(xB, yb + 9 * PT, ln, f, f === 'm' ? 8.4 : 9, c); yb += lh(9); });
       y = Math.max(ya, yb) + 3 * G;
     } else {
       if (withLangs && langs.length){ heading(l.lng); table(langs.map(x => [langName(x.code, x.other, d.lang), x.lvT])); }
-      if (withSkills && skills.length){ heading(l.skills); skills.forEach(s => para(s, 'r', 9)); y += 3 * G; }
+      if (withSkills && skills.length){ heading(l.skills); table(skills.filter(r => r[0]).map(r => [r[0], r[1]])); skills.filter(r => !r[0]).forEach(r => para(r[1], 'r', 9)); y += 3 * G; }
       if (withSkills && d.interests){ heading(l.int); para(d.interests, 'r', 9); y += 3 * G; }
     }
     if (d.refReq || refs.length){ heading(l.ref); if (d.refReq && !refs.length) para(l.refReq, 'r', 9, MUT); refs.forEach(r => { const lines = [r.name, [r.role, r.org].filter(Boolean).join(', '), r.contact].filter(Boolean); need(lines.length * lh(9) + 2); lines.forEach((ln, i) => { T(X0, y + 9 * PT, ln, i ? 'r' : 'm', 9, i ? MUT : INK); y += lh(9); }); y += 2; }); }
@@ -542,7 +698,7 @@ function build(d, mode = 0, dense = 0){
       if (lvT) T(SX + 22, sy + 2.4, lvT.replace(/^(C2|C1|B2|B1|A2|A1) – /, '$1 · '), 'r', 7.4, MUT, 'left', sp); sy += 6.5;
       if (x.ct){ wrap(x.ct, 'r', 7.4, SW).forEach(ln => { T(SX, sy + 0.6, ln, 'r', 7.4, MUT, 'left', sp); sy += lh(7.4); }); sy += 1.2; } }); sy += SEC; }
     if (mode < 2){
-      if (skills.length){ sh(l.skills); skills.forEach(s => sk('', s)); sy += SEC; }
+      if (skills.length){ sh(l.skills); skills.forEach(([k, v]) => sk(k, v)); sy += SEC; }
       if (d.interests){ sh(l.int); sk('', d.interests); }
     }
     /* основная колонка */
@@ -585,7 +741,7 @@ function svg(ops){
     if (o.t === 'rect') return `<rect x="${o.x}" y="${o.y}" width="${o.w}" height="${o.h}" fill="${o.fill}"/>`;
     if (o.t === 'line') return `<line x1="${o.x1}" y1="${o.y1}" x2="${o.x2}" y2="${o.y2}" stroke="${o.color}" stroke-width="${o.w}"/>`;
     if (o.t === 'circle') return `<circle cx="${o.cx}" cy="${o.cy}" r="${o.r}" fill="${o.fill}"${o.fill === '#FFFFFF' ? ' stroke="#B9B2A8" stroke-width="0.25"' : ''}/>`;
-    if (o.t === 'img') return `<image href="${o.data}" x="${o.x}" y="${o.y}" width="${o.w}" height="${o.h}" preserveAspectRatio="xMidYMid slice"/>`;
+    if (o.t === 'img') return `<image href="${o.data}" x="${o.x}" y="${o.y}" width="${o.w}" height="${o.h}" preserveAspectRatio="${o.fit ? 'xMidYMid meet' : 'xMidYMid slice'}"/>`;
     if (o.t === 'text') return `<text x="${o.x}" y="${o.y}" font-family="${FONTS[o.f][1]}" font-weight="${FONTS[o.f][0]}" font-size="${(o.size * PT).toFixed(3)}" fill="${o.color}"${o.align === 'right' ? ' text-anchor="end"' : ''}>${esc(o.s)}</text>`;
     return '';
   });
@@ -593,9 +749,9 @@ function svg(ops){
 }
 let rT = 0;
 function render(){ clearTimeout(rT); rT = setTimeout(() => {
-  const pages = build(norm(D()));
+  const nd = norm(D()), cvp = build(nd), pages = cvp.concat(attPages(nd));
   document.getElementById('pages').innerHTML = pages.map(svg).join('');
-  document.getElementById('pginfo').textContent = 'Так выглядит PDF · ' + (pages.length === 1 ? '1 страница' : pages.length + ' страницы') + (pages.length > 2 ? ' · лучше сократить до двух' : '');
+  const na = pages.length - cvp.length; document.getElementById('pginfo').textContent = 'Так выглядит PDF · резюме ' + (cvp.length === 1 ? '1 страница' : cvp.length + ' страницы') + (cvp.length > 2 ? ', лучше сократить до двух' : '') + (na ? ` · приложения ${na} ${na === 1 ? 'лист' : na < 5 ? 'листа' : 'листов'}` : '');
 }, 60); }
 
 /* ===================== PDF ===================== */
@@ -619,9 +775,10 @@ async function makePdf(){
   if (!window.jspdf) throw new Error('lib');
   const F = await fonts(), doc = new window.jspdf.jsPDF({unit: 'mm', format: 'a4', compress: true});
   for (const [k, b64] of Object.entries(F)){ doc.addFileToVFS(k + '.ttf', b64); doc.addFont(k + '.ttf', k, 'normal'); }
-  const d = norm(D()), pages = build(d);
+  const d = norm(D()), cvp = build(d), pages = cvp.concat(attPages(d)), slots = [];
   pages.forEach((ops, i) => {
     if (i) doc.addPage();
+    if (ops[0] && ops[0].t === 'pdfpage'){ slots.push([i, ops[0].id, ops[0].i]); return; }
     ops.forEach(o => {
       if (o.t === 'rect'){ doc.setFillColor(...hex(o.fill)); doc.rect(o.x, o.y, o.w, o.h, 'F'); }
       else if (o.t === 'line'){ doc.setDrawColor(...hex(o.color)); doc.setLineWidth(o.w); doc.line(o.x1, o.y1, o.x2, o.y2); }
@@ -632,7 +789,15 @@ async function makePdf(){
   });
   const nm = [d.p.first, d.p.last].filter(Boolean).join('_').replace(/[^\p{L}\p{N}_-]+/gu, '') || 'Name';
   doc.setProperties({title: `${(L[d.lang] || L.de).doc} ${[d.p.first, d.p.last].filter(Boolean).join(' ')}`.trim(), author: [d.p.first, d.p.last].filter(Boolean).join(' ')});
-  return {blob: doc.output('blob'), name: `${(L[d.lang] || L.de).file}_${nm}.pdf`};
+  const withAtt = pages.length > cvp.length, fname = `${withAtt ? (L[d.lang] || L.de).fileAll : (L[d.lang] || L.de).file}_${nm}.pdf`;
+  if (!slots.length) return {blob: doc.output('blob'), name: fname};
+  await loadScript('/assets/lib/pdf-lib.min.js');
+  const {PDFDocument} = window.PDFLib, main = await PDFDocument.load(doc.output('arraybuffer')), srcs = {};
+  for (const [idx, id, k] of slots){
+    srcs[id] = srcs[id] || await PDFDocument.load(PDFB[id], {ignoreEncryption: true});
+    const [cp] = await main.copyPages(srcs[id], [k]); main.removePage(idx); main.insertPage(idx, cp);
+  }
+  return {blob: new Blob([await main.save()], {type: 'application/pdf'}), name: fname};
 }
 async function doPdf(btns, share){
   btns.forEach(b => b.disabled = true); say('Готовлю PDF…');
@@ -696,8 +861,11 @@ function drawList(k){
 function vis(){
   document.getElementById('natow').hidden = S.p.natc !== 'other';
   document.getElementById('sexw').hidden = !S.p.civc || !['fr', 'it', 'ru', 'uk'].includes(S.lang);
-  document.querySelectorAll('#ch-skills button').forEach(b => b.setAttribute('aria-pressed', hasTok(S.skills, b.dataset.v)));
-  document.querySelectorAll('#ch-int button').forEach(b => b.setAttribute('aria-pressed', hasTok(S.interests, INTS[+b.dataset.i][LI[S.lang] + 1])));
+  document.querySelectorAll('#skl button[data-s]').forEach(b => b.setAttribute('aria-pressed', (S.skl || []).includes(b.dataset.s)));
+  document.querySelectorAll('#intc button[data-s]').forEach(b => b.setAttribute('aria-pressed', (S.ints || []).includes(b.dataset.s)));
+  document.querySelectorAll('#skl .grp, #intc .grp').forEach(g => { g.querySelector('.gc').textContent = g.querySelectorAll('button[aria-pressed="true"]').length || ''; });
+  document.getElementById('c-skl').textContent = (S.skl || []).length || '';
+  document.getElementById('c-ints').textContent = (S.ints || []).length || '';
   const dl = document.getElementById('dl-place'); dl.innerHTML = PLACES.map(r => `<option value="${esc(r[LI[S.lang]])}">`).join('');
 }
 const toks = t => String(t || '').split(/[,\n]/).map(x => x.trim().toLowerCase()).filter(Boolean);
@@ -728,6 +896,12 @@ function touched(){ if (showEx) leaveEx(); save(); vis(); render(); }
 
 /* ===================== события ===================== */
 /* списки в анкете */
+document.getElementById('skl').innerHTML = SKC.map(c => `<details class="grp"><summary>${c.t[0]}<span class="gc"></span></summary><div class="chips">${c.items.map(it => `<button type="button" data-s="${esc(sid(c.id, it))}" aria-pressed="false">${esc(typeof it === 'string' ? it : it[0])}</button>`).join('')}</div></details>`).join('');
+document.getElementById('intc').innerHTML = INC.map((c, ci) => `<details class="grp"><summary>${c.t}<span class="gc"></span></summary><div class="chips">${c.items.map(it => `<button type="button" data-s="${esc(ci + '.' + it[1])}" aria-pressed="false">${esc(it[0])}</button>`).join('')}</div></details>`).join('');
+['skl', 'intc'].forEach(id => document.getElementById(id).addEventListener('click', e => {
+  const b = e.target.closest('button[data-s]'); if (!b) return; const key = id === 'skl' ? 'skl' : 'ints';
+  const arr = S[key] = S[key] || []; const i = arr.indexOf(b.dataset.s); if (i < 0) arr.push(b.dataset.s); else arr.splice(i, 1); touched();
+}));
 const natOpts = Object.entries(NAT).map(([k, r]) => `<option value="${k}">${r[0]}</option>`).join('');
 document.getElementById('natc').innerHTML = '<option value="">Не указывать</option>' + natOpts + '<option value="other">Другое…</option>';
 document.getElementById('natc2').innerHTML = '<option value="">Нет</option>' + natOpts;
@@ -736,10 +910,6 @@ document.getElementById('dk').innerHTML = DK.map(k => `<label class="chk"><input
 document.getElementById('canton').innerHTML += CANTONS.map(c => `<option value="${c[0]}">${c[1]}</option>`).join('') + '<option value="INT">Международная фирма, английский</option>';
 document.getElementById('dl-chtown').innerHTML = CH_TOWNS.map(t => `<option value="${t}">`).join('');
 document.getElementById('dl-school').innerHTML = SCHOOLS.map(t => `<option value="${t}">`).join('');
-document.getElementById('ch-skills').innerHTML = SKILLS.map(v => `<button type="button" data-v="${v}" aria-pressed="false">${v}</button>`).join('');
-document.getElementById('ch-int').innerHTML = INTS.map((r, i) => `<button type="button" data-i="${i}" aria-pressed="false">${r[0]}</button>`).join('');
-document.getElementById('ch-skills').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; S.skills = toggleTok(S.skills, b.dataset.v); document.querySelector('[data-f="skills"]').value = S.skills; touched(); });
-document.getElementById('ch-int').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; S.interests = toggleTok(S.interests, INTS[+b.dataset.i][LI[S.lang] + 1]); document.querySelector('[data-f="interests"]').value = S.interests; touched(); });
 document.getElementById('dk').addEventListener('change', e => { if (e.target.dataset.f) return; S.p.dk = [...document.querySelectorAll('#dk input:not([data-f])')].filter(x => x.checked).map(x => x.value); touched(); });
 document.getElementById('canton').addEventListener('change', e => {
   S.canton = e.target.value; const c = CANTONS.find(x => x[0] === S.canton);
@@ -752,7 +922,7 @@ document.getElementById('color').innerHTML = Object.entries(COLORS).map(([k, c])
 document.getElementById('form').addEventListener('input', e => {
   const el = e.target;
   if (el.dataset.f){ const [a, b] = el.dataset.f.split('.'); const v = el.type === 'checkbox' ? el.checked : el.value; if (b) S[a][b] = v; else S[a] = v; touched(); return; }
-  const ent = el.closest('.ent'); if (!ent) return;
+  const ent = el.closest('.ent'); if (!ent || !ent.dataset.list) return;
   if (el.dataset.part){ const w = el.closest('.dsel'), it = S[ent.dataset.list][+ent.dataset.i], m = w.querySelector('[data-part="m"]'), y = w.querySelector('[data-part="y"]').value;
     it[w.dataset.d] = y ? (m && m.value ? m.value + '.' + y : y) : ''; touched(); return; }
   if (!el.dataset.k) return;
@@ -766,7 +936,7 @@ document.getElementById('form').addEventListener('input', e => {
 document.getElementById('form').addEventListener('click', e => {
   const add = e.target.closest('[data-add]');
   if (add){ const k = add.dataset.add; S[k].push(LISTS[k].make()); drawList(k); touched(); const last = document.querySelector(`#l-${k} .ent:last-child input, #l-${k} .ent:last-child select`); if (last) last.focus(); return; }
-  const ent = e.target.closest('.ent'); if (!ent) return;
+  const ent = e.target.closest('.ent'); if (!ent || !ent.dataset.list) return;
   const k = ent.dataset.list, i = +ent.dataset.i, arr = S[k];
   const mv = e.target.closest('[data-mv]');
   if (mv){ const j = i + +mv.dataset.mv; if (j < 0 || j >= arr.length) return; [arr[i], arr[j]] = [arr[j], arr[i]]; drawList(k); touched(); return; }
@@ -795,9 +965,224 @@ try { if (navigator.canShare && navigator.canShare({files: [new File(['x'], 'x.p
 document.getElementById('clearwrap').addEventListener('click', e => {
   const w = document.getElementById('clearwrap');
   if (e.target.id === 'clear'){ w.innerHTML = '<span class="confirm">Удалить всё резюме на этом устройстве? <button type="button" class="btn sm" id="clyes">Да, удалить</button><button type="button" class="btn ghost sm" id="clno">Нет</button></span>'; return; }
-  if (e.target.id === 'clyes'){ S = blank(); try { localStorage.removeItem(KEY); } catch (x) {} drawAll(); say('Резюме удалено.'); }
+  if (e.target.id === 'clyes'){ S = blank(); try { localStorage.removeItem(KEY); } catch (x) {} DB.clear(); drawAll(); drawAtt(); say('Резюме и приложения удалены.'); }
   if (e.target.id === 'clyes' || e.target.id === 'clno') w.innerHTML = '<button type="button" class="btn ghost sm" id="clear">Удалить всё</button>';
 });
+
+/* ===================== приложения ===================== */
+const ATT = {zeugnis: ['Рекомендация с работы (Arbeitszeugnis)', 'Arbeitszeugnis', 'Certificat de travail', 'Certificato di lavoro', 'Reference letter', 'Рекомендация с места работы', 'Рекомендація з місця роботи'],
+  zwischen: ['Промежуточная рекомендация (Zwischenzeugnis)', 'Zwischenzeugnis', 'Certificat de travail intermédiaire', 'Certificato di lavoro intermedio', 'Interim reference', 'Промежуточная характеристика', 'Проміжна характеристика'],
+  diplom: ['Диплом', 'Diplom', 'Diplôme', 'Diploma', 'Diploma', 'Диплом', 'Диплом'],
+  anerk: ['Признание диплома', 'Anerkennung des Diploms', 'Reconnaissance du diplôme', 'Riconoscimento del diploma', 'Diploma recognition', 'Признание диплома', 'Визнання диплома'],
+  zert: ['Сертификат курса', 'Zertifikat', 'Certificat', 'Certificato', 'Certificate', 'Сертификат', 'Сертифікат'],
+  sprach: ['Языковой сертификат', 'Sprachzertifikat', 'Certificat de langue', 'Certificato di lingua', 'Language certificate', 'Языковой сертификат', 'Мовний сертифікат'],
+  ref: ['Рекомендательное письмо', 'Empfehlungsschreiben', 'Lettre de recommandation', 'Lettera di raccomandazione', 'Recommendation letter', 'Рекомендательное письмо', 'Рекомендаційний лист'],
+  trans: ['Перевод документа', 'Übersetzung', 'Traduction', 'Traduzione', 'Translation', 'Перевод', 'Переклад'],
+  perm: ['Разрешение (пермит)', 'Aufenthaltsbewilligung', 'Permis de séjour', 'Permesso di soggiorno', 'Residence permit', 'Разрешение на пребывание', 'Дозвіл на перебування'],
+  drive: ['Водительские права', 'Führerausweis', 'Permis de conduire', 'Licenza di condurre', 'Driving licence', 'Водительские права', 'Посвідчення водія'],
+  other: ['Другой документ', 'Dokument', 'Document', 'Documento', 'Document', 'Документ', 'Документ']};
+const LOOKS = {orig: 'Как есть', clean: 'Ярче и чётче', bw: 'Как скан, чёрно-белый'};
+const ORIG = {}, PDFB = {}, PROC = {}, PDFT = {}, MEM = {};
+const attTitle = (a, cvl) => [tr(ATT[a.type] || ATT.other, cvl), a.note].filter(Boolean).join(' – ');
+const pagesWord = (n, cvl) => ({de: n === 1 ? '1 Seite' : n + ' Seiten', fr: n + (n > 1 ? ' pages' : ' page'), it: n === 1 ? '1 pagina' : n + ' pagine', en: n === 1 ? '1 page' : n + ' pages', ru: n + ' стр.', uk: n + ' стор.'}[cvl]);
+const DB = {
+  p: null,
+  open(){ return this.p || (this.p = new Promise((res, rej) => { const r = indexedDB.open('rezyumeCH', 1); r.onupgradeneeded = () => r.result.createObjectStore('att'); r.onsuccess = () => res(r.result); r.onerror = () => rej(r.error); })); },
+  async run(mode, fn){ const db = await this.open(); return new Promise((res, rej) => { const t = db.transaction('att', mode), st = t.objectStore('att'), rq = fn(st); t.oncomplete = () => res(rq && rq.result); t.onerror = () => rej(t.error); }); },
+  put(k, v){ MEM[k] = v; return this.run('readwrite', st => st.put(v, k)).catch(() => say('Файл добавлен, но на этом устройстве не сохранится после закрытия страницы.')); },
+  async get(k){ if (MEM[k]) return MEM[k]; try { return MEM[k] = await this.run('readonly', st => st.get(k)); } catch (e) { return null; } },
+  del(k){ delete MEM[k]; return this.run('readwrite', st => st.delete(k)).catch(() => {}); },
+  clear(){ return this.run('readwrite', st => st.clear()).catch(() => {}); }
+};
+const absUrl = u => window.PV_BASE ? (window.PV_BASE || '/').replace(/\/$/, '') + u : u;
+const scripts = {};
+function loadScript(u){ return scripts[u] || (scripts[u] = new Promise((res, rej) => { const el = document.createElement('script'); el.src = absUrl(u); el.onload = res; el.onerror = () => { delete scripts[u]; rej(new Error('script')); }; document.head.appendChild(el); })); }
+const loadImg = src => new Promise((res, rej) => { const i = new Image(); i.onload = () => res(i); i.onerror = rej; i.src = src; });
+/* поворот на 90° и мелкий наклон, тот же для листа и для автонастройки */
+function rotCanvas(img, rot, fine, max, fill = '#fff'){
+  rot = (((rot || 0) % 360) + 360) % 360; const sw = rot === 90 || rot === 270, sc = Math.min(1, max / Math.max(img.naturalWidth || img.width, img.naturalHeight || img.height));
+  const W0 = (img.naturalWidth || img.width) * sc, H0 = (img.naturalHeight || img.height) * sc, cw = Math.round(sw ? H0 : W0), ch = Math.round(sw ? W0 : H0);
+  const c = document.createElement('canvas'); c.width = cw; c.height = ch; const x = c.getContext('2d');
+  x.fillStyle = fill; x.fillRect(0, 0, cw, ch); x.translate(cw / 2, ch / 2); x.rotate((rot + (+fine || 0)) * Math.PI / 180); x.drawImage(img, -W0 / 2, -H0 / 2, W0, H0);
+  return c;
+}
+const lumData = c => { const d = c.getContext('2d').getImageData(0, 0, c.width, c.height).data, g = new Uint8Array(c.width * c.height); for (let i = 0, j = 0; i < d.length; i += 4, j++) g[j] = (d[i] * 77 + d[i + 1] * 150 + d[i + 2] * 29) >> 8; return g; };
+function otsu(g){ const h = new Float64Array(256); g.forEach(v => h[v]++); let sum = 0; for (let i = 0; i < 256; i++) sum += i * h[i]; let sb = 0, wb = 0, best = 0, th = 128; for (let t = 0; t < 256; t++){ wb += h[t]; if (!wb) continue; const wf = g.length - wb; if (!wf) break; sb += t * h[t]; const mb = sb / wb, mf = (sum - sb) / wf, v = wb * wf * (mb - mf) * (mb - mf); if (v > best){ best = v; th = t; } } return th; }
+/* найти наклон по строкам текста и краям листа, потом обрезать фон вокруг бумаги */
+function autoFix(img, rot){
+  const c0 = rotCanvas(img, rot, 0, 700), W = c0.width, H = c0.height, g = lumData(c0), th = otsu(g), pts = [];
+  for (let y = 1; y < H - 3; y += 1) for (let x = 1; x < W - 3; x += 1){ const v = g[y * W + x]; if (v < th && (g[(y + 2) * W + x] >= th || g[y * W + x + 2] >= th)) pts.push(x - W / 2, y - H / 2); }
+  let bestA = 0, bestS = -1;
+  if (pts.length > 200) for (let a = -12; a <= 12.001; a += 0.25){
+    const r = a * Math.PI / 180, sn = Math.sin(r), cs = Math.cos(r), bins = new Float64Array(H * 2 + 10);
+    for (let i = 0; i < pts.length; i += 2){ const yy = Math.round(pts[i] * sn + pts[i + 1] * cs + H); if (yy >= 0 && yy < bins.length) bins[yy]++; }
+    let sc = 0; for (let i = 0; i < bins.length; i++) sc += bins[i] * bins[i]; if (sc > bestS){ bestS = sc; bestA = a; }
+  }
+  const dd = c0.getContext('2d').getImageData(0, 0, W, H).data, rgb = [0, 0, 0]; let nb = 0;
+  for (let x = 0; x < W; x += 3) [0, H - 1].forEach(y => { const i = (y * W + x) * 4; rgb[0] += dd[i]; rgb[1] += dd[i + 1]; rgb[2] += dd[i + 2]; nb++; });
+  for (let y = 0; y < H; y += 3) [0, W - 1].forEach(x => { const i = (y * W + x) * 4; rgb[0] += dd[i]; rgb[1] += dd[i + 1]; rgb[2] += dd[i + 2]; nb++; });
+  const c1 = rotCanvas(img, rot, bestA, 700, `rgb(${rgb.map(v => Math.round(v / nb)).join(',')})`), W1 = c1.width, H1 = c1.height, g1 = lumData(c1), t1 = otsu(g1);
+  const row = new Float64Array(H1), col = new Float64Array(W1);
+  for (let y = 0; y < H1; y++) for (let x = 0; x < W1; x++) if (g1[y * W1 + x] >= t1){ row[y]++; col[x]++; }
+  const edge = (arr0, n, lim) => { const k = Math.max(2, Math.round(arr0.length * 0.03)), arr = arr0.map((_, i) => { let s2 = 0, c = 0; for (let j = i - k; j <= i + k; j++) if (j >= 0 && j < arr0.length){ s2 += arr0[j]; c++; } return s2 / c; });
+    let a = 0, b = arr.length - 1; while (a < b && arr[a] < lim * n) a++; while (b > a && arr[b] < lim * n) b--; const m = Math.round(arr.length * 0.006); return [a + m, b - m]; };
+  const [y0, y1] = edge(row, W1, 0.4), [x0, x1] = edge(col, H1, 0.4);
+  const pc = (v, n) => Math.max(0, Math.min(40, Math.round(v / n * 200) / 2));
+  const crop = (y1 - y0 > H1 * 0.3 && x1 - x0 > W1 * 0.3) ? [pc(y0, H1), pc(W1 - 1 - x1, W1), pc(H1 - 1 - y1, H1), pc(x0, W1)] : [0, 0, 0, 0];
+  return {fine: Math.round(bestA * 2) / 2, crop};
+}
+/* поворот, выравнивание, обрезка и «как скан» */
+function procImg(img, a){
+  const c1 = rotCanvas(img, a.rot, a.fine, 99999), cw = c1.width, ch = c1.height;
+  const c = a.crop || [0, 0, 0, 0], sx = cw * c[3] / 100, sy = ch * c[0] / 100, sw2 = Math.max(10, cw * (1 - (c[1] + c[3]) / 100)), sh2 = Math.max(10, ch * (1 - (c[0] + c[2]) / 100));
+  const sc = Math.min(1, 2000 / Math.max(sw2, sh2)), W = Math.round(sw2 * sc), H = Math.round(sh2 * sc);
+  const c2 = document.createElement('canvas'); c2.width = W; c2.height = H; const x2 = c2.getContext('2d');
+  x2.fillStyle = '#fff'; x2.fillRect(0, 0, W, H); x2.imageSmoothingQuality = 'high'; x2.drawImage(c1, sx, sy, sw2, sh2, 0, 0, W, H);
+  if (a.look === 'clean' || a.look === 'bw'){
+    const im = x2.getImageData(0, 0, W, H), d = im.data, hist = new Uint32Array(256);
+    for (let i = 0; i < d.length; i += 16) hist[(d[i] * 77 + d[i + 1] * 150 + d[i + 2] * 29) >> 8]++;
+    const tot = hist.reduce((p, v) => p + v, 0), pct = q => { let acc = 0; for (let v = 0; v < 256; v++){ acc += hist[v]; if (acc >= tot * q) return v; } return 255; };
+    const bw = a.look === 'bw', lo = pct(bw ? 0.03 : 0.01), hi = Math.max(lo + 30, pct(bw ? 0.55 : 0.6)), span = hi - lo;
+    const LO = [0, 0, 0], HI = [255, 255, 255];
+    if (!bw) for (let j = 0; j < 3; j++){ const h2 = new Uint32Array(256); let n2 = 0; for (let i = j; i < d.length; i += 16){ h2[d[i]]++; n2++; } let acc = 0, v = 0; for (; v < 256; v++){ acc += h2[v]; if (acc >= n2 * 0.01) break; } LO[j] = v; acc = 0; for (v = 0; v < 256; v++){ acc += h2[v]; if (acc >= n2 * 0.6) break; } HI[j] = Math.max(LO[j] + 30, v); }
+    for (let i = 0; i < d.length; i += 4){
+      if (bw){ let v = ((d[i] * 77 + d[i + 1] * 150 + d[i + 2] * 29) >> 8); v = Math.max(0, Math.min(255, (v - lo) * 255 / span)); v = 255 * Math.pow(v / 255, 1.25); d[i] = d[i + 1] = d[i + 2] = v; }
+      else for (let j = 0; j < 3; j++) d[i + j] = Math.max(0, Math.min(255, (d[i + j] - LO[j]) * 255 / (HI[j] - LO[j])));
+    }
+    x2.putImageData(im, 0, 0);
+  }
+  return {data: c2.toDataURL('image/jpeg', a.look === 'bw' ? 0.78 : 0.84), w: W, h: H};
+}
+async function prepAtt(a){
+  if (a.kind === 'pdf'){
+    if (PDFT[a.id]) return;
+    const rec = await DB.get(a.id); if (!rec) { a.missing = true; return; }
+    PDFB[a.id] = rec.bytes;
+    try {
+      await loadScript('/assets/lib/pdfjs/pdf.min.js');
+      window.pdfjsLib.GlobalWorkerOptions.workerSrc = absUrl('/assets/lib/pdfjs/pdf.worker.min.js');
+      const pdf = await window.pdfjsLib.getDocument({data: new Uint8Array(rec.bytes.slice(0))}).promise, out = [];
+      for (let i = 1; i <= pdf.numPages; i++){
+        const pg = await pdf.getPage(i), vp0 = pg.getViewport({scale: 1}), vp = pg.getViewport({scale: 900 / Math.max(vp0.width, vp0.height)});
+        const c = document.createElement('canvas'); c.width = vp.width; c.height = vp.height; const x = c.getContext('2d'); x.fillStyle = '#fff'; x.fillRect(0, 0, c.width, c.height);
+        await pg.render({canvasContext: x, viewport: vp}).promise; out.push({data: c.toDataURL('image/jpeg', 0.8), w: c.width, h: c.height, land: vp0.width > vp0.height});
+      }
+      PDFT[a.id] = out; a.pages = out.length;
+    } catch (e) { PDFT[a.id] = []; a.err = true; }
+    return;
+  }
+  if (!ORIG[a.id]){ const rec = await DB.get(a.id); if (!rec) { a.missing = true; return; } ORIG[a.id] = await loadImg(rec.orig); }
+  PROC[a.id] = procImg(ORIG[a.id], a);
+}
+async function addFiles(files){
+  for (const f of files){
+    const id = 'a' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
+    try {
+      if (f.type === 'application/pdf' || /\.pdf$/i.test(f.name)){
+        const bytes = await f.arrayBuffer(); await DB.put(id, {bytes});
+        const a = {id, kind: 'pdf', type: 'zeugnis', note: '', name: f.name}; S.att.push(a); await prepAtt(a);
+        if (a.err) say('Этот PDF не открылся для просмотра. Он защищён или повреждён. Попробуй сохранить его заново или сфотографировать.');
+      } else {
+        const url = URL.createObjectURL(f); let img;
+        try { img = await loadImg(url); } catch (e) { URL.revokeObjectURL(url); say('Это фото не открылось. Если это HEIC с iPhone, сделай снимок экрана документа или выбери в настройках камеры «Наиболее совместимый».'); continue; }
+        const sc = Math.min(1, 2400 / Math.max(img.naturalWidth, img.naturalHeight)), c = document.createElement('canvas'); c.width = Math.round(img.naturalWidth * sc); c.height = Math.round(img.naturalHeight * sc);
+        const x = c.getContext('2d'); x.fillStyle = '#fff'; x.fillRect(0, 0, c.width, c.height); x.drawImage(img, 0, 0, c.width, c.height); URL.revokeObjectURL(url);
+        const orig = c.toDataURL('image/jpeg', 0.9); await DB.put(id, {orig});
+        const a = {id, kind: 'img', type: 'zeugnis', note: '', name: f.name, rot: 0, fine: 0, crop: [0, 0, 0, 0], look: 'clean', size: c.width > c.height * 1.15 ? 'half' : 'full'};
+        ORIG[id] = await loadImg(orig); Object.assign(a, autoFix(ORIG[id], 0)); S.att.push(a); PROC[id] = procImg(ORIG[id], a);
+      }
+    } catch (e) { say('Файл «' + f.name + '» не получилось добавить.'); }
+  }
+  S.attOn = true; drawAtt(); touched(); document.getElementById('attsec').open = true;
+}
+function drawAtt(){
+  const box = document.getElementById('l-att'), arr = S.att;
+  box.innerHTML = arr.map((a, i) => {
+    const pr = a.kind === 'pdf' ? (PDFT[a.id] || [])[0] : PROC[a.id];
+    const th = pr ? `<img src="${pr.data}" alt="">` : `<span class="hint">${a.missing ? 'Файла нет на этом устройстве' : 'Загружаю…'}</span>`;
+    const head = `<div class="ent-h"><b>${i + 1}. ${esc(attTitle(a, 'ru') || 'Приложение')}</b><button type="button" class="ib" data-amv="-1" aria-label="Выше" ${i ? '' : 'disabled'}>↑</button><button type="button" class="ib" data-amv="1" aria-label="Ниже" ${i < arr.length - 1 ? '' : 'disabled'}>↓</button><button type="button" class="ib" data-adel aria-label="Удалить">✕</button></div>`;
+    const common = `<label class="fl"><span class="lb">Что это</span><select data-a="type">${Object.entries(ATT).map(([k, r]) => `<option value="${k}" ${a.type === k ? 'selected' : ''}>${r[0]}</option>`).join('')}</select></label>
+      <label class="fl"><span class="lb">Уточнение (фирма, школа или год)</span><input type="text" data-a="note" value="${esc(a.note)}" placeholder="Muster AG"></label>`;
+    const ctl = a.kind === 'pdf' ? `${common}<p class="hint">PDF · ${a.pages ? a.pages + ' стр.' : '…'} · добавится в файл без изменений.</p>`
+      : `${common}<div class="acts"><button type="button" class="btn ghost sm" data-arot="-90">↺ Повернуть</button><button type="button" class="btn ghost sm" data-arot="90">↻</button><button type="button" class="btn ghost sm" data-aauto>Выровнять автоматически</button><button type="button" class="btn ghost sm" data-areset>Без обрезки</button></div>
+      <div class="rng"><label>Выровнять наклон <input type="range" data-a="fine" min="-12" max="12" step="0.5" value="${a.fine || 0}"></label><label>Обрезать сверху <input type="range" data-a="c0" min="0" max="40" step="1" value="${a.crop[0]}"></label>
+      <label>Обрезать снизу <input type="range" data-a="c2" min="0" max="40" step="1" value="${a.crop[2]}"></label><label>Обрезать слева <input type="range" data-a="c3" min="0" max="40" step="1" value="${a.crop[3]}"></label>
+      <label>Обрезать справа <input type="range" data-a="c1" min="0" max="40" step="1" value="${a.crop[1]}"></label></div>
+      <div class="g2"><label class="fl"><span class="lb">Вид<button type="button" class="qh" data-help="attLook" aria-label="Подсказка: вид" aria-expanded="false">?</button></span><select data-a="look">${Object.entries(LOOKS).map(([k, v]) => `<option value="${k}" ${a.look === k ? 'selected' : ''}>${v}</option>`).join('')}</select></label>
+      <label class="fl"><span class="lb">На листе A4<button type="button" class="qh" data-help="attSize" aria-label="Подсказка: размер" aria-expanded="false">?</button></span><select data-a="size"><option value="full" ${a.size !== 'half' ? 'selected' : ''}>Целый лист</option><option value="half" ${a.size === 'half' ? 'selected' : ''}>Половина листа</option></select></label></div>`;
+    return `<div class="ent" data-att="${a.id}">${head}<div class="attrow"><div class="attth">${th}${a.kind === 'pdf' && a.pages ? `<span class="pg">${a.pages} стр.</span>` : ''}</div><div class="attctl">${ctl}</div></div></div>`;
+  }).join('');
+  document.getElementById('c-att').textContent = arr.length || '';
+  attSize();
+}
+function attSize(){
+  let b = 0; S.att.forEach(a => { if (a.kind === 'pdf') b += (PDFB[a.id] || {byteLength: 0}).byteLength; else if (PROC[a.id]) b += PROC[a.id].data.length * 0.75; });
+  const mb = (b + 150000) / 1048576, el = document.getElementById('attsize');
+  el.textContent = S.att.length ? `Размер PDF вместе с приложениями примерно ${mb.toFixed(1).replace('.', ',')} МБ.` + (mb > 8 ? ' Многие почтовые ящики не принимают письма больше 10 МБ. Выбери «Как скан» или убери лишнее.' : '') : '';
+}
+let attT = 0;
+function attChanged(a, redraw){ clearTimeout(attT); attT = setTimeout(() => { if (a.kind === 'img' && ORIG[a.id]) PROC[a.id] = procImg(ORIG[a.id], a); const th = document.querySelector(`[data-att="${a.id}"] .attth img`); if (th && PROC[a.id]) th.src = PROC[a.id].data; if (redraw) drawAtt(); else attSize(); touched(); }, 120); }
+document.getElementById('attfile').addEventListener('change', e => { const fs = [...e.target.files]; e.target.value = ''; if (fs.length){ if (showEx) leaveEx(); say('Добавляю…'); addFiles(fs).then(() => say('Готово. Проверь, ровно ли лежит документ.')); } });
+document.getElementById('l-att').addEventListener('input', e => {
+  const el = e.target, card = el.closest('[data-att]'); if (!card || !el.dataset.a) return;
+  const a = S.att.find(x => x.id === card.dataset.att); if (!a) return; const k = el.dataset.a;
+  if (k[0] === 'c' && k.length === 2) a.crop[+k[1]] = +el.value; else if (k === 'fine') a.fine = +el.value; else a[k] = el.value;
+  if (k === 'type' || k === 'note'){ card.querySelector('.ent-h b').textContent = (S.att.indexOf(a) + 1) + '. ' + attTitle(a, 'ru'); touched(); return; }
+  attChanged(a, false);
+});
+document.getElementById('l-att').addEventListener('click', e => {
+  const card = e.target.closest('[data-att]'); if (!card) return; const i = S.att.findIndex(x => x.id === card.dataset.att), a = S.att[i];
+  const r = e.target.closest('[data-arot]'); if (r){ a.rot = ((a.rot || 0) + +r.dataset.arot + 360) % 360; if (ORIG[a.id]) Object.assign(a, autoFix(ORIG[a.id], a.rot)); attChanged(a, true); return; }
+  if (e.target.closest('[data-aauto]') && ORIG[a.id]){ Object.assign(a, autoFix(ORIG[a.id], a.rot)); attChanged(a, true); say('Готово. Если что-то обрезалось лишнее, подвинь ползунки.'); return; }
+  if (e.target.closest('[data-areset]')){ a.fine = 0; a.crop = [0, 0, 0, 0]; attChanged(a, true); return; }
+  const mv = e.target.closest('[data-amv]'); if (mv){ const j = i + +mv.dataset.amv; if (j < 0 || j >= S.att.length) return; [S.att[i], S.att[j]] = [S.att[j], S.att[i]]; drawAtt(); touched(); return; }
+  if (e.target.closest('[data-adel]')){ S.att.splice(i, 1); DB.del(a.id); delete PROC[a.id]; delete ORIG[a.id]; delete PDFT[a.id]; delete PDFB[a.id]; drawAtt(); touched(); }
+});
+/* листы приложений: список и документы, ровно по центру листа */
+function attPages(d){
+  if (!d.attOn) return [];
+  const list = (d.att || []).filter(a => a.kind === 'pdf' ? (PDFT[a.id] || []).length : PROC[a.id]);
+  if (!list.length) return [];
+  const l = L[d.lang] || L.de, col = COLORS[d.color] || COLORS.sage, ACC = d.tpl === 'strogiy' ? '#1F1B18' : col[0], MUT = '#6B625A', INK = '#1F1B18', RULE = '#D9D3CA';
+  const name = [d.p.first, d.p.last].filter(Boolean).join(' ');
+  const pages = [], X0 = 18, W = PW - 36;
+  const foot = pg => pg.push({t: 'text', x: X0, y: PH - 9, s: [name, l.att].filter(Boolean).join(' · '), f: 'r', size: 7, color: '#9A928A', align: 'left'});
+  if (d.attList){
+    const pg = []; let y = 22;
+    pg.push({t: 'text', x: X0, y: y + 3, s: l.doc.toUpperCase(), f: 'b', size: 7.6, color: MUT, align: 'left'}); y += 6;
+    pg.push({t: 'text', x: X0, y: y + 30 * PT * 0.82, s: l.att, f: 'd', size: 30, color: INK, align: 'left'}); y += lh(30, 1.05) + 1;
+    if (name){ pg.push({t: 'text', x: X0, y: y + 11 * PT, s: name, f: 'm', size: 11, color: ACC, align: 'left'}); y += lh(11); }
+    y += 4; pg.push({t: 'line', x1: X0, y1: y, x2: X0 + W, y2: y, color: ACC, w: 0.6}); y += 9;
+    list.forEach((a, i) => {
+      const t = attTitle(a, d.lang) + (a.kind === 'pdf' && (PDFT[a.id] || []).length > 1 ? ` (${pagesWord(PDFT[a.id].length, d.lang)})` : '');
+      const ln = wrap(t, 'r', 10.5, W - 14);
+      pg.push({t: 'text', x: X0, y: y + 10.5 * PT, s: String(i + 1).padStart(2, '0'), f: 'b', size: 10.5, color: ACC, align: 'left'});
+      ln.forEach(s => { pg.push({t: 'text', x: X0 + 14, y: y + 10.5 * PT, s, f: 'r', size: 10.5, color: INK, align: 'left'}); y += lh(10.5, 1.4); });
+      y += 2.2; pg.push({t: 'line', x1: X0 + 14, y1: y, x2: X0 + W, y2: y, color: RULE, w: 0.25}); y += 4;
+    });
+    foot(pg); pages.push(pg);
+  }
+  let half = null;
+  const place = (pg, a, i, img, y0, hBox) => {
+    pg.push({t: 'text', x: X0, y: y0 + 3, s: `${l.attOne} ${i + 1}`.toUpperCase(), f: 'b', size: 7.6, color: ACC, align: 'left'});
+    wrap(attTitle(a, d.lang), 'm', 9.6, W).slice(0, 1).forEach(s => pg.push({t: 'text', x: X0, y: y0 + 8.4, s, f: 'm', size: 9.6, color: INK, align: 'left'}));
+    pg.push({t: 'line', x1: X0, y1: y0 + 11.5, x2: X0 + W, y2: y0 + 11.5, color: RULE, w: 0.3});
+    const by = y0 + 16, bh = hBox - 16, r = Math.min(W / img.w, bh / img.h), w = img.w * r, h = img.h * r, x = X0 + (W - w) / 2, yy = by + (bh - h) / 2;
+    pg.push({t: 'img', x, y: yy, w, h, data: img.data, fit: true});
+    [[x, yy, x + w, yy], [x, yy + h, x + w, yy + h], [x, yy, x, yy + h], [x + w, yy, x + w, yy + h]].forEach(([x1, y1, x2, y2]) => pg.push({t: 'line', x1, y1, x2, y2, color: '#CFC8BE', w: 0.2}));
+  };
+  list.forEach((a, i) => {
+    if (a.kind === 'pdf'){ half = null; PDFT[a.id].forEach((th, k) => pages.push([{t: 'pdfpage', id: a.id, i: k}, {t: 'img', x: 0, y: 0, w: PW, h: PH, data: th.data, fit: true}])); return; }
+    const img = PROC[a.id];
+    if (a.size === 'half'){
+      if (half){ place(half, a, i, img, 150, 132); half = null; return; }
+      const pg = []; place(pg, a, i, img, 16, 128); foot(pg); pages.push(pg); half = pg; return;
+    }
+    half = null; const pg = []; place(pg, a, i, img, 16, 266); foot(pg); pages.push(pg);
+  });
+  return pages;
+}
+async function loadAtts(){ for (const a of S.att) await prepAtt(a); drawAtt(); render(); }
 
 /* ===================== пример ===================== */
 function exPhoto(){
@@ -829,15 +1214,39 @@ function example(){
     edu: [{from: '2009', to: '2014', deg: 'master', title: {de: 'Finanzen und Kredit', fr: 'Finance et crédit', it: 'Finanza e credito', en: 'Finance and Credit', ru: 'финансы и кредит', uk: 'фінанси і кредит'}[S.lang], org: {de: 'Wirtschaftsuniversität', fr: 'Université d’économie', it: 'Università di economia', en: 'University of Economics', ru: 'Экономический университет', uk: 'Економічний університет'}[S.lang], place: {de: 'Kyjiw, Ukraine', fr: 'Kyiv, Ukraine', it: 'Kyiv, Ucraina', en: 'Kyiv, Ukraine', ru: 'Киев, Украина', uk: 'Київ, Україна'}[S.lang], text: {de: 'Anerkannt durch das SBFI', fr: 'Reconnu par le SEFRI', it: 'Riconosciuto dalla SEFRI', en: 'Recognised by SERI', ru: 'Признан SBFI', uk: 'Визнаний SBFI'}[S.lang]}],
     trn: [{year: '2025', title: {de: 'Deutschkurs B2', fr: 'Cours d’allemand B2', it: 'Corso di tedesco B2', en: 'German course B2', ru: 'Курс немецкого B2', uk: 'Курс німецької B2'}[S.lang], org: 'Klubschule Migros, Zürich'}, {year: '2023', title: 'Power BI Data Analyst (PL-300)', org: 'Microsoft'}],
     lng: [{code: 'uk', lvl: 'native', other: ''}, {code: 'ru', lvl: 'C2', other: ''}, {code: 'en', lvl: 'C1', other: '', cert: 'Cambridge English'}, {code: 'de', lvl: 'B2', other: '', cert: 'fide'}],
-    skills: 'MS Excel, Power BI, SAP FI/CO\n' + {de: 'Budgetierung · Forecast · Reporting · Controlling', fr: 'Budgétisation · prévisions · reporting · contrôle de gestion', it: 'Budgeting · forecast · reporting · controlling', en: 'Budgeting · forecasting · reporting · controlling', ru: 'Бюджетирование · прогноз · отчётность · контроллинг', uk: 'Бюджетування · прогноз · звітність · контролінг'}[S.lang], interests: {de: 'Wandern, Fotografie, Freiwilligenarbeit', fr: 'Randonnée, photographie, bénévolat', it: 'Escursionismo, fotografia, volontariato', en: 'Hiking, photography, volunteering', ru: 'Походы, фотография, волонтёрство', uk: 'Походи, фотографія, волонтерство'}[S.lang]});
+    skl: ['office.MS Excel', 'office.PowerPoint', 'fin.SAP FI/CO', 'fin.Power BI', 'fin.Jahresabschluss', 'fin.Budgetierung und Controlling', 'soft.Genauigkeit', 'soft.Teamfähigkeit', 'soft.Analytisches Denken'], skills: '', ints: ['0.Wandern', '1.Fotografie', '3.Freiwilligenarbeit'], interests: '',
+    att: [{id: 'ex1', kind: 'img', type: 'zeugnis', note: 'Muster Finanz AG', size: 'full'}, {id: 'ex2', kind: 'img', type: 'diplom', note: {de: 'Master in Finanzen', fr: 'Master en finance', it: 'Master in finanza', en: 'Master in Finance', ru: 'магистр финансов', uk: 'магістр фінансів'}[S.lang], size: 'full'}], attOn: true, attList: true});
+}
+function exDoc(kind){
+  const W = 1240, H = 1754, c = document.createElement('canvas'); c.width = W; c.height = H; const x = c.getContext('2d');
+  x.fillStyle = '#fff'; x.fillRect(0, 0, W, H); x.fillStyle = '#2B2724';
+  const line = (y, w, h = 14, col = '#C9C4BD') => { x.fillStyle = col; x.fillRect(150, y, w, h); };
+  if (kind === 'zeugnis'){
+    x.fillStyle = '#2E5A88'; x.fillRect(150, 150, 70, 70); x.fillStyle = '#2B2724'; x.font = '700 38px Manrope'; x.fillText('Muster Finanz AG', 245, 200);
+    x.font = '400 22px Manrope'; x.fillStyle = '#6B625A'; x.fillText('Bahnhofstrasse 1 · 8001 Zürich', 245, 232);
+    x.fillStyle = '#2B2724'; x.font = '700 54px Manrope'; x.fillText('Arbeitszeugnis', 150, 420);
+    for (let i = 0; i < 24; i++){ const y = 500 + i * 38 + (i > 8 ? 30 : 0) + (i > 17 ? 30 : 0); line(y, i % 9 === 8 ? 520 : 900 + (i * 37 % 40)); }
+    x.font = '400 24px Manrope'; x.fillStyle = '#2B2724'; x.fillText('Zürich, 31. März 2026', 150, 1600);
+    x.strokeStyle = '#1F3F7A'; x.lineWidth = 4; x.beginPath(); x.moveTo(760, 1600); x.bezierCurveTo(800, 1520, 840, 1640, 880, 1570); x.bezierCurveTo(920, 1510, 950, 1630, 1010, 1560); x.stroke();
+    x.fillStyle = '#6B625A'; x.font = '400 22px Manrope'; x.fillText('Anna Muster, Leiterin Finanzen', 760, 1650);
+  } else {
+    x.strokeStyle = '#9A6B12'; x.lineWidth = 10; x.strokeRect(70, 70, W - 140, H - 140); x.lineWidth = 2; x.strokeRect(95, 95, W - 190, H - 190);
+    x.textAlign = 'center'; x.fillStyle = '#2B2724'; x.font = '400 40px Forum'; x.fillText('UNIVERSITY OF ECONOMICS', W / 2, 330);
+    x.font = '400 120px Forum'; x.fillStyle = '#7A2E3A'; x.fillText('DIPLOMA', W / 2, 560);
+    x.font = '400 34px Manrope'; x.fillStyle = '#2B2724'; x.fillText('Master of Finance and Credit', W / 2, 700); x.font = '700 50px Manrope'; x.fillText('Olena Kovalenko', W / 2, 840);
+    x.textAlign = 'left'; for (let i = 0; i < 6; i++) { x.fillStyle = '#C9C4BD'; x.fillRect(250 + (i % 2) * 60, 960 + i * 40, 740 - (i % 2) * 120, 14); }
+    x.fillStyle = '#D9B45A'; x.beginPath(); x.arc(W / 2, 1450, 110, 0, Math.PI * 2); x.fill(); x.fillStyle = '#9A6B12'; x.beginPath(); x.arc(W / 2, 1450, 80, 0, Math.PI * 2); x.fill();
+  }
+  return {data: c.toDataURL('image/jpeg', 0.85), w: W, h: H};
 }
 function leaveEx(){ showEx = false; document.getElementById('exbar').hidden = true; render(); }
-document.getElementById('exbtn').addEventListener('click', () => { EX = example(); showEx = true; document.getElementById('exbar').hidden = false; render(); document.getElementById('sheet').scrollIntoView({behavior: 'smooth', block: 'start'}); });
+document.getElementById('exbtn').addEventListener('click', () => { EX = example(); PROC.ex1 = exDoc('zeugnis'); PROC.ex2 = exDoc('diplom'); showEx = true; document.getElementById('exbar').hidden = false; render(); document.getElementById('sheet').scrollIntoView({behavior: 'smooth', block: 'start'}); });
 document.getElementById('exback').addEventListener('click', leaveEx);
 
 /* шрифты листа должны загрузиться до первой раскладки, иначе ширина строк посчитается не тем шрифтом */
 Promise.all(['400 10px Manrope', '600 10px Manrope', '700 10px Manrope', '400 10px Forum'].map(f => document.fonts.load(f))).catch(() => {}).then(() => drawAll());
 drawAll();
+drawAtt(); if (S.att.length) loadAtts();
 if (/[?&]example\b/.test(location.search)) document.getElementById('exbtn').click();
 </script>
 <script>
@@ -862,7 +1271,11 @@ window.HELP = {
 "jobtype": "<p>Обычно оставь «Обычная работа». Если это было через агентство, стажировка, своё дело или волонтёрство, выбери. Это появится маленькой строкой под фирмой.</p><p>Волонтёрство в Швейцарии тоже считается опытом, особенно в первые годы.</p>",
 "pct": "<p>В Швейцарии часто работают не полную неделю. 100 % — полная занятость, 80 % — четыре дня в неделю. Указывать не обязательно.</p>",
 "deg": "<p>Выбери уровень, он переведётся сам. Специальность напиши на языке резюме.</p><p>Если диплом признан в Швейцарии, напиши это в примечании.</p>",
-"skills": "<p>Каждая строка станет отдельной строкой в резюме. Программы, оборудование, водительская категория, сертификаты.</p><p>Пиши конкретно, например «MS Excel (sehr gut)», а не «компьютер».</p>",
+"att": "<p>Обычно к резюме прикладывают рекомендации с прошлых мест работы (Arbeitszeugnis), дипломы с признанием и языковые сертификаты. Сначала самое новое и важное.</p><p>Фотографируй при дневном свете, сверху, бумага на тёмном столе. Наклон и фон вокруг листа убираются сами. Если нужно, поправь ползунками или поверни на 90°. «Ярче и чётче» делает фон белым, «Как скан» — чёрно-белым и лёгким.</p><p>Копию пермита и паспорта прикладывай только если об этом просят в вакансии.</p><p>Файлы хранятся только на этом устройстве и не входят в резервную копию. Их легко добавить снова.</p>",
+"attList": "<p>Первым листом после резюме идёт список всех приложений с номерами (по-немецки Beilagen). Работодателю удобно, и сразу видно, что всё на месте.</p>",
+"attLook": "<ul><li><b>Как есть.<\/b> Фото без изменений.<\/li><li><b>Ярче и чётче.<\/b> Фон становится белым, текст тёмным, цвета печатей и подписей остаются. Подходит почти всегда.<\/li><li><b>Как скан.<\/b> Чёрно-белый, как из сканера. Файл получается легче.<\/li><\/ul>",
+"attSize": "<p>«Целый лист» — для обычных бумаг A4. «Половина листа» — для маленьких документов: карточки, удостоверения, сертификаты в половину страницы. Два таких подряд встанут на один лист.</p>",
+"skills": "<p>Если нужного нет в группах выше, допиши здесь. Каждая строка станет отдельной строкой в резюме, пиши сразу на языке резюме. Программы, оборудование, водительская категория, сертификаты.</p><p>Пиши конкретно, например «MS Excel (sehr gut)», а не «компьютер».</p>",
 "refs": "<p>В Швейцарии обычно пишут «Referenzen auf Anfrage». Работодатель попросит контакты сам, если ты пройдёшь дальше.</p><p>Если хочешь указать рекомендателей сразу, сними галочку и добавь их. Сначала спроси у них согласие.</p>"
 };
 </script>
