@@ -1,0 +1,322 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<link rel="icon" href="/fav/favicon.svg" type="image/svg+xml"><link rel="icon" href="/fav/icon-32.png" sizes="32x32"><link rel="apple-touch-icon" href="/fav/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/fonts.css">
+<meta name="description" content="Как устроена пенсия в Швейцарии на схемах: три колонны (AHV, пенсионная касса, 3a), что происходит в каком возрасте, где лежат твои деньги и как проверить пробелы, что будет при отъезде. Свой ориентир по годам взносов. Бесплатно, PDF и PNG.">
+<link rel="canonical" href="https://svoiludi.ch/instrumenty/pensiya-shema/">
+<meta property="og:type" content="website"><meta property="og:locale" content="ru_RU"><meta property="og:site_name" content="Свои люди в Швейцарии">
+<meta property="og:title" content="Как устроена пенсия в Швейцарии · три колонны на схеме"><meta property="og:description" content="AHV, пенсионная касса и 3a на схемах, возраст пенсии, где лежат деньги и твой ориентир. Бесплатно, PDF и PNG.">
+<meta property="og:url" content="https://svoiludi.ch/instrumenty/pensiya-shema/"><meta property="og:image" content="https://svoiludi.ch/instrumenty/pensiya-shema/og-image.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="robots" content="noindex, nofollow">
+<title>Как устроена пенсия</title>
+<style>
+/* Как устроена пенсия (08.10.2026): анкета слева, живые листы справа, движок assets/shema.js. */
+:root{
+  --bg:#F4EDE3; --paper:#FFFCF8; --ink:#2F2924; --muted:#7A6E62; --line:#E5D9C9; --soft:#EFE5D7;
+  --brown:#6E4F3C; --mustard:#B98324; --mustard-soft:#F3E3C2; --sage:#4F5E3E; --sage-soft:#E3E8D6; --red:#A0523D;
+  --display:"Forum","Georgia",serif; --sans:"Manrope","Segoe UI",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#221D19; --paper:#2C2621; --ink:#F1E9DF; --muted:#B4A796; --line:#3E362F; --soft:#352E28;
+  --brown:#E1C2A6; --mustard:#E2B45C; --mustard-soft:#3D321F; --sage:#B4BF97; --sage-soft:#2E3226; --red:#E39A85; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#221D19; --paper:#2C2621; --ink:#F1E9DF; --muted:#B4A796; --line:#3E362F; --soft:#352E28;
+  --brown:#E1C2A6; --mustard:#E2B45C; --mustard-soft:#3D321F; --sage:#B4BF97; --sage-soft:#2E3226; --red:#E39A85; color-scheme:dark}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--ink);font:15px/1.55 var(--sans);margin:0}
+.wrap{max-width:1280px;margin:0 auto;padding-inline:16px;padding-block:28px 48px;display:flex;flex-direction:column;gap:24px}
+.eyebrow{font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+h1{font-family:var(--display);font-weight:400;font-size:clamp(2.4rem,6vw,3.6rem);line-height:1;margin:4px 0 10px;text-wrap:balance}
+h2{font-family:var(--display);font-weight:400;font-size:1.55rem;margin:0;text-wrap:balance}
+h3{font-family:var(--display);font-weight:400;font-size:1.22rem;line-height:1.2;margin:0}
+.lead{max-width:66ch;color:var(--muted);margin:0}
+.jump{font-weight:700;color:var(--brown);text-underline-offset:4px}
+.privnote{margin-top:14px;background:var(--sage-soft);border-radius:16px;padding:12px 16px;font-size:.9rem;max-width:90ch}
+.status{font-size:.86rem;color:var(--muted);min-height:1.3em}
+.btn{font:inherit;font-weight:700;font-size:.9rem;border:0;border-radius:999px;padding:10px 18px;cursor:pointer;color:#fff;text-decoration:none;display:inline-flex;align-items:center;gap:6px;background:#6E4F3C;box-shadow:0 8px 18px -8px rgba(110,79,60,.6)}
+.btn.gold{background:#B98324;box-shadow:0 8px 18px -8px rgba(185,131,36,.7)}
+.btn.free{background:#4F5E3E;box-shadow:0 8px 18px -8px rgba(79,94,62,.6)}
+.btn.ghost{background:transparent;color:var(--brown);border:1.5px solid var(--line);box-shadow:none}
+.btn.sm{font-size:.82rem;padding:7px 13px}
+.btn[disabled]{background:var(--soft);color:var(--muted);box-shadow:none;cursor:wait}
+select,input[type=text],input[type=tel],textarea{font:inherit;font-size:.95rem;color:var(--ink);background:var(--paper);border:1.5px solid var(--line);border-radius:12px;padding:9px 12px;width:100%;min-width:0}
+select:focus-visible,input:focus-visible,button:focus-visible,textarea:focus-visible,a:focus-visible{outline:2px solid var(--mustard);outline-offset:2px}
+::placeholder{color:color-mix(in srgb,var(--muted) 70%,transparent)}
+.setup{background:var(--paper);border:1.5px solid var(--line);border-radius:22px;padding:16px 18px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px 18px;align-items:start}
+@media (max-width:1000px){.setup{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.setup{grid-template-columns:1fr}}
+.fl{display:flex;flex-direction:column;gap:6px;min-width:0}
+.fl>.lb{font-size:.8rem;font-weight:700;color:var(--muted);display:flex;align-items:center}
+.seg{display:flex;flex-wrap:wrap;gap:6px}
+.seg button{font:inherit;font-size:.84rem;font-weight:700;border:1.5px solid var(--line);background:var(--paper);color:var(--ink);border-radius:999px;padding:6px 12px;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--sage);border-color:var(--sage);color:#fff}
+.acts{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.exbar{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;background:var(--mustard-soft);border-radius:16px;padding:10px 14px;font-size:.9rem;font-weight:600}
+.work{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:22px;align-items:start}
+@media (max-width:1040px){.work{grid-template-columns:1fr}}
+.form{display:flex;flex-direction:column;gap:14px;min-width:0}
+.sec{background:var(--paper);border:1.5px solid var(--line);border-radius:20px;padding:16px 18px;display:flex;flex-direction:column;gap:12px}
+.sec>h2{font-size:1.3rem;display:flex;align-items:center}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:560px){.g2{grid-template-columns:1fr}}
+.hint{font-size:.84rem;color:var(--muted);margin:0}
+.chk{display:flex;flex-direction:column;gap:8px}
+.chk label{display:flex;gap:10px;align-items:baseline;font-size:.92rem;cursor:pointer}
+.chk input{flex:none;width:18px;height:18px;accent-color:var(--sage);transform:translateY(3px)}
+.chk b{white-space:nowrap}
+.chk small{color:var(--muted)}
+.tog{display:flex;gap:10px;align-items:center;font-size:.92rem;cursor:pointer}
+.tog input{width:18px;height:18px;accent-color:var(--sage)}
+.sheetbox{position:sticky;top:12px;display:flex;flex-direction:column;gap:10px}
+@media (max-width:1040px){.sheetbox{position:static}}
+.sheet{background:#fff;border-radius:6px;box-shadow:0 18px 40px -22px rgba(47,41,36,.45);overflow:hidden}
+.sheet svg{display:block;width:100%;height:auto}
+.imp{background:var(--paper);border:1.5px dashed color-mix(in srgb,var(--sage) 55%,transparent);border-radius:16px;padding:14px 18px;font-size:.88rem;max-width:90ch;margin:0}
+.imp b{color:var(--sage)}
+.guide{display:flex;flex-direction:column;gap:14px;max-width:90ch}
+.guide ul{margin:0;padding-left:20px}
+.guide li{margin:4px 0}
+.credit{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:.8rem;color:var(--muted)}
+.credit a{color:var(--muted)}
+.qh{font:700 .72rem/1 var(--sans);width:20px;height:20px;border-radius:50%;border:1.5px solid var(--line);background:var(--paper);color:var(--brown);cursor:pointer;margin-left:6px;padding:0;flex:none}
+.sheets{display:flex;flex-direction:column;gap:14px}
+.goals{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+@media (max-width:560px){.goals{grid-template-columns:1fr}}
+.goals label{display:flex;gap:10px;align-items:flex-start;background:var(--bg);border:1.5px solid var(--line);border-radius:14px;padding:9px 12px;cursor:pointer;font-size:.92rem}
+.goals input{width:18px;height:18px;accent-color:var(--sage);flex:none;margin-top:2px}
+.goals small{display:block;color:var(--muted)}
+.steps{display:flex;flex-direction:column;gap:8px}
+.steps details{background:var(--paper);border:1.5px solid var(--line);border-radius:16px;padding:10px 16px}
+.steps summary{cursor:pointer;font-weight:700;display:flex;gap:10px;align-items:baseline}
+.steps summary small{font-weight:600;color:var(--muted);margin-left:auto;text-align:right}
+.steps details p,.steps details ul{margin:8px 0 2px;font-size:.93rem}
+.steps details ul{padding-left:20px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <p style="margin:0 0 14px"><a class="jump" href="https://svoiludi.ch/instrumenty/">← Все полезные инструменты · Свои люди в Швейцарии</a></p>
+    <div class="eyebrow">Схема · пенсия в Швейцарии</div>
+    <h1>Как устроена пенсия</h1>
+    <p class="lead">Три колонны пенсии на одной схеме: AHV, пенсионная касса и 3a. Что происходит в каком возрасте, где лежат твои деньги и как это проверить, что будет, если уедешь. Впиши год рождения и год приезда — увидишь свой ориентир. PDF и PNG бесплатно.</p>
+    <div class="privnote"><b>Твои данные только у тебя.</b> Год рождения и год приезда хранятся только в твоём браузере на этом устройстве. Регистрация не нужна.</div>
+    <div data-fan="pensiya-shema"></div>
+  </header>
+  <div class="setup">
+    <div class="fl"><span class="lb">Твой кантон<button type="button" class="qh" data-help="kanton" aria-label="Подсказка: твой кантон" aria-expanded="false">?</button></span><select id="kanton"></select></div>
+    <div class="fl"><span class="lb">Язык листов<button type="button" class="qh" data-help="lang" aria-label="Подсказка: язык листов" aria-expanded="false">?</button></span><select id="lang"><option value="bi">Русский + язык кантона</option><option value="ru">Только русский</option></select></div>
+    <div class="fl"><span class="lb">Что в PDF</span><div class="chk"><label><input type="checkbox" id="p1" checked> Три колонны</label><label><input type="checkbox" id="p2" checked> Пенсия по возрасту</label><label><input type="checkbox" id="p3" checked> Где лежат деньги</label><label><input type="checkbox" id="p4" checked> Мой ориентир</label></div></div>
+    <div class="fl"><span class="lb">Печать</span><label class="tog"><input type="checkbox" id="bw"> Без цвета, для дешёвой печати</label></div>
+  </div>
+  <div class="exbar" id="exbar" hidden><span>Это пример. Так будет выглядеть твой файл.</span><button type="button" class="btn sm" id="exOff">Вернуться к моим данным</button></div>
+  <div class="work">
+    <div class="form">
+      <section class="sec" aria-labelledby="h-me">
+        <h2 id="h-me">Про меня<button type="button" class="qh" data-help="me" aria-label="Подсказка: про меня" aria-expanded="false">?</button></h2>
+        <div class="g2">
+          <div class="fl"><span class="lb">Год рождения</span><select id="by"></select></div>
+          <div class="fl"><span class="lb">Пол (для возраста пенсии)<button type="button" class="qh" data-help="sex" aria-label="Подсказка: пол" aria-expanded="false">?</button></span><select id="sx"><option value="">—</option><option value="f">женщина</option><option value="m">мужчина</option></select></div>
+          <div class="fl"><span class="lb">С какого года в Швейцарии</span><select id="arr"></select></div>
+          <div class="fl"><span class="lb">Сколько лет не платила AHV после приезда<button type="button" class="qh" data-help="gap" aria-label="Подсказка: пробелы" aria-expanded="false">?</button></span><select id="gap"></select></div>
+        </div>
+        <p class="hint" id="meNote"></p>
+      </section>
+      <section class="sec" aria-labelledby="h-st">
+        <h2 id="h-st">Что проверить</h2>
+        <div class="steps" id="stepsList"></div>
+      </section>
+    </div>
+    <div class="sheetbox">
+      <div class="acts"><button type="button" class="btn gold" id="pdf">Скачать PDF</button><button type="button" class="btn ghost sm" id="share" hidden>Отправить</button><button type="button" class="btn ghost sm" id="exOn">Посмотреть на примере</button></div>
+      <div class="sheets" id="sheet" aria-label="Предпросмотр листов"></div>
+      <div class="status" id="status" role="status"></div>
+    </div>
+  </div>
+  <p class="imp"><b>Важно.</b> Это образец для примера и личного использования, а не официальный документ. Ориентир по годам взносов очень приблизительный: размер пенсии AHV зависит ещё от дохода, брака и детей. Точный расчёт бесплатно сделает твоя касса AHV. Суммы на 2026 год. Автор не несёт ответственности за достоверность.</p>
+  <div class="share-slot" data-url="https://svoiludi.ch/instrumenty/pensiya-shema/" data-lead="Перешли тем, кто хочет понять свою пенсию в Швейцарии. Сообщение уже готово." data-text="Привет! Тут на схемах, как устроена пенсия в Швейцарии: три колонны, где лежат деньги, как проверить пробелы, и можно посчитать свой ориентир. Бесплатно, PDF. https://svoiludi.ch/instrumenty/pensiya-shema/"></div>
+  <p class="credit"><span>Свои люди в Швейцарии · svoiludi.ch</span><a href="https://svoiludi.ch/privacy/">Политика конфиденциальности</a></p>
+</div>
+
+<script src="/assets/kantony.js"></script>
+<script src="/assets/lib/jspdf.umd.min.js"></script>
+<script src="/assets/shema.js"></script>
+<script>
+window.HELP = {
+  kanton: '<p>Выбери кантон, где ты живёшь, — от него язык вторых подписей. Пенсия AHV и пенсионная касса одинаково устроены во всей Швейцарии.</p>',
+  lang: '<p><b>Русский + язык кантона</b> — главные слова и на языке кантона, как они стоят в письмах кассы AHV и пенсионной кассы.</p>',
+  me: '<p>Год рождения нужен, чтобы посчитать, когда пенсия и сколько лет взносов у тебя может быть. Год приезда — чтобы увидеть годы, которых не будет в Швейцарии.</p>',
+  sex: '<p>Для женщин, рождённых в 1961–1963 годах, пенсионный возраст повышается постепенно: 64 года и 3, 6 или 9 месяцев. С 1964 года рождения — 65 лет, как у мужчин.</p>',
+  gap: '<p>Годы, когда ты жила в Швейцарии, но не платила AHV: например, не работала и не знала, что нужно платить самой. Точно это видно в выписке твоего счёта AHV. Последние 5 лет можно доплатить.</p>'
+};
+const KEY = 'pensiyaShema.v1';
+const K = window.KANTONY || {};
+const LOC = {GE: 'fr', VD: 'fr', NE: 'fr', JU: 'fr', FR: 'fr', VS: 'fr', TI: 'it'};
+const TL = {
+  t1: {de: 'Die drei Säulen der Vorsorge', fr: 'Les trois piliers de la prévoyance', it: 'I tre pilastri della previdenza'}, t2: {de: 'Vorsorge nach Alter', fr: 'La prévoyance selon l’âge', it: 'La previdenza secondo l’età'}, t3: {de: 'Wo liegt mein Geld?', fr: 'Où est mon argent ?', it: 'Dove sono i miei soldi?'}, t4: {de: 'Meine Orientierung', fr: 'Mon repère', it: 'Il mio orientamento'},
+  p1: {de: '1. Säule: AHV/IV', fr: '1er pilier : AVS/AI', it: '1° pilastro: AVS/AI'}, p2: {de: '2. Säule: Pensionskasse (BVG)', fr: '2e pilier : caisse de pension (LPP)', it: '2° pilastro: cassa pensioni (LPP)'}, p3: {de: '3. Säule: Säule 3a und 3b', fr: '3e pilier : 3a et 3b', it: '3° pilastro: 3a e 3b'}, el: {de: 'Ergänzungsleistungen (EL)', fr: 'prestations complémentaires (PC)', it: 'prestazioni complementari (PC)'}
+};
+const DISC = {ru: 'Образец для личного использования, не официальный документ. Суммы 2026 года. Точный расчёт пенсии бесплатно делает касса AHV. svoiludi.ch', de: 'Muster zur Orientierung und für den persönlichen Gebrauch, kein amtliches Dokument. Angaben ohne Gewähr, bitte selbst prüfen.', fr: 'Modèle indicatif pour usage personnel, pas un document officiel. Données sans garantie, à vérifier soi-même.', it: 'Modello indicativo per uso personale, non un documento ufficiale. Dati senza garanzia, da verificare personalmente.'};
+let S = load(), EX = null;
+function blank(){ return {k: '', lang: 'bi', bw: false, p: {1: true, 2: true, 3: true, 4: true}, by: '', sx: '', arr: '', gap: 0}; }
+function load(){ try { const s = JSON.parse(localStorage.getItem(KEY)); if (s && typeof s === 'object') return Object.assign(blank(), s); } catch (e) {} const b = blank(); try { b.k = localStorage.getItem('svoiludi.kanton') || ''; } catch (e) {} return b; }
+function save(){ if (EX) return; try { localStorage.setItem(KEY, JSON.stringify(S)); if (S.k) localStorage.setItem('svoiludi.kanton', S.k); } catch (e) {} }
+const D = () => EX || S, loc = d => LOC[d.k] || 'de', bi = d => d.lang === 'bi', L = (d, k) => bi(d) ? TL[k][loc(d)] : '';
+const right = d => d.k && K[d.k] ? K[d.k].n + ' · ' + d.k : '', disc = d => bi(d) ? DISC[loc(d)] : DISC.ru;
+/* возраст пенсии AHV в месяцах */
+function retAge(by, sx){ if (sx !== 'f' || by >= 1964) return 65 * 12; if (by <= 1960) return 64 * 12; return 64 * 12 + {1961: 3, 1962: 6, 1963: 9}[by]; }
+function calc(d){
+  const by = +d.by; if (!by) return null;
+  const ra = retAge(by, d.sx), ry = by + Math.floor(ra / 12), first = by + 21, last = ry - 1; // полные годы взносов: с 1 января после 20 лет до года пенсии
+  const arr = +d.arr || first, before = Math.max(0, Math.min(arr, last + 1) - first), gap = +d.gap || 0;
+  const total = last - first + 1, have = Math.max(0, total - before - gap);
+  return {by, ra, ry, first, last, arr, before, gap, total, have, frac: Math.min(1, have / 44)};
+}
+
+function p1(d){
+  const C = SH.pal(d.bw), P = SH.page(297, 210, C), c = C.c;
+  P.header('Пенсия в Швейцарии: три колонны', L(d, 't1'), right(d));
+  // крыша
+  P.tri([[148.5, 21], [24, 40], [273, 40]], d.bw ? '#FFFFFF' : c.mustard[0]);
+  P.line(24, 40, 148.5, 22, c.mustard[1], 0.5); P.line(148.5, 22, 273, 40, c.mustard[1], 0.5); P.line(24, 40, 273, 40, c.mustard[1], 0.5);
+  P.text('Твоя пенсия = 1 + 2 + 3', 148.5, 35, 11, true, c.mustard[1], 'center');
+  const cols = [
+    ['1 · AHV / IV — государственная', 'p1', c.blue, ['Цель: на самое нужное.', 'Обязательна для всех: работающие с 18 лет, неработающие с 21 года.', 'Платят: ты и работодатель по 5,3% зарплаты (с IV и EO), сама — если работаешь на себя или не работаешь.', 'Пенсия 2026: от 1260 до 2520 франков в месяц на одного, у пары вместе не больше 3780. С декабря 2026 года — 13-я пенсия раз в год.', 'Полная пенсия — за 44 года взносов без пробелов.']],
+    ['2 · Пенсионная касса — через работу', 'p2', c.green, ['Цель: вместе с AHV примерно сохранить уровень жизни.', 'Обязательна при зарплате у одного работодателя от 22 680 франков в год. Копить — с 25 лет.', 'Платят: ты и работодатель, он — минимум половину.', 'Это твой личный счёт. Сумма — в справке пенсионной кассы (Vorsorgeausweis) раз в год.', 'Можно докупить пропущенные годы (Einkauf) и вычесть из налогов.']],
+    ['3 · Колонна 3a и 3b — сама', 'p3', c.pink, ['Цель: добавить к пенсии и сэкономить на налогах.', '3a: по желанию, если есть доход с AHV. 2026: до 7258 франков в год, без пенсионной кассы — до 20% дохода, максимум 36 288. Вычитается из налогов.', 'Деньги заблокированы до пенсии, раньше — на жильё, своё дело или при отъезде.', '3b: любые накопления и страховки жизни, свободно.']]
+  ];
+  const X = 24, W = 249, gap = 6, cw = (W - 2 * gap) / 3;
+  const hs = cols.map(col => P.card(0, 0, cw, col[2], col[0], L(d, col[1]), col[3], {dry: true, bs: 8.6, ts: 10.4}));
+  const h = Math.max(...hs);
+  cols.forEach((col, i) => P.card(X + i * (cw + gap), 44, cw, col[2], col[0], L(d, col[1]), col[3], {minH: h, bs: 8.6, ts: 10.4}));
+  const by = 44 + h + 3;
+  P.card(X, by, W, c.brown, 'Фундамент: дополнительные пособия, если пенсии не хватает', L(d, 'el'), 'Если пенсия AHV и другие доходы не покрывают жизнь, касса AHV платит дополнительные пособия (Ergänzungsleistungen). Иностранцам — обычно после 10 лет жизни в Швейцарии, беженцам — после 5.', {bs: 8.6, ts: 10.4});
+  P.foot(disc(d));
+  return P;
+}
+function p2(d){
+  const C = SH.pal(d.bw), P = SH.page(297, 210, C), c = C.c;
+  P.header('Пенсия по возрасту: что когда происходит', L(d, 't2'), right(d));
+  const X = 20, W = 257, a0 = 17, a1 = 70, ax = a => X + (a - a0) / (a1 - a0) * W, y0 = 40;
+  P.line(X, y0, X + W, y0, C.head, 0.7);
+  [17, 18, 21, 25, 30, 40, 50, 58, 63, 65, 70].forEach(a => { P.line(ax(a), y0 - 1.5, ax(a), y0 + 1.5, C.head, 0.4); P.text(String(a), ax(a), y0 - 3, 7, true, C.mut, 'center'); });
+  P.text('лет', X + W, y0 - 7, 6.4, false, C.mut, 'right');
+  // полосы
+  const band = (a, b, y, col, t) => { P.rect(ax(a), y, ax(b) - ax(a), 5.5, col[0], col[1], 1.2); P.text(t, ax(a) + 2, y + 3.9, 6.6, true, col[1]); };
+  band(18, 65, 45, c.blue, 'AHV: платишь, если работаешь (с 18) или не работаешь (с 21)');
+  band(25, 65, 52, c.green, 'Пенсионная касса: копишь при зарплате от 22 680 в год');
+  band(18, 65, 59, c.pink, 'Колонна 3a: по желанию, пока есть доход с AHV');
+  band(65, 70, 45, c.mustard, 'пенсия');
+  const ev = [
+    [21, 'С 21 года', 'Не работаешь — плати AHV сама, иначе будет пробел. Если супруг работает и платит минимум вдвое больше минимального взноса, за тебя уже заплачено.', c.blue],
+    [25, 'С 25 лет', 'Пенсионная касса начинает копить на пенсию. До этого — только страховка на случай инвалидности и смерти.', c.green],
+    [35, 'В любом возрасте', 'Пробелы в AHV можно доплатить за последние 5 лет. Годы с детьми до 16 лет засчитываются бонусом (Erziehungsgutschriften).', c.blue],
+    [50, 'Лет за 10–15 до пенсии', 'Выгодно докупать пенсионную кассу и проверять выписку AHV. Попроси кассу AHV посчитать будущую пенсию — бесплатно.', c.green],
+    [63, 'С 63 лет', 'AHV можно взять на 1–2 года раньше, но пенсия будет меньше навсегда. В пенсионной кассе ранний выход часто с 58 лет — по правилам кассы.', c.mustard],
+    [65, '65 лет', 'Обычный возраст пенсии. Женщинам 1961–1963 годов рождения — 64 года и 3, 6 или 9 месяцев. Подай заявление в кассу AHV за 3–4 месяца.', c.red],
+    [68, 'До 70 лет', 'Пенсию можно отложить на срок до 5 лет — тогда она будет больше.', c.mustard]
+  ];
+  const cw = (273 - 3 * 4) / 4; let y = 74;
+  ev.forEach((e, i) => { const col = i % 4, row = Math.floor(i / 4), x = 12 + col * (cw + 4); if (col === 0 && row) y += 38; P.card(x, y, cw, e[3], e[1], '', e[2], {minH: 34, bs: 7.2, ts: 8.8}); });
+  P.foot(disc(d));
+  return P;
+}
+function p3(d){
+  const C = SH.pal(d.bw), P = SH.page(210, 297, C), c = C.c;
+  P.header('Где лежат твои деньги и как проверить', L(d, 't3'), right(d));
+  let y = 27;
+  const blocks = [
+    ['AHV: твой личный счёт в кассе AHV', c.blue, ['Каждый год взносов записан на твой индивидуальный счёт (IK). Выписку можно бесплатно заказать на ahv-iv.ch. Номер AHV (756…) стоит на страховой карте медстраховки.', 'В выписке видны пробелы: годы без взносов. Последние 5 лет можно доплатить.', 'Если работала у нескольких работодателей, записи могут быть в разных кассах — выписка собирает все.']],
+    ['Пенсионная касса: счёт у кассы работодателя', c.green, ['Раз в год приходит справка (Vorsorgeausweis): сколько накоплено, будущая пенсия, сколько можно докупить.', 'Ушла с работы — деньги переходят в кассу нового работодателя. Нет новой работы — на счёт свободного перехода (Freizügigkeitskonto) в банке или фонде.', 'Забытые деньги ищет бесплатно Центральная служба 2-й колонны (sfbvg.ch).']],
+    ['Колонна 3a: счёт в банке или страховой', c.pink, ['Выписка — от банка или страховой каждый год, её же прикладываешь к налоговой декларации.', 'Можно иметь несколько счетов 3a и снимать их в разные годы — это экономит налог.']],
+    ['Если уедешь из Швейцарии', c.mustard, ['AHV: пенсия обычно платится и за границу. В некоторых случаях можно вернуть взносы — зависит от страны.', 'Пенсионная касса: уезжаешь за пределы ЕС и ЕАСТ — можно забрать всё. В страну ЕС или ЕАСТ — только сверхобязательную часть.', '3a: при окончательном отъезде можно снять.', 'Перед отъездом сообщи кассам свой новый адрес.']]
+  ];
+  blocks.forEach(b => { y += P.card(12, y, 186, b[1], b[0], '', b[2], {bs: 8, ts: 10}) + 5; });
+  P.foot(disc(d));
+  return P;
+}
+function p4(d){
+  const C = SH.pal(d.bw), P = SH.page(210, 297, C), c = C.c, r = calc(d);
+  P.header('Мой ориентир по пенсии', L(d, 't4'), right(d));
+  let y = 28;
+  if (!r) { P.para('Впиши на сайте год рождения и год приезда, и здесь появится твой ориентир.', 12, y, 9, false, C.ink, 186, 4.2); P.foot(disc(d)); return P; }
+  const ra = Math.floor(r.ra / 12) + (r.ra % 12 ? ' лет и ' + (r.ra % 12) + ' мес.' : ' лет');
+  P.text('Возраст пенсии AHV: ' + ra + ' — примерно в ' + r.ry + ' году', 12, y, 10, true, C.ink); y += 6;
+  P.text('Полных лет взносов от 21 года до пенсии: ' + r.total, 12, y, 8.6, false, C.ink); y += 10;
+  // 44 клетки
+  y = P.sec('Мои годы взносов', 12, y, 186, '1 клетка = 1 год');
+  const n = Math.max(44, r.total), cols = 22, cwid = 186 / cols;
+  for (let i = 0; i < n; i++) {
+    const year = r.first + i, x = 12 + (i % cols) * cwid, yy = y + Math.floor(i / cols) * 11;
+    let col = c.green, lab = '';
+    if (i < r.before) { col = c.red; } else if (i >= r.total) { col = null; }
+    else if (i < r.before + r.gap) { col = c.mustard; }
+    if (col) P.rect(x + 0.4, yy, cwid - 0.8, 8, col[0], col[1], 1); else P.rect(x + 0.4, yy, cwid - 0.8, 8, null, C.line, 1, true);
+    if (i % 5 === 0 || i === r.total - 1) P.text(String(year), x + cwid / 2, yy + 5.2, 4.8, true, col ? col[1] : C.mut, 'center');
+  }
+  y += Math.ceil(n / cols) * 11 + 2;
+  [[c.red, 'до приезда в Швейцарию: ' + r.before], [c.mustard, 'пробелы после приезда: ' + r.gap], [c.green, 'взносы есть или будут: ' + r.have]].forEach(([col, t], i) => { P.rect(12 + i * 62, y, 4, 4, col[0], col[1], 1); P.text(t, 18 + i * 62, y + 3.2, 7.4, false, C.ink); });
+  y += 11;
+  P.rect(12, y, 186, 22, C.soft, C.line, 1.6);
+  P.text('Ориентир: ' + r.have + ' из 44 лет ≈ ' + Math.round(r.frac * 100) + '% полной пенсии AHV', 15, y + 7, 10, true, C.head);
+  P.para('Каждый год без взносов уменьшает пенсию AHV примерно на 1/44 (2,3%) навсегда. Размер ещё зависит от дохода, брака и детей. Годы в странах ЕС и ЕАСТ дают пенсию там.', 15, y + 12.5, 7.4, false, C.ink, 180, 3.3);
+  y += 30;
+  y = P.sec('Что сделать', 12, y, 186);
+  const todo = ['Закажи бесплатную выписку счёта AHV на ahv-iv.ch и проверь пробелы.', r.gap ? 'Пробелы за последние 5 лет можно доплатить — спроси в кассе AHV своего кантона.' : 'Не работаешь — проверь, что платишь AHV сама с 21 года (или за тебя платит супруг).', 'Сохрани справку пенсионной кассы (Vorsorgeausweis) и посмотри, сколько можно докупить.', 'Подумай о 3a: это пенсия и экономия на налогах.', 'Попроси кассу AHV посчитать будущую пенсию — бесплатно, лучше за 10–15 лет до пенсии.'];
+  todo.forEach((s, i) => { P.rect(14, y - 2.8, 3.4, 3.4, '#FFFFFF', C.head, 0.6); y = P.para(s, 20, y, 8, false, C.ink, 176, 3.7) + 1.8; });
+  P.foot(disc(d));
+  return P;
+}
+function build(){ const d = D(), p = []; [p1, p2, p3, p4].forEach((f, i) => { if (d.p[i + 1] !== false) p.push(f(d)); }); return p; }
+
+const $ = id => document.getElementById(id);
+$('kanton').innerHTML = '<option value="">Выбери кантон</option>' + Object.keys(K).sort((a, b) => K[a].n.localeCompare(K[b].n, 'ru')).map(k => `<option value="${k}">${SH.esc(K[k].n)}</option>`).join('');
+const Y = new Date().getFullYear();
+let o = '<option value="">—</option>'; for (let y = Y - 18; y >= Y - 80; y--) o += `<option value="${y}">${y}</option>`; $('by').innerHTML = o;
+o = '<option value="">—</option>'; for (let y = Y; y >= Y - 60; y--) o += `<option value="${y}">${y}</option>`; $('arr').innerHTML = o;
+o = ''; for (let i = 0; i <= 20; i++) o += `<option value="${i}">${i === 0 ? 'ни одного' : i}</option>`; $('gap').innerHTML = o;
+const STEPS = [
+  ['Проверь счёт AHV', 'Закажи бесплатную выписку (Auszug aus dem individuellen Konto) на ahv-iv.ch. Номер AHV — на страховой карте медстраховки, начинается с 756. Выписка придёт по почте, обычно за несколько недель.'],
+  ['Найди пробелы', 'Годы без записей уменьшают пенсию навсегда. Доплатить можно только за последние 5 лет — в кассе AHV своего кантона.'],
+  ['Не работаешь — плати сама', 'С 21 года нужно платить AHV и тем, кто не работает: дома с детьми, учится, ищет работу без пособия. Исключение — если работающий супруг платит минимум вдвое больше минимального взноса.'],
+  ['Справка пенсионной кассы', 'Vorsorgeausweis приходит раз в год от кассы работодателя: накоплено, будущая пенсия, сколько можно докупить.'],
+  ['Колонна 3a', 'Откладывай каждый год, если можешь: это пенсия и вычет из налогов. Подробно — статья «Пенсия: три колонны».']
+];
+$('stepsList').innerHTML = STEPS.map(s => `<details><summary>${SH.esc(s[0])}</summary><p>${SH.esc(s[1])}</p></details>`).join('');
+let UI;
+function fill(){
+  const d = D();
+  $('kanton').value = d.k; $('lang').value = d.lang; $('bw').checked = !!d.bw;
+  [1, 2, 3, 4].forEach(n => $('p' + n).checked = d.p[n] !== false);
+  ['by', 'sx', 'arr', 'gap'].forEach(id => { $(id).value = d[id] === undefined ? '' : String(d[id]); $(id).disabled = !!EX; });
+  const r = calc(d);
+  $('meNote').textContent = r ? `Пенсия AHV примерно в ${r.ry} году. Лет взносов: около ${r.have} из 44 — это примерно ${Math.round(r.frac * 100)}% полной пенсии AHV.` : 'Выбери год рождения, и появится твой ориентир.';
+  $('exbar').hidden = !EX; $('exOn').hidden = !!EX;
+  if (UI) UI.render();
+}
+const set = f => { f(S); if (EX) f(EX); save(); fill(); };
+$('kanton').addEventListener('change', e => set(s => s.k = e.target.value));
+$('lang').addEventListener('change', e => set(s => s.lang = e.target.value));
+$('bw').addEventListener('change', e => set(s => s.bw = e.target.checked));
+[1, 2, 3, 4].forEach(n => $('p' + n).addEventListener('change', e => set(s => s.p[n] = e.target.checked)));
+['by', 'sx', 'arr', 'gap'].forEach(id => $(id).addEventListener('change', e => { if (EX) return; S[id] = id === 'sx' ? e.target.value : (+e.target.value || (id === 'gap' ? 0 : '')); save(); fill(); }));
+const EXD = () => ({k: 'ZH', lang: 'bi', bw: S.bw, p: {1: true, 2: true, 3: true, 4: true}, by: 1984, sx: 'f', arr: 2015, gap: 2});
+$('exOn').addEventListener('click', () => { EX = EXD(); fill(); window.scrollTo({top: $('exbar').offsetTop - 12, behavior: 'smooth'}); });
+$('exOff').addEventListener('click', () => { EX = null; fill(); });
+if (/[?&]example\b/.test(location.search)) EX = EXD();
+UI = SH.mount({build, title: 'Как устроена пенсия', name: () => 'Pensiya-shema' + (D().k ? '-' + D().k : '')});
+fill();
+
+</script>
+<script src="/assets/help.js"></script>
+<script src="/assets/backup.js"></script>
+<script src="/assets/pdffan.js" defer></script>
+<script src="/assets/share.js" defer></script>
+<script src="/assets/samesite.js"></script>
+</body>
+</html>

@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<link rel="icon" href="/fav/favicon.svg" type="image/svg+xml"><link rel="icon" href="/fav/icon-32.png" sizes="32x32"><link rel="apple-touch-icon" href="/fav/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/fonts.css">
+<meta name="description" content="Как устроены налоги в Швейцарии на схемах: федеральный, кантональный и налог общины, налог у источника или декларация, налоговый год и сроки, что можно вычесть, какие ещё налоги и сборы. Свой налоговый календарь. Бесплатно, PDF и PNG.">
+<link rel="canonical" href="https://svoiludi.ch/instrumenty/nalogi-shema/">
+<meta property="og:type" content="website"><meta property="og:locale" content="ru_RU"><meta property="og:site_name" content="Свои люди в Швейцарии">
+<meta property="og:title" content="Как устроены налоги в Швейцарии · схемы и календарь"><meta property="og:description" content="Налог у источника или декларация, сроки, вычеты и другие налоги на схемах и твой налоговый календарь. Бесплатно, PDF и PNG.">
+<meta property="og:url" content="https://svoiludi.ch/instrumenty/nalogi-shema/"><meta property="og:image" content="https://svoiludi.ch/instrumenty/nalogi-shema/og-image.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="robots" content="noindex, nofollow">
+<title>Как устроены налоги</title>
+<style>
+/* Как устроены налоги (08.10.2026): анкета слева, живые листы справа, движок assets/shema.js. */
+:root{
+  --bg:#F4EDE3; --paper:#FFFCF8; --ink:#2F2924; --muted:#7A6E62; --line:#E5D9C9; --soft:#EFE5D7;
+  --brown:#6E4F3C; --mustard:#B98324; --mustard-soft:#F3E3C2; --sage:#4F5E3E; --sage-soft:#E3E8D6; --red:#A0523D;
+  --display:"Forum","Georgia",serif; --sans:"Manrope","Segoe UI",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#221D19; --paper:#2C2621; --ink:#F1E9DF; --muted:#B4A796; --line:#3E362F; --soft:#352E28;
+  --brown:#E1C2A6; --mustard:#E2B45C; --mustard-soft:#3D321F; --sage:#B4BF97; --sage-soft:#2E3226; --red:#E39A85; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#221D19; --paper:#2C2621; --ink:#F1E9DF; --muted:#B4A796; --line:#3E362F; --soft:#352E28;
+  --brown:#E1C2A6; --mustard:#E2B45C; --mustard-soft:#3D321F; --sage:#B4BF97; --sage-soft:#2E3226; --red:#E39A85; color-scheme:dark}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--ink);font:15px/1.55 var(--sans);margin:0}
+.wrap{max-width:1280px;margin:0 auto;padding-inline:16px;padding-block:28px 48px;display:flex;flex-direction:column;gap:24px}
+.eyebrow{font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+h1{font-family:var(--display);font-weight:400;font-size:clamp(2.4rem,6vw,3.6rem);line-height:1;margin:4px 0 10px;text-wrap:balance}
+h2{font-family:var(--display);font-weight:400;font-size:1.55rem;margin:0;text-wrap:balance}
+h3{font-family:var(--display);font-weight:400;font-size:1.22rem;line-height:1.2;margin:0}
+.lead{max-width:66ch;color:var(--muted);margin:0}
+.jump{font-weight:700;color:var(--brown);text-underline-offset:4px}
+.privnote{margin-top:14px;background:var(--sage-soft);border-radius:16px;padding:12px 16px;font-size:.9rem;max-width:90ch}
+.status{font-size:.86rem;color:var(--muted);min-height:1.3em}
+.btn{font:inherit;font-weight:700;font-size:.9rem;border:0;border-radius:999px;padding:10px 18px;cursor:pointer;color:#fff;text-decoration:none;display:inline-flex;align-items:center;gap:6px;background:#6E4F3C;box-shadow:0 8px 18px -8px rgba(110,79,60,.6)}
+.btn.gold{background:#B98324;box-shadow:0 8px 18px -8px rgba(185,131,36,.7)}
+.btn.free{background:#4F5E3E;box-shadow:0 8px 18px -8px rgba(79,94,62,.6)}
+.btn.ghost{background:transparent;color:var(--brown);border:1.5px solid var(--line);box-shadow:none}
+.btn.sm{font-size:.82rem;padding:7px 13px}
+.btn[disabled]{background:var(--soft);color:var(--muted);box-shadow:none;cursor:wait}
+select,input[type=text],input[type=tel],textarea{font:inherit;font-size:.95rem;color:var(--ink);background:var(--paper);border:1.5px solid var(--line);border-radius:12px;padding:9px 12px;width:100%;min-width:0}
+select:focus-visible,input:focus-visible,button:focus-visible,textarea:focus-visible,a:focus-visible{outline:2px solid var(--mustard);outline-offset:2px}
+::placeholder{color:color-mix(in srgb,var(--muted) 70%,transparent)}
+.setup{background:var(--paper);border:1.5px solid var(--line);border-radius:22px;padding:16px 18px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px 18px;align-items:start}
+@media (max-width:1000px){.setup{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.setup{grid-template-columns:1fr}}
+.fl{display:flex;flex-direction:column;gap:6px;min-width:0}
+.fl>.lb{font-size:.8rem;font-weight:700;color:var(--muted);display:flex;align-items:center}
+.seg{display:flex;flex-wrap:wrap;gap:6px}
+.seg button{font:inherit;font-size:.84rem;font-weight:700;border:1.5px solid var(--line);background:var(--paper);color:var(--ink);border-radius:999px;padding:6px 12px;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--sage);border-color:var(--sage);color:#fff}
+.acts{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.exbar{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;background:var(--mustard-soft);border-radius:16px;padding:10px 14px;font-size:.9rem;font-weight:600}
+.work{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:22px;align-items:start}
+@media (max-width:1040px){.work{grid-template-columns:1fr}}
+.form{display:flex;flex-direction:column;gap:14px;min-width:0}
+.sec{background:var(--paper);border:1.5px solid var(--line);border-radius:20px;padding:16px 18px;display:flex;flex-direction:column;gap:12px}
+.sec>h2{font-size:1.3rem;display:flex;align-items:center}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:560px){.g2{grid-template-columns:1fr}}
+.hint{font-size:.84rem;color:var(--muted);margin:0}
+.chk{display:flex;flex-direction:column;gap:8px}
+.chk label{display:flex;gap:10px;align-items:baseline;font-size:.92rem;cursor:pointer}
+.chk input{flex:none;width:18px;height:18px;accent-color:var(--sage);transform:translateY(3px)}
+.chk b{white-space:nowrap}
+.chk small{color:var(--muted)}
+.tog{display:flex;gap:10px;align-items:center;font-size:.92rem;cursor:pointer}
+.tog input{width:18px;height:18px;accent-color:var(--sage)}
+.sheetbox{position:sticky;top:12px;display:flex;flex-direction:column;gap:10px}
+@media (max-width:1040px){.sheetbox{position:static}}
+.sheet{background:#fff;border-radius:6px;box-shadow:0 18px 40px -22px rgba(47,41,36,.45);overflow:hidden}
+.sheet svg{display:block;width:100%;height:auto}
+.imp{background:var(--paper);border:1.5px dashed color-mix(in srgb,var(--sage) 55%,transparent);border-radius:16px;padding:14px 18px;font-size:.88rem;max-width:90ch;margin:0}
+.imp b{color:var(--sage)}
+.guide{display:flex;flex-direction:column;gap:14px;max-width:90ch}
+.guide ul{margin:0;padding-left:20px}
+.guide li{margin:4px 0}
+.credit{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:.8rem;color:var(--muted)}
+.credit a{color:var(--muted)}
+.qh{font:700 .72rem/1 var(--sans);width:20px;height:20px;border-radius:50%;border:1.5px solid var(--line);background:var(--paper);color:var(--brown);cursor:pointer;margin-left:6px;padding:0;flex:none}
+.sheets{display:flex;flex-direction:column;gap:14px}
+.goals{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+@media (max-width:560px){.goals{grid-template-columns:1fr}}
+.goals label{display:flex;gap:10px;align-items:flex-start;background:var(--bg);border:1.5px solid var(--line);border-radius:14px;padding:9px 12px;cursor:pointer;font-size:.92rem}
+.goals input{width:18px;height:18px;accent-color:var(--sage);flex:none;margin-top:2px}
+.goals small{display:block;color:var(--muted)}
+.steps{display:flex;flex-direction:column;gap:8px}
+.steps details{background:var(--paper);border:1.5px solid var(--line);border-radius:16px;padding:10px 16px}
+.steps summary{cursor:pointer;font-weight:700;display:flex;gap:10px;align-items:baseline}
+.steps summary small{font-weight:600;color:var(--muted);margin-left:auto;text-align:right}
+.steps details p,.steps details ul{margin:8px 0 2px;font-size:.93rem}
+.steps details ul{padding-left:20px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <p style="margin:0 0 14px"><a class="jump" href="https://svoiludi.ch/instrumenty/">← Все полезные инструменты · Свои люди в Швейцарии</a></p>
+    <div class="eyebrow">Схема · налоги в Швейцарии</div>
+    <h1>Как устроены налоги</h1>
+    <p class="lead">Почему соседние общины платят по-разному, кто платит налог у источника, а кто подаёт декларацию, что и когда происходит за налоговый год и что можно вычесть. На схемах, с твоим налоговым календарём. PDF и PNG бесплатно.</p>
+    <div class="privnote"><b>Твои данные только у тебя.</b> Отметки хранятся только в твоём браузере на этом устройстве. Регистрация не нужна.</div>
+    <div data-fan="nalogi-shema"></div>
+  </header>
+  <div class="setup">
+    <div class="fl"><span class="lb">Твой кантон<button type="button" class="qh" data-help="kanton" aria-label="Подсказка: твой кантон" aria-expanded="false">?</button></span><select id="kanton"></select></div>
+    <div class="fl"><span class="lb">Язык листов<button type="button" class="qh" data-help="lang" aria-label="Подсказка: язык листов" aria-expanded="false">?</button></span><select id="lang"><option value="bi">Русский + язык кантона</option><option value="ru">Только русский</option></select></div>
+    <div class="fl"><span class="lb">Что в PDF</span><div class="chk"><label><input type="checkbox" id="p1" checked> Как устроены налоги</label><label><input type="checkbox" id="p2" checked> Налоговый год</label><label><input type="checkbox" id="p3" checked> Вычеты и другие налоги</label><label><input type="checkbox" id="p4" checked> Мой календарь</label></div></div>
+    <div class="fl"><span class="lb">Печать</span><label class="tog"><input type="checkbox" id="bw"> Без цвета, для дешёвой печати</label></div>
+  </div>
+  <div class="exbar" id="exbar" hidden><span>Это пример. Так будет выглядеть твой файл.</span><button type="button" class="btn sm" id="exOff">Вернуться к моим данным</button></div>
+  <div class="work">
+    <div class="form">
+      <section class="sec" aria-labelledby="h-me">
+        <h2 id="h-me">Как плачу я<button type="button" class="qh" data-help="mode" aria-label="Подсказка: как плачу я" aria-expanded="false">?</button></h2>
+        <div class="goals" id="mode"></div>
+        <p class="hint" id="modeNote"></p>
+      </section>
+      <section class="sec" aria-labelledby="h-st">
+        <h2 id="h-st">Шаг за шагом</h2>
+        <div class="steps" id="stepsList"></div>
+      </section>
+    </div>
+    <div class="sheetbox">
+      <div class="acts"><button type="button" class="btn gold" id="pdf">Скачать PDF</button><button type="button" class="btn ghost sm" id="share" hidden>Отправить</button><button type="button" class="btn ghost sm" id="exOn">Посмотреть на примере</button></div>
+      <div class="sheets" id="sheet" aria-label="Предпросмотр листов"></div>
+      <div class="status" id="status" role="status"></div>
+    </div>
+  </div>
+  <p class="imp"><b>Важно.</b> Это образец для примера и личного использования, а не официальный документ. Сроки и правила у каждого кантона свои: срок декларации чаще всего 31 марта, но в некоторых кантонах раньше. Смотри письмо налоговой своего кантона. Автор не несёт ответственности за достоверность.</p>
+  <div class="share-slot" data-url="https://svoiludi.ch/instrumenty/nalogi-shema/" data-lead="Перешли тем, кто впервые платит налоги в Швейцарии. Сообщение уже готово." data-text="Привет! Тут на схемах, как устроены налоги в Швейцарии: налог у источника или декларация, сроки, вычеты, и можно сделать свой налоговый календарь. Бесплатно, PDF. https://svoiludi.ch/instrumenty/nalogi-shema/"></div>
+  <p class="credit"><span>Свои люди в Швейцарии · svoiludi.ch</span><a href="https://svoiludi.ch/privacy/">Политика конфиденциальности</a></p>
+</div>
+
+<script src="/assets/kantony.js"></script>
+<script src="/assets/lib/jspdf.umd.min.js"></script>
+<script src="/assets/shema.js"></script>
+<script>
+window.HELP = {
+  kanton: '<p>Выбери кантон, где ты живёшь. В нём ты платишь налог кантона и общины, на его языке вторые подписи.</p>',
+  lang: '<p><b>Русский + язык кантона</b> — главные слова и на языке кантона, как они стоят в письмах налоговой.</p>',
+  mode: '<p><b>Налог у источника</b> (Quellensteuer) — у тебя пермит B, L, S, F, N или G, и ты не в браке со швейцарцем или человеком с пермитом C. Налог вычитает работодатель.</p><p><b>Декларация</b> — у тебя пермит C или гражданство, или ты в браке со швейцарцем или человеком с C, или ты подала на декларацию сама, или доход от 120 000 франков в год.</p><p><b>Работаю на себя</b> — всегда декларация.</p>'
+};
+const KEY = 'nalogiShema.v1';
+const K = window.KANTONY || {};
+const LOC = {GE: 'fr', VD: 'fr', NE: 'fr', JU: 'fr', FR: 'fr', VS: 'fr', TI: 'it'};
+const MODES = [['qst', 'Налог у источника', 'пермит B, L, S, F, N, G, вычитают из зарплаты'], ['nov', 'Декларация', 'пермит C, гражданство, брак с C или швейцарцем, доход от 120 000'], ['self', 'Работаю на себя', 'всегда декларация и предварительные счета']];
+const TL = {
+  bund: {de: 'Bundessteuer', fr: 'impôt fédéral direct', it: 'imposta federale diretta'}, kant: {de: 'Kantonssteuer', fr: 'impôt cantonal', it: 'imposta cantonale'}, gem: {de: 'Gemeindesteuer', fr: 'impôt communal', it: 'imposta comunale'}, kirche: {de: 'Kirchensteuer', fr: 'impôt ecclésiastique', it: 'imposta di culto'},
+  qst: {de: 'Quellensteuer', fr: 'impôt à la source', it: 'imposta alla fonte'}, nov: {de: 'Steuererklärung', fr: 'déclaration d’impôt', it: 'dichiarazione d’imposta'}, fuss: {de: 'Steuerfuss', fr: 'coefficient', it: 'moltiplicatore'},
+  t1: {de: 'So funktionieren die Steuern', fr: 'Comment fonctionnent les impôts', it: 'Come funzionano le imposte'}, t2: {de: 'Das Steuerjahr', fr: 'L’année fiscale', it: 'L’anno fiscale'}, t3: {de: 'Abzüge und weitere Steuern', fr: 'Déductions et autres impôts', it: 'Deduzioni e altre imposte'}, t4: {de: 'Mein Steuerkalender', fr: 'Mon calendrier fiscal', it: 'Il mio calendario fiscale'}
+};
+const DISC = {ru: 'Образец для личного использования, не официальный документ. Сроки и правила кантонов разные, смотри письма налоговой. svoiludi.ch', de: 'Muster zur Orientierung und für den persönlichen Gebrauch, kein amtliches Dokument. Angaben ohne Gewähr, bitte selbst prüfen.', fr: 'Modèle indicatif pour usage personnel, pas un document officiel. Données sans garantie, à vérifier soi-même.', it: 'Modello indicativo per uso personale, non un documento ufficiale. Dati senza garanzia, da verificare personalmente.'};
+let S = load(), EX = null;
+function blank(){ return {k: '', lang: 'bi', bw: false, p: {1: true, 2: true, 3: true, 4: true}, m: ''}; }
+function load(){ try { const s = JSON.parse(localStorage.getItem(KEY)); if (s && typeof s === 'object') return Object.assign(blank(), s); } catch (e) {} const b = blank(); try { b.k = localStorage.getItem('svoiludi.kanton') || ''; } catch (e) {} return b; }
+function save(){ if (EX) return; try { localStorage.setItem(KEY, JSON.stringify(S)); if (S.k) localStorage.setItem('svoiludi.kanton', S.k); } catch (e) {} }
+const D = () => EX || S, loc = d => LOC[d.k] || 'de', bi = d => d.lang === 'bi', L = (d, k) => bi(d) ? TL[k][loc(d)] : '';
+const right = d => d.k && K[d.k] ? K[d.k].n + ' · ' + d.k : '', disc = d => bi(d) ? DISC[loc(d)] : DISC.ru;
+const NOW = new Date(), TY = NOW.getFullYear() - (NOW.getMonth() < 3 ? 1 : 0); // налоговый год, за который скоро подавать
+
+function p1(d){
+  const C = SH.pal(d.bw), P = SH.page(297, 210, C), c = C.c;
+  P.header('Как устроены налоги', L(d, 't1'), right(d));
+  // поток: доход → три уровня
+  const X = 12, W = 172;
+  P.card(X + W / 2 - 45, 24, 90, c.brown, 'Твой доход и имущество', '', 'Зарплата, доход от своего дела, пенсия, проценты, деньги на счетах, жильё.', {bs: 7.2, ts: 9});
+  const cw = (W - 6) / 3, tops = 54, xs = [X, X + cw + 3, X + 2 * (cw + 3)];
+  [[0, 'bund', 'Федеральный налог', 'Только с дохода, имущество не облагается. Одинаковый тариф во всей Швейцарии, растёт с доходом, максимум 11,5%.', c.blue], [1, 'kant', 'Налог кантона', 'С дохода и имущества. У каждого кантона свой тариф и свой коэффициент (Steuerfuss).', c.sage], [2, 'gem', 'Налог общины', 'Считается как налог кантона, но со своим коэффициентом общины. Поэтому в соседних общинах налог разный.', c.green]].forEach(([i, k, t, b, col]) => {
+    P.arrowDown(xs[i] + cw / 2, 46, tops, col[1]);
+    P.card(xs[i], tops, cw, col, t, L(d, k), b, {minH: 38, bs: 7.2, ts: 9});
+  });
+  P.card(xs[2], tops + 41, cw, c.mustard, 'Церковный налог', L(d, 'kirche'), 'Только если ты член признанной церкви. Выйти из церкви можно письмом.', {bs: 6.8, ts: 8.2, dash: true});
+  let y = 120;
+  P.rect(X, y, cw * 2 + 3, 26, C.soft, C.line, 1.6);
+  P.text('Как считают налог кантона и общины', X + 3, y + 5.5, 8.4, true, C.head);
+  P.text('простой налог по тарифу кантона', X + 3, y + 12.5, 7.6, true, C.ink);
+  P.text('× (коэффициент кантона + общины + церкви)', X + 3, y + 17, 7.6, true, C.ink);
+  P.text('Коэффициенты (' + (L(d, 'fuss') || 'Steuerfuss') + ') публикуют кантон и община каждый год.', X + 3, y + 22, 6.6, false, C.mut);
+  y = 152;
+  P.para('Пример: два соседа с одинаковым доходом в разных общинах одного кантона платят разный налог, потому что у общин разный коэффициент. Сравнить можно на калькуляторе налогов ESTV.', X, y, 7.4, false, C.ink, cw * 2 + 3, 3.4);
+  // правая колонка: два способа
+  const RX = 196, RW = 89;
+  P.text('Два способа платить', RX, 26, 9.5, true, C.head); P.line(RX, 27.8, RX + RW, 27.8, C.head, 0.4);
+  let ry = 31;
+  ry += P.card(RX, ry, RW, c.pink, 'Налог у источника', L(d, 'qst'), ['Кто: пермиты B, L, S, F, N, G, если ты не в браке со швейцарцем или человеком с пермитом C.', 'Как: работодатель вычитает налог из зарплаты каждый месяц.', 'Доход от 120 000 франков в год — декларация обязательна. Меньше — можно подать её самой до 31 марта следующего года. Кто подал, подаёт потом каждый год.'], {bs: 7, ts: 9}) + 4;
+  ry += P.card(RX, ry, RW, c.blue, 'Декларация', L(d, 'nov'), ['Кто: пермит C, гражданство, брак со швейцарцем или C, работа на себя.', 'Как: раз в год подаёшь декларацию, срок обычно 31 марта, в Берне и Во 15 марта, в Тичино 30 апреля. Продлить можно.', 'Налог платишь сама: частями по предварительным счетам, потом окончательный счёт.'], {bs: 7, ts: 9}) + 4;
+  P.foot(disc(d));
+  return P;
+}
+function p2(d){
+  const C = SH.pal(d.bw), P = SH.page(297, 210, C), c = C.c;
+  P.header('Налоговый год: что и когда', L(d, 't2'), right(d));
+  const X = 22, W = 255, y0 = 46, mw = W / 15;
+  const months = ['янв', 'фев', 'мар', 'апр', 'май', 'июн', 'июл', 'авг', 'сен', 'окт', 'ноя', 'дек', 'янв', 'фев', 'мар'];
+  P.text('Год дохода ' + TY, X, 26, 8.4, true, C.head); P.text('Год подачи декларации ' + (TY + 1), X + 12 * mw, 26, 8.4, true, C.head);
+  P.rect(X, 29, 12 * mw - 1, 5, c.sage[0], c.sage[1], 1.2); P.text('ты зарабатываешь и сохраняешь документы', X + 3, 32.6, 6.8, false, C.ink);
+  P.rect(X + 12 * mw, 29, 3 * mw, 5, c.mustard[0], c.mustard[1], 1.2); P.text('подаёшь декларацию', X + 12 * mw + 2, 32.6, 6.8, false, C.ink);
+  months.forEach((m, i) => { P.line(X + i * mw, y0 - 2, X + i * mw, y0 + 2, C.line, 0.3); P.text(m, X + i * mw + mw / 2, y0 - 4, 6.4, false, C.mut, 'center'); });
+  P.line(X, y0, X + W, y0, C.head, 0.6);
+  const ev = [
+    [12.1, 'Январь–февраль', 'Приходят бланк декларации, справка о зарплате (Lohnausweis), справки банка, 3a и кассы.', c.blue],
+    [14.9, '31 марта', 'Обычный срок декларации. В Берне и Во — 15 марта, в Тичино — 30 апреля. Тот же день — последний для заявления о декларации при налоге у источника и для исправления налога у источника.', c.red]
+  ];
+  let y = 56;
+  ev.forEach(([m, t, b, col], i) => { const x = X + m * mw; P.line(x, y0, x, y0 + 7, col[1], 0.6); P.tri([[x, y0 + 0.4], [x - 1.4, y0 + 2.8], [x + 1.4, y0 + 2.8]], col[1]); P.rect(x - 2.6, y0 + 7.5, 5.2, 5.2, col[1], null, 2.6); P.text(String(i + 1), x, y0 + 11.2, 7.5, true, '#FFFFFF', 'center'); });
+  const cards = [
+    ['1 · Январь–февраль', c.blue, 'Приходят бланк декларации, справка о зарплате (Lohnausweis), справки банка, 3a, кассы и о детских расходах. Собери всё в одну папку.'],
+    ['2 · До 31 марта (Берн и Во — 15 марта, Тичино — 30 апреля)', c.red, 'Подай декларацию онлайн или бумагой. Не успеваешь — попроси продление, это просто, иногда платно. При налоге у источника до 31 марта можно подать на декларацию или исправить вычет.'],
+    ['3 · В течение года', c.sage, 'Если ты подаёшь декларацию, приходят предварительные счета: плати частями, иначе в конце будет большая сумма и проценты.'],
+    ['4 · Потом: решение налоговой', c.blue, 'Налоговая присылает решение (Veranlagung). Проверь его. Если не согласна, у тебя обычно 30 дней на возражение (Einsprache), письменно и заказным письмом.'],
+    ['5 · Окончательный счёт', c.mustard, 'Доплати разницу или получи переплату. Не можешь заплатить сразу — попроси рассрочку до срока. Неоплаченный налог ведёт к Betreibung.'],
+    ['Переезд и отъезд', c.pink, 'При декларации налог за весь год платишь в кантоне, где жила 31 декабря. Уезжаешь из Швейцарии — сообщи и рассчитайся до отъезда.']
+  ];
+  const cw = (273 - 10) / 3; let cy = 68;
+  [0, 1].forEach(row => { const hs = [0, 1, 2].map(j => P.card(0, 0, cw, cards[row * 3 + j][1], cards[row * 3 + j][0], '', cards[row * 3 + j][2], {dry: true, bs: 7.6, ts: 9})); const h = Math.max(...hs); [0, 1, 2].forEach(j => P.card(12 + j * (cw + 5), cy, cw, cards[row * 3 + j][1], cards[row * 3 + j][0], '', cards[row * 3 + j][2], {minH: h, bs: 7.6, ts: 9})); cy += h + 5; });
+  P.rect(12, cy + 2, 273, 12, C.soft, C.line, 1.4);
+  P.para('Важные письма налоговой — заказным (Einschreiben): возражение, просьбу о продлении или рассрочке. Сохраняй копию и квитанцию. Документы для налогов советуют хранить 10 лет.', 15, cy + 7.2, 7.4, false, C.ink, 267, 3.4);
+  P.foot(disc(d));
+  return P;
+}
+function p3(d){
+  const C = SH.pal(d.bw), P = SH.page(210, 297, C), c = C.c;
+  P.header('Что можно вычесть и какие ещё налоги', L(d, 't3'), right(d));
+  let y = P.sec('Вычеты из дохода', 12, 27, 186, bi(d) ? {de: 'Abzüge', fr: 'déductions', it: 'deduzioni'}[loc(d)] : '');
+  [['Расходы на работу', 'дорога, обед вне дома, другие расходы — часто паушально (Berufskosten)'], ['Колонна 3a', 'взносы до максимума года'], ['Страховки', 'медстраховка и другие, в пределах суммы кантона'], ['Дети', 'вычет на каждого ребёнка'], ['Присмотр за детьми', 'ясли, дневная мама, продлёнка для детей до 14 лет, если вы работаете'], ['Медицинские расходы', 'то, что ты заплатила сама сверх 5% дохода: франшиза, доля, зубы'], ['Проценты по долгам', 'ипотека, кредиты'], ['Пожертвования', 'признанным организациям'], ['Учёба по профессии', 'курсы и переподготовка'], ['Алименты', 'для того, кто платит'], ['Второй доход в семье', 'если работают оба']].forEach(([t, s]) => { P.text('•', 14, y, 8, true, C.head); P.text(t, 19, y, 8, true, C.ink); y = P.para(s, 19 + SH.tw(t, true, 8) + 2, y, 7.6, false, C.mut, 186 - 9 - SH.tw(t, true, 8), 3.4) + 1.6; });
+  y += 2; P.para('При налоге у источника большинство вычетов уже заложено в тарифе. Отдельно можно попросить исправить, например, за 3a, выкуп в пенсионную кассу, алименты или присмотр за детьми — до 31 марта следующего года.', 12, y, 7.4, false, C.ink, 186, 3.4);
+  y += 18;
+  y = P.sec('Другие налоги и сборы', 12, y, 186);
+  const other = [['НДС', 'уже в цене товаров и услуг, обычно 8,1%', c.sage], ['Сбор за радио и ТВ (Serafe)', '335 франков в год на домохозяйство', c.mustard], ['Налог на собаку', 'платит владелец, его назначает община', c.pink], ['Налог на машину', 'кантон, по весу или мощности машины', c.blue], ['Пожарный сбор', 'в некоторых кантонах, если не служишь в пожарной команде', c.red], ['Налог на наследство и дарение', 'кантоны, супругам и обычно детям — нет', c.brown], ['Налог на прирост стоимости земли', 'при продаже жилья, кантон', c.brown], ['Церковный налог', 'только для членов церкви', c.mustard]];
+  const cw = (186 - 4) / 2;
+  for (let i = 0; i < other.length; i += 2) {
+    const hs = [0, 1].map(j => other[i + j] ? P.card(0, 0, cw, other[i + j][2], other[i + j][0], '', other[i + j][1], {dry: true, bs: 7.4, ts: 8.6}) : 0), h = Math.max(...hs);
+    [0, 1].forEach(j => { if (other[i + j]) P.card(12 + j * (cw + 4), y, cw, other[i + j][2], other[i + j][0], '', other[i + j][1], {minH: h, bs: 7.4, ts: 8.6}); });
+    y += h + 3;
+  }
+  P.foot(disc(d));
+  return P;
+}
+function p4(d){
+  const C = SH.pal(d.bw), P = SH.page(210, 297, C), c = C.c, m = d.m || 'nov';
+  P.header('Мой налоговый календарь', L(d, 't4'), right(d));
+  let y = 28;
+  P.text('Как я плачу: ' + MODES.find(x => x[0] === m)[1].toLowerCase() + (d.k && K[d.k] ? ', кантон ' + K[d.k].n : ''), 12, y, 9, true, C.ink); y += 7;
+  y = P.sec('Даты', 12, y, 186);
+  const rows = m === 'qst' ? [
+    ['Каждый месяц', 'Налог вычитают из зарплаты. Проверь в расчётке код тарифа (например, A0N или C1N): он должен подходить к твоей семье.'],
+    ['Январь–февраль ' + (TY + 1), 'Сохрани справку о зарплате (Lohnausweis) за ' + TY + ' год и справки о 3a, присмотре за детьми, алиментах.'],
+    ['До 31 марта ' + (TY + 1), 'Если хочешь вычеты или декларацию — подай заявление. Доход от 120 000 — декларация обязательна. Решение подать декларацию действует и на следующие годы.'],
+    ['Если меняется семья', 'Брак, ребёнок, развод, второй доход — сообщи работодателю, чтобы изменили код тарифа.']
+  ] : [
+    ['Январь–февраль ' + (TY + 1), 'Придёт бланк. Собери: справку о зарплате, справки банка на 31 декабря, 3a, медстраховки, счета за врача, ясли, проценты по долгам.'],
+    ['До 31 марта ' + (TY + 1), 'Подай декларацию за ' + TY + ' год (в Берне и Во — до 15 марта, в Тичино — до 30 апреля). Не успеваешь — попроси продление до срока.'],
+    ['В течение ' + (TY + 1) + ' года', 'Плати предварительные счета частями. ' + (m === 'self' ? 'Откладывай часть дохода на налоги и AHV каждый месяц.' : '')],
+    ['Когда придёт решение', 'Проверь. Не согласна — возражение в течение 30 дней, заказным письмом.'],
+    ['Окончательный счёт', 'Оплати до срока или попроси рассрочку заранее.']
+  ];
+  rows.forEach(([t, s], i) => { const ls = SH.wrap(s, false, 8, 140), h = Math.max(ls.length * 3.7, 4) + 5; if (i % 2 === 0) P.rect(12, y - 4, 186, h, C.zebra, null); P.rect(14, y - 2.6, 3.4, 3.4, '#FFFFFF', C.head, 0.6); P.text(t, 20, y, 8, true, C.ink); ls.forEach((l, k) => P.text(l, 58, y + k * 3.7, 8, false, C.ink)); y += h; });
+  y += 5; y = P.sec('Что собрать в папку', 12, y, 186);
+  ['Справка о зарплате (Lohnausweis) от каждого работодателя', 'Справки банков о счетах на 31 декабря', 'Справка 3a', 'Справка о премиях медстраховки', 'Счета за врача, зубного, очки, которые ты заплатила сама', 'Счета за ясли, продлёнку, дневную маму', 'Справки о процентах по ипотеке и кредитам', 'Квитанции о пожертвованиях', 'Решение и счета налоговой за прошлый год'].forEach(s => { P.rect(14, y - 2.8, 3.4, 3.4, '#FFFFFF', C.head, 0.6); P.text(s, 20, y, 8, false, C.ink); y += 5.2; });
+  P.foot(disc(d));
+  return P;
+}
+function build(){ const d = D(), p = []; [p1, p2, p3, p4].forEach((f, i) => { if (d.p[i + 1] !== false) p.push(f(d)); }); return p; }
+
+const $ = id => document.getElementById(id);
+$('kanton').innerHTML = '<option value="">Выбери кантон</option>' + Object.keys(K).sort((a, b) => K[a].n.localeCompare(K[b].n, 'ru')).map(k => `<option value="${k}">${SH.esc(K[k].n)}</option>`).join('');
+$('mode').innerHTML = MODES.map(m => `<label><input type="radio" name="mode" value="${m[0]}"><span>${SH.esc(m[1])}<small>${SH.esc(m[2])}</small></span></label>`).join('');
+const STEPS = [
+  ['Налог у источника: кому', 'Пермиты B, L, S, F, N и G, если ты не в браке со швейцарцем или человеком с пермитом C. Работодатель вычитает налог из зарплаты по коду тарифа (например, A0N — одна без детей, C1N — в браке, оба работают, один ребёнок).'],
+  ['Когда подавать декларацию при налоге у источника', 'Обязательно при доходе от 120 000 франков в год или при другом доходе и имуществе. Добровольно — заявление до 31 марта следующего года. Кто подал, остаётся на декларации каждый год, назад нельзя. Подробно — статья «Налоги на зарплату и декларация».'],
+  ['Декларация: кому', 'Пермит C, гражданство, брак со швейцарцем или человеком с C, работа на себя. Раз в год, обычно до 31 марта, в Берне и Во до 15 марта, в Тичино до 30 апреля. Продление можно попросить.'],
+  ['Почему община важна', 'Налог кантона и общины = простой налог × коэффициенты кантона, общины и церкви. При переезде в соседнюю общину налог может заметно измениться. Сравни на калькуляторе ESTV.'],
+  ['Если не согласна с решением', 'Возражение (Einsprache) — обычно 30 дней со дня получения, письменно, заказным письмом.'],
+  ['Если не можешь заплатить', 'Сразу напиши в налоговую и попроси рассрочку. Если молчать, будет Betreibung.']
+];
+$('stepsList').innerHTML = STEPS.map(s => `<details><summary>${SH.esc(s[0])}</summary><p>${SH.esc(s[1])}</p></details>`).join('');
+let UI;
+function fill(){
+  const d = D();
+  $('kanton').value = d.k; $('lang').value = d.lang; $('bw').checked = !!d.bw;
+  [1, 2, 3, 4].forEach(n => $('p' + n).checked = d.p[n] !== false);
+  document.querySelectorAll('[name=mode]').forEach(r => { r.checked = r.value === d.m; r.disabled = !!EX; });
+  $('modeNote').textContent = d.m ? '' : 'Выбери, как ты платишь налоги, и в PDF появится твой календарь с датами.';
+  $('exbar').hidden = !EX; $('exOn').hidden = !!EX;
+  if (UI) UI.render();
+}
+const set = f => { f(S); if (EX) f(EX); save(); fill(); };
+$('kanton').addEventListener('change', e => set(s => s.k = e.target.value));
+$('lang').addEventListener('change', e => set(s => s.lang = e.target.value));
+$('bw').addEventListener('change', e => set(s => s.bw = e.target.checked));
+[1, 2, 3, 4].forEach(n => $('p' + n).addEventListener('change', e => set(s => s.p[n] = e.target.checked)));
+$('mode').addEventListener('change', e => { if (EX) return; S.m = e.target.value; save(); fill(); });
+const EXD = () => ({k: 'ZH', lang: 'bi', bw: S.bw, p: {1: true, 2: true, 3: true, 4: true}, m: 'qst'});
+$('exOn').addEventListener('click', () => { EX = EXD(); fill(); window.scrollTo({top: $('exbar').offsetTop - 12, behavior: 'smooth'}); });
+$('exOff').addEventListener('click', () => { EX = null; fill(); });
+if (/[?&]example\b/.test(location.search)) EX = EXD();
+UI = SH.mount({build, title: 'Как устроены налоги', name: () => 'Nalogi-shema' + (D().k ? '-' + D().k : '')});
+fill();
+
+</script>
+<script src="/assets/help.js"></script>
+<script src="/assets/backup.js"></script>
+<script src="/assets/pdffan.js" defer></script>
+<script src="/assets/share.js" defer></script>
+<script src="/assets/samesite.js"></script>
+</body>
+</html>

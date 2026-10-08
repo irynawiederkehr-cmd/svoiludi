@@ -78,6 +78,7 @@ def hub():
     title = 'Как устроена Швейцария — простые ответы на русском · Свои люди'
     desc = 'Пермиты, налоги, долги, страховки, школа, работа, жильё и быт в Швейцарии простыми словами на русском. К каждой теме — полезные инструменты и специалисты, которые помогут.'
     mods = ''.join(f'<a href="#{m[0]}">{m[1]}</a>' for m in MODULES)
+    SCHEMES = ''.join(f'<a href="../instrumenty/{s}/"><img src="../instrumenty/preview/{s}/1.jpg" alt="" loading="lazy"><b>{t}</b></a>' for s, t in [('put-obrazovaniya', 'Путь образования'), ('yazyk-trebovaniya', 'Язык: что и где требуют'), ('nalogi-shema', 'Как устроены налоги'), ('pensiya-shema', 'Как устроена пенсия'), ('strahovki-obyazatelnye', 'Обязательные страховки')])
     body = []
     for key, name, lead in MODULES:
         cards = []
@@ -97,6 +98,7 @@ def hub():
     <nav class="tm-mods" aria-label="Разделы тем">{mods}</nav>
   </section>
   <a class="tm-sos" href="../instrumenty/ekstrennye-nomera/"><span class="tfan" aria-hidden="true"><img src="../instrumenty/preview/ekstrennye-nomera/1.jpg" alt="" loading="lazy" style="--i:-0.5"><img src="../instrumenty/preview/ekstrennye-nomera/2.jpg" alt="" loading="lazy" style="--i:0.5"></span><span><b>Сохрани сразу: экстренные номера</b><span>144, 117, 118, 145, дежурный врач твоего кантона и твои контакты на одной карточке, на русском и языке кантона. Распечатай: в кошелёк, на холодильник, няне.</span><em>Бесплатно · PDF · сделать карточку →</em></span></a>
+  <section class="tm-schemes" aria-labelledby="sch-h"><h2 id="sch-h">Схемы на одном листе</h2><p>Как всё устроено — на картинке, с твоими данными. Бесплатно, PDF и PNG.</p><div class="tm-sch">{SCHEMES}</div></section>
   {''.join(body)}
   <p class="tm-empty" id="tmempty" hidden>Ничего не нашлось. Попробуй другое слово или спроси в боте.</p>
   <section class="tm-ask" aria-labelledby="ask-h">
