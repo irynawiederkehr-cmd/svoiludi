@@ -2262,3 +2262,90 @@ ARTICLES['domashniy-personal'] = dict(
     terms=[('Deutsch', 'Hausangestellte, Haushaltshilfe, Ausgleichskasse, vereinfachtes Abrechnungsverfahren, Unfallversicherung, NBU, BVG, Krankentaggeld, Normalarbeitsvertrag, Lohnabrechnung, Lohnausweis, Kündigungsfrist'), ('Français', 'personnel de maison, employée domestique, caisse de compensation AVS, procédure simplifiée, assurance accidents, perte de gain maladie, contrat-type, fiche de salaire, certificat de salaire, délai de congé'), ('Italiano', 'personale domestico, cassa di compensazione AVS, procedura semplificata, assicurazione infortuni, indennità giornaliera di malattia, contratto normale, conteggio salariale, certificato di salario, termine di disdetta'), ('English', 'domestic staff, compensation office, simplified procedure, accident insurance, payslip, salary certificate, notice period')],
     post='Это регистрация в AHV-кассе, договор с работником и его расторжение.',
 )
+
+ARTICLES['samozanyatost'] = dict(
+    h1='Как открыть ИП в Швейцарии (selbständig): <em>AHV, страховки, налоги и счета клиентам</em>',
+    seo='Как открыть ИП в Швейцарии: selbständig machen, AHV, Handelsregister, MWST',
+    desc='Как начать своё дело в Швейцарии шаг за шагом: кто признаёт самозанятость (AHV-касса), кто может работать на себя с пермитом B, C, статусом S, взносы AHV 2026, страховки (несчастный случай, болезнь, пенсия, 3a), торговый реестр и НДС от 100 000 франков, бухгалтерия, налоги, QR-счёт. По-немецки selbständig machen, Einzelfirma, по-французски indépendant, raison individuelle, по-итальянски lavoratore indipendente.',
+    lead='Открыть ИП в Швейцарии — это чаще всего просто начать работать на себя как Einzelfirma и сообщить о себе в AHV-кассу. Регистрировать фирму и платить НДС нужно позже, с оборота 100 000 франков. Но страховки, пенсию и налоги теперь организуешь ты сама — и об этом лучше подумать до первого клиента.',
+    kanton=['migration', 'steuern'],
+    body='''
+<nav class="toc" aria-label="Содержание"><b>В этой статье</b>
+<ul>
+  <li><a href="#kto">Своё дело или по найму: решает касса</a></li>
+  <li><a href="#permit">Можно ли с твоим пермитом</a></li>
+  <li><a href="#ahv">AHV: взносы 2026</a></li>
+  <li><a href="#strahovki">Страховки и пенсия</a></li>
+  <li><a href="#reestr">Торговый реестр, НДС, бухгалтерия</a></li>
+  <li><a href="#nalogi">Налоги</a></li>
+  <li><a href="#scheta">Счета клиентам</a></li>
+</ul></nav>
+
+<h2 id="kto">Своё дело или по найму: решает касса</h2>
+<p>Как только начинаешь работать на себя, нужно присоединиться к AHV-кассе (Ausgleichskasse). <b>Признаёт ли она твоё дело самостоятельным, решает касса</b>, а не ты и не клиент (<a href="https://www.bsv.admin.ch/de/selbststaendigkeit">BSV</a>). Она смотрит, например, на то, есть ли у тебя несколько клиентов, свои средства и место работы, сама ли ты ищешь заказы, выставляешь счета и несёшь риск, работаешь ли по чужим указаниям (<a href="https://svazurich.ch/dam/sva-dokumente/2000_ak/2800_vb/2800_vb2_checkliste_selbstaendigkeit.pdf">SVA Zürich</a>).</p>
+<div class="warn"><b>Если у тебя один заказчик и он даёт указания</b>Касса может решить, что это работа по найму. Тогда взносы должен платить заказчик как работодатель. Это частый случай у уборщиц, нянь и водителей платформ — подробнее в статьях о профессиях.</div>
+
+<h2 id="permit">Можно ли с твоим пермитом</h2>
+<div class="cmp">
+  <div><b>Пермит C, граждане ЕС и ЕАСТ</b><p>С C можно работать на себя без разрешения. Граждане ЕС и ЕАСТ получают пермит B как самозанятые, если покажут, что дело настоящее и даёт доход.</p></div>
+  <div><b>Статус S</b><p>Можно и по найму, и на себя. Разрешение не нужно — о начале работы сообщают онлайн через <a href="https://www.easygov.swiss/easygov/#/de/landing/refugee">EasyGov</a>.</p></div>
+  <div><b>Пермит B не из ЕС</b><p>Зависит от того, за что дали B. Если по работе — для своего дела нужно отдельное разрешение кантона. Если по воссоединению семьи или как признанной беженке — работать на себя обычно можно. В любом случае спроси миграционную службу кантона до старта.</p></div>
+  <div><b>Статус F</b><p>Правила для своего дела уточни в миграционной службе кантона до старта.</p></div>
+</div>
+
+<h2 id="ahv">AHV: взносы 2026</h2>
+<ul class="ul">
+  <li><b>Ставка</b> AHV, IV и EO для своего дела — 10% дохода (8,1% AHV, 1,4% IV, 0,5% EO). Если доход меньше 60 500 франков в год, ставка ниже — по скользящей шкале, но не меньше 530 франков в год. Плюс взнос в кассу семейных пособий (обязателен, даже если детей нет) и сбор кассы за работу.</li>
+  <li><b>Как платишь.</b> Сначала — предварительные взносы по твоей оценке дохода, обычно раз в квартал. Потом касса пересчитывает их по налоговой декларации. Если доход вырос, сообщи сразу, иначе потом придёт доплата с процентами.</li>
+  <li><b>Безработица.</b> Своё дело не застраховано от безработицы: в ALV не платишь и пособие не получишь.</li>
+</ul>
+
+<h2 id="strahovki">Страховки и пенсия</h2>
+<ul class="ul">
+  <li><b>Несчастный случай</b> не застрахован автоматически. Либо включи несчастный случай в медстраховку (это обычно дешевле), либо оформи добровольную страховку от несчастных случаев.</li>
+  <li><b>Болезнь.</b> Если заболеешь, дохода не будет. Страховка дневных выплат при болезни (Krankentaggeld) — по желанию, но её очень советуют.</li>
+  <li><b>Пенсия.</b> Пенсионная касса (BVG) для своего дела не обязательна — можно присоединиться добровольно через отраслевую кассу. Без пенсионной кассы в 3a можно класть до 20% дохода, максимум 36 288 франков в год (2026) — это ещё и уменьшает налог.</li>
+  <li><b>Ответственность.</b> Страховка ответственности для дела (Betriebshaftpflicht) — если клиент пострадает из-за твоей работы.</li>
+</ul>
+<p>Кто за что платит и что обязательно — на схемах «Обязательные страховки» и «Как устроена пенсия».</p>
+
+<h2 id="reestr">Торговый реестр, НДС, бухгалтерия</h2>
+<ul class="ul">
+  <li><b>Торговый реестр</b> (Handelsregister) для Einzelfirma обязателен с оборота 100 000 франков в год. Раньше — по желанию: запись защищает название фирмы.</li>
+  <li><b>НДС</b> (MWST): регистрация обязательна с оборота 100 000 франков, в некоторых отраслях есть исключения.</li>
+  <li><b>Бухгалтерия.</b> До 500 000 франков оборота хватает простого учёта доходов, расходов и имущества. Документы хранят 10 лет (<a href="https://www.kmu.admin.ch/de/selbststaendigkeit-ein-leitfaden">KMU-Portal</a>).</li>
+  <li><b>Форма.</b> Einzelfirma — самая простая: ты отвечаешь всем своим имуществом. GmbH или AG — отдельное юрлицо со своим капиталом и бухгалтерией; это стоит обсудить с бухгалтером (Treuhand).</li>
+  <li><b>Онлайн.</b> Многое можно оформить через <a href="https://www.easygov.swiss/">EasyGov</a>: торговый реестр, AHV, НДС.</li>
+</ul>
+
+<h2 id="nalogi">Налоги</h2>
+<p>Прибыль Einzelfirma — это твой доход: налоговую декларацию подаёшь каждый год, налога у источника нет. Расходы на дело (материалы, программы, курсы, часть телефона, машина для работы) вычитаются, если есть чеки. Откладывай каждый месяц на налоги и AHV — первый большой счёт часто приходит через год-два. Как устроен налоговый год и сроки — на схеме «Как устроены налоги».</p>
+
+<h2 id="scheta">Счета клиентам</h2>
+<ul class="ul">
+  <li>В Швейцарии счёт выставляют с QR-счётом (QR-Rechnung): клиент сканирует его в приложении банка. Сделать его можно в банке или бухгалтерской программе.</li>
+  <li>В счёте: твоё имя или фирма, адрес, дата, номер, что сделано, сумма, срок оплаты (обычно 30 дней), с НДС — номер и ставка.</li>
+  <li>Если клиент не платит: напоминание, потом второе, потом можно начать взыскание через Betreibungsamt.</li>
+  <li>Работаешь из дома и принимаешь клиентов в съёмной квартире — нужно письменное согласие арендодателя.</li>
+</ul>
+''',
+    steps=[
+        'Проверь, можно ли работать на себя с твоим пермитом. С B не из ЕС — спроси миграционную службу кантона.',
+        'Сообщи о себе в AHV-кассу до первого заказа — касса решит, признаёт ли она твоё дело.',
+        'Оформи несчастный случай (в медстраховке или отдельно) и подумай о страховке на случай болезни и о 3a.',
+        'С оборота 100 000 франков — торговый реестр и НДС.',
+        'Веди простой учёт доходов и расходов, храни чеки 10 лет.',
+        'Выставляй счета с QR-кодом и откладывай каждый месяц на налоги и AHV.',
+    ],
+    tools={'chasy-po-klientam': 'Часы и заказы по каждому клиенту за месяц — основа для счёта и для учёта дохода.', 'moj-budget': 'Отложи каждый месяц на налоги, AHV и страховки, чтобы большие счета не застали врасплох.', 'strahovki-obyazatelnye': 'Что обязательно, когда работаешь на себя, а что по желанию: несчастный случай, болезнь, пенсия.', 'nalogi-shema': 'Налоговый год своего дела: декларация, предварительные счета, сроки и что собрать.', 'pensiya-shema': 'Пенсия без работодателя: AHV, добровольная пенсионная касса и 3a до 20% дохода.'},
+    related=['nalogi', 'nalogovaya-deklaraciya', 'pensiya', 'strahovki', 'betreibung', 'rabota'],
+    sources=[
+        ('BSV — что нужно знать о своём деле: AHV, безработица, несчастный случай, BVG, семейные пособия', 'https://www.bsv.admin.ch/de/selbststaendigkeit'),
+        ('KMU-Portal — своё дело: торговый реестр, НДС, бухгалтерия', 'https://www.kmu.admin.ch/de/selbststaendigkeit-ein-leitfaden'),
+        ('SVA Zürich — признаки своего дела', 'https://svazurich.ch/dam/sva-dokumente/2000_ak/2800_vb/2800_vb2_checkliste_selbstaendigkeit.pdf'),
+        ('WEKA — показатели соцстрахования: шкала AHV 10 100–60 500, минимум 530, 3a 36 288', 'https://www.weka.ch/themen/personal/sozialversicherungen/sozialversicherungsbeitraege/article/sozialversicherungskennzahlen-2026-alle-aenderungen-im-ueberblick/'),
+        ('Кантон Золотурн — своё дело для граждан не из ЕС только с разрешением', 'https://so.ch/verwaltung/departement-des-innern/migrationsamt/arbeit/drittstaaten/selbstaendige-erwerbstaetigkeit/'),
+    ],
+    terms=[('Deutsch', 'selbständig, Einzelfirma, Ausgleichskasse, Anerkennung der Selbständigkeit, Akontobeiträge, Handelsregister, MWST, Buchhaltung, Betriebshaftpflicht, Krankentaggeld, Säule 3a, QR-Rechnung, Treuhand'), ('Français', 'indépendant, raison individuelle, caisse de compensation AVS, acomptes, registre du commerce, TVA, comptabilité, responsabilité civile d’entreprise, perte de gain maladie, 3e pilier, QR-facture, fiduciaire'), ('Italiano', 'lavoratore indipendente, ditta individuale, cassa di compensazione AVS, acconti, registro di commercio, IVA, contabilità, responsabilità civile aziendale, terzo pilastro, QR-fattura, fiduciaria'), ('English', 'self-employed, sole proprietorship, compensation office, commercial register, VAT, bookkeeping, liability insurance, QR-bill')],
+    post='Это регистрация в AHV-кассе, ответы кассе и налоговой, напоминания клиентам об оплате и заявление на разрешение кантона.',
+)
