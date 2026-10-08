@@ -2566,7 +2566,7 @@ ARTICLES['trudovoe-pravo'] = dict(
         'Веди учёт часов, отпуска и больничных.',
     ],
     pomosh=dict(ids=['unia', 'syna', 'syndicom', 'hgu', 'kfmv', 'anwalt'], k='adv,arb', t='Не плачено за сверхурочные, уволили во время болезни, не дают отпуск — сначала звони в свой профсоюз. Нет членства — бесплатная справка адвокатов или кантона.'),
-    tools={'kuda-obratitsya': 'Профсоюзы и другие организации с консультациями — список с условиями и место для своих номеров.', 'uchet-vremeni': 'Часы, сверхурочные, отпуск и больничные — доказательство, если будет спор.', 'zarplata': 'Проверь расчётку: ставка, отпускные, сверхурочные, взносы.', 'rezyume': 'Резюме по-швейцарски, если ищешь новую работу.'},
+    tools={'bolezn-zarplata': 'Сколько недель зарплаты при болезни и когда нельзя увольнять — по твоему кантону.', 'kuda-obratitsya': 'Профсоюзы и другие организации с консультациями — список с условиями и место для своих номеров.', 'uchet-vremeni': 'Часы, сверхурочные, отпуск и больничные — доказательство, если будет спор.', 'zarplata': 'Проверь расчётку: ставка, отпускные, сверхурочные, взносы.', 'rezyume': 'Резюме по-швейцарски, если ищешь новую работу.'},
     related=['poterya-raboty', 'rabota', 'bolezn-na-rabote', 'domashniy-personal'],
     sources=[
         ('ch.ch — увольнение: сроки, форма, защита при болезни и беременности, причина письменно', 'https://ch.ch/de/kundigung-arbeitsvertrag'),
@@ -2787,7 +2787,7 @@ ARTICLES['arenda'] = dict(
         'Аренда кажется завышенной — в течение 30 дней после получения ключей к союзу арендаторов или в примирительный орган.',
     ],
     pomosh=dict(ids=['mv', 'asloca', 'asi', 'schlicht'], k='mv,miet,adv', t='Союз арендаторов проверит договор и аренду, а примирительный орган бесплатно объяснит права.'),
-    tools={'dosye-arendatora': 'Письмо и анкета жильцов на языке кантона с переводом для себя — отправь управляющей в день осмотра.', 'pisma-arenda': 'Когда уже живёшь в квартире: письма управляющей о снижении аренды, дефекте, расторжении и залоге.', 'moj-budget': 'Посчитай, какая аренда тебе по карману вместе с Nebenkosten, страховками и налогами.'},
+    tools={'pereezd-spisok': 'Нашла квартиру — список дел для переезда с датами.', 'dosye-arendatora': 'Письмо и анкета жильцов на языке кантона с переводом для себя — отправь управляющей в день осмотра.', 'pisma-arenda': 'Когда уже живёшь в квартире: письма управляющей о снижении аренды, дефекте, расторжении и залоге.', 'moj-budget': 'Посчитай, какая аренда тебе по карману вместе с Nebenkosten, страховками и налогами.'},
     related=['dogovor-arendy', 'strahovki', 'betreibung', 'gemeinde', 'profsoyuzy'],
     sources=[
         ('ch.ch — заказать выписку из реестра долгов', 'https://www.ch.ch/de/wohnen/miete/betreibungsregisterauszug-bestellen/'),
@@ -2885,7 +2885,7 @@ ARTICLES['dogovor-arendy'] = dict(
         'Уезжаешь — расторгай письменно за 3 месяца к местной дате или найди нового жильца.',
     ],
     pomosh=dict(ids=['mv', 'asloca', 'asi', 'schlicht', 'casafair'], k='mv,miet,adv', t='Почти все споры по аренде решаются через союз арендаторов и бесплатный примирительный орган — без суда.'),
-    tools={'pisma-arenda': 'Снижение аренды, дефект, расторжение и залог — письмо на языке кантона с русским переводом, отправляй заказным.', 'moj-budget': 'Nebenkosten, доплата за год, страховки и аренда — все расходы на жильё в одном бюджете.', 'kuda-obratitsya': 'Союз арендаторов твоего кантона: взнос, телефон и когда помогут.'},
+    tools={'zhurnal-shuma': 'Шум как дефект квартиры — сначала журнал шума, потом письмо управляющей.', 'pereezd-spisok': 'Уезжаешь — список дел с датами: расторжение, уборка, сдача, залог, община.', 'pisma-arenda': 'Снижение аренды, дефект, расторжение и залог — письмо на языке кантона с русским переводом, отправляй заказным.', 'moj-budget': 'Nebenkosten, доплата за год, страховки и аренда — все расходы на жильё в одном бюджете.', 'kuda-obratitsya': 'Союз арендаторов твоего кантона: взнос, телефон и когда помогут.'},
     related=['arenda', 'profsoyuzy', 'strahovki', 'betreibung'],
     sources=[
         ('BWO — референтная процентная ставка', 'https://www.bwo.admin.ch/de/referenzzinssatz'),
@@ -2901,4 +2901,1308 @@ ARTICLES['dogovor-arendy'] = dict(
     terms=[('Deutsch', 'Mietvertrag, Nebenkosten, Akonto, Pauschale, Nebenkostenabrechnung, Mietzinserhöhung, Referenzzinssatz, Mietzinssenkung, Herabsetzungsbegehren, Mängelrüge, Hinterlegung, Kündigung, Kündigungstermin, Nachmieter, Erstreckung, Wohnungsabgabe, Abgabeprotokoll, Lebensdauertabelle, Schlichtungsbehörde'), ('Français', 'bail à loyer, frais accessoires, acompte, décompte, hausse de loyer, taux de référence, baisse de loyer, avis des défauts, consignation du loyer, résiliation, terme de résiliation, locataire de remplacement, prolongation du bail, état des lieux, autorité de conciliation'), ('Italiano', 'contratto di locazione, spese accessorie, aumento della pigione, tasso di riferimento, riduzione della pigione, notifica dei difetti, deposito della pigione, disdetta, inquilino subentrante, protrazione, riconsegna, autorità di conciliazione'), ('English', 'tenancy agreement, ancillary costs, rent increase, reference interest rate, rent reduction, notice of defects, termination, replacement tenant, handover protocol')],
     post='Это требование снизить аренду, претензия о дефекте, расторжение договора, предложение нового жильца и требование вернуть залог.',
     post2='Для расторжения важен день, когда письмо получили, поэтому отправляй его минимум за неделю до начала срока.',
+)
+
+
+# ===== Покупка жилья и транспорт (08.10.2026). Факты сверены 08.10.2026: BJ, ch.ch, FINMA, BSV, ESTV, admin.ch, SBB, Alliance SwissPass, BAZG, кантоны.
+ARTICLES['pokupka-zhilya'] = dict(
+    h1='Купить квартиру или дом в Швейцарии: <em>кто может, сколько нужно своих денег и как считает банк</em>',
+    seo='Купить квартиру в Швейцарии: Lex Koller, Eigenkapital 20 %, ипотека (Hypothek)',
+    desc='Как купить жильё в Швейцарии простыми словами на русском: кто может покупать по закону Lex Koller (пермит B, C, статус S), сколько нужно собственных денег (20 %, из них 10 % не из пенсионной кассы), как банк считает посильность ипотеки (5 %, 1 %, треть дохода), как взять деньги из второй опоры и 3a, сколько стоят нотариус, Grundbuch и налог на переход собственности по кантонам, что меняется после отмены Eigenmietwert с 2029 года. По-немецки Wohneigentum, Hypothek, Eigenkapital, Tragbarkeit, по-французски achat immobilier, hypothèque, fonds propres, по-итальянски acquisto di un immobile, ipoteca.',
+    lead='Своё жильё в Швейцарии — это большие суммы и строгие правила банков. Прежде чем смотреть квартиры, проверь три вещи: можно ли тебе покупать с твоим пермитом, хватает ли собственных денег и потянешь ли ты ипотеку по расчёту банка. Здесь — всё по порядку.',
+    body='''
+<nav class="toc" aria-label="Содержание"><b>В этой статье</b>
+<ul>
+  <li><a href="#kto">Кто может купить</a></li>
+  <li><a href="#svoi">Сколько нужно своих денег</a></li>
+  <li><a href="#tragbarkeit">Как банк считает, потянешь ли ты</a></li>
+  <li><a href="#pensiya">Деньги из пенсионной кассы и 3a</a></li>
+  <li><a href="#rashody">Расходы на покупку</a></li>
+  <li><a href="#shagi">Как проходит покупка</a></li>
+  <li><a href="#stwe">Квартира в доме (Stockwerkeigentum)</a></li>
+  <li><a href="#nalog">Налоги и отмена Eigenmietwert</a></li>
+  <li><a href="#moshenniki">Осторожно, мошенники</a></li>
+</ul></nav>
+
+<h2 id="kto">Кто может купить (закон Lex Koller)</h2>
+<p>Покупку жилья иностранцами регулирует федеральный закон о приобретении земельных участков лицами за границей (BewG, его называют Lex Koller). Подробно — у <a href="https://www.bj.admin.ch/de/grundstueckerwerb-durch-personen-im-ausland">Федерального ведомства юстиции (BJ)</a> и на <a href="https://www.ch.ch/de/wohnen/wohneigentum/immobilien-kaufen/als-auslanderin-oder-auslander-immobilien-kaufen/">ch.ch</a>.</p>
+<ul class="ul">
+  <li><b>Пермит C или гражданство ЕС/ЕАСТ и жизнь в Швейцарии</b> — можно покупать как швейцарцы, без разрешения.</li>
+  <li><b>Пермит B, гражданство не ЕС</b> — можно купить без разрешения одно жильё для себя (Hauptwohnung): ты сама в нём живёшь, не сдаёшь, покупаешь на своё имя, а не через фирму. Дача или вторая квартира — только с разрешением кантона.</li>
+  <li><b>Статус S</b> — по разъяснению BJ законного места жительства в смысле этого закона статус S не создаёт, поэтому купить квартиру для себя без разрешения нельзя.</li>
+  <li><b>Пермит L</b> (не ЕС) — покупка жилья, как правило, недоступна. Статус F — уточняй в кантоне.</li>
+  <li><b>Закон могут ужесточить.</b> В апреле 2026 года Федеральный совет вынес на обсуждение проект: граждане третьих стран с пермитом B должны будут получать разрешение и продавать жильё после отъезда. Пока это проект, не закон, — перед покупкой проверь на сайте BJ.</li>
+</ul>
+
+<h2 id="svoi">Сколько нужно своих денег (Eigenkapital)</h2>
+<ul class="ul">
+  <li>Банк обычно даёт в долг <b>не больше 80 % цены</b>. Значит, <b>минимум 20 % — свои деньги</b> (<a href="https://www.ch.ch/de/wohnen/wohneigentum/immobilien-kaufen/wohneigentum-finanzieren/">ch.ch</a>).</li>
+  <li>Из них <b>минимум 10 % — «твёрдые» деньги</b>: сбережения, 3a, подарок или наследство, но <b>не из пенсионной кассы</b> (вторая опора). Это правило банков, признанное надзором <a href="https://www.finma.ch/de/news/2025/05/20250522-mm-hypothekarrisiken/">FINMA</a>.</li>
+  <li>Остальные до 20 % можно взять из пенсионной кассы (подробно ниже).</li>
+  <li>Расходы на саму покупку (нотариус, Grundbuch, налог) банк не финансирует — их тоже платишь из своих.</li>
+</ul>
+<p><b>Пример.</b> Квартира за 800 000 франков: своих нужно 160 000, из них не меньше 80 000 не из пенсионной кассы, плюс около 2–5 % на расходы покупки.</p>
+
+<h2 id="tragbarkeit">Как банк считает, потянешь ли ты (Tragbarkeit)</h2>
+<p>Банк считает не по нынешней низкой ставке, а по «расчётной» — на случай, если ставки вырастут. Обычный расчёт (примеры <a href="https://www.finma.ch/de/news/2025/05/20250522-mm-hypothekarrisiken/">FINMA</a> и практика банков):</p>
+<ul class="ul">
+  <li><b>Проценты:</b> 5 % в год от суммы ипотеки (Kalkulatorischer Zinssatz).</li>
+  <li><b>Содержание и побочные расходы:</b> около 1 % стоимости жилья в год.</li>
+  <li><b>Погашение (Amortisation):</b> вторую часть ипотеки — всё, что больше двух третей стоимости, — нужно погасить за 15 лет или до пенсии.</li>
+  <li><b>Всё вместе — не больше трети брутто-дохода</b> домохозяйства. Доход второго человека банк учитывает, обычно если он тоже подписывает ипотеку.</li>
+</ul>
+<p>Посчитать свои цифры поможет «Сколько стоит жильё, которое я потяну: расчёт ипотеки» — он покажет максимальную цену, нужные свои деньги и расходы в месяц. Сегодняшние ставки ипотеки ниже расчётных (осенью 2026 года ориентировочно 1–2 % в зависимости от срока), но банк всё равно проверяет по 5 %.</p>
+
+<h2 id="pensiya">Деньги из пенсионной кассы и 3a</h2>
+<ul class="ul">
+  <li><b>Вторая опора (Vorbezug WEF)</b> — только на жильё, где ты живёшь сама. Минимум 20 000 франков, не чаще раза в 5 лет и не позже чем за 3 года до пенсии. После 50 лет — не больше, чем было в 50 лет, или половина нынешней суммы. Если ты замужем, нужно письменное согласие мужа или жены (<a href="https://www.bsv.admin.ch/de/wohneigentumsfoerderung-mit-mitteln-der-beruflichen-vorsorge">BSV</a>).</li>
+  <li>Снятые деньги уменьшают будущую пенсию и выплаты при инвалидности. При продаже жилья их нужно вернуть в кассу. Вместо снятия можно <b>заложить</b> (Verpfändung) — пенсия тогда не уменьшается.</li>
+  <li><b>3a</b> тоже можно снять на покупку своего жилья или погашение ипотеки, не чаще раза в 5 лет.</li>
+  <li>Со снятых денег платится <b>налог на выплату капитала</b> — отдельно и по сниженной ставке, сумма зависит от кантона. Спроси у кассы и в налоговой, сколько выйдет.</li>
+</ul>
+
+<h2 id="rashody">Расходы на покупку</h2>
+<p>Закладывай <b>до 5 % цены</b> сверху. Из чего они складываются:</p>
+<ul class="ul">
+  <li><b>Нотариус</b> — договор купли-продажи жилья в Швейцарии действителен только у нотариуса. В одних кантонах это государственный нотариат с твёрдыми ценами, в других — частные нотариусы, у них цену спроси заранее.</li>
+  <li><b>Земельная книга (Grundbuch)</b> — запись о новом владельце, обычно меньше 1 %.</li>
+  <li><b>Закладная (Schuldbrief)</b> для ипотеки — около 0,1–0,3 % суммы, если её нужно создавать заново.</li>
+  <li><b>Налог на переход собственности (Handänderungssteuer).</b> Не берут: Аргау, Гларус, Шаффхаузен, Швиц, Тичино, Ури, Цуг, Цюрих. Примерно 1 %: Аппенцелль Иннерроден, Нидвальден, Санкт-Галлен, Тургау; 1,5 %: Фрибур, Люцерн, Обвальден; около 2 %: Берн (1,8 %), Граубюнден, Аппенцелль Ауссерроден, Юра (2,1 %), Золотурн и Во (2,2 %, в Во ещё доля общины); 2,5 %: Базель-Ланд; 3 % и больше: Базель-Штадт, Женева, Невшатель. В Вале 1–1,5 %. Кто платит — покупатель, продавец или пополам — записывают в договор. Ставки ориентировочные, точную проверь в налоговой своего кантона.</li>
+</ul>
+
+<h2 id="shagi">Как проходит покупка</h2>
+<ol class="ol">
+  <li><b>Финансирование заранее.</b> Сходи в банк или к независимому ипотечному консультанту, получи подтверждение финансирования — без него продавец часто не станет говорить с тобой всерьёз.</li>
+  <li><b>Осмотр и документы:</b> выписка из земельной книги, планы, для квартиры — регламент дома, протоколы собраний и фонд ремонта.</li>
+  <li><b>Резервация.</b> Резервационный договор без нотариуса не обязывает, задаток — только на заблокированный счёт (Sperrkonto), не продавцу лично (<a href="https://www.ch.ch/de/wohnen/wohneigentum/immobilien-kaufen/kaufvertrag-fur-wohneigentum/">ch.ch</a>).</li>
+  <li><b>Договор у нотариуса</b> и оплата.</li>
+  <li><b>Запись в земельную книгу.</b> Владелицей ты становишься только после неё.</li>
+</ol>
+
+<h2 id="stwe">Квартира в доме (Stockwerkeigentum)</h2>
+<ul class="ul">
+  <li>Ты владеешь своей квартирой и долей общего: крыша, фасад, лестница, отопление. Твоя доля называется Wertquote.</li>
+  <li>Главное решает <b>собрание владельцев</b>, обычно раз в год: бюджет, ремонты, управляющий. Перед покупкой прочитай регламент и протоколы последних собраний — там видно, какие большие ремонты впереди.</li>
+  <li><b>Фонд ремонта (Erneuerungsfonds)</b> — копилка на большие ремонты. Если она пустая, крупный ремонт оплатят владельцы из своего кармана.</li>
+</ul>
+
+<h2 id="nalog">Налоги и отмена Eigenmietwert</h2>
+<ul class="ul">
+  <li>Сейчас владелец жилья, где живёт сам, платит налог с условной арендной платы (<b>Eigenmietwert</b>), но может вычитать проценты по ипотеке и расходы на содержание.</li>
+  <li>28 сентября 2025 года народ проголосовал за отмену. По решению Федерального совета <b>с 1 января 2029 года</b> Eigenmietwert отменяется, а вместе с ним — вычет расходов на содержание и, для своего жилья, вычет процентов (<a href="https://www.admin.ch/de/newnsb/yGTqBPowRqyVh0zPokW-q">admin.ch</a>).</li>
+  <li>Для первой покупки будет временный вычет процентов: до 10 000 франков для супругов и 5 000 для остальных, он уменьшается каждый год и действует 10 лет. Кантоны могут ввести отдельный налог на вторые квартиры и дачи.</li>
+</ul>
+
+<h2 id="moshenniki">Осторожно, мошенники</h2>
+<p>Признаки фальшивого объявления: цена заметно ниже рынка, «владелец за границей», просьба внести задаток до осмотра, оплата подарочными картами или криптовалютой, продавец не значится владельцем в земельной книге. Никаких денег до осмотра и до нотариуса, задаток — только на заблокированный счёт.</p>
+''',
+    steps=[
+        'Проверь, можно ли тебе покупать с твоим пермитом — статус S и пермит L, как правило, нет.',
+        'Посчитай свои деньги: 20 % цены, из них 10 % не из пенсионной кассы, плюс до 5 % на расходы.',
+        'Посчитай посильность по расчёту банка: 5 % процентов, 1 % содержания и погашение — не больше трети дохода.',
+        'Получи подтверждение финансирования в банке до резервации, задаток — только на заблокированный счёт.',
+        'Перед договором у нотариуса проверь выписку из земельной книги, регламент дома и фонд ремонта.',
+    ],
+    pomosh=dict(ids=['casafair', 'budget', 'anwalt'], t='Перед подписанием покажи договор и расчёт независимому консультанту — банк и продавец смотрят на сделку со своей стороны.'),
+    tools={'ipoteka-raschet': 'Свои деньги, треть дохода и максимальная цена — проверь до похода в банк.', 'moj-budget': 'Ипотека, содержание, налоги и страховки — все расходы на жильё в одном бюджете.'},
+    related=['arenda', 'pensiya', 'nalogi', 'bank'],
+    sources=[
+        ('BJ — покупка жилья лицами за границей (Lex Koller)', 'https://www.bj.admin.ch/de/grundstueckerwerb-durch-personen-im-ausland'),
+        ('BJ — вопросы и ответы о Lex Koller', 'https://www.bj.admin.ch/de/fragen-und-antworten'),
+        ('BJ — проект ужесточения Lex Koller, 15.04.2026', 'https://www.bj.admin.ch/de/newnsb/4mzivVX5Ko4dpap06YtuI'),
+        ('ch.ch — покупка жилья иностранцами', 'https://www.ch.ch/de/wohnen/wohneigentum/immobilien-kaufen/als-auslanderin-oder-auslander-immobilien-kaufen/'),
+        ('ch.ch — финансирование жилья', 'https://www.ch.ch/de/wohnen/wohneigentum/immobilien-kaufen/wohneigentum-finanzieren/'),
+        ('ch.ch — договор купли-продажи жилья', 'https://www.ch.ch/de/wohnen/wohneigentum/immobilien-kaufen/kaufvertrag-fur-wohneigentum/'),
+        ('FINMA — риски ипотеки, 22.05.2025', 'https://www.finma.ch/de/news/2025/05/20250522-mm-hypothekarrisiken/'),
+        ('BSV — жильё за счёт пенсионной кассы', 'https://www.bsv.admin.ch/de/wohneigentumsfoerderung-mit-mitteln-der-beruflichen-vorsorge'),
+        ('admin.ch — отмена Eigenmietwert с 2029, 01.04.2026', 'https://www.admin.ch/de/newnsb/yGTqBPowRqyVh0zPokW-q'),
+        ('Comparis — расходы при покупке и налог на переход собственности', 'https://www.comparis.ch/hypotheken/immobilienkauf/kaufnebenkosten-hauskauf'),
+    ],
+    terms=[('Deutsch', 'Wohneigentum, Eigenkapital, harte Eigenmittel, Hypothek, Festhypothek, SARON-Hypothek, Tragbarkeit, kalkulatorischer Zinssatz, Amortisation, Belehnung, Vorbezug, Verpfändung, Notar, Grundbuch, Schuldbrief, Handänderungssteuer, Stockwerkeigentum, Wertquote, Erneuerungsfonds, Eigenmietwert'), ('Français', 'propriété du logement, fonds propres, hypothèque, taux fixe, capacité financière, amortissement, versement anticipé (EPL), mise en gage, notaire, registre foncier, cédule hypothécaire, droits de mutation, propriété par étages (PPE), fonds de rénovation, valeur locative'), ('Italiano', 'proprietà d’abitazione, capitale proprio, ipoteca, sostenibilità, ammortamento, prelievo anticipato, costituzione in pegno, notaio, registro fondiario, cartella ipotecaria, tassa di mutazione, proprietà per piani, valore locativo'), ('English', 'home ownership, equity, mortgage, affordability, amortisation, early withdrawal, pledge, notary, land register, property transfer tax, condominium, imputed rental value')],
+)
+
+ARTICLES['transport'] = dict(
+    h1='Транспорт в Швейцарии: <em>проездные, обмен прав, машина после переезда и штрафы</em>',
+    seo='Транспорт в Швейцарии: Halbtax и GA, обмен прав (Führerausweis umtauschen), машина',
+    desc='Транспорт в Швейцарии простыми словами на русском: Halbtax и GA и сколько они стоят с 13.12.2026, Junior-Karte для детей, Sparbillette, штрафы за проезд без билета; обмен иностранных водительских прав за 12 месяцев и контрольная поездка (Kontrollfahrt) для украинских и других прав, что со статусом S; машина после переезда: растаможка как Übersiedlungsgut, номера, MFK, виньетка 40 франков; детское кресло, e-bike. По-немецки Halbtax, Generalabonnement, Führerausweis umtauschen, по-французски abonnement demi-tarif, échange du permis de conduire, по-итальянски metà-prezzo, conversione della licenza di condurre.',
+    lead='В Швейцарии отличный общественный транспорт, и многие обходятся без машины. Здесь — какой проездной выгоднее, как обменять водительские права до того, как они перестанут действовать, и что делать с машиной, которую ты привезла.',
+    kanton=['stva'],
+    body='''
+<nav class="toc" aria-label="Содержание"><b>В этой статье</b>
+<ul>
+  <li><a href="#proezd">Проездные: Halbtax и GA</a></li>
+  <li><a href="#deti">Дети и молодёжь</a></li>
+  <li><a href="#shtraf">Без билета: сколько стоит</a></li>
+  <li><a href="#prava">Обмен водительских прав</a></li>
+  <li><a href="#ukraina">Украинские права и статус S</a></li>
+  <li><a href="#mashina">Машина после переезда</a></li>
+  <li><a href="#doroga">На дороге: виньетка, кресло, e-bike</a></li>
+</ul></nav>
+
+<h2 id="proezd">Проездные: Halbtax и GA</h2>
+<ul class="ul">
+  <li><b>Halbtax</b> (абонемент на полцены) — год ездишь почти везде за половину цены билета: поезда, автобусы, трамваи, многие корабли и горные дороги. Взрослым 190 франков в первый год и 170 при продлении, молодёжи 16–25 лет — 120 и 100 (<a href="https://www.sbb.ch/de/billette-angebote/abos/halbtax.html">SBB</a>). С 13 декабря 2026 года взрослый Halbtax дорожает на 5 франков.</li>
+  <li><b>GA</b> (Generalabonnement) — год ездишь везде без билетов. Взрослым во 2-м классе 3995 франков, с 13 декабря 2026 года — 4095, в 1-м классе — 6520, с 13 декабря — 6770 (<a href="https://www.allianceswisspass.ch/de/asp/News/Newsmeldung?newsid=1049">Alliance SwissPass</a>). Есть GA для молодёжи, пожилых, семейные и помесячная оплата.</li>
+  <li><b>Что выгоднее.</b> Halbtax окупается уже после нескольких поездок, если ты ездишь дальше своего города. GA — если ты ездишь на работу в другой город каждый день. Сравни свои поездки в «Какой проездной выгоднее: Halbtax, GA или билеты».</li>
+  <li><b>Городской проездной</b> (Verbundabo) — для поездок внутри своего региона, например ZVV в Цюрихе. Он часто выгоднее, если ездишь только в своём городе.</li>
+  <li><b>Sparbillette</b> (Supersaver) — скидка до 50 % на конкретный поезд, количество ограничено. <b>Spartageskarte</b> — день по всей Швейцарии с Halbtax от 29 франков, если купить заранее.</li>
+</ul>
+
+<h2 id="deti">Дети и молодёжь</h2>
+<ul class="ul">
+  <li>Дети <b>до 6 лет</b> ездят бесплатно с взрослым.</li>
+  <li><b>Junior-Karte</b> — 30 франков в год за ребёнка 6–16 лет: с мамой или папой он ездит бесплатно. <b>Kinder-Mitfahrkarte</b> — то же самое с бабушкой, няней или соседкой, тоже 30 франков (<a href="https://www.sbb.ch/de/angebote/junior-karte">SBB</a>).</li>
+  <li>До 25 лет — <b>GA Night</b> за 99 франков в год: ночные поездки с 19:00 до 5:00 (в выходные до 7:00).</li>
+</ul>
+
+<h2 id="shtraf">Без билета: сколько стоит</h2>
+<p>В поездах SBB доплата без билета — 90 франков в первый раз, 130 во второй и 160 с третьего, плюс цена билета. Забыла абонемент дома — покажи его в течение 10 дней, тогда 5 франков (<a href="https://www.sbb.ch/de/bahnhof-services/nach-der-reise/reisen-ohne-gueltigen-fahrausweis.html">SBB</a>). В городских сетях свои суммы, в ZVV — от 100 франков. Билет нужно купить <b>до посадки</b>: в большинстве поездов купить его у кондуктора нельзя.</p>
+
+<h2 id="prava">Обмен водительских прав (Führerausweis umtauschen)</h2>
+<ul class="ul">
+  <li><b>Срок — 12 месяцев с переезда в Швейцарию.</b> Потом ездить с иностранными правами нельзя. Подавай заявление заранее, хотя бы за месяц до конца срока (<a href="https://www.ch.ch/de/fahrzeuge-und-verkehr/fuhrerausweis/fuhrerausweis-umtauschen/">ch.ch</a>).</li>
+  <li><b>Куда:</b> в дорожное ведомство своего кантона (Strassenverkehrsamt, во франкоязычных кантонах Service des automobiles) — ссылка в блоке «Твой кантон» выше.</li>
+  <li><b>Документы:</b> заявление с отметкой окулиста или оптика о проверке зрения (Sehtest), свежее цветное фото, оригинал прав, пермит. Права не латиницей — нужен перевод. В Цюрихе личность подтверждают лично (<a href="https://www.zh.ch/de/mobilitaet/fuehrerausweis-fahren-lernen/auslaendischer-fuehrerausweis.html">zh.ch</a>).</li>
+  <li><b>Контрольная поездка (Kontrollfahrt).</b> С правами из ЕС/ЕАСТ, США, Канады, Японии, Австралии, Израиля и ещё нескольких стран её нет. С правами из всех остальных стран, в том числе из Украины, — нужна. <b>Попытка одна:</b> если не сдала, в Швейцарии ездить нельзя, и права получают заново — курс первой помощи, теория, ученические права, практика.</li>
+  <li><b>Цена</b> зависит от кантона, обычно больше 100 франков, с контрольной поездкой — 200–300.</li>
+  <li><b>Опоздала с обменом</b> — правила разные: где-то возможен обмен со штрафом, где-то только полное получение прав заново. Узнай в своём ведомстве до конца срока.</li>
+  <li>Перед контрольной поездкой стоит взять 1–2 урока в автошколе: экзаменатор смотрит на швейцарские правила — приоритет справа, пешеходные переходы, круговое движение.</li>
+</ul>
+
+<h2 id="ukraina">Украинские права и статус S</h2>
+<ul class="ul">
+  <li>Для тех, кто получил статус S с 24.02.2022 по 05.04.2024, действовало исключение: обменять права можно было в течение 24 месяцев. <b>Оно закончилось 5 апреля 2026 года</b> (<a href="https://www.ocn.ch/de/ukraine">OCN Fribourg</a>). Продления не объявляли — уточни в своём кантоне, если сомневаешься.</li>
+  <li>Статус S с 06.04.2024 и позже — обычный срок 12 месяцев с даты получения.</li>
+  <li>Украинские права обмениваются только с контрольной поездкой. Электронные и просроченные права не принимают.</li>
+</ul>
+
+<h2 id="mashina">Машина после переезда</h2>
+<ul class="ul">
+  <li><b>Без пошлины (как переселенческое имущество)</b>, если ты сама пользовалась машиной за границей не меньше 6 месяцев. Задекларируй её на первой же границе по форме 18.44 (<a href="https://www.bazg.admin.ch/de/faq-umzugsgut">BAZG</a>).</li>
+  <li>Пользовалась меньше 6 месяцев — растаможка: пошлина по весу (из ЕС с документом о происхождении — без пошлины), 4 % налога на автомобили и НДС 8,1 %.</li>
+  <li>С 1 июля 2024 года обладатели статуса S считаются жителями Швейцарии: машину с украинскими номерами нужно растаможить и перерегистрировать (<a href="https://www.bazg.admin.ch/de/verzollung-fahrzeuge-personen-schutzstatus-s">BAZG</a>).</li>
+  <li><b>Швейцарские номера</b> — в дорожном ведомстве кантона, обычно в течение года после переезда: страховка ответственности (полис), техосмотр по форме 13.20A, растаможка, документ на машину (<a href="https://www.ch.ch/de/fahrzeuge-und-verkehr/autos-und-andere-fahrzeuge/fahrzeug-einlosen/">ch.ch</a>). Налог на машину каждый год, сумма зависит от кантона.</li>
+  <li><b>Техосмотр (MFK)</b> — новой машине через 5 лет, потом через 3 года и дальше каждые 2 года, около 60 франков.</li>
+</ul>
+
+<h2 id="doroga">На дороге: виньетка, кресло, e-bike</h2>
+<ul class="ul">
+  <li><b>Виньетка</b> для автобанов — 40 франков в год, наклейка или электронная на <a href="https://www.e-vignette.ch">e-vignette.ch</a>. Виньетка 2026 действует до 31 января 2027. Без неё — штраф 200 франков.</li>
+  <li><b>Детское кресло</b> — для детей до 12 лет и ростом ниже 150 см (<a href="https://www.ch.ch/de/fahrzeuge-und-verkehr/verhalten-im-strassenverkehr/sicherung-von-kindern-in-autos/">ch.ch</a>).</li>
+  <li><b>Медленный e-bike</b> (до 25 км/ч) — с 14 лет, шлем советуют. <b>Быстрый</b> (до 45 км/ч) — права категории M, шлем, жёлтый номер.</li>
+  <li><b>Алкоголь:</b> общий предел 0,5 промилле, с правами на пробу (первые 3 года) и при обучении — 0,1.</li>
+  <li>Штрафы за превышение скорости в Швейцарии высокие, за большое превышение — уголовное дело и лишение прав. Камер много, приходит письмо на адрес владельца машины.</li>
+</ul>
+''',
+    steps=[
+        'Купи Halbtax в первый же месяц — он окупается быстро, детям оформи Junior-Karte за 30 франков.',
+        'Запиши в календарь дату: 12 месяцев с переезда — до неё обменяй права.',
+        'Подай заявление на обмен заранее и возьми урок в автошколе перед контрольной поездкой.',
+        'Машину из-за границы задекларируй на первой границе по форме 18.44 и поставь на швейцарские номера.',
+        'Купи виньетку, проверь детское кресло и страховку ответственности.',
+    ],
+    pomosh=dict(ids=['tcs'], t='Клубы автомобилистов помогают с поломкой на дороге, юридическими вопросами о машине и штрафами.'),
+    tools={'proezdnoj-vybor': 'Сравни за год: билеты, Halbtax или GA — по твоим поездкам и ценам с 13.12.2026.', 'moj-budget': 'Проездной, машина, виньетка, страховка и налог — расходы на транспорт в бюджете.', 'moj-god': 'Дата обмена прав, техосмотр и виньетка — сроки в календаре на год.'},
+    related=['strahovki', 'skrytye-rashody', 'status-s', 'professii-avto'],
+    sources=[
+        ('SBB — Halbtax', 'https://www.sbb.ch/de/billette-angebote/abos/halbtax.html'),
+        ('Alliance SwissPass — цены с 13.12.2026, 04.08.2026', 'https://www.allianceswisspass.ch/de/asp/News/Newsmeldung?newsid=1049'),
+        ('SBB — Junior-Karte', 'https://www.sbb.ch/de/angebote/junior-karte'),
+        ('SBB — проезд без действительного билета', 'https://www.sbb.ch/de/bahnhof-services/nach-der-reise/reisen-ohne-gueltigen-fahrausweis.html'),
+        ('ch.ch — обмен иностранных прав', 'https://www.ch.ch/de/fahrzeuge-und-verkehr/fuhrerausweis/fuhrerausweis-umtauschen/'),
+        ('Кантон Цюрих — иностранные права', 'https://www.zh.ch/de/mobilitaet/fuehrerausweis-fahren-lernen/auslaendischer-fuehrerausweis.html'),
+        ('OCN Fribourg — украинские права', 'https://www.ocn.ch/de/ukraine'),
+        ('BAZG — машины лиц со статусом S', 'https://www.bazg.admin.ch/de/verzollung-fahrzeuge-personen-schutzstatus-s'),
+        ('BAZG — переселенческое имущество', 'https://www.bazg.admin.ch/de/faq-umzugsgut'),
+        ('ch.ch — регистрация машины', 'https://www.ch.ch/de/fahrzeuge-und-verkehr/autos-und-andere-fahrzeuge/fahrzeug-einlosen/'),
+        ('ch.ch — виньетка', 'https://www.ch.ch/de/fahrzeuge-und-verkehr/autos-und-andere-fahrzeuge/autobahnvignette/'),
+    ],
+    terms=[('Deutsch', 'Halbtax, Generalabonnement (GA), Verbundabo, Sparbillett, Junior-Karte, Kinder-Mitfahrkarte, Zuschlag, Führerausweis, Umtausch, Kontrollfahrt, Sehtest, Strassenverkehrsamt, Übersiedlungsgut, Immatrikulation, Motorfahrzeugkontrolle (MFK), Vignette, Probeführerausweis'), ('Français', 'abonnement demi-tarif, abonnement général, billet dégriffé, carte junior, supplément, permis de conduire, échange, course de contrôle, service des automobiles, effets de déménagement, immatriculation, expertise, vignette'), ('Italiano', 'abbonamento metà-prezzo, abbonamento generale, biglietto risparmio, carta junior, licenza di condurre, conversione, corsa di controllo, ufficio della circolazione, masserizie di trasloco, immatricolazione, collaudo, contrassegno'), ('English', 'half-fare travelcard, general travelcard, supersaver ticket, driving licence exchange, control drive, road traffic office, household effects, vehicle registration, inspection, motorway vignette')],
+)
+
+
+# ===== Болезнь на работе, социальная помощь, KESB (08.10.2026). Факты сверены 08.10.2026: SECO, ch.ch, BAG, Suva, BSV, SKOS, SEM, кантоны ZH и AG, KOKES, KESCHA.
+ARTICLES['bolezn-na-rabote'] = dict(
+    h1='Заболела или травма на работе: <em>кто платит зарплату, сколько недель и когда нельзя увольнять</em>',
+    seo='Болезнь на работе в Швейцарии: зарплата (Lohnfortzahlung), Krankentaggeld, Arztzeugnis',
+    desc='Болезнь и несчастный случай на работе в Швейцарии простыми словами на русском: сколько недель работодатель платит зарплату при болезни (OR 324a, бернская, цюрихская и базельская шкала), страховка Krankentaggeld 80 % на 720 дней, когда нужна справка врача (Arztzeugnis), запрет увольнения при болезни (30, 90, 180 дней), несчастный случай по UVG — 80 % с третьего дня, беременность и декрет 14 недель. По-немецки Lohnfortzahlung, Krankentaggeld, Arztzeugnis, Sperrfrist, по-французски maintien du salaire, certificat médical, по-итальянски continuazione del salario.',
+    lead='Заболеть в Швейцарии — не значит остаться без денег. Но сколько и как долго тебе заплатят, зависит от того, сколько ты проработала, есть ли у работодателя страховка и болезнь это или несчастный случай. Здесь — по порядку и с примерами.',
+    body='''
+<nav class="toc" aria-label="Содержание"><b>В этой статье</b>
+<ul>
+  <li><a href="#pervoe">Заболела: что сделать сразу</a></li>
+  <li><a href="#zarplata">Кто платит зарплату при болезни</a></li>
+  <li><a href="#shkaly">Сколько недель: три шкалы</a></li>
+  <li><a href="#taggeld">Страховка Krankentaggeld</a></li>
+  <li><a href="#uvolnenie">Когда нельзя увольнять</a></li>
+  <li><a href="#neschastnyy">Несчастный случай (Unfall)</a></li>
+  <li><a href="#beremennost">Беременность и декрет</a></li>
+</ul></nav>
+
+<h2 id="pervoe">Заболела: что сделать сразу</h2>
+<ul class="ul">
+  <li><b>Сообщи работодателю в тот же день</b>, до начала работы — как принято у вас: звонок, сообщение, e-mail.</li>
+  <li><b>Справка врача (Arztzeugnis).</b> По закону её можно потребовать с первого дня, обычно — с третьего. Как у тебя, написано в договоре или правилах фирмы. В справке нет диагноза — только что ты не можешь работать и на сколько процентов (<a href="https://www.seco.admin.ch/seco/de/home/Arbeit/Personenfreizugigkeit_Arbeitsbeziehungen/Arbeitsrecht/FAQ_zum_privaten_Arbeitsrecht/verhinderung-des-arbeitnehmers-an-der-arbeitsleistung.html">SECO</a>).</li>
+  <li>Работаешь на нескольких работах — сообщи каждому работодателю.</li>
+  <li>Болеешь долго — присылай справки регулярно, не жди напоминаний.</li>
+</ul>
+
+<h2 id="zarplata">Кто платит зарплату при болезни (Lohnfortzahlung)</h2>
+<p>Если работа длится <b>больше трёх месяцев</b> или договор заключён больше чем на три месяца, работодатель платит зарплату во время болезни (Обязательственное право, OR ст. 324a). В первый год работы — <b>минимум 3 недели</b> полной зарплаты, потом дольше. Несколько болезней за год складываются. Отказаться от этого права договором нельзя (<a href="https://www.ch.ch/de/arbeit/arbeitsunfahigkeit/">ch.ch</a>).</p>
+<p>Сколько именно недель после первого года, закон не пишет. Суды разных регионов считают по своим шкалам — если в договоре или в коллективном договоре (GAV) нет условий лучше.</p>
+
+<h2 id="shkaly">Сколько недель: три шкалы</h2>
+<p>Шкала зависит от того, где работодатель. <b>Цюрихская</b> — кантоны Цюрих, Шаффхаузен, Тургау (в Граубюндене и Цуге уточняй). <b>Базельская</b> — Базель-Штадт и Базель-Ланд. <b>Бернская</b> — все остальные кантоны.</p>
+<div class="tbl"><table>
+<thead><tr><th>Год работы</th><th>Бернская</th><th>Цюрихская</th><th>Базельская</th></tr></thead>
+<tbody>
+<tr><td>1-й (после 3 месяцев)</td><td>3 недели</td><td>3 недели</td><td>3 недели</td></tr>
+<tr><td>2-й</td><td>1 месяц</td><td>8 недель</td><td>2 месяца</td></tr>
+<tr><td>3-й</td><td>2 месяца</td><td>9 недель</td><td>2 месяца</td></tr>
+<tr><td>4-й</td><td>2 месяца</td><td>10 недель</td><td>3 месяца</td></tr>
+<tr><td>5-й–9-й</td><td>3 месяца</td><td>11–15 недель</td><td>3 месяца</td></tr>
+<tr><td>10-й–14-й</td><td>4 месяца</td><td>16–20 недель</td><td>3–4 месяца</td></tr>
+<tr><td>15-й–19-й</td><td>5 месяцев</td><td>21–25 недель</td><td>4–5 месяцев</td></tr>
+<tr><td>20-й и дальше</td><td>6 месяцев</td><td>26 недель и +1 неделя за год</td><td>5–6 месяцев</td></tr>
+</tbody></table></div>
+<p>По базельской шкале источники расходятся — уточни в союзе своей профессии или профсоюзе. Свой случай посчитает «Сколько недель зарплаты при болезни: бернская, цюрихская, базельская шкала».</p>
+
+<h2 id="taggeld">Страховка Krankentaggeld</h2>
+<ul class="ul">
+  <li>Многие работодатели вместо шкалы страхуют сотрудников в <b>коллективной страховке на случай болезни</b> (Krankentaggeldversicherung). Обычно она платит <b>80 % зарплаты до 720 дней</b>.</li>
+  <li>Это заменяет шкалу, только если условия не хуже: 80 % на 720 дней и работодатель платит хотя бы половину взноса.</li>
+  <li>У страховки есть <b>дни ожидания</b> (Wartefrist) — например, 30 дней. Эти дни работодатель обычно платит сам. Условия — в договоре и полисе, попроси копию.</li>
+  <li>По закону такая страховка не обязательна. Нет её — действует шкала.</li>
+</ul>
+
+<h2 id="uvolnenie">Когда нельзя увольнять (Sperrfrist)</h2>
+<ul class="ul">
+  <li>После испытательного срока работодатель не может уволить тебя, пока ты болеешь: <b>30 дней</b> в первый год работы, <b>90 дней</b> со 2-го по 5-й год, <b>180 дней</b> с 6-го года (OR ст. 336c).</li>
+  <li>Увольнение в это время недействительно — его нужно повторить потом.</li>
+  <li>Если тебя уволили до болезни, срок увольнения на время болезни останавливается и продлевается.</li>
+  <li>В испытательный срок такой защиты нет. Сама уволиться ты можешь всегда.</li>
+  <li>Новая отдельная болезнь даёт новый срок защиты, возврат той же болезни — нет.</li>
+</ul>
+
+<h2 id="neschastnyy">Несчастный случай (Unfall)</h2>
+<ul class="ul">
+  <li>Каждого работника работодатель страхует от несчастных случаев по закону UVG — у Suva или у частной страховой.</li>
+  <li>Работаешь <b>8 часов в неделю и больше</b> у одного работодателя — застрахованы и несчастные случаи вне работы (на лыжах, дома). Меньше 8 часов — только на работе и по дороге на работу.</li>
+  <li><b>Пособие — 80 % зарплаты с третьего дня</b> после несчастного случая, лечение оплачивает страховка (<a href="https://www.suva.ch/de-ch/download/dokument/ihr-suva-versicherungsschutz-das-muessen-sie-wissen/ihr-suva-versicherungsschutz-das-muessen-sie-wissen--1807.d">Suva</a>).</li>
+  <li>Сразу сообщи работодателю — он заявляет о случае в страховую. Скажи врачу, что это несчастный случай: счёт тогда идёт не в медстраховку.</li>
+  <li>Не работай, если врач запретил: страховая может потребовать деньги назад.</li>
+</ul>
+
+<h2 id="beremennost">Беременность и декрет</h2>
+<ul class="ul">
+  <li>Во время беременности и <b>16 недель после родов</b> уволить нельзя (кроме испытательного срока).</li>
+  <li><b>Декретные (Mutterschaftsentschädigung):</b> 14 недель, 80 % среднего дохода, но не больше <b>220 франков в день</b>. Условия: до родов 9 месяцев была застрахована в AHV, из них минимум 5 месяцев работала (<a href="https://www.bsv.admin.ch/de/eo-bei-mutterschaft">BSV</a>).</li>
+  <li>8 недель после родов работать нельзя.</li>
+  <li>Кормишь грудью в первый год — часть времени на кормление засчитывается как рабочее: от 30 до 90 минут в день в зависимости от длины дня.</li>
+</ul>
+''',
+    steps=[
+        'Заболела — сообщи работодателю в тот же день и узнай, с какого дня нужна справка врача.',
+        'Посчитай, сколько недель тебе положено по шкале твоего кантона и году работы.',
+        'Попроси копию полиса Krankentaggeld: сколько процентов, сколько дней ожидания.',
+        'Пришло увольнение во время болезни — проверь срок защиты и обратись в профсоюз.',
+        'Несчастный случай — сразу сообщи работодателю и скажи врачу, что это Unfall.',
+    ],
+    pomosh=dict(ids=['unia', 'syna', 'vpod', 'ombpv', 'anwalt'], k='arb', t='По спорам о зарплате при болезни и увольнении помогут профсоюз и бесплатная правовая справка по трудовому праву.'),
+    tools={'bolezn-zarplata': 'Посчитай свои недели полной зарплаты и срок защиты от увольнения по кантону и году работы.', 'uchet-vremeni': 'Дни болезни и рабочие часы — в табеле за месяц, пригодится при споре.'},
+    related=['trudovoe-pravo', 'bolezn-travma', 'profsoyuzy', 'poterya-raboty'],
+    sources=[
+        ('SECO — работник не может работать (FAQ)', 'https://www.seco.admin.ch/seco/de/home/Arbeit/Personenfreizugigkeit_Arbeitsbeziehungen/Arbeitsrecht/FAQ_zum_privaten_Arbeitsrecht/verhinderung-des-arbeitnehmers-an-der-arbeitsleistung.html'),
+        ('ch.ch — нетрудоспособность', 'https://www.ch.ch/de/arbeit/arbeitsunfahigkeit/'),
+        ('BAG — добровольная страховка дневных пособий', 'https://www.bag.admin.ch/de/krankenversicherung-die-freiwillige-taggeldversicherung'),
+        ('Suva — страховая защита, 2026', 'https://www.suva.ch/de-ch/download/dokument/ihr-suva-versicherungsschutz-das-muessen-sie-wissen/ihr-suva-versicherungsschutz-das-muessen-sie-wissen--1807.d'),
+        ('BSV — пособие по материнству', 'https://www.bsv.admin.ch/de/eo-bei-mutterschaft'),
+        ('KMU-Portal — беременность и материнство на работе', 'https://www.kmu.admin.ch/kmu/de/home/praktisches-wissen/personal/arbeitsrecht/arbeitszeit/schwangerschaft-und-mutterschaft.html'),
+        ('law.ch — шкалы выплаты зарплаты (обзор)', 'https://law.ch/wp-content/uploads/2022/09/001_uebersicht-lohnfortzahlung-skalen.pdf'),
+    ],
+    terms=[('Deutsch', 'Lohnfortzahlung, Berner Skala, Zürcher Skala, Basler Skala, Krankentaggeldversicherung, Wartefrist, Arztzeugnis, Arbeitsunfähigkeit, Sperrfrist, Kündigungsschutz, Berufsunfall, Nichtberufsunfall, UVG-Taggeld, Mutterschaftsentschädigung'), ('Français', 'maintien du salaire, échelle bernoise, assurance indemnité journalière maladie, délai d’attente, certificat médical, incapacité de travail, délai de protection, accident professionnel, accident non professionnel, allocation de maternité'), ('Italiano', 'continuazione del pagamento del salario, scala bernese, indennità giornaliera di malattia, periodo d’attesa, certificato medico, incapacità lavorativa, periodo di protezione, infortunio professionale, indennità di maternità'), ('English', 'continued pay when sick, sickness daily allowance, waiting period, medical certificate, incapacity for work, protection period, occupational accident, maternity allowance')],
+)
+
+ARTICLES['sozialhilfe'] = dict(
+    h1='Социальная помощь в Швейцарии (Sozialhilfe): <em>кто получает, сколько, и что будет с пермитом</em>',
+    seo='Социальная помощь в Швейцарии (Sozialhilfe): сумма 2026, обязанности, пермит B и C',
+    desc='Социальная помощь в Швейцарии простыми словами на русском: кто решает (община и кантон), сколько дают на жизнь по нормам SKOS (1061 франк на одного человека), что оплачивают отдельно, обязанности и возврат, обязаны ли помогать родственники, как помощь влияет на пермит B и C и на натурализацию, что проверить до обращения: RAV, скидка на медстраховку, консультация по долгам, Caritas. По-немецки Sozialhilfe, Grundbedarf, Sozialamt, по-французски aide sociale, по-итальянски assistenza sociale.',
+    lead='Социальная помощь — последняя сеть безопасности, когда денег не хватает на самое необходимое и других выплат нет. Она помогает, но для иностранцев может иметь последствия для пермита. Здесь — как это устроено и что проверить раньше.',
+    kanton=['sozial'],
+    body='''
+<nav class="toc" aria-label="Содержание"><b>В этой статье</b>
+<ul>
+  <li><a href="#snachala">Что проверить раньше</a></li>
+  <li><a href="#kto">Кто решает и куда идти</a></li>
+  <li><a href="#skolko">Сколько дают</a></li>
+  <li><a href="#obyazannosti">Обязанности и возврат</a></li>
+  <li><a href="#rodstvenniki">Должны ли помогать родственники</a></li>
+  <li><a href="#permit">Что будет с пермитом</a></li>
+  <li><a href="#status-s">Статус S и F</a></li>
+</ul></nav>
+
+<h2 id="snachala">Что проверить раньше</h2>
+<p>Социальная помощь выплачивается, только если других денег нет. Поэтому сначала:</p>
+<ul class="ul">
+  <li><b>Пособие по безработице (ALV).</b> Работала 12 месяцев за последние 2 года — регистрируйся в RAV не позже первого дня без работы (<a href="https://www.ch.ch/de/versicherungen/arbeitslosenversicherung/">ch.ch</a>). Подробно — в теме «Потеря работы и RAV».</li>
+  <li><b>Скидка на медстраховку (Prämienverbilligung)</b> — при низком доходе кантон платит часть взноса. В одних кантонах автоматически, в других по заявлению (<a href="https://www.bag.admin.ch/de/krankenversicherung-praemienverbilligung">BAG</a>).</li>
+  <li><b>Алименты.</b> Бывший партнёр не платит — кантон может выплачивать алименты на ребёнка авансом (Alimentenbevorschussung).</li>
+  <li><b>Консультация по долгам</b> — бесплатно: <a href="https://schulden.ch/fachstellen/">Schuldenberatung Schweiz</a>, телефон 0800 708 708. Подробно — в теме «Долги в Швейцарии и Betreibung».</li>
+  <li><b>Разовая помощь</b> — Caritas, Winterhilfe, церковные общины помогают с отдельными счетами, продуктами (магазины Caritas-Markt).</li>
+</ul>
+
+<h2 id="kto">Кто решает и куда идти</h2>
+<p>Социальная помощь — дело кантона и общины. Обращаются в социальную службу (Sozialamt, Sozialdienst) своей общины. Суммы почти везде считают по нормам Конференции по социальной помощи <a href="https://skos.ch/">SKOS</a>, но каждый кантон решает сам. Ссылка на страницу твоего кантона — в блоке «Твой кантон» выше.</p>
+<p>Что взять с собой: пермит, договор аренды, выписки со счетов, справки о доходах, полис медстраховки, счета и долги. Тебя спросят обо всех доходах и имуществе.</p>
+
+<h2 id="skolko">Сколько дают</h2>
+<p>Деньги на жизнь (Grundbedarf) — на еду, одежду, электричество, связь, транспорт, гигиену. По нормам SKOS с 2025 года (<a href="https://skos.ch/skos-richtlinien/grundbedarf-fuer-den-lebensunterhalt">SKOS</a>, суммы в Цюрихе и Аргау):</p>
+<div class="tbl"><table>
+<thead><tr><th>Человек в семье</th><th>CHF в месяц</th></tr></thead>
+<tbody><tr><td>1</td><td>1061</td></tr><tr><td>2</td><td>1624</td></tr><tr><td>3</td><td>1974</td></tr><tr><td>4</td><td>2271</td></tr><tr><td>5</td><td>2568</td></tr></tbody></table></div>
+<p><b>Отдельно оплачивают:</b> аренду (до предела, который установила община), медстраховку, нужные расходы на врачей. В кантонах суммы могут отличаться.</p>
+
+<h2 id="obyazannosti">Обязанности и возврат</h2>
+<ul class="ul">
+  <li>Ты обязана сообщать обо всех доходах и изменениях: новая работа, наследство, переезд. Скрыть доход — это мошенничество, деньги потребуют назад и могут завести уголовное дело.</li>
+  <li>Обычно требуют искать работу, ходить на курсы и программы интеграции.</li>
+  <li><b>Возврат.</b> Если позже появятся большие деньги (наследство, выигрыш) или помощь получена неправомерно — её нужно вернуть. Из обычной зарплаты в большинстве кантонов не требуют, но правила разные — спроси в своём Sozialamt.</li>
+</ul>
+
+<h2 id="rodstvenniki">Должны ли помогать родственники</h2>
+<p>Только родственники по прямой линии — родители, дети, бабушки и дедушки — и <b>только если они состоятельны</b>. Например, в Цюрихе одинокий человек считается обязанным при налогооблагаемом доходе от 120 000 франков в год. Братья и сёстры, тёти и дяди не обязаны (<a href="https://www.zh.ch/de/soziales/sozialhilfe/sozialhilfehandbuch/flexdata-definition/17-ansprueche-gegenueber-dritten/17-3-verwandtenunterstuetzungspflicht/17-3-01-verwandtenunterstuetzungspflicht--allgemeine-ausfuehrungen.html">Кантон Цюрих</a>).</p>
+
+<h2 id="permit">Что будет с пермитом</h2>
+<ul class="ul">
+  <li><b>Автоматически пермит не отбирают.</b> Миграционная служба смотрит на всю ситуацию и причины: болезнь, кризис, маленький ребёнок (<a href="https://www.sem.admin.ch/sem/de/home/themen/aufenthalt/faq.html">SEM</a>).</li>
+  <li><b>Пермит B</b> могут не продлить или отозвать, если ты зависишь от помощи и это соразмерно. Миграционные службы получают сообщения от соцслужб: в Цюрихе — начиная примерно с 25 000 франков помощи.</li>
+  <li><b>Пермит C</b> — только при долгой и большой зависимости, ориентир — больше 80 000 франков за два-три года. Вместо отзыва C могут заменить на B.</li>
+  <li>Обычно не вредят: скидка на медстраховку, аванс алиментов, курсы интеграции.</li>
+  <li>После рождения ребёнка обычно ожидают, что в течение года ты снова будешь работать.</li>
+  <li><b>Натурализация:</b> подать заявление можно, если за последние 3 года не получала социальную помощь или всё вернула. Подробно — в теме «Гражданство Швейцарии и натурализация».</li>
+</ul>
+<p>Пермит под угрозой — сразу к юристу по миграционному праву или в консультацию UFS (право социальной помощи), до ответа миграционной службе.</p>
+
+<h2 id="status-s">Статус S и F</h2>
+<p>Для статуса S, беженцев и временно принятых (F) — отдельная помощь по линии убежища (Asylsozialhilfe). Ставки ниже обычных и зависят от кантона, жильё и медстраховка оплачиваются отдельно. Правила возврата похожи (<a href="https://skos.ch/themen/gefluechtete-aus-der-ukraine/fragen-und-antworten-zu-schutzstatus-s">SKOS</a>). Подробно — в теме «Статус S для украинцев».</p>
+''',
+    steps=[
+        'Сначала проверь RAV, скидку на медстраховку, аванс алиментов и бесплатную консультацию по долгам.',
+        'Не хватает на жизнь — иди в социальную службу своей общины с пермитом, договором аренды и выписками.',
+        'Сообщай обо всех доходах и изменениях — иначе потребуют вернуть деньги.',
+        'Пермит B или C — спроси юриста, как помощь скажется на продлении, до ответа миграционной службе.',
+        'Планируешь натурализацию — помни про 3 года без социальной помощи.',
+    ],
+    pomosh=dict(ids=['ufs', 'caritas', 'budget', 'gemeinde'], t='По праву социальной помощи бесплатно консультирует UFS, с долгами и бюджетом помогут Caritas и Budgetberatung.'),
+    tools={'moj-budget': 'Все обязательные расходы в месяц — чтобы увидеть, где можно сэкономить и чего не хватает.'},
+    related=['poterya-raboty', 'betreibung', 'permit-b', 'permit-c', 'status-s'],
+    sources=[
+        ('SKOS — основная сумма на жизнь', 'https://skos.ch/skos-richtlinien/grundbedarf-fuer-den-lebensunterhalt'),
+        ('Кантон Цюрих — справочник социальной помощи, суммы', 'https://www.zh.ch/de/soziales/sozialhilfe/sozialhilfehandbuch/flexdata-definition/7-materielle-grundsicherung-wsh/7-1-grundbedarf-gbl/7-1-05-betraege-fuer-den-grundbedarf-fuer-den-lebensunterhalt.html'),
+        ('Кантон Аргау — справочник, основная сумма', 'https://www.ag.ch/de/themen/soziales-gesellschaft/soziale-sicherheit/handbuch-soziales/7-materielle-grundsicherung/7-1-grundbedarf/7-1-1-grundbedarf'),
+        ('Кантон Цюрих — обязанность родственников', 'https://www.zh.ch/de/soziales/sozialhilfe/sozialhilfehandbuch/flexdata-definition/17-ansprueche-gegenueber-dritten/17-3-verwandtenunterstuetzungspflicht/17-3-01-verwandtenunterstuetzungspflicht--allgemeine-ausfuehrungen.html'),
+        ('SEM — вопросы о пребывании (социальная помощь)', 'https://www.sem.admin.ch/sem/de/home/themen/aufenthalt/faq.html'),
+        ('SKOS — статус S, вопросы и ответы', 'https://skos.ch/themen/gefluechtete-aus-der-ukraine/fragen-und-antworten-zu-schutzstatus-s'),
+        ('ch.ch — страхование по безработице', 'https://www.ch.ch/de/versicherungen/arbeitslosenversicherung/'),
+        ('BAG — скидка на взносы медстраховки', 'https://www.bag.admin.ch/de/krankenversicherung-praemienverbilligung'),
+        ('Schuldenberatung Schweiz — консультации', 'https://schulden.ch/fachstellen/'),
+    ],
+    terms=[('Deutsch', 'Sozialhilfe, Sozialamt, Sozialdienst, Grundbedarf für den Lebensunterhalt, Mietzinslimite, Mitwirkungspflicht, Rückerstattung, Verwandtenunterstützung, Prämienverbilligung, Alimentenbevorschussung, Asylsozialhilfe, Nothilfe'), ('Français', 'aide sociale, service social, forfait pour l’entretien, obligation de collaborer, remboursement, dette alimentaire des parents, réduction des primes, avance sur pensions alimentaires, aide d’urgence'), ('Italiano', 'assistenza sociale, servizio sociale, fabbisogno di base, obbligo di collaborare, restituzione, obbligo di assistenza dei parenti, riduzione dei premi, anticipo degli alimenti'), ('English', 'social assistance, social services, basic needs allowance, duty to cooperate, repayment, support obligation of relatives, premium reduction')],
+)
+
+ARTICLES['kesb'] = dict(
+    h1='KESB в Швейцарии: <em>что это за служба, когда она приходит и как защищать свои права</em>',
+    seo='KESB в Швейцарии: защита детей и взрослых, Beistandschaft, Vorsorgeauftrag',
+    desc='KESB (Kindes- und Erwachsenenschutzbehörde) простыми словами на русском: что это за ведомство, когда оно вмешивается (сообщение об угрозе ребёнку), какие бывают меры — от совета до куратора (Beistandschaft), права родителей, жалоба в течение 30 дней и бесплатный юрист, совместная опека для неженатых родителей, доверенность на случай недееспособности (Vorsorgeauftrag) и распоряжение пациента. Где бесплатно помогут: KESCHA. По-немецки KESB, Gefährdungsmeldung, Beistandschaft, по-французски APEA, curatelle, по-итальянски ARP, curatela.',
+    lead='О KESB в русскоязычных чатах рассказывают страшные истории. На деле это ведомство, которое защищает детей и взрослых, которые сами не справляются, — и в большинстве случаев оно помогает семье, а не забирает детей. Здесь — как оно работает и какие у тебя права.',
+    kanton=['kesb'],
+    body='''
+<nav class="toc" aria-label="Содержание"><b>В этой статье</b>
+<ul>
+  <li><a href="#chto">Что такое KESB</a></li>
+  <li><a href="#kogda">Когда KESB вмешивается</a></li>
+  <li><a href="#mery">Какие бывают меры</a></li>
+  <li><a href="#prava">Твои права</a></li>
+  <li><a href="#mify">Мифы</a></li>
+  <li><a href="#opeka">Совместная опека неженатых родителей</a></li>
+  <li><a href="#vorsorge">Доверенность на случай недееспособности</a></li>
+</ul></nav>
+
+<h2 id="chto">Что такое KESB</h2>
+<p>KESB (Kindes- und Erwachsenenschutzbehörde, во франкоязычных кантонах APEA, в Тичино ARP) — ведомство по защите детей и взрослых. Решения принимают три специалиста: юрист, социальный работник, психолог или педагог. В одних кантонах это суд, в других — отдельное ведомство (<a href="https://kescha.ch/de/kesr-abc/">KESCHA</a>). Ссылка на KESB твоего кантона — в блоке «Твой кантон» выше.</p>
+<p>Цель KESB в защите ребёнка — не наказать родителей, а сделать так, чтобы ребёнку было хорошо. Виноваты родители или нет — не важно (<a href="https://www.kokes.ch/application/files/9114/9390/8357/Merkblatt_Kindesschutz_normale_Sprache.pdf">KOKES</a>).</p>
+
+<h2 id="kogda">Когда KESB вмешивается</h2>
+<ul class="ul">
+  <li>Кто угодно может сообщить в KESB, что ребёнку или взрослому нужна помощь (Gefährdungsmeldung): школа, врач, соседи, родственники. Получив сообщение, KESB обязана проверить.</li>
+  <li>Вмешивается, если есть серьёзная возможность, что ребёнку плохо: насилие, заброшенность, тяжёлый конфликт родителей, зависимость, психическая болезнь родителя, которой не лечат.</li>
+  <li>Сначала KESB выясняет ситуацию: говорит с родителями и ребёнком, иногда просит социальную службу посмотреть. Если семья справляется сама или с добровольной помощью — мер не будет.</li>
+</ul>
+
+<h2 id="mery">Какие бывают меры — от мягкой к строгой</h2>
+<ol class="ol">
+  <li><b>Совет, указание, наблюдение</b> — например, ходить на консультацию.</li>
+  <li><b>Куратор (Beistandschaft)</b> — самая частая мера. Куратор помогает семье: с учёбой ребёнка, отношениями между родителями, контактами с отцом. Родители остаются родителями.</li>
+  <li><b>Лишение права решать, где живёт ребёнок</b> — ребёнка временно устраивают в другую семью или учреждение. Бывает нечасто.</li>
+  <li><b>Лишение родительских прав</b> — очень редко.</li>
+</ol>
+<p>KESB выбирает самую мягкую меру, которая помогает. Для взрослых бывают разные виды кураторства: от поддержки, при которой ты сама решаешь всё, до полного представительства.</p>
+
+<h2 id="prava">Твои права</h2>
+<ul class="ul">
+  <li><b>Право быть выслушанной</b> и посмотреть документы дела. Можно прийти с доверенным человеком и переводчиком — скажи заранее, что тебе нужен переводчик.</li>
+  <li><b>Ребёнка тоже слушают</b> — обычно с 6 лет, по зрелости и раньше. При споре о том, где он будет жить, ему могут назначить своего представителя.</li>
+  <li><b>Жалоба (Beschwerde)</b> — письменно в суд, который указан в решении, <b>в течение 30 дней</b> со дня получения, при принудительном помещении в учреждение — 10 дней. Сроки не продлевают. Юрист для жалобы не обязателен.</li>
+  <li><b>Бесплатный юрист</b> — если нет денег, можно попросить бесплатное ведение дела (unentgeltliche Rechtspflege).</li>
+  <li>Решения KESB могут быть платными, сумма зависит от кантона.</li>
+</ul>
+<p>Не согласна с KESB или не понимаешь, что происходит, — позвони в <a href="https://kescha.ch/de/kesr-abc/">KESCHA</a>: независимая бесплатная консультация по телефону +41 44 273 96 96 (пн–чт 9:00–11:30 и 14:00–16:30, пт 14:00–16:30).</p>
+
+<h2 id="mify">Мифы</h2>
+<ul class="ul">
+  <li><b>«KESB легко забирает детей».</b> Нет: это редкая и последняя мера. Чаще всего KESB назначает куратора, который помогает семье.</li>
+  <li><b>«Куратор — значит отберут ребёнка».</b> Нет: куратор поддерживает родителей.</li>
+  <li><b>«KESB наказывает родителей».</b> Нет: её задача — защита ребёнка, а не наказание.</li>
+  <li><b>«Лучше не открывать дверь и не отвечать».</b> Наоборот: сотрудничество — лучший способ показать, что ребёнку дома хорошо. Отвечай на письма, приходи на встречи, проси перевод.</li>
+</ul>
+
+<h2 id="opeka">Совместная опека неженатых родителей</h2>
+<ul class="ul">
+  <li>Если родители не женаты, при рождении опека только у матери. Отец признаёт ребёнка в отделе записи актов гражданского состояния (Zivilstandsamt), можно и до рождения.</li>
+  <li>Совместную опеку родители заявляют вместе — в Zivilstandsamt при признании или позже в KESB (<a href="https://www.ch.ch/de/familie-und-partnerschaft/mutterschaft-und-vaterschaft/schwangerschaft-und-geburt/elterliche-sorge-nicht-verheiratete-eltern/">ch.ch</a>).</li>
+  <li>Если один против — второй обращается в KESB, и она обычно назначает совместную опеку, если это не вредит ребёнку.</li>
+  <li>Договор об алиментах на ребёнка между неженатыми родителями становится обязательным после одобрения KESB. Подробно — в теме «Брак, развод и алименты».</li>
+</ul>
+
+<h2 id="vorsorge">Доверенность на случай недееспособности (Vorsorgeauftrag)</h2>
+<ul class="ul">
+  <li><b>Vorsorgeauftrag</b> — ты заранее решаешь, кто будет вести твои дела и деньги и представлять тебя, если ты не сможешь (болезнь, несчастный случай). Без неё решение может принимать KESB.</li>
+  <li><b>Форма:</b> целиком от руки, с датой и подписью, или у нотариуса. Напечатанный текст с подписью недействителен.</li>
+  <li>В отделе записи актов гражданского состояния можно зарегистрировать, что доверенность есть и где она хранится, — цену спроси там.</li>
+  <li><b>Распоряжение пациента (Patientenverfügung)</b> — какое лечение ты хочешь и не хочешь, если не сможешь сказать сама, и кто решает за тебя. Носи с собой карточку, что оно есть.</li>
+</ul>
+''',
+    steps=[
+        'Пришло письмо от KESB — не игнорируй: ответь, приходи на встречу, попроси переводчика.',
+        'Не понимаешь, что происходит, — позвони в KESCHA: бесплатно и независимо.',
+        'Не согласна с решением — жалоба в суд в течение 30 дней, можно попросить бесплатного юриста.',
+        'Не женаты — заявите совместную опеку при признании ребёнка в Zivilstandsamt.',
+        'Напиши от руки доверенность на случай недееспособности — для себя и пожилых родителей.',
+    ],
+    pomosh=dict(ids=['anwalt', 'beob', 'gemeinde'], t='Независимо и бесплатно по вопросам KESB консультирует KESCHA, по жалобе помогут юристы и справочные адвокатов.'),
+    tools={'moi-emocii': 'Записывай, что чувствуешь и что помогает, — пригодится для себя и в разговоре с психологом.'},
+    related=['brak-razvod', 'psihoterapiya', 'kita-detsad', 'sozialhilfe'],
+    sources=[
+        ('KESCHA — азбука защиты детей и взрослых', 'https://kescha.ch/de/kesr-abc/'),
+        ('KOKES — памятка о защите детей простым языком', 'https://www.kokes.ch/application/files/9114/9390/8357/Merkblatt_Kindesschutz_normale_Sprache.pdf'),
+        ('KOKES — ребёнок в процессе', 'https://www.kokes.ch/application/files/4614/6167/3624/Das_Kind_im_Verfahren.pdf'),
+        ('KOKES — новые инструменты: Vorsorgeauftrag и распоряжение пациента', 'https://www.kokes.ch/application/files/7814/6166/9124/Die_neuen_Instrumente.pdf'),
+        ('KESCHA — сколько стоит процедура и юрист', 'https://kescha.ch/de/erklaerungen-zum-kindes-und-erwachsenenschutz/erklaerungen-zum-kindesschutz/was-kostet-ein-verfahren-und-was-kostet-ein-anwalt.php'),
+        ('ch.ch — опека неженатых родителей', 'https://www.ch.ch/de/familie-und-partnerschaft/mutterschaft-und-vaterschaft/schwangerschaft-und-geburt/elterliche-sorge-nicht-verheiratete-eltern/'),
+    ],
+    terms=[('Deutsch', 'KESB, Gefährdungsmeldung, Kindesschutz, Erwachsenenschutz, Beistandschaft, Beistand, Aufenthaltsbestimmungsrecht, elterliche Sorge, Obhut, Kindesvertretung, Beschwerde, unentgeltliche Rechtspflege, fürsorgerische Unterbringung, Vorsorgeauftrag, Patientenverfügung'), ('Français', 'APEA, signalement, protection de l’enfant, curatelle, curateur, droit de déterminer le lieu de résidence, autorité parentale, garde, recours, assistance judiciaire, placement à des fins d’assistance, mandat pour cause d’inaptitude, directives anticipées'), ('Italiano', 'ARP, segnalazione, protezione dei minori, curatela, curatore, autorità parentale, custodia, ricorso, assistenza giudiziaria, mandato precauzionale, direttive del paziente'), ('English', 'child and adult protection authority, report of concern, deputyship, parental authority, custody, appeal, legal aid, advance care mandate, advance healthcare directive')],
+    post='Это жалоба на решение KESB, ответ на её письмо и заявление о бесплатном юристе.',
+    post2='Срок жалобы считается со дня, когда ты получила решение, поэтому храни конверт и квитанцию.',
+)
+
+
+# ===== Брак и развод, община и переезд, ферайны (08.10.2026). Факты сверены 08.10.2026: BJ, ch.ch, BSV, SEM, Serafe, кантоны ZH, AG, BS, SO, TG, BL, BGE 147 III 265.
+ARTICLES['brak-razvod'] = dict(
+    h1='Брак, развод и алименты в Швейцарии: <em>документы, имущество, дети и пермит</em>',
+    seo='Брак и развод в Швейцарии: документы для свадьбы, раздел имущества, алименты (Scheidung)',
+    desc='Брак и развод в Швейцарии простыми словами на русском: как пожениться иностранцам (подготовка в Zivilstandsamt, документы с апостилем, 300–400 франков), признание брака из-за границы, фамилия, раздел имущества по умолчанию, брачный договор у нотариуса; развод по совместному заявлению или через 2 года раздельной жизни, раздел пенсии и AHV, совместная опека и алименты на ребёнка, помощь кантона во взыскании и аванс алиментов; что будет с пермитом после развода (3 года брака, насилие); неженатые родители. По-немецки Heirat, Scheidung, Unterhalt, по-французски mariage, divorce, pension alimentaire, по-итальянски matrimonio, divorzio, alimenti.',
+    lead='Свадьба, развод или ребёнок без брака в Швейцарии — это не только чувства, но и документы, деньги и для иностранцев — пермит. Здесь — главное по шагам, без юридического языка.',
+    body='''
+<nav class="toc" aria-label="Содержание"><b>В этой статье</b>
+<ul>
+  <li><a href="#svadba">Пожениться в Швейцарии</a></li>
+  <li><a href="#zagranica">Брак из-за границы</a></li>
+  <li><a href="#familiya">Фамилия</a></li>
+  <li><a href="#imushchestvo">Имущество супругов</a></li>
+  <li><a href="#razvod">Развод</a></li>
+  <li><a href="#pensiya">Пенсия при разводе</a></li>
+  <li><a href="#deti">Дети и алименты</a></li>
+  <li><a href="#permit">Пермит после развода</a></li>
+  <li><a href="#bez-braka">Ребёнок без брака</a></li>
+</ul></nav>
+
+<h2 id="svadba">Пожениться в Швейцарии</h2>
+<ol class="ol">
+  <li><b>Подготовка (Ehevorbereitungsverfahren)</b> — в отделе записи актов гражданского состояния (Zivilstandsamt) по месту жительства одного из вас. Сначала спроси, какие документы нужны именно тебе: это зависит от страны (<a href="https://www.ch.ch/de/familie-und-partnerschaft/heirat--konkubinat--partenariat/heiraten/">ch.ch</a>).</li>
+  <li><b>Документы иностранца:</b> паспорт, справка о проживании, свидетельство о рождении, справка о семейном положении (что ты не замужем) или документы о разводе, подтверждение гражданства. Обычно не старше 6 месяцев, с апостилем или легализацией и переводом на немецкий, французский или итальянский (<a href="https://www.bj.admin.ch/de/faq-eheschliessung-ehe-fuer-alle">BJ</a>).</li>
+  <li><b>Законное пребывание</b> в Швейцарии до дня свадьбы — пермит или виза.</li>
+  <li>Оба подписываете заявление, что препятствий нет. После положительного решения у вас <b>3 месяца</b> на свадьбу.</li>
+  <li><b>Церемония</b> в Zivilstandsamt с двумя совершеннолетними свидетелями. Всего обычно 300–400 франков, в субботу дороже.</li>
+</ol>
+<p>С 1 июля 2022 года пожениться могут и однополые пары. Новые зарегистрированные партнёрства больше не заключают, прежние можно превратить в брак.</p>
+
+<h2 id="zagranica">Брак из-за границы</h2>
+<p>Брак, действительный в другой стране, в Швейцарии в принципе признаётся. Чтобы он был в швейцарском реестре, его регистрирует кантон: обычно через миграционную службу или Zivilstandsamt твоего кантона, документы — с апостилем и переводом (<a href="https://www.bj.admin.ch/dam/data/bj/gesellschaft/zivilstand/merkblaetter/ehe/auslandehe-d.pdf">BJ</a>).</p>
+
+<h2 id="familiya">Фамилия</h2>
+<ul class="ul">
+  <li>С 2013 года каждый оставляет свою фамилию. Можно выбрать одну общую фамилию семьи — заявить об этом при свадьбе.</li>
+  <li>Двойную фамилию без дефиса в реестр не вносят. Фамилию через дефис (Müller-Kovalenko) можно указать в паспорте, но это не официальная фамилия.</li>
+  <li>Дети получают общую фамилию, а при разных фамилиях — ту, которую вы выбрали при свадьбе.</li>
+  <li>После развода можно в любой момент вернуть фамилию до брака — заявлением в Zivilstandsamt.</li>
+</ul>
+
+<h2 id="imushchestvo">Имущество супругов</h2>
+<ul class="ul">
+  <li><b>По умолчанию</b> (Errungenschaftsbeteiligung): что было до брака, подарки и наследство — твоё. Что заработано в браке — при разводе делится пополам (<a href="https://www.ch.ch/de/familie-und-partnerschaft/heirat--konkubinat--partenariat/wirtschaftliche-folgen-der-ehe-guterstand/">ch.ch</a>).</li>
+  <li><b>Раздельное имущество</b> или <b>общее имущество</b> — только по брачному договору у нотариуса.</li>
+  <li>Налоги супруги платят вместе, независимо от режима имущества.</li>
+</ul>
+
+<h2 id="razvod">Развод</h2>
+<ul class="ul">
+  <li><b>По совместному заявлению</b> — оба согласны и договорились о детях, деньгах и имуществе. Подаёте в суд по месту жительства заявление и соглашение. Без ожидания, обычно 3–4 месяца (<a href="https://www.ch.ch/de/familie-und-partnerschaft/scheidung/scheidungsverfahren/">ch.ch</a>).</li>
+  <li><b>По иску одного</b> — если второй не согласен: после <b>2 лет раздельной жизни</b>, раньше — только по серьёзной причине, например при насилии. Суд решает всё сам, это может длиться долго.</li>
+  <li>Адвокат не обязателен, но при споре очень полезен. Суд стоит примерно 1000–4000 франков. Нет денег — можно попросить бесплатное ведение дела (unentgeltliche Rechtspflege).</li>
+  <li>Пока развод не начался, можно договориться о раздельной жизни через суд (Eheschutz) — например, о детях и алиментах.</li>
+</ul>
+
+<h2 id="pensiya">Пенсия при разводе</h2>
+<ul class="ul">
+  <li><b>Пенсионная касса (BVG):</b> то, что накоплено за брак, делится, как правило, пополам — на дату начала развода (<a href="https://www.bsv.admin.ch/de/scheidung">BSV</a>).</li>
+  <li><b>3a</b> — по режиму имущества: накопленное в браке обычно пополам.</li>
+  <li><b>AHV:</b> доходы обоих за годы брака делятся поровну (splitting). Подай заявление в свою кассу AHV сразу после развода.</li>
+</ul>
+
+<h2 id="deti">Дети и алименты</h2>
+<ul class="ul">
+  <li><b>Совместная опека</b> (elterliche Sorge) — правило и после развода. Это не значит, что ребёнок живёт у обоих поровну — где он живёт (Obhut), решаете вы или суд.</li>
+  <li><b>Алименты на ребёнка</b> — до совершеннолетия, при учёбе дольше. Считают по методу Федерального суда 2021 года: доходы, потребности, минимум каждого, потом остаток (<a href="https://servat.unibe.ch/dfr/bge/c3147265.html">BGE 147 III 265</a>). В алименты входит и плата за уход за ребёнком (Betreuungsunterhalt) — если из-за ребёнка ты работаешь меньше.</li>
+  <li><b>Алименты бывшему супругу</b> — не всегда: зависит от длины брака, возраста, детей и того, кто как зарабатывал.</li>
+  <li><b>Не платит?</b> В каждом кантоне есть служба, которая бесплатно помогает взыскать алименты (Inkassohilfe, с 2022 года по единым правилам). Кантон может выплачивать алименты на ребёнка <b>авансом</b> (Alimentenbevorschussung) — условия и суммы свои в каждом кантоне (<a href="https://www.zh.ch/alimentenhilfe">пример Цюриха</a>).</li>
+</ul>
+
+<h2 id="permit">Пермит после развода</h2>
+<ul class="ul">
+  <li>О разводе или раздельной жизни нужно сообщить в миграционную службу кантона.</li>
+  <li><b>Пермит C</b> остаётся.</li>
+  <li><b>Пермит B через брак</b> (не ЕС): продлят, если брак с совместной жизнью в Швейцарии длился <b>не меньше 3 лет</b> и ты интегрирована — работа или учёба, язык, соблюдение порядка. Или если есть <b>важные личные причины</b>: насилие в браке, принудительный брак, очень трудное возвращение на родину (<a href="https://www.sem.admin.ch/dam/sem/de/data/rechtsgrundlagen/weisungen/auslaender/chronologie/2025-01-01-weisungsaenderung-aig.pdf.download.pdf/2025-01-01-weisungsaenderung-aig-d.pdf">SEM, 2025</a>).</li>
+  <li>Пострадала от насилия — собирай доказательства (справки врача, полиции, консультаций) и обратись в <a href="https://www.opferhilfe-schweiz.ch">Opferhilfe</a>, телефон <a href="tel:142">142</a>.</li>
+</ul>
+
+<h2 id="bez-braka">Ребёнок без брака</h2>
+<ul class="ul">
+  <li>Отец признаёт ребёнка в Zivilstandsamt — лично, можно до рождения (<a href="https://www.bj.admin.ch/de/faq-kindesanerkennung">BJ</a>).</li>
+  <li>Совместную опеку вы заявляете вместе там же или позже в KESB. Если один против — решает KESB.</li>
+  <li>Договор об алиментах на ребёнка становится обязательным после одобрения KESB. Подробно — в теме «KESB».</li>
+  <li>Неженатые партнёры не наследуют друг друга и не получают алиментов друг от друга — подумайте о завещании и договоре о совместной жизни.</li>
+</ul>
+''',
+    steps=[
+        'Перед свадьбой спроси в Zivilstandsamt список документов именно для своей страны и закажи их с апостилем.',
+        'Брак из-за границы — зарегистрируй его в кантоне, чтобы он был в швейцарском реестре.',
+        'Расстаётесь — договоритесь о детях, деньгах и пенсии письменно, тогда развод быстрый и дешёвый.',
+        'Пермит через брак — посчитай, есть ли 3 года совместной жизни, и сообщи о разводе в миграционную службу.',
+        'Алименты не платят — обратись в кантональную службу взыскания и узнай об авансе алиментов.',
+    ],
+    pomosh=dict(ids=['anwalt', 'opfer', 'beob', 'gemeinde'], t='По разводу и алиментам бесплатно помогут справочные адвокатов, при насилии — Opferhilfe.'),
+    tools={'grazhdanstvo-shema': 'Брак со швейцарцем сокращает путь к паспорту — схема покажет, сколько лет осталось.'},
+    related=['kesb', 'grazhdanstvo', 'permit-b', 'pensiya'],
+    sources=[
+        ('ch.ch — пожениться', 'https://www.ch.ch/de/familie-und-partnerschaft/heirat--konkubinat--partenariat/heiraten/'),
+        ('BJ — вопросы о браке и браке для всех, 19.03.2026', 'https://www.bj.admin.ch/de/faq-eheschliessung-ehe-fuer-alle'),
+        ('BJ — признание брака из-за границы', 'https://www.bj.admin.ch/dam/data/bj/gesellschaft/zivilstand/merkblaetter/ehe/auslandehe-d.pdf'),
+        ('ch.ch — имущество супругов', 'https://www.ch.ch/de/familie-und-partnerschaft/heirat--konkubinat--partenariat/wirtschaftliche-folgen-der-ehe-guterstand/'),
+        ('ch.ch — процедура развода', 'https://www.ch.ch/de/familie-und-partnerschaft/scheidung/scheidungsverfahren/'),
+        ('ch.ch — последствия развода', 'https://www.ch.ch/de/familie-und-partnerschaft/scheidung/folgen-einer-scheidung/'),
+        ('BSV — развод и пенсия', 'https://www.bsv.admin.ch/de/scheidung'),
+        ('Федеральный суд — метод расчёта алиментов (BGE 147 III 265)', 'https://servat.unibe.ch/dfr/bge/c3147265.html'),
+        ('Кантон Цюрих — помощь с алиментами', 'https://www.zh.ch/alimentenhilfe'),
+        ('SEM — изменения указаний AIG с 01.01.2025', 'https://www.sem.admin.ch/dam/sem/de/data/rechtsgrundlagen/weisungen/auslaender/chronologie/2025-01-01-weisungsaenderung-aig.pdf.download.pdf/2025-01-01-weisungsaenderung-aig-d.pdf'),
+        ('BJ — признание ребёнка', 'https://www.bj.admin.ch/de/faq-kindesanerkennung'),
+    ],
+    terms=[('Deutsch', 'Zivilstandsamt, Ehevorbereitungsverfahren, Trauung, Trauzeugen, Eheurkunde, Familienname, Güterstand, Errungenschaftsbeteiligung, Ehevertrag, Scheidung auf gemeinsames Begehren, Scheidungsklage, Eheschutz, Vorsorgeausgleich, AHV-Splitting, elterliche Sorge, Obhut, Kindesunterhalt, Betreuungsunterhalt, Inkassohilfe, Alimentenbevorschussung, Kindesanerkennung, Konkubinat'), ('Français', 'office de l’état civil, procédure préparatoire, mariage, témoins, nom de famille, régime matrimonial, participation aux acquêts, contrat de mariage, divorce sur requête commune, mesures protectrices, partage de la prévoyance, splitting AVS, autorité parentale, garde, contribution d’entretien, aide au recouvrement, avance sur pensions alimentaires, reconnaissance d’enfant'), ('Italiano', 'ufficio dello stato civile, procedura preparatoria, matrimonio, regime dei beni, contratto matrimoniale, divorzio su richiesta comune, conguaglio della previdenza, autorità parentale, custodia, contributo di mantenimento, aiuto all’incasso, anticipo degli alimenti, riconoscimento del figlio'), ('English', 'civil registry office, marriage preparation, marital property regime, prenuptial agreement, divorce by mutual consent, pension splitting, parental authority, custody, child maintenance, collection assistance, advance on maintenance, paternity recognition')],
+    post='Это заявление о разводе, сообщение о раздельной жизни в миграционную службу и требования по алиментам.',
+)
+
+ARTICLES['gemeinde'] = dict(
+    h1='Община (Gemeinde) и переезд: <em>регистрация за 14 дней, смена кантона и кого известить</em>',
+    seo='Переезд в Швейцарии: регистрация в общине (Anmeldung), смена кантона, чек-лист',
+    desc='Община (Gemeinde) и переезд в Швейцарии простыми словами на русском: что делает община, как встать на учёт (Anmeldung) в течение 14 дней и сняться с учёта (Abmeldung), какие документы взять, когда переезд в другой кантон с пермитом B нужно согласовать заранее, онлайн-переезд eUmzugCH, кого ещё известить: работодателя, медстраховку, почту (Nachsendeauftrag), банк, дорожное ведомство, школу; сдача квартиры и Serafe. По-немецки Gemeinde, Einwohnerkontrolle, Anmeldung, Umzug, по-французски commune, contrôle des habitants, déménagement, по-итальянски comune, controllo abitanti, trasloco.',
+    lead='Община — первое ведомство, с которым ты встречаешься в Швейцарии, и место, куда идут почти со всеми бытовыми вопросами. Здесь — что она делает, как зарегистрироваться и как переехать, ничего не забыв.',
+    body='''
+<nav class="toc" aria-label="Содержание"><b>В этой статье</b>
+<ul>
+  <li><a href="#chto">Что делает община</a></li>
+  <li><a href="#anmeldung">Регистрация: 14 дней</a></li>
+  <li><a href="#kanton">Переезд в другой кантон</a></li>
+  <li><a href="#online">Переезд онлайн</a></li>
+  <li><a href="#kogo">Кого ещё известить</a></li>
+  <li><a href="#kvartira">Старая и новая квартира</a></li>
+</ul></nav>
+
+<h2 id="chto">Что делает община</h2>
+<ul class="ul">
+  <li><b>Учёт жителей</b> (Einwohnerkontrolle, Einwohnerdienste): регистрация, справки о проживании, для иностранцев — приём документов на пермит.</li>
+  <li>Школа и детский сад, вывоз мусора, регистрация собаки и налог на неё, социальная служба, часто — налоговое бюро.</li>
+  <li>Община сама решает часть налога (налоговый коэффициент, Steuerfuss) — поэтому в соседних деревнях налоги разные.</li>
+  <li>Во многих общинах есть приветственная встреча, курсы языка и консультация для новых жителей — спроси при регистрации.</li>
+</ul>
+
+<h2 id="anmeldung">Регистрация: 14 дней</h2>
+<ul class="ul">
+  <li>Переехала — <b>встань на учёт в новой общине</b>, как правило, <b>в течение 14 дней</b>, и <b>снимись с учёта в старой</b> (<a href="https://www.ch.ch/de/wohnen/umzug/ab-und-anmelden-bei-der-wohngemeinde/">ch.ch</a>).</li>
+  <li><b>Что взять:</b> паспорт и пермит, договор аренды, полис медстраховки, документы о браке и детях. Швейцарцы — Heimatschein. Иностранцам при первой регистрации — фото для пермита. Точный список — на сайте общины.</li>
+  <li>Регистрация обычно стоит от 0 до нескольких десятков франков.</li>
+  <li>Иностранцу нельзя начинать работу, пока не подано заявление на разрешение — уточни при регистрации.</li>
+</ul>
+
+<h2 id="kanton">Переезд в другой кантон</h2>
+<ul class="ul">
+  <li><b>Пермит L или B</b> — переезд в другой кантон нужно <b>согласовать заранее</b>: подать заявление в миграционную службу нового кантона и дождаться решения (<a href="https://so.ch/verwaltung/departement-des-innern/migrationsamt/aufenthalt-und-integration/kantonswechsel/">пример Золотурна</a>). Не переезжай до решения.</li>
+  <li>С пермитом B право на смену кантона есть, если ты не безработная и нет причин для отзыва пермита. С пермитом C — если нет серьёзных нарушений.</li>
+  <li><b>Обычно просят:</b> заявление, паспорт, трудовой договор или справку о доходе, выписку из реестра долгов не старше 3 месяцев, подтверждение, что не получаешь социальную помощь, иногда — письмо с объяснением (<a href="https://migrationsamt.tg.ch/public/upload/assets/143315/Merkblatt_Kantonswechsel_%2816.11.2023%29.pdf?fp=5">пример Тургау</a>).</li>
+  <li>Статус S, F или N — переезд в другой кантон особенно сложен, спрашивай в миграционной службе.</li>
+</ul>
+
+<h2 id="online">Переезд онлайн (eUmzugCH)</h2>
+<p>Во многих кантонах и общинах переезд можно оформить онлайн на <a href="https://www.eumzug.swiss">eumzug.swiss</a>: сняться и встать на учёт без визита. Но для иностранцев он часто недоступен: например, в Базеле онлайн только для граждан Швейцарии и ЕС/ЕАСТ, в некоторых общинах — не для статусов S, F, N. Не получилось онлайн — иди лично.</p>
+
+<h2 id="kogo">Кого ещё известить</h2>
+<p>По <a href="https://www.ch.ch/de/wohnen/umzug/checkliste-fur-den-umzug/">чек-листу ch.ch</a>:</p>
+<ul class="ul">
+  <li><b>Работодатель</b> — новый адрес; на переезд обычно положен один свободный день.</li>
+  <li><b>Медстраховка и другие страховки</b> — взнос медстраховки зависит от региона и может измениться.</li>
+  <li><b>Почта</b> — заказ на пересылку писем (Nachsendeauftrag), лучше заранее.</li>
+  <li><b>Банк, касса AHV, врач, школа и детский сад, электричество и интернет.</b></li>
+  <li><b>Дорожное ведомство</b> нового кантона — права и номера машины.</li>
+  <li><b>Собака</b> — снять с учёта в старой общине и зарегистрировать в новой.</li>
+  <li><b>Serafe</b> (сбор за радио и телевидение) получает адрес от общины сам, извещать не нужно. Сбор — 335 франков в год на домохозяйство (<a href="https://www.serafe.ch/">Serafe</a>).</li>
+  <li><b>Налоги</b> за весь год обычно платят там, где ты жила 31 декабря.</li>
+</ul>
+<p>Не держи всё в голове — «Переезд: кого известить и до какого числа» составит список с датами под твой переезд.</p>
+
+<h2 id="kvartira">Старая и новая квартира</h2>
+<ul class="ul">
+  <li>Расторгни старый договор письменно, заказным, в срок. Подробно — в теме «Договор аренды и ловушки».</li>
+  <li>При сдаче и при въезде — <b>протокол</b> квартиры со всеми дефектами и фото.</li>
+  <li>Уборка при сдаче — строгая. Многие заказывают уборочную фирму с гарантией приёмки (Abnahmegarantie): если управляющая не примет, фирма доубирает бесплатно.</li>
+  <li>Популярные даты переезда — конец марта и конец сентября: фирмы и машины тогда заняты, бронируй заранее.</li>
+</ul>
+''',
+    steps=[
+        'Встань на учёт в новой общине в течение 14 дней и снимись с учёта в старой.',
+        'Пермит L или B и переезд в другой кантон — сначала разрешение нового кантона, потом переезд.',
+        'Закажи пересылку писем на почте и сообщи адрес работодателю, страховкам и банку.',
+        'Составь список дел по переезду с датами, чтобы ничего не забыть.',
+        'Сделай протокол сдачи и въезда с фото — это защищает залог.',
+    ],
+    pomosh=dict(ids=['gemeinde', 'mv'], t='С регистрацией поможет учёт жителей твоей общины, со сдачей квартиры — союз арендаторов.'),
+    tools={'pereezd-spisok': 'Все дела переезда с датами под твой день переезда — PDF с галочками.', 'moj-god': 'Даты переезда, регистрации и расторжения — в календаре на год.', 'moi-dannye': 'Все номера и адреса семьи на одном листе — пригодится, когда сообщаешь новый адрес.'},
+    related=['arenda', 'dogovor-arendy', 'permit-b', 'musor'],
+    sources=[
+        ('ch.ch — регистрация в общине', 'https://www.ch.ch/de/wohnen/umzug/ab-und-anmelden-bei-der-wohngemeinde/'),
+        ('ch.ch — чек-лист переезда', 'https://www.ch.ch/de/wohnen/umzug/checkliste-fur-den-umzug/'),
+        ('Кантон Золотурн — смена кантона', 'https://so.ch/verwaltung/departement-des-innern/migrationsamt/aufenthalt-und-integration/kantonswechsel/'),
+        ('Кантон Тургау — памятка о смене кантона, 16.11.2023', 'https://migrationsamt.tg.ch/public/upload/assets/143315/Merkblatt_Kantonswechsel_%2816.11.2023%29.pdf?fp=5'),
+        ('Кантон Базель-Штадт — переезд и регистрация', 'https://www.bs.ch/node/13849'),
+        ('Serafe — сбор за радио и телевидение', 'https://www.serafe.ch/'),
+    ],
+    terms=[('Deutsch', 'Gemeinde, Einwohnerkontrolle, Einwohnerdienste, Anmeldung, Abmeldung, Wohnsitzbestätigung, Heimatschein, Kantonswechsel, eUmzug, Nachsendeauftrag, Umzug, Zügeltermin, Wohnungsabgabe, Abnahmegarantie, Steuerfuss, Gemeindeversammlung'), ('Français', 'commune, contrôle des habitants, annonce d’arrivée, annonce de départ, attestation de domicile, changement de canton, ordre de réexpédition, déménagement, remise de l’appartement, garantie de réception, coefficient d’impôt, assemblée communale'), ('Italiano', 'comune, controllo abitanti, notifica d’arrivo, notifica di partenza, cambiamento di cantone, ordine di rispedizione, trasloco, riconsegna dell’appartamento, moltiplicatore d’imposta'), ('English', 'municipality, residents’ registration office, registration, deregistration, change of canton, mail forwarding, moving, apartment handover')],
+)
+
+ARTICLES['vereine'] = dict(
+    h1='Ферайны, волонтёрство и свои люди: <em>как найти круг общения в Швейцарии</em>',
+    seo='Ферайны в Швейцарии (Verein): клубы, волонтёрство (Freiwilligenarbeit), свои люди',
+    desc='Ферайны и волонтёрство в Швейцарии простыми словами на русском: что такое Verein и почему через него здесь знакомятся, какие бывают клубы (спорт, хор, родители, культура, общины земляков), как вступить и сколько стоит, как найти волонтёрство и зачем оно для работы и интеграции, как основать свой ферайн. По-немецки Verein, Freiwilligenarbeit, Mitgliederbeitrag, по-французски association, bénévolat, по-итальянски associazione, volontariato.',
+    lead='В Швейцарии друзей заводят не на улице, а в ферайнах: в спортивном клубе, хоре, родительском кружке, у пожарных-добровольцев. Это лучший способ выучить язык, понять местную жизнь и перестать чувствовать себя чужой. Здесь — с чего начать.',
+    body='''
+<nav class="toc" aria-label="Содержание"><b>В этой статье</b>
+<ul>
+  <li><a href="#chto">Что такое ферайн</a></li>
+  <li><a href="#kakie">Какие бывают</a></li>
+  <li><a href="#kak">Как вступить</a></li>
+  <li><a href="#volonter">Волонтёрство</a></li>
+  <li><a href="#svoi">Свои люди</a></li>
+  <li><a href="#osnovat">Как основать свой ферайн</a></li>
+</ul></nav>
+
+<h2 id="chto">Что такое ферайн (Verein)</h2>
+<p>Ферайн — это объединение людей с общим интересом: от футбольного клуба до общества любителей кактусов. Почти у каждой деревни есть десятки ферайнов. Через них устроена большая часть общественной жизни: праздники, турниры, рынки, концерты. Для швейцарцев ферайн — место, где знакомятся надолго.</p>
+<p>По закону ферайн — простая форма: достаточно устава и собрания членов (Гражданский кодекс, ZGB ст. 60 и далее).</p>
+
+<h2 id="kakie">Какие бывают</h2>
+<ul class="ul">
+  <li><b>Спорт:</b> гимнастика (Turnverein), футбол, бег, волейбол, лыжи, альпинизм (Альпийский клуб SAC). Для детей и подростков курсы часто дешевле благодаря государственной программе «Молодёжь и спорт» (Jugend+Sport).</li>
+  <li><b>Музыка и культура:</b> хоры, оркестры, театр, танцы.</li>
+  <li><b>Родители и дети:</b> родительские ферайны (Elternverein, Familienverein), игровые группы, встречи мам.</li>
+  <li><b>Деревня и помощь:</b> добровольные пожарные, самаритяне (первая помощь), ферайны для пожилых.</li>
+  <li><b>Земляки и язык:</b> ферайны русско- и украиноязычных, школы родного языка, церковные общины.</li>
+</ul>
+
+<h2 id="kak">Как вступить</h2>
+<ul class="ul">
+  <li>Список ферайнов обычно есть на сайте общины (раздел Vereine) — или спроси в общине при регистрации.</li>
+  <li>Почти везде можно прийти на <b>пробную тренировку или репетицию</b> (Schnuppertraining) бесплатно.</li>
+  <li><b>Взнос</b> (Mitgliederbeitrag) — от нескольких десятков до нескольких сотен франков в год, для детей обычно дешевле. Есть трудности с деньгами — спроси, бывают скидки.</li>
+  <li>Язык не идеальный — не страшно. Скажи прямо, что учишь язык: обычно помогают.</li>
+  <li>Ферайн живёт за счёт членов: помогать на празднике или в кассе турнира — нормально и лучший способ подружиться.</li>
+</ul>
+
+<h2 id="volonter">Волонтёрство</h2>
+<ul class="ul">
+  <li>Волонтёрство (Freiwilligenarbeit) в Швейцарии ценят очень высоко. Помогать можно в доме престарелых, на мероприятиях, с переводами для новичков, в продуктовом банке, в спортивном клубе.</li>
+  <li>Найти место помогут региональные бюро Benevol и платформы вроде <a href="https://www.benevol-jobs.ch">benevol-jobs.ch</a>.</li>
+  <li><b>Для работы:</b> волонтёрство даёт местный опыт, язык и рекомендации. Попроси подтверждение — <a href="https://www.dossier-freiwillig-engagiert.ch">«Dossier freiwillig engagiert»</a> — и добавь в «Резюме для Швейцарии (Lebenslauf)».</li>
+  <li>Получаешь пособие RAV или социальную помощь — сообщи о волонтёрстве и спроси, засчитают ли его.</li>
+</ul>
+
+<h2 id="svoi">Свои люди</h2>
+<ul class="ul">
+  <li>Встречи, разговорные клубы, праздники для детей на русском и украинском — на вкладке «Встречи».</li>
+  <li>Курсы и занятия — от йоги до немецкого — на вкладке «Курсы».</li>
+  <li>Самое лучшее — сочетать: свои люди для поддержки и местный ферайн для языка и новых друзей.</li>
+</ul>
+
+<h2 id="osnovat">Как основать свой ферайн</h2>
+<ul class="ul">
+  <li>Нужны минимум двое, письменный устав (цель, членство, взносы, правление, собрание) и собрание, которое его принимает.</li>
+  <li>Регистрация в торговом реестре не нужна, если ферайн не ведёт коммерческую деятельность.</li>
+  <li>Свой ферайн удобен для курсов и мероприятий: можно открыть счёт, арендовать зал, просить поддержку общины. Платные курсы на вкладке «Курсы» размещают от фирмы или ферайна.</li>
+</ul>
+''',
+    steps=[
+        'Открой список ферайнов на сайте своей общины и выбери два-три по интересу.',
+        'Сходи на бесплатную пробную тренировку или репетицию.',
+        'Запиши детей в спортивный клуб — через ферайн знакомятся и родители.',
+        'Найди волонтёрство на пару часов в месяц и попроси подтверждение для резюме.',
+        'Загляни на вкладку «Встречи» — там свои люди рядом с тобой.',
+    ],
+    tools={'moj-den': 'Тренировка, хор, волонтёрство — найди для них время в плане дня.'},
+    tabs={'events': 'Разговорные клубы, встречи мам и праздники на русском и украинском рядом с тобой.', 'kursy': 'Курсы и занятия на своём языке — от йоги до немецкого.'},
+    related=['fide', 'rabota', 'gemeinde', 'priroda'],
+    sources=[
+        ('Benevol — волонтёрство в Швейцарии', 'https://www.benevol-jobs.ch'),
+        ('Dossier freiwillig engagiert — подтверждение волонтёрства', 'https://www.dossier-freiwillig-engagiert.ch'),
+        ('Jugend+Sport — государственная программа спорта для детей', 'https://www.jugendundsport.ch'),
+        ('Гражданский кодекс (ZGB), ст. 60 и далее — ферайн', 'https://www.fedlex.admin.ch/eli/cc/24/233_245_233/de'),
+    ],
+    terms=[('Deutsch', 'Verein, Vereinsmitglied, Mitgliederbeitrag, Statuten, Generalversammlung, Vorstand, Schnuppertraining, Turnverein, Elternverein, Freiwilligenarbeit, Freiwillige, Jugend+Sport'), ('Français', 'association, membre, cotisation, statuts, assemblée générale, comité, entraînement d’essai, société de gymnastique, association de parents, bénévolat, bénévole, Jeunesse+Sport'), ('Italiano', 'associazione, socio, quota sociale, statuto, assemblea generale, comitato, allenamento di prova, volontariato, volontario, Gioventù+Sport'), ('English', 'club, association, membership fee, statutes, general meeting, board, trial session, volunteering, volunteer')],
+)
+
+
+# ===== Правила дома, мусор, животные, горы (08.10.2026). Факты сверены 08.10.2026: ch.ch, город и кантон Цюрих, Mieterverband, Swiss Recycle, OBV (литтеринг), BLV, Rega, BFU, SAC, SLF, BAG, BAZL, Beobachter.
+ARTICLES['pravila-doma'] = dict(
+    h1='Тишина, прачечная и правила дома: <em>как жить с соседями в Швейцарии</em>',
+    seo='Правила дома в Швейцарии: ночная тишина (Nachtruhe), прачечная, Hausordnung, шум',
+    desc='Правила дома в Швейцарии простыми словами на русском: ночная тишина с 22:00 и тишина в обед и по воскресеньям (Nachtruhe, Mittagsruhe, Sonntagsruhe), что пишут в правилах дома (Hausordnung), общая прачечная и график стирки (Waschküche), музыка и дети, гриль на балконе, миф о запрете смывать ночью, что делать, если шумят соседи: разговор, письмо управляющей, журнал шума, полиция. По-немецки Nachtruhe, Hausordnung, Waschküche, Lärm, по-французски repos nocturne, règlement de maison, buanderie, по-итальянски quiete notturna, regolamento della casa, lavanderia.',
+    lead='Швейцарцы ценят тишину и порядок, и в многоквартирном доме это чувствуется сразу. Правил меньше, чем кажется, и многие «запреты» — мифы. Здесь — что действительно нужно соблюдать и как решать конфликты с соседями.',
+    body='''
+<nav class="toc" aria-label="Содержание"><b>В этой статье</b>
+<ul>
+  <li><a href="#tishina">Когда нужна тишина</a></li>
+  <li><a href="#hausordnung">Правила дома (Hausordnung)</a></li>
+  <li><a href="#prachechnaya">Общая прачечная</a></li>
+  <li><a href="#muzyka">Музыка, дети, гриль</a></li>
+  <li><a href="#mify">Мифы</a></li>
+  <li><a href="#shum">Если шумят соседи</a></li>
+</ul></nav>
+
+<h2 id="tishina">Когда нужна тишина</h2>
+<ul class="ul">
+  <li>Единого закона на всю Швейцарию нет: время тишины устанавливает полицейский регламент общины, детали — правила дома.</li>
+  <li><b>Ночная тишина (Nachtruhe)</b> — во многих местах <b>с 22:00 до 6:00</b> или до 7:00. Во многих общинах ещё <b>обеденная тишина</b> с 12:00 до 13:00 и тишина в <b>воскресенье и праздники</b> (<a href="https://www.ch.ch/de/wohnen/miete/larm--mangel--mietzins/">ch.ch</a>).</li>
+  <li><b>Пример Цюриха:</b> ночью с 22:00 до 7:00, летом в пятницу и субботу с 23:00. В обед с 12:00 до 13:00 и вечером с 20:00 — потише. В воскресенье и праздники — тишина весь день (<a href="https://www.stadt-zuerich.ch/de/stadtleben/zusammenleben/oeffentlicher-raum/nachbarschaft-nachtleben/was-ist-erlaubt.html">город Цюрих</a>).</li>
+  <li>Стекло в контейнеры не бросают вечером и в воскресенье, газон не косят и не сверлят в воскресенье.</li>
+  <li>Время тишины твоей общины — в её регламенте (Polizeireglement) на сайте общины, правила твоего дома — в Hausordnung.</li>
+</ul>
+
+<h2 id="hausordnung">Правила дома (Hausordnung)</h2>
+<ul class="ul">
+  <li>Правила дома обязательны, если ты получила их вместе с договором аренды. Попроси копию, если её нет.</li>
+  <li>Правила должны быть разумными: запрещать что-то «просто так» нельзя (<a href="https://www.mieterverband.ch/mietrecht/waehrend-der-miete/nachbarschaft-hausordnung/tipps/">Mieterverband</a>).</li>
+  <li>Обычно там: время тишины, график прачечной, уборка лестницы, где ставить велосипеды и коляски, мусор, гриль.</li>
+  <li>Если постоянно нарушать правила дома после письменного предупреждения, управляющая может расторгнуть договор досрочно.</li>
+</ul>
+
+<h2 id="prachechnaya">Общая прачечная (Waschküche)</h2>
+<ul class="ul">
+  <li>Во многих домах одна стиральная машина и сушилка на весь дом. Стирают по <b>графику</b> (Waschplan) или по записи — в табличке, приложении, ключом.</li>
+  <li>Свою одежду стирать можно, сколько нужно. Стирать постоянно и много для чужих людей — нельзя.</li>
+  <li>Правила хорошего тона: вовремя забирай бельё, после себя чисти фильтр и протирай машину, не стирай в чужое время без спроса, оставь сушилку свободной.</li>
+  <li>Своя стиральная машина в квартире — только с разрешения управляющей.</li>
+</ul>
+
+<h2 id="muzyka">Музыка, дети, гриль</h2>
+<ul class="ul">
+  <li><b>Музыка:</b> полный запрет играть на инструменте недействителен. Обычно принимают 2–3 часа в день вне времени тишины, но не барабаны и трубу. После 22:00 — только тихо.</li>
+  <li><b>Дети:</b> обычный детский шум соседи должны терпеть.</li>
+  <li><b>Гриль на балконе:</b> полностью запретить нельзя, но правила дома могут ограничить угольный гриль. Электрический и газовый обычно можно. Подумай о дыме для соседей.</li>
+</ul>
+
+<h2 id="mify">Мифы</h2>
+<ul class="ul">
+  <li><b>«Ночью нельзя смывать унитаз».</b> Неправда — такого запрета нет (<a href="https://www.blick.ch/schweiz/was-ist-am-mythos-dran-deutsche-denken-in-der-schweiz-herrsche-spuel-verbot-in-der-nacht-id18236059.html">Blick</a>).</li>
+  <li><b>«После 22:00 нельзя принимать душ».</b> Короткий душ можно, даже если в правилах дома написано иначе. Набирать ванну посреди ночи — уже слишком.</li>
+  <li><b>«В воскресенье нельзя стирать».</b> Зависит от правил твоего дома — проверь Hausordnung.</li>
+</ul>
+
+<h2 id="shum">Если шумят соседи</h2>
+<ol class="ol">
+  <li><b>Поговори</b> спокойно — часто сосед просто не знает, что его слышно.</li>
+  <li><b>Веди журнал шума</b>: дата, время, сколько длилось, что именно, кто ещё слышал. Без записей управляющей трудно помочь. Удобно — «Журнал шума для управляющей».</li>
+  <li><b>Напиши управляющей</b> — письменно, лучше заказным, приложи журнал.</li>
+  <li>Ночью и в серьёзных случаях — <b>полиция, 117</b>.</li>
+  <li>Если шум мешает жить постоянно (например, долгая стройка) — это может быть дефект квартиры: можно требовать устранения и снижения аренды, а через 30 дней без ответа — примирительный орган. Письмо поможет сделать «Письма управляющей». Подробно — в теме «Договор аренды и ловушки».</li>
+</ol>
+''',
+    steps=[
+        'Найди время тишины своей общины и прочитай правила своего дома.',
+        'Узнай график прачечной и убирай за собой фильтр и машину.',
+        'Шумят соседи — сначала поговори, потом веди журнал шума.',
+        'Не помогло — письмо управляющей заказным с журналом шума.',
+        'Ночью и при угрозе — полиция 117.',
+    ],
+    pomosh=dict(ids=['mv', 'schlicht', 'gemeinde'], t='В спорах с соседями и управляющей помогут союз арендаторов и бесплатный примирительный орган.'),
+    tools={'zhurnal-shuma': 'Шумят соседи — записывай каждый раз и отправь управляющей таблицу на языке кантона.', },
+    related=['dogovor-arendy', 'arenda', 'musor', 'gemeinde'],
+    sources=[
+        ('ch.ch — шум, дефекты и аренда', 'https://www.ch.ch/de/wohnen/miete/larm--mangel--mietzins/'),
+        ('Город Цюрих — что разрешено (тишина)', 'https://www.stadt-zuerich.ch/de/stadtleben/zusammenleben/oeffentlicher-raum/nachbarschaft-nachtleben/was-ist-erlaubt.html'),
+        ('Город Цюрих — бытовой шум', 'https://www.stadt-zuerich.ch/de/gesundheit/gesundheitsschutz/laerm/alltagslaerm.html'),
+        ('Mieterverband — соседи и правила дома', 'https://www.mieterverband.ch/mietrecht/waehrend-der-miete/nachbarschaft-hausordnung/tipps/'),
+        ('Blick — миф о запрете смывать ночью, 17.01.2023', 'https://www.blick.ch/schweiz/was-ist-am-mythos-dran-deutsche-denken-in-der-schweiz-herrsche-spuel-verbot-in-der-nacht-id18236059.html'),
+    ],
+    terms=[('Deutsch', 'Nachtruhe, Mittagsruhe, Sonntagsruhe, Ruhezeiten, Polizeireglement, Hausordnung, Waschküche, Waschplan, Lärm, Lärmprotokoll, Liegenschaftsverwaltung, Nachbarn'), ('Français', 'repos nocturne, pause de midi, repos dominical, règlement de police, règlement de maison, buanderie, planning de lessive, bruit, journal du bruit, gérance, voisins'), ('Italiano', 'quiete notturna, pausa di mezzogiorno, riposo domenicale, regolamento di polizia, regolamento della casa, lavanderia, rumore, amministrazione, vicini'), ('English', 'quiet hours, house rules, laundry room, laundry schedule, noise, noise log, property management, neighbours')],
+    post='Это жалоба управляющей на шум с журналом шума.',
+)
+
+ARTICLES['musor'] = dict(
+    h1='Мусор и сортировка в Швейцарии: <em>платные мешки, что куда сдавать и штрафы</em>',
+    seo='Мусор в Швейцарии: платный мешок (Gebührensack), сортировка, PET, стекло, штрафы',
+    desc='Мусор в Швейцарии простыми словами на русском: почему мусор выбрасывают только в платных мешках (Gebührensack, Züri-Sack), что сдают отдельно и бесплатно: PET, стекло по цветам, алюминий и жесть, бумага и картон, батарейки, электроника, зелёные отходы, текстиль; где узнать дни вывоза; штрафы за мусор не там — по всей Швейцарии с 1 августа 2026 от 80 франков. По-немецки Abfall, Kehricht, Recycling, Sammelstelle, по-французски déchets, sac taxé, tri, déchetterie, по-итальянски rifiuti, sacco tassato, raccolta differenziata.',
+    lead='В Швейцарии мусор — это почти наука: обычный мусор — только в платный мешок, остальное — в разные пункты сбора. Зато многое сдаётся бесплатно, а за мешок не в том месте могут оштрафовать. Здесь — как разобраться за один вечер.',
+    body='''
+<nav class="toc" aria-label="Содержание"><b>В этой статье</b>
+<ul>
+  <li><a href="#meshok">Платный мешок</a></li>
+  <li><a href="#sort">Что куда сдавать</a></li>
+  <li><a href="#vyvoz">Дни вывоза и пункты сбора</a></li>
+  <li><a href="#shtraf">Штрафы</a></li>
+</ul></nav>
+
+<h2 id="meshok">Платный мешок (Gebührensack)</h2>
+<ul class="ul">
+  <li>За вывоз мусора платит тот, кто его производит — так велит закон (<a href="https://www.fedlex.admin.ch/eli/cc/1984/1122_1122_1122/de#art_32_a">закон об охране окружающей среды, ст. 32a</a>). Поэтому в большинстве общин обычный мусор выбрасывают <b>только в официальных платных мешках</b> или с наклейкой (марка, Vignette).</li>
+  <li>Мешок покупают в супермаркете своего города или региона. В Цюрихе — синий <b>Züri-Sack</b> размером 10, 17, 35, 60 или 110 литров (<a href="https://www.stadt-zuerich.ch/de/umwelt-und-energie/entsorgung/zueri-sack.html">город Цюрих</a>). Мешок соседней общины может не подойти.</li>
+  <li>Часть стоимости вывоза платят ещё и через базовый сбор — он часто входит в дополнительные расходы за квартиру (Nebenkosten).</li>
+  <li>Чем больше сортируешь — тем меньше платных мешков нужно.</li>
+</ul>
+
+<h2 id="sort">Что куда сдавать</h2>
+<p>По <a href="https://swissrecycle.ch/de/wertstoffe-wissen/faq">Swiss Recycle</a> (правила в каждой общине немного свои):</p>
+<ul class="ul">
+  <li><b>PET</b> — только бутылки от напитков со знаком PET-Recycling, в магазин. Бутылки от масла, уксуса и моющих средств — в мусор.</li>
+  <li><b>Стекло</b> — по цветам: зелёное, белое, коричневое; другие цвета — к зелёному. Без крышек. Зеркала, оконное стекло и посуда — не сюда. Вечером и в воскресенье не бросать — шумно.</li>
+  <li><b>Алюминий и жесть</b> — вместе. Кофейные капсулы — отдельно, в магазин своей марки. Баллончики и банки из-под краски — опасные отходы, даже пустые.</li>
+  <li><b>Бумага и картон</b> — чистые, обычно связанные шнуром или в отдельный день. Грязный картон и коробки от напитков — в мусор.</li>
+  <li><b>Батарейки</b> — бесплатно в любом магазине, где их продают.</li>
+  <li><b>Электроника</b> — бесплатно в магазин, который продаёт такие же вещи, даже если купила не там. В мусор — запрещено.</li>
+  <li><b>Зелёные отходы</b> — в компост или зелёный контейнер общины. Без варёной еды, мяса, костей и кошачьего наполнителя.</li>
+  <li><b>Одежда и обувь</b> — чистые, в завязанном мешке в контейнер для текстиля.</li>
+  <li><b>Крупный мусор</b> (Sperrgut) — мебель и большие вещи: в пункт сбора общины или в день вывоза, часто платно.</li>
+</ul>
+
+<h2 id="vyvoz">Дни вывоза и пункты сбора</h2>
+<ul class="ul">
+  <li>Дни вывоза мусора, бумаги и зелёных отходов — в <b>календаре вывоза</b> (Abfallkalender) на сайте общины или в её приложении. Многие общины присылают его в почтовый ящик в конце года.</li>
+  <li>Мешки выставляют утром в день вывоза, в Цюрихе — до 7:00, не накануне вечером: ночью их разрывают лисы.</li>
+  <li>Пункт сбора (Sammelstelle, Recyclinghof, déchetterie) — где сдают всё сразу. Адрес и часы — на сайте общины.</li>
+  <li>Внеси дни вывоза в «Годовой календарь дел и сроков» — так не пропустишь бумагу и картон.</li>
+</ul>
+
+<h2 id="shtraf">Штрафы</h2>
+<ul class="ul">
+  <li>С 1 августа 2026 года штрафы за мусор не там (литтеринг) одинаковые по всей Швейцарии: <b>80 франков</b> за мелочь (окурок, банка), 100 — за несколько мелочей, 150 — за мешок до 35 литров, 250 — за мешок до 110 литров. Больше — уголовное дело (<a href="https://www.sz.ch/public/upload/assets/93393/Schweizweit_einheitliche_Littering-Busse.pdf?fp=2">кантон Швиц</a>).</li>
+  <li>Мусор в неправильном мешке или не в тот день — штраф общины, её «мусорная полиция» иногда ищет хозяина по содержимому.</li>
+</ul>
+''',
+    steps=[
+        'Купи официальные платные мешки своей общины в ближайшем супермаркете.',
+        'Скачай календарь вывоза и найди ближайший пункт сбора.',
+        'Поставь дома отдельные пакеты: PET, стекло, алюминий, бумага, батарейки.',
+        'Электронику и батарейки сдавай бесплатно в магазин.',
+        'Мешок выставляй утром в день вывоза, не накануне.',
+    ],
+    tools={'moj-god': 'Дни вывоза бумаги, картона и зелёных отходов — в календаре на год.'},
+    related=['gemeinde', 'pravila-doma', 'skrytye-rashody'],
+    sources=[
+        ('Swiss Recycle — вопросы и ответы о сортировке', 'https://swissrecycle.ch/de/wertstoffe-wissen/faq'),
+        ('Город Цюрих — Züri-Sack', 'https://www.stadt-zuerich.ch/de/umwelt-und-energie/entsorgung/zueri-sack.html'),
+        ('Город Цюрих — вывоз мусора', 'https://www.stadt-zuerich.ch/de/umwelt-und-energie/entsorgung/wo-und-wann-entsorgen/abfuhr-hauskehricht.html'),
+        ('Кантон Швиц — единые штрафы за литтеринг с 01.08.2026', 'https://www.sz.ch/public/upload/assets/93393/Schweizweit_einheitliche_Littering-Busse.pdf?fp=2'),
+        ('Закон об охране окружающей среды, ст. 32a', 'https://www.fedlex.admin.ch/eli/cc/1984/1122_1122_1122/de#art_32_a'),
+    ],
+    terms=[('Deutsch', 'Abfall, Kehricht, Gebührensack, Grundgebühr, Abfallkalender, Sammelstelle, Recyclinghof, PET, Altglas, Alu und Weissblech, Altpapier, Karton, Grüngut, Sperrgut, Sonderabfall, Littering'), ('Français', 'déchets, ordures ménagères, sac taxé, taxe de base, calendrier des déchets, déchetterie, PET, verre, alu et fer-blanc, papier, carton, déchets verts, encombrants, déchets spéciaux, littering'), ('Italiano', 'rifiuti, sacco tassato, tassa base, calendario dei rifiuti, ecocentro, PET, vetro, alluminio e latta, carta, cartone, scarti vegetali, ingombranti, rifiuti speciali'), ('English', 'waste, bag fee, waste calendar, collection point, recycling, glass, paper, cardboard, green waste, bulky waste, hazardous waste, littering')],
+)
+
+ARTICLES['zhivotnye'] = dict(
+    h1='Собака, кошка и другие животные в Швейцарии: <em>чип, регистрация, налог и ввоз</em>',
+    seo='Собака в Швейцарии: чип и AMICUS, налог на собаку (Hundesteuer), ввоз животных из Украины',
+    desc='Животные в Швейцарии простыми словами на русском: собаке обязательны чип и регистрация в AMICUS, налог на собаку в общине, страховка ответственности, поводок, курсы для владельцев (в Цюрихе обязательны с 2025 года), запрещённые породы в некоторых кантонах; кошки; морских свинок и кроликов нельзя держать по одному; как ввезти собаку или кошку из Украины: чип, прививка от бешенства, анализ на антитела, сертификат. По-немецки Hund, Hundesteuer, AMICUS, Tierschutz, по-французски chien, taxe des chiens, protection des animaux, по-итальянски cane, tassa sui cani, protezione degli animali.',
+    lead='В Швейцарии к животным относятся серьёзно: у собаки должны быть чип, регистрация и налог, а для некоторых зверьков закон требует компанию. Здесь — что сделать, если у тебя появилось животное или ты привезла его с собой.',
+    body='''
+<nav class="toc" aria-label="Содержание"><b>В этой статье</b>
+<ul>
+  <li><a href="#sobaka">Собака: чип, регистрация, налог</a></li>
+  <li><a href="#kursy">Курсы и запрещённые породы</a></li>
+  <li><a href="#progulka">Поводок и прогулки</a></li>
+  <li><a href="#koshka">Кошки и маленькие животные</a></li>
+  <li><a href="#vvoz">Ввоз животного</a></li>
+  <li><a href="#arenda">Животное в съёмной квартире</a></li>
+</ul></nav>
+
+<h2 id="sobaka">Собака: чип, регистрация, налог</h2>
+<ul class="ul">
+  <li><b>Чип и AMICUS.</b> Каждой собаке ветеринар ставит микрочип и регистрирует её в базе <a href="https://www.amicus.ch">AMICUS</a>. Привезла собаку из-за границы — в течение 10 дней к швейцарскому ветеринару (<a href="https://www.blv.admin.ch/blv/de/home/tiere/tierschutz/heim-und-wildtierhaltung/hunde.html">BLV</a>).</li>
+  <li><b>Регистрация в общине</b> — обычно в течение 10 дней. Переезд и смена адреса — тоже через общину.</li>
+  <li><b>Налог на собаку</b> (Hundesteuer) — каждый год в общине. В кантоне Цюрих — от 70 до 200 франков в зависимости от общины (<a href="https://www.zh.ch/de/umwelt-tiere/tiere/haustiere-heimtiere/hunde.html">кантон Цюрих</a>).</li>
+  <li><b>Страховка ответственности</b> — во многих кантонах обязательна, в Цюрихе — минимум на 1 миллион франков. Часто она уже входит в частную страховку ответственности — проверь полис.</li>
+  <li>Собаке нужна ежедневная прогулка на улице — это закон о защите животных.</li>
+</ul>
+
+<h2 id="kursy">Курсы и запрещённые породы</h2>
+<ul class="ul">
+  <li>Обязательного курса для владельцев собак по всей Швейцарии нет с 2017 года, но <b>кантоны могут ввести свои</b>.</li>
+  <li><b>Кантон Цюрих</b> с 1 июня 2025 года: теоретический курс для тех, у кого ещё не было собаки или не было больше 10 лет, и <b>практический курс для всех</b> — 6 уроков у тренера с разрешением ветеринарной службы, в течение 12 месяцев.</li>
+  <li><b>Запрещённые и ограниченные породы</b> — тоже решают кантоны. В Цюрихе нельзя заводить, например, питбуля, американского стаффордширского терьера, бультерьера, а с 2025 года — ротвейлера (<a href="https://www.zh.ch/de/umwelt-tiere/tiere/haustiere-heimtiere/hunde/verbotene-hunderassen.html">кантон Цюрих</a>). Ограничения есть и в Женеве, Вале и других кантонах.</li>
+  <li>Перед тем как завести собаку или переехать с ней в другой кантон, проверь правила ветеринарной службы (Veterinäramt) этого кантона.</li>
+</ul>
+
+<h2 id="progulka">Поводок и прогулки</h2>
+<ul class="ul">
+  <li>Правила поводка — кантона и общины. Обычно на поводке: в транспорте, на вокзале, на оживлённых улицах, в общественных зданиях.</li>
+  <li><b>В лесу и на краю леса весной</b> — во многих кантонах на поводке, в Цюрихе с 1 апреля по 31 июля: время выведения детёнышей у диких животных.</li>
+  <li>На кладбища, в бассейны, на школьные дворы и спортплощадки собакам обычно нельзя.</li>
+  <li>Убирай за собакой: пакеты (Robidog) почти на каждом углу.</li>
+</ul>
+
+<h2 id="koshka">Кошки и маленькие животные</h2>
+<ul class="ul">
+  <li>Для кошек чип и регистрация пока добровольны, но очень советуют: так потерявшаяся кошка вернётся домой.</li>
+  <li><b>Морских свинок нельзя держать по одной</b> — минимум вдвоём, кролик или человек компанией не считаются (<a href="https://www.blv.admin.ch/blv/de/home/tiere/tierschutz/heim-und-wildtierhaltung/meerschweinchen.html">BLV</a>). Кроликов тоже нельзя держать одних.</li>
+  <li>Попугаев, рыб, птиц и других животных — тоже по правилам о минимальном месте и компании. Проверь на сайте BLV перед покупкой.</li>
+</ul>
+
+<h2 id="vvoz">Ввоз животного</h2>
+<ul class="ul">
+  <li><b>Из ЕС</b> — паспорт животного ЕС, чип, действующая прививка от бешенства.</li>
+  <li><b>Из Украины</b> — облегчённые правила закончились 1 августа 2023 года. Нужны: чип, прививка от бешенства после чипа, <b>анализ на антитела</b> к бешенству в признанной ЕС лаборатории — не раньше чем через 30 дней после прививки и не позже чем за 3 месяца до въезда, ветеринарный сертификат государственного органа, декларация на таможне. Не выполнено — карантин за счёт владельца (<a href="https://www.gr.ch:443/DE/institutionen/verwaltung/djsg/afm/ukraine/info/Documents/Merkblatt%20Tiere%20Ukraine_DE_01.08.2023.pdf">памятка, 2023</a>).</li>
+  <li>Из других стран правила похожие, а иногда строже. Перед поездкой проверь актуальные правила на сайте ветеринарной службы <a href="https://www.blv.admin.ch">BLV</a> — они меняются.</li>
+</ul>
+
+<h2 id="arenda">Животное в съёмной квартире</h2>
+<ul class="ul">
+  <li>Маленьких животных в клетке и аквариуме (хомяк, рыбки) обычно можно без спроса.</li>
+  <li>Собаку и кошку — как написано в договоре. Часто нужно разрешение управляющей — спроси письменно до того, как заведёшь.</li>
+  <li>Ущерб от животного в квартире платишь ты — проверь страховку ответственности.</li>
+</ul>
+''',
+    steps=[
+        'Новая собака — к ветеринару за чипом и регистрацией в AMICUS, потом в общину в течение 10 дней.',
+        'Проверь, нужен ли в твоём кантоне курс для владельцев и не запрещена ли порода.',
+        'Проверь, покрывает ли твоя страховка ответственности ущерб от животного.',
+        'Снимаешь квартиру — спроси разрешение на собаку или кошку письменно.',
+        'Ввозишь животное — сделай анализ на антитела к бешенству заранее, за 3 месяца.',
+    ],
+    tools={},
+    related=['strahovki', 'gemeinde', 'tamozhnya', 'dogovor-arendy'],
+    sources=[
+        ('BLV — собаки', 'https://www.blv.admin.ch/blv/de/home/tiere/tierschutz/heim-und-wildtierhaltung/hunde.html'),
+        ('Кантон Цюрих — собаки (курсы, налог, страховка)', 'https://www.zh.ch/de/umwelt-tiere/tiere/haustiere-heimtiere/hunde.html'),
+        ('Кантон Цюрих — запрещённые породы', 'https://www.zh.ch/de/umwelt-tiere/tiere/haustiere-heimtiere/hunde/verbotene-hunderassen.html'),
+        ('Город Цюрих — собаки в городе', 'https://www.stadt-zuerich.ch/de/umwelt-und-energie/natur/tiere-in-der-stadt/hunde.html'),
+        ('BLV — морские свинки', 'https://www.blv.admin.ch/blv/de/home/tiere/tierschutz/heim-und-wildtierhaltung/meerschweinchen.html'),
+        ('Кантон Граубюнден — животные из Украины, 01.08.2023', 'https://www.gr.ch:443/DE/institutionen/verwaltung/djsg/afm/ukraine/info/Documents/Merkblatt%20Tiere%20Ukraine_DE_01.08.2023.pdf'),
+        ('Парламент — решение о чипах для кошек, 06.05.2025', 'https://www.parlament.ch/de/services/news/Seiten/2025/20250506131548476194158159026_bsd103.aspx'),
+    ],
+    terms=[('Deutsch', 'Hund, Hundehalter, Mikrochip, AMICUS, Hundesteuer, Hundekontrolle, Tierhalterhaftpflicht, Leinenpflicht, Hundekurs, Rassetypenliste, Veterinäramt, Tierarzt, Tollwutimpfung, Tollwut-Antikörpertest, Tierschutzverordnung'), ('Français', 'chien, puce électronique, taxe des chiens, responsabilité civile du détenteur, obligation de tenir en laisse, cours pour chiens, races interdites, service vétérinaire, vaccination contre la rage, titrage des anticorps, protection des animaux'), ('Italiano', 'cane, microchip, tassa sui cani, responsabilità civile del detentore, obbligo del guinzaglio, corso per cani, razze vietate, ufficio veterinario, vaccinazione antirabbica, protezione degli animali'), ('English', 'dog, microchip, dog tax, liability insurance, leash rules, dog training course, restricted breeds, veterinary office, rabies vaccination, rabies antibody test, animal welfare')],
+)
+
+ARTICLES['priroda'] = dict(
+    h1='Горы и хайкинг в Швейцарии: <em>как ходить без риска и кто спасает</em>',
+    seo='Хайкинг в Швейцарии: разметка троп, Rega 1414, клещи, погода и безопасность в горах',
+    desc='Горы и хайкинг в Швейцарии простыми словами на русском: что значат жёлтые, бело-красно-белые и бело-сине-белые указатели и шкала SAC T1–T6, как спланировать поход и время, что взять, номер спасателей Rega 1414 и приложение Rega, взнос Rega 40 франков, лавины и погода (SLF, MeteoSwiss), клещи и прививка от клещевого энцефалита, ночёвка в палатке, дроны. По-немецки Wandern, Bergwanderweg, Rega, Zecken, по-французски randonnée, sentier de montagne, tique, по-итальянски escursionismo, sentiero di montagna, zecca.',
+    lead='Горы — лучшее, что есть в Швейцарии, и самое частое место несчастных случаев: каждый год на пеших маршрутах гибнет около 50 человек. Почти всегда — из-за переоценки сил и маршрута. Здесь — как выбирать тропу, что взять и кому звонить.',
+    body='''
+<nav class="toc" aria-label="Содержание"><b>В этой статье</b>
+<ul>
+  <li><a href="#tropy">Цвет указателя = сложность</a></li>
+  <li><a href="#plan">Как спланировать поход</a></li>
+  <li><a href="#vzyat">Что взять</a></li>
+  <li><a href="#rega">Если что-то случилось</a></li>
+  <li><a href="#pogoda">Погода и лавины</a></li>
+  <li><a href="#kleshchi">Клещи</a></li>
+  <li><a href="#palatka">Палатка и дроны</a></li>
+</ul></nav>
+
+<h2 id="tropy">Цвет указателя = сложность</h2>
+<ul class="ul">
+  <li><b>Жёлтый указатель</b> (Wanderweg) — обычная тропа, подходит почти всем, в обычной обуви для прогулок.</li>
+  <li><b>Бело-красно-белая метка</b> (Bergwanderweg) — горная тропа: крутые, узкие участки, иногда цепи. Нужны уверенный шаг, хорошая форма, отсутствие страха высоты и треккинговые ботинки.</li>
+  <li><b>Бело-сине-белая метка</b> (Alpinwanderweg) — альпийская тропа: часто без тропы, через ледники и скалы. Только с опытом и снаряжением (<a href="https://swisshiking.ch/de/media/download/c815d6322c8c63151de17d244ad861228f1900da">Schweizer Wanderwege</a>).</li>
+  <li>В описаниях маршрутов сложность пишут по шкале Альпийского клуба <b>SAC: T1–T6</b>. T1 — лёгкая прогулка, T2–T3 — горная тропа, с T4 — альпийская (<a href="https://www.sac-cas.ch/fileadmin/Ausbildung_und_Sicherheit/Tourenplanung/Alpinmerkbl%C3%A4tter/20230601_SAC-Wanderskala_D.pdf">SAC</a>).</li>
+  <li>Розовые указатели — зимние тропы.</li>
+</ul>
+
+<h2 id="plan">Как спланировать поход</h2>
+<ul class="ul">
+  <li><b>Время:</b> на подъёме — 15 минут на каждые 100 м высоты плюс 15 минут на километр; на спуске — 15 минут на 200 м плюс 15 минут на километр. Время на указателях — для тренированных людей без остановок (<a href="https://www.bfu.ch/de/ratgeber/wandern-bergwandern">BFU</a>).</li>
+  <li>Посмотри маршрут в приложении <a href="https://www.swisstopo.admin.ch/de/swisstopo-app">swisstopo</a> и скачай карту офлайн — в горах часто нет связи.</li>
+  <li>Проверь, работают ли канатные дороги и последний автобус или поезд обратно.</li>
+  <li><b>Скажи кому-нибудь</b>, куда идёшь и когда вернёшься, особенно если идёшь одна. Удобно оставить близким «План похода: маршрут и время возвращения для близких».</li>
+  <li>Погода портится, устала или стало страшно — <b>разворачивайся</b>. Это не поражение.</li>
+</ul>
+
+<h2 id="vzyat">Что взять</h2>
+<p>Прочные ботинки с хорошей подошвой, одежду слоями и куртку от дождя и ветра (наверху холоднее на 6 градусов на каждые 1000 м), шапку, солнечные очки и крем, достаточно воды и еды, маленькую аптечку и спасательное одеяло, заряженный телефон и запасной аккумулятор, карту офлайн.</p>
+
+<h2 id="rega">Если что-то случилось</h2>
+<ul class="ul">
+  <li><b>Rega (вертолёт): 1414</b>, из-за границы +41 333 333 333. <b>Общий номер: 112</b> — если не дозвониться до Rega. Скорая: 144, полиция: 117.</li>
+  <li><b>Приложение Rega</b> — тревога одной кнопкой, приложение само передаёт твои координаты. Установи его до похода.</li>
+  <li><b>Взнос Rega</b> (Gönner) — 40 франков в год за взрослого, дети бесплатно. Это пожертвование, а не страховка, но если твоя страховка не покроет спасение (вертолёт стоит тысячи франков), Rega может не выставлять тебе счёт (<a href="https://www.rega.ch/en/rega-patron/become-a-patron">Rega</a>).</li>
+  <li>Проверь, покрывает ли спасение и поиск твоя медстраховка или страховка от несчастных случаев — суммы часто ограничены.</li>
+  <li>Все экстренные номера и дежурного врача на одной карточке — в «Карточка экстренных номеров и дежурного врача».</li>
+</ul>
+
+<h2 id="pogoda">Погода и лавины</h2>
+<ul class="ul">
+  <li>Погода в горах меняется быстро. Смотри прогноз и предупреждения в приложении <a href="https://www.meteoswiss.admin.ch/services-and-publications/service/weather-and-climate-products/meteoswiss-app.html">MeteoSwiss</a>. Летом после обеда часто бывают грозы — выходи рано.</li>
+  <li>Зимой и весной вне трасс — лавинный бюллетень <a href="https://slf.ch/en/avalanches/avalanche-warning.html">SLF</a> и приложение White Risk. Без знаний и снаряжения — только по открытым трассам и зимним тропам.</li>
+</ul>
+
+<h2 id="kleshchi">Клещи</h2>
+<ul class="ul">
+  <li>Клещи живут в траве и кустах почти по всей Швейцарии, с весны до осени. Длинные брюки, средство от клещей, после прогулки — осмотреть себя и детей.</li>
+  <li><b>Прививку от клещевого энцефалита (FSME)</b> рекомендуют взрослым и детям с 3 лет во всей Швейцарии, кроме Тичино. Три укола, потом раз в 10 лет. Её оплачивает базовая медстраховка (<a href="https://www.bag.admin.ch/de/fruehsommer-meningoenzephalitis-fsme">BAG</a>).</li>
+  <li>Клеща удаляй сразу. Покраснение вокруг укуса в следующие недели — к врачу (боррелиоз).</li>
+</ul>
+
+<h2 id="palatka">Палатка и дроны</h2>
+<ul class="ul">
+  <li><b>Палатка в природе</b> — правила кантона и общины. Почти везде запрещено в заповедниках, национальном парке и зонах покоя дичи. Выше границы леса на одну ночь часто терпят, в Аппенцелле Иннерроден и Юре запрещено везде. Штраф — от нескольких сотен франков. Проверь правила кантона (<a href="https://www.beobachter.ch/arbeit-bildung/freizeit/hier-ist-wildcamping-erlaubt-die-grosse-ubersicht-624417">Beobachter</a>).</li>
+  <li><b>Дрон</b> — по правилам, как в ЕС: регистрация, курс пилота, в прямой видимости, не над людьми, не у аэродромов и в заповедниках. Перед полётом проверь карту ограничений <a href="https://www.bazl.admin.ch/de/drohnen">BAZL</a>.</li>
+</ul>
+''',
+    steps=[
+        'Выбирай тропу по цвету указателя и шкале SAC, начинай с жёлтых и T1–T2.',
+        'Установи приложения Rega, MeteoSwiss и swisstopo с офлайн-картой.',
+        'Оставь близким план похода и время возвращения.',
+        'Оплати взнос Rega и проверь, что твоя страховка покрывает спасение.',
+        'Сделай прививку от клещевого энцефалита себе и детям с 3 лет.',
+    ],
+    tools={'plan-pohoda': 'Оставь близким маршрут, время возвращения и номера Rega — на русском и языке кантона.', 'ekstrennye-nomera': 'Rega 1414, 112, 144 и дежурный врач — на карточке в рюкзак.'},
+    tabs={'events': 'Походы и прогулки с группой на русском и украинском — во встречах рядом с тобой.'},
+    related=['bolezn-travma', 'strahovki', 'dop-strahovanie', 'vereine'],
+    sources=[
+        ('Schweizer Wanderwege — сигнализация троп', 'https://swisshiking.ch/de/media/download/c815d6322c8c63151de17d244ad861228f1900da'),
+        ('SAC — шкала сложности T1–T6, 01.06.2023', 'https://www.sac-cas.ch/fileadmin/Ausbildung_und_Sicherheit/Tourenplanung/Alpinmerkbl%C3%A4tter/20230601_SAC-Wanderskala_D.pdf'),
+        ('BFU — хайкинг и горные походы', 'https://www.bfu.ch/de/ratgeber/wandern-bergwandern'),
+        ('Rega — вопросы и ответы', 'https://www.rega.ch/en/questions-and-answers'),
+        ('Rega — стать донором (Gönner)', 'https://www.rega.ch/en/rega-patron/become-a-patron'),
+        ('SLF — лавинный бюллетень', 'https://slf.ch/en/avalanches/avalanche-warning.html'),
+        ('BAG — клещевой энцефалит (FSME)', 'https://www.bag.admin.ch/de/fruehsommer-meningoenzephalitis-fsme'),
+        ('Beobachter — где можно ставить палатку', 'https://www.beobachter.ch/arbeit-bildung/freizeit/hier-ist-wildcamping-erlaubt-die-grosse-ubersicht-624417'),
+        ('BAZL — дроны', 'https://www.bazl.admin.ch/de/drohnen'),
+    ],
+    terms=[('Deutsch', 'Wandern, Wanderweg, Bergwanderweg, Alpinwanderweg, Wegweiser, SAC-Wanderskala, Rega, Gönnerbeitrag, Notruf, Lawinenbulletin, Wetterwarnung, Zecken, FSME-Impfung, Wildcampen, Wildruhezone, Drohne'), ('Français', 'randonnée, chemin de randonnée, chemin de randonnée de montagne, sentier alpin, échelle SAC, REGA, donateur, bulletin d’avalanches, alerte météo, tiques, vaccination contre l’encéphalite à tiques, camping sauvage, zone de tranquillité, drone'), ('Italiano', 'escursionismo, sentiero escursionistico, sentiero di montagna, sentiero alpino, scala SAC, Rega, sostenitore, bollettino delle valanghe, allerta meteo, zecche, vaccinazione TBE, campeggio libero, zona di tranquillità, drone'), ('English', 'hiking, hiking trail, mountain trail, alpine trail, SAC scale, Rega patron, avalanche bulletin, weather warning, ticks, tick-borne encephalitis vaccination, wild camping, wildlife rest area, drone')],
+)
+
+
+# ===== Таможня и права покупателя (08.10.2026). Факты сверены 08.10.2026: BAZG, BLV, ESTV, Post, DHL, admin.ch, OR (fedlex), SKS, FRC, ACSI.
+ARTICLES['tamozhnya'] = dict(
+    h1='Таможня и посылки в Швейцарии: <em>150 франков в день, мясо, алкоголь и что нельзя ввозить</em>',
+    seo='Таможня в Швейцарии: лимит 150 франков, мясо 1 кг, алкоголь, посылки и НДС (Zoll)',
+    desc='Таможня в Швейцарии простыми словами на русском: с 2025 года без НДС можно ввезти покупки только на 150 франков на человека в день, нормы без пошлины — мясо 1 кг, масло 1 кг, алкоголь 5 л и 1 л крепкого, 250 сигарет; мясо и молочное из Украины и России ввозить нельзя; лекарства на месяц; наличные от 10 000 франков; посылки из-за границы — НДС от 62 франков, подарки до 100 франков, плата Почты за оформление; переезд с вещами по форме 18.44. По-немецки Zoll, Wertfreigrenze, Freimengen, Verzollung, по-французски douane, franchise de valeur, dédouanement, по-итальянски dogana, franchigia di valore, sdoganamento.',
+    lead='Швейцария не в ЕС, и на границе — таможня. За покупки в Германии или Италии и за посылки из интернет-магазинов часто нужно доплатить НДС и пошлину. Здесь — сколько можно ввезти без доплаты, что нельзя ввозить совсем и как не переплатить за посылку.',
+    body='''
+<nav class="toc" aria-label="Содержание"><b>В этой статье</b>
+<ul>
+  <li><a href="#limit">150 франков в день</a></li>
+  <li><a href="#normy">Мясо, алкоголь, табак</a></li>
+  <li><a href="#nelzya">Что нельзя ввозить</a></li>
+  <li><a href="#deklaraciya">Как задекларировать</a></li>
+  <li><a href="#posylki">Посылки из-за границы</a></li>
+  <li><a href="#pereezd">Переезд с вещами</a></li>
+  <li><a href="#ukraina">Посылки в Украину</a></li>
+</ul></nav>
+
+<h2 id="limit">150 франков в день</h2>
+<ul class="ul">
+  <li>С 1 января 2025 года без швейцарского НДС можно ввезти покупки на <b>150 франков на человека в день</b> (раньше было 300), дети тоже считаются (<a href="https://www.bazg.admin.ch/de/wertfreigrenze-mehrwertsteuer-einreise-150-franken">BAZG</a>).</li>
+  <li><b>Важно:</b> если покупки дороже 150 франков, НДС платят <b>со всей суммы</b>, а не с разницы. Купила на 400 — НДС с 400.</li>
+  <li>Одна вещь дороже 150 франков облагается всегда, даже если вас в машине четверо.</li>
+  <li><b>НДС:</b> 8,1 % на обычные товары, 2,6 % на еду, напитки без алкоголя, книги и лекарства.</li>
+  <li>Немецкий или итальянский НДС можно вернуть в магазине по бланку возврата (Ausfuhrschein) — тогда покупка выходит дешевле.</li>
+</ul>
+
+<h2 id="normy">Мясо, алкоголь, табак</h2>
+<p>На эти товары, кроме лимита 150 франков, есть нормы без пошлины — на человека в день (<a href="https://www.bazg.admin.ch/bazg/en/home/information-individuals/travel-and-purchases--allowances/goods-in-travel/freimengen--lebensmittel--alkohol-und-tabak.html">BAZG</a>):</p>
+<div class="tbl"><table>
+<thead><tr><th>Товар</th><th>Без пошлины</th><th>Пошлина сверх нормы</th></tr></thead>
+<tbody>
+<tr><td>Мясо и колбаса (кроме дичи)</td><td>1 кг</td><td>17 франков за кг (больше 10 кг — 23)</td></tr>
+<tr><td>Сливочное масло, сливки</td><td>1 кг или 1 л</td><td>16 франков за кг</td></tr>
+<tr><td>Масло растительное, жиры, маргарин</td><td>5 кг или 5 л</td><td>2 франка за кг</td></tr>
+<tr><td>Алкоголь до 18 % (вино, пиво)</td><td>5 л</td><td>2 франка за литр</td></tr>
+<tr><td>Алкоголь выше 18 %</td><td>1 л</td><td>15 франков за литр</td></tr>
+<tr><td>Сигареты, сигары</td><td>250 штук</td><td>0,25 франка за штуку</td></tr>
+</tbody></table></div>
+<p>Алкоголь и табак — только с 17 лет. Посчитай свою поездку в «Что можно ввезти без пошлины: лимиты на границе».</p>
+
+<h2 id="nelzya">Что нельзя ввозить</h2>
+<ul class="ul">
+  <li><b>Мясо и молочное — только из стран ЕС</b>, Норвегии, Исландии и Северной Ирландии. <b>Из Украины, России, Беларуси, Молдовы — запрещено</b>, даже немного для себя (<a href="https://www.blv.admin.ch/de/lebensmittel-im-privaten-reiseverkehr">BLV</a>).</li>
+  <li>Из этих стран можно: хлеб и выпечку, шоколад и сладости, макароны без мяса, рыбу до 20 кг, икру до 125 г, мёд до 2 кг, детское питание в заводской упаковке до 2 кг.</li>
+  <li><b>Лекарства</b> — только для себя и не больше чем на месяц.</li>
+  <li><b>Наличные</b> — сколько угодно, но от 10 000 франков на вопрос таможни нужно сказать, откуда деньги и для чего (<a href="https://www.bazg.admin.ch/de/mitnahme-von-bargeld-in-die-schweiz">BAZG</a>).</li>
+  <li>Оружие, наркотики, поддельные брендовые вещи, редкие животные и растения — запрещены или только с разрешением.</li>
+</ul>
+
+<h2 id="deklaraciya">Как задекларировать</h2>
+<ul class="ul">
+  <li>Есть что декларировать — заранее в приложении <b>QuickZoll</b> или на границе по красному коридору.</li>
+  <li>Нечего декларировать — зелёный коридор.</li>
+  <li>Не задекларировала то, что нужно, — придётся доплатить НДС и пошлину и штраф.</li>
+  <li>Вопросы — в справочную таможни: +41 58 467 15 15 (пн–пт 8:00–11:30 и 13:30–17:00).</li>
+</ul>
+
+<h2 id="posylki">Посылки из-за границы</h2>
+<ul class="ul">
+  <li><b>НДС не берут, если его сумма до 5 франков</b>: это посылка с товарами до 62 франков (по ставке 8,1 %) или до 193 франков (книги, еда — по ставке 2,6 %), вместе с доставкой (<a href="https://www.bazg.admin.ch/de/empfangen-von-briefen-und-paketen">BAZG</a>). Лимит 150 франков к посылкам не относится.</li>
+  <li><b>Плата перевозчика за оформление.</b> Швейцарская почта берёт от 11,50 до 70 франков: основа 13 франков из ЕС или 16 из других стран (на 1,50 дешевле при оплате онлайн) плюс 3 % стоимости (<a href="https://www.post.ch/de/empfangen/importverzollung">Post</a>). Из-за этого дешёвая покупка может выйти намного дороже.</li>
+  <li><b>Подарок от частного лица</b> до 100 франков — без налогов и пошлин, кроме алкоголя и табака. На посылке должно быть написано «подарок» (<a href="https://www.bazg.admin.ch/de/geschenksendungen-in-die-schweiz">BAZG</a>). Покупки из интернета подарком не считаются.</li>
+  <li><b>Интернет-площадки</b> (Temu, AliExpress и другие): с 2025 года крупные площадки сами отвечают за швейцарский НДС. Смотри в корзине, включён ли НДС и таможня, — тогда при доставке доплачивать не надо.</li>
+  <li>Лекарства из зарубежных интернет-аптек — почти всегда нельзя.</li>
+  <li>Не согласна с суммой — заявление в таможню в течение 60 дней после решения.</li>
+</ul>
+
+<h2 id="pereezd">Переезд с вещами</h2>
+<ul class="ul">
+  <li>Свои вещи при переезде в Швейцарию ввозятся без пошлины и НДС, если ты пользовалась ими за границей <b>не меньше 6 месяцев</b>. Заполни онлайн форму <b>18.44</b> и покажи на границе. Вещи можно ввезти частями в течение 2 лет (<a href="https://www.bazg.admin.ch/de/faq-umzugsgut">BAZG</a>).</li>
+  <li>Машина — тоже по форме 18.44, подробно — в теме «Транспорт, машина и права». Алкоголь и оружие в переезде — отдельно.</li>
+</ul>
+
+<h2 id="ukraina">Посылки в Украину</h2>
+<p>Через Швейцарскую почту письма и мелкие пакеты до 2 кг отправляются приоритетной почтой, для тяжёлых посылок есть отдельные варианты, экспресс сейчас недоступен. Доставка в некоторые районы ограничена — проверь у Укрпошты (<a href="https://www.post.ch/en/help-and-contact/ukraine/briefe-und-paket-in-die-ukraine">Post</a>).</p>
+''',
+    steps=[
+        'Перед покупками за границей посчитай: больше 150 франков на человека — НДС со всей суммы.',
+        'Мясо и молочное вези только из ЕС, из Украины и России — нельзя.',
+        'Есть что декларировать — сделай это заранее в приложении QuickZoll.',
+        'Заказываешь из-за границы — проверь, включены ли НДС и таможня, и сколько возьмёт перевозчик.',
+        'Переезжаешь — заполни форму 18.44 для своих вещей.',
+    ],
+    tools={'tamozhnya-limity': 'Впиши покупки и сколько вас — увидишь НДС, пошлину и что ввозить нельзя.', },
+    related=['transport', 'zhivotnye', 'prava-pokupatelya', 'skrytye-rashody'],
+    sources=[
+        ('BAZG — лимит 150 франков', 'https://www.bazg.admin.ch/de/wertfreigrenze-mehrwertsteuer-einreise-150-franken'),
+        ('BAZG — нормы для еды, алкоголя и табака', 'https://www.bazg.admin.ch/bazg/en/home/information-individuals/travel-and-purchases--allowances/goods-in-travel/freimengen--lebensmittel--alkohol-und-tabak.html'),
+        ('BLV — еда в личном багаже', 'https://www.blv.admin.ch/de/lebensmittel-im-privaten-reiseverkehr'),
+        ('BAZG — лекарства', 'https://www.bazg.admin.ch/de/medikamente-import-schweiz-mengen-abgaben'),
+        ('BAZG — наличные', 'https://www.bazg.admin.ch/de/mitnahme-von-bargeld-in-die-schweiz'),
+        ('BAZG — письма и посылки', 'https://www.bazg.admin.ch/de/empfangen-von-briefen-und-paketen'),
+        ('BAZG — подарки', 'https://www.bazg.admin.ch/de/geschenksendungen-in-die-schweiz'),
+        ('Post — таможенное оформление', 'https://www.post.ch/de/empfangen/importverzollung'),
+        ('BAZG — переселенческое имущество', 'https://www.bazg.admin.ch/de/faq-umzugsgut'),
+        ('Post — письма и посылки в Украину', 'https://www.post.ch/en/help-and-contact/ukraine/briefe-und-paket-in-die-ukraine'),
+    ],
+    terms=[('Deutsch', 'Zoll, BAZG, Wertfreigrenze, Freimengen, Mehrwertsteuer (MWST), Verzollung, Zollabgaben, QuickZoll, Ausfuhrschein, Geschenksendung, Übersiedlungsgut, Formular 18.44, Barmittel'), ('Français', 'douane, OFDF, franchise de valeur, franchises quantitatives, TVA, dédouanement, redevances, envoi-cadeau, effets de déménagement, formulaire 18.44, argent liquide'), ('Italiano', 'dogana, UDSC, franchigia di valore, franchigie quantitative, IVA, sdoganamento, invio regalo, masserizie di trasloco, modulo 18.44, denaro contante'), ('English', 'customs, value limit, duty-free allowances, VAT, customs clearance, gift parcel, household effects, form 18.44, cash')],
+)
+
+ARTICLES['prava-pokupatelya'] = dict(
+    h1='Права покупателя в Швейцарии: <em>гарантия, возврат, подписки и счета, с которыми ты не согласна</em>',
+    seo='Права покупателя в Швейцарии: гарантия 2 года, возврат, отзыв договора, подписки (Konsumentenrecht)',
+    desc='Права покупателя в Швейцарии простыми словами на русском: общего права вернуть покупку из интернета нет — только по правилам магазина; отзыв договора за 14 дней при покупке у двери и по телефону; гарантия 2 года и как быстро сообщить о дефекте; что можно исключить в условиях магазина; неоплаченный заказ и товары, которые ты не заказывала; подписки и ловушки (Abofalle); несогласие со счётом и возражение против Betreibung за 10 дней; бесплатная помощь: Konsumentenschutz, FRC, ACSI, омбудсмены. По-немецки Garantie, Gewährleistung, Widerruf, Abofalle, по-французски garantie, droit de révocation, по-итальянски garanzia, diritto di revoca.',
+    lead='В Швейцарии права покупателя слабее, чем в ЕС: например, вернуть покупку из интернет-магазина можно только если магазин сам это разрешает. Но кое-что закон защищает твёрдо. Здесь — что именно и как этим пользоваться.',
+    body='''
+<nav class="toc" aria-label="Содержание"><b>В этой статье</b>
+<ul>
+  <li><a href="#vozvrat">Вернуть покупку</a></li>
+  <li><a href="#otzyv">Отозвать договор за 14 дней</a></li>
+  <li><a href="#garantiya">Гарантия и дефект</a></li>
+  <li><a href="#nezakaz">То, что ты не заказывала</a></li>
+  <li><a href="#podpiski">Подписки и ловушки</a></li>
+  <li><a href="#schet">Счёт, с которым ты не согласна</a></li>
+  <li><a href="#pomoshch">Кто поможет</a></li>
+</ul></nav>
+
+<h2 id="vozvrat">Вернуть покупку</h2>
+<ul class="ul">
+  <li>В Швейцарии <b>нет общего права</b> вернуть исправную покупку — ни в магазине, ни в интернете. Возврат — это <b>добрая воля магазина</b> (Kulanz): смотри его условия (AGB) до покупки.</li>
+  <li>Многие крупные магазины всё равно принимают возврат 14–30 дней — сохраняй чек и упаковку.</li>
+  <li>Покупаешь в интернет-магазине из ЕС — там часто действует право ЕС с 14 днями на возврат.</li>
+</ul>
+
+<h2 id="otzyv">Отозвать договор за 14 дней</h2>
+<ul class="ul">
+  <li>Право отозвать договор (Widerrufsrecht) есть, если договор заключён <b>у двери дома</b>, на работе, на улице или в транспорте, на рекламной поездке или <b>по телефону</b> — и сумма больше 100 франков (Обязательственное право, OR ст. 40a и далее).</li>
+  <li>Срок — <b>14 дней</b> с момента, когда ты подписала договор и узнала о праве отзыва. Отзыв — письменно, лучше заказным.</li>
+  <li>Для покупок в интернете и в обычном магазине это право не действует.</li>
+</ul>
+
+<h2 id="garantiya">Гарантия и дефект</h2>
+<ul class="ul">
+  <li><b>Гарантия по закону</b> (Gewährleistung) — <b>2 года</b> с получения товара, для подержанных вещей магазин может сократить до 1 года (OR ст. 210).</li>
+  <li><b>Но:</b> в своих условиях (AGB) продавец может заменить её своей гарантией или ограничить, например только ремонтом. Читай условия до покупки.</li>
+  <li><b>О дефекте сообщай сразу</b>, как обнаружила, письменно (Mängelrüge, OR ст. 201): что сломалось, когда купила, номер заказа, фото. Тянуть нельзя — можно потерять право.</li>
+  <li>Что можно требовать: ремонт или замену (если это позволяют условия), снижение цены или возврат денег при серьёзном дефекте.</li>
+  <li><b>Гарантия производителя</b> (Garantie) — это отдельное добровольное обещание, условия — в гарантийном талоне.</li>
+  <li>Письмо продавцу о дефекте поможет сделать «Письма продавцу: дефект, отмена подписки, отзыв договора, спор по счёту».</li>
+</ul>
+
+<h2 id="nezakaz">То, что ты не заказывала</h2>
+<p>Прислали товар, который ты не заказывала, — платить и отправлять его обратно не обязана (OR ст. 6a). Если это явная ошибка, сообщи отправителю. Счёт за то, что ты не заказывала, не оплачивай.</p>
+
+<h2 id="podpiski">Подписки и ловушки (Abofalle)</h2>
+<ul class="ul">
+  <li>Как отменить подписку — написано в договоре: срок и форма. Отменяй письменно и попроси подтверждение.</li>
+  <li><b>Ловушки:</b> «бесплатный пробный период», который сам превращается в платную подписку, мелкий шрифт, звонки «вы выиграли». Интернет-магазин обязан ясно показать, что заказ платный.</li>
+  <li>Заключила договор по телефону — у тебя 14 дней на отзыв.</li>
+  <li>Спор со связью, банком, страховкой или турагентством — сначала жалоба самой компании, потом бесплатный омбудсмен (например, <a href="https://www.ombudscom.ch">Ombudscom</a> для связи).</li>
+</ul>
+
+<h2 id="schet">Счёт, с которым ты не согласна</h2>
+<ol class="ol">
+  <li><b>Не молчи.</b> Напиши продавцу письменно, что и почему ты оспариваешь, и попроси исправить счёт. Оплати бесспорную часть, если она есть.</li>
+  <li><b>Напоминания</b> (Mahnung) и письма инкассо — это ещё не принудительное взыскание.</li>
+  <li><b>Пришёл платёжный приказ (Zahlungsbefehl)</b> от Betreibungsamt — если долг спорный, подай <b>возражение (Rechtsvorschlag) в течение 10 дней</b>, объяснять причину не нужно. Подробно — в теме «Долги в Швейцарии и Betreibung».</li>
+  <li>Дальше спор решает примирительный орган — это недорого и без адвоката.</li>
+</ol>
+
+<h2 id="pomoshch">Кто поможет</h2>
+<ul class="ul">
+  <li><b>Konsumentenschutz (SKS)</b> — немецкая Швейцария, консультация по телефону +41 31 370 24 24 (пн–пт).</li>
+  <li><b>FRC</b> — франкоязычная Швейцария: членство от 90 франков в год, нечленам — одна первая консультация бесплатно.</li>
+  <li><b>ACSI</b> — Тичино: +41 91 922 97 55.</li>
+  <li>Журналы K-Tipp и Beobachter консультируют своих подписчиков. Подробно — «Профсоюзы и консультации: взносы, сроки, телефоны».</li>
+</ul>
+''',
+    steps=[
+        'Перед покупкой прочитай условия магазина: возврат, гарантия, кто платит доставку.',
+        'Сохраняй чеки, номера заказов и упаковку, фотографируй дефекты.',
+        'Дефект — сообщи продавцу сразу и письменно.',
+        'Подписку отменяй письменно в срок и проси подтверждение.',
+        'Платёжный приказ за спорный долг — возражение в течение 10 дней.',
+    ],
+    pomosh=dict(ids=['sks', 'frc', 'acsi', 'ktipp', 'ombudscom'], t='Бесплатно или за небольшой взнос помогут организации потребителей и отраслевые омбудсмены.'),
+    tools={'pisma-prodavcu': 'Дефект, подписка, отзыв договора, спор по счёту — письмо на языке продавца с переводом, отправляй заказным.', 'kuda-obratitsya': 'Организации потребителей и омбудсмены: взносы, телефоны и когда помогут.'},
+    related=['betreibung', 'tamozhnya', 'profsoyuzy', 'skrytye-rashody'],
+    sources=[
+        ('Обязательственное право (OR): ст. 6a, 40a–40f, 197–210', 'https://www.fedlex.admin.ch/eli/cc/27/317_321_377/de'),
+        ('Закон о долговом взыскании (SchKG), ст. 74 — возражение', 'https://www.fedlex.admin.ch/eli/cc/11/529_488_529/de'),
+        ('Konsumentenschutz (SKS)', 'https://www.konsumentenschutz.ch'),
+        ('FRC — помощь потребителям', 'https://www.frc.ch/aide'),
+        ('ACSI — потребители Тичино', 'https://www.acsi.ch'),
+        ('Ombudscom — омбудсмен связи', 'https://www.ombudscom.ch'),
+    ],
+    terms=[('Deutsch', 'Gewährleistung, Garantie, Mangel, Mängelrüge, Nachbesserung, Ersatzlieferung, Minderung, Wandelung, Widerrufsrecht, Haustürgeschäft, Kulanz, AGB, unbestellte Ware, Abofalle, Kündigung, Mahnung, Zahlungsbefehl, Rechtsvorschlag, Ombudsstelle'), ('Français', 'garantie légale, garantie du fabricant, défaut, avis des défauts, réparation, remplacement, réduction du prix, résolution, droit de révocation, démarchage à domicile, geste commercial, conditions générales, marchandise non commandée, piège à abonnement, résiliation, rappel, commandement de payer, opposition, médiateur'), ('Italiano', 'garanzia legale, garanzia del produttore, difetto, notifica dei difetti, riparazione, sostituzione, riduzione del prezzo, diritto di revoca, vendita a domicilio, condizioni generali, merce non ordinata, trappola dell’abbonamento, disdetta, diffida, precetto esecutivo, opposizione'), ('English', 'statutory warranty, manufacturer’s guarantee, defect, notice of defect, repair, replacement, price reduction, right of withdrawal, doorstep sale, terms and conditions, unsolicited goods, subscription trap, cancellation, reminder, payment order, objection, ombudsman')],
+    post='Это сообщение о дефекте, отзыв договора, отмена подписки и возражение против счёта.',
+    post2='Для отзыва и возражения считается день отправки или получения — храни квитанцию.',
 )

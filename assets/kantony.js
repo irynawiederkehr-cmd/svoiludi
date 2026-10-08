@@ -1,6 +1,6 @@
 /* Официальные страницы кантонов для статей «Как устроена Швейцария» (проверено 08.10.2026 по спискам SEM и ESTV и сайтам кантонов).
    fb — для этих разделов ссылка ведёт на главную кантона (точную страницу проверить не удалось). einb — что кантон добавляет к натурализации.
-   Обновлять раз в год вместе с проверкой статей. */
+   stva, sozial, kesb добавлены 08.10.2026 (часть ссылок помечена в claude/proverit-ssylki.md для перепроверки). Обновлять раз в год вместе с проверкой статей. */
 window.KANTONY = {
 "ZH": {
 "n": "Цюрих",
@@ -10,7 +10,10 @@ window.KANTONY = {
 "quellensteuer": "https://www.zh.ch/de/steuern-finanzen/steuern/quellensteuer.html",
 "migration": "https://www.zh.ch/de/sicherheitsdirektion/migrationsamt.html",
 "einbuergerung": "https://www.zh.ch/de/migration-integration/einbuergerung.html",
-"betreibung": "https://www.zh.ch/de.html"
+"betreibung": "https://www.zh.ch/de.html",
+"stva": "https://www.zh.ch/de/mobilitaet/fuehrerausweis-fahren-lernen/auslaendischer-fuehrerausweis.html",
+"sozial": "https://www.zh.ch/de/soziales/sozialhilfe.html",
+"kesb": "https://www.zh.ch/de/familie/kindes-und-erwachsenenschutz.html"
 },
 "fb": [
 "betreibung"
@@ -25,7 +28,10 @@ window.KANTONY = {
 "quellensteuer": "https://www.taxinfo.sv.fin.be.ch/taxinfo/f0495105-978d-45c0-ae6e-1b0881602f1e",
 "migration": "https://www.migration.sid.be.ch/de/start.html",
 "einbuergerung": "https://www.einbuergerung.sid.be.ch/de/start.html",
-"betreibung": "https://www.be.ch/"
+"betreibung": "https://www.be.ch/",
+"stva": "https://www.svsa.sid.be.ch/de/start/fuehrerausweise/rund-um-fuehrerausweis/fuehrerausweis-ukraine.html",
+"sozial": "https://www.gsi.be.ch/de/start/themen/soziales.html",
+"kesb": "https://www.kesb.dij.be.ch/de/start.html"
 },
 "fb": [
 "betreibung"
@@ -39,7 +45,10 @@ window.KANTONY = {
 "quellensteuer": "https://steuern.lu.ch/publikationen/nav_wegleitungen/we_quellensteuer",
 "migration": "https://migration.lu.ch/",
 "einbuergerung": "https://gemeinden.lu.ch/Einbuergerungen/einbuergerung_ausland/ordentliche_einbuergerung",
-"betreibung": "https://gerichte.lu.ch/organisation/betreibungsaemter"
+"betreibung": "https://gerichte.lu.ch/organisation/betreibungsaemter",
+"stva": "https://stva.lu.ch",
+"sozial": "https://disg.lu.ch/themen/sozialhilfe",
+"kesb": "https://gemeinden.lu.ch/Kindes_und_Erwachsenenschutz"
 },
 "fb": []
 },
@@ -51,7 +60,10 @@ window.KANTONY = {
 "quellensteuer": "https://www.ur.ch/",
 "migration": "https://www.ur.ch/",
 "einbuergerung": "https://www.ur.ch/",
-"betreibung": "https://www.ur.ch/"
+"betreibung": "https://www.ur.ch/",
+"stva": "https://www.ur.ch/_doc/449089",
+"sozial": "https://www.ur.ch/unterinstanzen/1558",
+"kesb": "https://www.ur.ch/unterinstanzen/1007"
 },
 "fb": [
 "betreibung",
@@ -69,7 +81,10 @@ window.KANTONY = {
 "quellensteuer": "https://www.sz.ch/behoerden/verwaltung/finanzdepartement/steuerverwaltung/quellensteuer.html/8756-8758-8802-10332-10354-10449",
 "migration": "https://www.sz.ch/migration",
 "einbuergerung": "https://www.sz.ch/behoerden/verwaltung/departement-des-innern/departementssekretariat/buergerrecht.html/8756-8758-8802-9316-9472-9477",
-"betreibung": "https://www.sz.ch/"
+"betreibung": "https://www.sz.ch/",
+"stva": "https://www.sz.ch/mobilitaet-verkehr/verkehrsamt/strassenverkehr/fuehrerzulassung/umtausch_auslaendischer_fuehrerausweis.html/72-512-450-446-5488-5549-5756",
+"sozial": "https://www.sz.ch/behoerden/verwaltung/departement-des-innern/sozialverzeichnis.html/8756-8758-8802-9316-10034/keyword/82/szs/1",
+"kesb": "https://www.sz.ch/behoerden/verwaltung/departement-des-innern/aemter-fuer-kindes-und-erwachsenenschutz-kesb.html/8756-8758-8802-9316-9321"
 },
 "fb": [
 "betreibung"
@@ -83,7 +98,10 @@ window.KANTONY = {
 "quellensteuer": "https://www.ow.ch/",
 "migration": "https://www.ow.ch/",
 "einbuergerung": "https://www.ow.ch/",
-"betreibung": "https://www.ow.ch/"
+"betreibung": "https://www.ow.ch/",
+"stva": "https://www.ow.ch/verwaltung/strassenverkehrsamt",
+"sozial": "https://www.ow.ch/aemter/244",
+"kesb": "https://www.ow.ch/fachbereiche/1978"
 },
 "fb": [
 "betreibung",
@@ -101,7 +119,10 @@ window.KANTONY = {
 "quellensteuer": "https://www.steuern-nw.ch/natuerlichepersonen/quellensteuer/",
 "migration": "https://www.nw.ch/migration/1146",
 "einbuergerung": "https://www.nw.ch/",
-"betreibung": "https://www.nw.ch/"
+"betreibung": "https://www.nw.ch/",
+"stva": "https://www.nw.ch/strassenverkehrsamt",
+"sozial": "https://www.nw.ch/sozialamtdienste/1573",
+"kesb": "https://www.nw.ch/kesb/1001"
 },
 "fb": [
 "betreibung",
@@ -116,7 +137,10 @@ window.KANTONY = {
 "quellensteuer": "https://www.gl.ch/verwaltung/online-schalter.html/1368/opendcategory/3078",
 "migration": "https://www.gl.ch/verwaltung/sicherheit-und-justiz/justiz/migration.html/1215",
 "einbuergerung": "https://www.gl.ch/verwaltung/sicherheit-und-justiz/justiz/zivilstands-und-buergerrechtsdienst-des-kantons-glarus/buergerrecht.html/1223",
-"betreibung": "https://www.gl.ch/verwaltung/sicherheit-und-justiz/justiz/betreibungs-konkursamt.html/1258"
+"betreibung": "https://www.gl.ch/verwaltung/sicherheit-und-justiz/justiz/betreibungs-konkursamt.html/1258",
+"stva": "https://www.gl.ch/verwaltung/sicherheit-und-justiz/strassenverkehrsamt.html",
+"sozial": "https://www.gl.ch/verwaltung/volkswirtschaft-und-inneres/soziales/sozialberatung.html/977",
+"kesb": "https://www.gl.ch/verwaltung/volkswirtschaft-und-inneres/soziales/kindes-und-erwachsenenschutz.html/962"
 },
 "fb": []
 },
@@ -128,7 +152,10 @@ window.KANTONY = {
 "quellensteuer": "https://zg.ch/de/steuern-finanzen/steuern/quellensteuer",
 "migration": "https://zg.ch/de/sicherheitsdirektion/amt-fuer-migration",
 "einbuergerung": "https://zg.ch/de/migration-integration/einbuergerung/ordentliche-einbuergerung",
-"betreibung": "https://cdn.zg.ch/dam/jcr:87cb3853-5a22-4f9b-928e-40d220e2f906/Adressen%20Betreibungs%C3%A4mter%20Stand%20Februar%202023.pdf"
+"betreibung": "https://cdn.zg.ch/dam/jcr:87cb3853-5a22-4f9b-928e-40d220e2f906/Adressen%20Betreibungs%C3%A4mter%20Stand%20Februar%202023.pdf",
+"stva": "https://www.zg.ch/de/sicherheit/strassenverkehrsamt",
+"sozial": "https://zg.ch/de/soziales/sozialhilfe/persoenliche-und-wirtschaftliche-sozialhilfe",
+"kesb": "https://zg.ch/de/familie-gesellschaft/kindes-und-erwachsenenschutz"
 },
 "fb": [],
 "einb": "немецкий B2 устно и B1 письменно"
@@ -141,9 +168,14 @@ window.KANTONY = {
 "quellensteuer": "https://www.fr.ch/impots/impot-a-la-source/personnes-imposees-a-la-source-pis",
 "migration": "https://www.fr.ch/dsjs/spomi",
 "einbuergerung": "https://www.fr.ch/vie-quotidienne/permis-de-sejour-et-naturalisation/la-naturalisation/naturalisation-ordinaire",
-"betreibung": "https://www.fr.ch/etat-et-droit/poursuites-et-faillites/contacter-un-bureau-de-loffice-des-poursuites-et-des-faillites"
+"betreibung": "https://www.fr.ch/etat-et-droit/poursuites-et-faillites/contacter-un-bureau-de-loffice-des-poursuites-et-des-faillites",
+"stva": "https://www.ocn.ch/de/ukraine",
+"sozial": "https://fr.ch/de/ksa/alltag/lebensverlauf/sozialhilfe",
+"kesb": "https://www.fr.ch/de"
 },
-"fb": [],
+"fb": [
+"kesb"
+],
 "einb": "3 года в кантоне (из них 2 за последние 5 лет), в общине 1–3 года, только с пермитом C"
 },
 "SO": {
@@ -154,7 +186,10 @@ window.KANTONY = {
 "quellensteuer": "https://so.ch/verwaltung/finanzdepartement/steueramt/quellensteuer/",
 "migration": "https://www.so.ch/verwaltung/departement-des-innern/migrationsamt/",
 "einbuergerung": "https://so.ch/verwaltung/volkswirtschaftsdepartement/amt-fuer-gemeinden/buergerrecht/",
-"betreibung": "https://so.ch/verwaltung/finanzdepartement/betreibungsaemter/"
+"betreibung": "https://so.ch/verwaltung/finanzdepartement/betreibungsaemter/",
+"stva": "https://so.ch/verwaltung/bau-und-justizdepartement/motorfahrzeugkontrolle/",
+"sozial": "https://sozialhilfehandbuch.so.ch/grundlagen/organisation-der-sozialhilfe/aufgaben-gemeinden/aufgaben-sozialdienste/",
+"kesb": "https://so.ch/verwaltung/departement-des-innern/kindes-und-erwachsenenschutz/"
 },
 "fb": []
 },
@@ -166,7 +201,10 @@ window.KANTONY = {
 "quellensteuer": "https://www.bs.ch/themen/arbeit-und-steuern/quellensteuer",
 "migration": "https://www.bs.ch/jsd/bdm/migrationsamt",
 "einbuergerung": "https://www.bs.ch/themen/persoenliches-und-wohnen/einbuergerungen/schritt-fuer-schritt-der-weg-zur-ordentlichen-einbuergerung-0",
-"betreibung": "https://www.bs.ch/gerichte-judikative/betreibungs-und-konkursamt"
+"betreibung": "https://www.bs.ch/gerichte-judikative/betreibungs-und-konkursamt",
+"stva": "https://www.bs.ch/mfk",
+"sozial": "https://www.bs.ch/themen/finanzielle-hilfe/leistungen/sozialhilfe",
+"kesb": "https://www.bs.ch/wsu/kindes-und-erwachsenenschutzbehoerde"
 },
 "fb": [],
 "einb": "2 года в общине прямо перед заявлением"
@@ -179,9 +217,14 @@ window.KANTONY = {
 "quellensteuer": "https://www.baselland.ch/politik-und-behorden/direktionen/finanz-und-kirchendirektion/steuerverwaltung/quellensteuer",
 "migration": "https://www.baselland.ch/politik-und-behorden/direktionen/sicherheitsdirektion/amt_fuer_migration",
 "einbuergerung": "https://www.baselland.ch/themen/einbuergerung",
-"betreibung": "https://www.baselland.ch/politik-und-behorden/direktionen/sicherheitsdirektion/zivilrechtsverwaltung/betreibungsamt/"
+"betreibung": "https://www.baselland.ch/politik-und-behorden/direktionen/sicherheitsdirektion/zivilrechtsverwaltung/betreibungsamt/",
+"stva": "https://www.baselland.ch/politik-und-behorden/direktionen/sicherheitsdirektion/motorfahrzeugkontrolle/fuehrer-und-lernfahrausweise/fuehrerausweise/motorfahrzeugfuehrer-aus-dem-ausland",
+"sozial": "https://oslvb.bl.ch/Behoerdengang/393",
+"kesb": "https://www.baselland.ch"
 },
-"fb": []
+"fb": [
+"kesb"
+]
 },
 "SH": {
 "n": "Шаффхаузен",
@@ -191,7 +234,10 @@ window.KANTONY = {
 "quellensteuer": "https://sh.ch/CMS/Webseite/Kanton-Schaffhausen/Beh-rde/Verwaltung/Finanzdepartement/Steuerverwaltung-3918-DE.html",
 "migration": "https://sh.ch/CMS/Webseite/Kanton-Schaffhausen/Beh-rde/Verwaltung/Departement-des-Innern/Migrationsamt-und-Passb-ro-3454-DE.html",
 "einbuergerung": "https://sh.ch/CMS/Webseite/Kanton-Schaffhausen/Beh-rde/Verwaltung/Volkswirtschaftsdepartement/Amt-f-r-Justiz-und-Gemeinden/Einb-rgerung-151418-DE.html",
-"betreibung": "https://sh.ch/CMS/Webseite/Kanton-Schaffhausen/Beh-rde/Justiz/Betreibungs--und-Konkursamt-407143-DE.html"
+"betreibung": "https://sh.ch/CMS/Webseite/Kanton-Schaffhausen/Beh-rde/Justiz/Betreibungs--und-Konkursamt-407143-DE.html",
+"stva": "https://strassenverkehrsamt.sh.ch",
+"sozial": "https://sh.ch/CMS/Webseite/Kanton-Schaffhausen/Beh-rde/Verwaltung/Departement-des-Innern/Sozialamt/Abteilung-Soziale-Angebote-15513618-DE.html",
+"kesb": "https://sh.ch/CMS/Webseite/Kanton-Schaffhausen/Beh-rde/Justiz/Kindes--und-Erwachsenenschutzbeh-rde--KESB--1306947-DE.html"
 },
 "fb": [
 "quellensteuer"
@@ -205,7 +251,10 @@ window.KANTONY = {
 "quellensteuer": "https://ar.ch/verwaltung/departement-finanzen/steuerverwaltung/",
 "migration": "https://ar.ch/verwaltung/departement-inneres-und-sicherheit/amt-fuer-inneres/abteilung-migration/",
 "einbuergerung": "https://ar.ch/verwaltung/departement-inneres-und-sicherheit/amt-fuer-inneres/abteilung-buergerrecht-und-zivilstand/einbuergerungen/ordentliche-einbuergerung/",
-"betreibung": "https://ar.ch/verwaltung/departement-inneres-und-sicherheit/departementssekretariat/betreibungsaemter-und-konkursamt/betreibungsaemter/"
+"betreibung": "https://ar.ch/verwaltung/departement-inneres-und-sicherheit/departementssekretariat/betreibungsaemter-und-konkursamt/betreibungsaemter/",
+"stva": "https://www.ar.ch/verwaltung/departement-bau-und-volkswirtschaft/amt-fuer-strassenverkehr/",
+"sozial": "https://ar.ch/verwaltung/departement-gesundheit-und-soziales/amt-fuer-soziales/abteilung-sozialhilfe-und-asyl/sozialhilfe/",
+"kesb": "https://ar.ch/verwaltung/departement-gesundheit-und-soziales/kindes-und-erwachsenenschutzbehoerde/"
 },
 "fb": [
 "quellensteuer"
@@ -220,7 +269,10 @@ window.KANTONY = {
 "quellensteuer": "https://ai.ch/themen/steuern/steuerarten/quellensteuer",
 "migration": "https://ai.ch/themen/auslaender/einreise-und-aufenthalt",
 "einbuergerung": "https://ai.ch/themen/auslaender/einbuergerung",
-"betreibung": "https://ai.ch/themen/staat-und-recht/betreibung"
+"betreibung": "https://ai.ch/themen/staat-und-recht/betreibung",
+"stva": "https://www.ai.ch/themen/fahrzeuge-und-verkehr",
+"sozial": "https://www.ai.ch/themen/gesundheit-alter-und-soziales/sozialhilfe",
+"kesb": "https://www.ai.ch/themen/gesundheit-alter-und-soziales/erwachsenenschutz"
 },
 "fb": [],
 "einb": "5 лет в кантоне, из них 2 прямо перед заявлением"
@@ -233,7 +285,10 @@ window.KANTONY = {
 "quellensteuer": "https://www.sg.ch/steuern-finanzen/steuern/steuerarten/quellensteuer.html",
 "migration": "https://www.sg.ch/sicherheit/migrationsamt.html",
 "einbuergerung": "https://www.sg.ch/recht/buergerrecht-zivilstand/einbuergerung.html",
-"betreibung": "https://www.sg.ch/"
+"betreibung": "https://www.sg.ch/",
+"stva": "https://www.stva.sg.ch",
+"sozial": "https://www.sg.ch/gesundheit-soziales/soziales/sozialhilfe.html",
+"kesb": "https://www.kesb.sg.ch/regionen/st-gallen"
 },
 "fb": [
 "betreibung"
@@ -247,9 +302,14 @@ window.KANTONY = {
 "quellensteuer": "https://www.gr.ch/DE/institutionen/verwaltung/dfg/stv/steuererklaerung/quellensteuer/Seiten/default.aspx",
 "migration": "https://www.gr.ch/DE/institutionen/verwaltung/djsg/afm/dienstleistungen/Einreise_Aufenthalt/Seiten/default.aspx",
 "einbuergerung": "https://www.gr.ch/DE/institutionen/verwaltung/djsg/afm/dienstleistungen/buergerrecht/Seiten/OrdentlicheEinbuergerungAuslaender.aspx",
-"betreibung": "https://www.justiz-gr.ch/schuldbetreibung-und-konkurs/ueber-uns/betreibungs-und-konkursaemter/"
+"betreibung": "https://www.justiz-gr.ch/schuldbetreibung-und-konkurs/ueber-uns/betreibungs-und-konkursaemter/",
+"stva": "https://www.stva.gr.ch",
+"sozial": "https://www.gr.ch/DE/Seiten/welcome.aspx",
+"kesb": "https://www.gr.ch/DE/institutionen/verwaltung/djsg/kesb/Seiten/Kontakt.aspx"
 },
-"fb": [],
+"fb": [
+"sozial"
+],
 "einb": "5 лет в общине, из них 2 прямо перед заявлением"
 },
 "AG": {
@@ -260,7 +320,10 @@ window.KANTONY = {
 "quellensteuer": "https://www.ag.ch/de/verwaltung/dfr/steuern/quellensteuer",
 "migration": "https://www.ag.ch/de/verwaltung/dvi/migration-integration",
 "einbuergerung": "https://www.ag.ch/de/verwaltung/dvi/persoenliches-zivilstandswesen/einbuergerung/ordentliche-einbuergerung",
-"betreibung": "https://www.ag.ch/de/gerichte/betreibungs-konkurswesen/betreibungsinspektorat"
+"betreibung": "https://www.ag.ch/de/gerichte/betreibungs-konkurswesen/betreibungsinspektorat",
+"stva": "https://www.ag.ch/media/kanton-aargau/dvi/dokumente/stva/fuehrerausweise/merkblatt-ausl-fuehrerausweis-v5.pdf",
+"sozial": "https://www.ag.ch/de/themen/soziales-gesellschaft/soziale-sicherheit/handbuch-soziales",
+"kesb": "https://www.ag.ch/de/themen/soziales-gesellschaft/kindes-und-erwachsenenschutz"
 },
 "fb": [],
 "einb": "5 лет в кантоне, 3 года подряд в общине"
@@ -273,7 +336,10 @@ window.KANTONY = {
 "quellensteuer": "https://steuerverwaltung.tg.ch/hauptrubrik-1/quellensteuern.html/2876",
 "migration": "https://migrationsamt.tg.ch/",
 "einbuergerung": "https://hz.tg.ch/buergerrecht/einbuergerung-von-auslaendern/ordentliche-einbuergerung.html/9059",
-"betreibung": "https://betreibungsamt.tg.ch/"
+"betreibung": "https://betreibungsamt.tg.ch/",
+"stva": "https://strassenverkehrsamt.tg.ch/fuehrerzulassung/fuehrerausweis/ukraine.html/15027",
+"sozial": "https://sozialamt.tg.ch/hauptsektor-3.html/4501",
+"kesb": "https://kesb.tg.ch/"
 },
 "fb": [],
 "einb": "5 лет в кантоне, последние 3 года подряд в общине; немецкий B2 устно и B1 письменно"
@@ -286,7 +352,10 @@ window.KANTONY = {
 "quellensteuer": "https://www4.ti.ch/dfe/dc/dichiarazione/imposte-alla-fonte-1/informazioni-sullimposte-alla-fonte",
 "migration": "https://www4.ti.ch/index.php?id=117690",
 "einbuergerung": "https://www4.ti.ch/index.php?id=121982",
-"betreibung": "https://www4.ti.ch/di/dg/sezione-di-esecuzione-e-fallimento/chi-siamo/uffici-esecuzione"
+"betreibung": "https://www4.ti.ch/di/dg/sezione-di-esecuzione-e-fallimento/chi-siamo/uffici-esecuzione",
+"stva": "https://www4.ti.ch/di/sc/sezione-della-circolazione",
+"sozial": "https://www4.ti.ch/dss/dasf/chi-siamo/sezione-del-sostegno-sociale",
+"kesb": "https://www4.ti.ch/dss/dasf/temi/famiglia-e-figli/supporto-aiuto-e-protezione/autorita-regionali-di-protezione-arp"
 },
 "fb": []
 },
@@ -298,9 +367,14 @@ window.KANTONY = {
 "quellensteuer": "https://www.vd.ch/etat-droit-finances/impots/pour-les-employeurs/impot-a-la-source/personnes-imposees-a-la-source-/-sourciers",
 "migration": "https://www.vd.ch/population/population-etrangere/entree-et-sejour",
 "einbuergerung": "https://www.vd.ch/population/population-etrangere/naturalisation",
-"betreibung": "https://www.vd.ch/ojv/offices-des-poursuites"
+"betreibung": "https://www.vd.ch/ojv/offices-des-poursuites",
+"stva": "https://www.vd.ch/mobilite",
+"sozial": "https://www.vd.ch/aides-financieres-et-soutien-social/aides-financieres-et-comment-les-demander/revenu-dinsertion-ri",
+"kesb": "https://www.vd.ch"
 },
-"fb": [],
+"fb": [
+"kesb"
+],
 "einb": "2 года в кантоне, включая год перед заявлением; некоторые общины просят ещё год у них"
 },
 "VS": {
@@ -311,9 +385,15 @@ window.KANTONY = {
 "quellensteuer": "https://www.vs.ch/fr/web/scc/source",
 "migration": "https://www.vs.ch/web/spm",
 "einbuergerung": "https://www.vs.ch/web/spm/naturalisation-ordinaire1",
-"betreibung": "https://www.vs.ch/web/spf/organisation-des-offices-de-poursuites-et-faillites"
+"betreibung": "https://www.vs.ch/web/spf/organisation-des-offices-de-poursuites-et-faillites",
+"stva": "https://www.vs.ch/de/web/scn/permis-de-conduire-etranger",
+"sozial": "https://www.vs.ch",
+"kesb": "https://www.vs.ch"
 },
-"fb": [],
+"fb": [
+"kesb",
+"sozial"
+],
 "einb": "5 лет в кантоне, 3 года в общине"
 },
 "NE": {
@@ -324,7 +404,10 @@ window.KANTONY = {
 "quellensteuer": "https://www.ne.ch/autorites/DFS/SCCO/impot-source/Pages/accueil.aspx",
 "migration": "https://www.ne.ch/themes/migration-et-integration/sejour-et-etablissement",
 "einbuergerung": "https://www.ne.ch/themes/migration-et-integration/naturalisation",
-"betreibung": "https://www.ne.ch/themes/etat-droit-et-finances/poursuites-et-faillites"
+"betreibung": "https://www.ne.ch/themes/etat-droit-et-finances/poursuites-et-faillites",
+"stva": "https://www.ne.ch/scan",
+"sozial": "https://www.ne.ch/themes/social/guichets-sociaux-regionaux",
+"kesb": "https://www.ne.ch/autorites/autorites-judiciaires/tribunal-dinstance/apea"
 },
 "fb": [],
 "einb": "2 года в кантоне"
@@ -337,7 +420,10 @@ window.KANTONY = {
 "quellensteuer": "https://www.ge.ch/impot-source",
 "migration": "https://www.ge.ch/organisation/office-cantonal-population-migrations-ocpm",
 "einbuergerung": "https://www.ge.ch/devenir-suisse/naturalisation-ordinaire-conditions-remplir",
-"betreibung": "https://www.ge.ch/poursuites"
+"betreibung": "https://www.ge.ch/poursuites",
+"stva": "https://www.ge.ch/organisation/office-cantonal-vehicules",
+"sozial": "https://www.ge.ch/arriver-dans-canton-geneve-toutes-informations-pratiques/assurances-sociales-aide-sociale",
+"kesb": "https://justice.ge.ch/en/theme/adult-protection"
 },
 "fb": [],
 "einb": "2 года в кантоне, включая последние 12 месяцев; жить в Женеве всё время процедуры"
@@ -350,7 +436,10 @@ window.KANTONY = {
 "quellensteuer": "https://www.jura.ch/DFI/CTR/Impots-speciaux/Impot-a-la-source/Impot-a-la-source.html",
 "migration": "https://www.jura.ch/fr/Autorites/Administration/DSJP/SPOP/Police-des-etrangers/Police-des-etrangers.html",
 "einbuergerung": "https://www.jura.ch/fr/Autorites/Administration/DSJP/SPOP/Naturalisations/Naturalisations-Devenir-suisse.html",
-"betreibung": "https://www.jura.ch/fr/Autorites/Administration/DFI/Office-des-poursuites-et-faillites-OPF/Office-des-poursuites-et-faillites-OPF.html"
+"betreibung": "https://www.jura.ch/fr/Autorites/Administration/DFI/Office-des-poursuites-et-faillites-OPF/Office-des-poursuites-et-faillites-OPF.html",
+"stva": "https://www.jura.ch/ovj",
+"sozial": "https://www.jura.ch/DIN/SAS/Soutiens-financiers/Aide-sociale/Aide-sociale.html",
+"kesb": "https://www.jura.ch/fr/Autorites/Administration/DSJP/APEA/Autorite-de-protection-de-l-enfant-et-de-l-adulte-APEA.html"
 },
 "fb": []
 }
