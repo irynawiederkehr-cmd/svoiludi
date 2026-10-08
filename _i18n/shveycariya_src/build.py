@@ -165,7 +165,7 @@ def article(t):
   {DISC}
   <div class="share-slot" data-url="{url}" data-lead="Перешли тому, кому это сейчас нужно. Сообщение уже готово." data-text="Привет! Тут коротко и по-русски про {html.escape(t['title'])}: что важно знать и что сделать. {url}"></div>
 '''
-    extra = '<script src="/data/specialists.js"></script>\n' + ('<script src="/assets/kantony.js"></script>\n' if a.get('kanton') else '')
+    extra = '<script src="/data/specialists.js"></script>\n' + ('<script src="/assets/kantony.js"></script>\n' if (a.get('kanton') or 'class="med"' in a['body']) else '')
     out = head(title, a['desc'], url, 2) + '<body data-root="../../">' + top(2)[len('<body>'):] + main + foot(2, extra)
     os.makedirs(f'shveycariya/{t["slug"]}', exist_ok=True)
     open(f'shveycariya/{t["slug"]}/index.html', 'w', encoding='utf-8').write(out)

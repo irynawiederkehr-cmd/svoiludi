@@ -48,7 +48,8 @@ a.tm-card:hover{border-color:var(--brown);transform:translateY(-1px)}
 .cmp b{display:block;font-family:var(--display);font-weight:400;font-size:1.2rem;margin-bottom:6px;color:var(--brown)}
 .cmp p{font-size:.95rem;margin:0}
 .warn{background:var(--mustard-soft);border-radius:16px;padding:14px 18px;margin:8px 0 14px;font-size:.96rem}
-.warn b{display:block;margin-bottom:4px}
+.warn>b:first-child{display:block;margin-bottom:4px}
+.warn a[href^="tel:"]{font-weight:700;white-space:nowrap}
 .todo{background:var(--paper);border:1.5px solid var(--line);border-radius:22px;padding:clamp(18px,3vw,26px);margin-top:34px}
 .todo h2{margin-top:0!important}
 .todo ol{margin:0;padding-left:0;list-style:none;counter-reset:s;display:flex;flex-direction:column;gap:10px}
@@ -129,3 +130,48 @@ a.tm-card:hover{border-color:var(--brown);transform:translateY(-1px)}
 .toc{box-sizing:border-box;max-width:100%}
 .toc a{color:var(--ink);white-space:normal;overflow-wrap:anywhere;display:inline}
 .art-main h2[id]{scroll-margin-top:90px}
+/* Экстренные номера и дежурный врач по кантонам */
+.nums{list-style:none;padding:0!important;display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:8px}
+.nums li{display:flex;gap:12px;align-items:baseline;background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:10px 14px;margin:0!important}
+.nums li::marker{content:none}
+.nums>li>a{font-weight:800;font-size:1.25rem;text-decoration:none;color:var(--brown);min-width:3.2em}
+.nums span{font-size:.95rem}
+.nums span a{font-weight:600}
+.med{background:var(--paper);border:1.5px solid var(--line);border-radius:18px;padding:16px 18px;margin:14px 0 18px}
+.med-l{list-style:none;padding:0!important;margin:10px 0 6px!important;display:flex;flex-direction:column;gap:8px}
+.med-l li{display:flex;gap:12px;align-items:baseline;flex-wrap:wrap;margin:0!important}
+.med-l li::marker{content:none}
+.med-n{font-weight:800;font-size:1.12rem;white-space:nowrap;text-decoration:none;color:var(--brown)}
+.med-l span{flex:1;min-width:12em;font-size:.94rem}
+.med-none{font-size:.94rem;color:var(--muted)}
+.med-src{font-size:.88rem;margin:4px 0 0!important}
+.med-btns{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.med-btns button{font:inherit;font-size:.9rem;font-weight:700;border:1.5px solid var(--brown);background:var(--paper);color:var(--brown);border-radius:999px;padding:8px 16px;cursor:pointer}
+.med-btns .med-print{background:var(--brown);color:#fff}
+.med-dlg{border:none;border-radius:20px;padding:0 20px 16px;width:min(560px,calc(100vw - 32px));max-height:85vh;overflow:auto;background:var(--bg);color:var(--ink)}
+.med-dlg::backdrop{background:rgba(0,0,0,.45)}
+.med-dh{position:sticky;top:0;background:var(--bg);display:flex;justify-content:space-between;align-items:center;padding:16px 0 8px;font-size:1.1rem}
+.med-x{font-size:1.6rem;line-height:1;border:none;background:none;cursor:pointer;color:var(--ink);padding:0 4px}
+.med-dlg details{border-top:1px solid var(--line);padding:8px 0}
+.med-dlg summary{cursor:pointer;font-weight:700}
+#medcard{display:none}
+@media print{
+  html.pc body>*:not(#medcard){display:none!important}
+  html.pc #medcard{display:block}
+  @page{size:A4;margin:10mm}
+  #medcard{font-family:Arial,Helvetica,sans-serif;color:#000}
+  .mc-row{display:flex;gap:0}
+  .mc{width:95mm;min-height:135mm;box-sizing:border-box;border:1px dashed #555;padding:5mm;font-size:8.5pt;line-height:1.25}
+  .mc h3{font-family:Arial,Helvetica,sans-serif;font-size:12pt;margin:0 0 2mm}
+  .mc h3 small{display:block;font-size:7.5pt;font-weight:400}
+  .mc-t{font-weight:700;margin:3mm 0 1mm;border-bottom:1px solid #000;font-size:8.5pt}
+  .mc ul{list-style:none;padding:0;margin:0}
+  .mc-sos{display:grid;grid-template-columns:1fr 1fr;gap:1mm 3mm}
+  .mc li{display:flex;gap:2mm;align-items:baseline}
+  .mc li b{font-size:11pt;min-width:11mm}
+  .mc-k li b{font-size:9.5pt;min-width:24mm;white-space:nowrap}
+  .mc li i{font-size:7pt}
+  .mc-me li{margin:2.2mm 0}
+  .mc-f{font-size:7pt;margin-top:3mm}
+  .mc-cut{font-size:8pt;margin-top:3mm}
+}
