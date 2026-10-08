@@ -50,6 +50,12 @@
   const credit = () => { const l = CFG.lang ? CFG.lang() : (document.documentElement.lang === 'uk' ? 'uk' : 'ru'); return CREDIT[l] || CREDIT.ru; };
   function marks(pg){ if (!pg.wm || vip()) return []; const out = [], dx = 66, dy = 27; for (let r = 0, y = 14; y < pg.wmMaxY - 2; y += dy, r++) for (let x = (r % 2) * dx / 2 - 10; x < pg.w; x += dx) out.push([x, y]); return out; }
   const showCredit = pg => pg.credit && !vip();
+  /* Штамп «ОБРАЗЕЦ» для шаблонов юридических документов (договоры): pg.stamp = {cx, cy, a, color, lines: [[текст, размер, жирный], …]}.
+     Это предупреждение «мы не юристы», поэтому подписка (SVL_VIP) его не убирает. */
+  const STA = 0.82;
+  function stampGeo(st){ const pad = 3.2, ws = st.lines.map(l => tw(l[0], l[2], l[1])), w = Math.max(...ws) + pad * 2; let h = pad * 2 - 1; st.lines.forEach(l => h += l[1] * PT * 1.25); return {w, h, pad}; }
+  function rot(st, lx, ly){ const a = (st.a || 0) * Math.PI / 180; return [st.cx + lx * Math.cos(a) + ly * Math.sin(a), st.cy - lx * Math.sin(a) + ly * Math.cos(a)]; }
+  function stampLines(st, g){ let y = -g.h / 2 + g.pad - 0.5; return st.lines.map(l => { y += l[1] * PT * 1.25; const r = [l, y - l[1] * PT * 0.22]; return r; }); }
   function svg(pg){
     let o = `<svg viewBox="0 0 ${pg.w} ${pg.h}" xmlns="http://www.w3.org/2000/svg" role="img"><rect width="${pg.w}" height="${pg.h}" fill="#fff"/>`;
     pg.ops.forEach(p => {
@@ -60,6 +66,9 @@
     });
     const mk = marks(pg); if (mk.length) o += `<g fill="${WMC}" fill-opacity="${WMA}" font-family="Manrope" font-weight="700" font-size="${(WMS * PT).toFixed(3)}">` + mk.map(([x, y]) => `<text transform="translate(${x} ${y}) rotate(-24)">${esc(WMT)}</text>`).join('') + '</g>';
     if (showCredit(pg)) o += `<text x="${pg.w - 8}" y="${pg.creditY}" font-family="Manrope" font-size="${(4.6 * PT).toFixed(3)}" fill="#7A6E62" text-anchor="end">${esc(credit())}</text>`;
+    if (pg.stamp) { const st = pg.stamp, g = stampGeo(st);
+      o += `<g transform="translate(${st.cx} ${st.cy}) rotate(${-(st.a || 0)})" opacity="${STA}" fill="none" stroke="${st.color}"><rect x="${-g.w / 2}" y="${-g.h / 2}" width="${g.w}" height="${g.h}" rx="1.2" stroke-width="0.8"/><rect x="${-g.w / 2 + 1.1}" y="${-g.h / 2 + 1.1}" width="${g.w - 2.2}" height="${g.h - 2.2}" rx="0.8" stroke-width="0.3"/>`
+        + stampLines(st, g).map(([l, y]) => `<text x="0" y="${y.toFixed(2)}" stroke="none" fill="${st.color}" font-family="Manrope" font-weight="${l[2] ? 700 : 400}" font-size="${(l[1] * PT).toFixed(3)}" text-anchor="middle"${l[2] ? ' letter-spacing="0.6"' : ''}>${esc(l[0])}</text>`).join('') + '</g>'; }
     return o + '</svg>';
   }
   const FONT_FILES = {'Manrope-Regular': '/assets/lib/fonts-pdf/Manrope-Regular.ttf', 'Manrope-Bold': '/assets/lib/fonts-pdf/Manrope-Bold.ttf'};
@@ -96,6 +105,11 @@
       const mk = marks(pg);
       if (mk.length) { const gs = doc.GState ? a => doc.setGState(new doc.GState({opacity: a})) : null; if (gs) gs(WMA); doc.setFont('Manrope-Bold', 'normal'); doc.setFontSize(WMS); doc.setTextColor(...(gs ? hex(WMC) : [240, 235, 228])); mk.forEach(([x, y]) => doc.text(WMT, x, y, {angle: 24})); if (gs) gs(1); }
       if (showCredit(pg)) { doc.setFont('Manrope-Regular', 'normal'); doc.setFontSize(4.6); doc.setTextColor(122, 110, 98); doc.text(credit(), pg.w - 8, pg.creditY, {align: 'right'}); }
+      if (pg.stamp) { const st = pg.stamp, g = stampGeo(st), col = hex(st.color), gs = doc.GState ? a => doc.setGState(new doc.GState({opacity: a})) : null; if (gs) gs(STA);
+        const box = (i, lw) => { const hw = g.w / 2 - i, hh = g.h / 2 - i, c = [[-hw, -hh], [hw, -hh], [hw, hh], [-hw, hh]].map(q => rot(st, q[0], q[1])); doc.setLineWidth(lw); for (let k = 0; k < 4; k++) doc.line(c[k][0], c[k][1], c[(k + 1) % 4][0], c[(k + 1) % 4][1]); };
+        doc.setDrawColor(...col); doc.setLineDashPattern([], 0); box(0, 0.8); box(1.1, 0.3); doc.setTextColor(...col);
+        stampLines(st, g).forEach(([l, y]) => { doc.setFont(l[2] ? 'Manrope-Bold' : 'Manrope-Regular', 'normal'); doc.setFontSize(l[1]); const w = doc.getTextWidth(l[0]), p = rot(st, -w / 2, y); doc.text(l[0], p[0], p[1], {angle: st.a || 0}); });
+        if (gs) gs(1); }
     });
     doc.setProperties({title});
     return doc.output('blob');
@@ -113,6 +127,9 @@
     const mk = marks(pg);
     if (mk.length) { c.save(); c.globalAlpha = WMA; c.fillStyle = WMC; c.font = '700 ' + (WMS * PT) + 'px Manrope'; c.textAlign = 'left'; mk.forEach(([x, y]) => { c.save(); c.translate(x, y); c.rotate(-24 * Math.PI / 180); c.fillText(WMT, 0, 0); c.restore(); }); c.restore(); }
     if (showCredit(pg)) { c.font = '400 ' + (4.6 * PT) + 'px Manrope'; c.fillStyle = '#7A6E62'; c.textAlign = 'right'; c.fillText(credit(), pg.w - 8, pg.creditY); }
+    if (pg.stamp) { const st = pg.stamp, g = stampGeo(st); c.save(); c.globalAlpha = STA; c.translate(st.cx, st.cy); c.rotate(-(st.a || 0) * Math.PI / 180); c.strokeStyle = st.color; c.fillStyle = st.color;
+      c.lineWidth = 0.8; c.strokeRect(-g.w / 2, -g.h / 2, g.w, g.h); c.lineWidth = 0.3; c.strokeRect(-g.w / 2 + 1.1, -g.h / 2 + 1.1, g.w - 2.2, g.h - 2.2); c.textAlign = 'center'; c.textBaseline = 'alphabetic';
+      stampLines(st, g).forEach(([l, y]) => { c.font = (l[2] ? '700 ' : '400 ') + (l[1] * PT) + 'px Manrope'; c.fillText(l[0], 0, y); }); c.restore(); }
     return new Promise(r => cv.toBlob(r, 'image/png'));
   }
   function save(blob, name){ const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = name; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 4000); }

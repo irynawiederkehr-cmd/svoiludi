@@ -2699,3 +2699,205 @@ ARTICLES['profsoyuzy'] = dict(
     terms=[('Deutsch', 'Gewerkschaft, Mitgliedschaft, Mitgliederbeitrag, Rechtsberatung, Rechtsschutz, Gesamtarbeitsvertrag (GAV), Mieterverband, Konsumentenschutz, Rechtsauskunft, Schlichtungsbehörde, Ombudsstelle, Rechtsschutzversicherung'), ('Français', 'syndicat, adhésion, cotisation, conseil juridique, protection juridique, CCT, ASLOCA, FRC, permanence juridique, autorité de conciliation, médiateur, assurance protection juridique'), ('Italiano', 'sindacato, adesione, quota, consulenza giuridica, protezione giuridica, CCL, associazione inquilini, autorità di conciliazione, mediatore, assicurazione protezione giuridica'), ('English', 'trade union, membership, legal advice, legal protection, collective agreement, tenants’ association, ombudsman, legal expenses insurance')],
     post='Это письма работодателю, арендодателю и кассе — и заявление о вступлении или выходе из организации.',
 )
+
+ARTICLES['arenda'] = dict(
+    h1='Как снять квартиру в Швейцарии: <em>поиск, досье и что хозяин не вправе спрашивать</em>',
+    seo='Снять квартиру в Швейцарии: поиск, досье, Betreibungsauszug (Wohnung mieten)',
+    desc='Как снять квартиру в Швейцарии простыми словами на русском: где искать (homegate, ImmoScout24, Flatfox, кооперативы), что положить в досье арендатора, как заказать выписку из реестра долгов (Betreibungsregisterauszug), какие вопросы хозяин задавать не вправе, сколько можно платить за аренду, залог не больше трёх месячных плат и как оспорить завышенную аренду в первые 30 дней. По-немецки Wohnung mieten, Bewerbungsdossier, по-французски louer un appartement, dossier de candidature, по-итальянски affittare un appartamento.',
+    lead='Свободных квартир в Швейцарии мало, особенно в городах, и на одну квартиру часто приходят десятки людей. Выигрывает тот, у кого полное досье, аккуратное письмо и кто знает свои права. Здесь — как искать, что подготовить заранее и чего управляющая требовать не вправе.',
+    kanton=['betreibung'],
+    body='''
+<nav class="toc" aria-label="Содержание"><b>В этой статье</b>
+<ul>
+  <li><a href="#gde">Где искать</a></li>
+  <li><a href="#dosye">Досье арендатора</a></li>
+  <li><a href="#betreibung">Выписка из реестра долгов</a></li>
+  <li><a href="#nelzya">Что хозяин спрашивать не вправе</a></li>
+  <li><a href="#skolko">Сколько можно платить</a></li>
+  <li><a href="#zalog">Залог (Mietkaution)</a></li>
+  <li><a href="#nachalnaya">Если аренда завышена</a></li>
+  <li><a href="#posle">После подписания</a></li>
+</ul></nav>
+
+<h2 id="gde">Где искать</h2>
+<ul class="ul">
+  <li><b>Порталы:</b> <a href="https://www.homegate.ch/">homegate.ch</a>, <a href="https://www.immoscout24.ch/">ImmoScout24</a>, <a href="https://flatfox.ch/">Flatfox</a>, <a href="https://www.newhome.ch/">newhome.ch</a>, <a href="https://www.comparis.ch/immobilien">comparis.ch</a>. Включи бесплатную подписку на новые объявления — хорошие квартиры уходят за день-два.</li>
+  <li><b>Комната или первая квартира:</b> <a href="https://www.wgzimmer.ch/">wgzimmer.ch</a> и порталы для студентов.</li>
+  <li><b>Кооперативы (Wohnbaugenossenschaften)</b> — часто дешевле рынка. Одни ведут лист ожидания (записывайся заранее и продлевай запись), другие публикуют квартиры только на своём сайте. Список и карта — у союза кооперативов <a href="https://www.wbg-schweiz.ch/information/genossenschaftlich_wohnen/tipps_wohnungssuche">WBG Schweiz</a>.</li>
+  <li><b>Знакомые и «свои люди».</b> Многие квартиры передают через уходящего жильца (Nachmieter) — спрашивай коллег и знакомых, следи за объявлениями в сообществах.</li>
+  <li><b>Осторожно, мошенники.</b> На порталах бывают фальшивые объявления: «хозяин за границей, переведи залог — пришлю ключи». До осмотра квартиры никому ничего не плати, залог — только после подписания договора обеими сторонами.</li>
+</ul>
+
+<h2 id="dosye">Досье арендатора (Bewerbungsdossier)</h2>
+<p>На осмотр приходи с готовым досье или отправь его в тот же день. Обычно в нём:</p>
+<ul class="ul">
+  <li><b>Анкета управляющей</b> (Anmeldeformular) — на её сайте или на осмотре.</li>
+  <li><b>Короткое письмо</b> — не длиннее страницы: кто вы, сколько человек, где работаете, почему эта квартира, когда можете въехать.</li>
+  <li><b>Выписка из реестра долгов</b> (Betreibungsregisterauszug) — свежая, не старше трёх месяцев.</li>
+  <li><b>Пермит</b> (копия), <b>подтверждение дохода</b> — их по правилам защиты данных можно требовать только у кандидата, которого уже выбрали.</li>
+  <li><b>Рекомендации</b> — контакты прежнего арендодателя или работодателя.</li>
+</ul>
+<p>Досье с письмом на немецком, французском или итальянском можно собрать в инструменте «Досье арендатора».</p>
+
+<h2 id="betreibung">Выписка из реестра долгов (Betreibungsregisterauszug)</h2>
+<ul class="ul">
+  <li>Заказывают в Betreibungsamt по месту жительства — онлайн через <a href="https://www.ch.ch/de/wohnen/miete/betreibungsregisterauszug-bestellen/">ch.ch и EasyGov</a> или лично. Стоит 17 франков плюс доставка.</li>
+  <li>Выписка показывает только свой округ. Если за последние 5 лет ты жила в разных местах Швейцарии, нужна выписка из каждого.</li>
+  <li>Быстрее и дороже — <a href="https://www.post.ch/de/weitere-angebote/behoerdendienstleistungen/betreibungsregisterauszug">через Почту</a>: онлайн 26.90 франка (PDF за несколько часов), в отделении 35.</li>
+  <li>Только приехала и выписки ещё нет — напиши это в письме и приложи выписку пустого реестра, как только её выдадут.</li>
+</ul>
+
+<h2 id="nelzya">Что хозяин спрашивать не вправе</h2>
+<p>Федеральный уполномоченный по защите данных (<a href="https://www.edoeb.admin.ch/dam/en/sd-web/F7ojQw99LBH-/Merkblatt%20zu%20Anmeldeformularen%20f%C3%BCr%20Mietwohnungen%20DE_20250715.pdf">EDÖB</a>) прямо перечислил, что в анкете можно и что нельзя.</p>
+<div class="cmp">
+  <div><b>Можно</b><p>Имя, дата рождения, адрес, телефон. Гражданство вместе с типом пермита и его сроком. Сколько человек будет жить, есть ли дети. Доход диапазоном. Профессия и работодатель тех, кто подписывает договор. Долги за последние 5 лет. Животные и музыкальные инструменты. Рекомендации — только у кандидатов, которых рассматривают всерьёз.</p></div>
+  <div><b>Нельзя</b><p>Семейное положение (в общем случае), религия, гражданство отдельно от пермита, сколько ты платишь сейчас, лизинг и кредиты, доход тех, кто не подписывает договор. По словам <a href="https://www.mieterverband.ch/mietrecht/vor-der-miete/wohnungssuche/">союза арендаторов</a> — ещё хронические болезни и членство в союзе арендаторов. На такие вопросы можно не отвечать.</p></div>
+</div>
+<p>Плата «за хлопоты», если договор не заключили, не положена, даже если она написана в анкете.</p>
+
+<h2 id="skolko">Сколько можно платить за аренду</h2>
+<p>Обычный ориентир — аренда не больше трети дохода (<a href="https://www.beobachter.ch/wohnen/miete/wer-richtig-sucht-der-findet-15646">Beobachter</a>). Служба <a href="https://budgetberatung.ch/wohnen">Budgetberatung</a> советует строже — не больше четверти дохода на руки. Не забудь дополнительные расходы (Nebenkosten — отопление, вода, лестница) и страховки. Все обязательные расходы в месяц и в год поможет увидеть «Бюджет: все обязательные расходы в Швейцарии».</p>
+
+<h2 id="zalog">Залог (Mietkaution)</h2>
+<ul class="ul">
+  <li><b>Не больше трёх месячных плат</b> и только если залог прописан в договоре.</li>
+  <li>Деньги лежат на <b>отдельном залоговом счёте на твоё имя</b> (Mietzinskautionskonto). Снять их арендодатель без твоей подписи не может. Никогда не отдавай залог наличными или на личный счёт хозяина.</li>
+  <li><b>Страховка залога</b> (Kautionsversicherung) вместо денег на счёте: ты платишь премию каждый год и не получаешь её обратно, а если хозяин заявит ущерб, страховая заплатит ему и потребует деньги с тебя. <a href="https://www.mieterverband.ch/mv/mietrecht-beratung/ratgeber-mietrecht/top-themen/depot-kautionsversicherung.html">Союз арендаторов</a> её не советует — посчитай, что выгоднее.</li>
+</ul>
+
+<h2 id="nachalnaya">Если аренда завышена</h2>
+<p>Начальную аренду можно оспорить в течение <b>30 дней после получения ключей</b> в примирительном органе (Schlichtungsbehörde). Условия: ты подписала из-за нужды (нехватка жилья, семейная ситуация) или аренда выросла больше чем на 10 % по сравнению с прежним жильцом без ремонта — и при этом она завышена.</p>
+<p>В кантонах <b>Базель-Штадт, Берн, Фрибур, Женева, Люцерн, Цуг, Цюрих</b>, почти во всём Во и в части общин Невшателя арендодатель обязан выдать <b>официальный бланк</b> с прежней арендой (<a href="https://www.bwo.admin.ch/dam/de/sd-web/lp4WEVqxdXWN/2026-02-03_D_Verzeichnis%20Formularpflicht%20Anfangsmietzins_Kantonale%20Gesetze%20und%20Leerwohnungsziffer_.pdf">список BWO, 2026</a>). Не дали бланк — сразу к союзу арендаторов: срок в 30 дней может не действовать.</p>
+
+<h2 id="posle">После подписания</h2>
+<ul class="ul">
+  <li><b>Прочитай договор</b> и правила дома — что входит в Nebenkosten, сроки расторжения, ремонт. Подробно — в теме «Договор аренды и ловушки».</li>
+  <li><b>Приёмка квартиры</b>: обойди квартиру с управляющей, все царапины и дефекты — в протокол, сфотографируй. Что не записано сейчас, при выезде могут поставить в счёт тебе.</li>
+  <li><b>Страховка ответственности</b> (Privathaftpflicht) и страховка имущества — обычно нужны каждому арендатору. Подробно — в теме «Какие страховки нужны».</li>
+  <li><b>Сообщи о переезде в общину</b> в срок, который установил кантон (обычно 14 дней), а затем всем остальным: работодателю, кассе, банку, почте.</li>
+  <li><b>Вступи в союз арендаторов</b>, пока всё спокойно: тогда при споре тебе помогут с адвокатом без срока ожидания.</li>
+</ul>
+''',
+    steps=[
+        'Включи подписки на новые квартиры на двух-трёх порталах и запишись в кооперативы своего города.',
+        'Закажи свежую выписку из реестра долгов и собери досье с коротким письмом на языке кантона.',
+        'Ничего не плати до осмотра и подписания договора, залог — только на залоговый счёт на своё имя.',
+        'При въезде — протокол приёмки с фото всех дефектов.',
+        'Аренда кажется завышенной — в течение 30 дней после получения ключей к союзу арендаторов или в примирительный орган.',
+    ],
+    pomosh=dict(ids=['mv', 'asloca', 'asi', 'schlicht'], k='mv,miet,adv', t='Союз арендаторов проверит договор и аренду, а примирительный орган бесплатно объяснит права.'),
+    tools={'moj-budget': 'Посчитай, какая аренда тебе по карману вместе с Nebenkosten, страховками и налогами.'},
+    related=['dogovor-arendy', 'strahovki', 'betreibung', 'gemeinde', 'profsoyuzy'],
+    sources=[
+        ('ch.ch — заказать выписку из реестра долгов', 'https://www.ch.ch/de/wohnen/miete/betreibungsregisterauszug-bestellen/'),
+        ('EDÖB — памятка об анкетах для аренды (15.07.2025)', 'https://www.edoeb.admin.ch/dam/en/sd-web/F7ojQw99LBH-/Merkblatt%20zu%20Anmeldeformularen%20f%C3%BCr%20Mietwohnungen%20DE_20250715.pdf'),
+        ('Mieterverband — поиск квартиры', 'https://www.mieterverband.ch/mietrecht/vor-der-miete/wohnungssuche/'),
+        ('Mieterverband — начальная аренда', 'https://www.mieterverband.ch/mietrecht/beginn-der-miete/anfangsmietzins/'),
+        ('Mieterverband — залог и страховка залога', 'https://www.mieterverband.ch/mv/mietrecht-beratung/ratgeber-mietrecht/top-themen/depot-kautionsversicherung.html'),
+        ('BWO — кантоны с бланком начальной аренды, 2026', 'https://www.bwo.admin.ch/dam/de/sd-web/lp4WEVqxdXWN/2026-02-03_D_Verzeichnis%20Formularpflicht%20Anfangsmietzins_Kantonale%20Gesetze%20und%20Leerwohnungsziffer_.pdf'),
+        ('Beobachter — как искать квартиру', 'https://www.beobachter.ch/wohnen/miete/wer-richtig-sucht-der-findet-15646'),
+        ('WBG Schweiz — квартиры в кооперативах', 'https://www.wbg-schweiz.ch/information/genossenschaftlich_wohnen/tipps_wohnungssuche'),
+    ],
+    terms=[('Deutsch', 'Wohnung mieten, Wohnungsbesichtigung, Anmeldeformular, Bewerbungsdossier, Betreibungsregisterauszug, Mietkaution, Mietzinskautionskonto, Anfangsmietzins, Formularpflicht, Wohnbaugenossenschaft, Nachmieter'), ('Français', 'louer un appartement, visite, formulaire d’inscription, dossier de candidature, extrait du registre des poursuites, garantie de loyer, loyer initial, coopérative d’habitation'), ('Italiano', 'affittare un appartamento, visita, modulo d’iscrizione, estratto del registro delle esecuzioni, deposito cauzionale, pigione iniziale, cooperativa d’abitazione'), ('English', 'rent a flat, viewing, application form, debt collection register extract, rental deposit, initial rent')],
+    post='Это оспаривание начальной аренды и всё, что ты отправляешь управляющей по договору.',
+)
+
+ARTICLES['dogovor-arendy'] = dict(
+    h1='Договор аренды в Швейцарии: <em>Nebenkosten, повышение и снижение аренды, дефекты, выезд</em>',
+    seo='Договор аренды в Швейцарии: снижение аренды, Referenzzinssatz, Kündigung (Mietvertrag)',
+    desc='Договор аренды в Швейцарии простыми словами на русском: что можно брать в Nebenkosten, как оспорить повышение аренды в 30 дней, как потребовать снижения аренды при падении ставки (Referenzzinssatz 1,25 %), что делать с дефектами и когда можно вносить аренду на депонирование, как расторгнуть договор и найти нового жильца (Nachmieter), как сдать квартиру и вернуть залог. По-немецки Mietvertrag, Mietzinssenkung, Kündigung, по-французски bail, baisse de loyer, résiliation, по-итальянски contratto di locazione.',
+    lead='Швейцарское право хорошо защищает арендаторов — но почти все права работают только письменно и в срок, часто в 30 дней. Здесь — главные ситуации за время аренды: дополнительные расходы, повышение и снижение аренды, дефекты, расторжение и выезд.',
+    body='''
+<nav class="toc" aria-label="Содержание"><b>В этой статье</b>
+<ul>
+  <li><a href="#nebenkosten">Дополнительные расходы (Nebenkosten)</a></li>
+  <li><a href="#povyshenie">Повышение аренды</a></li>
+  <li><a href="#snizhenie">Снижение аренды по ставке</a></li>
+  <li><a href="#defekty">Дефекты в квартире</a></li>
+  <li><a href="#pravila">Правила дома и соседи</a></li>
+  <li><a href="#rastorzhenie">Расторжение договора</a></li>
+  <li><a href="#vyezd">Выезд и залог</a></li>
+</ul></nav>
+
+<h2 id="nebenkosten">Дополнительные расходы (Nebenkosten)</h2>
+<ul class="ul">
+  <li>Платишь только те дополнительные расходы, которые <b>перечислены в договоре</b> (отопление, горячая вода, уборка лестницы, лифт). Всё, что не перечислено, уже входит в аренду.</li>
+  <li><b>Аванс (Akonto)</b> — раз в год управляющая присылает подробный расчёт, переплату возвращают, недоплату доплачиваешь. <b>Фиксированная сумма (Pauschale)</b> — расчёта нет.</li>
+  <li>Ты вправе посмотреть чеки и счета (Belege). Сомневаешься в расчёте — проверь его по <a href="https://mieterverband.ch/dam/jcr:4f76a22d-111b-4a80-b171-1d8bd04c4cfb/Merkblatt_Nebenkosten_Ueberpruefung_Checkliste.pdf">чек-листу союза арендаторов</a>.</li>
+  <li>Подозрительно маленький аванс при новой квартире — спроси письменно, какой была последняя доплата.</li>
+</ul>
+
+<h2 id="povyshenie">Повышение аренды</h2>
+<ul class="ul">
+  <li>Повышение сообщают на <b>официальном бланке</b> с причиной, и он должен прийти не позже чем за 10 дней до начала срока уведомления.</li>
+  <li>Оспорить можно <b>в течение 30 дней</b> после получения — в примирительном органе (Schlichtungsbehörde) своего района. Письма управляющей «я не согласна» недостаточно.</li>
+  <li>Заказное письмо, которое ты не забрала на почте, считается полученным на 7-й день хранения — следи за извещениями.</li>
+  <li>Пока идёт спор и ещё 3 года после него, расторгнуть договор с тобой в большинстве случаев нельзя (<a href="https://www.mieterverband.ch/dam/jcr:45d3a4f7-9aa3-49d0-b671-a34dc7dc1e6b/Merkblatt_Mietzinserhoehung_Anfechtung.pdf">памятка союза арендаторов</a>).</li>
+</ul>
+
+<h2 id="snizhenie">Снижение аренды по ставке (Referenzzinssatz)</h2>
+<p>Аренда в Швейцарии привязана к <b>референтной процентной ставке</b>, которую публикует федеральное ведомство по жилью <a href="https://www.bwo.admin.ch/de/referenzzinssatz">BWO</a> четыре раза в год. Сейчас она <b>1,25 %</b> (с 2 сентября 2025 года), следующая публикация — 1 декабря 2026 года.</p>
+<ul class="ul">
+  <li>Если ставка, на которой основана твоя аренда, выше нынешней, ты вправе требовать снижения: примерно <b>2,91 % за каждые 0,25 процентного пункта</b>. Какая ставка твоя — написано в договоре или в последнем бланке повышения.</li>
+  <li>Арендодатель может зачесть часть инфляции и доказанный рост расходов, поэтому итог обычно меньше. Посчитать поможет <a href="https://www.mieterverband.ch/mv/mietzinsrechner-senkung.html">калькулятор союза арендаторов</a>.</li>
+  <li><b>Как требовать:</b> письмо заказным, снижение — к ближайшему сроку расторжения, поэтому письмо должно дойти до начала срока уведомления. У арендодателя 30 дней на ответ. Отказал или молчит — в примирительный орган (в течение 30 дней после ответа или 60 дней после твоего письма). Это бесплатно.</li>
+</ul>
+<p>Письмо с требованием снижения на языке кантона можно сделать в инструменте «Письма управляющей».</p>
+
+<h2 id="defekty">Дефекты в квартире</h2>
+<ul class="ul">
+  <li>Сообщи управляющей <b>письменно</b>, опиши дефект и поставь срок, обычно около 14 дней (если срочно — меньше). Плесень и протечки — сразу.</li>
+  <li>Пока дефект мешает жить, можно требовать <b>снижения аренды</b> — размер зависит от случая. Самовольно платить меньше нельзя: это повод расторгнуть договор с тобой.</li>
+  <li><b>Внести аренду на депонирование</b> (Hinterlegung) — сильное средство, но строгий порядок: письменная претензия со сроком и предупреждением о депонировании, после срока вся аренда — на счёт кантонального места депонирования до даты платежа, копия квитанции управляющей, и в течение 30 дней — заявление в примирительный орган (<a href="https://www.mieterverband.ch/site/assets/files/39865/2026_merkblatt_mietzinshinterlegung.pdf">памятка 2026</a>). Делай это только после консультации.</li>
+  <li>Мелкий ремонт и обычное обслуживание (например, замена лампочки, чистка сифона) — на тебе.</li>
+</ul>
+
+<h2 id="pravila">Правила дома и соседи</h2>
+<ul class="ul">
+  <li>Во многих местах <b>ночная тишина с 22 до 6 часов</b>, обеденная — <b>с 12 до 13</b>, тише и в воскресенья и праздники (<a href="https://www.ch.ch/de/wohnen/miete/larm--mangel--mietzins/">ch.ch</a>). Точное время — в правилах дома и полицейских правилах общины.</li>
+  <li>Правила дома (Hausordnung) обязательны, только если их дали при заключении договора и у правила есть разумная причина. Слишком жёсткие ограничения, например стирать не больше трёх раз в день, по мнению союза арендаторов, скорее всего недопустимы.</li>
+  <li>Конфликт с соседом — сначала разговор, потом письмо управляющей. Записывай даты и время шума.</li>
+</ul>
+
+<h2 id="rastorzhenie">Расторжение договора</h2>
+<ul class="ul">
+  <li><b>Если расторгаешь ты:</b> письменно, заказным, срок для квартиры — <b>не меньше 3 месяцев</b>, к датам из договора, а если их нет — к местным датам (обычно конец месяца, кроме декабря, или конец квартала; уточни в примирительном органе). Важен день, когда письмо <b>получили</b>, а не когда ты его отправила.</li>
+  <li>Подписывают <b>все, кто в договоре</b>. Для семейного жилья супругов — оба, даже если договор подписал один.</li>
+  <li><b>Раньше срока</b> можно, если предложишь платёжеспособного нового жильца (Nachmieter), который готов взять договор на тех же условиях. Лучше нескольких, письмом. Если подходящего отклонили, ты свободна с даты, когда он мог бы въехать (<a href="https://www.mieterverband.ch/mv/mietrecht-beratung/ratgeber-mietrecht/fallbeispiele/m-p/nachmieterschaft-bei-ordentlicher-kuendigung.html">союз арендаторов</a>).</li>
+  <li><b>Если расторгает арендодатель:</b> только на <b>официальном бланке</b>, иначе расторжение недействительно. Супругам — каждому отдельным письмом. Оспорить или попросить отсрочку выезда (Erstreckung) можно <b>в течение 30 дней</b> в примирительном органе.</li>
+</ul>
+<p>Письмо о расторжении с новым жильцом или без — в инструменте «Письма управляющей».</p>
+
+<h2 id="vyezd">Выезд и залог</h2>
+<ul class="ul">
+  <li>При сдаче квартиры управляющая проверяет её вместе с тобой и пишет <b>протокол</b>. Подписывай только то, с чем согласна, спорное — отметь. Дефекты, за которые отвечаешь ты, она должна назвать сразу (без протокола — в течение 2–3 рабочих дней), иначе теряет право на претензию.</li>
+  <li><b>Обычный износ</b> не оплачивается, оплачивается только повреждение — и то по остаточной стоимости вещи по <a href="https://www.mieterverband.ch/mv/mietrecht-beratung/ratgeber-mietrecht/unterlagen-tools/lebensdauertabelle.html">таблице сроков службы</a>. Если, например, ковру 15 лет и срок его службы истёк, за пятно ты не платишь. Ущерб заяви в свою страховку ответственности.</li>
+  <li>Если уборка недостаточная, управляющая должна дать короткий срок доубрать и только потом нанимать уборку за твой счёт.</li>
+  <li><b>Залог</b> возвращают с процентами по поручению банку, которое подписывают обе стороны. Арендодатель тянет — напиши заказным, потом в примирительный орган. Через год после выезда банк выплатит залог и без его подписи, если он за этот год не начал судебных действий.</li>
+</ul>
+''',
+    steps=[
+        'Сохрани договор, правила дома и все бланки повышения — от них зависят твои права.',
+        'Сверь ставку в своём договоре с нынешней (1,25 %) — если она выше, требуй снижения письмом заказным.',
+        'Пришло повышение или расторжение — в течение 30 дней к союзу арендаторов или в примирительный орган.',
+        'Дефект — письмо управляющей со сроком, аренду самовольно не уменьшай.',
+        'Уезжаешь — расторгай письменно за 3 месяца к местной дате или найди нового жильца.',
+    ],
+    pomosh=dict(ids=['mv', 'asloca', 'asi', 'schlicht', 'casafair'], k='mv,miet,adv', t='Почти все споры по аренде решаются через союз арендаторов и бесплатный примирительный орган — без суда.'),
+    tools={'moj-budget': 'Nebenkosten, доплата за год, страховки и аренда — все расходы на жильё в одном бюджете.', 'kuda-obratitsya': 'Союз арендаторов твоего кантона: взнос, телефон и когда помогут.'},
+    related=['arenda', 'profsoyuzy', 'strahovki', 'betreibung'],
+    sources=[
+        ('BWO — референтная процентная ставка', 'https://www.bwo.admin.ch/de/referenzzinssatz'),
+        ('Mieterverband — памятка о снижении аренды', 'https://www.mieterverband.ch/site/assets/files/11219/2503_merkblatt_mietzinssenkung.pdf'),
+        ('Mieterverband — повышение аренды и оспаривание', 'https://www.mieterverband.ch/dam/jcr:45d3a4f7-9aa3-49d0-b671-a34dc7dc1e6b/Merkblatt_Mietzinserhoehung_Anfechtung.pdf'),
+        ('Mieterverband — дефекты и ущерб', 'https://www.mieterverband.ch/mietrecht/waehrend-der-miete/mangel-und-schaden/'),
+        ('Mieterverband — депонирование аренды, 2026', 'https://www.mieterverband.ch/site/assets/files/39865/2026_merkblatt_mietzinshinterlegung.pdf'),
+        ('Mieterverband — расторжение арендатором', 'https://www.mieterverband.ch/mv/mietrecht-beratung/ratgeber-mietrecht/top-themen/kuendigung-durch-mieter.html'),
+        ('Mieterverband — расчёт при выезде и возврат залога', 'https://www.mieterverband.ch/mietrecht/ende-der-miete/schlussrechnung-depotrueckgabe/'),
+        ('ch.ch — шум, дефекты и аренда', 'https://www.ch.ch/de/wohnen/miete/larm--mangel--mietzins/'),
+        ('Обязательственное право (OR), аренда — ст. 253 и далее', 'https://www.fedlex.admin.ch/eli/cc/27/317_321_377/de'),
+    ],
+    terms=[('Deutsch', 'Mietvertrag, Nebenkosten, Akonto, Pauschale, Nebenkostenabrechnung, Mietzinserhöhung, Referenzzinssatz, Mietzinssenkung, Herabsetzungsbegehren, Mängelrüge, Hinterlegung, Kündigung, Kündigungstermin, Nachmieter, Erstreckung, Wohnungsabgabe, Abgabeprotokoll, Lebensdauertabelle, Schlichtungsbehörde'), ('Français', 'bail à loyer, frais accessoires, acompte, décompte, hausse de loyer, taux de référence, baisse de loyer, avis des défauts, consignation du loyer, résiliation, terme de résiliation, locataire de remplacement, prolongation du bail, état des lieux, autorité de conciliation'), ('Italiano', 'contratto di locazione, spese accessorie, aumento della pigione, tasso di riferimento, riduzione della pigione, notifica dei difetti, deposito della pigione, disdetta, inquilino subentrante, protrazione, riconsegna, autorità di conciliazione'), ('English', 'tenancy agreement, ancillary costs, rent increase, reference interest rate, rent reduction, notice of defects, termination, replacement tenant, handover protocol')],
+    post='Это требование снизить аренду, претензия о дефекте, расторжение договора, предложение нового жильца и требование вернуть залог.',
+    post2='Для расторжения важен день, когда письмо получили, поэтому отправляй его минимум за неделю до начала срока.',
+)
