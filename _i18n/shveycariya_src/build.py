@@ -148,6 +148,7 @@ def article(t):
       {('<section class="kt" data-k="' + ','.join(a['kanton']) + '" aria-label="Твой кантон"></section>') if a.get('kanton') else ''}
       {a['body']}
       {('<section class="terms" aria-labelledby="terms-h"><h2 id="terms-h">Как это называется в твоём кантоне</h2><p>В письмах и на сайтах ведомств ищи эти слова.</p><dl>' + ''.join(f'<div><dt>{l}</dt><dd lang="{ {"Deutsch":"de","Français":"fr","Italiano":"it","English":"en"}[l] }">{w}</dd></div>' for l, w in a['terms']) + '</dl></section>') if a.get('terms') else ''}
+      {('<div class="warn post"><b>Важные письма — заказным (Einschreiben)</b><p>' + a['post'] + ' Отправляй такие письма на почте как <a href="https://www.post.ch/de/briefe-versenden/einschreiben">Einschreiben (R)</a>, сохраняй копию письма и квитанцию с номером отправления. По номеру на post.ch видно, когда письмо получили.</p><p>Для сроков ведомства обычно важно, что письмо сдано на почту до конца последнего дня. Для расторжения аренды или работы важно, когда его получили, поэтому отправляй заранее.' + (' ' + a['post2'] if a.get('post2') else '') + '</p></div>') if a.get('post') else ''}
       <section class="todo" aria-labelledby="todo-h"><h2 id="todo-h">Что сделать</h2><ol>{steps}</ol></section>
     </article>
     <aside class="side" aria-label="Что поможет">
