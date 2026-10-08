@@ -116,11 +116,39 @@ def hub():
     open('shveycariya/index.html', 'w', encoding='utf-8').write(out)
 
 
+
+# Ссылки по названию (правило Ирины 08.10.2026): «Расчёт зарплаты», схема «Признание дипломов», тема «Домашний персонал»,
+# вкладка «Курсы» — в тексте статьи сразу активная ссылка. Тема без статьи остаётся текстом и станет ссылкой, когда статья будет готова.
+TOPIC_ALIAS = {'Домашний персонал': 'domashniy-personal', 'Психотерапия через страховку': 'psihoterapiya', 'Своё дело': 'samozanyatost',
+               'Транспорт, машина и права': 'transport', 'Работа': 'rabota', 'Признание дипломов': 'diplomy'}
+def autolink(html_txt):
+    import re as _re
+    tool_by_name = {v: k for k, v in TOOLS.items()}
+    def fix(seg):
+        # тема «…»
+        def topic(m):
+            word, name = m.group(1), m.group(2)
+            slug = TOPIC_ALIAS.get(name) or next((x['slug'] for x in TOPICS if x['title'] == name), None)
+            if slug and BYSLUG.get(slug, {}).get('ready'):
+                return f'{word} <a href="../{slug}/">«{name}»</a>'
+            return m.group(0)
+        seg = _re.sub(r'(тем[аеуыо]й?)\s+«([^»]+)»', topic, seg)
+        # инструменты и схемы по точному названию
+        def tool(m):
+            name = m.group(1); x = tool_by_name.get(name)
+            if x and HAS(x): return f'<a href="../../instrumenty/{x}/">«{name}»</a>'
+            return m.group(0)
+        seg = _re.sub(r'«([^»]+)»', tool, seg)
+        seg = _re.sub(r'(вкладк[аеуи])\s+«Курсы»', r'\1 <a href="../../kursy/">«Курсы»</a>', seg)
+        return seg
+    parts = _re.split(r'(<a\b[^>]*>.*?</a>|<h[1-6][^>]*>.*?</h[1-6]>)', html_txt, flags=_re.S)
+    return ''.join(p if i % 2 else fix(p) for i, p in enumerate(parts))
+
 def article(t):
     a = ARTICLES[t['slug']]
     url = f'{SITE}shveycariya/{t["slug"]}/'
     title = a['seo'] + ' · Свои люди'
-    steps = ''.join(f'<li><span>{s}</span></li>' for s in a['steps'])
+    steps = ''.join(f'<li><span>{autolink(s)}</span></li>' for s in a['steps'])
     def fan(x):
         d = os.path.join('instrumenty', 'preview', x)
         imgs = sorted([f for f in os.listdir(d) if f.endswith('.jpg')], key=lambda f: int(f.split('.')[0]))[:3] if os.path.isdir(d) else []
@@ -151,7 +179,7 @@ def article(t):
   <div class="art">
     <article class="art-main">
       {('<section class="kt" data-k="' + ','.join(a['kanton']) + '" aria-label="Твой кантон"></section>') if a.get('kanton') else ''}
-      {a['body']}
+      {autolink(a['body'])}
       {('<section class="terms" aria-labelledby="terms-h"><h2 id="terms-h">Как это называется в твоём кантоне</h2><p>В письмах и на сайтах ведомств ищи эти слова.</p><dl>' + ''.join(f'<div><dt>{l}</dt><dd lang="{ {"Deutsch":"de","Français":"fr","Italiano":"it","English":"en"}[l] }">{w}</dd></div>' for l, w in a['terms']) + '</dl></section>') if a.get('terms') else ''}
       {('<div class="warn post"><b>Важные письма — заказным (Einschreiben)</b><p>' + a['post'] + ' Отправляй такие письма на почте как <a href="https://www.post.ch/de/briefe-versenden/einschreiben">Einschreiben (R)</a>, сохраняй копию письма и квитанцию с номером отправления. По номеру на post.ch видно, когда письмо получили.</p><p>Для сроков ведомства обычно важно, что письмо сдано на почту до конца последнего дня. Для расторжения аренды или работы важно, когда его получили, поэтому отправляй заранее.' + (' ' + a['post2'] if a.get('post2') else '') + '</p></div>') if a.get('post') else ''}
       <section class="todo" aria-labelledby="todo-h"><h2 id="todo-h">Что сделать</h2><ol>{steps}</ol></section>
