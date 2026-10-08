@@ -80,7 +80,7 @@ def hub():
     title = 'Как устроена Швейцария — простые ответы на русском · Свои люди'
     desc = 'Пермиты, налоги, долги, страховки, школа, работа, жильё и быт в Швейцарии простыми словами на русском. К каждой теме — полезные инструменты и специалисты, которые помогут.'
     mods = ''.join(f'<a href="#{m[0]}">{m[1]}</a>' for m in MODULES)
-    SCHEMES = ''.join(f'<a href="../instrumenty/{s}/"><img src="../instrumenty/preview/{s}/1.jpg" alt="" loading="lazy"><b>{t}</b></a>' for s, t in [('put-obrazovaniya', 'Путь образования'), ('yazyk-trebovaniya', 'Язык: что и где требуют'), ('nalogi-shema', 'Как устроены налоги'), ('pensiya-shema', 'Как устроена пенсия'), ('strahovki-obyazatelnye', 'Обязательные страховки'), ('grazhdanstvo-shema', 'Путь к гражданству'), ('diplomy-shema', 'Признание дипломов')])
+    SCHEMES = ''.join(f'<a href="../instrumenty/{s}/"><img src="../instrumenty/preview/{s}/1.jpg" alt="" loading="lazy"><b>{t}</b></a>' for s, t in [('put-obrazovaniya', 'Путь образования'), ('yazyk-trebovaniya', 'Язык: что и где требуют'), ('nalogi-shema', 'Как устроены налоги'), ('pensiya-shema', 'Как устроена пенсия'), ('strahovki-obyazatelnye', 'Обязательные страховки'), ('grazhdanstvo-shema', 'Путь к гражданству'), ('diplomy-shema', 'Признание дипломов'), ('franshiza-shema', 'Франшиза медстраховки')])
     body = []
     for key, name, lead in MODULES:
         cards = []

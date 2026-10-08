@@ -10,12 +10,14 @@ T = {
     'pensiya-shema': ('Как устроена пенсия', 'AHV, пенсионная касса и 3a, пенсия по возрасту и твой ориентир.'),
     'grazhdanstvo-shema': ('Путь к гражданству', '9 шагов к паспорту, как его можно потерять и твой расчёт.'),
     'diplomy-shema': ('Признание дипломов', 'Кто признаёт, цены и сроки в месяцах, язык и твой план.'),
+    'franshiza-shema': ('Франшиза медстраховки', 'Сколько платишь сама, какая франшиза выгоднее и до какого числа менять.'),
 }
 REL = {
-    'ekstrennye-nomera': ['strahovki-obyazatelnye', 'put-obrazovaniya'],
+    'ekstrennye-nomera': ['franshiza-shema', 'strahovki-obyazatelnye'],
     'put-obrazovaniya': ['diplomy-shema', 'yazyk-trebovaniya', 'ekstrennye-nomera'],
     'yazyk-trebovaniya': ['grazhdanstvo-shema', 'diplomy-shema', 'put-obrazovaniya'],
-    'strahovki-obyazatelnye': ['pensiya-shema', 'nalogi-shema', 'ekstrennye-nomera'],
+    'strahovki-obyazatelnye': ['franshiza-shema', 'pensiya-shema', 'nalogi-shema'],
+    'franshiza-shema': ['strahovki-obyazatelnye', 'ekstrennye-nomera', 'nalogi-shema'],
     'nalogi-shema': ['pensiya-shema', 'strahovki-obyazatelnye', 'grazhdanstvo-shema'],
     'pensiya-shema': ['strahovki-obyazatelnye', 'nalogi-shema'],
     'grazhdanstvo-shema': ['yazyk-trebovaniya', 'nalogi-shema', 'diplomy-shema'],
