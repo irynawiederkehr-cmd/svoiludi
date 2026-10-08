@@ -1,6 +1,6 @@
 /* Официальные страницы кантонов для статей «Как устроена Швейцария» (проверено 08.10.2026 по спискам SEM и ESTV и сайтам кантонов).
    fb — для этих разделов ссылка ведёт на главную кантона (точную страницу проверить не удалось). einb — что кантон добавляет к натурализации.
-   stva, sozial, kesb добавлены 08.10.2026 (часть ссылок помечена в claude/proverit-ssylki.md для перепроверки). Обновлять раз в год вместе с проверкой статей. */
+   stva, sozial, kesb добавлены 08.10.2026; stva у SO, BS, VD, GE, ZG, SG, GR, SH, VS уточнены поиском 08.10.2026 (часть ссылок помечена в claude/proverit-ssylki.md для перепроверки). Обновлять раз в год вместе с проверкой статей. */
 window.KANTONY = {
 "ZH": {
 "n": "Цюрих",
@@ -50,7 +50,9 @@ window.KANTONY = {
 "sozial": "https://disg.lu.ch/themen/sozialhilfe",
 "kesb": "https://gemeinden.lu.ch/Kindes_und_Erwachsenenschutz"
 },
-"fb": []
+"fb": [
+"stva"
+]
 },
 "UR": {
 "n": "Ури",
@@ -108,7 +110,8 @@ window.KANTONY = {
 "einbuergerung",
 "migration",
 "quellensteuer",
-"steuern"
+"steuern",
+"stva"
 ]
 },
 "NW": {
@@ -126,7 +129,8 @@ window.KANTONY = {
 },
 "fb": [
 "betreibung",
-"einbuergerung"
+"einbuergerung",
+"stva"
 ]
 },
 "GL": {
@@ -142,7 +146,9 @@ window.KANTONY = {
 "sozial": "https://www.gl.ch/verwaltung/volkswirtschaft-und-inneres/soziales/sozialberatung.html/977",
 "kesb": "https://www.gl.ch/verwaltung/volkswirtschaft-und-inneres/soziales/kindes-und-erwachsenenschutz.html/962"
 },
-"fb": []
+"fb": [
+"stva"
+]
 },
 "ZG": {
 "n": "Цуг",
@@ -153,7 +159,7 @@ window.KANTONY = {
 "migration": "https://zg.ch/de/sicherheitsdirektion/amt-fuer-migration",
 "einbuergerung": "https://zg.ch/de/migration-integration/einbuergerung/ordentliche-einbuergerung",
 "betreibung": "https://cdn.zg.ch/dam/jcr:87cb3853-5a22-4f9b-928e-40d220e2f906/Adressen%20Betreibungs%C3%A4mter%20Stand%20Februar%202023.pdf",
-"stva": "https://www.zg.ch/de/sicherheit/strassenverkehrsamt",
+"stva": "https://zg.ch/en/mobilitaet-reisen/strassenverkehr/fuehrerausweise",
 "sozial": "https://zg.ch/de/soziales/sozialhilfe/persoenliche-und-wirtschaftliche-sozialhilfe",
 "kesb": "https://zg.ch/de/familie-gesellschaft/kindes-und-erwachsenenschutz"
 },
@@ -187,7 +193,7 @@ window.KANTONY = {
 "migration": "https://www.so.ch/verwaltung/departement-des-innern/migrationsamt/",
 "einbuergerung": "https://so.ch/verwaltung/volkswirtschaftsdepartement/amt-fuer-gemeinden/buergerrecht/",
 "betreibung": "https://so.ch/verwaltung/finanzdepartement/betreibungsaemter/",
-"stva": "https://so.ch/verwaltung/bau-und-justizdepartement/motorfahrzeugkontrolle/",
+"stva": "https://so.ch/verwaltung/bau-und-justizdepartement/motorfahrzeugkontrolle/fuehrerinnen-und-fuehrer/fahrzeugfuehrerinnen-und-fahrzeugfuehrer/umtausch-des-auslaendischen-fuehrerausweises/",
 "sozial": "https://sozialhilfehandbuch.so.ch/grundlagen/organisation-der-sozialhilfe/aufgaben-gemeinden/aufgaben-sozialdienste/",
 "kesb": "https://so.ch/verwaltung/departement-des-innern/kindes-und-erwachsenenschutz/"
 },
@@ -202,7 +208,7 @@ window.KANTONY = {
 "migration": "https://www.bs.ch/jsd/bdm/migrationsamt",
 "einbuergerung": "https://www.bs.ch/themen/persoenliches-und-wohnen/einbuergerungen/schritt-fuer-schritt-der-weg-zur-ordentlichen-einbuergerung-0",
 "betreibung": "https://www.bs.ch/gerichte-judikative/betreibungs-und-konkursamt",
-"stva": "https://www.bs.ch/mfk",
+"stva": "https://www.bs.ch/themen/mobilitaet/fuehrerausweise/umtausch-schweizer-fuehrerausweis",
 "sozial": "https://www.bs.ch/themen/finanzielle-hilfe/leistungen/sozialhilfe",
 "kesb": "https://www.bs.ch/wsu/kindes-und-erwachsenenschutzbehoerde"
 },
@@ -235,7 +241,7 @@ window.KANTONY = {
 "migration": "https://sh.ch/CMS/Webseite/Kanton-Schaffhausen/Beh-rde/Verwaltung/Departement-des-Innern/Migrationsamt-und-Passb-ro-3454-DE.html",
 "einbuergerung": "https://sh.ch/CMS/Webseite/Kanton-Schaffhausen/Beh-rde/Verwaltung/Volkswirtschaftsdepartement/Amt-f-r-Justiz-und-Gemeinden/Einb-rgerung-151418-DE.html",
 "betreibung": "https://sh.ch/CMS/Webseite/Kanton-Schaffhausen/Beh-rde/Justiz/Betreibungs--und-Konkursamt-407143-DE.html",
-"stva": "https://strassenverkehrsamt.sh.ch",
+"stva": "https://sh.ch/CMS/get/file/5348d533-d168-4a33-8c6d-1dbdb97ac196",
 "sozial": "https://sh.ch/CMS/Webseite/Kanton-Schaffhausen/Beh-rde/Verwaltung/Departement-des-Innern/Sozialamt/Abteilung-Soziale-Angebote-15513618-DE.html",
 "kesb": "https://sh.ch/CMS/Webseite/Kanton-Schaffhausen/Beh-rde/Justiz/Kindes--und-Erwachsenenschutzbeh-rde--KESB--1306947-DE.html"
 },
@@ -257,7 +263,8 @@ window.KANTONY = {
 "kesb": "https://ar.ch/verwaltung/departement-gesundheit-und-soziales/kindes-und-erwachsenenschutzbehoerde/"
 },
 "fb": [
-"quellensteuer"
+"quellensteuer",
+"stva"
 ],
 "einb": "3 года подряд в одной общине; немецкий B1 и устно, и письменно"
 },
@@ -274,7 +281,9 @@ window.KANTONY = {
 "sozial": "https://www.ai.ch/themen/gesundheit-alter-und-soziales/sozialhilfe",
 "kesb": "https://www.ai.ch/themen/gesundheit-alter-und-soziales/erwachsenenschutz"
 },
-"fb": [],
+"fb": [
+"stva"
+],
 "einb": "5 лет в кантоне, из них 2 прямо перед заявлением"
 },
 "SG": {
@@ -286,7 +295,7 @@ window.KANTONY = {
 "migration": "https://www.sg.ch/sicherheit/migrationsamt.html",
 "einbuergerung": "https://www.sg.ch/recht/buergerrecht-zivilstand/einbuergerung.html",
 "betreibung": "https://www.sg.ch/",
-"stva": "https://www.stva.sg.ch",
+"stva": "https://www.sg.ch/sicherheit/kantonspolizei/verkehr/fuehrerausweis.html",
 "sozial": "https://www.sg.ch/gesundheit-soziales/soziales/sozialhilfe.html",
 "kesb": "https://www.kesb.sg.ch/regionen/st-gallen"
 },
@@ -303,7 +312,7 @@ window.KANTONY = {
 "migration": "https://www.gr.ch/DE/institutionen/verwaltung/djsg/afm/dienstleistungen/Einreise_Aufenthalt/Seiten/default.aspx",
 "einbuergerung": "https://www.gr.ch/DE/institutionen/verwaltung/djsg/afm/dienstleistungen/buergerrecht/Seiten/OrdentlicheEinbuergerungAuslaender.aspx",
 "betreibung": "https://www.justiz-gr.ch/schuldbetreibung-und-konkurs/ueber-uns/betreibungs-und-konkursaemter/",
-"stva": "https://www.stva.gr.ch",
+"stva": "https://www.gr.ch/IT/istituzioni/amministrazione/djsg/stva/chisiamo/Seiten/H%C3%A4ufige-Fragen.aspx",
 "sozial": "https://www.gr.ch/DE/Seiten/welcome.aspx",
 "kesb": "https://www.gr.ch/DE/institutionen/verwaltung/djsg/kesb/Seiten/Kontakt.aspx"
 },
@@ -357,7 +366,9 @@ window.KANTONY = {
 "sozial": "https://www4.ti.ch/dss/dasf/chi-siamo/sezione-del-sostegno-sociale",
 "kesb": "https://www4.ti.ch/dss/dasf/temi/famiglia-e-figli/supporto-aiuto-e-protezione/autorita-regionali-di-protezione-arp"
 },
-"fb": []
+"fb": [
+"stva"
+]
 },
 "VD": {
 "n": "Во",
@@ -368,7 +379,7 @@ window.KANTONY = {
 "migration": "https://www.vd.ch/population/population-etrangere/entree-et-sejour",
 "einbuergerung": "https://www.vd.ch/population/population-etrangere/naturalisation",
 "betreibung": "https://www.vd.ch/ojv/offices-des-poursuites",
-"stva": "https://www.vd.ch/mobilite",
+"stva": "https://www.vd.ch/mobilite/automobile-et-navigation/permis/echanger-un-permis-etranger",
 "sozial": "https://www.vd.ch/aides-financieres-et-soutien-social/aides-financieres-et-comment-les-demander/revenu-dinsertion-ri",
 "kesb": "https://www.vd.ch"
 },
@@ -386,7 +397,7 @@ window.KANTONY = {
 "migration": "https://www.vs.ch/web/spm",
 "einbuergerung": "https://www.vs.ch/web/spm/naturalisation-ordinaire1",
 "betreibung": "https://www.vs.ch/web/spf/organisation-des-offices-de-poursuites-et-faillites",
-"stva": "https://www.vs.ch/de/web/scn/permis-de-conduire-etranger",
+"stva": "https://www.vs.ch/de/web/scn/permis-de-conduire-%C3%A9tranger",
 "sozial": "https://www.vs.ch",
 "kesb": "https://www.vs.ch"
 },
@@ -409,7 +420,9 @@ window.KANTONY = {
 "sozial": "https://www.ne.ch/themes/social/guichets-sociaux-regionaux",
 "kesb": "https://www.ne.ch/autorites/autorites-judiciaires/tribunal-dinstance/apea"
 },
-"fb": [],
+"fb": [
+"stva"
+],
 "einb": "2 года в кантоне"
 },
 "GE": {
@@ -421,7 +434,7 @@ window.KANTONY = {
 "migration": "https://www.ge.ch/organisation/office-cantonal-population-migrations-ocpm",
 "einbuergerung": "https://www.ge.ch/devenir-suisse/naturalisation-ordinaire-conditions-remplir",
 "betreibung": "https://www.ge.ch/poursuites",
-"stva": "https://www.ge.ch/organisation/office-cantonal-vehicules",
+"stva": "https://www.ge.ch/echanger-son-permis-conduire-etranger",
 "sozial": "https://www.ge.ch/arriver-dans-canton-geneve-toutes-informations-pratiques/assurances-sociales-aide-sociale",
 "kesb": "https://justice.ge.ch/en/theme/adult-protection"
 },
