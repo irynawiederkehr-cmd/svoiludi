@@ -440,7 +440,8 @@ function srOpts(){ let o = null; try { o = JSON.parse(localStorage.getItem('srok
   return Object.assign({tax:'decl', emp:true, self:false, a3:false, rent:true, car:false, kids:[], own:[], off:{}, leads:[14, 1]}, o, {kt: S.canton || 'ZH'}); }
 function srList(){ if (S.sr === false || !window.SROKI) return []; const o = srOpts(); return SROKI.list(S.year, o).filter(it => !(o.off || {})[it.id + '@' + SROKI.iso(it.date)]); }
 function srMap(){ const m = {}; srList().forEach(it => { const k = SROKI.iso(it.date); (m[k] = m[k] || []).push(it); }); return m; }
-const srDate = it => it.date.getDate() + ' ' + MONTHS[it.date.getMonth()].toLowerCase().replace(/ь$/, 'я').replace(/й$/, 'я').replace(/т$/, 'та');
+const MGEN = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'];
+const srDate = it => it.date.getDate() + ' ' + MGEN[it.date.getMonth()];
 function srDetails(it){ const L = [it.what]; if (it.todo && it.todo.length) L.push('Что сделать и подготовить:\n' + it.todo.map(x => '• ' + x).join('\n')); if (it.page) L.push('Подробно: ' + SROKI.SITE + it.page); return L.filter(Boolean).join('\n\n'); }
 function srEvents(){ const o = srOpts(); return srList().map(it => ({uid:'srok-' + it.id + '-' + SROKI.iso(it.date), title: it.ic + ' ' + it.t + ' · срок', allDay:true, start: SROKI.iso(it.date), details: srDetails(it), alarms: o.leads || [14, 1], kind:'обязательный срок · ' + fmt(SROKI.iso(it.date))})); }
 function renderSr(){

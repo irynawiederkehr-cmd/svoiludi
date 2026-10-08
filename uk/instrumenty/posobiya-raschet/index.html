@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="uk">
+<head><!--i18n--><base href="/instrumenty/posobiya-raschet/"><!--i18n-->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<link rel="icon" href="/fav/favicon.svg" type="image/svg+xml"><link rel="icon" href="/fav/icon-32.png" sizes="32x32"><link rel="apple-touch-icon" href="/fav/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/fonts.css">
+<meta name="description" content="Безкоштовний розрахунок сімейних допомог у Швейцарії (Familienzulagen): впиши дітей, кантони роботи і як працюють батьки — отримаєш суму Kinderzulage і Ausbildungszulage на місяць і на рік за кантоном на 2026 рік, хто з батьків подає за законом, доплату різниці, одноразову допомогу при народженні і що повідомляти. Аркуш PDF і PNG.">
+<link rel="canonical" href="https://svoiludi.ch/uk/instrumenty/posobiya-raschet/">
+<meta property="og:type" content="website"><meta property="og:locale" content="uk_UA"><meta property="og:site_name" content="Свої люди у Швейцарії">
+<meta property="og:title" content="Дитячі допомоги: скільки належить родині і хто подає · безкоштовно"><meta property="og:description" content="Kinderzulage і Ausbildungszulage за кантоном 2026, хто з батьків подає і доплата різниці — на одному аркуші.">
+<meta property="og:url" content="https://svoiludi.ch/uk/instrumenty/posobiya-raschet/"><meta property="og:image" content="https://svoiludi.ch/instrumenty/posobiya-raschet/og-image.uk.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="robots" content="noindex, nofollow">
+<title>Дитячі допомоги: скільки належить родині і хто з батьків подає</title>
+<style>
+/* Детские пособия: сколько положено семье и кто из родителей подаёт (08.10.2026): анкета слева, живые листы справа, движок assets/shema.js. */
+:root{
+  --bg:#F4EDE3; --paper:#FFFCF8; --ink:#2F2924; --muted:#7A6E62; --line:#E5D9C9; --soft:#EFE5D7;
+  --brown:#6E4F3C; --mustard:#B98324; --mustard-soft:#F3E3C2; --sage:#4F5E3E; --sage-soft:#E3E8D6; --red:#A0523D;
+  --display:"Forum","Georgia",serif; --sans:"Manrope","Segoe UI",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#221D19; --paper:#2C2621; --ink:#F1E9DF; --muted:#B4A796; --line:#3E362F; --soft:#352E28;
+  --brown:#E1C2A6; --mustard:#E2B45C; --mustard-soft:#3D321F; --sage:#B4BF97; --sage-soft:#2E3226; --red:#E39A85; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#221D19; --paper:#2C2621; --ink:#F1E9DF; --muted:#B4A796; --line:#3E362F; --soft:#352E28;
+  --brown:#E1C2A6; --mustard:#E2B45C; --mustard-soft:#3D321F; --sage:#B4BF97; --sage-soft:#2E3226; --red:#E39A85; color-scheme:dark}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--ink);font:15px/1.55 var(--sans);margin:0}
+.wrap{max-width:1280px;margin:0 auto;padding-inline:16px;padding-block:28px 48px;display:flex;flex-direction:column;gap:24px}
+.eyebrow{font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+h1{font-family:var(--display);font-weight:400;font-size:clamp(2.4rem,6vw,3.6rem);line-height:1;margin:4px 0 10px;text-wrap:balance}
+h2{font-family:var(--display);font-weight:400;font-size:1.55rem;margin:0;text-wrap:balance}
+h3{font-family:var(--display);font-weight:400;font-size:1.22rem;line-height:1.2;margin:0}
+.lead{max-width:66ch;color:var(--muted);margin:0}
+.jump{font-weight:700;color:var(--brown);text-underline-offset:4px}
+.privnote{margin-top:14px;background:var(--sage-soft);border-radius:16px;padding:12px 16px;font-size:.9rem;max-width:90ch}
+.status{font-size:.86rem;color:var(--muted);min-height:1.3em}
+.btn{font:inherit;font-weight:700;font-size:.9rem;border:0;border-radius:999px;padding:10px 18px;cursor:pointer;color:#fff;text-decoration:none;display:inline-flex;align-items:center;gap:6px;background:#6E4F3C;box-shadow:0 8px 18px -8px rgba(110,79,60,.6)}
+.btn.gold{background:#B98324;box-shadow:0 8px 18px -8px rgba(185,131,36,.7)}
+.btn.free{background:#4F5E3E;box-shadow:0 8px 18px -8px rgba(79,94,62,.6)}
+.btn.ghost{background:transparent;color:var(--brown);border:1.5px solid var(--line);box-shadow:none}
+.btn.sm{font-size:.82rem;padding:7px 13px}
+.btn[disabled]{background:var(--soft);color:var(--muted);box-shadow:none;cursor:wait}
+select,input[type=text],input[type=tel],input[type=number],input[type=date],textarea{font:inherit;font-size:.95rem;color:var(--ink);background:var(--paper);border:1.5px solid var(--line);border-radius:12px;padding:9px 12px;width:100%;min-width:0}
+select:focus-visible,input:focus-visible,button:focus-visible,textarea:focus-visible,a:focus-visible{outline:2px solid var(--mustard);outline-offset:2px}
+::placeholder{color:color-mix(in srgb,var(--muted) 70%,transparent)}
+.setup{background:var(--paper);border:1.5px solid var(--line);border-radius:22px;padding:16px 18px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px 18px;align-items:start}
+@media (max-width:1000px){.setup{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.setup{grid-template-columns:1fr}}
+.fl{display:flex;flex-direction:column;gap:6px;min-width:0}
+.fl>.lb{font-size:.8rem;font-weight:700;color:var(--muted);display:flex;align-items:center}
+.seg{display:flex;flex-wrap:wrap;gap:6px}
+.seg button{font:inherit;font-size:.84rem;font-weight:700;border:1.5px solid var(--line);background:var(--paper);color:var(--ink);border-radius:999px;padding:6px 12px;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--sage);border-color:var(--sage);color:#fff}
+.acts{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.exbar{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;background:var(--mustard-soft);border-radius:16px;padding:10px 14px;font-size:.9rem;font-weight:600}
+.work{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:22px;align-items:start}
+@media (max-width:1040px){.work{grid-template-columns:1fr}}
+.form{display:flex;flex-direction:column;gap:14px;min-width:0}
+.sec{background:var(--paper);border:1.5px solid var(--line);border-radius:20px;padding:16px 18px;display:flex;flex-direction:column;gap:12px}
+.sec>h2{font-size:1.3rem;display:flex;align-items:center}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:560px){.g2{grid-template-columns:1fr}}
+.hint{font-size:.84rem;color:var(--muted);margin:0}
+.chk{display:flex;flex-direction:column;gap:8px}
+.chk label{display:flex;gap:10px;align-items:baseline;font-size:.92rem;cursor:pointer}
+.chk input{flex:none;width:18px;height:18px;accent-color:var(--sage);transform:translateY(3px)}
+.chk b{white-space:nowrap}
+.chk small{color:var(--muted)}
+.tog{display:flex;gap:10px;align-items:center;font-size:.92rem;cursor:pointer}
+.tog input{width:18px;height:18px;accent-color:var(--sage)}
+.sheetbox{position:sticky;top:12px;display:flex;flex-direction:column;gap:10px}
+@media (max-width:1040px){.sheetbox{position:static}}
+.sheet{background:#fff;border-radius:6px;box-shadow:0 18px 40px -22px rgba(47,41,36,.45);overflow:hidden}
+.sheet svg{display:block;width:100%;height:auto}
+.imp{background:var(--paper);border:1.5px dashed color-mix(in srgb,var(--sage) 55%,transparent);border-radius:16px;padding:14px 18px;font-size:.88rem;max-width:90ch;margin:0}
+.imp b{color:var(--sage)}
+.guide{display:flex;flex-direction:column;gap:14px;max-width:90ch}
+.guide ul{margin:0;padding-left:20px}
+.guide li{margin:4px 0}
+.credit{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:.8rem;color:var(--muted)}
+.credit a{color:var(--muted)}
+.qh{font:700 .72rem/1 var(--sans);width:20px;height:20px;border-radius:50%;border:1.5px solid var(--line);background:var(--paper);color:var(--brown);cursor:pointer;margin-left:6px;padding:0;flex:none}
+.sheets{display:flex;flex-direction:column;gap:14px}
+.goals{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+@media (max-width:560px){.goals{grid-template-columns:1fr}}
+.goals label{display:flex;gap:10px;align-items:flex-start;background:var(--bg);border:1.5px solid var(--line);border-radius:14px;padding:9px 12px;cursor:pointer;font-size:.92rem}
+.goals input{width:18px;height:18px;accent-color:var(--sage);flex:none;margin-top:2px}
+.goals small{display:block;color:var(--muted)}
+.steps{display:flex;flex-direction:column;gap:8px}
+.steps details{background:var(--paper);border:1.5px solid var(--line);border-radius:16px;padding:10px 16px}
+.steps summary{cursor:pointer;font-weight:700;display:flex;gap:10px;align-items:baseline}
+.steps summary small{font-weight:600;color:var(--muted);margin-left:auto;text-align:right}
+.steps details p,.steps details ul{margin:8px 0 2px;font-size:.93rem}
+.steps details ul{padding-left:20px}
+</style>
+<!--pwa--><link rel="manifest" href="/fav/site.uk.webmanifest"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Свої люди"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="theme-color" content="#4F5E3E"><style id="pa-tiles">/* верхнее меню на телефоне и планшете: прямоугольные плитки с закруглением в два ряда, иконки ставит pwa-app.js (08.10.2026) */html header.top nav[aria-label] a .pa-ni{display:none}@media (max-width:1100px){html header.top .page{flex-wrap:wrap;row-gap:8px}html header.top nav[aria-label]{order:3;width:100%;display:grid!important;grid-template-columns:repeat(var(--pa-cols,3),minmax(0,1fr));gap:8px;overflow:visible;padding:4px 0 12px;margin:0}html header.top nav[aria-label] a{display:flex!important;flex-direction:column;align-items:center;justify-content:center;gap:5px;min-height:62px;padding:9px 6px;border-radius:14px;background:var(--paper,#FFFCF8);border:1px solid color-mix(in srgb,var(--sage,#66704F) 30%,transparent);box-shadow:0 3px 10px -6px rgba(60,70,40,.45);color:var(--ink,#2F2924)!important;font:600 .78rem/1.18 var(--body,system-ui);text-align:center;white-space:normal;text-decoration:none;-webkit-tap-highlight-color:transparent}html header.top nav[aria-label] a::after{content:none!important}html header.top nav[aria-label] a .pa-ni{display:block;width:22px;height:22px;fill:none;stroke:var(--sage,#66704F);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}html header.top nav[aria-label] a[aria-current="page"]{background:var(--sage,#66704F);border-color:var(--sage,#66704F);color:var(--paper,#FFFCF8)!important;box-shadow:0 4px 12px -6px rgba(60,70,40,.6)}html header.top nav[aria-label] a[aria-current="page"] .pa-ni{stroke:var(--paper,#FFFCF8)}html header.top nav[aria-label] a:active{transform:scale(.97)}}/* кнопки сайта — прямоугольные с закруглением, как плитки меню (решение Ирины 08.10.2026); значки-метки (образец, теги, «?») остаются круглыми */:is(.navcta,.btn,.shr-btn,.pl-act a,.pl-act button,.qa,.more,.listbar button,.leaflet-popup-content button,.calmenu a,.calmenu button,.go-free,.find,.confirm,.monthics,.addb,.mbtn,.example,.viewsw,#langbar.langbar,.pa-go,.pa-x,.pa-foot){border-radius:12px!important}:is(.viewsw button,.seg button,.chips button,#langbar.langbar a,.cal-nav button){border-radius:9px!important}</style><script src="/assets/pwa-app.js" defer></script><!--pwa--><!--i18n--><link rel="alternate" hreflang="ru" href="https://svoiludi.ch/instrumenty/posobiya-raschet/"><link rel="alternate" hreflang="uk" href="https://svoiludi.ch/uk/instrumenty/posobiya-raschet/"><!--i18n--></head>
+<body>
+<style>.form input,.form select{width:100%}.kid{border:1.5px solid var(--line);border-radius:14px;padding:10px 12px;margin:8px 0;background:var(--bg)}.kid .row{display:flex;gap:8px;align-items:end}.kid .row .fl{flex:1}.res{background:var(--paper);border:1.5px solid var(--line);border-radius:16px;padding:14px 16px;margin-top:6px}.res p{margin:4px 0}.big{font-size:1.5rem;font-weight:700}</style>
+<div class="wrap">
+  <header>
+    <p style="margin:0 0 14px"><a class="jump" href="https://svoiludi.ch/uk/instrumenty/">← Усі корисні інструменти · Свої люди у Швейцарії</a></p>
+    <div class="eyebrow">Родина · допомоги</div>
+    <h1>Дитячі допомоги: скільки належить родині і хто з батьків подає</h1>
+    <p class="lead">Впиши дітей і як працюють батьки — розрахунок покаже, скільки сімейних допомог (Kinderzulage і Ausbildungszulage) належить на місяць і на рік, хто з батьків подає за законом і чи належить доплата різниці. Суми всіх 26 кантонів на 2026 рік. PDF безкоштовно.</p>
+    <div class="privnote"><b>Твої дані лише в тебе.</b> Усе зберігається лише у твоєму браузері на цьому пристрої. Реєстрація не потрібна.</div>
+    <div data-fan="posobiya-raschet"></div>
+  </header>
+  <div class="setup">
+    <div class="fl"><span class="lb">Друк</span><label class="tog"><input type="checkbox" id="bw"> Без кольору, для дешевого друку</label></div>
+  </div>
+  <div class="exbar" id="exbar" hidden><span>Це приклад. Так виглядатиме твій розрахунок.</span><button type="button" class="btn sm" id="exOff">Повернутися до моїх даних</button></div>
+  <div class="work">
+    <div class="form">
+      <section class="sec"><h2>Мама або перший з батьків</h2>
+        <div class="fl"><span class="lb">Робота<button type="button" class="qh" data-help="job" aria-label="Підказка: робота" aria-expanded="false">?</button></span><select id="aJob"><option value="emp">За наймом, від 630 франків на місяць</option><option value="self">На себе (selbständig)</option><option value="low">За наймом, менше 630 франків на місяць</option><option value="none">Не працює</option></select></div>
+        <div class="fl"><span class="lb">Кантон роботи (або проживання, якщо не працює)</span><select id="aKt"></select></div>
+      </section>
+      <section class="sec"><h2>Тато або другий з батьків</h2>
+        <div class="fl"><span class="lb">Робота</span><select id="bJob"><option value="emp">За наймом, від 630 франків на місяць</option><option value="self">На себе (selbständig)</option><option value="low">За наймом, менше 630 франків на місяць</option><option value="none">Не працює</option><option value="na">Немає другого з батьків у Швейцарії</option></select></div>
+        <div class="fl"><span class="lb">Кантон роботи (або проживання)</span><select id="bKt"></select></div>
+      </section>
+      <section class="sec"><h2>Родина</h2>
+        <div class="fl"><span class="lb">Опіка<button type="button" class="qh" data-help="sorge" aria-label="Підказка: опіка" aria-expanded="false">?</button></span><select id="sorge"><option value="both">Спільна, живемо разом</option><option value="bothA">Спільна, діти живуть з першим із батьків</option><option value="bothB">Спільна, діти живуть з другим із батьків</option><option value="a">Лише в першого з батьків</option><option value="b">Лише в другого з батьків</option></select></div>
+        <div class="fl"><span class="lb">Кантон, де живуть діти</span><select id="home"></select></div>
+        <div class="fl"><span class="lb">Хто заробляє більше<button type="button" class="qh" data-help="more" aria-label="Підказка: хто більше" aria-expanded="false">?</button></span><select id="more"><option value="a">Перший з батьків</option><option value="b">Другий з батьків</option></select></div>
+        <div class="fl"><span class="lb">Не працюєте обоє: дохід родини за федеральним податком не більше 45 360 франків<button type="button" class="qh" data-help="low" aria-label="Підказка: дохід" aria-expanded="false">?</button></span><select id="lowInc"><option value="y">Так</option><option value="n">Ні</option></select></div>
+      </section>
+      <section class="sec"><h2>Діти</h2>
+        <div id="kids"></div>
+        <button type="button" class="btn ghost sm" id="addKid">+ Додати дитину</button>
+      </section>
+      <div class="res" id="res" aria-live="polite"></div>
+    </div>
+    <div class="sheetbox">
+      <div class="acts"><button type="button" class="btn gold" id="pdf">Завантажити PDF</button><button type="button" class="btn ghost sm" id="share" hidden>Надіслати</button><button type="button" class="btn ghost sm" id="exOn">Подивитися на прикладі</button></div>
+      <div class="sheets" id="sheet" aria-label="Попередній перегляд аркуша"></div>
+      <div class="status" id="status" role="status"></div>
+    </div>
+  </div>
+  <p class="imp"><b>Важливо.</b> Це приблизний розрахунок за законом про сімейні допомоги і сумами кантонів на 2026 рік (PwC за даними кантонів), а не рішення каси. Особливі випадки (діти чоловіка чи дружини, прийомні діти, дитина з інвалідністю, робота в сільському господарстві, робота у двох країнах) вирішує каса. Докладно — у темі <a href="https://svoiludi.ch/uk/shveycariya/detskie-posobiya/">«Дитячі допомоги (Kinderzulagen)»</a>.</p>
+  <div class="share-slot" data-url="https://svoiludi.ch/uk/instrumenty/posobiya-raschet/" data-lead="Перешли родинам із дітьми. У посиланні немає твоїх даних." data-text="Привіт! Тут можна порахувати дитячі допомоги у Швейцарії за кантоном і дізнатися, хто з батьків подає. Безкоштовно. https://svoiludi.ch/uk/instrumenty/posobiya-raschet/"></div>
+  <p class="credit"><span>Свої люди у Швейцарії · svoiludi.ch</span><a href="https://svoiludi.ch/uk/privacy/">Політика конфіденційності</a></p>
+</div>
+
+<script src="/assets/kantony.uk.js"></script>
+<script src="/assets/lib/jspdf.umd.min.js"></script>
+<script src="/assets/shema.uk.js"></script>
+<script>
+window.HELP = {
+  job: '<p><b>За наймом</b> — допомога повна, якщо зарплата не менше 630 франків на місяць (7560 на рік). Кілька робіт — зарплати додаються.</p><p><b>На себе</b> — право є за будь-якого доходу. <b>Не працює</b> — право є лише за невеликого доходу родини.</p>',
+  sorge: '<p>Батьківська опіка (elterliche Sorge). В одружених батьків вона спільна сама собою. Якщо не одружені — спільну опіку оформлюють у РАЦС (Zivilstandsamt) або через KESB.</p>',
+  more: '<p>Потрібно, лише якщо обоє батьків працюють у кантоні, де живуть діти, або обоє в ньому не працюють. Тоді допомогу отримує той, у кого більший дохід за AHV.</p>',
+  low: '<p>Для тих, хто не працює: право на допомогу є, якщо оподатковуваний дохід за федеральним податком не більше 45 360 франків на рік (у Во — 60 480, у Женеві, Юрі й Тічино без межі) і немає додаткових виплат до AHV чи IV.</p>'
+};
+const KEY = 'posobiyaRaschet.v1';
+/* суммы 2026 (PwC «Familienzulagen 2026» по данным кантонов): k — до 16 лет, k12 — с 12 лет, k3 — с третьего ребёнка; a — учёба, a18 — с 18 лет, a3 — с третьего; g — при рождении */
+const FZ = {ZH:{k:215,k12:268,a:268}, BE:{k:250,a:310}, LU:{k:215,k12:260,a:268,g:1075}, UR:{k:240,a:290,g:1200}, SZ:{k:230,a:280,g:1000}, OW:{k:220,a:270}, NW:{k:258,a:311}, GL:{k:215,a:268},
+  ZG:{k:330,a:330,a18:385}, FR:{k:265,k3:285,a:325,a3:345,g:1500}, SO:{k:215,a:268}, BS:{k:275,a:325}, BL:{k:215,a:268}, SH:{k:230,a:290}, AR:{k:230,a:280}, AI:{k:245,a:298}, SG:{k:245,a:298},
+  GR:{k:240,a:290}, AG:{k:225,a:278}, TG:{k:215,a:280}, TI:{k:215,a:268}, VD:{k:322,k3:365,a:425,a3:468,g:1617}, VS:{k:327,k3:435,a:477,a3:585,g:2142}, NE:{k:240,k3:270,a:320,a3:350,g:1200},
+  GE:{k:311,k3:411,a:415,a3:515,g:2073}, JU:{k:275,a:325,g:1500}};
+const KTN = k => ((window.KANTONY || {})[k] || {}).n || k;
+const iso = d => d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0');
+function blank(){ let k = ''; try { k = localStorage.getItem('svoiludi.kanton') || ''; } catch (e) {} k = FZ[k] ? k : 'ZH';
+  return {bw: false, aJob: 'emp', aKt: k, bJob: 'emp', bKt: k, sorge: 'both', home: k, more: 'b', lowInc: 'y', kids: [{name: '', born: '', edu: 'y', where: 'ch'}]}; }
+let S = load(), EX = null;
+function load(){ try { const s = JSON.parse(localStorage.getItem(KEY)); if (s && typeof s === 'object') return Object.assign(blank(), s); } catch (e) {} return blank(); }
+function save(){ if (EX) return; try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} }
+const D = () => EX || S;
+const works = j => j === 'emp' || j === 'self';
+/* кто подаёт: очередь по закону (FamZG ст. 7) */
+function who(d){
+  const A = {id: 'a', job: d.aJob, kt: d.aKt}, B = {id: 'b', job: d.bJob, kt: d.bKt}, has2 = d.bJob !== 'na', why = [];
+  const ent = p => works(p.job) || ((p.job === 'none' || p.job === 'low') && d.lowInc === 'y');
+  const cands = [A].concat(has2 ? [B] : []).filter(ent);
+  if (!cands.length) return {p: null, why: ['Ні в кого з батьків немає права: немає роботи за наймом від 630 франків на місяць або на себе, а дохід родини вищий за межу для непрацюючих.']};
+  if (cands.length === 1) { why.push('Право є лише в одного з батьків.'); return {p: cands[0], other: null, why}; }
+  const w = cands.filter(p => works(p.job));
+  if (w.length === 1) { why.push('1. Подає той, хто працює.'); return {p: w[0], other: cands.find(p => p !== w[0]), why}; }
+  if (d.sorge === 'a' || d.sorge === 'b') { why.push('2. Подає той, у кого батьківська опіка.'); const p = d.sorge === 'a' ? A : B; return {p, other: p === A ? B : A, why}; }
+  if (d.sorge === 'bothA' || d.sorge === 'bothB') { why.push('3. Спільна опіка — подає той, з ким живуть діти.'); const p = d.sorge === 'bothA' ? A : B; return {p, other: p === A ? B : A, why}; }
+  const inHome = w.filter(p => p.kt === d.home);
+  if (w.length === 2 && inHome.length === 1) { why.push('4. Діти живуть з обома — подає той, хто працює в кантоні, де живуть діти.'); return {p: inHome[0], other: inHome[0] === A ? B : A, why}; }
+  why.push('5. Обоє працюють у кантоні, де живуть діти (або обоє ні) — подає той, хто заробляє більше.');
+  const p = d.more === 'a' ? A : B; return {p, other: p === A ? B : A, why};
+}
+function ageAt(born, ref){ const [y, m] = String(born || '').split('-').map(Number); if (!y) return null; return (ref.getFullYear() - y) * 12 + (ref.getMonth() + 1 - m); }
+function amount(kt, k, idx, ref){
+  const f = FZ[kt] || FZ.ZH, m = ageAt(k.born, ref); if (m === null || m < 0) return {sum: 0, kind: '—'};
+  const yrs = Math.floor(m / 12), third = idx >= 2;
+  if (yrs < 16) { return {sum: third && f.k3 ? f.k3 : (yrs >= 12 && f.k12 ? f.k12 : f.k), kind: 'дитина'}; }
+  if (yrs < 25 && k.edu === 'y') return {sum: third && f.a3 ? f.a3 : (yrs >= 18 && f.a18 ? f.a18 : f.a), kind: 'навчання'};
+  return {sum: 0, kind: yrs < 25 ? 'не навчається' : 'старше 25'};
+}
+function calc(d){
+  const ref = new Date(); const W = who(d);
+  const kids = d.kids.filter(k => k.born).slice().sort((a, b) => a.born.localeCompare(b.born));
+  const rows = kids.map((k, i) => {
+    if (!W.p) return {k, a: 0, kind: '—', diff: 0, note: ''};
+    if (k.where === 'other') return {k, a: 0, kind: 'за кордоном', diff: 0, note: 'Діти живуть у країні без угоди — допомоги, як правило, немає.'};
+    const r = amount(W.p.kt, k, i, ref); let diff = 0;
+    if (W.other && works(W.other.job) && r.sum) { const r2 = amount(W.other.kt, k, i, ref); diff = Math.max(0, r2.sum - r.sum); }
+    return {k, a: r.sum, kind: r.kind, diff, note: k.where === 'eu' ? 'Діти в ЄС або ЄАВТ — допомогу платять повністю, одноразову при народженні — ні.' : ''};
+  });
+  const month = rows.reduce((s, r) => s + r.a + r.diff, 0);
+  const g = W.p ? (FZ[W.p.kt] || {}).g : 0;
+  return {W, rows, month, year: month * 12, g};
+}
+const fmt = n => Math.round(n).toLocaleString('de-CH').replace(/[’']/g, ' ');
+const JOB = {emp: 'за наймом', self: 'на себе', low: 'за наймом, менше 630 фр. на місяць', none: 'не працює', na: '—'};
+function build(){
+  const d = D(), C = SH.pal(d.bw), c = C.c, P = SH.page(210, 297, C), X = 12, W = 186, r = calc(d);
+  P.header('Дитячі допомоги: розрахунок родини', 'Familienzulagen · allocations familiales · assegni familiari', '2026');
+  let y = 28;
+  if (!r.W.p) { y += P.card(X, y, W, c.red, 'Права на допомогу не видно', '', r.W.why, {ts: 12, bs: 9.5}) + 6; }
+  else {
+    const p = r.W.p, nm = p.id === 'a' ? 'Перший з батьків (мама)' : 'Другий з батьків (тато)';
+    y += P.card(X, y, W, c.green, fmt(r.month) + ' франків на місяць · ' + fmt(r.year) + ' на рік', 'Familienzulagen pro Monat und Jahr', ['Подає: ' + nm + ', ' + JOB[p.job] + ', кантон ' + KTN(p.kt) + '.', r.W.why.join(' ')], {ts: 14, bs: 9.5}) + 6;
+  }
+  y = P.sec('Діти', X, y, W);
+  const cols = [X, X + 55, X + 95, X + 130, X + 158];
+  ['Дитина', 'Допомога', 'На місяць', 'Доплата різниці', ''].forEach((t, i) => P.text(t, cols[i], y, 8, true, C.head)); y += 2; P.line(X, y, X + W, y, C.line, 0.3); y += 5;
+  r.rows.forEach(row => { const k = row.k; P.text((k.name || 'Дитина') + ' · ' + k.born.split('-').reverse().join('.'), cols[0], y, 9, false, C.ink); P.text(row.kind, cols[1], y, 9, false, C.ink); P.text(row.a ? fmt(row.a) + ' фр.' : '—', cols[2], y, 9, true, C.ink); P.text(row.diff ? '+' + fmt(row.diff) + ' фр.' : '—', cols[3], y, 9, false, C.ink); y += 5.5;
+    if (row.note) { y = P.para(row.note, cols[0] + 2, y, 7.6, false, C.mut, W - 4, 3.6) + 1; } });
+  if (!r.rows.length) { P.text('Додай дітей із датою народження.', X, y, 9, false, C.mut); y += 6; }
+  y += 4;
+  if (r.g) { y += P.card(X, y, W, c.mustard, 'При народженні в кантоні ' + KTN(r.W.p.kt) + ': ' + fmt(r.g) + ' франків одноразово', 'Geburtszulage', ['Подай разом з анкетою на допомогу після народження дитини.'], {ts: 10, bs: 8.6}) + 5; }
+  y = P.sec('Як подати', X, y, W);
+  ['За наймом — анкета в роботодавця (Anmeldung Familienzulagen), допомога приходить разом із зарплатою. Додай свідоцтво про народження.', 'На себе — до своєї каси сімейних допомог (Familienausgleichskasse). Не працюєш — до каси AHV свого кантону.', 'Не подавала раніше — можна заднім числом до 5 років.', 'З 16 років — щороку довідка про навчання (Ausbildungsbestätigung).', 'Повідомляй касі: народження, кінець навчання, шлюб, розлучення, зміну роботи другого з батьків.'].forEach(s => { y = P.para('• ' + s, X, y + 1, 8.8, false, C.ink, W, 4.3); });
+  P.foot('Приблизний розрахунок за законом про сімейні допомоги (FamZG) і сумами кантонів 2026 (PwC), не рішення каси. svoiludi.ch');
+  return [P];
+}
+const $ = id => document.getElementById(id);
+const kopts = Object.keys(FZ).sort((a, b) => KTN(a).localeCompare(KTN(b), 'ru')).map(k => `<option value="${k}">${KTN(k)}</option>`).join('');
+['aKt', 'bKt', 'home'].forEach(id => $(id).innerHTML = kopts);
+function kidsUI(){ const d = D();
+  $('kids').innerHTML = d.kids.map((k, i) => `<div class="kid"><div class="fl"><span class="lb">Ім’я (за бажанням)</span><input type="text" data-k="${i}" data-f="name" value="${(k.name || '').replace(/\x22/g, '&quot;')}"></div><div class="row"><div class="fl"><span class="lb">Місяць і рік народження</span><input type="month" data-k="${i}" data-f="born" value="${k.born || ''}"></div></div><div class="fl"><span class="lb">Після 15 років навчається (гімназія, Lehre, університет)</span><select data-k="${i}" data-f="edu"><option value="y">Так</option><option value="n">Ні</option></select></div><div class="fl"><span class="lb">Де живе</span><select data-k="${i}" data-f="where"><option value="ch">У Швейцарії</option><option value="eu">У країні ЄС або ЄАВТ</option><option value="other">В іншій країні (наприклад, в Україні)</option></select></div>${d.kids.length > 1 ? `<button type="button" class="btn ghost sm" data-del="${i}">Прибрати</button>` : ''}</div>`).join('');
+  $('kids').querySelectorAll('select[data-f]').forEach(s => s.value = d.kids[+s.dataset.k][s.dataset.f]);
+  $('kids').querySelectorAll('input,select,button').forEach(x => x.disabled = !!EX); }
+function showRes(){ const r = calc(D());
+  $('res').innerHTML = !r.W.p ? '<p><b>Права на допомогу не видно.</b></p><p>' + r.W.why.join(' ') + '</p>' : '<p>Приблизно</p><p class="big">' + fmt(r.month) + ' фр. на місяць</p><p>' + fmt(r.year) + ' франків на рік. Подає: <b>' + (r.W.p.id === 'a' ? 'перший з батьків' : 'другий з батьків') + '</b>, кантон ' + KTN(r.W.p.kt) + '.</p>'; }
+const F = ['aJob', 'aKt', 'bJob', 'bKt', 'sorge', 'home', 'more', 'lowInc'];
+let UI, tmr;
+function fill(){ const d = D(); $('bw').checked = !!d.bw; F.forEach(k => { $(k).value = d[k]; $(k).disabled = !!EX; }); $('addKid').hidden = !!EX; kidsUI(); $('exbar').hidden = !EX; $('exOn').hidden = !!EX; showRes(); if (UI) UI.render(); }
+$('bw').addEventListener('change', e => { S.bw = e.target.checked; if (EX) EX.bw = S.bw; save(); fill(); });
+F.forEach(k => $(k).addEventListener('change', e => { if (EX) return; S[k] = e.target.value; save(); fill(); }));
+$('kids').addEventListener('input', e => { const x = e.target; if (EX || !x.dataset.f) return; S.kids[+x.dataset.k][x.dataset.f] = x.value; save(); clearTimeout(tmr); tmr = setTimeout(() => { showRes(); UI && UI.render(); }, 300); });
+$('kids').addEventListener('change', e => { const x = e.target; if (EX || !x.dataset.f) return; S.kids[+x.dataset.k][x.dataset.f] = x.value; save(); showRes(); UI && UI.render(); });
+$('kids').addEventListener('click', e => { const b = e.target.closest('[data-del]'); if (!b || EX) return; S.kids.splice(+b.dataset.del, 1); save(); fill(); });
+$('addKid').addEventListener('click', () => { if (EX) return; S.kids.push({name: '', born: '', edu: 'y', where: 'ch'}); save(); fill(); });
+const EXD = () => { const y = new Date().getFullYear(); return Object.assign(blank(), {bw: S.bw, aJob: 'emp', aKt: 'ZH', bJob: 'emp', bKt: 'ZG', sorge: 'both', home: 'ZH', more: 'b', kids: [{name: 'Марія', born: (y - 17) + '-03', edu: 'y', where: 'ch'}, {name: 'Лев', born: (y - 13) + '-09', edu: 'y', where: 'ch'}, {name: 'Ніка', born: (y - 4) + '-01', edu: 'y', where: 'ch'}]}); };
+$('exOn').addEventListener('click', () => { EX = EXD(); fill(); window.scrollTo({top: $('exbar').offsetTop - 12, behavior: 'smooth'}); });
+$('exOff').addEventListener('click', () => { EX = null; fill(); });
+if (/[?&]example\b/.test(location.search)) EX = EXD();
+UI = SH.mount({build, title: 'Дитячі допомоги', name: () => 'Familienzulagen-2026'});
+fill();
+
+</script>
+<script src="/assets/help.uk.js"></script>
+<script src="/assets/backup.uk.js"></script>
+<script src="/assets/pdffan.uk.js" defer></script>
+<script src="/assets/share.uk.js" defer></script>
+<script src="/assets/samesite.js"></script>
+<!--i18n--><style>#langbar.langbar{position:fixed;bottom:14px;right:14px;z-index:60;display:flex;gap:2px;background:rgba(255,255,255,.92);border:1px solid rgba(0,0,0,.08);border-radius:999px;padding:3px;font:600 12px Manrope,system-ui,sans-serif;box-shadow:0 2px 8px rgba(0,0,0,.08)}#langbar.langbar a{color:#5d554d;padding:5px 9px;border-radius:999px;text-decoration:none;font:inherit;display:inline-block}#langbar.langbar a[aria-current="true"]{background:#2f2924;color:#fff}@media print{.langbar{display:none!important}}</style><div class="langbar" id="langbar" role="navigation" aria-label="Мова / Язык"><a href="/instrumenty/posobiya-raschet/" hreflang="ru" data-lang="ru">RU</a><a href="/uk/instrumenty/posobiya-raschet/" hreflang="uk" data-lang="uk" aria-current="true">UA</a></div><script>(function(){var b=document.getElementById('langbar');if(!b)return;b.addEventListener('click',function(e){var a=e.target.closest('a[data-lang]');if(a){try{localStorage.setItem('svoiludiLang',a.dataset.lang)}catch(x){}a.href=a.getAttribute('href').split('#')[0]+location.hash;}});})();</script><!--i18n--></body>
+</html>

@@ -55,6 +55,38 @@ const CARDS = [
     ru: { eb: EB.ru, title: 'Политика конфиденциальности', desc: 'Какие данные есть в справочнике и инструментах, где они хранятся и как их удалить.', chip: 'Простыми словами' },
     uk: { eb: EB.uk, title: 'Політика конфіденційності', desc: 'Які дані є в довіднику та інструментах, де вони зберігаються і як їх видалити.', chip: 'Простими словами' } },
 ];
+// Автоматические карточки (09.10.2026): все инструменты и статьи «Как устроена Швейцария», которых нет в списке выше.
+// Инструменты — веер страниц готового PDF (instrumenty/preview/<slug>, украинские — …/uk), статьи — снимок начала статьи.
+// Заголовок: у инструмента — og:title страницы без хвоста, у статьи — название темы; описание — первое предложение og:description.
+(function autoCards() {
+  const have = new Set(CARDS.map(c => c.out));
+  const meta = (file, prop) => { if (!fs.existsSync(file)) return ''; const m = fs.readFileSync(file, 'utf8').match(new RegExp('property="og:' + prop + '" content="([^"]*)"')); return m ? m[1].replace(/&quot;/g, '"').replace(/&amp;/g, '&') : ''; };
+  const first = t => { const m = t.match(/^.{20,140}?[.!?](?=\s|$)/); return m ? m[0] : (t.length > 140 ? t.slice(0, 137).replace(/\s+\S*$/, '') + '…' : t); };
+  const clean = t => t.replace(/\s*·\s*(Свои люди|Свої люди|бесплатно|безкоштовно)\s*$/i, '').replace(/\s*·\s*(Свои люди|Свої люди|бесплатно|безкоштовно)\s*$/i, '');
+  const gl = {}; const gf = path.join(__dirname, 'GLOSSARY_SHV.md');
+  if (fs.existsSync(gf)) for (const l of fs.readFileSync(gf, 'utf8').split('\n')) { const m = l.match(/^\| (.+?) \| (.+?) \|$/); if (m) gl[m[1]] = m[2]; }
+  const topics = fs.readFileSync(path.join(__dirname, 'shveycariya_src/topics.py'), 'utf8');
+  for (const d of fs.readdirSync(path.join(ROOT, 'instrumenty')).sort()) {
+    const out = `instrumenty/${d}/og-image`, ru = path.join(ROOT, 'instrumenty', d, 'index.html'), uk = path.join(ROOT, 'uk/instrumenty', d, 'index.html');
+    if (have.has(out) || d === 'preview' || !fs.existsSync(ru) || !fs.existsSync(path.join(ROOT, 'instrumenty/preview', d))) continue;
+    CARDS.push({ out, url: `/instrumenty/${d}/`, fan: `instrumenty/preview/${d}`,
+      ru: { eb: TOOLS.ru, title: clean(meta(ru, 'title')), desc: first(meta(ru, 'description')), chip: 'Бесплатно · PDF' },
+      uk: { eb: TOOLS.uk, title: clean(meta(uk, 'title')), desc: first(meta(uk, 'description')), chip: 'Безкоштовно · PDF' } });
+  }
+  const SH = { ru: EB.ru + ' · КАК УСТРОЕНА ШВЕЙЦАРИЯ', uk: EB.uk + ' · ЯК ВЛАШТОВАНА ШВЕЙЦАРІЯ' };
+  if (fs.existsSync(path.join(ROOT, 'shveycariya/index.html')) && !have.has('shveycariya/og-image'))
+    CARDS.push({ out: 'shveycariya/og-image', url: '/shveycariya/', sel: '.s-hero',
+      ru: { eb: EB.ru, title: 'Как устроена Швейцария', desc: 'Пермиты, налоги, страховки, школа, работа и жильё — простыми словами, с инструментами и специалистами.', chip: '56 тем · бесплатно' },
+      uk: { eb: EB.uk, title: 'Як влаштована Швейцарія', desc: 'Пермити, податки, страховки, школа, робота й житло — простими словами, з інструментами та фахівцями.', chip: '56 тем · безкоштовно' } });
+  for (const d of fs.readdirSync(path.join(ROOT, 'shveycariya')).sort()) {
+    const out = `shveycariya/${d}/og-image`, ru = path.join(ROOT, 'shveycariya', d, 'index.html'), uk = path.join(ROOT, 'uk/shveycariya', d, 'index.html');
+    if (have.has(out) || !fs.existsSync(ru)) continue;
+    const m = topics.match(new RegExp("T\\('" + d + "', '[a-z]+', '[^']*', '([^']+)'")); const t = m ? m[1] : clean(meta(ru, 'title'));
+    CARDS.push({ out, url: `/shveycariya/${d}/`, sel: 'main',
+      ru: { eb: SH.ru, title: t, desc: first(meta(ru, 'description')), chip: 'Простыми словами · бесплатно' },
+      uk: { eb: SH.uk, title: gl[t] || clean(meta(uk, 'title')), desc: first(meta(uk, 'description')), chip: 'Простими словами · безкоштовно' } });
+  }
+})();
 // Главная: карта Швейцарии, города связаны нитями, плашки специалистов (вариант A, выбран Ириной 07.10.2026)
 const MAIN = {
   out: 'fav/og-svoi-ludi',
@@ -73,7 +105,7 @@ p{font-size:25px;line-height:1.45;color:#4F5E3E;font-weight:600;margin-bottom:28
 .shot img{width:100%;display:block}
 .pg{position:absolute;width:330px;border-radius:6px;background:#fff;box-shadow:0 14px 34px rgba(60,50,30,.22);border:1px solid #e7dccb;overflow:hidden}.pg img{width:100%;display:block}</style>`;
 function cardHtml(t, visual) {
-  return `<html><head><meta charset="utf-8">${CSS}</head><body><div class="l"><div class="eb">${t.eb}</div><h1${t.title.length > 22 ? ' style="font-size:50px"' : ''}>${t.title}</h1><p>${t.desc}</p>${t.chip ? `<span class="chip">${t.chip}</span>` : ''}</div><div class="foot">svoiludi.ch</div>${visual}</body></html>`;
+  return `<html><head><meta charset="utf-8">${CSS}</head><body><div class="l"><div class="eb">${t.eb}</div><h1${t.title.length > 60 ? ' style="font-size:38px"' : t.title.length > 40 ? ' style="font-size:44px"' : t.title.length > 22 ? ' style="font-size:50px"' : ''}>${t.title}</h1><p${t.desc.length > 110 ? ' style="font-size:21px"' : ''}>${t.desc}</p>${t.chip ? `<span class="chip">${t.chip}</span>` : ''}</div><div class="foot">svoiludi.ch</div>${visual}</body></html>`;
 }
 function fanHtml(imgs) {   // до трёх страниц PDF веером
   const pos = [[610, 115, -8], [725, 72, -1], [840, 100, 6]].slice(-imgs.length);
@@ -132,7 +164,7 @@ function check() {   // страницы без og:image
       visual = fanHtml(imgs);
     } else {
       const pg = await (await b.newContext({ viewport: { width: 1100, height: 840 } })).newPage();
-      await pg.goto(BASE + (lang === 'uk' ? '/uk' : '') + c.url); await pg.waitForTimeout(1500);
+      for (let t = 0; t < 3; t++) { try { await pg.goto(BASE + (lang === 'uk' ? '/uk' : '') + c.url, { waitUntil: 'domcontentloaded', timeout: 45000 }); break; } catch (e) { if (t === 2) throw e; } } await pg.waitForTimeout(1500);
       await pg.evaluate(() => { const l = document.getElementById('langbar'); if (l) l.remove(); document.querySelectorAll('header').forEach(h => { h.style.position = 'static'; }); });
       if (await pg.$(c.sel)) await pg.evaluate(s => { const e = document.querySelector(s); window.scrollTo(0, e.getBoundingClientRect().top + window.scrollY - 30); }, c.sel);
       await pg.waitForTimeout(300);

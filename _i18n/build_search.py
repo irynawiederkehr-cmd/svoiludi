@@ -56,3 +56,26 @@ os.makedirs('data', exist_ok=True)
 out = '/* Индекс поиска по сайту — собирается _i18n/build_search.py, руками не править. */\nwindow.SVL_SEARCH = ' + json.dumps(items, ensure_ascii=False, separators=(',', ':')) + ';\n'
 open('data/search.js', 'w', encoding='utf-8').write(out)
 print('ok', len(items), 'записей')
+
+# Украинский индекс (09.10.2026): data/search.uk.js — тексты из памяти переводов (tm_uk.json и tm_search_uk.json),
+# ключевые слова — русские и украинские вместе, ссылки на /uk/…. Непереведённое — в _i18n/search_todo.json.
+TM = json.load(open('_i18n/tm_uk.json', encoding='utf-8'))
+ps = '_i18n/tm_search_uk.json'
+TS = json.load(open(ps, encoding='utf-8')) if os.path.exists(ps) else {}
+CYR = re.compile('[А-Яа-яЁё]')
+todo = []
+def tr(s):
+    if not s or not CYR.search(s): return s
+    v = TS.get(s) or TM.get(s)
+    if v is None: todo.append(s); return s
+    return v
+uk = []
+for it in items:
+    u = it['u']
+    uu = '/uk' + u if not u.startswith('/uk') else u
+    kk = tr(it.get('k', ''))
+    uk.append({'g': tr(it['g']), 't': tr(it['t']), 'u': uu, 'd': tr(it.get('d', '')), 'k': (it.get('k', '') + ' ' + (kk if kk != it.get('k', '') else '')).strip()})
+json.dump(sorted(set(todo)), open('_i18n/search_todo.json', 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
+out = '/* Украинский индекс поиска — собирается _i18n/build_search.py, руками не править. */\nwindow.SVL_SEARCH = ' + json.dumps(uk, ensure_ascii=False, separators=(',', ':')) + ';\n'
+open('data/search.uk.js', 'w', encoding='utf-8').write(out)
+print('uk: непереведено', len(set(todo)))

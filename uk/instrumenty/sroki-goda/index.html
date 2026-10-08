@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="uk">
+<head><!--i18n--><base href="/instrumenty/sroki-goda/"><!--i18n-->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<link rel="icon" href="/fav/favicon.svg" type="image/svg+xml"><link rel="icon" href="/fav/icon-32.png" sizes="32x32"><link rel="apple-touch-icon" href="/fav/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/fonts.css">
+<meta name="description" content="Безкоштовний список усіх обов’язкових строків року для життя у Швейцарії з нагадуваннями: податкова декларація і податок у джерела, зміна медстраховки до 30 листопада і франшиза, 3a до кінця року, віньєтка, референтна ставка з оренди, продовження пермиту й паспорта, дитячі допомоги й довідки про навчання, AHV для дорослих дітей, свої строки. У кожного строку — іконка, що це і що підготувати. Файл для календаря Google, Apple і Outlook із нагадуваннями та аркуш PDF.">
+<link rel="canonical" href="https://svoiludi.ch/uk/instrumenty/sroki-goda/">
+<meta property="og:type" content="website"><meta property="og:locale" content="uk_UA"><meta property="og:site_name" content="Свої люди у Швейцарії">
+<meta property="og:title" content="Обов’язкові строки року у Швейцарії: нагадування в календар · безкоштовно"><meta property="og:description" content="Податки, медстраховка, 3a, пермит, віньєтка й діти — усі строки року з нагадуваннями у твій календар.">
+<meta property="og:url" content="https://svoiludi.ch/uk/instrumenty/sroki-goda/"><meta property="og:image" content="https://svoiludi.ch/instrumenty/sroki-goda/og-image.uk.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="robots" content="noindex, nofollow">
+<title>Обов’язкові строки року у Швейцарії: нагадування в календар Google і Apple</title>
+<style>
+/* Обязательные сроки года в Швейцарии: напоминания в календарь Google и Apple (08.10.2026): анкета слева, живые листы справа, движок assets/shema.js. */
+:root{
+  --bg:#F4EDE3; --paper:#FFFCF8; --ink:#2F2924; --muted:#7A6E62; --line:#E5D9C9; --soft:#EFE5D7;
+  --brown:#6E4F3C; --mustard:#B98324; --mustard-soft:#F3E3C2; --sage:#4F5E3E; --sage-soft:#E3E8D6; --red:#A0523D;
+  --display:"Forum","Georgia",serif; --sans:"Manrope","Segoe UI",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#221D19; --paper:#2C2621; --ink:#F1E9DF; --muted:#B4A796; --line:#3E362F; --soft:#352E28;
+  --brown:#E1C2A6; --mustard:#E2B45C; --mustard-soft:#3D321F; --sage:#B4BF97; --sage-soft:#2E3226; --red:#E39A85; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#221D19; --paper:#2C2621; --ink:#F1E9DF; --muted:#B4A796; --line:#3E362F; --soft:#352E28;
+  --brown:#E1C2A6; --mustard:#E2B45C; --mustard-soft:#3D321F; --sage:#B4BF97; --sage-soft:#2E3226; --red:#E39A85; color-scheme:dark}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--ink);font:15px/1.55 var(--sans);margin:0}
+.wrap{max-width:1280px;margin:0 auto;padding-inline:16px;padding-block:28px 48px;display:flex;flex-direction:column;gap:24px}
+.eyebrow{font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+h1{font-family:var(--display);font-weight:400;font-size:clamp(2.4rem,6vw,3.6rem);line-height:1;margin:4px 0 10px;text-wrap:balance}
+h2{font-family:var(--display);font-weight:400;font-size:1.55rem;margin:0;text-wrap:balance}
+h3{font-family:var(--display);font-weight:400;font-size:1.22rem;line-height:1.2;margin:0}
+.lead{max-width:66ch;color:var(--muted);margin:0}
+.jump{font-weight:700;color:var(--brown);text-underline-offset:4px}
+.privnote{margin-top:14px;background:var(--sage-soft);border-radius:16px;padding:12px 16px;font-size:.9rem;max-width:90ch}
+.status{font-size:.86rem;color:var(--muted);min-height:1.3em}
+.btn{font:inherit;font-weight:700;font-size:.9rem;border:0;border-radius:999px;padding:10px 18px;cursor:pointer;color:#fff;text-decoration:none;display:inline-flex;align-items:center;gap:6px;background:#6E4F3C;box-shadow:0 8px 18px -8px rgba(110,79,60,.6)}
+.btn.gold{background:#B98324;box-shadow:0 8px 18px -8px rgba(185,131,36,.7)}
+.btn.free{background:#4F5E3E;box-shadow:0 8px 18px -8px rgba(79,94,62,.6)}
+.btn.ghost{background:transparent;color:var(--brown);border:1.5px solid var(--line);box-shadow:none}
+.btn.sm{font-size:.82rem;padding:7px 13px}
+.btn[disabled]{background:var(--soft);color:var(--muted);box-shadow:none;cursor:wait}
+select,input[type=text],input[type=tel],input[type=number],input[type=date],textarea{font:inherit;font-size:.95rem;color:var(--ink);background:var(--paper);border:1.5px solid var(--line);border-radius:12px;padding:9px 12px;width:100%;min-width:0}
+select:focus-visible,input:focus-visible,button:focus-visible,textarea:focus-visible,a:focus-visible{outline:2px solid var(--mustard);outline-offset:2px}
+::placeholder{color:color-mix(in srgb,var(--muted) 70%,transparent)}
+.setup{background:var(--paper);border:1.5px solid var(--line);border-radius:22px;padding:16px 18px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px 18px;align-items:start}
+@media (max-width:1000px){.setup{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.setup{grid-template-columns:1fr}}
+.fl{display:flex;flex-direction:column;gap:6px;min-width:0}
+.fl>.lb{font-size:.8rem;font-weight:700;color:var(--muted);display:flex;align-items:center}
+.seg{display:flex;flex-wrap:wrap;gap:6px}
+.seg button{font:inherit;font-size:.84rem;font-weight:700;border:1.5px solid var(--line);background:var(--paper);color:var(--ink);border-radius:999px;padding:6px 12px;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--sage);border-color:var(--sage);color:#fff}
+.acts{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.exbar{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;background:var(--mustard-soft);border-radius:16px;padding:10px 14px;font-size:.9rem;font-weight:600}
+.work{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:22px;align-items:start}
+@media (max-width:1040px){.work{grid-template-columns:1fr}}
+.form{display:flex;flex-direction:column;gap:14px;min-width:0}
+.sec{background:var(--paper);border:1.5px solid var(--line);border-radius:20px;padding:16px 18px;display:flex;flex-direction:column;gap:12px}
+.sec>h2{font-size:1.3rem;display:flex;align-items:center}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:560px){.g2{grid-template-columns:1fr}}
+.hint{font-size:.84rem;color:var(--muted);margin:0}
+.chk{display:flex;flex-direction:column;gap:8px}
+.chk label{display:flex;gap:10px;align-items:baseline;font-size:.92rem;cursor:pointer}
+.chk input{flex:none;width:18px;height:18px;accent-color:var(--sage);transform:translateY(3px)}
+.chk b{white-space:nowrap}
+.chk small{color:var(--muted)}
+.tog{display:flex;gap:10px;align-items:center;font-size:.92rem;cursor:pointer}
+.tog input{width:18px;height:18px;accent-color:var(--sage)}
+.sheetbox{position:sticky;top:12px;display:flex;flex-direction:column;gap:10px}
+@media (max-width:1040px){.sheetbox{position:static}}
+.sheet{background:#fff;border-radius:6px;box-shadow:0 18px 40px -22px rgba(47,41,36,.45);overflow:hidden}
+.sheet svg{display:block;width:100%;height:auto}
+.imp{background:var(--paper);border:1.5px dashed color-mix(in srgb,var(--sage) 55%,transparent);border-radius:16px;padding:14px 18px;font-size:.88rem;max-width:90ch;margin:0}
+.imp b{color:var(--sage)}
+.guide{display:flex;flex-direction:column;gap:14px;max-width:90ch}
+.guide ul{margin:0;padding-left:20px}
+.guide li{margin:4px 0}
+.credit{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:.8rem;color:var(--muted)}
+.credit a{color:var(--muted)}
+.qh{font:700 .72rem/1 var(--sans);width:20px;height:20px;border-radius:50%;border:1.5px solid var(--line);background:var(--paper);color:var(--brown);cursor:pointer;margin-left:6px;padding:0;flex:none}
+.sheets{display:flex;flex-direction:column;gap:14px}
+.goals{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+@media (max-width:560px){.goals{grid-template-columns:1fr}}
+.goals label{display:flex;gap:10px;align-items:flex-start;background:var(--bg);border:1.5px solid var(--line);border-radius:14px;padding:9px 12px;cursor:pointer;font-size:.92rem}
+.goals input{width:18px;height:18px;accent-color:var(--sage);flex:none;margin-top:2px}
+.goals small{display:block;color:var(--muted)}
+.steps{display:flex;flex-direction:column;gap:8px}
+.steps details{background:var(--paper);border:1.5px solid var(--line);border-radius:16px;padding:10px 16px}
+.steps summary{cursor:pointer;font-weight:700;display:flex;gap:10px;align-items:baseline}
+.steps summary small{font-weight:600;color:var(--muted);margin-left:auto;text-align:right}
+.steps details p,.steps details ul{margin:8px 0 2px;font-size:.93rem}
+.steps details ul{padding-left:20px}
+</style>
+<!--pwa--><link rel="manifest" href="/fav/site.uk.webmanifest"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Свої люди"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="theme-color" content="#4F5E3E"><style id="pa-tiles">/* верхнее меню на телефоне и планшете: прямоугольные плитки с закруглением в два ряда, иконки ставит pwa-app.js (08.10.2026) */html header.top nav[aria-label] a .pa-ni{display:none}@media (max-width:1100px){html header.top .page{flex-wrap:wrap;row-gap:8px}html header.top nav[aria-label]{order:3;width:100%;display:grid!important;grid-template-columns:repeat(var(--pa-cols,3),minmax(0,1fr));gap:8px;overflow:visible;padding:4px 0 12px;margin:0}html header.top nav[aria-label] a{display:flex!important;flex-direction:column;align-items:center;justify-content:center;gap:5px;min-height:62px;padding:9px 6px;border-radius:14px;background:var(--paper,#FFFCF8);border:1px solid color-mix(in srgb,var(--sage,#66704F) 30%,transparent);box-shadow:0 3px 10px -6px rgba(60,70,40,.45);color:var(--ink,#2F2924)!important;font:600 .78rem/1.18 var(--body,system-ui);text-align:center;white-space:normal;text-decoration:none;-webkit-tap-highlight-color:transparent}html header.top nav[aria-label] a::after{content:none!important}html header.top nav[aria-label] a .pa-ni{display:block;width:22px;height:22px;fill:none;stroke:var(--sage,#66704F);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}html header.top nav[aria-label] a[aria-current="page"]{background:var(--sage,#66704F);border-color:var(--sage,#66704F);color:var(--paper,#FFFCF8)!important;box-shadow:0 4px 12px -6px rgba(60,70,40,.6)}html header.top nav[aria-label] a[aria-current="page"] .pa-ni{stroke:var(--paper,#FFFCF8)}html header.top nav[aria-label] a:active{transform:scale(.97)}}/* кнопки сайта — прямоугольные с закруглением, как плитки меню (решение Ирины 08.10.2026); значки-метки (образец, теги, «?») остаются круглыми */:is(.navcta,.btn,.shr-btn,.pl-act a,.pl-act button,.qa,.more,.listbar button,.leaflet-popup-content button,.calmenu a,.calmenu button,.go-free,.find,.confirm,.monthics,.addb,.mbtn,.example,.viewsw,#langbar.langbar,.pa-go,.pa-x,.pa-foot){border-radius:12px!important}:is(.viewsw button,.seg button,.chips button,#langbar.langbar a,.cal-nav button){border-radius:9px!important}</style><script src="/assets/pwa-app.js" defer></script><!--pwa--><!--i18n--><link rel="alternate" hreflang="ru" href="https://svoiludi.ch/instrumenty/sroki-goda/"><link rel="alternate" hreflang="uk" href="https://svoiludi.ch/uk/instrumenty/sroki-goda/"><!--i18n--></head>
+<body>
+<style>.form input,.form select{width:100%}.form .chk input{width:18px}label.chk{flex-direction:row;align-items:baseline;gap:10px;margin:6px 0}.kid,.own{border:1.5px solid var(--line);border-radius:14px;padding:10px 12px;margin:8px 0;background:var(--bg)}
+.sl-m{margin:18px 0 6px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;font-size:.78rem}
+.sl{display:flex;gap:12px;background:var(--paper);border:1.5px solid var(--line);border-radius:16px;padding:12px 14px;margin:8px 0}
+.sl .ic{font-size:1.6rem;line-height:1;flex:none;width:2rem;text-align:center}
+.sl .bd{flex:1;min-width:0}.sl .dt{font-size:.82rem;font-weight:700;color:var(--sage)}.sl h3{margin:2px 0 4px;font-size:1rem}
+.sl p{margin:4px 0;font-size:.9rem}.sl ul{margin:4px 0 6px;padding-left:18px;font-size:.88rem}.sl .ln{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:6px}
+.sl .ln a{font-size:.85rem}.sl label.inc{display:flex;gap:6px;align-items:center;font-size:.84rem;color:var(--muted)}
+.leads{display:flex;flex-wrap:wrap;gap:6px 14px}.leads label{display:flex;gap:6px;align-items:center;font-size:.92rem}
+.calbar{position:sticky;bottom:0;background:var(--bg);padding:10px 0;display:flex;flex-wrap:wrap;gap:8px;align-items:center;border-top:1.5px solid var(--line);z-index:5}</style>
+<div class="wrap">
+  <header>
+    <p style="margin:0 0 14px"><a class="jump" href="https://svoiludi.ch/uk/instrumenty/">← Усі корисні інструменти · Свої люди у Швейцарії</a></p>
+    <div class="eyebrow">Строки · нагадування</div>
+    <h1>Обов’язкові строки року у Швейцарії: нагадування в календар Google і Apple</h1>
+    <p class="lead">Податкова декларація, зміна медстраховки до 30 листопада, 3a до кінця року, віньєтка, продовження пермиту — у Швейцарії багато обов’язкових строків, і пропустити їх дорого. Познач, що стосується тебе, — отримаєш свої строки на рік: з іконкою, що це і що підготувати. Одним файлом додай їх у свій календар із нагадуваннями.</p>
+    <div class="privnote"><b>Твої дані лише в тебе.</b> Усе зберігається лише у твоєму браузері на цьому пристрої. Реєстрація не потрібна.</div>
+    <div data-fan="sroki-goda"></div>
+  </header>
+  <div class="setup">
+    <div class="fl"><span class="lb">Рік</span><select id="year"></select></div>
+    <div class="fl"><span class="lb">Кантон<button type="button" class="qh" data-help="kt" aria-label="Підказка: кантон" aria-expanded="false">?</button></span><select id="kt"></select></div>
+    <div class="fl"><span class="lb">Друк</span><label class="tog"><input type="checkbox" id="bw"> Без кольору, для дешевого друку</label></div>
+  </div>
+  <div class="exbar" id="exbar" hidden><span>Це приклад. Так виглядатимуть твої строки.</span><button type="button" class="btn sm" id="exOff">Повернутися до моїх даних</button></div>
+  <div class="work">
+    <div class="form">
+      <section class="sec"><h2>Що стосується тебе</h2>
+        <div class="fl"><span class="lb">Податок<button type="button" class="qh" data-help="tax" aria-label="Підказка: податок" aria-expanded="false">?</button></span><select id="tax"><option value="decl">Подаю податкову декларацію</option><option value="qst">Податок утримують із зарплати (податок у джерела)</option></select></div>
+        <label class="chk"><input type="checkbox" id="emp"> <span>Працюю за наймом</span></label>
+        <label class="chk"><input type="checkbox" id="self"> <span>Працюю на себе (своя справа)</span></label>
+        <label class="chk"><input type="checkbox" id="a3"> <span>Плачу в 3-й стовп (3a)<button type="button" class="qh" data-help="a3" aria-label="Підказка: 3a" aria-expanded="false">?</button></span></label>
+        <label class="chk"><input type="checkbox" id="rent"> <span>Винаймаю квартиру</span></label>
+        <label class="chk"><input type="checkbox" id="car"> <span>Є автомобіль</span></label>
+      </section>
+      <section class="sec"><h2>Мої дати<button type="button" class="qh" data-help="dates" aria-label="Підказка: мої дати" aria-expanded="false">?</button></h2>
+        <div class="fl"><span class="lb">Пермит дійсний до</span><input type="date" id="permit"></div>
+        <div class="fl"><span class="lb">Паспорт дійсний до</span><input type="date" id="pass"></div>
+        <div class="fl"><span class="lb">Halbtax або GA дійсний до</span><input type="date" id="halbtax"></div>
+        <div class="fl"><span class="lb">Строк оплати податкового рахунку</span><input type="date" id="steuer"></div>
+        <div class="fl"><span class="lb">Строк оплати Serafe</span><input type="date" id="serafe"></div>
+        <div class="fl"><span class="lb">Заява на знижку на медстраховку до<button type="button" class="qh" data-help="ipv" aria-label="Підказка: знижка на медстраховку" aria-expanded="false">?</button></span><input type="date" id="ipv"></div>
+        <div class="fl"><span class="lb">Податок на собаку — строк оплати</span><input type="date" id="hund"></div>
+        <div class="fl"><span class="lb">Податок на автомобіль — строк оплати</span><input type="date" id="mfz"></div>
+      </section>
+      <section class="sec"><h2>Діти<button type="button" class="qh" data-help="kids" aria-label="Підказка: діти" aria-expanded="false">?</button></h2>
+        <div id="kids"></div><button type="button" class="btn ghost sm" id="addKid">+ Додати дитину</button>
+      </section>
+      <section class="sec"><h2>Мої строки</h2>
+        <div id="own"></div><button type="button" class="btn ghost sm" id="addOwn">+ Додати свій строк</button>
+      </section>
+      <section class="sec"><h2>Нагадування в календарі<button type="button" class="qh" data-help="leads" aria-label="Підказка: нагадування" aria-expanded="false">?</button></h2>
+        <div class="leads" id="leads"></div>
+      </section>
+    </div>
+    <div class="sheetbox">
+      <div class="calbar"><button type="button" class="btn gold" id="ics">Додати в мій календар (.ics)</button><button type="button" class="qh" data-help="ics" aria-label="Підказка: як додати в календар" aria-expanded="false">?</button><button type="button" class="btn ghost sm" id="pdf">Завантажити PDF</button><button type="button" class="btn ghost sm" id="share" hidden>Надіслати</button><button type="button" class="btn ghost sm" id="exOn">Подивитися на прикладі</button></div>
+      <div id="list" aria-live="polite"></div>
+      <div class="sheets" id="sheet" aria-label="Попередній перегляд аркуша" style="margin-top:18px"></div>
+      <div class="status" id="status" role="status"></div>
+    </div>
+  </div>
+  <p class="imp"><b>Важливо.</b> Це нагадування за загальними правилами на 2026 рік, а не офіційний календар: точні дати — у листах податкового відомства, каси й міграційної служби, у кожному кантоні бувають свої. Важливі листи відправляй рекомендованим листом (Einschreiben) і зберігай квитанцію. Як рахувати строки за листами — у темі <a href="https://svoiludi.ch/uk/shveycariya/pisma-sroki/">«Листи від відомств і строки»</a>, ці самі строки з іконками видно в «<a href="https://svoiludi.ch/uk/instrumenty/moj-god/">Річний календар справ і строків</a>» і в «<a href="https://svoiludi.ch/uk/instrumenty/moj-den/">План дня по годинах</a>» — там враховується те, що ти позначила тут.</p>
+  <div class="share-slot" data-url="https://svoiludi.ch/uk/instrumenty/sroki-goda/" data-lead="Перешли тим, хто живе у Швейцарії. У посиланні немає твоїх даних." data-text="Привіт! Тут можна зібрати всі обов’язкові строки року у Швейцарії — податки, медстраховка, 3a, пермит — і додати їх у свій календар із нагадуваннями. Безкоштовно. https://svoiludi.ch/uk/instrumenty/sroki-goda/"></div>
+  <p class="credit"><span>Свої люди у Швейцарії · svoiludi.ch</span><a href="https://svoiludi.ch/uk/privacy/">Політика конфіденційності</a></p>
+</div>
+
+<script src="/assets/kantony.uk.js"></script>
+<script src="/assets/lib/jspdf.umd.min.js"></script>
+<script src="/assets/shema.uk.js"></script>
+<script src="/assets/sroki.uk.js"></script>
+<script>
+window.HELP = {
+  kt: '<p>Кантон, де ти живеш. Від нього залежить строк податкової декларації: у Берні та Во — 15 березня, у Тічино — 30 квітня, в інших кантонах зазвичай 31 березня.</p>',
+  tax: '<p><b>Декларація</b> — пермит C, громадянство, шлюб зі швейцарцем або людиною з пермитом C, своя справа або великий дохід. <b>Податок у джерела</b> — роботодавець утримує податок із зарплати (пермити B, L, S, F, G). Тоді важливий інший строк — заява на декларацію до 31 березня.</p>',
+  a3: '<p>3-й стовп (Säule 3a) — пенсійний рахунок або страховка, внески в які зменшують податок. Внесок зараховується за рік, тільки якщо надійшов до 31 грудня.</p>',
+  dates: '<p>Впиши дати, які знаєш: строк пермиту й паспорта — на документі, строки рахунків — у самих рахунках. Порожні поля не потраплять до списку. Дати рахунків повторюються щороку того самого дня.</p>',
+  ipv: '<p>Знижка на медстраховку за невеликого доходу (Prämienverbilligung, IPV). В одних кантонах її дають самі, в інших потрібна заява до певної дати — дивись на сайті кантону.</p>',
+  kids: '<p>За днем народження дитини калькулятор додасть: 16 років — допомога на навчання, довідка про навчання щовересня, внески AHV після 20 років, кінець допомоги у 25.</p>',
+  leads: '<p>За скільки днів до строку календар нагадає. Нагадування приходять о 9 ранку. Вони працюють, якщо календар на телефоні дозволив сповіщення.</p>',
+  ics: '<p><b>iPhone, iPad, Mac</b>: відкрий завантажений файл — Календар запропонує додати всі строки.</p><p><b>Google Календар</b>: на комп’ютері відкрий calendar.google.com → шестірня «Налаштування» → «Імпорт і експорт» → вибери файл. Зручно спершу створити окремий календар «Строки Швейцарія». На Android файл можна відкрити застосунком «Google Календар».</p><p><b>Outlook</b>: відкрий файл подвійним клацанням.</p><p>Кнопка «У Google Календар» біля кожного строку додає його по одному, але без нагадувань — їх налаштуй у самому календарі. Після натискання текст цієї події (назва, дата, що зробити, а в дитячих строках — ім’я дитини, якщо ти його вписала) іде в Google в адресі сторінки. Не хочеш — користуйся файлом .ics: він збирається просто на твоєму пристрої.</p><p>У кожній події внизу — посилання на сторінку сайту з подробицями і на цей інструмент, щоб ти могла повернутися.</p>'
+};
+const KEY = 'srokiGoda.v1';
+const SR = window.SROKI;
+const TOOL_URL = /svoiludi\.ch$/.test(location.hostname) ? location.origin + location.pathname : 'https://svoiludi.ch/uk/instrumenty/sroki-goda/';
+const KTN = k => ((window.KANTONY || {})[k] || {}).n || k;
+const LEADS = [[30, 'за 30 днів'], [14, 'за 14 днів'], [7, 'за тиждень'], [1, 'за день'], [0, 'у той самий день']];
+const WD = ['нд', 'пн', 'вт', 'ср', 'чт', 'пт', 'сб'], MON = ['січень', 'лютий', 'березень', 'квітень', 'травень', 'червень', 'липень', 'серпень', 'вересень', 'жовтень', 'листопад', 'грудень'], MONG = ['січня', 'лютого', 'березня', 'квітня', 'трав', 'червня', 'липня', 'серпня', 'вересня', 'жовтня', 'листопада', 'грудня'];
+const nice = d => d.getDate() + ' ' + MONG[d.getMonth()] + ', ' + WD[d.getDay()];
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'}[c]));
+function blank(){ let k = ''; try { k = localStorage.getItem('svoiludi.kanton') || ''; } catch (e) {} const n = new Date();
+  return {bw: false, year: 'n12', kt: k || 'ZH', tax: 'decl', emp: true, self: false, a3: false, rent: true, car: false,
+    permit: '', pass: '', halbtax: '', steuer: '', serafe: '', ipv: '', hund: '', mfz: '', kids: [], own: [], leads: [14, 1], off: {}}; }
+let S = load(), EX = null;
+function load(){ try { const s = JSON.parse(localStorage.getItem(KEY)); if (s && typeof s === 'object') return Object.assign(blank(), s); } catch (e) {} return blank(); }
+function save(){ if (EX) return; try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} }
+const D = () => EX || S;
+/* «Ближайшие 12 месяцев» (по умолчанию): сроки с сегодняшнего дня на год вперёд, через границу года */
+const T0 = () => { const n = new Date(); return new Date(n.getFullYear(), n.getMonth(), n.getDate()); };
+const items = d => { if (d.year !== 'n12') return SR.list(+d.year, d); const a = T0(), b = new Date(a.getFullYear() + 1, a.getMonth(), a.getDate()); return SR.list(a.getFullYear(), d).concat(SR.list(a.getFullYear() + 1, d)).filter(x => x.date >= a && x.date < b); };
+const yLabel = d => d.year === 'n12' ? 'на 12 місяців' : String(d.year);
+const yFile = d => d.year === 'n12' ? 'na-god' : String(d.year);
+const keyOf = it => it.id + '@' + SR.iso(it.date);
+/* текст события: что это, что сделать, где подробно, откуда (правило Ирины 08.10.2026) */
+function details(it){
+  const L = [it.what];
+  if (it.todo && it.todo.length) L.push('', 'Що зробити і підготувати:', ...it.todo.map(t => '• ' + t));
+  if (it.page) L.push('', 'Детально: ' + SR.SITE + it.page);
+  L.push('', 'Свої люди у Швейцарії · нагадування з інструмента «Обов’язкові строки року у Швейцарії»: ' + TOOL_URL);
+  return L.join('\n');
+}
+const ymd = d => SR.iso(d).replace(/-/g, '');
+const icsEsc = v => String(v).replace(/\\/g, '\\\\').replace(/\n/g, '\\n').replace(/([,;])/g, '\\$1');
+function fold(line){ const out = []; let cur = '', bytes = 0; for (const ch of line) { const b = new TextEncoder().encode(ch).length; if (bytes + b > 73) { out.push(cur); cur = ' ' + ch; bytes = 1 + b; } else { cur += ch; bytes += b; } } out.push(cur); return out.join('\r\n'); }
+function ics(list, leads){
+  const stamp = new Date().toISOString().replace(/[-:]/g, '').slice(0, 15) + 'Z';
+  const L = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Svoi ludi v Shveicarii//Sroki//RU', 'CALSCALE:GREGORIAN', 'METHOD:PUBLISH', 'X-WR-CALNAME:Строки Швейцарія · Свої люди'];
+  list.forEach(it => {
+    const sum = it.ic + ' ' + it.t + ' · строк';
+    L.push('BEGIN:VEVENT', 'UID:' + it.id + '-' + ymd(it.date) + '@svoiludi.ch', 'DTSTAMP:' + stamp, 'DTSTART;VALUE=DATE:' + ymd(it.date), 'DTEND;VALUE=DATE:' + ymd(new Date(it.date.getFullYear(), it.date.getMonth(), it.date.getDate() + 1)),
+      'SUMMARY:' + icsEsc(sum), 'DESCRIPTION:' + icsEsc(details(it)), 'URL:' + (it.page ? SR.SITE + it.page : TOOL_URL), 'CATEGORIES:' + icsEsc(SR.CAT[it.cat][0]), 'TRANSP:TRANSPARENT');
+    leads.forEach(n => L.push('BEGIN:VALARM', 'ACTION:DISPLAY', 'DESCRIPTION:' + icsEsc(sum), 'TRIGGER:' + (n ? '-PT' + (n * 24 - 9) + 'H' : 'PT9H'), 'END:VALARM'));
+    L.push('END:VEVENT');
+  });
+  L.push('END:VCALENDAR');
+  return L.map(fold).join('\r\n') + '\r\n';
+}
+function gcal(it){ const p = new URLSearchParams({action: 'TEMPLATE', text: it.ic + ' ' + it.t + ' · строк', dates: ymd(it.date) + '/' + ymd(new Date(it.date.getFullYear(), it.date.getMonth(), it.date.getDate() + 1)), ctz: 'Europe/Zurich', details: details(it)}); return 'https://calendar.google.com/calendar/render?' + p.toString(); }
+function build(){
+  const d = D(), C = SH.pal(d.bw), pages = [], list = items(d).filter(it => !d.off[keyOf(it)]);
+  let P, y; const X = 12, W = 186, BOT = 282;
+  const np = () => { P = SH.page(210, 297, C); P.header('Обов’язкові строки ' + yLabel(d), 'Fristen · délais · scadenze — ' + KTN(d.kt), ''); pages.push(P); y = 26; };
+  np();
+  if (!list.length) { P.text('Познач, що стосується тебе, — тут з’являться строки.', X, y + 6, 11, false, C.mut); }
+  let mo = -1;
+  list.forEach(it => {
+    const what = SH.wrap(it.what, false, 7.6, W - 32), h = 9 + Math.min(what.length, 3) * 3.4;
+    if (it.date.getMonth() !== mo) { if (y + 12 + h > BOT) np(); mo = it.date.getMonth(); y += 2; P.text(MON[mo].toUpperCase(), X, y + 3, 9, true, C.head); y += 4; P.line(X, y, X + W, y, C.line, 0.3); y += 4; }
+    if (y + h > BOT) np();
+    const col = d.bw ? '#000000' : SR.CAT[it.cat][1];
+    P.rect(X, y - 3.6, 1.6, h - 1.5, col, null);
+    P.text(String(it.date.getDate()).padStart(2, '0') + '.' + String(it.date.getMonth() + 1).padStart(2, '0'), X + 4, y, 10, true, C.ink);
+    P.text(WD[it.date.getDay()], X + 4, y + 4, 7, false, C.mut);
+    P.text(it.t, X + 22, y, 9.4, true, C.ink);
+    what.slice(0, 3).forEach((l, i) => P.text(l, X + 22, y + 4.2 + i * 3.4, 7.6, false, C.mut));
+    y += h;
+  });
+  pages.forEach(pg => pg.foot('Нагадування за загальними правилами 2026, не офіційний календар: точні дати — в листах відомств. Докладно про кожен строк — на svoiludi.ch/instrumenty/sroki-goda/'));
+  return pages;
+}
+const $ = id => document.getElementById(id);
+function renderList(){
+  const d = D(), list = items(d);
+  if (!list.length) { $('list').innerHTML = '<p class="hint">Познач, що стосується тебе, — тут з’являться строки.</p>'; return; }
+  let mo = -1, h = '';
+  list.forEach(it => {
+    if (it.date.getMonth() !== mo) { mo = it.date.getMonth(); h += '<div class="sl-m">' + MON[mo] + ' ' + it.date.getFullYear() + '</div>'; }
+    const k = keyOf(it), on = !d.off[k];
+    h += '<article class="sl"><div class="ic" aria-hidden="true">' + it.ic + '</div><div class="bd"><div class="dt">' + nice(it.date) + ' · ' + esc(SR.CAT[it.cat][0]) + '</div><h3>' + esc(it.t) + '</h3>' + (it.what ? '<p>' + esc(it.what) + '</p>' : '') +
+      (it.todo && it.todo.length ? '<ul>' + it.todo.map(t => '<li>' + esc(t) + '</li>').join('') + '</ul>' : '') +
+      '<div class="ln">' + (it.page ? '<a href="' + SR.SITE + it.page + '" target="_blank" rel="noopener">Детально на сайті →</a>' : '') + '<a href="' + esc(gcal(it)) + '" target="_blank" rel="noopener">У Google Календар</a><label class="inc"><input type="checkbox" data-inc="' + esc(k) + '"' + (on ? ' checked' : '') + (EX ? ' disabled' : '') + '> у мій файл календаря</label></div></div></article>';
+  });
+  $('list').innerHTML = h;
+}
+const TF = ['permit', 'pass', 'halbtax', 'steuer', 'serafe', 'ipv', 'hund', 'mfz'], SEL = ['year', 'kt', 'tax'], CB = ['emp', 'self', 'a3', 'rent', 'car'];
+const y0 = new Date().getFullYear();
+$('year').innerHTML = '<option value="n12">Найближчі 12 місяців</option>' + [y0, y0 + 1].map(y => `<option value="${y}">${y}</option>`).join('');
+$('kt').innerHTML = Object.keys(window.KANTONY || {ZH: 1}).sort((a, b) => KTN(a).localeCompare(KTN(b), 'ru')).map(k => `<option value="${k}">${KTN(k)}</option>`).join('');
+$('leads').innerHTML = LEADS.map(([n, t]) => `<label><input type="checkbox" data-lead="${n}"> ${t}</label>`).join('');
+function subUI(){ const d = D(), dis = EX ? ' disabled' : '';
+  $('kids').innerHTML = d.kids.map((k, i) => `<div class="kid"><div class="fl"><span class="lb">Ім’я (за бажанням)</span><input type="text" data-k="${i}" data-f="name" value="${esc(k.name || '')}"${dis}></div><div class="fl"><span class="lb">Дата народження</span><input type="date" data-k="${i}" data-f="born" value="${k.born || ''}"${dis}></div><div class="fl"><span class="lb">Після 16 років навчається</span><select data-k="${i}" data-f="edu"${dis}><option value="y">Так</option><option value="n">Ні</option></select></div>${EX ? '' : `<button type="button" class="btn ghost sm" data-kdel="${i}">Прибрати</button>`}</div>`).join('');
+  $('kids').querySelectorAll('select[data-f]').forEach(s => s.value = d.kids[+s.dataset.k].edu || 'y');
+  $('own').innerHTML = d.own.map((o, i) => `<div class="own"><div class="fl"><span class="lb">Що</span><input type="text" data-o="${i}" data-f="t" value="${esc(o.t || '')}" placeholder="Продовжити страховку квартири"${dis}></div><div class="fl"><span class="lb">Дата</span><input type="date" data-o="${i}" data-f="date" value="${o.date || ''}"${dis}></div><div class="fl"><span class="lb">Що підготувати (за бажанням)</span><input type="text" data-o="${i}" data-f="note" value="${esc(o.note || '')}"${dis}></div>${EX ? '' : `<button type="button" class="btn ghost sm" data-odel="${i}">Прибрати</button>`}</div>`).join('');
+  $('addKid').hidden = $('addOwn').hidden = !!EX;
+  $('leads').querySelectorAll('[data-lead]').forEach(c => { c.checked = d.leads.includes(+c.dataset.lead); c.disabled = !!EX; }); }
+let UI, tmr;
+function fill(){ const d = D(); $('bw').checked = !!d.bw; SEL.concat(TF).forEach(k => { $(k).value = d[k]; $(k).disabled = !!EX; }); CB.forEach(k => { $(k).checked = !!d[k]; $(k).disabled = !!EX; });
+  subUI(); renderList(); $('exbar').hidden = !EX; $('exOn').hidden = !!EX; if (UI) UI.render(); }
+const upd = () => { save(); renderList(); clearTimeout(tmr); tmr = setTimeout(() => UI && UI.render(), 300); };
+$('bw').addEventListener('change', e => { S.bw = e.target.checked; if (EX) EX.bw = S.bw; save(); fill(); });
+SEL.forEach(k => $(k).addEventListener('change', e => { if (EX) { if (k === 'year') { EX.year = e.target.value === 'n12' ? 'n12' : +e.target.value; fill(); } return; } S[k] = k === 'year' ? (e.target.value === 'n12' ? 'n12' : +e.target.value) : e.target.value; if (k === 'kt') { try { localStorage.setItem('svoiludi.kanton', S.kt); } catch (er) {} } upd(); }));
+TF.forEach(k => $(k).addEventListener('change', e => { if (EX) return; S[k] = e.target.value; upd(); }));
+CB.forEach(k => $(k).addEventListener('change', e => { if (EX) return; S[k] = e.target.checked; upd(); }));
+$('leads').addEventListener('change', e => { const c = e.target; if (EX || !c.dataset.lead) return; const n = +c.dataset.lead; S.leads = S.leads.filter(x => x !== n); if (c.checked) S.leads.push(n); S.leads.sort((a, b) => b - a); save(); });
+$('kids').addEventListener('change', e => { const x = e.target; if (EX || !x.dataset.f) return; S.kids[+x.dataset.k][x.dataset.f] = x.value; upd(); });
+$('own').addEventListener('change', e => { const x = e.target; if (EX || !x.dataset.f) return; S.own[+x.dataset.o][x.dataset.f] = x.value; upd(); });
+document.addEventListener('click', e => { const a = e.target.closest('[data-kdel]'), b = e.target.closest('[data-odel]'); if (EX) return;
+  if (a) { S.kids.splice(+a.dataset.kdel, 1); save(); fill(); } if (b) { S.own.splice(+b.dataset.odel, 1); save(); fill(); } });
+$('addKid').addEventListener('click', () => { S.kids.push({name: '', born: '', edu: 'y'}); save(); fill(); });
+$('addOwn').addEventListener('click', () => { S.own.push({t: '', date: '', note: ''}); save(); fill(); });
+$('list').addEventListener('change', e => { const c = e.target; if (!c.dataset.inc || EX) return; if (c.checked) delete S.off[c.dataset.inc]; else S.off[c.dataset.inc] = 1; save(); clearTimeout(tmr); tmr = setTimeout(() => UI && UI.render(), 300); });
+$('ics').addEventListener('click', () => { const d = D(), list = items(d).filter(it => !d.off[keyOf(it)]); const st = $('status');
+  if (!list.length) { st.textContent = 'Немає строків для календаря — познач, що стосується тебе.'; return; }
+  const blob = new Blob([ics(list, d.leads)], {type: 'text/calendar;charset=utf-8'}), a = document.createElement('a');
+  a.href = URL.createObjectURL(blob); a.download = 'Строки-Швейцарія-' + yFile(d) + '.ics'; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 4000);
+  st.textContent = 'Файл завантажено: ' + list.length + ' строків. Відкрий його — календар запропонує додати. Як це зробити в Google — натисни «?» біля кнопки.'; });
+const EXD = () => { const y = +D().year || new Date().getFullYear() + (new Date().getMonth() >= 9 ? 1 : 0); return Object.assign(blank(), {bw: S.bw, year: y, kt: 'ZH', tax: 'decl', emp: true, a3: true, rent: true, car: true, permit: (y) + '-08-31', pass: (y + 1) + '-02-15', steuer: y + '-09-30', serafe: y + '-04-20',
+  kids: [{name: 'Марія', born: (y - 16) + '-05-12', edu: 'y'}, {name: 'Лев', born: (y - 9) + '-11-03', edu: 'y'}], own: [{t: 'Продовжити страховку квартири (Hausrat)', date: y + '-06-30', note: 'Порівняти ціни до розірвання'}], leads: [14, 1]}); };
+$('exOn').addEventListener('click', () => { EX = EXD(); fill(); window.scrollTo({top: $('exbar').offsetTop - 12, behavior: 'smooth'}); });
+$('exOff').addEventListener('click', () => { EX = null; fill(); });
+if (/[?&]example\b/.test(location.search)) EX = EXD();
+UI = SH.mount({build, title: 'Обов’язкові строки року', name: () => 'Sroki-' + yFile(D())});
+fill();
+
+</script>
+<script src="/assets/help.uk.js"></script>
+<script src="/assets/backup.uk.js"></script>
+<script src="/assets/pdffan.uk.js" defer></script>
+<script src="/assets/share.uk.js" defer></script>
+<script src="/assets/samesite.js"></script>
+<!--i18n--><style>#langbar.langbar{position:fixed;bottom:14px;right:14px;z-index:60;display:flex;gap:2px;background:rgba(255,255,255,.92);border:1px solid rgba(0,0,0,.08);border-radius:999px;padding:3px;font:600 12px Manrope,system-ui,sans-serif;box-shadow:0 2px 8px rgba(0,0,0,.08)}#langbar.langbar a{color:#5d554d;padding:5px 9px;border-radius:999px;text-decoration:none;font:inherit;display:inline-block}#langbar.langbar a[aria-current="true"]{background:#2f2924;color:#fff}@media print{.langbar{display:none!important}}</style><div class="langbar" id="langbar" role="navigation" aria-label="Мова / Язык"><a href="/instrumenty/sroki-goda/" hreflang="ru" data-lang="ru">RU</a><a href="/uk/instrumenty/sroki-goda/" hreflang="uk" data-lang="uk" aria-current="true">UA</a></div><script>(function(){var b=document.getElementById('langbar');if(!b)return;b.addEventListener('click',function(e){var a=e.target.closest('a[data-lang]');if(a){try{localStorage.setItem('svoiludiLang',a.dataset.lang)}catch(x){}a.href=a.getAttribute('href').split('#')[0]+location.hash;}});})();</script><!--i18n--></body>
+</html>

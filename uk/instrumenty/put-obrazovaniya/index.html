@@ -1,0 +1,669 @@
+<!doctype html>
+<html lang="uk">
+<head><!--i18n--><base href="/instrumenty/put-obrazovaniya/"><!--i18n-->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<link rel="icon" href="/fav/favicon.svg" type="image/svg+xml"><link rel="icon" href="/fav/icon-32.png" sizes="32x32"><link rel="apple-touch-icon" href="/fav/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/fonts.css">
+<meta name="description" content="Як влаштоване навчання у Швейцарії від ясел до докторантури: схема на одному аркуші, словник шкільних слів п’ятьма мовами і шлях твоїх дітей за навчальними роками. Українською та мовою кантону. Безкоштовно, PDF.">
+<link rel="canonical" href="https://svoiludi.ch/uk/instrumenty/put-obrazovaniya/">
+<meta property="og:type" content="website"><meta property="og:locale" content="uk_UA"><meta property="og:site_name" content="Свої люди у Швейцарії">
+<meta property="og:title" content="Шлях освіти у Швейцарії · від ясел до докторантури"><meta property="og:description" content="Схема навчання у Швейцарії, словник п’ятьма мовами і шлях твоїх дітей за роками. Безкоштовно, PDF.">
+<meta property="og:url" content="https://svoiludi.ch/uk/instrumenty/put-obrazovaniya/"><meta property="og:image" content="https://svoiludi.ch/instrumenty/put-obrazovaniya/og-image.uk.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="robots" content="noindex, nofollow">
+<title>Освіта у Швейцарії: від ясел до університету</title>
+<style>
+/* Путь образования (08.10.2026): анкета и пояснения слева, живые листы справа. Один «движок» раскладки рисует и предпросмотр (SVG), и PDF (jsPDF, шрифт Manrope). */
+:root{
+  --bg:#F4EDE3; --paper:#FFFCF8; --ink:#2F2924; --muted:#7A6E62; --line:#E5D9C9; --soft:#EFE5D7;
+  --brown:#6E4F3C; --mustard:#B98324; --mustard-soft:#F3E3C2; --sage:#4F5E3E; --sage-soft:#E3E8D6; --red:#A0523D;
+  --display:"Forum","Georgia",serif; --sans:"Manrope","Segoe UI",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#221D19; --paper:#2C2621; --ink:#F1E9DF; --muted:#B4A796; --line:#3E362F; --soft:#352E28;
+  --brown:#E1C2A6; --mustard:#E2B45C; --mustard-soft:#3D321F; --sage:#B4BF97; --sage-soft:#2E3226; --red:#E39A85; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#221D19; --paper:#2C2621; --ink:#F1E9DF; --muted:#B4A796; --line:#3E362F; --soft:#352E28;
+  --brown:#E1C2A6; --mustard:#E2B45C; --mustard-soft:#3D321F; --sage:#B4BF97; --sage-soft:#2E3226; --red:#E39A85; color-scheme:dark}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--ink);font:15px/1.55 var(--sans);margin:0}
+.wrap{max-width:1280px;margin:0 auto;padding-inline:16px;padding-block:28px 48px;display:flex;flex-direction:column;gap:24px}
+.eyebrow{font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+h1{font-family:var(--display);font-weight:400;font-size:clamp(2.4rem,6vw,3.6rem);line-height:1;margin:4px 0 10px;text-wrap:balance}
+h2{font-family:var(--display);font-weight:400;font-size:1.55rem;margin:0;text-wrap:balance}
+h3{font-family:var(--display);font-weight:400;font-size:1.22rem;line-height:1.2;margin:0}
+.lead{max-width:66ch;color:var(--muted);margin:0}
+.jump{font-weight:700;color:var(--brown);text-underline-offset:4px}
+.privnote{margin-top:14px;background:var(--sage-soft);border-radius:16px;padding:12px 16px;font-size:.9rem;max-width:90ch}
+.status{font-size:.86rem;color:var(--muted);min-height:1.3em}
+.btn{font:inherit;font-weight:700;font-size:.9rem;border:0;border-radius:999px;padding:10px 18px;cursor:pointer;color:#fff;text-decoration:none;display:inline-flex;align-items:center;gap:6px;background:#6E4F3C;box-shadow:0 8px 18px -8px rgba(110,79,60,.6)}
+.btn.gold{background:#B98324;box-shadow:0 8px 18px -8px rgba(185,131,36,.7)}
+.btn.free{background:#4F5E3E;box-shadow:0 8px 18px -8px rgba(79,94,62,.6)}
+.btn.ghost{background:transparent;color:var(--brown);border:1.5px solid var(--line);box-shadow:none}
+.btn.sm{font-size:.82rem;padding:7px 13px}
+.btn[disabled]{background:var(--soft);color:var(--muted);box-shadow:none;cursor:wait}
+select,input[type=text],input[type=tel],textarea{font:inherit;font-size:.95rem;color:var(--ink);background:var(--paper);border:1.5px solid var(--line);border-radius:12px;padding:9px 12px;width:100%;min-width:0}
+select:focus-visible,input:focus-visible,button:focus-visible,textarea:focus-visible,a:focus-visible{outline:2px solid var(--mustard);outline-offset:2px}
+::placeholder{color:color-mix(in srgb,var(--muted) 70%,transparent)}
+.setup{background:var(--paper);border:1.5px solid var(--line);border-radius:22px;padding:16px 18px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px 18px;align-items:start}
+@media (max-width:1000px){.setup{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.setup{grid-template-columns:1fr}}
+.fl{display:flex;flex-direction:column;gap:6px;min-width:0}
+.fl>.lb{font-size:.8rem;font-weight:700;color:var(--muted);display:flex;align-items:center}
+.seg{display:flex;flex-wrap:wrap;gap:6px}
+.seg button{font:inherit;font-size:.84rem;font-weight:700;border:1.5px solid var(--line);background:var(--paper);color:var(--ink);border-radius:999px;padding:6px 12px;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--sage);border-color:var(--sage);color:#fff}
+.acts{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.exbar{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;background:var(--mustard-soft);border-radius:16px;padding:10px 14px;font-size:.9rem;font-weight:600}
+.work{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:22px;align-items:start}
+@media (max-width:1040px){.work{grid-template-columns:1fr}}
+.form{display:flex;flex-direction:column;gap:14px;min-width:0}
+.sec{background:var(--paper);border:1.5px solid var(--line);border-radius:20px;padding:16px 18px;display:flex;flex-direction:column;gap:12px}
+.sec>h2{font-size:1.3rem;display:flex;align-items:center}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:560px){.g2{grid-template-columns:1fr}}
+.hint{font-size:.84rem;color:var(--muted);margin:0}
+.chk{display:flex;flex-direction:column;gap:8px}
+.chk label{display:flex;gap:10px;align-items:baseline;font-size:.92rem;cursor:pointer}
+.chk input{flex:none;width:18px;height:18px;accent-color:var(--sage);transform:translateY(3px)}
+.chk b{white-space:nowrap}
+.chk small{color:var(--muted)}
+.tog{display:flex;gap:10px;align-items:center;font-size:.92rem;cursor:pointer}
+.tog input{width:18px;height:18px;accent-color:var(--sage)}
+.sheetbox{position:sticky;top:12px;display:flex;flex-direction:column;gap:10px}
+@media (max-width:1040px){.sheetbox{position:static}}
+.sheet{background:#fff;border-radius:6px;box-shadow:0 18px 40px -22px rgba(47,41,36,.45);overflow:hidden}
+.sheet svg{display:block;width:100%;height:auto}
+.imp{background:var(--paper);border:1.5px dashed color-mix(in srgb,var(--sage) 55%,transparent);border-radius:16px;padding:14px 18px;font-size:.88rem;max-width:90ch;margin:0}
+.imp b{color:var(--sage)}
+.guide{display:flex;flex-direction:column;gap:14px;max-width:90ch}
+.guide ul{margin:0;padding-left:20px}
+.guide li{margin:4px 0}
+.credit{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:.8rem;color:var(--muted)}
+.credit a{color:var(--muted)}
+.qh{font:700 .72rem/1 var(--sans);width:20px;height:20px;border-radius:50%;border:1.5px solid var(--line);background:var(--paper);color:var(--brown);cursor:pointer;margin-left:6px;padding:0;flex:none}
+.kids{display:flex;flex-direction:column;gap:10px}
+.kid{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr) minmax(0,1fr) auto;gap:8px;align-items:end;background:var(--bg);border:1.5px solid var(--line);border-radius:16px;padding:10px}
+@media (max-width:560px){.kid{grid-template-columns:1fr 1fr}.kid .fl:first-child{grid-column:1/-1}}
+.ib{font:inherit;width:34px;height:34px;border-radius:50%;border:1.5px solid var(--line);background:var(--paper);color:var(--ink);cursor:pointer;padding:0;font-size:1rem;line-height:1;flex:none}
+.sheets{display:flex;flex-direction:column;gap:14px}
+.steps{display:flex;flex-direction:column;gap:8px}
+.steps details{background:var(--paper);border:1.5px solid var(--line);border-radius:16px;padding:10px 16px}
+.steps summary{cursor:pointer;font-weight:700;display:flex;gap:10px;align-items:baseline}
+.steps summary small{font-weight:600;color:var(--muted);margin-left:auto;white-space:nowrap}
+.steps details p,.steps details ul{margin:8px 0 2px;font-size:.93rem}
+.steps details ul{padding-left:20px}
+</style>
+<!--pwa--><link rel="manifest" href="/fav/site.uk.webmanifest"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Свої люди"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="theme-color" content="#4F5E3E"><style id="pa-tiles">/* верхнее меню на телефоне и планшете: прямоугольные плитки с закруглением в два ряда, иконки ставит pwa-app.js (08.10.2026) */html header.top nav[aria-label] a .pa-ni{display:none}@media (max-width:1100px){html header.top .page{flex-wrap:wrap;row-gap:8px}html header.top nav[aria-label]{order:3;width:100%;display:grid!important;grid-template-columns:repeat(var(--pa-cols,3),minmax(0,1fr));gap:8px;overflow:visible;padding:4px 0 12px;margin:0}html header.top nav[aria-label] a{display:flex!important;flex-direction:column;align-items:center;justify-content:center;gap:5px;min-height:62px;padding:9px 6px;border-radius:14px;background:var(--paper,#FFFCF8);border:1px solid color-mix(in srgb,var(--sage,#66704F) 30%,transparent);box-shadow:0 3px 10px -6px rgba(60,70,40,.45);color:var(--ink,#2F2924)!important;font:600 .78rem/1.18 var(--body,system-ui);text-align:center;white-space:normal;text-decoration:none;-webkit-tap-highlight-color:transparent}html header.top nav[aria-label] a::after{content:none!important}html header.top nav[aria-label] a .pa-ni{display:block;width:22px;height:22px;fill:none;stroke:var(--sage,#66704F);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}html header.top nav[aria-label] a[aria-current="page"]{background:var(--sage,#66704F);border-color:var(--sage,#66704F);color:var(--paper,#FFFCF8)!important;box-shadow:0 4px 12px -6px rgba(60,70,40,.6)}html header.top nav[aria-label] a[aria-current="page"] .pa-ni{stroke:var(--paper,#FFFCF8)}html header.top nav[aria-label] a:active{transform:scale(.97)}}/* кнопки сайта — прямоугольные с закруглением, как плитки меню (решение Ирины 08.10.2026); значки-метки (образец, теги, «?») остаются круглыми */:is(.navcta,.btn,.shr-btn,.pl-act a,.pl-act button,.qa,.more,.listbar button,.leaflet-popup-content button,.calmenu a,.calmenu button,.go-free,.find,.confirm,.monthics,.addb,.mbtn,.example,.viewsw,#langbar.langbar,.pa-go,.pa-x,.pa-foot){border-radius:12px!important}:is(.viewsw button,.seg button,.chips button,#langbar.langbar a,.cal-nav button){border-radius:9px!important}</style><script src="/assets/pwa-app.js" defer></script><!--pwa--><!--i18n--><link rel="alternate" hreflang="ru" href="https://svoiludi.ch/instrumenty/put-obrazovaniya/"><link rel="alternate" hreflang="uk" href="https://svoiludi.ch/uk/instrumenty/put-obrazovaniya/"><!--i18n--></head>
+<body>
+<div class="wrap">
+  <header>
+    <p style="margin:0 0 14px"><a class="jump" href="https://svoiludi.ch/uk/instrumenty/">← Усі корисні інструменти · Свої люди у Швейцарії</a></p>
+    <div class="eyebrow">Схема · від ясел до докторантури</div>
+    <h1>Освіта у Швейцарії: від ясел до університету</h1>
+    <p class="lead">Як влаштоване навчання у Швейцарії: хто куди йде, в якому віці і як переходять далі — від ясел до докторантури. Схема на одному аркуші, порівняння з нашою освітою, словник шкільних слів п’ятьма мовами, а якщо впишеш дітей — їхній шлях за навчальними роками. PDF і PNG безкоштовно.</p>
+    <div class="privnote"><b>Твої дані лише в тебе.</b> Імена і роки народження дітей зберігаються лише у твоєму браузері на цьому пристрої. Ніхто, крім тебе, їх не бачить. Реєстрація не потрібна.</div>
+    <div data-fan="put-obrazovaniya"></div>
+  </header>
+
+  <div class="setup">
+    <div class="fl"><span class="lb">Твій кантон<button type="button" class="qh" data-help="kanton" aria-label="Підказка: твій кантон" aria-expanded="false">?</button></span><select id="kanton"></select></div>
+    <div class="fl"><span class="lb">Мова<button type="button" class="qh" data-help="lang" aria-label="Підказка: мова" aria-expanded="false">?</button></span><select id="lang"><option value="bi">Російська + мова кантону</option><option value="ru">Тільки українська</option><option value="de">Deutsch</option><option value="fr">Français</option><option value="it">Italiano</option><option value="en">English</option></select></div>
+    <div class="fl"><span class="lb">Що в PDF<button type="button" class="qh" data-help="parts" aria-label="Підказка: що в PDF" aria-expanded="false">?</button></span><div class="chk"><label><input type="checkbox" id="pScheme" checked> Схема</label><label><input type="checkbox" id="pGloss" checked> Словник 5 мовами</label><label><input type="checkbox" id="pTr" checked> Переходи: де само, де готуватися</label><label><input type="checkbox" id="pCmp" checked> Порівняння з нашою освітою</label><label><input type="checkbox" id="pKids" checked> Шлях моїх дітей</label></div></div>
+    <div class="fl"><span class="lb">Друк<button type="button" class="qh" data-help="bw" aria-label="Підказка: друк" aria-expanded="false">?</button></span><label class="tog"><input type="checkbox" id="bw"> Без кольору, для дешевого друку</label></div>
+  </div>
+
+  <div class="exbar" id="exbar" hidden><span>Це приклад. Так виглядатиме твій файл.</span><button type="button" class="btn sm" id="exOff">Повернутися до моїх даних</button></div>
+
+  <div class="work">
+    <div class="form">
+      <section class="sec" aria-labelledby="h-kids">
+        <h2 id="h-kids">Мої діти<button type="button" class="qh" data-help="kids" aria-label="Підказка: мої діти" aria-expanded="false">?</button></h2>
+        <div class="kids" id="kids"></div>
+        <div><button type="button" class="btn ghost sm" id="addKid">+ Додати дитину</button></div>
+        <p class="hint" id="kidNote"></p>
+      </section>
+
+      <section class="sec" aria-labelledby="h-tr">
+        <h2 id="h-tr">Переходи: де само, а де готуватися</h2>
+        <div class="steps" id="trList"></div>
+      </section>
+
+      <section class="sec" aria-labelledby="h-cmp">
+        <h2 id="h-cmp">Як це співвідноситься з нашою освітою</h2>
+        <div class="steps" id="cmpList"></div>
+        <p class="hint">Порівняння орієнтовне. Офіційно рівень диплома оцінюють SBFI і swissuniversities — докладніше в статті <a href="https://svoiludi.ch/uk/shveycariya/diplomy/">«Визнання диплома»</a>.</p>
+      </section>
+
+      <section class="sec" aria-labelledby="h-steps">
+        <h2 id="h-steps">Крок за кроком</h2>
+        <div class="steps">
+          <details><summary>Ясла й ігрова група<small>0–4 роки</small></summary><p>За бажанням і платно. Ясла (Kita) беруть дітей часто з 3 місяців, повний день коштує зазвичай 100–150 франків без субсидії. Громада знижує ціну, якщо дохід невеликий. Ігрова група (Spielgruppe) — кілька годин на тиждень приблизно з 3 років, добра для мови. У деяких кантонах дітям, які погано говорять мовою школи, її призначають обов’язково.</p></details>
+          <details><summary>Дитячий садок<small>4–6 років</small></summary><p>Безкоштовний і в більшості кантонів обов’язковий 2 роки. Ідуть у 4 роки, якщо дитині виповнилося 4 до 31 липня. Громада сама надішле лист. Дитячий садок — уже частина школи, за системою HarmoS це 1-й і 2-й роки.</p></details>
+          <details><summary>Початкова школа<small>6–12 років</small></summary><p>6 років (у Тічино 5). Оцінки від 1 до 6, де 6 — найкраща. Школа й підручники безкоштовні. Дітям, які погано говорять мовою школи, дають безкоштовні додаткові уроки (DaZ).</p></details>
+          <details><summary>Середня школа I<small>12–15 років</small></summary><p>3 роки (у Тічино 4), часто на різних рівнях за вимогами. Рівень вирішують разом учитель, оцінки й розмова з батьками. Тут закінчується обов’язкова школа — 11 років разом із дитячим садком. У частині кантонів, наприклад у Цюриху, сильні учні йдуть у гімназію вже після 6-го класу.</p></details>
+          <details><summary>Гімназія, FMS або Lehre<small>15–19 років</small></summary><ul><li><b>Гімназія</b> — 3–4 роки, закінчується Matura. З нею можна вступити до будь-якого університету без іспиту, крім медицини, там окремий тест.</li><li><b>Середня спеціалізована школа (FMS)</b> — 3 роки для професій в охороні здоров’я, соціальній роботі, педагогіці. З роком практики — Fachmatura і шлях до FH або PH.</li><li><b>Lehre</b> — професія на фірмі й у школі: EBA 2 роки, EFZ 3–4 роки. Її обирають близько двох третин підлітків. З Berufsmaturität (BM) відкрита дорога до FH.</li><li>Якщо місця немає, є проміжний рік (Brückenangebot).</li></ul></details>
+          <details><summary>Університет<small>з 19 років</small></summary><ul><li><b>Університет або ETH</b>: бакалавр 3 роки, магістр 1,5–2 роки.</li><li><b>Вища школа прикладних наук (FH)</b> або <b>педагогічний виш (PH)</b>: ближче до практики, теж бакалавр і магістр.</li><li><b>Вища професійна освіта</b>: вища професійна школа (HF) або федеральні іспити (Berufsprüfung, höhere Fachprüfung), часто поруч із роботою і в будь-якому віці.</li><li>З Lehre до університету веде BM і річний іспит Passerelle.</li></ul></details>
+          <details><summary>Докторантура<small>зазвичай 24–28 років</small></summary><p>Після магістратури в університеті або ETH. Докторант — це співробітник із договором і зарплатою, навчання триває 3–5 років. Місця шукають на сайтах вишів і в проєктах SNF.</p></details>
+        </div>
+        <p class="hint">Детальніше — у статтях <a href="https://svoiludi.ch/uk/shveycariya/kita-detsad/">«Ясла, дитячий садок і школа»</a>, <a href="https://svoiludi.ch/uk/shveycariya/shkola-lehre/">«Середня школа, гімназія або Lehre»</a> та <a href="https://svoiludi.ch/uk/shveycariya/vuz/">«Університет і PhD»</a>.</p>
+      </section>
+    </div>
+
+    <div class="sheetbox">
+      <div class="acts"><button type="button" class="btn gold" id="pdf">Завантажити PDF</button><button type="button" class="btn ghost sm" id="share" hidden>Надіслати</button><button type="button" class="btn ghost sm" id="exOn">Подивитися на прикладі</button></div>
+      <div class="sheets" id="sheet" aria-label="Попередній перегляд аркушів"></div>
+      <div class="status" id="status" role="status"></div>
+    </div>
+  </div>
+
+  <!--rel--><style>.relsh{margin:34px 0 8px}.relsh h2{font-size:1.35rem;margin:0 0 14px}.relsh-g{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:14px}.relsh-g a{display:flex;gap:12px;align-items:center;padding:12px;border:1.5px solid var(--line,#E4DCCF);border-radius:18px;background:var(--paper,#FFFCF8);color:inherit;text-decoration:none}.relsh-g a:hover{border-color:var(--sage,#5E6B48)}.relsh-g img{width:72px;height:auto;flex:none;border-radius:4px;box-shadow:0 2px 8px rgba(60,50,30,.18)}.relsh-g b{display:block;font-size:.98rem;margin-bottom:3px}.relsh-g span{font-size:.84rem;line-height:1.35;opacity:.85}</style><section class="relsh" aria-labelledby="h-rel"><h2 id="h-rel">Пов’язані схеми</h2><div class="relsh-g"><a href="/uk/instrumenty/diplomy-shema/"><img src="../preview/diplomy-shema/1.jpg" alt="" loading="lazy"><span><b>Визнання дипломів</b><span>Хто визнає, ціни і строки в місяцях, мова і твій план.</span></span></a><a href="/uk/instrumenty/yazyk-trebovaniya/"><img src="../preview/yazyk-trebovaniya/1.jpg" alt="" loading="lazy"><span><b>Мова: що і де вимагають</b><span>Рівні A1–C2, вимоги кантонів для паспорта і твій план.</span></span></a><a href="/uk/instrumenty/ekstrennye-nomera/"><img src="../preview/ekstrennye-nomera/1.jpg" alt="" loading="lazy"><span><b>Екстрені номери</b><span>Номери, черговий лікар кантону і твої контакти на одній картці.</span></span></a></div></section><!--rel-->
+  <p class="imp"><b>Важливо.</b> Це зразок для прикладу й особистого використання, а не офіційний документ. Схема показує звичайний шлях. У кожному кантоні є свої особливості: вік переходу до гімназії, строки іспитів, назви шкіл. Роки для дітей пораховано за правилом «4 роки до 31 липня», і вони можуть відрізнятися, якщо дитина пішла в садок раніше чи пізніше. Уточнюй у своїй школі й на сайті кантону, автор не несе відповідальності за достовірність.</p>
+
+  <div class="share-slot" data-url="https://svoiludi.ch/uk/instrumenty/put-obrazovaniya/" data-lead="Перешли тим, у кого діти або хто сам хоче вчитися. Повідомлення вже готове." data-text="Привіт! Тут на одній схемі, як влаштоване навчання у Швейцарії від ясел до докторантури, зі словником п’ятьма мовами, і можна порахувати, коли твоя дитина піде в садок і школу. Безкоштовно, PDF. https://svoiludi.ch/uk/instrumenty/put-obrazovaniya/"></div>
+  <p class="credit"><span>Свої люди у Швейцарії · svoiludi.ch</span><a href="https://svoiludi.ch/uk/privacy/">Політика конфіденційності</a></p>
+</div>
+
+<script src="/assets/kantony.uk.js"></script>
+<script src="/assets/lib/jspdf.umd.min.js"></script>
+<script>
+window.HELP = {
+  kanton: '<p>Обери кантон, де навчаються або навчатимуться діти. Від нього залежить мова другого рядка і те, як рахуються класи: у Тічино початкова школа 5 років, а середня 4 роки.</p>',
+  lang: '<p><b>Українська + мова кантону</b> — кожна назва двома мовами. Так ти одразу запам’ятовуєш, як це кажуть у школі. Радимо цей варіант.</p><p><b>Deutsch, Français, Italiano, English</b> — лише одна мова, наприклад щоб показати вчителю або бабусі. Словник у PDF завжди всіма п’ятьма мовами.</p>',
+  parts: '<p><b>Схема</b> — увесь шлях від ясел до докторантури на одному аркуші.</p><p><b>Словник</b> — шкільні слова українською, німецькою, французькою, італійською та англійською.</p><p><b>Переходи</b> — що відбувається само собою, де вирішує школа, а де треба заздалегідь готуватися, складати іспит або подавати заявку.</p><p><b>Порівняння</b> — як швейцарські ступені співвідносяться з нашими: дитячий садок, школа, ПТУ й технікум, бакалавр, спеціаліст, кандидат наук.</p><p><b>Шлях моїх дітей</b> — для кожної дитини за навчальними роками: коли садок, школа, кінець обов’язкової школи і що далі.</p>',
+  bw: '<p>Якщо принтер чорно-білий або фарба дорога, увімкни цей пункт. Кольорові плашки стануть білими з рамкою.</p>',
+  kids: '<p>Впиши ім’я (можна просто «Старший») і обери місяць і рік народження. Важливий місяць: діти, у яких день народження до 31 липня, ідуть у дитячий садок у рік, коли їм виповнюється 4. Діти, народжені з серпня по грудень, — на рік пізніше.</p><p>Якщо дитина вже пішла в садок раніше чи пізніше, класи зсунуться. Тоді орієнтуйся на свою школу.</p>'
+};
+const KEY = 'putObrazovaniya.v1';
+const K = window.KANTONY || {};
+const LANG_OF = {GE: 'fr', VD: 'fr', NE: 'fr', JU: 'fr', FR: 'fr', VS: 'fr', TI: 'it'};
+const LGS = ['ru', 'de', 'fr', 'it', 'en'];
+
+/* ---------- тексты листов (ru — язык сайта, на украинской странице переводится) ---------- */
+const TX = {
+  title: {ru: 'Шлях освіти у Швейцарії', de: 'Bildungsweg in der Schweiz', fr: 'Le parcours de formation en Suisse', it: 'Il percorso formativo in Svizzera', en: 'Education pathways in Switzerland'},
+  age: {ru: 'Вік', de: 'Alter', fr: 'Âge', it: 'Età', en: 'Age'},
+  endc: {ru: 'Кінець обов’язкової школи · 11 років навчання', de: 'Ende der obligatorischen Schule · 11 Schuljahre', fr: 'Fin de la scolarité obligatoire · 11 années', it: 'Fine della scuola dell’obbligo · 11 anni', en: 'End of compulsory school · 11 years'},
+  how: {ru: 'Як це відбувається', de: 'So läuft es ab', fr: 'Comment ça se passe', it: 'Come funziona', en: 'How it works'},
+  gloss: {ru: 'Словник школи й навчання', de: 'Wörterbuch Schule und Ausbildung', fr: 'Lexique école et formation', it: 'Glossario scuola e formazione', en: 'School and education glossary'},
+  path: {ru: 'Шлях', de: 'Bildungsweg', fr: 'Parcours', it: 'Percorso', en: 'Pathway'},
+  born: {ru: 'дата народження', de: 'geboren', fr: 'né·e en', it: 'nato/a', en: 'born'},
+  cY: {ru: 'Навчальний рік', de: 'Schuljahr', fr: 'Année scolaire', it: 'Anno scolastico', en: 'School year'},
+  cA: {ru: 'Вік', de: 'Alter', fr: 'Âge', it: 'Età', en: 'Age'},
+  cS: {ru: 'Ступінь', de: 'Stufe', fr: 'Degré', it: 'Grado', en: 'Stage'},
+  now: {ru: 'зараз', de: 'jetzt', fr: 'maintenant', it: 'ora', en: 'now'},
+  pre: {ru: 'Ясла, денна сім’я, ігрова група — за бажанням', de: 'Kita, Tagesfamilie, Spielgruppe – freiwillig', fr: 'Crèche, maman de jour, groupe de jeu – facultatif', it: 'Asilo nido, famiglia diurna, gruppo gioco – facoltativo', en: 'Daycare, childminder, playgroup – optional'},
+  sec2: {ru: 'Гімназія (Matura), FMS або Lehre (EBA, EFZ, з BM)', de: 'Gymnasium (Matura), FMS oder Lehre (EBA, EFZ, mit BM)', fr: 'Gymnase (maturité), ECG ou apprentissage (AFP, CFC, avec MP)', it: 'Liceo (maturità), scuola specializzata o tirocinio (CFP, AFC, con MP)', en: 'Gymnasium (Matura), specialised school or apprenticeship'},
+  ter: {ru: 'Виш (університет, ETH, FH, PH) або робота й вища профосвіта', de: 'Hochschule (Uni, ETH, FH, PH) oder Beruf und höhere Berufsbildung', fr: 'Haute école (université, EPF, HES, HEP) ou emploi et formation professionnelle supérieure', it: 'Scuola universitaria o lavoro e formazione professionale superiore', en: 'Higher education or work and professional education'},
+  late: {ru: 'Народився з серпня по грудень — у садок на рік пізніше за однолітків січня–липня.', de: 'Geboren August bis Dezember: ein Jahr später in den Kindergarten.', fr: 'Né·e d’août à décembre : entrée à l’école une année plus tard.', it: 'Nato/a da agosto a dicembre: un anno più tardi alla scuola dell’infanzia.', en: 'Born August to December: starts kindergarten one year later.'},
+  rule: {ru: 'Пораховано за правилом «4 роки до 31 липня». Уточнюй у своїй школі.', de: 'Berechnet nach der Regel «4 Jahre bis 31. Juli». Bitte bei der Schule prüfen.', fr: 'Calculé selon la règle « 4 ans au 31 juillet ». À vérifier auprès de l’école.', it: 'Calcolato con la regola «4 anni entro il 31 luglio». Verificare con la scuola.', en: 'Calculated with the rule “age 4 by 31 July”. Check with your school.'},
+  disc: {ru: 'Зразок для особистого використання, не офіційний документ. Особливості кантонів уточнюй сама. svoiludi.ch', de: 'Muster zur Orientierung und für den persönlichen Gebrauch, kein amtliches Dokument. Angaben ohne Gewähr, bitte selbst prüfen.', fr: 'Modèle indicatif pour usage personnel, pas un document officiel. Données sans garantie, à vérifier soi-même.', it: 'Modello indicativo per uso personale, non un documento ufficiale. Dati senza garanzia, da verificare personalmente.', en: 'Sample for personal use, not an official document. No guarantee, please check yourself.'},
+  leg: {ru: 'Кольори на схемі', de: 'Farben im Schema', fr: 'Couleurs du schéma', it: 'Colori dello schema', en: 'Colours in the chart'},
+  legA: {ru: 'шлях через гімназію до університету', de: 'Weg über das Gymnasium an die Universität', fr: 'voie gymnasiale vers l’université', it: 'via liceale verso l’università', en: 'academic path to university'},
+  legB: {ru: 'спеціалізована школа, FH і PH', de: 'Fachmittelschule, FH und PH', fr: 'école de culture générale, HES et HEP', it: 'scuola specializzata, SUP e ASP', en: 'specialised school, applied sciences, teacher education'},
+  legC: {ru: 'Lehre і вища профосвіта', de: 'Lehre und höhere Berufsbildung', fr: 'apprentissage et formation professionnelle supérieure', it: 'tirocinio e formazione professionale superiore', en: 'apprenticeship and professional education'},
+  legComp: {ru: 'обов’язкова школа, безкоштовно', de: 'obligatorische Schule, kostenlos', fr: 'scolarité obligatoire, gratuite', it: 'scuola dell’obbligo, gratuita', en: 'compulsory school, free'},
+  toUni: {ru: 'і з BM або Fachmatura + Passerelle', de: 'auch mit BM/Fachmatura + Passerelle', fr: 'aussi avec MP + passerelle', it: 'anche con MP + passerella', en: 'also with BM + Passerelle'},
+  toFH: {ru: 'і з BM, або Matura + рік практики', de: 'auch mit BM, oder Matura + Praxisjahr', fr: 'aussi avec MP, ou maturité + pratique', it: 'anche con MP, o maturità + pratica', en: 'also with BM, or Matura + work year'},
+  long: {ru: 'У частині кантонів гімназія вже з 12 років', de: 'In einigen Kantonen Langzeitgymnasium ab 12', fr: 'Dans certains cantons, gymnase dès 12 ans', it: 'In alcuni cantoni liceo già dai 12 anni', en: 'Some cantons: Gymnasium from age 12'}
+};
+const ST = {
+  kita: {ru: ['Ясла, денна сім’я, ігрова група', 'за бажанням, платно, є субсидії'], de: ['Kita, Tagesfamilie, Spielgruppe', 'freiwillig, kostenpflichtig, Subventionen möglich'], fr: ['Crèche, maman de jour, groupe de jeu', 'facultatif, payant, subventions possibles'], it: ['Asilo nido, famiglia diurna, gruppo gioco', 'facoltativo, a pagamento, sussidi possibili'], en: ['Daycare, childminder, playgroup', 'optional, paid, subsidies possible']},
+  kg: {ru: ['Дитячий садок', '2 роки, безкоштовно, зазвичай обов’язково'], de: ['Kindergarten', '2 Jahre, kostenlos, meist obligatorisch'], fr: ['École enfantine (1P–2P)', '2 ans, gratuit, en général obligatoire'], it: ['Scuola dell’infanzia', '2 anni obbligatori, gratuita'], en: ['Kindergarten', '2 years, free, usually compulsory']},
+  prim: {ru: ['Початкова школа', '6 років, у Тічино 5'], de: ['Primarschule', '6 Jahre, im Tessin 5'], fr: ['École primaire (3P–8P)', '6 ans, au Tessin 5'], it: ['Scuola elementare', '5 anni in Ticino, 6 negli altri cantoni'], en: ['Primary school', '6 years, 5 in Ticino']},
+  sek: {ru: ['Середня школа I', '3 роки на різних рівнях, у Тічино 4'], de: ['Sekundarstufe I', '3 Jahre in Niveaus, im Tessin 4'], fr: ['Secondaire I (9–11)', '3 ans par niveaux, au Tessin 4'], it: ['Scuola media', '4 anni in Ticino, 3 negli altri cantoni'], en: ['Lower secondary school', '3 years in levels, 4 in Ticino']},
+  gym: {ru: ['Гімназія', '3–4 роки → Matura'], de: ['Gymnasium', '3–4 Jahre → Matura'], fr: ['Gymnase / collège', '3–4 ans → maturité'], it: ['Liceo', '4 anni → maturità'], en: ['Gymnasium', '3–4 years → Matura']},
+  fms: {ru: ['Середня спеціалізована школа (FMS)', '3 роки, потім Fachmatura'], de: ['Fachmittelschule (FMS)', '3 Jahre, danach Fachmaturität'], fr: ['École de culture générale (ECG)', '3 ans, puis maturité spécialisée'], it: ['Scuola specializzata (SSPSS)', '3 anni, poi maturità specializzata'], en: ['Specialised secondary school', '3 years, then specialised baccalaureate']},
+  lehre: {ru: ['Lehre: професія на фірмі й у школі', 'EBA 2 роки, EFZ 3–4 роки, можна з BM'], de: ['Berufliche Grundbildung (Lehre)', 'EBA 2 Jahre, EFZ 3–4 Jahre, mit BM möglich'], fr: ['Apprentissage', 'AFP 2 ans, CFC 3–4 ans, avec maturité professionnelle'], it: ['Tirocinio', 'CFP 2 anni, AFC 3–4 anni, con maturità professionale'], en: ['Apprenticeship', '2-year certificate, 3–4-year diploma, with vocational baccalaureate']},
+  uniB: {ru: ['Університет, ETH: бакалавр', '3 роки'], de: ['Universität, ETH: Bachelor', '3 Jahre'], fr: ['Université, EPF : bachelor', '3 ans'], it: ['Università, politecnico: bachelor', '3 anni'], en: ['University, ETH: Bachelor', '3 years']},
+  uniM: {ru: ['Магістр', '1,5–2 роки'], de: ['Master', '1,5–2 Jahre'], fr: ['Master', '1,5–2 ans'], it: ['Master', '1,5–2 anni'], en: ['Master', '1.5–2 years']},
+  phd: {ru: ['Докторантура (PhD)', '3–5 років, робота із зарплатою'], de: ['Doktorat', '3–5 Jahre, angestellt mit Lohn'], fr: ['Doctorat', '3–5 ans, poste salarié'], it: ['Dottorato', '3–5 anni, posto retribuito'], en: ['Doctorate (PhD)', '3–5 years, paid position']},
+  fhB: {ru: ['FH, педвиш (PH): бакалавр', '3 роки, ближче до практики'], de: ['Fachhochschule, PH: Bachelor', '3 Jahre, praxisnah'], fr: ['HES, HEP : bachelor', '3 ans, proche de la pratique'], it: ['SUP, ASP: bachelor', '3 anni, orientato alla pratica'], en: ['Applied sciences, teacher education: Bachelor', '3 years, practice-oriented']},
+  fhM: {ru: ['Магістр', '1,5–2 роки'], de: ['Master', '1,5–2 Jahre'], fr: ['Master', '1,5–2 ans'], it: ['Master', '1,5–2 anni'], en: ['Master', '1.5–2 years']},
+  hf: {ru: ['Вища профшкола (HF)', '2–3 роки, часто поруч із роботою'], de: ['Höhere Fachschule (HF)', '2–3 Jahre, oft berufsbegleitend'], fr: ['École supérieure (ES)', '2–3 ans, souvent en emploi'], it: ['Scuola specializzata superiore', '2–3 anni, spesso con il lavoro'], en: ['College of higher education', '2–3 years, often alongside work']},
+  bp: {ru: ['Федеральні проф. іспити', 'Fachausweis, Diplom — у будь-якому віці'], de: ['Berufsprüfung, höhere Fachprüfung', 'eidg. Fachausweis, eidg. Diplom'], fr: ['Examens professionnels fédéraux', 'brevet fédéral, diplôme fédéral'], it: ['Esami professionali federali', 'attestato professionale, diploma federale'], en: ['Federal professional exams', 'federal certificate, advanced diploma']}
+};
+const AR = {
+  mat: {ru: 'Matura', de: 'Matura', fr: 'maturité', it: 'maturità', en: 'Matura'},
+  fach: {ru: 'Fachmatura', de: 'Fachmatura', fr: 'mat. spécialisée', it: 'mat. specializzata', en: 'spec. bacc.'},
+  bm: {ru: 'BM', de: 'BM', fr: 'MP', it: 'MP', en: 'BM'},
+  efz: {ru: 'EFZ + досвід', de: 'EFZ + Praxis', fr: 'CFC + pratique', it: 'AFC + pratica', en: 'diploma + work'},
+  prak: {ru: '+ рік практики', de: '+ Praxisjahr', fr: '+ année de pratique', it: '+ anno di pratica', en: '+ work year'}
+};
+const HOW = {
+  ru: ['Дитячий садок: громада сама надішле лист, якщо дитині виповниться 4 роки до 31 липня.', 'Після початкової школи рівень вирішують разом учитель, оцінки й розмова з батьками.', 'Гімназія: іспит або оцінки, реєстрація взимку, іспит навесні. Строки в кожному кантоні свої.', 'Lehre: у 7–8-му класі обирають професію і ходять на пробні практики, місця роздають за рік до початку.', 'З Lehre до університету ведуть BM і річний іспит Passerelle. Медицина — з окремим тестом.', 'До кінця обов’язкової школи навчання безкоштовне. Семестр у державному виші коштує зазвичай 500–1000 франків.', 'Дороги не закриваються: дорослі теж можуть отримати диплом EFZ за досвідом роботи.'],
+  de: ['Kindergarten: Die Gemeinde schreibt von sich aus, wenn das Kind bis 31. Juli 4 Jahre alt wird.', 'Nach der Primarschule entscheiden Lehrperson, Noten und Elterngespräch über das Niveau.', 'Gymnasium: Prüfung oder Noten, Anmeldung im Winter, Prüfung im Frühling. Termine je nach Kanton.', 'Lehre: Berufswahl in der 7.–8. Klasse, Schnupperlehren, Lehrstellen werden ein Jahr im Voraus vergeben.', 'Von der Lehre an die Universität mit BM und Passerelle. Medizin mit Eignungstest.', 'Die obligatorische Schule ist kostenlos. Ein Semester an einer staatlichen Hochschule kostet meist 500–1000 Franken.', 'Kein Abschluss ohne Anschluss: Erwachsene können den EFZ mit Berufserfahrung nachholen.'],
+  fr: ['École enfantine : la commune écrit d’elle-même si l’enfant a 4 ans au 31 juillet.', 'Après le primaire, l’enseignant, les notes et l’entretien avec les parents décident de la filière.', 'Gymnase / collège : examen ou notes, inscription en hiver, examen au printemps. Dates selon le canton.', 'Apprentissage : choix du métier en 9e–10e, stages d’orientation, places attribuées un an à l’avance.', 'De l’apprentissage à l’université avec la maturité professionnelle et la passerelle. Médecine avec test d’aptitudes.', 'L’école obligatoire est gratuite. Un semestre dans une haute école publique coûte en général 500 à 1000 francs.', 'Aucun diplôme sans passerelle : les adultes peuvent obtenir un CFC grâce à leur expérience.'],
+  it: ['Scuola dell’infanzia: il comune scrive da sé se il bambino compie 4 anni entro il 31 luglio.', 'Dopo le elementari, docente, note e colloquio con i genitori decidono il percorso.', 'Liceo: ammissione con note o esame, secondo il cantone.', 'Tirocinio: scelta della professione negli ultimi anni di scuola media, stage di orientamento, posti assegnati un anno prima.', 'Dal tirocinio all’università con maturità professionale e passerella. Medicina con test attitudinale.', 'La scuola dell’obbligo è gratuita. Un semestre in una scuola universitaria pubblica costa di solito 500–1000 franchi.', 'Nessun titolo senza sbocco: gli adulti possono ottenere un AFC con l’esperienza.'],
+  en: ['Kindergarten: the municipality writes to you if the child turns 4 by 31 July.', 'After primary school, the teacher, grades and a talk with the parents decide the level.', 'Gymnasium: exam or grades, register in winter, exam in spring. Dates vary by canton.', 'Apprenticeship: choose a trade in school years 7–8, taster apprenticeships, places are given a year ahead.', 'From apprenticeship to university with a vocational baccalaureate and the Passerelle exam. Medicine has an aptitude test.', 'Compulsory school is free. A semester at a public university usually costs 500–1000 francs.', 'Every path stays open: adults can earn a federal diploma through work experience.']
+};
+/* словарь: RU, DE, FR, IT, EN */
+const GL = [
+  ['Ясла', 'Kita, Krippe', 'crèche', 'asilo nido', 'daycare'],
+  ['Денна родина', 'Tagesfamilie', 'accueil familial de jour', 'famiglia diurna', 'childminder'],
+  ['Ігрова група', 'Spielgruppe', 'groupe de jeu', 'gruppo gioco', 'playgroup'],
+  ['Дитячий садок', 'Kindergarten', 'école enfantine (1P–2P)', 'scuola dell’infanzia', 'kindergarten'],
+  ['Початкова школа', 'Primarschule', 'école primaire', 'scuola elementare', 'primary school'],
+  ['Середня школа I', 'Sekundarschule, Sek I', 'secondaire I, cycle d’orientation', 'scuola media', 'lower secondary school'],
+  ['Учитель, учителька', 'Lehrperson', 'enseignant·e', 'docente', 'teacher'],
+  ['Табель', 'Zeugnis', 'bulletin scolaire', 'pagella', 'school report'],
+  ['Зустріч з учителем', 'Elterngespräch', 'entretien avec les parents', 'colloquio con i genitori', 'parent-teacher meeting'],
+  ['Група продовженого дня, обід у школі', 'Hort, Tagesschule, Mittagstisch', 'accueil parascolaire, restaurant scolaire', 'doposcuola, mensa', 'after-school care, lunch club'],
+  ['Німецька (мова) як друга', 'DaZ (Deutsch als Zweitsprache)', 'FLS (français langue seconde)', 'italiano L2', 'second-language support'],
+  ['Логопед', 'Logopädie', 'logopédie', 'logopedia', 'speech therapy'],
+  ['Шкільний психолог', 'Schulpsychologischer Dienst', 'psychologie scolaire', 'psicologo scolastico', 'school psychology service'],
+  ['Гімназія', 'Gymnasium, Kantonsschule', 'gymnase, collège, lycée', 'liceo', 'Gymnasium (academic school)'],
+  ['Атестат зрілості', 'Matura', 'maturité gymnasiale', 'maturità liceale', 'Matura (baccalaureate)'],
+  ['Вступний іспит', 'Aufnahmeprüfung', 'examen d’admission', 'esame d’ammissione', 'entrance exam'],
+  ['Середня спеціалізована школа', 'Fachmittelschule (FMS)', 'école de culture générale (ECG)', 'scuola specializzata (SSPSS)', 'specialised secondary school'],
+  ['Професійне навчання', 'Lehre, berufliche Grundbildung', 'apprentissage', 'tirocinio', 'apprenticeship (VET)'],
+  ['Місце для Lehre', 'Lehrstelle', 'place d’apprentissage', 'posto di tirocinio', 'apprenticeship place'],
+  ['Пробна практика', 'Schnupperlehre', 'stage d’orientation', 'stage di orientamento', 'taster apprenticeship'],
+  ['Диплом про професію (3–4 роки)', 'EFZ (Fähigkeitszeugnis)', 'CFC', 'AFC', 'federal VET diploma'],
+  ['Свідоцтво про професію (2 роки)', 'EBA (Berufsattest)', 'AFP', 'CFP', 'federal VET certificate'],
+  ['Професійний атестат', 'Berufsmaturität (BM)', 'maturité professionnelle', 'maturità professionale', 'vocational baccalaureate'],
+  ['Проміжний рік', 'Brückenangebot', 'solution transitoire', 'offerta transitoria', 'bridge-year course'],
+  ['Консультація щодо професії', 'Berufsberatung, BIZ', 'orientation professionnelle', 'orientamento professionale', 'career guidance'],
+  ['Університет', 'Universität, ETH', 'université, EPF', 'università, politecnico', 'university'],
+  ['Вища школа прикладних наук', 'Fachhochschule (FH)', 'haute école spécialisée (HES)', 'scuola universitaria professionale (SUP)', 'university of applied sciences'],
+  ['Педагогічний виш', 'Pädagogische Hochschule (PH)', 'haute école pédagogique (HEP)', 'alta scuola pedagogica (ASP)', 'university of teacher education'],
+  ['Вища професійна школа', 'höhere Fachschule (HF)', 'école supérieure (ES)', 'scuola specializzata superiore (SSS)', 'college of higher education'],
+  ['Бакалавр, магістр, докторантура', 'Bachelor, Master, Doktorat', 'bachelor, master, doctorat', 'bachelor, master, dottorato', 'Bachelor, Master, PhD'],
+  ['Стипендія', 'Stipendium', 'bourse d’études', 'borsa di studio', 'scholarship']
+];
+const MON = {ru: ['січень', 'лютий', 'березень', 'квітень', 'травень', 'червень', 'липень', 'серпень', 'вересень', 'жовтень', 'листопад', 'грудень'], de: ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'], fr: ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'], it: ['gennaio', 'febbraio', 'marzo', 'aprile', 'maggio', 'giugno', 'luglio', 'agosto', 'settembre', 'ottobre', 'novembre', 'dicembre'], en: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']};
+
+/* название года обязательной школы: i = 0…10 (HarmoS i+1) */
+function yearName(i, lg, ti){
+  const h = i + 1;
+  if (i < 2) return {ru: `Дитячий садок, ${i + 1}-й рік`, de: `Kindergarten, ${i + 1}. Jahr`, fr: `${h}P (école enfantine)`, it: `Scuola dell’infanzia, ${i + 1}° anno`, en: `Kindergarten, year ${i + 1}`}[lg];
+  const primN = ti ? 5 : 6;
+  if (i < 2 + primN) { const n = i - 1; return {ru: `${n}-й клас початкової школи`, de: `${n}. Klasse Primarschule`, fr: `${h}P (primaire)`, it: `${n}ª elementare`, en: `Primary school, year ${n}`}[lg]; }
+  const n = i - 1 - primN; return {ru: `Середня школа, ${n}-й рік`, de: `${n}. Klasse Sekundarstufe I`, fr: `${h}e (secondaire I)`, it: `${n}ª media`, en: `Lower secondary, year ${n}`}[lg];
+}
+
+let S = load(), EX = null;
+function blank(){ return {k: '', lang: 'bi', bw: false, parts: {scheme: true, trans: true, gloss: true, cmp: true, kids: true}, kids: []}; }
+function load(){ try { const s = JSON.parse(localStorage.getItem(KEY)); if (s && typeof s === 'object') return Object.assign(blank(), s); } catch (e) {} const b = blank(); try { b.k = localStorage.getItem('svoiludi.kanton') || ''; } catch (e) {} return b; }
+function save(){ if (EX) return; try { localStorage.setItem(KEY, JSON.stringify(S)); if (S.k) localStorage.setItem('svoiludi.kanton', S.k); } catch (e) {} }
+function example(){ return {k: 'ZH', lang: S.lang, bw: S.bw, parts: {scheme: true, trans: true, gloss: true, cmp: true, kids: true}, kids: [{n: 'Софія', m: 3, y: 2021}, {n: 'Марк', m: 10, y: 2016}]}; }
+const D = () => EX || S;
+function langs(d){ const loc = LANG_OF[d.k] || 'de'; return d.lang === 'bi' ? ['ru', loc] : [d.lang, '']; }
+
+/* ---------- измерение текста ---------- */
+const PT = 0.3528;
+const mctx = document.createElement('canvas').getContext('2d');
+function tw(s, b, size){ mctx.font = (b ? '700 ' : '400 ') + size + 'px Manrope'; return mctx.measureText(s).width * PT; }
+function wrap(s, b, size, w){ const out = []; let line = ''; String(s || '').split(/\s+/).filter(Boolean).forEach(wd => { const t = line ? line + ' ' + wd : wd; if (tw(t, b, size) <= w || !line) line = t; else { out.push(line); line = wd; } }); if (line) out.push(line); return out; }
+
+function pal(d){
+  return d.bw ? {band: '#FFFFFF', bandTx: '#000000', bandLine: '#000000', ink: '#000000', mut: '#444444', line: '#999999', comp: ['#FFFFFF', '#000000'], kita: ['#FFFFFF', '#000000'], A: ['#FFFFFF', '#000000'], B: ['#FFFFFF', '#000000'], C: ['#FFFFFF', '#000000'], zebra: '#F2F2F2', hi: '#E6E6E6', head: '#000000'}
+    : {band: '#4F5E3E', bandTx: '#FFFFFF', bandLine: null, ink: '#2F2924', mut: '#7A6E62', line: '#C9BBA8', comp: ['#EFE5D7', '#6E4F3C'], kita: ['#FFFCF8', '#B98324'], A: ['#E1E8F5', '#2F5FB8'], B: ['#F7E1EC', '#B5357A'], C: ['#E2F0E2', '#3A8A48'], zebra: '#F8F3EC', hi: '#F3E3C2', head: '#4F5E3E'};
+}
+
+/* ---------- лист 1: схема (A4 альбом) ---------- */
+function scheme(d){
+  const ops = [], C = pal(d), [L1, L2] = langs(d), W = 297;
+  const text = (s, x, y, size, b, color, align) => ops.push({t: 'text', s, x, y, size, b, color, align: align || 'left'});
+  // шапка
+  ops.push({t: 'rect', x: 0, y: 0, w: W, h: 17, fill: C.band, stroke: C.bandLine});
+  text(TX.title[L1], 12, 10.5, 16, true, C.bandTx);
+  if (L2) text(TX.title[L2], 12, 15, 8, false, C.bandTx);
+  if (d.k && K[d.k]) text((L1 === 'ru' ? K[d.k].n + (L2 ? ' · ' : '') : '') + (L2 || L1 !== 'ru' ? 'Kanton ' + d.k : ''), W - 12, 10.5, 8, false, C.bandTx, 'right');
+  // шкала возраста
+  const yA = a => 26 + a * 5.5 + (a >= 15 ? 5 : 0) + (a >= 19 ? 11 : 0), yE = a => a === 15 ? yA(15) - 5 : a === 19 ? yA(19) - 11 : yA(a);
+  text(TX.age[L1] + (L2 ? ' · ' + TX.age[L2] : ''), 12, 23, 6, true, C.mut);
+  [0, 4, 6, 12, 15, 19, 22, 24, 28].forEach(a => { const y = a >= 19 ? yA(a) : a === 15 ? yA(15) : yA(a); text(String(a), 18, y + 2, 7, true, C.mut, 'right'); ops.push({t: 'line', x1: 19.5, y1: y, x2: 22, y2: y, color: C.line, w: 0.3}); });
+  ops.push({t: 'line', x1: 21, y1: yA(0), x2: 21, y2: yA(28), color: C.line, w: 0.3});
+  const X = 24, XW = 176, g = 3, cw = (XW - 2 * g) / 3, col = [X, X + cw + g, X + 2 * (cw + g)];
+  const box = (key, x, w, a1, a2, c, dash, extra) => {
+    const y = yA(a1) + 0.6, h = yE(a2) - yA(a1) - 1.2;
+    ops.push({t: 'rect', x, y, w, h, fill: c[0], stroke: c[1], dash: !!dash, r: 1.6});
+    const t1 = ST[key][L1], lines = [];
+    if (h < 14) { wrap(t1[0] + (L2 && ST[key][L2][0] !== t1[0] ? ' · ' + ST[key][L2][0] : ''), true, 7.2, w - 5).forEach(s => lines.push([s, true, 7.2, C.ink])); }
+    else {
+    wrap(t1[0], true, 7.4, w - 5).forEach(s => lines.push([s, true, 7.4, C.ink]));
+    if (L2) wrap(ST[key][L2][0], false, 6.2, w - 5).forEach(s => lines.push([s, false, 6.2, C.mut]));
+    }
+    wrap(t1[1], false, 6.2, w - 5).forEach(s => lines.push([s, false, 6.2, C.ink]));
+    if (extra) wrap(extra, false, 5.8, w - 5).forEach(s => lines.push([s, false, 5.8, C.mut]));
+    const lh = l => l[2] * PT * 1.3, tot = lines.reduce((a, l) => a + lh(l), 0);
+    let yy = y + Math.max(1.5, (h - tot) / 2) + lines[0][2] * PT * 0.95;
+    lines.forEach(l => { if (yy < y + h + 0.5) text(l[0], x + w / 2, yy, l[2], l[1], l[3], 'center'); yy += lh(l); });
+  };
+  box('kita', X, XW, 0, 4, C.kita, true);
+  box('kg', X, XW, 4, 6, C.comp);
+  box('prim', X, XW, 6, 12, C.comp);
+  box('sek', X, XW, 12, 15, C.comp, false, TX.long[L1] + (L2 ? ' · ' + TX.long[L2] : ''));
+  // конец обязательной школы
+  const ye = yA(15) - 2.5;
+  ops.push({t: 'line', x1: X, y1: ye, x2: X + XW, y2: ye, color: C.head, w: 0.5, dash: true});
+  const et = TX.endc[L1] + (L2 ? ' · ' + TX.endc[L2] : ''), ew = tw(et, true, 6.4) + 4;
+  ops.push({t: 'rect', x: X + XW / 2 - ew / 2, y: ye - 2.2, w: ew, h: 4.2, fill: '#FFFFFF', stroke: null});
+  text(et, X + XW / 2, ye + 1, 6.4, true, C.head, 'center');
+  box('gym', col[0], cw, 15, 19, C.A);
+  box('fms', col[1], cw, 15, 19, C.B);
+  box('lehre', col[2], cw, 15, 19, C.C);
+  box('uniB', col[0], cw, 19, 22, C.A, false, TX.toUni[L1]); box('uniM', col[0], cw, 22, 24, C.A); box('phd', col[0], cw, 24, 28, C.A);
+  box('fhB', col[1], cw, 19, 22, C.B, false, TX.toFH[L1]); box('fhM', col[1], cw, 22, 24, C.B);
+  box('hf', col[2], cw, 19, 22, C.C); box('bp', col[2], cw, 22, 26, C.C);
+  // стрелки переходов
+  const y1 = yA(19) - 11 - 0.6, y2 = yA(19) + 0.6;
+  const arrow = (xa, xb, label, col0, lx) => { ops.push({t: 'line', x1: xa, y1: y1 + 0.6, x2: xa, y2: y2 - 2, color: col0, w: 0.6}); ops.push({t: 'tri', p: [[xa, y2 - 0.3], [xa - 1.3, y2 - 2.3], [xa + 1.3, y2 - 2.3]], fill: col0}); if (label) text(label, lx, (y1 + y2) / 2 + 1, 6.4, true, col0); };
+  arrow(col[0] + cw / 2, col[0] + cw / 2, AR.mat[L1], C.A[1], col[0] + cw / 2 + 2);
+  arrow(col[1] + cw / 2, col[1] + cw / 2, AR.fach[L1], C.B[1], col[1] + cw / 2 + 2);
+  arrow(col[2] + cw / 2, col[2] + cw / 2, AR.efz[L1], C.C[1], col[2] + cw / 2 + 2);
+  // правая колонка: как это происходит
+  const px = 208, pw = W - 12 - px; let py = 26;
+  text(TX.how[L1], px, py, 9, true, C.head); py += 2; if (L2) { py += 2.4; text(TX.how[L2], px, py, 6.5, false, C.mut); }
+  py += 2; ops.push({t: 'line', x1: px, y1: py, x2: px + pw, y2: py, color: C.head, w: 0.4}); py += 4.5;
+  HOW[L1].forEach((s, i) => {
+    text(String(i + 1), px, py, 7, true, C.head);
+    wrap(s, false, 6.6, pw - 5).forEach(l => { text(l, px + 4.5, py, 6.6, false, C.ink); py += 3.1; });
+    if (L2) wrap(HOW[L2][i], false, 5.6, pw - 5).forEach(l => { text(l, px + 4.5, py, 5.6, false, C.mut); py += 2.6; });
+    py += 2.2;
+  });
+  if (!d.bw) { py += 3; text(TX.leg[L1] + (L2 ? ' · ' + TX.leg[L2] : ''), px, py, 7, true, C.head); py += 4;
+  [['A', 'legA'], ['B', 'legB'], ['C', 'legC'], ['comp', 'legComp']].forEach(([c, k]) => { ops.push({t: 'rect', x: px, y: py - 3, w: 6, h: 4, fill: C[c][0], stroke: C[c][1], r: 0.8}); wrap(TX[k][L1] + (L2 ? ' · ' + TX[k][L2] : ''), false, 6.2, pw - 9).forEach(l => { text(l, px + 8.5, py, 6.2, false, C.ink); py += 2.9; }); py += 1.8; }); }
+  wrap(TX.disc[L2 || L1], false, 4.8, W - 24).forEach((l, i) => text(l, 12, 203 + i * 2, 4.8, false, C.mut));
+  return {w: 297, h: 210, ops};
+}
+
+/* ---------- лист 2: словарь (A4 альбом) ---------- */
+function glossary(d){
+  const ops = [], C = pal(d), [L1, L2] = langs(d), W = 297;
+  const text = (s, x, y, size, b, color, align) => ops.push({t: 'text', s, x, y, size, b, color, align: align || 'left'});
+  ops.push({t: 'rect', x: 0, y: 0, w: W, h: 17, fill: C.band, stroke: C.bandLine});
+  text(TX.gloss[L1], 12, 10.5, 16, true, C.bandTx);
+  text(LGS.filter(l => l !== L1).map(l => TX.gloss[l]).join(' · '), 12, 15, 6, false, C.bandTx);
+  const x0 = 12, cw = (W - 24) / 5, heads = ['Російська', 'Deutsch', 'Français', 'Italiano', 'English'];
+  let y = 26;
+  heads.forEach((h, i) => text(h, x0 + i * cw + 2, y, 7.5, true, C.head));
+  y += 2; ops.push({t: 'line', x1: x0, y1: y, x2: W - 12, y2: y, color: C.head, w: 0.5}); y += 0.6;
+  GL.forEach((r, ri) => {
+    const cells = r.map((s, i) => wrap(s, i === 0, 6.6, cw - 4)), n = Math.max(...cells.map(c => c.length)), h = n * 2.9 + 2.2;
+    if (ri % 2 === 0) ops.push({t: 'rect', x: x0, y, w: W - 24, h, fill: C.zebra, stroke: null});
+    cells.forEach((c, i) => c.forEach((s, k) => text(s, x0 + i * cw + 2, y + 3.4 + k * 2.9, 6.6, i === 0, C.ink)));
+    y += h;
+  });
+  wrap(TX.disc[L2 || L1], false, 4.8, W - 24).forEach((l, i) => text(l, 12, 203 + i * 2, 4.8, false, C.mut));
+  return {w: 297, h: 210, ops};
+}
+
+
+
+/* переходы: a — само, d — решает школа вместе с родителями, e — экзамен, заявка или подготовка (текст на языке сайта, термины на языке кантона) */
+const TR = [
+  ['a', 'Ясла → дитячий садок', {de: 'Kindergarten', fr: 'école enfantine', it: 'scuola dell’infanzia', en: 'kindergarten'}, 'Само собою. Громада надішле лист, якщо дитині виповниться 4 роки до 31 липня.', 'За пів року запиши на обід і групу продовженого дня. Якщо дитина не готова, обговори зі школою, можна відкласти на рік.'],
+  ['a', 'Дитячий садок → початкова школа', {de: 'Primarschule', fr: 'école primaire', it: 'scuola elementare', en: 'primary school'}, 'Само собою, у тій самій школі або поруч.', 'Нічого особливого. Стеж за листами школи.'],
+  ['d', 'Початкова школа → середня школа I', {de: 'Übertritt Sekundarstufe I', fr: 'passage au secondaire I', it: 'passaggio alla scuola media', en: 'transfer to lower secondary'}, 'Вирішує школа в останньому класі початкової: за оцінками, думкою вчителя і бесідою з батьками. Від рівня залежить дорога далі.', 'З 5-го класу стеж за оцінками й ходи на зустрічі з учителем. З рішенням можна не погодитися: попроси письмове рішення й оскарж його вчасно.'],
+  ['e', 'До гімназії', {de: 'Gymnasium · Aufnahmeprüfung', fr: 'gymnase · examen d’admission', it: 'liceo · ammissione', en: 'Gymnasium entrance'}, 'Іспит або оцінки, залежно від кантону. У частині кантонів після 6-го класу (довга гімназія, наприклад Цюрих), в інших після 2–3-го року середньої школи.', 'Готуватися за 1–2 роки: курси або репетитор, старі іспити (часто є безкоштовно на сайті кантону), добрі оцінки — вони теж рахуються. Реєстрація зазвичай узимку, іспит навесні, потім випробувальний строк, часто пів року.'],
+  ['e', 'До Lehre', {de: 'Lehrstelle · Bewerbung', fr: 'place d’apprentissage', it: 'posto di tirocinio', en: 'apprenticeship place'}, 'Заявка на місце на фірмі. Місце треба знайти самостійно, школа й консультація щодо професії допомагають.', '7-й клас — вибір професії в BIZ. 8-й — пробні практики. З кінця 8-го — заявки, багато фірм роздають місця за рік. Іноді потрібен тест (Multicheck, Basic-Check). Місця немає — проміжний рік.'],
+  ['e', 'До FMS', {de: 'Fachmittelschule', fr: 'école de culture générale', it: 'scuola specializzata', en: 'specialised school'}, 'Іспит або оцінки, як до гімназії, за правилами кантону.', 'Дізнайся строки у 8-му класі.'],
+  ['d', 'Гімназія → університет, ETH', {de: 'Matura → Universität', fr: 'maturité → université', it: 'maturità → università', en: 'Matura → university'}, 'Matura відкриває майже всі напрями без іспиту. Треба лише записатися.', 'Запис зазвичай до 30 квітня на осінній семестр. Медицина в німецькомовних вишах — окремий тест: реєстрація до середини лютого, тест улітку.'],
+  ['e', 'До FH або педвишу', {de: 'Fachhochschule · PH', fr: 'HES · HEP', it: 'SUP · ASP', en: 'applied sciences · teacher education'}, 'З BM — без іспиту у своїй галузі. З Matura — після року практики. З Fachmatura — на близькі напрями.', 'У здоров’ї, дизайні, мистецтві часто є вступні випробування. Дізнайся умови за рік.'],
+  ['e', 'З Lehre до університету', {de: 'BM + Passerelle', fr: 'MP + passerelle', it: 'MP + passerella', en: 'BM + Passerelle'}, 'Через Berufsmaturität і річний курс з іспитом Passerelle.', 'BM можна зробити під час Lehre або після неї. Passerelle — рік підготовки та іспит.'],
+  ['a', 'Бакалавр → магістр', {de: 'Bachelor → Master', fr: 'bachelor → master', it: 'bachelor → master', en: 'Bachelor → Master'}, 'За тим самим напрямом зазвичай само собою.', 'До іншого вишу чи на інший напрям — перевір умови, іноді потрібні додаткові курси.'],
+  ['e', 'Магістр → докторантура', {de: 'Doktorat · Bewerbung', fr: 'doctorat · candidature', it: 'dottorato · candidatura', en: 'doctorate · application'}, 'Заявка на конкретне місце в професора або в проєкті, співбесіда.', 'Шукай місця на сайтах вишів і в проєктах SNF за пів року — рік.'],
+  ['d', 'Дорослим: диплом EFZ за досвідом', {de: 'Berufsabschluss für Erwachsene', fr: 'certification pour adultes', it: 'qualificazione per adulti', en: 'diploma for adults'}, '5 років роботи, з них 2–4 у професії, мова B1–B2.', 'Почни з безкоштовної консультації щодо професії (BIZ) свого кантону.']
+];
+const TRK = {a: ['само', '#3A8A48'], d: ['вирішує школа', '#B98324'], e: ['іспит, заявка, підготовка', '#A0523D']};
+function transPage(d){
+  const ops = [], C = pal(d), [L1, L2] = langs(d), W = 297, tl = d.lang === 'bi' || d.lang === 'ru' ? (LANG_OF[d.k] || 'de') : d.lang;
+  const text = (s, x, y, size, b, color, align) => ops.push({t: 'text', s, x, y, size, b, color, align: align || 'left'});
+  ops.push({t: 'rect', x: 0, y: 0, w: W, h: 17, fill: C.band, stroke: C.bandLine});
+  text('Переходи: де само, а де готуватися', 12, 10.5, 16, true, C.bandTx);
+  text({de: 'Übertritte: was automatisch geht und wo man sich vorbereiten muss', fr: 'Passages : ce qui se fait tout seul et ce qui se prépare', it: 'Passaggi: cosa avviene da sé e cosa va preparato', en: 'Transitions: what happens automatically and what needs preparation'}[tl], 12, 15, 6.5, false, C.bandTx);
+  let lx = 12; Object.values(TRK).forEach(([t, c]) => { const col = d.bw ? '#000000' : c; ops.push({t: 'rect', x: lx, y: 21.5, w: 3.2, h: 3.2, fill: col, stroke: null, r: 1.6}); text(t, lx + 4.5, 24.3, 7, true, C.ink); lx += tw(t, true, 7) + 12; });
+  const x0 = 12, cw = [62, 98, 113], xs = [x0, x0 + cw[0], x0 + cw[0] + cw[1]];
+  let y = 31;
+  ['Перехід', 'Як це відбувається', 'Коли і як готуватися'].forEach((h, i) => text(h, xs[i] + 2, y, 7.5, true, C.head));
+  y += 2; ops.push({t: 'line', x1: x0, y1: y, x2: W - 12, y2: y, color: C.head, w: 0.5}); y += 0.6;
+  TR.forEach((r, ri) => {
+    const col = d.bw ? '#000000' : TRK[r[0]][1];
+    const c0 = wrap(r[1], true, 8.4, cw[0] - 8), c0b = wrap(r[2][tl] || r[2].de, false, 6.8, cw[0] - 8), c1 = wrap(r[3], false, 7.8, cw[1] - 4), c2 = wrap(r[4], false, 7.6, cw[2] - 4);
+    const h = Math.max(c0.length * 3.6 + c0b.length * 3, c1.length * 3.4, c2.length * 3.3) + 3;
+    if (ri % 2 === 0) ops.push({t: 'rect', x: x0, y, w: W - 24, h, fill: C.zebra, stroke: null});
+    ops.push({t: 'rect', x: x0 + 1.5, y: y + 1.9, w: 2.8, h: 2.8, fill: col, stroke: null, r: 1.4});
+    let yy = y + 4.2; c0.forEach(s => { text(s, xs[0] + 6, yy, 8.4, true, C.ink); yy += 3.6; }); c0b.forEach(s => { text(s, xs[0] + 6, yy - 0.3, 6.8, false, C.mut); yy += 3; });
+    c1.forEach((s, k) => text(s, xs[1] + 2, y + 4.2 + k * 3.4, 7.8, false, C.ink));
+    c2.forEach((s, k) => text(s, xs[2] + 2, y + 4.2 + k * 3.3, 7.6, false, C.ink));
+    y += h;
+  });
+  wrap(TX.disc[L2 || L1], false, 4.8, W - 24).forEach((l, i) => text(l, 12, 203 + i * 2, 4.8, false, C.mut));
+  return {w: 297, h: 210, ops};
+}
+/* сравнение с образованием в Украине, России и других постсоветских странах (текст на языке сайта; названия в Швейцарии — на языке кантона) */
+const CMP = [
+  ['Ясла з 1–1,5 року, дитячий садок до 6–7 років', 'Ясла за бажанням і платно, дитячий садок з 4 років — уже школа, безкоштовно, 2 роки', {de: 'Kita · Kindergarten', fr: 'crèche · école enfantine', it: 'asilo nido · scuola dell’infanzia', en: 'daycare · kindergarten'}, 'Тутешній дитячий садок — це 1-й і 2-й рік школи. Дитина йде туди в 4 роки.'],
+  ['Початкова школа, 1–4 клас, з 6–7 років', 'Початкова школа, 6 років, з 6 років (у Тічино 5)', {de: 'Primarschule', fr: 'école primaire (3P–8P)', it: 'scuola elementare', en: 'primary school'}, 'Початкова школа довша за нашу, до 12 років.'],
+  ['Середня школа, 5–9 клас', 'Кінець початкової школи й середня школа I, 3 роки на різних рівнях', {de: 'Sekundarstufe I', fr: 'secondaire I', it: 'scuola media', en: 'lower secondary'}, 'У 12 років дітей ділять за рівнями. Обов’язкова школа закінчується в 15 років, як наші 9 класів.'],
+  ['10–11 клас, атестат, ЗНО, НМТ або ЄДІ', 'Гімназія 3–4 роки, іспити на атестат зрілості', {de: 'Gymnasium · Matura', fr: 'gymnase · maturité', it: 'liceo · maturità', en: 'Gymnasium · Matura'}, 'Іде лише близько п’ятої частини підлітків. Наш атестат не дорівнює Matura: для вишу зазвичай потрібні ще роки навчання у виші вдома або іспит.'],
+  ['ПТУ, профліцей після 9 класу', 'Lehre: 2–4 роки на фірмі й у профшколі, із зарплатою', {de: 'Lehre · EBA · EFZ', fr: 'apprentissage · AFP · CFC', it: 'tirocinio · CFP · AFC', en: 'apprenticeship'}, 'Це не «ПТУ для слабких»: Lehre обирають близько двох третин підлітків, із неї є дорога і до вишу.'],
+  ['Коледж, технікум (молодший спеціаліст)', 'Диплом EFZ, вища профшкола або професійні іспити', {de: 'EFZ · höhere Fachschule (HF)', fr: 'CFC · école supérieure (ES)', it: 'AFC · scuola specializzata superiore', en: 'VET diploma · college of higher education'}, 'Чому дорівнює твій диплом, залежить від програми. Це оцінює SBFI (Niveaubestätigung).'],
+  ['Бакалавр, 4 роки', 'Бакалавр університету або FH, 3 роки, 180 ECTS', {de: 'Bachelor', fr: 'bachelor', it: 'bachelor', en: 'Bachelor'}, 'Наш бакалавр зазвичай відповідає тутешньому бакалавру.'],
+  ['Спеціаліст, 5 років', 'Часто ближче до магістра', {de: 'Master', fr: 'master', it: 'master', en: 'Master'}, 'Як порівняти диплом спеціаліста, вирішує виш або swissuniversities.'],
+  ['Магістр', 'Магістр, 1,5–2 роки, 90–120 ECTS', {de: 'Master', fr: 'master', it: 'master', en: 'Master'}, 'Після магістратури можна йти в докторантуру.'],
+  ['Аспірантура, кандидат наук', 'Докторантура, 3–5 років, робота із зарплатою', {de: 'Doktorat · PhD', fr: 'doctorat', it: 'dottorato', en: 'doctorate · PhD'}, 'Докторант — співробітник вишу з договором, а не студент.'],
+  ['Доктор наук', 'Прямого аналога немає, найближче — габілітація', {de: 'Habilitation', fr: 'habilitation', it: 'abilitazione', en: 'habilitation'}, 'Потрібна переважно для кар’єри професора.'],
+  ['Оцінки від 1 до 5 (5 — найкраща) або від 1 до 12', 'Оцінки від 1 до 6, де 6 — найкраща, 4 — достатньо', {de: 'Noten 1–6', fr: 'notes 1–6', it: 'note 1–6', en: 'grades 1–6'}, 'Нижче 4 — незадовільно. Половинки, наприклад 4,5, бувають.'],
+  ['Навчальний рік з 1 вересня, довгі літні канікули', 'Навчальний рік із середини серпня, канікули кілька разів на рік, усього близько 13 тижнів', {de: 'Schuljahr · Schulferien', fr: 'année scolaire · vacances', it: 'anno scolastico · vacanze', en: 'school year · holidays'}, 'Дати канікул у кожного кантону свої.']
+];
+function compare(d){
+  const ops = [], C = pal(d), [L1, L2] = langs(d), W = 297, loc = LANG_OF[d.k] || 'de', tl = d.lang === 'bi' || d.lang === 'ru' ? loc : d.lang;
+  const text = (s, x, y, size, b, color, align) => ops.push({t: 'text', s, x, y, size, b, color, align: align || 'left'});
+  ops.push({t: 'rect', x: 0, y: 0, w: W, h: 17, fill: C.band, stroke: C.bandLine});
+  text('Наша освіта і швейцарська', 12, 10.5, 16, true, C.bandTx);
+  text({de: 'Vergleich: Bildung in der Ukraine, Russland und anderen postsowjetischen Ländern und in der Schweiz', fr: 'Comparaison : formation en Ukraine, en Russie et dans d’autres pays post-soviétiques et en Suisse', it: 'Confronto: formazione in Ucraina, Russia e altri paesi post-sovietici e in Svizzera', en: 'Comparison: education in Ukraine, Russia and other post-Soviet countries and in Switzerland'}[tl], 12, 15, 6.5, false, C.bandTx);
+  const x0 = 12, cw = [70, 95, 108], xs = [x0, x0 + cw[0], x0 + cw[0] + cw[1]];
+  let y = 26;
+  ['У нас (Україна, Росія та інші)', 'У Швейцарії', 'Що важливо знати'].forEach((h, i) => text(h, xs[i] + 2, y, 7.5, true, C.head));
+  y += 2; ops.push({t: 'line', x1: x0, y1: y, x2: W - 12, y2: y, color: C.head, w: 0.5}); y += 0.6;
+  CMP.forEach((r, ri) => {
+    const c0 = wrap(r[0], true, 8, cw[0] - 4), c1 = wrap(r[1], false, 8, cw[1] - 4), c1b = wrap(r[2][tl] || r[2].de, true, 7, cw[1] - 4), c2 = wrap(r[3], false, 7.4, cw[2] - 4);
+    const h = Math.max(c0.length * 3.5, c1.length * 3.5 + c1b.length * 3.1, c2.length * 3.3) + 3;
+    if (ri % 2 === 0) ops.push({t: 'rect', x: x0, y, w: W - 24, h, fill: C.zebra, stroke: null});
+    c0.forEach((s, k) => text(s, xs[0] + 2, y + 4 + k * 3.5, 8, true, C.ink));
+    let yy = y + 4; c1.forEach(s => { text(s, xs[1] + 2, yy, 8, false, C.ink); yy += 3.5; }); c1b.forEach(s => { text(s, xs[1] + 2, yy - 0.2, 7, true, C.head); yy += 3.1; });
+    c2.forEach((s, k) => text(s, xs[2] + 2, y + 4 + k * 3.3, 7.4, false, C.mut));
+    y += h;
+  });
+  y += 4;
+  wrap('Порівняння орієнтовне. Офіційно рівень твого диплома оцінюють SBFI (професії) і swissuniversities (виші). Детальніше — стаття «Визнання диплома» на svoiludi.ch.', false, 6.4, W - 24).forEach(l => { text(l, 12, y, 6.4, false, C.mut); y += 2.9; });
+  wrap(TX.disc[L2 || L1], false, 4.8, W - 24).forEach((l, i) => text(l, 12, 203 + i * 2, 4.8, false, C.mut));
+  return {w: 297, h: 210, ops};
+}
+/* ---------- лист 3+: путь детей (A4 книжный) ---------- */
+function kidRows(kid, ti){
+  const Y = +kid.y, M = +kid.m, start = Y + (M <= 7 ? 4 : 5), rows = [];
+  const age = y => y - Y - (M >= 8 ? 1 : 0);
+  rows.push({y0: Y, y1: start, a: '0–' + (start - Y - (M >= 8 ? 1 : 0)), key: 'pre'});
+  for (let i = 0; i < 11; i++) rows.push({y0: start + i, y1: start + i + 1, a: age(start + i) + '–' + (age(start + i) + 1), i, h: i + 1});
+  const e = start + 11;
+  rows.push({y0: e, y1: e + 4, a: age(e) + '–' + (age(e) + 4), key: 'sec2'});
+  rows.push({y0: e + 4, y1: null, a: age(e + 4) + '+', key: 'ter'});
+  return rows;
+}
+function kidsPages(d){
+  const pages = [], C = pal(d), [L1, L2] = langs(d), W = 210, ti = d.k === 'TI';
+  const kids = (d.kids || []).filter(k => k.y && k.m);
+  if (!kids.length) return pages;
+  const now = new Date(), curY = now.getMonth() >= 7 ? now.getFullYear() : now.getFullYear() - 1;
+  let ops = null, y = 0;
+  const text = (s, x, yy, size, b, color, align) => ops.push({t: 'text', s, x, y: yy, size, b, color, align: align || 'left'});
+  const newPage = () => { ops = []; pages.push({w: 210, h: 297, ops}); ops.push({t: 'rect', x: 0, y: 0, w: W, h: 17, fill: C.band, stroke: C.bandLine}); text(TX.title[L1], 12, 10.5, 15, true, C.bandTx); if (L2) text(TX.title[L2], 12, 15, 7.5, false, C.bandTx); if (d.k && K[d.k]) text((L1 === 'ru' ? K[d.k].n + (L2 ? ' · ' : '') : '') + (L2 || L1 !== 'ru' ? 'Kanton ' + d.k : ''), W - 12, 10.5, 8, false, C.bandTx, 'right'); y = 27; };
+  const cols = [12, 40, 58, 178], cw = [26, 16, 118, 20];
+  kids.forEach(kid => {
+    const rows = kidRows(kid, ti), need = 16 + rows.length * (L2 ? 8.2 : 6.4) + 12;
+    if (!ops || y + need > 285) newPage();
+    const nm = (kid.n || '').trim();
+    text(TX.path[L1] + (nm ? ': ' + nm : ''), 12, y, 12, true, C.head);
+    text(TX.born[L1] + ' ' + MON[L1][kid.m - 1] + ' ' + kid.y + (L2 ? ' · ' + TX.born[L2] + ' ' + MON[L2][kid.m - 1] + ' ' + kid.y : ''), 12, y + 5, 7, false, C.mut);
+    y += 10;
+    [TX.cY, TX.cA, TX.cS].forEach((h, i) => text(h[L1], cols[i] + 1, y, 7, true, C.head)); text('HarmoS', cols[3] + 1, y, 7, true, C.head);
+    y += 1.8; ops.push({t: 'line', x1: 12, y1: y, x2: W - 12, y2: y, color: C.head, w: 0.5}); y += 0.4;
+    rows.forEach((r, ri) => {
+      const lab1 = r.key ? TX[r.key][L1] : yearName(r.i, L1, ti), lab2 = L2 ? (r.key ? TX[r.key][L2] : yearName(r.i, L2, ti)) : '';
+      const l1 = wrap(lab1, true, 7.2, cw[2] - 2), l2 = lab2 ? wrap(lab2, false, 6, cw[2] - 2) : [];
+      const h = l1.length * 3.2 + l2.length * 2.7 + 2.6;
+      const isNow = r.y1 ? (curY >= r.y0 && curY < r.y1) : curY >= r.y0;
+      if (isNow) ops.push({t: 'rect', x: 12, y, w: W - 24, h, fill: C.hi, stroke: null}); else if (ri % 2) ops.push({t: 'rect', x: 12, y, w: W - 24, h, fill: C.zebra, stroke: null});
+      const yr = r.key === 'pre' ? '–' + (r.y1 - 1) + '/' + String(r.y1).slice(2) : r.key === 'sec2' ? r.y0 + '–' + r.y1 : r.key === 'ter' ? r.y0 + ' +' : r.y0 + '/' + String(r.y1).slice(2);
+      const past = r.y1 && r.y1 <= curY, col = past ? C.mut : C.ink;
+      text(yr, cols[0] + 1, y + 3.6, 7.2, true, col);
+      text(r.a, cols[1] + 1, y + 3.6, 7.2, false, col);
+      let yy = y + 3.6; l1.forEach(s => { text(s, cols[2] + 1, yy, 7.2, true, col); yy += 3.2; }); l2.forEach(s => { text(s, cols[2] + 1, yy - 0.4, 6, false, C.mut); yy += 2.7; });
+      if (r.h) text(String(r.h), cols[3] + 1, y + 3.6, 7.2, false, col);
+      if (isNow) text('← ' + TX.now[L1], W - 13, y + 3.6, 6.4, true, C.head, 'right');
+      y += h;
+    });
+    y += 2.5;
+    const notes = [TX.rule[L1] + (L2 ? ' ' + TX.rule[L2] : '')]; if (+kid.m >= 8) notes.unshift(TX.late[L1] + (L2 ? ' ' + TX.late[L2] : ''));
+    notes.forEach(n => wrap(n, false, 6, W - 24).forEach(l => { text(l, 12, y, 6, false, C.mut); y += 2.7; }));
+    y += 7;
+  });
+  pages.forEach(p => wrap(TX.disc[L2 || L1], false, 4.8, W - 24).forEach((l, i) => p.ops.push({t: 'text', s: l, x: 12, y: 290 + i * 2, size: 4.8, b: false, color: C.mut, align: 'left'})));
+  return pages;
+}
+function build(d){ const p = []; if (d.parts.scheme) p.push(scheme(d)); if (d.parts.trans !== false) p.push(transPage(d)); if (d.parts.gloss) p.push(glossary(d)); if (d.parts.cmp !== false) p.push(compare(d)); if (d.parts.kids) p.push(...kidsPages(d)); return p; }
+
+/* ---------- SVG ---------- */
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'}[c]));
+function svg(pg){
+  let o = `<svg viewBox="0 0 ${pg.w} ${pg.h}" xmlns="http://www.w3.org/2000/svg" role="img"><rect width="${pg.w}" height="${pg.h}" fill="#fff"/>`;
+  pg.ops.forEach(p => {
+    if (p.t === 'rect') o += `<rect x="${p.x}" y="${p.y}" width="${p.w}" height="${p.h}"${p.r ? ` rx="${p.r}"` : ''} fill="${p.fill || 'none'}"${p.stroke ? ` stroke="${p.stroke}" stroke-width="0.35"${p.dash ? ' stroke-dasharray="1.4 1"' : ''}` : ''}/>`;
+    else if (p.t === 'line') o += `<line x1="${p.x1}" y1="${p.y1}" x2="${p.x2}" y2="${p.y2}" stroke="${p.color}" stroke-width="${p.w}"${p.dash ? ' stroke-dasharray="1.2 0.9"' : ''}/>`;
+    else if (p.t === 'tri') o += `<polygon points="${p.p.map(q => q.join(',')).join(' ')}" fill="${p.fill}"/>`;
+    else o += `<text x="${p.x}" y="${p.y}" font-family="Manrope" font-weight="${p.b ? 700 : 400}" font-size="${(p.size * PT).toFixed(3)}" fill="${p.color}" text-anchor="${p.align === 'right' ? 'end' : p.align === 'center' ? 'middle' : 'start'}">${esc(p.s)}</text>`;
+  });
+  if (window.SVLWM) o += SVLWM.svg(pg.w, pg.h, D().lang === "bi" ? "" : D().lang);
+  return o + '</svg>';
+}
+
+/* ---------- PDF ---------- */
+const FONT_FILES = {'Manrope-Regular': '/assets/lib/fonts-pdf/Manrope-Regular.ttf', 'Manrope-Bold': '/assets/lib/fonts-pdf/Manrope-Bold.ttf'};
+let fontCache = null;
+async function fonts(){
+  if (fontCache) return fontCache;
+  const base = (window.PV_BASE || '/').replace(/\/$/, ''), out = {};
+  for (const [k, u] of Object.entries(FONT_FILES)) {
+    const r = await fetch(window.PV_BASE ? base + u : u); if (!r.ok) throw new Error('font');
+    const buf = new Uint8Array(await r.arrayBuffer()); let s = '';
+    for (let i = 0; i < buf.length; i += 0x8000) s += String.fromCharCode.apply(null, buf.subarray(i, i + 0x8000));
+    out[k] = btoa(s);
+  }
+  return fontCache = out;
+}
+const hex = h => [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16));
+async function makePdf(){
+  if (!window.jspdf) throw new Error('lib');
+  const d = D(), pages = build(d); if (!pages.length) throw new Error('empty');
+  const F = await fonts(), doc = new window.jspdf.jsPDF({unit: 'mm', format: 'a4', orientation: pages[0].w > pages[0].h ? 'l' : 'p', compress: true});
+  for (const [k, b64] of Object.entries(F)) { doc.addFileToVFS(k + '.ttf', b64); doc.addFont(k + '.ttf', k, 'normal'); }
+  pages.forEach((pg, i) => {
+    if (i) doc.addPage('a4', pg.w > pg.h ? 'l' : 'p');
+    pg.ops.forEach(o => {
+      if (o.t === 'rect') {
+        if (o.stroke) { doc.setDrawColor(...hex(o.stroke)); doc.setLineWidth(0.35); doc.setLineDashPattern(o.dash ? [1.4, 1] : [], 0); }
+        if (o.fill) doc.setFillColor(...hex(o.fill));
+        const st = o.fill && o.stroke ? 'FD' : o.fill ? 'F' : 'S';
+        if (o.r) doc.roundedRect(o.x, o.y, o.w, o.h, o.r, o.r, st); else doc.rect(o.x, o.y, o.w, o.h, st);
+        doc.setLineDashPattern([], 0);
+      } else if (o.t === 'line') { doc.setDrawColor(...hex(o.color)); doc.setLineWidth(o.w); doc.setLineDashPattern(o.dash ? [1.2, 0.9] : [], 0); doc.line(o.x1, o.y1, o.x2, o.y2); doc.setLineDashPattern([], 0); }
+      else if (o.t === 'tri') { doc.setFillColor(...hex(o.fill)); doc.triangle(o.p[0][0], o.p[0][1], o.p[1][0], o.p[1][1], o.p[2][0], o.p[2][1], 'F'); }
+      else { doc.setFont(o.b ? 'Manrope-Bold' : 'Manrope-Regular', 'normal'); doc.setFontSize(o.size); doc.setTextColor(...hex(o.color)); doc.text(o.s, o.x, o.y, {align: o.align}); }
+    });
+    if (window.SVLWM) SVLWM.pdf(doc, pg.w, pg.h, D().lang === "bi" ? "" : D().lang);
+  });
+  const [L1] = langs(d);
+  doc.setProperties({title: TX.title[L1]});
+  return {blob: doc.output('blob'), name: {ru: 'Put-obrazovaniya', de: 'Bildungsweg-Schweiz', fr: 'Parcours-formation-Suisse', it: 'Percorso-formativo-Svizzera', en: 'Education-pathways-Switzerland'}[L1] + (d.k ? '-' + d.k : '') + '.pdf'};
+}
+const st = document.getElementById('status'); const say = t => { st.textContent = t; };
+const PNG_NAME = () => { const [L1] = langs(D()); return {ru: 'Put-obrazovaniya', de: 'Bildungsweg-Schweiz', fr: 'Parcours-formation-Suisse', it: 'Percorso-formativo-Svizzera', en: 'Education-pathways-Switzerland'}[L1] + (D().k ? '-' + D().k : ''); };
+/* ---------- PNG: тот же лист, нарисованный на canvas (около 200 dpi) ---------- */
+async function pagePng(pg){
+  try { await Promise.all([document.fonts.load('400 20px Manrope'), document.fonts.load('700 20px Manrope')]); } catch (e) {}
+  const k = 8, cv = document.createElement('canvas'); cv.width = Math.round(pg.w * k); cv.height = Math.round(pg.h * k);
+  const c = cv.getContext('2d'); c.scale(k, k); c.fillStyle = '#FFFFFF'; c.fillRect(0, 0, pg.w, pg.h);
+  pg.ops.forEach(o => {
+    if (o.t === 'rect') {
+      c.beginPath(); if (o.r && c.roundRect) c.roundRect(o.x, o.y, o.w, o.h, o.r); else c.rect(o.x, o.y, o.w, o.h);
+      if (o.fill) { c.fillStyle = o.fill; c.fill(); }
+      if (o.stroke) { c.strokeStyle = o.stroke; c.lineWidth = 0.35; c.setLineDash(o.dash ? [1.4, 1] : []); c.stroke(); c.setLineDash([]); }
+    } else if (o.t === 'line') { c.beginPath(); c.moveTo(o.x1, o.y1); c.lineTo(o.x2, o.y2); c.strokeStyle = o.color; c.lineWidth = o.w; c.setLineDash(o.dash ? [1.2, 0.9] : []); c.stroke(); c.setLineDash([]); }
+    else if (o.t === 'tri') { c.beginPath(); c.moveTo(o.p[0][0], o.p[0][1]); c.lineTo(o.p[1][0], o.p[1][1]); c.lineTo(o.p[2][0], o.p[2][1]); c.closePath(); c.fillStyle = o.fill; c.fill(); }
+    else { c.font = (o.b ? '700 ' : '400 ') + (o.size * PT) + 'px Manrope'; c.fillStyle = o.color; c.textAlign = o.align === 'right' ? 'right' : o.align === 'center' ? 'center' : 'left'; c.textBaseline = 'alphabetic'; c.fillText(o.s, o.x, o.y); }
+  });
+  if (window.SVLWM) SVLWM.png(c, pg.w, pg.h, D().lang === "bi" ? "" : D().lang);
+  return new Promise(r => cv.toBlob(r, 'image/png'));
+}
+async function downloadPng(i){
+  const pages = build(D()), pg = pages[i]; if (!pg) return;
+  say('Готую PNG…');
+  try { const blob = await pagePng(pg), a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = PNG_NAME() + (pages.length > 1 ? '-' + (i + 1) : '') + '.png'; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 4000); say('PNG завантажено. Його зручно надіслати в месенджері або поставити на екран телефона.'); }
+  catch (e) { say('Не вдалося зробити PNG. Спробуй ще раз.'); }
+}
+
+async function doPdf(btns, share){
+  btns.forEach(b => b.disabled = true); say('Готую PDF…');
+  try {
+    const {blob, name} = await makePdf();
+    if (share) { const file = new File([blob], name, {type: 'application/pdf'}); await navigator.share({files: [file], title: name}); say('Готово.'); }
+    else { const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = name; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 4000); say('PDF завантажено.'); }
+  } catch (e) { if (e && e.name === 'AbortError') say(''); else if (e && e.message === 'empty') say('Познач хоча б одну частину: схему, словник або шлях дітей.'); else say('Не вдалося зробити PDF. Онови сторінку і спробуй ще раз.'); }
+  btns.forEach(b => b.disabled = false);
+}
+
+/* ---------- форма ---------- */
+const $ = id => document.getElementById(id);
+const ks = Object.keys(K).sort((a, b) => K[a].n.localeCompare(K[b].n, 'uk'));
+$('kanton').innerHTML = '<option value="">Обери кантон</option>' + ks.map(k => `<option value="${k}">${esc(K[k].n)}</option>`).join('');
+const YNOW = new Date().getFullYear(), YRS = []; for (let y = YNOW + 1; y >= YNOW - 22; y--) YRS.push(y);
+function drawKids(){
+  const d = D(), box = $('kids');
+  if (!d.kids.length) { box.innerHTML = '<p class="hint">Поки немає дітей. Натисни «Додати дитину», і в PDF з’явиться шлях за навчальними роками.</p>'; }
+  else box.innerHTML = d.kids.map((k, i) => `<div class="kid" data-i="${i}"><div class="fl"><span class="lb">Ім’я</span><input type="text" data-f="n" value="${esc(k.n || '')}" placeholder="Наприклад, Софія" autocomplete="off"${EX ? ' disabled' : ''}></div><div class="fl"><span class="lb">Місяць народження</span><select data-f="m"${EX ? ' disabled' : ''}><option value="">—</option>${MON.ru.map((m, j) => `<option value="${j + 1}"${+k.m === j + 1 ? ' selected' : ''}>${m}</option>`).join('')}</select></div><div class="fl"><span class="lb">Рік народження</span><select data-f="y"${EX ? ' disabled' : ''}><option value="">—</option>${YRS.map(y => `<option value="${y}"${+k.y === y ? ' selected' : ''}>${y}</option>`).join('')}</select></div><button type="button" class="ib" data-del="${i}" aria-label="Видалити дитину"${EX ? ' disabled' : ''}>×</button></div>`).join('');
+  const t = d.kids.filter(k => k.y && k.m).map(k => { const s = +k.y + (+k.m <= 7 ? 4 : 5); return `${k.n || 'Дитина'}: дитячий садок із серпня ${s}, кінець обов’язкової школи влітку ${s + 11}.`; });
+  $('kidNote').textContent = t.join(' ');
+  $('addKid').disabled = !!EX || d.kids.length >= 6;
+}
+function fill(){
+  const d = D();
+  $('kanton').value = d.k; $('lang').value = d.lang; $('bw').checked = !!d.bw;
+  $('pScheme').checked = d.parts.scheme; $('pGloss').checked = d.parts.gloss; $('pCmp').checked = d.parts.cmp !== false; $('pTr').checked = d.parts.trans !== false; $('pKids').checked = d.parts.kids;
+  $('exbar').hidden = !EX; $('exOn').hidden = !!EX;
+  drawKids(); render();
+}
+function drawTr(){ const tl = LANG_OF[D().k] || 'de'; $('trList').innerHTML = TR.map(r => `<details><summary><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:${TRK[r[0]][1]};flex:none"></span>${esc(r[1])}<small>${TRK[r[0]][0]}</small></summary><p>${esc(r[3])}</p><p><b>Готуватися:</b> ${esc(r[4])}</p><p class="hint">${esc(r[2][tl] || r[2].de)}</p></details>`).join(''); }
+function drawCmp(){ const tl = LANG_OF[D().k] || 'de'; $('cmpList').innerHTML = CMP.map(r => `<details><summary>${esc(r[0])}<small>→ ${esc(r[2][tl] || r[2].de)}</small></summary><p><b>У Швейцарії:</b> ${esc(r[1])}.</p><p>${esc(r[3])}</p></details>`).join(''); }
+function render(){ drawTr(); drawCmp(); $('sheet').innerHTML = build(D()).map((p, i) => `<div class="sheet">${svg(p)}</div><div class="acts"><button type="button" class="btn ghost sm" data-png="${i}">Цю сторінку в PNG</button></div>`).join('') || '<p class="hint">Познач, що має бути в PDF.</p>'; }
+const set = (f) => { f(S); if (EX) f(EX); save(); render(); };
+$('kanton').addEventListener('change', e => set(s => s.k = e.target.value));
+$('lang').addEventListener('change', e => set(s => s.lang = e.target.value));
+$('bw').addEventListener('change', e => set(s => s.bw = e.target.checked));
+[['pScheme', 'scheme'], ['pTr', 'trans'], ['pGloss', 'gloss'], ['pCmp', 'cmp'], ['pKids', 'kids']].forEach(([id, k]) => $(id).addEventListener('change', e => set(s => s.parts[k] = e.target.checked)));
+$('kids').addEventListener('input', e => { const r = e.target.closest('.kid'); if (!r || EX) return; const k = S.kids[+r.dataset.i], f = e.target.dataset.f; k[f] = f === 'n' ? e.target.value : +e.target.value || ''; save(); render(); if (f !== 'n') drawKids(); });
+$('kids').addEventListener('click', e => { const b = e.target.closest('[data-del]'); if (!b || EX) return; S.kids.splice(+b.dataset.del, 1); save(); fill(); });
+$('addKid').addEventListener('click', () => { if (EX) return; S.kids.push({n: '', m: '', y: ''}); save(); drawKids(); const ins = $('kids').querySelectorAll('input'); if (ins.length) ins[ins.length - 1].focus(); });
+$('exOn').addEventListener('click', () => { EX = example(); fill(); window.scrollTo({top: $('exbar').offsetTop - 12, behavior: 'smooth'}); });
+$('exOff').addEventListener('click', () => { EX = null; fill(); });
+const pdfBtns = [$('pdf')];
+$('pdf').addEventListener('click', () => doPdf(pdfBtns));
+$('sheet').addEventListener('click', e => { const b = e.target.closest('[data-png]'); if (b) downloadPng(+b.dataset.png); });
+try { if (navigator.canShare && navigator.canShare({files: [new File(['x'], 'x.pdf', {type: 'application/pdf'})]}) && matchMedia('(pointer:coarse)').matches) { const sb = $('share'); sb.hidden = false; sb.addEventListener('click', () => doPdf(pdfBtns.concat(sb), true)); } } catch (e) {}
+if (/[?&]example\b/.test(location.search)) EX = example();
+fill();
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(render);
+</script>
+<script src="/assets/wmpdf.uk.js"></script>
+<script src="/assets/help.uk.js"></script>
+<script src="/assets/backup.uk.js"></script>
+<script src="/assets/pdffan.uk.js" defer></script>
+<script src="/assets/share.uk.js" defer></script>
+<script src="/assets/samesite.js"></script>
+<!--i18n--><style>#langbar.langbar{position:fixed;bottom:14px;right:14px;z-index:60;display:flex;gap:2px;background:rgba(255,255,255,.92);border:1px solid rgba(0,0,0,.08);border-radius:999px;padding:3px;font:600 12px Manrope,system-ui,sans-serif;box-shadow:0 2px 8px rgba(0,0,0,.08)}#langbar.langbar a{color:#5d554d;padding:5px 9px;border-radius:999px;text-decoration:none;font:inherit;display:inline-block}#langbar.langbar a[aria-current="true"]{background:#2f2924;color:#fff}@media print{.langbar{display:none!important}}</style><div class="langbar" id="langbar" role="navigation" aria-label="Мова / Язык"><a href="/instrumenty/put-obrazovaniya/" hreflang="ru" data-lang="ru">RU</a><a href="/uk/instrumenty/put-obrazovaniya/" hreflang="uk" data-lang="uk" aria-current="true">UA</a></div><script>(function(){var b=document.getElementById('langbar');if(!b)return;b.addEventListener('click',function(e){var a=e.target.closest('a[data-lang]');if(a){try{localStorage.setItem('svoiludiLang',a.dataset.lang)}catch(x){}a.href=a.getAttribute('href').split('#')[0]+location.hash;}});})();</script><!--i18n--></body>
+</html>

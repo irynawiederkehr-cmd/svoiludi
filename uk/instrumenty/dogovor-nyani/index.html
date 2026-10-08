@@ -1,0 +1,365 @@
+<!doctype html>
+<html lang="uk">
+<head><!--i18n--><base href="/instrumenty/dogovor-nyani/"><!--i18n-->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<link rel="icon" href="/fav/favicon.svg" type="image/svg+xml"><link rel="icon" href="/fav/icon-32.png" sizes="32x32"><link rel="apple-touch-icon" href="/fav/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/fonts.css">
+<meta name="description" content="Безкоштовний трудовий договір з нянею у Швейцарії (Arbeitsvertrag Kinderbetreuung im Privathaushalt): заповни українською — отримаєш договір німецькою, французькою або італійською з перекладом українською під кожним пунктом. Випробувальний строк, години, зарплата й відпускні, відпустка, хвороба, страховки UVG і NBU, AHV і спрощена процедура, розірвання за OR. PDF.">
+<link rel="canonical" href="https://svoiludi.ch/uk/instrumenty/dogovor-nyani/">
+<meta property="og:type" content="website"><meta property="og:locale" content="uk_UA"><meta property="og:site_name" content="Свої люди у Швейцарії">
+<meta property="og:title" content="Трудовий договір з нянею · мовою кантону з українським перекладом"><meta property="og:description" content="Заповни українською — отримай трудовий договір з нянею німецькою, французькою або італійською з перекладом. Безкоштовно, дані тільки в тебе.">
+<meta property="og:url" content="https://svoiludi.ch/uk/instrumenty/dogovor-nyani/"><meta property="og:image" content="https://svoiludi.ch/instrumenty/dogovor-nyani/og-image.uk.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="robots" content="noindex, nofollow">
+<title>Трудовий договір з нянею</title>
+<style>
+/* Трудовой договор с няней (08.10.2026): анкета слева, живые листы справа, движок assets/shema.js. */
+:root{
+  --bg:#F4EDE3; --paper:#FFFCF8; --ink:#2F2924; --muted:#7A6E62; --line:#E5D9C9; --soft:#EFE5D7;
+  --brown:#6E4F3C; --mustard:#B98324; --mustard-soft:#F3E3C2; --sage:#4F5E3E; --sage-soft:#E3E8D6; --red:#A0523D;
+  --display:"Forum","Georgia",serif; --sans:"Manrope","Segoe UI",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#221D19; --paper:#2C2621; --ink:#F1E9DF; --muted:#B4A796; --line:#3E362F; --soft:#352E28;
+  --brown:#E1C2A6; --mustard:#E2B45C; --mustard-soft:#3D321F; --sage:#B4BF97; --sage-soft:#2E3226; --red:#E39A85; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#221D19; --paper:#2C2621; --ink:#F1E9DF; --muted:#B4A796; --line:#3E362F; --soft:#352E28;
+  --brown:#E1C2A6; --mustard:#E2B45C; --mustard-soft:#3D321F; --sage:#B4BF97; --sage-soft:#2E3226; --red:#E39A85; color-scheme:dark}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--ink);font:15px/1.55 var(--sans);margin:0}
+.wrap{max-width:1280px;margin:0 auto;padding-inline:16px;padding-block:28px 48px;display:flex;flex-direction:column;gap:24px}
+.eyebrow{font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+h1{font-family:var(--display);font-weight:400;font-size:clamp(2.4rem,6vw,3.6rem);line-height:1;margin:4px 0 10px;text-wrap:balance}
+h2{font-family:var(--display);font-weight:400;font-size:1.55rem;margin:0;text-wrap:balance}
+h3{font-family:var(--display);font-weight:400;font-size:1.22rem;line-height:1.2;margin:0}
+.lead{max-width:66ch;color:var(--muted);margin:0}
+.jump{font-weight:700;color:var(--brown);text-underline-offset:4px}
+.privnote{margin-top:14px;background:var(--sage-soft);border-radius:16px;padding:12px 16px;font-size:.9rem;max-width:90ch}
+.status{font-size:.86rem;color:var(--muted);min-height:1.3em}
+.btn{font:inherit;font-weight:700;font-size:.9rem;border:0;border-radius:999px;padding:10px 18px;cursor:pointer;color:#fff;text-decoration:none;display:inline-flex;align-items:center;gap:6px;background:#6E4F3C;box-shadow:0 8px 18px -8px rgba(110,79,60,.6)}
+.btn.gold{background:#B98324;box-shadow:0 8px 18px -8px rgba(185,131,36,.7)}
+.btn.free{background:#4F5E3E;box-shadow:0 8px 18px -8px rgba(79,94,62,.6)}
+.btn.ghost{background:transparent;color:var(--brown);border:1.5px solid var(--line);box-shadow:none}
+.btn.sm{font-size:.82rem;padding:7px 13px}
+.btn[disabled]{background:var(--soft);color:var(--muted);box-shadow:none;cursor:wait}
+select,input[type=text],input[type=tel],input[type=number],input[type=date],textarea{font:inherit;font-size:.95rem;color:var(--ink);background:var(--paper);border:1.5px solid var(--line);border-radius:12px;padding:9px 12px;width:100%;min-width:0}
+select:focus-visible,input:focus-visible,button:focus-visible,textarea:focus-visible,a:focus-visible{outline:2px solid var(--mustard);outline-offset:2px}
+::placeholder{color:color-mix(in srgb,var(--muted) 70%,transparent)}
+.setup{background:var(--paper);border:1.5px solid var(--line);border-radius:22px;padding:16px 18px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px 18px;align-items:start}
+@media (max-width:1000px){.setup{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.setup{grid-template-columns:1fr}}
+.fl{display:flex;flex-direction:column;gap:6px;min-width:0}
+.fl>.lb{font-size:.8rem;font-weight:700;color:var(--muted);display:flex;align-items:center}
+.seg{display:flex;flex-wrap:wrap;gap:6px}
+.seg button{font:inherit;font-size:.84rem;font-weight:700;border:1.5px solid var(--line);background:var(--paper);color:var(--ink);border-radius:999px;padding:6px 12px;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--sage);border-color:var(--sage);color:#fff}
+.acts{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.exbar{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;background:var(--mustard-soft);border-radius:16px;padding:10px 14px;font-size:.9rem;font-weight:600}
+.work{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:22px;align-items:start}
+@media (max-width:1040px){.work{grid-template-columns:1fr}}
+.form{display:flex;flex-direction:column;gap:14px;min-width:0}
+.sec{background:var(--paper);border:1.5px solid var(--line);border-radius:20px;padding:16px 18px;display:flex;flex-direction:column;gap:12px}
+.sec>h2{font-size:1.3rem;display:flex;align-items:center}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:560px){.g2{grid-template-columns:1fr}}
+.hint{font-size:.84rem;color:var(--muted);margin:0}
+.chk{display:flex;flex-direction:column;gap:8px}
+.chk label{display:flex;gap:10px;align-items:baseline;font-size:.92rem;cursor:pointer}
+.chk input{flex:none;width:18px;height:18px;accent-color:var(--sage);transform:translateY(3px)}
+.chk b{white-space:nowrap}
+.chk small{color:var(--muted)}
+.tog{display:flex;gap:10px;align-items:center;font-size:.92rem;cursor:pointer}
+.tog input{width:18px;height:18px;accent-color:var(--sage)}
+.sheetbox{position:sticky;top:12px;display:flex;flex-direction:column;gap:10px}
+@media (max-width:1040px){.sheetbox{position:static}}
+.sheet{background:#fff;border-radius:6px;box-shadow:0 18px 40px -22px rgba(47,41,36,.45);overflow:hidden}
+.sheet svg{display:block;width:100%;height:auto}
+.imp{background:var(--paper);border:1.5px dashed color-mix(in srgb,var(--sage) 55%,transparent);border-radius:16px;padding:14px 18px;font-size:.88rem;max-width:90ch;margin:0}
+.imp b{color:var(--sage)}
+.guide{display:flex;flex-direction:column;gap:14px;max-width:90ch}
+.guide ul{margin:0;padding-left:20px}
+.guide li{margin:4px 0}
+.credit{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:.8rem;color:var(--muted)}
+.credit a{color:var(--muted)}
+.qh{font:700 .72rem/1 var(--sans);width:20px;height:20px;border-radius:50%;border:1.5px solid var(--line);background:var(--paper);color:var(--brown);cursor:pointer;margin-left:6px;padding:0;flex:none}
+.sheets{display:flex;flex-direction:column;gap:14px}
+.goals{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+@media (max-width:560px){.goals{grid-template-columns:1fr}}
+.goals label{display:flex;gap:10px;align-items:flex-start;background:var(--bg);border:1.5px solid var(--line);border-radius:14px;padding:9px 12px;cursor:pointer;font-size:.92rem}
+.goals input{width:18px;height:18px;accent-color:var(--sage);flex:none;margin-top:2px}
+.goals small{display:block;color:var(--muted)}
+.steps{display:flex;flex-direction:column;gap:8px}
+.steps details{background:var(--paper);border:1.5px solid var(--line);border-radius:16px;padding:10px 16px}
+.steps summary{cursor:pointer;font-weight:700;display:flex;gap:10px;align-items:baseline}
+.steps summary small{font-weight:600;color:var(--muted);margin-left:auto;text-align:right}
+.steps details p,.steps details ul{margin:8px 0 2px;font-size:.93rem}
+.steps details ul{padding-left:20px}
+</style>
+<!--pwa--><link rel="manifest" href="/fav/site.uk.webmanifest"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Свої люди"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="theme-color" content="#4F5E3E"><style id="pa-tiles">/* верхнее меню на телефоне и планшете: прямоугольные плитки с закруглением в два ряда, иконки ставит pwa-app.js (08.10.2026) */html header.top nav[aria-label] a .pa-ni{display:none}@media (max-width:1100px){html header.top .page{flex-wrap:wrap;row-gap:8px}html header.top nav[aria-label]{order:3;width:100%;display:grid!important;grid-template-columns:repeat(var(--pa-cols,3),minmax(0,1fr));gap:8px;overflow:visible;padding:4px 0 12px;margin:0}html header.top nav[aria-label] a{display:flex!important;flex-direction:column;align-items:center;justify-content:center;gap:5px;min-height:62px;padding:9px 6px;border-radius:14px;background:var(--paper,#FFFCF8);border:1px solid color-mix(in srgb,var(--sage,#66704F) 30%,transparent);box-shadow:0 3px 10px -6px rgba(60,70,40,.45);color:var(--ink,#2F2924)!important;font:600 .78rem/1.18 var(--body,system-ui);text-align:center;white-space:normal;text-decoration:none;-webkit-tap-highlight-color:transparent}html header.top nav[aria-label] a::after{content:none!important}html header.top nav[aria-label] a .pa-ni{display:block;width:22px;height:22px;fill:none;stroke:var(--sage,#66704F);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}html header.top nav[aria-label] a[aria-current="page"]{background:var(--sage,#66704F);border-color:var(--sage,#66704F);color:var(--paper,#FFFCF8)!important;box-shadow:0 4px 12px -6px rgba(60,70,40,.6)}html header.top nav[aria-label] a[aria-current="page"] .pa-ni{stroke:var(--paper,#FFFCF8)}html header.top nav[aria-label] a:active{transform:scale(.97)}}/* кнопки сайта — прямоугольные с закруглением, как плитки меню (решение Ирины 08.10.2026); значки-метки (образец, теги, «?») остаются круглыми */:is(.navcta,.btn,.shr-btn,.pl-act a,.pl-act button,.qa,.more,.listbar button,.leaflet-popup-content button,.calmenu a,.calmenu button,.go-free,.find,.confirm,.monthics,.addb,.mbtn,.example,.viewsw,#langbar.langbar,.pa-go,.pa-x,.pa-foot){border-radius:12px!important}:is(.viewsw button,.seg button,.chips button,#langbar.langbar a,.cal-nav button){border-radius:9px!important}</style><script src="/assets/pwa-app.js" defer></script><!--pwa--><!--i18n--><link rel="alternate" hreflang="ru" href="https://svoiludi.ch/instrumenty/dogovor-nyani/"><link rel="alternate" hreflang="uk" href="https://svoiludi.ch/uk/instrumenty/dogovor-nyani/"><!--i18n--></head>
+<body>
+<style>#fields input:not([type=checkbox]),#fields select{width:100%}.chk-err{color:#8A3F2D;background:#F6E0D9;border-radius:12px;padding:10px 12px;font-size:.88rem}</style>
+<div class="wrap">
+  <header>
+    <p style="margin:0 0 14px"><a class="jump" href="https://svoiludi.ch/uk/instrumenty/">← Усі корисні інструменти · Свої люди у Швейцарії</a></p>
+    <div class="eyebrow">Няня · домашній персонал</div>
+    <h1>Трудовий договір з нянею</h1>
+    <p class="lead">Трудовий договір між родиною і нянею, яка працює в родини вдома. Заповнюєш українською — отримуєш договір мовою кантону (німецькою, французькою або італійською) і, за бажанням, український переклад під кожним пунктом, щоб обидві сторони розуміли одне й те саме. Випробувальний строк, години, зарплата, відпустка, хвороба, страховки, внески і розірвання — за швейцарським законом. Підходить і родині, і няні. PDF безкоштовно.</p>
+    <div class="privnote"><b>Твої дані тільки в тебе.</b> Усе, що ти вписуєш, зберігається тільки в твоєму браузері на цьому пристрої, договір складається прямо на пристрої. Реєстрація не потрібна.</div>
+    <div data-fan="dogovor-nyani"></div>
+  </header>
+  <div class="setup">
+    <div class="fl"><span class="lb">Кантон<button type="button" class="qh" data-help="kt" aria-label="Підказка: кантон" aria-expanded="false">?</button></span><select id="kt"></select></div>
+    <div class="fl"><span class="lb">Мова договору<button type="button" class="qh" data-help="lang" aria-label="Підказка: мова договору" aria-expanded="false">?</button></span><select id="lang"><option value="de+ru">Deutsch + українська</option><option value="fr+ru">Français + українська</option><option value="it+ru">Italiano + українська</option><option value="de">Deutsch</option><option value="fr">Français</option><option value="it">Italiano</option></select></div>
+    <div class="fl"><span class="lb">Друк</span><label class="tog"><input type="checkbox" id="bw"> Без кольору, для дешевого друку</label></div>
+  </div>
+  <div class="exbar" id="exbar" hidden><span>Це приклад. Так виглядатиме твій файл.</span><button type="button" class="btn sm" id="exOff">Повернутися до моїх даних</button></div>
+  <div class="work">
+    <div class="form" id="fields"></div>
+    <div class="sheetbox">
+      <div class="acts"><button type="button" class="btn gold" id="pdf">Завантажити PDF</button><button type="button" class="btn ghost sm" id="share" hidden>Надіслати</button><button type="button" class="btn ghost sm" id="exOn">Подивитися на прикладі</button></div>
+      <div class="sheets" id="sheet" aria-label="Попередній перегляд аркушів"></div>
+      <div class="status" id="status" role="status"></div>
+    </div>
+  </div>
+  <p class="imp"><b>Важливо.</b> Ми не юристи. Це зразок для прикладу й особистого використання, а не офіційний документ і не юридична консультація, тому на кожній сторінці стоїть штамп «Зразок». Перед підписанням покажи договір юристу, у профспілці або в консультації для роботодавців домашнього персоналу — список у «<a href="https://svoiludi.ch/uk/shveycariya/profsoyuzy/">Профспілки й консультації</a>». Цифри й ставки орієнтовні (2026) — уточнюй і перевіряй їх сама: у кантоні, у своїй касі AHV і в типовому договорі кантону для домашнього персоналу (Normalarbeitsvertrag). Автор не несе відповідальності за достовірність. Договір підписують обидві сторони, кожна зберігає свій примірник. Що ще оформлює родина — у темі <a href="https://svoiludi.ch/uk/shveycariya/domashniy-personal/">«Домашній персонал»</a>, а зарплату з внесками порахує «Розрахунок зарплати».</p>
+  <div class="share-slot" data-url="https://svoiludi.ch/uk/instrumenty/dogovor-nyani/" data-lead="Перешли родині або няні. У посиланні немає твоїх даних." data-text="Привіт! Тут можна безкоштовно зробити договір з нянею за швейцарськими правилами: заповнюєш українською, отримуєш німецькою або французькою з українським перекладом. https://svoiludi.ch/uk/instrumenty/dogovor-nyani/"></div>
+  <p class="credit"><span>Свої люди у Швейцарії · svoiludi.ch</span><a href="https://svoiludi.ch/uk/privacy/">Політика конфіденційності</a></p>
+</div>
+
+<script src="/assets/kantony.uk.js"></script>
+<script src="/assets/lib/jspdf.umd.min.js"></script>
+<script src="/assets/shema.uk.js"></script>
+<script>
+window.HELP = {
+  kt: '<p>Кантон, де живе родина й працює няня. За ним сама ставиться мова договору й підставляється типовий договір кантону для домашнього персоналу (Normalarbeitsvertrag), а форма попередить про мінімальну зарплату кантону.</p>',
+  lang: '<p>Договір підписують мовою кантону — він і діє. Варіант «+ українська» додає під кожним пунктом переклад, щоб обидві сторони розуміли одне й те саме. У договорі так і написано: у разі розбіжностей діє текст мовою кантону.</p>',
+  probe: '<p>Випробувальний строк — до 3 місяців. Якщо в договорі нічого не написано, за законом це 1 місяць. У цей час договір можна розірвати за 7 днів (<a href="https://www.fedlex.admin.ch/eli/cc/27/317_321_377/de#art_335_b" target="_blank" rel="noopener">OR ст. 335b</a>).</p>',
+  hours: '<p>Скільки годин на тиждень у середньому. Від 8 годин на тиждень родина страхує няню ще й від нещасних випадків поза роботою (NBU), внесок за це можна утримувати із зарплати. Час, коли няня має бути в домі (наприклад, поки дитина спить), — робочий час.</p>',
+  lohn: '<p>Брутто — до внесків. Мінімальні зарплати кантонів діють і для нянь (2026, за годину): Женева 24.59, Базель-Штадт 22.20, Юра 21.40, Невшатель 21.35, Тічино 20.00–20.50. Орієнтир — мінімум для домашнього персоналу NAV Hauswirtschaft 2026: 20.35 без досвіду, 22.30 з досвідом від 4 років, 24.55 з дипломом EFZ (для нянь, у яких головне — діти, він не обов’язковий). Скільки прийде на руки — в інструменті «Розрахунок зарплати».</p>',
+  ferien: '<p>Не менше 4 тижнів на рік, до 20 років — 5 тижнів (<a href="https://www.fedlex.admin.ch/eli/cc/27/317_321_377/de#art_329_a" target="_blank" rel="noopener">OR ст. 329a</a>). При погодинній оплаті відпустка оплачується надбавкою до ставки: 8,33 % за 4 тижні, 10,64 % за 5 тижнів — окремим рядком у розрахунковому листку.</p>',
+  ktg: '<p>Страховка на випадок хвороби (Krankentaggeld) виплачує частину зарплати, якщо няня довго хворіє. Без неї родина платить зарплату сама обмежений час (OR ст. 324a): у перший рік роботи не менше 3 тижнів. У Женеві така страховка обов’язкова. Де знайти умови: поліс страхової (Wartefrist, відсоток).</p>',
+  vereinf: '<p>Спрощена процедура (vereinfachtes Abrechnungsverfahren) — якщо зарплата няні до 22 680 франків на рік, а всіх працівників родини до 60 480. Родина розраховується з касою AHV раз на рік, каса утримує й податок 5 %. Запитай у своїй касі AHV.</p>',
+  kuend: '<p>За законом після випробувального строку: у перший рік — 1 місяць, з 2-го по 9-й рік — 2 місяці, далі — 3 місяці, завжди на кінець місяця (<a href="https://www.fedlex.admin.ch/eli/cc/27/317_321_377/de#art_335_c" target="_blank" rel="noopener">OR ст. 335c</a>). Можна домовитися про інший строк, однаковий для обох сторін. Розірвання — письмово, краще рекомендованим листом.</p>'
+};
+const KEY = 'dogovorNyani.v1';
+const TODAY = new Date().toISOString().slice(0, 10);
+let S = load(), EX = null;
+function langOf(k){ const K = window.KANTONY || {}; return k && K[k] ? ({de: 'de', fr: 'fr', it: 'it'}[K[k].l] || 'de') : 'de'; }
+function blank(){ let k = ''; try { k = localStorage.getItem('svoiludi.kanton') || ''; } catch (e) {} return {kt: k, lang: langOf(k), ru: true, g: 'f',
+  fam: {name: '', addr: '', city: '', tel: ''}, ny: {name: '', addr: '', city: '', born: '', ahv: ''}, kids: '', start: TODAY, befr: false, end: '', probe: 1,
+  hours: 20, sched: '', tasks: ['care', 'meals', 'out'], other: '', art: 'h', rate: 25, month: 3000, ferien: 4, m13: false, payday: 'end', paym: 'bank', baby: '', fahr: false, essen: true,
+  ktg: false, ktgP: 80, ktgW: 30, ktgH: 'half', vereinf: true, kuend: 'law', mehr: '', ort: ''}; }
+function load(){ try { const s = JSON.parse(localStorage.getItem(KEY)); if (s && typeof s === 'object') return Object.assign(blank(), s); } catch (e) {} return blank(); }
+function save(){ if (EX) return; try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} }
+const D = () => EX || S;
+const CN = {ZH: ['Zürich', 'Zurich', 'Zurigo'], BE: ['Bern', 'Berne', 'Berna'], LU: ['Luzern', 'Lucerne', 'Lucerna'], UR: ['Uri', 'Uri', 'Uri'], SZ: ['Schwyz', 'Schwytz', 'Svitto'], OW: ['Obwalden', 'Obwald', 'Obvaldo'], NW: ['Nidwalden', 'Nidwald', 'Nidvaldo'], GL: ['Glarus', 'Glaris', 'Glarona'], ZG: ['Zug', 'Zoug', 'Zugo'], FR: ['Freiburg', 'Fribourg', 'Friburgo'], SO: ['Solothurn', 'Soleure', 'Soletta'], BS: ['Basel-Stadt', 'Bâle-Ville', 'Basilea Città'], BL: ['Basel-Landschaft', 'Bâle-Campagne', 'Basilea Campagna'], SH: ['Schaffhausen', 'Schaffhouse', 'Sciaffusa'], AR: ['Appenzell Ausserrhoden', 'Appenzell Rhodes-Extérieures', 'Appenzello Esterno'], AI: ['Appenzell Innerrhoden', 'Appenzell Rhodes-Intérieures', 'Appenzello Interno'], SG: ['St. Gallen', 'Saint-Gall', 'San Gallo'], GR: ['Graubünden', 'Grisons', 'Grigioni'], AG: ['Aargau', 'Argovie', 'Argovia'], TG: ['Thurgau', 'Thurgovie', 'Turgovia'], TI: ['Tessin', 'Tessin', 'Ticino'], VD: ['Waadt', 'Vaud', 'Vaud'], VS: ['Wallis', 'Valais', 'Vallese'], NE: ['Neuenburg', 'Neuchâtel', 'Neuchâtel'], GE: ['Genf', 'Genève', 'Ginevra'], JU: ['Jura', 'Jura', 'Giura']};
+const MINW = {GE: 24.59, BS: 22.20, JU: 21.40, NE: 21.35, TI: 20.00};
+const KTN = k => ((window.KANTONY || {})[k] || {}).n || k;
+const money = n => { const [a, b] = (Math.round((+n || 0) * 100) / 100).toFixed(2).split('.'); return a.replace(/\B(?=(\d{3})+(?!\d))/g, '’') + '.' + b; };
+const dmy = iso => { const [y, m, d] = String(iso || '').split('-'); return d ? `${d}.${m}.${y}` : '____________'; };
+const yearly = d => d.art === 'h' ? (+d.rate || 0) * (+d.hours || 0) * 52 * (1 + (d.ferien == 5 ? 0.1064 : 0.0833)) : (+d.month || 0) * (d.m13 ? 13 : 12);
+
+/* ---------- тексты договора: de, fr, it, ru ---------- */
+const TASKS = {care: ['Betreuung und Beaufsichtigung der Kinder', 'garde et surveillance des enfants', 'custodia e sorveglianza dei bambini', 'нагляд і догляд за дітьми'],
+  meals: ['Zubereitung von Mahlzeiten für die Kinder', 'préparation des repas des enfants', 'preparazione dei pasti per i bambini', 'приготування їжі дітям'],
+  out: ['Begleitung zu Schule, Kita, Spielplatz und Freizeitaktivitäten', 'accompagnement à l’école, à la crèche, au parc et aux activités', 'accompagnamento a scuola, al nido, al parco e alle attività', 'відвести й забрати зі школи, садочка, на майданчик і заняття'],
+  hw: ['Hilfe bei den Hausaufgaben', 'aide aux devoirs', 'aiuto con i compiti', 'допомога з домашніми завданнями'],
+  house: ['leichte Hausarbeiten im Zusammenhang mit den Kindern (Kinderzimmer, Kinderwäsche)', 'petits travaux ménagers liés aux enfants (chambre, linge des enfants)', 'piccoli lavori domestici legati ai bambini (cameretta, bucato dei bambini)', 'легкі домашні справи, пов’язані з дітьми (дитяча кімната, дитячі речі)'],
+  lang: ['Sprachförderung: Gespräche mit den Kindern auf Russisch', 'conversation avec les enfants en russe', 'conversazione con i bambini in russo', 'спілкування з дітьми російською мовою']};
+const LIDX = {de: 0, fr: 1, it: 2, ru: 3};
+function txt(L, d){
+  const f = d.g === 'f', ktn = (L === 'ru' ? KTN(d.kt) : (CN[d.kt] || [])[{de: 0, fr: 1, it: 2}[L]]) || '____', vf = d.vereinf && yearly(d) <= 22680, nm = (a, b) => f ? a : b;
+  const N = {de: nm('die Betreuerin', 'der Betreuer'), fr: nm('l’employée', 'l’employé'), it: nm('la collaboratrice', 'il collaboratore'), ru: 'няня'}[L];
+  const Nc = N[0].toUpperCase() + N.slice(1), fer = d.ferien == 5 ? '10,64' : '8,33', ferX = money((+d.rate || 0) * (d.ferien == 5 ? 0.1064 : 0.0833));
+  const tasks = d.tasks.map(k => TASKS[k][LIDX[L]]).concat(d.other ? [d.other] : []).join('; ');
+  const nbu = (+d.hours || 0) >= 8, bvg = yearly(d) > 22680, kids = d.kids || '____________', place = d.fam.city || '____________';
+  const pay = d.payday === 'end' ? {de: 'Ende Monat', fr: 'à la fin du mois', it: 'alla fine del mese', ru: 'наприкінці місяця'}[L] : {de: `am ${d.payday}. des Monats`, fr: `le ${d.payday} du mois`, it: `il ${d.payday} del mese`, ru: `${d.payday}-го числа`}[L];
+  const how = d.paym === 'bank' ? {de: 'auf das Bankkonto überwiesen', fr: 'versé sur le compte bancaire', it: 'versato sul conto bancario', ru: 'переказується на банківський рахунок'}[L] : {de: 'bar gegen Quittung bezahlt', fr: 'payé en espèces contre quittance', it: 'pagato in contanti contro quietanza', ru: 'виплачується готівкою під розписку'}[L];
+  const kn = d.kuend === 'law' ? null : +d.kuend;
+  const T = {
+    de: [
+      ['Beginn und Dauer', `Das Arbeitsverhältnis beginnt am ${dmy(d.start)}. ` + (d.befr ? `Es ist bis zum ${dmy(d.end)} befristet und endet ohne Kündigung.` : 'Es wird auf unbestimmte Zeit abgeschlossen.')],
+      ['Probezeit', +d.probe ? `Die ersten ${d.probe} Monat${d.probe > 1 ? 'e' : ''} gelten als Probezeit. Während der Probezeit kann das Arbeitsverhältnis beidseitig mit einer Frist von 7 Tagen gekündigt werden.` : 'Es wird keine Probezeit vereinbart.'],
+      ['Aufgaben', `${Nc} betreut die Kinder ${kids} im Haushalt der Familie in ${place}. Zu den Aufgaben gehören: ${tasks}.`],
+      ['Arbeitszeit', `Die Arbeitszeit beträgt durchschnittlich ${d.hours} Stunden pro Woche${d.sched ? ` (${d.sched})` : ''}. Zeiten, in denen ${N} im Haushalt anwesend sein muss, zum Beispiel während die Kinder schlafen, gelten als Arbeitszeit. Überstunden werden im Einvernehmen durch Freizeit von gleicher Dauer ausgeglichen oder mit dem Lohn und einem Zuschlag von 25 % bezahlt (Art. 321c OR).`],
+      ['Lohn', (d.art === 'h' ? `Der Bruttolohn beträgt CHF ${money(d.rate)} pro Stunde. Dazu kommt eine Ferienentschädigung von ${fer} % (CHF ${ferX} pro Stunde), die in der Lohnabrechnung separat ausgewiesen wird.` : `Der Bruttolohn beträgt CHF ${money(d.month)} pro Monat.` + (d.m13 ? ' Zusätzlich wird ein 13. Monatslohn bezahlt, im Eintritts- und Austrittsjahr anteilsmässig.' : '')) + ` Der Lohn wird ${pay} ${how}. ${Nc} erhält jeden Monat eine Lohnabrechnung.` + (d.baby ? ` Abendeinsätze ausserhalb der vereinbarten Arbeitszeit werden mit CHF ${money(d.baby)} pro Stunde vergütet.` : '')],
+      ...(d.fahr || d.essen ? [['Spesen und Verpflegung', [d.fahr ? 'Fahrkosten, die im Auftrag der Familie entstehen, werden gegen Beleg erstattet.' : '', d.essen ? `Während der Arbeitszeit isst ${N} kostenlos mit den Kindern.` : ''].filter(Boolean).join(' ')]] : []),
+      ['Ferien und Feiertage', `${Nc} hat Anspruch auf ${d.ferien} Wochen bezahlte Ferien pro Jahr (bis zum vollendeten 20. Altersjahr mindestens 5 Wochen). Die Ferien werden gemeinsam und rechtzeitig festgelegt, mindestens zwei Wochen davon zusammenhängend.` + (d.art === 'h' ? ' Beim Stundenlohn sind die Ferien mit der Ferienentschädigung (Ziffer 5) abgegolten.' : '') + ` Der 1. August ist ein bezahlter Feiertag. Für die übrigen Feiertage gilt die Regelung des Kantons ${ktn}.`],
+      ['Krankheit und Unfall', (d.ktg ? `Die Familie schliesst eine Krankentaggeldversicherung ab, die ${d.ktgP} % des Lohnes nach einer Wartefrist von ${d.ktgW} Tagen deckt. Während der Wartefrist zahlt die Familie ${d.ktgP} % des Lohnes. Die Prämie trägt ${d.ktgH === 'half' ? 'je zur Hälfte die Familie und ' + N : 'die Familie'}.` : `Bei unverschuldeter Verhinderung an der Arbeit wegen Krankheit oder Unfall zahlt die Familie den Lohn nach Art. 324a OR, sofern das Arbeitsverhältnis mehr als drei Monate gedauert hat oder für mehr als drei Monate eingegangen ist: im ersten Dienstjahr während drei Wochen, danach für eine angemessene längere Zeit.`) + ` Die Familie versichert ${N} gegen Berufsunfälle (UVG).` + (nbu ? ` Da die wöchentliche Arbeitszeit mindestens 8 Stunden beträgt, ist ${N} auch gegen Nichtberufsunfälle versichert; die Prämie dafür wird vom Lohn abgezogen.` : '')],
+      ['Sozialversicherungen und Steuern', `Die Familie meldet ${N} innert 30 Tagen bei der AHV-Ausgleichskasse an und zieht die gesetzlichen Beiträge (AHV/IV/EO/ALV) vom Lohn ab.` + (vf ? ' Die Abrechnung erfolgt im vereinfachten Verfahren; dabei werden 5 % Quellensteuer vom Lohn abgezogen und über die Ausgleichskasse abgerechnet.' : '') + (bvg ? ` Da der Jahreslohn voraussichtlich über CHF 22’680 liegt, wird ${N} in der beruflichen Vorsorge (BVG) versichert.` : '') + ` ${Nc} erhält jedes Jahr einen Lohnausweis.`],
+      ['Kündigung', (d.befr ? 'Ein befristetes Arbeitsverhältnis kann vorzeitig nur aus wichtigem Grund aufgelöst werden. ' : '') + (kn ? `Nach der Probezeit kann das Arbeitsverhältnis von beiden Seiten mit einer Frist von ${kn} Monat${kn > 1 ? 'en' : ''} auf das Ende eines Monats gekündigt werden.` : 'Nach der Probezeit kann das Arbeitsverhältnis von beiden Seiten mit den gesetzlichen Fristen auf das Ende eines Monats gekündigt werden: im ersten Dienstjahr 1 Monat, im 2. bis 9. Dienstjahr 2 Monate, danach 3 Monate (Art. 335c OR).') + ' Die Kündigung erfolgt schriftlich.'],
+      ['Schweigepflicht und Schlüssel', `${Nc} behandelt alles, was ${f ? 'sie' : 'er'} über die Familie erfährt, vertraulich, auch nach Ende des Arbeitsverhältnisses. Erhaltene Schlüssel werden am letzten Arbeitstag zurückgegeben.`],
+      ...(d.mehr ? [['Weitere Vereinbarungen', d.mehr]] : []),
+      ['Schlussbestimmungen', `Änderungen dieses Vertrags bedürfen der Schriftform. Im Übrigen gelten das Obligationenrecht (OR) und der Normalarbeitsvertrag für Hausangestellte des Kantons ${ktn}, soweit dieser Vertrag nichts anderes regelt. Jede Partei erhält ein unterzeichnetes Exemplar.`]
+    ],
+    fr: [
+      ['Début et durée', `Les rapports de travail commencent le ${dmy(d.start)}. ` + (d.befr ? `Ils sont conclus pour une durée déterminée jusqu’au ${dmy(d.end)} et prennent fin sans résiliation.` : 'Ils sont conclus pour une durée indéterminée.')],
+      ['Temps d’essai', +d.probe ? `${d.probe === 1 ? 'Le premier mois est considéré' : 'Les ' + d.probe + ' premiers mois sont considérés'} comme temps d’essai. Pendant le temps d’essai, chaque partie peut résilier le contrat moyennant un délai de 7 jours.` : 'Aucun temps d’essai n’est convenu.'],
+      ['Tâches', `${Nc} garde les enfants ${kids} au domicile de la famille à ${place}. Les tâches comprennent : ${tasks}.`],
+      ['Temps de travail', `La durée du travail est en moyenne de ${d.hours} heures par semaine${d.sched ? ` (${d.sched})` : ''}. Le temps pendant lequel ${N} doit être ${f ? 'présente' : 'présent'} au domicile, par exemple pendant le sommeil des enfants, est du temps de travail. Les heures supplémentaires sont compensées d’entente par un congé de même durée ou payées avec le salaire et un supplément de 25 % (art. 321c CO).`],
+      ['Salaire', (d.art === 'h' ? `Le salaire brut est de CHF ${money(d.rate)} par heure. S’y ajoute une indemnité de vacances de ${fer} % (CHF ${ferX} par heure), indiquée séparément sur le décompte de salaire.` : `Le salaire brut est de CHF ${money(d.month)} par mois.` + (d.m13 ? ' Un 13e salaire est versé en plus, au prorata l’année d’entrée et de sortie.' : '')) + ` Le salaire est ${how} ${pay}. ${Nc} reçoit chaque mois un décompte de salaire.` + (d.baby ? ` Les gardes en soirée en dehors du temps convenu sont rémunérées CHF ${money(d.baby)} par heure.` : '')],
+      ...(d.fahr || d.essen ? [['Frais et repas', [d.fahr ? 'Les frais de transport engagés pour la famille sont remboursés sur justificatif.' : '', d.essen ? `Pendant le temps de travail, ${N} mange gratuitement avec les enfants.` : ''].filter(Boolean).join(' ')]] : []),
+      ['Vacances et jours fériés', `${Nc} a droit à ${d.ferien} semaines de vacances payées par année (au moins 5 semaines jusqu’à 20 ans révolus). Les vacances sont fixées d’un commun accord et à temps, dont au moins deux semaines consécutives.` + (d.art === 'h' ? ' Avec un salaire horaire, les vacances sont payées par l’indemnité de vacances (point 5).' : '') + ` Le 1er août est un jour férié payé. Pour les autres jours fériés, la réglementation du canton de ${ktn} s’applique.`],
+      ['Maladie et accident', (d.ktg ? `La famille conclut une assurance perte de gain maladie couvrant ${d.ktgP} % du salaire après un délai d’attente de ${d.ktgW} jours. Pendant le délai d’attente, la famille verse ${d.ktgP} % du salaire. La prime est payée ${d.ktgH === 'half' ? 'pour moitié par la famille et pour moitié par ' + N : 'par la famille'}.` : `En cas d’empêchement de travailler non fautif pour cause de maladie ou d’accident, la famille verse le salaire selon l’art. 324a CO, si les rapports de travail ont duré plus de trois mois ou ont été conclus pour plus de trois mois : trois semaines pendant la première année de service, puis pour une période plus longue fixée équitablement.`) + ` La famille assure ${N} contre les accidents professionnels (LAA).` + (nbu ? ` La durée de travail hebdomadaire étant d’au moins 8 heures, ${N} est aussi ${f ? 'assurée' : 'assuré'} contre les accidents non professionnels ; la prime est déduite du salaire.` : '')],
+      ['Assurances sociales et impôts', `La famille annonce ${N} à la caisse de compensation AVS dans les 30 jours et déduit du salaire les cotisations légales (AVS/AI/APG/AC).` + (vf ? ' Le décompte se fait selon la procédure simplifiée ; 5 % d’impôt à la source sont déduits du salaire et décomptés par la caisse de compensation.' : '') + (bvg ? ` Le salaire annuel dépassant probablement CHF 22’680, ${N} est ${f ? 'assurée' : 'assuré'} dans la prévoyance professionnelle (LPP).` : '') + ` ${Nc} reçoit chaque année un certificat de salaire.`],
+      ['Résiliation', (d.befr ? 'Un contrat de durée déterminée ne peut être résilié avant terme que pour justes motifs. ' : '') + (kn ? `Après le temps d’essai, chaque partie peut résilier le contrat moyennant un délai de ${kn} mois pour la fin d’un mois.` : 'Après le temps d’essai, chaque partie peut résilier le contrat moyennant les délais légaux pour la fin d’un mois : 1 mois pendant la première année de service, 2 mois de la 2e à la 9e année, 3 mois ensuite (art. 335c CO).') + ' La résiliation se fait par écrit.'],
+      ['Discrétion et clés', `${Nc} garde confidentiel tout ce qu’${f ? 'elle' : 'il'} apprend sur la famille, aussi après la fin des rapports de travail. Les clés reçues sont rendues le dernier jour de travail.`],
+      ...(d.mehr ? [['Autres conventions', d.mehr]] : []),
+      ['Dispositions finales', `Toute modification du présent contrat requiert la forme écrite. Pour le reste, le Code des obligations (CO) et le contrat-type de travail pour le personnel de maison du canton de ${ktn} s’appliquent, sauf disposition contraire du présent contrat. Chaque partie reçoit un exemplaire signé.`]
+    ],
+    it: [
+      ['Inizio e durata', `Il rapporto di lavoro inizia il ${dmy(d.start)}. ` + (d.befr ? `È concluso a tempo determinato fino al ${dmy(d.end)} e termina senza disdetta.` : 'È concluso a tempo indeterminato.')],
+      ['Periodo di prova', +d.probe ? `${d.probe === 1 ? 'Il primo mese vale' : 'I primi ' + d.probe + ' mesi valgono'} come periodo di prova. Durante il periodo di prova ciascuna parte può disdire il contratto con un preavviso di 7 giorni.` : 'Non è convenuto alcun periodo di prova.'],
+      ['Compiti', `${Nc} si occupa dei bambini ${kids} nell’economia domestica della famiglia a ${place}. I compiti comprendono: ${tasks}.`],
+      ['Orario di lavoro', `L’orario di lavoro è in media di ${d.hours} ore settimanali${d.sched ? ` (${d.sched})` : ''}. Il tempo in cui ${N} deve essere presente in casa, per esempio mentre i bambini dormono, è tempo di lavoro. Le ore supplementari sono compensate di comune accordo con tempo libero di uguale durata o pagate con il salario e un supplemento del 25 % (art. 321c CO).`],
+      ['Salario', (d.art === 'h' ? `Il salario lordo è di CHF ${money(d.rate)} all’ora. Si aggiunge un’indennità per vacanze del ${fer} % (CHF ${ferX} all’ora), indicata separatamente nel conteggio del salario.` : `Il salario lordo è di CHF ${money(d.month)} al mese.` + (d.m13 ? ' È inoltre versata una 13a mensilità, pro rata nell’anno di entrata e di uscita.' : '')) + ` Il salario è ${how} ${pay}. ${Nc} riceve ogni mese un conteggio del salario.` + (d.baby ? ` Le sere di custodia fuori dall’orario convenuto sono pagate CHF ${money(d.baby)} all’ora.` : '')],
+      ...(d.fahr || d.essen ? [['Spese e pasti', [d.fahr ? 'Le spese di trasporto sostenute per la famiglia sono rimborsate su giustificativo.' : '', d.essen ? `Durante l’orario di lavoro ${N} mangia gratuitamente con i bambini.` : ''].filter(Boolean).join(' ')]] : []),
+      ['Vacanze e giorni festivi', `${Nc} ha diritto a ${d.ferien} settimane di vacanze pagate all’anno (almeno 5 settimane fino ai 20 anni compiuti). Le vacanze sono fissate di comune accordo e per tempo, di cui almeno due settimane consecutive.` + (d.art === 'h' ? ' Con il salario orario le vacanze sono pagate con l’indennità per vacanze (punto 5).' : '') + ` Il 1° agosto è un giorno festivo pagato. Per gli altri giorni festivi vale la regolamentazione del Cantone ${ktn}.`],
+      ['Malattia e infortunio', (d.ktg ? `La famiglia stipula un’assicurazione d’indennità giornaliera per malattia che copre il ${d.ktgP} % del salario dopo un periodo d’attesa di ${d.ktgW} giorni. Durante il periodo d’attesa la famiglia paga il ${d.ktgP} % del salario. Il premio è pagato ${d.ktgH === 'half' ? 'per metà dalla famiglia e per metà da ' + N : 'dalla famiglia'}.` : `In caso di impedimento al lavoro senza sua colpa per malattia o infortunio, la famiglia paga il salario secondo l’art. 324a CO, se il rapporto di lavoro è durato più di tre mesi o è stato concluso per più di tre mesi: tre settimane nel primo anno di servizio, poi per un periodo più lungo adeguato.`) + ` La famiglia assicura ${N} contro gli infortuni professionali (LAINF).` + (nbu ? ` Poiché l’orario settimanale è di almeno 8 ore, ${N} è assicurat${f ? 'a' : 'o'} anche contro gli infortuni non professionali; il relativo premio è dedotto dal salario.` : '')],
+      ['Assicurazioni sociali e imposte', `La famiglia annuncia ${N} alla cassa di compensazione AVS entro 30 giorni e deduce dal salario i contributi legali (AVS/AI/IPG/AD).` + (vf ? ' Il conteggio avviene con la procedura semplificata; il 5 % d’imposta alla fonte è dedotto dal salario e conteggiato tramite la cassa di compensazione.' : '') + (bvg ? ` Poiché il salario annuo supera presumibilmente CHF 22’680, ${N} è assicurat${f ? 'a' : 'o'} nella previdenza professionale (LPP).` : '') + ` ${Nc} riceve ogni anno un certificato di salario.`],
+      ['Disdetta', (d.befr ? 'Un contratto a tempo determinato può essere sciolto anticipatamente solo per cause gravi. ' : '') + (kn ? `Dopo il periodo di prova ciascuna parte può disdire il contratto con un preavviso di ${kn} mes${kn > 1 ? 'i' : 'e'} per la fine di un mese.` : 'Dopo il periodo di prova ciascuna parte può disdire il contratto con i termini legali per la fine di un mese: 1 mese nel primo anno di servizio, 2 mesi dal 2° al 9° anno, poi 3 mesi (art. 335c CO).') + ' La disdetta avviene per iscritto.'],
+      ['Riservatezza e chiavi', `${Nc} tratta in modo confidenziale tutto ciò che apprende sulla famiglia, anche dopo la fine del rapporto di lavoro. Le chiavi ricevute sono restituite l’ultimo giorno di lavoro.`],
+      ...(d.mehr ? [['Altri accordi', d.mehr]] : []),
+      ['Disposizioni finali', `Le modifiche del presente contratto richiedono la forma scritta. Per il resto si applicano il Codice delle obbligazioni (CO) e il contratto normale di lavoro per il personale domestico del Cantone ${ktn}, salvo diversa disposizione del presente contratto. Ciascuna parte riceve un esemplare firmato.`]
+    ],
+    ru: [
+      ['Початок і строк', `Робота починається ${dmy(d.start)}. ` + (d.befr ? `Договір строковий — до ${dmy(d.end)}, закінчується без розірвання.` : 'Договір безстроковий.')],
+      ['Випробувальний термін', +d.probe ? `Перші ${d.probe} міс. — випробувальний строк. У цей час кожна сторона може розірвати договір, попередивши за 7 днів.` : 'Випробувального строку немає.'],
+      ['Обов’язки', `Няня наглядає за дітьми (${kids}) у домі родини в ${place}. До обов’язків входить: ${tasks}.`],
+      ['Робочий час', `У середньому ${d.hours} годин на тиждень${d.sched ? ` (${d.sched})` : ''}. Час, коли няня має бути в домі, наприклад поки діти сплять, — робочий час. Понаднормові за домовленістю компенсуються таким самим вільним часом або оплачуються з надбавкою 25 % (OR ст. 321c).`],
+      ['Зарплата', (d.art === 'h' ? `Брутто CHF ${money(d.rate)} за годину. Плюс відпускні ${fer} % (CHF ${ferX} за годину) окремим рядком у розрахунковому листку.` : `Брутто CHF ${money(d.month)} на місяць.` + (d.m13 ? ' Плюс 13-та зарплата, у перший і останній рік — пропорційно.' : '')) + ` Зарплата ${how} ${pay}. Щомісяця няня отримує розрахунковий листок.` + (d.baby ? ` Вечори понад обумовлений час — CHF ${money(d.baby)} за годину.` : '')],
+      ...(d.fahr || d.essen ? [['Витрати й харчування', [d.fahr ? 'Проїзд за дорученням родини відшкодовується за чеком.' : '', d.essen ? 'У робочий час няня безкоштовно їсть разом із дітьми.' : ''].filter(Boolean).join(' ')]] : []),
+      ['Відпустка і свята', `${d.ferien} ${d.ferien == 5 ? 'тижнів' : 'тижні'} оплачуваної відпустки на рік (до 20 років — не менше 5). Відпустку погоджують заздалегідь, хоча б два тижні поспіль.` + (d.art === 'h' ? ' При погодинній оплаті відпустку оплачено відпускними (пункт 5).' : '') + ` 1 серпня — оплачуване свято. Інші свята — за правилами кантону ${ktn}.`],
+      ['Хвороба й нещасний випадок', (d.ktg ? `Родина оформлює страховку на випадок хвороби: ${d.ktgP} % зарплати після ${d.ktgW} днів очікування. У дні очікування родина платить ${d.ktgP} % зарплати. Внесок платить ${d.ktgH === 'half' ? 'навпіл родина й няня' : 'родина'}.` : 'Якщо няня не може працювати через хворобу або нещасний випадок не зі своєї вини, родина платить зарплату за OR ст. 324a, якщо робота триває понад три місяці або договір укладено більш ніж на три місяці: у перший рік — три тижні, далі — довше.') + ' Родина страхує няню від нещасних випадків на роботі (UVG).' + (nbu ? ' Оскільки робота від 8 годин на тиждень, няня застрахована й від нещасних випадків поза роботою, внесок за це утримується із зарплати.' : '')],
+      ['Соцстрахування й податки', 'Родина протягом 30 днів реєструє няню в касі AHV і утримує із зарплати обов’язкові внески (AHV/IV/EO/ALV).' + (vf ? ' Розрахунок за спрощеною процедурою: із зарплати утримується податок 5 %, його сплачує каса AHV.' : '') + (bvg ? ' Оскільки зарплата за рік, найімовірніше, більша за 22 680 франків, няня застрахована в пенсійній касі (BVG).' : '') + ' Щороку няня отримує довідку про зарплату (Lohnausweis).'],
+      ['Розірвання', (d.befr ? 'Строковий договір достроково розривають лише з важливої причини. ' : '') + (kn ? `Після випробувального строку кожна сторона може розірвати договір, попередивши за ${kn} міс., на кінець місяця.` : 'Після випробувального строку — за законом, на кінець місяця: у перший рік 1 місяць, з 2-го по 9-й рік 2 місяці, далі 3 місяці (OR ст. 335c).') + ' Розірвання — письмово.'],
+      ['Конфіденційність і ключі', 'Няня нікому не розповідає про життя родини, і після закінчення роботи теж. Ключі повертає в останній робочий день.'],
+      ...(d.mehr ? [['Інші домовленості', d.mehr]] : []),
+      ['Прикінцеві положення', `Зміни — тільки письмово. В іншому діють Зобов’язальне право (OR) і типовий договір для домашнього персоналу кантону ${ktn}, якщо в цьому договорі не сказано інакше. Кожна сторона отримує підписаний примірник.`]
+    ]
+  };
+  return T[L];
+}
+const HEAD = {de: ['Arbeitsvertrag', 'für die Kinderbetreuung im Privathaushalt', 'zwischen', 'Familie (Arbeitgeberin, nachfolgend «Familie»)', 'und', 'Betreuerin', 'Betreuer', 'geboren am', 'AHV-Nr.', 'Kinder', 'Ort und Datum', 'Für die Familie', 'Unterschrift', 'Seite', 'massgebend ist die deutsche Fassung, die russische Übersetzung dient dem Verständnis'],
+  fr: ['Contrat de travail', 'pour la garde d’enfants au domicile privé', 'entre', 'Famille (employeur, ci-après « la famille »)', 'et', 'Employée', 'Employé', 'née le', 'N° AVS', 'Enfants', 'Lieu et date', 'Pour la famille', 'Signature', 'Page', 'seule la version française fait foi, la traduction russe sert à la compréhension'],
+  it: ['Contratto di lavoro', 'per la custodia di bambini nell’economia domestica privata', 'tra', 'Famiglia (datore di lavoro, di seguito «la famiglia»)', 'e', 'Collaboratrice', 'Collaboratore', 'nata il', 'N. AVS', 'Bambini', 'Luogo e data', 'Per la famiglia', 'Firma', 'Pagina', 'fa fede la versione italiana, la traduzione russa serve alla comprensione'],
+  ru: ['Трудовий договір', 'няня в приватному домі — переклад', 'між', 'Родина (роботодавець)', 'і', 'Няня', 'Няня', 'дата народження', 'Номер AHV', 'Діти', 'Місце й дата', 'За родину', 'Підпис', 'Стор.', 'діє текст мовою кантону, український переклад — для розуміння']};
+
+/* ---------- лист ---------- */
+function build(){
+  const d = D(), L = d.lang, H = HEAD[L], R = d.ru ? HEAD.ru : null, C = SH.pal(!!d.bw), ink = d.bw ? '#000000' : '#2F2924', mut = d.bw ? '#444444' : '#7A6E62', acc = d.bw ? '#000000' : '#4F5E3E';
+  const pages = []; let P, y; const X = 20, W = 170, BOT = 278;
+  /* штамп «ОБРАЗЕЦ» на каждой странице: мы не юристы (просьба Ирины 08.10.2026) */
+  const STL = [[{de: 'MUSTER', fr: 'MODÈLE', it: 'MODELLO'}[L] + (R ? ' · ЗРАЗОК' : ''), 13, true], [{de: 'Vorlage, keine Rechtsberatung', fr: 'Modèle, pas un conseil juridique', it: 'Modello, non una consulenza legale'}[L], 6, false]].concat(R ? [['Ми не юристи: перевір у юриста або в профспілці', 6, false]] : []);
+  const np = () => { const first = !pages.length; P = SH.page(210, 297, C); P.stamp = {cx: 162, cy: first ? 23 : 14, a: 7, color: d.bw ? '#000000' : '#B03A2E', lines: STL}; pages.push(P); y = first ? 22 : 33; };
+  const need = h => { if (y + h > BOT) np(); };
+  const para = (s, size, b, col, lh) => { const lines = SH.wrap(s, b, size, W); lines.forEach(l => { need(lh); P.text(l, X, y, size, b, col); y += lh; }); };
+  np();
+  P.text(H[0], X, y + 4, 18, true, ink); y += 10; P.text(H[1], X, y, 10, false, mut); y += 5;
+  if (R) { P.text(R[0] + ' · ' + R[1], X, y, 8, false, mut); y += 5; }
+  y += 3; P.line(X, y, X + W, y, '#C9BBA8', 0.4); y += 7;
+  const party = (title, lines) => { P.text(title, X, y, 7.5, true, mut); y += 4.5; lines.filter(Boolean).forEach((l, i) => { P.text(l, X, y, 9.5, i === 0, ink); y += 4.6; }); y += 2.5; };
+  party(H[3] + (R ? ' / ' + R[3] : ''), [d.fam.name || '____________________________', d.fam.addr, d.fam.city, d.fam.tel]);
+  P.text(H[4] + (R ? ' / ' + R[4] : ''), X, y, 8, false, mut); y += 6;
+  const g = d.g === 'f' ? 5 : 6;
+  party(H[g] + (R ? ' / ' + R[g] : ''), [d.ny.name || '____________________________', d.ny.addr, d.ny.city, (d.ny.born ? H[7] + ' ' + dmy(d.ny.born) : '') + (d.ny.ahv ? (d.ny.born ? ' · ' : '') + H[8] + ' ' + d.ny.ahv : '')]);
+  y += 2;
+  const loc = txt(L, d), ru = R ? txt('ru', d) : null;
+  loc.forEach((c, i) => {
+    need(14); P.text((i + 1) + '. ' + c[0] + (ru ? '  ·  ' + ru[i][0] : ''), X, y, 10, true, acc); y += 5.2;
+    para(c[1], 9.2, false, ink, 4.3);
+    if (ru) { y += 0.8; para(ru[i][1], 7.8, false, mut, 3.7); }
+    y += 3.2;
+  });
+  need(42); y += 6;
+  P.text(H[10] + (R ? ' / ' + R[10] : ''), X, y, 7.5, false, mut); P.text((d.ort || d.fam.city.replace(/^\d{4}\s*/, '') || '') + (d.ort || d.fam.city ? ', ' : ''), X, y + 8, 9.5, false, ink); P.line(X, y + 10, X + 80, y + 10, '#C9BBA8', 0.4); y += 22;
+  P.line(X, y, X + 75, y, '#C9BBA8', 0.4); P.line(X + 95, y, X + W, y, '#C9BBA8', 0.4);
+  P.text(H[11] + (R ? ' / ' + R[11] : ''), X, y + 4.5, 7.5, false, mut); P.text(H[g] + (R ? ' / ' + R[g] : ''), X + 95, y + 4.5, 7.5, false, mut);
+  P.text(d.fam.name || '', X, y + 9, 8.5, false, ink); P.text(d.ny.name || '', X + 95, y + 9, 8.5, false, ink);
+  pages.forEach((pg, i) => { pg.text(H[13] + ' ' + (i + 1) + ' / ' + pages.length + (R ? ' · ' + H[14] : ''), X, 290, 6.5, false, mut); });
+  return pages;
+}
+
+/* ---------- форма ---------- */
+const $ = id => document.getElementById(id);
+const esc = s => SH.esc(String(s == null ? '' : s));
+const qh = (h, l) => `<button type="button" class="qh" data-help="${h}" aria-label="Підказка: ${l}" aria-expanded="false">?</button>`;
+const dis = () => EX ? 'disabled' : '';
+const inp = (k, label, v, attrs, help) => `<div class="fl"><span class="lb">${label}${help ? qh(help, label) : ''}</span><input type="text" data-k="${k}" value="${esc(v)}" ${attrs || ''} ${dis()}></div>`;
+const sel = (k, label, v, list, help) => `<div class="fl"><span class="lb">${label}${help ? qh(help, label) : ''}</span><select data-k="${k}" ${dis()}>${list.map(([a, b]) => `<option value="${a}"${String(a) === String(v) ? ' selected' : ''}>${b}</option>`).join('')}</select></div>`;
+const chk = (k, label, v, help) => `<label class="tog"><input type="checkbox" data-k="${k}" ${v ? 'checked' : ''} ${dis()}> ${label}${help ? qh(help, label) : ''}</label>`;
+function warn(d){
+  const w = [], mw = MINW[d.kt], rate = d.art === 'h' ? +d.rate : (+d.month || 0) * (d.m13 ? 13 : 12) / 52 / Math.max(1, +d.hours || 1);
+  if (mw && rate && rate < mw) w.push(`У кантоні ${KTN(d.kt)} мінімальна зарплата ${money(mw)} франка на годину (2026)${d.kt === 'TI' ? ', залежно від галузі до 20.50' : ''}. Зараз ${d.art === 'h' ? 'ставка' : 'виходить приблизно'} ${money(rate)}.`);
+  if (d.kt === 'GE' && !d.ktg) w.push('У Женеві страховка на випадок хвороби (Krankentaggeld) для домашнього персоналу обов’язкова.');
+  if (yearly(d) > 22680) w.push(`Зарплата за рік більша за 22 680 франків — потрібна пенсійна каса (BVG), а спрощена процедура не підходить${d.vereinf ? ' (до договору вона не потрапить)' : ''}.`);
+  if ((+d.hours || 0) >= 8) w.push('Від 8 годин на тиждень — страховка й від нещасних випадків поза роботою (NBU). Це вже є в договорі.');
+  if (/[Ѐ-ӿ]/.test(JSON.stringify([d.fam, d.ny, d.kids, d.sched, d.other, d.mehr, d.ort])) && d.lang !== 'ru') w.push('Імена, адреси й свої тексти пиши латиницею і мовою договору — вони потраплять у договір як є.');
+  return w;
+}
+function renderForm(){
+  const d = D(), w = warn(d), K = window.KANTONY || {};
+  $('fields').innerHTML = (w.length ? `<div class="chk-err" style="margin:0 0 12px">${w.map(x => '<p style="margin:0 0 6px">' + esc(x) + '</p>').join('')}</div>` : '') + `
+  <section class="sec"><h2>Родина — роботодавець</h2><div class="g2">${inp('fam.name', 'Імена батьків або прізвище родини', d.fam.name, 'placeholder="Anna und Marco Keller"')}${inp('fam.addr', 'Вулиця і будинок', d.fam.addr)}${inp('fam.city', 'Індекс і місто', d.fam.city, 'placeholder="8000 Zürich"')}${inp('fam.tel', 'Телефон', d.fam.tel)}</div></section>
+  <section class="sec"><h2>Няня</h2><div class="g2">${inp('ny.name', 'Ім’я та прізвище', d.ny.name)}${sel('g', 'Стать (для тексту договору)', d.g, [['f', 'жінка'], ['m', 'чоловік']])}${inp('ny.addr', 'Вулиця і будинок', d.ny.addr)}${inp('ny.city', 'Індекс і місто', d.ny.city)}
+    <div class="fl"><span class="lb">Дата народження</span><input type="date" data-k="ny.born" value="${esc(d.ny.born)}" ${dis()}></div>${inp('ny.ahv', 'Номер AHV (якщо є)', d.ny.ahv, 'placeholder="756.0000.0000.00"')}</div></section>
+  <section class="sec"><h2>Робота</h2><div class="g2">${inp('kids', 'Діти: імена й роки народження', d.kids, 'placeholder="Mia (2021), Leo (2023)"')}
+    <div class="fl"><span class="lb">Початок роботи</span><input type="date" data-k="start" value="${esc(d.start)}" ${dis()}></div>
+    ${sel('befr', 'Строк договору', d.befr ? 1 : 0, [[0, 'безстроковий'], [1, 'до певної дати']])}
+    ${d.befr ? `<div class="fl"><span class="lb">До якого числа</span><input type="date" data-k="end" value="${esc(d.end)}" ${dis()}></div>` : ''}
+    ${sel('probe', 'Випробувальний термін', d.probe, [[0, 'без випробувального строку'], [1, '1 місяць'], [2, '2 місяці'], [3, '3 місяці']], 'probe')}
+    <div class="fl"><span class="lb">Годин на тиждень${qh('hours', 'годин на тиждень')}</span><input type="number" min="1" max="60" step="0.5" data-k="hours" value="${esc(d.hours)}" ${dis()}></div>
+    ${inp('sched', 'Коли (за бажанням)', d.sched, 'placeholder="Mo, Mi, Fr 8–17 Uhr"')}</div>
+    <div class="fl"><span class="lb">Що входить у роботу</span><div class="chk">${Object.entries(TASKS).map(([k, v]) => `<label><input type="checkbox" data-task="${k}" ${d.tasks.includes(k) ? 'checked' : ''} ${dis()}> <span>${esc(v[3])}</span></label>`).join('')}</div></div>
+    ${inp('other', 'Ще (мовою договору)', d.other)}</section>
+  <section class="sec"><h2>Зарплата й відпустка</h2><div class="g2">
+    ${sel('art', 'Як платять', d.art, [['h', 'погодинно'], ['m', 'на місяць']])}
+    ${d.art === 'h' ? `<div class="fl"><span class="lb">Ставка брутто за годину, CHF${qh('lohn', 'зарплата')}</span><input type="number" min="0" step="0.05" data-k="rate" value="${esc(d.rate)}" ${dis()}></div>` : `<div class="fl"><span class="lb">Брутто на місяць, CHF${qh('lohn', 'зарплата')}</span><input type="number" min="0" step="10" data-k="month" value="${esc(d.month)}" ${dis()}></div>`}
+    ${sel('ferien', 'Відпустка', d.ferien, [[4, '4 тижні (відпускні 8,33 %)'], [5, '5 тижнів (відпускні 10,64 %)']], 'ferien')}
+    ${sel('payday', 'Коли платять', d.payday, [['end', 'наприкінці місяця'], [25, '25-го числа'], [5, '5-го числа наступного місяця']])}
+    ${sel('paym', 'Як платять', d.paym, [['bank', 'на банківський рахунок'], ['cash', 'готівкою під розписку']])}
+    <div class="fl"><span class="lb">Увечері понад графік, CHF за годину</span><input type="number" min="0" step="0.5" data-k="baby" value="${esc(d.baby)}" placeholder="не потрібно" ${dis()}></div></div>
+    ${d.art === 'm' ? chk('m13', '13-та зарплата', d.m13) : ''}${chk('fahr', 'Проїзд у справах родини відшкодовується', d.fahr)}${chk('essen', 'Їжа з дітьми безкоштовно', d.essen)}</section>
+  <section class="sec"><h2>Хвороба, страховки, податки</h2>
+    ${chk('ktg', 'Родина оформлює страховку на випадок хвороби (Krankentaggeld)', d.ktg, 'ktg')}
+    ${d.ktg ? `<div class="g2">${sel('ktgP', 'Скільки платить страховка', d.ktgP, [[80, '80 % зарплати'], [90, '90 %'], [100, '100 %']])}${sel('ktgW', 'Днів очікування', d.ktgW, [[2, '2 дні'], [14, '14 днів'], [30, '30 днів'], [60, '60 днів'], [90, '90 днів']])}${sel('ktgH', 'Хто платить внесок', d.ktgH, [['half', 'навпіл'], ['fam', 'родина']])}</div>` : ''}
+    ${chk('vereinf', 'Спрощена процедура з касою AHV (податок 5 % через касу)', d.vereinf, 'vereinf')}
+    ${sel('kuend', 'Строк розірвання після випробувального', d.kuend, [['law', 'за законом (1, 2 або 3 місяці залежно від стажу)'], [1, '1 місяць'], [2, '2 місяці'], [3, '3 місяці']], 'kuend')}
+    ${inp('mehr', 'Інші домовленості (мовою договору)', d.mehr)}${inp('ort', 'Місце підписання', d.ort, 'placeholder="Zürich"')}</section>`;
+}
+let UI, tmr;
+const setPath = (o, p, v) => { const k = p.split('.'); if (k.length === 2) o[k[0]][k[1]] = v; else o[k[0]] = v; };
+const NUM = ['hours', 'rate', 'month', 'ferien', 'probe', 'ktgP', 'ktgW'];
+function fill(){ const d = D(); $('bw').checked = !!d.bw; $('kt').value = d.kt || ''; $('lang').value = d.lang + (d.ru ? '+ru' : ''); renderForm(); $('exbar').hidden = !EX; $('exOn').hidden = !!EX; if (UI) UI.render(); }
+const KN = window.KANTONY || {};
+$('kt').innerHTML = '<option value="">Обери кантон</option>' + Object.keys(KN).sort((a, b) => KN[a].n.localeCompare(KN[b].n, 'uk')).map(k => `<option value="${k}">${esc(KN[k].n)}</option>`).join('');
+$('kt').addEventListener('change', e => { S.kt = e.target.value; S.lang = langOf(S.kt); try { localStorage.setItem('svoiludi.kanton', S.kt); } catch (x) {} if (EX) { EX.kt = S.kt; EX.lang = S.lang; } save(); fill(); });
+$('bw').addEventListener('change', e => { S.bw = e.target.checked; if (EX) EX.bw = S.bw; save(); UI && UI.render(); });
+$('lang').addEventListener('change', e => { const [l, r] = e.target.value.split('+'); S.lang = l; S.ru = !!r; if (EX) { EX.lang = l; EX.ru = !!r; } save(); fill(); });
+document.addEventListener('input', e => { const x = e.target; if (EX || !x.dataset || !x.dataset.k || x.type === 'checkbox' || x.tagName === 'SELECT') return;
+  setPath(S, x.dataset.k, NUM.includes(x.dataset.k) ? (x.value === '' ? '' : +x.value) : x.value); save(); clearTimeout(tmr); tmr = setTimeout(() => { UI && UI.render(); }, 450); });
+document.addEventListener('change', e => { const x = e.target; if (EX || !x.dataset) return;
+  if (x.dataset.task) { S.tasks = [...document.querySelectorAll('[data-task]:checked')].map(i => i.dataset.task); save(); UI && UI.render(); return; }
+  if (!x.dataset.k) return;
+  if (x.type === 'checkbox') setPath(S, x.dataset.k, x.checked);
+  else if (x.tagName === 'SELECT') { const k = x.dataset.k, v = x.value; setPath(S, k, k === 'befr' ? v === '1' : (NUM.includes(k) || ((k === 'payday' || k === 'kuend') && /^\d+$/.test(v))) ? +v : v); }
+  else setPath(S, x.dataset.k, NUM.includes(x.dataset.k) ? +x.value : x.value);
+  save(); fill(); });
+const EXD = () => Object.assign(blank(), {kt: S.kt || 'ZH', lang: S.kt ? langOf(S.kt) : 'de', ru: true, g: 'f', fam: {name: 'Anna und Marco Keller', addr: 'Seestrasse 10', city: '8002 Zürich', tel: '079 111 22 33'}, ny: {name: 'Olena Kovalenko', addr: 'Musterstrasse 12', city: '8000 Zürich', born: '1990-04-12', ahv: '756.1234.5678.97'},
+  kids: 'Mia (2021), Leo (2023)', start: TODAY.slice(0, 8) + '01', probe: 1, hours: 24, sched: 'Mo, Mi, Fr 8–16 Uhr', tasks: ['care', 'meals', 'out', 'lang'], art: 'h', rate: 27, ferien: 4, baby: 30, fahr: true, essen: true, ktg: true, ktgP: 80, ktgW: 30, ktgH: 'half', vereinf: false, kuend: 'law', ort: 'Zürich'});
+$('exOn').addEventListener('click', () => { EX = EXD(); fill(); window.scrollTo({top: $('exbar').offsetTop - 12, behavior: 'smooth'}); });
+$('exOff').addEventListener('click', () => { EX = null; fill(); });
+if (/[?&]example\b/.test(location.search)) EX = EXD();
+UI = SH.mount({build, lang: () => D().lang, title: 'Arbeitsvertrag', name: () => ({de: 'Arbeitsvertrag-Kinderbetreuung', fr: 'Contrat-garde-enfants', it: 'Contratto-custodia-bambini'}[D().lang] || 'Arbeitsvertrag')});
+fill();
+
+</script>
+<script src="/assets/help.uk.js"></script>
+<script src="/assets/backup.uk.js"></script>
+<script src="/assets/pdffan.uk.js" defer></script>
+<script src="/assets/share.uk.js" defer></script>
+<script src="/assets/samesite.js"></script>
+<!--i18n--><style>#langbar.langbar{position:fixed;bottom:14px;right:14px;z-index:60;display:flex;gap:2px;background:rgba(255,255,255,.92);border:1px solid rgba(0,0,0,.08);border-radius:999px;padding:3px;font:600 12px Manrope,system-ui,sans-serif;box-shadow:0 2px 8px rgba(0,0,0,.08)}#langbar.langbar a{color:#5d554d;padding:5px 9px;border-radius:999px;text-decoration:none;font:inherit;display:inline-block}#langbar.langbar a[aria-current="true"]{background:#2f2924;color:#fff}@media print{.langbar{display:none!important}}</style><div class="langbar" id="langbar" role="navigation" aria-label="Мова / Язык"><a href="/instrumenty/dogovor-nyani/" hreflang="ru" data-lang="ru">RU</a><a href="/uk/instrumenty/dogovor-nyani/" hreflang="uk" data-lang="uk" aria-current="true">UA</a></div><script>(function(){var b=document.getElementById('langbar');if(!b)return;b.addEventListener('click',function(e){var a=e.target.closest('a[data-lang]');if(a){try{localStorage.setItem('svoiludiLang',a.dataset.lang)}catch(x){}a.href=a.getAttribute('href').split('#')[0]+location.hash;}});})();</script><!--i18n--></body>
+</html>

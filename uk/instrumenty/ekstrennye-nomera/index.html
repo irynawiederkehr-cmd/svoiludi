@@ -1,0 +1,454 @@
+<!doctype html>
+<html lang="uk">
+<head><!--i18n--><base href="/instrumenty/ekstrennye-nomera/"><!--i18n-->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<link rel="icon" href="/fav/favicon.svg" type="image/svg+xml"><link rel="icon" href="/fav/icon-32.png" sizes="32x32"><link rel="apple-touch-icon" href="/fav/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/fonts.css">
+<meta name="description" content="Картка з екстреними номерами Швейцарії, черговим лікарем твого кантону і твоїми контактами. Чотири картки на аркуші A4 або плакат на холодильник, українською і мовою кантону. Безкоштовно, PDF.">
+<link rel="canonical" href="https://svoiludi.ch/uk/instrumenty/ekstrennye-nomera/">
+<meta property="og:type" content="website"><meta property="og:locale" content="uk_UA"><meta property="og:site_name" content="Свої люди у Швейцарії">
+<meta property="og:title" content="Екстрені номери · картка для гаманця і холодильника"><meta property="og:description" content="Екстрені номери Швейцарії, черговий лікар твого кантону і твої контакти на одній картці. Безкоштовно, PDF.">
+<meta property="og:url" content="https://svoiludi.ch/uk/instrumenty/ekstrennye-nomera/"><meta property="og:image" content="https://svoiludi.ch/instrumenty/ekstrennye-nomera/og-image.uk.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="robots" content="noindex, nofollow">
+<title>Картка екстрених номерів і чергового лікаря</title>
+<style>
+/* Экстренные номера (08.10.2026): анкета слева, живой лист A4 справа. Один «движок» раскладки рисует и предпросмотр (SVG), и PDF (jsPDF, шрифт Manrope). */
+:root{
+  --bg:#F4EDE3; --paper:#FFFCF8; --ink:#2F2924; --muted:#7A6E62; --line:#E5D9C9; --soft:#EFE5D7;
+  --brown:#6E4F3C; --mustard:#B98324; --mustard-soft:#F3E3C2; --sage:#4F5E3E; --sage-soft:#E3E8D6; --red:#A0523D;
+  --display:"Forum","Georgia",serif; --sans:"Manrope","Segoe UI",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#221D19; --paper:#2C2621; --ink:#F1E9DF; --muted:#B4A796; --line:#3E362F; --soft:#352E28;
+  --brown:#E1C2A6; --mustard:#E2B45C; --mustard-soft:#3D321F; --sage:#B4BF97; --sage-soft:#2E3226; --red:#E39A85; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#221D19; --paper:#2C2621; --ink:#F1E9DF; --muted:#B4A796; --line:#3E362F; --soft:#352E28;
+  --brown:#E1C2A6; --mustard:#E2B45C; --mustard-soft:#3D321F; --sage:#B4BF97; --sage-soft:#2E3226; --red:#E39A85; color-scheme:dark}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--ink);font:15px/1.55 var(--sans);margin:0}
+.wrap{max-width:1280px;margin:0 auto;padding-inline:16px;padding-block:28px 48px;display:flex;flex-direction:column;gap:24px}
+.eyebrow{font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+h1{font-family:var(--display);font-weight:400;font-size:clamp(2.4rem,6vw,3.6rem);line-height:1;margin:4px 0 10px;text-wrap:balance}
+h2{font-family:var(--display);font-weight:400;font-size:1.55rem;margin:0;text-wrap:balance}
+h3{font-family:var(--display);font-weight:400;font-size:1.22rem;line-height:1.2;margin:0}
+.lead{max-width:66ch;color:var(--muted);margin:0}
+.jump{font-weight:700;color:var(--brown);text-underline-offset:4px}
+.privnote{margin-top:14px;background:var(--sage-soft);border-radius:16px;padding:12px 16px;font-size:.9rem;max-width:90ch}
+.status{font-size:.86rem;color:var(--muted);min-height:1.3em}
+.btn{font:inherit;font-weight:700;font-size:.9rem;border:0;border-radius:999px;padding:10px 18px;cursor:pointer;color:#fff;text-decoration:none;display:inline-flex;align-items:center;gap:6px;background:#6E4F3C;box-shadow:0 8px 18px -8px rgba(110,79,60,.6)}
+.btn.gold{background:#B98324;box-shadow:0 8px 18px -8px rgba(185,131,36,.7)}
+.btn.free{background:#4F5E3E;box-shadow:0 8px 18px -8px rgba(79,94,62,.6)}
+.btn.ghost{background:transparent;color:var(--brown);border:1.5px solid var(--line);box-shadow:none}
+.btn.sm{font-size:.82rem;padding:7px 13px}
+.btn[disabled]{background:var(--soft);color:var(--muted);box-shadow:none;cursor:wait}
+select,input[type=text],input[type=tel],textarea{font:inherit;font-size:.95rem;color:var(--ink);background:var(--paper);border:1.5px solid var(--line);border-radius:12px;padding:9px 12px;width:100%;min-width:0}
+select:focus-visible,input:focus-visible,button:focus-visible,textarea:focus-visible,a:focus-visible{outline:2px solid var(--mustard);outline-offset:2px}
+::placeholder{color:color-mix(in srgb,var(--muted) 70%,transparent)}
+.setup{background:var(--paper);border:1.5px solid var(--line);border-radius:22px;padding:16px 18px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px 18px;align-items:start}
+@media (max-width:1000px){.setup{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.setup{grid-template-columns:1fr}}
+.fl{display:flex;flex-direction:column;gap:6px;min-width:0}
+.fl>.lb{font-size:.8rem;font-weight:700;color:var(--muted);display:flex;align-items:center}
+.seg{display:flex;flex-wrap:wrap;gap:6px}
+.seg button{font:inherit;font-size:.84rem;font-weight:700;border:1.5px solid var(--line);background:var(--paper);color:var(--ink);border-radius:999px;padding:6px 12px;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--sage);border-color:var(--sage);color:#fff}
+.acts{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.exbar{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;background:var(--mustard-soft);border-radius:16px;padding:10px 14px;font-size:.9rem;font-weight:600}
+.work{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:22px;align-items:start}
+@media (max-width:1040px){.work{grid-template-columns:1fr}}
+.form{display:flex;flex-direction:column;gap:14px;min-width:0}
+.sec{background:var(--paper);border:1.5px solid var(--line);border-radius:20px;padding:16px 18px;display:flex;flex-direction:column;gap:12px}
+.sec>h2{font-size:1.3rem;display:flex;align-items:center}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:560px){.g2{grid-template-columns:1fr}}
+.hint{font-size:.84rem;color:var(--muted);margin:0}
+.chk{display:flex;flex-direction:column;gap:8px}
+.chk label{display:flex;gap:10px;align-items:baseline;font-size:.92rem;cursor:pointer}
+.chk input{flex:none;width:18px;height:18px;accent-color:var(--sage);transform:translateY(3px)}
+.chk b{white-space:nowrap}
+.chk small{color:var(--muted)}
+.tog{display:flex;gap:10px;align-items:center;font-size:.92rem;cursor:pointer}
+.tog input{width:18px;height:18px;accent-color:var(--sage)}
+.sheetbox{position:sticky;top:12px;display:flex;flex-direction:column;gap:10px}
+@media (max-width:1040px){.sheetbox{position:static}}
+.sheet{background:#fff;border-radius:6px;box-shadow:0 18px 40px -22px rgba(47,41,36,.45);overflow:hidden}
+.sheet svg{display:block;width:100%;height:auto}
+.imp{background:var(--paper);border:1.5px dashed color-mix(in srgb,var(--sage) 55%,transparent);border-radius:16px;padding:14px 18px;font-size:.88rem;max-width:90ch;margin:0}
+.imp b{color:var(--sage)}
+.guide{display:flex;flex-direction:column;gap:14px;max-width:90ch}
+.guide ul{margin:0;padding-left:20px}
+.guide li{margin:4px 0}
+.credit{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:.8rem;color:var(--muted)}
+.credit a{color:var(--muted)}
+.qh{font:700 .72rem/1 var(--sans);width:20px;height:20px;border-radius:50%;border:1.5px solid var(--line);background:var(--paper);color:var(--brown);cursor:pointer;margin-left:6px;padding:0;flex:none}
+</style>
+<!--pwa--><link rel="manifest" href="/fav/site.uk.webmanifest"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Свої люди"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="theme-color" content="#4F5E3E"><style id="pa-tiles">/* верхнее меню на телефоне и планшете: прямоугольные плитки с закруглением в два ряда, иконки ставит pwa-app.js (08.10.2026) */html header.top nav[aria-label] a .pa-ni{display:none}@media (max-width:1100px){html header.top .page{flex-wrap:wrap;row-gap:8px}html header.top nav[aria-label]{order:3;width:100%;display:grid!important;grid-template-columns:repeat(var(--pa-cols,3),minmax(0,1fr));gap:8px;overflow:visible;padding:4px 0 12px;margin:0}html header.top nav[aria-label] a{display:flex!important;flex-direction:column;align-items:center;justify-content:center;gap:5px;min-height:62px;padding:9px 6px;border-radius:14px;background:var(--paper,#FFFCF8);border:1px solid color-mix(in srgb,var(--sage,#66704F) 30%,transparent);box-shadow:0 3px 10px -6px rgba(60,70,40,.45);color:var(--ink,#2F2924)!important;font:600 .78rem/1.18 var(--body,system-ui);text-align:center;white-space:normal;text-decoration:none;-webkit-tap-highlight-color:transparent}html header.top nav[aria-label] a::after{content:none!important}html header.top nav[aria-label] a .pa-ni{display:block;width:22px;height:22px;fill:none;stroke:var(--sage,#66704F);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}html header.top nav[aria-label] a[aria-current="page"]{background:var(--sage,#66704F);border-color:var(--sage,#66704F);color:var(--paper,#FFFCF8)!important;box-shadow:0 4px 12px -6px rgba(60,70,40,.6)}html header.top nav[aria-label] a[aria-current="page"] .pa-ni{stroke:var(--paper,#FFFCF8)}html header.top nav[aria-label] a:active{transform:scale(.97)}}/* кнопки сайта — прямоугольные с закруглением, как плитки меню (решение Ирины 08.10.2026); значки-метки (образец, теги, «?») остаются круглыми */:is(.navcta,.btn,.shr-btn,.pl-act a,.pl-act button,.qa,.more,.listbar button,.leaflet-popup-content button,.calmenu a,.calmenu button,.go-free,.find,.confirm,.monthics,.addb,.mbtn,.example,.viewsw,#langbar.langbar,.pa-go,.pa-x,.pa-foot){border-radius:12px!important}:is(.viewsw button,.seg button,.chips button,#langbar.langbar a,.cal-nav button){border-radius:9px!important}</style><script src="/assets/pwa-app.js" defer></script><!--pwa--><!--i18n--><link rel="alternate" hreflang="ru" href="https://svoiludi.ch/instrumenty/ekstrennye-nomera/"><link rel="alternate" hreflang="uk" href="https://svoiludi.ch/uk/instrumenty/ekstrennye-nomera/"><!--i18n--></head>
+<body>
+<div class="wrap">
+  <header>
+    <p style="margin:0 0 14px"><a class="jump" href="https://svoiludi.ch/uk/instrumenty/">← Усі корисні інструменти · Свої люди у Швейцарії</a></p>
+    <div class="eyebrow">Картка · екстрені номери</div>
+    <h1>Картка екстрених номерів і чергового лікаря</h1>
+    <p class="lead">Усі номери, які потрібні, коли щось сталося: швидка, поліція, пожежники, отруєння, черговий лікар твого кантону і твої контакти. Чотири картки на одному аркуші A4 — у гаманець, на холодильник, няні й в автомобіль. Або великий плакат.</p>
+    <div class="privnote"><b>Твої дані тільки в тебе.</b> Номери й імена, які ти вписуєш, зберігаються тільки в твоєму браузері на цьому пристрої. Ніхто, крім тебе, їх не бачить. Реєстрація не потрібна.</div>
+    <div data-fan="ekstrennye-nomera"></div>
+  </header>
+
+  <div class="setup">
+    <div class="fl"><span class="lb">Твій кантон<button type="button" class="qh" data-help="kanton" aria-label="Підказка: твій кантон" aria-expanded="false">?</button></span><select id="kanton"></select></div>
+    <div class="fl"><span class="lb">Мова картки<button type="button" class="qh" data-help="lang" aria-label="Підказка: мова картки" aria-expanded="false">?</button></span><select id="lang"><option value="bi">Російська + мова кантону</option><option value="ru">Тільки українська</option><option value="de">Deutsch</option><option value="fr">Français</option><option value="it">Italiano</option></select></div>
+    <div class="fl"><span class="lb">Вид<button type="button" class="qh" data-help="fmt" aria-label="Підказка: вид" aria-expanded="false">?</button></span><div class="seg" id="fmt"><button type="button" data-v="four" aria-pressed="true">4 картки на A4</button><button type="button" data-v="a4" aria-pressed="false">Плакат A4</button></div></div>
+    <div class="fl"><span class="lb">Друк<button type="button" class="qh" data-help="bw" aria-label="Підказка: друк" aria-expanded="false">?</button></span><label class="tog"><input type="checkbox" id="bw"> Без кольору, для дешевого друку</label></div>
+  </div>
+
+  <div class="exbar" id="exbar" hidden><span>Це приклад. Так виглядатиме твоя картка.</span><button type="button" class="btn sm" id="exOff">Повернутися до моїх даних</button></div>
+
+  <div class="work">
+    <div class="form">
+      <section class="sec" aria-labelledby="h-doc">
+        <h2 id="h-doc">Черговий лікар кантону<button type="button" class="qh" data-help="doc" aria-label="Підказка: черговий лікар" aria-expanded="false">?</button></h2>
+        <div class="chk" id="docRows"></div>
+        <p class="hint" id="docNote"></p>
+      </section>
+
+      <section class="sec" aria-labelledby="h-me">
+        <h2 id="h-me">Мої номери<button type="button" class="qh" data-help="me" aria-label="Підказка: мої номери" aria-expanded="false">?</button></h2>
+        <div class="g2">
+          <div class="fl"><span class="lb">Сімейний лікар (Hausarzt)</span><input type="text" id="arzt" placeholder="Dr. med. Muster" autocomplete="off"></div>
+          <div class="fl"><span class="lb">Телефон лікаря</span><input type="tel" id="arztTel" placeholder="044 …" autocomplete="off"></div>
+          <div class="fl"><span class="lb">Педіатр (Kinderarzt)</span><input type="text" id="kid" placeholder="якщо є діти" autocomplete="off"></div>
+          <div class="fl"><span class="lb">Телефон педіатра</span><input type="tel" id="kidTel" autocomplete="off"></div>
+          <div class="fl"><span class="lb">Лікарняна каса<button type="button" class="qh" data-help="kasse" aria-label="Підказка: лікарняна каса" aria-expanded="false">?</button></span><input type="text" id="kasse" list="kassen" placeholder="Обери або впиши" autocomplete="off"><datalist id="kassen"></datalist></div>
+          <div class="fl"><span class="lb">Номер страховки<button type="button" class="qh" data-help="nr" aria-label="Підказка: номер страховки" aria-expanded="false">?</button></span><input type="text" id="nr" autocomplete="off"></div>
+          <div class="fl"><span class="lb">Телемедицина каси<button type="button" class="qh" data-help="tele" aria-label="Підказка: телемедицина" aria-expanded="false">?</button></span><input type="tel" id="tele" placeholder="номер з картки каси" autocomplete="off"></div>
+          <div class="fl"><span class="lb">Аптека поруч</span><input type="text" id="apo" placeholder="назва і телефон" autocomplete="off"></div>
+          <div class="fl"><span class="lb">Близька людина</span><input type="text" id="p1" placeholder="ім’я, хто це" autocomplete="off"></div>
+          <div class="fl"><span class="lb">Її телефон</span><input type="tel" id="p1Tel" autocomplete="off"></div>
+          <div class="fl"><span class="lb">Ще одна людина</span><input type="text" id="p2" placeholder="сусідка, подруга" autocomplete="off"></div>
+          <div class="fl"><span class="lb">Її телефон</span><input type="tel" id="p2Tel" autocomplete="off"></div>
+        </div>
+        <div class="fl"><span class="lb">Адреса, яку назвати по телефону<button type="button" class="qh" data-help="adr" aria-label="Підказка: адреса" aria-expanded="false">?</button></span><input type="text" id="adr" placeholder="вулиця, номер, поверх, місто" autocomplete="off"></div>
+        <div class="fl"><span class="lb">Алергії й важливі ліки<button type="button" class="qh" data-help="allerg" aria-label="Підказка: алергії" aria-expanded="false">?</button></span><input type="text" id="allerg" placeholder="наприклад, пеніцилін; інсулін" autocomplete="off"></div>
+        <label class="tog"><input type="checkbox" id="blank" checked> Порожні рядки, щоб вписати від руки</label>
+      </section>
+    </div>
+
+    <div class="sheetbox">
+      <div class="acts"><button type="button" class="btn gold" id="pdf">Завантажити PDF</button><button type="button" class="btn" id="png">Завантажити PNG</button><button type="button" class="btn ghost sm" id="share" hidden>Надіслати</button><button type="button" class="btn ghost sm" id="exOn">Подивитися на прикладі</button></div>
+      <div class="sheet" id="sheet" aria-label="Попередній перегляд аркуша"></div>
+      <div class="status" id="status" role="status"></div>
+    </div>
+  </div>
+
+  <!--rel--><style>.relsh{margin:34px 0 8px}.relsh h2{font-size:1.35rem;margin:0 0 14px}.relsh-g{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:14px}.relsh-g a{display:flex;gap:12px;align-items:center;padding:12px;border:1.5px solid var(--line,#E4DCCF);border-radius:18px;background:var(--paper,#FFFCF8);color:inherit;text-decoration:none}.relsh-g a:hover{border-color:var(--sage,#5E6B48)}.relsh-g img{width:72px;height:auto;flex:none;border-radius:4px;box-shadow:0 2px 8px rgba(60,50,30,.18)}.relsh-g b{display:block;font-size:.98rem;margin-bottom:3px}.relsh-g span{font-size:.84rem;line-height:1.35;opacity:.85}</style><section class="relsh" aria-labelledby="h-rel"><h2 id="h-rel">Пов’язані схеми</h2><div class="relsh-g"><a href="/uk/instrumenty/moi-dannye/"><img src="../preview/moi-dannye/1.jpg" alt="" loading="lazy"><span><b>Мої дані</b><span>Адреса, AHV, страховки, лікарі й близькі на одному аркуші та карткою в гаманець.</span></span></a><a href="/uk/instrumenty/franshiza-shema/"><img src="../preview/franshiza-shema/1.jpg" alt="" loading="lazy"><span><b>Франшиза медстраховки</b><span>Скільки платиш сама, яка франшиза вигідніша і до якого числа змінювати.</span></span></a><a href="/uk/instrumenty/strahovki-obyazatelnye/"><img src="../preview/strahovki-obyazatelnye/1.jpg" alt="" loading="lazy"><span><b>Обов’язкові страховки</b><span>Що не можна не оформити: медстраховка, AHV, Serafe, автомобіль, дім.</span></span></a></div></section><!--rel-->
+  <p class="imp"><b>Важливо.</b> Це зразок для прикладу й особистого використання, а не офіційний документ. Номери чергових лікарів ми перевірили 8 жовтня 2026 року за сайтами кантонів і лікарських товариств, але вони можуть змінюватися. Перевіряй їх на сайті свого кантону й громади, автор не несе відповідальності за достовірність. У разі загрози життю завжди телефонуй 144 або 112.</p>
+
+  <section class="guide" aria-labelledby="g1">
+    <div class="eyebrow">Як користуватися</div>
+    <h2 id="g1">Картка, яка працює, коли страшно</h2>
+    <ul>
+      <li>Роздрукуй аркуш і виріж картки по пунктиру. Одну поклади в гаманець, одну повісь на холодильник, одну залиш няні або тому, хто залишається з дітьми, одну — в автомобіль або в сумку для походів.</li>
+      <li>Збережи номери й у телефоні. Картка потрібна, коли телефон розряджений або дзвонить не той, хто знає пароль.</li>
+      <li>Навчи дітей: 144 — швидка, 117 — поліція, 118 — пожежники. Назви їм свою адресу, щоб вони могли її сказати.</li>
+      <li>По телефону скажи, де ти, що сталося і скільки людей постраждало. Не клади слухавку першою.</li>
+      <li>Докладно про те, куди дзвонити під час хвороби й травми, — у статті <a href="https://svoiludi.ch/uk/shveycariya/bolezn-travma/">«Захворіла або травма»</a>.</li>
+    </ul>
+  </section>
+  <div class="share-slot" data-url="https://svoiludi.ch/uk/instrumenty/ekstrennye-nomera/" data-lead="Перешли тим, у кого діти або хто нещодавно переїхав. Повідомлення вже готове." data-text="Привіт! Тут можна безкоштовно зробити картку з екстреними номерами Швейцарії та черговим лікарем свого кантону, українською і німецькою, і роздрукувати. https://svoiludi.ch/uk/instrumenty/ekstrennye-nomera/"></div>
+  <p class="credit"><span>Свої люди у Швейцарії · svoiludi.ch</span><a href="https://svoiludi.ch/uk/privacy/">Політика конфіденційності</a></p>
+</div>
+
+<script src="/assets/kantony.uk.js"></script>
+<script src="/assets/lib/jspdf.umd.min.js"></script>
+<script>
+window.HELP = {
+  kanton: '<p>Обери кантон, де ти живеш. Від нього залежить номер чергового лікаря і мова другого рядка на картці.</p><p>Якщо ти часто буваєш в іншому кантоні, наприклад у батьків, зроби для нього окрему картку.</p>',
+  lang: '<p><b>Російська + мова кантону</b> — кожен рядок двома мовами. Так картку зрозуміє і няня, і сусідка, і ти сама. Радимо цей варіант.</p><p><b>Deutsch, Français, Italiano</b> — лише мова кантону, наприклад для швейцарської няні. Те, що ти вписуєш сама, друкується як є.</p>',
+  fmt: '<p><b>4 картки на A4</b> — чотири однакові картки на одному аркуші. Виріж по пунктиру: у гаманець, на холодильник, няні, в машину.</p><p><b>Плакат A4</b> — один великий аркуш, наприклад на холодильник або біля вхідних дверей.</p>',
+  bw: '<p>Якщо принтер чорно-білий або фарба дорога, увімкни цей пункт. Картка буде без кольорових плашок, усі номери залишаться жирними.</p>',
+  doc: '<p>Черговий лікар — це номер, за яким дзвонять увечері, вночі та у вихідні, коли потрібен лікар, а твій не відповідає і це не загроза життю.</p><p>У деяких кантонах номер залежить від регіону. Познач лише свій регіон, щоб картка не була перевантажена.</p>',
+  me: '<p>Впиши номери, які знадобляться тобі або тому, хто залишається з дітьми. Усе необов’язково. Якщо поле порожнє і позначено «Порожні рядки», на картці буде лінія, щоб вписати від руки.</p>',
+  kasse: '<p>Назва лікарняної каси є на твоїй страховій картці. Обери зі списку або впиши сама.</p>',
+  nr: '<p>Номер страховки (Versichertennummer) є на твоїй страховій картці. Він потрібен у лікарні й у лікаря, якщо картки немає з собою.</p>',
+  tele: '<p>У багатьох кас є безкоштовна медична лінія, де лікар або медсестра скажуть, що робити. Номер є на страховій картці або в застосунку каси. У деяких моделях страховки дзвонити туди першою обов’язково.</p>',
+  adr: '<p>Той, хто дзвонить у швидку, має швидко назвати адресу. Дітям і няні це особливо важко. Впиши вулицю, номер будинку, поверх і місто, а якщо дзвінок біля дверей підписаний іншим прізвищем, то і його.</p>',
+  allerg: '<p>Якщо в тебе або в дитини алергія на ліки чи потрібні важливі ліки, наприклад інсулін, це допоможе лікарям швидкої. Пиши коротко.</p><p>Ці дані залишаються лише у твоєму браузері та на роздрукованій картці.</p>'
+};
+const KEY = 'ekstrennyeNomera.v1';
+const K = window.KANTONY || {}, M = window.KANTONY_MED || {};
+const LANG_OF = {GE:'fr', VD:'fr', NE:'fr', JU:'fr', FR:'fr', VS:'fr', TI:'it'};
+const KASSEN = ['Agrisano','Aquilana','Assura','Atupri','Avenir (Groupe Mutuel)','CONCORDIA','CSS','EGK','Helsana','KLuG','KPT','ÖKK','Philos (Groupe Mutuel)','Sana24','Sanitas','SLKK','sodalis','Sumiswalder','SWICA','Sympany','Visana','Vivao Sympany'];
+const FIELDS = ['arzt','arztTel','kid','kidTel','kasse','nr','tele','apo','p1','p1Tel','p2','p2Tel','adr','allerg'];
+
+/* Тексты карточки на всех языках. ru — язык сайта (на украинской странице переводится). */
+const L = {
+  ru: {title:'Екстрені номери', sos:'Загроза життю — дзвони одразу', doc:'Потрібен лікар, але не загроза життю', me:'Мої номери', kt:'Кантон',
+    s144:'Швидка допомога', s117:'Поліція', s118:'Пожежники', s112:'Загальний екстрений номер', s1414:'Rega, гелікоптер', s145:'Отруєння', s143:'Якщо важко на душі', s142:'Допомога постраждалим від насильства', s147:'Дітям і підліткам',
+    arzt:'Сімейний лікар', kid:'Педіатр', kasse:'Каса і номер', tele:'Телемедицина каси', apo:'Аптека', p:'Близька людина', adr:'Адреса', allerg:'Алергії, ліки', region:'Номер свого регіону',
+    say:'Скажи: де ти, що сталося, скільки постраждалих, хто дзвонить. Не клади слухавку першою.', cut:'Виріж по пунктиру: у гаманець, на холодильник, няні, в машину.',
+    disc:'Зразок для особистого використання, не офіційний документ. Номери перевірено 08.10.2026, перевіряй сама. svoiludi.ch'},
+  de: {title:'Notfallnummern', sos:'Lebensgefahr – sofort anrufen', doc:'Arzt nötig, keine Lebensgefahr', me:'Meine Kontakte', kt:'Kanton',
+    s144:'Sanität', s117:'Polizei', s118:'Feuerwehr', s112:'Euro-Notruf', s1414:'Rega, Helikopter', s145:'Vergiftung (Tox Info)', s143:'Die Dargebotene Hand', s142:'Opferhilfe bei Gewalt', s147:'Pro Juventute, Kinder und Jugendliche',
+    arzt:'Hausarzt', kid:'Kinderarzt', kasse:'Krankenkasse und Nr.', tele:'Telemedizin der Kasse', apo:'Apotheke', p:'Kontaktperson', adr:'Adresse', allerg:'Allergien, Medikamente', region:'Nummer meiner Region',
+    say:'Sagen: Wo? Was ist passiert? Wie viele Verletzte? Wer ruft an? Nicht zuerst auflegen.', cut:'Entlang der gestrichelten Linie ausschneiden.',
+    disc:'Muster zur Orientierung und für den persönlichen Gebrauch, kein amtliches Dokument. Angaben ohne Gewähr, bitte selbst prüfen.'},
+  fr: {title:'Numéros d’urgence', sos:'Danger de mort – appeler tout de suite', doc:'Besoin d’un médecin, pas de danger de mort', me:'Mes contacts', kt:'Canton',
+    s144:'Ambulance', s117:'Police', s118:'Pompiers', s112:'Numéro d’urgence européen', s1414:'Rega, hélicoptère', s145:'Intoxication (Tox Info)', s143:'La Main Tendue', s142:'Aide aux victimes de violence', s147:'Pro Juventute, enfants et jeunes',
+    arzt:'Médecin de famille', kid:'Pédiatre', kasse:'Caisse maladie et n°', tele:'Télémédecine de la caisse', apo:'Pharmacie', p:'Personne de contact', adr:'Adresse', allerg:'Allergies, médicaments', region:'Numéro de ma région',
+    say:'Dire : Où ? Que s’est-il passé ? Combien de blessés ? Qui appelle ? Ne pas raccrocher en premier.', cut:'Découper le long des pointillés.',
+    disc:'Modèle indicatif pour usage personnel, pas un document officiel. Données sans garantie, à vérifier soi-même.'},
+  it: {title:'Numeri d’emergenza', sos:'Pericolo di vita – chiamare subito', doc:'Serve un medico, nessun pericolo di vita', me:'I miei contatti', kt:'Cantone',
+    s144:'Ambulanza', s117:'Polizia', s118:'Pompieri', s112:'Numero d’emergenza europeo', s1414:'Rega, elicottero', s145:'Avvelenamento (Tox Info)', s143:'Telefono Amico', s142:'Aiuto alle vittime di violenza', s147:'Pro Juventute, bambini e giovani',
+    arzt:'Medico di famiglia', kid:'Pediatra', kasse:'Cassa malati e n.', tele:'Telemedicina della cassa', apo:'Farmacia', p:'Persona di contatto', adr:'Indirizzo', allerg:'Allergie, medicamenti', region:'Numero della mia regione',
+    say:'Dire: Dove? Cosa è successo? Quanti feriti? Chi chiama? Non riattaccare per primi.', cut:'Ritagliare lungo la linea tratteggiata.',
+    disc:'Modello indicativo per uso personale, non un documento ufficiale. Dati senza garanzia, da verificare personalmente.'}
+};
+/* русские слова в данных кантонов → язык кантона */
+const TR = [['Діти, весь кантон', ['Kinder, ganzer Kanton', 'Enfants, tout le canton', 'Bambini, tutto il cantone']], ['Стоматолог', ['Zahnarzt', 'Dentiste', 'Dentista']], ['Діти', ['Kinder', 'Enfants', 'Bambini']],
+  ['Схід кантону', ['Thurgau Ost', 'Thurgovie est', 'Turgovia est']], ['Захід', ['West', 'Ouest', 'Ovest']], ['Медична консультація', ['Medizinische Beratung', 'Conseil médical', 'Consulenza medica']],
+  ['дорослі', ['Erwachsene', 'adultes', 'adulti']], ['діти до 15 років', ['Kinder bis 15', 'enfants jusqu’à 15 ans', 'bambini fino a 15 anni']]];
+const tr = (s, lg) => { const i = {de: 0, fr: 1, it: 2}[lg]; if (i === undefined) return s; TR.forEach(([a, b]) => { s = s.split(a).join(b[i]); }); return s; };
+const SOS = ['144', '117', '118', '112', '1414', '145', '143', '147', '142'];
+
+let S = load(), EX = null;
+function blank(){ return {k: '', lang: 'bi', fmt: 'four', bw: false, blank: true, rows: {}, me: {}}; }
+function load(){ try { const s = JSON.parse(localStorage.getItem(KEY)); if (s && typeof s === 'object') return Object.assign(blank(), s); } catch (e) {} let k = ''; try { k = localStorage.getItem('svoiludi.kanton') || ''; } catch (e) {} const b = blank(); b.k = k; return b; }
+function save(){ if (EX) return; try { localStorage.setItem(KEY, JSON.stringify(S)); if (S.k) localStorage.setItem('svoiludi.kanton', S.k); } catch (e) {} }
+function example(){ return {k: 'ZH', lang: 'bi', fmt: S.fmt, bw: S.bw, blank: true, rows: {}, me: {arzt: 'Dr. med. Anna Muster', arztTel: '044 123 45 67', kid: 'Kinderarztpraxis Sonnenberg', kidTel: '044 765 43 21', kasse: 'Helsana', nr: '123456789', tele: '', apo: 'Apotheke am Bahnhof, 044 222 33 44', p1: 'Олег (чоловік)', p1Tel: '079 123 45 67', p2: 'Frau Keller (сусідка)', p2Tel: '', adr: 'Musterstrasse 12, 3. Stock, 8000 Zürich', allerg: 'Дитина: алергія на пеніцилін'}}; }
+const D = () => EX || S;
+
+/* ---------- измерение текста и раскладка ---------- */
+const PT = 0.3528;
+const mctx = document.createElement('canvas').getContext('2d');
+function tw(s, b, size){ mctx.font = (b ? '700 ' : '400 ') + size + 'px Manrope'; return mctx.measureText(s).width * PT; }
+function wrap(s, b, size, w){ const out = []; let line = ''; String(s || '').split(/\s+/).filter(Boolean).forEach(wd => { const t = line ? line + ' ' + wd : wd; if (tw(t, b, size) <= w || !line) line = t; else { out.push(line); line = wd; } }); if (line) out.push(line); return out; }
+
+function docRows(d){
+  const m = M[d.k]; if (!m) return [];
+  return m.l.map((r, i) => ({i, n: r[1], t: r[0]})).filter(r => d.rows[d.k + ':' + r.i] !== undefined ? d.rows[d.k + ':' + r.i] : !(m.r && !/Дети|Стоматолог/.test(r.t)));
+}
+
+/* Одна карточка: x, y, ширина, высота, масштаб. Возвращает ops и высоту. */
+function card(d, x, y, w, sc, big){
+  const ops = [], C = d.bw ? {band: '#FFFFFF', bandTx: '#000000', head: '#000000', num: '#000000', red: '#000000', ink: '#000000', mut: '#444444', line: '#888888', soft: '#FFFFFF', sage: '#000000'}
+    : {band: '#4F5E3E', bandTx: '#FFFFFF', head: '#4F5E3E', num: '#2F2924', red: '#A0523D', ink: '#2F2924', mut: '#7A6E62', line: '#C9BBA8', soft: '#F3E3C2', sage: '#4F5E3E'};
+  const lgK = LANG_OF[d.k] || 'de';
+  const one = d.lang === 'ru' ? 'ru' : d.lang === 'bi' ? 'ru' : d.lang, two = d.lang === 'bi' ? lgK : '';
+  const t1 = k => L[one][k], t2 = k => two ? L[two][k] : '';
+  const pad = 4 * sc, iw = w - pad * 2; let cy = y;
+  const text = (s, xx, yy, size, b, color, align) => ops.push({t: 'text', s, x: xx, y: yy, size, b, color, align: align || 'left'});
+  // шапка
+  const bh = (two ? 15 : 12) * sc;
+  ops.push({t: 'rect', x, y, w, h: bh, fill: C.band, stroke: d.bw ? '#000000' : null});
+  text(t1('title'), x + pad, y + 7.2 * sc, 13 * sc, true, C.bandTx);
+  if (two) text(L[two].title, x + pad, y + 12 * sc, 8 * sc, false, C.bandTx);
+  if (d.k && K[d.k]) { const kn = (one === 'ru' ? K[d.k].n : '') + (two || one !== 'ru' ? (one === 'ru' ? ' · ' : '') + (L[two || one].kt + ' ' + d.k) : ''); text(kn, x + w - pad, y + 7.2 * sc, 7 * sc, false, C.bandTx, 'right'); }
+  cy = y + bh + 5 * sc;
+  const head = (k) => { text(t1(k) + (two ? ' · ' + t2(k) : ''), x + pad, cy, 7 * sc, true, C.head); cy += 1.6 * sc; ops.push({t: 'line', x1: x + pad, y1: cy, x2: x + w - pad, y2: cy, color: C.head, w: 0.3 * sc}); cy += 4 * sc; };
+  // угроза жизни: две колонки
+  head('sos');
+  const colW = iw / 2, nW = tw('1414', true, 10.5 * sc) + 2.2 * sc;
+  for (let r = 0; r < Math.ceil(SOS.length / 2); r++) {
+    let rowH = 0;
+    [0, 1].forEach(c => {
+      const num = SOS[r * 2 + c], xx = x + pad + c * colW; if (!num) return;
+      text(num, xx, cy + 1 * sc, (num.length > 3 ? 10.5 : 12.5) * sc, true, num === '144' || num === '112' ? C.red : C.num);
+      const l1 = wrap(t1('s' + num), true, 6.6 * sc, colW - nW - 2 * sc), l2 = two ? wrap(t2('s' + num), false, 5.8 * sc, colW - nW - 2 * sc) : [];
+      let yy = cy - 1.0 * sc;
+      l1.forEach(s => { text(s, xx + nW, yy, 6.6 * sc, true, C.ink); yy += 2.7 * sc; });
+      l2.forEach(s => { text(s, xx + nW, yy, 5.8 * sc, false, C.mut); yy += 2.4 * sc; });
+      rowH = Math.max(rowH, yy - cy + 1.2 * sc, 6.5 * sc);
+    });
+    cy += rowH + 1.4 * sc;
+  }
+  cy += 1.5 * sc;
+  // дежурный врач
+  head('doc');
+  const rows = docRows(d), m = M[d.k];
+  if (rows.length) rows.forEach(r => {
+    const nw = tw(r.n, true, 9 * sc) + 3 * sc;
+    text(r.n, x + pad, cy, 9 * sc, true, C.num);
+    const lab = one === 'ru' ? r.t + (two && tr(r.t, two) !== r.t ? ' · ' + tr(r.t, two) : '') : tr(r.t, one);
+    const ll = wrap(lab, false, 6.4 * sc, iw - nw); ll.forEach((s, i) => text(s, x + pad + nw, cy - 0.2 * sc + i * 2.6 * sc, 6.4 * sc, false, C.ink));
+    cy += Math.max(4.4 * sc, ll.length * 2.6 * sc + 1.8 * sc);
+  });
+  else { text(t1('region') + (two ? ' · ' + t2('region') : '') + ':', x + pad, cy, 6.4 * sc, false, C.mut); cy += 2 * sc; ops.push({t: 'line', x1: x + pad, y1: cy + 3 * sc, x2: x + w - pad, y2: cy + 3 * sc, color: C.line, w: 0.25, dash: true}); cy += 7 * sc; }
+  cy += 1.5 * sc;
+  // мои номера
+  head('me');
+  const me = d.me || {}, J = (a, b) => [a, b].filter(Boolean).join(', ');
+  const list = [['arzt', J(me.arzt, me.arztTel)], ['kid', J(me.kid, me.kidTel)], ['kasse', J(me.kasse, me.nr)], ['tele', me.tele], ['apo', me.apo], ['p', J(me.p1, me.p1Tel)], ['p', J(me.p2, me.p2Tel)], ['adr', me.adr], ['allerg', me.allerg]];
+  list.forEach(([k, v]) => {
+    if (!v && !d.blank) return;
+    if (!v && k === 'kid' && !d.blank) return;
+    const lab = t1(k) + (two ? ' · ' + t2(k) : '') + ':';
+    const lw = Math.min(tw(lab, true, 6 * sc) + 2 * sc, iw * 0.55);
+    text(lab, x + pad, cy, 6 * sc, true, C.mut);
+    if (v) { const vv = wrap(v, false, 6.8 * sc, iw - lw); vv.forEach((s, i) => text(s, x + pad + lw, cy + i * 2.8 * sc, 6.8 * sc, false, C.ink)); cy += Math.max(4.2 * sc, vv.length * 2.8 * sc + 1.6 * sc); }
+    else { ops.push({t: 'line', x1: x + pad + lw, y1: cy + 0.6 * sc, x2: x + w - pad, y2: cy + 0.6 * sc, color: C.line, w: 0.25, dash: true}); cy += 4.6 * sc; }
+  });
+  cy += 1 * sc;
+  // что сказать
+  const sayL = wrap(t1('say'), true, 6.2 * sc, iw - 4 * sc).concat(two ? wrap(t2('say'), false, 5.6 * sc, iw - 4 * sc) : []);
+  const sh = sayL.length * 2.6 * sc + 3.2 * sc;
+  ops.push({t: 'rect', x: x + pad, y: cy - 1 * sc, w: iw, h: sh, fill: C.soft, stroke: d.bw ? '#000000' : null});
+  sayL.forEach((s, i) => text(s, x + pad + 2 * sc, cy + 2.6 * sc + i * 2.6 * sc, i < wrap(t1('say'), true, 6.2 * sc, iw - 4 * sc).length ? 6.2 * sc : 5.6 * sc, i < wrap(t1('say'), true, 6.2 * sc, iw - 4 * sc).length, C.ink));
+  cy += sh + 2.5 * sc;
+  // дисклеймер
+  const dl = wrap(L[one === 'ru' && two ? two : one].disc, false, 4.4 * sc, iw);
+  dl.forEach((s, i) => text(s, x + pad, cy + i * 1.9 * sc, 4.4 * sc, false, C.mut));
+  cy += dl.length * 1.9 * sc + 1 * sc;
+  return {ops, h: cy - y};
+}
+
+function build(d){
+  const page = [];
+  if (d.fmt === 'a4') {
+    let sc = 3, r; do { r = card(d, 12, 12, 186, sc, true); sc -= 0.04; } while (r.h > 271 && sc > 1);
+    page.push({t: 'rect', x: 12, y: 12, w: 186, h: Math.max(r.h, 0) + 2, fill: null, stroke: d.bw ? '#000000' : '#C9BBA8', dash: false});
+    return page.concat(r.ops);
+  }
+  const W = 92, H = 136, gx = [10, 108], gy = [10, 150];
+  let sc = 1.4, r; do { r = card(d, 0, 0, W, sc); sc -= 0.02; } while (r.h > H - 2 && sc > 0.6);
+  sc += 0.02;
+  gx.forEach(x => gy.forEach(y => {
+    page.push({t: 'rect', x, y, w: W, h: H, fill: null, stroke: '#9A8F84', dash: true});
+    card(d, x, y, W, sc).ops.forEach(o => page.push(o));
+  }));
+  const lg = d.lang === 'bi' || d.lang === 'ru' ? 'ru' : d.lang;
+  page.push({t: 'text', s: L[lg].cut + (d.lang === 'bi' ? ' · ' + L[LANG_OF[d.k] || 'de'].cut : ''), x: 105, y: 292, size: 6.5, b: false, color: '#7A6E62', align: 'center'});
+  return page;
+}
+
+/* ---------- SVG-предпросмотр ---------- */
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'}[c]));
+function svg(ops){
+  let o = '<svg viewBox="0 0 210 297" xmlns="http://www.w3.org/2000/svg" role="img"><rect width="210" height="297" fill="#fff"/>';
+  ops.forEach(p => {
+    if (p.t === 'rect') o += `<rect x="${p.x}" y="${p.y}" width="${p.w}" height="${p.h}" fill="${p.fill || 'none'}"${p.stroke ? ` stroke="${p.stroke}" stroke-width="0.3"${p.dash ? ' stroke-dasharray="1.6 1.2"' : ''}` : ''}/>`;
+    else if (p.t === 'line') o += `<line x1="${p.x1}" y1="${p.y1}" x2="${p.x2}" y2="${p.y2}" stroke="${p.color}" stroke-width="${p.w}"${p.dash ? ' stroke-dasharray="0.8 0.8"' : ''}/>`;
+    else o += `<text x="${p.x}" y="${p.y}" font-family="Manrope" font-weight="${p.b ? 700 : 400}" font-size="${(p.size * PT).toFixed(3)}" fill="${p.color}" text-anchor="${p.align === 'right' ? 'end' : p.align === 'center' ? 'middle' : 'start'}">${esc(p.s)}</text>`;
+  });
+  if (window.SVLWM) o += SVLWM.svg(210, 297, D().lang === "bi" ? "" : D().lang);
+  return o + '</svg>';
+}
+
+/* ---------- PDF ---------- */
+const FONT_FILES = {'Manrope-Regular': '/assets/lib/fonts-pdf/Manrope-Regular.ttf', 'Manrope-Bold': '/assets/lib/fonts-pdf/Manrope-Bold.ttf'};
+let fontCache = null;
+async function fonts(){
+  if (fontCache) return fontCache;
+  const base = (window.PV_BASE || '/').replace(/\/$/, ''), out = {};
+  for (const [k, u] of Object.entries(FONT_FILES)) {
+    const r = await fetch(window.PV_BASE ? base + u : u); if (!r.ok) throw new Error('font');
+    const buf = new Uint8Array(await r.arrayBuffer()); let s = '';
+    for (let i = 0; i < buf.length; i += 0x8000) s += String.fromCharCode.apply(null, buf.subarray(i, i + 0x8000));
+    out[k] = btoa(s);
+  }
+  return fontCache = out;
+}
+const hex = h => [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16));
+async function makePdf(){
+  if (!window.jspdf) throw new Error('lib');
+  const F = await fonts(), doc = new window.jspdf.jsPDF({unit: 'mm', format: 'a4', compress: true});
+  for (const [k, b64] of Object.entries(F)) { doc.addFileToVFS(k + '.ttf', b64); doc.addFont(k + '.ttf', k, 'normal'); }
+  const d = D();
+  build(d).forEach(o => {
+    if (o.t === 'rect') {
+      if (o.stroke) { doc.setDrawColor(...hex(o.stroke)); doc.setLineWidth(0.3); doc.setLineDashPattern(o.dash ? [1.6, 1.2] : [], 0); }
+      if (o.fill) doc.setFillColor(...hex(o.fill));
+      doc.rect(o.x, o.y, o.w, o.h, o.fill && o.stroke ? 'FD' : o.fill ? 'F' : 'S');
+      doc.setLineDashPattern([], 0);
+    } else if (o.t === 'line') { doc.setDrawColor(...hex(o.color)); doc.setLineWidth(o.w); doc.setLineDashPattern(o.dash ? [0.8, 0.8] : [], 0); doc.line(o.x1, o.y1, o.x2, o.y2); doc.setLineDashPattern([], 0); }
+    else { doc.setFont(o.b ? 'Manrope-Bold' : 'Manrope-Regular', 'normal'); doc.setFontSize(o.size); doc.setTextColor(...hex(o.color)); doc.text(o.s, o.x, o.y, {align: o.align}); }
+  });
+  if (window.SVLWM) SVLWM.pdf(doc, 210, 297, D().lang === "bi" ? "" : D().lang);
+  const kn = d.k ? '-' + d.k : '';
+  doc.setProperties({title: L[d.lang === 'bi' ? 'ru' : d.lang].title});
+  return {blob: doc.output('blob'), name: (d.lang === 'de' ? 'Notfallnummern' : d.lang === 'fr' ? 'Numeros-urgence' : d.lang === 'it' ? 'Numeri-emergenza' : 'Ekstrennye-nomera') + kn + '.pdf'};
+}
+const st = document.getElementById('status'); const say = t => { st.textContent = t; };
+const PNG_NAME = () => { const d = D(); return (d.lang === 'de' ? 'Notfallnummern' : d.lang === 'fr' ? 'Numeros-urgence' : d.lang === 'it' ? 'Numeri-emergenza' : 'Ekstrennye-nomera') + (d.k ? '-' + d.k : ''); };
+/* ---------- PNG: тот же лист, нарисованный на canvas (около 200 dpi) ---------- */
+async function pagePng(pg){
+  try { await Promise.all([document.fonts.load('400 20px Manrope'), document.fonts.load('700 20px Manrope')]); } catch (e) {}
+  const k = 8, cv = document.createElement('canvas'); cv.width = Math.round(pg.w * k); cv.height = Math.round(pg.h * k);
+  const c = cv.getContext('2d'); c.scale(k, k); c.fillStyle = '#FFFFFF'; c.fillRect(0, 0, pg.w, pg.h);
+  pg.ops.forEach(o => {
+    if (o.t === 'rect') {
+      c.beginPath(); if (o.r && c.roundRect) c.roundRect(o.x, o.y, o.w, o.h, o.r); else c.rect(o.x, o.y, o.w, o.h);
+      if (o.fill) { c.fillStyle = o.fill; c.fill(); }
+      if (o.stroke) { c.strokeStyle = o.stroke; c.lineWidth = 0.35; c.setLineDash(o.dash ? [1.4, 1] : []); c.stroke(); c.setLineDash([]); }
+    } else if (o.t === 'line') { c.beginPath(); c.moveTo(o.x1, o.y1); c.lineTo(o.x2, o.y2); c.strokeStyle = o.color; c.lineWidth = o.w; c.setLineDash(o.dash ? [1.2, 0.9] : []); c.stroke(); c.setLineDash([]); }
+    else if (o.t === 'tri') { c.beginPath(); c.moveTo(o.p[0][0], o.p[0][1]); c.lineTo(o.p[1][0], o.p[1][1]); c.lineTo(o.p[2][0], o.p[2][1]); c.closePath(); c.fillStyle = o.fill; c.fill(); }
+    else { c.font = (o.b ? '700 ' : '400 ') + (o.size * PT) + 'px Manrope'; c.fillStyle = o.color; c.textAlign = o.align === 'right' ? 'right' : o.align === 'center' ? 'center' : 'left'; c.textBaseline = 'alphabetic'; c.fillText(o.s, o.x, o.y); }
+  });
+  if (window.SVLWM) SVLWM.png(c, pg.w, pg.h, D().lang === "bi" ? "" : D().lang);
+  return new Promise(r => cv.toBlob(r, 'image/png'));
+}
+async function downloadPng(i){
+  const pages = [{w: 210, h: 297, ops: build(D())}], pg = pages[i]; if (!pg) return;
+  say('Готую PNG…');
+  try { const blob = await pagePng(pg), a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = PNG_NAME() + (pages.length > 1 ? '-' + (i + 1) : '') + '.png'; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 4000); say('PNG завантажено. Його зручно надіслати в месенджері або поставити на екран телефона.'); }
+  catch (e) { say('Не вдалося зробити PNG. Спробуй ще раз.'); }
+}
+
+async function doPdf(btns, share){
+  btns.forEach(b => b.disabled = true); say('Готую PDF…');
+  try {
+    const {blob, name} = await makePdf();
+    if (share) { const file = new File([blob], name, {type: 'application/pdf'}); await navigator.share({files: [file], title: name}); say('Готово.'); }
+    else { const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = name; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 4000); say('PDF завантажено. Роздрукуй його на звичайному папері A4.'); }
+  } catch (e) { if (e && e.name === 'AbortError') say(''); else say('Не вдалося зробити PDF. Онови сторінку і спробуй ще раз.'); }
+  btns.forEach(b => b.disabled = false);
+}
+
+/* ---------- форма ---------- */
+const $ = id => document.getElementById(id);
+const ks = Object.keys(K).sort((a, b) => K[a].n.localeCompare(K[b].n, 'uk'));
+$('kanton').innerHTML = '<option value="">Обери кантон</option>' + ks.map(k => `<option value="${k}">${esc(K[k].n)}</option>`).join('');
+$('kassen').innerHTML = KASSEN.map(k => `<option value="${esc(k)}">`).join('');
+function drawDoc(){
+  const d = D(), m = M[d.k], box = $('docRows'), note = $('docNote');
+  if (!d.k || !m) { box.innerHTML = '<p class="hint">Спочатку обери кантон.</p>'; note.textContent = ''; return; }
+  const on = new Set(docRows(d).map(r => r.i));
+  box.innerHTML = m.l.map((r, i) => `<label><input type="checkbox" data-row="${i}"${on.has(i) ? ' checked' : ''}${EX ? ' disabled' : ''}><span><b>${esc(r[1])}</b> ${esc(r[0])}${r[2] ? ` <small>· ${esc(r[2])}</small>` : ''}</span></label>`).join('') || '<p class="hint">У цьому кантоні номер залежить від регіону. Знайди свій на сторінці кантону і впиши від руки на картці.</p>';
+  note.innerHTML = (m.r && m.l.length ? 'Номер залежить від регіону. Познач лише свій. ' : '') + (m.u ? `<a href="${esc(m.u)}" target="_blank" rel="noopener">Офіційна сторінка · ${esc(K[d.k].n)} ↗</a>` : '');
+}
+function fill(){
+  const d = D();
+  $('kanton').value = d.k; $('lang').value = d.lang; $('bw').checked = !!d.bw; $('blank').checked = d.blank !== false;
+  document.querySelectorAll('#fmt button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.v === d.fmt)));
+  FIELDS.forEach(f => { $(f).value = (d.me || {})[f] || ''; $(f).disabled = !!EX; });
+  $('exbar').hidden = !EX; $('exOn').hidden = !!EX;
+  drawDoc(); render();
+}
+function render(){ $('sheet').innerHTML = svg(build(D())); }
+$('kanton').addEventListener('change', e => { S.k = e.target.value; save(); drawDoc(); render(); });
+$('lang').addEventListener('change', e => { S.lang = e.target.value; save(); render(); });
+$('bw').addEventListener('change', e => { S.bw = e.target.checked; if (EX) EX.bw = S.bw; save(); render(); });
+$('blank').addEventListener('change', e => { S.blank = e.target.checked; if (EX) EX.blank = S.blank; save(); render(); });
+document.querySelectorAll('#fmt button').forEach(b => b.addEventListener('click', () => { S.fmt = b.dataset.v; if (EX) EX.fmt = S.fmt; save(); fill(); }));
+$('docRows').addEventListener('change', e => { const i = e.target.dataset.row; if (i === undefined || EX) return; S.rows[S.k + ':' + i] = e.target.checked; save(); render(); });
+FIELDS.forEach(f => $(f).addEventListener('input', e => { if (EX) return; S.me[f] = e.target.value; save(); render(); }));
+$('exOn').addEventListener('click', () => { EX = example(); fill(); window.scrollTo({top: $('exbar').offsetTop - 12, behavior: 'smooth'}); });
+$('exOff').addEventListener('click', () => { EX = null; fill(); });
+const pdfBtns = [$('pdf')];
+$('pdf').addEventListener('click', () => doPdf(pdfBtns));
+$('png').addEventListener('click', () => downloadPng(0));
+try { if (navigator.canShare && navigator.canShare({files: [new File(['x'], 'x.pdf', {type: 'application/pdf'})]}) && matchMedia('(pointer:coarse)').matches) { const sb = $('share'); sb.hidden = false; sb.addEventListener('click', () => doPdf(pdfBtns.concat(sb), true)); } } catch (e) {}
+if (/[?&]example\b/.test(location.search)) EX = example();
+fill();
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(render);
+</script>
+<script src="/assets/wmpdf.uk.js"></script>
+<script src="/assets/help.uk.js"></script>
+<script src="/assets/backup.uk.js"></script>
+<script src="/assets/pdffan.uk.js" defer></script>
+<script src="/assets/share.uk.js" defer></script>
+<script src="/assets/samesite.js"></script>
+<!--i18n--><style>#langbar.langbar{position:fixed;bottom:14px;right:14px;z-index:60;display:flex;gap:2px;background:rgba(255,255,255,.92);border:1px solid rgba(0,0,0,.08);border-radius:999px;padding:3px;font:600 12px Manrope,system-ui,sans-serif;box-shadow:0 2px 8px rgba(0,0,0,.08)}#langbar.langbar a{color:#5d554d;padding:5px 9px;border-radius:999px;text-decoration:none;font:inherit;display:inline-block}#langbar.langbar a[aria-current="true"]{background:#2f2924;color:#fff}@media print{.langbar{display:none!important}}</style><div class="langbar" id="langbar" role="navigation" aria-label="Мова / Язык"><a href="/instrumenty/ekstrennye-nomera/" hreflang="ru" data-lang="ru">RU</a><a href="/uk/instrumenty/ekstrennye-nomera/" hreflang="uk" data-lang="uk" aria-current="true">UA</a></div><script>(function(){var b=document.getElementById('langbar');if(!b)return;b.addEventListener('click',function(e){var a=e.target.closest('a[data-lang]');if(a){try{localStorage.setItem('svoiludiLang',a.dataset.lang)}catch(x){}a.href=a.getAttribute('href').split('#')[0]+location.hash;}});})();</script><!--i18n--></body>
+</html>

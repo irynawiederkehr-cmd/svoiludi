@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="uk">
+<head><!--i18n--><base href="/instrumenty/anketa-klienta/"><!--i18n-->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<link rel="icon" href="/fav/favicon.svg" type="image/svg+xml"><link rel="icon" href="/fav/icon-32.png" sizes="32x32"><link rel="apple-touch-icon" href="/fav/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/fonts.css">
+<meta name="description" content="Безкоштовна анкета клієнта і згода на процедуру для косметолога, манікюру, масажу, депіляції, вій у Швейцарії (Kundenformular, Einverständniserklärung, fiche client): запитання про здоров’я під твої процедури, згода на зберігання даних за DSG і на фото до і після, протокол процедур. Німецькою, французькою, італійською, англійською, з українським перекладом. PDF.">
+<link rel="canonical" href="https://svoiludi.ch/uk/instrumenty/anketa-klienta/">
+<meta property="og:type" content="website"><meta property="og:locale" content="uk_UA"><meta property="og:site_name" content="Свої люди у Швейцарії">
+<meta property="og:title" content="Анкета здоров’я і згода клієнта на процедуру · безкоштовно"><meta property="og:description" content="Запитання про здоров’я, згода на процедуру, дані і фото — мовою кантону з українським перекладом. Для косметологів, манікюру і масажу.">
+<meta property="og:url" content="https://svoiludi.ch/uk/instrumenty/anketa-klienta/"><meta property="og:image" content="https://svoiludi.ch/instrumenty/anketa-klienta/og-image.uk.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="robots" content="noindex, nofollow">
+<title>Анкета здоров’я і згода клієнта на процедуру</title>
+<style>
+/* Анкета здоровья и согласие клиента на процедуру (08.10.2026): анкета слева, живые листы справа, движок assets/shema.js. */
+:root{
+  --bg:#F4EDE3; --paper:#FFFCF8; --ink:#2F2924; --muted:#7A6E62; --line:#E5D9C9; --soft:#EFE5D7;
+  --brown:#6E4F3C; --mustard:#B98324; --mustard-soft:#F3E3C2; --sage:#4F5E3E; --sage-soft:#E3E8D6; --red:#A0523D;
+  --display:"Forum","Georgia",serif; --sans:"Manrope","Segoe UI",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#221D19; --paper:#2C2621; --ink:#F1E9DF; --muted:#B4A796; --line:#3E362F; --soft:#352E28;
+  --brown:#E1C2A6; --mustard:#E2B45C; --mustard-soft:#3D321F; --sage:#B4BF97; --sage-soft:#2E3226; --red:#E39A85; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#221D19; --paper:#2C2621; --ink:#F1E9DF; --muted:#B4A796; --line:#3E362F; --soft:#352E28;
+  --brown:#E1C2A6; --mustard:#E2B45C; --mustard-soft:#3D321F; --sage:#B4BF97; --sage-soft:#2E3226; --red:#E39A85; color-scheme:dark}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--ink);font:15px/1.55 var(--sans);margin:0}
+.wrap{max-width:1280px;margin:0 auto;padding-inline:16px;padding-block:28px 48px;display:flex;flex-direction:column;gap:24px}
+.eyebrow{font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+h1{font-family:var(--display);font-weight:400;font-size:clamp(2.4rem,6vw,3.6rem);line-height:1;margin:4px 0 10px;text-wrap:balance}
+h2{font-family:var(--display);font-weight:400;font-size:1.55rem;margin:0;text-wrap:balance}
+h3{font-family:var(--display);font-weight:400;font-size:1.22rem;line-height:1.2;margin:0}
+.lead{max-width:66ch;color:var(--muted);margin:0}
+.jump{font-weight:700;color:var(--brown);text-underline-offset:4px}
+.privnote{margin-top:14px;background:var(--sage-soft);border-radius:16px;padding:12px 16px;font-size:.9rem;max-width:90ch}
+.status{font-size:.86rem;color:var(--muted);min-height:1.3em}
+.btn{font:inherit;font-weight:700;font-size:.9rem;border:0;border-radius:999px;padding:10px 18px;cursor:pointer;color:#fff;text-decoration:none;display:inline-flex;align-items:center;gap:6px;background:#6E4F3C;box-shadow:0 8px 18px -8px rgba(110,79,60,.6)}
+.btn.gold{background:#B98324;box-shadow:0 8px 18px -8px rgba(185,131,36,.7)}
+.btn.free{background:#4F5E3E;box-shadow:0 8px 18px -8px rgba(79,94,62,.6)}
+.btn.ghost{background:transparent;color:var(--brown);border:1.5px solid var(--line);box-shadow:none}
+.btn.sm{font-size:.82rem;padding:7px 13px}
+.btn[disabled]{background:var(--soft);color:var(--muted);box-shadow:none;cursor:wait}
+select,input[type=text],input[type=tel],input[type=number],input[type=date],textarea{font:inherit;font-size:.95rem;color:var(--ink);background:var(--paper);border:1.5px solid var(--line);border-radius:12px;padding:9px 12px;width:100%;min-width:0}
+select:focus-visible,input:focus-visible,button:focus-visible,textarea:focus-visible,a:focus-visible{outline:2px solid var(--mustard);outline-offset:2px}
+::placeholder{color:color-mix(in srgb,var(--muted) 70%,transparent)}
+.setup{background:var(--paper);border:1.5px solid var(--line);border-radius:22px;padding:16px 18px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px 18px;align-items:start}
+@media (max-width:1000px){.setup{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.setup{grid-template-columns:1fr}}
+.fl{display:flex;flex-direction:column;gap:6px;min-width:0}
+.fl>.lb{font-size:.8rem;font-weight:700;color:var(--muted);display:flex;align-items:center}
+.seg{display:flex;flex-wrap:wrap;gap:6px}
+.seg button{font:inherit;font-size:.84rem;font-weight:700;border:1.5px solid var(--line);background:var(--paper);color:var(--ink);border-radius:999px;padding:6px 12px;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--sage);border-color:var(--sage);color:#fff}
+.acts{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.exbar{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;background:var(--mustard-soft);border-radius:16px;padding:10px 14px;font-size:.9rem;font-weight:600}
+.work{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:22px;align-items:start}
+@media (max-width:1040px){.work{grid-template-columns:1fr}}
+.form{display:flex;flex-direction:column;gap:14px;min-width:0}
+.sec{background:var(--paper);border:1.5px solid var(--line);border-radius:20px;padding:16px 18px;display:flex;flex-direction:column;gap:12px}
+.sec>h2{font-size:1.3rem;display:flex;align-items:center}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:560px){.g2{grid-template-columns:1fr}}
+.hint{font-size:.84rem;color:var(--muted);margin:0}
+.chk{display:flex;flex-direction:column;gap:8px}
+.chk label{display:flex;gap:10px;align-items:baseline;font-size:.92rem;cursor:pointer}
+.chk input{flex:none;width:18px;height:18px;accent-color:var(--sage);transform:translateY(3px)}
+.chk b{white-space:nowrap}
+.chk small{color:var(--muted)}
+.tog{display:flex;gap:10px;align-items:center;font-size:.92rem;cursor:pointer}
+.tog input{width:18px;height:18px;accent-color:var(--sage)}
+.sheetbox{position:sticky;top:12px;display:flex;flex-direction:column;gap:10px}
+@media (max-width:1040px){.sheetbox{position:static}}
+.sheet{background:#fff;border-radius:6px;box-shadow:0 18px 40px -22px rgba(47,41,36,.45);overflow:hidden}
+.sheet svg{display:block;width:100%;height:auto}
+.imp{background:var(--paper);border:1.5px dashed color-mix(in srgb,var(--sage) 55%,transparent);border-radius:16px;padding:14px 18px;font-size:.88rem;max-width:90ch;margin:0}
+.imp b{color:var(--sage)}
+.guide{display:flex;flex-direction:column;gap:14px;max-width:90ch}
+.guide ul{margin:0;padding-left:20px}
+.guide li{margin:4px 0}
+.credit{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:.8rem;color:var(--muted)}
+.credit a{color:var(--muted)}
+.qh{font:700 .72rem/1 var(--sans);width:20px;height:20px;border-radius:50%;border:1.5px solid var(--line);background:var(--paper);color:var(--brown);cursor:pointer;margin-left:6px;padding:0;flex:none}
+.sheets{display:flex;flex-direction:column;gap:14px}
+.goals{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+@media (max-width:560px){.goals{grid-template-columns:1fr}}
+.goals label{display:flex;gap:10px;align-items:flex-start;background:var(--bg);border:1.5px solid var(--line);border-radius:14px;padding:9px 12px;cursor:pointer;font-size:.92rem}
+.goals input{width:18px;height:18px;accent-color:var(--sage);flex:none;margin-top:2px}
+.goals small{display:block;color:var(--muted)}
+.steps{display:flex;flex-direction:column;gap:8px}
+.steps details{background:var(--paper);border:1.5px solid var(--line);border-radius:16px;padding:10px 16px}
+.steps summary{cursor:pointer;font-weight:700;display:flex;gap:10px;align-items:baseline}
+.steps summary small{font-weight:600;color:var(--muted);margin-left:auto;text-align:right}
+.steps details p,.steps details ul{margin:8px 0 2px;font-size:.93rem}
+.steps details ul{padding-left:20px}
+</style>
+<!--pwa--><link rel="manifest" href="/fav/site.uk.webmanifest"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Свої люди"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="theme-color" content="#4F5E3E"><style id="pa-tiles">/* верхнее меню на телефоне и планшете: прямоугольные плитки с закруглением в два ряда, иконки ставит pwa-app.js (08.10.2026) */html header.top nav[aria-label] a .pa-ni{display:none}@media (max-width:1100px){html header.top .page{flex-wrap:wrap;row-gap:8px}html header.top nav[aria-label]{order:3;width:100%;display:grid!important;grid-template-columns:repeat(var(--pa-cols,3),minmax(0,1fr));gap:8px;overflow:visible;padding:4px 0 12px;margin:0}html header.top nav[aria-label] a{display:flex!important;flex-direction:column;align-items:center;justify-content:center;gap:5px;min-height:62px;padding:9px 6px;border-radius:14px;background:var(--paper,#FFFCF8);border:1px solid color-mix(in srgb,var(--sage,#66704F) 30%,transparent);box-shadow:0 3px 10px -6px rgba(60,70,40,.45);color:var(--ink,#2F2924)!important;font:600 .78rem/1.18 var(--body,system-ui);text-align:center;white-space:normal;text-decoration:none;-webkit-tap-highlight-color:transparent}html header.top nav[aria-label] a::after{content:none!important}html header.top nav[aria-label] a .pa-ni{display:block;width:22px;height:22px;fill:none;stroke:var(--sage,#66704F);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}html header.top nav[aria-label] a[aria-current="page"]{background:var(--sage,#66704F);border-color:var(--sage,#66704F);color:var(--paper,#FFFCF8)!important;box-shadow:0 4px 12px -6px rgba(60,70,40,.6)}html header.top nav[aria-label] a[aria-current="page"] .pa-ni{stroke:var(--paper,#FFFCF8)}html header.top nav[aria-label] a:active{transform:scale(.97)}}/* кнопки сайта — прямоугольные с закруглением, как плитки меню (решение Ирины 08.10.2026); значки-метки (образец, теги, «?») остаются круглыми */:is(.navcta,.btn,.shr-btn,.pl-act a,.pl-act button,.qa,.more,.listbar button,.leaflet-popup-content button,.calmenu a,.calmenu button,.go-free,.find,.confirm,.monthics,.addb,.mbtn,.example,.viewsw,#langbar.langbar,.pa-go,.pa-x,.pa-foot){border-radius:12px!important}:is(.viewsw button,.seg button,.chips button,#langbar.langbar a,.cal-nav button){border-radius:9px!important}</style><script src="/assets/pwa-app.js" defer></script><!--pwa--><!--i18n--><link rel="alternate" hreflang="ru" href="https://svoiludi.ch/instrumenty/anketa-klienta/"><link rel="alternate" hreflang="uk" href="https://svoiludi.ch/uk/instrumenty/anketa-klienta/"><!--i18n--></head>
+<body>
+<style>#fields input:not([type=checkbox]),#fields select{width:100%}</style>
+<div class="wrap">
+  <header>
+    <p style="margin:0 0 14px"><a class="jump" href="https://svoiludi.ch/uk/instrumenty/">← Усі корисні інструменти · Свої люди у Швейцарії</a></p>
+    <div class="eyebrow">Своя справа · краса і масаж</div>
+    <h1>Анкета здоров’я і згода клієнта на процедуру</h1>
+    <p class="lead">Анкета для косметолога, майстра манікюру, масажиста, майстра депіляції і вій. Клієнт перед першою процедурою відповідає на запитання про здоров’я і підписує згоду на процедуру, на зберігання даних і, за бажанням, на фото до і після. Запитання підбираються під твої процедури. Мовою кантону або англійською, за бажанням із українським перекладом. Плюс аркуш «Протокол процедур». PDF безкоштовно.</p>
+    <div class="privnote"><b>Твої дані тільки в тебе.</b> На сайті зберігаються тільки твої дані майстра і вибір процедур — у твоєму браузері. Анкети клієнти заповнюють від руки на роздруківці.</div>
+    <div data-fan="anketa-klienta"></div>
+  </header>
+  <div class="setup">
+    <div class="fl"><span class="lb">Мова анкети<button type="button" class="qh" data-help="lang" aria-label="Підказка: мова анкети" aria-expanded="false">?</button></span><select id="lang"><option value="de">Deutsch</option><option value="de+ru">Deutsch + українська</option><option value="fr">Français</option><option value="fr+ru">Français + українська</option><option value="it">Italiano</option><option value="it+ru">Italiano + українська</option><option value="en">English</option><option value="en+ru">English + українська</option><option value="ru">Тільки українська</option></select></div>
+    <div class="fl"><span class="lb">Друк</span><label class="tog"><input type="checkbox" id="bw"> Без кольору, для дешевого друку</label></div>
+  </div>
+  <div class="exbar" id="exbar" hidden><span>Це приклад. Так виглядатиме твій файл.</span><button type="button" class="btn sm" id="exOff">Повернутися до моїх даних</button></div>
+  <div class="work">
+    <div class="form" id="fields"></div>
+    <div class="sheetbox">
+      <div class="acts"><button type="button" class="btn gold" id="pdf">Завантажити PDF</button><button type="button" class="btn ghost sm" id="share" hidden>Надіслати</button><button type="button" class="btn ghost sm" id="exOn">Подивитися на прикладі</button></div>
+      <div class="sheets" id="sheet" aria-label="Попередній перегляд аркушів"></div>
+      <div class="status" id="status" role="status"></div>
+    </div>
+  </div>
+  <p class="imp"><b>Важливо.</b> Це зразок для прикладу й особистого використання, а не офіційний документ і не юридична консультація. Запитання — загальний орієнтир, правила для твоєї процедури й кантону уточнюй сама (у професійній спілці, у страховій, у кантоні). Автор не несе відповідальності за достовірність. Відомості про здоров’я — особливо захищені дані: зберігай заповнені анкети під замком і не довше, ніж потрібно. Медичні процедури (уколи, філери, перманентний макіяж, лазер) потребують своїх дозволів — ця анкета для них не підходить.</p>
+  <div class="share-slot" data-url="https://svoiludi.ch/uk/instrumenty/anketa-klienta/" data-lead="Перешли тим, хто працює в красі й масажі. У посиланні немає твоїх даних." data-text="Привіт! Тут можна безкоштовно зробити анкету клієнта і згоду на процедуру для косметолога, манікюру чи масажу — німецькою, французькою або англійською, з перекладом українською. https://svoiludi.ch/uk/instrumenty/anketa-klienta/"></div>
+  <p class="credit"><span>Свої люди у Швейцарії · svoiludi.ch</span><a href="https://svoiludi.ch/uk/privacy/">Політика конфіденційності</a></p>
+</div>
+
+<script src="/assets/kantony.uk.js"></script>
+<script src="/assets/lib/jspdf.umd.min.js"></script>
+<script src="/assets/shema.uk.js"></script>
+<script>
+window.HELP = {
+  lang: '<p>Якою мовою анкета для клієнта. Зазвичай — мовою кантону. «+ українська» додає переклад під кожним запитанням для україномовних клієнтів. Анкета англійською — для експатів.</p>',
+  proc: '<p>Познач процедури, які ти робиш. Запитання про здоров’я підбираються під них: для масажу — про серце, тиск і вени, для депіляції — про сонце й ретиноїди, для вій — про очі й лінзи.</p>',
+  dsg: '<p>Відомості про здоров’я — особливо захищені дані за швейцарським законом про захист даних (DSG). Тому в анкеті є згода клієнта, що ти їх зберігаєш і використовуєш тільки для процедури. Зберігай анкети під замком або в захищеній папці, не довше, ніж потрібно, і видаляй на прохання клієнта, якщо немає обов’язку зберігати.</p>',
+  foto: '<p>Фото «до і після» — теж особисті дані. Окрема галочка для фото тільки для себе і окрема — для соцмереж і сайту. Без другої галочки фото в Instagram викладати не можна.</p>',
+  prot: '<p>Протокол процедур — таблиця, куди ти записуєш дату, процедуру, засоби і нотатки. Він допомагає наступного разу і захищає тебе, якщо клієнт поскаржиться.</p>'
+};
+const KEY = 'anketaKlienta.v1';
+let S = load(), EX = null;
+function blank(){ return {lang: 'de', ru: false, procs: ['kos'], me: {name: '', firm: '', addr: '', city: '', tel: '', mail: ''}, foto: true, prot: true, n: 1}; }
+function load(){ try { const s = JSON.parse(localStorage.getItem(KEY)); if (s && typeof s === 'object') return Object.assign(blank(), s); } catch (e) {} return blank(); }
+function save(){ if (EX) return; try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} }
+const D = () => EX || S;
+const LX = {de: 0, fr: 1, it: 2, en: 3, ru: 4};
+const PROCS = {kos: ['Kosmetische Gesichtsbehandlung', 'Soin du visage', 'Trattamento viso', 'Facial treatment', 'Догляд за обличчям'], nail: ['Manicure / Pedicure', 'Manucure / pédicure', 'Manicure / pedicure', 'Manicure / pedicure', 'Манікюр / педикюр'],
+  mass: ['Massage', 'Massage', 'Massaggio', 'Massage', 'Масаж'], wax: ['Haarentfernung (Waxing, Sugaring)', 'Épilation (cire, sucre)', 'Depilazione (cera, zucchero)', 'Hair removal (waxing, sugaring)', 'Депіляція (віск, шугаринг)'], lash: ['Wimpern und Augenbrauen', 'Cils et sourcils', 'Ciglia e sopracciglia', 'Lashes and brows', 'Вії та брови']};
+const Q = [
+  ['allerg', '*', ['Allergien oder Unverträglichkeiten (z. B. Kosmetika, Duftstoffe, Latex, Öle)?', 'Allergies ou intolérances (p. ex. cosmétiques, parfums, latex, huiles) ?', 'Allergie o intolleranze (p. es. cosmetici, profumi, lattice, oli)?', 'Allergies or intolerances (e.g. cosmetics, fragrances, latex, oils)?', 'Алергія або непереносимість (косметика, віддушки, латекс, олії)?']],
+  ['skin', '*', ['Hautkrankheiten (z. B. Ekzem, Psoriasis, Akne, Rosacea)?', 'Maladies de la peau (eczéma, psoriasis, acné, rosacée) ?', 'Malattie della pelle (eczema, psoriasi, acne, rosacea)?', 'Skin conditions (eczema, psoriasis, acne, rosacea)?', 'Шкірні захворювання (екзема, псоріаз, акне, розацеа)?']],
+  ['wound', '*', ['Wunden, Entzündungen, Herpes oder Pilz im Behandlungsbereich?', 'Plaies, inflammations, herpès ou mycose dans la zone traitée ?', 'Ferite, infiammazioni, herpes o micosi nella zona trattata?', 'Wounds, inflammation, cold sores or fungal infection in the area?', 'Рани, запалення, герпес або грибок у зоні процедури?']],
+  ['preg', '*', ['Schwangerschaft oder Stillzeit?', 'Grossesse ou allaitement ?', 'Gravidanza o allattamento?', 'Pregnant or breastfeeding?', 'Вагітність або годування груддю?']],
+  ['meds', '*', ['Regelmässige Medikamente (z. B. Blutverdünner, Kortison)?', 'Médicaments réguliers (p. ex. anticoagulants, cortisone) ?', 'Farmaci regolari (p. es. anticoagulanti, cortisone)?', 'Regular medication (e.g. blood thinners, cortisone)?', 'Регулярні ліки (наприклад, що розріджують кров, кортизон)?']],
+  ['diab', '*', ['Diabetes?', 'Diabète ?', 'Diabete?', 'Diabetes?', 'Діабет?']],
+  ['heart', 'mass,kos', ['Herz-Kreislauf-Erkrankung, Bluthochdruck oder Herzschrittmacher?', 'Maladie cardiovasculaire, hypertension ou stimulateur cardiaque ?', 'Malattia cardiovascolare, ipertensione o pacemaker?', 'Heart disease, high blood pressure or pacemaker?', 'Хвороби серця, високий тиск або кардіостимулятор?']],
+  ['vein', 'mass,wax', ['Krampfadern, Thrombose oder Venenleiden?', 'Varices, thrombose ou problèmes veineux ?', 'Varici, trombosi o disturbi venosi?', 'Varicose veins, thrombosis or vein problems?', 'Варикоз, тромбоз або хвороби вен?']],
+  ['epi', 'mass,kos', ['Epilepsie?', 'Épilepsie ?', 'Epilessia?', 'Epilepsy?', 'Епілепсія?']],
+  ['ops', '*', ['Operation oder Verletzung in den letzten 6 Monaten?', 'Opération ou blessure au cours des 6 derniers mois ?', 'Operazione o lesione negli ultimi 6 mesi?', 'Surgery or injury in the last 6 months?', 'Операція або травма за останні 6 місяців?']],
+  ['retin', 'kos,wax', ['Retinoide (z. B. Isotretinoin), Peeling oder Laser in den letzten Wochen?', 'Rétinoïdes (p. ex. isotrétinoïne), peeling ou laser ces dernières semaines ?', 'Retinoidi (p. es. isotretinoina), peeling o laser nelle ultime settimane?', 'Retinoids (e.g. isotretinoin), peel or laser in recent weeks?', 'Ретиноїди (наприклад, ізотретиноїн), пілінг або лазер в останні тижні?']],
+  ['sun', 'kos,wax', ['Sonnenbrand oder Solarium in den letzten Tagen?', 'Coup de soleil ou solarium ces derniers jours ?', 'Scottatura o solarium negli ultimi giorni?', 'Sunburn or tanning bed in the last few days?', 'Сонячний опік або солярій в останні дні?']],
+  ['eyes', 'lash', ['Augenerkrankungen, Kontaktlinsen oder empfindliche Augen?', 'Maladies des yeux, lentilles de contact ou yeux sensibles ?', 'Malattie degli occhi, lenti a contatto o occhi sensibili?', 'Eye conditions, contact lenses or sensitive eyes?', 'Хвороби очей, контактні лінзи або чутливі очі?']],
+  ['nails', 'nail', ['Nagelpilz, Nagelverletzung oder Gefühlsstörung an Händen oder Füssen?', 'Mycose des ongles, blessure ou troubles de la sensibilité aux mains ou aux pieds ?', 'Micosi delle unghie, lesioni o disturbi della sensibilità a mani o piedi?', 'Nail fungus, nail injury or numbness in hands or feet?', 'Грибок нігтів, травма або оніміння рук чи ніг?']],
+  ['other', '*', ['Gibt es sonst etwas, das wir wissen sollten?', 'Autre chose que nous devrions savoir ?', 'C’è altro che dovremmo sapere?', 'Anything else we should know?', 'Щось іще, що нам важливо знати?']]
+];
+const T = {
+  title: ['Kundenformular und Einverständniserklärung', 'Fiche client et consentement', 'Scheda cliente e consenso', 'Client form and consent', 'Анкета клієнта і згода'],
+  proc: ['Behandlung', 'Soin', 'Trattamento', 'Treatment', 'Процедура'], pers: ['Persönliche Angaben', 'Données personnelles', 'Dati personali', 'Personal details', 'Особисті дані'],
+  f: [['Name, Vorname', 'Geburtsdatum', 'Adresse', 'Telefon', 'E-Mail'], ['Nom, prénom', 'Date de naissance', 'Adresse', 'Téléphone', 'E-mail'], ['Cognome, nome', 'Data di nascita', 'Indirizzo', 'Telefono', 'E-mail'], ['Name', 'Date of birth', 'Address', 'Phone', 'Email'], ['Прізвище, ім’я', 'Дата народження', 'Адреса', 'Телефон', 'E-mail']],
+  health: ['Gesundheit', 'Santé', 'Salute', 'Health', 'Здоров’я'], no: ['Nein', 'Non', 'No', 'No', 'Ні'], yes: ['Ja', 'Oui', 'Sì', 'Yes', 'Так'], det: ['Wenn ja, welche', 'Si oui, lesquels', 'Se sì, quali', 'If yes, which', 'Якщо так, які'],
+  cons: ['Einverständnis', 'Consentement', 'Consenso', 'Consent', 'Згода'],
+  c1: ['Ich habe die Fragen wahrheitsgemäss beantwortet und melde Änderungen meiner Gesundheit vor der nächsten Behandlung. Ich wurde über Ablauf, mögliche Reaktionen und Pflege nach der Behandlung informiert und bin mit der Behandlung einverstanden. Kosmetische Behandlungen ersetzen keine ärztliche Behandlung.', 'J’ai répondu sincèrement aux questions et j’annoncerai tout changement de santé avant le prochain soin. J’ai été informé·e du déroulement, des réactions possibles et des soins après traitement et j’accepte le soin. Les soins esthétiques ne remplacent pas un traitement médical.', 'Ho risposto sinceramente alle domande e comunicherò eventuali cambiamenti di salute prima del prossimo trattamento. Sono stato/a informato/a sullo svolgimento, sulle possibili reazioni e sulla cura dopo il trattamento e acconsento al trattamento. I trattamenti estetici non sostituiscono un trattamento medico.', 'I have answered the questions truthfully and will report any change in my health before the next treatment. I have been informed about the procedure, possible reactions and aftercare and I agree to the treatment. Cosmetic treatments do not replace medical treatment.', 'Я відповіла на запитання чесно і повідомлю про зміни здоров’я до наступної процедури. Мене поінформували про перебіг процедури, можливі реакції та догляд після неї, я згодна на процедуру. Косметичні процедури не замінюють лікування в лікаря.'],
+  c2: ['Meine Angaben, auch zur Gesundheit, werden vertraulich behandelt, nur für meine Behandlung verwendet und sicher aufbewahrt. Ich kann jederzeit Auskunft verlangen und die Löschung, soweit keine Aufbewahrungspflicht besteht.', 'Mes données, y compris de santé, sont traitées de manière confidentielle, utilisées uniquement pour mes soins et conservées en sécurité. Je peux à tout moment demander à y accéder et les faire supprimer, sauf obligation de conservation.', 'I miei dati, anche sulla salute, sono trattati in modo confidenziale, usati solo per il mio trattamento e conservati in modo sicuro. Posso in ogni momento chiederne l’accesso e la cancellazione, salvo obbligo di conservazione.', 'My details, including health information, are treated confidentially, used only for my treatment and kept securely. I may ask at any time to see them and to have them deleted unless they must be kept.', 'Мої дані, зокрема про здоров’я, зберігаються конфіденційно, використовуються тільки для моєї процедури і надійно захищені. Я будь-коли можу попросити їх показати або видалити, якщо немає обов’язку їх зберігати.'],
+  f1: ['Fotos vorher / nachher nur zur Dokumentation (nicht veröffentlicht)', 'Photos avant / après uniquement pour le suivi (non publiées)', 'Foto prima / dopo solo per documentazione (non pubblicate)', 'Before / after photos for records only (not published)', 'Фото до і після — тільки для записів майстра (не публікуються)'],
+  f2: ['Fotos ohne erkennbares Gesicht dürfen auf Website und Social Media gezeigt werden', 'Photos sans visage reconnaissable autorisées sur le site et les réseaux sociaux', 'Le foto senza volto riconoscibile possono essere mostrate sul sito e sui social', 'Photos without a recognisable face may be shown on the website and social media', 'Фото без упізнаваного обличчя можна показувати на сайті та в соцмережах'],
+  place: ['Ort und Datum', 'Lieu et date', 'Luogo e data', 'Place and date', 'Місце й дата'], sign: ['Unterschrift Kundin / Kunde', 'Signature cliente', 'Firma cliente', 'Client signature', 'Підпис клієнта'], minor: ['Bei Minderjährigen: Unterschrift der gesetzlichen Vertretung', 'Pour les mineurs : signature du représentant légal', 'Per i minorenni: firma del rappresentante legale', 'For minors: signature of parent or guardian', 'Для неповнолітніх: підпис одного з батьків'],
+  prot: ['Behandlungsprotokoll', 'Protocole des soins', 'Protocollo dei trattamenti', 'Treatment record', 'Протокол процедур'], pc: [['Datum', 'Behandlung', 'Produkte', 'Bemerkungen', 'Visum'], ['Date', 'Soin', 'Produits', 'Remarques', 'Visa'], ['Data', 'Trattamento', 'Prodotti', 'Osservazioni', 'Visto'], ['Date', 'Treatment', 'Products', 'Notes', 'Initials'], ['Дата', 'Процедура', 'Засоби', 'Нотатки', 'Підпис']],
+  client: ['Kundin / Kunde', 'Cliente', 'Cliente', 'Client', 'Клієнт']
+};
+/* ---------- лист (документ мастера от своего имени: без меток сайта) ---------- */
+function build(){
+  const d = D(), L = LX[d.lang], R = d.ru && d.lang !== 'ru' ? 4 : -1, C = SH.pal(!!d.bw), ink = d.bw ? '#000000' : '#2F2924', mut = d.bw ? '#444444' : '#7A6E62', ln = d.bw ? '#888888' : '#C9BBA8', acc = d.bw ? '#000000' : '#4F5E3E', zeb = d.bw ? '#F2F2F2' : '#F8F3EC';
+  const qs = Q.filter(q => q[1] === '*' || q[1].split(',').some(p => d.procs.includes(p)));
+  const two = (a, i) => a[L] + (R >= 0 ? ' / ' + a[R][i === undefined ? 0 : i] : '');
+  const tr = k => T[k][L] + (R >= 0 ? ' · ' + T[k][R] : '');
+  const pages = [];
+  for (let n = 0; n < Math.max(1, +d.n || 1); n++) {
+    let P = SH.page(210, 297, C), y = 16; pages.push(P); const X = 16, W = 178;
+    const me = d.me, mh = [me.firm || me.name, me.firm ? me.name : '', [me.addr, me.city].filter(Boolean).join(', '), [me.tel, me.mail].filter(Boolean).join(' · ')].filter(Boolean);
+    mh.forEach((s, i) => { P.text(s, X + W, y + i * 4, i ? 7.5 : 9, !i, i ? mut : ink, 'right'); });
+    P.text(T.title[L], X, y + 4, 15, true, ink); y += 10; if (R >= 0) { P.text(T.title[R], X, y, 8, false, mut); y += 4.5; }
+    y = Math.max(y, 16 + mh.length * 4) + 3;
+    P.text(tr('proc') + ':', X, y, 8, true, acc); let px = X + SH.tw(tr('proc') + ':', true, 8) + 3;
+    d.procs.forEach(p => { const s = PROCS[p][L]; const w = SH.tw(s, false, 8) + 8; if (px + w > X + W) { y += 5; px = X; } P.rect(px, y - 2.8, 2.8, 2.8, null, ink); P.text(s, px + 4, y, 8, false, ink); px += w + 3; }); y += 3; P.line(X, y, X + W, y, ln, 0.4); y += 6;
+    P.text(tr('pers'), X, y, 9.5, true, acc); y += 2;
+    const fld = (i, xx, w, yy) => { P.line(xx, yy, xx + w, yy, ln, 0.35); P.text(T.f[L][i] + (R >= 0 ? ' / ' + T.f[R][i] : ''), xx, yy + 3, 6.2, false, mut); };
+    y += 8; fld(0, X, 110, y); fld(1, X + 118, W - 118, y); y += 9; fld(2, X, W, y); y += 9; fld(3, X, 86, y); fld(4, X + 92, W - 92, y); y += 9;
+    P.text(tr('health'), X, y, 9.5, true, acc); P.text(T.no[L], X + 112, y, 7, true, mut, 'center'); P.text(T.yes[L], X + 122, y, 7, true, mut, 'center'); P.text(T.det[L], X + 130, y, 7, true, mut); y += 3;
+    qs.forEach((q, i) => {
+      const lines = SH.wrap(q[2][L], false, 7.8, 104), rl = R >= 0 ? SH.wrap(q[2][R], false, 6.6, 104) : [], h = Math.max(6.4, lines.length * 3.3 + rl.length * 2.8 + 1.8);
+      if (i % 2 === 0) P.rect(X, y, W, h, zeb);
+      let yy = y + 3.6; lines.forEach(l => { P.text(l, X + 2, yy, 7.8, false, ink); yy += 3.4; }); rl.forEach(l => { P.text(l, X + 2, yy - 0.4, 6.6, false, mut); yy += 2.9; });
+      P.rect(X + 110.6, y + 1.8, 2.8, 2.8, '#FFFFFF', ink); P.rect(X + 120.6, y + 1.8, 2.8, 2.8, '#FFFFFF', ink); P.line(X + 130, y + h - 1.6, X + W - 2, y + h - 1.6, ln, 0.3);
+      y += h;
+    });
+    y += 5; P.text(tr('cons'), X, y, 9.5, true, acc); y += 4.5;
+    const para = (s, size, col, lh) => { SH.wrap(s, false, size, W).forEach(l => { P.text(l, X, y, size, false, col); y += lh; }); };
+    para(T.c1[L], 7.6, ink, 3.4); if (R >= 0) para(T.c1[R], 6.5, mut, 2.9); y += 1.5;
+    para(T.c2[L], 7.6, ink, 3.4); if (R >= 0) para(T.c2[R], 6.5, mut, 2.9); y += 2;
+    if (d.foto) [['f1'], ['f2']].forEach(([k]) => { P.rect(X, y - 2.6, 2.8, 2.8, '#FFFFFF', ink); P.text(T[k][L], X + 5, y, 7.6, false, ink); y += 3.4; if (R >= 0) { P.text(T[k][R], X + 5, y - 0.3, 6.5, false, mut); y += 3; } y += 1.2; });
+    y = Math.max(y + 10, 268);
+    P.line(X, y, X + 70, y, ln, 0.4); P.line(X + 86, y, X + W, y, ln, 0.4);
+    P.text(tr('place'), X, y + 3.4, 6.4, false, mut); P.text(tr('sign'), X + 86, y + 3.4, 6.4, false, mut); P.text(T.minor[L], X + 86, y + 6.6, 5.6, false, mut);
+  }
+  if (d.prot) {
+    const P = SH.page(210, 297, C), X = 16, W = 178; pages.push(P);
+    P.text(tr('prot'), X, 20, 14, true, '#2F2924'); P.line(X + 80, 30, X + W, 30, ln, 0.35); P.text(tr('client'), X, 30, 8, true, mut);
+    const cw = [22, 48, 44, 48, 16], hdr = T.pc[L]; let x = X, y = 40;
+    hdr.forEach((h, i) => { P.text(h + (R >= 0 ? ' / ' + T.pc[R][i] : ''), x + 1, y, 6.8, true, mut); x += cw[i]; }); y += 2.5; P.line(X, y, X + W, y, '#4F5E3E', 0.4);
+    for (let r = 0; r < 24; r++) { const yy = y + (r + 1) * 9.6; P.line(X, yy, X + W, yy, ln, 0.3); }
+    x = X; cw.slice(0, -1).forEach(w => { x += w; P.line(x, y, x, y + 24 * 9.6, ln, 0.25); });
+  }
+  return pages;
+}
+/* ---------- форма ---------- */
+const $ = id => document.getElementById(id);
+const esc = s => SH.esc(String(s == null ? '' : s));
+function renderForm(){
+  const d = D(), dis = EX ? 'disabled' : '', m = d.me;
+  const i = (k, l, ph) => `<div class="fl"><span class="lb">${l}</span><input type="text" data-me="${k}" value="${esc(m[k])}" placeholder="${ph || ''}" ${dis}></div>`;
+  $('fields').innerHTML = `
+  <section class="sec"><h2>Майстер — твої дані на анкеті</h2><div class="g2">${i('name', 'Ім’я та прізвище', 'Olena Kovalenko')}${i('firm', 'Назва (за бажанням)', 'Studio Olena')}${i('addr', 'Вулиця і будинок')}${i('city', 'Індекс і місто')}${i('tel', 'Телефон')}${i('mail', 'E-mail')}</div></section>
+  <section class="sec"><h2>Процедури<button type="button" class="qh" data-help="proc" aria-label="Підказка: процедури" aria-expanded="false">?</button></h2><div class="chk">${Object.entries(PROCS).map(([k, v]) => `<label><input type="checkbox" data-proc="${k}" ${d.procs.includes(k) ? 'checked' : ''} ${dis}> <span>${esc(v[4])} <small>${esc(v[0])}</small></span></label>`).join('')}</div></section>
+  <section class="sec"><h2>Що на аркушах</h2>
+    <label class="tog"><input type="checkbox" data-o="foto" ${d.foto ? 'checked' : ''} ${dis}> Згода на фото до і після<button type="button" class="qh" data-help="foto" aria-label="Підказка: фото" aria-expanded="false">?</button></label>
+    <label class="tog"><input type="checkbox" data-o="prot" ${d.prot ? 'checked' : ''} ${dis}> Аркуш «Протокол процедур»<button type="button" class="qh" data-help="prot" aria-label="Підказка: протокол" aria-expanded="false">?</button></label>
+    <p class="hint">Згода на зберігання даних про здоров’я є в анкеті завжди<button type="button" class="qh" data-help="dsg" aria-label="Підказка: дані про здоров’я" aria-expanded="false">?</button></p>
+    <div class="fl"><span class="lb">Скільки анкет у PDF</span><select data-o="n" ${dis}>${[1, 2, 3, 5, 10].map(x => `<option${x == d.n ? ' selected' : ''}>${x}</option>`).join('')}</select></div>
+  </section>`;
+}
+let UI, tmr;
+function fill(){ const d = D(); $('lang').value = d.lang + (d.ru ? '+ru' : ''); $('bw').checked = !!d.bw; renderForm(); $('exbar').hidden = !EX; $('exOn').hidden = !!EX; if (UI) UI.render(); }
+$('bw').addEventListener('change', e => { S.bw = e.target.checked; if (EX) EX.bw = S.bw; save(); UI && UI.render(); });
+$('lang').addEventListener('change', e => { const [l, r] = e.target.value.split('+'); S.lang = l; S.ru = !!r; if (EX) { EX.lang = l; EX.ru = !!r; } save(); fill(); });
+document.addEventListener('input', e => { const x = e.target; if (EX || !x.dataset || !x.dataset.me) return; S.me[x.dataset.me] = x.value; save(); clearTimeout(tmr); tmr = setTimeout(() => UI && UI.render(), 450); });
+document.addEventListener('change', e => { const x = e.target; if (EX || !x.dataset) return;
+  if (x.dataset.proc) { S.procs = [...document.querySelectorAll('[data-proc]:checked')].map(i => i.dataset.proc); save(); UI && UI.render(); }
+  if (x.dataset.o) { S[x.dataset.o] = x.type === 'checkbox' ? x.checked : +x.value; save(); UI && UI.render(); } });
+const EXD = () => ({lang: S.lang === 'ru' ? 'de' : S.lang, bw: S.bw, ru: true, procs: ['kos', 'wax', 'lash'], me: {name: 'Olena Kovalenko', firm: 'Studio Olena', addr: 'Musterstrasse 12', city: '8000 Zürich', tel: '079 123 45 67', mail: 'olena.k@example.ch'}, foto: true, prot: true, n: 1});
+$('exOn').addEventListener('click', () => { EX = EXD(); fill(); window.scrollTo({top: $('exbar').offsetTop - 12, behavior: 'smooth'}); });
+$('exOff').addEventListener('click', () => { EX = null; fill(); });
+if (/[?&]example\b/.test(location.search)) EX = EXD();
+UI = SH.mount({build, lang: () => D().lang, title: 'Kundenformular', name: () => ({de: 'Kundenformular', fr: 'Fiche-client', it: 'Scheda-cliente', en: 'Client-form', ru: 'Anketa-klienta'}[D().lang])});
+fill();
+
+</script>
+<script src="/assets/help.uk.js"></script>
+<script src="/assets/backup.uk.js"></script>
+<script src="/assets/pdffan.uk.js" defer></script>
+<script src="/assets/share.uk.js" defer></script>
+<script src="/assets/samesite.js"></script>
+<!--i18n--><style>#langbar.langbar{position:fixed;bottom:14px;right:14px;z-index:60;display:flex;gap:2px;background:rgba(255,255,255,.92);border:1px solid rgba(0,0,0,.08);border-radius:999px;padding:3px;font:600 12px Manrope,system-ui,sans-serif;box-shadow:0 2px 8px rgba(0,0,0,.08)}#langbar.langbar a{color:#5d554d;padding:5px 9px;border-radius:999px;text-decoration:none;font:inherit;display:inline-block}#langbar.langbar a[aria-current="true"]{background:#2f2924;color:#fff}@media print{.langbar{display:none!important}}</style><div class="langbar" id="langbar" role="navigation" aria-label="Мова / Язык"><a href="/instrumenty/anketa-klienta/" hreflang="ru" data-lang="ru">RU</a><a href="/uk/instrumenty/anketa-klienta/" hreflang="uk" data-lang="uk" aria-current="true">UA</a></div><script>(function(){var b=document.getElementById('langbar');if(!b)return;b.addEventListener('click',function(e){var a=e.target.closest('a[data-lang]');if(a){try{localStorage.setItem('svoiludiLang',a.dataset.lang)}catch(x){}a.href=a.getAttribute('href').split('#')[0]+location.hash;}});})();</script><!--i18n--></body>
+</html>

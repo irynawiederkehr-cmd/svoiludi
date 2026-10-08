@@ -42,7 +42,7 @@
     if (IDX) return Promise.resolve(IDX);
     if (loading) return loading;
     var need = [];
-    if (!window.SVL_SEARCH) need.push(load('data/search.js'));
+    if (!window.SVL_SEARCH) need.push(load(uk ? 'data/search.uk.js' : 'data/search.js'));
     if (!window.SPECIALISTS) need.push(load(uk ? 'data/specialists.uk.js' : 'data/specialists.js'));
     if (!window.AFISHA) need.push(load(uk ? 'data/afisha.uk.js' : 'data/afisha.js'));
     loading = Promise.all(need).then(function(){

@@ -12,7 +12,7 @@
 <meta property="og:url" content="https://svoiludi.ch/uk/instrumenty/moj-god/"><meta property="og:image" content="https://svoiludi.ch/instrumenty/moj-god/og-image.uk.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="robots" content="noindex, nofollow">
-<title>Мій рік</title>
+<title>Річний календар справ і строків</title>
 
 <style>
 /* Layout: a printable year sheet — 12 month rows, weekdays aligned in 37 columns, thin routine lanes under each day number; editor above. Brand of Irina's site. */
@@ -77,7 +77,21 @@ select:focus-visible,input:focus-visible,button:focus-visible{outline:2px solid 
 .wd.we{color:var(--brown)}
 .mname{font-family:var(--display);font-size:1.02rem;padding-top:3px;align-self:start}
 .month{display:contents}
-.cell{border-top:1px solid var(--line);padding:3px 1px 6px;display:flex;flex-direction:column;gap:3px;min-height:34px}
+.cell{border-top:1px solid var(--line);padding:3px 1px 6px;display:flex;flex-direction:column;gap:3px;min-height:34px;position:relative}
+.cell .sri{position:absolute;top:-1px;right:-1px;font-size:11px;line-height:1;cursor:help;letter-spacing:-3px}
+.cell.srd .dn{box-shadow:inset 0 0 0 1.5px #B98324;border-radius:6px}
+.srbox{margin-top:18px;background:var(--paper);border:1.5px solid var(--line);border-radius:18px;padding:14px 16px}
+.srbox h3{margin:0 0 4px;font-size:1.05rem}
+.srbox>p{margin:0 0 10px;font-size:.88rem;color:var(--muted)}
+.srl{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.srl>li{display:grid;grid-template-columns:28px 1fr;gap:4px 10px;align-items:start;border-top:1px solid var(--line);padding-top:6px}
+.srl .ic{font-size:1.25rem;line-height:1.2}
+.srl b{font-weight:700}
+.srl small{color:var(--muted)}
+.srl details{grid-column:2;font-size:.88rem}
+.srl summary{cursor:pointer;color:var(--sage);font-weight:600}
+.srl details ul{margin:4px 0;padding-left:18px}
+.srl .ln{display:flex;flex-wrap:wrap;gap:4px 14px;font-size:.85rem}
 .cell.we{background:var(--weekend)}
 .cell.empty{background:transparent}
 .dn{font-size:.62rem;font-variant-numeric:tabular-nums;color:var(--muted);text-align:center;line-height:1.2;margin-bottom:1px}
@@ -195,7 +209,7 @@ a.btn{text-decoration:none;display:inline-flex;align-items:center}
   <header>
     <p style="margin:0 0 14px"><a class="jump" href="https://svoiludi.ch/uk/instrumenty/">← Усі корисні інструменти · Свої люди у Швейцарії</a></p>
     <div class="eyebrow">Річний план · рутина на весь рік</div>
-    <h1>Мій рік</h1>
+    <h1>Річний календар справ і строків</h1>
     <p class="lead">Розпиши повторювані справи й важливі терміни один раз, і вони з’являться на весь рік. Кожна смужка під датою — одна справа або період. Натисни на смужку справи в будь-який день, щоб прибрати її на цей день або додати.</p>
     <p style="margin:10px 0 0"><a class="jump" href="/uk/instrumenty/moj-god/#guide">Навіщо це тобі і як із цим працювати ↓</a></p>
     <div class="privnote"><b>Твої дані лише в тебе.</b> Усе, що ти вписуєш, зберігається лише у твоєму браузері на цьому пристрої. Ніхто, крім тебе, цього не бачить, навіть я. Реєстрація не потрібна. На іншому пристрої твого плану не буде, тому зберігай його в PDF або у свій календар. Кнопка «Видалити історію» повністю стирає твій план із цього пристрою.</div>
@@ -247,6 +261,7 @@ a.btn{text-decoration:none;display:inline-flex;align-items:center}
     <div class="toggles">
       <label for="tHol"><input type="checkbox" id="tHol"> Свята кантону<button type="button" class="qh" data-help="hol" aria-label="Підказка: Свята кантону" aria-expanded="false">?</button></label><label for="canton" style="cursor:default"><span class="sr">Кантон</span><select id="canton" class="mode"></select></label>
       <label for="tSch"><input type="checkbox" id="tSch"> Шкільні канікули<button type="button" class="qh" data-help="sch" aria-label="Підказка: Шкільні канікули" aria-expanded="false">?</button> <small>місто Цюрих, перевір дати своєї громади</small></label>
+      <label for="tSr"><input type="checkbox" id="tSr"> 🔔 Обов’язкові строки Швейцарії<button type="button" class="qh" data-help="sr" aria-label="Підказка: Обов’язкові строки Швейцарії" aria-expanded="false">?</button> <small>податки, медстраховка, 3a та інше · <a href="/uk/instrumenty/sroki-goda/">налаштувати, що стосується тебе</a></small></label>
     </div>
   </section>
 
@@ -262,6 +277,7 @@ a.btn{text-decoration:none;display:inline-flex;align-items:center}
     <p class="hint mobnote" style="margin:0 0 8px">Аркуш року ширший за екран телефона, гортай його пальцем убік. Цілком його зручно дивитися в PDF або PNG.</p>
     <div class="sheet-scroll"><div class="sheet" id="sheet"></div></div>
     <div class="legend" id="legend"></div>
+    <div class="srbox" id="srBox" hidden></div>
   </section>
   <p class="hint">Смужка з пунктиром — справа, додана в цей день вручну. Порожнє місце на лінії справи — день, коли справу прибрано. Кружечок на кінці періоду — фініш, наприклад іспит.</p>
   <section class="guide" id="guide" aria-labelledby="g-why">
@@ -307,6 +323,7 @@ a.btn{text-decoration:none;display:inline-flex;align-items:center}
 <script src="/assets/lib/jspdf.umd.min.js"></script>
 <script src="/assets/bwprint.uk.js"></script>
 <script src="/assets/lib/jszip.min.js"></script>
+<script src="/assets/sroki.uk.js"></script>
 <script>
 const MONTHS = ['Січень','Лютий','Березень','Квітень','Травень','Червень','Липень','Серпень','Вересень','Жовтень','Листопад','Грудень'];
 const MSHORT = ['Січ','Лют','Бер','Кві','Травень','Чер','Лип','Сер','Вер','Жов','Лис','Гру'];
@@ -373,7 +390,6 @@ function example(){
       {id:'p1', name:'Німецька B1', color:'#16A3A8', start:y+'-01-11', end:y+'-06-25', fin:true},
       {id:'p2', name:'Німецька B2', color:'#3A9A48', start:y+'-08-23', end:y+'-12-17', fin:true},
       {id:'p3', name:'Відпустка', color:'#E2B007', start:y+'-07-19', end:y+'-08-06', fin:false},
-      {id:'p4', name:'Податкова декларація', color:'#EE7A12', start:y+'-03-31', end:y+'-03-31', fin:true},
     ]};
 }
 let S;
@@ -414,7 +430,25 @@ function whenText(r){ return r.mode === 'month' ? 'кожного ' + r.mday + '
   $('tHol').checked = !!S.hol; $('tSch').checked = !!S.sch;
   $('tHol').addEventListener('change', e => { S.hol = e.target.checked; save(); renderSheet(); });
   $('tSch').addEventListener('change', e => { S.sch = e.target.checked; save(); renderSheet(); });
+  $('tSr').checked = S.sr !== false;
+  $('tSr').addEventListener('change', e => { S.sr = e.target.checked; save(); renderSheet(); });
 })();
+
+/* ---------- обязательные сроки Швейцарии (assets/sroki.js, 08.10.2026) ----------
+   что касается человека — из инструмента «Обязательные сроки года» на этом же устройстве, иначе типичный набор; кантон — из листа года */
+function srOpts(){ let o = null; try { o = JSON.parse(localStorage.getItem('srokiGoda.v1')); } catch(e) {} o = o && typeof o === 'object' ? o : {};
+  return Object.assign({tax:'decl', emp:true, self:false, a3:false, rent:true, car:false, kids:[], own:[], off:{}, leads:[14, 1]}, o, {kt: S.canton || 'ZH'}); }
+function srList(){ if (S.sr === false || !window.SROKI) return []; const o = srOpts(); return SROKI.list(S.year, o).filter(it => !(o.off || {})[it.id + '@' + SROKI.iso(it.date)]); }
+function srMap(){ const m = {}; srList().forEach(it => { const k = SROKI.iso(it.date); (m[k] = m[k] || []).push(it); }); return m; }
+const MGEN = ['січня', 'лютого', 'березня', 'квітня', 'трав', 'червня', 'липня', 'серпня', 'вересня', 'жовтня', 'листопада', 'грудня'];
+const srDate = it => it.date.getDate() + ' ' + MGEN[it.date.getMonth()];
+function srDetails(it){ const L = [it.what]; if (it.todo && it.todo.length) L.push('Що зробити і підготувати:\n' + it.todo.map(x => '• ' + x).join('\n')); if (it.page) L.push('Детально: ' + SROKI.SITE + it.page); return L.filter(Boolean).join('\n\n'); }
+function srEvents(){ const o = srOpts(); return srList().map(it => ({uid:'srok-' + it.id + '-' + SROKI.iso(it.date), title: it.ic + ' ' + it.t + ' · строк', allDay:true, start: SROKI.iso(it.date), details: srDetails(it), alarms: o.leads || [14, 1], kind:'обов’язковий строк · ' + fmt(SROKI.iso(it.date))})); }
+function renderSr(){
+  const box = $('srBox'), L = srList(); box.hidden = !L.length; if (!L.length){ box.innerHTML = ''; return; }
+  box.innerHTML = '<h3>🔔 Обов’язкові строки ' + S.year + ' · кантон ' + esc(CANTONS[S.canton] || S.canton) + '</h3><p>Іконка в куті дня на аркуші — це строк. Що стосується саме тебе і за скільки днів нагадати, познач в інструменті <a href="/uk/instrumenty/sroki-goda/">«Обов’язкові строки року у Швейцарії»</a>. У файл календаря строки потраплять із нагадуваннями.</p><ul class="srl">'
+    + L.map(it => { const e = {title: it.ic + ' ' + it.t + ' · строк', allDay:true, start: SROKI.iso(it.date), details: srDetails(it)}; return '<li><span class="ic" aria-hidden="true">' + it.ic + '</span><span><b>' + esc(srDate(it)) + '</b> · ' + esc(it.t) + '</span><details><summary>що це і що зробити</summary><p>' + esc(it.what) + '</p>' + (it.todo && it.todo.length ? '<ul>' + it.todo.map(x => '<li>' + esc(x) + '</li>').join('') + '</ul>' : '') + '<div class="ln">' + (it.page ? '<a href="' + SROKI.SITE + it.page + '" target="_blank" rel="noopener">Детально на сайті →</a>' : '') + '<a href="' + esc(gcalLink(e)) + '" target="_blank" rel="noopener">у Google Календар</a></div></details></li>'; }).join('') + '</ul>';
+}
 
 /* ---------- дела ---------- */
 function monthOpts(v){ return MONTHS.map((n,i) => `<option value="${i+1}"${i+1===v?' selected':''}>${n.toLowerCase()}</option>`).join(''); }
@@ -531,7 +565,7 @@ $('ideas').addEventListener('click', e => {
 
 /* ---------- лист года ---------- */
 function renderSheet(){
-  const y = S.year, rs = S.routines, ps = S.periods, t = new Date(), H = S.hol ? holidays(y, S.canton) : {};
+  const y = S.year, rs = S.routines, ps = S.periods, t = new Date(), H = S.hol ? holidays(y, S.canton) : {}, SR = srMap();
   let h = '<div class="grid"><div></div>';
   for (let c = 0; c < 37; c++) h += `<div class="wd${c % 7 > 4 ? ' we' : ''}">${WD[c % 7]}</div>`;
   for (let m = 0; m < 12; m++){
@@ -544,6 +578,7 @@ function renderSheet(){
       const holo = H[ds], hol = holo && holo.n, sch = S.sch ? schoolOf(ds) : '';
       const tip = [hol, sch].filter(Boolean).join(' · ');
       h += `<div class="cell${c % 7 > 4 ? ' we' : ''}${today ? ' today' : ''}${hol ? ' hol' + (holo.part ? ' part' : '') : ''}${sch ? ' sch' : ''}"${tip ? ` title="${esc(tip)}"` : ''}><span class="dn">${d}</span>`;
+      if (SR[ds]) h = h.replace(/<div class="cell([^"]*)"([^>]*)><span class="dn">(\d+)<\/span>$/, '<div class="cell$1 srd"$2><span class="dn">$3</span>') + `<span class="sri" title="${esc(SR[ds].map(it => it.ic + ' ' + it.t + ' · строк').join('\n'))}">${SR[ds].map(it => it.ic).slice(0, 2).join('')}</span>`;
       for (const r of rs){
         const st = state(r, y, m, d);
         const style = st === 'on' ? `background:${r.color}` : st === 'add' ? `color:${r.color}` : '';
@@ -557,7 +592,7 @@ function renderSheet(){
     }
   }
   $('sheet').innerHTML = h + '</div>';
-  renderLegend();
+  renderLegend(); renderSr();
 }
 function legendItems(){
   const out = S.routines.map(r => ({c: r.color, t: (r.name || 'Без назви') + ' · ' + whenText(r) + (r.from !== 1 || r.to !== 12 ? ' · ' + MSHORT[r.from-1].toLowerCase() + '–' + MSHORT[r.to-1].toLowerCase() : '')}));
@@ -566,7 +601,7 @@ function legendItems(){
 }
 function renderLegend(){
   $('legend').innerHTML = legendItems().map(x => `<span><i style="background:${x.c};"></i>${esc(x.t)}</span>`).join('')
-    + (S.hol ? '<span><i class="holsw"></i>свято · кантон ' + CANTONS[S.canton] + '</span>' : '') + (S.sch ? '<span><i class="sch"></i>шкільні канікули</span>' : '');
+    + (S.hol ? '<span><i class="holsw"></i>свято · кантон ' + CANTONS[S.canton] + '</span>' : '') + (S.sch ? '<span><i class="sch"></i>шкільні канікули</span>' : '') + (srList().length ? '<span>🔔 обов’язковий строк · список під аркушем</span>' : '');
 }
 $('sheet').addEventListener('click', e => {
   const l = e.target.closest('.lane[data-r]'); if (!l) return;
@@ -610,11 +645,13 @@ function drawSheet(){
   const items = legendItems();
   if (S.hol) items.push({hol: true, t: 'свято · кантон ' + CANTONS[S.canton]});
   if (S.sch) items.push({sch: true, t: 'шкільні канікули'});
+  const SRM = srMap(); if (Object.keys(SRM).length) items.push({sr: true, t: 'обов’язковий строк Швейцарії (список — у PDF на другій сторінці і в інструменті «Мій рік»)'});
   for (const it of items){
     const w = 66 + c.measureText(it.t).width + 60;
     if (lx + w > W - M){ lx = M; ly += 62; }
     if (it.hol){ c.fillStyle = C.hol; roundRect(c, lx, ly - 34, 50, 34, 8); c.fill(); c.fillStyle = '#FFFFFF'; c.font = '800 30px Manrope, sans-serif'; c.textAlign = 'center'; c.fillText('12', lx + 25, ly - 6); c.textAlign = 'left'; c.font = '600 40px Manrope, sans-serif'; }
     else if (it.sch){ c.fillStyle = C.sch; c.fillRect(lx, ly - 34, 50, 34); }
+    else if (it.sr){ c.font = '34px "Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif'; c.fillStyle = C.ink; c.fillText('🔔', lx + 6, ly); c.font = '600 40px Manrope, sans-serif'; }
     else { c.fillStyle = it.c; roundRect(c, lx, ly - 22, 50, 16, 8); c.fill(); }
     c.fillStyle = C.ink; c.fillText(it.t, lx + 66, ly);
     lx += w;
@@ -637,6 +674,7 @@ function drawSheet(){
       c.fillStyle = C.line; c.fillRect(x + 1, ry, colW - 2, 3);
       if (hol && !holo.part){ c.fillStyle = C.hol; roundRect(c, x + 6, ry + 8, colW - 12, 40, 10); c.fill(); }
       c.fillStyle = hol ? (holo.part ? C.hol : '#FFFFFF') : C.muted; c.font = (hol ? '800 ' : '500 ') + '30px Manrope, sans-serif'; c.textAlign = 'center'; c.fillText(String(d), x + colW/2, ry + 38);
+      if (SRM[ds]){ c.font = '24px "Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif'; c.textAlign = 'right'; c.fillStyle = C.ink; c.fillText(SRM[ds][0].ic, x + colW - 2, ry + rowH - 8); c.textAlign = 'center'; }
       rs.forEach((r, i) => {
         const st = state(r, y, m, d); if (!st || st === 'off') return;
         const lyy = ry + 44 + i*(laneH + 3); c.fillStyle = r.color;
@@ -663,6 +701,32 @@ function drawSheet(){
     if (part.u){ c.fillRect(fx, fy + 6, w, 2); cv.links.push({x: fx, y: fy - 34, w, h: 46, url: part.u}); }
     fx += w;
   });
+  return WM(cv, 'svoiludi.ch');
+}
+
+/* вторая страница PDF: обязательные сроки года с иконкой, что это и что сделать */
+function drawSrPage(){
+  const L = srList(); if (!L.length) return null;
+  const W = 3508, H = 2480, cv = document.createElement('canvas'); cv.width = W; cv.height = H; cv.links = [];
+  const c = cv.getContext('2d'), M = 120, EMO = '"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif';
+  c.fillStyle = '#FFFCF8'; c.fillRect(0, 0, W, H); c.textBaseline = 'alphabetic'; c.textAlign = 'left';
+  c.fillStyle = '#2F2924'; c.font = '120px Forum, Georgia, serif'; c.fillText('Обов’язкові строки ' + S.year + ' · кантон ' + (CANTONS[S.canton] || S.canton), M, M + 90);
+  c.fillStyle = '#7A6E62'; c.font = '500 36px Manrope, sans-serif'; c.fillText('Дати — звичайні для кантону; точний строк завжди в листі відомства. Детально про кожен строк — на svoiludi.ch/instrumenty/sroki-goda/', M, M + 160);
+  const wrap = (t, w) => { const out = []; let cur = ''; for (const wd of String(t).split(' ')){ const n = cur ? cur + ' ' + wd : wd; if (c.measureText(n).width > w && cur){ out.push(cur); cur = wd; } else cur = n; } if (cur) out.push(cur); return out; };
+  const cols = 2, gap = 90, colW = (W - 2*M - gap) / cols, top = M + 240, bottom = H - 130; let col = 0, y = top;
+  for (const it of L){
+    c.font = '700 38px Manrope, sans-serif'; const tl = wrap(it.t, colW - 290).slice(0, 2);
+    c.font = '500 32px Manrope, sans-serif'; const todo = (it.todo || []).slice(0, 2).flatMap(x => wrap('• ' + x, colW - 290));
+    const th = tl.length * 46, h = 12 + th + todo.length * 40 + 26; if (y + h > bottom){ if (col + 1 >= cols) break; col++; y = top; }
+    const x = M + col * (colW + gap);
+    c.fillStyle = '#E5D9C9'; c.fillRect(x, y - 44, colW, 3);
+    c.font = '50px ' + EMO; c.fillStyle = '#2F2924'; c.fillText(it.ic, x, y + 14);
+    c.font = '800 38px Manrope, sans-serif'; c.fillStyle = '#6E4F3C'; c.fillText(fmt(SROKI.iso(it.date)), x + 90, y + 10);
+    c.font = '700 38px Manrope, sans-serif'; c.fillStyle = '#2F2924'; tl.forEach((ln, i) => c.fillText(ln, x + 290, y + 10 + i * 46));
+    c.font = '500 32px Manrope, sans-serif'; c.fillStyle = '#4A413A'; todo.forEach((ln, i) => c.fillText(ln, x + 290, y + 12 + th + i * 40));
+    y += h;
+  }
+  c.font = '600 34px Manrope, sans-serif'; c.fillStyle = '#6E4F3C'; const ft = 'Свої люди у Швейцарії · svoiludi.ch · інструменти «Мій рік» і «Обов’язкові строки року»'; c.fillText(ft, M, H - 55); cv.links.push({x: M, y: H - 89, w: c.measureText(ft).width, h: 46, url: 'https://svoiludi.ch/uk/instrumenty/sroki-goda/'});
   return WM(cv, 'svoiludi.ch');
 }
 
@@ -694,6 +758,7 @@ $('dlPdf').addEventListener('click', async () => {
   doc.addImage(cv.toDataURL('image/jpeg', 0.92), 'JPEG', 0, 0, 297, 210);
   const k = 297 / cv.width;
   for (const l of cv.links || []) doc.link(l.x * k, l.y * k, l.w * k, l.h * k, {url: l.url});
+  const sp = drawSrPage(); if (sp){ doc.addPage('a4', 'landscape'); doc.addImage(sp.toDataURL('image/jpeg', 0.92), 'JPEG', 0, 0, 297, 210); for (const l of sp.links || []) doc.link(l.x * k, l.y * k, l.w * k, l.h * k, {url: l.url}); }
   offer('Мій рік ' + S.year + '.pdf', doc.output('blob'));
 });
 (async () => {
@@ -719,10 +784,12 @@ function icsCalendar(name, events){
     if (e.exdates && e.exdates.length) L.push('EXDATE;VALUE=DATE:' + e.exdates.map(ymd).join(','));
     L.push('SUMMARY:' + icsEsc(e.title));
     L.push('DESCRIPTION:' + icsEsc(withSrc(e.details)), 'URL:' + SRC_URL);
+    (e.alarms || []).forEach(n => L.push('BEGIN:VALARM', 'ACTION:DISPLAY', 'DESCRIPTION:' + icsEsc(e.title), 'TRIGGER:' + (n > 0 ? '-PT' + (n * 24 - 9) + 'H' : 'PT9H'), 'END:VALARM'));   // напоминание в 9:00 за n дней
     L.push('END:VEVENT');
   });
   L.push('END:VCALENDAR');
-  return L.join('\r\n').split('\r\n').map(line => { let o = '', s = line; while (s.length > 74){ o += s.slice(0, 74) + '\r\n '; s = s.slice(74); } return o + s; }).join('\r\n') + '\r\n';
+  const enc = new TextEncoder();   // строки по 75 байт, не разрывая буквы и эмодзи
+  return L.join('\r\n').split('\r\n').map(line => { const out = []; let cur = '', b = 0; for (const ch of line){ const n = enc.encode(ch).length; if (b + n > 73){ out.push(cur); cur = ' ' + ch; b = 1 + n; } else { cur += ch; b += n; } } out.push(cur); return out.join('\r\n'); }).join('\r\n') + '\r\n';
 }
 function gcalLink(e){
   const dates = e.allDay ? ymd(e.start) + '/' + ymd(addDaysIso(e.end || e.start, 1)) : e.start + '/' + e.end;
@@ -768,7 +835,7 @@ function yearEvents(){
     if (!p.start) continue;
     out.push({uid:'mojgod-' + p.id, title: p.name || 'Період', allDay:true, start:p.start, end:p.end || p.start, details:'період · план «Мій рік» · https://svoiludi.ch/uk/instrumenty/moj-god/', kind: p.start === p.end ? 'Термін · ' + fmt(p.start) : 'Період · ' + fmt(p.start) + '–' + fmt(p.end)});
   }
-  return out;
+  return out.concat(srEvents());
 }
 function renderCal(){
   const ev = yearEvents();
@@ -803,6 +870,7 @@ window.HELP = {
 "periods": "<p>Період — те, що триває поспіль від однієї дати до іншої. Відпустка, курс B1, випробувальний термін. Якщо початок і кінець збігаються, це один день, наприклад термін подання податкової декларації.<\/p><p>Галочка «фініш» ставить кружечок на останній день. Став її, коли наприкінці щось важливе, наприклад іспит чи подання документів. Для відпустки вона не потрібна.<\/p>",
 "hol": "<p>Свята у Швейцарії свої в кожному кантоні. Обери кантон, де ти живеш або працюєш, і свята позначаться рожевим. Свято, яке відзначають лише в частині громад, виділене світліше.<\/p><p>Справи у свято самі не прибираються. Якщо цього дня спортзал чи курс зачинений, натисни на смужку справи в цей день.<\/p>",
 "sch": "<p>Шкільні канікули показано штрихуванням, щоб ти заздалегідь бачила, коли діти вдома, і могла планувати відпустку.<\/p><p>Вбудовано лише дати міста Цюрих, від Різдва 2026 до Різдва 2027. В інших громадах дати інші. Свої канікули внеси як періоди, дати є на сайті школи чи громади.<\/p>",
+"sr": "<p>🔔 Обов’язкові строки — те, що у Швейцарії треба зробити щороку: податкова декларація, довідка про зарплату, зміна медстраховки до 30 листопада, внесок у 3a до 20 грудня, Serafe, віньєтка, продовження пермиту й паспорта, довідки та допомоги на дітей.<\/p><p>Іконка в куті дня показує строк, під аркушем — список: що це за строк і що зробити. У файл календаря строки потрапляють із нагадуваннями заздалегідь, а в кожній події — посилання на сторінку з подробицями.<\/p><p>Що стосується саме тебе (робота, своя справа, квартира, автомобіль, діти, дати пермиту й паспорта) і за скільки днів нагадувати, познач в інструменті «Обов’язкові строки року у Швейцарії» на цьому ж пристрої. Без цього показано звичайні строки для того, хто працює за наймом і винаймає квартиру. Кантон береться з аркуша року.<\/p><p>Дати — звичайні для кантону. Точний строк завжди в листі відомства.<\/p>",
 "cal": "<p>Кнопка «Завантажити файл для календаря» зберігає файл .ics. Справи стануть повторюваними подіями на весь день, періоди й терміни — подіями з датами.<\/p><ul><li><b>iPhone.<\/b> Відкрий файл, і календар запропонує додати події.<\/li><li><b>Outlook.<\/b> Відкрий файл в Outlook.<\/li><li><b>Google.<\/b> З телефона простіше натискати посилання «у Google Календар» біля кожної справи. На комп’ютері файл додається в налаштуваннях Google Календаря, у розділі «Імпорт і експорт».<\/li><\/ul><p>Якщо потім зміниш план і додаси файл ще раз, події можуть задвоїтися. Тоді спершу видали старі.<\/p>"
 };
 </script>

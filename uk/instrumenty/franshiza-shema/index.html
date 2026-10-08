@@ -1,0 +1,344 @@
+<!doctype html>
+<html lang="uk">
+<head><!--i18n--><base href="/instrumenty/franshiza-shema/"><!--i18n-->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<link rel="icon" href="/fav/favicon.svg" type="image/svg+xml"><link rel="icon" href="/fav/icon-32.png" sizes="32x32"><link rel="apple-touch-icon" href="/fav/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/fonts.css">
+<meta name="description" content="Франшиза медстраховки у Швейцарії на схемі: скільки платиш сама і коли платить каса (франшиза, 10% до 700 франків, 15 франків на день у лікарні), яка франшиза вигідніша від 300 до 2500, строки зміни (до 30 листопада і 31 грудня), діти, вагітність. Свій розрахунок, PDF і PNG безкоштовно.">
+<link rel="canonical" href="https://svoiludi.ch/uk/instrumenty/franshiza-shema/">
+<meta property="og:type" content="website"><meta property="og:locale" content="uk_UA"><meta property="og:site_name" content="Свої люди у Швейцарії">
+<meta property="og:title" content="Яка франшиза медстраховки тобі вигідніша · схема і твій розрахунок"><meta property="og:description" content="Скільки платиш сама за франшизи 300 або 2500, яка вигідніша за твоїх витрат і до якого числа її міняти — на схемах і твій розрахунок. Безкоштовно, PDF і PNG.">
+<meta property="og:url" content="https://svoiludi.ch/uk/instrumenty/franshiza-shema/"><meta property="og:image" content="https://svoiludi.ch/instrumenty/franshiza-shema/og-image.uk.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="robots" content="noindex, nofollow">
+<title>Яка франшиза медстраховки тобі вигідніша</title>
+<style>
+/* Какая франшиза медстраховки тебе выгоднее (08.10.2026): анкета слева, живые листы справа, движок assets/shema.js. */
+:root{
+  --bg:#F4EDE3; --paper:#FFFCF8; --ink:#2F2924; --muted:#7A6E62; --line:#E5D9C9; --soft:#EFE5D7;
+  --brown:#6E4F3C; --mustard:#B98324; --mustard-soft:#F3E3C2; --sage:#4F5E3E; --sage-soft:#E3E8D6; --red:#A0523D;
+  --display:"Forum","Georgia",serif; --sans:"Manrope","Segoe UI",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#221D19; --paper:#2C2621; --ink:#F1E9DF; --muted:#B4A796; --line:#3E362F; --soft:#352E28;
+  --brown:#E1C2A6; --mustard:#E2B45C; --mustard-soft:#3D321F; --sage:#B4BF97; --sage-soft:#2E3226; --red:#E39A85; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#221D19; --paper:#2C2621; --ink:#F1E9DF; --muted:#B4A796; --line:#3E362F; --soft:#352E28;
+  --brown:#E1C2A6; --mustard:#E2B45C; --mustard-soft:#3D321F; --sage:#B4BF97; --sage-soft:#2E3226; --red:#E39A85; color-scheme:dark}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--ink);font:15px/1.55 var(--sans);margin:0}
+.wrap{max-width:1280px;margin:0 auto;padding-inline:16px;padding-block:28px 48px;display:flex;flex-direction:column;gap:24px}
+.eyebrow{font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+h1{font-family:var(--display);font-weight:400;font-size:clamp(2.4rem,6vw,3.6rem);line-height:1;margin:4px 0 10px;text-wrap:balance}
+h2{font-family:var(--display);font-weight:400;font-size:1.55rem;margin:0;text-wrap:balance}
+h3{font-family:var(--display);font-weight:400;font-size:1.22rem;line-height:1.2;margin:0}
+.lead{max-width:66ch;color:var(--muted);margin:0}
+.jump{font-weight:700;color:var(--brown);text-underline-offset:4px}
+.privnote{margin-top:14px;background:var(--sage-soft);border-radius:16px;padding:12px 16px;font-size:.9rem;max-width:90ch}
+.status{font-size:.86rem;color:var(--muted);min-height:1.3em}
+.btn{font:inherit;font-weight:700;font-size:.9rem;border:0;border-radius:999px;padding:10px 18px;cursor:pointer;color:#fff;text-decoration:none;display:inline-flex;align-items:center;gap:6px;background:#6E4F3C;box-shadow:0 8px 18px -8px rgba(110,79,60,.6)}
+.btn.gold{background:#B98324;box-shadow:0 8px 18px -8px rgba(185,131,36,.7)}
+.btn.free{background:#4F5E3E;box-shadow:0 8px 18px -8px rgba(79,94,62,.6)}
+.btn.ghost{background:transparent;color:var(--brown);border:1.5px solid var(--line);box-shadow:none}
+.btn.sm{font-size:.82rem;padding:7px 13px}
+.btn[disabled]{background:var(--soft);color:var(--muted);box-shadow:none;cursor:wait}
+select,input[type=text],input[type=tel],input[type=number],input[type=date],textarea{font:inherit;font-size:.95rem;color:var(--ink);background:var(--paper);border:1.5px solid var(--line);border-radius:12px;padding:9px 12px;width:100%;min-width:0}
+select:focus-visible,input:focus-visible,button:focus-visible,textarea:focus-visible,a:focus-visible{outline:2px solid var(--mustard);outline-offset:2px}
+::placeholder{color:color-mix(in srgb,var(--muted) 70%,transparent)}
+.setup{background:var(--paper);border:1.5px solid var(--line);border-radius:22px;padding:16px 18px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px 18px;align-items:start}
+@media (max-width:1000px){.setup{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.setup{grid-template-columns:1fr}}
+.fl{display:flex;flex-direction:column;gap:6px;min-width:0}
+.fl>.lb{font-size:.8rem;font-weight:700;color:var(--muted);display:flex;align-items:center}
+.seg{display:flex;flex-wrap:wrap;gap:6px}
+.seg button{font:inherit;font-size:.84rem;font-weight:700;border:1.5px solid var(--line);background:var(--paper);color:var(--ink);border-radius:999px;padding:6px 12px;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--sage);border-color:var(--sage);color:#fff}
+.acts{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.exbar{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;background:var(--mustard-soft);border-radius:16px;padding:10px 14px;font-size:.9rem;font-weight:600}
+.work{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:22px;align-items:start}
+@media (max-width:1040px){.work{grid-template-columns:1fr}}
+.form{display:flex;flex-direction:column;gap:14px;min-width:0}
+.sec{background:var(--paper);border:1.5px solid var(--line);border-radius:20px;padding:16px 18px;display:flex;flex-direction:column;gap:12px}
+.sec>h2{font-size:1.3rem;display:flex;align-items:center}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:560px){.g2{grid-template-columns:1fr}}
+.hint{font-size:.84rem;color:var(--muted);margin:0}
+.chk{display:flex;flex-direction:column;gap:8px}
+.chk label{display:flex;gap:10px;align-items:baseline;font-size:.92rem;cursor:pointer}
+.chk input{flex:none;width:18px;height:18px;accent-color:var(--sage);transform:translateY(3px)}
+.chk b{white-space:nowrap}
+.chk small{color:var(--muted)}
+.tog{display:flex;gap:10px;align-items:center;font-size:.92rem;cursor:pointer}
+.tog input{width:18px;height:18px;accent-color:var(--sage)}
+.sheetbox{position:sticky;top:12px;display:flex;flex-direction:column;gap:10px}
+@media (max-width:1040px){.sheetbox{position:static}}
+.sheet{background:#fff;border-radius:6px;box-shadow:0 18px 40px -22px rgba(47,41,36,.45);overflow:hidden}
+.sheet svg{display:block;width:100%;height:auto}
+.imp{background:var(--paper);border:1.5px dashed color-mix(in srgb,var(--sage) 55%,transparent);border-radius:16px;padding:14px 18px;font-size:.88rem;max-width:90ch;margin:0}
+.imp b{color:var(--sage)}
+.guide{display:flex;flex-direction:column;gap:14px;max-width:90ch}
+.guide ul{margin:0;padding-left:20px}
+.guide li{margin:4px 0}
+.credit{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:.8rem;color:var(--muted)}
+.credit a{color:var(--muted)}
+.qh{font:700 .72rem/1 var(--sans);width:20px;height:20px;border-radius:50%;border:1.5px solid var(--line);background:var(--paper);color:var(--brown);cursor:pointer;margin-left:6px;padding:0;flex:none}
+.sheets{display:flex;flex-direction:column;gap:14px}
+.goals{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+@media (max-width:560px){.goals{grid-template-columns:1fr}}
+.goals label{display:flex;gap:10px;align-items:flex-start;background:var(--bg);border:1.5px solid var(--line);border-radius:14px;padding:9px 12px;cursor:pointer;font-size:.92rem}
+.goals input{width:18px;height:18px;accent-color:var(--sage);flex:none;margin-top:2px}
+.goals small{display:block;color:var(--muted)}
+.steps{display:flex;flex-direction:column;gap:8px}
+.steps details{background:var(--paper);border:1.5px solid var(--line);border-radius:16px;padding:10px 16px}
+.steps summary{cursor:pointer;font-weight:700;display:flex;gap:10px;align-items:baseline}
+.steps summary small{font-weight:600;color:var(--muted);margin-left:auto;text-align:right}
+.steps details p,.steps details ul{margin:8px 0 2px;font-size:.93rem}
+.steps details ul{padding-left:20px}
+</style>
+<!--pwa--><link rel="manifest" href="/fav/site.uk.webmanifest"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Свої люди"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="theme-color" content="#4F5E3E"><style id="pa-tiles">/* верхнее меню на телефоне и планшете: прямоугольные плитки с закруглением в два ряда, иконки ставит pwa-app.js (08.10.2026) */html header.top nav[aria-label] a .pa-ni{display:none}@media (max-width:1100px){html header.top .page{flex-wrap:wrap;row-gap:8px}html header.top nav[aria-label]{order:3;width:100%;display:grid!important;grid-template-columns:repeat(var(--pa-cols,3),minmax(0,1fr));gap:8px;overflow:visible;padding:4px 0 12px;margin:0}html header.top nav[aria-label] a{display:flex!important;flex-direction:column;align-items:center;justify-content:center;gap:5px;min-height:62px;padding:9px 6px;border-radius:14px;background:var(--paper,#FFFCF8);border:1px solid color-mix(in srgb,var(--sage,#66704F) 30%,transparent);box-shadow:0 3px 10px -6px rgba(60,70,40,.45);color:var(--ink,#2F2924)!important;font:600 .78rem/1.18 var(--body,system-ui);text-align:center;white-space:normal;text-decoration:none;-webkit-tap-highlight-color:transparent}html header.top nav[aria-label] a::after{content:none!important}html header.top nav[aria-label] a .pa-ni{display:block;width:22px;height:22px;fill:none;stroke:var(--sage,#66704F);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}html header.top nav[aria-label] a[aria-current="page"]{background:var(--sage,#66704F);border-color:var(--sage,#66704F);color:var(--paper,#FFFCF8)!important;box-shadow:0 4px 12px -6px rgba(60,70,40,.6)}html header.top nav[aria-label] a[aria-current="page"] .pa-ni{stroke:var(--paper,#FFFCF8)}html header.top nav[aria-label] a:active{transform:scale(.97)}}/* кнопки сайта — прямоугольные с закруглением, как плитки меню (решение Ирины 08.10.2026); значки-метки (образец, теги, «?») остаются круглыми */:is(.navcta,.btn,.shr-btn,.pl-act a,.pl-act button,.qa,.more,.listbar button,.leaflet-popup-content button,.calmenu a,.calmenu button,.go-free,.find,.confirm,.monthics,.addb,.mbtn,.example,.viewsw,#langbar.langbar,.pa-go,.pa-x,.pa-foot){border-radius:12px!important}:is(.viewsw button,.seg button,.chips button,#langbar.langbar a,.cal-nav button){border-radius:9px!important}</style><script src="/assets/pwa-app.js" defer></script><!--pwa--><!--i18n--><link rel="alternate" hreflang="ru" href="https://svoiludi.ch/instrumenty/franshiza-shema/"><link rel="alternate" hreflang="uk" href="https://svoiludi.ch/uk/instrumenty/franshiza-shema/"><!--i18n--></head>
+<body>
+<div class="wrap">
+  <header>
+    <p style="margin:0 0 14px"><a class="jump" href="https://svoiludi.ch/uk/instrumenty/">← Усі корисні інструменти · Свої люди у Швейцарії</a></p>
+    <div class="eyebrow">Схема · медстраховка</div>
+    <h1>Яка франшиза медстраховки тобі вигідніша</h1>
+    <p class="lead">Скільки ти платиш сама, коли йдеш до лікаря, і з якого моменту платить каса. Яка франшиза вигідніша — 300 чи 2500 франків — при твоїх витратах, скільки відкласти і до якого числа франшизу можна змінити. PDF і PNG безкоштовно.</p>
+    <div class="privnote"><b>Твої дані тільки в тебе.</b> Вибір зберігається тільки в твоєму браузері на цьому пристрої. Реєстрація не потрібна.</div>
+    <div data-fan="franshiza-shema"></div>
+  </header>
+  <div class="setup">
+    <div class="fl"><span class="lb">Мова аркушів<button type="button" class="qh" data-help="lang" aria-label="Підказка: мова аркушів" aria-expanded="false">?</button></span><select id="lang"><option value="de">Російська + німецька</option><option value="fr">Російська + французька</option><option value="it">Російська + італійська</option><option value="ru">Тільки українська</option></select></div>
+    <div class="fl"><span class="lb">Що в PDF</span><div class="chk"><label><input type="checkbox" id="p1" checked> Хто скільки платить</label><label><input type="checkbox" id="p2" checked> Яка франшиза вигідніша</label><label><input type="checkbox" id="p3" checked> Правила і строки</label><label><input type="checkbox" id="p4" checked> Мій розрахунок</label></div></div>
+    <div class="fl"><span class="lb">Друк</span><label class="tog"><input type="checkbox" id="bw"> Без кольору, для дешевого друку</label></div>
+  </div>
+  <div class="exbar" id="exbar" hidden><span>Це приклад. Так виглядатиме твій файл.</span><button type="button" class="btn sm" id="exOff">Повернутися до моїх даних</button></div>
+  <div class="work">
+    <div class="form">
+      <section class="sec" aria-labelledby="h-me">
+        <h2 id="h-me">Мій розрахунок<button type="button" class="qh" data-help="calc" aria-label="Підказка: мій розрахунок" aria-expanded="false">?</button></h2>
+        <div class="g2">
+          <div class="fl"><span class="lb">Для кого</span><select id="who"><option value="a">Дорослий (з 19 років)</option><option value="c">Дитина (до 18 років)</option></select></div>
+          <div class="fl"><span class="lb">Витрати на лікарів і ліки на рік<button type="button" class="qh" data-help="cost" aria-label="Підказка: витрати" aria-expanded="false">?</button></span><select id="cost"></select></div>
+          <div class="fl"><span class="lb">Премія на місяць за найнижчої франшизи<button type="button" class="qh" data-help="prem" aria-label="Підказка: премія" aria-expanded="false">?</button></span><select id="prem"></select></div>
+          <div class="fl"><span class="lb">Премія на місяць за найвищої франшизи<button type="button" class="qh" data-help="prem2" aria-label="Підказка: премія за високої франшизи" aria-expanded="false">?</button></span><select id="prem2"></select></div>
+        </div>
+        <p class="hint" id="meNote"></p>
+      </section>
+      <section class="sec" aria-labelledby="h-st">
+        <h2 id="h-st">Коротко</h2>
+        <div class="steps" id="stepsList"></div>
+      </section>
+    </div>
+    <div class="sheetbox">
+      <div class="acts"><button type="button" class="btn gold" id="pdf">Завантажити PDF</button><button type="button" class="btn ghost sm" id="share" hidden>Надіслати</button><button type="button" class="btn ghost sm" id="exOn">Подивитися на прикладі</button></div>
+      <div class="sheets" id="sheet" aria-label="Попередній перегляд аркушів"></div>
+      <div class="status" id="status" role="status"></div>
+    </div>
+  </div>
+  <!--rel--><style>.relsh{margin:34px 0 8px}.relsh h2{font-size:1.35rem;margin:0 0 14px}.relsh-g{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:14px}.relsh-g a{display:flex;gap:12px;align-items:center;padding:12px;border:1.5px solid var(--line,#E4DCCF);border-radius:18px;background:var(--paper,#FFFCF8);color:inherit;text-decoration:none}.relsh-g a:hover{border-color:var(--sage,#5E6B48)}.relsh-g img{width:72px;height:auto;flex:none;border-radius:4px;box-shadow:0 2px 8px rgba(60,50,30,.18)}.relsh-g b{display:block;font-size:.98rem;margin-bottom:3px}.relsh-g span{font-size:.84rem;line-height:1.35;opacity:.85}</style><section class="relsh" aria-labelledby="h-rel"><h2 id="h-rel">Пов’язані схеми</h2><div class="relsh-g"><a href="/uk/instrumenty/strahovki-obyazatelnye/"><img src="../preview/strahovki-obyazatelnye/1.jpg" alt="" loading="lazy"><span><b>Обов’язкові страховки</b><span>Що не можна не оформити: медстраховка, AHV, Serafe, машина, дім.</span></span></a><a href="/uk/instrumenty/ekstrennye-nomera/"><img src="../preview/ekstrennye-nomera/1.jpg" alt="" loading="lazy"><span><b>Екстрені номери</b><span>Номери, черговий лікар кантону і твої контакти на одній картці.</span></span></a><a href="/uk/instrumenty/nalogi-shema/"><img src="../preview/nalogi-shema/1.jpg" alt="" loading="lazy"><span><b>Як влаштовані податки</b><span>Три рівні податку, податок у джерела або декларація, строки.</span></span></a></div></section><!--rel-->
+  <p class="imp"><b>Важливо.</b> Це зразок для прикладу й особистого використання, а не офіційний документ. Правила — за сайтом BAG на жовтень 2026 року. Премії в кожної каси свої: точні цифри для своєї каси й кантону дивись на <a href="https://www.priminfo.admin.ch/">priminfo.admin.ch</a>. Розрахунок приблизний. Автор не несе відповідальності за достовірність.</p>
+  <div class="share-slot" data-url="https://svoiludi.ch/uk/instrumenty/franshiza-shema/" data-lead="Перешли тим, хто обирає франшизу. Повідомлення вже готове." data-text="Привіт! Тут на схемі зрозуміло, як працює франшиза медстраховки у Швейцарії: скільки платиш сама, яка франшиза вигідніша за твоїх витрат і до якого числа її міняти. Безкоштовно, PDF. https://svoiludi.ch/uk/instrumenty/franshiza-shema/"></div>
+  <p class="credit"><span>Свої люди у Швейцарії · svoiludi.ch</span><a href="https://svoiludi.ch/uk/privacy/">Політика конфіденційності</a></p>
+</div>
+
+<script src="/assets/kantony.uk.js"></script>
+<script src="/assets/lib/jspdf.umd.min.js"></script>
+<script src="/assets/shema.uk.js"></script>
+<script>
+window.HELP = {
+  lang: '<p><b>Російська + німецька</b> (французька, італійська) — слова «франшиза», «частка 10%» та інші ще й мовою, як вони стоять у рахунках і листах каси. Обери мову свого кантону.</p>',
+  calc: '<p>Обери, для кого рахуєш, скільки приблизно йде на рік на лікарів і ліки і скільки коштує медстраховка на місяць. Схема порахує, скільки ти заплатиш за рік за кожної франшизи — премії плюс твоя частка.</p>',
+  cost: '<p>Усі рахунки лікарів, лікарні, ліки за рецептом, аналізи за рік — до вирахування франшизи. Якщо не знаєш, подивися виписку каси за минулий рік (Leistungsabrechnung) або обери приблизно: здоровий дорослий — 300–1000, хронічна хвороба — від 2000.</p>',
+  prem: '<p>Скільки коштує на місяць базова медстраховка (KVG) за франшизи 300 у дорослих або 0 у дітей. Дивись у своєму полісі або на <a href="https://www.priminfo.admin.ch/">priminfo.admin.ch</a>.</p>',
+  prem2: '<p>Скільки коштує та сама страховка за франшизи 2500 у дорослих або 600 у дітей. Якщо не знаєш, обери «за максимальною знижкою»: за законом каса може зробити премію дешевшою не більше ніж на 70% різниці франшиз.</p>'
+};
+const KEY = 'franshizaShema.v1';
+const LOC = {
+  t1: {de: 'Kostenbeteiligung: Franchise und Selbstbehalt', fr: 'Participation aux coûts : franchise et quote-part', it: 'Partecipazione ai costi: franchigia e aliquota percentuale'},
+  t2: {de: 'Welche Franchise lohnt sich?', fr: 'Quelle franchise est avantageuse ?', it: 'Quale franchigia conviene?'},
+  t3: {de: 'Regeln und Fristen', fr: 'Règles et délais', it: 'Regole e termini'},
+  t4: {de: 'Meine Berechnung', fr: 'Mon calcul', it: 'Il mio calcolo'},
+  fr: {de: 'Franchise', fr: 'franchise', it: 'franchigia'},
+  sb: {de: 'Selbstbehalt 10 %', fr: 'quote-part 10 %', it: 'aliquota percentuale 10 %'},
+  sp: {de: 'Spitalbeitrag', fr: 'contribution aux frais hospitaliers', it: 'contributo ai costi ospedalieri'},
+  pr: {de: 'Prämie', fr: 'prime', it: 'premio'}
+};
+const AD = {F: [300, 500, 1000, 1500, 2000, 2500], S: 700}, CH = {F: [0, 100, 200, 300, 400, 500, 600], S: 350};
+const DISC = {ru: 'Зразок для особистого використання, не офіційний документ. Правила за BAG на 10.2026, премії своєї каси дивись на priminfo.admin.ch. svoiludi.ch', de: 'Muster zur Orientierung und für den persönlichen Gebrauch, kein amtliches Dokument. Angaben ohne Gewähr, bitte selbst prüfen.', fr: 'Modèle indicatif pour usage personnel, pas un document officiel. Données sans garantie, à vérifier soi-même.', it: 'Modello indicativo per uso personale, non un documento ufficiale. Dati senza garanzia, da verificare personalmente.'};
+let S = load(), EX = null;
+function blank(){ return {lang: 'de', bw: false, p: {1: true, 2: true, 3: true, 4: true}, who: 'a', cost: 1000, prem: 400, prem2: 0}; }
+function load(){ try { const s = JSON.parse(localStorage.getItem(KEY)); if (s && typeof s === 'object') return Object.assign(blank(), s); } catch (e) {} return blank(); }
+function save(){ if (EX) return; try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} }
+const D = () => EX || S, bi = d => d.lang !== 'ru', L = (d, k) => bi(d) ? LOC[k][d.lang] : '', disc = d => bi(d) ? DISC[d.lang] : DISC.ru;
+const fmt = n => Math.round(n).toLocaleString('de-CH').replace(/[’']/g, ' ');
+const G = d => d.who === 'c' ? CH : AD;
+/* премия в месяц при франшизе F: линейно между низкой и высокой; «авто» — максимальная скидка по закону (70% разницы франшиз) */
+function prem(d, F){ const g = G(d), lo = g.F[0], hi = g.F[g.F.length - 1], p0 = +d.prem || 0; const p1 = +d.prem2 ? +d.prem2 : Math.max(0, p0 - 0.7 * (hi - lo) / 12); return p0 - (p0 - p1) * (F - lo) / (hi - lo); }
+const share = (g, F, c) => Math.min(c, F) + Math.min(0.1 * Math.max(c - F, 0), g.S);
+const total = (d, F, c) => 12 * prem(d, F) + share(G(d), F, c);
+function best(d, c){ const g = G(d); let b = g.F[0]; g.F.forEach(F => { if (total(d, F, c) < total(d, b, c) - 0.5) b = F; }); return b; }
+function breakEven(d){ const g = G(d), lo = g.F[0], hi = g.F[g.F.length - 1]; for (let c = 0; c <= 20000; c += 50) if (total(d, lo, c) <= total(d, hi, c)) return c; return null; }
+
+/* ЛИСТ 1 */
+function p1(d){
+  const C = SH.pal(d.bw), P = SH.page(297, 210, C), c = C.c, g = G(d), kid = d.who === 'c';
+  P.header('Франшиза: хто скільки платить', L(d, 't1'), kid ? 'для дитини' : 'для дорослого');
+  const X = 12, W = 273, axX = X + 52, axW = W - 52, MAX = 10000, sx = v => axX + axW * Math.min(v, MAX) / MAX;
+  let y = 28;
+  P.para('Витрати на лікарів і ліки за рік — зліва направо. Колір показує, хто платить кожен франк.', X, y, 9, false, C.ink, W, 4); y += 9;
+  const bar = (F, label) => {
+    P.text(label, X, y + 7, 10, true, C.head);
+    const a = sx(F), b = sx(F + g.S * 10);
+    if (F > 0) P.rect(axX, y, a - axX, 11, c.red[0], c.red[1], 1);
+    P.rect(a, y, b - a, 11, c.mustard[0], c.mustard[1], 1);
+    P.rect(b, y, axX + axW - b, 11, c.green[0], c.green[1], 1);
+    if (F >= 600) P.text('ти 100%', axX + 2, y + 7, 7.4, true, c.red[1]);
+    P.text('ти 10%, каса 90%', a + 2, y + 7, 7.4, true, c.mustard[1]);
+    P.text('каса 100%', b + 2, y + 7, 7.4, true, c.green[1]);
+    P.text(fmt(F), a, y + 15, 6.6, false, C.mut, 'center'); P.text(fmt(F + g.S * 10), b, y + 15, 6.6, false, C.mut, 'center');
+    y += 22;
+  };
+  bar(g.F[0], 'Франшиза ' + fmt(g.F[0])); bar(g.F[g.F.length - 1], 'Франшиза ' + fmt(g.F[g.F.length - 1]));
+  for (let v = 0; v <= MAX; v += 2000) { P.line(sx(v), y - 3, sx(v), y - 1.6, C.mut, 0.3); P.text(fmt(v), sx(v), y + 1.6, 6, false, C.mut, 'center'); }
+  y += 8;
+  // три шага
+  const cw = (W - 12) / 3, o = {bs: 8.6, ts: 10.4};
+  const T = [[c.red, '1. Франшиза' , L(d, 'fr'), 'Перші ' + fmt(g.F[0]) + '–' + fmt(g.F[g.F.length - 1]) + ' франків за рік платиш сама — стільки, яку франшизу обрала.'], [c.mustard, '2. Частка 10%', L(d, 'sb'), 'Далі з кожного рахунку платиш 10%, але не більше ' + g.S + ' франків за рік. Каса платить 90%.'], [c.green, '3. Каса 100%', '', 'Коли франшиза і ' + g.S + ' франків частки набралися, до кінця року каса платить усе за базовою страховкою.']];
+  const h = Math.max(...T.map(t => P.card(0, 0, cw, t[0], t[1], t[2], t[3], Object.assign({dry: true}, o))));
+  T.forEach((t, i) => { P.card(X + i * (cw + 6), y, cw, t[0], t[1], t[2], t[3], Object.assign({minH: h}, o)); if (i < 2) P.arrowRight(X + i * (cw + 6) + cw + 0.5, X + (i + 1) * (cw + 6) - 0.5, y + h / 2, C.head); });
+  y += h + 10;
+  // примеры
+  y = P.sec('Скільки платиш сама за рік, без премій', X, y, W, 'приклади');
+  const ex = [500, 2000, 5000, 20000], lo = g.F[0], hi = g.F[g.F.length - 1], colW = (W - 60) / ex.length;
+  P.text('Витрати за рік', X, y, 8.6, true, C.head); ex.forEach((v, i) => P.text(fmt(v) + ' франків', X + 60 + i * colW, y, 8.6, true, C.head)); y += 7;
+  [[lo, c.blue], [hi, c.pink]].forEach(([F, col]) => { P.text('Франшиза ' + fmt(F), X, y, 8.8, true, col[1]); ex.forEach((v, i) => P.text(fmt(share(g, F, v)) + ' франків', X + 60 + i * colW, y, 8.8, false, C.ink)); y += 6.6; });
+  y += 3;
+  const e1 = g.F[0], bill = 1000;
+  P.para('Приклад: за рік один рахунок на ' + fmt(bill) + ' франків, франшиза ' + fmt(e1) + '. Ти платиш ' + fmt(Math.min(bill, e1)) + ' франшизи + ' + fmt(0.1 * Math.max(bill - e1, 0)) + ' частки = ' + fmt(share(g, e1, bill)) + ' франків, каса — ' + fmt(bill - share(g, e1, bill)) + '.', X, y, 8.6, false, C.ink, W, 4); y += 9;
+  P.para('Крім того: у лікарні 15 франків на день (' + (L(d, 'sp') || 'Spitalbeitrag') + '), крім дітей, молоді до 25 років, яка навчається, і вагітності. З 13-го тижня вагітності до 8 тижнів після пологів франшизу і 10% не платиш.', X, y, 8.2, false, C.ink, W, 3.8);
+  P.foot(disc(d));
+  return P;
+}
+
+/* ЛИСТ 2: график */
+function p2(d){
+  const C = SH.pal(d.bw), P = SH.page(297, 210, C), c = C.c, g = G(d);
+  P.header('Яка франшиза вигідніша', L(d, 't2'), d.who === 'c' ? 'для дитини' : 'для дорослого');
+  const X = 12, gx = X + 18, gy = 30, gw = 175, gh = 135, CMAX = d.who === 'c' ? 2000 : 6000;
+  const all = []; g.F.forEach(F => { for (let v = 0; v <= CMAX; v += CMAX / 60) all.push(total(d, F, v)); });
+  const YMAX = Math.ceil(Math.max(...all) / 500) * 500, YMIN = Math.max(0, Math.floor(Math.min(...all) / 500) * 500 - 500);
+  const px = v => gx + gw * v / CMAX, py = v => gy + gh - gh * (v - YMIN) / (YMAX - YMIN);
+  P.rect(gx, gy, gw, gh, '#FFFFFF', C.line, 0);
+  for (let v = YMIN; v <= YMAX; v += 500) { P.line(gx, py(v), gx + gw, py(v), C.line, 0.2); P.text(fmt(v), gx - 2, py(v) + 1.5, 5.8, false, C.mut, 'right'); }
+  const stepX = d.who === 'c' ? 250 : 1000;
+  for (let v = 0; v <= CMAX; v += stepX) { P.line(px(v), gy, px(v), gy + gh, C.line, 0.2); P.text(fmt(v), px(v), gy + gh + 4.5, 5.8, false, C.mut, 'center'); }
+  P.text('витрати на лікарів і ліки за рік, франків', gx + gw / 2, gy + gh + 9.5, 6.6, false, C.ink, 'center');
+  P.text('скільки всього за рік (премії + твоя частка), франків', gx, gy - 3, 6.6, false, C.ink);
+  const cols = [c.blue, c.green, c.sage, c.mustard, c.brown, c.pink, c.red];
+  g.F.forEach((F, i) => { let prev = null; for (let v = 0; v <= CMAX + 1; v += CMAX / 120) { const pt = [px(v), py(total(d, F, v))]; if (prev) P.line(prev[0], prev[1], pt[0], pt[1], cols[i][1], 0.7); prev = pt; } });
+  { const be0 = breakEven(d); if (be0 != null && be0 < CMAX) { P.line(px(be0), gy, px(be0), gy + gh, C.head, 0.5, true); P.text('межа ≈ ' + fmt(be0), px(be0) + 1.5, gy + 5, 6.8, true, C.head); } }
+  // легенда и выводы справа
+  const lx = gx + gw + 10, lw = 297 - 12 - lx; let y = gy + 2;
+  P.text('Франшиза і премія на місяць', lx, y, 8.6, true, C.head); y += 6;
+  g.F.forEach((F, i) => { P.rect(lx, y - 2.6, 6, 3, cols[i][0], cols[i][1], 0.6); P.text(fmt(F) + ' — ' + fmt(prem(d, F)) + ' франків', lx + 9, y, 7.6, false, C.ink); y += 5.2; });
+  y += 3;
+  const be = breakEven(d), lo = g.F[0], hi = g.F[g.F.length - 1];
+  const lines = [be != null ? 'Поки витрати менші приблизно за ' + fmt(be) + ' франків на рік, вигідніша франшиза ' + fmt(hi) + '. Якщо більше — франшиза ' + fmt(lo) + '.' : 'За цих премій найнижча франшиза вигідніша майже завжди.', 'Середні франшизи майже ніколи не вигідніші за крайні — зазвичай обирають ' + fmt(lo) + ' або ' + fmt(hi) + '.', 'З високою франшизою тримай на рахунку ' + fmt(hi + g.S) + ' франків на випадок хвороби.'];
+  y += P.card(lx, y, lw, c.mustard, 'Що видно на графіку', '', lines, {bs: 7.6, ts: 9.2}) + 4;
+  P.para(+d.prem2 ? 'Премії — твої. Проміжні франшизи пораховані приблизно, між твоїми двома цифрами.' : 'Премію за високої франшизи пораховано за максимальною знижкою, яку дозволяє закон (70% різниці франшиз). У твоєї каси знижка може бути меншою — перевір на priminfo.admin.ch.', lx, y, 6.6, false, C.mut, lw, 3);
+  P.foot(disc(d));
+  return P;
+}
+
+/* ЛИСТ 3: правила и сроки */
+function p3(d){
+  const C = SH.pal(d.bw), P = SH.page(297, 210, C), c = C.c;
+  P.header('Правила і строки', L(d, 't3'), '');
+  const X = 12, cw = (273 - 12) / 3, o = {bs: 9.2, ts: 11};
+  const K = [
+    [c.blue, 'Які франшизи бувають', ['Дорослі з 19 років: 300, 500, 1000, 1500, 2000 або 2500 франків на рік.', 'Діти до 18 років: 0 (зазвичай), 100, 200, 300, 400, 500 або 600.', 'Частка 10%: дорослі — до 700 франків на рік, діти — до 350.']],
+    [c.red, 'До якого числа міняти', ['Підняти франшизу можна до 31 грудня, знизити — до 30 листопада. Нова франшиза діє з 1 січня.', 'Лист у касу — рекомендованим листом (Einschreiben), збережи копію і квитанцію.', 'Каса не може відмовити через хвороби — у базовій страховці це заборонено.']],
+    [c.mustard, 'Відклади гроші', ['З високою франшизою тримай на рахунку франшизу плюс 700 франків — це найбільше, що заплатиш сама за рік (без премій і лікарні).', 'Рахунки лікарів часто приходять тобі, і ти платиш сама (Tiers garant). Каса повертає те, що понад франшизу і частку.']],
+    [c.green, 'Коли франшизу не платиш', ['З 13-го тижня вагітності до 8 тижнів після пологів — ні франшизи, ні 10%.', 'Нещасний випадок, якщо працюєш від 8 годин на тиждень, — платить страховка роботодавця від нещасного випадку, без франшизи.', 'Частина профілактики (наприклад, деякі щеплення й обстеження) — без франшизи, уточни в касі.']],
+    [c.pink, 'Ще частки', ['Оригінальні ліки, якщо є дешевий дженерик: частка 40% замість 10% — якщо лікар не призначив оригінал з медичної причини.', 'Лікарня: 15 франків на день, крім дітей, молоді до 25 років, яка навчається, і вагітності.']],
+    [c.sage, 'Як платити менше', ['Моделі із сімейним лікарем, телемедициною або HMO — премія нижча.', 'Знижка на премію від кантону (Prämienverbilligung), якщо дохід невеликий.', 'Порівняти каси — на priminfo.admin.ch. Змінити касу базової страховки — листом до 30 листопада.']]
+  ];
+  let y = 26;
+  for (let r = 0; r < 2; r++) {
+    const row = K.slice(r * 3, r * 3 + 3), h = Math.max(...row.map(k => P.card(0, 0, cw, k[0], k[1], '', k[2], Object.assign({dry: true}, o))));
+    row.forEach((k, i) => P.card(X + i * (cw + 6), y, cw, k[0], k[1], '', k[2], Object.assign({minH: h}, o)));
+    y += h + 8;
+  }
+  P.foot(disc(d));
+  return P;
+}
+
+/* ЛИСТ 4: мой расчёт */
+function p4(d){
+  const C = SH.pal(d.bw), P = SH.page(210, 297, C), c = C.c, g = G(d), cost = +d.cost || 0, b = best(d, cost);
+  P.header('Моя франшиза', L(d, 't4'), d.who === 'c' ? 'дитина' : 'дорослий');
+  let y = 28;
+  P.para('Витрати на лікарів і ліки на рік — приблизно ' + fmt(cost) + ' франків. Премія за франшизи ' + fmt(g.F[0]) + ' — ' + fmt(+d.prem) + ' франків на місяць' + (+d.prem2 ? ', за франшизи ' + fmt(g.F[g.F.length - 1]) + ' — ' + fmt(+d.prem2) + '.' : ', за найвищої — за максимальною знижкою за законом.'), 12, y, 8.6, false, C.ink, 186, 4); y += 12;
+  const cx = [12, 42, 74, 104, 138, 170];
+  ['Франшиза', 'Премія на місяць', 'Премії за рік', 'Твоя частка', 'Усього за рік', 'Якщо захворієш'].forEach((t, i) => P.text(t, cx[i], y, 7.4, true, C.head)); y += 2;
+  P.line(12, y, 198, y, C.head, 0.4); y += 5;
+  g.F.forEach(F => {
+    const isB = F === b, pm = prem(d, F), sh = share(g, F, cost), worst = 12 * pm + F + g.S;
+    if (isB) P.rect(11, y - 4.8, 188, 7.4, c.green[0], c.green[1], 1);
+    [fmt(F), fmt(pm), fmt(12 * pm), fmt(sh), fmt(12 * pm + sh), fmt(worst)].forEach((t, i) => P.text(t, cx[i], y, 9.2, isB || i === 4, isB ? c.green[1] : C.ink));
+    y += 8.4;
+  });
+  y += 2;
+  P.para('«Якщо захворієш» — премії за рік плюс найбільше, що платиш сама: франшиза і ' + g.S + ' франків частки (без лікарні 15 франків на день).', 12, y, 7, false, C.mut, 186, 3.2); y += 10;
+  y += P.card(12, y, 186, c.green, 'Найвигідніше за твоїх витрат: франшиза ' + fmt(b), '', ['Якщо обираєш франшизу ' + fmt(b) + ', тримай на рахунку ' + fmt(b + g.S) + ' франків на випадок хвороби.', 'Змінити франшизу: підняти — до 31 грудня, знизити — до 30 листопада, листом у касу рекомендованим. Діє з 1 січня.'], {bs: 8.4, ts: 10.4}) + 6;
+  y = P.sec('Мої цифри', 12, y, 186, 'впиши від руки');
+  ['Моя каса і модель', 'Номер поліса', 'Франшиза зараз', 'Нова франшиза з 1 січня', 'Лист у касу надіслано'].forEach(s => { P.text(s, 14, y + 1, 8.4, false, C.ink); P.line(70, y + 2, 198, y + 2, C.line, 0.4); y += 8; });
+  P.foot(disc(d));
+  return P;
+}
+function build(){ const d = D(), p = []; [p1, p2, p3, p4].forEach((f, i) => { if (d.p[i + 1] !== false) p.push(f(d)); }); return p; }
+
+const $ = id => document.getElementById(id);
+const opts = (arr, f) => arr.map(v => `<option value="${v}">${f(v)}</option>`).join('');
+function fillSelects(){
+  const kid = D().who === 'c';
+  $('cost').innerHTML = opts(kid ? [0, 100, 200, 300, 500, 800, 1000, 1500, 2000, 3000, 5000] : [0, 200, 300, 500, 800, 1000, 1500, 2000, 2500, 3000, 4000, 5000, 8000, 10000, 20000], v => v ? fmt(v) + ' франків' : 'майже нічого');
+  const pr = []; for (let v = kid ? 60 : 200; v <= (kid ? 250 : 900); v += kid ? 5 : 10) pr.push(v);
+  $('prem').innerHTML = opts(pr, v => fmt(v) + ' франків');
+  $('prem2').innerHTML = '<option value="0">не знаю — за максимальною знижкою</option>' + opts(pr, v => fmt(v) + ' франків');
+}
+$('stepsList').innerHTML = [['Як це працює', 'Спочатку платиш сама до суми франшизи, потім 10% від рахунків (до 700 франків на рік у дорослих, до 350 у дітей), далі каса платить усе.'], ['Яку обрати', 'Якщо на рік іде менше приблизно 2000 франків — зазвичай вигідніша найвища франшиза 2500. Якщо більше або є хронічна хвороба — 300. Порахуй зі своїми преміями.'], ['До якого числа міняти', 'Підняти — до 31 грудня, знизити — до 30 листопада. Лист у касу — рекомендованим.'], ['Скільки відкласти', 'З франшизою 2500 тримай на рахунку 3200 франків на випадок хвороби.']].map(s => `<details><summary>${SH.esc(s[0])}</summary><p>${SH.esc(s[1])}</p></details>`).join('');
+let UI;
+function fill(){
+  const d = D(); fillSelects();
+  $('lang').value = d.lang; $('bw').checked = !!d.bw; $('who').value = d.who; $('cost').value = String(d.cost); $('prem').value = String(d.prem); $('prem2').value = String(d.prem2 || 0);
+  [1, 2, 3, 4].forEach(n => $('p' + n).checked = d.p[n] !== false);
+  ['who', 'cost', 'prem', 'prem2'].forEach(id => $(id).disabled = !!EX);
+  const b = best(d, +d.cost), be = breakEven(d), g = G(d);
+  $('meNote').textContent = `За твоїх витрат вигідніша франшиза ${fmt(b)}.` + (be != null ? ` Межа — приблизно ${fmt(be)} франків витрат на рік.` : '') + ` Відклади ${fmt(b + g.S)} франків на випадок хвороби.`;
+  $('exbar').hidden = !EX; $('exOn').hidden = !!EX;
+  if (UI) UI.render();
+}
+const set = f => { f(S); if (EX) f(EX); save(); fill(); };
+$('lang').addEventListener('change', e => set(s => s.lang = e.target.value));
+$('bw').addEventListener('change', e => set(s => s.bw = e.target.checked));
+[1, 2, 3, 4].forEach(n => $('p' + n).addEventListener('change', e => set(s => s.p[n] = e.target.checked)));
+$('who').addEventListener('change', e => { if (EX) return; S.who = e.target.value; if (S.who === 'c') { S.prem = 120; S.prem2 = 0; S.cost = 300; } else { S.prem = 400; S.prem2 = 0; S.cost = 1000; } save(); fill(); });
+['cost', 'prem', 'prem2'].forEach(id => $(id).addEventListener('change', e => { if (EX) return; S[id] = +e.target.value; save(); fill(); }));
+const EXD = () => ({lang: 'de', bw: S.bw, p: {1: true, 2: true, 3: true, 4: true}, who: 'a', cost: 800, prem: 450, prem2: 0});
+$('exOn').addEventListener('click', () => { EX = EXD(); fill(); window.scrollTo({top: $('exbar').offsetTop - 12, behavior: 'smooth'}); });
+$('exOff').addEventListener('click', () => { EX = null; fill(); });
+if (/[?&]example\b/.test(location.search)) EX = EXD();
+UI = SH.mount({build, title: 'Франшиза медстраховки', name: () => 'Franshiza-shema'});
+fill();
+
+</script>
+<script src="/assets/help.uk.js"></script>
+<script src="/assets/backup.uk.js"></script>
+<script src="/assets/pdffan.uk.js" defer></script>
+<script src="/assets/share.uk.js" defer></script>
+<script src="/assets/samesite.js"></script>
+<!--i18n--><style>#langbar.langbar{position:fixed;bottom:14px;right:14px;z-index:60;display:flex;gap:2px;background:rgba(255,255,255,.92);border:1px solid rgba(0,0,0,.08);border-radius:999px;padding:3px;font:600 12px Manrope,system-ui,sans-serif;box-shadow:0 2px 8px rgba(0,0,0,.08)}#langbar.langbar a{color:#5d554d;padding:5px 9px;border-radius:999px;text-decoration:none;font:inherit;display:inline-block}#langbar.langbar a[aria-current="true"]{background:#2f2924;color:#fff}@media print{.langbar{display:none!important}}</style><div class="langbar" id="langbar" role="navigation" aria-label="Мова / Язык"><a href="/instrumenty/franshiza-shema/" hreflang="ru" data-lang="ru">RU</a><a href="/uk/instrumenty/franshiza-shema/" hreflang="uk" data-lang="uk" aria-current="true">UA</a></div><script>(function(){var b=document.getElementById('langbar');if(!b)return;b.addEventListener('click',function(e){var a=e.target.closest('a[data-lang]');if(a){try{localStorage.setItem('svoiludiLang',a.dataset.lang)}catch(x){}a.href=a.getAttribute('href').split('#')[0]+location.hash;}});})();</script><!--i18n--></body>
+</html>

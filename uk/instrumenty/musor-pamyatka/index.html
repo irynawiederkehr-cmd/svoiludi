@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="uk">
+<head><!--i18n--><base href="/instrumenty/musor-pamyatka/"><!--i18n-->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<link rel="icon" href="/fav/favicon.svg" type="image/svg+xml"><link rel="icon" href="/fav/icon-32.png" sizes="32x32"><link rel="apple-touch-icon" href="/fav/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/fonts.css">
+<meta name="description" content="Безкоштовна пам’ятка з сортування сміття у Швейцарії на одному аркуші: платний мішок (Gebührensack), PET, скло, алюміній, папір і картон, батарейки, електроніка, зелені відходи, одяг, великогабаритне й небезпечне сміття, кавові капсули — що куди здавати і чого не можна. Унизу — свої дні вивезення і пункт збору. Російська + німецька, французька або італійська, PDF і PNG.">
+<link rel="canonical" href="https://svoiludi.ch/uk/instrumenty/musor-pamyatka/">
+<meta property="og:type" content="website"><meta property="og:locale" content="uk_UA"><meta property="og:site_name" content="Свої люди у Швейцарії">
+<meta property="og:title" content="Сортування сміття: пам’ятка на холодильник · безкоштовно"><meta property="og:description" content="Що куди здавати у Швейцарії і свої дні вивезення — один аркуш українською і мовою кантону.">
+<meta property="og:url" content="https://svoiludi.ch/uk/instrumenty/musor-pamyatka/"><meta property="og:image" content="https://svoiludi.ch/instrumenty/musor-pamyatka/og-image.uk.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="robots" content="noindex, nofollow">
+<title>Сортування сміття: що куди — пам’ятка на холодильник зі своїми днями вивезення</title>
+<style>
+/* Сортировка мусора: что куда — памятка на холодильник со своими днями вывоза (08.10.2026): анкета слева, живые листы справа, движок assets/shema.js. */
+:root{
+  --bg:#F4EDE3; --paper:#FFFCF8; --ink:#2F2924; --muted:#7A6E62; --line:#E5D9C9; --soft:#EFE5D7;
+  --brown:#6E4F3C; --mustard:#B98324; --mustard-soft:#F3E3C2; --sage:#4F5E3E; --sage-soft:#E3E8D6; --red:#A0523D;
+  --display:"Forum","Georgia",serif; --sans:"Manrope","Segoe UI",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#221D19; --paper:#2C2621; --ink:#F1E9DF; --muted:#B4A796; --line:#3E362F; --soft:#352E28;
+  --brown:#E1C2A6; --mustard:#E2B45C; --mustard-soft:#3D321F; --sage:#B4BF97; --sage-soft:#2E3226; --red:#E39A85; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#221D19; --paper:#2C2621; --ink:#F1E9DF; --muted:#B4A796; --line:#3E362F; --soft:#352E28;
+  --brown:#E1C2A6; --mustard:#E2B45C; --mustard-soft:#3D321F; --sage:#B4BF97; --sage-soft:#2E3226; --red:#E39A85; color-scheme:dark}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--ink);font:15px/1.55 var(--sans);margin:0}
+.wrap{max-width:1280px;margin:0 auto;padding-inline:16px;padding-block:28px 48px;display:flex;flex-direction:column;gap:24px}
+.eyebrow{font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+h1{font-family:var(--display);font-weight:400;font-size:clamp(2.4rem,6vw,3.6rem);line-height:1;margin:4px 0 10px;text-wrap:balance}
+h2{font-family:var(--display);font-weight:400;font-size:1.55rem;margin:0;text-wrap:balance}
+h3{font-family:var(--display);font-weight:400;font-size:1.22rem;line-height:1.2;margin:0}
+.lead{max-width:66ch;color:var(--muted);margin:0}
+.jump{font-weight:700;color:var(--brown);text-underline-offset:4px}
+.privnote{margin-top:14px;background:var(--sage-soft);border-radius:16px;padding:12px 16px;font-size:.9rem;max-width:90ch}
+.status{font-size:.86rem;color:var(--muted);min-height:1.3em}
+.btn{font:inherit;font-weight:700;font-size:.9rem;border:0;border-radius:999px;padding:10px 18px;cursor:pointer;color:#fff;text-decoration:none;display:inline-flex;align-items:center;gap:6px;background:#6E4F3C;box-shadow:0 8px 18px -8px rgba(110,79,60,.6)}
+.btn.gold{background:#B98324;box-shadow:0 8px 18px -8px rgba(185,131,36,.7)}
+.btn.free{background:#4F5E3E;box-shadow:0 8px 18px -8px rgba(79,94,62,.6)}
+.btn.ghost{background:transparent;color:var(--brown);border:1.5px solid var(--line);box-shadow:none}
+.btn.sm{font-size:.82rem;padding:7px 13px}
+.btn[disabled]{background:var(--soft);color:var(--muted);box-shadow:none;cursor:wait}
+select,input[type=text],input[type=tel],input[type=number],input[type=date],textarea{font:inherit;font-size:.95rem;color:var(--ink);background:var(--paper);border:1.5px solid var(--line);border-radius:12px;padding:9px 12px;width:100%;min-width:0}
+select:focus-visible,input:focus-visible,button:focus-visible,textarea:focus-visible,a:focus-visible{outline:2px solid var(--mustard);outline-offset:2px}
+::placeholder{color:color-mix(in srgb,var(--muted) 70%,transparent)}
+.setup{background:var(--paper);border:1.5px solid var(--line);border-radius:22px;padding:16px 18px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px 18px;align-items:start}
+@media (max-width:1000px){.setup{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.setup{grid-template-columns:1fr}}
+.fl{display:flex;flex-direction:column;gap:6px;min-width:0}
+.fl>.lb{font-size:.8rem;font-weight:700;color:var(--muted);display:flex;align-items:center}
+.seg{display:flex;flex-wrap:wrap;gap:6px}
+.seg button{font:inherit;font-size:.84rem;font-weight:700;border:1.5px solid var(--line);background:var(--paper);color:var(--ink);border-radius:999px;padding:6px 12px;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--sage);border-color:var(--sage);color:#fff}
+.acts{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.exbar{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;background:var(--mustard-soft);border-radius:16px;padding:10px 14px;font-size:.9rem;font-weight:600}
+.work{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:22px;align-items:start}
+@media (max-width:1040px){.work{grid-template-columns:1fr}}
+.form{display:flex;flex-direction:column;gap:14px;min-width:0}
+.sec{background:var(--paper);border:1.5px solid var(--line);border-radius:20px;padding:16px 18px;display:flex;flex-direction:column;gap:12px}
+.sec>h2{font-size:1.3rem;display:flex;align-items:center}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:560px){.g2{grid-template-columns:1fr}}
+.hint{font-size:.84rem;color:var(--muted);margin:0}
+.chk{display:flex;flex-direction:column;gap:8px}
+.chk label{display:flex;gap:10px;align-items:baseline;font-size:.92rem;cursor:pointer}
+.chk input{flex:none;width:18px;height:18px;accent-color:var(--sage);transform:translateY(3px)}
+.chk b{white-space:nowrap}
+.chk small{color:var(--muted)}
+.tog{display:flex;gap:10px;align-items:center;font-size:.92rem;cursor:pointer}
+.tog input{width:18px;height:18px;accent-color:var(--sage)}
+.sheetbox{position:sticky;top:12px;display:flex;flex-direction:column;gap:10px}
+@media (max-width:1040px){.sheetbox{position:static}}
+.sheet{background:#fff;border-radius:6px;box-shadow:0 18px 40px -22px rgba(47,41,36,.45);overflow:hidden}
+.sheet svg{display:block;width:100%;height:auto}
+.imp{background:var(--paper);border:1.5px dashed color-mix(in srgb,var(--sage) 55%,transparent);border-radius:16px;padding:14px 18px;font-size:.88rem;max-width:90ch;margin:0}
+.imp b{color:var(--sage)}
+.guide{display:flex;flex-direction:column;gap:14px;max-width:90ch}
+.guide ul{margin:0;padding-left:20px}
+.guide li{margin:4px 0}
+.credit{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:.8rem;color:var(--muted)}
+.credit a{color:var(--muted)}
+.qh{font:700 .72rem/1 var(--sans);width:20px;height:20px;border-radius:50%;border:1.5px solid var(--line);background:var(--paper);color:var(--brown);cursor:pointer;margin-left:6px;padding:0;flex:none}
+.sheets{display:flex;flex-direction:column;gap:14px}
+.goals{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+@media (max-width:560px){.goals{grid-template-columns:1fr}}
+.goals label{display:flex;gap:10px;align-items:flex-start;background:var(--bg);border:1.5px solid var(--line);border-radius:14px;padding:9px 12px;cursor:pointer;font-size:.92rem}
+.goals input{width:18px;height:18px;accent-color:var(--sage);flex:none;margin-top:2px}
+.goals small{display:block;color:var(--muted)}
+.steps{display:flex;flex-direction:column;gap:8px}
+.steps details{background:var(--paper);border:1.5px solid var(--line);border-radius:16px;padding:10px 16px}
+.steps summary{cursor:pointer;font-weight:700;display:flex;gap:10px;align-items:baseline}
+.steps summary small{font-weight:600;color:var(--muted);margin-left:auto;text-align:right}
+.steps details p,.steps details ul{margin:8px 0 2px;font-size:.93rem}
+.steps details ul{padding-left:20px}
+</style>
+<!--pwa--><link rel="manifest" href="/fav/site.uk.webmanifest"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Свої люди"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="theme-color" content="#4F5E3E"><style id="pa-tiles">/* верхнее меню на телефоне и планшете: прямоугольные плитки с закруглением в два ряда, иконки ставит pwa-app.js (08.10.2026) */html header.top nav[aria-label] a .pa-ni{display:none}@media (max-width:1100px){html header.top .page{flex-wrap:wrap;row-gap:8px}html header.top nav[aria-label]{order:3;width:100%;display:grid!important;grid-template-columns:repeat(var(--pa-cols,3),minmax(0,1fr));gap:8px;overflow:visible;padding:4px 0 12px;margin:0}html header.top nav[aria-label] a{display:flex!important;flex-direction:column;align-items:center;justify-content:center;gap:5px;min-height:62px;padding:9px 6px;border-radius:14px;background:var(--paper,#FFFCF8);border:1px solid color-mix(in srgb,var(--sage,#66704F) 30%,transparent);box-shadow:0 3px 10px -6px rgba(60,70,40,.45);color:var(--ink,#2F2924)!important;font:600 .78rem/1.18 var(--body,system-ui);text-align:center;white-space:normal;text-decoration:none;-webkit-tap-highlight-color:transparent}html header.top nav[aria-label] a::after{content:none!important}html header.top nav[aria-label] a .pa-ni{display:block;width:22px;height:22px;fill:none;stroke:var(--sage,#66704F);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}html header.top nav[aria-label] a[aria-current="page"]{background:var(--sage,#66704F);border-color:var(--sage,#66704F);color:var(--paper,#FFFCF8)!important;box-shadow:0 4px 12px -6px rgba(60,70,40,.6)}html header.top nav[aria-label] a[aria-current="page"] .pa-ni{stroke:var(--paper,#FFFCF8)}html header.top nav[aria-label] a:active{transform:scale(.97)}}/* кнопки сайта — прямоугольные с закруглением, как плитки меню (решение Ирины 08.10.2026); значки-метки (образец, теги, «?») остаются круглыми */:is(.navcta,.btn,.shr-btn,.pl-act a,.pl-act button,.qa,.more,.listbar button,.leaflet-popup-content button,.calmenu a,.calmenu button,.go-free,.find,.confirm,.monthics,.addb,.mbtn,.example,.viewsw,#langbar.langbar,.pa-go,.pa-x,.pa-foot){border-radius:12px!important}:is(.viewsw button,.seg button,.chips button,#langbar.langbar a,.cal-nav button){border-radius:9px!important}</style><script src="/assets/pwa-app.js" defer></script><!--pwa--><!--i18n--><link rel="alternate" hreflang="ru" href="https://svoiludi.ch/instrumenty/musor-pamyatka/"><link rel="alternate" hreflang="uk" href="https://svoiludi.ch/uk/instrumenty/musor-pamyatka/"><!--i18n--></head>
+<body>
+<style>.form input,.form select{width:100%}</style>
+<div class="wrap">
+  <header>
+    <p style="margin:0 0 14px"><a class="jump" href="https://svoiludi.ch/uk/instrumenty/">← Усі корисні інструменти · Свої люди у Швейцарії</a></p>
+    <div class="eyebrow">Дім · сміття</div>
+    <h1>Сортування сміття: що куди — пам’ятка на холодильник зі своїми днями вивезення</h1>
+    <p class="lead">У Швейцарії звичайне сміття викидають лише в платних мішках, а решту здають окремо — часто безкоштовно. Тут усе на одному аркуші: що куди здавати і чого не можна, з назвами мовою кантону. Впиши свої дні вивезення й адресу пункту збору — і повісь на холодильник. PDF і PNG безкоштовно.</p>
+    <div class="privnote"><b>Твої дані тільки в тебе.</b> Дні вивезення зберігаються тільки в твоєму браузері на цьому пристрої. Реєстрація не потрібна.</div>
+    <div data-fan="musor-pamyatka"></div>
+  </header>
+  <div class="setup">
+    <div class="fl"><span class="lb">Мова аркуша<button type="button" class="qh" data-help="lang" aria-label="Підказка: мова аркуша" aria-expanded="false">?</button></span><select id="lang"><option value="de">Російська + німецька</option><option value="fr">Російська + французька</option><option value="it">Російська + італійська</option><option value="ru">Тільки українська</option></select></div>
+    <div class="fl"><span class="lb">Друк</span><label class="tog"><input type="checkbox" id="bw"> Без кольору, для дешевого друку</label></div>
+  </div>
+  <div class="exbar" id="exbar" hidden><span>Це приклад. Так виглядатиме твоя пам’ятка.</span><button type="button" class="btn sm" id="exOff">Повернутися до моїх даних</button></div>
+  <div class="work">
+    <div class="form">
+      <section class="sec"><h2>Мої дні вивезення<button type="button" class="qh" data-help="days" aria-label="Підказка: де дізнатися дні вивезення" aria-expanded="false">?</button></h2>
+        <div class="fl"><span class="lb">Громада</span><input type="text" id="town" placeholder="Uster"></div>
+        <div class="fl"><span class="lb">Мішок для сміття<button type="button" class="qh" data-help="sack" aria-label="Підказка: мішок" aria-expanded="false">?</button></span><input type="text" id="sack" placeholder="Uster-Sack 35 l, Migros und Coop"></div>
+        <div class="fl"><span class="lb">Сміття в мішках — день і час</span><input type="text" id="kehricht" placeholder="Dienstag und Freitag, bis 7 Uhr"></div>
+        <div class="fl"><span class="lb">Папір</span><input type="text" id="papier" placeholder="jeden 2. Mittwoch"></div>
+        <div class="fl"><span class="lb">Картон</span><input type="text" id="karton" placeholder="jeden 2. Donnerstag"></div>
+        <div class="fl"><span class="lb">Зелені відходи</span><input type="text" id="gruen" placeholder="Montag, März bis November jede Woche"></div>
+        <div class="fl"><span class="lb">Великогабаритне сміття</span><input type="text" id="sperr" placeholder="2× im Jahr oder Recyclinghof, Marke 20 Fr."></div>
+        <div class="fl"><span class="lb">Пункт збору: адреса і години</span><input type="text" id="hof" placeholder="Recyclinghof Werkstrasse 5, Mi 14–18, Sa 8–12"></div>
+      </section>
+    </div>
+    <div class="sheetbox">
+      <div class="acts"><button type="button" class="btn gold" id="pdf">Завантажити PDF</button><button type="button" class="btn ghost sm" id="share" hidden>Надіслати</button><button type="button" class="btn ghost sm" id="exOn">Подивитися на прикладі</button></div>
+      <div class="sheets" id="sheet" aria-label="Попередній перегляд аркуша"></div>
+      <div class="status" id="status" role="status"></div>
+    </div>
+  </div>
+  <p class="imp"><b>Важливо.</b> Правила за <a href="https://swissrecycle.ch/de/wertstoffe-wissen/faq">Swiss Recycle</a>; у кожній громаді вони трохи свої — точні дні, мішки і що приймає пункт збору, дивись у календарі вивезення (Abfallkalender) своєї громади. Штрафи за сміття не там із 1 серпня 2026 року — від 80 франків. Детально — у темі <a href="https://svoiludi.ch/uk/shveycariya/musor/">«Сміття і сортування»</a>. Дні вивезення зручно внести в «<a href="https://svoiludi.ch/uk/instrumenty/moj-god/">Річний календар справ і строків</a>».</p>
+  <div class="share-slot" data-url="https://svoiludi.ch/uk/instrumenty/musor-pamyatka/" data-lead="Перешли тим, хто нещодавно переїхав. У посиланні немає твоїх даних." data-text="Привіт! Тут безкоштовна пам’ятка, як сортувати сміття у Швейцарії, зі своїми днями вивезення — українською і німецькою. https://svoiludi.ch/uk/instrumenty/musor-pamyatka/"></div>
+  <p class="credit"><span>Свої люди у Швейцарії · svoiludi.ch</span><a href="https://svoiludi.ch/uk/privacy/">Політика конфіденційності</a></p>
+</div>
+
+<script src="/assets/kantony.uk.js"></script>
+<script src="/assets/lib/jspdf.umd.min.js"></script>
+<script src="/assets/shema.uk.js"></script>
+<script>
+window.HELP = {
+  lang: '<p><b>Російська + німецька</b> (французька, італійська) — у кожного виду сміття слово мовою кантону, як на контейнерах, у календарі вивезення і на сайті громади.</p>',
+  days: '<p>Дні вивезення — у календарі вивезення (Abfallkalender, calendrier des déchets) на сайті своєї громади або в її застосунку. Багато громад кладуть його в поштову скриньку наприкінці року. Пиши як у календарі — можна німецькою.</p>',
+  sack: '<p>Офіційний платний мішок твоєї громади чи регіону (наприклад, Züri-Sack у Цюриху) або наліпка на мішок (Vignette). Продається в супермаркетах поблизу. Мішок іншої громади можуть не забрати.</p>'
+};
+const KEY = 'musorPamyatka.v1';
+/* [ключ, цвет, RU название, {de, fr, it}, правила RU] */
+const CAT = [
+  ['keh', 'brown', 'Звичайне сміття', {de: 'Kehricht · Gebührensack', fr: 'Ordures ménagères · sac taxé', it: 'Rifiuti domestici · sacco tassato'}, ['Тільки в платному мішку громади або з наліпкою.', 'Виставляти вранці в день вивезення, не напередодні.']],
+  ['pet', 'blue', 'PET-пляшки', {de: 'PET-Getränkeflaschen', fr: 'Bouteilles à boissons en PET', it: 'Bottiglie per bevande in PET'}, ['Тільки від напоїв, зі знаком PET — у магазин.', 'Олія, оцет, мийні засоби — у сміття.']],
+  ['glas', 'green', 'Скло', {de: 'Glas', fr: 'Verre', it: 'Vetro'}, ['За кольорами: біле, зелене, коричневе; інші — до зеленого. Без кришок.', 'Не ввечері й не в неділю.']],
+  ['alu', 'sage', 'Алюміній і бляха', {de: 'Alu und Blech', fr: 'Alu et fer-blanc', it: 'Alluminio e latta'}, ['Банки й фольгу разом, без залишків їжі.', 'Балончики — небезпечні відходи.']],
+  ['pap', 'mustard', 'Папір і картон', {de: 'Papier und Karton', fr: 'Papier et carton', it: 'Carta e cartone'}, ['Чисті, перев’язані шнуром, часто в різні дні.', 'Брудний картон і пакети від напоїв — у сміття.']],
+  ['bat', 'red', 'Батарейки', {de: 'Batterien', fr: 'Piles', it: 'Pile'}, ['Безкоштовно в будь-який магазин, де їх продають.', 'У сміття не можна.']],
+  ['ele', 'blue', 'Електроніка і лампи', {de: 'Elektrogeräte und Leuchtmittel', fr: 'Appareils électriques et ampoules', it: 'Apparecchi elettrici e lampadine'}, ['Безкоштовно в магазин, де продають такі самі речі, навіть якщо купила не там.', 'У сміття не можна.']],
+  ['gru', 'green', 'Зелені відходи', {de: 'Grüngut', fr: 'Déchets verts', it: 'Scarti vegetali'}, ['Компост або зелений контейнер.', 'Без вареної їжі, м’яса, кісток, котячого наповнювача.']],
+  ['tex', 'pink', 'Одяг і взуття', {de: 'Textilien und Schuhe', fr: 'Textiles et chaussures', it: 'Tessili e scarpe'}, ['Чисті, у зав’язаному мішку в контейнер для текстилю.']],
+  ['spe', 'brown', 'Великогабаритне сміття', {de: 'Sperrgut', fr: 'Objets encombrants', it: 'Ingombranti'}, ['Меблі й великі речі — у пункт збору або в день вивезення, часто платно.']],
+  ['son', 'red', 'Небезпечні відходи', {de: 'Sonderabfall', fr: 'Déchets spéciaux', it: 'Rifiuti speciali'}, ['Фарби, хімія, балончики — у пункт збору або магазин.', 'Ліки — в аптеку.']],
+  ['kap', 'mustard', 'Кавові капсули', {de: 'Kaffeekapseln', fr: 'Capsules de café', it: 'Capsule di caffè'}, ['У магазин своєї марки або пункт збору.']]
+];
+const LOC = {
+  t: {de: 'Abfall richtig trennen', fr: 'Bien trier ses déchets', it: 'Separare bene i rifiuti'}, my: {de: 'Meine Abfuhrtage', fr: 'Mes jours de ramassage', it: 'I miei giorni di raccolta'},
+  sack: {de: 'Abfallsack', fr: 'Sac à ordures', it: 'Sacco'}, keh: {de: 'Kehricht', fr: 'Ordures', it: 'Rifiuti'}, papier: {de: 'Papier', fr: 'Papier', it: 'Carta'}, karton: {de: 'Karton', fr: 'Carton', it: 'Cartone'},
+  gruen: {de: 'Grüngut', fr: 'Déchets verts', it: 'Scarti vegetali'}, sperr: {de: 'Sperrgut', fr: 'Encombrants', it: 'Ingombranti'}, hof: {de: 'Sammelstelle', fr: 'Déchetterie', it: 'Ecocentro'}
+};
+function blank(){ return {lang: 'de', bw: false, town: '', sack: '', kehricht: '', papier: '', karton: '', gruen: '', sperr: '', hof: ''}; }
+let S = load(), EX = null;
+function load(){ try { const s = JSON.parse(localStorage.getItem(KEY)); if (s && typeof s === 'object') return Object.assign(blank(), s); } catch (e) {} return blank(); }
+function save(){ if (EX) return; try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} }
+const D = () => EX || S, bi = d => d.lang !== 'ru', L = (d, k) => bi(d) ? LOC[k][d.lang] : '';
+function build(){
+  const d = D(), C = SH.pal(d.bw), c = C.c, P = SH.page(210, 297, C), X = 12, W = 186, G = 5, CW = (W - G) / 2;
+  P.header('Сортування сміття: що куди', L(d, 't'), d.town || '');
+  let y = 24;
+  const card = (k, dry, x, yy, mh) => { const [, col, ru, lc, rules] = k; return P.card(x, yy, CW, c[col], ru, bi(d) ? lc[d.lang] : '', rules.map(r => '• ' + r), {ts: 10.5, bs: 8.4, dry, minH: mh || 0}); };
+  for (let i = 0; i < CAT.length; i += 2) {
+    const h = Math.max(card(CAT[i], true, 0, 0), card(CAT[i + 1], true, 0, 0));
+    card(CAT[i], false, X, y, h); card(CAT[i + 1], false, X + CW + G, y, h);
+    /* выровнять высоту пары: рамку второй дорисовываем той же высоты */
+    y += h + 3.5;
+  }
+  y += 1;
+  y = P.sec('Мої дні вивезення', X, y, W, L(d, 'my'));
+  const rows = [['Мішок', 'sack', d.sack], ['Сміття в мішках', 'keh', d.kehricht], ['Папір', 'papier', d.papier], ['Картон', 'karton', d.karton], ['Зелені відходи', 'gruen', d.gruen], ['Великогабаритне сміття', 'sperr', d.sperr], ['Пункт збору', 'hof', d.hof]];
+  rows.forEach(([ru, k, v]) => { P.text(ru, X, y, 8, true, C.head); if (bi(d)) P.text(LOC[k][d.lang], X, y + 3.2, 6, false, C.mut);
+    const ls = v ? SH.wrap(v, false, 8.8, W - 52) : ['']; ls.forEach((l, i) => P.text(l, X + 50, y + i * 4, 8.8, false, C.ink)); if (!v) P.line(X + 50, y + 1, X + W, y + 1, C.line, 0.25);
+    y += Math.max(9, ls.length * 4 + 4.5); });
+  P.foot('Правила за Swiss Recycle, у кожній громаді трохи свої — дивись календар вивезення (Abfallkalender). Штраф за сміття не там із 01.08.2026 — від 80 франків. svoiludi.ch');
+  return [P];
+}
+const $ = id => document.getElementById(id);
+const TF = ['town', 'sack', 'kehricht', 'papier', 'karton', 'gruen', 'sperr', 'hof'];
+let UI, tmr;
+function fill(){ const d = D(); $('lang').value = d.lang; $('bw').checked = !!d.bw; TF.forEach(k => { $(k).value = d[k]; $(k).disabled = !!EX; });
+  $('exbar').hidden = !EX; $('exOn').hidden = !!EX; if (UI) UI.render(); }
+$('lang').addEventListener('change', e => { S.lang = e.target.value; if (EX) EX = EXD(S.lang); save(); fill(); });
+$('bw').addEventListener('change', e => { S.bw = e.target.checked; if (EX) EX.bw = S.bw; save(); fill(); });
+TF.forEach(k => $(k).addEventListener('input', e => { if (EX) return; S[k] = e.target.value; save(); clearTimeout(tmr); tmr = setTimeout(() => UI && UI.render(), 400); }));
+const EXL = {
+  de: {town: 'Uster', sack: 'Uster-Sack 17, 35 oder 60 l — Migros, Coop, Denner', kehricht: 'Dienstag und Freitag, bis 7 Uhr an die Strasse', papier: 'jeden 2. Mittwoch, gebündelt', karton: 'jeden 2. Donnerstag, gebündelt', gruen: 'Montag, im Grüncontainer', sperr: 'mit Sperrgutmarke oder im Recyclinghof', hof: 'Recyclinghof Werkstrasse 5 · Mi 14–18, Sa 8–12'},
+  fr: {town: 'Morges', sack: 'Sac taxé 17, 35 ou 60 l — Migros, Coop, Denner', kehricht: 'mardi et vendredi, avant 7 h', papier: 'un mercredi sur deux, ficelé', karton: 'un jeudi sur deux, ficelé', gruen: 'lundi, conteneur vert', sperr: 'à la déchetterie', hof: 'Déchetterie rue de la Gare 5 · me 14–18, sa 8–12'},
+  it: {town: 'Lugano', sack: 'Sacco tassato 17, 35 o 60 l — Migros, Coop, Denner', kehricht: 'martedì e venerdì, entro le 7', papier: 'ogni secondo mercoledì, legata', karton: 'ogni secondo giovedì, legato', gruen: 'lunedì, contenitore verde', sperr: 'all’ecocentro', hof: 'Ecocentro via Stazione 5 · me 14–18, sa 8–12'}
+};
+const EXD = lg => Object.assign(blank(), {lang: lg, bw: S.bw}, EXL[lg] || EXL.de);
+$('exOn').addEventListener('click', () => { EX = EXD(S.lang); fill(); window.scrollTo({top: $('exbar').offsetTop - 12, behavior: 'smooth'}); });
+$('exOff').addEventListener('click', () => { EX = null; fill(); });
+if (/[?&]example\b/.test(location.search)) EX = EXD(S.lang);
+UI = SH.mount({build, title: 'Сортування сміття', name: () => 'Abfall-trennen' + (D().town ? '-' + D().town.replace(/[^\wÀ-ÿ-]/g, '') : '')});
+fill();
+
+</script>
+<script src="/assets/help.uk.js"></script>
+<script src="/assets/backup.uk.js"></script>
+<script src="/assets/pdffan.uk.js" defer></script>
+<script src="/assets/share.uk.js" defer></script>
+<script src="/assets/samesite.js"></script>
+<!--i18n--><style>#langbar.langbar{position:fixed;bottom:14px;right:14px;z-index:60;display:flex;gap:2px;background:rgba(255,255,255,.92);border:1px solid rgba(0,0,0,.08);border-radius:999px;padding:3px;font:600 12px Manrope,system-ui,sans-serif;box-shadow:0 2px 8px rgba(0,0,0,.08)}#langbar.langbar a{color:#5d554d;padding:5px 9px;border-radius:999px;text-decoration:none;font:inherit;display:inline-block}#langbar.langbar a[aria-current="true"]{background:#2f2924;color:#fff}@media print{.langbar{display:none!important}}</style><div class="langbar" id="langbar" role="navigation" aria-label="Мова / Язык"><a href="/instrumenty/musor-pamyatka/" hreflang="ru" data-lang="ru">RU</a><a href="/uk/instrumenty/musor-pamyatka/" hreflang="uk" data-lang="uk" aria-current="true">UA</a></div><script>(function(){var b=document.getElementById('langbar');if(!b)return;b.addEventListener('click',function(e){var a=e.target.closest('a[data-lang]');if(a){try{localStorage.setItem('svoiludiLang',a.dataset.lang)}catch(x){}a.href=a.getAttribute('href').split('#')[0]+location.hash;}});})();</script><!--i18n--></body>
+</html>

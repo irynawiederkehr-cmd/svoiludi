@@ -1,0 +1,374 @@
+<!doctype html>
+<html lang="uk">
+<head><!--i18n--><base href="/instrumenty/dosye-arendatora/"><!--i18n-->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<link rel="icon" href="/fav/favicon.svg" type="image/svg+xml"><link rel="icon" href="/fav/icon-32.png" sizes="32x32"><link rel="apple-touch-icon" href="/fav/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/fonts.css">
+<meta name="description" content="Безкоштовне досьє орендаря для Швейцарії (Bewerbungsdossier, Mieterdossier, dossier de candidature): супровідний лист керуючій компанії та анкета мешканців німецькою, французькою, італійською або англійською, список документів (виписка Betreibungsregisterauszug, пермит, розрахункові листки, страховка відповідальності) і український переклад для себе. Тільки те, про що керуюча компанія має право питати за пам’яткою EDÖB. Дані тільки в тебе.">
+<link rel="canonical" href="https://svoiludi.ch/uk/instrumenty/dosye-arendatora/">
+<meta property="og:type" content="website"><meta property="og:locale" content="uk_UA"><meta property="og:site_name" content="Свої люди у Швейцарії">
+<meta property="og:title" content="Досьє на квартиру: лист керуючій компанії й анкета мешканців · безкоштовно"><meta property="og:description" content="Заповни українською — отримай лист і анкету мовою кантону, список документів і переклад для себе. Дані тільки в тебе.">
+<meta property="og:url" content="https://svoiludi.ch/uk/instrumenty/dosye-arendatora/"><meta property="og:image" content="https://svoiludi.ch/instrumenty/dosye-arendatora/og-image.uk.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="robots" content="noindex, nofollow">
+<title>Досьє на квартиру: лист керуючій компанії й анкета мешканців</title>
+<style>
+/* Досье на квартиру: письмо управляющей и анкета жильцов (08.10.2026): анкета слева, живые листы справа, движок assets/shema.js. */
+:root{
+  --bg:#F4EDE3; --paper:#FFFCF8; --ink:#2F2924; --muted:#7A6E62; --line:#E5D9C9; --soft:#EFE5D7;
+  --brown:#6E4F3C; --mustard:#B98324; --mustard-soft:#F3E3C2; --sage:#4F5E3E; --sage-soft:#E3E8D6; --red:#A0523D;
+  --display:"Forum","Georgia",serif; --sans:"Manrope","Segoe UI",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#221D19; --paper:#2C2621; --ink:#F1E9DF; --muted:#B4A796; --line:#3E362F; --soft:#352E28;
+  --brown:#E1C2A6; --mustard:#E2B45C; --mustard-soft:#3D321F; --sage:#B4BF97; --sage-soft:#2E3226; --red:#E39A85; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#221D19; --paper:#2C2621; --ink:#F1E9DF; --muted:#B4A796; --line:#3E362F; --soft:#352E28;
+  --brown:#E1C2A6; --mustard:#E2B45C; --mustard-soft:#3D321F; --sage:#B4BF97; --sage-soft:#2E3226; --red:#E39A85; color-scheme:dark}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--ink);font:15px/1.55 var(--sans);margin:0}
+.wrap{max-width:1280px;margin:0 auto;padding-inline:16px;padding-block:28px 48px;display:flex;flex-direction:column;gap:24px}
+.eyebrow{font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+h1{font-family:var(--display);font-weight:400;font-size:clamp(2.4rem,6vw,3.6rem);line-height:1;margin:4px 0 10px;text-wrap:balance}
+h2{font-family:var(--display);font-weight:400;font-size:1.55rem;margin:0;text-wrap:balance}
+h3{font-family:var(--display);font-weight:400;font-size:1.22rem;line-height:1.2;margin:0}
+.lead{max-width:66ch;color:var(--muted);margin:0}
+.jump{font-weight:700;color:var(--brown);text-underline-offset:4px}
+.privnote{margin-top:14px;background:var(--sage-soft);border-radius:16px;padding:12px 16px;font-size:.9rem;max-width:90ch}
+.status{font-size:.86rem;color:var(--muted);min-height:1.3em}
+.btn{font:inherit;font-weight:700;font-size:.9rem;border:0;border-radius:999px;padding:10px 18px;cursor:pointer;color:#fff;text-decoration:none;display:inline-flex;align-items:center;gap:6px;background:#6E4F3C;box-shadow:0 8px 18px -8px rgba(110,79,60,.6)}
+.btn.gold{background:#B98324;box-shadow:0 8px 18px -8px rgba(185,131,36,.7)}
+.btn.free{background:#4F5E3E;box-shadow:0 8px 18px -8px rgba(79,94,62,.6)}
+.btn.ghost{background:transparent;color:var(--brown);border:1.5px solid var(--line);box-shadow:none}
+.btn.sm{font-size:.82rem;padding:7px 13px}
+.btn[disabled]{background:var(--soft);color:var(--muted);box-shadow:none;cursor:wait}
+select,input[type=text],input[type=tel],input[type=number],input[type=date],textarea{font:inherit;font-size:.95rem;color:var(--ink);background:var(--paper);border:1.5px solid var(--line);border-radius:12px;padding:9px 12px;width:100%;min-width:0}
+select:focus-visible,input:focus-visible,button:focus-visible,textarea:focus-visible,a:focus-visible{outline:2px solid var(--mustard);outline-offset:2px}
+::placeholder{color:color-mix(in srgb,var(--muted) 70%,transparent)}
+.setup{background:var(--paper);border:1.5px solid var(--line);border-radius:22px;padding:16px 18px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px 18px;align-items:start}
+@media (max-width:1000px){.setup{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.setup{grid-template-columns:1fr}}
+.fl{display:flex;flex-direction:column;gap:6px;min-width:0}
+.fl>.lb{font-size:.8rem;font-weight:700;color:var(--muted);display:flex;align-items:center}
+.seg{display:flex;flex-wrap:wrap;gap:6px}
+.seg button{font:inherit;font-size:.84rem;font-weight:700;border:1.5px solid var(--line);background:var(--paper);color:var(--ink);border-radius:999px;padding:6px 12px;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--sage);border-color:var(--sage);color:#fff}
+.acts{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.exbar{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;background:var(--mustard-soft);border-radius:16px;padding:10px 14px;font-size:.9rem;font-weight:600}
+.work{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:22px;align-items:start}
+@media (max-width:1040px){.work{grid-template-columns:1fr}}
+.form{display:flex;flex-direction:column;gap:14px;min-width:0}
+.sec{background:var(--paper);border:1.5px solid var(--line);border-radius:20px;padding:16px 18px;display:flex;flex-direction:column;gap:12px}
+.sec>h2{font-size:1.3rem;display:flex;align-items:center}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:560px){.g2{grid-template-columns:1fr}}
+.hint{font-size:.84rem;color:var(--muted);margin:0}
+.chk{display:flex;flex-direction:column;gap:8px}
+.chk label{display:flex;gap:10px;align-items:baseline;font-size:.92rem;cursor:pointer}
+.chk input{flex:none;width:18px;height:18px;accent-color:var(--sage);transform:translateY(3px)}
+.chk b{white-space:nowrap}
+.chk small{color:var(--muted)}
+.tog{display:flex;gap:10px;align-items:center;font-size:.92rem;cursor:pointer}
+.tog input{width:18px;height:18px;accent-color:var(--sage)}
+.sheetbox{position:sticky;top:12px;display:flex;flex-direction:column;gap:10px}
+@media (max-width:1040px){.sheetbox{position:static}}
+.sheet{background:#fff;border-radius:6px;box-shadow:0 18px 40px -22px rgba(47,41,36,.45);overflow:hidden}
+.sheet svg{display:block;width:100%;height:auto}
+.imp{background:var(--paper);border:1.5px dashed color-mix(in srgb,var(--sage) 55%,transparent);border-radius:16px;padding:14px 18px;font-size:.88rem;max-width:90ch;margin:0}
+.imp b{color:var(--sage)}
+.guide{display:flex;flex-direction:column;gap:14px;max-width:90ch}
+.guide ul{margin:0;padding-left:20px}
+.guide li{margin:4px 0}
+.credit{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:.8rem;color:var(--muted)}
+.credit a{color:var(--muted)}
+.qh{font:700 .72rem/1 var(--sans);width:20px;height:20px;border-radius:50%;border:1.5px solid var(--line);background:var(--paper);color:var(--brown);cursor:pointer;margin-left:6px;padding:0;flex:none}
+.sheets{display:flex;flex-direction:column;gap:14px}
+.goals{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+@media (max-width:560px){.goals{grid-template-columns:1fr}}
+.goals label{display:flex;gap:10px;align-items:flex-start;background:var(--bg);border:1.5px solid var(--line);border-radius:14px;padding:9px 12px;cursor:pointer;font-size:.92rem}
+.goals input{width:18px;height:18px;accent-color:var(--sage);flex:none;margin-top:2px}
+.goals small{display:block;color:var(--muted)}
+.steps{display:flex;flex-direction:column;gap:8px}
+.steps details{background:var(--paper);border:1.5px solid var(--line);border-radius:16px;padding:10px 16px}
+.steps summary{cursor:pointer;font-weight:700;display:flex;gap:10px;align-items:baseline}
+.steps summary small{font-weight:600;color:var(--muted);margin-left:auto;text-align:right}
+.steps details p,.steps details ul{margin:8px 0 2px;font-size:.93rem}
+.steps details ul{padding-left:20px}
+</style>
+<!--pwa--><link rel="manifest" href="/fav/site.uk.webmanifest"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Свої люди"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="theme-color" content="#4F5E3E"><style id="pa-tiles">/* верхнее меню на телефоне и планшете: прямоугольные плитки с закруглением в два ряда, иконки ставит pwa-app.js (08.10.2026) */html header.top nav[aria-label] a .pa-ni{display:none}@media (max-width:1100px){html header.top .page{flex-wrap:wrap;row-gap:8px}html header.top nav[aria-label]{order:3;width:100%;display:grid!important;grid-template-columns:repeat(var(--pa-cols,3),minmax(0,1fr));gap:8px;overflow:visible;padding:4px 0 12px;margin:0}html header.top nav[aria-label] a{display:flex!important;flex-direction:column;align-items:center;justify-content:center;gap:5px;min-height:62px;padding:9px 6px;border-radius:14px;background:var(--paper,#FFFCF8);border:1px solid color-mix(in srgb,var(--sage,#66704F) 30%,transparent);box-shadow:0 3px 10px -6px rgba(60,70,40,.45);color:var(--ink,#2F2924)!important;font:600 .78rem/1.18 var(--body,system-ui);text-align:center;white-space:normal;text-decoration:none;-webkit-tap-highlight-color:transparent}html header.top nav[aria-label] a::after{content:none!important}html header.top nav[aria-label] a .pa-ni{display:block;width:22px;height:22px;fill:none;stroke:var(--sage,#66704F);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}html header.top nav[aria-label] a[aria-current="page"]{background:var(--sage,#66704F);border-color:var(--sage,#66704F);color:var(--paper,#FFFCF8)!important;box-shadow:0 4px 12px -6px rgba(60,70,40,.6)}html header.top nav[aria-label] a[aria-current="page"] .pa-ni{stroke:var(--paper,#FFFCF8)}html header.top nav[aria-label] a:active{transform:scale(.97)}}/* кнопки сайта — прямоугольные с закруглением, как плитки меню (решение Ирины 08.10.2026); значки-метки (образец, теги, «?») остаются круглыми */:is(.navcta,.btn,.shr-btn,.pl-act a,.pl-act button,.qa,.more,.listbar button,.leaflet-popup-content button,.calmenu a,.calmenu button,.go-free,.find,.confirm,.monthics,.addb,.mbtn,.example,.viewsw,#langbar.langbar,.pa-go,.pa-x,.pa-foot){border-radius:12px!important}:is(.viewsw button,.seg button,.chips button,#langbar.langbar a,.cal-nav button){border-radius:9px!important}</style><script src="/assets/pwa-app.js" defer></script><!--pwa--><!--i18n--><link rel="alternate" hreflang="ru" href="https://svoiludi.ch/instrumenty/dosye-arendatora/"><link rel="alternate" hreflang="uk" href="https://svoiludi.ch/uk/instrumenty/dosye-arendatora/"><!--i18n--></head>
+<body>
+<style>#fields{display:flex;flex-direction:column;gap:14px}#fields input:not([type=checkbox]):not([type=radio]),#fields select{width:100%}</style>
+<div class="wrap">
+  <header>
+    <p style="margin:0 0 14px"><a class="jump" href="https://svoiludi.ch/uk/instrumenty/">← Усі корисні інструменти · Свої люди у Швейцарії</a></p>
+    <div class="eyebrow">Оренда житла</div>
+    <h1>Досьє на квартиру: лист керуючій компанії й анкета мешканців</h1>
+    <p class="lead">На одну квартиру у Швейцарії часто приходять десятки людей, і керуюча компанія вибирає за досьє. Заповнюєш українською — отримуєш короткий супровідний лист і акуратну анкету мешканців мовою кантону (або англійською), а третім аркушем — переклад листа й список документів для себе. В анкеті тільки те, про що керуюча компанія має право питати. PDF безкоштовно.</p>
+    <div class="privnote"><b>Твої дані тільки в тебе.</b> Усе, що ти вписуєш, зберігається тільки в твоєму браузері на цьому пристрої, досьє складається прямо на пристрої. Реєстрація не потрібна.</div>
+    <div data-fan="dosye-arendatora"></div>
+  </header>
+  <div class="setup">
+    <div class="fl"><span class="lb">Кантон<button type="button" class="qh" data-help="kt" aria-label="Підказка: кантон" aria-expanded="false">?</button></span><select id="kt"></select></div>
+    <div class="fl"><span class="lb">Мова досьє<button type="button" class="qh" data-help="lang" aria-label="Підказка: мова досьє" aria-expanded="false">?</button></span><select id="lang"><option value="de+ru">Deutsch + аркуш для себе</option><option value="fr+ru">Français + аркуш для себе</option><option value="it+ru">Italiano + аркуш для себе</option><option value="en+ru">English + аркуш для себе</option><option value="de">Deutsch</option><option value="fr">Français</option><option value="it">Italiano</option><option value="en">English</option></select></div>
+    <div class="fl"><span class="lb">Друк</span><p class="hint" style="margin:0">Досьє й так чорно-біле — для будь-якого друку.</p></div>
+  </div>
+  <div class="exbar" id="exbar" hidden><span>Це приклад. Так виглядатиме твоє досьє.</span><button type="button" class="btn sm" id="exOff">Повернутися до моїх даних</button></div>
+  <div class="work">
+    <div class="form" id="fields"></div>
+    <div class="sheetbox">
+      <div class="acts"><button type="button" class="btn gold" id="pdf">Завантажити PDF</button><button type="button" class="btn ghost sm" id="share" hidden>Надіслати</button><button type="button" class="btn ghost sm" id="exOn">Подивитися на прикладі</button></div>
+      <div class="sheets" id="sheet" aria-label="Попередній перегляд аркушів"></div>
+      <div class="status" id="status" role="status"></div>
+    </div>
+  </div>
+  <p class="imp"><b>Як надіслати.</b> Збережи лист і анкету одним PDF, додай скани документів (виписка з реєстру боргів, пермит, розрахункові листки) і надішли керуючій компанії в той самий день, що й огляд, — або принеси роздруківку на огляд. Підпиши лист і анкету. Третій аркуш — для тебе, його не надсилають.</p>
+  <p class="imp"><b>Важливо.</b> За пам’яткою Федерального уповноваженого із захисту даних (EDÖB) керуюча компанія не має права питати про сімейний стан, релігію, здоров’я, скільки ти платиш зараз, кредити й дохід тих, хто не підписує договір. Копії пермиту й розрахункових листків за правилами запитують у кандидата, якого вже вибрали, але багато хто додає їх одразу, щоб бути швидшими. Це зразок, а не юридична консультація. Детально про пошук квартири, заставу й шахраїв — у темі <a href="https://svoiludi.ch/uk/shveycariya/arenda/">«Оренда житла»</a>, про права після підписання — у темі <a href="https://svoiludi.ch/uk/shveycariya/dogovor-arendy/">«Договір оренди»</a>.</p>
+  <div class="share-slot" data-url="https://svoiludi.ch/uk/instrumenty/dosye-arendatora/" data-lead="Перешли тим, хто шукає квартиру. У посиланні немає твоїх даних." data-text="Привіт! Тут можна безкоштовно зібрати досьє на квартиру: лист керуючій компанії та анкету німецькою, французькою або англійською. Заповнюєш українською. https://svoiludi.ch/uk/instrumenty/dosye-arendatora/"></div>
+  <p class="credit"><span>Свої люди у Швейцарії · svoiludi.ch</span><a href="https://svoiludi.ch/uk/privacy/">Політика конфіденційності</a></p>
+</div>
+
+<script src="/assets/kantony.uk.js"></script>
+<script src="/assets/lib/jspdf.umd.min.js"></script>
+<script src="/assets/shema.uk.js"></script>
+<script>
+window.HELP = {
+  kt: '<p>Кантон, де ти шукаєш квартиру. Від нього залежить мова листа й анкети: німецька, французька або італійська. Англійська підходить для міжнародних агентств і деяких керуючих компаній у Цюриху, Женеві й Цузі.</p>',
+  lang: '<p>Лист і анкету керуючій компанії надсилають мовою кантону. Галочка «+ аркуш для себе» додає третій аркуш українською: переклад листа й список документів. Його не надсилають.</p>',
+  wir: '<p>Якщо договір підписуватимете вдвох (пара, двоє дорослих), познач — лист буде від «ми», а в анкеті з’явиться друга людина. Тих, хто договір не підписує (діти, батьки), в анкеті зазначають тільки числом.</p>',
+  permit: '<p>Керуюча компанія має право запитати громадянство тільки разом із типом дозволу на перебування (Ausweis) і його строком. Із пермитом S теж можна винаймати квартиру — напиши строк дії й додай копію.</p><p class="src">Джерело: <a href="https://www.edoeb.admin.ch/dam/en/sd-web/F7ojQw99LBH-/Merkblatt%20zu%20Anmeldeformularen%20f%C3%BCr%20Mietwohnungen%20DE_20250715.pdf" target="_blank" rel="noopener">EDÖB, пам’ятка про анкети на квартиру, 15.07.2025</a>.</p>',
+  inc: '<p>Дохід можна вказувати діапазоном — точну суму керуюча компанія питати не має права. Вказують дохід тільки тих, хто підписує договір. Орієнтир: оренда разом із додатковими витратами — не більше третини доходу.</p>',
+  betr: '<p>Виписка з реєстру боргів (Betreibungsregisterauszug) — головний документ досьє. Свіжа, не старша за три місяці. Замовляють у Betreibungsamt за місцем проживання — онлайн через ch.ch і EasyGov або особисто, коштує 17 франків плюс доставка. Тільки приїхала — напиши «Neuzuzug», додай виписку, щойно її видадуть.</p><p class="src">Джерело: <a href="https://www.ch.ch/de/wohnen/miete/betreibungsregisterauszug-bestellen/" target="_blank" rel="noopener">ch.ch</a>.</p>',
+  ref: '<p>Нинішня керуюча компанія або власник, які підтвердять, що ти платиш вчасно й дбайливо ставишся до квартири. Запитай їхньої згоди, перш ніж вписувати телефон. Якщо ти тільки приїхала — можна вказати роботодавця.</p>',
+  about: '<p>Одна-дві фрази про себе мовою листа — те, що виділить тебе серед інших: чому саме ця квартира (поруч робота, школа дітей), що ти тиха сусідка, давно живеш у районі. Без хвороб, релігії й сімейного стану — це нікому не треба вказувати.</p>',
+  rooms: '<p>Кількість кімнат як в оголошенні. У Швейцарії вітальня теж кімната, а «половинка» — зазвичай кухня-їдальня або маленька кімната: 3,5 кімнати — це дві спальні й вітальня з кухнею.</p>'
+};
+const KEY = 'dosyeArendatora.v1';
+const TODAY = new Date().toISOString().slice(0, 10);
+const LANGS = ['de', 'fr', 'it', 'en'];
+function langOf(k){ const K = window.KANTONY || {}; return k && K[k] ? ({de: 'de', fr: 'fr', it: 'it'}[K[k].l] || 'de') : 'de'; }
+const person = () => ({name: '', born: '', nat: '', permit: 'B', pvalid: '', prof: '', emp: '', since: '', inc: '', tel: '', mail: ''});
+function blank(){ let k = ''; try { k = localStorage.getItem('svoiludi.kanton') || ''; } catch (e) {} return {kt: k, lang: langOf(k), ru: true, wir: false,
+  a: person(), b: person(), kids: '', pets: '', instr: '', smoke: false, car: false, addr: '', city: '', livesince: '', refname: '', reftel: '',
+  obj: '', objnr: '', rooms: '3.5', miete: '', vm: {name: '', addr: '', city: ''}, move: '', reason: 'space', reasontx: '', about: '', ort: '', date: TODAY,
+  bdate: '', betrNone: true, haft: '', att: {betr: true, id: true, lohn: true, vertrag: false, haft: true, ref: false, anm: false}}; }
+let S = load(), EX = null;
+function load(){ try { const s = JSON.parse(localStorage.getItem(KEY)); if (s && typeof s === 'object') { const b = blank(); return Object.assign(b, s, {a: Object.assign(person(), s.a), b: Object.assign(person(), s.b), vm: Object.assign(b.vm, s.vm), att: Object.assign(b.att, s.att)}); } } catch (e) {} return blank(); }
+function save(){ if (EX) return; try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} }
+const D = () => EX || S;
+const dmy = iso => { const [y, m, d] = String(iso || '').split('-'); return d ? `${d}.${m}.${y}` : '__.__.____'; };
+const nz = (s, ph) => String(s || '').trim() || ph;
+const ages = s => String(s || '').split(/[,;\s]+/).filter(x => /^\d{1,2}$/.test(x));
+const roomsTx = (r, L) => { const v = String(r).replace('.', L === 'en' ? '.' : ','); return {de: `${v}-Zimmer-Wohnung`, fr: `l’appartement de ${v} pièces`, it: `l’appartamento di ${v} locali`, en: `the ${v}-room flat`, ru: `${v}-кімнатну квартиру`}[L]; };
+
+/* ---------- словари ---------- */
+const PERMIT = {CH: {de: 'Schweizer Staatsangehörigkeit', fr: 'nationalité suisse', it: 'cittadinanza svizzera', en: 'Swiss citizen', ru: 'громадянство Швейцарії'},
+  B: {de: 'Ausweis B', fr: 'permis B', it: 'permesso B', en: 'B permit', ru: 'пермит B'}, C: {de: 'Ausweis C', fr: 'permis C', it: 'permesso C', en: 'C permit', ru: 'пермит C'},
+  L: {de: 'Ausweis L', fr: 'permis L', it: 'permesso L', en: 'L permit', ru: 'пермит L'}, G: {de: 'Ausweis G', fr: 'permis G', it: 'permesso G', en: 'G permit', ru: 'пермит G'},
+  S: {de: 'Ausweis S', fr: 'permis S', it: 'permesso S', en: 'S permit', ru: 'статус S'}, F: {de: 'Ausweis F', fr: 'permis F', it: 'permesso F', en: 'F permit', ru: 'пермит F'}};
+const INC = [['', 'не вказувати'], ['u4', 'до 4000'], ['4-6', '4000–6000'], ['6-8', '6000–8000'], ['8-10', '8000–10 000'], ['10-12', '10 000–12 000'], ['o12', 'понад 12 000']];
+const INCT = {u4: ['unter CHF 4000', 'moins de CHF 4000', 'meno di CHF 4000', 'under CHF 4,000'], '4-6': ['CHF 4000–6000', 'CHF 4000–6000', 'CHF 4000–6000', 'CHF 4,000–6,000'], '6-8': ['CHF 6000–8000', 'CHF 6000–8000', 'CHF 6000–8000', 'CHF 6,000–8,000'],
+  '8-10': ['CHF 8000–10 000', 'CHF 8000–10 000', 'CHF 8000–10 000', 'CHF 8,000–10,000'], '10-12': ['CHF 10 000–12 000', 'CHF 10 000–12 000', 'CHF 10 000–12 000', 'CHF 10,000–12,000'], o12: ['über CHF 12 000', 'plus de CHF 12 000', 'oltre CHF 12 000', 'over CHF 12,000']};
+const incTx = (v, L) => v && INCT[v] ? INCT[v][LANGS.indexOf(L)] || INCT[v][0] : '';
+const REASON = {space: ['більше місця', {de: 'Wir brauchen mehr Platz', fr: 'nous avons besoin de plus d’espace', it: 'abbiamo bisogno di più spazio', en: 'we need more space', ru: 'нам потрібно більше місця'}],
+  job: ['нова робота поруч', {de: 'eine neue Stelle in der Nähe', fr: 'un nouvel emploi à proximité', it: 'un nuovo lavoro nelle vicinanze', en: 'a new job nearby', ru: 'нова робота поруч'}],
+  family: ['родина зростає', {de: 'Familienzuwachs', fr: 'l’agrandissement de la famille', it: 'la famiglia che cresce', en: 'our family is growing', ru: 'родина зростає'}],
+  school: ['ближче до школи дітей', {de: 'die Nähe zur Schule unserer Kinder', fr: 'la proximité de l’école de nos enfants', it: 'la vicinanza alla scuola dei nostri figli', en: 'being closer to our children’s school', ru: 'ближче до школи дітей'}],
+  smaller: ['менша квартира', {de: 'eine kleinere Wohnung', fr: 'un logement plus petit', it: 'un appartamento più piccolo', en: 'a smaller flat', ru: 'менша квартира'}],
+  arrive: ['переїзд до Швейцарії', {de: 'der Neuzuzug in die Schweiz', fr: 'l’arrivée en Suisse', it: 'l’arrivo in Svizzera', en: 'moving to Switzerland', ru: 'переїзд до Швейцарії'}],
+  sold: ['квартиру продають або власник в’їжджає сам', {de: 'der Verkauf bzw. Eigenbedarf unserer jetzigen Wohnung', fr: 'la vente ou l’usage propre de notre logement actuel par le propriétaire', it: 'la vendita o l’uso proprio del nostro attuale appartamento', en: 'our current flat is being sold or used by the owner', ru: 'нинішню квартиру продають або власник в’їжджає сам'}],
+  other: ['інше — напишу сама', null]};
+const ATT = {betr: {ru: 'Виписка з реєстру боргів (Betreibungsregisterauszug), не старша за 3 місяці', de: 'Betreibungsregisterauszug', fr: 'extrait du registre des poursuites', it: 'estratto del registro delle esecuzioni', en: 'debt collection register extract'},
+  id: {ru: 'Копія паспорта або ID і пермиту', de: 'Kopie Pass/ID und Ausländerausweis', fr: 'copie du passeport/de la carte d’identité et du permis de séjour', it: 'copia del passaporto/della carta d’identità e del permesso', en: 'copy of passport/ID and residence permit'},
+  lohn: {ru: 'Три останні розрахункові листки (Lohnabrechnung)', de: 'die letzten drei Lohnabrechnungen', fr: 'les trois dernières fiches de salaire', it: 'le ultime tre buste paga', en: 'the last three payslips'},
+  vertrag: {ru: 'Трудовий договір (якщо робота нова)', de: 'Arbeitsvertrag', fr: 'contrat de travail', it: 'contratto di lavoro', en: 'employment contract'},
+  haft: {ru: 'Підтвердження страховки відповідальності (Privathaftpflicht)', de: 'Nachweis Privathaftpflichtversicherung', fr: 'attestation d’assurance responsabilité civile', it: 'attestazione dell’assicurazione RC privata', en: 'proof of personal liability insurance'},
+  ref: {ru: 'Рекомендаційний лист від нинішньої керуючої компанії', de: 'Referenzschreiben der bisherigen Verwaltung', fr: 'lettre de référence de la gérance actuelle', it: 'lettera di referenza dell’amministrazione attuale', en: 'reference letter from the current landlord'},
+  anm: {ru: 'Заповнена анкета керуючої компанії (Anmeldeformular)', de: 'ausgefülltes Anmeldeformular', fr: 'formulaire d’inscription rempli', it: 'modulo d’iscrizione compilato', en: 'completed application form'}};
+const YN = {de: ['Ja', 'Nein', 'keine'], fr: ['Oui', 'Non', 'aucun'], it: ['Sì', 'No', 'nessuno'], en: ['Yes', 'No', 'none'], ru: ['Так', 'Ні', 'немає']};
+
+/* ---------- письмо ---------- */
+function letter(L, d){
+  const w = d.wir, A = d.a, B = d.b, ob = nz(d.obj, '__________'), nr = d.objnr ? ({de: ' (Objekt-Nr. ', fr: ' (réf. ', it: ' (rif. ', en: ' (ref. ', ru: ' (номер об’єкта '}[L] + d.objnr + ')') : '';
+  const kids = ages(d.kids), rs = d.reason === 'other' ? String(d.reasontx || '').trim() : (REASON[d.reason] && REASON[d.reason][1][L]);
+  const job = (p, first) => { if (!p.prof) return ''; const e = p.emp ? ({de: ' bei ', fr: ' chez ', it: ' presso ', en: ' at ', ru: ' у '}[L] + p.emp) : '';
+    if (!w) return {de: `Ich arbeite als ${p.prof}${e}.`, fr: `Je travaille comme ${p.prof}${e}.`, it: `Lavoro come ${p.prof}${e}.`, en: `I work as ${p.prof}${e}.`, ru: `Я працюю: ${p.prof}${e}.`}[L];
+    return {de: `${nz(p.name, '…')} arbeitet als ${p.prof}${e}`, fr: `${nz(p.name, '…')} travaille comme ${p.prof}${e}`, it: `${nz(p.name, '…')} lavora come ${p.prof}${e}`, en: `${nz(p.name, '…')} works as ${p.prof}${e}`, ru: `${nz(p.name, '…')} працює: ${p.prof}${e}`}[L]; };
+  const jobs = w ? [job(A), job(B)].filter(Boolean).join(L === 'ru' ? ', ' : {de: ', ', fr: ', ', it: ', ', en: ', '}[L]) + ([job(A), job(B)].some(Boolean) ? '.' : '') : job(A);
+  const kidTx = kids.length ? ({de: `Zu ${w ? 'unserem' : 'meinem'} Haushalt ${kids.length > 1 ? 'gehören' : 'gehört'} ${kids.length > 1 ? kids.length + ' Kinder' : 'ein Kind'} (${kids.join(' und ')} Jahre).`,
+    fr: `${w ? 'Notre' : 'Mon'} ménage compte ${kids.length > 1 ? kids.length + ' enfants' : 'un enfant'} (${kids.join(' et ')} ans).`,
+    it: `Nella ${w ? 'nostra' : 'mia'} economia domestica ${kids.length > 1 ? 'ci sono ' + kids.length + ' figli' : 'c’è un figlio'} (${kids.join(' e ')} anni).`,
+    en: `${w ? 'Our' : 'My'} household includes ${kids.length > 1 ? kids.length + ' children' : 'one child'} (aged ${kids.join(' and ')}).`,
+    ru: `З ${w ? 'нами' : 'мною'} ${kids.length > 1 ? ({2: 'двоє', 3: 'троє', 4: 'четверо', 5: 'п’ятеро'}[kids.length] || kids.length) + ' дітей' : 'одна дитина'} (${kids.join(' і ')} років).`}[L]) : '';
+  const quiet = {de: `${w ? 'Wir sind' : 'Ich bin'} ${w ? 'zuverlässige' : 'eine zuverlässige'} Mieter${w ? '' : 'in'}${d.smoke ? '' : ', ' + (w ? 'rauchen' : 'rauche') + ' nicht'}${d.pets ? '' : ' und ' + (w ? 'haben' : 'habe') + ' keine Haustiere'}.`,
+    fr: `${w ? 'Nous sommes des locataires fiables' : 'Je suis une locataire fiable'}${d.smoke ? '' : ', ' + (w ? 'nous ne fumons pas' : 'je ne fume pas')}${d.pets ? '' : ' et ' + (w ? 'nous n’avons' : 'je n’ai') + ' pas d’animaux'}.`,
+    it: `${w ? 'Siamo inquilini affidabili' : 'Sono un’inquilina affidabile'}${d.smoke ? '' : ', ' + (w ? 'non fumiamo' : 'non fumo')}${d.pets ? '' : ' e ' + (w ? 'non abbiamo' : 'non ho') + ' animali'}.`,
+    en: `${w ? 'We are reliable tenants' : 'I am a reliable tenant'}${d.smoke ? '' : ', ' + (w ? 'we do not smoke' : 'I do not smoke')}${d.pets ? '' : ' and ' + (w ? 'we have' : 'I have') + ' no pets'}.`,
+    ru: `${w ? 'Ми надійні мешканці' : 'Я надійний мешканець'}${d.smoke ? '' : (w ? ', не куримо' : ', не курю')}${d.pets ? '' : (w ? ', тварин у нас немає' : ', тварин у мене немає')}.`}[L];
+  const move = {de: `${w ? 'Wir möchten' : 'Ich möchte'} die Wohnung ab dem ${dmy(d.move)} beziehen.${rs ? ' Grund für den Umzug: ' + rs + '.' : ''}`,
+    fr: `${w ? 'Nous souhaitons' : 'Je souhaite'} emménager dès le ${dmy(d.move)}.${rs ? ' Motif du déménagement : ' + rs + '.' : ''}`,
+    it: `${w ? 'Desideriamo' : 'Desidero'} entrare nell’appartamento dal ${dmy(d.move)}.${rs ? ' Motivo del trasloco: ' + rs + '.' : ''}`,
+    en: `${w ? 'We would like' : 'I would like'} to move in from ${dmy(d.move)}.${rs ? ' Reason for moving: ' + rs + '.' : ''}`,
+    ru: `${w ? 'Хочемо' : 'Хочу'} в’їхати з ${dmy(d.move)}.${rs ? ' Причина переїзду: ' + rs + '.' : ''}`}[L];
+  const at = Object.keys(ATT).filter(k => d.att[k]).map(k => L === 'ru' ? ATT[k].ru.charAt(0).toLowerCase() + ATT[k].ru.slice(1) : ATT[k][L]);
+  const atTx = at.length ? ({de: `Im Anhang finden Sie ${w ? 'unser' : 'mein'} Mieterdossier: `, fr: `Vous trouverez en annexe ${w ? 'notre' : 'mon'} dossier : `, it: `In allegato trova il ${w ? 'nostro' : 'mio'} dossier: `, en: `Please find ${w ? 'our' : 'my'} tenant file attached: `, ru: `Додаю досьє: `}[L] + at.join(', ') + '.') : '';
+  const contact = [A.tel, A.mail].filter(Boolean).join(', ');
+  const end = {de: `Für eine Besichtigung oder Fragen ${w ? 'sind wir' : 'bin ich'} gerne erreichbar${contact ? ': ' + contact : ''}. ${w ? 'Wir freuen uns' : 'Ich freue mich'} auf Ihre Antwort.`,
+    fr: `${w ? 'Nous restons' : 'Je reste'} à votre disposition pour une visite ou toute question${contact ? ' : ' + contact : ''}. Dans l’attente de votre réponse.`,
+    it: `${w ? 'Restiamo' : 'Resto'} a disposizione per una visita o per domande${contact ? ': ' + contact : ''}. In attesa di un Suo riscontro.`,
+    en: `${w ? 'We are' : 'I am'} happy to arrange a viewing or answer any questions${contact ? ': ' + contact : ''}. ${w ? 'We look' : 'I look'} forward to hearing from you.`,
+    ru: `${w ? 'Будемо раді' : 'Буду рада'} огляду і запитанням${contact ? ': ' + contact : ''}. Чекаю на відповідь.`}[L];
+  const open = {de: `Mit grossem Interesse ${w ? 'bewerben wir uns' : 'bewerbe ich mich'} um die ${roomsTx(d.rooms, L)} an der ${ob}${nr}.`,
+    fr: `C’est avec un grand intérêt que ${w ? 'nous posons notre candidature' : 'je pose ma candidature'} pour ${roomsTx(d.rooms, L)}, ${ob}${nr}.`,
+    it: `Con grande interesse ${w ? 'presentiamo la nostra candidatura' : 'presento la mia candidatura'} per ${roomsTx(d.rooms, L)} in ${ob}${nr}.`,
+    en: `${w ? 'We are' : 'I am'} very interested in ${roomsTx(d.rooms, L)} at ${ob}${nr} and would like to apply.`,
+    ru: `${w ? 'Подаємо заявку' : 'Подаю заявку'} на ${roomsTx(d.rooms, L)} за адресою ${ob}${nr}.`}[L];
+  const T = {de: ['Bewerbung für die Wohnung', 'Sehr geehrte Damen und Herren', 'Freundliche Grüsse', 'Beilagen'], fr: ['Candidature pour l’appartement', 'Madame, Monsieur,', 'Meilleures salutations', 'Annexes'],
+    it: ['Candidatura per l’appartamento', 'Gentili signore, egregi signori', 'Distinti saluti', 'Allegati'], en: ['Application for the flat', 'Dear Sir or Madam', 'Kind regards', 'Enclosures'], ru: ['Заявка на квартиру', 'Шановні пані та панове!', 'З повагою', 'Додатки']}[L];
+  return {subj: T[0] + ' – ' + ob + nr, greet: T[1], bye: T[2], body: [open, [jobs, kidTx].filter(Boolean).join(' '), [quiet, String(d.about || '').trim()].filter(Boolean).join(' '), move, atTx, end].filter(Boolean)};
+}
+
+/* ---------- листы ---------- */
+const C0 = () => SH.pal(true);
+function head(P, d, X){ let y = 22; const ns = d.wir ? [d.a.name, d.b.name].filter(Boolean).join(', ') : d.a.name;
+  [nz(ns, 'Vorname Name'), d.addr, d.city, [d.a.tel, d.a.mail].filter(Boolean).join(' · ')].filter(Boolean).forEach((s, i) => { P.text(s, X, y, 9.5, i === 0, '#000000'); y += 4.6; }); return y; }
+function sheetLetter(L, d, transl){
+  const P = SH.page(210, 297, C0()), X = 25, W = 160, ink = '#000000', mut = '#555555', t = letter(L, d);
+  if (!transl) { P.wm = false; P.credit = false; }
+  head(P, d, X);
+  if (transl) P.text('Для себе — не надсилати', 210 - 25, 22, 8, true, ink, 'right');
+  let ry = 52; [nz(d.vm.name, 'Verwaltung'), d.vm.addr, d.vm.city].filter(Boolean).forEach(s => { P.text(s, 118, ry, 10, false, ink); ry += 4.8; });
+  let y = 88; const city = nz(d.ort, String(d.city || '').replace(/^\d{4}\s*/, '')); P.text((city ? city + ', ' : '') + dmy(d.date), X, y, 9.5, false, ink);
+  y += 11; SH.wrap(t.subj, true, 11, W).forEach(l => { P.text(l, X, y, 11, true, ink); y += 5.4; });
+  y += 4; P.text(t.greet, X, y, 10, false, ink); y += 8;
+  t.body.forEach(par => { SH.wrap(par, false, 10, W).forEach(l => { P.text(l, X, y, 10, false, ink); y += 4.9; }); y += 3.2; });
+  y += 2; P.text(t.bye, X, y, 10, false, ink); y += 16;
+  const names = d.wir ? [d.a.name, d.b.name] : [d.a.name];
+  names.forEach((n, i) => { const x = X + i * 60; P.line(x, y, x + 50, y, '#888888', 0.3); P.text(n || '', x, y + 4.2, 8.5, false, mut); });
+  if (transl) return [P, y + 12];
+  return P;
+}
+function rowsFor(L, d){
+  const Y = YN[L], lab = {de: ['Name, Vorname', 'Geburtsdatum', 'Staatsangehörigkeit', 'Aufenthaltsbewilligung', 'Beruf', 'Arbeitgeber', 'Angestellt seit', 'Einkommen brutto/Monat', 'Telefon', 'E-Mail'],
+    fr: ['Nom, prénom', 'Date de naissance', 'Nationalité', 'Permis de séjour', 'Profession', 'Employeur', 'Employé·e depuis', 'Revenu brut mensuel', 'Téléphone', 'E-mail'],
+    it: ['Cognome, nome', 'Data di nascita', 'Nazionalità', 'Permesso di dimora', 'Professione', 'Datore di lavoro', 'Impiegato/a dal', 'Reddito lordo mensile', 'Telefono', 'E-mail'],
+    en: ['Name', 'Date of birth', 'Nationality', 'Residence permit', 'Occupation', 'Employer', 'Employed since', 'Gross monthly income', 'Phone', 'Email']}[L];
+  const until = {de: 'gültig bis', fr: 'valable jusqu’au', it: 'valido fino al', en: 'valid until'}[L];
+  const pv = p => (PERMIT[p.permit] || {})[L] ? PERMIT[p.permit][L] + (p.permit !== 'CH' && p.pvalid ? ', ' + until + ' ' + dmy(p.pvalid) : '') : '';
+  const ps = d.wir ? [d.a, d.b] : [d.a];
+  const people = lab.map((l, i) => [l, ps.map(p => [p.name, p.born ? dmy(p.born) : '', p.permit === 'CH' ? PERMIT.CH[L] : p.nat, p.permit === 'CH' ? '' : pv(p), p.prof, p.emp, p.since ? dmy(p.since) : '', incTx(p.inc, L), p.tel, p.mail][i] || '')]);
+  people.splice(1, people.length - 1, ...people.slice(1).filter(r => r[1].some(Boolean)));
+  const kids = ages(d.kids), H = {de: ['Bisherige Adresse', 'In der jetzigen Wohnung seit', 'Referenz (bisherige Verwaltung)', 'Personen im Haushalt', 'Kinder (Alter)', 'Haustiere', 'Musikinstrumente', 'Raucher', 'Auto / Parkplatz gewünscht', 'Gewünschter Einzug', 'Betreibungen', 'Privathaftpflichtversicherung'],
+    fr: ['Adresse actuelle', 'Dans le logement actuel depuis', 'Référence (gérance actuelle)', 'Personnes dans le ménage', 'Enfants (âge)', 'Animaux', 'Instruments de musique', 'Fumeur', 'Voiture / place de parc souhaitée', 'Entrée souhaitée', 'Poursuites', 'Assurance responsabilité civile'],
+    it: ['Indirizzo attuale', 'Nell’appartamento attuale dal', 'Referenza (amministrazione attuale)', 'Persone nell’economia domestica', 'Figli (età)', 'Animali domestici', 'Strumenti musicali', 'Fumatore', 'Auto / posteggio desiderato', 'Entrata desiderata', 'Esecuzioni', 'Assicurazione RC privata'],
+    en: ['Current address', 'In current flat since', 'Reference (current landlord)', 'Persons in household', 'Children (age)', 'Pets', 'Musical instruments', 'Smoker', 'Car / parking space needed', 'Desired move-in date', 'Debt collection records', 'Personal liability insurance']}[L];
+  const betr = d.betrNone ? ({de: 'keine – Auszug', fr: 'aucune – extrait du', it: 'nessuna – estratto del', en: 'none – extract dated'}[L] + (d.bdate ? (L === 'de' ? ' vom ' : ' ') + dmy(d.bdate) : '') + {de: ' liegt bei', fr: ' joint', it: ' allegato', en: ' attached'}[L]) : {de: 'siehe Beilage', fr: 'voir annexe', it: 'vedi allegato', en: 'see enclosure'}[L];
+  const hh = [
+    [H[0], [d.addr, d.city].filter(Boolean).join(', ')], [H[1], d.livesince ? dmy(d.livesince) : ''], [H[2], [d.refname, d.reftel].filter(Boolean).join(', ')],
+    [H[3], String((d.wir ? 2 : 1) + kids.length)], [H[4], kids.length ? kids.join(', ') : ''], [H[5], d.pets || Y[2]], [H[6], d.instr || Y[2]], [H[7], d.smoke ? Y[0] : Y[1]], [H[8], d.car ? Y[0] : Y[1]],
+    [H[9], d.move ? dmy(d.move) : ''], [H[10], betr], [H[11], d.haft ? Y[0] + ', ' + d.haft : '']].filter(r => r[1]);
+  return {people, hh, n: ps.length};
+}
+function sheetProfile(L, d){
+  const P = SH.page(210, 297, C0()), X = 20, W = 170, ink = '#000000', mut = '#555555', line = '#999999';
+  P.wm = false; P.credit = false;
+  const T = {de: ['Mieterprofil', 'Bewerbung für', 'Mietinteressent', 'Haushalt', 'Die Angaben sind vollständig und wahrheitsgetreu.', 'Ort, Datum', 'Unterschrift'],
+    fr: ['Profil du locataire', 'Candidature pour', 'Candidat', 'Ménage', 'Les informations sont complètes et conformes à la vérité.', 'Lieu, date', 'Signature'],
+    it: ['Profilo dell’inquilino', 'Candidatura per', 'Candidato', 'Economia domestica', 'Le indicazioni sono complete e veritiere.', 'Luogo, data', 'Firma'],
+    en: ['Tenant profile', 'Application for', 'Applicant', 'Household', 'The information provided is complete and true.', 'Place, date', 'Signature']}[L];
+  let y = 24; P.text(T[0], X, y, 18, true, ink); y += 7;
+  P.text(T[1] + ': ' + roomsTx(d.rooms, L).replace(/^(l’|the )/, '') + ', ' + nz(d.obj, '__________') + (d.objnr ? ' · ' + d.objnr : ''), X, y, 9, false, mut); y += 8;
+  const R = rowsFor(L, d), c1 = 58, cw = (W - c1) / R.n;
+  const tbl = (title, rows, cols) => {
+    P.rect(X, y, W, 7, '#EDEDED', null); P.text(title, X + 2, y + 4.8, 9.5, true, ink);
+    if (cols) cols.forEach((c, i) => P.text(c, X + c1 + i * cw + 2, y + 4.8, 8.5, true, ink)); y += 7;
+    rows.forEach(r => { const vals = Array.isArray(r[1]) ? r[1] : [r[1]], ww = Array.isArray(r[1]) ? cw - 4 : W - c1 - 4;
+      const wr = vals.map(v => SH.wrap(v || '—', false, 9, ww)), h = Math.max(1, ...wr.map(x => x.length)) * 4.2 + 2.6;
+      P.text(r[0], X + 2, y + 4.6, 8, false, mut); wr.forEach((ls, i) => ls.forEach((l, j) => P.text(l, X + c1 + i * cw + 2, y + 4.6 + j * 4.2, 9, false, ink)));
+      y += h; P.line(X, y, X + W, y, line, 0.25); });
+    y += 6; };
+  tbl(T[2], R.people.slice(1), R.people[0][1].map((n, i) => n || (T[2] + ' ' + (i + 1))));
+  tbl(T[3], R.hh, null);
+  P.text(T[4], X, y + 2, 9, false, ink); y += 16;
+  P.line(X, y, X + 60, y, line, 0.3); P.text(T[5], X, y + 4, 7.5, false, mut);
+  (d.wir ? [d.a.name, d.b.name] : [d.a.name]).forEach((n, i) => { const x = X + 75 + i * 50; P.line(x, y, x + 45, y, line, 0.3); P.text(T[6] + (n ? ' ' + n : ''), x, y + 4, 7.5, false, mut); });
+  return P;
+}
+function sheetRu(d){
+  const [P, y0] = sheetLetter('ru', d, true), X = 25, W = 160, ink = '#000000', mut = '#555555';
+  let y = Math.max(y0, 200);
+  P.text('Що додати до досьє', X, y, 11, true, ink); y += 6;
+  Object.keys(ATT).forEach(k => { const on = d.att[k]; P.rect(X, y - 3, 3.2, 3.2, null, '#000000'); if (on) { P.line(X + 0.6, y - 1.5, X + 1.4, y - 0.5, ink, 0.5); P.line(X + 1.4, y - 0.5, X + 2.8, y - 2.6, ink, 0.5); }
+    SH.wrap(ATT[k].ru, false, 8.8, W - 8).forEach((l, i) => { P.text(l, X + 6, y + i * 4, 8.8, false, on ? ink : mut); }); y += 5.2; });
+  y += 2; ['Надсилай досьє одним PDF у той самий день, що й огляд. Паспорт, пермит і розрахункові листки можна віддати й пізніше — за законом їх', 'запитують у кандидата, якого вже вибрали. Не вказуй сімейний стан, релігію, здоров’я і скільки платиш зараз.'].forEach(l => { P.text(l, X, y, 7.5, false, mut); y += 3.8; });
+  return P;
+}
+function build(){ const d = D(), out = [sheetLetter(d.lang, d, false), sheetProfile(d.lang, d)]; if (d.ru) out.push(sheetRu(d)); return out; }
+
+/* ---------- форма ---------- */
+const $ = id => document.getElementById(id);
+const esc = s => SH.esc(String(s == null ? '' : s));
+const qh = (h, l) => `<button type="button" class="qh" data-help="${h}" aria-label="Підказка: ${l}" aria-expanded="false">?</button>`;
+const getK = (d, k) => k.split('.').reduce((o, x) => o == null ? o : o[x], d);
+function renderForm(){
+  const d = D(), dis = EX ? 'disabled' : '';
+  const inp = (k, l, ph, h, type) => `<div class="fl"><span class="lb">${l}${h ? qh(h, l) : ''}</span><input type="${type || 'text'}" data-k="${k}" value="${esc(getK(d, k))}" placeholder="${esc(ph || '')}" ${dis}></div>`;
+  const dt = (k, l, h) => inp(k, l, '', h, 'date');
+  const sel = (k, l, list, h) => `<div class="fl"><span class="lb">${l}${h ? qh(h, l) : ''}</span><select data-k="${k}" ${dis}>${list.map(([a, b]) => `<option value="${a}"${String(a) === String(getK(d, k)) ? ' selected' : ''}>${esc(b)}</option>`).join('')}</select></div>`;
+  const chk = (k, l, h) => `<label class="tog"><input type="checkbox" data-k="${k}" ${getK(d, k) ? 'checked' : ''} ${dis}> ${l}${h ? qh(h, l) : ''}</label>`;
+  const per = (p, t) => `<section class="sec"><h2>${t}</h2>${inp(p + '.name', 'Ім’я та прізвище', 'Olena Kovalenko')}<div class="g2">${dt(p + '.born', 'Дата народження')}${sel(p + '.permit', 'Пермит', Object.keys(PERMIT).map(k => [k, PERMIT[k].ru]), 'permit')}</div>
+    ${getK(d, p + '.permit') === 'CH' ? '' : `<div class="g2">${inp(p + '.nat', 'Громадянство (мовою листа)', 'Ukraine / ukrainisch')}${dt(p + '.pvalid', 'Пермит діє до')}</div>`}
+    <div class="g2">${inp(p + '.prof', 'Професія (мовою листа)', 'Pflegefachfrau')}${inp(p + '.emp', 'Роботодавець', 'Spital Zürich')}${dt(p + '.since', 'Працюю там з')}${sel(p + '.inc', 'Дохід брутто на місяць, CHF', INC, 'inc')}${inp(p + '.tel', 'Телефон', '079 000 00 00')}${inp(p + '.mail', 'E-mail', 'name@example.ch')}</div></section>`;
+  const rent = +String(d.miete).replace(/[^\d.]/g, ''), incs = [d.a.inc].concat(d.wir ? [d.b.inc] : []), lo = {u4: 0, '4-6': 4000, '6-8': 6000, '8-10': 8000, '10-12': 10000, o12: 12000};
+  const minInc = incs.every(Boolean) ? incs.reduce((s, v) => s + lo[v], 0) : 0;
+  const hint = rent && minInc ? `<p class="hint">${rent * 3 <= minInc ? 'Оренда не більше третини доходу — за цим орієнтиром квартира тобі по кишені.' : `Оренда ${rent} франків більша за третину нижньої межі доходу (${minInc}). Керуючі компанії часто дивляться на це правило — подумай, чи по силі тобі ця квартира, і подивись «<a href="https://svoiludi.ch/uk/instrumenty/moj-budget/" target="_blank" rel="noopener">Бюджет: усі обов’язкові витрати у Швейцарії</a>».`}</p>` : '';
+  $('fields').innerHTML = `
+  <section class="sec"><h2>Квартира</h2>${inp('obj', 'Адреса квартири (як в оголошенні)', 'Seestrasse 10, 8002 Zürich')}<div class="g2">${inp('objnr', 'Номер об’єкта, якщо є', '')}${sel('rooms', 'Кімнат', ['1', '1.5', '2', '2.5', '3', '3.5', '4', '4.5', '5', '5.5', '6'].map(r => [r, r.replace('.', ',')]), 'rooms')}${inp('miete', 'Оренда з дод. витратами, CHF (для підказки, у лист не йде)', '2100')}${dt('move', 'Хочу в’їхати з')}</div>${hint}
+    ${sel('reason', 'Чому переїжджаєш', Object.keys(REASON).map(k => [k, REASON[k][0]]))}${d.reason === 'other' ? inp('reasontx', 'Причина (мовою листа)', '') : ''}</section>
+  <section class="sec"><h2>Кому</h2><div class="g2">${inp('vm.name', 'Керуюча компанія або власник', 'Muster Immobilien AG')}${inp('vm.addr', 'Вулиця і будинок')}${inp('vm.city', 'Індекс і місто')}</div></section>
+  <section class="sec"><h2>Хто підписуватиме договір</h2>${chk('wir', 'Підписуємо вдвох — лист від «ми»', 'wir')}</section>
+  ${per('a', d.wir ? 'Перша людина' : 'Про тебе')}${d.wir ? per('b', 'Друга людина') : ''}
+  <section class="sec"><h2>Зараз живу</h2><div class="g2">${inp('addr', 'Вулиця і будинок')}${inp('city', 'Індекс і місто')}${dt('livesince', 'Живу там з')}${inp('ort', 'Місце (для дати листа)', 'Zürich')}${inp('refname', 'Рекомендація: нинішня керуюча компанія', 'Verwaltung AG, Frau Muster', 'ref')}${inp('reftel', 'Її телефон')}</div></section>
+  <section class="sec"><h2>Родина й побут</h2><div class="g2">${inp('kids', 'Вік дітей через кому', '4, 7')}${inp('pets', 'Тварини (порожньо — немає)', '1 Katze')}${inp('instr', 'Музичні інструменти (порожньо — немає)', 'Klavier')}${inp('haft', 'Страховка відповідальності: компанія', 'Mobiliar')}</div>
+    ${chk('smoke', 'Курю')}${chk('car', 'Потрібне місце для автомобіля')}
+    ${inp('about', 'Кілька фраз про себе (мовою листа, за бажанням)', 'Wir wohnen seit fünf Jahren im Quartier und schätzen die Nähe zum See.', 'about')}</section>
+  <section class="sec"><h2>Виписка з реєстру боргів</h2>${chk('betrNone', 'Записів про борги немає', 'betr')}<div class="g2">${dt('bdate', 'Дата виписки')}${dt('date', 'Дата листа')}</div>${!d.betrNone ? '<p class="hint">Якщо записи є, напиши в «Кілька фраз про себе» коротко, що борг погашено, і додай підтвердження — це краще, ніж мовчати.</p>' : ''}</section>
+  <section class="sec"><h2>Що додаю</h2><div class="chk">${Object.keys(ATT).map(k => `<label><input type="checkbox" data-k="att.${k}" ${d.att[k] ? 'checked' : ''} ${dis}> <span>${esc(ATT[k].ru)}</span></label>`).join('')}</div></section>`;
+}
+let UI, tmr;
+const setK = (k, v) => { const ks = k.split('.'); let o = S; ks.slice(0, -1).forEach(x => o = o[x]); o[ks[ks.length - 1]] = v; };
+/* пример на языке письма */
+const EXL = {de: {city: '8004 Zürich', addr: 'Langstrasse 5', ort: 'Zürich', obj: 'Seestrasse 10, 8002 Zürich', vm: {name: 'Muster Immobilien AG', addr: 'Bahnhofstrasse 1', city: '8001 Zürich'}, refname: 'Beispiel Verwaltung AG, Frau Muster', profA: 'Pflegefachfrau', empA: 'Spital Zürich', profB: 'Informatiker', empB: 'Beispiel AG', nat: 'Ukraine', pets: '', instr: '', haft: 'Mobiliar', about: 'Wir wohnen seit drei Jahren im Quartier, die Schule unserer Kinder ist zu Fuss erreichbar.'},
+  fr: {city: '1004 Lausanne', addr: 'Rue de Genève 5', ort: 'Lausanne', obj: 'Avenue de la Gare 10, 1003 Lausanne', vm: {name: 'Régie Exemple SA', addr: 'Rue Centrale 1', city: '1003 Lausanne'}, refname: 'Gérance Exemple SA, Mme Martin', profA: 'infirmière', empA: 'CHUV', profB: 'informaticien', empB: 'Exemple SA', nat: 'Ukraine', pets: '', instr: '', haft: 'Vaudoise', about: 'Nous habitons le quartier depuis trois ans et l’école de nos enfants est à deux pas.'},
+  it: {city: '6900 Lugano', addr: 'Via Cantonale 5', ort: 'Lugano', obj: 'Via Nassa 10, 6900 Lugano', vm: {name: 'Amministrazione Esempio SA', addr: 'Via Pretorio 1', city: '6900 Lugano'}, refname: 'Amministrazione Esempio SA, sig.ra Rossi', profA: 'infermiera', empA: 'EOC', profB: 'informatico', empB: 'Esempio SA', nat: 'Ucraina', pets: '', instr: '', haft: 'Helvetia', about: 'Abitiamo nel quartiere da tre anni e la scuola dei nostri figli è vicina.'},
+  en: {city: '8004 Zürich', addr: 'Langstrasse 5', ort: 'Zürich', obj: 'Seestrasse 10, 8002 Zürich', vm: {name: 'Example Real Estate Ltd', addr: 'Bahnhofstrasse 1', city: '8001 Zürich'}, refname: 'Example Management Ltd, Ms Muster', profA: 'nurse', empA: 'University Hospital Zurich', profB: 'software engineer', empB: 'Example Ltd', nat: 'Ukrainian', pets: '', instr: '', haft: 'Mobiliar', about: 'We have lived in the neighbourhood for three years and our children’s school is within walking distance.'}};
+function exApply(){ const x = EXL[EX.lang] || EXL.de;
+  Object.assign(EX, {addr: x.addr, city: x.city, ort: x.ort, obj: x.obj, vm: Object.assign({}, x.vm), refname: x.refname, pets: x.pets, instr: x.instr, haft: x.haft, about: x.about});
+  Object.assign(EX.a, {prof: x.profA, emp: x.empA, nat: x.nat}); Object.assign(EX.b, {prof: x.profB, emp: x.empB, nat: x.nat}); }
+const EXD = () => { const b = blank(); return Object.assign(b, {kt: 'ZH', lang: 'de', ru: true, wir: true,
+  a: Object.assign(person(), {name: 'Olena Kovalenko', born: '1988-04-12', permit: 'S', pvalid: '2027-03-04', since: '2024-02-01', inc: '6-8', tel: '079 000 00 00', mail: 'olena@example.ch'}),
+  b: Object.assign(person(), {name: 'Andrii Kovalenko', born: '1986-09-03', permit: 'B', pvalid: '2028-05-31', since: '2023-09-01', inc: '8-10'}),
+  kids: '6, 9', objnr: '2051.03.01', rooms: '4.5', miete: '2650', move: '2027-01-01', reason: 'space', livesince: '2023-08-01', reftel: '044 000 00 00', bdate: '2026-10-01',
+  att: {betr: true, id: true, lohn: true, vertrag: false, haft: true, ref: true, anm: false}}); };
+function fill(){ if (EX) exApply(); const d = D(); $('kt').value = d.kt || ''; $('lang').value = d.lang + (d.ru ? '+ru' : ''); renderForm(); $('exbar').hidden = !EX; $('exOn').hidden = !!EX; if (UI) UI.render(); }
+const KN = window.KANTONY || {};
+$('kt').innerHTML = '<option value="">Обери кантон</option>' + Object.keys(KN).sort((a, b) => KN[a].n.localeCompare(KN[b].n, 'uk')).map(k => `<option value="${k}">${esc(KN[k].n)}</option>`).join('');
+$('kt').addEventListener('change', e => { S.kt = e.target.value; S.lang = langOf(S.kt); try { localStorage.setItem('svoiludi.kanton', S.kt); } catch (x) {} if (EX) { EX.kt = S.kt; EX.lang = S.lang; } save(); fill(); });
+$('lang').addEventListener('change', e => { const [l, r] = e.target.value.split('+'); S.lang = l; S.ru = !!r; if (EX) { EX.lang = l; EX.ru = !!r; } save(); fill(); });
+document.addEventListener('input', e => { const x = e.target; if (EX || !x.dataset || !x.dataset.k || x.type === 'checkbox' || x.tagName === 'SELECT' || x.type === 'date') return; setK(x.dataset.k, x.value); save(); clearTimeout(tmr); tmr = setTimeout(() => UI && UI.render(), 450); });
+document.addEventListener('change', e => { const x = e.target; if (EX || !x.dataset || !x.dataset.k || !$('fields').contains(x)) return; setK(x.dataset.k, x.type === 'checkbox' ? x.checked : x.value); save(); fill(); });
+$('exOn').addEventListener('click', () => { EX = EXD(); fill(); window.scrollTo({top: $('exbar').offsetTop - 12, behavior: 'smooth'}); });
+$('exOff').addEventListener('click', () => { EX = null; fill(); });
+if (/[?&]example\b/.test(location.search)) EX = EXD();
+UI = SH.mount({build, lang: () => D().lang, title: 'Mieterdossier', name: () => ({de: 'Mieterdossier', fr: 'Dossier-locataire', it: 'Dossier-inquilino', en: 'Tenant-file'}[D().lang] || 'Mieterdossier') + (D().a.name ? '-' + D().a.name.replace(/\s+/g, '-') : '')});
+fill();
+
+</script>
+<script src="/assets/help.uk.js"></script>
+<script src="/assets/backup.uk.js"></script>
+<script src="/assets/pdffan.uk.js" defer></script>
+<script src="/assets/share.uk.js" defer></script>
+<script src="/assets/samesite.js"></script>
+<!--i18n--><style>#langbar.langbar{position:fixed;bottom:14px;right:14px;z-index:60;display:flex;gap:2px;background:rgba(255,255,255,.92);border:1px solid rgba(0,0,0,.08);border-radius:999px;padding:3px;font:600 12px Manrope,system-ui,sans-serif;box-shadow:0 2px 8px rgba(0,0,0,.08)}#langbar.langbar a{color:#5d554d;padding:5px 9px;border-radius:999px;text-decoration:none;font:inherit;display:inline-block}#langbar.langbar a[aria-current="true"]{background:#2f2924;color:#fff}@media print{.langbar{display:none!important}}</style><div class="langbar" id="langbar" role="navigation" aria-label="Мова / Язык"><a href="/instrumenty/dosye-arendatora/" hreflang="ru" data-lang="ru">RU</a><a href="/uk/instrumenty/dosye-arendatora/" hreflang="uk" data-lang="uk" aria-current="true">UA</a></div><script>(function(){var b=document.getElementById('langbar');if(!b)return;b.addEventListener('click',function(e){var a=e.target.closest('a[data-lang]');if(a){try{localStorage.setItem('svoiludiLang',a.dataset.lang)}catch(x){}a.href=a.getAttribute('href').split('#')[0]+location.hash;}});})();</script><!--i18n--></body>
+</html>

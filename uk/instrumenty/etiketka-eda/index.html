@@ -1,0 +1,297 @@
+<!doctype html>
+<html lang="uk">
+<head><!--i18n--><base href="/instrumenty/etiketka-eda/"><!--i18n-->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<link rel="icon" href="/fav/favicon.svg" type="image/svg+xml"><link rel="icon" href="/fav/icon-32.png" sizes="32x32"><link rel="apple-touch-icon" href="/fav/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/fonts.css">
+<meta name="description" content="Безкоштовні етикетки для домашньої їжі на продаж у Швейцарії (Etikette, Lebensmittelkennzeichnung): назва, склад із виділеними алергенами, «може містити сліди», вага, «спожити до» або «найкраще спожити до», зберігання, виробник, «Hergestellt in der Schweiz», за бажанням таблиця харчової цінності й ціна. Німецькою, французькою або італійською, аркуші наклейок A4. PDF.">
+<link rel="canonical" href="https://svoiludi.ch/uk/instrumenty/etiketka-eda/">
+<meta property="og:type" content="website"><meta property="og:locale" content="uk_UA"><meta property="og:site_name" content="Свої люди у Швейцарії">
+<meta property="og:title" content="Етикетки зі складом і алергенами для домашньої їжі · за швейцарськими правилами"><meta property="og:description" content="Склад з алергенами, строк, зберігання і виробник — етикетки німецькою, французькою або італійською на аркуші наклейок A4. Безкоштовно.">
+<meta property="og:url" content="https://svoiludi.ch/uk/instrumenty/etiketka-eda/"><meta property="og:image" content="https://svoiludi.ch/instrumenty/etiketka-eda/og-image.uk.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="robots" content="noindex, nofollow">
+<title>Етикетки зі складом і алергенами для домашньої їжі</title>
+<style>
+/* Этикетки с составом и аллергенами для домашней еды (08.10.2026): анкета слева, живые листы справа, движок assets/shema.js. */
+:root{
+  --bg:#F4EDE3; --paper:#FFFCF8; --ink:#2F2924; --muted:#7A6E62; --line:#E5D9C9; --soft:#EFE5D7;
+  --brown:#6E4F3C; --mustard:#B98324; --mustard-soft:#F3E3C2; --sage:#4F5E3E; --sage-soft:#E3E8D6; --red:#A0523D;
+  --display:"Forum","Georgia",serif; --sans:"Manrope","Segoe UI",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#221D19; --paper:#2C2621; --ink:#F1E9DF; --muted:#B4A796; --line:#3E362F; --soft:#352E28;
+  --brown:#E1C2A6; --mustard:#E2B45C; --mustard-soft:#3D321F; --sage:#B4BF97; --sage-soft:#2E3226; --red:#E39A85; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#221D19; --paper:#2C2621; --ink:#F1E9DF; --muted:#B4A796; --line:#3E362F; --soft:#352E28;
+  --brown:#E1C2A6; --mustard:#E2B45C; --mustard-soft:#3D321F; --sage:#B4BF97; --sage-soft:#2E3226; --red:#E39A85; color-scheme:dark}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--ink);font:15px/1.55 var(--sans);margin:0}
+.wrap{max-width:1280px;margin:0 auto;padding-inline:16px;padding-block:28px 48px;display:flex;flex-direction:column;gap:24px}
+.eyebrow{font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+h1{font-family:var(--display);font-weight:400;font-size:clamp(2.4rem,6vw,3.6rem);line-height:1;margin:4px 0 10px;text-wrap:balance}
+h2{font-family:var(--display);font-weight:400;font-size:1.55rem;margin:0;text-wrap:balance}
+h3{font-family:var(--display);font-weight:400;font-size:1.22rem;line-height:1.2;margin:0}
+.lead{max-width:66ch;color:var(--muted);margin:0}
+.jump{font-weight:700;color:var(--brown);text-underline-offset:4px}
+.privnote{margin-top:14px;background:var(--sage-soft);border-radius:16px;padding:12px 16px;font-size:.9rem;max-width:90ch}
+.status{font-size:.86rem;color:var(--muted);min-height:1.3em}
+.btn{font:inherit;font-weight:700;font-size:.9rem;border:0;border-radius:999px;padding:10px 18px;cursor:pointer;color:#fff;text-decoration:none;display:inline-flex;align-items:center;gap:6px;background:#6E4F3C;box-shadow:0 8px 18px -8px rgba(110,79,60,.6)}
+.btn.gold{background:#B98324;box-shadow:0 8px 18px -8px rgba(185,131,36,.7)}
+.btn.free{background:#4F5E3E;box-shadow:0 8px 18px -8px rgba(79,94,62,.6)}
+.btn.ghost{background:transparent;color:var(--brown);border:1.5px solid var(--line);box-shadow:none}
+.btn.sm{font-size:.82rem;padding:7px 13px}
+.btn[disabled]{background:var(--soft);color:var(--muted);box-shadow:none;cursor:wait}
+select,input[type=text],input[type=tel],input[type=number],input[type=date],textarea{font:inherit;font-size:.95rem;color:var(--ink);background:var(--paper);border:1.5px solid var(--line);border-radius:12px;padding:9px 12px;width:100%;min-width:0}
+select:focus-visible,input:focus-visible,button:focus-visible,textarea:focus-visible,a:focus-visible{outline:2px solid var(--mustard);outline-offset:2px}
+::placeholder{color:color-mix(in srgb,var(--muted) 70%,transparent)}
+.setup{background:var(--paper);border:1.5px solid var(--line);border-radius:22px;padding:16px 18px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px 18px;align-items:start}
+@media (max-width:1000px){.setup{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.setup{grid-template-columns:1fr}}
+.fl{display:flex;flex-direction:column;gap:6px;min-width:0}
+.fl>.lb{font-size:.8rem;font-weight:700;color:var(--muted);display:flex;align-items:center}
+.seg{display:flex;flex-wrap:wrap;gap:6px}
+.seg button{font:inherit;font-size:.84rem;font-weight:700;border:1.5px solid var(--line);background:var(--paper);color:var(--ink);border-radius:999px;padding:6px 12px;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--sage);border-color:var(--sage);color:#fff}
+.acts{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.exbar{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;background:var(--mustard-soft);border-radius:16px;padding:10px 14px;font-size:.9rem;font-weight:600}
+.work{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:22px;align-items:start}
+@media (max-width:1040px){.work{grid-template-columns:1fr}}
+.form{display:flex;flex-direction:column;gap:14px;min-width:0}
+.sec{background:var(--paper);border:1.5px solid var(--line);border-radius:20px;padding:16px 18px;display:flex;flex-direction:column;gap:12px}
+.sec>h2{font-size:1.3rem;display:flex;align-items:center}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:560px){.g2{grid-template-columns:1fr}}
+.hint{font-size:.84rem;color:var(--muted);margin:0}
+.chk{display:flex;flex-direction:column;gap:8px}
+.chk label{display:flex;gap:10px;align-items:baseline;font-size:.92rem;cursor:pointer}
+.chk input{flex:none;width:18px;height:18px;accent-color:var(--sage);transform:translateY(3px)}
+.chk b{white-space:nowrap}
+.chk small{color:var(--muted)}
+.tog{display:flex;gap:10px;align-items:center;font-size:.92rem;cursor:pointer}
+.tog input{width:18px;height:18px;accent-color:var(--sage)}
+.sheetbox{position:sticky;top:12px;display:flex;flex-direction:column;gap:10px}
+@media (max-width:1040px){.sheetbox{position:static}}
+.sheet{background:#fff;border-radius:6px;box-shadow:0 18px 40px -22px rgba(47,41,36,.45);overflow:hidden}
+.sheet svg{display:block;width:100%;height:auto}
+.imp{background:var(--paper);border:1.5px dashed color-mix(in srgb,var(--sage) 55%,transparent);border-radius:16px;padding:14px 18px;font-size:.88rem;max-width:90ch;margin:0}
+.imp b{color:var(--sage)}
+.guide{display:flex;flex-direction:column;gap:14px;max-width:90ch}
+.guide ul{margin:0;padding-left:20px}
+.guide li{margin:4px 0}
+.credit{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:.8rem;color:var(--muted)}
+.credit a{color:var(--muted)}
+.qh{font:700 .72rem/1 var(--sans);width:20px;height:20px;border-radius:50%;border:1.5px solid var(--line);background:var(--paper);color:var(--brown);cursor:pointer;margin-left:6px;padding:0;flex:none}
+.sheets{display:flex;flex-direction:column;gap:14px}
+.goals{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+@media (max-width:560px){.goals{grid-template-columns:1fr}}
+.goals label{display:flex;gap:10px;align-items:flex-start;background:var(--bg);border:1.5px solid var(--line);border-radius:14px;padding:9px 12px;cursor:pointer;font-size:.92rem}
+.goals input{width:18px;height:18px;accent-color:var(--sage);flex:none;margin-top:2px}
+.goals small{display:block;color:var(--muted)}
+.steps{display:flex;flex-direction:column;gap:8px}
+.steps details{background:var(--paper);border:1.5px solid var(--line);border-radius:16px;padding:10px 16px}
+.steps summary{cursor:pointer;font-weight:700;display:flex;gap:10px;align-items:baseline}
+.steps summary small{font-weight:600;color:var(--muted);margin-left:auto;text-align:right}
+.steps details p,.steps details ul{margin:8px 0 2px;font-size:.93rem}
+.steps details ul{padding-left:20px}
+</style>
+<!--pwa--><link rel="manifest" href="/fav/site.uk.webmanifest"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Свої люди"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="theme-color" content="#4F5E3E"><style id="pa-tiles">/* верхнее меню на телефоне и планшете: прямоугольные плитки с закруглением в два ряда, иконки ставит pwa-app.js (08.10.2026) */html header.top nav[aria-label] a .pa-ni{display:none}@media (max-width:1100px){html header.top .page{flex-wrap:wrap;row-gap:8px}html header.top nav[aria-label]{order:3;width:100%;display:grid!important;grid-template-columns:repeat(var(--pa-cols,3),minmax(0,1fr));gap:8px;overflow:visible;padding:4px 0 12px;margin:0}html header.top nav[aria-label] a{display:flex!important;flex-direction:column;align-items:center;justify-content:center;gap:5px;min-height:62px;padding:9px 6px;border-radius:14px;background:var(--paper,#FFFCF8);border:1px solid color-mix(in srgb,var(--sage,#66704F) 30%,transparent);box-shadow:0 3px 10px -6px rgba(60,70,40,.45);color:var(--ink,#2F2924)!important;font:600 .78rem/1.18 var(--body,system-ui);text-align:center;white-space:normal;text-decoration:none;-webkit-tap-highlight-color:transparent}html header.top nav[aria-label] a::after{content:none!important}html header.top nav[aria-label] a .pa-ni{display:block;width:22px;height:22px;fill:none;stroke:var(--sage,#66704F);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}html header.top nav[aria-label] a[aria-current="page"]{background:var(--sage,#66704F);border-color:var(--sage,#66704F);color:var(--paper,#FFFCF8)!important;box-shadow:0 4px 12px -6px rgba(60,70,40,.6)}html header.top nav[aria-label] a[aria-current="page"] .pa-ni{stroke:var(--paper,#FFFCF8)}html header.top nav[aria-label] a:active{transform:scale(.97)}}/* кнопки сайта — прямоугольные с закруглением, как плитки меню (решение Ирины 08.10.2026); значки-метки (образец, теги, «?») остаются круглыми */:is(.navcta,.btn,.shr-btn,.pl-act a,.pl-act button,.qa,.more,.listbar button,.leaflet-popup-content button,.calmenu a,.calmenu button,.go-free,.find,.confirm,.monthics,.addb,.mbtn,.example,.viewsw,#langbar.langbar,.pa-go,.pa-x,.pa-foot){border-radius:12px!important}:is(.viewsw button,.seg button,.chips button,#langbar.langbar a,.cal-nav button){border-radius:9px!important}</style><script src="/assets/pwa-app.js" defer></script><!--pwa--><!--i18n--><link rel="alternate" hreflang="ru" href="https://svoiludi.ch/instrumenty/etiketka-eda/"><link rel="alternate" hreflang="uk" href="https://svoiludi.ch/uk/instrumenty/etiketka-eda/"><!--i18n--></head>
+<body>
+<style>#fields input:not([type=checkbox]),#fields select{width:100%}.zr{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr) 34px;gap:6px;margin-bottom:6px}.zr .del{font:inherit;border:1.5px solid var(--line);background:var(--paper);border-radius:10px;height:42px;cursor:pointer}.chk.al{display:grid;grid-template-columns:1fr 1fr;gap:6px}@media (max-width:560px){.chk.al{grid-template-columns:1fr}}.chk-err{color:#8A3F2D;background:#F6E0D9;border-radius:12px;padding:10px 12px;font-size:.88rem}</style>
+<div class="wrap">
+  <header>
+    <p style="margin:0 0 14px"><a class="jump" href="https://svoiludi.ch/uk/instrumenty/">← Усі корисні інструменти · Свої люди у Швейцарії</a></p>
+    <div class="eyebrow">Своя справа · домашня кухня</div>
+    <h1>Етикетки зі складом і алергенами для домашньої їжі</h1>
+    <p class="lead">Якщо ти продаєш торти, пельмені, вареники, соління чи іншу домашню їжу в упаковці, на ній має бути етикетка за швейцарськими правилами. Тут ти вписуєш назву і склад, позначаєш алергени — і отримуєш аркуш наклейок A4 німецькою, французькою або італійською: склад із виділеними алергенами, вага, строк, зберігання, хто зробив і «зроблено у Швейцарії». Продукти зберігаються — наступного разу лише зміни дату. PDF безкоштовно.</p>
+    <div class="privnote"><b>Твої дані лише в тебе.</b> Продукти й адреса зберігаються лише у твоєму браузері на цьому пристрої. Реєстрація не потрібна.</div>
+    <div data-fan="etiketka-eda"></div>
+  </header>
+  <div class="setup">
+    <div class="fl"><span class="lb">Мова етикетки<button type="button" class="qh" data-help="lang" aria-label="Підказка: мова етикетки" aria-expanded="false">?</button></span><select id="lang"><option value="de">Deutsch</option><option value="fr">Français</option><option value="it">Italiano</option></select></div>
+    <div class="fl"><span class="lb">Розмір<button type="button" class="qh" data-help="size" aria-label="Підказка: розмір" aria-expanded="false">?</button></span><select id="size"><option value="big">105×74 мм, 8 на аркуші</option><option value="mid">70×42 мм, 21 на аркуші</option></select></div>
+    <div class="fl"><span class="lb">Друк</span><label class="tog"><input type="checkbox" id="cut"> Рамка, щоб вирізати</label><label class="tog"><input type="checkbox" id="bw"> Без кольору, для дешевого друку</label></div>
+  </div>
+  <div class="exbar" id="exbar" hidden><span>Це приклад. Так виглядатиме твій файл.</span><button type="button" class="btn sm" id="exOff">Повернутися до моїх даних</button></div>
+  <div class="work">
+    <div class="form" id="fields"></div>
+    <div class="sheetbox">
+      <div class="acts"><button type="button" class="btn gold" id="pdf">Завантажити PDF</button><button type="button" class="btn ghost sm" id="share" hidden>Надіслати</button><button type="button" class="btn ghost sm" id="exOn">Подивитися на прикладі</button></div>
+      <div class="sheets" id="sheet" aria-label="Попередній перегляд аркушів"></div>
+      <div class="status" id="status" role="status"></div>
+    </div>
+  </div>
+  <p class="imp"><b>Важливо.</b> Це зразок для прикладу й особистого використання, а не офіційний документ і не консультація. Правила маркування уточнюй у кантональній лабораторії (Lebensmittelkontrolle) свого кантону й перевіряй сама; для м’яса, риби, алкоголю, «біо» і харчових добавок є додаткові правила. Автор не несе відповідальності за достовірність. Як продавати домашню їжу — у темі <a href="https://svoiludi.ch/uk/shveycariya/professii-dom/">«Прибирання, кейтеринг, домашня кухня»</a>.</p>
+  <div class="share-slot" data-url="https://svoiludi.ch/uk/instrumenty/etiketka-eda/" data-lead="Перешли тим, хто продає домашню їжу. У посиланні немає твоїх даних." data-text="Привіт! Тут можна безкоштовно зробити етикетки для домашньої їжі за швейцарськими правилами: склад з алергенами, строк, зберігання — німецькою або французькою, одразу на аркуш наклейок. https://svoiludi.ch/uk/instrumenty/etiketka-eda/"></div>
+  <p class="credit"><span>Свої люди у Швейцарії · svoiludi.ch</span><a href="https://svoiludi.ch/uk/privacy/">Політика конфіденційності</a></p>
+</div>
+
+<script src="/assets/kantony.uk.js"></script>
+<script src="/assets/lib/jspdf.umd.min.js"></script>
+<script src="/assets/shema.uk.js"></script>
+<script>
+const SRC = '<p class="src">Джерело: <a href="https://www.ag.ch/media/kanton-aargau/dgs/dokumente/verbraucherschutz/lebensmittelkontrolle/lebensmittelinspektorat/merkblaetter/merkblatt-01-kennzeichnung-eines-vorverpackten-lebensmittels.pdf" target="_blank" rel="noopener">кантональна лабораторія Ааргау, пам’ятка «Маркування упакованих продуктів», 2025</a>, за постановою LIV.</p>';
+window.HELP = {
+  lang: '<p>Етикетка має бути хоча б однією офіційною мовою Швейцарії. Пиши мовою кантону, де продаєш: німецькою, французькою або італійською. Назву і склад ти вписуєш сама — одразу цією мовою.</p>' + SRC,
+  name: '<p>Зрозуміла назва продукту (Sachbezeichnung): що це насправді, наприклад «Apfelkuchen», «Borschtsch mit Rindfleisch», «Pelmeni mit Schweinefleisch, tiefgekühlt». Одна вигадана назва («Бабусина радість») не підходить — її можна додати, але поруч із зрозумілою.</p>' + SRC,
+  zut: '<p>Усі інгредієнти по порядку — від того, чого більше за вагою, до того, чого менше. Якщо інгредієнт — алерген, обери його в списку: на етикетці він буде виділений жирним. Якщо в назві продукту є інгредієнт («полуничний торт»), зазвичай треба вказати, скільки його у відсотках.</p>' + SRC,
+  allerg: '<p>14 алергенів, які завжди виділяють на етикетці: злаки з глютеном, ракоподібні, яйця, риба, арахіс, соя, молоко, горіхи, селера, гірчиця, кунжут, сульфіти, люпин, молюски.</p><p>«Може містити сліди» — за бажанням, якщо на твоїй кухні є, наприклад, горіхи і вони можуть випадково потрапити в продукт.</p>',
+  date: '<p><b>«Спожити до»</b> (Zu verbrauchen bis) — для швидкопсувного, що зберігають у холодильнику: торти з кремом, салати, м’ясо, пельмені. Після цієї дати їсти не можна.</p><p><b>«Найкраще спожити до»</b> (Mindestens haltbar bis) — для решти: печиво, варення, сушене. Дата — день, місяць, рік.</p>' + SRC,
+  lot: '<p>Номер партії (L + код) потрібен, щоб у разі проблеми знайти, яка це партія. Якщо на етикетці дата з днем і місяцем, номер партії можна не писати.</p>' + SRC,
+  nutri: '<p>Таблиця харчової цінності зазвичай обов’язкова. Але для продуктів ручної роботи, які ти сама продаєш безпосередньо покупцям у невеликих кількостях, є винятки (додаток 9 LIV). Уточни в кантональній лабораторії свого кантону, чи потрібна вона тобі.</p>' + SRC,
+  size: '<p>Розміри етикеток під звичайні аркуші наклейок A4: 105×74 мм — 8 на аркуші, 70×42 мм — 21 на аркуші. Можна друкувати і на звичайному папері — з тонкою рамкою, щоб вирізати.</p>',
+  reg: '<p>Якщо продаєш їжу, приготовану вдома, спочатку зареєструйся в кантональній лабораторії (Lebensmittelkontrolle) — це безкоштовно. Докладно про гігієну, самоконтроль і дозволи — у темі «Прибирання, кейтеринг, домашня кухня».</p>'
+};
+const KEY = 'etiketkaEda.v1';
+const AL = {gluten: ['Злаки з глютеном (пшениця, жито, ячмінь, овес, спельта)', 'glutenhaltigem Getreide', 'céréales contenant du gluten', 'cereali contenenti glutine'], crust: ['Ракоподібні', 'Krebstieren', 'crustacés', 'crostacei'], egg: ['Яйця', 'Eiern', 'œufs', 'uova'],
+  fish: ['Риба', 'Fisch', 'poisson', 'pesce'], peanut: ['Арахіс', 'Erdnüssen', 'arachides', 'arachidi'], soy: ['Соя', 'Soja', 'soja', 'soia'], milk: ['Молоко (і лактоза)', 'Milch', 'lait', 'latte'],
+  nuts: ['Горіхи (мигдаль, фундук, волоський, кеш’ю, пекан, бразильський, фісташки, макадамія)', 'Schalenfrüchten', 'fruits à coque', 'frutta a guscio'], celery: ['Селера', 'Sellerie', 'céleri', 'sedano'], mustard: ['Гірчиця', 'Senf', 'moutarde', 'senape'],
+  sesame: ['Кунжут', 'Sesam', 'sésame', 'sesamo'], sulph: ['Сульфіти (понад 10 мг на кг)', 'Sulfiten', 'sulfites', 'solfiti'], lupin: ['Люпин', 'Lupinen', 'lupin', 'lupini'], mollusc: ['Молюски', 'Weichtieren', 'mollusques', 'molluschi']};
+const LI = {de: 1, fr: 2, it: 3};
+const W = {
+  zut: ['Zutaten', 'Ingrédients', 'Ingredienti'], spur: [x => `Kann Spuren von ${x} enthalten.`, x => `Peut contenir des traces de ${x}.`, x => `Può contenere tracce di ${x}.`], and: [' und ', ' et ', ' e '],
+  net: ['Nettogewicht', 'Poids net', 'Peso netto'], vol: ['Inhalt', 'Contenu', 'Contenuto'], use: ['Zu verbrauchen bis', 'À consommer jusqu’au', 'Da consumare entro il'], mhd: ['Mindestens haltbar bis', 'À consommer de préférence avant le', 'Da consumarsi preferibilmente entro il'],
+  made: ['Hergestellt in der Schweiz', 'Fabriqué en Suisse', 'Prodotto in Svizzera'], by: ['Hersteller', 'Fabricant', 'Produttore'], price: ['Preis', 'Prix', 'Prezzo'],
+  nut: ['Nährwerte pro 100 g', 'Valeurs nutritives pour 100 g', 'Valori nutritivi per 100 g'], nrows: [['Energie', 'Fett', 'davon gesättigte Fettsäuren', 'Kohlenhydrate', 'davon Zucker', 'Eiweiss', 'Salz'], ['Énergie', 'Matières grasses', 'dont acides gras saturés', 'Glucides', 'dont sucres', 'Protéines', 'Sel'], ['Energia', 'Grassi', 'di cui acidi grassi saturi', 'Carboidrati', 'di cui zuccheri', 'Proteine', 'Sale']]
+};
+const STORE = {cool5: ['Зберігати не вище 5 °C', 'Bei höchstens 5 °C aufbewahren.', 'À conserver à 5 °C au maximum.', 'Conservare a max. 5 °C.'], dry: ['Зберігати в прохолодному сухому місці', 'Kühl und trocken lagern.', 'Conserver au frais et au sec.', 'Conservare in luogo fresco e asciutto.'],
+  frozen: ['Заморожене, −18 °C', 'Tiefgekühlt bei −18 °C lagern. Nach dem Auftauen nicht wieder einfrieren.', 'Conserver à −18 °C. Ne pas recongeler après décongélation.', 'Conservare a −18 °C. Non ricongelare dopo lo scongelamento.'], none: ['Не вказувати', '', '', '']};
+const SIZES = {big: {w: 105, h: 74, cols: 2, rows: 4, mx: 0, my: 0.5, name: '105×74 мм, 8 на аркуші'}, mid: {w: 70, h: 42.3, cols: 3, rows: 7, mx: 0, my: 0.65, name: '70×42 мм, 21 на аркуші'}};
+const TODAY = new Date().toISOString().slice(0, 10);
+function newItem(){ return {name: '', zut: [{t: '', a: ''}], spur: [], q: '', unit: 'g', dt: 'use', made: TODAY, days: 3, store: 'cool5', price: '', lot: false, nutri: false, nv: ['', '', '', '', '', '', '', '']}; }
+function langOf(k){ const K = window.KANTONY || {}; return k && K[k] ? ({de: 'de', fr: 'fr', it: 'it'}[K[k].l] || 'de') : 'de'; }
+function blank(){ let k = ''; try { k = localStorage.getItem('svoiludi.kanton') || ''; } catch (e) {} return {lang: langOf(k), size: 'big', cut: true, bw: false, me: {name: '', addr: '', city: ''}, items: [newItem()], cur: 0}; }
+let S = load(), EX = null;
+function load(){ try { const s = JSON.parse(localStorage.getItem(KEY)); if (s && typeof s === 'object' && Array.isArray(s.items) && s.items.length) return Object.assign(blank(), s); } catch (e) {} return blank(); }
+function save(){ if (EX) return; try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} }
+const D = () => EX || S, IT = d => d.items[Math.min(d.cur, d.items.length - 1)];
+const dmy = iso => { const [y, m, d] = String(iso || '').split('-'); return d ? `${d}.${m}.${y}` : ''; };
+const addDays = (iso, n) => { const t = new Date((iso || TODAY) + 'T12:00:00'); t.setDate(t.getDate() + (+n || 0)); return t.toISOString().slice(0, 10); };
+const listJoin = (arr, l) => arr.length < 2 ? arr.join('') : arr.slice(0, -1).join(', ') + W.and[l] + arr[arr.length - 1];
+
+/* ---------- этикетка ---------- */
+function tokens(d, it){ // [слово, жирный]
+  const l = LI[d.lang] - 1, out = [[W.zut[l] + ':', true]];
+  const z = it.zut.filter(x => x.t.trim());
+  z.forEach((x, i) => String(x.t).trim().split(/\s+/).forEach((w, k, a) => out.push([w + (k === a.length - 1 && i < z.length - 1 ? ',' : k === a.length - 1 ? '.' : ''), !!x.a])));
+  return out;
+}
+function flow(P, toks, x, y, w, size, lh, draw, ink){ // перенос слов с жирными аллергенами; возвращает новую y
+  let cx = x, sp = SH.tw(' ', false, size) * 1.25;
+  toks.forEach(([wd, b]) => { const ww = SH.tw(wd, b, size); if (cx > x && cx + ww > x + w) { cx = x; y += lh; } if (draw) P.text(wd, cx, y, size, b, ink); cx += ww + sp; });
+  return y + lh;
+}
+function label(P, d, it, X, Y, sz, draw){
+  const l = LI[d.lang] - 1, pad = sz.w > 80 ? 4 : 2.6, x = X + pad, w = sz.w - pad * 2, ink = '#000000', mut = d.bw ? '#333333' : '#6E4F3C';
+  const fit = (s, draw) => { let y = Y + pad, size = s, lh = s * SH.PT * 1.28;
+    const big = s * 1.45;
+    const nl = SH.wrap(it.name || '…', true, big, w);
+    nl.forEach((t, i) => { if (draw) P.text(t, x, y + big * SH.PT + i * big * SH.PT * 1.15, big, true, d.bw ? ink : '#2F2924'); });
+    y += big * SH.PT * 1.25 + (nl.length - 1) * big * SH.PT * 1.15 + 1;
+    y = flow(P, tokens(d, it), x, y + size * SH.PT, w, size, lh, draw, ink) - lh + lh;
+    const sp = it.spur.map(k => AL[k][l + 1]); if (sp.length) { SH.wrap(W.spur[l](listJoin(sp, l)), false, size, w).forEach(t => { if (draw) P.text(t, x, y, size, false, ink); y += lh; }); }
+    y += 0.8;
+    const rows = [];
+    if (it.q) rows.push([(it.unit === 'ml' || it.unit === 'l' ? W.vol[l] : W.net[l]) + ': ', it.q + ' ' + it.unit, false]);
+    rows.push([(it.dt === 'use' ? W.use[l] : W.mhd[l]) + ': ', dmy(addDays(it.made, it.days)), true]);
+    if (STORE[it.store] && STORE[it.store][l + 1]) rows.push(['', STORE[it.store][l + 1], false]);
+    if (it.lot) rows.push(['L ', String(it.made).replace(/-/g, '').slice(2), false]);
+    if (it.price) rows.push([W.price[l] + ': ', 'CHF ' + (+it.price).toFixed(2), false]);
+    rows.forEach(([a, b, bold]) => { const lines = SH.wrap(a + b, bold, size, w); lines.forEach(t => { if (draw) P.text(t, x, y, size, bold, ink); y += lh; }); });
+    const me = [d.me.name, [d.me.addr, d.me.city].filter(Boolean).join(', ')].filter(Boolean).join(', ');
+    SH.wrap((me ? W.by[l] + ': ' + me + '. ' : '') + W.made[l] + '.', false, size * 0.92, w).forEach(t => { if (draw) P.text(t, x, y, size * 0.92, false, mut); y += lh * 0.95; });
+    if (it.nutri && it.nv.some(v => String(v).trim())) {
+      y += 0.6; if (draw) P.text(W.nut[l], x, y, size * 0.92, true, ink); y += lh * 0.95;
+      const nm = W.nrows[l], vals = [(it.nv[0] ? it.nv[0] + ' kJ / ' : '') + (it.nv[1] ? it.nv[1] + ' kcal' : ''), ...it.nv.slice(2).map(v => v ? v + ' g' : '')];
+      nm.forEach((n, i) => { if (!vals[i]) return; if (draw) { P.text(n, x + (/^(davon|dont|di cui)/.test(n) ? 2 : 0), y, size * 0.88, false, ink); P.text(vals[i], x + w, y, size * 0.88, false, ink, 'right'); P.line(x, y + 0.7, x + w, y + 0.7, '#BBBBBB', 0.12); } y += lh * 0.9; });
+    }
+    return y;
+  };
+  let s = sz.w > 80 ? 11 : 8; while (s > 3.6 && fit(s, false) > Y + sz.h - pad - 0.8) s -= 0.2;
+  if (draw) { fit(s, true); if (d.cut) P.rect(X, Y, sz.w, sz.h, null, '#BBBBBB', 2, true); if (!window.SVL_VIP) P.text('svoiludi.ch', X + sz.w - 2.2, Y + sz.h - 1.6, 3.4, false, '#9A9086', 'right'); }
+  return s;
+}
+function build(){
+  const d = D(), it = IT(d), sz = SIZES[d.size], C = SH.pal(!!d.bw), P = SH.page(210, 297, C); P.wm = false; P.credit = false; // этикетка должна легко читаться (LIV): без водяного знака, только маленькое «svoiludi.ch» в углу
+  const ox = (210 - sz.cols * sz.w) / 2, oy = (297 - sz.rows * sz.h) / 2;
+  for (let r = 0; r < sz.rows; r++) for (let c = 0; c < sz.cols; c++) label(P, d, it, ox + c * sz.w, oy + r * sz.h, sz, true);
+  return [P];
+}
+
+/* ---------- форма ---------- */
+const $ = id => document.getElementById(id);
+const esc = s => SH.esc(String(s == null ? '' : s));
+const qh = (h, l) => `<button type="button" class="qh" data-help="${h}" aria-label="Підказка: ${l}" aria-expanded="false">?</button>`;
+function renderForm(){
+  const d = D(), it = IT(d), dis = EX ? 'disabled' : '', alOpts = v => '<option value="">не алерген</option>' + Object.entries(AL).map(([k, a]) => `<option value="${k}"${k === v ? ' selected' : ''}>${esc(a[0])}</option>`).join('');
+  const s = label(SH.page(210, 297, SH.pal(false)), d, it, 0, 0, SIZES[d.size], false);
+  $('fields').innerHTML = `
+  <p class="hint" style="margin:0 0 10px">Перед продажем зареєструйся в кантональній лабораторії${qh('reg', 'реєстрація')}</p>
+  <section class="sec"><h2>Продукт</h2>
+    <div class="fl"><span class="lb">Мої продукти</span><div style="display:flex;gap:6px"><select id="cur" ${dis}>${d.items.map((x, i) => `<option value="${i}"${i === d.cur ? ' selected' : ''}>${esc(x.name || 'Без назви')}</option>`).join('')}</select><button type="button" class="btn ghost sm" id="addIt" ${dis}>+ продукт</button>${d.items.length > 1 ? `<button type="button" class="btn ghost sm" id="delIt" ${dis}>Видалити</button>` : ''}</div></div>
+    <div class="fl"><span class="lb">Назва мовою етикетки${qh('name', 'назва')}</span><input type="text" data-i="name" value="${esc(it.name)}" placeholder="Apfelkuchen" ${dis}></div>
+  </section>
+  <section class="sec"><h2>Склад${qh('zut', 'склад')}</h2>
+    ${it.zut.map((z, i) => `<div class="zr"><input type="text" data-z="${i}" data-f="t" value="${esc(z.t)}" placeholder="${i ? 'Zucker' : 'Weizenmehl'}" ${dis}><select data-z="${i}" data-f="a" ${dis}>${alOpts(z.a)}</select><button type="button" class="del" data-zdel="${i}" aria-label="Видалити" ${dis}>×</button></div>`).join('')}
+    <button type="button" class="btn ghost sm" id="addZ" ${dis}>+ інгредієнт</button>
+    <div class="fl" style="margin-top:10px"><span class="lb">Може містити сліди (за бажанням)${qh('allerg', 'алергени')}</span><div class="chk al">${Object.entries(AL).map(([k, a]) => `<label><input type="checkbox" data-spur="${k}" ${it.spur.includes(k) ? 'checked' : ''} ${dis}> <span>${esc(a[0].split(' (')[0])}</span></label>`).join('')}</div></div>
+  </section>
+  <section class="sec"><h2>Кількість, строк, зберігання</h2><div class="g2">
+    <div class="fl"><span class="lb">Вага або об’єм</span><div style="display:flex;gap:6px"><input type="number" min="0" step="1" data-i="q" value="${esc(it.q)}" placeholder="250" ${dis}><select data-i="unit" ${dis}>${['g', 'kg', 'ml', 'l'].map(u => `<option${u === it.unit ? ' selected' : ''}>${u}</option>`).join('')}</select></div></div>
+    <div class="fl"><span class="lb">Яка дата${qh('date', 'дата')}</span><select data-i="dt" ${dis}><option value="use"${it.dt === 'use' ? ' selected' : ''}>Спожити до (швидкопсувне)</option><option value="mhd"${it.dt === 'mhd' ? ' selected' : ''}>Найкраще спожити до</option></select></div>
+    <div class="fl"><span class="lb">Дата приготування</span><input type="date" data-i="made" value="${esc(it.made)}" ${dis}></div>
+    <div class="fl"><span class="lb">Скільки днів зберігається</span><input type="number" min="0" max="730" data-i="days" value="${esc(it.days)}" ${dis}></div>
+    <div class="fl"><span class="lb">Зберігання</span><select data-i="store" ${dis}>${Object.entries(STORE).map(([k, v]) => `<option value="${k}"${k === it.store ? ' selected' : ''}>${esc(v[0])}</option>`).join('')}</select></div>
+    <div class="fl"><span class="lb">Ціна, CHF (за бажанням)</span><input type="number" min="0" step="0.05" data-i="price" value="${esc(it.price)}" ${dis}></div></div>
+    <p class="hint">${it.dt === 'use' ? 'Спожити до' : 'Найкраще спожити до'}: <b>${dmy(addDays(it.made, it.days))}</b></p>
+    <label class="tog"><input type="checkbox" data-i="lot" ${it.lot ? 'checked' : ''} ${dis}> Номер партії<span>${qh('lot', 'номер партії')}</span></label>
+    <label class="tog"><input type="checkbox" data-i="nutri" ${it.nutri ? 'checked' : ''} ${dis}> Таблиця харчової цінності<span>${qh('nutri', 'харчова цінність')}</span></label>
+    ${it.nutri ? `<div class="g2">${['Енергія, kJ', 'Енергія, kcal', 'Жири, g', 'з них насичені, g', 'Вуглеводи, g', 'з них цукри, g', 'Білки, g', 'Сіль, g'].map((n, i) => `<div class="fl"><span class="lb">${n} на 100 g</span><input type="number" min="0" step="0.1" data-nv="${i}" value="${esc(it.nv[i])}" ${dis}></div>`).join('')}</div>` : ''}
+  </section>
+  <section class="sec"><h2>Хто зробив</h2><div class="g2">
+    <div class="fl"><span class="lb">Ім’я або назва</span><input type="text" data-me="name" value="${esc(d.me.name)}" ${dis}></div>
+    <div class="fl"><span class="lb">Вулиця і будинок</span><input type="text" data-me="addr" value="${esc(d.me.addr)}" ${dis}></div>
+    <div class="fl"><span class="lb">Індекс і місто</span><input type="text" data-me="city" value="${esc(d.me.city)}" ${dis}></div></div>
+    <p class="hint">Адреса обов’язкова: одного сайту чи QR-коду замало.</p>
+  </section>
+  ${s < 4.2 ? '<p class="chk-err">Текст вийшов дуже дрібним. Обери великі етикетки або скороти склад.</p>' : ''}`;
+}
+let UI, tmr;
+function fill(){ const d = D(); $('lang').value = d.lang; $('size').value = d.size; $('cut').checked = !!d.cut; $('bw').checked = !!d.bw; renderForm(); $('exbar').hidden = !EX; $('exOn').hidden = !!EX; if (UI) UI.render(); }
+const later = () => { clearTimeout(tmr); tmr = setTimeout(() => { UI && UI.render(); }, 450); };
+['lang', 'size'].forEach(k => $(k).addEventListener('change', e => { S[k] = e.target.value; if (EX) EX[k] = S[k]; save(); fill(); }));
+['cut', 'bw'].forEach(k => $(k).addEventListener('change', e => { S[k] = e.target.checked; if (EX) EX[k] = S[k]; save(); fill(); }));
+document.addEventListener('input', e => { const x = e.target; if (EX || !x.dataset) return; const it = IT(S);
+  if (x.dataset.i && x.type !== 'checkbox' && x.tagName !== 'SELECT') { it[x.dataset.i] = x.value; save(); later(); }
+  if (x.dataset.z && x.dataset.f === 't') { it.zut[+x.dataset.z].t = x.value; save(); later(); }
+  if (x.dataset.nv) { it.nv[+x.dataset.nv] = x.value; save(); later(); }
+  if (x.dataset.me) { S.me[x.dataset.me] = x.value; save(); later(); } });
+document.addEventListener('change', e => { const x = e.target; if (EX || !x.dataset) return; const it = IT(S);
+  if (x.id === 'cur') { S.cur = +x.value; save(); fill(); return; }
+  if (x.dataset.i && (x.type === 'checkbox' || x.tagName === 'SELECT' || x.type === 'date' || x.type === 'number')) { it[x.dataset.i] = x.type === 'checkbox' ? x.checked : x.value; save(); fill(); }
+  if (x.dataset.z && x.dataset.f === 'a') { it.zut[+x.dataset.z].a = x.value; save(); UI && UI.render(); }
+  if (x.dataset.spur) { it.spur = [...document.querySelectorAll('[data-spur]:checked')].map(i => i.dataset.spur); save(); UI && UI.render(); }
+  if (x.dataset.i === 'name') fill(); });
+document.addEventListener('click', e => { if (EX) return; const b = e.target.closest && e.target.closest('button'); if (!b) return; const it = IT(S);
+  if (b.id === 'addZ') { it.zut.push({t: '', a: ''}); save(); fill(); }
+  if (b.dataset.zdel) { it.zut.splice(+b.dataset.zdel, 1); if (!it.zut.length) it.zut.push({t: '', a: ''}); save(); fill(); }
+  if (b.id === 'addIt') { S.items.push(newItem()); S.cur = S.items.length - 1; save(); fill(); }
+  if (b.id === 'delIt') { S.items.splice(S.cur, 1); S.cur = 0; save(); fill(); } });
+const EXD = () => ({lang: 'de', size: S.size, cut: true, bw: S.bw, me: {name: 'Olena Kovalenko', addr: 'Musterstrasse 12', city: '8000 Zürich'}, cur: 0, items: [{name: 'Medovik – Honigtorte mit Sauerrahmcreme', zut: [{t: 'Weizenmehl', a: 'gluten'}, {t: 'Sauerrahm', a: 'milk'}, {t: 'Zucker', a: ''}, {t: 'Butter', a: 'milk'}, {t: 'Eier', a: 'egg'}, {t: 'Honig (3 %)', a: ''}, {t: 'Backpulver (Natriumhydrogencarbonat)', a: ''}],
+  spur: ['nuts'], q: '500', unit: 'g', dt: 'use', made: TODAY, days: 3, store: 'cool5', price: '18.50', lot: false, nutri: false, nv: ['', '', '', '', '', '', '', '']}]});
+$('exOn').addEventListener('click', () => { EX = EXD(); fill(); window.scrollTo({top: $('exbar').offsetTop - 12, behavior: 'smooth'}); });
+$('exOff').addEventListener('click', () => { EX = null; fill(); });
+if (/[?&]example\b/.test(location.search)) EX = EXD();
+UI = SH.mount({build, lang: () => D().lang, title: 'Etiketten', name: () => 'Etiketten-' + String(IT(D()).name || 'Produkt').replace(/[^\wÀ-ž-]+/g, '-').slice(0, 30)});
+fill();
+
+</script>
+<script src="/assets/help.uk.js"></script>
+<script src="/assets/backup.uk.js"></script>
+<script src="/assets/pdffan.uk.js" defer></script>
+<script src="/assets/share.uk.js" defer></script>
+<script src="/assets/samesite.js"></script>
+<!--i18n--><style>#langbar.langbar{position:fixed;bottom:14px;right:14px;z-index:60;display:flex;gap:2px;background:rgba(255,255,255,.92);border:1px solid rgba(0,0,0,.08);border-radius:999px;padding:3px;font:600 12px Manrope,system-ui,sans-serif;box-shadow:0 2px 8px rgba(0,0,0,.08)}#langbar.langbar a{color:#5d554d;padding:5px 9px;border-radius:999px;text-decoration:none;font:inherit;display:inline-block}#langbar.langbar a[aria-current="true"]{background:#2f2924;color:#fff}@media print{.langbar{display:none!important}}</style><div class="langbar" id="langbar" role="navigation" aria-label="Мова / Язык"><a href="/instrumenty/etiketka-eda/" hreflang="ru" data-lang="ru">RU</a><a href="/uk/instrumenty/etiketka-eda/" hreflang="uk" data-lang="uk" aria-current="true">UA</a></div><script>(function(){var b=document.getElementById('langbar');if(!b)return;b.addEventListener('click',function(e){var a=e.target.closest('a[data-lang]');if(a){try{localStorage.setItem('svoiludiLang',a.dataset.lang)}catch(x){}a.href=a.getAttribute('href').split('#')[0]+location.hash;}});})();</script><!--i18n--></body>
+</html>

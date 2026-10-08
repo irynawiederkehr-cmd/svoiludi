@@ -5,7 +5,7 @@ const { chromium } = require('playwright');
 const { spawn } = require('child_process');
 const path = require('path');
 const ROOT = path.resolve(__dirname, '..'); const PORT = 8898; const BASE = `http://localhost:${PORT}`;
-const PAGES = ['/', '/events/', '/kursy/', '/join/', '/opros/', '/badge/', '/instrumenty/', '/instrumenty/zarplata/', '/instrumenty/moj-den/', '/instrumenty/moj-god/', '/instrumenty/moi-emocii/', '/instrumenty/moj-budget/', '/instrumenty/uchet-vremeni/', '/instrumenty/chasy-po-klientam/', '/instrumenty/rezyume/', '/privacy/'];
+const PAGES = [...new Set([...require('fs').readFileSync(path.join(__dirname, 'pages.py'), 'utf8').split('OWN =')[0].matchAll(/\('[^']+', '([^']+)'\)/g)].map(m => m[1]))];   // все страницы из pages.py (09.10.2026)
 const OWN = /^\/(events|kursy|join|opros|badge|instrumenty)?\/?/;
 (async () => {
   const srv = spawn('python3', ['-m', 'http.server', String(PORT)], { cwd: ROOT, stdio: 'ignore' });

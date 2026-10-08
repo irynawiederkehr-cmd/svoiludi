@@ -3,7 +3,7 @@
    Проверено 08.10.2026: налоговые сроки — как в схеме «Как устроены налоги»; медстраховка — BAG; 3a — Swiss Life «Änderungen 2026»;
    виньетка — ch.ch; пермит B — кантон Санкт-Галлен (не позже 2 недель до конца срока); детские пособия — памятка AHV 6.08. Обновлять каждый год в январе. */
 (function(){
-  const SITE = 'https://svoiludi.ch/';
+  const SITE = 'https://svoiludi.ch/' + (document.documentElement.lang === 'uk' ? 'uk/' : '');   // украинская страница — ссылки на украинские статьи
   const p2 = n => String(n).padStart(2, '0');
   const iso = d => d.getFullYear() + '-' + p2(d.getMonth() + 1) + '-' + p2(d.getDate());
   const D = (y, m, d) => new Date(y, m - 1, d);

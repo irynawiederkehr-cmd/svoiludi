@@ -7,6 +7,7 @@
   const visible = s => s.status === 'активен' && s.photo && !(s.paidUntil && s.paidUntil < today);
   const city = a => (String(a).match(/\d{4}\s+(.+)$/) || [, a])[1];
   const root = document.body.dataset.root || '../../';
+  const lroot = document.documentElement.lang === 'uk' ? '/uk/' : root;   // ссылки на страницы: на украинской версии — в /uk/ (09.10.2026); картинки — по root
 
   const box = document.getElementById('sp');
   if (box) {
@@ -27,11 +28,11 @@
     const card = s => {
       const p = (s.places || [])[0];
       const where = s.online && !p ? 'онлайн' : p ? city(p.address) : '';
-      return '<a class="sp" href="' + root + '#' + encodeURIComponent(s.id) + '"><img src="' + root + 'img/' + esc(s.photo) + '" alt="" loading="lazy">' +
+      return '<a class="sp" href="' + lroot + '#' + encodeURIComponent(s.id) + '"><img src="' + root + 'img/' + esc(s.photo) + '" alt="" loading="lazy">' +
         '<span><b>' + esc(s.name) + (s.sample ? '<span class="smp">Образец</span>' : '') + '</b><small>' + esc(s.role) + (where ? ' · ' + esc(where) : '') + '</small></span></a>';
     };
     if (!order.length) {
-      list.innerHTML = '<p class="sp-none">Пока в справочнике нет специалиста по этой теме. Знаешь хорошего — <a href="' + root + 'join/">расскажи ему о «Своих людях»</a>.</p>';
+      list.innerHTML = '<p class="sp-none">Пока в справочнике нет специалиста по этой теме. Знаешь хорошего — <a href="' + lroot + 'join/">расскажи ему о «Своих людях»</a>.</p>';
     } else {
       let from = 0;
       const draw = () => {
@@ -137,7 +138,7 @@
     dlg.addEventListener('click', e => { if (e.target === dlg) dlg.close(); });
     med.forEach(box => {
       box.innerHTML = '<div class="kt-h"><b>Дежурный врач в твоём кантоне</b><select aria-label="Твой кантон">' + opts + '</select></div><div class="med-out"></div>' +
-        '<div class="med-btns"><button type="button" class="med-all">Все кантоны</button><a class="med-print" href="' + (document.body.dataset.root || '/') + 'instrumenty/ekstrennye-nomera/' + (/index\.html$/.test(location.pathname) ? 'index.html' : '') + '">Сделать карточку с номерами (PDF)</a></div>';
+        '<div class="med-btns"><button type="button" class="med-all">Все кантоны</button><a class="med-print" href="' + (document.documentElement.lang === 'uk' ? '/uk/' : (document.body.dataset.root || '/')) + 'instrumenty/ekstrennye-nomera/' + (/index\.html$/.test(location.pathname) ? 'index.html' : '') + '">Сделать карточку с номерами (PDF)</a></div>';
       const sel = box.querySelector('select'), out = box.querySelector('.med-out');
       const draw = () => { out.innerHTML = cur && M[cur] ? rows(cur) : '<p class="kt-hint">Выбери кантон, и здесь появится номер дежурного врача. Его набирают, когда свой врач не отвечает, а в скорую не нужно.</p>'; };
       sel.value = cur; draw();
