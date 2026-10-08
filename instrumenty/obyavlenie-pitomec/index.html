@@ -228,7 +228,8 @@ function build(){
     for (let i = 0; i < strips; i++) { const sx = X + i * sw; if (i) P.line(sx, top, sx, top + stripH, C.ink, 0.25, true);
       const nm = (found ? L.found : (d.name || kindL)), t1 = SH.wrap(nm, true, 7, sw - 3)[0] || '';
       P.text(t1, sx + sw / 2, top + 9, 7, true, C.ink, 'center'); P.text(d.tel || '', sx + sw / 2, top + 16, sw > 28 ? 8.4 : 7.4, true, C.ink, 'center'); P.text(kindL, sx + sw / 2, top + 22, 6.4, false, C.mut, 'center'); } }
-  P.creditY = 297 - 4; P.foot('');
+  /* без водяного знака: листовка висит в подъезде и магазинах (решение Ирины 08.10.2026); маленькая строка о сайте остаётся */
+  P.wm = false; P.creditY = 297 - 4; P.foot('');
   return [P];
 }
 const $ = id => document.getElementById(id);
