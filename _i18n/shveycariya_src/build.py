@@ -114,17 +114,18 @@ def hub():
     <div class="eyebrow">Как устроена Швейцария · Свои люди в Швейцарии</div>
     <h1 id="h1">Как здесь всё устроено, <em>простыми словами</em></h1>
     <p class="lead">Пермиты, налоги, долги, страховки, школа, работа и жильё. Коротко о главном по каждой теме, что сделать самой, какие инструменты помогут и кто из специалистов справочника разбирается в этом вопросе.</p>
-    <label class="tm-search"><input id="tmq" type="search" placeholder="Например, Betreibung, пермит B, Kita, 3a" aria-label="Поиск по темам"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg></label>
+    <label class="tm-search"><input id="tmq" type="search" placeholder="Одно слово: Betreibung, пермит B, Kita, 3a" aria-label="Поиск по темам"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg></label>
     <nav class="tm-mods" aria-label="Разделы тем">{mods}</nav>
   </section>
   <a class="tm-sos" href="../instrumenty/ekstrennye-nomera/"><span class="tfan" aria-hidden="true"><img src="../instrumenty/preview/ekstrennye-nomera/1.jpg" alt="" loading="lazy" style="--i:-0.5"><img src="../instrumenty/preview/ekstrennye-nomera/2.jpg" alt="" loading="lazy" style="--i:0.5"></span><span><b>Сохрани сразу: экстренные номера</b><span>144, 117, 118, 145, дежурный врач твоего кантона и твои контакты на одной карточке, на русском и языке кантона. Распечатай: в кошелёк, на холодильник, няне.</span><em>Бесплатно · PDF · сделать карточку →</em></span></a>
   <section class="tm-schemes" aria-labelledby="sch-h"><h2 id="sch-h">Схемы на одном листе</h2><p>Как всё устроено — на картинке, с твоими данными. Бесплатно, PDF и PNG.</p><div class="tm-sch">{SCHEMES}</div></section>
   {''.join(body)}
-  <p class="tm-empty" id="tmempty" hidden>Ничего не нашлось. Попробуй другое слово или спроси в боте.</p>
+  <p class="tm-empty" id="tmempty" hidden>Среди тем ничего не нашлось. Попробуй поиск по всему сайту (кнопка «Поиск» вверху) или напиши нам, о чём рассказать.</p>
   <section class="tm-ask" aria-labelledby="ask-h">
     <h2 id="ask-h">Не нашла свой вопрос?</h2>
-    <p style="max-width:64ch">Советы о жизни в Швейцарии можно получать и в Telegram, в бесплатном боте «Гайд по Швейцарии». А если нужен человек, который разберётся именно в твоей ситуации, выбери специалиста в справочнике.</p>
-    <span class="addbtns"><a class="btn" href="{BOT}">Открыть бот в Telegram</a><a class="btn ghost" href="../">Найти специалиста</a></span>
+    <p style="max-width:64ch">Сначала попробуй поиск по сайту. Кнопка «Поиск» есть вверху каждой страницы. Напиши одно слово по-русски или немецкое слово из письма, которое тебе пришло: «налоги», «залог», «Kita», «Betreibung», «AHV». Поиск ищет по всем темам, инструментам, специалистам и событиям.</p>
+    <p style="max-width:64ch">Ничего не нашлось — напиши нам, о чём рассказать. Мы подготовим статью и добавим её в этот раздел. Если нужен человек, который разберётся именно в твоей ситуации, выбери специалиста в справочнике. Советы о жизни в Швейцарии есть и в бесплатном Telegram-боте «Гайд по Швейцарии».</p>
+    <span class="addbtns"><button type="button" class="btn" onclick="var b=document.querySelector('.ss-btn');if(b)b.click()">Искать по сайту</button><a class="btn ghost" href="mailto:voznesenskaya.iryna@gmail.com?subject=%D0%A2%D0%B5%D0%BC%D0%B0%20%D0%B4%D0%BB%D1%8F%20%D1%81%D1%82%D0%B0%D1%82%D1%8C%D0%B8%20%D0%BD%D0%B0%20svoiludi.ch&amp;body=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%21%20%D0%AF%20%D0%BD%D0%B5%20%D0%BD%D0%B0%D1%88%D0%BB%D0%B0%20%D0%BD%D0%B0%20%D1%81%D0%B0%D0%B9%D1%82%D0%B5%20%D0%BE%D1%82%D0%B2%D0%B5%D1%82%D0%B0%20%D0%BD%D0%B0%20%D0%B2%D0%BE%D0%BF%D1%80%D0%BE%D1%81%3A%20">Предложить тему для статьи</a><a class="btn ghost" href="../">Найти специалиста</a><a class="btn ghost" href="{BOT}">Бот в Telegram</a></span>
   </section>
   {DISC}
   <div class="share-slot" data-url="{url}" data-lead="Перешли тем, кто недавно переехал. Сообщение уже готово." data-text="Привет! Тут простыми словами на русском, как устроена Швейцария: пермиты, налоги, долги, страховки, школа и жильё. К каждой теме ещё инструменты и специалисты. {url}"></div>
@@ -255,6 +256,7 @@ def article(t):
       {f'<div class="box"><h3>Ещё по теме</h3><div class="rel">{rel}</div></div>' if rel else ''}
     </aside>
     <div class="art-foot">
+      <p class="botlink">Не нашла ответа на свой вопрос? Нажми «Поиск» вверху страницы и напиши одно слово по-русски или немецкое слово из письма. Ничего не нашлось — <a href="mailto:voznesenskaya.iryna@gmail.com?subject=%D0%A2%D0%B5%D0%BC%D0%B0%20%D0%B4%D0%BB%D1%8F%20%D1%81%D1%82%D0%B0%D1%82%D1%8C%D0%B8%20%D0%BD%D0%B0%20svoiludi.ch&amp;body=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%21%20%D0%AF%20%D0%BD%D0%B5%20%D0%BD%D0%B0%D1%88%D0%BB%D0%B0%20%D0%BD%D0%B0%20%D1%81%D0%B0%D0%B9%D1%82%D0%B5%20%D0%BE%D1%82%D0%B2%D0%B5%D1%82%D0%B0%20%D0%BD%D0%B0%20%D0%B2%D0%BE%D0%BF%D1%80%D0%BE%D1%81%3A%20">напиши нам</a>, мы подготовим статью.</p>
       <p class="botlink">Хочешь получать советы о жизни в Швейцарии прямо в Telegram? Можно подписаться на бесплатный бот «Гайд по Швейцарии». <a href="{BOT}">Открыть бот →</a></p>
       <div class="src"><b>Источники</b> (проверено {UPD})<ol>{srcs}</ol></div>
     </div>
