@@ -219,3 +219,12 @@ nav.toc{display:block!important}
 .tbl table{border-collapse:collapse;width:100%;font-size:.9rem;min-width:420px}
 .tbl th,.tbl td{border-bottom:1px solid var(--line);padding:7px 8px;text-align:left;vertical-align:top}
 .tbl th{background:var(--soft,#F8F3EC);font-weight:700}
+/* Предупреждения (правило Ирины 09.10.2026): запрещено, только с разрешения, штраф, последствия для пермита — красный треугольник с «!», чтобы бросалось в глаза */
+.art-main .attn{position:relative}
+.art-main ul li.attn{list-style:none}
+.art-main p.attn{padding-left:30px}
+.art-main .attn::before{content:"";position:absolute;top:.12em;width:1.25em;height:1.12em;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 22'%3E%3Cpath d='M12 1.5 23 20.5H1z' fill='%23D32F2F' stroke='%23D32F2F' stroke-width='2' stroke-linejoin='round'/%3E%3Cpath d='M12 8v6.2' stroke='%23fff' stroke-width='2.6' stroke-linecap='round'/%3E%3Ccircle cx='12' cy='17.4' r='1.5' fill='%23fff'/%3E%3C/svg%3E") center/contain no-repeat}
+.art-main ul li.attn::before{left:-1.55em}
+.art-main ol li.attn::before{position:static;display:inline-block;vertical-align:-.18em;margin-right:6px}
+.art-main p.attn::before{left:0}
+
