@@ -23,6 +23,7 @@ PAGES = [('index.html', '/'), ('events/index.html', '/events/'), ('kursy/index.h
          ('instrumenty/diplomy-shema/index.html', '/instrumenty/diplomy-shema/'),
          ('instrumenty/dogovor-nyani/index.html', '/instrumenty/dogovor-nyani/'),
          ('instrumenty/dohody-rashody/index.html', '/instrumenty/dohody-rashody/'),
+         ('instrumenty/dogovor-arendy-obrazec/index.html', '/instrumenty/dogovor-arendy-obrazec/'),
          ('instrumenty/dosye-arendatora/index.html', '/instrumenty/dosye-arendatora/'),
          ('instrumenty/ekstrennye-nomera/index.html', '/instrumenty/ekstrennye-nomera/'),
          ('instrumenty/etiketka-eda/index.html', '/instrumenty/etiketka-eda/'),
