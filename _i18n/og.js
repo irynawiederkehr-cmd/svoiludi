@@ -55,6 +55,28 @@ const CARDS = [
     ru: { eb: EB.ru, title: 'Политика конфиденциальности', desc: 'Какие данные есть в справочнике и инструментах, где они хранятся и как их удалить.', chip: 'Простыми словами' },
     uk: { eb: EB.uk, title: 'Політика конфіденційності', desc: 'Які дані є в довіднику та інструментах, де вони зберігаються і як їх видалити.', chip: 'Простими словами' } },
 ];
+// «Устройство сайта» (09.10.2026): О проекте, Для специалистов, Что нового, Моя ситуация — данные из _i18n/struktura_src/data.py
+(function strukturaCards() {
+  const S = [
+    ['o-proekte', '.prose', ['О проекте «Свои люди»', 'Кто это делает, на что живёт проект и как мы проверяем специалистов.', 'Честно и открыто'], ['Про проєкт «Свої люди»', 'Хто це робить, на що живе проєкт і як ми перевіряємо фахівців.', 'Чесно й відкрито']],
+    ['dlya-specialistov', '.pro-grid', ['Для специалистов', 'Разместиться в справочнике, значок для сайта, вакансии и инструменты для своего дела.', 'В период запуска бесплатно'], ['Для фахівців', 'Розміститися в довіднику, значок для сайту, вакансії та інструменти для своєї справи.', 'У період запуску безкоштовно']],
+    ['novosti', '.nfeed', ['Что нового', 'Что изменилось в Швейцарии, сроки месяца и новое на сайте.', 'С официальными источниками'], ['Що нового', 'Що змінилося у Швейцарії, терміни місяця і нове на сайті.', 'З офіційними джерелами']],
+    ['situacii', '.sit-grid', ['Моя ситуация: с чего начать', 'Шаги по порядку, статьи, инструменты и специалисты для твоей ситуации.', '8 маршрутов · бесплатно'], ['Моя ситуація: з чого почати', 'Кроки по черзі, статті, інструменти та фахівці для твоєї ситуації.', '8 маршрутів · безкоштовно']],
+  ];
+  for (const [d, sel, ru, uk] of S) if (fs.existsSync(path.join(ROOT, d, 'index.html')))
+    CARDS.push({ out: `${d}/og-image`, url: `/${d}/`, sel, ru: { eb: EB.ru, title: ru[0], desc: ru[1], chip: ru[2] }, uk: { eb: EB.uk, title: uk[0], desc: uk[1], chip: uk[2] } });
+  const meta = (file, prop) => { if (!fs.existsSync(file)) return ''; const m = fs.readFileSync(file, 'utf8').match(new RegExp('property="og:' + prop + '" content="([^"]*)"')); return m ? m[1].replace(/&quot;/g, '"').replace(/&amp;/g, '&') : ''; };
+  const h1 = file => { const m = fs.readFileSync(file, 'utf8').match(/<h1 id="h1">([^<]+)<\/h1>/); return m ? m[1] : ''; };
+  const first = t => { const m = t.match(/^.{20,140}?[.!?](?=\s|$)/); return m ? m[0] : t.slice(0, 140); };
+  const dir = path.join(ROOT, 'situacii');
+  if (fs.existsSync(dir)) for (const d of fs.readdirSync(dir).sort()) {
+    const ru = path.join(dir, d, 'index.html'), uk = path.join(ROOT, 'uk/situacii', d, 'index.html');
+    if (!fs.existsSync(ru)) continue;
+    CARDS.push({ out: `situacii/${d}/og-image`, url: `/situacii/${d}/`, sel: '.todo',
+      ru: { eb: EB.ru + ' · МОЯ СИТУАЦИЯ', title: h1(ru), desc: first(meta(ru, 'description')), chip: 'По шагам · бесплатно' },
+      uk: { eb: EB.uk + ' · МОЯ СИТУАЦІЯ', title: fs.existsSync(uk) ? h1(uk) : h1(ru), desc: first(meta(uk, 'description')), chip: 'Покроково · безкоштовно' } });
+  }
+})();
 // Автоматические карточки (09.10.2026): все инструменты и статьи «Как устроена Швейцария», которых нет в списке выше.
 // Инструменты — веер страниц готового PDF (instrumenty/preview/<slug>, украинские — …/uk), статьи — снимок начала статьи.
 // Заголовок: у инструмента — og:title страницы без хвоста, у статьи — название темы; описание — первое предложение og:description.

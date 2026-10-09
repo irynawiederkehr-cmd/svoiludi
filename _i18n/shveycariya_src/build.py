@@ -8,6 +8,8 @@ from topics import MODULES, TOPICS, TOOLS, TABS
 # инструмент показываем, только если его страница есть в этой ветке (например, «Расчёт зарплаты» живёт в своей копии)
 HAS = lambda x: os.path.isfile(os.path.join('instrumenty', x, 'index.html'))
 from articles import ARTICLES
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'struktura_src'))
+import nav as _NAV
 
 UPD = '08.10.2026'
 BOT = 'https://t.me/swisscompass_bot'
@@ -60,6 +62,8 @@ def top(depth):
     if depth == 2:
         t = re.sub(r'href="\.\./', 'href="../../', t)
         t = t.replace('href="./" aria-current="page"', 'href="../" aria-current="page"')
+    # меню — общее для всего сайта (решение Ирины 09.10.2026), из _i18n/struktura_src/nav.py
+    t = _NAV.NAV.sub(lambda m: m.group(1) + _NAV.build('shveycariya/' + ('x/' if depth == 2 else '') + 'index.html') + '\n    </nav>', t, count=1)
     return t
 
 

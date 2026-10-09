@@ -23,8 +23,22 @@ PAGES = [
 ]
 if os.path.isfile('vakansii/index.html'):
     PAGES.insert(3, ('Вакансии', '/vakansii/', 'Ищу сотрудника, ищу партнёра — для членов сообщества', 'вакансии работа сотрудник партнёр'))
+# «Устройство сайта» (09.10.2026): новые разделы и «Моя ситуация»
+for f, row in [('novosti/index.html', ('Что нового', '/novosti/', 'Что изменилось в Швейцарии, сроки месяца и новое на сайте', 'новости что нового изменения сроки месяц подписка rss')),
+               ('dlya-specialistov/index.html', ('Для специалистов', '/dlya-specialistov/', 'Разместиться в справочнике, значок, вакансии и инструменты для своего дела', 'специалист разместиться значок вакансии своё дело')),
+               ('o-proekte/index.html', ('О проекте', '/o-proekte/', 'Кто делает «Свои люди», как мы проверяем специалистов', 'о проекте кто мы проверка контакты')),
+               ('situacii/index.html', ('Моя ситуация', '/situacii/', 'С чего начать: шаги по порядку для твоей ситуации', 'ситуация с чего начать по шагам'))]:
+    if os.path.isfile(f): PAGES.append(row)
 for t, u, d, k in PAGES:
     items.append({'g': 'Разделы', 't': t, 'u': u, 'd': d, 'k': k})
+sys.path.insert(0, os.path.join(ROOT, '_i18n', 'struktura_src'))
+try:
+    from data import SITUACII
+except ImportError:
+    SITUACII = []
+for s in SITUACII:
+    if os.path.isfile(f"situacii/{s['slug']}/index.html"):
+        items.append({'g': 'Моя ситуация', 't': s['title'], 'u': f"/situacii/{s['slug']}/", 'd': s['short'], 'k': strip(s['seo'])})
 
 MOD = {m[0]: m[1] for m in MODULES}
 for tp in TOPICS:

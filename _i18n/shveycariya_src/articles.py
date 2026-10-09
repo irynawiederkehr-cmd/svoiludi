@@ -5071,3 +5071,7 @@ ARTICLES['detskie-posobiya'] = dict(
     ],
     terms=[('Deutsch', 'Familienzulagen, Kinderzulage, Ausbildungszulage, Geburtszulage, Adoptionszulage, Familienausgleichskasse, Ausgleichskasse, Anmeldung Familienzulagen, Ausbildungsbestätigung, Differenzzahlung, Anspruchskonkurrenz, Nichterwerbstätige, Selbständigerwerbende, elterliche Sorge'), ('Français', 'allocations familiales, allocation pour enfant, allocation de formation professionnelle, allocation de naissance, caisse d’allocations familiales, attestation de formation, montant différentiel, concours de droits, personnes sans activité lucrative, indépendants, autorité parentale'), ('Italiano', 'assegni familiari, assegno per i figli, assegno di formazione, assegno di nascita, cassa di compensazione per assegni familiari, attestato di formazione, importo differenziale, persone senza attività lucrativa, indipendenti, autorità parentale'), ('English', 'family allowances, child allowance, education allowance, birth allowance, family compensation fund, proof of education, differential payment, non-employed persons, self-employed, parental authority')],
 )
+
+# Тема «Адаптация и самочувствие» (09.10.2026) — отдельный файл
+import articles_struktura as _AS
+_AS.add(ARTICLES)
