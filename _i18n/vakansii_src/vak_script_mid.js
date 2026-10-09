@@ -1,0 +1,80 @@
+/* ---------- подтверждение объявления автором (решение Ирины 07.10.2026) ----------
+   Объявления пока вносит Ирина. Автор (тот, кто ищет сотрудника или партнёра) получает ссылку
+   https://svoiludi.ch/vakansii/#ok=<id>.<key>, видит своё объявление, отмечает ВСЕ галочки и нажимает «Подтверждаю».
+   Открывается письмо с его адреса Ирине: текст объявления, дата и каждое подтверждённое условие (это и есть доказательство).
+   Письмо Ирина сохраняет (ярлык «🌿 Свои люди»), Claude ставит в данных confirm: { date, via, checks } — и объявление появляется на сайте.
+   Без подтверждения объявление на сайте не видно. */
+const CHECKS = {
+  staff: [
+    { id: 'real', t: 'Объявление настоящее, данные в нём верны. Я согласен на его публикацию на svoiludi.ch.' },
+    { id: 'resp', t: 'Я работодатель и сам отвечаю за содержание объявления, отбор кандидатов, условия работы и договор с работником. Проект «Свои люди» и его организаторы не участвуют в найме и не несут за него ответственности.' },
+    { id: 'legal', t: 'Работа будет оформлена официально и по законам Швейцарии, моего кантона и общины (Gemeinde): письменный трудовой договор, зарплата не ниже обязательного минимума (минимальная зарплата кантона или города и отраслевой договор GAV, если они действуют), взносы AHV/IV/EO/ALV, страхование от несчастных случаев (UVG), пенсионная касса (BVG) и налог у источника — когда они положены по закону. Для работы в частном доме (уборка, уход, помощь по хозяйству) — не ниже минимальной зарплаты по NAV Hauswirtschaft.' },
+    { id: 'permit', t: 'Я беру на работу только людей с правом работать в Швейцарии. Если нужно разрешение на работу, оно будет получено до начала работы. Работу человека со статусом S я зарегистрирую через EasyGov до первого рабочего дня.' },
+    { id: 'own', t: 'Работа находится в Швейцарии, и я ищу работника для своей фирмы или своего дома, а не для других работодателей. Если я агентство по подбору или временному персоналу, у меня есть разрешение по закону AVG, и оно указано в объявлении.' },
+    { id: 'rav', t: 'Обязанность сообщать вакансии в RAV (Stellenmeldepflicht) я проверил: моей профессии нет в списке, или я сообщил вакансию в RAV и 5 рабочих дней уже прошли.' },
+    { id: 'fair', t: 'В объявлении нет требований по полу, возрасту, происхождению, религии или семейному положению. Язык указан, только если он нужен для работы.' },
+    { id: 'free', t: 'Я понимаю, что размещение бесплатно и не является коммерческой услугой. С соискателей я не беру денег — ни за работу, ни за обучение, ни за оформление.' },
+    { id: 'term', t: 'Я знаю: объявление показывается 60 дней и в день окончания срока само исчезает с сайта, об этом придёт письмо на мой e-mail. Продление — отдельная договорённость: о нём я напишу Ирине до окончания срока. Адрес voznesenskaya.iryna@gmail.com я добавил в контакты и проверяю папку «Спам».' },
+    { id: 'remove', t: 'Если объявление не соответствует этим условиям или на него поступят жалобы, «Свои люди» вправе снять его.' }
+  ],
+  partner: [
+    { id: 'real', t: 'Объявление настоящее, данные в нём верны. Я согласен на его публикацию на svoiludi.ch.' },
+    { id: 'resp', t: 'Я сам отвечаю за содержание объявления, выбор партнёра, условия и договор о сотрудничестве. Проект «Свои люди» и его организаторы не участвуют в сотрудничестве и не несут за него ответственности.' },
+    { id: 'self', t: 'Это сотрудничество самостоятельных специалистов, не работа по найму. Если человек фактически будет работать у меня по найму (в моё время, по моим указаниям, за регулярную оплату), я оформлю это как трудовой договор.' },
+    { id: 'legal', t: 'Сотрудничество будет законным по правилам Швейцарии, моего кантона и общины (Gemeinde): у каждой стороны своя регистрация самозанятого, свои взносы AHV и налоги, нужные разрешения на профессию, а для аренды помещения — разрешение арендодателя и правила общины.' },
+    { id: 'fair', t: 'В объявлении нет требований по полу, возрасту, происхождению, религии или семейному положению.' },
+    { id: 'free', t: 'Я понимаю, что размещение бесплатно и не является коммерческой услугой.' },
+    { id: 'term', t: 'Я знаю: объявление показывается 60 дней и в день окончания срока само исчезает с сайта, об этом придёт письмо на мой e-mail. Продление — отдельная договорённость: о нём я напишу Ирине до окончания срока. Адрес voznesenskaya.iryna@gmail.com я добавил в контакты и проверяю папку «Спам».' },
+    { id: 'remove', t: 'Если объявление не соответствует этим условиям или на него поступят жалобы, «Свои люди» вправе снять его.' }
+  ]
+};
+const checksFor = v => CHECKS[v.kind] || CHECKS.staff;
+const okUrl = v => `https://svoiludi.ch/vakansii/#ok=${encodeURIComponent(v.id)}.${encodeURIComponent(v.key || '')}`;
+const mailto = (to, su, body) => `mailto:${to}?subject=${encodeURIComponent(su)}&body=${encodeURIComponent(body)}`;
+const gmail = (to, su, body) => `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(to)}&su=${encodeURIComponent(su)}&body=${encodeURIComponent(body)}`;
+const adText = v => [`${(KINDS[v.kind] || KINDS.staff).t}: ${v.title}`, `Где: ${where(v)}`, v.workload ? `Занятость: ${v.workload}` : '', v.start ? `С какого времени: ${v.start}` : '',
+  `Языки: ${(v.langs || []).join(', ')}`, `${v.kind === 'partner' ? 'О сотрудничестве' : 'О работе'}: ${v.about}`, v.offer ? `Что я предлагаю: ${v.offer}` : ''].filter(Boolean).join('\n');
+const askLetter = v => { const a = authorOf(v); return { su: 'Ваше объявление в «Своих людях в Швейцарии» — проверьте и подтвердите, пожалуйста',
+  body: `Здравствуйте${a ? ', ' + a.name : ''}!\n\nЯ подготовила ваше объявление для раздела «Вакансии и партнёрство» на сайте «Свои люди в Швейцарии». Размещение бесплатное. Пока объявление видите только вы.\n\nОткройте, пожалуйста, ссылку, проверьте текст и отметьте условия галочками. После вашего подтверждения объявление появится на сайте и в вашей карточке на 60 дней. В день окончания срока оно само исчезнет с сайта, и вам придёт письмо. Если нужно продлить — напишите мне до окончания срока.\n\nПожалуйста, добавьте мой адрес voznesenskaya.iryna@gmail.com в контакты и проверяйте папку «Спам», чтобы письма о вашем объявлении не потерялись.\n\n${okUrl(v)}\n\nЕсли нужно что-то исправить — ответьте на это письмо.\n\nИрина Вознесенская\nСвои люди в Швейцарии` }; };
+const confirmLetter = v => { const a = authorOf(v), d = fmtDate(today); return { su: `Подтверждаю объявление — ${v.title}`,
+  body: `Здравствуйте, Ирина!\n\n${d} я проверил(а) своё объявление для раздела «Вакансии и партнёрство» на сайте «Свои люди в Швейцарии» и подтверждаю его публикацию.\n\n${adText(v)}\n\nПодтверждаю каждое из условий:\n${checksFor(v).map(c => '☑ ' + c.t).join('\n')}\n\n${okUrl(v)}\n\n${a ? a.name + (a.firm ? ', ' + a.firm : '') : ''}` }; };
+const fixLetter = (v, text) => ({ su: `Исправления в объявление — ${v.title}`, body: `Здравствуйте, Ирина!\n\nВ моём объявлении, пожалуйста, исправьте:\n\n${text}\n\n${okUrl(v)}` });
+
+function confirmView(v){
+  const k = KINDS[v.kind] || KINDS.staff, a = authorOf(v), box = document.getElementById('qmCard');
+  box.style.setProperty('--lc', k.c); box.style.setProperty('--lf', `color-mix(in srgb,${k.c} 12%,var(--paper))`);
+  box.innerHTML = `<div class="qm-top"><div class="qm-head"><span class="ev-k" style="color:var(--brown)">Предпросмотр · видите только вы</span><span class="ev-k" style="color:${k.c}">${esc(k.t)} · ${esc(k.s)}</span><h2 class="qm-title" id="qmTitle">${esc(v.title)}</h2><span class="free-line">${FREE_NOTE}</span></div><button class="qm-close" type="button" aria-label="Закрыть">✕</button></div>
+    <div class="cf-view">
+      <p>Здравствуйте${a ? ', ' + esc(a.name) : ''}! Это ваше объявление для раздела «Вакансии и партнёрство». Проверьте текст и подтвердите условия. Пока вы не подтвердите, на сайте его никто не видит.</p>
+      <p class="cf-term">Объявление показывается 60 дней и само исчезнет с сайта ${esc(fmtDate(v.until || today))}, и вам придёт письмо на e-mail. Продлить можно, если написать Ирине до окончания срока. Добавьте адрес <b>voznesenskaya.iryna@gmail.com</b> в контакты и проверяйте папку «Спам».</p>
+      <div class="cf-ad"><pre>${esc(adText(v))}</pre></div>
+      <h4>Подтвердите, пожалуйста, каждое условие</h4>
+      <div class="checks" id="cfChecks">${checksFor(v).map(c => `<label><input type="checkbox" data-cf="${c.id}"> <span>${esc(c.t)}</span></label>`).join('')}</div>
+      <p class="free-line">${FREE_NOTE}</p>
+      <div class="acts"><button class="btn" type="button" id="cfSend" disabled>Подтверждаю — отправить письмо Ирине</button><button class="btn ghost" type="button" id="cfFixOpen">Нужно исправить</button></div>
+      <div class="cf-fix" id="cfFix" hidden><textarea id="cfFixText" rows="4" maxlength="1500" placeholder="Что исправить в объявлении"></textarea><div class="acts"><button class="btn" type="button" id="cfFixSend">Отправить исправления</button></div></div>
+      <p class="note" id="cfMsg" aria-live="polite">Откроется письмо в вашей почте с текстом объявления и всеми условиями. Отправьте его — это и есть подтверждение. Отмечено: <b id="cfN">0</b> из ${checksFor(v).length}.</p>
+    </div>`;
+  box.querySelector('.qm-close').onclick = () => qm.close();
+  const all = [...box.querySelectorAll('[data-cf]')], send = box.querySelector('#cfSend');
+  box.querySelector('#cfChecks').addEventListener('change', () => { const n = all.filter(c => c.checked).length; box.querySelector('#cfN').textContent = n; send.disabled = n !== all.length; });
+  send.onclick = () => { const L = confirmLetter(v); location.href = mailto(MAIL, L.su, L.body);
+    box.querySelector('#cfMsg').innerHTML = `Письмо открылось в вашей почте — отправьте его. Если не открылось: <a href="${esc(gmail(MAIL, L.su, L.body))}" ${ext}>открыть в Gmail</a> или напишите на ${esc(MAIL)}.`; };
+  box.querySelector('#cfFixOpen').onclick = () => { const f = box.querySelector('#cfFix'); f.hidden = !f.hidden; };
+  box.querySelector('#cfFixSend').onclick = () => { const t = box.querySelector('#cfFixText').value.trim(); if (!t) return; const L = fixLetter(v, t); location.href = mailto(MAIL, L.su, L.body); };
+  if (!qm.open) qm.showModal();
+}
+/* блок для Ирины (режим ?ira=1) в окне объявления */
+function adminBox(v, a){
+  const to = a && a.contacts && a.contacts.email, L = askLetter(v);
+  const st = confirmed(v) ? `подтверждено ${fmtDate(v.confirm.date)} (${esc(v.confirm.via || '')}) · видно на сайте` : 'ждёт подтверждения автора · на сайте не видно';
+  return `<div class="adm"><b>Для Ирины</b><span>Статус: ${st}</span>${confirmed(v) ? '' : `<div class="acts">${to ? `<a class="btn" href="${esc(mailto(to, L.su, L.body))}">Отправить на подтверждение</a><a class="btn ghost" href="${esc(gmail(to, L.su, L.body))}" ${ext}>То же в Gmail</a>` : ''}<button class="btn ghost" type="button" data-copyask>Скопировать для Telegram</button></div><span class="note">Ссылка для автора: ${esc(okUrl(v))}</span>`}</div>`;
+}
+document.getElementById('qmCard').addEventListener('click', async e => {
+  if (!e.target.closest('[data-copyask]') || !OPEN) return; const L = askLetter(OPEN);
+  toast((await copyText(L.body)) ? 'Текст со ссылкой скопирован — вставь его автору в Telegram или WhatsApp.' : 'Выдели текст ссылки и скопируй вручную.');
+});
+/* «Скопировать шаблон» для сообщения Ирине в Telegram (объявления принимаются через Telegram, решение Ирины 07.10.2026) */
+const TPL = 'Здравствуйте, Ирина! Хочу бесплатно разместить объявление в «Своих людях».\nИщу: сотрудника (работа по найму) / партнёра (сотрудничество самостоятельных)\nКого ищу:\nГде (кантон, город, можно ли удалённо):\nЗанятость и с какого времени:\nНужные языки:\nО работе или сотрудничестве:\nЧто я предлагаю:\nКак откликнуться (Telegram или e-mail):\nМоя карточка в справочнике:';
+document.getElementById('askCopy').addEventListener('click', async () => toast((await copyText(TPL)) ? 'Шаблон скопирован — вставь его в сообщение Ирине в Telegram.' : 'Не получилось скопировать. Напиши Ирине в Telegram: @IrynaNeuroCoach'));
+
