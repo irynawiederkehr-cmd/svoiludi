@@ -1,5 +1,5 @@
 """Одна и та же шапка на ВСЕХ страницах svoiludi.ch (замечание Ирины 09.10.2026: «на разных страницах меню сверху разное»).
-Логотип, меню из 7 пунктов в одном порядке, «Поиск» (ставит assets/sitesearch.js) и кнопка «Разместиться».
+Логотип, меню из 7 пунктов в одном порядке, «Поиск» (ставит assets/sitesearch.js) и кнопка «Подать заявку» (анкета специалиста на join/).
 Текущий раздел выделен (aria-current). У страниц без шапки (инструменты, политика) шапка вставляется сразу после <body>.
 Стили шапки — блок <style id="sl-top"> в <head> (ставит pwa.py вместе с блоком приложения), шапка всегда поверх
 содержимого страницы (z-index 40: раньше веер страниц инструментов наезжал на меню).
@@ -11,7 +11,7 @@ import re
 NAV = [('', 'Специалисты'), ('events/', 'События'), ('kursy/', 'Курсы'), ('shveycariya/', 'Как устроена Швейцария'),
        ('instrumenty/', 'Полезные инструменты'), ('join/', 'Как разместиться')]
 IRINA = ('https://voznesenskaya.ch/', 'Сайт Ирины')
-CTA = ('join/', 'Разместиться')
+CTA = ('join/', 'Подать заявку')   # кнопка в шапке (решение Ирины 09.10.2026: «Подать заявку» вместо «Разместиться»)
 
 MARK_SVG = None
 
@@ -77,6 +77,7 @@ CSS = ('<style id="sl-top">/* единая шапка svoiludi.ch (09.10.2026), 
        '@media (max-width:1100px){header.top{position:static}}'
        '@media (max-width:420px){header.top .page{padding-block:8px;gap:8px}header.top .mono{width:32px;height:32px}header.top .mark{gap:8px}'
        'header.top .mark b{font-size:1.06rem}header.top .mark small{display:none}header.top .navcta{font-size:.8rem;padding:6px 11px}}'
+       '@media (max-width:380px){header.top .page{gap:6px;padding-inline:14px}header.top .mark b{font-size:1rem}header.top .navcta{font-size:.74rem;padding:6px 8px}}'
        '@media print{header.top{display:none!important}}'
        '</style>')
 

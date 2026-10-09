@@ -3,7 +3,7 @@
    Файлы (стили, скрипты, шрифты, картинки): сразу из памяти, в фоне обновляются.
    Личные записи людей здесь не хранятся: они остаются в localStorage браузера, как раньше.
    При изменении этого файла поднять VERSION — старая память удалится. */
-const VERSION = 'v19-2026-10-09';
+const VERSION = 'v20-2026-10-09';
 const CACHE = 'svoiludi-' + VERSION;
 const CORE = ['/offline.html', '/assets/fonts.css', '/assets/pwa-app.js', '/fav/icon-192.png', '/fav/favicon.svg'];
 const MAX = 160;
@@ -50,5 +50,6 @@ self.addEventListener('fetch', e => {
   if (url.origin !== location.origin) return;                  // формы, таблицы, внешние сервисы — мимо
   if (url.pathname === '/sw.js') return;
   if (req.mode === 'navigate') { e.respondWith(page(req)); return; }
+  if (url.pathname.startsWith('/data/')) { e.respondWith(page(req)); return; }   // справочник, афиша, поиск, новости — всегда свежие, без сети из памяти (09.10.2026)
   if (/\.(css|js|woff2?|ttf|png|jpe?g|svg|webp|ico|json|webmanifest)$/i.test(url.pathname)) e.respondWith(file(req, e));
 });

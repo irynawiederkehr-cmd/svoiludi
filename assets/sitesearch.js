@@ -18,7 +18,7 @@
   var css = '.ss-btn{display:inline-flex;align-items:center;gap:6px;font:inherit;font-size:.9rem;font-weight:600;color:var(--ink,#2b2a26);background:var(--paper,#fffcf8);border:1.5px solid var(--line,#e4dccf);border-radius:999px;padding:7px 13px;cursor:pointer;line-height:1}'
     + '.ss-btn:hover{border-color:var(--brown,#6e4f3c)}.ss-btn svg{width:16px;height:16px;flex:none}'
     + '.ss-res .ss-none a{display:inline!important;padding:0!important;margin:0!important;border:0!important;background:none!important;box-shadow:none!important;min-height:0!important;text-decoration:underline;font-weight:700;color:var(--brown,#6e4f3c)}'
-    + '.ss-ov{position:fixed;inset:0;z-index:100;background:rgba(30,28,22,.42);display:flex;justify-content:center;align-items:flex-start;padding:max(12px,env(safe-area-inset-top)) 12px 12px}'
+    + '.ss-ov{position:fixed;inset:0;z-index:1000;background:rgba(30,28,22,.42);display:flex;justify-content:center;align-items:flex-start;padding:max(12px,env(safe-area-inset-top)) 12px 12px}'
     + '.ss-box{width:min(680px,100%);max-height:calc(100dvh - 24px);display:flex;flex-direction:column;background:var(--bg,#f4efe6);border-radius:22px;box-shadow:0 20px 60px -20px rgba(0,0,0,.5);overflow:hidden}'
     + '.ss-top{display:flex;gap:8px;align-items:center;padding:12px;border-bottom:1px solid var(--line,#e4dccf);background:var(--paper,#fffcf8)}'
     + '.ss-top input{flex:1;min-width:0;font:inherit;font-size:1.05rem;border:none;background:transparent;outline:none;padding:8px 6px;color:var(--ink,#2b2a26)}'
@@ -26,7 +26,7 @@
     + '.ss-res{overflow:auto;padding:6px 12px 14px}.ss-g{font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted,#7a7468);margin:12px 4px 6px}'
     + '.ss-res a{display:block;text-decoration:none;color:var(--ink,#2b2a26);background:var(--paper,#fffcf8);border:1px solid var(--line,#e4dccf);border-radius:14px;padding:10px 14px;margin-bottom:6px}'
     + '.ss-res a:hover,.ss-res a.on{border-color:var(--brown,#6e4f3c)}.ss-res b{display:block;font-size:.98rem}.ss-res span{display:block;font-size:.84rem;color:var(--muted,#7a7468);margin-top:2px}'
-    + '.ss-none,.ss-hint{color:var(--muted,#7a7468);font-size:.9rem;padding:12px 4px}.ss-res mark{background:#f3e3c2;color:inherit;border-radius:3px}';
+    + 'html.ss-open .pa-tabs,html.ss-open .pa-card{display:none!important}.ss-none,.ss-hint{color:var(--muted,#7a7468);font-size:.9rem;padding:12px 4px}.ss-res mark{background:#f3e3c2;color:inherit;border-radius:3px}';
   var st = document.createElement('style'); st.textContent = css; document.head.appendChild(st);
   var ICON = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M15.5 15.5L21 21" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>';
   function addButton(){
@@ -97,14 +97,15 @@
       var t; inp.addEventListener('input', function(){ clearTimeout(t); t = setTimeout(render, 120); });
       inp.addEventListener('keydown', function(e){
         var links = res.querySelectorAll('a');
-        if (e.key === 'Enter' && links.length){ e.preventDefault(); location.href = links[Math.min(sel, links.length - 1)].href; }
+        if (e.key === 'Enter'){ e.preventDefault(); if (links.length) location.href = links[Math.min(sel, links.length - 1)].href; else ensure().then(function(){ render(); setTimeout(function(){ var l = res.querySelectorAll('a'); if (l.length && !l[0].closest('.ss-none')) location.href = l[0].href; }, 60); }); }
         if ((e.key === 'ArrowDown' || e.key === 'ArrowUp') && links.length){ e.preventDefault(); links[sel] && links[sel].classList.remove('on'); sel = (sel + (e.key === 'ArrowDown' ? 1 : -1) + links.length) % links.length; links[sel].classList.add('on'); links[sel].scrollIntoView({block: 'nearest'}); }
       });
     }
-    ov.style.display = 'flex'; document.documentElement.style.overflow = 'hidden';
-    render(); setTimeout(function(){ inp.focus(); }, 30); ensure();
+    ov.style.display = 'flex'; document.documentElement.style.overflow = 'hidden'; document.documentElement.classList.add('ss-open');
+    try { inp.focus({preventScroll: true}); } catch (x) { inp.focus(); }   // сразу, в том же нажатии: иначе на iPhone в приложении клавиатура не открывается (09.10.2026)
+    render(); setTimeout(function(){ if (document.activeElement !== inp) inp.focus(); }, 30); ensure();
   }
-  function close(){ if (ov){ ov.style.display = 'none'; document.documentElement.style.overflow = ''; } }
+  function close(){ if (ov){ ov.style.display = 'none'; document.documentElement.style.overflow = ''; document.documentElement.classList.remove('ss-open'); } }
   document.addEventListener('keydown', function(e){
     if (e.key === 'Escape' && ov && ov.style.display !== 'none') close();
     if (e.key === '/' && !/input|textarea|select/i.test((e.target && e.target.tagName) || '') && !(e.target && e.target.isContentEditable)){ e.preventDefault(); open(); }

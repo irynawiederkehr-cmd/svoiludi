@@ -3455,7 +3455,6 @@ ARTICLES['kesb'] = dict(
   <li><a href="#kogda">Когда KESB вмешивается</a></li>
   <li><a href="#mery">Какие бывают меры</a></li>
   <li><a href="#prava">Твои права</a></li>
-  <li><a href="#druzhba">Как дружить с соседями: памятка хорошего соседа</a></li>
   <li><a href="#mify">Мифы</a></li>
   <li><a href="#opeka">Совместная опека неженатых родителей</a></li>
   <li><a href="#vorsorge">Доверенность на случай недееспособности</a></li>
@@ -3835,6 +3834,7 @@ ARTICLES['pravila-doma'] = dict(
   <li><a href="#prachechnaya">Общая прачечная</a></li>
   <li><a href="#muzyka">Музыка, дети, гриль</a></li>
   <li><a href="#zakon">Какой закон защищает и что будет за нарушения</a></li>
+  <li><a href="#druzhba">Как дружить с соседями: памятка хорошего соседа</a></li>
   <li><a href="#mify">Мифы</a></li>
   <li><a href="#shum">Если шумят соседи</a></li>
 </ul></nav>
