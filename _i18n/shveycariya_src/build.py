@@ -118,7 +118,7 @@ def hub():
     <nav class="tm-mods" aria-label="Разделы тем">{mods}</nav>
   </section>
   <a class="tm-sos" href="../instrumenty/ekstrennye-nomera/"><span class="tfan" aria-hidden="true"><img src="../instrumenty/preview/ekstrennye-nomera/1.jpg" alt="" loading="lazy" style="--i:-0.5"><img src="../instrumenty/preview/ekstrennye-nomera/2.jpg" alt="" loading="lazy" style="--i:0.5"></span><span><b>Сохрани сразу: экстренные номера</b><span>144, 117, 118, 145, дежурный врач твоего кантона и твои контакты на одной карточке, на русском и языке кантона. Распечатай: в кошелёк, на холодильник, няне.</span><em>Бесплатно · PDF · сделать карточку →</em></span></a>
-  <section class="tm-schemes" aria-labelledby="sch-h"><h2 id="sch-h">Схемы на одном листе</h2><p>Как всё устроено — на картинке, с твоими данными. Бесплатно, PDF и PNG.</p><div class="tm-sch">{SCHEMES}</div></section>
+  <section class="tm-schemes" aria-labelledby="sch-h"><h2 id="sch-h">Схемы на одном листе</h2><p>Как всё устроено — на картинке, с твоими данными. Бесплатно, PDF и PNG.</p><div class="tm-sch">{SCHEMES}</div><p style="margin:14px 0 0"><a class="more" href="../instrumenty/vse-fayly/">Все файлы и инструменты по темам: письма, договоры, схемы, расчёты →</a></p></section>
   {''.join(body)}
   <p class="tm-empty" id="tmempty" hidden>Среди тем ничего не нашлось. Попробуй поиск по всему сайту (кнопка «Поиск» вверху) или напиши нам, о чём рассказать.</p>
   <section class="tm-ask" aria-labelledby="ask-h">
@@ -250,7 +250,7 @@ def article(t):
       <section class="todo" aria-labelledby="todo-h"><h2 id="todo-h">Что сделать</h2><ol>{steps}</ol></section>
     </article>
     <aside class="side" aria-label="Что поможет">
-      {f'<div class="box"><h3>Инструменты</h3>{tools}{tabs}</div>' if tools or tabs else ''}
+      {f'<div class="box"><h3>Инструменты</h3>{tools}{tabs}<a class="more" href="../../instrumenty/vse-fayly/">Все файлы и инструменты по темам →</a></div>' if tools or tabs else ''}
       <div class="box" id="sp" data-help="{helpj}"><h3>Кто поможет</h3><p class="note" style="margin:0">{profs}</p><div class="sp-list"></div><a class="more" href="../../">Все специалисты →</a>
         <p class="note">Специалисты сами отвечают за свои услуги. Проверка у всех одинаковая, <a href="../../join/">как мы проверяем</a>.</p></div>
       {f'<div class="box"><h3>Ещё по теме</h3><div class="rel">{rel}</div></div>' if rel else ''}

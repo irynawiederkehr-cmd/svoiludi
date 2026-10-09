@@ -135,6 +135,7 @@ TOPICS = [
     T('priroda', 'life', '7.2.6', 'Горы, хайкинг и безопасность', 'Как ходить в горы без риска и кто спасает.', ['plan-pohoda', 'ekstrennye-nomera'], [], ['events'], ready=True),
     T('rybalka-griby-ohota', 'life', '', 'Рыбалка, грибы, ягоды и охота', 'Какое разрешение нужно, сколько грибов можно собрать и что нельзя рвать.', ['plan-pohoda', 'ekstrennye-nomera'], [], ['events'], ready=True),
     T('drony-video', 'life', '', 'Дроны, фото и видео: что можно снимать', 'Дрон по правилам BAZL, съёмка людей на улице, камера у дома и что делать, если снимают тебя.', ['strahovki-obyazatelnye', 'srok-pisma', 'kuda-obratitsya', 'ekstrennye-nomera'], [('law', ['Медиация'])], ready=True),
+    T('voskresenye', 'life', '', 'Что открыто в воскресенье и в праздники', 'Почему магазины закрыты, где купить продукты в воскресенье, дежурная аптека и врач.', ['ekstrennye-nomera', 'srok-pisma', 'sroki-goda', 'moj-god', 'uchet-vremeni'], [('law', ['Трудовое право'])], ready=True),
     T('tamozhnya', 'life', '7.3', 'Таможня и посылки', 'Лимиты, НДС, пошлины и что нельзя ввозить.', ['tamozhnya-limity'], [('home', ['Международный переезд и таможня'])], ready=True),
     T('prava-pokupatelya', 'life', '7.4', 'Права покупателя', 'Гарантия, возврат, подписки и Abofallen.', ['pisma-prodavcu', 'kuda-obratitsya', 'srok-pisma'], [('law', ['Права потребителей'])], ready=True),
 ]

@@ -3925,7 +3925,7 @@ ARTICLES['pravila-doma'] = dict(
     ],
     pomosh=dict(ids=['mv', 'schlicht', 'gemeinde'], t='В спорах с соседями и управляющей помогут союз арендаторов и бесплатный примирительный орган.'),
     tools={'obyavleniya-sosedyam': 'Предупреди соседей о празднике или ремонте заранее — готовый вежливый лист на языке кантона, плакат с контактами дома и памятка хорошего соседа.', 'grafik-prachechnoj': 'Собери график прачечной и уборки подъезда для своего дома: дни, смены, квартиры, правила и время тишины на языке кантона.', 'zhurnal-shuma': 'Шумят соседи — записывай каждый раз и отправь управляющей таблицу на языке кантона.', 'pisma-arenda': 'Шум как дефект квартиры — письмо управляющей на языке кантона, отправляй заказным.', 'ekstrennye-nomera': 'Карточка с номерами полиции 117, пожарных 118, скорой помощи 144 и дежурного врача твоего кантона. Повесь её у двери или на холодильник.', 'musor-pamyatka': 'Что куда выбрасывать и дни вывоза твоей общины — памятка на холодильник.', 'kuda-obratitsya': 'Если спор с соседями или управляющей не решается, здесь найдёшь союз арендаторов своего кантона и его условия.'},
-    related=['dogovor-arendy', 'arenda', 'musor', 'gemeinde'],
+    related=['dogovor-arendy', 'arenda', 'musor', 'gemeinde', 'voskresenye'],
     sources=[
         ('Гражданский кодекс (ZGB), ст. 684 — помехи между соседями', 'https://www.fedlex.admin.ch/eli/cc/24/233_245_233/de#art_684'),
         ('Обязательственное право (OR), ст. 257f — бережность и уважение к соседям', 'https://www.fedlex.admin.ch/eli/cc/27/317_321_377/de#art_257_f'),
@@ -5408,3 +5408,157 @@ ARTICLES['drony-video'] = dict(
 
 # T('drony-video', 'life', '', 'Дроны, фото и видео: что можно снимать', 'Дрон по правилам BAZL, съёмка людей на улице, камера у дома и что делать, если снимают тебя.', ['strahovki-obyazatelnye', 'srok-pisma', 'kuda-obratitsya', 'ekstrennye-nomera'], [('law', ['Аренда', 'Медиация'])], ready=True),
 
+
+# ===== Что открыто в воскресенье и в праздники (09.10.2026). Факты сверены 09.10.2026: SECO (FAQ о воскресной торговле,
+# Wegleitung к ArG ст. 19, 20a, 27 и к ArGV 2 ст. 26a, приложение 3.1 со списком вокзалов), кантоны ZH, BE, GE, TI, VD,
+# община Кёниц, law.ch, Beobachter, SRF 06.03.2021, Blick 14.06.2026, Moneycab 09.06.2026, plattformJ 21.07.2026.
+#
+# Предложение для topics.py (раздел «7. Семья и быт»):
+# T('voskresenye', 'life', '', 'Что открыто в воскресенье и в праздники', 'Почему магазины закрыты, где купить продукты в воскресенье, дежурная аптека и врач.', ['ekstrennye-nomera', 'srok-pisma', 'sroki-goda', 'moj-god', 'uchet-vremeni'], [('law', ['Трудовое право'])], ready=True),
+
+ARTICLES['voskresenye'] = dict(
+    h1='Что открыто в воскресенье и в праздники: <em>магазины, аптеки, врач и работа в выходной</em>',
+    seo='Что открыто в воскресенье в Швейцарии: магазины на вокзалах, дежурная аптека (Notfallapotheke), праздники, Sonntagsverkauf',
+    desc='Что открыто в воскресенье и в праздники в Швейцарии простыми словами на русском: почему по воскресеньям почти все магазины закрыты (запрет воскресной работы в законе о труде ArG и законы кантонов о часах работы магазинов), как это устроено в Цюрихе, Берне, Женеве и Тичино, где купить продукты в воскресенье (магазины на крупных вокзалах и в аэропортах, магазины при заправках у трасс, киоски, пекарни, туристические места), воскресные продажи перед Рождеством, дежурная аптека и дежурный врач ночью и в выходные (Ärztefon 0800 33 66 55 в Цюрихе, MEDPHONE в Берне, 0848 133 133 в Во), когда звонить 144, праздники: федеральный только 1 августа, остальные назначает кантон, выходной на православное Рождество и Пасху, воскресный покой дома, работа в воскресенье: надбавка 50 % и твоё согласие. По-немецки Sonntagsarbeit, Ladenöffnungszeiten, Sonntagsverkauf, Notfallapotheke, Feiertag, по-французски travail du dimanche, heures d’ouverture des magasins, ouverture dominicale, pharmacie de garde, jour férié, по-итальянски lavoro domenicale, orari di apertura dei negozi, apertura domenicale, farmacia di turno, giorno festivo.',
+    lead='В первое воскресенье в Швейцарии многие удивляются: супермаркеты закрыты, на улицах тихо. Так задумано законом. Здесь — почему так, где всё-таки купить продукты и лекарства в воскресенье и в праздник, куда звонить, если заболела ночью или в выходной, и что нужно знать, если работаешь по воскресеньям.',
+    body='''
+<nav class="toc" aria-label="Содержание"><b>В этой статье</b>
+<ul>
+  <li><a href="#pochemu">Почему в воскресенье почти всё закрыто</a></li>
+  <li><a href="#kantony">Часы работы магазинов в разных кантонах</a></li>
+  <li><a href="#otkryto">Что открыто в воскресенье</a></li>
+  <li><a href="#rasprodazhi">Воскресные продажи перед Рождеством</a></li>
+  <li><a href="#apteka">Аптека и врач ночью и в выходные</a></li>
+  <li><a href="#prazdniki">Праздники</a></li>
+  <li><a href="#pokoj">Воскресный покой дома</a></li>
+  <li><a href="#rabota">Если ты работаешь в воскресенье</a></li>
+  <li><a href="#sovety">Советы на первые недели</a></li>
+</ul></nav>
+
+<h2 id="pochemu">Почему в воскресенье почти всё закрыто</h2>
+<p>Это решают два разных закона. Первый — федеральный закон о труде (<a href="https://www.fedlex.admin.ch/eli/cc/1966/57_57_57/de#art_18">Arbeitsgesetz, ArG</a>). Он защищает работников. Второй — закон твоего кантона о часах работы магазинов (Ladenöffnungsgesetz или Ruhetagsgesetz). Он защищает общий покой в выходной. Поэтому часы работы магазинов в каждом кантоне свои (<a href="https://www.seco.admin.ch/de/faq-ladenoeffnung-sonntag">SECO — вопросы о воскресной торговле</a>).</p>
+<ul class="ul">
+  <li class="attn"><b>Запрет воскресной работы.</b> <i class="wi"></i>С субботы 23:00 до воскресенья 23:00 работодатель не вправе ставить работников на работу (<a href="https://www.fedlex.admin.ch/eli/cc/1966/57_57_57/de#art_18">ArG ст. 18</a>). Исключение возможно только с разрешением властей. Постоянную воскресную работу разрешает федеральное ведомство по экономике SECO (Staatssekretariat für Wirtschaft), разовую — кантон (<a href="https://www.fedlex.admin.ch/eli/cc/1966/57_57_57/de#art_19">ArG ст. 19</a>). SECO даёт такие разрешения очень осторожно, строже, чем для ночной работы (<a href="https://www.seco.admin.ch/dam/de/sd-web/HSByjDiBvMb-/ArG-Artikel-19-SECO-AB-2012-DE.pdf">SECO — пояснения к ст. 19</a>).</li>
+  <li><b>Кого запрет касается.</b> Он касается работников. Поэтому супермаркету с продавцами нужно разрешение, а небольшой лавке, где хозяин стоит за прилавком сам, закон о труде не мешает. Тогда остаётся только закон кантона о магазинах.</li>
+  <li><b>Особые отрасли.</b> Для ряда отраслей в постановлении к закону о труде есть особые правила (<a href="https://www.seco.admin.ch/de/wegleitung-argv-2">ArGV 2</a>, Verordnung 2 zum Arbeitsgesetz). Это больницы, аптеки, рестораны и кафе, музеи, спортивные и развлекательные учреждения, зоопарки, подъёмники в горах, киоски, пекарни, цветочные магазины, магазины на вокзалах и при заправках. Поэтому они могут работать и по воскресеньям.</li>
+  <li class="attn"><b>Если у тебя свой магазин или салон.</b> <i class="wi"></i>Прежде чем открываться в воскресенье, проверь закон своего кантона и спроси общину. Например, в Берне за повторные нарушения часов работы магазин могут закрыть до трёх месяцев (<a href="https://www.lexfind.ch/tolv/100052/de">закон Берна о торговле, HGG ст. 14</a>). <i class="wi"></i>Если ты нанимаешь людей, для воскресной работы нужно ещё разрешение по закону о труде.</li>
+</ul>
+
+<h2 id="kantony">Часы работы магазинов в разных кантонах</h2>
+<p>Вот как это устроено в четырёх кантонах. Правила своего кантона найдёшь на его сайте по словам «Ladenöffnungszeiten», «heures d’ouverture des magasins» или «apertura dei negozi».</p>
+<ul class="ul">
+  <li><b>Цюрих.</b> С понедельника по субботу магазины по закону кантона могут работать без ограничения по времени. Работники же с 23:00 до 6:00 обычно работать не могут, поэтому часы выбирает сам магазин. В воскресенье и в праздники (öffentliche Ruhetage) магазины закрыты. Открытыми могут быть магазины в центрах общественного транспорта, аптеки, молочные магазины, пекарни, цветочные магазины, киоски и маленькие магазины (<a href="https://www.zh.ch/de/wirtschaft-arbeit/arbeitsbedingungen/arbeitsssicherheit-gesundheitsschutz/arbeits-ruhezeiten/ladenoeffnung-ruhetage.html">кантон Цюрих — часы работы магазинов</a>).</li>
+  <li><b>Берн.</b> С понедельника по пятницу магазины работают с 6:00 до 20:00, один вечер в неделю — до 22:00. В субботу и накануне праздника — только до 17:00. В воскресенье и праздники с 6:00 до 18:00 могут работать пекарни, кондитерские, мясные и молочные лавки, продуктовые магазины площадью до 120 м² и цветочные магазины. Магазины при заправках площадью до 120 м² и киоски работают каждый день до 22:00 (<a href="https://www.lexfind.ch/tolv/100052/de">HGG ст. 10–11</a>).</li>
+  <li><b>Женева.</b> Обычно магазины закрываются в 19:00, в пятницу — в 19:30, в субботу — в 18:00. Один вечер в неделю можно работать до 21:00. В воскресенье и праздники магазины закрыты. Пекарни и кондитерские в субботу и воскресенье могут работать до 19:00 (<a href="https://silgeneve.ch/legis/data/rsg_i1_05.htm">закон Женевы о часах работы магазинов, LHOM</a>).</li>
+  <li><b>Тичино.</b> С понедельника по пятницу магазины работают с 6:00 до 19:00, в четверг — до 21:00, в субботу — до 18:30. В воскресенье и в официальные праздники магазины закрыты. Пекарни, кондитерские, кафе-мороженое и цветочные магазины могут работать с 6:00 до 18:00. Киоски до 50 м², еда навынос, заправки и маленькие магазины для путешественников при заправках — с 6:00 до 22:30 (<a href="https://www4.ti.ch/fileadmin/DFE/DE-UIL/negozi/LAN.pdf">закон Тичино о магазинах, LAN ст. 8–14</a>).</li>
+  <li>Твой кантон может жить по совсем другим правилам. Посмотри блок «Твой кантон» на этой странице. Там часы работы магазинов и дежурные службы именно там, где ты живёшь.</li>
+</ul>
+
+<h2 id="otkryto">Что открыто в воскресенье</h2>
+<ul class="ul">
+  <li><b>Магазины на крупных вокзалах и в аэропортах.</b> По федеральному закону они могут работать по воскресеньям с продавцами, причём с любым ассортиментом и любой площадью (<a href="https://www.seco.admin.ch/dam/de/sd-web/kS2FXdUtKVdl/ArGV2-Artikel-26a-SECO-AB-2013-DE.pdf">SECO — пояснения к ArGV 2 ст. 26a</a>). Список таких вокзалов утверждает федеральный департамент экономики. Среди них Цюрих HB, Цюрих Эрликон, Цюрих Штадельхофен, Берн, Базель SBB, Женева, Лозанна, Люцерн, Лугано, Беллинцона, Винтертур, Санкт-Галлен, Цуг, Фрибур, Невшатель, Биль, Тун, Шур, Ольтен, Аарау и Сьон. Из аэропортов это Цюрих, Женева, Берн-Бельп и Лугано-Аньо (<a href="https://www.seco.admin.ch/dam/de/sd-web/N9Pw3nXWqYP5/ArGV2-Anhang3-1-Bahnhoefe-SECO-AB-2015-DE.pdf">SECO — список вокзалов и аэропортов</a>). Поэтому в воскресенье за продуктами едут на ближайший большой вокзал.</li>
+  <li><b>Как узнать часы.</b> На сайте железных дорог SBB есть <a href="https://www.sbb.ch/de/bahnhof-services/bahnhoefe.html">страницы вокзалов</a>. У каждого вокзала есть список магазинов (Geschäfte) с часами работы на каждый день недели.</li>
+  <li><b>Киоски и магазины для путешественников.</b> Киоски на улицах и площадях можно открывать и в воскресенье. Ещё можно магазинам для путешественников с небольшим ассортиментом на вокзалах, в аэропортах, на автостанциях и в приграничных местах (<a href="https://www.seco.admin.ch/de/faq-ladenoeffnung-sonntag">SECO</a>).</li>
+  <li><b>Магазины при заправках.</b> По федеральному закону с продавцами по воскресеньям и ночью могут работать только магазины при заправках на стоянках автобанов и на главных дорогах с сильным потоком путешественников. Товары там должны быть прежде всего для путешественников (<a href="https://www.seco.admin.ch/dam/de/sd-web/Nttd3hBThA1U/ArG-Artikel-27-SECO-AB-2014-DE.pdf">SECO — пояснения к ArG ст. 27</a>). Часы и площадь ещё ограничивает кантон. В Берне такой магазин может быть открыт до 22:00, в Тичино — до 22:30.</li>
+  <li><b>Пекарни и цветочные магазины.</b> Пекарня может работать в воскресенье, если продаёт в основном то, что печёт сама (<a href="https://www.seco.admin.ch/de/faq-ladenoeffnung-sonntag">SECO</a>). Часы назначает кантон. В Берне и Тичино это с 6:00 до 18:00, в Женеве — до 19:00.</li>
+  <li><b>Рестораны, музеи, бассейны, транспорт.</b> Рестораны и кафе, музеи, бассейны и спортивные центры, зоопарки и горные подъёмники по воскресеньям обычно открыты. Поезда, автобусы и трамваи ходят и в воскресенье. Расписание в выходной и в праздник бывает другим, поэтому перед поездкой проверь его в приложении SBB или на сайте своего транспорта.</li>
+  <li><b>Туристические места.</b> В местах, которые живут туризмом, закон о труде разрешает обслуживать покупателей в сезон и по воскресеньям (<a href="https://www.seco.admin.ch/de/faq-ladenoeffnung-sonntag">SECO</a>). Например, в кантоне Берн такие общины перечислены в постановлении кантона. Среди них Интерлакен, Гриндельвальд, Лаутербруннен, Адельбоден, Кандерштег и Занен (Гштаад). Магазины там могут работать каждый день с 6:00 до 22:30 (<a href="https://be.lexwork.naz.ch/de/dta/930.11.pdf">постановление Берна о торговле, ст. 5</a>; <a href="https://www.lexfind.ch/tolv/100052/de">HGG ст. 12</a>). Это разрешение, а не обязанность, и каждый магазин сам решает, открываться ли.</li>
+</ul>
+
+<h2 id="rasprodazhi">Воскресные продажи перед Рождеством</h2>
+<p>Иногда открыты все магазины города. Это воскресные продажи (Sonntagsverkäufe, ouvertures dominicales, aperture domenicali). Чаще всего их устраивают в декабре, в воскресенья перед Рождеством.</p>
+<ul class="ul">
+  <li><b>Сколько.</b> По федеральному закону кантон может назначить не больше четырёх воскресений в год, когда продавцы работают без отдельного разрешения (<a href="https://www.fedlex.admin.ch/eli/cc/1966/57_57_57/de#art_19">ArG ст. 19 абз. 6</a>). Даты назначают для всего кантона или общины, а не каждый магазин сам. Многие кантоны берут меньше четырёх.</li>
+  <li><b>Цюрих.</b> Община может назначить до четырёх таких воскресений, одинаковых для всей общины (<a href="https://www.zh.ch/de/wirtschaft-arbeit/arbeitsbedingungen/arbeitsssicherheit-gesundheitsschutz/arbeits-ruhezeiten/ladenoeffnung-ruhetage.html">кантон Цюрих</a>).</li>
+  <li><b>Берн.</b> Все магазины могут открываться только в два воскресенья или праздника в год, с 10:00 до 18:00 (<a href="https://www.lexfind.ch/tolv/100052/de">HGG ст. 11</a>). В марте 2021 года жители кантона отказались увеличить их число до четырёх (<a href="https://www.srf.ch/news/abstimmungen/abstimmung-kanton-bern-es-bleibt-bei-zwei-sonntagsverkaeufen-im-kanton-bern">SRF</a>).</li>
+  <li><b>Женева.</b> С 4 июля 2026 года магазины могут открываться в два воскресенья в год и 31 декабря, до 17:00. Работать в эти дни продавцы могут только по желанию и получают двойную оплату. Так решили жители кантона на голосовании 14 июня 2026 года (<a href="https://silgeneve.ch/legis/data/rsg_i1_05.htm">LHOM</a>; <a href="https://www.blick.ch/fr/suisse/votations-suisses/votations-du-14-juin-geneve-accepterait-louverture-des-magasins-deux-dimanches-par-an-id22028133.html">Blick</a>).</li>
+  <li><b>Тичино.</b> В воскресенья перед Рождеством, после 8 декабря, магазины могут работать с 10:00 до 18:00. Открыть все магазины кантон может не больше чем в три воскресенья в год, даты объявляет сам (<a href="https://www4.ti.ch/fileadmin/DFE/DE-UIL/negozi/LAN.pdf">LAN ст. 13</a>).</li>
+  <li><b>Что обсуждают.</b> Кантон Цюрих предложил разрешить до 12 воскресных продаж в год. 9 июня 2026 года Совет кантонов (Ständerat) отказался это рассматривать, теперь решает Национальный совет. Пока остаётся не больше четырёх (<a href="https://www.moneycab.com/schweiz/staenderat-will-keine-zusaetzlichen-sonntagsverkaeufe/amp/">Moneycab</a>).</li>
+  <li>Даты воскресных продаж своего города ищи на сайте общины или в местной газете.</li>
+</ul>
+
+<h2 id="apteka">Аптека и врач ночью и в выходные</h2>
+<ul class="ul">
+  <li><b>Дежурная аптека</b> (Notfallapotheke, pharmacie de garde, farmacia di turno). Ночью, в воскресенье и в праздники в регионе дежурят отдельные аптеки. Какая аптека дежурит сегодня, подскажут дежурные номера кантона ниже.</li>
+  <li><b>Кантон Цюрих.</b> Звони в <b>Ärztefon по номеру 0800 33 66 55</b>. Это бесплатно, круглосуточно и все 365 дней в году. Там помогут, если тебе плохо, но угрозы жизни нет, и подскажут дежурного врача, стоматолога или аптеку. Номер аптек Цюриха для советов и срочных случаев — 0900 55 35 55, он платный: 1.50 франка в минуту (<a href="https://www.zh.ch/de/gesundheit/notfall-rettung.html">кантон Цюрих — неотложная помощь</a>).</li>
+  <li><b>Кантон Берн.</b> Дежурный врач — <b>MEDPHONE по номеру 0900 57 67 47</b>. Номер платный, цена минуты — на сайте Medphone (<a href="https://www.koeniz.ch/wohnen/sicherheit/notfaelle.page/246/print/pdf">община Кёниц — экстренные номера</a>). В июле 2026 года у Medphone сменился главный владелец. Служба работает дальше круглосуточно, номер остаётся прежним (<a href="https://www.plattformj.ch/artikel/244988/">plattformJ, 21.07.2026</a>).</li>
+  <li><b>Кантон Во.</b> Центральная служба дежурных врачей (Centrale téléphonique des médecins de garde) — <b>0848 133 133</b>, по местному тарифу. Медсестра оценит, что с тобой, и скажет, куда идти. Дежурную аптеку можно найти на сайте <a href="https://garde.svph.ch">garde.svph.ch</a> или по тому же номеру (<a href="https://www.vd.ch/sante-soins-et-handicap/dispositifs-de-soins-vaudois/urgences">кантон Во — неотложная помощь</a>).</li>
+  <li class="attn"><b>Когда звонить 144.</b> <i class="wi"></i>Номер скорой помощи 144 — только при угрозе жизни, например если человек без сознания или не может дышать. В остальных случаях сначала звони своему семейному врачу или на дежурный номер кантона (<a href="https://www.vd.ch/sante-soins-et-handicap/dispositifs-de-soins-vaudois/urgences">кантон Во</a>). При отравлении звони в Tox Info по номеру 145 (<a href="https://www.zh.ch/de/gesundheit/notfall-rettung.html">кантон Цюрих</a>).</li>
+  <li>Дежурный номер своего кантона запиши в телефон заранее. Когда заболел ребёнок в воскресенье вечером, искать его некогда. Что делать при болезни и травме, подробно — в теме «<a href="../bolezn-travma/">Заболела или травма: что делать</a>».</li>
+</ul>
+
+<h2 id="prazdniki">Праздники</h2>
+<ul class="ul">
+  <li><b>Федеральный праздник один — 1 августа.</b> По закону о труде он приравнен к воскресенью и оплачивается во всей Швейцарии (<a href="https://www.fedlex.admin.ch/eli/cc/1966/57_57_57/de#art_20_a">ArG ст. 20a</a>; <a href="https://www.beobachter.ch/beratung/rechtsratgeber/arbeit/arbeitsrecht/absenzen-feiertage-ferien/feiertage">Beobachter</a>).</li>
+  <li><b>Остальные праздники назначает кантон.</b> Он может приравнять к воскресенью ещё до восьми праздников в год, иногда разные в разных частях кантона. Большинство из них христианские, в некоторых кантонах праздник ещё 1 мая (<a href="https://www.seco.admin.ch/dam/de/sd-web/kRYaojkWzLf1/ArG-Artikel-20a-SECO-AB-2012-DE.pdf">SECO — пояснения к ст. 20a</a>). Поэтому выходной в Цюрихе может быть рабочим днём в Женеве или Тичино.</li>
+  <li><b>Что работает в праздник.</b> В праздник, который приравнен к воскресенью, всё работает как в воскресенье. Обычные магазины закрыты, а вокзалы, заправки, киоски, пекарни, рестораны и дежурные аптеки открыты по воскресным правилам.</li>
+  <li><b>Накануне праздника</b> магазины в некоторых кантонах закрываются раньше. Например, в Берне — в 17:00, как в субботу (<a href="https://www.lexfind.ch/tolv/100052/de">HGG ст. 10</a>). Праздники часто примыкают к выходным, и тогда обычные магазины закрыты несколько дней подряд. Поэтому перед Рождеством, Пасхой и Новым годом закупайся заранее.</li>
+  <li><b>Оплата праздника.</b> Федеральный закон обязывает платить только за 1 августа. Платят ли тебе за другие праздники, решают договор и коллективный договор отрасли (<a href="https://www.seco.admin.ch/dam/de/sd-web/x5LtHPJdNis5/Anhang-Feiertage-Schweiz-Auszug-ArG-ArGV1-5-SECO-SB-2024-DE.pdf">SECO — праздники в Швейцарии</a>). Особенно внимательно проверь это, если у тебя почасовая оплата.</li>
+  <li class="attn"><b>Православное Рождество, Пасха и другие религиозные праздники.</b> Если твой кантон их не отмечает, ты всё равно вправе взять выходной. <i class="wi"></i>Предупреди работодателя не позже чем за три дня. Работодатель может попросить отработать эти часы в другой день (<a href="https://www.fedlex.admin.ch/eli/cc/1966/57_57_57/de#art_20_a">ArG ст. 20a абз. 2</a>). Предупреди письменно, хватит e-mail, и сохрани его.</li>
+  <li>Праздники своего кантона на весь год найдёшь в блоке «Твой кантон» и на сайте кантона.</li>
+</ul>
+
+<h2 id="pokoj">Воскресный покой дома</h2>
+<p>В воскресенье и в праздники тихо должно быть не только в магазинах, но и дома. Время тишины устанавливает община в своём полицейском регламенте (Polizeireglement), подробности — в правилах твоего дома (Hausordnung).</p>
+<ul class="ul">
+  <li class="attn"><i class="wi"></i>В воскресенье обычно не косят газон, не сверлят и не бросают стекло в контейнеры. Соседи могут пожаловаться в общину или полицию, а за нарушение тишины община может назначить штраф.</li>
+  <li>Можно ли в воскресенье стирать в общей прачечной, зависит от правил твоего дома.</li>
+  <li>Подробно о тишине, прачечной и соседях — в теме «<a href="../pravila-doma/">Тишина, прачечная и правила дома</a>».</li>
+</ul>
+
+<h2 id="rabota">Если ты работаешь в воскресенье</h2>
+<ul class="ul">
+  <li class="attn"><b>Только с твоего согласия.</b> <i class="wi"></i>Работодатель не может поставить тебя на воскресную работу без твоего согласия (<a href="https://www.fedlex.admin.ch/eli/cc/1966/57_57_57/de#art_19">ArG ст. 19 абз. 5</a>). Если ты устраиваешься туда, где работают по воскресеньям, например на вокзал, в ресторан или больницу, это обычно записано в договоре. Прочитай его до подписи.</li>
+  <li class="attn"><b>Надбавка 50 %.</b> <i class="wi"></i>За разовую, временную работу в воскресенье работодатель обязан доплатить 50 % к зарплате за эти часы (<a href="https://www.fedlex.admin.ch/eli/cc/1966/57_57_57/de#art_19">ArG ст. 19 абз. 3</a>). Эта надбавка обязательна и для тех, кто получает месячную зарплату. Отказаться от неё в договоре нельзя (<a href="https://www.seco.admin.ch/dam/de/sd-web/HSByjDiBvMb-/ArG-Artikel-19-SECO-AB-2012-DE.pdf">SECO</a>). Если ты работаешь по воскресеньям постоянно, закон надбавку не требует (<a href="https://law.ch/lawinfo/lohn-lohnforderungen/sonntagsarbeit/">law.ch</a>). Её может давать коллективный договор отрасли, проверь его. В Женеве в дни воскресных продаж продавцы получают двойную оплату.</li>
+  <li><b>Отдых взамен.</b> Если ты работала в воскресенье до пяти часов, это время нужно возместить свободным временем. Если дольше пяти часов, тебе положен свободный день, не меньше 24 часов подряд, на неделе до или после этого воскресенья. Кроме того, хотя бы одно воскресенье за две недели должно быть полностью свободным (<a href="https://www.fedlex.admin.ch/eli/cc/1966/57_57_57/de#art_20">ArG ст. 20</a>; <a href="https://law.ch/lawinfo/lohn-lohnforderungen/sonntagsarbeit/">law.ch</a>).</li>
+  <li>Эти правила не действуют для руководителей высшего уровня, например директора или члена правления (<a href="https://www.seco.admin.ch/de/faq-ladenoeffnung-sonntag">SECO</a>).</li>
+  <li class="attn">Записывай каждый час работы в воскресенье и в праздник: дату, начало, конец и перерывы. <i class="wi"></i>Если надбавку или день отдыха не дали, напиши работодателю заказным письмом (Einschreiben) и сохрани копию и квитанцию. Если не помогло, обратись в профсоюз или в кантональную инспекцию труда (Arbeitsinspektorat). О трудовом договоре и спорах с работодателем — в теме «<a href="../trudovoe-pravo/">Трудовой договор и увольнение</a>».</li>
+</ul>
+
+<h2 id="sovety">Советы на первые недели</h2>
+<ul class="ul">
+  <li><b>Закупайся в субботу.</b> В субботу магазины во многих кантонах закрываются раньше, чем в будни. В Берне — в 17:00, в Женеве — в 18:00, в Тичино — в 18:30. Не откладывай покупки на субботний вечер.</li>
+  <li><b>Найди «свой» воскресный магазин.</b> Посмотри на <a href="https://www.sbb.ch/de/bahnhof-services/bahnhoefe.html">сайте SBB</a>, какие магазины есть на ближайшем большом вокзале и до которого часа они работают в воскресенье.</li>
+  <li><b>Часы конкретного магазина</b> проверяй на сайте или в приложении его сети. Часы разных филиалов одной сети могут сильно различаться.</li>
+  <li><b>Держи дома запас.</b> Хлеб в морозилке, молоко длительного хранения, жаропонижающее и лекарства, которые принимаешь постоянно, особенно перед длинными праздниками.</li>
+  <li><b>Запиши номера.</b> Дежурный врач своего кантона, Tox Info 145, скорая помощь 144, полиция 117. Повесь листок на холодильник.</li>
+</ul>
+''',
+    steps=[
+        'Узнай часы работы магазинов в своём кантоне и закупайся в субботу днём. В воскресенье обычные магазины закрыты.',
+        'Найди на сайте SBB ближайший большой вокзал с магазинами, которые открыты в воскресенье.',
+        'Запиши в телефон дежурный номер врача своего кантона и Tox Info 145. Номер 144 — только при угрозе жизни.',
+        'Посмотри список праздников своего кантона на год и закупайся заранее перед Рождеством, Пасхой и Новым годом.',
+        'Работаешь в воскресенье — записывай часы и проверь, что тебе платят надбавку 50 % за временную работу и дают день отдыха.',
+    ],
+    pomosh=dict(ids=['unia', 'syna', 'hgu', 'beob'], k='arb', t='Если за воскресенье или праздник не доплатили или не дали день отдыха, помогут профсоюз и кантональная инспекция труда.'),
+    tools={'ekstrennye-nomera': 'Дежурный врач твоего кантона, Tox Info 145, скорая 144 и полиция 117 — на одной карточке для холодильника.', 'srok-pisma': 'Срок выпал на воскресенье или праздник? Калькулятор перенесёт его на рабочий день с праздниками твоего кантона.', 'sroki-goda': 'Праздники и обязательные сроки года — напоминания в календарь Google или Apple.', 'moj-god': 'Годовой календарь: отметь праздники кантона и длинные выходные, чтобы закупиться заранее.', 'uchet-vremeni': 'Записывай часы работы в воскресенье и праздники — так проще доказать право на надбавку 50 % и день отдыха.'},
+    related=['pravila-doma', 'trudovoe-pravo', 'bolezn-travma', 'transport', 'gemeinde'],
+    sources=[
+        ('Закон о труде (ArG), ст. 18–20a', 'https://www.fedlex.admin.ch/eli/cc/1966/57_57_57/de#art_18'),
+        ('SECO — вопросы и ответы о работе магазинов в воскресенье', 'https://www.seco.admin.ch/de/faq-ladenoeffnung-sonntag'),
+        ('SECO — пояснения к ArG ст. 19 (воскресная работа, надбавка 50 %, согласие, четыре воскресенья)', 'https://www.seco.admin.ch/dam/de/sd-web/HSByjDiBvMb-/ArG-Artikel-19-SECO-AB-2012-DE.pdf'),
+        ('SECO — пояснения к ArG ст. 20a (праздники)', 'https://www.seco.admin.ch/dam/de/sd-web/kRYaojkWzLf1/ArG-Artikel-20a-SECO-AB-2012-DE.pdf'),
+        ('SECO — пояснения к ArG ст. 27 (магазины при заправках)', 'https://www.seco.admin.ch/dam/de/sd-web/Nttd3hBThA1U/ArG-Artikel-27-SECO-AB-2014-DE.pdf'),
+        ('SECO — пояснения к ArGV 2 ст. 26a (вокзалы и аэропорты)', 'https://www.seco.admin.ch/dam/de/sd-web/kS2FXdUtKVdl/ArGV2-Artikel-26a-SECO-AB-2013-DE.pdf'),
+        ('SECO — список вокзалов и аэропортов (постановление WBF 822.112.1)', 'https://www.seco.admin.ch/dam/de/sd-web/N9Pw3nXWqYP5/ArGV2-Anhang3-1-Bahnhoefe-SECO-AB-2015-DE.pdf'),
+        ('SECO — особые правила по отраслям (ArGV 2)', 'https://www.seco.admin.ch/de/wegleitung-argv-2'),
+        ('SECO — праздники в Швейцарии, 2024', 'https://www.seco.admin.ch/dam/de/sd-web/x5LtHPJdNis5/Anhang-Feiertage-Schweiz-Auszug-ArG-ArGV1-5-SECO-SB-2024-DE.pdf'),
+        ('Кантон Цюрих — часы работы магазинов и дни покоя', 'https://www.zh.ch/de/wirtschaft-arbeit/arbeitsbedingungen/arbeitsssicherheit-gesundheitsschutz/arbeits-ruhezeiten/ladenoeffnung-ruhetage.html'),
+        ('Кантон Цюрих — неотложная помощь и Ärztefon', 'https://www.zh.ch/de/gesundheit/notfall-rettung.html'),
+        ('Кантон Берн — закон о торговле (HGG), ст. 9–14', 'https://www.lexfind.ch/tolv/100052/de'),
+        ('Кантон Берн — постановление о торговле (HGV), ст. 5 — туристические общины', 'https://be.lexwork.naz.ch/de/dta/930.11.pdf'),
+        ('Кантон Женева — закон о часах работы магазинов (LHOM)', 'https://silgeneve.ch/legis/data/rsg_i1_05.htm'),
+        ('Кантон Тичино — закон о часах работы магазинов (LAN)', 'https://www4.ti.ch/fileadmin/DFE/DE-UIL/negozi/LAN.pdf'),
+        ('Кантон Во — неотложная помощь и дежурные врачи', 'https://www.vd.ch/sante-soins-et-handicap/dispositifs-de-soins-vaudois/urgences'),
+        ('Община Кёниц — экстренные номера и MEDPHONE', 'https://www.koeniz.ch/wohnen/sicherheit/notfaelle.page/246/print/pdf'),
+        ('SBB — вокзалы, магазины и часы работы', 'https://www.sbb.ch/de/bahnhof-services/bahnhoefe.html'),
+        ('law.ch — воскресная работа и отдых взамен', 'https://law.ch/lawinfo/lohn-lohnforderungen/sonntagsarbeit/'),
+        ('Beobachter — праздники', 'https://www.beobachter.ch/beratung/rechtsratgeber/arbeit/arbeitsrecht/absenzen-feiertage-ferien/feiertage'),
+        ('SRF — в Берне остаются две воскресные продажи, 06.03.2021', 'https://www.srf.ch/news/abstimmungen/abstimmung-kanton-bern-es-bleibt-bei-zwei-sonntagsverkaeufen-im-kanton-bern'),
+        ('Blick — Женева: два воскресенья в год, голосование 14.06.2026', 'https://www.blick.ch/fr/suisse/votations-suisses/votations-du-14-juin-geneve-accepterait-louverture-des-magasins-deux-dimanches-par-an-id22028133.html'),
+        ('Moneycab — Совет кантонов против 12 воскресных продаж, 09.06.2026', 'https://www.moneycab.com/schweiz/staenderat-will-keine-zusaetzlichen-sonntagsverkaeufe/amp/'),
+        ('plattformJ — Medphone в Берне работает дальше, 21.07.2026', 'https://www.plattformj.ch/artikel/244988/'),
+    ],
+    terms=[('Deutsch', 'Sonntagsarbeit, Sonntagsarbeitsverbot, Bewilligung, Lohnzuschlag, Ersatzruhetag, Einverständnis, Ladenöffnungszeiten, Ladenöffnungsgesetz, Ruhetagsgesetz, öffentlicher Ruhetag, Feiertag, Bundesfeiertag, Vorabend, Sonntagsverkauf, Abendverkauf, Bahnhofladen, Tankstellenshop, Kiosk, Bäckerei, Tourismusort, Notfallapotheke, Ärztefon, ärztlicher Notfalldienst, Sonntagsruhe, Polizeireglement, Hausordnung, Arbeitsinspektorat'), ('Français', 'travail du dimanche, interdiction de travailler le dimanche, autorisation, majoration de salaire, repos compensatoire, consentement, heures d’ouverture des magasins, jour de repos public, jour férié, fête nationale, veille de jour férié, ouverture dominicale, nocturne, commerce de gare, shop de station-service, kiosque, boulangerie, station touristique, pharmacie de garde, médecin de garde, centrale des médecins de garde, repos dominical, règlement de police, règlement de maison, inspection du travail'), ('Italiano', 'lavoro domenicale, divieto del lavoro domenicale, permesso, supplemento salariale, riposo compensativo, consenso, orari di apertura dei negozi, giorno festivo ufficiale, festa nazionale, vigilia, apertura domenicale, apertura serale, negozio in stazione, shop della stazione di servizio, chiosco, panetteria, località turistica, farmacia di turno, guardia medica, riposo domenicale, regolamento di polizia, regolamento della casa, ispettorato del lavoro'), ('English', 'Sunday work, ban on Sunday work, permit, wage supplement, compensatory rest day, consent, shop opening hours, public holiday, national day, eve of a holiday, Sunday shopping, late-night shopping, station shop, petrol station shop, kiosk, bakery, tourist resort, on-duty pharmacy, on-call doctor, Sunday rest, police regulations, house rules, labour inspectorate')],
+)
