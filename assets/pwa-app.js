@@ -107,7 +107,7 @@
     kurs: '<svg viewBox="0 0 24 24"><path d="M2.5 9 12 4.5 21.5 9 12 13.5z"/><path d="M6.5 11v4.5c1.6 1.6 3.4 2.3 5.5 2.3s3.9-.7 5.5-2.3V11M21.5 9v5"/></svg>',
     tool: '<svg viewBox="0 0 24 24"><path d="M12 3.5v3M12 17.5v3M3.5 12h3M17.5 12h3"/><circle cx="12" cy="12" r="4.2"/><path d="m6 6 1.8 1.8M16.2 16.2 18 18M6 18l1.8-1.8M16.2 7.8 18 6"/></svg>',
     more: '<svg viewBox="0 0 24 24"><circle cx="5.5" cy="12" r="1.4"/><circle cx="12" cy="12" r="1.4"/><circle cx="18.5" cy="12" r="1.4"/></svg>',
-    swiss: '<svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="4"/><path d="M12 8v8M8 12h8"/></svg>',
+    swiss: '<svg viewBox="0 0 24 24"><path d="M2.5 19.5 9 8.5l3.2 5.2L15 10l6.5 9.5z"/><path d="m7.4 11.2 1.6 1.3 1.4-1.4"/></svg>',
     job: '<svg viewBox="0 0 24 24"><rect x="3.5" y="7.5" width="17" height="12" rx="2.5"/><path d="M9 7.5V6a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v1.5M3.5 13h17"/></svg>',
     join: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 8v8M8 12h8"/></svg>',
     site: '<svg viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg>',
@@ -133,7 +133,14 @@
       a.insertAdjacentHTML('afterbegin', ic.replace('<svg ', '<svg class="pa-ni" aria-hidden="true" '));
       a.style.removeProperty('color');
     });
-    nav.style.setProperty('--pa-cols', Math.max(2, Math.ceil(links.length / 2)));
+    /* как на voznesenskaya.ch: три колонки; «Как разместиться» на телефоне не дублируем — эта кнопка уже есть в шапке (09.10.2026) */
+    var cta = document.querySelector('header.top .navcta'), ctaPath = cta ? new URL(cta.href, location.href).pathname : '';   /* больше шести разделов — «Как разместиться» прячем (он есть на главной в шапке и в подвале) */
+    var shown = 0;
+    links.forEach(function (a) {
+      var p = new URL(a.href, location.href).pathname;
+      if (/join\/$/.test(p) && (p === ctaPath || links.length > 6)) a.classList.add('pa-dup'); else shown++;
+    });
+    nav.style.setProperty('--pa-cols', 3);
   }
   function tabBar() {
     document.documentElement.classList.add('pa-app');
