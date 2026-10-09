@@ -1,0 +1,67 @@
+/* «Устройство сайта» (09.10.2026): О проекте, Для специалистов, Моя ситуация, Что нового, подписка. Собирается вместе с _i18n/struktura_src/build.py */
+.prose{max-width:72ch}
+.prose section{margin:0;padding-block:18px}
+.prose{padding-top:4px}
+.prose h2{font-size:clamp(1.5rem,3vw,1.9rem);margin-bottom:10px}
+.prose p{margin:0 0 12px;line-height:1.65}
+.okl{list-style:none;padding:0;margin:0;display:grid;gap:10px}
+.okl li{position:relative;padding:12px 14px 12px 44px;background:var(--paper);border:1px solid var(--line);border-radius:14px;line-height:1.55}
+.okl li::before{content:"";position:absolute;left:14px;top:15px;width:18px;height:18px;border-radius:6px;background:var(--sage-soft) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%234F5E3E' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 12.5 4 4 8-9'/%3E%3C/svg%3E") center/14px no-repeat}
+/* Моя ситуация */
+.sit-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:16px 0 8px}
+@media (max-width:1000px){.sit-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:520px){.sit-grid{grid-template-columns:1fr}}
+.sit-card{display:flex;gap:12px;align-items:flex-start;background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:14px;text-decoration:none;color:inherit;min-width:0}
+.sit-card:hover{border-color:var(--brown);transform:translateY(-1px)}
+.sit-card .tm-ic{flex:none}
+.sit-card b{display:block;font-family:var(--display);font-weight:400;font-size:1.12rem;line-height:1.2;margin-bottom:4px}
+.sit-card span span{display:block;font-size:.86rem;color:var(--muted);line-height:1.4}
+.home-sit{margin-top:34px}
+.home-sit>h2{font-size:clamp(1.6rem,3.4vw,2.2rem)}
+.sit-topics{grid-template-columns:repeat(2,minmax(0,1fr))}
+@media (max-width:560px){.sit-topics{grid-template-columns:1fr}}
+.todo li a{white-space:nowrap;font-weight:700}
+/* Для специалистов */
+.pro-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:8px 0 30px}
+@media (max-width:900px){.pro-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.pro-grid{grid-template-columns:1fr}}
+.pro-card{position:relative;background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:18px;display:flex;flex-direction:column;gap:8px;text-decoration:none;color:inherit}
+a.pro-card:hover{border-color:var(--brown)}
+.pro-card b{font-family:var(--display);font-weight:400;font-size:1.25rem;line-height:1.2}
+.pro-card p{font-size:.92rem;color:var(--muted)}
+.pro-card .go{margin-top:auto;font-size:.86rem;font-weight:700;color:var(--brown)}
+.pro-card.soon{border-style:dashed}
+.pro-card .soon-tag{align-self:flex-start;font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#7A5A12;background:var(--mustard-soft);border-radius:999px;padding:3px 9px}
+.pro-tools{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+@media (max-width:700px){.pro-tools{grid-template-columns:1fr}}
+/* Что нового */
+.nfilter{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 16px}
+.nfilter button{font:600 .88rem var(--body);border:1.5px solid var(--line);background:var(--paper);color:var(--ink);border-radius:12px;padding:7px 14px;cursor:pointer}
+.nfilter button[aria-pressed="true"]{background:var(--sage);border-color:var(--sage);color:var(--paper)}
+.nfeed{display:grid;gap:12px;max-width:820px}
+.news{background:var(--paper);border:1px solid var(--line);border-left:5px solid var(--sage);border-radius:14px;padding:16px 18px;scroll-margin-top:90px}
+.news.k-change{border-left-color:var(--brown)}
+.news.k-month{border-left-color:var(--mustard)}
+.news h3{font-family:var(--display);font-weight:400;font-size:1.3rem;line-height:1.25;margin:6px 0 8px}
+.news p{margin:0 0 8px;line-height:1.6}
+.nmeta{display:flex;flex-wrap:wrap;gap:6px 12px;font-size:.8rem;color:var(--muted);align-items:center}
+.nmeta .nk{font-weight:700;color:var(--ink);background:var(--sage-soft);border-radius:999px;padding:2px 9px}
+.k-change .nmeta .nk{background:#F3E1D3}
+.k-month .nmeta .nk{background:var(--mustard-soft)}
+.nlinks{display:flex;flex-wrap:wrap;gap:6px 16px;font-weight:700;font-size:.9rem}
+.nsrc{font-size:.84rem;color:var(--muted)}
+.nfeed.short .news{padding:12px 14px}
+.nfeed.short .news h3{font-size:1.12rem;margin:4px 0 6px}
+.home-news{margin-top:30px;max-width:820px}
+.hn-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:10px}
+.hn-head h2{font-size:clamp(1.5rem,3vw,1.9rem)}
+.hn-head a{font-weight:700;white-space:nowrap}
+/* Подписка */
+.sub{display:flex;gap:14px 18px;align-items:center;justify-content:space-between;flex-wrap:wrap;background:var(--sage-soft);border-radius:16px;padding:14px 16px;margin:18px 0}
+.sub b{font-size:1rem}
+.sub p{margin:2px 0 0;font-size:.88rem;color:var(--ink);max-width:56ch}
+.sub .sub-btn{flex:none;background:var(--sage);color:var(--paper);border-radius:12px;padding:10px 16px;font-weight:700;text-decoration:none}
+.sub.sub-in{margin:14px 0 0}
+.sub-box{padding-block:20px;margin-top:20px;max-width:820px;scroll-margin-top:90px}
+.home-sit{padding-block:28px}
+.tm-schemes,.pro-grid+section,.art section{padding-block:12px}

@@ -116,6 +116,8 @@ PAGES = [('index.html', '/'), ('events/index.html', '/events/'), ('kursy/index.h
          ('shveycariya/vereine/index.html', '/shveycariya/vereine/'),
          ('shveycariya/vuz/index.html', '/shveycariya/vuz/'),
          ('shveycariya/zhivotnye/index.html', '/shveycariya/zhivotnye/')]
+# «Устройство сайта» (09.10.2026): О проекте, Для специалистов, Что нового, Моя ситуация, тема «Адаптация»
+PAGES += [x for x in [('o-proekte/index.html', '/o-proekte/'), ('dlya-specialistov/index.html', '/dlya-specialistov/'), ('novosti/index.html', '/novosti/'), ('situacii/index.html', '/situacii/'), ('shveycariya/adaptaciya/index.html', '/shveycariya/adaptaciya/'), ('situacii/tolko-priehala/index.html', '/situacii/tolko-priehala/'), ('situacii/rabota/index.html', '/situacii/rabota/'), ('situacii/deti/index.html', '/situacii/deti/'), ('situacii/dengi/index.html', '/situacii/dengi/'), ('situacii/zhilye/index.html', '/situacii/zhilye/'), ('situacii/svoe-delo/index.html', '/situacii/svoe-delo/'), ('situacii/zdorovye/index.html', '/situacii/zdorovye/'), ('situacii/pismo-problema/index.html', '/situacii/pismo-problema/')] if x not in PAGES]
 OWN = sorted({p for _, p in PAGES}, key=len, reverse=True)
 CODE_WORDS = ['ВСТРЕЧА', 'ОТЗЫВ', 'ЗАЯВКА', 'РАССЫЛКА', 'ПОРЯДОК']
 
@@ -224,6 +226,8 @@ def post(html, src):
     html = re.sub(r'(content="https://svoiludi\.ch/)([\w/.-]+?\.jpg)(?=")', ogimg, html)
     html = html.replace('/fav/site.webmanifest', '/fav/site.uk.webmanifest').replace('name="apple-mobile-web-app-title" content="Свои люди"', 'name="apple-mobile-web-app-title" content="Свої люди"')   # сайт как приложение (_i18n/pwa.py)
     html = re.sub(r"(localeCompare\([^()]*?,\s*)'ru'", r"\1'uk'", html)           # сортировка по украинскому алфавиту
+    if src == 'novosti/index.html':   # «Что нового»: украинская лента RSS (_i18n/struktura_src/build.py)
+        html = html.replace('href="rss.xml"', 'href="/uk/novosti/rss.xml"').replace('svoiludi.ch/novosti/rss.xml', 'svoiludi.ch/uk/novosti/rss.xml')
     if src == 'opros/index.html':
         html = opros_keep_russian_payload(html)
     if src == 'index.html':   # подтверждение карточки/прайс-листа: ответ специалисту — на языке страницы (как на сайте с 05.10.2026)

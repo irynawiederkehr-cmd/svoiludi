@@ -12,8 +12,8 @@
   var P = UK ? '/uk' : '';
   var Q = location.search;
   var T = UK ? {
-    tabs: ['Фахівці', 'Події', 'Курси', 'Інструменти', 'Ще'],
-    more: 'Ще', swiss: 'Як влаштована Швейцарія', join: 'Як розміститися', site: 'Сайт Ірини', privacy: 'Політика конфіденційності',
+    tabs: ['Фахівці', 'Швейцарія', 'Інструменти', 'Що нового', 'Ще'],
+    more: 'Ще', swiss: 'Як влаштована Швейцарія', join: 'Як розміститися', evk: 'Події та курси', pro: 'Для фахівців', about: 'Про проєкт', site: 'Сайт Ірини', privacy: 'Політика конфіденційності',
     share: 'Поділитися застосунком з друзями', reload: 'Оновити сторінку', lang: 'По-русски', close: 'Закрити',
     shareText: 'Свої люди у Швейцарії: фахівці, які говорять українською та російською, події, курси й корисні інструменти. Можна встановити як застосунок на телефон.',
     title: 'Свої люди — як застосунок на телефоні',
@@ -26,8 +26,8 @@
     note: '<b>Важливо для записів в інструментах.</b> Записи, зроблені в браузері, у застосунок самі не переходять. Перед встановленням натисни в інструменті «Зберегти резервну копію», а в застосунку — «Завантажити з резервної копії».',
     install_app: '📱 Встановити як застосунок'
   } : {
-    tabs: ['Специалисты', 'События', 'Курсы', 'Инструменты', 'Ещё'],
-    more: 'Ещё', swiss: 'Как устроена Швейцария', join: 'Как разместиться', site: 'Сайт Ирины', privacy: 'Политика конфиденциальности',
+    tabs: ['Специалисты', 'Швейцария', 'Инструменты', 'Что нового', 'Ещё'],
+    more: 'Ещё', swiss: 'Как устроена Швейцария', join: 'Как разместиться', evk: 'События и курсы', pro: 'Для специалистов', about: 'О проекте', site: 'Сайт Ирины', privacy: 'Политика конфиденциальности',
     share: 'Поделиться приложением с друзьями', reload: 'Обновить страницу', lang: 'Українською', close: 'Закрыть',
     shareText: 'Свои люди в Швейцарии: специалисты, которые говорят по-русски и по-украински, события, курсы и полезные инструменты. Можно установить как приложение на телефон.',
     title: 'Свои люди — как приложение на телефоне',
@@ -114,6 +114,9 @@
     lock: '<svg viewBox="0 0 24 24"><rect x="5" y="10.5" width="14" height="10" rx="2.5"/><path d="M8 10.5V8a4 4 0 0 1 8 0v2.5"/></svg>',
     share: '<svg viewBox="0 0 24 24"><path d="M12 15V4M8 7.5 12 3.5l4 4"/><path d="M6 11H5.5A1.5 1.5 0 0 0 4 12.5v6A1.5 1.5 0 0 0 5.5 20h13a1.5 1.5 0 0 0 1.5-1.5v-6a1.5 1.5 0 0 0-1.5-1.5H18"/></svg>',
     reload: '<svg viewBox="0 0 24 24"><path d="M19.5 12a7.5 7.5 0 1 1-2.2-5.3M19.5 4v4h-4"/></svg>',
+    news: '<svg viewBox="0 0 24 24"><path d="M5 4.5h11.5V18a2 2 0 0 0 2 2H6.5A1.5 1.5 0 0 1 5 18.5z"/><path d="M16.5 9h3v9a2 2 0 0 1-2 2M8 8.5h5.5M8 12h5.5M8 15.5h3.5"/></svg>',
+    pro: '<svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c.7-4 3.4-6 7-6s6.3 2 7 6"/><path d="m15.5 16.5 1.5 1.5 3-3"/></svg>',
+    info: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 11v5.5M12 7.6v.4"/></svg>',
     lang: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.5 2.6 3.5 5.4 3.5 8.5s-1 5.9-3.5 8.5c-2.5-2.6-3.5-5.4-3.5-8.5s1-5.9 3.5-8.5z"/></svg>'
   };
   function el(html) { var d = document.createElement('div'); d.innerHTML = html; return d.firstElementChild; }
@@ -123,7 +126,7 @@
   function topTiles() {   /* иконки в плитках верхнего меню; число колонок — чтобы всегда было два ряда */
     var nav = document.querySelector('header.top nav[aria-label]'); if (!nav) return;
     var map = [[/voznesenskaya\.ch/, I.site], [/kursy\//, I.kurs], [/events\//, I.ev], [/instrumenty\//, I.tool], [/join\//, I.join],
-      [/shveycariya\//, I.swiss], [/vakansii\//, I.job], [/^\/(index\.html)?$/, I.spec]];
+      [/shveycariya\//, I.swiss], [/situacii\//, I.swiss], [/vakansii\//, I.job], [/novosti\//, I.news], [/dlya-specialistov\//, I.pro], [/o-proekte\//, I.info], [/^\/(index\.html)?$/, I.spec]];
     var links = nav.querySelectorAll('a');
     links.forEach(function (a) {
       if (a.querySelector('.pa-ni')) return;
@@ -144,8 +147,9 @@
   }
   function tabBar() {
     document.documentElement.classList.add('pa-app');
-    var r = rel(), cur = r === '/' || r === '/index.html' ? 0 : /^\/events\//.test(r) ? 1 : /^\/kursy\//.test(r) ? 2 : /^\/instrumenty\//.test(r) ? 3 : 4;
-    var links = [['/', I.spec], ['/events/', I.ev], ['/kursy/', I.kurs], ['/instrumenty/', I.tool]];
+    /* вкладки внизу (09.10.2026, новое меню): Специалисты · Швейцария · Инструменты · Что нового · Ещё */
+    var r = rel(), cur = r === '/' || r === '/index.html' ? 0 : /^\/(shveycariya|situacii)\//.test(r) ? 1 : /^\/instrumenty\//.test(r) ? 2 : /^\/novosti\//.test(r) ? 3 : 4;
+    var links = [['/', I.spec], ['/shveycariya/', I.swiss], ['/instrumenty/', I.tool], ['/novosti/', I.news]];
     var h = '<div class="pa-tabs" role="navigation" aria-label="' + T.tabs.slice(0, 4).join(' · ') + '"><ul>';
     links.forEach(function (l, i) { h += '<li><a href="' + P + l[0] + '"' + (cur === i ? ' aria-current="page"' : '') + '>' + l[1] + '<span>' + T.tabs[i] + '</span></a></li>'; });
     h += '<li><button type="button" class="pa-more"' + (cur === 4 ? ' aria-current="page"' : '') + '>' + I.more + '<span>' + T.tabs[4] + '</span></button></li></ul></div>';
@@ -155,8 +159,9 @@
   function moreSheet() {
     var other = (UK ? '' : '/uk') + rel();
     var h = '<div class="pa-back" role="dialog" aria-modal="true" aria-label="' + T.more + '"><div class="pa-sheet"><div class="pa-grip"></div><h2>' + T.more + '</h2>' +
-      '<a href="' + P + '/shveycariya/">' + I.swiss + T.swiss + '</a>' +
-      '<a href="' + P + '/join/">' + I.join + T.join + '</a>' +
+      '<a href="' + P + '/events/">' + I.ev + T.evk + '</a>' +
+      '<a href="' + P + '/dlya-specialistov/">' + I.pro + T.pro + '</a>' +
+      '<a href="' + P + '/o-proekte/">' + I.info + T.about + '</a>' +
       '<a href="https://voznesenskaya.ch/' + (UK ? 'uk/' : '') + '">' + I.site + T.site + '</a>' +
       '<a href="' + P + '/privacy/">' + I.lock + T.privacy + '</a>' +
       '<button type="button" class="pa-row" data-a="share">' + I.share + T.share + '</button>' +
