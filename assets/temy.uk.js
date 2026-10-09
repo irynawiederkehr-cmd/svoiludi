@@ -163,4 +163,12 @@
       empty.hidden = mods.some(m => !m.hidden);
     });
   }
+
+  /* Таблицы в статьях с тремя и больше колонками на телефоне показываются карточками: у каждой ячейки подпись из заголовка (09.10.2026) */
+  document.querySelectorAll('.art-main .tbl table').forEach(t => {
+    const hs = [...t.querySelectorAll('thead th')].map(th => th.textContent.trim());
+    if (hs.length < 3) return;
+    t.classList.add('stk');
+    t.querySelectorAll('tbody tr').forEach(tr => [...tr.children].forEach((td, i) => { if (hs[i]) td.setAttribute('data-label', hs[i]); }));
+  });
 })();
