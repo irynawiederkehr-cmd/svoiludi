@@ -101,7 +101,7 @@ window.KANTONY = {
 "migration": "https://www.ow.ch/",
 "einbuergerung": "https://www.ow.ch/",
 "betreibung": "https://www.ow.ch/",
-"stva": "https://www.ow.ch/verwaltung/strassenverkehrsamt",
+"stva": "https://www.vsz.ch/",
 "sozial": "https://www.ow.ch/aemter/244",
 "kesb": "https://www.ow.ch/fachbereiche/1978"
 },
@@ -123,7 +123,7 @@ window.KANTONY = {
 "migration": "https://www.nw.ch/migration/1146",
 "einbuergerung": "https://www.nw.ch/",
 "betreibung": "https://www.nw.ch/",
-"stva": "https://www.nw.ch/strassenverkehrsamt",
+"stva": "https://www.vsz.ch/",
 "sozial": "https://www.nw.ch/sozialamtdienste/1573",
 "kesb": "https://www.nw.ch/kesb/1001"
 },
@@ -142,7 +142,7 @@ window.KANTONY = {
 "migration": "https://www.gl.ch/verwaltung/sicherheit-und-justiz/justiz/migration.html/1215",
 "einbuergerung": "https://www.gl.ch/verwaltung/sicherheit-und-justiz/justiz/zivilstands-und-buergerrechtsdienst-des-kantons-glarus/buergerrecht.html/1223",
 "betreibung": "https://www.gl.ch/verwaltung/sicherheit-und-justiz/justiz/betreibungs-konkursamt.html/1258",
-"stva": "https://www.gl.ch/verwaltung/sicherheit-und-justiz/strassenverkehrsamt.html",
+"stva": "https://www.gl.ch/verwaltung/sicherheit-und-justiz/justiz/strassenverkehrsamt.html/466",
 "sozial": "https://www.gl.ch/verwaltung/volkswirtschaft-und-inneres/soziales/sozialberatung.html/977",
 "kesb": "https://www.gl.ch/verwaltung/volkswirtschaft-und-inneres/soziales/kindes-und-erwachsenenschutz.html/962"
 },
@@ -254,7 +254,7 @@ window.KANTONY = {
 "migration": "https://ar.ch/verwaltung/departement-inneres-und-sicherheit/amt-fuer-inneres/abteilung-migration/",
 "einbuergerung": "https://ar.ch/verwaltung/departement-inneres-und-sicherheit/amt-fuer-inneres/abteilung-buergerrecht-und-zivilstand/einbuergerungen/ordentliche-einbuergerung/",
 "betreibung": "https://ar.ch/verwaltung/departement-inneres-und-sicherheit/departementssekretariat/betreibungsaemter-und-konkursamt/betreibungsaemter/",
-"stva": "https://www.ar.ch/verwaltung/departement-bau-und-volkswirtschaft/amt-fuer-strassenverkehr/",
+"stva": "https://ar.ch/verwaltung/departement-inneres-und-sicherheit/strassenverkehrsamt/",
 "sozial": "https://ar.ch/verwaltung/departement-gesundheit-und-soziales/amt-fuer-soziales/abteilung-sozialhilfe-und-asyl/sozialhilfe/",
 "kesb": "https://ar.ch/verwaltung/departement-gesundheit-und-soziales/kindes-und-erwachsenenschutzbehoerde/"
 },
@@ -273,7 +273,7 @@ window.KANTONY = {
 "migration": "https://ai.ch/themen/auslaender/einreise-und-aufenthalt",
 "einbuergerung": "https://ai.ch/themen/auslaender/einbuergerung",
 "betreibung": "https://ai.ch/themen/staat-und-recht/betreibung",
-"stva": "https://www.ai.ch/themen/fahrzeuge-und-verkehr",
+"stva": "https://www.ai.ch/themen/mobilitaet-und-verkehr/strassenverkehr",
 "sozial": "https://www.ai.ch/themen/gesundheit-alter-und-soziales/sozialhilfe",
 "kesb": "https://www.ai.ch/themen/gesundheit-alter-und-soziales/erwachsenenschutz"
 },
@@ -340,7 +340,7 @@ window.KANTONY = {
 "migration": "https://migrationsamt.tg.ch/",
 "einbuergerung": "https://hz.tg.ch/buergerrecht/einbuergerung-von-auslaendern/ordentliche-einbuergerung.html/9059",
 "betreibung": "https://betreibungsamt.tg.ch/",
-"stva": "https://strassenverkehrsamt.tg.ch/fuehrerzulassung/fuehrerausweis/ukraine.html/15027",
+"stva": "https://strassenverkehrsamt.tg.ch/fuehrerzulassung/fuehrerausweis/umtausch-auslaendischer-fuehrerausweis.html/13128",
 "sozial": "https://sozialamt.tg.ch/hauptsektor-3.html/4501",
 "kesb": "https://kesb.tg.ch/"
 },
@@ -356,7 +356,7 @@ window.KANTONY = {
 "migration": "https://www4.ti.ch/index.php?id=117690",
 "einbuergerung": "https://www4.ti.ch/index.php?id=121982",
 "betreibung": "https://www4.ti.ch/di/dg/sezione-di-esecuzione-e-fallimento/chi-siamo/uffici-esecuzione",
-"stva": "https://www4.ti.ch/di/sc/sezione-della-circolazione",
+"stva": "https://www4.ti.ch/di/sc/home",
 "sozial": "https://www4.ti.ch/dss/dasf/chi-siamo/sezione-del-sostegno-sociale",
 "kesb": "https://www4.ti.ch/dss/dasf/temi/famiglia-e-figli/supporto-aiuto-e-protezione/autorita-regionali-di-protezione-arp"
 },
@@ -407,7 +407,7 @@ window.KANTONY = {
 "migration": "https://www.ne.ch/themes/migration-et-integration/sejour-et-etablissement",
 "einbuergerung": "https://www.ne.ch/themes/migration-et-integration/naturalisation",
 "betreibung": "https://www.ne.ch/themes/etat-droit-et-finances/poursuites-et-faillites",
-"stva": "https://www.ne.ch/scan",
+"stva": "https://www.scan-ne.ch/",
 "sozial": "https://www.ne.ch/themes/social/guichets-sociaux-regionaux",
 "kesb": "https://www.ne.ch/autorites/autorites-judiciaires/tribunal-dinstance/apea"
 },
@@ -442,7 +442,7 @@ window.KANTONY = {
 "einbuergerung": "https://www.jura.ch/fr/Autorites/Administration/DSJP/SPOP/Naturalisations/Naturalisations-Devenir-suisse.html",
 "betreibung": "https://www.jura.ch/fr/Autorites/Administration/DFI/Office-des-poursuites-et-faillites-OPF/Office-des-poursuites-et-faillites-OPF.html",
 "stva": "https://www.jura.ch/ovj",
-"sozial": "https://www.jura.ch/DIN/SAS/Soutiens-financiers/Aide-sociale/Aide-sociale.html",
+"sozial": "https://www.jura.ch/fr/Autorites/Administration/DSJP/SAS/Soutiens-financiers/Aide-sociale/Aide-sociale.html",
 "kesb": "https://www.jura.ch/fr/Autorites/Administration/DSJP/APEA/Autorite-de-protection-de-l-enfant-et-de-l-adulte-APEA.html"
 },
 "fb": []
@@ -466,7 +466,7 @@ window.KANTONY_MED = {
 "BS": {"l": [["Medizinische Notrufzentrale", "061 261 15 15", "бесплатная медицинская консультация"]], "u": "https://www.bs.ch/themen/gesundheit/krank-sein-und-medizinischer-notfall/wohin-wende-ich-mich-wenn-ich-krank-bin"},
 "BL": {"l": [["Medizinische Notrufzentrale", "061 261 15 15", ""]], "u": "https://www.baselland.ch/politik-und-behorden/direktionen/volkswirtschafts-und-gesundheitsdirektion/amt-fur-gesundheit/medizinische-dienste/kantonsaerztlicher-dienst/im-notfall"},
 "SH": {"l": [["Ärztlicher Notfalldienst", "052 634 34 00", "назовут дежурного врача, стоматолога и аптеку"]], "u": "https://aerzte-schaffhausen.ch/notfalldienst/"},
-"AR": {"l": [["Медицинская консультация", "0844 55 00 55", "подскажут, куда обратиться"]], "u": "https://ar.ch/verwaltung/departement-gesundheit-und-soziales/amt-fuer-soziales/abteilung-chancengleichheit/willkommen-im-kanton-appenzell-ausserrhoden/gesundheit/notfallnummern"},
+"AR": {"l": [["Медицинская консультация", "0844 55 00 55", "подскажут, куда обратиться"]], "u": "https://spitalverbund.ch/notfall/"},
 "AI": {"l": [["Ärztlicher Notfalldienst", "071 788 73 34", "круглосуточно"], ["Oberegg", "0844 00 11 22", ""]], "u": "https://www.ai.ch/verwaltung/gesundheits-und-sozialdepartement/aktuelles/neue-telefonnummer-fuer-den-aerztlichen-notfalldienst-im-inneren-landesteil"},
 "SG": {"r": 1, "l": [["St. Gallen, Gossau, Rorschach", "0900 144 144", "платный"], ["Rheintal", "0842 144 441", ""], ["Werdenberg", "0900 740 742", "платный"], ["Sarganserland", "0900 740 743", "платный"], ["Wil, Uzwil, Flawil", "071 914 61 11", ""], ["Toggenburg", "071 987 33 00", ""], ["Rapperswil-Jona", "0848 144 111", ""], ["Uznach, Kaltbrunn, Amden", "0848 144 222", ""], ["Дети, весь кантон", "0900 144 100", "платный"], ["Стоматолог", "0844 144 001", "круглосуточно"]], "u": "https://www.hallo.sg.ch/de/gesundheit/medizinische-hilfe.html"},
 "GR": {"r": 1, "l": [], "u": "https://www.buendneraerzteverein.ch/de/patienten/notfallnummern.htm"},

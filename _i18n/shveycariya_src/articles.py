@@ -270,7 +270,7 @@ ARTICLES['rabota'] = dict(
   <li><b>Агентства временной работы</b> (Temporärbüro), например <a href="https://www.adecco.ch/">Adecco</a>, быстро находят работу на время. Так ты сразу начинаешь зарабатывать и получаешь местный опыт для резюме, а с ним потом легче найти постоянное место.</li>
   <li><b><a href="../../">Свои люди</a></b> — вакансии от участников сообщества и специалисты, которые помогут с резюме, языком и признанием диплома.</li>
 </ul>
-<p>Сколько просить? Проверь зарплату для своей профессии, возраста и кантона в официальном калькуляторе <a href="https://www.gate.bfs.admin.ch/salarium/public/index.html">Salarium</a> Федерального статистического управления.</p>
+<p>Сколько просить? Проверь зарплату для своей профессии, возраста и кантона в официальном калькуляторе <a href="https://www.salarium.bfs.admin.ch/">Salarium</a> Федерального статистического управления.</p>
 
 <h2>RAV помогает не только безработным</h2>
 <p>В <a href="https://www.arbeit.swiss/">RAV</a> (региональная служба занятости) можно зарегистрироваться в любой момент, даже если тебе не положено пособие. Тебе дадут консультанта, курсы и доступ к вакансиям. Для некоторых профессий фирмы сначала обязаны сообщить о вакансии в RAV, и люди, зарегистрированные там, узнают о ней раньше других.</p>
@@ -286,7 +286,7 @@ ARTICLES['rabota'] = dict(
 ''',
     steps=[
         'Проверь свой статус и что он разрешает. Со статусом S работать можно, работодатель только сообщает об этом через <a href="https://www.easygov.swiss/easygov/#/de/landing/refugee">EasyGov</a>.',
-        'Сделай <a href="../../instrumenty/rezyume/">резюме</a> на одну-две страницы на языке своего кантона и собери копии дипломов и рекомендаций. Проверь, сколько стоит твоя работа, в <a href="https://www.gate.bfs.admin.ch/salarium/public/index.html">Salarium</a>.',
+        'Сделай <a href="../../instrumenty/rezyume/">резюме</a> на одну-две страницы на языке своего кантона и собери копии дипломов и рекомендаций. Проверь, сколько стоит твоя работа, в <a href="https://www.salarium.bfs.admin.ch/">Salarium</a>.',
         'Зарегистрируйся на <a href="https://www.jobs.ch/">jobs.ch</a> или <a href="https://www.jobup.ch/">jobup.ch</a> и настрой рассылку. Если ты специалист или руководитель, оформи профиль в <a href="https://www.linkedin.com/jobs/">LinkedIn</a> и напиши кадровым агентствам своей отрасли.',
         'Зарегистрируйся в RAV через <a href="https://www.job-room.ch/">Job-Room</a>, даже если пособие тебе не положено. Тебе дадут консультанта и курсы, а о некоторых вакансиях ты узнаешь раньше других.',
         'Откликайся регулярно и записывай, куда и когда отправила. Если тебя уволили, RAV проверит, искала ли ты работу уже во время срока увольнения. Пока получаешь пособие, список откликов сдаёшь в RAV каждый месяц, не позже 5-го числа следующего месяца. Если не искать работу или не сдать список, пособие могут на время перестать платить.',
@@ -551,7 +551,7 @@ ARTICLES['status-f'] = dict(
     tabs={'kursy': 'Курсы языка и подготовка к fide.'},
     related=['status-n', 'permit-b', 'rabota', 'sozialhilfe'],
     sources=[
-        ('Кантон Аргау — права при статусах N и F (27.01.2025)', 'https://www.ag.ch/media/kanton-aargau/dvi/dokumente/mika/merkblaetter/uebersicht-auslaenderstatus-und-deren-rechtsfolgen/zusammenstellung-nach-status.pdf'),
+        ('Кантон Аргау — права при статусах N и F (27.01.2025)', 'https://www.ag.ch/media/kanton-aargau/dgs/dokumente/asyl-und-fluechtlingswesen/zusammenstellung-nach-status-neu-aig-januar-2025.pdf'),
         ('Кантон Цюрих — годы с F для гражданства считаются наполовину', 'https://www.zh.ch/de/migration-integration/einbuergerung.html'),
         ('Закон об иностранцах AIG, ст. 83–85 — временное принятие', 'https://www.fedlex.admin.ch/eli/cc/2007/758/de#art_83'),
     ],
@@ -592,7 +592,7 @@ ARTICLES['status-n'] = dict(
     tools={'moi-dannye': 'Номер карточки N, медстраховка (Krankenkasse), врачи и контакты на одном листе. Его можно показать в ведомстве или в больнице.', 'moj-god': 'Отметь даты бесед, решений и сроки жалоб, чтобы ничего не пропустить.', 'ekstrennye-nomera': 'Карточка с экстренными номерами Швейцарии на русском и языке кантона: скорая, полиция, дежурный врач, телефон доверия.'},
     related=['status-f', 'status-s', 'permit-b'],
     sources=[
-        ('Кантон Аргау — права при статусах N и F (27.01.2025)', 'https://www.ag.ch/media/kanton-aargau/dvi/dokumente/mika/merkblaetter/uebersicht-auslaenderstatus-und-deren-rechtsfolgen/zusammenstellung-nach-status.pdf'),
+        ('Кантон Аргау — права при статусах N и F (27.01.2025)', 'https://www.ag.ch/media/kanton-aargau/dgs/dokumente/asyl-und-fluechtlingswesen/zusammenstellung-nach-status-neu-aig-januar-2025.pdf'),
         ('SEM — процедура убежища', 'https://www.sem.admin.ch/sem/de/home/asyl/asylverfahren.html'),
         ('Закон об убежище AsylG', 'https://www.fedlex.admin.ch/eli/cc/1999/358/de'),
     ],
@@ -638,7 +638,7 @@ ARTICLES['nalogi'] = dict(
     tools={'nalogi-shema': 'На схемах видно три уровня налога, когда налог удерживают из зарплаты, а когда подают декларацию, как устроен налоговый год. Там же можно составить свой календарь сроков.', 'moj-budget': 'Посчитает налог для Цюриха, разложит его по месяцам и покажет, сколько откладывать.', 'sroki-goda': 'Декларация, налоги частями и другие сроки года — напоминания в календарь.'},
     related=['nalogovaya-deklaraciya', 'betreibung', 'pensiya', 'samozanyatost'],
     sources=[
-        ('ch.ch — налоговый калькулятор и три уровня налога', 'https://ch.ch/de/steuerrechner'),
+        ('ch.ch — налоговый калькулятор и три уровня налога', 'https://www.ch.ch/de/steuern-und-finanzen/steuern-zahlen/'),
         ('ESTV — калькулятор налогов', 'https://www.estv.admin.ch/de/steuerrechner-steuern-berechnen'),
         ('ESTV — Verrechnungssteuer 35%', 'https://www.estv.admin.ch/de/verrechnungssteuer'),
         ('Город Цюрих — предварительный счёт и проценты', 'https://www.stadt-zuerich.ch/de/lebenslagen/steuern/natuerliche-personen/steuern-bezahlen/provisorische-rechnung.html'),
@@ -790,7 +790,7 @@ ARTICLES['pensiya'] = dict(
         ('BSV — 13-я пенсия AHV', 'https://www.bsv.admin.ch/de/umsetzung-13-ahv-rente'),
         ('ch.ch — вторая колонна, смена работы, жильё', 'https://www.ch.ch/en/retirement/old-age-pension/the-2nd-pillar/'),
         ('Zentralstelle 2. Säule — поиск забытых денег', 'https://sfbvg.ch/aufgaben/suche-nach-guthaben'),
-        ('ESTV — циркуляр 18a о 3a с 2026 года', 'https://www.estv.admin.ch/dam/estv/de/dokumente/dbst/kreisschreiben/dbst-ks-2025-1-018a-dv.pdf.download.pdf/dbst-ks-2025-1-018a-dv.pdf'),
+        ('ESTV — циркуляр 18a о 3a с 2026 года', 'https://www.estv.admin.ch/dam/de/sd-web/yQgKmvu80LEr/dbst-ks-2025-1-018a-dv-de.pdf'),
         ('Федеральный совет — докупка в 3a', 'https://www.admin.ch/gov/de/start/dokumentation/medienmitteilungen.msg-id-103044.html'),
         ('Merkblatt 2.02 — взносы самозанятых (2026)', 'https://www.ahv-iv.ch/p/2.02.d'),
         ('Merkblatt 10.03 и ch.ch — пенсия за границей и возврат взносов', 'https://www.ch.ch/en/retirement/oasi-pension-abroad/'),
@@ -842,7 +842,7 @@ ARTICLES['skrytye-rashody'] = dict(
         ('Serafe — 335 CHF, с 2027 года 312 CHF', 'https://www.serafe.ch/de/'),
         ('BAG — премии медстраховки 2027, +5%', 'https://www.bag.admin.ch/de/newnsb/BfuGvedj0OOX'),
         ('BAG — лечение зубов не входит в базовую страховку', 'https://www.bag.admin.ch/de/zahnaerztliche-behandlung'),
-        ('ch.ch — штрафы за превышение скорости', 'https://ch.ch/de/geschwindigkeitsueberschreitungen'),
+        ('ch.ch — штрафы за превышение скорости', 'https://www.ch.ch/de/fahrzeuge-und-verkehr/verhalten-im-strassenverkehr/verkehrsregeln/geschwindigkeitsuberschreitung/'),
         ('SBB — проезд без действующего билета', 'https://www.sbb.ch/de/hilfe-und-kontakt/meine-abos/reisen-ohne-gueltigen-fahrausweis.html'),
         ('Город Цюрих — вывоз мусора и Züri-Sack', 'https://www.stadt-zuerich.ch/web/de/umwelt-und-energie/entsorgung/wo-und-wann-entsorgen/abfuhr-hauskehricht.html'),
         ('SRF Kassensturz — когда можно брать сбор за напоминание', 'https://www.srf.ch/sendungen/kassensturz-espresso/rechtsfragen/sonstiges-recht/sonstiges-recht-darf-ein-inkassobuero-mahnspesen-verlangen'),
@@ -1216,7 +1216,7 @@ ARTICLES['strahovki'] = dict(
     tools={'franshiza-shema': 'Франшиза медстраховки на схеме: кто сколько платит и какая франшиза выгоднее.', 'strahovki-obyazatelnye': 'Что обязательно именно для тебя, кто за что платит — на одной схеме и твоим списком.', 'moj-budget': 'Все страховки и их даты оплаты в одном бюджете.', 'ekstrennye-nomera': 'Номера скорой, полиции и дежурного врача и номер твоей страховки на одной карточке — пригодится при несчастном случае.', 'pensiya-shema': 'AHV и пенсионная касса — тоже обязательное страхование. Три колонны на одной схеме.', 'kuda-obratitsya': 'Омбудсмены страхования и страховка юридической защиты — со взносами и сроками.'},
     related=['medstrahovka', 'dop-strahovanie', 'bolezn-travma', 'arenda', 'zhivotnye'],
     sources=[
-        ('ch.ch — страховка ответственности', 'https://ch.ch/de/privathaftpflichtversicherung'),
+        ('ch.ch — страховка ответственности', 'https://www.ch.ch/de/versicherungen/privathaftpflichtversicherung/'),
         ('comparis — где Hausrat обязательна (NW, VD, FR, JU)', 'https://www.comparis.ch/hausrat-versicherung/hausratversicherung/obligatorisch'),
         ('AXA — кантоны без кантональной страховки зданий (GUSTAVO)', 'https://www.axa.ch/de/informationen/hagel-unwetter/gustavo.html'),
         ('KMU admin — страхование от несчастных случаев, 8 часов', 'https://www.kmu.admin.ch/de/berufsunfallversicherung-buv-und-nichtberufsunfallversicherung-nbuv'),
@@ -1546,7 +1546,7 @@ ARTICLES['shkola-lehre'] = dict(
     sources=[
         ('berufsberatung.ch — профессии, Lehre, LENA', 'https://www.berufsberatung.ch'),
         ('Кантон Цюрих — скидка на медстраховку: молодёжь в учёбе минимум 50%', 'https://www.zh.ch/de/soziales/sozialhilfe/sozialhilfehandbuch/flexdata-definition/11-weitere-leistungen-soziale-sicherheit/11-1-sozialversicherungsleistungen/11-1-10-krankenversicherung-praemienverbilligung-und-praemienuebernahme.html'),
-        ('SEM — Integrationsvorlehre (INVOL)', 'https://www.bj.admin.ch/dam/sem/de/data/integration/ausschreibungen/2018-integrvorlehre/fs-invol-d.pdf.download.pdf/fs-invol-d.pdf'),
+        ('SEM — Integrationsvorlehre (INVOL)', 'https://www.sem.admin.ch/sem/de/home/integration-einbuergerung/innovation/invol.html'),
     ],
     terms=[('Deutsch', 'Sekundarschule, Gymnasium, Aufnahmeprüfung, Matura, Lehre, Lehrstelle, Lehrvertrag, EFZ, EBA, Schnupperlehre, Berufsberatung, BIZ, Berufsmaturität, Passerelle, Brückenangebot'), ('Français', 'secondaire I, gymnase, collège, maturité, apprentissage, CFC, AFP, stage d’orientation, orientation professionnelle, maturité professionnelle'), ('Italiano', 'scuola media, liceo, maturità, tirocinio, AFC, CFP, stage, orientamento professionale, maturità professionale'), ('English', 'lower secondary, grammar school, entrance exam, apprenticeship, trial apprenticeship, career guidance, vocational baccalaureate')],
     post='Это возражение против решения о переводе на уровень или в гимназию и расторжение договора Lehre.',
@@ -1722,7 +1722,7 @@ ARTICLES['fide'] = dict(
         ('fide — тест, языковой паспорт, запись', 'https://fide-service.ch/de/sprachnachweise/fide-test'),
         ('Форум миграции Верхний Вале — цена теста fide 2026', 'https://www.randa.ch/wp-content/uploads/2026/02/fide-Test-2026.pdf'),
         ('Постановление о гражданстве (BüV), ст. 6: B1 устно, A2 письменно', 'https://www.fedlex.admin.ch/eli/cc/2016/405/de'),
-        ('SEM — программа S, поддержка людей со статусом S', 'https://www.ekm.admin.ch/sem/en/home/integration-einbuergerung/integrationsfoerderung/programm-s.html'),
+        ('SEM — программа S, поддержка людей со статусом S', 'https://www.sem.admin.ch/sem/en/home/integration-einbuergerung/integrationsfoerderung/programm-s.html'),
     ],
     terms=[('Deutsch', 'Sprachnachweis, fide-Test, Sprachenpass, mündlich, schriftlich, Integrationskriterien, Familiennachzug, Niederlassungsbewilligung, Einbürgerung, Sprachkurs'), ('Français', 'attestation de langue, test fide, passeport des langues, oral, écrit, regroupement familial, autorisation d’établissement, naturalisation'), ('Italiano', 'attestato di lingua, test fide, passaporto delle lingue, orale, scritto, ricongiungimento familiare, permesso di domicilio, naturalizzazione'), ('English', 'language certificate, fide test, language passport, oral, written, family reunification, settlement permit, naturalisation')],
 )
@@ -2076,7 +2076,7 @@ ARTICLES['professii-prepodavanie'] = dict(
 
 <h2 id="svobodno">Что можно без разрешения</h2>
 <p class="attn">Репетиторство (Nachhilfe), подготовка к экзаменам и гимназии, уроки языка, музыки, рисования, танцев, онлайн-курсы — для этого разрешение кантона не нужно. <i class="wi"></i>Разрешение нужно <b>частной школе, которая заменяет обязательную</b>, и домашнему обучению вместо школы: так во всех кантонах (<a href="https://eurydice.eacea.ec.europa.eu/de/eurypedia/switzerland/aufbau-des-privaten-bildungswesens">Eurydice</a>). Субботняя русская или украинская школа, кружки и подготовка — это дополнительные занятия, не замена школы.</p>
-<div class="warn"><b>Работаешь с детьми</b>Родители и организации всё чаще просят выписку из реестра судимостей для работы с детьми (Sonderprivatauszug). Её заказывают онлайн через <a href="https://ch.ch/de/strafregisterauszug">ch.ch</a>.</div>
+<div class="warn"><b>Работаешь с детьми</b>Родители и организации всё чаще просят выписку из реестра судимостей для работы с детьми (Sonderprivatauszug). Её заказывают онлайн через <a href="https://www.ch.ch/de/sicherheit-und-recht/strafregisterauszug/">ch.ch</a>.</div>
 
 <h2 id="vzroslye">Курсы для взрослых: SVEB и fide</h2>
 <ul class="ul">
@@ -2119,7 +2119,7 @@ ARTICLES['professii-prepodavanie'] = dict(
     sources=[
         ('Eurydice — частное образование в Швейцарии: когда нужно разрешение', 'https://eurydice.eacea.ec.europa.eu/de/eurypedia/switzerland/aufbau-des-privaten-bildungswesens'),
         ('fide — сертификат для преподавателей второго языка', 'https://fide-info.ch/doc/81/fideDE_WegleitungZertifikat.pdf'),
-        ('EDK — признание иностранных дипломов учителя', 'https://edudoc.ch/record/224543/files/FAQ%20Ukraine%20EN.pdf?version=1'),
+        ('EDK — признание иностранных дипломов учителя', 'https://edudoc.ch/record/224543/files/FAQ%20Ukraine%20EN.pdf'),
     ],
     terms=[('Deutsch', 'Nachhilfe, Privatunterricht, Kursleiterin, Erwachsenenbildung, SVEB-Zertifikat, fide, Lehrdiplom, Privatschule, Bewilligung, Sonderprivatauszug'), ('Français', 'cours privés, appui scolaire, formatrice d’adultes, certificat FSEA, diplôme d’enseignement, école privée, autorisation, extrait spécial du casier judiciaire'), ('Italiano', 'ripetizioni, lezioni private, formatrice per adulti, certificato FSEA, diploma d’insegnamento, scuola privata, autorizzazione'), ('English', 'tutoring, private lessons, adult educator, teaching diploma, private school, criminal record extract')],
     post='Это заявление на признание диплома, договор с родителями и письма в AHV-кассу.',
@@ -2142,7 +2142,7 @@ ARTICLES['professii-avto'] = dict(
 </ul></nav>
 
 <h2 id="prava">Права для перевозки людей за деньги (BPT, код 121)</h2>
-<p class="attn"><i class="wi"></i>Кто возит людей за деньги на легковой машине — такси, Uber, лимузин, — должен иметь в правах категории B дополнительную запись «профессиональная перевозка людей» (berufsmässiger Personentransport, BPT, код 121). Так, в кантоне <a href="https://ag.ch/media/kanton-aargau/dvi/dokumente/stva/fuehrerausweise/ausweiskategorien/kategorie-bpt-1-03072024.pdf">Аргау</a> нужно:</p>
+<p class="attn"><i class="wi"></i>Кто возит людей за деньги на легковой машине — такси, Uber, лимузин, — должен иметь в правах категории B дополнительную запись «профессиональная перевозка людей» (berufsmässiger Personentransport, BPT, код 121). Так, в кантоне <a href="https://www.ag.ch/de/themen/mobilitaet-verkehr/strassenverkehr/fuehrerausweise/ausweiskategorien/kategorie-b-bpt-121-(taxi)">Аргау</a> нужно:</p>
 <ul class="ul">
   <li>не меньше года водить без нарушений;</li>
   <li>проверка зрения не старше 24 месяцев и медосмотр у врача, которого назначит Strassenverkehrsamt;</li>
@@ -2190,7 +2190,7 @@ ARTICLES['professii-avto'] = dict(
     tools={'dohody-rashody': 'Доходы и расходы на машину, топливо и страховки — отчёт за год для налоговой.', 'schet-qr': 'Счёт за перевозку или ремонт — с QR-кодом, а если ты плательщик НДС, с НДС.', 'chasy-po-klientam': 'Поездки, часы и заказы за месяц — для своего дела и проверки расчётов платформы.', 'zarplata': 'Если ты работник — проверь расчётку: брутто, взносы и сумма к выплате.', 'strahovki-obyazatelnye': 'Машина, ответственность, несчастный случай: что обязательно для водителя и мастерской.', 'nalogi-shema': 'Налоги со своего дела и расходы на машину в декларации.', 'diplomy-shema': 'Признание диплома механика или инструктора по вождению, если он из-за границы.'},
     related=['transport', 'samozanyatost', 'rabota', 'diplomy', 'strahovki'],
     sources=[
-        ('Кантон Аргау — права BPT для профессиональной перевозки людей: условия и сборы', 'https://ag.ch/media/kanton-aargau/dvi/dokumente/stva/fuehrerausweise/ausweiskategorien/kategorie-bpt-1-03072024.pdf'),
+        ('Кантон Аргау — права BPT для профессиональной перевозки людей: условия и сборы', 'https://www.ag.ch/de/themen/mobilitaet-verkehr/strassenverkehr/fuehrerausweise/ausweiskategorien/kategorie-b-bpt-121-(taxi)'),
         ('Кантон Цюрих — лимузинные сервисы: регистрация и плакетка с 2024', 'https://www.zh.ch/de/mobilitaet/transportbewilligungen/personentransporte/limousinendienste.html'),
         ('Netzwoche — Федеральный суд: водители Uber в Женеве — работники (2022)', 'https://www.netzwoche.ch/news/2022-06-08/bundesgericht-bremst-uber-im-kanton-genf-aus'),
         ('Beobachter — суд Цюриха о водителях Uber (2022)', 'https://www.beobachter.ch/arbeit-bildung/stop-and-go-mit-uber-357644'),
@@ -2496,7 +2496,7 @@ ARTICLES['poterya-raboty'] = dict(
     related=['rabota', 'trudovoe-pravo', 'sozialhilfe', 'pensiya', 'medstrahovka'],
     sources=[
         ('Кантон Цюрих — пособие по безработице: регистрация, 70/80%, дни, ожидание, штрафные дни', 'https://www.zh.ch/de/wirtschaft-arbeit/stellensuche-arbeitslosigkeit/arbeitslosenentschaedigung.html'),
-        ('SECO — памятка о страховании по безработице', 'https://WWW.SECO.ADMIN.CH/dam/seco/de/dokumente/Arbeit/ALV/Grundlagen/Faktenblatt_Die_Arbeitslosenversicherung.pdf.download.pdf/DE_Faktenblatt_Die_Arbeitslosenversicherung.pdf'),
+        ('SECO — памятка о страховании по безработице', 'https://www.seco.admin.ch/de/versicherungsleistungen'),
         ('arbeit.swiss — финансы при безработице', 'https://www.arbeit.swiss/secoalv/de/home/menue/stellensuchende/arbeitslos-was-tun-/finanzielles.html'),
         ('Stiftung Auffangeinrichtung BVG — счёт свободного перехода', 'https://aeis.ch/application/files/7816/9502/6700/Merkblatt_FZK.pdf'),
         ('Stiftung Auffangeinrichtung BVG — пенсионная страховка при безработице (смерть и инвалидность)', 'https://aeis.ch/application/files/5117/2657/1525/Merkblatt_Obligatorische_ALV-DE_2024.pdf'),
@@ -2525,7 +2525,7 @@ ARTICLES['trudovoe-pravo'] = dict(
 <p>Договор может быть и устным, но лучше письменно: должность, место, часы, зарплата (и 13-я, если есть), отпуск, испытательный срок, сроки увольнения. Если в отрасли есть коллективный договор (GAV) — например, в строительстве, гастрономии, уборке, — он может давать больше прав, чем закон. Спроси работодателя, действует ли GAV.</p>
 
 <h2 id="sroki">Сроки увольнения (Kündigungsfrist)</h2>
-<p>Если в договоре или GAV не написано иначе, по закону (<a href="https://ch.ch/de/kundigung-arbeitsvertrag">ch.ch</a>):</p>
+<p>Если в договоре или GAV не написано иначе, по закону (<a href="https://www.ch.ch/de/arbeit/kundigung-arbeitsvertrag/">ch.ch</a>):</p>
 <ul class="ul">
   <li>в испытательный срок — 7 календарных дней;</li>
   <li>в первый год работы — 1 месяц, к концу месяца;</li>
@@ -2570,7 +2570,7 @@ ARTICLES['trudovoe-pravo'] = dict(
     tools={'bolezn-zarplata': 'Сколько недель зарплаты при болезни и когда нельзя увольнять — по твоему кантону.', 'kuda-obratitsya': 'Профсоюзы и другие организации с консультациями — список с условиями и место для своих номеров.', 'uchet-vremeni': 'Часы, сверхурочные, отпуск и больничные — доказательство, если будет спор.', 'zarplata': 'Проверь расчётку: ставка, отпускные, сверхурочные, взносы.', 'rezyume': 'Резюме по-швейцарски, если ищешь новую работу.', 'srok-pisma': 'Получила увольнение — посчитай последний день для возражения.'},
     related=['poterya-raboty', 'rabota', 'bolezn-na-rabote', 'domashniy-personal'],
     sources=[
-        ('ch.ch — увольнение: сроки, форма, защита при болезни и беременности, причина письменно', 'https://ch.ch/de/kundigung-arbeitsvertrag'),
+        ('ch.ch — увольнение: сроки, форма, защита при болезни и беременности, причина письменно', 'https://www.ch.ch/de/arbeit/kundigung-arbeitsvertrag/'),
         ('Суды кантона Цюрих — периоды запрета увольнения', 'https://www.gerichte-zh.ch/de/themen/arbeit/aufloesung-arbeitsverhaeltnis/ordentliche-kuendigung/sperrfristen'),
     ],
     terms=[('Deutsch', 'Arbeitsvertrag, Probezeit, Kündigung, Kündigungsfrist, Sperrfrist, missbräuchliche Kündigung, Überstunden, 13. Monatslohn, Arbeitszeugnis, Gesamtarbeitsvertrag (GAV)'), ('Français', 'contrat de travail, temps d’essai, résiliation, délai de congé, période de protection, congé abusif, heures supplémentaires, 13e salaire, certificat de travail, CCT'), ('Italiano', 'contratto di lavoro, periodo di prova, disdetta, termine di disdetta, periodo di protezione, disdetta abusiva, ore supplementari, tredicesima, certificato di lavoro, CCL'), ('English', 'employment contract, probation, notice period, protection period, unfair dismissal, overtime, reference letter, collective agreement')],
@@ -2689,7 +2689,7 @@ ARTICLES['profsoyuzy'] = dict(
     sources=[
         ('Unia — взносы по зарплате', 'https://unia.swiss/membership'),
         ('Unia — регламент взносов и услуг (3 месяца членства)', 'https://unia.ch/fileadmin/user_upload/2023-12-01-Reglement-Beitr%C3%A4ge-Leistungen.pdf'),
-        ('syndicom — взносы и правовая защита', 'https://syndicom.ch/en/article/faq-membership-syndicom'),
+        ('syndicom — взносы и правовая защита', 'https://syndicom.ch/en/faq-membership/'),
         ('Hotel & Gastro Union — регламент юридической службы', 'https://www.hotelgastrounion.ch/fileadmin/files/HGU/Rechtsdienst/Reglement/Reglement_fuer_die_Benutzung_des_Rechtsdienstes.pdf'),
         ('Mieterverband — выбрать секцию по индексу', 'https://www.mieterverband.ch/sektion-waehlen/?ref=mitglied-werden'),
         ('ASLOCA Vaud — тарифы 2026', 'https://vaud.asloca.ch/sites/vaud.asloca.ch/files/2026-05/LISTE%20DES%20TARIFS%202026%20-%20v.22.04.2026.pdf'),
@@ -2842,7 +2842,7 @@ ARTICLES['dogovor-arendy'] = dict(
 <p>Аренда в Швейцарии привязана к <b>референтной процентной ставке</b>, которую публикует федеральное ведомство по жилью <a href="https://www.bwo.admin.ch/de/referenzzinssatz">BWO</a> четыре раза в год. Сейчас она <b>1,25 %</b> (с 2 сентября 2025 года), следующая публикация — 1 декабря 2026 года.</p>
 <ul class="ul">
   <li>Если ставка, на которой основана твоя аренда, выше нынешней, ты вправе требовать снижения: примерно <b>2,91 % за каждые 0,25 процентного пункта</b>. Какая ставка твоя — написано в договоре или в последнем бланке повышения.</li>
-  <li>Арендодатель может зачесть часть инфляции и доказанный рост расходов, поэтому итог обычно меньше. Посчитать поможет <a href="https://www.mieterverband.ch/mv/mietzinsrechner-senkung.html">калькулятор союза арендаторов</a>.</li>
+  <li>Арендодатель может зачесть часть инфляции и доказанный рост расходов, поэтому итог обычно меньше. Посчитать поможет <a href="https://mzr.mieterverband.ch/senkung">калькулятор союза арендаторов</a>.</li>
   <li class="attn"><b>Как требовать снижения.</b> Напиши арендодателю письмо и отправь его заказным. Аренду снижают к ближайшему сроку, к которому договор можно расторгнуть. <i class="wi"></i>Поэтому письмо должно дойти до начала срока уведомления о расторжении. Например, чтобы аренда снизилась с 1 июля при сроке уведомления 3 месяца, письмо должно дойти до конца марта. У арендодателя 30 дней на ответ. Если он отказал или молчит, подай заявление в примирительный орган: в течение 30 дней после его ответа или в течение 60 дней после своего письма, если ответа нет. Это бесплатно.</li>
 </ul>
 <p>Письмо с требованием снижения на языке кантона можно сделать в инструменте «Письма управляющей».</p>
@@ -2874,7 +2874,7 @@ ARTICLES['dogovor-arendy'] = dict(
 <h2 id="vyezd">Выезд и залог</h2>
 <ul class="ul">
   <li class="attn">При сдаче квартиры управляющая проверяет её вместе с тобой и пишет <b>протокол</b>. Подписывай только то, с чем согласна, спорное — отметь. <i class="wi"></i>Дефекты, за которые отвечаешь ты, она должна назвать сразу (без протокола — в течение 2–3 рабочих дней), иначе теряет право на претензию.</li>
-  <li><b>Обычный износ</b> не оплачивается, оплачивается только повреждение — и то по остаточной стоимости вещи по <a href="https://www.mieterverband.ch/mv/mietrecht-beratung/ratgeber-mietrecht/unterlagen-tools/lebensdauertabelle.html">таблице сроков службы</a>. Если, например, ковру 15 лет и срок его службы истёк, за пятно ты не платишь. Если ты всё же что-то повредила, отправь счёт за ремонт в свою страховку гражданской ответственности (Privathaftpflicht).</li>
+  <li><b>Обычный износ</b> не оплачивается, оплачивается только повреждение — и то по остаточной стоимости вещи по <a href="https://www.mieterverband.ch/mietrecht/unterlagen-und-tools/lebensdauertabelle/">таблице сроков службы</a>. Если, например, ковру 15 лет и срок его службы истёк, за пятно ты не платишь. Если ты всё же что-то повредила, отправь счёт за ремонт в свою страховку гражданской ответственности (Privathaftpflicht).</li>
   <li>Если уборка недостаточная, управляющая должна дать короткий срок доубрать и только потом нанимать уборку за твой счёт.</li>
   <li><b>Залог</b> (Mietkaution) лежит в банке на заблокированном счёте. Чтобы получить его обратно с процентами, ты и арендодатель вместе подписываете поручение банку. Подписывай его, только если согласна с итоговым расчётом. Если арендодатель тянет с подписью, напиши ему заказное письмо, а если не поможет — подай заявление в примирительный орган. Через год после выезда банк выплатит залог и без подписи арендодателя, если за этот год он не начал против тебя взыскание долга, примирительную процедуру или суд.</li>
 </ul>
@@ -3228,14 +3228,14 @@ ARTICLES['bolezn-na-rabote'] = dict(
   <li>Каждого работника работодатель страхует от несчастных случаев по закону UVG — у Suva или у частной страховой.</li>
   <li class="attn">Если ты работаешь у одного работодателя <b>8 часов в неделю и больше</b>, страховка покрывает и несчастные случаи вне работы, например на лыжах или дома. Если меньше 8 часов, страховка работодателя покрывает только несчастные случаи на работе и по дороге на работу. <i class="wi"></i>Тогда несчастные случаи в свободное время нужно застраховать самой: включи страховку от несчастных случаев в свою обязательную медстраховку (<a href="https://www.kmu.admin.ch/de/berufsunfallversicherung-buv-und-nichtberufsunfallversicherung-nbuv">KMU-Portal</a>).</li>
   <li>С третьего дня после несчастного случая страховка платит <b>пособие — 80 % зарплаты</b>. Лечение она тоже оплачивает (<a href="https://www.suva.ch/de-ch/download/dokument/ihr-suva-versicherungsschutz-das-muessen-sie-wissen/ihr-suva-versicherungsschutz-das-muessen-sie-wissen--1807.d">Suva</a>).</li>
-  <li>Сразу сообщи о несчастном случае работодателю: он заявляет о нём в страховую. Врачу тоже скажи, что это несчастный случай (Unfall). Тогда счёт пойдёт в страховку от несчастных случаев, а не в медстраховку, и тебе не придётся платить франшизу и долю расходов (<a href="https://ch.ch/de/unfallversicherung-uvg">ch.ch</a>).</li>
+  <li>Сразу сообщи о несчастном случае работодателю: он заявляет о нём в страховую. Врачу тоже скажи, что это несчастный случай (Unfall). Тогда счёт пойдёт в страховку от несчастных случаев, а не в медстраховку, и тебе не придётся платить франшизу и долю расходов (<a href="https://www.ch.ch/de/versicherungen/unfallversicherung/">ch.ch</a>).</li>
   <li class="attn"><i class="wi"></i>Не работай, если врач запретил: страховая может потребовать деньги назад.</li>
 </ul>
 
 <h2 id="beremennost">Беременность и декрет</h2>
 <ul class="ul">
   <li class="attn"><i class="wi"></i>Во время беременности и <b>16 недель после родов</b> уволить нельзя (кроме испытательного срока).</li>
-  <li class="attn"><b>Декретные (Mutterschaftsentschädigung)</b> платят 14 недель: 80 % среднего дохода, но не больше <b>220 франков в день</b>. Их получаешь, если за 9 месяцев до родов была застрахована в AHV и из них минимум 5 месяцев работала (<a href="https://www.bsv.admin.ch/de/eo-bei-mutterschaft">BSV</a>). <i class="wi"></i>Сами они не приходят. Если ты работаешь по найму, заявление в кассу AHV (Ausgleichskasse) подают через работодателя. Если работаешь на себя или без работы, подаёшь его в кассу сама (<a href="https://faq.bsv.admin.ch/de/erwerbsersatz-eo/wie-muss-ich-vorgehen-damit-die-mutterschaftsentschaedigung-ausbezahlt-wird">BSV</a>).</li>
+  <li class="attn"><b>Декретные (Mutterschaftsentschädigung)</b> платят 14 недель: 80 % среднего дохода, но не больше <b>220 франков в день</b>. Их получаешь, если за 9 месяцев до родов была застрахована в AHV и из них минимум 5 месяцев работала (<a href="https://www.bsv.admin.ch/de/eo-bei-mutterschaft">BSV</a>). <i class="wi"></i>Сами они не приходят. Если ты работаешь по найму, заявление в кассу AHV (Ausgleichskasse) подают через работодателя. Если работаешь на себя или без работы, подаёшь его в кассу сама (<a href="https://www.ahv-iv.ch/p/6.02.d">BSV</a>).</li>
   <li class="attn"><i class="wi"></i>8 недель после родов работать нельзя.</li>
   <li>Кормишь грудью в первый год — часть времени на кормление засчитывается как рабочее: от 30 до 90 минут в день в зависимости от длины дня.</li>
 </ul>
@@ -3256,7 +3256,7 @@ ARTICLES['bolezn-na-rabote'] = dict(
         ('BAG — добровольная страховка дневных пособий', 'https://www.bag.admin.ch/de/krankenversicherung-die-freiwillige-taggeldversicherung'),
         ('Suva — страховая защита, 2026', 'https://www.suva.ch/de-ch/download/dokument/ihr-suva-versicherungsschutz-das-muessen-sie-wissen/ihr-suva-versicherungsschutz-das-muessen-sie-wissen--1807.d'),
         ('BSV — пособие по материнству', 'https://www.bsv.admin.ch/de/eo-bei-mutterschaft'),
-        ('KMU-Portal — беременность и материнство на работе', 'https://www.kmu.admin.ch/kmu/de/home/praktisches-wissen/personal/arbeitsrecht/arbeitszeit/schwangerschaft-und-mutterschaft.html'),
+        ('KMU-Portal — беременность и материнство на работе', 'https://www.kmu.admin.ch/de/schwangerschaft-mutterschaft-und-vaterschaft'),
         ('law.ch — шкалы выплаты зарплаты (обзор)', 'https://law.ch/wp-content/uploads/2022/09/001_uebersicht-lohnfortzahlung-skalen.pdf'),
     ],
     terms=[('Deutsch', 'Lohnfortzahlung, Berner Skala, Zürcher Skala, Basler Skala, Krankentaggeldversicherung, Wartefrist, Arztzeugnis, Arbeitsunfähigkeit, Sperrfrist, Kündigungsschutz, Berufsunfall, Nichtberufsunfall, UVG-Taggeld, Mutterschaftsentschädigung'), ('Français', 'maintien du salaire, échelle bernoise, assurance indemnité journalière maladie, délai d’attente, certificat médical, incapacité de travail, délai de protection, accident professionnel, accident non professionnel, allocation de maternité'), ('Italiano', 'continuazione del pagamento del salario, scala bernese, indennità giornaliera di malattia, periodo d’attesa, certificato medico, incapacità lavorativa, periodo di protezione, infortunio professionale, indennità di maternità'), ('English', 'continued pay when sick, sickness daily allowance, waiting period, medical certificate, incapacity for work, protection period, occupational accident, maternity allowance')],
@@ -3569,7 +3569,7 @@ ARTICLES['brak-razvod'] = dict(
 <p>С 1 июля 2022 года пожениться могут и однополые пары. Новые зарегистрированные партнёрства больше не заключают, прежние можно превратить в брак.</p>
 
 <h2 id="zagranica">Брак из-за границы</h2>
-<p>Брак, действительный в другой стране, в Швейцарии в принципе признаётся. Чтобы он был в швейцарском реестре, его регистрирует кантон: обычно через миграционную службу или Zivilstandsamt твоего кантона, документы — с апостилем и переводом (<a href="https://www.bj.admin.ch/dam/data/bj/gesellschaft/zivilstand/merkblaetter/ehe/auslandehe-d.pdf">BJ</a>).</p>
+<p>Брак, действительный в другой стране, в Швейцарии в принципе признаётся. Чтобы он был в швейцарском реестре, его регистрирует кантон: обычно через миграционную службу или Zivilstandsamt твоего кантона, документы — с апостилем и переводом (<a href="https://www.bj.admin.ch/de/zivilstandswesen">BJ</a>).</p>
 
 <h2 id="familiya">Фамилия</h2>
 <ul class="ul">
@@ -3638,7 +3638,7 @@ ARTICLES['brak-razvod'] = dict(
     sources=[
         ('ch.ch — пожениться', 'https://www.ch.ch/de/familie-und-partnerschaft/heirat--konkubinat--partenariat/heiraten/'),
         ('BJ — вопросы о браке и браке для всех, 19.03.2026', 'https://www.bj.admin.ch/de/faq-eheschliessung-ehe-fuer-alle'),
-        ('BJ — признание брака из-за границы', 'https://www.bj.admin.ch/dam/data/bj/gesellschaft/zivilstand/merkblaetter/ehe/auslandehe-d.pdf'),
+        ('BJ — признание брака из-за границы', 'https://www.bj.admin.ch/de/zivilstandswesen'),
         ('ch.ch — имущество супругов', 'https://www.ch.ch/de/familie-und-partnerschaft/heirat--konkubinat--partenariat/wirtschaftliche-folgen-der-ehe-guterstand/'),
         ('ch.ch — процедура развода', 'https://www.ch.ch/de/familie-und-partnerschaft/scheidung/scheidungsverfahren/'),
         ('ch.ch — последствия развода', 'https://www.ch.ch/de/familie-und-partnerschaft/scheidung/folgen-einer-scheidung/'),
@@ -3688,7 +3688,7 @@ ARTICLES['gemeinde'] = dict(
 <ul class="ul">
   <li class="attn"><i class="wi"></i>Пермит действует только в том кантоне, который его выдал. Поэтому с <b>пермитом L или B</b> переезд в другой кантон нужно <b>согласовать заранее</b>: подать заявление в миграционную службу нового кантона и дождаться решения (<a href="https://so.ch/verwaltung/departement-des-innern/migrationsamt/aufenthalt-und-integration/kantonswechsel/">пример Золотурна</a>). Для граждан стран вне ЕС и ЕАСТ это обязательно. Не переезжай до решения.</li>
   <li class="attn"><i class="wi"></i>С пермитом B право на смену кантона есть, если ты не безработная и нет причин для отзыва пермита. С пермитом C — если нет серьёзных нарушений.</li>
-  <li><b>Обычно просят:</b> заявление, паспорт, трудовой договор или справку о доходе, выписку из реестра долгов не старше 3 месяцев, подтверждение, что не получаешь социальную помощь, иногда — письмо с объяснением (<a href="https://migrationsamt.tg.ch/public/upload/assets/143315/Merkblatt_Kantonswechsel_%2816.11.2023%29.pdf?fp=5">пример Тургау</a>).</li>
+  <li><b>Обычно просят:</b> заявление, паспорт, трудовой договор или справку о доходе, выписку из реестра долгов не старше 3 месяцев, подтверждение, что не получаешь социальную помощь, иногда — письмо с объяснением (<a href="https://migrationsamt.tg.ch/einreise-und-aufenthalt/kantonswechsel.html/17031">пример Тургау</a>).</li>
   <li class="attn"><i class="wi"></i>Если у тебя статус S, F или N, переехать в другой кантон особенно сложно. Спроси в миграционной службе своего кантона, возможно ли это в твоём случае.</li>
 </ul>
 
@@ -3731,7 +3731,7 @@ ARTICLES['gemeinde'] = dict(
         ('ch.ch — регистрация в общине', 'https://www.ch.ch/de/wohnen/umzug/ab-und-anmelden-bei-der-wohngemeinde/'),
         ('ch.ch — чек-лист переезда', 'https://www.ch.ch/de/wohnen/umzug/checkliste-fur-den-umzug/'),
         ('Кантон Золотурн — смена кантона', 'https://so.ch/verwaltung/departement-des-innern/migrationsamt/aufenthalt-und-integration/kantonswechsel/'),
-        ('Кантон Тургау — памятка о смене кантона, 16.11.2023', 'https://migrationsamt.tg.ch/public/upload/assets/143315/Merkblatt_Kantonswechsel_%2816.11.2023%29.pdf?fp=5'),
+        ('Кантон Тургау — памятка о смене кантона, 16.11.2023', 'https://migrationsamt.tg.ch/einreise-und-aufenthalt/kantonswechsel.html/17031'),
         ('Кантон Базель-Штадт — переезд и регистрация', 'https://www.bs.ch/node/13849'),
         ('Serafe — сбор за радио и телевидение', 'https://www.serafe.ch/'),
     ],
@@ -3781,7 +3781,7 @@ ARTICLES['vereine'] = dict(
   <li>Волонтёрство (Freiwilligenarbeit) в Швейцарии ценят очень высоко. Помогать можно в доме престарелых, на мероприятиях, с переводами для новичков, в продуктовом банке, в спортивном клубе.</li>
   <li>Найти место помогут региональные бюро по волонтёрству Benevol и платформы вроде <a href="https://www.benevol-jobs.ch">benevol-jobs.ch</a>.</li>
   <li><b>Для работы:</b> волонтёрство даёт местный опыт, язык и рекомендации. Попроси подтверждение — <a href="https://www.dossier-freiwillig-engagiert.ch">«Dossier freiwillig engagiert»</a> — и добавь в «Резюме для Швейцарии (Lebenslauf)».</li>
-  <li class="attn">Если ты получаешь пособие по безработице (через региональный центр занятости RAV) или социальную помощь, сначала сообщи о волонтёрстве своему консультанту и спроси, засчитают ли его. <i class="wi"></i>Волонтёрство не должно мешать поиску работы: собеседования и курсы RAV всегда важнее (<a href="https://www.benevol.ch/fileadmin/images/global/benevol_Schweiz/Merkblaetter/benevol_Merkblatt_5_Freiwilligenarbeit_fuer_Stellensuchende_6_2022.pdf">памятка Benevol для ищущих работу</a>).</li>
+  <li class="attn">Если ты получаешь пособие по безработице (через региональный центр занятости RAV) или социальную помощь, сначала сообщи о волонтёрстве своему консультанту и спроси, засчитают ли его. <i class="wi"></i>Волонтёрство не должно мешать поиску работы: собеседования и курсы RAV всегда важнее (<a href="https://benevol.ch/merkblaetter-und-stadards">памятка Benevol для ищущих работу</a>).</li>
 </ul>
 
 <h2 id="svoi">Свои люди</h2>
@@ -4267,7 +4267,7 @@ ARTICLES['tamozhnya'] = dict(
 </ul>
 
 <h2 id="normy">Мясо, алкоголь, табак</h2>
-<p>На эти товары, кроме лимита 150 франков, есть нормы без пошлины — на человека в день (<a href="https://www.bazg.admin.ch/bazg/en/home/information-individuals/travel-and-purchases--allowances/goods-in-travel/freimengen--lebensmittel--alkohol-und-tabak.html">BAZG</a>):</p>
+<p>На эти товары, кроме лимита 150 франков, есть нормы без пошлины — на человека в день (<a href="https://www.bazg.admin.ch/en/duty-free-allowances-foodstuffs-alcohol-and-tobacco">BAZG</a>):</p>
 <div class="tbl"><table>
 <thead><tr><th>Товар</th><th>Без пошлины</th><th>Пошлина сверх нормы</th></tr></thead>
 <tbody>
@@ -4327,7 +4327,7 @@ ARTICLES['tamozhnya'] = dict(
     related=['transport', 'zhivotnye', 'prava-pokupatelya', 'skrytye-rashody'],
     sources=[
         ('BAZG — лимит 150 франков', 'https://www.bazg.admin.ch/de/wertfreigrenze-mehrwertsteuer-einreise-150-franken'),
-        ('BAZG — нормы для еды, алкоголя и табака', 'https://www.bazg.admin.ch/bazg/en/home/information-individuals/travel-and-purchases--allowances/goods-in-travel/freimengen--lebensmittel--alkohol-und-tabak.html'),
+        ('BAZG — нормы для еды, алкоголя и табака', 'https://www.bazg.admin.ch/en/duty-free-allowances-foodstuffs-alcohol-and-tobacco'),
         ('BLV — еда в личном багаже', 'https://www.blv.admin.ch/de/lebensmittel-im-privaten-reiseverkehr'),
         ('BAZG — лекарства', 'https://www.bazg.admin.ch/de/medikamente-import-schweiz-mengen-abgaben'),
         ('BAZG — наличные', 'https://www.bazg.admin.ch/de/mitnahme-von-bargeld-in-die-schweiz'),
@@ -4490,7 +4490,7 @@ ARTICLES['prava-pokupatelya'] = dict(
 <ul class="ul">
   <li>Найди фирму в торговом реестре (Handelsregister) через бесплатный поиск <a href="https://www.zefix.admin.ch">Zefix</a>. Там видно точное название, адрес и с какого года фирма существует. Маленький индивидуальный предприниматель может быть не записан в торговый реестр. Тогда спроси его номер предприятия (UID) и проверь его в <a href="https://www.uid.admin.ch">реестре UID</a>.</li>
   <li>Если фирма добавляет в счёт НДС (MWST), у неё должен быть номер плательщика НДС в формате CHE-123.456.789 MWST (<a href="https://www.estv.admin.ch/estv/de/home/mehrwertsteuer/uid.html">ESTV</a>). Проверь этот номер в реестре UID.</li>
-  <li>Почитай отзывы и посмотри, есть ли у фирмы настоящий адрес. Спроси, есть ли у неё страховка ответственности (Betriebshaftpflichtversicherung) на случай, если работники что-то повредят. Для уборки и переезда это особенно важно (<a href="https://www.beobachter.ch/umzug/darauf-mussen-sie-bei-offerten-achten">Beobachter</a>).</li>
+  <li>Почитай отзывы и посмотри, есть ли у фирмы настоящий адрес. Спроси, есть ли у неё страховка ответственности (Betriebshaftpflichtversicherung) на случай, если работники что-то повредят. Для уборки и переезда это особенно важно (<a href="https://www.beobachter.ch/wohnen/umzug/7-tipps-wie-sie-die-richtige-putzfirma-finden-13559">Beobachter</a>).</li>
   <li>Для большой работы возьми 2–3 оферты от разных фирм и сравни их по одному списку работ.</li>
 </ul>
 
@@ -4499,7 +4499,7 @@ ARTICLES['prava-pokupatelya'] = dict(
   <li>Оферта (по-немецки Offerte, по-французски offre или devis, по-итальянски offerta или preventivo) — это письменное предложение фирмы: что она сделает, из какого материала, за сколько и к какому сроку.</li>
   <li>Бери только оферту на бланке фирмы с её названием, адресом, номером UID, датой, номером оферты и сроком, до которого она действует (gültig bis). Цена в сообщении «примерно 500» в мессенджере ничего не гарантирует.</li>
   <li><b>Платная ли оферта?</b> Обычно оферта бесплатная (<a href="https://www.beobachter.ch/rechtslexikon/kostenvoranschlag">Beobachter</a>). Брать за неё деньги фирма может, если для неё нужно много работы: замеры, расчёты, планы, разборка прибора. И только если тебя заранее предупредили и ты согласилась. Если не предупредили, платить за оферту ты не обязана (<a href="https://www.srf.ch/sendungen/kassensturz-espresso/rechtsfragen/sonstiges-recht/darf-eine-offerte-kosten">SRF Kassensturz</a>). До визита спроси: «Ist die Offerte kostenlos?» (оферта бесплатная?). Если она платная, спроси, сколько она стоит и засчитают ли эти деньги, если ты закажешь работу.</li>
-  <li>Для большой работы (ремонт, уборка при сдаче квартиры, переезд) фирма должна сначала посмотреть всё на месте. Цена по телефону, без осмотра — плохой знак (<a href="https://www.beobachter.ch/umzug/darauf-mussen-sie-bei-offerten-achten">Beobachter</a>).</li>
+  <li>Для большой работы (ремонт, уборка при сдаче квартиры, переезд) фирма должна сначала посмотреть всё на месте. Цена по телефону, без осмотра — плохой знак (<a href="https://www.beobachter.ch/wohnen/umzug/7-tipps-wie-sie-die-richtige-putzfirma-finden-13559">Beobachter</a>).</li>
   <li>Прочитай каждую строчку и все сокращения. Что они значат, смотри в разделе «Словарик оферты».</li>
 </ul>
 
@@ -4632,8 +4632,8 @@ ARTICLES['prava-pokupatelya'] = dict(
 <ol class="ol">
   <li><b>Не молчи.</b> Напиши продавцу письменно, что и почему ты оспариваешь, и попроси исправить счёт. Оплати бесспорную часть, если она есть.</li>
   <li><b>Напоминания</b> (Mahnung) и письма от фирмы-инкассо — это ещё не принудительное взыскание. Если ты не согласна со счётом, ответь им письменно и объясни почему.</li>
-  <li class="attn"><b>Пришёл платёжный приказ (Zahlungsbefehl)</b> из ведомства по взысканию долгов (Betreibungsamt). <i class="wi"></i>Если долг спорный, подай <b>возражение (Rechtsvorschlag) в течение 10 дней</b>, объяснять причину не нужно. Если не подашь, продавец может продолжить взыскание: ведомство будет удерживать часть зарплаты или заберёт ценные вещи (<a href="https://ch.ch/de/betreibungen">ch.ch</a>). Подробно — в теме «Долги в Швейцарии и Betreibung».</li>
-  <li>После возражения взыскание останавливается. Чтобы его продолжить, продавец должен пойти в суд и доказать, что ты должна (<a href="https://ch.ch/de/betreibungen">ch.ch</a>). Обычно сначала спор разбирает примирительный орган (Schlichtungsbehörde). Это недорого, и адвокат там не нужен.</li>
+  <li class="attn"><b>Пришёл платёжный приказ (Zahlungsbefehl)</b> из ведомства по взысканию долгов (Betreibungsamt). <i class="wi"></i>Если долг спорный, подай <b>возражение (Rechtsvorschlag) в течение 10 дней</b>, объяснять причину не нужно. Если не подашь, продавец может продолжить взыскание: ведомство будет удерживать часть зарплаты или заберёт ценные вещи (<a href="https://www.ch.ch/de/steuern-und-finanzen/schulden--betreibungen-und-konkurs/betreibungen/">ch.ch</a>). Подробно — в теме «Долги в Швейцарии и Betreibung».</li>
+  <li>После возражения взыскание останавливается. Чтобы его продолжить, продавец должен пойти в суд и доказать, что ты должна (<a href="https://www.ch.ch/de/steuern-und-finanzen/schulden--betreibungen-und-konkurs/betreibungen/">ch.ch</a>). Обычно сначала спор разбирает примирительный орган (Schlichtungsbehörde). Это недорого, и адвокат там не нужен.</li>
 </ol>
 
 <h2 id="pomoshch">Кто поможет</h2>
@@ -4669,7 +4669,7 @@ ARTICLES['prava-pokupatelya'] = dict(
         ('Beobachter — платная оценка ремонта (Kostenvoranschlag)', 'https://www.beobachter.ch/konsum/dienstleistungen/reparaturen-bei-der-offerte-mit-kosten-rechnen'),
         ('Beobachter — Kostenvoranschlag', 'https://www.beobachter.ch/rechtslexikon/kostenvoranschlag'),
         ('Beobachter — если мастер сделал работу с дефектами', 'https://www.beobachter.ch/beratung/rechtsratgeber/konsum/handwerker/handwerker-neuanfertigung-und-reparatur/wenn-handwerker-mangelhafte-arbeit-leisten'),
-        ('Beobachter — уборка при сдаче квартиры: что проверить в оферте', 'https://www.beobachter.ch/umzug/darauf-mussen-sie-bei-offerten-achten'),
+        ('Beobachter — уборка при сдаче квартиры: что проверить в оферте', 'https://www.beobachter.ch/wohnen/umzug/7-tipps-wie-sie-die-richtige-putzfirma-finden-13559'),
         ('Beobachter — не платить фирме по уборке вперёд', 'https://www.beobachter.ch/gesetze-recht/darum-sollten-sie-putzinstitute-niemals-im-voraus-bezahlen-944868'),
         ('SRF Kassensturz — может ли счёт быть выше оферты', 'https://www.srf.ch/sendungen/kassensturz-espresso/darf-der-handwerker-mehr-verlangen-als-in-der-offerte-steht'),
         ('SRF Kassensturz — может ли оферта быть платной', 'https://www.srf.ch/sendungen/kassensturz-espresso/rechtsfragen/sonstiges-recht/darf-eine-offerte-kosten'),
@@ -4732,7 +4732,7 @@ ARTICLES['beremennost'] = dict(
   <li class="attn"><i class="wi"></i><b>Уволить нельзя</b> во время беременности и <b>16 недель после родов</b> — увольнение в это время недействительно (OR ст. 336c). Исключение — испытательный срок. Работодателю сообщать о беременности ты не обязана, но защита сильнее, если он знает.</li>
   <li>Беременная может не выходить на работу или уйти раньше, просто предупредив (без справки врача такие часы не оплачиваются; со справкой — как при болезни).</li>
   <li class="attn"><b>Защита на работе</b> (по <a href="https://www.weka.ch/themen/personal/arbeitszeit-und-absenzen/absenzen-und-ferien/article/mutterschutz-arbeitsrechtliche-regelungen-im-ueberblick/">закону о труде</a>). В последние 8 недель до родов тебе нельзя работать с 20 до 6 часов. С 4-го месяца, если ты работаешь стоя, у тебя каждые 2 часа есть дополнительный перерыв на 10 минут, а с 6-го месяца стоять на работе можно не больше 4 часов в день. <i class="wi"></i>Тяжёлую и опасную работу можно не выполнять. Если работодатель не может дать тебе вместо неё подходящую безопасную работу, он всё равно платит тебе 80 % зарплаты (<a href="https://www.seco.admin.ch/de/mutterschutz">SECO</a>).</li>
-  <li>Если ты работаешь у семьи (няня, уборка), защита от увольнения и оплачиваемый декрет у тебя такие же. Рабочее время и перерывы у работниц в частных домах регулирует типовой трудовой договор кантона (Normalarbeitsvertrag, NAV), найди его на сайте своего кантона (<a href="https://www.bern.ch/themen/gesundheit-alter-und-soziales/alter/betreuung/betreuung-zu-hause-1/druckversion/24-anstellung-betreuung-zu-hause.pdf/download">пример города Берна</a>).</li>
+  <li>Если ты работаешь у семьи (няня, уборка), защита от увольнения и оплачиваемый декрет у тебя такие же. Рабочее время и перерывы у работниц в частных домах регулирует типовой трудовой договор кантона (Normalarbeitsvertrag, NAV), найди его на сайте своего кантона (<a href="https://www.bern.ch/themen/gesundheit-alter-und-soziales/alter/betreuung/betreuung-zu-hause-1">пример города Берна</a>).</li>
 </ul>
 
 <h2 id="dekret">Декрет: 14 недель для мамы, 2 — для папы</h2>
@@ -4740,7 +4740,7 @@ ARTICLES['beremennost'] = dict(
   <li><b>Декрет мамы</b> (Mutterschaftsurlaub, congé de maternité) — <b>14 недель (98 дней)</b> с дня родов, <b>80 % зарплаты, не больше 220 франков в день</b> (<a href="https://www.ch.ch/de/mutterschaftsurlaub">ch.ch</a>). Работодатель или договор могут давать больше.</li>
   <li><b>Условия:</b> 9 месяцев до родов ты была застрахована в AHV, работала за время беременности хотя бы 5 месяцев и в день родов работаешь по найму, на себя или получаешь пособие по безработице. Время работы в ЕС тоже может засчитываться.</li>
   <li class="attn"><i class="wi"></i><b>8 недель после родов работать нельзя</b>, до 16-й недели — только если ты сама хочешь.</li>
-  <li>Если ребёнок сразу после родов лежит в больнице не меньше 2 недель, декретные выплаты продлевают на столько дней, сколько он там пробыл, но не больше чем на 56 дней. Это возможно, если после декрета ты снова выходишь на работу (<a href="https://faq.bsv.admin.ch/de/erwerbsersatz-eo/was-passiert-wenn-mein-kind-direkt-nach-der-geburt-im-spital-bleiben-muss">BSV</a>).</li>
+  <li>Если ребёнок сразу после родов лежит в больнице не меньше 2 недель, декретные выплаты продлевают на столько дней, сколько он там пробыл, но не больше чем на 56 дней. Это возможно, если после декрета ты снова выходишь на работу (<a href="https://www.bsv.admin.ch/de/eo-bei-mutterschaft#Mutterschaftsentsch%C3%A4digung-bei-l%C3%A4ngerem-Spitalaufenthalt-des-Neugeborenen">BSV</a>).</li>
   <li><b>Как получить.</b> Декретные выплаты платит касса AHV (Ausgleichskasse), для этого нужно заявление. Если ты работаешь по найму, его обычно подают через работодателя. Если у тебя своё дело, подай заявление сама в свою кассу AHV.</li>
   <li><b>Отец</b> (или жена мамы) — <b>2 недели</b> (10 рабочих дней) в течение 6 месяцев после родов, тоже 80 % до 220 франков в день. Можно брать по дням.</li>
   <li><b>Кормление грудью</b> в первый год — оплачиваемое рабочее время: не меньше 30 минут при рабочем дне до 4 часов, 60 минут — больше 4 часов, 90 минут — больше 7 часов.</li>
@@ -5170,9 +5170,9 @@ ARTICLES['rybalka-griby-ohota'] = dict(
 
 <h2 id="ohota">Охота</h2>
 <ul class="ul">
-  <li class="attn"><i class="wi"></i>Охотиться можно только с разрешением кантона (Jagdberechtigung). Его дают тем, кто сдал кантональный экзамен (<a href="https://www.fedlex.admin.ch/eli/cc/1988/506_506_506/de#art_4">закон об охоте, JSG ст. 4</a>). Подготовка к экзамену (Jagdprüfung) устроена в каждом кантоне по-своему и длится до трёх лет (<a href="https://ch.ch/de/sicherheit-und-recht/jagd">ch.ch</a>).</li>
+  <li class="attn"><i class="wi"></i>Охотиться можно только с разрешением кантона (Jagdberechtigung). Его дают тем, кто сдал кантональный экзамен (<a href="https://www.fedlex.admin.ch/eli/cc/1988/506_506_506/de#art_4">закон об охоте, JSG ст. 4</a>). Подготовка к экзамену (Jagdprüfung) устроена в каждом кантоне по-своему и длится до трёх лет (<a href="https://www.ch.ch/de/sicherheit-und-recht/jagd/">ch.ch</a>).</li>
   <li><b>Охота по патенту</b> (Patentjagd) действует в кантонах Берн, Ури, Швиц, Обвальден, Нидвальден, Гларус, Цуг, Фрибур, оба Аппенцелля, Граубюнден, Тичино, Во, Вале, Невшатель и Юра. Охотница покупает патент и может охотиться по всему кантону, кроме охраняемых зон (<a href="https://www.bafu.admin.ch/de/jagd">BAFU</a>).</li>
-  <li><b>Охота в угодьях</b> (Revierjagd) действует в кантонах Цюрих, Люцерн, Золотурн, оба Базеля, Шаффхаузен, Санкт-Галлен, Аргау и Тургау. Общины сдают право охоты обществам охотников (Jagdgesellschaft) в аренду, обычно на 8 лет. Чтобы охотиться, нужно стать членом или гостем такого общества (<a href="https://www.bafu.admin.ch/de/jagd">BAFU</a>, <a href="https://ch.ch/de/sicherheit-und-recht/jagd">ch.ch</a>).</li>
+  <li><b>Охота в угодьях</b> (Revierjagd) действует в кантонах Цюрих, Люцерн, Золотурн, оба Базеля, Шаффхаузен, Санкт-Галлен, Аргау и Тургау. Общины сдают право охоты обществам охотников (Jagdgesellschaft) в аренду, обычно на 8 лет. Чтобы охотиться, нужно стать членом или гостем такого общества (<a href="https://www.bafu.admin.ch/de/jagd">BAFU</a>, <a href="https://www.ch.ch/de/sicherheit-und-recht/jagd/">ch.ch</a>).</li>
   <li class="attn"><i class="wi"></i>В кантоне Женева охоты нет с 1974 года, её запретили на народном голосовании. Численность диких животных там регулируют государственные егеря (<a href="https://www.bafu.admin.ch/de/jagd">BAFU</a>).</li>
   <li><b>Гости.</b> Кантон может выдавать временные разрешения гостям-охотникам (<a href="https://www.fedlex.admin.ch/eli/cc/1988/506_506_506/de#art_4">JSG, ст. 4</a>). Условия и цены для гостей и для людей, которые живут в другом месте, в каждом кантоне свои. Узнавай их в кантональном управлении охоты (Jagdverwaltung).</li>
   <li class="attn"><b>Оружие.</b> <i class="wi"></i>Если у тебя нет швейцарского паспорта или пермита C, для покупки любого оружия нужно разрешение на покупку оружия (Waffenerwerbsschein) и подтверждение из страны твоего гражданства, что там тебе можно купить такое оружие. <i class="wi"></i>Граждане Сербии, Боснии и Герцеговины, Косово, Северной Македонии, Турции, Шри-Ланки, Алжира и Албании оружие в Швейцарии покупать и иметь не могут. Везти оружие на охоту можно только незаряженным (<a href="https://www.zh.ch/de/sicherheit-justiz/delikte-praevention/waffen.html">кантон Цюрих</a>).</li>
@@ -5229,7 +5229,7 @@ ARTICLES['rybalka-griby-ohota'] = dict(
         ('Кантон Аргау — сбор ягод, грибов и дров', 'https://www.ag.ch/de/themen/umwelt-natur/wald/erholungsraum-wald/sammeln-von-beeren-pilzen-und-holz'),
         ('SRF — черемша и её ядовитые двойники, 26.03.2024', 'https://www.srf.ch/news/gesellschaft/fruehlingsbote-der-baerlauch-und-seine-giftigen-doppelgaenger'),
         ('Info Flora — плакат «Охраняемые растения Швейцарии»', 'https://www.infoflora.ch/fr/assets/content/documents/conservation/geschuetzte-arten/poster-geschuetzte-pflanzen/poster-geschuetzte-pflanzen_7-ganze-schweiz_ausgabe-1.pdf'),
-        ('ch.ch — охота', 'https://ch.ch/de/sicherheit-und-recht/jagd'),
+        ('ch.ch — охота', 'https://www.ch.ch/de/sicherheit-und-recht/jagd/'),
         ('BAFU — охота', 'https://www.bafu.admin.ch/de/jagd'),
         ('Кантон Цюрих — оружие', 'https://www.zh.ch/de/sicherheit-justiz/delikte-praevention/waffen.html'),
         ('Кантон Граубюнден — опасность лесных пожаров и запрет костров', 'https://www.gr.ch/DE/institutionen/verwaltung/diem/awn/htm/waldbrandgefahr.htm'),
