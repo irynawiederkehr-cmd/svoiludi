@@ -5072,3 +5072,339 @@ ARTICLES['detskie-posobiya'] = dict(
     ],
     terms=[('Deutsch', 'Familienzulagen, Kinderzulage, Ausbildungszulage, Geburtszulage, Adoptionszulage, Familienausgleichskasse, Ausgleichskasse, Anmeldung Familienzulagen, Ausbildungsbestätigung, Differenzzahlung, Anspruchskonkurrenz, Nichterwerbstätige, Selbständigerwerbende, elterliche Sorge'), ('Français', 'allocations familiales, allocation pour enfant, allocation de formation professionnelle, allocation de naissance, caisse d’allocations familiales, attestation de formation, montant différentiel, concours de droits, personnes sans activité lucrative, indépendants, autorité parentale'), ('Italiano', 'assegni familiari, assegno per i figli, assegno di formazione, assegno di nascita, cassa di compensazione per assegni familiari, attestato di formazione, importo differenziale, persone senza attività lucrativa, indipendenti, autorità parentale'), ('English', 'family allowances, child allowance, education allowance, birth allowance, family compensation fund, proof of education, differential payment, non-employed persons, self-employed, parental authority')],
 )
+
+# ===== Новые темы 09.10.2026 (КОПИЯ): рыбалка, грибы, охота; дроны, фото и видео =====
+# ===== Рыбалка, грибы, ягоды и охота (09.10.2026). Факты сверены 09.10.2026: fedlex (ZGB, TSchV, BGF, JSG, NHV, NHG), ch.ch, BAFU, BLV,
+# кантоны ZH, BE, SG, SZ, GR, VD, GE, AG, ZG; Südostschweiz 01.10.2026, SRF 26.03.2024, TIR 10.04.2025, VerbanoNews 22.09.2023.
+#
+# Предложение для topics.py (раздел «7. Семья и быт», после 'priroda'):
+# T('rybalka-griby-ohota', 'life', '', 'Рыбалка, грибы, ягоды и охота', 'Какое разрешение нужно, сколько грибов можно собрать и что нельзя рвать.', ['plan-pohoda', 'ekstrennye-nomera'], [], ['events'], ready=True),
+
+ARTICLES['rybalka-griby-ohota'] = dict(
+    h1='Рыбалка, грибы, ягоды и охота в Швейцарии: <em>что можно и какие нужны разрешения</em>',
+    seo='Рыбалка, грибы и охота в Швейцарии: патент, SaNa, лимит грибов, Pilzkontrolle, Jagdprüfung',
+    desc='Рыбалка, грибы, ягоды и охота в Швейцарии простыми словами на русском: где купить рыболовный патент и когда нужен сертификат SaNa, где можно ловить с берега без патента, запрет живца и крючков с бородкой, сколько грибов можно собрать в Цюрихе, Берне, Граубюндене, Во и Тичино и в какие дни нельзя, бесплатный грибной контроль и номер Tox Info 145, черемша и её ядовитые двойники, охраняемые растения, охотничий экзамен и оружие, запрет костров в засуху и поводок для собаки весной. По-немецки Fischereipatent, Sachkunde-Nachweis, Pilzkontrolle, Jagdprüfung, по-французски permis de pêche, attestation de compétence, contrôle des champignons, examen de chasse, по-итальянски patente di pesca, controllo dei funghi, esame di caccia.',
+    lead='Лес в Швейцарии открыт для всех, и грибы или ягоды для себя собирать можно. Но охотиться можно только с разрешением, рыбачить — почти везде тоже, а для грибов в каждом кантоне свои лимиты и дни запрета. Здесь — что можно без бумаг, где взять разрешение и что будет за нарушение.',
+    body='''
+<nav class="toc" aria-label="Содержание"><b>В этой статье</b>
+<ul>
+  <li><a href="#les">Лес открыт для всех</a></li>
+  <li><a href="#rybalka">Рыбалка: патент и сертификат SaNa</a></li>
+  <li><a href="#bez-patenta">Где можно ловить без патента</a></li>
+  <li><a href="#pravila-ryby">Правила на воде</a></li>
+  <li><a href="#griby">Грибы: сколько и когда можно</a></li>
+  <li><a href="#kontrol">Грибной контроль и отравление</a></li>
+  <li><a href="#yagody">Ягоды, черемша и цветы</a></li>
+  <li><a href="#ohota">Охота</a></li>
+  <li><a href="#povedenie">Костёр, собака и заповедники</a></li>
+</ul></nav>
+
+<h2 id="les">Лес открыт для всех</h2>
+<ul class="ul">
+  <li>В Швейцарии любой человек может ходить по лесу и пастбищам и собирать дикие ягоды и грибы в обычном для этой местности количестве. Так написано в Гражданском кодексе (<a href="https://www.fedlex.admin.ch/eli/cc/24/233_245_233/de#art_699">ZGB, ст. 699</a>). Неважно, чей это лес — государственный или частный.</li>
+  <li>Что значит «обычное количество», решают кантоны. Поэтому лимиты для грибов, дни запрета и охраняемые растения в каждом кантоне свои. Проверь правила своего кантона, а если едешь в соседний, то и его.</li>
+  <li class="attn"><i class="wi"></i>Собирать растения на продажу можно только с разрешения кантона (<a href="https://www.fedlex.admin.ch/eli/cc/1966/1637_1694_1679/de#art_19">закон об охране природы, NHG ст. 19</a>). Например, в Аргау организованные сборы и реклама таких сборов запрещены (<a href="https://www.ag.ch/de/themen/umwelt-natur/wald/erholungsraum-wald/sammeln-von-beeren-pilzen-und-holz">кантон Аргау</a>).</li>
+  <li>Рыба и дичь в это свободное право не входят. Ловить рыбу и охотиться можно только по разрешению кантона.</li>
+</ul>
+
+<h2 id="rybalka">Рыбалка: патент и сертификат SaNa</h2>
+<ul class="ul">
+  <li>Рыбалку регулирует кантон (<a href="https://www.fedlex.admin.ch/eli/cc/1991/2259_2259_2259/de#art_3">федеральный закон о рыболовстве, BGF ст. 3</a>). Разрешение на ловлю называется <b>патент</b> (Fischereipatent, permis de pêche, patente di pesca). Его продаёт кантон. На некоторых реках и ручьях право ловить сдано в аренду обществу рыбаков (Pachtrevier). Тогда дневную карту (Tageskarte) покупаешь у этого общества или в пунктах продажи.</li>
+  <li>Патенты бывают на день, неделю, месяц и год. Какие именно и на какие озёра и реки, решает кантон. Например, в Цюрихе есть дневной патент на Цюрихское, Грайфензее и Пфеффикерзее и годовые патенты. Патент можно купить онлайн в <a href="https://webshop.efj.zh.ch">веб-магазине кантона</a> или в приложении eFJ-Mobile и пользоваться им сразу. Бумажный патент стоит на 10 франков дороже (<a href="https://www.zh.ch/de/umwelt-tiere/tiere/fischerei/wie-und-wo-fischen-im-kanton-zuerich/fischereipatente-beziehen-2026.html">кантон Цюрих</a>).</li>
+  <li>В Цюрихе разрешение на рыбалку дают детям с 10 лет. С 2026 года молодёжный патент там действует с 10 до 18 лет и стоит дешевле (<a href="https://www.zh.ch/de/umwelt-tiere/tiere/fischerei/wie-und-wo-fischen-im-kanton-zuerich.html">кантон Цюрих</a>).</li>
+  <li class="attn"><b>Сертификат SaNa</b> (Sachkunde-Nachweis, attestation de compétence) — это доказательство, что ты знаешь рыб и умеешь ловить и убивать их без лишних мучений. <i class="wi"></i>По федеральному закону о защите животных он нужен всем, кто ловит рыбу не профессионально. Без него можно ловить только там, где кантон не требует патента или продаёт короткий патент максимум на месяц (<a href="https://www.fedlex.admin.ch/eli/cc/2008/416/de#art_97">TSchV, ст. 97</a>).</li>
+  <li class="attn">На практике это значит так. Дневной или недельный патент обычно можно купить без SaNa. <i class="wi"></i>Для годового патента SaNa нужен везде. В некоторых кантонах он нужен уже для месячного: например, в Граубюндене (<a href="https://www.gr.ch/DE/institutionen/verwaltung/diem/ajf/fischerei/Fischen-in-Graubuenden/Seiten/Sachkundenachweis.aspx">кантон Граубюнден</a>). <i class="wi"></i>В кантоне Во с коротким патентом нельзя ловить на крючок с бородкой и на живую наживку (appâts vivants) и держать живую рыбу в садке (<a href="https://www.vd.ch/fileadmin/user_upload/themes/environnement/biodiversite/fichiers_pdf/P%C3%AAche/INFO_PECHEURS_SaNa_v14__20251215.pdf">кантон Во</a>).</li>
+  <li>SaNa получают после курса с тестом. Записаться можно на сайте швейцарской сети обучения рыбаков: <a href="https://www.anglerausbildung.ch">anglerausbildung.ch</a> по-немецки или <a href="https://www.formation-pecheurs.ch">formation-pecheurs.ch</a> по-французски. В кантоне Во курс длится не меньше 5 часов, ведут его инструкторы местных обществ рыбаков, а SaNa из другого кантона там признают (<a href="https://www.vd.ch/fileadmin/user_upload/themes/environnement/biodiversite/fichiers_pdf/P%C3%AAche/INFO_PECHEURS_SaNa_v14__20251215.pdf">кантон Во</a>). В Женеве курс нужен всем с 14 лет, кто впервые идёт на рыбалку и покупает не только дневные карты, и стоит около 100 франков (<a href="https://www.ge.ch/node/1245">кантон Женева</a>).</li>
+  <li class="attn"><i class="wi"></i>Патент всегда носи с собой. В Цюрихе нужно иметь при себе оригинал патента и вести учёт улова (Fangstatistik). В конце года листы учёта отправляют вместе с патентом в управление рыболовства и охоты (<a href="https://www.zh.ch/de/umwelt-tiere/tiere/fischerei/wie-und-wo-fischen-im-kanton-zuerich.html">кантон Цюрих</a>).</li>
+</ul>
+
+<h2 id="bez-patenta">Где можно ловить без патента</h2>
+<p>На некоторых больших озёрах с берега можно ловить без патента. Это называют правом свободной ловли (Freiangelrecht). Снасти при этом сильно ограничены, а правила о сроках и размерах рыбы действуют так же, как с патентом.</p>
+<ul class="ul">
+  <li><b>Кантон Цюрих.</b> Цюрихское озеро, Грайфензее, Пфеффикерзее и Тюрлерзее — с берега и с очень простыми снастями. Подробные условия — в памятке кантона (<a href="https://www.zh.ch/de/umwelt-tiere/tiere/fischerei/wie-und-wo-fischen-im-kanton-zuerich.html">кантон Цюрих</a>).</li>
+  <li><b>Кантон Берн.</b> Бриенцское, Тунское и Бильское озеро — с берега, одной удочкой, на природную или искусственную наживку и один крючок без бородки. Ты обязана знать виды рыб, минимальные размеры, сроки запрета и дневную норму и обращаться с пойманной рыбой без мучений (<a href="https://www.weu.be.ch/content/dam/weu/dokumente/lanat/de/fischerei/wie-wo-fischen/lanat-fi-flyer-allgemein-de.pdf">кантон Берн</a>).</li>
+  <li><b>Кантон Санкт-Галлен.</b> Боденское озеро, Валензее, Цюрихское озеро и Оберзее — с берега, одной удочкой, без живой рыбки в качестве наживки (<a href="https://www.sg.ch/umwelt-natur/jagd-fischerei/fischerei/fischereipatente/freiangelrecht.html">кантон Санкт-Галлен</a>).</li>
+  <li class="attn"><i class="wi"></i>Даже без патента иногда нужна бумага. В кантоне Швиц для свободной ловли нужна карта (Freiangelkarte), а крючок с бородкой с берега запрещён (<a href="https://www.sz.ch/verwaltung/umweltdepartement/amt-fuer-gewaesser/fischerei/haeufig-gestellte-fragen.html/8756-8758-8802-9447-9450-10713-10821">кантон Швиц</a>). Перед первой рыбалкой прочитай правила именно этого озера на сайте кантона.</li>
+</ul>
+
+<h2 id="pravila-ryby">Правила на воде</h2>
+<ul class="ul">
+  <li class="attn"><i class="wi"></i><b>Живая рыбка в качестве наживки</b> (lebender Köderfisch) по федеральному закону запрещена. Кантон может разрешить её только в отдельных водоёмах (<a href="https://www.fedlex.admin.ch/eli/cc/2008/416/de#art_23">TSchV, ст. 23</a>).</li>
+  <li class="attn"><i class="wi"></i><b>Крючок с бородкой</b> (Widerhaken, ardillon) по федеральному закону тоже запрещён, исключения устанавливает кантон. Например, в Швице он разрешён только на одинарном крючке в озёрах, а в реках запрещён (<a href="https://www.sz.ch/verwaltung/umweltdepartement/amt-fuer-gewaesser/fischerei/haeufig-gestellte-fragen.html/8756-8758-8802-9447-9450-10713-10821">кантон Швиц</a>). Безопаснее всего покупать крючки без бородки.</li>
+  <li class="attn"><i class="wi"></i><b>«Поймал и отпустил»</b> (catch and release) как развлечение запрещено. Нельзя ловить рыбу с намерением сразу выпустить её обратно (<a href="https://www.fedlex.admin.ch/eli/cc/2008/416/de#art_23">TSchV, ст. 23</a>). Рыбу меньше минимального размера или в период запрета, наоборот, нужно осторожно выпустить.</li>
+  <li class="attn"><b>Сроки запрета и минимальный размер.</b> Для каждого вида рыбы есть период, когда её ловить нельзя (Schonzeit), и минимальная длина (Fangmindestmass). Есть и дневная норма улова. <i class="wi"></i>Цифры в каждом кантоне свои и меняются, поэтому каждый год скачивай свежую памятку кантона, например «Fanglimiten, Fangmindestmasse und Schonzeiten» в Цюрихе.</li>
+  <li class="attn"><b>Чужие виды.</b> Квагга-мидия, американские раки и рыба-бычок (Schwarzmundgrundel) вытесняют местных животных, а раки переносят рачью чуму. <i class="wi"></i>Нельзя выпускать в воду рыбу, раков и растения из аквариума или из другого водоёма. Пойманного бычка убей и не используй как наживку. Прежде чем ловить в другом озере или реке, вымой снасти, сапоги и лодку, слей из них воду и дай им полностью высохнуть. В Цюрихе с 1 апреля 2025 года каждую зарегистрированную лодку перед спуском в другой водоём нужно помыть на специальной станции и заранее заявить (<a href="https://www.zh.ch/de/umwelt-tiere/umweltschutz/gebietsfremde-arten/aquatische-neobiota-als-unbemerkte-fracht.html">кантон Цюрих</a>).</li>
+  <li class="attn"><b>Что будет без патента или с нарушениями.</b> Рыбнадзор (Fischereiaufsicht) проверяет патенты, снасти и улов, а нарушителей передаёт властям. <i class="wi"></i>За нарушение сроков запрета и других федеральных правил — штраф до 20 000 франков (<a href="https://www.fedlex.admin.ch/eli/cc/1991/2259_2259_2259/de#art_17">BGF, ст. 17</a>). Суд может запретить человеку рыбачить до 5 лет (<a href="https://www.fedlex.admin.ch/eli/cc/1991/2259_2259_2259/de#art_19">BGF, ст. 19</a>). За рыбалку без патента наказывает кантон. В Цюрихе после серьёзного нарушения или нескольких мелких патент не выдают от 1 до 10 лет (<a href="https://www.notes.zh.ch/appl/zhlex_r.nsf/WebView/B606133842EFB246C1257ACC0033345D/$File/923.1_5.12.76_79.pdf">закон Цюриха о рыболовстве, § 7</a>).</li>
+</ul>
+
+<h2 id="griby">Грибы: сколько и когда можно</h2>
+<p>Единого закона о грибах на всю Швейцарию нет: правила устанавливает кантон, а иногда и община. Вот несколько примеров.</p>
+<ul class="ul">
+  <li class="attn"><b>Кантон Цюрих.</b> <i class="wi"></i>С 1-го по 10-е число каждого месяца грибы собирать нельзя. В остальные дни — не больше 1 кг на человека в день (<a href="https://www.zh.ch/de/news-uebersicht/mitteilungen/2022/gesundheit/lebensmittel/pilzsaison.html">кантон Цюрих</a>). В 2024 году правительство кантона решило эти дни запрета сохранить (<a href="https://www.zh.ch/bin/zhweb/publish/regierungsratsbeschluss-unterlagen./2024/243/RRB-2024-0243.pdf">кантон Цюрих</a>).</li>
+  <li class="attn"><b>Кантон Граубюнден.</b> <i class="wi"></i>С 1-го по 10-е число каждого месяца собирать нельзя, в остальные дни — не больше 2 кг на человека. Нельзя ходить за грибами группой больше трёх человек, если вы не одна семья, нельзя пользоваться никакими инструментами вроде грабель и нельзя нарочно портить грибы (<a href="https://www.gr.ch/DE/institutionen/verwaltung/ekud/anu/ANU_Dokumente/ANU-404-81d_Plakat_Pilzschutz.pdf">кантон Граубюнден</a>).</li>
+  <li class="attn">Те же дни запрета, с 1-го по 10-е, действуют в Гларусе и в части общин Санкт-Галлена и Шаффхаузена. <i class="wi"></i>В Люцерне и Обвальдене период запрета короче (<a href="https://www.suedostschweiz.ch/panorama/pilze-sammeln-von-graubuenden-bis-zuerich-hier-gilt-ab-heute-pflueckverbot-2180499">Südostschweiz, 01.10.2026</a>).</li>
+  <li><b>Кантон Берн.</b> Не больше 2 кг на человека в день, а ограничений по дням и часам с 2012 года нет. Собирать грибы на продажу, например для рынка или ресторана, можно только с особым разрешением (<a href="https://www.bern.ch/themen/gesundheit-alter-und-soziales/gesundheitsvorsorge/pilzkontrolle/downloads/merkblatt-pilzesammeln.pdf/download">город Берн</a>).</li>
+  <li class="attn"><b>Кантон Во.</b> Собирать можно каждый день, с 7:00 до 20:00, не больше 2 кг на человека в день. <i class="wi"></i>Редкие грибы из красного списка рвать нельзя совсем (<a href="https://www.vd.ch/environnement/biodiversite-et-paysage/recolte-des-champignons">кантон Во</a>).</li>
+  <li class="attn"><b>Кантон Тичино.</b> Не больше 3 кг на человека в день. <i class="wi"></i>За лишние килограммы штрафуют, а грибы забирают. Например, в сентябре 2023 года полиция проверила в лесу 25 грибников. 13 из них собрали больше нормы и заплатили вместе 2700 франков, 33 кг грибов конфисковали (<a href="https://www.verbanonews.it/aree-geografiche/lombardia/2023/09/22/controlli-di-polizia-nei-boschi-in-canton-ticino-multe-e-sequestri-a-12-fungiatt-italiani/966323/">VerbanoNews, 22.09.2023</a>).</li>
+  <li>Ядовитые и несъедобные грибы не сбивай ногой и не топчи: они нужны лесу. Собирай только те грибы, которые точно знаешь.</li>
+</ul>
+
+<h2 id="kontrol">Грибной контроль и отравление</h2>
+<ul class="ul">
+  <li><b>Грибной контроль</b> (Pilzkontrolle, contrôle des champignons, controllo dei funghi) — это пункт, где специалист проверяет каждый гриб из твоей корзины, чаще всего бесплатно. В кантоне Цюрих 31 такой пункт, большинство бесплатные. В дни запрета сбора они закрыты (<a href="https://www.zh.ch/de/news-uebersicht/mitteilungen/2022/gesundheit/lebensmittel/pilzsaison.html">кантон Цюрих</a>).</li>
+  <li>Федеральное ведомство безопасности пищевых продуктов советует проверять <b>все</b> собранные грибы до готовки. Ближайший пункт подскажет община или сайт объединения грибных контролёров <a href="https://www.vapko.ch">VAPKO</a> (<a href="https://www.blv.admin.ch/dam/de/sd-web/KfZiCQXXccw6/merkblatt-pilze-de.pdf">BLV</a>).</li>
+  <li class="attn"><i class="wi"></i>Бледная поганка (Knollenblätterpilz) может убить. Из-за отравлений грибами, часто именно ею, в Tox Info Suisse звонят несколько раз в день (<a href="https://www.beobachter.ch/konsum/todlicher-knollenblatterpilz-gegenmittel-fehlt-755587">Beobachter, 07.10.2024</a>). Поэтому не полагайся на советы знакомых, свой опыт с родины или «проверку серебряной ложкой» (<a href="https://www.blv.admin.ch/dam/de/sd-web/KfZiCQXXccw6/merkblatt-pilze-de.pdf">BLV</a>).</li>
+  <li>Неси грибы в открытой корзине, а не в пластиковом пакете. Сырыми грибы не ешь. Готовь их сразу: свежие грибы быстро портятся (<a href="https://www.blv.admin.ch/dam/de/sd-web/KfZiCQXXccw6/merkblatt-pilze-de.pdf">BLV</a>).</li>
+  <li class="attn"><i class="wi"></i>Не угощай других непроверенными грибами (<a href="https://www.bern.ch/themen/gesundheit-alter-und-soziales/gesundheitsvorsorge/pilzkontrolle/downloads/merkblatt-pilzesammeln.pdf/download">город Берн</a>).</li>
+  <li class="attn"><i class="wi"></i><b>Если после грибов стало плохо</b>, сразу звони в токсикологический центр <a href="https://www.toxinfo.ch">Tox Info Suisse</a> по номеру <b>145</b> или иди к врачу (<a href="https://www.blv.admin.ch/dam/de/sd-web/KfZiCQXXccw6/merkblatt-pilze-de.pdf">BLV</a>). Номер 145 работает круглосуточно и весь год (<a href="https://www.plattformj.ch/artikel/206988/">plattformJ, 31.01.2023</a>). Если человек теряет сознание или ему очень плохо, звони в скорую помощь по номеру <b>144</b>.</li>
+</ul>
+
+<h2 id="yagody">Ягоды, черемша и цветы</h2>
+<ul class="ul">
+  <li>Дикую малину, ежевику, чернику и землянику для себя в лесу собирать можно, в обычном количестве (<a href="https://www.fedlex.admin.ch/eli/cc/24/233_245_233/de#art_699">ZGB, ст. 699</a>). Это право касается леса и пастбищ. В чужом саду или на огороде ничего не рви без разрешения хозяина.</li>
+  <li class="attn"><b>Черемша</b> (Bärlauch, ail des ours, aglio orsino) растёт весной в сырых лиственных лесах. <i class="wi"></i>Её путают с ядовитыми растениями: безвременником (Herbstzeitlose) и ландышем (Maiglöckchen). Из-за этого в Tox Info Suisse стали звонить вдвое чаще, чем 10–15 лет назад (<a href="https://www.srf.ch/news/gesellschaft/fruehlingsbote-der-baerlauch-und-seine-giftigen-doppelgaenger">SRF, 26.03.2024</a>).</li>
+  <li>Как отличить. У черемши каждый лист растёт из земли сам по себе, на длинном тонком черешке, и пахнет чесноком. У безвременника 3–4 мясистых листа без черешка обхватывают стебель, как у тюльпана, и не пахнут. У ландыша 2–3 листа обхватывают стебель и тоже не пахнут (<a href="https://www.srf.ch/news/gesellschaft/fruehlingsbote-der-baerlauch-und-seine-giftigen-doppelgaenger">SRF</a>). Если сомневаешься, не бери.</li>
+  <li class="attn"><i class="wi"></i>Если через несколько часов после черемши началась тошнота, рвота или понос, сразу звони в Tox Info Suisse по номеру <b>145</b> (<a href="https://www.srf.ch/news/gesellschaft/fruehlingsbote-der-baerlauch-und-seine-giftigen-doppelgaenger">SRF</a>).</li>
+  <li class="attn"><b>Охраняемые растения.</b> <i class="wi"></i>Растения из федерального списка нельзя рвать, выкапывать, вырывать, увозить, продавать и покупать (<a href="https://www.fedlex.admin.ch/eli/cc/1991/249_249_249/de#art_20">NHV, ст. 20 и приложение 2</a>). В этом списке, например, лилия кудреватая (Türkenbund), белая кувшинка (Weisse Seerose) и горечавка лёгочная (Lungen-Enzian). Кантоны добавляют свои списки. Info Flora предупреждает, что за сорванное охраняемое растение могут наказать, даже если вокруг его много (<a href="https://www.infoflora.ch/fr/assets/content/documents/conservation/geschuetzte-arten/poster-geschuetzte-pflanzen/poster-geschuetzte-pflanzen_7-ganze-schweiz_ausgabe-1.pdf">Info Flora</a>). Самое простое правило — в горах цветы фотографируй, а не рви.</li>
+</ul>
+
+<h2 id="ohota">Охота</h2>
+<ul class="ul">
+  <li class="attn"><i class="wi"></i>Охотиться можно только с разрешением кантона (Jagdberechtigung). Его дают тем, кто сдал кантональный экзамен (<a href="https://www.fedlex.admin.ch/eli/cc/1988/506_506_506/de#art_4">закон об охоте, JSG ст. 4</a>). Подготовка к экзамену (Jagdprüfung) устроена в каждом кантоне по-своему и длится до трёх лет (<a href="https://ch.ch/de/sicherheit-und-recht/jagd">ch.ch</a>).</li>
+  <li><b>Охота по патенту</b> (Patentjagd) — в кантонах Берн, Ури, Швиц, Обвальден, Нидвальден, Гларус, Цуг, Фрибур, оба Аппенцелля, Граубюнден, Тичино, Во, Вале, Невшатель и Юра. Охотница покупает патент и может охотиться по всему кантону, кроме охраняемых зон (<a href="https://www.bafu.admin.ch/de/jagd">BAFU</a>).</li>
+  <li><b>Охота в угодьях</b> (Revierjagd) — в кантонах Цюрих, Люцерн, Золотурн, оба Базеля, Шаффхаузен, Санкт-Галлен, Аргау и Тургау. Общины сдают право охоты обществам охотников (Jagdgesellschaft) в аренду, обычно на 8 лет. Чтобы охотиться, нужно стать членом или гостем такого общества (<a href="https://www.bafu.admin.ch/de/jagd">BAFU</a>, <a href="https://ch.ch/de/sicherheit-und-recht/jagd">ch.ch</a>).</li>
+  <li class="attn"><i class="wi"></i>В кантоне Женева охоты нет с 1974 года, её запретили на народном голосовании. Численность диких животных там регулируют государственные егеря (<a href="https://www.bafu.admin.ch/de/jagd">BAFU</a>).</li>
+  <li><b>Гости.</b> Кантон может выдавать временные разрешения гостям-охотникам (<a href="https://www.fedlex.admin.ch/eli/cc/1988/506_506_506/de#art_4">JSG, ст. 4</a>). Условия и цены для гостей и для людей, которые живут в другом месте, в каждом кантоне свои. Узнавай их в кантональном управлении охоты (Jagdverwaltung).</li>
+  <li class="attn"><b>Оружие.</b> <i class="wi"></i>Если у тебя нет швейцарского паспорта или пермита C, для покупки любого оружия нужно разрешение на покупку оружия (Waffenerwerbsschein) и подтверждение из страны твоего гражданства, что там тебе можно купить такое оружие. <i class="wi"></i>Граждане Сербии, Боснии и Герцеговины, Косово, Северной Македонии, Турции, Шри-Ланки, Алжира и Албании оружие в Швейцарии покупать и иметь не могут. Везти оружие на охоту можно только незаряженным (<a href="https://www.zh.ch/de/sicherheit-justiz/delikte-praevention/waffen.html">кантон Цюрих</a>).</li>
+  <li class="attn"><i class="wi"></i><b>Охота без разрешения</b> — это преступление. За то, что человек нарочно охотится или убивает дикое животное без права на это, грозит до года лишения свободы или денежное наказание (<a href="https://www.fedlex.admin.ch/eli/cc/1988/506_506_506/de#art_17">JSG, ст. 17</a>). За более лёгкие нарушения, например если ловишь и держишь у себя дикое животное или ходишь с ружьём по охотничьим угодьям без причины, — штраф до 20 000 франков (<a href="https://www.fedlex.admin.ch/eli/cc/1988/506_506_506/de#art_18">JSG, ст. 18</a>). Приговор может повлиять и на пермит — подробно в теме «<a href="../shtrafy/">Штрафы и полиция</a>».</li>
+</ul>
+
+<h2 id="povedenie">Костёр, собака и заповедники</h2>
+<ul class="ul">
+  <li class="attn"><b>Костёр в засуху.</b> Запрет костров объявляют кантоны и общины, когда растёт опасность лесных пожаров (Waldbrandgefahr). Например, летом 2018 года 18 кантонов запретили разжигать огонь в лесу и рядом с ним (<a href="https://www.admin.ch/gov/de/start/dokumentation/medienmitteilungen.msg-id-71708.html">Федеральный совет</a>). У опасности 5 уровней. При «значительной» опасности огонь можно разводить только в готовых кострищах, без сильного ветра, и сразу тушить искры. <i class="wi"></i>При «большой» опасности костры на улице, как правило, нельзя, кроме кострищ, которые разрешили власти. При «очень большой» опасности костры на улице запрещены. При полном запрете (absolutes Feuerverbot) нельзя пользоваться даже кострищами (<a href="https://www.gr.ch/DE/institutionen/verwaltung/diem/awn/htm/waldbrandgefahr.htm">кантон Граубюнден</a>, <a href="https://zg.ch/waldbrand">кантон Цуг</a>). Перед пикником с грилем проверь уровень опасности на сайте своего кантона.</li>
+  <li class="attn"><b>Собака на поводке весной.</b> Весной и в начале лета у диких животных появляются детёныши. Поэтому во многих кантонах собаку в лесу нужно вести на поводке. В Цюрихе, Люцерне и Ури — с 1 апреля по 31 июля, в лесу и до 50 м от леса. В Во, Женеве и Фрибуре — с 1 апреля по 15 июля. <i class="wi"></i>За собаку без поводка в это время штрафуют, даже если она никого не тронула. Если собака поранит или загрызёт животное, ущерб платит хозяйка (<a href="https://www.tierimrecht.org/documents/10009/Zeitlupe-2025-04-10-Leinenpflicht-waehrend-der-Setz-und-Brutzeit.pdf">Tier im Recht, 10.04.2025</a>). Подробно о собаках — в теме «<a href="../zhivotnye/">Животные</a>».</li>
+  <li class="attn"><b>Заповедники и национальный парк.</b> В заповеднике (Naturschutzgebiet) действуют свои правила, они написаны на табличках у входа. <i class="wi"></i>В Швейцарском национальном парке нельзя сходить с размеченных троп, рвать цветы, выкапывать растения и грибы, брать с собой собаку, разводить костёр и ночевать. За нарушения штрафуют (<a href="https://www.gr-lex.gr.ch/api/de/versions/2411/pdf_file">правила национального парка</a>).</li>
+  <li class="attn"><b>Зоны покоя дичи</b> (Wildruhezone) — места, где зимой и весной животных нельзя тревожить. Правила там свои и написаны на табличках. <i class="wi"></i>Например, в Обвальдене и Нидвальдене собака там должна быть на поводке обычно с 1 или 15 декабря по 30 апреля, а в Базеле-Ланде — весь год (<a href="https://www.tierimrecht.org/documents/10009/Zeitlupe-2025-04-10-Leinenpflicht-waehrend-der-Setz-und-Brutzeit.pdf">Tier im Recht</a>).</li>
+  <li>Как собраться в лес или в горы и кому звонить, если что-то случилось, — в теме «<a href="../priroda/">Горы, хайкинг и безопасность</a>».</li>
+</ul>
+''',
+    steps=[
+        'Перед рыбалкой узнай на сайте кантона, нужен ли патент на этом озере или реке, и купи его онлайн или в пункте продажи. Патент носи с собой.',
+        'Если хочешь рыбачить чаще, пройди курс SaNa — без него не дадут годовой патент.',
+        'Ловить начинай с крючками без бородки и без живой рыбки. Каждый год скачивай свежую памятку кантона о сроках запрета и минимальных размерах.',
+        'Перед походом за грибами проверь лимит и дни запрета в своём кантоне, а все грибы до готовки отнеси на бесплатный грибной контроль.',
+        'Запиши в телефон номер Tox Info Suisse 145 и звони сразу, если после грибов или черемши стало плохо.',
+        'Весной веди собаку в лесу на поводке, в засуху проверяй запрет костров, а в заповеднике не сходи с тропы.',
+    ],
+    tools={'plan-pohoda': 'Идёшь в лес за грибами или на рыбалку одна — оставь близким маршрут и время возвращения на русском и языке кантона.', 'ekstrennye-nomera': 'Tox Info 145, скорая помощь 144, Rega 1414 и дежурный врач твоего кантона — на одной карточке в рюкзак.'},
+    tabs={'events': 'Прогулки, походы за грибами и выезды на природу с группой на русском и украинском — во встречах рядом с тобой.'},
+    related=['priroda', 'zhivotnye', 'shtrafy', 'bolezn-travma'],
+    sources=[
+        ('Гражданский кодекс (ZGB), ст. 699 — доступ в лес, ягоды и грибы', 'https://www.fedlex.admin.ch/eli/cc/24/233_245_233/de#art_699'),
+        ('Закон об охране природы (NHG), ст. 19 — сбор растений на продажу', 'https://www.fedlex.admin.ch/eli/cc/1966/1637_1694_1679/de#art_19'),
+        ('Ордонанция об охране природы (NHV), ст. 20 и приложение 2 — охраняемые растения', 'https://www.fedlex.admin.ch/eli/cc/1991/249_249_249/de#art_20'),
+        ('Ордонанция о защите животных (TSchV), ст. 23 и 97 — рыбалка и SaNa', 'https://www.fedlex.admin.ch/eli/cc/2008/416/de#art_97'),
+        ('Федеральный закон о рыболовстве (BGF), ст. 3, 17, 19', 'https://www.fedlex.admin.ch/eli/cc/1991/2259_2259_2259/de#art_17'),
+        ('Закон об охоте (JSG), ст. 3, 4, 17, 18', 'https://www.fedlex.admin.ch/eli/cc/1988/506_506_506/de#art_4'),
+        ('Кантон Цюрих — как и где рыбачить', 'https://www.zh.ch/de/umwelt-tiere/tiere/fischerei/wie-und-wo-fischen-im-kanton-zuerich.html'),
+        ('Кантон Цюрих — купить рыболовный патент на 2026 год', 'https://www.zh.ch/de/umwelt-tiere/tiere/fischerei/wie-und-wo-fischen-im-kanton-zuerich/fischereipatente-beziehen-2026.html'),
+        ('Кантон Берн — рыбалка, памятка', 'https://www.weu.be.ch/content/dam/weu/dokumente/lanat/de/fischerei/wie-wo-fischen/lanat-fi-flyer-allgemein-de.pdf'),
+        ('Кантон Санкт-Галлен — ловля без патента', 'https://www.sg.ch/umwelt-natur/jagd-fischerei/fischerei/fischereipatente/freiangelrecht.html'),
+        ('Кантон Швиц — вопросы о рыбалке', 'https://www.sz.ch/verwaltung/umweltdepartement/amt-fuer-gewaesser/fischerei/haeufig-gestellte-fragen.html/8756-8758-8802-9447-9450-10713-10821'),
+        ('Кантон Граубюнден — сертификат SaNa', 'https://www.gr.ch/DE/institutionen/verwaltung/diem/ajf/fischerei/Fischen-in-Graubuenden/Seiten/Sachkundenachweis.aspx'),
+        ('Кантон Во — SaNa, памятка 15.12.2025', 'https://www.vd.ch/fileadmin/user_upload/themes/environnement/biodiversite/fichiers_pdf/P%C3%AAche/INFO_PECHEURS_SaNa_v14__20251215.pdf'),
+        ('Кантон Женева — SaNa', 'https://www.ge.ch/node/1245'),
+        ('Кантон Цюрих — чужие виды в воде, мойка лодок и снастей', 'https://www.zh.ch/de/umwelt-tiere/umweltschutz/gebietsfremde-arten/aquatische-neobiota-als-unbemerkte-fracht.html'),
+        ('Закон Цюриха о рыболовстве (923.1)', 'https://www.notes.zh.ch/appl/zhlex_r.nsf/WebView/B606133842EFB246C1257ACC0033345D/$File/923.1_5.12.76_79.pdf'),
+        ('Кантон Цюрих — сезон грибов, 2022', 'https://www.zh.ch/de/news-uebersicht/mitteilungen/2022/gesundheit/lebensmittel/pilzsaison.html'),
+        ('Кантон Цюрих — ответ правительства о днях запрета для грибов, 06.03.2024', 'https://www.zh.ch/bin/zhweb/publish/regierungsratsbeschluss-unterlagen./2024/243/RRB-2024-0243.pdf'),
+        ('Кантон Граубюнден — плакат об охране грибов', 'https://www.gr.ch/DE/institutionen/verwaltung/ekud/anu/ANU_Dokumente/ANU-404-81d_Plakat_Pilzschutz.pdf'),
+        ('Город Берн — памятка грибника', 'https://www.bern.ch/themen/gesundheit-alter-und-soziales/gesundheitsvorsorge/pilzkontrolle/downloads/merkblatt-pilzesammeln.pdf/download'),
+        ('Кантон Во — сбор грибов', 'https://www.vd.ch/environnement/biodiversite-et-paysage/recolte-des-champignons'),
+        ('Südostschweiz — где действует запрет сбора грибов, 01.10.2026', 'https://www.suedostschweiz.ch/panorama/pilze-sammeln-von-graubuenden-bis-zuerich-hier-gilt-ab-heute-pflueckverbot-2180499'),
+        ('VerbanoNews — проверка грибников в Тичино, 22.09.2023', 'https://www.verbanonews.it/aree-geografiche/lombardia/2023/09/22/controlli-di-polizia-nei-boschi-in-canton-ticino-multe-e-sequestri-a-12-fungiatt-italiani/966323/'),
+        ('Beobachter — бледная поганка, 07.10.2024', 'https://www.beobachter.ch/konsum/todlicher-knollenblatterpilz-gegenmittel-fehlt-755587'),
+        ('plattformJ — номер 145 Tox Info Suisse, 31.01.2023', 'https://www.plattformj.ch/artikel/206988/'),
+        ('BLV — памятка «Собирать грибы»', 'https://www.blv.admin.ch/dam/de/sd-web/KfZiCQXXccw6/merkblatt-pilze-de.pdf'),
+        ('Кантон Аргау — сбор ягод, грибов и дров', 'https://www.ag.ch/de/themen/umwelt-natur/wald/erholungsraum-wald/sammeln-von-beeren-pilzen-und-holz'),
+        ('SRF — черемша и её ядовитые двойники, 26.03.2024', 'https://www.srf.ch/news/gesellschaft/fruehlingsbote-der-baerlauch-und-seine-giftigen-doppelgaenger'),
+        ('Info Flora — плакат «Охраняемые растения Швейцарии»', 'https://www.infoflora.ch/fr/assets/content/documents/conservation/geschuetzte-arten/poster-geschuetzte-pflanzen/poster-geschuetzte-pflanzen_7-ganze-schweiz_ausgabe-1.pdf'),
+        ('ch.ch — охота', 'https://ch.ch/de/sicherheit-und-recht/jagd'),
+        ('BAFU — охота', 'https://www.bafu.admin.ch/de/jagd'),
+        ('Кантон Цюрих — оружие', 'https://www.zh.ch/de/sicherheit-justiz/delikte-praevention/waffen.html'),
+        ('Кантон Граубюнден — опасность лесных пожаров и запрет костров', 'https://www.gr.ch/DE/institutionen/verwaltung/diem/awn/htm/waldbrandgefahr.htm'),
+        ('Кантон Цуг — опасность лесных пожаров', 'https://zg.ch/waldbrand'),
+        ('Федеральный совет — запреты костров, 30.07.2018', 'https://www.admin.ch/gov/de/start/dokumentation/medienmitteilungen.msg-id-71708.html'),
+        ('Tier im Recht — поводок весной по кантонам, 10.04.2025', 'https://www.tierimrecht.org/documents/10009/Zeitlupe-2025-04-10-Leinenpflicht-waehrend-der-Setz-und-Brutzeit.pdf'),
+        ('Правила Швейцарского национального парка (Nationalparkordnung)', 'https://www.gr-lex.gr.ch/api/de/versions/2411/pdf_file'),
+    ],
+    terms=[('Deutsch', 'Fischereipatent, Tagespatent, Jahrespatent, Tageskarte, Pachtrevier, Freiangelrecht, Sachkunde-Nachweis (SaNa), Fangstatistik, Schonzeit, Fangmindestmass, Widerhaken, Köderfisch, Fischereiaufsicht, Pilzkontrolle, Pilzschutz, Schontage, Bärlauch, Herbstzeitlose, Maiglöckchen, geschützte Pflanzen, Jagdberechtigung, Jagdprüfung, Patentjagd, Revierjagd, Jagdgesellschaft, Waffenerwerbsschein, Waldbrandgefahr, Feuerverbot, Leinenpflicht, Naturschutzgebiet, Wildruhezone'), ('Français', 'permis de pêche, permis journalier, permis annuel, pêche libre, attestation de compétence (SaNa), statistique des captures, période de protection, taille minimale de capture, ardillon, poisson d’appât, garde-pêche, contrôle des champignons, protection des champignons, ail des ours, colchique, muguet, plantes protégées, autorisation de chasse, examen de chasse, chasse à patente, chasse affermée, permis d’acquisition d’armes, danger d’incendie de forêt, interdiction de faire du feu, obligation de tenir les chiens en laisse, réserve naturelle, zone de tranquillité'), ('Italiano', 'patente di pesca, patente giornaliera, patente annuale, pesca libera, attestato di competenza (SaNa), statistica delle catture, periodo di protezione, misura minima, ardiglione, pesce esca, guardapesca, controllo dei funghi, protezione dei funghi, aglio orsino, colchico, mughetto, piante protette, autorizzazione di caccia, esame di caccia, caccia a patente, caccia in riserva, permesso d’acquisto di armi, pericolo d’incendio boschivo, divieto di accendere fuochi, obbligo del guinzaglio, riserva naturale, zona di tranquillità'), ('English', 'fishing licence, day licence, annual licence, free fishing from the shore, certificate of competence (SaNa), catch record, closed season, minimum size, barbed hook, live bait fish, fishing warden, mushroom inspection, wild garlic, autumn crocus, lily of the valley, protected plants, hunting licence, hunting exam, licence hunting, district hunting, weapon acquisition permit, forest fire danger, fire ban, leash requirement, nature reserve, wildlife rest area')],
+)
+
+ARTICLES['drony-video'] = dict(
+    h1='Дроны, фото и видео: <em>что можно снимать на улице и у дома, камеры наблюдения</em>',
+    seo='Дроны и видеосъёмка в Швейцарии: регистрация BAZL, право на своё изображение, камера у дома (Videoüberwachung)',
+    desc='Дроны, фото и видео в Швейцарии простыми словами на русском: когда дрон нужно регистрировать в BAZL (камера или от 250 г, 10 франков), онлайн-экзамен A1/A3, страховка ответственности на 1 миллион франков, высота 120 м, полёт только в прямой видимости, запрет над толпой, карта ограничений и бюллетень DABS, заповедники и кантональные запреты; когда можно снимать людей на улице и публиковать в соцсетях, фото детей, право на своё изображение (ZGB ст. 28); камера у дома, дверной звонок с камерой и видеорегистратор по правилам EDÖB; что делать, если снимают тебя или камера соседа смотрит в твои окна. По-немецки Drohne, Recht am eigenen Bild, Videoüberwachung, Dashcam, по-французски drone, droit à l’image, vidéosurveillance, по-итальянски drone, diritto all’immagine, videosorveglianza.',
+    lead='Дрон с камерой, видео для Instagram, камера над дверью — для всего этого в Швейцарии есть чёткие правила. Здесь — что сделать до первого полёта, кого и где можно снимать, как поставить камеру у дома по закону и что делать, если снимают тебя или твоего ребёнка.',
+    body='''
+<nav class="toc" aria-label="Содержание"><b>В этой статье</b>
+<ul>
+  <li><a href="#dron">Дрон: регистрация, экзамен, страховка</a></li>
+  <li><a href="#polet">Как летать: высота, видимость, люди</a></li>
+  <li><a href="#zaprety">Где летать нельзя</a></li>
+  <li><a href="#narusheniya">Что будет за нарушения с дроном</a></li>
+  <li><a href="#foto">Фото и видео людей на улице</a></li>
+  <li><a href="#publikaciya">Публикация в соцсетях и фото детей</a></li>
+  <li><a href="#kamera">Камера у дома и в саду</a></li>
+  <li><a href="#dom">Камера в многоквартирном доме и звонок с камерой</a></li>
+  <li><a href="#dashcam">Видеорегистратор в машине</a></li>
+  <li><a href="#esli">Если снимают тебя или камера соседа смотрит в твои окна</a></li>
+</ul></nav>
+
+<h2 id="dron">Дрон: регистрация, экзамен, страховка</h2>
+<p>В Швейцарии для дронов действуют те же правила, что в странах ЕС. За них отвечает Федеральное ведомство гражданской авиации (<a href="https://www.bazl.admin.ch/de/drohnen">BAZL</a>, Bundesamt für Zivilluftfahrt). Обычный полёт для себя относится к «открытой категории» (offene Kategorie). Отдельное разрешение для неё не нужно, если ты выполняешь правила ниже. Если их выполнить нельзя, нужно разрешение BAZL.</p>
+<ul class="ul">
+  <li class="attn"><b>Регистрация.</b> <i class="wi"></i>Если у дрона есть камера, микрофон или другой датчик или он весит 250 граммов и больше, зарегистрируйся как владелица дрона (Drohnenbetreiberin). Без регистрации можно летать только с дроном легче 250 г и без камеры. Лёгкий DJI Mini тоже нужно регистрировать, потому что у него камера. Регистрация — на портале BAZL <a href="https://www.dlis.bazl.admin.ch/de-CH/">dLIS</a> со входом через государственный логин AGOV, стоит 10 франков и действует без срока во всех странах EASA (Агентство ЕС по авиационной безопасности, в него входит и Швейцария). Зарегистрироваться можно с 12 лет, до 16 лет — с указанием родителя (<a href="https://www.bazl.admin.ch/de/registrierung-drohnenbetreiber">BAZL — регистрация</a>).</li>
+  <li class="attn"><b>Номер на дроне.</b> После регистрации ты получишь номер оператора. Он начинается с CHE. Нанеси его на дрон так, чтобы его было видно: наклейкой, водостойким маркером или гравировкой. Три знака после дефиса — секретные, как пароль, их на дрон не пиши. <i class="wi"></i>За дрон без номера бывает штраф. Продаёшь или отдаёшь дрон — сотри свой номер.</li>
+  <li class="attn"><b>Экзамен пилота.</b> <i class="wi"></i>Для дрона от 250 г нужен сертификат пилота A1/A3. Это онлайн-курс и онлайн-тест из дома: 60 минут, 20 франков, на том же портале dLIS. Сертификат действует 5 лет во всех странах EASA. Для дрона класса C0 и старого дрона легче 250 г сертификат не обязателен, но BAZL его советует. Для подкатегории A2, где можно подлетать ближе к людям, нужен ещё очный экзамен в Иттигене, Ильнау или Лозанне (<a href="https://www.bazl.admin.ch/de/fernpiloten">BAZL — пилоты</a>).</li>
+  <li class="attn"><b>Страховка ответственности.</b> <i class="wi"></i>Для дрона от 250 г обязательна страховка ответственности (Haftpflichtversicherung) минимум на 1 миллион франков. Её номер и страховую ты указываешь при регистрации. Без страховки грозит штраф, а ущерб ты оплачиваешь сама (<a href="https://www.bazl.admin.ch/de/faq-drohnen">BAZL — вопросы и ответы</a>). Часто дрон уже покрыт твоей частной страховкой ответственности (Privathaftpflicht), но не всегда: у страховых есть ограничения по весу и условиям (<a href="https://www.mobiliar.ch/versicherungen-und-vorsorge/wohnen-und-eigentum/ratgeber/drohnen-und-multicopter-versichern">Mobiliar</a>). Попроси страховую письменно подтвердить, что твой дрон застрахован. BAZL советует страховку и для дронов легче 250 г. Подробно о страховках — в теме «Нужные страховки».</li>
+  <li><b>Дети.</b> Детям до 12 лет можно летать только под прямым присмотром человека не младше 16 лет с нужным сертификатом. Для игрушечного дрона до 250 г без камеры регистрация не нужна, действует возраст, который указал производитель.</li>
+  <li class="attn"><b>Покупка.</b> На дроне должен быть знак CE, а на дроне, который поступил в продажу с 1 января 2024 года, — ещё и класс от C0 до C4. <i class="wi"></i>Без знака CE летать нельзя. Новый дрон без класса нельзя использовать в открытой категории. Перед покупкой проверь инструкцию, класс и серийный номер (<a href="https://www.bazl.admin.ch/de/konsumenten">BAZL — покупателям</a>).</li>
+</ul>
+
+<h2 id="polet">Как летать: высота, видимость, люди</h2>
+<ul class="ul">
+  <li class="attn"><i class="wi"></i>Летай не выше <b>120 метров</b> над землёй (<a href="https://www.bazl.admin.ch/de/flugregeln-drohnen">BAZL — правила полётов</a>).</li>
+  <li class="attn"><i class="wi"></i>Дрон всегда должен быть у тебя <b>перед глазами</b>. Бинокль и видеоочки (FPV) не считаются. В видеоочках летать можно, только если рядом стоит помощник и всё время видит дрон своими глазами.</li>
+  <li class="attn"><i class="wi"></i><b>Над скоплением людей</b> летать запрещено. Это праздники и концерты, лыжные трассы, оживлённые торговые улицы, популярные парки и пляжи.</li>
+  <li>Над отдельными посторонними людьми можно пролетать только с дроном класса C0 или со старым дроном легче 250 г. С дроном C1 этого избегай, а если так вышло — сразу уводи дрон в сторону. В подкатегории A2 держись от людей минимум в 30 метрах, но не меньше высоты полёта. В подкатегории A3 — минимум 150 метров от жилых, торговых и промышленных зон и мест отдыха.</li>
+  <li>Ночью летать можно только с зелёным мигающим огнём на дроне.</li>
+  <li class="attn">Самолёты и вертолёты всегда имеют приоритет. <i class="wi"></i>Если рядом вертолёт или работают спасатели, полиция или пожарные, сразу сажай дрон.</li>
+  <li><b>Чужой сад и двор.</b> Небо — общее, но владелец участка вправе защищать пространство над своей землёй. Поэтому низко над соседским садом без согласия не летай. Взлетать и садиться на чужой земле можно только с разрешения владельца. Хочешь снять сад или дом — спроси согласия у всех, кто там есть, и не снимай через окна (<a href="https://www.bazl.admin.ch/de/privatsphaere-dritten">BAZL — частная жизнь</a>).</li>
+</ul>
+
+<h2 id="zaprety">Где летать нельзя</h2>
+<p>Перед <b>каждым</b> полётом проверь две вещи. Это займёт пару минут и убережёт от штрафа.</p>
+<ul class="ul">
+  <li><b>Карта ограничений для дронов.</b> Она на <a href="https://map.geo.admin.ch/#/map?lang=de&amp;topic=aviation&amp;layers=ch.bazl.einschraenkungen-drohnen">map.geo.admin.ch</a>. Нажми на место, где хочешь летать: карта покажет, есть ли там ограничение и кто даёт разрешение. На карте отмечены контрольные зоны аэропортов (CTR, Kontrollzone), территория аэродромов, тюрьмы, атомные станции, военные зоны, объекты энергетики и газа, заповедники для диких животных и ограничения кантонов (<a href="https://www.bazl.admin.ch/de/geografische-flugeinschraenkungen">BAZL — где можно летать</a>).</li>
+  <li><b>Бюллетень DABS</b> (Daily Airspace Bulletin Switzerland — ежедневная сводка о воздушном пространстве) на <a href="https://www.skybriefing.com/de/dabs">skybriefing.com</a>. Там временные запреты, например на время конференции или военных учений. Сводка на завтра выходит в 16:00. <i class="wi"></i>Если в твоём месте действует ограничение, летать нельзя.</li>
+  <li class="attn"><i class="wi"></i><b>У аэропортов и аэродромов</b> летать можно только с разрешения той службы, которую указывает карта. За разрешение для дрона от 250 г в радиусе 5 км аэродром может брать плату.</li>
+  <li class="attn"><i class="wi"></i><b>В федеральных охотничьих заповедниках</b> (eidgenössische Jagdbanngebiete) и <b>заповедниках водоплавающих и перелётных птиц</b> (Wasser- und Zugvogelreservate) дроны запрещены. Исключения дают только для науки, учёта животных, проверки сооружений и спасения оленят. Для отдыха и красивых видов разрешение не дают. Нарушение — штраф по закону об охоте (<a href="https://www.vs.ch/de/web/scpf/drohnenfl%C3%BCge-innerhalb-von-eidgen%C3%B6ssischen-jagdbanngebieten-ebg-">кантон Вале</a>).</li>
+  <li>Будь особенно осторожна у вертолётных площадок больниц, у горных посадочных площадок, у военных стрельбищ и там, где летают парапланы и планеры.</li>
+  <li class="attn"><b>Запреты кантонов.</b> Кантоны вводят свои ограничения, и правила в них разные. <i class="wi"></i>В <b>Аппенцелле Иннерроден</b> с 1 ноября 2020 года дроны для отдыха запрещены на юге кантона, почти во всём Альпштайне, штраф — 150 франков (<a href="https://www.srf.ch/news/schweiz/appenzell-innerrhoden-drohnenverbot-bei-foto-hotspots-aescher-und-seealpsee">SRF</a>). <i class="wi"></i>В <b>Женеве</b> нельзя летать ближе 300 метров к тюрьмам, судам, зданиям полиции и международных организаций, а на время конференций кантон объявляет временные запреты (<a href="https://silgeneve.ch/legis/data/rsg_h3_05p02.htm">регламент кантона Женева</a>). Ограничения своего кантона ищи на той же карте BAZL.</li>
+  <li>О походах в горы с дроном и о заповедниках — в теме «Горы, хайкинг и безопасность».</li>
+</ul>
+
+<h2 id="narusheniya">Что будет за нарушения с дроном</h2>
+<ul class="ul">
+  <li class="attn"><i class="wi"></i>Нарушать правила полётов наказуемо. Штраф бывает за полёт без страховки, без номера на дроне, в заповеднике или в запретной зоне кантона (<a href="https://www.bazl.admin.ch/de/faq-drohnen">BAZL</a>).</li>
+  <li class="attn"><i class="wi"></i>Если дрон снимает людей в их частной жизни, например через окно или в закрытом от чужих глаз саду, это может быть уголовным преступлением: до 3 лет лишения свободы или денежный штраф (<a href="https://www.fedlex.admin.ch/eli/cc/54/757_781_799/de#art_179_quater">Уголовный кодекс, StGB ст. 179quater</a>).</li>
+  <li class="attn">Если дрон что-то сломает или кого-то ранит, платишь ты. <i class="wi"></i>Страховая может отказать, если ты летала с нарушением, например без сертификата.</li>
+  <li>Если видишь, что кто-то нарушает правила, сообщи в полицию. BAZL занимается безопасностью полётов, а споры о частной жизни и шуме не решает.</li>
+</ul>
+
+<h2 id="foto">Фото и видео людей на улице</h2>
+<p>Отдельной статьи о «праве на своё изображение» (Recht am eigenen Bild) в законе нет. Это право вытекает из защиты личности в Гражданском кодексе (<a href="https://www.fedlex.admin.ch/eli/cc/24/233_245_233/de#art_28">ZGB ст. 28</a>): вмешиваться в чужую личную жизнь можно только с согласия человека, по закону или при важной причине. Если человека на фото или видео можно узнать, это ещё и его персональные данные по закону о защите данных (<a href="https://www.fedlex.admin.ch/eli/cc/2022/491/de">DSG</a>, Datenschutzgesetz).</p>
+<ul class="ul">
+  <li><b>Для себя.</b> Если ты снимаешь только для себя, например для семейного альбома, закон о защите данных не применяется (<a href="https://www.fedlex.admin.ch/eli/cc/2022/491/de#art_2">DSG ст. 2</a>). Проблемы обычно начинаются, когда снимок публикуют.</li>
+  <li><b>На улице, на празднике, в толпе.</b> Если человек случайно попал в кадр, стоит в толпе или на заднем плане, его согласие обычно не нужно. Если же он главный на снимке и его можно узнать, нужно его согласие, особенно для публикации (<a href="https://www.sz.ch/public/upload/assets/12614/Das_eigene_Bild_Alles_was_Recht_ist.pdf?fp=5">Швейцарская служба профилактики преступлений</a>).</li>
+  <li>Если человек позирует или встал на общее фото, это считается согласием. Согласие можно отозвать в любой момент. То, что человек работает на улице, например полицейский или строитель, ещё не значит, что он согласен на съёмку крупным планом.</li>
+  <li>Если на улице человек попросил тебя не снимать или удалить видео, удали его.</li>
+  <li class="attn"><b>Частная жизнь.</b> <i class="wi"></i>Снимать без согласия то, что с улицы не видно каждому, — через окно, в закрытом саду или на террасе, в раздевалке — уголовное преступление. Наказуемо и хранить такие записи, и показывать их другим: до 3 лет лишения свободы или денежный штраф (<a href="https://www.fedlex.admin.ch/eli/cc/54/757_781_799/de#art_179_quater">StGB ст. 179quater</a>).</li>
+  <li class="attn"><b>Звук.</b> <i class="wi"></i>Записывать чужой разговор, в котором ты не участвуешь, без согласия всех, кто говорит, — тоже уголовное преступление (<a href="https://www.fedlex.admin.ch/eli/cc/54/757_781_799/de#art_179_bis">StGB ст. 179bis</a>).</li>
+</ul>
+
+<h2 id="publikaciya">Публикация в соцсетях и фото детей</h2>
+<ul class="ul">
+  <li class="attn"><i class="wi"></i>Прежде чем выложить в Instagram, TikTok, Telegram или в чат фото или видео, где человека хорошо видно, спроси его согласия. Лучше письменно, хватит сообщения в мессенджере. Так у тебя будет доказательство.</li>
+  <li>Не публикуй снимки, которые выставляют человека в смешном или плохом свете, даже если он когда-то согласился сфотографироваться.</li>
+  <li><b>Дети.</b> Ребёнок, который уже понимает, что значит публикация, может решать сам (по закону он «способен к суждению», urteilsfähig). Твёрдого возраста для этого нет. Для маленьких детей решают родители. Чужих детей, например с детской площадки, из садика или школы, без согласия родителей не публикуй. Если сомневаешься, спроси родителей.</li>
+  <li>Соцсети по своим условиям могут сами использовать загруженные фото. Подумай об этом, прежде чем выкладывать фото своих детей.</li>
+  <li class="attn"><b>Что будет.</b> Человек, которого опубликовали без согласия, может через суд потребовать удалить публикацию и запретить её. Ещё он может потребовать возмещения ущерба и денежной компенсации за моральный вред (Genugtuung) (<a href="https://www.fedlex.admin.ch/eli/cc/24/233_245_233/de#art_28_a">ZGB ст. 28a</a>). <i class="wi"></i>Если на видео частная жизнь, снятая без согласия, это уголовное дело.</li>
+</ul>
+
+<h2 id="kamera">Камера у дома и в саду</h2>
+<p>За видеонаблюдением частных людей следит Федеральный уполномоченный по защите данных и информации (<a href="https://www.edoeb.admin.ch/de/fotos-und-videoueberwachung">EDÖB</a>, Eidgenössischer Datenschutz- und Öffentlichkeitsbeauftragter). Разрешение на камеру на своём участке не нужно, но правила строгие (<a href="https://www.newsd.admin.ch/newsd/message/attachments/47013.pdf">EDÖB, 27.01.2017</a>).</p>
+<ul class="ul">
+  <li><b>Нужна причина.</b> Камера допустима, например, против взлома и вандализма. Сначала подумай, не хватит ли мягкой меры: хорошего замка, света с датчиком движения или сигнализации. Камера должна снимать только самое необходимое.</li>
+  <li class="attn"><b>Только своя территория.</b> <i class="wi"></i>Камера может снимать только твой участок: вход, гараж, сад. Тротуар, улицу и соседский участок снимать нельзя. Камера, которая поворачивается на улицу или на чужое парковочное место, — частая причина жалоб. Если чужое попадает в кадр, закрой эту часть в настройках камеры (маска приватности).</li>
+  <li class="attn"><b>Табличка.</b> <i class="wi"></i>Повесь заметную табличку на уровне глаз ещё до зоны съёмки. На ней должно быть, что здесь камера и к кому обращаться за справкой о записях. Скрытая съёмка нарушает закон о защите данных.</li>
+  <li><b>Короткое хранение.</b> Если ничего не случилось, стирай записи обычно через 24–48 часов. Смотри записи только после происшествия. Доступ к ним должен быть только у тебя и тех, кому ты доверяешь.</li>
+  <li class="attn"><b>Камера сняла вора.</b> Отдай запись полиции. <i class="wi"></i>Выкладывать её в соцсети и искать человека самой нельзя: частные люди не вправе сами объявлять розыск.</li>
+  <li><b>Муляж камеры</b> (Attrappe) тоже нарушает чужую частную жизнь, если «смотрит» на соседей или улицу. Человек ведь не знает, что камера ненастоящая (<a href="https://www.suedostschweiz.ch/schweiz-und-welt/darf-ich-meine-mieter-und-nachbarn-ueberwachen-1146761">HEV в Südostschweiz</a>).</li>
+  <li class="attn"><b>Право на справку.</b> Каждый, кто мог попасть в кадр, вправе спросить, есть ли записи с ним, и получить их. Отвечать нужно обычно в течение 30 дней и бесплатно (<a href="https://www.fedlex.admin.ch/eli/cc/2022/491/de#art_25">DSG ст. 25</a>). <i class="wi"></i>Если нарочно дать ложную или неполную справку, грозит штраф до 250 000 франков (<a href="https://www.fedlex.admin.ch/eli/cc/2022/491/de#art_60">DSG ст. 60</a>).</li>
+</ul>
+
+<h2 id="dom">Камера в многоквартирном доме и звонок с камерой</h2>
+<ul class="ul">
+  <li class="attn"><i class="wi"></i>Подъезд, лестница, коридор, прачечная и двор — общие, а не твои. Камеру, которая их снимает, без согласия управляющей и соседей ставить нельзя. В доме, где квартиры принадлежат разным владельцам (Stockwerkeigentum), нужно согласие других владельцев (<a href="https://www.swisslife.ch/de/private/blog/immo/private-videoueberwachung-was-ist-erlaubt-was-nicht.html">Swiss Life</a>).</li>
+  <li class="attn"><b>Дверной звонок с камерой</b> (Video-Türklingel) снимает не только гостя, но и коридор, соседские двери и всех, кто идёт мимо. Поэтому для него действуют те же правила. <i class="wi"></i>Если для звонка нужно сверлить дверь или стену, это изменение квартиры, и нужно письменное согласие управляющей (<a href="https://www.fedlex.admin.ch/eli/cc/27/317_321_377/de#art_260_a">OR ст. 260a</a>). Закрой в настройках соседские двери и отключи запись звука.</li>
+  <li>Камера внутри квартиры, например для няни или питомца, снимает твою территорию. Если у тебя бывают няня, уборщица или гости, предупреди их, что камера работает.</li>
+  <li><b>Если камеры ставит управляющая или владелец дома.</b> Это допустимо при конкретной угрозе, например взломах, вандализме или свалке мусора, и только если мягкие меры не помогают. Следить за всем домом круглые сутки без такой причины нельзя. Ты вправе запросить справку о записях с тобой.</li>
+  <li>О спорах с соседями — в теме «Тишина, прачечная и правила дома».</li>
+</ul>
+
+<h2 id="dashcam">Видеорегистратор в машине (Dashcam)</h2>
+<ul class="ul">
+  <li class="attn">EDÖB считает постоянную запись улицы из машины частным видеонаблюдением общественного места. Такое видеонаблюдение допустимо только в очень узких рамках (<a href="https://www.beobachter.ch/strassenverkehr/dashcams-autokameras-sind-rechtlich-heikel">Beobachter</a>). <i class="wi"></i>Выкладывать записи с регистратора в интернет ради интереса нельзя.</li>
+  <li class="attn"><i class="wi"></i>Федеральный суд в 2019 году решил, что запись регистратора — скрытая обработка данных: водители и пешеходы не видят, что их снимают. Как доказательство суд принимает такую запись только при тяжёлых преступлениях. При обычных нарушениях правил движения, например превышении скорости или опасном обгоне, её не учитывают (<a href="https://servat.unibe.ch/dfr/bge/c4146226.html">BGE 146 IV 226</a>).</li>
+  <li>Юристы Beobachter советуют регистратор не ставить. После аварии лучше сфотографируй место, машины и номера, запиши свидетелей и вызови полицию.</li>
+</ul>
+
+<h2 id="esli">Если снимают тебя или камера соседа смотрит в твои окна</h2>
+<ol class="ol">
+  <li><b>Поговори спокойно.</b> Часто человек просто не знает правил. Попроси удалить фото, убрать публикацию, повернуть камеру или закрыть твою зону в настройках. Так советует и EDÖB.</li>
+  <li><b>Собери доказательства.</b> Сфотографируй камеру и куда она смотрит. Сделай скриншоты публикации со ссылкой и датой. Записывай, когда и что происходило.</li>
+  <li><b>Напиши письмо</b> заказным (Einschreiben). Попроси справку о записях с тобой (Auskunftsbegehren) — ответить должны обычно в течение 30 дней. Потребуй удалить записи и повернуть камеру. Сохрани копию письма и квитанцию.</li>
+  <li><b>Если камера висит в подъезде или её поставил сосед-арендатор</b>, напиши управляющей и приложи фото. Общие части дома — её забота.</li>
+  <li><b>Если это публикация в соцсети</b>, пожалуйся через функцию жалобы в самой соцсети, что публикация нарушает твою частную жизнь.</li>
+  <li><b>Сообщи в EDÖB</b> через <a href="https://www.edoeb.admin.ch/de/anzeigeformular-betroffene">форму для пострадавших</a>. EDÖB проверяет нарушения закона о защите данных.</li>
+  <li class="attn"><b>Суд.</b> По иску о защите личности суд может запретить съёмку и обязать удалить записи и публикации (ZGB ст. 28 и 28a). <i class="wi"></i>Суд стоит денег и времени, поэтому сначала возьми консультацию: у юристов Beobachter, в справочной адвокатов, в своей страховке юридической защиты или в союзе арендаторов, если спор в доме.</li>
+  <li class="attn"><b>Полиция.</b> Если тебя или ребёнка снимают через окно, в закрытом саду или дрон висит у твоего балкона, подай заявление в полицию (Strafantrag). <i class="wi"></i>Срок — 3 месяца с того дня, когда ты узнала, кто снимал. Подать его можно в полиции или прокуратуре письменно или устно под протокол (<a href="https://law.ch/lawinfo/strafanzeige-strafantrag/grundlagen/">law.ch</a>). Если опасность прямо сейчас, звони в полицию по номеру 117.</li>
+  <li class="attn"><i class="wi"></i><b>Чужой дрон не сбивай и не лови.</b> BAZL допускает это только в крайнем случае, если пилот снова и снова нарочно вредит. Запомни время, место, как выглядел дрон и где стоял пилот, и сообщи в полицию.</li>
+</ol>
+''',
+    steps=[
+        'Купила дрон с камерой или от 250 г — зарегистрируйся в BAZL за 10 франков и нанеси номер оператора на дрон.',
+        'Для дрона от 250 г сдай онлайн-тест A1/A3 за 20 франков и проверь страховку ответственности минимум на 1 миллион франков.',
+        'Перед каждым полётом проверь карту ограничений BAZL и бюллетень DABS. Не летай выше 120 метров, над толпой и в заповедниках.',
+        'Прежде чем выложить фото или видео, где человека можно узнать, спроси его согласия. Чужих детей публикуй только с согласия родителей.',
+        'Камеру у дома направь только на свой участок, повесь табличку и стирай записи через 24–48 часов. В общем подъезде — только с согласия управляющей.',
+        'Тебя снимают без согласия — сначала поговори, потом напиши заказное письмо. При съёмке через окно или в саду подай заявление в полицию в течение 3 месяцев.',
+    ],
+    pomosh=dict(ids=['beob', 'anwalt', 'rs', 'mv', 'gemeinde'], t='Если тебя снимают без согласия или спор из-за камеры не решается, помогут юридические консультации, страховка юридической защиты и союз арендаторов.'),
+    tools={'strahovki-obyazatelnye': 'Для дрона от 250 г страховка ответственности обязательна — проверь, что ещё тебе нужно по закону.', 'srok-pisma': 'Посчитай последний день: 3 месяца на заявление в полицию и 30 дней на ответ о записях.', 'kuda-obratitsya': 'Если спор из-за съёмки или камеры не решается, здесь консультации юристов, союз арендаторов и их условия.', 'ekstrennye-nomera': 'Карточка с номером полиции 117 и другими экстренными номерами — на случай, если опасность прямо сейчас.'},
+    related=['pravila-doma', 'priroda', 'strahovki', 'shtrafy', 'dogovor-arendy'],
+    sources=[
+        ('BAZL — дроны', 'https://www.bazl.admin.ch/de/drohnen'),
+        ('BAZL — регистрация оператора дрона', 'https://www.bazl.admin.ch/de/registrierung-drohnenbetreiber'),
+        ('BAZL — правила полётов', 'https://www.bazl.admin.ch/de/flugregeln-drohnen'),
+        ('BAZL — сертификаты пилотов', 'https://www.bazl.admin.ch/de/fernpiloten'),
+        ('BAZL — географические ограничения', 'https://www.bazl.admin.ch/de/geografische-flugeinschraenkungen'),
+        ('BAZL — вопросы и ответы о дронах', 'https://www.bazl.admin.ch/de/faq-drohnen'),
+        ('BAZL — частная жизнь и права третьих лиц', 'https://www.bazl.admin.ch/de/privatsphaere-dritten'),
+        ('BAZL — информация для покупателей', 'https://www.bazl.admin.ch/de/konsumenten'),
+        ('Карта ограничений для дронов (map.geo.admin.ch)', 'https://map.geo.admin.ch/#/map?lang=de&amp;topic=aviation&amp;layers=ch.bazl.einschraenkungen-drohnen'),
+        ('Кантон Вале — дроны в охотничьих и птичьих заповедниках', 'https://www.vs.ch/de/web/scpf/drohnenfl%C3%BCge-innerhalb-von-eidgen%C3%B6ssischen-jagdbanngebieten-ebg-'),
+        ('SRF — запрет дронов в Аппенцелле Иннерроден, 19.10.2020', 'https://www.srf.ch/news/schweiz/appenzell-innerrhoden-drohnenverbot-bei-foto-hotspots-aescher-und-seealpsee'),
+        ('Кантон Женева — регламент об авиации (RaLA), ст. 10–11', 'https://silgeneve.ch/legis/data/rsg_h3_05p02.htm'),
+        ('Mobiliar — как застраховать дрон', 'https://www.mobiliar.ch/versicherungen-und-vorsorge/wohnen-und-eigentum/ratgeber/drohnen-und-multicopter-versichern'),
+        ('Гражданский кодекс (ZGB), ст. 28 и 28a — защита личности', 'https://www.fedlex.admin.ch/eli/cc/24/233_245_233/de#art_28'),
+        ('Закон о защите данных (DSG), ст. 2, 25, 60', 'https://www.fedlex.admin.ch/eli/cc/2022/491/de'),
+        ('Уголовный кодекс (StGB), ст. 179bis и 179quater', 'https://www.fedlex.admin.ch/eli/cc/54/757_781_799/de#art_179_quater'),
+        ('EDÖB — фото и видеонаблюдение', 'https://www.edoeb.admin.ch/de/fotos-und-videoueberwachung'),
+        ('EDÖB — пресс-релиз «Повсюду под камерами», 27.01.2017', 'https://www.newsd.admin.ch/newsd/message/attachments/47013.pdf'),
+        ('Швейцарская служба профилактики преступлений — «Своё изображение», 2015', 'https://www.sz.ch/public/upload/assets/12614/Das_eigene_Bild_Alles_was_Recht_ist.pdf?fp=5'),
+        ('Федеральный суд, BGE 146 IV 226 — видеорегистратор, 26.09.2019', 'https://servat.unibe.ch/dfr/bge/c4146226.html'),
+        ('Beobachter — видеорегистраторы, 15.01.2014', 'https://www.beobachter.ch/strassenverkehr/dashcams-autokameras-sind-rechtlich-heikel'),
+        ('Swiss Life — частное видеонаблюдение, 05.06.2025', 'https://www.swisslife.ch/de/private/blog/immo/private-videoueberwachung-was-ist-erlaubt-was-nicht.html'),
+        ('Südostschweiz (HEV) — камеры у арендаторов и соседей, 07.10.2019', 'https://www.suedostschweiz.ch/schweiz-und-welt/darf-ich-meine-mieter-und-nachbarn-ueberwachen-1146761'),
+        ('law.ch — срок и порядок подачи Strafantrag', 'https://law.ch/lawinfo/strafanzeige-strafantrag/grundlagen/'),
+    ],
+    terms=[('Deutsch', 'Drohne, Drohnenbetreiber, Fernpilot, Registrierung, UAS-Betreibernummer, Kompetenznachweis A1/A3, Haftpflichtversicherung, Sichtverbindung, Menschenansammlung, geografische Flugeinschränkung, Drohnenkarte, Kontrollzone, Jagdbanngebiet, Persönlichkeitsrecht, Recht am eigenen Bild, Einwilligung, Datenschutz, Videoüberwachung, Hinweisschild, Auskunftsrecht, Auskunftsbegehren, Video-Türklingel, Dashcam, Attrappe, Strafantrag, EDÖB'), ('Français', 'drone, exploitant de drone, télépilote, enregistrement, numéro d’exploitant UAS, certificat A1/A3, assurance responsabilité civile, contact visuel, rassemblement de personnes, restriction géographique de vol, carte des drones, zone de contrôle, district franc fédéral, droits de la personnalité, droit à l’image, consentement, protection des données, vidéosurveillance, panneau d’information, droit d’accès, demande d’accès, sonnette vidéo, caméra embarquée, caméra factice, plainte pénale, PFPDT'), ('Italiano', 'drone, operatore di droni, pilota remoto, registrazione, numero di operatore UAS, certificato A1/A3, assicurazione di responsabilità civile, contatto visivo, assembramento di persone, restrizione geografica di volo, carta dei droni, zona di controllo, bandita federale di caccia, diritti della personalità, diritto all’immagine, consenso, protezione dei dati, videosorveglianza, cartello informativo, diritto d’accesso, domanda di accesso, videocitofono, dashcam, telecamera finta, querela, IFPDT'), ('English', 'drone, drone operator, remote pilot, registration, UAS operator number, A1/A3 certificate, liability insurance, visual line of sight, assembly of people, geographical zone, drone map, control zone, hunting reserve, personality rights, right to one’s own image, consent, data protection, video surveillance, notice sign, right of access, access request, video doorbell, dashcam, dummy camera, criminal complaint, FDPIC')],
+    post='Это просьба соседу или управляющей убрать или повернуть камеру, запрос справки о записях с тобой (Auskunftsbegehren) и требование удалить фото или видео.',
+    post2='Срок на заявление в полицию (Strafantrag) — 3 месяца с того дня, когда ты узнала, кто снимал.',
+)
+
+# T('drony-video', 'life', '', 'Дроны, фото и видео: что можно снимать', 'Дрон по правилам BAZL, съёмка людей на улице, камера у дома и что делать, если снимают тебя.', ['strahovki-obyazatelnye', 'srok-pisma', 'kuda-obratitsya', 'ekstrennye-nomera'], [('law', ['Аренда', 'Медиация'])], ready=True),
+

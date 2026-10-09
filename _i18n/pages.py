@@ -60,6 +60,8 @@ PAGES = [('index.html', '/'), ('events/index.html', '/events/'), ('kursy/index.h
          ('shveycariya/bolezn-na-rabote/index.html', '/shveycariya/bolezn-na-rabote/'),
          ('shveycariya/bolezn-travma/index.html', '/shveycariya/bolezn-travma/'),
          ('shveycariya/brak-razvod/index.html', '/shveycariya/brak-razvod/'),
+         ('shveycariya/drony-video/index.html', '/shveycariya/drony-video/'),
+         ('shveycariya/rybalka-griby-ohota/index.html', '/shveycariya/rybalka-griby-ohota/'),
          ('shveycariya/detskie-posobiya/index.html', '/shveycariya/detskie-posobiya/'),
          ('shveycariya/diplomy/index.html', '/shveycariya/diplomy/'),
          ('shveycariya/dogovor-arendy/index.html', '/shveycariya/dogovor-arendy/'),
