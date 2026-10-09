@@ -31,14 +31,17 @@
       return '<a class="sp" href="' + lroot + '#' + encodeURIComponent(s.id) + '"><img src="' + root + 'img/' + esc(s.photo) + '" alt="" loading="lazy">' +
         '<span><b>' + esc(s.name) + (s.sample ? '<span class="smp">Зразок</span>' : '') + '</b><small>' + esc(s.role) + (where ? ' · ' + esc(where) : '') + '</small></span></a>';
     };
+    /* Карточка-приглашение «Здесь может быть твоё имя» — всегда последней в списке (09.10.2026, просьба Ирины) */
+    const invite = '<a class="sp sp-inv" href="' + lroot + 'join/#form"><span class="sp-plus" aria-hidden="true">+</span>' +
+      '<span><b>Тут може бути твоє ім’я</b><small>Працюєш за цією темою? Розмістися в довіднику, зараз безкоштовно →</small></span></a>';
     if (!order.length) {
-      list.innerHTML = '<p class="sp-none">Поки в довіднику немає фахівця з цієї теми. Знаєш доброго — <a href="' + lroot + 'join/">розкажи йому про «Своїх людей»</a>.</p>';
+      list.innerHTML = '<p class="sp-none">Поки в довіднику немає фахівця з цієї теми. Знаєш доброго — <a href="' + lroot + 'join/">розкажи йому про «Своїх людей»</a>.</p>' + invite;
     } else {
       let from = 0;
       const draw = () => {
         const part = order.slice(from, from + N); if (part.length < N && order.length > N) part.push(...order.slice(0, N - part.length));
         list.innerHTML = '<p class="sp-cnt">' + (order.length === 1 ? 'З цієї теми 1 фахівець' : 'З цієї теми ' + order.length + ' ' + (order.length < 5 ? 'фахівці' : 'фахівців')) + '</p>' + part.map(card).join('') +
-          (order.length > N ? '<button type="button" class="sp-next">Показати інших →</button>' : '');
+          (order.length > N ? '<button type="button" class="sp-next">Показати інших →</button>' : '') + invite;
         const nb = list.querySelector('.sp-next'); if (nb) nb.onclick = () => { from = (from + N) % order.length; draw(); };
       };
       draw();
