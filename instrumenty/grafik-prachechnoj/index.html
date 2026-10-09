@@ -1,0 +1,622 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<link rel="icon" href="/fav/favicon.svg" type="image/svg+xml"><link rel="icon" href="/fav/icon-32.png" sizes="32x32"><link rel="apple-touch-icon" href="/fav/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/fonts.css">
+<meta name="description" content="Бесплатный график прачечной (Waschplan, plan de la buanderie, piano della lavanderia) и график уборки подъезда (Reinigungsplan Treppenhaus) для многоквартирного дома в Швейцарии. Выбери дни, время смен и квартиры: каждую неделю одинаково или по очереди по неделям. На листе правила прачечной, время тишины, сушильная комната и контакт Hauswart — на немецком, французском, итальянском или английском, плюс перевод для себя по-русски. PDF A4 для печати бесплатно.">
+<link rel="canonical" href="https://svoiludi.ch/instrumenty/grafik-prachechnoj/">
+<meta property="og:type" content="website"><meta property="og:locale" content="ru_RU"><meta property="og:site_name" content="Свои люди в Швейцарии">
+<meta property="og:title" content="График прачечной и уборки подъезда: распечатка для дома · бесплатно"><meta property="og:description" content="Waschplan и Reinigungsplan Treppenhaus для своего дома: дни, смены, квартиры, правила и тишина на языке кантона, перевод для себя по-русски. PDF бесплатно.">
+<meta property="og:url" content="https://svoiludi.ch/instrumenty/grafik-prachechnoj/"><meta property="og:image" content="https://svoiludi.ch/instrumenty/grafik-prachechnoj/og-image.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="robots" content="noindex, nofollow">
+<title>График прачечной и уборки подъезда: распечатка для дома</title>
+<style>
+/* График прачечной и уборки подъезда: распечатка для дома (08.10.2026): анкета слева, живые листы справа, движок assets/shema.js. */
+:root{
+  --bg:#F4EDE3; --paper:#FFFCF8; --ink:#2F2924; --muted:#7A6E62; --line:#E5D9C9; --soft:#EFE5D7;
+  --brown:#6E4F3C; --mustard:#B98324; --mustard-soft:#F3E3C2; --sage:#4F5E3E; --sage-soft:#E3E8D6; --red:#A0523D;
+  --display:"Forum","Georgia",serif; --sans:"Manrope","Segoe UI",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#221D19; --paper:#2C2621; --ink:#F1E9DF; --muted:#B4A796; --line:#3E362F; --soft:#352E28;
+  --brown:#E1C2A6; --mustard:#E2B45C; --mustard-soft:#3D321F; --sage:#B4BF97; --sage-soft:#2E3226; --red:#E39A85; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#221D19; --paper:#2C2621; --ink:#F1E9DF; --muted:#B4A796; --line:#3E362F; --soft:#352E28;
+  --brown:#E1C2A6; --mustard:#E2B45C; --mustard-soft:#3D321F; --sage:#B4BF97; --sage-soft:#2E3226; --red:#E39A85; color-scheme:dark}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--ink);font:15px/1.55 var(--sans);margin:0}
+.wrap{max-width:1280px;margin:0 auto;padding-inline:16px;padding-block:28px 48px;display:flex;flex-direction:column;gap:24px}
+.eyebrow{font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+h1{font-family:var(--display);font-weight:400;font-size:clamp(2.4rem,6vw,3.6rem);line-height:1;margin:4px 0 10px;text-wrap:balance}
+h2{font-family:var(--display);font-weight:400;font-size:1.55rem;margin:0;text-wrap:balance}
+h3{font-family:var(--display);font-weight:400;font-size:1.22rem;line-height:1.2;margin:0}
+.lead{max-width:66ch;color:var(--muted);margin:0}
+.jump{font-weight:700;color:var(--brown);text-underline-offset:4px}
+.privnote{margin-top:14px;background:var(--sage-soft);border-radius:16px;padding:12px 16px;font-size:.9rem;max-width:90ch}
+.status{font-size:.86rem;color:var(--muted);min-height:1.3em}
+.btn{font:inherit;font-weight:700;font-size:.9rem;border:0;border-radius:999px;padding:10px 18px;cursor:pointer;color:#fff;text-decoration:none;display:inline-flex;align-items:center;gap:6px;background:#6E4F3C;box-shadow:0 8px 18px -8px rgba(110,79,60,.6)}
+.btn.gold{background:#B98324;box-shadow:0 8px 18px -8px rgba(185,131,36,.7)}
+.btn.free{background:#4F5E3E;box-shadow:0 8px 18px -8px rgba(79,94,62,.6)}
+.btn.ghost{background:transparent;color:var(--brown);border:1.5px solid var(--line);box-shadow:none}
+.btn.sm{font-size:.82rem;padding:7px 13px}
+.btn[disabled]{background:var(--soft);color:var(--muted);box-shadow:none;cursor:wait}
+select,input[type=text],input[type=tel],input[type=number],input[type=date],textarea{font:inherit;font-size:.95rem;color:var(--ink);background:var(--paper);border:1.5px solid var(--line);border-radius:12px;padding:9px 12px;width:100%;min-width:0}
+select:focus-visible,input:focus-visible,button:focus-visible,textarea:focus-visible,a:focus-visible{outline:2px solid var(--mustard);outline-offset:2px}
+::placeholder{color:color-mix(in srgb,var(--muted) 70%,transparent)}
+.setup{background:var(--paper);border:1.5px solid var(--line);border-radius:22px;padding:16px 18px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px 18px;align-items:start}
+@media (max-width:1000px){.setup{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.setup{grid-template-columns:1fr}}
+.fl{display:flex;flex-direction:column;gap:6px;min-width:0}
+.fl>.lb{font-size:.8rem;font-weight:700;color:var(--muted);display:flex;align-items:center}
+.seg{display:flex;flex-wrap:wrap;gap:6px}
+.seg button{font:inherit;font-size:.84rem;font-weight:700;border:1.5px solid var(--line);background:var(--paper);color:var(--ink);border-radius:999px;padding:6px 12px;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--sage);border-color:var(--sage);color:#fff}
+.acts{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.exbar{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;background:var(--mustard-soft);border-radius:16px;padding:10px 14px;font-size:.9rem;font-weight:600}
+.work{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:22px;align-items:start}
+@media (max-width:1040px){.work{grid-template-columns:1fr}}
+.form{display:flex;flex-direction:column;gap:14px;min-width:0}
+.sec{background:var(--paper);border:1.5px solid var(--line);border-radius:20px;padding:16px 18px;display:flex;flex-direction:column;gap:12px}
+.sec>h2{font-size:1.3rem;display:flex;align-items:center}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:560px){.g2{grid-template-columns:1fr}}
+.hint{font-size:.84rem;color:var(--muted);margin:0}
+.chk{display:flex;flex-direction:column;gap:8px}
+.chk label{display:flex;gap:10px;align-items:baseline;font-size:.92rem;cursor:pointer}
+.chk input{flex:none;width:18px;height:18px;accent-color:var(--sage);transform:translateY(3px)}
+.chk b{white-space:nowrap}
+.chk small{color:var(--muted)}
+.tog{display:flex;gap:10px;align-items:center;font-size:.92rem;cursor:pointer}
+.tog input{width:18px;height:18px;accent-color:var(--sage)}
+.sheetbox{position:sticky;top:12px;display:flex;flex-direction:column;gap:10px}
+@media (max-width:1040px){.sheetbox{position:static}}
+.sheet{background:#fff;border-radius:6px;box-shadow:0 18px 40px -22px rgba(47,41,36,.45);overflow:hidden}
+.sheet svg{display:block;width:100%;height:auto}
+.imp{background:var(--paper);border:1.5px dashed color-mix(in srgb,var(--sage) 55%,transparent);border-radius:16px;padding:14px 18px;font-size:.88rem;max-width:90ch;margin:0}
+.imp b{color:var(--sage)}
+.guide{display:flex;flex-direction:column;gap:14px;max-width:90ch}
+.guide ul{margin:0;padding-left:20px}
+.guide li{margin:4px 0}
+.credit{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:.8rem;color:var(--muted)}
+.credit a{color:var(--muted)}
+.qh{font:700 .72rem/1 var(--sans);width:20px;height:20px;border-radius:50%;border:1.5px solid var(--line);background:var(--paper);color:var(--brown);cursor:pointer;margin-left:6px;padding:0;flex:none}
+.sheets{display:flex;flex-direction:column;gap:14px}
+.goals{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+@media (max-width:560px){.goals{grid-template-columns:1fr}}
+.goals label{display:flex;gap:10px;align-items:flex-start;background:var(--bg);border:1.5px solid var(--line);border-radius:14px;padding:9px 12px;cursor:pointer;font-size:.92rem}
+.goals input{width:18px;height:18px;accent-color:var(--sage);flex:none;margin-top:2px}
+.goals small{display:block;color:var(--muted)}
+.steps{display:flex;flex-direction:column;gap:8px}
+.steps details{background:var(--paper);border:1.5px solid var(--line);border-radius:16px;padding:10px 16px}
+.steps summary{cursor:pointer;font-weight:700;display:flex;gap:10px;align-items:baseline}
+.steps summary small{font-weight:600;color:var(--muted);margin-left:auto;text-align:right}
+.steps details p,.steps details ul{margin:8px 0 2px;font-size:.93rem}
+.steps details ul{padding-left:20px}
+</style>
+<!--pwa--><link rel="manifest" href="/fav/site.webmanifest"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Свои люди"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="theme-color" content="#4F5E3E"><style id="pa-tiles">/* верхнее меню на телефоне и планшете: прямоугольные плитки с закруглением в два ряда, иконки ставит pwa-app.js (08.10.2026) */html header.top nav[aria-label] a .pa-ni{display:none}@media (max-width:1100px){html header.top .page{flex-wrap:wrap;row-gap:8px}html header.top nav[aria-label]{order:3;width:100%;display:grid!important;grid-template-columns:repeat(var(--pa-cols,3),minmax(0,1fr));gap:8px;overflow:visible;padding:4px 0 12px;margin:0}html header.top nav[aria-label] a{display:flex!important;flex-direction:column;align-items:center;justify-content:center;gap:5px;min-height:62px;padding:9px 6px;border-radius:14px;background:var(--paper,#FFFCF8);border:1px solid color-mix(in srgb,var(--sage,#66704F) 30%,transparent);box-shadow:0 3px 10px -6px rgba(60,70,40,.45);color:var(--ink,#2F2924)!important;font:600 .78rem/1.18 var(--body,system-ui);text-align:center;white-space:normal;text-decoration:none;-webkit-tap-highlight-color:transparent}html header.top nav[aria-label] a::after{content:none!important}html header.top nav[aria-label] a.pa-dup{display:none!important}html header.top nav[aria-label] a .pa-ni{display:block;width:22px;height:22px;fill:none;stroke:var(--sage,#66704F);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}html header.top nav[aria-label] a[aria-current="page"]{background:var(--sage,#66704F);border-color:var(--sage,#66704F);color:var(--paper,#FFFCF8)!important;box-shadow:0 4px 12px -6px rgba(60,70,40,.6)}html header.top nav[aria-label] a[aria-current="page"] .pa-ni{stroke:var(--paper,#FFFCF8)}html header.top nav[aria-label] a:active{transform:scale(.97)}}/* компьютер — как на сайте Ирины (решение 09.10.2026): на широком экране одна строка «логотип · меню · поиск · кнопка», пункты простым текстом, текущий — тёмным и жирным; на узком ноутбуке (1101–1359 px) меню переносится отдельной строкой под логотип, без переносов внутри пунктов */@media (min-width:1101px){html header.top .page{flex-wrap:wrap;row-gap:0;column-gap:14px}html header.top .mark{flex:none}html header.top .mark b,html header.top .mark small{white-space:nowrap}html header.top .page>.ss-btn{margin-left:auto}html header.top nav[aria-label]{order:3;flex:1 0 100%;display:flex!important;flex-wrap:nowrap;justify-content:center;gap:4px;overflow:visible;margin:8px 0 -2px;padding:6px 0 0;border-top:1px solid color-mix(in srgb,var(--sage,#66704F) 22%,transparent);font-size:.92rem}html header.top nav[aria-label] a{white-space:nowrap;padding:6px 10px;color:var(--muted,#6B635A);font-weight:500;text-decoration:none}html header.top nav[aria-label] a:hover{color:var(--ink,#2F2924)}html header.top nav[aria-label] a[aria-current="page"]{color:var(--ink,#2F2924)!important;font-weight:700}}@media (min-width:1360px){html header.top .page{flex-wrap:nowrap;max-width:1340px}html header.top nav[aria-label]{order:0;flex:0 1 auto;margin:0 auto;padding:0;border-top:0;gap:2px}html header.top nav[aria-label] a{padding:6px 9px}html header.top .page>.ss-btn{margin-left:0}html header.top .page>.ss-btn span{display:none}}/* кнопки сайта — прямоугольные с закруглением, как плитки меню (решение Ирины 08.10.2026); значки-метки (образец, теги, «?») остаются круглыми */:is(.navcta,.btn,.shr-btn,.pl-act a,.pl-act button,.qa,.more,.listbar button,.leaflet-popup-content button,.calmenu a,.calmenu button,.go-free,.find,.confirm,.monthics,.addb,.mbtn,.example,.viewsw,#langbar.langbar,.pa-go,.pa-x,.pa-foot){border-radius:12px!important}:is(.viewsw button,.seg button,.chips button,#langbar.langbar a,.cal-nav button){border-radius:9px!important}</style><script src="/assets/pwa-app.js" defer></script><!--pwa--><!--i18n--><link rel="alternate" hreflang="ru" href="https://svoiludi.ch/instrumenty/grafik-prachechnoj/"><link rel="alternate" hreflang="uk" href="https://svoiludi.ch/uk/instrumenty/grafik-prachechnoj/"><script>(function(){try{if(localStorage.getItem('svoiludiLang')==='uk'&&!/[?&]lang=ru/.test(location.search))location.replace('/uk/instrumenty/grafik-prachechnoj/'+location.search+location.hash);}catch(e){}})();</script><!--i18n--></head>
+<body>
+<style>#fields{display:flex;flex-direction:column;gap:14px}#fields input:not([type=checkbox]):not([type=radio]),#fields select{width:100%}
+.wi{display:inline-block;width:1.2em;height:1.1em;vertical-align:-.17em;margin:0 .28em 0 .05em;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 22'%3E%3Cpath d='M10.27 2.5a2 2 0 0 1 3.46 0l8.66 15a2 2 0 0 1-1.73 3H3.34a2 2 0 0 1-1.73-3z' fill='%23FDECEA' stroke='%23D32F2F' stroke-width='1.8' stroke-linejoin='round'/%3E%3Cpath d='M12 7.8v5.2' stroke='%23D32F2F' stroke-width='2.4' stroke-linecap='round'/%3E%3Ccircle cx='12' cy='16.5' r='1.35' fill='%23D32F2F'/%3E%3C/svg%3E") center/contain no-repeat}
+.apt{background:var(--bg);border:1.5px solid var(--line);border-radius:14px;padding:10px 12px;display:flex;flex-direction:column;gap:8px}
+.apt .row2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+@media (max-width:560px){.apt .row2{grid-template-columns:1fr}}
+.apt .row3{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;justify-content:space-between}
+.apt .nr{font-size:.78rem;font-weight:700;color:var(--muted)}
+.slot{display:grid;grid-template-columns:1fr auto 1fr auto;gap:8px;align-items:center}
+.slot span{color:var(--muted)}
+.xbtn{font:inherit;font-size:.8rem;font-weight:700;border:1.5px solid var(--line);background:var(--paper);color:var(--brown);border-radius:10px;padding:6px 10px;cursor:pointer}
+.dayrow{display:flex;flex-direction:column;gap:6px;padding:8px 0;border-top:1px dashed var(--line)}
+.dayrow:first-child{border-top:0;padding-top:0}
+.dayrow b{font-size:.88rem}
+.dayrow .cells{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:6px}
+.dayrow label{display:flex;flex-direction:column;gap:3px;font-size:.76rem;color:var(--muted);font-weight:700}
+.warnline{font-size:.86rem;margin:0;background:var(--mustard-soft);border-radius:12px;padding:8px 12px}
+.ok{font-size:.86rem;margin:0;color:var(--muted)}
+</style>
+<div class="wrap">
+  <header>
+    <p style="margin:0 0 14px"><a class="jump" href="https://svoiludi.ch/instrumenty/">← Все полезные инструменты · Свои люди в Швейцарии</a></p>
+    <div class="eyebrow">Дом · соседи</div>
+    <h1>График прачечной и уборки подъезда: распечатка для дома</h1>
+    <p class="lead">Во многих швейцарских домах одна стиральная машина на всех, а лестницу жильцы убирают по очереди. Здесь можно собрать оба графика для своего дома: дни и время стирки, квартиры, правила прачечной, время тишины и очередь уборки подъезда. Листы получаются на языке кантона, их вешают в прачечной и у входа. Для себя можно добавить лист с русским переводом. PDF бесплатно.</p>
+    <div class="privnote"><b>Твои данные только у тебя.</b> Имена соседей и всё, что ты вписываешь, хранятся только в твоём браузере на этом устройстве, PDF собирается прямо на устройстве. Регистрация не нужна.</div>
+    <div data-fan="grafik-prachechnoj"></div>
+  </header>
+  <div class="setup">
+    <div class="fl"><span class="lb">Кантон<button type="button" class="qh" data-help="kt" aria-label="Подсказка: кантон" aria-expanded="false">?</button></span><select id="kt"></select></div>
+    <div class="fl"><span class="lb">Язык листа<button type="button" class="qh" data-help="lang" aria-label="Подсказка: язык листа" aria-expanded="false">?</button></span><select id="lang"><option value="de">Deutsch</option><option value="fr">Français</option><option value="it">Italiano</option><option value="en">English</option></select></div>
+    <div class="fl"><span class="lb">Что будет в PDF</span><label class="tog"><input type="checkbox" id="shW"> График прачечной</label><label class="tog"><input type="checkbox" id="shT"> График уборки подъезда</label><label class="tog"><input type="checkbox" id="shR"> Перевод для себя<button type="button" class="qh" data-help="tr" aria-label="Подсказка: перевод для себя" aria-expanded="false">?</button></label></div>
+    <div class="fl"><span class="lb">Печать</span><label class="tog"><input type="checkbox" id="bw"> Без цвета, для дешёвой печати</label></div>
+  </div>
+  <div class="exbar" id="exbar" hidden><span>Это пример. Так будут выглядеть графики.</span><button type="button" class="btn sm" id="exOff">Вернуться к моим данным</button></div>
+  <div class="work">
+    <div class="form" id="fields"></div>
+    <div class="sheetbox">
+      <div class="acts"><button type="button" class="btn gold" id="pdf">Скачать PDF</button><button type="button" class="btn ghost sm" id="share" hidden>Отправить</button><button type="button" class="btn ghost sm" id="exOn">Посмотреть на примере</button></div>
+      <div class="sheets" id="sheet" aria-label="Предпросмотр листов"></div>
+      <div class="status" id="status" role="status"></div>
+    </div>
+  </div>
+  <p class="imp"><b>Важно.</b> Это образец для примера и личного использования, а не официальный документ. Данные нужно уточнять и перепроверять самому, автор не отвечает за достоверность. Обязательные правила дома написаны в правилах дома (Hausordnung), а время тишины — в полицейском регламенте общины (Polizeireglement). <i class="wi"></i>График не должен им противоречить, поэтому свой график, о котором договорились соседи, лучше сначала отправить управляющей (Verwaltung) или смотрителю дома (Hauswart). Подробно о прачечной, тишине и правилах дома — в теме <a href="https://svoiludi.ch/shveycariya/pravila-doma/">«Тишина, прачечная и правила дома»</a>, о правах арендатора — в теме <a href="https://svoiludi.ch/shveycariya/dogovor-arendy/">«Договор аренды»</a>, о мусоре — в теме <a href="https://svoiludi.ch/shveycariya/musor/">«Мусор и сортировка»</a>.</p>
+  <div class="share-slot" data-url="https://svoiludi.ch/instrumenty/grafik-prachechnoj/" data-lead="Перешли соседям или тем, кто составляет график в своём доме. В ссылке нет твоих данных." data-text="Привет! Тут можно бесплатно сделать график прачечной и уборки подъезда для своего дома — на немецком, французском или итальянском, с переводом для себя. https://svoiludi.ch/instrumenty/grafik-prachechnoj/"></div>
+  <p class="credit"><span>Свои люди в Швейцарии · svoiludi.ch</span><a href="https://svoiludi.ch/privacy/">Политика конфиденциальности</a></p>
+</div>
+
+<script src="/assets/kantony.js"></script>
+<script src="/assets/lib/jspdf.umd.min.js"></script>
+<script src="/assets/shema.js"></script>
+<script>
+/* График прачечной и уборки подъезда: распечатка для дома (09.10.2026, просьба Ирины: «расписание в прачечной, документ для распечатки для жителей дома»).
+   Лист 1 — Waschplan (A4 альбомный): дни × смены, квартиры, правила, тишина, сушилка, Hauswart. Лист 2 — Reinigungsplan Treppenhaus (A4): очередь по неделям, что убирать, «Erledigt am» и подпись.
+   Лист 3 — перевод для себя по-русски. Листы для соседей без водяного знака (их вешают в доме), строка svoiludi.ch остаётся.
+   Факты о тишине и прачечной — как в теме «Тишина, прачечная и правила дома» (сверено 08.10.2026). */
+window.HELP = {
+  kt: '<p>Кантон, где дом. От него зависит язык листов: немецкий, французский или итальянский — на нём соседи читают объявления в доме. Язык можно поменять вручную.</p>',
+  lang: '<p>Листы вешают в прачечной и в подъезде, их читают все соседи, поэтому они на языке кантона. Если в доме много иностранцев, можно сделать английский вариант. Чтобы самой понимать, что написано, отметь «Перевод для себя».</p>',
+  tr: '<p>Отдельный лист по-русски: перевод всего, что написано на графиках, твои дни стирки и уборки, слова, которые встречаются в доме, и советы, как повесить график. Этот лист для тебя, его не вывешивают.</p>',
+  who: '<p>Обычно график прачечной и уборки составляет управляющая (Verwaltung, régie, amministrazione) или смотритель дома (Hauswart, concierge, custode). Часто он уже записан в правилах дома (Hausordnung).</p><p>Если графика нет или он не работает, жильцы могут договориться сами. Тогда покажи проект соседям, а готовый график отправь управляющей по e-mail: так она знает о нём, и он не противоречит правилам дома. Менять сами правила дома может только управляющая.</p>',
+  start: '<p>С какой недели действует график. Он всегда начинается с понедельника этой недели, даты на листах считаются от него.</p>',
+  weeks: '<p>На сколько недель вперёд нужны даты. Для графика уборки — сколько строк будет в таблице. Обычно делают на квартал или на полгода и потом печатают новый.</p>',
+  floor: '<p>Этажи в Швейцарии считают иначе: Erdgeschoss (EG, rez-de-chaussée, pianterreno) — это наш первый этаж, 1. OG (1er étage, 1° piano) — наш второй. UG — подвальный этаж, DG — мансарда под крышей. Где найти: на почтовом ящике, у звонка или в договоре аренды.</p>',
+  part: '<p>Сними галочку «стирает в общей прачечной», если у квартиры своя машина и она не пользуется общей. Сними «убирает подъезд», если квартира не участвует в уборке, например офис на первом этаже или если так решила управляющая.</p>',
+  my: '<p>Выбери свою квартиру, и на листе перевода появятся твои дни стирки и недели уборки по-русски. На листы для соседей это не влияет.</p>',
+  days: '<p>В какие дни можно стирать. В воскресенье и в праздники во многих домах стирать нельзя, это записано в правилах дома (Hausordnung). Если в твоём доме можно, включи «Вс».</p>',
+  slots: '<p>На какие отрезки делить день. Обычно три смены (утро, день, вечер), две смены по полдня или весь день на одну квартиру. Последняя смена должна закончиться до ночной тишины: стиральная машина при отжиме и сушилка слышны по всему дому.</p>',
+  mode: '<p><b>Каждую неделю одинаково</b> — у каждой квартиры свои постоянные дни, например каждый вторник утром. Так проще запомнить.</p><p><b>По очереди</b> — каждую неделю все сдвигаются на день вперёд: кто стирал в понедельник, на следующей неделе стирает во вторник. Так никому не достаются всегда неудобные дни, а удобная суббота по очереди у всех. На листе будет таблица недель с датами.</p>',
+  grid: '<p>Программа сама распределяет смены поровну. Если нужно, поменяй квартиру в любой клетке. «Свободно» — клетка для всех: кто договорился, тот и стирает. Если поменяешь дни, время или список квартир, распределение начнётся заново.</p>',
+  dry: '<p>Сушильная комната (Trockenraum, local de séchage, locale di asciugatura) — помещение с верёвками, где сушат бельё. Обычно её можно занимать в свой день стирки и до утра или обеда следующего дня. Если в доме только сушильная машина (Tumbler), выбери «Не указывать».</p>',
+  quiet: '<p>Единого закона о тишине нет. Время тишины устанавливает община в полицейском регламенте (Polizeireglement), правила дома (Hausordnung) могут добавить подробности. Ночная тишина во многих местах с 22:00 до 6:00 или до 7:00, во многих общинах ещё обеденная тишина с 12:00 до 13:00 и тишина в воскресенье и праздники.</p><p>Где найти: Polizeireglement на сайте своей общины, Hausordnung — вместе с договором аренды или у управляющей.</p>',
+  rules: '<p>Из-за прачечной в швейцарских домах ссорятся чаще всего. Правила на листе одинаковы для всех и написаны вежливо, поэтому никому не нужно делать замечания соседу лично. Возьми те правила, что уже есть в правилах твоего дома (Hausordnung), — новые обязанности жильцам придумывать нельзя.</p>',
+  step: '<p>Как часто меняется дежурный по подъезду. В небольших домах обычно каждую неделю, в домах с маленьким подъездом — каждые две недели.</p>',
+  clean: '<p>Отметь, что дежурный делает за свою неделю. Проверь договор аренды: если в дополнительных расходах (Nebenkosten) есть уборка лестницы (Treppenhausreinigung, nettoyage de la cage d’escalier), за неё уже платят все, и убирает фирма или смотритель дома, а не жильцы.</p>',
+  hw: '<p>Кому сообщать о поломке машины, протечке или споре из-за графика. Где найти: на доске объявлений в подъезде, у двери прачечной, в договоре аренды или у управляющей. Можно не заполнять.</p>'
+};
+const KEY = 'grafikPrachechnoj.v1';
+const LANGS = ['de', 'fr', 'it', 'en'];
+function langOf(k){ const K = window.KANTONY || {}; return k && K[k] ? ({de: 'de', fr: 'fr', it: 'it'}[K[k].l] || 'de') : 'de'; }
+const iso = dt => dt.toISOString().slice(0, 10);
+const pd = s => { const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(s || ''); return m ? new Date(Date.UTC(+m[1], +m[2] - 1, +m[3])) : null; };
+const addD = (dt, n) => new Date(dt.getTime() + n * 864e5);
+const monday = dt => addD(dt, -((dt.getUTCDay() + 6) % 7));
+const p2 = n => String(n).padStart(2, '0');
+const dm = dt => `${p2(dt.getUTCDate())}.${p2(dt.getUTCMonth() + 1)}.`;
+const dmy = dt => dm(dt) + dt.getUTCFullYear();
+function nextMonday(){ const t = new Date(), u = new Date(Date.UTC(t.getFullYear(), t.getMonth(), t.getDate())); const m = monday(u); return iso(m.getTime() === u.getTime() ? u : addD(m, 7)); }
+let uid = 0; const nid = () => 'a' + Date.now().toString(36) + (uid++);
+const newApt = () => ({id: nid(), name: '', fl: '', side: '', wa: true, cl: true});
+const PRESET = {three: [[7, 12], [12, 17], [17, 21]], two: [[7, 14], [14, 21]], day: [[7, 21]]};
+function blank(){ let k = ''; try { k = localStorage.getItem('svoiludi.kanton') || ''; } catch (e) {}
+  return {kt: k, lang: langOf(k), shW: true, shT: true, shR: true, bw: false, addr: '', start: nextMonday(), weeks: '13',
+    apts: [newApt(), newApt(), newApt(), newApt()], my: '', days: [1, 1, 1, 1, 1, 1, 0], preset: 'three', slots: PRESET.three.map(s => s.slice()),
+    mode: 'fixed', fix: {}, dry: '12', night: '22-7', noon: true, sun: true,
+    rules: {filter: true, wipe: true, out: true, dry: true, swap: true, floor: false, defect: false},
+    step: '1', tasks: {stairs: true, landing: true, entrance: true, windows: false, mail: true, rail: false, wash: false, bins: false, snow: true}, hw: '', hwtel: ''}; }
+let S = load(), EX = null;
+function load(){ try { const s = JSON.parse(localStorage.getItem(KEY)); if (s && typeof s === 'object') { const b = blank(); const o = Object.assign(b, s, {rules: Object.assign(b.rules, s.rules), tasks: Object.assign(b.tasks, s.tasks)});
+  if (!Array.isArray(o.apts)) o.apts = b.apts; if (!Array.isArray(o.slots) || !o.slots.length) o.slots = b.slots; if (!Array.isArray(o.days) || o.days.length !== 7) o.days = b.days; if (!o.fix || typeof o.fix !== 'object') o.fix = {}; return o; } } catch (e) {} return blank(); }
+function save(){ if (EX) return; try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} }
+const D = () => EX || S;
+
+/* ---------- тексты листов ---------- */
+const T = {
+  wTitle: {ru: 'График прачечной', de: 'Waschplan', fr: 'Plan de la buanderie', it: 'Piano della lavanderia', en: 'Laundry schedule'},
+  wPlace: {ru: 'Прачечная', de: 'Waschküche', fr: 'Buanderie', it: 'Lavanderia', en: 'Laundry room'},
+  cTitle: {ru: 'График уборки подъезда', de: 'Reinigungsplan Treppenhaus', fr: 'Plan de nettoyage de la cage d’escalier', it: 'Piano di pulizia delle scale', en: 'Stairwell cleaning schedule'},
+  cPlace: {ru: 'Подъезд', de: 'Treppenhaus', fr: 'Cage d’escalier', it: 'Scale', en: 'Stairwell'},
+  hello: {ru: 'Дорогие соседи!', de: 'Liebe Nachbarinnen und Nachbarn', fr: 'Chers voisins,', it: 'Cari vicini,', en: 'Dear neighbours,'},
+  wIntro: {ru: a => `Чтобы каждый мог постирать в своё время, с ${a} действует такой график.`, de: a => `Damit alle zu ihrer Zeit waschen können, gilt ab ${a} folgender Waschplan.`, fr: a => `Pour que chacun puisse faire sa lessive à son tour, le plan suivant s’applique dès le ${a}.`, it: a => `Perché ognuno possa fare il bucato al suo turno, dal ${a} vale il seguente piano.`, en: a => `So that everyone can do their laundry in turn, the following schedule applies from ${a}.`},
+  wRot: {ru: 'Каждую неделю день стирки сдвигается на один день вперёд.', de: 'Der Waschtag verschiebt sich jede Woche um einen Tag.', fr: 'Chaque semaine, le jour de lessive avance d’un jour.', it: 'Ogni settimana il giorno di bucato si sposta di un giorno.', en: 'Each week, your laundry day moves on by one day.'},
+  wCycle: {ru: n => `После недели ${n} график начинается снова с недели 1.`, de: n => `Nach Woche ${n} beginnt der Plan wieder bei Woche 1.`, fr: n => `Après la semaine ${n}, le plan recommence à la semaine 1.`, it: n => `Dopo la settimana ${n} il piano ricomincia dalla settimana 1.`, en: n => `After week ${n}, the plan starts again at week 1.`},
+  valid: {ru: (a, b) => `действует ${a} – ${b}`, de: (a, b) => `gültig ${a} – ${b}`, fr: (a, b) => `valable du ${a} au ${b}`, it: (a, b) => `valido dal ${a} al ${b}`, en: (a, b) => `valid ${a} – ${b}`},
+  time: {ru: 'Время', de: 'Zeit', fr: 'Horaire', it: 'Orario', en: 'Time'},
+  week: {ru: 'Неделя', de: 'Woche', fr: 'Semaine', it: 'Settimana', en: 'Week'},
+  from: {ru: 'с', de: 'ab', fr: 'dès le', it: 'dal', en: 'from'},
+  free: {ru: 'свободно', de: 'frei', fr: 'libre', it: 'libero', en: 'free'},
+  freeNote: {ru: '«свободно» — для всех, по договорённости', de: 'frei = für alle, nach Absprache', fr: 'libre = pour tous, après entente', it: 'libero = per tutti, previo accordo', en: 'free = open to everyone by arrangement'},
+  please: {ru: 'Пожалуйста, соблюдайте', de: 'Bitte beachten', fr: 'Merci de respecter', it: 'Si prega di osservare', en: 'Please note'},
+  quiet: {ru: 'Время тишины', de: 'Ruhezeiten', fr: 'Heures de repos', it: 'Orari di quiete', en: 'Quiet hours'},
+  night: {ru: (a, b) => `Ночная тишина с ${a}:00 до ${b}:00: стиральную машину и сушилку не включать.`, de: (a, b) => `Nachtruhe ${a} bis ${b} Uhr: Waschmaschine und Tumbler nicht benutzen.`, fr: (a, b) => `Repos nocturne de ${a} h à ${b} h : ne pas utiliser la machine à laver ni le séchoir.`, it: (a, b) => `Quiete notturna dalle ${a} alle ${b}: non usare lavatrice né asciugatrice.`, en: (a, b) => `Night quiet ${a}:00–${b}:00: please do not use the washing machine or dryer.`},
+  noon: {ru: 'Обеденная тишина с 12:00 до 13:00.', de: 'Mittagsruhe 12 bis 13 Uhr.', fr: 'Repos de midi de 12 h à 13 h.', it: 'Pausa di mezzogiorno dalle 12 alle 13.', en: 'Midday quiet 12:00–13:00.'},
+  sun: {ru: 'В воскресенье и праздники прачечная закрыта.', de: 'Sonn- und Feiertage: Waschküche geschlossen.', fr: 'Dimanches et jours fériés : buanderie fermée.', it: 'Domeniche e giorni festivi: lavanderia chiusa.', en: 'Sundays and public holidays: laundry room closed.'},
+  hol: {ru: 'В праздники прачечная закрыта.', de: 'Feiertage: Waschküche geschlossen.', fr: 'Jours fériés : buanderie fermée.', it: 'Giorni festivi: lavanderia chiusa.', en: 'Public holidays: laundry room closed.'},
+  dryT: {ru: 'Сушильная комната', de: 'Trockenraum', fr: 'Local de séchage', it: 'Locale di asciugatura', en: 'Drying room'},
+  dryL: {ru: h => `В свой день стирки и до ${h}:00 следующего дня. Потом бельё нужно снять.`, de: h => `Am eigenen Waschtag und bis am nächsten Tag um ${h} Uhr. Danach bitte die Wäsche abnehmen.`, fr: h => `Le jour de sa lessive et jusqu’au lendemain à ${h} h. Ensuite, merci de reprendre son linge.`, it: h => `Il giorno del proprio bucato e fino al giorno dopo alle ${h}. Poi si prega di ritirare il bucato.`, en: h => `On your laundry day and until ${h}:00 the next day. Then please take your washing down.`},
+  hw: {ru: 'Смотритель дома', de: 'Hauswart', fr: 'Concierge', it: 'Custode', en: 'Caretaker'},
+  hwNote: {ru: 'Поломки и вопросы', de: 'Bei Störungen und Fragen', fr: 'Pannes et questions', it: 'Guasti e domande', en: 'Faults and questions'},
+  tel: {ru: 'тел.', de: 'Tel.', fr: 'tél.', it: 'tel.', en: 'phone'},
+  thanks: {ru: 'Спасибо за понимание!', de: 'Vielen Dank für die Rücksichtnahme!', fr: 'Merci de votre compréhension !', it: 'Grazie per la collaborazione!', en: 'Thank you for your consideration!'},
+  apt: {ru: 'Квартира', de: 'Wohnung', fr: 'Logement', it: 'Appartamento', en: 'Flat'},
+  wFoot: {ru: 'Вопросы и изменения графика — к смотрителю дома или в управляющую.', de: 'Fragen und Änderungen: bitte an den Hauswart oder die Verwaltung.', fr: 'Questions et changements : merci de vous adresser au concierge ou à la gérance.', it: 'Domande e modifiche: rivolgersi al custode o all’amministrazione.', en: 'Questions and changes: please contact the caretaker or the property management.'},
+  cIntro: {ru: 'Подъезд мы убираем по очереди. Кто дежурит, делает в своё время работы из списка и подтверждает подписью.', de: 'Das Treppenhaus reinigen wir abwechselnd. Wer an der Reihe ist, erledigt in dieser Zeit die Arbeiten unten und bestätigt sie mit der Unterschrift.', fr: 'Nous nettoyons la cage d’escalier à tour de rôle. Le ménage de service effectue les travaux ci-dessous pendant sa période et le confirme par sa signature.', it: 'Puliamo le scale a turno. Chi è di turno svolge i lavori qui sotto nel suo periodo e lo conferma con la firma.', en: 'We take turns cleaning the stairwell. Whoever is on duty does the tasks below during their period and signs to confirm.'},
+  todo: {ru: 'Что нужно сделать', de: 'Was zu tun ist', fr: 'Ce qu’il faut faire', it: 'Cosa fare', en: 'What to do'},
+  period: {ru: 'Период', de: 'Zeitraum', fr: 'Période', it: 'Periodo', en: 'Period'},
+  nr: {ru: '№', de: 'Nr.', fr: 'N°', it: 'N.', en: 'No.'},
+  done: {ru: 'Сделано (дата)', de: 'Erledigt am', fr: 'Fait le', it: 'Fatto il', en: 'Done on'},
+  sign: {ru: 'Подпись', de: 'Unterschrift', fr: 'Signature', it: 'Firma', en: 'Signature'},
+  cSwap: {ru: 'Поменяться можно только по договорённости. Кто не может, сам находит замену.', de: 'Tauschen nur nach Absprache. Wer verhindert ist, organisiert selbst eine Vertretung.', fr: 'Échanges uniquement après entente. En cas d’empêchement, merci de trouver vous-même un remplaçant.', it: 'Scambi solo previo accordo. Chi è impedito organizza personalmente una sostituzione.', en: 'Swaps only by agreement. If you can’t do your turn, please arrange a replacement yourself.'},
+  cont: {ru: 'продолжение', de: 'Fortsetzung', fr: 'suite', it: 'continuazione', en: 'continued'}
+};
+const tx = (k, L, ...a) => { const v = T[k][L] || T[k].de; return typeof v === 'function' ? v(...a) : v; };
+const DAYS = {ru: ['понедельник', 'вторник', 'среда', 'четверг', 'пятница', 'суббота', 'воскресенье'], de: ['Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag', 'Sonntag'],
+  fr: ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'], it: ['Lunedì', 'Martedì', 'Mercoledì', 'Giovedì', 'Venerdì', 'Sabato', 'Domenica'], en: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']};
+const DSH = ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'];
+const RULES = [
+  ['filter', {ru: 'После стирки почистить фильтр сушилки (Flusensieb) и фильтр стиральной машины.', de: 'Nach dem Waschen das Flusensieb des Tumblers und den Filter der Maschine reinigen.', fr: 'Après la lessive, nettoyer le filtre à peluches du séchoir et le filtre de la machine.', it: 'Dopo il bucato pulire il filtro dei pelucchi dell’asciugatrice e il filtro della lavatrice.', en: 'After washing, clean the dryer’s lint filter and the machine’s filter.'}],
+  ['wipe', {ru: 'Протереть машину, резиновый уплотнитель и лоток для порошка, дверцу оставить открытой.', de: 'Maschine, Gummidichtung und Waschmittelfach trocken wischen, Türe offen lassen.', fr: 'Essuyer la machine, le joint et le bac à lessive, laisser la porte ouverte.', it: 'Asciugare la lavatrice, la guarnizione e la vaschetta del detersivo, lasciare lo sportello aperto.', en: 'Wipe the machine, the door seal and the detergent drawer; leave the door open.'}],
+  ['out', {ru: 'Вовремя забрать бельё — до конца своего времени.', de: 'Die Wäsche pünktlich bis zum Ende der eigenen Zeit herausnehmen.', fr: 'Retirer son linge à temps, avant la fin de son créneau.', it: 'Togliere il bucato puntualmente entro la fine del proprio turno.', en: 'Take your laundry out on time, before your slot ends.'}],
+  ['dry', {ru: 'Вовремя освободить сушильную комнату и верёвки для следующих.', de: 'Trockenraum und Wäscheleinen rechtzeitig für die Nächsten frei machen.', fr: 'Libérer à temps le local de séchage et les étendages pour les suivants.', it: 'Liberare in tempo il locale di asciugatura e i fili per chi viene dopo.', en: 'Clear the drying room and lines in time for the next household.'}],
+  ['swap', {ru: 'Меняться временем только по договорённости с соседом.', de: 'Waschtage nur nach Absprache mit den Nachbarn tauschen.', fr: 'Échanger un créneau uniquement après entente avec le voisin concerné.', it: 'Scambiare il turno solo previo accordo con il vicino.', en: 'Swap slots only by agreement with the neighbour concerned.'}],
+  ['floor', {ru: 'Оставлять прачечную чистой, при необходимости протереть пол.', de: 'Die Waschküche sauber verlassen, den Boden bei Bedarf aufnehmen.', fr: 'Laisser la buanderie propre, nettoyer le sol si nécessaire.', it: 'Lasciare la lavanderia pulita, pulire il pavimento se necessario.', en: 'Leave the laundry room clean; mop the floor if needed.'}],
+  ['defect', {ru: 'О поломках и повреждениях сразу сообщать смотрителю дома.', de: 'Störungen und Schäden sofort dem Hauswart melden.', fr: 'Signaler immédiatement les pannes et les dégâts au concierge.', it: 'Segnalare subito guasti e danni al custode.', en: 'Report faults and damage to the caretaker straight away.'}]
+];
+const TASKS = [
+  ['stairs', {ru: 'Подмести и помыть лестницу', de: 'Treppen wischen und feucht aufnehmen', fr: 'Balayer et laver les escaliers', it: 'Scopare e lavare le scale', en: 'Sweep and mop the stairs'}],
+  ['landing', {ru: 'Убрать площадки и коридоры', de: 'Podeste und Gänge reinigen', fr: 'Nettoyer les paliers et couloirs', it: 'Pulire pianerottoli e corridoi', en: 'Clean the landings and corridors'}],
+  ['entrance', {ru: 'Вход, входная дверь и коврик', de: 'Hauseingang, Haustüre und Fussmatte', fr: 'Entrée, porte d’entrée et paillasson', it: 'Ingresso, portone e zerbino', en: 'Entrance, front door and doormat'}],
+  ['windows', {ru: 'Помыть окна на лестнице', de: 'Treppenhausfenster putzen', fr: 'Laver les fenêtres de la cage d’escalier', it: 'Pulire le finestre delle scale', en: 'Clean the stairwell windows'}],
+  ['mail', {ru: 'Протереть почтовые ящики', de: 'Briefkastenanlage abwischen', fr: 'Essuyer les boîtes aux lettres', it: 'Pulire le cassette delle lettere', en: 'Wipe the mailbox area'}],
+  ['rail', {ru: 'Протереть перила и выключатели', de: 'Handlauf und Lichtschalter abwischen', fr: 'Essuyer la main courante et les interrupteurs', it: 'Pulire corrimano e interruttori', en: 'Wipe the handrail and light switches'}],
+  ['wash', {ru: 'Помыть пол в прачечной', de: 'Boden der Waschküche aufnehmen', fr: 'Laver le sol de la buanderie', it: 'Lavare il pavimento della lavanderia', en: 'Mop the laundry room floor'}],
+  ['bins', {ru: 'Убрать место для мусора и контейнеров', de: 'Containerplatz sauber halten', fr: 'Nettoyer l’emplacement des conteneurs', it: 'Pulire lo spazio dei contenitori dei rifiuti', en: 'Clean the bin area'}],
+  ['snow', {ru: 'Зимой: убрать снег и посыпать лёд у входа', de: 'Im Winter: Schnee räumen und beim Eingang Eis streuen', fr: 'En hiver : déneiger et saler devant l’entrée', it: 'In inverno: sgomberare la neve e spargere sale all’ingresso', en: 'In winter: clear snow and grit the entrance'}]
+];
+const GLOSS = {
+  de: [['Waschküche', 'прачечная'], ['Tumbler', 'сушильная машина'], ['Flusensieb', 'фильтр для ворса в сушилке'], ['Trockenraum', 'сушильная комната'], ['Hauswart', 'смотритель дома'], ['Verwaltung', 'управляющая компания'], ['Treppenhaus', 'подъезд, лестница'], ['Nachtruhe', 'ночная тишина'], ['Erledigt am', 'сделано (дата)'], ['Unterschrift', 'подпись']],
+  fr: [['Buanderie', 'прачечная'], ['Séchoir', 'сушильная машина'], ['Filtre à peluches', 'фильтр для ворса в сушилке'], ['Local de séchage', 'сушильная комната'], ['Concierge', 'смотритель дома'], ['Gérance, régie', 'управляющая компания'], ['Cage d’escalier', 'подъезд, лестница'], ['Repos nocturne', 'ночная тишина'], ['Fait le', 'сделано (дата)'], ['Signature', 'подпись']],
+  it: [['Lavanderia', 'прачечная'], ['Asciugatrice', 'сушильная машина'], ['Filtro dei pelucchi', 'фильтр для ворса в сушилке'], ['Locale di asciugatura', 'сушильная комната'], ['Custode', 'смотритель дома'], ['Amministrazione', 'управляющая компания'], ['Scale', 'подъезд, лестница'], ['Quiete notturna', 'ночная тишина'], ['Fatto il', 'сделано (дата)'], ['Firma', 'подпись']],
+  en: [['Laundry room', 'прачечная (Waschküche)'], ['Dryer', 'сушильная машина (Tumbler)'], ['Lint filter', 'фильтр для ворса (Flusensieb)'], ['Drying room', 'сушильная комната (Trockenraum)'], ['Caretaker', 'смотритель дома (Hauswart)'], ['Property management', 'управляющая (Verwaltung)'], ['Stairwell', 'подъезд (Treppenhaus)'], ['Night quiet', 'ночная тишина (Nachtruhe)'], ['Done on', 'сделано (дата)'], ['Signature', 'подпись']]
+};
+/* этажи: '' — не указан, UG, EG, 1…9, DG; сторона: '', l, r, m */
+const FLOORS = ['', 'UG', 'EG', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'DG'];
+const SIDES = {'': ['—', '', '', '', ''], l: ['слева', 'links', 'gauche', 'sinistra', 'left'], r: ['справа', 'rechts', 'droite', 'destra', 'right'], m: ['посередине', 'Mitte', 'milieu', 'centro', 'middle']};
+const LI = {ru: 0, de: 1, fr: 2, it: 3, en: 4};
+function floorTxt(fl, L){
+  if (!fl) return '';
+  const n = +fl, ord = n === 1 ? 'st' : n === 2 ? 'nd' : n === 3 ? 'rd' : 'th';
+  if (L === 'ru') return fl === 'UG' ? 'подвальный этаж (UG)' : fl === 'EG' ? 'EG, наш 1-й этаж' : fl === 'DG' ? 'мансарда (DG)' : `${n}. OG, наш ${n + 1}-й этаж`;
+  if (L === 'de') return fl === 'UG' ? 'UG' : fl === 'EG' ? 'EG' : fl === 'DG' ? 'DG' : `${n}. OG`;
+  if (L === 'fr') return fl === 'UG' ? 'sous-sol' : fl === 'EG' ? 'rez' : fl === 'DG' ? 'combles' : (n === 1 ? '1er' : n + 'e') + ' étage';
+  if (L === 'it') return fl === 'UG' ? 'seminterrato' : fl === 'EG' ? 'pianterreno' : fl === 'DG' ? 'mansarda' : `${n}° piano`;
+  return fl === 'UG' ? 'basement' : fl === 'EG' ? 'ground floor' : fl === 'DG' ? 'attic' : `${n}${ord} floor`;
+}
+const whereTxt = (a, L) => { const f = floorTxt(a.fl, L), s = a.side ? SIDES[a.side][LI[L]] : ''; return L === 'de' ? [f, s].filter(Boolean).join(' ') : [f, s].filter(Boolean).join(', '); };
+const aptName = (d, a, L) => (a.name || '').trim() || tx('apt', L) + ' ' + (d.apts.indexOf(a) + 1);
+const hh = n => p2(n) + ':00';
+const slotTxt = s => `${hh(s[0])}–${hh(s[1])}`;
+const slotShort = s => `${s[0]}–${s[1]}`;
+
+/* ---------- распределение смен ---------- */
+function plan(d){
+  const days = d.days.map((v, i) => v ? i : -1).filter(i => i >= 0), S = d.slots.length, L = d.apts.filter(a => a.wa), n = L.length, Dn = days.length, cells = Dn * S;
+  const base = days.map(() => d.slots.map(() => 'free'));
+  if (n && cells) {
+    const k = Math.max(1, Math.floor(cells / n)), shift = Math.max(1, Math.round(n / S)), cnt = {};
+    days.forEach((_, di) => d.slots.forEach((_, si) => { const a = L[(di + si * shift) % n]; if ((cnt[a.id] || 0) < k) { cnt[a.id] = (cnt[a.id] || 0) + 1; base[di][si] = a.id; } }));
+  }
+  const ids = new Set(d.apts.map(a => a.id));
+  days.forEach((dd, di) => d.slots.forEach((_, si) => { const v = d.fix[dd + '-' + si]; if (v === 'free' || ids.has(v)) base[di][si] = v; }));
+  const used = new Set(); base.forEach(r => r.forEach(v => used.add(v)));
+  return {days, base, Dn, S, missing: L.filter(a => !used.has(a.id))};
+}
+/* неделя w (с 0) при очереди: всё сдвигается на день вперёд */
+const cellAt = (p, w, di, si) => p.base[((di - w) % p.Dn + p.Dn) % p.Dn][si];
+function period(d){ const st = monday(pd(d.start) || pd(nextMonday())), N = Math.max(1, +d.weeks || 13); return {st, N, end: addD(st, N * 7 - 1)}; }
+function nightOf(d){ const m = /^(\d+)-(\d+)$/.exec(d.night || ''); return m ? [+m[1], +m[2]] : null; }
+
+/* ---------- рисование ---------- */
+const PT = SH.PT;
+function cellText(P, x, y, w, h, lines, align){
+  const lh = l => l.size * PT * 1.32, tot = lines.reduce((a, l) => a + lh(l), 0); let yy = y + (h - tot) / 2;
+  lines.forEach(l => { const by = yy + l.size * PT * 0.98;
+    if (l.pre) { P.text(l.pre, x + 2.6, by, l.size, false, l.pc, 'left'); P.text(l.s, x + 2.6 + (l.pw || SH.tw(l.pre, false, l.size) + 1.6), by, l.size, l.b, l.col, 'left'); }
+    else P.text(l.s, align === 'center' ? x + w / 2 : x + 2.6, by, l.size, l.b, l.col, align === 'center' ? 'center' : 'left'); yy += lh(l); });
+}
+function fitLines(s, b, size, w, max){ const ls = SH.wrap(s, b, size, w); if (ls.length <= max) return ls; const out = ls.slice(0, max); out[max - 1] = out[max - 1].replace(/\s*\S*$/, '') + '…'; return out; }
+function infoBlock(d, C, L){ /* правая колонка под таблицей: тишина, сушилка, Hauswart */
+  const out = [], nt = nightOf(d), sunOn = !!d.days[6];
+  const q = []; if (nt) q.push(tx('night', L, nt[0], nt[1])); if (d.noon) q.push(tx('noon', L)); if (d.sun) q.push(sunOn ? tx('hol', L) : tx('sun', L));
+  if (q.length) out.push([tx('quiet', L), q]);
+  if (d.dry) out.push([tx('dryT', L), [tx('dryL', L, +d.dry)]]);
+  if ((d.hw || '').trim() || (d.hwtel || '').trim()) out.push([tx('hw', L) + ' · ' + tx('hwNote', L), [[d.hw.trim(), d.hwtel.trim() ? tx('tel', L) + ' ' + d.hwtel.trim() : ''].filter(Boolean).join(', ')]]);
+  return out;
+}
+function measureBox(title, items, w, ts, bs){ let h = 4 + ts * PT * 1.4; items.forEach(it => { h += SH.wrap(it, false, bs, w - 10).length * bs * PT * 1.38 + 1.2; }); return h + 2.5; }
+function drawBox(P, C, x, y, w, h, title, items, ts, bs, bullet){
+  P.rect(x, y, w, h, C.soft, C.line, 2); let yy = y + 3.4 + ts * PT; P.text(title, x + 4, yy, ts, true, C.head); yy += ts * PT * 0.55 + 1.6;
+  items.forEach(it => { const ls = SH.wrap(it, false, bs, w - 10); yy += bs * PT * 0.95; if (bullet) P.rect(x + 4.2, yy - bs * PT * 0.62, 1.3, 1.3, C.head, null, 0.3);
+    ls.forEach((l, i) => { P.text(l, x + (bullet ? 7.2 : 4), yy + i * bs * PT * 1.38, bs, false, C.ink); }); yy += (ls.length - 1) * bs * PT * 1.38 + bs * PT * 0.43 + 1.2; });
+}
+function washPages(d, C){
+  const L = d.lang, p = plan(d), pr = period(d), W = 297, H = 210, X = 12, TW = 273, pages = [];
+  const newPage = cont => { const P = SH.page(W, H, C); P.wm = false; P.header(tx('wTitle', L) + (cont ? ' · ' + tx('cont', L) : ''), [tx('wPlace', L), (d.addr || '').trim()].filter(Boolean).join(' · '), tx('valid', L, dmy(pr.st), dmy(pr.end))); P.foot(tx('wFoot', L)); pages.push(P); return P; };
+  let P = newPage(false), y = 25.5;
+  P.text(tx('hello', L), X, y, 11.5, true, C.ink); y += 5;
+  const intro = tx('wIntro', L, dmy(pr.st)) + (d.mode === 'rot' ? ' ' + tx('wRot', L) + (pr.N > p.Dn ? ' ' + tx('wCycle', L, p.Dn) : '') : '');
+  y = P.para(intro, X, y, 9.2, false, C.ink, TW, 4.1) + 1.5;
+  if (!p.Dn || !p.S) { P.text('—', X, y + 8, 12, true, C.mut); return pages; }
+  /* блок снизу: правила слева, справа тишина / сушилка / Hauswart */
+  const rules = RULES.filter(r => d.rules[r[0]]).map(r => r[1][L] || r[1].de), info = infoBlock(d, C, L);
+  const LW = info.length ? 160 : TW, RW = TW - LW - 5;
+  /* низ листа: правила слева, остальные блоки — в ту колонку, где ниже; compact — шрифт поменьше, если иначе не помещается */
+  const bottom = compact => { const F = compact ? [9.5, 8, 9, 7.9] : [10.5, 9, 9.5, 8.6], rH = rules.length ? measureBox(tx('please', L), rules, LW, F[0], F[1]) : 0;
+    const iH = info.map(b => measureBox(b[0], b[1], RW, F[2], F[3])), iHL = info.map(b => measureBox(b[0], b[1], LW, F[2], F[3]));
+    let colL = rules.length ? rH : -2.5, colR = -2.5;
+    const place = info.map((b, i) => { if (rules.length && i > 0 && colL < colR) { const at = colL + 2.5; colL = at + iHL[i]; return ['L', at, iHL[i]]; } const at = colR + 2.5; colR = at + iH[i]; return ['R', at, iH[i]]; });
+    return {F, rH, place, colL, colR, botH: Math.max(colL, colR, 0) + (rules.length || info.length ? 9 : 4)}; };
+  let B = bottom(false), botH = B.botH;
+  const headH = 10, labW = d.mode === 'rot' ? 34 : 30, colW = (TW - labW) / p.Dn, BOT = H - 10;
+  const fs = colW < 34 ? 0.82 : 1;
+  /* строки таблицы */
+  let rows;
+  if (d.mode === 'rot') {
+    const nW = Math.min(p.Dn, pr.N), pw = Math.max(...d.slots.map(s => SH.tw(slotShort(s), false, 9 * fs))) + 1.8;
+    rows = Array.from({length: nW}, (_, w) => {
+      const dates = []; for (let i = w; i < pr.N; i += p.Dn) dates.push(dm(addD(pr.st, i * 7)));
+      const dl = SH.wrap(tx('from', L) + ' ' + dates.join(' · '), false, 7, labW - 5);
+      const cells = p.days.map((_, di) => d.slots.map((s, si) => { const v = cellAt(p, w, di, si), a = d.apts.find(x => x.id === v);
+        return p.S === 1 ? (a ? [{s: fitLines(aptName(d, a, L), true, 11 * fs, colW - 5, 1)[0], size: 11 * fs, b: true, col: C.ink}].concat(whereTxt(a, L) ? [{s: whereTxt(a, L), size: 7.4 * fs, b: false, col: C.mut}] : []) : [{s: tx('free', L), size: 9.5 * fs, b: false, col: C.mut}])
+          : [{pre: slotShort(s), pc: C.mut, pw: pw, s: a ? fitLines(aptName(d, a, L), true, 9 * fs, colW - pw - 5, 1)[0] : tx('free', L), size: 9 * fs, b: !!a, col: a ? C.ink : C.mut}]; }).flat());
+      const lines = cells.reduce((m, c) => Math.max(m, c.reduce((a, l) => a + l.size * PT * 1.32, 0)), 0);
+      const lab = [{s: tx('week', L) + ' ' + (w + 1), size: 11, b: true, col: C.head}].concat(dl.map(s => ({s, size: 7, b: false, col: C.mut}))), lab_h = lab.reduce((a, l) => a + l.size * PT * 1.32, 0);
+      return {label: lab, cells, min: Math.max(lines, lab_h) + 2.6, h: Math.max(13, lines + 5, lab_h + 5)};
+    });
+    if (rows.reduce((a, r) => a + r.min, 0) > BOT - y - headH - botH - 3) { B = bottom(true); botH = B.botH; }
+    const avail = BOT - y - headH - botH - 3, want = rows.reduce((a, r) => a + r.h, 0);
+    if (want > avail) { const minT = rows.reduce((a, r) => a + r.min, 0); if (minT <= avail) { const k = (avail - minT) / (want - minT); rows.forEach(r => r.h = r.min + (r.h - r.min) * k); } else rows.forEach(r => r.h = r.min); }
+  } else {
+    rows = d.slots.map((s, si) => ({label: [{s: slotTxt(s), size: 10.5, b: true, col: C.head}], cells: p.days.map((_, di) => { const v = p.base[di][si], a = d.apts.find(x => x.id === v);
+      if (!a) return [{s: tx('free', L), size: 10 * fs, b: false, col: C.mut}];
+      const nm = fitLines(aptName(d, a, L), true, 13 * fs, colW - 5, 2), wh = whereTxt(a, L);
+      return nm.map(s2 => ({s: s2, size: 13 * fs, b: true, col: C.ink})).concat(wh ? [{s: wh, size: 8 * fs, b: false, col: C.mut}] : []); }), h: 0}));
+    if (15 * rows.length > BOT - y - headH - botH - 3) { B = bottom(true); botH = B.botH; }
+    const free = BOT - y - headH - botH - 3, hh2 = Math.min(34, Math.max(15, free / rows.length));
+    rows.forEach(r => r.h = hh2);
+  }
+  const head = (yy) => { P.rect(X, yy, TW, headH, C.c.sage[0], null, 0); P.text(d.mode === 'rot' ? tx('week', L) : tx('time', L), X + 2.6, yy + 6.6, 8.5, true, C.head);
+    p.days.forEach((dd, di) => P.text(DAYS[L][dd], X + labW + colW * di + colW / 2, yy + 6.8, 11 * fs, true, C.head, 'center')); return yy + headH; };
+  const frame = (t, b) => { P.rect(X, t, TW, b - t, null, C.ink, 0); P.line(X, t + headH, X + TW, t + headH, C.ink, 0.35); for (let i = 0; i < p.Dn; i++) P.line(X + labW + colW * i, t, X + labW + colW * i, b, i ? C.line : C.ink, i ? 0.3 : 0.35); };
+  let tTop = y; y = head(y);
+  rows.forEach((r, ri) => {
+    if (y + r.h > BOT - 2) { frame(tTop, y); P = newPage(true); tTop = 25; y = head(25); }
+    if (ri % 2) P.rect(X, y, TW, r.h, C.zebra, null, 0);
+    cellText(P, X, y, labW, r.h, r.label, 'left');
+    r.cells.forEach((c, di) => cellText(P, X + labW + colW * di, y, colW, r.h, c, d.mode === 'rot' && p.S > 1 ? 'left' : 'center'));
+    if (ri < rows.length - 1) P.line(X, y + r.h, X + TW, y + r.h, C.line, 0.3); y += r.h;
+  });
+  frame(tTop, y);
+  const anyFree = p.base.some(r => r.includes('free'));
+  if (anyFree) P.text(tx('freeNote', L), X + TW, y + 3.6, 7.5, false, C.mut, 'right');
+  y += anyFree ? 6.5 : 5;
+  if (rules.length || info.length) {
+    if (y + botH - 6 > BOT) { P = newPage(true); y = 26; }
+    if (rules.length) drawBox(P, C, X, y, LW, B.rH, tx('please', L), rules, B.F[0], B.F[1], true);
+    info.forEach((b, i) => { const [c, at, h] = B.place[i], x = c === 'L' ? X : rules.length ? X + LW + 5 : X, w = c === 'L' ? LW : rules.length ? RW : TW;
+      drawBox(P, C, x, y + at, w, h, b[0], b[1], B.F[2], B.F[3], false); });
+    y += Math.max(B.colL, B.colR) + 6;
+  }
+  if (y < BOT) P.text(tx('thanks', L), X, Math.min(y, BOT - 1), 10, true, C.head);
+  return pages;
+}
+function vlines(P, C, X, y0, y1, xs){ xs.forEach(x => P.line(x, y0, x, y1, C.line, 0.3)); }
+function cleanPages(d, C){
+  const L = d.lang, pr = period(d), st = +d.step || 1, part = d.apts.filter(a => a.cl), W = 210, H = 297, X = 14, TW = 182, BOT = H - 12, pages = [];
+  const cols = [[tx('nr', L), 11], [st > 1 ? tx('period', L) : tx('week', L), 42], [tx('apt', L), 52], [tx('done', L), 32], [tx('sign', L), 45]];
+  const newPage = cont => { const P = SH.page(W, H, C); P.wm = false; P.header(tx('cTitle', L) + (cont ? ' · ' + tx('cont', L) : ''), [tx('cPlace', L), (d.addr || '').trim()].filter(Boolean).join(' · '), tx('valid', L, dmy(pr.st), dmy(pr.end))); P.foot(tx('wFoot', L)); pages.push(P); return P; };
+  let P = newPage(false), y = 26;
+  P.text(tx('hello', L), X, y, 11.5, true, C.ink); y += 5.2;
+  y = P.para(tx('cIntro', L), X, y, 9.4, false, C.ink, TW, 4.2) + 2.5;
+  const tasks = TASKS.filter(t => d.tasks[t[0]]).map(t => t[1][L] || t[1].de);
+  if (tasks.length) {
+    const half = Math.ceil(tasks.length / 2), cw = (TW - 10) / 2, ll = 3.9, wr = tasks.map(t => fitLines(t, false, 8.8, cw - 7, 2));
+    const rowH = Array.from({length: half}, (_, r) => Math.max(wr[r].length, wr[r + half] ? wr[r + half].length : 1) * ll + 1.6), bh = 11 + rowH.reduce((a, h) => a + h, 0);
+    P.rect(X, y, TW, bh, C.soft, C.line, 2); P.text(tx('todo', L), X + 4, y + 6, 10.5, true, C.head);
+    let ry = y + 11.8; rowH.forEach((h, r) => { [r, r + half].forEach((i, j) => { if (!wr[i]) return; const cx = X + 4 + j * (cw + 2); P.rect(cx, ry - 2.9, 3.2, 3.2, '#FFFFFF', C.ink, 0.4); wr[i].forEach((l, k) => P.text(l, cx + 5, ry + k * ll, 8.8, false, C.ink)); }); ry += h; });
+    y += bh + 5;
+  }
+  const head = yy => { P.rect(X, yy, TW, 8.5, C.c.sage[0], C.line, 0); let x = X; cols.forEach(c => { P.text(c[0], x + 2.2, yy + 5.6, 8.4, true, C.head); x += c[1]; }); return yy + 8.5; };
+  let top = y; y = head(y);
+  const n = Math.ceil(pr.N / st), RH = 10.5;
+  const xs = []; let ax = X; cols.slice(0, -1).forEach(c => { ax += c[1]; xs.push(ax); });
+  for (let r = 0; r < n; r++) {
+    if (y + RH > BOT - 14) { vlines(P, C, X, top, y, xs); P.rect(X, top, TW, y - top, null, C.line, 0); P = newPage(true); top = 25; y = head(25); }
+    const a = part.length ? part[r % part.length] : null, f = addD(pr.st, r * st * 7), t = addD(f, st * 7 - 1);
+    if (r % 2) P.rect(X, y, TW, RH, C.zebra, null, 0);
+    P.text(String(r + 1), X + 2.2, y + 6.6, 9, false, C.mut);
+    P.text(`${dm(f)}–${dmy(t)}`, X + 11 + 2.2, y + 6.6, 9, false, C.ink);
+    if (a) { const wh = whereTxt(a, L), nm = fitLines(aptName(d, a, L), true, 10.5, 48, 1)[0]; P.text(nm, X + 53 + 2.2, y + (wh ? 5 : 6.8), 10.5, true, C.ink); if (wh) P.text(wh, X + 53 + 2.2, y + 8.7, 7, false, C.mut); }
+    P.line(X, y + RH, X + TW, y + RH, C.line, 0.3); y += RH;
+  }
+  vlines(P, C, X, top, y, xs); P.rect(X, top, TW, y - top, null, C.line, 0);
+  y += 6;
+  y = P.para(tx('cSwap', L), X, y, 9, false, C.ink, TW, 4.1) + 1;
+  if ((d.hw || '').trim() || (d.hwtel || '').trim()) { P.text(tx('hw', L) + (L === 'fr' ? '\u00a0: ' : ': ') + [d.hw.trim(), d.hwtel.trim() ? tx('tel', L) + ' ' + d.hwtel.trim() : ''].filter(Boolean).join(', '), X, y + 1, 9, true, C.head); y += 6; }
+  if (y + 4 < BOT) P.text(tx('thanks', L), X, y + 2, 10, true, C.head);
+  return pages;
+}
+function ruPages(d, C){
+  const L = d.lang, p = plan(d), pr = period(d), W = 210, H = 297, X = 16, TW = 178, BOT = H - 14, pages = [], lg = {de: 'немецком', fr: 'французском', it: 'итальянском', en: 'английском'}[L];
+  let P, y;
+  const np = () => { P = SH.page(W, H, C); P.credit = false; P.header('Перевод для себя', 'Этот лист не вывешивать · только для тебя', 'svoiludi.ch'); P.foot('Образец для примера и личного использования, не официальный документ. Время тишины — в полицейском регламенте общины, правила — в Hausordnung твоего дома. svoiludi.ch');
+    if (!window.SVL_VIP) P.text(document.documentElement.lang === 'uk' ? SH.CREDIT.uk : SH.CREDIT.ru, W - 8, H - 2.6, 4.6, false, '#7A6E62', 'right'); pages.push(P); y = 26; };
+  const need = h => { if (y + h > BOT) np(); };
+  const sec = t => { need(16); y += 2; y = P.sec(t, X, y, TW); };
+  const par = (s, size, b, col) => { SH.wrap(s, b, size || 9, TW).forEach(l => { need(4.4); P.text(l, X, y, size || 9, b, col || C.ink); y += (size || 9) * PT * 1.45; }); y += 1.2; };
+  const bul = (s, sub) => { const ls = SH.wrap(s, false, 9, TW - 6); need(ls.length * 4.6 + (sub ? 4 : 0)); P.rect(X + 0.6, y - 2.4, 1.4, 1.4, C.head, null, 0.3);
+    ls.forEach(l => { P.text(l, X + 5, y, 9, false, C.ink); y += 4.6; }); if (sub) { SH.wrap(sub, false, 7.4, TW - 6).forEach(l => { P.text(l, X + 5, y - 0.6, 7.4, false, C.mut); y += 3.6; }); } y += 0.8; };
+  np();
+  par(`Графики для соседей написаны на ${lg} языке. Здесь перевод всего, что на них написано, и твои дни. Этот лист для тебя, его не вывешивают.`, 9.4, false, C.mut);
+  const me = d.apts.find(a => a.id === d.my);
+  if (d.shW) {
+    sec(`График прачечной · ${tx('wTitle', L)}`);
+    par(`«${tx('hello', L)}» — «Дорогие соседи». ${tx('wIntro', 'ru', dmy(pr.st))}` + (d.mode === 'rot' ? ' ' + tx('wRot', 'ru') + (pr.N > p.Dn ? ' ' + tx('wCycle', 'ru', p.Dn) : '') : ''));
+    par(d.mode === 'rot' ? `В таблице строки — недели по очереди (${tx('week', L)} 1, 2, 3…), рядом даты понедельников, когда эта неделя наступает. Столбцы — дни недели, в клетке время и квартира. «${tx('free', L)}» — свободно: стирает тот, кто договорился.`
+      : `В таблице столбцы — дни недели, строки — время. В клетке квартира, которая стирает в это время каждую неделю. «${tx('free', L)}» — свободно: стирает тот, кто договорился с соседями.`);
+    if (me) {
+      const mine = [];
+      if (d.mode === 'rot') { p.days.forEach((dd, di) => d.slots.forEach((s, si) => { if (cellAt(p, 0, di, si) === me.id) mine.push(`${DAYS.ru[dd]} ${slotTxt(s)}`); })); }
+      else p.days.forEach((dd, di) => d.slots.forEach((s, si) => { if (p.base[di][si] === me.id) mine.push(`${DAYS.ru[dd]} ${slotTxt(s)}`); }));
+      need(14); P.rect(X, y - 3.6, TW, 1, C.c.mustard[1], null, 0); y += 1.5;
+      par(mine.length ? (d.mode === 'rot' ? `Твоё время в неделю 1 (с ${dmy(pr.st)}): ${mine.join('; ')}. Каждую следующую неделю — на один день позже.` : `Твоё время каждую неделю: ${mine.join('; ')}.`) : 'У твоей квартиры в графике нет своего времени. Проверь галочку «стирает в общей прачечной» или распределение смен.', 9.6, true, C.ink);
+    }
+    const rules = RULES.filter(r => d.rules[r[0]]);
+    if (rules.length) { need(10); par(`«${tx('please', L)}» — «Пожалуйста, соблюдайте»:`, 9, true, C.head); rules.forEach(r => bul(r[1].ru, r[1][L])); }
+    const nt = nightOf(d), q = []; if (nt) q.push([tx('night', 'ru', nt[0], nt[1]), tx('night', L, nt[0], nt[1])]); if (d.noon) q.push([tx('noon', 'ru'), tx('noon', L)]); if (d.sun) q.push(d.days[6] ? [tx('hol', 'ru'), tx('hol', L)] : [tx('sun', 'ru'), tx('sun', L)]);
+    if (q.length) { need(10); par(`«${tx('quiet', L)}» — «Время тишины»:`, 9, true, C.head); q.forEach(x => bul(x[0], x[1])); }
+    if (d.dry) { need(10); par(`«${tx('dryT', L)}» — «Сушильная комната»:`, 9, true, C.head); bul(tx('dryL', 'ru', +d.dry), tx('dryL', L, +d.dry)); }
+    par(`Внизу листа: «${tx('wFoot', L)}» — «${tx('wFoot', 'ru')}» «${tx('thanks', L)}» — «${tx('thanks', 'ru')}»`, 8.4, false, C.mut);
+  }
+  if (d.shT) {
+    sec(`График уборки подъезда · ${tx('cTitle', L)}`);
+    par(tx('cIntro', 'ru'));
+    const tasks = TASKS.filter(t => d.tasks[t[0]]);
+    if (tasks.length) { need(10); par(`«${tx('todo', L)}» — «Что нужно сделать»:`, 9, true, C.head); tasks.forEach(t => bul(t[1].ru, t[1][L])); }
+    par(`Столбцы таблицы: «${tx('nr', L)}» — номер, «${+d.step > 1 ? tx('period', L) : tx('week', L)}» — ${+d.step > 1 ? 'период' : 'неделя'}, «${tx('apt', L)}» — квартира, «${tx('done', L)}» — когда сделано, «${tx('sign', L)}» — подпись. После уборки впиши дату и распишись.`);
+    par(`«${tx('cSwap', L)}» — «${tx('cSwap', 'ru')}»`, 8.6, false, C.ink);
+    if (me) { const st = +d.step || 1, part = d.apts.filter(a => a.cl), n = Math.ceil(pr.N / st), mine = [];
+      if (part.length) for (let r = 0; r < n; r++) if (part[r % part.length].id === me.id) { const f = addD(pr.st, r * st * 7); mine.push(`${dm(f)}–${dmy(addD(f, st * 7 - 1))}`); }
+      need(12); par(mine.length ? `Твоя очередь убирать: ${mine.join('; ')}.` : 'У твоей квартиры в этом периоде нет очереди уборки.', 9.6, true, C.ink); }
+  }
+  sec('Слова, которые встречаются в доме');
+  const gl = GLOSS[L] || GLOSS.de, cw = TW / 2;
+  for (let i = 0; i < gl.length; i += 2) { need(5.2); [gl[i], gl[i + 1]].forEach((g, j) => { if (!g) return; P.text(g[0], X + j * cw, y, 9, true, C.ink); P.text('— ' + g[1], X + j * cw + SH.tw(g[0], true, 9) + 1.5, y, 9, false, C.ink); }); y += 5.2; }
+  y += 1;
+  sec('Как повесить и договориться');
+  bul('График прачечной повесь в прачечной у машины, график уборки — в подъезде у входа или у почтовых ящиков. Можно положить копию в каждый почтовый ящик.');
+  bul('Обычно график составляет управляющая (Verwaltung) или смотритель дома (Hauswart). Если вы договорились сами, отправь график управляющей по e-mail, чтобы он не противоречил правилам дома (Hausordnung).');
+  bul('Если сосед часто стирает в чужое время, сначала спокойно поговори с ним. Не помогло — напиши смотрителю или управляющей и сохрани копию письма.');
+  bul('Если в договоре аренды в дополнительных расходах (Nebenkosten) есть уборка лестницы (Treppenhausreinigung), за неё уже платят все жильцы, и убирать должна фирма или смотритель.');
+  return pages;
+}
+function build(){
+  const d = D(), C = SH.pal(!!d.bw), out = [];
+  if (d.shW) out.push(...washPages(d, C));
+  if (d.shT) out.push(...cleanPages(d, C));
+  if (d.shR && (d.shW || d.shT)) out.push(...ruPages(d, C));
+  return out;
+}
+
+/* ---------- форма: по одному блоку в строке ---------- */
+const $ = id => document.getElementById(id);
+const esc = s => SH.esc(String(s == null ? '' : s));
+const qh = (h, l) => `<button type="button" class="qh" data-help="${h}" aria-label="Подсказка: ${l}" aria-expanded="false">?</button>`;
+const getK = (d, k) => k.split('.').reduce((o, x) => o == null ? o : o[x], d);
+const WI = '<i class="wi"></i>';
+function renderForm(){
+  const d = D(), dis = EX ? 'disabled' : '', p = plan(d), nt = nightOf(d);
+  const inp = (k, l, ph, h, type, mode) => `<div class="fl"><span class="lb">${l}${h ? qh(h, l) : ''}</span><input type="${type || 'text'}"${mode ? ` inputmode="${mode}"` : ''} data-k="${k}" value="${esc(getK(d, k))}" placeholder="${esc(ph || '')}" ${dis}></div>`;
+  const sel = (k, l, list, h) => `<div class="fl"><span class="lb">${l}${h ? qh(h, l) : ''}</span><select data-k="${k}" ${dis}>${list.map(([a, b]) => `<option value="${a}"${String(a) === String(getK(d, k)) ? ' selected' : ''}>${esc(b)}</option>`).join('')}</select></div>`;
+  const chk = (k, l, h) => `<label class="tog"><input type="checkbox" data-k="${k}" ${getK(d, k) ? 'checked' : ''} ${dis}> ${l}${h ? qh(h, l) : ''}</label>`;
+  const seg = (act, list, cur) => `<div class="seg">${list.map(([v, t]) => `<button type="button" data-act="${act}" data-v="${v}" aria-pressed="${String(v) === String(cur)}" ${dis}>${esc(t)}</button>`).join('')}</div>`;
+  const flOpt = FLOORS.map(f => [f, f ? floorTxt(f, 'ru') : 'этаж не указывать']);
+  const sdOpt = Object.keys(SIDES).map(k => [k, k ? SIDES[k][0] : 'сторону не указывать']);
+  const hours = (k, v) => `<select data-k="${k}" data-num="1" ${dis} aria-label="Час">${Array.from({length: 18}, (_, i) => i + 6).map(h => `<option value="${h}"${h === +v ? ' selected' : ''}>${hh(h)}</option>`).join('')}</select>`;
+  const aptOpts = v => [['free', 'свободно']].concat(d.apts.filter(a => a.wa).map(a => [a.id, aptName(d, a, 'ru') + (a.fl ? ' · ' + whereTxt(a, 'de') : '')]))
+    .map(([a, b]) => `<option value="${a}"${a === v ? ' selected' : ''}>${esc(b)}</option>`).join('');
+  const warn = [];
+  if (nt) d.slots.forEach(s => { if ((nt[0] > nt[1] && (s[1] > nt[0] || s[0] < nt[1]))) warn.push(`Смена ${slotTxt(s)} заходит в ночную тишину (${hh(nt[0])}–${hh(nt[1])}). Стирку в это время соседи могут считать нарушением.`); });
+  d.slots.forEach(s => { if (s[1] <= s[0]) warn.push(`У смены ${slotTxt(s)} конец раньше начала — поправь время.`); });
+  if (d.sun && d.days[6]) warn.push('Отмечено «в воскресенье прачечная закрыта», но воскресенье выбрано днём стирки. Убери «Вс» или галочку про воскресенье.');
+  const wm = d.apts.filter(a => a.wa).length;
+  let html = `<section class="sec"><h2>Дом и период</h2>
+    ${inp('addr', 'Адрес дома', 'Seestrasse 12, 8002 Zürich')}
+    ${inp('start', 'С какой недели действует график', '', 'start', 'date')}
+    ${sel('weeks', 'На сколько недель', [['4', '4 недели — месяц'], ['8', '8 недель'], ['13', '13 недель — квартал'], ['26', '26 недель — полгода'], ['52', '52 недели — год']], 'weeks')}</section>
+  <section class="sec"><h2>Квартиры${qh('who', 'кто составляет график')}</h2>
+    <p class="hint">Фамилии пиши так, как на почтовых ящиках и у звонков: так соседи сразу узнают себя.</p>
+    ${d.apts.map((a, i) => `<div class="apt"><span class="nr">Квартира ${i + 1}</span>
+      <input type="text" data-k="apts.${i}.name" value="${esc(a.name)}" placeholder="${['Müller', 'Rossi', 'Keller', 'Brunner', 'Meier', 'Huber'][i % 6]}" aria-label="Фамилия, квартира ${i + 1}" ${dis}>
+      <div class="row2"><select data-k="apts.${i}.fl" aria-label="Этаж" ${dis}>${flOpt.map(([v, t]) => `<option value="${v}"${v === a.fl ? ' selected' : ''}>${esc(t)}</option>`).join('')}</select>
+        <select data-k="apts.${i}.side" aria-label="Сторона" ${dis}>${sdOpt.map(([v, t]) => `<option value="${v}"${v === a.side ? ' selected' : ''}>${esc(t)}</option>`).join('')}</select></div>
+      <div class="row3"><label class="tog"><input type="checkbox" data-k="apts.${i}.wa" ${a.wa ? 'checked' : ''} ${dis}> стирает в общей прачечной</label>
+        <label class="tog"><input type="checkbox" data-k="apts.${i}.cl" ${a.cl ? 'checked' : ''} ${dis}> убирает подъезд</label>
+        ${d.apts.length > 1 ? `<button type="button" class="xbtn" data-act="delApt" data-v="${i}" ${dis}>Убрать</button>` : ''}</div></div>`).join('')}
+    <div class="acts">${d.apts.length < 24 ? `<button type="button" class="btn ghost sm" data-act="addApt" ${dis}>+ Добавить квартиру</button>` : ''}${qh('floor', 'этажи')}${qh('part', 'кто участвует')}</div>
+    ${sel('my', 'Моя квартира', [['', 'не выбрана']].concat(d.apts.map((a, i) => [a.id, aptName(d, a, 'ru')])), 'my')}</section>`;
+  if (d.shW) html += `<section class="sec"><h2>Прачечная</h2>
+    <div class="fl"><span class="lb">Дни стирки${qh('days', 'дни стирки')}</span><div class="seg">${DSH.map((t, i) => `<button type="button" data-act="day" data-v="${i}" aria-pressed="${!!d.days[i]}" ${dis}>${t}</button>`).join('')}</div></div>
+    <div class="fl"><span class="lb">Время стирки${qh('slots', 'время стирки')}</span>${seg('preset', [['three', '3 смены'], ['two', '2 смены по полдня'], ['day', 'весь день'], ['own', 'своё время']], d.preset)}</div>
+    ${d.slots.map((s, i) => `<div class="slot">${hours(`slots.${i}.0`, s[0])}<span>до</span>${hours(`slots.${i}.1`, s[1])}${d.slots.length > 1 ? `<button type="button" class="xbtn" data-act="delSlot" data-v="${i}" ${dis} aria-label="Убрать смену">✕</button>` : '<span></span>'}</div>`).join('')}
+    ${d.slots.length < 5 ? `<div class="acts"><button type="button" class="btn ghost sm" data-act="addSlot" ${dis}>+ Добавить смену</button></div>` : ''}
+    ${warn.map(w => `<p class="warnline">${WI}${esc(w)}</p>`).join('')}
+    <div class="fl"><span class="lb">Как распределить${qh('mode', 'каждую неделю одинаково или по очереди')}</span>${seg('mode', [['fixed', 'Каждую неделю одинаково'], ['rot', 'По очереди: каждую неделю на день позже']], d.mode)}</div>
+    <div class="fl"><span class="lb">${d.mode === 'rot' ? 'Неделя 1: кто когда стирает' : 'Кто когда стирает'}${qh('grid', 'распределение')}</span>
+      ${!wm ? '<p class="hint">Отметь у квартир «стирает в общей прачечной».</p>' : !p.Dn ? '<p class="hint">Выбери хотя бы один день стирки.</p>' : p.days.map((dd, di) => `<div class="dayrow"><b>${DAYS.ru[dd][0].toUpperCase() + DAYS.ru[dd].slice(1)}</b><div class="cells">${d.slots.map((s, si) => `<label>${slotTxt(s)}<select data-fix="${dd}-${si}" ${dis}>${aptOpts(p.base[di][si])}</select></label>`).join('')}</div></div>`).join('')}
+      ${p.missing.length ? `<p class="warnline">${WI}Без своего времени: ${esc(p.missing.map(a => aptName(d, a, 'ru')).join(', '))}. Добавь день или смену либо выбери им клетку.</p>` : wm && p.Dn ? '<p class="ok">У каждой квартиры есть своё время.</p>' : ''}
+      ${Object.keys(d.fix).length ? `<div class="acts"><button type="button" class="btn ghost sm" data-act="redo" ${dis}>Распределить заново</button></div>` : ''}</div>
+    ${sel('dry', 'Сушильная комната', [['', 'не указывать'], ['10', 'в свой день и до 10:00 следующего дня'], ['12', 'в свой день и до 12:00 следующего дня'], ['14', 'в свой день и до 14:00 следующего дня'], ['18', 'в свой день и до 18:00 следующего дня'], ['20', 'в свой день и до 20:00 следующего дня']], 'dry')}</section>
+  <section class="sec"><h2>Время тишины${qh('quiet', 'время тишины')}</h2>
+    ${sel('night', 'Ночная тишина', [['22-6', 'с 22:00 до 6:00'], ['22-7', 'с 22:00 до 7:00'], ['21-7', 'с 21:00 до 7:00'], ['20-7', 'с 20:00 до 7:00'], ['', 'не указывать']])}
+    ${chk('noon', 'Обеденная тишина с 12:00 до 13:00')}
+    ${chk('sun', d.days[6] ? 'В праздники прачечная закрыта' : 'В воскресенье и праздники прачечная закрыта')}
+    <p class="hint">Точное время тишины своей общины найдёшь в её полицейском регламенте (Polizeireglement) на сайте общины, правила дома — в Hausordnung.</p></section>
+  <section class="sec"><h2>Правила на листе${qh('rules', 'зачем правила на листе')}</h2>
+    <div class="chk">${RULES.map(r => `<label><input type="checkbox" data-k="rules.${r[0]}" ${d.rules[r[0]] ? 'checked' : ''} ${dis}> <span>${esc(r[1].ru)}</span></label>`).join('')}</div></section>`;
+  if (d.shT) html += `<section class="sec"><h2>Уборка подъезда</h2>
+    <div class="fl"><span class="lb">Дежурный меняется${qh('step', 'как часто меняется дежурный')}</span>${seg('step', [['1', 'каждую неделю'], ['2', 'каждые 2 недели']], d.step)}</div>
+    <div class="fl"><span class="lb">Что убирать${qh('clean', 'что убирать')}</span><div class="chk">${TASKS.map(t => `<label><input type="checkbox" data-k="tasks.${t[0]}" ${d.tasks[t[0]] ? 'checked' : ''} ${dis}> <span>${esc(t[1].ru)}</span></label>`).join('')}</div></div>
+    ${d.apts.some(a => a.cl) ? `<p class="hint">Очередь идёт по списку квартир сверху вниз: ${esc(d.apts.filter(a => a.cl).map(a => aptName(d, a, 'ru')).join(' → '))}.</p>` : `<p class="warnline">${WI}Отметь у квартир «убирает подъезд».</p>`}</section>`;
+  html += `<section class="sec"><h2>Смотритель дома (Hauswart)${qh('hw', 'смотритель дома')}</h2>
+    ${inp('hw', 'Имя', 'Hans Huber')}${inp('hwtel', 'Телефон', '079 123 45 67', '', 'tel', 'tel')}</section>`;
+  $('fields').innerHTML = html;
+}
+let UI, tmr;
+const setK = (k, v) => { const ks = k.split('.'); let o = S; ks.slice(0, -1).forEach(x => o = o[x]); o[ks[ks.length - 1]] = v; };
+const EXL = {
+  de: {addr: 'Seestrasse 12, 8002 Zürich', kt: 'ZH', names: ['Müller', 'Rossi', 'Kovalenko', 'Keller', 'Nguyen', 'Brunner'], hw: 'Hans Huber', hwtel: '044 000 00 00'},
+  fr: {addr: 'Avenue de la Gare 12, 1003 Lausanne', kt: 'VD', names: ['Dubois', 'Rossi', 'Kovalenko', 'Favre', 'Nguyen', 'Bonvin'], hw: 'Marc Rochat', hwtel: '021 000 00 00'},
+  it: {addr: 'Via Cantonale 12, 6900 Lugano', kt: 'TI', names: ['Bernasconi', 'Rossi', 'Kovalenko', 'Fontana', 'Nguyen', 'Galli'], hw: 'Luca Ferrari', hwtel: '091 000 00 00'}};
+EXL.en = Object.assign({}, EXL.de, {kt: S.kt || 'ZH'});
+const EXD = lg => { const x = EXL[lg] || EXL.de, pos = [['EG', 'l'], ['EG', 'r'], ['1', 'l'], ['1', 'r'], ['2', 'l'], ['2', 'r']];
+  const apts = x.names.map((n, i) => ({id: 'ex' + i, name: n, fl: pos[i][0], side: pos[i][1], wa: true, cl: true}));
+  return Object.assign(blank(), {lang: lg, kt: x.kt, shW: S.shW, shT: S.shT, shR: S.shR, bw: S.bw, addr: x.addr, start: '2026-10-12', weeks: '13', apts, my: 'ex2',
+    days: [1, 1, 1, 1, 1, 1, 0], preset: 'two', slots: PRESET.two.map(s => s.slice()), mode: S.mode === 'rot' ? 'rot' : 'fixed', fix: {}, dry: '12', night: '22-7', noon: true, sun: true,
+    rules: {filter: true, wipe: true, out: true, dry: true, swap: true, floor: false, defect: true}, step: '1', hw: x.hw, hwtel: x.hwtel}); };
+function fill(){ const d = D(); $('kt').value = d.kt || ''; $('lang').value = d.lang; ['shW', 'shT', 'shR', 'bw'].forEach(k => $(k).checked = !!d[k]);
+  renderForm(); $('exbar').hidden = !EX; $('exOn').hidden = !!EX; if (UI) UI.render(); }
+const KN = window.KANTONY || {};
+$('kt').innerHTML = '<option value="">Выбери кантон</option>' + Object.keys(KN).sort((a, b) => KN[a].n.localeCompare(KN[b].n, 'ru')).map(k => `<option value="${k}">${esc(KN[k].n)}</option>`).join('');
+$('kt').addEventListener('change', e => { S.kt = e.target.value; S.lang = langOf(S.kt); try { localStorage.setItem('svoiludi.kanton', S.kt); } catch (x) {} if (EX) EX = EXD(S.lang); save(); fill(); });
+$('lang').addEventListener('change', e => { S.lang = e.target.value; if (EX) EX = EXD(S.lang); save(); fill(); });
+['shW', 'shT', 'shR', 'bw'].forEach(k => $(k).addEventListener('change', e => { S[k] = e.target.checked; if (EX) EX[k] = S[k]; save(); fill(); }));
+document.addEventListener('input', e => { const x = e.target; if (EX || !x.dataset || !x.dataset.k || x.type === 'checkbox' || x.tagName === 'SELECT' || x.type === 'date') return; setK(x.dataset.k, x.value); save(); clearTimeout(tmr);
+  tmr = setTimeout(() => { UI && UI.render(); relabel(); }, 450); });
+/* имена квартир в списках выбора обновляем на месте, не перерисовывая форму */
+function relabel(){ const d = D(); d.apts.forEach(a => { const t = aptName(d, a, 'ru'); document.querySelectorAll(`#fields option[value="${a.id}"]`).forEach(o => { o.textContent = o.closest('[data-fix]') ? t + (a.fl ? ' · ' + whereTxt(a, 'de') : '') : t; }); }); }
+document.addEventListener('change', e => { const x = e.target; if (EX || !$('fields').contains(x)) return;
+  if (x.dataset.fix) { S.fix[x.dataset.fix] = x.value; save(); fill(); return; }
+  if (!x.dataset.k || (x.tagName === 'INPUT' && (x.type === 'text' || x.type === 'tel'))) return; /* текст уже сохранён по input; перерисовка здесь съела бы клик по кнопке */
+  const k = x.dataset.k, v = x.type === 'checkbox' ? x.checked : x.dataset.num ? +x.value : x.value;
+  setK(k, v);
+  if (/^slots\./.test(k)) { S.preset = 'own'; S.fix = {}; }
+  if (/^apts\.\d+\.wa$/.test(k)) S.fix = {};
+  save(); fill(); });
+document.addEventListener('click', e => { const b = e.target.closest('[data-act]'); if (!b || EX || !$('fields').contains(b)) return; const a = b.dataset.act, v = b.dataset.v;
+  if (a === 'addApt') { S.apts.push(newApt()); S.fix = {}; }
+  else if (a === 'delApt') { const r = S.apts.splice(+v, 1)[0]; if (r && S.my === r.id) S.my = ''; S.fix = {}; }
+  else if (a === 'day') { S.days[+v] = S.days[+v] ? 0 : 1; S.fix = {}; }
+  else if (a === 'preset') { S.preset = v; if (PRESET[v]) S.slots = PRESET[v].map(s => s.slice()); S.fix = {}; }
+  else if (a === 'addSlot') { const l = S.slots[S.slots.length - 1]; S.slots.push([l ? Math.min(l[1], 21) : 17, 21]); S.preset = 'own'; S.fix = {}; }
+  else if (a === 'delSlot') { S.slots.splice(+v, 1); S.preset = 'own'; S.fix = {}; }
+  else if (a === 'mode') S.mode = v;
+  else if (a === 'step') S.step = v;
+  else if (a === 'redo') S.fix = {};
+  else return;
+  save(); fill(); if (a === 'addApt') { const n = document.querySelector(`[data-k="apts.${S.apts.length - 1}.name"]`); if (n) n.focus(); } });
+$('exOn').addEventListener('click', () => { EX = EXD(S.lang); fill(); window.scrollTo({top: $('exbar').offsetTop - 12, behavior: 'smooth'}); });
+$('exOff').addEventListener('click', () => { EX = null; fill(); });
+if (/[?&]example\b/.test(location.search)) EX = EXD(S.lang);
+UI = SH.mount({build, lang: () => D().lang, title: 'Waschplan', name: () => { const d = D(), L = d.lang; return (d.shW ? {de: 'Waschplan', fr: 'Plan-buanderie', it: 'Piano-lavanderia', en: 'Laundry-schedule'}[L] : {de: 'Reinigungsplan-Treppenhaus', fr: 'Plan-nettoyage-escalier', it: 'Piano-pulizia-scale', en: 'Stairwell-cleaning'}[L]); }});
+fill();
+
+</script>
+<script src="/assets/help.js"></script>
+<script src="/assets/backup.js"></script>
+<script src="/assets/pdffan.js" defer></script>
+<script src="/assets/share.js" defer></script>
+<script src="/assets/samesite.js"></script>
+<!--i18n--><style>#langbar.langbar{position:fixed;bottom:14px;right:14px;z-index:60;display:flex;gap:2px;background:rgba(255,255,255,.92);border:1px solid rgba(0,0,0,.08);border-radius:999px;padding:3px;font:600 12px Manrope,system-ui,sans-serif;box-shadow:0 2px 8px rgba(0,0,0,.08)}#langbar.langbar a{color:#5d554d;padding:5px 9px;border-radius:999px;text-decoration:none;font:inherit;display:inline-block}#langbar.langbar a[aria-current="true"]{background:#2f2924;color:#fff}@media print{.langbar{display:none!important}}</style><div class="langbar" id="langbar" role="navigation" aria-label="Мова / Язык"><a href="/instrumenty/grafik-prachechnoj/" hreflang="ru" data-lang="ru" aria-current="true">RU</a><a href="/uk/instrumenty/grafik-prachechnoj/" hreflang="uk" data-lang="uk">UA</a></div><script>(function(){var b=document.getElementById('langbar');if(!b)return;b.addEventListener('click',function(e){var a=e.target.closest('a[data-lang]');if(a){try{localStorage.setItem('svoiludiLang',a.dataset.lang)}catch(x){}a.href=a.getAttribute('href').split('#')[0]+location.hash;}});})();</script><!--i18n--></body>
+</html>

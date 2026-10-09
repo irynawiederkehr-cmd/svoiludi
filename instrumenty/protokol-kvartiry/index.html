@@ -1,0 +1,656 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<link rel="icon" href="/fav/favicon.svg" type="image/svg+xml"><link rel="icon" href="/fav/icon-32.png" sizes="32x32"><link rel="apple-touch-icon" href="/fav/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/fonts.css">
+<meta name="description" content="Бесплатный протокол приёмки и сдачи квартиры в Швейцарии (Wohnungsübergabeprotokoll, Rückgabeprotokoll, état des lieux, verbale di consegna): по комнатам с клеточками «в порядке» и «дефект», номера фото, ключи, показания счётчиков, список дефектов, замечания арендатора, оговорка и подписи. На немецком, французском, итальянском или английском с русским переводом для себя. Что считается износом, что повреждением и что делать, если дефект нашёлся позже. PDF.">
+<link rel="canonical" href="https://svoiludi.ch/instrumenty/protokol-kvartiry/">
+<meta property="og:type" content="website"><meta property="og:locale" content="ru_RU"><meta property="og:site_name" content="Свои люди в Швейцарии">
+<meta property="og:title" content="Протокол приёмки и сдачи квартиры: по комнатам, ключи, счётчики · бесплатно"><meta property="og:description" content="Пройди квартиру по комнатам, отметь дефекты, ключи и счётчики — получи протокол на языке кантона с переводом для себя. Данные только у тебя.">
+<meta property="og:url" content="https://svoiludi.ch/instrumenty/protokol-kvartiry/"><meta property="og:image" content="https://svoiludi.ch/instrumenty/protokol-kvartiry/og-image.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="robots" content="noindex, nofollow">
+<title>Протокол приёмки и сдачи квартиры: по комнатам, ключи, счётчики</title>
+<style>
+/* Протокол приёмки и сдачи квартиры: по комнатам, ключи, счётчики (08.10.2026): анкета слева, живые листы справа, движок assets/shema.js. */
+:root{
+  --bg:#F4EDE3; --paper:#FFFCF8; --ink:#2F2924; --muted:#7A6E62; --line:#E5D9C9; --soft:#EFE5D7;
+  --brown:#6E4F3C; --mustard:#B98324; --mustard-soft:#F3E3C2; --sage:#4F5E3E; --sage-soft:#E3E8D6; --red:#A0523D;
+  --display:"Forum","Georgia",serif; --sans:"Manrope","Segoe UI",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#221D19; --paper:#2C2621; --ink:#F1E9DF; --muted:#B4A796; --line:#3E362F; --soft:#352E28;
+  --brown:#E1C2A6; --mustard:#E2B45C; --mustard-soft:#3D321F; --sage:#B4BF97; --sage-soft:#2E3226; --red:#E39A85; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#221D19; --paper:#2C2621; --ink:#F1E9DF; --muted:#B4A796; --line:#3E362F; --soft:#352E28;
+  --brown:#E1C2A6; --mustard:#E2B45C; --mustard-soft:#3D321F; --sage:#B4BF97; --sage-soft:#2E3226; --red:#E39A85; color-scheme:dark}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--ink);font:15px/1.55 var(--sans);margin:0}
+.wrap{max-width:1280px;margin:0 auto;padding-inline:16px;padding-block:28px 48px;display:flex;flex-direction:column;gap:24px}
+.eyebrow{font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+h1{font-family:var(--display);font-weight:400;font-size:clamp(2.4rem,6vw,3.6rem);line-height:1;margin:4px 0 10px;text-wrap:balance}
+h2{font-family:var(--display);font-weight:400;font-size:1.55rem;margin:0;text-wrap:balance}
+h3{font-family:var(--display);font-weight:400;font-size:1.22rem;line-height:1.2;margin:0}
+.lead{max-width:66ch;color:var(--muted);margin:0}
+.jump{font-weight:700;color:var(--brown);text-underline-offset:4px}
+.privnote{margin-top:14px;background:var(--sage-soft);border-radius:16px;padding:12px 16px;font-size:.9rem;max-width:90ch}
+.status{font-size:.86rem;color:var(--muted);min-height:1.3em}
+.btn{font:inherit;font-weight:700;font-size:.9rem;border:0;border-radius:999px;padding:10px 18px;cursor:pointer;color:#fff;text-decoration:none;display:inline-flex;align-items:center;gap:6px;background:#6E4F3C;box-shadow:0 8px 18px -8px rgba(110,79,60,.6)}
+.btn.gold{background:#B98324;box-shadow:0 8px 18px -8px rgba(185,131,36,.7)}
+.btn.free{background:#4F5E3E;box-shadow:0 8px 18px -8px rgba(79,94,62,.6)}
+.btn.ghost{background:transparent;color:var(--brown);border:1.5px solid var(--line);box-shadow:none}
+.btn.sm{font-size:.82rem;padding:7px 13px}
+.btn[disabled]{background:var(--soft);color:var(--muted);box-shadow:none;cursor:wait}
+select,input[type=text],input[type=tel],input[type=number],input[type=date],textarea{font:inherit;font-size:.95rem;color:var(--ink);background:var(--paper);border:1.5px solid var(--line);border-radius:12px;padding:9px 12px;width:100%;min-width:0}
+select:focus-visible,input:focus-visible,button:focus-visible,textarea:focus-visible,a:focus-visible{outline:2px solid var(--mustard);outline-offset:2px}
+::placeholder{color:color-mix(in srgb,var(--muted) 70%,transparent)}
+.setup{background:var(--paper);border:1.5px solid var(--line);border-radius:22px;padding:16px 18px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px 18px;align-items:start}
+@media (max-width:1000px){.setup{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.setup{grid-template-columns:1fr}}
+.fl{display:flex;flex-direction:column;gap:6px;min-width:0}
+.fl>.lb{font-size:.8rem;font-weight:700;color:var(--muted);display:flex;align-items:center}
+.seg{display:flex;flex-wrap:wrap;gap:6px}
+.seg button{font:inherit;font-size:.84rem;font-weight:700;border:1.5px solid var(--line);background:var(--paper);color:var(--ink);border-radius:999px;padding:6px 12px;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--sage);border-color:var(--sage);color:#fff}
+.acts{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.exbar{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;background:var(--mustard-soft);border-radius:16px;padding:10px 14px;font-size:.9rem;font-weight:600}
+.work{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:22px;align-items:start}
+@media (max-width:1040px){.work{grid-template-columns:1fr}}
+.form{display:flex;flex-direction:column;gap:14px;min-width:0}
+.sec{background:var(--paper);border:1.5px solid var(--line);border-radius:20px;padding:16px 18px;display:flex;flex-direction:column;gap:12px}
+.sec>h2{font-size:1.3rem;display:flex;align-items:center}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:560px){.g2{grid-template-columns:1fr}}
+.hint{font-size:.84rem;color:var(--muted);margin:0}
+.chk{display:flex;flex-direction:column;gap:8px}
+.chk label{display:flex;gap:10px;align-items:baseline;font-size:.92rem;cursor:pointer}
+.chk input{flex:none;width:18px;height:18px;accent-color:var(--sage);transform:translateY(3px)}
+.chk b{white-space:nowrap}
+.chk small{color:var(--muted)}
+.tog{display:flex;gap:10px;align-items:center;font-size:.92rem;cursor:pointer}
+.tog input{width:18px;height:18px;accent-color:var(--sage)}
+.sheetbox{position:sticky;top:12px;display:flex;flex-direction:column;gap:10px}
+@media (max-width:1040px){.sheetbox{position:static}}
+.sheet{background:#fff;border-radius:6px;box-shadow:0 18px 40px -22px rgba(47,41,36,.45);overflow:hidden}
+.sheet svg{display:block;width:100%;height:auto}
+.imp{background:var(--paper);border:1.5px dashed color-mix(in srgb,var(--sage) 55%,transparent);border-radius:16px;padding:14px 18px;font-size:.88rem;max-width:90ch;margin:0}
+.imp b{color:var(--sage)}
+.guide{display:flex;flex-direction:column;gap:14px;max-width:90ch}
+.guide ul{margin:0;padding-left:20px}
+.guide li{margin:4px 0}
+.credit{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:.8rem;color:var(--muted)}
+.credit a{color:var(--muted)}
+.qh{font:700 .72rem/1 var(--sans);width:20px;height:20px;border-radius:50%;border:1.5px solid var(--line);background:var(--paper);color:var(--brown);cursor:pointer;margin-left:6px;padding:0;flex:none}
+.sheets{display:flex;flex-direction:column;gap:14px}
+.goals{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+@media (max-width:560px){.goals{grid-template-columns:1fr}}
+.goals label{display:flex;gap:10px;align-items:flex-start;background:var(--bg);border:1.5px solid var(--line);border-radius:14px;padding:9px 12px;cursor:pointer;font-size:.92rem}
+.goals input{width:18px;height:18px;accent-color:var(--sage);flex:none;margin-top:2px}
+.goals small{display:block;color:var(--muted)}
+.steps{display:flex;flex-direction:column;gap:8px}
+.steps details{background:var(--paper);border:1.5px solid var(--line);border-radius:16px;padding:10px 16px}
+.steps summary{cursor:pointer;font-weight:700;display:flex;gap:10px;align-items:baseline}
+.steps summary small{font-weight:600;color:var(--muted);margin-left:auto;text-align:right}
+.steps details p,.steps details ul{margin:8px 0 2px;font-size:.93rem}
+.steps details ul{padding-left:20px}
+</style>
+<!--pwa--><link rel="manifest" href="/fav/site.webmanifest"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Свои люди"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="theme-color" content="#4F5E3E"><style id="pa-tiles">/* верхнее меню на телефоне и планшете: прямоугольные плитки с закруглением в два ряда, иконки ставит pwa-app.js (08.10.2026) */html header.top nav[aria-label] a .pa-ni{display:none}@media (max-width:1100px){html header.top .page{flex-wrap:wrap;row-gap:8px}html header.top nav[aria-label]{order:3;width:100%;display:grid!important;grid-template-columns:repeat(var(--pa-cols,3),minmax(0,1fr));gap:8px;overflow:visible;padding:4px 0 12px;margin:0}html header.top nav[aria-label] a{display:flex!important;flex-direction:column;align-items:center;justify-content:center;gap:5px;min-height:62px;padding:9px 6px;border-radius:14px;background:var(--paper,#FFFCF8);border:1px solid color-mix(in srgb,var(--sage,#66704F) 30%,transparent);box-shadow:0 3px 10px -6px rgba(60,70,40,.45);color:var(--ink,#2F2924)!important;font:600 .78rem/1.18 var(--body,system-ui);text-align:center;white-space:normal;text-decoration:none;-webkit-tap-highlight-color:transparent}html header.top nav[aria-label] a::after{content:none!important}html header.top nav[aria-label] a.pa-dup{display:none!important}html header.top nav[aria-label] a .pa-ni{display:block;width:22px;height:22px;fill:none;stroke:var(--sage,#66704F);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}html header.top nav[aria-label] a[aria-current="page"]{background:var(--sage,#66704F);border-color:var(--sage,#66704F);color:var(--paper,#FFFCF8)!important;box-shadow:0 4px 12px -6px rgba(60,70,40,.6)}html header.top nav[aria-label] a[aria-current="page"] .pa-ni{stroke:var(--paper,#FFFCF8)}html header.top nav[aria-label] a:active{transform:scale(.97)}}/* компьютер — как на сайте Ирины (решение 09.10.2026): на широком экране одна строка «логотип · меню · поиск · кнопка», пункты простым текстом, текущий — тёмным и жирным; на узком ноутбуке (1101–1359 px) меню переносится отдельной строкой под логотип, без переносов внутри пунктов */@media (min-width:1101px){html header.top .page{flex-wrap:wrap;row-gap:0;column-gap:14px}html header.top .mark{flex:none}html header.top .mark b,html header.top .mark small{white-space:nowrap}html header.top .page>.ss-btn{margin-left:auto}html header.top nav[aria-label]{order:3;flex:1 0 100%;display:flex!important;flex-wrap:nowrap;justify-content:center;gap:4px;overflow:visible;margin:8px 0 -2px;padding:6px 0 0;border-top:1px solid color-mix(in srgb,var(--sage,#66704F) 22%,transparent);font-size:.92rem}html header.top nav[aria-label] a{white-space:nowrap;padding:6px 10px;color:var(--muted,#6B635A);font-weight:500;text-decoration:none}html header.top nav[aria-label] a:hover{color:var(--ink,#2F2924)}html header.top nav[aria-label] a[aria-current="page"]{color:var(--ink,#2F2924)!important;font-weight:700}}@media (min-width:1360px){html header.top .page{flex-wrap:nowrap;max-width:1340px}html header.top nav[aria-label]{order:0;flex:0 1 auto;margin:0 auto;padding:0;border-top:0;gap:2px}html header.top nav[aria-label] a{padding:6px 9px}html header.top .page>.ss-btn{margin-left:0}html header.top .page>.ss-btn span{display:none}}/* кнопки сайта — прямоугольные с закруглением, как плитки меню (решение Ирины 08.10.2026); значки-метки (образец, теги, «?») остаются круглыми */:is(.navcta,.btn,.shr-btn,.pl-act a,.pl-act button,.qa,.more,.listbar button,.leaflet-popup-content button,.calmenu a,.calmenu button,.go-free,.find,.confirm,.monthics,.addb,.mbtn,.example,.viewsw,#langbar.langbar,.pa-go,.pa-x,.pa-foot){border-radius:12px!important}:is(.viewsw button,.seg button,.chips button,#langbar.langbar a,.cal-nav button){border-radius:9px!important}</style><script src="/assets/pwa-app.js" defer></script><!--pwa--><!--i18n--><link rel="alternate" hreflang="ru" href="https://svoiludi.ch/instrumenty/protokol-kvartiry/"><link rel="alternate" hreflang="uk" href="https://svoiludi.ch/uk/instrumenty/protokol-kvartiry/"><script>(function(){try{if(localStorage.getItem('svoiludiLang')==='uk'&&!/[?&]lang=ru/.test(location.search))location.replace('/uk/instrumenty/protokol-kvartiry/'+location.search+location.hash);}catch(e){}})();</script><!--i18n--></head>
+<body>
+<style>#fields{display:flex;flex-direction:column;gap:14px}#fields input:not([type=checkbox]):not([type=radio]),#fields select,#fields textarea{width:100%}
+.wi{display:inline-block;width:1.2em;height:1.1em;vertical-align:-.17em;margin:0 .28em 0 .05em;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 22'%3E%3Cpath d='M10.27 2.5a2 2 0 0 1 3.46 0l8.66 15a2 2 0 0 1-1.73 3H3.34a2 2 0 0 1-1.73-3z' fill='%23FDECEA' stroke='%23D32F2F' stroke-width='1.8' stroke-linejoin='round'/%3E%3Cpath d='M12 7.8v5.2' stroke='%23D32F2F' stroke-width='2.4' stroke-linecap='round'/%3E%3Ccircle cx='12' cy='16.5' r='1.35' fill='%23D32F2F'/%3E%3C/svg%3E") center/contain no-repeat}
+.seg.mode button{padding:9px 14px}
+.rooms{display:flex;flex-direction:column;gap:8px}
+.room{background:var(--bg);border:1.5px solid var(--line);border-radius:16px;padding:8px 14px}
+.room[open]{background:var(--paper)}
+.room summary{cursor:pointer;font-weight:700;display:flex;flex-wrap:wrap;gap:4px 10px;align-items:baseline;padding:4px 0}
+.room summary .loc{font-style:normal;font-weight:600;font-size:.84rem;color:var(--muted)}
+.room summary small{font-weight:600;color:var(--muted);margin-left:auto}
+.room>.acts{padding:10px 0 6px}
+.it{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;padding:10px 0;border-top:1px solid var(--line)}
+.itl{flex:1 1 170px;min-width:0;font-size:.93rem}
+.itl small{display:block;color:var(--muted);font-size:.8rem}
+.seg.st button{font-size:.8rem;padding:5px 11px}
+.seg.st .s-def[aria-pressed="true"]{background:var(--red);border-color:var(--red)}
+.seg.st .s-na[aria-pressed="true"]{background:var(--muted);border-color:var(--muted)}
+.defx{flex:1 1 100%;display:flex;flex-direction:column;gap:10px;background:var(--bg);border-radius:12px;padding:10px 12px;min-width:0}
+.defx>.lb{font-size:.8rem;font-weight:700;color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chips label{display:inline-flex;gap:6px;align-items:center;background:var(--paper);border:1.5px solid var(--line);border-radius:999px;padding:4px 10px;font-size:.84rem;cursor:pointer}
+.chips input{width:15px;height:15px;accent-color:var(--red);margin:0}
+.krow{display:flex;flex-direction:column;gap:8px;padding:10px 0;border-top:1px solid var(--line)}
+.krow:first-of-type{border-top:0;padding-top:0}
+.krow>b small{display:block;font-weight:600;color:var(--muted);font-size:.8rem}
+.kg{display:grid;grid-template-columns:2fr 1fr 1fr;gap:10px}
+@media (max-width:560px){.kg{grid-template-columns:1fr 1fr}.kg>.fl:first-child{grid-column:1/-1}}
+.goals label span small{display:block}
+.steps a,.imp a{color:var(--brown);text-underline-offset:3px}
+</style>
+<div class="wrap">
+  <header>
+    <p style="margin:0 0 14px"><a class="jump" href="https://svoiludi.ch/instrumenty/">← Все полезные инструменты · Свои люди в Швейцарии</a></p>
+    <div class="eyebrow">Аренда жилья · въезд и выезд</div>
+    <h1>Протокол приёмки и сдачи квартиры: по комнатам, ключи, счётчики</h1>
+    <p class="lead">Когда ты въезжаешь и когда выезжаешь, управляющая (Verwaltung, régie, amministrazione) обходит квартиру вместе с тобой и записывает всё в протокол. Что не записано при въезде, при выезде могут поставить тебе в счёт и удержать из залога. Здесь ты проходишь квартиру по комнатам, отмечаешь, что в порядке и где дефект, вписываешь ключи и счётчики и получаешь протокол на языке кантона с таблицами и клеточками. Его можно заполнить заранее или распечатать пустым и заполнить от руки на месте. PDF бесплатно.</p>
+    <p style="margin:12px 0 0"><a class="jump" href="#sovety">Как пройти приёмку и сдачу без лишних счетов →</a></p>
+    <div class="privnote"><b>Твои данные только у тебя.</b> Всё, что ты вписываешь, хранится только в твоём браузере на этом устройстве, PDF собирается прямо на устройстве. Регистрация не нужна.</div>
+    <div data-fan="protokol-kvartiry"></div>
+  </header>
+  <div class="setup">
+    <div class="fl"><span class="lb">Кантон<button type="button" class="qh" data-help="kt" aria-label="Подсказка: кантон" aria-expanded="false">?</button></span><select id="kt"></select></div>
+    <div class="fl"><span class="lb">Язык листа<button type="button" class="qh" data-help="lang" aria-label="Подсказка: язык листа" aria-expanded="false">?</button></span><select id="lang"><option value="de">Deutsch</option><option value="fr">Français</option><option value="it">Italiano</option><option value="en">English</option></select></div>
+    <div class="fl"><span class="lb">Что добавить в PDF</span><label class="tog"><input type="checkbox" id="ru"> Перевод для себя<button type="button" class="qh" data-help="ru" aria-label="Подсказка: перевод для себя" aria-expanded="false">?</button></label></div>
+    <div class="fl"><span class="lb">Печать</span><label class="tog"><input type="checkbox" id="bw"> Без цвета, для дешёвой печати</label></div>
+  </div>
+  <div class="exbar" id="exbar" hidden><span>Это пример. Так будет выглядеть протокол.</span><button type="button" class="btn sm" id="exOff">Вернуться к моим данным</button></div>
+  <div class="work">
+    <div class="form" id="fields"></div>
+    <div class="sheetbox">
+      <div class="acts"><button type="button" class="btn gold" id="pdf">Скачать PDF</button><button type="button" class="btn ghost sm" id="share" hidden>Отправить</button><button type="button" class="btn ghost sm" id="exOn">Посмотреть на примере</button></div>
+      <div class="sheets" id="sheet" aria-label="Предпросмотр листов"></div>
+      <div class="status" id="status" role="status"></div>
+    </div>
+  </div>
+  <section class="guide" id="sovety" aria-labelledby="sovety-h">
+    <h2 id="sovety-h">Как пройти приёмку и сдачу без лишних счетов</h2>
+    <p class="hint">Нажми на пункт, чтобы открыть подробности.</p>
+    <div class="steps">
+      <details><summary>Перед въездом попроси протокол прежнего жильца <small>OR, ст. 256a</small></summary>
+        <p>Когда прежний жилец сдавал квартиру, управляющая тоже писала протокол. Ты вправе попросить посмотреть его при въезде (<a href="https://www.fedlex.admin.ch/eli/cc/27/317_321_377/de#art_256_a" target="_blank" rel="noopener">OR, ст. 256a</a>). Там видно, какие дефекты уже были и что прежний жилец должен был исправить. Если что-то так и не исправили, впиши это в свой протокол.</p></details>
+      <details><summary>Фотографируй всё, с датой <small>до подписи</small></summary>
+        <p>Каждый дефект снимай дважды: издалека, чтобы было видно, где он, и вблизи, рядом с монетой или линейкой. Номер фото впиши в протокол. В тот же день отправь фото управляющей по e-mail или хотя бы себе: дата в письме — хорошее доказательство. Сфотографируй и счётчики с номером и показанием.</p></details>
+      <details><summary>Иди по комнатам и включай всё <small>ничего не пропусти</small></summary>
+        <p>Открой духовку, холодильник и посудомойку, включи плиту и вытяжку, опусти и подними все жалюзи (Storen), открой все окна и краны, спусти воду в туалете, проверь свет и розетки. Загляни в кладовку в подвале и на чердаке, если они есть в договоре. Пустые строки протокола можно заполнить от руки на месте.</p></details>
+      <details><summary>Подписывай только то, с чем согласна <small>оговорка</small></summary>
+        <p><i class="wi"></i>Подпись под протоколом подтверждает то, что в нём записано. Если управляющая пишет, что ты согласна заплатить за что-то, а ты не согласна, не подписывай это так. Отметь пункт как спорный и впиши его номер в оговорку (Vorbehalt, sous réserve, con riserva). Подписывать протокол сразу ты не обязана: можно взять время и показать его в союзе арендаторов.</p></details>
+      <details><summary>Копию — сразу <small>с подписями обеих сторон</small></summary>
+        <p>Попроси экземпляр протокола с подписями обеих сторон в тот же день. Если управляющая заполняет протокол на планшете, попроси прислать PDF по e-mail сразу после осмотра и проверь, что в нём всё то же, что вы обсуждали.</p></details>
+      <details><summary>Нашла дефект после въезда <small>письменно, заказным</small></summary>
+        <p><i class="wi"></i>Если дефект нашёлся позже (не греет батарея, течёт кран, трещина за шкафом), сообщи управляющей письменно, лучше заказным письмом (Einschreiben), и сохрани копию и квитанцию. Многие управляющие и договоры просят прислать такой список дефектов в первые 10–14 дней после въезда — не откладывай. О плесени и протечке сообщай сразу: если промолчишь и ущерб вырастет, за него могут спросить с тебя. Письмо на языке кантона сделаешь в «<a href="https://svoiludi.ch/instrumenty/pisma-arenda/">Письма управляющей</a>».</p></details>
+      <details><summary>При выезде износ не оплачивается <small>таблица сроков службы</small></summary>
+        <p>Квартиру возвращают в том состоянии, которое получается от обычной жизни (<a href="https://www.fedlex.admin.ch/eli/cc/27/317_321_377/de#art_267" target="_blank" rel="noopener">OR, ст. 267</a>). Обычный износ, например выцветшая краска или следы мебели на полу, ты не оплачиваешь. За повреждение платишь только остаточную стоимость вещи по <a href="https://www.mieterverband.ch/mv/mietrecht-beratung/ratgeber-mietrecht/unterlagen-tools/lebensdauertabelle.html" target="_blank" rel="noopener">таблице сроков службы</a> (Lebensdauertabelle): если ковру 15 лет и срок его службы истёк, за пятно ты не платишь. Повреждение передай своей страховке ответственности (Privathaftpflicht).</p></details>
+      <details><summary>Управляющая должна назвать дефекты сразу <small>OR, ст. 267a</small></summary>
+        <p><i class="wi"></i>При сдаче управляющая обязана проверить квартиру и сразу сообщить тебе о дефектах, за которые отвечаешь ты (<a href="https://www.fedlex.admin.ch/eli/cc/27/317_321_377/de#art_267_a" target="_blank" rel="noopener">OR, ст. 267a</a>). Если протокол не составили, — в течение 2–3 рабочих дней. Если она этого не сделала, она теряет право на претензию. Исключение — скрытые дефекты, которые при обычном осмотре не видно: о них она должна сообщить, как только найдёт.</p></details>
+      <details><summary>Ключи, счётчики, уборка <small>мелочи, которые стоят денег</small></summary>
+        <p>Пересчитай ключи при въезде и запиши номера. <i class="wi"></i>Если потерян ключ от общей системы замков (Schliessanlage), хозяин может потребовать заменить замки во всём доме. Показания счётчиков сообщи поставщику электроэнергии. Если уборку не приняли, управляющая должна дать короткий срок доубрать. Уборочная фирма с гарантией сдачи (Abnahmegarantie) доубирает бесплатно, попроси, чтобы её человек был на сдаче.</p></details>
+      <details><summary>Не согласна — союз арендаторов <small>примирительный орган бесплатно</small></summary>
+        <p>Если управляющая требует денег за износ или удерживает залог, обратись в союз арендаторов (Mieterverband, ASLOCA, ASI) или в примирительный орган (Schlichtungsbehörde) твоего района — там бесплатно. Залог банк выплатит и без подписи хозяина через год после выезда, если за этот год он не начал против тебя взыскание или процедуру.</p></details>
+    </div>
+  </section>
+  <p class="imp"><b>Важно.</b> Это образец для примера и личного использования, а не официальный документ. Данные нужно уточнять и перепроверять самому, автор не отвечает за достоверность. Это протокол для записи состояния квартиры, а не договор и не юридическая консультация. Обычно управляющая приносит свой бланк: тогда этот протокол — твоя шпаргалка и запасной экземпляр. Пройди по нему, сверь, всё ли записано в её бланке, и приложи свои фото. Если хозяин частный и бланка у него нет, подпишите этот протокол вдвоём, каждый в своём экземпляре. При споре помогут союз арендаторов и примирительный орган. Как снять квартиру — в теме <a href="https://svoiludi.ch/shveycariya/arenda/">«Аренда жилья»</a>, права во время аренды и при выезде — в теме <a href="https://svoiludi.ch/shveycariya/dogovor-arendy/">«Договор аренды»</a>.</p>
+  <div class="warn post" style="max-width:90ch;background:var(--mustard-soft);border-radius:16px;padding:12px 16px;font-size:.9rem"><b>Важные письма — заказным (Einschreiben)</b><p style="margin:6px 0 0">Список дефектов, найденных после въезда, возражение против счёта за ремонт или уборку, требование вернуть залог — отправляй на почте как <a href="https://www.post.ch/de/briefe-versenden/einschreiben">Einschreiben (R)</a>, сохраняй копию письма и квитанцию с номером отправления.</p></div>
+  <div class="share-slot" data-url="https://svoiludi.ch/instrumenty/protokol-kvartiry/" data-lead="Перешли тем, кто въезжает в квартиру или сдаёт её. В ссылке нет твоих данных." data-text="Привет! Тут можно бесплатно сделать протокол приёмки или сдачи квартиры по комнатам — с ключами, счётчиками и переводом для себя. Чтобы при выезде не платить за чужие царапины. https://svoiludi.ch/instrumenty/protokol-kvartiry/"></div>
+  <p class="credit"><span>Свои люди в Швейцарии · svoiludi.ch</span><a href="https://svoiludi.ch/privacy/">Политика конфиденциальности</a></p>
+</div>
+
+<script src="/assets/kantony.js"></script>
+<script src="/assets/lib/jspdf.umd.min.js"></script>
+<script src="/assets/shema.js"></script>
+<script>
+/* Протокол приёмки и сдачи квартиры: по комнатам, ключи, счётчики (09.10.2026, просьба Ирины).
+   Въезд (Übergabeprotokoll) и выезд (Rückgabeprotokoll): комнаты с галочками «в порядке / дефект», номера фото,
+   ключи, счётчики, сводка дефектов, замечания, оговорка, подписи. DE/FR/IT/EN + лист «Перевод для себя».
+   Факты сверены 09.10.2026 со статьями «Аренда жилья» и «Договор аренды» (OR ст. 256a, 267, 267a, таблица сроков службы). */
+const FED = 'https://www.fedlex.admin.ch/eli/cc/27/317_321_377/de#art_';
+const LDT = 'https://www.mieterverband.ch/mv/mietrecht-beratung/ratgeber-mietrecht/unterlagen-tools/lebensdauertabelle.html';
+window.HELP = {
+  kt: '<p>Кантон, где квартира. От него зависит язык протокола: немецкий, французский или итальянский. Протокол подписывают обе стороны, поэтому он должен быть на языке, который понимает управляющая.</p>',
+  lang: '<p>Обычно протокол на языке кантона. Английский подходит, если управляющая или хозяин сами предложили английский. Чтобы понимать каждую строку, отметь «Перевод для себя».</p>',
+  ru: '<p>Отдельный лист по-русски: перевод всех строк протокола, слова для дефектов и твой список дефектов. Его не отдают управляющей. Он нужен тебе, чтобы понимать, что подписываешь.</p>',
+  mode: '<p><b>Въезд</b> — протокол приёмки (Übergabeprotokoll, état des lieux d’entrée, verbale di consegna). В нём записывают всё, что уже повреждено, чтобы при выезде за это не спросили с тебя.</p><p><b>Выезд</b> — протокол сдачи (Rückgabeprotokoll, Abnahmeprotokoll, état des lieux de sortie). Управляющая смотрит, что изменилось, и отмечает, за что платишь ты.</p>',
+  prev: `<p>Прежний жилец. При въезде ты вправе попросить посмотреть протокол, который составили, когда он сдавал квартиру (OR, ст. 256a). Там видно, какие дефекты уже были и что ему нужно было исправить.</p><p class="src">Источник: <a href="${FED}256_a" target="_blank" rel="noopener">OR, ст. 256a</a>.</p>`,
+  nach: '<p>Новый жилец, если он уже известен. Если он забирает у тебя вещи (лампы, шкаф, стиральную машину), это тоже лучше записать в замечаниях.</p>',
+  newaddr: '<p>Твой новый адрес. По нему управляющая пришлёт расчёт дополнительных расходов (Nebenkosten) и подпишет поручение банку, чтобы вернуть залог (Mietkaution).</p>',
+  apt: '<p>Номер квартиры и этаж, как в договоре, например «3. OG links, Nr. 7». Erdgeschoss (EG, rez-de-chaussée, pianterreno) — это наш первый этаж, 1. OG — наш второй.</p>',
+  rooms: '<p>Число комнат как в договоре. Гостиная тоже комната, кухня и ванная не считаются. 3,5 комнаты — обычно две спальни и гостиная с кухней-столовой.</p>',
+  mdate: '<p>Начало аренды — дата из договора, с которой ты платишь. Конец аренды — дата, к которой договор расторгнут. Приёмка обычно в этот день или за день-два до него.</p>',
+  rlist: '<p>Отметь, какие помещения есть. Кладовка в подвале (Kellerabteil) и на чердаке (Estrichabteil) тоже часть квартиры, если они есть в договоре, поэтому их тоже осматривают.</p>',
+  state: '<p>«В порядке» — всё целое, чистое и работает. «Дефект» — что-то повреждено, грязное, не хватает или не работает: выбери, что именно, и впиши номер фото. «Нет» — такого в квартире нет, например посудомойки.</p><p>Если ничего не отметить, в протоколе останутся пустые клеточки. Их можно заполнить от руки на месте.</p>',
+  note: '<p>Где и какого размера, коротко и на языке протокола: «Parkett vor der Balkontür, ca. 20 cm», «3 Löcher über dem Bett». Слова для самого дефекта (царапины, пятна, трещина) переводятся сами — их выбираешь галочками.</p>',
+  foto: '<p>Номер фото на телефоне или свой номер по порядку: «3» или «3–5». Фотографируй каждый дефект дважды: издалека, чтобы было видно, где он, и вблизи, рядом с монетой или линейкой.</p>',
+  w_ein: '<p>Договорились, что хозяин починит, — выбери «хозяин отремонтирует» и спроси, до какого числа. Дефект остаётся (например, старая царапина на паркете) — выбери «остаётся». Главное, что он записан: при выезде за него не спросят с тебя.</p>',
+  w_aus: `<p>Обычный износ — то, что бывает от нормальной жизни: выцветшая краска, следы мебели на полу, вытертый в проходе ковролин. Его ты не оплачиваешь.</p><p>Повреждение — например, пятно от вина на ковре, скол на раковине, прожжённая столешница. За него платишь, но только остаточную стоимость вещи по <a href="${LDT}" target="_blank" rel="noopener">таблице сроков службы</a> (Lebensdauertabelle). Не согласна — выбери «спорно» и не соглашайся платить при подписании.</p>`,
+  keys: '<p>Сколько ключей каждого вида тебе дали и сколько ты вернула. Номер обычно выбит на ключе, например «KABA 12-07».</p><p><i class="wi"></i>Если потерян ключ от общей системы замков дома (Schliessanlage), хозяин может потребовать заменить замки во всём доме. Это бывает очень дорого, поэтому пересчитай ключи при въезде.</p>',
+  meters: '<p>Сфотографируй каждый счётчик так, чтобы были видны номер и показание. Показание электричества сообщи поставщику электроэнергии, чтобы последний счёт выставили точно по дате. Тепло часто считают по маленьким приборам на батареях (Heizkostenverteiler) — их тоже записывают.</p>',
+  clean: '<p>При выезде квартиру сдают после тщательной уборки. Если управляющая находит недочёты, она должна дать короткий срок доубрать и только потом заказывать уборку за твой счёт. Уборочная фирма с гарантией сдачи (Abnahmegarantie) доубирает бесплатно.</p>',
+  vorb: '<p>Оговорка (Vorbehalt) — если ты не согласна с каким-то пунктом, но протокол подписываешь. Впиши номера спорных пунктов из списка дефектов. Тогда подпись подтверждает только то, что записано, а не твоё согласие платить за спорное.</p>',
+  rem: '<p>Что ты хочешь добавить своими словами, на языке протокола. Например, что посмотрела протокол прежнего жильца, что фото отправлены управляющей по e-mail или что какой-то дефект нашёлся уже после осмотра.</p>'
+};
+const KEY = 'protokolKvartiry.v1';
+const TODAY = new Date().toISOString().slice(0, 10);
+const LANGS = ['de', 'fr', 'it', 'en'];
+function langOf(k){ const K = window.KANTONY || {}; return k && K[k] ? ({de: 'de', fr: 'fr', it: 'it'}[K[k].l] || 'de') : 'de'; }
+
+/* ---------- словари ---------- */
+const RT = {
+  kor: {n: {de: 'Korridor, Entrée', fr: 'Hall d’entrée', it: 'Corridoio, entrata', en: 'Hallway', ru: 'Коридор, прихожая'}, it: ['wand', 'boden', 'tuer', 'elek', 'schrank', 'klingel']},
+  wz: {n: {de: 'Wohnzimmer', fr: 'Séjour', it: 'Soggiorno', en: 'Living room', ru: 'Гостиная'}, it: ['wand', 'boden', 'fenster', 'tuer', 'elek', 'heiz']},
+  ku: {n: {de: 'Küche', fr: 'Cuisine', it: 'Cucina', en: 'Kitchen', ru: 'Кухня'}, it: ['wand', 'boden', 'fenster', 'elek', 'herd', 'ofen', 'kuehl', 'gs', 'dunst', 'spuele', 'kschr']},
+  sz: {n: {de: 'Schlafzimmer', fr: 'Chambre à coucher', it: 'Camera da letto', en: 'Bedroom', ru: 'Спальня'}, it: ['wand', 'boden', 'fenster', 'tuer', 'elek', 'heiz', 'schrank']},
+  kz: {n: {de: 'Kinderzimmer', fr: 'Chambre d’enfant', it: 'Camera dei bambini', en: 'Children’s room', ru: 'Детская'}, it: ['wand', 'boden', 'fenster', 'tuer', 'elek', 'heiz']},
+  bad: {n: {de: 'Bad, WC', fr: 'Salle de bains, WC', it: 'Bagno, WC', en: 'Bathroom, WC', ru: 'Ванная с туалетом'}, it: ['wand', 'boden', 'tuer', 'wanne', 'wc', 'lavabo', 'spiegel', 'platten', 'luft', 'elek', 'heiz']},
+  du: {n: {de: 'Dusche, WC', fr: 'Douche, WC', it: 'Doccia, WC', en: 'Shower room, WC', ru: 'Душевая с туалетом'}, it: ['wand', 'boden', 'tuer', 'dusche', 'wc', 'lavabo', 'spiegel', 'platten', 'luft', 'elek']},
+  wc: {n: {de: 'Separates WC', fr: 'WC séparé', it: 'WC separato', en: 'Separate WC', ru: 'Отдельный туалет'}, it: ['wand', 'boden', 'tuer', 'wc', 'lavabo', 'spiegel', 'luft']},
+  bal: {n: {de: 'Balkon, Sitzplatz', fr: 'Balcon, terrasse', it: 'Balcone, terrazza', en: 'Balcony, patio', ru: 'Балкон, терраса'}, it: ['boden', 'gel', 'mark', 'wand']},
+  kel: {n: {de: 'Kellerabteil', fr: 'Cave', it: 'Cantina', en: 'Cellar compartment', ru: 'Кладовка в подвале'}, it: ['wand', 'boden', 'tuer', 'licht']},
+  est: {n: {de: 'Estrichabteil', fr: 'Galetas', it: 'Solaio', en: 'Attic compartment', ru: 'Кладовка на чердаке'}, it: ['wand', 'boden', 'tuer', 'licht']},
+  gar: {n: {de: 'Garage, Parkplatz', fr: 'Garage, place de parc', it: 'Autorimessa, posteggio', en: 'Garage, parking space', ru: 'Гараж, парковка'}, it: ['boden', 'tor', 'licht']}
+};
+const ROOM_ORDER = ['kor', 'wz', 'ku', 'sz', 'kz', 'bad', 'du', 'wc', 'bal', 'kel', 'est', 'gar'];
+const IT = {
+  wand: {de: 'Wände, Decke', fr: 'Murs, plafond', it: 'Pareti, soffitto', en: 'Walls, ceiling', ru: 'Стены, потолок'},
+  boden: {de: 'Boden, Sockelleisten', fr: 'Sol, plinthes', it: 'Pavimento, zoccolini', en: 'Floor, skirting', ru: 'Пол, плинтусы'},
+  fenster: {de: 'Fenster, Storen', fr: 'Fenêtres, stores', it: 'Finestre, tapparelle', en: 'Windows, blinds', ru: 'Окна, жалюзи (Storen)'},
+  tuer: {de: 'Türen, Schlösser', fr: 'Portes, serrures', it: 'Porte, serrature', en: 'Doors, locks', ru: 'Двери, замки'},
+  elek: {de: 'Steckdosen, Schalter, Lampen', fr: 'Prises, interrupteurs, luminaires', it: 'Prese, interruttori, lampade', en: 'Sockets, switches, lights', ru: 'Розетки, выключатели, свет'},
+  heiz: {de: 'Heizkörper, Ventile', fr: 'Radiateurs, vannes', it: 'Radiatori, valvole', en: 'Radiators, valves', ru: 'Батареи, краны отопления'},
+  schrank: {de: 'Einbauschränke, Garderobe', fr: 'Armoires murales, vestiaire', it: 'Armadi a muro, guardaroba', en: 'Built-in wardrobes', ru: 'Встроенные шкафы, вешалка'},
+  klingel: {de: 'Sonnerie, Gegensprechanlage', fr: 'Sonnette, interphone', it: 'Campanello, citofono', en: 'Doorbell, intercom', ru: 'Звонок, домофон'},
+  herd: {de: 'Kochfeld', fr: 'Plaques de cuisson', it: 'Piano cottura', en: 'Hob', ru: 'Варочная панель'},
+  ofen: {de: 'Backofen, Bleche', fr: 'Four, plaques', it: 'Forno, teglie', en: 'Oven, baking trays', ru: 'Духовка, противни'},
+  kuehl: {de: 'Kühlschrank, Tiefkühler', fr: 'Réfrigérateur, congélateur', it: 'Frigorifero, congelatore', en: 'Fridge, freezer', ru: 'Холодильник, морозилка'},
+  gs: {de: 'Geschirrspüler', fr: 'Lave-vaisselle', it: 'Lavastoviglie', en: 'Dishwasher', ru: 'Посудомойка'},
+  dunst: {de: 'Dampfabzug, Filter', fr: 'Hotte, filtres', it: 'Cappa aspirante, filtri', en: 'Extractor hood, filters', ru: 'Вытяжка, фильтры'},
+  spuele: {de: 'Spüle, Armatur', fr: 'Évier, robinetterie', it: 'Lavello, rubinetteria', en: 'Sink, tap', ru: 'Мойка, кран'},
+  kschr: {de: 'Küchenschränke, Abdeckung', fr: 'Armoires, plan de travail', it: 'Mobili, piano di lavoro', en: 'Cabinets, worktop', ru: 'Кухонные шкафы, столешница'},
+  wanne: {de: 'Badewanne, Brause', fr: 'Baignoire, douchette', it: 'Vasca, doccetta', en: 'Bathtub, shower head', ru: 'Ванна, душ'},
+  dusche: {de: 'Dusche, Duschwand', fr: 'Douche, paroi', it: 'Doccia, parete doccia', en: 'Shower, screen', ru: 'Душ, душевая стенка'},
+  wc: {de: 'WC, Spülkasten, Deckel', fr: 'WC, chasse d’eau, abattant', it: 'WC, cassetta, coperchio', en: 'Toilet, cistern, seat', ru: 'Унитаз, бачок, крышка'},
+  lavabo: {de: 'Lavabo, Armatur', fr: 'Lavabo, robinetterie', it: 'Lavabo, rubinetteria', en: 'Washbasin, tap', ru: 'Раковина, кран'},
+  spiegel: {de: 'Spiegelschrank', fr: 'Armoire à glace', it: 'Armadietto a specchio', en: 'Mirror cabinet', ru: 'Шкафчик с зеркалом'},
+  platten: {de: 'Wandplatten, Fugen', fr: 'Faïence, joints', it: 'Piastrelle, fughe', en: 'Tiles, grout', ru: 'Плитка, швы'},
+  luft: {de: 'Lüftung', fr: 'Ventilation', it: 'Ventilazione', en: 'Ventilation', ru: 'Вентиляция'},
+  gel: {de: 'Geländer', fr: 'Garde-corps', it: 'Parapetto', en: 'Railing', ru: 'Перила'},
+  mark: {de: 'Sonnenstoren, Markise', fr: 'Store-banne', it: 'Tenda da sole', en: 'Awning', ru: 'Маркиза от солнца'},
+  tor: {de: 'Tor, Fernbedienung', fr: 'Porte, télécommande', it: 'Portone, telecomando', en: 'Door, remote control', ru: 'Ворота, пульт'},
+  licht: {de: 'Licht', fr: 'Éclairage', it: 'Luce', en: 'Light', ru: 'Свет'}
+};
+const DEF = {
+  kratz: {de: 'Kratzer', fr: 'rayures', it: 'graffi', en: 'scratches', ru: 'царапины'},
+  fleck: {de: 'Flecken', fr: 'taches', it: 'macchie', en: 'stains', ru: 'пятна'},
+  loch: {de: 'Dübellöcher', fr: 'trous de chevilles', it: 'fori di tasselli', en: 'plug holes', ru: 'дырки от дюбелей'},
+  riss: {de: 'Riss', fr: 'fissure', it: 'crepa', en: 'crack', ru: 'трещина'},
+  besch: {de: 'beschädigt', fr: 'endommagé', it: 'danneggiato', en: 'damaged', ru: 'повреждено'},
+  fehlt: {de: 'fehlt', fr: 'manquant', it: 'mancante', en: 'missing', ru: 'нет, не хватает'},
+  funkt: {de: 'funktioniert nicht', fr: 'ne fonctionne pas', it: 'non funziona', en: 'not working', ru: 'не работает'},
+  lose: {de: 'lose', fr: 'branlant', it: 'allentato', en: 'loose', ru: 'шатается'},
+  undicht: {de: 'undicht', fr: 'fuit', it: 'perde', en: 'leaking', ru: 'протекает'},
+  kalk: {de: 'Kalk', fr: 'calcaire', it: 'calcare', en: 'limescale', ru: 'известковый налёт'},
+  schimmel: {de: 'Schimmel', fr: 'moisissure', it: 'muffa', en: 'mould', ru: 'плесень'},
+  schmutz: {de: 'verschmutzt', fr: 'sale', it: 'sporco', en: 'dirty', ru: 'грязно'},
+  verf: {de: 'verfärbt', fr: 'décoloré', it: 'scolorito', en: 'discoloured', ru: 'выцвело, пожелтело'},
+  abgen: {de: 'stark abgenutzt', fr: 'très usé', it: 'molto usurato', en: 'heavily worn', ru: 'сильно изношено'}
+};
+const KT = ['haus', 'brief', 'keller', 'garage', 'badge', 'andere'];
+const MT = ['strom', 'gas', 'wasser', 'waerme'];
+const TX = {
+  de: {ttl: ['Wohnungsübergabeprotokoll – Einzug', 'Wohnungsrückgabeprotokoll – Auszug'], sub: ['Übergabe der Wohnung an die Mieterschaft', 'Rückgabe der Wohnung an die Vermieterschaft'],
+    f: {obj: 'Mietobjekt (Adresse)', apt: 'Wohnung (Nr., Stockwerk)', rooms: 'Zimmer', date: 'Datum', time: 'Uhrzeit', mbeg: 'Mietbeginn', mend: 'Mietende', vm: 'Vermieterschaft / Verwaltung', vmp: 'vertreten durch', mie: 'Mieterschaft', prev: 'Vormieter/in', newaddr: 'Neue Adresse der Mieterschaft', nach: 'Nachmieter/in'},
+    leg: 'i.O. = in Ordnung. Mangel = beschädigt, verschmutzt, fehlt oder funktioniert nicht – mit Beschreibung und Foto-Nr. Zahl in Klammern = Nummer in der Mängelliste.',
+    legW: ['Behebung: ja = die Vermieterschaft behebt den Mangel, nein = der Mangel bleibt und geht nicht zu Lasten der Mieterschaft.', 'Zu Lasten: M = Mieterschaft, V = Vermieterschaft (normale Abnützung), ? = strittig.'],
+    col: {el: 'Element', ok: 'i.O.', def: 'Mangel', desc: 'Beschreibung des Mangels', foto: 'Foto-Nr.', w: ['Behebung', 'Zu Lasten']}, box: [['ja', 'nein'], ['M', 'V', '?']],
+    more: 'Weiteres:', na: 'nicht vorhanden', keys: 'Schlüssel', kh: ['Art', 'Nummer / Bezeichnung', 'übergeben (Einzug)', 'zurück (Auszug)'],
+    kt: {haus: 'Haus- und Wohnungstür', brief: 'Briefkasten', keller: 'Keller, Estrich', garage: 'Garage, Tor', badge: 'Badge, Fernbedienung', andere: 'Weitere (Waschküche, Veloraum)'},
+    met: 'Zählerstände', mh: ['Zähler', 'Zähler-Nr.', 'Stand', 'Datum'], mt: {strom: 'Strom', gas: 'Gas', wasser: 'Wasser', waerme: 'Wärme, Heizkostenverteiler'},
+    clean: [['Wohnung gereinigt übergeben:', 'ja', 'nein'], ['Reinigung:', 'abgenommen', 'Nachreinigung bis']],
+    defl: 'Mängelliste (Zusammenfassung)', dh: ['Nr.', 'Raum', 'Element', 'Mangel'], none: 'Keine Mängel festgestellt.',
+    remM: 'Bemerkungen der Mieterschaft', remV: 'Bemerkungen der Vermieterschaft / Verwaltung', vorb: 'Die Mieterschaft unterzeichnet unter Vorbehalt folgender Punkte:',
+    stmt: ['Die Mieterschaft hat die Wohnung im oben beschriebenen Zustand übernommen. Die aufgeführten Mängel bestanden bereits bei der Übergabe und gehen nicht zu Lasten der Mieterschaft. Mängel, die bei der Übergabe nicht erkennbar waren, meldet die Mieterschaft schriftlich nach.',
+      'Das Protokoll hält den Zustand der Wohnung bei der Rückgabe fest. Mit der Unterschrift bestätigt die Mieterschaft diesen Zustand. Eine Kostenübernahme gilt nur für Mängel, die ausdrücklich als «zu Lasten Mieterschaft» (M) bezeichnet sind; normale Abnützung geht nicht zu Lasten der Mieterschaft.'],
+    copy: 'Beide Parteien haben ein Exemplar dieses Protokolls erhalten.', place: 'Ort, Datum', sigV: 'Vermieterschaft / Verwaltung', sigM: 'Mieterschaft', page: 'Seite', vis: ['Visum Vermieterschaft', 'Visum Mieterschaft'], cont: '(Fortsetzung)'},
+  fr: {ttl: ['État des lieux d’entrée', 'État des lieux de sortie'], sub: ['Remise du logement au locataire', 'Restitution du logement au bailleur'],
+    f: {obj: 'Objet loué (adresse)', apt: 'Appartement (n°, étage)', rooms: 'Pièces', date: 'Date', time: 'Heure', mbeg: 'Début du bail', mend: 'Fin du bail', vm: 'Bailleur / gérance', vmp: 'représenté par', mie: 'Locataire(s)', prev: 'Locataire précédent', newaddr: 'Nouvelle adresse du locataire', nach: 'Nouveau locataire'},
+    leg: 'OK = en bon état. Défaut = endommagé, sale, manquant ou ne fonctionne pas – avec description et n° de photo. Chiffre entre parenthèses = numéro dans la liste des défauts.',
+    legW: ['Réparation : oui = le bailleur répare le défaut, non = le défaut reste et n’est pas à la charge du locataire.', 'À la charge : L = locataire, B = bailleur (usure normale), ? = contesté.'],
+    col: {el: 'Élément', ok: 'OK', def: 'Défaut', desc: 'Description du défaut', foto: 'N° photo', w: ['Réparation', 'À la charge']}, box: [['oui', 'non'], ['L', 'B', '?']],
+    more: 'Autres :', na: 'inexistant', keys: 'Clés', kh: ['Type', 'Numéro / désignation', 'remises (entrée)', 'rendues (sortie)'],
+    kt: {haus: 'Immeuble et appartement', brief: 'Boîte aux lettres', keller: 'Cave, galetas', garage: 'Garage, porte', badge: 'Badge, télécommande', andere: 'Autres (buanderie, local à vélos)'},
+    met: 'Relevés des compteurs', mh: ['Compteur', 'N° de compteur', 'Relevé', 'Date'], mt: {strom: 'Électricité', gas: 'Gaz', wasser: 'Eau', waerme: 'Chaleur, répartiteurs de chauffage'},
+    clean: [['Logement remis propre :', 'oui', 'non'], ['Nettoyage :', 'accepté', 'nettoyage complémentaire jusqu’au']],
+    defl: 'Liste des défauts (récapitulatif)', dh: ['N°', 'Pièce', 'Élément', 'Défaut'], none: 'Aucun défaut constaté.',
+    remM: 'Remarques du locataire', remV: 'Remarques du bailleur / de la gérance', vorb: 'Le locataire signe sous réserve des points suivants :',
+    stmt: ['Le locataire a pris possession du logement dans l’état décrit ci-dessus. Les défauts mentionnés existaient déjà lors de la remise et ne sont pas à la charge du locataire. Les défauts qui n’étaient pas visibles lors de la remise seront signalés par écrit ultérieurement.',
+      'Le présent état des lieux constate l’état du logement lors de sa restitution. Par sa signature, le locataire confirme cet état. Une prise en charge des frais ne vaut que pour les défauts expressément indiqués « à la charge du locataire » (L) ; l’usure normale n’est pas à la charge du locataire.'],
+    copy: 'Chaque partie a reçu un exemplaire du présent état des lieux.', place: 'Lieu, date', sigV: 'Bailleur / gérance', sigM: 'Locataire(s)', page: 'Page', vis: ['Visa bailleur', 'Visa locataire'], cont: '(suite)'},
+  it: {ttl: ['Verbale di consegna – entrata', 'Verbale di riconsegna – uscita'], sub: ['Consegna dell’appartamento all’inquilino', 'Riconsegna dell’appartamento al locatore'],
+    f: {obj: 'Ente locato (indirizzo)', apt: 'Appartamento (n., piano)', rooms: 'Locali', date: 'Data', time: 'Ora', mbeg: 'Inizio della locazione', mend: 'Fine della locazione', vm: 'Locatore / amministrazione', vmp: 'rappresentato da', mie: 'Inquilino/i', prev: 'Inquilino precedente', newaddr: 'Nuovo indirizzo dell’inquilino', nach: 'Nuovo inquilino'},
+    leg: 'OK = in ordine. Difetto = danneggiato, sporco, mancante o non funzionante – con descrizione e n. foto. Numero tra parentesi = numero nell’elenco dei difetti.',
+    legW: ['Riparazione: sì = il locatore ripara il difetto, no = il difetto rimane e non è a carico dell’inquilino.', 'A carico: I = inquilino, L = locatore (normale usura), ? = contestato.'],
+    col: {el: 'Elemento', ok: 'OK', def: 'Difetto', desc: 'Descrizione del difetto', foto: 'N. foto', w: ['Riparazione', 'A carico']}, box: [['sì', 'no'], ['I', 'L', '?']],
+    more: 'Altro:', na: 'non presente', keys: 'Chiavi', kh: ['Tipo', 'Numero / descrizione', 'consegnate (entrata)', 'restituite (uscita)'],
+    kt: {haus: 'Casa e appartamento', brief: 'Bucalettere', keller: 'Cantina, solaio', garage: 'Autorimessa, portone', badge: 'Badge, telecomando', andere: 'Altre (lavanderia, deposito bici)'},
+    met: 'Letture dei contatori', mh: ['Contatore', 'N. contatore', 'Lettura', 'Data'], mt: {strom: 'Elettricità', gas: 'Gas', wasser: 'Acqua', waerme: 'Calore, ripartitori di spese'},
+    clean: [['Appartamento consegnato pulito:', 'sì', 'no'], ['Pulizia:', 'accettata', 'pulizia supplementare entro il']],
+    defl: 'Elenco dei difetti (riepilogo)', dh: ['N.', 'Locale', 'Elemento', 'Difetto'], none: 'Nessun difetto constatato.',
+    remM: 'Osservazioni dell’inquilino', remV: 'Osservazioni del locatore / dell’amministrazione', vorb: 'L’inquilino firma con riserva sui punti seguenti:',
+    stmt: ['L’inquilino ha preso in consegna l’appartamento nello stato descritto sopra. I difetti elencati esistevano già al momento della consegna e non sono a carico dell’inquilino. I difetti non riconoscibili al momento della consegna saranno notificati per iscritto in seguito.',
+      'Il presente verbale constata lo stato dell’appartamento alla riconsegna. Con la firma l’inquilino conferma tale stato. Un’assunzione dei costi vale solo per i difetti espressamente indicati «a carico dell’inquilino» (I); la normale usura non è a carico dell’inquilino.'],
+    copy: 'Ciascuna parte ha ricevuto una copia del presente verbale.', place: 'Luogo, data', sigV: 'Locatore / amministrazione', sigM: 'Inquilino/i', page: 'Pagina', vis: ['Sigla locatore', 'Sigla inquilino'], cont: '(continuazione)'},
+  en: {ttl: ['Handover report – move-in', 'Handover report – move-out'], sub: ['Handover of the flat to the tenant', 'Return of the flat to the landlord'],
+    f: {obj: 'Property (address)', apt: 'Flat (no., floor)', rooms: 'Rooms', date: 'Date', time: 'Time', mbeg: 'Start of tenancy', mend: 'End of tenancy', vm: 'Landlord / managing agent', vmp: 'represented by', mie: 'Tenant(s)', prev: 'Previous tenant', newaddr: 'Tenant’s new address', nach: 'New tenant'},
+    leg: 'OK = in good order. Defect = damaged, dirty, missing or not working – with description and photo no. Number in brackets = number in the list of defects.',
+    legW: ['Repair: yes = the landlord repairs the defect, no = the defect remains and is not chargeable to the tenant.', 'Charged to: T = tenant, L = landlord (normal wear and tear), ? = disputed.'],
+    col: {el: 'Item', ok: 'OK', def: 'Defect', desc: 'Description of the defect', foto: 'Photo no.', w: ['Repair', 'Charged to']}, box: [['yes', 'no'], ['T', 'L', '?']],
+    more: 'Other:', na: 'not present', keys: 'Keys', kh: ['Type', 'Number / label', 'handed over (in)', 'returned (out)'],
+    kt: {haus: 'Building and flat door', brief: 'Mailbox', keller: 'Cellar, attic', garage: 'Garage, gate', badge: 'Badge, remote control', andere: 'Other (laundry, bike room)'},
+    met: 'Meter readings', mh: ['Meter', 'Meter no.', 'Reading', 'Date'], mt: {strom: 'Electricity', gas: 'Gas', wasser: 'Water', waerme: 'Heat, heat cost allocators'},
+    clean: [['Flat handed over clean:', 'yes', 'no'], ['Cleaning:', 'accepted', 'further cleaning by']],
+    defl: 'List of defects (summary)', dh: ['No.', 'Room', 'Item', 'Defect'], none: 'No defects found.',
+    remM: 'Tenant’s remarks', remV: 'Landlord’s / agent’s remarks', vorb: 'The tenant signs subject to reservations on the following points:',
+    stmt: ['The tenant has taken over the flat in the condition described above. The defects listed already existed at handover and are not chargeable to the tenant. Defects that were not visible at handover will be reported in writing later.',
+      'This report records the condition of the flat at its return. By signing, the tenant confirms this condition. The tenant accepts costs only for defects expressly marked as chargeable to the tenant (T); normal wear and tear is not chargeable to the tenant.'],
+    copy: 'Each party has received a copy of this report.', place: 'Place, date', sigV: 'Landlord / managing agent', sigM: 'Tenant(s)', page: 'Page', vis: ['Initials landlord', 'Initials tenant'], cont: '(continued)'},
+  ru: {ttl: ['Протокол приёмки квартиры — въезд', 'Протокол сдачи квартиры — выезд'], sub: ['Передача квартиры арендатору', 'Возврат квартиры арендодателю'],
+    f: {obj: 'Объект аренды (адрес)', apt: 'Квартира (номер, этаж)', rooms: 'Комнат', date: 'Дата', time: 'Время', mbeg: 'Начало аренды', mend: 'Конец аренды', vm: 'Арендодатель или управляющая', vmp: 'в лице', mie: 'Арендатор(ы)', prev: 'Прежний жилец', newaddr: 'Новый адрес арендатора', nach: 'Новый жилец'},
+    leg: 'В порядке — без замечаний. Дефект — повреждено, грязно, не хватает или не работает — с описанием и номером фото. Число в скобках — номер в списке дефектов.',
+    legW: ['Ремонт: «{0}» — хозяин устранит дефект, «{1}» — дефект остаётся и не оплачивается арендатором.', 'За чей счёт: {0} — арендатор, {1} — арендодатель (обычный износ), ? — спорно.'],
+    col: {el: 'Что проверяли', ok: 'В порядке', def: 'Дефект', desc: 'Описание дефекта', foto: 'Номер фото', w: ['Ремонт', 'За чей счёт']},
+    more: 'Другое:', na: 'нет в квартире', keys: 'Ключи', kh: ['Какой', 'Номер или надпись', 'выдано (въезд)', 'возвращено (выезд)'],
+    kt: {haus: 'Подъезд и квартира', brief: 'Почтовый ящик', keller: 'Подвал, чердак', garage: 'Гараж, ворота', badge: 'Бейдж, пульт', andere: 'Другие (прачечная, велосипедная)'},
+    met: 'Показания счётчиков', mh: ['Счётчик', 'Номер счётчика', 'Показание', 'Дата'], mt: {strom: 'Электричество', gas: 'Газ', wasser: 'Вода', waerme: 'Тепло, приборы учёта на батареях'},
+    clean: [['Квартира передана чистой:', 'да', 'нет'], ['Уборка:', 'принята', 'доубрать до']],
+    defl: 'Список дефектов (сводка)', dh: ['№', 'Комната', 'Что', 'Дефект'], none: 'Дефектов не найдено.',
+    remM: 'Замечания арендатора', remV: 'Замечания арендодателя или управляющей', vorb: 'Арендатор подписывает с оговоркой по пунктам:',
+    stmt: ['Арендатор принял квартиру в состоянии, описанном выше. Перечисленные дефекты были уже при передаче и не оплачиваются арендатором. О дефектах, которые нельзя было заметить при передаче, арендатор сообщит письменно позже.',
+      'Протокол фиксирует состояние квартиры при сдаче. Подписью арендатор подтверждает это состояние. Платить арендатор согласен только за дефекты, прямо отмеченные «за счёт арендатора» ({0}); обычный износ арендатор не оплачивает.'],
+    copy: 'Каждая сторона получила экземпляр протокола.', place: 'Место, дата', sigV: 'Арендодатель или управляющая', sigM: 'Арендатор(ы)', page: 'Страница', vis: ['Инициалы арендодателя', 'Инициалы арендатора'], cont: '(продолжение)'}
+};
+const W_OPT = {ein: [['', 'не выбрано'], ['rep', 'хозяин отремонтирует'], ['ble', 'остаётся, не за мой счёт']], aus: [['', 'не выбрано'], ['abn', 'обычный износ — платит хозяин'], ['mie', 'согласна платить я'], ['str', 'спорно, не согласна']]};
+const W_BOX = {ein: ['rep', 'ble'], aus: ['mie', 'abn', 'str']};
+
+/* ---------- состояние ---------- */
+const keyRow = () => ({nr: '', in: '', out: ''});
+const meterRow = on => ({on, nr: '', st: '', dt: ''});
+function blank(){ let k = ''; try { k = localStorage.getItem('svoiludi.kanton') || ''; } catch (e) {}
+  return {kt: k, lang: langOf(k), ru: true, bw: false, mode: 'ein', addr: '', apt: '', rooms: '3.5', date: TODAY, time: '', mdate: '',
+    vm: '', vmp: '', m1: '', m2: '', prev: '', newaddr: '', nach: '',
+    nsz: 2, nkz: 0, r: {kor: true, wz: true, ku: true, bad: true, du: false, wc: false, bal: true, kel: true, est: false, gar: false},
+    st: {}, keys: Object.fromEntries(KT.map(k => [k, keyRow()])), met: {strom: meterRow(true), gas: meterRow(false), wasser: meterRow(true), waerme: meterRow(true)},
+    clean: '', cleanBis: '', rem: '', vorb: false, vorbtx: '', ort: ''}; }
+let S = load(), EX = null;
+function load(){ try { const s = JSON.parse(localStorage.getItem(KEY)); if (s && typeof s === 'object') { const b = blank();
+  return Object.assign(b, s, {r: Object.assign(b.r, s.r), st: s.st && typeof s.st === 'object' ? s.st : {}, keys: Object.fromEntries(KT.map(k => [k, Object.assign(keyRow(), (s.keys || {})[k])])),
+    met: Object.fromEntries(MT.map(k => [k, Object.assign(b.met[k], (s.met || {})[k])]))}); } } catch (e) {} return blank(); }
+function save(){ if (EX) return; try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} }
+const D = () => EX || S;
+const dmy = iso => { const [y, m, d] = String(iso || '').split('-'); return d ? `${d}.${m}.${y}` : ''; };
+const nz = (s, ph) => String(s || '').trim() || ph;
+const cap = s => s ? s.charAt(0).toUpperCase() + s.slice(1) : s;
+const fmt = (s, a) => s.replace(/\{(\d)\}/g, (m, i) => a[+i]);
+
+/* комнаты квартиры по порядку обхода */
+function roomList(d){ const out = [];
+  ROOM_ORDER.forEach(t => {
+    if (t === 'sz' || t === 'kz') { const n = +(t === 'sz' ? d.nsz : d.nkz) || 0; for (let i = 1; i <= n; i++) out.push({id: t + i, t, num: n > 1 ? i : 0}); }
+    else if (d.r[t]) out.push({id: t, t, num: 0}); });
+  return out; }
+const roomName = (r, L) => RT[r.t].n[L] + (r.num ? ' ' + r.num : '');
+const cell = (d, rid, it) => (d.st[rid] || {})[it] || {s: '', d: [], n: '', f: '', w: ''};
+/* все дефекты по порядку — для номеров и сводки */
+function defects(d){ const out = []; roomList(d).forEach(r => RT[r.t].it.forEach(it => { const c = cell(d, r.id, it); if (c.s === 'def') out.push({r, it, c, n: out.length + 1}); })); return out; }
+const defText = (c, L) => { const t = (c.d || []).filter(k => DEF[k]).map(k => DEF[k][L]).join(', '), n = String(c.n || '').trim(); return cap([t, n].filter(Boolean).join(L === 'fr' ? ' : ' : ': ')); };
+
+/* ---------- листы ---------- */
+const X = 14, WW = 182, LIM = 279;
+function flow(C, first, cont){ const F = {pages: [], P: null, y: 0};
+  F.np = () => { F.P = SH.page(210, 297, C); F.pages.push(F.P); F.y = F.pages.length === 1 ? first(F.P) : cont(F.P); };
+  F.need = h => { if (F.y + h > LIM) F.np(); };
+  F.np(); return F; }
+function box(P, x, y, on, C){ P.rect(x, y, 3, 3, '#FFFFFF', C.ink); if (on) { P.line(x + 0.6, y + 1.6, x + 1.3, y + 2.4, C.ink, 0.5); P.line(x + 1.3, y + 2.4, x + 2.5, y + 0.6, C.ink, 0.5); } }
+/* таблица с переносом строк: cols [{w, h (заголовок), al}], rows [[текст…]] или {cells, draw(P, y, h)} */
+function table(F, C, cols, rows, opt){ opt = opt || {}; const fs = opt.fs || 7.6, lh = fs * SH.PT * 1.32, hh = 6;
+  const head = () => { const P = F.P; P.rect(X, F.y, WW, hh, C.soft, null); P.line(X, F.y + hh, X + WW, F.y + hh, C.line, 0.3); let x = X; cols.forEach(c => { if (c.h) P.text(c.h, c.al === 'c' ? x + c.w / 2 : x + 1.6, F.y + 4.1, 6.4, true, C.head, c.al === 'c' ? 'center' : 'left'); x += c.w; }); F.y += hh; };
+  if (opt.title) { F.need(9 + hh + 7); F.y = F.P.sec(opt.title, X, F.y + 2, WW, opt.sub) - 2.4; } else F.need(hh + 7);
+  head();
+  rows.forEach(row => { const cells = Array.isArray(row) ? row : row.cells, wr = cells.map((v, i) => SH.wrap(v || '', !!(cols[i].b), fs, cols[i].w - 3.2));
+    const h = Math.max(opt.minH || 6.2, Math.max(1, ...wr.map(w => w.length)) * lh + 2.6);
+    if (F.y + h > LIM) { F.np(); head(); }
+    const P = F.P; let x = X;
+    wr.forEach((ls, i) => { const c = cols[i]; ls.forEach((l, j) => P.text(l, c.al === 'c' ? x + c.w / 2 : x + 1.6, F.y + 2.1 + fs * SH.PT * 0.95 + j * lh, fs, !!c.b, c.mut ? C.mut : C.ink, c.al === 'c' ? 'center' : 'left')); x += c.w; });
+    if (row.draw) row.draw(P, F.y, h);
+    x = X; cols.forEach((c, i) => { if (i) P.line(x, F.y, x, F.y + h, C.line, 0.2); x += c.w; });
+    F.y += h; P.line(X, F.y, X + WW, F.y, C.line, 0.25); });
+  F.y += opt.after == null ? 5 : opt.after; }
+/* клетки «ремонт да/нет» или «за чей счёт» */
+function wBoxes(P, x, y, h, mode, L, w, C){ const lab = TX[L].box[mode === 'ein' ? 0 : 1], keys = W_BOX[mode], step = mode === 'ein' ? 12.5 : 8.6;
+  keys.forEach((k, i) => { const bx = x + 1.6 + i * step, by = y + h / 2 - 1.5; box(P, bx, by, w === k, C); P.text(lab[i], bx + 3.8, by + 2.5, 6.4, false, C.ink); }); }
+
+function sheetsProtocol(d){
+  const L = d.lang, t = TX[L], C = SH.pal(d.bw), ein = d.mode === 'ein', mi = ein ? 0 : 1;
+  const F = flow(C, P => { P.header(t.ttl[mi], t.sub[mi]); return 25; },
+    P => { P.text(t.ttl[mi] + ' ' + t.cont, X, 11, 9, true, C.head); P.text(String(d.addr || ''), X + WW, 11, 7, false, C.mut, 'right'); P.line(X, 13.5, X + WW, 13.5, C.head, 0.4); return 20; });
+  /* шапка */
+  const fld = (x, w, lab, val) => { const P = F.P; P.text(lab, x, F.y, 6.3, false, C.mut); const ls = SH.wrap(val || '', false, 9.2, w - 3); P.text(ls[0] || '', x, F.y + 4.8, 9.2, false, C.ink); P.line(x, F.y + 6.4, x + w - 3, F.y + 6.4, C.line, 0.3); };
+  const row = cells => { let x = X; cells.forEach(([w, lab, val]) => { fld(x, w, lab, val); x += w; }); F.y += 10.5; };
+  const mie = [d.m1, d.m2].filter(s => String(s || '').trim()).join(', ');
+  row([[124, t.f.obj, d.addr], [58, t.f.apt, d.apt]]);
+  row([[24, t.f.rooms, String(d.rooms || '').replace('.', L === 'en' ? '.' : ',')], [36, t.f.date, dmy(d.date)], [26, t.f.time, d.time], [96, ein ? t.f.mbeg : t.f.mend, dmy(d.mdate)]]);
+  row([[100, t.f.vm, d.vm], [82, t.f.vmp, d.vmp]]);
+  row([[182, t.f.mie, mie]]);
+  if (ein) row([[182, t.f.prev, d.prev]]); else row([[124, t.f.newaddr, d.newaddr], [58, t.f.nach, d.nach]]);
+  F.y += 1; [t.leg, t.legW[mi]].forEach(s => SH.wrap(s, false, 6.6, WW).forEach(l => { F.P.text(l, X, F.y, 6.6, false, C.mut); F.y += 2.9; })); F.y += 3;
+  /* комнаты */
+  const DF = defects(d), num = {}; DF.forEach(x => num[x.r.id + '|' + x.it] = x.n);
+  const cols = [{w: 46, h: t.col.el}, {w: 10, h: t.col.ok, al: 'c'}, {w: 12, h: t.col.def, al: 'c'}, {w: 70, h: t.col.desc}, {w: 15, h: t.col.foto, al: 'c'}, {w: 29, h: t.col.w[mi]}];
+  roomList(d).forEach(r => {
+    const rows = RT[r.t].it.map(it => { const c = cell(d, r.id, it), na = c.s === 'na', df = c.s === 'def';
+      return {cells: [IT[it][L], '', '', na ? t.na : df ? '(' + num[r.id + '|' + it] + ') ' + defText(c, L) : '', df ? c.f : '', ''],
+        draw: (P, y, h) => { if (na) { P.text('–', X + 51, y + h / 2 + 1, 8, false, C.mut, 'center'); P.text('–', X + 62, y + h / 2 + 1, 8, false, C.mut, 'center'); return; }
+          box(P, X + 46 + 3.5, y + h / 2 - 1.5, c.s === 'ok', C); box(P, X + 56 + 4.5, y + h / 2 - 1.5, df, C);
+          if (c.s !== 'ok') wBoxes(P, X + 153, y, h, d.mode, L, df ? c.w : '', C); }}; });
+    rows.push({cells: [t.more, '', '', '', '', ''], draw: (P, y, h) => { box(P, X + 49.5, y + h / 2 - 1.5, false, C); box(P, X + 60.5, y + h / 2 - 1.5, false, C); wBoxes(P, X + 153, y, h, d.mode, L, '', C); }});
+    F.need(9 + 6 + 6.2 * 3);
+    F.y = F.P.sec(roomName(r, L), X, F.y + 2, WW) - 2.4;
+    table(F, C, cols, rows, {after: 4});
+  });
+  /* ключи */
+  table(F, C, [{w: 62, h: t.kh[0]}, {w: 56, h: t.kh[1]}, {w: 32, h: t.kh[2], al: 'c'}, {w: 32, h: t.kh[3], al: 'c'}],
+    KT.map(k => [t.kt[k], d.keys[k].nr, d.keys[k].in, d.keys[k].out]), {title: t.keys});
+  /* счётчики */
+  let ms = MT.filter(k => d.met[k].on); if (!ms.length) ms = MT.slice();
+  table(F, C, [{w: 62, h: t.mh[0]}, {w: 56, h: t.mh[1]}, {w: 32, h: t.mh[2], al: 'c'}, {w: 32, h: t.mh[3], al: 'c'}],
+    ms.map(k => [t.mt[k], d.met[k].nr, d.met[k].st, dmy(d.met[k].dt || d.date)]), {title: t.met});
+  /* уборка */
+  F.need(10); { const P = F.P, cl = t.clean[mi]; let x = X; P.text(cl[0], x, F.y + 2.6, 8.4, true, C.ink); x += SH.tw(cl[0], true, 8.4) + 4;
+    box(P, x, F.y, ein ? d.clean === 'yes' : d.clean === 'ok', C); P.text(cl[1], x + 4.4, F.y + 2.6, 8.4, false, C.ink); x += 4.4 + SH.tw(cl[1], false, 8.4) + 6;
+    box(P, x, F.y, ein ? d.clean === 'no' : d.clean === 'nach', C); P.text(cl[2] + (ein ? '' : ' ' + (dmy(d.cleanBis) || '')), x + 4.4, F.y + 2.6, 8.4, false, C.ink);
+    if (!ein && !d.cleanBis) { const lx = x + 4.4 + SH.tw(cl[2], false, 8.4) + 2; P.line(lx, F.y + 3.2, lx + 26, F.y + 3.2, C.line, 0.3); }
+    F.y += 9; }
+  /* сводка дефектов */
+  const dcols = [{w: 10, h: t.dh[0], al: 'c'}, {w: 33, h: t.dh[1]}, {w: 37, h: t.dh[2]}, {w: 58, h: t.dh[3]}, {w: 15, h: t.col.foto, al: 'c'}, {w: 29, h: t.col.w[mi]}];
+  const drows = DF.map(x => ({cells: [String(x.n), roomName(x.r, L), IT[x.it][L], defText(x.c, L), x.c.f, ''], draw: (P, y, h) => wBoxes(P, X + 153, y, h, d.mode, L, x.c.w, C)}));
+  const blankRow = () => ({cells: ['', '', '', '', '', ''], draw: (P, y, h) => wBoxes(P, X + 153, y, h, d.mode, L, '', C)});
+  if (!DF.length) drows.push({cells: ['', '', '', t.none, '', ''], draw: () => {}});
+  drows.push(blankRow(), blankRow());
+  table(F, C, dcols, drows, {title: t.defl});
+  /* замечания */
+  const lines = (title, text, n) => { const ls = SH.wrap(String(text || '').replace(/\s+/g, ' ').trim(), false, 8.4, WW); F.need(9 + Math.max(n, ls.length) * 6 + 2);
+    F.y = F.P.sec(title, X, F.y + 2, WW); for (let i = 0; i < Math.max(n, ls.length); i++) { if (ls[i]) F.P.text(ls[i], X, F.y + 1, 8.4, false, C.ink); F.P.line(X, F.y + 2.3, X + WW, F.y + 2.3, C.line, 0.25); F.y += 6; } F.y += 2; };
+  lines(t.remM, d.rem, 3);
+  lines(t.remV, '', 3);
+  /* оговорка, заявление, подписи — вместе */
+  const vt = vorbText(d), st = SH.wrap(fmt(t.stmt[mi], []), false, 7.6, WW), vls = SH.wrap(t.vorb + ' ' + vt, false, 8.4, WW - 5);
+  F.need(vls.length * 4 + 8 + st.length * 3.4 + 6 + 36);
+  { const P = F.P; box(P, X, F.y - 2.4, d.vorb, C); vls.forEach((l, i) => P.text(l, X + 5, F.y + i * 4, 8.4, false, C.ink));
+    const ly = F.y + (vls.length - 1) * 4; if (!vt) { const lx = X + 5 + SH.tw(vls[vls.length - 1], false, 8.4) + 2; P.line(lx, ly + 0.8, X + WW, ly + 0.8, C.line, 0.3); }
+    F.y = ly + 5.5; P.line(X + 5, F.y, X + WW, F.y, C.line, 0.3); F.y += 6;
+    st.forEach(l => { P.text(l, X, F.y, 7.6, false, C.ink); F.y += 3.4; }); F.y += 1.5;
+    P.text(t.copy, X, F.y, 7.6, true, C.ink); F.y += 15;
+    const sig = [[50, t.place, [nz(d.ort, ''), dmy(d.date)].filter(Boolean).join(', ')], [62, t.sigV, nz(d.vmp, d.vm)], [70, t.sigM, mie]];
+    let x = X; sig.forEach(([w, lab, val]) => { if (val && lab === t.place) P.text(val, x, F.y - 1.5, 8.4, false, C.ink); P.line(x, F.y, x + w - 6, F.y, C.ink, 0.35); P.text(lab, x, F.y + 3.6, 6.6, true, C.mut); if (val && lab !== t.place) SH.wrap(val, false, 6.6, w - 6).slice(0, 2).forEach((l, i) => P.text(l, x, F.y + 6.6 + i * 2.8, 6.6, false, C.mut)); x += w; });
+    F.y += 12; }
+  /* нижняя строка каждой страницы: номер и визы */
+  const n = F.pages.length;
+  F.pages.forEach((P, i) => { P.text(`${t.page} ${i + 1}/${n}`, X, 288.5, 7, false, C.mut);
+    P.text(t.vis[0], 62, 288.5, 6.6, false, C.mut); P.line(62 + SH.tw(t.vis[0], false, 6.6) + 2, 289, 62 + SH.tw(t.vis[0], false, 6.6) + 22, 289, C.line, 0.3);
+    const vx = 128; P.text(t.vis[1], vx, 288.5, 6.6, false, C.mut); P.line(vx + SH.tw(t.vis[1], false, 6.6) + 2, 289, vx + SH.tw(t.vis[1], false, 6.6) + 22, 289, C.line, 0.3); });
+  return F.pages;
+}
+function vorbText(d){ const s = String(d.vorbtx || '').trim(); if (s) return s; if (!d.vorb) return '';
+  const st = defects(d).filter(x => x.c.w === 'str').map(x => x.n); if (!st.length) return '';
+  return ({de: 'Nr. ', fr: 'n° ', it: 'n. ', en: 'no. '}[d.lang] || 'Nr. ') + st.join(', '); }
+
+/* лист «Перевод для себя» */
+function sheetsRu(d){
+  const L = d.lang, t = TX[L], r = TX.ru, C = SH.pal(d.bw), ein = d.mode === 'ein', mi = ein ? 0 : 1, bx = t.box[mi];
+  const F = flow(C, P => { P.header('Перевод для себя', 'Этот лист не отдают управляющей. Он помогает понять, что написано в протоколе и что ты подписываешь.'); return 25; },
+    P => { P.text('Перевод для себя ' + r.cont, X, 11, 9, true, C.head); P.line(X, 13.5, X + WW, 13.5, C.head, 0.4); return 20; });
+  const LN = {de: 'Deutsch', fr: 'Français', it: 'Italiano', en: 'English'}[L];
+  const two = [{w: 86, h: LN, mut: true}, {w: 96, h: 'Русский'}];
+  const F2 = k => [t.f[k], r.f[k]];
+  const four = [{w: 45, h: LN, mut: true}, {w: 46, h: 'Русский'}, {w: 45, h: LN, mut: true}, {w: 46, h: 'Русский'}];
+  const pairs = list => { const out = []; for (let i = 0; i < list.length; i += 2) out.push([list[i][0], list[i][1], (list[i + 1] || [])[0] || '', (list[i + 1] || [])[1] || '']); return out; };
+  const shortT = [F2('obj'), F2('apt'), F2('rooms'), F2('date'), F2('time'), ein ? F2('mbeg') : F2('mend'), F2('vm'), F2('vmp'), F2('mie')].concat(ein ? [F2('prev')] : [F2('newaddr'), F2('nach')]).concat([
+    [t.col.el, r.col.el], [t.col.ok, r.col.ok], [t.col.def, r.col.def], [t.col.desc, r.col.desc], [t.col.foto, r.col.foto], [t.col.w[mi], r.col.w[mi]], [t.more, r.more], [t.na, r.na],
+    [t.keys, r.keys]]).concat(t.kh.map((s, i) => [s, r.kh[i]])).concat(KT.map(k => [t.kt[k], r.kt[k]])).concat([[t.met, r.met]]).concat(t.mh.slice(0, 3).map((s, i) => [s, r.mh[i]])).concat(MT.map(k => [t.mt[k], r.mt[k]]))
+    .concat([[t.clean[mi][0], r.clean[mi][0]], [t.clean[mi][1], r.clean[mi][1]], [t.clean[mi][2], r.clean[mi][2]], [t.defl, r.defl], [t.dh[1], r.dh[1]], [t.remM, r.remM], [t.remV, r.remV], [t.place, r.place], [t.sigV, r.sigV], [t.sigM, r.sigM], [t.vis[0], r.vis[0]], [t.vis[1], r.vis[1]], [t.page, r.page]]);
+  const longT = [[t.ttl[mi], r.ttl[mi]], [t.sub[mi], r.sub[mi]], [t.leg, r.leg], [t.legW[mi], fmt(r.legW[mi], bx)], [t.none, r.none], [t.vorb, r.vorb], [t.stmt[mi], fmt(r.stmt[mi], [bx[0]])], [t.copy, r.copy]];
+  table(F, C, two, longT, {title: 'Что написано в протоколе', fs: 7.2, minH: 5});
+  table(F, C, four, pairs(shortT), {title: 'Строки и столбцы', fs: 7, minH: 5});
+  /* комнаты, предметы, слова для дефектов — по две пары в строке */
+  const rl = roomList(d), types = [...new Set(rl.map(x => x.t))], items = [...new Set(rl.flatMap(x => RT[x.t].it))];
+  table(F, C, four, pairs(types.map(k => [RT[k].n[L], RT[k].n.ru])), {title: 'Комнаты', fs: 7, minH: 5});
+  table(F, C, four, pairs(items.map(k => [IT[k][L], IT[k].ru])), {title: 'Что проверяют в комнатах', fs: 7, minH: 5});
+  table(F, C, four, pairs(Object.keys(DEF).map(k => [DEF[k][L], DEF[k].ru])), {title: 'Слова для дефектов', fs: 7, minH: 5});
+  /* твои дефекты по-русски */
+  const DF = defects(d), wru = {rep: 'хозяин отремонтирует', ble: 'остаётся, не за твой счёт', abn: 'обычный износ, платит хозяин', mie: 'платишь ты', str: 'спорно'};
+  if (DF.length) table(F, C, [{w: 10, h: '№', al: 'c'}, {w: 38, h: 'Комната'}, {w: 42, h: 'Что'}, {w: 92, h: 'Дефект, фото и что дальше'}],
+    DF.map(x => { const ty = (x.c.d || []).filter(k => DEF[k]).map(k => DEF[k].ru).join(', '), n = String(x.c.n || '').trim();
+      return [String(x.n), roomName(x.r, 'ru'), IT[x.it].ru, [cap(ty) + (n ? (ty ? '; ' : '') + 'в протоколе: «' + n + '»' : ''), x.c.f ? 'фото ' + x.c.f : '', wru[x.c.w] || ''].filter(Boolean).join(' · ')]; }),
+    {title: 'Твои дефекты по-русски', fs: 7.2, minH: 5.4});
+  /* памятка */
+  const tips = ein ? ['Попроси посмотреть протокол сдачи прежнего жильца (OR, ст. 256a).', 'Фотографируй каждый дефект издалека и вблизи, с датой. Отправь фото управляющей по e-mail — так дата останется в письме.',
+      'Подписывай только то, с чем согласна. Копию протокола с подписями обеих сторон забери сразу.', 'Нашла дефект позже — сообщи управляющей письменно, лучше заказным (Einschreiben). Многие управляющие ждут такой список в первые 10–14 дней.']
+    : ['Обычный износ ты не оплачиваешь. За повреждение платишь только остаточную стоимость по таблице сроков службы (Lebensdauertabelle).', 'Не соглашайся платить за спорное. Отметь «?» и впиши номера в оговорку. Подпись под протоколом — не согласие платить.',
+      'Управляющая должна сразу назвать дефекты, за которые отвечаешь ты (OR, ст. 267a). Скрытые дефекты — сразу, как найдёт.', 'Копию протокола забери сразу. Повреждение передай своей страховке ответственности (Privathaftpflicht). Спор — в союз арендаторов или примирительный орган.'];
+  F.need(9 + tips.length * 8); F.y = F.P.sec('Помни', X, F.y + 2, WW);
+  tips.forEach(s => { const ls = SH.wrap(s, false, 8, WW - 5); F.need(ls.length * 3.6 + 2); F.P.rect(X, F.y - 2.2, 1.8, 1.8, C.head, null); ls.forEach(l => { F.P.text(l, X + 5, F.y, 8, false, C.ink); F.y += 3.6; }); F.y += 1.6; });
+  const n = F.pages.length; F.pages.forEach((P, i) => P.text(`Перевод для себя · страница ${i + 1}/${n}`, X, 288.5, 7, false, C.mut));
+  return F.pages;
+}
+/* протокол отдают управляющей и подписывают обе стороны — без водяного знака, как досье и письма (решение 09.10.2026); перевод для себя — со знаком */
+function build(){ const d = D(), pr = sheetsProtocol(d); pr.forEach(pg => { pg.wm = false; }); return pr.concat(d.ru ? sheetsRu(d) : []); }
+
+/* ---------- форма ---------- */
+const $ = id => document.getElementById(id);
+const esc = s => SH.esc(String(s == null ? '' : s));
+const qh = (h, l) => `<button type="button" class="qh" data-help="${h}" aria-label="Подсказка: ${l}" aria-expanded="false">?</button>`;
+const getK = (d, k) => k.split('.').reduce((o, x) => o == null ? o : o[x], d);
+const OPEN = new Set();
+function renderForm(){
+  const d = D(), dis = EX ? 'disabled' : '', L = d.lang, ein = d.mode === 'ein';
+  const inp = (k, l, ph, h, type, im) => `<div class="fl"><span class="lb">${l}${h ? qh(h, l) : ''}</span><input type="${type || 'text'}" data-k="${k}" value="${esc(getK(d, k))}" placeholder="${esc(ph || '')}"${im ? ` inputmode="${im}"` : ''} ${dis}></div>`;
+  const sel = (k, l, list, h) => `<div class="fl"><span class="lb">${l}${h ? qh(h, l) : ''}</span><select data-k="${k}" ${dis}>${list.map(([a, b]) => `<option value="${a}"${String(a) === String(getK(d, k)) ? ' selected' : ''}>${esc(b)}</option>`).join('')}</select></div>`;
+  const chk = (k, l, h) => `<label class="tog"><input type="checkbox" data-k="${k}" ${getK(d, k) ? 'checked' : ''} ${dis}> ${l}${h ? qh(h, l) : ''}</label>`;
+  const cnt = n => Array.from({length: n + 1}, (_, i) => [String(i), String(i)]);
+  const kcnt = [['', '—']].concat(Array.from({length: 11}, (_, i) => [String(i), String(i)]));
+  const rl = roomList(d), DF = defects(d), num = {}; DF.forEach(x => num[x.r.id + '|' + x.it] = x.n);
+  const rooms = rl.map(r => { const its = RT[r.t].it, done = its.filter(it => cell(d, r.id, it).s).length, nd = its.filter(it => cell(d, r.id, it).s === 'def').length;
+    return `<details class="room" data-r="${r.id}"${OPEN.has(r.id) ? ' open' : ''}><summary><span>${esc(roomName(r, 'ru'))}</span><i class="loc">${esc(roomName(r, L))}</i><small>${done} из ${its.length}${nd ? ` · дефектов: ${nd}` : ''}</small></summary>
+      ${its.map(it => { const c = cell(d, r.id, it), p = `st.${r.id}.${it}`;
+        return `<div class="it"><div class="itl"><b>${esc(IT[it].ru)}</b><small>${esc(IT[it][L])}</small></div>
+        <div class="seg st">${[['ok', 'В порядке'], ['def', 'Дефект'], ['na', 'Нет']].map(([v, l]) => `<button type="button" class="s-${v}" data-st="${v}" data-r="${r.id}" data-i="${it}" aria-pressed="${c.s === v}" ${dis}>${l}</button>`).join('')}</div>
+        ${c.s === 'def' ? `<div class="defx"><span class="lb">Что не так${num[r.id + '|' + it] ? ` · в протоколе № ${num[r.id + '|' + it]}` : ''}</span><div class="chips">${Object.keys(DEF).map(k => `<label><input type="checkbox" data-dk="${r.id}|${it}|${k}" ${(c.d || []).includes(k) ? 'checked' : ''} ${dis}><span>${esc(DEF[k].ru)}</span></label>`).join('')}</div>
+          ${inp(p + '.n', 'Где и какого размера (на языке протокола)', {de: 'Parkett vor der Balkontür, ca. 20 cm', fr: 'devant la porte du balcon, env. 20 cm', it: 'davanti alla porta del balcone, ca. 20 cm', en: 'in front of the balcony door, approx. 20 cm'}[L], 'note')}
+          <div class="g2">${inp(p + '.f', 'Номер фото', '3–4', 'foto')}${sel(p + '.w', ein ? 'Что дальше' : 'За чей счёт', W_OPT[d.mode], ein ? 'w_ein' : 'w_aus')}</div></div>` : ''}</div>`; }).join('')}
+      <div class="acts"><button type="button" class="btn ghost sm" data-allok="${r.id}" ${dis}>Остальное в этой комнате — в порядке</button></div></details>`; }).join('');
+  const keysTx = {haus: 'Подъезд и квартира', brief: 'Почтовый ящик', keller: 'Подвал, чердак', garage: 'Гараж, ворота', badge: 'Бейдж, пульт', andere: 'Другие: прачечная, велосипедная'};
+  const metTx = {strom: 'Электричество', gas: 'Газ', wasser: 'Вода', waerme: 'Тепло (приборы на батареях)'};
+  const cleanSel = ein ? [['', 'не выбрано — заполню на месте'], ['yes', 'квартира чистая'], ['no', 'квартира не убрана']] : [['', 'не выбрано — заполню на месте'], ['ok', 'уборку приняли'], ['nach', 'нужно доубрать']];
+  $('fields').innerHTML = `
+  <section class="sec"><h2>Протокол для${qh('mode', 'въезд или выезд')}</h2><div class="seg mode">${[['ein', 'Въезд — приёмка (Einzug)'], ['aus', 'Выезд — сдача (Auszug)']].map(([v, l]) => `<button type="button" data-mode="${v}" aria-pressed="${d.mode === v}">${l}</button>`).join('')}</div>
+    <p class="hint">${ein ? 'Записываешь всё, что уже повреждено. Что не записано сейчас, при выезде могут поставить тебе в счёт.' : 'Отмечаешь, что изменилось с въезда и за что платишь ты. Обычный износ не оплачивается.'}</p></section>
+  <section class="sec"><h2>Квартира</h2>${inp('addr', 'Адрес квартиры', {de: 'Seestrasse 10, 8002 Zürich', fr: 'Avenue de la Gare 10, 1003 Lausanne', it: 'Via Nassa 10, 6900 Lugano', en: 'Seestrasse 10, 8002 Zürich'}[L])}
+    ${inp('apt', 'Номер квартиры и этаж', '2. OG rechts, Nr. 5', 'apt')}
+    ${sel('rooms', 'Комнат', ['1', '1.5', '2', '2.5', '3', '3.5', '4', '4.5', '5', '5.5', '6', '6.5'].map(x => [x, x.replace('.', ',')]), 'rooms')}
+    <div class="g2">${inp('date', 'Дата осмотра', '', '', 'date')}${inp('time', 'Время', '', '', 'time')}</div>
+    ${inp('mdate', ein ? 'Начало аренды по договору' : 'Конец аренды по договору', '', 'mdate', 'date')}</section>
+  <section class="sec"><h2>Кто участвует</h2>${inp('vm', 'Арендодатель или управляющая', {de: 'Muster Immobilien AG', fr: 'Régie Exemple SA', it: 'Amministrazione Esempio SA', en: 'Example Property Ltd'}[L])}
+    ${inp('vmp', 'Кто пришёл от управляющей', 'Frau S. Muster')}
+    ${inp('m1', 'Арендатор', 'Olena Kovalenko')}${inp('m2', 'Второй арендатор, если подписываете вдвоём', 'Andrii Kovalenko')}
+    ${ein ? inp('prev', 'Прежний жилец (если знаешь)', 'Familie Beispiel', 'prev') : inp('newaddr', 'Твой новый адрес', 'Langstrasse 5, 8004 Zürich', 'newaddr') + inp('nach', 'Новый жилец (если знаешь)', '', 'nach')}</section>
+  <section class="sec"><h2>Какие помещения есть${qh('rlist', 'помещения')}</h2>
+    <div class="g2">${sel('nsz', 'Спален', cnt(5))}${sel('nkz', 'Детских', cnt(3))}</div>
+    <div class="goals">${['kor', 'wz', 'ku', 'bad', 'du', 'wc', 'bal', 'kel', 'est', 'gar'].map(k => `<label><input type="checkbox" data-k="r.${k}" ${d.r[k] ? 'checked' : ''} ${dis}><span>${esc(RT[k].n.ru)}<small>${esc(RT[k].n[L])}</small></span></label>`).join('')}</div></section>
+  <section class="sec"><h2>Осмотр по комнатам${qh('state', 'в порядке или дефект')}</h2><p class="hint">Открой комнату и отметь каждую строку. Пустые строки останутся в протоколе с клеточками — их можно заполнить от руки на месте.</p>
+    <div class="rooms">${rooms || '<p class="hint">Отметь выше, какие помещения есть.</p>'}</div></section>
+  <section class="sec"><h2>Ключи${qh('keys', 'ключи')}</h2>
+    ${KT.map(k => `<div class="krow"><b>${esc(keysTx[k])}<small>${esc(TX[L].kt[k])}</small></b><div class="kg">${inp('keys.' + k + '.nr', 'Номер на ключе', k === 'haus' ? 'KABA 12-07' : '')}${sel('keys.' + k + '.in', 'Выдали', kcnt)}${sel('keys.' + k + '.out', 'Вернула', kcnt)}</div></div>`).join('')}
+    <p class="hint">«—» — клеточка останется пустой, впишешь число от руки.</p></section>
+  <section class="sec"><h2>Счётчики${qh('meters', 'счётчики')}</h2>
+    ${MT.map(k => `<div class="krow">${chk('met.' + k + '.on', esc(metTx[k]))}${d.met[k].on ? `<div class="kg">${inp('met.' + k + '.nr', 'Номер счётчика', '')}${inp('met.' + k + '.st', 'Показание', '', '', 'text', 'decimal')}${inp('met.' + k + '.dt', 'Дата', '', '', 'date')}</div>` : ''}</div>`).join('')}
+    <p class="hint">Дата пустая — в протокол пойдёт дата осмотра.</p></section>
+  <section class="sec"><h2>Уборка${qh('clean', 'уборка')}</h2>${sel('clean', ein ? 'Квартиру передали чистой?' : 'Уборку приняли?', cleanSel)}${!ein && d.clean === 'nach' ? inp('cleanBis', 'Доубрать до', '', '', 'date') : ''}</section>
+  <section class="sec"><h2>Замечания и подписи</h2>
+    <div class="fl"><span class="lb">Твои замечания (на языке протокола)${qh('rem', 'замечания')}</span><textarea data-k="rem" rows="3" placeholder="${esc({de: 'Rückgabeprotokoll der Vormieterschaft eingesehen. Fotos per E-Mail an die Verwaltung gesendet.', fr: 'État des lieux de sortie du locataire précédent consulté. Photos envoyées par e-mail à la gérance.', it: 'Verbale di riconsegna dell’inquilino precedente visionato. Foto inviate per e-mail all’amministrazione.', en: 'Previous tenant’s move-out report inspected. Photos sent to the agent by email.'}[L])}" ${dis}>${esc(d.rem)}</textarea></div>
+    ${chk('vorb', 'Подписываю с оговоркой (Vorbehalt)', 'vorb')}
+    ${d.vorb ? inp('vorbtx', 'По каким пунктам', vorbText(Object.assign({}, d, {vorbtx: ''})) || 'Nr. 3, 5') : ''}
+    ${inp('ort', 'Место подписания', {de: 'Zürich', fr: 'Lausanne', it: 'Lugano', en: 'Zürich'}[L])}</section>`;
+}
+let UI, tmr;
+const setK = (k, v) => { const ks = k.split('.'); let o = S; ks.slice(0, -1).forEach(x => { if (o[x] == null || typeof o[x] !== 'object') o[x] = {}; o = o[x]; }); o[ks[ks.length - 1]] = v; };
+const ensure = (rid, it) => { S.st[rid] = S.st[rid] || {}; S.st[rid][it] = Object.assign({s: '', d: [], n: '', f: '', w: ''}, S.st[rid][it]); return S.st[rid][it]; };
+
+/* пример */
+const EXN = {
+  de: ['neben der Garderobe', 'Parkett vor der Balkontür, ca. 20 cm', '6 Löcher über dem Bett', '1 Backblech', 'Fettfilter', 'Platte neben der Wanne', '', 'Rückgabeprotokoll der Vormieterschaft eingesehen. Fotos vom {d} per E-Mail an die Verwaltung gesendet.', 'Fotos vom {d} per E-Mail an die Verwaltung gesendet.'],
+  fr: ['à côté du vestiaire', 'parquet devant la porte du balcon, env. 20 cm', '6 trous au-dessus du lit', '1 plaque de four', 'filtres à graisse', 'carreau à côté de la baignoire', '', 'État des lieux de sortie du locataire précédent consulté. Photos du {d} envoyées par e-mail à la gérance.', 'Photos du {d} envoyées par e-mail à la gérance.'],
+  it: ['accanto al guardaroba', 'parquet davanti alla porta del balcone, ca. 20 cm', '6 fori sopra il letto', '1 teglia', 'filtri antigrasso', 'piastrella accanto alla vasca', '', 'Verbale di riconsegna dell’inquilino precedente visionato. Foto del {d} inviate per e-mail all’amministrazione.', 'Foto del {d} inviate per e-mail all’amministrazione.'],
+  en: ['next to the coat rack', 'parquet in front of the balcony door, approx. 20 cm', '6 holes above the bed', '1 baking tray', 'grease filters', 'tile next to the bathtub', '', 'Previous tenant’s move-out report inspected. Photos of {d} sent to the managing agent by email.', 'Photos of {d} sent to the managing agent by email.']};
+const EXP = {de: {addr: 'Seestrasse 10, 8002 Zürich', vm: 'Muster Immobilien AG', ort: 'Zürich', kt: 'ZH', newaddr: 'Langstrasse 5, 8004 Zürich', prev: 'Familie Beispiel'},
+  fr: {addr: 'Avenue de la Gare 10, 1003 Lausanne', vm: 'Régie Exemple SA', ort: 'Lausanne', kt: 'VD', newaddr: 'Rue de Genève 5, 1004 Lausanne', prev: 'Famille Exemple'},
+  it: {addr: 'Via Nassa 10, 6900 Lugano', vm: 'Amministrazione Esempio SA', ort: 'Lugano', kt: 'TI', newaddr: 'Via Cantonale 5, 6900 Lugano', prev: 'Famiglia Esempio'},
+  en: {addr: 'Seestrasse 10, 8002 Zürich', vm: 'Example Property Ltd', ort: 'Zürich', kt: 'ZH', newaddr: 'Langstrasse 5, 8004 Zürich', prev: 'Example family'}};
+const EXD = (lg, mode) => { const ein = mode === 'ein', x = EXP[lg] || EXP.de, nt = EXN[lg] || EXN.de, date = ein ? '2026-12-01' : '2026-09-30';
+  const b = Object.assign(blank(), {lang: lg, ru: S.ru, bw: S.bw, mode, kt: x.kt, addr: x.addr, apt: {de: '2. OG rechts, Nr. 5', fr: '2e étage droite, n° 5', it: '2° piano destra, n. 5', en: '2nd floor right, no. 5'}[lg], rooms: '3.5', date, time: '10:00', mdate: date,
+    vm: x.vm, vmp: {de: 'Frau S. Muster', fr: 'Mme S. Martin', it: 'sig.ra S. Rossi', en: 'Ms S. Muster'}[lg], m1: 'Olena Kovalenko', m2: 'Andrii Kovalenko', prev: ein ? x.prev : '', newaddr: ein ? '' : x.newaddr, nach: '',
+    nsz: 2, nkz: 0, r: {kor: true, wz: true, ku: true, bad: true, du: false, wc: false, bal: true, kel: true, est: false, gar: false}, ort: x.ort,
+    clean: ein ? 'yes' : 'ok', rem: nt[ein ? 7 : 8].replace('{d}', dmy(date)), vorb: !ein, vorbtx: ''});
+  const st = {}; roomList(b).forEach(r => { st[r.id] = {}; RT[r.t].it.forEach(it => st[r.id][it] = {s: 'ok', d: [], n: '', f: '', w: ''}); });
+  const dd = (rid, it, d, n, f, we, wa) => st[rid][it] = {s: 'def', d, n, f, w: ein ? we : wa};
+  dd('kor', 'wand', ['fleck'], nt[0], '1', 'ble', 'abn'); dd('wz', 'boden', ['kratz'], nt[1], '3–4', 'ble', 'abn'); dd('sz1', 'wand', ['loch'], nt[2], '7', 'rep', 'str');
+  dd('ku', 'ofen', ['fehlt'], nt[3], '11', 'rep', 'mie'); dd('ku', 'dunst', ['schmutz'], nt[4], '12', 'rep', 'mie'); dd('bad', 'platten', ['riss'], nt[5], '15', 'ble', 'abn'); dd('bad', 'lavabo', ['kalk'], nt[6], '16', 'ble', 'abn');
+  st.bal.mark = {s: 'na', d: [], n: '', f: '', w: ''};
+  b.st = st;
+  b.keys = {haus: {nr: 'KABA 12-07', in: '3', out: ein ? '' : '3'}, brief: {nr: '5', in: '2', out: ein ? '' : '2'}, keller: {nr: 'K 5', in: '1', out: ein ? '' : '1'}, garage: keyRow(), badge: {nr: {de: 'Waschküche', fr: 'buanderie', it: 'lavanderia', en: 'laundry room'}[lg], in: '1', out: ein ? '' : '1'}, andere: keyRow()};
+  b.met = {strom: {on: true, nr: '10 482 377', st: ein ? '18 204 kWh' : '17 655 kWh', dt: ''}, gas: meterRow(false), wasser: {on: true, nr: 'W 5512', st: ein ? '412,6 m³' : '398,1 m³', dt: ''}, waerme: {on: true, nr: 'HKV 0447', st: ein ? '312' : '1 236', dt: ''}};
+  return b; };
+function fill(){ const d = D(); $('kt').value = d.kt || ''; $('lang').value = d.lang; $('ru').checked = !!d.ru; $('bw').checked = !!d.bw;
+  renderForm(); $('exbar').hidden = !EX; $('exOn').hidden = !!EX; if (UI) UI.render(); }
+const KN = window.KANTONY || {};
+$('kt').innerHTML = '<option value="">Выбери кантон</option>' + Object.keys(KN).sort((a, b) => KN[a].n.localeCompare(KN[b].n, 'ru')).map(k => `<option value="${k}">${esc(KN[k].n)}</option>`).join('');
+$('kt').addEventListener('change', e => { S.kt = e.target.value; S.lang = langOf(S.kt); try { localStorage.setItem('svoiludi.kanton', S.kt); } catch (x) {} if (EX) EX = Object.assign(EXD(S.lang, EX.mode), {kt: S.kt}); save(); fill(); });
+$('lang').addEventListener('change', e => { S.lang = e.target.value; if (EX) EX = EXD(S.lang, EX.mode); save(); fill(); });
+['ru', 'bw'].forEach(k => $(k).addEventListener('change', e => { S[k] = e.target.checked; if (EX) EX[k] = S[k]; save(); fill(); }));
+document.addEventListener('input', e => { const x = e.target; if (EX || !x.dataset || !x.dataset.k || x.type === 'checkbox' || x.tagName === 'SELECT' || x.type === 'date' || x.type === 'time') return; setK(x.dataset.k, x.value); save(); clearTimeout(tmr); tmr = setTimeout(() => UI && UI.render(), 450); });
+document.addEventListener('change', e => { const x = e.target; if (EX || !$('fields').contains(x)) return;
+  if (x.dataset.dk) { const [rid, it, k] = x.dataset.dk.split('|'), c = ensure(rid, it); c.d = x.checked ? [...new Set((c.d || []).concat(k))] : (c.d || []).filter(v => v !== k); save(); fill(); return; }
+  if (!x.dataset.k) return;
+  if (x.dataset.k.startsWith('st.')) { const [, rid, it] = x.dataset.k.split('.'); ensure(rid, it); }
+  const v = x.type === 'checkbox' ? x.checked : (x.dataset.k === 'nsz' || x.dataset.k === 'nkz') ? +x.value : x.value; setK(x.dataset.k, v); save();
+  /* текст и даты не меняют форму — не перерисовываем её, чтобы не терять следующий клик */
+  if (x.tagName === 'SELECT' || x.type === 'checkbox') fill(); else if (UI) UI.render(); });
+$('fields').addEventListener('click', e => { const b = e.target.closest('button'); if (!b || EX) return;
+  if (b.dataset.mode) { S.mode = b.dataset.mode; save(); fill(); return; }
+  if (b.dataset.st) { const c = ensure(b.dataset.r, b.dataset.i); c.s = c.s === b.dataset.st ? '' : b.dataset.st; save(); fill(); return; }
+  if (b.dataset.allok) { const r = roomList(S).find(x => x.id === b.dataset.allok); if (r) RT[r.t].it.forEach(it => { const c = ensure(r.id, it); if (!c.s) c.s = 'ok'; }); save(); fill(); } });
+/* в примере режим тоже переключается */
+$('fields').addEventListener('click', e => { const b = e.target.closest('button[data-mode]'); if (b && EX) { EX = EXD(EX.lang, b.dataset.mode); fill(); } }, true);
+$('fields').addEventListener('toggle', e => { const el = e.target; if (el.matches && el.matches('details.room')) { if (el.open) OPEN.add(el.dataset.r); else OPEN.delete(el.dataset.r); } }, true);
+$('exOn').addEventListener('click', () => { EX = EXD(S.lang, S.mode); fill(); window.scrollTo({top: $('exbar').offsetTop - 12, behavior: 'smooth'}); });
+$('exOff').addEventListener('click', () => { EX = null; fill(); });
+if (/[?&]example\b/.test(location.search)) EX = EXD(S.lang, S.mode);
+const FN = {de: ['Uebergabeprotokoll-Einzug', 'Rueckgabeprotokoll-Auszug'], fr: ['Etat-des-lieux-entree', 'Etat-des-lieux-sortie'], it: ['Verbale-consegna-entrata', 'Verbale-riconsegna-uscita'], en: ['Handover-report-move-in', 'Handover-report-move-out']};
+UI = SH.mount({build, lang: () => D().lang, title: 'Übergabeprotokoll', name: () => (FN[D().lang] || FN.de)[D().mode === 'ein' ? 0 : 1] + (D().date ? '-' + D().date : '')});
+fill();
+
+</script>
+<script src="/assets/help.js"></script>
+<script src="/assets/backup.js"></script>
+<script src="/assets/pdffan.js" defer></script>
+<script src="/assets/share.js" defer></script>
+<script src="/assets/samesite.js"></script>
+<!--i18n--><style>#langbar.langbar{position:fixed;bottom:14px;right:14px;z-index:60;display:flex;gap:2px;background:rgba(255,255,255,.92);border:1px solid rgba(0,0,0,.08);border-radius:999px;padding:3px;font:600 12px Manrope,system-ui,sans-serif;box-shadow:0 2px 8px rgba(0,0,0,.08)}#langbar.langbar a{color:#5d554d;padding:5px 9px;border-radius:999px;text-decoration:none;font:inherit;display:inline-block}#langbar.langbar a[aria-current="true"]{background:#2f2924;color:#fff}@media print{.langbar{display:none!important}}</style><div class="langbar" id="langbar" role="navigation" aria-label="Мова / Язык"><a href="/instrumenty/protokol-kvartiry/" hreflang="ru" data-lang="ru" aria-current="true">RU</a><a href="/uk/instrumenty/protokol-kvartiry/" hreflang="uk" data-lang="uk">UA</a></div><script>(function(){var b=document.getElementById('langbar');if(!b)return;b.addEventListener('click',function(e){var a=e.target.closest('a[data-lang]');if(a){try{localStorage.setItem('svoiludiLang',a.dataset.lang)}catch(x){}a.href=a.getAttribute('href').split('#')[0]+location.hash;}});})();</script><!--i18n--></body>
+</html>

@@ -1,0 +1,907 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<link rel="icon" href="/fav/favicon.svg" type="image/svg+xml"><link rel="icon" href="/fav/icon-32.png" sizes="32x32"><link rel="apple-touch-icon" href="/fav/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/fonts.css">
+<meta name="description" content="Бесплатные объявления для жителей дома в Швейцарии на немецком, французском, итальянском или английском: «Wir feiern» (праздник), «Handwerker im Haus» (ремонт и шум), «Umzug» (переезд), «Neu im Haus» (новые соседи), записки «Paket für Sie» (посылка у соседа), плакат «Wichtige Kontakte» для подъезда и прачечной (Verwaltung, Hauswart, Pikettdienst, 117, 118, 144, 112), «Gefunden / Verloren», таблички на почтовый ящик и звонок своего размера и наклейка «Bitte keine Werbung». С переводом на русский для себя и памяткой хорошего соседа. PDF.">
+<link rel="canonical" href="https://svoiludi.ch/instrumenty/obyavleniya-sosedyam/">
+<meta property="og:type" content="website"><meta property="og:locale" content="ru_RU"><meta property="og:site_name" content="Свои люди в Швейцарии">
+<meta property="og:title" content="Объявления для соседей и таблички на почтовый ящик · бесплатно"><meta property="og:description" content="Праздник, ремонт, переезд, новые соседи, посылка, важные контакты дома, находка — вежливо, на языке кантона, плюс таблички на ящик и звонок.">
+<meta property="og:url" content="https://svoiludi.ch/instrumenty/obyavleniya-sosedyam/"><meta property="og:image" content="https://svoiludi.ch/instrumenty/obyavleniya-sosedyam/og-image.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="robots" content="noindex, nofollow">
+<title>Объявления для соседей и таблички: праздник, ремонт, переезд, имя на почтовый ящик</title>
+<style>
+/* Объявления для соседей и таблички: праздник, ремонт, переезд, имя на почтовый ящик (08.10.2026): анкета слева, живые листы справа, движок assets/shema.js. */
+:root{
+  --bg:#F4EDE3; --paper:#FFFCF8; --ink:#2F2924; --muted:#7A6E62; --line:#E5D9C9; --soft:#EFE5D7;
+  --brown:#6E4F3C; --mustard:#B98324; --mustard-soft:#F3E3C2; --sage:#4F5E3E; --sage-soft:#E3E8D6; --red:#A0523D;
+  --display:"Forum","Georgia",serif; --sans:"Manrope","Segoe UI",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#221D19; --paper:#2C2621; --ink:#F1E9DF; --muted:#B4A796; --line:#3E362F; --soft:#352E28;
+  --brown:#E1C2A6; --mustard:#E2B45C; --mustard-soft:#3D321F; --sage:#B4BF97; --sage-soft:#2E3226; --red:#E39A85; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#221D19; --paper:#2C2621; --ink:#F1E9DF; --muted:#B4A796; --line:#3E362F; --soft:#352E28;
+  --brown:#E1C2A6; --mustard:#E2B45C; --mustard-soft:#3D321F; --sage:#B4BF97; --sage-soft:#2E3226; --red:#E39A85; color-scheme:dark}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--ink);font:15px/1.55 var(--sans);margin:0}
+.wrap{max-width:1280px;margin:0 auto;padding-inline:16px;padding-block:28px 48px;display:flex;flex-direction:column;gap:24px}
+.eyebrow{font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+h1{font-family:var(--display);font-weight:400;font-size:clamp(2.4rem,6vw,3.6rem);line-height:1;margin:4px 0 10px;text-wrap:balance}
+h2{font-family:var(--display);font-weight:400;font-size:1.55rem;margin:0;text-wrap:balance}
+h3{font-family:var(--display);font-weight:400;font-size:1.22rem;line-height:1.2;margin:0}
+.lead{max-width:66ch;color:var(--muted);margin:0}
+.jump{font-weight:700;color:var(--brown);text-underline-offset:4px}
+.privnote{margin-top:14px;background:var(--sage-soft);border-radius:16px;padding:12px 16px;font-size:.9rem;max-width:90ch}
+.status{font-size:.86rem;color:var(--muted);min-height:1.3em}
+.btn{font:inherit;font-weight:700;font-size:.9rem;border:0;border-radius:999px;padding:10px 18px;cursor:pointer;color:#fff;text-decoration:none;display:inline-flex;align-items:center;gap:6px;background:#6E4F3C;box-shadow:0 8px 18px -8px rgba(110,79,60,.6)}
+.btn.gold{background:#B98324;box-shadow:0 8px 18px -8px rgba(185,131,36,.7)}
+.btn.free{background:#4F5E3E;box-shadow:0 8px 18px -8px rgba(79,94,62,.6)}
+.btn.ghost{background:transparent;color:var(--brown);border:1.5px solid var(--line);box-shadow:none}
+.btn.sm{font-size:.82rem;padding:7px 13px}
+.btn[disabled]{background:var(--soft);color:var(--muted);box-shadow:none;cursor:wait}
+select,input[type=text],input[type=tel],input[type=number],input[type=date],textarea{font:inherit;font-size:.95rem;color:var(--ink);background:var(--paper);border:1.5px solid var(--line);border-radius:12px;padding:9px 12px;width:100%;min-width:0}
+select:focus-visible,input:focus-visible,button:focus-visible,textarea:focus-visible,a:focus-visible{outline:2px solid var(--mustard);outline-offset:2px}
+::placeholder{color:color-mix(in srgb,var(--muted) 70%,transparent)}
+.setup{background:var(--paper);border:1.5px solid var(--line);border-radius:22px;padding:16px 18px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px 18px;align-items:start}
+@media (max-width:1000px){.setup{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.setup{grid-template-columns:1fr}}
+.fl{display:flex;flex-direction:column;gap:6px;min-width:0}
+.fl>.lb{font-size:.8rem;font-weight:700;color:var(--muted);display:flex;align-items:center}
+.seg{display:flex;flex-wrap:wrap;gap:6px}
+.seg button{font:inherit;font-size:.84rem;font-weight:700;border:1.5px solid var(--line);background:var(--paper);color:var(--ink);border-radius:999px;padding:6px 12px;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--sage);border-color:var(--sage);color:#fff}
+.acts{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.exbar{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;background:var(--mustard-soft);border-radius:16px;padding:10px 14px;font-size:.9rem;font-weight:600}
+.work{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:22px;align-items:start}
+@media (max-width:1040px){.work{grid-template-columns:1fr}}
+.form{display:flex;flex-direction:column;gap:14px;min-width:0}
+.sec{background:var(--paper);border:1.5px solid var(--line);border-radius:20px;padding:16px 18px;display:flex;flex-direction:column;gap:12px}
+.sec>h2{font-size:1.3rem;display:flex;align-items:center}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:560px){.g2{grid-template-columns:1fr}}
+.hint{font-size:.84rem;color:var(--muted);margin:0}
+.chk{display:flex;flex-direction:column;gap:8px}
+.chk label{display:flex;gap:10px;align-items:baseline;font-size:.92rem;cursor:pointer}
+.chk input{flex:none;width:18px;height:18px;accent-color:var(--sage);transform:translateY(3px)}
+.chk b{white-space:nowrap}
+.chk small{color:var(--muted)}
+.tog{display:flex;gap:10px;align-items:center;font-size:.92rem;cursor:pointer}
+.tog input{width:18px;height:18px;accent-color:var(--sage)}
+.sheetbox{position:sticky;top:12px;display:flex;flex-direction:column;gap:10px}
+@media (max-width:1040px){.sheetbox{position:static}}
+.sheet{background:#fff;border-radius:6px;box-shadow:0 18px 40px -22px rgba(47,41,36,.45);overflow:hidden}
+.sheet svg{display:block;width:100%;height:auto}
+.imp{background:var(--paper);border:1.5px dashed color-mix(in srgb,var(--sage) 55%,transparent);border-radius:16px;padding:14px 18px;font-size:.88rem;max-width:90ch;margin:0}
+.imp b{color:var(--sage)}
+.guide{display:flex;flex-direction:column;gap:14px;max-width:90ch}
+.guide ul{margin:0;padding-left:20px}
+.guide li{margin:4px 0}
+.credit{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:.8rem;color:var(--muted)}
+.credit a{color:var(--muted)}
+.qh{font:700 .72rem/1 var(--sans);width:20px;height:20px;border-radius:50%;border:1.5px solid var(--line);background:var(--paper);color:var(--brown);cursor:pointer;margin-left:6px;padding:0;flex:none}
+.sheets{display:flex;flex-direction:column;gap:14px}
+.goals{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+@media (max-width:560px){.goals{grid-template-columns:1fr}}
+.goals label{display:flex;gap:10px;align-items:flex-start;background:var(--bg);border:1.5px solid var(--line);border-radius:14px;padding:9px 12px;cursor:pointer;font-size:.92rem}
+.goals input{width:18px;height:18px;accent-color:var(--sage);flex:none;margin-top:2px}
+.goals small{display:block;color:var(--muted)}
+.steps{display:flex;flex-direction:column;gap:8px}
+.steps details{background:var(--paper);border:1.5px solid var(--line);border-radius:16px;padding:10px 16px}
+.steps summary{cursor:pointer;font-weight:700;display:flex;gap:10px;align-items:baseline}
+.steps summary small{font-weight:600;color:var(--muted);margin-left:auto;text-align:right}
+.steps details p,.steps details ul{margin:8px 0 2px;font-size:.93rem}
+.steps details ul{padding-left:20px}
+</style>
+<!--pwa--><link rel="manifest" href="/fav/site.webmanifest"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Свои люди"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="theme-color" content="#4F5E3E"><style id="pa-tiles">/* верхнее меню на телефоне и планшете: прямоугольные плитки с закруглением в два ряда, иконки ставит pwa-app.js (08.10.2026) */html header.top nav[aria-label] a .pa-ni{display:none}@media (max-width:1100px){html header.top .page{flex-wrap:wrap;row-gap:8px}html header.top nav[aria-label]{order:3;width:100%;display:grid!important;grid-template-columns:repeat(var(--pa-cols,3),minmax(0,1fr));gap:8px;overflow:visible;padding:4px 0 12px;margin:0}html header.top nav[aria-label] a{display:flex!important;flex-direction:column;align-items:center;justify-content:center;gap:5px;min-height:62px;padding:9px 6px;border-radius:14px;background:var(--paper,#FFFCF8);border:1px solid color-mix(in srgb,var(--sage,#66704F) 30%,transparent);box-shadow:0 3px 10px -6px rgba(60,70,40,.45);color:var(--ink,#2F2924)!important;font:600 .78rem/1.18 var(--body,system-ui);text-align:center;white-space:normal;text-decoration:none;-webkit-tap-highlight-color:transparent}html header.top nav[aria-label] a::after{content:none!important}html header.top nav[aria-label] a.pa-dup{display:none!important}html header.top nav[aria-label] a .pa-ni{display:block;width:22px;height:22px;fill:none;stroke:var(--sage,#66704F);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}html header.top nav[aria-label] a[aria-current="page"]{background:var(--sage,#66704F);border-color:var(--sage,#66704F);color:var(--paper,#FFFCF8)!important;box-shadow:0 4px 12px -6px rgba(60,70,40,.6)}html header.top nav[aria-label] a[aria-current="page"] .pa-ni{stroke:var(--paper,#FFFCF8)}html header.top nav[aria-label] a:active{transform:scale(.97)}}/* компьютер — как на сайте Ирины (решение 09.10.2026): на широком экране одна строка «логотип · меню · поиск · кнопка», пункты простым текстом, текущий — тёмным и жирным; на узком ноутбуке (1101–1359 px) меню переносится отдельной строкой под логотип, без переносов внутри пунктов */@media (min-width:1101px){html header.top .page{flex-wrap:wrap;row-gap:0;column-gap:14px}html header.top .mark{flex:none}html header.top .mark b,html header.top .mark small{white-space:nowrap}html header.top .page>.ss-btn{margin-left:auto}html header.top nav[aria-label]{order:3;flex:1 0 100%;display:flex!important;flex-wrap:nowrap;justify-content:center;gap:4px;overflow:visible;margin:8px 0 -2px;padding:6px 0 0;border-top:1px solid color-mix(in srgb,var(--sage,#66704F) 22%,transparent);font-size:.92rem}html header.top nav[aria-label] a{white-space:nowrap;padding:6px 10px;color:var(--muted,#6B635A);font-weight:500;text-decoration:none}html header.top nav[aria-label] a:hover{color:var(--ink,#2F2924)}html header.top nav[aria-label] a[aria-current="page"]{color:var(--ink,#2F2924)!important;font-weight:700}}@media (min-width:1360px){html header.top .page{flex-wrap:nowrap;max-width:1340px}html header.top nav[aria-label]{order:0;flex:0 1 auto;margin:0 auto;padding:0;border-top:0;gap:2px}html header.top nav[aria-label] a{padding:6px 9px}html header.top .page>.ss-btn{margin-left:0}html header.top .page>.ss-btn span{display:none}}/* кнопки сайта — прямоугольные с закруглением, как плитки меню (решение Ирины 08.10.2026); значки-метки (образец, теги, «?») остаются круглыми */:is(.navcta,.btn,.shr-btn,.pl-act a,.pl-act button,.qa,.more,.listbar button,.leaflet-popup-content button,.calmenu a,.calmenu button,.go-free,.find,.confirm,.monthics,.addb,.mbtn,.example,.viewsw,#langbar.langbar,.pa-go,.pa-x,.pa-foot){border-radius:12px!important}:is(.viewsw button,.seg button,.chips button,#langbar.langbar a,.cal-nav button){border-radius:9px!important}</style><script src="/assets/pwa-app.js" defer></script><!--pwa--><!--i18n--><link rel="alternate" hreflang="ru" href="https://svoiludi.ch/instrumenty/obyavleniya-sosedyam/"><link rel="alternate" hreflang="uk" href="https://svoiludi.ch/uk/instrumenty/obyavleniya-sosedyam/"><script>(function(){try{if(localStorage.getItem('svoiludiLang')==='uk'&&!/[?&]lang=ru/.test(location.search))location.replace('/uk/instrumenty/obyavleniya-sosedyam/'+location.search+location.hash);}catch(e){}})();</script><!--i18n--></head>
+<body>
+<style>.form input:not([type=checkbox]):not([type=radio]),.form select,.form textarea{width:100%}.form textarea{min-height:64px;font:inherit;font-size:.95rem;border:1.5px solid var(--line);border-radius:12px;padding:9px 12px;background:var(--paper);color:var(--ink)}
+.goals{grid-template-columns:1fr}
+.goals label b{display:block}
+.chk.two{display:grid;grid-template-columns:1fr;gap:8px}
+.wi{display:inline-block;width:1.2em;height:1.1em;vertical-align:-.17em;margin:0 .28em 0 .05em;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 22'%3E%3Cpath d='M10.27 2.5a2 2 0 0 1 3.46 0l8.66 15a2 2 0 0 1-1.73 3H3.34a2 2 0 0 1-1.73-3z' fill='%23FDECEA' stroke='%23D32F2F' stroke-width='1.8' stroke-linejoin='round'/%3E%3Cpath d='M12 7.8v5.2' stroke='%23D32F2F' stroke-width='2.4' stroke-linecap='round'/%3E%3Ccircle cx='12' cy='16.5' r='1.35' fill='%23D32F2F'/%3E%3C/svg%3E") center/contain no-repeat}
+.sec .hint a{color:var(--brown)}
+.which{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px;max-width:90ch}
+.which li{background:var(--paper);border:1.5px solid var(--line);border-radius:16px;padding:10px 14px;font-size:.92rem}
+.which b{display:block}
+.sz{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+</style>
+<div class="wrap">
+  <header>
+    <p style="margin:0 0 14px"><a class="jump" href="https://svoiludi.ch/instrumenty/">← Все полезные инструменты · Свои люди в Швейцарии</a></p>
+    <div class="eyebrow">Дом и соседи · распечатки</div>
+    <h1>Объявления для соседей и таблички: праздник, ремонт, переезд, имя на почтовый ящик</h1>
+    <p class="lead">В швейцарском доме о празднике, ремонте и переезде принято предупреждать соседей запиской в подъезде, а имя на почтовом ящике и звонке должно быть видно, иначе почта не дойдёт. Отметь, что тебе нужно, выбери дату и время — получишь вежливые листы на языке кантона, записки «посылка у меня», плакат с важными контактами дома и таблички на ящик своего размера. Для себя — перевод на русский и памятка хорошего соседа. PDF бесплатно.</p>
+    <p style="margin:12px 0 0"><a class="jump" href="#kakie">Какие листы бывают нужны в доме →</a></p>
+    <div class="privnote"><b>Твои данные только у тебя.</b> Имена, телефон и всё, что ты выбираешь, хранятся только в твоём браузере на этом устройстве, PDF собирается прямо на устройстве. Регистрация не нужна.</div>
+    <div data-fan="obyavleniya-sosedyam"></div>
+  </header>
+  <div class="setup">
+    <div class="fl"><span class="lb">Кантон<button type="button" class="qh" data-help="kt" aria-label="Подсказка: кантон" aria-expanded="false">?</button></span><select id="kt"></select></div>
+    <div class="fl"><span class="lb">Язык листов<button type="button" class="qh" data-help="lang" aria-label="Подсказка: язык листов" aria-expanded="false">?</button></span><select id="lang"><option value="de">Deutsch</option><option value="fr">Français</option><option value="it">Italiano</option><option value="en">English</option></select></div>
+    <div class="fl"><span class="lb">Для себя</span><label class="tog"><input type="checkbox" id="tr"> Перевод для себя на русский<button type="button" class="qh" data-help="tr" aria-label="Подсказка: перевод для себя" aria-expanded="false">?</button></label></div>
+    <div class="fl"><span class="lb">Печать</span><label class="tog"><input type="checkbox" id="bw"> Без цвета, для дешёвой печати</label></div>
+  </div>
+  <div class="exbar" id="exbar" hidden><span>Это пример. Так будут выглядеть твои листы.</span><button type="button" class="btn sm" id="exOff">Вернуться к моим данным</button></div>
+  <div class="work">
+    <div class="form" id="fields">
+      <section class="sec"><h2>Что напечатать</h2>
+        <p class="hint">Отметь один или несколько листов. Каждый появится справа, а ниже откроются вопросы только для него.</p>
+        <div class="goals" id="types"></div>
+      </section>
+
+      <section class="sec" id="s-me"><h2>Кто подписывает</h2>
+        <div class="fl"><span class="lb">Подпись от имени<button type="button" class="qh" data-help="who" aria-label="Подсказка: подпись" aria-expanded="false">?</button></span><select data-k="who"><option value="we">Мы (семья, пара, соседи по квартире)</option><option value="me">Я</option></select></div>
+        <div class="fl"><span class="lb">Имена для подписи (как на звонке)</span><input type="text" data-k="names" data-ph="names" autocomplete="off"></div>
+        <div class="fl"><span class="lb">Этаж<button type="button" class="qh" data-help="floor" aria-label="Подсказка: этаж" aria-expanded="false">?</button></span><select data-k="floor" class="flsel"></select></div>
+        <div class="fl"><span class="lb">Квартира на этаже</span><select data-k="side" class="sdsel"></select></div>
+        <div class="fl"><span class="lb">Номер квартиры (если есть)</span><input type="text" data-k="apno" placeholder="5" autocomplete="off"></div>
+        <div class="fl"><span class="lb">Телефон (по желанию)<button type="button" class="qh" data-help="tel" aria-label="Подсказка: телефон" aria-expanded="false">?</button></span><input type="text" data-k="tel" inputmode="tel" placeholder="079 000 00 00" autocomplete="off"></div>
+      </section>
+
+      <section class="sec" data-t="party"><h2>Мы празднуем</h2>
+        <div class="fl"><span class="lb">Какой праздник</span><select data-k="p_occ"><option value="bday">День рождения</option><option value="kids">Детский день рождения</option><option value="wed">Свадьба</option><option value="house">Новоселье</option><option value="fam">Семейный праздник</option><option value="friends">Встреча с друзьями</option></select></div>
+        <div class="fl"><span class="lb">Где</span><select data-k="p_where"><option value="flat">В квартире</option><option value="balc">На балконе</option><option value="garden">В саду</option><option value="room">В общей комнате дома</option></select></div>
+        <div class="fl"><span class="lb">Дата</span><input type="date" data-k="p_date"></div>
+        <div class="fl"><span class="lb">С</span><select data-k="p_from" class="tsel"></select></div>
+        <div class="fl"><span class="lb">До<button type="button" class="qh" data-help="quiet" aria-label="Подсказка: ночная тишина" aria-expanded="false">?</button></span><select data-k="p_to" class="tsel"></select></div>
+        <div class="fl"><span class="lb">Пригласить соседей</span><select data-k="p_inv"><option value="none">Не приглашать</option><option value="floor">Пригласить соседей по этажу на бокал</option><option value="all">Пригласить всех соседей на бокал</option></select></div>
+        <p class="hint"><i class="wi"></i>Записка не отменяет ночную тишину. После 22:00 в большинстве домов и общин шуметь нельзя, и соседи всё равно вправе позвонить в полицию (117). Повесь лист за 3–7 дней до праздника.</p>
+      </section>
+
+      <section class="sec" data-t="reno"><h2>Ремонт и шум от работ</h2>
+        <div class="fl"><span class="lb">Кто заказал работы</span><select data-k="r_who"><option value="we">Мы сами (с разрешения управляющей)</option><option value="verw">Управляющая или владелец</option></select></div>
+        <div class="fl"><span class="lb">Что будут делать</span><div class="chk two">
+          <label><input type="checkbox" data-k="r_drill"> Сверлить и долбить (самое шумное)</label>
+          <label><input type="checkbox" data-k="r_bath"> Ремонт ванной</label>
+          <label><input type="checkbox" data-k="r_kitchen"> Ремонт кухни</label>
+          <label><input type="checkbox" data-k="r_floor"> Замена пола</label>
+          <label><input type="checkbox" data-k="r_paint"> Покраска стен</label>
+          <label><input type="checkbox" data-k="r_win"> Замена окон</label>
+          <label><input type="checkbox" data-k="r_elec"> Электрика</label>
+          <label><input type="checkbox" data-k="r_plumb"> Сантехника</label></div></div>
+        <div class="fl"><span class="lb">Другое (на языке листа, по желанию)</span><input type="text" data-k="r_other" data-ph="r_other" autocomplete="off"></div>
+        <div class="fl"><span class="lb">Первый день</span><input type="date" data-k="r_d1"></div>
+        <div class="fl"><span class="lb">Последний день</span><input type="date" data-k="r_d2"></div>
+        <div class="fl"><span class="lb">Дни недели</span><select data-k="r_days"><option value="mf">С понедельника по пятницу</option><option value="ms">С понедельника по субботу</option></select></div>
+        <div class="fl"><span class="lb">Работают с<button type="button" class="qh" data-help="reno" aria-label="Подсказка: часы работ" aria-expanded="false">?</button></span><select data-k="r_h1" class="tsel"></select></div>
+        <div class="fl"><span class="lb">До</span><select data-k="r_h2" class="tsel"></select></div>
+        <label class="tog"><input type="checkbox" data-k="r_pause"> Перерыв на обед 12:00–13:00</label>
+        <label class="tog"><input type="checkbox" data-k="r_dust"> Пообещать убирать пыль на лестнице</label>
+        <div class="fl"><span class="lb">Фирма (по желанию)</span><input type="text" data-k="r_firm" data-ph="firm" autocomplete="off"></div>
+        <div class="fl"><span class="lb">Телефон фирмы (по желанию)</span><input type="text" data-k="r_ftel" inputmode="tel" placeholder="044 000 00 00" autocomplete="off"></div>
+        <p class="hint"><i class="wi"></i>Сверлить, ломать стены, менять кухню или ванную можно только с письменного разрешения управляющей, иначе при выезде придётся всё вернуть за свой счёт.</p>
+      </section>
+
+      <section class="sec" data-t="move"><h2>Переезд</h2>
+        <div class="fl"><span class="lb">Что</span><select data-k="m_dir"><option value="in">Въезжаем в дом</option><option value="out">Выезжаем из дома</option></select></div>
+        <div class="fl"><span class="lb">Дата</span><input type="date" data-k="m_date"></div>
+        <div class="fl"><span class="lb">С</span><select data-k="m_h1" class="tsel"></select></div>
+        <div class="fl"><span class="lb">До</span><select data-k="m_h2" class="tsel"></select></div>
+        <label class="tog"><input type="checkbox" data-k="m_lift"> Лифт будет часто занят</label>
+        <label class="tog"><input type="checkbox" data-k="m_entr"> Вход и лестница будут заняты вещами</label>
+        <div class="fl"><span class="lb">Где встанет фургон<button type="button" class="qh" data-help="van" aria-label="Подсказка: фургон" aria-expanded="false">?</button></span><select data-k="m_van"><option value="">Не писать</option><option value="front">Перед домом</option><option value="visitor">На гостевой парковке</option><option value="drive">На въезде</option><option value="yard">Во дворе</option></select></div>
+        <div class="fl"><span class="lb">Фирма по переезду (по желанию)</span><input type="text" data-k="m_firm" data-ph="mfirm" autocomplete="off"></div>
+        <p class="hint"><i class="wi"></i>В воскресенье и в праздники переезжать во многих общинах нельзя. Не забудь отметиться в общине: выписаться на старом месте и прописаться на новом в течение 14 дней — подробно в теме <a href="https://svoiludi.ch/shveycariya/gemeinde/">«Переезд и регистрация в общине»</a>, список дел — в инструменте «<a href="https://svoiludi.ch/instrumenty/pereezd-spisok/">Переезд: кого известить и до какого числа</a>».</p>
+      </section>
+
+      <section class="sec" data-t="neu"><h2>Мы новые соседи</h2>
+        <div class="fl"><span class="lb">Живём здесь с (по желанию)</span><input type="date" data-k="n_since"></div>
+        <div class="fl"><span class="lb">Откуда (на языке листа, по желанию)</span><input type="text" data-k="n_origin" data-ph="origin" autocomplete="off"></div>
+        <div class="fl"><span class="lb">Дети (имена и возраст, на языке листа, по желанию)</span><input type="text" data-k="n_kids" data-ph="kids" autocomplete="off"></div>
+        <div class="fl"><span class="lb">Животное</span><select data-k="n_pet"><option value="">Нет</option><option value="cat">Кошка</option><option value="dog">Собака</option></select></div>
+        <label class="tog"><input type="checkbox" data-k="n_coffee"> Пригласить на кофе</label>
+        <label class="tog"><input type="checkbox" data-k="n_tel"> Написать телефон</label>
+        <p class="hint">Повесь лист в подъезде или положи записку в почтовые ящики соседей по этажу. Ещё лучше — позвони в двери и представься лично.</p>
+      </section>
+
+      <section class="sec" data-t="paket"><h2>Посылка у меня</h2>
+        <div class="fl"><span class="lb">Какая записка<button type="button" class="qh" data-help="paket" aria-label="Подсказка: записки про посылки" aria-expanded="false">?</button></span><select data-k="k_mode"><option value="held">Посылка для соседа у меня</option><option value="drop">Курьеру: оставьте посылку у соседа</option><option value="accept">Я охотно приму посылки соседей</option></select></div>
+        <div class="fl" data-km="held"><span class="lb">Для кого (имя соседа)</span><input type="text" data-k="k_rec" data-ph="rec" autocomplete="off"></div>
+        <div class="fl" data-km="held"><span class="lb">Кто принёс</span><select data-k="k_cour"><option value="">Не писать</option><option value="Post">Почта (Die Post / La Poste)</option><option value="DHL">DHL</option><option value="DPD">DPD</option><option value="UPS">UPS</option><option value="Planzer">Planzer</option></select></div>
+        <div class="fl" data-km="held"><span class="lb">Когда принесли</span><input type="date" data-k="k_date"></div>
+        <div class="fl" data-km="held"><span class="lb">Можно забрать</span><select data-k="k_time" class="tsel" data-any="1"></select></div>
+        <div class="fl" data-km="drop"><span class="lb">Имя соседа, у которого оставить</span><input type="text" data-k="k_nb" data-ph="nb" autocomplete="off"></div>
+        <div class="fl" data-km="drop"><span class="lb">Этаж соседа</span><select data-k="k_nbfloor" class="flsel"></select></div>
+        <div class="fl" data-km="drop"><span class="lb">Квартира соседа на этаже</span><select data-k="k_nbside" class="sdsel"></select></div>
+        <p class="hint">На листе четыре записки размером A6: разрежь по пунктиру и положи в почтовый ящик соседа или приклей на дверь. <i class="wi"></i>Записку «оставьте у соседа» вешай только с согласия соседа.</p>
+      </section>
+
+      <section class="sec" data-t="kont"><h2>Важные контакты дома</h2>
+        <p class="hint">Пустые строки на плакат не попадут. Номера экстренных служб стоят всегда.</p>
+        <div class="fl"><span class="lb">Адрес дома (по желанию)</span><input type="text" data-k="c_house" data-ph="house" autocomplete="off"></div>
+        <div class="fl"><span class="lb">Управляющая (Verwaltung): название<button type="button" class="qh" data-help="verw" aria-label="Подсказка: управляющая" aria-expanded="false">?</button></span><input type="text" data-k="c_vname" data-ph="vname" autocomplete="off"></div>
+        <div class="fl"><span class="lb">Телефон управляющей</span><input type="text" data-k="c_vtel" inputmode="tel" placeholder="044 000 00 00" autocomplete="off"></div>
+        <div class="fl"><span class="lb">E-mail управляющей</span><input type="text" data-k="c_vmail" inputmode="email" placeholder="info@verwaltung.ch" autocomplete="off"></div>
+        <div class="fl"><span class="lb">Часы работы управляющей</span><input type="text" data-k="c_vhours" data-ph="hours" autocomplete="off"></div>
+        <div class="fl"><span class="lb">Хаусварт: имя<button type="button" class="qh" data-help="hw" aria-label="Подсказка: хаусварт" aria-expanded="false">?</button></span><input type="text" data-k="c_hname" data-ph="hname" autocomplete="off"></div>
+        <div class="fl"><span class="lb">Телефон хаусварта</span><input type="text" data-k="c_htel" inputmode="tel" placeholder="079 000 00 00" autocomplete="off"></div>
+        <div class="fl"><span class="lb">Дежурный номер управляющей (Pikett)<button type="button" class="qh" data-help="pikett" aria-label="Подсказка: дежурная служба" aria-expanded="false">?</button></span><input type="text" data-k="c_pik" inputmode="tel" placeholder="044 000 00 99" autocomplete="off"></div>
+        <div class="fl"><span class="lb">Авария отопления: фирма</span><input type="text" data-k="c_heat_n" data-ph="heat" autocomplete="off"></div>
+        <div class="fl"><span class="lb">Телефон (отопление)</span><input type="text" data-k="c_heat_t" inputmode="tel" autocomplete="off"></div>
+        <div class="fl"><span class="lb">Вода и сантехника: фирма</span><input type="text" data-k="c_water_n" data-ph="water" autocomplete="off"></div>
+        <div class="fl"><span class="lb">Телефон (вода)</span><input type="text" data-k="c_water_t" inputmode="tel" autocomplete="off"></div>
+        <div class="fl"><span class="lb">Лифт застрял: фирма</span><input type="text" data-k="c_lift_n" data-ph="lift" autocomplete="off"></div>
+        <div class="fl"><span class="lb">Телефон (лифт)<button type="button" class="qh" data-help="lift" aria-label="Подсказка: лифт" aria-expanded="false">?</button></span><input type="text" data-k="c_lift_t" inputmode="tel" autocomplete="off"></div>
+        <div class="fl"><span class="lb">Правила прачечной</span><select data-k="c_wash"><option value="wk">Висят в прачечной</option><option value="ho">Записаны в правилах дома (Hausordnung)</option><option value="link">Ссылка на график или правила</option><option value="">Не писать</option></select></div>
+        <div class="fl" id="linkBox"><span class="lb">Ссылка или где найти</span><input type="text" data-k="c_link" placeholder="www.verwaltung.ch/waschplan" autocomplete="off"></div>
+        <div class="fl"><span class="lb">Вывоз мусора в мешках<button type="button" class="qh" data-help="musor" aria-label="Подсказка: мусор" aria-expanded="false">?</button></span><select data-k="c_trash"><option value="">Не писать</option><option value="1">Понедельник</option><option value="2">Вторник</option><option value="3">Среда</option><option value="4">Четверг</option><option value="5">Пятница</option><option value="6">Суббота</option></select></div>
+        <div class="fl"><span class="lb">Бумага и картон (на языке листа, по желанию)</span><input type="text" data-k="c_paper" data-ph="paper" autocomplete="off"></div>
+        <div class="fl"><span class="lb">Ночная тишина по правилам дома<button type="button" class="qh" data-help="quiet" aria-label="Подсказка: ночная тишина" aria-expanded="false">?</button></span><select data-k="c_quiet"><option value="22-7">22:00–07:00</option><option value="22-6">22:00–06:00</option><option value="21-7">21:00–07:00</option><option value="">Не писать</option></select></div>
+        <label class="tog"><input type="checkbox" data-k="c_noon"> Тишина в обед 12:00–13:00</label>
+      </section>
+
+      <section class="sec" data-t="fund"><h2>Нашла / потеряла</h2>
+        <div class="fl"><span class="lb">Что случилось<button type="button" class="qh" data-help="fund" aria-label="Подсказка: находка" aria-expanded="false">?</button></span><select data-k="f_mode"><option value="found">Я нашла вещь</option><option value="lost">Я потеряла вещь</option></select></div>
+        <div class="fl"><span class="lb">Что</span><select data-k="f_item"><option value="key">Ключ</option><option value="keys">Связка ключей</option><option value="glove">Перчатка</option><option value="glasses">Очки</option><option value="toy">Игрушка</option><option value="clothes">Одежда</option><option value="laundry">Бельё из прачечной</option><option value="wallet">Кошелёк</option><option value="phone">Телефон</option><option value="parcel">Посылка</option><option value="other">Другое</option></select></div>
+        <div class="fl" id="fOther"><span class="lb">Что именно (на языке листа)</span><input type="text" data-k="f_other" data-ph="fother" autocomplete="off"></div>
+        <div class="fl"><span class="lb">Где</span><select data-k="f_where"><option value="stairs">На лестнице</option><option value="laundry">В прачечной</option><option value="lift">В лифте</option><option value="entr">У входа в дом</option><option value="mail">У почтовых ящиков</option><option value="bike">В велокомнате</option><option value="garage">В подземном гараже</option><option value="play">На детской площадке</option><option value="front">Перед домом</option></select></div>
+        <div class="fl"><span class="lb">Когда</span><input type="date" data-k="f_date"></div>
+        <div class="fl"><span class="lb">Приметы (на языке листа, по желанию)</span><input type="text" data-k="f_desc" data-ph="fdesc" autocomplete="off"></div>
+        <div class="fl" data-fm="found"><span class="lb">Где забрать</span><select data-k="f_pick"><option value="me">У нас в квартире</option><option value="hw">У хаусварта</option><option value="fund">В бюро находок общины</option></select></div>
+        <div class="fl" data-fm="lost"><span class="lb">Вознаграждение (по желанию)</span><input type="text" data-k="f_reward" placeholder="CHF 20" autocomplete="off"></div>
+        <p class="hint" data-fm="found">Нашла вещь — не пиши все приметы: пусть хозяин сам её опишет, так вещь точно вернётся к своему. <i class="wi"></i>Если вещь дороже 10 франков и хозяин не нашёлся, о находке нужно сообщить в полицию или бюро находок общины (Fundbüro).</p>
+      </section>
+
+      <section class="sec" data-t="label"><h2>Таблички на ящик и звонок</h2>
+        <div class="fl"><span class="lb">Первая строка (крупно)</span><input type="text" data-k="l_1" placeholder="Kovalenko" autocomplete="off"></div>
+        <div class="fl"><span class="lb">Вторая строка (по желанию)</span><input type="text" data-k="l_2" placeholder="Olena &amp; Andrii" autocomplete="off"></div>
+        <div class="fl"><span class="lb">Размер таблички<button type="button" class="qh" data-help="size" aria-label="Подсказка: размер таблички" aria-expanded="false">?</button></span><select data-k="l_size"><option value="60x17">60 × 17 мм (частый размер на ящике)</option><option value="70x20">70 × 20 мм</option><option value="80x25">80 × 25 мм</option><option value="50x15">50 × 15 мм (звонок)</option><option value="40x12">40 × 12 мм (маленький звонок)</option><option value="100x30">100 × 30 мм</option><option value="custom">Свой размер</option></select></div>
+        <p class="hint">Измерь свою табличку линейкой — окошко на почтовом ящике и у звонка, внутренний размер, в миллиметрах.</p>
+        <div class="sz" id="szBox"><div class="fl"><span class="lb">Ширина, мм</span><input type="number" data-k="l_w" min="20" max="180" step="1" inputmode="numeric"></div><div class="fl"><span class="lb">Высота, мм</span><input type="number" data-k="l_h" min="8" max="80" step="1" inputmode="numeric"></div></div>
+        <div class="fl"><span class="lb">Сколько табличек</span><select data-k="l_n"><option value="4">4</option><option value="8">8</option><option value="12">12</option><option value="16">16</option></select></div>
+        <div class="fl"><span class="lb">Наклейка против рекламы<button type="button" class="qh" data-help="werbung" aria-label="Подсказка: наклейка против рекламы" aria-expanded="false">?</button></span><select data-k="l_ad"><option value="">Не нужна</option><option value="ad">«Bitte keine Werbung»</option><option value="adfree">«Bitte keine Werbung» + «Keine Gratiszeitungen»</option></select></div>
+        <div class="fl" data-ad="1"><span class="lb">Язык наклейки</span><select data-k="l_adlang"><option value="one">Язык листов</option><option value="all">Немецкий, французский и итальянский</option></select></div>
+        <div class="fl" data-ad="1"><span class="lb">Сколько наклеек</span><select data-k="l_adn"><option value="2">2</option><option value="4">4</option><option value="6">6</option></select></div>
+        <p class="hint"><i class="wi"></i>Печатай в масштабе 100 % (не «по размеру страницы»), иначе табличка не войдёт в окошко. Во многих домах таблички заказывает управляющая — спроси хаусварта, можно ли вставить свою.</p>
+      </section>
+
+      <section class="sec" data-t="memo"><h2>Памятка хорошего соседа</h2>
+        <p class="hint">12 советов по-русски из темы <a href="https://svoiludi.ch/shveycariya/pravila-doma/#druzhba">«Тишина, прачечная и правила дома»</a>, у каждого — что он тебе даст. Этот лист для тебя и твоей семьи, в подъезде его не вешают.</p>
+      </section>
+    </div>
+    <div class="sheetbox">
+      <div class="acts"><button type="button" class="btn gold" id="pdf">Скачать PDF</button><button type="button" class="btn ghost sm" id="share" hidden>Отправить</button><button type="button" class="btn ghost sm" id="exOn">Посмотреть на примере</button></div>
+      <div class="sheets" id="sheet" aria-label="Предпросмотр листов"></div>
+      <div class="status" id="status" role="status"></div>
+    </div>
+  </div>
+  <section class="guide" id="kakie" aria-labelledby="kakie-h">
+    <h2 id="kakie-h">Какие листы бывают нужны в доме</h2>
+    <p class="hint">В Швейцарии с соседями чаще общаются записками, чем в чате дома. Вот когда какая пригодится.</p>
+    <ul class="which">
+      <li><b>Праздник.</b> День рождения или новоселье с гостями — за 3–7 дней повесь лист у входа или у лифта. К шуму, о котором знали заранее, относятся спокойнее.</li>
+      <li><b>Ремонт.</b> Сверление, новая ванная или кухня — предупреди соседей, когда и сколько будет шумно и кому звонить. Лист обычно вешают за неделю.</li>
+      <li><b>Переезд.</b> Лифт и вход в этот день заняты, фургон стоит у дома — короткий лист за несколько дней избавит от недовольства.</li>
+      <li><b>Новые соседи.</b> Знакомство после переезда: кто ты, из какой квартиры, как связаться. Так сосед с вопросом придёт к тебе, а не к управляющей.</li>
+      <li><b>Посылка.</b> Приняла посылку соседа — положи ему записку в почтовый ящик. Уезжаешь — повесь курьеру записку, у кого оставить посылку.</li>
+      <li><b>Важные контакты.</b> Плакат для входа или прачечной: управляющая, хаусварт, дежурные номера на случай аварии и экстренные службы. Повесь с согласия хаусварта или управляющей.</li>
+      <li><b>Находка.</b> Ключ на лестнице, перчатка в прачечной — лист у почтовых ящиков вернёт вещь хозяину быстрее всего.</li>
+      <li><b>Таблички.</b> Без имени на почтовом ящике и звонке почта и курьеры не доставят письма. Размер окошка разный, поэтому измерь его сама.</li>
+    </ul>
+  </section>
+  <p class="imp"><b>Важно.</b> Это образец для примера и личного использования, а не официальный документ. Данные нужно уточнять и перепроверять самому, автор не отвечает за достоверность. Часы тишины, правила прачечной и где можно вешать объявления написаны в правилах твоего дома (Hausordnung) и в правилах общины — проверь их. Записка соседям не даёт права шуметь после 22:00. Вешай листы на доску объявлений или с согласия хаусварта и снимай, когда событие прошло. Подробно о правилах дома — в теме <a href="https://svoiludi.ch/shveycariya/pravila-doma/">«Тишина, прачечная и правила дома»</a>, о мусоре — <a href="https://svoiludi.ch/shveycariya/musor/">«Мусор и сортировка»</a>, о съёме квартиры — <a href="https://svoiludi.ch/shveycariya/arenda/">«Аренда жилья»</a>. Если шумят соседи, пригодится «<a href="https://svoiludi.ch/instrumenty/zhurnal-shuma/">Журнал шума для управляющей</a>», что куда выбрасывать и в какие дни — «<a href="https://svoiludi.ch/instrumenty/musor-pamyatka/">Сортировка мусора: что куда</a>», номера на случай беды — «<a href="https://svoiludi.ch/instrumenty/ekstrennye-nomera/">Карточка экстренных номеров и дежурного врача</a>».</p>
+  <div class="share-slot" data-url="https://svoiludi.ch/instrumenty/obyavleniya-sosedyam/" data-lead="Перешли тем, кто устраивает праздник, делает ремонт, переезжает или только въехал. В ссылке нет твоих данных." data-text="Привет! Тут можно бесплатно сделать вежливое объявление для соседей на немецком, французском или итальянском: праздник, ремонт, переезд, новые соседи, посылка, важные контакты дома — и таблички на почтовый ящик своего размера. https://svoiludi.ch/instrumenty/obyavleniya-sosedyam/"></div>
+  <p class="credit"><span>Свои люди в Швейцарии · svoiludi.ch</span><a href="https://svoiludi.ch/privacy/">Политика конфиденциальности</a></p>
+</div>
+
+<script src="/assets/kantony.js"></script>
+<script src="/assets/lib/jspdf.umd.min.js"></script>
+<script src="/assets/shema.js"></script>
+<script>
+window.HELP = {
+  kt: '<p>Кантон, где ты живёшь. От него зависит язык листов: немецкий, французский или итальянский. Кантон запоминается и для других инструментов сайта.</p>',
+  lang: '<p>Листы читают соседи, поэтому они на языке кантона. В двуязычных кантонах (Берн, Фрибур, Вале) и в доме, где много иностранцев, можно выбрать другой язык. Английский понимают не все — лучше язык кантона.</p><p>Поля «на языке листа» (приметы, имена детей, откуда ты) пиши сразу на этом языке, они попадут на лист как есть.</p>',
+  tr: '<p>Отдельный лист с русским переводом всего, что написано на твоих объявлениях, чтобы ты точно знала, что вешаешь. Его не вывешивают, он только для тебя.</p>',
+  who: '<p>«Мы» — если в квартире живёт семья, пара или несколько человек. «Я» — если живёшь одна. От этого зависят слова на листах, например «wir feiern» или «ich feiere».</p>',
+  floor: '<p>В Швейцарии этажи считают иначе. Erdgeschoss (EG, rez-de-chaussée, pianterreno) — это первый этаж, а 1. Obergeschoss (1. OG, 1. Stock, 1er étage) — второй по-нашему.</p><p>Где найти: этаж и номер квартиры написаны в договоре аренды и часто на почтовом ящике.</p>',
+  tel: '<p>Номер, по которому тебе можно позвонить, если шум мешает или вещь нашлась. Не хочешь писать телефон — оставь пустым, тогда соседи позвонят в дверь. Домашний адрес на листах не нужен.</p>',
+  quiet: '<p>Ночная тишина (Nachtruhe) обычно с 22:00 до 6:00 или 7:00, во многих домах ещё в обед с 12:00 до 13:00 и весь день в воскресенье и праздники. Точные часы — в правилах твоего дома (Hausordnung) и в полицейских правилах общины.</p><p><i class="wi"></i>Записка соседям не даёт права шуметь после 22:00. Если шумно, соседи вправе вызвать полицию (117), а за нарушение ночной тишины бывает штраф.</p>',
+  reno: '<p>Шумные работы обычно можно делать в будни примерно с 7:00 или 8:00 до 12:00 и с 13:00 до 18:00 или 19:00. В субботу — короче или нельзя совсем, в воскресенье и праздники — нельзя.</p><p>Где найти точные часы: правила дома (Hausordnung) и полицейские правила общины (Polizeiverordnung) на сайте общины.</p>',
+  van: '<p>Если фургон встанет на улице, а не на территории дома, часто нужно разрешение общины или городской полиции (Umzugsbewilligung, временный знак «стоянка запрещена» для переезда). Его просят заранее, обычно за 1–2 недели. Место во дворе или на гостевой парковке согласуй с управляющей или хаусвартом.</p>',
+  paket: '<p><b>Посылка для соседа у меня</b> — курьер оставил у тебя посылку соседа. Положи записку ему в почтовый ящик.</p><p><b>Курьеру: оставьте посылку у соседа</b> — приклей на свою дверь, когда тебя нет дома. Только если сосед согласен.</p><p><b>Я охотно приму посылки</b> — дружеское предложение соседям, например после переезда.</p>',
+  verw: '<p>Управляющая (Verwaltung, gérance, régie, amministrazione) — фирма, которая от имени владельца сдаёт квартиры и отвечает за дом.</p><p>Где найти: в договоре аренды, на счетах за аренду и обычно на доске у входа.</p>',
+  hw: '<p>Хаусварт (Hauswart, concierge, custode) следит за домом: уборка, прачечная, мусор, мелкий ремонт. Его имя и телефон обычно висят у входа или в прачечной.</p>',
+  pikett: '<p>Дежурная служба (Pikettdienst, service de piquet, servizio di picchetto) — номер на случай аварии вечером, ночью и в выходные: прорвало трубу, нет отопления, застрял лифт.</p><p>Где найти: в правилах дома, на доске у входа, на сайте управляющей, на наклейке в котельной или в лифте.</p><p><i class="wi"></i>Если вызвать мастера самой, когда аварии нет или можно было подождать до утра, счёт могут выставить тебе.</p>',
+  lift: '<p>Номер фирмы, которая обслуживает лифт, обычно написан внутри кабины. Если застряла — нажми кнопку тревоги в лифте, она соединяет с дежурной службой.</p>',
+  musor: '<p>День вывоза мусора в платных мешках (Gebührensack) и бумаги смотри в календаре вывоза своей общины (Abfallkalender). Подробно — в теме <a href="https://svoiludi.ch/shveycariya/musor/">«Мусор и сортировка»</a>.</p>',
+  fund: '<p>Нашла вещь и не знаешь хозяина — повесь объявление. Если вещь явно дороже 10 франков, о находке нужно сообщить в полицию или бюро находок общины (Fundbüro), так требует Гражданский кодекс (ZGB, ст. 720). Если хозяин не найдётся за 5 лет, вещь становится твоей.</p><p>Когда вещь возвращают, нашедший вправе получить разумное вознаграждение (Finderlohn), обычно около 10 % стоимости.</p>',
+  size: '<p>Измерь линейкой окошко для таблички на своём почтовом ящике и у звонка — внутренний размер в миллиметрах. Частые размеры: 60 × 17, 70 × 20 и 80 × 25 мм на ящике, 50 × 15 мм у звонка. Нет нужного — выбери «Свой размер».</p><p>Печатай в масштабе 100 %, лучше на плотной бумаге (160–200 г/м²) или на листе наклеек.</p>',
+  werbung: '<p>Наклейку «Bitte keine Werbung» на почтовом ящике в Швейцарии соблюдают и почта, и разносчики рекламы. Бесплатные газеты (Gratiszeitungen) и официальные листки общины часто приносят всё равно. Не хочешь и газет — выбери вариант с «Keine Gratiszeitungen».</p>'
+};
+const KEY = 'obyavleniyaSosedyam.v1';
+const TYPES = [
+  ['party', 'Мы празднуем', 'Wir feiern · день рождения, новоселье, встреча с друзьями'],
+  ['reno', 'Ремонт и шум от работ', 'Handwerker im Haus · сроки, часы, фирма'],
+  ['move', 'Переезд', 'Umzug · лифт и вход заняты, фургон у дома'],
+  ['neu', 'Мы новые соседи', 'Neu im Haus · знакомство после переезда'],
+  ['paket', 'Посылка у меня', 'Paket für Sie · 4 записки A6 на листе'],
+  ['kont', 'Важные контакты дома', 'Wichtige Kontakte · плакат для входа и прачечной'],
+  ['fund', 'Нашла / потеряла', 'Gefunden · Verloren · ключ, вещь'],
+  ['label', 'Таблички на ящик и звонок', 'Briefkasten- und Klingelschild, «Bitte keine Werbung»'],
+  ['memo', 'Памятка хорошего соседа', '12 советов по-русски, для себя']
+];
+const NOTICE = ['party', 'reno', 'move', 'neu', 'paket', 'kont', 'fund'];
+const LI = {de: 0, fr: 1, it: 2, en: 3, ru: 4};
+const LOC = {de: 'de-CH', fr: 'fr-CH', it: 'it-CH', en: 'en-GB', ru: 'ru-RU'};
+const pick = (arr, lg) => arr[LI[lg]];
+
+/* ---------- даты, время, квартира ---------- */
+const iso = t => t.getFullYear() + '-' + String(t.getMonth() + 1).padStart(2, '0') + '-' + String(t.getDate()).padStart(2, '0');
+const dt = s => new Date(s + 'T12:00:00');
+const plusDays = (s, n) => { const t = dt(s); t.setDate(t.getDate() + n); return iso(t); };
+function nextDow(dow, extraWeeks){ const t = new Date(); t.setHours(12); let k = (dow - t.getDay() + 7) % 7; if (k < 3) k += 7; t.setDate(t.getDate() + k + 7 * (extraWeeks || 0)); return iso(t); }
+const TODAY = iso(new Date());
+const cap = s => s ? s.charAt(0).toUpperCase() + s.slice(1) : s;
+const okDate = s => /^\d{4}-\d{2}-\d{2}$/.test(s || '');
+function dLong(s, lg, wd){ if (!okDate(s)) return '…'; let o = new Intl.DateTimeFormat(LOC[lg], wd === false ? {day: 'numeric', month: 'long', year: 'numeric'} : {weekday: 'long', day: 'numeric', month: 'long', year: 'numeric'}).format(dt(s)); o = o.replace(/\s?г\.$/, ''); return lg === 'fr' || lg === 'it' ? o.replace(/^([^\s,]+), /, '$1 ') : o; }
+const RU_ACC = ['в воскресенье', 'в понедельник', 'во вторник', 'в среду', 'в четверг', 'в пятницу', 'в субботу'];
+const ruOn = s => okDate(s) ? RU_ACC[dt(s).getDay()] + ', ' + dLong(s, 'ru', false) : '…';
+const dNum = s => { if (!okDate(s)) return '…'; const [y, m, d] = s.split('-'); return `${d}.${m}.${y}`; };
+const tm = (t, lg) => !t ? '…' : lg === 'fr' ? t.replace(/^0(\d)/, '$1').replace(':', 'h') : t;
+const mins = t => { const [h, m] = String(t || '0:0').split(':').map(Number); let v = h * 60 + (m || 0); if (v < 360) v += 1440; return v; };
+function range(a, b, lg){ const A = tm(a, lg), B = tm(b, lg); return {de: `${A}–${B} Uhr`, fr: `${A} – ${B}`, it: `dalle ${A} alle ${B}`, en: `${A}–${B}`, ru: `с ${A} до ${B}`}[lg]; }
+const ord = n => n + ({1: 'st', 2: 'nd', 3: 'rd'}[n % 10 > 3 || [11, 12, 13].includes(n % 100) ? 0 : n % 10] || 'th');
+function apt(fl, sd, no, lg){
+  const n = +fl; let name = '', loc = '';
+  const S = {de: {l: 'links', r: 'rechts', m: 'Mitte'}, fr: {l: 'gauche', r: 'droite', m: 'milieu'}, it: {l: 'a sinistra', r: 'a destra', m: 'al centro'}, en: {l: 'left', r: 'right', m: 'middle'}, ru: {l: 'слева', r: 'справа', m: 'посередине'}}[lg][sd] || '';
+  if (lg === 'de') { name = fl === 'EG' ? 'Erdgeschoss' : fl === 'DG' ? 'Dachgeschoss' : n ? n + '. Stock' : ''; if (name && S) name += ' ' + S; loc = name ? 'im ' + name : ''; }
+  if (lg === 'fr') { const f = fl === 'EG' ? 'rez-de-chaussée' : fl === 'DG' ? 'combles' : n ? (n === 1 ? '1er étage' : n + 'e étage') : ''; name = f + (f && S ? ' ' + S : ''); loc = f ? (fl === 'EG' ? 'au rez-de-chaussée' : fl === 'DG' ? 'sous les combles' : 'au ' + f) + (S ? (sd === 'm' ? ' au milieu' : ' à ' + S) : '') : ''; }
+  if (lg === 'it') { const f = fl === 'EG' ? 'pianterreno' : fl === 'DG' ? 'mansarda' : n ? n + '° piano' : ''; name = f + (f && S ? ', ' + S : ''); loc = f ? (fl === 'EG' ? 'al pianterreno' : fl === 'DG' ? 'in mansarda' : 'al ' + f) + (S ? ', ' + S : '') : ''; }
+  if (lg === 'en') { const f = fl === 'EG' ? 'ground floor' : fl === 'DG' ? 'top floor' : n ? ord(n) + ' floor' : ''; name = f + (f && S ? ', ' + S : ''); loc = f ? 'on the ' + name : ''; }
+  if (lg === 'ru') { const f = fl === 'EG' ? 'EG (1-й этаж)' : fl === 'DG' ? 'DG (мансарда)' : n ? `${n}. OG (${n + 1}-й этаж по-нашему)` : ''; name = f + (f && S ? ', ' + S : ''); loc = f ? (fl === 'DG' ? 'в мансарде (DG)' : 'на ' + f) + (S ? ', ' + S : '') : ''; }
+  if (no) { const w = {de: 'Wohnung', fr: 'appartement', it: 'appartamento', en: 'flat', ru: 'кв.'}[lg]; name = name ? name + ', ' + (lg === 'de' ? 'Whg.' : lg === 'ru' ? 'кв.' : lg === 'en' ? 'flat' : 'app.') + ' ' + no : cap(w) + ' ' + no; if (!loc) loc = {de: 'in der Wohnung ' + no, fr: 'dans l’appartement ' + no, it: 'nell’appartamento ' + no, en: 'in flat ' + no, ru: 'в квартире ' + no}[lg]; }
+  return {name, loc};
+}
+const listJoin = (a, lg) => a.length < 2 ? a.join('') : a.slice(0, -1).join(', ') + {de: ' und ', fr: ' et ', it: ' e ', en: ' and ', ru: ' и '}[lg] + a[a.length - 1];
+const LB = {
+  date: ['Datum', 'Date', 'Data', 'Date', 'Дата'], time: ['Zeit', 'Heure', 'Orario', 'Time', 'Время'], where: ['Ort', 'Lieu', 'Luogo', 'Where', 'Где'],
+  period: ['Zeitraum', 'Période', 'Periodo', 'Dates', 'Сроки'], hours: ['Arbeitszeiten', 'Horaires', 'Orari', 'Working hours', 'Часы работ'], works: ['Arbeiten', 'Travaux', 'Lavori', 'Work', 'Работы'],
+  firm: ['Firma', 'Entreprise', 'Ditta', 'Company', 'Фирма'], van: ['Umzugswagen', 'Camion', 'Furgone', 'Removal van', 'Фургон'], mfirm: ['Umzugsfirma', 'Déménageur', 'Ditta di traslochi', 'Removal company', 'Фирма по переезду'],
+  name: ['Name', 'Nom', 'Nome', 'Name', 'Кто'], flat: ['Wohnung', 'Appartement', 'Appartamento', 'Flat', 'Квартира'], tel: ['Telefon', 'Téléphone', 'Telefono', 'Phone', 'Телефон'],
+  when: ['Wann', 'Quand', 'Quando', 'When', 'Когда'], wo: ['Wo', 'Où', 'Dove', 'Where', 'Где'], pick: ['Abzuholen bei', 'À récupérer chez', 'Da ritirare presso', 'Collect from', 'Забрать'],
+  reward: ['Finderlohn', 'Récompense', 'Ricompensa', 'Reward', 'Вознаграждение'], desc: ['Merkmale', 'Signes particuliers', 'Segni particolari', 'Description', 'Приметы'], for: ['Für', 'Pour', 'Per', 'For', 'Для'],
+  greet: ['Liebe Nachbarinnen und Nachbarn', 'Chères voisines, chers voisins', 'Care vicine, cari vicini', 'Dear neighbours', 'Дорогие соседи'],
+  thanks: ['Vielen Dank für Ihr Verständnis!', 'Merci beaucoup de votre compréhension !', 'Grazie mille per la comprensione!', 'Thank you very much for your understanding!', 'Большое спасибо за понимание!']
+};
+const lb = (k, lg) => pick(LB[k], lg);
+const regards = (lg, pl) => ({de: 'Herzliche Grüsse', fr: pl ? 'Avec nos meilleures salutations' : 'Avec mes meilleures salutations', it: 'Cordiali saluti', en: 'Kind regards', ru: 'С сердечным приветом'}[lg]);
+const BLANKN = '________________________';
+function signOf(f, lg){ const pl = f.who !== 'me', A = apt(f.floor, f.side, f.apno, lg); return {regards: regards(lg, pl), names: f.names || BLANKN, apt: A.name, tel: f.tel}; }
+
+/* ---------- тексты листов ---------- */
+const GEN = {};
+GEN.party = (f, lg) => {
+  const pl = f.who !== 'me', A = apt(f.floor, f.side, f.apno, lg), late = mins(f.p_to) > 22 * 60, tel = f.tel, o = f.p_occ, w = f.p_where;
+  const SUB = {bday: ['Geburtstagsfest', 'Fête d’anniversaire', 'Festa di compleanno', 'Birthday party', 'День рождения'], kids: ['Kindergeburtstag', 'Anniversaire d’enfant', 'Festa di compleanno per bambini', 'Children’s birthday party', 'Детский день рождения'],
+    wed: ['Hochzeitsfest', 'Fête de mariage', 'Festa di matrimonio', 'Wedding party', 'Свадьба'], house: ['Einweihungsfest', 'Crémaillère', 'Festa per la casa nuova', 'Housewarming party', 'Новоселье'],
+    fam: ['Familienfest', 'Fête de famille', 'Festa di famiglia', 'Family celebration', 'Семейный праздник'], friends: ['Fest mit Freunden', 'Soirée entre amis', 'Serata tra amici', 'Get-together with friends', 'Встреча с друзьями']};
+  const D = dLong(f.p_date, lg), T = {
+    de: () => { const occ = {bday: 'einen Geburtstag', kids: 'einen Kindergeburtstag', wed: pl ? 'unsere Hochzeit' : 'meine Hochzeit', house: pl ? 'unseren Einzug' : 'meinen Einzug', fam: 'ein Familienfest', friends: 'mit Freunden'}[o],
+      wh = {flat: pl ? 'in unserer Wohnung' : 'in meiner Wohnung', balc: pl ? 'auf unserem Balkon' : 'auf meinem Balkon', garden: 'im Garten', room: 'im Gemeinschaftsraum'}[w];
+      return {head: pl ? 'Wir feiern!' : 'Ich feiere!', wh, p1: `Am ${D}, ${pl ? 'feiern wir' : 'feiere ich'} ${wh} ${occ}.`,
+        p2: late ? `Es kann etwas lauter werden als sonst. Ab 22 Uhr ${pl ? 'achten wir' : 'achte ich'} darauf, dass es ruhiger wird: Fenster zu, Musik leiser.` : `${pl ? 'Wir achten' : 'Ich achte'} darauf, dass es nicht zu laut wird.`,
+        ap: `${pl ? 'Wir bitten' : 'Ich bitte'} Sie schon jetzt um Verständnis für allfälligen Lärm.`,
+        ct: `Sollte es Sie stören, klingeln Sie bitte einfach bei ${pl ? 'uns' : 'mir'}${tel ? ' oder rufen Sie an: ' + tel : ''}.`,
+        inv: {all: 'Sie sind herzlich eingeladen, auf ein Glas vorbeizukommen!', floor: `${pl ? 'Unsere' : 'Meine'} Nachbarinnen und Nachbarn auf dem Stockwerk sind herzlich eingeladen, auf ein Glas vorbeizukommen!`}}; },
+    fr: () => { const occ = {bday: 'une fête d’anniversaire', kids: 'un anniversaire d’enfant', wed: pl ? 'notre fête de mariage' : 'ma fête de mariage', house: pl ? 'notre crémaillère' : 'ma crémaillère', fam: 'une fête de famille', friends: 'une soirée entre amis'}[o],
+      wh = {flat: pl ? 'dans notre appartement' : 'dans mon appartement', balc: pl ? 'sur notre balcon' : 'sur mon balcon', garden: 'dans le jardin', room: 'dans la salle commune'}[w];
+      return {head: 'On fait la fête !', wh, p1: `Le ${D}, ${pl ? 'nous organisons' : 'j’organise'} ${occ} ${wh}.`,
+        p2: late ? `Il se peut que ce soit un peu plus bruyant que d’habitude. Dès 22h00, ${pl ? 'nous veillerons' : 'je veillerai'} à baisser le volume : fenêtres fermées, musique moins forte.` : `${pl ? 'Nous veillerons' : 'Je veillerai'} à ne pas faire trop de bruit.`,
+        ap: `${pl ? 'Nous vous prions' : 'Je vous prie'} d’ores et déjà de ${pl ? 'nous excuser' : 'm’excuser'} pour le dérangement.`,
+        ct: `Si le bruit vous dérange, sonnez simplement chez ${pl ? 'nous' : 'moi'}${tel ? ` ou appelez-${pl ? 'nous' : 'moi'} au ${tel}` : ''}.`,
+        inv: {all: 'Vous êtes cordialement invités à passer prendre un verre !', floor: `${pl ? 'Nos' : 'Mes'} voisines et voisins d’étage sont cordialement invités à passer prendre un verre !`}}; },
+    it: () => { const occ = {bday: 'una festa di compleanno', kids: 'una festa di compleanno per bambini', wed: pl ? 'la nostra festa di matrimonio' : 'la mia festa di matrimonio', house: 'una festa per la casa nuova', fam: 'una festa di famiglia', friends: 'una serata tra amici'}[o],
+      wh = {flat: pl ? 'nel nostro appartamento' : 'nel mio appartamento', balc: pl ? 'sul nostro balcone' : 'sul mio balcone', garden: 'in giardino', room: 'nella sala comune'}[w];
+      return {head: pl ? 'Facciamo festa!' : 'Faccio festa!', wh, p1: `${cap(D)} ${pl ? 'organizziamo' : 'organizzo'} ${occ} ${wh}.`,
+        p2: late ? `Potrebbe esserci un po’ più di rumore del solito. Dalle 22:00 ${pl ? 'faremo' : 'farò'} attenzione ad abbassare il volume: finestre chiuse, musica più bassa.` : `${pl ? 'Faremo' : 'Farò'} attenzione a non fare troppo rumore.`,
+        ap: `${pl ? 'Vi chiediamo' : 'Vi chiedo'} fin d’ora scusa per l’eventuale disturbo.`,
+        ct: `Se il rumore vi disturba, suonate pure da ${pl ? 'noi' : 'me'}${tel ? ` o ${pl ? 'chiamateci' : 'chiamatemi'} al ${tel}` : ''}.`,
+        inv: {all: 'Siete cordialmente invitati a passare per un brindisi!', floor: `I vicini del ${pl ? 'nostro' : 'mio'} piano sono cordialmente invitati a passare per un brindisi!`}}; },
+    en: () => { const occ = {bday: 'a birthday party', kids: 'a children’s birthday party', wed: pl ? 'our wedding party' : 'my wedding party', house: 'a housewarming party', fam: 'a family celebration', friends: 'a get-together with friends'}[o],
+      wh = {flat: pl ? 'in our flat' : 'in my flat', balc: pl ? 'on our balcony' : 'on my balcony', garden: 'in the garden', room: 'in the common room'}[w];
+      return {head: pl ? 'We’re having a party!' : 'I’m having a party!', wh, p1: `On ${D}, ${pl ? 'we are having' : 'I am having'} ${occ} ${wh}.`,
+        p2: late ? `It may be a little louder than usual. From 22:00, ${pl ? 'we' : 'I'} will make sure to keep the noise down: windows closed, music lower.` : `${pl ? 'We' : 'I'} will make sure not to make too much noise.`,
+        ap: `${pl ? 'We apologise' : 'I apologise'} in advance for any disturbance.`,
+        ct: `If the noise bothers you, just ring ${pl ? 'our' : 'my'} bell${tel ? ` or call ${pl ? 'us' : 'me'} on ${tel}` : ''}.`,
+        inv: {all: 'You are warmly invited to drop by for a drink!', floor: `${pl ? 'Our' : 'My'} neighbours on this floor are warmly invited to drop by for a drink!`}}; },
+    ru: () => { const occ = {bday: 'день рождения', kids: 'детский день рождения', wed: pl ? 'нашу свадьбу' : 'свою свадьбу', house: 'новоселье', fam: 'семейный праздник', friends: 'встречу с друзьями'}[o],
+      wh = {flat: pl ? 'у нас в квартире' : 'у себя в квартире', balc: pl ? 'на нашем балконе' : 'на своём балконе', garden: 'в саду', room: 'в общей комнате дома'}[w];
+      return {head: pl ? 'Мы празднуем!' : 'Я праздную!', wh, p1: `${cap(ruOn(f.p_date))} ${pl ? 'мы отмечаем' : 'я отмечаю'} ${occ} ${wh}.`,
+        p2: late ? `Может быть чуть громче обычного. С 22:00 ${pl ? 'мы постараемся' : 'я постараюсь'} шуметь меньше: ${pl ? 'закроем' : 'закрою'} окна и ${pl ? 'сделаем' : 'сделаю'} музыку тише.` : `${pl ? 'Мы постараемся' : 'Я постараюсь'} не шуметь сильно.`,
+        ap: `Заранее ${pl ? 'просим' : 'прошу'} прощения за возможное беспокойство.`,
+        ct: `Если шум мешает, просто позвоните в ${pl ? 'нашу' : 'мою'} дверь${tel ? ' или по телефону ' + tel : ''}.`,
+        inv: {all: `${pl ? 'Приглашаем' : 'Приглашаю'} вас заглянуть на бокал!`, floor: `Соседей по этажу ${pl ? 'приглашаем' : 'приглашаю'} заглянуть на бокал!`}}; }
+  }[lg]();
+  const facts = [[lb('date', lg), cap(lg === 'ru' ? dLong(f.p_date, 'ru') : D)], [lb('time', lg), cap(range(f.p_from, f.p_to, lg))], [lb('where', lg), cap(T.wh) + (w === 'flat' && A.name ? ` (${A.name})` : '')]];
+  return {col: 'pink', deco: 'party', head: T.head, sub: pick(SUB[o], lg), greet: lb('greet', lg), pre: [T.p1, T.p2], facts, post: [T.ap, T.ct], hl: T.inv[f.p_inv] || '', sign: signOf(f, lg)};
+};
+const WORKS = {drill: ['Bohr- und Spitzarbeiten', 'travaux de perçage et de démolition', 'lavori di foratura e demolizione', 'drilling and chiselling', 'сверление и долбёжные работы'],
+  bath: ['Umbau des Badezimmers', 'rénovation de la salle de bains', 'ristrutturazione del bagno', 'bathroom renovation', 'ремонт ванной'], kitchen: ['Küchenumbau', 'rénovation de la cuisine', 'ristrutturazione della cucina', 'kitchen renovation', 'ремонт кухни'],
+  floor: ['Bodenarbeiten', 'travaux de sol', 'lavori ai pavimenti', 'flooring work', 'замена пола'], paint: ['Malerarbeiten', 'travaux de peinture', 'lavori di pittura', 'painting', 'покраска стен'],
+  win: ['Fensterersatz', 'remplacement des fenêtres', 'sostituzione delle finestre', 'window replacement', 'замена окон'], elec: ['Elektroarbeiten', 'travaux d’électricité', 'lavori elettrici', 'electrical work', 'электромонтаж'],
+  plumb: ['Sanitärarbeiten', 'travaux de plomberie', 'lavori idraulici', 'plumbing work', 'сантехнические работы']};
+GEN.reno = (f, lg) => {
+  const pl = f.who !== 'me', A = apt(f.floor, f.side, f.apno, lg), tel = f.tel, ms = f.r_days === 'ms', pz = !!f.r_pause, drill = !!f.r_drill;
+  const ws = Object.keys(WORKS).filter(k => f['r_' + k]).map(k => pick(WORKS[k], lg)); if (f.r_other) ws.push(f.r_other);
+  const works = ws.length ? listJoin(ws, lg) : pick(['Renovationsarbeiten', 'travaux de rénovation', 'lavori di ristrutturazione', 'renovation work', 'ремонт'], lg);
+  const d1 = dLong(f.r_d1, lg, false), d2 = dLong(f.r_d2, lg, false), h1 = tm(f.r_h1, lg), h2 = tm(f.r_h2, lg), verw = f.r_who === 'verw';
+  const T = {
+    de: () => { const fl = `in ${pl ? 'unserer' : 'meiner'} Wohnung${A.name ? ` (${A.name})` : ''}`, days = ms ? 'von Montag bis Samstag' : 'von Montag bis Freitag';
+      return {head: 'Handwerker im Haus', days, p1: verw ? `Vom ${d1} bis ${d2} lässt die Verwaltung ${fl} folgende Arbeiten ausführen: ${works}.` : `Vom ${d1} bis ${d2} ${pl ? 'lassen wir' : 'lasse ich'} ${fl} folgende Arbeiten ausführen: ${works}.`,
+        p2: `Gearbeitet wird ${days} von ${h1} bis ${h2} Uhr${pz ? ', mit Mittagspause von 12 bis 13 Uhr' : ''}. ${drill ? 'Vor allem beim Bohren kann es zeitweise laut werden.' : 'Zeitweise kann es laut werden.'}`,
+        dust: `Im Treppenhaus kann es etwas Staub geben – ${pl ? 'wir sorgen' : 'ich sorge'} dafür, dass täglich gereinigt wird.`,
+        ap: `${pl ? 'Wir danken' : 'Ich danke'} Ihnen für Ihr Verständnis und ${pl ? 'entschuldigen uns' : 'entschuldige mich'} für die Unannehmlichkeiten.`, ct: tel ? `Bei Fragen erreichen Sie ${pl ? 'uns' : 'mich'} unter ${tel}.` : ''}; },
+    fr: () => { const fl = `dans ${pl ? 'notre' : 'mon'} appartement${A.name ? ` (${A.name})` : ''}`, days = ms ? 'du lundi au samedi' : 'du lundi au vendredi';
+      return {head: 'Travaux dans l’immeuble', days, p1: verw ? `Du ${d1} au ${d2}, la gérance fait effectuer les travaux suivants ${fl} : ${works}.` : `Du ${d1} au ${d2}, ${pl ? 'nous faisons' : 'je fais'} effectuer les travaux suivants ${fl} : ${works}.`,
+        p2: `Les travaux auront lieu ${days}, de ${h1} à ${h2}${pz ? ', avec une pause de midi de 12h00 à 13h00' : ''}. ${drill ? 'Le perçage en particulier peut être bruyant par moments.' : 'Il peut y avoir du bruit par moments.'}`,
+        dust: `Il peut y avoir un peu de poussière dans la cage d’escalier : ${pl ? 'nous veillerons' : 'je veillerai'} à ce qu’elle soit nettoyée chaque jour.`,
+        ap: `${pl ? 'Nous vous remercions' : 'Je vous remercie'} de votre compréhension et ${pl ? 'nous nous excusons' : 'je m’excuse'} pour ces désagréments.`, ct: tel ? `Pour toute question, vous pouvez ${pl ? 'nous' : 'me'} joindre au ${tel}.` : ''}; },
+    it: () => { const fl = `nel ${pl ? 'nostro' : 'mio'} appartamento${A.name ? ` (${A.name})` : ''}`, days = ms ? 'dal lunedì al sabato' : 'dal lunedì al venerdì';
+      return {head: 'Lavori in casa', days, p1: verw ? `Dal ${d1} al ${d2} l’amministrazione farà eseguire i seguenti lavori ${fl}: ${works}.` : `Dal ${d1} al ${d2} ${pl ? 'faremo' : 'farò'} eseguire i seguenti lavori ${fl}: ${works}.`,
+        p2: `Si lavorerà ${days} dalle ${h1} alle ${h2}${pz ? ', con pausa pranzo dalle 12:00 alle 13:00' : ''}. ${drill ? 'Soprattutto durante le forature potrà esserci rumore a tratti.' : 'A tratti potrà esserci rumore.'}`,
+        dust: `Nelle scale potrebbe esserci un po’ di polvere: ${pl ? 'ci occuperemo' : 'mi occuperò'} di pulire ogni giorno.`,
+        ap: `${pl ? 'Vi ringraziamo' : 'Vi ringrazio'} per la comprensione e ${pl ? 'ci scusiamo' : 'mi scuso'} per il disagio.`, ct: tel ? `Per domande potete ${pl ? 'contattarci' : 'contattarmi'} al ${tel}.` : ''}; },
+    en: () => { const fl = `in ${pl ? 'our' : 'my'} flat${A.name ? ` (${A.name})` : ''}`, days = ms ? 'Monday to Saturday' : 'Monday to Friday';
+      return {head: 'Building work', days, p1: verw ? `From ${d1} to ${d2}, the property management is having the following work done ${fl}: ${works}.` : `From ${d1} to ${d2}, ${pl ? 'we are' : 'I am'} having the following work done ${fl}: ${works}.`,
+        p2: `Work will take place ${days} from ${h1} to ${h2}${pz ? ', with a lunch break from 12:00 to 13:00' : ''}. ${drill ? 'Drilling in particular may be loud at times.' : 'It may be noisy at times.'}`,
+        dust: `There may be some dust in the stairwell – ${pl ? 'we' : 'I'} will make sure it is cleaned every day.`,
+        ap: `Thank you for your understanding, and ${pl ? 'we' : 'I'} apologise for the inconvenience.`, ct: tel ? `If you have any questions, you can reach ${pl ? 'us' : 'me'} on ${tel}.` : ''}; },
+    ru: () => { const fl = `в ${pl ? 'нашей' : 'моей'} квартире${A.name ? ` (${A.name})` : ''}`, days = ms ? 'с понедельника по субботу' : 'с понедельника по пятницу';
+      return {head: 'Ремонт в доме', days, p1: verw ? `С ${d1} по ${d2} по заказу управляющей ${fl} будут работы: ${works}.` : `С ${d1} по ${d2} ${fl} будут работы: ${works}.`,
+        p2: `Работают ${days} с ${h1} до ${h2}${pz ? ', перерыв на обед с 12:00 до 13:00' : ''}. ${drill ? 'Особенно при сверлении временами будет шумно.' : 'Временами будет шумно.'}`,
+        dust: `На лестнице может быть немного пыли — ${pl ? 'мы позаботимся' : 'я позабочусь'}, чтобы её убирали каждый день.`,
+        ap: `Спасибо за понимание, ${pl ? 'просим' : 'прошу'} прощения за неудобства.`, ct: tel ? `Если есть вопросы, звоните по телефону ${tel}.` : ''}; }
+  }[lg]();
+  const facts = [[lb('period', lg), `${dNum(f.r_d1)} – ${dNum(f.r_d2)}`], [lb('hours', lg), cap(T.days) + ', ' + range(f.r_h1, f.r_h2, lg)], [lb('works', lg), cap(works)]];
+  if (f.r_firm || f.r_ftel) facts.push([lb('firm', lg), [f.r_firm, f.r_ftel].filter(Boolean).join(' · ')]);
+  return {col: 'mustard', head: T.head, sub: `${dNum(f.r_d1)} – ${dNum(f.r_d2)}`, greet: lb('greet', lg), pre: [T.p1, T.p2], facts, post: [f.r_dust ? T.dust : '', T.ap, T.ct].filter(Boolean), hl: '', sign: signOf(f, lg)};
+};
+const VAN = {front: ['vor dem Haus', 'devant l’immeuble', 'davanti alla casa', 'in front of the building', 'перед домом'], visitor: ['auf dem Besucherparkplatz', 'sur une place visiteurs', 'su un posteggio per visitatori', 'in a visitor parking space', 'на гостевой парковке'],
+  drive: ['in der Einfahrt', 'dans l’allée d’accès', 'nel vialetto d’accesso', 'in the driveway', 'на въезде'], yard: ['im Hof', 'dans la cour', 'nel cortile', 'in the courtyard', 'во дворе']};
+GEN.move = (f, lg) => {
+  const pl = f.who !== 'me', A = apt(f.floor, f.side, f.apno, lg), inn = f.m_dir !== 'out', D = dLong(f.m_date, lg), h1 = tm(f.m_h1, lg), h2 = tm(f.m_h2, lg), v = f.m_van ? pick(VAN[f.m_van], lg) : '';
+  const T = {
+    de: {head: 'Umzug', sub: inn ? (pl ? 'Wir ziehen ein' : 'Ich ziehe ein') : (pl ? 'Wir ziehen aus' : 'Ich ziehe aus'),
+      p1: inn ? `Am ${D}, ${pl ? 'ziehen wir' : 'ziehe ich'} ${A.loc ? 'in die Wohnung ' + A.loc : 'hier im Haus'} ein.` : `Am ${D}, ${pl ? 'ziehen wir aus unserer' : 'ziehe ich aus meiner'} Wohnung${A.loc ? ' ' + A.loc : ''} aus.`,
+      t: `Zwischen ${h1} und ${h2} Uhr kann es im Haus etwas unruhiger sein als sonst.`, lift: 'Der Lift wird in dieser Zeit oft besetzt sein.',
+      entr: `Im Treppenhaus und beim Eingang kann es eng werden – ${pl ? 'wir halten' : 'ich halte'} die Wege so gut wie möglich frei.`, van: `Der Umzugswagen steht ${v}.`, ask: 'Bitte lassen Sie diesen Platz am Umzugstag wenn möglich frei.',
+      prot: `${pl ? 'Wir schützen' : 'Ich schütze'} Böden und Wände und ${pl ? 'hinterlassen' : 'hinterlasse'} das Treppenhaus sauber.`, thx: 'Vielen Dank für Ihr Verständnis und Ihre Geduld!', meet: `${pl ? 'Wir freuen uns' : 'Ich freue mich'}, Sie bald kennenzulernen!`},
+    fr: {head: 'Déménagement', sub: inn ? (pl ? 'Nous emménageons' : 'J’emménage') : (pl ? 'Nous déménageons' : 'Je déménage'),
+      p1: inn ? `Le ${D}, ${pl ? 'nous emménageons' : 'j’emménage'} ${A.loc ? 'dans l’appartement ' + A.loc : 'dans l’immeuble'}.` : `Le ${D}, ${pl ? 'nous quittons notre' : 'je quitte mon'} appartement${A.loc ? ' ' + A.loc : ''}.`,
+      t: `Entre ${h1} et ${h2}, il y aura un peu plus de passage que d’habitude dans l’immeuble.`, lift: 'L’ascenseur sera souvent occupé pendant ce temps.',
+      entr: `La cage d’escalier et l’entrée seront parfois encombrées : ${pl ? 'nous ferons notre' : 'je ferai mon'} possible pour laisser le passage libre.`, van: `Le camion de déménagement sera stationné ${v}.`, ask: 'Merci de laisser cette place libre ce jour-là, si possible.',
+      prot: `${pl ? 'Nous protégerons' : 'Je protégerai'} les sols et les murs et ${pl ? 'laisserons' : 'laisserai'} la cage d’escalier propre.`, thx: 'Merci beaucoup de votre compréhension et de votre patience !', meet: `${pl ? 'Nous nous réjouissons' : 'Je me réjouis'} de faire votre connaissance !`},
+    it: {head: 'Trasloco', sub: inn ? (pl ? 'Ci trasferiamo qui' : 'Mi trasferisco qui') : (pl ? 'Lasciamo l’appartamento' : 'Lascio l’appartamento'),
+      p1: inn ? `${cap(D)} ${pl ? 'ci trasferiamo' : 'mi trasferisco'} ${A.loc ? 'nell’appartamento ' + A.loc : 'in questo palazzo'}.` : `${cap(D)} ${pl ? 'lasciamo il nostro' : 'lascio il mio'} appartamento${A.loc ? ' ' + A.loc : ''}.`,
+      t: `Tra le ${h1} e le ${h2} ci sarà un po’ più di movimento del solito in casa.`, lift: 'In quelle ore l’ascensore sarà spesso occupato.',
+      entr: `Nelle scale e all’entrata potrebbe esserci un po’ di ingombro: ${pl ? 'cercheremo' : 'cercherò'} di lasciare libero il passaggio.`, van: `Il furgone del trasloco sarà posteggiato ${v}.`, ask: 'Se possibile, lasciate libero quel posto il giorno del trasloco.',
+      prot: `${pl ? 'Proteggeremo' : 'Proteggerò'} pavimenti e pareti e ${pl ? 'lasceremo' : 'lascerò'} le scale pulite.`, thx: 'Grazie mille per la comprensione e la pazienza!', meet: `${pl ? 'Saremo felici' : 'Sarò felice'} di conoscervi!`},
+    en: {head: 'Moving day', sub: inn ? (pl ? 'We are moving in' : 'I am moving in') : (pl ? 'We are moving out' : 'I am moving out'),
+      p1: inn ? `On ${D}, ${pl ? 'we are' : 'I am'} moving into ${A.loc ? 'the flat ' + A.loc : 'the building'}.` : `On ${D}, ${pl ? 'we are' : 'I am'} moving out of ${pl ? 'our' : 'my'} flat${A.loc ? ' ' + A.loc : ''}.`,
+      t: `Between ${h1} and ${h2}, the building may be a little busier than usual.`, lift: 'The lift will often be in use during this time.',
+      entr: `The stairwell and entrance may be crowded – ${pl ? 'we' : 'I'} will keep the way clear as much as possible.`, van: `The removal van will be parked ${v}.`, ask: 'If possible, please keep this space free on moving day.',
+      prot: `${pl ? 'We' : 'I'} will protect floors and walls and leave the stairwell clean.`, thx: 'Thank you very much for your understanding and patience!', meet: `${pl ? 'We' : 'I'} look forward to meeting you!`},
+    ru: {head: 'Переезд', sub: inn ? (pl ? 'Мы въезжаем' : 'Я въезжаю') : (pl ? 'Мы выезжаем' : 'Я выезжаю'),
+      p1: inn ? `${cap(ruOn(f.m_date))} ${pl ? 'мы въезжаем' : 'я въезжаю'} ${A.loc ? 'в квартиру ' + A.loc : 'в этот дом'}.` : `${cap(ruOn(f.m_date))} ${pl ? 'мы выезжаем' : 'я выезжаю'} из квартиры${A.loc ? ' ' + A.loc : ''}.`,
+      t: `С ${h1} до ${h2} в доме будет суетливее обычного.`, lift: 'Лифт в это время часто будет занят.',
+      entr: `На лестнице и у входа может быть тесно — ${pl ? 'постараемся' : 'постараюсь'} не загораживать проход.`, van: `Фургон будет стоять ${v}.`, ask: 'Если можно, оставьте это место свободным в день переезда.',
+      prot: `${pl ? 'Мы защитим' : 'Я защищу'} пол и стены и ${pl ? 'оставим' : 'оставлю'} лестницу чистой.`, thx: 'Большое спасибо за понимание и терпение!', meet: `${pl ? 'Будем рады' : 'Буду рада'} познакомиться!`}
+  }[lg];
+  const pre = [T.p1, [T.t, f.m_lift ? T.lift : ''].filter(Boolean).join(' ')], post = [];
+  if (f.m_entr) post.push(T.entr); if (f.m_van === 'visitor') post.push(T.ask); post.push(T.prot); post.push(T.thx);
+  const facts = [[lb('date', lg), cap(D)], [lb('time', lg), cap(range(f.m_h1, f.m_h2, lg))]];
+  if (v) facts.push([lb('van', lg), cap(v)]); if (f.m_firm) facts.push([lb('mfirm', lg), f.m_firm]);
+  return {col: 'blue', head: T.head, sub: T.sub, greet: lb('greet', lg), pre, facts, post, hl: inn ? T.meet : '', sign: signOf(f, lg)};
+};
+GEN.neu = (f, lg) => {
+  const pl = f.who !== 'me', A = apt(f.floor, f.side, f.apno, lg), N = f.names || BLANKN, s = okDate(f.n_since) ? f.n_since : '', ds = dLong(s, lg, false), o = f.n_origin, k = f.n_kids, pet = f.n_pet;
+  const T = {
+    de: {head: 'Neu im Haus', sub: pl ? 'Wir stellen uns vor' : 'Ich stelle mich vor',
+      p1: `${pl ? 'Wir sind' : 'Ich bin'} ${N} und ${pl ? 'wohnen' : 'wohne'} ${s ? 'seit dem ' + ds + ' ' : 'neu '}${A.loc || 'hier im Haus'}.`, o: `Ursprünglich ${pl ? 'kommen wir' : 'komme ich'} ${o}.`,
+      k: `Zu ${pl ? 'unserer' : 'meiner'} Familie gehören ${k}. Kinder sind manchmal laut – sagen Sie es ${pl ? 'uns' : 'mir'} bitte direkt, wenn etwas stört.`,
+      pet: {cat: `Ausserdem wohnt ${pl ? 'unsere' : 'meine'} Katze bei ${pl ? 'uns' : 'mir'}.`, dog: `Ausserdem gehört ${pl ? 'unser' : 'mein'} Hund dazu.`},
+      fr: `${pl ? 'Wir freuen uns' : 'Ich freue mich'} auf eine gute Nachbarschaft und darauf, Sie kennenzulernen!`, cof: 'Kommen Sie gerne auf einen Kaffee vorbei – oder klingeln Sie einfach, wenn Sie etwas brauchen.'},
+    fr: {head: pl ? 'Vos nouveaux voisins' : 'Du nouveau dans l’immeuble', sub: pl ? 'Nous nous présentons' : 'Je me présente',
+      p1: s ? `${pl ? 'Nous sommes' : 'Je suis'} ${N} et ${pl ? 'nous habitons' : 'j’habite'} ${A.loc || 'dans l’immeuble'} depuis le ${ds}.` : `${pl ? 'Nous sommes' : 'Je suis'} ${N} et ${pl ? 'nous venons' : 'je viens'} d’emménager ${A.loc || 'dans l’immeuble'}.`,
+      o: `${pl ? 'Nous venons' : 'Je viens'} ${o}.`, k: `${pl ? 'Nos' : 'Mes'} enfants, ${k}, vivent avec ${pl ? 'nous' : 'moi'}. Les enfants font parfois du bruit : n’hésitez pas à ${pl ? 'nous' : 'me'} le dire directement si quelque chose vous dérange.`,
+      pet: {cat: `${pl ? 'Nous avons' : 'J’ai'} aussi un chat.`, dog: `${pl ? 'Nous avons' : 'J’ai'} aussi un chien.`},
+      fr: `${pl ? 'Nous nous réjouissons' : 'Je me réjouis'} de faire votre connaissance et d’entretenir de bons rapports de voisinage !`, cof: 'Passez volontiers boire un café, ou sonnez simplement si vous avez besoin de quelque chose.'},
+    it: {head: pl ? 'Nuovi vicini' : 'Nuovo arrivo nel palazzo', sub: pl ? 'Ci presentiamo' : 'Mi presento',
+      p1: s ? `${pl ? 'Siamo' : 'Sono'} ${N} e ${pl ? 'abitiamo' : 'abito'} ${A.loc || 'in questo palazzo'} dal ${ds}.` : `${pl ? 'Siamo' : 'Sono'} ${N} e da poco ${pl ? 'abitiamo' : 'abito'} ${A.loc || 'in questo palazzo'}.`,
+      o: `${pl ? 'Veniamo' : 'Vengo'} ${o}.`, k: `I ${pl ? 'nostri' : 'miei'} figli sono ${k}. I bambini a volte fanno rumore: se qualcosa vi disturba, ${pl ? 'ditecelo' : 'ditemelo'} pure direttamente.`,
+      pet: {cat: `Con ${pl ? 'noi' : 'me'} vive anche ${pl ? 'il nostro' : 'il mio'} gatto.`, dog: `Anche ${pl ? 'il nostro' : 'il mio'} cane fa parte della famiglia.`},
+      fr: `${pl ? 'Siamo felici' : 'Sono felice'} di conoscervi e speriamo in un buon vicinato!`, cof: 'Passate volentieri per un caffè, o suonate pure se avete bisogno di qualcosa.'},
+    en: {head: pl ? 'New neighbours' : 'New neighbour', sub: pl ? 'Let us introduce ourselves' : 'Let me introduce myself',
+      p1: s ? `${pl ? 'We are' : 'I am'} ${N}, and ${pl ? 'we have' : 'I have'} been living ${A.loc || 'in the building'} since ${ds}.` : `${pl ? 'We are' : 'I am'} ${N}, and ${pl ? 'we have' : 'I have'} just moved in ${A.loc || 'here'}.`,
+      o: `${pl ? 'We are' : 'I am'} originally ${o}.`, k: `${pl ? 'Our' : 'My'} children are ${k}. Children can be noisy sometimes – please tell ${pl ? 'us' : 'me'} directly if anything bothers you.`,
+      pet: {cat: `${pl ? 'Our' : 'My'} cat lives with ${pl ? 'us' : 'me'} too.`, dog: `${pl ? 'Our' : 'My'} dog is part of the family too.`},
+      fr: `${pl ? 'We' : 'I'} look forward to meeting you and to being good neighbours!`, cof: 'Feel free to drop by for a coffee – or just ring the bell if you need anything.'},
+    ru: {head: pl ? 'Мы новые соседи' : 'Новая соседка', sub: 'Давайте знакомиться',
+      p1: s ? `${pl ? 'Мы' : 'Я'} — ${N}, с ${ds} ${pl ? 'живём' : 'живу'} ${A.loc || 'в этом доме'}.` : `${pl ? 'Мы' : 'Я'} — ${N}, недавно ${pl ? 'поселились' : 'поселилась'} ${A.loc || 'в этом доме'}.`,
+      o: `${pl ? 'Мы' : 'Я'} родом «${o}».`, k: `${pl ? 'Наши' : 'Мои'} дети — «${k}». Дети иногда шумят — если что-то мешает, скажите ${pl ? 'нам' : 'мне'} прямо.`,
+      pet: {cat: `У ${pl ? 'нас' : 'меня'} есть кошка.`, dog: `У ${pl ? 'нас' : 'меня'} есть собака.`},
+      fr: `${pl ? 'Будем рады' : 'Буду рада'} познакомиться и жить по-соседски дружно!`, cof: 'Заходите на кофе — или просто позвоните в дверь, если что-то нужно.'}
+  }[lg];
+  const pre = [T.p1, [o ? T.o : '', pet ? T.pet[pet] : ''].filter(Boolean).join(' '), k ? T.k : ''].filter(Boolean);
+  const facts = []; if (A.name) facts.push([lb('flat', lg), A.name]); if (f.n_tel && f.tel) facts.push([lb('tel', lg), f.tel]);
+  const sg = signOf(f, lg); sg.apt = ''; sg.tel = '';
+  return {col: 'green', head: T.head, sub: T.sub, greet: lb('greet', lg), pre, facts, post: [T.fr], hl: f.n_coffee ? T.cof : '', sign: sg};
+};
+GEN.paket = (f, lg) => {
+  const pl = f.who !== 'me', A = apt(f.floor, f.side, f.apno, lg), N = f.names || BLANKN, c = f.k_cour, any = f.k_time === 'any', t = tm(f.k_time, lg), m = f.k_mode;
+  const NB = apt(f.k_nbfloor, f.k_nbside, '', lg).name;
+  const cs = {de: c === 'Post' ? 'der Post' : c, fr: c === 'Post' ? 'La Poste' : c, it: c === 'Post' ? 'la Posta' : c, en: c === 'Post' ? 'Swiss Post' : c, ru: c === 'Post' ? 'почты' : c}[lg];
+  const D = lg === 'ru' ? ruOn(f.k_date) : dLong(f.k_date, lg);
+  const T = {
+    de: {held: {head: 'Ein Paket für Sie', text: [`Am ${D} wurde ${c ? 'von ' + cs + ' ' : ''}ein Paket für Sie bei ${pl ? 'uns' : 'mir'} abgegeben.`, `Sie können es ${any ? 'jederzeit' : 'ab ' + t + ' Uhr'} bei ${pl ? 'uns' : 'mir'} abholen.`]},
+      drop: {head: 'Pakete bitte abgeben bei', greet: 'Liebe Paketbotin, lieber Paketbote', text: [`Wenn ${pl ? 'wir nicht zu Hause sind' : 'ich nicht zu Hause bin'}, geben Sie Pakete bitte bei ${pl ? 'unseren' : 'meinen'} Nachbarn ab:`], thx: 'Vielen Dank!'},
+      accept: {head: pl ? 'Wir nehmen Pakete an' : 'Ich nehme Pakete an', text: [`Sie sind nicht zu Hause, wenn der Kurier kommt? ${pl ? 'Wir nehmen' : 'Ich nehme'} Ihr Paket gerne für Sie entgegen.`]}},
+    fr: {held: {head: 'Un colis pour vous', text: [`Le ${D}, ${c ? cs + ' a déposé' : 'on a déposé'} un colis pour vous chez ${pl ? 'nous' : 'moi'}.`, `Vous pouvez venir le chercher ${any ? 'quand vous voulez' : 'dès ' + t}.`]},
+      drop: {head: 'Pour les colis', greet: 'Chère livreuse, cher livreur', text: [`En cas d’absence, merci de déposer les colis chez ${pl ? 'nos' : 'mes'} voisins :`], thx: 'Merci beaucoup !'},
+      accept: {head: pl ? 'Nous acceptons vos colis' : 'J’accepte vos colis', text: [`Vous n’êtes pas là quand le livreur passe ? ${pl ? 'Nous prenons' : 'Je prends'} volontiers votre colis.`]}},
+    it: {held: {head: 'Un pacco per voi', text: [`${cap(D)} ${c ? cs + ' ha lasciato' : 'è stato lasciato'} un pacco per voi da ${pl ? 'noi' : 'me'}.`, `Potete ritirarlo ${any ? 'quando volete' : 'dalle ' + t}.`]},
+      drop: {head: 'Per i pacchi', greet: 'Gentile corriere', text: [`Se ${pl ? 'non siamo' : 'non sono'} in casa, per favore consegnate i pacchi ai ${pl ? 'nostri' : 'miei'} vicini:`], thx: 'Grazie mille!'},
+      accept: {head: pl ? 'Riceviamo i vostri pacchi' : 'Ricevo i vostri pacchi', text: [`Non siete in casa quando passa il corriere? ${pl ? 'Riceviamo' : 'Ricevo'} volentieri il vostro pacco.`]}},
+    en: {held: {head: 'A parcel for you', text: [`On ${D}, ${c ? cs : 'a courier'} left a parcel for you with ${pl ? 'us' : 'me'}.`, `You can collect it ${any ? 'any time' : 'from ' + t}.`]},
+      drop: {head: 'Parcels', greet: 'Dear delivery driver', text: [`If ${pl ? 'we are' : 'I am'} not at home, please leave parcels with ${pl ? 'our' : 'my'} neighbours:`], thx: 'Thank you!'},
+      accept: {head: pl ? 'We take in parcels' : 'I take in parcels', text: [`Not at home when the courier comes? ${pl ? 'We' : 'I'} will gladly take in your parcel for you.`]}},
+    ru: {held: {head: 'Для вас посылка', text: [`${cap(D)} курьер${c ? ' ' + cs : ''} оставил у ${pl ? 'нас' : 'меня'} посылку для вас.`, `Забрать можно ${any ? 'в любое время' : 'с ' + t}.`]},
+      drop: {head: 'Посылки оставлять у соседей', greet: 'Уважаемый курьер', text: [`Если ${pl ? 'нас' : 'меня'} нет дома, оставьте, пожалуйста, посылку у соседей:`], thx: 'Спасибо!'},
+      accept: {head: pl ? 'Мы примем вашу посылку' : 'Я приму вашу посылку', text: [`Вас нет дома, когда приходит курьер? ${pl ? 'Мы с радостью примем' : 'Я с радостью приму'} посылку за вас.`]}}
+  }[lg][m];
+  const sp = {kind: 'a6', col: 'brown', head: T.head, greet: T.greet || '', text: T.text, rows: [], big: '', small: []};
+  if (m === 'held') { if (f.k_rec) sp.rows.push([lb('for', lg), f.k_rec]); sp.big = N; sp.small = [A.name, f.tel].filter(Boolean); }
+  if (m === 'drop') { sp.big = f.k_nb || BLANKN; sp.small = [NB].filter(Boolean); sp.thx = T.thx + ' ' + (f.names || ''); }
+  if (m === 'accept') { sp.big = N; sp.small = [A.name, f.tel].filter(Boolean); }
+  return sp;
+};
+const WD = (n, lg) => lg === 'ru' ? ['', 'каждый понедельник', 'каждый вторник', 'каждую среду', 'каждый четверг', 'каждую пятницу', 'каждую субботу'][n] : pick(['jeden ', 'chaque ', 'ogni ', 'every ', ''], lg) + new Intl.DateTimeFormat(LOC[lg], {weekday: 'long'}).format(dt(plusDays('2026-10-04', n)));
+GEN.kont = (f, lg) => {
+  const E = [['117', ['Polizei', 'Police', 'Polizia', 'Police', 'Полиция']], ['118', ['Feuerwehr', 'Pompiers', 'Pompieri', 'Fire brigade', 'Пожарные']], ['144', ['Sanität', 'Ambulance', 'Ambulanza', 'Ambulance', 'Скорая помощь']],
+    ['112', ['Euro-Notruf', 'Urgence européenne', 'Emergenza europea', 'European emergency', 'Единый номер']], ['145', ['Vergiftung · Tox Info', 'Intoxication · Tox Info', 'Intossicazione · Tox Info', 'Poisoning · Tox Info', 'Отравление · Tox Info']]];
+  const cards = [], R = (lab, val, big) => [lab, val, !!big];
+  const vr = [f.c_vname ? R('', f.c_vname) : null, f.c_vtel ? R('', f.c_vtel, 1) : null, f.c_vmail ? R('', f.c_vmail) : null, f.c_vhours ? R('', f.c_vhours) : null].filter(Boolean);
+  if (vr.length) cards.push({t: pick(['Verwaltung', 'Gérance', 'Amministrazione', 'Property management', 'Управляющая (Verwaltung)'], lg), rows: vr});
+  const hr = [f.c_hname ? R('', f.c_hname) : null, f.c_htel ? R('', f.c_htel, 1) : null].filter(Boolean);
+  if (hr.length) cards.push({t: pick(['Hauswart', 'Concierge', 'Custode', 'Caretaker', 'Хаусварт'], lg), rows: hr});
+  const pk = [];
+  if (f.c_pik) pk.push(R(pick(['Verwaltung', 'Gérance', 'Amministrazione', 'Management', 'Управляющая'], lg), f.c_pik, 1));
+  [['heat', ['Heizung', 'Chauffage', 'Riscaldamento', 'Heating', 'Отопление']], ['water', ['Wasser / Sanitär', 'Eau / sanitaire', 'Acqua / sanitari', 'Water / plumbing', 'Вода / сантехника']], ['lift', ['Lift', 'Ascenseur', 'Ascensore', 'Lift', 'Лифт']]].forEach(([k, l]) => {
+    if (f['c_' + k + '_n'] || f['c_' + k + '_t']) pk.push(R(pick(l, lg) + (f['c_' + k + '_n'] ? ' · ' + f['c_' + k + '_n'] : ''), f['c_' + k + '_t'] || '—', 1)); });
+  if (pk.length) cards.push({t: pick(['Pikettdienst · Notfälle ausserhalb der Bürozeiten', 'Service de piquet · urgences hors des heures de bureau', 'Servizio di picchetto · urgenze fuori orario', 'On-call service · emergencies out of hours', 'Дежурная служба · аварии в нерабочее время'], lg), rows: pk, red: true});
+  if (f.c_wash) { const w = {wk: ['Die Waschküchenordnung hängt in der Waschküche.', 'Le règlement de la buanderie est affiché à la buanderie.', 'Il regolamento della lavanderia è appeso in lavanderia.', 'The laundry rules are posted in the laundry room.', 'Правила прачечной висят в прачечной.'],
+      ho: ['Die Regeln stehen in der Hausordnung.', 'Les règles figurent dans le règlement de maison.', 'Le regole sono nel regolamento della casa.', 'The rules are in the house rules.', 'Правила — в правилах дома (Hausordnung).'],
+      link: ['Waschplan und Regeln', 'Planning et règles', 'Piano e regole', 'Schedule and rules', 'График и правила']}[f.c_wash];
+    cards.push({t: pick(['Waschküche', 'Buanderie', 'Lavanderia', 'Laundry room', 'Прачечная'], lg), rows: f.c_wash === 'link' ? [R(pick(w, lg), f.c_link || '—')] : [R('', pick(w, lg))]}); }
+  const ab = []; if (f.c_trash) ab.push(R(pick(['Kehricht (Gebührensack)', 'Ordures (sac taxé)', 'Rifiuti (sacco ufficiale)', 'Household waste (official bag)', 'Мусор (платный мешок)'], lg), cap(WD(+f.c_trash, lg))));
+  if (f.c_paper) ab.push(R(pick(['Papier und Karton', 'Papier et carton', 'Carta e cartone', 'Paper and cardboard', 'Бумага и картон'], lg), f.c_paper));
+  if (ab.length) cards.push({t: pick(['Abfall', 'Déchets', 'Rifiuti', 'Waste', 'Мусор'], lg), rows: ab});
+  const q = [];
+  if (f.c_quiet) { const [a, b] = f.c_quiet.split('-'), A = tm(a.padStart(2, '0') + ':00', lg), B = tm(b.padStart(2, '0') + ':00', lg);
+    q.push(R('', {de: `Nachtruhe ${A}–${B} Uhr`, fr: `Repos nocturne ${A} – ${B}`, it: `Riposo notturno ${A}–${B}`, en: `Night-time ${A}–${B}`, ru: `Ночью ${A}–${B}`}[lg])); }
+  if (f.c_noon) q.push(R('', {de: 'Mittagsruhe 12:00–13:00 Uhr', fr: 'Pause de midi 12h00 – 13h00', it: 'Pausa di mezzogiorno 12:00–13:00', en: 'Lunchtime 12:00–13:00', ru: 'В обед 12:00–13:00'}[lg]));
+  if (f.c_quiet) q.push(R('', pick(['Sonn- und Feiertage: ganzer Tag', 'Dimanches et jours fériés : toute la journée', 'Domeniche e giorni festivi: tutto il giorno', 'Sundays and public holidays: all day', 'Воскресенья и праздники — весь день'], lg)));
+  if (q.length) cards.push({t: pick(['Ruhezeiten', 'Heures de repos', 'Orari di quiete', 'Quiet hours', 'Часы тишины'], lg), rows: q});
+  const my = new Intl.DateTimeFormat(LOC[lg], {month: 'long', year: 'numeric'}).format(new Date()).replace(/\s?г\.$/, '');
+  return {kind: 'poster', col: 'sage', head: pick(['Wichtige Kontakte', 'Contacts importants', 'Contatti importanti', 'Important contacts', 'Важные контакты дома'], lg), sub: f.c_house || '',
+    etitle: pick(['Notfall', 'Urgences', 'Emergenze', 'Emergency', 'Экстренные службы'], lg), emerg: E.map(([n, l]) => [n, pick(l, lg)]), cards,
+    foot: pick(['Bei Feuer, Unfall oder Gefahr zuerst die Notrufnummer wählen, dann Verwaltung oder Hauswart informieren.', 'En cas d’incendie, d’accident ou de danger, appelez d’abord le numéro d’urgence, puis informez la gérance ou le concierge.', 'In caso di incendio, incidente o pericolo chiamate prima il numero d’emergenza, poi informate l’amministrazione o il custode.', 'In case of fire, accident or danger, call the emergency number first, then inform the management or caretaker.', 'При пожаре, несчастном случае или опасности сначала звоните на экстренный номер, потом сообщите управляющей или хаусварту.'], lg),
+    stand: pick(['Stand: ', 'État : ', 'Aggiornato: ', 'Updated: ', 'Актуально на '], lg) + my};
+};
+const ITEMS = {key: ['Schlüssel', 'clé', 'chiave', 'key', 'ключ'], keys: ['Schlüsselbund', 'trousseau de clés', 'mazzo di chiavi', 'bunch of keys', 'связка ключей'], glove: ['Handschuh', 'gant', 'guanto', 'glove', 'перчатка'],
+  glasses: ['Brille', 'lunettes', 'occhiali', 'glasses', 'очки'], toy: ['Spielzeug', 'jouet', 'giocattolo', 'toy', 'игрушка'], clothes: ['Kleidungsstück', 'vêtement', 'indumento', 'item of clothing', 'одежда'],
+  laundry: ['Wäsche aus der Waschküche', 'linge de la buanderie', 'biancheria della lavanderia', 'laundry from the laundry room', 'бельё из прачечной'], wallet: ['Portemonnaie', 'porte-monnaie', 'portafoglio', 'wallet', 'кошелёк'],
+  phone: ['Handy', 'téléphone portable', 'telefonino', 'mobile phone', 'телефон'], parcel: ['Paket', 'colis', 'pacco', 'parcel', 'посылка']};
+const WHERE = {stairs: ['im Treppenhaus', 'dans la cage d’escalier', 'nelle scale', 'in the stairwell', 'на лестнице'], laundry: ['in der Waschküche', 'à la buanderie', 'in lavanderia', 'in the laundry room', 'в прачечной'],
+  lift: ['im Lift', 'dans l’ascenseur', 'nell’ascensore', 'in the lift', 'в лифте'], entr: ['beim Hauseingang', 'à l’entrée de l’immeuble', 'all’entrata della casa', 'at the main entrance', 'у входа в дом'],
+  mail: ['bei den Briefkästen', 'près des boîtes aux lettres', 'vicino alle bucalettere', 'by the letterboxes', 'у почтовых ящиков'], bike: ['im Veloraum', 'au local à vélos', 'nel locale bici', 'in the bike room', 'в велокомнате'],
+  garage: ['in der Tiefgarage', 'au parking souterrain', 'nell’autorimessa', 'in the underground car park', 'в подземном гараже'], play: ['auf dem Spielplatz', 'à la place de jeux', 'al parco giochi', 'at the playground', 'на детской площадке'],
+  front: ['vor dem Haus', 'devant l’immeuble', 'davanti alla casa', 'in front of the building', 'перед домом']};
+GEN.fund = (f, lg) => {
+  const pl = f.who !== 'me', A = apt(f.floor, f.side, f.apno, lg), N = f.names || BLANKN, found = f.f_mode !== 'lost';
+  const item = f.f_item === 'other' ? (f.f_other || '…') : pick(ITEMS[f.f_item] || ITEMS.key, lg), wh = pick(WHERE[f.f_where] || WHERE.stairs, lg), D = lg === 'ru' ? ruOn(f.f_date) : dLong(f.f_date, lg);
+  const T = {
+    de: {head: found ? 'Gefunden' : 'Verloren', p1: `Am ${D}, ${pl ? 'haben wir' : 'habe ich'} ${found ? '' : 'vermutlich '}${wh} folgenden Gegenstand ${found ? 'gefunden' : 'verloren'}: ${item}.`,
+      p2: found ? `Gehört der Gegenstand Ihnen? Melden Sie sich bitte und beschreiben Sie ihn kurz – ${pl ? 'wir geben' : 'ich gebe'} ihn gerne zurück.` : `Haben Sie ihn gefunden? ${pl ? 'Wir freuen uns' : 'Ich freue mich'} sehr über eine kurze Nachricht oder einen Anruf!`},
+    fr: {head: found ? 'Trouvé' : 'Perdu', p1: `Le ${D}, ${pl ? 'nous avons' : 'j’ai'} ${found ? 'trouvé' : 'perdu, probablement'} ${wh}, l’objet suivant : ${item}.`,
+      p2: found ? `Il est à vous ? Contactez-${pl ? 'nous' : 'moi'} et décrivez-le brièvement : ${pl ? 'nous vous le rendrons' : 'je vous le rendrai'} volontiers.` : `Vous l’avez trouvé ? Un message ou un appel ${pl ? 'nous' : 'me'} ferait très plaisir !`},
+    it: {head: found ? 'Trovato' : 'Perso', p1: `${cap(D)} ${pl ? 'abbiamo' : 'ho'} ${found ? 'trovato' : 'perso, probabilmente'} ${wh}, il seguente oggetto: ${item}.`,
+      p2: found ? `È vostro? ${pl ? 'Contattateci' : 'Contattatemi'} e descrivetelo brevemente: ${pl ? 've lo restituiremo' : 've lo restituirò'} volentieri.` : `L’avete trovato? Un messaggio o una telefonata ${pl ? 'ci' : 'mi'} farebbe molto piacere!`},
+    en: {head: found ? 'Found' : 'Lost', p1: `On ${D}, ${pl ? 'we' : 'I'} ${found ? 'found' : 'probably lost'} the following item ${wh}: ${item}.`,
+      p2: found ? `Is it yours? Please get in touch and describe it briefly – ${pl ? 'we' : 'I'} will be happy to give it back.` : `Have you found it? ${pl ? 'We' : 'I'} would be very grateful for a quick message or call!`},
+    ru: {head: found ? 'Найдено' : 'Потеряно', p1: `${cap(D)} ${pl ? (found ? 'мы нашли' : 'мы, кажется, потеряли') : (found ? 'я нашла' : 'я, кажется, потеряла')} ${wh}: ${item}.`,
+      p2: found ? `Это ваше? Свяжитесь со ${pl ? 'нами' : 'мной'} и коротко опишите вещь — с радостью ${pl ? 'вернём' : 'верну'}.` : `Нашли? ${pl ? 'Будем очень благодарны' : 'Буду очень благодарна'} за сообщение или звонок!`}
+  }[lg];
+  const facts = [[lb('when', lg), cap(lg === 'ru' ? dLong(f.f_date, 'ru') : D)], [lb('wo', lg), cap(wh)]];
+  if (f.f_desc) facts.push([lb('desc', lg), f.f_desc]);
+  if (found) { const pv = f.f_pick === 'hw' ? pick(['Hauswart', 'Concierge', 'Custode', 'Caretaker', 'У хаусварта'], lg) : f.f_pick === 'fund' ? pick(['Fundbüro der Gemeinde', 'Bureau des objets trouvés de la commune', 'Ufficio oggetti smarriti del Comune', 'Municipal lost property office', 'Бюро находок общины'], lg) : N + (A.name ? ', ' + A.name : ''); facts.push([lb('pick', lg), pv]); }
+  else if (f.f_reward) facts.push([lb('reward', lg), f.f_reward]);
+  if (f.tel) facts.push([lb('tel', lg), f.tel]);
+  return {col: found ? 'green' : 'red', head: T.head, sub: cap(item), greet: lb('greet', lg), pre: [T.p1], facts, post: [T.p2], hl: '', sign: signOf(f, lg)};
+};
+const MEMO = [
+  ['Здоровайся', 'На лестнице, у дома, в лифте и на улице в небольшом посёлке здороваются со всеми, даже с незнакомыми: «Grüezi», «Bonjour», «Buongiorno».', 'Тебя запомнят в лицо и примут за свою. Тем, кого знают, охотнее помогают.'],
+  ['Представься после переезда', 'Позвони в двери ближайших соседей или оставь в их почтовых ящиках короткую записку: кто ты, из какой квартиры, как связаться.', 'Если что-то случится, сосед сначала придёт поговорить с тобой, а не напишет управляющей.'],
+  ['Предупреди о празднике и ремонте заранее', 'За несколько дней повесь записку в подъезде: что будет, когда, до какого часа и твой телефон. Соседей по этажу можно пригласить.', 'К шуму, о котором знали заранее, относятся спокойнее. Жалоба в полицию в такой вечер маловероятна.'],
+  ['Береги прачечную', 'Стирай в своё время, забирай бельё вовремя, чисти фильтр, протирай машину и пол.', 'Прачечная — самая частая причина ссор в швейцарских домах. Чистая машина после тебя — лучшая репутация в доме.'],
+  ['Соблюдай правила мусора', 'Мусор — в платном мешке и в день вывоза, стекло не бросай вечером и в воскресенье, бумагу связывай.', 'Соседи видят, что ты знаешь правила, и не жалуются в общину. За мусор не там бывает штраф.', 1],
+  ['Держи проходы свободными', 'Обувь, коляски, велосипеды и вещи — только там, где разрешено правилами дома.', 'Лестница — путь эвакуации при пожаре, поэтому на это смотрят строго. Свободный подъезд нравится всем.'],
+  ['Не занимай чужую парковку', 'Ставь машину только на своё место или гостевое; гостям заранее скажи, где можно.', 'На частной парковке за чужое место бывает штраф, а соседи обижаются сильнее, чем на шум.', 1],
+  ['Предложи помощь', 'Принять посылку, полить цветы, вынуть почту из ящика, пока сосед в отпуске.', 'Так в доме и появляются «свои люди», и тебе тоже помогут, когда понадобится.'],
+  ['Решай споры разговором', 'Если что-то мешает, сначала поговори лично и спокойно. Не вешай в подъезде анонимных записок с упрёками.', 'Анонимные записки обижают весь дом. Разговор решает большинство проблем без управляющей и полиции.'],
+  ['Объясни правила детям и гостям', 'Детям — когда в доме тихо и где играть, гостям — где парковаться и что после 22:00 на балконе говорят тише.', 'Соседи видят, что ты заботишься о доме, и спокойнее относятся к обычному детскому шуму.'],
+  ['На улице и в саду', 'Собаку веди на поводке там, где это требуется, и убирай за ней (пакеты в ящиках Robidog). Газонокосилку и садовые машины не включай в обед, вечером и в воскресенье.', 'Улица и посёлок замечают это быстрее, чем кажется: так тебя будут знать как хорошую соседку.'],
+  ['Приходи на праздники соседей', 'Во многих городах и посёлках есть «День соседей» (Tag der Nachbarn, Fête des voisins), уличные праздники и собрания жильцов.', 'Это самый простой способ познакомиться со всеми сразу и найти тех, кто поможет в трудный день.']
+];
+
+/* ---------- рисование ---------- */
+const PT = SH.PT;
+/* телефоны не разрываем между строк: пробелы внутри номера временно заменяем */
+const glue = s => String(s == null ? '' : s).replace(/\+?\d[\d ]{5,}\d/g, m => m.replace(/ /g, '\u0001'));
+const wrapT = (s, b, size, w) => SH.wrap(glue(s), b, size, w).map(l => l.replace(/\u0001/g, ' '));
+function para(P, s, x, y, size, b, color, w, lh){ wrapT(s, b, size, w).forEach(l => { P.text(l, x, y, size, b, color); y += lh || size * PT * 1.45; }); return y; }
+function ruCredit(P){ P.credit = false; if (!window.SVL_VIP) P.text(SH.CREDIT.ru, P.w - 8, P.h - 2.6, 4.6, false, '#7A6E62', 'right'); }
+function fitSize(s, b, size, w, min){ while (size > (min || 6) && SH.tw(s, b, size) > w) size -= 0.5; return size; }
+function band(P, d, col, h, head, sub){
+  const tc = d.bw ? '#000000' : '#FFFFFF';
+  if (d.bw) { P.rect(0, 0, 210, h, '#FFFFFF', null); P.line(20, h, 190, h, '#000000', 0.8); } else P.rect(0, 0, 210, h, col[1], null);
+  const hs = fitSize(head, true, 46, 172, 18), hy = sub ? h * 0.52 : h * 0.62;
+  P.text(head, 105, hy, hs, true, tc, 'center');
+  if (sub) P.text(sub, 105, hy + 11, fitSize(sub, false, 15, 172, 8), false, tc, 'center');
+}
+function drawNotice(d, s, k){
+  const C = SH.pal(d.bw), col = C.c[s.col], P = SH.page(210, 297, C), X = 22, W = 166, bh = 52;
+  band(P, d, col, bh, s.head, s.sub);
+  if (s.deco === 'party' && !d.bw) { const cs = [C.c.mustard[1], C.c.blue[1], C.c.green[1], C.c.red[1]]; for (let i = 0, x = 3; x < 206; x += 12, i++) P.tri([[x, bh], [x + 10, bh], [x + 5, bh + 7]], cs[i % 4]); }
+  const fs = 12.5 * k, lh = fs * PT * 1.5, gap = lh * 0.5;
+  let y = bh + 18 * k;
+  P.text(s.greet + (/[!.]$/.test(s.greet) ? '' : ','), X, y, 14 * k, true, C.ink); y += lh * 1.5;
+  s.pre.forEach(p => { y = para(P, p, X, y, fs, false, C.ink, W, lh) + gap; });
+  if (s.facts.length) {
+    const lw = 42, vw = W - lw - 12, vs = 13.5 * k, vl = vs * PT * 1.35, rows = s.facts.map(([l, v]) => ({l, v: wrapT(v, true, vs, vw)}));
+    const bh2 = rows.reduce((a, r) => a + r.v.length * vl + 3.2 * k, 0) + 6 * k;
+    y += 1;
+    P.rect(X, y, W, bh2, col[0], col[1], 2.4); if (!d.bw) P.rect(X, y, 2.2, bh2, col[1], null);
+    let yy = y + 4 * k + vl * 0.75;
+    rows.forEach(r => { P.text(r.l.toUpperCase(), X + 7, yy - 0.3, 8 * k, true, d.bw ? '#000000' : col[1]); r.v.forEach((l, i) => P.text(l, X + 7 + lw, yy + i * vl, vs, true, C.ink)); yy += r.v.length * vl + 3.2 * k; });
+    y += bh2 + gap + lh * 0.6;
+  }
+  s.post.forEach(p => { y = para(P, p, X, y, fs, false, C.ink, W, lh) + gap; });
+  if (s.hl) y = para(P, s.hl, X, y, fs * 1.04, true, d.bw ? '#000000' : col[1], W, lh) + gap;
+  y += 3 * k;
+  const g = s.sign; P.text(g.regards, X, y, fs, false, C.ink); y += lh * 1.15;
+  P.text(g.names, X, y, fs * 1.08, true, C.ink); y += lh;
+  if (g.apt) { P.text(g.apt, X, y, fs * 0.92, false, C.mut); y += lh * 0.95; }
+  if (g.tel) { P.text(g.tel, X, y, fs * 0.92, false, C.mut); y += lh * 0.95; }
+  P.wm = false; P.creditY = 294.4; P._y = y;
+  return P;
+}
+function notice(d, s){ let P; for (let k = 1.12; k > 0.6; k -= 0.05) { P = drawNotice(d, s, k); if (P._y <= 284) break; } return P; }
+function a6card(P, d, s, x0, y0, k){
+  const C = P.C, col = C.c[s.col], X = x0 + 9, W = 87, tc = d.bw ? '#000000' : '#FFFFFF';
+  P.rect(x0 + 7, y0 + 8, 91, 21, d.bw ? '#FFFFFF' : col[1], d.bw ? '#000000' : null, 2);
+  let hs = fitSize(s.head, true, Math.min(20, 15 * k), 83, 12), hl2 = [s.head];
+  if (SH.tw(s.head, true, hs) > 83) { hs = 11.5; hl2 = wrapT(s.head, true, hs, 83).slice(0, 2); }
+  hl2.forEach((l, i) => P.text(l, x0 + 52.5, y0 + 8 + (hl2.length > 1 ? 9 + i * 5.4 : 10.5 + hs * PT * 0.36), hs, true, tc, 'center'));
+  let y = y0 + 38 * Math.min(1, k + 0.05); const fs = 10 * k, lh = fs * PT * 1.45;
+  if (s.greet) { P.text(s.greet + ',', X, y, fs, true, C.ink); y += lh * 1.3; }
+  s.rows.forEach(([l, v]) => { P.text(l.toUpperCase(), X, y, 7 * k, true, d.bw ? '#000000' : col[1]); y += lh * 0.9; y = para(P, v, X, y, 12 * k, true, C.ink, W, 12 * k * PT * 1.35) + lh * 0.3; });
+  s.text.forEach(t => { y = para(P, t, X, y, fs, false, C.ink, W, lh) + lh * 0.35; });
+  y += lh * 0.4;
+  y = para(P, s.big, X, y + 1.5, 14 * k, true, C.ink, W, 14 * k * PT * 1.3);
+  s.small.forEach(t => { y = para(P, t, X, y + 0.5, 10 * k, false, C.ink, W, lh); });
+  if (s.thx) { y += lh * 0.6; y = para(P, s.thx, X, y, fs, false, C.mut, W, lh); }
+  return y - y0;
+}
+function a6page(d, s){
+  const C = SH.pal(d.bw); let k = 1;
+  for (k = 1.7; k > 0.6; k -= 0.05) { const T = SH.page(210, 297, C); if (a6card(T, d, s, 0, 0, k) <= 138) break; }
+  const P = SH.page(210, 297, C);
+  [[0, 0], [105, 0], [0, 148.5], [105, 148.5]].forEach(([x, y]) => a6card(P, d, s, x, y, k));
+  P.line(105, 0, 105, 297, '#999999', 0.25, true); P.line(0, 148.5, 210, 148.5, '#999999', 0.25, true);
+  P.wm = false; P.creditY = 294.4;
+  return P;
+}
+function posterCard(P, x, y, w, c, C, k, dry){
+  const col = c.red ? C.c.red : C.c.sage, pad = 4, iw = w - pad * 2; let yy = y + pad + 9.5 * k * PT;
+  const ops = [];
+  wrapT(c.t, true, 9.5 * k, iw).forEach(l => { ops.push([l, x + pad, yy, 9.5 * k, true, col[1]]); yy += 9.5 * k * PT * 1.35; });
+  yy += 1.2;
+  c.rows.forEach(([l, v, big]) => {
+    if (l) wrapT(l, false, 7.6 * k, iw).forEach((t, j) => { yy += j ? 0.4 : 2.2; ops.push([t, x + pad, yy, 7.6 * k, false, C.mut]); yy += 7.6 * k * PT * 1.35; });
+    const s = big ? 15 * k : 9.6 * k; wrapT(v, big, s, iw).forEach(t => { yy += big ? s * PT * 0.95 : s * PT * 0.85; ops.push([t, x + pad, yy, s, big, C.ink]); yy += s * PT * 0.45; });
+    yy += 1.6;
+  });
+  const h = yy - y + pad - 1;
+  if (!dry) { P.rect(x, y, w, h, col[0], col[1], 2.2); ops.forEach(o => P.text(o[0], o[1], o[2], o[3], o[4], o[5])); }
+  return h;
+}
+function drawPoster(d, s, k){
+  const C = SH.pal(d.bw), col = C.c.sage, P = SH.page(210, 297, C), X = 12, W = 186, bh = 44;
+  band(P, d, col, bh, s.head, s.sub);
+  let y = bh + 8;
+  P.text(s.etitle.toUpperCase(), X, y + 2, 9 * k, true, d.bw ? '#000000' : C.c.red[1]); y += 5;
+  const n = s.emerg.length, bw2 = (W - (n - 1) * 3) / n, eh = 25 * k, red = d.bw ? '#000000' : '#C62828';
+  s.emerg.forEach(([num, lab], i) => { const x = X + i * (bw2 + 3); P.rect(x, y, bw2, eh, d.bw ? '#FFFFFF' : '#FBE9E7', red, 2); P.text(num, x + bw2 / 2, y + 12.5 * k, 28 * k, true, red, 'center');
+    wrapT(lab, false, 7.2 * k, bw2 - 3).slice(0, 2).forEach((l, j) => P.text(l, x + bw2 / 2, y + 18 * k + j * 3, 7.2 * k, false, C.ink, 'center')); });
+  y += eh + 7;
+  const cw = (W - 5) / 2, colY = [y, y];
+  s.cards.forEach(c => { const i = colY[0] <= colY[1] ? 0 : 1, h = posterCard(P, X + i * (cw + 5), colY[i], cw, c, C, k); colY[i] += h + 5; });
+  y = Math.max(colY[0], colY[1]) + 2;
+  y = para(P, s.foot, X, y + 3, 9 * k, true, C.ink, W, 9 * k * PT * 1.45);
+  P.text(s.stand, X, y + 1, 7, false, C.mut);
+  P.wm = false; P.creditY = 294.4; P._y = y;
+  return P;
+}
+function poster(d, s){ let P; for (let k = 1.2; k > 0.55; k -= 0.05) { P = drawPoster(d, s, k); if (P._y <= 286) break; } return P; }
+const AD = {main: ['Bitte keine Werbung', 'Pas de publicité, s.v.p.', 'Niente pubblicità, grazie', 'No advertising, please'], free: ['Keine Gratiszeitungen', 'Pas de journaux gratuits', 'Niente giornali gratuiti', 'No free newspapers'], stop: ['STOPP', 'STOP', 'STOP', 'STOP']};
+function labelPages(d, f){
+  const C = SH.pal(d.bw), pages = []; let P, x, y, rowH;
+  const [pw, ph] = f.l_size === 'custom' ? [Math.min(180, Math.max(20, +f.l_w || 60)), Math.min(80, Math.max(8, +f.l_h || 17))] : f.l_size.split('x').map(Number);
+  const np = () => { P = SH.page(210, 297, C); P.wm = false; P.creditY = 294.4; ruCredit(P); pages.push(P); x = 10; y = 20; rowH = 0;
+    P.text('Вырежи по пунктиру. Печатай в масштабе 100 % — проверь линейкой, что табличка ' + pw + ' × ' + ph + ' мм.', 10, 12, 7.5, false, C.mut); };
+  const place = (w, h, draw) => { if (x + w > 200.01) { x = 10; y += rowH + 4; rowH = 0; } if (y + h > 284) { np(); } draw(x, y); x += w + 4; rowH = Math.max(rowH, h); };
+  np();
+  const l1 = f.l_1 || 'Name', l2 = f.l_2;
+  for (let i = 0; i < (+f.l_n || 8); i++) place(pw, ph, (x0, y0) => {
+    P.rect(x0, y0, pw, ph, '#FFFFFF', '#999999', 0, true);
+    const iw = pw - 4;
+    if (l2) { let s1 = Math.min(ph * 0.42 / PT, 40), s2; s1 = fitSize(l1, true, s1, iw, 4); s2 = fitSize(l2, false, Math.min(s1 * 0.72, ph * 0.3 / PT), iw, 3.5);
+      const h1 = s1 * PT * 0.72, h2 = s2 * PT * 0.72, g = ph * 0.1, top = y0 + (ph - h1 - g - h2) / 2;
+      P.text(l1, x0 + pw / 2, top + h1, s1, true, '#000000', 'center'); P.text(l2, x0 + pw / 2, top + h1 + g + h2, s2, false, '#000000', 'center'); }
+    else { const s1 = fitSize(l1, true, Math.min(ph * 0.55 / PT, 44), iw, 4); P.text(l1, x0 + pw / 2, y0 + ph / 2 + s1 * PT * 0.36, s1, true, '#000000', 'center'); }
+  });
+  if (f.l_ad) {
+    x = 10; y += rowH + 10; rowH = 0; if (y > 260) np();
+    const all = f.l_adlang === 'all', li = LI[d.lang], free = f.l_ad === 'adfree', red = d.bw ? '#000000' : '#C62828';
+    const lines = all ? [0, 1, 2].map(i => AD.main[i]) : [AD.main[li]], fl = free ? (all ? [0, 1, 2].map(i => AD.free[i]) : [AD.free[li]]) : [];
+    const w = 90, h = all ? (free ? 44 : 32) : (free ? 30 : 24);
+    for (let i = 0; i < (+f.l_adn || 2); i++) place(w, h, (x0, y0) => {
+      P.rect(x0, y0, w, h, '#FFFFFF', '#999999', 0, true);
+      P.rect(x0 + 2, y0 + 2, w - 4, h - 4, '#FFFFFF', red, 2);
+      const sq = Math.min(18, h - 8); P.rect(x0 + 5, y0 + (h - sq) / 2, sq, sq, red, null, 2); P.text(all ? 'STOP' : AD.stop[li], x0 + 5 + sq / 2, y0 + h / 2 + 1.2, fitSize('STOPP', true, 11, sq - 2, 5), true, '#FFFFFF', 'center');
+      const tx = x0 + 9 + sq, tw2 = w - sq - 13, n = lines.length + fl.length; let yy = y0 + (h - (lines.length * 5.4 + fl.length * 4)) / 2 + 4;
+      lines.forEach(l => { P.text(l, tx, yy, fitSize(l, true, all ? 11 : 13, tw2, 6), true, '#000000'); yy += all ? 5.4 : 6.4; });
+      if (fl.length) yy += 0.6; fl.forEach(l => { P.text(l, tx, yy, fitSize(l, false, 9, tw2, 5), false, '#000000'); yy += 4; });
+    });
+  }
+  return pages;
+}
+function memoPage(d){
+  const C = SH.pal(d.bw), P = SH.page(210, 297, C), X = 12, W = 186, bh = 40, keys = ['sage', 'blue', 'pink', 'green', 'mustard', 'brown'];
+  band(P, d, C.c.sage, bh, 'Памятка хорошего соседа', '12 привычек, с которыми в швейцарском доме тебя примут за свою');
+  let y = bh + 9;
+  y = para(P, 'В Швейцарии отношения с соседями строят годами, и маленькие знаки внимания значат много. Под каждым советом — что он тебе даст.', X, y, 9, false, C.ink, W, 4.2) + 2;
+  const cw = (W - 6) / 2;
+  const card = (i, x, yy, k, dry) => { const [t, tx, g, attn] = MEMO[i], col = C.c[keys[i % 6]], pad = 3, iw = cw - pad * 2 - 9; let h = pad + 1;
+    const tl = wrapT(t, true, 9 * k, iw - (attn ? 6 : 0)), bl = wrapT(tx, false, 7.6 * k, iw), gl = wrapT('→ ' + g, true, 7.4 * k, iw), l9 = 9 * k * PT * 1.35, l7 = 7.6 * k * PT * 1.42;
+    h += tl.length * l9 + 0.8 + bl.length * l7 + 1.2 + gl.length * l7 + pad;
+    if (!dry) { P.rect(x, yy, cw, h, d.bw ? '#FFFFFF' : C.soft, col[1], 2); P.rect(x + 2.5, yy + 2.6, 6.2, 6.2, d.bw ? '#FFFFFF' : col[1], d.bw ? '#000000' : null, 1.4); P.text(String(i + 1), x + 5.6, yy + 7.1, 9, true, d.bw ? '#000000' : '#FFFFFF', 'center');
+      let ty = yy + pad + 1 + 9 * k * PT * 0.8; const tx0 = x + pad + 9;
+      tl.forEach(l => { P.text(l, tx0, ty, 9 * k, true, C.ink); ty += l9; }); ty += 0.8;
+      bl.forEach(l => { P.text(l, tx0, ty, 7.6 * k, false, C.ink); ty += l7; }); ty += 1.2;
+      gl.forEach(l => { P.text(l, tx0, ty, 7.4 * k, true, d.bw ? '#000000' : col[1]); ty += l7; });
+      if (attn) { const ax = x + cw - 8, ay = yy + 2.5; P.tri([[ax + 2.6, ay], [ax + 5.2, ay + 4.6], [ax, ay + 4.6]], d.bw ? '#000000' : '#D32F2F'); P.text('!', ax + 2.6, ay + 4.1, 7, true, '#FFFFFF', 'center'); } }
+    return h; };
+  let k = 1, top = y;
+  for (; k > 0.6; k -= 0.04) { let yy = top; for (let r = 0; r < 6; r++) yy += Math.max(card(r * 2, 0, 0, k, true), card(r * 2 + 1, 0, 0, k, true)) + 3; if (yy <= 280) break; }
+  for (let r = 0; r < 6; r++) { const h = Math.max(card(r * 2, 0, 0, k, true), card(r * 2 + 1, 0, 0, k, true)); card(r * 2, X, y, k); card(r * 2 + 1, X + cw + 6, y, k); y += h + 3; }
+  P.text('Подробно, с законами и правилами дома: svoiludi.ch/shveycariya/pravila-doma/', X, Math.min(y + 3, 289), 7.5, false, C.mut);
+  ruCredit(P);
+  return P;
+}
+/* перевод для себя: все листы подряд по-русски */
+function flat(s){ const out = [];
+  if (s.kind === 'a6') { if (s.greet) out.push(['b', s.greet + ',']); s.rows.forEach(r => out.push(['kv', r[0], r[1]])); s.text.forEach(t => out.push(['p', t])); out.push(['b', s.big]); s.small.forEach(t => out.push(['p', t])); if (s.thx) out.push(['p', s.thx]); return out; }
+  if (s.kind === 'poster') { if (s.sub) out.push(['p', s.sub]); out.push(['b', s.etitle]); s.emerg.forEach(([n, l]) => out.push(['kv', n, l])); s.cards.forEach(c => { out.push(['b', c.t]); c.rows.forEach(([l, v]) => out.push(l ? ['kv', l, v] : ['p', v])); }); out.push(['p', s.foot]); return out; }
+  out.push(['b', s.greet + ',']); s.pre.forEach(p => out.push(['p', p])); s.facts.forEach(([l, v]) => out.push(['kv', l, v])); s.post.forEach(p => out.push(['p', p])); if (s.hl) out.push(['p', s.hl]);
+  out.push(['p', s.sign.regards + ', ' + s.sign.names + (s.sign.apt ? ', ' + s.sign.apt : '') + (s.sign.tel ? ', ' + s.sign.tel : '')]); return out; }
+function trPages(d, list){
+  const C = SH.pal(d.bw), pages = [], X = 14, W = 182; let P, y;
+  const np = first => { P = SH.page(210, 297, C); ruCredit(P); pages.push(P); if (first) { P.header('Перевод для себя', 'Что написано на твоих листах. Этот лист не вывешивают — он только для тебя.', 'не вывешивать'); y = 28; } else y = 16; };
+  np(true);
+  list.forEach(([orig, ru], i) => {
+    if (y > 262) np();
+    y = P.sec(`${i + 1}. «${orig.head}» — ${ru.head}`, X, y + 2, W) + 0.5;
+    flat(ru).forEach(it => {
+      const kl = it[0] === 'kv' ? wrapT(it[1], true, 7.6, 49) : [], kv = it[0] === 'kv' ? wrapT(it[2], false, 8.6, W - 52) : [];
+      const lines = it[0] === 'kv' ? Math.max(1, kl.length, kv.length) : wrapT(it[1], it[0] === 'b', 8.6, W).length;
+      if (y + lines * 4.1 > 284) np();
+      if (it[0] === 'kv') { kl.forEach((l, j) => P.text(l, X, y + j * 4.1, 7.6, true, C.mut)); kv.forEach((l, j) => P.text(l, X + 52, y + j * 4.1, 8.6, false, C.ink)); y += lines * 4.1 + 0.8; }
+      else y = para(P, it[1], X, y, 8.6, it[0] === 'b', C.ink, W, 4.1) + 1.2;
+    });
+    y += 4;
+  });
+  return pages;
+}
+
+/* ---------- состояние и форма ---------- */
+function langOf(k){ const K = window.KANTONY || {}; return k && K[k] ? ({de: 'de', fr: 'fr', it: 'it'}[K[k].l] || 'de') : 'de'; }
+function blankF(){ return {who: 'we', names: '', floor: '', side: '', apno: '', tel: '',
+  p_occ: 'bday', p_where: 'flat', p_date: nextDow(6), p_from: '18:00', p_to: '23:00', p_inv: 'none',
+  r_who: 'we', r_drill: true, r_bath: false, r_kitchen: false, r_floor: false, r_paint: false, r_win: false, r_elec: false, r_plumb: false, r_other: '', r_d1: nextDow(1), r_d2: plusDays(nextDow(1), 4), r_days: 'mf', r_h1: '08:00', r_h2: '17:00', r_pause: true, r_dust: true, r_firm: '', r_ftel: '',
+  m_dir: 'in', m_date: nextDow(6, 1), m_h1: '08:00', m_h2: '16:00', m_lift: true, m_entr: true, m_van: 'front', m_firm: '',
+  n_since: '', n_origin: '', n_kids: '', n_pet: '', n_coffee: true, n_tel: true,
+  k_mode: 'held', k_rec: '', k_cour: 'Post', k_date: TODAY, k_time: '18:00', k_nb: '', k_nbfloor: '', k_nbside: '',
+  c_house: '', c_vname: '', c_vtel: '', c_vmail: '', c_vhours: '', c_hname: '', c_htel: '', c_pik: '', c_heat_n: '', c_heat_t: '', c_water_n: '', c_water_t: '', c_lift_n: '', c_lift_t: '', c_wash: 'wk', c_link: '', c_trash: '', c_paper: '', c_quiet: '22-7', c_noon: true,
+  f_mode: 'found', f_item: 'keys', f_other: '', f_where: 'stairs', f_date: TODAY, f_desc: '', f_pick: 'me', f_reward: '',
+  l_1: '', l_2: '', l_size: '60x17', l_w: 60, l_h: 17, l_n: '8', l_ad: '', l_adlang: 'one', l_adn: '2'}; }
+function blank(){ let k = ''; try { k = localStorage.getItem('svoiludi.kanton') || ''; } catch (e) {} return {kt: k, lang: langOf(k), tr: true, bw: false, types: {party: true}, f: blankF()}; }
+let S = load(), EX = null;
+function load(){ try { const s = JSON.parse(localStorage.getItem(KEY)); if (s && typeof s === 'object') { const b = blank(); return Object.assign(b, s, {f: Object.assign(blankF(), s.f || {}), types: s.types || b.types}); } } catch (e) {} return blank(); }
+function save(){ if (EX) return; try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} }
+const D = () => EX || S;
+const EXL = {
+  de: {names: 'Olena und Andrii Kovalenko', r_firm: 'Muster Sanitär AG', m_firm: 'Beispiel Umzüge GmbH', n_origin: 'aus der Ukraine', n_kids: 'Mila (6) und Tim (3)', k_rec: 'Familie Meier', k_nb: 'Familie Brunner', c_house: 'Seestrasse 10, 8002 Zürich', c_vname: 'Muster Immobilien AG', c_vmail: 'info@muster-immobilien.ch', c_vhours: 'Mo–Fr 8–12 und 13.30–17 Uhr', c_hname: 'Herr Brunner', c_heat_n: 'Muster Wärmetechnik AG', c_water_n: 'Sanitär Beispiel GmbH', c_lift_n: 'Lift Service AG', c_paper: 'jeden zweiten Mittwoch', f_desc: 'drei Schlüssel, roter Anhänger'},
+  fr: {names: 'Olena et Andrii Kovalenko', r_firm: 'Sanitaire Exemple SA', m_firm: 'Déménagements Exemple Sàrl', n_origin: 'd’Ukraine', n_kids: 'Mila (6 ans) et Tim (3 ans)', k_rec: 'Famille Dubois', k_nb: 'Famille Rochat', c_house: 'Avenue de la Gare 10, 1003 Lausanne', c_vname: 'Régie Exemple SA', c_vmail: 'info@regie-exemple.ch', c_vhours: 'lu–ve 8h–12h et 13h30–17h', c_hname: 'M. Rochat', c_heat_n: 'Chauffage Exemple SA', c_water_n: 'Sanitaire Exemple Sàrl', c_lift_n: 'Ascenseurs Service SA', c_paper: 'un mercredi sur deux', f_desc: 'trois clés, porte-clés rouge'},
+  it: {names: 'Olena e Andrii Kovalenko', r_firm: 'Sanitari Esempio SA', m_firm: 'Traslochi Esempio Sagl', n_origin: 'dall’Ucraina', n_kids: 'Mila (6 anni) e Tim (3 anni)', k_rec: 'Famiglia Rossi', k_nb: 'Famiglia Bernasconi', c_house: 'Via Nassa 10, 6900 Lugano', c_vname: 'Amministrazione Esempio SA', c_vmail: 'info@amministrazione-esempio.ch', c_vhours: 'lu–ve 8–12 e 13.30–17', c_hname: 'Sig. Bernasconi', c_heat_n: 'Riscaldamenti Esempio SA', c_water_n: 'Sanitari Esempio Sagl', c_lift_n: 'Ascensori Service SA', c_paper: 'un mercoledì sì e uno no', f_desc: 'tre chiavi, portachiavi rosso'},
+  en: {names: 'Olena and Andrii Kovalenko', r_firm: 'Example Plumbing Ltd', m_firm: 'Example Removals Ltd', n_origin: 'from Ukraine', n_kids: 'Mila (6) and Tim (3)', k_rec: 'the Meier family', k_nb: 'the Brunner family', c_house: 'Seestrasse 10, 8002 Zurich', c_vname: 'Example Property Ltd', c_vmail: 'info@example-property.ch', c_vhours: 'Mon–Fri 8–12 and 13.30–17', c_hname: 'Mr Brunner', c_heat_n: 'Example Heating Ltd', c_water_n: 'Example Plumbing Ltd', c_lift_n: 'Lift Service Ltd', c_paper: 'every other Wednesday', f_desc: 'three keys, red key ring'}
+};
+const EXD = () => { const lg = S.lang, x = EXL[lg] || EXL.de, y = new Date(); y.setDate(y.getDate() - 1);
+  return {kt: S.kt, lang: lg, tr: S.tr, bw: S.bw, types: Object.assign({}, S.types), f: Object.assign(blankF(), x, {who: 'we', floor: '2', side: 'l', apno: '', tel: '079 000 00 00',
+    p_occ: 'bday', p_where: 'flat', p_from: '18:00', p_to: '01:00', p_inv: 'floor', r_bath: true, r_ftel: '044 000 00 00', m_dir: 'in', m_van: 'front',
+    n_since: plusDays(TODAY, -7), n_pet: 'cat', k_mode: 'held', k_cour: 'Post', k_time: '18:00', k_nbfloor: '2', k_nbside: 'r',
+    c_vtel: '044 000 00 00', c_htel: '079 111 11 11', c_pik: '044 000 00 99', c_heat_t: '044 000 00 10', c_water_t: '044 000 00 20', c_lift_t: '0800 000 000', c_wash: 'wk', c_trash: '2', c_quiet: '22-7', c_noon: true,
+    f_mode: 'found', f_item: 'keys', f_where: 'laundry', f_date: iso(y), f_pick: 'me', l_1: 'Kovalenko', l_2: x.names.replace(/ Kovalenko$/, '').replace(/ (und|et|e|and) /, ' & '), l_size: '60x17', l_n: '8', l_ad: 'adfree', l_adlang: 'one', l_adn: '2'})}; };
+function build(){
+  const d = D(), f = d.f, lg = d.lang, pages = [], tr = [];
+  NOTICE.forEach(t => { if (!d.types[t]) return; const s = GEN[t](f, lg);
+    pages.push(t === 'paket' ? a6page(d, s) : t === 'kont' ? poster(d, s) : notice(d, s));
+    if (d.tr) tr.push([s, GEN[t](f, 'ru')]); });
+  if (d.types.label) labelPages(d, f).forEach(p => pages.push(p));
+  if (d.types.memo) pages.push(memoPage(d));
+  if (tr.length) trPages(d, tr).forEach(p => pages.push(p));
+  return pages;
+}
+const $ = id => document.getElementById(id), fields = $('fields');
+const PH = {names: EXL, r_other: {de: 'Ersatz der Wohnungstür', fr: 'remplacement de la porte d’entrée', it: 'sostituzione della porta d’ingresso', en: 'replacing the front door'}, firm: 'r_firm', mfirm: 'm_firm', origin: 'n_origin', kids: 'n_kids', rec: 'k_rec', nb: 'k_nb', house: 'c_house', vname: 'c_vname', hours: 'c_vhours', hname: 'c_hname', heat: 'c_heat_n', water: 'c_water_n', lift: 'c_lift_n', paper: 'c_paper', fdesc: 'f_desc',
+  fother: {de: 'Velohelm', fr: 'casque de vélo', it: 'casco da bici', en: 'bike helmet'}};
+function ph(key, lg){ const v = PH[key]; if (key === 'names') return EXL[lg].names; if (typeof v === 'string') return EXL[lg][v]; return v ? v[lg] : ''; }
+/* списки времени, этажей, сторон */
+const TIMES = []; for (let h = 6; h <= 23; h++) TIMES.push(String(h).padStart(2, '0') + ':00', String(h).padStart(2, '0') + ':30'); TIMES.push('00:00', '00:30', '01:00', '01:30', '02:00', '03:00');
+fields.querySelectorAll('.tsel').forEach(s => { s.innerHTML = (s.dataset.any ? '<option value="any">В любое время</option>' : '') + TIMES.map(t => `<option value="${t}">${t}</option>`).join(''); });
+fields.querySelectorAll('.flsel').forEach(s => { s.innerHTML = '<option value="">Не указывать</option><option value="EG">Первый этаж (EG, Erdgeschoss)</option>' + Array.from({length: 10}, (_, i) => `<option value="${i + 1}">${i + 1}. OG — ${i + 2}-й этаж по-нашему</option>`).join('') + '<option value="DG">Мансарда (DG, Dachgeschoss)</option>'; });
+fields.querySelectorAll('.sdsel').forEach(s => { s.innerHTML = '<option value="">Не указывать</option><option value="l">Слева (links)</option><option value="r">Справа (rechts)</option><option value="m">Посередине (Mitte)</option>'; });
+$('types').innerHTML = TYPES.map(([k, t, s]) => `<label><input type="checkbox" data-type="${k}"><span><b>${t}</b><small>${s}</small></span></label>`).join('');
+const KN = window.KANTONY || {};
+$('kt').innerHTML = '<option value="">Выбери кантон</option>' + Object.keys(KN).sort((a, b) => KN[a].n.localeCompare(KN[b].n, 'ru')).map(k => `<option value="${k}">${SH.esc(KN[k].n)}</option>`).join('');
+let UI, tmr;
+function vis(){ const d = D(), f = d.f, ty = d.types;
+  fields.querySelectorAll('[data-t]').forEach(s => s.hidden = !ty[s.dataset.t]);
+  $('s-me').hidden = !NOTICE.some(t => ty[t]);
+  fields.querySelectorAll('[data-km]').forEach(e => e.hidden = e.dataset.km !== f.k_mode);
+  fields.querySelectorAll('[data-fm]').forEach(e => e.hidden = e.dataset.fm !== f.f_mode);
+  fields.querySelectorAll('[data-ad]').forEach(e => e.hidden = !f.l_ad);
+  $('fOther').hidden = f.f_item !== 'other'; $('linkBox').hidden = f.c_wash !== 'link'; $('szBox').hidden = f.l_size !== 'custom'; }
+function fill(){ const d = D();
+  $('kt').value = d.kt || ''; $('lang').value = d.lang; $('tr').checked = !!d.tr; $('bw').checked = !!d.bw;
+  $('types').querySelectorAll('[data-type]').forEach(c => { c.checked = !!d.types[c.dataset.type]; });
+  fields.querySelectorAll('[data-k]').forEach(e => { const v = d.f[e.dataset.k]; if (e.type === 'checkbox') e.checked = !!v; else e.value = v == null ? '' : v; e.disabled = !!EX; if (e.dataset.ph) e.placeholder = ph(e.dataset.ph, d.lang) || ''; });
+  $('exbar').hidden = !EX; $('exOn').hidden = !!EX; vis(); if (UI) UI.render(); }
+$('types').addEventListener('change', e => { const c = e.target.closest('[data-type]'); if (!c) return; S.types[c.dataset.type] = c.checked; if (EX) EX.types[c.dataset.type] = c.checked; save(); vis(); if (UI) UI.render(); });
+fields.addEventListener('input', e => { const el = e.target.closest('[data-k]'); if (!el || EX || el.type === 'checkbox' || el.tagName === 'SELECT') return; S.f[el.dataset.k] = el.type === 'number' ? +el.value : el.value; save(); clearTimeout(tmr); tmr = setTimeout(() => UI && UI.render(), 350); });
+fields.addEventListener('change', e => { const el = e.target.closest('[data-k]'); if (!el || EX) return; S.f[el.dataset.k] = el.type === 'checkbox' ? el.checked : el.type === 'number' ? +el.value : el.value; save(); vis(); if (UI) UI.render(); });
+$('kt').addEventListener('change', e => { S.kt = e.target.value; if (S.kt) S.lang = langOf(S.kt); try { localStorage.setItem('svoiludi.kanton', S.kt); } catch (x) {} if (EX) EX = EXD(); save(); fill(); });
+$('lang').addEventListener('change', e => { S.lang = e.target.value; if (EX) EX = EXD(); save(); fill(); });
+$('tr').addEventListener('change', e => { S.tr = e.target.checked; if (EX) EX.tr = S.tr; save(); if (UI) UI.render(); });
+$('bw').addEventListener('change', e => { S.bw = e.target.checked; if (EX) EX.bw = S.bw; save(); if (UI) UI.render(); });
+$('exOn').addEventListener('click', () => { EX = EXD(); fill(); window.scrollTo({top: $('exbar').offsetTop - 12, behavior: 'smooth'}); });
+$('exOff').addEventListener('click', () => { EX = null; fill(); });
+if (/[?&]example\b/.test(location.search)) EX = EXD();
+const FN = {party: 'Wir-feiern', reno: 'Handwerker-im-Haus', move: 'Umzug', neu: 'Neu-im-Haus', paket: 'Paket-Notiz', kont: 'Wichtige-Kontakte', fund: 'Gefunden-Verloren', label: 'Briefkastenschilder', memo: 'Pamyatka-horoshego-soseda'};
+UI = SH.mount({build, lang: () => D().lang, title: 'Объявления для соседей', name: () => { const on = TYPES.map(t => t[0]).filter(t => D().types[t]); return on.length === 1 ? FN[on[0]] : 'Aushaenge-Nachbarn'; }});
+fill();
+
+</script>
+<script src="/assets/help.js"></script>
+<script src="/assets/backup.js"></script>
+<script src="/assets/pdffan.js" defer></script>
+<script src="/assets/share.js" defer></script>
+<script src="/assets/samesite.js"></script>
+<!--i18n--><style>#langbar.langbar{position:fixed;bottom:14px;right:14px;z-index:60;display:flex;gap:2px;background:rgba(255,255,255,.92);border:1px solid rgba(0,0,0,.08);border-radius:999px;padding:3px;font:600 12px Manrope,system-ui,sans-serif;box-shadow:0 2px 8px rgba(0,0,0,.08)}#langbar.langbar a{color:#5d554d;padding:5px 9px;border-radius:999px;text-decoration:none;font:inherit;display:inline-block}#langbar.langbar a[aria-current="true"]{background:#2f2924;color:#fff}@media print{.langbar{display:none!important}}</style><div class="langbar" id="langbar" role="navigation" aria-label="Мова / Язык"><a href="/instrumenty/obyavleniya-sosedyam/" hreflang="ru" data-lang="ru" aria-current="true">RU</a><a href="/uk/instrumenty/obyavleniya-sosedyam/" hreflang="uk" data-lang="uk">UA</a></div><script>(function(){var b=document.getElementById('langbar');if(!b)return;b.addEventListener('click',function(e){var a=e.target.closest('a[data-lang]');if(a){try{localStorage.setItem('svoiludiLang',a.dataset.lang)}catch(x){}a.href=a.getAttribute('href').split('#')[0]+location.hash;}});})();</script><!--i18n--></body>
+</html>
