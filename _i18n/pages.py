@@ -220,12 +220,14 @@ def localize_assets(html, tr, missing):
 def post(html, src):
     """правки кода, которые зависят от языка не только словами"""
     html = re.sub(r"(['\"])ru-RU\1", r"\1uk-UA\1", html)                      # даты и числа по-украински
+    html = html.replace('aria-label="Свои люди в Швейцарии — в начало"', 'aria-label="Свої люди у Швейцарії — на початок"')   # шапка (topnav.py)
     def ogimg(m):   # картинки превью ссылок — украинские, если есть (_i18n/og.js)
         rel = m.group(2); uk = rel[:-4] + '.uk.jpg'
         return m.group(1) + (uk if os.path.exists(os.path.join(ROOT, uk)) else rel)
     html = re.sub(r'(content="https://svoiludi\.ch/)([\w/.-]+?\.jpg)(?=")', ogimg, html)
     html = html.replace('/fav/site.webmanifest', '/fav/site.uk.webmanifest').replace('name="apple-mobile-web-app-title" content="Свои люди"', 'name="apple-mobile-web-app-title" content="Свої люди"')   # сайт как приложение (_i18n/pwa.py)
     html = re.sub(r"(localeCompare\([^()]*?,\s*)'ru'", r"\1'uk'", html)           # сортировка по украинскому алфавиту
+    html = re.sub(r'href="(?:\.\./)*novosti/rss\.xml"', 'href="/uk/novosti/rss.xml"', html)   # ссылка «Лента новостей RSS» в блоке подписки на любой странице
     if src == 'novosti/index.html':   # «Что нового»: украинская лента RSS (_i18n/struktura_src/build.py)
         html = html.replace('href="rss.xml"', 'href="/uk/novosti/rss.xml"').replace('svoiludi.ch/novosti/rss.xml', 'svoiludi.ch/uk/novosti/rss.xml')
     if src == 'opros/index.html':

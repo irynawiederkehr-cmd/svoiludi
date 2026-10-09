@@ -105,7 +105,7 @@ for key, name, lead, slugs in CATS:
         files = ''.join(f'<li><b>{html.escape(it["t"])}</b><span>{html.escape(it["d"])}</span></li>' for it in items)
         size = f'{F["pages"]} {F["unit"]}' if F.get('pages') else ''
         used = USED.get(s, [])[:4]
-        usedh = ('<p class="ku">Где пригодится: ' + ', '.join(f'<a href="../../shveycariya/{a}/">{html.escape(b)}</a>' for a, b in used) + '</p>') if used else ''
+        usedh = ('<p class="ku">Пригодится в темах: ' + ', '.join(f'<a href="../../shveycariya/{a}/">{html.escape(b)}</a>' for a, b in used) + '</p>') if used else ''
         rows.append(f'''<article class="kt" data-kind="{kind}">
       <a class="kh" href="../{s}/">{thumbs(s)}<span class="kic">{T['ic']}</span><span class="ktx"><span class="tag">{html.escape(T['tag'])}</span><b>{html.escape(T['title'])}</b></span></a>
       <p class="kp">{html.escape(T['p'])}</p>

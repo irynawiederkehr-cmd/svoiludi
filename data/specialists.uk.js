@@ -394,7 +394,7 @@ window.SPECIALISTS = [
     "places": [
       {
         "canton": "Zürich",
-        "address": "Bahnhofstrasse 10, 8001 Zürich",
+        "address": "Musterstrasse 10, 8001 Zürich",
         "geo": [
           47.3686,
           8.5392
@@ -417,12 +417,9 @@ window.SPECIALISTS = [
       "англійська"
     ],
     "contacts": {
-      "phone": "+41 44 555 23 89",
-      "email": "anna.keller@example.ch",
-      "site": "example.ch",
-      "instagram": "swiss.adapt",
-      "telegram": "annakeller_ch",
-      "whatsapp": "+41 44 555 23 89"
+      "phone": "+41 00 000 00 00",
+      "email": "anna.keller@example.com",
+      "site": "example.com"
     },
     "pricesDate": "2026-10-01",
     "prices": [
@@ -491,7 +488,7 @@ window.SPECIALISTS = [
     "places": [
       {
         "canton": "Zürich",
-        "address": "Seefeldstrasse 40, 8008 Zürich",
+        "address": "Musterstrasse 40, 8008 Zürich",
         "geo": [
           47.3594,
           8.55
@@ -499,7 +496,7 @@ window.SPECIALISTS = [
       },
       {
         "canton": "Zürich",
-        "address": "Marktgasse 12, 8400 Winterthur",
+        "address": "Musterstrasse 12, 8400 Winterthur",
         "geo": [
           47.4996,
           8.729
@@ -523,11 +520,8 @@ window.SPECIALISTS = [
       "німецька"
     ],
     "contacts": {
-      "phone": "+41 77 555 10 20",
-      "email": "olga.marti@example.ch",
-      "instagram": "olga.marti.body",
-      "telegram": "olgamarti_ch",
-      "whatsapp": "+41 77 555 10 20"
+      "phone": "+41 00 000 00 00",
+      "email": "olga.marti@example.com"
     }
   },
   {
@@ -555,7 +549,7 @@ window.SPECIALISTS = [
     "places": [
       {
         "canton": "Zug",
-        "address": "Baarerstrasse 8, 6300 Zug",
+        "address": "Musterstrasse 8, 6300 Zug",
         "geo": [
           47.1702,
           8.516
@@ -563,7 +557,7 @@ window.SPECIALISTS = [
       },
       {
         "canton": "Luzern",
-        "address": "Hertensteinstrasse 20, 6004 Luzern",
+        "address": "Musterstrasse 20, 6004 Luzern",
         "geo": [
           47.0532,
           8.308
@@ -587,10 +581,9 @@ window.SPECIALISTS = [
       "англійська"
     ],
     "contacts": {
-      "phone": "+41 41 555 33 44",
-      "email": "d.huber@example.ch",
-      "site": "example.ch",
-      "telegram": "huber_tax"
+      "phone": "+41 00 000 00 00",
+      "email": "d.huber@example.com",
+      "site": "example.com"
     }
   },
   {
@@ -619,7 +612,7 @@ window.SPECIALISTS = [
     "places": [
       {
         "canton": "Ticino",
-        "address": "Via Nassa 5, 6900 Lugano",
+        "address": "Musterstrasse 5, 6900 Lugano",
         "geo": [
           46.0046,
           8.9506
@@ -641,9 +634,9 @@ window.SPECIALISTS = [
       "німецька"
     ],
     "contacts": {
-      "phone": "+41 91 555 77 88",
-      "email": "praxis.bianchi@example.ch",
-      "site": "example.ch"
+      "phone": "+41 00 000 00 00",
+      "email": "praxis.bianchi@example.com",
+      "site": "example.com"
     }
   },
   {
@@ -670,7 +663,7 @@ window.SPECIALISTS = [
     "places": [
       {
         "canton": "Bern",
-        "address": "Marktgasse 30, 3011 Bern",
+        "address": "Musterstrasse 30, 3011 Bern",
         "geo": [
           46.948,
           7.4446
@@ -692,9 +685,8 @@ window.SPECIALISTS = [
       "французька"
     ],
     "contacts": {
-      "phone": "+41 31 555 12 34",
-      "email": "s.meier@example.ch",
-      "whatsapp": "+41 79 555 12 34"
+      "phone": "+41 00 000 00 00",
+      "email": "s.meier@example.com"
     }
   },
   {
@@ -728,7 +720,7 @@ window.SPECIALISTS = [
     "places": [
       {
         "canton": "Aargau",
-        "address": "Bahnhofstrasse 2, 5000 Aarau",
+        "address": "Musterstrasse 2, 5000 Aarau",
         "geo": [
           47.3913,
           8.0496
@@ -750,9 +742,7 @@ window.SPECIALISTS = [
       "німецька"
     ],
     "contacts": {
-      "email": "irina.frei@example.ch",
-      "instagram": "deutsch.mit.irina",
-      "telegram": "deutsch_irina"
+      "email": "irina.frei@example.com"
     }
   },
   {
@@ -780,7 +770,7 @@ window.SPECIALISTS = [
     "places": [
       {
         "canton": "Luzern",
-        "address": "Pilatusstrasse 15, 6003 Luzern",
+        "address": "Musterstrasse 15, 6003 Luzern",
         "geo": [
           47.0494,
           8.307
@@ -802,9 +792,8 @@ window.SPECIALISTS = [
       "німецька"
     ],
     "contacts": {
-      "phone": "+41 41 555 66 00",
-      "email": "oksana.roth@example.ch",
-      "whatsapp": "+41 76 555 66 00"
+      "phone": "+41 00 000 00 00",
+      "email": "oksana.roth@example.com"
     }
   },
   {
@@ -838,7 +827,7 @@ window.SPECIALISTS = [
     "places": [
       {
         "canton": "Basel-Stadt",
-        "address": "Steinenvorstadt 22, 4051 Basel",
+        "address": "Musterstrasse 22, 4051 Basel",
         "geo": [
           47.553,
           7.588
@@ -859,9 +848,9 @@ window.SPECIALISTS = [
       "англійська"
     ],
     "contacts": {
-      "phone": "+41 61 555 90 90",
-      "email": "e.schmid@example.ch",
-      "site": "example.ch"
+      "phone": "+41 00 000 00 00",
+      "email": "e.schmid@example.com",
+      "site": "example.com"
     }
   },
   {
@@ -894,7 +883,7 @@ window.SPECIALISTS = [
     "places": [
       {
         "canton": "St. Gallen",
-        "address": "Multergasse 4, 9000 St. Gallen",
+        "address": "Musterstrasse 4, 9000 St. Gallen",
         "geo": [
           47.4245,
           9.3747
@@ -914,10 +903,8 @@ window.SPECIALISTS = [
       "німецька"
     ],
     "contacts": {
-      "phone": "+41 71 555 45 45",
-      "email": "v.baumann@example.ch",
-      "telegram": "baumann_insure",
-      "whatsapp": "+41 79 555 45 45"
+      "phone": "+41 00 000 00 00",
+      "email": "v.baumann@example.com"
     }
   },
   {
@@ -946,7 +933,7 @@ window.SPECIALISTS = [
     "places": [
       {
         "canton": "Zürich",
-        "address": "Limmatquai 70, 8001 Zürich",
+        "address": "Musterstrasse 70, 8001 Zürich",
         "geo": [
           47.374,
           8.544
@@ -967,9 +954,7 @@ window.SPECIALISTS = [
       "німецька"
     ],
     "contacts": {
-      "email": "alina.shteuber@example.ch",
-      "telegram": "alina_coach_ch",
-      "instagram": "alina.coach.ch"
+      "email": "alina.shteuber@example.com"
     }
   },
   {
@@ -993,7 +978,7 @@ window.SPECIALISTS = [
     "places": [
       {
         "canton": "Zürich",
-        "address": "Badenerstrasse 100, 8004 Zürich",
+        "address": "Musterstrasse 100, 8004 Zürich",
         "geo": [
           47.377,
           8.524
@@ -1013,7 +998,7 @@ window.SPECIALISTS = [
       "німецька"
     ],
     "contacts": {
-      "phone": "+41 44 555 00 11"
+      "phone": "+41 00 000 00 00"
     }
   },
   {
@@ -1037,7 +1022,7 @@ window.SPECIALISTS = [
     "places": [
       {
         "canton": "Zug",
-        "address": "Industriestrasse 3, 6300 Zug",
+        "address": "Musterstrasse 3, 6300 Zug",
         "geo": [
           47.176,
           8.515
@@ -1057,7 +1042,7 @@ window.SPECIALISTS = [
       "українська"
     ],
     "contacts": {
-      "phone": "+41 78 555 22 33"
+      "phone": "+41 00 000 00 00"
     }
   }
 ];

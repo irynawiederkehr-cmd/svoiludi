@@ -46,7 +46,7 @@ window.AFISHA = [
     date: '2026-10-08', time: '18:30', timeEnd: '20:00', repeat: { freq: 'weekly', until: '2026-12-17', except: ['2026-12-24'] },
     canton: 'Zürich', address: 'Limmatquai 70, 8001 Zürich', geo: [47.3740, 8.5440], online: false,
     langs: ['немецкий', 'русский'], price: 'CHF 15', commercial: true, organizers: ['irina-frei'],
-    link: 'https://t.me/example_deutsch_club', contact: 'irina.frei@example.ch',
+    link: 'https://example.com/deutsch_club', contact: 'irina.frei@example.com',
     about: 'Говорим по-немецки на бытовые темы: школа, врач, работа, письма из коммуны. Уровень A2–B1, небольшие группы до 8 человек, без домашних заданий.'
   },
   {
@@ -55,8 +55,8 @@ window.AFISHA = [
     id: 'vstrecha-mam-aarau', status: 'активен', title: 'Встреча мам с малышами', type: 'kids',
     date: '2026-10-10', time: '10:00', timeEnd: '12:00', repeat: { freq: 'monthly', until: '2027-06-30' },
     canton: 'Aargau', address: 'Bahnhofstrasse 2, 5000 Aarau', geo: [47.3913, 8.0496], online: false,
-    langs: ['русский', 'украинский'], price: 'бесплатно', commercial: false, organizers: [{ name: 'Клуб «Мамы Аарау»', link: 'https://t.me/example_mamy' }],
-    link: 'https://t.me/example_mamy', contact: '@example_mamy',
+    langs: ['русский', 'украинский'], price: 'бесплатно', commercial: false, organizers: [{ name: 'Клуб «Мамы Аарау»', link: 'https://example.com/mamy' }],
+    link: 'https://example.com/mamy', contact: 'mamy@example.com',
     about: 'Каждую вторую субботу месяца: игровая комната для детей до 4 лет, чай для мам, обмен опытом о яслях, педиатрах и детских кружках. Взнос на чай по желанию.'
   },
   {
@@ -66,7 +66,7 @@ window.AFISHA = [
     date: '2026-10-15', time: '19:30', timeEnd: '21:00',
     canton: 'Zürich', address: '', online: true,
     langs: ['русский'], price: 'бесплатно', commercial: false, organizers: ['anna-keller', 'alina-shteuber'],
-    link: 'https://example.ch/webinar', contact: 'anna.keller@example.ch',
+    link: 'https://example.com/webinar', contact: 'anna.keller@example.com',
     about: 'Онлайн-встреча для тех, кто недавно переехал: разрешения, страховки, коммуна, школа. Отвечаем на вопросы и рассказываем, с чего начать, чтобы не потеряться в первые месяцы.'
   },
   {
@@ -76,7 +76,7 @@ window.AFISHA = [
     date: '2026-10-23', dateEnd: '2026-10-25',
     canton: 'Graubünden', address: 'Via Maistra 12, 7500 St. Moritz', geo: [46.4983, 9.8390], online: false,
     langs: ['русский'], price: 'CHF 480 (проживание и питание включены)', commercial: true, organizers: ['alina-shteuber'],
-    link: 'https://example.ch/retreat', contact: 'alina@example.ch',
+    link: 'https://example.com/retreat', contact: 'alina@example.com',
     about: 'Три дня в горах: прогулки, коучинговые практики и время для себя. Для женщин, которые переехали и хотят снова почувствовать опору. Группа до 12 человек.'
   },
   {
@@ -85,8 +85,8 @@ window.AFISHA = [
     id: 'yazykovoj-tandem-basel', status: 'активен', title: 'Языковой тандем: русский ↔ немецкий', type: 'lang',
     date: '2026-10-14', time: '19:00', timeEnd: '21:00', repeat: { freq: 'weekly', interval: 2, until: '2027-03-31' },
     canton: 'Basel-Stadt', address: 'Steinenvorstadt 22, 4051 Basel', geo: [47.5530, 7.5880], online: false,
-    langs: ['русский', 'немецкий'], price: 'бесплатно', commercial: false, organizers: [{ name: 'Tandem Basel', link: 'https://example.ch/tandem' }],
-    link: 'https://example.ch/tandem', contact: 'tandem@example.ch',
+    langs: ['русский', 'немецкий'], price: 'бесплатно', commercial: false, organizers: [{ name: 'Tandem Basel', link: 'https://example.com/tandem' }],
+    link: 'https://example.com/tandem', contact: 'tandem@example.com',
     about: 'Полчаса говорим по-русски, полчаса по-немецки. Приходят и местные, кто учит русский, — хороший способ найти знакомых и практику языка.'
   },
   {
@@ -95,8 +95,8 @@ window.AFISHA = [
     id: 'novogodnyaya-elka-luzern', status: 'активен', title: 'Новогодняя ёлка для детей', type: 'culture',
     date: '2026-12-19', time: '15:00', timeEnd: '17:30',
     canton: 'Luzern', address: 'Pilatusstrasse 15, 6003 Luzern', geo: [47.0494, 8.3070], online: false,
-    langs: ['русский', 'украинский'], price: 'CHF 20 за ребёнка, взрослые бесплатно', commercial: true, organizers: ['oksana-roth', { name: 'Русская школа Люцерн', link: 'https://example.ch/schule' }],
-    link: 'https://example.ch/elka', contact: 'oksana.roth@example.ch',
+    langs: ['русский', 'украинский'], price: 'CHF 20 за ребёнка, взрослые бесплатно', commercial: true, organizers: ['oksana-roth', { name: 'Русская школа Люцерн', link: 'https://example.com/schule' }],
+    link: 'https://example.com/elka', contact: 'oksana.roth@example.com',
     about: 'Хоровод, Дед Мороз и Снегурочка, подарки и спектакль от учеников русской школы. Для детей 3–10 лет, записаться нужно заранее.'
   },
   {
@@ -106,7 +106,7 @@ window.AFISHA = [
     date: '2027-02-06', time: '10:00', timeEnd: '12:30',
     canton: 'Zug', address: 'Baarerstrasse 8, 6300 Zug', geo: [47.1702, 8.5160], online: true,
     langs: ['русский'], price: 'CHF 40', commercial: true, organizers: ['dmitri-huber'],
-    link: 'https://example.ch/steuern', contact: 'dmitri.huber@example.ch',
+    link: 'https://example.com/steuern', contact: 'dmitri.huber@example.com',
     about: 'Как заполнить первую налоговую декларацию, какие вычеты положены семьям и что делать с иностранными доходами. Очно в Цуге и онлайн одновременно.'
   },
   {
@@ -115,8 +115,8 @@ window.AFISHA = [
     id: 'piknik-bern', status: 'активен', title: 'Летний пикник у Аре', type: 'meet',
     date: '2027-06-19', time: '12:00', timeEnd: '17:00',
     canton: 'Bern', address: 'Marzilistrasse 29, 3005 Bern', geo: [46.9440, 7.4440], online: false,
-    langs: ['русский', 'украинский', 'немецкий'], price: 'бесплатно', commercial: false, organizers: [{ name: 'Свои люди Берн', link: 'https://t.me/example_bern' }],
-    link: 'https://t.me/example_bern', contact: '@example_bern',
+    langs: ['русский', 'украинский', 'немецкий'], price: 'бесплатно', commercial: false, organizers: [{ name: 'Свои люди Берн', link: 'https://example.com/bern' }],
+    link: 'https://example.com/bern', contact: 'bern@example.com',
     about: 'Большой пикник для всех: каждый приносит что-то к общему столу, для детей игры и купание. Отличный способ познакомиться с теми, кто живёт рядом.'
   },
 
@@ -130,7 +130,7 @@ window.AFISHA = [
     langs: ['русский', 'украинский'], level: 'любой уровень, можно без опыта',
     price: 'CHF 25', per: 'за занятие', priceNote: 'абонемент на 10 занятий — CHF 220, первое занятие — CHF 10; коврики есть в зале',
     commercial: true, organizers: ['olga-marti'],
-    link: 'https://example.ch/joga', contact: 'olga.marti@example.ch',
+    link: 'https://example.com/joga', contact: 'olga.marti@example.com',
     about: 'Спокойная практика после рабочего дня: дыхание, растяжка и долгое расслабление в конце. Группа до 10 человек, можно прийти на любое занятие и остаться.'
   },
   {
@@ -142,7 +142,7 @@ window.AFISHA = [
     langs: ['немецкий', 'русский'], level: 'с нуля, взрослые',
     price: 'CHF 480', per: 'за курс из 20 занятий', priceNote: 'учебник и рабочая тетрадь включены; можно платить двумя частями',
     commercial: true, organizers: ['irina-frei'],
-    link: 'https://example.ch/deutsch-a1', contact: 'irina.frei@example.ch',
+    link: 'https://example.com/deutsch-a1', contact: 'irina.frei@example.com',
     about: 'Группа до 8 человек, раз в неделю по полтора часа. Учимся говорить о себе, понимать письма из коммуны и разговаривать в магазине и у врача. Объясняю по-русски, говорим по-немецки.'
   },
   {
@@ -154,7 +154,7 @@ window.AFISHA = [
     langs: ['русский'], level: 'для тех, кто работает на себя или только начинает',
     price: 'CHF 35', per: 'за вебинар', priceNote: 'запись вебинара включена',
     commercial: true, organizers: ['dmitri-huber'],
-    link: 'https://example.ch/webinar-steuern', contact: 'dmitri.huber@example.ch',
+    link: 'https://example.com/webinar-steuern', contact: 'dmitri.huber@example.com',
     about: 'Как платить AHV на своё дело, какие расходы можно вычесть и что делать с налоговой декларацией в первый год. В конце отвечаю на вопросы участников.'
   },
   {
@@ -166,7 +166,7 @@ window.AFISHA = [
     langs: ['русский'], level: 'для женщин, которые недавно переехали',
     price: 'CHF 240', per: 'за курс из 6 встреч', priceNote: 'рабочая тетрадь в PDF включена',
     commercial: true, organizers: ['alina-shteuber'],
-    link: 'https://example.ch/krug', contact: 'alina@example.ch',
+    link: 'https://example.com/krug', contact: 'alina@example.com',
     about: 'Шесть онлайн-встреч в небольшой группе. Говорим о том, как найти опору после переезда, выстроить свой ритм и не потерять себя между работой, семьёй и новым языком.'
   },
   {
@@ -178,7 +178,7 @@ window.AFISHA = [
     langs: ['русский'], level: 'дети 3–5 лет вместе с мамой или папой',
     price: 'CHF 20', per: 'за занятие', priceNote: 'пробное занятие бесплатно',
     commercial: true, organizers: ['oksana-roth'],
-    link: 'https://example.ch/muzykalnye-igry', contact: 'oksana.roth@example.ch',
+    link: 'https://example.com/muzykalnye-igry', contact: 'oksana.roth@example.com',
     about: 'Игровые занятия под музыку: движения, песенки, стишки, пальчиковые игры. Малыши слышат русскую речь и играют вместе с другими детьми. Это не логопедические занятия и не терапия.'
   },
   {
@@ -189,8 +189,8 @@ window.AFISHA = [
     canton: 'Zug', address: 'Baarerstrasse 8, 6300 Zug', geo: [47.1702, 8.5160], online: false,
     langs: ['русский', 'украинский'], level: 'без опыта, с 14 лет',
     price: 'CHF 60', per: 'за мастер-класс', priceNote: 'краски, кисти и бумага включены, чай тоже',
-    commercial: true, organizers: [{ name: 'Ателье «Палитра»', link: 'https://example.ch/palitra' }],
-    link: 'https://example.ch/palitra', contact: 'atelier@example.ch',
+    commercial: true, organizers: [{ name: 'Ателье «Палитра»', link: 'https://example.com/palitra' }],
+    link: 'https://example.com/palitra', contact: 'atelier@example.com',
     about: 'За три часа рисуем осенний пейзаж и пробуем главные приёмы акварели. Каждый уносит домой свою готовую работу.'
   },
   {
@@ -201,8 +201,8 @@ window.AFISHA = [
     canton: 'Bern', address: 'Marzilistrasse 29, 3005 Bern', geo: [46.9440, 7.4440], online: false,
     langs: ['русский', 'украинский', 'немецкий'], level: 'дети 6–12 лет, можно без опыта',
     price: 'бесплатно', per: '', priceNote: 'родители по очереди приносят чай и печенье',
-    commercial: false, organizers: [{ name: 'Свои люди Берн', link: 'https://t.me/example_bern' }],
-    link: 'https://t.me/example_bern', contact: '@example_bern',
+    commercial: false, organizers: [{ name: 'Свои люди Берн', link: 'https://example.com/bern' }],
+    link: 'https://example.com/bern', contact: 'bern@example.com',
     about: 'Каждую пятницу играем, решаем задачки и устраиваем маленькие турниры. Ведут родители, которые сами любят шахматы.'
   }
 ];
