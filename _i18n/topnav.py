@@ -3,6 +3,8 @@
 Текущий раздел выделен (aria-current). У страниц без шапки (инструменты, политика) шапка вставляется сразу после <body>.
 Стили шапки — блок <style id="sl-top"> в <head> (ставит pwa.py вместе с блоком приложения), шапка всегда поверх
 содержимого страницы (z-index 40: раньше веер страниц инструментов наезжал на меню).
+Пункты меню: если в ветке есть _i18n/struktura_src/nav.py (новое устройство сайта, ветка kopiya-struktura) — берутся оттуда
+(ITEMS, без «Сайт Ирины»), иначе — список NAV ниже. Так после слияния новое меню само встанет на все страницы, включая инструменты.
 Вызывается из _i18n/pwa.py для каждой русской страницы из PAGES; украинские получают её при сборке pages.py."""
 import re
 
@@ -21,17 +23,32 @@ def _mark(root_html):
     return MARK_SVG
 
 
+def _struktura():
+    import os, importlib.util
+    f = os.path.join(os.path.dirname(__file__), 'struktura_src', 'nav.py')
+    if not os.path.isfile(f):
+        return None
+    spec = importlib.util.spec_from_file_location('struktura_nav', f); m = importlib.util.module_from_spec(spec); spec.loader.exec_module(m)
+    return m.ITEMS
+
+
 def header(url, home_html):
     depth = len([x for x in url.strip('/').split('/') if x])
     up = '../' * depth
     sec = url.strip('/').split('/')[0] + '/' if url.strip('/') else ''
+    rel = (url.strip('/') + '/index.html') if url.strip('/') else 'index.html'
     home = up or './'
     items = []
-    for href, name in NAV:
-        cur = (sec == href) if href else (url == '/')
-        link = (up + href) or './'
-        items.append(f'      <a href="{link}"' + (' aria-current="page"' if cur else '') + f'>{name}</a>')
-    items.append(f'      <a href="{IRINA[0]}">{IRINA[1]}</a>')
+    S = _struktura()
+    if S:
+        for href, name, cur in S:
+            items.append(f'      <a href="{(up + href) or "./"}"' + (' aria-current="page"' if cur(rel) else '') + f'>{name}</a>')
+    else:
+        for href, name in NAV:
+            cur = (sec == href) if href else (url == '/')
+            link = (up + href) or './'
+            items.append(f'      <a href="{link}"' + (' aria-current="page"' if cur else '') + f'>{name}</a>')
+        items.append(f'      <a href="{IRINA[0]}">{IRINA[1]}</a>')
     cta = '#form' if sec == 'join/' else up + CTA[0]
     return ('<header class="top">\n  <div class="page">\n'
             f'    <a class="mark" href="{home}" aria-label="Свои люди в Швейцарии — в начало">\n'
