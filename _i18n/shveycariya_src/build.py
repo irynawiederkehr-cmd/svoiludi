@@ -55,6 +55,7 @@ def head(title, desc, url, depth):
 def top(depth):
     t = TOP
     t = t.replace('<a href="./" aria-current="page" style="color:var(--ink)">Курсы</a>', '<a href="../kursy/">Курсы</a>\n      <a href="./" aria-current="page" style="color:var(--ink)">Как устроена Швейцария</a>')
+    t = t.replace('\n      <a href="../shveycariya/">Как устроена Швейцария</a>', '')   # в «Курсах» этот пункт уже есть (09.10.2026) — без повтора
     t = t.replace('<a class="navcta" href="#add">Добавить курс</a>', '<a class="navcta" href="../">Найти специалиста</a>')
     if depth == 2:
         t = re.sub(r'href="\.\./', 'href="../../', t)
@@ -84,7 +85,10 @@ DISC = ('<p class="fine"><b>Это общая информация, а не юр
 
 
 def chips(t):
-    out = [f'<span class="t">{TOOLS[x]}</span>' for x in t['tools'] if HAS(x)]
+    # на карточке темы — одна короткая строка «N инструментов», а не названия: длинные названия занимали полкарточки (замечание Ирины 09.10.2026)
+    n = len([x for x in t['tools'] if HAS(x)])
+    word = 'инструмент' if n % 10 == 1 and n % 100 != 11 else 'инструмента' if n % 10 in (2, 3, 4) and n % 100 not in (12, 13, 14) else 'инструментов'
+    out = [f'<span class="t">{n} {word}</span>'] if n else []
     out += [f'<span>{CATT.get(c, c)}</span>' for c, _ in t['help'][:2]]
     return '<div class="tm-chips">' + ''.join(out) + '</div>' if out else ''
 
