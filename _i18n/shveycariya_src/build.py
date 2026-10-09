@@ -56,7 +56,7 @@ def top(depth):
     t = TOP
     t = t.replace('<a href="./" aria-current="page" style="color:var(--ink)">Курсы</a>', '<a href="../kursy/">Курсы</a>\n      <a href="./" aria-current="page" style="color:var(--ink)">Как устроена Швейцария</a>')
     t = t.replace('\n      <a href="../shveycariya/">Как устроена Швейцария</a>', '')   # в «Курсах» этот пункт уже есть (09.10.2026) — без повтора
-    t = t.replace('<a class="navcta" href="#add">Добавить курс</a>', '<a class="navcta" href="../">Найти специалиста</a>')
+    # кнопка в шапке одинаковая на всех страницах — «Разместиться»; шапку целиком потом ставит _i18n/topnav.py через pwa.py (09.10.2026)
     if depth == 2:
         t = re.sub(r'href="\.\./', 'href="../../', t)
         t = t.replace('href="./" aria-current="page"', 'href="../" aria-current="page"')
