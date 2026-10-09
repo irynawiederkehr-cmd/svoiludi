@@ -28,6 +28,7 @@ TOOLS = {
     'strahovki-obyazatelnye': 'Какие страховки обязательны в Швейцарии',
     'nalogi-shema': 'Как устроены налоги в Швейцарии',
     'pensiya-shema': 'Как устроена пенсия: три колонны',
+    'dogovor-arendy-obrazec': 'Договор аренды квартиры: образец с объяснением каждого пункта',
     'sroki-goda': 'Обязательные сроки года в Швейцарии: напоминания в календарь Google и Apple',
     'posobiya-raschet': 'Детские пособия: сколько положено семье и кто из родителей подаёт',
     'srok-pisma': 'До какого числа ответить на письмо: калькулятор срока с праздниками кантона',
@@ -114,8 +115,8 @@ TOPICS = [
     T('domashniy-personal', 'work', '5.5', 'Домашний персонал', 'Если нанимаешь няню или уборщицу — твои обязанности как работодателя.', ['dogovor-nyani', 'zarplata', 'uchet-vremeni', 'strahovki-obyazatelnye', 'ekstrennye-nomera', 'kuda-obratitsya', 'moi-dannye'], [('money', ['Бухгалтерия и Treuhand'])], ready=True),
     T('sozialhilfe', 'work', '5.6', 'Социальная помощь', 'Права, контроль, возврат и влияние на статус.', ['moj-budget'], [('status', ['Социальные вопросы и пособия']), ('law', ['Миграционное право'])], ready=True),
     # 6. Жильё и транспорт
-    T('arenda', 'home', '6.1.1', 'Как снять квартиру', 'Поиск, досье арендатора и что хозяин не вправе требовать.', ['dosye-arendatora', 'moj-budget', 'pisma-arenda', 'pereezd-spisok'], [('home', ['Риелтор', 'Переезд'])], ready=True),
-    T('dogovor-arendy', 'home', '6.1.2', 'Договор аренды и ловушки', 'Залог, Nebenkosten, сдача квартиры и споры.', ['pisma-arenda', 'moj-budget', 'kuda-obratitsya', 'dosye-arendatora', 'pereezd-spisok', 'zhurnal-shuma'], [('law', ['Аренда']), ('home', ['Уборка со сдачей квартиры'])], ready=True),
+    T('arenda', 'home', '6.1.1', 'Как снять квартиру', 'Поиск, досье арендатора и что хозяин не вправе требовать.', ['dosye-arendatora', 'moj-budget', 'pisma-arenda', 'pereezd-spisok', 'dogovor-arendy-obrazec'], [('home', ['Риелтор', 'Переезд'])], ready=True),
+    T('dogovor-arendy', 'home', '6.1.2', 'Договор аренды и ловушки', 'Залог, Nebenkosten, сдача квартиры и споры.', ['dogovor-arendy-obrazec', 'pisma-arenda', 'moj-budget', 'kuda-obratitsya', 'dosye-arendatora', 'pereezd-spisok', 'zhurnal-shuma'], [('law', ['Аренда']), ('home', ['Уборка со сдачей квартиры'])], ready=True),
     T('pokupka-zhilya', 'home', '6.1.4', 'Покупка жилья', 'Кто может купить, сколько нужно своих денег и ипотека.', ['ipoteka-raschet', 'moj-budget'], [('money', ['Ипотека и банки']), ('home', ['Риелтор'])], ready=True),
     T('transport', 'home', '6.2', 'Транспорт, машина и права', 'Проездные, обмен прав, машина после переезда и штрафы.', ['proezdnoj-vybor', 'moj-budget', 'sroki-goda'], [('home', ['Автошкола', 'Автосервис'])], ready=True),
     # 7. Семья и быт
