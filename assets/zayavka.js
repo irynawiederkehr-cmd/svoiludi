@@ -95,7 +95,7 @@
     + '.zp-dl dt{color:var(--muted,#7A6E62)}.zp-dl dd{margin:0;font-weight:600;overflow-wrap:anywhere}'
     + '.zp-note{margin:12px 0 0;font-size:.86rem;color:var(--muted,#7A6E62);line-height:1.5}'
     + '.zp .lnk{margin-top:10px;display:inline-block}'
-    + '.zf input.zlocked,.zf textarea.zlocked{background:var(--soft,#E3E8D6);color:var(--muted,#7A6E62)}'
+    + '.zf input.zlocked,.zf textarea.zlocked,[data-zlook-root] input.zlocked,[data-zlook-root] textarea.zlocked{background:var(--soft,#E3E8D6);color:var(--muted,#7A6E62);cursor:default}'
     + '@media (max-width:520px){.zp-dl div{grid-template-columns:1fr;gap:0}.zlrow{flex-direction:column}}'
     + '@media print{.zform{display:none!important}}';
   document.head.appendChild(css);
