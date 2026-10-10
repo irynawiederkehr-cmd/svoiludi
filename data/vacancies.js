@@ -12,6 +12,8 @@
    status  — 'активен' | 'на подтверждении' | 'закрыто' (на сайте видны только «активен» и не просроченные)
    kind    — 'staff' «Ищу сотрудника» (работа по найму) | 'partner' «Ищу партнёра» (только самостоятельные)
    author  — id специалиста из data/specialists.js; если у автора нет карточки — { name, firm, role, contacts: { telegram, email } } (карточка не обязательна)
+             организация или фирма из раздела «Организации» — { org: '<id из data/organizations.js>', name, role, contacts } (10.10.2026):
+             в окне объявления «Карточка организации →», в карточке организации — её объявления
    title   — кого ищут; cat — направление, как в справочнике (status, law, money, insure, health, psy, coach, body, kids, learn, home, events)
    canton, city — где работа; online: true — можно удалённо (тогда canton/city могут быть пустыми)
    workload — для staff: '40–60 %', 'полная занятость', 'по часам'; start — 'с ноября 2026', 'по договорённости'
@@ -95,6 +97,50 @@ window.VACANCIES = [
         "resp",
         "self",
         "legal",
+        "fair",
+        "free",
+        "remove"
+      ]
+    }
+  },
+  {
+    "sample": true,
+    "id": "obrazec-firma-povar",
+    "status": "активен",
+    "kind": "staff",
+    "author": {
+      "org": "obrazec-firma-kejtering",
+      "name": "Кейтеринг «Пример» GmbH (образец)",
+      "role": "фирма, образец",
+      "contacts": {}
+    },
+    "title": "Помощник или помощница повара на кейтеринг, 50 %",
+    "cat": "events",
+    "canton": "Zürich",
+    "city": "Zürich",
+    "online": false,
+    "workload": "50 %",
+    "start": "с ноября 2026",
+    "langs": [
+      "украинский",
+      "русский",
+      "немецкий"
+    ],
+    "about": "Подготовка блюд для праздников и офисов, упаковка заказов, порядок на кухне. Два-три дня в неделю, иногда в выходные перед праздниками.",
+    "offer": "Трудовой договор, зарплата по часам не ниже минимальной в Цюрихе, обед на работе, обучение на месте.",
+    "contact": "",
+    "posted": "2026-10-10",
+    "until": "2026-12-09",
+    "key": "obr5",
+    "confirm": {
+      "date": "2026-10-10",
+      "via": "образец",
+      "checks": [
+        "real",
+        "resp",
+        "legal",
+        "permit",
+        "rav",
         "fair",
         "free",
         "remove"

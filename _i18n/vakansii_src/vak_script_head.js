@@ -110,7 +110,7 @@ function openV(id){
         <div class="d-block"><h4>${v.kind === 'partner' ? 'О сотрудничестве' : 'О работе'}</h4><p>${esc(v.about)}</p></div>
         ${v.offer ? `<div class="d-block"><h4>Что предлагает автор</h4><p>${esc(v.offer)}</p></div>` : ''}
         <div class="d-block"><h4>Языки</h4><div class="chips">${(v.langs || []).map(l => `<span>${esc(l)}</span>`).join('')}</div></div>
-        <div class="d-block"><h4>Автор объявления</h4><div class="orgs">${a ? `<a class="org" href="../#${esc(a.id)}">${a.photo ? `<img src="${esc(photoSrc(a.photo))}" alt="${esc(a.name)}">` : `<span class="ini">${esc(a.name[0])}</span>`}<span><b>${esc(a.name)}</b><small>${esc(a.role || '')}${a.firm ? ' · ' + esc(a.firm) : ''}</small><br><u>Карточка в справочнике →</u></span></a>` : '<span>автор объявления</span>'}</div></div>
+        <div class="d-block"><h4>Автор объявления</h4><div class="orgs">${a ? `${a.org ? `<a class="org" href="../organizacii/#${esc(a.org)}">` : `<a class="org" href="../#${esc(a.id)}">`}${a.photo ? `<img src="${esc(photoSrc(a.photo))}" alt="${esc(a.name)}">` : `<span class="ini">${esc(a.name[0])}</span>`}<span><b>${esc(a.name)}</b><small>${esc(a.role || '')}${a.firm ? ' · ' + esc(a.firm) : ''}</small><br><u>${a.org ? 'Карточка организации →' : 'Карточка в справочнике →'}</u></span></a>` : '<span>автор объявления</span>'}</div></div>
       </div>
       <div class="d-side">
         <div class="d-block"><h4>Где</h4><span>${esc(where(v)) || '—'}</span></div>

@@ -1,6 +1,6 @@
 """Раздел «Организации» (10.10.2026): собирает organizacii/index.html.
 Шапка, стили, меню и подвал берутся из готовой страницы vakansii/index.html (тот же вид, что «Вакансии и партнёрство»),
-текст — body.html, код — script.js, данные — data/organizations.js (+ afisha.js для событий и курсов).
+текст — body.html, код — script.js, данные — data/organizations.js (+ afisha.js для событий и курсов, vacancies.js для вакансий и поиска партнёров организации).
 Запуск из корня репозитория: python3 _i18n/organizacii_src/build.py ; потом python3 _i18n/pwa.py, python3 _i18n/sync.py check,
 python3 _i18n/build_search.py, node _i18n/og.js organizacii. Правила — документ проекта «obshchestvennye-organizacii.md»."""
 import os, re, hashlib
@@ -31,6 +31,7 @@ js = open(os.path.join(HERE, 'script.js'), encoding='utf-8').read()
 tail = f'''
 <script src="/data/organizations.js?v={ver('data/organizations.js')}"></script>
 <script src="/data/afisha.js?v={ver('data/afisha.js')}"></script>
+<script src="/data/vacancies.js?v={ver('data/vacancies.js')}"></script>
 <script>
 {js}</script>
 <script src="/assets/help.js" defer></script>
