@@ -139,6 +139,7 @@ top = top.replace('<a href="#start" aria-current="page" style="color:var(--ink)"
                   '<a href="https://svoiludi.ch/instrumenty/" aria-current="page" style="color:var(--ink)">Полезные инструменты</a>')
 top = top.replace('href="../', 'href="../../')
 foot = src[src.index('  <footer>'):src.index('</main>') + len('</main>')]
+foot = foot.replace('href="../', 'href="../../')   # страница на уровень глубже вкладки: «О проекте» и «Ограничение ответственности» в подвале (10.10.2026)
 
 CSS = '''<style>
 .kat-hero{padding:34px 0 8px}.kat-hero h1{margin:.2em 0 .3em}
