@@ -7,7 +7,8 @@ ICO_PART='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 11.5l4-4 3.2
 js=js.replace("<b>${v.kind === 'partner' ? '🤝' : '👋'}</b>", "<b>${v.kind === 'partner' ? ICO.partner : ICO.staff}</b>")
 if 'const ICO =' not in js: js=js.replace("const KINDS =", "const ICO = { staff: '"+ICO_STAFF+"', partner: '"+ICO_PART+"' };\nconst KINDS =",1)
 src=open('events/index.html',encoding='utf-8').read().split('\n')
-h='\n'.join(src[:17]); style='\n'.join(src[17:466]).replace('</style>','')
+h='\n'.join(src[:17]); _se=next(i for i,l in enumerate(src) if i>=17 and l.startswith('</style>'))+1   # конец стиля ищем по </style>, а не по номеру строки
+style='\n'.join(src[17:_se]).replace('</style>','')
 ns=[i for i,l in enumerate(src) if l.startswith('<style id="nav-chips">')][0]; ne=[i for i,l in enumerate(src) if i>ns and l.startswith('</style>')][0]
 navchips='\n'.join(src[ns:ne+1])
 hs=[i for i,l in enumerate(src) if l.startswith('<header class="top">')][0]; he=[i for i,l in enumerate(src) if l.startswith('</header>')][0]
@@ -29,6 +30,7 @@ scripts=f'''<script src="/data/specialists.js?v=7fef69e3"></script>
 <script>
 {js}</script>
 <script src="/assets/help.js" defer></script>
+<script defer src="/assets/zayavka.js"></script>
 <script data-goatcounter="https://svoiludi.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 <script src="/assets/share.js" defer></script>
 <script src="/assets/samesite.js"></script>

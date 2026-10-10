@@ -94,7 +94,7 @@
       var miss = Array.prototype.filter.call(box.querySelectorAll('[data-req]'), function(el){ return !el.value.trim(); });
       if (miss.length) {
         miss.forEach(function(el){ el.closest('.zf').classList.add('zmiss'); });
-        msg.textContent = box.getAttribute('data-t-miss') + miss.map(function(el){ var t = el.getAttribute('data-a'); return /^.[a-zа-яёієїґ]/.test(t) ? t.charAt(0).toLowerCase() + t.slice(1) : t; }).join(', ') + '.';
+        msg.textContent = box.getAttribute('data-t-miss') + miss.map(function(el){ var t = el.getAttribute('data-a'); return /^.[^A-ZА-ЯЁІЇЄҐ]/.test(t) ? t.charAt(0).toLowerCase() + t.slice(1) : t; }).join(', ') + '.';
         msg.hidden = false; miss[0].focus(); return;
       }
       var bad = Array.prototype.filter.call(box.querySelectorAll('input[type=email]'), function(el){ var v = el.value.trim(); return v && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); });
