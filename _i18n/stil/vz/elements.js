@@ -49,4 +49,5 @@ module.exports = [
   { id: 't-tiles', group: 'Тесты', title: 'Плитки ступеней («Ступени устойчивости»)', page: '/stupeni/', sel: '.st-tiles', w: ['phone', 'desk'], themes: D, before: showStart },
   { id: 't-ab', group: 'Тесты', title: '«Точка А → точка Б»', page: '/kompas/', sel: '#intro .ab', w: ['phone'], themes: D, before: showStart },
   { id: 't-roles', group: 'Тесты', title: 'Роли в паре («Быть рядом и быть собой»)', page: '/blizost/', sel: '.roles', w: ['phone'], themes: D, before: showStart },
+  { id: 't-dl', group: 'Тесты', title: 'Галочка перед скачиванием разбора и бланка', page: '/stupeni/', sel: '.svl-dl', w: ['phone'], themes: D, pad: 8, wait: 900, before: async (p) => { await p.evaluate(() => { ['intro', 'quiz'].forEach(i => { const e = document.getElementById(i); if (e) e.hidden = true; }); const r = document.getElementById('result'); if (r) r.hidden = false; }); await p.waitForTimeout(700); await p.evaluate(() => { const c = document.querySelector('.svl-dl input'); if (c && c.checked) c.click(); }); await p.waitForTimeout(200); } },
 ];
