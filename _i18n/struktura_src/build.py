@@ -146,7 +146,7 @@ def o_proekte():
       <p>Всё, что ты вводишь в инструментах, остаётся в твоём браузере и никуда не отправляется. Статистику посещений мы считаем без cookies и не сохраняя IP-адреса. Подробно — в <a href="https://svoiludi.ch/privacy/">политике конфиденциальности</a>.</p>
     </section>
     <section aria-labelledby="h-contact"><h2 id="h-contact">Как с нами связаться</h2>
-      <p>Нашла ошибку, хочешь предложить тему или разместиться — пиши на <a href="mailto:voznesenskaya.iryna@gmail.com">voznesenskaya.iryna@gmail.com</a>. Адрес проекта: c/o Alonira.ch AG, Poststrasse 6, 6302 Zug. <a href="https://voznesenskaya.ch/impressum/">Выходные данные</a>.</p>
+      <p>Нашла ошибку, хочешь предложить тему или разместиться — пиши на <a href="mailto:voznesenskaya.iryna@gmail.com">voznesenskaya.iryna@gmail.com</a>. Владелец проекта — фирма Alonira.ch AG, Poststrasse 6, 6302 Zug. <a href="https://voznesenskaya.ch/impressum/">Выходные данные</a>.</p>
       <span class="addbtns"><a class="btn" href="../">Найти специалиста</a><a class="btn ghost" href="../shveycariya/">Как устроена Швейцария</a><a class="btn ghost" href="../dlya-specialistov/">Для специалистов</a></span>
     </section>
     {subscribe('../')}
