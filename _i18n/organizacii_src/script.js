@@ -1,9 +1,7 @@
-/* Раздел «Организации» (10.10.2026, копия). Данные — data/organizations.js; события и курсы — data/afisha.js (organizers: { org: id }),
-   поиск волонтёров — data/vacancies.js (kind: 'volunteer', author: { org: id }). Правила — документ проекта «obshchestvennye-organizacii.md». */
+/* Раздел «Организации» (10.10.2026, копия). Данные — data/organizations.js; события и курсы — data/afisha.js (organizers: { org: id }). Правила — документ проекта «obshchestvennye-organizacii.md». */
 const MAIL = 'voznesenskaya.iryna@gmail.com';
 const ORGS = window.ORGANIZATIONS || [];
 const AFISHA = window.AFISHA || [];
-const VACS = window.VACANCIES || [];
 /* Пометка на карточке — везде и всегда (решение Ирины 10.10.2026: некоммерческим бесплатно навсегда) */
 const BADGE = { charity: 'Благотворительная организация · размещение бесплатно', nonprofit: 'Некоммерческая организация · размещение бесплатно' };
 const DISC = 'Карточку заполнила сама организация, она отвечает за её содержание. «Свои люди» не участвуют в работе организации и не отвечают за её помощь, курсы и события. Обо всём договаривайтесь напрямую с организацией.';
@@ -64,7 +62,6 @@ function match(o, skip){
 const where = o => [(o.cities || []).join(', '), o.canton ? kt(o.canton) : ''].filter(Boolean).join(' · ');
 const lastDay = e => (e.repeat && e.repeat.until) || e.dateEnd || e.date || '';
 const eventsOf = o => AFISHA.filter(e => e.status !== 'закрыто' && (e.organizers || []).some(x => x && typeof x === 'object' && x.org === o.id) && (!lastDay(e) || lastDay(e) >= today));
-const volsOf = o => VACS.filter(v => v.kind === 'volunteer' && v.author && typeof v.author === 'object' && v.author.org === o.id && v.status === 'активен' && v.confirm && v.confirm.date && (!v.until || v.until > today));
 
 function row(o){
   const d = DIRS[o.dir] || DIRS.help;
@@ -112,7 +109,7 @@ function contactLinks(o){
 }
 function openO(id){
   const o = ORGS.find(x => x.id === id); if (!o) return; OPEN = o;
-  const d = DIRS[o.dir] || DIRS.help, box = document.getElementById('qmCard'), evs = eventsOf(o), vols = volsOf(o);
+  const d = DIRS[o.dir] || DIRS.help, box = document.getElementById('qmCard'), evs = eventsOf(o);
   box.style.setProperty('--lc', d.c); box.style.setProperty('--lf', `color-mix(in srgb,${d.c} 12%,var(--paper))`);
   box.innerHTML = `<div class="qm-top"><div class="qm-head">${o.sample ? '<span class="ev-k" style="color:var(--brown)">Образец карточки · всё вымышленное</span><a class="yours" href="#add" data-close>Здесь может быть ваша организация! Как разместить →</a>' : ''}<span class="ev-k" style="color:${d.c}">${esc(d.t)}</span><h2 class="qm-title" id="qmTitle">${esc(o.name)}</h2>${o.name_ru ? `<span class="note">${esc(o.name_ru)}</span>` : ''}<span class="free-line">${esc(BADGE[o.kind] || BADGE.nonprofit)}<button type="button" class="qh" data-help="badge" aria-label="Подсказка: размещение бесплатно" aria-expanded="false">?</button></span></div><button class="qm-close" type="button" aria-label="Закрыть">×</button></div>
     <div class="d-body">
@@ -122,7 +119,6 @@ function openO(id){
         ${(o.for || []).length ? `<div class="d-block"><h4>Для кого</h4><div class="chips">${o.for.map(x => `<span>${esc(WHO[x] || x)}</span>`).join('')}</div></div>` : ''}
         <div class="d-block"><h4>Языки</h4><div class="chips">${(o.langs || []).map(l => `<span>${esc(l)}</span>`).join('')}</div></div>
         ${o.join ? `<div class="d-block"><h4>Как прийти или записаться</h4><p>${esc(o.join)}</p></div>` : ''}
-        ${o.volunteer || vols.length ? `<div class="d-block"><h4>Как стать волонтёром</h4>${o.volunteer ? `<p>${esc(o.volunteer)}</p>` : ''}${vols.map(v => `<p><a href="../vakansii/#${esc(v.id)}">${esc(v.title)} →</a></p>`).join('')}</div>` : ''}
         ${evs.length ? `<div class="d-block"><h4>События и курсы</h4>${evs.map(e => `<p><a href="../${(e.sections || []).includes('kursy') && !(e.sections || []).includes('events') ? 'kursy' : 'events'}/#${esc(e.id)}">${esc(e.title)} →</a></p>`).join('')}</div>` : ''}
       </div>
       <div class="d-side">

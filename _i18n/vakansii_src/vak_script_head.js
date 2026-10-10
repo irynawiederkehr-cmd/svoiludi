@@ -8,10 +8,9 @@ const VACANCIES = window.VACANCIES || [];
 const FREE_NOTE = 'Бесплатно, для поддержки сообщества «Свои люди». Не коммерческая услуга.';
 const DISC = {
   staff: 'Вакансию разместил сам работодатель, он отвечает за её содержание. «Свои люди» не участвуют в найме и не отвечают за условия и сотрудничество. Обо всём договаривайтесь напрямую с работодателем.',
-  partner: 'Предложение разместил сам автор, он отвечает за его содержание. «Свои люди» не участвуют в сотрудничестве и не отвечают за условия. Обо всём договаривайтесь напрямую с автором предложения.',
-  volunteer: 'Объявление разместила сама организация, она отвечает за его содержание. «Свои люди» не участвуют в отборе волонтёров и не отвечают за условия. Обо всём договаривайтесь напрямую с организацией.'
+  partner: 'Предложение разместил сам автор, он отвечает за его содержание. «Свои люди» не участвуют в сотрудничестве и не отвечают за условия. Обо всём договаривайтесь напрямую с автором предложения.'
 };
-const KINDS = { staff: { t: 'Ищу сотрудника', s: 'работа по найму', c: '#4F5E3E' }, partner: { t: 'Ищу партнёра', s: 'сотрудничество', c: '#C97E52' }, volunteer: { t: 'Ищу волонтёров', s: 'без оплаты, для некоммерческих организаций', c: '#7A5A8C' } };
+const KINDS = { staff: { t: 'Ищу сотрудника', s: 'работа по найму', c: '#4F5E3E' }, partner: { t: 'Ищу партнёра', s: 'сотрудничество', c: '#C97E52' } };
 const CATS = {
   status: 'Документы и статус', law: 'Юристы', money: 'Налоги и финансы', insure: 'Страхование и пенсия', health: 'Врачи и здоровье',
   psy: 'Психологическая помощь', coach: 'Коучинг и личное развитие', body: 'Тело и красота', kids: 'Дети и семья',
@@ -28,8 +27,7 @@ const CANTONS = {
 const LANG_FIRST = ['русский', 'украинский', 'немецкий', 'французский', 'итальянский', 'английский'];
 const MON_G = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'];
 window.HELP = {
-  kind: '<p><b>Ищу сотрудника</b> — работа по найму: человек работает у автора по договору, по его графику и указаниям, получает зарплату, автор платит отчисления AHV.</p><p><b>Ищу партнёра</b> — сотрудничество самостоятельных специалистов: субподряд, совместный проект, аренда кабинета, обмен клиентами. Каждый работает на себя и сам платит свои взносы.</p><p><b>Ищу волонтёров</b> — только для некоммерческих организаций: ферайнов, фондов, центров помощи. Волонтёр помогает добровольно и без оплаты, организация возмещает настоящие расходы.</p>',
-  volunteer: '<p>Волонтёрство — это добровольная помощь без оплаты, в среднем до 6 часов в неделю. Организация возмещает настоящие расходы: дорогу, еду, материалы. Платить за часы работы нельзя, тогда это уже работа по найму с договором и взносами.</p><p>Людям со статусом S, F, с пермитом C и признанным беженцам волонтёрить в некоммерческой организации можно без отдельного разрешения. В сомнительных случаях решает ведомство по миграции кантона.</p><p>Попроси у организации подтверждение «Dossier freiwillig engagiert»: что ты делала и чему научилась. Его можно приложить к резюме. Подробнее — у <a href="https://www.benevol.ch/" target="_blank" rel="noopener">benevol Schweiz</a>, объединения центров волонтёрства.</p>',
+  kind: '<p><b>Ищу сотрудника</b> — работа по найму: человек работает у автора по договору, по его графику и указаниям, получает зарплату, автор платит отчисления AHV.</p><p><b>Ищу партнёра</b> — сотрудничество самостоятельных специалистов: субподряд, совместный проект, аренда кабинета, обмен клиентами. Каждый работает на себя и сам платит свои взносы.</p>',
   partner: '<p>Партнёрство — это когда каждый работает на себя: сам решает, когда и как работать, сам выставляет счета и платит свои взносы.</p><p>Если человек будет работать в твоё время, по твоим указаниям и за регулярную оплату за часы, это работа по найму, даже если называть её партнёрством. Такое объявление размести как «Ищу сотрудника». Иначе может получиться скрытый найм, и касса AHV вправе потребовать взносы задним числом.</p>',
   rav: '<p>Для некоторых профессий с высокой безработицей работодатель сначала сообщает вакансию в RAV (региональный центр занятости), и только через 5 рабочих дней может публиковать её в других местах.</p><p>Список профессий обновляется каждый год. Проверить свою профессию можно на <a href="https://www.arbeit.swiss/secoalv/de/home/menue/unternehmen/stellenmeldepflicht.html" target="_blank" rel="noopener">arbeit.swiss</a>.</p>'
 };
@@ -50,7 +48,7 @@ const copyText = t => { try { return navigator.clipboard.writeText(t).then(() =>
 const authorOf = v => v.author && typeof v.author === 'object' ? v.author : SPECIALISTS.find(s => s.id === v.author) || null;   // автор с карточкой — id; без карточки — { name, firm, role, contacts: { telegram, email } }
 const confirmed = v => !!(v.confirm && v.confirm.date);
 const pool = () => VACANCIES.filter(v => v.status === 'активен' && confirmed(v) && (!v.until || v.until > today));
-const state = { kind: (/[?&]kind=(staff|partner|volunteer)\b/.exec(location.search) || [])[1] || '', cat: '', canton: '', lang: '', remote: '' };   // ?kind=volunteer — из переключателя «Специалисты | Организации | Волонтёрство» (10.10.2026)
+const state = { kind: '', cat: '', canton: '', lang: '', remote: '' };
 function match(v, skip){
   return (skip === 'kind' || !state.kind || v.kind === state.kind)
     && (skip === 'cat' || !state.cat || v.cat === state.cat)
@@ -78,7 +76,6 @@ function render(){
   document.getElementById('count').textContent = `${list.length} ${plural(list.length, 'объявление', 'объявления', 'объявлений')}`;
   document.getElementById('reset').hidden = !Object.values(state).some(Boolean);
   Object.keys(state).forEach(id => document.getElementById(id).classList.toggle('set', !!state[id]));
-  const vs = document.getElementById('volsw'); if (vs) vs.hidden = state.kind !== 'volunteer';
   fillSelects();
 }
 function fillSelects(){
@@ -110,10 +107,10 @@ function openV(id){
   box.innerHTML = `<div class="qm-top"><div class="qm-head">${v.sample ? '<span class="ev-k" style="color:var(--brown)">Образец объявления · всё вымышленное</span><a class="yours" href="#add" data-close>Здесь может быть твоё объявление! Как разместить →</a>' : ''}<span class="ev-k" style="color:${k.c}">${esc(k.t)} · ${esc(k.s)}</span><h2 class="qm-title" id="qmTitle">${esc(v.title)}</h2><span class="free-line">${FREE_NOTE}</span></div><button class="qm-close" type="button" aria-label="Закрыть">✕</button></div>
     <div class="d-body">
       <div class="d-col">
-        <div class="d-block"><h4>${v.kind === 'partner' ? 'О сотрудничестве' : v.kind === 'volunteer' ? 'Чем помочь' : 'О работе'}</h4><p>${esc(v.about)}</p></div>
-        ${v.offer ? `<div class="d-block"><h4>${v.kind === 'volunteer' ? 'Что даёт организация' : 'Что предлагает автор'}</h4><p>${esc(v.offer)}</p></div>` : ''}
+        <div class="d-block"><h4>${v.kind === 'partner' ? 'О сотрудничестве' : 'О работе'}</h4><p>${esc(v.about)}</p></div>
+        ${v.offer ? `<div class="d-block"><h4>Что предлагает автор</h4><p>${esc(v.offer)}</p></div>` : ''}
         <div class="d-block"><h4>Языки</h4><div class="chips">${(v.langs || []).map(l => `<span>${esc(l)}</span>`).join('')}</div></div>
-        <div class="d-block"><h4>Автор объявления</h4><div class="orgs">${a ? `<a class="org" href="${a.org ? '../organizacii/#' + esc(a.org) : '../#' + esc(a.id)}">${a.photo ? `<img src="${esc(photoSrc(a.photo))}" alt="${esc(a.name)}">` : `<span class="ini">${esc(a.name[0])}</span>`}<span><b>${esc(a.name)}</b><small>${esc(a.role || '')}${a.firm ? ' · ' + esc(a.firm) : ''}</small><br><u>${a.org ? 'Карточка организации →' : 'Карточка в справочнике →'}</u></span></a>` : '<span>автор объявления</span>'}</div></div>
+        <div class="d-block"><h4>Автор объявления</h4><div class="orgs">${a ? `<a class="org" href="../#${esc(a.id)}">${a.photo ? `<img src="${esc(photoSrc(a.photo))}" alt="${esc(a.name)}">` : `<span class="ini">${esc(a.name[0])}</span>`}<span><b>${esc(a.name)}</b><small>${esc(a.role || '')}${a.firm ? ' · ' + esc(a.firm) : ''}</small><br><u>Карточка в справочнике →</u></span></a>` : '<span>автор объявления</span>'}</div></div>
       </div>
       <div class="d-side">
         <div class="d-block"><h4>Где</h4><span>${esc(where(v)) || '—'}</span></div>

@@ -25,7 +25,7 @@ const S = [
   ['dl-toast', '/instrumenty/ekstrennye-nomera/', 390, 669, { later: true, real: true, lang: 'ru', scrollSel: '.svl-dl', top: 70, post: "document.querySelector('.svl-dl input').click(); document.getElementById('png').click()" }],
   ['dl-uk', '/uk/instrumenty/zarplata/', 390, 669, { later: true, real: true, lang: 'uk', pre: "new Promise(r => { document.getElementById('exampleBtn').click(); setTimeout(r, 6000); })", scrollSel: '.svl-dl', top: 70 }],
   ['dl-vz', '/stupeni/', 390, 736, { vz: true, locale: 'ru-RU', later: true, real: true, lang: 'ru', pre: "['intro','quiz'].forEach(i => { const e = document.getElementById(i); if (e) e.hidden = true; }); document.getElementById('result').hidden = false", scrollSel: '.svl-dl', top: 210, post: "document.getElementById('pdfBtn').click()" }],
-  // раздел «Организации» и «Ищу волонтёров» (10.10.2026)
+  // раздел «Организации» (10.10.2026; «Ищу волонтёров» убрано 10.10.2026)
   ['org-list', '/organizacii/', 390, 669, { later: true }], ['org-card', '/organizacii/#obrazec-centr-pomoshchi', 390, 669, { later: true }],
   ['org-card2', '/organizacii/#obrazec-centr-pomoshchi', 390, 669, { later: true, scrollIn: '#qmCard', by: 900 }],
   ['org-add', '/organizacii/', 390, 669, { later: true, scrollSel: '#add' }], ['org-uk', '/uk/organizacii/', 390, 669, { later: true }],

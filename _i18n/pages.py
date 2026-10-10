@@ -150,7 +150,7 @@ def fix_links(html, base):
         url = m.group(2)
         if re.match(r'^(https?:|mailto:|tel:|data:|javascript:|\$\{)', url) or url.startswith('#'): return m.group(0)
         u, h = (url.split('#', 1) + [''])[:2]
-        u, q = (u.split('?', 1) + [None])[:2]          # ?kind=volunteer и другие параметры адреса сохраняются (10.10.2026)
+        u, q = (u.split('?', 1) + [None])[:2]          # ?параметры адреса сохраняются (10.10.2026)
         p = resolve(base, u)
         uk = own_uk(p)
         if not uk: return m.group(0)
