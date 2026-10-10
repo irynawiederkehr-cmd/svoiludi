@@ -33,7 +33,7 @@ module.exports = [
   // Твой путь
   { id: 'p-hero', group: 'Твой путь', title: 'Первый блок страницы «Твой путь»', page: '/put/', sel: '.p-hero', w: ['phone', 'desk'], themes: L },
   { id: 'rules', group: 'Твой путь', title: 'Правила пути', page: '/put/', sel: '.rules', w: ['phone'], themes: L },
-  { id: 'trail', group: 'Твой путь', title: 'Дорога «Земля под ногами» с остановками', page: '/put/', sel: '#trailWrap', w: ['phone'], themes: D, maxH: 2000 },
+  { id: 'trail', group: 'Твой путь', title: 'Дорога пути: восемь ступеней снизу вверх', page: '/put/', sel: '#trailWrap', w: ['phone'], themes: D, maxH: 2000 },
   { id: 'where', group: 'Твой путь', title: '«Где ты сейчас на этом пути?»', page: '/put/', sel: '.where', w: ['phone'], themes: L },
   { id: 'rvs', group: 'Твой путь', title: 'Отзывы на странице пути', page: '/put/', sel: '.rvs', w: ['phone'], themes: L },
   { id: 'share', group: 'Твой путь', title: 'Поделиться страницей', page: '/put/', sel: '.shr', w: ['phone'], themes: L },
