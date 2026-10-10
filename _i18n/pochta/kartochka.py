@@ -4,7 +4,7 @@
 Запуск из корня репозитория svoiludi:
   python3 -I _i18n/pochta/kartochka.py <card.json> <фото> [--box x0,y0,x1,y1]
     card.json — карточка в формате data/specialists.js (поля описаны в шапке файла). Скрипт сам ставит:
-                status «черновик» (если не задан), key (8 знаков, если нет), added/checked = сегодня, photo = <id>.jpg.
+                status «на подтверждении» (если не задан; на сайте скрыта, кнопка «Подтверждаю» работает), key (8 знаков, если нет), added/checked = сегодня, photo = <id>.jpg.
     фото      — оригинал от специалиста. Кадр 4:5 → img/<id>.jpg 480×600. Без --box — по центру сверху (лицо обычно там);
                 --box задаёт область кадра в пикселях оригинала. После сборки ОБЯЗАТЕЛЬНО посмотреть img/<id>.jpg глазами.
 Если карточка с таким id уже есть, она заменяется (номер SG и key сохраняются), иначе встаёт первой в списке.
@@ -58,7 +58,7 @@ def main():
                             capture_output=True, text=True, check=True).stdout
         old = next(x for x in json.loads(js) if x['id'] == cid)
         card.setdefault('num', old.get('num')); card.setdefault('key', old.get('key'))
-    card.setdefault('status', 'черновик')
+    card.setdefault('status', 'на подтверждении')
     card.setdefault('key', ''.join(random.choice(string.ascii_lowercase + string.digits) for _ in range(8)))
     card.setdefault('added', today); card['checked'] = card.get('checked') or today
     card['photo'] = f'{cid}.jpg'
