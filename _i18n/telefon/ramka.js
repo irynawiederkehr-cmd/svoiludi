@@ -179,34 +179,39 @@ const appIcon = (k, label, and, hl) => {
 
 const shot = (n, top, w) => `<img class="shot" style="top:${top}px;${w ? 'width:' + w + 'px' : ''}" src="${d64(DIR + '/shots2/' + n + '.png')}">`;
 const appF = (n, bg = '#EEF1E6', dark) => `<div class="scr" style="background:${bg}">${sb(false, dark)}${shot(n, 47)}<div style="position:absolute;left:0;right:0;bottom:0;height:20px;background:${dark ? '#26221E' : '#FFFCF8'}"></div><div class="hi${dark ? ' w' : ''}"></div></div>`;
-const safF = (n) => `<div class="scr" style="background:#EEF1E6">${sb()}${shot(n, 47)}
-    <div class="sf"><div class="addr"><span style="font-size:15px">ᴀA</span><span>${S(G.lock, 13, '#555', 2.2)}svoiludi.ch</span><span>${S(G.reload, 18, '#333')}</span></div>
+const safF = (n, host = 'svoiludi.ch', bg = '#EEF1E6') => `<div class="scr" style="background:${bg}">${sb()}${shot(n, 47)}
+    <div class="sf"><div class="addr"><span style="font-size:15px">ᴀA</span><span>${S(G.lock, 13, '#555', 2.2)}${host}</span><span>${S(G.reload, 18, '#333')}</span></div>
     <div class="bar"><i>${S(G.back, 24)}</i><i class="off">${S(G.fwd, 24)}</i><i>${S(G.share, 25)}</i><i>${S(G.book, 25)}</i><i>${S(G.tabs, 24)}</i></div></div><div class="hi"></div></div>`;
-const chrF = (n, dark) => `<div class="scr" style="background:${dark ? '#1C2019' : '#fff'}"><div style="position:absolute;left:0;right:0;top:0;height:32px;background:${dark ? '#202124' : '#fff'}"></div>${sb(true, dark)}
-    <div class="cb" style="${dark ? 'background:#202124;color:#ddd;border-color:#333' : ''}"><i>${S(G.home, 22)}</i><div class="pill" style="${dark ? 'background:#303134;color:#eee' : ''}">${S(G.lock, 15, dark ? '#bbb' : '#555', 2.2)}svoiludi.ch</div><i><span class="tabn" style="${dark ? 'border-color:#ddd' : ''}">2</span></i><i>${S(G.dots, 24)}</i></div>${shot(n, 88)}<div class="gest" style="${dark ? 'background:#202124' : ''}"></div></div>`;
+const chrF = (n, dark, host = 'svoiludi.ch') => `<div class="scr" style="background:${dark ? '#1C2019' : '#fff'}"><div style="position:absolute;left:0;right:0;top:0;height:32px;background:${dark ? '#202124' : '#fff'}"></div>${sb(true, dark)}
+    <div class="cb" style="${dark ? 'background:#202124;color:#ddd;border-color:#333' : ''}"><i>${S(G.home, 22)}</i><div class="pill" style="${dark ? 'background:#303134;color:#eee' : ''}">${S(G.lock, 15, dark ? '#bbb' : '#555', 2.2)}${host}</div><i><span class="tabn" style="${dark ? 'border-color:#ddd' : ''}">2</span></i><i>${S(G.dots, 24)}</i></div>${shot(n, 88)}<div class="gest" style="${dark ? 'background:#202124' : ''}"></div></div>`;
 const inF = (n) => `<div class="scr"><div style="position:absolute;left:0;right:0;top:0;height:47px;background:#fff"></div>${sb()}
     <div class="ia"><i>${S(G.x, 22)}</i><div class="t"><b>Свои люди в Швейцарии</b><small>svoiludi.ch</small></div><i>${S(G.hdots, 24)}</i></div>${shot(n, 97)}<div class="hi"></div></div>`;
 const seF = (n) => `<div class="scr" style="background:#EEF1E6;width:375px;height:667px;border-radius:0">${sb()}${shot(n, 20, 375)}<div class="sf" style="height:87px"><div class="addr" style="margin-top:6px"><span style="font-size:15px">ᴀA</span><span>${S(G.lock, 13, '#555', 2.2)}svoiludi.ch</span><span>${S(G.reload, 18, '#333')}</span></div></div></div>`;
+// снимок собирается, только когда нужен (можно пересобрать часть: node ramka.js <папка> yazyk)
 const JOBS = {
-  'app/app-home': ['p', appF('app-home')], 'app/app-tools': ['p', appF('app-tools')], 'app/app-more': ['p', appF('app-more')],
-  'app/app-uk': ['p', appF('app-uk')], 'app/app-dark': ['p', appF('app-dark', '#1C2019', true)],
-  'app/card-ios': ['p', safF('card-ios')], 'app/card-and': ['a', chrF('card-and')], 'app/card-inapp': ['p', inF('card-inapp')],
-  'app/br-home': ['p', safF('br-home')], 'app/br-uk-dark': ['a', chrF('br-uk-dark', true)],
-  'knopki/b-cards': ['p', safF('b-cards')], 'knopki/b-join': ['p', safF('b-join')], 'knopki/b-tools': ['p', safF('b-tools')],
-  'knopki/b-god': ['p', safF('b-god')], 'knopki/b-kursy': ['p', safF('b-kursy')], 'knopki/b-search': ['p', safF('b-search')],
+  'app/app-home': ['p', () => appF('app-home')], 'app/app-tools': ['p', () => appF('app-tools')], 'app/app-more': ['p', () => appF('app-more')],
+  'app/app-uk': ['p', () => appF('app-uk')], 'app/app-dark': ['p', () => appF('app-dark', '#1C2019', true)],
+  'app/card-ios': ['p', () => safF('card-ios')], 'app/card-and': ['a', () => chrF('card-and')], 'app/card-inapp': ['p', () => inF('card-inapp')],
+  'app/br-home': ['p', () => safF('br-home')], 'app/br-uk-dark': ['a', () => chrF('br-uk-dark', true)],
+  'knopki/b-cards': ['p', () => safF('b-cards')], 'knopki/b-join': ['p', () => safF('b-join')], 'knopki/b-tools': ['p', () => safF('b-tools')],
+  'yazyk/lang-ru': ['p', () => safF('lang-ru')], 'yazyk/lang-uk': ['p', () => safF('lang-uk')], 'yazyk/lang-app': ['p', () => appF('lang-app')],
+  'yazyk/lang-dark': ['a', () => chrF('lang-dark', true)], 'yazyk/lang-vz': ['p', () => safF('lang-vz', 'voznesenskaya.ch', '#F4EDE3')],
+  'yazyk/lang-vz-test': ['a', () => chrF('lang-vz-test', false, 'voznesenskaya.ch')], 'yazyk/lang-vz-app': ['p', () => appF('lang-vz-app', '#F4EDE3')],
+  'knopki/b-god': ['p', () => safF('b-god')], 'knopki/b-kursy': ['p', () => safF('b-kursy')], 'knopki/b-search': ['p', () => safF('b-search')],
 };
 (async () => {
   const b = await chromium.launch();
   const p = await b.newPage({ viewport: { width: 470, height: 930 }, deviceScaleFactor: 1.32 });
   for (const [id, [kind, inner]] of Object.entries(JOBS)) {
+    if (process.argv[3] && !id.startsWith(process.argv[3])) continue;
     fs.mkdirSync(OUT + '/' + id.split('/')[0], { recursive: true });
-    const html = `<!doctype html><html><head><meta charset="utf-8"><style>${CSS}</style></head><body><div class="tile${kind === 'a' ? ' and' : ''}"><div class="phone">${inner}</div></div></body></html>`;
+    const html = `<!doctype html><html><head><meta charset="utf-8"><style>${CSS}</style></head><body><div class="tile${kind === 'a' ? ' and' : ''}"><div class="phone">${inner()}</div></div></body></html>`;
     await p.setContent(html, { waitUntil: 'load' }); await p.waitForTimeout(120);
     await p.locator('.tile').screenshot({ path: `${OUT}/${id}.jpg`, type: 'jpeg', quality: 74 });
   }
   // планшет: экран 820×1160 в рамке
   const t = await b.newPage({ viewport: { width: 900, height: 1240 }, deviceScaleFactor: 1 });
-  for (const n of ['ipad', 'ipad-br']) {
+  for (const n of (process.argv[3] ? [] : ['ipad', 'ipad-br'])) {
     const html = `<!doctype html><html><head><meta charset="utf-8"><style>${CSS}.tab{width:900px;height:1240px;display:flex;align-items:center;justify-content:center;background:#E3E8D6}.tab .fr{background:#1F1D1B;border-radius:38px;padding:18px;box-shadow:0 22px 44px -14px rgba(40,50,30,.45)}.tab .sc{width:820px;height:1180px;border-radius:22px;overflow:hidden;position:relative;background:#EEF1E6}.tab .sc img{position:absolute;left:0;top:20px;width:820px}</style></head><body><div class="tab"><div class="fr"><div class="sc"><div class="sb" style="height:20px;font-size:12px;padding:0 18px">9:41</div><img src="${d64(DIR + '/shots2/' + n + '.png')}"></div></div></div></body></html>`;
     await t.setContent(html, { waitUntil: 'load' }); await t.waitForTimeout(120);
     await t.locator('.tab').screenshot({ path: `${OUT}/app/${n}.jpg`, type: 'jpeg', quality: 72 });

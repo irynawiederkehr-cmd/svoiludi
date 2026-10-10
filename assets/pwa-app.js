@@ -5,7 +5,10 @@
    3) Если сайт открыт в браузере телефона или планшета — подсказка «Установить как приложение»
       (Android: кнопка установки; iPhone/iPad: как добавить через «Поделиться»; Instagram/Telegram: открыть в браузере).
    Русский и украинский текст выбирается по <html lang>. Показ для проверки: ?app=1 (режим приложения), ?install=ios|android|inapp.
-   Личные данные не собираются; в localStorage только отметка «Не сейчас» (svoiludi-app-later). */
+   4) При первом заходе — вопрос «Якою мовою тобі комфортно? · На каком языке тебе комфортно?» с кнопками «Українською» и «По-русски»
+      (10.10.2026, просьба Ирины). Выбор запоминается (svoiludiLang, тот же ключ, что у переключателя RU · UA), больше не спрашиваем.
+      Подсказка об установке ждёт, пока человек выберет язык. Показ для проверки: ?lang=ask.
+   Личные данные не собираются; в localStorage только отметка «Не сейчас» (svoiludi-app-later) и выбранный язык (svoiludiLang). */
 (function () {
   if (window.__svoiApp) return; window.__svoiApp = true;
   var UK = (document.documentElement.lang || '').indexOf('uk') === 0;
@@ -121,6 +124,14 @@
     '.pa-pics.one figure{flex-basis:100%}',
     '.pa-pics img{display:block;width:100%;height:auto;border-radius:12px;border:1px solid var(--line,#E5D9C9)}',
     '.pa-pics b{position:absolute;left:6px;top:6px;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;background:var(--sage,#66704F);color:var(--paper,#FFFCF8);font:700 .75rem var(--body,system-ui);box-shadow:0 1px 4px rgba(0,0,0,.25)}',
+    /* вопрос о языке при первом заходе (10.10.2026): только вопрос на двух языках и кнопки, как кнопка установки — светлый шалфей с рамкой */
+    '.pa-lang{padding:18px 16px 16px}',
+    '.pa-lang h3{font:400 1.3rem/1.3 var(--display,Georgia);margin:0;text-align:center}',
+    '.pa-lang h3 span{display:block}',
+    '.pa-lbtns{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}',
+    '.pa-lbtns button{min-height:48px;padding:10px 12px;border-radius:12px;border:1.5px solid var(--sage,#66704F);background:var(--sage-soft,#E3E6D6);color:var(--ink,#2F2924);font:700 1rem/1.2 var(--body,system-ui);cursor:pointer;-webkit-tap-highlight-color:transparent}',
+    '.pa-lbtns button:active{transform:scale(.98)}',
+    '@media (max-width:1100px){html.pa-app .pa-lang{bottom:calc(84px + env(safe-area-inset-bottom))}}',
     '@media print{.pa-tabs,.pa-card,.pa-back,.pa-foot,.pa-flink,.pa-ibtn{display:none!important}}'
   ].join('\n');
   document.head.appendChild(css);
@@ -283,15 +294,51 @@
     new IntersectionObserver(function (es) { var v = es[0].isIntersecting; m.classList.toggle('on', !v); if (v) set(false); }).observe(h);
   }
 
+  /* 5. вопрос о языке при первом заходе (10.10.2026). Спрашиваем один раз: выбор хранится в svoiludiLang.
+     Не спрашиваем: если язык уже выбран (кнопкой RU · UA, во вкладке «Ещё» или здесь), у роботов и снимков сайта,
+     на страницах без украинской версии (нет переключателя). ?lang=ask — показать для проверки. */
+  var LKEY = 'svoiludiLang';
+  function langAsk(after) {
+    var ask = /[?&]lang=ask/.test(Q);
+    if (!document.getElementById('langbar') && !ask) return false;
+    if (!ask) {
+      if (navigator.webdriver) return false;
+      try { if (localStorage.getItem(LKEY)) return false; } catch (e) { return false; }
+    }
+    var cur = UK ? 'uk' : 'ru';
+    var c = el('<aside class="pa-card pa-lang" role="dialog" aria-label="Мова · Язык">' +
+      '<h3><span lang="uk">Якою мовою тобі комфортно?</span><span lang="ru">На каком языке тебе комфортно?</span></h3>' +
+      '<div class="pa-lbtns"><button type="button" data-l="uk" lang="uk">Українською</button><button type="button" data-l="ru" lang="ru">По-русски</button></div></aside>');
+    function done() { c.remove(); document.removeEventListener('keydown', esc); if (after) after(); }
+    function esc(e) { if (e.key === 'Escape') { try { localStorage.setItem(LKEY, cur); } catch (x) {} done(); } }
+    c.addEventListener('click', function (e) {
+      var b = e.target.closest('[data-l]'); if (!b) return;
+      var l = b.dataset.l;
+      try { localStorage.setItem(LKEY, l); } catch (x) {}
+      if (l === cur) return done();
+      var a = document.querySelector('#langbar a[data-lang="' + l + '"]');
+      var href = (a ? a.getAttribute('href') : (l === 'uk' ? '/uk' : '') + rel()).split('#')[0];
+      var q = Q.replace(/[?&]lang=ask/, '').replace(/^&/, '?');
+      location.href = href + q + location.hash;
+    });
+    document.addEventListener('keydown', esc);
+    setTimeout(function () { document.body.appendChild(c); }, 400);
+    return true;
+  }
+
   function start() {
     topTiles();
-    if (STANDALONE) { tabBar(); return; }
+    if (STANDALONE) { tabBar(); langAsk(); return; }
     miniBar();
     if (deferred) installBtn();
-    if (!(TOUCH || force)) return;
+    if (!(TOUCH || force)) { langAsk(); return; }
     installBtn();
     footerLink();
     if (force) { setTimeout(function () { card(force); }, 300); return; }
+    if (langAsk(hintLater)) return;   // сначала язык, подсказка об установке — после выбора
+    hintLater();
+  }
+  function hintLater() {
     if (later()) return;
     var shown = false;
     function show() { if (shown) return; shown = true; window.removeEventListener('scroll', onScroll); card(); }
