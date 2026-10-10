@@ -16,7 +16,7 @@ module.exports = [
   { id: 'footer', group: 'Шапка и навигация', title: 'Подвал', page: '/', sel: 'footer', w: ['phone'], themes: L },
   // Главная
   { id: 'hero', group: 'Главная', title: 'Первый блок главной: заголовок, вступление, кнопки-переходы', page: '/', sel: '.w-hero', w: ['phone', 'desk'], themes: D },
-  { id: 'who', group: 'Главная', title: '«Привет! Меня зовут Ирина»: фото, сертификаты, пути', page: '/', sel: '#who', w: ['phone', 'desk'], themes: L, maxH: 1700 },
+  { id: 'who', group: 'Главная', title: '«Привет! Меня зовут Ирина»: картинка, плашки, пути', page: '/', sel: '#who', w: ['phone', 'desk'], themes: L, maxH: 1700 },
   { id: 'requests', group: 'Главная', title: '«Узнаёшь себя?» — список запросов', page: '/', sel: '#requests', w: ['phone'], themes: D },
   { id: 'qm', group: 'Главная', title: 'Окно запроса (открывается по нажатию на фразу)', page: '/', sel: 'dialog#qm .qm-card', keep: true, w: ['phone'], themes: D, before: click('#requests .rq') },
   { id: 'approach', group: 'Главная', title: '«На чём держится наша работа» — опоры', page: '/', sel: '#approach', w: ['phone', 'desk'], themes: L },
