@@ -33,3 +33,9 @@
 .draft .lnk{font:inherit;font-weight:700;background:none;border:none;padding:0;color:var(--brown);text-decoration:underline;cursor:pointer}
 .draft .lnk + .lnk{margin-left:12px}
 .form .note{margin-top:10px;max-width:66ch}
+/* галочка согласия перед «Отправить заявку» (вопрос Ирины 10.10.2026, 20:37) — как .zok в assets/zayavka.js */
+.form .zok{display:flex;gap:10px;align-items:flex-start;box-sizing:border-box;max-width:640px;background:var(--soft,#E3E8D6);border:1.5px solid var(--line,#D9DFCB);border-radius:12px;padding:12px 14px;margin:18px 0 0;font-size:.92rem;line-height:1.5;color:var(--ink,#2F2924)}
+.form .zok input{width:22px;height:22px;flex:none;margin:1px 0 0;accent-color:var(--brown,#4F5E3E);cursor:pointer}
+.form .zok label{cursor:pointer;flex:1;min-width:0}.form .zok a{color:var(--brown,#4F5E3E);font-weight:600}
+.form .zok.need{border-color:var(--mustard,#B98324);box-shadow:0 0 0 3px rgba(185,131,36,.28)}
+.form.zok-off #orgSend{opacity:.45;filter:grayscale(1);cursor:not-allowed}

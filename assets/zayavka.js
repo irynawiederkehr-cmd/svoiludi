@@ -3,6 +3,9 @@
    страницы (атрибуты data-* и скрытые абзацы), поэтому украинская страница получает их переводом страницы, а сам файл общий.
    Форма ничего не отправляет на сервер: «Отправить заявку» открывает готовое письмо на адрес из data-mail.
    Черновик хранится только в браузере (localStorage, ключ svoi-zayavka-<имя формы>), «Удалить историю» стирает его.
+   Галочка согласия (вопрос Ирины 10.10.2026, 20:37): <div class="zok"><input type="checkbox" data-z="ok" id="…"><label for="…">…</label></div>
+   над кнопкой; пока её нет, кнопка серая, а нажатие подсвечивает галочку (data-t-ok). В письмо — строка data-t-okline + дата и время.
+   Галочка в черновик не сохраняется: её ставят каждый раз перед отправкой.
 
    Разметка:
    <section class="zform" id="zayavka" data-zayavka="event" data-mail="…" data-subject="…" data-hello="…" data-from="…"
@@ -42,6 +45,11 @@
     + '.zmsg a,.zmsg .lnk,.zdraft .lnk{font:inherit;font-weight:700;color:var(--brown,#4F5E3E);background:none;border:0;padding:0;text-decoration:underline;cursor:pointer}'
     + '.zdraft{font-size:.88rem;color:var(--muted,#7A6E62);margin:14px 0 0;line-height:1.5;max-width:66ch}.zdraft .lnk+.lnk{margin-left:12px}'
     + '.zform .note{margin-top:10px;max-width:66ch}'
+    + '.zok{display:flex;gap:10px;align-items:flex-start;box-sizing:border-box;max-width:640px;background:var(--soft,#E3E8D6);border:1.5px solid var(--line,#D9DFCB);border-radius:12px;padding:12px 14px;margin:18px 0 0;font-size:.92rem;line-height:1.5;color:var(--ink,#2F2924)}'
+    + '.zok input{width:22px;height:22px;flex:none;margin:1px 0 0;accent-color:var(--brown,#4F5E3E);cursor:pointer}'
+    + '.zok label{cursor:pointer;flex:1;min-width:0}.zok a{color:var(--brown,#4F5E3E);font-weight:600}'
+    + '.zok.need{border-color:var(--mustard,#B98324);box-shadow:0 0 0 3px rgba(185,131,36,.28)}'
+    + '.zform.zok-off [data-z=send]{opacity:.45;filter:grayscale(1);cursor:not-allowed}'
     + '@media print{.zform{display:none!important}}';
   document.head.appendChild(css);
 
@@ -68,6 +76,11 @@
       }
     } catch (e) {}
     box.addEventListener('input', save); box.addEventListener('change', save);
+    var ok = q('ok');
+    function paint(){ box.classList.toggle('zok-off', !!ok && !ok.checked); if (ok && ok.checked) ok.closest('.zok').classList.remove('need'); }
+    if (ok) ok.addEventListener('change', paint);
+    paint();
+    var stamp = function(){ var d = new Date(), p = function(n){ return (n < 10 ? '0' : '') + n; }; return p(d.getDate()) + '.' + p(d.getMonth() + 1) + '.' + d.getFullYear() + ', ' + p(d.getHours()) + ':' + p(d.getMinutes()); };
 
     function letter(){
       var lines = [];
@@ -83,6 +96,7 @@
       });
       var first = box.querySelector('[data-a][data-title]'), t = first ? first.value.trim() : '';
       var su = box.getAttribute('data-subject') + (t ? ' — ' + t : '');
+      if (ok && ok.checked) lines.push('', box.getAttribute('data-t-okline') + ' ' + stamp());
       var body = [box.getAttribute('data-hello'), ''].concat(lines, ['', box.getAttribute('data-from') + ' ' + location.origin + location.pathname, '']).join('\n');
       return { su: su, body: body };
     }
@@ -99,6 +113,7 @@
       }
       var bad = Array.prototype.filter.call(box.querySelectorAll('input[type=email]'), function(el){ var v = el.value.trim(); return v && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); });
       if (bad.length) { bad[0].closest('.zf').classList.add('zmiss'); msg.textContent = box.getAttribute('data-t-mail'); msg.hidden = false; bad[0].focus(); return; }
+      if (ok && !ok.checked) { ok.closest('.zok').classList.add('need'); msg.textContent = box.getAttribute('data-t-ok'); msg.hidden = false; ok.focus(); return; }
       msg.hidden = true;
       var L = letter();
       var g = q('gmail'); if (g) g.href = 'https://mail.google.com/mail/?view=cm&fs=1&to=' + encodeURIComponent(MAIL) + '&su=' + encodeURIComponent(L.su) + '&body=' + encodeURIComponent(L.body);
@@ -113,7 +128,7 @@
       try { localStorage.removeItem(KEY); } catch (e) {}
       box.querySelectorAll('[data-a]').forEach(function(el){ el.value = ''; });
       box.querySelectorAll('input[type=checkbox]').forEach(function(x){ x.checked = false; });
-      q('msg').hidden = true; q('sent').hidden = true; q('ask').hidden = true; q('idle').hidden = false;
+      q('msg').hidden = true; q('sent').hidden = true; q('ask').hidden = true; q('idle').hidden = false; paint();
       say(box.getAttribute('data-t-wiped'));
     });
   }

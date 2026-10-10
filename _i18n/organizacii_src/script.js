@@ -188,12 +188,17 @@ try { const d = JSON.parse(localStorage.getItem(OKEY) || 'null'); if (d) {
   (d.who || []).forEach(v => { const i = oF.querySelector(`input[name="o-who"][value="${CSS.escape(v)}"]`); if (i) i.checked = true; });
   (d.langs || []).forEach(v => { const i = oF.querySelector(`input[name="o-lang"][value="${CSS.escape(v)}"]`); if (i) i.checked = true; }); } } catch (_) {}
 oF.addEventListener('input', oSave); oF.addEventListener('change', oSave);
+/* галочка согласия (вопрос Ирины 10.10.2026, 20:37): пока её нет, кнопка серая; в письмо — строка с датой и временем; в черновик не сохраняется */
+const oOk = document.getElementById('o-ok'), oSec = document.getElementById('zayavka');
+const oPaint = () => { oSec.classList.toggle('zok-off', !oOk.checked); if (oOk.checked) oOk.closest('.zok').classList.remove('need'); };
+oOk.addEventListener('change', oPaint); oPaint();
+const oStamp = () => { const d = new Date(), p = n => String(n).padStart(2, '0'); return `${p(d.getDate())}.${p(d.getMonth() + 1)}.${d.getFullYear()}, ${p(d.getHours())}:${p(d.getMinutes())}`; };
 const oDraftIdle = () => { oDraft.innerHTML = 'Всё, что вы ввели, сохраняется только на этом устройстве, пока вы сами не отправите заявку. Можно закрыть страницу и продолжить позже. <button class="lnk" type="button" id="oWipe">Удалить историю</button>'; };
 oDraftIdle();
 oDraft.addEventListener('click', e => { const id = e.target.id;
   if (id === 'oWipe') oDraft.innerHTML = 'Удалить с этого устройства всё, что вы ввели в заявку? Вернуть это будет нельзя. <button class="lnk" type="button" id="oWipeYes">Да, удалить историю</button><button class="lnk" type="button" id="oWipeNo">Отмена</button>';
   if (id === 'oWipeNo') oDraftIdle();
-  if (id === 'oWipeYes'){ try { localStorage.removeItem(OKEY); } catch (_) {} oF.querySelectorAll('[data-a]').forEach(el => el.value = ''); oF.querySelectorAll('input[type=checkbox]').forEach(i => i.checked = false); oMsg.hidden = true; oDraftIdle(); toast('Вся история заявки удалена с этого устройства.'); }
+  if (id === 'oWipeYes'){ try { localStorage.removeItem(OKEY); } catch (_) {} oF.querySelectorAll('[data-a]').forEach(el => el.value = ''); oF.querySelectorAll('input[type=checkbox]').forEach(i => i.checked = false); oOk.checked = false; oPaint(); oMsg.hidden = true; oDraftIdle(); toast('Вся история заявки удалена с этого устройства.'); }
 });
 function oLetter(){
   const lines = [], name = document.getElementById('o-name').value.trim();
@@ -204,6 +209,7 @@ function oLetter(){
   });
   const su = 'Заявка организации в «Своих людях»' + (name ? ' — ' + name : '');
   const firm = document.getElementById('o-kind').value === 'фирма', free = !firm && document.getElementById('o-money').value === 'нет';
+  if (oOk.checked) lines.push('', 'Согласие на обработку данных и публикацию: отмечено на сайте ' + oStamp());
   const body = [firm ? 'Здравствуйте! Мы хотим разместить нашу фирму в «Своих людях».' : free ? 'Здравствуйте! Мы хотим бесплатно разместить нашу организацию в «Своих людях». Для людей у нас всё бесплатно.' : 'Здравствуйте! Мы хотим разместить нашу организацию в «Своих людях».', '', ...lines, '', 'Заявка заполнена на странице https://svoiludi.ch/organizacii/', ''].join('\n');
   return { su, body };
 }
@@ -216,6 +222,7 @@ document.getElementById('orgSend').addEventListener('click', () => {
   const mailOk = x => !x || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(x);
   const badMail = ['o-email', 'o-board-mail'].find(id => !mailOk(document.getElementById(id).value.trim()));
   if (badMail){ document.getElementById(badMail).closest('.f').classList.add('miss'); oMsg.hidden = false; oMsg.textContent = 'Проверьте e-mail: в адресе не хватает знака @ или точки.'; document.getElementById(badMail).focus(); return; }
+  if (!oOk.checked){ oOk.closest('.zok').classList.add('need'); oMsg.hidden = false; oMsg.textContent = 'Поставьте галочку согласия над кнопкой — без неё мы не можем принять заявку.'; oOk.focus(); return; }
   const L = oLetter(), q = `?subject=${encodeURIComponent(L.su)}&body=${encodeURIComponent(L.body)}`;
   const gm = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(MAIL)}&su=${encodeURIComponent(L.su)}&body=${encodeURIComponent(L.body)}`;
   oMsg.hidden = false;
