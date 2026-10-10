@@ -197,6 +197,9 @@ const JOBS = {
   'yazyk/lang-ru': ['p', () => safF('lang-ru')], 'yazyk/lang-uk': ['p', () => safF('lang-uk')], 'yazyk/lang-app': ['p', () => appF('lang-app')],
   'yazyk/lang-dark': ['a', () => chrF('lang-dark', true)], 'yazyk/lang-vz': ['p', () => safF('lang-vz', 'voznesenskaya.ch', '#F4EDE3')],
   'yazyk/lang-vz-test': ['a', () => chrF('lang-vz-test', false, 'voznesenskaya.ch')], 'yazyk/lang-vz-app': ['p', () => appF('lang-vz-app', '#F4EDE3')],
+  'org/org-list': ['p', () => safF('org-list')], 'org/org-card': ['p', () => safF('org-card')], 'org/org-card2': ['p', () => safF('org-card2')],
+  'org/org-add': ['p', () => safF('org-add')], 'org/org-uk': ['a', () => chrF('org-uk')], 'org/org-main': ['p', () => safF('org-main')],
+  'org/org-vac': ['p', () => safF('org-vac')], 'org/org-vac-kinds': ['a', () => chrF('org-vac-kinds')],
   'knopki/b-god': ['p', () => safF('b-god')], 'knopki/b-kursy': ['p', () => safF('b-kursy')], 'knopki/b-search': ['p', () => safF('b-search')],
   // галочка перед скачиванием (10.10.2026)
   'skachivanie/dl-off': ['p', () => safF('dl-off')], 'skachivanie/dl-need': ['p', () => safF('dl-need')], 'skachivanie/dl-toast': ['a', () => chrF('dl-toast')],

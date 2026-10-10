@@ -25,6 +25,12 @@ const S = [
   ['dl-toast', '/instrumenty/ekstrennye-nomera/', 390, 669, { later: true, real: true, lang: 'ru', scrollSel: '.svl-dl', top: 70, post: "document.querySelector('.svl-dl input').click(); document.getElementById('png').click()" }],
   ['dl-uk', '/uk/instrumenty/zarplata/', 390, 669, { later: true, real: true, lang: 'uk', pre: "new Promise(r => { document.getElementById('exampleBtn').click(); setTimeout(r, 6000); })", scrollSel: '.svl-dl', top: 70 }],
   ['dl-vz', '/stupeni/', 390, 736, { vz: true, locale: 'ru-RU', later: true, real: true, lang: 'ru', pre: "['intro','quiz'].forEach(i => { const e = document.getElementById(i); if (e) e.hidden = true; }); document.getElementById('result').hidden = false", scrollSel: '.svl-dl', top: 210, post: "document.getElementById('pdfBtn').click()" }],
+  // раздел «Организации» и «Ищу волонтёров» (10.10.2026)
+  ['org-list', '/organizacii/', 390, 669, { later: true }], ['org-card', '/organizacii/#obrazec-centr-pomoshchi', 390, 669, { later: true }],
+  ['org-card2', '/organizacii/#obrazec-centr-pomoshchi', 390, 669, { later: true, scrollIn: '#qmCard', by: 900 }],
+  ['org-add', '/organizacii/', 390, 669, { later: true, scrollSel: '#add' }], ['org-uk', '/uk/organizacii/', 390, 669, { later: true }],
+  ['org-main', '/', 390, 669, { later: true, scrollSel: '.evk' }], ['org-vac', '/vakansii/#obrazec-volontery-razgovornyj-klub', 390, 669, { later: true }],
+  ['org-vac-kinds', '/vakansii/', 390, 669, { later: true, scrollSel: '.vac-kinds' }], ['org-desk', '/organizacii/', 1280, 800, { later: true, desk: true }],
 ];
 (async () => {
   const srv = spawn('python3', ['-I', '-m', 'http.server', String(PORT), '--directory', require('path').resolve(__dirname, '../..')], { cwd: __dirname, stdio: 'ignore' });
@@ -37,6 +43,8 @@ const S = [
     await ctx.addInitScript((l) => { try { for (const k of ['svoiludi-app-later', 'vz-app-later']) { if (l) localStorage.setItem(k, String(Date.now())); else localStorage.removeItem(k); } } catch (e) {} }, !!o.later || !/install=/.test(pg));
     if (o.real) await ctx.addInitScript(() => { Object.defineProperty(Navigator.prototype, 'webdriver', { get: () => false }); });
     if (o.lang) await ctx.addInitScript((l) => { try { localStorage.setItem('svoiludiLang', l); localStorage.setItem('irinaTestsLang', l); } catch (e) {} }, o.lang);
+    // язык уже выбран (иначе внизу вопрос о языке), кроме снимков самого вопроса (?lang=ask)
+    await ctx.addInitScript(() => { try { if (!/lang=ask/.test(location.search)) { const l = location.pathname.startsWith('/uk/') ? 'uk' : 'ru'; localStorage.setItem('svoiludiLang', l); localStorage.setItem('irinaTestsLang', l); } } catch (e) {} });
     const p = await ctx.newPage(); p.on('pageerror', e => errs.push(n + ' ' + e.message));
     await p.goto((o.vz ? VB : B) + pg, { waitUntil: 'networkidle' }); await p.waitForTimeout(1000);
     if (o.scrollText) { const el = p.getByText(o.scrollText, { exact: false }).first(); try { await el.evaluate(e => { window.scrollTo(0, e.getBoundingClientRect().top + scrollY - innerHeight * 0.45); }); } catch (e) { errs.push(n + ' noscroll'); } await p.waitForTimeout(600); }
@@ -45,6 +53,7 @@ const S = [
     if (o.post) { await p.evaluate(o.post); await p.waitForTimeout(1200); if (o.scrollSel && o.top != null) { await p.evaluate(([sel, top]) => { const e = document.querySelector(sel); if (e) window.scrollTo(0, e.getBoundingClientRect().top + scrollY - top); }, [o.scrollSel, o.top]); await p.waitForTimeout(500); } }
     if (/install=/.test(pg)) await p.evaluate(() => document.querySelectorAll('.pa-card img').forEach(i => i.loading = 'eager'));
     if (o.click) { await p.click(o.click); }
+    if (o.scrollIn) { await p.waitForTimeout(500); await p.evaluate(([sel, by]) => { const e = document.querySelector(sel); if (e) { const s = e.closest('dialog') || e; s.scrollTop += by; e.scrollTop += by; } }, [o.scrollIn, o.by || 600]); }
     await p.waitForTimeout(700);
     await p.screenshot({ path: OUT + n + '.png' });
     await ctx.close();
