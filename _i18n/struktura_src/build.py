@@ -66,6 +66,7 @@ GLYPH = {  # знак в центре «круга своих» (правило:
     'info': '<circle cx="180" cy="165" r="22" fill="#F3E3C2" stroke="#6E4F3C" stroke-width="3"/><path d="M180 160v16" stroke="#6E4F3C" stroke-width="4" stroke-linecap="round"/><circle cx="180" cy="151" r="2.8" fill="#6E4F3C"/>',
     'news': '<rect x="160" y="146" width="34" height="38" rx="4" fill="#F3E3C2" stroke="#6E4F3C" stroke-width="3"/><path d="M194 156h7v22a6 6 0 0 1-6 6M167 156h20M167 165h20M167 174h13" fill="none" stroke="#6E4F3C" stroke-width="3" stroke-linecap="round"/>',
     'pro': '<circle cx="180" cy="156" r="9" fill="#F3E3C2" stroke="#6E4F3C" stroke-width="3"/><path d="M162 184c2-10 9-15 18-15s16 5 18 15" fill="#F3E3C2" stroke="#6E4F3C" stroke-width="3" stroke-linejoin="round"/><path d="M188 176l5 5 9-10" fill="none" stroke="#4F5E3E" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>',
+    'app': '<rect x="164" y="140" width="32" height="52" rx="7" fill="#F3E3C2" stroke="#6E4F3C" stroke-width="3"/><path d="M176 186h8" stroke="#6E4F3C" stroke-width="3" stroke-linecap="round"/><path d="M180 176c0-9 4-15 11-18-1 8-5 13-11 14M180 172c-1-6-4-9-9-11 0 6 3 9 9 10" fill="#C9D3B6" stroke="#4F5E3E" stroke-width="2.2" stroke-linejoin="round"/>',
     'path': '<path d="M162 184c10-4 4-14 14-18s10-10 2-16" fill="none" stroke="#6E4F3C" stroke-width="3.4" stroke-linecap="round" stroke-dasharray="1 6"/><circle cx="162" cy="184" r="4.5" fill="#B98324"/><path d="M178 146v-10l12 4-12 4" fill="#F3E3C2" stroke="#6E4F3C" stroke-width="2.6" stroke-linejoin="round"/>',
 }
 def art(kind):
@@ -184,6 +185,60 @@ def dlya_specialistov():
   <p class="fine">Проверка у всех одинаковая: регистрация в официальных реестрах. Платные возможности всегда помечены. <a href="../o-proekte/">О проекте и как мы проверяем</a>.</p>
 ''' + share(url, 'Перешлите коллегам, которые работают на русском или украинском.', f'Здравствуйте! В справочнике «Свои люди в Швейцарии» можно разместиться бесплатно в период запуска. Там же бесплатные инструменты для своего дела: счёт с QR-кодом, учёт доходов и часов. {url}')
     write(rel, head(title, desc, url, 1) + '<body>' + top(rel, ('Разместиться', 'join/')) + main + foot(1))
+
+
+# --- «Свои люди» как приложение на телефоне: пошаговая инструкция (просьба Ирины 10.10.2026) ---
+def prilozhenie():
+    rel = 'prilozhenie/index.html'; url = SITE + 'prilozhenie/'
+    title = 'Как установить «Свои люди» на телефон как приложение: iPhone, iPad и Android'
+    desc = 'Пошагово: как поставить «Свои люди в Швейцарии» иконкой на экран телефона — на iPhone и iPad через Safari, на Android через Chrome или Samsung Internet. Бесплатно, без App Store и Google Play, без регистрации. Как обновлять, что делать, если ссылка открылась в Instagram или Telegram, как перенести записи инструментов и как удалить.'
+    def steps(items):
+        return '<ol>' + ''.join(f'<li><span>{x}</span></li>' for x in items) + '</ol>'
+    main = '<main class="page">\n' + hero('Приложение · Свои люди в Швейцарии', '«Свои люди» на телефоне: <em>как установить приложение за минуту</em>',
+        'Иконка «Свои люди» на экране телефона — и все статьи, инструменты и специалисты всегда под рукой. Это бесплатно, без App Store и Google Play и без регистрации. Ниже по шагам для iPhone, iPad и Android.', 'app',
+        '\n      <span class="addbtns"><button type="button" class="btn" id="pr-hint">Показать подсказку на этом телефоне</button></span>') + f'''
+  <div class="prose">
+    <section aria-labelledby="h-why"><h2 id="h-why">Зачем ставить приложение</h2>
+      <ul class="okl">
+        <li><b>Не потеряешь.</b> Ссылку не нужно искать в чатах и закладках: иконка всегда на экране.</li>
+        <li><b>Открывается быстро и во весь экран,</b> без адресной строки. Внизу вкладки: Специалисты, Швейцария, Инструменты, Что нового.</li>
+        <li><b>Работает и без интернета:</b> страницы, которые ты уже открывала, видно и в поезде, и в горах.</li>
+        <li><b>Всегда свежее.</b> Когда телефон в интернете, приложение само показывает новые статьи, сроки и специалистов. Скачивать обновления не нужно.</li>
+      </ul>
+    </section>
+    <section class="todo" aria-labelledby="h-ios"><h2 id="h-ios">iPhone и iPad</h2>
+      {steps(['Открой <a href="https://svoiludi.ch/">svoiludi.ch</a> в браузере <b>Safari</b>.',
+              'Нажми «Поделиться» — квадрат со стрелкой вверх. На iPhone он внизу экрана, на iPad вверху справа. Если его не видно, сначала нажми «⋯» внизу справа.',
+              'Прокрути список вниз и выбери «На экран „Домой“».',
+              'Нажми «Добавить». Иконка «Свои люди» появится на экране, как у обычного приложения.'])}
+    </section>
+    <section class="todo" aria-labelledby="h-android"><h2 id="h-android">Android</h2>
+      {steps(['Открой <a href="https://svoiludi.ch/">svoiludi.ch</a> в браузере <b>Chrome</b>.',
+              'Если внизу появилась подсказка «Установить приложение», нажми «Установить». Если нет — открой меню ⋮ вверху справа.',
+              'Выбери «Установить приложение» или «Добавить на главный экран».',
+              'Подтверди. Иконка «Свои люди» появится на экране.'])}
+      <p>В браузере <b>Samsung Internet</b>: меню ≡ внизу справа → «Добавить страницу на» → «Главный экран».</p>
+    </section>
+    <section aria-labelledby="h-inapp"><h2 id="h-inapp">Ссылка открылась в Instagram, Telegram или WhatsApp</h2>
+      <p>Внутри этих приложений установить нельзя: у них свой маленький браузер. Нажми ⋯ или ⋮ вверху и выбери «Открыть в браузере» (Safari на iPhone, Chrome на Android). Дальше — шаги выше.</p>
+    </section>
+    <section aria-labelledby="h-upd"><h2 id="h-upd">Как обновлять</h2>
+      <ul class="okl">
+        <li><b>Само.</b> Когда телефон в интернете, приложение открывает свежие страницы.</li>
+        <li><b>Если кажется, что видишь старое,</b> нажми внизу «Ещё» → «Обновить страницу» или закрой приложение совсем и открой снова.</li>
+        <li><b>Что нового на сайте</b> — в разделе <a href="../novosti/">«Что нового»</a>, он тоже во вкладках внизу.</li>
+      </ul>
+    </section>
+    <section aria-labelledby="h-data"><h2 id="h-data">Твои записи в инструментах</h2>
+      <p>Всё, что ты вписываешь в инструментах (бюджет, календарь, учёт часов), хранится только на твоём телефоне. На iPhone записи в Safari и в приложении лежат отдельно и сами не переходят. Поэтому перед установкой нажми в инструменте «Сохранить резервную копию», а в приложении — «Загрузить из резервной копии». Раз в месяц сохраняй копию на всякий случай.</p>
+    </section>
+    <section aria-labelledby="h-del"><h2 id="h-del">Как удалить</h2>
+      <p>Как обычную иконку: удерживай её пальцем и выбери «Удалить приложение» или «Удалить с экрана». Сайт <a href="https://svoiludi.ch/">svoiludi.ch</a> при этом остаётся, его можно открыть в браузере в любой момент.</p>
+    </section>
+  </div>
+<script>document.getElementById('pr-hint').addEventListener('click',function(){{if(window.svoiInstallHint)window.svoiInstallHint();}});</script>
+''' + share(url, 'Перешли тем, кто недавно переехал: пусть «Свои люди» тоже будут под рукой.', f'Привет! «Свои люди в Швейцарии» можно поставить на телефон как приложение — вот как это сделать за минуту: {url}')
+    write(rel, head(title, desc, url, 1) + '<body>' + top(rel) + main + foot(1))
 
 # --- «Моя ситуация» ---
 def tiles(up, cls='sit-grid'):
@@ -317,7 +372,7 @@ exec(re.search(r"_C = .*?\n}\n", open(os.path.join(HERE, '..', 'shveycariya_src'
 MODICON = from_build['MODICON']
 
 if __name__ == '__main__':
-    o_proekte(); dlya_specialistov(); situacii_index()
+    o_proekte(); dlya_specialistov(); prilozhenie(); situacii_index()
     for s in SITUACII: situaciya(s)
     novosti(); home_blocks(); evk(); bridges()
     print('ok: o-proekte, dlya-specialistov, situacii (', len(SITUACII), '), novosti (', len(NEWS), '), главная, events/kursy')

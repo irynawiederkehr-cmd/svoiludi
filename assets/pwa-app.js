@@ -24,7 +24,7 @@
     android: ['Відкрий меню браузера ⋮ угорі праворуч.', 'Вибери «Встановити застосунок» або «Додати на головний екран».', 'Підтверди. Іконка «Свої люди» з’явиться на екрані.'],
     inapp: '<b>Зараз сторінка відкрита всередині Instagram, Telegram чи іншого застосунку.</b> Звідси встановити не можна. Натисни ⋯ або значок угорі й вибери «Відкрити в браузері» (Safari чи Chrome), а там — «Встановити застосунок».',
     note: '<b>Важливо для записів в інструментах.</b> Записи, зроблені в браузері, у застосунок самі не переходять. Перед встановленням натисни в інструменті «Зберегти резервну копію», а в застосунку — «Завантажити з резервної копії».',
-    install_app: '📱 Встановити як застосунок'
+    install_app: '📱 Встановити як застосунок', guide: 'Покрокова інструкція →'
   } : {
     tabs: ['Специалисты', 'Швейцария', 'Инструменты', 'Что нового', 'Ещё'],
     more: 'Ещё', swiss: 'Как устроена Швейцария', join: 'Как разместиться', evk: 'События и курсы', pro: 'Для специалистов', about: 'О проекте', site: 'Сайт Ирины', privacy: 'Политика конфиденциальности',
@@ -38,7 +38,7 @@
     android: ['Открой меню браузера ⋮ вверху справа.', 'Выбери «Установить приложение» или «Добавить на главный экран».', 'Подтверди. Иконка «Свои люди» появится на экране.'],
     inapp: '<b>Сейчас страница открыта внутри Instagram, Telegram или другого приложения.</b> Отсюда установить нельзя. Нажми ⋯ или значок вверху и выбери «Открыть в браузере» (Safari или Chrome), а там — «Установить приложение».',
     note: '<b>Важно для записей в инструментах.</b> Записи, сделанные в браузере, в приложение сами не переходят. Перед установкой нажми в инструменте «Сохранить резервную копию», а в приложении — «Загрузить из резервной копии».',
-    install_app: '📱 Установить как приложение'
+    install_app: '📱 Установить как приложение', guide: 'Пошаговая инструкция →'
   };
 
   var ua = navigator.userAgent;
@@ -97,7 +97,8 @@
     '.pa-go{border:0;border-radius:999px;padding:11px 20px;background:var(--brown,#6E4F3C);color:var(--paper,#FFFCF8);font:700 .95rem var(--body,system-ui);cursor:pointer}',
     '.pa-later{border:0;background:none;color:var(--muted,#7A6E62);font:600 .9rem var(--body,system-ui);text-decoration:underline;text-underline-offset:3px;cursor:pointer;padding:10px 6px}',
     '.pa-foot{display:inline-block;margin:10px 0;border:1.5px solid var(--sage,#66704F);color:var(--sage,#66704F);background:none;border-radius:999px;padding:9px 16px;font:700 .9rem var(--body,system-ui);cursor:pointer}',
-    '@media print{.pa-tabs,.pa-card,.pa-back,.pa-foot{display:none!important}}'
+    '.pa-guide{margin:8px 0 0;font-size:.9rem}.pa-guide a,.pa-flink{color:var(--sage,#66704F);font-weight:700;text-underline-offset:3px}.pa-flink{display:inline-block;margin:0 0 0 12px;font-size:.9rem}',
+    '@media print{.pa-tabs,.pa-card,.pa-back,.pa-foot,.pa-flink{display:none!important}}'
   ].join('\n');
   document.head.appendChild(css);
 
@@ -203,7 +204,7 @@
     else if (kind === 'ios' || !deferred) body = '<ol class="pa-steps"><li>' + T[kind === 'ios' ? 'ios' : 'android'].join('</li><li>') + '</li></ol>';
     var h = '<aside class="pa-card" role="dialog" aria-label="' + T.title + '"><div class="pa-head"><img src="/fav/icon-192.png" alt=""><div>' +
       '<h3>' + T.title + '<button type="button" class="pa-q" aria-label="?" aria-expanded="false">?</button></h3><p>' + T.lead + '</p></div></div>' +
-      '<div class="pa-help">' + T.help + '</div>' + body + (kind !== 'inapp' ? '<div class="pa-note">' + T.note + '</div>' : '') +
+      '<div class="pa-help">' + T.help + '</div>' + body + '<p class="pa-guide"><a href="' + P + '/prilozhenie/">' + T.guide + '</a></p>' + (kind !== 'inapp' ? '<div class="pa-note">' + T.note + '</div>' : '') +
       '<div class="pa-btns">' + (kind === 'android' && deferred ? '<button type="button" class="pa-go">' + T.install + '</button>' : '') +
       '<button type="button" class="pa-later">' + T.later + '</button></div></aside>';
     var c = el(h); document.body.appendChild(c);
@@ -219,7 +220,9 @@
     var f = document.querySelector('footer'); if (!f) return;
     var b = el('<button type="button" class="pa-foot">' + T.install_app + '</button>');
     b.addEventListener('click', function () { card(force); });
-    var box = document.createElement('div'); box.appendChild(b); f.insertBefore(box, f.firstChild);
+    var box = document.createElement('div'); box.appendChild(b);
+    box.appendChild(el('<a class="pa-flink" href="' + P + '/prilozhenie/">' + T.guide + '</a>'));   // пошаговая инструкция (10.10.2026)
+    f.insertBefore(box, f.firstChild);
   }
 
   function start() {
