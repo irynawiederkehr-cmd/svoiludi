@@ -119,7 +119,7 @@ PAGES = [('index.html', '/'), ('events/index.html', '/events/'), ('kursy/index.h
          ('shveycariya/vuz/index.html', '/shveycariya/vuz/'),
          ('shveycariya/zhivotnye/index.html', '/shveycariya/zhivotnye/')]
 # «Устройство сайта» (09.10.2026): О проекте, Для специалистов, Что нового, Моя ситуация, тема «Адаптация»
-PAGES += [x for x in [('o-proekte/index.html', '/o-proekte/'), ('prilozhenie/index.html', '/prilozhenie/'), ('dlya-specialistov/index.html', '/dlya-specialistov/'), ('novosti/index.html', '/novosti/'), ('situacii/index.html', '/situacii/'), ('shveycariya/adaptaciya/index.html', '/shveycariya/adaptaciya/'), ('situacii/tolko-priehala/index.html', '/situacii/tolko-priehala/'), ('situacii/rabota/index.html', '/situacii/rabota/'), ('situacii/deti/index.html', '/situacii/deti/'), ('situacii/dengi/index.html', '/situacii/dengi/'), ('situacii/zhilye/index.html', '/situacii/zhilye/'), ('situacii/svoe-delo/index.html', '/situacii/svoe-delo/'), ('situacii/zdorovye/index.html', '/situacii/zdorovye/'), ('situacii/pismo-problema/index.html', '/situacii/pismo-problema/')] if x not in PAGES]
+PAGES += [x for x in [('o-proekte/index.html', '/o-proekte/'), ('usloviya/index.html', '/usloviya/'), ('prilozhenie/index.html', '/prilozhenie/'), ('dlya-specialistov/index.html', '/dlya-specialistov/'), ('novosti/index.html', '/novosti/'), ('situacii/index.html', '/situacii/'), ('shveycariya/adaptaciya/index.html', '/shveycariya/adaptaciya/'), ('situacii/tolko-priehala/index.html', '/situacii/tolko-priehala/'), ('situacii/rabota/index.html', '/situacii/rabota/'), ('situacii/deti/index.html', '/situacii/deti/'), ('situacii/dengi/index.html', '/situacii/dengi/'), ('situacii/zhilye/index.html', '/situacii/zhilye/'), ('situacii/svoe-delo/index.html', '/situacii/svoe-delo/'), ('situacii/zdorovye/index.html', '/situacii/zdorovye/'), ('situacii/pismo-problema/index.html', '/situacii/pismo-problema/')] if x not in PAGES]
 OWN = sorted({p for _, p in PAGES}, key=len, reverse=True)
 CODE_WORDS = ['ВСТРЕЧА', 'ОТЗЫВ', 'ЗАЯВКА', 'РАССЫЛКА', 'ПОРЯДОК']
 
@@ -167,7 +167,7 @@ def fix_links(html, base):
     # 4) абсолютные ссылки https://svoiludi.ch/страница (в разметке, скриптах и готовых сообщениях)
     def absu(m):
         return SITE + (own_uk(m.group(1) or '/') or (m.group(1) or '/'))
-    html = re.sub(r'https://svoiludi\.ch(/(?:events/|kursy/|join/|opros/|badge/|privacy/|instrumenty/(?:[a-z-]+/)?|shveycariya/(?:[a-z0-9-]+/)?)?)(?=["\'`#?<)\s]|$)', absu, html)
+    html = re.sub(r'https://svoiludi\.ch(/(?:events/|kursy/|join/|opros/|badge/|privacy/|o-proekte/|usloviya/|instrumenty/(?:[a-z-]+/)?|shveycariya/(?:[a-z0-9-]+/)?)?)(?=["\'`#?<)\s]|$)', absu, html)
     # 4б) ссылки на сайт Ирины — на его украинскую версию
     html = re.sub(r'https://voznesenskaya\.ch/(#[\w-]*)?(?=["\'`<)\s])', lambda m: 'https://voznesenskaya.ch/uk/' + (m.group(1) or ''), html)
     html = re.sub(r'https://voznesenskaya\.ch/(privacy|impressum)/(?=["\'`<)\s])', lambda m: f'https://voznesenskaya.ch/{m.group(1)}/#lang=uk', html)
