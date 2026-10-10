@@ -40,6 +40,7 @@ const CANTONS = {
 const LANG_FIRST = ['украинский', 'русский', 'немецкий', 'французский', 'итальянский', 'английский'];
 const MON_G = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'];
 window.HELP = {
+  feek: '<p><b>Ничего</b> или <b>только добровольные пожертвования</b> — организация размещается у нас бесплатно всегда. Её события и курсы тоже только бесплатные или с пожертвованием.</p><p><b>Членский взнос, плата за занятия, курс, школу, лагерь, билеты или цены</b> — размещение на тех же условиях, что у специалистов: до конца 2027 года бесплатно, потом платно.</p><p>Сумму пишите конечную, в швейцарских франках: «CHF» уже стоит, впишите только число и выберите, за что она.</p>',
   zfindHead: '<p>Если руководитель организации или фирмы уже размещён в справочнике специалистов, найдите его карточку по номеру. <b>UID</b> — номер фирмы или самозанятого вида CHE-123.456.789, он есть в карточке. <b>Номер карточки</b> — SG-0001, он тоже есть в карточке, внизу.</p><p>Имя руководителя подставится из карточки, а его карточка и карточка организации будут ссылаться друг на друга. Номер никуда не отправляется: поиск идёт только по опубликованным карточкам, прямо на этой странице.</p>',
   dir: '<p><b>Помощь и интеграция</b> — центры помощи, консультации, помощь с документами, жильём и работой, курсы языка.</p><p><b>Дети и школы</b> — школы выходного дня, кружки, лагеря, родительские группы.</p><p><b>Общества и культура</b> — общества диаспоры, хоры, танцы, праздники, клубы.</p><p><b>Деловые сообщества</b> — объединения предпринимателей и специалистов, встречи и обмен опытом.</p><p><b>Еда и магазины</b> — рестораны, кафе, кейтеринг, продукты и магазины своих.</p><p><b>Студии и досуг</b> — студии танца, спорта, творчества и красоты, частные курсы и школы.</p>',
   kind: '<p><b>Благотворительная организация</b> помогает людям без прибыли: центр помощи, фонд. <b>Некоммерческая</b> — ферайн или общество без прибыли: школа выходного дня, хор, клуб, деловое общество.</p><p><b>Фирма</b> — коммерческая организация: ресторан, кейтеринг, магазин, студия, частная школа.</p><p>Условия зависят от того, берёт ли организация деньги с людей. Кто всё делает для людей бесплатно, размещается бесплатно всегда. Кто берёт членский взнос, плату за занятия, билеты или цены, — на тех же условиях, что специалисты справочника: до конца 2027 года бесплатно, потом платно.</p>',
@@ -179,27 +180,46 @@ document.getElementById('o-kind').innerHTML = oOpt('', 'Выберите вид'
 document.getElementById('o-money').innerHTML = oOpt('', 'Выберите ответ') + oOpt('нет', 'Нет: для людей всё бесплатно, только добровольные пожертвования') + oOpt('да', 'Да: взнос, плата за занятия, школу или курс, билеты, цены');
 document.getElementById('o-kind').addEventListener('change', e => { if (e.target.value === 'фирма') document.getElementById('o-money').value = 'да'; });
 document.getElementById('o-dir').innerHTML = oOpt('', 'Выберите направление') + Object.values(DIRS).map(x => oOpt(x.t, x.t)).join('');
-document.getElementById('o-canton').innerHTML = oOpt('', 'Выберите кантон') + Object.keys(CANTONS).sort((a, b) => ktRu(a).localeCompare(ktRu(b), 'ru')).map(x => oOpt(`${ktRu(x)} (${kt(x)})`, `${ktRu(x)} (${kt(x)})`)).join('') + oOpt('Вся Швейцария', 'Вся Швейцария');
+document.getElementById('o-canton').innerHTML = oOpt('', 'Выберите кантон') + Object.keys(CANTONS).sort((a, b) => ktRu(a).localeCompare(ktRu(b), 'ru')).map(x => `<option value="${esc(ktRu(x) + ' (' + kt(x) + ')')}" data-k="${kt(x)}">${esc(ktRu(x) + ' (' + kt(x) + ')')}</option>`).join('') + oOpt('Вся Швейцария', 'Вся Швейцария');
+/* что можно получить, дни, что платят люди — галочками и списками, чтобы почти ничего не писать (решение Ирины 10.10.2026, 22:07) */
+const OFFERS = ['Помощь с письмами и документами', 'Помощь со статусом S и пермитом', 'Курсы языка', 'Разговорные клубы', 'Школа выходного дня', 'Кружки и секции для детей', 'Встречи и праздники',
+  'Психологическая поддержка', 'Юридические консультации', 'Помощь с работой', 'Одежда, продукты, вещи', 'Помощь с жильём', 'Концерты, театр, выставки', 'Спорт', 'Еда: ресторан, кейтеринг', 'Магазин'];
+document.getElementById('o-offers').innerHTML = OFFERS.map(t => oChk('o-offer', t, t)).join('');
+document.getElementById('o-days').innerHTML = ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'].map(t => oChk('o-day', t, t)).join('');
+const FEEK = [['free', 'Ничего: всё бесплатно'], ['donation', 'Только добровольные пожертвования'], ['member', 'Членский взнос'], ['lesson', 'Плата за занятия'], ['course', 'Плата за курс, школу или лагерь'], ['ticket', 'Билеты на события'], ['prices', 'Цены: фирма, ресторан, магазин']];
+document.getElementById('o-feek').innerHTML = oOpt('', 'Выберите') + FEEK.map(([v, t]) => oOpt(v, t)).join('');
+/* «Берёте ли деньги с людей?» — «нет»: только «ничего» и «пожертвования»; «да»: только платные варианты */
+function oFeeLock(){
+  const m = document.getElementById('o-money').value, f = document.getElementById('o-feek');
+  [...f.options].forEach(o => { if (!o.value) return; const freeOpt = o.value === 'free' || o.value === 'donation'; o.disabled = (m === 'нет' && !freeOpt) || (m === 'да' && freeOpt); });
+  if (f.selectedOptions[0] && f.selectedOptions[0].disabled){ f.value = ''; f.dispatchEvent(new Event('change', { bubbles: true })); }
+}
+document.getElementById('o-money').addEventListener('change', oFeeLock);
 document.getElementById('o-who').innerHTML = Object.entries(WHO).map(([, t]) => oChk('o-who', t, t)).join('');
 document.getElementById('o-langs').innerHTML = LANG_FIRST.map(l => oChk('o-lang', l, l[0].toUpperCase() + l.slice(1))).join('');
 const oChecked = name => [...oF.querySelectorAll(`input[name="${name}"]:checked`)].map(i => i.value);
-function oSave(){ try { const d = {}; oF.querySelectorAll('[data-a]').forEach(el => d[el.id] = el.value); d.who = oChecked('o-who'); d.langs = oChecked('o-lang'); localStorage.setItem(OKEY, JSON.stringify(d)); } catch (_) {} }
+function oSave(){ try { const d = {}; oF.querySelectorAll('[data-a]').forEach(el => d[el.id] = el.value); d.who = oChecked('o-who'); d.langs = oChecked('o-lang'); d.offers = oChecked('o-offer'); d.days = oChecked('o-day'); localStorage.setItem(OKEY, JSON.stringify(d)); } catch (_) {} }
 try { const d = JSON.parse(localStorage.getItem(OKEY) || 'null'); if (d) {
   oF.querySelectorAll('[data-a]').forEach(el => { if (typeof d[el.id] === 'string') el.value = d[el.id]; });
   (d.who || []).forEach(v => { const i = oF.querySelector(`input[name="o-who"][value="${CSS.escape(v)}"]`); if (i) i.checked = true; });
-  (d.langs || []).forEach(v => { const i = oF.querySelector(`input[name="o-lang"][value="${CSS.escape(v)}"]`); if (i) i.checked = true; }); } } catch (_) {}
+  (d.langs || []).forEach(v => { const i = oF.querySelector(`input[name="o-lang"][value="${CSS.escape(v)}"]`); if (i) i.checked = true; });
+  [['offers', 'o-offer'], ['days', 'o-day']].forEach(([k, n]) => (d[k] || []).forEach(v => { const i = oF.querySelector(`input[name="${n}"][value="${CSS.escape(v)}"]`); if (i) i.checked = true; })); } } catch (_) {}
+oFeeLock();
 oF.addEventListener('input', oSave); oF.addEventListener('change', oSave);
 /* галочка согласия (вопрос Ирины 10.10.2026, 20:37): пока её нет, кнопка серая; в письмо — строка с датой и временем; в черновик не сохраняется */
 const oOk = document.getElementById('o-ok'), oSec = document.getElementById('zayavka');
-const oPaint = () => { oSec.classList.toggle('zok-off', !oOk.checked); if (oOk.checked) oOk.closest('.zok').classList.remove('need'); };
-oOk.addEventListener('change', oPaint); oPaint();
+/* ещё две обязательные галочки (решение Ирины 10.10.2026, 22:14 и 22:24): только своя организация; законно и в нашей компетенции */
+const oMust = [['o-own', 'Поставьте галочку «Мы подаём заявку только за свою организацию».', 'Только своя организация, за других не размещаем: отмечено на сайте'], ['o-law', 'Поставьте галочку «Деятельность организации законна».', 'Законно и в нашей компетенции: отмечено на сайте']];
+const oChecks = () => [oOk].concat(oMust.map(m => document.getElementById(m[0])));
+const oPaint = () => { oSec.classList.toggle('zok-off', !oChecks().every(x => x.checked)); oChecks().forEach(x => { if (x.checked) x.closest('.zok').classList.remove('need'); }); };
+oChecks().forEach(x => x.addEventListener('change', oPaint)); oPaint();
 const oStamp = () => { const d = new Date(), p = n => String(n).padStart(2, '0'); return `${p(d.getDate())}.${p(d.getMonth() + 1)}.${d.getFullYear()}, ${p(d.getHours())}:${p(d.getMinutes())}`; };
 const oDraftIdle = () => { oDraft.innerHTML = 'Всё, что вы ввели, сохраняется только на этом устройстве, пока вы сами не отправите заявку. Можно закрыть страницу и продолжить позже. <button class="lnk" type="button" id="oWipe">Удалить историю</button>'; };
 oDraftIdle();
 oDraft.addEventListener('click', e => { const id = e.target.id;
   if (id === 'oWipe') oDraft.innerHTML = 'Удалить с этого устройства всё, что вы ввели в заявку? Вернуть это будет нельзя. <button class="lnk" type="button" id="oWipeYes">Да, удалить историю</button><button class="lnk" type="button" id="oWipeNo">Отмена</button>';
   if (id === 'oWipeNo') oDraftIdle();
-  if (id === 'oWipeYes'){ try { localStorage.removeItem(OKEY); } catch (_) {} oF.querySelectorAll('[data-a]').forEach(el => el.value = ''); oF.querySelectorAll('input[type=checkbox]').forEach(i => i.checked = false); oOk.checked = false; oPaint(); oF.dispatchEvent(new Event('zwipe')); oMsg.hidden = true; oDraftIdle(); toast('Вся история заявки удалена с этого устройства.'); }
+  if (id === 'oWipeYes'){ try { localStorage.removeItem(OKEY); } catch (_) {} oF.querySelectorAll('[data-a]').forEach(el => el.value = ''); oF.querySelectorAll('input[type=checkbox]').forEach(i => i.checked = false); oChecks().forEach(x => x.checked = false); oFeeLock(); oPaint(); oF.dispatchEvent(new Event('zwipe')); oMsg.hidden = true; oDraftIdle(); toast('Вся история заявки удалена с этого устройства.'); }
 });
 function oLetter(){
   const lines = [], name = document.getElementById('o-name').value.trim();
@@ -212,12 +232,15 @@ function oLetter(){
   const su = 'Заявка организации в «Своих людях»' + (name ? ' — ' + name : '');
   const firm = document.getElementById('o-kind').value === 'фирма', free = !firm && document.getElementById('o-money').value === 'нет';
   if (oOk.checked) lines.push('', 'Согласие на обработку данных и публикацию: отмечено на сайте ' + oStamp());
+  oMust.forEach(([id, , line]) => { if (document.getElementById(id).checked) lines.push(line + ' ' + oStamp()); });
   const body = [firm ? 'Здравствуйте! Мы хотим разместить нашу фирму в «Своих людях».' : free ? 'Здравствуйте! Мы хотим бесплатно разместить нашу организацию в «Своих людях». Для людей у нас всё бесплатно.' : 'Здравствуйте! Мы хотим разместить нашу организацию в «Своих людях».', '', ...lines, '', 'Заявка заполнена на странице https://svoiludi.ch/organizacii/', ''].join('\n');
   return { su, body };
 }
 document.getElementById('orgSend').addEventListener('click', () => {
   const firmK = document.getElementById('o-kind').value === 'фирма';
-  const need = [['o-kind', 'вид организации'], ['o-name', 'название организации'], ['o-form', 'форму организации'], ['o-about', 'что вы делаете'], ['o-canton', 'кантон'], ['o-email', 'e-mail организации'], ['o-board', 'кто подтвердит карточку']].concat(firmK ? [['o-uid', 'номер UID фирмы'], ['o-head', 'руководителя фирмы']] : [['o-money', 'берёте ли вы деньги с людей']]);
+  const need = [['o-kind', 'вид организации'], ['o-name', 'название организации'], ['o-form', 'форму организации'], ['o-about', 'что вы делаете'], ['o-canton', 'кантон'], ['o-email', 'e-mail организации'], ['o-board', 'кто подтвердит карточку']].concat(firmK ? [['o-uid', 'номер UID фирмы'], ['o-head', 'руководителя фирмы']] : [['o-money', 'берёте ли вы деньги с людей']])
+    .concat([['o-addrshow', 'адрес встреч'], ['o-feek', 'что платят люди']])
+    .concat(['o-street', 'o-city', 'o-fee', 'o-feeper'].filter(id => !document.getElementById(id).closest('.f').hidden).map(id => [id, { 'o-street': 'улицу и дом', 'o-city': 'город', 'o-fee': 'сумму', 'o-feeper': 'за что платят' }[id]]));
   const miss = need.filter(([id]) => !document.getElementById(id).value.trim());
   oF.querySelectorAll('.f').forEach(f => f.classList.remove('miss')); miss.forEach(([id]) => document.getElementById(id).closest('.f').classList.add('miss'));
   if (miss.length){ oMsg.hidden = false; oMsg.textContent = 'Пожалуйста, заполните: ' + miss.map(m => m[1]).join(', ') + '.'; document.getElementById(miss[0][0]).focus(); return; }
@@ -225,6 +248,8 @@ document.getElementById('orgSend').addEventListener('click', () => {
   const badMail = ['o-email', 'o-board-mail'].find(id => !mailOk(document.getElementById(id).value.trim()));
   if (badMail){ document.getElementById(badMail).closest('.f').classList.add('miss'); oMsg.hidden = false; oMsg.textContent = 'Проверьте e-mail: в адресе не хватает знака @ или точки.'; document.getElementById(badMail).focus(); return; }
   if (!oOk.checked){ oOk.closest('.zok').classList.add('need'); oMsg.hidden = false; oMsg.textContent = 'Поставьте галочку согласия над кнопкой — без неё мы не можем принять заявку.'; oOk.focus(); return; }
+  const m1 = oMust.find(([id]) => !document.getElementById(id).checked);
+  if (m1){ const x = document.getElementById(m1[0]); x.closest('.zok').classList.add('need'); oMsg.hidden = false; oMsg.textContent = m1[1]; x.focus(); return; }
   const L = oLetter(), q = `?subject=${encodeURIComponent(L.su)}&body=${encodeURIComponent(L.body)}`;
   const gm = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(MAIL)}&su=${encodeURIComponent(L.su)}&body=${encodeURIComponent(L.body)}`;
   oMsg.hidden = false;

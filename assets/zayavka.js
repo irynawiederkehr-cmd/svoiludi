@@ -45,7 +45,30 @@
                           если это UID специалиста — его карточка подставляется как руководитель (data-t-dupspec)
    [data-zfill="name|ref|uid|num|email|phone"] — поле получает значение из карточки и становится только для чтения
                           (для форм со своим движком, например заявка организации: руководитель из справочника)
-   Блок поиска работает и вне [data-zayavka]: корнем тогда служит ближайший [data-zlook-root]. */
+   Блок поиска работает и вне [data-zayavka]: корнем тогда служит ближайший [data-zlook-root].
+
+   ТОЛЬКО АКТИВНЫЕ КАРТОЧКИ (решение Ирины 10.10.2026, 22:12): карточка на паузе, на подтверждении или с прошедшим
+   paidUntil по номеру находится, но не подставляется — форма говорит почему (data-t-offwait / offpause / offend, {n} — имя,
+   {d} — дата) и не отправляет заявку, даже если этот UID вписан вручную. Записи таких карточек страницы сами скрывают.
+
+   ЧТОБЫ ПИСАТЬ КАК МОЖНО МЕНЬШЕ (решение Ирины 10.10.2026, 22:00–22:09) — что ещё умеет движок:
+   data-zif="id:a|b"        — поле видно, когда в #id выбрано a или b; #id может быть и группой галочек .zchk (отмечено a или b)
+   input[data-zplz][data-zcity="id"][data-zkt="id"] — почтовый индекс: город (input с подсказками) и кантон (select, option[data-k="ZH"])
+                          подставляются сами из assets/plz.js (window.SVL_PLZ); <small data-zplzno hidden> — «такого индекса нет»
+   input[data-zort]       — город: подсказки по первым буквам из того же списка; по городу сам ставится кантон
+   input[type=date][data-zd="from"|"to"] — начало и конец: конец не раньше начала, начало не в прошлом (data-t-dpast, data-t-dorder);
+                          data-zmax="60" на конце — не дольше 60 дней (data-t-dmax, {n}); data-zdef="60" — пусто → начало + 60 дней,
+                          data-zsame — пусто → та же дата, что начало; в письмо даты идут как ДД.ММ.ГГГГ
+   .zchk[data-req]        — группа галочек: нужна хотя бы одна
+   [data-zany="c"]        — контакты: без карточки нужен хотя бы один из группы (data-t-any на форме)
+   option[data-zcharge]   — платный вариант: организации, которые ничего не берут с людей (free: true), его выбрать не могут,
+                          виден [data-zl="free"]; option[data-t-own] — подпись варианта без карточки (например «По адресу» вместо «Другой адрес»)
+   input[type=checkbox][data-zmust] в .zok — ещё одна обязательная галочка (например «Я сам(а) организатор…», решение Ирины
+                          10.10.2026, 22:14): без неё кнопка серая; в письмо — data-line + дата и время, подсказка — data-t-must
+   [data-zl="mine"]       — архив: прошлые записи этой карточки (window.ZMINE(card) → [{ t, s, d: { id поля: значение | [значения] } }]),
+                          кнопка «Повторить» (data-t-again) заполняет форму, даты остаются пустыми (data-t-repeated)
+   .zchk[data-zskills]    — навыки из assets/navyki.js (window.NAVYKI), с выбором направления select[data-zskg] и поиском input[data-zsks]
+                          в том же .zf; в письмо и в данные — по-русски, на украинской странице подписи украинские */
 (function(){
   if (window.SVL_ZAYAVKA) return;
   window.SVL_ZAYAVKA = true;
@@ -97,6 +120,21 @@
     + '.zp .lnk{margin-top:10px;display:inline-block}'
     + '.zf input.zlocked,.zf textarea.zlocked,[data-zlook-root] input.zlocked,[data-zlook-root] textarea.zlocked{background:var(--soft,#E3E8D6);color:var(--muted,#7A6E62);cursor:default}'
     + '@media (max-width:520px){.zp-dl div{grid-template-columns:1fr;gap:0}.zlrow{flex-direction:column}}'
+    /* поля «как можно меньше писать» */
+    + '.zform .zh3,[data-zlook-root] .zh3{font-size:.8rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--brown,#4F5E3E);margin:10px 0 -4px;padding-top:12px;border-top:1px dashed var(--line,#D9DFCB)}'
+    + '.zcur{display:flex;align-items:stretch}.zcur span{display:grid;place-items:center;padding:0 14px;font-weight:800;color:var(--brown,#4F5E3E);background:var(--soft,#E3E8D6);border:1.5px solid var(--line,#D9DFCB);border-right:0;border-radius:14px 0 0 14px}'
+    + '.zcur input{border-radius:0 14px 14px 0!important;flex:1;min-width:0}'
+    + '.zf input[type=date],.zf input[type=time]{appearance:none;-webkit-appearance:none;text-align:left}'
+    + '.zchk label[hidden]{display:none!important}.zchk input:disabled+*,.zchk label:has(input:disabled){opacity:.5;cursor:not-allowed}'
+    + '.zsk{display:flex;flex-direction:column;gap:8px}'
+    + '.zsk-n{font-size:.82rem;color:var(--muted,#7A6E62)}'
+    + '.zmine{margin-top:12px;padding:12px 14px;border:1.5px solid var(--line,#D9DFCB);border-radius:14px;background:var(--paper,#FFFCF8)}'
+    + '.zmine>b{display:block;font-size:.92rem;margin:0 0 8px}'
+    + '.zmine-i{display:flex;gap:10px;align-items:center;justify-content:space-between;padding:8px 0;border-top:1px solid var(--line,#D9DFCB)}'
+    + '.zmine-i:first-of-type{border-top:0}.zmine-i span{min-width:0}.zmine-i small{display:block;color:var(--muted,#7A6E62);font-size:.82rem}'
+    + '.zmine-i .btn{margin:0;flex:none;padding:8px 14px;font-size:.88rem}'
+    + '.zoff{background:color-mix(in srgb,#C0392B 8%,var(--paper,#FFFCF8));border:1.5px solid color-mix(in srgb,#C0392B 35%,var(--line,#D9DFCB));border-radius:14px;padding:10px 14px;color:var(--ink,#2F2924)!important}'
+    + '@media (max-width:520px){.zmine-i{flex-direction:column;align-items:flex-start}}'
     + '@media print{.zform{display:none!important}}';
   document.head.appendChild(css);
 
@@ -117,22 +155,24 @@
     if (d.length === 9 && /^(CHE)?[\d.\-]+(MWST|TVA|IVA|VAT|HR)?$/.test(q)) return { uid: d };
     return null;
   }
+  /* все карточки, и неактивные тоже: off — почему карточку сейчас нельзя использовать ('wait' ждёт подтверждения,
+     'pause' на паузе или закрыта, 'end' закончился оплаченный срок paidUntil), до — дата конца срока */
   function records(kinds){
     var r = [];
     if (kinds.indexOf('spec') >= 0) (window.SPECIALISTS || []).forEach(function(s){
-      if (s.status !== 'активен' || (s.paidUntil && s.paidUntil < TODAY)) return;
       var c = s.contacts || {};
+      var off = s.status === 'активен' ? (s.paidUntil && s.paidUntil < TODAY ? 'end' : '') : (s.status === 'на подтверждении' ? 'wait' : 'pause');
       r.push({ t: 'spec', id: s.id, name: s.name, sub: [s.role, s.firm].filter(Boolean).join(' · '), uid: s.uid || '', num: s.num || '',
         places: (s.places || []).filter(function(p){ return p.address && !p.area; }).map(function(p){ return p.address; }),
         phone: c.phone || '', email: c.email || '', site: c.site || '', langs: s.langs || [], photo: s.photo || '', sample: !!s.sample,
-        paid: !!s.uid, url: 'https://svoiludi.ch/#' + s.id });
+        paid: !!s.uid, free: false, off: off, until: s.paidUntil || '', url: 'https://svoiludi.ch/#' + s.id });
     });
     if (kinds.indexOf('org') >= 0) (window.ORGANIZATIONS || []).forEach(function(o){
-      if (o.status !== 'активен' || !o.confirm) return;
       var c = o.contacts || {}, uid = /CHE/i.test(o.zefix || '') ? o.zefix : '';
+      var off = o.status === 'активен' ? (o.confirm ? '' : 'wait') : (o.status === 'на подтверждении' ? 'wait' : 'pause');
       r.push({ t: 'org', id: o.id, name: o.name, sub: [o.name_ru, o.form].filter(Boolean).join(' · '), uid: uid, num: o.num || '',
         places: o.address ? [o.address] : [], phone: c.phone || '', email: c.email || '', site: c.site || '', langs: o.langs || [], photo: '',
-        sample: !!o.sample, paid: !!uid || REG.indexOf(o.form) >= 0, url: 'https://svoiludi.ch/organizacii/#' + o.id });
+        sample: !!o.sample, paid: !!uid || REG.indexOf(o.form) >= 0, free: !!o.free, off: off, until: '', url: 'https://svoiludi.ch/organizacii/#' + o.id });
     });
     return r;
   }
@@ -140,27 +180,191 @@
     var p = parseQ(q); if (!p) return null;
     return records(kinds).filter(function(r){ return p.num ? r.num.toUpperCase() === p.num : digits(r.uid) === p.uid; });
   }
+  var active = function(list){ return (list || []).filter(function(r){ return !r.off; }); };
+
+  /* видимость полей: data-zown (без карточки), data-zcard (с карточкой), data-zif="id:a|b" (выбран вариант a или b) */
+  function chosen(root, id){
+    var s = root.querySelector('#' + id); if (!s) return [];
+    if (s.classList.contains('zchk')) return arr(s.querySelectorAll('input:checked')).map(function(x){ return x.value; });
+    return s.value ? [s.value] : [];
+  }
+  function refreshVis(root){
+    var card = root._zcard;
+    for (var pass = 0; pass < 2; pass++) arr(root.querySelectorAll('[data-zown],[data-zcard],[data-zif]')).forEach(function(el){
+      var vis = true;
+      if (el.hasAttribute('data-zown') && card) vis = false;
+      if (el.hasAttribute('data-zcard') && !card) vis = false;
+      var c = el.getAttribute('data-zif');
+      if (vis && c){
+        var p = c.split(':'), want = p[1].split('|'), dep = root.querySelector('#' + p[0]);
+        vis = !!dep && !hiddenEl(dep) && chosen(root, p[0]).some(function(v){ return want.indexOf(v) >= 0; });
+      }
+      el.hidden = !vis;
+    });
+    arr(root.querySelectorAll('option[data-t-own]')).forEach(function(o){
+      if (!o.hasAttribute('data-t-cardopt')) o.setAttribute('data-t-cardopt', o.textContent);
+      o.textContent = o.getAttribute(card ? 'data-t-cardopt' : 'data-t-own');
+    });
+  }
+
+  /* ---------- почтовый индекс → город и кантон (assets/plz.js) ---------- */
+  var PLZ = null;
+  var norm = function(s){ return String(s || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/\s+/g, ' ').trim(); };
+  function plzIdx(){
+    if (PLZ) return PLZ;
+    PLZ = { z: {}, o: [] };
+    String(window.SVL_PLZ || '').split(';').forEach(function(e){
+      var p = e.split(':'); if (p.length < 3) return;
+      var places = p[2].split(',');
+      PLZ.z[p[0]] = { k: p[1], p: places };
+      places.forEach(function(n){ PLZ.o.push({ n: n, z: p[0], k: p[1], q: norm(n) }); });
+    });
+    return PLZ;
+  }
+  function setKt(sel, code){
+    if (!sel || !code) return;
+    var o = sel.querySelector('option[data-k="' + code + '"]');
+    if (o && sel.value !== o.value){ sel.value = o.value; sel.dispatchEvent(new Event('change', { bubbles: true })); }
+  }
+  function datalist(inp){
+    var id = 'dl-' + inp.id, dl = document.getElementById(id);
+    if (!dl){ dl = document.createElement('datalist'); dl.id = id; document.body.appendChild(dl); inp.setAttribute('list', id); }
+    return dl;
+  }
+  function fillList(dl, items){ dl.innerHTML = items.map(function(x){ return '<option value="' + esc(x.n) + '" label="' + esc(x.z + ' · ' + x.k) + '"></option>'; }).join(''); }
+  function plzWire(root){
+    arr(root.querySelectorAll('input[data-zplz]')).forEach(function(z){
+      var city = root.querySelector('#' + z.getAttribute('data-zcity')), kt = root.querySelector('#' + z.getAttribute('data-zkt'));
+      var no = z.parentNode.querySelector('[data-zplzno]');
+      z.setAttribute('inputmode', 'numeric'); z.setAttribute('maxlength', '4');
+      z.addEventListener('input', function(){
+        var v = z.value.replace(/\D/g, '').slice(0, 4); if (v !== z.value) z.value = v;
+        if (no) no.hidden = true;
+        if (v.length !== 4) return;
+        var e = plzIdx().z[v];
+        if (!e){ if (no) no.hidden = false; return; }
+        setKt(kt, e.k);
+        if (city){
+          fillList(datalist(city), e.p.map(function(n){ return { n: n, z: v, k: e.k }; }));
+          if (!city.value.trim() || e.p.map(norm).indexOf(norm(city.value)) < 0){ city.value = e.p[0]; city.dispatchEvent(new Event('input', { bubbles: true })); }
+        }
+      });
+    });
+    arr(root.querySelectorAll('input[data-zort]')).forEach(function(c){
+      var dl = datalist(c), z = root.querySelector('input[data-zplz][data-zcity="' + c.id + '"]'), kt = z ? root.querySelector('#' + z.getAttribute('data-zkt')) : null;
+      c.setAttribute('autocomplete', 'off');
+      c.addEventListener('input', function(e){
+        if (!e.isTrusted) return;
+        var q = norm(c.value); if (q.length < 2) return;
+        var seen = {}, starts = [], has = [];
+        plzIdx().o.forEach(function(x){
+          if (seen[x.q + x.k]) return;
+          if (x.q.indexOf(q) === 0){ seen[x.q + x.k] = 1; starts.push(x); } else if (x.q.indexOf(q) > 0 && has.length < 20){ seen[x.q + x.k] = 1; has.push(x); }
+        });
+        fillList(dl, starts.concat(has).slice(0, 30));
+      });
+      c.addEventListener('change', function(){
+        var q = norm(c.value); if (!q) return;
+        var m = plzIdx().o.filter(function(x){ return x.q === q; });
+        if (!m.length) return;
+        var ks = m.map(function(x){ return x.k; }).filter(function(k, i, a){ return a.indexOf(k) === i; });
+        if (ks.length === 1) setKt(kt, ks[0]);
+        var zs = m.map(function(x){ return x.z; }).filter(function(k, i, a){ return a.indexOf(k) === i; });
+        if (z && !z.value && zs.length === 1){ z.value = zs[0]; }
+      });
+    });
+  }
+
+  /* ---------- даты: начало и конец ---------- */
+  var addD = function(x, n){ var d = new Date(x + 'T12:00:00Z'); d.setUTCDate(d.getUTCDate() + n); return d.toISOString().slice(0, 10); };
+  var dayDiff = function(a, b){ return Math.round((new Date(b + 'T12:00:00Z') - new Date(a + 'T12:00:00Z')) / 864e5); };
+  function datesWire(root){
+    var from = root.querySelector('input[data-zd="from"]'), to = root.querySelector('input[data-zd="to"]');
+    if (from && !from.hasAttribute('data-zpast')) from.min = TODAY;
+    if (to) to.min = TODAY;
+    function sync(){
+      if (!from || !to) return;
+      if (from.value){
+        to.min = from.value;
+        if (to.hasAttribute('data-zmax')) to.max = addD(from.value, +to.getAttribute('data-zmax'));
+        if (!to.value && to.hasAttribute('data-zdef')) to.value = addD(from.value, +to.getAttribute('data-zdef'));
+        if (!to.value && to.hasAttribute('data-zsame')) to.value = from.value;
+      }
+    }
+    if (from){ from.addEventListener('change', sync); if (!from.value && from.hasAttribute('data-ztoday')) from.value = TODAY; sync(); }
+  }
+  function datesBad(root, box){
+    var from = root.querySelector('input[data-zd="from"]'), to = root.querySelector('input[data-zd="to"]');
+    if (from && !hiddenEl(from) && from.value && from.value < TODAY && !from.hasAttribute('data-zpast')) return [from, box.getAttribute('data-t-dpast')];
+    if (from && to && !hiddenEl(to) && from.value && to.value){
+      if (to.value < from.value) return [to, box.getAttribute('data-t-dorder')];
+      var mx = to.getAttribute('data-zmax');
+      if (mx && dayDiff(from.value, to.value) > +mx) return [to, (box.getAttribute('data-t-dmax') || '').replace('{n}', mx)];
+    }
+    if (to && !hiddenEl(to) && to.value && to.value < TODAY) return [to, box.getAttribute('data-t-dpast')];
+    return null;
+  }
+
+  /* ---------- навыки из «Резюме по-швейцарски» ---------- */
+  function skillsBuild(root){
+    var UK = document.documentElement.lang === 'uk';
+    arr(root.querySelectorAll('.zchk[data-zskills]')).forEach(function(c){
+      if (c.childElementCount) return;
+      var f = c.closest('.zf'), g = f.querySelector('select[data-zskg]'), s = f.querySelector('input[data-zsks]'), n = f.querySelector('[data-zskn]');
+      var L = window.NAVYKI || [];
+      if (g) L.forEach(function(gr){ var o = document.createElement('option'); o.value = gr.id; o.textContent = gr.t[UK ? 1 : 0]; g.appendChild(o); });
+      c.innerHTML = L.map(function(gr){ return gr.i.map(function(it){ return '<label data-g="' + esc(gr.id) + '" hidden><input type="checkbox" value="' + esc(it[0]) + '">' + esc(it[UK ? 1 : 0]) + '</label>'; }).join(''); }).join('');
+      function show(){
+        var gv = g ? g.value : '', q = norm(s ? s.value : ''), k = 0;
+        arr(c.querySelectorAll('label')).forEach(function(l){
+          var on = l.querySelector('input').checked; if (on) k++;
+          l.hidden = !(on || ((gv || q) && (!gv || l.getAttribute('data-g') === gv) && (!q || norm(l.textContent).indexOf(q) >= 0)));
+        });
+        if (n) n.textContent = (n.getAttribute('data-t') || '{n}').replace('{n}', k);
+      }
+      if (g) g.addEventListener('change', show);
+      if (s) s.addEventListener('input', show);
+      c.addEventListener('change', show);
+      c._zshow = show;
+    });
+  }
+  var skillsShow = function(root){ arr(root.querySelectorAll('.zchk[data-zskills]')).forEach(function(c){ if (c._zshow) c._zshow(); }); };
+
+  /* ---------- заполнить форму из прошлой записи (архив) ---------- */
+  function fillFrom(root, d){
+    Object.keys(d || {}).forEach(function(k){
+      var el = root.querySelector('#' + k); if (!el) return;
+      /* значение ищем по value, а если нет — по подписи (в данных записи хранятся подписи: «за человека», «TWINT») */
+      if (el.classList.contains('zchk')){
+        var v = [].concat(d[k]).map(function(x){ return norm(x); });
+        arr(el.querySelectorAll('input')).forEach(function(x){ x.checked = v.indexOf(norm(x.value)) >= 0 || v.indexOf(norm(x.parentNode.textContent)) >= 0; });
+      } else if (!el.readOnly){
+        var want = d[k] == null ? '' : String(d[k]);
+        el.value = want;
+        if (el.tagName === 'SELECT' && el.value !== want){
+          var o = arr(el.options).filter(function(x){ return want && norm(x.textContent) === norm(want); })[0];
+          el.value = o ? o.value : '';
+        }
+      }
+      el.dispatchEvent(new Event('change', { bubbles: true }));
+    });
+    arr(root.querySelectorAll('input[data-zplz]')).forEach(function(z){ if (z.value) z.dispatchEvent(new Event('input', { bubbles: true })); });
+    refreshVis(root); skillsShow(root);
+  }
 
   function look(lk, root, onChange){
     var kinds = (lk.getAttribute('data-kinds') || 'spec,org').split(',');
     var T = function(k){ return lk.getAttribute('data-t-' + k) || ''; };
     var g = function(z){ return lk.querySelector('[data-zl="' + z + '"]'); };
-    var q = g('q'), msg = g('msg'), prof = g('prof'), nouid = g('nouid'), row = q.closest('.zf');
+    var q = g('q'), msg = g('msg'), prof = g('prof'), nouid = g('nouid'), free = g('free'), mine = g('mine'), row = q.closest('.zf');
     var name = root.getAttribute('data-zayavka') || lk.getAttribute('data-zlook') || 'form';
     var KEY = 'svoi-zayavka-' + name + '-card';
-    var CUR = null, LIST = [];
-    var tell = function(t){ msg.innerHTML = t; msg.hidden = !t; };
+    var CUR = null, LIST = [], OFF = null;
+    var tell = function(t, warn){ msg.innerHTML = t; msg.hidden = !t; msg.classList.toggle('zoff', !!warn); };
+    var fmt = function(x){ return x ? x.split('-').reverse().join('.') : ''; };
+    var offText = function(r){ return esc(T('off' + r.off) || T('offpause')).replace('{n}', '<b>' + esc(r.name) + '</b>').replace('{d}', esc(fmt(r.until))); };
 
-    function refresh(){
-      arr(root.querySelectorAll('[data-zown],[data-zcard],[data-zif]')).forEach(function(el){
-        var vis = true;
-        if (el.hasAttribute('data-zown') && CUR) vis = false;
-        if (el.hasAttribute('data-zcard') && !CUR) vis = false;
-        var c = el.getAttribute('data-zif');
-        if (vis && c){ var p = c.split(':'), s = root.querySelector('#' + p[0]); vis = !!s && s.value === p[1]; }
-        el.hidden = !vis;
-      });
-    }
+    function refresh(){ refreshVis(root); }
     function photo(r){
       if (!r.photo) return '<span class="zp-ini">' + esc((r.name || '?').trim().charAt(0)) + '</span>';
       var src = (window.SP_IMG && window.SP_IMG[r.photo]) || BASE + 'img/' + r.photo;
@@ -199,34 +403,43 @@
       });
     }
     function paid(r){
-      arr(root.querySelectorAll('option[data-zuidonly]')).forEach(function(o){
-        o.disabled = !!r && !r.paid;
-        if (o.disabled && o.selected) o.parentNode.value = '';
+      arr(root.querySelectorAll('option[data-zuidonly],option[data-zcharge]')).forEach(function(o){
+        o.disabled = !!r && ((o.hasAttribute('data-zuidonly') && !r.paid) || (o.hasAttribute('data-zcharge') && r.free));
+        if (o.disabled && o.selected){ o.parentNode.value = ''; o.parentNode.dispatchEvent(new Event('change', { bubbles: true })); }
       });
-      if (nouid) nouid.hidden = !r || r.paid;
+      if (nouid) nouid.hidden = !r || r.paid || r.free;
+      if (free) free.hidden = !r || !r.free;
     }
     function ref(r){ return [r.name + (r.sub ? ' (' + r.sub + ')' : ''), r.num, r.uid ? 'UID ' + r.uid : '', r.url].filter(Boolean).join(', ') + (r.sample ? ' — ' + T('sample') : ''); }
+    function showMine(r){
+      if (!mine) return;
+      var L = r && typeof window.ZMINE === 'function' ? (window.ZMINE(r) || []) : [];
+      mine.hidden = !L.length;
+      mine.innerHTML = L.length ? '<b>' + esc(T('mine')) + '</b>' + L.map(function(x, i){ return '<div class="zmine-i"><span>' + esc(x.t) + (x.s ? '<small>' + esc(x.s) + '</small>' : '') + '</span><button class="btn ghost" type="button" data-zagain="' + i + '">' + esc(T('again')) + '</button></div>'; }).join('') : '';
+      mine._list = L;
+    }
     function apply(r, quiet){
-      CUR = r; root._zcard = r; root.classList.add('zhas');
+      CUR = r; OFF = null; root._zcard = r; root.classList.add('zhas');
       prof.innerHTML = render(r); prof.hidden = false; row.hidden = true;
-      addrs(r); fills(r); paid(r); setLangs(r); refresh();
+      addrs(r); fills(r); paid(r); setLangs(r); refresh(); showMine(r);
       try { localStorage.setItem(KEY, r.t + ':' + r.id); } catch (e) {}
       if (!quiet) tell('');
       if (onChange) onChange(r);
     }
     function clear(){
-      CUR = null; root._zcard = null; root.classList.remove('zhas');
+      CUR = null; OFF = null; root._zcard = null; root.classList.remove('zhas');
       prof.hidden = true; prof.innerHTML = ''; row.hidden = false; q.value = ''; tell('');
-      addrs(null); fills(null); paid(null); refresh();
+      addrs(null); fills(null); paid(null); refresh(); showMine(null);
       try { localStorage.removeItem(KEY); } catch (e) {}
       if (onChange) onChange(null);
     }
     function search(){
       var v = q.value.trim();
       if (!v){ tell(esc(T('empty'))); q.focus(); return; }
-      var res = findCards(v, kinds);
-      if (res === null){ tell(esc(T('format'))); q.focus(); return; }
-      if (!res.length){ tell(esc(T('none'))); return; }
+      var all = findCards(v, kinds);
+      if (all === null){ tell(esc(T('format'))); q.focus(); return; }
+      var res = active(all);
+      if (!res.length){ if (all.length){ tell(offText(all[0]), true); } else tell(esc(T('none'))); return; }
       if (res.length === 1){ apply(res[0]); return; }
       LIST = res;
       tell(esc(T('many')) + '<span class="zpick">' + res.map(function(r, i){ return '<button type="button" data-zpick="' + i + '"><b>' + esc(r.name) + '</b><small>' + esc([T(r.t === 'org' ? 'korg' : 'kspec'), r.sub, r.num].filter(Boolean).join(' · ')) + '</small></button>'; }).join('') + '</span>');
@@ -235,18 +448,25 @@
     q.addEventListener('keydown', function(e){ if (e.key === 'Enter'){ e.preventDefault(); search(); } });
     lk.addEventListener('click', function(e){
       var p = e.target.closest('[data-zpick]'); if (p){ apply(LIST[+p.getAttribute('data-zpick')]); return; }
-      if (e.target.closest('[data-zl="change"]')){ clear(); q.focus(); }
+      if (e.target.closest('[data-zl="change"]')){ clear(); q.focus(); return; }
+      var a = e.target.closest('[data-zagain]');
+      if (a && mine && mine._list){
+        fillFrom(root, mine._list[+a.getAttribute('data-zagain')].d);
+        tell(esc(T('repeated')));
+        var f = root.querySelector('input[data-zd="from"]'); if (f && !hiddenEl(f)) { f.focus(); f.scrollIntoView({ block: 'center', behavior: 'smooth' }); }
+        root.dispatchEvent(new Event('input', { bubbles: true }));
+      }
     });
     root.addEventListener('change', function(e){
-      if (e.target.tagName === 'SELECT') refresh();
+      refresh();
       if (!CUR && e.target.matches && e.target.matches('[data-zuid]')) auto(e.target);
       if (e.target.matches && e.target.matches('[data-zdup]')) dup(e.target);
     });
     /* заявка организации: такой UID уже есть на сайте? организация — предупреждаем, специалист — подставляем руководителя */
     function dup(el){
       var out = el.parentNode.querySelector('[data-zdupmsg]'); if (!out) return;
-      var res = findCards(el.value, ['spec', 'org']) || [], o = res.filter(function(r){ return r.t === 'org'; }), sp = res.filter(function(r){ return r.t === 'spec'; });
-      var link = function(r){ return '<a href="' + esc(r.url) + '" target="_blank" rel="noopener">' + esc(r.name) + '</a>'; };
+      var res = findCards(el.value, ['spec', 'org']) || [], o = res.filter(function(r){ return r.t === 'org'; }), sp = active(res.filter(function(r){ return r.t === 'spec'; }));
+      var link = function(r){ return r.off ? '<b>' + esc(r.name) + '</b>' : '<a href="' + esc(r.url) + '" target="_blank" rel="noopener">' + esc(r.name) + '</a>'; };
       if (o.length){ out.innerHTML = esc(T('duporg')).replace('{n}', link(o[0])); out.hidden = false; return; }
       if (sp.length === 1 && kinds.indexOf('spec') >= 0 && (!CUR || CUR.id === sp[0].id)){
         if (!CUR) apply(sp[0], true);
@@ -254,22 +474,36 @@
       }
       out.hidden = true; out.innerHTML = '';
     }
-    /* человек с карточкой вписал свой UID вручную — подставляем карточку сами */
+    /* человек с карточкой вписал свой UID вручную — подставляем карточку сами; карточка не активна — запоминаем, заявку не пускаем */
     function auto(el){
-      var res = findCards(el.value, kinds);
-      if (!res || res.length !== 1) return false;
-      apply(res[0], true); tell(esc(T('auto'))); say0(T('auto'));
-      lk.scrollIntoView({ block: 'start', behavior: 'smooth' });
-      return true;
+      var all = findCards(el.value, kinds) || [], res = active(all);
+      OFF = null;
+      if (res.length === 1){
+        apply(res[0], true); tell(esc(T('auto'))); say0(T('auto'));
+        lk.scrollIntoView({ block: 'start', behavior: 'smooth' });
+        return 'auto';
+      }
+      if (!res.length && all.length){ OFF = all[0]; tell(offText(OFF), true); return 'off'; }
+      return '';
     }
     refresh();
     try {
       var saved = localStorage.getItem(KEY);
-      if (saved){ var p = saved.split(':'), r = records(kinds).filter(function(x){ return x.t === p[0] && x.id === p[1]; })[0]; if (r) apply(r, true); else localStorage.removeItem(KEY); }
+      if (saved){
+        var p = saved.split(':'), r = records(kinds).filter(function(x){ return x.t === p[0] && x.id === p[1]; })[0];
+        if (r && !r.off) apply(r, true);
+        else { localStorage.removeItem(KEY); if (r) tell(offText(r), true); }
+      }
     } catch (e) {}
     return {
       card: function(){ return CUR; }, ref: function(){ return CUR ? ref(CUR) : ''; }, clear: clear, refresh: refresh,
-      check: function(){ if (CUR) return false; return arr(root.querySelectorAll('[data-zuid]')).some(function(el){ return el.value.trim() && auto(el); }); },
+      /* перед отправкой: '' — можно; иначе текст, почему нельзя (подставили карточку или карточка не активна) */
+      check: function(){
+        if (CUR) return '';
+        var why = '';
+        arr(root.querySelectorAll('[data-zuid]')).some(function(el){ if (!el.value.trim() || hiddenEl(el)) return false; var a = auto(el); if (a === 'auto') why = T('auto'); if (a === 'off') why = offText(OFF).replace(/<[^>]+>/g, ''); return !!a; });
+        return why;
+      },
       label: T
     };
   }
@@ -282,7 +516,9 @@
     var fields = function(){ return arr(box.querySelectorAll('.zf')).filter(function(f){ return !hiddenEl(f) && !f.closest('.zlook'); }); };
     var say = function(t){ if (typeof window.toast === 'function') window.toast(t); else { var m = q('msg'); m.textContent = t; m.hidden = false; } };
     var copyText = function(t){ try { return navigator.clipboard.writeText(t).then(function(){ return true; }, function(){ return false; }); } catch (e) { return Promise.resolve(false); } };
+    skillsBuild(box);
     var lkEl = box.querySelector('[data-zlook]'), LK = lkEl ? look(lkEl, box) : null;
+    if (!LK) box.addEventListener('change', function(){ refreshVis(box); });
 
     function save(){
       try {
@@ -299,11 +535,15 @@
         box.querySelectorAll('.zchk').forEach(function(c, i){ (d['chk' + i] || []).forEach(function(v){ c.querySelectorAll('input').forEach(function(x){ if (x.value === v) x.checked = true; }); }); });
       }
     } catch (e) {}
-    if (LK) LK.refresh();
+    refreshVis(box); skillsShow(box); plzWire(box); datesWire(box);
     box.addEventListener('input', save); box.addEventListener('change', save);
-    var ok = q('ok');
-    function paint(){ box.classList.toggle('zok-off', !!ok && !ok.checked); if (ok && ok.checked) ok.closest('.zok').classList.remove('need'); }
-    if (ok) ok.addEventListener('change', paint);
+    var ok = q('ok'), must = arr(box.querySelectorAll('input[type=checkbox][data-zmust]'));
+    var allOk = function(){ return (!ok || ok.checked) && must.every(function(m){ return m.checked || hiddenEl(m); }); };
+    function paint(){
+      box.classList.toggle('zok-off', !allOk());
+      [ok].concat(must).forEach(function(x){ if (x && x.checked) x.closest('.zok').classList.remove('need'); });
+    }
+    box.addEventListener('change', function(){ setTimeout(paint, 0); });
     paint();
     var stamp = function(){ var d = new Date(), p = function(n){ return (n < 10 ? '0' : '') + n; }; return p(d.getDate()) + '.' + p(d.getMonth() + 1) + '.' + d.getFullYear() + ', ' + p(d.getHours()) + ':' + p(d.getMinutes()); };
 
@@ -319,6 +559,7 @@
         var el = f.querySelector('[data-a]'), c = f.querySelector('.zchk');
         if (el) {
           var x = el.tagName === 'SELECT' ? (el.value ? el.options[el.selectedIndex].text : '') : el.value.trim();
+          if (x && el.type === 'date') x = x.split('-').reverse().join('.');
           if (x) lines.push(el.getAttribute('data-a') + ': ' + x);
         } else if (c) {
           var v = Array.prototype.map.call(c.querySelectorAll('input:checked'), function(x){ return x.parentNode.textContent.trim(); });
@@ -327,7 +568,10 @@
       });
       var first = box.querySelector('[data-a][data-title]'), t = first ? first.value.trim() : '';
       var su = box.getAttribute('data-subject') + (t ? ' — ' + t : '');
-      if (ok && ok.checked) lines.push('', box.getAttribute('data-t-okline') + ' ' + stamp());
+      var oks = [];
+      if (ok && ok.checked) oks.push(box.getAttribute('data-t-okline') + ' ' + stamp());
+      must.forEach(function(m){ if (m.checked && !hiddenEl(m)) oks.push(m.getAttribute('data-line') + ' ' + stamp()); });
+      if (oks.length) lines.push.apply(lines, [''].concat(oks));
       var body = [box.getAttribute('data-hello'), ''].concat(lines, ['', box.getAttribute('data-from') + ' ' + location.origin + location.pathname, '']).join('\n');
       return { su: su, body: body };
     }
@@ -336,16 +580,36 @@
       var msg = q('msg'), sent = q('sent');
       box.querySelectorAll('.zf').forEach(function(f){ f.classList.remove('zmiss'); });
       sent.hidden = true;
-      if (LK && LK.check()) { msg.textContent = LK.label('auto'); msg.hidden = false; return; }
-      var miss = Array.prototype.filter.call(box.querySelectorAll('[data-req]'), function(el){ return !hiddenEl(el) && !el.value.trim(); });
+      var why = LK ? LK.check() : '';
+      if (why) { msg.textContent = why; msg.hidden = false; return; }
+      var filled = function(el){ return el.classList.contains('zchk') ? !!el.querySelector('input:checked') : !!el.value.trim(); };
+      var miss = Array.prototype.filter.call(box.querySelectorAll('[data-req]'), function(el){ return !hiddenEl(el) && !filled(el); });
       if (miss.length) {
         miss.forEach(function(el){ el.closest('.zf').classList.add('zmiss'); });
+        miss.forEach(function(el){ if (!el.hasAttribute('data-a') && el.hasAttribute('data-l') && !el.hasAttribute('data-miss')) el.setAttribute('data-miss', el.getAttribute('data-l')); });
         msg.textContent = box.getAttribute('data-t-miss') + miss.map(function(el){ var t = el.getAttribute('data-miss') || el.getAttribute('data-a'); return /^.[^A-ZА-ЯЁІЇЄҐ]/.test(t) ? t.charAt(0).toLowerCase() + t.slice(1) : t; }).join(', ') + '.';
         msg.hidden = false; miss[0].focus(); return;
       }
       var bad = Array.prototype.filter.call(box.querySelectorAll('input[type=email]'), function(el){ var v = el.value.trim(); return !hiddenEl(el) && v && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); });
       if (bad.length) { bad[0].closest('.zf').classList.add('zmiss'); msg.textContent = box.getAttribute('data-t-mail'); msg.hidden = false; bad[0].focus(); return; }
+      var any = arr(box.querySelectorAll('[data-zany]')).filter(function(el){ return !hiddenEl(el); });
+      if (!(LK && LK.card()) && any.length && !any.some(function(el){ return el.value.trim(); })) {
+        any.forEach(function(el){ el.closest('.zf').classList.add('zmiss'); });
+        msg.textContent = box.getAttribute('data-t-any'); msg.hidden = false; any[0].focus(); return;
+      }
+      /* «Как записаться: WhatsApp» — без карточки номер WhatsApp тогда обязателен (option[data-zneed="id поля"], текст data-t-need) */
+      var need = arr(box.querySelectorAll('select')).filter(function(s){ return !hiddenEl(s) && s.value; })
+        .map(function(s){ var o = s.options[s.selectedIndex]; return o && o.getAttribute('data-zneed'); }).filter(Boolean)
+        .map(function(id){ return box.querySelector('#' + id); }).filter(function(el){ return el && !hiddenEl(el) && !el.value.trim(); });
+      if (!(LK && LK.card()) && need.length) {
+        need[0].closest('.zf').classList.add('zmiss');
+        msg.textContent = (box.getAttribute('data-t-need') || '').replace('{f}', need[0].getAttribute('data-miss') || need[0].getAttribute('data-a') || ''); msg.hidden = false; need[0].focus(); return;
+      }
+      var dt = datesBad(box, box);
+      if (dt) { dt[0].closest('.zf').classList.add('zmiss'); msg.textContent = dt[1]; msg.hidden = false; dt[0].focus(); return; }
       if (ok && !ok.checked) { ok.closest('.zok').classList.add('need'); msg.textContent = box.getAttribute('data-t-ok'); msg.hidden = false; ok.focus(); return; }
+      var m1 = must.filter(function(m){ return !m.checked && !hiddenEl(m); })[0];
+      if (m1) { m1.closest('.zok').classList.add('need'); msg.textContent = m1.getAttribute('data-t-must') || box.getAttribute('data-t-ok'); msg.hidden = false; m1.focus(); return; }
       msg.hidden = true;
       var L = letter();
       var g = q('gmail'); if (g) g.href = 'https://mail.google.com/mail/?view=cm&fs=1&to=' + encodeURIComponent(MAIL) + '&su=' + encodeURIComponent(L.su) + '&body=' + encodeURIComponent(L.body);
@@ -358,9 +622,12 @@
     q('no').addEventListener('click', function(){ q('ask').hidden = true; q('idle').hidden = false; });
     q('yes').addEventListener('click', function(){
       try { localStorage.removeItem(KEY); } catch (e) {}
-      box.querySelectorAll('[data-a]').forEach(function(el){ el.value = ''; });
+      box.querySelectorAll('[data-a]').forEach(function(el){ if (!el.readOnly) el.value = ''; });
       box.querySelectorAll('input[type=checkbox]').forEach(function(x){ x.checked = false; });
-      if (LK) LK.clear();
+      box.querySelectorAll('input[data-zsks]').forEach(function(x){ x.value = ''; });
+      box.querySelectorAll('select[data-zskg]').forEach(function(x){ x.value = ''; });
+      if (LK) LK.clear(); else refreshVis(box);
+      skillsShow(box); datesWire(box);
       q('msg').hidden = true; q('sent').hidden = true; q('ask').hidden = true; q('idle').hidden = false; paint();
       say(box.getAttribute('data-t-wiped'));
     });
@@ -371,7 +638,9 @@
     document.querySelectorAll('[data-zlook-root] [data-zlook]').forEach(function(lk){
       if (lk.closest('[data-zayavka]')) return;
       var root = lk.closest('[data-zlook-root]');
+      skillsBuild(root);
       root._zlook = look(lk, root, function(r){ root.dispatchEvent(new CustomEvent('zcard', { detail: r })); });
+      plzWire(root); datesWire(root);
       root.addEventListener('zwipe', function(){ root._zlook.clear(); });
     });
   }

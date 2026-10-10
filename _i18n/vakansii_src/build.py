@@ -31,7 +31,10 @@ scripts=f'''<script src="/data/specialists.js?v=7fef69e3"></script>
 <script>
 {js}</script>
 <script src="/assets/help.js" defer></script>
+<script defer src="/assets/plz.js"></script>
+<script defer src="/assets/navyki.js"></script>
 <script defer src="/assets/zayavka.js"></script>
+<script defer src="/assets/napisat.js"></script>
 <script defer src="/assets/podtverdit.js"></script>
 <script data-goatcounter="https://svoiludi.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 <script src="/assets/share.js" defer></script>

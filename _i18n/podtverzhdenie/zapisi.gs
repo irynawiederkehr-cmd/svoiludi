@@ -76,7 +76,10 @@ function zsConfirm_(p) {
   const card = typeof who === 'string' ? sp.filter(s => s.id === who)[0] : (who && who.org ? og.filter(o => o.id === who.org)[0] : null);
   const name = card ? card.name : ((who && who.name) || '');
   const num = (card && card.num) || '', uid = (card && (card.uid || (/CHE/.test(card.zefix || '') ? card.zefix : ''))) || '';
-  const email = (card && card.contacts && card.contacts.email) || (who && who.contacts && who.contacts.email) || '';
+  const email = (card && card.contacts && card.contacts.email) || (who && who.contacts && who.contacts.email) || (!card && x.contacts && x.contacts.email) || '';
+  // только активная карточка (решение Ирины 10.10.2026, 22:12): на паузе, на подтверждении или с прошедшим сроком — не подтверждаем
+  const today = Utilities.formatDate(new Date(), ZS_TZ, 'yyyy-MM-dd');
+  if (card && (card.status !== 'активен' || (card.paidUntil && card.paidUntil < today) || (who && who.org && !card.confirm))) return { ok: false, error: 'card' };
 
   // защита от двойного нажатия: одинаковый запрос в течение 2 минут не повторяем
   const cache = CacheService.getScriptCache(), ck = [kind, x.id, text].join('|').slice(0, 240);
@@ -103,8 +106,8 @@ function zsConfirm_(p) {
   if (email && !fix) {
     const csu = lang === 'uk' ? `🌿 Ви підтвердили ${W[1]} «${x.title}»` : `🌿 Вы подтвердили ${W[1]} «${x.title}»`;
     const cbody = lang === 'uk'
-      ? `Вітаємо${name ? ', ' + name : ''}!\n\n${time} ви підтвердили ${W[1]} «${x.title}» для сайту «Свої люди у Швейцарії». Ми опублікуємо його найближчим часом.\n\n${url}\n\nЯкщо щось зміниться, просто дайте відповідь на цей лист.\n\nПроєкт 🌿 «Свої люди» створено для того, щоб зробити ваше життя у Швейцарії максимально легким і без стресу.\n\nСвої люди у Швейцарії`
-      : `Здравствуйте${name ? ', ' + name : ''}!\n\n${time} вы подтвердили ${W[1]} «${x.title}» для сайта «Свои люди в Швейцарии». Мы опубликуем его в ближайшее время.\n\n${url}\n\nЕсли что-то изменится, просто ответьте на это письмо.\n\nПроект 🌿 «Свои люди» создан для того, чтобы сделать вашу жизнь в Швейцарии максимально лёгкой и без стресса.\n\nСвои люди в Швейцарии`;
+      ? `Вітаємо${name ? ', ' + name : ''}!\n\n${time} ви підтвердили ${W[1]} «${x.title}» для сайту «Свої люди у Швейцарії». Ми опублікуємо його найближчим часом.\n\n${url}\n\nПідтвердивши, ви прийняли умови розміщення. Перечитати їх можна будь-коли: ${ZS_SITE}uk/usloviya/\nКоли запис знімають і за що виключають із проєкту: ${ZS_SITE}uk/usloviya/#isklyuchenie\n\nЯкщо щось зміниться, просто дайте відповідь на цей лист.\n\nПроєкт 🌿 «Свої люди» створено для того, щоб зробити ваше життя у Швейцарії максимально легким і без стресу.\n\nСвої люди у Швейцарії`
+      : `Здравствуйте${name ? ', ' + name : ''}!\n\n${time} вы подтвердили ${W[1]} «${x.title}» для сайта «Свои люди в Швейцарии». Мы опубликуем его в ближайшее время.\n\n${url}\n\nПодтвердив, вы приняли условия размещения. Перечитать их можно в любой момент: ${ZS_SITE}usloviya/\nКогда запись снимают и за что исключают из проекта: ${ZS_SITE}usloviya/#isklyuchenie\n\nЕсли что-то изменится, просто ответьте на это письмо.\n\nПроект 🌿 «Свои люди» создан для того, чтобы сделать вашу жизнь в Швейцарии максимально лёгкой и без стресса.\n\nСвои люди в Швейцарии`;
     MailApp.sendEmail({ to: email, replyTo: ZS_REPLY, name: ZS_NAME, subject: csu, body: cbody });
     copy = true;
   }

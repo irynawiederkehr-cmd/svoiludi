@@ -27,10 +27,14 @@ const CANTONS = {
 const LANG_FIRST = ['русский', 'украинский', 'немецкий', 'французский', 'итальянский', 'английский'];
 const MON_G = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'];
 window.HELP = {
-  zfind: '<p><b>UID</b> — номер фирмы или самозанятого в реестре Швейцарии, вида CHE-123.456.789. Мы берём его, когда размещаем карточку, он есть в твоей карточке на сайте.</p><p><b>Номер карточки</b> — SG-0001 у специалистов, OR-0001 у организаций. Он есть в твоей карточке на сайте, внизу.</p><p>Данные из карточки мы уже проверили, поэтому вписывать их заново не нужно. Ссылку на подтверждение пришлём на e-mail из карточки: так никто не сможет разместить запись от твоего имени. Этот e-mail один для всех подтверждений, в заявке его не поменять. Если для записи нужен другой e-mail, укажи его в поле «Другой e-mail»: на сайте будет он.</p><p>Номер никуда не отправляется: поиск идёт только по опубликованным карточкам, прямо на этой странице.</p>',
+  zfind: '<p><b>UID</b> — номер фирмы или самозанятого в реестре Швейцарии, вида CHE-123.456.789. Мы берём его, когда размещаем карточку, он есть в твоей карточке на сайте.</p><p><b>Номер карточки</b> — SG-0001 у специалистов, OR-0001 у организаций. Он есть в твоей карточке на сайте, внизу.</p><p>Данные из карточки мы уже проверили, поэтому вписывать их заново не нужно. Ссылку на подтверждение пришлём на e-mail из карточки: так никто не сможет разместить запись от твоего имени. Этот e-mail один для всех подтверждений, в заявке его не поменять. Если для записи нужен другой e-mail, впиши его в контактах: на сайте будет он.</p><p>Если карточка на паузе, ждёт подтверждения или закончился срок размещения, по номеру её не найти: объявления размещаются только от активных карточек.</p><p>Номер никуда не отправляется: поиск идёт только по опубликованным карточкам, прямо на этой странице.</p>',
   kind: '<p><b>Ищу сотрудника</b> — работа по найму: человек работает у автора по договору, по его графику и указаниям, получает зарплату, автор платит отчисления AHV.</p><p><b>Ищу партнёра</b> — сотрудничество самостоятельных специалистов: субподряд, совместный проект, аренда кабинета, обмен клиентами. Каждый работает на себя и сам платит свои взносы.</p>',
   partner: '<p>Партнёрство — это когда каждый работает на себя: сам решает, когда и как работать, сам выставляет счета и платит свои взносы.</p><p>Если человек будет работать в твоё время, по твоим указаниям и за регулярную оплату за часы, это работа по найму, даже если называть её партнёрством. Такое объявление размести как «Ищу сотрудника». Иначе может получиться скрытый найм, и касса AHV вправе потребовать взносы задним числом.</p>',
-  rav: '<p>Для некоторых профессий с высокой безработицей работодатель сначала сообщает вакансию в RAV (региональный центр занятости), и только через 5 рабочих дней может публиковать её в других местах.</p><p>Список профессий обновляется каждый год. Проверить свою профессию можно на <a href="https://www.arbeit.swiss/secoalv/de/home/menue/unternehmen/stellenmeldepflicht.html" target="_blank" rel="noopener">arbeit.swiss</a>.</p>'
+  rav: '<p>Для некоторых профессий с высокой безработицей работодатель сначала сообщает вакансию в RAV (региональный центр занятости), и только через 5 рабочих дней может публиковать её в других местах.</p><p>Список профессий обновляется каждый год. Проверить свою профессию можно на <a href="https://www.arbeit.swiss/secoalv/de/home/menue/unternehmen/stellenmeldepflicht.html" target="_blank" rel="noopener">arbeit.swiss</a>.</p>',
+  contract: '<p><b>Бессрочный договор</b> (unbefristet) — без даты окончания. <b>Срочный</b> (befristet) — до определённой даты. <b>На время замены</b> — пока основной сотрудник в декрете, болеет или в долгом отпуске.</p><p><b>Почасовая работа</b> (Stundenlohn) — оплата за отработанные часы, в оплату за час входит доля отпускных. <b>Стажировка</b> (Praktikum) — знакомство с профессией, тоже по договору и с оплатой. <b>Обучение профессии</b> (Lehre) — 2–4 года по договору об обучении: работа и профессиональная школа.</p><p>Подробно — в статье <a href="https://svoiludi.ch/shveycariya/trudovoe-pravo/">«Трудовое право»</a>.</p>',
+  edu: '<p><b>EFZ и EBA</b> — швейцарские свидетельства о профессиональном обучении (Lehre). <b>HF</b> — высшая профессиональная школа, <b>FH</b> — университет прикладных наук.</p><p>Для регулируемых профессий (врач, медсестра, учитель, психотерапевт и другие) нужен диплом, признанный в Швейцарии. Как его признать — в статье <a href="https://svoiludi.ch/shveycariya/diplomy/">«Признание дипломов»</a>.</p>',
+  permit: '<p>Работать можно только с правом на работу в Швейцарии. Отметь, с какими разрешениями человек может начать у тебя работать.</p><p><b>Швейцарский паспорт и C</b> — без ограничений. <b>B и L</b> — обычно работать можно; у граждан стран вне ЕС и ЕАСТ это зависит от их разрешения. <b>S и F</b> — работу регистрируют до первого рабочего дня, со статусом S — через EasyGov, бесплатно. <b>G</b> — пограничники: живут за границей, работают здесь.</p>',
+  level: '<p>Уровни языка по общей европейской шкале: <b>A2</b> — простые разговоры, <b>B1</b> — уверенно в быту и на простой работе, <b>B2</b> — свободно на работе, <b>C1</b> — почти как на родном.</p><p>Пиши уровень, который действительно нужен для работы.</p>'
 };
 
 const today = new Date().toISOString().slice(0, 10);
@@ -48,7 +52,11 @@ const copyText = t => { try { return navigator.clipboard.writeText(t).then(() =>
 
 const authorOf = v => v.author && typeof v.author === 'object' ? v.author : SPECIALISTS.find(s => s.id === v.author) || null;   // автор с карточкой — id; без карточки — { name, firm, role, contacts: { telegram, email } }
 const confirmed = v => !!(v.confirm && v.confirm.date);
-const pool = () => VACANCIES.filter(v => v.status === 'активен' && confirmed(v) && (!v.until || v.until > today));
+/* только активные карточки (решение Ирины 10.10.2026, 22:12): объявления карточек на паузе, на подтверждении, с прошедшим сроком или снятых не показываем */
+const cardOfV = v => typeof v.author === 'string' ? SPECIALISTS.find(s => s.id === v.author) : (v.author && v.author.org ? (window.ORGANIZATIONS || []).find(o => o.id === v.author.org) : null);
+const liveV = v => { const a = v.author, c = cardOfV(v); if (typeof a === 'string') return !!c && c.status === 'активен' && !(c.paidUntil && c.paidUntil < today);
+  if (a && a.org) return !!c && c.status === 'активен' && !!c.confirm; return true; };
+const pool = () => VACANCIES.filter(v => v.status === 'активен' && confirmed(v) && liveV(v) && (!v.until || v.until > today));
 const state = { kind: '', cat: '', canton: '', lang: '', remote: '' };
 function match(v, skip){
   return (skip === 'kind' || !state.kind || v.kind === state.kind)
@@ -64,7 +72,7 @@ function row(v){
   return `<button class="ev vac" type="button" data-v="${esc(v.id)}" style="--lc:${k.c}">${v.sample ? '<span class="sample">Образец</span>' : ''}
     <span class="ev-d vk"><b>${(typeof ICO !== 'undefined' && ICO[v.kind]) || (typeof ICO !== 'undefined' ? ICO.staff : '👋')}</b><small>${esc(k.t)}</small></span>
     <span class="ev-m">${v.sample ? '<span class="yours">Здесь может быть твоё объявление!</span>' : ''}<span class="ev-k">${esc(CATS[v.cat] || '')}</span><span class="ev-t">${esc(v.title)}</span>
-      <span class="ev-i">${a ? `<b>${esc(a.name)}</b>` : ''}<span>${esc(where(v))}</span>${v.workload ? `<span>${esc(v.workload)}</span>` : ''}<span>${esc((v.langs || []).join(', '))}</span></span>
+      <span class="ev-i">${a ? `<b>${esc(a.name)}</b>` : ''}<span>${esc(where(v))}</span>${v.workload ? `<span>${esc(v.workload)}</span>` : ''}${v.salary ? `<span>${esc(v.salary)}</span>` : ''}<span>${esc((v.langs || []).join(', '))}</span></span>
       <span class="free-line">${FREE_NOTE}</span>
       <span class="disc-line">${esc(DISC[v.kind] || DISC.staff)}</span></span>
     ${a && a.photo ? `<span class="ev-o"><img src="${esc(photoSrc(a.photo))}" alt="" loading="lazy"></span>` : ''}</button>`;
@@ -100,15 +108,37 @@ let OPEN = null;
 /* e-mail карточки автора — один для всех подтверждений: ссылка уходит только на него, письмо-подтверждение принимаем только с него */
 const cardMailV = v => { const a = v.author; if (typeof a === 'string'){ const s = SPECIALISTS.find(x => x.id === a); return (s && s.contacts && s.contacts.email) || ''; }
   if (a && a.org){ const o = (window.ORGANIZATIONS || []).find(x => x.id === a.org); return (o && o.contacts && o.contacts.email) || (a.contacts && a.contacts.email) || ''; } return ''; };
-function contactLinks(v, a){
-  const out = [], ac = (a && a.contacts) || {}, parts = String(v.contact || '').split(';').map(x => x.trim()).filter(Boolean);
-  const get = p => { const x = parts.find(y => y.startsWith(p + ':')); return x ? x.slice(p.length + 1).trim() : ''; };
-  const tg = get('tg') || ac.telegram, mail = get('mail') || ac.email, tel = get('tel') || (!tg && !mail ? ac.phone : '');
-  if (tg) out.push(`<a class="btn" href="https://t.me/${esc(tg.replace(/^@/, ''))}" ${ext}>Откликнуться в Telegram</a>`);
-  if (mail) out.push(`<a class="btn${tg ? ' ghost' : ''}" href="mailto:${esc(mail)}?subject=${encodeURIComponent('Отклик: ' + v.title)}">Написать письмо</a>`);
-  if (tel) out.push(`<a class="btn${tg || mail ? ' ghost' : ''}" href="tel:${esc(tel.replace(/[^\d+]/g, ''))}">Позвонить: ${esc(tel)}</a>`);
-  return out.join('');
+/* каналы для отклика: другой контакт из заявки (contacts или contact 'tg:…; mail:…; tel:…; wa:…; ig:…') — вместо контакта карточки автора */
+function chansV(v){
+  const card = cardOfV(v), c = Object.assign({}, (card && card.contacts) || {}, (v.author && typeof v.author === 'object' && v.author.contacts) || {}), x = v.contacts || {};
+  const parts = String(v.contact || '').split(';').map(y => y.trim()).filter(Boolean), get = p => { const y = parts.find(z => z.startsWith(p + ':')); return y ? y.slice(p.length + 1).trim() : ''; };
+  return { wa: x.whatsapp || get('wa') || c.whatsapp || '', tg: x.telegram || get('tg') || c.telegram || '', mail: x.email || get('mail') || c.email || '', tel: x.phone || get('tel') || c.phone || '', ig: x.instagram || get('ig') || c.instagram || '', link: v.link || '' };
 }
+const waNum = x => { let d = String(x || '').replace(/[^\d+]/g, ''); if (/^00/.test(d)) d = d.slice(2); if (/^\+/.test(d)) d = d.slice(1); else if (/^0\d{9}$/.test(d)) d = '41' + d.slice(1); return d; };
+const nick = x => String(x || '').trim().replace(/^https?:\/\/(www\.)?(t\.me|instagram\.com)\//i, '').replace(/^@/, '').replace(/[/?#].*$/, '');
+function contactHtmlV(v){
+  const c = chansV(v), L = [];
+  if (c.tel) L.push(`<a href="tel:${esc(c.tel.replace(/[^\d+]/g, ''))}">${esc(c.tel)}</a>`);
+  if (c.wa) L.push(`WhatsApp <a href="https://wa.me/${esc(waNum(c.wa))}" ${ext}>${esc(c.wa)}</a>`);
+  if (c.tg) L.push(`Telegram <a href="https://t.me/${esc(/^\+?\d[\d\s]{6,}$/.test(nick(c.tg)) ? '+' + waNum(c.tg) : nick(c.tg))}" ${ext}>${esc(c.tg)}</a>`);
+  if (c.mail) L.push(`<a href="mailto:${esc(c.mail)}?subject=${encodeURIComponent('Отклик: ' + v.title)}">${esc(c.mail)}</a>`);
+  if (c.ig) L.push(`Instagram <a href="https://instagram.com/${esc(nick(c.ig))}" ${ext}>@${esc(nick(c.ig))}</a>`);
+  return L.join(', ') + (v.contacts && v.contacts.person ? ` (${esc(v.contacts.person)})` : '');
+}
+/* архив: объявления карточки за последние 12 месяцев — в заявке их можно повторить (window.ZMINE, assets/zayavka.js) */
+window.ZMINE = card => { const back = new Date(Date.now() - 365 * 864e5).toISOString().slice(0, 10), fmt = x => x ? x.split('-').reverse().join('.') : '';
+  const codes = (fid, langs) => { const box = document.getElementById(fid); if (!box) return []; const L = (langs || []).map(l => String(l).toLowerCase().slice(0, 4));
+    return [...box.querySelectorAll('label')].filter(l => L.includes(l.textContent.trim().toLowerCase().slice(0, 4))).map(l => l.querySelector('input').value); };
+  return VACANCIES.filter(v => (card.t === 'spec' ? v.author === card.id : !!v.author && v.author.org === card.id) && (v.until || v.posted || '') >= back)
+    .sort((a, b) => (b.until || '').localeCompare(a.until || '')).slice(0, 8).map(v => { const x = v.contacts || {}, sal = String(v.salary || '');
+      return { t: v.title, s: (v.until && v.until <= today ? 'В архиве, снято ' : 'На сайте до ') + fmt(v.until),
+        d: { 'z-v-kind': v.kind, 'z-v-title': v.title, 'z-v-cat': v.cat || '', 'z-v-load': v.workload || '', 'z-v-contract': v.contract || '', 'z-v-start': /договор/i.test(v.start || '') ? 'deal' : /сразу/i.test(v.start || '') ? 'now' : '',
+          'z-v-exp': v.exp || '', 'z-v-edu': v.edu || '', 'z-v-skills': v.skills || [], 'z-v-permit': v.permits || [], 'z-v-drive': v.drive || '',
+          'z-v-paytype': /час/.test(sal) ? 'hour' : /месяц/.test(sal) ? 'month' : /год/.test(sal) ? 'year' : sal ? 'deal' : '', 'z-v-pay': (sal.match(/\d+(?:[.,]\d+)?/) || [''])[0].replace(',', '.'),
+          'z-v-benefits': v.benefits || [], 'z-v-ptype': v.ptypes || [], 'z-v-pterms': v.pterms || '', 'z-v-pform': v.pform || '', 'z-v-pwho': v.pwho || [],
+          'z-v-where': v.online && !v.canton ? 'remote' : 'other', 'z-v-city': v.city || '', 'z-v-kt': v.canton || '', 'z-v-langs': codes('z-v-langs', v.langs), 'z-v-level': v.level || '',
+          'z-v-about': v.about || '', 'z-v-link': v.link || '', 'z-v-signup': v.signup || '',
+          'z-v-person': x.person || '', 'z-v-tel': x.phone || '', 'z-v-wa': x.whatsapp || '', 'z-v-tg': x.telegram || '', 'z-v-mail': x.email || '', 'z-v-ig': x.instagram || '' } }; }); };
 function openV(id){
   const v = VACANCIES.find(x => x.id === id); if (!v) return; OPEN = v;
   const k = KINDS[v.kind] || KINDS.staff, a = authorOf(v), box = document.getElementById('qmCard');
@@ -117,7 +147,10 @@ function openV(id){
     <div class="d-body">
       <div class="d-col">
         <div class="d-block"><h4>${v.kind === 'partner' ? 'О сотрудничестве' : 'О работе'}</h4><p>${esc(v.about)}</p></div>
-        ${v.offer ? `<div class="d-block"><h4>Что предлагает автор</h4><p>${esc(v.offer)}</p></div>` : ''}
+        ${(v.ptypes || []).length ? `<div class="d-block"><h4>Какое сотрудничество</h4><div class="chips">${v.ptypes.map(x => `<span>${esc(x)}</span>`).join('')}</div></div>` : ''}
+        ${(v.skills || []).length ? `<div class="d-block"><h4>Навыки</h4><div class="chips">${v.skills.map(x => `<span>${esc(x)}</span>`).join('')}</div></div>` : ''}
+        ${v.offer || (v.benefits || []).length ? `<div class="d-block"><h4>Что предлагает автор</h4>${(v.benefits || []).length ? `<div class="chips">${v.benefits.map(x => `<span>${esc(x)}</span>`).join('')}</div>` : ''}${v.offer ? `<p>${esc(v.offer)}</p>` : ''}</div>` : ''}
+        ${(v.pwho || []).length ? `<div class="d-block"><h4>Кого ищет в партнёры</h4><div class="chips">${v.pwho.map(x => `<span>${esc(x)}</span>`).join('')}</div></div>` : ''}
         <div class="d-block"><h4>Языки</h4><div class="chips">${(v.langs || []).map(l => `<span>${esc(l)}</span>`).join('')}</div></div>
         <div class="d-block"><h4>Автор объявления</h4><div class="orgs">${a ? `${a.org ? `<a class="org" href="../organizacii/#${esc(a.org)}">` : `<a class="org" href="../#${esc(a.id)}">`}${a.photo ? `<img src="${esc(photoSrc(a.photo))}" alt="${esc(a.name)}">` : `<span class="ini">${esc(a.name[0])}</span>`}<span><b>${esc(a.name)}</b><small>${esc(a.role || '')}${a.firm ? ' · ' + esc(a.firm) : ''}</small><br><u>${a.org ? 'Карточка организации →' : 'Карточка в справочнике →'}</u></span></a>` : '<span>автор объявления</span>'}</div></div>
       </div>
@@ -125,14 +158,27 @@ function openV(id){
         <div class="d-block"><h4>Где</h4><span>${esc(where(v)) || '—'}</span></div>
         ${v.workload ? `<div class="d-block"><h4>Занятость</h4><span>${esc(v.workload)}</span></div>` : ''}
         ${v.start ? `<div class="d-block"><h4>С какого времени</h4><span>${esc(v.start)}</span></div>` : ''}
+        ${v.contract ? `<div class="d-block"><h4>Договор</h4><span>${esc(v.contract)}</span></div>` : ''}
+        ${v.salary ? `<div class="d-block"><h4>Зарплата до вычетов</h4><span>${esc(v.salary)}</span></div>` : ''}
+        ${v.exp ? `<div class="d-block"><h4>Опыт</h4><span>${esc(v.exp)}</span></div>` : ''}
+        ${v.edu ? `<div class="d-block"><h4>Образование</h4><span>${esc(v.edu)}</span></div>` : ''}
+        ${(v.permits || []).length ? `<div class="d-block"><h4>Разрешение на работу</h4><div class="chips">${v.permits.map(x => `<span>${esc(x)}</span>`).join('')}</div></div>` : ''}
+        ${v.drive ? `<div class="d-block"><h4>Водительские права</h4><span>${esc(v.drive)}</span></div>` : ''}
+        ${v.level ? `<div class="d-block"><h4>Местный язык</h4><span>${esc(v.level)}</span></div>` : ''}
+        ${v.pterms ? `<div class="d-block"><h4>Условия</h4><span>${esc(v.pterms)}</span></div>` : ''}
+        ${v.pform ? `<div class="d-block"><h4>Формат</h4><span>${esc(v.pform)}</span></div>` : ''}
         ${confirmed(v) ? `<details class="cf-box"><summary><b>Условия подтверждены автором</b><span>${esc(fmtDate(v.confirm.date))} · что именно подтверждено</span></summary><ul class="marks">${checksFor(v).map(c => `<li>${esc(c.t)}</li>`).join('')}</ul></details>` : ''}
         ${ADMIN ? adminBox(v, a) : ''}
         <div class="disc-box"><b>Важно</b><p>${esc(DISC[v.kind] || DISC.staff)}</p><p class="free-line">${FREE_NOTE}</p></div>
-        <div class="acts">${contactLinks(v, a)}<button class="btn ghost" type="button" data-share>Поделиться</button></div>
+        <div class="d-block" data-wr-slot></div>
+        <div class="acts"><button class="btn ghost" type="button" data-share>Поделиться</button></div>
+        ${contactHtmlV(v) ? `<p class="note">Контакты: ${contactHtmlV(v)}.</p>` : ''}
         <p class="note">Опубликовано ${esc(fmtDate(v.posted))}${v.until ? ` · снимется ${esc(fmtDate(v.until))}` : ''}. <a href="#terms" data-close>Условия раздела</a>. <a href="mailto:${MAIL}?subject=${encodeURIComponent('Сообщить об объявлении: ' + v.title)}&body=${encodeURIComponent('Ссылка: ' + vUrl(v) + '\n\nЧто не так:\n')}">Сообщить об объявлении</a></p>
       </div>
     </div>`;
   box.querySelector('.qm-close').onclick = () => qm.close();
+  { const run = () => { const slot = box.querySelector('[data-wr-slot]'); if (slot && window.SVL_NAPISAT) SVL_NAPISAT(slot, { kind: v.kind === 'partner' ? 'partner' : 'staff', title: v.title, url: vUrl(v), main: v.signup || '', ch: chansV(v) }); };
+    if (window.SVL_NAPISAT) run(); else addEventListener('DOMContentLoaded', run, { once: true }); }
   if (!qm.open) qm.showModal();
   if (location.hash.slice(1) !== v.id) history.replaceState(null, '', '#' + v.id);
 }
