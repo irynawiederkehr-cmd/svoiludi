@@ -51,7 +51,7 @@ def foot(depth, extra=''):
     return f'''
   <footer>
     <span>© 2026 Свои люди в Швейцарии · <a href="{up}o-proekte/">О проекте</a> · проект <a href="https://voznesenskaya.ch/">Ирины Вознесенской</a></span>
-    <span><a href="{up}">Специалисты</a> · <a href="{up}organizacii/">Организации</a> · <a href="{up}shveycariya/">Как устроена Швейцария</a> · <a href="{up}instrumenty/">Полезные инструменты</a> · <a href="{up}events/">События</a> · <a href="{up}kursy/">Курсы</a> · <a href="{up}novosti/">Что нового</a> · <a href="{up}dlya-specialistov/">Для специалистов</a> · <a href="https://svoiludi.ch/privacy/">Политика конфиденциальности</a> · <a href="https://voznesenskaya.ch/impressum/">Выходные данные</a></span>
+    <span><a href="{up}">Специалисты</a> · <a href="{up}organizacii/">Организации</a> · <a href="{up}shveycariya/">Как устроена Швейцария</a> · <a href="{up}instrumenty/">Полезные инструменты</a> · <a href="{up}events/">События</a> · <a href="{up}kursy/">Курсы</a> · <a href="{up}novosti/">Что нового</a> · <a href="{up}dlya-specialistov/">Для специалистов</a> · <a href="https://svoiludi.ch/privacy/">Политика конфиденциальности</a> · <a href="{up}o-proekte/#otvetstvennost">Ограничение ответственности</a> · <a href="https://voznesenskaya.ch/impressum/">Выходные данные</a></span>
   </footer>
 </main>
 {extra}<script src="/assets/temy.js" defer></script>
