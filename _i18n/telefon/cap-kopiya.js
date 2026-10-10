@@ -31,6 +31,12 @@ const S = [
   ['org-add', '/organizacii/', 390, 669, { later: true, scrollSel: '#add' }], ['org-uk', '/uk/organizacii/', 390, 669, { later: true }],
   ['org-main', '/', 390, 669, { later: true, scrollSel: '.evk' }], ['org-vac', '/vakansii/#obrazec-volontery-razgovornyj-klub', 390, 669, { later: true }],
   ['org-vac-kinds', '/vakansii/', 390, 669, { later: true, scrollSel: '.vac-kinds' }], ['org-desk', '/organizacii/', 1280, 800, { later: true, desk: true }],
+  // значок «Мы в «Своих людях»» для организаций и «Я в справочнике» для специалистов (10.10.2026, badge/)
+  ['zn-top', '/badge/#org', 390, 669, { later: true, scrollSel: '.free-badge', top: 150 }], ['zn-mini', '/badge/#org', 390, 669, { later: true, scrollSel: '.b-mini', top: 70 }],
+  ['zn-code', '/badge/#org', 390, 669, { later: true, scrollSel: '#code', top: 110 }], ['zn-more', '/badge/#org', 390, 669, { later: true, scrollSel: '#h-more', top: 70 }],
+  ['zn-rules', '/badge/#org', 390, 669, { later: true, scrollSel: '#h-rules', top: 70 }], ['zn-uk', '/uk/badge/#org', 390, 669, { later: true, scrollSel: '.b-mini', top: 70 }],
+  ['zn-spec', '/badge/#viktoria-ponomarenko', 390, 669, { later: true, scrollSel: '.pickrow', top: 40 }], ['zn-org', '/organizacii/', 390, 669, { later: true, scrollSel: '#add .vac-kinds', top: 70 }],
+  ['zn-desk', '/badge/#org', 1280, 800, { later: true, desk: true, scrollSel: '.pickrow', top: 20 }],
 ];
 (async () => {
   const srv = spawn('python3', ['-I', '-m', 'http.server', String(PORT), '--directory', require('path').resolve(__dirname, '../..')], { cwd: __dirname, stdio: 'ignore' });

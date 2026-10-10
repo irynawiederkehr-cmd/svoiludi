@@ -204,6 +204,10 @@ const JOBS = {
   // галочка перед скачиванием (10.10.2026)
   'skachivanie/dl-off': ['p', () => safF('dl-off')], 'skachivanie/dl-need': ['p', () => safF('dl-need')], 'skachivanie/dl-toast': ['a', () => chrF('dl-toast')],
   'skachivanie/dl-uk': ['p', () => safF('dl-uk')], 'skachivanie/dl-vz': ['a', () => chrF('dl-vz', false, 'voznesenskaya.ch')],
+  // значок для сайта (10.10.2026)
+  'znachok/zn-top': ['p', () => safF('zn-top')], 'znachok/zn-mini': ['p', () => safF('zn-mini')], 'znachok/zn-code': ['p', () => safF('zn-code')],
+  'znachok/zn-more': ['p', () => safF('zn-more')], 'znachok/zn-rules': ['p', () => safF('zn-rules')], 'znachok/zn-uk': ['a', () => chrF('zn-uk')],
+  'znachok/zn-spec': ['p', () => safF('zn-spec')], 'znachok/zn-org': ['p', () => safF('zn-org')],
 };
 (async () => {
   const b = await chromium.launch();
