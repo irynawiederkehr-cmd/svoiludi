@@ -52,7 +52,7 @@ window.SPECIALISTS = [
     "key": "nmoa9uvl",
     "num": "SG-0018",
     "uid": "CHE-324.492.167",
-    "status": "черновик",
+    "status": "на подтверждении",
     "paidUntil": "",
     "tiers": [],
     "onlineCH": "",
