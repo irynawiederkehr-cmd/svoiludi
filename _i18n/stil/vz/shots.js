@@ -16,7 +16,7 @@ const VIEW = {
 // прячем то, что всплывает поверх (подсказка установки, языки), если элемент не про них
 const HIDE = '.pa-card,.pa-back{display:none!important}.langbar{display:none!important}';
 // у элементов ниже шапки шапка не должна наезжать на снимок
-const STATIC = 'header.top,header.sitebar,.sitebar{position:static!important}';
+const STATIC = 'header.top,header.sitebar,.sitebar{position:static!important}html header.top.pa-mini{display:none!important}';
 
 (async () => {
   fs.mkdirSync(OUT, { recursive: true });
