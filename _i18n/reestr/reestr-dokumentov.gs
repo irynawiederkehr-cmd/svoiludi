@@ -32,7 +32,10 @@ var TEXTS = [
   ['T1', '10.10.2026', 'voznesenskaya.ch', 'en', 'I understand: this is a tool for reflection, not a diagnosis and not psychological counselling. The decision and the responsibility for how I use the result are mine.']
 ];
 
-function book(){ return SpreadsheetApp.getActiveSpreadsheet(); }
+/* ID таблицы (из её адреса …/spreadsheets/d/<ID>/edit). Нужен, если скрипт создан отдельно на script.google.com, а не из меню таблицы.
+   В репозитории не храним — вписывается только в развёрнутом скрипте. */
+var SS_ID = '';
+function book(){ return SS_ID ? SpreadsheetApp.openById(SS_ID) : SpreadsheetApp.getActiveSpreadsheet(); }
 function yearSheet(ss, y){
   var sh = ss.getSheetByName(String(y));
   if (!sh) { sh = ss.insertSheet(String(y)); sh.appendRow(HEAD); sh.setFrozenRows(1); sh.getRange(1, 1, 1, HEAD.length).setFontWeight('bold'); sh.setColumnWidth(1, 190); sh.setColumnWidth(6, 260); }

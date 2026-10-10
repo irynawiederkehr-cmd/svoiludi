@@ -198,6 +198,9 @@ const JOBS = {
   'yazyk/lang-dark': ['a', () => chrF('lang-dark', true)], 'yazyk/lang-vz': ['p', () => safF('lang-vz', 'voznesenskaya.ch', '#F4EDE3')],
   'yazyk/lang-vz-test': ['a', () => chrF('lang-vz-test', false, 'voznesenskaya.ch')], 'yazyk/lang-vz-app': ['p', () => appF('lang-vz-app', '#F4EDE3')],
   'knopki/b-god': ['p', () => safF('b-god')], 'knopki/b-kursy': ['p', () => safF('b-kursy')], 'knopki/b-search': ['p', () => safF('b-search')],
+  // галочка перед скачиванием (10.10.2026)
+  'skachivanie/dl-off': ['p', () => safF('dl-off')], 'skachivanie/dl-need': ['p', () => safF('dl-need')], 'skachivanie/dl-toast': ['a', () => chrF('dl-toast')],
+  'skachivanie/dl-uk': ['p', () => safF('dl-uk')], 'skachivanie/dl-vz': ['a', () => chrF('dl-vz', false, 'voznesenskaya.ch')],
 };
 (async () => {
   const b = await chromium.launch();

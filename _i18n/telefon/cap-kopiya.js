@@ -18,6 +18,13 @@ const S = [
   ['lang-dark', '/instrumenty/?lang=ask', 390, 736, { dark: true }], ['lang-desk', '/?lang=ask', 1280, 760, { desk: true }],
   ['lang-vz', '/?lang=ask', 390, 669, { vz: true }], ['lang-vz-test', '/kompas/?lang=ask', 390, 736, { vz: true, locale: 'ru-RU' }],
   ['lang-vz-app', '/?app=1&lang=ask', 390, 777, { vz: true }], ['lang-vz-desk', '/?lang=ask', 1280, 760, { vz: true, desk: true }],
+  // галочка перед скачиванием и номер документа (10.10.2026, «skachivanie-i-nomer.md»): real — как у человека (робот иначе проходит без галочки),
+  // lang — язык уже выбран, pre/post — действия до и после прокрутки, top — где на экране окажется элемент scrollSel
+  ['dl-off', '/instrumenty/nalogi-shema/', 390, 669, { later: true, real: true, lang: 'ru', scrollSel: '.svl-dl', top: 70 }],
+  ['dl-need', '/instrumenty/nalogi-shema/', 390, 669, { later: true, real: true, lang: 'ru', post: "document.getElementById('pdf').click()", scrollSel: '.svl-dl', top: 70 }],
+  ['dl-toast', '/instrumenty/ekstrennye-nomera/', 390, 669, { later: true, real: true, lang: 'ru', scrollSel: '.svl-dl', top: 70, post: "document.querySelector('.svl-dl input').click(); document.getElementById('png').click()" }],
+  ['dl-uk', '/uk/instrumenty/zarplata/', 390, 669, { later: true, real: true, lang: 'uk', pre: "new Promise(r => { document.getElementById('exampleBtn').click(); setTimeout(r, 6000); })", scrollSel: '.svl-dl', top: 70 }],
+  ['dl-vz', '/stupeni/', 390, 736, { vz: true, locale: 'ru-RU', later: true, real: true, lang: 'ru', pre: "['intro','quiz'].forEach(i => { const e = document.getElementById(i); if (e) e.hidden = true; }); document.getElementById('result').hidden = false", scrollSel: '.svl-dl', top: 210, post: "document.getElementById('pdfBtn').click()" }],
 ];
 (async () => {
   const srv = spawn('python3', ['-I', '-m', 'http.server', String(PORT), '--directory', require('path').resolve(__dirname, '../..')], { cwd: __dirname, stdio: 'ignore' });
@@ -28,10 +35,14 @@ const S = [
     if (!n.startsWith(ONLY) || (o.vz && !vsrv)) continue;
     const ctx = await b.newContext({ viewport: { width: w, height: h }, deviceScaleFactor: o.desk ? 1 : 2, isMobile: !o.desk, hasTouch: !o.desk, colorScheme: o.dark ? 'dark' : 'light', ...(o.locale ? { locale: o.locale } : {}) });
     await ctx.addInitScript((l) => { try { for (const k of ['svoiludi-app-later', 'vz-app-later']) { if (l) localStorage.setItem(k, String(Date.now())); else localStorage.removeItem(k); } } catch (e) {} }, !!o.later || !/install=/.test(pg));
+    if (o.real) await ctx.addInitScript(() => { Object.defineProperty(Navigator.prototype, 'webdriver', { get: () => false }); });
+    if (o.lang) await ctx.addInitScript((l) => { try { localStorage.setItem('svoiludiLang', l); localStorage.setItem('irinaTestsLang', l); } catch (e) {} }, o.lang);
     const p = await ctx.newPage(); p.on('pageerror', e => errs.push(n + ' ' + e.message));
     await p.goto((o.vz ? VB : B) + pg, { waitUntil: 'networkidle' }); await p.waitForTimeout(1000);
     if (o.scrollText) { const el = p.getByText(o.scrollText, { exact: false }).first(); try { await el.evaluate(e => { window.scrollTo(0, e.getBoundingClientRect().top + scrollY - innerHeight * 0.45); }); } catch (e) { errs.push(n + ' noscroll'); } await p.waitForTimeout(600); }
-    if (o.scrollSel) { const ok = await p.evaluate((sel) => { const e = document.querySelector(sel); if (!e) return false; window.scrollTo(0, e.getBoundingClientRect().top + scrollY - innerHeight * 0.45); return true; }, o.scrollSel); if (!ok) errs.push(n + ' nosel'); await p.waitForTimeout(600); }
+    if (o.pre) { await p.evaluate(o.pre); await p.waitForTimeout(900); }
+    if (o.scrollSel) { const ok = await p.evaluate(([sel, top]) => { const e = document.querySelector(sel); if (!e) return false; window.scrollTo(0, e.getBoundingClientRect().top + scrollY - (top == null ? innerHeight * 0.45 : top)); return true; }, [o.scrollSel, o.top]); if (!ok) errs.push(n + ' nosel'); await p.waitForTimeout(600); }
+    if (o.post) { await p.evaluate(o.post); await p.waitForTimeout(1200); if (o.scrollSel && o.top != null) { await p.evaluate(([sel, top]) => { const e = document.querySelector(sel); if (e) window.scrollTo(0, e.getBoundingClientRect().top + scrollY - top); }, [o.scrollSel, o.top]); await p.waitForTimeout(500); } }
     if (/install=/.test(pg)) await p.evaluate(() => document.querySelectorAll('.pa-card img').forEach(i => i.loading = 'eager'));
     if (o.click) { await p.click(o.click); }
     await p.waitForTimeout(700);
