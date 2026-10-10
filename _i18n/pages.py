@@ -34,6 +34,7 @@ PAGES = [('index.html', '/'), ('events/index.html', '/events/'), ('kursy/index.h
          ('instrumenty/grazhdanstvo-shema/index.html', '/instrumenty/grazhdanstvo-shema/'),
          ('instrumenty/ipoteka-raschet/index.html', '/instrumenty/ipoteka-raschet/'),
          ('instrumenty/kartochka-pitomca/index.html', '/instrumenty/kartochka-pitomca/'),
+         ('instrumenty/zhurnal-perederzhki/index.html', '/instrumenty/zhurnal-perederzhki/'),
          ('instrumenty/kuda-obratitsya/index.html', '/instrumenty/kuda-obratitsya/'),
          ('instrumenty/moi-dannye/index.html', '/instrumenty/moi-dannye/'),
          ('instrumenty/musor-pamyatka/index.html', '/instrumenty/musor-pamyatka/'),

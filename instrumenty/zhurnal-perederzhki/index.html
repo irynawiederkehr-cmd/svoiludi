@@ -1,0 +1,671 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<link rel="icon" href="/fav/favicon.svg" type="image/svg+xml"><link rel="icon" href="/fav/icon-32.png" sizes="32x32"><link rel="apple-touch-icon" href="/fav/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/fonts.css">
+<meta name="description" content="Бесплатный журнал передержки для Швейцарии: животные и хозяева, даты передержки, визитов и прогулок, календарь с числом животных в сутки и предупреждением, если их больше пяти, уход по дням (корм, прогулка, лекарство), заработок и оплаты, праздники и школьные каникулы кантона. PDF на немецком, французском, итальянском или русском: список животных с номерами чипов, уход по дням и список хозяев. Tierbetreuung, Tierpension, Betreuungsjournal.">
+<link rel="canonical" href="https://svoiludi.ch/instrumenty/zhurnal-perederzhki/">
+<meta property="og:type" content="website"><meta property="og:locale" content="ru_RU"><meta property="og:site_name" content="Свои люди в Швейцарии">
+<meta property="og:title" content="Журнал передержки животных · бесплатно"><meta property="og:description" content="Кто у тебя по дням, сколько животных в сутки, уход, хозяева и оплаты — PDF на языке кантона.">
+<meta property="og:url" content="https://svoiludi.ch/instrumenty/zhurnal-perederzhki/"><meta property="og:image" content="https://svoiludi.ch/instrumenty/zhurnal-perederzhki/og-image.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="robots" content="noindex, nofollow">
+<title>Журнал передержки животных: кто у тебя по дням, сколько в сутки, уход и хозяева</title>
+<style>
+/* Журнал передержки животных (10.10.2026): животные, даты, календарь с числом животных в сутки, уход по дням, PDF на движке assets/shema.js. */
+:root{
+  --bg:#F4EDE3; --paper:#FFFCF8; --ink:#2F2924; --muted:#7A6E62; --line:#E5D9C9; --soft:#EFE5D7;
+  --brown:#6E4F3C; --mustard:#B98324; --mustard-soft:#F3E3C2; --sage:#4F5E3E; --sage-soft:#E3E8D6; --red:#A0523D;
+  --display:"Forum","Georgia",serif; --sans:"Manrope","Segoe UI",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#221D19; --paper:#2C2621; --ink:#F1E9DF; --muted:#B4A796; --line:#3E362F; --soft:#352E28;
+  --brown:#E1C2A6; --mustard:#E2B45C; --mustard-soft:#3D321F; --sage:#B4BF97; --sage-soft:#2E3226; --red:#E39A85; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#221D19; --paper:#2C2621; --ink:#F1E9DF; --muted:#B4A796; --line:#3E362F; --soft:#352E28;
+  --brown:#E1C2A6; --mustard:#E2B45C; --mustard-soft:#3D321F; --sage:#B4BF97; --sage-soft:#2E3226; --red:#E39A85; color-scheme:dark}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--ink);font:15px/1.55 var(--sans);margin:0}
+.wrap{max-width:1280px;margin:0 auto;padding-inline:16px;padding-block:28px 48px;display:flex;flex-direction:column;gap:24px}
+.eyebrow{font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+h1{font-family:var(--display);font-weight:400;font-size:clamp(2.4rem,6vw,3.6rem);line-height:1;margin:4px 0 10px;text-wrap:balance}
+h2{font-family:var(--display);font-weight:400;font-size:1.55rem;margin:0;text-wrap:balance}
+h3{font-family:var(--display);font-weight:400;font-size:1.22rem;line-height:1.2;margin:0}
+.lead{max-width:66ch;color:var(--muted);margin:0}
+.jump{font-weight:700;color:var(--brown);text-underline-offset:4px}
+.privnote{margin-top:14px;background:var(--sage-soft);border-radius:16px;padding:12px 16px;font-size:.9rem;max-width:90ch}
+.status{font-size:.86rem;color:var(--muted);min-height:1.3em}
+.btn{font:inherit;font-weight:700;font-size:.9rem;border:0;border-radius:999px;padding:10px 18px;cursor:pointer;color:#fff;text-decoration:none;display:inline-flex;align-items:center;gap:6px;background:#6E4F3C;box-shadow:0 8px 18px -8px rgba(110,79,60,.6)}
+.btn.gold{background:#B98324;box-shadow:0 8px 18px -8px rgba(185,131,36,.7)}
+.btn.free{background:#4F5E3E;box-shadow:0 8px 18px -8px rgba(79,94,62,.6)}
+.btn.ghost{background:transparent;color:var(--brown);border:1.5px solid var(--line);box-shadow:none}
+.btn.sm{font-size:.82rem;padding:7px 13px}
+.btn[disabled]{background:var(--soft);color:var(--muted);box-shadow:none;cursor:wait}
+select,input[type=text],input[type=tel],input[type=number],input[type=date],textarea{font:inherit;font-size:.95rem;color:var(--ink);background:var(--paper);border:1.5px solid var(--line);border-radius:12px;padding:9px 12px;width:100%;min-width:0}
+select:focus-visible,input:focus-visible,button:focus-visible,textarea:focus-visible,a:focus-visible{outline:2px solid var(--mustard);outline-offset:2px}
+::placeholder{color:color-mix(in srgb,var(--muted) 70%,transparent)}
+.setup{background:var(--paper);border:1.5px solid var(--line);border-radius:22px;padding:16px 18px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px 18px;align-items:start}
+@media (max-width:1000px){.setup{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.setup{grid-template-columns:1fr}}
+.fl{display:flex;flex-direction:column;gap:6px;min-width:0}
+.fl>.lb{font-size:.8rem;font-weight:700;color:var(--muted);display:flex;align-items:center}
+.seg{display:flex;flex-wrap:wrap;gap:6px}
+.seg button{font:inherit;font-size:.84rem;font-weight:700;border:1.5px solid var(--line);background:var(--paper);color:var(--ink);border-radius:999px;padding:6px 12px;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--sage);border-color:var(--sage);color:#fff}
+.acts{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.exbar{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;background:var(--mustard-soft);border-radius:16px;padding:10px 14px;font-size:.9rem;font-weight:600}
+.work{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:22px;align-items:start}
+@media (max-width:1040px){.work{grid-template-columns:1fr}}
+.form{display:flex;flex-direction:column;gap:14px;min-width:0}
+.sec{background:var(--paper);border:1.5px solid var(--line);border-radius:20px;padding:16px 18px;display:flex;flex-direction:column;gap:12px}
+.sec>h2{font-size:1.3rem;display:flex;align-items:center}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:560px){.g2{grid-template-columns:1fr}}
+.hint{font-size:.84rem;color:var(--muted);margin:0}
+.chk{display:flex;flex-direction:column;gap:8px}
+.chk label{display:flex;gap:10px;align-items:baseline;font-size:.92rem;cursor:pointer}
+.chk input{flex:none;width:18px;height:18px;accent-color:var(--sage);transform:translateY(3px)}
+.chk b{white-space:nowrap}
+.chk small{color:var(--muted)}
+.tog{display:flex;gap:10px;align-items:center;font-size:.92rem;cursor:pointer}
+.tog input{width:18px;height:18px;accent-color:var(--sage)}
+.sheetbox{position:sticky;top:12px;display:flex;flex-direction:column;gap:10px}
+@media (max-width:1040px){.sheetbox{position:static}}
+.sheet{background:#fff;border-radius:6px;box-shadow:0 18px 40px -22px rgba(47,41,36,.45);overflow:hidden}
+.sheet svg{display:block;width:100%;height:auto}
+.imp{background:var(--paper);border:1.5px dashed color-mix(in srgb,var(--sage) 55%,transparent);border-radius:16px;padding:14px 18px;font-size:.88rem;max-width:90ch;margin:0}
+.imp b{color:var(--sage)}
+.guide{display:flex;flex-direction:column;gap:14px;max-width:90ch}
+.guide ul{margin:0;padding-left:20px}
+.guide li{margin:4px 0}
+.credit{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:.8rem;color:var(--muted)}
+.credit a{color:var(--muted)}
+.qh{font:700 .72rem/1 var(--sans);width:20px;height:20px;border-radius:50%;border:1.5px solid var(--line);background:var(--paper);color:var(--brown);cursor:pointer;margin-left:6px;padding:0;flex:none}
+.sheets{display:flex;flex-direction:column;gap:14px}
+.goals{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+@media (max-width:560px){.goals{grid-template-columns:1fr}}
+.goals label{display:flex;gap:10px;align-items:flex-start;background:var(--bg);border:1.5px solid var(--line);border-radius:14px;padding:9px 12px;cursor:pointer;font-size:.92rem}
+.goals input{width:18px;height:18px;accent-color:var(--sage);flex:none;margin-top:2px}
+.goals small{display:block;color:var(--muted)}
+.steps{display:flex;flex-direction:column;gap:8px}
+.steps details{background:var(--paper);border:1.5px solid var(--line);border-radius:16px;padding:10px 16px}
+.steps summary{cursor:pointer;font-weight:700;display:flex;gap:10px;align-items:baseline}
+.steps summary small{font-weight:600;color:var(--muted);margin-left:auto;text-align:right}
+.steps details p,.steps details ul{margin:8px 0 2px;font-size:.93rem}
+.steps details ul{padding-left:20px}
+/* Журнал передержки (10.10.2026) */
+.wrap>.sec,.sheetbox,.guide,.imp{max-width:1040px}
+.g3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.fl .tog{margin-top:2px}
+.pets,.stays{display:flex;flex-direction:column;gap:8px}
+.pet{background:var(--bg);border:1.5px solid var(--line);border-radius:16px;padding:8px 14px}
+.pet>summary{cursor:pointer;display:flex;gap:10px;align-items:center;font-weight:700;list-style:none}
+.pet>summary::-webkit-details-marker{display:none}
+.pet>summary small{font-weight:600;color:var(--muted);margin-left:auto;text-align:right}
+.pet[open]>summary{margin-bottom:10px}
+.dot{width:12px;height:12px;border-radius:50%;flex:none;display:inline-block}
+.pet .g2{margin-bottom:10px}
+.pet textarea{min-height:56px;font:inherit;font-size:.95rem;border:1.5px solid var(--line);border-radius:12px;padding:9px 12px;background:var(--paper);color:var(--ink);width:100%}
+.stay{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1.2fr) minmax(0,1fr) minmax(0,1fr) minmax(0,.7fr) auto;gap:8px;align-items:end;background:var(--bg);border:1.5px solid var(--line);border-left:6px solid var(--c,#7A6E62);border-radius:14px;padding:10px 12px}
+.stay .fl>.lb{font-size:.72rem}
+.stay .row2{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:6px 18px;align-items:center;font-size:.86rem;color:var(--muted)}
+.stay .row2 label{display:flex;gap:6px;align-items:center;cursor:pointer}
+.stay .row2 input[type=checkbox]{width:17px;height:17px;accent-color:var(--sage)}
+.stay .row2 input[type=text]{flex:1;min-width:160px;padding:6px 10px;font-size:.88rem}
+.stay .del{background:none;border:0;color:var(--red);font:700 .82rem var(--sans);cursor:pointer;padding:8px 4px}
+@media (max-width:760px){.stay{grid-template-columns:1fr 1fr}.stay .fl:first-child{grid-column:1/-1}}
+.calhead{display:flex;align-items:center;gap:10px;justify-content:space-between}
+.calhead h2{text-align:center;flex:1}
+.cal{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px}
+.cal .wd{font-size:.72rem;font-weight:700;color:var(--muted);text-align:center;padding-bottom:2px}
+.cal .d{min-height:72px;border:1.5px solid var(--line);border-radius:12px;background:var(--paper);padding:5px 6px;text-align:left;font:inherit;color:var(--ink);display:flex;flex-direction:column;gap:3px;cursor:pointer;min-width:0;position:relative;overflow:hidden}
+.cal .d.hol{background:#F7E1EC}
+.cal .d.sch{box-shadow:inset 0 -5px 0 #A9CFA0}
+.cal .d.today .n{text-decoration:underline;text-underline-offset:3px}
+.cal .d[aria-pressed="true"]{outline:2.5px solid var(--mustard);outline-offset:1px}
+.cal .d.blank{visibility:hidden}
+.cal .d .n{font-weight:700;font-size:.86rem;display:flex;justify-content:space-between;gap:4px}
+.cal .d .hn{font-size:.62rem;line-height:1.15;color:#B5357A;font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.cal .d .dots{display:flex;flex-wrap:wrap;gap:2px}
+.cal .d .dots i{width:8px;height:8px;border-radius:50%;display:block}
+.cnt{display:inline-block;font-weight:800;font-size:.76rem;border-radius:999px;padding:1px 7px;background:var(--sage-soft);color:var(--sage);line-height:1.4}
+.cnt.over{background:#A0523D;color:#fff}
+.cal .d .cnt{position:absolute;right:5px;bottom:7px}
+@media (max-width:560px){.cal{gap:3px}.cal .d{min-height:54px;padding:4px;border-radius:10px}.cal .d .hn,.cal .d .dots{display:none}.cal .d .cnt{right:3px;bottom:6px;padding:0 5px}}
+.calleg{display:flex;flex-wrap:wrap;gap:4px 12px;align-items:center}
+.calleg .lg{display:inline-block;width:16px;height:12px;border-radius:4px;border:1px solid var(--line);vertical-align:-1px}
+.calleg .lg.hol{background:#F7E1EC}.calleg .lg.sch{background:var(--paper);box-shadow:inset 0 -4px 0 #A9CFA0}
+.calleg .lg.cnt{width:auto;height:auto;border:0}
+.minfo details{background:var(--bg);border-radius:14px;padding:8px 12px}
+.minfo summary{cursor:pointer;font-size:.9rem}
+.hchips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.hchip{font:inherit;font-size:.82rem;border:1.5px solid #E9B9D1;background:#F7E1EC;color:#7A2353;border-radius:999px;padding:4px 10px;cursor:pointer}
+.hchip b{margin-right:4px}
+.schip{font-size:.82rem;border-radius:999px;padding:4px 10px;background:#E2F0E2;color:#2F6B37}
+.hinfo{background:var(--paper);border:1.5px solid #E9B9D1;border-radius:14px;padding:10px 14px;font-size:.9rem}
+.hinfo p{margin:4px 0 0}
+.daybox{background:var(--bg);border:1.5px solid var(--mustard);border-radius:18px;padding:12px 16px;display:flex;flex-direction:column;gap:10px}
+.daybox h3{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.dpet{background:var(--paper);border:1.5px solid var(--line);border-left:6px solid var(--c,#7A6E62);border-radius:14px;padding:8px 12px;display:flex;flex-direction:column;gap:6px}
+.dpet .who{font-weight:700;display:flex;flex-wrap:wrap;gap:4px 10px;align-items:baseline}
+.dpet .who small{font-weight:600;color:var(--muted)}
+.dpet .who a{color:var(--brown);font-weight:700}
+.dpet .care{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:.9rem}
+.dpet .care label{display:flex;gap:6px;align-items:center;cursor:pointer}
+.dpet .care input{width:18px;height:18px;accent-color:var(--sage)}
+.dpet input[type=text]{padding:6px 10px;font-size:.88rem}
+.tot{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px}
+.tot div{background:var(--bg);border-radius:14px;padding:10px 12px}
+.tot b{display:block;font-family:var(--display);font-size:1.6rem;font-weight:400;line-height:1.1}
+.tot span{font-size:.8rem;color:var(--muted)}
+.tot .over b{color:#A0523D}
+.warnbox{background:#FDECEA;border:1.5px solid #E8A69C;color:#5A2117;border-radius:14px;padding:10px 14px;font-size:.92rem}
+.warnbox a{color:#7A2A1D;font-weight:700}
+.wi{display:inline-block;width:1.2em;height:1.1em;vertical-align:-.17em;margin:0 .28em 0 .05em;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 22'%3E%3Cpath d='M10.27 2.5a2 2 0 0 1 3.46 0l8.66 15a2 2 0 0 1-1.73 3H3.34a2 2 0 0 1-1.73-3z' fill='%23FDECEA' stroke='%23D32F2F' stroke-width='1.8' stroke-linejoin='round'/%3E%3Cpath d='M12 7.8v5.2' stroke='%23D32F2F' stroke-width='2.4' stroke-linecap='round'/%3E%3Ccircle cx='12' cy='16.5' r='1.35' fill='%23D32F2F'/%3E%3C/svg%3E") center/contain no-repeat}
+.sheetbox h2{font-size:1.4rem}
+.imp a,.guide a,.hint a,.sec a,.hinfo a{color:var(--brown);text-underline-offset:3px}
+.sheetbox .sheets{max-width:720px}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .cal .d.hol,:root:not([data-theme="light"]) .calleg .lg.hol{background:#4A2A3A}:root:not([data-theme="light"]) .hchip{background:#4A2A3A;color:#F7E1EC;border-color:#7A3A5A}:root:not([data-theme="light"]) .warnbox{background:#3D2420;color:#F6D5CE;border-color:#7A3A2E}:root:not([data-theme="light"]) .warnbox a{color:#F6D5CE}:root:not([data-theme="light"]) .schip{background:#2B3A2B;color:#CFE6CB}}
+</style>
+<!--pwa--><link rel="manifest" href="/fav/site.webmanifest"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Свои люди"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="theme-color" content="#4F5E3E"><style id="sl-top">/* единая шапка svoiludi.ch (09.10.2026), собирается _i18n/topnav.py */header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:40;background:color-mix(in srgb,var(--bg,#EEF1E6) 92%,transparent);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border-bottom:1px solid var(--line,#D9DFCB);font-family:"Manrope","Segoe UI",system-ui,sans-serif;line-height:1.5;margin:0}header.top .page{max-width:1120px;margin:0 auto;padding-inline:20px;display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:12px;box-sizing:border-box;width:auto}header.top .mark{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink,#2F2924)}header.top .mono{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;flex:none}header.top .mono.av{border:none;padding:0}header.top .mono.av svg{width:100%;height:100%;display:block}header.top .mark b{font-family:"Forum","Cormorant Garamond",Georgia,serif;font-weight:400;font-size:1.25rem;line-height:1;color:var(--ink,#2F2924)}header.top .mark small{display:block;font-size:.72rem;color:var(--muted,#7A6E62);letter-spacing:.04em;margin-top:3px}header.top nav{display:flex;gap:22px;font-size:.88rem;font-weight:600;margin:0;padding:0}header.top nav a{text-decoration:none;color:var(--muted,#7A6E62)}header.top nav a:hover{color:var(--ink,#2F2924)}header.top nav a[aria-current="page"]{color:var(--ink,#2F2924)}header.top .navcta{font-size:.86rem;font-weight:700;text-decoration:none;border:1.5px solid #4F5E3E;color:#4F5E3E;background:transparent;border-radius:12px;padding:8px 16px;white-space:nowrap}@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) header.top .navcta{border-color:#B9C69F;color:#B9C69F}}:root[data-theme="dark"] header.top .navcta{border-color:#B9C69F;color:#B9C69F}@media (max-width:1100px){header.top{position:static}}@media (max-width:420px){header.top .page{padding-block:8px;gap:8px}header.top .mono{width:32px;height:32px}header.top .mark{gap:8px}header.top .mark b{font-size:1.06rem}header.top .mark small{display:none}header.top .navcta{font-size:.8rem;padding:6px 11px}}@media (max-width:380px){header.top .page{gap:6px;padding-inline:14px}header.top .mark b{font-size:1rem}header.top .navcta{font-size:.74rem;padding:6px 8px}}@media print{header.top{display:none!important}}</style><style id="pa-tiles">/* верхнее меню на телефоне и планшете: прямоугольные плитки с закруглением в два ряда, иконки ставит pwa-app.js (08.10.2026) */html header.top nav[aria-label] a .pa-ni{display:none}@media (max-width:1100px){html header.top .page{flex-wrap:wrap;row-gap:8px}html header.top nav[aria-label]{order:3;width:100%;display:grid!important;grid-template-columns:repeat(var(--pa-cols,3),minmax(0,1fr));gap:8px;overflow:visible;padding:4px 0 12px;margin:0}html header.top nav[aria-label] a{display:flex!important;flex-direction:column;align-items:center;justify-content:center;gap:5px;min-height:62px;padding:9px 6px;border-radius:14px;background:var(--paper,#FFFCF8);border:1px solid color-mix(in srgb,var(--sage,#66704F) 30%,transparent);box-shadow:0 3px 10px -6px rgba(60,70,40,.45);color:var(--ink,#2F2924)!important;font:600 .78rem/1.18 var(--body,system-ui);text-align:center;white-space:normal;text-decoration:none;-webkit-tap-highlight-color:transparent}html header.top nav[aria-label] a::after{content:none!important}html header.top nav[aria-label] a.pa-dup{display:none!important}html header.top nav[aria-label] a .pa-ni{display:block;width:22px;height:22px;fill:none;stroke:var(--sage,#66704F);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}html header.top nav[aria-label] a[aria-current="page"]{background:var(--sage,#66704F);border-color:var(--sage,#66704F);color:var(--paper,#FFFCF8)!important;box-shadow:0 4px 12px -6px rgba(60,70,40,.6)}html header.top nav[aria-label] a[aria-current="page"] .pa-ni{stroke:var(--paper,#FFFCF8)}html header.top nav[aria-label] a:active{transform:scale(.97)}}/* компьютер — как на сайте Ирины (решение 09.10.2026): на широком экране одна строка «логотип · меню · поиск · кнопка», пункты простым текстом, текущий — тёмным и жирным; на узком ноутбуке (1101–1359 px) меню переносится отдельной строкой под логотип, без переносов внутри пунктов */@media (min-width:1101px){html header.top .page{flex-wrap:wrap;row-gap:0;column-gap:14px}html header.top .mark{flex:none}html header.top .mark b,html header.top .mark small{white-space:nowrap}html header.top .page>.ss-btn{margin-left:auto}html header.top nav[aria-label]{order:3;flex:1 0 100%;display:flex!important;flex-wrap:nowrap;justify-content:center;gap:4px;overflow:visible;margin:8px 0 -2px;padding:6px 0 0;border-top:1px solid color-mix(in srgb,var(--sage,#66704F) 22%,transparent);font-size:.92rem}html header.top nav[aria-label] a{white-space:nowrap;padding:6px 10px;color:var(--muted,#6B635A);font-weight:500;text-decoration:none}html header.top nav[aria-label] a:hover{color:var(--ink,#2F2924)}html header.top nav[aria-label] a[aria-current="page"]{color:var(--ink,#2F2924)!important;font-weight:700}}@media (min-width:1360px){html header.top .page{flex-wrap:nowrap;max-width:1340px}html header.top nav[aria-label]{order:0;flex:0 1 auto;margin:0 auto;padding:0;border-top:0;gap:2px}html header.top nav[aria-label] a{padding:6px 9px}html header.top .page>.ss-btn{margin-left:0}html header.top .page>.ss-btn span{display:none}}/* кнопки сайта — прямоугольные с закруглением, как плитки меню (решение Ирины 08.10.2026); значки-метки (образец, теги, «?») остаются круглыми */:is(.navcta,.btn,.shr-btn,.pl-act a,.pl-act button,.qa,.more,.listbar button,.leaflet-popup-content button,.calmenu a,.calmenu button,.go-free,.find,.confirm,.monthics,.addb,.mbtn,.example,.viewsw,#langbar.langbar,.pa-go,.pa-x,.pa-foot){border-radius:12px!important}:is(.viewsw button,.seg button,.chips button,#langbar.langbar a,.cal-nav button){border-radius:9px!important}</style><script src="/assets/pwa-app.js" defer></script><!--pwa--><!--i18n--><link rel="alternate" hreflang="ru" href="https://svoiludi.ch/instrumenty/zhurnal-perederzhki/"><link rel="alternate" hreflang="uk" href="https://svoiludi.ch/uk/instrumenty/zhurnal-perederzhki/"><script>(function(){try{if(localStorage.getItem('svoiludiLang')==='uk'&&!/[?&]lang=ru/.test(location.search))location.replace('/uk/instrumenty/zhurnal-perederzhki/'+location.search+location.hash);}catch(e){}})();</script><!--i18n--></head>
+<body>
+<header class="top">
+  <div class="page">
+    <a class="mark" href="../../" aria-label="Свои люди в Швейцарии — в начало">
+      <span class="mono av"><svg aria-hidden="true" viewBox="0 0 100 100"><circle cx="50" cy="50" r="46" fill="#FFFCF8" stroke="#4F5E3E" stroke-width="3"/><g transform="rotate(0.0 50 50)"><path d="M50 47 C42 41 40.5 33 44 31 C47 29.5 53 29.5 56 31 C59.5 33 58 41 50 47Z" fill="#E3E8D6" stroke="#5E6B48" stroke-width="2"/><circle cx="50" cy="24" r="6.2" fill="#5E6B48"/></g><g transform="rotate(60.0 50 50)"><path d="M50 47 C42 41 40.5 33 44 31 C47 29.5 53 29.5 56 31 C59.5 33 58 41 50 47Z" fill="#E3E8D6" stroke="#5E6B48" stroke-width="2"/><circle cx="50" cy="24" r="6.2" fill="#5E6B48"/></g><g transform="rotate(120.0 50 50)"><path d="M50 47 C42 41 40.5 33 44 31 C47 29.5 53 29.5 56 31 C59.5 33 58 41 50 47Z" fill="#E3E8D6" stroke="#5E6B48" stroke-width="2"/><circle cx="50" cy="24" r="6.2" fill="#5E6B48"/></g><g transform="rotate(180.0 50 50)"><path d="M50 47 C42 41 40.5 33 44 31 C47 29.5 53 29.5 56 31 C59.5 33 58 41 50 47Z" fill="#E3E8D6" stroke="#5E6B48" stroke-width="2"/><circle cx="50" cy="24" r="6.2" fill="#5E6B48"/></g><g transform="rotate(240.0 50 50)"><path d="M50 47 C42 41 40.5 33 44 31 C47 29.5 53 29.5 56 31 C59.5 33 58 41 50 47Z" fill="#E3E8D6" stroke="#5E6B48" stroke-width="2"/><circle cx="50" cy="24" r="6.2" fill="#5E6B48"/></g><g transform="rotate(300.0 50 50)"><path d="M50 47 C42 41 40.5 33 44 31 C47 29.5 53 29.5 56 31 C59.5 33 58 41 50 47Z" fill="#E3E8D6" stroke="#5E6B48" stroke-width="2"/><circle cx="50" cy="24" r="6.2" fill="#5E6B48"/></g><circle cx="50" cy="50" r="7" fill="#B98324"/></svg></span>
+      <span><b>Свои люди</b><small>в Швейцарии</small></span>
+    </a>
+    <nav aria-label="Разделы">
+      <a href="../../">Специалисты</a>
+      <a href="../../shveycariya/">Как устроена Швейцария</a>
+      <a href="../../instrumenty/" aria-current="page">Полезные инструменты</a>
+      <a href="../../events/">События и курсы</a>
+      <a href="../../novosti/">Что нового</a>
+      <a href="../../dlya-specialistov/">Для специалистов</a>
+    </nav>
+    <a class="navcta" href="../../join/">Подать заявку</a>
+  </div>
+</header>
+
+<div class="wrap">
+  <header>
+    <p style="margin:0 0 14px"><a class="jump" href="https://svoiludi.ch/instrumenty/">← Все полезные инструменты · Свои люди в Швейцарии</a></p>
+    <div class="eyebrow">Животные · своё дело</div>
+    <h1>Журнал передержки животных: кто у тебя по дням, сколько в сутки, уход и хозяева</h1>
+    <p class="lead">Для тех, кто берёт собак и кошек на передержку, приходит кормить их к хозяевам или гуляет с собаками. Впиши животных и даты — журнал сам покажет, кто у тебя в какой день и сколько животных в сутки, посчитает заработок и соберёт PDF: список животных с номерами чипов, уход по дням и список хозяев. Такие записи пригодятся тебе, хозяевам и при проверке ветеринарной службы кантона.</p>
+    <div class="privnote"><b>Твои данные только у тебя.</b> Журнал хранится только в твоём браузере на этом устройстве. Регистрация не нужна. Раз в месяц сохраняй резервную копию — кнопка внизу страницы.</div>
+    <div data-fan="zhurnal-perederzhki"></div>
+  </header>
+
+  <div class="setup">
+    <div class="fl"><span class="lb">Кантон<button type="button" class="qh" data-help="canton" aria-label="Подсказка: кантон" aria-expanded="false">?</button></span><select id="canton"></select></div>
+    <div class="fl"><span class="lb">Язык PDF<button type="button" class="qh" data-help="lang" aria-label="Подсказка: язык PDF" aria-expanded="false">?</button></span><select id="lang"><option value="auto">Язык кантона</option><option value="site">На языке сайта · русский</option><option value="de">Deutsch · немецкий</option><option value="fr">Français · французский</option><option value="it">Italiano · итальянский</option></select></div>
+    <div class="fl"><span class="lb">Моё имя или название для PDF</span><input type="text" id="name" placeholder="Anna Petrenko · Tierbetreuung"></div>
+    <div class="fl"><span class="lb">Мои животные дома<button type="button" class="qh" data-help="own" aria-label="Подсказка: свои животные" aria-expanded="false">?</button></span><input type="number" min="0" max="20" inputmode="numeric" id="own" placeholder="0"></div>
+    <div class="fl"><span class="lb">Мои цены, CHF<button type="button" class="qh" data-help="price" aria-label="Подсказка: цены" aria-expanded="false">?</button></span>
+      <div class="g3"><input type="text" inputmode="decimal" id="pHome" placeholder="сутки" aria-label="Цена за сутки у меня дома"><input type="text" inputmode="decimal" id="pVisit" placeholder="визит" aria-label="Цена за визит к хозяину"><input type="text" inputmode="decimal" id="pWalk" placeholder="прогулка" aria-label="Цена за прогулку"></div></div>
+    <div class="fl"><span class="lb">Календарь<button type="button" class="qh" data-help="hol" aria-label="Подсказка: праздники и каникулы" aria-expanded="false">?</button></span><label class="tog"><input type="checkbox" id="showHol"> Праздники кантона</label><label class="tog"><input type="checkbox" id="showSch"> Школьные каникулы</label></div>
+    <div class="fl"><span class="lb">Печать</span><label class="tog"><input type="checkbox" id="bw"> Без цвета, для дешёвой печати</label></div>
+  </div>
+
+  <div class="exbar" id="exbar" hidden><span>Это пример. Так будет выглядеть твой журнал.</span><button type="button" class="btn sm" id="exOff">Вернуться к моим данным</button></div>
+
+  <section class="sec" id="petsSec"><h2>Животные и хозяева<button type="button" class="qh" data-help="pets" aria-label="Подсказка: животные и хозяева" aria-expanded="false">?</button></h2>
+    <p class="hint">Впиши каждое животное один раз — оно сохранится для всех месяцев. Нажми на животное, чтобы открыть или поменять данные.</p>
+    <div id="pets" class="pets"></div>
+    <div class="acts"><button type="button" class="btn free sm" id="addPet">+ Добавить животное</button></div>
+  </section>
+
+  <section class="sec" id="staysSec"><h2>Кто когда у тебя<button type="button" class="qh" data-help="stays" aria-label="Подсказка: даты передержки" aria-expanded="false">?</button></h2>
+    <p class="hint">Для каждой передержки, серии визитов или прогулок — животное, услуга и даты. Здесь видно всё, что приходится на выбранный месяц.</p>
+    <div id="stays" class="stays"></div>
+    <div class="acts"><button type="button" class="btn free sm" id="addStay">+ Добавить даты</button><button type="button" class="btn ghost sm" id="allStays" aria-pressed="false">Показать все даты</button></div>
+  </section>
+
+  <section class="sec" id="calSec">
+    <div class="calhead"><button type="button" class="btn ghost sm" id="prev" aria-label="Прошлый месяц">←</button><h2 id="monTitle"></h2><button type="button" class="btn ghost sm" id="next" aria-label="Следующий месяц">→</button></div>
+    <div id="monthInfo" class="minfo"></div>
+    <div class="hinfo" id="holInfo" hidden></div>
+    <div class="cal" id="cal" role="grid" aria-label="Календарь месяца"></div>
+    <p class="hint calleg"><span class="lg hol"></span> праздник кантона <span class="lg sch"></span> школьные каникулы <span class="lg cnt">3</span> животных в сутки <span class="lg cnt over">6</span> больше пяти<button type="button" class="qh" data-help="five" aria-label="Подсказка: больше пяти животных" aria-expanded="false">?</button></p>
+    <div id="day" class="daybox" hidden></div>
+    <div id="warn"></div>
+    <div id="tot" class="tot"></div>
+  </section>
+
+  <div class="sheetbox">
+    <h2>PDF за месяц</h2>
+    <p class="hint">Три части: животные с номерами чипов, уход по дням и хозяева. На языке сайта в конце ещё заработок и оплаты — для себя.</p>
+    <div class="acts"><button type="button" class="btn gold" id="pdf">Скачать PDF</button><button type="button" class="btn ghost sm" id="share" hidden>Отправить</button><button type="button" class="btn ghost sm" id="exOn">Посмотреть на примере</button></div>
+    <div class="status" id="status" role="status"></div>
+    <div class="sheets" id="sheet" aria-label="Предпросмотр PDF"></div>
+  </div>
+
+  <p class="imp"><b>Важно.</b> Журнал помогает вести учёт, но не заменяет разрешений и правил кантона. Цифры и даты ориентировочные: уточняй и перепроверяй их сама, автор не отвечает за их точность. Это образец для примера и личного использования, а не официальный документ. Правила для передержки — в теме «<a href="../../shveycariya/perederzhka/">Передержка и выгул животных</a>».</p>
+
+  <section class="guide" aria-labelledby="g-h"><h2 id="g-h">Как вести журнал</h2>
+    <ul>
+      <li><b>Перед передержкой</b> отправь хозяину ссылку на «<a href="../kartochka-pitomca/">Карточку питомца для передержки и ветеринара</a>»: он сам впишет чип, прививки, корм, ветеринара и свои телефоны. Перенеси главное сюда.</li>
+      <li><b>Каждый день</b> открывай календарь и отмечай, что сделала: корм, прогулка или лоток, лекарство. Хватает минуты.</li>
+      <li><b>В конце месяца</b> скачай PDF и сохрани резервную копию. Счёт хозяину с QR-кодом сделаешь в «<a href="../schet-qr/">Счёт клиенту с QR-квитанцией для оплаты</a>», доходы и расходы для налоговой — в «<a href="../dohody-rashody/">Книга доходов и расходов для своего дела</a>».</li>
+    </ul>
+  </section>
+
+  <div class="share-slot" data-url="https://svoiludi.ch/instrumenty/zhurnal-perederzhki/" data-lead="Перешли тем, кто присматривает за животными. В ссылке нет твоих данных." data-text="Привет! Тут бесплатный журнал передержки: кто у тебя по дням, сколько животных в сутки, уход и хозяева, PDF на языке кантона. https://svoiludi.ch/instrumenty/zhurnal-perederzhki/"></div>
+  <p class="credit"><span>Свои люди в Швейцарии · svoiludi.ch</span><a href="https://svoiludi.ch/privacy/">Политика конфиденциальности</a></p>
+</div>
+
+<script src="/assets/lib/jspdf.umd.min.js"></script>
+<script src="/assets/shema.js"></script>
+<script>
+window.HELP = {
+  canton: '<p>Кантон, где ты работаешь. По нему календарь показывает праздники и школьные каникулы, а PDF по умолчанию выходит на языке кантона.</p>',
+  lang: '<p><b>Язык кантона</b> — для хозяев и для проверки ветеринарной службы: в Женеве, Во, Невшателе, Юре, Фрибуре и Вале по-французски, в Тичино по-итальянски, в остальных кантонах по-немецки. <b>На языке сайта</b> — для себя: в конце ещё заработок и оплаты.</p><p>То, что ты вписываешь сама (клички, имена, заметки), попадает в PDF как есть.</p>',
+  own: '<p>Свои животные обычно тоже считаются, если живут там же, где чужие. Так объясняет федеральное ветеринарное ведомство (BLV). Впиши, сколько их, — журнал прибавит их к счёту в дни, когда у тебя дома есть чужие животные.</p>',
+  price: '<p>Твои обычные цены в франках: за сутки у тебя дома, за визит к хозяину и за прогулку. Они подставятся сами, когда добавляешь даты. Для отдельного животного цену можно поменять в его карточке или в датах.</p>',
+  hol: '<p>Праздники кантона выделены розовым. Нажми на праздник в списке над календарём — узнаешь, что это за день. Школьные каникулы отмечены зелёной полосой: в эти недели передержку обычно ищут чаще. В твоей общине даты каникул могут отличаться.</p>',
+  pets: '<p>Кличка, вид, номер чипа и хозяин с телефоном и адресом — это нужно для учёта, а телефон всегда под рукой, если что-то случилось.</p><p>Проще всего заранее отправить хозяину ссылку на «<a href="../kartochka-pitomca/">Карточку питомца для передержки и ветеринара</a>»: он сам впишет чип, прививки, корм, ветеринара и свои номера.</p>',
+  chip: '<p>Номер микрочипа — 15 цифр, он есть в паспорте животного. У собак его записывают в журнал обязательно, у кошек — если есть.</p>',
+  stays: '<p><b>У меня дома</b> — животное живёт у тебя, считаются сутки: с 10 по 12 октября — 2 суток.</p><p><b>Визиты к хозяину</b> и <b>выгул</b> — считаются дни: с 10 по 12 октября — 3 дня, по одному визиту или прогулке в день.</p><p>В календаре животное видно во все дни с первого по последний.</p>',
+  five: '<p>В кружке — сколько животных у тебя в этот день, вместе с твоими, если они живут там же. Считаются все животные за сутки: и одновременно, и по очереди.</p><p>Если животных больше пяти в сутки, по правилам о защите животных нужно разрешение ветеринарной службы кантона. Твои животные обычно тоже считаются, если живут там же, где чужие. Подробно — в теме «<a href="../../shveycariya/perederzhka/">Передержка и выгул животных</a>».</p>',
+  care: '<p>Отмечай каждый день, что сделала: корм, прогулка или лоток, лекарство. Так получается запись ухода по дням — её ведут все, кто присматривает за животными как за работой.</p>',
+  paid: '<p>Отметь, когда хозяин заплатил. В итогах месяца видно, сколько ещё ждёт оплаты.</p>'
+};
+const KEY = 'zhurnalPerederzhki.v1';
+const iso = (y, m, d) => y + '-' + String(m + 1).padStart(2, '0') + '-' + String(d).padStart(2, '0');
+function easter(y){ const a=y%19,b=Math.floor(y/100),c=y%100,d=Math.floor(b/4),e=b%4,f=Math.floor((b+8)/25),g=Math.floor((b-f+1)/3),h=(19*a+b-d-g+15)%30,i=Math.floor(c/4),k=c%4,l=(32+2*e+2*i-h-k)%7,m=Math.floor((a+11*h+22*l)/451),mo=Math.floor((h+l-7*m+114)/31),da=((h+l-7*m+114)%31)+1; return new Date(y,mo-1,da); }
+const CANTONS = {ZH:'Цюрих',BE:'Берн',LU:'Люцерн',UR:'Ури',SZ:'Швиц',OW:'Обвальден',NW:'Нидвальден',GL:'Гларус',ZG:'Цуг',FR:'Фрибур',SO:'Золотурн',BS:'Базель-Штадт',BL:'Базель-Ланд',SH:'Шаффхаузен',AR:'Аппенцелль-Ауссерроден',AI:'Аппенцелль-Иннерроден',SG:'Санкт-Галлен',GR:'Граубюнден',AG:'Аргау',TG:'Тургау',TI:'Тичино',VD:'Во',VS:'Вале',NE:'Невшатель',GE:'Женева',JU:'Юра'};
+/* праздники по кантонам — Федеральное ведомство юстиции (BJ), «Kantonale Feiertage»; * = только в части общин */
+const CH = {
+  ZH:'NY BE KF OM AR AU PM WN ST', BE:'NY BE KF OM AU PM WN ST', LU:'NY BE KF OM AU PM FL MH AH ME WN ST',
+  UR:'NY DK JO KF OM AU PM FL MH AH ME WN ST', SZ:'NY DK JO KF OM AU PM FL MH AH ME WN ST', OW:'NY KF AU FL MH BK AH ME WN',
+  NW:'NY JO KF AU FL MH AH ME WN', GL:'NY KF OM NF AU PM AH WN ST', ZG:'NY KF AU FL MH AH ME WN', FR:'NY KF AU FL* MH* AH* ME* WN',
+  SO:'NY JO* KF AR AU FL* MH* AH* WN', BS:'NY KF OM AR AU PM WN ST', BL:'NY KF OM AR AU PM WN ST', SH:'NY KF OM AR AU PM WN ST',
+  AR:'NY KF OM AU PM WN ST', AI:'NY KF OM AU PM FL MH MT* AH ME WN ST', SG:'NY KF OM AU PM AH WN ST', GR:'NY OM AU PM WN ST',
+  AG:'NY BE KF OM AR AU PM FL MH AH ME WN ST', TG:'NY BE KF OM AR AU PM WN ST', TI:'NY DK JO OM AR AU PM FL PP MH AH ME WN ST',
+  VD:'NY BE KF OM AU PM LJ WN', VS:'NY JO AU FL MH AH ME WN', NE:'NY IR KF AU FL* WN AR', GE:'NY KF OM AU PM JG WN RR',
+  JU:'NY BE KF OM AR AU PM FL PJ MH AH WN'
+};
+const HNAME = {NY:'Новый год',BE:'Берхтольдов день',DK:'Богоявление',JO:'День святого Иосифа',KF:'Страстная пятница',OM:'Пасхальный понедельник',AR:'День труда',AU:'Вознесение',PM:'Духов понедельник',FL:'Праздник Тела Христова',PP:'Петра и Павла',MH:'Успение Богородицы',BK:'День святого Николая из Флюэ',MT:'День святого Маврикия',AH:'День всех святых',ME:'Непорочное зачатие',WN:'Рождество',ST:'День святого Стефана',NF:'Нефельсская битва',LJ:'Понедельник после Дня покаяния',JG:'Женевский пост',RR:'Восстановление республики',IR:'День республики',PJ:'Годовщина плебисцита Юры',BF:'День Швейцарии'};
+/* короткие подсказки к праздникам: что за день, аналог у нас, как празднуют в Швейцарии */
+const HINFO = {
+  NY:'Первый день года, как и у нас. Но главный зимний праздник здесь Рождество, а Новый год встречают с друзьями. В полночь звонят колокола и запускают фейерверки, в Цюрихе большой салют над озером.',
+  BE:'Второй выходной после Нового года. У нас такого отдельного праздника нет. Это спокойный день для семьи и прогулок, кое-где проходят местные народные праздники.',
+  DK:'Праздник трёх королей, 6 января. Близок к нашему Крещению, которое православные отмечают 19 января. В Швейцарии в этот день едят пирог трёх королей: в один кусочек запечена фигурка, и кто её найдёт, становится королём дня.',
+  JO:'День святого Иосифа, покровителя семьи и ремесленников. У нас аналога-выходного нет. В католических кантонах это выходной, люди идут в церковь и проводят день с семьёй.',
+  KF:'Страстная пятница, день памяти распятия Христа перед Пасхой. У православных она тоже есть, но наша Пасха часто бывает в другие даты. В Швейцарии это тихий день: многие магазины закрыты, шумные мероприятия не проводят.',
+  OM:'Второй день Пасхи, у нас его называют Светлым понедельником. В Швейцарии дети ищут спрятанные шоколадные яйца, семьи гуляют. В Берне на площади бьются крашеными яйцами, как у нас в «битки».',
+  AR:'День труда, как наш Первомай. В Цюрихе и других городах проходят демонстрации профсоюзов. Выходной не во всех кантонах.',
+  AU:'Вознесение, 40-й день после Пасхи, всегда четверг. У православных тоже есть Вознесение, по своему календарю. Многие берут пятницу и уезжают на длинные выходные.',
+  PM:'Понедельник после Троицы (Пфингстен). У православных это Духов день, тоже на следующий день после Троицы. В Швейцарии это длинные выходные и время поездок.',
+  FL:'Праздник Тела Христова, католический праздник через 60 дней после Пасхи. У нас аналога нет. В католических кантонах проходят процессии с цветами, флагами и музыкой.',
+  PP:'День апостолов Петра и Павла, 29 июня. У православных он тоже есть, 12 июля. В кантоне Тичино это выходной.',
+  MH:'Успение Богородицы, 15 августа. У православных Успение отмечают 28 августа. В католических кантонах выходной, проходят службы и местные праздники.',
+  BK:'День брата Клауса, Николая из Флюэ, покровителя Швейцарии. У нас аналога нет. В Обвальдене в этот день идут паломничеством к его келье во Флюэли-Ранфте.',
+  MT:'День святого Маврикия, покровителя солдат. У нас аналога-выходного нет. Отмечают в части общин Аппенцелля-Иннерродена.',
+  AH:'День всех святых, 1 ноября. Близок к нашим поминальным дням. В католических кантонах ходят на кладбища и ставят свечи на могилы близких.',
+  ME:'Непорочное зачатие Девы Марии, 8 декабря, католический праздник. У православных похожий праздник 22 декабря, но он не выходной. В католических кантонах это выходной день.',
+  WN:'У православных Рождество празднуют 7 января. Здесь это главный семейный праздник: ёлку наряжают заранее, подарки дарят вечером 24 декабря после праздничного ужина, по всей стране работают рождественские рынки.',
+  ST:'Второй день Рождества. У нас аналога нет. Это день для семьи и гостей, многие едут в горы кататься.',
+  NF:'Нефельсская битва, первый четверг апреля. Кантон Гларус вспоминает победу 1388 года над Габсбургами. Люди идут процессией к месту битвы.',
+  LJ:'Понедельник после Дня благодарения, покаяния и молитвы, который вся Швейцария отмечает в третье воскресенье сентября. У нас аналога нет. В эти дни традиционно пекут сливовый пирог.',
+  JG:'Женевский пост, четверг после первого воскресенья сентября. Женева вспоминает трудные времена в своей истории. Традиционно едят сливовый пирог.',
+  RR:'Восстановление Женевской республики, 31 декабря. Память о том, как в 1813 году Женева вернула себе независимость.',
+  IR:'День республики Невшатель, 1 марта. Годовщина 1848 года, когда Невшатель перестал быть прусским княжеством и стал республикой.',
+  PJ:'Годовщина плебисцита 23 июня 1974 года, после которого появился кантон Юра. Это праздник независимости кантона.',
+  BF:'День Швейцарии, 1 августа, национальный праздник, как наш день независимости. Вечером зажигают костры и фейерверки, дети ходят с бумажными фонариками, на фермах устраивают праздничные завтраки.'
+};
+function holidays(y, canton){
+  const e = easter(y), dd = (dt,n) => { const x = new Date(dt); x.setDate(x.getDate()+n); return x; }, f = x => iso(x.getFullYear(), x.getMonth(), x.getDate());
+  const nthWd = (m, wd, n) => { const x = new Date(y, m, 1); while ((x.getDay()) !== wd) x.setDate(x.getDate()+1); x.setDate(x.getDate() + 7*(n-1)); return x; };
+  const D = {NY:iso(y,0,1), BE:iso(y,0,2), DK:iso(y,0,6), JO:iso(y,2,19), KF:f(dd(e,-2)), OM:f(dd(e,1)), AR:iso(y,4,1), AU:f(dd(e,39)), PM:f(dd(e,50)), FL:f(dd(e,60)),
+    PP:iso(y,5,29), MH:iso(y,7,15), BK:iso(y,8,25), MT:iso(y,8,22), AH:iso(y,10,1), ME:iso(y,11,8), WN:iso(y,11,25), ST:iso(y,11,26),
+    NF:f(nthWd(3,4,1)), LJ:f(dd(nthWd(8,0,3),1)), JG:f(dd(nthWd(8,0,1),4)), RR:iso(y,11,31), IR:iso(y,2,1), PJ:iso(y,5,23), BF:iso(y,7,1)};
+  const out = {}; out[D.BF] = {n: HNAME.BF, k: 'BF'};
+  for (const tok of (CH[canton] || CH.ZH).split(' ')){ const k = tok.replace('*',''), part = tok.endsWith('*'); out[D[k]] = {n: HNAME[k] + (part ? ' (в части общин)' : ''), part, k}; }
+  return out;
+}
+
+/* школьные каникулы города Цюрих: недели по правилу Stadt Zürich (спортивные 7–8, весенние 17–18, летние 29–33, осенние 41–42), рождественские 2 недели с понедельника недели 21 декабря */
+function isoMonday(y, w){ const j4 = new Date(y, 0, 4), m = new Date(j4); m.setDate(j4.getDate() - ((j4.getDay() + 6) % 7) + (w - 1) * 7); return m; }
+function zhSchool(y){
+  const out = [], add = (a, days, n) => { const e = new Date(a); e.setDate(e.getDate() + days); out.push([a, e, n]); };
+  add(isoMonday(y, 7), 13, 'Спортивные каникулы'); add(isoMonday(y, 17), 13, 'Весенние каникулы');
+  add(isoMonday(y, 29), 34, 'Летние каникулы'); add(isoMonday(y, 41), 13, 'Осенние каникулы');
+  [y - 1, y].forEach(yy => { const d = new Date(yy, 11, 21); d.setDate(d.getDate() - ((d.getDay() + 6) % 7)); add(d, 13, 'Рождественские каникулы'); });
+  return out;
+}
+/* школьные каникулы всех кантонов, 2026–2027 (часть дат до 2028): официальные планы кантонов, городов и общин, собраны 06.10.2026. Для кантонов, где даты назначает община, — главный город. Каникулы, которые начинаются в понедельник или заканчиваются в пятницу, показаны вместе с выходными. */
+const SCH = {"ZH":{"p":"город Цюрих","d":[["2025-12-20","2026-01-03","Рождественские каникулы"],["2026-02-07","2026-02-21","Спортивные каникулы"],["2026-04-18","2026-05-02","Весенние каникулы"],["2026-07-11","2026-08-15","Летние каникулы"],["2026-10-03","2026-10-17","Осенние каникулы"],["2026-12-19","2027-01-02","Рождественские каникулы"],["2027-02-13","2027-02-27","Спортивные каникулы"],["2027-04-24","2027-05-08","Весенние каникулы"],["2027-07-17","2027-08-21","Летние каникулы"],["2027-10-09","2027-10-23","Осенние каникулы"],["2027-12-18","2028-01-01","Рождественские каникулы"]]},"BE":{"p":"город Берн","d":[["2025-12-20","2026-01-04","Рождественские каникулы"],["2026-01-31","2026-02-08","Зимние каникулы"],["2026-04-02","2026-04-19","Весенние каникулы"],["2026-07-03","2026-08-09","Летние каникулы"],["2026-09-19","2026-10-11","Осенние каникулы"],["2026-12-24","2027-01-10","Рождественские каникулы"],["2027-02-06","2027-02-14","Зимние каникулы"],["2027-04-10","2027-04-25","Весенние каникулы"],["2027-07-02","2027-08-15","Летние каникулы"],["2027-09-25","2027-10-17","Осенние каникулы"],["2027-12-24","2028-01-09","Рождественские каникулы"]]},"LU":{"p":"город Люцерн","d":[["2025-12-20","2026-01-04","Рождественские каникулы"],["2026-02-07","2026-02-22","Карнавальные каникулы (Fasnacht)"],["2026-04-03","2026-04-19","Пасхальные каникулы"],["2026-07-04","2026-08-16","Летние каникулы"],["2026-09-26","2026-10-11","Осенние каникулы"],["2026-12-19","2027-01-03","Рождественские каникулы"],["2027-01-30","2027-02-14","Карнавальные каникулы (Fasnacht)"],["2027-03-26","2027-04-11","Пасхальные каникулы"],["2027-05-06","2027-05-07","Вознесение, свободные дни"],["2027-05-27","2027-05-28","Праздник Тела Христова, свободные дни"],["2027-07-03","2027-08-15","Летние каникулы"],["2027-09-25","2027-10-10","Осенние каникулы"],["2027-12-18","2028-01-02","Рождественские каникулы"]]},"UR":{"p":"Альтдорф","d":[["2025-12-20","2026-01-06","Рождественские каникулы"],["2026-02-28","2026-03-08","Спортивные каникулы"],["2026-05-02","2026-05-17","Весенние каникулы"],["2026-07-04","2026-08-16","Летние каникулы"],["2026-10-03","2026-10-18","Осенние каникулы"],["2026-12-05","2026-12-08","Непорочное зачатие, свободные дни"],["2026-12-24","2027-01-10","Рождественские каникулы"],["2027-02-04","2027-02-10","Карнавальные каникулы (Fasnacht)"],["2027-02-27","2027-03-07","Спортивные каникулы"],["2027-05-01","2027-05-17","Весенние каникулы"],["2027-05-27","2027-05-30","Праздник Тела Христова, свободные дни"],["2027-07-03","2027-08-15","Летние каникулы"],["2027-10-02","2027-10-17","Осенние каникулы"],["2027-12-24","2028-01-09","Рождественские каникулы"]]},"SZ":{"p":"община Швиц","d":[["2026-02-21","2026-03-01","Спортивные каникулы"],["2026-04-25","2026-05-10","Весенние каникулы"],["2026-09-26","2026-10-11","Осенние каникулы"],["2026-12-19","2027-01-06","Рождественские каникулы"],["2027-02-27","2027-03-07","Спортивные каникулы"],["2027-05-01","2027-05-16","Весенние каникулы"]],"m":{"2027":"летние, осенние и рождественские каникулы 2027 года"}},"OW":{"p":"весь кантон Обвальден","d":[["2025-12-24","2026-01-06","Рождественские каникулы"],["2026-02-07","2026-02-22","Карнавальные каникулы (Fasnacht)"],["2026-04-03","2026-04-19","Пасхальные каникулы"],["2026-07-04","2026-08-16","Летние каникулы"],["2026-09-25","2026-10-11","Осенние каникулы"],["2026-12-24","2027-01-06","Рождественские каникулы"],["2027-01-30","2027-02-14","Карнавальные каникулы (Fasnacht)"],["2027-03-26","2027-04-11","Пасхальные каникулы"],["2027-05-07","2027-05-07","Вознесение, свободные дни"],["2027-05-28","2027-05-28","Праздник Тела Христова, свободные дни"],["2027-07-03","2027-08-15","Летние каникулы"],["2027-09-25","2027-10-10","Осенние каникулы"],["2027-12-24","2028-01-06","Рождественские каникулы"]]},"NW":{"p":"весь кантон Нидвальден","d":[["2026-02-07","2026-02-22","Карнавальные каникулы (Fasnacht)"],["2026-04-03","2026-04-19","Пасхальные каникулы"],["2026-07-04","2026-08-16","Летние каникулы"],["2026-09-26","2026-10-11","Осенние каникулы"],["2026-12-19","2027-01-03","Рождественские каникулы"],["2027-01-30","2027-02-14","Карнавальные каникулы (Fasnacht)"],["2027-03-26","2027-04-11","Пасхальные каникулы"],["2027-05-06","2027-05-09","Вознесение, свободные дни"],["2027-05-27","2027-05-30","Праздник Тела Христова, свободные дни"],["2027-07-03","2027-08-15","Летние каникулы"],["2027-09-25","2027-10-10","Осенние каникулы"],["2027-12-18","2028-01-02","Рождественские каникулы"]],"m":{"2026":"рождественские каникулы в начале 2026 года"}},"GL":{"p":"весь кантон Гларус","d":[["2025-12-20","2026-01-04","Рождественские каникулы"],["2026-01-24","2026-02-01","Спортивные каникулы"],["2026-04-03","2026-04-19","Весенние каникулы"],["2026-06-27","2026-08-09","Летние каникулы"],["2026-10-03","2026-10-18","Осенние каникулы"],["2026-12-24","2027-01-10","Рождественские каникулы"],["2027-01-30","2027-02-07","Спортивные каникулы"],["2027-04-01","2027-04-18","Весенние каникулы"],["2027-07-03","2027-08-15","Летние каникулы"],["2027-10-09","2027-10-24","Осенние каникулы"],["2027-12-24","2028-01-09","Рождественские каникулы"]]},"ZG":{"p":"весь кантон Цуг","d":[["2025-12-20","2026-01-04","Рождественские каникулы"],["2026-01-31","2026-02-15","Спортивные каникулы"],["2026-04-11","2026-04-26","Весенние каникулы"],["2026-05-14","2026-05-17","Вознесение, свободные дни"],["2026-07-04","2026-08-16","Летние каникулы"],["2026-10-03","2026-10-18","Осенние каникулы"],["2026-12-19","2027-01-03","Рождественские каникулы"],["2027-02-06","2027-02-21","Спортивные каникулы"],["2027-04-17","2027-05-02","Весенние каникулы"],["2027-05-06","2027-05-09","Вознесение, свободные дни"],["2027-07-03","2027-08-15","Летние каникулы"],["2027-10-02","2027-10-17","Осенние каникулы"],["2027-12-23","2028-01-05","Рождественские каникулы"]]},"FR":{"p":"кантон Фрибур (кроме района Муртен и Керцерса)","d":[["2026-07-11","2026-08-26","Летние каникулы"],["2026-10-10","2026-10-25","Осенние каникулы"],["2026-12-19","2027-01-03","Рождественские каникулы"],["2027-02-06","2027-02-14","Карнавальные каникулы (Fasnacht)"],["2027-03-26","2027-04-11","Пасхальные каникулы"],["2027-07-10","2027-08-25","Летние каникулы"],["2027-10-16","2027-10-31","Осенние каникулы"],["2027-12-18","2028-01-02","Рождественские каникулы"]],"m":{"2026":"рождественские, карнавальные и пасхальные каникулы до лета 2026 года"}},"SO":{"p":"город Золотурн","d":[["2025-12-20","2026-01-04","Рождественские каникулы"],["2026-01-31","2026-02-15","Зимние каникулы"],["2026-04-04","2026-04-19","Весенние каникулы"],["2026-07-04","2026-08-09","Летние каникулы"],["2026-09-26","2026-10-18","Осенние каникулы"],["2026-12-19","2027-01-03","Рождественские каникулы"],["2027-02-06","2027-02-21","Зимние каникулы"],["2027-04-10","2027-04-25","Весенние каникулы"],["2027-07-10","2027-08-15","Летние каникулы"],["2027-10-02","2027-10-24","Осенние каникулы"],["2027-12-25","2028-01-09","Рождественские каникулы"]]},"BS":{"p":"весь кантон Базель-Штадт","d":[["2025-12-20","2026-01-04","Рождественские каникулы"],["2026-02-14","2026-03-01","Карнавальные каникулы (Fasnacht)"],["2026-03-28","2026-04-12","Весенние каникулы"],["2026-06-27","2026-08-09","Летние каникулы"],["2026-09-26","2026-10-11","Осенние каникулы"],["2026-12-19","2027-01-03","Рождественские каникулы"],["2027-02-06","2027-02-21","Карнавальные каникулы (Fasnacht)"],["2027-03-20","2027-04-04","Весенние каникулы"],["2027-07-03","2027-08-15","Летние каникулы"],["2027-10-02","2027-10-17","Осенние каникулы"],["2027-12-18","2028-01-02","Рождественские каникулы"]]},"BL":{"p":"весь кантон Базель-Ланд","d":[["2025-12-20","2026-01-04","Рождественские каникулы"],["2026-02-14","2026-03-01","Карнавальные каникулы (Fasnacht)"],["2026-03-28","2026-04-12","Весенние каникулы"],["2026-06-27","2026-08-09","Летние каникулы"],["2026-09-26","2026-10-11","Осенние каникулы"],["2026-12-19","2027-01-03","Рождественские каникулы"],["2027-02-06","2027-02-21","Карнавальные каникулы (Fasnacht)"],["2027-03-20","2027-04-04","Весенние каникулы"],["2027-07-03","2027-08-15","Летние каникулы"],["2027-10-02","2027-10-17","Осенние каникулы"],["2027-12-18","2028-01-02","Рождественские каникулы"]]},"SH":{"p":"весь кантон Шаффхаузен","d":[["2026-09-26","2026-10-18","Осенние каникулы"],["2026-12-24","2027-01-03","Рождественские каникулы"],["2027-01-30","2027-02-14","Спортивные каникулы"],["2027-04-17","2027-05-02","Весенние каникулы"],["2027-07-10","2027-08-15","Летние каникулы"],["2027-10-02","2027-10-24","Осенние каникулы"],["2027-12-24","2028-01-02","Рождественские каникулы"],["2028-01-29","2028-02-13","Спортивные каникулы"]],"m":{"2026":"каникулы первой половины 2026 года"}},"AR":{"p":"весь кантон Аппенцелль-Ауссерроден, без спортивных каникул (их назначает община)","d":[["2025-12-20","2026-01-04","Рождественские каникулы"],["2026-04-03","2026-04-19","Весенние каникулы"],["2026-07-04","2026-08-09","Летние каникулы"],["2026-10-03","2026-10-18","Осенние каникулы"],["2026-12-19","2027-01-03","Рождественские каникулы"],["2027-04-10","2027-04-25","Весенние каникулы"],["2027-07-10","2027-08-15","Летние каникулы"],["2027-10-09","2027-10-24","Осенние каникулы"],["2027-12-18","2028-01-02","Рождественские каникулы"]],"m":{"2026":"спортивные каникулы (их назначает каждая община)","2027":"спортивные каникулы (их назначает каждая община)"}},"AI":{"p":"Аппенцелль (внутренняя часть кантона)","d":[["2025-12-20","2026-01-04","Рождественские каникулы"],["2026-02-13","2026-02-22","Спортивные каникулы"],["2026-04-03","2026-04-19","Весенние каникулы"],["2026-07-04","2026-08-16","Летние каникулы"],["2026-10-03","2026-10-18","Осенние каникулы"],["2026-12-19","2027-01-03","Рождественские каникулы"],["2027-02-05","2027-02-14","Спортивные каникулы"],["2027-04-10","2027-04-25","Весенние каникулы"],["2027-07-03","2027-08-15","Летние каникулы"],["2027-10-02","2027-10-17","Осенние каникулы"],["2027-12-18","2028-01-02","Рождественские каникулы"],["2028-02-25","2028-03-05","Спортивные каникулы"],["2028-04-08","2028-04-23","Весенние каникулы"]]},"SG":{"p":"город Санкт-Галлен","d":[["2026-04-05","2026-04-19","Весенние каникулы"],["2026-07-05","2026-08-09","Летние каникулы"],["2026-09-27","2026-10-18","Осенние каникулы"],["2026-12-20","2027-01-03","Рождественские каникулы"],["2027-01-31","2027-02-07","Зимние каникулы"],["2027-04-11","2027-04-25","Весенние каникулы"],["2027-07-11","2027-08-15","Летние каникулы"],["2027-10-03","2027-10-24","Осенние каникулы"],["2027-12-19","2028-01-02","Рождественские каникулы"],["2028-01-30","2028-02-06","Зимние каникулы"],["2028-04-09","2028-04-23","Весенние каникулы"],["2028-07-09","2028-08-13","Летние каникулы"]],"m":{"2026":"зимние каникулы 2026 года"}},"GR":{"p":"Кур","d":[["2026-10-10","2026-10-25","Осенние каникулы"],["2026-12-23","2027-01-05","Рождественские каникулы"],["2027-02-27","2027-03-07","Спортивные каникулы"],["2027-04-17","2027-05-02","Весенние каникулы"],["2027-05-06","2027-05-07","Вознесение, свободные дни"],["2027-07-03","2027-08-15","Летние каникулы"],["2027-10-09","2027-10-24","Осенние каникулы"],["2027-12-23","2028-01-05","Рождественские каникулы"],["2028-02-26","2028-03-05","Спортивные каникулы"],["2028-04-15","2028-04-30","Весенние каникулы"]],"m":{"2026":"каникулы первой половины 2026 года"}},"AG":{"p":"Аарау","d":[["2026-09-26","2026-10-11","Осенние каникулы"],["2026-12-19","2027-01-03","Рождественские каникулы"],["2027-01-30","2027-02-14","Спортивные каникулы"],["2027-04-10","2027-04-25","Весенние каникулы"],["2027-07-03","2027-08-08","Летние каникулы"],["2027-10-02","2027-10-17","Осенние каникулы"],["2027-12-24","2028-01-09","Рождественские каникулы"],["2028-01-29","2028-02-13","Спортивные каникулы"],["2028-04-08","2028-04-23","Весенние каникулы"],["2028-07-08","2028-08-13","Летние каникулы"]],"m":{"2026":"каникулы первой половины 2026 года"}},"TG":{"p":"весь кантон Тургау","d":[["2025-12-20","2026-01-04","Рождественские каникулы"],["2026-01-24","2026-02-01","Спортивные каникулы"],["2026-04-03","2026-04-19","Весенние каникулы"],["2026-05-14","2026-05-25","Каникулы на Троицу"],["2026-07-04","2026-08-09","Летние каникулы"],["2026-10-03","2026-10-18","Осенние каникулы"],["2026-12-19","2027-01-03","Рождественские каникулы"],["2027-01-31","2027-02-07","Спортивные каникулы"],["2027-03-26","2027-04-11","Весенние каникулы"],["2027-05-06","2027-05-17","Каникулы на Троицу"],["2027-07-10","2027-08-15","Летние каникулы"],["2027-10-09","2027-10-24","Осенние каникулы"],["2027-12-18","2028-01-02","Рождественские каникулы"],["2028-01-29","2028-02-06","Спортивные каникулы"]]},"TI":{"p":"весь кантон Тичино","d":[["2025-12-24","2026-01-06","Рождественские каникулы"],["2026-02-14","2026-02-22","Карнавальные каникулы (Fasnacht)"],["2026-04-03","2026-04-12","Пасхальные каникулы"],["2026-05-14","2026-05-15","Вознесение, свободные дни"],["2026-06-18","2026-08-30","Летние каникулы"],["2026-10-31","2026-11-08","Осенние каникулы"],["2026-12-24","2027-01-06","Рождественские каникулы"],["2027-02-06","2027-02-14","Карнавальные каникулы (Fasnacht)"],["2027-03-26","2027-04-04","Пасхальные каникулы"],["2027-05-06","2027-05-07","Вознесение, свободные дни"],["2027-06-17","2027-08-29","Летние каникулы"],["2027-10-30","2027-11-07","Осенние каникулы"],["2027-12-24","2028-01-09","Рождественские каникулы"]]},"VD":{"p":"весь кантон Во","d":[["2025-12-20","2026-01-04","Рождественские каникулы"],["2026-02-14","2026-02-22","Спортивные каникулы"],["2026-04-03","2026-04-19","Пасхальные каникулы"],["2026-05-14","2026-05-15","Вознесение, свободные дни"],["2026-06-27","2026-08-16","Летние каникулы"],["2026-10-10","2026-10-25","Осенние каникулы"],["2026-12-24","2027-01-10","Рождественские каникулы"],["2027-02-06","2027-02-14","Спортивные каникулы"],["2027-03-26","2027-04-11","Пасхальные каникулы"],["2027-05-06","2027-05-07","Вознесение, свободные дни"],["2027-07-03","2027-08-22","Летние каникулы"],["2027-10-09","2027-10-24","Осенние каникулы"],["2027-12-24","2028-01-09","Рождественские каникулы"]]},"VS":{"p":"франкоязычный Вале (Сьон)","d":[["2025-12-20","2026-01-04","Рождественские каникулы"],["2026-02-14","2026-02-22","Карнавальные каникулы (Fasnacht)"],["2026-04-03","2026-04-12","Пасхальные каникулы"],["2026-05-13","2026-05-17","Вознесение, свободные дни"],["2026-06-27","2026-08-19","Летние каникулы"],["2026-10-14","2026-10-25","Осенние каникулы"],["2026-12-05","2026-12-08","Непорочное зачатие, свободные дни"],["2026-12-23","2027-01-10","Рождественские каникулы"],["2027-02-06","2027-02-14","Карнавальные каникулы (Fasnacht)"],["2027-03-19","2027-03-21","День святого Иосифа, свободные дни"],["2027-03-26","2027-04-04","Пасхальные каникулы"],["2027-05-05","2027-05-09","Вознесение, свободные дни"],["2027-05-15","2027-05-17","Троица, свободные дни"],["2027-05-26","2027-05-30","Праздник Тела Христова, свободные дни"]],"m":{"2027":"конец летних каникул, осенние и рождественские каникулы 2027 года"}},"NE":{"p":"весь кантон Невшатель","d":[["2025-12-20","2026-01-04","Рождественские каникулы"],["2026-02-21","2026-03-01","Зимние каникулы"],["2026-04-03","2026-04-19","Пасхальные каникулы"],["2026-07-04","2026-08-16","Летние каникулы"],["2026-10-03","2026-10-18","Осенние каникулы"],["2026-12-19","2027-01-03","Рождественские каникулы"],["2027-02-27","2027-03-07","Зимние каникулы"],["2027-03-26","2027-04-11","Пасхальные каникулы"],["2027-07-03","2027-08-15","Летние каникулы"],["2027-10-02","2027-10-17","Осенние каникулы"],["2027-12-23","2028-01-09","Рождественские каникулы"]]},"GE":{"p":"весь кантон Женева","d":[["2025-12-20","2026-01-04","Рождественские каникулы"],["2026-02-21","2026-03-01","Зимние каникулы"],["2026-04-03","2026-04-19","Пасхальные каникулы"],["2026-05-14","2026-05-15","Вознесение, свободные дни"],["2026-06-27","2026-08-16","Летние каникулы"],["2026-10-17","2026-10-25","Осенние каникулы"],["2026-12-24","2027-01-10","Рождественские каникулы"],["2027-02-13","2027-02-21","Зимние каникулы"],["2027-03-26","2027-04-11","Пасхальные каникулы"],["2027-05-06","2027-05-07","Вознесение, свободные дни"],["2027-07-03","2027-08-25","Летние каникулы"],["2027-09-09","2027-09-10","Пост, свободные дни"],["2027-10-23","2027-10-31","Осенние каникулы"],["2027-12-24","2028-01-09","Рождественские каникулы"]]},"JU":{"p":"весь кантон Юра","d":[["2025-12-20","2026-01-04","Рождественские каникулы"],["2026-02-14","2026-02-22","Зимние каникулы"],["2026-04-03","2026-04-19","Пасхальные каникулы"],["2026-05-14","2026-05-15","Вознесение, свободные дни"],["2026-07-04","2026-08-16","Летние каникулы"],["2026-10-03","2026-10-18","Осенние каникулы"],["2026-12-24","2027-01-10","Рождественские каникулы"],["2027-02-13","2027-02-21","Зимние каникулы"],["2027-03-26","2027-04-11","Пасхальные каникулы"],["2027-07-03","2027-08-15","Летние каникулы"],["2027-10-02","2027-10-17","Осенние каникулы"],["2027-12-24","2028-01-09","Рождественские каникулы"]]}};
+function cantonSchool(y, c){
+  const a0 = new Date(y, 0, 1), b0 = new Date(y, 11, 31);
+  const L = ((SCH[c] || {}).d || []).map(([a, b, n]) => [new Date(a + 'T00:00'), new Date(b + 'T00:00'), n]).filter(([a, b]) => b >= a0 && a <= b0);
+  if (!L.length && c === 'ZH') return zhSchool(y);
+  return L;
+}
+
+const MONTHS = ['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'];
+const MONTHS_GEN = ['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря'];
+const WD = ['Вс','Пн','Вт','Ср','Чт','Пт','Сб'];
+const WD_FULL = ['воскресенье','понедельник','вторник','среда','четверг','пятница','суббота'];
+const KINDS = {dog: 'Собака', cat: 'Кошка', rabbit: 'Кролик', guinea: 'Морская свинка', bird: 'Птица', other: 'Другое животное'};
+const SVC = {home: 'У меня дома', visit: 'Визиты к хозяину', walk: 'Выгул'};
+const UNIT = {home: ['сутки', 'суток', 'суток'], visit: ['день', 'дня', 'дней'], walk: ['день', 'дня', 'дней']};
+const UNIT_N = {home: 'Суток', visit: 'Дней', walk: 'Дней'}, PRICE_FOR = {home: 'CHF за сутки', visit: 'CHF за визит', walk: 'CHF за прогулку'};
+const COLORS = ['#C0603A', '#4F7A5A', '#3F6FBF', '#B98324', '#8E5BA8', '#2894A0', '#C25468', '#6E4F3C', '#7A8A2E', '#5A6FA8'];
+const CANT_LANG = {FR: 'fr', VS: 'fr', GE: 'fr', VD: 'fr', NE: 'fr', JU: 'fr', TI: 'it'};
+const CANT_LOC = {ZH: 'Zürich', BE: 'Bern', LU: 'Luzern', UR: 'Uri', SZ: 'Schwyz', OW: 'Obwalden', NW: 'Nidwalden', GL: 'Glarus', ZG: 'Zug', FR: 'Fribourg', SO: 'Solothurn', BS: 'Basel-Stadt', BL: 'Basel-Landschaft', SH: 'Schaffhausen', AR: 'Appenzell Ausserrhoden', AI: 'Appenzell Innerrhoden', SG: 'St. Gallen', GR: 'Graubünden', AG: 'Aargau', TG: 'Thurgau', TI: 'Ticino', VD: 'Vaud', VS: 'Valais', NE: 'Neuchâtel', GE: 'Genève', JU: 'Jura'};
+/* подписи PDF: на языке сайта (русский; на украинской странице переводятся сами) и на языках кантона */
+const DOC = {
+  site: {loc: '', title: 'Журнал передержки', sub: 'Животные, уход по дням и хозяева', who: 'Присматривает', canton: 'Кантон', made: 'Составлено',
+    tAnimals: 'Животных', tDays: 'Дней ухода', tMax: 'Больше всего в сутки', tOver: 'Дней больше пяти',
+    s1: 'Животные', c1: ['№', 'Кличка, вид', 'Чип', 'Хозяин, телефон', 'Даты', 'Услуга', 'Сутки, дни'],
+    s2: 'Уход по дням', c2: ['Дата', 'Сколько', 'Кто и что сделано', 'Заметки'], own: 'из них свои:',
+    s3: 'Хозяева', c3: ['Хозяин', 'Адрес, телефон', 'Животные', 'Услуги и даты'],
+    s4: 'Заработок за месяц', c4: ['Животное', 'Услуга', 'В этом месяце', 'Цена, CHF', 'Сумма, CHF', 'Оплачено'], total: 'Итого за месяц', wait: 'Ждёт оплаты', yes: 'да', no: 'нет',
+    care: {f: 'корм', w: 'прогулка', m: 'лекарство'}, none: 'В этом месяце записей нет.',
+    svc: {home: 'у меня дома', visit: 'визиты к хозяину', walk: 'выгул'}, kinds: {dog: 'собака', cat: 'кошка', rabbit: 'кролик', guinea: 'морская свинка', bird: 'птица', other: 'другое животное'},
+    disc: 'Образец для учёта и личного использования, а не официальный документ. Данные без гарантии, проверяй их сама. svoiludi.ch'},
+  de: {loc: 'de-CH', title: 'Betreuungsjournal', sub: 'Tierbestand, Betreuung pro Tag und Kundenliste', who: 'Betreuungsperson', canton: 'Kanton', made: 'Erstellt am',
+    tAnimals: 'Tiere', tDays: 'Betreuungstage', tMax: 'Höchstens pro Tag', tOver: 'Tage mit mehr als 5 Tieren',
+    s1: 'Tierbestand', c1: ['Nr.', 'Name, Tierart', 'Chipnummer', 'Halter/in, Telefon', 'Daten', 'Leistung', 'Nächte, Tage'],
+    s2: 'Betreuung pro Tag', c2: ['Datum', 'Anzahl', 'Tiere und Betreuung', 'Bemerkungen'], own: 'davon eigene:',
+    s3: 'Kundenliste', c3: ['Halter/in', 'Adresse, Telefon', 'Tiere', 'Leistungen und Daten'],
+    care: {f: 'Futter', w: 'Spaziergang', m: 'Medikament'}, none: 'In diesem Monat keine Einträge.',
+    svc: {home: 'bei mir zu Hause', visit: 'Besuche beim Halter', walk: 'Gassi'}, kinds: {dog: 'Hund', cat: 'Katze', rabbit: 'Kaninchen', guinea: 'Meerschweinchen', bird: 'Vogel', other: 'anderes Tier'},
+    disc: 'Muster zur Orientierung und für den persönlichen Gebrauch, kein amtliches Dokument. Angaben ohne Gewähr, bitte selbst prüfen. svoiludi.ch'},
+  fr: {loc: 'fr-CH', title: 'Journal de garde', sub: 'Animaux gardés, garde par jour et liste des clients', who: 'Personne responsable de la garde', canton: 'Canton', made: 'Établi le',
+    tAnimals: 'Animaux', tDays: 'Jours de garde', tMax: 'Maximum par jour', tOver: 'Jours avec plus de 5 animaux',
+    s1: 'Animaux gardés', c1: ['N°', 'Nom, espèce', 'N° de puce', 'Propriétaire, téléphone', 'Dates', 'Prestation', 'Nuits, jours'],
+    s2: 'Garde par jour', c2: ['Date', 'Nombre', 'Animaux et soins', 'Remarques'], own: 'dont propres :',
+    s3: 'Liste des clients', c3: ['Propriétaire', 'Adresse, téléphone', 'Animaux', 'Prestations et dates'],
+    care: {f: 'nourriture', w: 'promenade', m: 'médicament'}, none: 'Aucune entrée ce mois-ci.',
+    svc: {home: 'chez moi', visit: 'visites à domicile', walk: 'promenade'}, kinds: {dog: 'chien', cat: 'chat', rabbit: 'lapin', guinea: 'cochon d’Inde', bird: 'oiseau', other: 'autre animal'},
+    disc: 'Modèle indicatif pour usage personnel, pas un document officiel. Données sans garantie, à vérifier soi-même. svoiludi.ch'},
+  it: {loc: 'it-CH', title: 'Registro di custodia', sub: 'Animali custoditi, custodia per giorno ed elenco clienti', who: 'Persona responsabile della custodia', canton: 'Cantone', made: 'Redatto il',
+    tAnimals: 'Animali', tDays: 'Giorni di custodia', tMax: 'Massimo al giorno', tOver: 'Giorni con più di 5 animali',
+    s1: 'Animali custoditi', c1: ['N.', 'Nome, specie', 'N. microchip', 'Proprietario/a, telefono', 'Date', 'Prestazione', 'Notti, giorni'],
+    s2: 'Custodia per giorno', c2: ['Data', 'Numero', 'Animali e cura', 'Osservazioni'], own: 'di cui propri:',
+    s3: 'Elenco clienti', c3: ['Proprietario/a', 'Indirizzo, telefono', 'Animali', 'Prestazioni e date'],
+    care: {f: 'cibo', w: 'passeggiata', m: 'medicamento'}, none: 'Nessuna registrazione in questo mese.',
+    svc: {home: 'a casa mia', visit: 'visite a domicilio', walk: 'passeggiata'}, kinds: {dog: 'cane', cat: 'gatto', rabbit: 'coniglio', guinea: 'porcellino d’India', bird: 'uccello', other: 'altro animale'},
+    disc: 'Modello indicativo per uso personale, non un documento ufficiale. Dati senza garanzia, da verificare personalmente. svoiludi.ch'}
+};
+
+/* ---------- состояние ---------- */
+const pad2 = n => String(n).padStart(2, '0');
+const isoD = dt => dt.getFullYear() + '-' + pad2(dt.getMonth() + 1) + '-' + pad2(dt.getDate());
+const parseD = s => { const [y, m, d] = String(s || '').split('-').map(Number); return y ? new Date(y, m - 1, d) : null; };
+const addD = (s, n) => { const x = parseD(s); x.setDate(x.getDate() + n); return isoD(x); };
+const dmy = s => { const [y, m, d] = String(s || '').split('-'); return d ? d + '.' + m + '.' + y : ''; };
+const dm = s => { const [, m, d] = String(s || '').split('-'); return d ? d + '.' + m + '.' : ''; };
+const num = v => { const n = parseFloat(String(v == null ? '' : v).replace(/[’'\s]/g, '').replace(',', '.')); return isNaN(n) ? 0 : n; };
+const chf = v => (Math.round(v * 20) / 20).toLocaleString('de-CH', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
+const plural = (n, f) => f[n % 10 === 1 && n % 100 !== 11 ? 0 : [2, 3, 4].includes(n % 10) && ![12, 13, 14].includes(n % 100) ? 1 : 2];
+const newId = p => p + Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
+const today = isoD(new Date());
+function fresh(){ const t = new Date(); return {v: 1, cur: t.getFullYear() + '-' + pad2(t.getMonth() + 1), set: {canton: 'ZH', lang: 'auto', name: '', own: '', pHome: '', pVisit: '', pWalk: '', showHol: true, showSch: true, bw: false}, pets: [], stays: [], log: {}}; }
+function fix(s){ const f = fresh(); s = Object.assign(f, s || {}); s.set = Object.assign(fresh().set, s.set || {}); s.pets = Array.isArray(s.pets) ? s.pets : []; s.stays = Array.isArray(s.stays) ? s.stays : []; s.log = s.log && typeof s.log === 'object' ? s.log : {}; return s; }
+let S = (() => { try { return fix(JSON.parse(localStorage.getItem(KEY))); } catch (e) { return fresh(); } })(), EX = null, showAll = false, selDay = null;
+function save(){ if (EX) return; try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} }
+const D = () => EX || S;
+const ym = () => { const [y, m] = D().cur.split('-').map(Number); return {y, m: m - 1}; };
+const dim = (y, m) => new Date(y, m + 1, 0).getDate();
+const petById = id => D().pets.find(p => p.id === id);
+const pname = p => p ? ((p.name || '').trim() || 'Без клички') : 'Животное удалено';
+const pcol = p => p ? COLORS[Math.max(0, D().pets.indexOf(p)) % COLORS.length] : '#7A6E62';
+const stTo = s => (s.to && s.to >= s.from) ? s.to : s.from;
+/* единицы: у меня дома — сутки (ночи), визиты и выгул — дни */
+function units(s, a, b){ if (!s.from) return 0; const from = s.from, to = stTo(s); let n = 0;
+  for (let d = from; d <= to; d = addD(d, 1)) { if (a && d < a) continue; if (b && d > b) break; if (s.svc === 'home' && d === to && to !== from) continue; n++; }
+  if (s.svc === 'home' && to === from && (!a || from >= a) && (!b || from <= b)) n = 1;
+  return n; }
+const price = s => num(s.price);
+function onDay(ds){ return D().stays.filter(s => s.from && s.from <= ds && stTo(s) >= ds && petById(s.pet)); }
+function dayCount(ds){ const L = onDay(ds), pets = new Set(L.map(s => s.pet)); const own = L.some(s => s.svc === 'home') ? Math.max(0, Math.round(num(D().set.own))) : 0; return {L, n: pets.size + own, foreign: pets.size, own}; }
+function monthStats(){
+  const {y, m} = ym(), n = dim(y, m), a = y + '-' + pad2(m + 1) + '-01', b = y + '-' + pad2(m + 1) + '-' + pad2(n);
+  let care = 0, max = 0, maxD = null, over = [], days = [];
+  for (let d = 1; d <= n; d++) { const ds = y + '-' + pad2(m + 1) + '-' + pad2(d), c = dayCount(ds); care += c.foreign; if (c.n > max) { max = c.n; maxD = ds; } if (c.n > 5) over.push(ds); if (c.L.length) days.push([ds, c]); }
+  const stays = D().stays.filter(s => s.from && s.from <= b && stTo(s) >= a && petById(s.pet)).sort((p, q) => p.from < q.from ? -1 : 1);
+  const pets = new Set(stays.map(s => s.pet));
+  let earned = 0, wait = 0; stays.forEach(s => { earned += units(s, a, b) * price(s); if (!s.paid) wait += units(s) * price(s); });
+  return {a, b, care, max, maxD, over, days, stays, pets: pets.size, earned, wait};
+}
+
+/* ---------- праздники и каникулы ---------- */
+function schoolMap(y, m){ const map = {}, first = new Date(y, m, 1), last = new Date(y, m + 1, 0);
+  if (!D().set.showSch) return map;
+  for (const [a, b, n] of cantonSchool(y, D().set.canton)) for (let d = new Date(Math.max(a, first)); d <= b && d <= last; d.setDate(d.getDate() + 1)) map[d.getDate()] = map[d.getDate()] || n;
+  return map; }
+const holMap = y => D().set.showHol ? holidays(y, D().set.canton) : {};
+const plHol = n => n + ' ' + plural(n, ['праздник', 'праздника', 'праздников']);
+let monOpen = false;
+
+/* ---------- отрисовка ---------- */
+const $ = id => document.getElementById(id);
+const opt = (v, t, sel) => `<option value="${esc(v)}"${sel ? ' selected' : ''}>${esc(t)}</option>`;
+function renderSetup(){
+  const d = D().set, dis = !!EX;
+  $('canton').innerHTML = Object.entries(CANTONS).map(([k, v]) => opt(k, v, k === d.canton)).join('');
+  $('lang').value = d.lang; ['name', 'own', 'pHome', 'pVisit', 'pWalk'].forEach(k => { $(k).value = d[k] || ''; });
+  ['showHol', 'showSch', 'bw'].forEach(k => $(k).checked = !!d[k]);
+  ['canton', 'lang', 'name', 'own', 'pHome', 'pVisit', 'pWalk', 'showHol', 'showSch', 'addPet', 'addStay'].forEach(k => $(k).disabled = dis && !['lang', 'bw', 'showHol', 'showSch'].includes(k));
+  $('exbar').hidden = !EX; $('exOn').hidden = !!EX;
+}
+function petSummary(p){ return [KINDS[p.kind] || '', p.owner ? 'хозяин ' + p.owner : ''].filter(Boolean).join(' · '); }
+function renderPets(openId){
+  const L = D().pets, dis = EX ? ' disabled' : '';
+  $('pets').innerHTML = L.length ? L.map(p => `<details class="pet" data-id="${p.id}"${p.id === openId ? ' open' : ''}><summary><span class="dot" style="background:${pcol(p)}"></span><span class="pn">${esc(pname(p))}</span><small class="ps">${esc(petSummary(p))}</small></summary>
+    <div class="g2">
+      <div class="fl"><span class="lb">Кличка</span><input type="text" data-f="name" value="${esc(p.name)}" placeholder="Bella"${dis}></div>
+      <div class="fl"><span class="lb">Кто</span><select data-f="kind"${dis}>${Object.entries(KINDS).map(([k, v]) => opt(k, v, k === p.kind)).join('')}</select></div>
+      <div class="fl"><span class="lb">Порода, окрас, приметы</span><input type="text" data-f="look" value="${esc(p.look)}" placeholder="Labrador-Mischling, schwarz"${dis}></div>
+      <div class="fl"><span class="lb">Номер чипа<button type="button" class="qh" data-help="chip" aria-label="Подсказка: номер чипа" aria-expanded="false">?</button></span><input type="text" inputmode="numeric" data-f="chip" value="${esc(p.chip)}" placeholder="756 0000 0000 0000"${dis}></div>
+      <div class="fl"><span class="lb">Хозяин: имя</span><input type="text" data-f="owner" value="${esc(p.owner)}" placeholder="Olena Muster"${dis}></div>
+      <div class="fl"><span class="lb">Телефон хозяина</span><input type="tel" data-f="phone" value="${esc(p.phone)}" placeholder="079 000 00 00"${dis}></div>
+      <div class="fl"><span class="lb">Адрес хозяина</span><input type="text" data-f="addr" value="${esc(p.addr)}" placeholder="Bahnhofstrasse 1, 8001 Zürich"${dis}></div>
+      <div class="fl"><span class="lb">Запасной контакт</span><input type="text" data-f="backup" value="${esc(p.backup)}" placeholder="Frau Keller, 044 000 00 00"${dis}></div>
+      <div class="fl"><span class="lb">Ветеринар</span><input type="text" data-f="vet" value="${esc(p.vet)}" placeholder="Tierarztpraxis am Bach, 044 000 00 00"${dis}></div>
+      <div class="fl"><span class="lb">Цена за сутки у меня дома, CHF</span><input type="text" inputmode="decimal" data-f="price" value="${esc(p.price)}" placeholder="${esc(D().set.pHome || '30')}"${dis}></div>
+    </div>
+    <div class="fl"><span class="lb">Корм, лекарства, особенности</span><textarea data-f="care" placeholder="2× täglich 150 g Trockenfutter; Angst vor Gewitter"${dis}>${esc(p.care)}</textarea></div>
+    ${EX ? '' : '<div class="acts" style="margin-top:8px"><button type="button" class="btn ghost sm" data-delpet="1">Удалить животное</button></div>'}
+  </details>`).join('') : '<p class="hint">Пока нет ни одного животного. Нажми «+ Добавить животное».</p>';
+}
+function staySel(s){ return D().pets.map(p => opt(p.id, pname(p), p.id === s.pet)).join(''); }
+function renderStays(){
+  const st = monthStats(), L = showAll ? D().stays.slice().sort((p, q) => (p.from || '') < (q.from || '') ? -1 : 1) : st.stays, dis = EX ? ' disabled' : '';
+  $('allStays').textContent = showAll ? 'Только этот месяц' : 'Показать все даты'; $('allStays').setAttribute('aria-pressed', showAll);
+  if (!D().pets.length) { $('stays').innerHTML = '<p class="hint">Сначала добавь животное, потом даты.</p>'; return; }
+  $('stays').innerHTML = L.length ? L.map(s => { const p = petById(s.pet), u = units(s), un = UNIT[s.svc] || UNIT.home;
+    return `<div class="stay" data-id="${s.id}" style="--c:${pcol(p)}">
+      <div class="fl"><span class="lb">Животное</span><select data-f="pet"${dis}>${staySel(s)}</select></div>
+      <div class="fl"><span class="lb">Услуга</span><select data-f="svc"${dis}>${Object.entries(SVC).map(([k, v]) => opt(k, v, k === s.svc)).join('')}</select></div>
+      <div class="fl"><span class="lb">С</span><input type="date" data-f="from" value="${esc(s.from)}"${dis}></div>
+      <div class="fl"><span class="lb">По</span><input type="date" data-f="to" value="${esc(s.to)}"${dis}></div>
+      <div class="fl"><span class="lb">${PRICE_FOR[s.svc] || PRICE_FOR.home}</span><input type="text" inputmode="decimal" data-f="price" value="${esc(s.price)}"${dis}></div>
+      ${EX ? '<span></span>' : '<button type="button" class="del" data-delstay="1" aria-label="Удалить эти даты">Удалить</button>'}
+      <div class="row2"><span><b>${UNIT_N[s.svc] || UNIT_N.home}: ${u}</b>${price(s) ? ' · ' + chf(u * price(s)) + ' CHF' : ''}</span>
+        <label><input type="checkbox" data-f="pickup"${s.pickup ? ' checked' : ''}${dis}> забираю и привожу</label>
+        <label><input type="checkbox" data-f="paid"${s.paid ? ' checked' : ''}${dis}> оплачено<button type="button" class="qh" data-help="paid" aria-label="Подсказка: оплачено" aria-expanded="false">?</button></label>
+        <input type="text" data-f="note" value="${esc(s.note)}" placeholder="Заметка: ключ у соседки, привезут в 9:00"${dis}></div>
+    </div>`; }).join('') : `<p class="hint">${showAll ? 'Дат пока нет.' : 'В этом месяце дат нет.'} Нажми «+ Добавить даты».</p>`;
+}
+function renderMonthInfo(){
+  const {y, m} = ym(), H = holMap(y), hs = Object.entries(H).filter(([ds]) => +ds.slice(5, 7) === m + 1).sort((a, b) => a[0] < b[0] ? -1 : 1), sm = schoolMap(y, m), runs = [];
+  Object.keys(sm).map(Number).sort((a, b) => a - b).forEach(d => { const l = runs[runs.length - 1]; if (l && l.b === d - 1 && l.n === sm[d]) l.b = d; else runs.push({a: d, b: d, n: sm[d]}); });
+  const sum = (!D().set.showHol ? 'праздники скрыты' : hs.length ? plHol(hs.length) + ' кантона' : 'праздников кантона нет') + (runs.length ? ' · школьные каникулы' : '');
+  $('monthInfo').innerHTML = `<details${monOpen ? ' open' : ''}><summary><b>${MONTHS[m]} ${y}</b> · ${sum}</summary><div class="hchips">`
+    + hs.map(([ds, h]) => `<button type="button" class="hchip" data-hk="${h.k}" data-hn="${esc(h.n)}" data-hd="${+ds.slice(8)} ${MONTHS_GEN[m]}"><b>${+ds.slice(8)} ${MONTHS_GEN[m]}</b>${esc(h.n)} ?</button>`).join('')
+    + runs.map(r => `<span class="schip"><b>${r.a === r.b ? r.a : r.a + '–' + r.b} ${MONTHS_GEN[m]}</b> ${esc(r.n)}</span>`).join('') + '</div></details>';
+  const det = $('monthInfo').querySelector('details'); det.addEventListener('toggle', () => { monOpen = det.open; if (!det.open) $('holInfo').hidden = true; });
+}
+function renderCal(){
+  const {y, m} = ym(), n = dim(y, m), first = (new Date(y, m, 1).getDay() + 6) % 7, H = holMap(y), sm = schoolMap(y, m);
+  $('monTitle').textContent = MONTHS[m] + ' ' + y;
+  let h = ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'].map(w => `<div class="wd">${w}</div>`).join('');
+  for (let i = 0; i < first; i++) h += '<span class="d blank" aria-hidden="true"></span>';
+  for (let d = 1; d <= n; d++) { const ds = y + '-' + pad2(m + 1) + '-' + pad2(d), c = dayCount(ds), hol = H[ds];
+    const pets = [...new Set(c.L.map(s => s.pet))].map(petById);
+    h += `<button type="button" class="d${hol ? ' hol' : ''}${sm[d] ? ' sch' : ''}${ds === today ? ' today' : ''}" data-ds="${ds}" aria-pressed="${ds === selDay}" aria-label="${d} ${MONTHS_GEN[m]}${c.n ? ', животных: ' + c.n : ''}"><span class="n">${d}</span>${hol ? `<span class="hn">${esc(hol.n)}</span>` : ''}<span class="dots">${pets.map(p => `<i style="background:${pcol(p)}" title="${esc(pname(p))}"></i>`).join('')}</span>${c.n ? `<span class="cnt${c.n > 5 ? ' over' : ''}">${c.n}</span>` : ''}</button>`; }
+  $('cal').innerHTML = h;
+}
+function renderDay(){
+  const box = $('day'); if (!selDay) { box.hidden = true; return; }
+  const dt = parseD(selDay), c = dayCount(selDay), H = holidays(dt.getFullYear(), D().set.canton)[selDay], sm = schoolMap(dt.getFullYear(), dt.getMonth())[dt.getDate()], lg = (D().log[selDay] || {}), dis = EX ? ' disabled' : '';
+  const seen = new Set(), rows = c.L.filter(s => { if (seen.has(s.id)) return false; seen.add(s.id); return true; });
+  box.hidden = false;
+  box.innerHTML = `<h3>${dt.getDate()} ${MONTHS_GEN[dt.getMonth()]}, ${WD_FULL[dt.getDay()]}${c.n ? ` <span class="cnt${c.n > 5 ? ' over' : ''}">${c.n}</span>` : ''}</h3>`
+    + (H && D().set.showHol ? `<p class="hint"><b>${esc(H.n)}.</b> ${HINFO[H.k] || ''}</p>` : '') + (sm ? `<p class="hint">${esc(sm)} в кантоне ${esc(CANTONS[D().set.canton])}.</p>` : '')
+    + (c.n > 5 ? `<p class="warnbox"><i class="wi"></i>В этот день у тебя больше пяти животных. Для этого нужно разрешение ветеринарной службы кантона — подробно в теме «<a href="../../shveycariya/perederzhka/">Передержка и выгул животных</a>».</p>` : '')
+    + (c.own ? `<p class="hint">Из них твоих: ${c.own}.</p>` : '')
+    + (rows.length ? rows.map(s => { const p = petById(s.pet), r = lg[s.id] || {};
+      return `<div class="dpet" data-sid="${s.id}" style="--c:${pcol(p)}"><div class="who">${esc(pname(p))} <small>${esc(KINDS[p.kind] || '')} · ${esc(SVC[s.svc] || '')}${s.from === selDay ? ' · первый день' : ''}${stTo(s) === selDay ? ' · последний день' : ''}</small>${p.phone ? `<a href="tel:${esc(p.phone.replace(/[^\d+]/g, ''))}">${esc(p.owner || 'Хозяин')}: ${esc(p.phone)}</a>` : ''}</div>`
+        + `<div class="care"><label><input type="checkbox" data-c="f"${r.f ? ' checked' : ''}${dis}> корм</label><label><input type="checkbox" data-c="w"${r.w ? ' checked' : ''}${dis}> ${p.kind === 'cat' ? 'лоток' : 'прогулка'}</label><label><input type="checkbox" data-c="m"${r.m ? ' checked' : ''}${dis}> лекарство</label><button type="button" class="qh" data-help="care" aria-label="Подсказка: уход по дням" aria-expanded="false">?</button></div>`
+        + (p.care ? `<p class="hint">${esc(p.care)}</p>` : '')
+        + `<input type="text" data-c="n" value="${esc(r.n)}" placeholder="Заметка: ела хорошо, гуляли 40 минут"${dis}></div>`; }).join('')
+      + (EX ? '' : '<div class="acts"><button type="button" class="btn ghost sm" id="allUsual">Всем: корм и прогулка ✓</button></div>')
+      : '<p class="hint">В этот день никого нет.</p>');
+}
+function renderTot(){
+  const t = monthStats(), {m} = ym();
+  $('tot').innerHTML = `<div><b>${t.pets}</b><span>животных в этом месяце</span></div><div><b>${t.care}</b><span>дней ухода</span></div>`
+    + `<div class="${t.over.length ? 'over' : ''}"><b>${t.max}</b><span>больше всего в сутки${t.maxD ? ' · ' + (+t.maxD.slice(8)) + ' ' + MONTHS_GEN[m] : ''}</span></div>`
+    + `<div><b>${chf(t.earned)}</b><span>заработано за месяц, CHF</span></div><div><b>${chf(t.wait)}</b><span>ждёт оплаты, CHF</span></div>`;
+  $('warn').innerHTML = t.over.length ? `<p class="warnbox"><i class="wi"></i>В ${t.over.length} ${plural(t.over.length, ['день', 'дня', 'дней'])} этого месяца у тебя больше пяти животных в сутки (${t.over.map(ds => +ds.slice(8)).join(', ')} ${MONTHS_GEN[m]}). Для этого нужно разрешение ветеринарной службы кантона (Veterinäramt) — подробно в теме «<a href="../../shveycariya/perederzhka/">Передержка и выгул животных</a>».</p>` : '';
+}
+let UI, tmr;
+const sheetLater = () => { clearTimeout(tmr); tmr = setTimeout(() => UI && UI.render(), 350); };
+function renderAll(openId){ renderSetup(); renderPets(openId); renderStays(); renderMonthInfo(); renderCal(); renderDay(); renderTot(); if (UI) UI.render(); }
+function light(){ renderStays(); renderCal(); renderDay(); renderTot(); sheetLater(); }
+
+/* ---------- PDF ---------- */
+const docLang = () => { const d = D().set; return d.lang === 'auto' ? (CANT_LANG[d.canton] || 'de') : d.lang; };
+function build(){
+  const d = D(), g = docLang(), L = DOC[g] || DOC.site, C = SH.pal(d.set.bw), c = C.c, X = 12, W = 186, pages = [], t = monthStats(), {y, m} = ym();
+  const mon = g === 'site' ? MONTHS[m] + ' ' + y : new Date(y, m, 1).toLocaleDateString(L.loc, {month: 'long', year: 'numeric'});
+  const wd = ds => { const dt = parseD(ds); return g === 'site' ? WD[dt.getDay()] : dt.toLocaleDateString(L.loc, {weekday: 'short'}).replace('.', ''); };
+  const kind = p => (L.kinds || DOC.site.kinds)[p.kind] || '';
+  let P, yy;
+  const newPage = () => { P = SH.page(210, 297, C); P.header(L.title, L.sub, mon); pages.push(P); yy = 27; };
+  const need = h => { if (yy + h > 279) newPage(); };
+  newPage();
+  P.text(L.who + ': ' + ((d.set.name || '').trim() || '________________________'), X, yy, 9.4, true, C.ink); yy += 5;
+  P.text(L.canton + ' ' + (g === 'site' ? CANTONS[d.set.canton] : CANT_LOC[d.set.canton]) + ' · ' + L.made + ' ' + dmy(today), X, yy, 7, false, C.mut); yy += 7;
+  /* четыре плитки */
+  const tiles = [[String(t.pets), L.tAnimals, c.sage], [String(t.care), L.tDays, c.sage], [String(t.max) + (t.maxD ? '  ' + dm(t.maxD) : ''), L.tMax, c.mustard], [String(t.over.length), L.tOver, t.over.length ? c.red : c.sage]];
+  const tw = (W - 9) / 4; tiles.forEach(([v, l, col], i) => { const x = X + i * (tw + 3); P.rect(x, yy - 4, tw, 15, col[0], col[1], 1.6); P.text(v, x + 3, yy + 3, 13, true, col[1]); P.text(l, x + 3, yy + 8.6, 6.2, false, C.ink); }); yy += 18;
+  /* таблица */
+  function table(cols, rows, opts){ opts = opts || {}; const fs = 7.2, lh = 3.3, head = () => { P.rect(X, yy - 3.8, W, 6, c.sage[0]); let x = X; cols.forEach((col, k) => { P.text(cols[k][0], x + 1.4, yy, 6.4, true, C.head); x += col[1]; }); yy += 5; };
+    head();
+    rows.forEach((r, i) => { const cells = r.map((s, k) => String(s == null ? '' : s).split('\n').flatMap(q => SH.wrap(q, k === 0 && opts.bold, fs, cols[k][1] - 2.8))), n = Math.max(1, ...cells.map(q => q.length)), h = n * lh + 2;
+      if (yy + h > 279) { newPage(); head(); }
+      const hi = opts.hi && opts.hi(i); if (hi) P.rect(X, yy - 3, W, h, C.hi); else if (i % 2) P.rect(X, yy - 3, W, h, C.zebra);
+      let x = X; cells.forEach((ls, k) => { ls.forEach((l, j) => P.text(l, x + 1.4, yy + j * lh, fs, (k === 0 && opts.bold) || (hi && k === 1), hi && k === 1 ? C.warn : C.ink)); x += cols[k][1]; });
+      yy += h; P.line(X, yy - 3, X + W, yy - 3, C.line, 0.15); });
+    if (!rows.length) { P.text(L.none, X + 1.4, yy, fs, false, C.mut); yy += 5; }
+    yy += 3; }
+  /* 1. животные */
+  need(20); yy = P.sec(L.s1, X, yy, W);
+  table(L.c1.map((h, k) => [h, [8, 32, 31, 42, 30, 25, 18][k]]), t.stays.map((s, i) => { const p = petById(s.pet), u = units(s);
+    return [String(i + 1), pname(p) + '\n' + kind(p) + (p.look ? ', ' + p.look : ''), p.chip || '—', [p.owner, p.phone].filter(Boolean).join('\n') || '—', dmy(s.from) + ' –\n' + dmy(stTo(s)), (L.svc || DOC.site.svc)[s.svc] || '', String(u)]; }), {bold: false});
+  /* 2. уход по дням */
+  need(20); yy = P.sec(L.s2, X, yy, W);
+  table(L.c2.map((h, k) => [h, [20, 24, 92, 50][k]]), t.days.map(([ds, cc]) => { const lg = d.log[ds] || {}, seen = new Set();
+    const who = cc.L.filter(s => { if (seen.has(s.pet)) return false; seen.add(s.pet); return true; }).map(s => { const p = petById(s.pet), r = lg[s.id] || {}, cr = ['f', 'w', 'm'].filter(k => r[k]).map(k => k === 'w' && p.kind === 'cat' && g === 'site' ? 'лоток' : L.care[k]);
+      return pname(p) + (s.svc !== 'home' ? ' (' + (L.svc || DOC.site.svc)[s.svc] + ')' : '') + (cr.length ? ': ' + cr.join(', ') : ''); }).join('\n');
+    const notes = cc.L.map(s => (lg[s.id] || {}).n ? pname(petById(s.pet)) + ': ' + lg[s.id].n : '').filter(Boolean).join('\n');
+    return [wd(ds) + ' ' + dm(ds), String(cc.n) + (cc.own ? '\n(' + L.own + ' ' + cc.own + ')' : ''), who, notes]; }), {hi: i => t.days[i][1].n > 5});
+  /* 3. хозяева */
+  const owners = {}; t.stays.forEach(s => { const p = petById(s.pet), k = (p.owner || '—') + '|' + (p.phone || ''); (owners[k] = owners[k] || {p, pets: new Set(), svc: []}).pets.add(pname(p)); const sv = (L.svc || DOC.site.svc)[s.svc] + ' ' + dm(s.from) + '–' + dm(stTo(s)); if (!owners[k].svc.includes(sv)) owners[k].svc.push(sv); });
+  need(20); yy = P.sec(L.s3, X, yy, W);
+  table(L.c3.map((h, k) => [h, [40, 56, 38, 52][k]]), Object.values(owners).map(o => [o.p.owner || '—', [o.p.addr, o.p.phone].filter(Boolean).join('\n') || '—', [...o.pets].join(', '), o.svc.join('\n')]), {bold: true});
+  /* 4. заработок — только для себя, на языке сайта */
+  if (g === 'site' && t.stays.length) {
+    need(24); yy = P.sec(L.s4, X, yy, W);
+    table(L.c4.map((h, k) => [h, [40, 36, 30, 26, 28, 26][k]]), t.stays.map(s => { const u = units(s, t.a, t.b), un = UNIT[s.svc] || UNIT.home; return [pname(petById(s.pet)), SVC[s.svc] || '', (UNIT_N[s.svc] || UNIT_N.home) + ': ' + u, price(s) ? chf(price(s)) : '—', price(s) ? chf(u * price(s)) : '—', s.paid ? L.yes : L.no]; }));
+    need(12); P.text(L.total + ': ' + chf(t.earned) + ' CHF', X, yy, 9.4, true, C.ink); P.text(L.wait + ': ' + chf(t.wait) + ' CHF', X + 100, yy, 9.4, true, t.wait ? C.warn : C.ink); yy += 6;
+  }
+  pages.forEach(p => p.foot(L.disc));
+  return pages;
+}
+
+/* ---------- события ---------- */
+const setS = (k, v) => { if (EX) { EX.set[k] = v; } else { S.set[k] = v; save(); } };
+$('canton').addEventListener('change', e => { setS('canton', e.target.value); renderAll(); });
+$('lang').addEventListener('change', e => { setS('lang', e.target.value); if (UI) UI.render(); });
+['name', 'own', 'pHome', 'pVisit', 'pWalk'].forEach(k => $(k).addEventListener('input', e => { if (EX) return; S.set[k] = e.target.value; save(); if (k === 'own') light(); else sheetLater(); }));
+['showHol', 'showSch'].forEach(k => $(k).addEventListener('change', e => { setS(k, e.target.checked); renderMonthInfo(); renderCal(); renderDay(); }));
+$('bw').addEventListener('change', e => { setS('bw', e.target.checked); if (UI) UI.render(); });
+$('prev').addEventListener('click', () => { let {y, m} = ym(); m--; if (m < 0) { m = 11; y--; } D().cur = y + '-' + pad2(m + 1); selDay = null; save(); renderAll(); });
+$('next').addEventListener('click', () => { let {y, m} = ym(); m++; if (m > 11) { m = 0; y++; } D().cur = y + '-' + pad2(m + 1); selDay = null; save(); renderAll(); });
+$('addPet').addEventListener('click', () => { if (EX) return; const p = {id: newId('p'), name: '', kind: 'dog', look: '', chip: '', owner: '', phone: '', addr: '', backup: '', vet: '', price: '', care: ''}; S.pets.push(p); save(); renderAll(p.id); const el = document.querySelector(`.pet[data-id="${p.id}"] input[data-f="name"]`); if (el) el.focus(); });
+$('pets').addEventListener('input', e => { if (EX) return; const box = e.target.closest('.pet'), f = e.target.dataset.f; if (!box || !f) return; const p = S.pets.find(x => x.id === box.dataset.id); if (!p) return; p[f] = e.target.value; save();
+  box.querySelector('.pn').textContent = pname(p); box.querySelector('.ps').textContent = petSummary(p); if (f === 'name' || f === 'kind') { renderStays(); renderCal(); renderDay(); } sheetLater(); });
+$('pets').addEventListener('change', e => { if (e.target.dataset.f === 'kind') { const box = e.target.closest('.pet'); box.querySelector('.ps').textContent = petSummary(S.pets.find(x => x.id === box.dataset.id)); renderDay(); sheetLater(); } });
+$('pets').addEventListener('click', e => { if (EX || !e.target.closest('[data-delpet]')) return; const id = e.target.closest('.pet').dataset.id, n = S.stays.filter(s => s.pet === id).length;
+  if (!confirm(n ? 'Удалить животное вместе со всеми его датами и записями ухода?' : 'Удалить это животное?')) return;
+  S.pets = S.pets.filter(p => p.id !== id); S.stays = S.stays.filter(s => s.pet !== id); save(); renderAll(); });
+$('addStay').addEventListener('click', () => { if (EX) return; if (!S.pets.length) { $('addPet').click(); return; }
+  const {y, m} = ym(), first = y + '-' + pad2(m + 1) + '-01', from = today.slice(0, 7) === S.cur ? today : first, p = S.pets[S.pets.length - 1];
+  S.stays.push({id: newId('s'), pet: p.id, svc: 'home', from, to: addD(from, 1), price: p.price || S.set.pHome || '', pickup: false, paid: false, note: ''}); save(); showAll = false; light(); });
+$('allStays').addEventListener('click', () => { showAll = !showAll; renderStays(); });
+const defPrice = (s, p) => s.svc === 'home' ? (p && p.price) || S.set.pHome : s.svc === 'visit' ? S.set.pVisit : S.set.pWalk;
+$('stays').addEventListener('change', e => { if (EX) return; const row = e.target.closest('.stay'), f = e.target.dataset.f; if (!row || !f) return; const s = S.stays.find(x => x.id === row.dataset.id); if (!s) return;
+  if (e.target.type === 'checkbox') s[f] = e.target.checked; else s[f] = e.target.value;
+  if (f === 'svc' || f === 'pet') { const dp = defPrice(s, petById(s.pet)); if (dp) s.price = dp; }
+  if (f === 'from' && (!s.to || s.to < s.from)) s.to = s.svc === 'home' ? addD(s.from, 1) : s.from;
+  save(); light(); });
+$('stays').addEventListener('input', e => { if (EX) return; const row = e.target.closest('.stay'), f = e.target.dataset.f; if (!row || !['note', 'price'].includes(f)) return; const s = S.stays.find(x => x.id === row.dataset.id); if (!s) return; s[f] = e.target.value; save(); if (f === 'price') { renderTot(); } sheetLater(); });
+$('stays').addEventListener('click', e => { if (EX || !e.target.closest('[data-delstay]')) return; const id = e.target.closest('.stay').dataset.id; S.stays = S.stays.filter(s => s.id !== id); save(); light(); });
+$('cal').addEventListener('click', e => { const b = e.target.closest('.d[data-ds]'); if (!b) return; selDay = selDay === b.dataset.ds ? null : b.dataset.ds; renderCal(); renderDay(); if (selDay) $('day').scrollIntoView({behavior: 'smooth', block: 'nearest'}); });
+$('day').addEventListener('change', e => { if (EX) return; const row = e.target.closest('.dpet'), k = e.target.dataset.c; if (!row || !k || k === 'n') return; const L = S.log[selDay] = S.log[selDay] || {}, r = L[row.dataset.sid] = L[row.dataset.sid] || {}; r[k] = e.target.checked ? 1 : 0; save(); sheetLater(); });
+$('day').addEventListener('input', e => { if (EX || e.target.dataset.c !== 'n') return; const row = e.target.closest('.dpet'), L = S.log[selDay] = S.log[selDay] || {}, r = L[row.dataset.sid] = L[row.dataset.sid] || {}; r.n = e.target.value; save(); sheetLater(); });
+$('day').addEventListener('click', e => { if (EX || e.target.id !== 'allUsual') return; const L = S.log[selDay] = S.log[selDay] || {}; onDay(selDay).forEach(s => { const r = L[s.id] = L[s.id] || {}; r.f = 1; r.w = 1; }); save(); renderDay(); sheetLater(); });
+$('monthInfo').addEventListener('click', e => { const b = e.target.closest('.hchip'); if (!b) return; const box = $('holInfo'), same = !box.hidden && box.dataset.k === b.dataset.hk; if (same) { box.hidden = true; return; } box.dataset.k = b.dataset.hk; box.innerHTML = `<b>${esc(b.dataset.hn)} · ${esc(b.dataset.hd)}</b><p>${HINFO[b.dataset.hk] || ''}</p>`; box.hidden = false; });
+
+/* ---------- пример ---------- */
+function EXD(){
+  const {y, m} = ym(), K = y + '-' + pad2(m + 1), d = n => K + '-' + pad2(n), lg = {};
+  const pets = [
+    {id: 'xb', name: 'Bella', kind: 'dog', look: 'Labrador-Mischling, schwarz', chip: '756 0981 0012 3456', owner: 'Olena Muster', phone: '079 000 00 01', addr: 'Bahnhofstrasse 1, 8001 Zürich', vet: 'Tierarztpraxis am Bach, 044 000 00 00', price: '30', care: '2× täglich 150 g Trockenfutter. Gelenktablette morgens.'},
+    {id: 'xm', name: 'Max', kind: 'dog', look: 'Border Collie', chip: '756 0981 0023 4567', owner: 'Familie Keller', phone: '079 000 00 02', addr: 'Seestrasse 12, 8800 Thalwil', price: '30', care: 'Viel Bewegung, 2 lange Spaziergänge.'},
+    {id: 'xl', name: 'Luna', kind: 'cat', look: 'Britisch Kurzhaar, grau', chip: '756 0981 0034 5678', owner: 'Natalia Weber', phone: '078 000 00 03', addr: 'Dorfstrasse 5, 8600 Dübendorf', price: '15'},
+    {id: 'xs', name: 'Simba', kind: 'cat', look: 'rot getigert', chip: '756 0981 0045 6789', owner: 'Natalia Weber', phone: '078 000 00 03', addr: 'Dorfstrasse 5, 8600 Dübendorf', price: '15'},
+    {id: 'xc', name: 'Coco', kind: 'cat', look: 'Maine Coon', chip: '', owner: 'Thomas Meier', phone: '076 000 00 05', addr: 'Langstrasse 20, 8004 Zürich', price: '15'},
+    {id: 'xr', name: 'Rocky', kind: 'dog', look: 'Jack Russell Terrier', chip: '756 0981 0056 7890', owner: 'Svetlana Roth', phone: '079 000 00 06', addr: 'Hauptstrasse 3, 8302 Kloten'},
+    {id: 'xi', name: 'Mia', kind: 'cat', look: 'schwarz-weiss', chip: '', owner: 'Irene Frei', phone: '079 000 00 07', addr: 'Rosenweg 8, 8152 Glattbrugg'}];
+  const stays = [
+    {id: 'y1', pet: 'xb', svc: 'home', from: d(3), to: d(10), price: '30', pickup: true, paid: true, note: 'Schlüssel bei der Nachbarin'},
+    {id: 'y2', pet: 'xm', svc: 'home', from: d(8), to: d(15), price: '30', pickup: false, paid: false, note: ''},
+    {id: 'y3', pet: 'xl', svc: 'home', from: d(12), to: d(19), price: '15', pickup: true, paid: false, note: ''},
+    {id: 'y4', pet: 'xs', svc: 'home', from: d(12), to: d(19), price: '15', pickup: true, paid: false, note: ''},
+    {id: 'y5', pet: 'xc', svc: 'home', from: d(14), to: d(16), price: '15', pickup: false, paid: false, note: ''},
+    {id: 'y6', pet: 'xr', svc: 'walk', from: d(13), to: d(17), price: '25', pickup: false, paid: true, note: 'Gassi 12–13 Uhr'},
+    {id: 'y7', pet: 'xi', svc: 'visit', from: d(20), to: d(24), price: '20', pickup: false, paid: false, note: 'Füttern morgens'}];
+  const notes = {'y1': {[d(4)]: 'frisst gut, 3 Spaziergänge', [d(7)]: 'Gelenktablette gegeben'}, 'y3': {[d(13)]: 'frisst wenig, beobachten'}, 'y6': {[d(15)]: '45 Minuten im Wald'}};
+  stays.forEach(s => { for (let ds = s.from; ds <= s.to; ds = addD(ds, 1)) { const L = lg[ds] = lg[ds] || {}; L[s.id] = {f: 1, w: s.svc !== 'visit' ? 1 : 0, m: s.id === 'y1' ? 1 : 0, n: ((notes[s.id] || {})[ds]) || ''}; } });
+  return fix({cur: K, set: Object.assign({}, S.set, {name: 'Anna Petrenko · Tierbetreuung', own: '1', pHome: '30', pVisit: '20', pWalk: '25'}), pets, stays, log: lg});
+}
+$('exOn').addEventListener('click', () => { EX = EXD(); selDay = EX.cur + '-14'; renderAll(); window.scrollTo({top: $('exbar').offsetTop - 12, behavior: 'smooth'}); });
+$('exOff').addEventListener('click', () => { EX = null; selDay = null; renderAll(); });
+if (/[?&]example\b/.test(location.search)) { EX = EXD(); selDay = EX.cur + '-14'; }
+const lq = (location.search.match(/[?&]lang=(de|fr|it|site)/) || [])[1]; if (lq && EX) EX.set.lang = lq;
+if (/[?&]bw\b/.test(location.search) && EX) EX.set.bw = true;
+const cq = (location.search.match(/[?&]canton=([A-Z]{2})/) || [])[1]; if (cq && EX && CANTONS[cq]) EX.set.canton = cq;
+UI = SH.mount({build, title: 'Журнал передержки', name: () => ({site: 'Журнал передержки', de: 'Betreuungsjournal', fr: 'Journal de garde', it: 'Registro di custodia'}[docLang()] || 'Betreuungsjournal') + '-' + D().cur, lang: () => { const g = docLang(); return g === 'site' ? (document.documentElement.lang === 'uk' ? 'uk' : 'ru') : g; }});
+renderAll();
+
+</script>
+<script src="/assets/help.js"></script>
+<script src="/assets/backup.js"></script>
+<script src="/assets/pdffan.js" defer></script>
+<script src="/assets/share.js" defer></script>
+<script src="/assets/samesite.js"></script>
+<!--i18n--><style>#langbar.langbar{position:fixed;bottom:14px;right:14px;z-index:60;display:flex;gap:2px;background:rgba(255,255,255,.92);border:1px solid rgba(0,0,0,.08);border-radius:999px;padding:3px;font:600 12px Manrope,system-ui,sans-serif;box-shadow:0 2px 8px rgba(0,0,0,.08)}#langbar.langbar a{color:#5d554d;padding:5px 9px;border-radius:999px;text-decoration:none;font:inherit;display:inline-block}#langbar.langbar a[aria-current="true"]{background:#2f2924;color:#fff}@media print{.langbar{display:none!important}}</style><div class="langbar" id="langbar" role="navigation" aria-label="Мова / Язык"><a href="/instrumenty/zhurnal-perederzhki/" hreflang="ru" data-lang="ru" aria-current="true">RU</a><a href="/uk/instrumenty/zhurnal-perederzhki/" hreflang="uk" data-lang="uk">UA</a></div><script>(function(){var b=document.getElementById('langbar');if(!b)return;b.addEventListener('click',function(e){var a=e.target.closest('a[data-lang]');if(a){try{localStorage.setItem('svoiludiLang',a.dataset.lang)}catch(x){}a.href=a.getAttribute('href').split('#')[0]+location.hash;}});})();</script><!--i18n--></body>
+</html>

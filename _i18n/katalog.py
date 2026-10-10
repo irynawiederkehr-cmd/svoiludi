@@ -31,8 +31,8 @@ CATS = [
      ['schet-qr', 'dohody-rashody', 'chasy-po-klientam', 'anketa-klienta', 'etiketka-eda', 'statuty-fereyna']),
     ('semya', 'Семья, дети и учёба', 'Школа и учёба, детские пособия и договор с няней.',
      ['put-obrazovaniya', 'posobiya-raschet', 'dogovor-nyani']),
-    ('byt', 'Покупки, транспорт, отдых и питомцы', 'Письма продавцу, лимиты на границе, проездной, поход в горы и животные.',
-     ['pisma-prodavcu', 'tamozhnya-limity', 'proezdnoj-vybor', 'plan-pohoda', 'kartochka-pitomca', 'obyavlenie-pitomec']),
+    ('byt', 'Покупки, транспорт, отдых и питомцы', 'Письма продавцу, лимиты на границе, проездной, поход в горы, животные и передержка.',
+     ['pisma-prodavcu', 'tamozhnya-limity', 'proezdnoj-vybor', 'plan-pohoda', 'kartochka-pitomca', 'zhurnal-perederzhki', 'obyavlenie-pitomec']),
     ('plan', 'Планеры и дневник', 'Год и день на одном листе и дневник эмоций.',
      ['moj-god', 'moj-den', 'moi-emocii']),
 ]

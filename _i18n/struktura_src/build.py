@@ -159,7 +159,7 @@ def dlya_specialistov():
     rel = 'dlya-specialistov/index.html'; url = SITE + 'dlya-specialistov/'
     title = 'Для специалистов: разместиться в справочнике «Свои люди», вакансии и инструменты для своего дела'
     desc = 'Всё для специалистов, которые работают в Швейцарии и говорят по-русски или по-украински: как разместиться в справочнике (в период запуска бесплатно), значок для сайта, вакансии и партнёрство, бесплатные инструменты для своего дела — счёт с QR-кодом, учёт доходов, часы по клиентам.'
-    tools = ['schet-qr', 'dohody-rashody', 'chasy-po-klientam', 'uchet-vremeni', 'anketa-klienta', 'zarplata', 'etiketka-eda', 'statuty-fereyna']
+    tools = ['schet-qr', 'dohody-rashody', 'chasy-po-klientam', 'uchet-vremeni', 'anketa-klienta', 'zarplata', 'etiketka-eda', 'zhurnal-perederzhki', 'statuty-fereyna']
     cards = ''.join(f'<a class="tool tpv" href="../instrumenty/{x}/">{fan(x, "../")}<span class="ttxt"><b>{TOOLNAMES.get(x, x)}</b><em>Бесплатно · открыть →</em></span></a>' for x in tools if HAS(x))
     vak = os.path.isfile('vakansii/index.html')
     main = '<main class="page">\n' + hero('Для специалистов · Свои люди в Швейцарии', 'Вас ищут <em>на вашем языке</em>',
