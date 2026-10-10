@@ -1,0 +1,30 @@
+<!-- @dsCard height=320 -->
+<div class="cv">
+<!--
+blocks: brown 200×200 (10× space-page) · sage 140×120 · mustard 100×100 · sage-soft 300×100 — радиус radius-tile
+arrangement: высокий квадрат brown уходит за верхний край, sage и mustard — справа за край, полоса sage-soft снизу
+pattern: «плитки меню» — 2 ряда по 3 плитки, как верхнее меню на телефоне (самый узнаваемый элемент), одна залита sage
+steps/radii: плитка 56×44, промежуток space-tile 8, скругление radius-tile 14
+-->
+<svg viewBox="0 0 960 320" width="960" height="320" aria-hidden="true">
+<rect class="b-brown r" x="600" y="-20" width="200" height="200"/>
+<rect class="b-sage r" x="820" y="40" width="160" height="120"/>
+<rect class="b-mustard r" x="820" y="180" width="100" height="100"/>
+<rect class="b-tint r" x="500" y="208" width="300" height="100"/>
+<g class="tiles">
+<rect class="t-cur r" x="520" y="214" width="56" height="40"/><rect class="t r" x="584" y="214" width="56" height="40"/><rect class="t r" x="648" y="214" width="56" height="40"/>
+<rect class="t r" x="520" y="262" width="56" height="40"/><rect class="t r" x="584" y="262" width="56" height="40"/><rect class="t r" x="648" y="262" width="56" height="40"/>
+</g>
+</svg>
+<div class="cv-t"><h1>Свои<br>люди</h1><p>Стиль svoiludi.ch и voznesenskaya.ch: один стиль, разный главный цвет.</p></div>
+</div>
+<style>
+.cv{position:relative;width:960px;height:320px;background:var(--bg);overflow:hidden}
+.cv svg{position:absolute;inset:0}
+.r{rx:var(--radius-tile);ry:var(--radius-tile)}
+.b-brown{fill:var(--brown)}.b-sage{fill:var(--sage)}.b-mustard{fill:var(--mustard)}.b-tint{fill:var(--sage-soft)}
+.t{fill:var(--paper);stroke:var(--line);stroke-width:1}.t-cur{fill:var(--sage)}
+.cv-t{position:absolute;left:36px;bottom:30px;max-width:420px}
+.cv-t h1{margin:0;font:400 112px/.94 var(--font-display);color:var(--ink)}
+.cv-t p{margin:14px 0 0;font:400 14px/1.45 var(--font-body);color:var(--muted)}
+</style>
