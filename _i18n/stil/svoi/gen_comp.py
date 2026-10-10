@@ -101,6 +101,20 @@ C['InstallHint'] = ('Подсказки', 640, 'Подсказка «Устан�
 - Варианты: iPhone (Safari, «Поделиться»), Android без кнопки браузера (⋮), Instagram/Telegram («Открыть в браузере»), Android с кнопкой — одна кнопка «Установить приложение».
 **Код:** `card()` в `assets/pwa-app.js`; проверка — `?install=ios|android|inapp`.
 ''')
+C['LanguageQuestion'] = ('Подсказки', 400, 'Вопрос о языке при первом заходе', doc('', '''<span class="ds-cap">svoiludi.ch — две кнопки</span>
+<aside class="pa-card pa-lang"><h3><span lang="uk">Якою мовою тобі комфортно?</span><span lang="ru">На каком языке тебе комфортно?</span></h3><div class="pa-lbtns"><button type="button" lang="uk">Українською</button><button type="button" lang="ru">По-русски</button></div></aside>
+<span class="ds-cap">voznesenskaya.ch — четыре кнопки, коричневым</span>
+<aside class="pa-card pa-lang" data-site="vozn"><h3><span lang="uk">Якою мовою тобі комфортно?</span><span lang="ru">На каком языке тебе комфортно?</span></h3><div class="pa-lbtns"><button type="button" lang="uk">Українською</button><button type="button" lang="ru">По-русски</button><button type="button" lang="de">Deutsch</button><button type="button" lang="en">English</button></div></aside>'''),
+ '''# LanguageQuestion
+
+Карточка снизу экрана при первом заходе на сайт (решение Ирины 10.10.2026, «пиши вопрос проще… и всё, а потом кнопки»): только вопрос на двух языках и кнопки выбора, без иконки, пояснений и крестика.
+
+- Та же карточка, что у подсказки установки (`paper`, рамка `line`, `radius-hint`, `shadow-hint`); вопрос — Forum по центру, двумя строками: сначала украинский, потом русский.
+- Кнопки — как кнопка установки: светлый `sage-soft` с рамкой `sage` 1,5 px, 12 px, жирный Manrope, по две в ряд. На voznesenskaya.ch — коричневая рамка и светло-коричневая заливка, четыре кнопки (Українською · По-русски · Deutsch · English).
+- Порядок кнопок: украинский первым (проект — в первую очередь для украинцев). Флагов нет.
+- Спрашиваем один раз: выбор хранится в браузере (svoiludiLang / irinaTestsLang — те же ключи, что у переключателя RU · UA), другой язык — сразу переход на его страницу. Подсказка установки ждёт выбора, в приложении карточка стоит над вкладками.
+**Код:** `langAsk()` в `assets/pwa-app.js` и `assets/vz-app.js`; проверка — `?lang=ask` (роботы и снимки сайта вопрос не видят).
+''')
 C['HelpDot'] = ('Подсказки', 180, 'Кружок «?» у непонятных опций', doc('', '''<div><span class="lb">Кантон</span><button type="button" class="qh" aria-label="Подсказка: кантон" aria-expanded="true">?</button>
 <div class="qh-pop">Выбери кантон, где ты живёшь. От него зависят праздники в календаре и язык PDF: немецкий, французский или итальянский. Его всегда можно поменять.</div></div>'''),
  '''# HelpDot

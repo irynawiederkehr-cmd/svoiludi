@@ -11,6 +11,7 @@ module.exports = [
   { id: 'sitebar', group: 'Шапка и навигация', title: 'Шапка страниц тестов', page: '/testy/', sel: 'header.sitebar', w: ['phone', 'desk'], themes: L },
   { id: 'tabs', group: 'Шапка и навигация', title: 'Вкладки внизу в режиме приложения', page: '/?app=1', sel: '.pa-tabs', keep: true, w: ['phone'], themes: D },
   { id: 'more', group: 'Шапка и навигация', title: 'Лист «Ещё» в приложении', page: '/?app=1', sel: '.pa-sheet', keep: true, w: ['phone'], themes: D, before: click('.pa-tabs li:last-child > *') },
+  { id: 'langask', group: 'Шапка и навигация', title: 'Вопрос о языке при первом заходе', page: '/?lang=ask', sel: '.pa-lang', keep: true, w: ['phone'], themes: D, wait: 1200 },
   { id: 'hint', group: 'Шапка и навигация', title: 'Подсказка «Установить как приложение»', page: '/?install=ios', sel: '.pa-card', keep: true, w: ['phone'], themes: D, wait: 1200 },
   { id: 'footer', group: 'Шапка и навигация', title: 'Подвал', page: '/', sel: 'footer', w: ['phone'], themes: L },
   // Главная
