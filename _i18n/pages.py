@@ -150,10 +150,11 @@ def fix_links(html, base):
         url = m.group(2)
         if re.match(r'^(https?:|mailto:|tel:|data:|javascript:|\$\{)', url) or url.startswith('#'): return m.group(0)
         u, h = (url.split('#', 1) + [''])[:2]
+        u, q = (u.split('?', 1) + [None])[:2]          # ?kind=volunteer и другие параметры адреса сохраняются (10.10.2026)
         p = resolve(base, u)
         uk = own_uk(p)
         if not uk: return m.group(0)
-        return f'{m.group(1)}="{uk}{"#" + h if "#" in url else ""}"'
+        return f'{m.group(1)}="{uk}{"?" + q if q is not None else ""}{"#" + h if "#" in url else ""}"'
     html = re.sub(r'\b(href)="([^"]*)"', attr, html)
     # 2) якоря внутри страницы: из-за <base> их нужно привязать к этой странице
     html = re.sub(r'href=(\\?["\'])#', lambda m: f'href={m.group(1)}/uk{base}#', html)
