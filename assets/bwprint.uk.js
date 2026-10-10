@@ -3,7 +3,8 @@
    Как работает: листы этих инструментов рисуются на canvas и попадают в PDF через toDataURL — здесь лист копируется, при «Без цвета»
    переводится в оттенки серого (светлый фон становится белым, чтобы не тратить чернила), и внизу справа добавляется строка о сайте.
    В векторных PDF (резюме) «Без цвета» переводит цвета jsPDF в серые. Резюме — документ человека от своего имени: строки о сайте там нет.
-   Совсем без знаков — только по подписке (window.SVL_VIP). */
+   Совсем без знаков — только по подписке (window.SVL_VIP).
+   С 10.10.2026 над строкой о сайте — номер документа (assets/skachivanie.js), и то же самое попадает в PNG (toBlob). */
 (function(){
   var uk = document.documentElement.lang === 'uk', KEY = 'svoiludi.bw';
   var T = uk ? {lbl: 'Без кольору, для дешевого друку', credit: 'Створено на сайті проєкту «Свої люди» · svoiludi.ch'} : {lbl: 'Без кольору, для дешевого друку', credit: 'Створено на сайті проєкту «Свої люди» · svoiludi.ch'};
@@ -39,8 +40,20 @@
       var pw = c.width > c.height ? 297 : 210, k = c.width / pw;
       x.font = '400 ' + Math.round(1.7 * k) + 'px Manrope, Arial, sans-serif'; x.fillStyle = bw ? '#555555' : '#7A6E62'; x.textAlign = 'right'; x.textBaseline = 'alphabetic';
       x.fillText(T.credit, c.width - 8 * k, c.height - 2.4 * k);
+      /* номер документа над строкой о сайте (галочка перед скачиванием, assets/skachivanie.js, 10.10.2026) */
+      var no = window.SVLDOC && window.SVLDOC.label ? window.SVLDOC.label(uk ? 'uk' : 'ru') : '';
+      if (no) x.fillText(no, c.width - 8 * k, c.height - 4.4 * k);
     }
     return orig.apply(c, arguments);
+  };
+  /* PNG этих инструментов (toBlob): та же строка о сайте и номер, что и в PDF */
+  var origBlob = HTMLCanvasElement.prototype.toBlob;
+  if (origBlob) HTMLCanvasElement.prototype.toBlob = function(cb){
+    if (this.__svl || !isSheet(this) || (!bw && (noCredit || window.SVL_VIP))) return origBlob.apply(this, arguments);
+    var rest = [].slice.call(arguments, 1), url = HTMLCanvasElement.prototype.toDataURL.call(this, 'image/png'), im = new Image(), self = this;
+    im.onload = function(){ var c = document.createElement('canvas'); c.width = self.width; c.height = self.height; c.__svl = true; c.getContext('2d').drawImage(im, 0, 0); origBlob.apply(c, [cb].concat(rest)); };
+    im.onerror = function(){ origBlob.apply(self, [cb].concat(rest)); };
+    im.src = url;
   };
   /* векторные PDF (резюме): цвета в серые при «Без цвета» */
   function patch(){

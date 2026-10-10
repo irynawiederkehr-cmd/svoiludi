@@ -52,6 +52,10 @@
   const credit = () => { const l = CFG.lang ? CFG.lang() : (document.documentElement.lang === 'uk' ? 'uk' : 'ru'); return CREDIT[l] || CREDIT.ru; };
   function marks(pg){ if (!pg.wm || vip()) return []; const out = [], dx = 66, dy = 27; for (let r = 0, y = 14; y < pg.wmMaxY - 2; y += dy, r++) for (let x = (r % 2) * dx / 2 - 10; x < pg.w; x += dx) out.push([x, y]); return out; }
   const showCredit = pg => pg.credit && !vip();
+  /* номер документа над строкой «Создано на сайте…» (галочка перед скачиванием, assets/skachivanie.js, 10.10.2026).
+     Только в PDF и PNG, не в предпросмотре; там, где строки о сайте нет (этикетки, резюме), номера на листе тоже нет. */
+  const docLang = () => CFG.lang ? CFG.lang() : (document.documentElement.lang === 'uk' ? 'uk' : 'ru');
+  const docNo = () => (window.SVLDOC && window.SVLDOC.label) ? window.SVLDOC.label(docLang()) : '';
   /* Штамп «ОБРАЗЕЦ» для шаблонов юридических документов (договоры): pg.stamp = {cx, cy, a, color, lines: [[текст, размер, жирный], …]}.
      Это предупреждение «мы не юристы», поэтому подписка (SVL_VIP) его не убирает. */
   const STA = 0.82;
@@ -94,7 +98,7 @@
   const hex = h => [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16));
   async function makePdf(pages, title){
     if (!window.jspdf) throw new Error('lib'); if (!pages.length) throw new Error('empty');
-    const F = await fonts(), doc = new window.jspdf.jsPDF({unit: 'mm', format: 'a4', orientation: pages[0].w > pages[0].h ? 'l' : 'p', compress: true});
+    const no = docNo(), F = await fonts(), doc = new window.jspdf.jsPDF({unit: 'mm', format: 'a4', orientation: pages[0].w > pages[0].h ? 'l' : 'p', compress: true});
     for (const [k, b64] of Object.entries(F)) { doc.addFileToVFS(k + '.ttf', b64); doc.addFont(k + '.ttf', k, 'normal'); }
     pages.forEach((pg, i) => {
       if (i) doc.addPage('a4', pg.w > pg.h ? 'l' : 'p');
@@ -112,7 +116,7 @@
       });
       const mk = marks(pg);
       if (mk.length) { const gs = doc.GState ? a => doc.setGState(new doc.GState({opacity: a})) : null; if (gs) gs(WMA); doc.setFont('Manrope-Bold', 'normal'); doc.setFontSize(WMS); doc.setTextColor(...(gs ? hex(WMC) : [240, 235, 228])); mk.forEach(([x, y]) => doc.text(WMT, x, y, {angle: 24})); if (gs) gs(1); }
-      if (showCredit(pg)) { doc.setFont('Manrope-Regular', 'normal'); doc.setFontSize(4.6); doc.setTextColor(122, 110, 98); doc.text(credit(), pg.w - 8, pg.creditY, {align: 'right'}); }
+      if (showCredit(pg)) { doc.setFont('Manrope-Regular', 'normal'); doc.setFontSize(4.6); doc.setTextColor(122, 110, 98); doc.text(credit(), pg.w - 8, pg.creditY, {align: 'right'}); if (no) doc.text(no, pg.w - 8, pg.creditY - 2, {align: 'right'}); }
       if (pg.stamp) { const st = pg.stamp, g = stampFit(pg), col = hex(st.color), gs = doc.GState ? a => doc.setGState(new doc.GState({opacity: a})) : null; if (gs) gs(STA);
         const box = (i, lw) => { const hw = g.w / 2 - i, hh = g.h / 2 - i, c = [[-hw, -hh], [hw, -hh], [hw, hh], [-hw, hh]].map(q => rot(st, q[0], q[1])); doc.setLineWidth(lw); for (let k = 0; k < 4; k++) doc.line(c[k][0], c[k][1], c[(k + 1) % 4][0], c[(k + 1) % 4][1]); };
         doc.setDrawColor(...col); doc.setLineDashPattern([], 0); box(0, 0.8); box(1.1, 0.3); doc.setTextColor(...col);
@@ -124,7 +128,7 @@
   }
   async function pagePng(pg){
     try { await Promise.all([document.fonts.load('400 20px Manrope'), document.fonts.load('700 20px Manrope')]); } catch (e) {}
-    const k = 8, cv = document.createElement('canvas'); cv.width = Math.round(pg.w * k); cv.height = Math.round(pg.h * k);
+    const k = 8, cv = document.createElement('canvas'); cv.width = Math.round(pg.w * k); cv.height = Math.round(pg.h * k); cv.__svl = true;
     const c = cv.getContext('2d'); c.scale(k, k); c.fillStyle = '#FFFFFF'; c.fillRect(0, 0, pg.w, pg.h);
     const IM = new Map(); await Promise.all(pg.ops.filter(o => o.t === 'img').map(o => new Promise(r => { const im = new Image(); im.onload = () => { IM.set(o, im); r(); }; im.onerror = r; im.src = o.data; })));
     pg.ops.forEach(o => {
@@ -136,7 +140,7 @@
     });
     const mk = marks(pg);
     if (mk.length) { c.save(); c.globalAlpha = WMA; c.fillStyle = WMC; c.font = '700 ' + (WMS * PT) + 'px Manrope'; c.textAlign = 'left'; mk.forEach(([x, y]) => { c.save(); c.translate(x, y); c.rotate(-24 * Math.PI / 180); c.fillText(WMT, 0, 0); c.restore(); }); c.restore(); }
-    if (showCredit(pg)) { c.font = '400 ' + (4.6 * PT) + 'px Manrope'; c.fillStyle = '#7A6E62'; c.textAlign = 'right'; c.fillText(credit(), pg.w - 8, pg.creditY); }
+    if (showCredit(pg)) { c.font = '400 ' + (4.6 * PT) + 'px Manrope'; c.fillStyle = '#7A6E62'; c.textAlign = 'right'; c.fillText(credit(), pg.w - 8, pg.creditY); const no = docNo(); if (no) c.fillText(no, pg.w - 8, pg.creditY - 2); }
     if (pg.stamp) { const st = pg.stamp, g = stampFit(pg); c.save(); c.globalAlpha = STA; c.translate(st.cx, st.cy); c.rotate(-(st.a || 0) * Math.PI / 180); c.strokeStyle = st.color; c.fillStyle = st.color;
       c.lineWidth = 0.8; c.strokeRect(-g.w / 2, -g.h / 2, g.w, g.h); c.lineWidth = 0.3; c.strokeRect(-g.w / 2 + 1.1, -g.h / 2 + 1.1, g.w - 2.2, g.h - 2.2); c.textAlign = 'center'; c.textBaseline = 'alphabetic';
       stampLines(st, g).forEach(([l, y]) => { c.font = (l[2] ? '700 ' : '400 ') + (l[1] * PT) + 'px Manrope'; c.fillText(l[0], 0, y); }); c.restore(); }
