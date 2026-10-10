@@ -118,6 +118,7 @@ def hub():
     <div class="eyebrow">Как устроена Швейцария · Свои люди в Швейцарии</div>
     <h1 id="h1">Как здесь всё устроено, <em>простыми словами</em></h1>
     <p class="lead">Пермиты, налоги, долги, страховки, школа, работа и жильё. Коротко о главном по каждой теме, что сделать самой, какие инструменты помогут и кто из специалистов справочника разбирается в этом вопросе.</p>
+    <p class="tm-calm">Многие правила здесь сначала кажутся строгими. На самом деле законы — это договорённость о том, как разным людям жить рядом в одной стране, а строгость — форма заботы: она всё упорядочивает и защищает каждого. Государство здесь не против тебя: оно поддерживает и идёт навстречу, если ты отвечаешь на письма и соблюдаешь сроки. Не всё получается быстро — и не должно: всему своё время.</p>
     <label class="tm-search"><input id="tmq" type="search" placeholder="Одно слово: Betreibung, пермит B, Kita, 3a" aria-label="Поиск по темам"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg></label>
     <nav class="tm-mods" aria-label="Разделы тем">{mods}</nav>
   </section>
@@ -242,7 +243,7 @@ def article(t):
   <section class="s-hero" aria-labelledby="h1" style="padding-top:18px">
     <h1 id="h1">{a['h1']}</h1>
     <p class="lead">{a['lead']}</p>
-    <p class="upd">Обновлено {a.get('upd', UPD)}</p>
+    <p class="upd">Обновлено {a.get('upd', UPD)}{(': ' + a['updw']) if a.get('updw') else ''}</p>
   </section>
   <div class="art">
     <article class="art-main">
