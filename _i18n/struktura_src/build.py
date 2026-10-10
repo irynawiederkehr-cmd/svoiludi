@@ -406,7 +406,7 @@ def evk():
         p = 'index.html'; h = open(p, encoding='utf-8').read()
         h = re.sub(r'<!--orgsw-->.*?<!--orgsw-->', '', h, flags=re.S)
         sw = ('<!--orgsw--><nav class="evk" aria-label="Специалисты и организации"><a href="./" aria-current="page">Специалисты</a><a href="organizacii/">Организации</a></nav>'
-              '<style>.evk{display:inline-flex;gap:4px;background:var(--sage-soft,#E3E6D6);border-radius:12px;padding:4px;margin:0 0 14px}.evk a{padding:7px 16px;border-radius:9px;font-weight:700;font-size:.9rem;text-decoration:none;color:var(--ink)}.evk a[aria-current]{background:var(--paper,#FFFCF8);box-shadow:0 1px 4px rgba(0,0,0,.12)}</style><!--orgsw-->')
+              '<style>.evk{display:inline-flex;gap:4px;background:var(--sage-soft,#E3E6D6);border-radius:12px;padding:4px;margin:0 0 14px}.evk a{padding:7px 16px;border-radius:9px;font-weight:700;font-size:.9rem;text-decoration:none;color:var(--ink);background:none;border:0;box-shadow:none}.evk a[aria-current]{background:var(--paper,#FFFCF8);box-shadow:0 1px 4px rgba(0,0,0,.12);color:var(--ink)!important}</style><!--orgsw-->')
         h = re.sub(r'(<div class="hero-txt">\s*)', lambda m: m.group(1) + sw, h, count=1)
         open(p, 'w', encoding='utf-8').write(h)
 
