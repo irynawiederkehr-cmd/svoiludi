@@ -162,6 +162,20 @@ def o_proekte():
 ''' + share(url, 'Перешли тем, кто недавно переехал. Сообщение уже готово.', f'Привет! «Свои люди в Швейцарии» — специалисты на русском и украинском, простые ответы о жизни здесь и бесплатные инструменты. {url}')
     write(rel, head(title, desc, url, 1) + '<body>' + top(rel) + main + foot(1))
 
+# Иконки карточек «Работа и своё дело» (просьба Ирины 10.10.2026 «иконки можно поставить на разделы») — в стиле MODICON
+_PC = '<circle cx="50" cy="50" r="46" fill="#FFFCF8" stroke="#4F5E3E" stroke-width="3"/>'
+PROICON = {
+    'vak': None, 'join': None, 'kurs': None,   # берутся из MODICON: work, status, learn
+    'anketa': _PC + '<rect x="30" y="25" width="40" height="52" rx="6" fill="#E3E8D6" stroke="#4F5E3E" stroke-width="3"/><rect x="40" y="19" width="20" height="11" rx="3.5" fill="#FFFCF8" stroke="#4F5E3E" stroke-width="2.6"/><path d="M38 43h24M38 53h24M38 63h14" stroke="#4F5E3E" stroke-width="3" stroke-linecap="round"/>',
+    'badge': _PC + '<path d="M41 56l-6 21 9-5 5 8 3-19M59 56l6 21-9-5-5 8-3-19" fill="#FFF6DF" stroke="#B98324" stroke-width="2.6" stroke-linejoin="round"/><circle cx="50" cy="43" r="17" fill="#F3E3C2" stroke="#B98324" stroke-width="3"/><path d="M50 51s-7.5-4.6-9-8.6a4.8 4.8 0 0 1 9-4.4 4.8 4.8 0 0 1 9 4.4c-1.5 4-9 8.6-9 8.6z" fill="#FFFCF8" stroke="#B98324" stroke-width="2.4" stroke-linejoin="round"/>',
+    'org': _PC + '<rect x="30" y="45" width="40" height="29" rx="3" fill="#E3E8D6" stroke="#4F5E3E" stroke-width="3"/><path d="M24 47l26-20 26 20" fill="none" stroke="#4F5E3E" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M50 68s-8-5-9.6-9.3a5 5 0 0 1 9.6-4.6 5 5 0 0 1 9.6 4.6C58 63 50 68 50 68z" fill="#F7E1EC" stroke="#B5357A" stroke-width="2.4" stroke-linejoin="round"/>',
+    'event': _PC + '<rect x="24" y="29" width="52" height="45" rx="6" fill="#F6E0D9" stroke="#A0523D" stroke-width="3"/><path d="M24 42h52" stroke="#A0523D" stroke-width="3"/><path d="M38 22v12M62 22v12" stroke="#A0523D" stroke-width="3" stroke-linecap="round"/><path d="M50 51l2.6 5.3 5.8.8-4.2 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8-4.2-4.1 5.8-.8z" fill="#FFFCF8" stroke="#A0523D" stroke-width="2.2" stroke-linejoin="round"/>',
+}
+def pico(k):
+    src = {'vak': 'work', 'join': 'status', 'kurs': 'learn'}
+    svg = MODICON.get(src[k], '') if k in src else PROICON[k]
+    return f'<svg class="tm-ic" viewBox="0 0 100 100" width="44" height="44" aria-hidden="true">{svg}</svg>'
+
 # --- «Для специалистов» ---
 def dlya_specialistov():
     rel = 'dlya-specialistov/index.html'; url = SITE + 'dlya-specialistov/'
@@ -174,13 +188,13 @@ def dlya_specialistov():
         'Здесь специалисты справочника ищут сотрудников и партнёров, а некоммерческие организации — волонтёров. Здесь же можно разместить себя в справочнике, свою организацию, курс или событие и взять бесплатные инструменты для своего дела. Люди ищут друг друга и часто не могут найти, потому что всё разбросано по чатам и группам. Здесь всё в одном месте, и чем шире справочник, тем проще найти своих.', 'pro',
         '\n      <span class="addbtns"><a class="btn" href="../vakansii/">Вакансии и партнёрство</a><a class="btn ghost" href="../join/">Разместиться в справочнике</a></span>') + f'''
   <div class="pro-grid">
-    {'<a class="pro-card" href="../vakansii/"><b>Вакансии и партнёрство</b><p>Ищете сотрудника, партнёра или волонтёров? Бесплатно для всех и всегда.</p><span class="go">Открыть →</span></a>' if vak else '<div class="pro-card soon"><span class="soon-tag">Скоро</span><b>Вакансии и партнёрство</b><p>«Ищу сотрудника» и «Ищу партнёра». Бесплатно для членов сообщества «Свои люди». Не коммерческая услуга.</p></div>'}
-    <a class="pro-card" href="../join/"><b>Разместиться в справочнике</b><p>Анкета за 15 минут. Базовая карточка в период запуска, до конца 2027 года, бесплатна: фото, профиль, услуги, контакты, визитка и прайс-лист для телефона и PDF.</p><span class="go">Как разместиться →</span></a>
-    <a class="pro-card" href="../join/#form"><b>Анкета специалиста</b><p>Заполните основное на сайте, скачайте анкету в Word, допишите и отправьте с портретным фото.</p><span class="go">Заполнить →</span></a>
-    <a class="pro-card" href="../badge/"><b>Значок «Свои люди» для сайта</b><p>Поставьте значок со ссылкой на свою карточку на сайт, в Instagram или подпись письма. Клиентам проще вас найти и проверить.</p><span class="go">Взять значок →</span></a>
-    {'<a class="pro-card" href="../organizacii/#add"><b>Организациям — бесплатно всегда</b><p>Ферайн, фонд или центр помощи? Карточка организации, события, курсы и поиск волонтёров для некоммерческих организаций бесплатны всегда.</p><span class="go">Разместить организацию →</span></a>' if os.path.isfile('organizacii/index.html') else ''}
-    <a class="pro-card" href="../kursy/#add"><b>Добавить курс или занятие</b><p>Регулярные занятия, курсы, мастер-классы, вебинары. Размещение бесплатно до конца 2027 года. Курсы видны и в вашей карточке.</p><span class="go">Добавить курс →</span></a>
-    <a class="pro-card" href="../events/#add"><b>Добавить событие</b><p>Встреча, праздник, выставка, лекция. События видны в афише и в вашей карточке.</p><span class="go">Добавить событие →</span></a>
+    {'<a class="pro-card" href="../vakansii/">' + pico("vak") + '<b>Вакансии и партнёрство</b><p>Ищете сотрудника, партнёра или волонтёров? Бесплатно для всех и всегда.</p><span class="go">Открыть →</span></a>' if vak else '<div class="pro-card soon"><span class="soon-tag">Скоро</span><b>Вакансии и партнёрство</b><p>«Ищу сотрудника» и «Ищу партнёра». Бесплатно для членов сообщества «Свои люди». Не коммерческая услуга.</p></div>'}
+    <a class="pro-card" href="../join/">{pico("join")}<b>Разместиться в справочнике</b><p>Анкета за 15 минут. Базовая карточка в период запуска, до конца 2027 года, бесплатна: фото, профиль, услуги, контакты, визитка и прайс-лист для телефона и PDF.</p><span class="go">Как разместиться →</span></a>
+    <a class="pro-card" href="../join/#form">{pico("anketa")}<b>Анкета специалиста</b><p>Заполните основное на сайте, скачайте анкету в Word, допишите и отправьте с портретным фото.</p><span class="go">Заполнить →</span></a>
+    <a class="pro-card" href="../badge/">{pico("badge")}<b>Значок «Свои люди» для сайта</b><p>Поставьте значок со ссылкой на свою карточку на сайт, в Instagram или подпись письма. Клиентам проще вас найти и проверить.</p><span class="go">Взять значок →</span></a>
+    {'<a class="pro-card" href="../organizacii/#add">' + pico("org") + '<b>Организациям — бесплатно всегда</b><p>Ферайн, фонд или центр помощи? Карточка организации, события, курсы и поиск волонтёров для некоммерческих организаций бесплатны всегда.</p><span class="go">Разместить организацию →</span></a>' if os.path.isfile('organizacii/index.html') else ''}
+    <a class="pro-card" href="../kursy/#add">{pico("kurs")}<b>Добавить курс или занятие</b><p>Регулярные занятия, курсы, мастер-классы, вебинары. Размещение бесплатно до конца 2027 года. Курсы видны и в вашей карточке.</p><span class="go">Добавить курс →</span></a>
+    <a class="pro-card" href="../events/#add">{pico("event")}<b>Добавить событие</b><p>Встреча, праздник, выставка, лекция. События видны в афише и в вашей карточке.</p><span class="go">Добавить событие →</span></a>
   </div>
   <section class="tm-schemes" aria-labelledby="h-tools"><h2 id="h-tools">Инструменты для своего дела</h2><p>Бесплатно, без регистрации, PDF на русском и на языке кантона.</p><div class="pro-tools">{cards}</div></section>
   <section aria-labelledby="h-know"><h2 id="h-know">Полезно знать</h2><div class="rel">
@@ -398,15 +412,15 @@ def evk():
         h = re.sub(r'<!--evk-->.*?<!--evk-->', '', h, flags=re.S)
         sw = ('<!--evk--><nav class="evk" aria-label="События и курсы">'
               + (f'<a href="./" aria-current="page">События</a><a href="../kursy/">Курсы и занятия</a>' if cur == 'ev' else f'<a href="../events/">События</a><a href="./" aria-current="page">Курсы и занятия</a>')
-              + '</nav><style>.evk{display:inline-flex;gap:4px;background:var(--sage-soft,#E3E6D6);border-radius:12px;padding:4px;margin:0 0 14px}.evk a{padding:7px 16px;border-radius:9px;font-weight:700;font-size:.9rem;text-decoration:none;color:var(--ink);background:none;border:0;box-shadow:none}.evk a[aria-current]{background:var(--paper,#FFFCF8);box-shadow:0 1px 4px rgba(0,0,0,.12);color:var(--ink)!important}</style><!--evk-->')
+              + '</nav><style>.evk{display:inline-flex;flex-wrap:wrap;gap:4px;background:var(--sage-soft,#E3E6D6);border-radius:12px;padding:4px;margin:0 0 14px}.evk a{padding:7px 16px;border-radius:9px;font-weight:700;font-size:.9rem;text-decoration:none;color:var(--ink);background:none;border:0;box-shadow:none}.evk a[aria-current]{background:var(--paper,#FFFCF8);box-shadow:0 1px 4px rgba(0,0,0,.12);color:var(--ink)!important}@media (max-width:420px){.evk{gap:2px}.evk a{padding:7px 9px;font-size:.84rem}}@media (max-width:380px){.evk a{padding:7px 7px;font-size:.8rem}}</style><!--evk-->')
         h = re.sub(r'(<div class="hero-txt">\s*)', lambda m: m.group(1) + sw, h, count=1)
         open(p, 'w', encoding='utf-8').write(h)
     # главная: «Специалисты | Организации» (раздел «Организации», решение Ирины 10.10.2026), тот же вид, что «События | Курсы»
     if os.path.isfile('organizacii/index.html'):
         p = 'index.html'; h = open(p, encoding='utf-8').read()
         h = re.sub(r'<!--orgsw-->.*?<!--orgsw-->', '', h, flags=re.S)
-        sw = ('<!--orgsw--><nav class="evk" aria-label="Специалисты и организации"><a href="./" aria-current="page">Специалисты</a><a href="organizacii/">Организации</a></nav>'
-              '<style>.evk{display:inline-flex;gap:4px;background:var(--sage-soft,#E3E6D6);border-radius:12px;padding:4px;margin:0 0 14px}.evk a{padding:7px 16px;border-radius:9px;font-weight:700;font-size:.9rem;text-decoration:none;color:var(--ink);background:none;border:0;box-shadow:none}.evk a[aria-current]{background:var(--paper,#FFFCF8);box-shadow:0 1px 4px rgba(0,0,0,.12);color:var(--ink)!important}</style><!--orgsw-->')
+        sw = ('<!--orgsw--><nav class="evk" aria-label="Специалисты, организации и волонтёрство"><a href="./" aria-current="page">Специалисты</a><a href="organizacii/">Организации</a><a href="vakansii/?kind=volunteer">Волонтёрство</a></nav>'
+              '<style>.evk{display:inline-flex;flex-wrap:wrap;gap:4px;background:var(--sage-soft,#E3E6D6);border-radius:12px;padding:4px;margin:0 0 14px}.evk a{padding:7px 16px;border-radius:9px;font-weight:700;font-size:.9rem;text-decoration:none;color:var(--ink);background:none;border:0;box-shadow:none}.evk a[aria-current]{background:var(--paper,#FFFCF8);box-shadow:0 1px 4px rgba(0,0,0,.12);color:var(--ink)!important}@media (max-width:420px){.evk{gap:2px}.evk a{padding:7px 9px;font-size:.84rem}}@media (max-width:380px){.evk a{padding:7px 7px;font-size:.8rem}}</style><!--orgsw-->')
         h = re.sub(r'(<div class="hero-txt">\s*)', lambda m: m.group(1) + sw, h, count=1)
         open(p, 'w', encoding='utf-8').write(h)
 

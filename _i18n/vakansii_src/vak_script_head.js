@@ -50,7 +50,7 @@ const copyText = t => { try { return navigator.clipboard.writeText(t).then(() =>
 const authorOf = v => v.author && typeof v.author === 'object' ? v.author : SPECIALISTS.find(s => s.id === v.author) || null;   // автор с карточкой — id; без карточки — { name, firm, role, contacts: { telegram, email } }
 const confirmed = v => !!(v.confirm && v.confirm.date);
 const pool = () => VACANCIES.filter(v => v.status === 'активен' && confirmed(v) && (!v.until || v.until > today));
-const state = { kind: '', cat: '', canton: '', lang: '', remote: '' };
+const state = { kind: (/[?&]kind=(staff|partner|volunteer)\b/.exec(location.search) || [])[1] || '', cat: '', canton: '', lang: '', remote: '' };   // ?kind=volunteer — из переключателя «Специалисты | Организации | Волонтёрство» (10.10.2026)
 function match(v, skip){
   return (skip === 'kind' || !state.kind || v.kind === state.kind)
     && (skip === 'cat' || !state.cat || v.cat === state.cat)
@@ -78,6 +78,7 @@ function render(){
   document.getElementById('count').textContent = `${list.length} ${plural(list.length, 'объявление', 'объявления', 'объявлений')}`;
   document.getElementById('reset').hidden = !Object.values(state).some(Boolean);
   Object.keys(state).forEach(id => document.getElementById(id).classList.toggle('set', !!state[id]));
+  const vs = document.getElementById('volsw'); if (vs) vs.hidden = state.kind !== 'volunteer';
   fillSelects();
 }
 function fillSelects(){
