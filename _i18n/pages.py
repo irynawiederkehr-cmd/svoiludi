@@ -236,6 +236,8 @@ def post(html, src):
         html = opros_keep_russian_payload(html)
     if src == 'index.html':   # подтверждение карточки/прайс-листа: ответ специалисту — на языке страницы (как на сайте с 05.10.2026)
         html = html.replace('&lang=ru${text', '&lang=uk${text')
+    if src == 'prilozhenie/index.html':   # галерея «Как установить приложение»: украинские картинки (scratchpad gal/mock.js, 10.10.2026)
+        html = html.replace('src="img/ru/', 'src="img/uk/')
     if src == 'join/index.html':   # украинская анкета в Word (собирается _i18n/docx.py)
         html = html.replace("ANKETA = 'files/anketa.docx'", "ANKETA = 'files/anketa.uk.docx'")
         html = html.replace('href="files/anketa.docx" download="Анкета специалиста — Свои люди в Швейцарии.docx"',

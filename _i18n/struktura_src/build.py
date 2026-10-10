@@ -194,10 +194,23 @@ def prilozhenie():
     desc = 'Пошагово: как поставить «Свои люди в Швейцарии» иконкой на экран телефона — на iPhone и iPad через Safari, на Android через Chrome или Samsung Internet. Бесплатно, без App Store и Google Play, без регистрации. Как обновлять, что делать, если ссылка открылась в Instagram или Telegram, как перенести записи инструментов и как удалить.'
     def steps(items):
         return '<ol>' + ''.join(f'<li><span>{x}</span></li>' for x in items) + '</ol>'
+    # галерея картинок (10.10.2026): макеты телефона в prilozhenie/img/ru/ (украинские — img/uk/, замена в _i18n/pages.py post); картинки — scratchpad gal/mock.js
+    def gal(items, one=False):
+        return f'<div class="pr-gal{" one" if one else ""}" role="list">' + ''.join(
+            f'<figure role="listitem"><button type="button" class="pr-shot"><img src="img/ru/{f}.jpg" width="620" height="1228" loading="lazy" decoding="async" alt="{alt}"></button><figcaption>' + ('' if one else f'<b>{i}</b>') + f'{cap}</figcaption></figure>'
+            for i, (f, alt, cap) in enumerate(items, 1)) + '</div>'
+    ghint = '<p class="pr-ghint">Листай картинки вбок. Нажми на картинку, чтобы увеличить.</p>'
     main = '<main class="page">\n' + hero('Приложение · Свои люди в Швейцарии', '«Свои люди» на телефоне: <em>как установить приложение за минуту</em>',
         'Иконка «Свои люди» на экране телефона — и все статьи, инструменты и специалисты всегда под рукой. Это бесплатно, без App Store и Google Play и без регистрации. Ниже по шагам для iPhone, iPad и Android.', 'app',
         '\n      <span class="addbtns"><button type="button" class="btn" id="pr-hint">Показать подсказку на этом телефоне</button></span>') + f'''
   <div class="prose">
+    <section aria-labelledby="h-look"><h2 id="h-look">Так выглядит приложение на телефоне</h2>
+      {ghint}
+      {gal([('home-ios', 'Экран телефона: иконка «Свои люди» среди других приложений', 'Иконка «Свои люди» на экране телефона, рядом с другими приложениями.'),
+            ('app-home', 'Приложение «Свои люди» открыто во весь экран, внизу вкладки', 'Открывается во весь экран, без адресной строки. Внизу вкладки: Специалисты, Швейцария, Инструменты, Что нового и Ещё.'),
+            ('app-tools', 'Вкладка «Инструменты» в приложении', 'Вкладка «Инструменты»: бесплатные календари, калькуляторы и шаблоны. У каждого видно, какой файл получится.'),
+            ('app-more', 'Меню «Ещё» в приложении', 'Кнопка «Ещё»: события и курсы, «О проекте», поделиться с друзьями, обновить страницу, сменить язык.')])}
+    </section>
     <section aria-labelledby="h-why"><h2 id="h-why">Зачем ставить приложение</h2>
       <ul class="okl">
         <li><b>Не потеряешь.</b> Ссылку не нужно искать в чатах и закладках: иконка всегда на экране.</li>
@@ -211,6 +224,11 @@ def prilozhenie():
               'Нажми «Поделиться» — квадрат со стрелкой вверх. На iPhone он внизу экрана, на iPad вверху справа. Если его не видно, сначала нажми «⋯» внизу справа.',
               'Прокрути список вниз и выбери «На экран „Домой“».',
               'Нажми «Добавить». Иконка «Свои люди» появится на экране, как у обычного приложения.'])}
+      <p class="pr-ghint">Так это выглядит. Картинки примерные: на твоём телефоне кнопки могут выглядеть чуть иначе, но находятся на тех же местах. Нажми на картинку, чтобы увеличить.</p>
+      {gal([('ios-1', 'Safari на iPhone: кнопка «Поделиться» внизу экрана', 'Открой svoiludi.ch в Safari и нажми «Поделиться» — квадрат со стрелкой вверх.'),
+            ('ios-2', 'Меню «Поделиться» на iPhone: пункт «На экран „Домой“»', 'Прокрути список вниз и выбери «На экран „Домой“».'),
+            ('ios-3', 'Окно «На экран „Домой“» на iPhone: кнопка «Добавить»', 'Нажми «Добавить» вверху справа. Название можно оставить как есть.'),
+            ('home-ios', 'Иконка «Свои люди» на экране iPhone', 'Готово: иконка «Свои люди» на экране. Нажми на неё — откроется приложение.')])}
     </section>
     <section class="todo" aria-labelledby="h-android"><h2 id="h-android">Android</h2>
       {steps(['Открой <a href="https://svoiludi.ch/">svoiludi.ch</a> в браузере <b>Chrome</b>.',
@@ -218,9 +236,15 @@ def prilozhenie():
               'Выбери «Установить приложение» или «Добавить на главный экран».',
               'Подтверди. Иконка «Свои люди» появится на экране.'])}
       <p>В браузере <b>Samsung Internet</b>: меню ≡ внизу справа → «Добавить страницу на» → «Главный экран».</p>
+      <p class="pr-ghint">Так это выглядит в Chrome. Картинки примерные: на твоём телефоне меню может выглядеть чуть иначе. Нажми на картинку, чтобы увеличить.</p>
+      {gal([('and-1', 'Chrome на Android: меню ⋮ вверху справа', 'Открой svoiludi.ch в Chrome и нажми ⋮ вверху справа.'),
+            ('and-2', 'Меню Chrome: пункт «Установить приложение»', 'Выбери «Установить приложение». На некоторых телефонах пункт называется «Добавить на главный экран».'),
+            ('and-3', 'Окно «Установить приложение»: кнопка «Установить»', 'Подтверди: нажми «Установить».'),
+            ('home-android', 'Иконка «Свои люди» на экране Android', 'Готово: иконка «Свои люди» среди приложений. Нажми на неё — откроется приложение.')])}
     </section>
     <section aria-labelledby="h-inapp"><h2 id="h-inapp">Ссылка открылась в Instagram, Telegram или WhatsApp</h2>
       <p>Внутри этих приложений установить нельзя: у них свой маленький браузер. Нажми ⋯ или ⋮ вверху и выбери «Открыть в браузере» (Safari на iPhone, Chrome на Android). Дальше — шаги выше.</p>
+      {gal([('inapp', 'Встроенный браузер: меню ⋯ и пункт «Открыть в браузере»', 'Нажми ⋯ вверху и выбери «Открыть в браузере». Дальше — шаги для iPhone или Android выше.')], one=True)}
     </section>
     <section aria-labelledby="h-upd"><h2 id="h-upd">Как обновлять</h2>
       <ul class="okl">
@@ -236,7 +260,15 @@ def prilozhenie():
       <p>Как обычную иконку: удерживай её пальцем и выбери «Удалить приложение» или «Удалить с экрана». Сайт <a href="https://svoiludi.ch/">svoiludi.ch</a> при этом остаётся, его можно открыть в браузере в любой момент.</p>
     </section>
   </div>
-<script>document.getElementById('pr-hint').addEventListener('click',function(){{if(window.svoiInstallHint)window.svoiInstallHint();}});</script>
+<dialog class="pr-lb" id="pr-lb" aria-label="Картинка крупно"><figure><img alt=""><figcaption></figcaption></figure><div class="pr-lbn"><button type="button" class="pr-prev" aria-label="Предыдущая картинка">←</button><span class="pr-cnt"></span><button type="button" class="pr-next" aria-label="Следующая картинка">→</button><button type="button" class="pr-close">Закрыть</button></div></dialog>
+<script>document.getElementById('pr-hint').addEventListener('click',function(){{if(window.svoiInstallHint)window.svoiInstallHint();}});
+(function(){{var d=document.getElementById('pr-lb');if(!d||!d.showModal)return;var im=d.querySelector('img'),cap=d.querySelector('figcaption'),cnt=d.querySelector('.pr-cnt'),list=[],i=0;
+function show(){{var f=list[i],s=f.querySelector('img');im.src=s.currentSrc||s.src;im.alt=s.alt;var fc=f.querySelector('figcaption').cloneNode(true),nb=fc.querySelector('b');if(nb)nb.remove();cap.textContent=fc.textContent;cnt.textContent=list.length>1?(i+1)+' / '+list.length:'';d.querySelector('.pr-prev').hidden=d.querySelector('.pr-next').hidden=list.length<2;}}
+function go(k){{i=(i+k+list.length)%list.length;show();}}
+document.querySelectorAll('.pr-gal').forEach(function(g){{var fs=[].slice.call(g.querySelectorAll('figure'));fs.forEach(function(f,n){{f.querySelector('.pr-shot').addEventListener('click',function(){{list=fs;i=n;show();d.showModal();}});}});}});
+d.querySelector('.pr-prev').addEventListener('click',function(){{go(-1);}});d.querySelector('.pr-next').addEventListener('click',function(){{go(1);}});d.querySelector('.pr-close').addEventListener('click',function(){{d.close();}});
+d.addEventListener('click',function(e){{if(e.target===d)d.close();}});d.addEventListener('keydown',function(e){{if(e.key==='ArrowLeft')go(-1);if(e.key==='ArrowRight')go(1);}});
+var x0=null;d.addEventListener('touchstart',function(e){{x0=e.touches[0].clientX;}},{{passive:true}});d.addEventListener('touchend',function(e){{if(x0===null)return;var dx=e.changedTouches[0].clientX-x0;x0=null;if(Math.abs(dx)>45&&list.length>1)go(dx<0?1:-1);}});}})();</script>
 ''' + share(url, 'Перешли тем, кто недавно переехал: пусть «Свои люди» тоже будут под рукой.', f'Привет! «Свои люди в Швейцарии» можно поставить на телефон как приложение — вот как это сделать за минуту: {url}')
     write(rel, head(title, desc, url, 1) + '<body>' + top(rel) + main + foot(1))
 
