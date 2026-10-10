@@ -42,15 +42,15 @@ const fixLetter = (v, text) => ({ su: `Исправления в объявле�
 
 /* блок подтверждения — общий движок assets/podtverdit.js (одной кнопкой, как у карточки; 10.10.2026). Все условия обязательны. */
 function okBox(v){
-  const L = confirmLetter(v), F = fixLetter(v, '{text}'), n = checksFor(v).length;
-  return `<div class="pv-box" data-pv-kind="vacancy" data-pv-id="${esc(v.id)}" data-pv-key="${esc(v.key || '')}" data-pv-lang="ru" data-mail="${MAIL}" data-su-ok="${esc(L.su)}" data-body-ok="${esc(L.body)}" data-su-fix="${esc(F.su)}" data-body-fix="${esc(F.body)}" data-t-sending="Отправляю…" data-t-ok="Спасибо! Подтверждение получено {t}. Мы опубликуем объявление, обычно в тот же день." data-t-copy=" Копия придёт на ваш e-mail." data-t-fixok="Спасибо! Исправления получены {t}. Мы внесём их и пришлём ссылку ещё раз." data-t-empty="Напишите, пожалуйста, что исправить." data-t-fail="Не получилось отправить. Пожалуйста, {a} ({m})." data-t-mail="отправьте подтверждение письмом" data-t-gmail="Открыть письмо в Gmail" data-t-letter="Открылось письмо в вашей почте с текстом объявления и всеми условиями. Отправьте его, это и есть подтверждение. Письмо не открылось? {g} или напишите на {m}.">
+  const L = confirmLetter(v), F = fixLetter(v, '{text}'), n = checksFor(v).length, cm = cardMailV(v);
+  return `<div class="pv-box" data-pv-kind="vacancy" data-pv-id="${esc(v.id)}" data-pv-key="${esc(v.key || '')}" data-pv-lang="ru" data-mail="${MAIL}" data-su-ok="${esc(L.su)}" data-body-ok="${esc(L.body)}" data-su-fix="${esc(F.su)}" data-body-fix="${esc(F.body)}" data-t-sending="Отправляю…" data-t-ok="Спасибо! Подтверждение получено {t}. Мы опубликуем объявление, обычно в тот же день." data-t-copy=" Копия придёт на ваш e-mail." data-t-fixok="Спасибо! Исправления получены {t}. Мы внесём их и пришлём ссылку ещё раз." data-t-empty="Напишите, пожалуйста, что исправить." data-pv-cmail="${esc(cm)}" data-t-fail="${cm ? 'Не получилось отправить. Пожалуйста, {a} с адреса {c} на {m}.' : 'Не получилось отправить. Пожалуйста, {a} ({m}).'}" data-t-mail="отправьте подтверждение письмом" data-t-gmail="Открыть письмо в Gmail" data-t-letter="${cm ? 'Открылось письмо в вашей почте с текстом объявления и всеми условиями. Отправьте его с адреса {c}: подтверждения мы принимаем только с e-mail вашей карточки. Письмо не открылось? {g} или напишите с этого адреса на {m}.' : 'Открылось письмо в вашей почте с текстом объявления и всеми условиями. Отправьте его, это и есть подтверждение. Письмо не открылось? {g} или напишите на {m}.'}">
     <b>Подтвердите, пожалуйста, каждое условие</b>
     <div class="pv-list">${checksFor(v).map(c => `<label class="pv-ok"><input type="checkbox" data-pv-agree data-id="${c.id}"> <span>${esc(c.t)}</span></label>`).join('')}</div>
     <span class="free-line">${FREE_NOTE}</span>
     <div class="pv-acts"><button class="btn" type="button" data-pv-send="ok" disabled>Подтверждаю</button><button class="btn ghost" type="button" data-pv-fixopen>Нужно исправить</button></div>
     <div class="pv-fix" hidden><textarea data-pv-text rows="4" maxlength="1500" placeholder="Что исправить в объявлении"></textarea><div class="pv-acts"><button class="btn" type="button" data-pv-send="fix">Отправить исправления</button></div></div>
     <span class="pv-small">Отмечено: <b data-pv-n>0</b> из ${n}.</span>
-    <span class="pv-small" data-pv-msg data-online="Одно нажатие — и готово. Копия придёт на ваш e-mail.">${window.SVL_PV_ONLINE ? 'Одно нажатие — и готово. Копия придёт на ваш e-mail.' : 'После нажатия откроется письмо из вашей почты с текстом объявления и всеми условиями. Отправьте его, это и есть подтверждение.'}</span></div>`;
+    <span class="pv-small" data-pv-msg data-online="Одно нажатие — и готово. Копия придёт на ваш e-mail.">${window.SVL_PV_ONLINE ? 'Одно нажатие — и готово. Копия придёт на ваш e-mail.' : (cm ? `После нажатия откроется письмо из вашей почты с текстом объявления и всеми условиями. Отправьте его с адреса ${esc(cm)}: подтверждения мы принимаем только с e-mail вашей карточки.` : 'После нажатия откроется письмо из вашей почты с текстом объявления и всеми условиями. Отправьте его, это и есть подтверждение.')}</span></div>`;
 }
 function confirmView(v){
   const k = KINDS[v.kind] || KINDS.staff, a = authorOf(v), box = document.getElementById('qmCard');
@@ -67,7 +67,7 @@ function confirmView(v){
 }
 /* блок для Ирины (режим ?ira=1) в окне объявления */
 function adminBox(v, a){
-  const to = a && a.contacts && a.contacts.email, L = askLetter(v);
+  const to = cardMailV(v) || (a && a.contacts && a.contacts.email), L = askLetter(v);   // ссылка — на e-mail карточки автора
   const st = confirmed(v) ? `подтверждено ${fmtDate(v.confirm.date)} (${esc(v.confirm.via || '')}) · видно на сайте` : 'ждёт подтверждения автора · на сайте не видно';
   return `<div class="adm"><b>Для Ирины</b><span>Статус: ${st}</span>${confirmed(v) ? '' : `<div class="acts">${to ? `<a class="btn" href="${esc(mailto(to, L.su, L.body))}">Отправить на подтверждение</a><a class="btn ghost" href="${esc(gmail(to, L.su, L.body))}" ${ext}>То же в Gmail</a>` : ''}<button class="btn ghost" type="button" data-copyask>Скопировать для Telegram</button></div><span class="note">Ссылка для автора: ${esc(okUrl(v))}</span>`}</div>`;
 }

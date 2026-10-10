@@ -12,7 +12,8 @@
    <div class="pv-box" data-pv-kind="event|kurs|vacancy" data-pv-id="…" data-pv-key="…" data-pv-lang="ru"
         data-mail="…" data-su-ok="…" data-body-ok="…" data-su-fix="…" data-body-fix="… {text} …"
         data-t-sending="…" data-t-ok="… {t} …" data-t-copy="…" data-t-fixok="… {t} …" data-t-empty="…"
-        data-t-fail="…" data-t-mail="…" data-t-gmail="…" data-t-letter="…">
+        data-t-fail="…" data-t-mail="…" data-t-gmail="…" data-t-letter="… {c} …" data-pv-cmail="e-mail карточки">
+   (e-mail карточки — один для всех подтверждений, решение Ирины 10.10.2026: ссылка уходит только на него, письмо-подтверждение принимаем только с него)
      … <label class="pv-ok"><input type="checkbox" data-pv-agree data-id="real"> <span>…</span></label> …
      <div class="pv-acts"><button class="btn" type="button" data-pv-send="ok" disabled>…</button><button class="btn ghost" type="button" data-pv-fixopen>…</button></div>
      <div class="pv-fix" hidden><textarea data-pv-text></textarea><div class="pv-acts"><button class="btn" type="button" data-pv-send="fix">…</button></div></div>
@@ -58,7 +59,7 @@
   }
   function byMail(box, msg, L, opened){
     var link = '<a href="' + esc(mailto(L.to, L.su, L.body)) + '">' + esc(A(box, 'data-t-mail')) + '</a>', g = '<a href="' + esc(gmail(L.to, L.su, L.body)) + '" target="_blank" rel="noopener">' + esc(A(box, 'data-t-gmail')) + '</a>';
-    msg.innerHTML = esc(A(box, opened ? 'data-t-letter' : 'data-t-fail')).replace('{a}', link).replace('{g}', g).replace('{m}', esc(L.to));
+    msg.innerHTML = esc(A(box, opened ? 'data-t-letter' : 'data-t-fail')).replace('{a}', link).replace('{g}', g).replace('{m}', esc(L.to)).replace('{c}', '<b>' + esc(A(box, 'data-pv-cmail')) + '</b>');
   }
   document.addEventListener('click', function(e){
     var o = e.target.closest && e.target.closest('.pv-box [data-pv-fixopen]');
