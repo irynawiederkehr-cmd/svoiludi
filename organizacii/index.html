@@ -524,6 +524,31 @@ a.yours:hover{background:#EBD3A3}
 .jc .marks{margin:6px 0 0}
 
 @media (max-width:420px){.evk{gap:2px}.evk a{padding:7px 9px;font-size:.84rem}}@media (max-width:380px){.evk a{padding:7px 7px;font-size:.8rem}}
+/* заявка организации на сайте (10.10.2026) — как форма на «Как разместиться» (join/), по одному полю в строке */
+.form{background:var(--paper);border:1.5px solid var(--line);border-radius:24px;padding:clamp(18px,3vw,30px);margin:22px 0 10px;scroll-margin-top:90px}
+.form h2{margin:0 0 4px}
+.form .hint{color:var(--muted);margin:0 0 18px;font-size:.95rem;max-width:66ch}
+.fg{display:grid;grid-template-columns:1fr;gap:14px;max-width:640px}
+.f{display:flex;flex-direction:column;gap:7px;min-width:0}
+.f label{font-size:.78rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;flex-wrap:wrap}
+.f label s{text-decoration:none;color:var(--mustard,#B98324);margin-left:4px}
+.f input,.f select,.f textarea{width:100%;box-sizing:border-box;font:inherit;font-size:1rem;color:var(--ink);background:var(--bg);border:1.5px solid var(--line);border-radius:14px;padding:12px 14px;min-height:50px}
+.f textarea{resize:vertical;line-height:1.45}
+.f input:focus,.f select:focus,.f textarea:focus{border-color:var(--brown);outline:none}
+.f.miss input,.f.miss select,.f.miss textarea{border-color:#C0392B}
+.f small{color:var(--muted);font-size:.82rem}
+.f small a{color:var(--ink);font-weight:600}
+.chk{display:flex;flex-wrap:wrap;gap:8px}
+.chk label{text-transform:none;letter-spacing:0;font-size:.92rem;font-weight:600;color:var(--ink);background:var(--bg);border:1.5px solid var(--line);border-radius:12px;padding:7px 13px;cursor:pointer;display:inline-flex;gap:7px;align-items:center}
+.chk input{accent-color:var(--brown);width:auto;min-height:0;padding:0;margin:0}
+.chk label:has(input:checked){border-color:var(--brown);background:var(--soft)}
+.form .acts{margin-top:18px}
+.form .msg{margin-top:12px;font-size:.92rem;color:var(--brown);font-weight:600;max-width:66ch}
+.form .msg a,.form .msg .lnk{color:var(--brown);font:inherit;font-weight:700;background:none;border:0;padding:0;text-decoration:underline;cursor:pointer}
+.draft{font-size:.88rem;color:var(--muted);margin:14px 0 0;line-height:1.5}
+.draft .lnk{font:inherit;font-weight:700;background:none;border:none;padding:0;color:var(--brown);text-decoration:underline;cursor:pointer}
+.draft .lnk + .lnk{margin-left:12px}
+.form .note{margin-top:10px;max-width:66ch}
 </style>
 <!--pwa--><link rel="manifest" href="/fav/site.webmanifest"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Свои люди"><meta name="apple-mobile-web-app-status-bar-style" content="default"><style id="sl-top">/* единая шапка svoiludi.ch (09.10.2026), собирается _i18n/topnav.py */header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:40;background:color-mix(in srgb,var(--bg,#EEF1E6) 92%,transparent);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border-bottom:1px solid var(--line,#D9DFCB);font-family:"Manrope","Segoe UI",system-ui,sans-serif;line-height:1.5;margin:0}header.top .page{max-width:1120px;margin:0 auto;padding-inline:20px;display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:12px;box-sizing:border-box;width:auto}header.top .mark{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink,#2F2924)}header.top .mono{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;flex:none}header.top .mono.av{border:none;padding:0}header.top .mono.av svg{width:100%;height:100%;display:block}header.top .mark b{font-family:"Forum","Cormorant Garamond",Georgia,serif;font-weight:400;font-size:1.25rem;line-height:1;color:var(--ink,#2F2924)}header.top .mark small{display:block;font-size:.72rem;color:var(--muted,#7A6E62);letter-spacing:.04em;margin-top:3px}header.top nav{display:flex;gap:22px;font-size:.88rem;font-weight:600;margin:0;padding:0}header.top nav a{text-decoration:none;color:var(--muted,#7A6E62)}header.top nav a:hover{color:var(--ink,#2F2924)}header.top nav a[aria-current="page"]{color:var(--ink,#2F2924)}header.top .navcta{font-size:.86rem;font-weight:700;text-decoration:none;border:1.5px solid #4F5E3E;color:#4F5E3E;background:transparent;border-radius:12px;padding:8px 16px;white-space:nowrap}@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) header.top .navcta{border-color:#B9C69F;color:#B9C69F}}:root[data-theme="dark"] header.top .navcta{border-color:#B9C69F;color:#B9C69F}@media (max-width:1100px){header.top{position:static}}@media (max-width:420px){header.top .page{padding-block:8px;gap:8px}header.top .mono{width:32px;height:32px}header.top .mark{gap:8px}header.top .mark b{font-size:1.06rem}header.top .mark small{display:none}header.top .navcta{font-size:.8rem;padding:6px 11px}}@media (max-width:380px){header.top .page{gap:6px;padding-inline:14px}header.top .mark b{font-size:1rem}header.top .navcta{font-size:.74rem;padding:6px 8px}}@media print{header.top{display:none!important}}</style><style id="pa-tiles">/* верхнее меню на телефоне и планшете: прямоугольные плитки с закруглением в два ряда, иконки ставит pwa-app.js (08.10.2026) */html header.top nav[aria-label] a .pa-ni{display:none}@media (max-width:1100px){html header.top .page{flex-wrap:wrap;row-gap:8px}html header.top nav[aria-label]{order:3;width:100%;display:grid!important;grid-template-columns:repeat(var(--pa-cols,3),minmax(0,1fr));gap:8px;overflow:visible;padding:4px 0 12px;margin:0}html header.top nav[aria-label] a{display:flex!important;flex-direction:column;align-items:center;justify-content:center;gap:5px;min-height:62px;padding:9px 6px;border-radius:14px;background:var(--paper,#FFFCF8);border:1px solid color-mix(in srgb,var(--sage,#66704F) 30%,transparent);box-shadow:0 3px 10px -6px rgba(60,70,40,.45);color:var(--ink,#2F2924)!important;font:600 .78rem/1.18 var(--body,system-ui);text-align:center;white-space:normal;text-decoration:none;-webkit-tap-highlight-color:transparent}html header.top nav[aria-label] a::after{content:none!important}html header.top nav[aria-label] a.pa-dup{display:none!important}html header.top nav[aria-label] a .pa-ni{display:block;width:22px;height:22px;fill:none;stroke:var(--sage,#66704F);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}html header.top nav[aria-label] a[aria-current="page"]{background:var(--sage,#66704F);border-color:var(--sage,#66704F);color:var(--paper,#FFFCF8)!important;box-shadow:0 4px 12px -6px rgba(60,70,40,.6)}html header.top nav[aria-label] a[aria-current="page"] .pa-ni{stroke:var(--paper,#FFFCF8)}html header.top nav[aria-label] a:active{transform:scale(.97)}}/* компьютер — как на сайте Ирины (решение 09.10.2026): на широком экране одна строка «логотип · меню · поиск · кнопка», пункты простым текстом, текущий — тёмным и жирным; на узком ноутбуке (1101–1359 px) меню переносится отдельной строкой под логотип, без переносов внутри пунктов */@media (min-width:1101px){html header.top .page{flex-wrap:wrap;row-gap:0;column-gap:14px}html header.top .mark{flex:none}html header.top .mark b,html header.top .mark small{white-space:nowrap}html header.top .page>.ss-btn{margin-left:auto}html header.top nav[aria-label]{order:3;flex:1 0 100%;display:flex!important;flex-wrap:nowrap;justify-content:center;gap:4px;overflow:visible;margin:8px 0 -2px;padding:6px 0 0;border-top:1px solid color-mix(in srgb,var(--sage,#66704F) 22%,transparent);font-size:.92rem}html header.top nav[aria-label] a{white-space:nowrap;padding:6px 10px;color:var(--muted,#6B635A);font-weight:500;text-decoration:none}html header.top nav[aria-label] a:hover{color:var(--ink,#2F2924)}html header.top nav[aria-label] a[aria-current="page"]{color:var(--ink,#2F2924)!important;font-weight:700}}@media (min-width:1360px){html header.top .page{flex-wrap:nowrap;max-width:1340px}html header.top nav[aria-label]{order:0;flex:0 1 auto;margin:0 auto;padding:0;border-top:0;gap:2px}html header.top nav[aria-label] a{padding:6px 9px}html header.top .page>.ss-btn{margin-left:0}html header.top .page>.ss-btn span{display:none}}/* кнопки сайта — прямоугольные с закруглением, как плитки меню (решение Ирины 08.10.2026); значки-метки (образец, теги, «?») остаются круглыми */:is(.navcta,.btn,.shr-btn,.pl-act a,.pl-act button,.qa,.more,.listbar button,.leaflet-popup-content button,.calmenu a,.calmenu button,.go-free,.find,.confirm,.monthics,.addb,.mbtn,.example,.viewsw,#langbar.langbar,.pa-go,.pa-x,.pa-foot){border-radius:12px!important}:is(.viewsw button,.seg button,.chips button,#langbar.langbar a,.cal-nav button){border-radius:9px!important}</style><script src="/assets/pwa-app.js" defer></script><!--pwa--><!--i18n--><link rel="alternate" hreflang="ru" href="https://svoiludi.ch/organizacii/"><link rel="alternate" hreflang="uk" href="https://svoiludi.ch/uk/organizacii/"><script>(function(){try{if(localStorage.getItem('svoiludiLang')==='uk'&&!/[?&]lang=ru/.test(location.search))location.replace('/uk/organizacii/'+location.search+location.hash);}catch(e){}})();</script><!--i18n--></head>
 <body>
@@ -616,15 +641,50 @@ a.yours:hover{background:#EBD3A3}
       </div>
       <div class="jc jc-how"><b>Как это работает</b>
         <ol class="steps">
-          <li>Напишите Ирине в Telegram или на e-mail: как называется организация, что вы делаете, для кого, где и как с вами связаться. Шаблон можно скопировать кнопкой ниже.</li>
+          <li>Заполните <a href="#zayavka">заявку прямо здесь, на сайте</a>, и нажмите «Отправить заявку». Или напишите нам на <a href="mailto:voznesenskaya.iryna@gmail.com">voznesenskaya.iryna@gmail.com</a>. Расскажите, как называется организация, что вы делаете, для кого, где и как с вами связаться.</li>
           <li>Мы проверим организацию по записи в торговом реестре (Zefix) или по уставу<button type="button" class="qh" data-help="zefix" aria-label="Подсказка: Zefix и устав" aria-expanded="false">?</button>.</li>
           <li>Подготовим карточку и пришлём её вам на проверку.</li>
           <li>Член правления подтверждает карточку ответным письмом с адреса организации. После этого карточка появится на сайте.</li>
           <li>Что-то изменилось — напишите, и мы обновим карточку. Убрать карточку можно в любой момент, достаточно письма.</li>
         </ol>
-        <div class="acts"><a class="btn" href="https://t.me/IrynaNeuroCoach" target="_blank" rel="noopener">Написать Ирине в Telegram</a><button class="btn ghost" type="button" id="askCopy">Скопировать шаблон</button><a class="btn ghost" href="mailto:voznesenskaya.iryna@gmail.com?subject=%D0%9E%D1%80%D0%B3%D0%B0%D0%BD%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D1%8F%20%D0%B2%20%C2%AB%D0%A1%D0%B2%D0%BE%D0%B8%D1%85%20%D0%BB%D1%8E%D0%B4%D1%8F%D1%85%C2%BB">Написать письмо</a></div>
+        <div class="acts"><a class="btn" href="#zayavka">Заполнить заявку на сайте</a><a class="btn ghost" href="mailto:voznesenskaya.iryna@gmail.com?subject=%D0%9E%D1%80%D0%B3%D0%B0%D0%BD%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D1%8F%20%D0%B2%20%C2%AB%D0%A1%D0%B2%D0%BE%D0%B8%D1%85%20%D0%BB%D1%8E%D0%B4%D1%8F%D1%85%C2%BB">Написать письмо</a><span class="note">voznesenskaya.iryna@gmail.com</span></div>
       </div>
     </div>
+  </section>
+
+  <section class="form" id="zayavka" aria-labelledby="zayavka-h">
+    <h2 id="zayavka-h">Заявка на размещение организации</h2>
+    <p class="hint">Заполните, что знаете, и нажмите «Отправить заявку». Обязательные поля отмечены звёздочкой. Остальное мы уточним, когда будем готовить карточку.</p>
+    <div class="fg" id="orgForm">
+      <div class="f"><label for="o-name">Название организации <s>*</s></label><input id="o-name" data-a="Название организации" autocomplete="organization" placeholder="как в уставе или в торговом реестре"></div>
+      <div class="f"><label for="o-form">Форма организации <s>*</s><button type="button" class="qh" data-help="form" aria-label="Подсказка: ферайн и фонд" aria-expanded="false">?</button></label><select id="o-form" data-a="Форма организации">
+        <option value="">Выберите форму</option><option value="ферайн (Verein)">Ферайн (Verein)</option><option value="фонд (Stiftung)">Фонд (Stiftung)</option><option value="неформальная группа">Неформальная группа, без устава</option><option value="другая форма">Другая форма</option>
+      </select></div>
+      <div class="f"><label for="o-uid">Номер в торговом реестре (UID) или устав<button type="button" class="qh" data-help="zefix" aria-label="Подсказка: Zefix и устав" aria-expanded="false">?</button></label><input id="o-uid" data-a="Номер в торговом реестре (UID) или устав" placeholder="CHE-123.456.789 или «есть устав»"><small>Номер можно найти в торговом реестре <a href="https://www.zefix.ch" target="_blank" rel="noopener">Zefix</a> по названию организации.</small></div>
+      <div class="f"><label for="o-dir">Направление<button type="button" class="qh" data-help="dir" aria-label="Подсказка: Направление" aria-expanded="false">?</button></label><select id="o-dir" data-a="Направление"></select></div>
+      <div class="f"><label for="o-about">Что вы делаете <s>*</s></label><textarea id="o-about" data-a="Что мы делаем" rows="4" placeholder="2–4 предложения: чем помогаете, что проводите, сколько лет работаете"></textarea></div>
+      <div class="f"><label for="o-offers">Что у вас можно получить</label><textarea id="o-offers" data-a="Что у нас можно получить" rows="3" placeholder="например: консультации по документам, курсы немецкого, школа выходного дня"></textarea></div>
+      <div class="f"><label>Для кого<button type="button" class="qh" data-help="whoForm" aria-label="Подсказка: Для кого" aria-expanded="false">?</button></label><div class="chk" id="o-who" data-l="Для кого"></div></div>
+      <div class="f"><label>Языки, на которых вы работаете</label><div class="chk" id="o-langs" data-l="Языки"></div></div>
+      <div class="f"><label for="o-canton">Кантон <s>*</s></label><select id="o-canton" data-a="Кантон"></select></div>
+      <div class="f"><label for="o-cities">Города</label><input id="o-cities" data-a="Города" placeholder="например: Цюрих, Винтертур"></div>
+      <div class="f"><label for="o-address">Адрес встреч</label><input id="o-address" data-a="Адрес встреч" placeholder="улица и номер, индекс, город"><small>Только если этот адрес можно показывать на сайте.</small></div>
+      <div class="f"><label for="o-fee">Бесплатно или взнос</label><input id="o-fee" data-a="Бесплатно или взнос" placeholder="бесплатно или 30 CHF в год"></div>
+      <div class="f"><label for="o-join">Как прийти или записаться</label><textarea id="o-join" data-a="Как прийти или записаться" rows="2" placeholder="например: по субботам с 10:00, запись по e-mail"></textarea></div>
+      <div class="f"><label for="o-vol">Нужны ли вам волонтёры</label><input id="o-vol" data-a="Нужны ли волонтёры" placeholder="кто нужен и чем помочь"><small>Если волонтёры не нужны, оставьте поле пустым.</small></div>
+      <div class="f"><label for="o-email">E-mail организации <s>*</s></label><input id="o-email" type="email" data-a="E-mail организации" autocomplete="email" placeholder="info@example.ch"></div>
+      <div class="f"><label for="o-site">Сайт</label><input id="o-site" data-a="Сайт" placeholder="https://www.…"></div>
+      <div class="f"><label for="o-tg">Telegram</label><input id="o-tg" data-a="Telegram" placeholder="https://t.me/…"></div>
+      <div class="f"><label for="o-ig">Instagram</label><input id="o-ig" data-a="Instagram" placeholder="https://www.instagram.com/…"></div>
+      <div class="f"><label for="o-fb">Facebook</label><input id="o-fb" data-a="Facebook" placeholder="https://www.facebook.com/…"></div>
+      <div class="f"><label for="o-phone">Телефон</label><input id="o-phone" type="tel" data-a="Телефон" autocomplete="tel" placeholder="+41 …"></div>
+      <div class="f"><label for="o-board">Кто подтвердит карточку: член правления <s>*</s><button type="button" class="qh" data-help="board" aria-label="Подсказка: кто подтверждает карточку" aria-expanded="false">?</button></label><input id="o-board" data-a="Кто подтвердит карточку (член правления)" autocomplete="name" placeholder="имя и фамилия"></div>
+      <div class="f"><label for="o-board-mail">E-mail члена правления</label><input id="o-board-mail" type="email" data-a="E-mail члена правления" placeholder="name@example.ch"><small>Если он не совпадает с e-mail организации.</small></div>
+    </div>
+    <div class="acts"><button class="btn" type="button" id="orgSend">Отправить заявку</button></div>
+    <div class="msg" id="orgMsg" role="status" hidden></div>
+    <p class="draft" id="orgDraft"></p>
+    <p class="note">Отправляя заявку, вы просите разместить организацию и соглашаетесь, чтобы после проверки мы опубликовали карточку. На сайте она появится только после того, как член правления подтвердит её письмом с адреса организации. Как мы храним заявку — в <a href="https://svoiludi.ch/privacy/">политике конфиденциальности</a>.</p>
   </section>
 
   <section class="terms" id="terms" aria-labelledby="terms-h">
@@ -636,7 +696,7 @@ a.yours:hover{background:#EBD3A3}
     <h3>Как мы проверяем</h3>
     <p>Каждую организацию мы проверяем одинаково: запись в торговом реестре (Zefix) или устав, официальный сайт или страницы в соцсетях. Данные карточки подтверждает член правления. Дата проверки стоит в карточке.</p>
     <h3>Ваши данные</h3>
-    <p>Заявку организации вы присылаете письмом или в Telegram. Мы храним её, пока карточка на сайте, и год после того, как её убрали. Подробнее — в <a href="https://svoiludi.ch/privacy/">политике конфиденциальности</a>.</p>
+    <p>Заявку организации вы заполняете на этой странице или присылаете письмом. Пока вы не отправили заявку, всё, что вы ввели, хранится только в вашем браузере, кнопка «Удалить историю» стирает это с устройства. Мы храним заявку, пока карточка на сайте, и год после того, как её убрали. Подробнее — в <a href="https://svoiludi.ch/privacy/">политике конфиденциальности</a>.</p>
     <h3>Если что-то не так</h3>
     <p>Нажми «Сообщить об ошибке» в карточке организации. Мы проверим сообщение и исправим или снимем карточку.</p>
   </section>
@@ -691,7 +751,9 @@ window.HELP = {
   who: '<p>Отметь, для кого ищешь. <b>Статус S</b> — защита для людей из Украины: временное право жить и работать в Швейцарии. Многие центры помощи работают именно для них.</p>',
   zefix: '<p><b>Zefix</b> — официальный торговый реестр Швейцарии, там видно название, адрес и правление организации. Фонд (Stiftung) записан в реестре всегда. Ферайну (Verein) запись нужна не всегда, тогда проверяем по уставу (Statuten) и протоколу собрания.</p>',
   badge: '<p>Некоммерческие организации — благотворительные фонды и ферайны без прибыли — мы размещаем бесплатно всегда, потому что они работают для людей, а не ради прибыли. Проверка у всех одинаковая.</p>',
-  form: '<p><b>Ферайн (Verein)</b> — объединение людей с общей целью: общество, клуб, школа, центр помощи. Для него хватает устава и собрания. <b>Фонд (Stiftung)</b> — организация с имуществом для определённой цели, всегда записана в торговом реестре и под надзором.</p>'
+  form: '<p><b>Ферайн (Verein)</b> — объединение людей с общей целью: общество, клуб, школа, центр помощи. Для него хватает устава и собрания. <b>Фонд (Stiftung)</b> — организация с имуществом для определённой цели, всегда записана в торговом реестре и под надзором.</p>',
+  whoForm: '<p>Отметьте, для кого вы работаете. По этим отметкам люди находят организацию в фильтре «Для кого». <b>Статус S</b> — защита для людей из Украины: временное право жить и работать в Швейцарии.</p>',
+  board: '<p>Карточку мы публикуем только с согласия самой организации. Поэтому её подтверждает член правления (Vorstand) ответным письмом с адреса организации. Его имя на сайте не показываем.</p>'
 };
 
 const today = new Date().toISOString().slice(0, 10);
@@ -803,9 +865,57 @@ document.getElementById('qmCard').addEventListener('click', async ev => {
 qm.addEventListener('click', e => { if (e.target === qm) qm.close(); });
 qm.addEventListener('close', () => { if (location.hash && location.hash !== '#add' && location.hash !== '#terms') history.replaceState(null, '', location.pathname + location.search); });
 
-/* «Скопировать шаблон» для заявки Ирине (заявки — только от самой организации, решение Ирины 10.10.2026) */
-const TPL = 'Здравствуйте, Ирина! Мы хотим бесплатно разместить нашу организацию в «Своих людях».\nНазвание организации:\nФорма (ферайн, фонд, другое):\nНомер в торговом реестре (UID) или устав:\nЧто мы делаем (2–4 предложения):\nДля кого (статус S, дети, взрослые, предприниматели):\nЯзыки:\nКантон и города:\nАдрес встреч (если его можно публиковать):\nБесплатно или взнос:\nКак записаться или прийти:\nНужны ли волонтёры:\nСайт, e-mail, Telegram, Instagram:\nКто подтвердит карточку (член правления, имя и e-mail):';
-document.getElementById('askCopy').addEventListener('click', async () => toast((await copyText(TPL)) ? 'Шаблон скопирован — вставьте его в сообщение Ирине в Telegram или в письмо.' : 'Не получилось скопировать. Напишите Ирине в Telegram: @IrynaNeuroCoach'));
+/* ---------- заявка организации на сайте (решение Ирины 10.10.2026: «пусть регистрируются на сайте сразу или пишут на мейл») ----------
+   Форма ничего не отправляет сама: «Отправить заявку» открывает готовое письмо на MAIL. Черновик — только в браузере (ключ svoi-org-zayavka). */
+const OKEY = 'svoi-org-zayavka';
+const oF = document.getElementById('orgForm'), oMsg = document.getElementById('orgMsg'), oDraft = document.getElementById('orgDraft');
+const oOpt = (v, t) => `<option value="${esc(v)}">${esc(t)}</option>`;
+const oChk = (name, v, t) => `<label><input type="checkbox" name="${name}" value="${esc(v)}">${esc(t)}</label>`;
+document.getElementById('o-dir').innerHTML = oOpt('', 'Выберите направление') + Object.values(DIRS).map(x => oOpt(x.t, x.t)).join('');
+document.getElementById('o-canton').innerHTML = oOpt('', 'Выберите кантон') + Object.keys(CANTONS).sort((a, b) => ktRu(a).localeCompare(ktRu(b), 'ru')).map(x => oOpt(`${ktRu(x)} (${kt(x)})`, `${ktRu(x)} (${kt(x)})`)).join('') + oOpt('Вся Швейцария', 'Вся Швейцария');
+document.getElementById('o-who').innerHTML = Object.entries(WHO).map(([, t]) => oChk('o-who', t, t)).join('');
+document.getElementById('o-langs').innerHTML = LANG_FIRST.map(l => oChk('o-lang', l, l[0].toUpperCase() + l.slice(1))).join('');
+const oChecked = name => [...oF.querySelectorAll(`input[name="${name}"]:checked`)].map(i => i.value);
+function oSave(){ try { const d = {}; oF.querySelectorAll('[data-a]').forEach(el => d[el.id] = el.value); d.who = oChecked('o-who'); d.langs = oChecked('o-lang'); localStorage.setItem(OKEY, JSON.stringify(d)); } catch (_) {} }
+try { const d = JSON.parse(localStorage.getItem(OKEY) || 'null'); if (d) {
+  oF.querySelectorAll('[data-a]').forEach(el => { if (typeof d[el.id] === 'string') el.value = d[el.id]; });
+  (d.who || []).forEach(v => { const i = oF.querySelector(`input[name="o-who"][value="${CSS.escape(v)}"]`); if (i) i.checked = true; });
+  (d.langs || []).forEach(v => { const i = oF.querySelector(`input[name="o-lang"][value="${CSS.escape(v)}"]`); if (i) i.checked = true; }); } } catch (_) {}
+oF.addEventListener('input', oSave); oF.addEventListener('change', oSave);
+const oDraftIdle = () => { oDraft.innerHTML = 'Всё, что вы ввели, сохраняется только на этом устройстве, пока вы сами не отправите заявку. Можно закрыть страницу и продолжить позже. <button class="lnk" type="button" id="oWipe">Удалить историю</button>'; };
+oDraftIdle();
+oDraft.addEventListener('click', e => { const id = e.target.id;
+  if (id === 'oWipe') oDraft.innerHTML = 'Удалить с этого устройства всё, что вы ввели в заявку? Вернуть это будет нельзя. <button class="lnk" type="button" id="oWipeYes">Да, удалить историю</button><button class="lnk" type="button" id="oWipeNo">Отмена</button>';
+  if (id === 'oWipeNo') oDraftIdle();
+  if (id === 'oWipeYes'){ try { localStorage.removeItem(OKEY); } catch (_) {} oF.querySelectorAll('[data-a]').forEach(el => el.value = ''); oF.querySelectorAll('input[type=checkbox]').forEach(i => i.checked = false); oMsg.hidden = true; oDraftIdle(); toast('Вся история заявки удалена с этого устройства.'); }
+});
+function oLetter(){
+  const lines = [], name = document.getElementById('o-name').value.trim();
+  oF.querySelectorAll('.f').forEach(f => {
+    const el = f.querySelector('[data-a]'), box = f.querySelector('.chk');
+    if (el){ const x = el.tagName === 'SELECT' ? (el.value ? el.options[el.selectedIndex].text : '') : el.value.trim(); if (x) lines.push(`${el.dataset.a}: ${x}`); }
+    else if (box){ const x = [...box.querySelectorAll('input:checked')].map(i => i.parentNode.textContent.trim()); if (x.length) lines.push(`${box.dataset.l}: ${x.join(', ')}`); }
+  });
+  const su = 'Заявка организации в «Своих людях»' + (name ? ' — ' + name : '');
+  const body = ['Здравствуйте! Мы хотим бесплатно разместить нашу организацию в «Своих людях».', '', ...lines, '', 'Заявка заполнена на странице https://svoiludi.ch/organizacii/', ''].join('\n');
+  return { su, body };
+}
+document.getElementById('orgSend').addEventListener('click', () => {
+  const need = [['o-name', 'название организации'], ['o-form', 'форму организации'], ['o-about', 'что вы делаете'], ['o-canton', 'кантон'], ['o-email', 'e-mail организации'], ['o-board', 'кто подтвердит карточку']];
+  const miss = need.filter(([id]) => !document.getElementById(id).value.trim());
+  oF.querySelectorAll('.f').forEach(f => f.classList.remove('miss')); miss.forEach(([id]) => document.getElementById(id).closest('.f').classList.add('miss'));
+  if (miss.length){ oMsg.hidden = false; oMsg.textContent = 'Пожалуйста, заполните: ' + miss.map(m => m[1]).join(', ') + '.'; document.getElementById(miss[0][0]).focus(); return; }
+  const mailOk = x => !x || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(x);
+  const badMail = ['o-email', 'o-board-mail'].find(id => !mailOk(document.getElementById(id).value.trim()));
+  if (badMail){ document.getElementById(badMail).closest('.f').classList.add('miss'); oMsg.hidden = false; oMsg.textContent = 'Проверьте e-mail: в адресе не хватает знака @ или точки.'; document.getElementById(badMail).focus(); return; }
+  const L = oLetter(), q = `?subject=${encodeURIComponent(L.su)}&body=${encodeURIComponent(L.body)}`;
+  const gm = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(MAIL)}&su=${encodeURIComponent(L.su)}&body=${encodeURIComponent(L.body)}`;
+  oMsg.hidden = false;
+  oMsg.innerHTML = `Открылось письмо с вашей заявкой на ${esc(MAIL)}. Проверьте его и нажмите «Отправить» в своей почте. Письмо не открылось? <a href="${esc(gm)}" ${ext}>Открыть в Gmail</a> или <button class="lnk" type="button" id="oCopy">скопировать заявку</button> и отправить её на ${esc(MAIL)}.`;
+  location.href = `mailto:${MAIL}${q}`;
+});
+oMsg.addEventListener('click', async e => { if (e.target.id !== 'oCopy') return; const L = oLetter();
+  toast((await copyText(L.su + '\n\n' + L.body)) ? 'Заявка скопирована. Вставьте её в письмо на ' + MAIL + '.' : 'Не получилось скопировать. Напишите нам на ' + MAIL + '.'); });
 
 /* ---------- события страницы ---------- */
 document.getElementById('results').addEventListener('click', e => { const b = e.target.closest('[data-o]'); if (b) openO(b.dataset.o); });

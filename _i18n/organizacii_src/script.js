@@ -34,7 +34,9 @@ window.HELP = {
   who: '<p>Отметь, для кого ищешь. <b>Статус S</b> — защита для людей из Украины: временное право жить и работать в Швейцарии. Многие центры помощи работают именно для них.</p>',
   zefix: '<p><b>Zefix</b> — официальный торговый реестр Швейцарии, там видно название, адрес и правление организации. Фонд (Stiftung) записан в реестре всегда. Ферайну (Verein) запись нужна не всегда, тогда проверяем по уставу (Statuten) и протоколу собрания.</p>',
   badge: '<p>Некоммерческие организации — благотворительные фонды и ферайны без прибыли — мы размещаем бесплатно всегда, потому что они работают для людей, а не ради прибыли. Проверка у всех одинаковая.</p>',
-  form: '<p><b>Ферайн (Verein)</b> — объединение людей с общей целью: общество, клуб, школа, центр помощи. Для него хватает устава и собрания. <b>Фонд (Stiftung)</b> — организация с имуществом для определённой цели, всегда записана в торговом реестре и под надзором.</p>'
+  form: '<p><b>Ферайн (Verein)</b> — объединение людей с общей целью: общество, клуб, школа, центр помощи. Для него хватает устава и собрания. <b>Фонд (Stiftung)</b> — организация с имуществом для определённой цели, всегда записана в торговом реестре и под надзором.</p>',
+  whoForm: '<p>Отметьте, для кого вы работаете. По этим отметкам люди находят организацию в фильтре «Для кого». <b>Статус S</b> — защита для людей из Украины: временное право жить и работать в Швейцарии.</p>',
+  board: '<p>Карточку мы публикуем только с согласия самой организации. Поэтому её подтверждает член правления (Vorstand) ответным письмом с адреса организации. Его имя на сайте не показываем.</p>'
 };
 
 const today = new Date().toISOString().slice(0, 10);
@@ -146,9 +148,57 @@ document.getElementById('qmCard').addEventListener('click', async ev => {
 qm.addEventListener('click', e => { if (e.target === qm) qm.close(); });
 qm.addEventListener('close', () => { if (location.hash && location.hash !== '#add' && location.hash !== '#terms') history.replaceState(null, '', location.pathname + location.search); });
 
-/* «Скопировать шаблон» для заявки Ирине (заявки — только от самой организации, решение Ирины 10.10.2026) */
-const TPL = 'Здравствуйте, Ирина! Мы хотим бесплатно разместить нашу организацию в «Своих людях».\nНазвание организации:\nФорма (ферайн, фонд, другое):\nНомер в торговом реестре (UID) или устав:\nЧто мы делаем (2–4 предложения):\nДля кого (статус S, дети, взрослые, предприниматели):\nЯзыки:\nКантон и города:\nАдрес встреч (если его можно публиковать):\nБесплатно или взнос:\nКак записаться или прийти:\nНужны ли волонтёры:\nСайт, e-mail, Telegram, Instagram:\nКто подтвердит карточку (член правления, имя и e-mail):';
-document.getElementById('askCopy').addEventListener('click', async () => toast((await copyText(TPL)) ? 'Шаблон скопирован — вставьте его в сообщение Ирине в Telegram или в письмо.' : 'Не получилось скопировать. Напишите Ирине в Telegram: @IrynaNeuroCoach'));
+/* ---------- заявка организации на сайте (решение Ирины 10.10.2026: «пусть регистрируются на сайте сразу или пишут на мейл») ----------
+   Форма ничего не отправляет сама: «Отправить заявку» открывает готовое письмо на MAIL. Черновик — только в браузере (ключ svoi-org-zayavka). */
+const OKEY = 'svoi-org-zayavka';
+const oF = document.getElementById('orgForm'), oMsg = document.getElementById('orgMsg'), oDraft = document.getElementById('orgDraft');
+const oOpt = (v, t) => `<option value="${esc(v)}">${esc(t)}</option>`;
+const oChk = (name, v, t) => `<label><input type="checkbox" name="${name}" value="${esc(v)}">${esc(t)}</label>`;
+document.getElementById('o-dir').innerHTML = oOpt('', 'Выберите направление') + Object.values(DIRS).map(x => oOpt(x.t, x.t)).join('');
+document.getElementById('o-canton').innerHTML = oOpt('', 'Выберите кантон') + Object.keys(CANTONS).sort((a, b) => ktRu(a).localeCompare(ktRu(b), 'ru')).map(x => oOpt(`${ktRu(x)} (${kt(x)})`, `${ktRu(x)} (${kt(x)})`)).join('') + oOpt('Вся Швейцария', 'Вся Швейцария');
+document.getElementById('o-who').innerHTML = Object.entries(WHO).map(([, t]) => oChk('o-who', t, t)).join('');
+document.getElementById('o-langs').innerHTML = LANG_FIRST.map(l => oChk('o-lang', l, l[0].toUpperCase() + l.slice(1))).join('');
+const oChecked = name => [...oF.querySelectorAll(`input[name="${name}"]:checked`)].map(i => i.value);
+function oSave(){ try { const d = {}; oF.querySelectorAll('[data-a]').forEach(el => d[el.id] = el.value); d.who = oChecked('o-who'); d.langs = oChecked('o-lang'); localStorage.setItem(OKEY, JSON.stringify(d)); } catch (_) {} }
+try { const d = JSON.parse(localStorage.getItem(OKEY) || 'null'); if (d) {
+  oF.querySelectorAll('[data-a]').forEach(el => { if (typeof d[el.id] === 'string') el.value = d[el.id]; });
+  (d.who || []).forEach(v => { const i = oF.querySelector(`input[name="o-who"][value="${CSS.escape(v)}"]`); if (i) i.checked = true; });
+  (d.langs || []).forEach(v => { const i = oF.querySelector(`input[name="o-lang"][value="${CSS.escape(v)}"]`); if (i) i.checked = true; }); } } catch (_) {}
+oF.addEventListener('input', oSave); oF.addEventListener('change', oSave);
+const oDraftIdle = () => { oDraft.innerHTML = 'Всё, что вы ввели, сохраняется только на этом устройстве, пока вы сами не отправите заявку. Можно закрыть страницу и продолжить позже. <button class="lnk" type="button" id="oWipe">Удалить историю</button>'; };
+oDraftIdle();
+oDraft.addEventListener('click', e => { const id = e.target.id;
+  if (id === 'oWipe') oDraft.innerHTML = 'Удалить с этого устройства всё, что вы ввели в заявку? Вернуть это будет нельзя. <button class="lnk" type="button" id="oWipeYes">Да, удалить историю</button><button class="lnk" type="button" id="oWipeNo">Отмена</button>';
+  if (id === 'oWipeNo') oDraftIdle();
+  if (id === 'oWipeYes'){ try { localStorage.removeItem(OKEY); } catch (_) {} oF.querySelectorAll('[data-a]').forEach(el => el.value = ''); oF.querySelectorAll('input[type=checkbox]').forEach(i => i.checked = false); oMsg.hidden = true; oDraftIdle(); toast('Вся история заявки удалена с этого устройства.'); }
+});
+function oLetter(){
+  const lines = [], name = document.getElementById('o-name').value.trim();
+  oF.querySelectorAll('.f').forEach(f => {
+    const el = f.querySelector('[data-a]'), box = f.querySelector('.chk');
+    if (el){ const x = el.tagName === 'SELECT' ? (el.value ? el.options[el.selectedIndex].text : '') : el.value.trim(); if (x) lines.push(`${el.dataset.a}: ${x}`); }
+    else if (box){ const x = [...box.querySelectorAll('input:checked')].map(i => i.parentNode.textContent.trim()); if (x.length) lines.push(`${box.dataset.l}: ${x.join(', ')}`); }
+  });
+  const su = 'Заявка организации в «Своих людях»' + (name ? ' — ' + name : '');
+  const body = ['Здравствуйте! Мы хотим бесплатно разместить нашу организацию в «Своих людях».', '', ...lines, '', 'Заявка заполнена на странице https://svoiludi.ch/organizacii/', ''].join('\n');
+  return { su, body };
+}
+document.getElementById('orgSend').addEventListener('click', () => {
+  const need = [['o-name', 'название организации'], ['o-form', 'форму организации'], ['o-about', 'что вы делаете'], ['o-canton', 'кантон'], ['o-email', 'e-mail организации'], ['o-board', 'кто подтвердит карточку']];
+  const miss = need.filter(([id]) => !document.getElementById(id).value.trim());
+  oF.querySelectorAll('.f').forEach(f => f.classList.remove('miss')); miss.forEach(([id]) => document.getElementById(id).closest('.f').classList.add('miss'));
+  if (miss.length){ oMsg.hidden = false; oMsg.textContent = 'Пожалуйста, заполните: ' + miss.map(m => m[1]).join(', ') + '.'; document.getElementById(miss[0][0]).focus(); return; }
+  const mailOk = x => !x || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(x);
+  const badMail = ['o-email', 'o-board-mail'].find(id => !mailOk(document.getElementById(id).value.trim()));
+  if (badMail){ document.getElementById(badMail).closest('.f').classList.add('miss'); oMsg.hidden = false; oMsg.textContent = 'Проверьте e-mail: в адресе не хватает знака @ или точки.'; document.getElementById(badMail).focus(); return; }
+  const L = oLetter(), q = `?subject=${encodeURIComponent(L.su)}&body=${encodeURIComponent(L.body)}`;
+  const gm = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(MAIL)}&su=${encodeURIComponent(L.su)}&body=${encodeURIComponent(L.body)}`;
+  oMsg.hidden = false;
+  oMsg.innerHTML = `Открылось письмо с вашей заявкой на ${esc(MAIL)}. Проверьте его и нажмите «Отправить» в своей почте. Письмо не открылось? <a href="${esc(gm)}" ${ext}>Открыть в Gmail</a> или <button class="lnk" type="button" id="oCopy">скопировать заявку</button> и отправить её на ${esc(MAIL)}.`;
+  location.href = `mailto:${MAIL}${q}`;
+});
+oMsg.addEventListener('click', async e => { if (e.target.id !== 'oCopy') return; const L = oLetter();
+  toast((await copyText(L.su + '\n\n' + L.body)) ? 'Заявка скопирована. Вставьте её в письмо на ' + MAIL + '.' : 'Не получилось скопировать. Напишите нам на ' + MAIL + '.'); });
 
 /* ---------- события страницы ---------- */
 document.getElementById('results').addEventListener('click', e => { const b = e.target.closest('[data-o]'); if (b) openO(b.dataset.o); });
