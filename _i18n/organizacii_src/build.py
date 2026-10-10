@@ -29,12 +29,14 @@ top = top.replace(' aria-current="page" style="color:var(--ink)"', '')   # в м
 body = open(os.path.join(HERE, 'body.html'), encoding='utf-8').read()
 js = open(os.path.join(HERE, 'script.js'), encoding='utf-8').read()
 tail = f'''
+<script src="/data/specialists.js?v={ver('data/specialists.js')}"></script>
 <script src="/data/organizations.js?v={ver('data/organizations.js')}"></script>
 <script src="/data/afisha.js?v={ver('data/afisha.js')}"></script>
 <script src="/data/vacancies.js?v={ver('data/vacancies.js')}"></script>
 <script>
 {js}</script>
 <script src="/assets/help.js" defer></script>
+<script defer src="/assets/zayavka.js"></script>
 <script data-goatcounter="https://svoiludi.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 <script src="/assets/share.js" defer></script>
 <script src="/assets/samesite.js"></script>

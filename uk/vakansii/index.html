@@ -599,9 +599,9 @@ a.yours:hover{background:#EBD3A3}
       </div>
       <div class="jc jc-how"><b>Як це працює</b>
         <ol class="steps">
-          <li>Заповни <a href="/uk/vakansii/#zayavka">заявку просто тут, на сайті</a>, і натисни «Надіслати заявку». Або напиши нам на <a href="mailto:voznesenskaya.iryna@gmail.com">voznesenskaya.iryna@gmail.com</a>, кого шукаєш, де і на яких умовах.</li>
-          <li>Ми підготуємо оголошення й надішлемо тобі посилання на нього.</li>
-          <li>Ти перевіряєш текст і галочками підтверджуєш умови: робота офіційна й за законами Швейцарії, твого кантону та громади.</li>
+          <li>Заповни <a href="/uk/vakansii/#zayavka">заявку просто тут, на сайті</a>, і натисни «Надіслати заявку». Якщо ти вже є в довіднику, знайди в заявці свою картку за UID або номером: ім’я, адреса й контакти підставляться самі. Або напиши нам на <a href="mailto:voznesenskaya.iryna@gmail.com">voznesenskaya.iryna@gmail.com</a>, кого шукаєш, де і на яких умовах.</li>
+          <li>Ми підготуємо оголошення й надішлемо тобі посилання на нього. Якщо ти є в довіднику, посилання прийде на e-mail із твоєї картки.</li>
+          <li>Ти перевіряєш текст, галочками підтверджуєш умови й натискаєш «Підтверджую». Умови такі: робота офіційна й за законами Швейцарії, твого кантону та громади.</li>
           <li>Після твого підтвердження оголошення з’явиться тут і в твоїй картці на 60 днів. У день закінчення строку воно саме зникне з сайту.</li>
           <li>Потрібно продовжити — напиши нам до закінчення строку. Додай адресу voznesenskaya.iryna@gmail.com у контакти й перевіряй папку «Спам», щоб листи не загубилися.</li>
         </ol>
@@ -613,17 +613,25 @@ a.yours:hover{background:#EBD3A3}
   <section class="zform" id="zayavka" aria-labelledby="zayavka-h" data-zayavka="vakansiya" data-t-ok="Постав позначку згоди над кнопкою — без неї ми не можемо прийняти заявку." data-t-okline="Згода на обробку даних і публікацію: позначено на сайті" data-mail="voznesenskaya.iryna@gmail.com" data-subject="Оголошення для «Свої люди у Швейцарії»" data-hello="Добрий день! Хочу безкоштовно розмістити оголошення у «Своїх людях»." data-from="Заявку заповнено на сторінці" data-t-miss="Не заповнені обов’язкові поля: " data-t-mail="Перевір e-mail: в адресі бракує знака @ або крапки." data-t-wiped="Усю історію заявки видалено з цього пристрою." data-t-copied="Заявку скопійовано. Встав її в лист на voznesenskaya.iryna@gmail.com." data-t-copyfail="Не вдалося скопіювати. Напиши нам на voznesenskaya.iryna@gmail.com.">
     <h2 id="zayavka-h">Заявка на оголошення</h2>
     <p class="zhint">Заповни те, що знаєш, і натисни «Надіслати заявку». Обов’язкові поля позначені зірочкою. Решту ми уточнимо, коли готуватимемо оголошення.</p>
+    <div class="zlook" data-zlook data-kinds="spec,org" data-t-kspec="Твоя картка в довіднику" data-t-korg="Картка організації" data-t-sample="Зразок" data-t-uid="UID" data-t-num="Номер картки" data-t-addr="Адреса" data-t-phone="Телефон" data-t-mail="E-mail" data-t-site="Сайт" data-t-locked="Ці дані візьмемо з картки, тут їх змінювати не потрібно. Якщо в картці щось змінилося, напиши нам, і ми виправимо саму картку." data-t-to="Посилання на підтвердження оголошення надішлемо на e-mail із картки:" data-t-noemail="У картці немає e-mail. Посилання на підтвердження надішлемо туди ж, куди надсилали посилання на картку." data-t-change="Це не моя картка, ввести інший номер" data-t-empty="Впиши UID або номер картки." data-t-format="Такий номер не знайти. UID має такий вигляд: CHE-123.456.789. Номер картки — такий: SG-0001 або OR-0001." data-t-none="Опублікованої картки з цим номером немає. Перевір номер. Якщо картки ще немає або вона тільки готується, заповни поля нижче." data-t-many="Під цим UID кілька карток. Обери свою:" data-t-auto="Цей номер уже є в довіднику. Ми підставили дані з картки: перевір їх і натисни «Надіслати заявку» ще раз." data-t-ref="Картка в довіднику" data-t-toletter="Посилання на підтвердження надіслати на">
+      <div class="zf"><label for="z-v-find">Уже є у «Своїх людях»? Знайди свою картку<button type="button" class="qh" data-help="zfind" aria-label="Підказка: навіщо шукати свою картку" aria-expanded="false">?</button></label><div class="zlrow"><input id="z-v-find" data-zl="q" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="UID або номер картки"><button class="btn" type="button" data-zl="find">Знайти</button></div><small>Впиши UID (CHE-123.456.789) або номер картки (SG-0001). Ім’я, адреса й контакти підставляться самі. Картки немає — заповни поля нижче.</small></div>
+      <p class="zmsg" data-zl="msg" role="status" hidden></p>
+      <div data-zl="prof" hidden></div>
+    </div>
     <div class="zfg">
       <div class="zf"><label for="z-v-kind">Кого шукаєш <s>*</s><button type="button" class="qh" data-help="kind" aria-label="Підказка: працівник чи партнер" aria-expanded="false">?</button></label><select id="z-v-kind" data-a="Кого шукаю" data-req><option value="">Вибери</option><option value="staff">Працівника: робота за наймом</option><option value="partner">Партнера: співпраця самостійних</option></select></div>
       <div class="zf"><label for="z-v-title">Хто потрібен <s>*</s></label><input id="z-v-title" data-a="Хто потрібен" data-title data-req placeholder="наприклад: адміністратор у салон краси"></div>
-      <div class="zf"><label for="z-v-where">Де <s>*</s></label><input id="z-v-where" data-a="Де" data-req placeholder="кантон і місто, чи можна віддалено"></div>
+      <div class="zf" data-zown><label for="z-v-where">Де <s>*</s></label><input id="z-v-where" data-a="Де" data-req placeholder="кантон і місто, чи можна віддалено"></div>
+      <div class="zf" data-zcard hidden><label for="z-v-where">Де робота <s>*</s></label><select id="z-v-where" data-a="Де" data-req data-zaddr data-t-card="{a} — адреса з картки"><option value="" data-keep>Вибери</option><option value="Віддалено" data-keep>Віддалено</option><option value="other" data-keep>Інша адреса</option></select></div>
+      <div class="zf" data-zcard data-zif="z-v-where:other" hidden><label for="z-v-addr2">Інша адреса <s>*</s></label><input id="z-v-addr2" data-a="Інша адреса (замість адреси з картки)" data-miss="інша адреса" data-req placeholder="вулиця й номер, індекс, місто"><small>На сайті в цього оголошення буде це місце, а не адреса з картки.</small></div>
       <div class="zf"><label for="z-v-load">Зайнятість і з якого часу</label><input id="z-v-load" data-a="Зайнятість і з якого часу" placeholder="наприклад: 60 %, з 1 грудня"></div>
       <div class="zf"><label>Потрібні мови</label><div class="zchk" data-l="Потрібні мови"><label><input type="checkbox" value="de">Німецька</label><label><input type="checkbox" value="fr">Французька</label><label><input type="checkbox" value="it">Італійська</label><label><input type="checkbox" value="en">Англійська</label><label><input type="checkbox" value="ru">Російська</label><label><input type="checkbox" value="uk">Українська</label></div></div>
       <div class="zf"><label for="z-v-about">Про роботу чи співпрацю <s>*</s></label><textarea id="z-v-about" data-a="Про роботу чи співпрацю" data-req rows="4" placeholder="що треба робити, який досвід чи дозвіл потрібні"></textarea></div>
       <div class="zf"><label for="z-v-offer">Що ти пропонуєш</label><textarea id="z-v-offer" data-a="Що я пропоную" rows="3" placeholder="наприклад: зарплата чи умови, графік, навчання"></textarea></div>
-      <div class="zf"><label for="z-v-author">Автор оголошення <s>*</s></label><input id="z-v-author" data-a="Автор оголошення" data-req placeholder="ім’я та прізвище або назва фірми"><small>Оголошення без імені автора ми не публікуємо.</small></div>
-      <div class="zf"><label for="z-v-reply">Як відгукнутися <s>*</s></label><input id="z-v-reply" data-a="Як відгукнутися" data-req placeholder="e-mail або Telegram"><small>Цей контакт побачать в оголошенні.</small></div>
-      <div class="zf"><label for="z-v-card">Твоя картка в довіднику або організація</label><input id="z-v-card" data-a="Моя картка в довіднику або організація" placeholder="якщо є: ім’я в довіднику або назва організації"></div>
+      <div class="zf" data-zown><label for="z-v-author">Автор оголошення <s>*</s></label><input id="z-v-author" data-a="Автор оголошення" data-req placeholder="ім’я та прізвище або назва фірми"><small>Оголошення без імені автора ми не публікуємо.</small></div>
+      <div class="zf" data-zown><label for="z-v-reply">Як відгукнутися <s>*</s></label><input id="z-v-reply" data-a="Як відгукнутися" data-req placeholder="e-mail або Telegram"><small>Цей контакт побачать в оголошенні.</small></div>
+      <div class="zf" data-zcard hidden><label for="z-v-phone2">Інший телефон</label><input id="z-v-phone2" type="tel" data-a="Інший телефон (замість телефону з картки)" autocomplete="tel" placeholder="+41 …"><small>Тільки якщо для відгуків потрібен не той телефон, що в картці. На сайті буде цей.</small></div>
+      <div class="zf" data-zcard hidden><label for="z-v-mail2">Інший e-mail</label><input id="z-v-mail2" type="email" data-a="Інший e-mail (замість e-mail із картки)" autocomplete="email" placeholder="name@example.ch"><small>Тільки якщо для відгуків потрібен не той e-mail, що в картці. На сайті буде цей.</small></div>
     </div>
     <div class="zok"><input type="checkbox" id="z-va-ok" data-z="ok"><label for="z-va-ok">Даю згоду, щоб «Свої люди» (Alonira.ch AG) обробили дані з цієї заявки, за потреби зв’язалися зі мною і після мого підтвердження листом опублікували оголошення. Я маю право розмістити ці дані, зокрема контакт для відгуку. Докладніше — у <a href="https://svoiludi.ch/uk/privacy/">політиці конфіденційності</a>.</label></div>
     <div class="acts"><button class="btn" type="button" data-z="send">Надіслати заявку</button></div>
@@ -664,7 +672,8 @@ a.yours:hover{background:#EBD3A3}
 
 
 <script src="/data/specialists.uk.js?v=f3ab927c"></script>
-<script src="/data/vacancies.uk.js?v=8dad6a16"></script>
+<script src="/data/organizations.uk.js?v=489feb29"></script>
+<script src="/data/vacancies.uk.js?v=5de638b0"></script>
 <script>window.IMG_BASE = '../img/';</script>
 <script>
 const ADMIN = (() => {   // режим Ирины: ?ira=1 включает на этом устройстве, ?ira=0 выключает
@@ -697,6 +706,7 @@ const CANTONS = {
 const LANG_FIRST = ['російська', 'українська', 'німецька', 'французька', 'італійська', 'англійська'];
 const MON_G = ['січня', 'лютого', 'березня', 'квітня', 'травня', 'червня', 'липня', 'серпня', 'вересня', 'жовтня', 'листопада', 'грудня'];
 window.HELP = {
+  zfind: '<p><b>UID</b> — номер фірми чи самозайнятого в реєстрі Швейцарії, на кшталт CHE-123.456.789. Ми беремо його, коли розміщуємо картку, він є в твоїй картці на сайті.</p><p><b>Номер картки</b> — SG-0001 у спеціалістів, OR-0001 в організацій. Він є в твоїй картці на сайті, внизу.</p><p>Дані з картки ми вже перевірили, тому вписувати їх наново не потрібно. Посилання на підтвердження надішлемо на e-mail із картки: так ніхто не зможе розмістити запис від твого імені.</p><p>Номер нікуди не надсилається: пошук іде тільки за опублікованими картками, просто на цій сторінці.</p>',
   kind: '<p><b>Шукаю працівника</b> — робота за наймом: людина працює в автора за договором, за його графіком і вказівками, отримує зарплату, автор платить відрахування AHV.</p><p><b>Шукаю партнера</b> — співпраця самостійних фахівців: субпідряд, спільний проєкт, оренда кабінету, обмін клієнтами. Кожен працює на себе й сам платить свої внески.</p>',
   partner: '<p>Партнерство — це коли кожен працює на себе: сам вирішує, коли й як працювати, сам виставляє рахунки й платить свої внески.</p><p>Якщо людина працюватиме у твій час, за твоїми вказівками і за регулярну оплату за години, це робота за наймом, навіть якщо називати її партнерством. Таке оголошення розмісти як «Шукаю працівника». Інакше може вийти прихований найм, і каса AHV має право вимагати внески заднім числом.</p>',
   rav: '<p>Для деяких професій із високим безробіттям роботодавець спершу повідомляє вакансію в RAV (регіональний центр зайнятості), і лише через 5 робочих днів може публікувати її в інших місцях.</p><p>Список професій оновлюється щороку. Перевірити свою професію можна на <a href="https://www.arbeit.swiss/secoalv/de/home/menue/unternehmen/stellenmeldepflicht.html" target="_blank" rel="noopener">arbeit.swiss</a>.</p>'
@@ -763,11 +773,15 @@ function fillSelects(){
 /* ---------- окно объявления ---------- */
 const qm = document.getElementById('qm');
 let OPEN = null;
+/* контакт для откликов: свой у объявления — 'tg:имя', 'mail:адрес', 'tel:+41 …' (можно несколько через «;», например другой телефон
+   и e-mail из заявки) — или из карточки автора: Telegram и e-mail, а если их нет — телефон (10.10.2026) */
 function contactLinks(v, a){
-  const out = [], c = (v.contact || '').trim(), ac = (a && a.contacts) || {};
-  const tg = c.startsWith('tg:') ? c.slice(3) : !c ? ac.telegram : '', mail = c.startsWith('mail:') ? c.slice(5) : !c ? ac.email : '';
+  const out = [], ac = (a && a.contacts) || {}, parts = String(v.contact || '').split(';').map(x => x.trim()).filter(Boolean);
+  const get = p => { const x = parts.find(y => y.startsWith(p + ':')); return x ? x.slice(p.length + 1).trim() : ''; };
+  const tg = parts.length ? get('tg') : ac.telegram, mail = parts.length ? get('mail') : ac.email, tel = parts.length ? get('tel') : (!ac.telegram && !ac.email ? ac.phone : '');
   if (tg) out.push(`<a class="btn" href="https://t.me/${esc(tg.replace(/^@/, ''))}" ${ext}>Відгукнутися в Telegram</a>`);
   if (mail) out.push(`<a class="btn${tg ? ' ghost' : ''}" href="mailto:${esc(mail)}?subject=${encodeURIComponent('Відгук: ' + v.title)}">Написати лист</a>`);
+  if (tel) out.push(`<a class="btn${tg || mail ? ' ghost' : ''}" href="tel:${esc(tel.replace(/[^\d+]/g, ''))}">Зателефонувати: ${esc(tel)}</a>`);
   return out.join('');
 }
 function openV(id){
@@ -848,6 +862,18 @@ const confirmLetter = v => { const a = authorOf(v), d = fmtDate(today); return {
   body: `Добрий день, Ірино!\n\n${d} я перевірив(ла) своє оголошення для розділу «Вакансії та партнерство» на сайті «Свої люди у Швейцарії» і підтверджую його публікацію.\n\n${adText(v)}\n\nПідтверджую кожну з умов:\n${checksFor(v).map(c => '☑ ' + c.t).join('\n')}\n\n${okUrl(v)}\n\n${a ? a.name + (a.firm ? ', ' + a.firm : '') : ''}` }; };
 const fixLetter = (v, text) => ({ su: `Виправлення в оголошення — ${v.title}`, body: `Добрий день, Ірино!\n\nУ моєму оголошенні, будь ласка, виправте:\n\n${text}\n\n${okUrl(v)}` });
 
+/* блок подтверждения — общий движок assets/podtverdit.js (одной кнопкой, как у карточки; 10.10.2026). Все условия обязательны. */
+function okBox(v){
+  const L = confirmLetter(v), F = fixLetter(v, '{text}'), n = checksFor(v).length;
+  return `<div class="pv-box" data-pv-kind="vacancy" data-pv-id="${esc(v.id)}" data-pv-key="${esc(v.key || '')}" data-pv-lang="uk" data-mail="${MAIL}" data-su-ok="${esc(L.su)}" data-body-ok="${esc(L.body)}" data-su-fix="${esc(F.su)}" data-body-fix="${esc(F.body)}" data-t-sending="Надсилаю…" data-t-ok="Дякуємо! Підтвердження отримано {t}. Ми опублікуємо оголошення, зазвичай того ж дня." data-t-copy=" Копія прийде на ваш e-mail." data-t-fixok="Дякуємо! Виправлення отримано {t}. Ми внесемо їх і надішлемо посилання ще раз." data-t-empty="Напишіть, будь ласка, що виправити." data-t-fail="Не вдалося надіслати. Будь ласка, {a} ({m})." data-t-mail="надішліть підтвердження листом" data-t-gmail="Відкрити лист у Gmail" data-t-letter="Відкрився лист у вашій пошті з текстом оголошення й усіма умовами. Надішліть його, це і є підтвердження. Лист не відкрився? {g} або напишіть на {m}.">
+    <b>Підтвердьте, будь ласка, кожну умову</b>
+    <div class="pv-list">${checksFor(v).map(c => `<label class="pv-ok"><input type="checkbox" data-pv-agree data-id="${c.id}"> <span>${esc(c.t)}</span></label>`).join('')}</div>
+    <span class="free-line">${FREE_NOTE}</span>
+    <div class="pv-acts"><button class="btn" type="button" data-pv-send="ok" disabled>Підтверджую</button><button class="btn ghost" type="button" data-pv-fixopen>Потрібно виправити</button></div>
+    <div class="pv-fix" hidden><textarea data-pv-text rows="4" maxlength="1500" placeholder="Що виправити в оголошенні"></textarea><div class="pv-acts"><button class="btn" type="button" data-pv-send="fix">Надіслати виправлення</button></div></div>
+    <span class="pv-small">Позначено: <b data-pv-n>0</b> з ${n}.</span>
+    <span class="pv-small" data-pv-msg data-online="Одне натискання — і готово. Копія прийде на ваш e-mail.">${window.SVL_PV_ONLINE ? 'Одне натискання — і готово. Копія прийде на ваш e-mail.' : 'Після натискання відкриється лист із вашої пошти з текстом оголошення й усіма умовами. Надішліть його, це і є підтвердження.'}</span></div>`;
+}
 function confirmView(v){
   const k = KINDS[v.kind] || KINDS.staff, a = authorOf(v), box = document.getElementById('qmCard');
   box.style.setProperty('--lc', k.c); box.style.setProperty('--lf', `color-mix(in srgb,${k.c} 12%,var(--paper))`);
@@ -856,20 +882,9 @@ function confirmView(v){
       <p>Добрий день${a ? ', ' + esc(a.name) : ''}! Це ваше оголошення для розділу «Вакансії та партнерство». Перевірте текст і підтвердьте умови. Поки ви не підтвердите, на сайті його ніхто не бачить.</p>
       <p class="cf-term">Оголошення показується 60 днів і саме зникне із сайту ${esc(fmtDate(v.until || today))}. Продовжити можна, якщо написати Ірині до закінчення строку. Додайте адресу <b>voznesenskaya.iryna@gmail.com</b> у контакти й перевіряйте папку «Спам».</p>
       <div class="cf-ad"><pre>${esc(adText(v))}</pre></div>
-      <h4>Підтвердьте, будь ласка, кожну умову</h4>
-      <div class="checks" id="cfChecks">${checksFor(v).map(c => `<label><input type="checkbox" data-cf="${c.id}"> <span>${esc(c.t)}</span></label>`).join('')}</div>
-      <p class="free-line">${FREE_NOTE}</p>
-      <div class="acts"><button class="btn" type="button" id="cfSend" disabled>Підтверджую — надіслати лист Ірині</button><button class="btn ghost" type="button" id="cfFixOpen">Потрібно виправити</button></div>
-      <div class="cf-fix" id="cfFix" hidden><textarea id="cfFixText" rows="4" maxlength="1500" placeholder="Що виправити в оголошенні"></textarea><div class="acts"><button class="btn" type="button" id="cfFixSend">Надіслати виправлення</button></div></div>
-      <p class="note" id="cfMsg" aria-live="polite">Відкриється лист у вашій пошті з текстом оголошення й усіма умовами. Надішліть його — це і є підтвердження. Позначено: <b id="cfN">0</b> з ${checksFor(v).length}.</p>
+      ${okBox(v)}
     </div>`;
   box.querySelector('.qm-close').onclick = () => qm.close();
-  const all = [...box.querySelectorAll('[data-cf]')], send = box.querySelector('#cfSend');
-  box.querySelector('#cfChecks').addEventListener('change', () => { const n = all.filter(c => c.checked).length; box.querySelector('#cfN').textContent = n; send.disabled = n !== all.length; });
-  send.onclick = () => { const L = confirmLetter(v); location.href = mailto(MAIL, L.su, L.body);
-    box.querySelector('#cfMsg').innerHTML = `Лист відкрився у вашій пошті — надішліть його. Якщо не відкрився: <a href="${esc(gmail(MAIL, L.su, L.body))}" ${ext}>відкрити в Gmail</a> або напишіть на ${esc(MAIL)}.`; };
-  box.querySelector('#cfFixOpen').onclick = () => { const f = box.querySelector('#cfFix'); f.hidden = !f.hidden; };
-  box.querySelector('#cfFixSend').onclick = () => { const t = box.querySelector('#cfFixText').value.trim(); if (!t) return; const L = fixLetter(v, t); location.href = mailto(MAIL, L.su, L.body); };
   if (!qm.open) qm.showModal();
 }
 /* блок для Ирины (режим ?ira=1) в окне объявления */
@@ -897,6 +912,7 @@ fromHash(); addEventListener('hashchange', fromHash);
 </script>
 <script src="/assets/help.uk.js" defer></script>
 <script defer src="/assets/zayavka.js"></script>
+<script defer src="/assets/podtverdit.js"></script>
 <script data-goatcounter="https://svoiludi.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 <script src="/assets/share.uk.js" defer></script>
 <script src="/assets/samesite.js"></script>

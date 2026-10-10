@@ -553,7 +553,7 @@ a.yours:hover{background:#EBD3A3}
       <div class="jc"><b>Ціна й реєстрація</b><p>Пиши кінцеву ціну у швейцарських франках з усіма обов’язковими витратами (матеріали, MWST) і за що вона: за заняття, за курс або за вебінар. Знижки й «старі ціни» — тільки справжні. Платні курси розміщуємо тільки від організаторів із реєстрацією у Швейцарії: номер UID, фірма або зареєстрований ферайн.</p></div>
       </div>
       <div class="jc k-how"><b>Як надіслати</b>
-        <p>Заповни заявку нижче й натисни «Надіслати заявку». Або напиши листа: назва, напрям, формат, розклад, місце або «онлайн», мова, для кого, ціна, хто веде, посилання на запис і кілька речень про курс.</p>
+        <p>Заповни заявку нижче й натисни «Надіслати заявку». Якщо ти вже є в довіднику, знайди в заявці свою картку за UID або номером: ім’я, адреса й контакти підставляться самі. Ми підготуємо курс і надішлемо посилання на перевірку, ти підтвердиш його однією кнопкою. Або напиши листа: назва, напрям, формат, розклад, місце або «онлайн», мова, для кого, ціна, хто веде, посилання на запис і кілька речень про курс.</p>
         <ul class="k-rules">
           <li>Без обіцянок вилікувати чи гарантовано знайти роботу.</li>
           <li>Терапія (логопед, психотерапія, фізіотерапія) — це не курс. Вона розміщується в картці фахівця з дозволом кантону.</li>
@@ -569,20 +569,30 @@ a.yours:hover{background:#EBD3A3}
   <section class="zform" id="zayavka" aria-labelledby="zayavka-h" data-zayavka="kurs" data-t-ok="Постав позначку згоди над кнопкою — без неї ми не можемо прийняти заявку." data-t-okline="Згода на обробку даних і публікацію: позначено на сайті" data-mail="voznesenskaya.iryna@gmail.com" data-subject="Курс для «Свої люди у Швейцарії»" data-hello="Добрий день! Хочу розмістити курс у «Свої люди у Швейцарії»." data-from="Заявку заповнено на сторінці" data-t-miss="Не заповнені обов’язкові поля: " data-t-mail="Перевір e-mail: в адресі бракує знака @ або крапки." data-t-wiped="Усю історію заявки видалено з цього пристрою." data-t-copied="Заявку скопійовано. Встав її в лист на voznesenskaya.iryna@gmail.com." data-t-copyfail="Не вдалося скопіювати. Напиши нам на voznesenskaya.iryna@gmail.com.">
     <h2 id="zayavka-h">Заявка на розміщення курсу або занять</h2>
     <p class="zhint">Заповни те, що знаєш, і натисни «Надіслати заявку». Обов’язкові поля позначені зірочкою. Решту ми уточнимо, коли готуватимемо запис.</p>
+    <div class="zlook" data-zlook data-kinds="spec,org" data-t-kspec="Твоя картка в довіднику" data-t-korg="Картка організації" data-t-sample="Зразок" data-t-uid="UID" data-t-num="Номер картки" data-t-addr="Адреса" data-t-phone="Телефон" data-t-mail="E-mail" data-t-site="Сайт" data-t-locked="Ці дані візьмемо з картки, тут їх змінювати не потрібно. Якщо в картці щось змінилося, напиши нам, і ми виправимо саму картку." data-t-to="Посилання на підтвердження курсу надішлемо на e-mail із картки:" data-t-noemail="У картці немає e-mail. Посилання на підтвердження надішлемо туди ж, куди надсилали посилання на картку." data-t-change="Це не моя картка, ввести інший номер" data-t-empty="Впиши UID або номер картки." data-t-format="Такий номер не знайти. UID має такий вигляд: CHE-123.456.789. Номер картки — такий: SG-0001 або OR-0001." data-t-none="Опублікованої картки з цим номером немає. Перевір номер. Якщо картки ще немає або вона тільки готується, заповни поля нижче." data-t-many="Під цим UID кілька карток. Обери свою:" data-t-auto="Цей номер уже є в довіднику. Ми підставили дані з картки: перевір їх і натисни «Надіслати заявку» ще раз." data-t-ref="Картка в довіднику" data-t-toletter="Посилання на підтвердження надіслати на">
+      <div class="zf"><label for="z-k-find">Уже є у «Своїх людях»? Знайди свою картку<button type="button" class="qh" data-help="zfind" aria-label="Підказка: навіщо шукати свою картку" aria-expanded="false">?</button></label><div class="zlrow"><input id="z-k-find" data-zl="q" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="UID або номер картки"><button class="btn" type="button" data-zl="find">Знайти</button></div><small>Впиши UID (CHE-123.456.789) або номер картки (SG-0001). Ім’я, адреса й контакти підставляться самі. Картки немає — заповни поля нижче.</small></div>
+      <p class="zmsg" data-zl="msg" role="status" hidden></p>
+      <div data-zl="prof" hidden></div>
+      <p class="zmsg" data-zl="nouid" hidden>Платні курси ми розміщуємо тільки з UID, фірмою чи ферайном. У картці UID немає, тому зараз можна розмістити безкоштовні заняття. Якщо UID з’явився, напиши нам, і ми додамо його в картку.</p>
+    </div>
     <div class="zfg">
       <div class="zf"><label for="z-k-title">Назва курсу або занять <s>*</s></label><input id="z-k-title" data-a="Назва" data-title data-req placeholder="наприклад: Йога для початківців"></div>
       <div class="zf"><label for="z-k-type">Напрям</label><select id="z-k-type" data-a="Напрям"><option value="">Обери напрям</option><option value="body">Йога, танці й рух</option><option value="lang">Мови</option><option value="kids">Для дітей</option><option value="create">Творчість і рукоділля</option><option value="pro">Професія та своя справа</option><option value="life">Життя у Швейцарії та саморозвиток</option></select></div>
       <div class="zf"><label for="z-k-kind">Формат<button type="button" class="qh" data-help="zformat" aria-label="Підказка: формат курсу" aria-expanded="false">?</button></label><select id="z-k-kind" data-a="Формат"><option value="">Обери формат</option><option value="regular">Регулярні заняття</option><option value="course">Курс зі спільним початком</option><option value="once">Майстер-клас або вебінар</option></select></div>
       <div class="zf"><label for="z-k-when">Розклад <s>*</s></label><input id="z-k-when" data-a="Розклад" data-req placeholder="наприклад: щовівторка, 18:30–19:30, з 4 листопада"><small>День тижня й час, з якого числа і до якого, скільки зустрічей.</small></div>
-      <div class="zf"><label for="z-k-place">Місце <s>*</s></label><input id="z-k-place" data-a="Місце" data-req placeholder="вулиця й номер, індекс, місто або «онлайн»"></div>
-      <div class="zf"><label>Мова</label><div class="zchk" data-l="Мова"><label><input type="checkbox" value="ru">Російська</label><label><input type="checkbox" value="uk">Українська</label><label><input type="checkbox" value="de">Німецька</label><label><input type="checkbox" value="fr">Французька</label><label><input type="checkbox" value="it">Італійська</label><label><input type="checkbox" value="en">Англійська</label></div></div>
+      <div class="zf" data-zown><label for="z-k-place">Місце <s>*</s></label><input id="z-k-place" data-a="Місце" data-req placeholder="вулиця й номер, індекс, місто або «онлайн»"></div>
+      <div class="zf" data-zcard hidden><label for="z-k-where">Де проходять заняття <s>*</s></label><select id="z-k-where" data-a="Де" data-req data-zaddr data-t-card="{a} — адреса з картки"><option value="" data-keep>Вибери</option><option value="Онлайн" data-keep>Онлайн</option><option value="other" data-keep>Інша адреса</option></select></div>
+      <div class="zf" data-zcard data-zif="z-k-where:other" hidden><label for="z-k-addr2">Інша адреса <s>*</s></label><input id="z-k-addr2" data-a="Інша адреса (замість адреси з картки)" data-miss="інша адреса" data-req placeholder="вулиця й номер, індекс, місто"><small>На сайті в цього курсу буде ця адреса, а не адреса з картки.</small></div>
+      <div class="zf"><label>Мова</label><div class="zchk" data-l="Мова" data-zlangs><label><input type="checkbox" value="ru">Російська</label><label><input type="checkbox" value="uk">Українська</label><label><input type="checkbox" value="de">Німецька</label><label><input type="checkbox" value="fr">Французька</label><label><input type="checkbox" value="it">Італійська</label><label><input type="checkbox" value="en">Англійська</label></div></div>
       <div class="zf"><label for="z-k-who">Для кого</label><input id="z-k-who" data-a="Для кого" placeholder="наприклад: дорослі, початківці; діти 6–10 років"></div>
       <div class="zf"><label for="z-k-price">Ціна в CHF і за що <s>*</s><button type="button" class="qh" data-help="zprice" aria-label="Підказка: яку ціну писати" aria-expanded="false">?</button></label><input id="z-k-price" data-a="Ціна" data-req placeholder="наприклад: 25 CHF за заняття, усе включено"></div>
-      <div class="zf"><label for="z-k-lead">Хто веде <s>*</s></label><input id="z-k-lead" data-a="Хто веде" data-req placeholder="ім’я та прізвище або назва"><small>Якщо ти є в довіднику, напиши про це: курс з’явиться і в твоїй картці.</small></div>
-      <div class="zf"><label for="z-k-uid">UID, фірма або ферайн<button type="button" class="qh" data-help="zuid" aria-label="Підказка: UID і ферайн" aria-expanded="false">?</button></label><input id="z-k-uid" data-a="UID, фірма або ферайн" placeholder="CHE-123.456.789"><small>Потрібно для платних курсів.</small></div>
+      <div class="zf" data-zown><label for="z-k-lead">Хто веде <s>*</s></label><input id="z-k-lead" data-a="Хто веде" data-req placeholder="ім’я та прізвище або назва"><small>Якщо ти є в довіднику, знайди свою картку вгорі форми: курс з’явиться і в ній.</small></div>
+      <div class="zf" data-zown><label for="z-k-uid">UID, фірма або ферайн<button type="button" class="qh" data-help="zuid" aria-label="Підказка: UID і ферайн" aria-expanded="false">?</button></label><input id="z-k-uid" data-a="UID, фірма або ферайн" data-zuid placeholder="CHE-123.456.789"><small>Потрібно для платних курсів.</small></div>
       <div class="zf"><label for="z-k-link">Посилання на запис</label><input id="z-k-link" data-a="Посилання на запис" placeholder="https://…"></div>
       <div class="zf"><label for="z-k-about">Коротко про курс <s>*</s></label><textarea id="z-k-about" data-a="Коротко про курс" data-req rows="4" placeholder="2–3 речення: що буде і чого навчиш"></textarea></div>
-      <div class="zf"><label for="z-k-contact">Контакт для запитань <s>*</s></label><input id="z-k-contact" data-a="Контакт для запитань" data-req placeholder="e-mail, телефон або Telegram"><small>Його побачать на сайті в описі курсу.</small></div>
+      <div class="zf" data-zown><label for="z-k-contact">Контакт для запитань <s>*</s></label><input id="z-k-contact" data-a="Контакт для запитань" data-req placeholder="e-mail, телефон або Telegram"><small>Його побачать на сайті в описі курсу.</small></div>
+      <div class="zf" data-zcard hidden><label for="z-k-phone2">Інший телефон</label><input id="z-k-phone2" type="tel" data-a="Інший телефон (замість телефону з картки)" autocomplete="tel" placeholder="+41 …"><small>Тільки якщо для цього курсу потрібен не той телефон, що в картці. На сайті буде цей.</small></div>
+      <div class="zf" data-zcard hidden><label for="z-k-mail2">Інший e-mail</label><input id="z-k-mail2" type="email" data-a="Інший e-mail (замість e-mail із картки)" autocomplete="email" placeholder="name@example.ch"><small>Тільки якщо для цього курсу потрібен не той e-mail, що в картці. На сайті буде цей.</small></div>
     </div>
     <div class="zok"><input type="checkbox" id="z-ku-ok" data-z="ok"><label for="z-ku-ok">Даю згоду, щоб «Свої люди» (Alonira.ch AG) обробили дані з цієї заявки, за потреби зв’язалися зі мною і після перевірки опублікували курс. Я маю право розмістити ці дані, зокрема контакт для запису й запитань. Докладніше — у <a href="https://svoiludi.ch/uk/privacy/">політиці конфіденційності</a>.</label></div>
     <div class="acts"><button class="btn" type="button" data-z="send">Надіслати заявку</button></div>
@@ -606,12 +616,13 @@ a.yours:hover{background:#EBD3A3}
 <dialog class="qm" id="qm" aria-labelledby="qmTitle"><div class="qm-card" id="qmCard"></div></dialog>
 
 <script src="/data/specialists.uk.js?v=f3ab927c"></script>
+<script src="/data/organizations.uk.js?v=489feb29"></script>
 <script>
 window.IMG_BASE = '../img/';
 /* карточки специалистов — в /data/specialists.js (одна копия на весь сайт) */
 const SPECIALISTS = window.SPECIALISTS || [];
 </script>
-<script src="/data/afisha.uk.js?v=d91ec9ad"></script>
+<script src="/data/afisha.uk.js?v=6629f63b"></script>
 <script>/* одна база афиши: здесь — записи раздела «Курсы»; у записи в обеих вкладках направление курса в ktype */
 const KURSY = (window.AFISHA || []).filter(e => (e.sections || []).includes('kursy')).map(e => e.ktype ? Object.assign({}, e, { type: e.ktype }) : e);</script>
 <script>
@@ -823,7 +834,28 @@ function saveIcs(e){
 /* ---------- окно курса ---------- */
 const qm = document.getElementById('qm');
 let OPEN = null;
-function openKurs(id){
+/* ---------- подтверждение записи организатором (решение Ирины 10.10.2026: «процедура подтверждения будет такая же, как у карточки специалиста») ----------
+   Claude готовит запись по заявке: status «на подтверждении» и key. Ирина отправляет ссылку https://svoiludi.ch/uk/kursy/#ok=<id>.<key>
+   на e-mail ИЗ КАРТОЧКИ организатора. Он видит запись, как её увидят все, ставит галочку и нажимает «Подтверждаю» (assets/podtverdit.js):
+   запись на лист подтверждений, письмо Ирине «🌿 Свои люди: … подтверждено», копия на e-mail из карточки. Запасной вариант — письмо из почты.
+   После подтверждения Claude ставит status «активен» и confirm: { date, via }. */
+const okUrl = e => `https://svoiludi.ch/uk/kursy/#ok=${encodeURIComponent(e.id)}.${encodeURIComponent(e.key || '')}`;
+/* контакт для вопросов: свой у записи (другой телефон или e-mail из заявки) или телефон и e-mail из карточки организатора */
+const contactList = e => { if (e.contact) return String(e.contact).split(/\s*[·;]\s*/).filter(Boolean); const s = (e.organizers || []).map(orgOf).find(Boolean); const c = (s && s.contacts) || {}; return [c.phone, c.email].filter(Boolean); };
+const contactLink = x => /@.+\./.test(x) ? `<a href="mailto:${esc(x)}">${esc(x)}</a>` : /^\+?[\d\s()\-]{7,}$/.test(x) ? `<a href="tel:${esc(x.replace(/[^\d+]/g, ''))}">${esc(x)}</a>` : esc(x);
+const okText = e => [`Назва: ${e.title}`, `Коли: ${fmtFull(e.date)}${e.time ? ', ' + e.time : ''}${e.repeat ? ' (повторюється)' : ''}`, `Де: ${placeText(e)}`, `Ціна: ${e.price || ''}`, `Організатор: ${orgNames(e)}`, `Контакт: ${contactList(e).join(', ')}`].join('\n');
+function okBox(e){
+  const who = orgNames(e);
+  const su = `Підтверджую курс — ${e.title}`, body = `Добрий день, Ірино!\n\nУсе правильно, підтверджую публікацію на сайті «Свої люди у Швейцарії».\n\n${okText(e)}\n\n${okUrl(e)}\n\n${who}`;
+  const suf = `Виправлення — ${e.title}`, bodyf = `Добрий день, Ірино!\n\nБудь ласка, виправте:\n\n{text}\n\n${okUrl(e)}\n\n${who}`;
+  return `<div class="pv-box" id="pvBox" data-pv-kind="kurs" data-pv-id="${esc(e.id)}" data-pv-key="${esc(e.key || '')}" data-pv-lang="uk" data-mail="${MAIL}" data-su-ok="${esc(su)}" data-body-ok="${esc(body)}" data-su-fix="${esc(suf)}" data-body-fix="${esc(bodyf)}" data-t-sending="Надсилаю…" data-t-ok="Дякуємо! Підтвердження отримано {t}. Ми опублікуємо запис, зазвичай того ж дня." data-t-copy=" Копія прийде на ваш e-mail." data-t-fixok="Дякуємо! Виправлення отримано {t}. Ми внесемо їх і надішлемо посилання ще раз." data-t-empty="Напишіть, будь ласка, що виправити." data-t-fail="Не вдалося надіслати. Будь ласка, {a} ({m})." data-t-mail="надішліть підтвердження листом" data-t-gmail="Відкрити лист у Gmail" data-t-letter="Відкрився лист у вашій пошті. Надішліть його, це і є підтвердження. Лист не відкрився? {g} або напишіть на {m}.">
+    <b>Це попередній перегляд: так ваш курс побачать на сайті.</b><span>Поки його бачите тільки ви. Перевірте назву, дату, місце, ціну й контакти. Якщо все правильно, поставте галочку й натисніть «Підтверджую». Якщо щось потрібно змінити, натисніть «Потрібно виправити».</span>
+    <label class="pv-ok"><input type="checkbox" data-pv-agree data-id="ok"> <span>Дані правильні. Я організатор або представляю організатора й даю згоду на публікацію на svoiludi.ch. Запис, оплата й договір — тільки зі мною, «Свої люди» в них не беруть участі.</span></label>
+    <div class="pv-acts"><button class="btn" type="button" data-pv-send="ok" disabled>Підтверджую</button><button class="btn ghost" type="button" data-pv-fixopen>Потрібно виправити</button></div>
+    <div class="pv-fix" hidden><textarea data-pv-text rows="4" maxlength="1500" placeholder="Що виправити: наприклад, розклад, адресу чи ціну"></textarea><div class="pv-acts"><button class="btn" type="button" data-pv-send="fix">Надіслати виправлення</button></div></div>
+    <span class="pv-small" data-pv-msg data-online="Одне натискання — і готово. Копія прийде на ваш e-mail.">${window.SVL_PV_ONLINE ? 'Одне натискання — і готово. Копія прийде на ваш e-mail.' : 'Після натискання відкриється лист із вашої пошти. Надішліть його, це і є підтвердження.'}</span></div>`;
+}
+function openKurs(id, pv){
   const e = KURSY.find(x => x.id === id); if (!e) return;
   OPEN = e;
   const k = KTYPES[e.type] || KTYPES.life, kd = KINDS[e.kind] || KINDS.once, box = document.getElementById('qmCard'), nd = nextDate(e);
@@ -834,7 +866,7 @@ function openKurs(id){
   const when = e.kind === 'once' ? `${esc(fmtFull(e.date))}${timeStr(e) ? ' · ' + esc(timeStr(e)) : ''}${e.date < today ? '<small>Ця зустріч уже минула.</small>' : ''}`
     : `${esc(e.repeat ? repeatText(e) : fmtFull(e.date))}${timeStr(e) ? ' · ' + esc(timeStr(e)) : ''}<small>${esc(kindLine(e))}${e.kind === 'course' && !started(e) ? '' : nd ? `. Найближче заняття: ${esc(fmtDay(nd))}` : ''}</small>${e.repeat && e.repeat.except && e.repeat.except.some(x => x >= today) ? `<small>Без занять: ${e.repeat.except.filter(x => x >= today).map(fmtDate).join(', ')}</small>` : ''}`;
   box.innerHTML = `<div class="qm-top"><div class="qm-head">${e.sample ? '<span class="ev-k" style="color:var(--brown)">Зразок курсу · усе вигадане</span><a class="yours" href="/uk/kursy/#add">Тут може бути твій курс! Як додати →</a>' : ''}<span class="ev-k" style="color:${k.c}">${esc(k.t)} · ${esc(kindName(e))}</span><h2 class="qm-title" id="qmTitle">${esc(e.title)}</h2></div><button class="qm-close" type="button" aria-label="Закрити">✕</button></div>
-    <div class="d-body">
+    ${pv ? okBox(e) : ''}<div class="d-body">
       <div class="d-col">
         <div class="d-block"><h4>Про курс</h4><p>${esc(e.about)}</p></div>
         ${e.level ? `<div class="d-block"><h4>Для кого</h4><p>${esc(e.level)}</p></div>` : ''}
@@ -848,12 +880,12 @@ function openKurs(id){
         <div class="acts">${e.link ? `<a class="btn" href="${esc(e.link)}" ${ext}>Записатися в організатора</a>` : ''}<button class="btn ghost" type="button" data-share>Поділитися</button></div>
         ${e.date < today && e.kind === 'once' ? '' : `<div class="d-block"><h4>Додати в календар</h4><div class="calmenu"><a href="${esc(gcalLink(e))}" ${ext}>Google Календар</a><button type="button" data-ics>Apple, Outlook, телефон (.ics)</button></div></div>`}
         <p class="kdisc sm"><b>Курс проводить організатор.</b> Запис, оплата й договір — тільки з ним. «Свої люди» не продають курси й не відповідають за зміст і проведення занять.${e.type === 'body' ? ' Заняття не замінюють лікування. Якщо є проблеми зі здоров’ям, спершу порадься з лікарем.' : ''}</p>
-        <p class="note">${e.contact ? `Запитання організатору: ${/@.+\./.test(e.contact) ? `<a href="mailto:${esc(e.contact)}">${esc(e.contact)}</a>` : esc(e.contact)}. ` : ''}Знайшли помилку? <a href="mailto:${MAIL}?subject=${encodeURIComponent('Помилка в курсі: ' + e.title)}&body=${encodeURIComponent('Посилання: ' + evUrl(e) + '\n\nЩо виправити:\n')}">Повідомити</a></p>
+        <p class="note">${contactList(e).length ? `Запитання організатору: ${contactList(e).map(contactLink).join(', ')}. ` : ''}Знайшли помилку? <a href="mailto:${MAIL}?subject=${encodeURIComponent('Помилка в курсі: ' + e.title)}&body=${encodeURIComponent('Посилання: ' + evUrl(e) + '\n\nЩо виправити:\n')}">Повідомити</a></p>
       </div>
     </div>`;
   box.querySelector('.qm-close').onclick = () => qm.close();
   if (!qm.open) qm.showModal();
-  if (location.hash.slice(1) !== e.id) history.replaceState(null, '', location.pathname + '#' + e.id);
+  if (!pv && location.hash.slice(1) !== e.id) history.replaceState(null, '', location.pathname + '#' + e.id);
 }
 document.getElementById('qmCard').addEventListener('click', async ev => {
   if (!OPEN) return;
@@ -893,16 +925,19 @@ document.getElementById('reset').addEventListener('click', () => { Object.assign
 document.getElementById('trial').hidden = !ADMIN;
 document.getElementById('addbtn').href = `mailto:${MAIL}?subject=${encodeURIComponent('Курс для «Свої люди у Швейцарії»')}&body=${encodeURIComponent(TEMPLATE)}`;
 fillSelects(); render();
-const fromHash = () => { const id = decodeURIComponent(location.hash.slice(1)); if (id === 'digest'){ digest(); return; } if (id && KURSY.some(e => e.id === id)) openKurs(id); };
+const fromHash = () => { const id = decodeURIComponent(location.hash.slice(1)); if (id === 'digest'){ digest(); return; } if (id.startsWith('ok=')){ const [eid, key] = id.slice(3).split('.'); const e = KURSY.find(x => x.id === eid); if (e && e.key && key === e.key) openKurs(eid, true); return; }
+  if (id && KURSY.some(e => e.id === id && (e.status === 'активен' || ADMIN))) openKurs(id); };
 fromHash(); addEventListener('hashchange', fromHash);
 </script>
 <script>window.HELP = Object.assign(window.HELP || {}, {
+  zfind: '<p><b>UID</b> — номер фірми чи самозайнятого в реєстрі Швейцарії, на кшталт CHE-123.456.789. Ми беремо його, коли розміщуємо картку, він є в твоїй картці на сайті.</p><p><b>Номер картки</b> — SG-0001 у спеціалістів, OR-0001 в організацій. Він є в твоїй картці на сайті, внизу.</p><p>Дані з картки ми вже перевірили, тому вписувати їх наново не потрібно. Посилання на підтвердження надішлемо на e-mail із картки: так ніхто не зможе розмістити запис від твого імені.</p><p>Номер нікуди не надсилається: пошук іде тільки за опублікованими картками, просто на цій сторінці.</p>',
   zformat: '<p><b>Регулярні заняття</b> — можна прийти будь-коли, наприклад йога щовівторка.</p><p><b>Курс зі спільним початком</b> — група починає разом і проходить програму від початку до кінця.</p><p><b>Майстер-клас або вебінар</b> — одна зустріч.</p>',
   zprice: '<p>Пиши кінцеву ціну у швейцарських франках з усіма обов’язковими витратами (матеріали, MWST) і за що вона: за заняття, за курс чи за вебінар. Знижки та «старі ціни» — лише справжні. Безкоштовне заняття — так і напиши: безкоштовно.</p>',
   zuid: '<p><b>UID</b> — номер підприємства у Швейцарії, виду CHE-123.456.789. Його можна знайти за назвою в реєстрі <a href="https://www.uid.admin.ch/Search.aspx" target="_blank" rel="noopener">uid.admin.ch</a> або в торговому реєстрі <a href="https://www.zefix.ch" target="_blank" rel="noopener">Zefix</a>.</p><p><b>Ферайн (Verein)</b> — об’єднання людей зі спільною метою та статутом. Якщо ферайн не має запису в реєстрі, напиши його назву.</p>'
 });</script>
 <script src="/assets/help.uk.js" defer></script>
 <script defer src="/assets/zayavka.js"></script>
+<script defer src="/assets/podtverdit.js"></script>
 <script data-goatcounter="https://svoiludi.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 <script src="/assets/share.uk.js" defer></script>
 <script src="/assets/samesite.js"></script>

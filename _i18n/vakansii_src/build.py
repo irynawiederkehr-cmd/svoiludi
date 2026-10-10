@@ -25,12 +25,14 @@ extra=open(S+'/vak_extra.css',encoding='utf-8').read()
 style=style+extra
 body=open(S+'/vak_body.html',encoding='utf-8').read()
 scripts=f'''<script src="/data/specialists.js?v=7fef69e3"></script>
+<script src="/data/organizations.js"></script>
 <script src="/data/vacancies.js"></script>
 <script>window.IMG_BASE = '../img/';</script>
 <script>
 {js}</script>
 <script src="/assets/help.js" defer></script>
 <script defer src="/assets/zayavka.js"></script>
+<script defer src="/assets/podtverdit.js"></script>
 <script data-goatcounter="https://svoiludi.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 <script src="/assets/share.js" defer></script>
 <script src="/assets/samesite.js"></script>

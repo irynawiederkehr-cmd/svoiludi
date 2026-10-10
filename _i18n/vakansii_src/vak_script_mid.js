@@ -40,6 +40,18 @@ const confirmLetter = v => { const a = authorOf(v), d = fmtDate(today); return {
   body: `Здравствуйте, Ирина!\n\n${d} я проверил(а) своё объявление для раздела «Вакансии и партнёрство» на сайте «Свои люди в Швейцарии» и подтверждаю его публикацию.\n\n${adText(v)}\n\nПодтверждаю каждое из условий:\n${checksFor(v).map(c => '☑ ' + c.t).join('\n')}\n\n${okUrl(v)}\n\n${a ? a.name + (a.firm ? ', ' + a.firm : '') : ''}` }; };
 const fixLetter = (v, text) => ({ su: `Исправления в объявление — ${v.title}`, body: `Здравствуйте, Ирина!\n\nВ моём объявлении, пожалуйста, исправьте:\n\n${text}\n\n${okUrl(v)}` });
 
+/* блок подтверждения — общий движок assets/podtverdit.js (одной кнопкой, как у карточки; 10.10.2026). Все условия обязательны. */
+function okBox(v){
+  const L = confirmLetter(v), F = fixLetter(v, '{text}'), n = checksFor(v).length;
+  return `<div class="pv-box" data-pv-kind="vacancy" data-pv-id="${esc(v.id)}" data-pv-key="${esc(v.key || '')}" data-pv-lang="ru" data-mail="${MAIL}" data-su-ok="${esc(L.su)}" data-body-ok="${esc(L.body)}" data-su-fix="${esc(F.su)}" data-body-fix="${esc(F.body)}" data-t-sending="Отправляю…" data-t-ok="Спасибо! Подтверждение получено {t}. Мы опубликуем объявление, обычно в тот же день." data-t-copy=" Копия придёт на ваш e-mail." data-t-fixok="Спасибо! Исправления получены {t}. Мы внесём их и пришлём ссылку ещё раз." data-t-empty="Напишите, пожалуйста, что исправить." data-t-fail="Не получилось отправить. Пожалуйста, {a} ({m})." data-t-mail="отправьте подтверждение письмом" data-t-gmail="Открыть письмо в Gmail" data-t-letter="Открылось письмо в вашей почте с текстом объявления и всеми условиями. Отправьте его, это и есть подтверждение. Письмо не открылось? {g} или напишите на {m}.">
+    <b>Подтвердите, пожалуйста, каждое условие</b>
+    <div class="pv-list">${checksFor(v).map(c => `<label class="pv-ok"><input type="checkbox" data-pv-agree data-id="${c.id}"> <span>${esc(c.t)}</span></label>`).join('')}</div>
+    <span class="free-line">${FREE_NOTE}</span>
+    <div class="pv-acts"><button class="btn" type="button" data-pv-send="ok" disabled>Подтверждаю</button><button class="btn ghost" type="button" data-pv-fixopen>Нужно исправить</button></div>
+    <div class="pv-fix" hidden><textarea data-pv-text rows="4" maxlength="1500" placeholder="Что исправить в объявлении"></textarea><div class="pv-acts"><button class="btn" type="button" data-pv-send="fix">Отправить исправления</button></div></div>
+    <span class="pv-small">Отмечено: <b data-pv-n>0</b> из ${n}.</span>
+    <span class="pv-small" data-pv-msg data-online="Одно нажатие — и готово. Копия придёт на ваш e-mail.">${window.SVL_PV_ONLINE ? 'Одно нажатие — и готово. Копия придёт на ваш e-mail.' : 'После нажатия откроется письмо из вашей почты с текстом объявления и всеми условиями. Отправьте его, это и есть подтверждение.'}</span></div>`;
+}
 function confirmView(v){
   const k = KINDS[v.kind] || KINDS.staff, a = authorOf(v), box = document.getElementById('qmCard');
   box.style.setProperty('--lc', k.c); box.style.setProperty('--lf', `color-mix(in srgb,${k.c} 12%,var(--paper))`);
@@ -48,20 +60,9 @@ function confirmView(v){
       <p>Здравствуйте${a ? ', ' + esc(a.name) : ''}! Это ваше объявление для раздела «Вакансии и партнёрство». Проверьте текст и подтвердите условия. Пока вы не подтвердите, на сайте его никто не видит.</p>
       <p class="cf-term">Объявление показывается 60 дней и само исчезнет с сайта ${esc(fmtDate(v.until || today))}. Продлить можно, если написать Ирине до окончания срока. Добавьте адрес <b>voznesenskaya.iryna@gmail.com</b> в контакты и проверяйте папку «Спам».</p>
       <div class="cf-ad"><pre>${esc(adText(v))}</pre></div>
-      <h4>Подтвердите, пожалуйста, каждое условие</h4>
-      <div class="checks" id="cfChecks">${checksFor(v).map(c => `<label><input type="checkbox" data-cf="${c.id}"> <span>${esc(c.t)}</span></label>`).join('')}</div>
-      <p class="free-line">${FREE_NOTE}</p>
-      <div class="acts"><button class="btn" type="button" id="cfSend" disabled>Подтверждаю — отправить письмо Ирине</button><button class="btn ghost" type="button" id="cfFixOpen">Нужно исправить</button></div>
-      <div class="cf-fix" id="cfFix" hidden><textarea id="cfFixText" rows="4" maxlength="1500" placeholder="Что исправить в объявлении"></textarea><div class="acts"><button class="btn" type="button" id="cfFixSend">Отправить исправления</button></div></div>
-      <p class="note" id="cfMsg" aria-live="polite">Откроется письмо в вашей почте с текстом объявления и всеми условиями. Отправьте его — это и есть подтверждение. Отмечено: <b id="cfN">0</b> из ${checksFor(v).length}.</p>
+      ${okBox(v)}
     </div>`;
   box.querySelector('.qm-close').onclick = () => qm.close();
-  const all = [...box.querySelectorAll('[data-cf]')], send = box.querySelector('#cfSend');
-  box.querySelector('#cfChecks').addEventListener('change', () => { const n = all.filter(c => c.checked).length; box.querySelector('#cfN').textContent = n; send.disabled = n !== all.length; });
-  send.onclick = () => { const L = confirmLetter(v); location.href = mailto(MAIL, L.su, L.body);
-    box.querySelector('#cfMsg').innerHTML = `Письмо открылось в вашей почте — отправьте его. Если не открылось: <a href="${esc(gmail(MAIL, L.su, L.body))}" ${ext}>открыть в Gmail</a> или напишите на ${esc(MAIL)}.`; };
-  box.querySelector('#cfFixOpen').onclick = () => { const f = box.querySelector('#cfFix'); f.hidden = !f.hidden; };
-  box.querySelector('#cfFixSend').onclick = () => { const t = box.querySelector('#cfFixText').value.trim(); if (!t) return; const L = fixLetter(v, t); location.href = mailto(MAIL, L.su, L.body); };
   if (!qm.open) qm.showModal();
 }
 /* блок для Ирины (режим ?ira=1) в окне объявления */
