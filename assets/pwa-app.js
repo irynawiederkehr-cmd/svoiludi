@@ -24,7 +24,8 @@
     android: ['Відкрий меню браузера ⋮ угорі праворуч.', 'Вибери «Встановити застосунок» або «Додати на головний екран».', 'Підтверди. Іконка «Свої люди» з’явиться на екрані.'],
     inapp: '<b>Зараз сторінка відкрита всередині Instagram, Telegram чи іншого застосунку.</b> Звідси встановити не можна. Натисни ⋯ або значок угорі й вибери «Відкрити в браузері» (Safari чи Chrome), а там — «Встановити застосунок».',
     note: '<b>Важливо для записів в інструментах.</b> Записи, зроблені в браузері, у застосунок самі не переходять. Перед встановленням натисни в інструменті «Зберегти резервну копію», а в застосунку — «Завантажити з резервної копії».',
-    install_app: '📱 Встановити як застосунок', guide: 'Покрокова інструкція →'
+    install_app: '📱 Встановити як застосунок', guide: 'Покрокова інструкція →',
+    install_btn: 'Встановити застосунок «Свої люди»', pics: 'Так це виглядає на телефоні:'
   } : {
     tabs: ['Специалисты', 'Швейцария', 'Инструменты', 'Что нового', 'Ещё'],
     more: 'Ещё', swiss: 'Как устроена Швейцария', join: 'Как разместиться', evk: 'События и курсы', pro: 'Для специалистов', about: 'О проекте', site: 'Сайт Ирины', privacy: 'Политика конфиденциальности',
@@ -38,7 +39,8 @@
     android: ['Открой меню браузера ⋮ вверху справа.', 'Выбери «Установить приложение» или «Добавить на главный экран».', 'Подтверди. Иконка «Свои люди» появится на экране.'],
     inapp: '<b>Сейчас страница открыта внутри Instagram, Telegram или другого приложения.</b> Отсюда установить нельзя. Нажми ⋯ или значок вверху и выбери «Открыть в браузере» (Safari или Chrome), а там — «Установить приложение».',
     note: '<b>Важно для записей в инструментах.</b> Записи, сделанные в браузере, в приложение сами не переходят. Перед установкой нажми в инструменте «Сохранить резервную копию», а в приложении — «Загрузить из резервной копии».',
-    install_app: '📱 Установить как приложение', guide: 'Пошаговая инструкция →'
+    install_app: '📱 Установить как приложение', guide: 'Пошаговая инструкция →',
+    install_btn: 'Установить приложение «Свои люди»', pics: 'Так это выглядит на телефоне:'
   };
 
   var ua = navigator.userAgent;
@@ -98,7 +100,22 @@
     '.pa-later{border:0;background:none;color:var(--muted,#7A6E62);font:600 .9rem var(--body,system-ui);text-decoration:underline;text-underline-offset:3px;cursor:pointer;padding:10px 6px}',
     '.pa-foot{display:inline-block;margin:10px 0;border:1.5px solid var(--sage,#66704F);color:var(--sage,#66704F);background:none;border-radius:999px;padding:9px 16px;font:700 .9rem var(--body,system-ui);cursor:pointer}',
     '.pa-guide{margin:8px 0 0;font-size:.9rem}.pa-guide a,.pa-flink{color:var(--sage,#66704F);font-weight:700;text-underline-offset:3px}.pa-flink{display:inline-block;margin:0 0 0 12px;font-size:.9rem}',
-    '@media print{.pa-tabs,.pa-card,.pa-back,.pa-foot,.pa-flink{display:none!important}}'
+    /* кнопка «Установить приложение» под верхним меню (10.10.2026, просьба Ирины «на сайте сделай кнопку установить app») */
+    '.pa-ibtn{order:4;flex:1 0 100%;display:flex;align-items:center;justify-content:center;gap:9px;min-height:46px;margin:0 0 12px;padding:8px 14px;border-radius:12px;border:1.5px solid var(--sage,#66704F);background:var(--sage-soft,#E3E6D6);color:var(--ink,#2F2924);font:700 .9rem/1.2 var(--body,system-ui);cursor:pointer;-webkit-tap-highlight-color:transparent;box-sizing:border-box}',
+    '.pa-ibtn svg{width:22px;height:22px;flex:none;fill:none;stroke:var(--sage,#66704F);stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}',
+    '.pa-ibtn:active{transform:scale(.98)}',
+    '@media (min-width:1101px){.pa-ibtn{order:1;flex:0 0 auto;min-height:0;margin:0;padding:7px 12px;font-size:.84rem}.pa-ibtn svg{width:18px;height:18px}}',
+    '@media (min-width:1360px){.pa-ibtn{padding:7px 9px}.pa-ibtn span{display:none}}',   /* на широком экране — только значок, как у «Поиска» */
+    'html.pa-app .pa-ibtn{display:none!important}',
+    /* картинки шагов в подсказке установки — крупные планы из галереи prilozhenie/img (10.10.2026) */
+    '.pa-card{max-height:calc(100vh - 24px);max-height:calc(100dvh - 24px);overflow:auto;overscroll-behavior:contain}',
+    '.pa-pics-t{margin:12px 0 6px;font-size:.84rem;font-weight:700;color:var(--muted,#7A6E62)}',
+    '.pa-pics{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;padding:2px 2px 8px;-webkit-overflow-scrolling:touch}',
+    '.pa-pics figure{position:relative;flex:0 0 80%;margin:0;scroll-snap-align:start}',
+    '.pa-pics.one figure{flex-basis:100%}',
+    '.pa-pics img{display:block;width:100%;height:auto;border-radius:12px;border:1px solid var(--line,#E5D9C9)}',
+    '.pa-pics b{position:absolute;left:6px;top:6px;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;background:var(--sage,#66704F);color:var(--paper,#FFFCF8);font:700 .75rem var(--body,system-ui);box-shadow:0 1px 4px rgba(0,0,0,.25)}',
+    '@media print{.pa-tabs,.pa-card,.pa-back,.pa-foot,.pa-flink,.pa-ibtn{display:none!important}}'
   ].join('\n');
   document.head.appendChild(css);
 
@@ -188,8 +205,8 @@
 
   /* 3. подсказка «Установить как приложение» */
   var deferred = null;
-  window.addEventListener('beforeinstallprompt', function (e) { e.preventDefault(); deferred = e; });
-  window.addEventListener('appinstalled', function () { var c = document.querySelector('.pa-card'); if (c) c.remove(); });
+  window.addEventListener('beforeinstallprompt', function (e) { e.preventDefault(); deferred = e; if (document.readyState !== 'loading') installBtn(); });
+  window.addEventListener('appinstalled', function () { var c = document.querySelector('.pa-card'); if (c) c.remove(); var ib = document.querySelector('.pa-ibtn'); if (ib) ib.remove(); });
   function later(set) {
     try {
       if (set) localStorage.setItem('svoiludi-app-later', String(Date.now()));
@@ -202,6 +219,9 @@
     var body = '';
     if (kind === 'inapp') body = '<div class="pa-warn">' + T.inapp + '</div>';
     else if (kind === 'ios' || !deferred) body = '<ol class="pa-steps"><li>' + T[kind === 'ios' ? 'ios' : 'android'].join('</li><li>') + '</li></ol>';
+    var pics = kind === 'inapp' ? ['s-inapp-1'] : (kind === 'ios' || !deferred) ? [1, 2, 3, 4].map(function (n) { return 's-' + (kind === 'ios' ? 'ios' : 'and') + '-' + n; }) : [];
+    if (pics.length) body += '<p class="pa-pics-t">' + T.pics + '</p><div class="pa-pics' + (pics.length === 1 ? ' one' : '') + '">' + pics.map(function (f, i) {
+      return '<figure><img src="/prilozhenie/img/' + (UK ? 'uk' : 'ru') + '/' + f + '.jpg" width="390" height="150" alt="" loading="lazy">' + (pics.length > 1 ? '<b>' + (i < 3 ? i + 1 : '✓') + '</b>' : '') + '</figure>'; }).join('') + '</div>';
     var h = '<aside class="pa-card" role="dialog" aria-label="' + T.title + '"><div class="pa-head"><img src="/fav/icon-192.png" alt=""><div>' +
       '<h3>' + T.title + '<button type="button" class="pa-q" aria-label="?" aria-expanded="false">?</button></h3><p>' + T.lead + '</p></div></div>' +
       '<div class="pa-help">' + T.help + '</div>' + body + '<p class="pa-guide"><a href="' + P + '/prilozhenie/">' + T.guide + '</a></p>' + (kind !== 'inapp' ? '<div class="pa-note">' + T.note + '</div>' : '') +
@@ -216,6 +236,19 @@
   }
   window.svoiInstallHint = function () { card(force); };
 
+  /* 4. кнопка «Установить приложение «Свои люди»» под верхним меню (10.10.2026): Android и компьютер с Chrome — окно установки браузера,
+     iPhone и iPad — подсказка с шагами и картинками, Instagram и Telegram — «открой в браузере». В приложении кнопки нет. */
+  function installBtn() {
+    if (STANDALONE || document.querySelector('.pa-ibtn')) return;
+    var page = document.querySelector('header.top .page'); if (!page) return;
+    var b = el('<button type="button" class="pa-ibtn" title="' + T.install_btn + '" aria-label="' + T.install_btn + '"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6.5" y="2.5" width="11" height="19" rx="2.5"/><path d="M12 7.5v7M9.2 11.8 12 14.6l2.8-2.8M10.5 18.5h3"/></svg><span>' + T.install_btn + '</span></button>');
+    b.addEventListener('click', function () {
+      if (deferred && !INAPP) { deferred.prompt(); deferred.userChoice.then(function (r) { deferred = null; if (r && r.outcome === 'accepted') b.remove(); }); return; }
+      card(force);
+    });
+    page.appendChild(b);
+  }
+
   function footerLink() {
     var f = document.querySelector('footer'); if (!f) return;
     var b = el('<button type="button" class="pa-foot">' + T.install_app + '</button>');
@@ -228,7 +261,9 @@
   function start() {
     topTiles();
     if (STANDALONE) { tabBar(); return; }
+    if (deferred) installBtn();
     if (!(TOUCH || force)) return;
+    installBtn();
     footerLink();
     if (force) { setTimeout(function () { card(force); }, 300); return; }
     if (later()) return;
