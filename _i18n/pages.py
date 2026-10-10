@@ -10,7 +10,7 @@ I18N = os.path.join(ROOT, '_i18n')
 SITE = 'https://svoiludi.ch'
 L = 'uk'
 KEY = 'svoiludiLang'
-PAGES = [('index.html', '/'), ('events/index.html', '/events/'), ('kursy/index.html', '/kursy/'), ('vakansii/index.html', '/vakansii/'), ('join/index.html', '/join/'), ('opros/index.html', '/opros/'),
+PAGES = [('index.html', '/'), ('events/index.html', '/events/'), ('kursy/index.html', '/kursy/'), ('vakansii/index.html', '/vakansii/'), ('organizacii/index.html', '/organizacii/'), ('join/index.html', '/join/'), ('opros/index.html', '/opros/'),
          ('badge/index.html', '/badge/'), ('instrumenty/index.html', '/instrumenty/'), ('instrumenty/moj-den/index.html', '/instrumenty/moj-den/'),
          ('instrumenty/moj-god/index.html', '/instrumenty/moj-god/'), ('instrumenty/moi-emocii/index.html', '/instrumenty/moi-emocii/'),
          ('instrumenty/moj-budget/index.html', '/instrumenty/moj-budget/'),

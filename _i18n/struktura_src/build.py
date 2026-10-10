@@ -51,7 +51,7 @@ def foot(depth, extra=''):
     return f'''
   <footer>
     <span>© 2026 Свои люди в Швейцарии · <a href="{up}o-proekte/">О проекте</a> · проект <a href="https://voznesenskaya.ch/">Ирины Вознесенской</a></span>
-    <span><a href="{up}">Специалисты</a> · <a href="{up}shveycariya/">Как устроена Швейцария</a> · <a href="{up}instrumenty/">Полезные инструменты</a> · <a href="{up}events/">События</a> · <a href="{up}kursy/">Курсы</a> · <a href="{up}novosti/">Что нового</a> · <a href="{up}dlya-specialistov/">Для специалистов</a> · <a href="https://svoiludi.ch/privacy/">Политика конфиденциальности</a> · <a href="https://voznesenskaya.ch/impressum/">Выходные данные</a></span>
+    <span><a href="{up}">Специалисты</a> · <a href="{up}organizacii/">Организации</a> · <a href="{up}shveycariya/">Как устроена Швейцария</a> · <a href="{up}instrumenty/">Полезные инструменты</a> · <a href="{up}events/">События</a> · <a href="{up}kursy/">Курсы</a> · <a href="{up}novosti/">Что нового</a> · <a href="{up}dlya-specialistov/">Для специалистов</a> · <a href="https://svoiludi.ch/privacy/">Политика конфиденциальности</a> · <a href="https://voznesenskaya.ch/impressum/">Выходные данные</a></span>
   </footer>
 </main>
 {extra}<script src="/assets/temy.js" defer></script>
@@ -177,7 +177,8 @@ def dlya_specialistov():
     <a class="pro-card" href="../join/"><b>Разместиться в справочнике</b><p>Анкета за 15 минут. Базовая карточка в период запуска бесплатна: фото, профиль, услуги, контакты, визитка и прайс-лист для телефона и PDF.</p><span class="go">Как разместиться →</span></a>
     <a class="pro-card" href="../join/#form"><b>Анкета специалиста</b><p>Заполните основное на сайте, скачайте анкету в Word, допишите и отправьте с портретным фото.</p><span class="go">Заполнить →</span></a>
     <a class="pro-card" href="../badge/"><b>Значок «Свои люди» для сайта</b><p>Поставьте значок со ссылкой на свою карточку на сайт, в Instagram или подпись письма. Клиентам проще вас найти и проверить.</p><span class="go">Взять значок →</span></a>
-    {'<a class="pro-card" href="../vakansii/"><b>Вакансии и партнёрство</b><p>Ищете сотрудника или партнёра? Бесплатно для всех и всегда.</p><span class="go">Открыть →</span></a>' if vak else '<div class="pro-card soon"><span class="soon-tag">Скоро</span><b>Вакансии и партнёрство</b><p>«Ищу сотрудника» и «Ищу партнёра». Бесплатно для членов сообщества «Свои люди». Не коммерческая услуга.</p></div>'}
+    {'<a class="pro-card" href="../vakansii/"><b>Вакансии и партнёрство</b><p>Ищете сотрудника, партнёра или волонтёров? Бесплатно для всех и всегда.</p><span class="go">Открыть →</span></a>' if vak else '<div class="pro-card soon"><span class="soon-tag">Скоро</span><b>Вакансии и партнёрство</b><p>«Ищу сотрудника» и «Ищу партнёра». Бесплатно для членов сообщества «Свои люди». Не коммерческая услуга.</p></div>'}
+    {'<a class="pro-card" href="../organizacii/#add"><b>Организациям — бесплатно всегда</b><p>Ферайн, фонд или центр помощи? Карточка организации, события, курсы и поиск волонтёров для некоммерческих организаций бесплатны всегда.</p><span class="go">Разместить организацию →</span></a>' if os.path.isfile('organizacii/index.html') else ''}
     <a class="pro-card" href="../kursy/#add"><b>Добавить курс или занятие</b><p>Регулярные занятия, курсы, мастер-классы, вебинары. Размещение бесплатно до конца 2027 года. Курсы видны и в вашей карточке.</p><span class="go">Добавить курс →</span></a>
     <a class="pro-card" href="../events/#add"><b>Добавить событие</b><p>Встреча, праздник, выставка, лекция. События видны в афише и в вашей карточке.</p><span class="go">Добавить событие →</span></a>
   </div>
@@ -398,6 +399,14 @@ def evk():
         sw = ('<!--evk--><nav class="evk" aria-label="События и курсы">'
               + (f'<a href="./" aria-current="page">События</a><a href="../kursy/">Курсы и занятия</a>' if cur == 'ev' else f'<a href="../events/">События</a><a href="./" aria-current="page">Курсы и занятия</a>')
               + '</nav><style>.evk{display:inline-flex;gap:4px;background:var(--sage-soft,#E3E6D6);border-radius:12px;padding:4px;margin:0 0 14px}.evk a{padding:7px 16px;border-radius:9px;font-weight:700;font-size:.9rem;text-decoration:none;color:var(--ink);background:none;border:0;box-shadow:none}.evk a[aria-current]{background:var(--paper,#FFFCF8);box-shadow:0 1px 4px rgba(0,0,0,.12);color:var(--ink)!important}</style><!--evk-->')
+        h = re.sub(r'(<div class="hero-txt">\s*)', lambda m: m.group(1) + sw, h, count=1)
+        open(p, 'w', encoding='utf-8').write(h)
+    # главная: «Специалисты | Организации» (раздел «Организации», решение Ирины 10.10.2026), тот же вид, что «События | Курсы»
+    if os.path.isfile('organizacii/index.html'):
+        p = 'index.html'; h = open(p, encoding='utf-8').read()
+        h = re.sub(r'<!--orgsw-->.*?<!--orgsw-->', '', h, flags=re.S)
+        sw = ('<!--orgsw--><nav class="evk" aria-label="Специалисты и организации"><a href="./" aria-current="page">Специалисты</a><a href="organizacii/">Организации</a></nav>'
+              '<style>.evk{display:inline-flex;gap:4px;background:var(--sage-soft,#E3E6D6);border-radius:12px;padding:4px;margin:0 0 14px}.evk a{padding:7px 16px;border-radius:9px;font-weight:700;font-size:.9rem;text-decoration:none;color:var(--ink)}.evk a[aria-current]{background:var(--paper,#FFFCF8);box-shadow:0 1px 4px rgba(0,0,0,.12)}</style><!--orgsw-->')
         h = re.sub(r'(<div class="hero-txt">\s*)', lambda m: m.group(1) + sw, h, count=1)
         open(p, 'w', encoding='utf-8').write(h)
 

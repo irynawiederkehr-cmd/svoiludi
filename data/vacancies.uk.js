@@ -11,6 +11,8 @@
    id      — латиницей, уникальный: ссылка svoiludi.ch/vakansii/#id
    status  — 'активен' | 'на подтверждении' | 'закрыто' (на сайте видны только «активен» и не просроченные)
    kind    — 'staff' «Ищу сотрудника» (работа по найму) | 'partner' «Ищу партнёра» (только самостоятельные)
+             | 'volunteer' «Ищу волонтёров» (10.10.2026: только некоммерческие организации, помощь без оплаты, возмещение расходов;
+               author: { org: '<id из data/organizations.js>', name, role, contacts }; условия — CHECKS.volunteer на странице vakansii/)
    author  — id специалиста из data/specialists.js; если у автора нет карточки — { name, firm, role, contacts: { telegram, email } } (карточка не обязательна)
    title   — кого ищут; cat — направление, как в справочнике (status, law, money, insure, health, psy, coach, body, kids, learn, home, events)
    canton, city — где работа; online: true — можно удалённо (тогда canton/city могут быть пустыми)
@@ -96,6 +98,55 @@ window.VACANCIES = [
         "self",
         "legal",
         "fair",
+        "free",
+        "remove"
+      ]
+    }
+  },
+  {
+    "sample": true,
+    "id": "obrazec-volontery-razgovornyj-klub",
+    "status": "активен",
+    "kind": "volunteer",
+    "author": {
+      "org": "obrazec-centr-pomoshchi",
+      "name": "Центр допомоги «Приклад» (зразок)",
+      "firm": "",
+      "role": "некомерційна організація, зразок",
+      "contacts": {
+        "telegram": "",
+        "email": ""
+      }
+    },
+    "title": "Шукаємо волонтерів для розмовного клубу німецької",
+    "cat": "learn",
+    "canton": "Zürich",
+    "city": "Winterthur",
+    "online": false,
+    "workload": "2 години на тиждень, щовівторка",
+    "start": "з листопада 2026",
+    "langs": [
+      "німецька",
+      "українська або російська"
+    ],
+    "about": "Це зразок оголошення, усе в ньому вигадане. Раз на тиждень ми зустрічаємося з тими, хто вчить німецьку: говоримо про життя, розбираємо листи, граємо. Потрібна людина, яка добре говорить німецькою і готова підтримати новачків.",
+    "offer": "Відшкодовуємо дорогу, даємо підтвердження «Dossier freiwillig engagiert», знайомимо з командою і пояснюємо, як проходять зустрічі.",
+    "contact": "",
+    "posted": "2026-10-10",
+    "until": "2026-12-09",
+    "key": "obr4",
+    "confirm": {
+      "date": "2026-10-10",
+      "via": "зразок",
+      "checks": [
+        "real",
+        "resp",
+        "npo",
+        "unpaid",
+        "noreplace",
+        "insure",
+        "safe",
+        "confirm",
         "free",
         "remove"
       ]
