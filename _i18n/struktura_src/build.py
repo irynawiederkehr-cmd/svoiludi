@@ -303,7 +303,7 @@ def situaciya(s):
     # шаги без статьи: экстренные номера и справочник (текст шага — в data.py, менять согласованно)
     ahv = 'Запиши номер AHV (номер социального страхования, он есть на карточке медстраховки), страховки и врачей, чтобы в трудную минуту всё было под рукой.'
     steps = steps.replace(ahv + '</span>', ahv + f' <a href="{up}instrumenty/ekstrennye-nomera/">Сделать карточку →</a></span>')
-    steps = steps.replace('в период запуска, до конца 2027 года, бесплатно.</span>', f'в период запуска, до конца 2027 года, бесплатно. <a href="{up}dlya-specialistov/">Для специалистов →</a></span>')
+    steps = steps.replace('в период запуска, до конца 2027 года, бесплатно.</span>', f'в период запуска, до конца 2027 года, бесплатно. <a href="{up}dlya-specialistov/">Работа и своё дело →</a></span>')
     cards = ''.join(f'<a class="tm-card" href="{up}shveycariya/{t}/"><b>{BYSLUG[t]["title"]}</b><p>{BYSLUG[t]["lead"]}</p><span class="go">Читать →</span></a>' for t in s['topics'] if t in BYSLUG and BYSLUG[t]['ready'])
     tools = ''.join(f'<a class="tool tpv" href="{up}instrumenty/{x}/">{fan(x, up)}<span class="ttxt"><b>{TOOLNAMES.get(x, x)}</b><em>Бесплатно · открыть →</em></span></a>' for x in s['tools'] if HAS(x))
     tabs = {'kursy': ('Курсы и занятия', 'kursy/', 'Язык, работа и жизнь в Швейцарии — курсы рядом и онлайн.'), 'events': ('События', 'events/', 'Встречи и праздники в твоём кантоне — чтобы не быть одной.')}
