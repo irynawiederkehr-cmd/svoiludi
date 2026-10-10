@@ -372,7 +372,10 @@ a.bot:hover{color:#B98324}
 .sp-sub{display:flex;align-items:center;gap:7px;font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--lc)}
 .sp-sub svg{flex:none}
 .sp-sub .badge{margin-left:auto}
-.sp-id{display:grid;grid-template-columns:88px 1fr;gap:14px;align-items:center}
+/* строка направления и фото на одном уровне во всех карточках ряда, даже если у соседей направление в две строки (10.10.2026) */
+.sp-main{display:flex;flex-direction:column;gap:12px;flex:1;min-width:0}
+@supports (grid-template-rows:subgrid){.grid>.sp{display:grid;grid-template-rows:subgrid;grid-row:span 2}}
+.sp-id{display:grid;grid-template-columns:88px 1fr;gap:14px;align-items:start}  /* фото всегда сверху, на одном уровне во всех карточках (10.10.2026) */
 .sp-id>div{display:flex;flex-direction:column;gap:4px;min-width:0}
 .ph{display:block;width:100%;max-width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:14px;background:var(--lf)}
 .phw{position:relative;display:block}
@@ -1009,7 +1012,7 @@ function card(s, lvl = ''){
   const k = CATS[s.cat] || CATS.status, why = hiddenReason(s);
   const flag = why ? `<span class="badge warn">${esc(why)}</span>` : lvl === 'vip' ? '<span class="badge tier">VIP-партнер ТОП</span>' + VIPQ : lvl === 'партнёр' || lvl === 'vip+' ? '<span class="badge tier">VIP-партнер</span>' + VIPQ : '';
   return `<article class="sp${why ? ' off' : ''}${lvl === 'vip' ? ' vip' : lvl === 'партнёр' || lvl === 'vip+' ? ' partner' : ''}" style="--lc:${k.c}">
-    ${s.sample ? '<span class="sample" title="Вигаданий фахівець — так виглядатиме ваша картка">Зразок</span>' : ''}<div class="sp-sub">${ico(k.i, k.c, null, 16)}<span>${esc(k.t)}</span>${flag}</div>
+    ${s.sample ? '<span class="sample" title="Вигаданий фахівець — так виглядатиме ваша картка">Зразок</span>' : ''}<div class="sp-sub">${ico(k.i, k.c, null, 16)}<span>${esc(k.t)}</span>${flag}</div><div class="sp-main">
     <div class="sp-id">${photo(s)}<div>
       <h3>${esc(s.name)}${isNew(s) ? '<span class="new" title="Новий у довіднику">новий</span>' : ''}</h3>
       <div class="role">${esc(s.role)}</div>${s.firm ? `<div class="firm">${esc(s.firm)}</div>` : ''}${vacChips(s)}
@@ -1019,7 +1022,7 @@ function card(s, lvl = ''){
       <div class="fact"><span>Мови</span><div>${esc(s.langs.join(', '))}</div></div>
     </div>
     <div class="sp-acts">${quick(s)}<button class="more" type="button" data-open="${esc(s.id)}">Детальніше</button>${favBtn(s)}</div>
-  </article>`;
+  </div></article>`;
 }
 const plural = (n, a, b, c) => n % 10 === 1 && n % 100 !== 11 ? a : [2, 3, 4].includes(n % 10) && ![12, 13, 14].includes(n % 100) ? b : c;
 
