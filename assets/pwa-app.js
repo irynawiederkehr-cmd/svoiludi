@@ -16,7 +16,7 @@
   var Q = location.search;
   var T = UK ? {
     tabs: ['Фахівці', 'Швейцарія', 'Інструменти', 'Що нового', 'Ще'],
-    more: 'Ще', swiss: 'Як влаштована Швейцарія', join: 'Як розміститися', evk: 'Події та курси', pro: 'Для фахівців', about: 'Про проєкт', site: 'Сайт Ірини', privacy: 'Політика конфіденційності',
+    more: 'Ще', swiss: 'Як влаштована Швейцарія', join: 'Як розміститися', evk: 'Події та курси', pro: 'Робота і своя справа', about: 'Про проєкт', site: 'Сайт Ірини', privacy: 'Політика конфіденційності',
     share: 'Поділитися застосунком з друзями', reload: 'Оновити сторінку', lang: 'По-русски', close: 'Закрити',
     shareText: 'Свої люди у Швейцарії: фахівці, які говорять українською та російською, події, курси й корисні інструменти. Можна встановити як застосунок на телефон.',
     title: 'Свої люди — як застосунок на телефоні',
@@ -32,7 +32,7 @@
     menu: 'Меню', fold: 'Згорнути', search: 'Пошук'
   } : {
     tabs: ['Специалисты', 'Швейцария', 'Инструменты', 'Что нового', 'Ещё'],
-    more: 'Ещё', swiss: 'Как устроена Швейцария', join: 'Как разместиться', evk: 'События и курсы', pro: 'Для специалистов', about: 'О проекте', site: 'Сайт Ирины', privacy: 'Политика конфиденциальности',
+    more: 'Ещё', swiss: 'Как устроена Швейцария', join: 'Как разместиться', evk: 'События и курсы', pro: 'Работа и своё дело', about: 'О проекте', site: 'Сайт Ирины', privacy: 'Политика конфиденциальности',
     share: 'Поделиться приложением с друзьями', reload: 'Обновить страницу', lang: 'Українською', close: 'Закрыть',
     shareText: 'Свои люди в Швейцарии: специалисты, которые говорят по-русски и по-украински, события, курсы и полезные инструменты. Можно установить как приложение на телефон.',
     title: 'Свои люди — как приложение на телефоне',
@@ -161,7 +161,7 @@
   function topTiles() {   /* иконки в плитках верхнего меню; число колонок — чтобы всегда было два ряда */
     var nav = document.querySelector('header.top nav[aria-label]'); if (!nav) return;
     var map = [[/voznesenskaya\.ch/, I.site], [/kursy\//, I.kurs], [/events\//, I.ev], [/instrumenty\//, I.tool], [/join\//, I.join],
-      [/shveycariya\//, I.swiss], [/situacii\//, I.swiss], [/vakansii\//, I.job], [/novosti\//, I.news], [/dlya-specialistov\//, I.pro], [/o-proekte\//, I.info], [/^\/(index\.html)?$/, I.spec]];
+      [/shveycariya\//, I.swiss], [/situacii\//, I.swiss], [/vakansii\//, I.job], [/novosti\//, I.news], [/dlya-specialistov\//, I.job], [/o-proekte\//, I.info], [/^\/(index\.html)?$/, I.spec]];
     var links = nav.querySelectorAll('a');
     links.forEach(function (a) {
       if (a.querySelector('.pa-ni')) return;

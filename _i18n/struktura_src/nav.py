@@ -1,5 +1,5 @@
 """Меню сайта (решение Ирины 09.10.2026, «устройство сайта»): 6 пунктов во всех русских страницах.
-Специалисты · Как устроена Швейцария · Полезные инструменты · События и курсы · Что нового · Для специалистов.
+Специалисты · Как устроена Швейцария · Полезные инструменты · События и курсы · Что нового · Работа и своё дело (до 10.10.2026 — «Для специалистов»).
 «Сайт Ирины» — в подвале, на странице «О проекте» и в «Ещё» приложения (справочник нейтральный, см. документ проекта «struktura-saytov.md»).
 Запуск из корня: python3 _i18n/struktura_src/nav.py  (идемпотентно; после слияния веток запускать заново, потом _i18n/sync.py для UA)."""
 import os, re
@@ -10,7 +10,7 @@ ITEMS = [  # (путь, название, условие «текущий»)
     ('instrumenty/', 'Полезные инструменты', lambda p: p.startswith('instrumenty/')),
     ('events/', 'События и курсы', lambda p: p.startswith(('events/', 'kursy/'))),
     ('novosti/', 'Что нового', lambda p: p.startswith('novosti/')),
-    ('dlya-specialistov/', 'Для специалистов', lambda p: p.startswith(('dlya-specialistov/', 'join/', 'vakansii/', 'badge/'))),
+    ('dlya-specialistov/', 'Работа и своё дело', lambda p: p.startswith(('dlya-specialistov/', 'join/', 'vakansii/', 'badge/'))),
 ]
 NAV = re.compile(r'(<nav aria-label="Разделы">)(.*?)(\n?\s*</nav>)', re.S)
 
