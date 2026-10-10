@@ -94,6 +94,7 @@ PAGES = [('index.html', '/'), ('events/index.html', '/events/'), ('kursy/index.h
          ('shveycariya/pravila-doma/index.html', '/shveycariya/pravila-doma/'),
          ('shveycariya/priroda/index.html', '/shveycariya/priroda/'),
          ('shveycariya/professii-avto/index.html', '/shveycariya/professii-avto/'),
+         ('shveycariya/perederzhka/index.html', '/shveycariya/perederzhka/'),
          ('shveycariya/professii-dom/index.html', '/shveycariya/professii-dom/'),
          ('shveycariya/professii-konsultirovanie/index.html', '/shveycariya/professii-konsultirovanie/'),
          ('shveycariya/professii-krasota/index.html', '/shveycariya/professii-krasota/'),

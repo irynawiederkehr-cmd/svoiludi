@@ -242,7 +242,7 @@ def article(t):
   <section class="s-hero" aria-labelledby="h1" style="padding-top:18px">
     <h1 id="h1">{a['h1']}</h1>
     <p class="lead">{a['lead']}</p>
-    <p class="upd">Обновлено {UPD}</p>
+    <p class="upd">Обновлено {a.get('upd', UPD)}</p>
   </section>
   <div class="art">
     <article class="art-main">
@@ -262,7 +262,7 @@ def article(t):
     <div class="art-foot">
       <p class="botlink">Не нашла ответа на свой вопрос? Нажми «Поиск» вверху страницы и напиши одно слово по-русски или немецкое слово из письма. Ничего не нашлось — <a href="mailto:voznesenskaya.iryna@gmail.com?subject=%D0%A2%D0%B5%D0%BC%D0%B0%20%D0%B4%D0%BB%D1%8F%20%D1%81%D1%82%D0%B0%D1%82%D1%8C%D0%B8%20%D0%BD%D0%B0%20svoiludi.ch&amp;body=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%21%20%D0%AF%20%D0%BD%D0%B5%20%D0%BD%D0%B0%D1%88%D0%BB%D0%B0%20%D0%BD%D0%B0%20%D1%81%D0%B0%D0%B9%D1%82%D0%B5%20%D0%BE%D1%82%D0%B2%D0%B5%D1%82%D0%B0%20%D0%BD%D0%B0%20%D0%B2%D0%BE%D0%BF%D1%80%D0%BE%D1%81%3A%20">напиши нам</a>, мы подготовим статью.</p>
       <p class="botlink">Хочешь получать советы о жизни в Швейцарии прямо в Telegram? Можно подписаться на бесплатный бот «Гайд по Швейцарии». <a href="{BOT}">Открыть бот →</a></p>
-      <div class="src"><b>Источники</b> (проверено {UPD})<ol>{srcs}</ol></div>
+      <div class="src"><b>Источники</b> (проверено {a.get('upd', UPD)})<ol>{srcs}</ol></div>
     </div>
   </div>
   {DISC}
