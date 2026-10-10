@@ -439,6 +439,7 @@ a.bot:hover{color:#B98324}
 .jc>b{font-family:var(--display);font-weight:400;font-size:1.3rem;line-height:1.2}
 .jc p{font-size:.93rem}
 .jc .btn{margin-top:auto;align-self:flex-start}
+.addbtns{display:flex;flex-wrap:wrap;gap:8px;margin-top:auto}.addbtns .btn{margin:0}
 .fine{font-size:.84rem;color:var(--muted);max-width:80ch;padding-block:28px 8px}
 #digest{margin-top:18px;background:var(--paper);border:1.5px solid var(--mustard);border-radius:20px;padding:18px;display:flex;flex-direction:column;gap:10px}
 #digest textarea{width:100%;min-height:340px;font:14px/1.5 var(--body,Manrope),system-ui,sans-serif;border:1.5px solid var(--line);border-radius:12px;padding:12px;background:var(--bg);color:var(--ink);box-sizing:border-box}
@@ -530,12 +531,37 @@ a.yours:hover{background:#EBD3A3}
   <div id="digest" hidden></div>
 
   <section class="join" id="add" aria-labelledby="add-h">
-    <div><h2 id="add-h">Проводишь встречи?</h2><p style="max-width:62ch">Размести своё событие здесь — это бесплатно в период запуска, до конца 2027 года. Пришли письмо с описанием, мы проверим и опубликуем, а ты получишь ссылку на событие. Регулярные занятия, курсы, мастер-классы и вебинары размещаются во вкладке <a href="../kursy/">«Курсы»</a>.</p></div>
+    <div><h2 id="add-h">Проводишь встречи?</h2><p style="max-width:62ch">Размести своё событие здесь — это бесплатно в период запуска, до конца 2027 года. Заполни <a href="#zayavka">заявку прямо здесь, на сайте</a>, или напиши нам на <a href="mailto:voznesenskaya.iryna@gmail.com">voznesenskaya.iryna@gmail.com</a>. Мы проверим и опубликуем событие, а ты получишь ссылку на него. Регулярные занятия, курсы, мастер-классы и вебинары размещаются во вкладке <a href="../kursy/">«Курсы»</a>.</p></div>
     <div class="join-cols">
       <div class="jc"><b>Некоммерческие</b><p>Клубы, посиделки, встречи, сообщества, взаимопомощь. Регистрация не нужна, даже если собираете взнос на расходы (аренда зала, чай) и организатор на этом не зарабатывает.</p></div>
       <div class="jc"><b>Коммерческие</b><p>Платный вход, оплата участия, продажа услуг или товаров. Размещаем только организаторов с регистрацией в Швейцарии: номер UID, фирма или зарегистрированный ферайн.</p></div>
-      <div class="jc"><b>Как прислать</b><p>Название, дата и время, место или «онлайн», язык, цена, кто организует, ссылка на запись и пару предложений о событии. Разрешения на событие (крупные публичные встречи, алкоголь, работа с детьми) организатор получает сам.</p><a class="btn" id="addbtn" href="mailto:voznesenskaya.iryna@gmail.com">Прислать событие</a></div>
+      <div class="jc"><b>Как прислать</b><p>Заполни заявку ниже и нажми «Отправить заявку». Или напиши письмо: название, дата и время, место или «онлайн», язык, цена, кто организует, ссылка на запись и пару предложений о событии. Разрешения на событие (крупные публичные встречи, алкоголь, работа с детьми) организатор получает сам.</p><span class="addbtns"><a class="btn" href="#zayavka">Заполнить заявку на сайте</a><a class="btn ghost" id="addbtn" href="mailto:voznesenskaya.iryna@gmail.com">Написать письмо</a></span></div>
     </div>
+  </section>
+
+  <section class="zform" id="zayavka" aria-labelledby="zayavka-h" data-zayavka="event" data-mail="voznesenskaya.iryna@gmail.com" data-subject="Событие для «Свои люди в Швейцарии»" data-hello="Здравствуйте! Хочу разместить событие в «Свои люди в Швейцарии»." data-from="Заявка заполнена на странице" data-t-miss="Пожалуйста, заполни: " data-t-mail="Проверь e-mail: в адресе не хватает знака @ или точки." data-t-wiped="Вся история заявки удалена с этого устройства." data-t-copied="Заявка скопирована. Вставь её в письмо на voznesenskaya.iryna@gmail.com." data-t-copyfail="Не получилось скопировать. Напиши нам на voznesenskaya.iryna@gmail.com.">
+    <h2 id="zayavka-h">Заявка на размещение события</h2>
+    <p class="zhint">Заполни, что знаешь, и нажми «Отправить заявку». Обязательные поля отмечены звёздочкой. Остальное мы уточним, когда будем готовить запись.</p>
+    <div class="zfg">
+      <div class="zf"><label for="z-ev-title">Название события <s>*</s></label><input id="z-ev-title" data-a="Название" data-title data-req placeholder="например: Разговорный клуб по-немецки"></div>
+      <div class="zf"><label for="z-ev-type">Вид события</label><select id="z-ev-type" data-a="Вид события"><option value="">Выбери вид</option><option value="meet">Встречи и общение</option><option value="lang">Разговорные клубы и тандемы</option><option value="kids">Дети и семья</option><option value="retreat">Ретриты и выезды</option><option value="culture">Праздники и культура</option><option value="talk">Лекции и мастер-классы</option></select></div>
+      <div class="zf"><label for="z-ev-when">Дата и время <s>*</s></label><input id="z-ev-when" data-a="Дата и время" data-req placeholder="например: 15.11.2026, 18:00–20:00"><small>Если событие повторяется, напиши, как часто.</small></div>
+      <div class="zf"><label for="z-ev-place">Место <s>*</s></label><input id="z-ev-place" data-a="Место" data-req placeholder="улица и номер, индекс, город или «онлайн»"></div>
+      <div class="zf"><label>Язык</label><div class="zchk" data-l="Язык"><label><input type="checkbox" value="ru">Русский</label><label><input type="checkbox" value="uk">Украинский</label><label><input type="checkbox" value="de">Немецкий</label><label><input type="checkbox" value="fr">Французский</label><label><input type="checkbox" value="it">Итальянский</label><label><input type="checkbox" value="en">Английский</label></div></div>
+      <div class="zf"><label for="z-ev-price">Цена <s>*</s></label><input id="z-ev-price" data-a="Цена" data-req placeholder="например: бесплатно, 20 CHF или взнос 5 CHF на чай"></div>
+      <div class="zf"><label for="z-ev-kind">Какое это событие<button type="button" class="qh" data-help="zkind" aria-label="Подсказка: некоммерческое и коммерческое событие" aria-expanded="false">?</button></label><select id="z-ev-kind" data-a="Какое событие"><option value="">Выбери</option><option value="nonprofit">Некоммерческое: вход бесплатный или взнос только на расходы</option><option value="commercial">Коммерческое: платный вход, продажа услуг или товаров</option></select></div>
+      <div class="zf"><label for="z-ev-org">Кто организует <s>*</s></label><input id="z-ev-org" data-a="Организатор" data-req placeholder="имя, сообщество или фирма"></div>
+      <div class="zf"><label for="z-ev-uid">UID, фирма или ферайн<button type="button" class="qh" data-help="zuid" aria-label="Подсказка: UID и ферайн" aria-expanded="false">?</button></label><input id="z-ev-uid" data-a="UID, фирма или ферайн" placeholder="CHE-123.456.789"><small>Нужно для коммерческих событий.</small></div>
+      <div class="zf"><label for="z-ev-link">Ссылка на запись</label><input id="z-ev-link" data-a="Ссылка на запись" placeholder="https://…"></div>
+      <div class="zf"><label for="z-ev-about">Коротко о событии <s>*</s></label><textarea id="z-ev-about" data-a="Коротко о событии" data-req rows="4" placeholder="2–3 предложения: что будет и для кого"></textarea></div>
+      <div class="zf"><label for="z-ev-contact">Контакт для вопросов <s>*</s></label><input id="z-ev-contact" data-a="Контакт для вопросов" data-req placeholder="e-mail, телефон или Telegram"><small>Его увидят на сайте в описании события.</small></div>
+    </div>
+    <div class="acts"><button class="btn" type="button" data-z="send">Отправить заявку</button></div>
+    <p class="zmsg" data-z="msg" role="status" hidden></p>
+    <p class="zmsg" data-z="sent" hidden>Открылось письмо с твоей заявкой на voznesenskaya.iryna@gmail.com. Проверь его и нажми «Отправить» в своей почте. Письмо не открылось? <a data-z="gmail" href="https://mail.google.com/" target="_blank" rel="noopener">Открыть в Gmail</a> или <button class="lnk" type="button" data-z="copy">скопировать заявку</button> и отправить её на voznesenskaya.iryna@gmail.com.</p>
+    <p class="zdraft" data-z="idle">Всё вписанное сохраняется только на этом устройстве, пока заявка не отправлена. Можно закрыть страницу и продолжить позже. <button class="lnk" type="button" data-z="wipe">Удалить историю</button></p>
+    <p class="zdraft" data-z="ask" hidden>Удалить с этого устройства всё, что вписано в заявку? Вернуть это будет нельзя. <button class="lnk" type="button" data-z="yes">Да, удалить историю</button><button class="lnk" type="button" data-z="no">Отмена</button></p>
+    <p class="note">Отправляя заявку, ты просишь разместить событие и соглашаешься, чтобы после проверки мы его опубликовали. Как мы храним заявку — в <a href="https://svoiludi.ch/privacy/">политике конфиденциальности</a>.</p>
   </section>
 
   <p class="fine">Страница носит информационный характер. За проведение события, его содержание и разрешения отвечает организатор. Записывайся и договаривайся напрямую с организатором.</p>
@@ -886,6 +912,12 @@ fillSelects(); render();
 const fromHash = () => { const id = decodeURIComponent(location.hash.slice(1)); if (id === 'digest'){ digest(); return; } if (id && EVENTS.some(e => e.id === id)) openEvent(id); };
 fromHash(); addEventListener('hashchange', fromHash);
 </script>
+<script>window.HELP = Object.assign(window.HELP || {}, {
+  zkind: '<p><b>Некоммерческое</b> — встреча, клуб, посиделки, взаимопомощь. Вход бесплатный или взнос только на расходы (аренда зала, чай), организатор на этом не зарабатывает. Регистрация не нужна.</p><p><b>Коммерческое</b> — платный вход, оплата участия, продажа услуг или товаров. Такие события мы размещаем только от организаторов с регистрацией в Швейцарии.</p>',
+  zuid: '<p><b>UID</b> — номер предприятия в Швейцарии, вида CHE-123.456.789. Его можно найти по названию в реестре <a href="https://www.uid.admin.ch/Search.aspx" target="_blank" rel="noopener">uid.admin.ch</a> или в торговом реестре <a href="https://www.zefix.ch" target="_blank" rel="noopener">Zefix</a>.</p><p><b>Ферайн (Verein)</b> — объединение людей с общей целью и уставом. Если у ферайна нет записи в реестре, напиши его название.</p>'
+});</script>
+<script src="/assets/help.js" defer></script>
+<script defer src="/assets/zayavka.js"></script>
 <script data-goatcounter="https://svoiludi.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 
 

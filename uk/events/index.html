@@ -439,6 +439,7 @@ a.bot:hover{color:#B98324}
 .jc>b{font-family:var(--display);font-weight:400;font-size:1.3rem;line-height:1.2}
 .jc p{font-size:.93rem}
 .jc .btn{margin-top:auto;align-self:flex-start}
+.addbtns{display:flex;flex-wrap:wrap;gap:8px;margin-top:auto}.addbtns .btn{margin:0}
 .fine{font-size:.84rem;color:var(--muted);max-width:80ch;padding-block:28px 8px}
 #digest{margin-top:18px;background:var(--paper);border:1.5px solid var(--mustard);border-radius:20px;padding:18px;display:flex;flex-direction:column;gap:10px}
 #digest textarea{width:100%;min-height:340px;font:14px/1.5 var(--body,Manrope),system-ui,sans-serif;border:1.5px solid var(--line);border-radius:12px;padding:12px;background:var(--bg);color:var(--ink);box-sizing:border-box}
@@ -530,12 +531,37 @@ a.yours:hover{background:#EBD3A3}
   <div id="digest" hidden></div>
 
   <section class="join" id="add" aria-labelledby="add-h">
-    <div><h2 id="add-h">Проводиш зустрічі?</h2><p style="max-width:62ch">Розмісти свою подію тут — це безкоштовно в період запуску, до кінця 2027 року. Надішли лист з описом, ми перевіримо й опублікуємо, а ти отримаєш посилання на подію. Регулярні заняття, курси, майстер-класи та вебінари розміщуються у вкладці <a href="/uk/kursy/">«Курси»</a>.</p></div>
+    <div><h2 id="add-h">Проводиш зустрічі?</h2><p style="max-width:62ch">Розмісти свою подію тут — це безкоштовно в період запуску, до кінця 2027 року. Заповни <a href="/uk/events/#zayavka">заявку просто тут, на сайті</a>, або напиши нам на <a href="mailto:voznesenskaya.iryna@gmail.com">voznesenskaya.iryna@gmail.com</a>. Ми перевіримо й опублікуємо подію, а ти отримаєш посилання на неї. Регулярні заняття, курси, майстер-класи та вебінари розміщуються у вкладці <a href="/uk/kursy/">«Курси»</a>.</p></div>
     <div class="join-cols">
       <div class="jc"><b>Некомерційні</b><p>Клуби, посиденьки, зустрічі, спільноти, взаємодопомога. Реєстрація не потрібна, навіть якщо збираєте внесок на витрати (оренда зали, чай) і організатор на цьому не заробляє.</p></div>
       <div class="jc"><b>Комерційні</b><p>Платний вхід, оплата участі, продаж послуг або товарів. Розміщуємо лише організаторів з реєстрацією у Швейцарії: номер UID, фірма або зареєстрований ферайн.</p></div>
-      <div class="jc"><b>Як надіслати</b><p>Назва, дата й час, місце або «онлайн», мова, ціна, хто організовує, посилання на запис і кілька речень про подію. Дозволи на подію (великі публічні зустрічі, алкоголь, робота з дітьми) організатор отримує сам.</p><a class="btn" id="addbtn" href="mailto:voznesenskaya.iryna@gmail.com">Надіслати подію</a></div>
+      <div class="jc"><b>Як надіслати</b><p>Заповни заявку нижче й натисни «Надіслати заявку». Або напиши листа: назва, дата й час, місце або «онлайн», мова, ціна, хто організовує, посилання на запис і кілька речень про подію. Дозволи на подію (великі публічні зустрічі, алкоголь, робота з дітьми) організатор отримує сам.</p><span class="addbtns"><a class="btn" href="/uk/events/#zayavka">Заповнити заявку на сайті</a><a class="btn ghost" id="addbtn" href="mailto:voznesenskaya.iryna@gmail.com">Написати листа</a></span></div>
     </div>
+  </section>
+
+  <section class="zform" id="zayavka" aria-labelledby="zayavka-h" data-zayavka="event" data-mail="voznesenskaya.iryna@gmail.com" data-subject="Подія для «Свої люди у Швейцарії»" data-hello="Добрий день! Хочу розмістити подію у «Свої люди у Швейцарії»." data-from="Заявку заповнено на сторінці" data-t-miss="Будь ласка, заповни: " data-t-mail="Перевір e-mail: в адресі бракує знака @ або крапки." data-t-wiped="Усю історію заявки видалено з цього пристрою." data-t-copied="Заявку скопійовано. Встав її в лист на voznesenskaya.iryna@gmail.com." data-t-copyfail="Не вдалося скопіювати. Напиши нам на voznesenskaya.iryna@gmail.com.">
+    <h2 id="zayavka-h">Заявка на розміщення події</h2>
+    <p class="zhint">Заповни те, що знаєш, і натисни «Надіслати заявку». Обов’язкові поля позначені зірочкою. Решту ми уточнимо, коли готуватимемо запис.</p>
+    <div class="zfg">
+      <div class="zf"><label for="z-ev-title">Назва події <s>*</s></label><input id="z-ev-title" data-a="Назва" data-title data-req placeholder="наприклад: Розмовний клуб німецькою"></div>
+      <div class="zf"><label for="z-ev-type">Вид події</label><select id="z-ev-type" data-a="Вид події"><option value="">Обери вид</option><option value="meet">Зустрічі та спілкування</option><option value="lang">Розмовні клуби й тандеми</option><option value="kids">Діти і сім’я</option><option value="retreat">Ретрити й виїзди</option><option value="culture">Свята й культура</option><option value="talk">Лекції та майстер-класи</option></select></div>
+      <div class="zf"><label for="z-ev-when">Дата й час <s>*</s></label><input id="z-ev-when" data-a="Дата й час" data-req placeholder="наприклад: 15.11.2026, 18:00–20:00"><small>Якщо подія повторюється, напиши, як часто.</small></div>
+      <div class="zf"><label for="z-ev-place">Місце <s>*</s></label><input id="z-ev-place" data-a="Місце" data-req placeholder="вулиця й номер, індекс, місто або «онлайн»"></div>
+      <div class="zf"><label>Мова</label><div class="zchk" data-l="Мова"><label><input type="checkbox" value="ru">Російська</label><label><input type="checkbox" value="uk">Українська</label><label><input type="checkbox" value="de">Німецька</label><label><input type="checkbox" value="fr">Французька</label><label><input type="checkbox" value="it">Італійська</label><label><input type="checkbox" value="en">Англійська</label></div></div>
+      <div class="zf"><label for="z-ev-price">Ціна <s>*</s></label><input id="z-ev-price" data-a="Ціна" data-req placeholder="наприклад: безкоштовно, 20 CHF або внесок 5 CHF на чай"></div>
+      <div class="zf"><label for="z-ev-kind">Яка це подія<button type="button" class="qh" data-help="zkind" aria-label="Підказка: некомерційна й комерційна подія" aria-expanded="false">?</button></label><select id="z-ev-kind" data-a="Яка подія"><option value="">Вибери</option><option value="nonprofit">Некомерційна: вхід безкоштовний або внесок лише на витрати</option><option value="commercial">Комерційна: платний вхід, продаж послуг або товарів</option></select></div>
+      <div class="zf"><label for="z-ev-org">Хто організовує <s>*</s></label><input id="z-ev-org" data-a="Організатор" data-req placeholder="ім’я, спільнота або фірма"></div>
+      <div class="zf"><label for="z-ev-uid">UID, фірма або ферайн<button type="button" class="qh" data-help="zuid" aria-label="Підказка: UID і ферайн" aria-expanded="false">?</button></label><input id="z-ev-uid" data-a="UID, фірма або ферайн" placeholder="CHE-123.456.789"><small>Потрібно для комерційних подій.</small></div>
+      <div class="zf"><label for="z-ev-link">Посилання на запис</label><input id="z-ev-link" data-a="Посилання на запис" placeholder="https://…"></div>
+      <div class="zf"><label for="z-ev-about">Коротко про подію <s>*</s></label><textarea id="z-ev-about" data-a="Коротко про подію" data-req rows="4" placeholder="2–3 речення: що буде і для кого"></textarea></div>
+      <div class="zf"><label for="z-ev-contact">Контакт для запитань <s>*</s></label><input id="z-ev-contact" data-a="Контакт для запитань" data-req placeholder="e-mail, телефон або Telegram"><small>Його побачать на сайті в описі події.</small></div>
+    </div>
+    <div class="acts"><button class="btn" type="button" data-z="send">Надіслати заявку</button></div>
+    <p class="zmsg" data-z="msg" role="status" hidden></p>
+    <p class="zmsg" data-z="sent" hidden>Відкрився лист із твоєю заявкою на voznesenskaya.iryna@gmail.com. Перевір його й натисни «Надіслати» у своїй пошті. Лист не відкрився? <a data-z="gmail" href="https://mail.google.com/" target="_blank" rel="noopener">Відкрити в Gmail</a> або <button class="lnk" type="button" data-z="copy">скопіювати заявку</button> і надіслати її на voznesenskaya.iryna@gmail.com.</p>
+    <p class="zdraft" data-z="idle">Усе вписане зберігається лише на цьому пристрої, поки заявку не надіслано. Можна закрити сторінку й продовжити пізніше. <button class="lnk" type="button" data-z="wipe">Видалити історію</button></p>
+    <p class="zdraft" data-z="ask" hidden>Видалити з цього пристрою все, що вписано в заявку? Повернути це буде неможливо. <button class="lnk" type="button" data-z="yes">Так, видалити історію</button><button class="lnk" type="button" data-z="no">Скасувати</button></p>
+    <p class="note">Надсилаючи заявку, ти просиш розмістити подію і погоджуєшся, щоб після перевірки ми її опублікували. Як ми зберігаємо заявку — у <a href="https://svoiludi.ch/uk/privacy/">політиці конфіденційності</a>.</p>
   </section>
 
   <p class="fine">Сторінка має інформаційний характер. За проведення події, її зміст і дозволи відповідає організатор. Записуйся й домовляйся безпосередньо з організатором.</p>
@@ -886,6 +912,12 @@ fillSelects(); render();
 const fromHash = () => { const id = decodeURIComponent(location.hash.slice(1)); if (id === 'digest'){ digest(); return; } if (id && EVENTS.some(e => e.id === id)) openEvent(id); };
 fromHash(); addEventListener('hashchange', fromHash);
 </script>
+<script>window.HELP = Object.assign(window.HELP || {}, {
+  zkind: '<p><b>Некомерційна</b> — зустріч, клуб, посиденьки, взаємодопомога. Вхід безкоштовний або внесок лише на витрати (оренда залу, чай), організатор на цьому не заробляє. Реєстрація не потрібна.</p><p><b>Комерційна</b> — платний вхід, оплата участі, продаж послуг або товарів. Такі події ми розміщуємо лише від організаторів з реєстрацією у Швейцарії.</p>',
+  zuid: '<p><b>UID</b> — номер підприємства у Швейцарії, виду CHE-123.456.789. Його можна знайти за назвою в реєстрі <a href="https://www.uid.admin.ch/Search.aspx" target="_blank" rel="noopener">uid.admin.ch</a> або в торговому реєстрі <a href="https://www.zefix.ch" target="_blank" rel="noopener">Zefix</a>.</p><p><b>Ферайн (Verein)</b> — об’єднання людей зі спільною метою та статутом. Якщо ферайн не має запису в реєстрі, напиши його назву.</p>'
+});</script>
+<script src="/assets/help.uk.js" defer></script>
+<script defer src="/assets/zayavka.js"></script>
 <script data-goatcounter="https://svoiludi.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 
 
