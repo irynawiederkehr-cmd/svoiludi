@@ -25,7 +25,8 @@
     inapp: '<b>Зараз сторінка відкрита всередині Instagram, Telegram чи іншого застосунку.</b> Звідси встановити не можна. Натисни ⋯ або значок угорі й вибери «Відкрити в браузері» (Safari чи Chrome), а там — «Встановити застосунок».',
     note: '<b>Важливо для записів в інструментах.</b> Записи, зроблені в браузері, у застосунок самі не переходять. Перед встановленням натисни в інструменті «Зберегти резервну копію», а в застосунку — «Завантажити з резервної копії».',
     install_app: '📱 Встановити як застосунок', guide: 'Покрокова інструкція →',
-    install_btn: 'Встановити застосунок «Свої люди»', pics: 'Так це виглядає на телефоні:'
+    install_btn: 'Встановити застосунок «Свої люди»', pics: 'Так це виглядає на телефоні:',
+    menu: 'Меню', fold: 'Згорнути', search: 'Пошук'
   } : {
     tabs: ['Специалисты', 'Швейцария', 'Инструменты', 'Что нового', 'Ещё'],
     more: 'Ещё', swiss: 'Как устроена Швейцария', join: 'Как разместиться', evk: 'События и курсы', pro: 'Для специалистов', about: 'О проекте', site: 'Сайт Ирины', privacy: 'Политика конфиденциальности',
@@ -40,7 +41,8 @@
     inapp: '<b>Сейчас страница открыта внутри Instagram, Telegram или другого приложения.</b> Отсюда установить нельзя. Нажми ⋯ или значок вверху и выбери «Открыть в браузере» (Safari или Chrome), а там — «Установить приложение».',
     note: '<b>Важно для записей в инструментах.</b> Записи, сделанные в браузере, в приложение сами не переходят. Перед установкой нажми в инструменте «Сохранить резервную копию», а в приложении — «Загрузить из резервной копии».',
     install_app: '📱 Установить как приложение', guide: 'Пошаговая инструкция →',
-    install_btn: 'Установить приложение «Свои люди»', pics: 'Так это выглядит на телефоне:'
+    install_btn: 'Установить приложение «Свои люди»', pics: 'Так это выглядит на телефоне:',
+    menu: 'Меню', fold: 'Свернуть', search: 'Поиск'
   };
 
   var ua = navigator.userAgent;
@@ -59,6 +61,10 @@
 
   var css = document.createElement('style');
   css.textContent = [
+    /* узкая строка меню при прокрутке на телефоне и планшете (10.10.2026, как на voznesenskaya.ch): логотип · Меню · поиск · Подать заявку */
+    '.pa-mini{display:none}',
+    '@media (max-width:1100px){html header.top.pa-mini{display:block;position:fixed!important;left:0;right:0;top:0;z-index:800;padding-top:env(safe-area-inset-top,0px);transform:translateY(-105%);visibility:hidden;transition:transform .22s ease,visibility 0s .22s;box-shadow:0 8px 20px -14px rgba(40,50,25,.5);background:color-mix(in srgb,var(--bg,#EEF1E6) 96%,transparent)}html header.top.pa-mini.on{transform:none;visibility:visible;transition:transform .22s ease}html header.top.pa-mini .page{padding-block:8px;flex-wrap:wrap;row-gap:8px;gap:8px}html header.top.pa-mini .mark small{display:none}html header.top.pa-mini .mono{width:32px;height:32px}html header.top.pa-mini .mark b{font-size:1.05rem}html header.top.pa-mini:not(.open) nav{display:none!important}html header.top.pa-mini .pa-ibtn,html header.top.pa-mini .ss-btn{display:none!important}.pa-mbtn{margin-left:auto;display:flex;align-items:center;gap:6px;padding:7px 12px;border-radius:12px;border:1.5px solid color-mix(in srgb,var(--sage,#66704F) 40%,transparent);background:var(--paper,#FFFCF8);color:var(--ink,#2F2924);font:700 .84rem/1 var(--body,Manrope,system-ui);cursor:pointer;-webkit-tap-highlight-color:transparent}.pa-msrch{display:grid;place-items:center;width:36px;height:34px;padding:0;border-radius:12px;border:1.5px solid color-mix(in srgb,var(--sage,#66704F) 40%,transparent);background:var(--paper,#FFFCF8);cursor:pointer;-webkit-tap-highlight-color:transparent}.pa-mbtn svg,.pa-msrch svg{width:18px;height:18px;flex:none;fill:none;stroke:var(--sage,#66704F);stroke-width:2;stroke-linecap:round}}',
+    '@media (max-width:480px){html header.top.pa-mini .mark span:not(.mono){display:none}}',
     '.pa-tabs{position:fixed;left:0;right:0;bottom:0;z-index:900;display:none;background:color-mix(in srgb,var(--paper,#FFFCF8) 94%,transparent);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-top:1px solid var(--line,#E5D9C9);padding:6px 6px calc(6px + env(safe-area-inset-bottom))}',
     '.pa-tabs ul{list-style:none;margin:0 auto;padding:0;display:grid;grid-template-columns:repeat(5,1fr);max-width:640px}',
     '.pa-tabs a,.pa-tabs button{display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 2px 4px;border:0;background:none;font:600 .7rem/1.15 var(--body,system-ui);color:var(--muted,#7A6E62);text-decoration:none;cursor:pointer;width:100%;border-radius:12px;-webkit-tap-highlight-color:transparent}',
@@ -258,9 +264,29 @@
     f.insertBefore(box, f.firstChild);
   }
 
+  function miniBar() {   /* телефон и планшет: шапка уходит при прокрутке, сверху остаётся узкая строка; «Меню» разворачивает разделы, «Свернуть» прячет их (10.10.2026) */
+    var h = document.querySelector('header.top'); if (!h || document.querySelector('.pa-mini') || !('IntersectionObserver' in window)) return;
+    var m = document.createElement('header'); m.className = 'top pa-mini';
+    var pg = document.createElement('div'); pg.className = 'page';
+    var mk = h.querySelector('.mark'); if (mk) pg.appendChild(mk.cloneNode(true));
+    var b = el('<button type="button" class="pa-mbtn" aria-expanded="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg><span>' + T.menu + '</span></button>');
+    pg.appendChild(b);
+    var sb = el('<button type="button" class="pa-msrch" aria-label="' + T.search + '" title="' + T.search + '"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/></svg></button>');
+    sb.addEventListener('click', function () { var o = h.querySelector('.ss-btn'); if (o) o.click(); });
+    pg.appendChild(sb);
+    var c = h.querySelector('.navcta'); if (c) pg.appendChild(c.cloneNode(true));
+    var n = h.querySelector('nav[aria-label]'); if (n) pg.appendChild(n.cloneNode(true));
+    m.appendChild(pg); document.body.appendChild(m);
+    function set(o) { m.classList.toggle('open', o); b.setAttribute('aria-expanded', o ? 'true' : 'false'); b.lastChild.textContent = o ? T.fold : T.menu; }
+    b.addEventListener('click', function () { set(!m.classList.contains('open')); });
+    m.addEventListener('click', function (e) { if (e.target.closest('nav a')) set(false); });
+    new IntersectionObserver(function (es) { var v = es[0].isIntersecting; m.classList.toggle('on', !v); if (v) set(false); }).observe(h);
+  }
+
   function start() {
     topTiles();
     if (STANDALONE) { tabBar(); return; }
+    miniBar();
     if (deferred) installBtn();
     if (!(TOUCH || force)) return;
     installBtn();
