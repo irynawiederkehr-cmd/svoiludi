@@ -118,6 +118,7 @@ def hub():
     <div class="eyebrow">Как устроена Швейцария · Свои люди в Швейцарии</div>
     <h1 id="h1">Как здесь всё устроено, <em>простыми словами</em></h1>
     <p class="lead">Пермиты, налоги, долги, страховки, школа, работа и жильё. Коротко о главном по каждой теме, что сделать самой, какие инструменты помогут и кто из специалистов справочника разбирается в этом вопросе.</p>
+    <p class="tm-calm">Многие правила здесь сначала кажутся строгими. На самом деле законы — это договорённость о том, как разным людям жить рядом в одной стране, а строгость — форма заботы: она всё упорядочивает и защищает каждого. Государство здесь не против тебя: оно поддерживает и идёт навстречу, если ты отвечаешь на письма и соблюдаешь сроки. Не всё получается быстро — и не должно: всему своё время.</p>
     <label class="tm-search"><input id="tmq" type="search" placeholder="Одно слово: Betreibung, пермит B, Kita, 3a" aria-label="Поиск по темам"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg></label>
     <nav class="tm-mods" aria-label="Разделы тем">{mods}</nav>
   </section>
@@ -242,7 +243,7 @@ def article(t):
   <section class="s-hero" aria-labelledby="h1" style="padding-top:18px">
     <h1 id="h1">{a['h1']}</h1>
     <p class="lead">{a['lead']}</p>
-    <p class="upd">Обновлено {UPD}</p>
+    <p class="upd">Обновлено {a.get('upd', UPD)}{(': ' + a['updw']) if a.get('updw') else ''}</p>
   </section>
   <div class="art">
     <article class="art-main">
@@ -262,7 +263,7 @@ def article(t):
     <div class="art-foot">
       <p class="botlink">Не нашла ответа на свой вопрос? Нажми «Поиск» вверху страницы и напиши одно слово по-русски или немецкое слово из письма. Ничего не нашлось — <a href="mailto:voznesenskaya.iryna@gmail.com?subject=%D0%A2%D0%B5%D0%BC%D0%B0%20%D0%B4%D0%BB%D1%8F%20%D1%81%D1%82%D0%B0%D1%82%D1%8C%D0%B8%20%D0%BD%D0%B0%20svoiludi.ch&amp;body=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%21%20%D0%AF%20%D0%BD%D0%B5%20%D0%BD%D0%B0%D1%88%D0%BB%D0%B0%20%D0%BD%D0%B0%20%D1%81%D0%B0%D0%B9%D1%82%D0%B5%20%D0%BE%D1%82%D0%B2%D0%B5%D1%82%D0%B0%20%D0%BD%D0%B0%20%D0%B2%D0%BE%D0%BF%D1%80%D0%BE%D1%81%3A%20">напиши нам</a>, мы подготовим статью.</p>
       <p class="botlink">Хочешь получать советы о жизни в Швейцарии прямо в Telegram? Можно подписаться на бесплатный бот «Гайд по Швейцарии». <a href="{BOT}">Открыть бот →</a></p>
-      <div class="src"><b>Источники</b> (проверено {UPD})<ol>{srcs}</ol></div>
+      <div class="src"><b>Источники</b> (проверено {a.get('upd', UPD)})<ol>{srcs}</ol></div>
     </div>
   </div>
   {DISC}
