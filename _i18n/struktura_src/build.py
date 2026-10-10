@@ -1,7 +1,7 @@
 """Страницы «устройства сайта» (решение Ирины 09.10.2026, документ проекта «struktura-saytov.md»):
   o-proekte/ — О проекте; dlya-specialistov/ — Для специалистов; novosti/ — Что нового (+ data/news.js, novosti/rss.xml);
   situacii/ и situacii/<slug>/ — «Моя ситуация», 8 маршрутов; блоки «Моя ситуация» и «Что нового» на главной (метки <!--sit-->);
-  переключатель «События | Курсы» на events/ и kursy/ (метки <!--evk-->).
+  переключатель «События | Курсы» на events/ и kursy/ (метки <!--evk-->). 10.10.2026: на телефоне меню плитками красило активную ссылку любого <nav> белым — у .evk свой цвет с !important.
 Шапка, стили и подвал — из kursy/index.html, меню — из nav.py. Тексты — data.py.
 Запуск из корня: python3 _i18n/struktura_src/build.py ; потом nav.py, sync.py (UA), og.js, build_search.py."""
 import os, re, sys, json, html, datetime
@@ -397,7 +397,7 @@ def evk():
         h = re.sub(r'<!--evk-->.*?<!--evk-->', '', h, flags=re.S)
         sw = ('<!--evk--><nav class="evk" aria-label="События и курсы">'
               + (f'<a href="./" aria-current="page">События</a><a href="../kursy/">Курсы и занятия</a>' if cur == 'ev' else f'<a href="../events/">События</a><a href="./" aria-current="page">Курсы и занятия</a>')
-              + '</nav><style>.evk{display:inline-flex;gap:4px;background:var(--sage-soft,#E3E6D6);border-radius:12px;padding:4px;margin:0 0 14px}.evk a{padding:7px 16px;border-radius:9px;font-weight:700;font-size:.9rem;text-decoration:none;color:var(--ink)}.evk a[aria-current]{background:var(--paper,#FFFCF8);box-shadow:0 1px 4px rgba(0,0,0,.12)}</style><!--evk-->')
+              + '</nav><style>.evk{display:inline-flex;gap:4px;background:var(--sage-soft,#E3E6D6);border-radius:12px;padding:4px;margin:0 0 14px}.evk a{padding:7px 16px;border-radius:9px;font-weight:700;font-size:.9rem;text-decoration:none;color:var(--ink);background:none;border:0;box-shadow:none}.evk a[aria-current]{background:var(--paper,#FFFCF8);box-shadow:0 1px 4px rgba(0,0,0,.12);color:var(--ink)!important}</style><!--evk-->')
         h = re.sub(r'(<div class="hero-txt">\s*)', lambda m: m.group(1) + sw, h, count=1)
         open(p, 'w', encoding='utf-8').write(h)
 
