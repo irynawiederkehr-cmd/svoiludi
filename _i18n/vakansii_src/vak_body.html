@@ -3,12 +3,15 @@
     <div class="hero-txt">
       <div class="eyebrow">Вакансии и партнёрство · Свои люди в Швейцарии</div>
       <h1 id="h1">Ищу своих — <em>в команду и в партнёры</em></h1>
-      <p class="lead">Здесь свои люди рассказывают, кого ищут: сотрудника в команду или партнёра для общего дела. Откликайся напрямую автору объявления. А если ищешь сама или сам, заполни <a href="#zayavka">заявку прямо на сайте</a> или напиши нам на <a href="mailto:voznesenskaya.iryna@gmail.com">voznesenskaya.iryna@gmail.com</a> — объявление разместим бесплатно.</p>
+      <p class="lead">Здесь свои люди рассказывают, кого ищут: сотрудника в команду или партнёра для общего дела. Откликайся напрямую автору объявления. Ищешь сама или сам — размести своё объявление бесплатно, кнопкой ниже.</p>
+      <!-- 11.10.2026, Ирина: «заодно и нажать на кнопку и разместить свою вакансию или объявление о поиске партнёра». Кнопка открывает заявку ниже и сразу выбирает «Кого ищешь» -->
+      <span class="vak-top"><a class="btn" href="#zayavka" data-vkind="staff"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10" cy="8" r="3.5" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M3.5 19.5c.8-3.4 3.4-5.3 6.5-5.3s5.7 1.9 6.5 5.3" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><path d="M18.5 7.5v5M16 10h5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>Разместить вакансию</a><a class="btn" href="#zayavka" data-vkind="partner"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 11.5l4-4 3.2 1.4L13 7l3.5 1.2 4.5 3.3-4.6 4.8" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round"/><path d="M7 15l2.2 2.2a1.4 1.4 0 0 0 2-2M10 13l2.6 2.6a1.4 1.4 0 0 0 2-2l-3-3" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>Разместить поиск партнёра</a></span>
+      <script>document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('[data-vkind]');if(!a)return;var s=document.getElementById('z-v-kind');if(s){s.value=a.getAttribute('data-vkind');s.dispatchEvent(new Event('change',{bubbles:true}));}});</script>
       <p class="free-badge"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-4.4-9.3-9A5.2 5.2 0 0 1 12 6.3 5.2 5.2 0 0 1 21.3 12C19 16.6 12 21 12 21z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>Бесплатно, для поддержки сообщества «Свои люди». Не коммерческая услуга.</p>
     </div>
   </section>
 
-  <div class="trial" id="trial" hidden><span><b>Видишь только ты.</b> Это копия страницы, на сайт она не выложена. Объявления с пометкой «Образец» вымышленные.</span></div>
+  <div class="trial" id="trial" hidden><span><b>Видишь только ты.</b> Объявления с пометкой «Образец» вымышленные и остаются на странице как пример.</span></div>
 
   <section class="finder" role="search" aria-label="Подбор объявлений">
     <div class="f-grid">

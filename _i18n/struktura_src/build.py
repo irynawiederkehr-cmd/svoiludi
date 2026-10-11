@@ -51,7 +51,7 @@ def foot(depth, extra=''):
     return f'''
   <footer>
     <span>© 2026 Свои люди в Швейцарии · <a href="{up}o-proekte/">О проекте</a> · проект <a href="https://voznesenskaya.ch/">Ирины Вознесенской</a></span>
-    <span><a href="{up}">Специалисты</a> · <a href="{up}organizacii/">Организации</a> · <a href="{up}shveycariya/">Как устроена Швейцария</a> · <a href="{up}instrumenty/">Полезные инструменты</a> · <a href="{up}events/">События</a> · <a href="{up}kursy/">Курсы</a> · <a href="{up}novosti/">Что нового</a> · <a href="{up}dlya-specialistov/">Работа и своё дело</a> · <a href="https://svoiludi.ch/privacy/">Политика конфиденциальности</a> · <a href="{up}usloviya/">Условия размещения</a> · <a href="{up}o-proekte/#otvetstvennost">Ограничение ответственности</a> · <a href="https://voznesenskaya.ch/impressum/">Выходные данные</a></span>
+    <span><a href="{up}">Специалисты</a> · <a href="{up}organizacii/">Организации</a> · <a href="{up}shveycariya/">Как устроена Швейцария</a> · <a href="{up}instrumenty/">Полезные инструменты</a> · <a href="{up}events/">События</a> · <a href="{up}kursy/">Курсы</a> · <a href="{up}novosti/">Что нового</a> · <a href="{up}vakansii/">Вакансии и партнёрство</a> · <a href="{up}dlya-specialistov/">Для специалистов и организаций</a> · <a href="https://svoiludi.ch/privacy/">Политика конфиденциальности</a> · <a href="{up}usloviya/">Условия размещения</a> · <a href="{up}o-proekte/#otvetstvennost">Ограничение ответственности</a> · <a href="https://voznesenskaya.ch/impressum/">Выходные данные</a></span>
   </footer>
 </main>
 {extra}<script src="/assets/temy.js" defer></script>
@@ -157,14 +157,14 @@ def o_proekte():
     </section>
     <section aria-labelledby="h-contact"><h2 id="h-contact">Как с нами связаться</h2>
       <p>Нашла ошибку, хочешь предложить тему или разместиться — пиши на <a href="mailto:voznesenskaya.iryna@gmail.com">voznesenskaya.iryna@gmail.com</a>. Владелец проекта — фирма Alonira.ch AG, Poststrasse 6, 6302 Zug. <a href="https://voznesenskaya.ch/impressum/">Выходные данные</a>.</p>
-      <span class="addbtns"><a class="btn" href="../">Найти специалиста</a><a class="btn ghost" href="../shveycariya/">Как устроена Швейцария</a><a class="btn ghost" href="../dlya-specialistov/">Работа и своё дело</a></span>
+      <span class="addbtns"><a class="btn" href="../">Найти специалиста</a><a class="btn ghost" href="../shveycariya/">Как устроена Швейцария</a><a class="btn ghost" href="../vakansii/">Вакансии и партнёрство</a></span>
     </section>
     {subscribe('../')}
   </div>
 ''' + share(url, 'Перешли тем, кто недавно переехал. Сообщение уже готово.', f'Привет! «Свои люди в Швейцарии» — специалисты на русском и украинском, простые ответы о жизни здесь и бесплатные инструменты. {url}')
     write(rel, head(title, desc, url, 1) + '<body>' + top(rel) + main + foot(1))
 
-# Иконки карточек «Работа и своё дело» (просьба Ирины 10.10.2026 «иконки можно поставить на разделы») — в стиле MODICON
+# Иконки карточек «Для специалистов и организаций» (до 11.10.2026 — «Работа и своё дело») (просьба Ирины 10.10.2026 «иконки можно поставить на разделы») — в стиле MODICON
 _PC = '<circle cx="50" cy="50" r="46" fill="#FFFCF8" stroke="#4F5E3E" stroke-width="3"/>'
 PROICON = {
     'vak': None, 'join': None, 'kurs': None,   # берутся из MODICON: work, status, learn
@@ -178,25 +178,28 @@ def pico(k):
     svg = MODICON.get(src[k], '') if k in src else PROICON[k]
     return f'<svg class="tm-ic" viewBox="0 0 100 100" width="44" height="44" aria-hidden="true">{svg}</svg>'
 
-# --- «Для специалистов» ---
+# --- «Для специалистов и организаций» (dlya-specialistov/) ---
 def dlya_specialistov():
     rel = 'dlya-specialistov/index.html'; url = SITE + 'dlya-specialistov/'
-    title = 'Работа и своё дело: вакансии и партнёрство, размещение в справочнике «Свои люди», инструменты для своего дела'
-    desc = 'Работа и своё дело среди своих в Швейцарии: вакансии и поиск партнёров от специалистов справочника, размещение в справочнике «Свои люди» (в период запуска, до конца 2027 года, бесплатно), курсы, события и бесплатные инструменты для своего дела на русском и украинском.'
+    # 11.10.2026: «Вакансии и партнёрство» — своя вкладка в меню (Ирина: «название работа и свое дело не подходит, оно о другом…
+    # там все собрано как то не так»). Эта страница — для тех, кто размещается сам: справочник, организация, курс, событие, значок,
+    # инструменты. Вакансии здесь — одна карточка в конце со ссылкой на вкладку. В меню страницы нет: подвал, «Ещё» приложения, «Как разместиться».
+    title = 'Для специалистов и организаций: размещение в справочнике «Свои люди», курсы, события, значок, инструменты для своего дела'
+    desc = 'Всё для специалистов и организаций в «Своих людях в Швейцарии»: карточка в справочнике (в период запуска, до конца 2027 года, бесплатно), организация, курс или событие, значок для сайта и бесплатные инструменты для своего дела на русском и украинском.'
     tools = ['schet-qr', 'dohody-rashody', 'chasy-po-klientam', 'uchet-vremeni', 'anketa-klienta', 'zarplata', 'etiketka-eda', 'zhurnal-perederzhki', 'statuty-fereyna']
     cards = ''.join(f'<a class="tool tpv" href="../instrumenty/{x}/">{fan(x, "../")}<span class="ttxt"><b>{TOOLNAMES.get(x, x)}</b><em>Бесплатно · открыть →</em></span></a>' for x in tools if HAS(x))
     vak = os.path.isfile('vakansii/index.html')
-    main = '<main class="page">\n' + hero('Работа и своё дело · Свои люди в Швейцарии', 'Работа и своё дело <em>среди своих</em>',
-        'Здесь специалисты справочника ищут сотрудников и партнёров. Здесь же можно разместить себя в справочнике, свою организацию, курс или событие и взять бесплатные инструменты для своего дела. Люди ищут друг друга и часто не могут найти, потому что всё разбросано по чатам и группам. Здесь всё в одном месте, и чем шире справочник, тем проще найти своих.', 'pro',
-        '\n      <span class="addbtns"><a class="btn" href="../vakansii/">Вакансии и партнёрство</a><a class="btn ghost" href="../join/">Разместиться в справочнике</a></span>') + f'''
+    main = '<main class="page">\n' + hero('Для специалистов и организаций · Свои люди в Швейцарии', 'Для специалистов <em>и организаций</em>',
+        'Здесь можно разместить себя в справочнике, свою организацию, курс или событие, взять значок для своего сайта и бесплатные инструменты для своего дела, чтобы свои могли вас найти. Люди ищут друг друга и часто не могут найти, потому что всё разбросано по чатам и группам. Здесь всё в одном месте, и чем шире справочник, тем проще найти своих.', 'pro',
+        '\n      <span class="addbtns"><a class="btn" href="../join/">Разместиться в справочнике</a><a class="btn ghost" href="../vakansii/">Вакансии и партнёрство</a></span>') + f'''
   <div class="pro-grid">
-    {'<a class="pro-card" href="../vakansii/">' + pico("vak") + '<b>Вакансии и партнёрство</b><p>Ищете сотрудника или партнёра? Бесплатно для всех и всегда.</p><span class="go">Открыть →</span></a>' if vak else '<div class="pro-card soon"><span class="soon-tag">Скоро</span><b>Вакансии и партнёрство</b><p>«Ищу сотрудника» и «Ищу партнёра». Бесплатно, для поддержки сообщества «Свои люди». Не коммерческая услуга.</p></div>'}
     <a class="pro-card" href="../join/">{pico("join")}<b>Разместиться в справочнике</b><p>Анкета за 15 минут. Базовая карточка в период запуска, до конца 2027 года, бесплатна: фото, профиль, услуги, контакты, визитка и прайс-лист для телефона и PDF.</p><span class="go">Как разместиться →</span></a>
     <a class="pro-card" href="../join/#form">{pico("anketa")}<b>Анкета специалиста</b><p>Заполните основное на сайте, скачайте анкету в Word, допишите и отправьте с портретным фото.</p><span class="go">Заполнить →</span></a>
     <a class="pro-card" href="../badge/">{pico("badge")}<b>Значок «Свои люди» для сайта</b><p>Поставьте значок со ссылкой на свою карточку на сайт, в Instagram или подпись письма. Клиентам проще вас найти и проверить.</p><span class="go">Взять значок →</span></a>
     {'<a class="pro-card" href="../organizacii/#add">' + pico("org") + '<b>Организации и фирмы</b><p>Кто помогает людям бесплатно — бесплатно всегда. Фирма или ферайн со взносом или платой за занятия — на условиях специалистов: до конца 2027 года бесплатно.</p><span class="go">Разместить организацию →</span></a>' if os.path.isfile('organizacii/index.html') else ''}
     <a class="pro-card" href="../kursy/#add">{pico("kurs")}<b>Добавить курс или занятие</b><p>Регулярные занятия, курсы, мастер-классы, вебинары. Размещение бесплатно до конца 2027 года. Курсы видны и в вашей карточке.</p><span class="go">Добавить курс →</span></a>
     <a class="pro-card" href="../events/#add">{pico("event")}<b>Добавить событие</b><p>Встреча, праздник, выставка, лекция. События видны в афише и в вашей карточке.</p><span class="go">Добавить событие →</span></a>
+    {'<a class="pro-card" href="../vakansii/">' + pico("vak") + '<b>Ищете сотрудника или партнёра?</b><p>Разместите вакансию или поиск партнёра во вкладке «Вакансии и партнёрство». Бесплатно для всех и всегда, карточка в справочнике не нужна.</p><span class="go">Вакансии и партнёрство →</span></a>' if vak else ''}
   </div>
   <section class="tm-schemes" aria-labelledby="h-tools"><h2 id="h-tools">Инструменты для своего дела</h2><p>Бесплатно, без регистрации, PDF на русском и на языке кантона.</p><div class="pro-tools">{cards}</div></section>
   <section aria-labelledby="h-know"><h2 id="h-know">Полезно знать</h2><div class="rel">
@@ -208,7 +211,7 @@ def dlya_specialistov():
     <a href="../shveycariya/vereine/">Ферайны и волонтёрство</a>
   </div></section>
   <p class="fine">Проверка у всех одинаковая: регистрация в официальных реестрах. Платные возможности всегда помечены. <a href="../o-proekte/">О проекте и как мы проверяем</a> · <a href="../usloviya/">Условия размещения</a>.</p>
-''' + share(url, 'Перешлите коллегам, которые работают на русском или украинском.', f'Здравствуйте! В «Своих людях в Швейцарии» есть раздел «Работа и своё дело»: вакансии и поиск партнёров от специалистов справочника, размещение в справочнике (бесплатно до конца 2027 года) и бесплатные инструменты для своего дела — счёт с QR-кодом, учёт доходов и часов. {url}')
+''' + share(url, 'Перешлите коллегам, которые работают на русском или украинском.', f'Здравствуйте! В «Своих людях в Швейцарии» есть страница для специалистов и организаций: размещение в справочнике (бесплатно до конца 2027 года), курсы и события, значок для сайта и бесплатные инструменты для своего дела — счёт с QR-кодом, учёт доходов и часов. {url}')
     write(rel, head(title, desc, url, 1) + '<body>' + top(rel, ('Разместиться', 'join/')) + main + foot(1))
 
 
@@ -220,7 +223,7 @@ def usloviya():
     W = '<i class="wi"></i>'
     main = '<main class="page">\n' + hero('Условия размещения · Свои люди в Швейцарии', 'Условия размещения <em>для специалистов и организаций</em>',
         'Здесь по порядку: что бесплатно, что платно, как заключается договор, как его продлить или закончить и кто за что отвечает. Если что-то непонятно, напишите нам, мы объясним.', 'doc',
-        '\n      <span class="addbtns"><a class="btn" href="../join/">Как разместиться</a><a class="btn ghost" href="../dlya-specialistov/">Работа и своё дело</a></span>') + f'''
+        '\n      <span class="addbtns"><a class="btn" href="../join/">Как разместиться</a><a class="btn ghost" href="../dlya-specialistov/">Для специалистов и организаций</a></span>') + f'''
   <div class="prose">
     <section aria-labelledby="h-short"><h2 id="h-short">Коротко</h2>
       <ul class="okl">
@@ -481,7 +484,7 @@ def situaciya(s):
     # шаги без статьи: экстренные номера и справочник (текст шага — в data.py, менять согласованно)
     ahv = 'Запиши номер AHV (номер социального страхования, он есть на карточке медстраховки), страховки и врачей, чтобы в трудную минуту всё было под рукой.'
     steps = steps.replace(ahv + '</span>', ahv + f' <a href="{up}instrumenty/ekstrennye-nomera/">Сделать карточку →</a></span>')
-    steps = steps.replace('в период запуска, до конца 2027 года, бесплатно.</span>', f'в период запуска, до конца 2027 года, бесплатно. <a href="{up}dlya-specialistov/">Работа и своё дело →</a></span>')
+    steps = steps.replace('в период запуска, до конца 2027 года, бесплатно.</span>', f'в период запуска, до конца 2027 года, бесплатно. <a href="{up}dlya-specialistov/">Для специалистов и организаций →</a></span>')
     cards = ''.join(f'<a class="tm-card" href="{up}shveycariya/{t}/"><b>{BYSLUG[t]["title"]}</b><p>{BYSLUG[t]["lead"]}</p><span class="go">Читать →</span></a>' for t in s['topics'] if t in BYSLUG and BYSLUG[t]['ready'])
     tools = ''.join(f'<a class="tool tpv" href="{up}instrumenty/{x}/">{fan(x, up)}<span class="ttxt"><b>{TOOLNAMES.get(x, x)}</b><em>Бесплатно · открыть →</em></span></a>' for x in s['tools'] if HAS(x))
     tabs = {'kursy': ('Курсы и занятия', 'kursy/', 'Язык, работа и жизнь в Швейцарии — курсы рядом и онлайн.'), 'events': ('События', 'events/', 'Встречи и праздники в твоём кантоне — чтобы не быть одной.')}

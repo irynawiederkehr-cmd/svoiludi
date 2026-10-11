@@ -466,6 +466,11 @@ a.yours:hover{background:#EBD3A3}
 /* ---------- вакансии и партнёрство (07.10.2026) ---------- */
 .free-badge{display:inline-flex;align-items:center;gap:8px;font-weight:700;font-size:.92rem;color:var(--forest,#4F5E3E);background:color-mix(in srgb,var(--sage) 22%,var(--paper));border:1.5px solid color-mix(in srgb,var(--sage) 55%,transparent);border-radius:999px;padding:8px 16px;margin-top:6px}
 .free-badge svg{width:18px;height:18px;flex:none}
+/* кнопки «Разместить вакансию» и «Разместить поиск партнёра» вверху (11.10.2026) */
+.vak-top{display:flex;flex-wrap:wrap;gap:10px;margin:4px 0 0}
+.vak-top .btn{margin:0;align-self:auto;font-size:.95rem;padding:12px 20px}
+.vak-top .btn svg{width:20px;height:20px;flex:none}
+@media (max-width:520px){.vak-top .btn{flex:1 1 100%;justify-content:center}}
 .free-line{display:block;font-size:.8rem;font-weight:700;color:var(--forest,#4F5E3E);margin-top:6px}
 .disc-line{display:block;font-size:.76rem;color:var(--muted);margin-top:4px;line-height:1.4}
 .vac{grid-template-columns:96px minmax(0,1fr) auto}
@@ -546,7 +551,7 @@ a.yours:hover{background:#EBD3A3}
       <a href="/uk/instrumenty/">Корисні інструменти</a>
       <a href="/uk/events/">Події та курси</a>
       <a href="/uk/novosti/">Що нового</a>
-      <a href="/uk/dlya-specialistov/" aria-current="page">Робота і своя справа</a>
+      <a href="/uk/vakansii/" aria-current="page">Вакансії та партнерство</a>
     </nav>
     <a class="navcta" href="/uk/join/">Подати заявку</a>
   </div>
@@ -557,12 +562,15 @@ a.yours:hover{background:#EBD3A3}
     <div class="hero-txt">
       <div class="eyebrow">Вакансії та партнерство · Свої люди у Швейцарії</div>
       <h1 id="h1">Шукаю своїх — <em>у команду й у партнери</em></h1>
-      <p class="lead">Тут свої люди розповідають, кого шукають: працівника в команду або партнера для спільної справи. Відгукуйся напряму автору оголошення. А якщо шукаєш сама або сам, заповни <a href="/uk/vakansii/#zayavka">заявку просто на сайті</a> або напиши нам на <a href="mailto:voznesenskaya.iryna@gmail.com">voznesenskaya.iryna@gmail.com</a> — оголошення розмістимо безкоштовно.</p>
+      <p class="lead">Тут свої люди розповідають, кого шукають: працівника в команду чи партнера для спільної справи. Відгукуйся напряму авторові оголошення. Шукаєш сама чи сам — розмісти своє оголошення безкоштовно, кнопкою нижче.</p>
+      <!-- 11.10.2026, Ирина: «заодно и нажать на кнопку и разместить свою вакансию или объявление о поиске партнёра». Кнопка открывает заявку ниже и сразу выбирает «Кого ищешь» -->
+      <span class="vak-top"><a class="btn" href="/uk/vakansii/#zayavka" data-vkind="staff"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10" cy="8" r="3.5" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M3.5 19.5c.8-3.4 3.4-5.3 6.5-5.3s5.7 1.9 6.5 5.3" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><path d="M18.5 7.5v5M16 10h5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>Розмістити вакансію</a><a class="btn" href="/uk/vakansii/#zayavka" data-vkind="partner"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 11.5l4-4 3.2 1.4L13 7l3.5 1.2 4.5 3.3-4.6 4.8" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round"/><path d="M7 15l2.2 2.2a1.4 1.4 0 0 0 2-2M10 13l2.6 2.6a1.4 1.4 0 0 0 2-2l-3-3" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>Розмістити пошук партнера</a></span>
+      <script>document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('[data-vkind]');if(!a)return;var s=document.getElementById('z-v-kind');if(s){s.value=a.getAttribute('data-vkind');s.dispatchEvent(new Event('change',{bubbles:true}));}});</script>
       <p class="free-badge"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-4.4-9.3-9A5.2 5.2 0 0 1 12 6.3 5.2 5.2 0 0 1 21.3 12C19 16.6 12 21 12 21z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>Безкоштовно, для підтримки спільноти «Свої люди». Не комерційна послуга.</p>
     </div>
   </section>
 
-  <div class="trial" id="trial" hidden><span><b>Бачиш тільки ти.</b> Це копія сторінки, на сайт її не викладено. Оголошення з позначкою «Зразок» вигадані.</span></div>
+  <div class="trial" id="trial" hidden><span><b>Бачиш тільки ти.</b> Оголошення з позначкою «Зразок» вигадані й залишаються на сторінці як приклад.</span></div>
 
   <section class="finder" role="search" aria-label="Підбір оголошень">
     <div class="f-grid">
