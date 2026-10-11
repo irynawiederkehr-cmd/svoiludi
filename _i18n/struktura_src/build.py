@@ -368,7 +368,7 @@ def usloviya():
       <p>Вопросы — на <a href="mailto:voznesenskaya.iryna@gmail.com">voznesenskaya.iryna@gmail.com</a> или в <a href="https://t.me/IrynaNeuroCoach">Telegram</a>.</p>
       <span class="addbtns"><a class="btn" href="../join/">Как разместиться</a><a class="btn ghost" href="../o-proekte/">О проекте</a></span>
     </section>
-    <p class="fine">Редакция от 10 октября 2026 года.</p>
+    <p class="fine">Редакция от 11 октября 2026 года.</p>
   </div>
 ''' + share(url, 'Перешлите коллегам, которые думают разместиться.', f'Здравствуйте! Условия размещения в справочнике «Свои люди в Швейцарии»: что бесплатно, что платно и как всё устроено. {url}')
     write(rel, head(title, desc, url, 1) + '<body>' + top(rel, ('Разместиться', 'join/')) + main + foot(1))
