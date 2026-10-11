@@ -65,6 +65,8 @@
                           виден [data-zl="free"]; option[data-t-own] — подпись варианта без карточки (например «По адресу» вместо «Другой адрес»)
    input[type=checkbox][data-zmust] в .zok — ещё одна обязательная галочка (например «Я сам(а) организатор…», решение Ирины
                           10.10.2026, 22:14): без неё кнопка серая; в письмо — data-line + дата и время, подсказка — data-t-must
+   [data-zblock="текст"]  — видимый блок-запрет: пока он не скрыт, заявку не отправить, в сообщении — этот текст (акции профессий здоровья, 11.10.2026)
+                          у найденной карточки в событии 'zcard' на форме есть cat, cat2, specs (специалист) и dir (организация)
    form[data-zneedcard]   — форма только для тех, у кого есть карточка (акции, 11.10.2026): без найденной карточки заявку не отправить (data-t-needcard)
    input[type=number][min|max] — число вне границ не принимается: форма говорит data-t-range ({f} — поле, {min}, {max}); без data-t-range не проверяется
    [data-zl="mine"]       — архив: прошлые записи этой карточки (window.ZMINE(card, имя формы) → [{ t, s, d: { id поля: значение | [значения] } }]),
@@ -167,14 +169,16 @@
       r.push({ t: 'spec', id: s.id, name: s.name, sub: [s.role, s.firm].filter(Boolean).join(' · '), uid: s.uid || '', num: s.num || '',
         places: (s.places || []).filter(function(p){ return p.address && !p.area; }).map(function(p){ return p.address; }),
         phone: c.phone || '', email: c.email || '', site: c.site || '', langs: s.langs || [], photo: s.photo || '', sample: !!s.sample,
-        paid: !!s.uid, free: false, off: off, until: s.paidUntil || '', url: 'https://svoiludi.ch/#' + s.id });
+        paid: !!s.uid, free: false, off: off, until: s.paidUntil || '', url: 'https://svoiludi.ch/#' + s.id,
+        cat: s.cat || '', cat2: s.cat2 || '', specs: s.specs || [] });
     });
     if (kinds.indexOf('org') >= 0) (window.ORGANIZATIONS || []).forEach(function(o){
       var c = o.contacts || {}, uid = /CHE/i.test(o.zefix || '') ? o.zefix : '';
       var off = o.status === 'активен' ? (o.confirm ? '' : 'wait') : (o.status === 'на подтверждении' ? 'wait' : 'pause');
       r.push({ t: 'org', id: o.id, name: o.name, sub: [o.name_ru, o.form].filter(Boolean).join(' · '), uid: uid, num: o.num || '',
         places: o.address ? [o.address] : [], phone: c.phone || '', email: c.email || '', site: c.site || '', langs: o.langs || [], photo: '',
-        sample: !!o.sample, paid: !!uid || REG.indexOf(o.form) >= 0, free: !!o.free, off: off, until: '', url: 'https://svoiludi.ch/organizacii/#' + o.id });
+        sample: !!o.sample, paid: !!uid || REG.indexOf(o.form) >= 0, free: !!o.free, off: off, until: '', url: 'https://svoiludi.ch/organizacii/#' + o.id,
+        dir: o.dir || '' });
     });
     return r;
   }
@@ -519,7 +523,7 @@
     var say = function(t){ if (typeof window.toast === 'function') window.toast(t); else { var m = q('msg'); m.textContent = t; m.hidden = false; } };
     var copyText = function(t){ try { return navigator.clipboard.writeText(t).then(function(){ return true; }, function(){ return false; }); } catch (e) { return Promise.resolve(false); } };
     skillsBuild(box);
-    var lkEl = box.querySelector('[data-zlook]'), LK = lkEl ? look(lkEl, box) : null;
+    var lkEl = box.querySelector('[data-zlook]'), LK = lkEl ? look(lkEl, box, function(r){ box.dispatchEvent(new CustomEvent('zcard', { detail: r })); }) : null;
     if (!LK) box.addEventListener('change', function(){ refreshVis(box); });
 
     function save(){
@@ -587,6 +591,9 @@
       if (box.hasAttribute('data-zneedcard') && !(LK && LK.card())) {
         var lkq = box.querySelector('[data-zl="q"]'); msg.textContent = box.getAttribute('data-t-needcard') || ''; msg.hidden = false; if (lkq) { lkq.closest('.zf').classList.add('zmiss'); lkq.focus(); } return;
       }
+      /* [data-zblock="текст"] — видимый запрет (например, акции профессий здоровья, 11.10.2026): заявку не отправить, текст — причина */
+      var blk = arr(box.querySelectorAll('[data-zblock]')).filter(function(el){ return !hiddenEl(el); })[0];
+      if (blk) { msg.textContent = blk.getAttribute('data-zblock'); msg.hidden = false; return; }
       var filled = function(el){ return el.classList.contains('zchk') ? !!el.querySelector('input:checked') : !!el.value.trim(); };
       var miss = Array.prototype.filter.call(box.querySelectorAll('[data-req]'), function(el){ return !hiddenEl(el) && !filled(el); });
       if (miss.length) {

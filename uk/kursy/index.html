@@ -520,7 +520,7 @@ a.yours:hover{background:#EBD3A3}
 <main class="page">
   <section class="s-hero has-art" aria-labelledby="h1">
     <div class="hero-txt">
-      <!--evk--><nav class="evk" aria-label="Події, акції та курси"><a href="/uk/events/">Події</a><a href="/uk/akcii/">Акції</a><a href="/uk/kursy/" aria-current="page">Курси та заняття</a></nav><style>.evk{display:inline-flex;flex-wrap:wrap;gap:4px;background:var(--sage-soft,#E3E6D6);border-radius:12px;padding:4px;margin:0 0 14px;order:0;width:auto;align-self:flex-start;overflow:visible}.evk a{padding:7px 16px;border-radius:9px;font-weight:700;font-size:.9rem;text-decoration:none;color:var(--ink);background:none;border:0;box-shadow:none}.evk a[aria-current]{background:var(--paper,#FFFCF8);box-shadow:0 1px 4px rgba(0,0,0,.12);color:var(--ink)!important}@media (max-width:420px){.evk{gap:2px}.evk a{padding:7px 9px;font-size:.84rem}}@media (max-width:380px){.evk a{padding:7px 7px;font-size:.8rem}}</style><!--evk--><!--evk--><div class="eyebrow">Курси й заняття · Свої люди у Швейцарії</div>
+      <!--evk--><nav class="evk" aria-label="Події, акції та курси"><a href="/uk/events/">Події</a><a href="/uk/akcii/">Акції</a><a href="/uk/kursy/" aria-current="page">Курси та заняття</a></nav><style>.evk{display:inline-flex;flex-wrap:wrap;gap:4px;background:var(--sage-soft,#E3E6D6);border-radius:12px;padding:4px;margin:0 0 14px;order:0;width:auto;align-self:flex-start;overflow:visible}.evk a{padding:7px 16px;border-radius:9px;font-weight:700;font-size:.9rem;text-decoration:none;color:var(--ink);background:none;border:0;box-shadow:none}.evk a[aria-current]{background:var(--paper,#FFFCF8);box-shadow:0 1px 4px rgba(0,0,0,.12);color:var(--ink)!important}@media (max-width:420px){.evk{gap:2px}.evk a{padding:7px 9px;font-size:.84rem}}@media (max-width:380px){.evk a{padding:7px 7px;font-size:.8rem}}</style><!--evk--><!--evk--><!--evk--><div class="eyebrow">Курси й заняття · Свої люди у Швейцарії</div>
       <h1 id="h1">Навчатися й займатися <em>своєю мовою</em></h1>
       <p class="lead">Йога й танці, німецька з нуля, гуртки для дітей, творчі майстер-класи та вебінари про життя й роботу у Швейцарії. Обери кантон і подивися, що відбувається поруч із тобою або онлайн. Кожен курс веде людина з довідника або спільнота, і ти одразу бачиш, хто це.</p>
     </div>
@@ -662,7 +662,7 @@ window.IMG_BASE = '../img/';
 /* карточки специалистов — в /data/specialists.js (одна копия на весь сайт) */
 const SPECIALISTS = window.SPECIALISTS || [];
 </script>
-<script src="/data/afisha.uk.js?v=27f88797"></script>
+<script src="/data/afisha.uk.js?v=b7b06092"></script>
 <script>/* одна база афиши: здесь — записи раздела «Курсы»; у записи в обеих вкладках направление курса в ktype */
 const KURSY = (window.AFISHA || []).filter(e => (e.sections || []).includes('kursy')).map(e => e.ktype ? Object.assign({}, e, { type: e.ktype }) : e);</script>
 <script>
@@ -888,6 +888,11 @@ const OKKEY = {};   // id → ключ из открытой ссылки: то�
 const svlHash = async k => { try { const b = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(String(k || ''))); return Array.from(new Uint8Array(b), x => x.toString(16).padStart(2, '0')).join(''); } catch (x) { return ''; } };
 const keyOk = async (r, k) => !!(r && r.keyHash && k && (await svlHash(k)) === r.keyHash);
 const okUrl = e => `https://svoiludi.ch/uk/kursy/#ok=${encodeURIComponent(e.id)}.${encodeURIComponent(OKKEY[e.id] || '')}`;
+/* «Снять с сайта» (решение Ирины 11.10.2026, 21:45): ссылка kursy/#off=<id>.<ключ> приходит в письме о публикации на e-mail из карточки.
+   По кнопке Ирине уходит письмо «Снять с сайта — …»; Claude ставит status 'снято' и off: { date, via } — курс уходит в архив,
+   в заявке по номеру карточки его можно повторить кнопкой «Повторить» и только подправить. */
+const isOff = e => e.status === 'знято';
+const offUrl = e => `https://svoiludi.ch/uk/kursy/#off=${encodeURIComponent(e.id)}.${encodeURIComponent(OKKEY[e.id] || '')}`;
 /* контакт для вопросов: свой у записи (другой телефон или e-mail из заявки) или телефон и e-mail из карточки организатора */
 /* карточка организатора из справочника: специалист (id) или организация ({ org }) */
 const cardOf = o => typeof o === 'string' ? SPECIALISTS.find(s => s.id === o) : (o && o.org ? (window.ORGANIZATIONS || []).find(x => x.id === o.org) : null);
@@ -927,7 +932,7 @@ const SIGN_T = { none: 'без запису', wa: 'WhatsApp', tg: 'Telegram', ma
 const DAYK = ['SU', 'MO', 'TU', 'WE', 'TH', 'FR', 'SA'];
 window.ZMINE = card => KURSY.filter(e => (e.organizers || []).some(o => card.t === 'spec' ? o === card.id : !!o && o.org === card.id) && lastDay(e) >= addDays(today, -365))
   .sort((a, b) => lastDay(b).localeCompare(lastDay(a))).slice(0, 8).map(e => { const a = addrParts(e.address), x = e.contacts || {}, own = (card.places || []).includes(e.address), r = e.repeat || {};
-    return { t: e.title, s: (lastDay(e) < today ? 'В архіві, останнє заняття ' : 'На сайті до ') + fmtD(lastDay(e)),
+    return { t: e.title, s: isOff(e) ? 'Знято з сайту ' + fmtD((e.off || {}).date) : (lastDay(e) < today ? 'В архіві, останнє заняття ' : 'На сайті до ') + fmtD(lastDay(e)),
       d: { 'z-k-title': e.title, 'z-k-type': e.ktype || e.type || '', 'z-k-kind': e.kind === 'once' ? (isRemote(e) ? 'web' : 'mk') : (e.kind || ''), 'z-k-sessions': e.sessions || '',
         'z-k-for': e.for || [], 'z-k-age': e.age || '', 'z-k-level': e.levelK || '', 'z-k-langs': langCodes('z-k-langs', e.langs),
         'z-k-rep': !e.repeat ? '' : r.days && r.days.length > 1 ? 'several' : r.freq === 'monthly' ? 'monthly' : r.interval === 2 ? 'biweekly' : 'weekly',
@@ -937,6 +942,16 @@ window.ZMINE = card => KURSY.filter(e => (e.organizers || []).some(o => card.t =
         'z-k-disc': e.disc || [], 'z-k-payhow': e.payhow || [], 'z-k-signup': e.signup || '', 'z-k-seats': e.seats || '', 'z-k-link': e.link || '', 'z-k-about': e.about || '', 'z-k-bring': e.bring || '',
         'z-k-person': x.person || '', 'z-k-tel': x.phone || e.phone || '', 'z-k-wa': x.whatsapp || '', 'z-k-tg': x.telegram || '', 'z-k-mail': x.email || e.email || '', 'z-k-ig': x.instagram || '' } }; });
 const okText = e => [`Назва: ${e.title}`, `Коли: ${fmtFull(e.date)}${e.time ? ', ' + e.time : ''}${e.repeat ? ' (повторюється)' : ''}`, `Де: ${placeText(e)}`, `Ціна: ${priceText(e)}`, `Організатор: ${orgNames(e)}`, `Контакт: ${contactList(e).join(', ')}`].join('\n');
+function offBox(e){
+  const cm = cardMail(e), who = orgNames(e);
+  const again = 'Повторити його потім можна в <a href="/uk/kursy/#zayavka">заявці</a>: знайдіть свою картку за номером (SG-… або OR-…) чи UID і натисніть «Повторити» — залишиться виправити дати й деталі, писати все заново не потрібно.';
+  if (isOff(e)) return `<div class="pv-box"><b>Курс уже знято з сайту, він лежить в архіві.</b><span>${again}</span></div>`;
+  const su = `Зняти з сайту — ${e.title} (${e.id})`, body = `Добрий день, Ірино!\n\nПрошу зняти курс «${e.title}» з сайту «Свої люди у Швейцарії» й перенести в архів.\n\n${offUrl(e)}\n\n${who}`;
+  return `<div class="pv-box" data-pv-kind="kursoff" data-pv-id="${esc(e.id)}" data-pv-key="${esc(OKKEY[e.id] || '')}" data-pv-lang="uk" data-mail="${MAIL}" data-su-ok="${esc(su)}" data-body-ok="${esc(body)}" data-t-sending="Надсилаю…" data-t-ok="Готово: запит отримано {t}. Ми знімемо курс з сайту того ж дня й перенесемо в архів." data-t-fail="${cm ? 'Не вдалося надіслати. Будь ласка, {a} з адреси {c} на {m}.' : 'Не вдалося надіслати. Будь ласка, {a} ({m}).'}" data-t-mail="напишіть нам листом" data-t-gmail="Відкрити лист у Gmail" data-pv-cmail="${esc(cm)}" data-t-letter="${cm ? 'Відкрився лист у вашій пошті. Надішліть його з адреси {c}: такі прохання ми приймаємо тільки з e-mail вашої картки. Лист не відкрився? {g} або напишіть з цієї адреси на {m}.' : 'Відкрився лист у вашій пошті. Надішліть його. Лист не відкрився? {g} або напишіть на {m}.'}">
+    <b>Зняти курс з сайту?</b><span>Наприклад, якщо набір закрито або заняття закінчилися раніше. Запис одразу зникне з сайту й перейде в архів, де зберігатиметься 12 місяців. ${again}</span>
+    <div class="pv-acts"><button class="btn" type="button" data-pv-send="ok">Зняти з сайту</button></div>
+    <span class="pv-small" data-pv-msg data-online="Одне натискання — і готово.">${window.SVL_PV_ONLINE ? 'Одне натискання — і готово.' : (cm ? `Після натискання відкриється лист із вашої пошти. Надішліть його з адреси ${esc(cm)}: такі прохання ми приймаємо тільки з e-mail вашої картки.` : 'Після натискання відкриється лист із вашої пошти. Надішліть його.')}</span></div>`;
+}
 function okBox(e){
   const who = orgNames(e), cm = cardMail(e);
   const su = `Підтверджую курс — ${e.title}`, body = `Добрий день, Ірино!\n\nУсе правильно, підтверджую публікацію на сайті «Свої люди у Швейцарії».\nЦе мій курс: я сам(а) його веду, або його проводить моя організація. Записи за інших я не розміщую.\nКурс у моїй компетенції та відповідає законам Швейцарії, мого кантону й громади.\nУмови розміщення (https://svoiludi.ch/uk/usloviya/) прочитав(ла) й приймаю.\n\n${okText(e)}\n\n${okUrl(e)}\n\n${who}`;
@@ -962,7 +977,7 @@ function openKurs(id, pv){
   const when = e.kind === 'once' ? `${esc(fmtFull(e.date))}${timeStr(e) ? ' · ' + esc(timeStr(e)) : ''}${e.date < today ? '<small>Ця зустріч уже минула.</small>' : ''}`
     : `${esc(e.repeat ? repeatText(e) : fmtFull(e.date))}${timeStr(e) ? ' · ' + esc(timeStr(e)) : ''}<small>${esc(kindLine(e))}${e.kind === 'course' && !started(e) ? '' : nd ? `. Найближче заняття: ${esc(fmtDay(nd))}` : ''}</small>${e.repeat && e.repeat.except && e.repeat.except.some(x => x >= today) ? `<small>Без занять: ${e.repeat.except.filter(x => x >= today).map(fmtDate).join(', ')}</small>` : ''}`;
   box.innerHTML = `<div class="qm-top"><div class="qm-head">${e.sample ? '<span class="ev-k" style="color:var(--brown)">Зразок курсу · усе вигадане</span><a class="yours" href="/uk/kursy/#add">Тут може бути твій курс! Як додати →</a>' : ''}<span class="ev-k" style="color:${k.c}">${esc(k.t)} · ${esc(kindName(e))}</span><h2 class="qm-title" id="qmTitle">${esc(e.title)}</h2></div><button class="qm-close" type="button" aria-label="Закрыть">✕</button></div>
-    ${pv ? okBox(e) : ''}<div class="d-body">
+    ${pv === 'off' ? offBox(e) : pv ? okBox(e) : ''}<div class="d-body">
       <div class="d-col">
         <div class="d-block"><h4>Про курс</h4><p>${esc(e.about)}</p></div>
         ${e.level || (e.for || []).length ? `<div class="d-block"><h4>Для кого</h4>${(e.for || []).length ? `<div class="chips">${e.for.map(l => `<span>${esc(l)}</span>`).join('')}${e.age ? `<span>${esc(e.age)}</span>` : ''}</div>` : ''}${e.level ? `<p>${esc(e.level)}</p>` : ''}</div>` : ''}
@@ -971,18 +986,18 @@ function openKurs(id, pv){
         <div class="d-block"><h4>${(e.organizers || []).length > 1 ? 'Ведуть' : 'Веде'}</h4><div class="orgs">${orgs}</div></div>
       </div>
       <div class="d-side">
-        <div class="d-block"><h4>Коли</h4><div class="when">${when}</div></div>
+        <div class="d-block"><h4>Коли</h4><div class="when">${when}${isOff(e) ? '<small>Організатор зняв цей курс із сайту.</small>' : ''}</div></div>
         <div class="d-block"><h4>Де</h4>${isRemote(e) ? '<span>Онлайн, посилання надсилає організатор</span>' : `${e.venue ? `<b>${esc(e.venue)}</b><br>` : ''}<a class="addr" href="${maps(e.address)}" ${ext}>${esc(e.address)}</a><span class="note">кантон ${esc(ktRu(e.canton))}${e.online ? ' · можна й онлайн' : ''}</span>`}</div>
         <div class="d-block"><h4>Ціна</h4><span class="kprice">${esc(priceText(e))}</span>${e.priceNote ? `<span class="note">${esc(e.priceNote)}</span>` : ''}${e.trial ? `<span class="note">${esc(e.trial === 'free' ? 'Пробне заняття безкоштовно' : e.trial === 'disc' ? 'Пробне заняття зі знижкою' : '')}</span>` : ''}${(e.disc || []).length ? `<span class="note">${esc(e.disc.join(' · '))}</span>` : ''}${(e.payhow || []).length ? `<span class="note">Оплата: ${esc(e.payhow.join(', ').toLowerCase())}</span>` : ''}${e.seats ? `<span class="note">Місць у групі: ${esc(e.seats)}</span>` : ''}<span class="note">Ціну вказав організатор. Точні умови й оплата — у нього.</span></div>
-        ${lastDay(e) < today ? '' : '<div class="d-block" data-wr-slot></div>'}
+        ${lastDay(e) < today || isOff(e) ? '' : '<div class="d-block" data-wr-slot></div>'}
         <div class="acts"><button class="btn ghost" type="button" data-share>Поділитися</button></div>
-        ${e.date < today && e.kind === 'once' ? '' : `<div class="d-block"><h4>Додати в календар</h4><div class="calmenu"><a href="${esc(gcalLink(e))}" ${ext}>Google Календар</a><button type="button" data-ics>Apple, Outlook, телефон (.ics)</button></div></div>`}
+        ${(e.date < today && e.kind === 'once') || isOff(e) ? '' : `<div class="d-block"><h4>Додати в календар</h4><div class="calmenu"><a href="${esc(gcalLink(e))}" ${ext}>Google Календар</a><button type="button" data-ics>Apple, Outlook, телефон (.ics)</button></div></div>`}
         <p class="kdisc sm"><b>Курс проводить організатор.</b> Запис, оплата й договір — тільки з ним. «Свої люди» не продають курси й не відповідають за зміст і проведення занять.${e.type === 'body' ? ' Заняття не замінюють лікування. Якщо є проблеми зі здоров’ям, спершу порадься з лікарем.' : ''}</p>
         <p class="note">${contactList(e).length ? `Запитання організатору: ${contactHtml(e)}. ` : ''}Знайшли помилку? <a href="mailto:${MAIL}?subject=${encodeURIComponent('Помилка в курсі: ' + e.title)}&body=${encodeURIComponent('Посилання: ' + evUrl(e) + '\n\nЩо виправити:\n')}">Повідомити</a></p>
       </div>
     </div>`;
   box.querySelector('.qm-close').onclick = () => qm.close();
-  if (lastDay(e) >= today) wireWrite(box, { kind: 'kurs', ask: e.signup === 'none', title: e.title, when: nd ? fmtDay(nd) + (e.time ? ', ' + e.time : '') : '', url: evUrl(e), main: e.signup || (e.link ? 'link' : ''), ch: chans(e) });
+  if (lastDay(e) >= today && !isOff(e)) wireWrite(box, { kind: 'kurs', ask: e.signup === 'none', title: e.title, when: nd ? fmtDay(nd) + (e.time ? ', ' + e.time : '') : '', url: evUrl(e), main: e.signup || (e.link ? 'link' : ''), ch: chans(e) });
   if (!qm.open) qm.showModal();
   if (!pv && location.hash.slice(1) !== e.id) history.replaceState(null, '', location.pathname + '#' + e.id);
 }
@@ -1025,7 +1040,8 @@ document.getElementById('trial').hidden = !ADMIN;
 document.getElementById('addbtn').href = `mailto:${MAIL}?subject=${encodeURIComponent('Курс для «Свої люди у Швейцарії»')}&body=${encodeURIComponent(TEMPLATE)}`;
 fillSelects(); render();
 const fromHash = () => { const id = decodeURIComponent(location.hash.slice(1)); if (id === 'digest'){ digest(); return; } if (id.startsWith('ok=')){ const [eid, key] = id.slice(3).split('.'); const e = KURSY.find(x => x.id === eid); keyOk(e, key).then(ok => { if (ok){ OKKEY[eid] = key; openKurs(eid, true); } }); return; }
-  if (id && KURSY.some(e => e.id === id && ((e.status === 'активен' && live(e)) || ADMIN))) openKurs(id); };
+  if (id.startsWith('off=')){ const [eid, key] = id.slice(4).split('.'); const e = KURSY.find(x => x.id === eid); keyOk(e, key).then(ok => { if (ok){ OKKEY[eid] = key; openKurs(eid, 'off'); } }); return; }
+  if (id && KURSY.some(e => e.id === id && ((e.status === 'активен' && live(e)) || isOff(e) || ADMIN))) openKurs(id); };
 fromHash(); addEventListener('hashchange', fromHash);
 </script>
 <script>window.HELP = Object.assign(window.HELP || {}, {

@@ -6,6 +6,9 @@
    Что делает: человек открывает ссылку предпросмотра (svoiludi.ch/events/#ok=<id>.<key>, kursy/#ok=…, vakansii/#ok=…),
    ставит галочку и нажимает «Подтверждаю». Сайт (assets/podtverdit.js) зовёт это веб-приложение:
      GET ?what=confirm&kind=event|kurs|vacancy (или eventfix|kursfix|vacancyfix)&id=…&key=…&lang=ru|uk[&checks=a,b][&text=…]
+     «Снять с сайта» (решение Ирины 11.10.2026, 21:45): kind=eventoff|kursoff|vacancyoff — ссылка …/#off=<id>.<ключ> из письма о публикации;
+     строка «… — снять с сайта» и письмо Ирине «🌿 Свои люди: Снять с сайта — …». Снять можно всегда, даже если карточка на паузе.
+     Claude ставит в данных status 'снято' и off: { date, via } — запись уходит в архив, в заявке её можно повторить кнопкой «Повторить».
    Скрипт сверяет отпечаток ключа из ссылки (SHA-256) с keyHash в данных сайта (data/afisha.js, data/vacancies.js) — сам ключ
    в открытых данных не хранится (11.10.2026), поэтому подтвердить запись за другого человека нельзя. Образцы (sample) не принимает. Пишет строку в таблицу
    «Свои люди — подтверждения записей» (со снимком записи — это доказательство согласия), шлёт письмо Ирине
@@ -73,7 +76,7 @@ function zsHash_(k) {
 
 function zsConfirm_(p) {
   if (p.what !== 'confirm') return { ok: false, error: 'what' };
-  const kind = String(p.kind || ''), fix = /fix$/.test(kind), base = kind.replace(/fix$/, '');
+  const kind = String(p.kind || ''), fix = /fix$/.test(kind), off = /off$/.test(kind), base = kind.replace(/(fix|off)$/, '');
   if (!ZS_WHAT[base]) return { ok: false, error: 'kind' };
   const lang = p.lang === 'uk' ? 'uk' : 'ru', W = ZS_WHAT[base][lang];
   const list = base === 'vacancy' ? zsLoad_('vacancies.js', 'VACANCIES') : zsLoad_('afisha.js', 'AFISHA');
@@ -92,31 +95,31 @@ function zsConfirm_(p) {
   const email = (card && card.contacts && card.contacts.email) || (who && who.contacts && who.contacts.email) || (!card && x.contacts && x.contacts.email) || '';
   // только активная карточка (решение Ирины 10.10.2026, 22:12): на паузе, на подтверждении или с прошедшим сроком — не подтверждаем
   const today = Utilities.formatDate(new Date(), ZS_TZ, 'yyyy-MM-dd');
-  if (card && (card.status !== 'активен' || (card.paidUntil && card.paidUntil < today) || (who && who.org && !card.confirm))) return { ok: false, error: 'card' };
+  if (card && !off && (card.status !== 'активен' || (card.paidUntil && card.paidUntil < today) || (who && who.org && !card.confirm))) return { ok: false, error: 'card' };
 
   // защита от двойного нажатия: одинаковый запрос в течение 2 минут не повторяем
   const cache = CacheService.getScriptCache(), ck = [kind, x.id, text].join('|').slice(0, 240);
   const time = Utilities.formatDate(new Date(), ZS_TZ, 'dd.MM.yyyy, HH:mm');
-  if (cache.get(ck)) return { ok: true, time: cache.get(ck), copy: !!email && !fix };
+  if (cache.get(ck)) return { ok: true, time: cache.get(ck), copy: !!email && !fix && !off };
   cache.put(ck, time, 120);
 
   const props = PropertiesService.getScriptProperties();
   const sh = SpreadsheetApp.openById(props.getProperty('SHEET_ID')).getSheets()[0];
-  sh.appendRow([time, W[0] + (fix ? ' — исправления' : ' — подтверждено'), x.id, x.title, name, num, uid, email, String(p.checks || ''), text, JSON.stringify(x)]);
+  sh.appendRow([time, W[0] + (fix ? ' — исправления' : off ? ' — снять с сайта' : ' — подтверждено'), x.id, x.title, name, num, uid, email, String(p.checks || ''), text, JSON.stringify(x)]);
 
-  const url = ZS_SITE + W[2] + '/#ok=' + x.id + '.' + p.key;   // ключ — из ссылки, он уже проверен по отпечатку
+  const url = ZS_SITE + W[2] + (off ? '/#off=' : '/#ok=') + x.id + '.' + p.key;   // ключ — из ссылки, он уже проверен по отпечатку
   const tag = name + (num ? ', ' + num : '');
-  const su = fix ? `🌿 Свои люди: Исправления — ${x.title} (${tag})` : `🌿 Свои люди: ${W[0]} подтверждено — ${x.title} (${tag})`;
+  const su = fix ? `🌿 Свои люди: Исправления — ${x.title} (${tag})` : off ? `🌿 Свои люди: Снять с сайта — ${x.title} (${tag})` : `🌿 Свои люди: ${W[0]} подтверждено — ${x.title} (${tag})`;
   const body = [
-    fix ? `${name} просит исправить ${W[1]} «${x.title}»:` : `${name} подтвердил(а) ${W[1]} «${x.title}» кнопкой на сайте.`,
-    '', fix ? text : '', fix ? '' : (p.checks ? 'Отмечены условия: ' + p.checks : ''),
+    fix ? `${name} просит исправить ${W[1]} «${x.title}»:` : off ? `${name} просит снять ${W[1]} «${x.title}» с сайта и перенести в архив (кнопка на сайте).` : `${name} подтвердил(а) ${W[1]} «${x.title}» кнопкой на сайте.`,
+    '', fix ? text : '', fix || off ? '' : (p.checks ? 'Отмечены условия: ' + p.checks : ''),
     'Когда: ' + time, 'Карточка: ' + (num || '—') + (uid ? ', UID ' + uid : ''), 'E-mail из карточки: ' + (email || '—'),
-    '', 'Ссылка: ' + url, '', fix ? 'Claude внесёт исправления и подготовит ссылку ещё раз.' : 'Claude поставит запись на сайт при ближайшей проверке писем.'
+    '', 'Ссылка: ' + url, '', fix ? 'Claude внесёт исправления и подготовит ссылку ещё раз.' : off ? 'Claude снимет запись с сайта (status «снято», в архив) при ближайшей проверке писем.' : 'Claude поставит запись на сайт при ближайшей проверке писем.'
   ].filter((l, i, a) => l !== '' || a[i - 1] !== '').join('\n');
   MailApp.sendEmail({ to: ZS_TO, replyTo: email || ZS_REPLY, name: ZS_NAME, subject: su, body: body });
 
   let copy = false;
-  if (email && !fix) {
+  if (email && !fix && !off) {
     const csu = lang === 'uk' ? `🌿 Ви підтвердили ${W[1]} «${x.title}»` : `🌿 Вы подтвердили ${W[1]} «${x.title}»`;
     const cbody = lang === 'uk'
       ? `Вітаємо${name ? ', ' + name : ''}!\n\n${time} ви підтвердили ${W[1]} «${x.title}» для сайту «Свої люди у Швейцарії». Ми опублікуємо його найближчим часом.\n\n${url}\n\nПідтвердивши, ви прийняли умови розміщення. Перечитати їх можна будь-коли: ${ZS_SITE}uk/usloviya/\nКоли запис знімають і за що виключають із проєкту: ${ZS_SITE}uk/usloviya/#isklyuchenie\n\nЯкщо щось зміниться, просто дайте відповідь на цей лист.\n\nПроєкт 🌿 «Свої люди» створено для того, щоб зробити ваше життя у Швейцарії максимально легким і без стресу.\n\nСвої люди у Швейцарії`

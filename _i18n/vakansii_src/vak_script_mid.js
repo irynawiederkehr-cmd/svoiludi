@@ -42,6 +42,10 @@ const OKKEY = {};   // id → ключ из открытой ссылки: то�
 const svlHash = async k => { try { const b = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(String(k || ''))); return Array.from(new Uint8Array(b), x => x.toString(16).padStart(2, '0')).join(''); } catch (x) { return ''; } };
 const keyOk = async (r, k) => !!(r && r.keyHash && k && (await svlHash(k)) === r.keyHash);
 const okUrl = v => `https://svoiludi.ch/vakansii/#ok=${encodeURIComponent(v.id)}.${encodeURIComponent(OKKEY[v.id] || '')}`;
+/* «Снять с сайта» (решение Ирины 11.10.2026, 21:45): ссылка vakansii/#off=<id>.<ключ> приходит в письме о публикации на e-mail из карточки
+   (или на e-mail автора). По кнопке Ирине уходит письмо «Снять с сайта — …»; Claude ставит status 'снято' и off: { date, via } —
+   объявление уходит в архив, в заявке по номеру карточки его можно повторить кнопкой «Повторить» и только подправить. */
+const offUrlV = v => `https://svoiludi.ch/vakansii/#off=${encodeURIComponent(v.id)}.${encodeURIComponent(OKKEY[v.id] || '')}`;
 const mailto = (to, su, body) => `mailto:${to}?subject=${encodeURIComponent(su)}&body=${encodeURIComponent(body)}`;
 const gmail = (to, su, body) => `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(to)}&su=${encodeURIComponent(su)}&body=${encodeURIComponent(body)}`;
 const adText = v => [`${(KINDS[v.kind] || KINDS.staff).t}: ${v.title}`, `Где: ${where(v)}`, v.workload ? `Занятость: ${v.workload}` : '', v.start ? `С какого времени: ${v.start}` : '',
@@ -65,6 +69,21 @@ function okBox(v){
     <div class="pv-fix" hidden><textarea data-pv-text rows="4" maxlength="1500" placeholder="Что исправить в объявлении"></textarea><div class="pv-acts"><button class="btn" type="button" data-pv-send="fix">Отправить исправления</button></div></div>
     <span class="pv-small">Отмечено: <b data-pv-n>0</b> из ${n}.</span>
     <span class="pv-small" data-pv-msg data-online="Одно нажатие — и готово. Копия придёт на ваш e-mail.">${window.SVL_PV_ONLINE ? 'Одно нажатие — и готово. Копия придёт на ваш e-mail.' : (cm ? `После нажатия откроется письмо из вашей почты с текстом объявления и всеми условиями. Отправьте его с адреса ${esc(cm)}: подтверждения мы принимаем только с e-mail вашей карточки.` : 'После нажатия откроется письмо из вашей почты с текстом объявления и всеми условиями. Отправьте его, это и есть подтверждение.')}</span></div>`;
+}
+function offView(v){
+  const k = KINDS[v.kind] || KINDS.staff, cm = cardMailV(v), box = document.getElementById('qmCard'), gone = v.status === 'снято' || (v.until && v.until <= today);
+  const again = 'Повторить его потом можно в <a href="#zayavka">заявке</a>: найдите свою карточку по номеру (SG-… или OR-…) или UID и нажмите «Повторить» — останется поправить даты и детали, писать всё заново не нужно.';
+  const su = `Снять с сайта — ${v.title} (${v.id})`, body = `Здравствуйте, Ирина!\n\nПрошу снять объявление «${v.title}» с сайта «Свои люди в Швейцарии» и перенести в архив.\n\n${offUrlV(v)}`;
+  box.style.setProperty('--lc', k.c); box.style.setProperty('--lf', `color-mix(in srgb,${k.c} 12%,var(--paper))`);
+  box.innerHTML = `<div class="qm-top"><div class="qm-head"><span class="ev-k" style="color:${k.c}">${esc(k.t)} · ${esc(k.s)}</span><h2 class="qm-title" id="qmTitle">${esc(v.title)}</h2></div><button class="qm-close" type="button" aria-label="Закрыть">✕</button></div>
+    <div class="cf-view">${gone ? `<div class="pv-box"><b>Объявление уже снято с сайта и лежит в архиве.</b><span>${again}</span></div>`
+      : `<div class="pv-box" data-pv-kind="vacancyoff" data-pv-id="${esc(v.id)}" data-pv-key="${esc(OKKEY[v.id] || '')}" data-pv-lang="ru" data-mail="${MAIL}" data-su-ok="${esc(su)}" data-body-ok="${esc(body)}" data-t-sending="Отправляю…" data-t-ok="Готово: запрос получен {t}. Мы снимем объявление с сайта в тот же день и перенесём в архив." data-t-fail="${cm ? 'Не получилось отправить. Пожалуйста, {a} с адреса {c} на {m}.' : 'Не получилось отправить. Пожалуйста, {a} ({m}).'}" data-t-mail="напишите нам письмом" data-t-gmail="Открыть письмо в Gmail" data-pv-cmail="${esc(cm)}" data-t-letter="${cm ? 'Открылось письмо в вашей почте. Отправьте его с адреса {c}: такие просьбы мы принимаем только с e-mail вашей карточки. Письмо не открылось? {g} или напишите с этого адреса на {m}.' : 'Открылось письмо в вашей почте. Отправьте его. Письмо не открылось? {g} или напишите на {m}.'}">
+        <b>Снять объявление с сайта?</b><span>Например, если вы уже нашли сотрудника или партнёра. Объявление сразу уйдёт с сайта в архив и будет храниться там 12 месяцев. ${again}</span>
+        <div class="pv-acts"><button class="btn" type="button" data-pv-send="ok">Снять с сайта</button></div>
+        <span class="pv-small" data-pv-msg data-online="Одно нажатие — и готово.">${window.SVL_PV_ONLINE ? 'Одно нажатие — и готово.' : (cm ? `После нажатия откроется письмо из вашей почты. Отправьте его с адреса ${esc(cm)}: такие просьбы мы принимаем только с e-mail вашей карточки.` : 'После нажатия откроется письмо из вашей почты. Отправьте его.')}</span></div>`}
+    </div>`;
+  box.querySelector('.qm-close').onclick = () => qm.close();
+  if (!qm.open) qm.showModal();
 }
 function confirmView(v){
   const k = KINDS[v.kind] || KINDS.staff, a = authorOf(v), box = document.getElementById('qmCard');

@@ -88,13 +88,14 @@ const vacsOf = o => (VAK_OPEN || VAK_IRA ? VACS : []).filter(v => v.author && ty
 const isPromo = e => e.type === 'promo' && !!e.promo;
 const moneyP = n => 'CHF ' + (+n % 1 ? (+n).toFixed(2) : +n);
 const r05 = x => Math.round(x * 20) / 20;
-const PCOND = { new: 'Только для новых клиентов', book: 'По предварительной записи', nosum: 'Не суммируется с другими скидками', wd: 'Только в будни', online: 'Только онлайн' };
+const PCOND = { new: 'Только для новых клиентов', book: 'По предварительной записи', nosum: 'Не суммируется с другими скидками', wd: 'Только в будни', online: 'Только онлайн', noalc: 'Кроме спиртных напитков' };
 const pCondList = p => (p.cond || []).map(c => c === 'first' ? (p.limit ? `Первым ${p.limit} клиентам` : 'Количество мест ограничено') : PCOND[c]).filter(Boolean);
+/* цена к оплате (юридическая проверка 11.10.2026, PBV): у скидки на одну услугу видна цена, которую человек заплатит; promo.group — одинаковая скидка на группу */
 function pOffer(e){
-  const p = e.promo || {}, v = +p.value, reg = +p.regular, more = [];
-  if (p.kind === 'percent'){ if (reg) more.push(`обычно ${moneyP(reg)}, по акции ${moneyP(r05(reg * (100 - v) / 100))}`); return { big: `−${v} %`, chip: `−${v} %`, sub: p.what, more }; }
-  if (p.kind === 'amount'){ if (reg) more.push(`обычно ${moneyP(reg)}, по акции ${moneyP(reg - v)}`); return { big: `−${moneyP(v)}`, chip: `−${moneyP(v)}`, sub: p.what, more }; }
-  if (p.kind === 'price'){ if (reg) more.push(`обычно ${moneyP(reg)}`); return { big: moneyP(v), chip: moneyP(v), sub: p.what, more }; }
+  const p = e.promo || {}, v = +p.value, reg = +p.regular, more = [], grp = () => { if (p.group) more.push('скидка одинаковая на всё перечисленное'); };
+  if (p.kind === 'percent'){ if (reg) more.push(`по акции ${moneyP(r05(reg * (100 - v) / 100))} вместо ${moneyP(reg)}`); else grp(); return { big: `−${v} %`, chip: `−${v} %`, sub: p.what, more }; }
+  if (p.kind === 'amount'){ if (reg) more.push(`по акции ${moneyP(reg - v)} вместо ${moneyP(reg)}`); else grp(); return { big: `−${moneyP(v)}`, chip: `−${moneyP(v)}`, sub: p.what, more }; }
+  if (p.kind === 'price'){ if (reg) more.push(`вместо ${moneyP(reg)}`); return { big: moneyP(v), chip: moneyP(v), sub: p.what, more }; }
   if (p.kind === 'gift') return { big: 'Подарок', chip: 'подарок', sub: p.what, more };
   return { big: 'Бесплатно', chip: 'бесплатно', sub: p.what, more };
 }

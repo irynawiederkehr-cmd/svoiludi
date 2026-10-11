@@ -219,6 +219,7 @@ def main():
     to = ((card or {}).get('contacts') or {}).get('email', '') or f.get('Ссылку на подтверждение прислать на', '') or C.get('email', '')
     print(json.dumps(e, ensure_ascii=False, indent=2))
     print(f"\nПредпросмотр: https://svoiludi.ch/{page}/#ok={e['id']}.{key}")
+    print(f"Снять с сайта (в письмо о публикации): https://svoiludi.ch/{page}/#off={e['id']}.{key}")
     print(f"Ссылку отправить на: {to or 'ответом на письмо с заявкой (на адрес, с которого она пришла)'}" + ('  (e-mail из карточки — один для всех подтверждений; письмо-подтверждение принимаем только с него)' if card else '  (карточки нет — e-mail из заявки)'))
     print('Перед размещением: сверить автора по листу «Исключены» в «Реестре специалистов» (имя, фирма, UID, e-mail, телефоны, Telegram, Instagram).')
     if '--write' in a:

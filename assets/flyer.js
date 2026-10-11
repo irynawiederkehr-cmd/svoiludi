@@ -3,7 +3,8 @@
    Всё считается в браузере человека, на сервер ничего не уходит.
    window.SVL_FLYER.open(o)  — собирает PNG 1080×1920 (экран телефона) и показывает его в окне с кнопками «Скачать на телефон» и «Отправить подруге».
    window.SVL_FLYER.burst(el) — несколько сердечек из места нажатия (не показываются, если у человека включено «уменьшить движение»).
-   o: { id, big, title, sub, more[], conds[], days, until, who, role, place, signup, c:{tel,wa,tg,mail,ig,link}, url, sample }
+   o: { id, big, title, sub, more[], conds[], days, until, who, role, place, signup, c:{tel,wa,tg,mail,ig,link}, url, sample, limited }
+   limited — у акции «первым N клиентам»: под QR-кодом «Проверь, что места ещё есть» (11.10.2026; места считает автор, на сайте — пометка «Места закончились»)
    Язык: по <html lang>. Знак «Свои люди · svoiludi.ch» и строка «Создано на сайте проекта «Свои люди»» — по правилу проекта для PNG svoiludi.ch.
    Изменить вид флаера — только здесь; после правки пересобрать превью «Копии» и (если меняется текст) проверить русский и украинский. */
 (function(){
@@ -17,7 +18,7 @@
       cond: 'УСЛОВИЯ', term: 'СРОК АКЦИИ', by: 'КТО ОБЪЯВИЛ АКЦИЮ', signup: 'Записаться: ',
       ch: { wa: 'WhatsApp', tg: 'Telegram', mail: 'e-mail', tel: 'телефон или SMS', ig: 'Instagram', link: 'по ссылке', none: 'без записи' },
       lab: { tel: 'Телефон', wa: 'WhatsApp', tg: 'Telegram', mail: 'E-mail', ig: 'Instagram', link: 'Сайт' },
-      show: 'Покажи этот листок при записи или визите', check: 'Проверь, что акция действует',
+      show: 'Покажи этот листок при записи или визите', check: 'Проверь, что акция действует', checkL: 'Проверь, что места ещё есть',
       disc: 'Акцию объявляет и выполняет её автор. «Свои люди» не продают услугу и не отвечают за условия: уточни их у автора.',
       made: 'Создано на сайте проекта «Свои люди»', wm: 'Свои люди · svoiludi.ch',
       h: 'Твой флаер готов', p: 'Сохрани его на телефон и покажи при записи или визите. Сердечки в нём для тебя.', dl: 'Скачать на телефон', sh: 'Отправить подруге', cl: 'Закрыть',
@@ -29,7 +30,7 @@
       cond: 'УМОВИ', term: 'ТЕРМІН АКЦІЇ', by: 'ХТО ОГОЛОСИВ АКЦІЮ', signup: 'Записатися: ',
       ch: { wa: 'WhatsApp', tg: 'Telegram', mail: 'e-mail', tel: 'телефон або SMS', ig: 'Instagram', link: 'за посиланням', none: 'без запису' },
       lab: { tel: 'Телефон', wa: 'WhatsApp', tg: 'Telegram', mail: 'E-mail', ig: 'Instagram', link: 'Сайт' },
-      show: 'Покажи цей листок під час запису або візиту', check: 'Перевір, що акція діє',
+      show: 'Покажи цей листок під час запису або візиту', check: 'Перевір, що акція діє', checkL: 'Перевір, чи є ще місця',
       disc: 'Акцію оголошує й виконує її автор. «Свої люди» не продають послугу й не відповідають за умови: уточни їх в автора.',
       made: 'Створено на сайті проєкту «Свої люди»', wm: 'Свої люди · svoiludi.ch',
       h: 'Твій флаєр готовий', p: 'Збережи його на телефон і покажи під час запису або візиту. Серденька в ньому для тебе.', dl: 'Завантажити на телефон', sh: 'Надіслати подрузі', cl: 'Закрити',
@@ -168,7 +169,7 @@
     ctx.restore();
     var qy = fy + sh2 + 28, qs = 216;
     qrDraw(ctx, o.url || 'https://svoiludi.ch/akcii/', 80, qy, qs);
-    ctx.fillStyle = C.sage; ctx.font = '700 26px ' + FB; var cl2 = wrap(ctx, t.check, 700, 1); ctx.fillText(cl2[0], 80 + qs + 36, qy + 38);
+    ctx.fillStyle = C.sage; ctx.font = '700 26px ' + FB; var cl2 = wrap(ctx, o.limited ? t.checkL : t.check, 700, 1); ctx.fillText(cl2[0], 80 + qs + 36, qy + 38);
     ctx.fillStyle = C.muted; ctx.font = '500 25px ' + FB; var ds = wrap(ctx, t.disc, W - 80 - (80 + qs + 36), 5); ds.forEach(function(s, i){ ctx.fillText(s, 80 + qs + 36, qy + 80 + 33 * i); });
     ctx.fillStyle = C.sage; ctx.font = '700 25px ' + FB; ctx.fillText(t.made, 80 + qs + 36, qy + qs - 6);
     return cv;

@@ -875,7 +875,7 @@ window.IMG_BASE = 'img/';
 const SPECIALISTS = window.SPECIALISTS || [];
 
 </script>
-<script src="/data/afisha.uk.js?v=27f88797"></script>
+<script src="/data/afisha.uk.js?v=b7b06092"></script>
 <script>const AFISHA = window.AFISHA || [];</script>
 <script>
 const ADMIN = (() => {   // режим Ирины: svoiludi.ch/?ira=1 включает на этом устройстве, ?ira=0 выключает
@@ -1268,13 +1268,14 @@ const afHref = e => ((e.sections || [])[0] === 'kursy' ? '/uk/kursy/#' : '/uk/ev
    В карточке акция видна с первого до последнего дня; всегда с пометкой «Реклама». Подтверждённые и активные, карточка активна. */
 const moneyP = n => 'CHF ' + (+n % 1 ? (+n).toFixed(2) : +n);
 const r05 = x => Math.round(x * 20) / 20;
-const PCOND = { new: 'Тільки для нових клієнтів', book: 'За попереднім записом', nosum: 'Не сумується з іншими знижками', wd: 'Тільки в будні', online: 'Тільки онлайн' };
+const PCOND = { new: 'Тільки для нових клієнтів', book: 'За попереднім записом', nosum: 'Не сумується з іншими знижками', wd: 'Тільки в будні', online: 'Тільки онлайн', noalc: 'Крім спиртних напоїв' };
 const pCondList = p => (p.cond || []).map(c => c === 'first' ? (p.limit ? `Першим ${p.limit} клієнтам` : 'Кількість місць обмежена') : PCOND[c]).filter(Boolean);
+/* цена к оплате (юридическая проверка 11.10.2026, PBV): у скидки на одну услугу видна цена, которую человек заплатит; promo.group — одинаковая скидка на группу */
 function pOffer(e){
-  const p = e.promo || {}, v = +p.value, reg = +p.regular, more = [];
-  if (p.kind === 'percent'){ if (reg) more.push(`зазвичай ${moneyP(reg)}, за акцією ${moneyP(r05(reg * (100 - v) / 100))}`); return { big: `−${v} %`, sub: p.what, more }; }
-  if (p.kind === 'amount'){ if (reg) more.push(`зазвичай ${moneyP(reg)}, за акцією ${moneyP(reg - v)}`); return { big: `−${moneyP(v)}`, sub: p.what, more }; }
-  if (p.kind === 'price'){ if (reg) more.push(`зазвичай ${moneyP(reg)}`); return { big: moneyP(v), sub: p.what, more }; }
+  const p = e.promo || {}, v = +p.value, reg = +p.regular, more = [], grp = () => { if (p.group) more.push('знижка однакова на все перелічене'); };
+  if (p.kind === 'percent'){ if (reg) more.push(`за акцією ${moneyP(r05(reg * (100 - v) / 100))} замість ${moneyP(reg)}`); else grp(); return { big: `−${v} %`, sub: p.what, more }; }
+  if (p.kind === 'amount'){ if (reg) more.push(`за акцією ${moneyP(reg - v)} замість ${moneyP(reg)}`); else grp(); return { big: `−${moneyP(v)}`, sub: p.what, more }; }
+  if (p.kind === 'price'){ if (reg) more.push(`замість ${moneyP(reg)}`); return { big: moneyP(v), sub: p.what, more }; }
   if (p.kind === 'gift') return { big: 'Подарунок', chip: 'подарунок', sub: p.what, more };
   return { big: 'Безкоштовно', chip: 'безкоштовно', sub: p.what, more };
 }

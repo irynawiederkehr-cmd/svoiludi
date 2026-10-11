@@ -865,7 +865,7 @@ window.ZMINE = card => { const back = new Date(Date.now() - 365 * 864e5).toISOSt
     return [...box.querySelectorAll('label')].filter(l => L.includes(l.textContent.trim().toLowerCase().slice(0, 4))).map(l => l.querySelector('input').value); };
   return VACANCIES.filter(v => (card.t === 'spec' ? v.author === card.id : !!v.author && v.author.org === card.id) && (v.until || v.posted || '') >= back)
     .sort((a, b) => (b.until || '').localeCompare(a.until || '')).slice(0, 8).map(v => { const x = v.contacts || {}, sal = String(v.salary || '');
-      return { t: v.title, s: (v.until && v.until <= today ? 'В архіві, знято ' : 'На сайті до ') + fmt(v.until),
+      return { t: v.title, s: v.status === 'знято' ? 'Знято з сайту ' + fmt((v.off || {}).date) : (v.until && v.until <= today ? 'В архіві, знято ' : 'На сайті до ') + fmt(v.until),
         d: { 'z-v-kind': v.kind, 'z-v-title': v.title, 'z-v-cat': v.cat || '', 'z-v-load': v.workload || '', 'z-v-contract': v.contract || '', 'z-v-start': /договор/i.test(v.start || '') ? 'deal' : /сразу/i.test(v.start || '') ? 'now' : '',
           'z-v-exp': v.exp || '', 'z-v-edu': v.edu || '', 'z-v-skills': v.skills || [], 'z-v-permit': v.permits || [], 'z-v-drive': v.drive || '',
           'z-v-paytype': /час/.test(sal) ? 'hour' : /месяц/.test(sal) ? 'month' : /год/.test(sal) ? 'year' : sal ? 'deal' : '', 'z-v-pay': (sal.match(/\d+(?:[.,]\d+)?/) || [''])[0].replace(',', '.'),
@@ -969,6 +969,10 @@ const OKKEY = {};   // id → ключ из открытой ссылки: то�
 const svlHash = async k => { try { const b = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(String(k || ''))); return Array.from(new Uint8Array(b), x => x.toString(16).padStart(2, '0')).join(''); } catch (x) { return ''; } };
 const keyOk = async (r, k) => !!(r && r.keyHash && k && (await svlHash(k)) === r.keyHash);
 const okUrl = v => `https://svoiludi.ch/vakansii/#ok=${encodeURIComponent(v.id)}.${encodeURIComponent(OKKEY[v.id] || '')}`;
+/* «Снять с сайта» (решение Ирины 11.10.2026, 21:45): ссылка vakansii/#off=<id>.<ключ> приходит в письме о публикации на e-mail из карточки
+   (или на e-mail автора). По кнопке Ирине уходит письмо «Снять с сайта — …»; Claude ставит status 'снято' и off: { date, via } —
+   объявление уходит в архив, в заявке по номеру карточки его можно повторить кнопкой «Повторить» и только подправить. */
+const offUrlV = v => `https://svoiludi.ch/vakansii/#off=${encodeURIComponent(v.id)}.${encodeURIComponent(OKKEY[v.id] || '')}`;
 const mailto = (to, su, body) => `mailto:${to}?subject=${encodeURIComponent(su)}&body=${encodeURIComponent(body)}`;
 const gmail = (to, su, body) => `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(to)}&su=${encodeURIComponent(su)}&body=${encodeURIComponent(body)}`;
 const adText = v => [`${(KINDS[v.kind] || KINDS.staff).t}: ${v.title}`, `Де: ${where(v)}`, v.workload ? `Зайнятість: ${v.workload}` : '', v.start ? `З якого часу: ${v.start}` : '',
@@ -992,6 +996,21 @@ function okBox(v){
     <div class="pv-fix" hidden><textarea data-pv-text rows="4" maxlength="1500" placeholder="Що виправити в оголошенні"></textarea><div class="pv-acts"><button class="btn" type="button" data-pv-send="fix">Надіслати виправлення</button></div></div>
     <span class="pv-small">Позначено: <b data-pv-n>0</b> з ${n}.</span>
     <span class="pv-small" data-pv-msg data-online="Одне натискання — і готово. Копія прийде на ваш e-mail.">${window.SVL_PV_ONLINE ? 'Одне натискання — і готово. Копія прийде на ваш e-mail.' : (cm ? `Після натискання відкриється лист із вашої пошти з текстом оголошення й усіма умовами. Надішліть його з адреси ${esc(cm)}: підтвердження ми приймаємо тільки з e-mail вашої картки.` : 'Після натискання відкриється лист із вашої пошти з текстом оголошення й усіма умовами. Надішліть його, це і є підтвердження.')}</span></div>`;
+}
+function offView(v){
+  const k = KINDS[v.kind] || KINDS.staff, cm = cardMailV(v), box = document.getElementById('qmCard'), gone = v.status === 'знято' || (v.until && v.until <= today);
+  const again = 'Повторити його потім можна в <a href="/uk/vakansii/#zayavka">заявці</a>: знайдіть свою картку за номером (SG-… або OR-…) чи UID і натисніть «Повторити» — залишиться виправити дати й деталі, писати все заново не потрібно.';
+  const su = `Зняти з сайту — ${v.title} (${v.id})`, body = `Добрий день, Ірино!\n\nПрошу зняти оголошення «${v.title}» з сайту «Свої люди у Швейцарії» й перенести в архів.\n\n${offUrlV(v)}`;
+  box.style.setProperty('--lc', k.c); box.style.setProperty('--lf', `color-mix(in srgb,${k.c} 12%,var(--paper))`);
+  box.innerHTML = `<div class="qm-top"><div class="qm-head"><span class="ev-k" style="color:${k.c}">${esc(k.t)} · ${esc(k.s)}</span><h2 class="qm-title" id="qmTitle">${esc(v.title)}</h2></div><button class="qm-close" type="button" aria-label="Закрити">✕</button></div>
+    <div class="cf-view">${gone ? `<div class="pv-box"><b>Оголошення вже знято з сайту, воно лежить в архіві.</b><span>${again}</span></div>`
+      : `<div class="pv-box" data-pv-kind="vacancyoff" data-pv-id="${esc(v.id)}" data-pv-key="${esc(OKKEY[v.id] || '')}" data-pv-lang="uk" data-mail="${MAIL}" data-su-ok="${esc(su)}" data-body-ok="${esc(body)}" data-t-sending="Надсилаю…" data-t-ok="Готово: запит отримано {t}. Ми знімемо оголошення з сайту того ж дня й перенесемо в архів." data-t-fail="${cm ? 'Не вдалося надіслати. Будь ласка, {a} з адреси {c} на {m}.' : 'Не вдалося надіслати. Будь ласка, {a} ({m}).'}" data-t-mail="напишіть нам листом" data-t-gmail="Відкрити лист у Gmail" data-pv-cmail="${esc(cm)}" data-t-letter="${cm ? 'Відкрився лист у вашій пошті. Надішліть його з адреси {c}: такі прохання ми приймаємо тільки з e-mail вашої картки. Лист не відкрився? {g} або напишіть з цієї адреси на {m}.' : 'Відкрився лист у вашій пошті. Надішліть його. Лист не відкрився? {g} або напишіть на {m}.'}">
+        <b>Зняти оголошення з сайту?</b><span>Наприклад, якщо ви вже знайшли працівника чи партнера. Оголошення одразу зникне з сайту й перейде в архів, де зберігатиметься 12 місяців. ${again}</span>
+        <div class="pv-acts"><button class="btn" type="button" data-pv-send="ok">Зняти з сайту</button></div>
+        <span class="pv-small" data-pv-msg data-online="Одне натискання — і готово.">${window.SVL_PV_ONLINE ? 'Одне натискання — і готово.' : (cm ? `Після натискання відкриється лист із вашої пошти. Надішліть його з адреси ${esc(cm)}: такі прохання ми приймаємо тільки з e-mail вашої картки.` : 'Після натискання відкриється лист із вашої пошти. Надішліть його.')}</span></div>`}
+    </div>`;
+  box.querySelector('.qm-close').onclick = () => qm.close();
+  if (!qm.open) qm.showModal();
 }
 function confirmView(v){
   const k = KINDS[v.kind] || KINDS.staff, a = authorOf(v), box = document.getElementById('qmCard');
@@ -1026,6 +1045,7 @@ document.getElementById('trial').hidden = !ADMIN;
 render();
 const fromHash = () => { const id = decodeURIComponent(location.hash.slice(1));
   if (id.startsWith('ok=')){ const [vid, key] = id.slice(3).split('.'); const v = VACANCIES.find(x => x.id === vid); keyOk(v, key).then(ok => { if (ok){ OKKEY[vid] = key; confirmView(v); } }); return; }
+  if (id.startsWith('off=')){ const [vid, key] = id.slice(4).split('.'); const v = VACANCIES.find(x => x.id === vid); keyOk(v, key).then(ok => { if (ok){ OKKEY[vid] = key; offView(v); } }); return; }
   if (id && pool().some(v => v.id === id) || (ADMIN && VACANCIES.some(v => v.id === id))) openV(id); };
 fromHash(); addEventListener('hashchange', fromHash);
 </script>

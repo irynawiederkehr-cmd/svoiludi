@@ -133,7 +133,7 @@ window.ZMINE = card => { const back = new Date(Date.now() - 365 * 864e5).toISOSt
     return [...box.querySelectorAll('label')].filter(l => L.includes(l.textContent.trim().toLowerCase().slice(0, 4))).map(l => l.querySelector('input').value); };
   return VACANCIES.filter(v => (card.t === 'spec' ? v.author === card.id : !!v.author && v.author.org === card.id) && (v.until || v.posted || '') >= back)
     .sort((a, b) => (b.until || '').localeCompare(a.until || '')).slice(0, 8).map(v => { const x = v.contacts || {}, sal = String(v.salary || '');
-      return { t: v.title, s: (v.until && v.until <= today ? 'В архиве, снято ' : 'На сайте до ') + fmt(v.until),
+      return { t: v.title, s: v.status === 'снято' ? 'Снято с сайта ' + fmt((v.off || {}).date) : (v.until && v.until <= today ? 'В архиве, снято ' : 'На сайте до ') + fmt(v.until),
         d: { 'z-v-kind': v.kind, 'z-v-title': v.title, 'z-v-cat': v.cat || '', 'z-v-load': v.workload || '', 'z-v-contract': v.contract || '', 'z-v-start': /договор/i.test(v.start || '') ? 'deal' : /сразу/i.test(v.start || '') ? 'now' : '',
           'z-v-exp': v.exp || '', 'z-v-edu': v.edu || '', 'z-v-skills': v.skills || [], 'z-v-permit': v.permits || [], 'z-v-drive': v.drive || '',
           'z-v-paytype': /час/.test(sal) ? 'hour' : /месяц/.test(sal) ? 'month' : /год/.test(sal) ? 'year' : sal ? 'deal' : '', 'z-v-pay': (sal.match(/\d+(?:[.,]\d+)?/) || [''])[0].replace(',', '.'),

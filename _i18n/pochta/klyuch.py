@@ -14,6 +14,10 @@
     в черновик письма. Потеряли ссылку — запустить ещё раз и отправить новую.
 Дальше: python3 _i18n/sync.py build → node _i18n/smoke.js → commit, push.
 
+  У события, курса, акции и объявления печатается и ссылка off — «Снять с сайта» (…/#off=<id>.<ключ>, тот же ключ): она идёт в письмо
+  о публикации, по ней автор сам снимает запись в архив, а потом повторяет её в заявке кнопкой «Повторить» (решение Ирины 11.10.2026, 21:45).
+  Ключ потерян, а ссылка подтверждения есть в переписке — ссылка «Снять с сайта» та же, только #ok= заменить на #off=.
+
   python3 -I _i18n/pochta/klyuch.py --check <id> <ключ или вся ссылка>
     Проверить ключ из ссылки (например, из письма «Подтверждаю карточку»): совпадает ли его отпечаток с keyHash записи.
     Ничего не меняет.
@@ -93,10 +97,11 @@ def links(kind, r, k):
     i = r['id']
     if kind == 'spec':
         return {'preview': f'https://svoiludi.ch/#preview={i}.{k}', 'price': f'https://svoiludi.ch/#price={i}.{k}'}
+    # off — «Снять с сайта» (решение Ирины 11.10.2026, 21:45): тот же ключ, ссылка идёт в письмо о публикации
     if kind == 'vacancy':
-        return {'ok': f'https://svoiludi.ch/vakansii/#ok={i}.{k}'}
+        return {'ok': f'https://svoiludi.ch/vakansii/#ok={i}.{k}', 'off': f'https://svoiludi.ch/vakansii/#off={i}.{k}'}
     page = 'akcii' if r.get('type') == 'promo' and r.get('promo') else ('events' if 'events' in (r.get('sections') or ['events']) else 'kursy')
-    return {'ok': f'https://svoiludi.ch/{page}/#ok={i}.{k}'}
+    return {'ok': f'https://svoiludi.ch/{page}/#ok={i}.{k}', 'off': f'https://svoiludi.ch/{page}/#off={i}.{k}'}
 
 
 def find(rid):

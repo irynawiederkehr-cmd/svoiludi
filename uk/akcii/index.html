@@ -374,7 +374,7 @@ a.bot:hover{color:#B98324}
 .ev-ad{font-style:normal;font-size:.62rem;letter-spacing:.08em;border:1px solid currentColor;border-radius:6px;padding:0 5px;margin-left:6px;vertical-align:1px;opacity:.85}
 .pr-offer{background:var(--lf);border-radius:16px;padding:14px 16px;display:flex;flex-direction:column;gap:6px}
 .pr-big{font:400 2.1rem/1.05 var(--display),Georgia,serif;color:var(--lc)}
-.pr-sub{font-weight:600}.pr-more{font-size:.9rem;color:var(--muted)}
+.pr-sub{font-weight:600}.pr-more{font-size:.9rem;color:var(--muted)}.pr-pay{font-weight:700;color:var(--ink)}.pr-end{font-weight:700;color:#8E3320}.pc-pay{display:block;font-weight:700;color:var(--ink);margin-top:2px}
 .pr-days{font-weight:700;color:var(--ink)}
 .pr-conds{display:flex;flex-wrap:wrap;gap:6px;margin:2px 0 0;padding:0;list-style:none}
 .pr-conds li{font-size:.82rem;font-weight:600;background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:4px 10px}
@@ -568,7 +568,7 @@ a.yours:hover{background:#EBD3A3}
     <div><h2 id="add-h">Проводиш акції?</h2><p style="max-width:62ch">Розмісти свою акцію тут. Це безкоштовно в період запуску, до кінця 2027 року. Вона буде видна на цій сторінці й одразу у твоїй картці: в довіднику фахівців або в розділі «Організації». Заповни <a href="/uk/akcii/#akciya">заявку просто тут, на сайті</a>, або напиши нам на <a href="mailto:voznesenskaya.iryna@gmail.com">voznesenskaya.iryna@gmail.com</a>. Ми перевіримо й опублікуємо акцію, а ти отримаєш посилання на неї.</p></div>
     <div class="join-cols">
       <div class="jc"><b>Хто може</b><p>Фахівці й організації, які вже мають картку на сайті та UID: фірма, самозайнятий(а) з UID або ферайн. Магазин, ресторан, студія й інші фірми своїх розміщуються в розділі <a href="/uk/organizacii/">«Організації»</a>, картка фахівця їм не потрібна. Організації, які нічого не беруть з людей, акцій не розміщують: у них усе й так безкоштовно.</p></div>
-      <div class="jc"><b>Що можна запропонувати</b><p>Знижку у відсотках або у франках, акційну ціну, подарунок чи бонус до послуги або товару, безкоштовне знайомство чи пробне заняття. Лише своє, у своїй компетенції, правдиво й за законом. Розіграші та конкурси ми не розміщуємо. До 31.12.2027 розміщення акцій безкоштовне.</p></div>
+      <div class="jc"><b>Що можна запропонувати</b><p>Знижку у відсотках або у франках, акційну ціну, подарунок або бонус до послуги чи товару, безкоштовне знайомство або пробне заняття. Тільки своє, у своїй компетенції, правдиво й за законом. Для знижки на одну послугу вкажи звичайну ціну: на сайті покажемо ціну, яку людина заплатить. Розіграші й конкурси ми не розміщуємо, як і акції на спиртні напої, тютюн і вейпи, ліки, зброю й кредити. Лікарі, психотерапевти, психологи та інші професії здоров’я акцій не розміщують: закон дозволяє їм лише стриману рекламу. До 31.12.2027 розміщення акцій безкоштовне.</p></div>
       <div class="jc"><b>Як надіслати</b><p>Знайди в заявці свою картку за номером (SG-0001 у фахівців, OR-0001 в організацій, він стоїть унизу картки) або за UID: ім’я, адреса й контакти підставляться самі. Вибери вид акції, впиши розмір знижки чи ціну й дати. Ми надішлемо посилання на перевірку, а ти підтвердиш акцію однією кнопкою. Акція діє не довше 90 днів.</p><span class="addbtns"><a class="btn" href="/uk/akcii/#akciya">Заповнити заявку на акцію</a><a class="btn ghost" id="addbtn" href="mailto:voznesenskaya.iryna@gmail.com">Написати листа</a></span></div>
     </div>
   </section>
@@ -582,7 +582,7 @@ a.yours:hover{background:#EBD3A3}
       <div data-zl="prof" hidden></div>
       <p class="zmsg" data-zl="nouid" hidden>Акції розміщують лише фахівці й організації з UID (фірма, самозайнятий(а) з UID або ферайн), бо акція — це пропозиція платної послуги чи товару. У картці UID немає. Якщо UID з’явився, напиши нам, і ми додамо його в картку.</p>
       <p class="zmsg" data-zl="free" hidden>Ваша організація розміщується безкоштовно, бо нічого не бере з людей. Акції (знижки й спеціальні ціни) у таких організацій ми не розміщуємо. Якщо ви почнете брати плату, напишіть нам: умови розміщення тоді будуть такими самими, як у фахівців.</p>
-      <div class="zmine" data-zl="mine" hidden></div>
+      <p class="zmsg zoff" data-zhealth hidden data-zblock="Акції лікарів, психотерапевтів, психологів та інших професій здоров’я ми не розміщуємо: закон дозволяє їм лише стриману рекламу, без знижок і безкоштовних послуг. Твоя картка й події залишаються на сайті, як і раніше.">Акції лікарів, психотерапевтів, психологів та інших професій здоров’я ми не розміщуємо. Закон дозволяє їм лише стриману, об’єктивну рекламу, без знижок, подарунків і безкоштовних послуг (MedBG, PsyG і закони кантонів про здоров’я). Твоя картка, події й курси залишаються на сайті, як і раніше.</p><div class="zmine" data-zl="mine" hidden></div>
     </div>
     <div class="zfg">
       <h3 class="zh3">Що за акція</h3>
@@ -593,10 +593,10 @@ a.yours:hover{background:#EBD3A3}
       <div class="zf" data-zif="z-pr-kind:price" hidden><label for="z-pr-price">Акційна ціна <s>*</s></label><div class="zcur"><span>CHF</span><input id="z-pr-price" type="number" data-a="Акційна ціна, CHF" data-req data-miss="акційна ціна" min="1" max="20000" step="0.5" inputmode="decimal" placeholder="120"></div><small>Кінцева ціна: з усіма обов’язковими витратами та ПДВ (MWST), якщо ти його сплачуєш.</small></div>
       <div class="zf" data-zif="z-pr-kind:percent|amount|price" hidden><label for="z-pr-what">На що акція <s>*</s></label><input id="z-pr-what" data-a="На що акція" data-req data-miss="на що акція" maxlength="80" placeholder="наприклад: абонемент на 4 зустрічі"><small>Назви послугу чи товар точно. Тільки своє.</small></div>
       <div class="zf" data-zif="z-pr-kind:gift|free" hidden><label for="z-pr-gift">Що отримає людина <s>*</s></label><input id="z-pr-gift" data-a="Що отримає людина" data-req data-miss="що отримає людина" maxlength="120" placeholder="наприклад: чек-лист «Перші 30 днів» до першої консультації"></div>
-      <div class="zf" data-zif="z-pr-kind:percent|amount|price" hidden><label for="z-pr-regular">Звичайна ціна<button type="button" class="qh" data-help="zpregular" aria-label="Підказка: звичайна ціна" aria-expanded="false">?</button></label><div class="zcur"><span>CHF</span><input id="z-pr-regular" type="number" data-a="Звичайна ціна, CHF" min="1" max="20000" step="0.5" inputmode="decimal" placeholder="150"></div><small>Не обов’язково. Впиши, тільки якщо ти брав(ла) цю ціну безпосередньо перед акцією. Тоді на сайті буде «зазвичай CHF …». Не впевнений(а) — залиш порожнім.</small></div>
+      <div class="zf" data-zif="z-pr-kind:percent|amount" hidden><div class="zchk" id="z-pr-grp" data-l="Знижка на групу"><label><input type="checkbox" value="group">Знижка однакова на всю групу послуг або товарів</label></div><small>Наприклад, «−20 % на всі стрижки» або «−15 % на все меню». Тоді в полі «На що акція» назви групу точно, а звичайна ціна не обов’язкова.</small></div><div class="zf" data-zif="z-pr-kind:percent|amount|price" hidden><label for="z-pr-regular">Звичайна ціна <s data-zregmark hidden>*</s><button type="button" class="qh" data-help="zpregular" aria-label="Підказка: звичайна ціна" aria-expanded="false">?</button></label><div class="zcur"><span>CHF</span><input id="z-pr-regular" type="number" data-a="Звичайна ціна, CHF" data-miss="звичайна ціна" min="1" max="20000" step="0.5" inputmode="decimal" placeholder="60"></div><small>Ціна, за якою ти працювала(-в) щонайменше 30 днів поспіль безпосередньо перед акцією і працюєш з іншими клієнтами. На сайті буде «За акцією CHF 48 замість CHF 60». Для знижки у відсотках або франках на одну послугу — обов’язково.</small></div>
       <h3 class="zh3">Умови</h3>
-      <div class="zf"><label>Що обмежує акцію<button type="button" class="qh" data-help="zpcond" aria-label="Підказка: умови акції" aria-expanded="false">?</button></label><div class="zchk" id="z-pr-cond" data-l="Умови"><label><input type="checkbox" value="new">Тільки для нових клієнтів</label><label><input type="checkbox" value="book">За попереднім записом</label><label><input type="checkbox" value="nosum">Не сумується з іншими знижками</label><label><input type="checkbox" value="wd">Тільки в будні</label><label><input type="checkbox" value="online">Тільки онлайн</label><label><input type="checkbox" value="first">Кількість місць обмежена</label></div></div>
-      <div class="zf" data-zif="z-pr-cond:first" hidden><label for="z-pr-limit">Першим скільком клієнтам</label><input id="z-pr-limit" type="number" data-a="Першим клієнтам" min="1" max="500" step="1" inputmode="numeric" placeholder="10"><small>Якщо місця закінчаться раніше строку, напиши нам: ми знімемо акцію.</small></div>
+      <div class="zf"><label>Що обмежує акцію<button type="button" class="qh" data-help="zpcond" aria-label="Підказка: умови акції" aria-expanded="false">?</button></label><div class="zchk" id="z-pr-cond" data-l="Умови"><label><input type="checkbox" value="new">Тільки для нових клієнтів</label><label><input type="checkbox" value="book">За попереднім записом</label><label><input type="checkbox" value="nosum">Не сумується з іншими знижками</label><label><input type="checkbox" value="wd">Тільки в будні</label><label><input type="checkbox" value="online">Тільки онлайн</label><label><input type="checkbox" value="first">Кількість місць обмежена</label><label><input type="checkbox" value="noalc">Крім спиртних напоїв</label></div></div>
+      <div class="zf" data-zif="z-pr-cond:first" hidden><label for="z-pr-limit">Скільком першим клієнтам <s>*</s></label><input id="z-pr-limit" type="number" data-a="Першим клієнтам" data-req data-miss="скільки місць" min="1" max="500" step="1" inputmode="numeric" placeholder="10"><small>Рахуєш ти сама(-м): флаєр може завантажити кожен, а місце займає той, хто записався. Коли місця закінчаться, зніми акцію за посиланням «Зняти з сайту» з листа про публікацію: вона перейде в архів, а повторити її потім можна кнопкою «Повторити».</small></div>
       <h3 class="zh3">Коли</h3>
       <div class="zf"><label for="z-pr-dur">Як довго діє акція <s>*</s><button type="button" class="qh" data-help="zpdur" aria-label="Підказка: на дати чи постійно" aria-expanded="false">?</button></label><select id="z-pr-dur" data-a="Як довго діє" data-req data-miss="як довго діє акція"><option value="period">На певні дати, до 90 днів</option><option value="always">Постійно, на перше відвідування нового клієнта</option></select><small data-zif="z-pr-dur:always" hidden>Наприклад: «перше прибирання», «перша стрижка» або «перший манікюр» за половину ціни, завжди. Акція діє рік. Коли рік закінчується, ти підтверджуєш її листом, і вона залишається. Не підтвердила — акція сама зникає з сайту. Умова «Лише для нових клієнтів» відмічена сама.</small></div>
       <div class="zf"><label for="z-pr-from">Перший день акції <s>*</s></label><input id="z-pr-from" type="date" data-a="Перший день" data-req data-miss="перший день" data-zd="from"></div>
@@ -616,7 +616,7 @@ a.yours:hover{background:#EBD3A3}
       <div class="zf"><label for="z-pr-about">Коротко про акцію <s>*</s></label><textarea id="z-pr-about" data-a="Коротко про акцію" data-req rows="4" maxlength="400" placeholder="2–3 речення: що включено і для кого"></textarea></div>
     </div>
     <div class="zok"><input type="checkbox" id="z-pr-own" data-zmust data-line="Це моя акція, за інших не розміщую: позначено на сайті" data-t-must="Постав позначку «Це моя акція». Розміщувати можна тільки свої акції."><label for="z-pr-own">Це моя акція: я сам(а) її оголошую й виконую, або її виконує моя організація. Акції за інших людей та організації я не розміщую. Знаю: за це можуть виключити з проєкту (<a href="https://svoiludi.ch/uk/usloviya/#vy">умови розміщення</a>).</label></div>
-    <div class="zok"><input type="checkbox" id="z-pr-law" data-zmust data-line="Акція правдива, в моїй компетенції та за законом: позначено на сайті" data-t-must="Постав позначку «Акція правдива й за законом»."><label for="z-pr-law">Акція правдива й за законом: ціни та умови справжні, звичайна ціна (якщо вказана) — та, за якою я працював(ла) безпосередньо перед акцією. Я виконаю акцію для всіх, хто підпадає під умови, до останнього дня. Послуга чи товар у моїй компетенції, на них є всі потрібні дозволи. Це не розіграш і не обіцянка лікування чи результату.</label></div>
+    <div class="zok"><input type="checkbox" id="z-pr-law" data-zmust data-line="Акція правдива, в моїй компетенції та за законом: позначено на сайті" data-t-must="Постав позначку «Акція правдива й за законом»."><label for="z-pr-law">Акція правдива й за законом: ціни й умови справжні, звичайна ціна (якщо вказана) — та, за якою я працював(-ла) щонайменше 30 днів поспіль безпосередньо до акції і працюю з іншими клієнтами; на запит підтверджу її прайс-листом або рахунками. Я виконаю акцію для всіх, хто підходить під умови, до останнього дня, а якщо місця закінчаться — одразу повідомлю. Послуга чи товар у моїй компетенції, на них є всі потрібні дозволи. Це не розіграш, не обіцянка лікування чи результату й не акція на спиртні напої, тютюн і вейпи, ліки, зброю чи кредити.</label></div>
     <div class="zok"><input type="checkbox" id="z-pr-ad" data-zmust data-line="Знаю, що акція має мітку «Реклама»: позначено на сайті" data-t-must="Постав позначку про мітку «Реклама»."><label for="z-pr-ad">Я знаю: на сайті акція має мітку «Реклама». До 31.12.2027 розміщення безкоштовне. «Свої люди» не продають мою послугу й не відповідають за умови акції.</label></div>
     <div class="zok"><input type="checkbox" id="z-pr-ok" data-z="ok"><label for="z-pr-ok">Даю згоду, щоб «Свої люди» (Alonira.ch AG) обробили дані з цієї заявки, за потреби зв’язалися зі мною й після перевірки опублікували акцію. Я маю право розмістити ці дані, зокрема контакти для запису й запитань. Докладніше — у <a href="https://svoiludi.ch/uk/privacy/">політиці конфіденційності</a>.</label></div>
     <div class="acts"><button class="btn" type="button" data-z="send">Надіслати заявку</button></div>
@@ -647,7 +647,7 @@ window.IMG_BASE = '../img/';
 const SPECIALISTS = window.SPECIALISTS || [];
 
 </script>
-<script src="/data/afisha.uk.js?v=27f88797"></script>
+<script src="/data/afisha.uk.js?v=b7b06092"></script>
 <script>/* одна база афиши: здесь — записи раздела «События» */
 const EVENTS = (window.AFISHA || []).filter(e => (e.sections || []).includes('events'));</script>
 <script>
@@ -780,7 +780,7 @@ function pcard(e){
   return `<div class="pcw"><button class="pcard" type="button" data-ev="${esc(e.id)}" data-d="${e.date}">${e.sample ? '<span class="sample">Зразок</span>' : ''}
     <span class="pc-big">${esc(o.big)}</span>
     <span class="pc-m">${e.sample ? '<span class="yours">Тут може бути твоя акція!</span>' : ''}<span class="ev-k">Акція <i class="ev-ad">Реклама</i>${isAlways(e) ? '<i class="pc-always">Постійна</i>' : ''}</span><span class="pc-t">${esc(e.title)}</span>
-      <span class="pc-sub">${esc(o.sub || '')}${o.more.length ? ' · ' + esc(o.more.join('; ')) : ''}</span>
+      <span class="pc-sub">${esc(o.sub || '')}${o.more.filter(x => x !== o.pay).length ? ' · ' + esc(o.more.filter(x => x !== o.pay).join('; ')) : ''}</span>${o.pay ? `<span class="pc-pay">${esc(o.pay)}</span>` : ''}
       <span class="pc-who">${orgFaces(e)}<span class="pc-n"><b>${esc(orgNames(e))}</b>${role ? `<small>${esc(role)}</small>` : ''}</span></span>
       <span class="ev-i"><b>${esc(promoDays(e))}</b><span>${where}</span><span>${esc((e.langs || []).join(', '))}</span></span>
       ${cl.length ? `<span class="pc-c">${cl.map(c => `<i>${esc(c)}</i>`).join('')}</span>` : ''}</span></button>${heartBtn(e.id)}</div>`;
@@ -993,13 +993,17 @@ const priceText = e => isPromo(e) ? offer(e).big : (e.price || '') + (e.per && !
 const isPromo = e => e.type === 'promo' && !!e.promo;
 const money = n => 'CHF ' + (+n % 1 ? (+n).toFixed(2) : +n);
 const r05 = x => Math.round(x * 20) / 20;
-const COND = { new: 'Тільки для нових клієнтів', book: 'За попереднім записом', nosum: 'Не сумується з іншими знижками', wd: 'Тільки в будні', online: 'Тільки онлайн' };
+const COND = { new: 'Тільки для нових клієнтів', book: 'За попереднім записом', nosum: 'Не сумується з іншими знижками', wd: 'Тільки в будні', online: 'Тільки онлайн', noalc: 'Крім спиртних напоїв' };
 const condList = p => (p.cond || []).map(c => c === 'first' ? (p.limit ? `Першим ${p.limit} клієнтам` : 'Кількість місць обмежена') : COND[c]).filter(Boolean);
-function offer(e){   // big — крупно («−20 %»), sub — на что, more — обычная и акционная цена
+/* Цена к оплате (юридическая проверка 11.10.2026, PBV): у скидки в % или франках на одну услугу на сайте всегда видна цена, которую человек заплатит
+   («По акции CHF 48 вместо CHF 60»); без обычной цены — только одинаковая скидка на целую группу услуг или товаров (promo.group). Обычная цена — та,
+   что действовала не меньше 30 дней подряд прямо перед акцией (Art. 16 PBV с 01.01.2025). Документ проекта «akcii-pravo-proverka.md». */
+function offer(e){   // big — крупно («−20 %»), sub — на что, pay — цена к оплате, more — цена к оплате и пояснения
   const p = e.promo || {}, v = +p.value, reg = +p.regular, more = [];
-  if (p.kind === 'percent'){ if (reg) more.push(`зазвичай ${money(reg)}, за акцією ${money(r05(reg * (100 - v) / 100))}`); return { big: `−${v} %`, sub: p.what, more }; }
-  if (p.kind === 'amount'){ if (reg) more.push(`зазвичай ${money(reg)}, за акцією ${money(reg - v)}`); return { big: `−${money(v)}`, sub: p.what, more }; }
-  if (p.kind === 'price'){ if (reg) more.push(`зазвичай ${money(reg)}`); return { big: money(v), sub: p.what, more }; }
+  const grp = () => { if (p.group) more.push('Знижка однакова на все перелічене'); };
+  if (p.kind === 'percent'){ const pay = reg ? `За акцією ${money(r05(reg * (100 - v) / 100))} замість ${money(reg)}` : ''; if (pay) more.push(pay); else grp(); return { big: `−${v} %`, sub: p.what, pay, more }; }
+  if (p.kind === 'amount'){ const pay = reg ? `За акцією ${money(reg - v)} замість ${money(reg)}` : ''; if (pay) more.push(pay); else grp(); return { big: `−${money(v)}`, sub: p.what, pay, more }; }
+  if (p.kind === 'price'){ const pay = reg ? `Замість ${money(reg)}` : ''; if (pay) more.push(pay); return { big: money(v), sub: p.what, pay, more }; }
   if (p.kind === 'gift') return { big: 'Подарунок', sub: p.what, more };
   return { big: 'Безкоштовно', sub: p.what, more };
 }
@@ -1008,6 +1012,7 @@ const promoDays = e => isAlways(e) ? (e.date > today ? `Почнеться ${fmt
 /* постоянная акция (promo.always, решение Ирины 11.10.2026, 19:19: «всегда первая уборка, стрижка или маникюр за 50 %»): в данных date — первый день, dateEnd — конец
    текущего года подтверждения; владелец подтверждает её раз в год, без подтверждения она сама уходит с сайта после dateEnd */
 const isAlways = e => !!(e.promo && e.promo.always);
+const hasLimit = e => !!(e.promo && (e.promo.cond || []).includes('first'));
 const promoUntil = e => isAlways(e) && e.dateEnd ? 'Підтверджена власником до ' + fmtD(e.dateEnd) : '';
 /* сердечки: акции, которые человек сохранил себе (только в его браузере, ключ svlHearts) */
 const FAV_KEY = 'svlHearts';
@@ -1029,7 +1034,7 @@ function toggleFav(id, el){
 /* данные для флаера (assets/flyer.js): всё, что на нём печатается, берём из той же записи, что видит человек в окне акции */
 function flyerOf(e){
   const o = offer(e), c = chans(e), s = (e.organizers || []).map(cardOf).find(Boolean);
-  return { id: e.id, big: o.big, title: e.title, sub: o.sub || '', more: o.more, conds: condList(e.promo), days: promoDays(e), until: promoUntil(e), who: orgNames(e),
+  return { id: e.id, big: o.big, title: e.title, sub: o.sub || '', more: o.more, conds: condList(e.promo), days: promoDays(e), until: promoUntil(e), who: orgNames(e), limited: hasLimit(e),
     role: s ? (s.role || 'організація') : '', place: isRemote(e) ? 'Онлайн' : placeText(e), signup: e.signup && e.signup !== 'none' ? e.signup : '',
     c: { tel: c.tel, wa: c.wa, tg: c.tg, mail: c.mail, ig: c.ig, link: c.link }, url: evUrl(e), sample: !!e.sample };
 }
@@ -1048,14 +1053,14 @@ const SIGN_T = { none: 'без запису', wa: 'WhatsApp', tg: 'Telegram', ma
 const mineOf = (card, test) => EVENTS.filter(e => test(e) && (e.organizers || []).some(o => card.t === 'spec' ? o === card.id : !!o && o.org === card.id) && lastDay(e) >= addDays(today, -365));
 /* прошлые акции карточки — для «Повторить» в форме акции (поля z-pr-…) */
 const promoMine = card => mineOf(card, isPromo).sort((a, b) => lastDay(b).localeCompare(lastDay(a))).slice(0, 8).map(e => { const p = e.promo, x = e.contacts || {}, num = ['percent', 'amount', 'price'].includes(p.kind);
-  return { t: e.title, s: (lastDay(e) < today ? 'В архіві, останній день ' : 'На сайті до ') + fmtD(lastDay(e)),
+  return { t: e.title, s: isOff(e) ? 'Знято з сайту ' + fmtD((e.off || {}).date) : (lastDay(e) < today ? 'В архіві, останній день ' : 'На сайті до ') + fmtD(lastDay(e)),
     d: { 'z-pr-title': e.title, 'z-pr-dur': p.always ? 'always' : 'period', 'z-pr-kind': p.kind, 'z-pr-pct': p.kind === 'percent' ? p.value : '', 'z-pr-amt': p.kind === 'amount' ? p.value : '', 'z-pr-price': p.kind === 'price' ? p.value : '',
-      'z-pr-what': num ? p.what : '', 'z-pr-gift': num ? '' : p.what, 'z-pr-regular': p.regular || '', 'z-pr-cond': p.cond || [], 'z-pr-limit': p.limit || '',
+      'z-pr-what': num ? p.what : '', 'z-pr-gift': num ? '' : p.what, 'z-pr-regular': p.regular || '', 'z-pr-grp': p.group ? ['group'] : [], 'z-pr-cond': p.cond || [], 'z-pr-limit': p.limit || '',
       'z-pr-where': isRemote(e) ? 'online' : (card.places || []).includes(e.address) ? e.address : '', 'z-pr-signup': e.signup || '', 'z-pr-link': e.link || '', 'z-pr-about': e.about || '',
       'z-pr-tel': x.phone || e.phone || '', 'z-pr-wa': x.whatsapp || '', 'z-pr-tg': x.telegram || '', 'z-pr-mail': x.email || e.email || '', 'z-pr-ig': x.instagram || '' } }; });
 window.ZMINE = (card, form) => form === 'promo' ? promoMine(card) : mineOf(card, e => !isPromo(e))
   .sort((a, b) => lastDay(b).localeCompare(lastDay(a))).slice(0, 8).map(e => { const a = addrParts(e.address), x = e.contacts || {}, own = (card.places || []).includes(e.address);
-    return { t: e.title, s: (lastDay(e) < today ? 'В архіві, останній день ' : 'На сайті до ') + fmtD(lastDay(e)),
+    return { t: e.title, s: isOff(e) ? 'Знято з сайту ' + fmtD((e.off || {}).date) : (lastDay(e) < today ? 'В архіві, останній день ' : 'На сайті до ') + fmtD(lastDay(e)),
       d: { 'z-ev-title': e.title, 'z-ev-type': e.type || '', 'z-ev-for': e.for || [], 'z-ev-age': e.age || '', 'z-ev-langs': langCodes('z-ev-langs', e.langs),
         'z-ev-rep': e.repeat ? (e.repeat.freq === 'monthly' ? 'monthly' : e.repeat.interval === 2 ? 'biweekly' : 'weekly') : (e.dateEnd ? 'days' : 'once'),
         'z-ev-t1': e.time || '', 'z-ev-t2': e.timeEnd || '', 'z-ev-where': isRemote(e) ? 'online' : own ? e.address : 'other',
@@ -1064,9 +1069,30 @@ window.ZMINE = (card, form) => form === 'promo' ? promoMine(card) : mineOf(card,
         'z-ev-disc': e.disc || [], 'z-ev-payhow': e.payhow || [], 'z-ev-signup': e.signup || '', 'z-ev-seats': e.seats || '', 'z-ev-link': e.link || '', 'z-ev-about': e.about || '',
         'z-ev-person': x.person || '', 'z-ev-tel': x.phone || e.phone || '', 'z-ev-wa': x.whatsapp || '', 'z-ev-tg': x.telegram || '', 'z-ev-mail': x.email || e.email || '', 'z-ev-ig': x.instagram || '' } }; });
 const okText = e => isPromo(e) ? [`Назва: ${e.title}`, `Пропозиція: ${offer(e).big}, ${offer(e).sub}${offer(e).more.length ? ' (' + offer(e).more.join('; ') + ')' : ''}`, `Умови: ${condList(e.promo).join('; ') || '—'}`, `Коли: ${promoDays(e)}`, `Де: ${placeText(e)}`, `Організатор: ${orgNames(e)}`, `Контакт: ${contactList(e).join(', ')}`].join('\n') : [`Назва: ${e.title}`, `Коли: ${fmtFull(e.date)}${e.time ? ', ' + e.time : ''}${e.repeat ? ' (повторюється)' : ''}`, `Де: ${placeText(e)}`, `Ціна: ${priceText(e)}`, `Організатор: ${orgNames(e)}`, `Контакт: ${contactList(e).join(', ')}`, `Як записатися: ${SIGN_T[e.signup] || '—'}`].join('\n');
+/* «Снять с сайта» (решение Ирины 11.10.2026, 21:45: «при размещении в письме должна прийти ссылка, как удалить акцию или дезактивировать её
+   и поместить в архив, чтобы потом не переписывать, а только подкорректировать — кнопка «Повторить»»). Ссылка …/#off=<id>.<ключ> приходит
+   в письме о публикации на e-mail из карточки (тот же ключ, что у подтверждения; klyuch.py печатает обе ссылки). По кнопке Ирине уходит
+   письмо «Снять с сайта — …» (с ZAPIS_URL — через скрипт записей); Claude ставит status 'снято' и off: { date, via } — запись уходит в архив,
+   а в заявке по номеру карточки её можно повторить кнопкой «Повторить». Снять можно всегда, даже если карточка на паузе. */
+const isOff = e => e.status === 'знято';
+const offUrl = e => `https://svoiludi.ch/${isPromo(e) ? 'akcii' : 'events'}/#off=${encodeURIComponent(e.id)}.${encodeURIComponent(OKKEY[e.id] || '')}`;
+function offBox(e){
+  const PR = isPromo(e), cm = cardMail(e), who = orgNames(e);
+  const T = PR ? { q: 'Зняти акцію з сайту?', why: 'Наприклад, якщо місця закінчилися або акція більше не діє.', done: 'Акцію вже знято з сайту, вона лежить в архіві.', ok: 'Готово: запит отримано {t}. Ми знімемо акцію з сайту того ж дня й перенесемо в архів.', form: 'akciya',
+      body: `Добрий день, Ірино!\n\nПрошу зняти акцію «${e.title}» з сайту «Свої люди у Швейцарії» й перенести в архів.\n\n${offUrl(e)}\n\n${who}` }
+    : { q: 'Зняти подію з сайту?', why: 'Наприклад, якщо місця закінчилися або подію скасовано.', done: 'Подію вже знято з сайту, вона лежить в архіві.', ok: 'Готово: запит отримано {t}. Ми знімемо подію з сайту того ж дня й перенесемо в архів.', form: 'zayavka',
+      body: `Добрий день, Ірино!\n\nПрошу зняти подію «${e.title}» з сайту «Свої люди у Швейцарії» й перенести в архів.\n\n${offUrl(e)}\n\n${who}` };
+  const again = `Повторити запис потім можна в <a href="/uk/akcii/#${T.form}">заявці</a>: знайдіть свою картку за номером (SG-… або OR-…) чи UID і натисніть «Повторити» — залишиться виправити дати й деталі, писати все заново не потрібно.`;
+  if (isOff(e)) return `<div class="pv-box"><b>${T.done}</b><span>${again}</span></div>`;
+  const su = `Зняти з сайту — ${e.title} (${e.id})`;
+  return `<div class="pv-box" data-pv-kind="eventoff" data-pv-id="${esc(e.id)}" data-pv-key="${esc(OKKEY[e.id] || '')}" data-pv-lang="uk" data-mail="${MAIL}" data-su-ok="${esc(su)}" data-body-ok="${esc(T.body)}" data-t-sending="Надсилаю…" data-t-ok="${T.ok}" data-t-fail="${cm ? 'Не вдалося надіслати. Будь ласка, {a} з адреси {c} на {m}.' : 'Не вдалося надіслати. Будь ласка, {a} ({m}).'}" data-t-mail="напишіть нам листом" data-t-gmail="Відкрити лист у Gmail" data-pv-cmail="${esc(cm)}" data-t-letter="${cm ? 'Відкрився лист у вашій пошті. Надішліть його з адреси {c}: такі прохання ми приймаємо тільки з e-mail вашої картки. Лист не відкрився? {g} або напишіть з цієї адреси на {m}.' : 'Відкрився лист у вашій пошті. Надішліть його. Лист не відкрився? {g} або напишіть на {m}.'}">
+    <b>${T.q}</b><span>${T.why} Запис одразу зникне з сайту й перейде в архів, де зберігатиметься 12 місяців. ${again}</span>
+    <div class="pv-acts"><button class="btn" type="button" data-pv-send="ok">Зняти з сайту</button></div>
+    <span class="pv-small" data-pv-msg data-online="Одне натискання — і готово.">${window.SVL_PV_ONLINE ? 'Одне натискання — і готово.' : (cm ? `Після натискання відкриється лист із вашої пошти. Надішліть його з адреси ${esc(cm)}: такі прохання ми приймаємо тільки з e-mail вашої картки.` : 'Після натискання відкриється лист із вашої пошти. Надішліть його.')}</span></div>`;
+}
 function okBox(e){
   const who = orgNames(e), cm = cardMail(e), PR = isPromo(e);
-  const W = PR ? { su: 'акцію', own: 'Це моя акція: я сам(а) її оголошую й виконую, або її виконує моя організація. Записи за інших я не розміщую.', law: 'Акція правдива, в моїй компетенції та відповідає законам Швейцарії, мого кантону й громади. Ціни та умови справжні, звичайна ціна (якщо вказана) — та, за якою я працював(ла) безпосередньо до акції. Я виконаю акцію для всіх, хто підходить під умови, до останнього дня.', who: 'вашу акцію', ad: ' Я знаю, що на сайті акція має мітку «Реклама».' }
+  const W = PR ? { su: 'акцію', own: 'Це моя акція: я сам(а) її оголошую й виконую, або її виконує моя організація. Записи за інших я не розміщую.', law: 'Акція правдива, у моїй компетенції та відповідає законам Швейцарії, мого кантону й громади. Ціни й умови справжні, звичайна ціна (якщо вказана) — та, за якою я працював(-ла) щонайменше 30 днів поспіль безпосередньо до акції і працюю з іншими клієнтами; на запит підтверджу її прайс-листом або рахунками. Я виконаю акцію для всіх, хто підходить під умови, до останнього дня, а якщо місця закінчаться — одразу повідомлю. Акція не стосується спиртних напоїв, тютюну й вейпів, ліків, зброї та кредитів.', who: 'вашу акцію', ad: ' Я знаю, що на сайті акція має мітку «Реклама».' }
     : { su: 'подія', own: 'Це моя подія: я сам(а) її організовую, або її проводить моя організація. Записи за інших я не розміщую.', law: 'Подія в моїй компетенції та відповідає законам Швейцарії, мого кантону й громади.', who: 'вашу подію', ad: '' };
   const su = `Підтверджую ${W.su} — ${e.title}`, body = `Добрий день, Ірино!\n\nУсе правильно, підтверджую публікацію на сайті «Свої люди у Швейцарії».\n${W.own}\n${W.law}${W.ad}\nУмови розміщення (https://svoiludi.ch/uk/usloviya/) прочитав(ла) й приймаю.\n\n${okText(e)}\n\n${okUrl(e)}\n\n${who}`;
   const suf = `Виправлення — ${e.title}`, bodyf = `Добрий день, Ірино!\n\nБудь ласка, виправте:\n\n{text}\n\n${okUrl(e)}\n\n${who}`;
@@ -1089,18 +1115,18 @@ function openEvent(id, d, pv){
     if (s) return `<a class="org" href="/uk/#${esc(s.id)}">${s.photo ? `<img src="${esc(photoSrc(s.photo))}" alt="${esc(s.name)}">` : `<span class="ini">${esc(s.name[0])}</span>`}<span><b>${esc(s.name)}</b><small>${esc(s.role)}</small><br><u>Картка в довіднику →</u></span></a>`;
     if (o && o.org && cardOf(o)) return `<a class="org" href="/uk/organizacii/#${esc(o.org)}"><span class="ini">${esc((o.name || cardOf(o).name || '?')[0])}</span><span><b>${esc(o.name || cardOf(o).name)}</b><small>організація</small><br><u>Картка організації →</u></span></a>`;
     return `<${o.link ? `a href="${esc(o.link)}" ${ext}` : 'div'} class="org"><span class="ini">${esc((o.name || '?')[0])}</span><span><b>${esc(o.name || '')}</b><small>спільнота</small></span></${o.link ? 'a' : 'div'}>`; }).join('');
-  const PR = isPromo(e), past = e.repeat ? d < today : lastDay(e) < today;
+  const PR = isPromo(e), off = isOff(e), past = (e.repeat ? d < today : lastDay(e) < today) || off;
   box.innerHTML = `<div class="qm-top"><div class="qm-head">${e.sample ? `<span class="ev-k" style="color:var(--brown)">Зразок ${PR ? 'акції' : 'події'} · усе вигадане</span><a class="yours" href="/uk/akcii/#${PR ? 'akciya' : 'add'}">Тут може бути ${PR ? 'твоя акція' : 'твоя подія'}! Як додати →</a>` : ''}<span class="ev-k" style="color:${k.c}">${PR ? 'Акція фахівця <i class="ev-ad">Реклама</i>' : esc(k.t)}</span><h2 class="qm-title" id="qmTitle">${esc(e.title)}</h2></div><button class="qm-close" type="button" aria-label="Закрити">✕</button></div>
-    ${pv ? okBox(e) : ''}<div class="d-body">
+    ${pv === 'off' ? offBox(e) : pv ? okBox(e) : ''}<div class="d-body">
       <div class="d-col">
-        ${PR ? (() => { const o = offer(e); return `<div class="d-block"><h4>Пропозиція</h4><div class="pr-offer"><span class="pr-big">${esc(o.big)}</span><span class="pr-sub">${esc(o.sub || '')}</span>${o.more.map(x => `<span class="pr-more">${esc(x)}</span>`).join('')}<span class="pr-days">${esc(promoDays(e))}</span>${promoUntil(e) ? `<span class="pr-until">${esc(promoUntil(e))}</span>` : ''}</div>${condList(e.promo).length ? `<ul class="pr-conds">${condList(e.promo).map(c => `<li>${esc(c)}</li>`).join('')}</ul>` : ''}</div>`; })() : ''}
+        ${PR ? (() => { const o = offer(e); return `<div class="d-block"><h4>Пропозиція</h4><div class="pr-offer"><span class="pr-big">${esc(o.big)}</span><span class="pr-sub">${esc(o.sub || '')}</span>${o.more.map(x => `<span class="${x === o.pay ? 'pr-pay' : 'pr-more'}">${esc(x)}</span>`).join('')}${off ? '<span class="pr-end">Автор зняв цю акцію з сайту: вона більше не діє.</span>' : past ? '<span class="pr-end">Ця акція закінчилася.</span>' : `<span class="pr-days">${esc(promoDays(e))}</span>${promoUntil(e) ? `<span class="pr-until">${esc(promoUntil(e))}</span>` : ''}`}</div>${condList(e.promo).length ? `<ul class="pr-conds">${condList(e.promo).map(c => `<li>${esc(c)}</li>`).join('')}</ul>` : ''}</div>`; })() : ''}
         <div class="d-block"><h4>${PR ? 'Про акцію' : 'Про подію'}</h4><p>${esc(e.about)}</p></div>
         <div class="d-block"><h4>Мови</h4><div class="chips">${(e.langs || []).map(l => `<span>${esc(l)}</span>`).join('')}</div></div>
         ${(e.for || []).length ? `<div class="d-block"><h4>Для кого</h4><div class="chips">${e.for.map(l => `<span>${esc(l)}</span>`).join('')}${e.age ? `<span>${esc(e.age)}</span>` : ''}</div></div>` : ''}
         <div class="d-block"><h4>${(e.organizers || []).length > 1 ? 'Організатори' : 'Організатор'}</h4><div class="orgs">${orgs}</div></div>
       </div>
       <div class="d-side">
-        ${PR ? '' : `<div class="d-block"><h4>Коли</h4><div class="when">${esc(fmtFull(d))}${e.dateEnd && !e.repeat ? ` — ${D(e.dateEnd).getUTCDate()} ${MON_G[D(e.dateEnd).getUTCMonth()]}` : ''}${timeStr(e) ? ' · ' + esc(timeStr(e)) : ''}${e.repeat ? `<small>Повторюється: ${esc(repeatText(e))}</small>` : ''}${past ? '<small>Ця подія вже минула.</small>' : ''}</div></div>`}
+        ${PR ? '' : `<div class="d-block"><h4>Коли</h4><div class="when">${esc(fmtFull(d))}${e.dateEnd && !e.repeat ? ` — ${D(e.dateEnd).getUTCDate()} ${MON_G[D(e.dateEnd).getUTCMonth()]}` : ''}${timeStr(e) ? ' · ' + esc(timeStr(e)) : ''}${e.repeat ? `<small>Повторюється: ${esc(repeatText(e))}</small>` : ''}${off ? '<small>Організатор зняв цю подію з сайту.</small>' : past ? '<small>Ця подія вже минула.</small>' : ''}</div></div>`}
         <div class="d-block"><h4>Де</h4>${isRemote(e) ? '<span>Онлайн, посилання надсилає організатор</span>' : `${e.venue ? `<b>${esc(e.venue)}</b><br>` : ''}<a class="addr" href="${maps(e.address)}" ${ext}>${esc(e.address)}</a><span class="note">кантон ${esc(ktRu(e.canton))}${e.online ? ' · можна й онлайн' : ''}</span>`}</div>
         ${PR ? '' : `<div class="d-block"><h4>Ціна</h4><span>${esc(priceText(e))}</span>${(e.disc || []).length ? `<small class="note">${esc(e.disc.join(' · '))}</small>` : ''}${(e.payhow || []).length ? `<small class="note">Оплата: ${esc(e.payhow.join(', ').toLowerCase())}</small>` : ''}${e.seats ? `<small class="note">Місць: ${esc(e.seats)}</small>` : ''}</div>`}
         ${past ? '' : '<div class="d-block" data-wr-slot></div>'}
@@ -1159,7 +1185,7 @@ document.getElementById('reset').addEventListener('click', () => { Object.assign
 if (AK){
   const luck = document.getElementById('luck'), mh = document.getElementById('myhearts'), hc = document.getElementById('hclear');
   if (luck) luck.addEventListener('click', () => { const L = pool().filter(e => shown(e) && e.date <= today); if (!L.length){ toast('Поки немає акцій для вибору. Спробуй інший кантон або прибери частину вибору.'); return; }
-    const e = L[Math.floor(Math.random() * L.length)]; if (window.SVL_FLYER) SVL_FLYER.burst(luck, 14); toast('Тобі випала акція: ' + e.title + ' ♥'); openEvent(e.id); });
+    const e = L[Math.floor(Math.random() * L.length)]; if (window.SVL_FLYER) SVL_FLYER.burst(luck, 14); toast('Випадкова акція зі списку: ' + e.title + '. Умови для всіх однакові ♥'); openEvent(e.id); });
   if (mh) mh.addEventListener('click', () => { state.hearts = !state.hearts; render(); });
   if (hc) hc.addEventListener('click', () => { favSet([]); state.hearts = false; render(); toast('Серденька очищено на цьому пристрої.'); });
 }
@@ -1167,6 +1193,22 @@ if (AK){   // постоянная акция — только на первое
   const dur = document.getElementById('z-pr-dur'), cond = document.getElementById('z-pr-cond'), nw = cond && cond.querySelector('input[value="new"]');
   if (dur && nw){ const sync = () => { nw.disabled = dur.value === 'always'; if (dur.value === 'always') nw.checked = true; };
     dur.addEventListener('change', () => { sync(); nw.dispatchEvent(new Event('change', { bubbles: true })); }); setTimeout(sync, 600); }
+  /* юридическая проверка 11.10.2026 (документ проекта «akcii-pravo-proverka.md»):
+     1) скидка в % или франках на одну услугу — обычная цена обязательна (на сайте видна цена к оплате); без неё — только галочка «скидка одинаковая на всю группу»;
+     2) «Количество мест ограничено» — только с числом; 3) еда и напитки — условие «Кроме спиртных напитков» ставится само (AlkG Art. 42b);
+     4) профессии здоровья (врачи, психотерапевты, психологи, физиотерапия и др.) — акции не принимаем (MedBG Art. 40, PsyG Art. 27) */
+  const fm = document.getElementById('akciya'), kind = document.getElementById('z-pr-kind'), reg = document.getElementById('z-pr-regular'), grp = document.getElementById('z-pr-grp'),
+    noalc = cond && cond.querySelector('input[value="noalc"]'), health = fm && fm.querySelector('[data-zhealth]');
+  const HEALTH_DIRS = ['health', 'psy'], HEALTH_SPECS = ['Медичний догляд удома', 'Ветеринар', 'Натуропатія', 'Китайська медицина й акупунктура', 'Гомеопатія'];
+  const isHealth = r => !!r && r.t === 'spec' && (HEALTH_DIRS.includes(r.cat) || HEALTH_DIRS.includes(r.cat2) || (r.specs || []).some(x => HEALTH_SPECS.includes(x)));
+  const isFood = r => !!r && (r.t === 'org' ? r.dir === 'food' : r.cat === 'food' || r.cat2 === 'food');
+  const needReg = () => { if (!kind || !reg) return; const one = ['percent', 'amount'].includes(kind.value) && !(grp && grp.querySelector('input:checked'));
+    if (one) reg.setAttribute('data-req', ''); else reg.removeAttribute('data-req');
+    const m = reg.closest('.zf') && reg.closest('.zf').querySelector('[data-zregmark]'); if (m) m.hidden = !one; };
+  if (kind) kind.addEventListener('change', needReg); if (grp) grp.addEventListener('change', needReg); setTimeout(needReg, 600);
+  if (fm) fm.addEventListener('zcard', ev => { const r = ev.detail;
+    if (health) health.hidden = !isHealth(r);
+    if (noalc){ const food = isFood(r); noalc.disabled = food; if (food) noalc.checked = true; noalc.dispatchEvent(new Event('change', { bubbles: true })); } });
 }
 document.getElementById('trial').hidden = !ADMIN;
 const addbtn = document.getElementById('addbtn');
@@ -1176,14 +1218,15 @@ if (AK) document.querySelectorAll('#monthIcs,.viewsw').forEach(el => { el.style.
 fillSelects(); render();
 const fromHash = () => { let id = decodeURIComponent(location.hash.slice(1)); const wantFlyer = AK && /&flyer$/.test(id); id = id.replace(/&flyer$/, ''); if (id === 'digest'){ digest(); return; }
   const e0 = EVENTS.find(x => x.id === id); if (!AK && e0 && isPromo(e0)){ location.replace('/uk/akcii/#' + encodeURIComponent(id)); return; } if (id.startsWith('ok=')){ const [eid, key] = id.slice(3).split('.'); const e = EVENTS.find(x => x.id === eid); keyOk(e, key).then(ok => { if (ok){ OKKEY[eid] = key; openEvent(eid, null, true); } }); return; }
-  if (id && EVENTS.some(e => e.id === id && ((e.status === 'активен' && live(e)) || ADMIN))){ openEvent(id); if (wantFlyer){ const e = EVENTS.find(x => x.id === id), go = () => window.SVL_FLYER ? SVL_FLYER.open(flyerOf(e)) : setTimeout(go, 200); setTimeout(go, 250); } } };
+  if (id.startsWith('off=')){ const [eid, key] = id.slice(4).split('.'); const e = EVENTS.find(x => x.id === eid); if (!AK && e && isPromo(e)){ location.replace('/uk/akcii/#' + encodeURIComponent(id)); return; } keyOk(e, key).then(ok => { if (ok){ OKKEY[eid] = key; openEvent(eid, null, 'off'); } }); return; }
+  if (id && EVENTS.some(e => e.id === id && ((e.status === 'активен' && live(e)) || isOff(e) || ADMIN))){ openEvent(id); if (wantFlyer){ const e = EVENTS.find(x => x.id === id); if (isPromo(e) && (isOff(e) || lastDay(e) < today)) return; const go = () => window.SVL_FLYER ? SVL_FLYER.open(flyerOf(e)) : setTimeout(go, 200); setTimeout(go, 250); } } };
 fromHash(); addEventListener('hashchange', fromHash);
 </script>
 <script>window.HELP = Object.assign(window.HELP || {}, {
-  zpkind: '<p><b>Знижка у відсотках</b> — одне число, наприклад 20 %. Слова «до 50 %» не підходять: знижка має бути точною.</p><p><b>Знижка у франках</b> — на скільки CHF послуга дешевша.</p><p><b>Акційна ціна</b> — кінцева ціна на час акції.</p><p><b>Подарунок або бонус</b> — що людина отримає разом із послугою.</p><p><b>Безкоштовне знайомство</b> — коротка зустріч без оплати й без зобов’язань.</p><p>Розіграші й конкурси ми не розміщуємо: для них потрібні дозволи.</p>',
+  zpkind: '<p><b>Знижка у відсотках</b> — одне число, наприклад 20 %. Слова «до 50 %» не підходять: знижка має бути точною.</p><p><b>Знижка у франках</b> — на скільки CHF послуга дешевша.</p><p><b>Акційна ціна</b> — кінцева ціна на час акції.</p><p><b>Подарунок або бонус</b> — що людина отримає разом із послугою.</p><p><b>Безкоштовне знайомство</b> — коротка зустріч без оплати й без зобов’язань.</p><p>Для знижки у відсотках або франках на одну послугу впиши звичайну ціну: на сайті покажемо ціну, яку людина заплатить.</p><p>Розіграші й конкурси ми не розміщуємо: для них потрібні дозволи.</p><p>Не приймаємо акції на спиртні напої, тютюн і вейпи, ліки, зброю й кредити, а також акції лікарів, психотерапевтів, психологів та інших професій здоров’я: їм закон дозволяє лише стриману рекламу, без знижок і безкоштовних послуг.</p>',
   zpdur: '<p><b>На певні дати</b> — звичайна акція, до 90 днів. Після останнього дня вона йде в архів, повторити її можна кнопкою «Повторити».</p><p><b>Постійно</b> — акція «завжди», наприклад «перше прибирання за півціни». Вона лише на перше відвідування нового клієнта. Діє рік, потім ти підтверджуєш її листом. Не підтвердила — вона сама зникає з сайту.</p><p>Безкоштовно в період запуску, до 31.12.2027.</p>',
-  zpregular: '<p>Звичайна ціна — та, за якою ти працював(ла) безпосередньо перед акцією. Якщо вказати ціну, якої насправді не було, це вводить людей в оману. За швейцарським законом про недобросовісну конкуренцію (UWG) і правилами про вказування цін (PBV) так робити не можна.</p><p>Не впевнений(а)? Залиш поле порожнім: на сайті покажемо тільки знижку чи акційну ціну.</p>',
-  zpcond: '<p>Познач усе, що справді обмежує акцію. Умови показуються на сайті поруч із пропозицією. Чого немає в списку, напиши в описі.</p><p><b>Кількість місць обмежена</b> — вкажи, скільком клієнтам вистачить. Якщо місця закінчаться раніше строку, напиши нам, і ми знімемо акцію.</p>',
+  zpregular: '<p>Звичайна ціна — та, за якою ти працювала(-в) <b>щонайменше 30 днів поспіль безпосередньо перед акцією</b> і за якою працюєш з іншими клієнтами. Тоді на сайті буде «За акцією CHF 48 замість CHF 60».</p><p>Навіщо вона потрібна. За швейцарськими правилами про зазначення цін (PBV) для знижки у відсотках або франках на одну послугу людина має бачити ціну, яку вона заплатить. Без звичайної ціни її не порахувати.</p><p>Якщо знижка однакова на цілу групу послуг або товарів (наприклад, «−20 % на всі стрижки»), відміть галочку «Знижка однакова на всю групу» — тоді звичайна ціна не обов’язкова.</p><p>Ціну, якої насправді не було, вказувати не можна: це вводить людей в оману (закон про недобросовісну конкуренцію, UWG). На запит кантону ти маєш змогти показати звичайну ціну: прайс-лист, рахунки.</p>',
+  zpcond: '<p>Відміть усе, що справді обмежує акцію. Умови показуються на сайті поруч із пропозицією. Чого немає в списку, напиши в описі.</p><p><b>Кількість місць обмежена</b> — впиши, скільком клієнтам вистачить. Рахуєш ти сама(-м): флаєр може завантажити кожен, а місце займає той, хто записався. Коли місця закінчаться, зніми акцію за посиланням «Зняти з сайту» з листа про публікацію: вона перейде в архів, а повторити її потім можна кнопкою «Повторити».</p><p><b>Крім спиртних напоїв</b> — обов’язково для ресторанів, кафе, кейтерингу й магазинів: у Швейцарії на спиртні напої в рекламі не можна обіцяти знижки й подарунки (закон про алкоголь, AlkG).</p>',
   zfind: '<p><b>UID</b> — номер фірми або самозайнятого в реєстрі Швейцарії, вигляду CHE-123.456.789. Ми беремо його, коли розміщуємо картку, він є у твоїй картці на сайті.</p><p><b>Номер картки</b> — SG-0001 у фахівців, OR-0001 в організацій. Він є у твоїй картці на сайті, внизу.</p><p>Дані з картки ми вже перевірили, тому вписувати їх заново не потрібно. Посилання на підтвердження надішлемо на e-mail із картки: так ніхто не зможе розмістити запис від твого імені. Цей e-mail один для всіх підтверджень, у заявці його не змінити. Якщо для запису потрібен інший e-mail, впиши його в контактах: на сайті буде він.</p><p>Якщо картка на паузі, чекає на підтвердження або закінчився строк розміщення, за номером її не знайти: записи розміщуються тільки від активних карток.</p><p>Номер нікуди не надсилається: пошук іде тільки за опублікованими картками, просто на цій сторінці.</p>',
   zkind: '<p><b>Безкоштовно</b> і <b>безкоштовно з пожертвою</b> — зустріч, клуб, посиденьки, взаємодопомога. Пожертву кожен залишає за бажанням, скільки хоче. Реєстрація не потрібна.</p><p><b>Внесок на витрати</b> — організатор бере рівно стільки, скільки коштує зала, чай чи матеріали, і нічого на цьому не заробляє.</p><p><b>Платно</b> — квиток, плата за участь, продаж послуг або товарів. Такі події ми розміщуємо тільки від організаторів із реєстрацією у Швейцарії (UID, фірма або ферайн).</p><p>Організації, які розміщуються в нас безкоштовно, бо нічого не беруть із людей, вибирають тільки «Безкоштовно» або «Безкоштовно, можна залишити пожертву».</p>',
   zprice: '<p>Пиши <b>кінцеву ціну</b> у швейцарських франках: з усіма обов’язковими витратами (матеріали, MWST, якщо ти його сплачуєш). «CHF» уже стоїть, впиши тільки число, наприклад 25.</p><p>Нижче вибери, за що ця ціна: за людину, за родину, за одну зустріч або за всі зустрічі. Знижки познач позначками.</p>',
