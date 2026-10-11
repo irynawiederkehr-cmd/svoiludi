@@ -29,7 +29,9 @@
     note: '<b>Важливо для записів в інструментах.</b> Записи, зроблені в браузері, у застосунок самі не переходять. Перед встановленням натисни в інструменті «Зберегти резервну копію», а в застосунку — «Завантажити з резервної копії».',
     install_app: '📱 Встановити як застосунок', guide: 'Покрокова інструкція →',
     install_btn: 'Встановити застосунок «Свої люди»', pics: 'Так це виглядає на телефоні:',
-    menu: 'Меню', fold: 'Згорнути', search: 'Пошук'
+    menu: 'Меню', fold: 'Згорнути', search: 'Пошук',
+    cSpec: 'Фахівців у довіднику', cSpecTip: 'Скільки карток фахівців зараз видно на сайті. Зразки (вигадані) не рахуємо.',
+    cVis: 'Переглядів сторінок', cVisTip: 'Скільки разів відкривали сторінки сайту, з початку підрахунку. Лічильник без cookie, хто саме заходив — невідомо.'
   } : {
     tabs: ['Специалисты', 'Швейцария', 'Инструменты', 'Что нового', 'Ещё'],
     more: 'Ещё', swiss: 'Как устроена Швейцария', join: 'Как разместиться', evk: 'События и курсы', pro: 'Для специалистов и организаций', vak: 'Вакансии и партнёрство', about: 'О проекте', site: 'Сайт Ирины', privacy: 'Политика конфиденциальности',
@@ -45,7 +47,9 @@
     note: '<b>Важно для записей в инструментах.</b> Записи, сделанные в браузере, в приложение сами не переходят. Перед установкой нажми в инструменте «Сохранить резервную копию», а в приложении — «Загрузить из резервной копии».',
     install_app: '📱 Установить как приложение', guide: 'Пошаговая инструкция →',
     install_btn: 'Установить приложение «Свои люди»', pics: 'Так это выглядит на телефоне:',
-    menu: 'Меню', fold: 'Свернуть', search: 'Поиск'
+    menu: 'Меню', fold: 'Свернуть', search: 'Поиск',
+    cSpec: 'Специалистов в справочнике', cSpecTip: 'Сколько карточек специалистов сейчас видно на сайте. Образцы (вымышленные) не считаем.',
+    cVis: 'Просмотров страниц', cVisTip: 'Сколько раз открывали страницы сайта с начала подсчёта. Счётчик без cookie, кто именно заходил — неизвестно.'
   };
 
   var ua = navigator.userAgent;
@@ -132,7 +136,12 @@
     '.pa-lbtns button{min-height:48px;padding:10px 12px;border-radius:12px;border:1.5px solid var(--sage,#66704F);background:var(--sage-soft,#E3E6D6);color:var(--ink,#2F2924);font:700 1rem/1.2 var(--body,system-ui);cursor:pointer;-webkit-tap-highlight-color:transparent}',
     '.pa-lbtns button:active{transform:scale(.98)}',
     '@media (max-width:1100px){html.pa-app .pa-lang{bottom:calc(84px + env(safe-area-inset-bottom))}}',
-    '@media print{.pa-tabs,.pa-card,.pa-back,.pa-foot,.pa-flink,.pa-ibtn{display:none!important}}'
+    /* маленькие счётчики внизу страницы (11.10.2026) */
+    '.pa-cnt{flex:1 0 100%;display:flex;flex-wrap:wrap;gap:6px 8px;margin:6px 0 0;padding:0;font:600 .74rem/1.35 var(--body,Manrope,system-ui);color:var(--muted,#7A6E62)}',
+    '.pa-cnt span{display:inline-flex;align-items:baseline;gap:5px;background:var(--sage-soft,#E3E6D6);border-radius:999px;padding:3px 11px}',
+    '.pa-cnt[hidden],.pa-cnt span[hidden]{display:none}',
+    '.pa-cnt b{font-weight:800;color:var(--ink,#2F2924);font-variant-numeric:tabular-nums}',
+    '@media print{.pa-tabs,.pa-card,.pa-back,.pa-foot,.pa-flink,.pa-ibtn,.pa-cnt{display:none!important}}'
   ].join('\n');
   document.head.appendChild(css);
 
@@ -340,8 +349,48 @@
   }
   var IRA = ira();
 
+  /* 6. маленькие счётчики внизу каждой страницы (11.10.2026): «Специалистов в справочнике» (data/stats.js, считает _i18n/sync.py) и
+     «Просмотров страниц» (счётчик GoatCounter без cookie, который уже стоит на сайте; число появляется само, когда в нём включена
+     галочка «Allow adding visitor counts»). Если число недоступно или равно нулю — строки нет: вымышленных чисел не показываем. */
+  function counters() {
+    if (document.querySelector('.pa-cnt')) return;
+    var foot = document.querySelector('footer'), cred = foot ? null : document.querySelector('.credit');
+    if (!foot && !cred) return;
+    var box = document.createElement('div'); box.className = 'pa-cnt'; box.hidden = true;
+    var loc = UK ? 'uk-UA' : 'ru-RU';
+    function slot(label, tip) {   // два места сразу, чтобы порядок не зависел от того, какой ответ придёт раньше
+      var sp = document.createElement('span'); sp.title = tip; sp.hidden = true;
+      sp.appendChild(document.createTextNode(label + ': ')); sp.appendChild(document.createElement('b'));
+      box.appendChild(sp);
+      return function (n) { sp.lastChild.textContent = n.toLocaleString(loc).replace(/[  ]/g, ' '); sp.hidden = false; box.hidden = false; };
+    }
+    var setSpec = slot(T.cSpec, T.cSpecTip), setVis = slot(T.cVis, T.cVisTip);
+    if (foot) foot.appendChild(box); else cred.parentNode.insertBefore(box, cred.nextSibling);
+
+    var today = new Date().toISOString().slice(0, 10);
+    var s = document.createElement('script'); s.src = '/data/stats.js';
+    s.onload = function () {
+      var S = window.STATS;
+      if (S && S.specialists > 0 && (!S.specialistsUntil || S.specialistsUntil >= today)) setSpec(S.specialists);
+    };
+    document.head.appendChild(s);
+
+    if (!/(^|\.)svoiludi\.ch$/.test(location.hostname) || !window.fetch) return;   // на копиях и в превью чужой счётчик не трогаем
+    var KEY = 'svoiludi-views';
+    try { var c = JSON.parse(sessionStorage.getItem(KEY) || 'null'); if (c && c.n > 0 && Date.now() - c.t < 1800000) { setVis(c.n); return; } } catch (e) {}
+    fetch('https://svoiludi.goatcounter.com/counter/TOTAL.json', { cache: 'no-store' })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (j) {
+        var x = j && parseInt(String(j.count).replace(/\D/g, ''), 10);
+        if (!(x > 0)) return;
+        try { sessionStorage.setItem(KEY, JSON.stringify({ t: Date.now(), n: x })); } catch (e) {}
+        setVis(x);
+      }).catch(function () {});
+  }
+
   function start() {
     topTiles();
+    counters();
     if (STANDALONE) { tabBar(); langAsk(); return; }
     miniBar();
     if (deferred) installBtn();

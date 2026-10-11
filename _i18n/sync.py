@@ -64,7 +64,29 @@ def apply(path):
     json.dump(TM, open(p, 'w', encoding='utf-8'), ensure_ascii=False, indent=0, sort_keys=True)
     print(f'applied {len(todo)} units'); build()
 
+def stats():
+    """data/stats.js: число специалистов для маленького счётчика внизу страниц (11.10.2026, assets/pwa-app.js).
+    Считаем ровно те карточки, которые сейчас видны в справочнике (как hiddenReason в index.html): не образец, статус «активен», есть фото,
+    оплата не закончилась. specialistsUntil — самая ранняя дата конца оплаты среди посчитанных: после неё страница число не показывает,
+    пока файл не пересоберут. Файл переписываем только если цифры изменились (чтобы не плодить правки)."""
+    import subprocess
+    js = ("global.window={};new Function('window',require('fs').readFileSync('data/specialists.js','utf8'))(window);"
+          "const t=new Date().toISOString().slice(0,10);"
+          "const L=window.SPECIALISTS.filter(x=>!x.sample&&x.status==='активен'&&x.photo&&(!x.paidUntil||x.paidUntil>=t));"
+          "console.log(JSON.stringify({n:L.length,until:L.map(x=>x.paidUntil).filter(Boolean).sort()[0]||null,today:t}))")
+    out = subprocess.run(['node', '-e', js], cwd=ROOT, capture_output=True, text=True)
+    if out.returncode: print('stats: node failed', out.stderr[:200]); return
+    d = json.loads(out.stdout)
+    p = os.path.join(ROOT, 'data', 'stats.js'); old = open(p, encoding='utf-8').read()
+    head = old[:old.index('window.STATS')]
+    m = re.search(r"specialists:\s*(\d+),\s*specialistsUntil:\s*(null|'[\d-]+')", old)
+    want_until = 'null' if not d['until'] else f"'{d['until']}'"
+    if m and int(m.group(1)) == d['n'] and m.group(2) == want_until: print(f"stats: без изменений ({d['n']} специалистов)"); return
+    open(p, 'w', encoding='utf-8').write(head + f"window.STATS = {{ specialists: {d['n']}, specialistsUntil: {want_until}, updated: '{d['today']}' }};\n")
+    print(f"stats: специалистов {d['n']}, обновлено {d['today']}")
+
 def build():
+    stats()
     m = pages.build()
     print(f'built; untranslated left: {len(m)}')
     if m: sys.exit(1)

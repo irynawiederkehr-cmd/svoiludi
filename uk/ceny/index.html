@@ -567,6 +567,34 @@ a.yours:hover{background:#EBD3A3}
 #ceny .cn-calc .cn-inv th{font:700 12px var(--body);color:var(--muted);text-align:left;padding:4px 0;border-bottom:1px solid var(--line)}
 #ceny .cn-calc .cn-inv th:last-child{text-align:right}
 #ceny .cn-calc .cn-inv td small{display:block;font-size:12px;color:var(--muted)}
+#ceny .cn-zl{padding:14px 16px;border:1.5px dashed var(--brown);border-radius:18px;background:color-mix(in srgb,var(--sage-soft) 45%,var(--paper));display:flex;flex-direction:column;gap:10px}
+#ceny .cn-zl .cn-zq>label{display:block;font-weight:700;margin-bottom:6px}
+#ceny .cn-zl small{display:block;color:var(--muted);font-size:12px;line-height:1.4;margin-top:6px}
+#ceny .cn-zlrow{display:flex;gap:8px;align-items:stretch}
+#ceny .cn-zlrow input{flex:1;min-width:0;font:inherit;color:var(--ink);background:var(--paper);border:1.5px solid var(--line);border-radius:10px;padding:9px 12px}
+#ceny .cn-zlrow .cn-btn{margin:0;flex:none;white-space:nowrap}
+#ceny .cn-zmsg{font-size:14px;line-height:1.45;border-radius:10px;padding:10px 12px;background:var(--mustard-soft);border:1px solid var(--mustard)}
+#ceny .cn-zmsg.cn-zoff{background:var(--warn-soft);border-color:var(--warn)}
+#ceny .cn-zpick{display:flex;flex-direction:column;gap:8px;margin-top:10px}
+#ceny .cn-zpick button{font:inherit;text-align:left;cursor:pointer;background:var(--paper);border:1.5px solid var(--line);border-radius:12px;padding:9px 12px;color:var(--ink)}
+#ceny .cn-zpick button:hover{border-color:var(--brown)}
+#ceny .cn-zpick small{margin-top:0}
+#ceny .cn-zp{background:var(--paper);border:1.5px solid var(--brown);border-radius:16px;padding:14px 16px;text-align:left}
+#ceny .cn-zp-top{display:flex;gap:12px;align-items:center}
+#ceny .cn-zp-ini{width:48px;height:48px;border-radius:50%;background:var(--sage-soft);display:grid;place-items:center;font-weight:700;color:var(--brown);flex:none}
+#ceny .cn-zp-k{display:block;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--brown)}
+#ceny .cn-zp-top b{display:block;font-size:17px;line-height:1.25}
+#ceny .cn-zp-top small{margin:0}
+#ceny .cn-zp-dl{display:grid;gap:6px;margin:12px 0 0;font-size:14px}
+#ceny .cn-zp-dl div{display:grid;grid-template-columns:140px 1fr;gap:8px}
+#ceny .cn-zp-dl dt{color:var(--muted)}
+#ceny .cn-zp-dl dd{margin:0;font-weight:600;overflow-wrap:anywhere}
+#ceny .cn-zp-fnd{margin:12px 0 0;padding:10px 12px;list-style:none;display:flex;flex-direction:column;gap:3px;font-size:14px;background:var(--sage-soft);border-radius:10px}
+#ceny .cn-zp-note{margin:10px 0 0;font-size:13px;color:var(--muted);line-height:1.5}
+#ceny .cn-zp .cn-lnk{margin-top:10px;display:inline-block;background:none;border:0;padding:0;font:inherit;font-size:14px;color:var(--sage);text-decoration:underline;cursor:pointer}
+#ceny .cn-calc select:disabled{opacity:.75;cursor:not-allowed}
+#ceny .cn-zp-dl div{grid-template-columns:1fr;gap:0}
+#ceny .cn-zlrow{flex-direction:column}
 #ceny .cn-calc .cn-inv tr.cn-cur td{background:var(--sage-soft);font-weight:700}
 #ceny .cn-calc .cn-inv tr.cn-cur td:first-child{padding-left:8px}
 #ceny .cn-calc .cn-inv tr.cn-cur td:last-child{padding-right:8px}
@@ -635,9 +663,6 @@ a.yours:hover{background:#EBD3A3}
 #ceny .cn-calc input[type=date], #ceny .cn-calc input[type=number]{font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:6px 8px;max-width:48%;min-width:0}
 #ceny .cn-zn .cn-chs{display:flex;flex-wrap:wrap;gap:6px;margin:2px 0 6px}
 #ceny .cn-zn .cn-chs span{padding:3px 10px;border-radius:999px;background:var(--mustard-soft);font-size:13px;font-weight:700;color:var(--brown)}
-#ceny .cn-nm{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
-#ceny .cn-nm .cn-box b{display:block;font:400 40px var(--display);line-height:1.1;color:var(--brown)}
-#ceny .cn-nm .cn-box span.cn-l{font-size:13px;color:var(--muted)}
 #ceny .cn-stps{counter-reset:stp}
 #ceny .cn-stps .cn-box{position:relative;padding-top:42px}
 #ceny .cn-stps .cn-box::before{counter-increment:stp;content:counter(stp);position:absolute;left:14px;top:12px;width:24px;height:24px;border-radius:50%;background:var(--sage);color:var(--paper);display:grid;place-items:center;font:700 13px var(--body)}
@@ -1100,6 +1125,13 @@ a.yours:hover{background:#EBD3A3}
   <p class="cn-muted">Ви вже в пакеті й хочете більше? Платите лише різницю за залишок терміну, заново платити не потрібно, кінець терміну не змінюється. Вкажіть, що у вас зараз, і калькулятор покаже доплату за будь-який інший пакет, очний або онлайн. Це попередній розрахунок, а не рахунок.</p>
   <div class="cn-cstep">
     <h3><span class="cn-n">1</span>Що у вас зараз</h3>
+    <div class="cn-zl" id="ulook">
+      <div class="cn-zq" id="usearch"><label for="ufind">Уже є в «Своїх людях»? Знайдіть свою картку<button type="button" class="cn-qh" aria-label="Що таке номер картки та UID" aria-expanded="false" data-t="Номер картки (SG-0001 у фахівців, OR-0001 в організацій) стоїть унизу вашої картки на сайті. UID — це реєстраційний номер вашої фірми з торгового реєстру, він виглядає так: CHE-123.456.789. За будь-яким із них калькулятор знаходить саме вашу картку й підставляє те, що в ній записано. Пошук іде просто у вашому браузері, номер нікуди не надсилається.">?</button></label>
+        <div class="cn-zlrow"><input id="ufind" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="UID або номер картки" aria-label="UID або номер картки"><button class="cn-btn" type="button" id="ubtn">Знайти</button></div>
+        <small>Впишіть UID (CHE-123.456.789) або номер картки (SG-0001, OR-0001). Основний кантон, пакет і строк з картки підставляться самі, залишиться вибрати, на який пакет перейти. Картки немає або номера немає під рукою? Заповніть поля нижче вручну.</small></div>
+      <p class="cn-zmsg" id="umsg" role="status" hidden></p>
+      <div id="uprof" hidden></div>
+    </div>
     <label class="cn-crow"><span>Ваш пакет<small>Той, що вказаний в останньому рахунку</small></span><select id="tf" aria-label="Ваш пакет"></select></label>
     <label class="cn-crow"><span>На який термін оплачено<small>Рік, пів року або квартал, як у рахунку</small></span><select id="tp" aria-label="На який термін оплачено"><option value="y">Рік</option><option value="h">Пів року</option><option value="q">Квартал</option></select></label>
     <label class="cn-crow"><span>Оплачено до<small>Дата кінця терміну з рахунку або листа</small></span><input type="date" id="td" aria-label="Оплачено до"></label>
@@ -1168,15 +1200,6 @@ a.yours:hover{background:#EBD3A3}
     <div class="cn-box"><h3>Людина пише</h3><p class="cn-small">Кнопка відкриває обраний вами канал на пристрої людини з готовим текстом. Лишається натиснути «Надіслати».</p></div>
     <div class="cn-box"><h3>Сайт нічого не зберігає</h3><p class="cn-small">Повідомлення не проходить через наш сервер і ніде не зберігається. Ім’я запам’ятовується лише в браузері людини. Кнопка «Зв’язатися» лишається як була.</p></div>
   </div>
-  </section>
-<section class="cn-sec" id="chisla">
-  <h2>Скільки людей користуються довідником</h2>
-  <p class="cn-muted">Ціни мають спиратися на цифри, тому ми показуємо два числа й оновлюємо їх 1-го числа кожного місяця.</p>
-  <div class="cn-nm" id="nm">
-    <div class="cn-box"><span class="cn-l">Фахівців у довіднику</span><b id="nSpec">128</b><p class="cn-small">Рахуємо картки, які зараз видно на сайті.</p></div>
-    <div class="cn-box"><span class="cn-l">Відвідувань сайту за місяць: <span id="nMon">вересень 2026</span></span><b id="nVis">4 310</b><p class="cn-small" id="nVisN">Відвідування: один захід на сайт. Рахуємо без cookie і без запису особистих даних.</p></div>
-  </div>
-  <p class="cn-sample" id="nSample">Зразок · цифри вигадані. На робочій сторінці тут справжні числа.</p>
   </section>
 <section class="cn-sec" id="tabl">
   <h2>Пакети поруч</h2>
@@ -1269,8 +1292,6 @@ a.yours:hover{background:#EBD3A3}
 
 
 
-
-
   </div>
 <footer>
     <span>© 2026 Свої люди у Швейцарії · <a href="/uk/o-proekte/">Про проєкт</a> · проєкт <a href="https://voznesenskaya.ch/uk/">Ірини Вознесенської</a></span>
@@ -1310,8 +1331,22 @@ a.yours:hover{background:#EBD3A3}
     uNeed:'Вкажіть дату, до якої оплачено ваш пакет, і калькулятор покаже доплату.',uPast:'Термін уже закінчився. Замовте пакет заново: доплата не потрібна.',
     uHead:'Залишилося днів: ',uOf:' із ',uTo:'Перехід на пакет',uPay:'Доплата, CHF без MWST',uLow:'Дешевший або рівний за ціною. Перейти можна під час продовження, за залишок терміну гроші не повертаємо.',
     uSmall:'Доплата менше 30 CHF. Ми її не виставляємо, новий пакет увімкнеться під час продовження.',uTop:'Потрібне вільне місце ТОП. Перевірте в розділі «Як замовити пакет».',
-    uExtra:'В онлайн-пакетах додаткові кантони не потрібні, їхня оплата в розрахунок не входить.',uNow:'Зараз у вас',uGrp:{i:'Очні пакети',o:'Онлайн-пакети'},uCur:'ваш пакет',uReset:'Розрахунок видалено з браузера',
-    visSoon:'Лічильник відвідувань ми підключимо скоро. Поки показуємо лише кількість фахівців.'
+    uEmpty:'Впишіть UID або номер картки.',
+    uFormat:'Такого номера не знайти. UID виглядає так: CHE-123.456.789. Номер картки так: SG-0001 або OR-0001.',
+    uNone:'Опублікованої картки з цим номером немає. Перевірте номер. Якщо картки ще немає, заповніть поля нижче вручну.',
+    uMany:'Під цим UID кілька карток. Виберіть свою:',
+    uOffwait:'Картка {n} ще чекає на підтвердження. Щойно ви підтвердите її за посиланням із нашого листа й вона з’явиться на сайті, тут можна буде порахувати пакет.',
+    uOffpause:'Картка {n} зараз не активна. Щоб знову відкрити картку, напишіть нам з e-mail картки.',
+    uOffend:'Строк розміщення картки {n} закінчився {d}. Щоб продовжити, напишіть нам з e-mail картки.',
+    uFreeOrg:'Організація {n} нічого не бере з людей і розміщується безкоштовно завжди, пакети їй не потрібні.',
+    uNoData:'Не вдалося завантажити довідник. Оновіть сторінку або заповніть поля нижче вручну.',
+    uKspec:'Ваша картка в довіднику',uKorg:'Картка організації',uSample:'Зразок · усе вигадане',uUid:'UID',uNum:'Номер картки',
+    uFnd:'Підставили з картки',uMainC:'Основний кантон',uPkg:'Пакет',uBase:'Базова, платного рівня немає',uTill:' до ',uCants:'Додаткові кантони',uPrices:'Прайс-лист',uHas:'є',
+    uLocked:'Основний кантон узято з картки, і він не змінюється. Решту перевірте за останнім рахунком: на який строк ви оплатили (рік, пів року чи квартал), у картці не записано.',
+    uFirm:'У вашої фірми в довіднику ще карток: {n}. Якщо ця друга або наступна за ціною, позначте нижче знижку фірмі −30 %.',
+    uFreeCard:'Оплаченого пакета в картки немає, вона розміщена безкоштовно. Якщо ви вже платили, впишіть дату кінця строку з рахунку.',
+    uChange:'Це не моя картка, ввести інший номер',
+    uExtra:'В онлайн-пакетах додаткові кантони не потрібні, їхня оплата в розрахунок не входить.',uNow:'Зараз у вас',uGrp:{i:'Очні пакети',o:'Онлайн-пакети'},uCur:'ваш пакет',uReset:'Розрахунок видалено з браузера'
   };
   var PRICE={i:{b:99,v:240,t:480},o:{b:279,v:360,t:600}};
   var BIG=[0,1,2,8,11,16,18,21,24];
@@ -1496,6 +1531,7 @@ a.yours:hover{background:#EBD3A3}
     if(C.indexOf(j.main)>=0)U.main=j.main;
     U.whole=!!j.whole;U.price=!!j.price;U.firm=!!j.firm;
     U.cant=Math.max(0,Math.min(5,parseInt(j.cant,10)||0));U.places=Math.max(0,Math.min(60,parseInt(j.places,10)||0));
+    U.card=/^(spec|org):[\w.-]+$/.test(j.card||'')?j.card:'';
   }}catch(e){}}
   function uFill(){
     var h='';['i','o'].forEach(function(M){h+='<optgroup label="'+T.uGrp[M]+'">'+['b','v','t'].map(function(q){var v=M+'.'+q;return '<option value="'+v+'"'+(v===U.cur?' selected':'')+'>'+T.pk[M][q]+'</option>'}).join('')+'</optgroup>'});
@@ -1537,35 +1573,122 @@ a.yours:hover{background:#EBD3A3}
     uFill();uRun();try{localStorage.removeItem(UK)}catch(e){}
   });
 
+
+  /* поиск своей карточки в калькуляторе перехода. Логика как в assets/zayavka.js (решение Ирины 11.10.2026):
+     UID или номер SG-/OR-, находятся только активные карточки, поиск идёт в браузере, номер никуда не отправляется.
+     Вымышленные образцы показываем только в черновике (вне svoiludi.ch); на сайте только настоящие данные справочника. */
+  (function(){
+    var look=$('ulook');if(!look)return;
+    var LIVE=/(^|\.)svoiludi\.ch$/.test(location.hostname),TODAY=new Date().toISOString().slice(0,10);
+    var UKL=(document.documentElement.lang||'')==='uk'?'.uk':'';
+    var KA={zh:0,zurich:0,be:1,bern:1,berne:1,lu:2,luzern:2,lucerne:2,ur:3,uri:3,sz:4,schwyz:4,ow:5,obwalden:5,nw:6,nidwalden:6,gl:7,glarus:7,zg:8,zug:8,fr:9,freiburg:9,fribourg:9,so:10,solothurn:10,bs:11,baselstadt:11,bl:12,basellandschaft:12,baselland:12,sh:13,schaffhausen:13,ar:14,appenzellausserrhoden:14,ai:15,appenzellinnerrhoden:15,sg:16,stgallen:16,gr:17,graubunden:17,grisons:17,ag:18,aargau:18,tg:19,thurgau:19,ti:20,ticino:20,tessin:20,vd:21,vaud:21,waadt:21,vs:22,valais:22,wallis:22,ne:23,neuchatel:23,neuenburg:23,ge:24,geneve:24,geneva:24,genf:24,ju:25,jura:25};
+    function kIdx(n){var x=String(n||'').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[^a-z]/g,'');return KA.hasOwnProperty(x)?KA[x]:-1}
+    var SAMP={S:[
+      {id:'anna-keller',num:'SG-0001',uid:'CHE-999.000.001',name:'Анна Келлер',firm:'Keller Integration GmbH',status:'активен',paidUntil:'2027-12-31',tiers:[{canton:'Zürich',level:'vip',until:'2027-12-31'}],sample:true,prices:[1],places:[{canton:'Zürich'}]},
+      {id:'olga-marti',num:'SG-0002',uid:'CHE-999.000.002',name:'Ольга Марті',firm:'Praxis Marti GmbH',status:'активен',paidUntil:'2027-12-31',tiers:[{canton:'Zürich',level:'партнёр',until:'2027-12-31'}],sample:true,places:[{canton:'Zürich'}]},
+      {id:'dmitri-huber',num:'SG-0003',uid:'CHE-999.000.003',name:'Дмитро Хубер',status:'активен',paidUntil:'2027-12-31',tiers:[],sample:true,places:[{canton:'Zug'},{canton:'Luzern',paidUntil:'2027-12-31',extra:true}]},
+      {id:'irina-frei',num:'SG-0006',uid:'CHE-999.000.006',name:'Ірина Фрай',status:'активен',paidUntil:'2027-12-31',tiers:[{canton:'Aargau',level:'vip',until:'2027-12-31'}],sample:true,places:[{canton:'Aargau'}]},
+      {id:'maria-weber',num:'SG-0010',uid:'CHE-999.000.010',name:'Марія Вебер',status:'пауза',paidUntil:'2027-12-31',tiers:[],sample:true,places:[{canton:'Zürich'}]}],
+      O:[{id:'obrazec-centr-pomoshchi',num:'OR-0001',name:'Центр допомоги «Приклад» (зразок)',form:'Verein',free:true,canton:'Zürich',zefix:'зразок',status:'активен',sample:true,confirm:{date:'2026-10-10'}},
+         {id:'obrazec-firma-kejtering',num:'OR-0002',name:'Кейтеринг «Приклад» GmbH (зразок)',form:'GmbH',canton:'Zürich',zefix:'зразок',status:'активен',sample:true,confirm:{date:'2026-10-10'}}]};
+    function esc(x){return String(x==null?'':x).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+    function ymd(x){return x?x.split('-').reverse().join('.'):''}
+    var q=$('ufind'),msg=$('umsg'),prof=$('uprof'),box=$('usearch'),CARD=null,LIST=[];
+    function tell(h,warn){msg.innerHTML=h;msg.hidden=!h;msg.className=k('zmsg'+(warn?' zoff':''))}
+    function once(src,key,cb){if(Array.isArray(window[key])){cb();return}var el=document.createElement('script');el.src=src;el.onload=cb;el.onerror=cb;document.head.appendChild(el)}
+    function data(cb){once('/data/specialists'+UKL+'.js','SPECIALISTS',function(){once('/data/organizations'+UKL+'.js','ORGANIZATIONS',cb)})}
+    function arr(key,samp){var a=window[key];return Array.isArray(a)&&a.length?a:(LIVE?[]:samp)}
+    function recs(){
+      var r=[];
+      arr('SPECIALISTS',SAMP.S).forEach(function(s){
+        var pl=s.places||[],m=pl.length?kIdx(pl[0].canton):-1,tier='',tu='',cs={};
+        (s.tiers||[]).forEach(function(t){if(kIdx(t.canton)===m&&t.until>=TODAY){var l=/vip/i.test(t.level)?'t':'v';if(!tier||l==='t'){tier=l;tu=t.until}}});
+        pl.forEach(function(p){var i=kIdx(p.canton);if(i>=0&&i!==m&&p.paidUntil&&p.paidUntil>=TODAY)cs[i]=1});
+        var off=s.status==='активен'?(s.paidUntil&&s.paidUntil<TODAY?'end':''):(/^на п[оі]дтвер/.test(s.status||'')?'wait':'pause');
+        r.push({t:'spec',id:s.id,name:s.name,sub:[s.role,s.firm].filter(Boolean).join(' · '),uid:s.uid||'',num:s.num||'',off:off,until:s.paidUntil||'',sample:!!s.sample,main:m,tier:tier,tu:tu,cant:Object.keys(cs).length,price:!!(s.prices&&s.prices.length),free:false});
+      });
+      arr('ORGANIZATIONS',SAMP.O).forEach(function(o){
+        var off=o.status==='активен'?(o.confirm?'':'wait'):(/^на п[оі]дтвер/.test(o.status||'')?'wait':'pause');
+        r.push({t:'org',id:o.id,name:o.name,sub:[o.name_ru,o.form].filter(Boolean).join(' · '),uid:/CHE/i.test(o.zefix||'')?o.zefix:'',num:o.num||'',off:off,until:'',sample:!!o.sample,main:kIdx(o.canton),tier:'',tu:'',cant:0,price:false,free:!!o.free});
+      });
+      return r;
+    }
+    function digits(x){return String(x||'').replace(/\D/g,'')}
+    function parseQ(v){
+      v=String(v||'').toUpperCase().replace(/\s+/g,'');
+      var m=v.match(/^(SG|OR)-?0*(\d{1,5})$/);if(m)return {num:m[1]+'-'+('0000'+m[2]).slice(-4)};
+      var d=digits(v);if(d.length===9&&/^(CHE)?[\d.\-]+(MWST|TVA|IVA|VAT|HR)?$/.test(v))return {uid:d};
+      return null;
+    }
+    function find(v){var p=parseQ(v);if(!p)return null;return recs().filter(function(r){return p.num?r.num.toUpperCase()===p.num:digits(r.uid)===p.uid})}
+    function offText(r){return esc(T['uOff'+r.off]||T.uOffpause).replace('{n}','<b>'+esc(r.name)+'</b>').replace('{d}',esc(ymd(r.until)))}
+    function row(label,val){return val?'<div><dt>'+esc(label)+'</dt><dd>'+esc(val)+'</dd></div>':''}
+    function render(r,freeCard,others){
+      var lines=[];
+      if(r.main>=0)lines.push(T.uMainC+': '+C[r.main]);
+      lines.push(T.uPkg+': '+(r.tier?T.pk.i[r.tier]+T.uTill+ymd(r.tu):T.uBase));
+      if(r.cant>0)lines.push(T.uCants+': '+r.cant);
+      if(r.price)lines.push(T.uPrices+': '+T.uHas);
+      return '<div class="'+k('zp')+'"><div class="'+k('zp-top')+'"><span class="'+k('zp-ini')+'">'+esc((r.name||'?').trim().charAt(0))+'</span><div><span class="'+k('zp-k')+'">'+esc(T[r.t==='org'?'uKorg':'uKspec'])+(r.sample?' · '+esc(T.uSample):'')+'</span><b>'+esc(r.name)+'</b>'+(r.sub?'<small>'+esc(r.sub)+'</small>':'')+'</div></div>'
+        +'<dl class="'+k('zp-dl')+'">'+row(T.uUid,r.uid)+row(T.uNum,r.num)+'</dl>'
+        +'<ul class="'+k('zp-fnd')+'"><li><b>'+esc(T.uFnd)+':</b></li>'+lines.map(function(x){return '<li>'+esc(x)+'</li>'}).join('')+'</ul>'
+        +'<p class="'+k('zp-note')+'">'+esc(T.uLocked)+'</p>'
+        +(freeCard?'<p class="'+k('zp-note')+'">'+esc(T.uFreeCard)+'</p>':'')
+        +(others>0?'<p class="'+k('zp-note')+'">'+esc(T.uFirm).replace('{n}',others)+'</p>':'')
+        +'<button type="button" class="'+k('lnk')+'" data-zl="change">'+esc(T.uChange)+'</button></div>';
+    }
+    function apply(r,restoring){
+      CARD=r;U.card=r.t+':'+r.id;
+      if(r.main>=0)U.main=C[r.main];
+      if(!restoring){
+        U.cur='i.'+(r.tier||'b');
+        var till=r.tier?r.tu:(r.until||'');if(till)U.until=till;
+        U.cant=Math.min(5,r.cant);U.price=r.price;
+      }
+      var others=r.uid?recs().filter(function(x){return x.t==='spec'&&x.id!==r.id&&x.uid&&x.uid===r.uid&&!x.off}).length:0;
+      prof.innerHTML=render(r,!r.tier&&!r.until,others);prof.hidden=false;box.hidden=true;tell('');
+      uFill();$('tm').disabled=r.main>=0;uRun();
+    }
+    function clear(){
+      CARD=null;U.card='';$('tm').disabled=false;prof.hidden=true;prof.innerHTML='';box.hidden=false;q.value='';tell('');uRun();
+    }
+    function search(){
+      var v=q.value.trim();
+      if(!v){tell(esc(T.uEmpty));q.focus();return}
+      if(!parseQ(v)){tell(esc(T.uFormat),true);q.focus();return}
+      data(function(){
+        var all=find(v)||[],res=all.filter(function(r){return !r.off});
+        if(!res.length){tell(all.length?offText(all[0]):esc(LIVE&&!arr('SPECIALISTS',[]).length?T.uNoData:T.uNone),!!all.length);return}
+        if(res.length===1){pick(res[0]);return}
+        LIST=res;
+        tell(esc(T.uMany)+'<span class="'+k('zpick')+'">'+res.map(function(r,i){return '<button type="button" data-zpick="'+i+'"><b>'+esc(r.name)+'</b><small>'+esc([r.sub,r.num].filter(Boolean).join(' · '))+'</small></button>'}).join('')+'</span>');
+      });
+    }
+    function pick(r){
+      if(r.free){tell(esc(T.uFreeOrg).replace('{n}','<b>'+esc(r.name)+'</b>'));return}
+      apply(r,false);
+    }
+    $('ubtn').addEventListener('click',search);
+    q.addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();search()}});
+    look.addEventListener('click',function(e){
+      var p=e.target.closest('[data-zpick]');if(p){pick(LIST[+p.getAttribute('data-zpick')]);return}
+      if(e.target.closest('[data-zl="change"]')){clear();q.focus()}
+    });
+    $('tclr').addEventListener('click',function(){clear()});
+    if(U.card){
+      var m=U.card.split(':');
+      data(function(){
+        var r=recs().filter(function(x){return x.t===m[0]&&x.id===m[1]&&!x.off&&!x.free})[0];
+        if(r)apply(r,true);else{U.card='';uRun()}
+      });
+    }
+  })();
+
   /* образец индикатора свободных мест */
   if($('bsel')){
     var bd=function(){[].forEach.call(document.querySelectorAll('#brd [data-s]'),function(e){e.classList[e.getAttribute('data-s')===$('bsel').value?'add':'remove'](P+'on')})};
     $('bsel').addEventListener('change',bd);bd();
   }
-
-  /* счётчики: настоящие числа берём из данных сайта, вымышленных на сайте не показываем */
-  (function(){
-    if(!$('nm'))return;
-    function numFmt(n){return String(n).replace(/\B(?=(\d{3})+(?!\d))/g,' ')}
-    function ld(src,cb){var el=document.createElement('script');el.src=src;el.onload=cb;el.onerror=cb;document.head.appendChild(el)}
-    var today=new Date().toISOString().slice(0,10);
-    ld('/data/specialists.js',function(){
-      var A=window.SPECIALISTS;
-      if(!Array.isArray(A)||!A.length)return;
-      $('nSpec').textContent=numFmt(A.filter(function(x){return !x.sample&&x.status==='активен'&&x.photo&&(!x.paidUntil||x.paidUntil>=today)}).length);
-      $('nSample').hidden=true;
-      ld('/data/stats.js',function(){
-        var St=window.STATS;
-        if(St&&St.visits>0&&/^\d{4}-\d\d$/.test(St.month||'')){
-          $('nVis').textContent=numFmt(St.visits);
-          try{$('nMon').textContent=new Date(St.month+'-15T12:00:00').toLocaleDateString(document.documentElement.lang||'ru',{month:'long',year:'numeric'})}catch(e){$('nMon').textContent=St.month}
-        }else{
-          $('nVis').textContent='—';$('nMon').textContent='';
-          $('nVisN').textContent=T.visSoon;
-        }
-      });
-    });
-  })();
 
   /* кружки «?» */
   document.addEventListener('click',function(e){
