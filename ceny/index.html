@@ -528,9 +528,64 @@ a.yours:hover{background:#EBD3A3}
 #ceny .cn-opt .cn-pr b{display:block;font-size:16px}
 #ceny .cn-ic{font-size:26px;line-height:1}
 #ceny .cn-hook{font-size:13px;color:var(--brown);background:var(--mustard-soft);border-radius:8px;padding:6px 10px}
-#ceny .cn-calc label{display:flex;gap:10px;align-items:center;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--paper);cursor:pointer}
-#ceny .cn-calc label span{flex:1;min-width:0}
-#ceny .cn-calc input{width:20px;height:20px;accent-color:var(--sage)}
+#ceny .cn-oc{gap:10px}
+#ceny .cn-box .cn-ab svg{width:20px;height:20px}
+#ceny .cn-box .cn-hl svg{width:40px;height:40px}
+#ceny .cn-abar{display:flex;flex-wrap:wrap;gap:6px;margin-top:2px}
+#ceny .cn-ab{display:inline-flex;align-items:center;gap:6px;border:1.5px solid var(--line);border-radius:12px;padding:7px 10px;font-size:13px;font-weight:700;background:var(--bg);color:var(--ink)}
+#ceny .cn-ab.cn-hb b{font-size:14px}
+#ceny .cn-ab.cn-hb i{font-style:normal;font-weight:400;font-size:11px;color:var(--muted)}
+#ceny .cn-ab.cn-on{border-color:var(--sage);background:var(--sage-soft)}
+#ceny .cn-toast{font-size:12px;border-radius:10px;padding:6px 10px;background:var(--sage-soft);color:var(--ink)}
+#ceny .cn-toast.cn-mute{background:none;color:var(--muted);padding:0}
+#ceny .cn-calc{display:flex;flex-direction:column;gap:18px}
+#ceny .cn-calc .cn-cstep{display:flex;flex-direction:column;gap:8px}
+#ceny .cn-calc .cn-cstep>h3{display:flex;gap:8px;align-items:center;font-size:17px}
+#ceny .cn-calc .cn-cstep>h3 .cn-n{width:24px;height:24px;flex:none;border-radius:50%;background:var(--sage);color:var(--paper);display:grid;place-items:center;font:700 13px var(--body)}
+#ceny .cn-calc .cn-rh{font-size:20px}
+#ceny .cn-calc .cn-seg{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+#ceny .cn-calc .cn-seg label{display:flex;flex-direction:column;align-items:center;gap:2px;padding:10px 6px;border:1.5px solid var(--line);border-radius:12px;background:var(--paper);cursor:pointer;text-align:center;position:relative}
+#ceny .cn-calc .cn-seg input{position:absolute;opacity:0;pointer-events:none}
+#ceny .cn-calc .cn-seg label:has(input:checked){border-color:var(--sage);background:var(--sage-soft)}
+#ceny .cn-calc .cn-seg label:has(input:focus-visible){outline:2px solid var(--sage);outline-offset:2px}
+#ceny .cn-calc .cn-seg span{font-weight:700}
+#ceny .cn-calc .cn-seg em{font-style:normal;font-size:12px;color:var(--muted)}
+#ceny .cn-calc .cn-crow{display:flex;gap:10px;align-items:center;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--paper);cursor:pointer}
+#ceny .cn-calc .cn-crow>span{flex:1;min-width:0}
+#ceny .cn-calc .cn-crow input[type=checkbox]{width:20px;height:20px;accent-color:var(--sage);flex:none}
+#ceny .cn-calc .cn-crow b{white-space:nowrap}
+#ceny .cn-calc .cn-crow small{display:block;color:var(--muted);font-size:12px;font-weight:400;line-height:1.35}
+#ceny .cn-calc select{font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:6px 8px;max-width:48%}
+#ceny .cn-calc #extra{display:flex;flex-direction:column;gap:8px}
+#ceny .cn-calc .cn-rm{border:0;background:var(--bg);color:var(--ink);border-radius:8px;width:28px;height:28px;font-size:18px;cursor:pointer;flex:none}
+#ceny .cn-calc .cn-stp{display:flex;align-items:center;gap:8px;flex:none}
+#ceny .cn-calc .cn-stp button{width:36px;height:36px;border-radius:10px;border:1.5px solid var(--sage);background:var(--paper);color:var(--sage);font:700 20px var(--body);cursor:pointer}
+#ceny .cn-calc .cn-stp output{min-width:34px;text-align:center;font:400 26px var(--display);color:var(--brown)}
+#ceny .cn-calc .cn-cres{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;padding-top:6px}
+#ceny .cn-calc .cn-cc{position:relative;display:flex;flex-direction:column;gap:8px;background:var(--paper);border:1.5px solid var(--line);border-radius:14px;padding:14px}
+#ceny .cn-calc .cn-cc.cn-best{border:2px solid var(--mustard)}
+#ceny .cn-calc .cn-cc.cn-sel{box-shadow:0 0 0 3px var(--sage-soft)}
+#ceny .cn-calc .cn-cc h3{font-size:18px}
+#ceny .cn-calc .cn-cc .cn-bd{position:absolute;top:-11px;right:12px}
+#ceny .cn-calc .cn-cc .cn-big{font:400 30px var(--display);color:var(--brown);line-height:1.1}
+#ceny .cn-calc .cn-cc .cn-big small{font:400 12px var(--body);color:var(--muted)}
+#ceny .cn-calc .cn-cc .cn-ok{font-size:13px;color:var(--sage);font-weight:700}
+#ceny .cn-calc .cn-cc .cn-no{font-size:13px;color:var(--warn);background:var(--warn-soft);border-radius:8px;padding:6px 8px}
+#ceny .cn-calc .cn-cc .cn-nt{font-size:12px;color:var(--muted)}
+#ceny .cn-calc .cn-btn, #ceny .cn-calc .cn-pick{font:700 14px var(--body);border:1.5px solid var(--sage);background:var(--sage);color:var(--paper);border-radius:10px;padding:9px 14px;cursor:pointer}
+#ceny .cn-calc .cn-btn.cn-ghost, #ceny .cn-calc .cn-pick{background:transparent;color:var(--sage)}
+#ceny .cn-calc .cn-cc .cn-pick{margin-top:auto}
+#ceny .cn-calc .cn-cc.cn-sel .cn-pick{background:var(--sage);color:var(--paper)}
+#ceny .cn-calc .cn-acts{display:flex;gap:8px;flex-wrap:wrap}
+#ceny .cn-calc .cn-inv{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:14px;display:flex;flex-direction:column;gap:8px}
+#ceny .cn-calc .cn-inv h3{font-size:17px}
+#ceny .cn-calc .cn-inv table{width:100%;min-width:0;border-collapse:collapse;font-size:14px}
+#ceny .cn-calc .cn-inv td{text-align:left;padding:6px 0;border-bottom:1px solid var(--line);vertical-align:top}
+#ceny .cn-calc .cn-inv td:last-child{text-align:right;white-space:nowrap;padding-left:10px}
+#ceny .cn-calc .cn-inv .cn-sub td{color:var(--muted)}
+#ceny .cn-calc .cn-inv .cn-tot td{font-weight:700;font-size:17px;border-bottom:0;color:var(--brown)}
+#ceny .cn-qh{flex:none;width:20px;height:20px;margin-left:6px;border-radius:50%;border:1.5px solid var(--mustard);background:var(--paper);color:var(--ink);font:700 12px/1 var(--body);cursor:pointer;padding:0;display:inline-grid;place-items:center;vertical-align:middle}
+#ceny .cn-qtip{position:fixed;z-index:50;background:var(--paper);color:var(--ink);border:1px solid var(--line);border-radius:12px;padding:10px 12px;font-size:13px;line-height:1.45;box-shadow:0 6px 20px rgba(0,0,0,.18)}
 #ceny .cn-sum{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap}
 #ceny .cn-msg{border-radius:12px;padding:12px 14px;background:var(--mustard-soft);border:1px solid var(--mustard);font-size:15px}
 #ceny .cn-tw{overflow-x:auto;border:1px solid var(--line);border-radius:14px;background:var(--paper)}
@@ -592,10 +647,9 @@ a.yours:hover{background:#EBD3A3}
 #ceny .cn-hl{display:flex;flex-direction:column;align-items:center;gap:2px;text-align:center;background:var(--bg);border-radius:10px;padding:8px 4px}
 #ceny .cn-hl b{font-size:12px}
 #ceny .cn-hl span{font-size:11px;color:var(--muted);line-height:1.2}
-#ceny .cn-calc select{font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:6px 8px;max-width:55%}
-#ceny .cn-calc label:has(select){flex-wrap:wrap}
-#ceny .cn-calc .cn-rm{border:0;background:var(--bg);color:var(--ink);border-radius:8px;width:28px;height:28px;font-size:18px;cursor:pointer}
 #ceny .cn-addc{font:700 14px var(--body);border:1.5px dashed var(--sage);background:transparent;color:var(--sage);border-radius:10px;padding:10px 14px;cursor:pointer;text-align:left}
+#ceny .cn-cbtns{display:flex;flex-wrap:wrap;gap:6px}
+#ceny .cn-cbtns span{border:1.5px solid var(--line);border-radius:12px;padding:8px 12px;font-size:13px;font-weight:700;background:var(--bg)}
 </style>
 <!--i18n--><link rel="alternate" hreflang="ru" href="https://svoiludi.ch/ceny/"><link rel="alternate" hreflang="uk" href="https://svoiludi.ch/uk/ceny/"><script>(function(){try{if(localStorage.getItem('svoiludiLang')==='uk'&&!/[?&]lang=ru/.test(location.search))location.replace('/uk/ceny/'+location.search+location.hash);}catch(e){}})();</script><!--i18n--></head>
 <body>
@@ -652,19 +706,19 @@ a.yours:hover{background:#EBD3A3}
         <div class="cn-cat"><span>Психология · консультации</span></div>
         <div class="cn-id"><div class="cn-ph">А</div><div><b>Анна Образцова</b><br><span class="cn-muted">Консультант</span></div></div>
         <div class="cn-facts"><div><span>Где:</span> Цюрих</div><div><span>Языки:</span> RU · UA · DE</div></div>
-      </div><div class="cn-sample">Образец · всё вымышленное</div><div class="cn-box"><h3>Базовая</h3><div class="cn-price">72 <small>CHF в год</small></div><ul class="cn-fl"><li class="cn-i"><span>Полная карточка, контакты, UID, особенности</span></li><li class="cn-i"><span>Метка на карте в своём городе</span></li><li class="cn-i"><span>Визитка PNG и PDF с QR, с водяным знаком «Свои люди»</span></li><li class="cn-i"><span>Значок «Я в справочнике» для сайта</span></li><li class="cn-n"><span>События и курсы</span><em>опция +30 за 5 мест</em></li><li class="cn-n"><span>Весь кантон</span><em>опция +36</em></li><li class="cn-n"><span>+ 1 дополнительный кантон</span><em>опция +36</em></li><li class="cn-n"><span>Онлайн по всей Швейцарии</span><em>опция +60</em></li><li class="cn-n"><span>Прайс-лист PNG</span><em>опция +24</em></li><li class="cn-n"><span>Выделение цветом и место выше</span></li><li class="cn-n"><span>Отчёт посещений раз в месяц: открытия, «связаться», «В контакты», сердечки</span></li><li class="cn-n"><span>Первый ряд в кантоне, 3 места</span></li><li class="cn-n"><span>Пост «Реклама» в нашем канале, раз в год</span></li></ul><div class="cn-free"><b>Бесплатно с первого дня, в цену пакета не входит</b>
+      </div><div class="cn-sample">Образец · всё вымышленное</div><div class="cn-box"><h3>Базовая</h3><div class="cn-price">72 <small>CHF в год</small></div><ul class="cn-fl"><li class="cn-i"><span>Полная карточка, контакты, UID, особенности</span></li><li class="cn-i"><span>Метка на карте в своём городе</span></li><li class="cn-i"><span>Визитка PNG и PDF с QR, с водяным знаком «Свои люди»</span></li><li class="cn-i"><span>Значок «Я в справочнике» для сайта</span></li><li class="cn-n"><span>События и курсы</span><em>опция +30 за 5 мест</em></li><li class="cn-n"><span>Весь кантон</span><em>опция +36</em></li><li class="cn-n"><span>+ 1 дополнительный кантон</span><em>опция +36</em></li><li class="cn-n"><span>Онлайн по всей Швейцарии</span><em>опция +60</em></li><li class="cn-n"><span>Прайс-лист PNG</span><em>опция +24</em></li><li class="cn-n"><span>Выделение цветом и место выше</span></li><li class="cn-n"><span>Отчёт посещений раз в месяц: открытия, «связаться», «В контакты», «Мой список», сердечки</span></li><li class="cn-n"><span>Первый ряд в кантоне, 3 места</span></li><li class="cn-n"><span>Пост «Реклама» в нашем канале, раз в год</span></li></ul><div class="cn-free"><b>Бесплатно с первого дня, в цену пакета не входит</b>
 <ul><li>✓ Вакансии и поиск партнёров. Всегда бесплатно, это поддержка сообщества, а не коммерческая услуга.</li>
 <li>✓ Инструменты сайта, PDF и PNG. Водяной знак у всех одинаковый, пакет его не убирает.</li></ul></div></div></div><div class="cn-pk cn-best cn-vipc2"><div class="cn-sp cn-vipc">
         <div class="cn-cat"><span>Психология · консультации</span><span class="cn-badge cn-vb">VIP-партнёр</span></div>
         <div class="cn-id"><div class="cn-ph">М</div><div><b>Мария Образцова</b><br><span class="cn-muted">Консультант</span></div></div>
         <div class="cn-facts"><div><span>Где:</span> Цюрих, Цуг</div><div><span>Языки:</span> RU · UA · DE</div><div><span class="cn-onl">онлайн</span> по всей Швейцарии</div></div>
-      </div><div class="cn-sample">Образец · всё вымышленное · платное размещение помечено</div><div class="cn-box"><h3>VIP-партнёр <span class="cn-tag">самый выгодный</span></h3><div class="cn-price">240 <small>CHF в год</small></div><ul class="cn-fl"><li class="cn-i"><span>Полная карточка, контакты, UID, особенности</span></li><li class="cn-i"><span>Метка на карте в своём городе</span></li><li class="cn-a"><span>Визитка PNG и PDF с QR без водяного знака</span></li><li class="cn-i"><span>Значок «Я в справочнике» для сайта</span></li><li class="cn-a"><span>События и курсы одновременно: <u>6</u></span></li><li class="cn-a"><span>Весь кантон</span></li><li class="cn-a"><span>+ 1 дополнительный кантон</span></li><li class="cn-a"><span>Онлайн по всей Швейцарии</span></li><li class="cn-a"><span>Прайс-лист PNG</span></li><li class="cn-a"><span>Выделение цветом и место выше</span></li><li class="cn-a"><span>Отчёт посещений раз в месяц: открытия, «связаться», «В контакты», сердечки</span></li><li class="cn-n"><span>Первый ряд в кантоне, 3 места</span></li><li class="cn-n"><span>Пост «Реклама» в нашем канале, раз в год</span></li></ul><div class="cn-free"><b>Бесплатно с первого дня, в цену пакета не входит</b>
+      </div><div class="cn-sample">Образец · всё вымышленное · платное размещение помечено</div><div class="cn-box"><h3>VIP-партнёр <span class="cn-tag">самый выгодный</span></h3><div class="cn-price">240 <small>CHF в год</small></div><ul class="cn-fl"><li class="cn-i"><span>Полная карточка, контакты, UID, особенности</span></li><li class="cn-i"><span>Метка на карте в своём городе</span></li><li class="cn-a"><span>Визитка PNG и PDF с QR без водяного знака</span></li><li class="cn-i"><span>Значок «Я в справочнике» для сайта</span></li><li class="cn-a"><span>События и курсы одновременно: <u>6</u></span></li><li class="cn-a"><span>Весь кантон</span></li><li class="cn-a"><span>+ 1 дополнительный кантон</span></li><li class="cn-a"><span>Онлайн по всей Швейцарии</span></li><li class="cn-a"><span>Прайс-лист PNG</span></li><li class="cn-a"><span>Выделение цветом и место выше</span></li><li class="cn-a"><span>Отчёт посещений раз в месяц: открытия, «связаться», «В контакты», «Мой список», сердечки</span></li><li class="cn-n"><span>Первый ряд в кантоне, 3 места</span></li><li class="cn-n"><span>Пост «Реклама» в нашем канале, раз в год</span></li></ul><div class="cn-free"><b>Бесплатно с первого дня, в цену пакета не входит</b>
 <ul><li>✓ Вакансии и поиск партнёров. Всегда бесплатно, это поддержка сообщества, а не коммерческая услуга.</li>
 <li>✓ Инструменты сайта, PDF и PNG. Водяной знак у всех одинаковый, пакет его не убирает.</li></ul></div><div class="cn-hook">По отдельности то же (с пятью местами для событий) стоит 258 CHF, но без цвета, места выше и отчёта посещений. В VIP на 18 CHF меньше.</div></div></div><div class="cn-pk"><div class="cn-sp cn-partner">
         <div class="cn-cat"><span>Психология · консультации</span><span class="cn-badge">VIP-партнёр ТОП</span></div>
         <div class="cn-id"><div class="cn-ph">Е</div><div><b>Елена Образцова</b><br><span class="cn-muted">Консультант</span></div></div>
         <div class="cn-facts"><div><span>Где:</span> Цюрих, Цуг</div><div><span>Языки:</span> RU · UA · DE</div><div><span class="cn-onl">онлайн</span> по всей Швейцарии</div></div>
-      </div><div class="cn-sample">Образец · первый ряд кантона · до 3 мест</div><div class="cn-box"><h3>VIP-партнёр ТОП</h3><div class="cn-price">480 <small>CHF в год</small></div><ul class="cn-fl"><li class="cn-i"><span>Полная карточка, контакты, UID, особенности</span></li><li class="cn-i"><span>Метка на карте в своём городе</span></li><li class="cn-i"><span>Визитка PNG и PDF с QR без водяного знака</span></li><li class="cn-i"><span>Значок «Я в справочнике» для сайта</span></li><li class="cn-a"><span>События и курсы одновременно: <u>12</u></span></li><li class="cn-i"><span>Весь кантон</span></li><li class="cn-i"><span>+ 1 дополнительный кантон</span></li><li class="cn-i"><span>Онлайн по всей Швейцарии</span></li><li class="cn-i"><span>Прайс-лист PNG</span></li><li class="cn-i"><span>Выделение цветом и место выше</span></li><li class="cn-i"><span>Отчёт посещений раз в месяц: открытия, «связаться», «В контакты», сердечки</span></li><li class="cn-a"><span>Первый ряд в кантоне, 3 места</span></li><li class="cn-a"><span>Пост «Реклама» в нашем канале, раз в год: <u>1</u></span></li></ul><div class="cn-free"><b>Бесплатно с первого дня, в цену пакета не входит</b>
+      </div><div class="cn-sample">Образец · первый ряд кантона · до 3 мест</div><div class="cn-box"><h3>VIP-партнёр ТОП</h3><div class="cn-price">480 <small>CHF в год</small></div><ul class="cn-fl"><li class="cn-i"><span>Полная карточка, контакты, UID, особенности</span></li><li class="cn-i"><span>Метка на карте в своём городе</span></li><li class="cn-i"><span>Визитка PNG и PDF с QR без водяного знака</span></li><li class="cn-i"><span>Значок «Я в справочнике» для сайта</span></li><li class="cn-a"><span>События и курсы одновременно: <u>12</u></span></li><li class="cn-i"><span>Весь кантон</span></li><li class="cn-i"><span>+ 1 дополнительный кантон</span></li><li class="cn-i"><span>Онлайн по всей Швейцарии</span></li><li class="cn-i"><span>Прайс-лист PNG</span></li><li class="cn-i"><span>Выделение цветом и место выше</span></li><li class="cn-i"><span>Отчёт посещений раз в месяц: открытия, «связаться», «В контакты», «Мой список», сердечки</span></li><li class="cn-a"><span>Первый ряд в кантоне, 3 места</span></li><li class="cn-a"><span>Пост «Реклама» в нашем канале, раз в год: <u>1</u><button type="button" class="cn-qh" aria-label="Что значит пост «Реклама»" aria-expanded="false" data-t="Раз в год мы публикуем в канале «Свои люди» пост о вашей карточке: кто вы, чем помогаете и как с вами связаться. Пост помечен словом «Реклама», чтобы читатели видели, что это платное размещение. Текст мы готовим и согласуем с вами до выхода. Канал скоро откроется, ссылку добавим на сайт. Пост не обещает потока клиентов, это ещё один способ рассказать о вас.">?</button></span></li></ul><div class="cn-free"><b>Бесплатно с первого дня, в цену пакета не входит</b>
 <ul><li>✓ Вакансии и поиск партнёров. Всегда бесплатно, это поддержка сообщества, а не коммерческая услуга.</li>
 <li>✓ Инструменты сайта, PDF и PNG. Водяной знак у всех одинаковый, пакет его не убирает.</li></ul></div><div class="cn-hook">Три места на кантон. Когда они заняты, вход только по очереди.</div></div></div></div>
   <p class="cn-small cn-muted">Полгода стоит 60 % годовой цены, квартал 35 %. Минимальный счёт 30 CHF. Ничего не продлевается само, за 45 дней до конца придёт предложение.</p>
@@ -673,16 +727,16 @@ a.yours:hover{background:#EBD3A3}
   <h2>Опции к базовой: берите только нужное</h2>
   <div class="cn-grid">
     <div class="cn-box cn-opt"><div class="cn-ic">🗺️</div><h3>Весь кантон</h3><p class="cn-small">Вас видят при поиске по всему кантону.</p>
-      <div class="cn-pr"><div><b>36</b>год</div><div><b>21.60</b>полгода</div><div><b>30</b>квартал</div></div></div>
+      <div class="cn-pr"><div><b>36</b>год</div><div><b>21.60</b>полгода</div><div><b>12.60</b>квартал</div></div></div>
     <div class="cn-box cn-opt"><div class="cn-ic">📍</div><h3>+ 1 дополнительный кантон</h3><p class="cn-small">Второй кабинет или адрес, метка на карте и там.</p>
-      <div class="cn-pr"><div><b>36</b>год</div><div><b>21.60</b>полгода</div><div><b>30</b>квартал</div></div></div>
+      <div class="cn-pr"><div><b>36</b>год</div><div><b>21.60</b>полгода</div><div><b>12.60</b>квартал</div></div></div>
     <div class="cn-box cn-opt"><div class="cn-ic">💻</div><h3>Вся Швейцария онлайн</h3><p class="cn-small">Значок «онлайн», вас находят из любого кантона.</p>
-      <div class="cn-pr"><div><b>60</b>год</div><div><b>36</b>полгода</div><div><b>30</b>квартал</div></div></div>
+      <div class="cn-pr"><div><b>60</b>год</div><div><b>36</b>полгода</div><div><b>21</b>квартал</div></div></div>
     <div class="cn-box cn-opt"><div class="cn-ic">🏷️</div><h3>Прайс на ладони</h3><p class="cn-small">Прайс-лист PNG: услуги и цены, чтобы показать клиентке и переслать.</p>
-      <div class="cn-pr"><div><b>24</b>год</div><div><b>30</b>полгода</div><div><b>30</b>квартал</div></div></div>
-    <div class="cn-box cn-opt"><div class="cn-ic">📅</div><h3>+5 мест для событий</h3><p class="cn-small">Пять мест для событий и курсов. В базовой это единственный способ размещать события. Место освобождается после события.</p>
-      <div class="cn-pr"><div><b>30</b>год</div><div><b>30</b>полгода</div><div><b>30</b>квартал</div></div></div>
-    <div class="cn-box cn-opt"><div class="cn-ic">✨</div><h3>Выделение и отчёт посещений</h3><p class="cn-small">Цвет карточки, место выше, ежемесячный отчёт посещений: открытия, нажатия «связаться», «В контакты» и сердечки. Отдельно не продаются, только в VIP и ТОП.</p>
+      <div class="cn-pr"><div><b>24</b>год</div><div><b>14.40</b>полгода</div><div><b>8.40</b>квартал</div></div></div>
+    <div class="cn-box cn-opt"><div class="cn-ic">📅</div><h3>Дополнительные места для событий</h3><p class="cn-small">Места для событий и курсов, по одному. В Базовой это единственный способ размещать события, в VIP и ТОП так добавляют места сверх входящих. Место освобождается после события.</p>
+      <div class="cn-pr"><div><b>20</b>год</div><div><b>12</b>полгода</div><div><b>7</b>квартал</div></div><div class="cn-pr"><div><b>10</b>год, VIP и ТОП</div><div><b>6</b>полгода</div><div><b>3.50</b>квартал</div></div></div>
+    <div class="cn-box cn-opt"><div class="cn-ic">✨</div><h3>Выделение и отчёт посещений</h3><p class="cn-small">Цвет карточки, место выше, ежемесячный отчёт посещений: открытия, нажатия «связаться», «В контакты», «Мой список» и сердечки. Отдельно не продаются, только в VIP и ТОП.</p>
       <div class="cn-pr"><div><b>VIP</b>240</div><div><b>ТОП</b>480</div><div><b>–</b>отдельно</div></div></div>
   </div>
 </section>
@@ -747,12 +801,12 @@ a.yours:hover{background:#EBD3A3}
       <div class="cn-slots"><span>VIP</span><div class="cn-sq"><i class="cn-f"></i><i class="cn-f"></i><i class="cn-f"></i><i></i><i></i><i></i></div></div>
       <div class="cn-slots"><span>ТОП</span><div class="cn-sq"><i class="cn-f"></i><i class="cn-f"></i><i class="cn-f"></i><i class="cn-f"></i><i class="cn-f"></i><i class="cn-f"></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
       <p class="cn-small cn-muted">В VIP 6 мест, в ТОП 12. Закрашено занятое, пустое свободно.</p></div>
-    <div class="cn-box"><h3>Опция «+5 мест»</h3><div class="cn-price">30 <small>CHF в год</small></div>
-      <div class="cn-slots"><span>Базовая + 5</span><div class="cn-sq"><i class="cn-x"></i><i class="cn-x"></i><i class="cn-x"></i><i class="cn-x"></i><i class="cn-x"></i></div></div>
-      <div class="cn-slots"><span>VIP + 5</span><div class="cn-sq"><i class="cn-f"></i><i class="cn-f"></i><i class="cn-f"></i><i></i><i></i><i></i><i class="cn-x"></i><i class="cn-x"></i><i class="cn-x"></i><i class="cn-x"></i><i class="cn-x"></i></div></div>
-      <p class="cn-small">6 CHF за место. Серия на три месяца занимает одно место, поэтому пять мест дают десятки дат в год. Берётся к любому пакету и несколько раз: VIP 6 + 5 = 11, ТОП 12 + 5 = 17.</p></div>
-    <div class="cn-box"><h3>Одно событие отдельно</h3><div class="cn-price">не продаём</div>
-      <p class="cn-small">Самый маленький набор — 5 мест за 30 CHF. Пример: школа берёт базовую за 72 и «+5 мест» за 30, всего 102 CHF в год. Пять мест хватает на пять курсов или серий одновременно.</p></div>
+    <div class="cn-box"><h3>Дополнительные места</h3><div class="cn-price">20 <small>CHF за место, в VIP и ТОП 10</small></div>
+      <div class="cn-slots"><span>Базовая + 5 мест</span><div class="cn-sq"><i class="cn-x"></i><i class="cn-x"></i><i class="cn-x"></i><i class="cn-x"></i><i class="cn-x"></i></div></div>
+      <div class="cn-slots"><span>VIP + 5 мест</span><div class="cn-sq"><i class="cn-f"></i><i class="cn-f"></i><i class="cn-f"></i><i></i><i></i><i></i><i class="cn-x"></i><i class="cn-x"></i><i class="cn-x"></i><i class="cn-x"></i><i class="cn-x"></i></div></div>
+      <p class="cn-small">Место берётся по одному, сколько нужно, к любому пакету. В Базовой оно стоит 20 CHF, в VIP и ТОП 10 CHF: у кого пакет, тому места дешевле. Серия на три месяца занимает одно место, поэтому несколько мест дают десятки дат в год. Пример: VIP 6 + 5 = 11 мест.</p></div>
+    <div class="cn-box"><h3>Пример: школа с пятью курсами</h3><div class="cn-price">172 <small>CHF в год</small></div>
+      <p class="cn-small">Школа берёт Базовую за 72 и 5 мест по 20, это 100, всего 172 CHF в год. С VIP за 240 в цену уже входят 6 мест, поэтому VIP выходит всего на 68 дороже и в нём ещё цвет карточки, отчёт и шесть мест вместо пяти. Минимальный счёт 30 CHF: одно дополнительное место (20) выставляется счётом на 30.</p></div>
   </div>
   <h3>Счётчик мест: что видит организатор</h3>
   <div class="cn-grid cn-rep">
@@ -768,8 +822,8 @@ a.yours:hover{background:#EBD3A3}
       <span class="cn-btn">Добавить событие или курс</span></div>
     <div class="cn-box"><span class="cn-tag cn-m">Когда места закончились</span>
       <div class="cn-cnt"><div class="cn-sq"><i class="cn-f"></i><i class="cn-f"></i><i class="cn-f"></i><i class="cn-f"></i><i class="cn-f"></i><i class="cn-f"></i></div><strong>Занято 6 из 6, свободных нет</strong></div>
-      <p class="cn-small">Все места заняты. Ближайшее освободится 15.11.2026, после мастер-класса «Границы». Можно подождать или взять «+5 мест» за 30 CHF в год, они появятся сразу после подтверждения оплаты.</p>
-      <span class="cn-btn">Взять «+5 мест»</span>
+      <p class="cn-small">Все места заняты. Ближайшее освободится 15.11.2026, после мастер-класса «Границы». Можно подождать или взять дополнительное место: 20 CHF в год, у VIP и ТОП 10. Оно появится сразу после подтверждения оплаты.</p>
+      <span class="cn-btn">Взять дополнительное место</span>
       </div>
     <div class="cn-box"><h3>Где ещё виден счётчик</h3>
       <ul class="cn-cl2">
@@ -795,40 +849,88 @@ a.yours:hover{background:#EBD3A3}
 </section>
 <section class="cn-sec" id="otchet">
   <h2>Отчёт посещений для VIP и ТОП</h2>
-  <p class="cn-muted">Раз в месяц, в первую неделю следующего месяца, на e-mail из карточки приходит отчёт посещений: сколько человек посмотрели карточку, сколько захотели связаться и сколько поставили сердечко. Это видно из цифр, а не на глаз.</p>
+  <p class="cn-muted">Раз в месяц, в первую неделю следующего месяца, на e-mail из карточки приходит отчёт посещений: сколько человек посмотрели карточку, сколько захотели связаться, сколько сохранили карточку в «Мой список» и сколько поставили сердечко. Это видно из цифр, а не на глаз.</p>
   <div class="cn-grid cn-rep">
     <div class="cn-box"><span class="cn-tag cn-m">Образец · цифры вымышленные</span>
       <h3>Мария Образцова · сентябрь</h3>
-      <div class="cn-kp"><div><b>184</b><span>открыли карточку</span><em>+22 % к августу</em></div><div><b>31</b><span>нажали «связаться»</span><em>+5 к августу</em></div><div><b>9</b><span>добавили в «В контакты»</span><em>+2 к августу</em></div><div><b>17 ♥</b><span>поставили сердечко</span><em>+4 к августу</em></div></div>
+      <div class="cn-kp"><div><b>184</b><span>открыли карточку</span><em>+22 % к августу</em></div><div><b>31</b><span>нажали «связаться»</span><em>+5 к августу</em></div><div><b>9</b><span>добавили в «В контакты»</span><em>+2 к августу</em></div><div><b>14</b><span>добавили в «Мой список»</span><em>+3 к августу</em></div><div><b>17 ♥</b><span>поставили сердечко</span><em>+4 к августу</em></div></div>
       <svg viewBox="0 0 240 80" role="img" aria-label="Открытия карточки по неделям" style="background:none;max-height:90px">
         <g fill="var(--sage)"><rect x="14" y="40" width="34" height="30" rx="4"/><rect x="62" y="28" width="34" height="42" rx="4"/><rect x="110" y="16" width="34" height="54" rx="4"/><rect x="158" y="34" width="34" height="36" rx="4"/></g>
         <g font-size="9" fill="var(--muted)" text-anchor="middle"><text x="31" y="79">нед. 1</text><text x="79" y="79">нед. 2</text><text x="127" y="79">нед. 3</text><text x="175" y="79">нед. 4</text></g>
         <g font-size="9" fill="var(--ink)" text-anchor="middle"><text x="31" y="36">41</text><text x="79" y="24">58</text><text x="127" y="12">72</text><text x="175" y="30">13</text></g>
       </svg>
     </div>
-    <div class="cn-box"><h3>Четыре числа и что они значат</h3>
+    <div class="cn-box"><h3>Пять чисел и что они значат</h3>
       <p class="cn-small"><b>1. Открыли карточку.</b> Сколько раз карточку открывали на сайте и в приложении. Один человек за один день считается один раз.</p>
       <p class="cn-small"><b>2. Нажали «связаться».</b> Сколько раз нажали на телефон, WhatsApp, Telegram или e-mail. Это не звонок и не письмо, а нажатие: человек мог передумать. Разбивка по способам: телефон 12, WhatsApp 11, Telegram 5, e-mail 3.</p>
       <p class="cn-small"><b>3. Добавили в «В контакты».</b> Сколько человек сохранили карточку в контакты на телефоне.</p>
-      <p class="cn-small"><b>4. Сердечки.</b> У каждой карточки есть кнопка ♡. Посетитель нажимает её, чтобы отметить, что специалист ему понравился или пригодится потом. Один браузер даёт одно сердечко на карточку, регистрации нет, личных данных мы не собираем. Точное число видит только владелец карточки в отчёте. На странице видна только иконка сердечка, она меняется по уровням. На порядок карточек сердечки не влияют. Сердечко есть у всех карточек, а отчёт получают VIP и ТОП.</p>
+      <p class="cn-small"><b>4. Добавили в «Мой список».</b> Сколько человек сохранили карточку в свой личный список специалистов, чтобы вернуться к ней позже или отправить подборку знакомым. Сам список хранится только на устройстве посетителя. Нам приходит лишь число, без имён.</p>
+      <p class="cn-small"><b>5. Сердечки.</b> Посетитель нажимает ♡ на карточке, чтобы отметить, что специалист ему понравился. Число сердечек и иконка видны всем на карточке, а в отчёте владелец видит, сколько сердечек прибавилось за месяц. Чтобы сохранить карточку на потом, есть отдельная кнопка «В мой список». Один браузер даёт одно сердечко на карточку, регистрации нет, личных данных мы не собираем. На порядок карточек сердечки не влияют. Сердечко есть у всех карточек, а отчёт получают VIP и ТОП.</p>
       <p class="cn-small cn-muted">Каждое число сравнивается с прошлым месяцем. Имён, телефонов и других данных посетителей в отчёте нет, только счётчики.</p></div>
+    <div class="cn-box"><h3>Кнопки на карточке: чем отличаются</h3>
+      <div class="cn-cbtns"><span>♡ Нравится</span><span>＋ В мой список</span><span>В контакты</span><span>Поделиться</span></div>
+      <div class="cn-tw"><table style="min-width:440px"><tr><th>Кнопка</th><th>Что делает</th><th>Что получает владелец</th></tr>
+        <tr><td>♡ Нравится</td><td>Открытая отметка «мне нравится этот специалист». Число и иконка сердечка видны всем и меняются по уровням.</td><td>Число видно всем на карточке, прирост за месяц в отчёте.</td></tr>
+        <tr><td>＋ В мой список</td><td>Личная закладка: карточка попадает в список посетителя, к которому можно вернуться и которым можно поделиться по ссылке. Список хранится только на устройстве.</td><td>Число «добавили в Мой список» в отчёте, без имён.</td></tr>
+        <tr><td>В контакты</td><td>Сохраняет телефон, e-mail и адрес в контакты телефона.</td><td>Число «добавили в «В контакты»» в отчёте.</td></tr>
+      </table></div>
+      </div>
+    <div class="cn-box"><h3>Открытая карточка: где сердечко и что происходит при нажатии</h3><div class="cn-grid"><div class="cn-sp cn-oc"><span class="cn-tag">Открытая карточка до нажатия</span><div class="cn-cat"><span>Психология · консультации</span><span class="cn-badge cn-vb">VIP-партнёр</span></div><div class="cn-id"><div class="cn-ph">М</div><div><b>Мария Образцова</b><br><span class="cn-muted">Консультант</span></div></div><div class="cn-facts"><div><span>Где:</span> Цюрих, Цуг</div><div><span>Языки:</span> RU · UA · DE</div></div><div class="cn-abar"><span class="cn-ab cn-hb"><svg viewBox="0 0 24 24" width="20" height="20" style="background:none;max-height:none;flex:none" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.6 4.6 0 0 1 8-3 4.6 4.6 0 0 1 8 3c0 5.8-8 11-8 11z" fill="var(--sage)" stroke="var(--sage)" stroke-width="1.6" stroke-linejoin="round"/></svg><b>16</b><i>люблю</i><button type="button" class="cn-qh" aria-label="Что значит сердечко" aria-expanded="false" data-t="Сердечки ставят посетители сайта. Один браузер даёт одно сердечко на карточку, регистрации нет. Сердечки не влияют на порядок карточек и не заменяют проверку специалиста. Решение остаётся за вами.">?</button></span><span class="cn-ab">＋ В мой список</span><span class="cn-ab">В контакты</span><span class="cn-ab">Поделиться</span></div><div class="cn-toast cn-mute">Число видят все. Иконка теплеет по уровням.</div></div><div class="cn-sp cn-oc"><span class="cn-tag cn-m">После нажатия на сердечко</span><div class="cn-cat"><span>Психология · консультации</span><span class="cn-badge cn-vb">VIP-партнёр</span></div><div class="cn-id"><div class="cn-ph">М</div><div><b>Мария Образцова</b><br><span class="cn-muted">Консультант</span></div></div><div class="cn-facts"><div><span>Где:</span> Цюрих, Цуг</div><div><span>Языки:</span> RU · UA · DE</div></div><div class="cn-abar"><span class="cn-ab cn-hb cn-on"><svg viewBox="0 0 24 24" width="20" height="20" style="background:none;max-height:none;flex:none" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.6 4.6 0 0 1 8-3 4.6 4.6 0 0 1 8 3c0 5.8-8 11-8 11z" fill="var(--sage)" stroke="var(--brown)" stroke-width="2.4" stroke-linejoin="round"/></svg><b>17</b><i>люблю</i><button type="button" class="cn-qh" aria-label="Что значит сердечко" aria-expanded="false" data-t="Сердечки ставят посетители сайта. Один браузер даёт одно сердечко на карточку, регистрации нет. Сердечки не влияют на порядок карточек и не заменяют проверку специалиста. Решение остаётся за вами.">?</button></span><span class="cn-ab">＋ В мой список</span><span class="cn-ab">В контакты</span><span class="cn-ab">Поделиться</span></div><div class="cn-toast">Спасибо, сердечко поставлено. Нажмите ещё раз, чтобы убрать.</div></div></div><p class="cn-small"><b>1.</b> Посетитель открывает карточку. Внизу ряд из четырёх кнопок. Сердечко стоит первым и показывает число, которое видят все, и подпись уровня.</p><p class="cn-small"><b>2.</b> Нажатие на сердечко: оно получает коричневый контур, число растёт на единицу, под рядом кнопок появляется спокойная подпись. Повторное нажатие убирает сердечко.</p><p class="cn-small"><b>3.</b> В списке карточек то же сердечко стоит маленьким значком с числом рядом с названием категории, его тоже можно нажать.</p><p class="cn-small"><b>4.</b> Одно сердечко от одного браузера. Что человек отметил, хранится только у него в браузере. На сервер уходит лишь число.</p></div>
     <div class="cn-box"><h3>Иконка сердечка меняется</h3>
       <div class="cn-hrow"><div class="cn-hl"><div><svg viewBox="0 0 24 24" width="40" height="40" style="background:none;max-height:none" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.6 4.6 0 0 1 8-3 4.6 4.6 0 0 1 8 3c0 5.8-8 11-8 11z" fill="none" stroke="var(--muted)" stroke-width="1.6" stroke-linejoin="round"/></svg></div><b>0</b><span>ничего</span></div><div class="cn-hl"><div><svg viewBox="0 0 24 24" width="40" height="40" style="background:none;max-height:none" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.6 4.6 0 0 1 8-3 4.6 4.6 0 0 1 8 3c0 5.8-8 11-8 11z" fill="var(--sage-soft)" stroke="var(--sage)" stroke-width="1.6" stroke-linejoin="round"/></svg></div><b>1–9</b><span>нравится</span></div><div class="cn-hl"><div><svg viewBox="0 0 24 24" width="40" height="40" style="background:none;max-height:none" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.6 4.6 0 0 1 8-3 4.6 4.6 0 0 1 8 3c0 5.8-8 11-8 11z" fill="var(--sage)" stroke="var(--sage)" stroke-width="1.6" stroke-linejoin="round"/></svg></div><b>10–49</b><span>люблю</span></div><div class="cn-hl"><div><svg viewBox="0 0 24 24" width="40" height="40" style="background:none;max-height:none" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.6 4.6 0 0 1 8-3 4.6 4.6 0 0 1 8 3c0 5.8-8 11-8 11z" fill="var(--mustard)" stroke="var(--brown)" stroke-width="1.6" stroke-linejoin="round"/><path d="M8 9.5q1.2-2 3-1.5" fill="none" stroke="var(--paper)" stroke-width="1.4" stroke-linecap="round"/></svg></div><b>50 и больше</b><span>обожаю</span></div></div>
-      <p class="cn-small">Чем больше сердечек, тем «теплее» иконка на карточке. Точное число видит только владелец в отчёте посещений, посетитель видит только уровень. Порядок карточек сердечки не меняют.</p>
-      <p class="cn-small cn-muted">Рядом с иконкой кружок «?»: «Сердечки ставят посетители. Они не влияют на порядок карточек и не заменяют проверку».</p></div>
+      <p class="cn-small">Чем больше сердечек, тем «теплее» иконка на карточке. Рядом с иконкой стоит число, его видят все. Порядок карточек сердечки не меняют.</p>
+      <p class="cn-small cn-muted">Рядом с иконкой кружок «?»: «Сердечки ставят посетители. Они не влияют на порядок карточек и не заменяют проверку специалиста».</p></div>
     </div>
 </section>
 <section class="cn-sec cn-calc" id="calc">
-  <h2>Соберите свой набор и сравните с VIP</h2>
-  <p class="cn-muted">Базовая за 72 уже внутри. Отметьте «Весь кантон» и выберите основной кантон карточки, затем отметьте другие опции и при необходимости добавьте дополнительные кантоны. Внизу появится сравнение.</p>
-  <label><input type="checkbox" data-p="36" id="o1"><span>Весь кантон</span><select id="mainc" aria-label="Основной кантон карточки"></select><b>36</b></label>
-  <div id="extra"></div>
-  <button type="button" id="addc" class="cn-addc">+ 1 дополнительный кантон, 36 CHF</button>
-  <label><input type="checkbox" data-p="60" id="o3"><span>Вся Швейцария онлайн</span><b>60</b></label>
-  <label><input type="checkbox" data-p="24" id="o4"><span>Прайс на ладони</span><b>24</b></label>
-  <label><input type="checkbox" data-p="30" id="o5"><span>+5 мест для событий</span><b>30</b></label>
-  <div class="cn-sum"><span>Ваш набор в год</span><span class="cn-price" id="total">72</span></div>
+  <h2>Калькулятор: соберите набор и сравните пакеты</h2>
+  <p class="cn-muted">Отметьте, что вам нужно. Калькулятор посчитает Базовую, VIP и ТОП именно под ваш набор, покажет, чего в каждом не хватает, и подскажет самый выгодный вариант. Цены в CHF без MWST, 8,1 % добавляется в счёте. Это предварительный расчёт, а не счёт и не договор.</p>
+
+  <div class="cn-cstep">
+    <h3><span class="cn-n">1</span>На какой срок</h3>
+    <div class="cn-seg" role="radiogroup" aria-label="Срок">
+      <label><input type="radio" name="per" value="y" checked><span>Год</span><em>полная цена</em></label>
+      <label><input type="radio" name="per" value="h"><span>Полгода</span><em>60 % от года</em></label>
+      <label><input type="radio" name="per" value="q"><span>Квартал</span><em>35 % от года</em></label>
+    </div>
+    <p class="cn-small cn-muted">Минимальный счёт 30 CHF. Ничего не продлевается само, за 45 дней до конца придёт предложение.</p>
+  </div>
+
+  <div class="cn-cstep">
+    <h3><span class="cn-n">2</span>Где вас должны найти</h3>
+    <label class="cn-crow"><span>Основной кантон карточки<small>Свой город и метка на карте есть в любом пакете</small></span><select id="mainc" aria-label="Основной кантон карточки"></select></label>
+    <label class="cn-crow"><input type="checkbox" id="c_whole"><span id="c_wholet">Весь кантон<small>Вас находят при поиске по всему кантону, не только по городу. В VIP и ТОП входит</small></span><b>36</b></label>
+    <label class="cn-crow"><input type="checkbox" id="c_online"><span>Вся Швейцария онлайн<small>Для тех, кто принимает онлайн. В VIP и ТОП входит</small></span><b>60</b></label>
+    <div id="extra"></div>
+    <button type="button" id="addc" class="cn-addc">+ 1 дополнительный кантон, 36 CHF (в VIP и ТОП один входит)</button>
+  </div>
+
+  <div class="cn-cstep">
+    <h3><span class="cn-n">3</span>Что ещё нужно</h3>
+    <label class="cn-crow"><input type="checkbox" id="c_price"><span>Прайс на ладони<small>Ваши услуги и цены одной страницей, PDF и PNG. В VIP и ТОП входит</small></span><b>24</b></label>
+    <div class="cn-crow" style="cursor:default"><span>Сколько событий и курсов вы хотите разместить за срок<small>В VIP входит 6 мест, в ТОП 12, у Базовой мест нет. Каждое дополнительное место: 20 CHF, в VIP и ТОП 10 CHF. Одно место: одна запись или серия до 90 дней</small></span>
+      <div class="cn-stp"><button type="button" id="pm" aria-label="Меньше">−</button><output id="pn" aria-live="polite">0</output><button type="button" id="pp" aria-label="Больше">+</button></div></div>
+  </div>
+
+  <div class="cn-cstep">
+    <h3><span class="cn-n">4</span>Что вы хотите получить</h3>
+    <p class="cn-small cn-muted">Это есть не во всех пакетах. Калькулятор покажет, где это входит.</p>
+    <label class="cn-crow"><input type="checkbox" id="w_color"><span>Выделение цветом в списке</span></label>
+    <label class="cn-crow"><input type="checkbox" id="w_report"><span>Отчёт посещений раз в месяц</span></label>
+    <label class="cn-crow"><input type="checkbox" id="w_card"><span>Визитка PNG и PDF без водяного знака</span></label>
+    <label class="cn-crow"><input type="checkbox" id="w_first"><span>Первый ряд в кантоне<small>Только в ТОП, три места на кантон</small></span></label>
+  </div>
+
+  <h3 class="cn-rh">Сравнение под ваш набор</h3>
   <div class="cn-msg" id="msg" role="status"></div>
+  <div class="cn-cres" id="res"></div>
+  <div class="cn-inv" id="inv"></div>
+  <div class="cn-acts">
+    <button type="button" class="cn-btn" id="copy">Скопировать расчёт</button>
+    <button type="button" class="cn-btn cn-ghost" id="reset">Удалить историю</button>
+  </div>
+  <p class="cn-small cn-muted" id="cst" role="status"></p>
+  <p class="cn-small cn-muted">Расчёт сохраняется только в вашем браузере, чтобы можно было уйти и вернуться позже. Мы его не видим. Кнопка «Удалить историю» стирает его. Это помощник для личного использования, а не официальный документ и не консультация. Окончательные цены сообщим не позже 30.09.2027.</p>
 </section>
 <section class="cn-sec" id="tabl">
   <h2>Пакеты рядом</h2>
@@ -841,11 +943,12 @@ a.yours:hover{background:#EBD3A3}
     <tr><td>Онлайн по Швейцарии</td><td>60</td><td class="cn-y">✓</td><td class="cn-y">✓</td></tr>
     <tr><td>Визитка PNG и PDF с QR</td><td>с водяным знаком</td><td class="cn-y">без знака</td><td class="cn-y">без знака</td></tr>
     <tr><td>Прайс-лист</td><td>24</td><td class="cn-y">✓</td><td class="cn-y">✓</td></tr>
-    <tr><td>Мест для событий и курсов (+5 за 30)</td><td>0</td><td>6</td><td>12</td></tr>
+    <tr><td>Мест для событий и курсов</td><td>0</td><td>6</td><td>12</td></tr>
+    <tr><td>Дополнительное место, CHF</td><td>20</td><td>10</td><td>10</td></tr>
     <tr><td>Выделение цветом</td><td>–</td><td class="cn-y">✓</td><td class="cn-y">✓</td></tr>
     <tr><td>Первый ряд в кантоне</td><td>–</td><td>–</td><td class="cn-y">✓ (3 места)</td></tr>
     <tr><td>Отчёт посещений раз в месяц</td><td>–</td><td class="cn-y">✓</td><td class="cn-y">✓</td></tr>
-    <tr><td>Пост «Реклама» в год</td><td>–</td><td>–</td><td class="cn-y">1</td></tr>
+    <tr><td>Пост «Реклама» в год<button type="button" class="cn-qh" aria-label="Что значит пост «Реклама»" aria-expanded="false" data-t="Раз в год мы публикуем в канале «Свои люди» пост о вашей карточке: кто вы, чем помогаете и как с вами связаться. Пост помечен словом «Реклама», чтобы читатели видели, что это платное размещение. Текст мы готовим и согласуем с вами до выхода. Канал скоро откроется, ссылку добавим на сайт. Пост не обещает потока клиентов, это ещё один способ рассказать о вас.">?</button></td><td>–</td><td>–</td><td class="cn-y">1</td></tr>
   <tr><td>Вакансии и поиск партнёров</td><td class="cn-y">бесплатно</td><td class="cn-y">бесплатно</td><td class="cn-y">бесплатно</td></tr>
     <tr><td>Инструменты, PDF, PNG, водяной знак</td><td class="cn-y">как у всех</td><td class="cn-y">как у всех</td><td class="cn-y">как у всех</td></tr>
   </table></div>
@@ -880,39 +983,173 @@ a.yours:hover{background:#EBD3A3}
 <script>(function(){try{if(/[?&]preview=1/.test(location.search)){var c=document.getElementById('ceny'),s=document.getElementById('cn-soon');if(c){c.hidden=false}if(s){s.hidden=true}}}catch(e){}})();
 
 (function(){
+  var P='cn-';
+  function k(s){return s.split(' ').map(function(c){return P+c}).join(' ')}
+  var $=function(id){return document.getElementById(id)};
   var C=['Цюрих','Берн','Люцерн','Ури','Швиц','Обвальден','Нидвальден','Гларус','Цуг','Фрибур','Золотурн','Базель-Штадт','Базель-Ландшафт','Шаффхаузен','Аппенцелль-Ауссерроден','Аппенцелль-Иннерроден','Санкт-Галлен','Граубюнден','Аргау','Тургау','Тичино','Во','Вале','Невшатель','Женева','Юра'];
-  var main=document.getElementById('mainc'),extra=document.getElementById('extra'),add=document.getElementById('addc'),
-      t=document.getElementById('total'),m=document.getElementById('msg');
-  main.innerHTML=C.map(function(n){return '<option>'+n+'</option>'}).join('');
-  var boxes=document.querySelectorAll('#calc input[type=checkbox]');
-  function fillExtra(sel){
-    var keep=sel.value;
-    sel.innerHTML='<option value="">Выберите кантон</option>'+C.filter(function(n){return n!==main.value}).map(function(n){return '<option'+(n===keep?' selected':'')+'>'+n+'</option>'}).join('');
+  var T={
+    pk:{b:'Базовая',v:'VIP',t:'ТОП'},
+    pkLine:{b:'Пакет «Базовая»',v:'Пакет «VIP»',t:'Пакет «ТОП»'},
+    perName:{y:'за год',h:'за полгода',q:'за квартал'},
+    perLine:{y:'Срок: год',h:'Срок: полгода, 60 % от годовой цены',q:'Срок: квартал, 35 % от годовой цены'},
+    whole:'Весь кантон',online:'Вся Швейцария онлайн',price:'Прайс на ладони',extra:'Дополнительный кантон',noCanton:'кантон не выбран',
+    inc:'входит',placesInc:'Места для событий и курсов, входят в пакет',packs:'Дополнительные места',
+    mColor:'выделения цветом',mReport:'отчёта посещений',mCard:'визитки без водяного знака',mFirst:'первого ряда в кантоне',
+    okAll:'✓ Есть всё, что вы отметили',noHas:'Нет: ',
+    best:'Выгоднее всего',pick:'Показать счёт',picked:'Счёт показан',
+    topNote:'ТОП: три места на кантон. Когда они заняты, вход по очереди.',
+    sum:'Сумма за год',minNote:'Минимальный счёт',noVat:'Сумма без MWST',vat:'MWST 8,1 %',due:'К оплате',
+    invFor:'Счёт: ',month:'Для сравнения: в пересчёте на месяц около ',monthTail:' CHF. Оплата одним счётом за выбранный срок, помесячно не предлагаем.',
+    chf:'CHF',
+    mB:'Для вашего набора хватает Базовой с опциями: ',mBt:' CHF. ',mToV:'До VIP осталось ',mToVt:' CHF. В VIP ещё цвет карточки, отчёт посещений и визитка без знака.',
+    mV1:'Вам выгоднее VIP: ',mV2:' CHF. Базовая с такими опциями стоила бы ',mV3:', и в ней нет: ',
+    mT1:'Для вашего набора подходит только ТОП: ',mT2:' CHF. Он единственный даёт первый ряд в кантоне. Мест три на кантон, когда они заняты, вход по очереди.',
+    cpHead:'Свои люди · расчёт пакета для карточки в справочнике',copied:'Расчёт скопирован',copyFail:'Не получилось скопировать, выделите текст и скопируйте вручную',reset:'Расчёт удалён из браузера',
+    kasTitle:'Выберите кантон'
+  };
+  var PRICE={b:72,v:240,t:480};
+  var INC={b:{w:0,o:0,x:0,p:0,pl:0},v:{w:1,o:1,x:1,p:1,pl:6},t:{w:1,o:1,x:1,p:1,pl:12}};
+  var PER={y:{f:1,m:12},h:{f:0.6,m:6},q:{f:0.35,m:3}};
+  var KEY='svoiCeny';
+  var S={per:'y',main:'Цюрих',whole:false,online:false,extra:[],price:false,places:0,wColor:false,wReport:false,wCard:false,wFirst:false,sel:'auto'};
+
+  function r5(x){return Math.round(x*20)/20}
+  function fmt(n){return n%1?n.toFixed(2):String(n)}
+
+  function packOf(key){
+    var i=INC[key],lines=[],miss=[],sum=PRICE[key];
+    lines.push([T.pkLine[key],PRICE[key]]);
+    if(S.whole){var w=i.w?0:36;sum+=w;lines.push([T.whole+': '+S.main,w])}
+    if(S.online){var o=i.o?0:60;sum+=o;lines.push([T.online,o])}
+    S.extra.forEach(function(n,j){var f=j<i.x?0:36;sum+=f;lines.push([T.extra+': '+n,f])});
+    if(S.price){var p=i.p?0:24;sum+=p;lines.push([T.price,p])}
+    if(S.places>0){
+      var inc=Math.min(i.pl,S.places);
+      if(inc>0) lines.push([T.placesInc+': '+inc,0]);
+      var packs=Math.max(0,S.places-i.pl),rate=key==='b'?20:10;
+      if(packs>0){sum+=packs*rate;lines.push([T.packs+': '+packs+' × '+rate,packs*rate])}
+    }
+    if(S.wColor&&key==='b')miss.push(T.mColor);
+    if(S.wReport&&key==='b')miss.push(T.mReport);
+    if(S.wCard&&key==='b')miss.push(T.mCard);
+    if(S.wFirst&&key!=='t')miss.push(T.mFirst);
+    var raw=r5(sum*PER[S.per].f),inv=Math.max(30,raw);
+    return {k:key,lines:lines,miss:miss,sum:sum,raw:raw,inv:inv,minHit:raw<30};
   }
-  function addRow(){
-    var l=document.createElement('label');
-    l.innerHTML='<span>+ 1 дополнительный кантон</span><select></select><b>36</b><button type="button" aria-label="Убрать" class="rm">×</button>';
-    var s=l.querySelector('select');fillExtra(s);s.addEventListener('change',upd);
-    l.querySelector('.rm').addEventListener('click',function(e){e.preventDefault();l.remove();upd()});
-    extra.appendChild(l);upd();
+
+  function fillSelect(sel,keep,skip){
+    sel.innerHTML='<option value="">'+T.kasTitle+'</option>'+C.filter(function(n){return skip.indexOf(n)<0}).map(function(n){return '<option'+(n===keep?' selected':'')+'>'+n+'</option>'}).join('');
+    sel.value=skip.indexOf(keep)<0?keep:'';
   }
+  function readExtra(){S.extra=[].map.call($('extra').querySelectorAll('select'),function(x){return x.value}).filter(Boolean)}
+  function refillExtra(){
+    var sels=[].slice.call($('extra').querySelectorAll('select'));
+    sels.forEach(function(sel){
+      var others=sels.filter(function(x){return x!==sel}).map(function(x){return x.value}).filter(Boolean);
+      fillSelect(sel,sel.value,[S.main].concat(others));
+    });
+  }
+  function addRow(val){
+    var l=document.createElement('label');l.className=k('crow');
+    l.innerHTML='<span>'+T.extra+'</span><select></select><button type="button" aria-label="×" class="'+k('rm')+'">×</button>';
+    var s=l.querySelector('select');fillSelect(s,val||'',[S.main]);
+    s.addEventListener('change',function(){refillExtra();upd()});
+    l.querySelector('button').addEventListener('click',function(e){e.preventDefault();l.remove();refillExtra();upd()});
+    $('extra').appendChild(l);refillExtra();
+  }
+
+  function card(p,best,sel){
+    var h='<div class="'+k('cc'+(best?' best':'')+(sel?' sel':''))+'">';
+    if(best)h+='<span class="'+k('badge bd')+'">'+T.best+'</span>';
+    h+='<h3>'+T.pk[p.k]+'</h3><div class="'+k('big')+'">'+fmt(p.inv)+' <small>'+T.chf+' '+T.perName[S.per]+'</small></div>';
+    h+='<ul class="'+k('cl')+'">'+p.lines.map(function(x){return '<li><span>'+x[0]+'</span><em>'+(x[1]?fmt(x[1]):T.inc)+'</em></li>'}).join('')+'</ul>';
+    h+=p.miss.length?'<div class="'+k('no')+'">'+T.noHas+p.miss.join(', ')+'</div>':'<div class="'+k('ok')+'">'+T.okAll+'</div>';
+    if(p.k==='t')h+='<div class="'+k('nt')+'">'+T.topNote+'</div>';
+    h+='<button type="button" class="'+k('pick')+'" data-k="'+p.k+'">'+(sel?T.picked:T.pick)+'</button></div>';
+    return h;
+  }
+
   function upd(){
-    var s=72,n=0,names=[];
-    boxes.forEach(function(b){if(b.checked){s+=+b.dataset.p;n++}});
-    extra.querySelectorAll('select').forEach(function(x){fillExtra(x);if(x.value){s+=36;n++;names.push(x.value)}});
-    t.textContent=s;
-    var full=258;
-    var txt;
-    if(n===0) txt='Базовая за 72 уже даёт карточку и метку на карте. Добавьте охват, например «Весь кантон», и вас найдут не только в городе.';
-    else if(s>=240) txt='Ваш набор стоит '+s+'. VIP за 240 включает всё это плюс выделение цветом и отчёт посещений. Выгоднее на '+(s-240)+' CHF.';
-    else if(s>=150) txt='Осталось '+(240-s)+' CHF до VIP. Там цвет карточки, место выше, все опции и отчёт посещений. Набрать то же по отдельности стоило бы '+full+'.';
-    else txt='Ваш набор '+s+' CHF. С VIP за 240 в охват входят все опции сразу, и карточка выделена цветом.';
-    var cn=[];if(document.getElementById('o1').checked)cn.push('Весь кантон: '+main.value);if(names.length)cn.push('Дополнительные: '+names.join(', '));
-    if(cn.length) txt=cn.join('. ')+'. '+txt;
-    m.textContent=txt;
+    readExtra();
+    var P3=['b','v','t'].map(packOf),by={};P3.forEach(function(p){by[p.k]=p});
+    var sat=P3.filter(function(p){return !p.miss.length}).sort(function(a,b){return a.inv-b.inv});
+    var best=sat[0],shown=S.sel==='auto'||!by[S.sel]?best.k:S.sel;
+    $('res').innerHTML=P3.map(function(p){return card(p,p.k===best.k,p.k===shown)}).join('');
+    // подсказка
+    var m,b=by.b,v=by.v;
+    if(best.k==='b'){m=T.mB+fmt(b.inv)+T.mBt;if(v.inv>b.inv)m+=T.mToV+fmt(v.inv-b.inv)+T.mToVt;}
+    else if(best.k==='v'){m=T.mV1+fmt(v.inv)+T.mV2+fmt(b.inv)+(b.miss.length?T.mV3+b.miss.join(', ')+'.':'.')}
+    else m=T.mT1+fmt(best.inv)+T.mT2;
+    $('msg').textContent=m;
+    // счёт
+    var p=by[shown],vat=r5(p.inv*0.081),tot=p.inv+vat;
+    var rows=p.lines.map(function(x){return '<tr><td>'+x[0]+'</td><td>'+(x[1]?fmt(x[1]):T.inc)+'</td></tr>'}).join('');
+    rows+='<tr class="'+k('sub')+'"><td>'+T.sum+'</td><td>'+fmt(p.sum)+'</td></tr>';
+    if(S.per!=='y')rows+='<tr class="'+k('sub')+'"><td>'+T.perLine[S.per]+'</td><td>'+fmt(p.raw)+'</td></tr>';
+    if(p.minHit)rows+='<tr class="'+k('sub')+'"><td>'+T.minNote+'</td><td>30</td></tr>';
+    rows+='<tr><td>'+T.noVat+'</td><td>'+fmt(p.inv)+'</td></tr><tr class="'+k('sub')+'"><td>'+T.vat+'</td><td>'+fmt(vat)+'</td></tr><tr class="'+k('tot')+'"><td>'+T.due+'</td><td>'+fmt(tot)+' '+T.chf+'</td></tr>';
+    $('inv').innerHTML='<h3>'+T.invFor+T.pk[p.k]+'</h3><table>'+rows+'</table><p class="'+k('small muted')+'">'+T.month+fmt(r5(tot/PER[S.per].m))+T.monthTail+'</p>';
+    $('inv')._p={p:p,vat:vat,tot:tot};
+    save();
   }
-  boxes.forEach(function(b){b.addEventListener('change',upd)});
-  main.addEventListener('change',upd);add.addEventListener('click',addRow);upd();
+
+  function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+  function load(){try{var j=JSON.parse(localStorage.getItem(KEY)||'null');if(j&&typeof j==='object'){
+    if(PER[j.per])S.per=j.per; if(C.indexOf(j.main)>=0)S.main=j.main;
+    ['whole','online','price','wColor','wReport','wCard','wFirst'].forEach(function(f){S[f]=!!j[f]});
+    S.places=Math.max(0,Math.min(60,parseInt(j.places,10)||0));
+    S.extra=(j.extra||[]).filter(function(n){return C.indexOf(n)>=0&&n!==S.main}).slice(0,25);
+    S.sel=['b','v','t'].indexOf(j.sel)>=0?j.sel:'auto';
+  }}catch(e){}}
+  function sync(){
+    document.querySelectorAll('input[name=per]').forEach(function(r){r.checked=r.value===S.per});
+    fillSelect($('mainc'),S.main,[]);$('mainc').value=S.main;
+    $('c_whole').checked=S.whole;$('c_online').checked=S.online;$('c_price').checked=S.price;
+    $('w_color').checked=S.wColor;$('w_report').checked=S.wReport;$('w_card').checked=S.wCard;$('w_first').checked=S.wFirst;
+    $('pn').textContent=S.places;
+    $('extra').innerHTML='';S.extra.forEach(function(n){addRow(n)});
+  }
+  function text(){
+    var o=$('inv')._p,p=o.p,L=[T.cpHead,T.pk[p.k]+' · '+T.perName[S.per],''];
+    p.lines.forEach(function(x){L.push(x[0]+': '+(x[1]?fmt(x[1]):T.inc))});
+    L.push('',T.noVat+': '+fmt(p.inv)+' '+T.chf,T.vat+': '+fmt(o.vat)+' '+T.chf,T.due+': '+fmt(o.tot)+' '+T.chf);
+    return L.join('\n');
+  }
+
+  load();sync();
+  document.querySelectorAll('input[name=per]').forEach(function(r){r.addEventListener('change',function(){S.per=r.value;upd()})});
+  $('mainc').addEventListener('change',function(){S.main=$('mainc').value;refillExtra();upd()});
+  [['c_whole','whole'],['c_online','online'],['c_price','price'],['w_color','wColor'],['w_report','wReport'],['w_card','wCard'],['w_first','wFirst']].forEach(function(a){
+    $(a[0]).addEventListener('change',function(){S[a[1]]=$(a[0]).checked;upd()})});
+  $('addc').addEventListener('click',function(){if($('extra').children.length<25){addRow('');upd()}});
+  $('pm').addEventListener('click',function(){S.places=Math.max(0,S.places-1);$('pn').textContent=S.places;upd()});
+  $('pp').addEventListener('click',function(){S.places=Math.min(60,S.places+1);$('pn').textContent=S.places;upd()});
+  $('res').addEventListener('click',function(e){var b=e.target.closest('button[data-k]');if(b){S.sel=b.getAttribute('data-k');upd();$('inv').scrollIntoView({behavior:'smooth',block:'nearest'})}});
+  $('copy').addEventListener('click',function(){
+    var t=text(),c=$('cst');
+    function ok(){c.textContent=T.copied}
+    function fail(){c.textContent=T.copyFail}
+    if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(t).then(ok,fail);else fail();
+  });
+  $('reset').addEventListener('click',function(){
+    try{localStorage.removeItem(KEY)}catch(e){}
+    S={per:'y',main:'Цюрих',whole:false,online:false,extra:[],price:false,places:0,wColor:false,wReport:false,wCard:false,wFirst:false,sel:'auto'};
+    sync();upd();try{localStorage.removeItem(KEY)}catch(e){}$('cst').textContent=T.reset;
+  });
+  upd();
+
+  /* кружки «?» */
+  document.addEventListener('click',function(e){
+    var b=e.target.closest('button[data-t]'),host=document.getElementById('ceny')||document.body,old=document.getElementById('qtip');
+    if(!b){if(old&&!e.target.closest('#qtip'))old.remove();return}
+    e.preventDefault();
+    if(old){old.remove();if(old._b===b){b.setAttribute('aria-expanded','false');return}}
+    var t=document.createElement('div');t.id='qtip';t.className=k('qtip');t.setAttribute('role','note');t.textContent=b.getAttribute('data-t');t._b=b;host.appendChild(t);
+    b.setAttribute('aria-expanded','true');
+    var r=b.getBoundingClientRect(),w=Math.min(300,window.innerWidth-24);t.style.width=w+'px';
+    t.style.left=Math.max(12,Math.min(window.innerWidth-w-12,r.left+r.width/2-w/2))+'px';t.style.top=(r.bottom+8)+'px';
+  },true);
+  window.addEventListener('scroll',function(){var o=document.getElementById('qtip');if(o)o.remove()},{passive:true});
 })();
 </script>
 <script src="/assets/temy.js" defer></script>
