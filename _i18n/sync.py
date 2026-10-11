@@ -29,7 +29,21 @@ def ctx_of(u):
         if k >= 0: return src, s[max(0, k - 160):k + len(u) + 160]
     return '', ''
 
+def nokey():
+    """Защита ссылок подтверждения (11.10.2026): в открытых data/*.js может быть только отпечаток keyHash, но не сам ключ key.
+    Ключ, записанный в открытый файл, может прочитать любой — и подтвердить или исправить запись за другого человека."""
+    bad = []
+    for f in ('specialists.js', 'afisha.js', 'vacancies.js', 'organizations.js'):
+        s = open(os.path.join(ROOT, 'data', f), encoding='utf-8').read()
+        s = s[re.search(r'\nwindow\.[A-Z_]+ = \[', s).end():] if re.search(r'\nwindow\.[A-Z_]+ = \[', s) else s
+        if re.search(r'(?<![\w$])(["\']?)key\1\s*:', s): bad.append(f)
+    if bad:
+        print('STOP: в data/' + ', data/'.join(bad) + ' есть поле key (сам ключ подтверждения). В открытых данных — только keyHash.\n'
+              'Новый ключ и ссылку даёт: python3 -I _i18n/pochta/klyuch.py <id> (ключ — только в ссылке в письме).')
+        sys.exit(1)
+
 def check():
+    nokey()
     missing = pages.build()
     units = []
     for i, u in enumerate(missing):
@@ -86,6 +100,7 @@ def stats():
     print(f"stats: специалистов {d['n']}, обновлено {d['today']}")
 
 def build():
+    nokey()
     stats()
     m = pages.build()
     print(f'built; untranslated left: {len(m)}')

@@ -866,8 +866,8 @@ function ico(name, line = '#2E5A88', fill, size = 24){
 const AVATAR_SVG = '<svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="46" fill="#FFFCF8" stroke="#6E4F3C" stroke-width="3"/><g transform="rotate(22.5 50 50)"><path d="M50 50 C42 40 43 24 50 15 C57 24 58 40 50 50Z" fill="#E3E6D6" stroke="#66704F" stroke-width="2"/></g><g transform="rotate(67.5 50 50)"><path d="M50 50 C42 40 43 24 50 15 C57 24 58 40 50 50Z" fill="#E3E6D6" stroke="#66704F" stroke-width="2"/></g><g transform="rotate(112.5 50 50)"><path d="M50 50 C42 40 43 24 50 15 C57 24 58 40 50 50Z" fill="#E3E6D6" stroke="#66704F" stroke-width="2"/></g><g transform="rotate(157.5 50 50)"><path d="M50 50 C42 40 43 24 50 15 C57 24 58 40 50 50Z" fill="#E3E6D6" stroke="#66704F" stroke-width="2"/></g><g transform="rotate(202.5 50 50)"><path d="M50 50 C42 40 43 24 50 15 C57 24 58 40 50 50Z" fill="#E3E6D6" stroke="#66704F" stroke-width="2"/></g><g transform="rotate(247.5 50 50)"><path d="M50 50 C42 40 43 24 50 15 C57 24 58 40 50 50Z" fill="#E3E6D6" stroke="#66704F" stroke-width="2"/></g><g transform="rotate(292.5 50 50)"><path d="M50 50 C42 40 43 24 50 15 C57 24 58 40 50 50Z" fill="#E3E6D6" stroke="#66704F" stroke-width="2"/></g><g transform="rotate(337.5 50 50)"><path d="M50 50 C42 40 43 24 50 15 C57 24 58 40 50 50Z" fill="#E3E6D6" stroke="#66704F" stroke-width="2"/></g><g transform="rotate(0.0 50 50)"><path d="M50 50 C45 43 45 32 50 26 C55 32 55 43 50 50Z" fill="#EADFCF" stroke="#6E4F3C" stroke-width="2"/></g><g transform="rotate(45.0 50 50)"><path d="M50 50 C45 43 45 32 50 26 C55 32 55 43 50 50Z" fill="#EADFCF" stroke="#6E4F3C" stroke-width="2"/></g><g transform="rotate(90.0 50 50)"><path d="M50 50 C45 43 45 32 50 26 C55 32 55 43 50 50Z" fill="#EADFCF" stroke="#6E4F3C" stroke-width="2"/></g><g transform="rotate(135.0 50 50)"><path d="M50 50 C45 43 45 32 50 26 C55 32 55 43 50 50Z" fill="#EADFCF" stroke="#6E4F3C" stroke-width="2"/></g><g transform="rotate(180.0 50 50)"><path d="M50 50 C45 43 45 32 50 26 C55 32 55 43 50 50Z" fill="#EADFCF" stroke="#6E4F3C" stroke-width="2"/></g><g transform="rotate(225.0 50 50)"><path d="M50 50 C45 43 45 32 50 26 C55 32 55 43 50 50Z" fill="#EADFCF" stroke="#6E4F3C" stroke-width="2"/></g><g transform="rotate(270.0 50 50)"><path d="M50 50 C45 43 45 32 50 26 C55 32 55 43 50 50Z" fill="#EADFCF" stroke="#6E4F3C" stroke-width="2"/></g><g transform="rotate(315.0 50 50)"><path d="M50 50 C45 43 45 32 50 26 C55 32 55 43 50 50Z" fill="#EADFCF" stroke="#6E4F3C" stroke-width="2"/></g><circle cx="50" cy="50" r="7" fill="#B98324"/></svg>';
 
 </script>
-<script src="/data/specialists.uk.js?v=06599fe4"></script>
-<script src="/data/vacancies.uk.js?v=1889cf60"></script>
+<script src="/data/specialists.uk.js?v=144584ac"></script>
+<script src="/data/vacancies.uk.js?v=49588a9e"></script>
 <script src="/data/organizations.uk.js?v=817cafda"></script>
 <script>
 window.IMG_BASE = 'img/';
@@ -875,7 +875,7 @@ window.IMG_BASE = 'img/';
 const SPECIALISTS = window.SPECIALISTS || [];
 
 </script>
-<script src="/data/afisha.uk.js?v=6e01b45f"></script>
+<script src="/data/afisha.uk.js?v=934a4edc"></script>
 <script>const AFISHA = window.AFISHA || [];</script>
 <script>
 const ADMIN = (() => {   // режим Ирины: svoiludi.ch/?ira=1 включает на этом устройстве, ?ira=0 выключает
@@ -1330,12 +1330,18 @@ async function shareCard(s){
 
 /* ---------- подтверждение карточки специалистом (05.10.2026) ----------
    Ирина (режим ?ira=1) в окне карточки нажимает «Отправить на подтверждение»: письмо специалисту со ссылкой предпросмотра.
-   Специалист открывает https://svoiludi.ch/uk/#preview=<id>.<key>, видит свою карточку (даже если она ещё скрыта)
+   Специалист открывает https://svoiludi.ch/uk/#preview=<id>.<key>, видит свою карточку (даже если она ещё скрыта).
+   В data/specialists.js только keyHash (SHA-256 ключа); ключ — только в ссылке из письма (_i18n/pochta/klyuch.py, 11.10.2026).
    ставит галочку и нажимает «Подтверждаю» или пишет исправления прямо на странице. Запрос уходит в Google Apps Script
    (22 Тесты\Code_Google_Sheets.gs, ?what=confirm, с 06.10.2026): запись со снимком карточки на лист «Свои люди — подтверждения»,
    письмо Ирине и копия специалисту на e-mail из карточки. Если скрипт недоступен — запасной вариант: письмо через почту. */
 const SITE = 'https://svoiludi.ch/uk/';
-const previewUrl = s => `${SITE}#preview=${encodeURIComponent(s.id)}.${encodeURIComponent(s.key || '')}`;
+/* ключ подтверждения (11.10.2026): в открытых данных только отпечаток keyHash = SHA-256 ключа, сам ключ есть только в ссылке из письма.
+   Поэтому, даже прочитав открытые файлы сайта, подтвердить или исправить запись за другого человека нельзя. */
+const OKKEY = {};   // id → ключ из открытой ссылки: только в этой вкладке, пока она открыта
+const svlHash = async k => { try { const b = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(String(k || ''))); return Array.from(new Uint8Array(b), x => x.toString(16).padStart(2, '0')).join(''); } catch (x) { return ''; } };
+const keyOk = async (r, k) => !!(r && r.keyHash && k && (await svlHash(k)) === r.keyHash);
+const previewUrl = s => `${SITE}#preview=${encodeURIComponent(s.id)}.${encodeURIComponent(OKKEY[s.id] || '')}`;
 const mailto = (to, su, body) => `mailto:${to}?subject=${encodeURIComponent(su)}&body=${encodeURIComponent(body)}`;
 const gmail = (to, su, body) => `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(to)}&su=${encodeURIComponent(su)}&body=${encodeURIComponent(body)}`;
 const ownerLetter = s => ({ su: 'Ваша картка у «Своїх людях у Швейцарії» — перегляньте, будь ласка',
@@ -1358,7 +1364,7 @@ function previewBox(s){
    письмо с его адреса приходит Ирине. После письма Ирина ставит pricesOk — и кнопка «Прайс-лист PNG» появляется на сайте. */
 let PRICEVIEW = '';   // id карточки, открытой по ссылке подтверждения прайс-листа
 const priceShown = s => (s.prices || []).length > 0 && (!!s.pricesOk || !!s.sample || ADMIN || PRICEVIEW === s.id);
-const priceUrl = s => `${SITE}#price=${encodeURIComponent(s.id)}.${encodeURIComponent(s.key || '')}`;
+const priceUrl = s => `${SITE}#price=${encodeURIComponent(s.id)}.${encodeURIComponent(OKKEY[s.id] || '')}`;
 const priceAsk = s => ({ su: 'Прайс-лист для вашої картки у «Своїх людях у Швейцарії»',
   body: `Добрий день!\n\nУ довіднику «Свої люди у Швейцарії» у вашої картки може бути прайс-лист. Його можна зберегти картинкою на телефон і переслати клієнтам.\n\n${(s.services || []).length ? `Нижче — послуги з вашої картки. Впишіть, будь ласка, ціни замість ___ і надішліть листом у відповідь. Послугу можна видалити, додати свою або дописати пояснення, наприклад тривалість (Манікюр з гель-лаком — 60 CHF — 60 хвилин).\n\n${s.services.map(x => x + ' — ___ CHF').join('\n')}` : `Якщо хочете, надішліть, будь ласка, листом у відповідь ваші ціни, по одній послузі в рядку:\nпослуга — ціна — пояснення, якщо потрібно (наприклад, тривалість)\n\nНаприклад:\nМанікюр з гель-лаком — 60 CHF — 60 хвилин`}\n\nПеред публікацією я надішлю вам прайс-лист на перевірку, і він з’явиться на сайті тільки після вашого підтвердження.\n\nЗ теплом,\nІрина Вознесенська\n${MAIL}` });
 const priceLetter = s => ({ su: 'Ваш прайс-лист у «Своїх людях у Швейцарії» — перегляньте, будь ласка',
@@ -1392,7 +1398,7 @@ document.addEventListener('click', async e => {
   if (fix && !text){ msg.textContent = PV_T.empty; return; }
   b.disabled = true; msg.textContent = PV_T.sending;
   try {
-    const u = `${CONFIRM_URL}?what=confirm&kind=${kind}&id=${encodeURIComponent(s.id)}&key=${encodeURIComponent(s.key || '')}&lang=uk${text ? '&text=' + encodeURIComponent(text) : ''}`;
+    const u = `${CONFIRM_URL}?what=confirm&kind=${kind}&id=${encodeURIComponent(s.id)}&key=${encodeURIComponent(OKKEY[s.id] || '')}&lang=uk${text ? '&text=' + encodeURIComponent(text) : ''}`;
     const j = await (await fetch(u)).json(); if (!j.ok) throw new Error(j.error || 'error');
     box.querySelectorAll('.pv-ok,.pv-acts,.pv-fix').forEach(x => x.hidden = true);
     msg.textContent = fix ? PV_T.fixok(j.time) : PV_T.ok(j.time, j.copy); msg.classList.add('pv-done');
@@ -1403,6 +1409,7 @@ document.addEventListener('click', async e => {
     msg.innerHTML = `${PV_T.fail} <a href="${esc(mailto(MAIL, L.su, body))}">${PV_T.mail}</a> (${esc(MAIL)}).`;
   }
 });
+const noKeyNote = s => `<div class="adm-act off"><b>Посилання — у чернетці листа</b><span>У відкритих даних сайту немає ключа підтвердження, лише його відбиток. Тому підтвердити чи виправити картку замість фахівця ніхто не може. Посилання на попередній перегляд Claude кладе в чернетку листа фахівцю. Потрібне нове посилання — напиши Claude: «нове посилання для ${esc(s.num || s.id)}». Якщо відкрити картку за цим посиланням, кнопки надсилання з’являться і тут.</span></div>`;
 function admAct(attrs, title, desc, main){
   const tag = attrs.startsWith('href') ? 'a' : 'button';
   return `<${tag} class="adm-act${main ? ' main' : ''}" ${tag === 'button' ? 'type="button" ' : ''}${attrs}><b>${title}</b><span>${desc}</span></${tag}>`;
@@ -1418,6 +1425,8 @@ function priceAdmin(s, to){
         'Відкриває цей лист у Gmail у новій вкладці, якщо поштова програма не налаштована. Перевір, що надсилаєш з voznesenskaya.iryna@gmail.com. Якщо список послуг довгий і лист відкрився не повністю — скористайся копіюванням.') : '')
       + admAct(`data-copyask="${esc(s.id)}"`, 'Скопіювати запит',
         'Весь текст запиту зі списком послуг копіюється в буфер. Встав його в Telegram, WhatsApp або в лист вручну.');
+  } else if (!s.pricesOk && !OKKEY[s.id]){
+    acts = noKeyNote(s);
   } else if (!s.pricesOk){
     acts = (to ? admAct(`href="${esc(mailto(to, L.su, L.body))}"`, 'Надіслати прайс-лист на підтвердження',
         `Відкриється лист на ${esc(to)} з посиланням на попередній перегляд прайс-листа. Фахівець ставить галочку й натискає «Прайс-лист правильний, підтверджую». Тобі прийде лист «🌿 Свої люди: Прайс-лист підтверджено», після цього Claude вмикає прайс-лист на сайті.`, true)
@@ -1436,14 +1445,14 @@ document.addEventListener('click', async e => { const b = e.target.closest('[dat
   try { await navigator.clipboard.writeText(t); (b.querySelector('b') || b).textContent = 'Скопійовано ✓'; } catch (x) { prompt('Скопіюйте текст', t); } });
 function adminBox(s){
   const to = (s.contacts && s.contacts.email) || '', L = ownerLetter(s), why = hiddenReason(s);
-  const acts = (to ? admAct(`href="${esc(mailto(to, L.su, L.body))}"`, 'Надіслати картку на підтвердження — листом',
+  const acts = !OKKEY[s.id] ? noKeyNote(s) : (to ? admAct(`href="${esc(mailto(to, L.su, L.body))}"`, 'Надіслати картку на підтвердження — листом',
       `Відкриється готовий лист на ${esc(to)} у твоїй поштовій програмі: посилання на попередній перегляд картки й прохання натиснути «Підтверджую». Лист потрібно тільки надіслати. Коли фахівець підтвердить, тобі прийде лист «🌿 Свої люди: Картку підтверджено», і Claude зробить картку активною.`, true)
     + admAct(`href="${esc(gmail(to, L.su, L.body))}" target="_blank" rel="noopener"`, 'Той самий лист — у Gmail',
       'Відкриває цей лист у Gmail у новій вкладці, якщо поштова програма не налаштована. Перевір, що надсилаєш з voznesenskaya.iryna@gmail.com.')
     : `<div class="adm-act off"><b>Листом не вийде</b><span>У фахівця немає e-mail у картці. Надішли посилання через Telegram або WhatsApp.</span></div>`)
     + admAct(`data-copyprev="${esc(s.id)}"`, 'Скопіювати посилання для Telegram',
       'Текст із посиланням на попередній перегляд копіюється в буфер. Встав його фахівцю в Telegram або WhatsApp. Підтвердження він зробить кнопкою на сайті — e-mail не потрібен.');
-  return `<div class="adm-box"><b>Бачиш тільки ти</b><div class="adm-sec"><span><b>Картка:</b> ${esc(s.status || '—')}${why ? ' · на сайті не видно (' + esc(why) + ')' : ' · видно на сайті'}${s.key ? '' : ' · немає ключа попереднього перегляду (key)'}</span>
+  return `<div class="adm-box"><b>Бачиш тільки ти</b><div class="adm-sec"><span><b>Картка:</b> ${esc(s.status || '—')}${why ? ' · на сайті не видно (' + esc(why) + ')' : ' · видно на сайті'}${s.keyHash ? '' : ' · немає ключа попереднього перегляду'}</span>
     ${(s.todo || []).length ? `<ul class="adm-todo">${s.todo.map(x => `<li>${esc(x)}</li>`).join('')}</ul>` : ''}<div class="adm-acts">${acts}</div></div>${priceAdmin(s, to)}</div>`;
 }
 document.addEventListener('click', async e => { const b = e.target.closest('[data-copyprev]'); if (!b) return;
@@ -1691,8 +1700,8 @@ document.getElementById('trial').hidden = !ADMIN;
 fillSelects(); render();
 // ссылки для бота: …/specialisty/#anna-keller открывает карточку, …/specialisty/#k-health — направление
 const openFromHash = () => { const id = decodeURIComponent(location.hash.slice(1));
-  if (id.startsWith('preview=')){ const [pid, key] = id.slice(8).split('.'); const sp = SPECIALISTS.find(x => x.id === pid); if (sp && sp.key && key === sp.key){ PREVIEW = pid; openCard(pid); setTimeout(() => { const b = document.querySelector('.pv-box'); if (b) b.scrollIntoView({ block: 'center' }); }, 300); } return; }
-  if (id.startsWith('price=')){ const [pid, key] = id.slice(6).split('.'); const sp = SPECIALISTS.find(x => x.id === pid); if (sp && sp.key && key === sp.key){ PRICEVIEW = pid; openCard(pid); setTimeout(() => { const b = document.getElementById('pvPrice'); if (b) b.scrollIntoView({ block: 'center' }); }, 300); } return; }
+  if (id.startsWith('preview=')){ const [pid, key] = id.slice(8).split('.'); const sp = SPECIALISTS.find(x => x.id === pid); keyOk(sp, key).then(ok => { if (!ok) return; OKKEY[pid] = key; PREVIEW = pid; openCard(pid); setTimeout(() => { const b = document.querySelector('.pv-box'); if (b) b.scrollIntoView({ block: 'center' }); }, 300); }); return; }
+  if (id.startsWith('price=')){ const [pid, key] = id.slice(6).split('.'); const sp = SPECIALISTS.find(x => x.id === pid); keyOk(sp, key).then(ok => { if (!ok) return; OKKEY[pid] = key; PRICEVIEW = pid; openCard(pid); setTimeout(() => { const b = document.getElementById('pvPrice'); if (b) b.scrollIntoView({ block: 'center' }); }, 300); }); return; }
   if (id.startsWith('list=')){ state.shared = new Set(id.slice(5).split(',').filter(x => SPECIALISTS.some(s => s.id === x))); state.fav = false; render(); return; }
   if (id.startsWith('k-') && CATS[id.slice(2)]){ state.cat = id.slice(2); state.spec = ''; render(); document.querySelector('.finder').scrollIntoView(); return; }
   if (id && SPECIALISTS.some(s => s.id === id && (s.sample || !hiddenReason(s)))) openCard(id); };

@@ -4,15 +4,18 @@
 Запуск из корня репозитория svoiludi:
   python3 -I _i18n/pochta/kartochka.py <card.json> <фото> [--box x0,y0,x1,y1]
     card.json — карточка в формате data/specialists.js (поля описаны в шапке файла). Скрипт сам ставит:
-                status «на подтверждении» (если не задан; на сайте скрыта, кнопка «Подтверждаю» работает), key (8 знаков, если нет), added/checked = сегодня, photo = <id>.jpg.
+                status «на подтверждении» (если не задан; на сайте скрыта, кнопка «Подтверждаю» работает), НОВЫЙ ключ подтверждения при каждом
+                запуске (в данные — только отпечаток keyHash, сам ключ — только в напечатанной ссылке; _i18n/pochta/klyuch.py), added/checked = сегодня, photo = <id>.jpg.
     фото      — оригинал от специалиста. Кадр 4:5 → img/<id>.jpg 480×600. Без --box — по центру сверху (лицо обычно там);
                 --box задаёт область кадра в пикселях оригинала. После сборки ОБЯЗАТЕЛЬНО посмотреть img/<id>.jpg глазами.
-Если карточка с таким id уже есть, она заменяется (номер SG и key сохраняются), иначе встаёт первой в списке.
+Если карточка с таким id уже есть, она заменяется (номер SG сохраняется, ключ — новый: старая ссылка перестаёт работать), иначе встаёт первой в списке.
 Дальше: python3 _i18n/sync.py check → перевести новые строки (apply) → node _i18n/smoke.js → commit, push.
-Ссылка предпросмотра: https://svoiludi.ch/#preview=<id>.<key>
+Ссылка предпросмотра: https://svoiludi.ch/#preview=<id>.<ключ> — печатается в конце; ключ нигде не сохраняется, ссылку сразу в черновик письма.
 Данные людей (анкеты, оригиналы фото, письма) в репозиторий НЕ кладём — только в папку специалиста на компьютере Ирины.
 """
-import sys, os, json, random, string, datetime
+import sys, os, json, datetime
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import klyuch
 
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 DATA = os.path.join(ROOT, 'data', 'specialists.js')
@@ -57,9 +60,10 @@ def main():
         js = subprocess.run(['node', '-e', "global.window={};require(process.argv[1]);console.log(JSON.stringify(window.SPECIALISTS))", DATA],
                             capture_output=True, text=True, check=True).stdout
         old = next(x for x in json.loads(js) if x['id'] == cid)
-        card.setdefault('num', old.get('num')); card.setdefault('key', old.get('key'))
+        card.setdefault('num', old.get('num'))
     card.setdefault('status', 'на подтверждении')
-    card.setdefault('key', ''.join(random.choice(string.ascii_lowercase + string.digits) for _ in range(8)))
+    card.pop('key', None); card.pop('keyHash', None)
+    key = klyuch.new_key(); card['keyHash'] = klyuch.sha(key)   # в открытых данных только отпечаток ключа (11.10.2026)
     card.setdefault('added', today); card['checked'] = card.get('checked') or today
     card['photo'] = f'{cid}.jpg'
     for k, v in (('paidUntil', ''), ('tiers', []), ('onlineCH', ''), ('tags', [])):
@@ -81,8 +85,8 @@ def main():
     else:
         s = s.replace(ANCHOR, ANCHOR + block + ',\n')
     open(DATA, 'w', encoding='utf-8').write(s)
-    print(json.dumps({'id': cid, 'num': card.get('num'), 'status': card['status'], 'key': card['key'],
-                      'preview': f"https://svoiludi.ch/#preview={cid}.{card['key']}", 'photo': 'img/' + card['photo'],
+    print(json.dumps({'id': cid, 'num': card.get('num'), 'status': card['status'],
+                      'preview': f"https://svoiludi.ch/#preview={cid}.{key}", 'price': f"https://svoiludi.ch/#price={cid}.{key}", 'photo': 'img/' + card['photo'],
                       'replaced': bool(old)}, ensure_ascii=False))
 
 

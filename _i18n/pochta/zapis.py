@@ -5,7 +5,7 @@
   python3 -I _i18n/pochta/zapis.py <письмо.txt> [--write]
     письмо.txt — текст письма-заявки из формы events/#zayavka, kursy/#zayavka или vakansii/#zayavka (RU или UA), как пришёл в Gmail.
     Без --write только печатает черновик (JSON) — проверить глазами. С --write ставит запись первой в data/afisha.js
-    или data/vacancies.js со статусом «на подтверждении» и ключом key: на сайте её не видно, ссылка предпросмотра работает.
+    или data/vacancies.js со статусом «на подтверждении» и отпечатком ключа keyHash (сам ключ — только в напечатанной ссылке, klyuch.py): на сайте её не видно, ссылка предпросмотра работает.
 
 Формы теперь почти без свободного текста (решение Ирины 10.10.2026, 22:00–22:09): адрес отдельными полями (улица, индекс, город,
 кантон «Цюрих (ZH)»), даты ДД.ММ.ГГГГ (первый и последний день → date, dateEnd или repeat.until), время, повтор из списка,
@@ -24,6 +24,8 @@
 Дальше: python3 _i18n/sync.py check → перевести (apply) → node _i18n/smoke.js → commit, push → черновик письма со ссылкой в Gmail.
 """
 import sys, os, re, json, random, string, datetime, subprocess
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import klyuch
 
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 TODAY = datetime.date.today()
@@ -139,12 +141,12 @@ def main():
     own = [k for k in ('Это моё событие, за других не размещаю', 'Это мой курс, за других не размещаю', 'Ищу для себя, за других не размещаю') if f.get(k)]
     if not own or not f.get('В моей компетенции и по закону'):
         print('ВНИМАНИЕ: в письме нет галочек «Это моё…» и/или «В моей компетенции и по закону». Без них не размещаем — попросить отправить заявку с сайта ещё раз.')
-    key = ''.join(random.choice(string.ascii_lowercase + string.digits) for _ in range(8))
+    key = klyuch.new_key()   # в данные — только отпечаток keyHash, сам ключ — только в напечатанной ссылке (11.10.2026)
     P = place_of(f, ct, card)
     title = f.get('Название') or f.get('Кто нужен') or ''
     C = contacts(f)
     if kind in ('event', 'kurs'):
-        e = {'id': slug(title), 'key': key, 'status': 'на подтверждении', 'sections': ['events' if kind == 'event' else 'kursy'], 'title': title}
+        e = {'id': slug(title), 'keyHash': klyuch.sha(key), 'status': 'на подтверждении', 'sections': ['events' if kind == 'event' else 'kursy'], 'title': title}
         if kind == 'event': e['type'] = EV_TYPES.get(f.get('Вид события', ''), 'meet')
         else:
             e['type'] = K_TYPES.get(f.get('Направление', ''), 'life'); kk = K_KINDS.get(f.get('Формат', ''), 'regular')
@@ -212,7 +214,7 @@ def main():
         if f.get('Местный язык на уровне'): e['level'] = RU_BACK.get(f['Местный язык на уровне'], f['Местный язык на уровне'])
         e = {x: y for x, y in e.items() if y not in ('', [], None) or x in ('author', 'title', 'about', 'canton', 'city', 'online')}
         if C: e['contacts'] = C
-        e.update({'signup': SIGN.get(f.get('Как откликнуться', ''), ''), 'link': f.get('Ссылка', ''), 'contact': '', 'posted': d1, 'until': d2, 'key': key})
+        e.update({'signup': SIGN.get(f.get('Как откликнуться', ''), ''), 'link': f.get('Ссылка', ''), 'contact': '', 'posted': d1, 'until': d2, 'keyHash': klyuch.sha(key)})
         page, data, var = 'vakansii', 'vacancies.js', 'window.VACANCIES = [\n'
     to = ((card or {}).get('contacts') or {}).get('email', '') or f.get('Ссылку на подтверждение прислать на', '') or C.get('email', '')
     print(json.dumps(e, ensure_ascii=False, indent=2))

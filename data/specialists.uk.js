@@ -11,7 +11,10 @@
    prices — прайс-лист (необязательно, только если специалист сам его прислал): [{ t: 'Услуга', p: '120 CHF', n: '60 минут' }, …];
             pricesDate — 'ГГГГ-ММ-ДД', на какую дату цены. Есть prices — в карточке появляется кнопка «Прайс-лист PNG» (05.10.2026)
             pricesOk — 'ГГГГ-ММ-ДД', когда специалист подтвердил прайс-лист письмом по e-mail. Без pricesOk прайс-лист видят
-                       только Ирина (?ira=1) и сам специалист по ссылке #price=<id>.<key> (решение Ирины 05.10.2026)
+                       только Ирина (?ira=1) и сам специалист по ссылке #price=<id>.<ключ> (решение Ирины 05.10.2026)
+   keyHash — ОТПЕЧАТОК (SHA-256) ключа из ссылок #preview=<id>.<ключ> и #price=<id>.<ключ> (11.10.2026). Сам ключ в этот открытый файл
+             НЕ пишем никогда (поле key запрещено, sync.py останавливается): ключ есть только в ссылке из письма специалисту.
+             Новый ключ и ссылки — python3 -I _i18n/pochta/klyuch.py <id> (kartochka.py ставит новый ключ сам при каждом запуске).
    num — внутренний номер из «Реестра специалистов.xlsx» (SG-0001 …): запасной ID, если UID нет или он общий
          (несколько специалистов одной фирмы с одним UID фирмы).
 
@@ -52,7 +55,7 @@
 window.SPECIALISTS = [
   {
     "id": "elena-savina",
-    "key": "nmoa9uvl",
+    "keyHash": "0cc5133a99d1fea9d3fe98605e31ed6053dba934edf462fc66126fd408a21af4",
     "num": "SG-0018",
     "uid": "CHE-324.492.167",
     "status": "активен",
@@ -111,7 +114,7 @@ window.SPECIALISTS = [
   },
   {
     "id": "viktoria-ponomarenko",
-    "key": "f1z4gnyx",
+    "keyHash": "3de015056a739e76c440f98a57b4eeedbd4841e5fd9303df47fd18ed0e060d68",
     "num": "SG-0017",
     "uid": "CHE-321.897.450",
     "status": "активен",
@@ -162,7 +165,7 @@ window.SPECIALISTS = [
   },
   {
     "id": "irina-voznesenskaya",
-    "key": "v8kq3zte",
+    "keyHash": "b9a96191524214f4b440523572bcc70f8af81fc4cbb2b5a2f606bb1679766c73",
     "num": "SG-0016",
     "uid": "CHE-100.616.561",
     "status": "пауза",
@@ -221,7 +224,7 @@ window.SPECIALISTS = [
   },
   {
     "id": "tetiana-aleksandrova",
-    "key": "2fuajkoh",
+    "keyHash": "ec440476002655988baea9a65c840783811e5aebafe20fd69cf4409274e45f67",
     "num": "SG-0015",
     "uid": "",
     "status": "на підтвердженні",
@@ -290,7 +293,7 @@ window.SPECIALISTS = [
   },
   {
     "id": "larisa-medvedeva",
-    "key": "7txhyndd",
+    "keyHash": "3fd7dfc829ae7c7a3623e46d663b3d59b9abc81ff0604fdd97e123309c334a71",
     "num": "SG-0014",
     "uid": "CHE-413.105.403",
     "status": "активен",
@@ -363,7 +366,7 @@ window.SPECIALISTS = [
   },
   {
     "id": "irina-andreeva",
-    "key": "hlm54ex4",
+    "keyHash": "8774cb9f993dc44124d5ba3da6e1301a85227d198a6d92a42903b4cc2e8e3cf2",
     "num": "SG-0013",
     "uid": "CHE-248.554.137",
     "status": "активен",

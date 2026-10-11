@@ -5,6 +5,6 @@ document.getElementById('reset').addEventListener('click', () => { Object.keys(s
 document.getElementById('trial').hidden = !ADMIN;
 render();
 const fromHash = () => { const id = decodeURIComponent(location.hash.slice(1));
-  if (id.startsWith('ok=')){ const [vid, key] = id.slice(3).split('.'); const v = VACANCIES.find(x => x.id === vid); if (v && v.key && key === v.key) confirmView(v); return; }
+  if (id.startsWith('ok=')){ const [vid, key] = id.slice(3).split('.'); const v = VACANCIES.find(x => x.id === vid); keyOk(v, key).then(ok => { if (ok){ OKKEY[vid] = key; confirmView(v); } }); return; }
   if (id && pool().some(v => v.id === id) || (ADMIN && VACANCIES.some(v => v.id === id))) openV(id); };
 fromHash(); addEventListener('hashchange', fromHash);

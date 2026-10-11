@@ -10,7 +10,9 @@
                мастер-классы, ВЕБИНАРЫ), ['events', 'kursy'] — в обеих (например, бесплатная онлайн-встреча с вопросами)
    id        — латиницей, уникальный: ссылка svoiludi.ch/events/#id или svoiludi.ch/kursy/#id
    status    — 'активен' | 'пауза' | 'черновик' | 'на подтверждении' (на сайте видны только «активен»)
-   key       — секрет для ссылки подтверждения svoiludi.ch/events/#ok=<id>.<key> или kursy/#ok=<id>.<key> (8 букв и цифр);
+   keyHash   — ОТПЕЧАТОК (SHA-256) ключа из ссылки подтверждения svoiludi.ch/events/#ok=<id>.<ключ>, kursy/#ok=… или akcii/#ok=… (11.10.2026).
+               Сам ключ в этот открытый файл НЕ пишем никогда (поле key запрещено, sync.py останавливается): ключ есть только в ссылке из письма.
+               Новый ключ и ссылка — python3 -I _i18n/pochta/klyuch.py <id> (zapis.py ставит его сам);
                ссылку отправляем на e-mail ИЗ КАРТОЧКИ организатора, он подтверждает одной кнопкой (assets/podtverdit.js, 10.10.2026)
    confirm   — { date: 'ГГГГ-ММ-ДД', via: 'кнопка на сайте' | 'письмо с адреса организатора' } — ставится после подтверждения
    title     — название
@@ -76,7 +78,7 @@ window.AFISHA = [
   {
     sample: true,
     sections: ['events'],
-    id: 'razgovornyj-klub-zurich', key: 'obr6', status: 'активен', title: 'Розмовний клуб німецької мови', type: 'lang',
+    id: 'razgovornyj-klub-zurich', keyHash: '0589015053b089780ec301be313b747772ae829fe469660cadc43c2c3167ce96', status: 'активен', title: 'Розмовний клуб німецької мови', type: 'lang',
     date: '2026-10-08', time: '18:30', timeEnd: '20:00', repeat: { freq: 'weekly', until: '2026-12-17', except: ['2026-12-24'] },
     canton: 'Zürich', address: 'Limmatquai 70, 8001 Zürich', geo: [47.3740, 8.5440], online: false,
     langs: ['німецька', 'російська'], price: 'CHF 15', commercial: true, organizers: ['irina-frei'],
@@ -158,7 +160,7 @@ window.AFISHA = [
   {
     sample: true,
     sections: ['kursy'],
-    id: 'myagkaya-joga-zurich', key: 'obr7', status: 'активен', title: 'М’яка йога вечорами', type: 'body', kind: 'regular',
+    id: 'myagkaya-joga-zurich', keyHash: 'ec8d934c6c207568ed20ec7e18323ebc3c1eb15f02bbbbfa2d81fe55dc1506eb', status: 'активен', title: 'М’яка йога вечорами', type: 'body', kind: 'regular',
     date: '2026-10-13', time: '19:00', timeEnd: '20:15', repeat: { freq: 'weekly', until: '2027-06-29', except: ['2026-12-22', '2026-12-29'] },
     canton: 'Zürich', address: 'Seefeldstrasse 45, 8008 Zürich', geo: [47.3600, 8.5520], online: false,
     langs: ['російська', 'українська'], level: 'будь-який рівень, можна без досвіду',
@@ -243,7 +245,7 @@ window.AFISHA = [
   {
     sample: true,
     sections: ['events'],
-    id: 'akciya-razgovornyj-klub', key: 'ak1m', status: 'активен', title: 'Знижка 20 % на перший місяць розмовного клубу', type: 'promo',
+    id: 'akciya-razgovornyj-klub', keyHash: '3e0121c886a2fb824d32b5b3edabc6e202d571e8bcb8a5f9a9166d2fd390d500', status: 'активен', title: 'Знижка 20 % на перший місяць розмовного клубу', type: 'promo',
     promo: { kind: 'percent', value: 20, what: 'абонемент на 4 зустрічі розмовного клубу', regular: 60, cond: ['new', 'book'] },
     date: '2026-10-05', dateEnd: '2026-11-30',
     canton: 'Aargau', address: 'Musterstrasse 2, 5000 Aarau', geo: [47.3913, 8.0496], online: false,
@@ -254,7 +256,7 @@ window.AFISHA = [
   {
     sample: true,
     sections: ['events'],
-    id: 'akciya-pervye-30-dnej', key: 'ak2g', status: 'активен', title: 'Чек-лист «Перші 30 днів» у подарунок до консультації', type: 'promo',
+    id: 'akciya-pervye-30-dnej', keyHash: '7eece2805c2d8cec267931156952e3d0b7c2e6a1370669f3694e08e8ab3a2a5c', status: 'активен', title: 'Чек-лист «Перші 30 днів» у подарунок до консультації', type: 'promo',
     promo: { kind: 'gift', what: 'чек-лист «Перші 30 днів у Швейцарії» з посиланнями на відомства та зразками листів', cond: ['new'] },
     date: '2026-10-08', dateEnd: '2026-12-15',
     canton: 'Zürich', address: 'Musterstrasse 10, 8001 Zürich', geo: [47.3866, 8.5442], online: true,
@@ -265,7 +267,7 @@ window.AFISHA = [
   {
     sample: true,
     sections: ['events'],
-    id: 'akciya-znakomstvo-onlajn', key: 'ak3z', status: 'активен', title: 'Безкоштовне знайомство 30 хвилин онлайн', type: 'promo',
+    id: 'akciya-znakomstvo-onlajn', keyHash: 'c375c11c539e63dad1d46fdf08d64fb1f6d3d59bfbe27c42b70b49135de8ef19', status: 'активен', title: 'Безкоштовне знайомство 30 хвилин онлайн', type: 'promo',
     promo: { kind: 'free', what: 'знайомство з коучем: 30 хвилин по відеозв’язку, без зобов’язань', cond: ['new', 'book', 'first'], limit: 10 },
     date: '2026-10-05', dateEnd: '2026-12-31',
     canton: 'Zürich', address: '', online: true,
@@ -276,7 +278,7 @@ window.AFISHA = [
   {
     sample: true,
     sections: ['events'],
-    id: 'akciya-deklaraciya', key: 'ak4p', status: 'активен', title: 'Перевірка податкової декларації за CHF 120', type: 'promo',
+    id: 'akciya-deklaraciya', keyHash: '72c8824d13be4a4c8013e4e359218bc6d68fcb4016b2e6bb5f5b7765e577b713', status: 'активен', title: 'Перевірка податкової декларації за CHF 120', type: 'promo',
     promo: { kind: 'price', value: 120, what: 'перевірка вашої податкової декларації перед надсиланням', regular: 160, cond: ['book', 'nosum'] },
     date: '2026-11-02', dateEnd: '2027-01-31',
     canton: 'Zug', address: 'Baarerstrasse 8, 6300 Zug', geo: [47.1708, 8.5170], online: true,
@@ -287,7 +289,7 @@ window.AFISHA = [
   {
     sample: true,
     sections: ['events'],
-    id: 'akciya-kejtering', key: 'ak5k', status: 'активен', title: 'Знижка 15 % на перше замовлення кейтерингу', type: 'promo',
+    id: 'akciya-kejtering', keyHash: '6b2ccc844650c59c790d2881fdf454937a168828b3d3610983dd73dee1a19c29', status: 'активен', title: 'Знижка 15 % на перше замовлення кейтерингу', type: 'promo',
     promo: { kind: 'percent', value: 15, what: 'замовлення кейтерингу на 10 осіб і більше', cond: ['new', 'book'] },
     date: '2026-10-10', dateEnd: '2026-12-20',
     canton: 'Zürich', address: 'Musterstrasse 5, 8004 Zürich', geo: [47.3769, 8.5417], online: false,
@@ -299,7 +301,7 @@ window.AFISHA = [
   {
     sample: true,
     sections: ['events'],
-    id: 'akciya-salon', key: 'ak6s', status: 'активен', title: 'Перший манікюр або перша стрижка за півціни', type: 'promo',
+    id: 'akciya-salon', keyHash: 'd45c93cdbfaaecc272f711c865280d9dc22ac2767dc391ad6e4859a5e554bae6', status: 'активен', title: 'Перший манікюр або перша стрижка за півціни', type: 'promo',
     promo: { kind: 'percent', value: 50, what: 'перший манікюр або перша стрижка в салоні, будь-яка послуга до 80 CHF', cond: ['new', 'book'], always: true },
     date: '2026-10-11', dateEnd: '2027-10-11',
     canton: 'Zürich', address: 'Musterstrasse 5, 8004 Zürich', geo: [47.3769, 8.5417], online: false,

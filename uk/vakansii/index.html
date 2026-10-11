@@ -724,9 +724,9 @@ a.yours:hover{background:#EBD3A3}
 
 
 
-<script src="/data/specialists.uk.js?v=06599fe4"></script>
+<script src="/data/specialists.uk.js?v=144584ac"></script>
 <script src="/data/organizations.uk.js?v=817cafda"></script>
-<script src="/data/vacancies.uk.js?v=1889cf60"></script>
+<script src="/data/vacancies.uk.js?v=49588a9e"></script>
 <script>window.IMG_BASE = '../img/';</script>
 <script>
 const ADMIN = (() => {   // режим Ирины: ?ira=1 включает на этом устройстве, ?ira=0 выключает
@@ -963,7 +963,12 @@ const CHECKS = {
   ]
 };
 const checksFor = v => CHECKS[v.kind] || CHECKS.staff;
-const okUrl = v => `https://svoiludi.ch/vakansii/#ok=${encodeURIComponent(v.id)}.${encodeURIComponent(v.key || '')}`;
+/* ключ подтверждения (11.10.2026): в открытых данных только отпечаток keyHash = SHA-256 ключа, сам ключ есть только в ссылке из письма.
+   Поэтому, даже прочитав открытые файлы сайта, подтвердить или исправить запись за другого человека нельзя. */
+const OKKEY = {};   // id → ключ из открытой ссылки: только в этой вкладке, пока она открыта
+const svlHash = async k => { try { const b = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(String(k || ''))); return Array.from(new Uint8Array(b), x => x.toString(16).padStart(2, '0')).join(''); } catch (x) { return ''; } };
+const keyOk = async (r, k) => !!(r && r.keyHash && k && (await svlHash(k)) === r.keyHash);
+const okUrl = v => `https://svoiludi.ch/vakansii/#ok=${encodeURIComponent(v.id)}.${encodeURIComponent(OKKEY[v.id] || '')}`;
 const mailto = (to, su, body) => `mailto:${to}?subject=${encodeURIComponent(su)}&body=${encodeURIComponent(body)}`;
 const gmail = (to, su, body) => `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(to)}&su=${encodeURIComponent(su)}&body=${encodeURIComponent(body)}`;
 const adText = v => [`${(KINDS[v.kind] || KINDS.staff).t}: ${v.title}`, `Де: ${where(v)}`, v.workload ? `Зайнятість: ${v.workload}` : '', v.start ? `З якого часу: ${v.start}` : '',
@@ -979,7 +984,7 @@ const fixLetter = (v, text) => ({ su: `Виправлення в оголоше�
 /* блок подтверждения — общий движок assets/podtverdit.js (одной кнопкой, как у карточки; 10.10.2026). Все условия обязательны. */
 function okBox(v){
   const L = confirmLetter(v), F = fixLetter(v, '{text}'), n = checksFor(v).length, cm = cardMailV(v);
-  return `<div class="pv-box" data-pv-kind="vacancy" data-pv-id="${esc(v.id)}" data-pv-key="${esc(v.key || '')}" data-pv-lang="uk" data-mail="${MAIL}" data-su-ok="${esc(L.su)}" data-body-ok="${esc(L.body)}" data-su-fix="${esc(F.su)}" data-body-fix="${esc(F.body)}" data-t-sending="Надсилаю…" data-t-ok="Дякуємо! Підтвердження отримано {t}. Ми опублікуємо оголошення, зазвичай того ж дня." data-t-copy=" Копія прийде на ваш e-mail." data-t-fixok="Дякуємо! Виправлення отримано {t}. Ми внесемо їх і надішлемо посилання ще раз." data-t-empty="Напишіть, будь ласка, що виправити." data-pv-cmail="${esc(cm)}" data-t-fail="${cm ? 'Не вдалося надіслати. Будь ласка, {a} з адреси {c} на {m}.' : 'Не вдалося надіслати. Будь ласка, {a} ({m}).'}" data-t-mail="надішліть підтвердження листом" data-t-gmail="Відкрити лист у Gmail" data-t-letter="${cm ? 'Відкрився лист у вашій пошті з текстом оголошення й усіма умовами. Надішліть його з адреси {c}: підтвердження ми приймаємо тільки з e-mail вашої картки. Лист не відкрився? {g} або напишіть з цієї адреси на {m}.' : 'Відкрився лист у вашій пошті з текстом оголошення й усіма умовами. Надішліть його, це і є підтвердження. Лист не відкрився? {g} або напишіть на {m}.'}">
+  return `<div class="pv-box" data-pv-kind="vacancy" data-pv-id="${esc(v.id)}" data-pv-key="${esc(OKKEY[v.id] || '')}" data-pv-lang="uk" data-mail="${MAIL}" data-su-ok="${esc(L.su)}" data-body-ok="${esc(L.body)}" data-su-fix="${esc(F.su)}" data-body-fix="${esc(F.body)}" data-t-sending="Надсилаю…" data-t-ok="Дякуємо! Підтвердження отримано {t}. Ми опублікуємо оголошення, зазвичай того ж дня." data-t-copy=" Копія прийде на ваш e-mail." data-t-fixok="Дякуємо! Виправлення отримано {t}. Ми внесемо їх і надішлемо посилання ще раз." data-t-empty="Напишіть, будь ласка, що виправити." data-pv-cmail="${esc(cm)}" data-t-fail="${cm ? 'Не вдалося надіслати. Будь ласка, {a} з адреси {c} на {m}.' : 'Не вдалося надіслати. Будь ласка, {a} ({m}).'}" data-t-mail="надішліть підтвердження листом" data-t-gmail="Відкрити лист у Gmail" data-t-letter="${cm ? 'Відкрився лист у вашій пошті з текстом оголошення й усіма умовами. Надішліть його з адреси {c}: підтвердження ми приймаємо тільки з e-mail вашої картки. Лист не відкрився? {g} або напишіть з цієї адреси на {m}.' : 'Відкрився лист у вашій пошті з текстом оголошення й усіма умовами. Надішліть його, це і є підтвердження. Лист не відкрився? {g} або напишіть на {m}.'}">
     <b>Підтвердьте, будь ласка, кожну умову</b>
     <div class="pv-list">${checksFor(v).map(c => `<label class="pv-ok"><input type="checkbox" data-pv-agree data-id="${c.id}"> <span>${c.h || esc(c.t)}</span></label>`).join('')}</div>
     <span class="free-line">${FREE_NOTE}</span>
@@ -1005,7 +1010,7 @@ function confirmView(v){
 function adminBox(v, a){
   const to = cardMailV(v) || (a && a.contacts && a.contacts.email), L = askLetter(v);   // ссылка — на e-mail карточки автора
   const st = confirmed(v) ? `підтверджено ${fmtDate(v.confirm.date)} (${esc(v.confirm.via || '')}) · видно на сайті` : 'чекає на підтвердження автора · на сайті не видно';
-  return `<div class="adm"><b>Для Ірини</b><span>Статус: ${st}</span>${confirmed(v) ? '' : `<div class="acts">${to ? `<a class="btn" href="${esc(mailto(to, L.su, L.body))}">Надіслати на підтвердження</a><a class="btn ghost" href="${esc(gmail(to, L.su, L.body))}" ${ext}>Те саме в Gmail</a>` : ''}<button class="btn ghost" type="button" data-copyask>Скопіювати для Telegram</button></div><span class="note">Посилання для автора: ${esc(okUrl(v))}</span>`}</div>`;
+  return `<div class="adm"><b>Для Ірини</b><span>Статус: ${st}</span>${confirmed(v) ? '' : !OKKEY[v.id] ? `<span class="note">У відкритих даних сайту немає ключа підтвердження, лише його відбиток, тому підтвердити оголошення замість автора ніхто не може. Посилання для автора Claude кладе в чернетку листа. Потрібне нове — напиши Claude: «нове посилання для оголошення ${esc(v.id)}». Якщо відкрити оголошення за цим посиланням, кнопки надсилання з’являться і тут.</span>` : `<div class="acts">${to ? `<a class="btn" href="${esc(mailto(to, L.su, L.body))}">Надіслати на підтвердження</a><a class="btn ghost" href="${esc(gmail(to, L.su, L.body))}" ${ext}>Те саме в Gmail</a>` : ''}<button class="btn ghost" type="button" data-copyask>Скопіювати для Telegram</button></div><span class="note">Посилання для автора: ${esc(okUrl(v))}</span>`}</div>`;
 }
 document.getElementById('qmCard').addEventListener('click', async e => {
   if (!e.target.closest('[data-copyask]') || !OPEN) return; const L = askLetter(OPEN);
@@ -1020,7 +1025,7 @@ document.getElementById('reset').addEventListener('click', () => { Object.keys(s
 document.getElementById('trial').hidden = !ADMIN;
 render();
 const fromHash = () => { const id = decodeURIComponent(location.hash.slice(1));
-  if (id.startsWith('ok=')){ const [vid, key] = id.slice(3).split('.'); const v = VACANCIES.find(x => x.id === vid); if (v && v.key && key === v.key) confirmView(v); return; }
+  if (id.startsWith('ok=')){ const [vid, key] = id.slice(3).split('.'); const v = VACANCIES.find(x => x.id === vid); keyOk(v, key).then(ok => { if (ok){ OKKEY[vid] = key; confirmView(v); } }); return; }
   if (id && pool().some(v => v.id === id) || (ADMIN && VACANCIES.some(v => v.id === id))) openV(id); };
 fromHash(); addEventListener('hashchange', fromHash);
 </script>

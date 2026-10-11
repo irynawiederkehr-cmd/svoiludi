@@ -639,7 +639,7 @@ a.yours:hover{background:#EBD3A3}
 
 <dialog class="qm" id="qm" aria-labelledby="qmTitle"><div class="qm-card" id="qmCard"></div></dialog>
 
-<script src="/data/specialists.js?v=1c00be5f"></script>
+<script src="/data/specialists.js?v=c6c211d8"></script>
 <script src="/data/organizations.js?v=d667f830"></script>
 <script>
 window.IMG_BASE = '../img/';
@@ -647,7 +647,7 @@ window.IMG_BASE = '../img/';
 const SPECIALISTS = window.SPECIALISTS || [];
 
 </script>
-<script src="/data/afisha.js?v=7fb8983c"></script>
+<script src="/data/afisha.js?v=fdd34bea"></script>
 <script>/* одна база афиши: здесь — записи раздела «События» */
 const EVENTS = (window.AFISHA || []).filter(e => (e.sections || []).includes('events'));</script>
 <script>
@@ -958,7 +958,12 @@ let OPEN = null;
    на e-mail ИЗ КАРТОЧКИ организатора. Он видит запись, как её увидят все, ставит галочку и нажимает «Подтверждаю» (assets/podtverdit.js):
    запись на лист подтверждений, письмо Ирине «🌿 Свои люди: … подтверждено», копия на e-mail из карточки. Запасной вариант — письмо из почты.
    После подтверждения Claude ставит status «активен» и confirm: { date, via }. */
-const okUrl = e => `https://svoiludi.ch/${isPromo(e) ? 'akcii' : 'events'}/#ok=${encodeURIComponent(e.id)}.${encodeURIComponent(e.key || '')}`;
+/* ключ подтверждения (11.10.2026): в открытых данных только отпечаток keyHash = SHA-256 ключа, сам ключ есть только в ссылке из письма.
+   Поэтому, даже прочитав открытые файлы сайта, подтвердить или исправить запись за другого человека нельзя. */
+const OKKEY = {};   // id → ключ из открытой ссылки: только в этой вкладке, пока она открыта
+const svlHash = async k => { try { const b = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(String(k || ''))); return Array.from(new Uint8Array(b), x => x.toString(16).padStart(2, '0')).join(''); } catch (x) { return ''; } };
+const keyOk = async (r, k) => !!(r && r.keyHash && k && (await svlHash(k)) === r.keyHash);
+const okUrl = e => `https://svoiludi.ch/${isPromo(e) ? 'akcii' : 'events'}/#ok=${encodeURIComponent(e.id)}.${encodeURIComponent(OKKEY[e.id] || '')}`;
 /* контакт для вопросов: свой у записи (другой телефон или e-mail из заявки) или телефон и e-mail из карточки организатора */
 /* карточка организатора из справочника: специалист (id) или организация ({ org }) */
 const cardOf = o => typeof o === 'string' ? SPECIALISTS.find(s => s.id === o) : (o && o.org ? (window.ORGANIZATIONS || []).find(x => x.id === o.org) : null);
@@ -1065,7 +1070,7 @@ function okBox(e){
     : { su: 'событие', own: 'Это моё событие: я сам(а) его организую, или его проводит моя организация. Записи за других я не размещаю.', law: 'Событие в моей компетенции и соответствует законам Швейцарии, моего кантона и общины.', who: 'ваше событие', ad: '' };
   const su = `Подтверждаю ${W.su} — ${e.title}`, body = `Здравствуйте, Ирина!\n\nВсё верно, подтверждаю публикацию на сайте «Свои люди в Швейцарии».\n${W.own}\n${W.law}${W.ad}\nУсловия размещения (https://svoiludi.ch/usloviya/) прочитал(а) и принимаю.\n\n${okText(e)}\n\n${okUrl(e)}\n\n${who}`;
   const suf = `Исправления — ${e.title}`, bodyf = `Здравствуйте, Ирина!\n\nПожалуйста, исправьте:\n\n{text}\n\n${okUrl(e)}\n\n${who}`;
-  return `<div class="pv-box" id="pvBox" data-pv-kind="event" data-pv-id="${esc(e.id)}" data-pv-key="${esc(e.key || '')}" data-pv-lang="ru" data-mail="${MAIL}" data-su-ok="${esc(su)}" data-body-ok="${esc(body)}" data-su-fix="${esc(suf)}" data-body-fix="${esc(bodyf)}" data-t-sending="Отправляю…" data-t-ok="Спасибо! Подтверждение получено {t}. Мы опубликуем запись, обычно в тот же день." data-t-copy=" Копия придёт на ваш e-mail." data-t-fixok="Спасибо! Исправления получены {t}. Мы внесём их и пришлём ссылку ещё раз." data-t-empty="Напишите, пожалуйста, что исправить." data-t-fail="${cm ? 'Не получилось отправить. Пожалуйста, {a} с адреса {c} на {m}.' : 'Не получилось отправить. Пожалуйста, {a} ({m}).'}" data-t-mail="отправьте подтверждение письмом" data-t-gmail="Открыть письмо в Gmail" data-pv-cmail="${esc(cm)}" data-t-letter="${cm ? 'Открылось письмо в вашей почте. Отправьте его с адреса {c}: подтверждения мы принимаем только с e-mail вашей карточки. Письмо не открылось? {g} или напишите с этого адреса на {m}.' : 'Открылось письмо в вашей почте. Отправьте его, это и есть подтверждение. Письмо не открылось? {g} или напишите на {m}.'}">
+  return `<div class="pv-box" id="pvBox" data-pv-kind="event" data-pv-id="${esc(e.id)}" data-pv-key="${esc(OKKEY[e.id] || '')}" data-pv-lang="ru" data-mail="${MAIL}" data-su-ok="${esc(su)}" data-body-ok="${esc(body)}" data-su-fix="${esc(suf)}" data-body-fix="${esc(bodyf)}" data-t-sending="Отправляю…" data-t-ok="Спасибо! Подтверждение получено {t}. Мы опубликуем запись, обычно в тот же день." data-t-copy=" Копия придёт на ваш e-mail." data-t-fixok="Спасибо! Исправления получены {t}. Мы внесём их и пришлём ссылку ещё раз." data-t-empty="Напишите, пожалуйста, что исправить." data-t-fail="${cm ? 'Не получилось отправить. Пожалуйста, {a} с адреса {c} на {m}.' : 'Не получилось отправить. Пожалуйста, {a} ({m}).'}" data-t-mail="отправьте подтверждение письмом" data-t-gmail="Открыть письмо в Gmail" data-pv-cmail="${esc(cm)}" data-t-letter="${cm ? 'Открылось письмо в вашей почте. Отправьте его с адреса {c}: подтверждения мы принимаем только с e-mail вашей карточки. Письмо не открылось? {g} или напишите с этого адреса на {m}.' : 'Открылось письмо в вашей почте. Отправьте его, это и есть подтверждение. Письмо не открылось? {g} или напишите на {m}.'}">
     <b>Это предпросмотр: так ${W.who} увидят на сайте.</b><span>Пока его видите только вы. Проверьте название, дату, место, цену и контакты. Если всё верно, отметьте все галочки и нажмите «Подтверждаю». Если что-то нужно поменять, нажмите «Нужно исправить».</span>
     <label class="pv-ok"><input type="checkbox" data-pv-agree data-id="ok"> <span>Данные верны, даю согласие на публикацию на svoiludi.ch. Запись, оплата и договор — только со мной, «Свои люди» в них не участвуют.</span></label>
     <label class="pv-ok"><input type="checkbox" data-pv-agree data-id="own"> <span>${W.own}</span></label>
@@ -1170,7 +1175,7 @@ if (addbtn) addbtn.href = AK ? `mailto:${MAIL}?subject=${encodeURIComponent('А�
 if (AK) document.querySelectorAll('#monthIcs,.viewsw').forEach(el => { el.style.display = 'none'; });
 fillSelects(); render();
 const fromHash = () => { let id = decodeURIComponent(location.hash.slice(1)); const wantFlyer = AK && /&flyer$/.test(id); id = id.replace(/&flyer$/, ''); if (id === 'digest'){ digest(); return; }
-  const e0 = EVENTS.find(x => x.id === id); if (!AK && e0 && isPromo(e0)){ location.replace('../akcii/#' + encodeURIComponent(id)); return; } if (id.startsWith('ok=')){ const [eid, key] = id.slice(3).split('.'); const e = EVENTS.find(x => x.id === eid); if (e && e.key && key === e.key) openEvent(eid, null, true); return; }
+  const e0 = EVENTS.find(x => x.id === id); if (!AK && e0 && isPromo(e0)){ location.replace('../akcii/#' + encodeURIComponent(id)); return; } if (id.startsWith('ok=')){ const [eid, key] = id.slice(3).split('.'); const e = EVENTS.find(x => x.id === eid); keyOk(e, key).then(ok => { if (ok){ OKKEY[eid] = key; openEvent(eid, null, true); } }); return; }
   if (id && EVENTS.some(e => e.id === id && ((e.status === 'активен' && live(e)) || ADMIN))){ openEvent(id); if (wantFlyer){ const e = EVENTS.find(x => x.id === id), go = () => window.SVL_FLYER ? SVL_FLYER.open(flyerOf(e)) : setTimeout(go, 200); setTimeout(go, 250); } } };
 fromHash(); addEventListener('hashchange', fromHash);
 </script>

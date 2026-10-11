@@ -1,11 +1,13 @@
 /* =====================================================================
-   «Свои люди» — подтверждение записей одной кнопкой: события, курсы, объявления (10.10.2026; подключено 11.10.2026).
+   «Свои люди» — подтверждение записей одной кнопкой: события, курсы, акции, объявления (10.10.2026; подключено 11.10.2026;
+   проверка ключа по отпечатку keyHash — 11.10.2026, вечер).
    Решение Ирины: «процедура подтверждения будет такая же, как у карточки специалиста».
 
    Что делает: человек открывает ссылку предпросмотра (svoiludi.ch/events/#ok=<id>.<key>, kursy/#ok=…, vakansii/#ok=…),
    ставит галочку и нажимает «Подтверждаю». Сайт (assets/podtverdit.js) зовёт это веб-приложение:
      GET ?what=confirm&kind=event|kurs|vacancy (или eventfix|kursfix|vacancyfix)&id=…&key=…&lang=ru|uk[&checks=a,b][&text=…]
-   Скрипт сверяет id и key с данными сайта (data/afisha.js, data/vacancies.js), пишет строку в таблицу
+   Скрипт сверяет отпечаток ключа из ссылки (SHA-256) с keyHash в данных сайта (data/afisha.js, data/vacancies.js) — сам ключ
+   в открытых данных не хранится (11.10.2026), поэтому подтвердить запись за другого человека нельзя. Образцы (sample) не принимает. Пишет строку в таблицу
    «Свои люди — подтверждения записей» (со снимком записи — это доказательство согласия), шлёт письмо Ирине
    «🌿 Свои люди: Событие подтверждено — …» и копию на e-mail из карточки организатора или автора.
    Ответ: {"ok":true,"time":"10.10.2026, 21:05","copy":true} или {"ok":false,"error":"…"} — тогда сайт предлагает письмо.
@@ -63,6 +65,12 @@ function zsLoad_(file, name) {
   return new Function('return ' + txt.slice(i + ('window.' + name + ' =').length).trim().replace(/;\s*$/, ''))();
 }
 
+// SHA-256 ключа из ссылки — так же, как страница считает keyHash (_i18n/pochta/klyuch.py, 11.10.2026)
+function zsHash_(k) {
+  return Utilities.computeDigest(Utilities.DigestAlgorithm.SHA_256, String(k || ''), Utilities.Charset.UTF_8)
+    .map(function (b) { return ('0' + ((b + 256) % 256).toString(16)).slice(-2); }).join('');
+}
+
 function zsConfirm_(p) {
   if (p.what !== 'confirm') return { ok: false, error: 'what' };
   const kind = String(p.kind || ''), fix = /fix$/.test(kind), base = kind.replace(/fix$/, '');
@@ -70,7 +78,8 @@ function zsConfirm_(p) {
   const lang = p.lang === 'uk' ? 'uk' : 'ru', W = ZS_WHAT[base][lang];
   const list = base === 'vacancy' ? zsLoad_('vacancies.js', 'VACANCIES') : zsLoad_('afisha.js', 'AFISHA');
   const x = list.filter(r => r.id === p.id)[0];
-  if (!x || !x.key || x.key !== p.key) return { ok: false, error: 'key' };
+  if (!x || !x.keyHash || !p.key || zsHash_(p.key) !== x.keyHash) return { ok: false, error: 'key' };
+  if (x.sample) return { ok: false, error: 'sample' };   // образцы на сайте вымышленные, подтверждать нечего
   const text = String(p.text || '').slice(0, 1500);
   if (fix && !text) return { ok: false, error: 'text' };
 
@@ -95,7 +104,7 @@ function zsConfirm_(p) {
   const sh = SpreadsheetApp.openById(props.getProperty('SHEET_ID')).getSheets()[0];
   sh.appendRow([time, W[0] + (fix ? ' — исправления' : ' — подтверждено'), x.id, x.title, name, num, uid, email, String(p.checks || ''), text, JSON.stringify(x)]);
 
-  const url = ZS_SITE + W[2] + '/#ok=' + x.id + '.' + x.key;
+  const url = ZS_SITE + W[2] + '/#ok=' + x.id + '.' + p.key;   // ключ — из ссылки, он уже проверен по отпечатку
   const tag = name + (num ? ', ' + num : '');
   const su = fix ? `🌿 Свои люди: Исправления — ${x.title} (${tag})` : `🌿 Свои люди: ${W[0]} подтверждено — ${x.title} (${tag})`;
   const body = [

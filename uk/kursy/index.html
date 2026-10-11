@@ -655,14 +655,14 @@ a.yours:hover{background:#EBD3A3}
 
 <dialog class="qm" id="qm" aria-labelledby="qmTitle"><div class="qm-card" id="qmCard"></div></dialog>
 
-<script src="/data/specialists.uk.js?v=06599fe4"></script>
+<script src="/data/specialists.uk.js?v=144584ac"></script>
 <script src="/data/organizations.uk.js?v=817cafda"></script>
 <script>
 window.IMG_BASE = '../img/';
 /* карточки специалистов — в /data/specialists.js (одна копия на весь сайт) */
 const SPECIALISTS = window.SPECIALISTS || [];
 </script>
-<script src="/data/afisha.uk.js?v=6e01b45f"></script>
+<script src="/data/afisha.uk.js?v=934a4edc"></script>
 <script>/* одна база афиши: здесь — записи раздела «Курсы»; у записи в обеих вкладках направление курса в ktype */
 const KURSY = (window.AFISHA || []).filter(e => (e.sections || []).includes('kursy')).map(e => e.ktype ? Object.assign({}, e, { type: e.ktype }) : e);</script>
 <script>
@@ -882,7 +882,12 @@ let OPEN = null;
    на e-mail ИЗ КАРТОЧКИ организатора. Он видит запись, как её увидят все, ставит галочку и нажимает «Подтверждаю» (assets/podtverdit.js):
    запись на лист подтверждений, письмо Ирине «🌿 Свои люди: … подтверждено», копия на e-mail из карточки. Запасной вариант — письмо из почты.
    После подтверждения Claude ставит status «активен» и confirm: { date, via }. */
-const okUrl = e => `https://svoiludi.ch/uk/kursy/#ok=${encodeURIComponent(e.id)}.${encodeURIComponent(e.key || '')}`;
+/* ключ подтверждения (11.10.2026): в открытых данных только отпечаток keyHash = SHA-256 ключа, сам ключ есть только в ссылке из письма.
+   Поэтому, даже прочитав открытые файлы сайта, подтвердить или исправить запись за другого человека нельзя. */
+const OKKEY = {};   // id → ключ из открытой ссылки: только в этой вкладке, пока она открыта
+const svlHash = async k => { try { const b = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(String(k || ''))); return Array.from(new Uint8Array(b), x => x.toString(16).padStart(2, '0')).join(''); } catch (x) { return ''; } };
+const keyOk = async (r, k) => !!(r && r.keyHash && k && (await svlHash(k)) === r.keyHash);
+const okUrl = e => `https://svoiludi.ch/uk/kursy/#ok=${encodeURIComponent(e.id)}.${encodeURIComponent(OKKEY[e.id] || '')}`;
 /* контакт для вопросов: свой у записи (другой телефон или e-mail из заявки) или телефон и e-mail из карточки организатора */
 /* карточка организатора из справочника: специалист (id) или организация ({ org }) */
 const cardOf = o => typeof o === 'string' ? SPECIALISTS.find(s => s.id === o) : (o && o.org ? (window.ORGANIZATIONS || []).find(x => x.id === o.org) : null);
@@ -936,7 +941,7 @@ function okBox(e){
   const who = orgNames(e), cm = cardMail(e);
   const su = `Підтверджую курс — ${e.title}`, body = `Добрий день, Ірино!\n\nУсе правильно, підтверджую публікацію на сайті «Свої люди у Швейцарії».\nЦе мій курс: я сам(а) його веду, або його проводить моя організація. Записи за інших я не розміщую.\nКурс у моїй компетенції та відповідає законам Швейцарії, мого кантону й громади.\nУмови розміщення (https://svoiludi.ch/uk/usloviya/) прочитав(ла) й приймаю.\n\n${okText(e)}\n\n${okUrl(e)}\n\n${who}`;
   const suf = `Виправлення — ${e.title}`, bodyf = `Добрий день, Ірино!\n\nБудь ласка, виправте:\n\n{text}\n\n${okUrl(e)}\n\n${who}`;
-  return `<div class="pv-box" id="pvBox" data-pv-kind="kurs" data-pv-id="${esc(e.id)}" data-pv-key="${esc(e.key || '')}" data-pv-lang="ru" data-mail="${MAIL}" data-su-ok="${esc(su)}" data-body-ok="${esc(body)}" data-su-fix="${esc(suf)}" data-body-fix="${esc(bodyf)}" data-t-sending="Отправляю…" data-t-ok="Спасибо! Подтверждение получено {t}. Мы опубликуем запись, обычно в тот же день." data-t-copy=" Копия придёт на ваш e-mail." data-t-fixok="Спасибо! Исправления получены {t}. Мы внесём их и пришлём ссылку ещё раз." data-t-empty="Напишите, пожалуйста, что исправить." data-t-fail="${cm ? 'Не вдалося надіслати. Будь ласка, {a} з адреси {c} на {m}.' : 'Не вдалося надіслати. Будь ласка, {a} ({m}).'}" data-t-mail="отправьте подтверждение письмом" data-t-gmail="Открыть письмо в Gmail" data-pv-cmail="${esc(cm)}" data-t-letter="${cm ? 'Відкрився лист у вашій пошті. Надішліть його з адреси {c}: підтвердження ми приймаємо тільки з e-mail вашої картки. Лист не відкрився? {g} або напишіть з цієї адреси на {m}.' : 'Відкрився лист у вашій пошті. Надішліть його, це і є підтвердження. Лист не відкрився? {g} або напишіть на {m}.'}">
+  return `<div class="pv-box" id="pvBox" data-pv-kind="kurs" data-pv-id="${esc(e.id)}" data-pv-key="${esc(OKKEY[e.id] || '')}" data-pv-lang="ru" data-mail="${MAIL}" data-su-ok="${esc(su)}" data-body-ok="${esc(body)}" data-su-fix="${esc(suf)}" data-body-fix="${esc(bodyf)}" data-t-sending="Отправляю…" data-t-ok="Спасибо! Подтверждение получено {t}. Мы опубликуем запись, обычно в тот же день." data-t-copy=" Копия придёт на ваш e-mail." data-t-fixok="Спасибо! Исправления получены {t}. Мы внесём их и пришлём ссылку ещё раз." data-t-empty="Напишите, пожалуйста, что исправить." data-t-fail="${cm ? 'Не вдалося надіслати. Будь ласка, {a} з адреси {c} на {m}.' : 'Не вдалося надіслати. Будь ласка, {a} ({m}).'}" data-t-mail="отправьте подтверждение письмом" data-t-gmail="Открыть письмо в Gmail" data-pv-cmail="${esc(cm)}" data-t-letter="${cm ? 'Відкрився лист у вашій пошті. Надішліть його з адреси {c}: підтвердження ми приймаємо тільки з e-mail вашої картки. Лист не відкрився? {g} або напишіть з цієї адреси на {m}.' : 'Відкрився лист у вашій пошті. Надішліть його, це і є підтвердження. Лист не відкрився? {g} або напишіть на {m}.'}">
     <b>Це попередній перегляд: так ваш курс побачать на сайті.</b><span>Поки його бачите тільки ви. Перевірте назву, дату, місце, ціну й контакти. Якщо все правильно, позначте всі позначки й натисніть «Підтверджую». Якщо щось потрібно змінити, натисніть «Потрібно виправити».</span>
     <label class="pv-ok"><input type="checkbox" data-pv-agree data-id="ok"> <span>Дані правильні, даю згоду на публікацію на svoiludi.ch. Запис, оплата й договір — тільки зі мною, «Свої люди» в них не беруть участі.</span></label>
     <label class="pv-ok"><input type="checkbox" data-pv-agree data-id="own"> <span>Це мій курс: я сам(а) його веду, або його проводить моя організація. Записи за інших людей та організації я не розміщую.</span></label>
@@ -1019,7 +1024,7 @@ document.getElementById('reset').addEventListener('click', () => { Object.assign
 document.getElementById('trial').hidden = !ADMIN;
 document.getElementById('addbtn').href = `mailto:${MAIL}?subject=${encodeURIComponent('Курс для «Свої люди у Швейцарії»')}&body=${encodeURIComponent(TEMPLATE)}`;
 fillSelects(); render();
-const fromHash = () => { const id = decodeURIComponent(location.hash.slice(1)); if (id === 'digest'){ digest(); return; } if (id.startsWith('ok=')){ const [eid, key] = id.slice(3).split('.'); const e = KURSY.find(x => x.id === eid); if (e && e.key && key === e.key) openKurs(eid, true); return; }
+const fromHash = () => { const id = decodeURIComponent(location.hash.slice(1)); if (id === 'digest'){ digest(); return; } if (id.startsWith('ok=')){ const [eid, key] = id.slice(3).split('.'); const e = KURSY.find(x => x.id === eid); keyOk(e, key).then(ok => { if (ok){ OKKEY[eid] = key; openKurs(eid, true); } }); return; }
   if (id && KURSY.some(e => e.id === id && ((e.status === 'активен' && live(e)) || ADMIN))) openKurs(id); };
 fromHash(); addEventListener('hashchange', fromHash);
 </script>
