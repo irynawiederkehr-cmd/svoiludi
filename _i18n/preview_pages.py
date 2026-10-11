@@ -1,14 +1,21 @@
 """Живой предпросмотр нескольких страниц копии для «Копии svoiludi.ch» (10.10.2026).
 Страницы работают по-настоящему (фильтры, окна, подсказки), ссылки между ними — внутри предпросмотра, всё остальное — на живой сайт.
 Запуск из корня репозитория: python3 _i18n/preview_pages.py <папка> organizacii vakansii uk/organizacii uk/vakansii
+Главную (подбор специалистов) берём псевдонимом: spec=. и uk/spec=uk — страница лежит в <папка>/spec/ и <папка>/uk/spec/ (11.10.2026, для акций).
 Результат: <папка>/<страница>/index.html + assets, data, fav, img. Публикуется вместе с оглавлением копии (files в Artifact).
 Без приложения (pwa-app.js, вопрос о языке, сервис-воркер) и без счётчика: в предпросмотре они не нужны."""
 import sys, os, re, shutil, datetime
 from urllib.parse import urljoin, urlsplit
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-OUT, PAGES = sys.argv[1], [p.strip('/') for p in sys.argv[2:]]
+OUT = sys.argv[1]
+SRC = {}      # куда положить в предпросмотре -> откуда взять в репозитории ('.' — корень, 'uk' — украинская главная)
+for a in sys.argv[2:]:
+    d, _, o = a.partition('=')
+    d = d.strip('/'); SRC[d] = (o.strip('/') or d) if o else d
+    if o == '.': SRC[d] = ''
+PAGES = list(SRC)
 LIVE = 'https://svoiludi.ch/'
-INSIDE = {'/' + p + '/' for p in PAGES}
+INSIDE = {('/' + o + '/' if o else '/'): d for d, o in SRC.items()}    # живой путь -> страница предпросмотра
 BANNER = ('<div style="position:sticky;top:0;z-index:999;background:#2f2924;color:#FFFCF8;font:600 13px/1.45 Manrope,system-ui,sans-serif;'
           'padding:8px 16px;text-align:center">Предпросмотр КОПИИ · на сайт не выложено · {d}. Меню ведёт на настоящий сайт.</div>')
 
@@ -16,22 +23,23 @@ def local(target, page):
     """ссылка на страницу внутри предпросмотра — относительно текущей страницы, с index.html"""
     sp = urlsplit(target)
     up = '../' * page.count('/') + '../'
-    return up + sp.path.strip('/') + '/index.html' + (('#' + sp.fragment) if sp.fragment else '')
+    return up + INSIDE[sp.path] + '/index.html' + (('#' + sp.fragment) if sp.fragment else '')
 
 def fix_href(m, page, base):
+    sp_ = SRC[page]
     attr, url = m.group(1), m.group(2)
     if url.startswith(('#', 'mailto:', 'tel:', 'data:', 'javascript:')) or '${' in url: return m.group(0)
     if re.match(r'https?://', url) and not url.startswith(LIVE): return m.group(0)
-    full = urljoin(LIVE + (base.lstrip('/') if base else page + '/'), url)   # украинские страницы считают ссылки от <base> русской
+    full = urljoin(LIVE + (base.lstrip('/') if base else (sp_ + '/' if sp_ else '')), url)   # украинские страницы считают ссылки от <base> русской
     path = urlsplit(full).path
-    if page.startswith('uk/') and '/uk' + path in INSIDE: full, path = full.replace(LIVE, LIVE + 'uk/', 1), '/uk' + path   # на сайте RU-ссылку переводит на /uk/ выбранный язык
+    if sp_.startswith('uk') and '/uk' + path in INSIDE: full, path = full.replace(LIVE, LIVE + 'uk/', 1), '/uk' + path   # на сайте RU-ссылку переводит на /uk/ выбранный язык
     if re.match(r'/(assets|data|fav|img)/', path):   # файлы — в копию рядом
         return f'{attr}="{"../" * (page.count("/") + 1)}{full[len(LIVE):]}"'
     if path in INSIDE: return f'{attr}="{local(full, page)}"'
     return f'{attr}="{full}"'
 
 def build(page):
-    html = open(os.path.join(ROOT, page, 'index.html'), encoding='utf-8').read()
+    html = open(os.path.join(ROOT, SRC[page], 'index.html'), encoding='utf-8').read()
     html = re.sub(r'<script src="/assets/pwa-app\.js"[^>]*></script>\s*', '', html)
     html = re.sub(r'<link rel="manifest"[^>]*>\s*', '', html)
     html = re.sub(r'<script data-goatcounter[^>]*></script>\s*', '', html)
@@ -40,14 +48,16 @@ def build(page):
     html = re.sub(r'\b(href|src)="([^"]*)"', lambda m: fix_href(m, page, base), html)
     # ссылки, которые собирает код страницы: ../vakansii/#…, /uk/organizacii/#…
     for p in PAGES:
-        name = p.split('/')[-1]
-        if p.startswith('uk/') == page.startswith('uk/'):
+        name = SRC[p].split('/')[-1]
+        if name and p.startswith('uk/') == page.startswith('uk/'):
             html = re.sub(rf"([`'\"])(\.\./){name}/#", lambda m: f"{m.group(1)}../{name}/index.html#", html)
         up = '../' * (page.count('/') + 1)
-        for q in '`\'"': html = html.replace(f'{q}/{p}/#', f'{q}{up}{p}/index.html#')
-    live = LIVE + ('uk/' if page.startswith('uk/') else '')   # остальные ссылки из кода страницы — на живой сайт
+        if SRC[p]:
+            for q in '`\'"': html = html.replace(f'{q}/{SRC[p]}/#', f'{q}{up}{p}/index.html#')
+    live = LIVE + ('uk/' if SRC[page].startswith('uk') else '')   # остальные ссылки из кода страницы — на живой сайт
     html = html.replace("'../#'", f"'{live}#'").replace('href="../${', f'href="{live}${{')
     html = html.replace("window.IMG_BASE = '../img/'", f"window.IMG_BASE = '{'../' * (page.count('/') + 1)}img/'")
+    html = html.replace("window.IMG_BASE = 'img/'", f"window.IMG_BASE = '{'../' * (page.count('/') + 1)}img/'")   # главная
     html = html.replace('<body>', '<body>\n' + BANNER.format(d=datetime.date.today().strftime('%d.%m.%Y')), 1)
     os.makedirs(os.path.join(OUT, page), exist_ok=True)
     open(os.path.join(OUT, page, 'index.html'), 'w', encoding='utf-8').write(html)
