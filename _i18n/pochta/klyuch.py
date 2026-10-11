@@ -14,6 +14,10 @@
     в черновик письма. Потеряли ссылку — запустить ещё раз и отправить новую.
 Дальше: python3 _i18n/sync.py build → node _i18n/smoke.js → commit, push.
 
+  python3 -I _i18n/pochta/klyuch.py --check <id> <ключ или вся ссылка>
+    Проверить ключ из ссылки (например, из письма «Подтверждаю карточку»): совпадает ли его отпечаток с keyHash записи.
+    Ничего не меняет.
+
 Поле key (сам ключ) в данных запрещено: python3 _i18n/sync.py check и build останавливаются, если находят его.
 kartochka.py и zapis.py ставят новый ключ сами (через функции этого файла).
 """
@@ -113,7 +117,18 @@ def rekey(rid):
     return res
 
 
+def check(rid, k):
+    k = re.split(r'[.#=]', k.strip().rstrip('/'))[-1] if ('.' in k or '#' in k) else k.strip()
+    f, r = find(rid)
+    if not f: print(f'Нет записи с id «{rid}».'); return False
+    ok = bool(r.get('keyHash')) and sha(k) == r['keyHash']
+    print(f"{rid}: {'ключ совпадает с отпечатком — ссылка настоящая' if ok else 'НЕ совпадает: ссылка старая или чужая, запись не подтверждаем'}")
+    return ok
+
+
 if __name__ == '__main__':
+    if len(sys.argv) == 4 and sys.argv[1] == '--check':
+        sys.exit(0 if check(sys.argv[2], sys.argv[3]) else 3)
     ids = [x for x in sys.argv[1:] if not x.startswith('-')]
     if not ids: print(__doc__); sys.exit(1)
     for rid in ids:
