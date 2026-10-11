@@ -551,25 +551,13 @@ a.yours:hover{background:#EBD3A3}
       <a href="../instrumenty/">Полезные инструменты</a>
       <a href="../events/">События и курсы</a>
       <a href="../novosti/">Что нового</a>
-      <a href="../vakansii/" aria-current="page" data-ira>Вакансии и партнёрство</a>
+      <a href="../vakansii/" aria-current="page">Вакансии и партнёрство</a>
     </nav>
     <a class="navcta" href="../join/">Подать заявку</a>
   </div>
 </header>
 
 <main class="page">
-  <!-- 11.10.2026, Ирина: «размести но скрой пока». Посетители видят только эту заглушку; вся страница — в #vak-all,
-       её видно с ?preview=1 и в режиме Ирины (svoiludi.ch/?ira=1). Открыть для всех: убрать заглушку, обёртку и скрипт ниже,
-       VAK_OPEN в _i18n/struktura_src/build.py и HIDDEN в nav.py (см. «struktura-saytov.md»). -->
-  <section class="s-hero" id="vak-soon" aria-labelledby="h1-soon">
-    <div class="hero-txt">
-      <div class="eyebrow">Вакансии и партнёрство · Свои люди в Швейцарии</div>
-      <h1 id="h1-soon">Раздел <em>скоро откроется</em></h1>
-      <p class="lead">Здесь появятся объявления своих людей, которые ищут сотрудника в команду или партнёра для общего дела. Разместить своё объявление можно будет бесплатно. Если ищешь сотрудника или партнёра уже сейчас, напиши нам на <a href="mailto:voznesenskaya.iryna@gmail.com">voznesenskaya.iryna@gmail.com</a>.</p>
-      <p class="free-badge"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-4.4-9.3-9A5.2 5.2 0 0 1 12 6.3 5.2 5.2 0 0 1 21.3 12C19 16.6 12 21 12 21z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>Бесплатно, для поддержки сообщества «Свои люди». Не коммерческая услуга.</p>
-    </div>
-  </section>
-  <div id="vak-all" hidden>
   <section class="s-hero" aria-labelledby="h1">
     <div class="hero-txt">
       <div class="eyebrow">Вакансии и партнёрство · Свои люди в Швейцарии</div>
@@ -645,7 +633,7 @@ a.yours:hover{background:#EBD3A3}
       <h3 class="zh3">Объявление</h3>
       <div class="zf"><label for="z-v-kind">Кого ищешь <s>*</s><button type="button" class="qh" data-help="kind" aria-label="Подсказка: сотрудник или партнёр" aria-expanded="false">?</button></label><select id="z-v-kind" data-a="Кого ищу" data-req data-miss="кого ищешь"><option value="">Выбери</option><option value="staff">Сотрудника: работа по найму</option><option value="partner">Партнёра: сотрудничество самостоятельных</option></select></div>
       <div class="zf"><label for="z-v-title">Кто нужен <s>*</s></label><input id="z-v-title" data-a="Кто нужен" data-title data-req data-miss="кто нужен" placeholder="например: администратор в салон красоты"></div>
-      <div class="zf"><label for="z-v-cat">Направление <s>*</s></label><select id="z-v-cat" data-a="Направление" data-req data-miss="направление"><option value="">Выбери направление</option><option value="status">Документы и статус</option><option value="law">Юристы</option><option value="money">Налоги и финансы</option><option value="insure">Страхование и пенсия</option><option value="health">Врачи и здоровье</option><option value="psy">Психологическая помощь</option><option value="coach">Коучинг и личное развитие</option><option value="body">Тело и красота</option><option value="kids">Дети и семья</option><option value="learn">Язык, учёба и работа</option><option value="home">Дом, быт и транспорт</option><option value="events">Праздники, фото и еда</option></select><small>Как в справочнике: по нему объявление найдут в фильтре.</small></div>
+      <div class="zf"><label for="z-v-cat">Направление <s>*</s></label><select id="z-v-cat" data-a="Направление" data-req data-miss="направление"><option value="">Выбери направление</option><optgroup label="Документы, право и деньги"><option value="status">Документы, переводы и ведомства</option><option value="law">Юристы и нотариусы</option><option value="money">Налоги, бухгалтерия и деньги</option><option value="insure">Страхование и пенсия</option></optgroup><optgroup label="Здоровье и душевное состояние"><option value="health">Врачи и медицина</option><option value="alt">Комплементарная медицина</option><option value="psy">Психологическая помощь</option><option value="coach">Коучинг, консультирование и медиация</option></optgroup><optgroup label="Семья, близкие и животные"><option value="kids">Дети: уход и учёба</option><option value="care">Уход за пожилыми и близкими</option><option value="pets">Животные</option></optgroup><optgroup label="Учёба, работа и своё дело"><option value="learn">Языки</option><option value="work">Работа и карьера</option><option value="biz">Своё дело и услуги для бизнеса</option></optgroup><optgroup label="Дом и повседневная жизнь"><option value="home">Жильё, ремонт и быт</option><option value="auto">Авто и транспорт</option><option value="body">Красота и уход за собой</option><option value="sport">Спорт, музыка и творчество</option><option value="events">Праздники и события</option><option value="food">Еда на заказ</option></optgroup></select><small>Как в справочнике: по нему объявление найдут в фильтре.</small></div>
       <h3 class="zh3" data-zif="z-v-kind:staff" hidden>Работа</h3>
       <div class="zf" data-zif="z-v-kind:staff" hidden><label for="z-v-load">Занятость <s>*</s></label><select id="z-v-load" data-a="Занятость" data-req data-miss="занятость"><option value="">Выбери</option><option value="100">100 %, полная занятость</option><option value="80-100">80–100 %</option><option value="60-80">60–80 %</option><option value="40-60">40–60 %</option><option value="20-40">20–40 %</option><option value="u20">до 20 %</option><option value="hours">по часам</option></select></div>
       <div class="zf" data-zif="z-v-kind:staff" hidden><label for="z-v-contract">Договор <s>*</s><button type="button" class="qh" data-help="contract" aria-label="Подсказка: виды договоров" aria-expanded="false">?</button></label><select id="z-v-contract" data-a="Договор" data-req data-miss="договор"><option value="">Выбери</option><option value="perm">Бессрочный договор</option><option value="temp">Срочный договор</option><option value="repl">На время замены</option><option value="hourly">Почасовая работа</option><option value="prakt">Стажировка (Praktikum)</option><option value="lehre">Обучение профессии (Lehre)</option></select></div>
@@ -725,8 +713,6 @@ a.yours:hover{background:#EBD3A3}
 
   <p class="fine">Страница носит информационный характер. Объявления размещают сами их авторы и отвечают за их содержание. Свои люди в Швейцарии не участвуют в найме и сотрудничестве. Отклики и резюме этот сайт не собирает: ты пишешь автору объявления напрямую.</p>
 
-  </div>
-  <script>(function(){try{var q=location.search,on=/[?&]preview=1/.test(q)||/[?&]ira=1/.test(q);if(!on&&!/[?&]ira=0/.test(q))on=localStorage.getItem('svoiludi-admin')==='1';if(on){document.getElementById('vak-all').hidden=false;document.getElementById('vak-soon').hidden=true;}}catch(e){}})();</script>
   <footer>
     <span>© 2026 Свои люди в Швейцарии · <a href="../o-proekte/">О проекте</a> · проект <a href="https://voznesenskaya.ch/">Ирины Вознесенской</a></span>
     <span><a href="../">Специалисты</a> · <a href="../join/">Разместиться</a> · <a href="https://svoiludi.ch/privacy/">Политика конфиденциальности</a> · <a href="../usloviya/">Условия размещения</a> · <a href="../o-proekte/#otvetstvennost">Ограничение ответственности</a> · <a href="https://voznesenskaya.ch/impressum/">Выходные данные</a></span>
@@ -738,9 +724,9 @@ a.yours:hover{background:#EBD3A3}
 
 
 
-<script src="/data/specialists.js?v=ba7f5a4c"></script>
+<script src="/data/specialists.js?v=1c00be5f"></script>
 <script src="/data/organizations.js?v=7b1459f7"></script>
-<script src="/data/vacancies.js?v=22d1d935"></script>
+<script src="/data/vacancies.js?v=63675b46"></script>
 <script>window.IMG_BASE = '../img/';</script>
 <script>
 const ADMIN = (() => {   // режим Ирины: ?ira=1 включает на этом устройстве, ?ira=0 выключает
@@ -758,9 +744,11 @@ const DISC = {
 const ICO = { staff: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10" cy="8" r="3.5" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M3.5 19.5c.8-3.4 3.4-5.3 6.5-5.3s5.7 1.9 6.5 5.3" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><path d="M18.5 7.5v5M16 10h5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>', partner: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 11.5l4-4 3.2 1.4L13 7l3.5 1.2 4.5 3.3-4.6 4.8" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round"/><path d="M7 15l2.2 2.2a1.4 1.4 0 0 0 2-2M10 13l2.6 2.6a1.4 1.4 0 0 0 2-2l-3-3" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>' };
 const KINDS = { staff: { t: 'Ищу сотрудника', s: 'работа по найму', c: '#4F5E3E' }, partner: { t: 'Ищу партнёра', s: 'сотрудничество', c: '#C97E52' } };
 const CATS = {
-  status: 'Документы и статус', law: 'Юристы', money: 'Налоги и финансы', insure: 'Страхование и пенсия', health: 'Врачи и здоровье',
-  psy: 'Психологическая помощь', coach: 'Коучинг и личное развитие', body: 'Тело и красота', kids: 'Дети и семья',
-  learn: 'Язык, учёба и работа', home: 'Дом, быт и транспорт', events: 'Праздники, фото и еда'
+  status: 'Документы, переводы и ведомства', law: 'Юристы и нотариусы', money: 'Налоги, бухгалтерия и деньги', insure: 'Страхование и пенсия',
+  health: 'Врачи и медицина', alt: 'Комплементарная медицина', psy: 'Психологическая помощь', coach: 'Коучинг, консультирование и медиация',
+  kids: 'Дети: уход и учёба', care: 'Уход за пожилыми и близкими', pets: 'Животные', learn: 'Языки',
+  work: 'Работа и карьера', biz: 'Своё дело и услуги для бизнеса', home: 'Жильё, ремонт и быт', auto: 'Авто и транспорт',
+  body: 'Красота и уход за собой', sport: 'Спорт, музыка и творчество', events: 'Праздники и события', food: 'Еда на заказ'
 };
 const CANTONS = {
   'Aargau': ['AG', 'Аргау'], 'Appenzell Ausserrhoden': ['AR', 'Аппенцелль-Ауссерроден'], 'Appenzell Innerrhoden': ['AI', 'Аппенцелль-Иннерроден'],

@@ -81,7 +81,7 @@ function match(o, skip){
 const where = o => [(o.cities || []).join(', '), o.canton ? kt(o.canton) : ''].filter(Boolean).join(' · ');
 const lastDay = e => (e.repeat && e.repeat.until) || e.dateEnd || e.date || '';
 // 11.10.2026: вкладка вакансий скрыта («размести но скрой пока») — объявления в карточках организаций видит только Ирина (?ira=1).
-const VAK_OPEN = false, VAK_IRA = (() => { try { return localStorage.getItem('svoiludi-admin') === '1' || /[?&]ira=1/.test(location.search); } catch (e) { return false; } })();
+const VAK_OPEN = true, VAK_IRA = (() => { try { return localStorage.getItem('svoiludi-admin') === '1' || /[?&]ira=1/.test(location.search); } catch (e) { return false; } })();
 const vacsOf = o => (VAK_OPEN || VAK_IRA ? VACS : []).filter(v => v.author && typeof v.author === 'object' && v.author.org === o.id && v.status === 'активен' && v.confirm && v.confirm.date && (!v.until || v.until > today));
 const eventsOf = o => AFISHA.filter(e => e.status !== 'закрыто' && (e.organizers || []).some(x => x && typeof x === 'object' && x.org === o.id) && (!lastDay(e) || lastDay(e) >= today));
 

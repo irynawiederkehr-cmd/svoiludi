@@ -14,7 +14,7 @@
    author  — id специалиста из data/specialists.js; если у автора нет карточки — { name, firm, role, contacts: { telegram, email } } (карточка не обязательна)
              организация или фирма из раздела «Организации» — { org: '<id из data/organizations.js>', name, role, contacts } (10.10.2026):
              в окне объявления «Карточка организации →», в карточке организации — её объявления
-   title   — кого ищут; cat — направление, как в справочнике (status, law, money, insure, health, psy, coach, body, kids, learn, home, events)
+   title   — кого ищут; cat — направление, как в справочнике (список — _i18n/kategorii.py: status, law, money, insure, health, alt, psy, coach, kids, care, pets, learn, work, biz, home, auto, body, sport, events, food)
    canton, city — где работа; online: true — можно удалённо (тогда canton/city могут быть пустыми)
    workload — для staff: '40–60 %', 'полная занятость', 'по часам'; start — 'с ноября 2026', 'по договорённости'
    langs   — нужные языки; about — 2–4 предложения: что за работа или сотрудничество; offer — что предлагает автор
@@ -76,7 +76,7 @@ window.VACANCIES = [
     "kind": "partner",
     "author": "olga-marti",
     "title": "Ищу партнёра на аренду кабинета по средам и пятницам",
-    "cat": "body",
+    "cat": "health",
     "canton": "Zürich",
     "city": "Winterthur",
     "online": false,
@@ -117,7 +117,7 @@ window.VACANCIES = [
       "contacts": {}
     },
     "title": "Помощник или помощница повара на кейтеринг, 50 %",
-    "cat": "events",
+    "cat": "food",
     "canton": "Zürich",
     "city": "Zürich",
     "online": false,

@@ -313,6 +313,9 @@ a.bot:hover{color:#B98324}
 .f input:focus,.f select:focus{border-color:var(--brown);outline:none} .f small{color:var(--muted);font-size:.82rem} .f small a{color:var(--ink);font-weight:600}
 .chk{display:flex;flex-wrap:wrap;gap:8px} .chk label{text-transform:none;letter-spacing:0;font-size:.92rem;font-weight:600;color:var(--ink);background:var(--bg);border:1.5px solid var(--line);border-radius:999px;padding:7px 13px;cursor:pointer;display:inline-flex;gap:7px;align-items:center}
 .chk input{accent-color:var(--brown);width:auto;min-height:0;padding:0;margin:0} .chk label:has(input:checked){border-color:var(--brown);background:var(--soft)}
+.chk .chk-h{flex-basis:100%;font-size:.78rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-top:4px}
+.regdoc{margin-top:10px;background:var(--bg);border:1.5px solid var(--line);border-left:4px solid var(--mustard);border-radius:12px;padding:10px 14px;font-size:.9rem;line-height:1.5}
+.regdoc b{display:block;margin-bottom:4px} .regdoc ul{margin:0;padding:0;list-style:none} .regdoc li{margin:4px 0;padding-left:16px;position:relative} .regdoc li::before{content:"";position:absolute;left:1px;top:.55em;width:7px;height:7px;border-radius:2px;background:var(--mustard)}
 .acts{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px} .acts .btn.ghost{background:transparent}
 .draft{font-size:.88rem;color:var(--muted,#6b6b6b);margin:14px 0 0;line-height:1.5}
 .draft .lnk{font:inherit;font-weight:700;background:none;border:none;padding:0;color:var(--brown);text-decoration:underline;cursor:pointer}
@@ -369,7 +372,7 @@ a.bot:hover{color:#B98324}
       <a href="/uk/instrumenty/">Корисні інструменти</a>
       <a href="/uk/events/">Події та курси</a>
       <a href="/uk/novosti/">Що нового</a>
-      <a href="/uk/vakansii/" data-ira>Вакансії та партнерство</a>
+      <a href="/uk/vakansii/">Вакансії та партнерство</a>
     </nav>
     <a class="navcta" href="/uk/join/#form">Подати заявку</a>
   </div>
@@ -416,8 +419,9 @@ a.bot:hover{color:#B98324}
       <div class="f"><label for="v-latin">Прізвище та ім’я латиницею</label><input id="v-latin" data-a="Прізвище та ім’я латиницею" placeholder="як у банку, наприклад Marti Olga"></div>
       <div class="f"><label for="v-role">Професія <s>*</s></label><input id="v-role" data-a="Професія" placeholder="наприклад «Сімейний лікар»"></div>
       <div class="f"><label for="v-firm">Назва фірми</label><input id="v-firm" data-a="Назва фірми" autocomplete="organization" placeholder="точно як у реєстрі, якщо є"></div>
-      <div class="f"><label for="v-dir">Напрям <s>*</s></label><select id="v-dir" data-a="Головний напрям"></select></div>
-      <div class="f wide" id="specs-wrap" hidden><label>Спеціалізація — позначте одну або кілька</label><div class="chk" id="v-specs"></div></div>
+      <div class="f"><label for="v-dir">Головний напрям <s>*</s></label><select id="v-dir" data-a="Головний напрям"></select></div>
+      <div class="f"><label for="v-dir2">Другий напрям</label><select id="v-dir2" data-a="Другий напрям"></select><small>Якщо ви працюєте і в іншому напрямі. Необов’язково.</small></div>
+      <div class="f wide" id="specs-wrap" hidden><label>Категорії — позначте до трьох</label><div class="chk" id="v-specs"></div><small id="v-specs-max" hidden>Можна позначити не більше трьох категорій. Зніміть одну, щоб вибрати іншу.</small><div class="regdoc" id="v-reg" hidden></div></div>
       <div class="f"><label for="v-kant">Кантон основної адреси <s>*</s></label><select id="v-kant" data-a="Кантон основної адреси"></select></div>
       <div class="f"><label for="v-addr">Основна адреса</label><input id="v-addr" data-a="Основна адреса" autocomplete="street-address" placeholder="вулиця й номер, індекс, місто"></div>
       <div class="f wide"><label>Мови, якими ви працюєте</label><div class="chk" id="v-langs"></div></div>
@@ -448,26 +452,49 @@ a.bot:hover{color:#B98324}
 
 <script src="../assets/lib/jszip.min.js"></script>
 <script>
-const CATS = [{"t": "Документи і статус", "s": ["Дозволи і статус", "Натуралізація", "Листи та форми", "Засвідчені переклади", "Усний переклад", "Соціальні питання і допомога", "Нотаріус"]}, {"t": "Юристи", "s": ["Міграційне право", "Сімейне право", "Трудове право", "Оренда", "Борги і стягнення", "Спадщина і заповіти", "Права споживачів", "Медіація"]}, {"t": "Податки і фінанси", "s": ["Податкова декларація", "Бухгалтерія і Treuhand", "Фінансове планування", "Іпотека і банки", "Консультації з боргів"]}, {"t": "Страхування і пенсія", "s": ["Страховий брокер", "Пенсія AHV і BVG"]}, {"t": "Лікарі і здоров’я", "s": ["Сімейний лікар", "Педіатр", "Гінеколог", "Стоматолог", "Інші лікарі-спеціалісти", "Фізіотерапія", "Остеопатія", "Акушерка", "Дієтолог", "Догляд удома (Spitex)"]}, {"t": "Психологічна допомога", "s": ["Психотерапевт", "Психіатр", "Психолог"]}, {"t": "Коучинг і особистісний розвиток", "s": ["Коуч", "Сімейний консультант", "Консультант з адаптації"]}, {"t": "Тіло і краса", "s": ["Масаж", "Косметолог", "Перукар", "Манікюр", "Фітнес і йога"]}, {"t": "Діти і сім’я", "s": ["Логопед", "Дитячий психолог", "Репетитор", "Підготовка до гімназії", "Російська школа і білінгвізм", "Ясла і дитячий садок", "Няня", "Гуртки і заняття", "Догляд за літніми людьми"]}, {"t": "Мова, навчання і робота", "s": ["Німецька мова", "Французька мова", "Італійська мова", "Підготовка до fide", "Визнання дипломів", "Кар’єра і резюме", "Пошук роботи і рекрутинг", "Курси і перекваліфікація", "Відкриття власної справи"]}, {"t": "Дім, побут і транспорт", "s": ["Рієлтор", "Переїзд", "Міжнародний переїзд і митниця", "Прибирання зі здачею квартири", "Прибирання і допомога по дому", "Ремонт", "Електрик і сантехнік", "Комп’ютерна допомога", "Автошкола", "Автосервіс", "Ветеринар і догляд за тваринами", "Перетримка й вигул тварин"]}, {"t": "Свята, фото і їжа", "s": ["Фотограф і відеограф", "Організація свят", "Торти і домашня кухня", "Флорист і декор"]}];
+const CATS = [{"t": "Документи, переклади й установи", "g": "docs", "s": ["Листи та форми", "Пермит: заяви й продовження", "Підготовка до натуралізації", "Соціальні допомоги й соцконсультація", "Письмовий переклад", "Засвідчений переклад і апостиль", "Усний переклад: лікар, установа, суд"]}, {"t": "Юристи й нотаріуси", "g": "docs", "s": ["Міграційне право", "Сім’я і розлучення", "Трудове право", "Оренда і житло", "Спадщина і заповіт", "Договори й права споживачів", "Стягнення боргів і Betreibung", "Штрафи й кримінальні справи", "Право для фірм", "Право України та інших країн", "Нотаріус"]}, {"t": "Податки, бухгалтерія і гроші", "g": "docs", "s": ["Податкова декларація", "Бухгалтерія і Treuhand", "Зарплата і внески для роботодавців", "Фінансове планування й інвестиції", "Іпотека й купівля житла", "Бюджет і борги"]}, {"t": "Страхування і пенсія", "g": "docs", "s": ["Страховий брокер", "Медстраховка: вибір і зміна каси", "Пенсія: AHV, BVG і 3a", "Страхування для власної справи"]}, {"t": "Лікарі й медицина", "g": "zdorovye", "s": ["Сімейний лікар", "Педіатр", "Гінеколог", "Стоматолог і гігієна ротової порожнини", "Інші лікарі-спеціалісти", "Акушерка", "Фізіотерапія", "Ерготерапія", "Остеопатія", "Дієтолог", "Оптометрист", "Логопед — діти й дорослі", "Медичний масаж"]}, {"t": "Комплементарна медицина", "g": "zdorovye", "s": ["Натуропатія", "Китайська медицина й акупунктура", "Кінезіологія", "Гомеопатія", "Терапії за методами EMR і ASCA"]}, {"t": "Психологічна допомога", "g": "zdorovye", "s": ["Психотерапевт", "Психіатр", "Психолог", "Дитячий і підлітковий психолог або психотерапевт", "Парна й сімейна психотерапія"]}, {"t": "Коучинг, консультування й медіація", "g": "zdorovye", "s": ["Коуч", "Консультант з адаптації та інтеграції", "Консультації для пар і сімей, без терапії", "Медіатор", "Ментор для фахівців і керівників"]}, {"t": "Діти: догляд і навчання", "g": "semya", "s": ["Няня", "Денна мама", "Репетитор зі шкільних предметів", "Підготовка до гімназії та іспитів"]}, {"t": "Догляд за літніми й близькими", "g": "semya", "s": ["Допомога літнім удома і компанія", "Помічниця з проживанням", "Медичний догляд удома", "Асистент для людей з інвалідністю"]}, {"t": "Тварини", "g": "semya", "s": ["Ветеринар", "Перетримка й вигул", "Грумінг", "Дресирування собак"]}, {"t": "Мови", "g": "ucheba", "s": ["Німецька мова", "Швейцарська німецька", "Французька мова", "Італійська мова", "Англійська мова", "Підготовка до fide і мовних іспитів", "Російська школа і білінгвізм"]}, {"t": "Робота і кар’єра", "g": "ucheba", "s": ["Резюме і співбесіда", "Кар’єрний консультант", "Визнання дипломів", "Перекваліфікація і професійні курси"]}, {"t": "Власна справа і послуги для бізнесу", "g": "ucheba", "s": ["Відкриття власної справи та фірми", "Сайти й IT", "Маркетинг і соцмережі", "Дизайн і друк"]}, {"t": "Житло, ремонт і побут", "g": "zhizn", "s": ["Рієлтор: купівля й продаж", "Пошук квартири й релокація", "Переїзд і вантажники", "Міжнародний переїзд і митниця", "Прибирання зі здачею квартири", "Прибирання і допомога по дому", "Ремонт і оздоблення", "Майстер на годину й складання меблів", "Електрик", "Сантехнік", "Сад і озеленення", "Швачка, ремонт одягу й взуття", "Комп’ютер, телефон та інтернет удома"]}, {"t": "Авто і транспорт", "g": "zhizn", "s": ["Автошкола", "Автосервіс і шини", "Таксі й трансфер", "Кур’єр, перевезення й посилки в Україну"]}, {"t": "Краса і догляд за собою", "g": "zhizn", "s": ["Косметолог", "Манікюр і педикюр", "Перукар і барбер", "Брови й вії", "Візажист", "Перманентний макіяж і тату", "Видалення волосся й лазер", "Масаж для відпочинку"]}, {"t": "Спорт, музика і творчість", "g": "zhizn", "s": ["Фітнес і персональний тренер", "Йога й пілатес", "Танці", "Тренер зі спорту", "Музика й вокал", "Малювання і творчість", "Шахи й розвивальні заняття"]}, {"t": "Свята й події", "g": "zhizn", "s": ["Фотограф і відеограф", "Організація свят і весіль", "Ведучий, музиканти й DJ", "Дитячі свята й аніматори", "Декор і флорист", "Екскурсії й гіди"]}, {"t": "Їжа на замовлення", "g": "zhizn", "s": ["Торти й десерти", "Кейтеринг", "Домашня кухня на замовлення"]}];
+const GROUPS = { docs: 'Документи, право і гроші', zdorovye: 'Здоров’я і душевний стан', semya: 'Сім’я, близькі й тварини', ucheba: 'Навчання, робота і власна справа', zhizn: 'Дім і повсякденне життя' };   // группы направлений в списке «Направление» (11.10.2026)
+const PROVERKA = {"Засвідчений переклад і апостиль": "хто засвідчує переклад — за правилами кантону", "Усний переклад: лікар, установа, суд": "для суду — список перекладачів суду кантону", "Міграційне право": "слово «адвокат» у картці — лише із записом у реєстрі адвокатів кантону; без нього — «юридична консультація»", "Сім’я і розлучення": "слово «адвокат» у картці — лише із записом у реєстрі адвокатів кантону; без нього — «юридична консультація»", "Трудове право": "слово «адвокат» у картці — лише із записом у реєстрі адвокатів кантону; без нього — «юридична консультація»", "Оренда і житло": "слово «адвокат» у картці — лише із записом у реєстрі адвокатів кантону; без нього — «юридична консультація»", "Спадщина і заповіт": "слово «адвокат» у картці — лише із записом у реєстрі адвокатів кантону; без нього — «юридична консультація»", "Договори й права споживачів": "слово «адвокат» у картці — лише із записом у реєстрі адвокатів кантону; без нього — «юридична консультація»", "Стягнення боргів і Betreibung": "слово «адвокат» у картці — лише із записом у реєстрі адвокатів кантону; без нього — «юридична консультація»", "Штрафи й кримінальні справи": "слово «адвокат» у картці — лише із записом у реєстрі адвокатів кантону; без нього — «юридична консультація»", "Право для фірм": "слово «адвокат» у картці — лише із записом у реєстрі адвокатів кантону; без нього — «юридична консультація»", "Право України та інших країн": "диплом і допуск у своїй країні", "Нотаріус": "реєстр нотаріусів кантону", "Фінансове планування й інвестиції": "поради щодо фінансових продуктів — реєстр консультантів (FIDLEG)", "Страховий брокер": "незалежний посередник — реєстр FINMA", "Медстраховка: вибір і зміна каси": "незалежний посередник — реєстр FINMA", "Пенсія: AHV, BVG і 3a": "незалежний посередник — реєстр FINMA", "Страхування для власної справи": "незалежний посередник — реєстр FINMA", "Сімейний лікар": "MedReg і дозвіл кантону", "Педіатр": "MedReg і дозвіл кантону", "Гінеколог": "MedReg і дозвіл кантону", "Стоматолог і гігієна ротової порожнини": "MedReg і дозвіл кантону", "Інші лікарі-спеціалісти": "MedReg і дозвіл кантону", "Акушерка": "GesReg і дозвіл кантону", "Фізіотерапія": "GesReg і дозвіл кантону", "Ерготерапія": "GesReg і дозвіл кантону", "Остеопатія": "GesReg і дозвіл кантону", "Дієтолог": "GesReg і дозвіл кантону", "Оптометрист": "GesReg і дозвіл кантону", "Логопед — діти й дорослі": "визнаний диплом, дозвіл кантону", "Медичний масаж": "дозвіл кантону", "Натуропатія": "дозвіл кантону, де він потрібен", "Китайська медицина й акупунктура": "дозвіл кантону, де він потрібен", "Гомеопатія": "дозвіл кантону, де він потрібен", "Психотерапевт": "PsyReg і дозвіл кантону", "Психіатр": "MedReg і дозвіл кантону", "Психолог": "визнаний диплом, PsyReg", "Дитячий і підлітковий психолог або психотерапевт": "визнаний диплом, PsyReg", "Парна й сімейна психотерапія": "PsyReg і дозвіл кантону", "Денна мама": "повідомлення про себе в кантоні, у частині кантонів дозвіл", "Медичний догляд удома": "GesReg і дозвіл кантону", "Ветеринар": "MedReg і дозвіл кантону", "Перетримка й вигул": "понад 5 тварин на добу — дозвіл ветеринарної служби кантону", "Підготовка до fide і мовних іспитів": "«викладач fide» — лише із сертифікатом fide", "Електрик": "дозвіл ESTI", "Автошкола": "дозвіл інструктора", "Таксі й трансфер": "запис BPT 121 у правах, у частині кантонів реєстрація", "Косметолог": "лазер, IPL, кріоліполіз — сертифікат; ін’єкції — лише лікар", "Перманентний макіяж і тату": "реєстрація в кантональній службі", "Видалення волосся й лазер": "лазер і IPL — сертифікат", "Масаж для відпочинку": "без медичних обіцянок", "Торти й десерти": "реєстрація в кантональній службі контролю продуктів", "Кейтеринг": "реєстрація в кантональній службі контролю продуктів", "Домашня кухня на замовлення": "реєстрація в кантональній службі контролю продуктів"};   // что проверяем при размещении (регулируемые категории), _i18n/kategorii.py
 const KANT = ["Аппенцелль-Ауссерроден (AR) — Appenzell Ausserrhoden", "Аппенцелль-Іннерроден (AI) — Appenzell Innerrhoden", "Ааргау (AG) — Aargau", "Базель-Ланд (BL) — Basel-Landschaft", "Базель-Штадт (BS) — Basel-Stadt", "Берн (BE) — Bern", "Вале (VS) — Valais", "Во (VD) — Vaud", "Гларус (GL) — Glarus", "Граубюнден (GR) — Graubünden", "Женева (GE) — Genève", "Золотурн (SO) — Solothurn", "Люцерн (LU) — Luzern", "Невшатель (NE) — Neuchâtel", "Нідвальден (NW) — Nidwalden", "Обвальден (OW) — Obwalden", "Санкт-Галлен (SG) — St. Gallen", "Тічино (TI) — Ticino", "Тургау (TG) — Thurgau", "Урі (UR) — Uri", "Фрібур (FR) — Fribourg", "Цуг (ZG) — Zug", "Цюрих (ZH) — Zürich", "Шаффгаузен (SH) — Schaffhausen", "Швіц (SZ) — Schwyz", "Юра (JU) — Jura"];
 const LANGS = ['російська', 'українська', 'німецька', 'французька', 'італійська', 'англійська'];
 const MAIL = 'voznesenskaya.iryna@gmail.com', ANKETA = 'files/anketa.uk.docx';
 const $ = id => document.getElementById(id), esc = t => String(t).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const opt = (v, t) => `<option value="${esc(v)}">${esc(t)}</option>`;
-$('v-dir').innerHTML = opt('', 'Оберіть напрям') + CATS.map(c => opt(c.t, c.t)).join('');
+// направления по группам (11.10.2026): 20 направлений в 5 группах, список — _i18n/kategorii.py
+const dirOpts = first => opt('', first) + Object.entries(GROUPS).map(([g, gt]) => `<optgroup label="${esc(gt)}">` + CATS.filter(c => c.g === g).map(c => opt(c.t, c.t)).join('') + '</optgroup>').join('');
+$('v-dir').innerHTML = dirOpts('Оберіть напрям');
+$('v-dir2').innerHTML = dirOpts('Немає другого напряму');
 $('v-kant').innerHTML = opt('', 'Оберіть кантон') + KANT.map(k => opt(k, k)).join('');
 const chk = (name, v) => `<label><input type="checkbox" name="${name}" value="${esc(v)}">${esc(v)}</label>`;
 $('v-langs').innerHTML = LANGS.map(l => chk('lang', l)).join('');
-$('v-dir').addEventListener('change', e => { const c = CATS.find(x => x.t === e.target.value);
-  $('specs-wrap').hidden = !c; $('v-specs').innerHTML = c ? c.s.map(s => chk('spec', s)).join('') : ''; });
+// категории главного и второго направления; до трёх; для регулируемых — какой документ приложить (PROVERKA)
+const drawSpecs = () => {
+  const keep = [...document.querySelectorAll('input[name=spec]:checked')].map(i => i.value);
+  const ds = [$('v-dir').value, $('v-dir2').value].filter((v, i, a) => v && a.indexOf(v) === i).map(t => CATS.find(x => x.t === t)).filter(Boolean);
+  $('specs-wrap').hidden = !ds.length;
+  $('v-specs').innerHTML = ds.map(c => (ds.length > 1 ? `<span class="chk-h">${esc(c.t)}</span>` : '') + c.s.map(s => chk('spec', s)).join('')).join('');
+  keep.forEach(v => { const i = document.querySelector(`input[name=spec][value="${CSS.escape(v)}"]`); if (i) i.checked = true; });
+  regNote();
+};
+const regNote = () => {
+  const on = [...document.querySelectorAll('input[name=spec]:checked')].map(i => i.value).filter(v => PROVERKA[v]);
+  $('v-reg').hidden = !on.length;
+  $('v-reg').innerHTML = on.length ? '<b>Що ми перевіряємо в цих категоріях. Якщо потрібен документ, додайте його до листа або впишіть номер в анкеті (розділ 6).</b><ul>' + on.map(v => `<li>${esc(v)} — ${esc(PROVERKA[v])}</li>`).join('') + '</ul>' : '';
+};
+$('v-dir').addEventListener('change', drawSpecs); $('v-dir2').addEventListener('change', drawSpecs);
+$('v-specs').addEventListener('change', e => { if (e.target.name !== 'spec') return;
+  const on = document.querySelectorAll('input[name=spec]:checked');
+  if (on.length > 3) e.target.checked = false;
+  $('v-specs-max').hidden = !(on.length > 3);
+  regNote(); });
 // черновик формы остаётся на этом устройстве (если браузер разрешает)
 const KEY = 'svoi-join';
 const save = () => { try { const d = {}; document.querySelectorAll('.f [data-a]').forEach(el => d[el.id] = el.value);
   d.langs = [...document.querySelectorAll('input[name=lang]:checked')].map(i => i.value); d.specs = [...document.querySelectorAll('input[name=spec]:checked')].map(i => i.value);
   localStorage.setItem(KEY, JSON.stringify(d)); } catch (_) {} };
 try { const d = JSON.parse(localStorage.getItem(KEY) || 'null'); if (d) { Object.entries(d).forEach(([k, v]) => { if ($(k) && typeof v === 'string') $(k).value = v; });
-  $('v-dir').dispatchEvent(new Event('change')); (d.langs || []).forEach(v => { const i = document.querySelector(`input[name=lang][value="${CSS.escape(v)}"]`); if (i) i.checked = true; });
-  (d.specs || []).forEach(v => { const i = document.querySelector(`input[name=spec][value="${CSS.escape(v)}"]`); if (i) i.checked = true; }); } } catch (_) {}
+  drawSpecs(); (d.langs || []).forEach(v => { const i = document.querySelector(`input[name=lang][value="${CSS.escape(v)}"]`); if (i) i.checked = true; });
+  (d.specs || []).slice(0, 3).forEach(v => { const i = document.querySelector(`input[name=spec][value="${CSS.escape(v)}"]`); if (i) i.checked = true; }); regNote(); } } catch (_) {}
 document.querySelector('.form').addEventListener('input', save); document.querySelector('.form').addEventListener('change', save);
 
 const say = t => { const m = $('msg'); m.textContent = t; m.hidden = !t; };
@@ -477,7 +504,7 @@ $('draftBox').addEventListener('click', e => { const id = e.target.id;
   if (id === 'wipeNo') draftIdle();
   if (id === 'wipeYes'){ try { localStorage.removeItem(KEY); } catch (_) {}
     document.querySelectorAll('.f [data-a]').forEach(el => { el.value = ''; }); document.querySelectorAll('input[name=lang], input[name=spec]').forEach(i => { i.checked = false; });
-    $('v-dir').dispatchEvent(new Event('change')); draftIdle(); say('Усю історію видалено з цього пристрою.'); }
+    drawSpecs(); draftIdle(); say('Усю історію видалено з цього пристрою.'); }
 });
 const need = () => { const miss = [['v-name', 'ім’я'], ['v-role', 'професію'], ['v-dir', 'напрям'], ['v-kant', 'кантон'], ['v-email', 'e-mail']].filter(([id]) => !$(id).value.trim()).map(x => x[1]);
   if (miss.length) { say('Заповніть, будь ласка: ' + miss.join(', ') + '.'); return false; } return true; };
@@ -494,7 +521,7 @@ function fill(xml, alias, value){
   sdt = sdt.replace(/<w:sdtContent>[\s\S]*<\/w:sdtContent>/, `<w:sdtContent><w:r>${runs}</w:r></w:sdtContent>`);
   return xml.slice(0, st) + sdt + xml.slice(en);
 }
-// ставит галочку перед подписью (языки, специализации)
+// ставит галочку перед подписью (языки, категории)
 function tick(xml, label){
   const re = /<w:sdt><w:sdtPr><w:tag w:val="cb\d+"\/>[\s\S]*?<\/w:sdt>(?=<w:r>(?:(?!<\/w:r>)[\s\S])*?<w:t[^>]*>([^<]*)<\/w:t>)/g;
   return xml.replace(re, (m, txt) => txt.replace(/\u00a0/g, ' ').trim() === label ? m.replace('w14:val="0"', 'w14:val="1"').replace('<w:t>☐</w:t>', '<w:t>☒</w:t>') : m);
@@ -515,7 +542,7 @@ $('dl').addEventListener('click', async () => {
 });
 $('mail').addEventListener('click', () => {
   const name = $('v-name').value.trim();
-  const body = ['Вітаю!', '', 'Хочу розміститися в довіднику «Свої люди у Швейцарії».', name && `Ім’я: ${name}`, $('v-role').value && `Професія: ${$('v-role').value}`, $('v-kant').value && `Кантон: ${$('v-kant').value}`, '', 'У вкладенні: заповнена анкета й портретне фото.', ''].filter(x => x !== false && x !== undefined && x !== '' || x === '').join('\n');
+  const body = ['Вітаю!', '', 'Хочу розміститися в довіднику «Свої люди у Швейцарії».', name ? `Ім’я: ${name}` : false, $('v-role').value.trim() ? `Професія: ${$('v-role').value.trim()}` : false, $('v-dir').value ? `Напрям: ${$('v-dir').value}` : false, $('v-dir2').value ? `Другий напрям: ${$('v-dir2').value}` : false, (() => { const v = [...document.querySelectorAll('input[name=spec]:checked')].map(i => i.value); return v.length ? `Категорії: ${v.join(', ')}` : false; })(), $('v-kant').value ? `Кантон: ${$('v-kant').value}` : false, '', 'У вкладенні: заповнена анкета й портретне фото.', ''].filter(x => x !== false).join('\n');   // пустые поля не дают пустых строк в письме
   location.href = `mailto:${MAIL}?subject=${encodeURIComponent('Розміщення в довіднику' + (name ? ' — ' + name : ''))}&body=${encodeURIComponent(body)}`;
 });
 </script>

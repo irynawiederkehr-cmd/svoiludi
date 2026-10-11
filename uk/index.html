@@ -457,22 +457,38 @@ a.bot:hover{color:#B98324}
 .tag{font:inherit;font-size:.84rem;font-weight:600;color:var(--ink);background:var(--paper);border:1.5px solid var(--line);border-radius:999px;padding:6px 13px;cursor:pointer;display:inline-flex;align-items:center;gap:6px}
 .tag[aria-pressed="true"]{border-color:var(--brown);background:var(--soft)}
 .tag i{font-style:normal;color:var(--muted);font-weight:500}
+/* сердечко и «Мой список» с числом (11.10.2026), категории карточки */
+.lk{display:inline-flex;align-items:center;gap:4px;border:1.5px solid var(--line);background:var(--paper);color:var(--muted);border-radius:10px!important;padding:3px 8px 3px 6px;font:700 .78rem/1.2 var(--body,system-ui);letter-spacing:0;text-transform:none;cursor:pointer;flex:none}
+.lk svg{flex:none}.lk b{font-weight:700;color:var(--ink);font-variant-numeric:tabular-nums}
+.lk[aria-pressed="true"]{border-color:#E8798F;background:color-mix(in srgb,#E8798F 12%,var(--paper))}
+.sp-sub .lk{margin-left:auto}.sp-sub .badge~.lk,.sp-sub .vip-q~.lk{margin-left:6px}
+.card-acts .lk-big{gap:6px;padding:10px 14px;font-size:.86rem}
+.lk-big i{font-style:normal;font-weight:500;font-size:.78rem;color:var(--muted)}
+.card-acts .vip-q{align-self:center;margin-left:-4px}
+.svb{display:inline-flex;align-items:center;gap:6px}.svb svg{flex:none}.svb b{font-variant-numeric:tabular-nums;color:var(--muted);font-weight:700}
+.svb[aria-pressed="true"]{border-color:var(--forest,#4F5E3E);color:var(--forest,#4F5E3E)}.svb[aria-pressed="true"] path:first-child{fill:currentColor}
+.sp-cats{font-size:.8rem;line-height:1.4;color:var(--muted);margin-top:3px}
+.d-where{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.d-where+.d-where{margin-top:4px}
+.gocat{font:inherit;font-size:.84rem;font-weight:600;color:var(--ink);background:var(--paper);border:1.5px solid var(--line);border-radius:999px!important;padding:5px 12px;cursor:pointer;display:inline-flex;align-items:center;gap:6px;text-align:left}
+.gocat.dir{border-color:var(--wc);font-weight:700}
+.gocat:hover{border-color:var(--wc)}
 .new{display:inline-block;vertical-align:middle;margin-left:8px;font:700 .62rem/1 var(--sans,Manrope),system-ui,sans-serif;letter-spacing:.06em;text-transform:uppercase;color:var(--paper);background:var(--mustard);border-radius:999px;padding:4px 7px 3px;position:relative;top:-2px}
 .sp-acts{grid-template-columns:minmax(0,1fr) minmax(0,1fr) auto}
 /* 11.10.2026: на 360 px «Позвонить · Подробнее · ♡» вылезали за карточку на 3 px — кнопки ужимаются, текст не переносится */
 .sp{grid-template-columns:minmax(0,1fr)}
 @media (max-width:380px){.sp-acts{gap:6px}.sp-acts>a,.sp-acts>button:not(.fav){padding-inline:6px;font-size:.84rem}}
 .fav{display:grid;place-items:center;width:40px;height:40px;border-radius:50%;border:1.5px solid var(--line);background:var(--paper);color:var(--muted);cursor:pointer;padding:0}
-.fav:hover{border-color:#C25468;color:#C25468}
-.fav[aria-pressed="true"]{color:#C25468;border-color:#C25468;background:color-mix(in srgb,#C25468 10%,var(--paper))}
-.fav[aria-pressed="true"] path{fill:currentColor}
+.fav:hover{border-color:var(--forest,#4F5E3E);color:var(--forest,#4F5E3E)}
+.fav[aria-pressed="true"]{color:var(--forest,#4F5E3E);border-color:var(--forest,#4F5E3E);background:color-mix(in srgb,var(--forest,#4F5E3E) 10%,var(--paper))}
+.fav[aria-pressed="true"] path:first-child{fill:currentColor}
 .viewsw{display:inline-flex;border:1.5px solid var(--line);border-radius:999px;padding:2px;background:var(--paper)}
 .viewsw button{font:inherit;font-size:.86rem;font-weight:700;border:0;background:none;color:var(--muted);padding:6px 14px;border-radius:999px;cursor:pointer;text-decoration:none!important}
 .viewsw button[aria-pressed="true"]{background:var(--brown);color:var(--paper)}
 .count{align-items:center}
 .count-acts{align-items:center}
 .count .favbtn{display:inline-flex;align-items:center;gap:6px;text-decoration:none;font-weight:700}
-.count .favbtn[aria-pressed="true"]{color:#C25468}
+.count .favbtn[aria-pressed="true"]{color:var(--forest,#4F5E3E)}
 #map{height:min(70vh,560px);border-radius:22px;border:1.5px solid var(--line);overflow:hidden;margin-top:12px;background:var(--soft);z-index:0}
 .map-note{font-size:.86rem;color:var(--muted);padding-top:8px}
 .leaflet-popup-content{font:14px/1.45 var(--sans,Manrope),system-ui,sans-serif;margin:12px 14px}
@@ -632,7 +648,7 @@ a.bot:hover{color:#B98324}
       <a href="/uk/instrumenty/">Корисні інструменти</a>
       <a href="/uk/events/">Події та курси</a>
       <a href="/uk/novosti/">Що нового</a>
-      <a href="/uk/vakansii/" data-ira>Вакансії та партнерство</a>
+      <a href="/uk/vakansii/">Вакансії та партнерство</a>
     </nav>
     <a class="navcta" href="/uk/join/">Подати заявку</a>
   </div>
@@ -672,7 +688,7 @@ a.bot:hover{color:#B98324}
         <select id="cat"></select>
       </div>
       <div class="fld w3">
-        <label for="spec"><i>5</i>Спеціалізація</label>
+        <label for="spec"><i>5</i>Категорія</label>
         <select id="spec" disabled></select>
       </div>
       <div class="fld q">
@@ -825,6 +841,15 @@ dirBody:   (c, f, s) => `<circle cx="11" cy="9.5" r="6.2" fill="${f}" stroke="${
   dirKids:   (c, f, s) => `<circle cx="8" cy="5" r="2.3" fill="${f}" stroke="${c}" ${s}/><path d="M5.5 21v-6l-1-1v-4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v4l-1 1v6" fill="${f}" stroke="${c}" ${s}/><circle cx="17" cy="11" r="1.9" fill="${f}" stroke="${c}" ${s}/><path d="M15.2 21v-3.8l-.8-.8v-2a1.5 1.5 0 0 1 1.5-1.5h2.2a1.5 1.5 0 0 1 1.5 1.5v2l-.8.8V21M11.5 13.5h2.9" fill="${f}" stroke="${c}" ${s}/>`,
   dirLearn:  (c, f, s) => `<path d="M12 4 2.5 9 12 14l9.5-5z" fill="${f}" stroke="${c}" ${s}/><path d="M6.5 11.3V16c1.6 1.5 3.5 2.3 5.5 2.3s3.9-.8 5.5-2.3v-4.7M21.5 9v5.5" fill="none" stroke="${c}" ${s}/>`,
   dirHome:   (c, f, s) => `<path d="M5.5 9.5V20h13V9.5" fill="${f}" stroke="${c}" ${s}/><path d="M3.5 11 12 4l8.5 7M10 20v-5h4v5M16 6.2V4.5h2v3.3" fill="none" stroke="${c}" ${s}/>`,
+  /* новые направления (11.10.2026): комплементарная медицина, уход, животные, работа, своё дело, авто, спорт, еда */
+  dirAlt:    (c, f, s) => `<path d="M5 19.5c0-8.5 5.5-14.5 15-15.5 0 10-6 15.5-15 15.5z" fill="${f}" stroke="${c}" ${s}/><path d="M5 19.5c3-4.2 6.2-7.4 10.5-10.5" fill="none" stroke="${c}" ${s}/>`,
+  dirCare:   (c, f, s) => `<path d="M12 12.3c-2.7-1.8-4.4-3.3-4.4-5.2a2.2 2.2 0 0 1 4.4-1 2.2 2.2 0 0 1 4.4 1c0 1.9-1.7 3.4-4.4 5.2z" fill="${f}" stroke="${c}" ${s}/><path d="M2.8 15h3.4l3.8 1.8h3.8a1.4 1.4 0 0 0 0-2.8h-2.6M13.6 14.2l4.5-1.8a1.5 1.5 0 0 1 1.3 2.7l-6.6 4.4H6.2M2.8 20.5h3.4" fill="none" stroke="${c}" ${s}/>`,
+  dirPets:   (c, f, s) => `<path d="M12 11.5c3 0 5.3 2.9 5.3 5.3 0 1.9-1.5 3-3.1 3-1 0-1.4-.5-2.2-.5s-1.2.5-2.2.5c-1.6 0-3.1-1.1-3.1-3 0-2.4 2.3-5.3 5.3-5.3z" fill="${f}" stroke="${c}" ${s}/><circle cx="5.6" cy="10.4" r="1.9" fill="${f}" stroke="${c}" ${s}/><circle cx="9.2" cy="6.2" r="1.9" fill="${f}" stroke="${c}" ${s}/><circle cx="14.8" cy="6.2" r="1.9" fill="${f}" stroke="${c}" ${s}/><circle cx="18.4" cy="10.4" r="1.9" fill="${f}" stroke="${c}" ${s}/>`,
+  dirWork:   (c, f, s) => `<rect x="3.5" y="7.5" width="17" height="12" rx="2" fill="${f}" stroke="${c}" ${s}/><path d="M9 7.5V5.6A1.6 1.6 0 0 1 10.6 4h2.8A1.6 1.6 0 0 1 15 5.6v1.9M3.5 12.5h17M10.8 12.5v1.8h2.4v-1.8" fill="none" stroke="${c}" ${s}/>`,
+  dirBiz:    (c, f, s) => `<rect x="4.5" y="4.5" width="15" height="10.5" rx="1.5" fill="${f}" stroke="${c}" ${s}/><path d="M2.5 19h19M10 15v4M14 15v4M7.5 12l3-3 2 2 3.8-3.8M14 7.2h2.3v2.3" fill="none" stroke="${c}" ${s}/>`,
+  dirAuto:   (c, f, s) => `<path d="M3.8 16.2v-3.4l1.9-4.6A2 2 0 0 1 7.6 7h8.8a2 2 0 0 1 1.9 1.2l1.9 4.6v3.4z" fill="${f}" stroke="${c}" ${s}/><path d="M3.8 12.8h16.4M3.8 16.2v2.3M20.2 16.2v2.3" fill="none" stroke="${c}" ${s}/><circle cx="7.6" cy="16.2" r="1.7" fill="${c}"/><circle cx="16.4" cy="16.2" r="1.7" fill="${c}"/>`,
+  dirSport:  (c, f, s) => `<circle cx="12" cy="12" r="8.3" fill="${f}" stroke="${c}" ${s}/><path d="M4.2 9.4c3.4 1.4 5.6 4.6 6 10.8M19.8 9.4c-3.4 1.4-5.6 4.6-6 10.8M7.6 4.9c2.8 2.2 6 2.2 8.8 0" fill="none" stroke="${c}" ${s}/>`,
+  dirFood:   (c, f, s) => `<path d="M4.5 11h15v4.4a4.1 4.1 0 0 1-4.1 4.1H8.6a4.1 4.1 0 0 1-4.1-4.1z" fill="${f}" stroke="${c}" ${s}/><path d="M2.8 11h18.4M9 3.8c-.8 1 .8 2 0 3.2M12 3.8c-.8 1 .8 2 0 3.2M15 3.8c-.8 1 .8 2 0 3.2" fill="none" stroke="${c}" ${s}/>`,
   dirEvents: (c, f, s) => `<path d="M5.5 20.5v-6a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v6" fill="${f}" stroke="${c}" ${s}/><path d="M3.8 20.5h16.4M5.5 16.2c1.2 1 2.5 1 3.6 0 1.2 1 2.5 1 3.6 0 1.2 1 2.5 1 3.6 0 .7.6 1.4.8 2.2.6M12 12.5V9.3" fill="none" stroke="${c}" ${s}/><path d="M12 4.5c1.1 1.3 1.1 2.6 0 3.3-1.1-.7-1.1-2-0-3.3z" fill="${c}" stroke="${c}" stroke-width="1" stroke-linejoin="round"/>`
 };
 /* светлый тон цвета для заливки по умолчанию */
@@ -840,8 +865,8 @@ function ico(name, line = '#2E5A88', fill, size = 24){
 const AVATAR_SVG = '<svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="46" fill="#FFFCF8" stroke="#6E4F3C" stroke-width="3"/><g transform="rotate(22.5 50 50)"><path d="M50 50 C42 40 43 24 50 15 C57 24 58 40 50 50Z" fill="#E3E6D6" stroke="#66704F" stroke-width="2"/></g><g transform="rotate(67.5 50 50)"><path d="M50 50 C42 40 43 24 50 15 C57 24 58 40 50 50Z" fill="#E3E6D6" stroke="#66704F" stroke-width="2"/></g><g transform="rotate(112.5 50 50)"><path d="M50 50 C42 40 43 24 50 15 C57 24 58 40 50 50Z" fill="#E3E6D6" stroke="#66704F" stroke-width="2"/></g><g transform="rotate(157.5 50 50)"><path d="M50 50 C42 40 43 24 50 15 C57 24 58 40 50 50Z" fill="#E3E6D6" stroke="#66704F" stroke-width="2"/></g><g transform="rotate(202.5 50 50)"><path d="M50 50 C42 40 43 24 50 15 C57 24 58 40 50 50Z" fill="#E3E6D6" stroke="#66704F" stroke-width="2"/></g><g transform="rotate(247.5 50 50)"><path d="M50 50 C42 40 43 24 50 15 C57 24 58 40 50 50Z" fill="#E3E6D6" stroke="#66704F" stroke-width="2"/></g><g transform="rotate(292.5 50 50)"><path d="M50 50 C42 40 43 24 50 15 C57 24 58 40 50 50Z" fill="#E3E6D6" stroke="#66704F" stroke-width="2"/></g><g transform="rotate(337.5 50 50)"><path d="M50 50 C42 40 43 24 50 15 C57 24 58 40 50 50Z" fill="#E3E6D6" stroke="#66704F" stroke-width="2"/></g><g transform="rotate(0.0 50 50)"><path d="M50 50 C45 43 45 32 50 26 C55 32 55 43 50 50Z" fill="#EADFCF" stroke="#6E4F3C" stroke-width="2"/></g><g transform="rotate(45.0 50 50)"><path d="M50 50 C45 43 45 32 50 26 C55 32 55 43 50 50Z" fill="#EADFCF" stroke="#6E4F3C" stroke-width="2"/></g><g transform="rotate(90.0 50 50)"><path d="M50 50 C45 43 45 32 50 26 C55 32 55 43 50 50Z" fill="#EADFCF" stroke="#6E4F3C" stroke-width="2"/></g><g transform="rotate(135.0 50 50)"><path d="M50 50 C45 43 45 32 50 26 C55 32 55 43 50 50Z" fill="#EADFCF" stroke="#6E4F3C" stroke-width="2"/></g><g transform="rotate(180.0 50 50)"><path d="M50 50 C45 43 45 32 50 26 C55 32 55 43 50 50Z" fill="#EADFCF" stroke="#6E4F3C" stroke-width="2"/></g><g transform="rotate(225.0 50 50)"><path d="M50 50 C45 43 45 32 50 26 C55 32 55 43 50 50Z" fill="#EADFCF" stroke="#6E4F3C" stroke-width="2"/></g><g transform="rotate(270.0 50 50)"><path d="M50 50 C45 43 45 32 50 26 C55 32 55 43 50 50Z" fill="#EADFCF" stroke="#6E4F3C" stroke-width="2"/></g><g transform="rotate(315.0 50 50)"><path d="M50 50 C45 43 45 32 50 26 C55 32 55 43 50 50Z" fill="#EADFCF" stroke="#6E4F3C" stroke-width="2"/></g><circle cx="50" cy="50" r="7" fill="#B98324"/></svg>';
 
 </script>
-<script src="/data/specialists.uk.js?v=f3ab927c"></script>
-<script src="/data/vacancies.uk.js?v=5de638b0"></script>
+<script src="/data/specialists.uk.js?v=06599fe4"></script>
+<script src="/data/vacancies.uk.js?v=1889cf60"></script>
 <script src="/data/organizations.uk.js?v=489feb29"></script>
 <script>
 window.IMG_BASE = 'img/';
@@ -856,20 +881,29 @@ const ADMIN = (() => {   // режим Ирины: svoiludi.ch/?ira=1 включ
   try { const q = location.search; if (/[?&]ira=1/.test(q)) localStorage.setItem('svoiludi-admin', '1'); if (/[?&]ira=0/.test(q)) localStorage.removeItem('svoiludi-admin'); return localStorage.getItem('svoiludi-admin') === '1'; }
   catch (e) { return /[?&]ira=1/.test(location.search); } })();
 const TRIAL = false;  // устарело: образцы теперь помечаются в карточке (sample: true), плашка «Пробная версия» видна только в режиме Ирины
-const CATS = {   // направление → цвет, значок и список специализаций (порядок = порядок в списках)
-  status: { t: 'Документи і статус',        c: '#3F6FBF', i: 'dirStatus',      s: ['Дозволи і статус', 'Натуралізація', 'Листи та форми', 'Засвідчені переклади', 'Усний переклад', 'Соціальні питання і допомога', 'Нотаріус'] },
-  law:    { t: 'Юристи',                    c: '#4F6D7A', i: 'dirLaw',      s: ['Міграційне право', 'Сімейне право', 'Трудове право', 'Оренда', 'Борги і стягнення', 'Спадщина і заповіти', 'Права споживачів', 'Медіація'] },
-  money:  { t: 'Податки і фінанси',          c: '#C97E52', i: 'dirMoney', s: ['Податкова декларація', 'Бухгалтерія і Treuhand', 'Фінансове планування', 'Іпотека і банки', 'Консультації з боргів'] },
-  insure: { t: 'Страхування і пенсія',      c: '#A99A2E', i: 'dirInsure',   s: ['Страховий брокер', 'Пенсія AHV і BVG'] },
-  health: { t: 'Лікарі і здоров’я',          c: '#C25468', i: 'dirHealth',    s: ['Сімейний лікар', 'Педіатр', 'Гінеколог', 'Стоматолог', 'Інші лікарі-спеціалісти', 'Фізіотерапія', 'Остеопатія', 'Акушерка', 'Дієтолог', 'Догляд удома (Spitex)'] },
-  psy:    { t: 'Психологічна допомога',    c: '#6A5FB8', i: 'dirPsy',   s: ['Психотерапевт', 'Психіатр', 'Психолог'] },   // только с признанным дипломом / разрешением
-  coach:  { t: 'Коучинг і особистісний розвиток', c: '#8E5A86', i: 'dirCoach',  s: ['Коуч', 'Сімейний консультант', 'Консультант з адаптації'] },
-  body:   { t: 'Тіло і краса',            c: '#4E9A70', i: 'dirBody',    s: ['Масаж', 'Косметолог', 'Перукар', 'Манікюр', 'Фітнес і йога'] },
-  kids:   { t: 'Діти і сім’я',              c: '#B5648E', i: 'dirKids',   s: ['Логопед', 'Дитячий психолог', 'Репетитор', 'Підготовка до гімназії', 'Російська школа і білінгвізм', 'Ясла і дитячий садок', 'Няня', 'Гуртки і заняття', 'Догляд за літніми людьми'] },
-  learn:  { t: 'Мова, навчання і робота',      c: '#2894A0', i: 'dirLearn',   s: ['Німецька мова', 'Французька мова', 'Італійська мова', 'Підготовка до fide', 'Визнання дипломів', 'Кар’єра і резюме', 'Пошук роботи і рекрутинг', 'Курси і перекваліфікація', 'Відкриття власної справи'] },
-  home:   { t: 'Дім, побут і транспорт',      c: '#8E8470', i: 'dirHome',     s: ['Рієлтор', 'Переїзд', 'Міжнародний переїзд і митниця', 'Прибирання зі здачею квартири', 'Прибирання і допомога по дому', 'Ремонт', 'Електрик і сантехнік', 'Комп’ютерна допомога', 'Автошкола', 'Автосервіс', 'Ветеринар і догляд за тваринами', 'Перетримка й вигул тварин'] },
-  events: { t: 'Свята, фото і їжа',     c: '#C0663A', i: 'dirEvents',      s: ['Фотограф і відеограф', 'Організація свят', 'Торти і домашня кухня', 'Флорист і декор'] }
+const CATS = {   // направление → название, группа, цвет, значок, категории (s) и их немецкие слова для поиска (w). Собирается _i18n/kategorii.py — правь там (11.10.2026)
+  status: { t: 'Документи, переклади й установи',      g: 'docs', c: '#3F6FBF', i: 'dirStatus', s: ['Листи та форми', 'Пермит: заяви й продовження', 'Підготовка до натуралізації', 'Соціальні допомоги й соцконсультація', 'Письмовий переклад', 'Засвідчений переклад і апостиль', 'Усний переклад: лікар, установа, суд'], w: ['Briefe, Formulare', 'Aufenthaltsbewilligung', 'Einbürgerung', 'Sozialberatung', 'Übersetzung', 'beglaubigte Übersetzung, Apostille', 'Dolmetschen'] },
+  law:    { t: 'Юристи й нотаріуси',                   g: 'docs', c: '#4F6D7A', i: 'dirLaw', s: ['Міграційне право', 'Сім’я і розлучення', 'Трудове право', 'Оренда і житло', 'Спадщина і заповіт', 'Договори й права споживачів', 'Стягнення боргів і Betreibung', 'Штрафи й кримінальні справи', 'Право для фірм', 'Право України та інших країн', 'Нотаріус'], w: ['Migrationsrecht', 'Familienrecht, Scheidung', 'Arbeitsrecht', 'Mietrecht', 'Erbrecht, Testament', 'Vertragsrecht, Konsumentenrecht', 'Betreibungsrecht, SchKG', 'Strafrecht, Strafbefehl', 'Gesellschaftsrecht', 'ausländisches Recht', 'Notar, Notariat'] },
+  money:  { t: 'Податки, бухгалтерія і гроші',         g: 'docs', c: '#C97E52', i: 'dirMoney', s: ['Податкова декларація', 'Бухгалтерія і Treuhand', 'Зарплата і внески для роботодавців', 'Фінансове планування й інвестиції', 'Іпотека й купівля житла', 'Бюджет і борги'], w: ['Steuererklärung', 'Buchhaltung, Treuhand', 'Lohnbuchhaltung', 'Finanzplanung, Anlageberatung', 'Hypothek', 'Budgetberatung, Schuldenberatung'] },
+  insure: { t: 'Страхування і пенсія',                 g: 'docs', c: '#A99A2E', i: 'dirInsure', s: ['Страховий брокер', 'Медстраховка: вибір і зміна каси', 'Пенсія: AHV, BVG і 3a', 'Страхування для власної справи'], w: ['Versicherungsbroker', 'Krankenkasse wechseln', 'Vorsorge, Säule 3a', 'Betriebsversicherung'] },
+  health: { t: 'Лікарі й медицина',                     g: 'zdorovye', c: '#C25468', i: 'dirHealth', s: ['Сімейний лікар', 'Педіатр', 'Гінеколог', 'Стоматолог і гігієна ротової порожнини', 'Інші лікарі-спеціалісти', 'Акушерка', 'Фізіотерапія', 'Ерготерапія', 'Остеопатія', 'Дієтолог', 'Оптометрист', 'Логопед — діти й дорослі', 'Медичний масаж'], w: ['Hausarzt', 'Kinderarzt', 'Frauenarzt, Gynäkologie', 'Zahnarzt, Dentalhygiene', 'Facharzt', 'Hebamme', 'Physiotherapie', 'Ergotherapie', 'Osteopathie', 'Ernährungsberatung', 'Optometrie', 'Logopädie', 'medizinische Massage'] },
+  alt:    { t: 'Комплементарна медицина',             g: 'zdorovye', c: '#6B8E3E', i: 'dirAlt', s: ['Натуропатія', 'Китайська медицина й акупунктура', 'Кінезіологія', 'Гомеопатія', 'Терапії за методами EMR і ASCA'], w: ['Naturheilpraktik', 'TCM, Akupunktur', 'Kinesiologie', 'Homöopathie', 'Shiatsu, Reflexzonentherapie'] },
+  psy:    { t: 'Психологічна допомога',               g: 'zdorovye', c: '#6A5FB8', i: 'dirPsy', s: ['Психотерапевт', 'Психіатр', 'Психолог', 'Дитячий і підлітковий психолог або психотерапевт', 'Парна й сімейна психотерапія'], w: ['Psychotherapie', 'Psychiater', 'Psychologe', 'Kinder- und Jugendpsychologie', 'Paartherapie, Familientherapie'] },
+  coach:  { t: 'Коучинг, консультування й медіація', g: 'zdorovye', c: '#8E5A86', i: 'dirCoach', s: ['Коуч', 'Консультант з адаптації та інтеграції', 'Консультації для пар і сімей, без терапії', 'Медіатор', 'Ментор для фахівців і керівників'], w: ['Coaching', 'Integrationsberatung', 'Paarberatung, Familienberatung', 'Mediation', 'Mentoring'] },
+  kids:   { t: 'Діти: догляд і навчання',                   g: 'semya', c: '#B5648E', i: 'dirKids', s: ['Няня', 'Денна мама', 'Репетитор зі шкільних предметів', 'Підготовка до гімназії та іспитів'], w: ['Nanny, Kinderbetreuung', 'Tagesmutter, Tagesfamilie', 'Nachhilfe', 'Gymiprüfung'] },
+  care:   { t: 'Догляд за літніми й близькими',          g: 'semya', c: '#B5735A', i: 'dirCare', s: ['Допомога літнім удома і компанія', 'Помічниця з проживанням', 'Медичний догляд удома', 'Асистент для людей з інвалідністю'], w: ['Seniorenbetreuung', '24-Stunden-Betreuung', 'Spitex, Pflege', 'Assistenz'] },
+  pets:   { t: 'Тварини',                             g: 'semya', c: '#8A6A45', i: 'dirPets', s: ['Ветеринар', 'Перетримка й вигул', 'Грумінг', 'Дресирування собак'], w: ['Tierarzt', 'Tierbetreuung, Hundesitter', 'Hundecoiffeur', 'Hundetraining'] },
+  learn:  { t: 'Мови',                                g: 'ucheba', c: '#2894A0', i: 'dirLearn', s: ['Німецька мова', 'Швейцарська німецька', 'Французька мова', 'Італійська мова', 'Англійська мова', 'Підготовка до fide і мовних іспитів', 'Російська школа і білінгвізм'], w: ['Deutsch', 'Schweizerdeutsch', 'Französisch', 'Italienisch', 'Englisch', 'fide, telc, Goethe', 'Bilingualität'] },
+  work:   { t: 'Робота і кар’єра',                     g: 'ucheba', c: '#1F7A8C', i: 'dirWork', s: ['Резюме і співбесіда', 'Кар’єрний консультант', 'Визнання дипломів', 'Перекваліфікація і професійні курси'], w: ['Bewerbung, Lebenslauf', 'Laufbahnberatung', 'Diplomanerkennung', 'Weiterbildung, Umschulung'] },
+  biz:    { t: 'Власна справа і послуги для бізнесу',       g: 'ucheba', c: '#4C6A9A', i: 'dirBiz', s: ['Відкриття власної справи та фірми', 'Сайти й IT', 'Маркетинг і соцмережі', 'Дизайн і друк'], w: ['Gründungsberatung', 'Webdesign, IT', 'Marketing, Social Media', 'Grafikdesign, Druck'] },
+  home:   { t: 'Житло, ремонт і побут',                  g: 'zhizn', c: '#8E8470', i: 'dirHome', s: ['Рієлтор: купівля й продаж', 'Пошук квартири й релокація', 'Переїзд і вантажники', 'Міжнародний переїзд і митниця', 'Прибирання зі здачею квартири', 'Прибирання і допомога по дому', 'Ремонт і оздоблення', 'Майстер на годину й складання меблів', 'Електрик', 'Сантехнік', 'Сад і озеленення', 'Швачка, ремонт одягу й взуття', 'Комп’ютер, телефон та інтернет удома'], w: ['Immobilienmakler', 'Wohnungssuche, Relocation', 'Umzug', 'internationaler Umzug, Zoll', 'Endreinigung mit Abgabegarantie', 'Reinigung, Haushaltshilfe', 'Renovation, Malerarbeiten', 'Handwerker, Möbelmontage', 'Elektroinstallation', 'Sanitär', 'Gartenpflege', 'Änderungsschneiderei', 'Computerhilfe'] },
+  auto:   { t: 'Авто і транспорт',                     g: 'zhizn', c: '#5C6670', i: 'dirAuto', s: ['Автошкола', 'Автосервіс і шини', 'Таксі й трансфер', 'Кур’єр, перевезення й посилки в Україну'], w: ['Fahrschule', 'Autogarage, Reifen', 'Taxi, Transfer', 'Kurier, Transport'] },
+  body:   { t: 'Краса і догляд за собою',              g: 'zhizn', c: '#4E9A70', i: 'dirBody', s: ['Косметолог', 'Манікюр і педикюр', 'Перукар і барбер', 'Брови й вії', 'Візажист', 'Перманентний макіяж і тату', 'Видалення волосся й лазер', 'Масаж для відпочинку'], w: ['Kosmetik', 'Nageldesign, Fusspflege', 'Coiffeur, Barbier', 'Augenbrauen, Wimpern', 'Make-up', 'Permanent Make-up, Tattoo', 'Haarentfernung', 'Wellnessmassage'] },
+  sport:  { t: 'Спорт, музика і творчість',           g: 'zhizn', c: '#D08A2E', i: 'dirSport', s: ['Фітнес і персональний тренер', 'Йога й пілатес', 'Танці', 'Тренер зі спорту', 'Музика й вокал', 'Малювання і творчість', 'Шахи й розвивальні заняття'], w: ['Personal Training', 'Yoga, Pilates', 'Tanz', 'Sporttraining, Schwimmen', 'Musikunterricht', 'Kunst, Gestalten', 'Schach'] },
+  events: { t: 'Свята й події',                  g: 'zhizn', c: '#C0663A', i: 'dirEvents', s: ['Фотограф і відеограф', 'Організація свят і весіль', 'Ведучий, музиканти й DJ', 'Дитячі свята й аніматори', 'Декор і флорист', 'Екскурсії й гіди'], w: ['Fotograf, Videograf', 'Eventplanung, Hochzeit', 'Moderation, DJ', 'Kinderanimation', 'Dekoration, Floristik', 'Stadtführung'] },
+  food:   { t: 'Їжа на замовлення',                         g: 'zhizn', c: '#A84E3C', i: 'dirFood', s: ['Торти й десерти', 'Кейтеринг', 'Домашня кухня на замовлення'], w: ['Torten', 'Catering', 'hausgemachtes Essen'] }
 };
+const GROUPS = { docs: 'Документи, право і гроші', zdorovye: 'Здоров’я і душевний стан', semya: 'Сім’я, близькі й тварини', ucheba: 'Навчання, робота і власна справа', zhizn: 'Дім і повсякденне життя' };   // группы направлений в списке «Направление» (11.10.2026)
 
 // все 26 кантонов: как пишется в карточке (официально) → код и русское название
 const CANTONS = {
@@ -883,9 +917,9 @@ const CANTONS = {
 const LANG_FIRST = ['російська', 'українська', 'німецька', 'французька', 'італійська', 'англійська'];
 const MAIL = 'voznesenskaya.iryna@gmail.com';   // вся переписка по справочнику
 // пометки с фильтром (04.10.2026): только с подтверждением специалиста, страховки — по реестру
-const TAGS = { emr: 'Оплачує дод. страховка (EMR/ASCA)', basic: 'Покриває базова страховка', free1: 'Перша зустріч безкоштовно', kids: 'Працює з дітьми', evening: 'Увечері й у вихідні', access: 'Доступно з візочком' };
+const TAGS = { emr: 'Оплачує дод. страховка (EMR/ASCA)', basic: 'Покриває базова страховка', free1: 'Перша зустріч безкоштовно', kids: 'Працює з дітьми', seniors: 'Працює з літніми людьми', couples: 'Працює з парами й сім’ями', firms: 'Працює з фірмами', evening: 'Увечері й у вихідні', access: 'Доступно з візочком' };   // «для кого» — пометками, а не направлениями (11.10.2026)
 const NEW_DAYS = 30;   // значок «Новый» первые 30 дней после added
-const GC_CODE = 'svoiludi';    // статистика GoatCounter (без cookies): svoiludi.goatcounter.com — открытия карточек, звонки, маршрут, «в контакты», «поделиться»
+const GC_CODE = 'svoiludi';    // статистика GoatCounter (без cookies): svoiludi.goatcounter.com — открытия карточек, звонки, маршрут, «в контакты», «поделиться», сердечки и «Мой список»
 const MONTHS = ['січ', 'лют', 'бер', 'квіт', 'травня', 'черв', 'лип', 'серп', 'вер', 'жовт', 'лист', 'груд'];
 
 const today = new Date().toISOString().slice(0, 10);
@@ -894,6 +928,63 @@ const isNew = s => !!s.added && (Date.parse(today) - Date.parse(s.added)) / 864e
 const FAV = new Set((() => { try { return JSON.parse(localStorage.getItem('svoiFav') || '[]'); } catch (_) { return []; } })());
 const saveFav = () => { try { localStorage.setItem('svoiFav', JSON.stringify([...FAV])); } catch (_) {} };
 function track(path){ try { if (window.goatcounter && goatcounter.count) goatcounter.count({ path, title: path, event: true }); } catch (_) {} }
+/* ---------- Сердечки и «Мой список» с числами на карточке (Ирина 11.10.2026, 16:49: «лайков и подсчёта, кто добавил в закладки… это можно уже внести»).
+   Что отметил посетитель, хранится только в его браузере (svoiLikes; «Мой список» — svoiFav). Считает тот же GoatCounter, что уже считает открытия карточек:
+   события like/<id>, unlike/<id>, save/<id>, unsave/<id>. На карточке число = like − unlike и save − unsave, его видят все (политика, раздел 4).
+   GoatCounter отдаёт число с задержкой, поэтому своё свежее нажатие браузер прибавляет сам (svoiSocialDelta, 6 часов), пока число не обновится.
+   Сердечки не меняют порядок карточек и не заменяют проверку. Уровни (Ирина): 1–9 «нравится», 10–49 «люблю», 50 и больше «обожаю». У образцов сердечек и чисел нет. */
+const LIKES = new Set((() => { try { return JSON.parse(localStorage.getItem('svoiLikes') || '[]'); } catch (_) { return []; } })());
+const saveLikes = () => { try { localStorage.setItem('svoiLikes', JSON.stringify([...LIKES])); } catch (_) {} };
+const SOC = {}, SOC_TTL = 6 * 36e5;
+const SOC_D = (() => { try { return JSON.parse(localStorage.getItem('svoiSocialDelta') || '{}'); } catch (_) { return {}; } })();
+const socBase = k => (SOC[k] || 0) - (SOC['un' + k] || 0);
+function socN(kind, id){ const k = kind + '/' + id, net = Math.max(0, socBase(k)), d = SOC_D[k];
+  if (!d || Date.now() - d[1] > SOC_TTL) return net;
+  const done = d[0] > 0 ? net >= d[2] + d[0] : d[0] < 0 ? net <= d[2] + d[0] : true;   // GoatCounter уже посчитал это нажатие
+  return Math.max(0, done ? net : net + d[0]); }
+function socMark(kind, id, step){ const k = kind + '/' + id, now = Date.now();
+  Object.keys(SOC_D).forEach(x => { if (now - SOC_D[x][1] > SOC_TTL) delete SOC_D[x]; });
+  const d = SOC_D[k]; SOC_D[k] = d ? [d[0] + step, now, d[2]] : [step, now, Math.max(0, socBase(k))];
+  try { localStorage.setItem('svoiSocialDelta', JSON.stringify(SOC_D)); } catch (_) {}
+  track((step > 0 ? '' : 'un') + kind + '/' + id); }
+const SOC_LIVE = !!GC_CODE && /(^|\.)svoiludi\.ch$/.test(location.hostname);   // на копиях и в превью чужой счётчик не трогаем
+async function socLoad(ids){
+  ids = [...new Set(ids)].filter(id => { const x = SPECIALISTS.find(s => s.id === id); return x && !x.sample; });
+  if (!SOC_LIVE || !window.fetch || !ids.length) return;
+  let cache = {}; try { cache = JSON.parse(sessionStorage.getItem('svoiSocial') || '{}'); } catch (_) {}
+  ids.forEach(id => { if (cache[id]) Object.assign(SOC, cache[id].v); });
+  const need = ids.filter(id => !(cache[id] && Date.now() - cache[id].t < 18e5));
+  if (!need.length){ paintSocial(); return; }
+  const get = p => fetch(`https://${GC_CODE}.goatcounter.com/counter/${encodeURIComponent(p)}.json`, { cache: 'no-store' })
+    .then(r => r.ok ? r.json() : { count: '0' }).then(j => parseInt(String(j.count).replace(/\D/g, ''), 10) || 0).catch(() => 0);
+  await Promise.all(need.map(async id => { const v = {};
+    for (const kind of ['like', 'save']){ const k = kind + '/' + id; v[k] = await get(k); v['un' + k] = v[k] ? await get('un' + k) : 0; }
+    Object.assign(SOC, v); cache[id] = { t: Date.now(), v }; }));
+  try { sessionStorage.setItem('svoiSocial', JSON.stringify(cache)); } catch (_) {}
+  paintSocial();
+}
+const HPATH = 'M12 21s-8-5.2-8-11a4.6 4.6 0 0 1 8-3 4.6 4.6 0 0 1 8 3c0 5.8-8 11-8 11z';
+const heartLvl = n => n >= 50 ? 3 : n >= 10 ? 2 : n >= 1 ? 1 : 0;
+const LVL_T = ['', 'подобається', 'люблю', 'обожнюю'];
+/* цвета сердечка (Ирина 11.10.2026: «цвета более привлекательные сделай»): чем больше сердечек, тем теплее — контур, румяный, розовый, малиновый с золотой искоркой */
+const HEART_C = [['none', 'currentColor'], ['#FDE3E8', '#E8798F'], ['#F07A92', '#D9536E'], ['url(#hg)', '#B81D4E']];
+let heartN = 0;
+const heartSvg = (n, on, size) => { const l = heartLvl(n), [f, st] = HEART_C[l], id = 'hg' + (++heartN);
+  return `<svg viewBox="0 0 24 24" width="${size}" height="${size}" aria-hidden="true">${l === 3 ? `<defs><linearGradient id="${id}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FF8AA1"/><stop offset="1" stop-color="#D6245A"/></linearGradient></defs>` : ''}<path d="${HPATH}" fill="${f.replace('#hg', '#' + id)}" stroke="${on ? '#A3234A' : st}" stroke-width="${on ? 2.4 : 1.7}" stroke-linejoin="round"/>${l >= 2 ? '<path d="M7.6 9.6q1.1-2.1 3.1-1.7" fill="none" stroke="#FFFFFF" stroke-opacity=".75" stroke-width="1.4" stroke-linecap="round"/>' : ''}${l === 3 ? '<path d="M19.6 1.4l.7 1.8 1.8.7-1.8.7-.7 1.8-.7-1.8-1.8-.7 1.8-.7z" fill="#F6B93B"/>' : ''}</svg>`; };
+const likeLabel = id => LIKES.has(id) ? 'Прибрати сердечко' : 'Поставити сердечко';
+const likeInner = (id, big) => { const n = socN('like', id); return heartSvg(n, LIKES.has(id), big ? 20 : 16) + `<b>${n}</b>` + (big && n ? `<i>${LVL_T[heartLvl(n)]}</i>` : ''); };
+const likeBtn = (s, big) => s.sample ? '' : `<button type="button" class="lk${big ? ' lk-big btn ghost' : ''}" data-like="${esc(s.id)}" aria-pressed="${LIKES.has(s.id)}" aria-label="${likeLabel(s.id)}" title="${likeLabel(s.id)}">${likeInner(s.id, big)}</button>`;
+const LIKE_TIP = 'Сердечка ставлять відвідувачі сайту. Один браузер дає одне сердечко на картку, реєстрації немає. Сердечка не змінюють порядок карток і не замінюють перевірку фахівця. Рішення залишається за тобою.';
+const SAVE_TIP = 'Стільки разів цю картку зберегли в «Мій список». Сам список зберігається лише на пристрої відвідувача, ми бачимо тільки загальне число.';
+const saveInner = s => `${BOOK}<span>${FAV.has(s.id) ? 'У моєму списку' : 'У мій список'}</span>${s.sample ? '' : `<b title="${SAVE_TIP}">${socN('save', s.id)}</b>`}`;
+function paintSocial(){
+  document.querySelectorAll('[data-like]').forEach(b => { const id = b.dataset.like; b.setAttribute('aria-pressed', String(LIKES.has(id))); b.setAttribute('aria-label', likeLabel(id)); b.title = likeLabel(id); b.innerHTML = likeInner(id, b.classList.contains('lk-big')); });
+  document.querySelectorAll('.svb[data-fav]').forEach(b => { const s = SPECIALISTS.find(x => x.id === b.dataset.fav); if (!s) return; b.setAttribute('aria-pressed', String(FAV.has(s.id))); b.innerHTML = saveInner(s); });
+}
+function toggleLike(id){
+  const on = !LIKES.has(id); on ? LIKES.add(id) : LIKES.delete(id); saveLikes(); socMark('like', id, on ? 1 : -1); paintSocial();
+  toast(on ? 'Дякуємо, сердечко поставлено. Натисни ще раз, щоб прибрати.' : 'Сердечко прибрано.');
+}
 if (GC_CODE){ const g = document.createElement('script'); g.async = true; g.src = 'https://gc.zgo.at/count.js'; g.dataset.goatcounter = `https://${GC_CODE}.goatcounter.com/count`; document.head.appendChild(g); }
 // даты событий (повторяющиеся — weekly / monthly «n-й день недели»), как на странице событий
 const D = x => new Date(x + 'T12:00:00Z'), iso = d => d.toISOString().slice(0, 10);
@@ -971,14 +1062,17 @@ const tierBest = s => (s.tiers || []).filter(x => state.hidden || live(x.until))
 // «Онлайн по всей Швейцарии» — платная опция: показ в блоке «Онлайн, из других кантонов»
 const onlineCH = s => s.online && (state.hidden || live(s.onlineCH));
 const pool = () => SPECIALISTS.filter(s => state.hidden || !hiddenReason(s));
-const hay = s => norm([s.name, s.role, s.firm, s.about, s.format, ...(s.tags || []).map(t => TAGS[t]), CATS[s.cat]?.t, ...(s.specs || []), ...(s.services || []), ...(s.langs || []), ...s.places.map(p => p.canton + ' ' + ktRu(p.canton) + ' ' + p.address)].join(' '));
+// направления карточки: главное (cat) и второе (cat2, необязательно; 11.10.2026); немецкие слова категорий — для поиска
+const dirsOf = s => [s.cat, s.cat2].filter(Boolean);
+const deOf = sp => { for (const k of Object.values(CATS)){ const i = k.s.indexOf(sp); if (i >= 0) return (k.w || [])[i] || ''; } return ''; };
+const hay = s => norm([s.name, s.role, s.firm, s.about, s.format, ...(s.tags || []).map(t => TAGS[t]), ...dirsOf(s).map(d => CATS[d]?.t), ...(s.specs || []), ...(s.specs || []).map(deOf), ...(s.services || []), ...(s.langs || []), ...s.places.map(p => p.canton + ' ' + ktRu(p.canton) + ' ' + p.address)].join(' '));
 // фильтр «Кантон → Город» (04.10.2026): город берётся из адреса; в списке городов только те, где в кантоне уже есть специалисты
 const inCanton = s => !state.canton || livePlaces(s).some(p => p.canton === state.canton && (!state.city || p.area || city(p.address) === state.city));
 // «Онлайн по кантону» (onlineCanton — оплачено до): виден во всех городах своего кантона; «Онлайн по всей Швейцарии» (onlineCH) — везде
 const onlineCanton = s => s.online && (state.hidden || live(s.onlineCanton)) && livePlaces(s).some(p => p.canton === state.canton);
 
 function base(s, skipCat){        // всё, кроме кантона
-  if (!skipCat && state.cat && s.cat !== state.cat) return false;
+  if (!skipCat && state.cat && !dirsOf(s).includes(state.cat)) return false;
   if (!skipCat && state.spec && !(s.specs || []).includes(state.spec)) return false;
   if (state.lang && !s.langs.includes(state.lang)) return false;
   if (state.promo && !promoOf(s).length) return false;
@@ -1005,31 +1099,41 @@ function quick(s){   // одна главная кнопка связи: Telegra
   return `<a class="qa" href="${esc(h)}" ${k === 'phone' ? '' : ext}>${k === 'phone' ? 'Зателефонувати' : t}</a>`;
 }
 const HEART = '<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-9.3-9.2C1.4 7.9 3.6 4.5 7 4.5c2 0 3.3 1.1 5 3 1.7-1.9 3-3 5-3 3.4 0 5.6 3.4 4.3 6.8-1.8 4.6-9.3 9.2-9.3 9.2z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>';
-const favBtn = s => `<button class="fav" type="button" data-fav="${esc(s.id)}" aria-pressed="${FAV.has(s.id)}" aria-label="${FAV.has(s.id) ? 'Прибрати з мого списку' : 'Зберегти в мій список'}" title="${FAV.has(s.id) ? 'Прибрати з мого списку' : 'Зберегти в мій список'}">${HEART}</button>`;
+const BOOK = '<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M6.5 3.5h11v17l-5.5-3.8-5.5 3.8z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M12 7.3v5.4M9.3 10h5.4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>';   // «Мой список» — закладка, сердечко — «Нравится» (решение Ирины 11.10.2026)
+const favBtn = s => `<button class="fav" type="button" data-fav="${esc(s.id)}" aria-pressed="${FAV.has(s.id)}" aria-label="${FAV.has(s.id) ? 'Прибрати з мого списку' : 'Зберегти в мій список'}" title="${FAV.has(s.id) ? 'Прибрати з мого списку' : 'Зберегти в мій список'}">${BOOK}</button>`;
+const catsLine = s => (s.specs || []).length ? `<div class="sp-cats">${s.specs.map(esc).join(' · ')}</div>` : '';
+/* «Где найти в справочнике»: направления и категории карточки, нажатие открывает подбор (Ирина 11.10.2026: «в карточке нигде не прописаны категории, в которых можно найти человека») */
+function whereBlock(s){
+  const dirs = [s.cat, s.cat2].filter((v, i, a) => v && CATS[v] && a.indexOf(v) === i); if (!dirs.length) return '';
+  return `<div class="d-block"><h4>Де знайти в довіднику</h4>${dirs.map(d => { const k = CATS[d], sp = (s.specs || []).filter(x => k.s.includes(x));
+    return `<div class="d-where" style="--wc:${k.c}"><button type="button" class="gocat dir" data-gocat="${d}">${ico(k.i, k.c, null, 16)}${esc(k.t)}</button>${sp.map(x => `<button type="button" class="gocat" data-gocat="${d}" data-gospec="${esc(x)}">${esc(x)}</button>`).join('')}</div>`; }).join('')}<p class="d-note">Натисни на напрям або категорію, щоб побачити всіх, хто там є.</p></div>`;
+}
 /* объявления специалиста (вкладка «Вакансии», data/vacancies.js): только подтверждённые автором и не просроченные */
 const VAC_KIND = { staff: 'Шукає собі працівника', partner: 'Шукає собі партнера' };
 // 11.10.2026: вкладка «Вакансии и партнёрство» выложена, но скрыта («размести но скрой пока») — объявления в карточках видит только Ирина.
 // Открыть для всех: VAK_OPEN = true (и см. VAK_OPEN в _i18n/struktura_src/build.py).
-const VAK_OPEN = false;
+const VAK_OPEN = true;   // открыто 11.10.2026, 14:39
 const vacsOf = s => (VAK_OPEN || ADMIN ? (window.VACANCIES || []) : []).filter(v => v.author === s.id && v.status === 'активен' && v.confirm && v.confirm.date && (!v.until || v.until > new Date().toISOString().slice(0, 10)));
 const vacChips = s => { const kinds = [...new Set(vacsOf(s).map(v => v.kind))]; return kinds.length ? `<div class="vac-chips">${kinds.map(k => `<a class="vac-chip" href="/uk/vakansii/#${esc(vacsOf(s).find(v => v.kind === k).id)}">${VAC_KIND[k]}</a>`).join('')}</div>` : ''; };
 /* VIP — платное размещение: кружок «?» у значка (правило Ирины, проверка 09.10.2026) */
 const VIPQ = '<button type="button" class="vip-q" aria-label="Що означає VIP" aria-expanded="false">?</button>';
-const VIP_TIP = 'Платне розміщення. Фахівець оплатив пакет VIP, тому його картка виділена і стоїть вище. Перевіряємо ми всіх однаково: чи працює фахівець офіційно і чи є він в офіційному реєстрі.';
+const VIP_TIP = 'Платне розміщення. Фахівець оплатив пакет «VIP-партнер» або «VIP-партнер ТОП», тому його картка виділена і стоїть вище. Перевіряємо ми всіх однаково: чи працює фахівець офіційно і чи є він в офіційному реєстрі.';
 document.addEventListener('click', e => { const b = e.target.closest('.vip-q'); const old = document.getElementById('vipTip');
   if (!b) { if (old && !e.target.closest('#vipTip')) old.remove(); return; }
   e.preventDefault(); e.stopPropagation(); if (old) { old.remove(); if (old._b === b) return; }
-  const t = document.createElement('div'); t.id = 'vipTip'; t.className = 'vip-tip'; t.setAttribute('role', 'note'); t.textContent = VIP_TIP; t._b = b; document.body.appendChild(t);
+  const t = document.createElement('div'); t.id = 'vipTip'; t.className = 'vip-tip'; t.setAttribute('role', 'note'); t.textContent = b.dataset.t || VIP_TIP; t._b = b;
+  const dlg = b.closest('dialog'); (dlg || document.body).appendChild(t);   // в открытой карточке (окно поверх страницы) подсказка внутри окна
   const r = b.getBoundingClientRect(), w = Math.min(300, innerWidth - 24); t.style.width = w + 'px';
+  if (dlg){ t.style.position = 'fixed'; t.style.left = Math.max(12, Math.min(innerWidth - w - 12, r.left + r.width / 2 - w / 2)) + 'px'; t.style.top = Math.min(r.bottom + 8, innerHeight - 140) + 'px'; return; }
   t.style.left = Math.max(12, Math.min(innerWidth - w - 12, r.left + r.width / 2 - w / 2)) + scrollX + 'px'; t.style.top = r.bottom + 8 + scrollY + 'px'; }, true);
 function card(s, lvl = ''){
   const k = CATS[s.cat] || CATS.status, why = hiddenReason(s);
   const flag = why ? `<span class="badge warn">${esc(why)}</span>` : lvl === 'vip' ? '<span class="badge tier">VIP-партнер ТОП</span>' + VIPQ : lvl === 'партнёр' || lvl === 'vip+' ? '<span class="badge tier">VIP-партнер</span>' + VIPQ : '';
   return `<article class="sp${why ? ' off' : ''}${lvl === 'vip' ? ' vip' : lvl === 'партнёр' || lvl === 'vip+' ? ' partner' : ''}" style="--lc:${k.c}">
-    ${s.sample ? '<span class="sample" title="Вигаданий фахівець — так виглядатиме ваша картка">Зразок</span>' : ''}<div class="sp-sub">${ico(k.i, k.c, null, 16)}<span>${esc(k.t)}</span>${flag}</div><div class="sp-main">
+    ${s.sample ? '<span class="sample" title="Вигаданий фахівець — так виглядатиме ваша картка">Зразок</span>' : ''}<div class="sp-sub">${ico(k.i, k.c, null, 16)}<span>${esc(k.t)}</span>${flag}${likeBtn(s)}</div><div class="sp-main">
     <div class="sp-id">${photo(s)}<div>
       <h3>${esc(s.name)}${isNew(s) ? '<span class="new" title="Новий у довіднику">новий</span>' : ''}</h3>
-      <div class="role">${esc(s.role)}</div>${s.firm ? `<div class="firm">${esc(s.firm)}</div>` : ''}${promoChip(s)}${vacChips(s)}
+      <div class="role">${esc(s.role)}</div>${s.firm ? `<div class="firm">${esc(s.firm)}</div>` : ''}${catsLine(s)}${promoChip(s)}${vacChips(s)}
     </div></div>
     <div class="facts">
       <div class="fact"><span>Де</span><div>${livePlaces(s).map(p => placeLink(p)).join('')}${s.online ? '<span class="onl">онлайн</span>' : ''}</div></div>
@@ -1059,7 +1163,7 @@ function render(){
   const row = new Set(local.filter(s => lv(s) === 'vip').slice(0, VIP_ROW).map(s => s.id));
   const lvView = s => listMode ? '' : lv(s) === 'vip' && !row.has(s.id) ? 'vip+' : lv(s);   // ТОП вне первого ряда (бывает только в общем списке без кантона) показываются как обычный «VIP-партнёр»
   CURRENT = local.concat(remote);
-  const empty = t => `<div class="empty"><b>${t}</b><span>${listMode ? 'Натисни ♡ на картці, щоб зберегти фахівця сюди.' : 'Спробуй іншу мову або прибери частину вибору.'}</span></div>`;
+  const empty = t => `<div class="empty"><b>${t}</b><span>${listMode ? 'Натисни значок закладки на картці, щоб зберегти фахівця сюди.' : 'Спробуй іншу мову або прибери частину вибору.'}</span></div>`;
   let html = '';
   if (listMode || !state.canton){
     html = `<div class="group"><div class="grid">${local.map(s => card(s, lvView(s))).join('')}</div>${list.length ? '' : empty(listMode ? 'У списку поки нікого немає' : 'Поки нікого не знайшлося')}</div>`;
@@ -1078,9 +1182,10 @@ function render(){
   document.getElementById('count').textContent = `${n} ${plural(n, 'фахівець', 'фахівці', 'фахівців')}`;
   document.getElementById('reset').hidden = listMode || !(state.q || state.cat || state.spec || state.canton || state.city || state.lang || state.promo || state.tags.length);
   ['canton', 'city', 'lang'].forEach(id => document.getElementById(id).classList.toggle('set', !!state[id]));
-  const fb = document.getElementById('favbtn'); fb.innerHTML = `${HEART.replace('width="18" height="18"', 'width="16" height="16"')}Мій список${FAV.size ? ' · ' + plainList(FAV).length : ''}`; fb.setAttribute('aria-pressed', String(!!state.fav));
+  const fb = document.getElementById('favbtn'); fb.innerHTML = `${BOOK.replace('width="18" height="18"', 'width="16" height="16"')}Мій список${FAV.size ? ' · ' + plainList(FAV).length : ''}`; fb.setAttribute('aria-pressed', String(!!state.fav));
   document.querySelectorAll('.viewsw button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.view === state.view)));
   renderListbar(); renderCats(); renderTags(list); nfLink();
+  socLoad(CURRENT.map(s => s.id));
 }
 function renderTags(list){   // пометки-фильтры с числом специалистов
   const el = document.getElementById('tags'), used = Object.keys(TAGS).filter(t => pool().some(s => (s.tags || []).includes(t)));
@@ -1113,17 +1218,18 @@ async function drawMap(list){
   setTimeout(() => { MAP.invalidateSize(); if (pts.length) MAP.fitBounds(pts, { padding: [40, 40], maxZoom: 14 }); else MAP.setView([46.8, 8.23], 7); }, 40);
   note.textContent = pts.length ? `На карті ${pts.length} ${plural(pts.length, 'адреса', 'адреси', 'адрес')}. Онлайн-фахівці з інших місць на карті не показуються. Колір точки — напрям.` : 'Для цього вибору адрес на карті немає.';
 }
-function renderCats(){   // выпадающие списки «Направление» и «Специализация» с числом специалистов
+function renderCats(){   // выпадающие списки «Направление» и «Категория» с числом специалистов
   const b = pool().filter(s => visible(s, true));
   const opt = (v, t, n, sel) => `<option value="${esc(v)}"${sel ? ' selected' : ''}>${esc(t)}${n === undefined ? '' : ' · ' + n}</option>`;
   const cs = document.getElementById('cat'), ss = document.getElementById('spec');
-  cs.innerHTML = opt('', 'Усі напрями', b.length, !state.cat) + Object.entries(CATS).map(([key, k]) => opt(key, k.t, b.filter(s => s.cat === key).length, state.cat === key)).join('');
+  // направления по группам (<optgroup>), 11.10.2026: 20 направлений в 5 группах
+  cs.innerHTML = opt('', 'Усі напрями', b.length, !state.cat) + Object.entries(GROUPS).map(([g, gt]) => `<optgroup label="${esc(gt)}">` + Object.entries(CATS).filter(([, k]) => k.g === g).map(([key, k]) => opt(key, k.t, b.filter(s => dirsOf(s).includes(key)).length, state.cat === key)).join('') + '</optgroup>').join('');
   const k = CATS[state.cat];
   ss.disabled = !k;
   if (!k){ ss.innerHTML = opt('', 'Спочатку обери напрям'); }
   else {
-    const inCat = b.filter(s => s.cat === state.cat);
-    ss.innerHTML = opt('', 'Усі спеціалізації', inCat.length, !state.spec) + k.s.map(sp => opt(sp, sp, inCat.filter(s => (s.specs || []).includes(sp)).length, state.spec === sp)).join('');
+    const inCat = b.filter(s => dirsOf(s).includes(state.cat));
+    ss.innerHTML = opt('', 'Усі категорії', inCat.length, !state.spec) + k.s.map(sp => opt(sp, sp, inCat.filter(s => (s.specs || []).includes(sp)).length, state.spec === sp)).join('');
   }
   cs.classList.toggle('set', !!state.cat); ss.classList.toggle('set', !!state.spec);
 }
@@ -1355,6 +1461,7 @@ function openCard(id){
       <div class="d-col">
         <div class="d-block"><h4>Профіль</h4><p>${esc(s.about)}</p></div>
         <div class="d-block"><h4>Послуги</h4><div class="chips svc">${s.services.map(x => `<span>${esc(x)}</span>`).join('')}</div></div>
+        ${whereBlock(s)}
         <div class="d-block"><h4>Формат</h4><p>${esc(s.format)}</p></div>
         <div class="d-block"><h4>Мови</h4><div class="chips">${s.langs.map(l => `<span>${esc(l)}</span>`).join('')}</div></div>
         ${(s.tags || []).length ? `<div class="d-block"><h4>Особливості</h4><div class="d-tags">${s.tags.filter(t => TAGS[t]).map(t => `<span>${esc(TAGS[t])}</span>`).join('')}</div></div>` : ''}
@@ -1368,7 +1475,7 @@ function openCard(id){
       <div class="d-side">
         <div class="d-block"><h4>Де приймає</h4><div style="display:flex;flex-direction:column;gap:10px">${livePlaces(s).map(placeFull).join('')}${s.online ? '<span>і онлайн через відеозв’язок</span>' : ''}</div></div>
         <div class="d-block"><h4>Контакти</h4><ul class="ctl">${contacts}</ul></div>
-        <div class="card-acts"><button class="btn" type="button" data-vcf="${esc(s.id)}" data-tip="Зберегти телефон, e-mail і адресу в контакти телефона або комп’ютера">До контактів</button><button class="btn ghost" type="button" data-share="${esc(s.id)}">Поділитися</button><button class="btn ghost" type="button" data-png-card="${esc(s.id)}" data-tip="Візитка-картинка PNG: збережеться в галерею телефона, її зручно показати або переслати">Візитка PNG</button>${priceShown(s) ? `<button class="btn ghost" type="button" data-png-price="${esc(s.id)}" data-tip="Прайс-лист картинкою PNG: збережеться в галерею телефона">Прайс-лист PNG</button>` : ''}<button class="btn ghost" type="button" data-pdf-card="${esc(s.id)}" data-tip="Повна картка для друку й пошти">PDF</button></div>
+        <div class="card-acts">${likeBtn(s, true)}${s.sample ? '' : `<button type="button" class="vip-q" data-t="${esc(LIKE_TIP)}" aria-label="Що означає сердечко" aria-expanded="false">?</button>`}<button class="btn ghost svb" type="button" data-fav="${esc(s.id)}" aria-pressed="${FAV.has(s.id)}">${saveInner(s)}</button><button class="btn" type="button" data-vcf="${esc(s.id)}" data-tip="Зберегти телефон, e-mail і адресу в контакти телефона або комп’ютера">До контактів</button><button class="btn ghost" type="button" data-share="${esc(s.id)}">Поділитися</button><button class="btn ghost" type="button" data-png-card="${esc(s.id)}" data-tip="Візитка-картинка PNG: збережеться в галерею телефона, її зручно показати або переслати">Візитка PNG</button>${priceShown(s) ? `<button class="btn ghost" type="button" data-png-price="${esc(s.id)}" data-tip="Прайс-лист картинкою PNG: збережеться в галерею телефона">Прайс-лист PNG</button>` : ''}<button class="btn ghost" type="button" data-pdf-card="${esc(s.id)}" data-tip="Повна картка для друку й пошти">PDF</button></div>
         <p class="d-note">${s.uid ? `Реєстраційний номер${s.firm ? 'фірми ' : ''}(UID): <a class="uid" href="${uidUrl(s.uid)}" ${ext} data-tip="Відкрити запис в офіційному реєстрі підприємств Швейцарії (uid.admin.ch)">${esc(s.uid)}</a>. ` : ''}${s.checked ? `Дані перевірено ${fmtDate(s.checked)}. ` : ''}${s.num ? `Номер картки ${esc(s.num)}. ` : ''}Довідник перевіряє тільки офіційну реєстрацію. Дипломи й сертифікати вказує сам фахівець. Домовленості — напряму з фахівцем.</p>
         <p class="report">Знайшли помилку в картці? <a href="${esc(reportLink(s))}">Повідомити</a></p>
         ${PREVIEW === s.id ? previewBox(s) : ''}${PRICEVIEW === s.id ? priceBox(s) : ''}${ADMIN ? adminBox(s) : ''}
@@ -1378,6 +1485,7 @@ function openCard(id){
   promoOf(s).forEach(e => { const slot = box.querySelector(`[data-prw="${e.id}"]`); if (!slot) return; const o = { kind: 'promo', title: e.title, when: 'до ' + pShort(e.dateEnd || e.date), url: PAGE_URL + '#' + s.id, main: e.signup || (e.link ? 'link' : ''), ch: promoChans(e, s) };
     const run = () => window.SVL_NAPISAT && SVL_NAPISAT(slot, o); if (window.SVL_NAPISAT) run(); else addEventListener('load', run, { once: true }); });
   if (!qm.open){ qm.showModal(); track('card/' + s.id); }
+  socLoad([s.id]);
   if (PREVIEW !== s.id && location.hash.slice(1) !== s.id) history.replaceState(null, '', location.pathname + '#' + s.id);
 }
 /* ---------- PDF: карточка и список (библиотеки — те же, что у PDF-отчётов тестов) ---------- */
@@ -1534,7 +1642,11 @@ async function cardPng(s, kind, opts){
   toast(kind === 'price' ? 'Прайс-лист збережено картинкою.' : 'Візитку збережено картинкою.');
 }
 // PDF всего списка намеренно нет: чтобы базу нельзя было скачать целиком (решение 03.10.2026)
-document.getElementById('qmCard').addEventListener('click', e => { const b = e.target.closest('[data-pdf-card]'); if (b) pdfCard(b.dataset.pdfCard); const g = e.target.closest('[data-png-card]'); if (g){ const s = SPECIALISTS.find(x => x.id === g.dataset.pngCard); if (s) cardPng(s); } const pr = e.target.closest('[data-png-price]'); if (pr){ const s = SPECIALISTS.find(x => x.id === pr.dataset.pngPrice); if (s) cardPng(s, 'price'); }
+document.getElementById('qmCard').addEventListener('click', e => {
+  const lk = e.target.closest('[data-like]'); if (lk){ toggleLike(lk.dataset.like); return; }
+  const fv = e.target.closest('.svb[data-fav]'); if (fv){ toggleFav(fv.dataset.fav); paintSocial(); return; }
+  const gc = e.target.closest('[data-gocat]'); if (gc){ qm.close(); state.fav = false; state.shared = null; state.cat = gc.dataset.gocat; state.spec = gc.dataset.gospec || ''; render(); const f = document.querySelector('.finder'); if (f) f.scrollIntoView({ behavior: 'smooth' }); return; }
+  const b = e.target.closest('[data-pdf-card]'); if (b) pdfCard(b.dataset.pdfCard); const g = e.target.closest('[data-png-card]'); if (g){ const s = SPECIALISTS.find(x => x.id === g.dataset.pngCard); if (s) cardPng(s); } const pr = e.target.closest('[data-png-price]'); if (pr){ const s = SPECIALISTS.find(x => x.id === pr.dataset.pngPrice); if (s) cardPng(s, 'price'); }
   const v = e.target.closest('[data-vcf]'); if (v){ const s = SPECIALISTS.find(x => x.id === v.dataset.vcf); if (s) saveVcf(s); }
   const sh = e.target.closest('[data-share]'); if (sh){ const s = SPECIALISTS.find(x => x.id === sh.dataset.share); if (s) shareCard(s); }
   const a = e.target.closest('a[href]'); if (a){ const id = (location.hash || '').slice(1), h = a.getAttribute('href');
@@ -1547,8 +1659,8 @@ const qm = document.getElementById('qm');
 qm.addEventListener('click', e => { if (e.target === qm) qm.close(); });
 qm.addEventListener('close', () => { if (location.hash) history.replaceState(null, '', location.pathname + location.search); });
 
-function toggleFav(id){ FAV.has(id) ? FAV.delete(id) : FAV.add(id); saveFav(); render(); }
-document.getElementById('results').addEventListener('click', e => { const f = e.target.closest('[data-fav]'); if (f){ toggleFav(f.dataset.fav); return; } const b = e.target.closest('[data-open]'); if (b) openCard(b.dataset.open);
+function toggleFav(id){ const on = !FAV.has(id); on ? FAV.add(id) : FAV.delete(id); saveFav(); const x = SPECIALISTS.find(s => s.id === id); if (x && !x.sample) socMark('save', id, on ? 1 : -1); render(); }
+document.getElementById('results').addEventListener('click', e => { const lk = e.target.closest('[data-like]'); if (lk){ toggleLike(lk.dataset.like); return; } const f = e.target.closest('[data-fav]'); if (f){ toggleFav(f.dataset.fav); return; } const b = e.target.closest('[data-open]'); if (b) openCard(b.dataset.open);
   const q = e.target.closest('.qa'); if (q){ const c = q.closest('.sp').querySelector('[data-open]'); if (c) track('quick/' + c.dataset.open); } });
 document.getElementById('map').addEventListener('click', e => { const b = e.target.closest('[data-open]'); if (b) openCard(b.dataset.open); });
 document.getElementById('tags').addEventListener('click', e => { if (e.target.closest('[data-promo]')){ state.promo = !state.promo; render(); return; } const t = e.target.closest('[data-tag]'); if (!t) return; const k = t.dataset.tag; state.tags = state.tags.includes(k) ? state.tags.filter(x => x !== k) : state.tags.concat(k); render(); });
@@ -1556,7 +1668,7 @@ document.querySelector('.viewsw').addEventListener('click', e => { const b = e.t
 document.getElementById('favbtn').addEventListener('click', () => { state.shared = null; state.fav = !state.fav; render(); });
 document.getElementById('listbar').addEventListener('click', async e => { const b = e.target.closest('[data-lb]'); if (!b) return;
   if (b.dataset.lb === 'all'){ state.fav = false; state.shared = null; if (location.hash.startsWith('#list=')) history.replaceState(null, '', location.pathname + location.search); render(); }
-  if (b.dataset.lb === 'save'){ state.shared.forEach(id => FAV.add(id)); saveFav(); state.shared = null; state.fav = true; history.replaceState(null, '', location.pathname + location.search); render(); toast('Збережено в «Мій список».'); }
+  if (b.dataset.lb === 'save'){ state.shared.forEach(id => { if (!FAV.has(id)){ FAV.add(id); const x = SPECIALISTS.find(s => s.id === id); if (x && !x.sample) socMark('save', id, 1); } }); saveFav(); state.shared = null; state.fav = true; history.replaceState(null, '', location.pathname + location.search); render(); toast('Збережено в «Мій список».'); }
   if (b.dataset.lb === 'share'){ const url = PAGE_URL + '#list=' + plainList(FAV).map(s => s.id).join(','); if (navigator.share){ try { await navigator.share({ title: 'Мій список — Свої люди у Швейцарії', url }); return; } catch (err){ if (err && err.name === 'AbortError') return; } } const ok = await copyText(url); toast(ok ? 'Посилання на список скопійовано.' : url); } });
 document.getElementById('cat').addEventListener('change', e => { state.cat = e.target.value; state.spec = ''; render(); });
 document.getElementById('spec').addEventListener('change', e => { state.spec = e.target.value; render(); });

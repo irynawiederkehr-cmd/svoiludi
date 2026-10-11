@@ -204,7 +204,7 @@
     var other = (UK ? '' : '/uk') + rel();
     var h = '<div class="pa-back" role="dialog" aria-modal="true" aria-label="' + T.more + '"><div class="pa-sheet"><div class="pa-grip"></div><h2>' + T.more + '</h2>' +
       '<a href="' + P + '/events/">' + I.ev + T.evk + '</a>' +
-      (IRA ? '<a href="' + P + '/vakansii/">' + I.job + T.vak + '</a>' : '') +   /* «Вакансии и партнёрство» — пока скрыто, видит только Ирина */
+      '<a href="' + P + '/vakansii/">' + I.job + T.vak + '</a>' +   /* «Вакансии и партнёрство» — открыто для всех 11.10.2026, 14:39 */
       '<a href="' + P + '/dlya-specialistov/">' + I.pro + T.pro + '</a>' +
       '<a href="' + P + '/o-proekte/">' + I.info + T.about + '</a>' +
       '<a href="https://voznesenskaya.ch/' + (UK ? 'uk/' : '') + '">' + I.site + T.site + '</a>' +

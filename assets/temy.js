@@ -19,8 +19,9 @@
        Внутри — случайный порядок при каждом открытии, чтобы все специалисты по теме показывались по очереди.
        Порядок по пакетам (VIP и т. п.) решим позже, пока у всех одинаково (08.10.2026). */
     const shuffle = a => { for (let i = a.length - 1; i > 0; i--){ const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
-    const exact = s => help.some(([cat, specs]) => s.cat === cat && (!specs.length || (s.specs || []).some(x => specs.includes(x))));
-    const near = s => help.some(([cat]) => s.cat === cat);
+    const dirs = s => [s.cat, s.cat2].filter(Boolean);   // главное и второе направление карточки (11.10.2026)
+    const exact = s => help.some(([cat, specs]) => dirs(s).includes(cat) && (!specs.length || (s.specs || []).some(x => specs.includes(x))));
+    const near = s => help.some(([cat]) => dirs(s).includes(cat));
     const tierOf = s => (exact(s) ? 0 : 2) + (s.sample ? 1 : 0);
     const hit = all.filter(s => exact(s) || near(s));
     const groups = [0, 1, 2, 3].map(t => shuffle(hit.filter(s => tierOf(s) === t)));

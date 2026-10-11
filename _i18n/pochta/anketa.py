@@ -96,6 +96,8 @@ def parse_docx(path):
                 seq.append(('t', c.text or '', None))
             else:
                 walk(c)
+                if c.tag == W + 'p':   # подпись галочки не переходит в следующий абзац (название следующего направления)
+                    seq.append(('pend', '', None))
     walk(x.find('w:body', NS))
     for i, (k, n, on) in enumerate(seq):
         if k != 'cb':
