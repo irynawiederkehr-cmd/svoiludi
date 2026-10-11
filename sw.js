@@ -3,7 +3,7 @@
    Файлы (стили, скрипты, шрифты, картинки): сразу из памяти, в фоне обновляются.
    Личные записи людей здесь не хранятся: они остаются в localStorage браузера, как раньше.
    При изменении этого файла поднять VERSION — старая память удалится. */
-const VERSION = 'v43-2026-10-11';
+const VERSION = 'v44-2026-10-11';
 const CACHE = 'svoiludi-' + VERSION;
 const CORE = ['/offline.html', '/assets/fonts.css', '/assets/pwa-app.js', '/fav/icon-192.png', '/fav/favicon.svg'];
 const MAX = 160;
