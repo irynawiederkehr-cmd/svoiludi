@@ -521,7 +521,7 @@ function fill(xml, alias, value){
   sdt = sdt.replace(/<w:sdtContent>[\s\S]*<\/w:sdtContent>/, `<w:sdtContent><w:r>${runs}</w:r></w:sdtContent>`);
   return xml.slice(0, st) + sdt + xml.slice(en);
 }
-// ставит галочку перед подписью (языки, специализации)
+// ставит галочку перед подписью (языки, категории)
 function tick(xml, label){
   const re = /<w:sdt><w:sdtPr><w:tag w:val="cb\d+"\/>[\s\S]*?<\/w:sdt>(?=<w:r>(?:(?!<\/w:r>)[\s\S])*?<w:t[^>]*>([^<]*)<\/w:t>)/g;
   return xml.replace(re, (m, txt) => txt.replace(/\u00a0/g, ' ').trim() === label ? m.replace('w14:val="0"', 'w14:val="1"').replace('<w:t>☐</w:t>', '<w:t>☒</w:t>') : m);
@@ -542,7 +542,7 @@ $('dl').addEventListener('click', async () => {
 });
 $('mail').addEventListener('click', () => {
   const name = $('v-name').value.trim();
-  const body = ['Вітаю!', '', 'Хочу розміститися в довіднику «Свої люди у Швейцарії».', name && `Ім’я: ${name}`, $('v-role').value && `Професія: ${$('v-role').value}`, $('v-dir').value && `Напрям: ${$('v-dir').value}`, $('v-dir2').value && `Другий напрям: ${$('v-dir2').value}`, (() => { const v = [...document.querySelectorAll('input[name=spec]:checked')].map(i => i.value); return v.length ? `Категорії: ${v.join(', ')}` : false; })(), $('v-kant').value && `Кантон: ${$('v-kant').value}`, '', 'У вкладенні: заповнена анкета й портретне фото.', ''].filter(x => x !== false && x !== undefined && x !== '' || x === '').join('\n');
+  const body = ['Вітаю!', '', 'Хочу розміститися в довіднику «Свої люди у Швейцарії».', name ? `Ім’я: ${name}` : false, $('v-role').value.trim() ? `Професія: ${$('v-role').value.trim()}` : false, $('v-dir').value ? `Напрям: ${$('v-dir').value}` : false, $('v-dir2').value ? `Другий напрям: ${$('v-dir2').value}` : false, (() => { const v = [...document.querySelectorAll('input[name=spec]:checked')].map(i => i.value); return v.length ? `Категорії: ${v.join(', ')}` : false; })(), $('v-kant').value ? `Кантон: ${$('v-kant').value}` : false, '', 'У вкладенні: заповнена анкета й портретне фото.', ''].filter(x => x !== false).join('\n');   // пустые поля не дают пустых строк в письме
   location.href = `mailto:${MAIL}?subject=${encodeURIComponent('Розміщення в довіднику' + (name ? ' — ' + name : ''))}&body=${encodeURIComponent(body)}`;
 });
 </script>

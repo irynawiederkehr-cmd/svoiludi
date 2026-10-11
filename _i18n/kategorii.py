@@ -286,55 +286,110 @@ def write_zapis():
     return put('_i18n/pochta/zapis.py', r"CATS = both\(\{.*?\}\)\n", 'CATS = both({' + items + '})\n')
 
 # --- анкета Word, раздел 2: список «Главное направление» и галочки специализаций по направлениям ---
+# анкета Word, раздел 2: те же слова, что в форме «Как разместиться» (до трёх категорий, второе направление)
+ANKETA_TEXTS = [
+    ('2. Направление и специализации', '2. Направление и категории'),
+    ('Главное направление определяет, где карточка стоит в первую очередь. Специализации отметьте все подходящие — можно несколько и из разных направлений: по ним вас находят в поиске.',
+     'Главное направление определяет, где карточка стоит в первую очередь. Второе направление — по желанию, если вы работаете и в нём. Отметьте до трёх категорий из главного и второго направления: по ним вас находят в поиске и в подборе. Если категория регулируется (врач, психолог, адвокат, электрик и другие), впишите номер разрешения или записи в реестре в разделе 6 — мы его проверяем.'),
+    ('Нет подходящей специализации? Напишите её: ', 'Нет подходящей категории? Напишите её: '),
+    ('<w:alias w:val="Другая специализация"/>', '<w:alias w:val="Другая категория"/>'),
+]
+
+# анкета Word: устаревшие подписи и тексты о данных — как в политике конфиденциальности svoiludi.ch (раздел 6)
+ANKETA_FIXES = [
+    ('Анкета и заявка специалиста · справочник Swiss Guide', 'Анкета и заявка специалиста · справочник «Свои люди» · svoiludi.ch'),
+    ('Instagram @iryna.voznesenskaya  ·  Telegram @IrynaNeuroCoach_channel', 'Свои люди в Швейцарии  ·  https://svoiludi.ch/  ·  voznesenskaya.iryna@gmail.com'),
+    ('За данные отвечает владелец справочника, указанный в Impressum на сайте https://svoiludi.ch/; связь по всем вопросам о данных — ',
+     'За данные отвечает Alonira.ch AG, Poststrasse 6, 6302 Zug — владелец справочника; связь по всем вопросам о данных — '),
+    ('Документы и анкета хранятся, пока действует размещение, и удаляются через 12 месяцев после его окончания; счета мы обязаны хранить 10 лет.',
+     'Анкету, фото и запись о согласии мы храним, пока карточка опубликована, и не дольше трёх лет после её снятия: в течение этого срока по закону можно заявить претензию. Документы, которые нужны только для проверки (копии дипломов и разрешений), удаляем через 12 месяцев после снятия карточки. Счета мы обязаны хранить 10 лет.'),
+]
+
 def write_anketa():
     path = os.path.join(ROOT, 'join/files/anketa.docx')
     z = zipfile.ZipFile(path); parts = {n: z.read(n) for n in z.namelist()}; infos = z.infolist(); z.close()
+    orig = dict(parts)
+    # старые подписи шапки и подвала (11.10.2026): справочник нейтральный — без коучинговых каналов
+    for n in parts:
+        if re.match(r'word/(footer|header)\d*\.xml$', n):
+            t = parts[n].decode('utf-8')
+            for a, b in ANKETA_FIXES: t = t.replace(a, b)
+            parts[n] = t.encode('utf-8')
     x = parts['word/document.xml'].decode('utf-8')
-    # 1) выпадающий список
+    for a, b in ANKETA_FIXES:
+        x = x.replace(a, b)
+    # 0) слово «категории» вместо «специализации» (11.10.2026) — как в форме на странице «Как разместиться»
+    for a, b in ANKETA_TEXTS:
+        x = x.replace(a, b)
+    # 0б) строка «Второе направление» сразу под «Главное направление» (копия строки, своё поле d2)
+    if '<w:alias w:val="Второе направление"/>' not in x:
+        a = x.find('<w:alias w:val="Главное направление"/>')
+        rs = x.rfind('<w:tr>', 0, a); re_ = x.find('</w:tr>', a) + 7
+        assert rs > 0 and re_ > 7, 'анкета: нет строки «Главное направление»'
+        row = x[rs:re_]
+        nid = max(int(v) for v in re.findall(r'<w:id w:val="(\d+)"/>', x)) + 1
+        row2 = (row.replace('>Главное направление<', '>Второе направление<', 1)
+                   .replace('<w:alias w:val="Главное направление"/>', '<w:alias w:val="Второе направление"/>')
+                   .replace('<w:tag w:val="d1"/>', '<w:tag w:val="d%d"/>' % (max(int(v) for v in re.findall(r'<w:tag w:val="d(\d+)"/>', x)) + 1))
+                   .replace('>выберите из списка<', '>по желанию, если работаете и в нём<', 1))
+        row2 = re.sub(r'<w:id w:val="\d+"/>', f'<w:id w:val="{nid}"/>', row2, count=1)
+        assert row2.count('Второе направление') == 2 and 'w:val="d1"' not in row2, 'анкета: строка второго направления'
+        x = x[:re_] + row2 + x[re_:]
+    # 1) выпадающие списки направлений
     items = '<w:listItem w:displayText="Выберите из списка" w:value=""/>' + ''.join(f'<w:listItem w:displayText="{t}" w:value="{t}"/>' for _, t, *_ in DIRS)
-    x2, n = re.subn(r'(<w:alias w:val="Главное направление"/>.*?<w:dropDownList>).*?(</w:dropDownList>)', lambda m: m.group(1) + items + m.group(2), x, count=1, flags=re.S)
-    assert n, 'анкета: нет списка «Главное направление»'
-    x = x2
-    # 2) блоки «название направления» + «абзац с галочками»: первый блок — образец, остальные пересобираем
-    paras = list(re.finditer(r'<w:p(?: [^>]*)?>(?:(?!<w:p[ >]).)*?</w:p>', x, re.S))
-    def text(p): return ''.join(re.findall(r'<w:t[^>]*>([^<]*)</w:t>', p)).replace('\xa0', ' ').strip()
-    start = next(i for i, m in enumerate(paras) if text(m.group(0)).startswith('Документы и статус') or text(m.group(0)) == DIRS[0][1])
-    end = next(i for i, m in enumerate(paras) if text(m.group(0)).startswith('Нет подходящей специализации'))
-    # уже совпадает (те же направления и подписи в том же порядке) — файл не трогаем, чтобы номера полей не менялись
-    def labels(p): return [t.strip() for t in text(p).split('☐') if t.strip()]
-    cur = [(text(paras[k].group(0)), labels(paras[k + 1].group(0))) for k in range(start, end - 1, 2)]
-    want = [(t, [s[0] for s in specs]) for _, t, _, _, _, specs in DIRS]
-    if cur == want and x == parts['word/document.xml'].decode('utf-8'):
-        return False
-    head_p, box_p = paras[start].group(0), paras[start + 1].group(0)
-    # части абзаца с галочками: [начало абзаца][галочка+подпись][разделитель][галочка+подпись]…[конец]
-    sdts = list(re.finditer(r'<w:sdt>.*?</w:sdt>', box_p, re.S))
-    first_lbl_end = box_p.find('</w:r>', sdts[0].end()) + 6
-    item_tpl = box_p[sdts[0].start():first_lbl_end]
-    sep = box_p[first_lbl_end:sdts[1].start()]
-    p_open = box_p[:sdts[0].start()]
-    tail_after_last = box_p[box_p.find('</w:r>', sdts[-1].end()) + 6:]
-    ids = [int(v) for v in re.findall(r'<w:id w:val="(\d+)"/>', x)]
-    nid = [max(ids) + 1]
-    tag_n = [max(int(v) for v in re.findall(r'<w:tag w:val="cb(\d+)"/>', x)) + 1]
-    def item(label):
-        t = re.sub(r'<w:id w:val="\d+"/>', lambda m: f'<w:id w:val="{nid[0]}"/>', item_tpl, count=1); nid[0] += 1
-        t = re.sub(r'<w:tag w:val="cb\d+"/>', f'<w:tag w:val="cb{tag_n[0]}"/>', t, count=1); tag_n[0] += 1
-        t = re.sub(r'(<w:t[^>]*>)\xa0[^<]*(</w:t>)(?![\s\S]*<w:t)', lambda m: m.group(1) + '\xa0' + label.replace(' ', '\xa0') + m.group(2), t)
-        return t
-    # проверка шаблона подписи: последняя <w:t> в item_tpl — подпись с неразрывными пробелами
-    assert re.findall(r'<w:t[^>]*>([^<]*)</w:t>', item_tpl)[-1].startswith('\xa0'), 'анкета: неожиданный вид галочки'
-    head_txt = text(head_p)
-    blocks = ''
-    for _, t, _, _, _, specs in DIRS:
-        blocks += head_p.replace('>' + head_txt + '<', '>' + t + '<', 1)
-        blocks += p_open + sep.join(item(s[0]) for s in specs) + tail_after_last
-    x = x[:paras[start].start()] + blocks + x[paras[end].start():]
+    for alias in ('Главное направление', 'Второе направление'):
+        x2, n = re.subn(r'(<w:alias w:val="' + alias + r'"/>.*?<w:dropDownList>).*?(</w:dropDownList>)', lambda m: m.group(1) + items + m.group(2), x, count=1, flags=re.S)
+        assert n, 'анкета: нет списка «' + alias + '»'
+        x = x2
     # примеры регулируемых профессий в разделе 6: ясли теперь в «Организациях»
     x = x.replace('электрик, ветеринар, ясли и др.', 'электрик, ветеринар, дневная мама, тату и перманент и др.')
-    new = x.encode('utf-8')
-    if new == parts['word/document.xml']: return False
-    parts['word/document.xml'] = new
+    # 2) таблица галочек: строка = [ячейка «направление»][ячейка с галочками категорий].
+    #    Первая строка — образец, остальные пересобираем целыми строками <w:tr> (11.10.2026: раньше абзацы
+    #    вынимались из ячеек — таблица ломалась и Word не открывал файл; теперь проверяем XML перед записью).
+    def text(p): return ''.join(re.findall(r'<w:t[^>]*>([^<]*)</w:t>', p)).replace('\xa0', ' ').strip()
+    def labels(p): return [t.strip() for t in text(p).split('☐') if t.strip()]
+    m_end = re.search(r'<w:p(?: [^>]*)?>(?:(?!<w:p[ >]).)*?Нет подходящей (?:специализации|категории)', x, re.S)
+    assert m_end, 'анкета: нет строки «Нет подходящей категории»'
+    tb_s = x.rfind('<w:tbl>', 0, m_end.start()); tb_e = x.rfind('</w:tbl>', 0, m_end.start()) + 8
+    assert tb_s > 0 and tb_e > tb_s, 'анкета: таблица галочек не найдена или повреждена'
+    tbl = x[tb_s:tb_e]
+    rows = re.findall(r'<w:tr(?: [^>]*)?>.*?</w:tr>', tbl, re.S)
+    def cells(r): return re.findall(r'<w:tc>.*?</w:tc>', r, re.S)
+    assert rows and all(len(cells(r)) == 2 for r in rows), 'анкета: в таблице галочек не по две ячейки'
+    cur = [(text(cells(r)[0]), labels(cells(r)[1])) for r in rows]
+    want = [(t, [s[0] for s in specs]) for _, t, _, _, _, specs in DIRS]
+    if cur != want:   # те же направления и подписи — строки не трогаем, чтобы номера полей не менялись
+        row_tpl = rows[0]; tc1, tc2 = cells(row_tpl)
+        box_p = re.search(r'<w:p(?: [^>]*)?>(?:(?!<w:p[ >]).)*?</w:p>', tc2, re.S).group(0)
+        # части абзаца с галочками: [начало абзаца][галочка+подпись][разделитель][галочка+подпись]…[конец]
+        sdts = list(re.finditer(r'<w:sdt>.*?</w:sdt>', box_p, re.S))
+        first_lbl_end = box_p.find('</w:r>', sdts[0].end()) + 6
+        item_tpl = box_p[sdts[0].start():first_lbl_end]
+        sep = box_p[first_lbl_end:sdts[1].start()]
+        p_open = box_p[:sdts[0].start()]
+        tail_after_last = box_p[box_p.find('</w:r>', sdts[-1].end()) + 6:]
+        assert re.findall(r'<w:t[^>]*>([^<]*)</w:t>', item_tpl)[-1].startswith('\xa0'), 'анкета: неожиданный вид галочки'
+        nid = [max(int(v) for v in re.findall(r'<w:id w:val="(\d+)"/>', x)) + 1]
+        tag_n = [max(int(v) for v in re.findall(r'<w:tag w:val="cb(\d+)"/>', x)) + 1]
+        def item(label):
+            t = re.sub(r'<w:id w:val="\d+"/>', f'<w:id w:val="{nid[0]}"/>', item_tpl, count=1); nid[0] += 1
+            t = re.sub(r'<w:tag w:val="cb\d+"/>', f'<w:tag w:val="cb{tag_n[0]}"/>', t, count=1); tag_n[0] += 1
+            t = re.sub(r'(<w:t[^>]*>)\xa0[^<]*(</w:t>)(?![\s\S]*<w:t)', lambda m: m.group(1) + '\xa0' + label.replace(' ', '\xa0') + m.group(2), t)
+            return t
+        head_txt = text(tc1)
+        new_rows = ''
+        for _, t, _, _, _, specs in DIRS:
+            box = p_open + sep.join(item(s_[0]) for s_ in specs) + tail_after_last
+            new_rows += row_tpl.replace(tc1, tc1.replace('>' + head_txt + '<', '>' + t + '<', 1), 1).replace(box_p, box, 1)
+        r_s = tbl.find(rows[0]); r_e = tbl.rfind(rows[-1]) + len(rows[-1])
+        x = x[:tb_s] + tbl[:r_s] + new_rows + tbl[r_e:] + x[tb_e:]
+    # Word не открывает файл с ошибкой в XML — проверяем до записи, а номера полей должны быть разными
+    from xml.dom import minidom
+    minidom.parseString(x.encode('utf-8'))
+    ids = re.findall(r'<w:id w:val="(\d+)"/>', x); tags = re.findall(r'<w:tag w:val="([^"]+)"/>', x)
+    assert len(ids) == len(set(ids)) and len(tags) == len(set(tags)), 'анкета: повторяются номера полей'
+    parts['word/document.xml'] = x.encode('utf-8')
+    if parts == orig: return False
     with zipfile.ZipFile(path, 'w', zipfile.ZIP_DEFLATED) as zo:
         for info in infos: zo.writestr(info, parts[info.filename])
     return True
