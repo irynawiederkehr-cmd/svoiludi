@@ -13,7 +13,7 @@ module.exports = [
   { id: 'more', group: 'Шапка и навигация', title: 'Лист «Ещё» в приложении', page: '/?app=1', sel: '.pa-sheet', keep: true, w: ['phone'], themes: D, before: click('.pa-tabs li:last-child > *') },
   { id: 'langask', group: 'Шапка и навигация', title: 'Вопрос о языке при первом заходе', page: '/?lang=ask', sel: '.pa-lang', keep: true, w: ['phone'], themes: D, wait: 1200 },
   { id: 'hint', group: 'Шапка и навигация', title: 'Подсказка «Установить как приложение»', page: '/?install=ios', sel: '.pa-card', keep: true, w: ['phone'], themes: D, wait: 1200 },
-  { id: 'footer', group: 'Шапка и навигация', title: 'Подвал', page: '/', sel: 'footer', w: ['phone'], themes: L },
+  { id: 'footer', group: 'Шапка и навигация', title: 'Подвал со значком «Мой проект «Свои люди»»', page: '/', sel: 'footer', w: ['phone'], themes: D, wait: 900 },
   // Главная
   { id: 'hero', group: 'Главная', title: 'Первый блок главной: заголовок, вступление, кнопки-переходы', page: '/', sel: '.w-hero', w: ['phone', 'desk'], themes: D },
   { id: 'who', group: 'Главная', title: '«Привет! Меня зовут Ирина»: картинка, плашки, пути', page: '/', sel: '#who', w: ['phone', 'desk'], themes: L, maxH: 1700 },
