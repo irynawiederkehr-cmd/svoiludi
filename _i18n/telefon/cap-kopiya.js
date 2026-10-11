@@ -41,6 +41,11 @@ const S = [
   ['zsv-ru', '/', 390, 669, { vz: true, later: true, scrollSel: '.vz-svoi', top: 420 }], ['zsv-dark', '/', 390, 669, { vz: true, later: true, dark: true, scrollSel: '.vz-svoi', top: 420 }],
   ['zsv-uk', '/uk/', 390, 669, { vz: true, later: true, scrollSel: '.vz-svoi', top: 420 }], ['zsv-test', '/kompas/', 390, 669, { vz: true, locale: 'ru-RU', later: true, scrollSel: '.vz-svoi', top: 420 }],
   ['zsv-desk', '/', 1280, 800, { vz: true, desk: true, later: true, scrollSel: '.vz-svoi', top: 560 }],
+  // значок: белый и чёрный варианты (11.10.2026)
+  ['zc-four', '/badge/#viktoria-ponomarenko', 390, 669, { later: true, scrollSel: '#h-site', top: 90 }],
+  ['zc-black', '/badge/#org', 390, 669, { later: true, pre: "document.querySelector('.theme.black').click()", scrollSel: '.themes', top: 90 }],
+  ['zc-uk', '/uk/badge/#viktoria-ponomarenko', 390, 669, { later: true, pre: "document.querySelector('.theme.white').click()", scrollSel: '#h-site', top: 90 }],
+  ['zc-desk', '/badge/#org', 1280, 800, { later: true, desk: true, scrollSel: '.b-mini', top: 20 }],
 ];
 (async () => {
   const srv = spawn('python3', ['-I', '-m', 'http.server', String(PORT), '--directory', require('path').resolve(__dirname, '../..')], { cwd: __dirname, stdio: 'ignore' });
