@@ -12,6 +12,7 @@ IC = {
  'tool': '<svg viewBox="0 0 24 24"><path d="M12 3.5v3M12 17.5v3M3.5 12h3M17.5 12h3"/><circle cx="12" cy="12" r="4.2"/><path d="m6 6 1.8 1.8M16.2 16.2 18 18M6 18l1.8-1.8M16.2 7.8 18 6"/></svg>',
  'ev': '<svg viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15" rx="3"/><path d="M3.5 10h17M8 3v4M16 3v4"/><circle cx="12" cy="15" r="1.6"/></svg>',
  'news': '<svg viewBox="0 0 24 24"><path d="M5 4.5h11.5V18a2 2 0 0 0 2 2H6.5A1.5 1.5 0 0 1 5 18.5z"/><path d="M16.5 9h3v9a2 2 0 0 1-2 2M8 8.5h5.5M8 12h5.5M8 15.5h3.5"/></svg>',
+ 'job': '<svg viewBox="0 0 24 24"><rect x="3.5" y="7.5" width="17" height="12" rx="2.5"/><path d="M9 7.5V6a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v1.5M3.5 13h17"/></svg>',
  'pro': '<svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c.7-4 3.4-6 7-6s6.3 2 7 6"/><path d="m15.5 16.5 1.5 1.5 3-3"/></svg>',
  'more': '<svg viewBox="0 0 24 24"><circle cx="5.5" cy="12" r="1.4"/><circle cx="12" cy="12" r="1.4"/><circle cx="18.5" cy="12" r="1.4"/></svg>',
  'info': '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 11v5.5M12 7.6v.4"/></svg>',
@@ -24,7 +25,7 @@ IC = {
 def doc(marker, body):
     return marker + '\n<div class="ds-wrap">\n' + body + '\n</div>\n'
 def tiles(cur=0):
-    items = [('spec', 'Специалисты'), ('swiss', 'Как устроена Швейцария'), ('tool', 'Полезные инструменты'), ('ev', 'События и курсы'), ('news', 'Что нового'), ('pro', 'Для специалистов')]
+    items = [('spec', 'Специалисты'), ('ev', 'События и курсы'), ('job', 'Вакансии и партнёрство'), ('swiss', 'Как устроена Швейцария'), ('tool', 'Полезные инструменты'), ('news', 'Что нового')]   # порядок меню — Ирина 11.10.2026
     return '<nav class="tiles" aria-label="Разделы">' + ''.join(f'<a href="#"{" aria-current=\"page\"" if i == cur else ""}>{IC[k]}<span>{t}</span></a>' for i, (k, t) in enumerate(items)) + '</nav>'
 HEADER = lambda logo, name, btn, site='', cur=0: f'''<header class="top ds-phone"{site}><div class="page"><a class="mark" href="#"><img src="{logo}" alt=""><b>{name}</b></a><span class="ds-row"><span class="ss-btn">{IC['search']}Поиск</span><a class="navcta" href="#">{btn}</a></span>{tiles(cur)}<button type="button" class="pa-ibtn">{IC['phone']}<span>Установить приложение «Свои люди»</span></button></div></header>'''
 C = {}
@@ -68,14 +69,14 @@ C['TopMenu'] = ('Навигация', 420, 'Шапка и меню плитка�
 - Разделы svoiludi.ch: Специалисты · Как устроена Швейцария · Полезные инструменты · События и курсы · Что нового · Для специалистов. voznesenskaya.ch: Обо мне · Работа со мной · Продукты · Твой путь · Тесты · Свои люди.
 **Код:** блоки `sl-top` и `pa-tiles` в `<head>` (собирает `_i18n/pwa.py`, `topnav.py`), иконки — `topTiles()` в `assets/pwa-app.js`.
 ''')
-tabs = [('spec', 'Специалисты'), ('swiss', 'Швейцария'), ('tool', 'Инструменты'), ('news', 'Что нового'), ('more', 'Ещё')]
+tabs = [('spec', 'Специалисты'), ('ev', 'События'), ('job', 'Вакансии'), ('swiss', 'Швейцария'), ('more', 'Ещё')]   # как верхнее меню, 11.10.2026
 C['TabBar'] = ('Навигация', 120, 'Вкладки внизу в режиме приложения', doc('', '<nav class="pa-tabs ds-phone"><ul>' + ''.join(f'<li><a href="#"{" aria-current=\"page\"" if i == 2 else ""}>{IC[k]}<span>{t}</span></a></li>' for i, (k, t) in enumerate(tabs)) + '</ul></nav>'),
  '''# TabBar
 
 Панель вкладок внизу экрана, когда сайт открыт с иконки как приложение (только телефон и планшет).
 
-- svoiludi.ch: Специалисты · Швейцария · Инструменты · Что нового · Ещё. voznesenskaya.ch: Главная · Твой путь · Тесты · Знакомство · Ещё.
-- Подпись `tab` цветом `muted`, иконки линией 1,8; текущая вкладка — `sage` с полоской 26×3 px сверху.
+- svoiludi.ch (с 11.10.2026, в порядке верхнего меню): Специалисты · События · Вакансии · Швейцария · Ещё; в «Ещё» первыми — «Полезные инструменты» и «Что нового». «Организации» отмечают вкладку «Специалисты», «Акции» и «Курсы» — «События». Нажатая вкладка становится текущей сразу, до загрузки страницы. voznesenskaya.ch: Главная · Твой путь · Тесты · Знакомство · Ещё.
+- Подпись `tab` цветом `muted`, иконки линией 1,8; текущая вкладка — `sage` с полоской 26×3 px сверху (полоска стоит отдельно и не сдвигает значок и подпись).
 - Фон `paper` с размытием, рамка `line` сверху, отступ под полоску «домой» (safe-area).
 **Код:** `tabBar()` в `assets/pwa-app.js` / `assets/vz-app.js`; проверка — `?app=1`.
 ''')

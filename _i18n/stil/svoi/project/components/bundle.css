@@ -43,10 +43,10 @@ body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font
 /* Вкладки приложения и лист «Ещё» */
 .pa-tabs{background:var(--paper);border-top:1px solid var(--line);padding:6px 6px 8px}
 .pa-tabs ul{list-style:none;margin:0 auto;padding:0;display:grid;grid-template-columns:repeat(5,1fr)}
-.pa-tabs a{display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 2px 4px;font:600 .7rem/1.15 var(--body);color:var(--muted);text-decoration:none}
+.pa-tabs a{position:relative;display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 2px 4px;font:600 .7rem/1.15 var(--body);color:var(--muted);text-decoration:none}
 .pa-tabs svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 .pa-tabs [aria-current="page"]{color:var(--sage)}
-.pa-tabs [aria-current="page"]::before{content:"";display:block;width:26px;height:3px;border-radius:3px;background:var(--sage);margin:-6px 0 3px}
+.pa-tabs [aria-current="page"]::before{content:"";position:absolute;top:-6px;left:50%;width:26px;height:3px;border-radius:3px;background:var(--sage);transform:translateX(-50%)}
 .pa-sheet{background:var(--paper);border-radius:22px 22px 0 0;padding:10px 16px 18px;box-shadow:0 -10px 40px rgba(0,0,0,.18)}
 .pa-grip{width:42px;height:5px;border-radius:5px;background:var(--line);margin:0 auto 12px}
 .pa-sheet h2{font:400 1.5rem/1.2 var(--display);margin:0 0 8px}

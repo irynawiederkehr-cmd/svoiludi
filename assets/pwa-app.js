@@ -15,7 +15,7 @@
   var P = UK ? '/uk' : '';
   var Q = location.search;
   var T = UK ? {
-    tabs: ['Фахівці', 'Швейцарія', 'Інструменти', 'Що нового', 'Ще'],
+    tabs: ['Фахівці', 'Події', 'Вакансії', 'Швейцарія', 'Ще'], tool: 'Корисні інструменти', news: 'Що нового',
     more: 'Ще', swiss: 'Як влаштована Швейцарія', join: 'Як розміститися', evk: 'Події та курси', akc: 'Акції', pro: 'Для фахівців і організацій', vak: 'Вакансії та партнерство', about: 'Про проєкт', site: 'Сайт Ірини', privacy: 'Політика конфіденційності',
     share: 'Поділитися застосунком з друзями', reload: 'Оновити сторінку', lang: 'По-русски', close: 'Закрити',
     shareText: 'Свої люди у Швейцарії: фахівці, які говорять українською та російською, події, курси й корисні інструменти. Можна встановити як застосунок на телефон.',
@@ -33,7 +33,7 @@
     cSpec: 'Фахівців у довіднику', cSpecTip: 'Скільки карток фахівців зараз видно на сайті. Зразки (вигадані) не рахуємо.',
     cVis: 'Переглядів сторінок', cVisTip: 'Скільки разів відкривали сторінки сайту, з початку підрахунку. Лічильник без cookie, хто саме заходив — невідомо.'
   } : {
-    tabs: ['Специалисты', 'Швейцария', 'Инструменты', 'Что нового', 'Ещё'],
+    tabs: ['Специалисты', 'События', 'Вакансии', 'Швейцария', 'Ещё'], tool: 'Полезные инструменты', news: 'Что нового',
     more: 'Ещё', swiss: 'Как устроена Швейцария', join: 'Как разместиться', evk: 'События и курсы', akc: 'Акции', pro: 'Для специалистов и организаций', vak: 'Вакансии и партнёрство', about: 'О проекте', site: 'Сайт Ирины', privacy: 'Политика конфиденциальности',
     share: 'Поделиться приложением с друзьями', reload: 'Обновить страницу', lang: 'Українською', close: 'Закрыть',
     shareText: 'Свои люди в Швейцарии: специалисты, которые говорят по-русски и по-украински, события, курсы и полезные инструменты. Можно установить как приложение на телефон.',
@@ -74,11 +74,12 @@
     '@media (max-width:480px){html header.top.pa-mini .mark span:not(.mono){display:none}}',
     '.pa-tabs{position:fixed;left:0;right:0;bottom:0;z-index:900;display:none;background:color-mix(in srgb,var(--paper,#FFFCF8) 94%,transparent);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-top:1px solid var(--line,#E5D9C9);padding:6px 6px calc(6px + env(safe-area-inset-bottom))}',
     '.pa-tabs ul{list-style:none;margin:0 auto;padding:0;display:grid;grid-template-columns:repeat(5,1fr);max-width:640px}',
-    '.pa-tabs a,.pa-tabs button{display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 2px 4px;border:0;background:none;font:600 .7rem/1.15 var(--body,system-ui);color:var(--muted,#7A6E62);text-decoration:none;cursor:pointer;width:100%;border-radius:12px;-webkit-tap-highlight-color:transparent}',
+    '.pa-tabs a,.pa-tabs button{position:relative;display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 2px 4px;border:0;background:none;font:600 .7rem/1.15 var(--body,system-ui);color:var(--muted,#7A6E62);text-decoration:none;cursor:pointer;width:100%;border-radius:12px;-webkit-tap-highlight-color:transparent}',
     '.pa-tabs svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}',
     '.pa-tabs [aria-current="page"]{color:var(--sage,#66704F)}',
     '.pa-tabs [aria-current="page"] svg{stroke-width:2.2}',
-    '.pa-tabs [aria-current="page"]::before{content:"";display:block;width:26px;height:3px;border-radius:3px;background:var(--sage,#66704F);margin:-6px 0 3px}',
+    '.pa-tabs [aria-current="page"]::before{content:"";position:absolute;top:-6px;left:50%;width:26px;height:3px;border-radius:3px;background:var(--sage,#66704F);transform:translateX(-50%)}',   /* полоска над текущей вкладкой не сдвигает значок и подпись (11.10.2026) */
+    '.pa-sheet a[aria-current="page"]{color:var(--sage,#66704F)}',
     '.pa-tabs a:active,.pa-tabs button:active{background:var(--sage-soft,#E3E6D6)}',
     '@media (max-width:1100px){html.pa-app .pa-tabs{display:block}html.pa-app body{padding-bottom:calc(72px + env(safe-area-inset-bottom))}}',
     /* верхнее меню плитками (телефон и планшет, в браузере и в приложении) — стили в <head>, блок <!--pwa--> (_i18n/pwa.py) */
@@ -190,25 +191,36 @@
     });
     nav.style.setProperty('--pa-cols', 3);
   }
+  /* вкладки внизу — в порядке верхнего меню (Ирина 11.10.2026: «специалисты, события и курсы, вакансии, как устроена швейцария,
+     полезные инструменты, что нового»; в панели пять мест, поэтому инструменты и «Что нового» — первыми строками в «Ещё»).
+     Текущая вкладка — по разделу: «Организации» — в «Специалистах» (переключатель на главной), «Акции» и «Курсы» — в «Событиях». */
+  var TABS = [['/', I.spec, /^\/(index\.html|organizacii\/.*)?$/], ['/events/', I.ev, /^\/(events|akcii|kursy)\//],
+    ['/vakansii/', I.job, /^\/vakansii\//], ['/shveycariya/', I.swiss, /^\/(shveycariya|situacii)\//]];
+  function curTab() { var r = rel(); for (var i = 0; i < TABS.length; i++) if (TABS[i][2].test(r)) return i; return TABS.length; }
   function tabBar() {
     document.documentElement.classList.add('pa-app');
-    /* вкладки внизу (09.10.2026, новое меню): Специалисты · Швейцария · Инструменты · Что нового · Ещё */
-    var r = rel(), cur = r === '/' || r === '/index.html' ? 0 : /^\/(shveycariya|situacii)\//.test(r) ? 1 : /^\/instrumenty\//.test(r) ? 2 : /^\/novosti\//.test(r) ? 3 : 4;
-    var links = [['/', I.spec], ['/shveycariya/', I.swiss], ['/instrumenty/', I.tool], ['/novosti/', I.news]];
-    var h = '<div class="pa-tabs" role="navigation" aria-label="' + T.tabs.slice(0, 4).join(' · ') + '"><ul>';
-    links.forEach(function (l, i) { h += '<li><a href="' + P + l[0] + '"' + (cur === i ? ' aria-current="page"' : '') + '>' + l[1] + '<span>' + T.tabs[i] + '</span></a></li>'; });
-    h += '<li><button type="button" class="pa-more"' + (cur === 4 ? ' aria-current="page"' : '') + '>' + I.more + '<span>' + T.tabs[4] + '</span></button></li></ul></div>';
+    var cur = curTab();
+    var h = '<div class="pa-tabs" role="navigation" aria-label="' + T.tabs.join(' · ') + '"><ul>';
+    TABS.forEach(function (l, i) { h += '<li><a href="' + P + l[0] + '"' + (cur === i ? ' aria-current="page"' : '') + '>' + l[1] + '<span>' + T.tabs[i] + '</span></a></li>'; });
+    h += '<li><button type="button" class="pa-more"' + (cur === TABS.length ? ' aria-current="page"' : '') + '>' + I.more + '<span>' + T.tabs[TABS.length] + '</span></button></li></ul></div>';
     var bar = el(h); document.body.appendChild(bar);
+    function mark(n) { [].forEach.call(bar.querySelectorAll('li > *'), function (x, i) { if (i === n) x.setAttribute('aria-current', 'page'); else x.removeAttribute('aria-current'); }); }
+    /* нажатие видно сразу: вкладка становится текущей ещё до того, как откроется страница (11.10.2026, Ирина: «не переключается») */
+    bar.addEventListener('click', function (e) { var a = e.target.closest('a'); if (a) mark([].indexOf.call(bar.querySelectorAll('li > *'), a)); });
+    /* назад/вперёд: страница из памяти браузера — отметку вкладки ставим заново */
+    window.addEventListener('pageshow', function (e) { if (e.persisted) mark(curTab()); });
     bar.querySelector('.pa-more').addEventListener('click', moreSheet);
   }
   function moreSheet() {
-    var other = (UK ? '' : '/uk') + rel();
+    var other = (UK ? '' : '/uk') + rel(), r = rel();
+    function row(path, ic, label) { return '<a href="' + P + path + '"' + (r.indexOf(path) === 0 ? ' aria-current="page"' : '') + '>' + ic + label + '</a>'; }
     var h = '<div class="pa-back" role="dialog" aria-modal="true" aria-label="' + T.more + '"><div class="pa-sheet"><div class="pa-grip"></div><h2>' + T.more + '</h2>' +
-      '<a href="' + P + '/events/">' + I.ev + T.evk + '</a>' +
-      '<a href="' + P + '/akcii/">' + I.promo + T.akc + '</a>' +   /* «Акции» — отдельной строкой, 11.10.2026 */
-      '<a href="' + P + '/vakansii/">' + I.job + T.vak + '</a>' +   /* «Вакансии и партнёрство» — открыто для всех 11.10.2026, 14:39 */
-      '<a href="' + P + '/dlya-specialistov/">' + I.pro + T.pro + '</a>' +
-      '<a href="' + P + '/o-proekte/">' + I.info + T.about + '</a>' +
+      /* «События и курсы» и «Вакансии и партнёрство» — теперь вкладки внизу; здесь первыми — инструменты и «Что нового» (11.10.2026) */
+      row('/instrumenty/', I.tool, T.tool) +
+      row('/novosti/', I.news, T.news) +
+      row('/akcii/', I.promo, T.akc) +   /* «Акции» — отдельной строкой, 11.10.2026 */
+      row('/dlya-specialistov/', I.pro, T.pro) +
+      row('/o-proekte/', I.info, T.about) +
       '<a href="https://voznesenskaya.ch/' + (UK ? 'uk/' : '') + '">' + I.site + T.site + '</a>' +
       '<a href="' + P + '/privacy/">' + I.lock + T.privacy + '</a>' +
       '<button type="button" class="pa-row" data-a="share">' + I.share + T.share + '</button>' +
