@@ -465,6 +465,11 @@ a.yours:hover{background:#EBD3A3}
 /* ---------- вакансии и партнёрство (07.10.2026) ---------- */
 .free-badge{display:inline-flex;align-items:center;gap:8px;font-weight:700;font-size:.92rem;color:var(--forest,#4F5E3E);background:color-mix(in srgb,var(--sage) 22%,var(--paper));border:1.5px solid color-mix(in srgb,var(--sage) 55%,transparent);border-radius:999px;padding:8px 16px;margin-top:6px}
 .free-badge svg{width:18px;height:18px;flex:none}
+/* кнопки «Разместить вакансию» и «Разместить поиск партнёра» вверху (11.10.2026) */
+.vak-top{display:flex;flex-wrap:wrap;gap:10px;margin:4px 0 0}
+.vak-top .btn{margin:0;align-self:auto;font-size:.95rem;padding:12px 20px}
+.vak-top .btn svg{width:20px;height:20px;flex:none}
+@media (max-width:520px){.vak-top .btn{flex:1 1 100%;justify-content:center}}
 .free-line{display:block;font-size:.8rem;font-weight:700;color:var(--forest,#4F5E3E);margin-top:6px}
 .disc-line{display:block;font-size:.76rem;color:var(--muted);margin-top:4px;line-height:1.4}
 .vac{grid-template-columns:96px minmax(0,1fr) auto}
@@ -554,6 +559,17 @@ a.yours:hover{background:#EBD3A3}
 .form .zok label{cursor:pointer;flex:1;min-width:0}.form .zok a{color:var(--brown,#4F5E3E);font-weight:600}
 .form .zok.need{border-color:var(--mustard,#B98324);box-shadow:0 0 0 3px rgba(185,131,36,.28)}
 .form.zok-off #orgSend{opacity:.45;filter:grayscale(1);cursor:not-allowed}
+/* акции организации (11.10.2026) — как полоска акции в карточке специалиста */
+.pr-chip{display:inline-flex;align-items:center;gap:6px;flex-wrap:wrap;align-self:flex-start;margin:8px 0 0;padding:5px 11px;border-radius:12px;border:1.5px solid #B8472E;background:color-mix(in srgb,#B8472E 9%,var(--paper));color:#8E3320;font:600 .84rem/1.25 inherit;cursor:pointer;text-align:left}
+.pr-chip b{font-weight:800}.pr-chip i,.pr-ad{font-style:normal;font-size:.6rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;border:1px solid currentColor;border-radius:6px;padding:0 5px;opacity:.85}
+.pr-strip{margin:18px 0 0;padding:14px 16px;border-radius:18px;border:1.5px solid #B8472E;background:color-mix(in srgb,#B8472E 7%,var(--paper));display:flex;flex-direction:column;gap:12px}
+.pr-hd{display:flex;align-items:center;gap:10px;color:#8E3320;font-size:.74rem;letter-spacing:.14em;text-transform:uppercase}
+.pr-one{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;align-items:center}
+.pr-big{font:400 2rem/1.05 var(--display),Georgia,serif;color:#B8472E;white-space:nowrap}
+.pr-txt{display:flex;flex-direction:column;gap:2px;min-width:0}.pr-txt b{font-size:1rem;line-height:1.3}.pr-txt small{color:var(--muted);font-size:.84rem}
+.pr-act{grid-column:1/-1}.pr-act:empty{display:none}.pr-act .btn{margin:0}
+.pr-note{margin:0;font-size:.8rem;color:var(--muted);line-height:1.45}
+@media (max-width:520px){.pr-one{grid-template-columns:1fr}.pr-big{font-size:1.7rem}}
 </style>
 <!--pwa--><link rel="manifest" href="/fav/site.uk.webmanifest"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Свої люди"><meta name="apple-mobile-web-app-status-bar-style" content="default"><style id="sl-top">/* единая шапка svoiludi.ch (09.10.2026), собирается _i18n/topnav.py */header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:40;background:color-mix(in srgb,var(--bg,#EEF1E6) 92%,transparent);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border-bottom:1px solid var(--line,#D9DFCB);font-family:"Manrope","Segoe UI",system-ui,sans-serif;line-height:1.5;margin:0}header.top .page{max-width:1120px;margin:0 auto;padding-inline:20px;display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:12px;box-sizing:border-box;width:auto}header.top .mark{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink,#2F2924)}header.top .mono{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;flex:none}header.top .mono.av{border:none;padding:0}header.top .mono.av svg{width:100%;height:100%;display:block}header.top .mark b{font-family:"Forum","Cormorant Garamond",Georgia,serif;font-weight:400;font-size:1.25rem;line-height:1;color:var(--ink,#2F2924)}header.top .mark small{display:block;font-size:.72rem;color:var(--muted,#7A6E62);letter-spacing:.04em;margin-top:3px}header.top nav{display:flex;gap:22px;font-size:.88rem;font-weight:600;margin:0;padding:0}header.top nav a{text-decoration:none;color:var(--muted,#7A6E62)}header.top nav a:hover{color:var(--ink,#2F2924)}header.top nav a[aria-current="page"]{color:var(--ink,#2F2924)}header.top .navcta{font-size:.86rem;font-weight:700;text-decoration:none;border:1.5px solid #4F5E3E;color:#4F5E3E;background:transparent;border-radius:12px;padding:8px 16px;white-space:nowrap}@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) header.top .navcta{border-color:#B9C69F;color:#B9C69F}}:root[data-theme="dark"] header.top .navcta{border-color:#B9C69F;color:#B9C69F}@media (max-width:1100px){header.top{position:static}}@media (max-width:420px){header.top .page{padding-block:8px;gap:8px}header.top .mono{width:32px;height:32px}header.top .mark{gap:8px}header.top .mark b{font-size:1.06rem}header.top .mark small{display:none}header.top .navcta{font-size:.8rem;padding:6px 11px}}@media (max-width:380px){header.top .page{gap:6px;padding-inline:14px}header.top .mark b{font-size:1rem}header.top .navcta{font-size:.74rem;padding:6px 8px}}header.top .sl-free{background:#4F5E3E;color:#FFFCF8;font-size:.86rem;line-height:1.45;box-shadow:inset 0 -1px 0 rgba(0,0,0,.18)}header.top .sl-free p{max-width:1340px;margin:0 auto;padding:9px 20px;display:flex;align-items:flex-start;justify-content:center;gap:10px;box-sizing:border-box}header.top .sl-free svg{width:19px;height:19px;flex:none;margin-top:0;fill:none;stroke:#F3E3C2;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}header.top .sl-free b{font-weight:800;color:#FFFFFF}header.top .sl-free a{color:#F3E3C2;font-weight:700;text-decoration:underline;text-underline-offset:3px;white-space:nowrap}header.top .sl-free a:hover{color:#FFFFFF}@media (max-width:700px){header.top .sl-free{font-size:.82rem;line-height:1.42}header.top .sl-free p{justify-content:flex-start;padding:9px 16px}}html:not(.sl-ira) header.top a[data-ira]{display:none!important}@media print{header.top{display:none!important}}</style><style id="pa-tiles">/* верхнее меню на телефоне и планшете: прямоугольные плитки с закруглением в два ряда, иконки ставит pwa-app.js (08.10.2026) */html header.top nav[aria-label] a .pa-ni{display:none}@media (max-width:1100px){html header.top .page{flex-wrap:wrap;row-gap:8px}html header.top nav[aria-label]{order:3;width:100%;display:grid!important;grid-template-columns:repeat(var(--pa-cols,3),minmax(0,1fr));gap:8px;overflow:visible;padding:4px 0 12px;margin:0}html header.top nav[aria-label] a{display:flex!important;flex-direction:column;align-items:center;justify-content:center;gap:5px;min-height:62px;padding:9px 6px;border-radius:14px;background:var(--paper,#FFFCF8);border:1px solid color-mix(in srgb,var(--sage,#66704F) 30%,transparent);box-shadow:0 3px 10px -6px rgba(60,70,40,.45);color:var(--ink,#2F2924)!important;font:600 .78rem/1.18 var(--body,system-ui);text-align:center;white-space:normal;text-decoration:none;-webkit-tap-highlight-color:transparent}html header.top nav[aria-label] a::after{content:none!important}html header.top nav[aria-label] a.pa-dup{display:none!important}html header.top nav[aria-label] a .pa-ni{display:block;width:22px;height:22px;fill:none;stroke:var(--sage,#66704F);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}html header.top nav[aria-label] a[aria-current="page"]{background:var(--sage,#66704F);border-color:var(--sage,#66704F);color:var(--paper,#FFFCF8)!important;box-shadow:0 4px 12px -6px rgba(60,70,40,.6)}html header.top nav[aria-label] a[aria-current="page"] .pa-ni{stroke:var(--paper,#FFFCF8)}html header.top nav[aria-label] a:active{transform:scale(.97)}}/* компьютер — как на сайте Ирины (решение 09.10.2026): на широком экране одна строка «логотип · меню · поиск · кнопка», пункты простым текстом, текущий — тёмным и жирным; на узком ноутбуке (1101–1359 px) меню переносится отдельной строкой под логотип, без переносов внутри пунктов */@media (min-width:1101px){html header.top .page{flex-wrap:wrap;row-gap:0;column-gap:14px}html header.top .mark{flex:none}html header.top .mark b,html header.top .mark small{white-space:nowrap}html header.top .page>.ss-btn{margin-left:auto}html header.top nav[aria-label]{order:3;flex:1 0 100%;display:flex!important;flex-wrap:nowrap;justify-content:center;gap:4px;overflow:visible;margin:8px 0 -2px;padding:6px 0 0;border-top:1px solid color-mix(in srgb,var(--sage,#66704F) 22%,transparent);font-size:.92rem}html header.top nav[aria-label] a{white-space:nowrap;padding:6px 10px;color:var(--muted,#6B635A);font-weight:500;text-decoration:none}html header.top nav[aria-label] a:hover{color:var(--ink,#2F2924)}html header.top nav[aria-label] a[aria-current="page"]{color:var(--ink,#2F2924)!important;font-weight:700}}@media (min-width:1360px){html header.top .page{flex-wrap:nowrap;max-width:1340px}html header.top nav[aria-label]{order:0;flex:0 1 auto;margin:0 auto;padding:0;border-top:0;gap:2px}html header.top nav[aria-label] a{padding:6px 9px}html header.top .page>.ss-btn{margin-left:0}html header.top .page>.ss-btn span{display:none}}/* кнопки сайта — прямоугольные с закруглением, как плитки меню (решение Ирины 08.10.2026); значки-метки (образец, теги, «?») остаются круглыми */:is(.navcta,.btn,.shr-btn,.pl-act a,.pl-act button,.qa,.more,.listbar button,.leaflet-popup-content button,.calmenu a,.calmenu button,.go-free,.find,.confirm,.monthics,.addb,.mbtn,.example,.viewsw,#langbar.langbar,.pa-go,.pa-x,.pa-foot){border-radius:12px!important}:is(.viewsw button,.seg button,.chips button,#langbar.langbar a,.cal-nav button){border-radius:9px!important}</style><script src="/assets/pwa-app.js" defer></script><!--pwa--><!--i18n--><link rel="alternate" hreflang="ru" href="https://svoiludi.ch/organizacii/"><link rel="alternate" hreflang="uk" href="https://svoiludi.ch/uk/organizacii/"><!--i18n--></head>
 <body>
@@ -751,7 +767,7 @@ a.yours:hover{background:#EBD3A3}
 
 <script src="/data/specialists.uk.js?v=06599fe4"></script>
 <script src="/data/organizations.uk.js?v=489feb29"></script>
-<script src="/data/afisha.uk.js?v=e32be747"></script>
+<script src="/data/afisha.uk.js?v=576345ee"></script>
 <script src="/data/vacancies.uk.js?v=1889cf60"></script>
 <script>
 /* Раздел «Организации» (10.10.2026). Данные — data/organizations.js; события и курсы — data/afisha.js (organizers: { org: id }); вакансии и поиск партнёров организации — data/vacancies.js (author: { org: id }).
@@ -839,7 +855,32 @@ const lastDay = e => (e.repeat && e.repeat.until) || e.dateEnd || e.date || '';
 // 11.10.2026: вкладка вакансий скрыта («размести но скрой пока») — объявления в карточках организаций видит только Ирина (?ira=1).
 const VAK_OPEN = true, VAK_IRA = (() => { try { return localStorage.getItem('svoiludi-admin') === '1' || /[?&]ira=1/.test(location.search); } catch (e) { return false; } })();
 const vacsOf = o => (VAK_OPEN || VAK_IRA ? VACS : []).filter(v => v.author && typeof v.author === 'object' && v.author.org === o.id && v.status === 'активен' && v.confirm && v.confirm.date && (!v.until || v.until > today));
-const eventsOf = o => AFISHA.filter(e => e.status !== 'закрито' && (e.organizers || []).some(x => x && typeof x === 'object' && x.org === o.id) && (!lastDay(e) || lastDay(e) >= today));
+/* ---------- акции организации (решение Ирины 11.10.2026): type: 'promo' в data/afisha.js, организатор { org: id }. Акции размещают фирмы и организации, которые берут деньги
+   (магазин, ресторан, студия, школа, ферайн со взносом); у бесплатных (free: true) акций нет. Список всех акций — вкладка «Акции» (akcii/), здесь — полоска в карточке ---------- */
+const isPromo = e => e.type === 'promo' && !!e.promo;
+const moneyP = n => 'CHF ' + (+n % 1 ? (+n).toFixed(2) : +n);
+const r05 = x => Math.round(x * 20) / 20;
+const PCOND = { new: 'Тільки для нових клієнтів', book: 'За попереднім записом', nosum: 'Не сумується з іншими знижками', wd: 'Тільки в будні', online: 'Тільки онлайн' };
+const pCondList = p => (p.cond || []).map(c => c === 'first' ? (p.limit ? `Першим ${p.limit} клієнтам` : 'Кількість місць обмежена') : PCOND[c]).filter(Boolean);
+function pOffer(e){
+  const p = e.promo || {}, v = +p.value, reg = +p.regular, more = [];
+  if (p.kind === 'percent'){ if (reg) more.push(`зазвичай ${moneyP(reg)}, за акцією ${moneyP(r05(reg * (100 - v) / 100))}`); return { big: `−${v} %`, chip: `−${v} %`, sub: p.what, more }; }
+  if (p.kind === 'amount'){ if (reg) more.push(`зазвичай ${moneyP(reg)}, за акцією ${moneyP(reg - v)}`); return { big: `−${moneyP(v)}`, chip: `−${moneyP(v)}`, sub: p.what, more }; }
+  if (p.kind === 'price'){ if (reg) more.push(`зазвичай ${moneyP(reg)}`); return { big: moneyP(v), chip: moneyP(v), sub: p.what, more }; }
+  if (p.kind === 'gift') return { big: 'Подарунок', chip: 'подарунок', sub: p.what, more };
+  return { big: 'Безкоштовно', chip: 'безкоштовно', sub: p.what, more };
+}
+const pShort = x => `${+x.slice(8)} ${MON_G[+x.slice(5, 7) - 1]}`;
+const isOrgOf = (e, o) => (e.organizers || []).some(x => x && typeof x === 'object' && x.org === o.id);
+const promoOf = o => o.free === true ? [] : AFISHA.filter(e => isPromo(e) && e.status === 'активен' && isOrgOf(e, o) && e.date <= today && lastDay(e) >= today)
+  .sort((a, b) => lastDay(a).localeCompare(lastDay(b))).slice(0, 2);
+const promoStrip = o => { const L = promoOf(o); if (!L.length) return '';
+  return `<div class="pr-strip" role="note"><div class="pr-hd"><b>${L.length > 1 ? 'Акції організації' : 'Акція організації'}</b><i class="pr-ad">Реклама</i></div>${L.map(e => { const p = pOffer(e), cl = pCondList(e.promo);
+    return `<div class="pr-one"><span class="pr-big">${esc(p.big)}</span><div class="pr-txt"><b>${esc(e.title)}</b><span>${esc(p.sub || '')}${p.more.length ? ' · ' + esc(p.more.join('; ')) : ''}</span><small>До ${esc(pShort(lastDay(e)))}${cl.length ? ' · ' + esc(cl.join(' · ')) : ''}${e.sample ? ' · зразок' : ''}</small></div><div class="pr-act"><a class="btn ghost" href="/uk/akcii/#${esc(e.id)}">Подробиці та як скористатися</a></div></div>`; }).join('')}
+    <p class="pr-note">Акцію оголошує й виконує сама організація. «Свої люди» не продають послуги й товари та не відповідають за умови акції: домовляйся напряму з організацією.</p></div>`; };
+const promoChip = o => { const L = promoOf(o); if (!L.length) return ''; const e = L[0], p = pOffer(e);
+  return `<span class="pr-chip"><b>Акція</b> · ${esc(p.chip || p.big)} до ${esc(pShort(lastDay(e)))}<i>Реклама</i></span>`; };
+const eventsOf = o => AFISHA.filter(e => e.status !== 'закрито' && !isPromo(e) && (e.organizers || []).some(x => x && typeof x === 'object' && x.org === o.id) && (!lastDay(e) || lastDay(e) >= today));
 
 function row(o){
   const d = DIRS[o.dir] || DIRS.help;
@@ -847,7 +888,7 @@ function row(o){
     <span class="ev-d vk"><b>${ICO[o.dir] || ICO.help}</b><small>${esc(d.t)}</small></span>
     <span class="ev-m">${o.sample ? '<span class="yours">Тут може бути ваша організація!</span>' : ''}<span class="ev-k">${esc(kindLine(o))}</span><span class="ev-t">${esc(o.name)}</span>
       <span class="ev-i"><span>${esc(where(o))}</span><span>${esc((o.langs || []).join(', '))}</span>${o.fee ? `<span>${esc(o.fee)}</span>` : ''}${o.kind === 'firm' && o.head && o.head.name ? `<span>керівник: ${esc(o.head.name)}</span>` : ''}</span>
-      ${badgeOf(o) ? `<span class="free-line">${esc(badgeOf(o))}</span>` : ''}</span></button>`;
+      ${badgeOf(o) ? `<span class="free-line">${esc(badgeOf(o))}</span>` : ''}${promoChip(o)}</span></button>`;
 }
 function render(){
   const list = pool().filter(o => match(o)).sort((a, b) => (a.sample ? 1 : 0) - (b.sample ? 1 : 0) || a.name.localeCompare(b.name, 'uk'));
@@ -892,7 +933,7 @@ function openO(id){
   const d = DIRS[o.dir] || DIRS.help, box = document.getElementById('qmCard'), evs = eventsOf(o);
   box.style.setProperty('--lc', d.c); box.style.setProperty('--lf', `color-mix(in srgb,${d.c} 12%,var(--paper))`);
   box.innerHTML = `<div class="qm-top"><div class="qm-head">${o.sample ? '<span class="ev-k" style="color:var(--brown)">Зразок картки · усе вигадане</span><a class="yours" href="/uk/organizacii/#add" data-close>Тут може бути ваша організація! Як розмістити →</a>' : ''}<span class="ev-k" style="color:${d.c}">${esc(d.t)}</span><h2 class="qm-title" id="qmTitle">${esc(o.name)}</h2>${o.name_ru ? `<span class="note">${esc(o.name_ru)}</span>` : ''}${badgeOf(o) ? `<span class="free-line">${esc(badgeOf(o))}<button type="button" class="qh" data-help="badge" aria-label="Підказка: розміщення безкоштовне" aria-expanded="false">?</button></span>` : ''}</div><button class="qm-close" type="button" aria-label="Закрити">×</button></div>
-    <div class="d-body">
+    ${promoStrip(o)}<div class="d-body">
       <div class="d-col">
         <div class="d-block"><h4>Що робить організація</h4><p>${esc(o.about)}</p></div>
         ${(o.offers || []).length ? `<div class="d-block"><h4>Що можна отримати</h4><ul class="marks">${o.offers.map(x => `<li>${esc(x)}</li>`).join('')}</ul></div>` : ''}

@@ -83,7 +83,32 @@ const lastDay = e => (e.repeat && e.repeat.until) || e.dateEnd || e.date || '';
 // 11.10.2026: вкладка вакансий скрыта («размести но скрой пока») — объявления в карточках организаций видит только Ирина (?ira=1).
 const VAK_OPEN = true, VAK_IRA = (() => { try { return localStorage.getItem('svoiludi-admin') === '1' || /[?&]ira=1/.test(location.search); } catch (e) { return false; } })();
 const vacsOf = o => (VAK_OPEN || VAK_IRA ? VACS : []).filter(v => v.author && typeof v.author === 'object' && v.author.org === o.id && v.status === 'активен' && v.confirm && v.confirm.date && (!v.until || v.until > today));
-const eventsOf = o => AFISHA.filter(e => e.status !== 'закрыто' && (e.organizers || []).some(x => x && typeof x === 'object' && x.org === o.id) && (!lastDay(e) || lastDay(e) >= today));
+/* ---------- акции организации (решение Ирины 11.10.2026): type: 'promo' в data/afisha.js, организатор { org: id }. Акции размещают фирмы и организации, которые берут деньги
+   (магазин, ресторан, студия, школа, ферайн со взносом); у бесплатных (free: true) акций нет. Список всех акций — вкладка «Акции» (akcii/), здесь — полоска в карточке ---------- */
+const isPromo = e => e.type === 'promo' && !!e.promo;
+const moneyP = n => 'CHF ' + (+n % 1 ? (+n).toFixed(2) : +n);
+const r05 = x => Math.round(x * 20) / 20;
+const PCOND = { new: 'Только для новых клиентов', book: 'По предварительной записи', nosum: 'Не суммируется с другими скидками', wd: 'Только в будни', online: 'Только онлайн' };
+const pCondList = p => (p.cond || []).map(c => c === 'first' ? (p.limit ? `Первым ${p.limit} клиентам` : 'Количество мест ограничено') : PCOND[c]).filter(Boolean);
+function pOffer(e){
+  const p = e.promo || {}, v = +p.value, reg = +p.regular, more = [];
+  if (p.kind === 'percent'){ if (reg) more.push(`обычно ${moneyP(reg)}, по акции ${moneyP(r05(reg * (100 - v) / 100))}`); return { big: `−${v} %`, chip: `−${v} %`, sub: p.what, more }; }
+  if (p.kind === 'amount'){ if (reg) more.push(`обычно ${moneyP(reg)}, по акции ${moneyP(reg - v)}`); return { big: `−${moneyP(v)}`, chip: `−${moneyP(v)}`, sub: p.what, more }; }
+  if (p.kind === 'price'){ if (reg) more.push(`обычно ${moneyP(reg)}`); return { big: moneyP(v), chip: moneyP(v), sub: p.what, more }; }
+  if (p.kind === 'gift') return { big: 'Подарок', chip: 'подарок', sub: p.what, more };
+  return { big: 'Бесплатно', chip: 'бесплатно', sub: p.what, more };
+}
+const pShort = x => `${+x.slice(8)} ${MON_G[+x.slice(5, 7) - 1]}`;
+const isOrgOf = (e, o) => (e.organizers || []).some(x => x && typeof x === 'object' && x.org === o.id);
+const promoOf = o => o.free === true ? [] : AFISHA.filter(e => isPromo(e) && e.status === 'активен' && isOrgOf(e, o) && e.date <= today && lastDay(e) >= today)
+  .sort((a, b) => lastDay(a).localeCompare(lastDay(b))).slice(0, 2);
+const promoStrip = o => { const L = promoOf(o); if (!L.length) return '';
+  return `<div class="pr-strip" role="note"><div class="pr-hd"><b>${L.length > 1 ? 'Акции организации' : 'Акция организации'}</b><i class="pr-ad">Реклама</i></div>${L.map(e => { const p = pOffer(e), cl = pCondList(e.promo);
+    return `<div class="pr-one"><span class="pr-big">${esc(p.big)}</span><div class="pr-txt"><b>${esc(e.title)}</b><span>${esc(p.sub || '')}${p.more.length ? ' · ' + esc(p.more.join('; ')) : ''}</span><small>До ${esc(pShort(lastDay(e)))}${cl.length ? ' · ' + esc(cl.join(' · ')) : ''}${e.sample ? ' · образец' : ''}</small></div><div class="pr-act"><a class="btn ghost" href="../akcii/#${esc(e.id)}">Подробности и как воспользоваться</a></div></div>`; }).join('')}
+    <p class="pr-note">Акцию объявляет и выполняет сама организация. «Свои люди» не продают услуги и товары и не отвечают за условия акции: договаривайся напрямую с организацией.</p></div>`; };
+const promoChip = o => { const L = promoOf(o); if (!L.length) return ''; const e = L[0], p = pOffer(e);
+  return `<span class="pr-chip"><b>Акция</b> · ${esc(p.chip || p.big)} до ${esc(pShort(lastDay(e)))}<i>Реклама</i></span>`; };
+const eventsOf = o => AFISHA.filter(e => e.status !== 'закрыто' && !isPromo(e) && (e.organizers || []).some(x => x && typeof x === 'object' && x.org === o.id) && (!lastDay(e) || lastDay(e) >= today));
 
 function row(o){
   const d = DIRS[o.dir] || DIRS.help;
@@ -91,7 +116,7 @@ function row(o){
     <span class="ev-d vk"><b>${ICO[o.dir] || ICO.help}</b><small>${esc(d.t)}</small></span>
     <span class="ev-m">${o.sample ? '<span class="yours">Здесь может быть ваша организация!</span>' : ''}<span class="ev-k">${esc(kindLine(o))}</span><span class="ev-t">${esc(o.name)}</span>
       <span class="ev-i"><span>${esc(where(o))}</span><span>${esc((o.langs || []).join(', '))}</span>${o.fee ? `<span>${esc(o.fee)}</span>` : ''}${o.kind === 'firm' && o.head && o.head.name ? `<span>руководитель: ${esc(o.head.name)}</span>` : ''}</span>
-      ${badgeOf(o) ? `<span class="free-line">${esc(badgeOf(o))}</span>` : ''}</span></button>`;
+      ${badgeOf(o) ? `<span class="free-line">${esc(badgeOf(o))}</span>` : ''}${promoChip(o)}</span></button>`;
 }
 function render(){
   const list = pool().filter(o => match(o)).sort((a, b) => (a.sample ? 1 : 0) - (b.sample ? 1 : 0) || a.name.localeCompare(b.name, 'ru'));
@@ -136,7 +161,7 @@ function openO(id){
   const d = DIRS[o.dir] || DIRS.help, box = document.getElementById('qmCard'), evs = eventsOf(o);
   box.style.setProperty('--lc', d.c); box.style.setProperty('--lf', `color-mix(in srgb,${d.c} 12%,var(--paper))`);
   box.innerHTML = `<div class="qm-top"><div class="qm-head">${o.sample ? '<span class="ev-k" style="color:var(--brown)">Образец карточки · всё вымышленное</span><a class="yours" href="#add" data-close>Здесь может быть ваша организация! Как разместить →</a>' : ''}<span class="ev-k" style="color:${d.c}">${esc(d.t)}</span><h2 class="qm-title" id="qmTitle">${esc(o.name)}</h2>${o.name_ru ? `<span class="note">${esc(o.name_ru)}</span>` : ''}${badgeOf(o) ? `<span class="free-line">${esc(badgeOf(o))}<button type="button" class="qh" data-help="badge" aria-label="Подсказка: размещение бесплатно" aria-expanded="false">?</button></span>` : ''}</div><button class="qm-close" type="button" aria-label="Закрыть">×</button></div>
-    <div class="d-body">
+    ${promoStrip(o)}<div class="d-body">
       <div class="d-col">
         <div class="d-block"><h4>Что делает организация</h4><p>${esc(o.about)}</p></div>
         ${(o.offers || []).length ? `<div class="d-block"><h4>Что можно получить</h4><ul class="marks">${o.offers.map(x => `<li>${esc(x)}</li>`).join('')}</ul></div>` : ''}

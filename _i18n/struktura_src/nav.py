@@ -8,7 +8,7 @@ ITEMS = [  # (путь, название, условие «текущий»)
     ('', 'Специалисты', lambda p: p == 'index.html'),
     ('shveycariya/', 'Как устроена Швейцария', lambda p: p.startswith(('shveycariya/', 'situacii/'))),
     ('instrumenty/', 'Полезные инструменты', lambda p: p.startswith('instrumenty/')),
-    ('events/', 'События и курсы', lambda p: p.startswith(('events/', 'kursy/'))),
+    ('events/', 'События и курсы', lambda p: p.startswith(('events/', 'akcii/', 'kursy/'))),
     ('novosti/', 'Что нового', lambda p: p.startswith('novosti/')),
     # 11.10.2026, Ирина: «у нас на сайте нет вкладки вакансии и партнерство… название работа и свое дело не подходит, оно о другом…
     # в категории вакансии и партнерство должна открываться страница, где можно найти, кто кого ищет… и разместить свою вакансию».
@@ -41,6 +41,9 @@ def files():
             if f.endswith('.html'):
                 yield os.path.normpath(os.path.join(r, f)).replace(os.sep, '/')
 
+# «Акции» в подвале рядом с «События» и «Курсы» (11.10.2026): подвалы собирают разные скрипты, поэтому ссылка ставится здесь, на всех страницах сразу
+FOOT = re.compile(r'(<a href="((?:\.\./)*|https://svoiludi\.ch/)events/">События</a> · )(<a href="\2kursy/">Курсы</a>)')
+
 def main():
     n = 0
     for rel in files():
@@ -48,6 +51,7 @@ def main():
         m = NAV.search(h)
         if not m: continue
         new = h[:m.start(2)] + build(rel) + '\n    </nav>' + h[m.end(3):] if False else NAV.sub(lambda m: m.group(1) + build(rel) + '\n    </nav>', h, count=1)
+        new = FOOT.sub(lambda m: m.group(1) + f'<a href="{m.group(2)}akcii/">Акции</a> · ' + m.group(3), new)
         if new != h:
             open(p, 'w', encoding='utf-8').write(new); n += 1
     print('меню обновлено:', n, 'страниц')

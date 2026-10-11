@@ -378,6 +378,16 @@ a.bot:hover{color:#B98324}
 .pr-days{font-weight:700;color:var(--ink)}
 .pr-conds{display:flex;flex-wrap:wrap;gap:6px;margin:2px 0 0;padding:0;list-style:none}
 .pr-conds li{font-size:.82rem;font-weight:600;background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:4px 10px}
+.pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,340px),1fr));gap:16px;padding-top:4px}
+.pcard{--lc:#B8472E;--lf:color-mix(in srgb,var(--lc) 10%,var(--paper));position:relative;display:flex;flex-direction:column;gap:12px;background:var(--paper);border:1.5px solid var(--line);border-radius:20px;padding:18px;text-align:left;font:inherit;color:inherit;cursor:pointer;width:100%;transition:border-color .15s,transform .15s}
+.pcard:hover{border-color:var(--lc);transform:translateY(-1px)}
+.pc-big{align-self:flex-start;font:400 2.2rem/1 var(--display),Georgia,serif;color:var(--lc);background:var(--lf);border-radius:14px;padding:9px 16px;max-width:100%;overflow-wrap:anywhere}
+.pc-m{display:flex;flex-direction:column;gap:6px;min-width:0}
+.pc-t{font:400 1.35rem/1.15 var(--display),Georgia,serif}
+.pc-sub{font-weight:600;font-size:.95rem}
+.pc-who{display:flex;align-items:center;gap:12px;margin-top:2px}.pc-who .ev-o{margin:0 6px 0 0}
+.pc-n{display:flex;flex-direction:column;min-width:0}.pc-n b{font-size:.92rem}.pc-n small{font-size:.8rem;color:var(--muted)}
+.pc-c{display:flex;flex-wrap:wrap;gap:6px}.pc-c i{font-style:normal;font-size:.78rem;font-weight:600;background:var(--lf);border-radius:10px;padding:3px 9px}
 .ev-p{font-size:.84rem;font-weight:700;color:var(--ink);background:var(--lf);border-radius:14px;padding:5px 11px;max-width:190px;text-align:center;line-height:1.3}
 .ev-o{display:flex;margin-top:2px}
 .ev-o img,.ev-o span.ini2{width:26px;height:26px;border-radius:50%;object-fit:cover;border:2px solid var(--paper);margin-right:-6px;background:var(--soft);display:grid;place-items:center;font-size:.66rem;font-weight:700;color:var(--muted)}
@@ -512,7 +522,7 @@ a.yours:hover{background:#EBD3A3}
 <main class="page">
   <section class="s-hero has-art" aria-labelledby="h1">
     <div class="hero-txt">
-      <!--evk--><nav class="evk" aria-label="События и курсы"><a href="./" aria-current="page">События</a><a href="../kursy/">Курсы и занятия</a></nav><style>.evk{display:inline-flex;flex-wrap:wrap;gap:4px;background:var(--sage-soft,#E3E6D6);border-radius:12px;padding:4px;margin:0 0 14px;order:0;width:auto;align-self:flex-start;overflow:visible}.evk a{padding:7px 16px;border-radius:9px;font-weight:700;font-size:.9rem;text-decoration:none;color:var(--ink);background:none;border:0;box-shadow:none}.evk a[aria-current]{background:var(--paper,#FFFCF8);box-shadow:0 1px 4px rgba(0,0,0,.12);color:var(--ink)!important}@media (max-width:420px){.evk{gap:2px}.evk a{padding:7px 9px;font-size:.84rem}}@media (max-width:380px){.evk a{padding:7px 7px;font-size:.8rem}}</style><!--evk--><div class="eyebrow">События · Свои люди в Швейцарии</div>
+      <!--evk--><nav class="evk" aria-label="События, акции и курсы"><a href="./" aria-current="page">События</a><a href="../akcii/">Акции</a><a href="../kursy/">Курсы и занятия</a></nav><style>.evk{display:inline-flex;flex-wrap:wrap;gap:4px;background:var(--sage-soft,#E3E6D6);border-radius:12px;padding:4px;margin:0 0 14px;order:0;width:auto;align-self:flex-start;overflow:visible}.evk a{padding:7px 16px;border-radius:9px;font-weight:700;font-size:.9rem;text-decoration:none;color:var(--ink);background:none;border:0;box-shadow:none}.evk a[aria-current]{background:var(--paper,#FFFCF8);box-shadow:0 1px 4px rgba(0,0,0,.12);color:var(--ink)!important}@media (max-width:420px){.evk{gap:2px}.evk a{padding:7px 9px;font-size:.84rem}}@media (max-width:380px){.evk a{padding:7px 7px;font-size:.8rem}}</style><!--evk--><!--evk--><!--evk--><div class="eyebrow">События · Свои люди в Швейцарии</div>
       <h1 id="h1">Встречи <em>рядом с тобой</em></h1>
       <p class="lead">Разговорные клубы, встречи мам, праздники для детей, лекции и ретриты на твоём языке. Выбери кантон и посмотри, что будет на этой неделе, в этом месяце или в течение года. Любое событие можно сразу добавить в свой календарь.</p>
     </div>
@@ -540,7 +550,7 @@ a.yours:hover{background:#EBD3A3}
   <div id="digest" hidden></div>
 
   <section class="join" id="add" aria-labelledby="add-h">
-    <div><h2 id="add-h">Проводишь встречи?</h2><p style="max-width:62ch">Размести своё событие здесь — это бесплатно в период запуска, до конца 2027 года. Заполни <a href="#zayavka">заявку прямо здесь, на сайте</a>, или напиши нам на <a href="mailto:voznesenskaya.iryna@gmail.com">voznesenskaya.iryna@gmail.com</a>. Мы проверим и опубликуем событие, а ты получишь ссылку на него. Регулярные занятия, курсы, мастер-классы и вебинары размещаются во вкладке <a href="../kursy/">«Курсы»</a>. Хочешь рассказать о скидке или специальной цене? Заполни <a href="#akciya">заявку на акцию</a>: она будет видна прямо в твоей карточке.</p></div>
+    <div><h2 id="add-h">Проводишь встречи?</h2><p style="max-width:62ch">Размести своё событие здесь — это бесплатно в период запуска, до конца 2027 года. Заполни <a href="#zayavka">заявку прямо здесь, на сайте</a>, или напиши нам на <a href="mailto:voznesenskaya.iryna@gmail.com">voznesenskaya.iryna@gmail.com</a>. Мы проверим и опубликуем событие, а ты получишь ссылку на него. Регулярные занятия, курсы, мастер-классы и вебинары размещаются во вкладке <a href="../kursy/">«Курсы»</a>. Хочешь рассказать о скидке или специальной цене? Акции размещаются на вкладке <a href="../akcii/">«Акции»</a>: заполни <a href="../akcii/#akciya">заявку на акцию</a>, и она будет видна прямо в твоей карточке.</p></div>
     <div class="join-cols">
       <div class="jc"><b>Некоммерческие</b><p>Клубы, посиделки, встречи, сообщества, взаимопомощь. Регистрация не нужна, даже если собираете взнос на расходы (аренда зала, чай) и организатор на этом не зарабатывает.</p></div>
       <div class="jc"><b>Коммерческие</b><p>Платный вход, оплата участия, продажа услуг или товаров. Размещаем только организаторов с регистрацией в Швейцарии: номер UID, фирма или зарегистрированный ферайн.</p></div>
@@ -617,66 +627,13 @@ a.yours:hover{background:#EBD3A3}
     <p class="note">Отправляя заявку, ты просишь разместить событие и соглашаешься, чтобы после проверки мы его опубликовали. Как мы храним заявку — в <a href="https://svoiludi.ch/privacy/">политике конфиденциальности</a>.</p>
   </section>
 
-  <section class="zform" id="akciya" aria-labelledby="akciya-h" data-zayavka="promo" data-zneedcard data-t-ok="Поставь галочку согласия над кнопкой — без неё мы не можем принять заявку." data-t-okline="Согласие на обработку данных и публикацию: отмечено на сайте" data-mail="voznesenskaya.iryna@gmail.com" data-subject="Акция для «Свои люди в Швейцарии»" data-hello="Здравствуйте! Хочу разместить акцию в «Свои люди в Швейцарии»." data-from="Заявка заполнена на странице" data-t-miss="Не заполнены обязательные поля: " data-t-mail="Проверь e-mail: в адресе не хватает знака @ или точки." data-t-any="Укажи хотя бы один контакт: телефон, WhatsApp, Telegram, e-mail или Instagram." data-t-need="Для записи выбран этот способ. Заполни поле «{f}»." data-t-dpast="Эта дата уже прошла. Выбери сегодняшнюю или будущую дату." data-t-dorder="Последний день не может быть раньше первого." data-t-dmax="Акция действует не дольше {n} дней. Выбери дату окончания раньше." data-t-wiped="Вся история заявки удалена с этого устройства." data-t-copied="Заявка скопирована. Вставь её в письмо на voznesenskaya.iryna@gmail.com." data-t-copyfail="Не получилось скопировать. Напиши нам на voznesenskaya.iryna@gmail.com." data-t-range="Проверь поле «{f}»: число должно быть от {min} до {max}." data-t-needcard="Акции размещают специалисты и организации из справочника. Сначала найди свою карточку по номеру (SG-0001) или UID вверху формы. Карточки ещё нет — подай заявку на карточку, кнопка «Подать заявку» вверху страницы.">
-    <h2 id="akciya-h">Заявка на размещение акции</h2>
-    <p class="zhint">Акция — временное предложение на твою услугу: скидка, акционная цена, подарок или бесплатное знакомство. Она занимает одно событие из твоего пакета (до 31.12.2027 размещение бесплатно) и сразу видна в твоей карточке. Акции размещают специалисты и организации из справочника, поэтому сначала найди свою карточку по номеру или UID.</p>
-    <div class="zlook" data-zlook data-kinds="spec,org" data-t-kspec="Твоя карточка в справочнике" data-t-korg="Карточка организации" data-t-sample="Образец" data-t-uid="UID" data-t-num="Номер карточки" data-t-addr="Адрес" data-t-phone="Телефон" data-t-mail="E-mail" data-t-site="Сайт" data-t-locked="Эти данные возьмём из карточки, в заявке их не поменять. Если в карточке что-то изменилось, напиши нам с e-mail карточки, и мы исправим саму карточку." data-t-to="Подтверждение — всегда через e-mail из карточки, он один для всех подтверждений. Ссылку пришлём на" data-t-noemail="В карточке нет e-mail для подтверждений. Напиши нам: мы добавим его в карточку, без него запись не подтвердить." data-t-change="Это не моя карточка, ввести другой номер" data-t-empty="Впиши UID или номер карточки." data-t-format="Такой номер не найти. UID выглядит так: CHE-123.456.789. Номер карточки — так: SG-0001 или OR-0001." data-t-none="Опубликованной карточки с этим номером нет. Проверь номер. Акции размещают только специалисты и организации из справочника: если карточки ещё нет, сначала подай заявку на карточку (кнопка «Подать заявку» вверху страницы)." data-t-many="Под этим UID несколько карточек. Выбери свою:" data-t-auto="Этот номер уже есть в справочнике. Мы подставили данные из карточки: проверь их и нажми «Отправить заявку» ещё раз." data-t-ref="Карточка в справочнике" data-t-toletter="Ссылку на подтверждение прислать на" data-t-offwait="Карточка {n} ещё ждёт подтверждения. Подтверди её по ссылке из нашего письма. Как только карточка появится на сайте, здесь можно будет разместить запись." data-t-offpause="Карточка {n} сейчас не активна. Пока она не активна, записи от её имени не размещаются, а прежние записи на сайте скрыты. Чтобы снова открыть карточку, напиши нам с e-mail карточки." data-t-offend="Срок размещения карточки {n} закончился {d}. Пока карточка не продлена, записи от её имени не размещаются, а прежние записи на сайте скрыты. Чтобы продлить, напиши нам с e-mail карточки." data-t-mine="Твои прошлые акции. Можно повторить, тогда останется выбрать новые даты:" data-t-again="Повторить" data-t-repeated="Готово: данные из прошлой записи подставлены. Выбери новые даты и проверь остальное.">
-      <div class="zf"><label for="z-pr-find">Найди свою карточку <s>*</s><button type="button" class="qh" data-help="zfind" aria-label="Подсказка: зачем искать свою карточку" aria-expanded="false">?</button></label><div class="zlrow"><input id="z-pr-find" data-zl="q" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="UID или номер карточки"><button class="btn" type="button" data-zl="find">Найти</button></div><small>Впиши номер карточки (SG-0001, он стоит внизу твоей карточки) или UID (CHE-123.456.789). Имя, адрес и контакты подставятся сами, прошлые акции можно будет повторить.</small></div>
-      <p class="zmsg" data-zl="msg" role="status" hidden></p>
-      <div data-zl="prof" hidden></div>
-      <p class="zmsg" data-zl="nouid" hidden>Акции размещают только специалисты и организации с UID (фирма, самозанятый(ая) с UID или ферайн), потому что акция — это предложение платной услуги. В карточке UID нет. Если UID появился, напиши нам, и мы добавим его в карточку.</p>
-      <p class="zmsg" data-zl="free" hidden>Ваша организация размещается бесплатно, потому что ничего не берёт с людей. Акции (скидки и специальные цены) у таких организаций мы не размещаем. Если вы начнёте брать плату, напишите нам: условия размещения тогда будут такими же, как у специалистов.</p>
-      <div class="zmine" data-zl="mine" hidden></div>
-    </div>
-    <div class="zfg">
-      <h3 class="zh3">Что за акция</h3>
-      <div class="zf"><label for="z-pr-title">Название акции <s>*</s></label><input id="z-pr-title" data-a="Название" data-title data-req maxlength="80" placeholder="например: Скидка 20 % на первый месяц"></div>
-      <div class="zf"><label for="z-pr-kind">Вид акции <s>*</s><button type="button" class="qh" data-help="zpkind" aria-label="Подсказка: какие бывают акции" aria-expanded="false">?</button></label><select id="z-pr-kind" data-a="Вид акции" data-req data-miss="вид акции"><option value="">Выбери вид</option><option value="percent" data-zcharge data-zuidonly>Скидка в процентах</option><option value="amount" data-zcharge data-zuidonly>Скидка в франках</option><option value="price" data-zcharge data-zuidonly>Акционная цена</option><option value="gift" data-zcharge data-zuidonly>Подарок или бонус к услуге</option><option value="free" data-zcharge data-zuidonly>Бесплатное знакомство или пробное занятие</option></select></div>
-      <div class="zf" data-zif="z-pr-kind:percent" hidden><label for="z-pr-pct">Размер скидки, % <s>*</s></label><input id="z-pr-pct" type="number" data-a="Скидка, %" data-req data-miss="размер скидки" min="5" max="80" step="1" inputmode="numeric" placeholder="20"><small>Одно число, от 5 до 80. Слова «до 50 %» не подходят: скидка должна быть точной.</small></div>
-      <div class="zf" data-zif="z-pr-kind:amount" hidden><label for="z-pr-amt">Размер скидки <s>*</s></label><div class="zcur"><span>CHF</span><input id="z-pr-amt" type="number" data-a="Скидка, CHF" data-req data-miss="размер скидки" min="1" max="2000" step="0.5" inputmode="decimal" placeholder="30"></div><small>На сколько франков услуга дешевле на время акции.</small></div>
-      <div class="zf" data-zif="z-pr-kind:price" hidden><label for="z-pr-price">Акционная цена <s>*</s></label><div class="zcur"><span>CHF</span><input id="z-pr-price" type="number" data-a="Акционная цена, CHF" data-req data-miss="акционная цена" min="1" max="20000" step="0.5" inputmode="decimal" placeholder="120"></div><small>Конечная цена: со всеми обязательными расходами и НДС (MWST), если ты его платишь.</small></div>
-      <div class="zf" data-zif="z-pr-kind:percent|amount|price" hidden><label for="z-pr-what">На что акция <s>*</s></label><input id="z-pr-what" data-a="На что акция" data-req data-miss="на что акция" maxlength="80" placeholder="например: абонемент на 4 встречи"><small>Назови услугу или товар точно. Только своё.</small></div>
-      <div class="zf" data-zif="z-pr-kind:gift|free" hidden><label for="z-pr-gift">Что получит человек <s>*</s></label><input id="z-pr-gift" data-a="Что получит человек" data-req data-miss="что получит человек" maxlength="120" placeholder="например: чек-лист «Первые 30 дней» к первой консультации"></div>
-      <div class="zf" data-zif="z-pr-kind:percent|amount|price" hidden><label for="z-pr-regular">Обычная цена<button type="button" class="qh" data-help="zpregular" aria-label="Подсказка: обычная цена" aria-expanded="false">?</button></label><div class="zcur"><span>CHF</span><input id="z-pr-regular" type="number" data-a="Обычная цена, CHF" min="1" max="20000" step="0.5" inputmode="decimal" placeholder="150"></div><small>Не обязательно. Впиши, только если ты брал(а) эту цену непосредственно перед акцией. Тогда на сайте будет «обычно CHF …». Не уверен(а) — оставь пустым.</small></div>
-      <h3 class="zh3">Условия</h3>
-      <div class="zf"><label>Что ограничивает акцию<button type="button" class="qh" data-help="zpcond" aria-label="Подсказка: условия акции" aria-expanded="false">?</button></label><div class="zchk" id="z-pr-cond" data-l="Условия"><label><input type="checkbox" value="new">Только для новых клиентов</label><label><input type="checkbox" value="book">По предварительной записи</label><label><input type="checkbox" value="nosum">Не суммируется с другими скидками</label><label><input type="checkbox" value="wd">Только в будни</label><label><input type="checkbox" value="online">Только онлайн</label><label><input type="checkbox" value="first">Количество мест ограничено</label></div></div>
-      <div class="zf" data-zif="z-pr-cond:first" hidden><label for="z-pr-limit">Первым скольким клиентам</label><input id="z-pr-limit" type="number" data-a="Первым клиентам" min="1" max="500" step="1" inputmode="numeric" placeholder="10"><small>Если места закончатся раньше срока, напиши нам: мы снимем акцию.</small></div>
-      <h3 class="zh3">Когда</h3>
-      <div class="zf"><label for="z-pr-from">Первый день акции <s>*</s></label><input id="z-pr-from" type="date" data-a="Первый день" data-req data-miss="первый день" data-zd="from"></div>
-      <div class="zf"><label for="z-pr-to">Последний день акции <s>*</s></label><input id="z-pr-to" type="date" data-a="Последний день" data-req data-miss="последний день" data-zd="to" data-zmax="90" data-zdef="30"><small>Акция действует не дольше 90 дней. После последнего дня она уйдёт в архив, а повторить её можно здесь по номеру карточки.</small></div>
-      <h3 class="zh3">Где</h3>
-      <div class="zf"><label for="z-pr-where">Где действует акция <s>*</s></label><select id="z-pr-where" data-a="Где" data-req data-miss="где действует" data-zaddr data-t-card="{a} — адрес из карточки"><option value="" data-keep>Выбери</option><option value="online" data-keep>Онлайн</option></select><small>Адреса берутся из твоей карточки.</small></div>
-      <h3 class="zh3">Как воспользоваться</h3>
-      <div class="zf"><label for="z-pr-signup">Как записаться по акции <s>*</s></label><select id="z-pr-signup" data-a="Как записаться" data-req data-miss="как записаться"><option value="">Выбери</option><option value="wa" data-zneed="z-pr-wa">Написать в WhatsApp</option><option value="tg" data-zneed="z-pr-tg">Написать в Telegram</option><option value="mail" data-zneed="z-pr-mail">Написать на e-mail</option><option value="tel" data-zneed="z-pr-tel">Позвонить или написать SMS</option><option value="ig" data-zneed="z-pr-ig">Написать в Instagram</option><option value="link" data-zneed="z-pr-link">Записаться на сайте, по ссылке</option></select><small>В окне акции будет кнопка «Воспользоваться акцией». Она откроет этот мессенджер или почту с готовым сообщением тебе.</small></div>
-      <div class="zf"><label for="z-pr-link">Ссылка на запись или подробности</label><input id="z-pr-link" type="url" data-a="Ссылка" placeholder="https://…" inputmode="url"></div>
-      <p class="zhint">Телефон и e-mail возьмём из карточки. Впиши ниже, только если для этой акции нужен другой контакт: на сайте будет он вместо контакта из карточки.</p>
-      <div class="zf"><label for="z-pr-tel">Другой телефон</label><input id="z-pr-tel" type="tel" data-a="Телефон" placeholder="+41 …" autocomplete="tel"></div>
-      <div class="zf"><label for="z-pr-wa">WhatsApp</label><input id="z-pr-wa" type="tel" data-a="WhatsApp" placeholder="+41 79 …"><small>Номер, на котором есть WhatsApp.</small></div>
-      <div class="zf"><label for="z-pr-tg">Telegram</label><input id="z-pr-tg" data-a="Telegram" placeholder="@имя" autocapitalize="off" spellcheck="false"><small>Имя пользователя с @ или ссылка t.me/…</small></div>
-      <div class="zf"><label for="z-pr-mail">Другой e-mail</label><input id="z-pr-mail" type="email" data-a="E-mail" placeholder="name@example.ch" autocomplete="email"><small>E-mail для подтверждений остаётся из карточки, его не поменять.</small></div>
-      <div class="zf"><label for="z-pr-ig">Instagram</label><input id="z-pr-ig" data-a="Instagram" placeholder="@имя" autocapitalize="off" spellcheck="false"></div>
-      <h3 class="zh3">Описание</h3>
-      <div class="zf"><label for="z-pr-about">Коротко об акции <s>*</s></label><textarea id="z-pr-about" data-a="Коротко об акции" data-req rows="4" maxlength="400" placeholder="2–3 предложения: что включено и для кого"></textarea></div>
-    </div>
-    <div class="zok"><input type="checkbox" id="z-pr-own" data-zmust data-line="Это моя акция, за других не размещаю: отмечено на сайте" data-t-must="Поставь галочку «Это моя акция». Размещать можно только свои акции."><label for="z-pr-own">Это моя акция: я сам(а) её объявляю и выполняю, или её выполняет моя организация. Акции за других людей и организации я не размещаю. Знаю: за это могут исключить из проекта (<a href="https://svoiludi.ch/usloviya/#vy">условия размещения</a>).</label></div>
-    <div class="zok"><input type="checkbox" id="z-pr-law" data-zmust data-line="Акция правдива, в моей компетенции и по закону: отмечено на сайте" data-t-must="Поставь галочку «Акция правдива и по закону»."><label for="z-pr-law">Акция правдива и по закону: цены и условия настоящие, обычная цена (если указана) — та, по которой я работал(а) непосредственно до акции. Я выполню акцию для всех, кто подходит под условия, до последнего дня. Услуга в моей компетенции, на неё есть все нужные разрешения. Это не розыгрыш и не обещание лечения или результата.</label></div>
-    <div class="zok"><input type="checkbox" id="z-pr-ad" data-zmust data-line="Знаю, что акция помечена «Реклама» и занимает одно событие из пакета: отмечено на сайте" data-t-must="Поставь галочку про пометку «Реклама»."><label for="z-pr-ad">Я знаю: на сайте акция помечена «Реклама» и занимает одно событие из моего пакета (до 31.12.2027 размещение бесплатно). «Свои люди» не продают мою услугу и не отвечают за условия акции.</label></div>
-    <div class="zok"><input type="checkbox" id="z-pr-ok" data-z="ok"><label for="z-pr-ok">Даю согласие, чтобы «Свои люди» (Alonira.ch AG) обработали данные из этой заявки, при необходимости связались со мной и после проверки опубликовали акцию. Я вправе разместить эти данные, в том числе контакты для записи и вопросов. Подробнее — в <a href="https://svoiludi.ch/privacy/">политике конфиденциальности</a>.</label></div>
-    <div class="acts"><button class="btn" type="button" data-z="send">Отправить заявку</button></div>
-    <p class="zmsg" data-z="msg" role="status" hidden></p>
-    <p class="zmsg" data-z="sent" hidden>Открылось письмо с твоей заявкой на voznesenskaya.iryna@gmail.com. Проверь его и нажми «Отправить» в своей почте. Письмо не открылось? <a data-z="gmail" href="https://mail.google.com/" target="_blank" rel="noopener">Открыть в Gmail</a> или <button class="lnk" type="button" data-z="copy">скопировать заявку</button> и отправить её на voznesenskaya.iryna@gmail.com.</p>
-    <p class="zdraft" data-z="idle">Всё вписанное сохраняется только на этом устройстве, пока заявка не отправлена. Можно закрыть страницу и продолжить позже. <button class="lnk" type="button" data-z="wipe">Удалить историю</button></p>
-    <p class="zdraft" data-z="ask" hidden>Удалить с этого устройства всё, что вписано в заявку? Вернуть это будет нельзя. <button class="lnk" type="button" data-z="yes">Да, удалить историю</button><button class="lnk" type="button" data-z="no">Отмена</button></p>
-    <p class="note">Отправляя заявку, ты просишь разместить акцию и соглашаешься, чтобы после проверки мы её опубликовали. Как мы храним заявку — в <a href="https://svoiludi.ch/privacy/">политике конфиденциальности</a>.</p>
-  </section>
-
   <p class="fine">Страница носит информационный характер. За проведение события, его содержание и разрешения отвечает организатор. Записывайся и договаривайся напрямую с организатором.</p>
 
   <div class="share-slot" data-url="https://svoiludi.ch/events/" data-lead="Позови с собой друзей. Перешли страницу с событиями, сообщение уже готово." data-text="Привет! Тут собраны встречи на русском по всей Швейцарии. Разговорные клубы, праздники для детей, лекции и ретриты. Может, сходим куда-нибудь вместе?"></div>
 
   <footer>
     <span>© 2026 Свои люди в Швейцарии · <a href="../o-proekte/">О проекте</a> · проект <a href="https://voznesenskaya.ch/">Ирины Вознесенской</a></span>
-    <span><a href="../">Специалисты</a> · <a href="../kursy/">Курсы</a> · <a href="../join/">Разместиться</a> · <a href="https://svoiludi.ch/privacy/">Политика конфиденциальности</a> · <a href="../usloviya/">Условия размещения</a> · <a href="../o-proekte/#otvetstvennost">Ограничение ответственности</a> · <a href="https://voznesenskaya.ch/impressum/">Выходные данные</a></span>
+    <span><a href="../">Специалисты</a> · <a href="../akcii/">Акции</a> · <a href="../kursy/">Курсы</a> · <a href="../join/">Разместиться</a> · <a href="https://svoiludi.ch/privacy/">Политика конфиденциальности</a> · <a href="../usloviya/">Условия размещения</a> · <a href="../o-proekte/#otvetstvennost">Ограничение ответственности</a> · <a href="https://voznesenskaya.ch/impressum/">Выходные данные</a></span>
   </footer>
 </main>
 
@@ -690,7 +647,7 @@ window.IMG_BASE = '../img/';
 const SPECIALISTS = window.SPECIALISTS || [];
 
 </script>
-<script src="/data/afisha.js?v=6a1b5852"></script>
+<script src="/data/afisha.js?v=508a8b2a"></script>
 <script>/* одна база афиши: здесь — записи раздела «События» */
 const EVENTS = (window.AFISHA || []).filter(e => (e.sections || []).includes('events'));</script>
 <script>
@@ -773,12 +730,22 @@ function repeatText(e){   // «каждый четверг до 17 декабр�
 }
 
 /* ---------- фильтры ---------- */
+/* AK — страница «Акции» (akcii/index.html): её собирает _i18n/akcii_src/build.py из этой страницы. Те же данные, окна и форма, но только акции и карточками.
+   На странице «События» акций нет: они живут на своей вкладке (решение Ирины 11.10.2026, 18:48: «где на сайте будут акции? где в меню или фильтрах?»). */
+const AK = document.documentElement.dataset.mode === 'akcii';
+const PKINDS = { percent: 'Скидка в процентах', amount: 'Скидка в франках', price: 'Акционная цена', gift: 'Подарок или бонус', free: 'Бесплатное знакомство или пробное занятие' };
 const state = { canton: '', city: '', type: '', lang: '', when: '', view: 'list', month: today.slice(0, 7) };
-const pool = () => EVENTS.filter(e => e.status === 'активен' && live(e));
+const kindOf = e => AK ? ((e.promo || {}).kind || '') : e.type;
+const pool = () => EVENTS.filter(e => e.status === 'активен' && live(e) && (AK ? isPromo(e) && lastDay(e) >= today : !isPromo(e)));
 const isRemote = e => e.online && !e.address;
+/* «Срок» на странице акций: какие заканчиваются на этой неделе или в этом месяце */
+const akWhen = e => { if (!state.when) return true; const end = lastDay(e), d = D(today);
+  if (state.when === 'week') return end <= addDays(today, 6 - (d.getUTCDay() + 6) % 7);
+  return end <= iso(new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth() + 1, 0, 12))); };
 function match(e, skip){
-  if (skip !== 'type' && state.type && e.type !== state.type) return false;
+  if (skip !== 'type' && state.type && kindOf(e) !== state.type) return false;
   if (state.lang && !(e.langs || []).includes(state.lang)) return false;
+  if (AK && !akWhen(e)) return false;
   return true;
 }
 // в кантоне — очные события кантона (и города); онлайн-события показываются всем отдельным блоком
@@ -804,6 +771,33 @@ function row(e, d){
     <span class="ev-m">${e.sample ? `<span class="yours">Здесь может быть ${isPromo(e) ? 'твоя акция' : 'твоё событие'}!</span>` : ''}<span class="ev-k">${isPromo(e) ? 'Акция специалиста <i class="ev-ad">Реклама</i>' : esc(k.t)}</span><span class="ev-t">${esc(e.title)}</span>
       <span class="ev-i">${timeStr(e) ? `<b>${esc(timeStr(e))}</b>` : e.dateEnd ? `<b>до ${D(e.dateEnd).getUTCDate()} ${MON_G[D(e.dateEnd).getUTCMonth()]}</b>` : ''}<span>${where}</span>${e.repeat ? `<span>${esc(repeatText(e))}</span>` : ''}<span>${esc((e.langs || []).join(', '))}</span></span>${orgFaces(e)}</span>
     <span class="ev-p">${esc(priceText(e))}</span></button>`;
+}
+/* карточка акции (страница «Акции»): крупно предложение, потом название, на что, кто, где и до какого дня */
+function pcard(e){
+  const o = offer(e), s = (e.organizers || []).map(cardOf).find(Boolean), role = s && s.role ? s.role : '', cl = condList(e.promo);
+  const where = isRemote(e) ? 'онлайн' : `${esc(city(e.address))} · ${esc(kt(e.canton))}${e.online ? ' · и онлайн' : ''}`;
+  return `<button class="pcard" type="button" data-ev="${esc(e.id)}" data-d="${e.date}">${e.sample ? '<span class="sample">Образец</span>' : ''}
+    <span class="pc-big">${esc(o.big)}</span>
+    <span class="pc-m">${e.sample ? '<span class="yours">Здесь может быть твоя акция!</span>' : ''}<span class="ev-k">Акция <i class="ev-ad">Реклама</i></span><span class="pc-t">${esc(e.title)}</span>
+      <span class="pc-sub">${esc(o.sub || '')}${o.more.length ? ' · ' + esc(o.more.join('; ')) : ''}</span>
+      <span class="pc-who">${orgFaces(e)}<span class="pc-n"><b>${esc(orgNames(e))}</b>${role ? `<small>${esc(role)}</small>` : ''}</span></span>
+      <span class="ev-i"><b>${esc(promoDays(e))}</b><span>${where}</span><span>${esc((e.langs || []).join(', '))}</span></span>
+      ${cl.length ? `<span class="pc-c">${cl.map(c => `<i>${esc(c)}</i>`).join('')}</span>` : ''}</span></button>`;
+}
+function promoView(list){
+  const items = list.slice().sort((a, b) => (a.date > today) - (b.date > today) || lastDay(a).localeCompare(lastDay(b)) || a.title.localeCompare(b.title, 'ru'));
+  const local = items.filter(e => inPlace(e) && !(state.canton && isRemote(e))), remote = state.canton ? items.filter(e => !inPlace(e)) : [];
+  const empty = t => `<div class="empty"><b>${t}</b><span>Попробуй другой кантон или убери часть выбора. Акции появляются, когда специалисты и организации из справочника размещают их у нас.</span></div>`;
+  const grid = arr => { const now = arr.filter(e => e.date <= today), soon = arr.filter(e => e.date > today);
+    return (now.length ? `<div class="pgrid">${now.map(pcard).join('')}</div>` : '') + (soon.length ? `<div class="mh">Скоро начнутся</div><div class="pgrid">${soon.map(pcard).join('')}</div>` : ''); };
+  let html = '';
+  if (!state.canton) html = `<div class="group">${items.length ? grid(items) : empty('Пока акций нет')}</div>`;
+  else {
+    const name = state.city || ktRu(state.canton);
+    html = `<div class="group"><div class="group-h"><h2>${state.city ? 'В городе' : 'В кантоне'} ${esc(name)}</h2></div>${local.length ? grid(local) : empty('Здесь пока акций нет')}</div>`;
+    if (remote.length) html += `<div class="group"><div class="group-h"><h2>Онлайн</h2><p>Можно воспользоваться из дома, где бы ты ни жил.</p></div>${grid(remote)}</div>`;
+  }
+  return { html, n: items.length };
 }
 function listView(list){
   const [from, to] = range();
@@ -846,6 +840,14 @@ function yearView(list){
 }
 function render(){
   const list = pool().filter(shown);
+  if (AK){
+    const v = promoView(list);
+    document.getElementById('results').innerHTML = v.html;
+    document.getElementById('count').textContent = `${v.n} ${plural(v.n, 'акция', 'акции', 'акций')}`;
+    document.getElementById('reset').hidden = !(state.canton || state.city || state.type || state.lang || state.when);
+    ['canton', 'city', 'type', 'lang', 'when'].forEach(id => document.getElementById(id).classList.toggle('set', !!state[id]));
+    fillTypes(); return;
+  }
   const v = state.view === 'month' ? monthView(list) : state.view === 'year' ? yearView(list) : listView(list);
   document.getElementById('results').innerHTML = v.html;
   document.getElementById('count').textContent = state.view === 'list' ? `${v.n} ${plural(v.n, 'событие', 'события', 'событий')}` : state.view === 'month' ? `В этом месяце: ${v.n}` : `За 12 месяцев: ${v.n}`;
@@ -859,7 +861,8 @@ function render(){
 function fillTypes(){
   const b = pool().filter(e => match(e, 'type') && (inPlace(e) || isRemote(e)));
   const el = document.getElementById('type'), opt = (v, t, n) => `<option value="${esc(v)}">${esc(t)}${n === undefined ? '' : ' · ' + n}</option>`;
-  el.innerHTML = opt('', 'Все события', b.length) + Object.entries(TYPES).map(([k, t]) => opt(k, t.t, b.filter(e => e.type === k).length)).join('');
+  el.innerHTML = AK ? opt('', 'Все акции', b.length) + Object.entries(PKINDS).map(([k, t]) => opt(k, t, b.filter(e => kindOf(e) === k).length)).join('')
+    : opt('', 'Все события', b.length) + Object.entries(TYPES).filter(([k]) => k !== 'promo').map(([k, t]) => opt(k, t.t, b.filter(e => e.type === k).length)).join('');
   el.value = state.type;
 }
 function fillCities(){
@@ -869,7 +872,7 @@ function fillCities(){
   const list = Object.keys(n).sort((a, b) => a.localeCompare(b, 'de'));
   if (!list.includes(state.city)) state.city = '';
   el.disabled = !list.length;
-  el.innerHTML = opt('', list.length ? 'Все города кантона' : 'Пока нет событий') + list.map(c => opt(c, `${c} · ${n[c]}`)).join('');
+  el.innerHTML = opt('', list.length ? 'Все города кантона' : (AK ? 'Пока нет акций' : 'Пока нет событий')) + list.map(c => opt(c, `${c} · ${n[c]}`)).join('');
   el.value = state.city;
 }
 function fillSelects(){
@@ -891,7 +894,8 @@ function rrule(e){
   if (r.freq === 'monthly'){ const d = D(e.date); return `RRULE:FREQ=MONTHLY;BYDAY=${Math.ceil(d.getUTCDate() / 7)}${ICS_WD[d.getUTCDay()]}${until}`; }
   return '';
 }
-const evUrl = e => PAGE_URL + '#' + e.id;
+const AK_URL = AK ? PAGE_URL : PAGE_URL.replace(/events\/(?:index\.html)?$/, 'akcii/');
+const evUrl = e => (isPromo(e) ? AK_URL : PAGE_URL) + '#' + e.id;
 const placeText = e => isRemote(e) ? 'Онлайн' : (e.venue ? e.venue + ', ' : '') + e.address + (e.online ? ' (и онлайн)' : '');
 const details = e => `${e.about}\n\nОрганизатор: ${orgNames(e)}\nЦена: ${priceText(e)}\nЗапись и подробности: ${e.link || evUrl(e)}\n\nСвои люди в Швейцарии: ${evUrl(e)}`;
 function gcalLink(e, d){
@@ -951,7 +955,7 @@ let OPEN = null;
    на e-mail ИЗ КАРТОЧКИ организатора. Он видит запись, как её увидят все, ставит галочку и нажимает «Подтверждаю» (assets/podtverdit.js):
    запись на лист подтверждений, письмо Ирине «🌿 Свои люди: … подтверждено», копия на e-mail из карточки. Запасной вариант — письмо из почты.
    После подтверждения Claude ставит status «активен» и confirm: { date, via }. */
-const okUrl = e => `https://svoiludi.ch/events/#ok=${encodeURIComponent(e.id)}.${encodeURIComponent(e.key || '')}`;
+const okUrl = e => `https://svoiludi.ch/${isPromo(e) ? 'akcii' : 'events'}/#ok=${encodeURIComponent(e.id)}.${encodeURIComponent(e.key || '')}`;
 /* контакт для вопросов: свой у записи (другой телефон или e-mail из заявки) или телефон и e-mail из карточки организатора */
 /* карточка организатора из справочника: специалист (id) или организация ({ org }) */
 const cardOf = o => typeof o === 'string' ? SPECIALISTS.find(s => s.id === o) : (o && o.org ? (window.ORGANIZATIONS || []).find(x => x.id === o.org) : null);
@@ -1047,6 +1051,7 @@ function openEvent(id, d, pv){
   box.style.setProperty('--lc', k.c); box.style.setProperty('--lf', `color-mix(in srgb,${k.c} 12%,var(--paper))`);
   const orgs = (e.organizers || []).map(o => { const s = orgOf(o);
     if (s) return `<a class="org" href="../#${esc(s.id)}">${s.photo ? `<img src="${esc(photoSrc(s.photo))}" alt="${esc(s.name)}">` : `<span class="ini">${esc(s.name[0])}</span>`}<span><b>${esc(s.name)}</b><small>${esc(s.role)}</small><br><u>Карточка в справочнике →</u></span></a>`;
+    if (o && o.org && cardOf(o)) return `<a class="org" href="../organizacii/#${esc(o.org)}"><span class="ini">${esc((o.name || cardOf(o).name || '?')[0])}</span><span><b>${esc(o.name || cardOf(o).name)}</b><small>организация</small><br><u>Карточка организации →</u></span></a>`;
     return `<${o.link ? `a href="${esc(o.link)}" ${ext}` : 'div'} class="org"><span class="ini">${esc((o.name || '?')[0])}</span><span><b>${esc(o.name || '')}</b><small>сообщество</small></span></${o.link ? 'a' : 'div'}>`; }).join('');
   const PR = isPromo(e), past = e.repeat ? d < today : lastDay(e) < today;
   box.innerHTML = `<div class="qm-top"><div class="qm-head">${e.sample ? `<span class="ev-k" style="color:var(--brown)">Образец ${PR ? 'акции' : 'события'} · всё вымышленное</span><a class="yours" href="#${PR ? 'akciya' : 'add'}">Здесь может быть ${PR ? 'твоя акция' : 'твоё событие'}! Как добавить →</a>` : ''}<span class="ev-k" style="color:${k.c}">${PR ? 'Акция специалиста <i class="ev-ad">Реклама</i>' : esc(k.t)}</span><h2 class="qm-title" id="qmTitle">${esc(e.title)}</h2></div><button class="qm-close" type="button" aria-label="Закрыть">✕</button></div>
@@ -1113,9 +1118,13 @@ document.getElementById('lang').addEventListener('change', e => { state.lang = e
 document.getElementById('when').addEventListener('change', e => { state.when = e.target.value; render(); });
 document.getElementById('reset').addEventListener('click', () => { Object.assign(state, { canton: '', city: '', type: '', lang: '', when: '' }); fillSelects(); render(); });
 document.getElementById('trial').hidden = !ADMIN;
-document.getElementById('addbtn').href = `mailto:${MAIL}?subject=${encodeURIComponent('Событие для «Свои люди в Швейцарии»')}&body=${encodeURIComponent('Здравствуйте!\n\nХочу разместить событие.\n\nНазвание:\nДата и время (если повторяется — как часто):\nМесто (адрес) или онлайн:\nЯзык:\nЦена или «бесплатно»:\nОрганизатор (имя, сообщество или фирма):\nUID или ферайн (для платных событий):\nСсылка на запись:\nКоротко о событии (2–3 предложения):\nКонтакт для вопросов:\n')}`;
+const addbtn = document.getElementById('addbtn');
+if (addbtn) addbtn.href = AK ? `mailto:${MAIL}?subject=${encodeURIComponent('Акция для «Свои люди в Швейцарии»')}&body=${encodeURIComponent('Здравствуйте!\n\nХочу разместить акцию.\n\nНомер моей карточки (SG-… или OR-…) или UID:\nНазвание акции:\nВид (скидка в процентах или франках, акционная цена, подарок, бесплатное знакомство):\nРазмер скидки или цена:\nНа какую услугу или товар:\nПервый и последний день (не больше 90 дней):\nГде действует (адрес из карточки или онлайн):\nУсловия (только новым клиентам, по записи и так далее):\nКак записаться:\nКоротко об акции (2–3 предложения):\n')}`
+  : `mailto:${MAIL}?subject=${encodeURIComponent('Событие для «Свои люди в Швейцарии»')}&body=${encodeURIComponent('Здравствуйте!\n\nХочу разместить событие.\n\nНазвание:\nДата и время (если повторяется — как часто):\nМесто (адрес) или онлайн:\nЯзык:\nЦена или «бесплатно»:\nОрганизатор (имя, сообщество или фирма):\nUID или ферайн (для платных событий):\nСсылка на запись:\nКоротко о событии (2–3 предложения):\nКонтакт для вопросов:\n')}`;
+if (AK) document.querySelectorAll('#monthIcs,.viewsw').forEach(el => { el.style.display = 'none'; });
 fillSelects(); render();
-const fromHash = () => { const id = decodeURIComponent(location.hash.slice(1)); if (id === 'digest'){ digest(); return; } if (id.startsWith('ok=')){ const [eid, key] = id.slice(3).split('.'); const e = EVENTS.find(x => x.id === eid); if (e && e.key && key === e.key) openEvent(eid, null, true); return; }
+const fromHash = () => { const id = decodeURIComponent(location.hash.slice(1)); if (id === 'digest'){ digest(); return; }
+  const e0 = EVENTS.find(x => x.id === id); if (!AK && e0 && isPromo(e0)){ location.replace('../akcii/#' + encodeURIComponent(id)); return; } if (id.startsWith('ok=')){ const [eid, key] = id.slice(3).split('.'); const e = EVENTS.find(x => x.id === eid); if (e && e.key && key === e.key) openEvent(eid, null, true); return; }
   if (id && EVENTS.some(e => e.id === id && ((e.status === 'активен' && live(e)) || ADMIN))) openEvent(id); };
 fromHash(); addEventListener('hashchange', fromHash);
 </script>

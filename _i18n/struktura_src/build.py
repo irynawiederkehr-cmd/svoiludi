@@ -175,6 +175,7 @@ PROICON = {
     'anketa': _PC + '<rect x="30" y="25" width="40" height="52" rx="6" fill="#E3E8D6" stroke="#4F5E3E" stroke-width="3"/><rect x="40" y="19" width="20" height="11" rx="3.5" fill="#FFFCF8" stroke="#4F5E3E" stroke-width="2.6"/><path d="M38 43h24M38 53h24M38 63h14" stroke="#4F5E3E" stroke-width="3" stroke-linecap="round"/>',
     'badge': _PC + '<path d="M41 56l-6 21 9-5 5 8 3-19M59 56l6 21-9-5-5 8-3-19" fill="#FFF6DF" stroke="#B98324" stroke-width="2.6" stroke-linejoin="round"/><circle cx="50" cy="43" r="17" fill="#F3E3C2" stroke="#B98324" stroke-width="3"/><path d="M50 51s-7.5-4.6-9-8.6a4.8 4.8 0 0 1 9-4.4 4.8 4.8 0 0 1 9 4.4c-1.5 4-9 8.6-9 8.6z" fill="#FFFCF8" stroke="#B98324" stroke-width="2.4" stroke-linejoin="round"/>',
     'org': _PC + '<rect x="30" y="45" width="40" height="29" rx="3" fill="#E3E8D6" stroke="#4F5E3E" stroke-width="3"/><path d="M24 47l26-20 26 20" fill="none" stroke="#4F5E3E" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M50 68s-8-5-9.6-9.3a5 5 0 0 1 9.6-4.6 5 5 0 0 1 9.6 4.6C58 63 50 68 50 68z" fill="#F7E1EC" stroke="#B5357A" stroke-width="2.4" stroke-linejoin="round"/>',
+    'promo': _PC + '<path d="M28 33h30a6 6 0 0 1 4.300 1.800l15 15.600a6 6 0 0 1 0 8.300L55 74.200a6 6 0 0 1-8.500 0L28 55.700a6 6 0 0 1-1.800-4.300V39a6 6 0 0 1 6-6z" fill="#F6E0D9" stroke="#B8472E" stroke-width="3" stroke-linejoin="round"/><circle cx="38" cy="43" r="4" fill="#FFFCF8" stroke="#B8472E" stroke-width="2.400"/><path d="M47 48l16 16" stroke="#B8472E" stroke-width="3" stroke-linecap="round"/><circle cx="51" cy="52" r="2.600" fill="#B8472E"/><circle cx="59" cy="60" r="2.600" fill="#B8472E"/>',
     'event': _PC + '<rect x="24" y="29" width="52" height="45" rx="6" fill="#F6E0D9" stroke="#A0523D" stroke-width="3"/><path d="M24 42h52" stroke="#A0523D" stroke-width="3"/><path d="M38 22v12M62 22v12" stroke="#A0523D" stroke-width="3" stroke-linecap="round"/><path d="M50 51l2.6 5.3 5.8.8-4.2 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8-4.2-4.1 5.8-.8z" fill="#FFFCF8" stroke="#A0523D" stroke-width="2.2" stroke-linejoin="round"/>',
 }
 def pico(k):
@@ -203,6 +204,7 @@ def dlya_specialistov():
     {'<a class="pro-card" href="../organizacii/#add">' + pico("org") + '<b>Организации и фирмы</b><p>Кто помогает людям бесплатно — бесплатно всегда. Фирма или ферайн со взносом или платой за занятия — на условиях специалистов: до конца 2027 года бесплатно.</p><span class="go">Разместить организацию →</span></a>' if os.path.isfile('organizacii/index.html') else ''}
     <a class="pro-card" href="../kursy/#add">{pico("kurs")}<b>Добавить курс или занятие</b><p>Регулярные занятия, курсы, мастер-классы, вебинары. Размещение бесплатно до конца 2027 года. Курсы видны и в вашей карточке.</p><span class="go">Добавить курс →</span></a>
     <a class="pro-card" href="../events/#add">{pico("event")}<b>Добавить событие</b><p>Встреча, праздник, выставка, лекция. События видны в афише и в вашей карточке.</p><span class="go">Добавить событие →</span></a>
+    <a class="pro-card" href="../akcii/#akciya">{pico("promo")}<b>Разместить акцию</b><p>Скидка, акционная цена, подарок или бесплатное знакомство со специалистом, магазином или студией. Акция видна на вкладке «Акции» и сразу в вашей карточке. Размещение бесплатно до конца 2027 года.</p><span class="go">Разместить акцию →</span></a>
     {'<a class="pro-card" href="../vakansii/">' + pico("vak") + '<b>Ищете сотрудника или партнёра?</b><p>Разместите вакансию или поиск партнёра во вкладке «Вакансии и партнёрство». Бесплатно для всех и всегда, карточка в справочнике не нужна.</p><span class="go">Вакансии и партнёрство →</span></a>' if vak else ''}
   </div>
   <section class="tm-schemes" aria-labelledby="h-tools"><h2 id="h-tools">Инструменты для своего дела</h2><p>Бесплатно, без регистрации, PDF на русском и на языке кантона.</p><div class="pro-tools">{cards}</div></section>
@@ -636,12 +638,16 @@ def home_blocks():
         open(p, 'w', encoding='utf-8').write(h2)
 
 def evk():
-    for p, cur in [('events/index.html', 'ev'), ('kursy/index.html', 'ku')]:
+    # 11.10.2026: третья вкладка «Акции» (решение Ирины: «где на сайте будут акции? где в меню или фильтрах?»).
+    # Страницу akcii/ собирает _i18n/akcii_src/build.py из events/index.html — запускать его до этой функции.
+    TABS = [('ev', 'events/', 'События'), ('ak', 'akcii/', 'Акции'), ('ku', 'kursy/', 'Курсы и занятия')]
+    for p, cur in [('events/index.html', 'ev'), ('kursy/index.html', 'ku'), ('akcii/index.html', 'ak')]:
+        if not os.path.isfile(p): continue
         h = open(p, encoding='utf-8').read()
         h = re.sub(r'<!--evk-->.*?<!--evk-->', '', h, flags=re.S)
-        sw = ('<!--evk--><nav class="evk" aria-label="События и курсы">'
-              + (f'<a href="./" aria-current="page">События</a><a href="../kursy/">Курсы и занятия</a>' if cur == 'ev' else f'<a href="../events/">События</a><a href="./" aria-current="page">Курсы и занятия</a>')
-              + '</nav><style>.evk{display:inline-flex;flex-wrap:wrap;gap:4px;background:var(--sage-soft,#E3E6D6);border-radius:12px;padding:4px;margin:0 0 14px;order:0;width:auto;align-self:flex-start;overflow:visible}.evk a{padding:7px 16px;border-radius:9px;font-weight:700;font-size:.9rem;text-decoration:none;color:var(--ink);background:none;border:0;box-shadow:none}.evk a[aria-current]{background:var(--paper,#FFFCF8);box-shadow:0 1px 4px rgba(0,0,0,.12);color:var(--ink)!important}@media (max-width:420px){.evk{gap:2px}.evk a{padding:7px 9px;font-size:.84rem}}@media (max-width:380px){.evk a{padding:7px 7px;font-size:.8rem}}</style><!--evk-->')
+        links = ''.join(f'<a href="./" aria-current="page">{t}</a>' if c == cur else f'<a href="../{d}">{t}</a>' for c, d, t in TABS)
+        sw = ('<!--evk--><nav class="evk" aria-label="События, акции и курсы">' + links
+              + '</nav><style>.evk{display:inline-flex;flex-wrap:wrap;gap:4px;background:var(--sage-soft,#E3E6D6);border-radius:12px;padding:4px;margin:0 0 14px;order:0;width:auto;align-self:flex-start;overflow:visible}.evk a{padding:7px 16px;border-radius:9px;font-weight:700;font-size:.9rem;text-decoration:none;color:var(--ink);background:none;border:0;box-shadow:none}.evk a[aria-current]{background:var(--paper,#FFFCF8);box-shadow:0 1px 4px rgba(0,0,0,.12);color:var(--ink)!important}@media (max-width:420px){.evk{gap:2px}.evk a{padding:7px 9px;font-size:.84rem}}@media (max-width:380px){.evk a{padding:7px 7px;font-size:.8rem}}</style><!--evk--><!--evk-->')
         h = re.sub(r'(<div class="hero-txt">\s*)', lambda m: m.group(1) + sw, h, count=1)
         open(p, 'w', encoding='utf-8').write(h)
     # 11.10.2026: у .evk order:0, width:auto, align-self:flex-start — на телефоне общее правило страниц nav{order:3;width:100%}

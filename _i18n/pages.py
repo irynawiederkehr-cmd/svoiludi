@@ -10,7 +10,7 @@ I18N = os.path.join(ROOT, '_i18n')
 SITE = 'https://svoiludi.ch'
 L = 'uk'
 KEY = 'svoiludiLang'
-PAGES = [('index.html', '/'), ('events/index.html', '/events/'), ('kursy/index.html', '/kursy/'), ('vakansii/index.html', '/vakansii/'), ('organizacii/index.html', '/organizacii/'), ('join/index.html', '/join/'), ('opros/index.html', '/opros/'),
+PAGES = [('index.html', '/'), ('events/index.html', '/events/'), ('akcii/index.html', '/akcii/'), ('kursy/index.html', '/kursy/'), ('vakansii/index.html', '/vakansii/'), ('organizacii/index.html', '/organizacii/'), ('join/index.html', '/join/'), ('opros/index.html', '/opros/'),
          ('badge/index.html', '/badge/'), ('instrumenty/index.html', '/instrumenty/'), ('instrumenty/moj-den/index.html', '/instrumenty/moj-den/'),
          ('instrumenty/moj-god/index.html', '/instrumenty/moj-god/'), ('instrumenty/moi-emocii/index.html', '/instrumenty/moi-emocii/'),
          ('instrumenty/moj-budget/index.html', '/instrumenty/moj-budget/'),
@@ -163,11 +163,11 @@ def fix_links(html, base):
         q, url, rest = m.group(1), m.group(2), m.group(3)
         uk = own_uk(resolve(base, url))
         return q + (uk or url) + rest
-    html = re.sub(r"(['\"`])((?:\.\./)*(?:events|kursy|join|opros|badge|instrumenty(?:/[a-z-]+)?|shveycariya(?:/[a-z0-9-]+)?)/)(#|\1)", js, html)
+    html = re.sub(r"(['\"`])((?:\.\./)*(?:events|akcii|kursy|join|opros|badge|instrumenty(?:/[a-z-]+)?|shveycariya(?:/[a-z0-9-]+)?)/)(#|\1)", js, html)
     # 4) абсолютные ссылки https://svoiludi.ch/страница (в разметке, скриптах и готовых сообщениях)
     def absu(m):
         return SITE + (own_uk(m.group(1) or '/') or (m.group(1) or '/'))
-    html = re.sub(r'https://svoiludi\.ch(/(?:events/|kursy/|join/|opros/|badge/|privacy/|o-proekte/|usloviya/|instrumenty/(?:[a-z-]+/)?|shveycariya/(?:[a-z0-9-]+/)?)?)(?=["\'`#?<)\s]|$)', absu, html)
+    html = re.sub(r'https://svoiludi\.ch(/(?:events/|akcii/|kursy/|join/|opros/|badge/|privacy/|o-proekte/|usloviya/|instrumenty/(?:[a-z-]+/)?|shveycariya/(?:[a-z0-9-]+/)?)?)(?=["\'`#?<)\s]|$)', absu, html)
     # 4б) ссылки на сайт Ирины — на его украинскую версию
     html = re.sub(r'https://voznesenskaya\.ch/(#[\w-]*)?(?=["\'`<)\s])', lambda m: 'https://voznesenskaya.ch/uk/' + (m.group(1) or ''), html)
     html = re.sub(r'https://voznesenskaya\.ch/(privacy|impressum)/(?=["\'`<)\s])', lambda m: f'https://voznesenskaya.ch/{m.group(1)}/#lang=uk', html)

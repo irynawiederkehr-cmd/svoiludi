@@ -21,6 +21,9 @@ const CARDS = [
   { out: 'events/og-image', url: '/events/', sel: '.finder',
     ru: { eb: EB.ru, title: 'Встречи рядом с тобой', desc: 'Разговорные клубы, встречи мам, праздники для детей, лекции и ретриты на русском.', chip: 'По всем кантонам' },
     uk: { eb: EB.uk, title: 'Зустрічі поруч із тобою', desc: 'Розмовні клуби, зустрічі мам, свята для дітей, лекції та ретрити російською.', chip: 'По всіх кантонах' } },
+  { out: 'akcii/og-image', url: '/akcii/', sel: '.pgrid', pad: true,
+    ru: { eb: EB.ru, title: 'Скидки и подарки от своих', desc: 'Акции специалистов и организаций по кантонам Швейцарии. Видны и в карточке специалиста.', chip: 'Реклама · по всем кантонам' },
+    uk: { eb: EB.uk, title: 'Знижки та подарунки від своїх', desc: 'Акції фахівців і організацій по кантонах Швейцарії. Видно й у картці фахівця.', chip: 'Реклама · по всіх кантонах' } },
   { out: 'organizacii/og-image', url: '/organizacii/', sel: '#add .vac-add',
     ru: { eb: EB.ru, title: 'Организации, которые помогают своим', desc: 'Центры помощи, школы выходного дня, общества, деловые сообщества и фирмы своих для украинцев и русскоязычных в Швейцарии.', chip: 'Помогаете бесплатно — бесплатно всегда' },
     uk: { eb: EB.uk, title: 'Організації, які допомагають своїм', desc: 'Центри допомоги, школи вихідного дня, товариства, ділові спільноти й фірми своїх для українців і російськомовних у Швейцарії.', chip: 'Допомагаєте безкоштовно — безкоштовно завжди' } },
@@ -208,6 +211,7 @@ function check() {   // страницы без og:image
       const pg = await (await b.newContext({ viewport: { width: 1100, height: 840 } })).newPage();
       for (let t = 0; t < 3; t++) { try { await pg.goto(BASE + (lang === 'uk' ? '/uk' : '') + c.url, { waitUntil: 'domcontentloaded', timeout: 45000 }); break; } catch (e) { if (t === 2) throw e; } } await pg.waitForTimeout(1500);
       await pg.evaluate(() => { const l = document.getElementById('langbar'); if (l) l.remove(); document.querySelectorAll('header').forEach(h => { h.style.position = 'static'; }); });
+      if (c.pad) await pg.evaluate(() => { document.body.style.paddingBottom = '1400px'; document.documentElement.style.scrollBehavior = 'auto'; document.querySelectorAll('header, .top').forEach(h => h.style.setProperty('display', 'none', 'important')); });   // короткая страница: без запаса снизу прокрутка не доходит до нужного места
       if (await pg.$(c.sel)) await pg.evaluate(s => { const e = document.querySelector(s); window.scrollTo(0, e.getBoundingClientRect().top + window.scrollY - 30); }, c.sel);
       await pg.waitForTimeout(300);
       visual = `<div class="shot"><img src="data:image/png;base64,${(await pg.screenshot({ type: 'png' })).toString('base64')}"></div>`;
