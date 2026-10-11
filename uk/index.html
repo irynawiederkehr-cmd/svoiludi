@@ -661,7 +661,7 @@ a.bot:hover{color:#B98324}
         <select id="cat"></select>
       </div>
       <div class="fld w3">
-        <label for="spec"><i>5</i>Спеціалізація</label>
+        <label for="spec"><i>5</i>Категорія</label>
         <select id="spec" disabled></select>
       </div>
       <div class="fld q">
@@ -814,6 +814,15 @@ dirBody:   (c, f, s) => `<circle cx="11" cy="9.5" r="6.2" fill="${f}" stroke="${
   dirKids:   (c, f, s) => `<circle cx="8" cy="5" r="2.3" fill="${f}" stroke="${c}" ${s}/><path d="M5.5 21v-6l-1-1v-4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v4l-1 1v6" fill="${f}" stroke="${c}" ${s}/><circle cx="17" cy="11" r="1.9" fill="${f}" stroke="${c}" ${s}/><path d="M15.2 21v-3.8l-.8-.8v-2a1.5 1.5 0 0 1 1.5-1.5h2.2a1.5 1.5 0 0 1 1.5 1.5v2l-.8.8V21M11.5 13.5h2.9" fill="${f}" stroke="${c}" ${s}/>`,
   dirLearn:  (c, f, s) => `<path d="M12 4 2.5 9 12 14l9.5-5z" fill="${f}" stroke="${c}" ${s}/><path d="M6.5 11.3V16c1.6 1.5 3.5 2.3 5.5 2.3s3.9-.8 5.5-2.3v-4.7M21.5 9v5.5" fill="none" stroke="${c}" ${s}/>`,
   dirHome:   (c, f, s) => `<path d="M5.5 9.5V20h13V9.5" fill="${f}" stroke="${c}" ${s}/><path d="M3.5 11 12 4l8.5 7M10 20v-5h4v5M16 6.2V4.5h2v3.3" fill="none" stroke="${c}" ${s}/>`,
+  /* новые направления (11.10.2026): комплементарная медицина, уход, животные, работа, своё дело, авто, спорт, еда */
+  dirAlt:    (c, f, s) => `<path d="M5 19.5c0-8.5 5.5-14.5 15-15.5 0 10-6 15.5-15 15.5z" fill="${f}" stroke="${c}" ${s}/><path d="M5 19.5c3-4.2 6.2-7.4 10.5-10.5" fill="none" stroke="${c}" ${s}/>`,
+  dirCare:   (c, f, s) => `<path d="M12 12.3c-2.7-1.8-4.4-3.3-4.4-5.2a2.2 2.2 0 0 1 4.4-1 2.2 2.2 0 0 1 4.4 1c0 1.9-1.7 3.4-4.4 5.2z" fill="${f}" stroke="${c}" ${s}/><path d="M2.8 15h3.4l3.8 1.8h3.8a1.4 1.4 0 0 0 0-2.8h-2.6M13.6 14.2l4.5-1.8a1.5 1.5 0 0 1 1.3 2.7l-6.6 4.4H6.2M2.8 20.5h3.4" fill="none" stroke="${c}" ${s}/>`,
+  dirPets:   (c, f, s) => `<path d="M12 11.5c3 0 5.3 2.9 5.3 5.3 0 1.9-1.5 3-3.1 3-1 0-1.4-.5-2.2-.5s-1.2.5-2.2.5c-1.6 0-3.1-1.1-3.1-3 0-2.4 2.3-5.3 5.3-5.3z" fill="${f}" stroke="${c}" ${s}/><circle cx="5.6" cy="10.4" r="1.9" fill="${f}" stroke="${c}" ${s}/><circle cx="9.2" cy="6.2" r="1.9" fill="${f}" stroke="${c}" ${s}/><circle cx="14.8" cy="6.2" r="1.9" fill="${f}" stroke="${c}" ${s}/><circle cx="18.4" cy="10.4" r="1.9" fill="${f}" stroke="${c}" ${s}/>`,
+  dirWork:   (c, f, s) => `<rect x="3.5" y="7.5" width="17" height="12" rx="2" fill="${f}" stroke="${c}" ${s}/><path d="M9 7.5V5.6A1.6 1.6 0 0 1 10.6 4h2.8A1.6 1.6 0 0 1 15 5.6v1.9M3.5 12.5h17M10.8 12.5v1.8h2.4v-1.8" fill="none" stroke="${c}" ${s}/>`,
+  dirBiz:    (c, f, s) => `<rect x="4.5" y="4.5" width="15" height="10.5" rx="1.5" fill="${f}" stroke="${c}" ${s}/><path d="M2.5 19h19M10 15v4M14 15v4M7.5 12l3-3 2 2 3.8-3.8M14 7.2h2.3v2.3" fill="none" stroke="${c}" ${s}/>`,
+  dirAuto:   (c, f, s) => `<path d="M3.8 16.2v-3.4l1.9-4.6A2 2 0 0 1 7.6 7h8.8a2 2 0 0 1 1.9 1.2l1.9 4.6v3.4z" fill="${f}" stroke="${c}" ${s}/><path d="M3.8 12.8h16.4M3.8 16.2v2.3M20.2 16.2v2.3" fill="none" stroke="${c}" ${s}/><circle cx="7.6" cy="16.2" r="1.7" fill="${c}"/><circle cx="16.4" cy="16.2" r="1.7" fill="${c}"/>`,
+  dirSport:  (c, f, s) => `<circle cx="12" cy="12" r="8.3" fill="${f}" stroke="${c}" ${s}/><path d="M4.2 9.4c3.4 1.4 5.6 4.6 6 10.8M19.8 9.4c-3.4 1.4-5.6 4.6-6 10.8M7.6 4.9c2.8 2.2 6 2.2 8.8 0" fill="none" stroke="${c}" ${s}/>`,
+  dirFood:   (c, f, s) => `<path d="M4.5 11h15v4.4a4.1 4.1 0 0 1-4.1 4.1H8.6a4.1 4.1 0 0 1-4.1-4.1z" fill="${f}" stroke="${c}" ${s}/><path d="M2.8 11h18.4M9 3.8c-.8 1 .8 2 0 3.2M12 3.8c-.8 1 .8 2 0 3.2M15 3.8c-.8 1 .8 2 0 3.2" fill="none" stroke="${c}" ${s}/>`,
   dirEvents: (c, f, s) => `<path d="M5.5 20.5v-6a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v6" fill="${f}" stroke="${c}" ${s}/><path d="M3.8 20.5h16.4M5.5 16.2c1.2 1 2.5 1 3.6 0 1.2 1 2.5 1 3.6 0 1.2 1 2.5 1 3.6 0 .7.6 1.4.8 2.2.6M12 12.5V9.3" fill="none" stroke="${c}" ${s}/><path d="M12 4.5c1.1 1.3 1.1 2.6 0 3.3-1.1-.7-1.1-2-0-3.3z" fill="${c}" stroke="${c}" stroke-width="1" stroke-linejoin="round"/>`
 };
 /* светлый тон цвета для заливки по умолчанию */
@@ -829,8 +838,8 @@ function ico(name, line = '#2E5A88', fill, size = 24){
 const AVATAR_SVG = '<svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="46" fill="#FFFCF8" stroke="#6E4F3C" stroke-width="3"/><g transform="rotate(22.5 50 50)"><path d="M50 50 C42 40 43 24 50 15 C57 24 58 40 50 50Z" fill="#E3E6D6" stroke="#66704F" stroke-width="2"/></g><g transform="rotate(67.5 50 50)"><path d="M50 50 C42 40 43 24 50 15 C57 24 58 40 50 50Z" fill="#E3E6D6" stroke="#66704F" stroke-width="2"/></g><g transform="rotate(112.5 50 50)"><path d="M50 50 C42 40 43 24 50 15 C57 24 58 40 50 50Z" fill="#E3E6D6" stroke="#66704F" stroke-width="2"/></g><g transform="rotate(157.5 50 50)"><path d="M50 50 C42 40 43 24 50 15 C57 24 58 40 50 50Z" fill="#E3E6D6" stroke="#66704F" stroke-width="2"/></g><g transform="rotate(202.5 50 50)"><path d="M50 50 C42 40 43 24 50 15 C57 24 58 40 50 50Z" fill="#E3E6D6" stroke="#66704F" stroke-width="2"/></g><g transform="rotate(247.5 50 50)"><path d="M50 50 C42 40 43 24 50 15 C57 24 58 40 50 50Z" fill="#E3E6D6" stroke="#66704F" stroke-width="2"/></g><g transform="rotate(292.5 50 50)"><path d="M50 50 C42 40 43 24 50 15 C57 24 58 40 50 50Z" fill="#E3E6D6" stroke="#66704F" stroke-width="2"/></g><g transform="rotate(337.5 50 50)"><path d="M50 50 C42 40 43 24 50 15 C57 24 58 40 50 50Z" fill="#E3E6D6" stroke="#66704F" stroke-width="2"/></g><g transform="rotate(0.0 50 50)"><path d="M50 50 C45 43 45 32 50 26 C55 32 55 43 50 50Z" fill="#EADFCF" stroke="#6E4F3C" stroke-width="2"/></g><g transform="rotate(45.0 50 50)"><path d="M50 50 C45 43 45 32 50 26 C55 32 55 43 50 50Z" fill="#EADFCF" stroke="#6E4F3C" stroke-width="2"/></g><g transform="rotate(90.0 50 50)"><path d="M50 50 C45 43 45 32 50 26 C55 32 55 43 50 50Z" fill="#EADFCF" stroke="#6E4F3C" stroke-width="2"/></g><g transform="rotate(135.0 50 50)"><path d="M50 50 C45 43 45 32 50 26 C55 32 55 43 50 50Z" fill="#EADFCF" stroke="#6E4F3C" stroke-width="2"/></g><g transform="rotate(180.0 50 50)"><path d="M50 50 C45 43 45 32 50 26 C55 32 55 43 50 50Z" fill="#EADFCF" stroke="#6E4F3C" stroke-width="2"/></g><g transform="rotate(225.0 50 50)"><path d="M50 50 C45 43 45 32 50 26 C55 32 55 43 50 50Z" fill="#EADFCF" stroke="#6E4F3C" stroke-width="2"/></g><g transform="rotate(270.0 50 50)"><path d="M50 50 C45 43 45 32 50 26 C55 32 55 43 50 50Z" fill="#EADFCF" stroke="#6E4F3C" stroke-width="2"/></g><g transform="rotate(315.0 50 50)"><path d="M50 50 C45 43 45 32 50 26 C55 32 55 43 50 50Z" fill="#EADFCF" stroke="#6E4F3C" stroke-width="2"/></g><circle cx="50" cy="50" r="7" fill="#B98324"/></svg>';
 
 </script>
-<script src="/data/specialists.uk.js?v=f3ab927c"></script>
-<script src="/data/vacancies.uk.js?v=5de638b0"></script>
+<script src="/data/specialists.uk.js?v=d5c961d6"></script>
+<script src="/data/vacancies.uk.js?v=1889cf60"></script>
 <script src="/data/organizations.uk.js?v=489feb29"></script>
 <script>
 window.IMG_BASE = 'img/';
@@ -845,20 +854,29 @@ const ADMIN = (() => {   // режим Ирины: svoiludi.ch/?ira=1 включ
   try { const q = location.search; if (/[?&]ira=1/.test(q)) localStorage.setItem('svoiludi-admin', '1'); if (/[?&]ira=0/.test(q)) localStorage.removeItem('svoiludi-admin'); return localStorage.getItem('svoiludi-admin') === '1'; }
   catch (e) { return /[?&]ira=1/.test(location.search); } })();
 const TRIAL = false;  // устарело: образцы теперь помечаются в карточке (sample: true), плашка «Пробная версия» видна только в режиме Ирины
-const CATS = {   // направление → цвет, значок и список специализаций (порядок = порядок в списках)
-  status: { t: 'Документи і статус',        c: '#3F6FBF', i: 'dirStatus',      s: ['Дозволи і статус', 'Натуралізація', 'Листи та форми', 'Засвідчені переклади', 'Усний переклад', 'Соціальні питання і допомога', 'Нотаріус'] },
-  law:    { t: 'Юристи',                    c: '#4F6D7A', i: 'dirLaw',      s: ['Міграційне право', 'Сімейне право', 'Трудове право', 'Оренда', 'Борги і стягнення', 'Спадщина і заповіти', 'Права споживачів', 'Медіація'] },
-  money:  { t: 'Податки і фінанси',          c: '#C97E52', i: 'dirMoney', s: ['Податкова декларація', 'Бухгалтерія і Treuhand', 'Фінансове планування', 'Іпотека і банки', 'Консультації з боргів'] },
-  insure: { t: 'Страхування і пенсія',      c: '#A99A2E', i: 'dirInsure',   s: ['Страховий брокер', 'Пенсія AHV і BVG'] },
-  health: { t: 'Лікарі і здоров’я',          c: '#C25468', i: 'dirHealth',    s: ['Сімейний лікар', 'Педіатр', 'Гінеколог', 'Стоматолог', 'Інші лікарі-спеціалісти', 'Фізіотерапія', 'Остеопатія', 'Акушерка', 'Дієтолог', 'Догляд удома (Spitex)'] },
-  psy:    { t: 'Психологічна допомога',    c: '#6A5FB8', i: 'dirPsy',   s: ['Психотерапевт', 'Психіатр', 'Психолог'] },   // только с признанным дипломом / разрешением
-  coach:  { t: 'Коучинг і особистісний розвиток', c: '#8E5A86', i: 'dirCoach',  s: ['Коуч', 'Сімейний консультант', 'Консультант з адаптації'] },
-  body:   { t: 'Тіло і краса',            c: '#4E9A70', i: 'dirBody',    s: ['Масаж', 'Косметолог', 'Перукар', 'Манікюр', 'Фітнес і йога'] },
-  kids:   { t: 'Діти і сім’я',              c: '#B5648E', i: 'dirKids',   s: ['Логопед', 'Дитячий психолог', 'Репетитор', 'Підготовка до гімназії', 'Російська школа і білінгвізм', 'Ясла і дитячий садок', 'Няня', 'Гуртки і заняття', 'Догляд за літніми людьми'] },
-  learn:  { t: 'Мова, навчання і робота',      c: '#2894A0', i: 'dirLearn',   s: ['Німецька мова', 'Французька мова', 'Італійська мова', 'Підготовка до fide', 'Визнання дипломів', 'Кар’єра і резюме', 'Пошук роботи і рекрутинг', 'Курси і перекваліфікація', 'Відкриття власної справи'] },
-  home:   { t: 'Дім, побут і транспорт',      c: '#8E8470', i: 'dirHome',     s: ['Рієлтор', 'Переїзд', 'Міжнародний переїзд і митниця', 'Прибирання зі здачею квартири', 'Прибирання і допомога по дому', 'Ремонт', 'Електрик і сантехнік', 'Комп’ютерна допомога', 'Автошкола', 'Автосервіс', 'Ветеринар і догляд за тваринами', 'Перетримка й вигул тварин'] },
-  events: { t: 'Свята, фото і їжа',     c: '#C0663A', i: 'dirEvents',      s: ['Фотограф і відеограф', 'Організація свят', 'Торти і домашня кухня', 'Флорист і декор'] }
+const CATS = {   // направление → название, группа, цвет, значок, категории (s) и их немецкие слова для поиска (w). Собирается _i18n/kategorii.py — правь там (11.10.2026)
+  status: { t: 'Документи, переклади й установи',      g: 'docs', c: '#3F6FBF', i: 'dirStatus', s: ['Листи та форми', 'Пермит: заяви й продовження', 'Підготовка до натуралізації', 'Соціальні допомоги й соцконсультація', 'Письмовий переклад', 'Засвідчений переклад і апостиль', 'Усний переклад: лікар, установа, суд'], w: ['Briefe, Formulare', 'Aufenthaltsbewilligung', 'Einbürgerung', 'Sozialberatung', 'Übersetzung', 'beglaubigte Übersetzung, Apostille', 'Dolmetschen'] },
+  law:    { t: 'Юристи й нотаріуси',                   g: 'docs', c: '#4F6D7A', i: 'dirLaw', s: ['Міграційне право', 'Сім’я і розлучення', 'Трудове право', 'Оренда і житло', 'Спадщина і заповіт', 'Договори й права споживачів', 'Стягнення боргів і Betreibung', 'Штрафи й кримінальні справи', 'Право для фірм', 'Право України та інших країн', 'Нотаріус'], w: ['Migrationsrecht', 'Familienrecht, Scheidung', 'Arbeitsrecht', 'Mietrecht', 'Erbrecht, Testament', 'Vertragsrecht, Konsumentenrecht', 'Betreibungsrecht, SchKG', 'Strafrecht, Strafbefehl', 'Gesellschaftsrecht', 'ausländisches Recht', 'Notar, Notariat'] },
+  money:  { t: 'Податки, бухгалтерія і гроші',         g: 'docs', c: '#C97E52', i: 'dirMoney', s: ['Податкова декларація', 'Бухгалтерія і Treuhand', 'Зарплата і внески для роботодавців', 'Фінансове планування й інвестиції', 'Іпотека й купівля житла', 'Бюджет і борги'], w: ['Steuererklärung', 'Buchhaltung, Treuhand', 'Lohnbuchhaltung', 'Finanzplanung, Anlageberatung', 'Hypothek', 'Budgetberatung, Schuldenberatung'] },
+  insure: { t: 'Страхування і пенсія',                 g: 'docs', c: '#A99A2E', i: 'dirInsure', s: ['Страховий брокер', 'Медстраховка: вибір і зміна каси', 'Пенсія: AHV, BVG і 3a', 'Страхування для власної справи'], w: ['Versicherungsbroker', 'Krankenkasse wechseln', 'Vorsorge, Säule 3a', 'Betriebsversicherung'] },
+  health: { t: 'Лікарі й медицина',                     g: 'zdorovye', c: '#C25468', i: 'dirHealth', s: ['Сімейний лікар', 'Педіатр', 'Гінеколог', 'Стоматолог і гігієна ротової порожнини', 'Інші лікарі-спеціалісти', 'Акушерка', 'Фізіотерапія', 'Ерготерапія', 'Остеопатія', 'Дієтолог', 'Оптометрист', 'Логопед — діти й дорослі', 'Медичний масаж'], w: ['Hausarzt', 'Kinderarzt', 'Frauenarzt, Gynäkologie', 'Zahnarzt, Dentalhygiene', 'Facharzt', 'Hebamme', 'Physiotherapie', 'Ergotherapie', 'Osteopathie', 'Ernährungsberatung', 'Optometrie', 'Logopädie', 'medizinische Massage'] },
+  alt:    { t: 'Комплементарна медицина',             g: 'zdorovye', c: '#6B8E3E', i: 'dirAlt', s: ['Натуропатія', 'Китайська медицина й акупунктура', 'Кінезіологія', 'Гомеопатія', 'Терапії за методами EMR і ASCA'], w: ['Naturheilpraktik', 'TCM, Akupunktur', 'Kinesiologie', 'Homöopathie', 'Shiatsu, Reflexzonentherapie'] },
+  psy:    { t: 'Психологічна допомога',               g: 'zdorovye', c: '#6A5FB8', i: 'dirPsy', s: ['Психотерапевт', 'Психіатр', 'Психолог', 'Дитячий і підлітковий психолог або психотерапевт', 'Парна й сімейна психотерапія'], w: ['Psychotherapie', 'Psychiater', 'Psychologe', 'Kinder- und Jugendpsychologie', 'Paartherapie, Familientherapie'] },
+  coach:  { t: 'Коучинг, консультування й медіація', g: 'zdorovye', c: '#8E5A86', i: 'dirCoach', s: ['Коуч', 'Консультант з адаптації та інтеграції', 'Консультації для пар і сімей, без терапії', 'Медіатор', 'Ментор для фахівців і керівників'], w: ['Coaching', 'Integrationsberatung', 'Paarberatung, Familienberatung', 'Mediation', 'Mentoring'] },
+  kids:   { t: 'Діти: догляд і навчання',                   g: 'semya', c: '#B5648E', i: 'dirKids', s: ['Няня', 'Денна мама', 'Репетитор зі шкільних предметів', 'Підготовка до гімназії та іспитів'], w: ['Nanny, Kinderbetreuung', 'Tagesmutter, Tagesfamilie', 'Nachhilfe', 'Gymiprüfung'] },
+  care:   { t: 'Догляд за літніми й близькими',          g: 'semya', c: '#B5735A', i: 'dirCare', s: ['Допомога літнім удома і компанія', 'Помічниця з проживанням', 'Медичний догляд удома', 'Асистент для людей з інвалідністю'], w: ['Seniorenbetreuung', '24-Stunden-Betreuung', 'Spitex, Pflege', 'Assistenz'] },
+  pets:   { t: 'Тварини',                             g: 'semya', c: '#8A6A45', i: 'dirPets', s: ['Ветеринар', 'Перетримка й вигул', 'Грумінг', 'Дресирування собак'], w: ['Tierarzt', 'Tierbetreuung, Hundesitter', 'Hundecoiffeur', 'Hundetraining'] },
+  learn:  { t: 'Мови',                                g: 'ucheba', c: '#2894A0', i: 'dirLearn', s: ['Німецька мова', 'Швейцарська німецька', 'Французька мова', 'Італійська мова', 'Англійська мова', 'Підготовка до fide і мовних іспитів', 'Російська школа і білінгвізм'], w: ['Deutsch', 'Schweizerdeutsch', 'Französisch', 'Italienisch', 'Englisch', 'fide, telc, Goethe', 'Bilingualität'] },
+  work:   { t: 'Робота і кар’єра',                     g: 'ucheba', c: '#1F7A8C', i: 'dirWork', s: ['Резюме і співбесіда', 'Кар’єрний консультант', 'Визнання дипломів', 'Перекваліфікація і професійні курси'], w: ['Bewerbung, Lebenslauf', 'Laufbahnberatung', 'Diplomanerkennung', 'Weiterbildung, Umschulung'] },
+  biz:    { t: 'Власна справа і послуги для бізнесу',       g: 'ucheba', c: '#4C6A9A', i: 'dirBiz', s: ['Відкриття власної справи та фірми', 'Сайти й IT', 'Маркетинг і соцмережі', 'Дизайн і друк'], w: ['Gründungsberatung', 'Webdesign, IT', 'Marketing, Social Media', 'Grafikdesign, Druck'] },
+  home:   { t: 'Житло, ремонт і побут',                  g: 'zhizn', c: '#8E8470', i: 'dirHome', s: ['Рієлтор: купівля й продаж', 'Пошук квартири й релокація', 'Переїзд і вантажники', 'Міжнародний переїзд і митниця', 'Прибирання зі здачею квартири', 'Прибирання і допомога по дому', 'Ремонт і оздоблення', 'Майстер на годину й складання меблів', 'Електрик', 'Сантехнік', 'Сад і озеленення', 'Швачка, ремонт одягу й взуття', 'Комп’ютер, телефон та інтернет удома'], w: ['Immobilienmakler', 'Wohnungssuche, Relocation', 'Umzug', 'internationaler Umzug, Zoll', 'Endreinigung mit Abgabegarantie', 'Reinigung, Haushaltshilfe', 'Renovation, Malerarbeiten', 'Handwerker, Möbelmontage', 'Elektroinstallation', 'Sanitär', 'Gartenpflege', 'Änderungsschneiderei', 'Computerhilfe'] },
+  auto:   { t: 'Авто і транспорт',                     g: 'zhizn', c: '#5C6670', i: 'dirAuto', s: ['Автошкола', 'Автосервіс і шини', 'Таксі й трансфер', 'Кур’єр, перевезення й посилки в Україну'], w: ['Fahrschule', 'Autogarage, Reifen', 'Taxi, Transfer', 'Kurier, Transport'] },
+  body:   { t: 'Краса і догляд за собою',              g: 'zhizn', c: '#4E9A70', i: 'dirBody', s: ['Косметолог', 'Манікюр і педикюр', 'Перукар і барбер', 'Брови й вії', 'Візажист', 'Перманентний макіяж і тату', 'Видалення волосся й лазер', 'Масаж для відпочинку'], w: ['Kosmetik', 'Nageldesign, Fusspflege', 'Coiffeur, Barbier', 'Augenbrauen, Wimpern', 'Make-up', 'Permanent Make-up, Tattoo', 'Haarentfernung', 'Wellnessmassage'] },
+  sport:  { t: 'Спорт, музика і творчість',           g: 'zhizn', c: '#D08A2E', i: 'dirSport', s: ['Фітнес і персональний тренер', 'Йога й пілатес', 'Танці', 'Тренер зі спорту', 'Музика й вокал', 'Малювання і творчість', 'Шахи й розвивальні заняття'], w: ['Personal Training', 'Yoga, Pilates', 'Tanz', 'Sporttraining, Schwimmen', 'Musikunterricht', 'Kunst, Gestalten', 'Schach'] },
+  events: { t: 'Свята й події',                  g: 'zhizn', c: '#C0663A', i: 'dirEvents', s: ['Фотограф і відеограф', 'Організація свят і весіль', 'Ведучий, музиканти й DJ', 'Дитячі свята й аніматори', 'Декор і флорист', 'Екскурсії й гіди'], w: ['Fotograf, Videograf', 'Eventplanung, Hochzeit', 'Moderation, DJ', 'Kinderanimation', 'Dekoration, Floristik', 'Stadtführung'] },
+  food:   { t: 'Їжа на замовлення',                         g: 'zhizn', c: '#A84E3C', i: 'dirFood', s: ['Торти й десерти', 'Кейтеринг', 'Домашня кухня на замовлення'], w: ['Torten', 'Catering', 'hausgemachtes Essen'] }
 };
+const GROUPS = { docs: 'Документи, право і гроші', zdorovye: 'Здоров’я і душевний стан', semya: 'Сім’я, близькі й тварини', ucheba: 'Навчання, робота і власна справа', zhizn: 'Дім і повсякденне життя' };   // группы направлений в списке «Направление» (11.10.2026)
 
 // все 26 кантонов: как пишется в карточке (официально) → код и русское название
 const CANTONS = {
@@ -872,7 +890,7 @@ const CANTONS = {
 const LANG_FIRST = ['російська', 'українська', 'німецька', 'французька', 'італійська', 'англійська'];
 const MAIL = 'voznesenskaya.iryna@gmail.com';   // вся переписка по справочнику
 // пометки с фильтром (04.10.2026): только с подтверждением специалиста, страховки — по реестру
-const TAGS = { emr: 'Оплачує дод. страховка (EMR/ASCA)', basic: 'Покриває базова страховка', free1: 'Перша зустріч безкоштовно', kids: 'Працює з дітьми', evening: 'Увечері й у вихідні', access: 'Доступно з візочком' };
+const TAGS = { emr: 'Оплачує дод. страховка (EMR/ASCA)', basic: 'Покриває базова страховка', free1: 'Перша зустріч безкоштовно', kids: 'Працює з дітьми', seniors: 'Працює з літніми людьми', couples: 'Працює з парами й сім’ями', firms: 'Працює з фірмами', evening: 'Увечері й у вихідні', access: 'Доступно з візочком' };   // «для кого» — пометками, а не направлениями (11.10.2026)
 const NEW_DAYS = 30;   // значок «Новый» первые 30 дней после added
 const GC_CODE = 'svoiludi';    // статистика GoatCounter (без cookies): svoiludi.goatcounter.com — открытия карточек, звонки, маршрут, «в контакты», «поделиться»
 const MONTHS = ['січ', 'лют', 'бер', 'квіт', 'травня', 'черв', 'лип', 'серп', 'вер', 'жовт', 'лист', 'груд'];
@@ -960,14 +978,17 @@ const tierBest = s => (s.tiers || []).filter(x => state.hidden || live(x.until))
 // «Онлайн по всей Швейцарии» — платная опция: показ в блоке «Онлайн, из других кантонов»
 const onlineCH = s => s.online && (state.hidden || live(s.onlineCH));
 const pool = () => SPECIALISTS.filter(s => state.hidden || !hiddenReason(s));
-const hay = s => norm([s.name, s.role, s.firm, s.about, s.format, ...(s.tags || []).map(t => TAGS[t]), CATS[s.cat]?.t, ...(s.specs || []), ...(s.services || []), ...(s.langs || []), ...s.places.map(p => p.canton + ' ' + ktRu(p.canton) + ' ' + p.address)].join(' '));
+// направления карточки: главное (cat) и второе (cat2, необязательно; 11.10.2026); немецкие слова категорий — для поиска
+const dirsOf = s => [s.cat, s.cat2].filter(Boolean);
+const deOf = sp => { for (const k of Object.values(CATS)){ const i = k.s.indexOf(sp); if (i >= 0) return (k.w || [])[i] || ''; } return ''; };
+const hay = s => norm([s.name, s.role, s.firm, s.about, s.format, ...(s.tags || []).map(t => TAGS[t]), ...dirsOf(s).map(d => CATS[d]?.t), ...(s.specs || []), ...(s.specs || []).map(deOf), ...(s.services || []), ...(s.langs || []), ...s.places.map(p => p.canton + ' ' + ktRu(p.canton) + ' ' + p.address)].join(' '));
 // фильтр «Кантон → Город» (04.10.2026): город берётся из адреса; в списке городов только те, где в кантоне уже есть специалисты
 const inCanton = s => !state.canton || livePlaces(s).some(p => p.canton === state.canton && (!state.city || p.area || city(p.address) === state.city));
 // «Онлайн по кантону» (onlineCanton — оплачено до): виден во всех городах своего кантона; «Онлайн по всей Швейцарии» (onlineCH) — везде
 const onlineCanton = s => s.online && (state.hidden || live(s.onlineCanton)) && livePlaces(s).some(p => p.canton === state.canton);
 
 function base(s, skipCat){        // всё, кроме кантона
-  if (!skipCat && state.cat && s.cat !== state.cat) return false;
+  if (!skipCat && state.cat && !dirsOf(s).includes(state.cat)) return false;
   if (!skipCat && state.spec && !(s.specs || []).includes(state.spec)) return false;
   if (state.lang && !s.langs.includes(state.lang)) return false;
   if (state.tags.length && !state.tags.every(t => (s.tags || []).includes(t))) return false;
@@ -1100,17 +1121,18 @@ async function drawMap(list){
   setTimeout(() => { MAP.invalidateSize(); if (pts.length) MAP.fitBounds(pts, { padding: [40, 40], maxZoom: 14 }); else MAP.setView([46.8, 8.23], 7); }, 40);
   note.textContent = pts.length ? `На карті ${pts.length} ${plural(pts.length, 'адреса', 'адреси', 'адрес')}. Онлайн-фахівці з інших місць на карті не показуються. Колір точки — напрям.` : 'Для цього вибору адрес на карті немає.';
 }
-function renderCats(){   // выпадающие списки «Направление» и «Специализация» с числом специалистов
+function renderCats(){   // выпадающие списки «Направление» и «Категория» с числом специалистов
   const b = pool().filter(s => visible(s, true));
   const opt = (v, t, n, sel) => `<option value="${esc(v)}"${sel ? ' selected' : ''}>${esc(t)}${n === undefined ? '' : ' · ' + n}</option>`;
   const cs = document.getElementById('cat'), ss = document.getElementById('spec');
-  cs.innerHTML = opt('', 'Усі напрями', b.length, !state.cat) + Object.entries(CATS).map(([key, k]) => opt(key, k.t, b.filter(s => s.cat === key).length, state.cat === key)).join('');
+  // направления по группам (<optgroup>), 11.10.2026: 20 направлений в 5 группах
+  cs.innerHTML = opt('', 'Усі напрями', b.length, !state.cat) + Object.entries(GROUPS).map(([g, gt]) => `<optgroup label="${esc(gt)}">` + Object.entries(CATS).filter(([, k]) => k.g === g).map(([key, k]) => opt(key, k.t, b.filter(s => dirsOf(s).includes(key)).length, state.cat === key)).join('') + '</optgroup>').join('');
   const k = CATS[state.cat];
   ss.disabled = !k;
   if (!k){ ss.innerHTML = opt('', 'Спочатку обери напрям'); }
   else {
-    const inCat = b.filter(s => s.cat === state.cat);
-    ss.innerHTML = opt('', 'Усі спеціалізації', inCat.length, !state.spec) + k.s.map(sp => opt(sp, sp, inCat.filter(s => (s.specs || []).includes(sp)).length, state.spec === sp)).join('');
+    const inCat = b.filter(s => dirsOf(s).includes(state.cat));
+    ss.innerHTML = opt('', 'Усі категорії', inCat.length, !state.spec) + k.s.map(sp => opt(sp, sp, inCat.filter(s => (s.specs || []).includes(sp)).length, state.spec === sp)).join('');
   }
   cs.classList.toggle('set', !!state.cat); ss.classList.toggle('set', !!state.spec);
 }

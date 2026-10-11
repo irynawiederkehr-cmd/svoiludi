@@ -25,7 +25,7 @@ SITUACII = [
          ],
          topics=['gemeinde', 'medstrahovka', 'adaptaciya', 'permit-l', 'permit-b', 'status-s', 'bank', 'fide', 'kita-detsad', 'pravila-doma', 'musor', 'transport'],
          tools=['pereezd-spisok', 'ekstrennye-nomera', 'moi-dannye', 'strahovki-obyazatelnye', 'moj-budget', 'sroki-goda', 'musor-pamyatka', 'yazyk-trebovaniya'],
-         help=[('status', ['Разрешения и статус']), ('learn', ['Немецкий язык'])], tabs=['kursy', 'events']),
+         help=[('status', ['Пермит: заявления и продление']), ('learn', ['Немецкий язык'])], tabs=['kursy', 'events']),
     dict(slug='rabota', icon='work', title='Ищу работу или уже работаю',
          short='Резюме, дипломы, договор, зарплата, болезнь, потеря работы.',
          seo='Работа в Швейцарии: резюме, признание диплома, трудовой договор, зарплата и RAV',
@@ -42,7 +42,7 @@ SITUACII = [
          ],
          topics=['rabota', 'diplomy', 'fide', 'trudovoe-pravo', 'profsoyuzy', 'bolezn-na-rabote', 'poterya-raboty', 'nalogovaya-deklaraciya', 'domashniy-personal'],
          tools=['rezyume', 'diplomy-shema', 'yazyk-trebovaniya', 'zarplata', 'bolezn-zarplata', 'uchet-vremeni', 'kuda-obratitsya'],
-         help=[('learn', ['Немецкий язык']), ('law', ['Трудовое право'])], tabs=['kursy']),
+         help=[('work', ['Резюме и собеседование', 'Карьерный консультант']), ('learn', ['Немецкий язык']), ('law', ['Трудовое право'])], tabs=['kursy']),
     dict(slug='deti', icon='learn', title='Дети, школа и учёба',
          short='Беременность, ясли, школа, Lehre, вуз, пособия, няня.',
          seo='Дети в Швейцарии: ясли (Kita), школа, Lehre, университет и детские пособия',
@@ -58,7 +58,7 @@ SITUACII = [
          ],
          topics=['beremennost', 'detskie-posobiya', 'kita-detsad', 'shkola-lehre', 'vuz', 'nyani', 'fide'],
          tools=['put-obrazovaniya', 'posobiya-raschet', 'dogovor-nyani', 'moj-budget', 'moj-god'],
-         help=[('kids', []), ('learn', [])], tabs=['kursy', 'events']),
+         help=[('kids', []), ('sport', [])], tabs=['kursy', 'events']),
     dict(slug='dengi', icon='money', title='Деньги, налоги и долги',
          short='Налоги, декларация, бюджет, пенсия, Betreibung, соцпомощь.',
          seo='Налоги, бюджет и долги в Швейцарии: декларация, пенсия, Betreibung',
@@ -74,7 +74,7 @@ SITUACII = [
          ],
          topics=['nalogi', 'nalogovaya-deklaraciya', 'bank', 'pensiya', 'skrytye-rashody', 'betreibung', 'sozialhilfe'],
          tools=['moj-budget', 'nalogi-shema', 'pensiya-shema', 'sroki-goda', 'srok-pisma', 'kuda-obratitsya'],
-         help=[('money', ['Налоговая декларация']), ('insure', ['Пенсия AHV и BVG'])], tabs=['kursy']),
+         help=[('money', ['Налоговая декларация']), ('insure', ['Пенсия: AHV, BVG и 3a'])], tabs=['kursy']),
     dict(slug='zhilye', icon='home', title='Жильё и переезд',
          short='Найти квартиру, договор, соседи, мусор, переезд, покупка.',
          seo='Жильё в Швейцарии: как снять квартиру, договор аренды, переезд и покупка',
@@ -106,7 +106,7 @@ SITUACII = [
          ],
          topics=['samozanyatost', 'professii-krasota', 'professii-dom', 'professii-konsultirovanie', 'professii-prepodavanie', 'professii-avto', 'nalogi', 'vereine', 'domashniy-personal'],
          tools=['schet-qr', 'dohody-rashody', 'chasy-po-klientam', 'anketa-klienta', 'etiketka-eda', 'statuty-fereyna', 'zarplata'],
-         help=[('money', ['Бухгалтерия и Treuhand']), ('law', [])], tabs=['kursy']),
+         help=[('biz', []), ('money', ['Бухгалтерия и Treuhand'])], tabs=['kursy']),
     dict(slug='zdorovye', icon='insure', title='Здоровье и страховки',
          short='Медстраховка, франшиза, врач, психотерапия, беременность.',
          seo='Медицина и страховки в Швейцарии: Krankenkasse, франшиза, врач, психотерапия',
@@ -139,7 +139,7 @@ SITUACII = [
          ],
          topics=['pisma-sroki', 'betreibung', 'shtrafy', 'kesb', 'prava-pokupatelya', 'profsoyuzy', 'dogovor-arendy', 'trudovoe-pravo'],
          tools=['srok-pisma', 'pisma-prodavcu', 'pisma-arenda', 'kuda-obratitsya', 'moi-dannye'],
-         help=[('law', [])], tabs=[]),
+         help=[('law', []), ('status', ['Письма и формы'])], tabs=[]),
 ]
 
 # Инструменты для этих страниц, которых нет в TOOLS из topics.py, подставляются оттуда.
@@ -148,6 +148,15 @@ SITUACII = [
 # kind: 'site' — Новое на сайте, 'change' — Изменилось в Швейцарии, 'month' — Сроки месяца
 # text — 2–4 предложения своими словами; links — (название, путь от корня сайта); src — официальный источник для 'change'
 NEWS = [
+    dict(id='2026-10-11-kategorii', date='2026-10-11', kind='site', topic='Справочник',
+         title='Справочник специалистов: 20 направлений и 124 категории',
+         text='Мы пересобрали направления справочника, чтобы своего специалиста было проще найти. Направлений теперь 20, они собраны в пять групп: '
+              'документы, право и деньги; здоровье; семья, близкие и животные; учёба, работа и своё дело; дом и повседневная жизнь. '
+              'Новые направления — «Комплементарная медицина», «Уход за пожилыми и близкими», «Животные», «Работа и карьера», '
+              '«Своё дело и услуги для бизнеса», «Авто и транспорт», «Спорт, музыка и творчество» и «Еда на заказ». '
+              'Профессии, для которых в Швейцарии нужно разрешение, стоят отдельно: например, медицинский массаж и массаж для отдыха, психолог и коуч. '
+              'Справочник только открылся и пополняется. Выбери направление и посмотри, найдётся ли там специалист для тебя.',
+         links=[('Найти специалиста', ''), ('Как разместиться', 'join/')]),
     dict(id='2026-10-11-vakansii-vkladka', date='2026-10-11', kind='site', topic='Вакансии и партнёрство',
          title='«Вакансии и партнёрство» — теперь отдельная вкладка в меню',
          text='Вкладка «Вакансии и партнёрство» стоит прямо в меню. Там видно, кто кого ищет: сотрудника в команду или партнёра для общего дела. '

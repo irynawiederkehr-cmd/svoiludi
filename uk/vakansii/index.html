@@ -633,7 +633,7 @@ a.yours:hover{background:#EBD3A3}
       <h3 class="zh3">Оголошення</h3>
       <div class="zf"><label for="z-v-kind">Кого шукаєш <s>*</s><button type="button" class="qh" data-help="kind" aria-label="Підказка: працівник чи партнер" aria-expanded="false">?</button></label><select id="z-v-kind" data-a="Кого шукаю" data-req data-miss="кого шукаєш"><option value="">Вибери</option><option value="staff">Працівника: робота за наймом</option><option value="partner">Партнера: співпраця самостійних</option></select></div>
       <div class="zf"><label for="z-v-title">Хто потрібен <s>*</s></label><input id="z-v-title" data-a="Хто потрібен" data-title data-req data-miss="хто потрібен" placeholder="наприклад: адміністратор у салон краси"></div>
-      <div class="zf"><label for="z-v-cat">Напрям <s>*</s></label><select id="z-v-cat" data-a="Напрям" data-req data-miss="напрям"><option value="">Обери напрям</option><option value="status">Документи і статус</option><option value="law">Юристи</option><option value="money">Податки і фінанси</option><option value="insure">Страхування і пенсія</option><option value="health">Лікарі і здоров’я</option><option value="psy">Психологічна допомога</option><option value="coach">Коучинг і особистісний розвиток</option><option value="body">Тіло і краса</option><option value="kids">Діти і сім’я</option><option value="learn">Мова, навчання і робота</option><option value="home">Дім, побут і транспорт</option><option value="events">Свята, фото і їжа</option></select><small>Як у довіднику: за ним оголошення знайдуть у фільтрі.</small></div>
+      <div class="zf"><label for="z-v-cat">Напрям <s>*</s></label><select id="z-v-cat" data-a="Напрям" data-req data-miss="напрям"><option value="">Обери напрям</option><optgroup label="Документи, право і гроші"><option value="status">Документи, переклади й установи</option><option value="law">Юристи й нотаріуси</option><option value="money">Податки, бухгалтерія і гроші</option><option value="insure">Страхування і пенсія</option></optgroup><optgroup label="Здоров’я і душевний стан"><option value="health">Лікарі й медицина</option><option value="alt">Комплементарна медицина</option><option value="psy">Психологічна допомога</option><option value="coach">Коучинг, консультування й медіація</option></optgroup><optgroup label="Сім’я, близькі й тварини"><option value="kids">Діти: догляд і навчання</option><option value="care">Догляд за літніми й близькими</option><option value="pets">Тварини</option></optgroup><optgroup label="Навчання, робота і власна справа"><option value="learn">Мови</option><option value="work">Робота і кар’єра</option><option value="biz">Власна справа і послуги для бізнесу</option></optgroup><optgroup label="Дім і повсякденне життя"><option value="home">Житло, ремонт і побут</option><option value="auto">Авто і транспорт</option><option value="body">Краса і догляд за собою</option><option value="sport">Спорт, музика і творчість</option><option value="events">Свята й події</option><option value="food">Їжа на замовлення</option></optgroup></select><small>Як у довіднику: за ним оголошення знайдуть у фільтрі.</small></div>
       <h3 class="zh3" data-zif="z-v-kind:staff" hidden>Робота</h3>
       <div class="zf" data-zif="z-v-kind:staff" hidden><label for="z-v-load">Зайнятість <s>*</s></label><select id="z-v-load" data-a="Зайнятість" data-req data-miss="зайнятість"><option value="">Вибери</option><option value="100">100 %, повна зайнятість</option><option value="80-100">80–100 %</option><option value="60-80">60–80 %</option><option value="40-60">40–60 %</option><option value="20-40">20–40 %</option><option value="u20">до 20 %</option><option value="hours">погодинно</option></select></div>
       <div class="zf" data-zif="z-v-kind:staff" hidden><label for="z-v-contract">Договір <s>*</s><button type="button" class="qh" data-help="contract" aria-label="Підказка: види договорів" aria-expanded="false">?</button></label><select id="z-v-contract" data-a="Договір" data-req data-miss="договір"><option value="">Вибери</option><option value="perm">Безстроковий договір</option><option value="temp">Строковий договір</option><option value="repl">На час заміни</option><option value="hourly">Погодинна робота</option><option value="prakt">Стажування (Praktikum)</option><option value="lehre">Навчання професії (Lehre)</option></select></div>
@@ -724,9 +724,9 @@ a.yours:hover{background:#EBD3A3}
 
 
 
-<script src="/data/specialists.uk.js?v=f3ab927c"></script>
+<script src="/data/specialists.uk.js?v=d5c961d6"></script>
 <script src="/data/organizations.uk.js?v=489feb29"></script>
-<script src="/data/vacancies.uk.js?v=5de638b0"></script>
+<script src="/data/vacancies.uk.js?v=1889cf60"></script>
 <script>window.IMG_BASE = '../img/';</script>
 <script>
 const ADMIN = (() => {   // режим Ирины: ?ira=1 включает на этом устройстве, ?ira=0 выключает
@@ -744,9 +744,11 @@ const DISC = {
 const ICO = { staff: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10" cy="8" r="3.5" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M3.5 19.5c.8-3.4 3.4-5.3 6.5-5.3s5.7 1.9 6.5 5.3" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><path d="M18.5 7.5v5M16 10h5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>', partner: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 11.5l4-4 3.2 1.4L13 7l3.5 1.2 4.5 3.3-4.6 4.8" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round"/><path d="M7 15l2.2 2.2a1.4 1.4 0 0 0 2-2M10 13l2.6 2.6a1.4 1.4 0 0 0 2-2l-3-3" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>' };
 const KINDS = { staff: { t: 'Шукаю працівника', s: 'робота за наймом', c: '#4F5E3E' }, partner: { t: 'Шукаю партнера', s: 'співпраця', c: '#C97E52' } };
 const CATS = {
-  status: 'Документи і статус', law: 'Юристи', money: 'Податки і фінанси', insure: 'Страхування і пенсія', health: 'Лікарі і здоров’я',
-  psy: 'Психологічна допомога', coach: 'Коучинг і особистісний розвиток', body: 'Тіло і краса', kids: 'Діти і сім’я',
-  learn: 'Мова, навчання і робота', home: 'Дім, побут і транспорт', events: 'Свята, фото і їжа'
+  status: 'Документи, переклади й установи', law: 'Юристи й нотаріуси', money: 'Податки, бухгалтерія і гроші', insure: 'Страхування і пенсія',
+  health: 'Лікарі й медицина', alt: 'Комплементарна медицина', psy: 'Психологічна допомога', coach: 'Коучинг, консультування й медіація',
+  kids: 'Діти: догляд і навчання', care: 'Догляд за літніми й близькими', pets: 'Тварини', learn: 'Мови',
+  work: 'Робота і кар’єра', biz: 'Власна справа і послуги для бізнесу', home: 'Житло, ремонт і побут', auto: 'Авто і транспорт',
+  body: 'Краса і догляд за собою', sport: 'Спорт, музика і творчість', events: 'Свята й події', food: 'Їжа на замовлення'
 };
 const CANTONS = {
   'Aargau': ['AG', 'Ааргау'], 'Appenzell Ausserrhoden': ['AR', 'Аппенцелль-Ауссерроден'], 'Appenzell Innerrhoden': ['AI', 'Аппенцелль-Іннерроден'],
