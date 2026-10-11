@@ -10,4 +10,4 @@
       который уже стоит на сайте и описан в политике конфиденциальности. Показывается сам, когда в GoatCounter (Settings → Site) включена галочка
       «Allow adding visitor counts on your website». Пока галочки нет, строка скрыта. Никаких вымышленных чисел здесь нет.
    ===================================================================== */
-window.STATS = { specialists: 3, specialistsUntil: null, updated: '2026-10-11' };
+window.STATS = { specialists: 4, specialistsUntil: null, updated: '2026-10-11' };

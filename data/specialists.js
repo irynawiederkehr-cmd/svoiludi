@@ -55,7 +55,7 @@ window.SPECIALISTS = [
     "key": "nmoa9uvl",
     "num": "SG-0018",
     "uid": "CHE-324.492.167",
-    "status": "на подтверждении",
+    "status": "активен",
     "paidUntil": "",
     "tiers": [],
     "onlineCH": "",
