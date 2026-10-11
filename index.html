@@ -1105,7 +1105,7 @@ const vacsOf = s => (VAK_OPEN || ADMIN ? (window.VACANCIES || []) : []).filter(v
 const vacChips = s => { const kinds = [...new Set(vacsOf(s).map(v => v.kind))]; return kinds.length ? `<div class="vac-chips">${kinds.map(k => `<a class="vac-chip" href="vakansii/#${esc(vacsOf(s).find(v => v.kind === k).id)}">${VAC_KIND[k]}</a>`).join('')}</div>` : ''; };
 /* VIP — платное размещение: кружок «?» у значка (правило Ирины, проверка 09.10.2026) */
 const VIPQ = '<button type="button" class="vip-q" aria-label="Что значит VIP" aria-expanded="false">?</button>';
-const VIP_TIP = 'Платное размещение. Специалист оплатил пакет VIP, поэтому его карточка выделена и стоит выше. Проверяем мы всех одинаково: работает ли специалист официально и есть ли он в официальном реестре.';
+const VIP_TIP = 'Платное размещение. Специалист оплатил пакет «VIP-партнёр» или «VIP-партнёр ТОП», поэтому его карточка выделена и стоит выше. Проверяем мы всех одинаково: работает ли специалист официально и есть ли он в официальном реестре.';
 document.addEventListener('click', e => { const b = e.target.closest('.vip-q'); const old = document.getElementById('vipTip');
   if (!b) { if (old && !e.target.closest('#vipTip')) old.remove(); return; }
   e.preventDefault(); e.stopPropagation(); if (old) { old.remove(); if (old._b === b) return; }
