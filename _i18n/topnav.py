@@ -97,15 +97,15 @@ CSS = ('<style id="sl-top">/* единая шапка svoiludi.ch (09.10.2026), 
        '@media (max-width:420px){header.top .page{padding-block:8px;gap:8px}header.top .mono{width:32px;height:32px}header.top .mark{gap:8px}'
        'header.top .mark b{font-size:1.06rem}header.top .mark small{display:none}header.top .navcta{font-size:.8rem;padding:6px 11px}}'
        '@media (max-width:380px){header.top .page{gap:6px;padding-inline:14px}header.top .mark b{font-size:1rem}header.top .navcta{font-size:.74rem;padding:6px 8px}}'
-       # плашка «Бесплатно до конца 2027 года» (11.10.2026): светлый шалфей, как «Бесплатно…» на badge/ (зелёный = бесплатно)
-       'header.top .sl-free{background:color-mix(in srgb,var(--sage,#66704F) 22%,var(--paper,#FFFCF8));border-bottom:1px solid color-mix(in srgb,var(--sage,#66704F) 32%,transparent);color:var(--ink,#2F2924);font-size:.84rem;line-height:1.45}'
-       'header.top .sl-free p{max-width:1340px;margin:0 auto;padding:7px 20px;display:flex;align-items:flex-start;justify-content:center;gap:9px;box-sizing:border-box}'
-       'header.top .sl-free svg{width:17px;height:17px;flex:none;margin-top:1px;fill:none;stroke:#4F5E3E;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}'
-       'header.top .sl-free b{font-weight:700}'
-       'header.top .sl-free a{color:#4F5E3E;font-weight:700;text-decoration:underline;text-underline-offset:2px;white-space:nowrap}'
-       '@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) header.top .sl-free a{color:#B9C69F}:root:not([data-theme="light"]) header.top .sl-free svg{stroke:#B9C69F}}'
-       ':root[data-theme="dark"] header.top .sl-free a{color:#B9C69F}:root[data-theme="dark"] header.top .sl-free svg{stroke:#B9C69F}'
-       '@media (max-width:700px){header.top .sl-free{font-size:.8rem;line-height:1.4}header.top .sl-free p{justify-content:flex-start;padding:7px 16px}}'
+       # плашка «Бесплатно до конца 2027 года» (11.10.2026): заливка главным зелёным (зелёный = бесплатно), светлый текст,
+       # ссылка и веточка светлой горчицей — по просьбе Ирины «может как-то выделить цветом?» (сначала был светлый шалфей, сливался с шапкой)
+       'header.top .sl-free{background:#4F5E3E;color:#FFFCF8;font-size:.86rem;line-height:1.45;box-shadow:inset 0 -1px 0 rgba(0,0,0,.18)}'
+       'header.top .sl-free p{max-width:1340px;margin:0 auto;padding:9px 20px;display:flex;align-items:flex-start;justify-content:center;gap:10px;box-sizing:border-box}'
+       'header.top .sl-free svg{width:19px;height:19px;flex:none;margin-top:0;fill:none;stroke:#F3E3C2;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}'
+       'header.top .sl-free b{font-weight:800;color:#FFFFFF}'
+       'header.top .sl-free a{color:#F3E3C2;font-weight:700;text-decoration:underline;text-underline-offset:3px;white-space:nowrap}'
+       'header.top .sl-free a:hover{color:#FFFFFF}'
+       '@media (max-width:700px){header.top .sl-free{font-size:.82rem;line-height:1.42}header.top .sl-free p{justify-content:flex-start;padding:9px 16px}}'
        '@media print{header.top{display:none!important}}'
        '</style>')
 
