@@ -58,8 +58,15 @@ sub(r'<section class="s-hero has-art" aria-labelledby="h1">.*?</section>', HERO)
 rep('<label for="type"><i>3</i>Что ищешь</label>', '<label for="type"><i>3</i>Какая акция</label>')
 rep('<label for="when"><i>5</i>Когда</label>', '<label for="when"><i>5</i>Срок</label>')
 sub(r'<option value="">Все ближайшие</option><option value="week">На этой неделе</option><option value="month">В этом месяце</option><option value="next">В следующем месяце</option>',
-    '<option value="">Все действующие</option><option value="week">Заканчиваются на этой неделе</option><option value="month">Заканчиваются в этом месяце</option>')
+    '<option value="">Все действующие</option><option value="always">Постоянные акции</option><option value="week">Заканчиваются на этой неделе</option><option value="month">Заканчиваются в этом месяце</option>')
 rep('aria-label="Подбор событий"', 'aria-label="Подбор акций"')
+# игровые сердечки (решение Ирины 11.10.2026, 19:16): «Мне повезёт» и «Мои сердечки»; сердечки хранятся только в браузере человека
+PLAY = ('<div class="ak-play" role="group" aria-label="Сердечки"><button type="button" class="btn ghost" id="luck"><span aria-hidden="true">♡</span> Мне повезёт</button>'
+        '<button type="button" class="btn ghost" id="myhearts" aria-pressed="false"><span aria-hidden="true">♥</span> Мои сердечки <b id="hn">0</b></button>'
+        '<button type="button" class="lnk" id="hclear" hidden>Очистить сердечки</button></div>\n'
+        '  <p class="ak-note">«Мне повезёт» достанет для тебя случайную акцию из тех, что ты сейчас видишь. Сердечко на карточке сохраняет акцию в «Мои сердечки»: список хранится только на этом устройстве.</p>\n  ')
+rep('<div class="count"><span id="count"', PLAY + '<div class="count"><span id="count"')
+rep('<script defer src="/assets/napisat.js"></script>', '<script defer src="/assets/napisat.js"></script><script defer src="/assets/flyer.js"></script>')
 # «Проводишь акции?» вместо «Проводишь встречи?» и форма заявки на акцию вместо формы события
 ADD = ('''  <section class="join" id="add" aria-labelledby="add-h">
     <div><h2 id="add-h">Проводишь акции?</h2><p style="max-width:62ch">Размести свою акцию здесь. Это бесплатно в период запуска, до конца 2027 года. Она будет видна на этой странице и сразу в твоей карточке: в справочнике специалистов или в разделе «Организации». Заполни <a href="#akciya">заявку прямо здесь, на сайте</a>, или напиши нам на <a href="mailto:voznesenskaya.iryna@gmail.com">voznesenskaya.iryna@gmail.com</a>. Мы проверим и опубликуем акцию, а ты получишь ссылку на неё.</p></div>

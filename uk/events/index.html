@@ -378,6 +378,18 @@ a.bot:hover{color:#B98324}
 .pr-days{font-weight:700;color:var(--ink)}
 .pr-conds{display:flex;flex-wrap:wrap;gap:6px;margin:2px 0 0;padding:0;list-style:none}
 .pr-conds li{font-size:.82rem;font-weight:600;background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:4px 10px}
+.pcw{position:relative;display:flex}.pcw .pcard{flex:1;min-width:0}
+.pheart{position:absolute;right:12px;top:12px;width:42px;height:42px;border-radius:50%;border:1.5px solid var(--line);background:var(--paper);color:#C9BEB0;font:inherit;font-size:1.25rem;line-height:1;cursor:pointer;display:grid;place-items:center;transition:transform .15s,color .15s,border-color .15s}
+.pheart:hover{transform:scale(1.08);color:#C94A63;border-color:#C94A63}.pheart[aria-pressed="true"]{color:#C94A63;border-color:#C94A63;background:#FDECEF}
+.pc-always{font-style:normal;font-size:.62rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;background:var(--sage-soft);color:#4F5E3E;border-radius:999px;padding:2px 8px;margin-left:6px}
+.pr-until{font-size:.82rem;color:var(--muted)}
+.heart-btn .hb-on{display:none}.heart-btn[aria-pressed="true"] .hb-on{display:inline;color:#C94A63}.heart-btn[aria-pressed="true"] .hb-off{display:none}
+.flyer-btn{background:#B8472E;border-color:#B8472E;color:#FFFCF8}.flyer-btn:hover{filter:brightness(.95)}
+.flyer-note{margin:4px 0 0}
+.ak-play{display:flex;flex-wrap:wrap;gap:10px 12px;align-items:center;margin:12px 0 2px}
+.ak-play .btn{padding:10px 18px}.ak-play #hn{display:inline-block;min-width:1.4em;text-align:center;background:var(--soft,#E3E8D6);border-radius:999px;padding:0 7px;margin-left:4px}
+.ak-play [aria-pressed="true"]{background:#FDECEF;border-color:#C94A63;color:#A8324B}
+.ak-note{margin:2px 0 0;font-size:.86rem;color:var(--muted)}
 .pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,340px),1fr));gap:16px;padding-top:4px}
 .pcard{--lc:#B8472E;--lf:color-mix(in srgb,var(--lc) 10%,var(--paper));position:relative;display:flex;flex-direction:column;gap:12px;background:var(--paper);border:1.5px solid var(--line);border-radius:20px;padding:18px;text-align:left;font:inherit;color:inherit;cursor:pointer;width:100%;transition:border-color .15s,transform .15s}
 .pcard:hover{border-color:var(--lc);transform:translateY(-1px)}
@@ -640,14 +652,14 @@ a.yours:hover{background:#EBD3A3}
 <dialog class="qm" id="qm" aria-labelledby="qmTitle"><div class="qm-card" id="qmCard"></div></dialog>
 
 <script src="/data/specialists.uk.js?v=06599fe4"></script>
-<script src="/data/organizations.uk.js?v=489feb29"></script>
+<script src="/data/organizations.uk.js?v=817cafda"></script>
 <script>
 window.IMG_BASE = '../img/';
 /* карточки специалистов — в /data/specialists.js (одна копия на весь сайт) */
 const SPECIALISTS = window.SPECIALISTS || [];
 
 </script>
-<script src="/data/afisha.uk.js?v=576345ee"></script>
+<script src="/data/afisha.uk.js?v=6e01b45f"></script>
 <script>/* одна база афиши: здесь — записи раздела «События» */
 const EVENTS = (window.AFISHA || []).filter(e => (e.sections || []).includes('events'));</script>
 <script>
@@ -734,18 +746,19 @@ function repeatText(e){   // «каждый четверг до 17 декабр�
    На странице «События» акций нет: они живут на своей вкладке (решение Ирины 11.10.2026, 18:48: «где на сайте будут акции? где в меню или фильтрах?»). */
 const AK = document.documentElement.dataset.mode === 'akcii';
 const PKINDS = { percent: 'Знижка у відсотках', amount: 'Знижка у франках', price: 'Акційна ціна', gift: 'Подарунок або бонус', free: 'Безкоштовне знайомство або пробне заняття' };
-const state = { canton: '', city: '', type: '', lang: '', when: '', view: 'list', month: today.slice(0, 7) };
+const state = { canton: '', city: '', type: '', lang: '', when: '', hearts: false, view: 'list', month: today.slice(0, 7) };
 const kindOf = e => AK ? ((e.promo || {}).kind || '') : e.type;
 const pool = () => EVENTS.filter(e => e.status === 'активен' && live(e) && (AK ? isPromo(e) && lastDay(e) >= today : !isPromo(e)));
 const isRemote = e => e.online && !e.address;
 /* «Срок» на странице акций: какие заканчиваются на этой неделе или в этом месяце */
-const akWhen = e => { if (!state.when) return true; const end = lastDay(e), d = D(today);
+const akWhen = e => { if (!state.when) return true; if (state.when === 'always') return isAlways(e); if (isAlways(e)) return false; const end = lastDay(e), d = D(today);
   if (state.when === 'week') return end <= addDays(today, 6 - (d.getUTCDay() + 6) % 7);
   return end <= iso(new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth() + 1, 0, 12))); };
 function match(e, skip){
   if (skip !== 'type' && state.type && kindOf(e) !== state.type) return false;
   if (state.lang && !(e.langs || []).includes(state.lang)) return false;
   if (AK && !akWhen(e)) return false;
+  if (AK && state.hearts && !favGet().includes(e.id)) return false;
   return true;
 }
 // в кантоне — очные события кантона (и города); онлайн-события показываются всем отдельным блоком
@@ -776,22 +789,24 @@ function row(e, d){
 function pcard(e){
   const o = offer(e), s = (e.organizers || []).map(cardOf).find(Boolean), role = s && s.role ? s.role : '', cl = condList(e.promo);
   const where = isRemote(e) ? 'онлайн' : `${esc(city(e.address))} · ${esc(kt(e.canton))}${e.online ? ' · і онлайн' : ''}`;
-  return `<button class="pcard" type="button" data-ev="${esc(e.id)}" data-d="${e.date}">${e.sample ? '<span class="sample">Зразок</span>' : ''}
+  return `<div class="pcw"><button class="pcard" type="button" data-ev="${esc(e.id)}" data-d="${e.date}">${e.sample ? '<span class="sample">Зразок</span>' : ''}
     <span class="pc-big">${esc(o.big)}</span>
-    <span class="pc-m">${e.sample ? '<span class="yours">Тут може бути твоя акція!</span>' : ''}<span class="ev-k">Акція <i class="ev-ad">Реклама</i></span><span class="pc-t">${esc(e.title)}</span>
+    <span class="pc-m">${e.sample ? '<span class="yours">Тут може бути твоя акція!</span>' : ''}<span class="ev-k">Акція <i class="ev-ad">Реклама</i>${isAlways(e) ? '<i class="pc-always">Постійна</i>' : ''}</span><span class="pc-t">${esc(e.title)}</span>
       <span class="pc-sub">${esc(o.sub || '')}${o.more.length ? ' · ' + esc(o.more.join('; ')) : ''}</span>
       <span class="pc-who">${orgFaces(e)}<span class="pc-n"><b>${esc(orgNames(e))}</b>${role ? `<small>${esc(role)}</small>` : ''}</span></span>
       <span class="ev-i"><b>${esc(promoDays(e))}</b><span>${where}</span><span>${esc((e.langs || []).join(', '))}</span></span>
-      ${cl.length ? `<span class="pc-c">${cl.map(c => `<i>${esc(c)}</i>`).join('')}</span>` : ''}</span></button>`;
+      ${cl.length ? `<span class="pc-c">${cl.map(c => `<i>${esc(c)}</i>`).join('')}</span>` : ''}</span></button>${heartBtn(e.id)}</div>`;
 }
 function promoView(list){
   const items = list.slice().sort((a, b) => (a.date > today) - (b.date > today) || lastDay(a).localeCompare(lastDay(b)) || a.title.localeCompare(b.title, 'uk'));
   const local = items.filter(e => inPlace(e) && !(state.canton && isRemote(e))), remote = state.canton ? items.filter(e => !inPlace(e)) : [];
-  const empty = t => `<div class="empty"><b>${t}</b><span>Спробуй інший кантон або прибери частину вибору. Акції з’являються, коли фахівці й організації з довідника розміщують їх у нас.</span></div>`;
-  const grid = arr => { const now = arr.filter(e => e.date <= today), soon = arr.filter(e => e.date > today);
+  const empty = t => `<div class="empty"><b>${t}</b><span>${state.hearts ? 'Натисни серденько на картці акції, і вона з’явиться тут. Список зберігається лише на цьому пристрої.' : 'Спробуй інший кантон або прибери частину вибору. Акції з’являються, коли фахівці й організації з довідника розміщують їх у нас.'}</span></div>`;
+  const part = arr => { const now = arr.filter(e => e.date <= today), soon = arr.filter(e => e.date > today);
     return (now.length ? `<div class="pgrid">${now.map(pcard).join('')}</div>` : '') + (soon.length ? `<div class="mh">Незабаром почнуться</div><div class="pgrid">${soon.map(pcard).join('')}</div>` : ''); };
+  const grid = arr => { const reg = arr.filter(e => !isAlways(e)), alw = arr.filter(isAlways);
+    return part(reg) + (alw.length ? `<div class="mh">Постійні акції: діють завжди, зазвичай на перше відвідування нового клієнта</div>` + part(alw) : ''); };
   let html = '';
-  if (!state.canton) html = `<div class="group">${items.length ? grid(items) : empty('Поки акцій немає')}</div>`;
+  if (!state.canton) html = `<div class="group">${items.length ? grid(items) : empty(state.hearts ? 'У серденьках поки порожньо' : 'Поки акцій немає')}</div>`;
   else {
     const name = state.city || ktRu(state.canton);
     html = `<div class="group"><div class="group-h"><h2>${state.city ? 'У місті' : 'У кантоні'} ${esc(name)}</h2></div>${local.length ? grid(local) : empty('Тут поки акцій немає')}</div>`;
@@ -844,9 +859,9 @@ function render(){
     const v = promoView(list);
     document.getElementById('results').innerHTML = v.html;
     document.getElementById('count').textContent = `${v.n} ${plural(v.n, 'акція', 'акції', 'акцій')}`;
-    document.getElementById('reset').hidden = !(state.canton || state.city || state.type || state.lang || state.when);
+    document.getElementById('reset').hidden = !(state.canton || state.city || state.type || state.lang || state.when || state.hearts);
     ['canton', 'city', 'type', 'lang', 'when'].forEach(id => document.getElementById(id).classList.toggle('set', !!state[id]));
-    fillTypes(); return;
+    fillTypes(); favUi(); return;
   }
   const v = state.view === 'month' ? monthView(list) : state.view === 'year' ? yearView(list) : listView(list);
   document.getElementById('results').innerHTML = v.html;
@@ -996,7 +1011,35 @@ function offer(e){   // big — крупно («−20 %»), sub — на что,
   return { big: 'Безкоштовно', sub: p.what, more };
 }
 const fmtShort = x => `${D(x).getUTCDate()} ${MON_G[D(x).getUTCMonth()]}`;
-const promoDays = e => e.date > today ? `Починається ${fmtShort(e.date)}, діє до ${fmtShort(e.dateEnd || e.date)} ${D(e.dateEnd || e.date).getUTCFullYear()}` : `Діє до ${fmtShort(e.dateEnd || e.date)} ${D(e.dateEnd || e.date).getUTCFullYear()}`;
+const promoDays = e => isAlways(e) ? (e.date > today ? `Почнеться ${fmtShort(e.date)}, потім діє постійно` : 'Діє постійно') : e.date > today ? `Починається ${fmtShort(e.date)}, діє до ${fmtShort(e.dateEnd || e.date)} ${D(e.dateEnd || e.date).getUTCFullYear()}` : `Діє до ${fmtShort(e.dateEnd || e.date)} ${D(e.dateEnd || e.date).getUTCFullYear()}`;
+/* постоянная акция (promo.always, решение Ирины 11.10.2026, 19:19: «всегда первая уборка, стрижка или маникюр за 50 %»): в данных date — первый день, dateEnd — конец
+   текущего года подтверждения; владелец подтверждает её раз в год, без подтверждения она сама уходит с сайта после dateEnd */
+const isAlways = e => !!(e.promo && e.promo.always);
+const promoUntil = e => isAlways(e) && e.dateEnd ? 'Підтверджена власником до ' + fmtD(e.dateEnd) : '';
+/* сердечки: акции, которые человек сохранил себе (только в его браузере, ключ svlHearts) */
+const FAV_KEY = 'svlHearts';
+const favGet = () => { try { const a = JSON.parse(localStorage.getItem(FAV_KEY) || '[]'); return Array.isArray(a) ? a : []; } catch (_) { return []; } };
+const favSet = a => { try { localStorage.setItem(FAV_KEY, JSON.stringify(a)); } catch (_) {} };
+const heartBtn = id => `<button type="button" class="pheart" data-heart="${esc(id)}" aria-pressed="${favGet().includes(id)}" aria-label="Зберегти акцію до серденьок" title="Зберегти до серденьок">♥</button>`;
+function favUi(){
+  const n = favGet().filter(id => EVENTS.some(e => e.id === id && isPromo(e))).length;
+  const hn = document.getElementById('hn'); if (hn) hn.textContent = n;
+  const mh = document.getElementById('myhearts'); if (mh) mh.setAttribute('aria-pressed', String(!!state.hearts));
+  const hc = document.getElementById('hclear'); if (hc) hc.hidden = !favGet().length;
+  document.querySelectorAll('[data-heart]').forEach(b => b.setAttribute('aria-pressed', String(favGet().includes(b.dataset.heart))));
+}
+function toggleFav(id, el){
+  let a = favGet(); const on = !a.includes(id); a = on ? a.concat(id) : a.filter(x => x !== id); favSet(a);
+  if (on && window.SVL_FLYER) SVL_FLYER.burst(el, 9);
+  if (state.hearts) render(); else favUi();
+}
+/* данные для флаера (assets/flyer.js): всё, что на нём печатается, берём из той же записи, что видит человек в окне акции */
+function flyerOf(e){
+  const o = offer(e), c = chans(e), s = (e.organizers || []).map(cardOf).find(Boolean);
+  return { id: e.id, big: o.big, title: e.title, sub: o.sub || '', more: o.more, conds: condList(e.promo), days: promoDays(e), until: promoUntil(e), who: orgNames(e),
+    role: s ? (s.role || 'організація') : '', place: isRemote(e) ? 'Онлайн' : placeText(e), signup: e.signup && e.signup !== 'none' ? e.signup : '',
+    c: { tel: c.tel, wa: c.wa, tg: c.tg, mail: c.mail, ig: c.ig, link: c.link }, url: evUrl(e), sample: !!e.sample };
+}
 /* кнопка «Записаться»: готовое сообщение в выбранный организатором канал (assets/napisat.js, решение Ирины 10.10.2026, 22:18) */
 function wireWrite(box, o){
   const run = () => { const slot = box.querySelector('[data-wr-slot]'); if (slot && window.SVL_NAPISAT) SVL_NAPISAT(slot, o); };
@@ -1013,7 +1056,7 @@ const mineOf = (card, test) => EVENTS.filter(e => test(e) && (e.organizers || []
 /* прошлые акции карточки — для «Повторить» в форме акции (поля z-pr-…) */
 const promoMine = card => mineOf(card, isPromo).sort((a, b) => lastDay(b).localeCompare(lastDay(a))).slice(0, 8).map(e => { const p = e.promo, x = e.contacts || {}, num = ['percent', 'amount', 'price'].includes(p.kind);
   return { t: e.title, s: (lastDay(e) < today ? 'В архіві, останній день ' : 'На сайті до ') + fmtD(lastDay(e)),
-    d: { 'z-pr-title': e.title, 'z-pr-kind': p.kind, 'z-pr-pct': p.kind === 'percent' ? p.value : '', 'z-pr-amt': p.kind === 'amount' ? p.value : '', 'z-pr-price': p.kind === 'price' ? p.value : '',
+    d: { 'z-pr-title': e.title, 'z-pr-dur': p.always ? 'always' : 'period', 'z-pr-kind': p.kind, 'z-pr-pct': p.kind === 'percent' ? p.value : '', 'z-pr-amt': p.kind === 'amount' ? p.value : '', 'z-pr-price': p.kind === 'price' ? p.value : '',
       'z-pr-what': num ? p.what : '', 'z-pr-gift': num ? '' : p.what, 'z-pr-regular': p.regular || '', 'z-pr-cond': p.cond || [], 'z-pr-limit': p.limit || '',
       'z-pr-where': isRemote(e) ? 'online' : (card.places || []).includes(e.address) ? e.address : '', 'z-pr-signup': e.signup || '', 'z-pr-link': e.link || '', 'z-pr-about': e.about || '',
       'z-pr-tel': x.phone || e.phone || '', 'z-pr-wa': x.whatsapp || '', 'z-pr-tg': x.telegram || '', 'z-pr-mail': x.email || e.email || '', 'z-pr-ig': x.instagram || '' } }; });
@@ -1057,7 +1100,7 @@ function openEvent(id, d, pv){
   box.innerHTML = `<div class="qm-top"><div class="qm-head">${e.sample ? `<span class="ev-k" style="color:var(--brown)">Зразок ${PR ? 'акції' : 'події'} · усе вигадане</span><a class="yours" href="/uk/events/#${PR ? 'akciya' : 'add'}">Тут може бути ${PR ? 'твоя акція' : 'твоя подія'}! Як додати →</a>` : ''}<span class="ev-k" style="color:${k.c}">${PR ? 'Акція фахівця <i class="ev-ad">Реклама</i>' : esc(k.t)}</span><h2 class="qm-title" id="qmTitle">${esc(e.title)}</h2></div><button class="qm-close" type="button" aria-label="Закрити">✕</button></div>
     ${pv ? okBox(e) : ''}<div class="d-body">
       <div class="d-col">
-        ${PR ? (() => { const o = offer(e); return `<div class="d-block"><h4>Пропозиція</h4><div class="pr-offer"><span class="pr-big">${esc(o.big)}</span><span class="pr-sub">${esc(o.sub || '')}</span>${o.more.map(x => `<span class="pr-more">${esc(x)}</span>`).join('')}<span class="pr-days">${esc(promoDays(e))}</span></div>${condList(e.promo).length ? `<ul class="pr-conds">${condList(e.promo).map(c => `<li>${esc(c)}</li>`).join('')}</ul>` : ''}</div>`; })() : ''}
+        ${PR ? (() => { const o = offer(e); return `<div class="d-block"><h4>Пропозиція</h4><div class="pr-offer"><span class="pr-big">${esc(o.big)}</span><span class="pr-sub">${esc(o.sub || '')}</span>${o.more.map(x => `<span class="pr-more">${esc(x)}</span>`).join('')}<span class="pr-days">${esc(promoDays(e))}</span>${promoUntil(e) ? `<span class="pr-until">${esc(promoUntil(e))}</span>` : ''}</div>${condList(e.promo).length ? `<ul class="pr-conds">${condList(e.promo).map(c => `<li>${esc(c)}</li>`).join('')}</ul>` : ''}</div>`; })() : ''}
         <div class="d-block"><h4>${PR ? 'Про акцію' : 'Про подію'}</h4><p>${esc(e.about)}</p></div>
         <div class="d-block"><h4>Мови</h4><div class="chips">${(e.langs || []).map(l => `<span>${esc(l)}</span>`).join('')}</div></div>
         ${(e.for || []).length ? `<div class="d-block"><h4>Для кого</h4><div class="chips">${e.for.map(l => `<span>${esc(l)}</span>`).join('')}${e.age ? `<span>${esc(e.age)}</span>` : ''}</div></div>` : ''}
@@ -1068,7 +1111,7 @@ function openEvent(id, d, pv){
         <div class="d-block"><h4>Де</h4>${isRemote(e) ? '<span>Онлайн, посилання надсилає організатор</span>' : `${e.venue ? `<b>${esc(e.venue)}</b><br>` : ''}<a class="addr" href="${maps(e.address)}" ${ext}>${esc(e.address)}</a><span class="note">кантон ${esc(ktRu(e.canton))}${e.online ? ' · можна й онлайн' : ''}</span>`}</div>
         ${PR ? '' : `<div class="d-block"><h4>Ціна</h4><span>${esc(priceText(e))}</span>${(e.disc || []).length ? `<small class="note">${esc(e.disc.join(' · '))}</small>` : ''}${(e.payhow || []).length ? `<small class="note">Оплата: ${esc(e.payhow.join(', ').toLowerCase())}</small>` : ''}${e.seats ? `<small class="note">Місць: ${esc(e.seats)}</small>` : ''}</div>`}
         ${past ? '' : '<div class="d-block" data-wr-slot></div>'}
-        <div class="acts"><button class="btn ghost" type="button" data-share>Поділитися</button></div>
+        <div class="acts">${PR && !past ? '<button class="btn flyer-btn" type="button" data-flyer>♥ Завантажити флаєр</button>' : ''}${PR ? `<button class="btn ghost heart-btn" type="button" data-heart="${esc(e.id)}" aria-pressed="${favGet().includes(e.id)}"><span class="hb-on">♥ У серденьках</span><span class="hb-off">♡ До серденьок</span></button>` : ''}<button class="btn ghost" type="button" data-share>Поділитися</button></div>${PR && !past ? '<p class="note flyer-note">Флаєр для телефона: акція, умови, строк і контакти автора. Покажи його під час запису чи візиту.</p>' : ''}
         ${PR ? `<p class="note">Акцію оголошує й виконує сам фахівець. «Свої люди» не продають послугу, не беруть участі в угоді й не відповідають за умови акції: домовляйся напряму з фахівцем. Розміщення акції — реклама.</p>` : `<div class="d-block"><h4>Додати в календар</h4><div class="calmenu"><a href="${esc(gcalLink(e, d))}" ${ext}>Google Календар</a><button type="button" data-ics>Apple, Outlook, телефон (.ics)</button></div></div>`}
         <p class="note">${contactList(e).length ? `Запитання організатору: ${contactHtml(e)}. ` : ''}Знайшли помилку? <a href="mailto:${MAIL}?subject=${encodeURIComponent('Помилка в події: ' + e.title)}&body=${encodeURIComponent('Посилання: ' + evUrl(e) + '\n\nЩо виправити:\n')}">Повідомити</a></p>
       </div>
@@ -1081,6 +1124,8 @@ function openEvent(id, d, pv){
 document.getElementById('qmCard').addEventListener('click', async ev => {
   if (!OPEN) return;
   if (ev.target.closest('[data-ics]')) saveIcs(OPEN.e, OPEN.d);
+  const fl = ev.target.closest('[data-flyer]'); if (fl){ if (window.SVL_FLYER) SVL_FLYER.open(flyerOf(OPEN.e), fl); return; }
+  const hb = ev.target.closest('[data-heart]'); if (hb){ toggleFav(hb.dataset.heart, hb); return; }
   if (ev.target.closest('[data-share]')){ const url = evUrl(OPEN.e), title = OPEN.e.title + ' — ' + fmtDay(OPEN.d);
     if (navigator.share){ try { await navigator.share({ title, text: title + ' · Свої люди у Швейцарії', url }); return; } catch (err){ if (err && err.name === 'AbortError') return; } }
     const ok = await copyText(url); toast(ok ? 'Посилання на подію скопійовано.' : url); }
@@ -1105,6 +1150,7 @@ function digest(){
 
 /* ---------- события страницы ---------- */
 document.getElementById('results').addEventListener('click', e => {
+  const hb = e.target.closest('[data-heart]'); if (hb){ toggleFav(hb.dataset.heart, hb); return; }
   const b = e.target.closest('[data-ev]'); if (b){ openEvent(b.dataset.ev, b.dataset.d); return; }
   const m = e.target.closest('[data-mo]'); if (m){ const [y, mo] = state.month.split('-').map(Number), x = new Date(Date.UTC(y, mo - 1 + Number(m.dataset.mo), 1, 12)); state.month = iso(x).slice(0, 7); render(); return; }
   const y = e.target.closest('[data-month]'); if (y){ state.month = y.dataset.month; state.view = 'month'; render(); }
@@ -1116,20 +1162,33 @@ document.getElementById('city').addEventListener('change', e => { state.city = e
 document.getElementById('type').addEventListener('change', e => { state.type = e.target.value; render(); });
 document.getElementById('lang').addEventListener('change', e => { state.lang = e.target.value; render(); });
 document.getElementById('when').addEventListener('change', e => { state.when = e.target.value; render(); });
-document.getElementById('reset').addEventListener('click', () => { Object.assign(state, { canton: '', city: '', type: '', lang: '', when: '' }); fillSelects(); render(); });
+document.getElementById('reset').addEventListener('click', () => { Object.assign(state, { canton: '', city: '', type: '', lang: '', when: '', hearts: false }); fillSelects(); render(); });
+if (AK){
+  const luck = document.getElementById('luck'), mh = document.getElementById('myhearts'), hc = document.getElementById('hclear');
+  if (luck) luck.addEventListener('click', () => { const L = pool().filter(e => shown(e) && e.date <= today); if (!L.length){ toast('Поки немає акцій для вибору. Спробуй інший кантон або прибери частину вибору.'); return; }
+    const e = L[Math.floor(Math.random() * L.length)]; if (window.SVL_FLYER) SVL_FLYER.burst(luck, 14); toast('Тобі випала акція: ' + e.title + ' ♥'); openEvent(e.id); });
+  if (mh) mh.addEventListener('click', () => { state.hearts = !state.hearts; render(); });
+  if (hc) hc.addEventListener('click', () => { favSet([]); state.hearts = false; render(); toast('Серденька очищено на цьому пристрої.'); });
+}
+if (AK){   // постоянная акция — только на первое посещение нового клиента: условие «Только для новых клиентов» отмечаем само и не даём снять
+  const dur = document.getElementById('z-pr-dur'), cond = document.getElementById('z-pr-cond'), nw = cond && cond.querySelector('input[value="new"]');
+  if (dur && nw){ const sync = () => { nw.disabled = dur.value === 'always'; if (dur.value === 'always') nw.checked = true; };
+    dur.addEventListener('change', () => { sync(); nw.dispatchEvent(new Event('change', { bubbles: true })); }); setTimeout(sync, 600); }
+}
 document.getElementById('trial').hidden = !ADMIN;
 const addbtn = document.getElementById('addbtn');
 if (addbtn) addbtn.href = AK ? `mailto:${MAIL}?subject=${encodeURIComponent('Акція для «Свої люди у Швейцарії»')}&body=${encodeURIComponent('Добрий день!\n\nХочу розмістити акцію.\n\nНомер моєї картки (SG-… або OR-…) чи UID:\nНазва акції:\nВид (знижка у відсотках чи франках, акційна ціна, подарунок, безкоштовне знайомство):\nРозмір знижки або ціна:\nНа яку послугу чи товар:\nПерший і останній день (не більше 90 днів):\nДе діє (адреса з картки або онлайн):\nУмови (лише новим клієнтам, за попереднім записом тощо):\nЯк записатися:\nКоротко про акцію (2–3 речення):\n')}`
   : `mailto:${MAIL}?subject=${encodeURIComponent('Подія для «Свої люди у Швейцарії»')}&body=${encodeURIComponent('Вітаю!\n\nХочу розмістити подію.\n\nНазва:\nДата й час (якщо повторюється — як часто):\nМісце (адреса) або онлайн:\nМова:\nЦіна або «безкоштовно»:\nОрганізатор (ім’я, спільнота або фірма):\nUID або ферайн (для платних подій):\nПосилання на запис:\nКоротко про подію (2–3 речення):\nКонтакт для запитань:\n')}`;
 if (AK) document.querySelectorAll('#monthIcs,.viewsw').forEach(el => { el.style.display = 'none'; });
 fillSelects(); render();
-const fromHash = () => { const id = decodeURIComponent(location.hash.slice(1)); if (id === 'digest'){ digest(); return; }
+const fromHash = () => { let id = decodeURIComponent(location.hash.slice(1)); const wantFlyer = AK && /&flyer$/.test(id); id = id.replace(/&flyer$/, ''); if (id === 'digest'){ digest(); return; }
   const e0 = EVENTS.find(x => x.id === id); if (!AK && e0 && isPromo(e0)){ location.replace('/uk/akcii/#' + encodeURIComponent(id)); return; } if (id.startsWith('ok=')){ const [eid, key] = id.slice(3).split('.'); const e = EVENTS.find(x => x.id === eid); if (e && e.key && key === e.key) openEvent(eid, null, true); return; }
-  if (id && EVENTS.some(e => e.id === id && ((e.status === 'активен' && live(e)) || ADMIN))) openEvent(id); };
+  if (id && EVENTS.some(e => e.id === id && ((e.status === 'активен' && live(e)) || ADMIN))){ openEvent(id); if (wantFlyer){ const e = EVENTS.find(x => x.id === id), go = () => window.SVL_FLYER ? SVL_FLYER.open(flyerOf(e)) : setTimeout(go, 200); setTimeout(go, 250); } } };
 fromHash(); addEventListener('hashchange', fromHash);
 </script>
 <script>window.HELP = Object.assign(window.HELP || {}, {
   zpkind: '<p><b>Знижка у відсотках</b> — одне число, наприклад 20 %. Слова «до 50 %» не підходять: знижка має бути точною.</p><p><b>Знижка у франках</b> — на скільки CHF послуга дешевша.</p><p><b>Акційна ціна</b> — кінцева ціна на час акції.</p><p><b>Подарунок або бонус</b> — що людина отримає разом із послугою.</p><p><b>Безкоштовне знайомство</b> — коротка зустріч без оплати й без зобов’язань.</p><p>Розіграші й конкурси ми не розміщуємо: для них потрібні дозволи.</p>',
+  zpdur: '<p><b>На певні дати</b> — звичайна акція, до 90 днів. Після останнього дня вона йде в архів, повторити її можна кнопкою «Повторити».</p><p><b>Постійно</b> — акція «завжди», наприклад «перше прибирання за півціни». Вона лише на перше відвідування нового клієнта. Діє рік, потім ти підтверджуєш її листом. Не підтвердила — вона сама зникає з сайту. За кожен рік займає одну подію з пакета.</p><p>Безкоштовно в період запуску, до 31.12.2027.</p>',
   zpregular: '<p>Звичайна ціна — та, за якою ти працював(ла) безпосередньо перед акцією. Якщо вказати ціну, якої насправді не було, це вводить людей в оману. За швейцарським законом про недобросовісну конкуренцію (UWG) і правилами про вказування цін (PBV) так робити не можна.</p><p>Не впевнений(а)? Залиш поле порожнім: на сайті покажемо тільки знижку чи акційну ціну.</p>',
   zpcond: '<p>Познач усе, що справді обмежує акцію. Умови показуються на сайті поруч із пропозицією. Чого немає в списку, напиши в описі.</p><p><b>Кількість місць обмежена</b> — вкажи, скільком клієнтам вистачить. Якщо місця закінчаться раніше строку, напиши нам, і ми знімемо акцію.</p>',
   zfind: '<p><b>UID</b> — номер фірми або самозайнятого в реєстрі Швейцарії, вигляду CHE-123.456.789. Ми беремо його, коли розміщуємо картку, він є у твоїй картці на сайті.</p><p><b>Номер картки</b> — SG-0001 у фахівців, OR-0001 в організацій. Він є у твоїй картці на сайті, внизу.</p><p>Дані з картки ми вже перевірили, тому вписувати їх заново не потрібно. Посилання на підтвердження надішлемо на e-mail із картки: так ніхто не зможе розмістити запис від твого імені. Цей e-mail один для всіх підтверджень, у заявці його не змінити. Якщо для запису потрібен інший e-mail, впиши його в контактах: на сайті буде він.</p><p>Якщо картка на паузі, чекає на підтвердження або закінчився строк розміщення, за номером її не знайти: записи розміщуються тільки від активних карток.</p><p>Номер нікуди не надсилається: пошук іде тільки за опублікованими картками, просто на цій сторінці.</p>',

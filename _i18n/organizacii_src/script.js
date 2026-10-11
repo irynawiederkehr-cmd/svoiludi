@@ -99,15 +99,18 @@ function pOffer(e){
   return { big: 'Бесплатно', chip: 'бесплатно', sub: p.what, more };
 }
 const pShort = x => `${+x.slice(8)} ${MON_G[+x.slice(5, 7) - 1]}`;
+/* постоянная акция (promo.always): «Действует постоянно», подтверждается владельцем раз в год (data/afisha.js) */
+const pAlways = e => !!(e.promo && e.promo.always);
+const pEnd = e => pAlways(e) ? 'постоянно' : 'до ' + pShort(lastDay(e));
 const isOrgOf = (e, o) => (e.organizers || []).some(x => x && typeof x === 'object' && x.org === o.id);
 const promoOf = o => o.free === true ? [] : AFISHA.filter(e => isPromo(e) && e.status === 'активен' && isOrgOf(e, o) && e.date <= today && lastDay(e) >= today)
   .sort((a, b) => lastDay(a).localeCompare(lastDay(b))).slice(0, 2);
 const promoStrip = o => { const L = promoOf(o); if (!L.length) return '';
   return `<div class="pr-strip" role="note"><div class="pr-hd"><b>${L.length > 1 ? 'Акции организации' : 'Акция организации'}</b><i class="pr-ad">Реклама</i></div>${L.map(e => { const p = pOffer(e), cl = pCondList(e.promo);
-    return `<div class="pr-one"><span class="pr-big">${esc(p.big)}</span><div class="pr-txt"><b>${esc(e.title)}</b><span>${esc(p.sub || '')}${p.more.length ? ' · ' + esc(p.more.join('; ')) : ''}</span><small>До ${esc(pShort(lastDay(e)))}${cl.length ? ' · ' + esc(cl.join(' · ')) : ''}${e.sample ? ' · образец' : ''}</small></div><div class="pr-act"><a class="btn ghost" href="../akcii/#${esc(e.id)}">Подробности и как воспользоваться</a></div></div>`; }).join('')}
+    return `<div class="pr-one"><span class="pr-big">${esc(p.big)}</span><div class="pr-txt"><b>${esc(e.title)}</b><span>${esc(p.sub || '')}${p.more.length ? ' · ' + esc(p.more.join('; ')) : ''}</span><small>${pAlways(e) ? 'Действует постоянно' : 'До ' + esc(pShort(lastDay(e)))}${cl.length ? ' · ' + esc(cl.join(' · ')) : ''}${e.sample ? ' · образец' : ''}</small></div><div class="pr-act"><a class="btn ghost" href="../akcii/#${esc(e.id)}">Подробности и как воспользоваться</a><a class="pr-fl" href="../akcii/#${esc(e.id)}&amp;flyer">♥ Скачать флаер</a></div></div>`; }).join('')}
     <p class="pr-note">Акцию объявляет и выполняет сама организация. «Свои люди» не продают услуги и товары и не отвечают за условия акции: договаривайся напрямую с организацией.</p></div>`; };
 const promoChip = o => { const L = promoOf(o); if (!L.length) return ''; const e = L[0], p = pOffer(e);
-  return `<span class="pr-chip"><b>Акция</b> · ${esc(p.chip || p.big)} до ${esc(pShort(lastDay(e)))}<i>Реклама</i></span>`; };
+  return `<span class="pr-chip"><b>Акция</b> · ${esc(p.chip || p.big)} ${esc(pEnd(e))}<i>Реклама</i></span>`; };
 const eventsOf = o => AFISHA.filter(e => e.status !== 'закрыто' && !isPromo(e) && (e.organizers || []).some(x => x && typeof x === 'object' && x.org === o.id) && (!lastDay(e) || lastDay(e) >= today));
 
 function row(o){
