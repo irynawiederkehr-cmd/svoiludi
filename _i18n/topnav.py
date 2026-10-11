@@ -13,6 +13,25 @@ NAV = [('', 'Специалисты'), ('events/', 'События'), ('kursy/',
 IRINA = ('https://voznesenskaya.ch/', 'Сайт Ирины')
 CTA = ('join/', 'Подать заявку')   # кнопка в шапке (решение Ирины 09.10.2026: «Подать заявку» вместо «Разместиться»)
 
+# Закреплённая плашка над шапкой на ВСЕХ страницах (просьба Ирины 11.10.2026: «закрепить уведомление… до конца 2027 года
+# размещение карточки в проекте бесплатно! Дополнительные сервисы платно. Цены ещё уточняются»).
+# Внутри header.top: на компьютере шапка липкая — плашка видна всегда; на телефоне и планшете шапка уходит при прокрутке
+# вместе с плашкой и ничего не закрывает (узкая строка меню при прокрутке плашку не копирует). Ссылка — «Условия размещения», п. 2.
+# Убрать после 31.12.2027: FREE_NOTE = None и python3 _i18n/pwa.py.
+FREE_NOTE = ('<b>Разместить карточку в справочнике — бесплатно до конца 2027 года.</b> '
+             'Дополнительные услуги платные, цены на них сейчас уточняются.')
+FREE_LINK = ('usloviya/#besplatno', 'Что бесплатно и что платно')
+LEAF = ('<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21.5V10"/>'
+        '<path d="M12 15.5c-4 0-6.6-2.6-6.6-6.6 4 0 6.6 2.6 6.6 6.6z"/><path d="M12 11.5c0-3.6 2.4-6.4 6.6-6.4 0 3.8-2.6 6.4-6.6 6.4z"/></svg>')
+
+
+def free_note(up, sec):
+    if not FREE_NOTE:
+        return ''
+    href = '#' + FREE_LINK[0].split('#')[1] if sec == FREE_LINK[0].split('#')[0] else up + FREE_LINK[0]
+    return (f'  <div class="sl-free" role="note"><p>{LEAF}<span>{FREE_NOTE} '
+            f'<a href="{href}">{FREE_LINK[1]}&nbsp;→</a></span></p></div>\n')
+
 MARK_SVG = None
 
 
@@ -50,7 +69,7 @@ def header(url, home_html):
             items.append(f'      <a href="{link}"' + (' aria-current="page"' if cur else '') + f'>{name}</a>')
         items.append(f'      <a href="{IRINA[0]}">{IRINA[1]}</a>')
     cta = '#form' if sec == 'join/' else up + CTA[0]
-    return ('<header class="top">\n  <div class="page">\n'
+    return ('<header class="top">\n' + free_note(up, sec) + '  <div class="page">\n'
             f'    <a class="mark" href="{home}" aria-label="Свои люди в Швейцарии — в начало">\n'
             f'      {_mark(home_html)}\n'
             '      <span><b>Свои люди</b><small>в Швейцарии</small></span>\n    </a>\n'
@@ -78,6 +97,15 @@ CSS = ('<style id="sl-top">/* единая шапка svoiludi.ch (09.10.2026), 
        '@media (max-width:420px){header.top .page{padding-block:8px;gap:8px}header.top .mono{width:32px;height:32px}header.top .mark{gap:8px}'
        'header.top .mark b{font-size:1.06rem}header.top .mark small{display:none}header.top .navcta{font-size:.8rem;padding:6px 11px}}'
        '@media (max-width:380px){header.top .page{gap:6px;padding-inline:14px}header.top .mark b{font-size:1rem}header.top .navcta{font-size:.74rem;padding:6px 8px}}'
+       # плашка «Бесплатно до конца 2027 года» (11.10.2026): светлый шалфей, как «Бесплатно…» на badge/ (зелёный = бесплатно)
+       'header.top .sl-free{background:color-mix(in srgb,var(--sage,#66704F) 22%,var(--paper,#FFFCF8));border-bottom:1px solid color-mix(in srgb,var(--sage,#66704F) 32%,transparent);color:var(--ink,#2F2924);font-size:.84rem;line-height:1.45}'
+       'header.top .sl-free p{max-width:1340px;margin:0 auto;padding:7px 20px;display:flex;align-items:flex-start;justify-content:center;gap:9px;box-sizing:border-box}'
+       'header.top .sl-free svg{width:17px;height:17px;flex:none;margin-top:1px;fill:none;stroke:#4F5E3E;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}'
+       'header.top .sl-free b{font-weight:700}'
+       'header.top .sl-free a{color:#4F5E3E;font-weight:700;text-decoration:underline;text-underline-offset:2px;white-space:nowrap}'
+       '@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) header.top .sl-free a{color:#B9C69F}:root:not([data-theme="light"]) header.top .sl-free svg{stroke:#B9C69F}}'
+       ':root[data-theme="dark"] header.top .sl-free a{color:#B9C69F}:root[data-theme="dark"] header.top .sl-free svg{stroke:#B9C69F}'
+       '@media (max-width:700px){header.top .sl-free{font-size:.8rem;line-height:1.4}header.top .sl-free p{justify-content:flex-start;padding:7px 16px}}'
        '@media print{header.top{display:none!important}}'
        '</style>')
 
