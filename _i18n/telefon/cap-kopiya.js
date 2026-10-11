@@ -37,6 +37,10 @@ const S = [
   ['zn-rules', '/badge/#org', 390, 669, { later: true, scrollSel: '#h-rules', top: 70 }], ['zn-uk', '/uk/badge/#org', 390, 669, { later: true, scrollSel: '.b-mini', top: 70 }],
   ['zn-spec', '/badge/#viktoria-ponomarenko', 390, 669, { later: true, scrollSel: '.pickrow', top: 40 }], ['zn-org', '/organizacii/', 390, 669, { later: true, scrollSel: '#add .vac-kinds', top: 70 }],
   ['zn-desk', '/badge/#org', 1280, 800, { later: true, desk: true, scrollSel: '.pickrow', top: 20 }],
+  // значок «Мой проект «Свои люди»» в подвале voznesenskaya.ch (11.10.2026)
+  ['zsv-ru', '/', 390, 669, { vz: true, later: true, scrollSel: '.vz-svoi', top: 420 }], ['zsv-dark', '/', 390, 669, { vz: true, later: true, dark: true, scrollSel: '.vz-svoi', top: 420 }],
+  ['zsv-uk', '/uk/', 390, 669, { vz: true, later: true, scrollSel: '.vz-svoi', top: 420 }], ['zsv-test', '/kompas/', 390, 669, { vz: true, locale: 'ru-RU', later: true, scrollSel: '.vz-svoi', top: 420 }],
+  ['zsv-desk', '/', 1280, 800, { vz: true, desk: true, later: true, scrollSel: '.vz-svoi', top: 560 }],
 ];
 (async () => {
   const srv = spawn('python3', ['-I', '-m', 'http.server', String(PORT), '--directory', require('path').resolve(__dirname, '../..')], { cwd: __dirname, stdio: 'ignore' });

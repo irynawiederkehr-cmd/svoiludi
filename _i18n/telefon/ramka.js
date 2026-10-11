@@ -208,6 +208,9 @@ const JOBS = {
   'znachok/zn-top': ['p', () => safF('zn-top')], 'znachok/zn-mini': ['p', () => safF('zn-mini')], 'znachok/zn-code': ['p', () => safF('zn-code')],
   'znachok/zn-more': ['p', () => safF('zn-more')], 'znachok/zn-rules': ['p', () => safF('zn-rules')], 'znachok/zn-uk': ['a', () => chrF('zn-uk')],
   'znachok/zn-spec': ['p', () => safF('zn-spec')], 'znachok/zn-org': ['p', () => safF('zn-org')],
+  // значок «Мой проект «Свои люди»» на voznesenskaya.ch (11.10.2026)
+  'znachok-vz/zsv-ru': ['p', () => safF('zsv-ru', 'voznesenskaya.ch', '#F4EDE3')], 'znachok-vz/zsv-dark': ['a', () => chrF('zsv-dark', true, 'voznesenskaya.ch')],
+  'znachok-vz/zsv-uk': ['p', () => safF('zsv-uk', 'voznesenskaya.ch', '#F4EDE3')], 'znachok-vz/zsv-test': ['a', () => chrF('zsv-test', false, 'voznesenskaya.ch')],
 };
 (async () => {
   const b = await chromium.launch();
