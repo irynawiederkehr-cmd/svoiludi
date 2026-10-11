@@ -818,9 +818,8 @@ a.yours:hover{background:#EBD3A3}
 </section>
 <section class="cn-sec cn-calc" id="calc">
   <h2>Зберіть свій набір і порівняйте з VIP</h2>
-  <p class="cn-muted">Базова за 72 уже всередині. Виберіть основний кантон, позначте опції й за потреби додайте додаткові кантони. Внизу з’явиться порівняння.</p>
-  <label for="mainc"><span>Основний кантон</span><select id="mainc"></select></label>
-  <label><input type="checkbox" data-p="36" id="o1"><span id="o1t">Увесь кантон</span><b>36</b></label>
+  <p class="cn-muted">Базова за 72 уже всередині. Позначте «Увесь кантон» і виберіть основний кантон картки, потім позначте інші опції й за потреби додайте додаткові кантони. Внизу з’явиться порівняння.</p>
+  <label><input type="checkbox" data-p="36" id="o1"><span>Увесь кантон</span><select id="mainc" aria-label="Основний кантон картки"></select><b>36</b></label>
   <div id="extra"></div>
   <button type="button" id="addc" class="cn-addc">+ 1 додатковий кантон, 36 CHF</button>
   <label><input type="checkbox" data-p="60" id="o3"><span>Уся Швейцарія онлайн</span><b>60</b></label>
@@ -881,7 +880,7 @@ a.yours:hover{background:#EBD3A3}
 (function(){
   var C=['Цюрих','Берн','Люцерн','Урі','Швіц','Обвальден','Нідвальден','Гларус','Цуг','Фрібур','Золотурн','Базель-Штадт','Базель-Ландшафт','Шаффгаузен','Аппенцелль-Ауссерроден','Аппенцелль-Іннерроден','Санкт-Галлен','Граубюнден','Ааргау','Тургау','Тічино','Во','Вале','Невшатель','Женева','Юра'];
   var main=document.getElementById('mainc'),extra=document.getElementById('extra'),add=document.getElementById('addc'),
-      t=document.getElementById('total'),m=document.getElementById('msg'),o1t=document.getElementById('o1t');
+      t=document.getElementById('total'),m=document.getElementById('msg');
   main.innerHTML=C.map(function(n){return '<option>'+n+'</option>'}).join('');
   var boxes=document.querySelectorAll('#calc input[type=checkbox]');
   function fillExtra(sel){
@@ -897,7 +896,6 @@ a.yours:hover{background:#EBD3A3}
   }
   function upd(){
     var s=72,n=0,names=[];
-    o1t.textContent='Увесь кантон: '+main.value;
     boxes.forEach(function(b){if(b.checked){s+=+b.dataset.p;n++}});
     extra.querySelectorAll('select').forEach(function(x){fillExtra(x);if(x.value){s+=36;n++;names.push(x.value)}});
     t.textContent=s;
@@ -907,7 +905,8 @@ a.yours:hover{background:#EBD3A3}
     else if(s>=240) txt='Ваш набір коштує '+s+'. VIP за 240 включає все це плюс виділення кольором і звіт відвідувань. Вигідніше на '+(s-240)+' CHF.';
     else if(s>=150) txt='Залишилося '+(240-s)+' CHF до VIP. Там колір картки, місце вище, усі опції та звіт відвідувань. Набрати те саме окремо коштувало б '+full+'.';
     else txt='Ваш набір '+s+' CHF. З VIP за 240 в охоплення входять усі опції одразу, і картка виділена кольором.';
-    if(names.length) txt='Основний кантон: '+main.value+'. Додаткові: '+names.join(', ')+'. '+txt;
+    var cn=[];if(document.getElementById('o1').checked)cn.push('Увесь кантон: '+main.value);if(names.length)cn.push('Додаткові: '+names.join(', '));
+    if(cn.length) txt=cn.join('. ')+'. '+txt;
     m.textContent=txt;
   }
   boxes.forEach(function(b){b.addEventListener('change',upd)});
