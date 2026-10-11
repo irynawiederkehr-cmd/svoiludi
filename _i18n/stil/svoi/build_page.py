@@ -42,7 +42,9 @@ def blob_uri(b):
         DU[b] = datauri(SRC[b])
     return DU[b]
 def deblob(s):
-    return re.sub(r'/_blob/([0-9a-f]{32})', lambda m: blob_uri(m.group(1)), s)
+    s = re.sub(r'/_blob/([0-9a-f]{32})', lambda m: blob_uri(m.group(1)), s)
+    # /_repo/<путь> — картинка прямо из репозитория svoiludi (например, значок badge/img/…), встраивается в страницу
+    return re.sub(r'/_repo/([\w./-]+\.(?:png|jpg|svg))', lambda m: datauri(os.path.join(REPO, m.group(1))), s)
 
 # --- шрифты внутрь страницы ---
 fonts = ''
