@@ -621,7 +621,7 @@ a.bot:hover{color:#B98324}
       <a href="instrumenty/">Полезные инструменты</a>
       <a href="events/">События и курсы</a>
       <a href="novosti/">Что нового</a>
-      <a href="vakansii/" data-ira>Вакансии и партнёрство</a>
+      <a href="vakansii/">Вакансии и партнёрство</a>
     </nav>
     <a class="navcta" href="join/">Подать заявку</a>
   </div>
@@ -998,7 +998,7 @@ const favBtn = s => `<button class="fav" type="button" data-fav="${esc(s.id)}" a
 const VAC_KIND = { staff: 'Ищет себе сотрудника', partner: 'Ищет себе партнёра' };
 // 11.10.2026: вкладка «Вакансии и партнёрство» выложена, но скрыта («размести но скрой пока») — объявления в карточках видит только Ирина.
 // Открыть для всех: VAK_OPEN = true (и см. VAK_OPEN в _i18n/struktura_src/build.py).
-const VAK_OPEN = false;
+const VAK_OPEN = true;   // открыто 11.10.2026, 14:39
 const vacsOf = s => (VAK_OPEN || ADMIN ? (window.VACANCIES || []) : []).filter(v => v.author === s.id && v.status === 'активен' && v.confirm && v.confirm.date && (!v.until || v.until > new Date().toISOString().slice(0, 10)));
 const vacChips = s => { const kinds = [...new Set(vacsOf(s).map(v => v.kind))]; return kinds.length ? `<div class="vac-chips">${kinds.map(k => `<a class="vac-chip" href="vakansii/#${esc(vacsOf(s).find(v => v.kind === k).id)}">${VAC_KIND[k]}</a>`).join('')}</div>` : ''; };
 /* VIP — платное размещение: кружок «?» у значка (правило Ирины, проверка 09.10.2026) */
