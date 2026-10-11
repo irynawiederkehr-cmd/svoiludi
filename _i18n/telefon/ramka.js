@@ -211,6 +211,8 @@ const JOBS = {
   // значок «Мой проект «Свои люди»» на voznesenskaya.ch (11.10.2026)
   'znachok-vz/zsv-ru': ['p', () => safF('zsv-ru', 'voznesenskaya.ch', '#F4EDE3')], 'znachok-vz/zsv-dark': ['a', () => chrF('zsv-dark', true, 'voznesenskaya.ch')],
   'znachok-vz/zsv-uk': ['p', () => safF('zsv-uk', 'voznesenskaya.ch', '#F4EDE3')], 'znachok-vz/zsv-test': ['a', () => chrF('zsv-test', false, 'voznesenskaya.ch')],
+  // значок: белый и чёрный варианты (11.10.2026)
+  'znachok-cveta/zc-four': ['p', () => safF('zc-four')], 'znachok-cveta/zc-black': ['p', () => safF('zc-black')], 'znachok-cveta/zc-uk': ['a', () => chrF('zc-uk')],
 };
 (async () => {
   const b = await chromium.launch();

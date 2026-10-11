@@ -76,14 +76,18 @@ textarea.code{width:100%;min-height:96px;font:13px/1.45 ui-monospace,Menlo,Conso
 textarea.txt{width:100%;min-height:96px;font:inherit;font-size:.95rem;line-height:1.5;border:1.5px solid var(--line);border-radius:12px;padding:10px 12px;background:var(--bg);color:var(--ink);resize:vertical}
 .urlline{font-size:.92rem;overflow-wrap:anywhere;color:var(--ink);background:var(--bg);border:1.5px solid var(--line);border-radius:12px;padding:10px 12px}
 
-/* 1. значок для сайта: светлый и тёмный */
+/* 1. значок для сайта: четыре цвета — светлый (кремовый), белый, тёмный (зелёный), чёрный (белый и чёрный — 11.10.2026, «у людей разные дизайны сайтов») */
 .themes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
-@media (max-width:640px){.themes{grid-template-columns:1fr}}
+@media (max-width:640px){.themes{gap:10px}}
 .theme{font:inherit;text-align:left;cursor:pointer;color:var(--ink);border:2px solid var(--line);border-radius:18px;padding:0;background:none;overflow:hidden;display:flex;flex-direction:column;min-width:0}
 .theme[aria-pressed="true"]{border-color:var(--brown);box-shadow:0 0 0 3px color-mix(in srgb,var(--sage) 30%,transparent)}
 .theme .stage{display:grid;place-items:center;padding:26px 16px;min-height:132px}
-.theme.light .stage{background:#FFFFFF;background-image:radial-gradient(#E9ECE2 1px,transparent 1px);background-size:14px 14px}
+.theme.light .stage{background:#F4EFE6;background-image:radial-gradient(#E4DCCD 1px,transparent 1px);background-size:14px 14px}
+.theme.white .stage{background:#FFFFFF;background-image:radial-gradient(#ECECEC 1px,transparent 1px);background-size:14px 14px}
 .theme.dark .stage{background:#26292A;background-image:radial-gradient(#33373A 1px,transparent 1px);background-size:14px 14px}
+.theme.black .stage{background:#000000;background-image:radial-gradient(#1E1E1E 1px,transparent 1px);background-size:14px 14px}
+/* на телефоне все четыре цвета видны сразу: по два в ряд, подпись под названием */
+@media (max-width:640px){.theme .stage{padding:14px 8px;min-height:0}.theme{border-radius:14px}.theme .cap{flex-wrap:wrap;gap:2px 8px;padding:8px 10px;font-size:.88rem}.theme .cap i{width:18px;height:18px}.theme .cap span{flex:1 0 100%;padding-left:26px;font-size:.76rem;line-height:1.3}}
 .theme canvas{width:280px;max-width:100%;height:auto;display:block}
 .theme .cap{display:flex;align-items:center;gap:10px;padding:10px 14px;font-weight:700;font-size:.92rem;background:var(--paper);border-top:1.5px solid var(--line)}
 .theme .cap i{flex:none;width:20px;height:20px;border-radius:50%;border:2px solid var(--line);display:grid;place-items:center}
@@ -154,8 +158,10 @@ footer a{color:var(--muted)}
   <section class="b-sec b-mini" aria-labelledby="h-site">
     <h2 id="h-site"><span class="num">1</span><span id="siteTitle">Значок для сайта</span><button type="button" class="qh" data-help="znak" aria-label="Подсказка: что значит значок" aria-expanded="false">?</button><small>Выберите цвет, скопируйте код и вставьте его на свой сайт. Значок ведёт прямо на вашу карточку.</small></h2>
     <div class="themes" role="group" aria-label="Цвет значка">
-      <button type="button" class="theme light" data-theme="light" aria-pressed="true"><span class="stage"><canvas id="mLight" width="560" height="160" aria-label="Светлый значок"></canvas></span><span class="cap"><i aria-hidden="true"></i>Светлый <span>для светлого сайта</span></span></button>
-      <button type="button" class="theme dark" data-theme="dark" aria-pressed="false"><span class="stage"><canvas id="mDark" width="560" height="160" aria-label="Тёмный значок"></canvas></span><span class="cap"><i aria-hidden="true"></i>Тёмный <span>для тёмного сайта</span></span></button>
+      <button type="button" class="theme light" data-theme="light" aria-pressed="true"><span class="stage"><canvas id="mLight" width="560" height="160" aria-label="Светлый значок"></canvas></span><span class="cap"><i aria-hidden="true"></i>Светлый <span>кремовый, для светлого сайта</span></span></button>
+      <button type="button" class="theme white" data-theme="white" aria-pressed="false"><span class="stage"><canvas id="mWhite" width="560" height="160" aria-label="Белый значок"></canvas></span><span class="cap"><i aria-hidden="true"></i>Белый <span>для белого сайта</span></span></button>
+      <button type="button" class="theme dark" data-theme="dark" aria-pressed="false"><span class="stage"><canvas id="mDark" width="560" height="160" aria-label="Тёмный значок"></canvas></span><span class="cap"><i aria-hidden="true"></i>Тёмный <span>зелёный, для тёмного сайта</span></span></button>
+      <button type="button" class="theme black" data-theme="black" aria-pressed="false"><span class="stage"><canvas id="mBlack" width="560" height="160" aria-label="Чёрный значок"></canvas></span><span class="cap"><i aria-hidden="true"></i>Чёрный <span>для чёрного сайта</span></span></button>
     </div>
     <label for="code" class="eyebrow">Код для сайта<button type="button" class="qh" data-help="kod" aria-label="Подсказка: как вставить код" aria-expanded="false">?</button></label>
     <textarea id="code" class="code" readonly></textarea>
@@ -244,6 +250,15 @@ const cardLink = (kind, x) => kind === 'org' ? `${HOST}${PRE}/organizacii/#${x.i
 const imgUrl = (kind, theme) => `${HOST}/badge/img/${kind}-${LG}-${theme}.png`;
 
 let KIND = 'spec', CUR = null, THEME = 'light';
+// цвета значка: светлый (кремовый) и тёмный (зелёный) — с 10.10.2026, белый и чёрный — с 11.10.2026; имена картинок badge/img/<kind>-<lang>-<theme>.png не менять
+const THEMES = ['light', 'white', 'dark', 'black'];
+const CV = { light: 'mLight', white: 'mWhite', dark: 'mDark', black: 'mBlack' };
+const PAL = {
+  light: { bg: '#FFFCF8', line: '#C9D2B6', eb: '#B98324', big: '#4F5E3E', dom: '#7A6E62' },
+  white: { bg: '#FFFFFF', line: '#D6D6D6', eb: '#B98324', big: '#4F5E3E', dom: '#6F6F6F' },
+  dark:  { bg: '#4F5E3E', line: '#66704F', eb: '#F3E3C2', big: '#FFFCF8', dom: '#E3E8D6' },
+  black: { bg: '#111111', line: '#3A3A3A', eb: '#E9C77E', big: '#FFFFFF', dom: '#BDBDBD' }
+};
 
 // ---------- рисунки ----------
 const LOGO = new Image(); LOGO.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(LOGO_SVG);
@@ -257,18 +272,18 @@ function spaced(ctx, px){ try { ctx.letterSpacing = px + 'px'; } catch (_) {} }
 // маленький значок для сайта: 280 × 80, рисуется в 2 раза крупнее для чётких экранов
 async function drawMini(cv, kind, theme){
   await ready;
-  const s = cv.width / 280, W = 280, H = 80, ctx = cv.getContext('2d'), t = TX[kind], dark = theme === 'dark';
+  const s = cv.width / 280, W = 280, H = 80, ctx = cv.getContext('2d'), t = TX[kind], p = PAL[theme] || PAL.light;
   ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.clearRect(0, 0, cv.width, cv.height); ctx.scale(s, s);
   ctx.beginPath(); ctx.roundRect(1, 1, W - 2, H - 2, 14);
-  ctx.fillStyle = dark ? '#4F5E3E' : '#FFFCF8'; ctx.fill();
-  ctx.lineWidth = 1.5; ctx.strokeStyle = dark ? '#66704F' : '#C9D2B6'; ctx.stroke();
+  ctx.fillStyle = p.bg; ctx.fill();
+  ctx.lineWidth = 1.5; ctx.strokeStyle = p.line; ctx.stroke();
   try { ctx.drawImage(LOGO, 13, 13, 54, 54); } catch (_) {}
   const x = 78, max = W - x - 12;
   spaced(ctx, 1.1); fit(ctx, t.eb, z => `700 ${z}px Manrope, Arial, sans-serif`, 9, max);
-  ctx.fillStyle = dark ? '#F3E3C2' : '#B98324'; ctx.textBaseline = 'alphabetic'; ctx.fillText(t.eb, x, 27);
+  ctx.fillStyle = p.eb; ctx.textBaseline = 'alphabetic'; ctx.fillText(t.eb, x, 27);
   spaced(ctx, 0); fit(ctx, t.big, z => `400 ${z}px Forum, Georgia, serif`, 23, max);
-  ctx.fillStyle = dark ? '#FFFCF8' : '#4F5E3E'; ctx.fillText(t.big, x, 51);
-  ctx.font = '600 11px Manrope, Arial, sans-serif'; ctx.fillStyle = dark ? '#E3E8D6' : '#7A6E62'; ctx.fillText('svoiludi.ch', x, 67);
+  ctx.fillStyle = p.big; ctx.fillText(t.big, x, 51);
+  ctx.font = '600 11px Manrope, Arial, sans-serif'; ctx.fillStyle = p.dom; ctx.fillText('svoiludi.ch', x, 67);
   ctx.setTransform(1, 0, 0, 1, 0, 0);
 }
 
@@ -328,7 +343,7 @@ function fill(){
   drawSquare();
 }
 function setTheme(th){
-  THEME = th === 'dark' ? 'dark' : 'light';
+  THEME = THEMES.includes(th) ? th : 'light';
   document.querySelectorAll('.theme').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.theme === THEME)));
   fill();
 }
@@ -343,7 +358,7 @@ function setKind(kind, id){
   $('pickLbl').textContent = t.who;
   $('pick').innerHTML = p.map(x => `<option value="${esc(x.id)}">${esc(x.name)}${KIND === 'spec' && x.role ? ' — ' + esc(x.role) : ''}</option>`).join('');
   const note = $('sampleNote'); note.hidden = !onlySamples(KIND); note.textContent = t.sample;
-  drawMini($('mLight'), KIND, 'light'); drawMini($('mDark'), KIND, 'dark');
+  THEMES.forEach(th => drawMini($(CV[th]), KIND, th));
   select(id);
 }
 function select(id){
@@ -367,7 +382,7 @@ $('copytxt').onclick = () => copy($('txt').value, MSG.text);
 $('copyimg').onclick = () => copy(imgUrl(KIND, THEME), MSG.img);
 $('png').onclick = () => save($('cv'), fileName(`${TX[KIND].big} — ${CUR.name}`) + '.png');
 $('qr').onclick = () => { const q = qrModules(cardLink(KIND, CUR)), c = document.createElement('canvas'); c.width = c.height = 1000; const x = c.getContext('2d'); x.fillStyle = '#fff'; x.fillRect(0, 0, 1000, 1000); drawQr(x, q, 60, 60, 880); save(c, fileName(`QR — ${CUR.name}`) + '.png'); };
-$('minipng').onclick = () => save($(THEME === 'dark' ? 'mDark' : 'mLight'), fileName(TX[KIND].big) + '.png');
+$('minipng').onclick = () => save($(CV[THEME]), fileName(TX[KIND].big) + '.png');
 addEventListener('hashchange', fromHash);
 fromHash();
 // для сборки картинок значков (_i18n/badge_img.js): готовый PNG значка без выбора на странице
