@@ -460,7 +460,7 @@ a.bot:hover{color:#B98324}
 /* сердечко и «Мой список» с числом (11.10.2026), категории карточки */
 .lk{display:inline-flex;align-items:center;gap:4px;border:1.5px solid var(--line);background:var(--paper);color:var(--muted);border-radius:10px!important;padding:3px 8px 3px 6px;font:700 .78rem/1.2 var(--body,system-ui);letter-spacing:0;text-transform:none;cursor:pointer;flex:none}
 .lk svg{flex:none}.lk b{font-weight:700;color:var(--ink);font-variant-numeric:tabular-nums}
-.lk[aria-pressed="true"]{border-color:var(--brown)}
+.lk[aria-pressed="true"]{border-color:#E8798F;background:color-mix(in srgb,#E8798F 12%,var(--paper))}
 .sp-sub .lk{margin-left:auto}.sp-sub .badge~.lk,.sp-sub .vip-q~.lk{margin-left:6px}
 .card-acts .lk-big{gap:6px;padding:10px 14px;font-size:.86rem}
 .lk-big i{font-style:normal;font-weight:500;font-size:.78rem;color:var(--muted)}
@@ -955,8 +955,11 @@ async function socLoad(ids){
 const HPATH = 'M12 21s-8-5.2-8-11a4.6 4.6 0 0 1 8-3 4.6 4.6 0 0 1 8 3c0 5.8-8 11-8 11z';
 const heartLvl = n => n >= 50 ? 3 : n >= 10 ? 2 : n >= 1 ? 1 : 0;
 const LVL_T = ['', 'нравится', 'люблю', 'обожаю'];
-const heartSvg = (n, on, size) => { const l = heartLvl(n), f = ['none', 'var(--sage-soft)', 'var(--sage)', 'var(--mustard)'][l], st = on ? 'var(--brown)' : ['currentColor', 'var(--sage)', 'var(--sage)', 'var(--brown)'][l];
-  return `<svg viewBox="0 0 24 24" width="${size}" height="${size}" aria-hidden="true"><path d="${HPATH}" fill="${f}" stroke="${st}" stroke-width="${on ? 2.3 : 1.7}" stroke-linejoin="round"/>${l === 3 ? '<path d="M8 9.5q1.2-2 3-1.5" fill="none" stroke="var(--paper)" stroke-width="1.4" stroke-linecap="round"/>' : ''}</svg>`; };
+/* цвета сердечка (Ирина 11.10.2026: «цвета более привлекательные сделай»): чем больше сердечек, тем теплее — контур, румяный, розовый, малиновый с золотой искоркой */
+const HEART_C = [['none', 'currentColor'], ['#FDE3E8', '#E8798F'], ['#F07A92', '#D9536E'], ['url(#hg)', '#B81D4E']];
+let heartN = 0;
+const heartSvg = (n, on, size) => { const l = heartLvl(n), [f, st] = HEART_C[l], id = 'hg' + (++heartN);
+  return `<svg viewBox="0 0 24 24" width="${size}" height="${size}" aria-hidden="true">${l === 3 ? `<defs><linearGradient id="${id}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FF8AA1"/><stop offset="1" stop-color="#D6245A"/></linearGradient></defs>` : ''}<path d="${HPATH}" fill="${f.replace('#hg', '#' + id)}" stroke="${on ? '#A3234A' : st}" stroke-width="${on ? 2.4 : 1.7}" stroke-linejoin="round"/>${l >= 2 ? '<path d="M7.6 9.6q1.1-2.1 3.1-1.7" fill="none" stroke="#FFFFFF" stroke-opacity=".75" stroke-width="1.4" stroke-linecap="round"/>' : ''}${l === 3 ? '<path d="M19.6 1.4l.7 1.8 1.8.7-1.8.7-.7 1.8-.7-1.8-1.8-.7 1.8-.7z" fill="#F6B93B"/>' : ''}</svg>`; };
 const likeLabel = id => LIKES.has(id) ? 'Убрать сердечко' : 'Поставить сердечко';
 const likeInner = (id, big) => { const n = socN('like', id); return heartSvg(n, LIKES.has(id), big ? 20 : 16) + `<b>${n}</b>` + (big && n ? `<i>${LVL_T[heartLvl(n)]}</i>` : ''); };
 const likeBtn = (s, big) => s.sample ? '' : `<button type="button" class="lk${big ? ' lk-big btn ghost' : ''}" data-like="${esc(s.id)}" aria-pressed="${LIKES.has(s.id)}" aria-label="${likeLabel(s.id)}" title="${likeLabel(s.id)}">${likeInner(s.id, big)}</button>`;
