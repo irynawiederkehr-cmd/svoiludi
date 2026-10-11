@@ -611,6 +611,36 @@ a.yours:hover{background:#EBD3A3}
 #ceny .cn-fl li.cn-n span{text-decoration:line-through;text-decoration-thickness:1px}
 #ceny .cn-fl li em{font-style:normal;font-size:12px;font-weight:700;color:var(--brown);flex:0 1 auto;max-width:48%;text-align:right;overflow-wrap:break-word}
 #ceny .cn-fl li.cn-n em{font-weight:400;color:var(--muted)}
+#ceny .cn-calc input[type=date], #ceny .cn-calc input[type=number]{font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:6px 8px;max-width:48%;min-width:0}
+#ceny .cn-zn .cn-chs{display:flex;flex-wrap:wrap;gap:6px;margin:2px 0 6px}
+#ceny .cn-zn .cn-chs span{padding:3px 10px;border-radius:999px;background:var(--mustard-soft);font-size:13px;font-weight:700;color:var(--brown)}
+#ceny .cn-nm{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+#ceny .cn-nm .cn-box b{display:block;font:400 40px var(--display);line-height:1.1;color:var(--brown)}
+#ceny .cn-nm .cn-box span.cn-l{font-size:13px;color:var(--muted)}
+#ceny .cn-stps{counter-reset:stp}
+#ceny .cn-stps .cn-box{position:relative;padding-top:42px}
+#ceny .cn-stps .cn-box::before{counter-increment:stp;content:counter(stp);position:absolute;left:14px;top:12px;width:24px;height:24px;border-radius:50%;background:var(--sage);color:var(--paper);display:grid;place-items:center;font:700 13px var(--body)}
+#ceny .cn-brd{gap:12px}
+#ceny .cn-brd .cn-crow{flex-direction:column;align-items:stretch;gap:6px}
+#ceny .cn-brd .cn-crow select{max-width:100%;width:100%}
+#ceny .cn-brd .cn-st{display:none;border:1.5px solid var(--line);border-radius:12px;padding:12px 14px;flex-direction:column;gap:6px;background:var(--paper)}
+#ceny .cn-brd .cn-st.cn-on{display:flex}
+#ceny .cn-brd .cn-st.cn-no{border-color:var(--warn);background:var(--warn-soft)}
+#ceny .cn-brd .cn-st.cn-part{border-color:var(--mustard);background:var(--mustard-soft)}
+#ceny .cn-brd .cn-st.cn-free{border-color:var(--sage);background:var(--sage-soft)}
+#ceny .cn-brd .cn-st>b{font-size:17px}
+#ceny .cn-brd .cn-dots{display:flex;gap:6px}
+#ceny .cn-brd .cn-dots i{width:16px;height:16px;border-radius:50%;border:2px solid var(--brown);display:block}
+#ceny .cn-brd .cn-dots i.cn-f{background:var(--brown)}
+#ceny .cn-brd .cn-dots i.cn-r{background:repeating-linear-gradient(45deg,var(--mustard-soft) 0 3px,var(--mustard) 3px 5px)}
+#ceny .cn-brd .cn-fake{align-self:flex-start;font:700 14px var(--body);border:1.5px solid var(--sage);background:var(--sage);color:var(--paper);border-radius:10px;padding:9px 14px;cursor:default;opacity:.9}
+#ceny .cn-brd .cn-fake.cn-gh{background:transparent;color:var(--sage)}
+#ceny .cn-msgb{border:1.5px dashed var(--line);border-radius:12px;padding:12px 14px;background:var(--paper);font-size:14px;line-height:1.5}
+#ceny .cn-msgb p+p{margin-top:8px}
+#ceny .cn-cbtn{display:flex;flex-wrap:wrap;gap:8px}
+#ceny .cn-cbtn span.cn-fake{font:700 14px var(--body);border:1.5px solid var(--sage);background:var(--sage);color:var(--paper);border-radius:10px;padding:9px 14px}
+#ceny .cn-cbtn span.cn-fake.cn-gh{background:transparent;color:var(--sage)}
+#ceny .cn-up td small{display:block;color:var(--muted);font-size:12px;font-weight:400;line-height:1.35}
 #ceny .cn-fl u{text-decoration:none;font-weight:700}
 #ceny .cn-lg{background:var(--mustard-soft);border-radius:6px;padding:0 6px;color:var(--brown)}
 #ceny .cn-free{background:var(--sage-soft);border-radius:10px;padding:10px 12px;font-size:13px;display:flex;flex-direction:column;gap:4px}
@@ -726,22 +756,32 @@ a.yours:hover{background:#EBD3A3}
         <div class="cn-cat"><span>Психологія · консультації</span></div>
         <div class="cn-id"><div class="cn-ph">А</div><div><b>Анна Зразкова</b><br><span class="cn-muted">Консультантка</span></div></div>
         <div class="cn-facts"><div><span>Де:</span> Цюрих</div><div><span>Мови:</span> RU · UA · DE</div></div>
-      </div><div class="cn-sample">Зразок · усе вигадане</div><div class="cn-box"><h3>Базова</h3><div class="cn-price">72 <small>CHF на рік</small></div><ul class="cn-fl"><li class="cn-i"><span>Повна картка, контакти, UID, особливості</span></li><li class="cn-i"><span>Мітка на мапі у своєму місті</span></li><li class="cn-i"><span>Візитівка PNG і PDF із QR, з водяним знаком «Свої люди»</span></li><li class="cn-i"><span>Значок «Я в довіднику» для сайту</span></li><li class="cn-n"><span>Події та курси</span><em>місце 20</em></li><li class="cn-n"><span>Увесь кантон</span><em>опція +36</em></li><li class="cn-n"><span>+ 1 додатковий кантон</span><em>опція +36</em></li><li class="cn-i"><span>Значок «онлайн» на картці, якщо приймаєте по відеозв’язку</span></li><li class="cn-n"><span>Показ по всій Швейцарії, коли обирають «онлайн»</span><em>лише в онлайн-пакетах</em></li><li class="cn-n"><span>Прайс-лист PNG</span><em>опція +24</em></li><li class="cn-n"><span>Виділення кольором і місце вище</span></li><li class="cn-n"><span>Звіт відвідувань раз на місяць: відкриття, «зв’язатися», «У контакти», «Мій список», сердечка</span></li><li class="cn-n"><span>Перший ряд у кантоні, 3 місця на напрям</span></li><li class="cn-n"><span>Допис «Реклама» в нашому каналі, раз на рік</span></li></ul><div class="cn-free"><b>Безкоштовно від першого дня, у ціну пакета не входить</b>
+      </div><div class="cn-sample">Зразок · усе вигадане</div><div class="cn-box"><h3>Базова</h3><div class="cn-price">99 <small>CHF на рік</small></div><ul class="cn-fl"><li class="cn-i"><span>Повна картка, контакти, UID, особливості</span></li><li class="cn-i"><span>Мітка на мапі у своєму місті</span></li><li class="cn-i"><span>Візитівка PNG і PDF із QR, з водяним знаком «Свої люди»</span></li><li class="cn-i"><span>Значок «Я в довіднику» для сайту</span></li><li class="cn-n"><span>Події та курси</span><em>місце 20</em></li><li class="cn-n"><span>Увесь кантон</span><em>опція +36</em></li><li class="cn-n"><span>+ 1 додатковий кантон</span><em>опція +36</em></li><li class="cn-i"><span>Значок «онлайн» на картці, якщо приймаєте по відеозв’язку</span></li><li class="cn-n"><span>Показ по всій Швейцарії, коли обирають «онлайн»</span><em>лише в онлайн-пакетах</em></li><li class="cn-n"><span>Друга категорія або спеціалізація</span><em>опція +48</em></li><li class="cn-n"><span>Прайс-лист PNG</span><em>опція +24</em></li><li class="cn-n"><span>Виділення кольором і місце вище</span></li><li class="cn-n"><span>Звіт відвідувань раз на місяць: відкриття, «зв’язатися», «У контакти», «Мій список», сердечка</span></li><li class="cn-n"><span>Перший ряд у кантоні, 3 місця на напрям</span></li><li class="cn-n"><span>Допис «Реклама» в нашому каналі, раз на рік</span></li></ul><div class="cn-free"><b>Безкоштовно від першого дня, у ціну пакета не входить</b>
 <ul><li>✓ Вакансії та пошук партнерів. Завжди безкоштовно, це підтримка спільноти, а не комерційна послуга.</li>
+<li>✓ Кнопки «Записатися», «Запитати ціну» та «Написати відгук» на картці. Людина пише вам у вибраний вами канал, відгук бачите лише ви.</li>
 <li>✓ Інструменти сайту, PDF і PNG. Водяний знак у всіх однаковий, пакет його не прибирає.</li></ul></div></div></div><div class="cn-pk cn-best cn-vipc2"><div class="cn-sp cn-vipc">
         <div class="cn-cat"><span>Психологія · консультації</span><span class="cn-badge cn-vb">VIP-партнер</span></div>
         <div class="cn-id"><div class="cn-ph">М</div><div><b>Марія Зразкова</b><br><span class="cn-muted">Консультантка</span></div></div>
         <div class="cn-facts"><div><span>Де:</span> Цюрих, Цуг</div><div><span>Мови:</span> RU · UA · DE</div><div><span class="cn-onl">онлайн</span> по відеозв’язку</div></div>
-      </div><div class="cn-sample">Зразок · усе вигадане · платне розміщення позначене</div><div class="cn-box"><h3>VIP-партнер <span class="cn-tag">найвигідніший</span></h3><div class="cn-price">240 <small>CHF на рік</small></div><ul class="cn-fl"><li class="cn-i"><span>Повна картка, контакти, UID, особливості</span></li><li class="cn-i"><span>Мітка на мапі у своєму місті</span></li><li class="cn-a"><span>Візитівка PNG і PDF із QR без водяного знака</span></li><li class="cn-i"><span>Значок «Я в довіднику» для сайту</span></li><li class="cn-a"><span>Події й курси одночасно: <u>6</u></span></li><li class="cn-a"><span>Увесь кантон</span></li><li class="cn-a"><span>+ 1 додатковий кантон</span></li><li class="cn-i"><span>Значок «онлайн» на картці, якщо приймаєте по відеозв’язку</span></li><li class="cn-n"><span>Показ по всій Швейцарії, коли обирають «онлайн»</span><em>лише в онлайн-пакетах</em></li><li class="cn-a"><span>Прайс-лист PNG</span></li><li class="cn-a"><span>Виділення кольором і місце вище</span></li><li class="cn-n"><span>Звіт відвідувань раз на місяць: відкриття, «зв’язатися», «У контакти», «Мій список», сердечка</span></li><li class="cn-n"><span>Перший ряд у кантоні, 3 місця на напрям</span></li><li class="cn-n"><span>Допис «Реклама» в нашому каналі, раз на рік</span></li></ul><div class="cn-free"><b>Безкоштовно від першого дня, у ціну пакета не входить</b>
+      </div><div class="cn-sample">Зразок · усе вигадане · платне розміщення позначене</div><div class="cn-box"><h3>VIP-партнер <span class="cn-tag">найвигідніший</span></h3><div class="cn-price">240 <small>CHF на рік</small></div><ul class="cn-fl"><li class="cn-i"><span>Повна картка, контакти, UID, особливості</span></li><li class="cn-i"><span>Мітка на мапі у своєму місті</span></li><li class="cn-a"><span>Візитівка PNG і PDF із QR без водяного знака</span></li><li class="cn-i"><span>Значок «Я в довіднику» для сайту</span></li><li class="cn-a"><span>Події й курси одночасно: <u>6</u></span></li><li class="cn-a"><span>Увесь кантон</span></li><li class="cn-a"><span>+ 1 додатковий кантон</span></li><li class="cn-i"><span>Значок «онлайн» на картці, якщо приймаєте по відеозв’язку</span></li><li class="cn-n"><span>Показ по всій Швейцарії, коли обирають «онлайн»</span><em>лише в онлайн-пакетах</em></li><li class="cn-n"><span>Друга категорія або спеціалізація</span><em>опція +48</em></li><li class="cn-a"><span>Прайс-лист PNG</span></li><li class="cn-a"><span>Виділення кольором і місце вище</span></li><li class="cn-n"><span>Звіт відвідувань раз на місяць: відкриття, «зв’язатися», «У контакти», «Мій список», сердечка</span></li><li class="cn-n"><span>Перший ряд у кантоні, 3 місця на напрям</span></li><li class="cn-n"><span>Допис «Реклама» в нашому каналі, раз на рік</span></li></ul><div class="cn-free"><b>Безкоштовно від першого дня, у ціну пакета не входить</b>
 <ul><li>✓ Вакансії та пошук партнерів. Завжди безкоштовно, це підтримка спільноти, а не комерційна послуга.</li>
+<li>✓ Кнопки «Записатися», «Запитати ціну» та «Написати відгук» на картці. Людина пише вам у вибраний вами канал, відгук бачите лише ви.</li>
 <li>✓ Інструменти сайту, PDF і PNG. Водяний знак у всіх однаковий, пакет його не прибирає.</li></ul></div></div></div><div class="cn-pk"><div class="cn-sp cn-partner">
         <div class="cn-cat"><span>Психологія · консультації</span><span class="cn-badge">VIP-партнер ТОП</span></div>
         <div class="cn-id"><div class="cn-ph">Є</div><div><b>Олена Зразкова</b><br><span class="cn-muted">Консультантка</span></div></div>
         <div class="cn-facts"><div><span>Де:</span> Цюрих, Цуг</div><div><span>Мови:</span> RU · UA · DE</div><div><span class="cn-onl">онлайн</span> по відеозв’язку</div></div>
-      </div><div class="cn-sample">Зразок · перший ряд кантону · до 3 місць на напрям</div><div class="cn-box"><h3>VIP-партнер ТОП</h3><div class="cn-price">480 <small>CHF на рік</small></div><ul class="cn-fl"><li class="cn-i"><span>Повна картка, контакти, UID, особливості</span></li><li class="cn-i"><span>Мітка на мапі у своєму місті</span></li><li class="cn-i"><span>Візитівка PNG і PDF із QR без водяного знака</span></li><li class="cn-i"><span>Значок «Я в довіднику» для сайту</span></li><li class="cn-a"><span>Події й курси одночасно: <u>12</u></span></li><li class="cn-i"><span>Увесь кантон</span></li><li class="cn-i"><span>+ 1 додатковий кантон</span></li><li class="cn-i"><span>Значок «онлайн» на картці, якщо приймаєте по відеозв’язку</span></li><li class="cn-n"><span>Показ по всій Швейцарії, коли обирають «онлайн»</span><em>лише в онлайн-пакетах</em></li><li class="cn-i"><span>Прайс-лист PNG</span></li><li class="cn-i"><span>Виділення кольором і місце вище</span></li><li class="cn-a"><span>Звіт відвідувань раз на місяць: відкриття, «зв’язатися», «У контакти», «Мій список», сердечка</span></li><li class="cn-a"><span>Перший ряд у кантоні, 3 місця на напрям</span></li><li class="cn-a"><span>Допис «Реклама» в нашому каналі, раз на рік: <u>1</u><button type="button" class="cn-qh" aria-label="Що означає допис «Реклама»" aria-expanded="false" data-t="Раз на рік ми публікуємо в каналі «Свої люди» допис про вашу картку: хто ви, чим допомагаєте й як із вами зв’язатися. Допис позначений словом «Реклама», щоб читачі бачили, що це платне розміщення. Текст ми готуємо й погоджуємо з вами до виходу. Канал скоро відкриється, посилання додамо на сайт. Допис не обіцяє потоку клієнтів, це ще один спосіб розповісти про вас.">?</button></span></li></ul><div class="cn-free"><b>Безкоштовно від першого дня, у ціну пакета не входить</b>
+      </div><div class="cn-sample">Зразок · перший ряд кантону · до 3 місць на напрям</div><div class="cn-box"><h3>VIP-партнер ТОП</h3><div class="cn-price">від 360 <small>CHF на рік</small></div><p class="cn-small cn-muted">У Цюриху, Берні, Женеві, Во, Базелі-Штадт, Цузі, Ааргау, Санкт-Галлені та Люцерні 480, в інших кантонах 360. Ціна залежить від основного кантону картки.</p><ul class="cn-fl"><li class="cn-i"><span>Повна картка, контакти, UID, особливості</span></li><li class="cn-i"><span>Мітка на мапі у своєму місті</span></li><li class="cn-i"><span>Візитівка PNG і PDF із QR без водяного знака</span></li><li class="cn-i"><span>Значок «Я в довіднику» для сайту</span></li><li class="cn-a"><span>Події й курси одночасно: <u>12</u></span></li><li class="cn-i"><span>Увесь кантон</span></li><li class="cn-i"><span>+ 1 додатковий кантон</span></li><li class="cn-i"><span>Значок «онлайн» на картці, якщо приймаєте по відеозв’язку</span></li><li class="cn-n"><span>Показ по всій Швейцарії, коли обирають «онлайн»</span><em>лише в онлайн-пакетах</em></li><li class="cn-n"><span>Друга категорія або спеціалізація</span><em>опція +48</em></li><li class="cn-i"><span>Прайс-лист PNG</span></li><li class="cn-i"><span>Виділення кольором і місце вище</span></li><li class="cn-a"><span>Звіт відвідувань раз на місяць: відкриття, «зв’язатися», «У контакти», «Мій список», сердечка</span></li><li class="cn-a"><span>Перший ряд у кантоні, 3 місця на напрям</span></li><li class="cn-a"><span>Допис «Реклама» в нашому каналі, раз на рік: <u>1</u><button type="button" class="cn-qh" aria-label="Що означає допис «Реклама»" aria-expanded="false" data-t="Раз на рік ми публікуємо в каналі «Свої люди» допис про вашу картку: хто ви, чим допомагаєте й як із вами зв’язатися. Допис позначений словом «Реклама», щоб читачі бачили, що це платне розміщення. Текст ми готуємо й погоджуємо з вами до виходу. Канал скоро відкриється, посилання додамо на сайт. Допис не обіцяє потоку клієнтів, це ще один спосіб розповісти про вас.">?</button></span></li></ul><div class="cn-free"><b>Безкоштовно від першого дня, у ціну пакета не входить</b>
 <ul><li>✓ Вакансії та пошук партнерів. Завжди безкоштовно, це підтримка спільноти, а не комерційна послуга.</li>
+<li>✓ Кнопки «Записатися», «Запитати ціну» та «Написати відгук» на картці. Людина пише вам у вибраний вами канал, відгук бачите лише ви.</li>
 <li>✓ Інструменти сайту, PDF і PNG. Водяний знак у всіх однаковий, пакет його не прибирає.</li></ul></div></div></div></div>
   <p class="cn-small cn-muted">Пів року коштує 60 % річної ціни, квартал 35 %. Мінімальний рахунок 30 CHF. Нічого не продовжується саме, за 45 днів до кінця прийде пропозиція.</p>
+  <div class="cn-box cn-zn"><h3>Ціна ТОП залежить від кантону</h3>
+    <p class="cn-small">У великих кантонах живе більше людей, які шукають фахівців, тому три місця першого ряду там коштують дорожче. Ціна залежить від основного кантону картки. У «VIP-онлайн ТОП» ціна одна, 600, де б ви не жили.</p>
+    <p class="cn-small"><b>480 CHF на рік</b></p>
+    <div class="cn-chs"><span>Цюрих</span><span>Берн</span><span>Женева</span><span>Во</span><span>Базель-Штадт</span><span>Цуг</span><span>Ааргау</span><span>Санкт-Галлен</span><span>Люцерн</span></div>
+    <p class="cn-small"><b>360 CHF на рік</b>: решта 17 кантонів.</p>
+    <p class="cn-small cn-muted">Перший ряд діє в основному кантоні. У додатковому кантоні картка показується як у VIP: із кольором і вище за звичайні. Раз на рік, 1 січня, ми дивимося на кількість відвідувань довідника і за потреби змінюємо розбивку. Для тих, хто вже оплатив термін, ціна до його кінця не змінюється.</p>
+  </div>
 </section>
 <section class="cn-sec" id="onlpak" data-m="o">
   <h2>Три онлайн-пакети: для тих, хто працює лише онлайн</h2>
@@ -750,29 +790,32 @@ a.yours:hover{background:#EBD3A3}
         <div class="cn-cat"><span>Психологія · консультації</span></div>
         <div class="cn-id"><div class="cn-ph">Д</div><div><b>Дар’я Зразкова</b><br><span class="cn-muted">Консультантка</span></div></div>
         <div class="cn-facts"><div><span>Де:</span> Цюрих</div><div><span>Мови:</span> RU · UA · DE</div><div><span class="cn-onl">онлайн</span> по всій Швейцарії</div></div>
-      </div><div class="cn-sample">Зразок · усе вигадане</div><div class="cn-box"><h3>Онлайн базовий</h3><div class="cn-price">252 <small>CHF на рік</small></div><ul class="cn-fl"><li class="cn-i"><span>Повна картка, контакти, UID, особливості</span></li><li class="cn-i"><span>Місто й кантон проживання в картці, мітка на мапі у вашому місті</span></li><li class="cn-i"><span>Увесь кантон: вас знаходять, коли шукають по всьому кантону</span></li><li class="cn-i"><span>Показ, коли обирають «онлайн» у будь-якому кантоні</span></li><li class="cn-i"><span>Значок «онлайн» на картці</span></li><li class="cn-i"><span>Візитка PNG і PDF з QR із водяним знаком «Свої люди»</span></li><li class="cn-i"><span>Значок «Я в довіднику» для сайту</span></li><li class="cn-n"><span>Події та курси</span><em>місце 20</em></li><li class="cn-n"><span>Додаткові кантони</span><em>не потрібні, охоплення й так уся Швейцарія</em></li><li class="cn-n"><span>Прайс-лист PNG</span><em>опція +24</em></li><li class="cn-n"><span>Виділення кольором і місце вище</span></li><li class="cn-n"><span>Звіт відвідувань раз на місяць: відкриття, «зв’язатися», «У контакти», «Мій список», сердечка</span></li><li class="cn-n"><span>Перший ряд в онлайн-списку, 3 місця на напрям</span></li><li class="cn-n"><span>Допис «Реклама» в нашому каналі, раз на рік</span></li></ul><div class="cn-free"><b>Безкоштовно від першого дня, у ціну пакета не входить</b>
+      </div><div class="cn-sample">Зразок · усе вигадане</div><div class="cn-box"><h3>Онлайн базовий</h3><div class="cn-price">279 <small>CHF на рік</small></div><ul class="cn-fl"><li class="cn-i"><span>Повна картка, контакти, UID, особливості</span></li><li class="cn-i"><span>Місто й кантон проживання в картці, мітка на мапі у вашому місті</span></li><li class="cn-i"><span>Увесь кантон: вас знаходять, коли шукають по всьому кантону</span></li><li class="cn-i"><span>Показ, коли обирають «онлайн» у будь-якому кантоні</span></li><li class="cn-i"><span>Значок «онлайн» на картці</span></li><li class="cn-i"><span>Візитка PNG і PDF з QR із водяним знаком «Свої люди»</span></li><li class="cn-i"><span>Значок «Я в довіднику» для сайту</span></li><li class="cn-n"><span>Події та курси</span><em>місце 20</em></li><li class="cn-n"><span>Додаткові кантони</span><em>не потрібні, охоплення й так уся Швейцарія</em></li><li class="cn-n"><span>Друга категорія або спеціалізація</span><em>опція +48</em></li><li class="cn-n"><span>Прайс-лист PNG</span><em>опція +24</em></li><li class="cn-n"><span>Виділення кольором і місце вище</span></li><li class="cn-n"><span>Звіт відвідувань раз на місяць: відкриття, «зв’язатися», «У контакти», «Мій список», сердечка</span></li><li class="cn-n"><span>Перший ряд в онлайн-списку, 3 місця на напрям</span></li><li class="cn-n"><span>Допис «Реклама» в нашому каналі, раз на рік</span></li></ul><div class="cn-free"><b>Безкоштовно від першого дня, у ціну пакета не входить</b>
 <ul><li>✓ Вакансії та пошук партнерів. Завжди безкоштовно, це підтримка спільноти, а не комерційна послуга.</li>
+<li>✓ Кнопки «Записатися», «Запитати ціну» та «Написати відгук» на картці. Людина пише вам у вибраний вами канал, відгук бачите лише ви.</li>
 <li>✓ Інструменти сайту, PDF і PNG. Водяний знак у всіх однаковий, пакет його не прибирає.</li></ul></div></div></div><div class="cn-pk cn-best cn-vipc2"><div class="cn-sp cn-vipc">
         <div class="cn-cat"><span>Психологія · консультації</span><span class="cn-badge cn-vb">VIP-онлайн</span></div>
         <div class="cn-id"><div class="cn-ph">Н</div><div><b>Наталія Зразкова</b><br><span class="cn-muted">Консультантка</span></div></div>
         <div class="cn-facts"><div><span>Де:</span> Цюрих</div><div><span>Мови:</span> RU · UA · DE</div><div><span class="cn-onl">онлайн</span> по всій Швейцарії</div></div>
-      </div><div class="cn-sample">Зразок · усе вигадане · платне розміщення позначене</div><div class="cn-box"><h3>VIP-онлайн <span class="cn-tag">найвигідніший</span></h3><div class="cn-price">360 <small>CHF на рік</small></div><ul class="cn-fl"><li class="cn-i"><span>Повна картка, контакти, UID, особливості</span></li><li class="cn-i"><span>Місто й кантон проживання в картці, мітка на мапі у вашому місті</span></li><li class="cn-i"><span>Увесь кантон: вас знаходять, коли шукають по всьому кантону</span></li><li class="cn-i"><span>Показ, коли обирають «онлайн» у будь-якому кантоні</span></li><li class="cn-i"><span>Значок «онлайн» на картці</span></li><li class="cn-a"><span>Візитівка PNG і PDF із QR без водяного знака</span></li><li class="cn-i"><span>Значок «Я в довіднику» для сайту</span></li><li class="cn-a"><span>Події й курси одночасно: <u>6</u></span></li><li class="cn-n"><span>Додаткові кантони</span><em>не потрібні, охоплення й так уся Швейцарія</em></li><li class="cn-a"><span>Прайс-лист PNG</span></li><li class="cn-a"><span>Виділення кольором і місце вище</span></li><li class="cn-n"><span>Звіт відвідувань раз на місяць: відкриття, «зв’язатися», «У контакти», «Мій список», сердечка</span></li><li class="cn-n"><span>Перший ряд в онлайн-списку, 3 місця на напрям</span></li><li class="cn-n"><span>Допис «Реклама» в нашому каналі, раз на рік</span></li></ul><div class="cn-free"><b>Безкоштовно від першого дня, у ціну пакета не входить</b>
+      </div><div class="cn-sample">Зразок · усе вигадане · платне розміщення позначене</div><div class="cn-box"><h3>VIP-онлайн <span class="cn-tag">найвигідніший</span></h3><div class="cn-price">360 <small>CHF на рік</small></div><ul class="cn-fl"><li class="cn-i"><span>Повна картка, контакти, UID, особливості</span></li><li class="cn-i"><span>Місто й кантон проживання в картці, мітка на мапі у вашому місті</span></li><li class="cn-i"><span>Увесь кантон: вас знаходять, коли шукають по всьому кантону</span></li><li class="cn-i"><span>Показ, коли обирають «онлайн» у будь-якому кантоні</span></li><li class="cn-i"><span>Значок «онлайн» на картці</span></li><li class="cn-a"><span>Візитівка PNG і PDF із QR без водяного знака</span></li><li class="cn-i"><span>Значок «Я в довіднику» для сайту</span></li><li class="cn-a"><span>Події й курси одночасно: <u>6</u></span></li><li class="cn-n"><span>Додаткові кантони</span><em>не потрібні, охоплення й так уся Швейцарія</em></li><li class="cn-n"><span>Друга категорія або спеціалізація</span><em>опція +48</em></li><li class="cn-a"><span>Прайс-лист PNG</span></li><li class="cn-a"><span>Виділення кольором і місце вище</span></li><li class="cn-n"><span>Звіт відвідувань раз на місяць: відкриття, «зв’язатися», «У контакти», «Мій список», сердечка</span></li><li class="cn-n"><span>Перший ряд в онлайн-списку, 3 місця на напрям</span></li><li class="cn-n"><span>Допис «Реклама» в нашому каналі, раз на рік</span></li></ul><div class="cn-free"><b>Безкоштовно від першого дня, у ціну пакета не входить</b>
 <ul><li>✓ Вакансії та пошук партнерів. Завжди безкоштовно, це підтримка спільноти, а не комерційна послуга.</li>
+<li>✓ Кнопки «Записатися», «Запитати ціну» та «Написати відгук» на картці. Людина пише вам у вибраний вами канал, відгук бачите лише ви.</li>
 <li>✓ Інструменти сайту, PDF і PNG. Водяний знак у всіх однаковий, пакет його не прибирає.</li></ul></div></div></div><div class="cn-pk"><div class="cn-sp cn-partner">
         <div class="cn-cat"><span>Психологія · консультації</span><span class="cn-badge">VIP-онлайн ТОП</span></div>
         <div class="cn-id"><div class="cn-ph">О</div><div><b>Ольга Зразкова</b><br><span class="cn-muted">Консультантка</span></div></div>
         <div class="cn-facts"><div><span>Де:</span> Цюрих</div><div><span>Мови:</span> RU · UA · DE</div><div><span class="cn-onl">онлайн</span> по всій Швейцарії</div></div>
-      </div><div class="cn-sample">Зразок · перший ряд онлайн-списку · до 3 місць на напрям</div><div class="cn-box"><h3>VIP-онлайн ТОП</h3><div class="cn-price">600 <small>CHF на рік</small></div><ul class="cn-fl"><li class="cn-i"><span>Повна картка, контакти, UID, особливості</span></li><li class="cn-i"><span>Місто й кантон проживання в картці, мітка на мапі у вашому місті</span></li><li class="cn-i"><span>Увесь кантон: вас знаходять, коли шукають по всьому кантону</span></li><li class="cn-i"><span>Показ, коли обирають «онлайн» у будь-якому кантоні</span></li><li class="cn-i"><span>Значок «онлайн» на картці</span></li><li class="cn-a"><span>Візитівка PNG і PDF із QR без водяного знака</span></li><li class="cn-i"><span>Значок «Я в довіднику» для сайту</span></li><li class="cn-a"><span>Події й курси одночасно: <u>12</u></span></li><li class="cn-n"><span>Додаткові кантони</span><em>не потрібні, охоплення й так уся Швейцарія</em></li><li class="cn-i"><span>Прайс-лист PNG</span></li><li class="cn-i"><span>Виділення кольором і місце вище</span></li><li class="cn-a"><span>Звіт відвідувань раз на місяць: відкриття, «зв’язатися», «У контакти», «Мій список», сердечка</span></li><li class="cn-a"><span>Перший ряд в онлайн-списку, 3 місця на напрям</span></li><li class="cn-a"><span>Допис «Реклама» в нашому каналі, раз на рік</span></li></ul><div class="cn-free"><b>Безкоштовно від першого дня, у ціну пакета не входить</b>
+      </div><div class="cn-sample">Зразок · перший ряд онлайн-списку · до 3 місць на напрям</div><div class="cn-box"><h3>VIP-онлайн ТОП</h3><div class="cn-price">600 <small>CHF на рік</small></div><ul class="cn-fl"><li class="cn-i"><span>Повна картка, контакти, UID, особливості</span></li><li class="cn-i"><span>Місто й кантон проживання в картці, мітка на мапі у вашому місті</span></li><li class="cn-i"><span>Увесь кантон: вас знаходять, коли шукають по всьому кантону</span></li><li class="cn-i"><span>Показ, коли обирають «онлайн» у будь-якому кантоні</span></li><li class="cn-i"><span>Значок «онлайн» на картці</span></li><li class="cn-a"><span>Візитівка PNG і PDF із QR без водяного знака</span></li><li class="cn-i"><span>Значок «Я в довіднику» для сайту</span></li><li class="cn-a"><span>Події й курси одночасно: <u>12</u></span></li><li class="cn-n"><span>Додаткові кантони</span><em>не потрібні, охоплення й так уся Швейцарія</em></li><li class="cn-n"><span>Друга категорія або спеціалізація</span><em>опція +48</em></li><li class="cn-i"><span>Прайс-лист PNG</span></li><li class="cn-i"><span>Виділення кольором і місце вище</span></li><li class="cn-a"><span>Звіт відвідувань раз на місяць: відкриття, «зв’язатися», «У контакти», «Мій список», сердечка</span></li><li class="cn-a"><span>Перший ряд в онлайн-списку, 3 місця на напрям</span></li><li class="cn-a"><span>Допис «Реклама» в нашому каналі, раз на рік</span></li></ul><div class="cn-free"><b>Безкоштовно від першого дня, у ціну пакета не входить</b>
 <ul><li>✓ Вакансії та пошук партнерів. Завжди безкоштовно, це підтримка спільноти, а не комерційна послуга.</li>
+<li>✓ Кнопки «Записатися», «Запитати ціну» та «Написати відгук» на картці. Людина пише вам у вибраний вами канал, відгук бачите лише ви.</li>
 <li>✓ Інструменти сайту, PDF і PNG. Водяний знак у всіх однаковий, пакет його не прибирає.</li></ul></div></div></div></div>
   <div class="cn-tw"><table style="min-width:420px"><tr><th>Пакет</th><th>Рік</th><th>Пів року (60 %)</th><th>Квартал (35 %)</th></tr>
-    <tr><td>Онлайн базовий</td><td>252</td><td>151.20</td><td>88.20</td></tr>
+    <tr><td>Онлайн базовий</td><td>279</td><td>167.40</td><td>97.65</td></tr>
     <tr><td>VIP-онлайн</td><td>360</td><td>216</td><td>126</td></tr>
     <tr><td>VIP-онлайн ТОП</td><td>600</td><td>360</td><td>210</td></tr></table></div>
   <div class="cn-grid">
     <div class="cn-box"><h3>Як пораховано ціну</h3>
-      <p class="cn-small">«Онлайн базовий» 252 коштує як п’ять кантонів в очних пакетах: Базова 72, Увесь кантон 36 і чотири кантони по 36. Один кантон ви обираєте як свій, решта Швейцарії показує вас, коли обирають «онлайн».</p>
-      <p class="cn-small">«VIP-онлайн» 360: до 252 додається те, чим VIP відрізняється від Базової (колір, місце вище, прайс, 6 місць, візитка без знака): 252 + 96 = 348, округлено до 360. «VIP-онлайн ТОП» 600: 360 плюс різниця між ТОП і VIP (240).</p>
+      <p class="cn-small">«Онлайн базовий» 279 коштує як п’ять кантонів в очних пакетах: Базова 99, Увесь кантон 36 і чотири кантони по 36. Один кантон ви обираєте як свій, решта Швейцарії показує вас під час вибору «онлайн».</p>
+      <p class="cn-small">«VIP-онлайн» 360: до 279 додається те, чим VIP відрізняється від Базової (колір, місце вище, прайс, 6 місць, візитівка без знака): 279 + 69 = 348, округлено до 360. «VIP-онлайн ТОП» 600: 360 плюс різниця між ТОП і VIP (240).</p>
       <p class="cn-small">За пів року й квартал рахується 60 % і 35 % річної ціни, мінімальний рахунок 30 CHF. Нічого не продовжується саме.</p></div>
   </div>
   </section>
@@ -786,12 +829,16 @@ a.yours:hover{background:#EBD3A3}
       <div class="cn-pr"><div><b>36</b>рік</div><div><b>21.60</b>пів року</div><div><b>12.60</b>квартал</div></div></div>
     <div class="cn-box cn-opt"><div class="cn-ic">🏷️</div><h3>Прайс на долоні</h3><p class="cn-small">Прайс-лист PNG: послуги й ціни, щоб показати клієнтці й переслати.</p>
       <div class="cn-pr"><div><b>24</b>рік</div><div><b>14.40</b>пів року</div><div><b>8.40</b>квартал</div></div></div>
+    <div class="cn-box cn-opt"><div class="cn-ic">🗂️</div><h3>Друга категорія або спеціалізація</h3><p class="cn-small">Бухгалтер і податковий консультант, коуч і тренер. Картка показується у двох категоріях, у кожної своя перевірка документів. Усього до трьох категорій на картці. Перший ряд ТОП лише в основній категорії.</p>
+      <div class="cn-pr"><div><b>48</b>рік</div><div><b>28.80</b>пів року</div><div><b>16.80</b>квартал</div></div></div>
+    <div class="cn-box cn-opt"><div class="cn-ic">👥</div><h3>Команда: −30 % на другу й наступні картки</h3><p class="cn-small">Якщо в довіднику кілька карток однієї фірми (один UID), на ціну пакета в другої й наступних діє знижка 30 %. Найдорожча картка йде за повною ціною. На опції знижка не поширюється. У ТОП в однієї фірми не більше одного місця на напрям у кантоні, щоб перший ряд не дістався одній команді.</p>
+      <div class="cn-pr"><div><b>3 × VIP</b>576 замість 720</div></div></div>
     <div data-m="i" class="cn-box cn-opt"><div class="cn-ic">📅</div><h3>Додаткові місця для подій</h3><p class="cn-small">Місця для подій і курсів, по одному. У Базовій це єдиний спосіб розміщувати події, у VIP і ТОП так додають місця понад ті, що входять. Місце звільняється після події.</p>
       <div class="cn-pr"><div><b>20</b>рік</div><div><b>12</b>пів року</div><div><b>7</b>квартал</div></div><div class="cn-pr"><div><b>10</b>рік, VIP і ТОП</div><div><b>6</b>пів року</div><div><b>3.50</b>квартал</div></div></div>
     <div data-m="o" class="cn-box cn-opt"><div class="cn-ic">📅</div><h3>Додаткові місця для подій</h3><p class="cn-small">Місця для подій і курсів, по одному. В «Онлайн базовий» це єдиний спосіб розміщувати події, у VIP-онлайн і VIP-онлайн ТОП так додають місця понад ті, що входять. Місце звільняється після події.</p>
       <div class="cn-pr"><div><b>20</b>рік</div><div><b>12</b>пів року</div><div><b>7</b>квартал</div></div><div class="cn-pr"><div><b>10</b>рік, VIP-онлайн</div><div><b>6</b>пів року</div><div><b>3.50</b>квартал</div></div></div>
     <div data-m="i" class="cn-box cn-opt"><div class="cn-ic">✨</div><h3>Виділення кольором і місце вище</h3><p class="cn-small">Колір картки і місце вище звичайних. Окремо не продається, лише у VIP і ТОП. Щомісячний звіт відвідувань входить лише в ТОП.</p>
-      <div class="cn-pr"><div><b>VIP</b>240</div><div><b>ТОП</b>480</div><div><b>–</b>окремо</div></div></div>
+      <div class="cn-pr"><div><b>VIP</b>240</div><div><b>ТОП</b>360–480</div><div><b>–</b>окремо</div></div></div>
     <div data-m="o" class="cn-box cn-opt"><div class="cn-ic">✨</div><h3>Виділення кольором і місце вище</h3><p class="cn-small">Колір картки й місце вище звичайних. Окремо не продається, лише у VIP-онлайн і VIP-онлайн ТОП. Щомісячний звіт відвідувань входить лише у VIP-онлайн ТОП.</p>
       <div class="cn-pr"><div><b>VIP-онлайн</b>360</div><div><b>ТОП</b>600</div><div><b>–</b>окремо</div></div></div>
   </div>
@@ -807,7 +854,7 @@ a.yours:hover{background:#EBD3A3}
       <span class="cn-tag">Входить у базову</span><h3>Моє місто</h3>
       <svg viewBox="0 0 200 128.1" role="img" aria-label="Одне місто на мапі Швейцарії"><use href="/uk/ceny/#chC" fill="var(--paper)" stroke="var(--sage)" stroke-width="1.2"/><use href="/uk/ceny/#c1" fill="none" stroke="var(--line)" stroke-width=".5"/><use href="/uk/ceny/#c2" fill="none" stroke="var(--line)" stroke-width=".5"/><use href="/uk/ceny/#c3" fill="none" stroke="var(--line)" stroke-width=".5"/><use href="/uk/ceny/#c4" fill="none" stroke="var(--line)" stroke-width=".5"/><use href="/uk/ceny/#c5" fill="none" stroke="var(--line)" stroke-width=".5"/><use href="/uk/ceny/#c6" fill="none" stroke="var(--line)" stroke-width=".5"/><use href="/uk/ceny/#c7" fill="none" stroke="var(--line)" stroke-width=".5"/><use href="/uk/ceny/#c8" fill="none" stroke="var(--line)" stroke-width=".5"/><use href="/uk/ceny/#c9" fill="none" stroke="var(--line)" stroke-width=".5"/><use href="/uk/ceny/#c10" fill="none" stroke="var(--line)" stroke-width=".5"/><use href="/uk/ceny/#c11" fill="none" stroke="var(--line)" stroke-width=".5"/><use href="/uk/ceny/#c12" fill="none" stroke="var(--line)" stroke-width=".5"/><use href="/uk/ceny/#c13" fill="none" stroke="var(--line)" stroke-width=".5"/><use href="/uk/ceny/#c14" fill="none" stroke="var(--line)" stroke-width=".5"/><use href="/uk/ceny/#c15" fill="none" stroke="var(--line)" stroke-width=".5"/><use href="/uk/ceny/#c16" fill="none" stroke="var(--line)" stroke-width=".5"/><use href="/uk/ceny/#c17" fill="none" stroke="var(--line)" stroke-width=".5"/><use href="/uk/ceny/#c18" fill="none" stroke="var(--line)" stroke-width=".5"/><use href="/uk/ceny/#c19" fill="none" stroke="var(--line)" stroke-width=".5"/><use href="/uk/ceny/#c20" fill="none" stroke="var(--line)" stroke-width=".5"/><use href="/uk/ceny/#c21" fill="none" stroke="var(--line)" stroke-width=".5"/><use href="/uk/ceny/#c22" fill="none" stroke="var(--line)" stroke-width=".5"/><use href="/uk/ceny/#c23" fill="none" stroke="var(--line)" stroke-width=".5"/><use href="/uk/ceny/#c24" fill="none" stroke="var(--line)" stroke-width=".5"/><use href="/uk/ceny/#c25" fill="none" stroke="var(--line)" stroke-width=".5"/><use href="/uk/ceny/#c26" fill="none" stroke="var(--line)" stroke-width=".5"/><circle cx="113.9" cy="28.2" r="11" fill="var(--sage)" opacity=".25"/><circle cx="113.9" cy="28.2" r="4" fill="var(--sage)" stroke="var(--paper)" stroke-width="1.2"/></svg>
       <p class="cn-small">Картка в списку вашого міста й мітка на мапі. Онлайн-зустрічі для людей цього міста.</p>
-      <div class="cn-price">72 <small>CHF на рік · входить</small></div>
+      <div class="cn-price">99 <small>CHF на рік · входить</small></div>
     </div>
     <div class="cn-box" data-m="i">
       <span class="cn-tag cn-m">Опція «Увесь кантон»</span><h3>Увесь мій кантон</h3>
@@ -824,13 +871,13 @@ a.yours:hover{background:#EBD3A3}
     <div class="cn-box" data-m="o">
       <span class="cn-tag">Входить в онлайн-пакети</span><h3>Моє місто й кантон</h3>
       <p class="cn-small">Місто й кантон проживання в картці, мітка на мапі у вашому місті та весь ваш кантон. Додаткових кантонів в онлайн-пакетах немає: показ по всій Швейцарії й так усе покриває.</p>
-      <div class="cn-price">252 <small>CHF на рік · входить в «Онлайн базовий»</small></div>
+      <div class="cn-price">279 <small>CHF на рік · входить до «Онлайн базовий»</small></div>
     </div>
     <div class="cn-box" data-m="o">
       <span class="cn-tag cn-m">Лінійка «Онлайн»</span><h3>Онлайн по всій Швейцарії</h3>
       <svg viewBox="0 0 200 128.1" role="img" aria-label="Усю Швейцарію виділено, значок онлайн"><use href="/uk/ceny/#chC" fill="var(--sage)" fill-opacity=".35" stroke="var(--sage)" stroke-width="1.2"/><use href="/uk/ceny/#c1" fill="none" stroke="var(--line)" stroke-width=".5"/><use href="/uk/ceny/#c2" fill="none" stroke="var(--line)" stroke-width=".5"/><use href="/uk/ceny/#c3" fill="none" stroke="var(--line)" stroke-width=".5"/><use href="/uk/ceny/#c4" fill="none" stroke="var(--line)" stroke-width=".5"/><use href="/uk/ceny/#c5" fill="none" stroke="var(--line)" stroke-width=".5"/><use href="/uk/ceny/#c6" fill="none" stroke="var(--line)" stroke-width=".5"/><use href="/uk/ceny/#c7" fill="none" stroke="var(--line)" stroke-width=".5"/><use href="/uk/ceny/#c8" fill="none" stroke="var(--line)" stroke-width=".5"/><use href="/uk/ceny/#c9" fill="none" stroke="var(--line)" stroke-width=".5"/><use href="/uk/ceny/#c10" fill="none" stroke="var(--line)" stroke-width=".5"/><use href="/uk/ceny/#c11" fill="none" stroke="var(--line)" stroke-width=".5"/><use href="/uk/ceny/#c12" fill="none" stroke="var(--line)" stroke-width=".5"/><use href="/uk/ceny/#c13" fill="none" stroke="var(--line)" stroke-width=".5"/><use href="/uk/ceny/#c14" fill="none" stroke="var(--line)" stroke-width=".5"/><use href="/uk/ceny/#c15" fill="none" stroke="var(--line)" stroke-width=".5"/><use href="/uk/ceny/#c16" fill="none" stroke="var(--line)" stroke-width=".5"/><use href="/uk/ceny/#c17" fill="none" stroke="var(--line)" stroke-width=".5"/><use href="/uk/ceny/#c18" fill="none" stroke="var(--line)" stroke-width=".5"/><use href="/uk/ceny/#c19" fill="none" stroke="var(--line)" stroke-width=".5"/><use href="/uk/ceny/#c20" fill="none" stroke="var(--line)" stroke-width=".5"/><use href="/uk/ceny/#c21" fill="none" stroke="var(--line)" stroke-width=".5"/><use href="/uk/ceny/#c22" fill="none" stroke="var(--line)" stroke-width=".5"/><use href="/uk/ceny/#c23" fill="none" stroke="var(--line)" stroke-width=".5"/><use href="/uk/ceny/#c24" fill="none" stroke="var(--line)" stroke-width=".5"/><use href="/uk/ceny/#c25" fill="none" stroke="var(--line)" stroke-width=".5"/><use href="/uk/ceny/#c26" fill="none" stroke="var(--line)" stroke-width=".5"/><g transform="translate(104.0,53.80199999999999)"><path d="M-14 -4 q14 -12 28 0 M-8 3 q8 -7 16 0" fill="none" stroke="var(--brown)" stroke-width="3" stroke-linecap="round"/><circle cx="0" cy="10" r="3" fill="var(--brown)"/></g></svg>
       <p class="cn-small">Для тих, хто працює лише онлайн. У картці ваше місто й кантон проживання, а ще вас знаходять, коли обирають «онлайн» з будь-якого кантону. Додаткових кантонів немає, вони не потрібні. Значок «онлайн» на самій картці безкоштовний у будь-якому пакеті.</p>
-      <div class="cn-price">від 252 <small>CHF на рік, три онлайн-пакети</small></div>
+      <div class="cn-price">від 279 <small>CHF на рік, три онлайн-пакети</small></div>
     </div>
   </div>
   </section>
@@ -839,10 +886,10 @@ a.yours:hover{background:#EBD3A3}
   <p class="cn-muted">Це два різні питання. «Як ви працюєте»: значок «онлайн» на картці, він безкоштовний у будь-якому пакеті й лише каже, що зустріч може бути по відеозв’язку. «Де вас розміщують»: охоплення, тобто місто, кантон, інший кантон або вся Швейцарія, коли обирають «онлайн». Охоплення оплачується окремо. Тому для тих, хто працює лише онлайн, є своя лінійка з трьох онлайн-пакетів, а в очних пакетах онлайн лишається значком.</p>
   <div class="cn-tw"><table>
     <tr><th>Хто це</th><th>Що бере</th><th>CHF на рік</th><th>У списку свого міста</th><th>В усіх кантонах під час вибору «онлайн»</th></tr>
-    <tr><td>Кабінет в одному місті</td><td>Базова</td><td>72</td><td class="cn-y">✓</td><td>–</td></tr>
+    <tr><td>Кабінет в одному місті</td><td>Базова</td><td>99</td><td class="cn-y">✓</td><td>–</td></tr>
     <tr><td>Кабінет, клієнти з усього кантону</td><td>Базова + Увесь кантон</td><td>108</td><td class="cn-y">✓</td><td>–</td></tr>
     <tr><td>Кабінети у двох кантонах</td><td>Базова + Увесь кантон + 1 додатковий кантон</td><td>144</td><td class="cn-y">✓</td><td>–</td></tr>
-    <tr><td>Працюєте лише онлайн, клієнти з усієї Швейцарії</td><td>Онлайн базовий</td><td>252</td><td class="cn-y">✓</td><td class="cn-y">✓</td></tr>
+    <tr><td>Працюєте лише онлайн, клієнти з усієї Швейцарії</td><td>Онлайн базовий</td><td>279</td><td class="cn-y">✓</td><td class="cn-y">✓</td></tr>
     <tr><td>Те саме, з кольором, прайсом і 6 місцями для подій</td><td>VIP-онлайн</td><td>360</td><td class="cn-y">✓</td><td class="cn-y">✓</td></tr>
     <tr><td>Те саме, перший ряд в онлайн-списку і звіт</td><td>VIP-онлайн ТОП</td><td>600</td><td class="cn-y">✓</td><td class="cn-y">✓</td></tr>
   </table></div>
@@ -879,9 +926,9 @@ a.yours:hover{background:#EBD3A3}
       <div class="cn-slots"><span>VIP-онлайн + 5 місць</span><div class="cn-sq"><i class="cn-f"></i><i class="cn-f"></i><i class="cn-f"></i><i></i><i></i><i></i><i class="cn-x"></i><i class="cn-x"></i><i class="cn-x"></i><i class="cn-x"></i><i class="cn-x"></i></div></div>
       <p class="cn-small">Місце береться по одному, скільки потрібно, до будь-якого пакета. В «Онлайн базовий» воно коштує 20 CHF, у VIP-онлайн і VIP-онлайн ТОП 10 CHF: у кого пакет, тому місця дешевші. Серія на три місяці займає одне місце, тому кілька місць дають десятки дат на рік. Приклад: VIP-онлайн 6 + 5 = 11 місць.</p></div>
     <div data-m="i" class="cn-box"><h3>Приклад: школа з п’ятьма курсами</h3><div class="cn-price">172 <small>CHF на рік</small></div>
-      <p class="cn-small">Школа бере Базову за 72 і 5 місць по 20, це 100, разом 172 CHF на рік. З VIP за 240 у ціну вже входять 6 місць, тому VIP виходить лише на 68 дорожче, і в ньому ще колір картки та шість місць замість п’яти. Мінімальний рахунок 30 CHF: одне додаткове місце (20) виставляється рахунком на 30.</p></div>
+      <p class="cn-small">Школа бере Базову за 99 і 5 місць по 20, це 100, разом 199 CHF на рік. З VIP за 240 у ціну вже входять 6 місць, тому VIP виходить лише на 41 дорожче, і в ньому ще колір картки та шість місць замість п’яти. Мінімальний рахунок 30 CHF: одне додаткове місце (20) виставляється рахунком на 30.</p></div>
     <div data-m="o" class="cn-box"><h3>Приклад: онлайн-школа з п’ятьма курсами</h3><div class="cn-price">352 <small>CHF на рік</small></div>
-      <p class="cn-small">Школа бере «Онлайн базовий» за 252 і 5 місць по 20, це 100, разом 352 CHF на рік. З VIP-онлайн за 360 у ціну вже входять 6 місць, тому він виходить лише на 8 дорожче, і в ньому ще колір картки, прайс і шість місць замість п’яти.</p></div>
+      <p class="cn-small">Школа бере «Онлайн базовий» за 279 і 5 місць по 20, це 100, разом 379 CHF на рік. З VIP-онлайн за 360 у ціну вже входять 6 місць, тому він виходить навіть на 19 дешевше, і в ньому ще колір картки, прайс і шість місць замість п’яти.</p></div>
   </div>
   <h3>Лічильник місць: що бачить організатор</h3>
   <div class="cn-grid cn-rep">
@@ -980,7 +1027,7 @@ a.yours:hover{background:#EBD3A3}
 
   <div class="cn-cstep">
     <h3><span class="cn-n">3</span>Де вас мають знаходити</h3>
-    <label class="cn-crow"><span>Основний кантон картки<small data-m="i">Власне місто й мітка на мапі є в будь-якому пакеті</small><small data-m="o">Ваше місто й кантон проживання. Мітка на мапі у вашому місті</small></span><select id="mainc" aria-label="Основний кантон картки"></select></label>
+    <label class="cn-crow"><span>Основний кантон картки<small data-m="i">Своє місто та мітка на карті є в будь-якому пакеті. Ціна ТОП залежить від кантону</small><small data-m="o">Ваше місто й кантон проживання. Мітка на карті у вашому місті</small></span><select id="mainc" aria-label="Основний кантон картки"></select></label>
     <label class="cn-crow" data-m="i"><input type="checkbox" id="c_whole"><span id="c_wholet">Увесь кантон<small>Вас знаходять під час пошуку по всьому кантону, не лише по місту. У VIP і ТОП входить</small></span><b>36</b></label>
     <p class="cn-small cn-muted" data-m="o">В онлайн-пакети входять: увесь ваш кантон і показ по всій Швейцарії, коли обирають «онлайн». Додаткових кантонів немає, вони не потрібні.</p>
     <div id="extra" data-m="i"></div>
@@ -990,6 +1037,9 @@ a.yours:hover{background:#EBD3A3}
   <div class="cn-cstep">
     <h3><span class="cn-n">4</span>Що ще потрібно</h3>
     <label class="cn-crow"><input type="checkbox" id="c_price"><span>Прайс на долоні<small>Ваші послуги й ціни однією сторінкою, PDF і PNG. У VIP і ТОП входить</small></span><b>24</b></label>
+    <div class="cn-crow" style="cursor:default"><span>Додаткові категорії або спеціалізації<small>Бухгалтер і податковий консультант, коуч і тренер. До двох додаткових, кожна 48 CHF. Перший ряд лише в основній категорії</small></span>
+      <div class="cn-stp"><button type="button" id="km" aria-label="Менше">−</button><output id="kn" aria-live="polite">0</output><button type="button" id="kp" aria-label="Більше">+</button></div></div>
+    <label class="cn-crow"><input type="checkbox" id="c_firm"><span>Це друга або наступна картка нашої фірми<small>Знижка 30 % на ціну пакета. У найдорожчої картки фірми знижки немає. Потрібен той самий UID фірми</small></span><b>−30 %</b></label>
     <div class="cn-crow" style="cursor:default"><span>Скільки подій і курсів ви хочете розмістити за строк<small data-m="i">У VIP входить 6 місць, у ТОП 12, у Базової місць немає. Кожне додаткове місце: 20 CHF, у VIP і ТОП 10 CHF. Одне місце: один запис або серія до 90 днів</small><small data-m="o">У «VIP-онлайн» входить 6 місць, у «VIP-онлайн ТОП» 12, в «Онлайн базовий» місць немає. Кожне додаткове місце: 20 CHF, у VIP і ТОП 10 CHF. Одне місце: один запис або серія до 90 днів</small></span>
       <div class="cn-stp"><button type="button" id="pm" aria-label="Менше">−</button><output id="pn" aria-live="polite">0</output><button type="button" id="pp" aria-label="Більше">+</button></div></div>
   </div>
@@ -1014,11 +1064,96 @@ a.yours:hover{background:#EBD3A3}
   <p class="cn-small cn-muted" id="cst" role="status"></p>
   <p class="cn-small cn-muted">Розрахунок зберігається лише у вашому браузері, щоб можна було піти й повернутися пізніше. Ми його не бачимо. Кнопка «Видалити історію» стирає його. Це помічник для особистого використання, а не офіційний документ і не консультація. Остаточні ціни повідомимо не пізніше 30.09.2027.</p>
 </section>
+<section class="cn-sec cn-calc" id="perehod">
+  <h2>Перейти на інший пакет: скільки доплатити</h2>
+  <p class="cn-muted">Ви вже в пакеті й хочете більше? Платите лише різницю за залишок терміну, заново платити не потрібно, кінець терміну не змінюється. Вкажіть, що у вас зараз, і калькулятор покаже доплату за будь-який інший пакет, очний або онлайн. Це попередній розрахунок, а не рахунок.</p>
+  <div class="cn-cstep">
+    <h3><span class="cn-n">1</span>Що у вас зараз</h3>
+    <label class="cn-crow"><span>Ваш пакет<small>Той, що вказаний в останньому рахунку</small></span><select id="tf" aria-label="Ваш пакет"></select></label>
+    <label class="cn-crow"><span>На який термін оплачено<small>Рік, пів року або квартал, як у рахунку</small></span><select id="tp" aria-label="На який термін оплачено"><option value="y">Рік</option><option value="h">Пів року</option><option value="q">Квартал</option></select></label>
+    <label class="cn-crow"><span>Оплачено до<small>Дата кінця терміну з рахунку або листа</small></span><input type="date" id="td" aria-label="Оплачено до"></label>
+    <label class="cn-crow"><span>Основний кантон картки<small>Потрібен, щоб порахувати ціну ТОП</small></span><select id="tm" aria-label="Основний кантон картки"></select></label>
+    <label class="cn-crow"><input type="checkbox" id="tfi"><span>У мене знижка фірмі −30 %<small>Якщо це друга або наступна картка вашої фірми</small></span></label>
+  </div>
+  <div class="cn-cstep">
+    <h3><span class="cn-n">2</span>Що ви вже оплатили понад пакет</h3>
+    <label class="cn-crow"><input type="checkbox" id="tw"><span>Увесь кантон<small>У VIP і ТОП уже входить, тоді оплату зарахуємо</small></span></label>
+    <label class="cn-crow"><span>Додаткові кантони<small>У VIP і ТОП входить один, в онлайн-пакетах вони не потрібні</small></span><select id="tc" aria-label="Додаткові кантони"><option value="0">немає</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select></label>
+    <label class="cn-crow"><input type="checkbox" id="tpr"><span>Прайс на долоні<small>У VIP і ТОП уже входить, тоді оплату зарахуємо</small></span></label>
+    <label class="cn-crow"><span>Додаткові місця для подій<small>У VIP входить 6, у ТОП 12</small></span><input type="number" id="tpl" min="0" max="60" value="0" inputmode="numeric" aria-label="Додаткові місця для подій"></label>
+  </div>
+  <h3 class="cn-rh">Скільки доплатити</h3>
+  <div class="cn-inv cn-up" id="tres" role="status"></div>
+  <div class="cn-acts"><button type="button" class="cn-btn cn-ghost" id="tclr">Видалити історію</button></div>
+  <p class="cn-small cn-muted">Як рахуємо: різниця цін за термін, помножена на частку терміну, що залишився, плюс те, що ви доплачуєте понад входяче в новий пакет. Оплачене, що вже входить у новий пакет, зараховується. Угору можна перейти будь-якого дня. Вниз за ціною переходять під час продовження, за залишок терміну гроші не повертаємо. Доплату менше 30 CHF ми не виставляємо: новий пакет увімкнеться під час продовження. У ТОП потрібне вільне місце. Розрахунок зберігається лише у вашому браузері. Це помічник для особистого використання, а не офіційний документ і не консультація.</p>
+  </section>
+<section class="cn-sec cn-calc" id="zakaz">
+  <h2>Як замовити пакет і як дізнатися, чи є вільне місце</h2>
+  <p class="cn-muted">Пакет замовляють для картки, яка вже є в довіднику. Платити на сайті не потрібно: рахунок приходить лише після вашого підтвердження.</p>
+  <div class="cn-grid cn-stps">
+    <div class="cn-box"><h3>Оберіть пакет</h3><p class="cn-small">Зберіть набір у калькуляторі вище й відкрийте форму «Замовити пакет». Номер вашої картки підставить дані сам, вписувати їх не потрібно.</p></div>
+    <div class="cn-box"><h3>Перевірте місце</h3><p class="cn-small">Для ТОП форма одразу показує, чи вільне місце у вашому напрямі та кантоні. Якщо місць немає, кнопка змінюється на «Стати в чергу».</p></div>
+    <div class="cn-box"><h3>Підтвердьте замовлення</h3><p class="cn-small">Посилання приходить на e-mail картки. Ви ставите позначки й натискаєте «Підтверджую». До цього нічого не виставляється й не списується.</p></div>
+    <div class="cn-box"><h3>Оплатіть рахунок</h3><p class="cn-small">Рахунок від Alonira.ch AG приходить на той самий e-mail, термін оплати 30 днів. Пакет вмикається, коли оплата надійшла на наш рахунок.</p></div>
+  </div>
+  <h3>Вільні місця в першому ряду</h3>
+  <p class="cn-muted">У ТОП три місця на напрям: у вашому основному кантоні, а в «VIP-онлайн ТОП» по всій Швейцарії. Оберіть приклад і подивіться, що побачить людина.</p>
+  <div class="cn-box cn-brd" id="brd">
+    <div class="cn-sample">Зразок · усе вигадане. На робочій сторінці місця рахуються за довідником.</div>
+    <label class="cn-crow"><span>Напрям і де вас мають знайти</span><select id="bsel" aria-label="Напрям і де вас мають знайти">
+      <option value="0">Психологія · консультації, Цюрих</option>
+      <option value="1">Бухгалтерія та податки, Цюрих</option>
+      <option value="2">Бухгалтерія та податки, Урі</option>
+      <option value="3">Психологія · консультації, онлайн по всій Швейцарії</option>
+    </select></label>
+    <div class="cn-st cn-no cn-on" data-s="0"><span class="cn-dots"><i class="cn-f"></i><i class="cn-f"></i><i class="cn-f"></i></span><b>Місць немає: зайнято 3 із 3</b><p class="cn-small">Найближче місце звільниться 15.03.2027. У черзі 2 людини. Черга йде за датою заявки, місце пропонуємо першому в черзі.</p><p class="cn-small cn-muted">ТОП у Цюриху: 480 CHF на рік</p><span class="cn-fake cn-gh">Стати в чергу, безкоштовно</span></div>
+    <div class="cn-st cn-part" data-s="1"><span class="cn-dots"><i class="cn-f"></i><i class="cn-f"></i><i></i></span><b>Вільно 1 із 3</b><p class="cn-small">Два місця зайняті. Вільне місце отримує той, хто першим підтвердить замовлення.</p><p class="cn-small cn-muted">ТОП у Цюриху: 480 CHF на рік</p><span class="cn-fake">Замовити ТОП</span></div>
+    <div class="cn-st cn-free" data-s="2"><span class="cn-dots"><i></i><i></i><i></i></span><b>Вільно 3 із 3</b><p class="cn-small">У цьому кантоні перший ряд за напрямом поки ніхто не зайняв.</p><p class="cn-small cn-muted">ТОП в Урі: 360 CHF на рік</p><span class="cn-fake">Замовити ТОП</span></div>
+    <div class="cn-st cn-part" data-s="3"><span class="cn-dots"><i class="cn-f"></i><i class="cn-r"></i><i></i></span><b>Вільно 1 із 3, ще одне місце чекає на оплату</b><p class="cn-small">Одне місце зайняте. Ще одне зарезервоване до 10.11.2026: людина підтвердила замовлення, ми чекаємо на оплату. Якщо не оплатять вчасно, місце повернеться в продаж і буде запропоноване за чергою.</p><p class="cn-small cn-muted">VIP-онлайн ТОП: 600 CHF на рік, показ по всій Швейцарії</p><span class="cn-fake">Замовити VIP-онлайн ТОП</span></div>
+  </div>
+  <div class="cn-grid">
+    <div class="cn-box"><h3>Коли місце зайняте</h3><p class="cn-small">Місце зайняте з вашого підтвердження до оплати рахунку, але не довше 30 днів. Не оплатили вчасно: місце повертається в продаж.</p></div>
+    <div class="cn-box"><h3>Черга</h3><p class="cn-small">Стати в чергу можна безкоштовно, і це ні до чого не зобов’язує. Коли місце звільнилося, ми пишемо першому в черзі. На відповідь у нього 7 днів, потім місце пропонуємо наступному.</p></div>
+    <div class="cn-box"><h3>Продовження для тих, у кого місце є</h3><p class="cn-small">За 45 днів до кінця терміну ми надсилаємо пропозицію про продовження. Місце залишається за вами до останнього дня терміну. Не продовжили: воно йде далі за чергою.</p></div>
+    <div class="cn-box"><h3>Одне місце на фірму</h3><p class="cn-small">В однієї фірми не більше одного місця ТОП на напрям у кантоні, а в онлайн-списку не більше одного на напрям. Так перший ряд не дістається одній команді.</p></div>
+  </div>
+  </section>
+<section class="cn-sec" id="knopka">
+  <h2>Кнопки «Записатися», «Запитати ціну» та «Написати відгук» на картці</h2>
+  <p class="cn-muted">Людина, яка знайшла вас у довіднику, натискає кнопку й отримує готове повідомлення в той канал, який обрали ви. Кнопки безкоштовні, в будь-якому пакеті, зокрема в Базовій.</p>
+  <div class="cn-grid">
+    <div class="cn-box"><h3>Записатися</h3><p class="cn-small">Повідомлення з проханням про запис. Є на кожній картці.</p></div>
+    <div class="cn-box"><h3>Запитати ціну</h3><p class="cn-small">Повідомлення із запитанням про ціну. Показується там, де в картки немає прайс-листа.</p></div>
+    <div class="cn-box"><h3>Написати відгук</h3><p class="cn-small">Особисте повідомлення фахівцю: подякувати за роботу або написати з будь-якого приводу. Публічних відгуків у нас немає, тому такий відгук бачить лише власник картки.</p></div>
+  </div>
+  <div class="cn-box">
+    <div class="cn-sample">Зразок · усе вигадане</div>
+    <div class="cn-cbtn"><span class="cn-fake">Записатися</span><span class="cn-fake cn-gh">Запитати ціну</span><span class="cn-fake cn-gh">Написати відгук</span></div>
+    <div class="cn-msgb"><p>Доброго дня! Мене звати Ольга. На сайті проєкту 🌿 «Свої люди» мені трапилася ваша картка «Психологія · консультації».</p><p>Хотіла б записатися на консультацію. Підкажіть, будь ласка, коли у вас є вільний час? Дякую!</p></div>
+    <p class="cn-small cn-muted">Людина вписує своє ім’я, обирає «на ви» або «на ти» й може виправити текст. Решта каналів зв’язку лежать кнопками нижче.</p>
+  </div>
+  <div class="cn-grid cn-stps">
+    <div class="cn-box"><h3>Ви обираєте канал</h3><p class="cn-small">У заявці на картку ви позначаєте, куди вам зручніше отримувати повідомлення: WhatsApp, Telegram, пошта, телефон або SMS, Instagram чи посилання на онлайн-запис.</p></div>
+    <div class="cn-box"><h3>Людина пише</h3><p class="cn-small">Кнопка відкриває обраний вами канал на пристрої людини з готовим текстом. Лишається натиснути «Надіслати».</p></div>
+    <div class="cn-box"><h3>Сайт нічого не зберігає</h3><p class="cn-small">Повідомлення не проходить через наш сервер і ніде не зберігається. Ім’я запам’ятовується лише в браузері людини. Кнопка «Зв’язатися» лишається як була.</p></div>
+  </div>
+  </section>
+<section class="cn-sec" id="chisla">
+  <h2>Скільки людей користуються довідником</h2>
+  <p class="cn-muted">Ціни мають спиратися на цифри, тому ми показуємо два числа й оновлюємо їх 1-го числа кожного місяця.</p>
+  <div class="cn-nm" id="nm">
+    <div class="cn-box"><span class="cn-l">Фахівців у довіднику</span><b id="nSpec">128</b><p class="cn-small">Рахуємо картки, які зараз видно на сайті.</p></div>
+    <div class="cn-box"><span class="cn-l">Відвідувань сайту за місяць: <span id="nMon">вересень 2026</span></span><b id="nVis">4 310</b><p class="cn-small" id="nVisN">Відвідування: один захід на сайт. Рахуємо без cookie і без запису особистих даних.</p></div>
+  </div>
+  <p class="cn-sample" id="nSample">Зразок · цифри вигадані. На робочій сторінці тут справжні числа.</p>
+  </section>
 <section class="cn-sec" id="tabl">
   <h2>Пакети поруч</h2>
   <div class="cn-tw" data-m="i"><table>
     <tr><th></th><th>Базова</th><th>VIP</th><th>ТОП</th></tr>
-    <tr><td>Ціна на рік, CHF</td><td>72</td><td>240</td><td>480</td></tr>
+    <tr><td>Ціна на рік, CHF</td><td>99</td><td>240</td><td>360–480<button type="button" class="cn-qh" aria-label="Чому ціна ТОП різна" aria-expanded="false" data-t="У Цюриху, Берні, Женеві, Во, Базелі-Штадт, Цузі, Ааргау, Санкт-Галлені та Люцерні ТОП коштує 480, в інших кантонах 360. Ціна залежить від основного кантону картки. У «VIP-онлайн ТОП» ціна одна, 600.">?</button></td></tr>
+    <tr><td>Друга категорія або спеціалізація, CHF на рік</td><td>48</td><td>48</td><td>48</td></tr>
+    <tr><td>Друга й наступні картки однієї фірми</td><td>−30 % на пакет</td><td>−30 % на пакет</td><td>−30 % на пакет</td></tr>
     <tr><td>Власне місто й мітка на мапі</td><td class="cn-y">✓</td><td class="cn-y">✓</td><td class="cn-y">✓</td></tr>
     <tr><td>Увесь кантон</td><td>36</td><td class="cn-y">✓</td><td class="cn-y">✓</td></tr>
     <tr><td>+ 1 додатковий кантон</td><td>36</td><td class="cn-y">1</td><td class="cn-y">1</td></tr>
@@ -1037,7 +1172,9 @@ a.yours:hover{background:#EBD3A3}
   <h3 data-m="o">Онлайн-пакети поруч</h3>
   <div class="cn-tw" data-m="o"><table>
     <tr><th></th><th>Онлайн базовий</th><th>VIP-онлайн</th><th>VIP-онлайн ТОП</th></tr>
-    <tr><td>Ціна на рік, CHF</td><td>252</td><td>360</td><td>600</td></tr>
+    <tr><td>Ціна на рік, CHF</td><td>279</td><td>360</td><td>600</td></tr>
+    <tr><td>Друга категорія або спеціалізація, CHF на рік</td><td>48</td><td>48</td><td>48</td></tr>
+    <tr><td>Друга й наступні картки однієї фірми</td><td>−30 % на пакет</td><td>−30 % на пакет</td><td>−30 % на пакет</td></tr>
     <tr><td>Місто, кантон і мітка на мапі у своєму місті</td><td class="cn-y">✓</td><td class="cn-y">✓</td><td class="cn-y">✓</td></tr>
     <tr><td>Увесь кантон</td><td class="cn-y">✓</td><td class="cn-y">✓</td><td class="cn-y">✓</td></tr>
     <tr><td>Показ, коли обирають «онлайн» по всій Швейцарії</td><td class="cn-y">✓</td><td class="cn-y">✓</td><td class="cn-y">✓</td></tr>
@@ -1061,12 +1198,22 @@ a.yours:hover{background:#EBD3A3}
   <div class="cn-grid">
     <div class="cn-box"><h3>Один набір правил для всіх</h3><p class="cn-small">Перевірка дозволів і реєстрації в усіх однакова, платний пакет її не змінює. Платне розміщення завжди позначене. Ми не продаємо «рекомендуємо» й «найкращий».</p></div>
     <div class="cn-box"><h3>Нічого не продовжується саме</h3><p class="cn-small">За 45 днів до кінця строку ми надсилаємо пропозицію. Продовжувати чи ні, вирішуєте ви. Щомісячних списань немає.</p></div>
-    <div class="cn-box"><h3>Вище по сходинках, платите різницю</h3><p class="cn-small">Перейти на пакет вище можна будь-якого дня. Ви доплачуєте лише різницю за решту строку, а не платите заново.</p></div>
-    <div class="cn-box"><h3>Перший ряд без «вічного першого місця»</h3><p class="cn-small">У ТОП три місця на напрям. Порядок трьох карток змінюється, щоб ніхто не стояв першим завжди. Черга йде за датою заявки, вільні місця видно на сторінці.</p></div>
+    <div class="cn-box"><h3>Вище по сходинках, платите різницю</h3><p class="cn-small">Перейти на пакет вище можна будь-якого дня. Ви доплачуєте лише різницю за залишок терміну, а не платите заново. Порахувати можна в розділі «Перейти на інший пакет».</p></div>
+    <div class="cn-box"><h3>Перший ряд без «вічного першого місця»</h3><p class="cn-small">У ТОП три місця на напрям. Порядок трьох карток змінюється, щоб ніхто не стояв першим завжди. Черга йде за датою заявки, вільні місця видно в розділі «Як замовити пакет».</p></div>
+    <div class="cn-box"><h3>Відгуки лише особисті</h3><p class="cn-small">Публічних відгуків у нас немає: за них легко написати хибний відгук, а потім сперечатися. Подякувати фахівцю можна особистим повідомленням, кнопкою «Написати відгук». Його бачить лише власник картки.</p></div>
     <div class="cn-box"><h3>Якщо картку знімаємо ми</h3><p class="cn-small">Якщо ми самі знімаємо платну картку не з вашої вини, наприклад закриваємо розділ, ми повертаємо гроші за решту строку. У разі виключення за порушення умов повернення немає.</p></div>
   </div>
   <p class="cn-small cn-muted">Ми не обіцяємо потоку клієнтів. Довідник допомагає людям вас знайти, а рішення обрати вас залишається за ними.</p>
 </section>
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1124,26 +1271,38 @@ a.yours:hover{background:#EBD3A3}
     mV1:'Вам вигідніший пакет «',mV2:'»: ',mV3:' CHF. Пакет «',mV4:'» з такими опціями коштував би ',mV5:', і в ньому немає: ',
     mT1:'Для вашого набору підходить лише пакет «',mT2:'»: ',mT3:{i:' CHF. Лише в ТОП є перший ряд у кантоні та звіт відвідувань. Місць три на напрям у кантоні, коли вони зайняті, вхід за чергою.',o:' CHF. Лише в «VIP-онлайн ТОП» є перший ряд в онлайн-списку та звіт відвідувань. Місць три на напрям по всій Швейцарії, коли вони зайняті, вхід за чергою.'},
     cpHead:'Свої люди · розрахунок пакета для картки в довіднику',copied:'Розрахунок скопійовано',copyFail:'Не вдалося скопіювати, виділіть текст і скопіюйте вручну',reset:'Розрахунок видалено з браузера',
-    kasTitle:'Оберіть кантон'
+    kasTitle:'Оберіть кантон',
+    cats:'Додаткові категорії',firm:'Знижка фірмі −30 % на пакет',zone:{b:'великий кантон',s:'інші кантони'},
+    uNeed:'Вкажіть дату, до якої оплачено ваш пакет, і калькулятор покаже доплату.',uPast:'Термін уже закінчився. Замовте пакет заново: доплата не потрібна.',
+    uHead:'Залишилося днів: ',uOf:' із ',uTo:'Перехід на пакет',uPay:'Доплата, CHF без MWST',uLow:'Дешевший або рівний за ціною. Перейти можна під час продовження, за залишок терміну гроші не повертаємо.',
+    uSmall:'Доплата менше 30 CHF. Ми її не виставляємо, новий пакет увімкнеться під час продовження.',uTop:'Потрібне вільне місце ТОП. Перевірте в розділі «Як замовити пакет».',
+    uExtra:'В онлайн-пакетах додаткові кантони не потрібні, їхня оплата в розрахунок не входить.',uNow:'Зараз у вас',uGrp:{i:'Очні пакети',o:'Онлайн-пакети'},uCur:'ваш пакет',uReset:'Розрахунок видалено з браузера',
+    visSoon:'Лічильник відвідувань ми підключимо скоро. Поки показуємо лише кількість фахівців.'
   };
-  var PRICE={i:{b:72,v:240,t:480},o:{b:252,v:360,t:600}};
+  var PRICE={i:{b:99,v:240,t:480},o:{b:279,v:360,t:600}};
+  var BIG=[0,1,2,8,11,16,18,21,24];
+  function isBig(n){return BIG.indexOf(C.indexOf(n))>=0}
+  function price(M,key,main){return (M==='i'&&key==='t')?(isBig(main)?480:360):PRICE[M][key]}
+  var ORD={b:0,v:1,t:2};
   var INC={i:{b:{w:0,x:0,p:0,pl:0},v:{w:1,x:1,p:1,pl:6},t:{w:1,x:1,p:1,pl:12}},o:{b:{p:0,pl:0},v:{p:1,pl:6},t:{p:1,pl:12}}};
   var PER={y:{f:1,m:12},h:{f:0.6,m:6},q:{f:0.35,m:3}};
   var KEY='svoiCeny';
-  var S={mode:'i',per:'y',main:'Цюрих',whole:false,extra:[],price:false,places:0,wColor:false,wReport:false,wCard:false,wFirst:false,sel:'auto'};
+  var S={mode:'i',per:'y',main:'Цюрих',whole:false,extra:[],price:false,places:0,cats:0,firm:false,wColor:false,wReport:false,wCard:false,wFirst:false,sel:'auto'};
 
   function r5(x){return Math.round(x*20)/20}
   function fmt(n){return n%1?n.toFixed(2):String(n)}
 
   function packOf(key){
-    var M=S.mode,i=INC[M][key],lines=[],miss=[],pr=PRICE[M][key],sum=pr;
-    lines.push([T.pkLine[M][key],pr]);
+    var M=S.mode,i=INC[M][key],lines=[],miss=[],pr=price(M,key,S.main),sum=pr;
+    lines.push([T.pkLine[M][key]+(M==='i'&&key==='t'?' ('+T.zone[isBig(S.main)?'b':'s']+')':''),pr]);
+    if(S.firm){var dsc=-Math.round(pr*30)/100;sum+=dsc;lines.push([T.firm,dsc])}
     if(M==='o'){lines.push([T.whole+': '+S.main,0]);lines.push([T.online,0])}
     else{
       if(S.whole){var w=i.w?0:36;sum+=w;lines.push([T.whole+': '+S.main,w])}
       S.extra.forEach(function(n,j){var f=j<i.x?0:36;sum+=f;lines.push([T.extra+': '+n,f])});
     }
     if(S.price){var p=i.p?0:24;sum+=p;lines.push([T.price,p])}
+    if(S.cats>0){var cc=S.cats*48;sum+=cc;lines.push([T.cats+': '+S.cats+' × 48',cc])}
     if(S.places>0){
       var inc=Math.min(i.pl,S.places);
       if(inc>0) lines.push([T.placesInc+': '+inc,0]);
@@ -1194,7 +1353,7 @@ a.yours:hover{background:#EBD3A3}
   function upd(){
     readExtra();
     var P3=['b','v','t'].map(packOf),by={};P3.forEach(function(p){by[p.k]=p});
-    var sat=P3.filter(function(p){return !p.miss.length}).sort(function(a,b){return a.inv-b.inv});
+    var sat=P3.filter(function(p){return !p.miss.length}).sort(function(a,b){return a.inv-b.inv||ORD[b.k]-ORD[a.k]});
     var best=sat[0],shown=S.sel==='auto'||!by[S.sel]?best.k:S.sel;
     $('res').innerHTML=P3.map(function(p){return card(p,p.k===best.k,p.k===shown)}).join('');
     // подсказка
@@ -1218,7 +1377,8 @@ a.yours:hover{background:#EBD3A3}
   function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
   function load(){try{var j=JSON.parse(localStorage.getItem(KEY)||'null');if(j&&typeof j==='object'){
     if(PER[j.per])S.per=j.per; S.mode=j.mode==='o'?'o':'i'; if(C.indexOf(j.main)>=0)S.main=j.main;
-    ['whole','price','wColor','wReport','wCard','wFirst'].forEach(function(f){S[f]=!!j[f]});
+    ['whole','price','firm','wColor','wReport','wCard','wFirst'].forEach(function(f){S[f]=!!j[f]});
+    S.cats=Math.max(0,Math.min(2,parseInt(j.cats,10)||0));
     S.places=Math.max(0,Math.min(60,parseInt(j.places,10)||0));
     S.extra=(j.extra||[]).filter(function(n){return C.indexOf(n)>=0&&n!==S.main}).slice(0,25);
     S.sel=['b','v','t'].indexOf(j.sel)>=0?j.sel:'auto';
@@ -1230,7 +1390,7 @@ a.yours:hover{background:#EBD3A3}
     fillSelect($('mainc'),S.main,[]);$('mainc').value=S.main;
     $('c_whole').checked=S.whole;$('c_price').checked=S.price;
     $('w_color').checked=S.wColor;$('w_report').checked=S.wReport;$('w_card').checked=S.wCard;$('w_first').checked=S.wFirst;
-    $('pn').textContent=S.places;
+    $('pn').textContent=S.places;$('kn').textContent=S.cats;$('c_firm').checked=S.firm;
     $('extra').innerHTML='';S.extra.forEach(function(n){addRow(n)});
   }
   function applyMode(){
@@ -1251,9 +1411,11 @@ a.yours:hover{background:#EBD3A3}
   document.querySelectorAll('input[name=per]').forEach(function(r){r.addEventListener('change',function(){S.per=r.value;upd()})});
   document.querySelectorAll('input[name=mode],input[name=pmode]').forEach(function(r){r.addEventListener('change',function(){if(r.checked)setMode(r.value)})});
   $('mainc').addEventListener('change',function(){S.main=$('mainc').value;refillExtra();upd()});
-  [['c_whole','whole'],['c_price','price'],['w_color','wColor'],['w_report','wReport'],['w_card','wCard'],['w_first','wFirst']].forEach(function(a){
+  [['c_whole','whole'],['c_price','price'],['c_firm','firm'],['w_color','wColor'],['w_report','wReport'],['w_card','wCard'],['w_first','wFirst']].forEach(function(a){
     $(a[0]).addEventListener('change',function(){S[a[1]]=$(a[0]).checked;upd()})});
   $('addc').addEventListener('click',function(){if($('extra').children.length<25){addRow('');upd()}});
+  $('km').addEventListener('click',function(){S.cats=Math.max(0,S.cats-1);$('kn').textContent=S.cats;upd()});
+  $('kp').addEventListener('click',function(){S.cats=Math.min(2,S.cats+1);$('kn').textContent=S.cats;upd()});
   $('pm').addEventListener('click',function(){S.places=Math.max(0,S.places-1);$('pn').textContent=S.places;upd()});
   $('pp').addEventListener('click',function(){S.places=Math.min(60,S.places+1);$('pn').textContent=S.places;upd()});
   $('res').addEventListener('click',function(e){var b=e.target.closest('button[data-k]');if(b){S.sel=b.getAttribute('data-k');upd();$('inv').scrollIntoView({behavior:'smooth',block:'nearest'})}});
@@ -1265,10 +1427,97 @@ a.yours:hover{background:#EBD3A3}
   });
   $('reset').addEventListener('click',function(){
     try{localStorage.removeItem(KEY)}catch(e){}
-    S={mode:'i',per:'y',main:'Цюрих',whole:false,extra:[],price:false,places:0,wColor:false,wReport:false,wCard:false,wFirst:false,sel:'auto'};
+    S={mode:'i',per:'y',main:'Цюрих',whole:false,extra:[],price:false,places:0,cats:0,firm:false,wColor:false,wReport:false,wCard:false,wFirst:false,sel:'auto'};
     sync();upd();try{localStorage.removeItem(KEY)}catch(e){}$('cst').textContent=T.reset;
   });
   upd();
+
+  /* переход на другой пакет */
+  var U={cur:'i.v',per:'y',until:'',main:'Цюрих',whole:false,cant:0,price:false,places:0,firm:false},UK='svoiPerehod';
+  var NAMES=[['i','b'],['i','v'],['i','t'],['o','b'],['o','v'],['o','t']],DAYS={y:365,h:182,q:91};
+  function tot(M,key,o){
+    var i=INC[M][key],s=price(M,key,o.main)*(o.firm?0.7:1);
+    if(M==='i'){if(o.whole&&!i.w)s+=36;s+=Math.max(0,o.cant-i.x)*36}
+    if(o.price&&!i.p)s+=24;
+    s+=Math.max(0,o.places-i.pl)*(key==='b'?20:10);
+    return s;
+  }
+  function uLoad(){try{var j=JSON.parse(localStorage.getItem(UK)||'null');if(j&&typeof j==='object'){
+    if(NAMES.some(function(n){return n.join('.')===j.cur}))U.cur=j.cur;
+    if(DAYS[j.per])U.per=j.per; if(/^\d{4}-\d\d-\d\d$/.test(j.until||''))U.until=j.until;
+    if(C.indexOf(j.main)>=0)U.main=j.main;
+    U.whole=!!j.whole;U.price=!!j.price;U.firm=!!j.firm;
+    U.cant=Math.max(0,Math.min(5,parseInt(j.cant,10)||0));U.places=Math.max(0,Math.min(60,parseInt(j.places,10)||0));
+  }}catch(e){}}
+  function uFill(){
+    var h='';['i','o'].forEach(function(M){h+='<optgroup label="'+T.uGrp[M]+'">'+['b','v','t'].map(function(q){var v=M+'.'+q;return '<option value="'+v+'"'+(v===U.cur?' selected':'')+'>'+T.pk[M][q]+'</option>'}).join('')+'</optgroup>'});
+    $('tf').innerHTML=h;
+    $('tp').value=U.per;$('td').value=U.until;
+    fillSelect($('tm'),U.main,[]);$('tm').value=U.main;
+    $('tfi').checked=U.firm;$('tw').checked=U.whole;$('tc').value=String(U.cant);$('tpr').checked=U.price;$('tpl').value=U.places;
+  }
+  function uRead(){
+    U.cur=$('tf').value;U.per=$('tp').value;U.until=$('td').value;U.main=$('tm').value;
+    U.firm=$('tfi').checked;U.whole=$('tw').checked;U.cant=parseInt($('tc').value,10)||0;U.price=$('tpr').checked;
+    U.places=Math.max(0,Math.min(60,parseInt($('tpl').value,10)||0));
+  }
+  function uRun(){
+    uRead();try{localStorage.setItem(UK,JSON.stringify(U))}catch(e){}
+    var out=$('tres'),d=null;
+    if(U.until){d=Math.ceil((new Date(U.until+'T23:59:59')-new Date())/864e5)}
+    if(d===null||isNaN(d)){out.innerHTML='<p class="'+k('small muted')+'">'+T.uNeed+'</p>';return}
+    if(d<=0){out.innerHTML='<p class="'+k('small muted')+'">'+T.uPast+'</p>';return}
+    var full=DAYS[U.per],frac=Math.min(1,d/full),f=PER[U.per].f,cur=U.cur.split('.'),c0=tot(cur[0],cur[1],U);
+    var rows=NAMES.filter(function(n){return n.join('.')!==U.cur}).map(function(n){
+      var t1=tot(n[0],n[1],U),diff=t1-c0,sur=Math.max(0,r5(diff*f*frac)),note=[];
+      if(diff<=0)note.push(T.uLow);else if(sur<30)note.push(T.uSmall);
+      if(n[1]==='t')note.push(T.uTop);
+      if(cur[0]==='i'&&n[0]==='o'&&U.cant>0)note.push(T.uExtra);
+      return {n:n,t1:t1,sur:sur,note:note,low:diff<=0||sur<30};
+    });
+    var h='<p class="'+k('small muted')+'">'+T.uHead+Math.min(d,full)+T.uOf+full+'. '+T.pk[cur[0]][cur[1]]+'.</p><table>'+
+      '<tr><td><b>'+T.uTo+'</b></td><td><b>'+T.uPay+'</b></td></tr>'+
+      rows.map(function(r){return '<tr><td>'+T.pk[r.n[0]][r.n[1]]+(r.note.length?'<small>'+r.note.join(' ')+'</small>':'')+'</td><td>'+(r.low?'0':fmt(r.sur))+'</td></tr>'}).join('')+'</table>';
+    out.innerHTML=h;
+  }
+  uLoad();uFill();uRun();
+  ['tf','tp','td','tm','tfi','tw','tc','tpr'].forEach(function(id){$(id).addEventListener('change',uRun)});
+  $('tpl').addEventListener('input',uRun);
+  $('tclr').addEventListener('click',function(){
+    try{localStorage.removeItem(UK)}catch(e){}
+    U={cur:'i.v',per:'y',until:'',main:'Цюрих',whole:false,cant:0,price:false,places:0,firm:false};
+    uFill();uRun();try{localStorage.removeItem(UK)}catch(e){}
+  });
+
+  /* образец индикатора свободных мест */
+  if($('bsel')){
+    var bd=function(){[].forEach.call(document.querySelectorAll('#brd [data-s]'),function(e){e.classList[e.getAttribute('data-s')===$('bsel').value?'add':'remove'](P+'on')})};
+    $('bsel').addEventListener('change',bd);bd();
+  }
+
+  /* счётчики: настоящие числа берём из данных сайта, вымышленных на сайте не показываем */
+  (function(){
+    if(!$('nm'))return;
+    function numFmt(n){return String(n).replace(/\B(?=(\d{3})+(?!\d))/g,' ')}
+    function ld(src,cb){var el=document.createElement('script');el.src=src;el.onload=cb;el.onerror=cb;document.head.appendChild(el)}
+    var today=new Date().toISOString().slice(0,10);
+    ld('/data/specialists.js',function(){
+      var A=window.SPECIALISTS;
+      if(!Array.isArray(A)||!A.length)return;
+      $('nSpec').textContent=numFmt(A.filter(function(x){return !x.sample&&x.status==='активен'&&x.photo&&(!x.paidUntil||x.paidUntil>=today)}).length);
+      $('nSample').hidden=true;
+      ld('/data/stats.js',function(){
+        var St=window.STATS;
+        if(St&&St.visits>0&&/^\d{4}-\d\d$/.test(St.month||'')){
+          $('nVis').textContent=numFmt(St.visits);
+          try{$('nMon').textContent=new Date(St.month+'-15T12:00:00').toLocaleDateString(document.documentElement.lang||'ru',{month:'long',year:'numeric'})}catch(e){$('nMon').textContent=St.month}
+        }else{
+          $('nVis').textContent='—';$('nMon').textContent='';
+          $('nVisN').textContent=T.visSoon;
+        }
+      });
+    });
+  })();
 
   /* кружки «?» */
   document.addEventListener('click',function(e){
