@@ -361,7 +361,8 @@ def usloviya():
       <p>Как мы обращаемся с данными анкеты, карточки и подтверждений, подробно написано в <a href="https://svoiludi.ch/privacy/">политике конфиденциальности</a>. Коротко: публикуется только то, что вы подтвердили. Анкету, фото и запись о согласии мы храним, пока карточка опубликована, и не дольше трёх лет после её снятия. Счета по закону хранятся 10 лет.</p>
     </section>
     <section id="izmeneniya" aria-labelledby="h-change"><h2 id="h-change">14. Если условия меняются</h2>
-      <p>Об изменениях мы пишем всем, у кого есть карточка, не позже чем за 30 дней. Для уже оплаченного срока действуют прежние условия. Если вы не согласны, можете прекратить платную услугу без затрат и получить деньги за оставшиеся полные месяцы.</p>
+      <p><b>Пока сайт в разработке и тестировании</b> и размещение бесплатное, условия могут уточняться часто. Об изменениях мы сообщаем на сайте, в разделе <a href="../novosti/">«Что нового»</a>, отдельных писем не присылаем. Действующий текст всегда на этой странице, дата редакции — внизу.</p>
+      <p><b>Когда у вас есть платная услуга,</b> об изменениях мы пишем вам не позже чем за 30 дней. Для уже оплаченного срока действуют прежние условия. Если вы не согласны, можете прекратить платную услугу без затрат и получить деньги за оставшиеся полные месяцы.</p>
     </section>
     <section id="pravo" aria-labelledby="h-law"><h2 id="h-law">15. Право и суд</h2>
       <p>Действует швейцарское право. Если договориться не получится, место суда — Цуг. Условия написаны по-русски, украинский текст — перевод. Если они расходятся, действует русский текст.</p>
@@ -518,16 +519,66 @@ def news_item(n, up, full=True):
     src = f'<p class="nsrc">Источник: <a href="{n["src"][1]}">{E(n["src"][0])}</a></p>' if n.get('src') else ''
     return f'''<article class="news k-{n['kind']}" id="{n['id']}" data-kind="{n['kind']}"><div class="nmeta"><span class="nk">{KIND[n['kind']]}</span><time datetime="{n['date']}">{ddate(n['date'])}</time><span class="nt">{E(n.get('topic', ''))}</span></div><h3>{E(n['title'])}</h3>{'<p>' + n['text'] + '</p>' + warn + src if full else ''}<div class="nlinks">{links}</div></article>'''
 
+def plural(n, one, few, many):
+    a, b = n % 10, n % 100
+    return one if a == 1 and b != 11 else few if 2 <= a <= 4 and not 12 <= b <= 14 else many
+
+# «Новое на сайте» — одна карточка на день: решение Ирины 11.10.2026 («чтобы не засоряло всю ленту, мы размещаем по несколько раз в день»).
+# «Изменилось в Швейцарии» и «Сроки месяца» остаются отдельными карточками. Якоря #<id> каждой записи работают (скрипт раскрывает её).
+NEWS_SHOW = 4     # сколько обновлений дня видно сразу, остальные — «Показать все»
+NEWS_CARDS = 8    # сколько карточек ленты видно сразу, остальные — «Более ранние новости»
+def news_cards(items):
+    cards, days = [], {}
+    for n in items:
+        if n['kind'] != 'site': cards.append(n); continue
+        g = days.get(n['date'])
+        if g is None:
+            g = days[n['date']] = {'kind': 'site', 'date': n['date'], 'items': []}; cards.append(g)
+        g['items'].append(n)
+    order = {'change': 0, 'month': 1, 'site': 2}
+    cards.sort(key=lambda c: (c['date'], -order[c['kind']]), reverse=True)
+    return cards
+
+def news_count(k):
+    return f'<span class="ncnt">{k}</span> <span>{plural(k, "обновление сайта", "обновления сайта", "обновлений сайта")}</span>'
+
+def news_li(n, up):
+    links = ''.join(f'<a href="{up}{p}">{E(t)} →</a>' for t, p in n.get('links', []))
+    warn = f'<p class="attn"><i class="wi"></i>{n["warn"]}</p>' if n.get('warn') else ''
+    tp = f'<span class="ntp">{E(n["topic"])}</span>' if n.get('topic') else ''
+    return (f'<li class="nli" id="{n["id"]}"><details><summary><span class="nst">{E(n["title"])}</span>{tp}</summary>'
+            f'<div class="nbody"><p>{n["text"]}</p>{warn}<div class="nlinks">{links}</div></div></details></li>')
+
+def news_day(g, up, full=True):
+    its, k = g['items'], len(g['items'])
+    meta = f'<div class="nmeta"><span class="nk">{KIND["site"]}</span><time datetime="{g["date"]}">{ddate(g["date"])}</time></div>'
+    if full:
+        rest = its[NEWS_SHOW:]
+        more = (f'<details class="nrest"><summary><span class="s-o">Показать все <span class="ncnt">{k}</span></span><span class="s-c">Свернуть</span></summary>'
+                f'<ul class="nlist">{"".join(news_li(n, up) for n in rest)}</ul></details>') if rest else ''
+        return (f'<section class="news nday k-site" id="d-{g["date"]}" data-kind="site">{meta}<h3>{news_count(k)}</h3>'
+                f'<ul class="nlist">{"".join(news_li(n, up) for n in its[:NEWS_SHOW])}</ul>{more}</section>')
+    lis = ''.join(f'<li><a href="{up}novosti/#{n["id"]}">{E(n["title"])}</a></li>' for n in its[:3])
+    more = f'<div class="nlinks"><a href="{up}novosti/#d-{g["date"]}">Ещё <span class="ncnt">{k - 3}</span> →</a></div>' if k > 3 else ''
+    return f'<article class="news nday k-site" data-kind="site">{meta}<h3>{news_count(k)}</h3><ul class="nl-short">{lis}</ul>{more}</article>'
+
+def news_card(c, up, full=True):
+    return news_day(c, up, full) if 'items' in c else news_item(c, up, full)
+
 def novosti():
     rel = 'novosti/index.html'; url = SITE + 'novosti/'
     items = sorted(NEWS, key=lambda n: n['date'], reverse=True)
     title = 'Что нового в Швейцарии и на сайте «Свои люди»: изменения, сроки месяца, новые статьи'
     desc = 'Что изменилось в Швейцарии (суммы, сроки, правила), сроки месяца — медстраховка, налоги, 3a — и новое на сайте «Свои люди»: статьи и бесплатные инструменты. Коротко, на русском, с официальными источниками.'
     filt = '<div class="nfilter" role="group" aria-label="Что показать"><button type="button" aria-pressed="true" data-k="">Всё</button>' + ''.join(f'<button type="button" aria-pressed="false" data-k="{k}">{v}</button>' for k, v in [('change', KIND['change']), ('month', KIND['month']), ('site', KIND['site'])]) + '</div>'
-    feed = ''.join(news_item(n, '../') for n in items)
-    script = '''<script>(function(){var b=document.querySelectorAll('.nfilter button');b.forEach(function(x){x.addEventListener('click',function(){b.forEach(function(y){y.setAttribute('aria-pressed',y===x)});var k=x.dataset.k;document.querySelectorAll('.news').forEach(function(n){n.hidden=k&&n.dataset.kind!==k});var e=document.getElementById('nempty');if(e)e.hidden=!!document.querySelector('.news:not([hidden])')})})})();</script>\n'''
+    cards = news_cards(items)
+    feed = ''.join(news_card(c, '../') for c in cards[:NEWS_CARDS])
+    if cards[NEWS_CARDS:]:
+        feed += f'<details class="nolder"><summary>Более ранние новости</summary><div class="nfeed">{"".join(news_card(c, "../") for c in cards[NEWS_CARDS:])}</div></details>'
+    # фильтр по виду; переход по ссылке на запись (#id) или на день (#d-ГГГГ-ММ-ДД) раскрывает её и всё вокруг
+    script = '''<script>(function(){var b=document.querySelectorAll('.nfilter button');function show(k){document.querySelectorAll('.nfeed .news').forEach(function(n){n.hidden=!!k&&n.dataset.kind!==k});var o=document.querySelector('.nolder');if(o&&k)o.open=true;var e=document.getElementById('nempty');if(e)e.hidden=!!document.querySelector('.nfeed .news:not([hidden])')}b.forEach(function(x){x.addEventListener('click',function(){b.forEach(function(y){y.setAttribute('aria-pressed',y===x)});show(x.dataset.k)})});function go(){var id='';try{id=decodeURIComponent(location.hash.slice(1))}catch(e){}if(!id)return;var t=document.getElementById(id);if(!t||!t.closest('.nfeed'))return;var c=t.closest('.news');if(c&&c.hidden&&b[0])b[0].click();for(var p=t;p;p=p.parentElement){if(p.tagName==='DETAILS')p.open=true}var d=t.querySelector(':scope>details');if(d)d.open=true;setTimeout(function(){t.scrollIntoView({block:'start'})},30)}addEventListener('hashchange',go);go()})();</script>\n'''
     main = '<main class="page">\n' + hero('Что нового · Свои люди в Швейцарии', 'Что нового <em>в Швейцарии и у нас</em>',
-        'Что изменилось в правилах и суммах, какие сроки в этом месяце и что нового на сайте. Коротко, с официальными источниками и ссылками на подробные статьи.', 'news',
+        'Что изменилось в правилах и суммах, какие сроки в этом месяце и что нового на сайте. Обновления сайта собраны по дням: нажми на строку, чтобы прочитать подробнее.', 'news',
         '\n      ' + subscribe('../', ' sub-in')) + f'''
   {filt}
   <div class="nfeed">{feed}<p id="nempty" class="tm-empty" hidden>Здесь пока пусто. Загляни позже или подпишись на новости.</p></div>
@@ -542,12 +593,26 @@ def novosti():
     write('data/news.js', '/* Собирается _i18n/struktura_src/build.py из data.py — руками не править. «Что нового», 09.10.2026. */\nwindow.SVOI_NEWS = ' + json.dumps(items, ensure_ascii=False, separators=(',', ':')) + ';\n')
     # RSS
     def rfc(iso): d = datetime.datetime.fromisoformat(iso + 'T08:00:00+02:00'); return d.strftime('%a, %d %b %Y %H:%M:%S +0200')
-    it = ''.join(f'<item><title>{E(n["title"])}</title><link>{url}#{n["id"]}</link><guid isPermaLink="false">svoiludi-{n["id"]}</guid><pubDate>{rfc(n["date"])}</pubDate><category>{KIND[n["kind"]]}</category><description>{E(re.sub("<[^>]+>", "", n["text"]))}</description></item>' for n in items)
-    # украинская лента — тексты из памяти переводов (если перевода ещё нет, остаётся русский)
+    # обновления сайта — одна запись RSS на день (как карточка дня в ленте), изменения и сроки — по одной
     try: TM = json.load(open('_i18n/tm_uk.json', encoding='utf-8'))
     except Exception: TM = {}
     tr = lambda t: TM.get(t, t)
-    itu = ''.join(f'<item><title>{E(tr(n["title"]))}</title><link>{SITE}uk/novosti/#{n["id"]}</link><guid isPermaLink="false">svoiludi-uk-{n["id"]}</guid><pubDate>{rfc(n["date"])}</pubDate><description>{E(re.sub("<[^>]+>", "", tr(n["text"])))}</description></item>' for n in items)
+    MON_UK = ['січня', 'лютого', 'березня', 'квітня', 'травня', 'червня', 'липня', 'серпня', 'вересня', 'жовтня', 'листопада', 'грудня']
+    def ddate_uk(iso): d = datetime.date.fromisoformat(iso); return f'{d.day} {MON_UK[d.month - 1]} {d.year}'
+    def rss(c, uk=False):
+        t = tr if uk else (lambda x: x); base = SITE + ('uk/' if uk else '') + 'novosti/'
+        if 'items' in c:
+            k = len(c['items'])
+            cnt = plural(k, 'оновлення сайту', 'оновлення сайту', 'оновлень сайту') if uk else plural(k, 'обновление сайта', 'обновления сайта', 'обновлений сайта')
+            title = f'{t(KIND["site"])}, {ddate_uk(c["date"]) if uk else ddate(c["date"])}: {k} {cnt}'
+            body = ' · '.join(t(n['title']) for n in c['items'])
+            return (f'<item><title>{E(title)}</title><link>{base}#d-{c["date"]}</link><guid isPermaLink="false">svoiludi-{"uk-" if uk else ""}site-{c["date"]}</guid>'
+                    f'<pubDate>{rfc(c["date"])}</pubDate><category>{E(t(KIND["site"]))}</category><description>{E(body)}</description></item>')
+        return (f'<item><title>{E(t(c["title"]))}</title><link>{base}#{c["id"]}</link><guid isPermaLink="false">svoiludi-{"uk-" if uk else ""}{c["id"]}</guid>'
+                f'<pubDate>{rfc(c["date"])}</pubDate><category>{E(t(KIND[c["kind"]]))}</category><description>{E(re.sub("<[^>]+>", "", t(c["text"])))}</description></item>')
+    cards = news_cards(items)
+    it = ''.join(rss(c) for c in cards)
+    itu = ''.join(rss(c, True) for c in cards)
     write('uk/novosti/rss.xml', f'<?xml version="1.0" encoding="UTF-8"?>\n<rss version="2.0"><channel><title>Свої люди у Швейцарії — що нового</title><link>{SITE}uk/novosti/</link><description>Що змінилося у Швейцарії, терміни місяця і нове на сайті svoiludi.ch</description><language>uk</language>{itu}</channel></rss>\n')
     write('novosti/rss.xml', f'<?xml version="1.0" encoding="UTF-8"?>\n<rss version="2.0"><channel><title>Свои люди в Швейцарии — что нового</title><link>{url}</link><description>Что изменилось в Швейцарии, сроки месяца и новое на сайте svoiludi.ch</description><language>ru</language>{it}</channel></rss>\n')
 
@@ -555,7 +620,7 @@ def novosti():
 def home_blocks():
     p = 'index.html'; h = open(p, encoding='utf-8').read()
     h = re.sub(r'\n?<!--sit-->.*?<!--sit-->', '', h, flags=re.S)
-    latest = ''.join(news_item(n, '', full=False) for n in sorted(NEWS, key=lambda n: n['date'], reverse=True)[:3])
+    latest = ''.join(news_card(c, '', full=False) for c in news_cards(sorted(NEWS, key=lambda n: n['date'], reverse=True))[:3])
     block = f'''
 <!--sit--><link rel="stylesheet" href="assets/struktura.css"><section class="home-sit page" aria-labelledby="h-sit">
   <h2 id="h-sit">Моя ситуация: с чего начать</h2>

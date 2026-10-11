@@ -52,6 +52,32 @@ a.pro-card:hover{border-color:var(--brown)}
 .k-month .nmeta .nk{background:var(--mustard-soft)}
 .nlinks{display:flex;flex-wrap:wrap;gap:6px 16px;font-weight:700;font-size:.9rem}
 .nsrc{font-size:.84rem;color:var(--muted)}
+/* «Новое на сайте» — одна карточка на день (11.10.2026): строки раскрываются по нажатию */
+.nday h3{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+.ncnt{font-weight:700}
+.nlist,.nl-short{list-style:none;margin:4px 0 0;padding:0}
+.nli{border-top:1px solid var(--line);scroll-margin-top:90px}
+.nday>.nlist>.nli:first-child{border-top:0}
+.nli>details>summary{display:flex;align-items:baseline;gap:6px 12px;flex-wrap:wrap;padding:11px 26px 11px 0;cursor:pointer;list-style:none;position:relative;line-height:1.4}
+.nli>details>summary::-webkit-details-marker{display:none}
+.nli>details>summary::after{content:'';position:absolute;right:6px;top:17px;width:8px;height:8px;border-right:2px solid var(--muted);border-bottom:2px solid var(--muted);transform:rotate(45deg);transition:transform .15s}
+.nli>details[open]>summary::after{transform:rotate(-135deg);top:21px}
+.nst{font-weight:600;flex:1 1 16ch}
+.ntp{font-size:.78rem;color:var(--muted);background:var(--sage-soft);border-radius:999px;padding:1px 8px;white-space:nowrap}
+.nbody{padding:0 0 12px}
+.nbody p{margin:0 0 8px;line-height:1.6}
+.nrest>summary,.nolder>summary{display:inline-flex;align-items:center;gap:6px;list-style:none;cursor:pointer;margin-top:6px;font:700 .9rem var(--body);border:1.5px solid var(--line);background:var(--paper);color:var(--ink);border-radius:12px;padding:8px 14px}
+.nrest>summary::-webkit-details-marker,.nolder>summary::-webkit-details-marker{display:none}
+.nrest[open]>summary .s-o,.nrest:not([open])>summary .s-c{display:none}
+.nrest[open]>.nlist{border-top:1px solid var(--line);margin-top:10px}
+.nolder>summary{margin:4px 0 12px}
+.nolder[open]>summary{display:none}
+.nl-short li{padding:6px 0;border-top:1px solid var(--line);line-height:1.4}
+.nl-short li:first-child{border-top:0}
+.nl-short a{font-weight:600;color:var(--ink);text-decoration:none}
+.nl-short a:hover{text-decoration:underline}
+@media (max-width:600px){.ntp{display:none}}
+.nday .nlinks{margin-top:6px}
 .nfeed.short .news{padding:12px 14px}
 .nfeed.short .news h3{font-size:1.12rem;margin:4px 0 6px}
 .home-news{margin-top:30px;max-width:820px}
