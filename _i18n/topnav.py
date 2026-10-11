@@ -42,12 +42,17 @@ def _mark(root_html):
     return MARK_SVG
 
 
+HIDDEN = set()   # пункты меню «выложено, но скрыто» (nav.py HIDDEN): атрибут data-ira, видны только в режиме Ирины
+
+
 def _struktura():
+    global HIDDEN
     import os, importlib.util
     f = os.path.join(os.path.dirname(__file__), 'struktura_src', 'nav.py')
     if not os.path.isfile(f):
         return None
     spec = importlib.util.spec_from_file_location('struktura_nav', f); m = importlib.util.module_from_spec(spec); spec.loader.exec_module(m)
+    HIDDEN = set(getattr(m, 'HIDDEN', ()))
     return m.ITEMS
 
 
@@ -61,7 +66,7 @@ def header(url, home_html):
     S = _struktura()
     if S:
         for href, name, cur in S:
-            items.append(f'      <a href="{(up + href) or "./"}"' + (' aria-current="page"' if cur(rel) else '') + f'>{name}</a>')
+            items.append(f'      <a href="{(up + href) or "./"}"' + (' aria-current="page"' if cur(rel) else '') + (' data-ira' if href in HIDDEN else '') + f'>{name}</a>')
     else:
         for href, name in NAV:
             cur = (sec == href) if href else (url == '/')
@@ -106,6 +111,8 @@ CSS = ('<style id="sl-top">/* единая шапка svoiludi.ch (09.10.2026), 
        'header.top .sl-free a{color:#F3E3C2;font-weight:700;text-decoration:underline;text-underline-offset:3px;white-space:nowrap}'
        'header.top .sl-free a:hover{color:#FFFFFF}'
        '@media (max-width:700px){header.top .sl-free{font-size:.82rem;line-height:1.42}header.top .sl-free p{justify-content:flex-start;padding:9px 16px}}'
+       # пункт меню «выложено, но скрыто» (data-ira): посетители его не видят, Ирина в своём режиме (html.sl-ira из pwa-app.js) видит
+       'html:not(.sl-ira) header.top a[data-ira]{display:none!important}'
        '@media print{header.top{display:none!important}}'
        '</style>')
 

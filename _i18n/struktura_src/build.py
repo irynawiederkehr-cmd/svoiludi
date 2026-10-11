@@ -12,6 +12,10 @@ from data import SITUACII, NEWS, TG_CHANNEL
 from topics import TOPICS, TOOLS as TOOLNAMES
 BYSLUG = {t['slug']: t for t in TOPICS}
 SITE = 'https://svoiludi.ch/'
+# 11.10.2026, Ирина: «размести но скрой пока» — вкладка «Вакансии и партнёрство» выложена, но скрыта: в меню её видит только Ирина
+# (nav.py HIDDEN), на страницах сайта ссылок на неё нет, страница vakansii/ без ?preview=1 и без режима Ирины показывает «скоро откроется».
+# Открыть для всех: VAK_OPEN = True, убрать 'vakansii/' из HIDDEN в nav.py, убрать заглушку в vakansii (vak_body.html), собрать сайт.
+VAK_OPEN = 'vakansii/' not in getattr(NAV, 'HIDDEN', set())
 HAS = lambda x: os.path.isfile(os.path.join('instrumenty', x, 'index.html'))
 src = open('kursy/index.html', encoding='utf-8').read()
 src = re.sub(r'<!--i18n-->.*?<!--i18n-->', '', src, flags=re.S)
@@ -51,7 +55,7 @@ def foot(depth, extra=''):
     return f'''
   <footer>
     <span>© 2026 Свои люди в Швейцарии · <a href="{up}o-proekte/">О проекте</a> · проект <a href="https://voznesenskaya.ch/">Ирины Вознесенской</a></span>
-    <span><a href="{up}">Специалисты</a> · <a href="{up}organizacii/">Организации</a> · <a href="{up}shveycariya/">Как устроена Швейцария</a> · <a href="{up}instrumenty/">Полезные инструменты</a> · <a href="{up}events/">События</a> · <a href="{up}kursy/">Курсы</a> · <a href="{up}novosti/">Что нового</a> · <a href="{up}vakansii/">Вакансии и партнёрство</a> · <a href="{up}dlya-specialistov/">Для специалистов и организаций</a> · <a href="https://svoiludi.ch/privacy/">Политика конфиденциальности</a> · <a href="{up}usloviya/">Условия размещения</a> · <a href="{up}o-proekte/#otvetstvennost">Ограничение ответственности</a> · <a href="https://voznesenskaya.ch/impressum/">Выходные данные</a></span>
+    <span><a href="{up}">Специалисты</a> · <a href="{up}organizacii/">Организации</a> · <a href="{up}shveycariya/">Как устроена Швейцария</a> · <a href="{up}instrumenty/">Полезные инструменты</a> · <a href="{up}events/">События</a> · <a href="{up}kursy/">Курсы</a> · <a href="{up}novosti/">Что нового</a> · {('<a href="' + up + 'vakansii/">Вакансии и партнёрство</a> · ') if VAK_OPEN else ''}<a href="{up}dlya-specialistov/">Для специалистов и организаций</a> · <a href="https://svoiludi.ch/privacy/">Политика конфиденциальности</a> · <a href="{up}usloviya/">Условия размещения</a> · <a href="{up}o-proekte/#otvetstvennost">Ограничение ответственности</a> · <a href="https://voznesenskaya.ch/impressum/">Выходные данные</a></span>
   </footer>
 </main>
 {extra}<script src="/assets/temy.js" defer></script>
@@ -157,7 +161,7 @@ def o_proekte():
     </section>
     <section aria-labelledby="h-contact"><h2 id="h-contact">Как с нами связаться</h2>
       <p>Нашла ошибку, хочешь предложить тему или разместиться — пиши на <a href="mailto:voznesenskaya.iryna@gmail.com">voznesenskaya.iryna@gmail.com</a>. Владелец проекта — фирма Alonira.ch AG, Poststrasse 6, 6302 Zug. <a href="https://voznesenskaya.ch/impressum/">Выходные данные</a>.</p>
-      <span class="addbtns"><a class="btn" href="../">Найти специалиста</a><a class="btn ghost" href="../shveycariya/">Как устроена Швейцария</a><a class="btn ghost" href="../vakansii/">Вакансии и партнёрство</a></span>
+      <span class="addbtns"><a class="btn" href="../">Найти специалиста</a><a class="btn ghost" href="../shveycariya/">Как устроена Швейцария</a>{'<a class="btn ghost" href="../vakansii/">Вакансии и партнёрство</a>' if VAK_OPEN else '<a class="btn ghost" href="../dlya-specialistov/">Для специалистов и организаций</a>'}</span>
     </section>
     {subscribe('../')}
   </div>
@@ -188,10 +192,10 @@ def dlya_specialistov():
     desc = 'Всё для специалистов и организаций в «Своих людях в Швейцарии»: карточка в справочнике (в период запуска, до конца 2027 года, бесплатно), организация, курс или событие, значок для сайта и бесплатные инструменты для своего дела на русском и украинском.'
     tools = ['schet-qr', 'dohody-rashody', 'chasy-po-klientam', 'uchet-vremeni', 'anketa-klienta', 'zarplata', 'etiketka-eda', 'zhurnal-perederzhki', 'statuty-fereyna']
     cards = ''.join(f'<a class="tool tpv" href="../instrumenty/{x}/">{fan(x, "../")}<span class="ttxt"><b>{TOOLNAMES.get(x, x)}</b><em>Бесплатно · открыть →</em></span></a>' for x in tools if HAS(x))
-    vak = os.path.isfile('vakansii/index.html')
+    vak = VAK_OPEN and os.path.isfile('vakansii/index.html')
     main = '<main class="page">\n' + hero('Для специалистов и организаций · Свои люди в Швейцарии', 'Для специалистов <em>и организаций</em>',
         'Здесь можно разместить себя в справочнике, свою организацию, курс или событие, взять значок для своего сайта и бесплатные инструменты для своего дела, чтобы свои могли вас найти. Люди ищут друг друга и часто не могут найти, потому что всё разбросано по чатам и группам. Здесь всё в одном месте, и чем шире справочник, тем проще найти своих.', 'pro',
-        '\n      <span class="addbtns"><a class="btn" href="../join/">Разместиться в справочнике</a><a class="btn ghost" href="../vakansii/">Вакансии и партнёрство</a></span>') + f'''
+        '\n      <span class="addbtns"><a class="btn" href="../join/">Разместиться в справочнике</a>' + ('<a class="btn ghost" href="../vakansii/">Вакансии и партнёрство</a>' if vak else '<a class="btn ghost" href="../usloviya/">Условия размещения</a>') + '</span>') + f'''
   <div class="pro-grid">
     <a class="pro-card" href="../join/">{pico("join")}<b>Разместиться в справочнике</b><p>Анкета за 15 минут. Базовая карточка в период запуска, до конца 2027 года, бесплатна: фото, профиль, услуги, контакты, визитка и прайс-лист для телефона и PDF.</p><span class="go">Как разместиться →</span></a>
     <a class="pro-card" href="../join/#form">{pico("anketa")}<b>Анкета специалиста</b><p>Заполните основное на сайте, скачайте анкету в Word, допишите и отправьте с портретным фото.</p><span class="go">Заполнить →</span></a>

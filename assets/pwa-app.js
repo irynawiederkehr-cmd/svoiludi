@@ -195,7 +195,7 @@
     var other = (UK ? '' : '/uk') + rel();
     var h = '<div class="pa-back" role="dialog" aria-modal="true" aria-label="' + T.more + '"><div class="pa-sheet"><div class="pa-grip"></div><h2>' + T.more + '</h2>' +
       '<a href="' + P + '/events/">' + I.ev + T.evk + '</a>' +
-      '<a href="' + P + '/vakansii/">' + I.job + T.vak + '</a>' +   /* 11.10.2026: «Вакансии и партнёрство» — вкладка меню */
+      (IRA ? '<a href="' + P + '/vakansii/">' + I.job + T.vak + '</a>' : '') +   /* «Вакансии и партнёрство» — пока скрыто, видит только Ирина */
       '<a href="' + P + '/dlya-specialistov/">' + I.pro + T.pro + '</a>' +
       '<a href="' + P + '/o-proekte/">' + I.info + T.about + '</a>' +
       '<a href="https://voznesenskaya.ch/' + (UK ? 'uk/' : '') + '">' + I.site + T.site + '</a>' +
@@ -326,6 +326,19 @@
     setTimeout(function () { document.body.appendChild(c); }, 400);
     return true;
   }
+
+  /* режим Ирины (svoiludi.ch/?ira=1 включает на этом устройстве, ?ira=0 выключает): html.sl-ira показывает то, что выложено,
+     но скрыто от посетителей — пункты меню с data-ira (11.10.2026: «Вакансии и партнёрство», «размести но скрой пока») */
+  function ira() {
+    try {
+      var q = location.search;
+      if (/[?&]ira=1/.test(q)) localStorage.setItem('svoiludi-admin', '1');
+      if (/[?&]ira=0/.test(q)) localStorage.removeItem('svoiludi-admin');
+      if (localStorage.getItem('svoiludi-admin') === '1') document.documentElement.classList.add('sl-ira');
+    } catch (e) {}
+    return document.documentElement.classList.contains('sl-ira');
+  }
+  var IRA = ira();
 
   function start() {
     topTiles();
