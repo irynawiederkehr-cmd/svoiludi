@@ -431,6 +431,7 @@ window.SPECIALISTS = [
   {
     "sample": true,
     "id": "anna-keller",
+    "keyHash": "ec8d324b708fb6e2dbcac33cef4ae66c8976a5bc597d06519ba96e472e44c6b5",
     "firm": "Keller Integration GmbH",
     "num": "SG-0001",
     "uid": "CHE-999.000.001",
