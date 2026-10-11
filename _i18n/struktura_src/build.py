@@ -1,6 +1,6 @@
 """Страницы «устройства сайта» (решение Ирины 09.10.2026, документ проекта «struktura-saytov.md»):
   o-proekte/ — О проекте; dlya-specialistov/ — Для специалистов; novosti/ — Что нового (+ data/news.js, novosti/rss.xml);
-  situacii/ и situacii/<slug>/ — «Моя ситуация», 8 маршрутов; блоки «Моя ситуация» и «Что нового» на главной (метки <!--sit-->);
+  situacii/ и situacii/<slug>/ — «Моя ситуация», 8 маршрутов (блок «Моя ситуация: с чего начать» — вверху «Как устроена Швейцария»; с 11.10.2026 на главной его и «Что нового» нет);
   переключатель «События | Курсы» на events/ и kursy/ (метки <!--evk-->). 10.10.2026: на телефоне меню плитками красило активную ссылку любого <nav> белым — у .evk свой цвет с !important.
 Шапка, стили и подвал — из kursy/index.html, меню — из nav.py. Тексты — data.py.
 Запуск из корня: python3 _i18n/struktura_src/build.py ; потом nav.py, sync.py (UA), og.js, build_search.py."""
@@ -616,23 +616,17 @@ def novosti():
     write('uk/novosti/rss.xml', f'<?xml version="1.0" encoding="UTF-8"?>\n<rss version="2.0"><channel><title>Свої люди у Швейцарії — що нового</title><link>{SITE}uk/novosti/</link><description>Що змінилося у Швейцарії, терміни місяця і нове на сайті svoiludi.ch</description><language>uk</language>{itu}</channel></rss>\n')
     write('novosti/rss.xml', f'<?xml version="1.0" encoding="UTF-8"?>\n<rss version="2.0"><channel><title>Свои люди в Швейцарии — что нового</title><link>{url}</link><description>Что изменилось в Швейцарии, сроки месяца и новое на сайте svoiludi.ch</description><language>ru</language>{it}</channel></rss>\n')
 
-# --- блоки на главной и переключатель «События | Курсы» ---
+# --- главная и переключатель «События | Курсы» ---
+# 11.10.2026, замечание Ирины: «на странице специалисты… специалистов не видно вообще, там слишком много всего стоит до этого.
+# для что нового у нас есть отдельная вкладка, с чего начать можно тоже куда то вынести… на странице специалисты должно быть
+# все о специалистах». Поэтому на главной («Специалисты») блоков «Моя ситуация» и «Что нового» больше нет: «Моя ситуация:
+# с чего начать» стоит вверху вкладки «Как устроена Швейцария» (_i18n/shveycariya_src/build.py, hub(), якорь #s-nachat),
+# новости — во вкладке «Что нового». Функция только убирает старый блок с метками <!--sit-->, если он где-то остался.
 def home_blocks():
     p = 'index.html'; h = open(p, encoding='utf-8').read()
-    h = re.sub(r'\n?<!--sit-->.*?<!--sit-->', '', h, flags=re.S)
-    latest = ''.join(news_card(c, '', full=False) for c in news_cards(sorted(NEWS, key=lambda n: n['date'], reverse=True))[:3])
-    block = f'''
-<!--sit--><link rel="stylesheet" href="assets/struktura.css"><section class="home-sit page" aria-labelledby="h-sit">
-  <h2 id="h-sit">Моя ситуация: с чего начать</h2>
-  <p class="lead" style="max-width:62ch">Выбери, что сейчас происходит. Покажем шаги по порядку, статьи, бесплатные инструменты и категории справочника, где искать специалиста.</p>
-  {tiles('')}
-  <div class="home-news"><div class="hn-head"><h2>Что нового</h2><a href="novosti/">Все новости →</a></div><div class="nfeed short">{latest}</div>{subscribe('')}</div>
-</section><!--sit-->'''
-    # после первого экрана (hero) главной
-    m = re.search(r'</section>', h[h.index('<main'):])
-    i = h.index('<main') + m.end()
-    h = h[:i] + block + h[i:]
-    open(p, 'w', encoding='utf-8').write(h)
+    h2 = re.sub(r'\n?<!--sit-->.*?<!--sit-->', '', h, flags=re.S)
+    if h2 != h:
+        open(p, 'w', encoding='utf-8').write(h2)
 
 def evk():
     for p, cur in [('events/index.html', 'ev'), ('kursy/index.html', 'ku')]:
@@ -640,15 +634,17 @@ def evk():
         h = re.sub(r'<!--evk-->.*?<!--evk-->', '', h, flags=re.S)
         sw = ('<!--evk--><nav class="evk" aria-label="События и курсы">'
               + (f'<a href="./" aria-current="page">События</a><a href="../kursy/">Курсы и занятия</a>' if cur == 'ev' else f'<a href="../events/">События</a><a href="./" aria-current="page">Курсы и занятия</a>')
-              + '</nav><style>.evk{display:inline-flex;flex-wrap:wrap;gap:4px;background:var(--sage-soft,#E3E6D6);border-radius:12px;padding:4px;margin:0 0 14px}.evk a{padding:7px 16px;border-radius:9px;font-weight:700;font-size:.9rem;text-decoration:none;color:var(--ink);background:none;border:0;box-shadow:none}.evk a[aria-current]{background:var(--paper,#FFFCF8);box-shadow:0 1px 4px rgba(0,0,0,.12);color:var(--ink)!important}@media (max-width:420px){.evk{gap:2px}.evk a{padding:7px 9px;font-size:.84rem}}@media (max-width:380px){.evk a{padding:7px 7px;font-size:.8rem}}</style><!--evk-->')
+              + '</nav><style>.evk{display:inline-flex;flex-wrap:wrap;gap:4px;background:var(--sage-soft,#E3E6D6);border-radius:12px;padding:4px;margin:0 0 14px;order:0;width:auto;align-self:flex-start;overflow:visible}.evk a{padding:7px 16px;border-radius:9px;font-weight:700;font-size:.9rem;text-decoration:none;color:var(--ink);background:none;border:0;box-shadow:none}.evk a[aria-current]{background:var(--paper,#FFFCF8);box-shadow:0 1px 4px rgba(0,0,0,.12);color:var(--ink)!important}@media (max-width:420px){.evk{gap:2px}.evk a{padding:7px 9px;font-size:.84rem}}@media (max-width:380px){.evk a{padding:7px 7px;font-size:.8rem}}</style><!--evk-->')
         h = re.sub(r'(<div class="hero-txt">\s*)', lambda m: m.group(1) + sw, h, count=1)
         open(p, 'w', encoding='utf-8').write(h)
+    # 11.10.2026: у .evk order:0, width:auto, align-self:flex-start — на телефоне общее правило страниц nav{order:3;width:100%}
+    # уводило переключатель в самый низ первого экрана, а на компьютере он растягивался на всю ширину.
     # главная: «Специалисты | Организации» (раздел «Организации», решение Ирины 10.10.2026), тот же вид, что «События | Курсы»
     if os.path.isfile('organizacii/index.html'):
         p = 'index.html'; h = open(p, encoding='utf-8').read()
         h = re.sub(r'<!--orgsw-->.*?<!--orgsw-->', '', h, flags=re.S)
         sw = ('<!--orgsw--><nav class="evk" aria-label="Специалисты и организации"><a href="./" aria-current="page">Специалисты</a><a href="organizacii/">Организации</a></nav>'
-              '<style>.evk{display:inline-flex;flex-wrap:wrap;gap:4px;background:var(--sage-soft,#E3E6D6);border-radius:12px;padding:4px;margin:0 0 14px}.evk a{padding:7px 16px;border-radius:9px;font-weight:700;font-size:.9rem;text-decoration:none;color:var(--ink);background:none;border:0;box-shadow:none}.evk a[aria-current]{background:var(--paper,#FFFCF8);box-shadow:0 1px 4px rgba(0,0,0,.12);color:var(--ink)!important}@media (max-width:420px){.evk{gap:2px}.evk a{padding:7px 9px;font-size:.84rem}}@media (max-width:380px){.evk a{padding:7px 7px;font-size:.8rem}}</style><!--orgsw-->')
+              '<style>.evk{display:inline-flex;flex-wrap:wrap;gap:4px;background:var(--sage-soft,#E3E6D6);border-radius:12px;padding:4px;margin:0 0 14px;order:0;width:auto;align-self:flex-start;overflow:visible}.evk a{padding:7px 16px;border-radius:9px;font-weight:700;font-size:.9rem;text-decoration:none;color:var(--ink);background:none;border:0;box-shadow:none}.evk a[aria-current]{background:var(--paper,#FFFCF8);box-shadow:0 1px 4px rgba(0,0,0,.12);color:var(--ink)!important}@media (max-width:420px){.evk{gap:2px}.evk a{padding:7px 9px;font-size:.84rem}}@media (max-width:380px){.evk a{padding:7px 7px;font-size:.8rem}}</style><!--orgsw-->')
         h = re.sub(r'(<div class="hero-txt">\s*)', lambda m: m.group(1) + sw, h, count=1)
         open(p, 'w', encoding='utf-8').write(h)
 

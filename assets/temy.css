@@ -245,3 +245,16 @@ nav.toc{display:block!important}
 
 /* «Как устроена Швейцария»: спокойное вступление — правила как забота (10.10.2026) */
 .tm-calm{max-width:64ch;background:var(--sage-soft);border-radius:14px;padding:12px 16px;margin:12px 0 16px;line-height:1.6;color:var(--ink)}
+
+/* «Моя ситуация: с чего начать» вверху «Как устроена Швейцария» (11.10.2026, раньше стояла на главной). Плитки — тот же вид, что .sit-grid в struktura.css */
+.tm-sit{margin:22px 0 8px;scroll-margin-top:90px}
+.tm-sit>h2{font-size:clamp(1.6rem,3.4vw,2.2rem)}
+.tm-sit>p{color:var(--muted);margin:4px 0 12px;max-width:62ch}
+.tm-sit .sit-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:16px 0 8px}
+@media (max-width:1000px){.tm-sit .sit-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:520px){.tm-sit .sit-grid{grid-template-columns:1fr}}
+.tm-sit .sit-card{display:flex;gap:12px;align-items:flex-start;background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:14px;text-decoration:none;color:inherit;min-width:0}
+.tm-sit .sit-card:hover{border-color:var(--brown);transform:translateY(-1px)}
+.tm-sit .sit-card .tm-ic{flex:none}
+.tm-sit .sit-card b{display:block;font-family:var(--display);font-weight:400;font-size:1.12rem;line-height:1.2;margin-bottom:4px}
+.tm-sit .sit-card span span{display:block;font-size:.86rem;color:var(--muted);line-height:1.4}

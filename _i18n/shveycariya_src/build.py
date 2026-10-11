@@ -10,6 +10,7 @@ HAS = lambda x: os.path.isfile(os.path.join('instrumenty', x, 'index.html'))
 from articles import ARTICLES
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'struktura_src'))
 import nav as _NAV
+from data import SITUACII   # «Моя ситуация» (struktura_src/data.py): плитки вверху этой вкладки, 11.10.2026
 
 UPD = '08.10.2026'
 BOT = 'https://t.me/swisscompass_bot'
@@ -102,6 +103,12 @@ def hub():
     desc = 'Пермиты, налоги, долги, страховки, школа, работа, жильё и быт в Швейцарии простыми словами на русском. К каждой теме — полезные инструменты и категории справочника, где искать специалиста.'
     mods = ''.join(f'<a href="#{m[0]}">{modicon(m[0], 26)}<span>{m[1]}</span></a>' for m in MODULES)
     SCHEMES = ''.join(f'<a href="../instrumenty/{s}/"><img src="../instrumenty/preview/{s}/1.jpg" alt="" loading="lazy"><b>{t}</b></a>' for s, t in [('put-obrazovaniya', 'Образование в Швейцарии: от яслей до вуза'), ('yazyk-trebovaniya', 'Какой уровень языка нужен для пермита, паспорта и работы'), ('nalogi-shema', 'Как устроены налоги в Швейцарии'), ('pensiya-shema', 'Как устроена пенсия: три колонны'), ('strahovki-obyazatelnye', 'Какие страховки обязательны в Швейцарии'), ('grazhdanstvo-shema', 'Путь к швейцарскому паспорту'), ('diplomy-shema', 'Как признать иностранный диплом'), ('franshiza-shema', 'Какая франшиза медстраховки тебе выгоднее'), ('kuda-obratitsya', 'Профсоюзы и консультации: взносы, сроки, телефоны')])
+    # «Моя ситуация: с чего начать» — 8 маршрутов situacii/<slug>/. До 11.10.2026 стояли на главной; по замечанию Ирины
+    # («на странице специалисты должно быть все о специалистах… с чего начать можно тоже куда то вынести») — здесь, сразу под первым экраном.
+    SIT = ('<section class="tm-sit" id="s-nachat" aria-labelledby="sit-h"><h2 id="sit-h">Моя ситуация: с чего начать</h2>'
+           '<p>Выбери, что сейчас происходит. Покажем шаги по порядку, статьи, бесплатные инструменты и категории справочника, где искать специалиста.</p>'
+           '<div class="sit-grid">' + ''.join(f'<a class="sit-card" href="../situacii/{x["slug"]}/"><svg class="tm-ic" viewBox="0 0 100 100" width="40" height="40" aria-hidden="true">{MODICON.get(x["icon"], "")}</svg><span><b>{x["title"]}</b><span>{x["short"]}</span></span></a>' for x in SITUACII)
+           + '</div></section>')
     body = []
     for key, name, lead in MODULES:
         cards = []
@@ -121,6 +128,7 @@ def hub():
     <label class="tm-search"><input id="tmq" type="search" placeholder="Одно слово: Betreibung, пермит B, Kita, 3a" aria-label="Поиск по темам"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg></label>
     <nav class="tm-mods" aria-label="Разделы тем">{mods}</nav>
   </section>
+  {SIT}
   <a class="tm-sos" href="../instrumenty/ekstrennye-nomera/"><span class="tfan" aria-hidden="true"><img src="../instrumenty/preview/ekstrennye-nomera/1.jpg" alt="" loading="lazy" style="--i:-0.5"><img src="../instrumenty/preview/ekstrennye-nomera/2.jpg" alt="" loading="lazy" style="--i:0.5"></span><span><b>Сохрани сразу: экстренные номера</b><span>144, 117, 118, 145, дежурный врач твоего кантона и твои контакты на одной карточке, на русском и языке кантона. Распечатай: в кошелёк, на холодильник, няне.</span><em>Бесплатно · PDF · сделать карточку →</em></span></a>
   <section class="tm-schemes" aria-labelledby="sch-h"><h2 id="sch-h">Схемы на одном листе</h2><p>Как всё устроено — на картинке, с твоими данными. Бесплатно, PDF и PNG.</p><div class="tm-sch">{SCHEMES}</div><p style="margin:14px 0 0"><a class="more" href="../instrumenty/vse-fayly/">Все файлы и инструменты по темам: письма, договоры, схемы, расчёты →</a></p></section>
   {''.join(body)}
