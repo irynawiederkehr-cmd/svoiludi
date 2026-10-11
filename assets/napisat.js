@@ -43,8 +43,10 @@
     return String(to);
   }
 
+  var UN = 0;
   window.SVL_NAPISAT = function(slot, o){
     if (!slot) return;
+    var u = ++UN;
     var ch = {}; Object.keys(o.ch || {}).forEach(function(k){ if (o.ch[k]) ch[k] = o.ch[k]; });
     if (ch.tel && !ch.sms && /^(\+41|0041|0)7[5-9]/.test(String(ch.tel).replace(/\s/g, ''))) ch.sms = ch.tel;   // мобильный — можно и SMS
     var keys = ORDER.filter(function(k){ return ch[k]; });
@@ -58,9 +60,9 @@
       + (only ? '<a class="btn" href="' + esc(ch.link) + '" target="_blank" rel="noopener">' + esc(btn) + '</a>'
         : '<button class="btn" type="button" data-wr-open aria-expanded="false">' + esc(btn) + '</button>'
         + '<div class="wr-p" hidden>'
-        + '<div class="wr-f"><label for="wr-name">' + esc(TT('name')) + '</label><input id="wr-name" data-wr-name autocomplete="given-name" placeholder="' + esc(TT('nameph')) + '" value="' + esc(d.n || '') + '"></div>'
-        + '<div class="wr-f"><label for="wr-tone">' + esc(TT('tone')) + '</label><select id="wr-tone" data-wr-tone><option value="vy">' + esc(TT('vy')) + '</option><option value="ty">' + esc(TT('ty')) + '</option></select></div>'
-        + '<div class="wr-f"><label for="wr-text">' + esc(TT('text')) + '</label><textarea id="wr-text" data-wr-text rows="7"></textarea></div>'
+        + '<div class="wr-f"><label for="wr-name' + u + '">' + esc(TT('name')) + '</label><input id="wr-name' + u + '" data-wr-name autocomplete="given-name" placeholder="' + esc(TT('nameph')) + '" value="' + esc(d.n || '') + '"></div>'
+        + '<div class="wr-f"><label for="wr-tone' + u + '">' + esc(TT('tone')) + '</label><select id="wr-tone' + u + '" data-wr-tone><option value="vy">' + esc(TT('vy')) + '</option><option value="ty">' + esc(TT('ty')) + '</option></select></div>'
+        + '<div class="wr-f"><label for="wr-text' + u + '">' + esc(TT('text')) + '</label><textarea id="wr-text' + u + '" data-wr-text rows="7"></textarea></div>'
         + '<div class="wr-acts">' + '<a class="btn" data-wr-k="' + main + '" target="_blank" rel="noopener">' + esc(TT('go-' + main)) + '</a>'
         + (keys.length > 1 ? '<span class="wr-n">' + esc(TT('or')) + '</span><div class="wr-more">' + keys.filter(function(k){ return k !== main; }).map(function(k){ return '<a class="btn ghost" data-wr-k="' + k + '" target="_blank" rel="noopener">' + esc(TT('go-' + k)) + '</a>'; }).join('') + '</div>' : '')
         + '<button class="btn ghost" type="button" data-wr-copy>' + esc(TT('copy')) + '</button></div>'

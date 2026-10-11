@@ -65,7 +65,9 @@
                           виден [data-zl="free"]; option[data-t-own] — подпись варианта без карточки (например «По адресу» вместо «Другой адрес»)
    input[type=checkbox][data-zmust] в .zok — ещё одна обязательная галочка (например «Я сам(а) организатор…», решение Ирины
                           10.10.2026, 22:14): без неё кнопка серая; в письмо — data-line + дата и время, подсказка — data-t-must
-   [data-zl="mine"]       — архив: прошлые записи этой карточки (window.ZMINE(card) → [{ t, s, d: { id поля: значение | [значения] } }]),
+   form[data-zneedcard]   — форма только для тех, у кого есть карточка (акции, 11.10.2026): без найденной карточки заявку не отправить (data-t-needcard)
+   input[type=number][min|max] — число вне границ не принимается: форма говорит data-t-range ({f} — поле, {min}, {max}); без data-t-range не проверяется
+   [data-zl="mine"]       — архив: прошлые записи этой карточки (window.ZMINE(card, имя формы) → [{ t, s, d: { id поля: значение | [значения] } }]),
                           кнопка «Повторить» (data-t-again) заполняет форму, даты остаются пустыми (data-t-repeated)
    .zchk[data-zskills]    — навыки из assets/navyki.js (window.NAVYKI), с выбором направления select[data-zskg] и поиском input[data-zsks]
                           в том же .zf; в письмо и в данные — по-русски, на украинской странице подписи украинские */
@@ -413,7 +415,7 @@
     function ref(r){ return [r.name + (r.sub ? ' (' + r.sub + ')' : ''), r.num, r.uid ? 'UID ' + r.uid : '', r.url].filter(Boolean).join(', ') + (r.sample ? ' — ' + T('sample') : ''); }
     function showMine(r){
       if (!mine) return;
-      var L = r && typeof window.ZMINE === 'function' ? (window.ZMINE(r) || []) : [];
+      var L = r && typeof window.ZMINE === 'function' ? (window.ZMINE(r, name) || []) : [];
       mine.hidden = !L.length;
       mine.innerHTML = L.length ? '<b>' + esc(T('mine')) + '</b>' + L.map(function(x, i){ return '<div class="zmine-i"><span>' + esc(x.t) + (x.s ? '<small>' + esc(x.s) + '</small>' : '') + '</span><button class="btn ghost" type="button" data-zagain="' + i + '">' + esc(T('again')) + '</button></div>'; }).join('') : '';
       mine._list = L;
@@ -582,6 +584,9 @@
       sent.hidden = true;
       var why = LK ? LK.check() : '';
       if (why) { msg.textContent = why; msg.hidden = false; return; }
+      if (box.hasAttribute('data-zneedcard') && !(LK && LK.card())) {
+        var lkq = box.querySelector('[data-zl="q"]'); msg.textContent = box.getAttribute('data-t-needcard') || ''; msg.hidden = false; if (lkq) { lkq.closest('.zf').classList.add('zmiss'); lkq.focus(); } return;
+      }
       var filled = function(el){ return el.classList.contains('zchk') ? !!el.querySelector('input:checked') : !!el.value.trim(); };
       var miss = Array.prototype.filter.call(box.querySelectorAll('[data-req]'), function(el){ return !hiddenEl(el) && !filled(el); });
       if (miss.length) {
@@ -592,6 +597,14 @@
       }
       var bad = Array.prototype.filter.call(box.querySelectorAll('input[type=email]'), function(el){ var v = el.value.trim(); return !hiddenEl(el) && v && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); });
       if (bad.length) { bad[0].closest('.zf').classList.add('zmiss'); msg.textContent = box.getAttribute('data-t-mail'); msg.hidden = false; bad[0].focus(); return; }
+      var rng = box.getAttribute('data-t-range') ? Array.prototype.filter.call(box.querySelectorAll('input[type=number]'), function(el){
+        var v = el.value.trim(); if (hiddenEl(el) || !v) return false; var n = +v.replace(',', '.');
+        return isNaN(n) || (el.min !== '' && n < +el.min) || (el.max !== '' && n > +el.max); }) : [];
+      if (rng.length) {
+        var rl = rng[0].closest('.zf').querySelector('label'), rn = (rl ? rl.firstChild.textContent : '').trim();
+        rng[0].closest('.zf').classList.add('zmiss');
+        msg.textContent = box.getAttribute('data-t-range').replace('{f}', rng[0].getAttribute('data-miss') || rn).replace('{min}', rng[0].min).replace('{max}', rng[0].max); msg.hidden = false; rng[0].focus(); return;
+      }
       var any = arr(box.querySelectorAll('[data-zany]')).filter(function(el){ return !hiddenEl(el); });
       if (!(LK && LK.card()) && any.length && !any.some(function(el){ return el.value.trim(); })) {
         any.forEach(function(el){ el.closest('.zf').classList.add('zmiss'); });

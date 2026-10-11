@@ -491,6 +491,17 @@ a.bot:hover{color:#B98324}
 .card-acts .btn{font-size:.86rem;padding:10px 16px}
 .d-tags{display:flex;flex-wrap:wrap;gap:6px}
 .d-tags span{font-size:.82rem;font-weight:600;border:1px solid var(--lc);border-radius:999px;padding:4px 11px;background:var(--paper)}
+.pr-chip{display:inline-flex;align-items:center;gap:6px;flex-wrap:wrap;align-self:flex-start;margin:8px 0 0;padding:5px 11px;border-radius:12px;border:1.5px solid #B8472E;background:color-mix(in srgb,#B8472E 9%,var(--paper));color:#8E3320;font:600 .84rem/1.25 inherit;cursor:pointer;text-align:left}
+.pr-chip b{font-weight:800}.pr-chip i,.pr-ad{font-style:normal;font-size:.6rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;border:1px solid currentColor;border-radius:6px;padding:0 5px;opacity:.85}
+.tag-promo{border-color:#B8472E!important;color:#8E3320}.tag-promo[aria-pressed=true]{background:#B8472E;color:#fff}
+.pr-strip{margin:18px 0 0;padding:14px 16px;border-radius:18px;border:1.5px solid #B8472E;background:color-mix(in srgb,#B8472E 7%,var(--paper));display:flex;flex-direction:column;gap:12px}
+.pr-hd{display:flex;align-items:center;gap:10px;color:#8E3320;font-size:.74rem;letter-spacing:.14em;text-transform:uppercase}
+.pr-one{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;align-items:center}
+.pr-big{font:400 2rem/1.05 var(--display),Georgia,serif;color:#B8472E;white-space:nowrap}
+.pr-txt{display:flex;flex-direction:column;gap:2px;min-width:0}.pr-txt b{font-size:1rem;line-height:1.3}.pr-txt small{color:var(--muted);font-size:.84rem}
+.pr-act{grid-column:1/-1}.pr-act:empty{display:none}.pr-act .btn{margin:0}
+.pr-note{margin:0;font-size:.8rem;color:var(--muted);line-height:1.45}
+@media (max-width:520px){.pr-one{grid-template-columns:1fr}.pr-big{font-size:1.7rem}}
 .evs{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
 .evs a{display:grid;grid-template-columns:54px 1fr;gap:10px;align-items:center;text-decoration:none;color:var(--ink);background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:8px 10px}
 .evs a:hover{border-color:var(--lc)}
@@ -838,7 +849,7 @@ window.IMG_BASE = 'img/';
 const SPECIALISTS = window.SPECIALISTS || [];
 
 </script>
-<script src="/data/afisha.uk.js?v=39e9cc2e"></script>
+<script src="/data/afisha.uk.js?v=e32be747"></script>
 <script>const AFISHA = window.AFISHA || [];</script>
 <script>
 const ADMIN = (() => {   // режим Ирины: svoiludi.ch/?ira=1 включает на этом устройстве, ?ira=0 выключает
@@ -948,7 +959,7 @@ const placeLink = (p, full) => p.area ? `<span class="place area" data-tip="ка
 
 // в режиме Ирины скрытые карточки видны сразу; если снять галочку, устройство это запомнит
 const ADMIN_HIDDEN = ADMIN && (() => { try { return localStorage.getItem('svoiludi-admin-hidden') !== '0'; } catch (e) { return true; } })();
-const state = { q: '', cat: '', spec: '', canton: '', city: '', lang: '', tags: [], hidden: ADMIN_HIDDEN, fav: false, shared: null, view: 'list' };
+const state = { q: '', cat: '', spec: '', canton: '', city: '', lang: '', promo: false, tags: [], hidden: ADMIN_HIDDEN, fav: false, shared: null, view: 'list' };
 const VIP_ROW = 3;   // VIP занимают максимум один ряд сверху; если VIP больше — каждый раз случайный выбор
 const live = d => !!d && d >= today;
 // адрес виден: кантон основного адреса входит в базовое размещение, другой кантон — только с оплаченным «paidUntil» у адреса
@@ -970,6 +981,7 @@ function base(s, skipCat){        // всё, кроме кантона
   if (!skipCat && state.cat && s.cat !== state.cat) return false;
   if (!skipCat && state.spec && !(s.specs || []).includes(state.spec)) return false;
   if (state.lang && !s.langs.includes(state.lang)) return false;
+  if (state.promo && !promoOf(s).length) return false;
   if (state.tags.length && !state.tags.every(t => (s.tags || []).includes(t))) return false;
   if (state.q){ const h = hay(s); if (!norm(state.q).split(/\s+/).filter(Boolean).every(w => h.includes(w))) return false; }
   return true;
@@ -1017,7 +1029,7 @@ function card(s, lvl = ''){
     ${s.sample ? '<span class="sample" title="Вигаданий фахівець — так виглядатиме ваша картка">Зразок</span>' : ''}<div class="sp-sub">${ico(k.i, k.c, null, 16)}<span>${esc(k.t)}</span>${flag}</div><div class="sp-main">
     <div class="sp-id">${photo(s)}<div>
       <h3>${esc(s.name)}${isNew(s) ? '<span class="new" title="Новий у довіднику">новий</span>' : ''}</h3>
-      <div class="role">${esc(s.role)}</div>${s.firm ? `<div class="firm">${esc(s.firm)}</div>` : ''}${vacChips(s)}
+      <div class="role">${esc(s.role)}</div>${s.firm ? `<div class="firm">${esc(s.firm)}</div>` : ''}${promoChip(s)}${vacChips(s)}
     </div></div>
     <div class="facts">
       <div class="fact"><span>Де</span><div>${livePlaces(s).map(p => placeLink(p)).join('')}${s.online ? '<span class="onl">онлайн</span>' : ''}</div></div>
@@ -1064,7 +1076,7 @@ function render(){
   if (map) drawMap(local);
   const n = list.length;
   document.getElementById('count').textContent = `${n} ${plural(n, 'фахівець', 'фахівці', 'фахівців')}`;
-  document.getElementById('reset').hidden = listMode || !(state.q || state.cat || state.spec || state.canton || state.city || state.lang || state.tags.length);
+  document.getElementById('reset').hidden = listMode || !(state.q || state.cat || state.spec || state.canton || state.city || state.lang || state.promo || state.tags.length);
   ['canton', 'city', 'lang'].forEach(id => document.getElementById(id).classList.toggle('set', !!state[id]));
   const fb = document.getElementById('favbtn'); fb.innerHTML = `${HEART.replace('width="18" height="18"', 'width="16" height="16"')}Мій список${FAV.size ? ' · ' + plainList(FAV).length : ''}`; fb.setAttribute('aria-pressed', String(!!state.fav));
   document.querySelectorAll('.viewsw button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.view === state.view)));
@@ -1072,8 +1084,9 @@ function render(){
 }
 function renderTags(list){   // пометки-фильтры с числом специалистов
   const el = document.getElementById('tags'), used = Object.keys(TAGS).filter(t => pool().some(s => (s.tags || []).includes(t)));
-  el.hidden = !used.length;
-  el.innerHTML = '<span>Особливості</span>' + used.map(t => { const on = state.tags.includes(t), n = list.filter(s => (s.tags || []).includes(t)).length;
+  const np = list.filter(s => promoOf(s).length).length, hasPromo = pool().some(s => promoOf(s).length);
+  el.hidden = !used.length && !hasPromo;
+  el.innerHTML = (hasPromo ? `<button class="tag tag-promo" type="button" data-promo="1" aria-pressed="${state.promo}">З акцією${state.promo ? '' : ` <i>${np}</i>`}</button>` : '') + (used.length ? '<span>Особливості</span>' : '') + used.map(t => { const on = state.tags.includes(t), n = list.filter(s => (s.tags || []).includes(t)).length;
     return `<button class="tag" type="button" data-tag="${t}" aria-pressed="${on}">${esc(TAGS[t])}${on ? '' : ` <i>${n}</i>`}</button>`; }).join('');
 }
 function nfLink(){   // «Не нашли специалиста?» — письмо с уже подставленным выбором
@@ -1141,9 +1154,34 @@ function fillSelects(){
 }
 
 /* афиша специалиста: всё, где он указан организатором (data/afisha.js — одна база для «Событий» и «Курсов»), ближайшее сверху */
-const VID = e => (e.sections || []).includes('kursy') && e.kind ? (e.kind === 'regular' ? 'регулярні заняття' : e.kind === 'course' ? 'курс' : e.online && !e.address ? 'вебінар' : 'майстер-клас') : 'подія';
-const afishaOf = s => AFISHA.filter(e => e.status === 'активен' && (e.organizers || []).includes(s.id)).map(e => ({ e, d: e.kind === 'course' && e.date >= today ? e.date : nextDate(e), start: e.kind === 'course' && e.date >= today })).filter(x => x.d).sort((a, b) => a.d.localeCompare(b.d) || (a.e.time || '').localeCompare(b.e.time || '')).slice(0, 5);
+const VID = e => e.type === 'promo' ? 'акція' : (e.sections || []).includes('kursy') && e.kind ? (e.kind === 'regular' ? 'регулярні заняття' : e.kind === 'course' ? 'курс' : e.online && !e.address ? 'вебінар' : 'майстер-клас') : 'подія';
+const afishaOf = s => AFISHA.filter(e => e.status === 'активен' && e.type !== 'promo' && (e.organizers || []).includes(s.id)).map(e => ({ e, d: e.kind === 'course' && e.date >= today ? e.date : nextDate(e), start: e.kind === 'course' && e.date >= today })).filter(x => x.d).sort((a, b) => a.d.localeCompare(b.d) || (a.e.time || '').localeCompare(b.e.time || '')).slice(0, 5);
 const afHref = e => ((e.sections || [])[0] === 'kursy' ? '/uk/kursy/#' : '/uk/events/#') + e.id;
+/* ---------- акции специалиста (решение Ирины 11.10.2026): вид события type: 'promo', описание в e.promo (data/afisha.js) ----------
+   В карточке акция видна с первого до последнего дня; всегда с пометкой «Реклама». Подтверждённые и активные, карточка активна. */
+const moneyP = n => 'CHF ' + (+n % 1 ? (+n).toFixed(2) : +n);
+const r05 = x => Math.round(x * 20) / 20;
+const PCOND = { new: 'Тільки для нових клієнтів', book: 'За попереднім записом', nosum: 'Не сумується з іншими знижками', wd: 'Тільки в будні', online: 'Тільки онлайн' };
+const pCondList = p => (p.cond || []).map(c => c === 'first' ? (p.limit ? `Першим ${p.limit} клієнтам` : 'Кількість місць обмежена') : PCOND[c]).filter(Boolean);
+function pOffer(e){
+  const p = e.promo || {}, v = +p.value, reg = +p.regular, more = [];
+  if (p.kind === 'percent'){ if (reg) more.push(`зазвичай ${moneyP(reg)}, за акцією ${moneyP(r05(reg * (100 - v) / 100))}`); return { big: `−${v} %`, sub: p.what, more }; }
+  if (p.kind === 'amount'){ if (reg) more.push(`зазвичай ${moneyP(reg)}, за акцією ${moneyP(reg - v)}`); return { big: `−${moneyP(v)}`, sub: p.what, more }; }
+  if (p.kind === 'price'){ if (reg) more.push(`зазвичай ${moneyP(reg)}`); return { big: moneyP(v), sub: p.what, more }; }
+  if (p.kind === 'gift') return { big: 'Подарунок', chip: 'подарунок', sub: p.what, more };
+  return { big: 'Безкоштовно', chip: 'безкоштовно', sub: p.what, more };
+}
+const pShort = x => `${+x.slice(8)} ${MONTHS[+x.slice(5, 7) - 1]}`;
+const promoOf = s => AFISHA.filter(e => e.type === 'promo' && e.promo && e.status === 'активен' && (e.organizers || []).includes(s.id) && e.date <= today && (e.dateEnd || e.date) >= today)
+  .sort((a, b) => (a.dateEnd || a.date).localeCompare(b.dateEnd || b.date)).slice(0, 2);
+const promoChans = (e, s) => { const c = s.contacts || {}, x = e.contacts || {};
+  return { wa: x.whatsapp || c.whatsapp || '', tg: x.telegram || c.telegram || '', mail: x.email || e.email || c.email || '', tel: x.phone || e.phone || c.phone || '', ig: x.instagram || c.instagram || '', link: e.link || '' }; };
+const promoStrip = s => { const L = promoOf(s); if (!L.length) return '';
+  return `<div class="pr-strip" role="note"><div class="pr-hd"><b>${L.length > 1 ? 'Акції фахівця' : 'Акція фахівця'}</b><i class="pr-ad">Реклама</i></div>${L.map(e => { const o = pOffer(e), cl = pCondList(e.promo);
+    return `<div class="pr-one"><span class="pr-big">${esc(o.big)}</span><div class="pr-txt"><b>${esc(e.title)}</b><span>${esc(o.sub || '')}${o.more.length ? ' · ' + esc(o.more.join('; ')) : ''}</span><small>До ${esc(pShort(e.dateEnd || e.date))}${cl.length ? ' · ' + esc(cl.join(' · ')) : ''}${e.sample ? ' · зразок' : ''}</small></div><div class="pr-act" data-prw="${esc(e.id)}"></div></div>`; }).join('')}
+    <p class="pr-note">Акцію оголошує й виконує сам фахівець. «Свої люди» не продають послугу й не відповідають за умови акції: домовляйся напряму з фахівцем.</p></div>`; };
+const promoChip = s => { const L = promoOf(s); if (!L.length) return ''; const e = L[0], o = pOffer(e);
+  return `<button type="button" class="pr-chip" data-open="${esc(s.id)}" aria-label="Акція: ${esc(o.chip || o.big)} до ${esc(pShort(e.dateEnd || e.date))}. Відкрити картку"><b>Акція</b> · ${esc(o.chip || o.big)} до ${esc(pShort(e.dateEnd || e.date))}<i>Реклама</i></button>`; };
 const cardUrl = s => PAGE_URL + '#' + s.id;
 const reportLink = s => `mailto:${MAIL}?subject=${encodeURIComponent(`Помилка в картці ${s.num || ''} ${s.name}`.replace(/\s+/g, ' '))}&body=${encodeURIComponent(`Добрий день!\n\nКартка: ${cardUrl(s)}\n\nЩо потрібно виправити:\n`)}`;
 const copyText = t => { try { return navigator.clipboard.writeText(t).then(() => true, () => false); } catch (_) { return Promise.resolve(false); } };
@@ -1312,6 +1350,7 @@ function openCard(id){
   box.innerHTML = `<div class="qm-top"><div class="qm-ph">${photo(s)}</div><div class="qm-head">${s.sample ? '<span class="qm-sample">Зразок картки · фахівець вигаданий</span>' : ''}<span class="sp-sub" style="color:${k.c}">${ico(k.i, k.c, null, 16)}${esc(k.t)}${(() => { const l = state.canton ? tierIn(s, state.canton) : tierBest(s); return l === 'vip' ? ' · VIP-партнер ТОП (платне розміщення)' : l === 'партнёр' ? ' · VIP-партнер (платне розміщення)' : ''; })()}</span>
       <h2 class="qm-title" id="qmTitle">${esc(s.name)}</h2><div style="font-family:var(--display);font-size:1.25rem;color:var(--brown)">${esc(s.role)}</div>${s.firm ? `<div class="firm" style="font-size:.95rem;margin-top:4px">${esc(s.firm)}</div>` : ''}</div>
       <button class="qm-close" type="button" aria-label="Закрити">✕</button></div>
+    ${promoStrip(s)}
     <div class="d-body">
       <div class="d-col">
         <div class="d-block"><h4>Профіль</h4><p>${esc(s.about)}</p></div>
@@ -1336,6 +1375,8 @@ function openCard(id){
       </div>
     </div>`;
   box.querySelector('.qm-close').onclick = () => qm.close();
+  promoOf(s).forEach(e => { const slot = box.querySelector(`[data-prw="${e.id}"]`); if (!slot) return; const o = { kind: 'promo', title: e.title, when: 'до ' + pShort(e.dateEnd || e.date), url: PAGE_URL + '#' + s.id, main: e.signup || (e.link ? 'link' : ''), ch: promoChans(e, s) };
+    const run = () => window.SVL_NAPISAT && SVL_NAPISAT(slot, o); if (window.SVL_NAPISAT) run(); else addEventListener('load', run, { once: true }); });
   if (!qm.open){ qm.showModal(); track('card/' + s.id); }
   if (PREVIEW !== s.id && location.hash.slice(1) !== s.id) history.replaceState(null, '', location.pathname + '#' + s.id);
 }
@@ -1510,7 +1551,7 @@ function toggleFav(id){ FAV.has(id) ? FAV.delete(id) : FAV.add(id); saveFav(); r
 document.getElementById('results').addEventListener('click', e => { const f = e.target.closest('[data-fav]'); if (f){ toggleFav(f.dataset.fav); return; } const b = e.target.closest('[data-open]'); if (b) openCard(b.dataset.open);
   const q = e.target.closest('.qa'); if (q){ const c = q.closest('.sp').querySelector('[data-open]'); if (c) track('quick/' + c.dataset.open); } });
 document.getElementById('map').addEventListener('click', e => { const b = e.target.closest('[data-open]'); if (b) openCard(b.dataset.open); });
-document.getElementById('tags').addEventListener('click', e => { const t = e.target.closest('[data-tag]'); if (!t) return; const k = t.dataset.tag; state.tags = state.tags.includes(k) ? state.tags.filter(x => x !== k) : state.tags.concat(k); render(); });
+document.getElementById('tags').addEventListener('click', e => { if (e.target.closest('[data-promo]')){ state.promo = !state.promo; render(); return; } const t = e.target.closest('[data-tag]'); if (!t) return; const k = t.dataset.tag; state.tags = state.tags.includes(k) ? state.tags.filter(x => x !== k) : state.tags.concat(k); render(); });
 document.querySelector('.viewsw').addEventListener('click', e => { const b = e.target.closest('[data-view]'); if (b){ state.view = b.dataset.view; render(); } });
 document.getElementById('favbtn').addEventListener('click', () => { state.shared = null; state.fav = !state.fav; render(); });
 document.getElementById('listbar').addEventListener('click', async e => { const b = e.target.closest('[data-lb]'); if (!b) return;
@@ -1526,7 +1567,7 @@ document.getElementById('lang').addEventListener('change', e => { state.lang = e
 document.getElementById('showHidden').checked = state.hidden;
 document.getElementById('showHidden').addEventListener('change', e => { state.hidden = e.target.checked; try { localStorage.setItem('svoiludi-admin-hidden', e.target.checked ? '1' : '0'); } catch (x) {} fillSelects(); render(); });
 document.getElementById('reset').addEventListener('click', () => {
-  Object.assign(state, { q: '', cat: '', spec: '', canton: '', city: '', lang: '', tags: [] });
+  Object.assign(state, { q: '', cat: '', spec: '', canton: '', city: '', lang: '', promo: false, tags: [] });
   document.getElementById('q').value = ''; fillSelects(); render();
 });
 document.getElementById('trial').hidden = !ADMIN;
@@ -1543,6 +1584,8 @@ openFromHash(); addEventListener('hashchange', openFromHash);
 </script>
 
 <script src="/assets/share.uk.js" defer></script>
+<div id="napisat-t" hidden data-t-name="Як тебе звати?" data-t-nameph="Ім’я, підставимо його в повідомлення" data-t-tone="Як звертатися" data-t-vy="На «ви»" data-t-ty="На «ти»" data-t-text="Готове повідомлення, його можна виправити" data-t-hi-vy="Вітаю!" data-t-hi-ty="Привіт!" data-t-me="Мене звати {n}." data-t-go-wa="Написати у WhatsApp" data-t-go-tg="Написати в Telegram" data-t-go-mail="Написати на e-mail" data-t-go-tel="Зателефонувати" data-t-go-sms="Написати SMS" data-t-go-ig="Написати в Instagram" data-t-go-link="Відкрити сторінку запису" data-t-or="Або іншим способом:" data-t-copy="Скопіювати повідомлення" data-t-copied="Повідомлення скопійовано. Якщо воно не вставилося саме, встав його в чат." data-t-copied-ig="Повідомлення скопійовано. В Instagram встав його в чат: довге натискання на поле, потім «Вставити»." data-t-copyfail="Не вдалося скопіювати. Виділи текст і скопіюй його." data-t-note="Повідомлення піде фахівцеві напряму з твого месенджера або пошти. «Свої люди» його не бачать і не зберігають. Ім’я запам’ятовується тільки на цьому пристрої." data-t-btn-promo="Скористатися акцією" data-t-subj-promo="Акція «{title}»" data-t-msg-promo-join-vy="{hi}{name} На сайті проєкту 🌿 «Свої люди» мені трапилася ваша акція «{title}»{when}. Хочу нею скористатися. Підкажіть, будь ласка, як записатися і як застосовується акція?" data-t-msg-promo-join-ty="{hi}{name} На сайті проєкту 🌿 «Свої люди» мені трапилася твоя акція «{title}»{when}. Хочу нею скористатися. Підкажи, будь ласка, як записатися і як застосовується акція?"></div>
+<script src="/assets/napisat.js" defer></script>
 <script src="/assets/samesite.js"></script>
 <!--i18n--><style>#langbar.langbar{position:fixed;bottom:14px;right:14px;z-index:60;display:flex;gap:2px;background:rgba(255,255,255,.92);border:1px solid rgba(0,0,0,.08);border-radius:999px;padding:3px;font:600 12px Manrope,system-ui,sans-serif;box-shadow:0 2px 8px rgba(0,0,0,.08)}#langbar.langbar a{color:#5d554d;padding:5px 9px;border-radius:999px;text-decoration:none;font:inherit;display:inline-block}#langbar.langbar a[aria-current="true"]{background:#2f2924;color:#fff}@media print{.langbar{display:none!important}}</style><div class="langbar" id="langbar" role="navigation" aria-label="Мова / Язык"><a href="/" hreflang="ru" data-lang="ru">RU</a><a href="/uk/" hreflang="uk" data-lang="uk" aria-current="true">UA</a></div><script>(function(){var b=document.getElementById('langbar');if(!b)return;b.addEventListener('click',function(e){var a=e.target.closest('a[data-lang]');if(a){try{localStorage.setItem('svoiludiLang',a.dataset.lang)}catch(x){}a.href=a.getAttribute('href').split('#')[0]+location.hash;}});})();</script><!--i18n--></body>
 </html>
