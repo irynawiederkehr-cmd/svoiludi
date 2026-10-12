@@ -617,6 +617,20 @@ a.bot:hover{color:#B98324}
 .fee-list{list-style:none;margin:0;padding:6px 14px;background:var(--paper,#FFFCF8);border:1px solid var(--line);border-radius:14px}.fee-list li{display:flex;gap:14px;align-items:baseline;padding:7px 0;border-bottom:1px dashed var(--line)}.fee-list li:last-child{border-bottom:0}.fee-list span{flex:1;min-width:0}.fee-list b{white-space:nowrap;font-family:var(--display);font-weight:400;font-size:1.1rem;text-align:right}.fee-list b small{display:inline;margin-left:5px;font-family:var(--body,inherit);font-size:.78rem;color:var(--muted);font-weight:600}
 .fee-acts{display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px}.fee-acts .btn{margin:0}.fee-acts small{color:var(--muted);font-size:.8rem;line-height:1.4;flex:1 1 220px}.fee-free{margin:0}
 .pv-pl{list-style:none;margin:0;padding:0;background:var(--paper,#FFFCF8);border-radius:12px;padding:6px 12px}.pv-pl li{display:flex;gap:12px;align-items:baseline;padding:6px 0;border-bottom:1px dashed var(--line)}.pv-pl li:last-child{border-bottom:0}.pv-pl span{flex:1}.pv-pl small{display:block;color:var(--muted);font-size:.8rem}.pv-pl b{white-space:nowrap;font-family:var(--display);font-weight:400;font-size:1.05rem}
+/* цены в окне карточки (12.10.2026): коротко, весь прайс-лист в свёрнутом списке, кнопка «Прайс-лист PNG»; в предпросмотре — просьба проверить цены */
+.pl-sum{margin:0;line-height:1.5}
+.pl-tog{display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%;box-sizing:border-box;font:inherit;font-weight:700;font-size:.95rem;line-height:1.3;color:var(--ink);background:var(--paper,#FFFCF8);border:1.5px solid var(--line);border-radius:14px;padding:11px 14px;cursor:pointer;text-align:left;transition:border-color .15s}
+.pl-tog:hover,.pl-tog:focus-visible{border-color:var(--lc,var(--sage))}
+.pl-tog svg{flex:none;color:var(--lc,var(--sage));transition:transform .2s}
+.pl-tog[aria-expanded="true"] svg{transform:rotate(180deg)}
+.pl-body{display:flex;flex-direction:column;gap:6px}
+.pl-body[hidden]{display:none}
+.pl-list span small{display:block;margin-top:1px;color:var(--muted);font-size:.8rem;font-weight:500}
+.pl-list b{font-size:1.02rem}
+@media (max-width:520px){.pl-list li.lp{flex-wrap:wrap;row-gap:2px}.pl-list li.lp span{flex-basis:100%}.pl-list li.lp b{margin-left:auto}}   /* длинная цена («120 / 150 / 180 CHF») на телефоне — строкой ниже, сумма не переносится */
+.pl-note{color:var(--muted);font-size:.8rem;line-height:1.4}
+.pl-check{margin:0;padding:10px 12px;border-radius:12px;background:var(--mustard-soft,#F3E3C2);border-left:4px solid var(--mustard,#B98324);font-size:.9rem;line-height:1.45}
+.pl-check b{font-weight:700}
 .adm-sec{display:flex;flex-direction:column;gap:6px;padding-top:6px}
 .adm-sec+.adm-sec{border-top:1px dashed #4F5E3E;margin-top:4px;padding-top:10px}
 .adm-acts{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:8px}
@@ -879,7 +893,7 @@ const AVATAR_SVG = '<svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50
 </script>
 <script src="/data/specialists.js?v=7521ad0d"></script>
 <script src="/data/vacancies.js?v=3527d207"></script>
-<script src="/data/organizations.js?v=5a74e14f"></script>
+<script src="/data/organizations.js?v=fbee0a32"></script>
 <script>
 window.IMG_BASE = 'img/';
 /* карточки специалистов — в /data/specialists.js (одна копия на весь сайт) */
@@ -1073,6 +1087,36 @@ function feeBlock(s){
 const feePdf = s => { if (!('fees' in s)) return ''; const r = feeRows(s);
   return r.length ? `<div class="pp-sec"><h4>Взносы</h4><div style="display:grid;grid-template-columns:1fr auto;gap:3px 18px;max-width:560px">${r.map(f => `<span>${richPdf(f.name)}</span><b style="white-space:nowrap">${chf(f.sum)}${f.per ? ' ' + esc(f.per) : ''}</b>`).join('')}</div><p style="font-size:11px;color:#7A6E62;margin-top:4px">${FEE_NOTE}</p></div>`
     : s.feeFree ? `<div class="pp-sec"><h4>Взносы</h4><p>${feeFreeTxt(s)}</p></div>` : s.feeText ? `<div class="pp-sec"><h4>Взносы</h4><p>${richPdf(s.feeText)}</p></div>` : ''; };
+/* ЦЕНЫ ПРЯМО В КАРТОЧКЕ (правило Ирины 12.10.2026, 17:20: «скрытой информации, которая только в прайс-листе на скачивание, быть не должна»).
+   Всё, что есть в «Прайс-лист PNG», видно и в окне карточки: блок «Цены» сразу после «Услуг» — коротко (s.priceSum: у фирм — строка fee
+   из карточки) и весь прайс-лист в свёрнутом списке «Весь прайс-лист · N услуг» (нажатие раскрывает, «Свернуть прайс-лист» — обратно).
+   Под списком — кнопка «Прайс-лист PNG» и строка, что та же кнопка есть внизу карточки, рядом с «Визитка PNG». В предпросмотре по ссылке
+   из письма список сразу раскрыт и рядом просьба проверить цены: человек подтверждает карточку вместе с прайс-листом (pvPriceCheck).
+   Тот же прайс-лист — в PDF карточки (pricePdf). */
+const PRICE_WHO = 'Цены указал сам специалист';
+const nbspSum = h => h.replace(/(\d) (CHF)/g, '$1&nbsp;$2').replace(/(CHF) (\d)/g, '$1&nbsp;$2').replace(/(^|\s)(от|до|за) (\d)/g, '$1$2&nbsp;$3');   // суммы в строке цен не переносятся
+const PRICE_TIP = `${PRICE_WHO}: услуги, сколько они длятся и сколько стоят. Это ориентир, точную стоимость называют при записи. «Свои люди» цены не назначают и не проверяют, обо всём договаривайся напрямую.`;
+const priceNote = s => `${PRICE_WHO}${s.pricesDate ? ', по состоянию на ' + fmtDate(s.pricesDate) : ''}. Точную стоимость уточняй при записи.`;
+const pvPriceCheck = s => PREVIEW === s.id && (s.prices || []).length > 0 && !s.pricesOk;   // предпросмотр: цены подтверждаются вместе с карточкой
+const PL_CHEV = '<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>';
+const plTog = (n, open) => open ? `<span>Свернуть прайс-лист</span>${PL_CHEV}` : `<span>Весь прайс-лист · ${n} ${plural(n, 'услуга', 'услуги', 'услуг')}</span>${PL_CHEV}`;
+function priceBlock(s){
+  const r = s.prices || []; if (!r.length || !priceShown(s)) return '';
+  const open = PREVIEW === s.id || PRICEVIEW === s.id;
+  return `<div class="d-block pl-block"><h4>Цены<button type="button" class="vip-q" data-t="${esc(PRICE_TIP)}" aria-label="Подсказка: цены" aria-expanded="false">?</button></h4>
+    ${s.priceSum ? `<p class="pl-sum">${nbspSum(rich(s.priceSum))}</p>` : ''}
+    ${pvPriceCheck(s) ? `<p class="pl-check"><b>Проверьте, пожалуйста, цены.</b> Весь прайс-лист уже открыт ниже. Если какая-то цена изменилась или услуги больше нет, нажмите «Нужно исправить» внизу карточки и напишите, что поменять, — я всё поправлю.</p>` : ''}
+    <button type="button" class="pl-tog" data-pl-tog="${r.length}" aria-expanded="${open}">${plTog(r.length, open)}</button>
+    <div class="pl-body"${open ? '' : ' hidden'}><ul class="fee-list pl-list">${r.map(x => `<li${String(x.p || '').length > 12 ? ' class="lp"' : ''}><span>${esc(x.t)}${x.n ? `<small>${esc(x.n)}</small>` : ''}</span><b>${esc(x.p)}</b></li>`).join('')}</ul>
+      <small class="pl-note">${esc(priceNote(s))}</small></div>
+    <div class="fee-acts"><button class="btn ghost" type="button" data-png-price="${esc(s.id)}" data-tip="Прайс-лист картинкой PNG: сохранится в галерею телефона, удобно показать или переслать">Прайс-лист PNG</button><small>Весь прайс-лист можно сохранить картинкой на телефон. Эта же кнопка есть среди кнопок карточки, рядом с «Визитка PNG».</small></div></div>`;
+}
+document.addEventListener('click', e => { const b = e.target.closest('[data-pl-tog]'); if (!b) return;
+  const body = b.nextElementSibling, open = b.getAttribute('aria-expanded') !== 'true';
+  if (body) body.hidden = !open; b.setAttribute('aria-expanded', String(open)); b.innerHTML = plTog(+b.dataset.plTog, open);
+  if (!open) b.scrollIntoView({ block: 'nearest' }); });
+const pricePdf = s => { const r = s.prices || []; if (!r.length || !priceShown(s)) return '';
+  return `<div class="pp-sec"><h4>Цены</h4><div style="display:grid;grid-template-columns:${r.length > 8 ? '1fr auto 1fr auto' : '1fr auto'};gap:3px 18px">${r.map(x => `<span>${esc(x.t)}${x.n ? ` <small style="color:#7A6E62">· ${esc(x.n)}</small>` : ''}</span><b style="white-space:nowrap">${esc(x.p)}</b>`).join('')}</div><p style="font-size:11px;color:#7A6E62;margin-top:4px">${esc(priceNote(s))}</p></div>`; };
 
 // что скрывает карточку с сайта (пусто — карточка видна)
 function hiddenReason(s){
@@ -1506,6 +1550,16 @@ const draftPara = s => { const L = draftLines(s); return L.length ? `Для пр
    в контактах карточки и кнопка «Пригласить в WhatsApp» открывают чат специалиста с готовым сообщением и ссылкой на предпросмотр. Сайт ничего не отправляет. */
 const waDigits = v => { let d = String(v || '').replace(/[^\d+]/g, ''); if (/^00/.test(d)) d = d.slice(2); if (/^\+/.test(d)) d = d.slice(1); else if (/^0\d{9}$/.test(d)) d = '41' + d.slice(1); return d; };
 const waTo = s => (s.contacts || {}).whatsapp || (s.contacts || {}).phone || '';
+/* цены в письмах и сообщениях (правило Ирины 12.10.2026, 17:20: «в письмах прописывай, что проверить прайсы нужно и прислать коррекцию»):
+   если у карточки есть прайс-лист и он ещё не подтверждён — в приглашении, в письме со ссылкой на предпросмотр и в тексте для Telegram
+   отдельный абзац: весь прайс-лист открывается в карточке, в блоке «Цены», проверьте и напишите, что изменилось.
+   У организации с подвязанной карточкой владельца смотрим обе карточки. */
+const priceAskOn = s => (s.prices || []).length > 0 && !s.pricesOk;
+const PRICE_ASK = '💶 Посмотрите, пожалуйста, и цены: весь прайс-лист открывается прямо в карточке, в блоке «Цены» — нажмите «Весь прайс-лист». Если какая-то цена изменилась или услуги уже нет, нажмите «Нужно исправить» и напишите, что поменять, — я всё поправлю.';
+const headSpecOf = s => { const id = s.org && (s.org.head || {}).spec; return id ? (window.SPECIALISTS || []).find(x => x.id === id) || null : null; };
+const priceInvite = s => { const a = priceAskOn(s), sp = headSpecOf(s), b = !!sp && priceAskOn(sp); if (!a && !b) return '';
+  const where = a && b ? 'в обеих карточках весь прайс-лист открывается в блоке «Цены»' : a ? 'весь прайс-лист открывается прямо в карточке, в блоке «Цены»' : 'в вашей личной карточке весь прайс-лист открывается в блоке «Цены»';
+  return `💶 Цены я тоже внесла — ${where}. Посмотрите, пожалуйста, всё ли там актуально. Если какая-то цена изменилась или какой-то услуги уже нет, просто напишите мне — я всё поправлю.`; };
 const inviteMsg = s => { const v = s.invite || {}, n = String(s.name || '').trim().split(/\s+/)[0];
   /* тон — тепло и с заботой, даже если мы человека не знаем; пробная карточка ни к чему не обязывает и собрана только из того, что он сам разместил в интернете;
      почему мы сделали её сами — ценим время, анкеты удовольствия не приносят, для первых участников делаем сами; от человека — только ответить на сообщение
@@ -1516,6 +1570,7 @@ const inviteMsg = s => { const v = s.invite || {}, n = String(s.name || '').trim
     /* владелец или руководитель фирмы сам оказывает услуги — к карточке организации подвязана его карточка специалиста (org.head.spec, тот же ключ);
        в приглашении всегда обе ссылки (правило Ирины 12.10.2026, 14:18: «в карточке организации её карточка специалиста должна быть подвязана… в лидах подкрепляй всегда») */
     ...(s.org && (s.org.head || {}).spec ? [`${v.spec || `А это ваша личная карточка в справочнике специалистов. Её найдут те, кто ищет именно мастера, и она связана с карточкой «${s.name}»`}:\n👉 ${SITE}#preview=${encodeURIComponent(s.org.head.spec)}.${encodeURIComponent(OKKEY[s.id] || '')}`] : []),
+    priceInvite(s),
     draftPara(s),
     'Почему я сделала карточку сама? Мы очень ценим ваше время и понимаем, что регистрация и заполнение анкет удовольствия не приносят. Поэтому для первых участников мы делаем это сами.',
     'От вас нужно совсем немного: просто ответьте на это сообщение — что поправить или добавить, а если всё верно, так и напишите. Я всё внесу сама, и совсем скоро вы станете частью нашего сообщества: наши соотечественники смогут находить вас в сервисе, которым легко и удобно пользоваться.',
@@ -1543,18 +1598,19 @@ document.addEventListener('click', async e => { const b = e.target.closest('[dat
 const mailto = (to, su, body) => `mailto:${to}?subject=${encodeURIComponent(su)}&body=${encodeURIComponent(body)}`;
 const gmail = (to, su, body) => `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(to)}&su=${encodeURIComponent(su)}&body=${encodeURIComponent(body)}`;
 const ownerLetter = s => ({ su: 'Ваша карточка в «Своих людях в Швейцарии» — посмотрите, пожалуйста',
-  body: `Здравствуйте!\n\nЯ подготовила вашу карточку для справочника «Свои люди в Швейцарии». Пока её видите только вы. Посмотрите, пожалуйста, всё ли верно: фото, профиль, услуги, адреса и контакты.\n\n${previewUrl(s)}\n\n${draftPara(s) ? draftPara(s) + '\n\n' : ''}Если всё верно, внизу карточки отметьте галочку и нажмите «Подтверждаю» — и я сразу опубликую карточку. Если что-то не так, нажмите «Нужно исправить» и напишите прямо там, что поменять.\n\nС теплом,\nИрина Вознесенская\n${MAIL}` });
+  body: `Здравствуйте!\n\nЯ подготовила вашу карточку для справочника «Свои люди в Швейцарии». Пока её видите только вы. Посмотрите, пожалуйста, всё ли верно: фото, профиль, услуги, адреса и контакты.\n\n${previewUrl(s)}\n\n${priceAskOn(s) ? PRICE_ASK + '\n\n' : ''}${draftPara(s) ? draftPara(s) + '\n\n' : ''}Если всё верно, внизу карточки отметьте галочку и нажмите «Подтверждаю» — и я сразу опубликую карточку. Если что-то не так, нажмите «Нужно исправить» и напишите прямо там, что поменять.\n\nС теплом,\nИрина Вознесенская\n${MAIL}` });
 const confirmLetter = s => ({ su: `Подтверждаю карточку — ${s.name}${s.num ? ' (' + s.num + ')' : ''}`,
-  body: `Здравствуйте, Ирина!\n\nВсё верно, подтверждаю публикацию своей карточки на сайте «Свои люди в Швейцарии».\nУсловия размещения (https://svoiludi.ch/usloviya/) прочитал(а) и принимаю, в том числе когда карточку снимают и за что исключают из проекта.${feeRows(s).length ? '\n\nВзносы:\n' + feeTxt(s) : s.feeFree ? '\n\n' + feeFreeTxt(s) : ''}\n\n${previewUrl(s)}\n\n${s.name}` });
+  body: `Здравствуйте, Ирина!\n\nВсё верно, подтверждаю публикацию своей карточки на сайте «Свои люди в Швейцарии».\nУсловия размещения (https://svoiludi.ch/usloviya/) прочитал(а) и принимаю, в том числе когда карточку снимают и за что исключают из проекта.${feeRows(s).length ? '\n\nВзносы:\n' + feeTxt(s) : s.feeFree ? '\n\n' + feeFreeTxt(s) : ''}${pvPriceCheck(s) ? '\n\nПрайс-лист:\n' + priceTxt(s) : ''}\n\n${previewUrl(s)}\n\n${s.name}` });
 const fixLetter = s => ({ su: `Исправления в карточку — ${s.name}${s.num ? ' (' + s.num + ')' : ''}`,
   body: `Здравствуйте, Ирина!\n\nВ моей карточке, пожалуйста, исправьте\n\n— \n\n${previewUrl(s)}\n\n${s.name}` });
 function previewBox(s){
   return `<div class="pv-box" id="pvCard" data-pv="${esc(s.id)}"><b>Это предпросмотр вашей карточки.</b><span>Пока её видите только вы. Если всё верно, отметьте галочки и нажмите «Подтверждаю» — карточка появится на сайте. Если что-то нужно поменять, нажмите «Нужно исправить».</span>
     ${needList(s).length ? `<span class="pv-need">Подсвеченные поля мы ещё уточняем: ${esc(needList(s).join(', '))}.${needReq(s).length ? ` Без ${needReq(s).length > 1 ? 'этих данных' : 'этого'} (${esc(needReq(s).join(', '))}) карточка на сайт не выйдет.` : ''}${needOpt(s).length ? ` ${esc(needOpt(s).join(' и ').replace(/^т/, 'Т'))} мы тоже просим, чтобы людям было проще с вами связаться.` : ''} Напишите нам эти данные в ответ на сообщение или нажмите «Нужно исправить».</span>` : ''}
-    <label class="pv-ok"><input type="checkbox" data-pv-agree> <span>Данные в карточке верны. Я даю согласие на публикацию карточки и фото на сайте svoiludi.ch.</span></label>
+    ${pvPriceCheck(s) ? `<span class="pv-need">💶 Цены — тоже часть карточки. Весь прайс-лист открыт выше, в блоке «Цены». Если какая-то цена изменилась или услуги больше нет, нажмите «Нужно исправить» и напишите, что поменять.</span>` : ''}
+    <label class="pv-ok"><input type="checkbox" data-pv-agree> <span>Данные в карточке верны${pvPriceCheck(s) ? ', в том числе услуги и цены в прайс-листе' : ''}. Я даю согласие на публикацию карточки и фото на сайте svoiludi.ch.</span></label>
     <label class="pv-ok"><input type="checkbox" data-pv-agree> <span>Я прочитал(а) <a href="https://svoiludi.ch/usloviya/" target="_blank" rel="noopener">условия размещения</a> и принимаю их, в том числе <a href="https://svoiludi.ch/usloviya/#isklyuchenie" target="_blank" rel="noopener">когда карточку снимают и за что исключают из проекта</a>. Перечитать их можно в любой момент.</span></label>
     <div class="pv-acts"><button class="btn" type="button" data-pv-send="card" disabled>Подтверждаю</button><button class="btn ghost" type="button" data-pv-fixopen>Нужно исправить</button></div>
-    <div class="pv-fix" hidden><textarea data-pv-text rows="4" maxlength="1500" placeholder="Что исправить: например, телефон, адрес или услугу"></textarea><div class="pv-acts"><button class="btn" type="button" data-pv-send="fix">Отправить исправления</button></div></div>
+    <div class="pv-fix" hidden><textarea data-pv-text rows="4" maxlength="1500" placeholder="${pvPriceCheck(s) ? 'Что исправить: например, телефон, адрес, услугу или цену' : 'Что исправить: например, телефон, адрес или услугу'}"></textarea><div class="pv-acts"><button class="btn" type="button" data-pv-send="fix">Отправить исправления</button></div></div>
     <span class="pv-small" data-pv-msg>Одно нажатие — и готово. Копия придёт на e-mail из вашей карточки.</span></div>`;
 }
 /* ---------- прайс-лист: отдельный запрос и отдельное подтверждение по e-mail (решение Ирины 05.10.2026) ----------
@@ -1562,7 +1618,7 @@ function previewBox(s){
    Специалист открывает https://svoiludi.ch/#price=<id>.<key>, видит свой прайс-лист и нажимает «Подтверждаю» или «Нужно исправить» —
    письмо с его адреса приходит Ирине. После письма Ирина ставит pricesOk — и кнопка «Прайс-лист PNG» появляется на сайте. */
 let PRICEVIEW = '';   // id карточки, открытой по ссылке подтверждения прайс-листа
-const priceShown = s => (s.prices || []).length > 0 && (!!s.pricesOk || !!s.sample || ADMIN || PRICEVIEW === s.id);
+const priceShown = s => (s.prices || []).length > 0 && (!!s.pricesOk || !!s.sample || ADMIN || PRICEVIEW === s.id || PREVIEW === s.id);   // в предпросмотре карточки прайс-лист тоже виден: цены подтверждаются вместе с карточкой (12.10.2026)
 const priceUrl = s => `${SITE}#price=${encodeURIComponent(s.id)}.${encodeURIComponent(OKKEY[s.id] || '')}`;
 const priceAsk = s => ({ su: 'Прайс-лист для вашей карточки в «Своих людях в Швейцарии»',
   body: `Здравствуйте!\n\nВ справочнике «Свои люди в Швейцарии» у вашей карточки может быть прайс-лист. Его можно сохранить картинкой на телефон и переслать клиентам.\n\n${(s.services || []).length ? `Ниже — услуги из вашей карточки. Впишите, пожалуйста, цены вместо ___ и отправьте ответным письмом. Услугу можно удалить, добавить свою или дописать пояснение, например длительность (Маникюр с гель-лаком — 60 CHF — 60 минут).\n\n${s.services.map(x => x + ' — ___ CHF').join('\n')}` : `Если хотите, пришлите, пожалуйста, ответным письмом ваши цены, по одной услуге в строке:\nуслуга — цена — пояснение, если нужно (например, длительность)\n\nНапример:\nМаникюр с гель-лаком — 60 CHF — 60 минут`}\n\nПеред публикацией я пришлю вам прайс-лист на проверку, и он появится на сайте только после вашего подтверждения.\n\nС теплом,\nИрина Вознесенская\n${MAIL}` });
@@ -1671,7 +1727,7 @@ document.addEventListener('click', async e => { const b = e.target.closest('[dat
   const s = SPECIALISTS.find(x => x.id === b.dataset.copydrafts); if (!s) return; const t = draftPara(s);
   try { await navigator.clipboard.writeText(t); b.textContent = 'Скопировано ✓ — вставь в письмо или сообщение'; } catch (x) { prompt('Скопируйте ссылки на черновики', t); } });
 document.addEventListener('click', async e => { const b = e.target.closest('[data-copyprev]'); if (!b) return;
-  const s = SPECIALISTS.find(x => x.id === b.dataset.copyprev); const t = `Здравствуйте! Я подготовила вашу карточку для справочника «Свои люди в Швейцарии». Пока её видите только вы. Посмотрите, пожалуйста, всё ли верно.\n\n${previewUrl(s)}\n\n${draftPara(s) ? draftPara(s) + '\n\n' : ''}Если всё верно, внизу карточки отметьте галочку и нажмите «Подтверждаю» — это одно нажатие. Если что-то не так, нажмите «Нужно исправить» и напишите прямо там. Спасибо!`;
+  const s = SPECIALISTS.find(x => x.id === b.dataset.copyprev); const t = `Здравствуйте! Я подготовила вашу карточку для справочника «Свои люди в Швейцарии». Пока её видите только вы. Посмотрите, пожалуйста, всё ли верно.\n\n${previewUrl(s)}\n\n${priceAskOn(s) ? PRICE_ASK + '\n\n' : ''}${draftPara(s) ? draftPara(s) + '\n\n' : ''}Если всё верно, внизу карточки отметьте галочку и нажмите «Подтверждаю» — это одно нажатие. Если что-то не так, нажмите «Нужно исправить» и напишите прямо там. Спасибо!`;
   try { await navigator.clipboard.writeText(t); (b.querySelector('b') || b).textContent = 'Скопировано ✓'; } catch (x) { prompt('Скопируйте текст', t); } });
 let PREVIEW = '';   // id карточки, открытой по ссылке предпросмотра
 function openCard(id){
@@ -1690,7 +1746,7 @@ function openCard(id){
     <div class="d-body">
       <div class="d-col">
         <div class="d-block"><h4>Профиль</h4><p>${rich(s.about)}</p></div>${feeBlock(s)}
-        <div class="d-block"><h4>Услуги</h4><div class="chips svc">${s.services.map(x => `<span>${esc(x)}</span>`).join('')}</div></div>
+        <div class="d-block"><h4>Услуги</h4><div class="chips svc">${s.services.map(x => `<span>${esc(x)}</span>`).join('')}</div></div>${priceBlock(s)}
         ${whereBlock(s)}
         <div class="d-block"><h4>Формат</h4><p>${needOf(s).format ? UT() : rich(s.format)}</p></div>
         <div class="d-block"><h4>Языки</h4><div class="chips">${(s.langs || []).map(l => `<span>${esc(l)}</span>`).join('') || UT()}</div></div>
@@ -1762,7 +1818,7 @@ function cardPage(s){
       <div class="pp-sec"><h4>Контакты</h4><div class="pp-ct">${pdfContacts(s)}</div></div></div></div>
     <div class="pp-grid"><div class="pp-sec"><h4>Профиль</h4><p>${richPdf(s.about)}</p></div><div class="pp-sec"><h4>Услуги</h4><p>${esc(s.services.join(' · '))}</p></div>
       <div class="pp-sec"><h4>Формат</h4><p>${richPdf(s.format)}</p></div><div class="pp-sec"><h4>Языки</h4><p>${esc(s.langs.join(', '))}</p></div></div>
-    ${feePdf(s)}
+    ${feePdf(s)}${pricePdf(s)}
     ${s.uid ? `<div class="pp-sec"><h4>Регистрационный номер (UID)</h4><a data-href="${esc(uidUrl(s.uid))}">${esc(s.uid)}</a> · проверено ${fmtDate(s.checked)} на uid.admin.ch</div>` : ''}<div class="pp-qr">${qrImg(vcard(s))}<div class="pp-sec"><h4>Карточка на сайте</h4><a data-href="${esc(cardUrl(s))}">${esc(cardUrl(s))}</a><small>QR-код — визитка: наведите камеру телефона, чтобы сохранить контакт.</small></div></div>${pdfFoot}`;
 }
 async function makePdf(pages, file){
