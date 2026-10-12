@@ -436,7 +436,7 @@ window.AFISHA = [
     "date": "2026-10-12",
     "dateEnd": "2027-10-11",
     "canton": "Zug",
-    "address": "Suurstoffi 16, 6343 Risch-Rotkreuz",
+    "address": "Suurstoffi 16, 6343 Rotkreuz",
     "geo": [
       47.1442162,
       8.4370922
@@ -457,7 +457,6 @@ window.AFISHA = [
     ],
     "signup": "wa",
     "contacts": {
-      "email": "florearubin@mail.ru",
       "phone": "+41 79 626 89 18",
       "whatsapp": "+41 79 626 89 18",
       "instagram": "rubinbeauty"
@@ -629,7 +628,7 @@ window.AFISHA = [
     date: '2026-10-18', time: '14:00', repeat: { freq: 'weekly', until: '2026-12-27' },
     canton: 'Zürich', address: 'Krypta der Liebfrauenkirche, Weinbergstrasse 32, 8006 Zürich', online: false,
     langs: ['українська'], level: 'для всіх, можна з дітьми', price: 'безкоштовно', commercial: false,
-    organizers: [{ org: 'ugcc-zurich', name: 'Українська греко-католицька місія Цюрих' }], link: 'https://www.forum-magazin.ch/ukrainische-mission/agenda/',
+    organizers: [{ org: 'ugcc-zurich', name: 'Українська греко-католицька місія в Цюриху' }], link: 'https://www.forum-magazin.ch/ukrainische-mission/agenda/',
     about: 'Щонеділі, крім п’ятої неділі місяця, місія служить Божественну літургію в крипті церкви Liebfrauen. Запрошують усіх християн і всіх, кому цікаво. Після служби — спілкування за чашкою кави у фоє.'
   },
   {
@@ -638,7 +637,7 @@ window.AFISHA = [
     date: '2026-10-18', time: '15:30', timeEnd: '17:00', repeat: { freq: 'weekly', until: '2026-12-27' },
     canton: 'Zürich', address: 'Pfarreizentrum Liebfrauen, Weinbergstrasse 32, 8006 Zürich', online: false,
     langs: ['українська'], level: 'діти й підлітки 3–15 років', price: 'безкоштовно', commercial: false,
-    organizers: [{ org: 'ugcc-zurich', name: 'Українська греко-католицька місія Цюрих' }], link: 'https://www.forum-magazin.ch/ukrainische-mission/updates/20251028-kinderkatechese/',
+    organizers: [{ org: 'ugcc-zurich', name: 'Українська греко-католицька місія в Цюриху' }], link: 'https://www.forum-magazin.ch/ukrainische-mission/updates/20251028-kinderkatechese/',
     about: 'Після недільної літургії діти й підлітки від 3 до 15 років мають катехизацію в залах парафії Liebfrauen, зазвичай з 15:30 до 17:00.'
   },
   {
@@ -647,7 +646,7 @@ window.AFISHA = [
     date: '2026-10-18', time: '16:00',
     canton: 'Zürich', address: 'Foyer der Liebfrauenkirche, Weinbergstrasse 32, 8006 Zürich', online: false,
     langs: ['українська'], level: 'для дорослих', price: 'безкоштовно', commercial: false,
-    organizers: [{ org: 'ugcc-zurich', name: 'Українська греко-католицька місія Цюрих' }], link: 'https://www.forum-magazin.ch/ukrainische-mission/updates/20251028-bibelstunde/',
+    organizers: [{ org: 'ugcc-zurich', name: 'Українська греко-католицька місія в Цюриху' }], link: 'https://www.forum-magazin.ch/ukrainische-mission/updates/20251028-bibelstunde/',
     about: 'У першу й третю неділю місяця після літургії, близько 16:00, у фоє церкви Liebfrauen разом читають і обговорюють недільне Євангеліє. Наступні зустрічі — 1 і 15 листопада.'
   },
   {
@@ -656,7 +655,7 @@ window.AFISHA = [
     date: '2026-10-31', time: '14:00',
     canton: 'Schwyz', address: 'Kloster Einsiedeln, 8840 Einsiedeln', online: false,
     langs: ['українська'], level: 'для всіх', price: 'безкоштовно', commercial: false,
-    organizers: [{ org: 'ugcc-zurich', name: 'Українська греко-католицька місія Цюрих' }], link: 'https://www.forum-magazin.ch/ukrainische-mission/updates/20260203-gottliche-liturgie-und-gebet-fur-den-frieden-in-de/',
+    organizers: [{ org: 'ugcc-zurich', name: 'Українська греко-католицька місія в Цюриху' }], link: 'https://www.forum-magazin.ch/ukrainische-mission/updates/20260203-gottliche-liturgie-und-gebet-fur-den-frieden-in-de/',
     about: 'В останню суботу місяця місія вирушає до монастиря Айнзідельн. О 14:00 — Божественна літургія, зазвичай у каплиці Святої Магдалини, потім молитва за мир в Україні й у всьому світі та можливість сповідатися. Після — кава або невеликий перекус у кімнаті для паломників.'
   },
   /* Спортивная школа UA-DO (12.10.2026): будущих событий на их сайте нет (новости — до 12.2023), поэтому для примера — их последний открытый чемпионат, с пометкой «прошло»

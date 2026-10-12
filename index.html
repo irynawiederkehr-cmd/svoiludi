@@ -879,14 +879,14 @@ const AVATAR_SVG = '<svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50
 </script>
 <script src="/data/specialists.js?v=7521ad0d"></script>
 <script src="/data/vacancies.js?v=3527d207"></script>
-<script src="/data/organizations.js?v=d5dbc840"></script>
+<script src="/data/organizations.js?v=e79bd1d6"></script>
 <script>
 window.IMG_BASE = 'img/';
 /* карточки специалистов — в /data/specialists.js (одна копия на весь сайт) */
 const SPECIALISTS = window.SPECIALISTS || [];
 
 </script>
-<script src="/data/afisha.js?v=7e8dc1d3"></script>
+<script src="/data/afisha.js?v=ab5773eb"></script>
 <script>const AFISHA = window.AFISHA || [];</script>
 <script>
 const ADMIN = (() => {   // режим Ирины: svoiludi.ch/?ira=1 включает на этом устройстве, ?ira=0 выключает
@@ -1707,7 +1707,7 @@ function openCard(id){
         <div class="d-block"><h4>Контакты</h4><ul class="ctl">${contacts}</ul></div>
         <div class="card-acts">${likeBtn(s, true)}${s.sample ? '' : `<button type="button" class="vip-q" data-t="${esc(LIKE_TIP)}" aria-label="Что значит сердечко" aria-expanded="false">?</button>`}<button class="btn ghost svb" type="button" data-fav="${esc(s.id)}" aria-pressed="${FAV.has(s.id)}">${saveInner(s)}</button><button class="btn" type="button" data-vcf="${esc(s.id)}" data-tip="Сохранить телефон, e-mail и адрес в контакты телефона или компьютера. Рядом с именем будет 🌿 и категория — по ним контакт легко найти поиском">В контакты</button><button class="btn ghost" type="button" data-share="${esc(s.id)}">Поделиться</button><button class="btn ghost" type="button" data-png-card="${esc(s.id)}" data-tip="Визитка-картинка PNG: сохранится в галерею телефона, её удобно показать или переслать">Визитка PNG</button>${priceShown(s) ? `<button class="btn ghost" type="button" data-png-price="${esc(s.id)}" data-tip="Прайс-лист картинкой PNG: сохранится в галерею телефона">Прайс-лист PNG</button>` : ''}${feeRows(s).length ? `<button class="btn ghost" type="button" data-png-fees="${esc(s.id)}" data-tip="Взносы картинкой PNG: сохранится в галерею телефона">Взносы PNG</button>` : ''}<button class="btn ghost" type="button" data-pdf-card="${esc(s.id)}" data-tip="Полная карточка для печати и почты">PDF</button></div>
         ${needOf(s).reg ? `<p class="d-need">${UT(NEED_T.reg[0].toUpperCase() + NEED_T.reg.slice(1))}</p>` : ''}
-        <p class="d-note">${s.uid ? `Регистрационный номер ${s.firm ? 'фирмы ' : ''}(UID): <a class="uid" href="${uidUrl(s.uid)}" ${ext} data-tip="Открыть запись в официальном реестре предприятий Швейцарии (uid.admin.ch)">${esc(s.uid)}</a>. ` : ''}${s.checked ? `Данные проверены ${fmtDate(s.checked)}. ` : ''}${s.num ? `Номер карточки ${esc(s.num)}. ` : ''}Справочник проверяет только официальную регистрацию. Дипломы и сертификаты указывает сам специалист. Договорённости — напрямую со специалистом.</p>
+        <p class="d-note">${s.uid ? `Регистрационный номер ${s.firm ? 'фирмы ' : ''}(UID): <a class="uid" href="${uidUrl(s.uid)}" ${ext} data-tip="Открыть запись в официальном реестре предприятий Швейцарии (uid.admin.ch)">${esc(s.uid)}</a>. ${s.regName ? `Название в реестре: ${esc(s.regName)}. ` : ''}` : ''}${s.checked ? `Данные проверены ${fmtDate(s.checked)}. ` : ''}${s.num ? `Номер карточки ${esc(s.num)}. ` : ''}Справочник проверяет только официальную регистрацию. Дипломы и сертификаты указывает сам специалист. Договорённости — напрямую со специалистом.</p>
         <p class="report">Нашли ошибку в карточке? <a href="${esc(reportLink(s))}">Сообщить</a></p>
         ${PREVIEW === s.id ? previewBox(s) : ''}${PRICEVIEW === s.id ? priceBox(s) : ''}${ADMIN ? adminBox(s) : ''}
       </div>

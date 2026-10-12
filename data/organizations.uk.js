@@ -27,7 +27,9 @@
    prices, pricesOk, pricesDate — прайс-лист (как у специалистов), виден после подтверждения организацией
    status  — 'активен' | 'на подтверждении' | 'закрыто' (на сайте видны только «активен» с confirm)
    sample  — true: образец, всё вымышленное, видно как пример с пометкой «Образец»
-   name    — название, как пишет сама организация; name_ru — по-русски, если есть
+   name    — название, как пишет сама организация (одна строка, без города и девиза: город — в «Где»)
+   regName — название в торговом реестре или реестре UID, только если отличается от name; стоит внизу карточки рядом с UID
+             (строки под ролью с другим названием и городом у организаций нет — Ирина 12.10.2026, 16:47: «убери»)
    form    — 'Verein' | 'Stiftung' | 'неформальная группа' | 'GmbH' | 'AG' | 'Einzelunternehmen' | 'Genossenschaft' | 'другое' (кружок «?»)
    kind    — 'charity' — благотворительная (помощь людям по уставу) | 'nonprofit' — некоммерческая (школа, хор, общество, клуб) | 'firm' — фирма
    free    — true: организация ничего не берёт с людей (проверено по сайту, уставу и заявке) → пометка «размещение бесплатно», бесплатно всегда;
@@ -59,7 +61,6 @@ window.ORGANIZATIONS = [
     "num": "OR-0001",
     "status": "активен",
     "name": "Центр допомоги «Приклад» (зразок)",
-    "name_ru": "",
     "form": "Verein",
     "kind": "charity",
     "free": true,
@@ -111,7 +112,6 @@ window.ORGANIZATIONS = [
     "num": "OR-0002",
     "status": "активен",
     "name": "Кейтеринг «Приклад» GmbH (зразок)",
-    "name_ru": "",
     "form": "GmbH",
     "kind": "firm",
     "dir": "catering",
@@ -164,7 +164,6 @@ window.ORGANIZATIONS = [
     "num": "OR-0003",
     "status": "активен",
     "name": "Салон «Приклад» GmbH (зразок)",
-    "name_ru": "",
     "form": "GmbH",
     "kind": "firm",
     "dir": "beauty",
@@ -409,7 +408,6 @@ window.ORGANIZATIONS = [
     "status": "на підтвердженні",
     "keyHash": "166a038502e1ad58594ee1333a0553f505f30f146afa54c2b34255c649ceb4ea",
     "name": "Українська школа «Рідне Слово»",
-    "name_ru": "Ukrainische Schule – Ridne Slovo · Берн і Тун",
     "form": "",
     "kind": "nonprofit",
     "dir": "school",
@@ -454,7 +452,7 @@ window.ORGANIZATIONS = [
     "status": "на підтвердженні",
     "keyHash": "09e960beed9572499e1ba030273dfc4cd7f04a55d1b49f6b709212320041cc2c",
     "name": "Швейцарсько-українська асоціація VIDNOVA",
-    "name_ru": "VIDNOVA Schweizerisch-Ukrainischer Verein · Цюрих",
+    "regName": "VIDNOVA Schweizerisch-Ukrainischer Verein",
     "form": "Verein",
     "kind": "nonprofit",
     "dir": "help",
@@ -519,7 +517,6 @@ window.ORGANIZATIONS = [
     "status": "на підтвердженні",
     "keyHash": "75318fbbb1510d6477b59476d04f17fd965ae98df6b1ddbf9f2f89831d768fd5",
     "name": "Jewish Culture Switzerland",
-    "name_ru": "Месіанська єврейська громада · Берн",
     "form": "неформальна група",
     "kind": "nonprofit",
     "free": true,
@@ -578,7 +575,6 @@ window.ORGANIZATIONS = [
     "status": "на підтвердженні",
     "keyHash": "61bdd3a84ac0066144160cf39b0ac3673b81c08d32efb9dc6332fd6a471d7a6e",
     "name": "Rubin Beauty",
-    "name_ru": "салон краси · Роткройц, кантон Цуг",
     "form": "Einzelunternehmen",
     "kind": "firm",
     "dir": "beauty",
@@ -614,7 +610,7 @@ window.ORGANIZATIONS = [
     "cities": [
       "Rotkreuz"
     ],
-    "address": "Suurstoffi 16, 6343 Risch-Rotkreuz",
+    "address": "Suurstoffi 16, 6343 Rotkreuz",
     "fee": "манікюр від CHF 55, педикюр від CHF 85, нарощування вій від CHF 115, масаж 60 хвилин — CHF 130. Студентам знижка 10 % на всі послуги. Ціни із сайту салону, з ПДВ (MWST)",
     "join": "Записатися можна телефоном або у WhatsApp. На манікюр, педикюр і догляд за обличчям — ще й онлайн, за посиланням на [сайті салону](https://www.rubinbeauty.ch). Якщо плани змінилися, скасуйте або перенесіть запис не пізніше ніж за 12 годин.",
     "head": {
@@ -624,7 +620,6 @@ window.ORGANIZATIONS = [
     },
     "contacts": {
       "site": "https://www.rubinbeauty.ch",
-      "email": "florearubin@mail.ru",
       "phone": "+41 79 626 89 18",
       "whatsapp": "+41 79 626 89 18",
       "instagram": "rubinbeauty",
@@ -639,7 +634,6 @@ window.ORGANIZATIONS = [
     "status": "на підтвердженні",
     "keyHash": "d1b93742abd187ead83fffeff48fabe9145aaf9838103e64039c9174a3ecbf77",
     "name": "Autocustom & Services GmbH",
-    "name_ru": "Україномовний автосервіс · Biberist (SO)",
     "form": "GmbH",
     "kind": "firm",
     "dir": "auto",
@@ -690,7 +684,7 @@ window.ORGANIZATIONS = [
       "Логотип або фото сервісу, години роботи, ціни (за бажанням) — попросити в другому повідомленні"
     ],
     "invite": {
-      "hi": "Вітаю, Євгене! Мене звати Ірина Вознесенська. Побачила у Facebook допис про ваш автосервіс у Біберисті й вирішила написати 🙂",
+      "hi": "Добрий день, Євгене! Мене звати Ірина Вознесенська. Побачила у Facebook допис про ваш автосервіс у Біберісті й вирішила написати 🙂",
       "by": "вашого автосервісу — за цим дописом",
       "free": "До кінця 2027 року, поки довідник запускається, розміщення для вас безкоштовне: картка автосервісу в розділі «Організації», візитка й PDF, ваші акції (наприклад, до сезонної заміни шин). Пошук працівника чи партнера — безкоштовно завжди. Потім — на тих самих умовах, що й для фахівців: ціни повідомимо заздалегідь, не пізніше 30 вересня 2027 року, і нічого не продовжується само."
     }
@@ -700,7 +694,7 @@ window.ORGANIZATIONS = [
     "status": "на підтвердженні",
     "keyHash": "96e893710007df1426b473ef85cc53db9f0f87efa137f02562a7ce6290f1125e",
     "name": "Beauty Paradise",
-    "name_ru": "салон краси · Цюрих",
+    "regName": "Viktoriia Pyrozhenko Beauty Paradise",
     "form": "Einzelunternehmen",
     "kind": "firm",
     "dir": "beauty",
@@ -839,7 +833,6 @@ window.ORGANIZATIONS = [
     "status": "на підтвердженні",
     "keyHash": "42273fe7019bf99136854298cf7c5cdc194a1796fdc09bee9d3809b22c2fdb94",
     "name": "Unity Club Switzerland",
-    "name_ru": "«Where Unity Builds Possibility» · Цюрих",
     "form": "",
     "kind": "nonprofit",
     "dir": "community",
@@ -886,8 +879,7 @@ window.ORGANIZATIONS = [
     "id": "ugcc-zurich",
     "status": "на підтвердженні",
     "keyHash": "2c680732bc95c4dd38447e0ee83f36af69096eb505701d542378e008f0c90c0c",
-    "name": "Ukrainische Griechisch-Katholische Mission Zürich",
-    "name_ru": "Українська греко-католицька місія · Цюрих",
+    "name": "Українська греко-католицька місія в Цюриху",
     "form": "",
     "kind": "nonprofit",
     "free": true,
@@ -956,7 +948,6 @@ window.ORGANIZATIONS = [
     "status": "на підтвердженні",
     "keyHash": "09de5945781020e152796fdec5fcf631c0debd478625a7f2e7305f29d38834cf",
     "name": "Спортивна школа UA-DO",
-    "name_ru": "Schule UA-DO · Клотен (ZH) і Зіссельн (AG)",
     "form": "",
     "kind": "nonprofit",
     "dir": "sport",

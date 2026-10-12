@@ -1712,7 +1712,7 @@ a.yours:hover{background:#EBD3A3}
       });
       arr('ORGANIZATIONS',SAMP.O).forEach(function(o){
         var off=o.status==='активен'?(o.confirm?'':'wait'):(/^на п[оі]дтвер/.test(o.status||'')?'wait':'pause');
-        r.push({t:'org',id:o.id,name:o.name,sub:[o.name_ru,o.form].filter(Boolean).join(' · '),uid:/CHE/i.test(o.zefix||'')?o.zefix:'',num:o.num||'',off:off,until:'',sample:!!o.sample,main:kIdx(o.canton),tier:'',tu:'',cant:0,price:false,free:!!o.free});
+        r.push({t:'org',id:o.id,name:o.name,sub:[o.regName,o.form].filter(Boolean).join(' · '),uid:/CHE/i.test(o.zefix||'')?o.zefix:'',num:o.num||'',off:off,until:'',sample:!!o.sample,main:kIdx(o.canton),tier:'',tu:'',cant:0,price:false,free:!!o.free});
       });
       return r;
     }

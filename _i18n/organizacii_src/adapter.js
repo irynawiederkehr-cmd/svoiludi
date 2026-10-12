@@ -33,7 +33,7 @@
   const items = ORGS.map(o => ({
     org: o, id: o.id, sample: !!o.sample, status: o.status === 'активен' && !(o.confirm && o.confirm.date) && !o.sample ? 'на подтверждении' : o.status,
     keyHash: o.keyHash || '', num: o.num || '', uid: /^CHE/.test(o.zefix || '') ? o.zefix : '', checked: o.checked || '', added: o.added || '',
-    name: o.name, role: roleOf(o), firm: o.name_ru || '', photo: o.logo || '', cat: dirOf(o.dir), cat2: o.dir2 ? dirOf(o.dir2) : '', specs: (o.cats || []).slice(0, 3), tags: tagsOf(o),
+    name: o.name, role: roleOf(o), firm: '' /* строки под ролью у организаций нет (Ирина 12.10.2026, 16:47: «убери»); название из реестра, если отличается, — regName, внизу у UID */, regName: o.regName || '', photo: o.logo || '', cat: dirOf(o.dir), cat2: o.dir2 ? dirOf(o.dir2) : '', specs: (o.cats || []).slice(0, 3), tags: tagsOf(o),
     places: placesOf(o), online: !!o.online, onlineCH: o.onlineCH || '', onlineTier: o.onlineTier, tiers: o.tiers || [], paidUntil: o.paidUntil || '',
     langs: o.langs || [], about: o.about || '', services: o.offers || [], format: o.join || '', contacts: Object.assign({}, o.contacts || {}),
     prices: o.prices || [], pricesOk: !!o.pricesOk, pricesDate: o.pricesDate || '',

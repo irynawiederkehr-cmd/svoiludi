@@ -175,7 +175,7 @@
     if (kinds.indexOf('org') >= 0) (window.ORGANIZATIONS || []).forEach(function(o){
       var c = o.contacts || {}, uid = /CHE/i.test(o.zefix || '') ? o.zefix : '';
       var off = o.status === 'активен' ? (o.confirm ? '' : 'wait') : (o.status === 'на подтверждении' ? 'wait' : 'pause');
-      r.push({ t: 'org', id: o.id, name: o.name, sub: [o.name_ru, o.form].filter(Boolean).join(' · '), uid: uid, num: o.num || '',
+      r.push({ t: 'org', id: o.id, name: o.name, sub: [o.regName, o.form].filter(Boolean).join(' · '), uid: uid, num: o.num || '',
         places: o.address ? [o.address] : [], phone: c.phone || '', email: c.email || '', site: c.site || '', langs: o.langs || [], photo: '',
         sample: !!o.sample, paid: !!uid || REG.indexOf(o.form) >= 0, free: !!o.free, off: off, until: '', url: 'https://svoiludi.ch/organizacii/#' + o.id,
         dir: o.dir || '' });
