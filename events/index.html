@@ -685,7 +685,8 @@ const CANTONS = {
   'Schwyz': ['SZ', 'Швиц'], 'Solothurn': ['SO', 'Золотурн'], 'St. Gallen': ['SG', 'Санкт-Галлен'], 'Thurgau': ['TG', 'Тургау'], 'Ticino': ['TI', 'Тичино'],
   'Uri': ['UR', 'Ури'], 'Valais': ['VS', 'Вале'], 'Vaud': ['VD', 'Во'], 'Zug': ['ZG', 'Цуг'], 'Zürich': ['ZH', 'Цюрих']
 };
-const LANG_FIRST = ['русский', 'украинский', 'немецкий', 'французский', 'итальянский', 'английский'];
+const CANTON_LANGS = ['немецкий', 'французский', 'итальянский', 'ретороманский'];   // языки кантонов — всегда в подборе (Ирина 12.10.2026)
+const LANG_FIRST = ['русский', 'украинский', 'немецкий', 'французский', 'итальянский', 'ретороманский', 'английский'];
 const MON = ['январь', 'февраль', 'март', 'апрель', 'май', 'июнь', 'июль', 'август', 'сентябрь', 'октябрь', 'ноябрь', 'декабрь'];
 const MON_P = ['январе', 'феврале', 'марте', 'апреле', 'мае', 'июне', 'июле', 'августе', 'сентябре', 'октябре', 'ноябре', 'декабре'];
 const MON_G = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'];
@@ -895,7 +896,7 @@ function fillSelects(){
   const cs = document.getElementById('canton'), ls = document.getElementById('lang');
   cs.innerHTML = opt('', 'Выбери кантон') + Object.keys(CANTONS).sort((a, b) => ktRu(a).localeCompare(ktRu(b), 'ru')).map(c => { const n = all.filter(e => e.canton === c && !isRemote(e)).length; return opt(c, `${ktRu(c)} (${kt(c)})${n ? ' · ' + n : ''}`); }).join('');
   cs.value = state.canton; fillCities();
-  const langs = [...new Set(all.flatMap(e => e.langs || []))].sort((a, b) => (LANG_FIRST.indexOf(a) + 1 || 99) - (LANG_FIRST.indexOf(b) + 1 || 99));
+  const langs = [...new Set(all.flatMap(e => e.langs || []).concat(CANTON_LANGS))].sort((a, b) => (LANG_FIRST.indexOf(a) + 1 || 99) - (LANG_FIRST.indexOf(b) + 1 || 99));
   ls.innerHTML = opt('', 'Любой язык') + langs.map(l => opt(l, l[0].toUpperCase() + l.slice(1))).join('');
   ls.value = state.lang;
 }

@@ -26,7 +26,8 @@ const CANTONS = {
   'Schwyz': ['SZ', 'Швиц'], 'Solothurn': ['SO', 'Золотурн'], 'St. Gallen': ['SG', 'Санкт-Галлен'], 'Thurgau': ['TG', 'Тургау'], 'Ticino': ['TI', 'Тичино'],
   'Uri': ['UR', 'Ури'], 'Valais': ['VS', 'Вале'], 'Vaud': ['VD', 'Во'], 'Zug': ['ZG', 'Цуг'], 'Zürich': ['ZH', 'Цюрих']
 };
-const LANG_FIRST = ['русский', 'украинский', 'немецкий', 'французский', 'итальянский', 'английский'];
+const CANTON_LANGS = ['немецкий', 'французский', 'итальянский', 'ретороманский'];   // языки кантонов — всегда в подборе (Ирина 12.10.2026)
+const LANG_FIRST = ['русский', 'украинский', 'немецкий', 'французский', 'итальянский', 'ретороманский', 'английский'];
 const MON_G = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'];
 window.HELP = {
   zfind: '<p><b>UID</b> — номер фирмы или самозанятого в реестре Швейцарии, вида CHE-123.456.789. Мы берём его, когда размещаем карточку, он есть в твоей карточке на сайте.</p><p><b>Номер карточки</b> — SG-0001 у специалистов, OR-0001 у организаций. Он есть в твоей карточке на сайте, внизу.</p><p>Данные из карточки мы уже проверили, поэтому вписывать их заново не нужно. Ссылку на подтверждение пришлём на e-mail из карточки: так никто не сможет разместить запись от твоего имени. Этот e-mail один для всех подтверждений, в заявке его не поменять. Если для записи нужен другой e-mail, впиши его в контактах: на сайте будет он.</p><p>Если карточка на паузе, ждёт подтверждения или закончился срок размещения, по номеру её не найти: объявления размещаются только от активных карточек.</p><p>Номер никуда не отправляется: поиск идёт только по опубликованным карточкам, прямо на этой странице.</p>',
@@ -97,7 +98,7 @@ function fillSelects(){
   c.innerHTML = opt('', 'Все направления', b2.length) + Object.entries(CATS).map(([id, t]) => opt(id, t, b2.filter(v => v.cat === id).length)).join(''); c.value = state.cat;
   const cs = document.getElementById('canton');
   cs.innerHTML = opt('', 'Все кантоны') + Object.keys(CANTONS).sort((a, b) => ktRu(a).localeCompare(ktRu(b), 'ru')).map(x => { const n = all.filter(v => v.canton === x).length; return opt(x, `${ktRu(x)} (${kt(x)})${n ? ' · ' + n : ''}`); }).join(''); cs.value = state.canton;
-  const ls = document.getElementById('lang'), langs = [...new Set(all.flatMap(v => v.langs || []).concat(LANG_FIRST.slice(0, 3)))].sort((a, b) => (LANG_FIRST.indexOf(a) + 1 || 99) - (LANG_FIRST.indexOf(b) + 1 || 99));
+  const ls = document.getElementById('lang'), langs = [...new Set(all.flatMap(v => v.langs || []).concat(LANG_FIRST.slice(0, 2), CANTON_LANGS))].sort((a, b) => (LANG_FIRST.indexOf(a) + 1 || 99) - (LANG_FIRST.indexOf(b) + 1 || 99));
   ls.innerHTML = opt('', 'Любой язык') + langs.map(l => opt(l, l[0].toUpperCase() + l.slice(1))).join(''); ls.value = state.lang;
 }
 

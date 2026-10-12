@@ -37,7 +37,8 @@ const CANTONS = {
   'Schwyz': ['SZ', 'Швиц'], 'Solothurn': ['SO', 'Золотурн'], 'St. Gallen': ['SG', 'Санкт-Галлен'], 'Thurgau': ['TG', 'Тургау'], 'Ticino': ['TI', 'Тичино'],
   'Uri': ['UR', 'Ури'], 'Valais': ['VS', 'Вале'], 'Vaud': ['VD', 'Во'], 'Zug': ['ZG', 'Цуг'], 'Zürich': ['ZH', 'Цюрих']
 };
-const LANG_FIRST = ['украинский', 'русский', 'немецкий', 'французский', 'итальянский', 'английский'];
+const CANTON_LANGS = ['немецкий', 'французский', 'итальянский', 'ретороманский'];   // языки кантонов — всегда в подборе (Ирина 12.10.2026)
+const LANG_FIRST = ['украинский', 'русский', 'немецкий', 'французский', 'итальянский', 'ретороманский', 'английский'];
 const MON_G = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'];
 window.HELP = {
   feek: '<p><b>Ничего</b> или <b>только добровольные пожертвования</b> — организация размещается у нас бесплатно всегда. Её события и курсы тоже только бесплатные или с пожертвованием.</p><p><b>Членский взнос, плата за занятия, курс, школу, лагерь, билеты или цены</b> — размещение на тех же условиях, что у специалистов: до конца 2027 года бесплатно, потом платно.</p><p>Сумму пишите конечную, в швейцарских франках: «CHF» уже стоит, впишите только число и выберите, за что она.</p>',
@@ -139,7 +140,7 @@ function fillSelects(){
   d.innerHTML = opt('', 'Все направления', b1.length) + Object.entries(DIRS).map(([id, x]) => opt(id, x.t, b1.filter(o => o.dir === id).length)).join(''); d.value = state.dir;
   const cs = document.getElementById('canton');
   cs.innerHTML = opt('', 'Все кантоны') + Object.keys(CANTONS).sort((a, b) => ktRu(a).localeCompare(ktRu(b), 'ru')).map(x => { const n = all.filter(o => o.canton === x).length; return opt(x, `${ktRu(x)} (${kt(x)})${n ? ' · ' + n : ''}`); }).join(''); cs.value = state.canton;
-  const ls = document.getElementById('lang'), langs = [...new Set(all.flatMap(o => o.langs || []).concat(LANG_FIRST.slice(0, 3)))].sort((a, b) => (LANG_FIRST.indexOf(a) + 1 || 99) - (LANG_FIRST.indexOf(b) + 1 || 99));
+  const ls = document.getElementById('lang'), langs = [...new Set(all.flatMap(o => o.langs || []).concat(LANG_FIRST.slice(0, 2), CANTON_LANGS))].sort((a, b) => (LANG_FIRST.indexOf(a) + 1 || 99) - (LANG_FIRST.indexOf(b) + 1 || 99));
   ls.innerHTML = opt('', 'Любой язык') + langs.map(l => opt(l, l[0].toUpperCase() + l.slice(1))).join(''); ls.value = state.lang;
   const w = document.getElementById('who');
   w.innerHTML = opt('', 'Для всех') + Object.entries(WHO).filter(([id]) => id !== 'all').map(([id, t]) => opt(id, t)).join(''); w.value = state.who;

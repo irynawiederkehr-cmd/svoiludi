@@ -915,7 +915,8 @@ const CANTONS = {
   'Schwyz': ['SZ', 'Швиц'], 'Solothurn': ['SO', 'Золотурн'], 'St. Gallen': ['SG', 'Санкт-Галлен'], 'Thurgau': ['TG', 'Тургау'], 'Ticino': ['TI', 'Тичино'],
   'Uri': ['UR', 'Ури'], 'Valais': ['VS', 'Вале'], 'Vaud': ['VD', 'Во'], 'Zug': ['ZG', 'Цуг'], 'Zürich': ['ZH', 'Цюрих']
 };
-const LANG_FIRST = ['русский', 'украинский', 'немецкий', 'французский', 'итальянский', 'английский'];
+const CANTON_LANGS = ['немецкий', 'французский', 'итальянский', 'ретороманский'];   // языки кантонов — всегда в подборе (Ирина 12.10.2026)
+const LANG_FIRST = ['русский', 'украинский', 'немецкий', 'французский', 'итальянский', 'ретороманский', 'английский'];
 const MAIL = 'voznesenskaya.iryna@gmail.com';   // вся переписка по справочнику
 // пометки с фильтром (04.10.2026): только с подтверждением специалиста, страховки — по реестру
 const TAGS = { emr: 'Оплачивает доп. страховка (EMR/ASCA)', basic: 'Покрывает базовая страховка', free1: 'Первая встреча бесплатно', kids: 'Работает с детьми', seniors: 'Работает с пожилыми', couples: 'Работает с парами и семьями', firms: 'Работает с фирмами', evening: 'Вечером и в выходные', access: 'Доступно с коляской' };   // «для кого» — пометками, а не направлениями (11.10.2026)
@@ -1255,7 +1256,7 @@ function fillSelects(){
   }).join('');
   cs.value = state.canton;
   fillCities();
-  const langs = [...new Set(all.flatMap(s => s.langs))].sort((a, b) => (LANG_FIRST.indexOf(a) + 1 || 99) - (LANG_FIRST.indexOf(b) + 1 || 99) || a.localeCompare(b, 'ru'));
+  const langs = [...new Set(all.flatMap(s => s.langs).concat(CANTON_LANGS))].sort((a, b) => (LANG_FIRST.indexOf(a) + 1 || 99) - (LANG_FIRST.indexOf(b) + 1 || 99) || a.localeCompare(b, 'ru'));
   ls.innerHTML = opt('', 'Любой язык') + langs.map(l => opt(l, l[0].toUpperCase() + l.slice(1))).join('');
   ls.value = langs.includes(state.lang) ? state.lang : (state.lang = '');
 }
