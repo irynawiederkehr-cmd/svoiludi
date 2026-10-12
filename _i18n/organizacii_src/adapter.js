@@ -48,9 +48,11 @@
     head: s => { const b = badgeOf(s.org); return b ? `<div class="free-line">${esc(b)}<button type="button" class="qh" data-help="badge" aria-label="Подсказка: размещение бесплатно" aria-expanded="false">?</button></div>` : ''; },
     /* в окне карточки, правая колонка: форма, взнос или цены, руководитель, «Важно» */
     side: s => { const o = s.org, h = o.head || {};
-      return `<div class="d-block"><h4>Форма<button type="button" class="qh" data-help="form" aria-label="Подсказка: ферайн и фонд" aria-expanded="false">?</button></h4><span>${esc(FORMS[o.form] || o.form || '—')}</span></div>`
+      const nd = typeof needOf === 'function' ? needOf(s) : {}, UTQ = '<span class="need">уточняем</span>';   // «уточняем» у карточки, которая ещё не на сайте (12.10.2026)
+      return `<div class="d-block"><h4>Форма<button type="button" class="qh" data-help="form" aria-label="Подсказка: ферайн и фонд" aria-expanded="false">?</button></h4><span>${nd.form ? UTQ : esc(FORMS[o.form] || o.form || '—')}</span></div>`
         + (o.fee ? `<div class="d-block"><h4>${o.kind === 'firm' ? 'Цены' : 'Взнос'}</h4><span>${esc(o.fee)}</span></div>` : '')
-        + (h.name ? `<div class="d-block"><h4>Руководитель<button type="button" class="qh" data-help="head" aria-label="Подсказка: руководитель" aria-expanded="false">?</button></h4><span>${esc(h.name)}${h.role ? ' · ' + esc(h.role) : ''}</span>${h.spec ? `<p><a href="../#${esc(h.spec)}">Карточка в справочнике специалистов →</a></p>` : ''}</div>` : '')
+        + (nd.head ? `<div class="d-block"><h4>Руководитель<button type="button" class="qh" data-help="head" aria-label="Подсказка: руководитель" aria-expanded="false">?</button></h4>${UTQ}</div>` : '')
+        + (h.name && !nd.head ? `<div class="d-block"><h4>Руководитель<button type="button" class="qh" data-help="head" aria-label="Подсказка: руководитель" aria-expanded="false">?</button></h4><span>${esc(h.name)}${h.role ? ' · ' + esc(h.role) : ''}</span>${h.spec ? `<p><a href="../#${esc(h.spec)}">Карточка в справочнике специалистов →</a></p>` : ''}</div>` : '')
         + `<div class="disc-box"><b>Важно</b><p>${esc(o.kind === 'firm' ? DISC_FIRM : DISC)}</p></div>`; },
     /* предпросмотр по ссылке (#preview=…): расписание и курсы организации, которые ждут подтверждения вместе с карточкой */
     main: s => { if (!/^#preview=/.test(location.hash) || location.hash.indexOf(s.id) < 0) return '';
@@ -64,6 +66,6 @@
       return `<div class="d-block"><h4>Расписание — появится после подтверждения</h4>${L.map(e => `<p><b>${esc(e.title)}</b><br><small>${esc(days(e))}${e.time ? ' · ' + esc(e.time) + (e.timeEnd ? '–' + esc(e.timeEnd) : '') : ''}</small></p>`).join('')}<p class="d-note">Это видите только вы. После подтверждения расписание появится ${(() => { const ev = L.some(e => (e.sections || []).includes('events')), ku = L.some(e => (e.sections || []).includes('kursy')); return ev && ku ? 'во вкладках «События» и «Курсы»' : ev ? 'во вкладке «События»' : 'во вкладке «Курсы»'; })()} и в карточке организации.</p></div>`; },
     /* на карточке в списке: руководитель фирмы и пометка «… · размещение бесплатно» с зелёным сердечком (знак «некоммерческое», 12.10.2026) */
     line: s => { const o = s.org, h = o.head || {}, b = badgeOf(o);
-      return (o.kind === 'firm' && h.name ? `<div class="firm">руководитель: ${esc(h.name)}</div>` : '') + (b ? `<div class="free-line">${esc(b)}</div>` : ''); }
+      return (o.kind === 'firm' && h.name && !/уточн/i.test(h.name) ? `<div class="firm">руководитель: ${esc(h.name)}</div>` : '') + (b ? `<div class="free-line">${esc(b)}</div>` : ''); }
   };
 })();
