@@ -16,7 +16,7 @@
   const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
   const keys = () => { try { return JSON.parse(localStorage.getItem(KEYS) || '{}') || {}; } catch (e) { return {}; } };
   const keep = (id, k) => { try { const o = keys(); if (k) o[id] = k; else delete o[id]; localStorage.setItem(KEYS, JSON.stringify(o)); } catch (e) {} };
-  const isDraft = r => !!r && (r.status === 'на подтверждении' || r.status === 'черновик');
+  const isDraft = r => !!r && (r.status === 'на подтверждении' || r.status === 'на підтвердженні' || r.status === 'черновик'); // на /uk/ статусы переведены
   const showInList = () => { try { return localStorage.getItem(PREF) !== '0'; } catch (e) { return true; } };
   const MON = ['янв', 'фев', 'мар', 'апр', 'мая', 'июн', 'июл', 'авг', 'сен', 'окт', 'ноя', 'дек'];
   const CSS = `.drafts{border:1.5px dashed var(--mustard,#B98324);background:color-mix(in srgb,var(--mustard-soft,#F3E3C2) 45%,var(--paper,#FFFCF8));border-radius:16px;padding:14px 16px;margin:0 0 18px;font-size:.92rem;line-height:1.45}
