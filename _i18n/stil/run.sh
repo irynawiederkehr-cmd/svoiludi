@@ -10,5 +10,5 @@ TESTS=$(cd "$1" && pwd)
 OUT=$2; mkdir -p "$OUT"; OUT=$(cd "$OUT" && pwd)
 python3 -I "$D/svoi/build_page.py" "$TESTS" "$OUT/01 Стиль «Свои люди» — открыть.html"
 rm -rf "$D/vz/shots"
-NODE_PATH=$(npm root -g) node "$D/vz/shots.js" "$TESTS" "$D/vz/shots" | grep -v '^ok' || true
-NODE_PATH=$(npm root -g) node "$D/vz/build.js" "$TESTS" "$D/vz/shots" "$OUT/01 Стиль voznesenskaya.ch — открыть.html"
+NODE_PATH=${NODE_PATH:-$(npm root -g)} node "$D/vz/shots.js" "$TESTS" "$D/vz/shots" | grep -v '^ok' || true
+NODE_PATH=${NODE_PATH:-$(npm root -g)} node "$D/vz/build.js" "$TESTS" "$D/vz/shots" "$OUT/01 Стиль voznesenskaya.ch — открыть.html"

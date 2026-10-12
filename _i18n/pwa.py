@@ -18,11 +18,33 @@ NK = ('<style id="sl-nk-css">/* «Некоммерческое» — зелён�
       ':is(.sl-nk,.free-line,.vac-note>b:first-child)::before{content:"";display:inline-block;flex:none;width:.95em;height:.95em;margin:0 .32em -.13em 0;'
       'background:var(--brown,#4F5E3E);-webkit-mask:url("' + NK_HEART + '") center/contain no-repeat;mask:url("' + NK_HEART + '") center/contain no-repeat}'
       'i.sl-nk{font-style:normal}i.sl-nk::before{margin-right:.28em}.free-badge.sl-nk::before{margin:0;width:1.05em;height:1.05em}</style>')
-BLOCK = (M + '<link rel="manifest" href="/fav/site.webmanifest">'
+# «Росток» — единый маркер списков на всех страницах обоих сайтов (решение Ирины 12.10.2026, 22:29: вариант 3 «Росток»; «на будущее запоминай…
+# ставишь мне эти черные точки как в вордовском файле»). Стебелёк с двумя листиками, цвет сайта (здесь шалфей, на voznesenskaya.ch коричневый).
+# Рисунок — маска, цвет — --sl-bul-c, поэтому в тёмной теме и в цветных списках (карточки инструментов, --c) он перекрашивается сам.
+# Новый список: ul без класса и без id (где угодно, кроме меню, кнопок и BUL_NOT) получает росток сам; ul с классом — допиши класс в BUL_UL;
+# список данных без маркера (строки, суммы) — класс no-bul или контейнер в BUL_NOT.
+# Не трогаем: нумерацию (ol), галочки ✓ в пакетах и «Как мы проверяем», красный треугольник предупреждений, меню и вкладки.
+BUL_SVG = ("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none' stroke='%23000' stroke-width='1.6' "
+           "stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M10 18V9'/%3E%3Cpath d='M10 12C6 12 3.5 9.5 3.5 6 7 6 10 8.2 10 12Z' "
+           "fill='%23000' fill-opacity='.3'/%3E%3Cpath d='M10 9.5C10 5.5 12.5 3 16.5 3 16.5 6.8 14 9.5 10 9.5Z' fill='%23000' fill-opacity='.3'/%3E%3C/svg%3E")
+BUL_UL = ('ul.ul,ul.marks,ul.facts,ul.k-rules,ul.effects,ul.regdoc,ul.big,ul.svplan,ul.sl-bul,ul.adm-todo,.tool ul,'
+          'ul:not([class]):not([id])')
+BUL_NOT = 'nav ul,header ul,footer ul,button ul,[role=navigation] ul,.pa-tabs ul,.cn-free ul,.mc ul,.no-bul'
+BUL = ('<style id="sl-bul-css">/* «Росток» — единый маркер списков (12.10.2026), собирается _i18n/pwa.py */'
+       ':root{--sl-bul-c:#66704F}@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--sl-bul-c:#A9B98F}}:root[data-theme="dark"]{--sl-bul-c:#A9B98F}'
+       ':where(:is(' + BUL_UL + '):not(' + BUL_NOT + ')){list-style:none!important;padding-left:0!important}'
+       ':where(:is(' + BUL_UL + '):not(' + BUL_NOT + '))>li{list-style:none!important;position:relative!important;padding-left:1.7em!important}'
+       ':where(:is(' + BUL_UL + '):not(' + BUL_NOT + '))>li::marker{content:none}'
+       ':where(:is(' + BUL_UL + '):not(' + BUL_NOT + '))>li::before{content:""!important;display:block!important;position:absolute!important;left:.05em!important;top:.2em!important;'
+       'width:1.15em!important;height:1.15em!important;margin:0!important;border:0!important;border-radius:0!important;transform:none!important;box-shadow:none!important;'
+       'background:var(--sl-bul-c)!important;-webkit-mask:url("' + BUL_SVG + '") center/contain no-repeat!important;mask:url("' + BUL_SVG + '") center/contain no-repeat!important}'
+       '.tool ul>li::before{background:var(--c,var(--sl-bul-c))!important}'
+       '@media print{:is(' + BUL_UL + '):not(' + BUL_NOT + ')>li::before{-webkit-print-color-adjust:exact;print-color-adjust:exact}}</style>')
+BLOCK = (M +'<link rel="manifest" href="/fav/site.webmanifest">'
          '<meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes">'
          '<meta name="apple-mobile-web-app-title" content="Свои люди"><meta name="apple-mobile-web-app-status-bar-style" content="default">'
          '{extra}<style id="pa-tiles">/* верхнее меню на телефоне и планшете: прямоугольные плитки с закруглением в два ряда, иконки ставит pwa-app.js (08.10.2026) */' + TILES + SHAPE + '</style>'
-         + NK + '<script src="/assets/pwa-app.js" defer></script>' + M)
+         + NK + BUL + '<script src="/assets/pwa-app.js" defer></script>' + M)
 
 def apply(html):
     html = re.sub(re.escape(M) + '.*?' + re.escape(M), '', html, flags=re.S)

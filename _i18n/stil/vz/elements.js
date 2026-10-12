@@ -5,6 +5,7 @@ const showStart = async (p) => { await p.evaluate(() => { const t = document.get
 const click = (sel) => async (p) => { await p.locator(sel).first().scrollIntoViewIfNeeded(); await p.locator(sel).first().click(); await p.waitForTimeout(500); };
 module.exports = [
   // Шапка и навигация
+  { id: 'bullets', group: 'Главная', title: 'Маркер списков «Росток»', page: '/usloviya/', sel: 'ul.leaf', w: ['phone'], themes: D, pad: 10 },
   { id: 'first', group: 'Шапка и навигация', title: 'Первый экран: шапка, меню плитками, кнопка установки', page: '/', sel: 'body', viewport: true, w: ['phone', 'desk'], themes: D },
   { id: 'header', group: 'Шапка и навигация', title: 'Шапка главного сайта', page: '/', sel: 'header.top', w: ['phone', 'desk'], themes: L },
   { id: 'langbar', group: 'Шапка и навигация', title: 'Переключатель языков RU · UA · DE · EN', page: '/', sel: '#langbar', keep: true, w: ['phone'], themes: D, pad: 8 },
