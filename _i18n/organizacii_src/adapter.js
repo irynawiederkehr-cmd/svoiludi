@@ -43,20 +43,25 @@
     ...(o.kind === 'firm' ? {} : { fees: (o.fees || []).slice(), feeFree: o.free === true, feeDonation: o.free === true && /пожертв/i.test(o.fee || ''),
       feeText: o.free === true || (o.fees || []).length ? '' : (o.fee || ''), feeNeed: o.free !== true && !(o.fees || []).length && !o.fee })
   }));
+  /* карточка руководителя уже на сайте (активна и подтверждена) — ссылка на неё без ключа предпросмотра */
+  const specLive = id => { const x = (window.SPECIALISTS || []).find(r => r.id === id); return !!(x && x.status === 'активен'); };
   const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
   const DISC = 'Карточку заполнила сама организация, она отвечает за её содержание. «Свои люди» не участвуют в работе организации и не отвечают за её помощь, курсы и события. Обо всём договаривайся напрямую с организацией.';
   const DISC_FIRM = 'Карточку заполнила сама фирма, она отвечает за её содержание. «Свои люди» не участвуют в работе фирмы и не отвечают за её товары, услуги и цены. Обо всём договаривайся напрямую с фирмой.';
   window.SVL_ORG = {
     items, cats, groups: window.SVL_ORG_GROUPS || {}, tags,
     /* в окне карточки: пометка «размещение бесплатно» под названием */
+    roleHelp: s => `<button type="button" class="qh" data-help="form" aria-label="Подсказка: что значит форма организации" aria-expanded="false">?</button>`,
     head: s => { const b = badgeOf(s.org); return b ? `<div class="free-line">${esc(b)}<button type="button" class="qh" data-help="badge" aria-label="Подсказка: размещение бесплатно" aria-expanded="false">?</button></div>` : ''; },
     /* в окне карточки, правая колонка: форма, взнос или цены, руководитель, «Важно» */
     side: s => { const o = s.org, h = o.head || {};
       const nd = typeof needOf === 'function' ? needOf(s) : {}, UTQ = '<span class="need">уточняем</span>';   // «уточняем» у карточки, которая ещё не на сайте (12.10.2026)
-      return `<div class="d-block"><h4>Форма<button type="button" class="qh" data-help="form" aria-label="Подсказка: ферайн и фонд" aria-expanded="false">?</button></h4><span>${nd.form ? UTQ : esc(FORMS[o.form] || o.form || '—')}</span></div>`
+      /* форма (ООО, ИП, ферайн…) уже стоит под названием («Фирма · ООО (GmbH)», кружок «?» там же) — отдельный блок «Форма» только для «уточняем»
+         (Ирина 12.10.2026, 20:04: «чтобы лишнего и повторений не было») */
+      return (nd.form ? `<div class="d-block"><h4>Форма<button type="button" class="qh" data-help="form" aria-label="Подсказка: ферайн и фонд" aria-expanded="false">?</button></h4><span>${UTQ}</span></div>` : '')
         + (o.fee && o.kind === 'firm' && !(typeof priceShown === 'function' && priceShown(s)) ? `<div class="d-block"><h4>Цены</h4><span>${esc(o.fee)}</span></div>` : '')   // есть прайс-лист — коротко и весь список в блоке «Цены» после «Что можно получить» (движок, priceBlock, 12.10.2026); взносы некоммерческих — блок «Взносы» под описанием (feeBlock)
         + (nd.head ? `<div class="d-block"><h4>Руководитель<button type="button" class="qh" data-help="head" aria-label="Подсказка: руководитель" aria-expanded="false">?</button></h4>${UTQ}</div>` : '')
-        + (h.name && !nd.head ? `<div class="d-block"><h4>Руководитель<button type="button" class="qh" data-help="head" aria-label="Подсказка: руководитель" aria-expanded="false">?</button></h4><span>${esc(h.name)}${nd.headSurname ? ' <span class="need">фамилия — уточняем</span>' : ''}${h.role ? ' · ' + esc(h.role) : ''}</span>${h.spec ? `<p><a href="../#${/^#preview=/.test(location.hash) && typeof OKKEY === 'object' && OKKEY[s.id] ? 'preview=' + esc(h.spec) + '.' + esc(OKKEY[s.id]) : esc(h.spec)}">Карточка в справочнике специалистов →</a></p>` : ''}</div>` : '')
+        + (h.name && !nd.head ? `<div class="d-block"><h4>Руководитель<button type="button" class="qh" data-help="head" aria-label="Подсказка: руководитель" aria-expanded="false">?</button></h4><span>${esc(h.name)}${nd.headSurname ? ' <span class="need">фамилия — уточняем</span>' : ''}${h.role ? ' · ' + esc(h.role) : ''}</span>${h.spec ? `<p><a href="../#${specLive(h.spec) || !(/^#preview=/.test(location.hash) && typeof OKKEY === 'object' && OKKEY[s.id]) ? esc(h.spec) : 'preview=' + esc(h.spec) + '.' + esc(OKKEY[s.id])}">Карточка в справочнике специалистов →</a></p>` : ''}</div>` : '')
         + `<div class="disc-box"><b>Важно</b><p>${esc(o.kind === 'firm' ? DISC_FIRM : DISC)}</p></div>`; },
     /* предпросмотр по ссылке и режим Ирины: занятия, события и мастер-классы пробной карточки показывает сам движок (pvAfisha в index.html, 12.10.2026) */
     main: s => '',

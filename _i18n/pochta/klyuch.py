@@ -38,6 +38,7 @@ import sys, os, re, json, hashlib, secrets, string, subprocess
 
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 FILES = (('spec', 'specialists.js', 'SPECIALISTS'), ('afisha', 'afisha.js', 'AFISHA'), ('vacancy', 'vacancies.js', 'VACANCIES'))
+ORG = ('org', 'organizations.js', 'ORGANIZATIONS')   # карточки «Организаций»: новый ключ — тем же klyuch.py <id> (12.10.2026)
 ABC = string.ascii_lowercase + string.digits
 
 
@@ -106,6 +107,8 @@ def links(kind, r, k):
     i = r['id']
     if kind == 'spec':
         return {'preview': f'https://svoiludi.ch/#preview={i}.{k}', 'price': f'https://svoiludi.ch/#price={i}.{k}'}
+    if kind == 'org':
+        return {'preview': f'https://svoiludi.ch/organizacii/#preview={i}.{k}'}
     # off — «Снять с сайта» (решение Ирины 11.10.2026, 21:45): тот же ключ, ссылка идёт в письмо о публикации
     if kind == 'vacancy':
         return {'ok': f'https://svoiludi.ch/vakansii/#ok={i}.{k}', 'off': f'https://svoiludi.ch/vakansii/#off={i}.{k}'}
@@ -114,7 +117,7 @@ def links(kind, r, k):
 
 
 def find(rid):
-    for f in FILES:
+    for f in FILES + (ORG,):
         for r in load(f):
             if r.get('id') == rid: return f, r
     return None, None
@@ -125,7 +128,7 @@ def rekey(rid):
     if not f: print(f'Нет записи с id «{rid}» ни в одном из файлов данных.'); return None
     k = new_key(); set_hash(os.path.join(ROOT, 'data', f[1]), rid, sha(k))
     who = (r.get('name') or r.get('title') or rid) + (f" ({r['num']})" if r.get('num') else '')
-    to = ((r.get('contacts') or {}).get('email') or '') if f[0] == 'spec' else ''
+    to = ((r.get('contacts') or {}).get('email') or '') if f[0] in ('spec', 'org') else ''
     res = {'id': rid, 'kind': f[0], 'who': who, 'status': r.get('status'), 'sample': bool(r.get('sample')), 'links': links(f[0], r, k)}
     if to: res['to'] = to
     return res

@@ -628,7 +628,7 @@ a.bot:hover{color:#B98324}
 .pl-list span small{display:block;margin-top:1px;color:var(--muted);font-size:.8rem;font-weight:500}
 .pl-list b{font-size:1.02rem}
 @media (max-width:520px){.pl-list li.lp{flex-wrap:wrap;row-gap:2px}.pl-list li.lp span{flex-basis:100%}.pl-list li.lp b{margin-left:auto}}   /* длинная цена («120 / 150 / 180 CHF») на телефоне — строкой ниже, сумма не переносится */
-.pl-note{color:var(--muted);font-size:.8rem;line-height:1.4}
+.pl-note{display:block;margin-top:6px;color:var(--muted);font-size:.8rem;line-height:1.4}
 .pl-check{margin:0;padding:10px 12px;border-radius:12px;background:var(--mustard-soft,#F3E3C2);border-left:4px solid var(--mustard,#B98324);font-size:.9rem;line-height:1.45}
 .pl-check b{font-weight:700}
 .adm-sec{display:flex;flex-direction:column;gap:6px;padding-top:6px}
@@ -891,9 +891,9 @@ function ico(name, line = '#2E5A88', fill, size = 24){
 const AVATAR_SVG = '<svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="46" fill="#FFFCF8" stroke="#6E4F3C" stroke-width="3"/><g transform="rotate(22.5 50 50)"><path d="M50 50 C42 40 43 24 50 15 C57 24 58 40 50 50Z" fill="#E3E6D6" stroke="#66704F" stroke-width="2"/></g><g transform="rotate(67.5 50 50)"><path d="M50 50 C42 40 43 24 50 15 C57 24 58 40 50 50Z" fill="#E3E6D6" stroke="#66704F" stroke-width="2"/></g><g transform="rotate(112.5 50 50)"><path d="M50 50 C42 40 43 24 50 15 C57 24 58 40 50 50Z" fill="#E3E6D6" stroke="#66704F" stroke-width="2"/></g><g transform="rotate(157.5 50 50)"><path d="M50 50 C42 40 43 24 50 15 C57 24 58 40 50 50Z" fill="#E3E6D6" stroke="#66704F" stroke-width="2"/></g><g transform="rotate(202.5 50 50)"><path d="M50 50 C42 40 43 24 50 15 C57 24 58 40 50 50Z" fill="#E3E6D6" stroke="#66704F" stroke-width="2"/></g><g transform="rotate(247.5 50 50)"><path d="M50 50 C42 40 43 24 50 15 C57 24 58 40 50 50Z" fill="#E3E6D6" stroke="#66704F" stroke-width="2"/></g><g transform="rotate(292.5 50 50)"><path d="M50 50 C42 40 43 24 50 15 C57 24 58 40 50 50Z" fill="#E3E6D6" stroke="#66704F" stroke-width="2"/></g><g transform="rotate(337.5 50 50)"><path d="M50 50 C42 40 43 24 50 15 C57 24 58 40 50 50Z" fill="#E3E6D6" stroke="#66704F" stroke-width="2"/></g><g transform="rotate(0.0 50 50)"><path d="M50 50 C45 43 45 32 50 26 C55 32 55 43 50 50Z" fill="#EADFCF" stroke="#6E4F3C" stroke-width="2"/></g><g transform="rotate(45.0 50 50)"><path d="M50 50 C45 43 45 32 50 26 C55 32 55 43 50 50Z" fill="#EADFCF" stroke="#6E4F3C" stroke-width="2"/></g><g transform="rotate(90.0 50 50)"><path d="M50 50 C45 43 45 32 50 26 C55 32 55 43 50 50Z" fill="#EADFCF" stroke="#6E4F3C" stroke-width="2"/></g><g transform="rotate(135.0 50 50)"><path d="M50 50 C45 43 45 32 50 26 C55 32 55 43 50 50Z" fill="#EADFCF" stroke="#6E4F3C" stroke-width="2"/></g><g transform="rotate(180.0 50 50)"><path d="M50 50 C45 43 45 32 50 26 C55 32 55 43 50 50Z" fill="#EADFCF" stroke="#6E4F3C" stroke-width="2"/></g><g transform="rotate(225.0 50 50)"><path d="M50 50 C45 43 45 32 50 26 C55 32 55 43 50 50Z" fill="#EADFCF" stroke="#6E4F3C" stroke-width="2"/></g><g transform="rotate(270.0 50 50)"><path d="M50 50 C45 43 45 32 50 26 C55 32 55 43 50 50Z" fill="#EADFCF" stroke="#6E4F3C" stroke-width="2"/></g><g transform="rotate(315.0 50 50)"><path d="M50 50 C45 43 45 32 50 26 C55 32 55 43 50 50Z" fill="#EADFCF" stroke="#6E4F3C" stroke-width="2"/></g><circle cx="50" cy="50" r="7" fill="#B98324"/></svg>';
 
 </script>
-<script src="/data/specialists.js?v=7521ad0d"></script>
+<script src="/data/specialists.js?v=f09c479f"></script>
 <script src="/data/vacancies.js?v=3527d207"></script>
-<script src="/data/organizations.js?v=fbee0a32"></script>
+<script src="/data/organizations.js?v=b7f0b462"></script>
 <script>
 window.IMG_BASE = 'img/';
 /* карточки специалистов — в /data/specialists.js (одна копия на весь сайт) */
@@ -1066,7 +1066,8 @@ const plain = t => String(t ?? '').replace(MDL, '$1');
 const rich = t => esc(t).replace(MDL, (m, l, u) => `<a href="${u}" ${ext}>${l}</a>`);
 const richPdf = t => esc(t).replace(MDL, (m, l, u) => `<a data-href="${u}">${l}</a>`);
 /* ВЗНОСЫ ОРГАНИЗАЦИИ (правила Ирины 12.10.2026, 14:21 и 14:23): у ферайна, общества, школы — список взносов «CHF сумма · название · как часто»,
-   сколько угодно строк. На карточке — сразу под описанием, с кнопкой «Взносы PNG»; тот же список — в PDF карточки, визитке и письме «Подтверждаю».
+   сколько угодно строк. На карточке — сразу под описанием; скачать картинкой — кнопка «Взносы PNG» среди кнопок карточки (одна, без повтора в блоке,
+   12.10.2026, 20:04); тот же список — в PDF карточки, визитке и письме «Подтверждаю».
    Данные — s.fees [{ sum, name, per }] (adapter.js из data/organizations.js); s.feeFree — для людей всё бесплатно, s.feeDonation — можно пожертвование,
    s.feeNeed — взносы не знаем (пробная карточка: «Взносы — уточняем»). У специалистов этих полей нет — ничего не рисуется. */
 const chf = n => 'CHF ' + Number(n).toLocaleString('de-CH', { minimumFractionDigits: Number.isInteger(+n) ? 0 : 2, maximumFractionDigits: 2 });
@@ -1079,7 +1080,7 @@ function feeBlock(s){
   if (!('fees' in s)) return '';
   const r = feeRows(s), h = `<h4>Взносы<button type="button" class="qh" data-help="fees" aria-label="Подсказка: взносы" aria-expanded="false">?</button></h4>`;
   if (r.length) return `<div class="d-block fee-block">${h}<ul class="fee-list">${r.map(f => `<li><span>${rich(f.name)}</span><b>${chf(f.sum)}${f.per ? `<small>${esc(f.per)}</small>` : ''}</b></li>`).join('')}</ul>
-    <div class="fee-acts"><button class="btn ghost" type="button" data-png-fees="${esc(s.id)}" data-tip="Взносы картинкой PNG: сохранится в галерею телефона, удобно переслать">Взносы PNG</button><small>${FEE_NOTE}</small></div></div>`;
+    <small class="pl-note">${FEE_NOTE}</small></div>`;
   if (s.feeFree) return `<div class="d-block fee-block">${h}<p class="fee-free">${feeFreeTxt(s)}</p></div>`;
   if (needOf(s).fees) return `<div class="d-block fee-block">${h}${UT()}</div>`;
   return s.feeText ? `<div class="d-block fee-block">${h}<p>${rich(s.feeText)}</p></div>` : '';
@@ -1090,10 +1091,15 @@ const feePdf = s => { if (!('fees' in s)) return ''; const r = feeRows(s);
 /* ЦЕНЫ ПРЯМО В КАРТОЧКЕ (правило Ирины 12.10.2026, 17:20: «скрытой информации, которая только в прайс-листе на скачивание, быть не должна»).
    Всё, что есть в «Прайс-лист PNG», видно и в окне карточки: блок «Цены» сразу после «Услуг» — коротко (s.priceSum: у фирм — строка fee
    из карточки) и весь прайс-лист в свёрнутом списке «Весь прайс-лист · N услуг» (нажатие раскрывает, «Свернуть прайс-лист» — обратно).
-   Под списком — кнопка «Прайс-лист PNG» и строка, что та же кнопка есть внизу карточки, рядом с «Визитка PNG». В предпросмотре по ссылке
+   Скачать прайс-лист картинкой — одна кнопка «Прайс-лист PNG» среди кнопок карточки, рядом с «Визитка PNG» (Ирина 12.10.2026, 20:04: «прайс лист пнг
+   можно 2 раза скачать… чтобы лишнего и повторений не было» — вторую кнопку в блоке «Цены» убрали). В предпросмотре по ссылке
    из письма список сразу раскрыт и рядом просьба проверить цены: человек подтверждает карточку вместе с прайс-листом (pvPriceCheck).
    Тот же прайс-лист — в PDF карточки (pricePdf). */
 const PRICE_WHO = 'Цены указал сам специалист';
+/* пометки в окне карточки — без тех, что уже видны под названием (у организаций «Фирма» и «Благотворительная или некоммерческая» — в строке
+   «Фирма · ООО (GmbH)»; они остаются фильтрами подбора). Ирина 12.10.2026, 20:04: «чтобы лишнего и повторений не было» */
+const TAG_ROLE = new Set(window.SVL_ORG ? ['firm', 'npo'] : []);
+const tagsShown = s => (s.tags || []).filter(t => TAGS[t] && !TAG_ROLE.has(t));
 const nbspSum = h => h.replace(/(\d) (CHF)/g, '$1&nbsp;$2').replace(/(CHF) (\d)/g, '$1&nbsp;$2').replace(/(^|\s)(от|до|за) (\d)/g, '$1$2&nbsp;$3');   // суммы в строке цен не переносятся
 const PRICE_TIP = `${PRICE_WHO}: услуги, сколько они длятся и сколько стоят. Это ориентир, точную стоимость называют при записи. «Свои люди» цены не назначают и не проверяют, обо всём договаривайся напрямую.`;
 const priceNote = s => `${PRICE_WHO}${s.pricesDate ? ', по состоянию на ' + fmtDate(s.pricesDate) : ''}. Точную стоимость уточняй при записи.`;
@@ -1108,8 +1114,7 @@ function priceBlock(s){
     ${pvPriceCheck(s) ? `<p class="pl-check"><b>Проверьте, пожалуйста, цены.</b> Весь прайс-лист уже открыт ниже. Если какая-то цена изменилась или услуги больше нет, нажмите «Нужно исправить» внизу карточки и напишите, что поменять, — я всё поправлю.</p>` : ''}
     <button type="button" class="pl-tog" data-pl-tog="${r.length}" aria-expanded="${open}">${plTog(r.length, open)}</button>
     <div class="pl-body"${open ? '' : ' hidden'}><ul class="fee-list pl-list">${r.map(x => `<li${String(x.p || '').length > 12 ? ' class="lp"' : ''}><span>${esc(x.t)}${x.n ? `<small>${esc(x.n)}</small>` : ''}</span><b>${esc(x.p)}</b></li>`).join('')}</ul>
-      <small class="pl-note">${esc(priceNote(s))}</small></div>
-    <div class="fee-acts"><button class="btn ghost" type="button" data-png-price="${esc(s.id)}" data-tip="Прайс-лист картинкой PNG: сохранится в галерею телефона, удобно показать или переслать">Прайс-лист PNG</button><small>Весь прайс-лист можно сохранить картинкой на телефон. Эта же кнопка есть среди кнопок карточки, рядом с «Визитка PNG».</small></div></div>`;
+      <small class="pl-note">${esc(priceNote(s))}</small></div></div>`;
 }
 document.addEventListener('click', e => { const b = e.target.closest('[data-pl-tog]'); if (!b) return;
   const body = b.nextElementSibling, open = b.getAttribute('aria-expanded') !== 'true';
@@ -1671,18 +1676,18 @@ function admAct(attrs, title, desc, main){
 }
 function priceAdmin(s, to){
   const pr = (s.prices || []).length, n = (s.services || []).length, A = priceAsk(s), L = priceLetter(s);
-  const st = !pr ? 'нет' : s.pricesOk ? `подтверждён ${fmtDate(s.pricesOk)} · виден на сайте` : 'ждёт подтверждения · на сайте не виден';
+  const withCard = pr && !s.pricesOk && s.status !== 'активен' && !s.sample;   // карточка ещё не на сайте: цены подтверждаются вместе с ней одной галочкой (17:20)
+  const st = !pr ? 'нет' : s.pricesOk ? `подтверждён ${fmtDate(s.pricesOk)} · виден на сайте` : withCard ? 'подтверждается вместе с карточкой, одной галочкой «Подтверждаю»' : 'ждёт подтверждения · на сайте не виден' + (OKKEY[s.id] ? '' : ' · ссылка — в черновике письма');
   let acts = '';
-  if (!pr){
+  if (withCard){
+  } else if (!pr){
     acts = (to ? admAct(`href="${esc(mailto(to, A.su, A.body))}"`, 'Запросить прайс-лист — письмом',
         `Откроется готовое письмо на ${esc(to)} в твоей почтовой программе. В нём ${n ? 'все ' + n + ' услуг из карточки, у каждой «___ CHF»' : 'просьба прислать цены по одной услуге в строке'} — специалист вписывает цены и отвечает. Письмо нужно только отправить. Ответ перешли Claude: он внесёт цены и подготовит прайс-лист.`, true)
       + admAct(`href="${esc(gmail(to, A.su, A.body))}" target="_blank" rel="noopener"`, 'То же письмо — в Gmail',
         'Открывает это письмо в Gmail в новой вкладке, если почтовая программа не настроена. Проверь, что отправляешь с voznesenskaya.iryna@gmail.com. Если список услуг длинный и письмо открылось не целиком — используй копирование.') : '')
       + admAct(`data-copyask="${esc(s.id)}"`, 'Скопировать запрос',
         'Весь текст запроса со списком услуг копируется в буфер. Вставь его в Telegram, WhatsApp или в письмо вручную.');
-  } else if (!s.pricesOk && !OKKEY[s.id]){
-    acts = noKeyNote(s);
-  } else if (!s.pricesOk){
+  } else if (!s.pricesOk && OKKEY[s.id]){
     acts = (to ? admAct(`href="${esc(mailto(to, L.su, L.body))}"`, 'Отправить прайс-лист на подтверждение',
         `Откроется письмо на ${esc(to)} со ссылкой на предпросмотр прайс-листа. Специалист ставит галочку и нажимает «Прайс-лист верный, подтверждаю». Тебе придёт письмо «🌿 Свои люди: Прайс-лист подтверждён», после этого Claude включает прайс-лист на сайте.`, true)
       + admAct(`href="${esc(gmail(to, L.su, L.body))}" target="_blank" rel="noopener"`, 'То же письмо — в Gmail',
@@ -1750,7 +1755,7 @@ function openCard(id){
         ${whereBlock(s)}
         <div class="d-block"><h4>Формат</h4><p>${needOf(s).format ? UT() : rich(s.format)}</p></div>
         <div class="d-block"><h4>Языки</h4><div class="chips">${(s.langs || []).map(l => `<span>${esc(l)}</span>`).join('') || UT()}</div></div>
-        ${(s.tags || []).length ? `<div class="d-block"><h4>Особенности</h4><div class="d-tags">${s.tags.filter(t => TAGS[t]).map(t => `<span>${esc(TAGS[t])}</span>`).join('')}</div></div>` : ''}
+        ${tagsShown(s).length ? `<div class="d-block"><h4>Особенности</h4><div class="d-tags">${tagsShown(s).map(t => `<span>${esc(TAGS[t])}</span>`).join('')}</div></div>` : ''}
         ${(() => { const vs = vacsOf(s); if (!vs.length) return '';
           const grp = kind => { const g = vs.filter(v => v.kind === kind); return g.length ? `<div class="vac-grp"><h4>${VAC_KIND[kind]}</h4><ul class="vacs">${g.map(v => `<li><a href="vakansii/#${esc(v.id)}"><b>${esc(v.title)}</b><small>${esc([v.city, v.workload].filter(Boolean).join(' · '))}${v.sample ? ' · образец' : ''}</small></a></li>`).join('')}</ul></div>` : ''; };
           return `<div class="d-block vac-block">${grp('staff')}${grp('partner')}<p class="vac-note"><b>Бесплатно, для поддержки сообщества «Свои люди». Не коммерческая услуга.</b> Объявления размещает сам специалист и отвечает за их содержание. «Свои люди» не участвуют в найме и сотрудничестве, договаривайтесь напрямую с автором.</p></div>`; })()}
