@@ -478,44 +478,6 @@ window.AFISHA = [
     "sections": [
       "events"
     ],
-    "id": "anastasia-dietikon-modeli",
-    "keyHash": "2bb16bd289419250682c72171264d47c3fd63694cb1adf046fc6e15ece4c3a25",
-    "status": "на підтвердженні",
-    "title": "Моделям — знижка 50 % на всі послуги салону",
-    "type": "promo",
-    "promo": {
-      "kind": "percent",
-      "value": 50,
-      "what": "усі послуги салону для моделей",
-      "group": true,
-      "cond": [
-        "book"
-      ]
-    },
-    "date": "2026-10-12",
-    "dateEnd": "2027-01-09",
-    "canton": "Zürich",
-    "address": "Neumattstrasse 12, 8953 Dietikon (салон Coiffeur Branka)",
-    "online": false,
-    "langs": [
-      "російська",
-      "німецька"
-    ],
-    "commercial": true,
-    "organizers": [
-      "anastasia-dietikon"
-    ],
-    "signup": "tel",
-    "contacts": {
-      "phone": "+41 44 740 03 13"
-    },
-    "link": "",
-    "about": "Я навчаюся на перукарку й завжди шукаю моделей. Для моделей — знижка 50 % на всі послуги салону: стрижка з миттям і укладанням, укладання феном, тонування та фарбування, чоловіча стрижка. Працюю під наглядом досвідченого майстра салону. Запис — за телефоном салону."
-  },
-  {
-    "sections": [
-      "events"
-    ],
     "id": "maryna-geneva-gajd-stipendii",
     "keyHash": "03c5aaf1152dc86720fe6171beb91a296913565ce8466092bf50e664057dcd44",
     "status": "на підтвердженні",
