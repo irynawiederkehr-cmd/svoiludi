@@ -333,7 +333,45 @@ window.AFISHA = [
     date: '2026-10-17', time: '11:00', timeEnd: '14:00', repeat: { freq: 'weekly', until: '2027-01-30' },
     canton: 'Bern', address: 'Marktgasse, Käfiggässchen 63, 3011 Bern', online: false,
     langs: ['украинский', 'русский', 'английский'], level: 'для всех, можно с детьми', price: 'бесплатно', commercial: false,
-    organizers: [{ org: 'jewish-culture-bern', name: 'Jewish Culture Switzerland' }], link: 'https://jewishculture.ch/uk/events',
+    organizers: [{ org: 'jewish-culture-bern', name: 'Jewish Culture Switzerland' }], link: 'https://jewishculture.ch/uk/events/shabbat-shalom',
     about: 'Каждую субботу община встречает Шабат: молитва и хвала, чтение Писания, общение и семейный стол. На украинском и русском с переводом на английский. Вход свободный.'
+  },
+  /* Jewish Culture Switzerland (12.10.2026): события и занятия с их сайта jewishculture.ch для примера — ждут подтверждения общины вместе с карточкой (organizacii/#preview=…);
+     прошедшие даты Claude заменяет следующими с их сайта перед каждым письмом (правило Ирины 12.10.2026, «lidy-svoiludi.md») */
+  {
+    sections: ['events'], type: 'meet',
+    id: 'jewish-culture-teens-tribe', status: 'на подтверждении', title: 'Teens Tribe & Youvin — вечер для молодёжи',
+    date: '2026-10-23', time: '18:30', timeEnd: '21:30',
+    canton: 'Bern', address: 'Marktgasse, Käfiggässchen 63, 3011 Bern', online: false,
+    langs: ['немецкий'], level: 'молодёжь', price: '', commercial: false,
+    organizers: [{ org: 'jewish-culture-bern', name: 'Jewish Culture Switzerland' }], link: 'https://jewishculture.ch/uk/events/teens-tribe-youvin',
+    about: 'Общий вечер молодёжи общины и Vineyard Bern: знакомство, хвала, короткое слово, перекус и общение. На литературном немецком. Запись — формой на сайте общины.'
+  },
+  {
+    sections: ['events'], type: 'culture',
+    id: 'jewish-culture-erev-shabat', status: 'на подтверждении', title: 'Ерев Шабат — встречаем Шабат вместе',
+    date: '2026-10-30', time: '18:30', timeEnd: '20:30',
+    canton: 'Bern', address: 'Marktgasse, Käfiggässchen 63, 3011 Bern', online: false,
+    langs: ['немецкий', 'английский'], level: 'для всех', price: '', commercial: false,
+    organizers: [{ org: 'jewish-culture-bern', name: 'Jewish Culture Switzerland' }], link: 'https://jewishculture.ch/uk/events/erev-shabbat',
+    about: 'Вечер пятницы: оставить суету недели позади и встретить Шабат с радостью, хвалой и тёплым общением. На немецком и английском. Можно принести что-нибудь к праздничному столу.'
+  },
+  {
+    sections: ['kursy'], kind: 'regular', ktype: 'kids',
+    id: 'jewish-culture-kinder-club', status: 'на подтверждении', title: 'Kinder Club — вечер для детей 8–13 лет', type: 'kids',
+    date: '2026-10-15', time: '18:30', timeEnd: '20:00', repeat: { freq: 'weekly', until: '2026-12-03' },
+    canton: 'Bern', address: 'Marktgasse, Käfiggässchen 63, 3011 Bern', online: false,
+    langs: ['украинский'], level: 'дети 8–13 лет', price: '', commercial: false,
+    organizers: [{ org: 'jewish-culture-bern', name: 'Jewish Culture Switzerland' }], link: 'https://jewishculture.ch/uk/workshops',
+    about: 'Воркшоп для детей 8–13 лет по четвергам: творчество, новые друзья и вечер вместе. Осенний сезон — с 17 сентября по 3 декабря 2026 года. Ребёнка записывают формой на сайте общины.'
+  },
+  {
+    sections: ['kursy'], kind: 'regular', ktype: 'lang',
+    id: 'jewish-culture-deutsch-club', status: 'на подтверждении', title: 'Deutsch Sprechclub — разговорный клуб немецкого', type: 'lang',
+    date: '2026-10-15', time: '18:30', timeEnd: '21:00', repeat: { freq: 'weekly', until: '2026-12-03' },
+    canton: 'Bern', address: 'Marktgasse, Käfiggässchen 63, 3011 Bern', online: false,
+    langs: ['немецкий'], level: '', price: '', commercial: false,
+    organizers: [{ org: 'jewish-culture-bern', name: 'Jewish Culture Switzerland' }], link: 'https://jewishculture.ch/uk/workshops',
+    about: 'Говорим по-немецки по четвергам — в месте, где можно просто быть и получать удовольствие от процесса. Осенний сезон — с 17 сентября по 3 декабря 2026 года. Запись — формой на сайте общины.'
   }
 ];

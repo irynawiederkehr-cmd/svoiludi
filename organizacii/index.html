@@ -1130,7 +1130,7 @@ window.SVL_ORG_ICONS = {
         while (d <= end && out.length < 60){ const iso = d.toISOString().slice(0, 10); if (!ex.includes(iso)) out.push(iso); if (!r.freq) break; d = new Date(d.getTime() + 864e5 * 7 * (r.interval || 1)); }
         const by = {}; out.forEach(x => { const k = x.slice(0, 7); (by[k] = by[k] || []).push(+x.slice(8)); });
         return Object.entries(by).map(([k, v]) => v.join(', ') + ' ' + MON[+k.slice(5) - 1] + (k.slice(0, 4) !== out[0].slice(0, 4) ? ' ' + k.slice(0, 4) : '')).join(' · '); };
-      return `<div class="d-block"><h4>Расписание — появится после подтверждения</h4>${L.map(e => `<p><b>${esc(e.title)}</b><br><small>${esc(days(e))}${e.time ? ' · ' + esc(e.time) : ''}</small></p>`).join('')}<p class="d-note">Это видите только вы. После подтверждения расписание появится во вкладке «Курсы» и в карточке организации.</p></div>`; },
+      return `<div class="d-block"><h4>Расписание — появится после подтверждения</h4>${L.map(e => `<p><b>${esc(e.title)}</b><br><small>${esc(days(e))}${e.time ? ' · ' + esc(e.time) + (e.timeEnd ? '–' + esc(e.timeEnd) : '') : ''}</small></p>`).join('')}<p class="d-note">Это видите только вы. После подтверждения расписание появится ${(() => { const ev = L.some(e => (e.sections || []).includes('events')), ku = L.some(e => (e.sections || []).includes('kursy')); return ev && ku ? 'во вкладках «События» и «Курсы»' : ev ? 'во вкладке «События»' : 'во вкладке «Курсы»'; })()} и в карточке организации.</p></div>`; },
     /* на карточке в списке: руководитель фирмы и пометка «… · размещение бесплатно» с зелёным сердечком (знак «некоммерческое», 12.10.2026) */
     line: s => { const o = s.org, h = o.head || {}, b = badgeOf(o);
       return (o.kind === 'firm' && h.name ? `<div class="firm">руководитель: ${esc(h.name)}</div>` : '') + (b ? `<div class="free-line">${esc(b)}</div>` : ''); }
@@ -1142,7 +1142,7 @@ window.SVL_ORG_ICONS = {
 const SPECIALISTS = window.SVL_ORG.items;   // организации в виде карточек справочника (adapter.js)
 
 </script>
-<script src="/data/afisha.js?v=880374ba"></script>
+<script src="/data/afisha.js?v=82ac813d"></script>
 <script>const AFISHA = window.AFISHA || [];</script>
 <script>
 const ADMIN = (() => {   // режим Ирины: svoiludi.ch/?ira=1 включает на этом устройстве, ?ira=0 выключает
