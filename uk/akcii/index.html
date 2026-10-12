@@ -350,6 +350,10 @@ a.bot:hover{color:#B98324}
 .count .monthics{font:inherit;font-size:.86rem;font-weight:700;color:var(--brown);background:var(--paper);border:1.5px solid var(--line);border-radius:999px;padding:7px 14px;cursor:pointer;display:inline-flex;align-items:center;gap:7px}
 .count .monthics:hover{border-color:var(--brown)}
 .monthics svg{width:18px;height:18px;flex:none}
+/* «Без регулярных встреч» (копия 12.10.2026): только разовые события в списке и календаре */
+.noreg{display:inline-flex;align-items:center;gap:6px;color:var(--ink);font-weight:600;font-size:.88rem}
+.noreg label{display:inline-flex;align-items:center;gap:8px;cursor:pointer}
+.noreg input{width:18px;height:18px;margin:0;accent-color:var(--brown);cursor:pointer}
 @media (max-width:520px){.count-acts{width:100%;gap:10px 14px}.count .monthics{width:100%;justify-content:center}}
 .viewsw{display:inline-flex;border:1.5px solid var(--line);border-radius:999px;padding:2px;background:var(--paper)}
 .viewsw button{font:inherit;font-size:.86rem;font-weight:700;border:0;background:none;color:var(--muted);padding:6px 14px;border-radius:999px;cursor:pointer}
@@ -406,20 +410,7 @@ a.bot:hover{color:#B98324}
 @media (max-width:620px){.ev{grid-template-columns:64px minmax(0,1fr)}.ev-p{grid-column:2;justify-self:start;text-align:left;max-width:100%}}
 .empty{background:var(--paper);border:1.5px dashed var(--line);border-radius:22px;padding:28px;text-align:center;display:flex;flex-direction:column;gap:8px;align-items:center}
 .empty b{font-family:var(--display);font-weight:400;font-size:1.4rem}
-/* месяц */
-.cal-nav{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-top:14px}
-.cal-nav h2{font-size:1.8rem;text-transform:capitalize}
-.cal-nav button{font:inherit;font-weight:700;border:1.5px solid var(--line);background:var(--paper);color:var(--ink);border-radius:999px;padding:8px 14px;cursor:pointer}
-.cal{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px;margin-top:12px}
-.cal .wd{font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);text-align:center;padding-bottom:2px}
-.day{min-height:104px;background:var(--paper);border:1.5px solid var(--line);border-radius:14px;padding:6px;display:flex;flex-direction:column;gap:4px;min-width:0}
-.day.out{opacity:.4;background:transparent}
-.day.today{border-color:var(--brown)}
-.day>span{font-size:.8rem;font-weight:700;color:var(--muted)}
-.day.today>span{color:var(--brown)}
-.chipev{display:block;width:100%;text-align:left;font:600 .74rem/1.25 var(--body,Manrope),system-ui,sans-serif;border:0;border-left:3px solid var(--lc);background:color-mix(in srgb,var(--lc) 12%,var(--paper));color:var(--ink);border-radius:6px;padding:3px 5px;cursor:pointer;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-@media (max-width:700px){.day{min-height:62px;padding:4px}.chipev{font-size:0;height:9px;padding:0;border-left-width:9px;border-radius:5px}.cal .wd{font-size:.62rem}}
-.daylist{margin-top:14px;display:flex;flex-direction:column;gap:10px}
+/* неделя и месяц — assets/kalendar.js (стили вставляет сам скрипт) */
 /* год */
 .year{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:14px}
 @media (max-width:900px){.year{grid-template-columns:repeat(3,1fr)}}
@@ -558,7 +549,8 @@ a.yours:hover{background:#EBD3A3}
 
   <div class="ak-play" role="group" aria-label="Серденька"><button type="button" class="btn ghost" id="luck"><span aria-hidden="true">♡</span> Мені пощастить</button><button type="button" class="btn ghost" id="myhearts" aria-pressed="false"><span aria-hidden="true">♥</span> Мої серденька <b id="hn">0</b></button><button type="button" class="lnk" id="hclear" hidden>Очистити серденька</button></div>
   <p class="ak-note">«Мені пощастить» дістане для тебе випадкову акцію з тих, що ти зараз бачиш. Серденько на картці зберігає акцію в «Моїх серденьках»: список зберігається лише на цьому пристрої.</p>
-  <div class="count"><span id="count" aria-live="polite"></span><span class="count-acts"><button type="button" class="lnk" id="reset" hidden>Скинути вибір</button><button type="button" class="monthics" id="monthIcs"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="3" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M3.5 9.5h17M8 3v4M16 3v4M12 12.5v5m-2.3-2.2L12 17.5l2.3-2.2" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg><span></span></button><span class="viewsw" role="group" aria-label="Вид"><button type="button" data-view="list" aria-pressed="true">Список</button><button type="button" data-view="month" aria-pressed="false">Місяць</button><button type="button" data-view="year" aria-pressed="false">Рік</button></span></span></div>
+  <div class="count"><span id="count" aria-live="polite"></span><span class="count-acts"><button type="button" class="lnk" id="reset" hidden>Скинути вибір</button><button type="button" class="monthics" id="monthIcs"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="3" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M3.5 9.5h17M8 3v4M16 3v4M12 12.5v5m-2.3-2.2L12 17.5l2.3-2.2" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg><span></span></button><span class="viewsw" role="group" aria-label="Вид"><button type="button" data-view="list" aria-pressed="true">Список</button><button type="button" data-view="week" aria-pressed="false">Тиждень</button><button type="button" data-view="month" aria-pressed="false">Місяць</button><button type="button" data-view="year" aria-pressed="false">Рік</button></span><span class="noreg"><label><input type="checkbox" id="noreg"> Без регулярних зустрічей</label><button type="button" class="qh" data-help="evnoreg" aria-label="Підказка: що таке регулярні зустрічі" aria-expanded="false">?</button></span></span></div>
+  <div id="kal-t" hidden data-t-wd="неділя,понеділок,вівторок,середа,четвер,п’ятниця,субота" data-t-wds="пн,вт,ср,чт,пт,сб,нд" data-t-one="подія" data-t-few="події" data-t-many="подій" data-t-wprev="Попередній тиждень" data-t-wnext="Наступний тиждень" data-t-mprev="Попередній місяць" data-t-mnext="Наступний місяць" data-t-thisweek="Цей тиждень" data-t-nextweek="Наступний тиждень" data-t-backnow="Повернутися до сьогоднішнього дня" data-t-today="сьогодні" data-t-tomorrow="завтра" data-t-weekend="вихідний" data-t-free="поки нічого не заплановано" data-t-emptyweek="На ці дні поки нічого не заплановано" data-t-emptymonth="Цього місяця поки нічого не заплановано" data-t-emptyday="Цього дня поки нічого не заплановано." data-t-near="Найближча подія" data-t-later="Далі поки нічого не заплановано. Нові події з’являються, коли організатори надсилають їх нам." data-t-hint="Натисни на будь-який день, щоб побачити його події. Місяці гортаються стрілками або пальцем."></div>
   <div class="toast" id="toast" role="status" hidden></div>
   <div id="napisat-t" hidden data-t-name="Як тебе звати?" data-t-nameph="Ім’я, підставимо його в повідомлення" data-t-tone="Як звертатися" data-t-vy="На «ви»" data-t-ty="На «ти»" data-t-text="Готове повідомлення, його можна виправити" data-t-hi-vy="Вітаю!" data-t-hi-ty="Привіт!" data-t-me="Мене звати {n}." data-t-go-wa="Написати у WhatsApp" data-t-go-tg="Написати в Telegram" data-t-go-mail="Написати на e-mail" data-t-go-tel="Зателефонувати" data-t-go-sms="Написати SMS" data-t-go-ig="Написати в Instagram" data-t-go-link="Відкрити сторінку запису" data-t-or="Або іншим способом:" data-t-copy="Скопіювати повідомлення" data-t-copied="Повідомлення скопійовано. Якщо воно не вставилося саме, встав його в чат." data-t-copied-ig="Повідомлення скопійовано. В Instagram встав його в чат: довге натискання на поле, потім «Вставити»." data-t-copyfail="Не вдалося скопіювати. Виділи текст і скопіюй його." data-t-note="Повідомлення піде організатору напряму з твого месенджера або пошти. «Свої люди» його не бачать і не зберігають. Ім’я запам’ятовується тільки на цьому пристрої." data-t-btn-event="Записатися" data-t-btn-event-ask="Написати організатору" data-t-btn-promo="Скористатися акцією" data-t-subj-promo="Акція «{title}»" data-t-msg-promo-join-vy="{hi}{name} На сайті проєкту 🌿 «Свої люди» мені трапилася ваша акція «{title}»{when}. Хочу нею скористатися. Підкажіть, будь ласка, як записатися і як застосовується акція?" data-t-msg-promo-join-ty="{hi}{name} На сайті проєкту 🌿 «Свої люди» мені трапилася твоя акція «{title}»{when}. Хочу нею скористатися. Підкажи, будь ласка, як записатися і як застосовується акція?" data-t-subj-event="Запис на подію «{title}»" data-t-msg-event-join-vy="{hi}{name} На сайті проєкту 🌿 «Свої люди» мені трапилася ваша подія «{title}»{when}. Мені дуже цікаво, хочу прийти. Підкажіть, будь ласка, як записатися і чи є ще місця?" data-t-msg-event-join-ty="{hi}{name} На сайті проєкту 🌿 «Свої люди» мені трапилася твоя подія «{title}»{when}. Мені дуже цікаво, хочу прийти. Підкажи, будь ласка, як записатися і чи є ще місця?" data-t-msg-event-ask-vy="{hi}{name} На сайті проєкту 🌿 «Свої люди» мені трапилася ваша подія «{title}»{when}. Мені дуже цікаво, хочу прийти. Підкажіть, будь ласка, чи потрібно щось узяти з собою?" data-t-msg-event-ask-ty="{hi}{name} На сайті проєкту 🌿 «Свої люди» мені трапилася твоя подія «{title}»{when}. Мені дуже цікаво, хочу прийти. Підкажи, будь ласка, чи потрібно щось узяти з собою?"></div>
   <div id="results"></div>
@@ -649,6 +641,7 @@ const SPECIALISTS = window.SPECIALISTS || [];
 </script>
 <script src="/data/afisha.uk.js?v=58bdbcb4"></script>
 <script src="/assets/chernoviki.uk.js"></script>
+<script src="/assets/kalendar.uk.js"></script>
 <script>/* одна база афиши: здесь — записи раздела «События» */
 const EVENTS = (window.AFISHA || []).filter(e => (e.sections || []).includes('events'));</script>
 <script>
@@ -687,7 +680,7 @@ const NTH = ['першу', 'другу', 'третю', 'четверту', 'п�
 const NTH_M = ['перший', 'другий', 'третій', 'четвертий', 'п’ятий'];
 const ICS_WD = ['SU', 'MO', 'TU', 'WE', 'TH', 'FR', 'SA'];
 
-const today = new Date().toISOString().slice(0, 10);
+const today = (d => new Date(d.getTime() - d.getTimezoneOffset() * 6e4).toISOString().slice(0, 10))(new Date());   // дата по часам посетителя (копия 12.10.2026)
 const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 const kt = c => (CANTONS[c] || [c])[0];
 const ktRu = c => (CANTONS[c] || [, c])[1];
@@ -736,7 +729,7 @@ function repeatText(e){   // «каждый четверг до 17 декабр�
    На странице «События» акций нет: они живут на своей вкладке (решение Ирины 11.10.2026, 18:48: «где на сайте будут акции? где в меню или фильтрах?»). */
 const AK = document.documentElement.dataset.mode === 'akcii';
 const PKINDS = { percent: 'Знижка у відсотках', amount: 'Знижка у франках', price: 'Акційна ціна', gift: 'Подарунок або бонус', free: 'Безкоштовне знайомство або пробне заняття' };
-const state = { canton: '', city: '', type: '', lang: '', when: '', hearts: false, view: 'list', month: today.slice(0, 7) };
+const state = { canton: '', city: '', type: '', lang: '', when: '', hearts: false, view: 'list', month: today.slice(0, 7), week: '', day: '', noreg: false };
 const kindOf = e => AK ? ((e.promo || {}).kind || '') : e.type;
 /* черновики (правило Ирины 12.10.2026, 14:34): в режиме Ирины записи «на подтверждении» стоят в списке с пометкой «Черновик», у всех — нет */
 const isDraft = e => e.status === 'на підтвердженні' || e.status === 'черновик';
@@ -750,6 +743,7 @@ const akWhen = e => { if (!state.when) return true; if (state.when === 'always')
 function match(e, skip){
   if (skip !== 'type' && state.type && kindOf(e) !== state.type) return false;
   if (state.lang && !(e.langs || []).includes(state.lang)) return false;
+  if (!AK && state.noreg && e.repeat) return false;
   if (AK && !akWhen(e)) return false;
   if (AK && state.hearts && !favGet().includes(e.id)) return false;
   return true;
@@ -759,6 +753,8 @@ const inPlace = e => !state.canton || (e.canton === state.canton && !isRemote(e)
 const shown = e => match(e) && (inPlace(e) || isRemote(e) || (e.online && !state.city));
 function range(){
   const d = D(today);
+  if (state.when === 'today') return [today, today];
+  if (state.when === 'weekend'){ const wd = (d.getUTCDay() + 6) % 7; if (wd >= 5) return [today, addDays(today, 6 - wd)]; return [addDays(today, 5 - wd), addDays(today, 6 - wd)]; }
   if (state.when === 'week'){ const wd = (d.getUTCDay() + 6) % 7; return [today, addDays(today, 6 - wd)]; }
   if (state.when === 'month'){ return [today, iso(new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth() + 1, 0, 12)))]; }
   if (state.when === 'next'){ return [iso(new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth() + 1, 1, 12))), iso(new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth() + 2, 0, 12)))]; }
@@ -822,18 +818,10 @@ function listView(list){
   }
   return { html, n: items.length };
 }
-function monthView(list){
-  const [y, m] = state.month.split('-').map(Number), first = new Date(Date.UTC(y, m - 1, 1, 12)), last = new Date(Date.UTC(y, m, 0, 12));
-  const start = addDays(iso(first), -((first.getUTCDay() + 6) % 7)), cells = [];
-  const occ = {}; let n = 0;
-  list.forEach(e => occurrences(e, addDays(start, 0), addDays(start, 41)).forEach(d => { (occ[d] = occ[d] || []).push(e); if (d.slice(0, 7) === state.month) n++;
-    if (e.dateEnd && !e.repeat){ for (let x = addDays(d, 1); x <= e.dateEnd; x = addDays(x, 1)) (occ[x] = occ[x] || []).push(e); } }));
-  for (let i = 0; i < 42; i++){ const d = addDays(start, i); if (i >= 35 && d.slice(0, 7) !== state.month) break; cells.push(d); }
-  const cal = cells.map(d => `<div class="day${d.slice(0, 7) !== state.month ? ' out' : ''}${d === today ? ' today' : ''}"><span>${+d.slice(8)}</span>${(occ[d] || []).sort((a, b) => (a.time || '').localeCompare(b.time || '')).map(e => `<button class="chipev" type="button" data-ev="${esc(e.id)}" data-d="${d}" style="--lc:${(TYPES[e.type] || TYPES.meet).c}" title="${esc((e.time ? e.time + ' ' : '') + e.title)}">${e.time ? esc(e.time) + ' ' : ''}${esc(e.title)}</button>`).join('')}</div>`).join('');
-  const html = `<div class="cal-nav"><button type="button" data-mo="-1" aria-label="Попередній місяць">←</button><h2>${MON[m - 1]} ${y}</h2><button type="button" data-mo="1" aria-label="Наступний місяць">→</button></div>
-    <div class="cal">${['пн', 'вт', 'ср', 'чт', 'пт', 'сб', 'нд'].map(w => `<span class="wd">${w}</span>`).join('')}${cal}</div>`;
-  return { html, n };
-}
+/* неделя и месяц — общий календарь афиши (assets/kalendar.js), тот же на «Курсах» */
+const CAL = window.SVL_CAL ? SVL_CAL.create({ state, today, occ: occurrences, row, render: () => render(),
+  color: e => (TYPES[e.type] || TYPES.meet).c, title: e => e.title, time: e => e.time || '',
+  MON, MON_G, T: document.getElementById('kal-t').dataset }) : null;
 function yearView(list){
   const d = D(today); let html = '<div class="year">', total = 0;
   for (let i = 0; i < 12; i++){
@@ -856,10 +844,13 @@ function render(){
     ['canton', 'city', 'type', 'lang', 'when'].forEach(id => document.getElementById(id).classList.toggle('set', !!state[id]));
     fillTypes(); favUi(); return;
   }
-  const v = state.view === 'month' ? monthView(list) : state.view === 'year' ? yearView(list) : listView(list);
+  if (!CAL && (state.view === 'week' || state.view === 'month')) state.view = 'list';
+  const v = state.view === 'week' ? CAL.week(list) : state.view === 'month' ? CAL.month(list) : state.view === 'year' ? yearView(list) : listView(list);
   document.getElementById('results').innerHTML = v.html;
-  document.getElementById('count').textContent = state.view === 'list' ? `${v.n} ${plural(v.n, 'подія', 'події', 'подій')}` : state.view === 'month' ? `Цього місяця: ${v.n}` : `За 12 місяців: ${v.n}`;
-  document.getElementById('reset').hidden = !(state.canton || state.city || state.type || state.lang || state.when);
+  document.getElementById('count').textContent = state.view === 'list' ? `${v.n} ${plural(v.n, 'подія', 'події', 'подій')}` : state.view === 'week' ? `За тиждень: ${v.n} ${plural(v.n, 'подія', 'події', 'подій')}` : state.view === 'month' ? `За місяць: ${v.n} ${plural(v.n, 'подія', 'події', 'подій')}` : `За 12 місяців: ${v.n}`;
+  document.getElementById('reset').hidden = !(state.canton || state.city || state.type || state.lang || state.when || state.noreg);
+  document.getElementById('noreg').checked = state.noreg;
+  if (state.view === 'week' && state.week) state.month = [state.week, today].sort()[1].slice(0, 7);   // «Скачать … в свой календарь» — месяц показанной недели
   document.querySelector('#monthIcs span').textContent = `Завантажити ${MON[+state.month.slice(5) - 1]} у свій календар`;
   document.querySelectorAll('.viewsw button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.view === state.view)));
   document.getElementById('when').disabled = state.view !== 'list';
@@ -1193,17 +1184,19 @@ function digest(){
 document.getElementById('results').addEventListener('click', e => {
   const hb = e.target.closest('[data-heart]'); if (hb){ toggleFav(hb.dataset.heart, hb); return; }
   const b = e.target.closest('[data-ev]'); if (b){ openEvent(b.dataset.ev, b.dataset.d); return; }
-  const m = e.target.closest('[data-mo]'); if (m){ const [y, mo] = state.month.split('-').map(Number), x = new Date(Date.UTC(y, mo - 1 + Number(m.dataset.mo), 1, 12)); state.month = iso(x).slice(0, 7); render(); return; }
-  const y = e.target.closest('[data-month]'); if (y){ state.month = y.dataset.month; state.view = 'month'; render(); }
+  if (CAL && CAL.click(e)) return;
+  const y = e.target.closest('[data-month]'); if (y){ state.month = y.dataset.month; state.day = ''; state.view = 'month'; render(); }
 });
 document.getElementById('monthIcs').addEventListener('click', monthIcs);
-document.querySelector('.viewsw').addEventListener('click', e => { const b = e.target.closest('[data-view]'); if (b){ state.view = b.dataset.view; if (b.dataset.view === 'month') state.month = state.month || today.slice(0, 7); render(); } });
+document.querySelector('.viewsw').addEventListener('click', e => { const b = e.target.closest('[data-view]'); if (b){ if (CAL) CAL.setView(b.dataset.view); else state.view = b.dataset.view; render(); } });
+if (CAL) CAL.bind(document.getElementById('results'));
+document.getElementById('noreg').addEventListener('change', e => { state.noreg = e.target.checked; render(); });
 document.getElementById('canton').addEventListener('change', e => { state.canton = e.target.value; state.city = ''; fillCities(); render(); });
 document.getElementById('city').addEventListener('change', e => { state.city = e.target.value; render(); });
 document.getElementById('type').addEventListener('change', e => { state.type = e.target.value; render(); });
 document.getElementById('lang').addEventListener('change', e => { state.lang = e.target.value; render(); });
 document.getElementById('when').addEventListener('change', e => { state.when = e.target.value; render(); });
-document.getElementById('reset').addEventListener('click', () => { Object.assign(state, { canton: '', city: '', type: '', lang: '', when: '', hearts: false }); fillSelects(); render(); });
+document.getElementById('reset').addEventListener('click', () => { Object.assign(state, { canton: '', city: '', type: '', lang: '', when: '', hearts: false, noreg: false }); fillSelects(); render(); });
 if (AK){
   const luck = document.getElementById('luck'), mh = document.getElementById('myhearts'), hc = document.getElementById('hclear');
   if (luck) luck.addEventListener('click', () => { const L = pool().filter(e => shown(e) && e.date <= today); if (!L.length){ toast('Поки немає акцій для вибору. Спробуй інший кантон або прибери частину вибору.'); return; }
@@ -1237,7 +1230,7 @@ document.getElementById('trial').hidden = !ADMIN;
 const addbtn = document.getElementById('addbtn');
 if (addbtn) addbtn.href = AK ? `mailto:${MAIL}?subject=${encodeURIComponent('Акція для «Свої люди у Швейцарії»')}&body=${encodeURIComponent('Добрий день!\n\nХочу розмістити акцію.\n\nНомер моєї картки (SG-… або OR-…) чи UID:\nНазва акції:\nВид (знижка у відсотках чи франках, акційна ціна, подарунок, безкоштовне знайомство):\nРозмір знижки або ціна:\nНа яку послугу чи товар:\nПерший і останній день (не більше 90 днів):\nДе діє (адреса з картки або онлайн):\nУмови (лише новим клієнтам, за попереднім записом тощо):\nЯк записатися:\nКоротко про акцію (2–3 речення):\n')}`
   : `mailto:${MAIL}?subject=${encodeURIComponent('Подія для «Свої люди у Швейцарії»')}&body=${encodeURIComponent('Вітаю!\n\nХочу розмістити подію.\n\nНазва:\nДата й час (якщо повторюється — як часто):\nМісце (адреса) або онлайн:\nМова:\nЦіна або «безкоштовно»:\nОрганізатор (ім’я, спільнота або фірма):\nUID або ферайн (для платних подій):\nПосилання на запис:\nКоротко про подію (2–3 речення):\nКонтакт для запитань:\n')}`;
-if (AK) document.querySelectorAll('#monthIcs,.viewsw').forEach(el => { el.style.display = 'none'; });
+if (AK) document.querySelectorAll('#monthIcs,.viewsw,.noreg').forEach(el => { el.style.display = 'none'; });
 fillSelects(); render();
 const fromHash = () => { let id = decodeURIComponent(location.hash.slice(1)); const wantFlyer = AK && /&flyer$/.test(id); id = id.replace(/&flyer$/, ''); if (id === 'digest'){ digest(); return; }
   const e0 = EVENTS.find(x => x.id === id); if (!AK && e0 && isPromo(e0)){ location.replace('/uk/akcii/#' + encodeURIComponent(id)); return; } if (id.startsWith('ok=')){ const [eid, key] = id.slice(3).split('.'); const e = EVENTS.find(x => x.id === eid); if (!AK && e && isPromo(e)){ location.replace('/uk/akcii/#' + encodeURIComponent(id)); return; } keyOk(e, key).then(ok => { if (ok){ OKKEY[eid] = key; if (ADMIN && window.SVL_DRAFTS) SVL_DRAFTS.keep(eid, key); openEvent(eid, null, pastDraft(e) ? 'past' : true); } }); return; }
@@ -1254,6 +1247,7 @@ if (ADMIN && window.SVL_DRAFTS) SVL_DRAFTS.init({ page: AK ? 'akcii' : 'events',
   toast, onToggle: on => { DRAFTS_ON = on; fillSelects(); render(); } });
 </script>
 <script>window.HELP = Object.assign(window.HELP || {}, {
+  evnoreg: '<p><b>Регулярні зустрічі</b> — клуби, гуртки та зустрічі, які відбуваються щотижня або щомісяця.</p><p>Познач галочку, і в списку та календарі залишаться лише разові події: свята, лекції, майстер-класи, виїзди. Так їх легше помітити.</p>',
   zpkind: '<p><b>Знижка у відсотках</b> — одне число, наприклад 20 %. Слова «до 50 %» не підходять: знижка має бути точною.</p><p><b>Знижка у франках</b> — на скільки CHF послуга дешевша.</p><p><b>Акційна ціна</b> — кінцева ціна на час акції.</p><p><b>Подарунок або бонус</b> — що людина отримає разом із послугою.</p><p><b>Безкоштовне знайомство</b> — коротка зустріч без оплати й без зобов’язань.</p><p>Для знижки у відсотках або франках на одну послугу впиши звичайну ціну: на сайті покажемо ціну, яку людина заплатить.</p><p>Розіграші й конкурси ми не розміщуємо: для них потрібні дозволи.</p><p>Не приймаємо акції на спиртні напої, тютюн і вейпи, ліки, зброю й кредити, а також акції лікарів, психотерапевтів, психологів та інших професій здоров’я: їм закон дозволяє лише стриману рекламу, без знижок і безкоштовних послуг.</p>',
   zpdur: '<p><b>На певні дати</b> — звичайна акція, до 90 днів. Після останнього дня вона йде в архів, повторити її можна кнопкою «Повторити».</p><p><b>Постійно</b> — акція «завжди», наприклад «перше прибирання за півціни». Вона лише на перше відвідування нового клієнта. Діє рік, потім ти підтверджуєш її листом. Не підтвердила — вона сама зникає з сайту.</p><p>Безкоштовно в період запуску, до 31.12.2027.</p>',
   zpregular: '<p>Звичайна ціна — та, за якою ти працювала(-в) <b>щонайменше 30 днів поспіль безпосередньо перед акцією</b> і за якою працюєш з іншими клієнтами. Тоді на сайті буде «За акцією CHF 48 замість CHF 60».</p><p>Навіщо вона потрібна. За швейцарськими правилами про зазначення цін (PBV) для знижки у відсотках або франках на одну послугу людина має бачити ціну, яку вона заплатить. Без звичайної ціни її не порахувати.</p><p>Якщо знижка однакова на цілу групу послуг або товарів (наприклад, «−20 % на всі стрижки»), відміть галочку «Знижка однакова на всю групу» — тоді звичайна ціна не обов’язкова.</p><p>Ціну, якої насправді не було, вказувати не можна: це вводить людей в оману (закон про недобросовісну конкуренцію, UWG). На запит кантону ти маєш змогти показати звичайну ціну: прайс-лист, рахунки.</p>',
