@@ -866,16 +866,16 @@ function ico(name, line = '#2E5A88', fill, size = 24){
 const AVATAR_SVG = '<svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="46" fill="#FFFCF8" stroke="#6E4F3C" stroke-width="3"/><g transform="rotate(22.5 50 50)"><path d="M50 50 C42 40 43 24 50 15 C57 24 58 40 50 50Z" fill="#E3E6D6" stroke="#66704F" stroke-width="2"/></g><g transform="rotate(67.5 50 50)"><path d="M50 50 C42 40 43 24 50 15 C57 24 58 40 50 50Z" fill="#E3E6D6" stroke="#66704F" stroke-width="2"/></g><g transform="rotate(112.5 50 50)"><path d="M50 50 C42 40 43 24 50 15 C57 24 58 40 50 50Z" fill="#E3E6D6" stroke="#66704F" stroke-width="2"/></g><g transform="rotate(157.5 50 50)"><path d="M50 50 C42 40 43 24 50 15 C57 24 58 40 50 50Z" fill="#E3E6D6" stroke="#66704F" stroke-width="2"/></g><g transform="rotate(202.5 50 50)"><path d="M50 50 C42 40 43 24 50 15 C57 24 58 40 50 50Z" fill="#E3E6D6" stroke="#66704F" stroke-width="2"/></g><g transform="rotate(247.5 50 50)"><path d="M50 50 C42 40 43 24 50 15 C57 24 58 40 50 50Z" fill="#E3E6D6" stroke="#66704F" stroke-width="2"/></g><g transform="rotate(292.5 50 50)"><path d="M50 50 C42 40 43 24 50 15 C57 24 58 40 50 50Z" fill="#E3E6D6" stroke="#66704F" stroke-width="2"/></g><g transform="rotate(337.5 50 50)"><path d="M50 50 C42 40 43 24 50 15 C57 24 58 40 50 50Z" fill="#E3E6D6" stroke="#66704F" stroke-width="2"/></g><g transform="rotate(0.0 50 50)"><path d="M50 50 C45 43 45 32 50 26 C55 32 55 43 50 50Z" fill="#EADFCF" stroke="#6E4F3C" stroke-width="2"/></g><g transform="rotate(45.0 50 50)"><path d="M50 50 C45 43 45 32 50 26 C55 32 55 43 50 50Z" fill="#EADFCF" stroke="#6E4F3C" stroke-width="2"/></g><g transform="rotate(90.0 50 50)"><path d="M50 50 C45 43 45 32 50 26 C55 32 55 43 50 50Z" fill="#EADFCF" stroke="#6E4F3C" stroke-width="2"/></g><g transform="rotate(135.0 50 50)"><path d="M50 50 C45 43 45 32 50 26 C55 32 55 43 50 50Z" fill="#EADFCF" stroke="#6E4F3C" stroke-width="2"/></g><g transform="rotate(180.0 50 50)"><path d="M50 50 C45 43 45 32 50 26 C55 32 55 43 50 50Z" fill="#EADFCF" stroke="#6E4F3C" stroke-width="2"/></g><g transform="rotate(225.0 50 50)"><path d="M50 50 C45 43 45 32 50 26 C55 32 55 43 50 50Z" fill="#EADFCF" stroke="#6E4F3C" stroke-width="2"/></g><g transform="rotate(270.0 50 50)"><path d="M50 50 C45 43 45 32 50 26 C55 32 55 43 50 50Z" fill="#EADFCF" stroke="#6E4F3C" stroke-width="2"/></g><g transform="rotate(315.0 50 50)"><path d="M50 50 C45 43 45 32 50 26 C55 32 55 43 50 50Z" fill="#EADFCF" stroke="#6E4F3C" stroke-width="2"/></g><circle cx="50" cy="50" r="7" fill="#B98324"/></svg>';
 
 </script>
-<script src="/data/specialists.js?v=f501bc0a"></script>
+<script src="/data/specialists.js?v=439d9c6b"></script>
 <script src="/data/vacancies.js?v=4b6b6ac1"></script>
-<script src="/data/organizations.js?v=d667f830"></script>
+<script src="/data/organizations.js?v=96e522f7"></script>
 <script>
 window.IMG_BASE = 'img/';
 /* карточки специалистов — в /data/specialists.js (одна копия на весь сайт) */
 const SPECIALISTS = window.SPECIALISTS || [];
 
 </script>
-<script src="/data/afisha.js?v=596ed4ef"></script>
+<script src="/data/afisha.js?v=f2125c41"></script>
 <script>const AFISHA = window.AFISHA || [];</script>
 <script>
 const ADMIN = (() => {   // режим Ирины: svoiludi.ch/?ira=1 включает на этом устройстве, ?ira=0 выключает
@@ -1059,10 +1059,16 @@ const live = d => !!d && d >= today;
 const placeLive = (s, p) => state.hidden || p.canton === s.places[0].canton || live(p.paidUntil);
 const livePlaces = s => s.places.filter(p => placeLive(s, p));
 // уровень в кантоне: из списка tiers, только пока оплачен
-const tierIn = (s, c) => { const t = (s.tiers || []).find(x => x.canton === c && (state.hidden || live(x.until))); return t ? t.level : ''; };
-const tierBest = s => (s.tiers || []).filter(x => state.hidden || live(x.until)).map(x => x.level).sort((a, b) => (a === 'vip' ? 0 : 1) - (b === 'vip' ? 0 : 1))[0] || '';
+/* онлайн-пакеты (Ирина 12.10.2026: «и вип партнёры должны быть, и вип онлайны, и вип партнёры топ»): «Онлайн базовый», «VIP-онлайн», «VIP-онлайн ТОП» —
+   только для тех, кто работает только онлайн. onlineTier: { level: 'online' | 'vip-online' | 'vip-online-top', until: 'ГГГГ-ММ-ДД' }.
+   Онлайн-пакет даёт показ при выборе «онлайн» во всех кантонах (как onlineCH); VIP-онлайн — выделение и место выше, VIP-онлайн ТОП — первый ряд онлайн-списка. */
+const oTier = s => s.onlineTier && (state.hidden || live(s.onlineTier.until)) ? s.onlineTier.level : '';
+const oLvl = s => ({ 'vip-online-top': 'vip', 'vip-online': 'партнёр' })[oTier(s)] || '';
+const tierName = (s, l) => oLvl(s) && !(s.tiers || []).some(x => state.hidden || live(x.until)) ? (l === 'vip' ? 'VIP-онлайн ТОП' : 'VIP-онлайн') : (l === 'vip' ? 'VIP-партнёр ТОП' : 'VIP-партнёр');
+const tierIn = (s, c) => { const t = (s.tiers || []).find(x => x.canton === c && (state.hidden || live(x.until))); return t ? t.level : oLvl(s); };
+const tierBest = s => (s.tiers || []).filter(x => state.hidden || live(x.until)).map(x => x.level).sort((a, b) => (a === 'vip' ? 0 : 1) - (b === 'vip' ? 0 : 1))[0] || oLvl(s);
 // «Онлайн по всей Швейцарии» — платная опция: показ в блоке «Онлайн, из других кантонов»
-const onlineCH = s => s.online && (state.hidden || live(s.onlineCH));
+const onlineCH = s => s.online && (state.hidden || live(s.onlineCH) || !!oTier(s));
 const pool = () => SPECIALISTS.filter(s => state.hidden || !hiddenReason(s));
 // направления карточки: главное (cat) и второе (cat2, необязательно; 11.10.2026); немецкие слова категорий — для поиска
 const dirsOf = s => [s.cat, s.cat2].filter(Boolean);
@@ -1119,6 +1125,8 @@ const vacsOf = s => (VAK_OPEN || ADMIN ? (window.VACANCIES || []) : []).filter(v
 const vacChips = s => { const kinds = [...new Set(vacsOf(s).map(v => v.kind))]; return kinds.length ? `<div class="vac-chips">${kinds.map(k => `<a class="vac-chip" href="vakansii/#${esc(vacsOf(s).find(v => v.kind === k).id)}">${VAC_KIND[k]}</a>`).join('')}</div>` : ''; };
 /* VIP — платное размещение: кружок «?» у значка (правило Ирины, проверка 09.10.2026) */
 const VIPQ = '<button type="button" class="vip-q" aria-label="Что значит VIP" aria-expanded="false">?</button>';
+const VIP_TIP_O = 'Платное размещение. Специалист работает только онлайн и оплатил пакет «VIP-онлайн» или «VIP-онлайн ТОП», поэтому его карточка выделена и стоит выше в онлайн-списке во всей Швейцарии. Проверяем мы всех одинаково: работает ли специалист официально и есть ли он в официальном реестре.';
+const VIPQO = `<button type="button" class="vip-q" data-t="${VIP_TIP_O}" aria-label="Что значит VIP-онлайн" aria-expanded="false">?</button>`;
 const VIP_TIP = 'Платное размещение. Специалист оплатил пакет «VIP-партнёр» или «VIP-партнёр ТОП», поэтому его карточка выделена и стоит выше. Проверяем мы всех одинаково: работает ли специалист официально и есть ли он в официальном реестре.';
 document.addEventListener('click', e => { const b = e.target.closest('.vip-q'); const old = document.getElementById('vipTip');
   if (!b) { if (old && !e.target.closest('#vipTip')) old.remove(); return; }
@@ -1130,7 +1138,8 @@ document.addEventListener('click', e => { const b = e.target.closest('.vip-q'); 
   t.style.left = Math.max(12, Math.min(innerWidth - w - 12, r.left + r.width / 2 - w / 2)) + scrollX + 'px'; t.style.top = r.bottom + 8 + scrollY + 'px'; }, true);
 function card(s, lvl = ''){
   const k = CATS[s.cat] || CATS.status, why = hiddenReason(s);
-  const flag = why ? `<span class="badge warn">${esc(why)}</span>` : lvl === 'vip' ? '<span class="badge tier">VIP-партнёр ТОП</span>' + VIPQ : lvl === 'партнёр' || lvl === 'vip+' ? '<span class="badge tier">VIP-партнёр</span>' + VIPQ : '';
+  const q = oLvl(s) && tierName(s, 'vip').includes('онлайн') ? VIPQO : VIPQ;
+  const flag = why ? `<span class="badge warn">${esc(why)}</span>` : lvl === 'vip' ? `<span class="badge tier">${tierName(s, 'vip')}</span>` + q : lvl === 'партнёр' || lvl === 'vip+' ? `<span class="badge tier">${tierName(s, 'партнёр')}</span>` + q : '';
   return `<article class="sp${why ? ' off' : ''}${lvl === 'vip' ? ' vip' : lvl === 'партнёр' || lvl === 'vip+' ? ' partner' : ''}" style="--lc:${k.c}">
     ${s.sample ? '<span class="sample" title="Вымышленный специалист — так будет выглядеть ваша карточка">Образец</span>' : ''}<div class="sp-sub">${ico(k.i, k.c, null, 16)}<span>${esc(k.t)}</span>${flag}${likeBtn(s)}</div><div class="sp-main">
     <div class="sp-id">${photo(s)}<div>
@@ -1161,9 +1170,11 @@ function render(){
   const list = listMode ? plainList(state.shared || FAV) : pool().filter(s => visible(s));
   const lv = s => state.canton ? tierIn(s, state.canton) : tierBest(s);
   const local = listMode ? list : arrange(list.filter(inCanton), lv);
-  const remote = listMode ? [] : list.filter(s => !inCanton(s)).sort(alphaS);
+  const remote = listMode ? [] : arrange(list.filter(s => !inCanton(s)), lv);   // онлайн из других кантонов: VIP-онлайн ТОП — первый ряд, VIP-онлайн — выше остальных
   const row = new Set(local.filter(s => lv(s) === 'vip').slice(0, VIP_ROW).map(s => s.id));
-  const lvView = s => listMode ? '' : lv(s) === 'vip' && !row.has(s.id) ? 'vip+' : lv(s);   // ТОП вне первого ряда (бывает только в общем списке без кантона) показываются как обычный «VIP-партнёр»
+  const lvView = s => listMode ? '' : lv(s) === 'vip' && !row.has(s.id) ? 'vip+' : lv(s);
+  const rowR = new Set(remote.filter(s => lv(s) === 'vip').slice(0, VIP_ROW).map(s => s.id));
+  const lvR = s => lv(s) === 'vip' && !rowR.has(s.id) ? 'vip+' : lv(s);   // ТОП вне первого ряда (бывает только в общем списке без кантона) показываются как обычный «VIP-партнёр»
   CURRENT = local.concat(remote);
   const empty = t => `<div class="empty"><b>${t}</b><span>${listMode ? 'Нажми значок закладки на карточке, чтобы сохранить специалиста сюда.' : 'Попробуй другой язык или убери часть выбора.'}</span></div>`;
   let html = '';
@@ -1174,7 +1185,7 @@ function render(){
     html = `<div class="group"><div class="group-h"><h2>${state.city ? 'В городе' : 'В кантоне'} ${esc(name)}</h2><p>Принимают очно в ${esc(name)}.</p></div>
       ${local.length ? `<div class="grid">${local.map(s => card(s, lvView(s))).join('')}</div>` : empty(`В этом ${where} пока никого нет`)}</div>`;
     if (remote.length) html += `<div class="group"><div class="group-h"><h2>Онлайн, ${state.city ? 'из других городов' : 'из других кантонов'}</h2><p>Принимают в другом месте, но консультируют по видеосвязи или телефону. Ехать никуда не нужно. Показ в других кантонах и городах — платное размещение, проверка у всех одинаковая.</p></div>
-      <div class="grid">${remote.map(s => card(s)).join('')}</div></div>`;
+      <div class="grid">${remote.map(s => card(s, lvR(s))).join('')}</div></div>`;
   }
   const map = state.view === 'map';
   document.getElementById('results').innerHTML = map ? '' : html;
@@ -1468,7 +1479,7 @@ function openCard(id){
     const [t, h, v] = LINK[x](c[x]); return `<li><span>${t}</span><a href="${esc(h)}" ${x === 'phone' || x === 'email' ? '' : ext}>${esc(v)}</a></li>`; }).join('');
   const box = document.getElementById('qmCard');
   box.style.setProperty('--lc', k.c); box.style.setProperty('--lf', `color-mix(in srgb,${k.c} 13%,var(--paper))`);
-  box.innerHTML = `<div class="qm-top"><div class="qm-ph">${photo(s)}</div><div class="qm-head">${s.sample ? '<span class="qm-sample">Образец карточки · специалист вымышленный</span>' : ''}<span class="sp-sub" style="color:${k.c}">${ico(k.i, k.c, null, 16)}${esc(k.t)}${(() => { const l = state.canton ? tierIn(s, state.canton) : tierBest(s); return l === 'vip' ? ' · VIP-партнёр ТОП (платное размещение)' : l === 'партнёр' ? ' · VIP-партнёр (платное размещение)' : ''; })()}</span>
+  box.innerHTML = `<div class="qm-top"><div class="qm-ph">${photo(s)}</div><div class="qm-head">${s.sample ? '<span class="qm-sample">Образец карточки · специалист вымышленный</span>' : ''}<span class="sp-sub" style="color:${k.c}">${ico(k.i, k.c, null, 16)}${esc(k.t)}${(() => { const l = state.canton ? tierIn(s, state.canton) : tierBest(s); return l === 'vip' ? ` · ${tierName(s, 'vip')} (платное размещение)` : l === 'партнёр' ? ` · ${tierName(s, 'партнёр')} (платное размещение)` : ''; })()}</span>
       <h2 class="qm-title" id="qmTitle">${esc(s.name)}</h2><div style="font-family:var(--display);font-size:1.25rem;color:var(--brown)">${esc(s.role)}</div>${s.firm ? `<div class="firm" style="font-size:.95rem;margin-top:4px">${esc(s.firm)}</div>` : ''}</div>
       <button class="qm-close" type="button" aria-label="Закрыть">✕</button></div>
     ${promoStrip(s)}
