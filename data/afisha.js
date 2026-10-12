@@ -316,5 +316,15 @@ window.AFISHA = [
     langs: ['украинский', 'русский', 'немецкий'], commercial: true, organizers: [{ org: 'obrazec-salon-krasoty', name: 'Салон «Пример» GmbH (образец)' }],
     signup: 'wa', contacts: { phone: '+41 00 000 00 00', whatsapp: '+41 79 000 00 00', instagram: '@salon_primer' }, link: 'https://example.com/salon',
     about: 'Для тех, кто пришёл в салон впервые: первая стрижка за половину цены, всегда. Мы рады новым клиентам и хотим, чтобы вам у нас было спокойно и приятно. Запись по телефону или в WhatsApp.'
+  },
+  /* «Рідне Слово» (12.10.2026): расписание школы с её страницы — ждёт подтверждения школы вместе с карточкой организации (organizacii/#preview=…) */
+  {
+    sections: ['kursy'], kind: 'regular', ktype: 'kids',
+    id: 'ridne-slovo-zanyatiya', status: 'на подтверждении', title: 'Украинская субботняя школа «Рідне Слово»: занятия I семестра 2026–2027', type: 'kids',
+    date: '2026-08-15', repeat: { freq: 'weekly', until: '2027-01-30', except: ['2026-09-19', '2026-09-26', '2026-10-03', '2026-10-10', '2026-12-26', '2027-01-02', '2027-01-09'] },
+    canton: 'Bern', address: 'Gotthelfstrasse 40, 3013 Bern', online: false,
+    langs: ['украинский'], level: 'дети: садик, дошкольники, младшая, средняя и старшая группы', price: '', commercial: true,
+    organizers: [{ org: 'ridne-slovo-bern', name: 'Українська школа «Рідне Слово»' }], link: 'https://ridneslovo.ch/register/',
+    about: 'Занятия по субботам по расписанию школы: украинский язык и литература, традиции, культура и история Украины. Запись ребёнка — анкетой для родителей на сайте школы.'
   }
 ];
