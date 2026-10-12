@@ -729,7 +729,7 @@ window.ORGANIZATIONS = [
     "fee": "маникюр от 60 CHF, педикюр от 80 CHF, стрижка от 40 CHF, окрашивание от 70 CHF",
     "join": "Записаться онлайн через DIKIDI — там видно свободное время каждого мастера. Или позвонить в салон.",
     "head": {
-      "name": "Viktoriia Pyrozhenko",
+      "name": "Виктория Пироженко",
       "role": "владелица (Inhaberin)",
       "spec": "viktoriia-beauty-paradise"
     },
