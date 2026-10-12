@@ -32,8 +32,9 @@
    kind    — 'charity' — благотворительная (помощь людям по уставу) | 'nonprofit' — некоммерческая (школа, хор, общество, клуб) | 'firm' — фирма
    free    — true: организация ничего не берёт с людей (проверено по сайту, уставу и заявке) → пометка «размещение бесплатно», бесплатно всегда;
              нет или false: берёт деньги (взнос, плата, билеты, цены) → условия специалистов, без пометки; у фирмы всегда нет
-   dir     — направление: 'help' Помощь и интеграция | 'kids' Дети и школы | 'culture' Общества и культура | 'business' Деловые сообщества
-             | 'food' Еда и магазины | 'studio' Студии и досуг
+   dir     — главное направление, dir2 — второе (по желанию), cats — до трёх категорий этих направлений. Список направлений и категорий один на весь сайт:
+             _i18n/kategorii_org.py (25 направлений в 5 группах: help, ukraine, support, advice · kita, school, circles, languages, edu ·
+             community, culture, traditions, sport, media · business, prof, career · food, catering, shop, beauty, studio, services, transport, office)
    head    — { name, role, spec } — руководитель: у фирмы обязательно и видно на карточке; у ферайна и фонда — только если организация хочет;
              spec — id специалиста из data/specialists.js, если руководитель есть в справочнике (тогда ссылки на обеих карточках)
    for     — для кого: 'S' (статус S), 'kids' (дети), 'adults' (взрослые), 'women' (женщины), 'business' (предприниматели), 'all' (все)
@@ -59,6 +60,7 @@ window.ORGANIZATIONS = [
     "kind": "charity",
     "free": true,
     "dir": "help",
+    "cats": ["Центр помощи и консультации", "Помощь людям со статусом S", "Сопровождение в ведомства"],
     "for": [
       "S",
       "adults",
@@ -108,7 +110,8 @@ window.ORGANIZATIONS = [
     "name_ru": "",
     "form": "GmbH",
     "kind": "firm",
-    "dir": "food",
+    "dir": "catering",
+    "cats": ["Кейтеринг для праздников и фирм", "Торты на заказ"],
     "for": [
       "all"
     ],
@@ -160,7 +163,8 @@ window.ORGANIZATIONS = [
     "name_ru": "",
     "form": "GmbH",
     "kind": "firm",
-    "dir": "studio",
+    "dir": "beauty",
+    "cats": ["Парикмахерская и барбершоп", "Маникюр и косметика"],
     "for": [
       "all"
     ],
@@ -224,6 +228,7 @@ window.ORGANIZATIONS = [
     "form": "GmbH",
     "kind": "firm",
     "dir": "studio",
+    "cats": ["Танцевальная студия", "Йога и пилатес"],
     "for": [
       "kids",
       "adults"
@@ -274,7 +279,8 @@ window.ORGANIZATIONS = [
     "name": "Языковая школа «Пример» (образец)",
     "form": "GmbH",
     "kind": "firm",
-    "dir": "studio",
+    "dir": "languages",
+    "cats": ["Курсы немецкого", "Подготовка к экзаменам fide, Goethe, telc"],
     "for": [
       "adults",
       "S"
@@ -326,6 +332,7 @@ window.ORGANIZATIONS = [
     "form": "Verein",
     "kind": "nonprofit",
     "dir": "business",
+    "cats": ["Сообщество предпринимательниц", "Бизнес-клуб и нетворкинг"],
     "for": [
       "women",
       "business"
@@ -369,7 +376,8 @@ window.ORGANIZATIONS = [
     "name": "Онлайн-школа «Пример» для детей (образец)",
     "form": "Verein",
     "kind": "nonprofit",
-    "dir": "kids",
+    "dir": "school",
+    "cats": ["Украинская школа дистанционно"],
     "for": [
       "kids"
     ],
@@ -400,7 +408,9 @@ window.ORGANIZATIONS = [
     "name_ru": "Ukrainische Schule – Ridne Slovo · Берн и Тун",
     "form": "",
     "kind": "nonprofit",
-    "dir": "kids",
+    "dir": "school",
+    "dir2": "circles",
+    "cats": ["Субботняя и воскресная школа", "Творчество для детей", "Музыка и танцы для детей"],
     "for": [
       "kids"
     ],

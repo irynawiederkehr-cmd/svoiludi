@@ -63,10 +63,13 @@ def pick(css):
     return ''.join(out)
 extra = open(os.path.join(HERE, 'extra.css'), encoding='utf-8').read()
 head += '<style id="org-forms">' + pick(vcss) + '</style>\n<style id="org-extra">' + extra + '''
-.sp .ph.org-ico,.qm-ph .ph.org-ico{display:grid;place-items:center;background:color-mix(in srgb,var(--lc,#4F5E3E) 12%,#fff);border:1px solid color-mix(in srgb,var(--lc,#4F5E3E) 25%,#fff)}
-.sp .ph.org-ico svg{width:56%;height:56%}.qm-ph .ph.org-ico svg{width:60%;height:60%}
-.qm-head .free-line{margin-top:6px}
-#spec-fld{display:none!important}
+/* плитка организации без логотипа (решение Ирины 12.10.2026: «отработай красивый дизайн»): медальон со значком направления на мягком фоне цвета направления */
+.ph.org-ico{position:relative;display:grid;place-items:center;overflow:hidden;border:1px solid color-mix(in srgb,var(--oc,#4F5E3E) 24%,#fff)!important;border-style:solid!important;
+  background:radial-gradient(120% 90% at 85% 100%,color-mix(in srgb,var(--oc,#4F5E3E) 26%,#FFFCF8) 0%,transparent 60%),linear-gradient(160deg,color-mix(in srgb,var(--oc,#4F5E3E) 8%,#FFFCF8),color-mix(in srgb,var(--oc,#4F5E3E) 16%,#FFFCF8))!important}
+.ph.org-ico::before{content:"";position:absolute;width:76%;aspect-ratio:1;border-radius:50%;background:#FFFCF8;box-shadow:0 8px 18px -10px color-mix(in srgb,var(--oc,#4F5E3E) 70%,transparent),inset 0 0 0 1.5px color-mix(in srgb,var(--oc,#4F5E3E) 32%,#fff)}
+.ph.org-ico::after{content:"";position:absolute;width:88%;aspect-ratio:1;border-radius:50%;border:1px dashed color-mix(in srgb,var(--oc,#4F5E3E) 32%,transparent)}
+.ph.org-ico svg{position:relative;width:46%;height:46%}
+#qmCard>.free-line{margin:2px 0 14px;font-size:.88rem}
 </style>\n'''
 
 # ---------- страница ----------
@@ -103,7 +106,7 @@ need(rest, '<script src="/data/specialists.js')
 rest = re.sub(r'<script src="/data/specialists\.js\?v=[0-9a-f]+"></script>', f'<script src="/data/specialists.js?v={ver("data/specialists.js")}"></script>', rest)
 a = "window.IMG_BASE = 'img/';"; need(rest, a); rest = rest.replace(a, "window.IMG_BASE = '/img/org/';")
 a = 'const SPECIALISTS = window.SPECIALISTS || [];'; need(rest, a)
-adapter = open(os.path.join(HERE, 'adapter.js'), encoding='utf-8').read()
+adapter = open(os.path.join(HERE, 'orgdirs.js'), encoding='utf-8').read() + '\n' + open(os.path.join(HERE, 'adapter.js'), encoding='utf-8').read()   # направления и значки (kategorii_org.py) + перевод карточек
 rest = rest.replace(a, '</script>\n<script>\n' + adapter + '\n</script>\n<script>\nconst SPECIALISTS = window.SVL_ORG.items;   // организации в виде карточек справочника (adapter.js)')
 # слова и пути движка
 REPL = [
@@ -114,7 +117,7 @@ REPL = [
     ("const LANG_FIRST = ['русский', 'украинский',", "const LANG_FIRST = ['украинский', 'русский',"),
     # фото: у организации логотип (по желанию), иначе значок направления; без логотипа карточка не скрывается
     ("  if (!s.photo) return 'Нет фото';\n", ''),
-    ('const photo = s => s.photo ?', 'const photo = s => !s.photo ? `<span class="ph none org-ico">${ico((CATS[s.cat] || {}).i || \'people\', (CATS[s.cat] || {}).c, null, 48)}</span>` : s.photo ?'),
+    ('const photo = s => s.photo ?', 'const photo = s => !s.photo ? `<span class="ph none org-ico" style="--oc:${(CATS[s.cat] || {}).c || \'#4F5E3E\'}" role="img" aria-label="${esc((CATS[s.cat] || {}).t || \'Организация\')}">${ico((CATS[s.cat] || {}).i || \'orgCommunity\', (CATS[s.cat] || {}).c, null, 48)}</span>` : s.photo ?'),
     (', портрет"', ', логотип"'),
     # тексты
     ("'Сердечки ставят посетители сайта. Один браузер даёт одно сердечко на карточку, регистрации нет. Сердечки не меняют порядок карточек и не заменяют проверку специалиста.", "'Сердечки ставят посетители сайта. Один браузер даёт одно сердечко на карточку, регистрации нет. Сердечки не меняют порядок карточек и не заменяют проверку организации."),
@@ -160,8 +163,8 @@ REPL = [
     ("v.author === s.id &&", "v.author && typeof v.author === 'object' && v.author.org === s.id &&"),
     ("(e.organizers || []).includes(s.id)", "(e.organizers || []).some(x => x && typeof x === 'object' && x.org === s.id)"),
     # блоки организации в окне карточки: пометка «бесплатно», форма, взнос, руководитель, «Важно»
-    ("""${s.firm ? `<div class="firm" style="font-size:.95rem;margin-top:4px">${esc(s.firm)}</div>` : ''}</div>""",
-     """${s.firm ? `<div class="firm" style="font-size:.95rem;margin-top:4px">${esc(s.firm)}</div>` : ''}${SVL_ORG.head(s)}</div>"""),
+    # пометка «… · размещение бесплатно» с сердечком — во всю ширину окна под шапкой (на телефоне колонка шапки узкая)
+    ("""    ${promoStrip(s)}\n    <div class="d-body">""", """    ${SVL_ORG.head(s)}${promoStrip(s)}\n    <div class="d-body">"""),
     ("""<div class="d-block"><h4>Контакты</h4><ul class="ctl">${contacts}</ul></div>""",
      """<div class="d-block"><h4>Контакты</h4><ul class="ctl">${contacts}</ul></div>${SVL_ORG.side(s)}"""),
     ("""${s.firm ? `<div class="firm">${esc(s.firm)}</div>` : ''}${catsLine(s)}""", """${s.firm ? `<div class="firm">${esc(s.firm)}</div>` : ''}${SVL_ORG.line(s)}${catsLine(s)}"""),

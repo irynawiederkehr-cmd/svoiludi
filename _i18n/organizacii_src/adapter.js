@@ -5,16 +5,14 @@
    Данные организаций не меняются: правила полей — в шапке data/organizations.js. */
 (function(){
   const ORGS = window.ORGANIZATIONS || [];
-  /* значки направлений — из общей библиотеки значков (ICONS в первом скрипте страницы) */
-  const DIRS = {
-    help:     { t: 'Помощь и интеграция', c: '#4F5E3E', i: 'hands' },
-    kids:     { t: 'Дети и школы',        c: '#B98324', i: 'dirKids' },
-    culture:  { t: 'Общества и культура', c: '#C97E52', i: 'people' },
-    business: { t: 'Деловые сообщества',  c: '#4F6F8F', i: 'dirBiz' },
-    food:     { t: 'Еда и магазины',      c: '#A0523D', i: 'dirFood' },
-    studio:   { t: 'Студии и досуг',      c: '#7A5A8C', i: 'dirSport' }
-  };
-  const cats = {}; Object.entries(DIRS).forEach(([k, d]) => { cats[k] = { t: d.t, g: 'org', c: d.c, i: d.i, s: [], w: [] }; });
+  /* направления, группы, категории и значки — из orgdirs.js (собирает _i18n/kategorii_org.py, решение Ирины 12.10.2026:
+     «направлений очень мало, возьми по крайней мере как у специалистов», «значки нужны разные, чтобы отображали суть») */
+  const DIRS = window.SVL_ORG_DIRS || {};
+  const cats = {}; Object.entries(DIRS).forEach(([k, d]) => { cats[k] = { t: d.t, g: d.g, c: d.c, i: d.i, s: d.s.slice(), w: d.w.slice() }; });
+  if (typeof ICONS === 'object' && window.SVL_ORG_ICONS) Object.assign(ICONS, window.SVL_ORG_ICONS);   // значки организаций — в общую библиотеку значков страницы
+  /* старые ключи направлений (до 12.10.2026) — на новые, чтобы прежние записи не потерялись */
+  const OLD = { kids: 'school', culture: 'community', studio: 'studio', food: 'food', business: 'business', help: 'help' };
+  const dirOf = k => DIRS[k] ? k : (OLD[k] && DIRS[OLD[k]] ? OLD[k] : 'community');
   const FORMS = { 'Verein': 'ферайн (Verein)', 'Stiftung': 'фонд (Stiftung)', 'неформальная группа': 'неформальная группа', 'GmbH': 'ООО (GmbH)', 'AG': 'АО (AG)',
     'Einzelunternehmen': 'ИП (Einzelunternehmen)', 'Genossenschaft': 'кооператив (Genossenschaft)', 'другое': 'другая форма' };
   const KIND = { charity: 'Благотворительная организация', nonprofit: 'Некоммерческая организация', firm: 'Фирма' };
@@ -35,7 +33,7 @@
   const items = ORGS.map(o => ({
     org: o, id: o.id, sample: !!o.sample, status: o.status === 'активен' && !(o.confirm && o.confirm.date) && !o.sample ? 'на подтверждении' : o.status,
     keyHash: o.keyHash || '', num: o.num || '', uid: /^CHE/.test(o.zefix || '') ? o.zefix : '', checked: o.checked || '', added: o.added || '',
-    name: o.name, role: roleOf(o), firm: o.name_ru || '', photo: o.logo || '', cat: o.dir, cat2: o.dir2 || '', specs: [], tags: tagsOf(o),
+    name: o.name, role: roleOf(o), firm: o.name_ru || '', photo: o.logo || '', cat: dirOf(o.dir), cat2: o.dir2 ? dirOf(o.dir2) : '', specs: (o.cats || []).slice(0, 3), tags: tagsOf(o),
     places: placesOf(o), online: !!o.online, onlineCH: o.onlineCH || '', onlineTier: o.onlineTier, tiers: o.tiers || [], paidUntil: o.paidUntil || '',
     langs: o.langs || [], about: o.about || '', services: o.offers || [], format: o.join || '', contacts: Object.assign({}, o.contacts || {}),
     prices: o.prices || [], pricesOk: !!o.pricesOk, pricesDate: o.pricesDate || ''
@@ -44,7 +42,7 @@
   const DISC = 'Карточку заполнила сама организация, она отвечает за её содержание. «Свои люди» не участвуют в работе организации и не отвечают за её помощь, курсы и события. Обо всём договаривайся напрямую с организацией.';
   const DISC_FIRM = 'Карточку заполнила сама фирма, она отвечает за её содержание. «Свои люди» не участвуют в работе фирмы и не отвечают за её товары, услуги и цены. Обо всём договаривайся напрямую с фирмой.';
   window.SVL_ORG = {
-    items, cats, groups: { org: 'Направления организаций' }, tags,
+    items, cats, groups: window.SVL_ORG_GROUPS || {}, tags,
     /* в окне карточки: пометка «размещение бесплатно» под названием */
     head: s => { const b = badgeOf(s.org); return b ? `<div class="free-line">${esc(b)}<button type="button" class="qh" data-help="badge" aria-label="Подсказка: размещение бесплатно" aria-expanded="false">?</button></div>` : ''; },
     /* в окне карточки, правая колонка: форма, взнос или цены, руководитель, «Важно» */
@@ -63,7 +61,8 @@
         const by = {}; out.forEach(x => { const k = x.slice(0, 7); (by[k] = by[k] || []).push(+x.slice(8)); });
         return Object.entries(by).map(([k, v]) => v.join(', ') + ' ' + MON[+k.slice(5) - 1] + (k.slice(0, 4) !== out[0].slice(0, 4) ? ' ' + k.slice(0, 4) : '')).join(' · '); };
       return `<div class="d-block"><h4>Расписание — появится после подтверждения</h4>${L.map(e => `<p><b>${esc(e.title)}</b><br><small>${esc(days(e))}${e.time ? ' · ' + esc(e.time) : ''}</small></p>`).join('')}<p class="d-note">Это видите только вы. После подтверждения расписание появится во вкладке «Курсы» и в карточке организации.</p></div>`; },
-    /* на карточке в списке: руководитель фирмы */
-    line: s => { const o = s.org, h = o.head || {}; return o.kind === 'firm' && h.name ? `<div class="firm">руководитель: ${esc(h.name)}</div>` : ''; }
+    /* на карточке в списке: руководитель фирмы и пометка «… · размещение бесплатно» с зелёным сердечком (знак «некоммерческое», 12.10.2026) */
+    line: s => { const o = s.org, h = o.head || {}, b = badgeOf(o);
+      return (o.kind === 'firm' && h.name ? `<div class="firm">руководитель: ${esc(h.name)}</div>` : '') + (b ? `<div class="free-line">${esc(b)}</div>` : ''); }
   };
 })();

@@ -652,7 +652,7 @@ a.yours:hover{background:#EBD3A3}
 <dialog class="qm" id="qm" aria-labelledby="qmTitle"><div class="qm-card" id="qmCard"></div></dialog>
 
 <script src="/data/specialists.js?v=d5743f4f"></script>
-<script src="/data/organizations.js?v=e7761421"></script>
+<script src="/data/organizations.js?v=96e522f7"></script>
 <script>
 window.IMG_BASE = '../img/';
 /* карточки специалистов — в /data/specialists.js (одна копия на весь сайт) */
@@ -1214,7 +1214,8 @@ if (AK){   // постоянная акция — только на первое
     noalc = cond && cond.querySelector('input[value="noalc"]'), health = fm && fm.querySelector('[data-zhealth]');
   const HEALTH_DIRS = ['health', 'psy'], HEALTH_SPECS = ['Медицинский уход на дому', 'Ветеринар', 'Натуропатия', 'Китайская медицина и акупунктура', 'Гомеопатия'];
   const isHealth = r => !!r && r.t === 'spec' && (HEALTH_DIRS.includes(r.cat) || HEALTH_DIRS.includes(r.cat2) || (r.specs || []).some(x => HEALTH_SPECS.includes(x)));
-  const isFood = r => !!r && (r.t === 'org' ? r.dir === 'food' : r.cat === 'food' || r.cat2 === 'food');
+  const ORG_FOOD = ["food", "catering", "shop"];   // направления еды организаций — _i18n/kategorii_org.py
+  const isFood = r => !!r && (r.t === 'org' ? ORG_FOOD.includes(r.dir) : r.cat === 'food' || r.cat2 === 'food');
   const needReg = () => { if (!kind || !reg) return; const one = ['percent', 'amount'].includes(kind.value) && !(grp && grp.querySelector('input:checked'));
     if (one) reg.setAttribute('data-req', ''); else reg.removeAttribute('data-req');
     const m = reg.closest('.zf') && reg.closest('.zf').querySelector('[data-zregmark]'); if (m) m.hidden = !one; };

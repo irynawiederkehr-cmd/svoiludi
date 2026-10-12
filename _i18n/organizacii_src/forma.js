@@ -3,11 +3,7 @@
    готовое письмо; черновик только в браузере (svoi-org-zayavka); галочка согласия и две галочки «только своё» обязательны. */
 (() => {
 const MAIL = 'voznesenskaya.iryna@gmail.com';
-const DIRS = {
-  help: { t: 'Помощь и интеграция', c: '#4F5E3E' }, kids: { t: 'Дети и школы', c: '#B98324' },
-  culture: { t: 'Общества и культура', c: '#C97E52' }, business: { t: 'Деловые сообщества', c: '#4F6F8F' },
-  food: { t: 'Еда и магазины', c: '#A0523D' }, studio: { t: 'Студии и досуг', c: '#7A5A8C' }
-};
+const DIRS = window.SVL_ORG_DIRS || {}, OGROUPS = window.SVL_ORG_GROUPS || {}, OCHECK = window.SVL_ORG_CHECK || {};   // направления и категории — _i18n/kategorii_org.py
 const WHO = { S: 'Люди со статусом S', kids: 'Дети и подростки', adults: 'Взрослые', women: 'Женщины', business: 'Предприниматели', all: 'Все' };
 const CANTONS = {
   'Aargau': ['AG', 'Аргау'], 'Appenzell Ausserrhoden': ['AR', 'Аппенцелль-Ауссерроден'], 'Appenzell Innerrhoden': ['AI', 'Аппенцелль-Иннерроден'],
@@ -21,7 +17,8 @@ const LANG_FIRST = ['украинский', 'русский', 'немецкий'
 const HELP_ORG = {
   feek: '<p><b>Ничего</b> или <b>только добровольные пожертвования</b> — организация размещается у нас бесплатно всегда. Её события и курсы тоже только бесплатные или с пожертвованием.</p><p><b>Членский взнос, плата за занятия, курс, школу, лагерь, билеты или цены</b> — размещение на тех же условиях, что у специалистов: до конца 2027 года бесплатно, потом платно.</p><p>Сумму пишите конечную, в швейцарских франках: «CHF» уже стоит, впишите только число и выберите, за что она.</p>',
   zfindHead: '<p>Если руководитель организации или фирмы уже размещён в справочнике специалистов, найдите его карточку по номеру. <b>UID</b> — номер фирмы или самозанятого вида CHE-123.456.789, он есть в карточке. <b>Номер карточки</b> — SG-0001, он тоже есть в карточке, внизу.</p><p>Имя руководителя подставится из карточки, а его карточка и карточка организации будут ссылаться друг на друга. Номер никуда не отправляется: поиск идёт только по опубликованным карточкам, прямо на этой странице.</p>',
-  dir: '<p><b>Помощь и интеграция</b> — центры помощи, консультации, помощь с документами, жильём и работой, курсы языка.</p><p><b>Дети и школы</b> — школы выходного дня, кружки, лагеря, родительские группы.</p><p><b>Общества и культура</b> — общества диаспоры, хоры, танцы, праздники, клубы.</p><p><b>Деловые сообщества</b> — объединения предпринимателей и специалистов, встречи и обмен опытом.</p><p><b>Еда и магазины</b> — рестораны, кафе, кейтеринг, продукты и магазины своих.</p><p><b>Студии и досуг</b> — студии танца, спорта, творчества и красоты, частные курсы и школы.</p>',
+  dir: window.SVL_ORG_HELP_DIR || '',
+  cats: '<p>Категория уточняет, чем именно вы занимаетесь: например, «Субботняя и воскресная школа» или «Курсы немецкого». Отметьте до трёх. По категориям люди находят вас в подборе «Категория».</p><p>Для некоторых категорий нужно разрешение кантона или ведомства, например для яслей, частной школы или ресторана. Тогда под списком появится подсказка: этот документ мы попросим, прежде чем поставить карточку на сайт.</p>',
   kind: '<p><b>Благотворительная организация</b> помогает людям без прибыли: центр помощи, фонд. <b>Некоммерческая</b> — ферайн или общество без прибыли: школа выходного дня, хор, клуб, деловое общество.</p><p><b>Фирма</b> — коммерческая организация: ресторан, кейтеринг, магазин, студия, частная школа.</p><p>Условия зависят от того, берёт ли организация деньги с людей. Кто всё делает для людей бесплатно, размещается бесплатно всегда. Кто берёт членский взнос, плату за занятия, билеты или цены, — на тех же условиях, что специалисты справочника: до конца 2027 года бесплатно, потом платно.</p>',
   firm: '<p>Фирма зарабатывает на своих товарах и услугах, а ферайн или школа со взносом или платой за занятия собирает деньги с людей. Поэтому они размещаются на тех же условиях, что специалисты справочника. В период запуска, до 31 декабря 2027 года, карточка бесплатна. Потом размещение платное, цены мы сообщим заранее, и ничего не продлевается само. VIP всегда платный и помечен «Платное размещение». Вакансии и поиск партнёров бесплатны для всех и всегда.</p>',
   head: '<p>У фирмы на карточке всегда указан руководитель, чтобы людям было понятно, кто отвечает. Обычно это директор или владелец, как в торговом реестре Zefix. Он подтверждает карточку письмом с адреса фирмы. Если руководитель есть в справочнике специалистов, на обеих карточках будет ссылка друг на друга. Ферайну и фонду указывать руководителя не обязательно.</p>',
@@ -49,7 +46,28 @@ const oChk = (name, v, t) => `<label><input type="checkbox" name="${name}" value
 document.getElementById('o-kind').innerHTML = oOpt('', 'Выберите вид') + oOpt('благотворительная организация', 'Благотворительная организация') + oOpt('некоммерческая организация', 'Некоммерческий ферайн или общество') + oOpt('фирма', 'Фирма: ресторан, магазин, студия, частная школа');
 document.getElementById('o-money').innerHTML = oOpt('', 'Выберите ответ') + oOpt('нет', 'Нет: для людей всё бесплатно, только добровольные пожертвования') + oOpt('да', 'Да: взнос, плата за занятия, школу или курс, билеты, цены');
 document.getElementById('o-kind').addEventListener('change', e => { if (e.target.value === 'фирма') document.getElementById('o-money').value = 'да'; });
-document.getElementById('o-dir').innerHTML = oOpt('', 'Выберите направление') + Object.values(DIRS).map(x => oOpt(x.t, x.t)).join('');
+/* направление по группам, второе — по желанию, до трёх категорий (решение Ирины 12.10.2026: «возьми по крайней мере как у специалистов») */
+const dirOpts = first => oOpt('', first) + Object.entries(OGROUPS).map(([g, gt]) => `<optgroup label="${esc(gt)}">` + Object.values(DIRS).filter(x => x.g === g).map(x => oOpt(x.t, x.t)).join('') + '</optgroup>').join('');
+document.getElementById('o-dir').innerHTML = dirOpts('Выберите направление');
+document.getElementById('o-dir2').innerHTML = dirOpts('Нет второго направления');
+const oCatBox = document.getElementById('o-cats'), oCatNote = document.getElementById('o-catnote');
+function oDrawCats(keep){
+  const was = keep || [...oCatBox.querySelectorAll('input:checked')].map(i => i.value);
+  const ds = [document.getElementById('o-dir').value, document.getElementById('o-dir2').value].filter((v, i, a) => v && a.indexOf(v) === i).map(t => Object.values(DIRS).find(x => x.t === t)).filter(Boolean);
+  oCatBox.innerHTML = ds.length ? ds.map(d => d.s.map(c => oChk('o-cat', c, c)).join('')).join('') : '<small>Сначала выберите направление — здесь появятся его категории.</small>';
+  was.forEach(v => { const i = oCatBox.querySelector(`input[value="${CSS.escape(v)}"]`); if (i) i.checked = true; });
+  oCatLimit();
+}
+function oCatLimit(){
+  const on = [...oCatBox.querySelectorAll('input:checked')];
+  oCatBox.querySelectorAll('input').forEach(i => { i.disabled = !i.checked && on.length >= 3; i.parentNode.classList.toggle('off', i.disabled); });
+  const need = [...new Set(on.map(i => OCHECK[i.value] || '').filter(Boolean))].map(t => esc(t[0].toUpperCase() + t.slice(1)));
+  oCatNote.hidden = !need.length; oCatNote.innerHTML = need.length ? '<b>Перед публикацией мы проверим документ.</b> ' + need.join('. ') + '.' : '';
+}
+document.getElementById('o-dir').addEventListener('change', () => oDrawCats());
+document.getElementById('o-dir2').addEventListener('change', () => oDrawCats());
+oCatBox.addEventListener('change', oCatLimit);
+oDrawCats();
 document.getElementById('o-canton').innerHTML = oOpt('', 'Выберите кантон') + Object.keys(CANTONS).sort((a, b) => ktRu(a).localeCompare(ktRu(b), 'ru')).map(x => `<option value="${esc(ktRu(x) + ' (' + kt(x) + ')')}" data-k="${kt(x)}">${esc(ktRu(x) + ' (' + kt(x) + ')')}</option>`).join('') + oOpt('Вся Швейцария', 'Вся Швейцария');
 /* что можно получить, дни, что платят люди — галочками и списками, чтобы почти ничего не писать (решение Ирины 10.10.2026, 22:07) */
 const OFFERS = ['Помощь с письмами и документами', 'Помощь со статусом S и пермитом', 'Курсы языка', 'Разговорные клубы', 'Школа выходного дня', 'Кружки и секции для детей', 'Встречи и праздники',
@@ -68,12 +86,13 @@ document.getElementById('o-money').addEventListener('change', oFeeLock);
 document.getElementById('o-who').innerHTML = Object.entries(WHO).map(([, t]) => oChk('o-who', t, t)).join('');
 document.getElementById('o-langs').innerHTML = LANG_FIRST.map(l => oChk('o-lang', l, l[0].toUpperCase() + l.slice(1))).join('');
 const oChecked = name => [...oF.querySelectorAll(`input[name="${name}"]:checked`)].map(i => i.value);
-function oSave(){ try { const d = {}; oF.querySelectorAll('[data-a]').forEach(el => d[el.id] = el.value); d.who = oChecked('o-who'); d.langs = oChecked('o-lang'); d.offers = oChecked('o-offer'); d.days = oChecked('o-day'); localStorage.setItem(OKEY, JSON.stringify(d)); } catch (_) {} }
+function oSave(){ try { const d = {}; oF.querySelectorAll('[data-a]').forEach(el => d[el.id] = el.value); d.who = oChecked('o-who'); d.langs = oChecked('o-lang'); d.offers = oChecked('o-offer'); d.days = oChecked('o-day'); d.cats = oChecked('o-cat'); localStorage.setItem(OKEY, JSON.stringify(d)); } catch (_) {} }
 try { const d = JSON.parse(localStorage.getItem(OKEY) || 'null'); if (d) {
   oF.querySelectorAll('[data-a]').forEach(el => { if (typeof d[el.id] === 'string') el.value = d[el.id]; });
   (d.who || []).forEach(v => { const i = oF.querySelector(`input[name="o-who"][value="${CSS.escape(v)}"]`); if (i) i.checked = true; });
   (d.langs || []).forEach(v => { const i = oF.querySelector(`input[name="o-lang"][value="${CSS.escape(v)}"]`); if (i) i.checked = true; });
-  [['offers', 'o-offer'], ['days', 'o-day']].forEach(([k, n]) => (d[k] || []).forEach(v => { const i = oF.querySelector(`input[name="${n}"][value="${CSS.escape(v)}"]`); if (i) i.checked = true; })); } } catch (_) {}
+  [['offers', 'o-offer'], ['days', 'o-day']].forEach(([k, n]) => (d[k] || []).forEach(v => { const i = oF.querySelector(`input[name="${n}"][value="${CSS.escape(v)}"]`); if (i) i.checked = true; }));
+  oDrawCats(d.cats || []); } } catch (_) {}
 oFeeLock();
 oF.addEventListener('input', oSave); oF.addEventListener('change', oSave);
 /* галочка согласия (вопрос Ирины 10.10.2026, 20:37): пока её нет, кнопка серая; в письмо — строка с датой и временем; в черновик не сохраняется */
@@ -89,7 +108,7 @@ oDraftIdle();
 oDraft.addEventListener('click', e => { const id = e.target.id;
   if (id === 'oWipe') oDraft.innerHTML = 'Удалить с этого устройства всё, что вы ввели в заявку? Вернуть это будет нельзя. <button class="lnk" type="button" id="oWipeYes">Да, удалить историю</button><button class="lnk" type="button" id="oWipeNo">Отмена</button>';
   if (id === 'oWipeNo') oDraftIdle();
-  if (id === 'oWipeYes'){ try { localStorage.removeItem(OKEY); } catch (_) {} oF.querySelectorAll('[data-a]').forEach(el => el.value = ''); oF.querySelectorAll('input[type=checkbox]').forEach(i => i.checked = false); oChecks().forEach(x => x.checked = false); oFeeLock(); oPaint(); oF.dispatchEvent(new Event('zwipe')); oMsg.hidden = true; oDraftIdle(); toast('Вся история заявки удалена с этого устройства.'); }
+  if (id === 'oWipeYes'){ try { localStorage.removeItem(OKEY); } catch (_) {} oF.querySelectorAll('[data-a]').forEach(el => el.value = ''); oF.querySelectorAll('input[type=checkbox]').forEach(i => i.checked = false); oChecks().forEach(x => x.checked = false); oFeeLock(); oDrawCats([]); oPaint(); oF.dispatchEvent(new Event('zwipe')); oMsg.hidden = true; oDraftIdle(); toast('Вся история заявки удалена с этого устройства.'); }
 });
 function oLetter(){
   const lines = [], name = document.getElementById('o-name').value.trim();
