@@ -610,7 +610,7 @@ window.ORGANIZATIONS = [
     "cities": [
       "Rotkreuz"
     ],
-    "address": "Suurstoffi 16, 6343 Rotkreuz",
+    "address": "Suurstoffi 16, 6343 Risch-Rotkreuz",
     "fee": "манікюр від CHF 55, педикюр від CHF 85, нарощування вій від CHF 115, масаж 60 хвилин — CHF 130. Студентам знижка 10 % на всі послуги. Ціни із сайту салону, з ПДВ (MWST)",
     "join": "Записатися можна телефоном або у WhatsApp. На манікюр, педикюр і догляд за обличчям — ще й онлайн, за посиланням на [сайті салону](https://www.rubinbeauty.ch). Якщо плани змінилися, скасуйте або перенесіть запис не пізніше ніж за 12 годин.",
     "head": {
@@ -620,6 +620,7 @@ window.ORGANIZATIONS = [
     },
     "contacts": {
       "site": "https://www.rubinbeauty.ch",
+      "email": "florearubin@mail.ru",
       "phone": "+41 79 626 89 18",
       "whatsapp": "+41 79 626 89 18",
       "instagram": "rubinbeauty",
