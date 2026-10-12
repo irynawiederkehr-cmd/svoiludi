@@ -538,7 +538,7 @@ a.bot:hover{color:#B98324}
 .evs .vid{display:block;font-style:normal;font-size:.64rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:1px}
 .evs-links{display:flex;flex-wrap:wrap;gap:6px 18px}
 .evs-all{align-self:flex-start;font-size:.84rem;font-weight:700;color:var(--brown);text-decoration:none}
-.evs-all:hover{text-decoration:underline}
+.evs-all:hover{text-decoration:underline}.evs .evx{display:grid;grid-template-columns:54px 1fr;gap:10px;align-items:start;color:var(--ink);background:var(--paper);border:1.5px dashed var(--line);border-radius:14px;padding:8px 10px}.evs .evx .dt{padding-top:2px}.evs .evx.past .dt{color:var(--muted)}.evs .evx.past{background:transparent}.evs .evx .ab{display:block;font-weight:500;font-size:.82rem;color:var(--ink);margin-top:5px;line-height:1.45}.pv-af .evs+.k-note,.pv-af .k-note+.evs{margin-top:8px}.pv-af .d-note{margin-top:10px}
 .k-note{font-size:.78rem;color:var(--muted);margin:2px 0 0;line-height:1.45}
 .report{font-size:.8rem;color:var(--muted)}
 /* пока TRIAL — на каждой карточке пометка «Образец» (04.10.2026) */
@@ -883,7 +883,7 @@ window.IMG_BASE = 'img/';
 const SPECIALISTS = window.SPECIALISTS || [];
 
 </script>
-<script src="/data/afisha.js?v=a8dd1b23"></script>
+<script src="/data/afisha.js?v=951c3f47"></script>
 <script>const AFISHA = window.AFISHA || [];</script>
 <script>
 const ADMIN = (() => {   // режим Ирины: svoiludi.ch/?ira=1 включает на этом устройстве, ?ira=0 выключает
@@ -1303,6 +1303,31 @@ function fillSelects(){
 const VID = e => e.type === 'promo' ? 'акция' : (e.sections || []).includes('kursy') && e.kind ? (e.kind === 'regular' ? 'регулярные занятия' : e.kind === 'course' ? 'курс' : e.online && !e.address ? 'вебинар' : 'мастер-класс') : 'событие';
 const afishaOf = s => AFISHA.filter(e => e.status === 'активен' && e.type !== 'promo' && (e.organizers || []).includes(s.id)).map(e => ({ e, d: e.kind === 'course' && e.date >= today ? e.date : nextDate(e), start: e.kind === 'course' && e.date >= today })).filter(x => x.d).sort((a, b) => a.d.localeCompare(b.d) || (a.e.time || '').localeCompare(b.e.time || '')).slice(0, 5);
 const afHref = e => ((e.sections || [])[0] === 'kursy' ? 'kursy/#' : 'events/#') + e.id;
+/* пробная карточка (лид): в предпросмотре по ссылке (#preview=…) и в режиме Ирины — все занятия, события и мастер-классы этой карточки,
+   которые ждут подтверждения вместе с ней (status «на подтверждении», организатор — эта карточка). Прошедшие — с пометкой «прошло»:
+   так видно, как события будут выглядеть на сайте (решение Ирины 12.10.2026: «у школы были ещё и эвенты, создай их тоже… чтобы они размещались
+   в её карточке, хотя бы одна… если эвенты или мастер-классы есть, встраивай все»). Для всех они появятся только после подтверждения. */
+const pvMine = (e, s) => (e.organizers || []).some(x => x === s.id || (x && typeof x === 'object' && (x.org === s.id || x.spec === s.id)));
+const PV_WD = ['по воскресеньям', 'по понедельникам', 'по вторникам', 'по средам', 'по четвергам', 'по пятницам', 'по субботам'];
+function pvAfisha(s){
+  const pv = PREVIEW === s.id || (/^#preview=/.test(location.hash) && location.hash.indexOf(s.id) > 0);
+  if (!pv && !(ADMIN && s.status !== 'активен')) return '';
+  const L = AFISHA.filter(e => e.status === 'на подтверждении' && e.type !== 'promo' && pvMine(e, s));
+  if (!L.length) return '';
+  const rows = L.map(e => { const n = nextDate(e), last = (e.repeat && e.repeat.until) || e.date; return { e, d: n || last, past: !n }; })
+    .sort((a, b) => (a.past - b.past) || (a.past ? b.d.localeCompare(a.d) : a.d.localeCompare(b.d)));
+  const dm = d => +d.slice(8) + ' ' + MONTHS[+d.slice(5, 7) - 1];
+  const when = e => { if (e.repeat && e.repeat.freq === 'weekly') return PV_WD[new Date(e.date + 'T12:00:00').getDay()] + (e.repeat.until ? ' до ' + dm(e.repeat.until) : '');
+    if (e.dateEnd && e.dateEnd !== e.date) return (e.date.slice(0, 7) === e.dateEnd.slice(0, 7) ? +e.date.slice(8) : dm(e.date)) + '–' + dm(e.dateEnd); return ''; };
+  const li = ({ e, d, past }) => { const w = when(e), place = e.online && !e.address ? 'онлайн' : city(e.address || '') || ktRu(e.canton || '');
+    const price = e.price && e.price !== 'бесплатно' ? e.price + (e.per ? ' ' + e.per : '') + (e.priceNote ? ' (' + e.priceNote + ')' : '') : e.price === 'бесплатно' || !e.commercial ? 'бесплатно' : '';
+    return `<li><div class="evx${past ? ' past' : ''}"><span class="dt">${past ? '<small>прошло</small>' : ''}<span>${+d.slice(8)}</span><small>${MONTHS[+d.slice(5, 7) - 1]}</small></span><span class="t"><i class="vid">${esc(VID(e))}</i>${esc(e.title)}<small>${[w, e.time ? esc(e.time) + (e.timeEnd ? '–' + esc(e.timeEnd) : '') : '', esc(place), esc(price), e.level ? esc(e.level) : ''].filter(Boolean).join(' · ')}</small>${e.about ? `<span class="ab">${esc(e.about)}</span>` : ''}</span></div></li>`; };
+  const up = rows.filter(r => !r.past), was = rows.filter(r => r.past);
+  const sec = k => up.some(r => (r.e.sections || []).includes(k)), ev = sec('events'), ku = sec('kursy');
+  const tabs = ev && ku ? 'занятия и события появятся во вкладках «События» и «Курсы»' : ku ? 'занятия появятся во вкладке «Курсы»' : ev ? 'события появятся во вкладке «События»' : 'ваши занятия и события появятся во вкладках «События» и «Курсы»';
+  return `<div class="d-block pv-af"><h4>Занятия и события — появятся после подтверждения</h4>${up.length ? `<ul class="evs">${up.map(li).join('')}</ul>` : ''}${was.length ? `<p class="k-note"><b>Уже прошли.</b> Мы показываем их для примера: так ваши события будут выглядеть на сайте.</p><ul class="evs">${was.map(li).join('')}</ul>` : ''}<p class="d-note">Это видите только вы. После подтверждения ${tabs} и здесь, в карточке. Пришлите нам ближайшие события, мастер-классы и праздники с коротким описанием — мы поставим их сюда.</p></div>`;
+}
+
 /* ---------- акции специалиста (решение Ирины 11.10.2026): вид события type: 'promo', описание в e.promo (data/afisha.js) ----------
    В карточке акция видна с первого до последнего дня; всегда с пометкой «Реклама». Подтверждённые и активные, карточка активна. */
 const moneyP = n => 'CHF ' + (+n % 1 ? (+n).toFixed(2) : +n);
@@ -1569,7 +1594,7 @@ function openCard(id){
           return `<div class="d-block vac-block">${grp('staff')}${grp('partner')}<p class="vac-note"><b>Бесплатно, для поддержки сообщества «Свои люди». Не коммерческая услуга.</b> Объявления размещает сам специалист и отвечает за их содержание. «Свои люди» не участвуют в найме и сотрудничестве, договаривайтесь напрямую с автором.</p></div>`; })()}
         ${(() => { const os = (window.ORGANIZATIONS || []).filter(o => o.head && o.head.spec === s.id && ((o.status === 'активен' && o.confirm && o.confirm.date) || (o.status === 'на подтверждении' && (pvOn(s.id) || ADMIN)))); return os.length ? `<div class="d-block"><h4>Руководит</h4>${os.map(o => `<p><a href="organizacii/#${o.status !== 'активен' && OKKEY[s.id] ? 'preview=' + esc(o.id) + '.' + esc(OKKEY[s.id]) : esc(o.id)}">${esc(o.name)} →</a></p>`).join('')}</div>` : ''; })()}
         ${(() => { const af = afishaOf(s); if (!af.length) return ''; const has = k => af.some(x => (x.e.sections || []).includes(k));
-          return `<div class="d-block"><h4>Встречи, курсы и вебинары</h4><ul class="evs">${af.map(({ e, d, start }) => `<li><a href="${esc(afHref(e))}"><span class="dt">${start ? '<small>начало</small>' : ''}<span>${+d.slice(8)}</span><small>${MONTHS[+d.slice(5, 7) - 1]}</small></span><span class="t"><i class="vid">${esc(VID(e))}</i>${esc(e.title)}<small>${e.time ? esc(e.time) + ' · ' : ''}${e.online && !e.address ? 'онлайн' : esc(city(e.address || ''))} · ${esc(e.price && e.price !== 'бесплатно' ? e.price + (e.per ? ' ' + e.per : '') : 'бесплатно')}${e.sample ? ' · образец' : ''}</small></span></a></li>`).join('')}</ul><p class="k-note">Проводит организатор. Запись, оплата и договор — только с ним.</p><span class="evs-links">${has('events') ? '<a class="evs-all" href="events/">Все события →</a>' : ''}${has('kursy') ? '<a class="evs-all" href="kursy/">Все курсы и вебинары →</a>' : ''}</span></div>`; })()}
+          return `<div class="d-block"><h4>Встречи, курсы и вебинары</h4><ul class="evs">${af.map(({ e, d, start }) => `<li><a href="${esc(afHref(e))}"><span class="dt">${start ? '<small>начало</small>' : ''}<span>${+d.slice(8)}</span><small>${MONTHS[+d.slice(5, 7) - 1]}</small></span><span class="t"><i class="vid">${esc(VID(e))}</i>${esc(e.title)}<small>${e.time ? esc(e.time) + ' · ' : ''}${e.online && !e.address ? 'онлайн' : esc(city(e.address || ''))} · ${esc(e.price && e.price !== 'бесплатно' ? e.price + (e.per ? ' ' + e.per : '') : 'бесплатно')}${e.sample ? ' · образец' : ''}</small></span></a></li>`).join('')}</ul><p class="k-note">Проводит организатор. Запись, оплата и договор — только с ним.</p><span class="evs-links">${has('events') ? '<a class="evs-all" href="events/">Все события →</a>' : ''}${has('kursy') ? '<a class="evs-all" href="kursy/">Все курсы и вебинары →</a>' : ''}</span></div>`; })()}${pvAfisha(s)}
       </div>
       <div class="d-side">
         <div class="d-block"><h4>Где принимает</h4><div style="display:flex;flex-direction:column;gap:10px">${livePlaces(s).map(placeFull).join('') || (needOf(s).place ? UT('Кантон и адрес') : '')}${s.online ? '<span>и онлайн по видеосвязи</span>' : ''}</div></div>

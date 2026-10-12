@@ -327,6 +327,35 @@ window.AFISHA = [
     organizers: [{ org: 'ridne-slovo-bern', name: 'Українська школа «Рідне Слово»' }], link: 'https://ridneslovo.ch/register/',
     about: 'Занятия по субботам по расписанию школы: украинский язык и литература, традиции, культура и история Украины. Запись ребёнка — анкетой для родителей на сайте школы.'
   },
+  /* пробная карточка «Рідне Слово» (лид, 12.10.2026): события школы по её постам в Facebook (facebook.com/ridneslovo.bern, фото с анонсами).
+     Все уже прошли — в предпросмотре карточки они стоят с пометкой «прошло», для примера. Личные телефоны из постов не берём. */
+  {
+    sections: ['events'], type: 'retreat',
+    id: 'ridne-slovo-tabir-osin-2026', status: 'на подтверждении', title: 'Осенний лагерь «Мандрівка країнами світу» для подростков 13–16 лет в Мюмлисвиле',
+    date: '2026-09-20', dateEnd: '2026-09-26',
+    canton: 'Solothurn', address: '4717 Mümliswil', online: false,
+    langs: ['украинский'], level: 'подростки 13–16 лет', price: 'CHF 250', per: 'за неделю', commercial: true,
+    organizers: [{ org: 'ridne-slovo-bern', name: 'Українська школа «Рідне Слово»' }, { name: 'Ukraine Hilfe Bern', link: 'https://www.ukraine-hilfe-bern.ch' }, { name: 'Ukrainer in Bern' }], link: 'https://www.facebook.com/ridneslovo.bern/',
+    about: 'Неделя в горах кантона Солотурн: каждый день — новая страна (Швейцария, Украина, Германия, Франция, Англия, Италия и другие), её культура, традиции, язык, музыка и кухня. Квесты и командные игры, творческие мастер-классы, музыка и танцы, спорт и прогулки на природе.'
+  },
+  {
+    sections: ['events'], type: 'culture',
+    id: 'ridne-slovo-kino-chervona-ruta', status: 'на подтверждении', title: 'Кино на украинском для подростков 14–17 лет: комедия «Потяг «Червона Рута» во Фрибуре',
+    date: '2026-08-29', time: '17:00', timeEnd: '20:56',
+    canton: 'Bern', address: 'Treffpunkt, Bahnhof Bern, 3011 Bern', online: false,
+    langs: ['украинский'], level: 'подростки 14–17 лет', price: 'CHF 10', priceNote: 'благотворительный взнос', commercial: false,
+    organizers: [{ org: 'ridne-slovo-bern', name: 'Українська школа «Рідне Слово»' }, { name: 'Ukraine Hilfe Bern', link: 'https://www.ukraine-hilfe-bern.ch' }, { name: 'Ukrainer in Bern' }], link: 'https://www.facebook.com/ridneslovo.bern/',
+    about: 'Сбор у Treffpunkt на вокзале Берна, вместе едем во Фрибур на украинскую комедию «Потяг «Червона Рута», потом фото и общение, около 21:00 — снова в Берне. С собой — перекус и воду. Нужна регистрация, мест немного.'
+  },
+  {
+    sections: ['events'], type: 'kids',
+    id: 'ridne-slovo-kozacki-zabavy', status: 'на подтверждении', title: '«Козацькі забави» — интеллектуальные игры для учеников школы «Рідне Слово»',
+    date: '2026-09-12', time: '10:00',
+    canton: 'Bern', address: 'Gotthelfstrasse 40, 3013 Bern', online: false,
+    langs: ['украинский'], level: 'ученики школы, в рамках субботних занятий', price: '', commercial: true,
+    organizers: [{ org: 'ridne-slovo-bern', name: 'Українська школа «Рідне Слово»' }], link: 'https://www.facebook.com/ridneslovo.bern/',
+    about: 'На уроках украинского языка, литературы и культуры — соревнования в знаниях и смекалке: страницы украинской литературы, игры со словами и языковые загадки, казачьи традиции и обычаи.'
+  },
   {
     sections: ['events'], type: 'culture',
     id: 'jewish-culture-shabat', status: 'на подтверждении', title: 'Шабат в Берне — еженедельная встреча общины Jewish Culture Switzerland',
@@ -434,5 +463,15 @@ window.AFISHA = [
     },
     "link": "https://www.rubinbeauty.ch",
     "about": "Студенткам и студентам — скидка 10 % на все услуги салона: маникюр и педикюр, ресницы и брови, уход за лицом, депиляция, массаж и стрижки. Скидка действует постоянно, подробности — при записи."
+  },
+  /* пробная карточка SG-0021 «Алёна» (лид, 12.10.2026): её мастер-класс из поста в группе Facebook — уже прошёл, в предпросмотре стоит примером с пометкой «прошло» */
+  {
+    sections: ['kursy'], ktype: 'create', kind: 'once',
+    id: 'alena-botanical-relief-mk-2026-04', status: 'на подтверждении', title: 'Мастер-класс по рельефу, свету и композиции — Botanical Relief Series',
+    date: '2026-04-11', time: '12:00', timeEnd: '16:00',
+    canton: 'Zürich', address: 'INTWINE Conceptual Showroom, Heidbachstrasse 42, 8032 Zürich', online: false,
+    langs: ['русский'], level: 'для взрослых', price: '', commercial: true,
+    organizers: ['alena-botanical-relief'],
+    about: 'Декоративная рельефная панель своими руками: ботанический рельеф, работа со светом и композицией. Свою работу забираете с собой.'
   }
 ];
