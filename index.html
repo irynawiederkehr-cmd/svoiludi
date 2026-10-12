@@ -1621,7 +1621,9 @@ function previewBox(s){
 /* ---------- прайс-лист: отдельный запрос и отдельное подтверждение по e-mail (решение Ирины 05.10.2026) ----------
    Ирина в окне карточки: «Запросить прайс-лист» (письмо специалисту), потом «Отправить прайс-лист на подтверждение».
    Специалист открывает https://svoiludi.ch/#price=<id>.<key>, видит свой прайс-лист и нажимает «Подтверждаю» или «Нужно исправить» —
-   письмо с его адреса приходит Ирине. После письма Ирина ставит pricesOk — и кнопка «Прайс-лист PNG» появляется на сайте. */
+   письмо с его адреса приходит Ирине. После письма Ирина ставит pricesOk — и кнопка «Прайс-лист PNG» появляется на сайте.
+   В этом окне нет второго списка цен и своей кнопки картинки: прайс-лист открыт выше, в блоке «Цены», кнопка «Прайс-лист PNG» — среди кнопок
+   карточки (одна кнопка на один файл, Ирина 12.10.2026, 20:44: «дублируются кнопки скачивания одного и того же файла»). */
 let PRICEVIEW = '';   // id карточки, открытой по ссылке подтверждения прайс-листа
 const priceShown = s => (s.prices || []).length > 0 && (!!s.pricesOk || !!s.sample || ADMIN || PRICEVIEW === s.id || PREVIEW === s.id);   // в предпросмотре карточки прайс-лист тоже виден: цены подтверждаются вместе с карточкой (12.10.2026)
 const priceUrl = s => `${SITE}#price=${encodeURIComponent(s.id)}.${encodeURIComponent(OKKEY[s.id] || '')}`;
@@ -1635,10 +1637,9 @@ const priceConfirm = s => ({ su: `Подтверждаю прайс-лист —
 const priceFix = s => ({ su: `Исправления в прайс-лист — ${s.name}${s.num ? ' (' + s.num + ')' : ''}`,
   body: `Здравствуйте, Ирина!\n\nВ моём прайс-листе, пожалуйста, исправьте\n\n— \n\n${priceUrl(s)}\n\n${s.name}` });
 function priceBox(s){
-  return `<div class="pv-box" id="pvPrice" data-pv="${esc(s.id)}"><b>Это предпросмотр вашего прайс-листа.</b><span>Пока его видите только вы. Если всё верно, отметьте галочку и нажмите «Прайс-лист верный, подтверждаю» — прайс-лист появится в вашей карточке на сайте. Если что-то нужно поменять, нажмите «Нужно исправить».</span>
-    <ul class="pv-pl">${(s.prices || []).map(r => `<li><span>${esc(r.t)}${r.n ? `<small>${esc(r.n)}</small>` : ''}</span><b>${esc(r.p)}</b></li>`).join('')}</ul>
+  return `<div class="pv-box" id="pvPrice" data-pv="${esc(s.id)}"><b>Это предпросмотр вашего прайс-листа.</b><span>Пока его видите только вы. Если всё верно, отметьте галочку и нажмите «Прайс-лист верный, подтверждаю» — прайс-лист появится в вашей карточке на сайте. Если что-то нужно поменять, нажмите «Нужно исправить». Весь прайс-лист открыт выше, в блоке «Цены».</span>
     <label class="pv-ok"><input type="checkbox" data-pv-agree> <span>Услуги, цены и пояснения верны. Я даю согласие на публикацию прайс-листа на сайте svoiludi.ch.</span></label>
-    <div class="pv-acts"><button class="btn ghost" type="button" data-png-price="${esc(s.id)}">Посмотреть картинкой</button><button class="btn" type="button" data-pv-send="price" disabled>Прайс-лист верный, подтверждаю</button><button class="btn ghost" type="button" data-pv-fixopen>Нужно исправить</button></div>
+    <div class="pv-acts"><button class="btn" type="button" data-pv-send="price" disabled>Прайс-лист верный, подтверждаю</button><button class="btn ghost" type="button" data-pv-fixopen>Нужно исправить</button></div>
     <div class="pv-fix" hidden><textarea data-pv-text rows="4" maxlength="1500" placeholder="Что исправить: например, цену или название услуги"></textarea><div class="pv-acts"><button class="btn" type="button" data-pv-send="fix">Отправить исправления</button></div></div>
     <span class="pv-small" data-pv-msg>Одно нажатие — и готово. Копия придёт на e-mail из вашей карточки.</span></div>`;
 }
