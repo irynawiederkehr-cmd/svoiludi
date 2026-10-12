@@ -66,7 +66,7 @@ window.SPECIALISTS = [
   {
     "id": "nora-zurich",
     "keyHash": "409bbf753826dcdacf2a97f54e802d3ad3589504c278349fe28f30e55ee02429",
-    "num": "SG-0023",
+    "num": "SG-0024",
     "uid": "",
     "status": "на подтверждении",
     "paidUntil": "",
