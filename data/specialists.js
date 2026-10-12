@@ -67,7 +67,7 @@
 window.SPECIALISTS = [
   {
     "id": "viktoriia-beauty-paradise",
-    "keyHash": "b5077be85696e83367a6bbdf5191be9df8daba54b235b99ea609902f24c17d7e",
+    "keyHash": "96e893710007df1426b473ef85cc53db9f0f87efa137f02562a7ce6290f1125e",
     "num": "SG-0027",
     "uid": "CHE-442.340.426",
     "firm": "Viktoriia Pyrozhenko Beauty Paradise",
