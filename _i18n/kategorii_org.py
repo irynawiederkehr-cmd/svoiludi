@@ -230,18 +230,18 @@ ICONS = {
     'orgProf': '<rect x="3" y="6.5" width="18" height="13" rx="2.2" fill="{f}" stroke="{c}" {s}/><path d="M10 6.5V4.2h4v2.3" fill="none" stroke="{c}" {s}/><circle cx="8.2" cy="11.6" r="2" fill="#fff" stroke="{c}" {s}/><path d="M5.2 16.6c.5-1.6 1.6-2.4 3-2.4s2.5.8 3 2.4M13.5 11h4.5M13.5 14h4.5M13.5 17h2.8" fill="none" stroke="{c}" {s}/>',
     # ступени и флажок — работа и карьера
     'orgCareer': '<path d="M3 20.5V17h4.5v-4h4.5V9h4.5v11.5z" fill="{f}" stroke="{c}" {s}/><path d="M21 20.5H3M16.5 9V3" fill="none" stroke="{c}" {s}/><path d="M16.5 3h4l-1.1 1.5 1.1 1.5h-4z" fill="{c}" stroke="{c}" stroke-width="1" stroke-linejoin="round"/>',
-    # тарелка, вилка и нож — ресторан
-    'orgFood': '<circle cx="12" cy="12.5" r="5.8" fill="{f}" stroke="{c}" {s}/><circle cx="12" cy="12.5" r="3.2" fill="#fff" stroke="{c}" stroke-width="1.4"/><path d="M3 4v4.5a1.5 1.5 0 0 0 3 0V4M4.5 4v16.5" fill="none" stroke="{c}" {s}/><path d="M21 4c-1.6 1-2.4 3.3-2.4 5.8v2.4H21v8.3" fill="none" stroke="{c}" {s}/>',
+    # колпак повара — рестораны, кафе и пекарни (12.10.2026, 10:55 по просьбе Ирины; до этого — тарелка с вилкой и ножом)
+    'orgFood': '<path d="M7 14c-2.4-.2-4-2.1-4-4.3a4.3 4.3 0 0 1 5.6-4.1A4.6 4.6 0 0 1 12 4a4.6 4.6 0 0 1 3.4 1.6A4.3 4.3 0 0 1 21 9.7c0 2.2-1.6 4.1-4 4.3v3.7H7z" fill="{f}" stroke="{c}" {s}/><rect x="6.5" y="17.7" width="11" height="3" rx="1" fill="#fff" stroke="{c}" {s}/><path d="M9.3 9.6c.5-1 1.4-1.6 2.4-1.8" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/>',
     # блюдо под крышкой — кейтеринг
     'orgCatering': '<path d="M4.5 17a7.5 7.5 0 0 1 15 0z" fill="{f}" stroke="{c}" {s}/><path d="M2.8 17h18.4M3.5 20.3h17M12 9.5V8M10.6 8h2.8" fill="none" stroke="{c}" {s}/><path d="M8 13.6a4.6 4.6 0 0 1 2.4-1.8" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/>',
     # корзина — магазин
     'orgShop': '<path d="M3.5 10h17l-1.8 9.2a1.6 1.6 0 0 1-1.6 1.3H6.9a1.6 1.6 0 0 1-1.6-1.3z" fill="{f}" stroke="{c}" {s}/><path d="M8 10l3-5.5M16 10l-3-5.5M2.5 10h19M9 13.5v3.8M12 13.5v3.8M15 13.5v3.8" fill="none" stroke="{c}" {s}/>',
     # ножницы и искорка — салон красоты
     'orgBeauty': '<circle cx="6.5" cy="17.5" r="2.8" fill="{f}" stroke="{c}" {s}/><circle cx="15.5" cy="17.5" r="2.8" fill="{f}" stroke="{c}" {s}/><path d="M8.4 15.4 15 4.5M13.6 15.4 7 4.5" fill="none" stroke="{c}" {s}/><path d="M19.5 3.2c.3 1.5.9 2.1 2.3 2.4-1.4.3-2 .9-2.3 2.4-.3-1.5-.9-2.1-2.3-2.4 1.4-.3 2-.9 2.3-2.4z" fill="{c}" stroke="{c}" stroke-width="1" stroke-linejoin="round"/>',
-    # танцовщица — студия танца, спорта и йоги
-    'orgStudio': '<circle cx="12" cy="4.4" r="2" fill="{f}" stroke="{c}" {s}/><path d="M6.5 9.5c1.6-2 3.4-2.9 5.5-2.9s3.9.9 5.5 2.9M12 6.8v5.4" fill="none" stroke="{c}" {s}/><path d="M7 14.2c1.5-1.4 3.2-2 5-2s3.5.6 5 2l-1.6 1.2H8.6z" fill="{f}" stroke="{c}" {s}/><path d="M10.6 15.4l-1.5 5.6M13.4 15.4l2.9 5.2" fill="none" stroke="{c}" {s}/>',
-    # гаечный ключ и молоток — мастерские
-    'orgServices': '<path d="M14.9 3.6a4.3 4.3 0 0 0-4.1 5.7L3.9 16.2a1.9 1.9 0 0 0 2.7 2.7l6.9-6.9a4.3 4.3 0 0 0 5.7-4.1l-2.5 1.3-2.1-.8-.8-2.1z" fill="{f}" stroke="{c}" {s}/><circle cx="5.3" cy="17.6" r=".9" fill="{c}"/><path d="M13.8 14.6l5.4 5.4" fill="none" stroke="{c}" stroke-width="2.6" stroke-linecap="round"/><path d="M11.2 12l2.6 2.6" fill="none" stroke="{c}" {s}/>',
+    # цветок лотоса — студии танца, спорта и йоги (12.10.2026, 10:55 по просьбе Ирины «сделай другой дизайн»; до этого — танцовщица)
+    'orgStudio': '<path d="M12 4c2 2.3 2.9 4.8 2.9 7.3S13.9 16 12 17.5c-1.9-1.5-2.9-3.7-2.9-6.2S10 6.3 12 4z" fill="{f}" stroke="{c}" {s}/><path d="M9.3 9.4C7 8.6 4.6 8.8 2.8 9.7c.6 3.8 3.6 7 9.2 7.8M14.7 9.4c2.3-.8 4.7-.6 6.5.3-.6 3.8-3.6 7-9.2 7.8" fill="#fff" stroke="{c}" {s}/><path d="M4 20.2c2.6-1.4 5.3-2 8-2s5.4.6 8 2" fill="none" stroke="{c}" {s}/>',
+    # молоток и отвёртка крест-накрест — мастерские и сервисы (12.10.2026, 10:55 по просьбе Ирины; до этого — гаечный ключ)
+    'orgServices': '<path d="M14.5 9.5 4.7 19.3a1.5 1.5 0 0 0 2.1 2.1l9.8-9.8" fill="{f}" stroke="{c}" {s}/><path d="M12.4 6.2l3.3-3.3 5.4 5.4-3.3 3.3z" fill="#fff" stroke="{c}" {s}/><path d="M9.6 9.6 4.2 4.2M11 11l2 2" fill="none" stroke="{c}" {s}/><path d="M13.7 13.7l5.7 5.7a1.5 1.5 0 0 1-2.1 2.1l-5.7-5.7z" fill="{f}" stroke="{c}" {s}/><path d="M3.2 3.2l1.6-.6.6 1.6" fill="none" stroke="{c}" stroke-width="1.4"/>',
     # грузовик с посылкой — перевозки
     'orgTransport': '<path d="M2.5 6.5h11v10h-11z" fill="{f}" stroke="{c}" {s}/><path d="M13.5 9.5h4l3 3.4v3.6h-7z" fill="#fff" stroke="{c}" {s}/><path d="M6.2 6.5v3.4h3.6V6.5" fill="none" stroke="{c}" {s}/><circle cx="6.5" cy="17.2" r="2" fill="{c}"/><circle cx="16.8" cy="17.2" r="2" fill="{c}"/>',
     # здание бюро
