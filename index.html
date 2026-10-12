@@ -866,7 +866,7 @@ function ico(name, line = '#2E5A88', fill, size = 24){
 const AVATAR_SVG = '<svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="46" fill="#FFFCF8" stroke="#6E4F3C" stroke-width="3"/><g transform="rotate(22.5 50 50)"><path d="M50 50 C42 40 43 24 50 15 C57 24 58 40 50 50Z" fill="#E3E6D6" stroke="#66704F" stroke-width="2"/></g><g transform="rotate(67.5 50 50)"><path d="M50 50 C42 40 43 24 50 15 C57 24 58 40 50 50Z" fill="#E3E6D6" stroke="#66704F" stroke-width="2"/></g><g transform="rotate(112.5 50 50)"><path d="M50 50 C42 40 43 24 50 15 C57 24 58 40 50 50Z" fill="#E3E6D6" stroke="#66704F" stroke-width="2"/></g><g transform="rotate(157.5 50 50)"><path d="M50 50 C42 40 43 24 50 15 C57 24 58 40 50 50Z" fill="#E3E6D6" stroke="#66704F" stroke-width="2"/></g><g transform="rotate(202.5 50 50)"><path d="M50 50 C42 40 43 24 50 15 C57 24 58 40 50 50Z" fill="#E3E6D6" stroke="#66704F" stroke-width="2"/></g><g transform="rotate(247.5 50 50)"><path d="M50 50 C42 40 43 24 50 15 C57 24 58 40 50 50Z" fill="#E3E6D6" stroke="#66704F" stroke-width="2"/></g><g transform="rotate(292.5 50 50)"><path d="M50 50 C42 40 43 24 50 15 C57 24 58 40 50 50Z" fill="#E3E6D6" stroke="#66704F" stroke-width="2"/></g><g transform="rotate(337.5 50 50)"><path d="M50 50 C42 40 43 24 50 15 C57 24 58 40 50 50Z" fill="#E3E6D6" stroke="#66704F" stroke-width="2"/></g><g transform="rotate(0.0 50 50)"><path d="M50 50 C45 43 45 32 50 26 C55 32 55 43 50 50Z" fill="#EADFCF" stroke="#6E4F3C" stroke-width="2"/></g><g transform="rotate(45.0 50 50)"><path d="M50 50 C45 43 45 32 50 26 C55 32 55 43 50 50Z" fill="#EADFCF" stroke="#6E4F3C" stroke-width="2"/></g><g transform="rotate(90.0 50 50)"><path d="M50 50 C45 43 45 32 50 26 C55 32 55 43 50 50Z" fill="#EADFCF" stroke="#6E4F3C" stroke-width="2"/></g><g transform="rotate(135.0 50 50)"><path d="M50 50 C45 43 45 32 50 26 C55 32 55 43 50 50Z" fill="#EADFCF" stroke="#6E4F3C" stroke-width="2"/></g><g transform="rotate(180.0 50 50)"><path d="M50 50 C45 43 45 32 50 26 C55 32 55 43 50 50Z" fill="#EADFCF" stroke="#6E4F3C" stroke-width="2"/></g><g transform="rotate(225.0 50 50)"><path d="M50 50 C45 43 45 32 50 26 C55 32 55 43 50 50Z" fill="#EADFCF" stroke="#6E4F3C" stroke-width="2"/></g><g transform="rotate(270.0 50 50)"><path d="M50 50 C45 43 45 32 50 26 C55 32 55 43 50 50Z" fill="#EADFCF" stroke="#6E4F3C" stroke-width="2"/></g><g transform="rotate(315.0 50 50)"><path d="M50 50 C45 43 45 32 50 26 C55 32 55 43 50 50Z" fill="#EADFCF" stroke="#6E4F3C" stroke-width="2"/></g><circle cx="50" cy="50" r="7" fill="#B98324"/></svg>';
 
 </script>
-<script src="/data/specialists.js?v=8b6307f7"></script>
+<script src="/data/specialists.js?v=b50672cb"></script>
 <script src="/data/vacancies.js?v=4b6b6ac1"></script>
 <script src="/data/organizations.js?v=96e522f7"></script>
 <script>
@@ -1356,7 +1356,29 @@ const SITE = 'https://svoiludi.ch/';
 const OKKEY = {};   // id → ключ из открытой ссылки: только в этой вкладке, пока она открыта
 const svlHash = async k => { try { const b = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(String(k || ''))); return Array.from(new Uint8Array(b), x => x.toString(16).padStart(2, '0')).join(''); } catch (x) { return ''; } };
 const keyOk = async (r, k) => !!(r && r.keyHash && k && (await svlHash(k)) === r.keyHash);
+/* режим Ирины (12.10.2026): ключ из ссылки предпросмотра, которую Ирина один раз открыла, запоминается только на её устройстве
+   (localStorage, svoiludi-admin-keys) — тогда кнопки «Пригласить в WhatsApp» и «Отправить на подтверждение» работают и при открытии карточки из списка.
+   Устаревший ключ (после новой ссылки) при загрузке проверяется по отпечатку и забывается. У посетителей ничего не сохраняется. */
+const ADMKEYS = 'svoiludi-admin-keys';
+const admKeys = () => { try { return JSON.parse(localStorage.getItem(ADMKEYS) || '{}') || {}; } catch (e) { return {}; } };
+const keepKey = (id, k) => { if (!ADMIN) return; try { const o = admKeys(); if (k) o[id] = k; else delete o[id]; localStorage.setItem(ADMKEYS, JSON.stringify(o)); } catch (e) {} };
+if (ADMIN) { const o = admKeys(); Object.assign(OKKEY, o);
+  (async () => { for (const [id, k] of Object.entries(o)) { const r = (window.SPECIALISTS || []).find(x => x.id === id); if (!(await keyOk(r, k))) { delete OKKEY[id]; keepKey(id, ''); } } })(); }
 const previewUrl = s => `${SITE}#preview=${encodeURIComponent(s.id)}.${encodeURIComponent(OKKEY[s.id] || '')}`;
+/* приглашение в WhatsApp для скрытой пробной карточки (12.10.2026, Ирина: «я буду оттуда отправлять сообщение, оно должно туда в кнопку вотсап вкладываться»).
+   У карточки поле invite = { seen: 'ваше объявление о …', by: 'по вашему объявлению', local: 'фраза про кантон' }. В режиме Ирины кнопка WhatsApp
+   в контактах карточки и кнопка «Пригласить в WhatsApp» открывают чат специалиста с готовым сообщением и ссылкой на предпросмотр. Сайт ничего не отправляет. */
+const waDigits = v => { let d = String(v || '').replace(/[^\d+]/g, ''); if (/^00/.test(d)) d = d.slice(2); if (/^\+/.test(d)) d = d.slice(1); else if (/^0\d{9}$/.test(d)) d = '41' + d.slice(1); return d; };
+const waTo = s => (s.contacts || {}).whatsapp || (s.contacts || {}).phone || '';
+const inviteMsg = s => { const v = s.invite || {}, n = String(s.name || '').trim().split(/\s+/)[0];
+  return [`Здравствуйте${n ? ', ' + n : ''}! Меня зовут Ирина Вознесенская. ${v.seen ? `Увидела ${v.seen} и решила написать 🙂` : 'Решила вам написать 🙂'}`,
+    'Я запустила проект 🌿 «Свои люди» — справочник специалистов и организаций, которые работают в Швейцарии на русском и украинском. Чтобы свои могли найти своих: и те, кто только приехал, и те, кто живёт здесь давно. Сейчас всё разбросано по чатам и группам, а здесь — в одном месте, по кантонам. Проект создан для того, чтобы сделать жизнь в Швейцарии максимально лёгкой и без стресса — и тем, кто ищет помощь, и тем, кто её предлагает.',
+    `Чтобы вам было проще представить, как это выглядит, я подготовила пробную карточку ${v.by || 'по вашему объявлению'}. Пока её видите только вы, для всех она появится только с вашего согласия, и всё в ней можно поменять:\n👉 ${previewUrl(s)}`,
+    `${v.local ? v.local + ' ' : ''}До конца 2027 года всё бесплатно: карточка с фото и услугами, визитка и прайс-лист для телефона, ваши акции на сайте.`,
+    'Как справочник выглядит целиком:\n👥 Специалисты: https://svoiludi.ch/\n📅 События и курсы: https://svoiludi.ch/events/\n🎁 Акции: https://svoiludi.ch/akcii/\n💼 Вакансии и партнёрство: https://svoiludi.ch/vakansii/',
+    'Если интересно, просто напишите, что поправить или добавить, — и я помогу с остальным. А если сейчас не время, ничего делать не нужно 🤍'].join('\n\n'); };
+const inviteHref = s => `https://wa.me/${waDigits(waTo(s))}?text=${encodeURIComponent(inviteMsg(s))}`;
+const inviteOn = s => ADMIN && !!s.invite && !!OKKEY[s.id] && !!waTo(s);
 const mailto = (to, su, body) => `mailto:${to}?subject=${encodeURIComponent(su)}&body=${encodeURIComponent(body)}`;
 const gmail = (to, su, body) => `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(to)}&su=${encodeURIComponent(su)}&body=${encodeURIComponent(body)}`;
 const ownerLetter = s => ({ su: 'Ваша карточка в «Своих людях в Швейцарии» — посмотрите, пожалуйста',
@@ -1467,8 +1489,11 @@ function adminBox(s){
     : `<div class="adm-act off"><b>Письмом не получится</b><span>У специалиста нет e-mail в карточке. Отправь ссылку через Telegram или WhatsApp.</span></div>`)
     + admAct(`data-copyprev="${esc(s.id)}"`, 'Скопировать ссылку для Telegram',
       'Текст со ссылкой на предпросмотр копируется в буфер. Вставь его специалисту в Telegram или WhatsApp. Подтверждение он сделает кнопкой на сайте — e-mail не нужен.');
+  const inv = !s.invite ? '' : inviteOn(s) ? admAct(`href="${esc(inviteHref(s))}" ${ext}`, 'Пригласить в WhatsApp — готовое сообщение',
+      `Откроется чат с ${esc(waTo(s))} и готовый текст приглашения со ссылкой на пробную карточку. Остаётся нажать «Отправить». Тот же текст открывает кнопка WhatsApp в контактах карточки (только у тебя).`, true)
+    : `<div class="adm-act off"><b>Приглашение в WhatsApp</b><span>${waTo(s) ? 'Открой карточку один раз по ссылке с ключом (её присылает Claude) — после этого кнопка с готовым сообщением появится здесь и в контактах.' : 'В карточке нет номера WhatsApp или телефона.'}</span></div>`;
   return `<div class="adm-box"><b>Видишь только ты</b><div class="adm-sec"><span><b>Карточка:</b> ${esc(s.status || '—')}${why ? ' · на сайте не видна (' + esc(why) + ')' : ' · видна на сайте'}${s.keyHash ? '' : ' · нет ключа предпросмотра'}</span>
-    ${(s.todo || []).length ? `<ul class="adm-todo">${s.todo.map(x => `<li>${esc(x)}</li>`).join('')}</ul>` : ''}<div class="adm-acts">${acts}</div></div>${priceAdmin(s, to)}</div>`;
+    ${(s.todo || []).length ? `<ul class="adm-todo">${s.todo.map(x => `<li>${esc(x)}</li>`).join('')}</ul>` : ''}<div class="adm-acts">${inv}${acts}</div></div>${priceAdmin(s, to)}</div>`;
 }
 document.addEventListener('click', async e => { const b = e.target.closest('[data-copyprev]'); if (!b) return;
   const s = SPECIALISTS.find(x => x.id === b.dataset.copyprev); const t = `Здравствуйте! Я подготовила вашу карточку для справочника «Свои люди в Швейцарии». Пока её видите только вы. Посмотрите, пожалуйста, всё ли верно.\n\n${previewUrl(s)}\n\nЕсли всё верно, внизу карточки отметьте галочку и нажмите «Подтверждаю» — это одно нажатие. Если что-то не так, нажмите «Нужно исправить» и напишите прямо там. Спасибо!`;
@@ -1478,7 +1503,7 @@ function openCard(id){
   const s = SPECIALISTS.find(x => x.id === id); if (!s) return;
   const k = CATS[s.cat] || CATS.status, c = s.contacts || {};
   const contacts = ['phone', 'email', 'site', 'site2', 'instagram', 'telegram', 'bot', 'whatsapp'].filter(x => c[x]).map(x => {
-    const [t, h, v] = LINK[x](c[x]); return `<li><span>${t}</span><a href="${esc(h)}" ${x === 'phone' || x === 'email' ? '' : ext}>${esc(v)}</a></li>`; }).join('');
+    const [t, h0, v] = LINK[x](c[x]); const h = x === 'whatsapp' && inviteOn(s) ? inviteHref(s) : h0; return `<li><span>${t}</span><a href="${esc(h)}" ${x === 'phone' || x === 'email' ? '' : ext}>${esc(v)}</a></li>`; }).join('');
   const box = document.getElementById('qmCard');
   box.style.setProperty('--lc', k.c); box.style.setProperty('--lf', `color-mix(in srgb,${k.c} 13%,var(--paper))`);
   box.innerHTML = `<div class="qm-top"><div class="qm-ph">${photo(s)}</div><div class="qm-head">${s.sample ? '<span class="qm-sample">Образец карточки · специалист вымышленный</span>' : ''}<span class="sp-sub" style="color:${k.c}">${ico(k.i, k.c, null, 16)}${esc(k.t)}${(() => { const l = state.canton ? tierIn(s, state.canton) : tierBest(s); return l === 'vip' ? ` · ${tierName(s, 'vip')} (платное размещение)` : l === 'партнёр' ? ` · ${tierName(s, 'партнёр')} (платное размещение)` : ''; })()}</span>
@@ -1715,11 +1740,11 @@ document.getElementById('trial').hidden = !ADMIN;
 fillSelects(); render();
 // ссылки для бота: …/specialisty/#anna-keller открывает карточку, …/specialisty/#k-health — направление
 const openFromHash = () => { const id = decodeURIComponent(location.hash.slice(1));
-  if (id.startsWith('preview=')){ const [pid, key] = id.slice(8).split('.'); const sp = SPECIALISTS.find(x => x.id === pid); keyOk(sp, key).then(ok => { if (!ok) return; OKKEY[pid] = key; PREVIEW = pid; openCard(pid); setTimeout(() => { const b = document.querySelector('.pv-box'); if (b) b.scrollIntoView({ block: 'center' }); }, 300); }); return; }
-  if (id.startsWith('price=')){ const [pid, key] = id.slice(6).split('.'); const sp = SPECIALISTS.find(x => x.id === pid); keyOk(sp, key).then(ok => { if (!ok) return; OKKEY[pid] = key; PRICEVIEW = pid; openCard(pid); setTimeout(() => { const b = document.getElementById('pvPrice'); if (b) b.scrollIntoView({ block: 'center' }); }, 300); }); return; }
+  if (id.startsWith('preview=')){ const [pid, key] = id.slice(8).split('.'); const sp = SPECIALISTS.find(x => x.id === pid); keyOk(sp, key).then(ok => { if (!ok) return; OKKEY[pid] = key; keepKey(pid, key); PREVIEW = pid; openCard(pid); setTimeout(() => { const b = document.querySelector(ADMIN ? '.adm-box' : '.pv-box'); if (b) b.scrollIntoView({ block: ADMIN ? 'start' : 'center' }); }, 300); }); return; }
+  if (id.startsWith('price=')){ const [pid, key] = id.slice(6).split('.'); const sp = SPECIALISTS.find(x => x.id === pid); keyOk(sp, key).then(ok => { if (!ok) return; OKKEY[pid] = key; keepKey(pid, key); PRICEVIEW = pid; openCard(pid); setTimeout(() => { const b = document.getElementById('pvPrice'); if (b) b.scrollIntoView({ block: 'center' }); }, 300); }); return; }
   if (id.startsWith('list=')){ state.shared = new Set(id.slice(5).split(',').filter(x => SPECIALISTS.some(s => s.id === x))); state.fav = false; render(); return; }
   if (id.startsWith('k-') && CATS[id.slice(2)]){ state.cat = id.slice(2); state.spec = ''; render(); document.querySelector('.finder').scrollIntoView(); return; }
-  if (id && SPECIALISTS.some(s => s.id === id && (s.sample || !hiddenReason(s)))) openCard(id); };
+  if (id && SPECIALISTS.some(s => s.id === id && (s.sample || !hiddenReason(s) || ADMIN))) openCard(id); };   // скрытые карточки по #id открываются только в режиме Ирины (12.10.2026)
 openFromHash(); addEventListener('hashchange', openFromHash);
 </script>
 
