@@ -57,7 +57,7 @@ sub(r'<section class="s-hero has-art" aria-labelledby="h1">.*?</section>', HERO)
 # фильтры
 rep('<label for="type"><i>3</i>Что ищешь</label>', '<label for="type"><i>3</i>Какая акция</label>')
 rep('<label for="when"><i>5</i>Когда</label>', '<label for="when"><i>5</i>Срок</label>')
-sub(r'<option value="">Все ближайшие</option><option value="week">На этой неделе</option><option value="month">В этом месяце</option><option value="next">В следующем месяце</option>',
+sub(r'<option value="">Все ближайшие</option><option value="today">Сегодня</option><option value="weekend">Эти выходные</option><option value="week">На этой неделе</option><option value="month">В этом месяце</option><option value="next">В следующем месяце</option>',
     '<option value="">Все действующие</option><option value="always">Постоянные акции</option><option value="week">Заканчиваются на этой неделе</option><option value="month">Заканчиваются в этом месяце</option>')
 rep('aria-label="Подбор событий"', 'aria-label="Подбор акций"')
 # игровые сердечки (решение Ирины 11.10.2026, 19:16): «Мне повезёт» и «Мои сердечки»; сердечки хранятся только в браузере человека
