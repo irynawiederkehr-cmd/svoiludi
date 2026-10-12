@@ -727,7 +727,7 @@ window.ORGANIZATIONS = [
     "head": {
       "name": "Viktoriia Pyrozhenko",
       "role": "владелица (Inhaberin)",
-      "spec": ""
+      "spec": "viktoriia-beauty-paradise"
     },
     "contacts": {
       "site": "https://dikidi.net/1169172",
