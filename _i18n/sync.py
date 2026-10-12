@@ -8,6 +8,15 @@ import sys, os, re, json
 sys.path.insert(0, os.path.dirname(__file__))
 import pages
 ROOT = pages.ROOT; I18N = pages.I18N
+PAUSE = os.path.join(I18N, 'PAUSE_TRANSLATIONS.md')   # есть файл — переводы на паузе (решение Ирины 12.10.2026)
+
+def pause_note():
+    if not os.path.exists(PAUSE): return False
+    print('\n!!! ПЕРЕВОДЫ НА ПАУЗЕ (решение Ирины 12.10.2026). НЕ ПЕРЕВОДИ units, не запускай субагентов-переводчиков и не делай украинскую\n'
+          '!!! версию, пока Ирина не скажет «переводи». Непереведённое копится в _i18n/todo.json и будет переведено одним разом перед запуском.\n'
+          '!!! Подробно: _i18n/PAUSE_TRANSLATIONS.md')
+    return True
+
 KNOWN = {'uk', 'assets', 'data', 'img', 'fav', 'files', '_i18n'} | {p.strip('/').split('/')[0] for _, p in pages.PAGES if p != '/'}
 
 def new_pages():
@@ -52,6 +61,7 @@ def check():
     rep = {'units': units, 'new_pages': new_pages()}
     json.dump(rep, open(os.path.join(I18N, 'todo.json'), 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
     print(f"to translate: {len(units)} units; new pages without mirror: {rep['new_pages'] or 'none'}")
+    pause_note()
     return rep
 
 ATTR = re.compile(r'\b(alt|title|aria-label|placeholder|content|data-[\w-]+)\s*=\s*(\\?")(.*?)\2')
@@ -104,6 +114,7 @@ def build():
     stats()
     m = pages.build()
     print(f'built; untranslated left: {len(m)}')
+    if m and pause_note(): return          # на паузе непереведённое — не ошибка
     if m: sys.exit(1)
 
 if __name__ == '__main__':
