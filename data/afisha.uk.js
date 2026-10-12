@@ -316,5 +316,346 @@ window.AFISHA = [
     langs: ['українська', 'російська', 'німецька'], commercial: true, organizers: [{ org: 'obrazec-salon-krasoty', name: 'Салон «Приклад» GmbH (зразок)' }],
     signup: 'wa', contacts: { phone: '+41 00 000 00 00', whatsapp: '+41 79 000 00 00', instagram: '@salon_primer' }, link: 'https://example.com/salon',
     about: 'Для тих, хто прийшов у салон уперше: перша стрижка за половину ціни, завжди. Ми раді новим клієнтам і хочемо, щоб вам у нас було спокійно й приємно. Запис телефоном або у WhatsApp.'
+  },
+  /* «Рідне Слово» (12.10.2026): расписание школы с её страницы — ждёт подтверждения школы вместе с карточкой организации (organizacii/#preview=…) */
+  {
+    sections: ['kursy'], kind: 'regular', ktype: 'kids',
+    id: 'ridne-slovo-zanyatiya', keyHash: '166a038502e1ad58594ee1333a0553f505f30f146afa54c2b34255c649ceb4ea', status: 'на підтвердженні', title: 'Українська суботня школа «Рідне Слово»: заняття I семестру 2026–2027', type: 'kids',
+    date: '2026-08-15', repeat: { freq: 'weekly', until: '2027-01-30', except: ['2026-09-19', '2026-09-26', '2026-10-03', '2026-10-10', '2026-12-26', '2027-01-02', '2027-01-09'] },
+    canton: 'Bern', address: 'Gotthelfstrasse 40, 3013 Bern', online: false,
+    langs: ['українська'], level: 'діти: садочок, дошкільнята, молодша, середня й старша групи', price: '', commercial: true,
+    organizers: [{ org: 'ridne-slovo-bern', name: 'Українська школа «Рідне Слово»' }], link: 'https://ridneslovo.ch/register/',
+    about: 'Заняття щосуботи за розкладом школи: українська мова й література, традиції, культура та історія України. Записати дитину можна анкетою для батьків на сайті школи.'
+  },
+  /* пробная карточка «Рідне Слово» (лид, 12.10.2026): события школы по её постам в Facebook (facebook.com/ridneslovo.bern, фото с анонсами).
+     Все уже прошли — в предпросмотре карточки они стоят с пометкой «прошло», для примера. Личные телефоны из постов не берём. */
+  {
+    sections: ['events'], type: 'retreat',
+    id: 'ridne-slovo-tabir-osin-2026', keyHash: '166a038502e1ad58594ee1333a0553f505f30f146afa54c2b34255c649ceb4ea', status: 'на підтвердженні', title: 'Осінній табір «Мандрівка країнами світу» для підлітків 13–16 років у Мюмлісвілі',
+    date: '2026-09-20', dateEnd: '2026-09-26',
+    canton: 'Solothurn', address: '4717 Mümliswil', online: false,
+    langs: ['українська'], level: 'підлітки 13–16 років', price: 'CHF 250', per: 'за тиждень', commercial: true,
+    organizers: [{ org: 'ridne-slovo-bern', name: 'Українська школа «Рідне Слово»' }, { name: 'Ukraine Hilfe Bern', link: 'https://www.ukraine-hilfe-bern.ch' }, { name: 'Ukrainer in Bern' }], link: 'https://www.facebook.com/ridneslovo.bern/',
+    about: 'Тиждень у горах кантону Золотурн: щодня — нова країна (Швейцарія, Україна, Німеччина, Франція, Англія, Італія та інші), її культура, традиції, мова, музика й кухня. Квести та командні ігри, творчі майстер-класи, музика й танці, спорт і прогулянки на природі.'
+  },
+  {
+    sections: ['events'], type: 'culture',
+    id: 'ridne-slovo-kino-chervona-ruta', keyHash: '166a038502e1ad58594ee1333a0553f505f30f146afa54c2b34255c649ceb4ea', status: 'на підтвердженні', title: 'Кіно українською для підлітків 14–17 років: комедія «Потяг «Червона Рута» у Фрібурі',
+    date: '2026-08-29', time: '17:00', timeEnd: '20:56',
+    canton: 'Bern', address: 'Treffpunkt, Bahnhof Bern, 3011 Bern', online: false,
+    langs: ['українська'], level: 'підлітки 14–17 років', price: 'CHF 10', priceNote: 'благодійний внесок', commercial: false,
+    organizers: [{ org: 'ridne-slovo-bern', name: 'Українська школа «Рідне Слово»' }, { name: 'Ukraine Hilfe Bern', link: 'https://www.ukraine-hilfe-bern.ch' }, { name: 'Ukrainer in Bern' }], link: 'https://www.facebook.com/ridneslovo.bern/',
+    about: 'Збір біля Treffpunkt на вокзалі Берна, разом їдемо до Фрібура на українську комедію «Потяг «Червона Рута», потім фото й спілкування, близько 21:00 — знову в Берні. Із собою — перекус і вода. Потрібна реєстрація, місць небагато.'
+  },
+  {
+    sections: ['events'], type: 'kids',
+    id: 'ridne-slovo-kozacki-zabavy', keyHash: '166a038502e1ad58594ee1333a0553f505f30f146afa54c2b34255c649ceb4ea', status: 'на підтвердженні', title: '«Козацькі забави» — інтелектуальні ігри для учнів школи «Рідне Слово»',
+    date: '2026-09-12', time: '10:00',
+    canton: 'Bern', address: 'Gotthelfstrasse 40, 3013 Bern', online: false,
+    langs: ['українська'], level: 'учні школи, у межах суботніх занять', price: '', commercial: true,
+    organizers: [{ org: 'ridne-slovo-bern', name: 'Українська школа «Рідне Слово»' }], link: 'https://www.facebook.com/ridneslovo.bern/',
+    about: 'На уроках української мови, літератури та культури — змагання в знаннях і кмітливості: сторінки української літератури, ігри зі словами й мовні загадки, козацькі традиції та звичаї.'
+  },
+  {
+    sections: ['events'], type: 'culture',
+    id: 'jewish-culture-shabat', keyHash: '75318fbbb1510d6477b59476d04f17fd965ae98df6b1ddbf9f2f89831d768fd5', status: 'на підтвердженні', title: 'Шабат у Берні — щотижнева зустріч громади Jewish Culture Switzerland',
+    date: '2026-10-17', time: '11:00', timeEnd: '14:00', repeat: { freq: 'weekly', until: '2027-01-30' },
+    canton: 'Bern', address: 'Marktgasse, Käfiggässchen 63, 3011 Bern', online: false,
+    langs: ['українська', 'російська', 'англійська'], level: 'для всіх, можна з дітьми', price: 'безкоштовно', commercial: false,
+    organizers: [{ org: 'jewish-culture-bern', name: 'Jewish Culture Switzerland' }], link: 'https://jewishculture.ch/uk/events/shabbat-shalom',
+    about: 'Щосуботи громада зустрічає Шабат у теплій, невимушеній, родинній атмосфері. Молитва й хвала, читання Писання, спілкування та спільний стіл. Українською та російською з перекладом англійською, вхід вільний.'
+  },
+  /* Jewish Culture Switzerland (12.10.2026): события и занятия с их сайта jewishculture.ch для примера — ждут подтверждения общины вместе с карточкой (organizacii/#preview=…);
+     прошедшие даты Claude заменяет следующими с их сайта перед каждым письмом (правило Ирины 12.10.2026, «lidy-svoiludi.md») */
+  {
+    sections: ['events'], type: 'meet',
+    id: 'jewish-culture-teens-tribe', keyHash: '75318fbbb1510d6477b59476d04f17fd965ae98df6b1ddbf9f2f89831d768fd5', status: 'на підтвердженні', title: 'Teens Tribe & Youvin — вечір для молоді',
+    date: '2026-10-23', time: '18:30', timeEnd: '21:30',
+    canton: 'Bern', address: 'Marktgasse, Käfiggässchen 63, 3011 Bern', online: false,
+    langs: ['німецька'], level: 'молодь', price: '', commercial: false,
+    organizers: [{ org: 'jewish-culture-bern', name: 'Jewish Culture Switzerland' }], link: 'https://jewishculture.ch/uk/events/teens-tribe-youvin',
+    about: 'Спільний вечір молоді громади та Vineyard Bern, щоб подружитися й змістовно провести час. Буде знайомство, хвала, коротке слово, перекус і спілкування. Літературною німецькою, запис — через форму на сайті громади.'
+  },
+  {
+    sections: ['events'], type: 'culture',
+    id: 'jewish-culture-erev-shabat', keyHash: '75318fbbb1510d6477b59476d04f17fd965ae98df6b1ddbf9f2f89831d768fd5', status: 'на підтвердженні', title: 'Ерев Шабат — зустрічаємо Шабат разом',
+    date: '2026-10-30', time: '18:30', timeEnd: '20:30',
+    canton: 'Bern', address: 'Marktgasse, Käfiggässchen 63, 3011 Bern', online: false,
+    langs: ['німецька', 'англійська'], level: 'для всіх', price: '', commercial: false,
+    organizers: [{ org: 'jewish-culture-bern', name: 'Jewish Culture Switzerland' }], link: 'https://jewishculture.ch/uk/events/erev-shabbat',
+    about: 'Вечір п’ятниці, щоб залишити метушню тижня позаду й зустріти Шабат із радістю, хвалою та теплим спілкуванням. Німецькою та англійською. Будемо раді, якщо принесете щось до святкового столу.'
+  },
+  {
+    sections: ['kursy'], kind: 'regular', ktype: 'kids',
+    id: 'jewish-culture-kinder-club', keyHash: '75318fbbb1510d6477b59476d04f17fd965ae98df6b1ddbf9f2f89831d768fd5', status: 'на підтвердженні', title: 'Kinder Club — вечір для дітей 8–13 років', type: 'kids',
+    date: '2026-10-15', time: '18:30', timeEnd: '20:00', repeat: { freq: 'weekly', until: '2026-12-03' },
+    canton: 'Bern', address: 'Marktgasse, Käfiggässchen 63, 3011 Bern', online: false,
+    langs: ['українська'], level: 'діти 8–13 років', price: '', commercial: false,
+    organizers: [{ org: 'jewish-culture-bern', name: 'Jewish Culture Switzerland' }], link: 'https://jewishculture.ch/uk/workshops',
+    about: 'Воркшоп для дітей 8–13 років щочетверга. Творчість, нові друзі й вечір разом. Осінній сезон триває з 17 вересня до 3 грудня 2026 року, дитину записують через форму на сайті громади.'
+  },
+  {
+    sections: ['kursy'], kind: 'regular', ktype: 'lang',
+    id: 'jewish-culture-deutsch-club', keyHash: '75318fbbb1510d6477b59476d04f17fd965ae98df6b1ddbf9f2f89831d768fd5', status: 'на підтвердженні', title: 'Deutsch Sprechclub — розмовний клуб німецької', type: 'lang',
+    date: '2026-10-15', time: '18:30', timeEnd: '21:00', repeat: { freq: 'weekly', until: '2026-12-03' },
+    canton: 'Bern', address: 'Marktgasse, Käfiggässchen 63, 3011 Bern', online: false,
+    langs: ['німецька'], level: '', price: '', commercial: false,
+    organizers: [{ org: 'jewish-culture-bern', name: 'Jewish Culture Switzerland' }], link: 'https://jewishculture.ch/uk/workshops',
+    about: 'Розмовний клуб німецької щочетверга — місце, де можна просто бути, відчувати й насолоджуватися процесом. Осінній сезон триває з 17 вересня до 3 грудня 2026 року, запис — через форму на сайті громади.'
+  },
+  /* VIDNOVA (12.10.2026): цена форума в анонсе не указана — commercial: true, чтобы в предпросмотре не было «бесплатно»; цену спросить. Их ближайшее событие с их канала «Українці в Швейцарії» — для примера в пробной карточке, ждёт подтверждения вместе с карточкой
+     (organizacii/#preview=vidnova-zurich…); прошедшее Claude заменяет следующим их событием перед каждым письмом (правило Ирины 12.10.2026, «lidy-svoiludi.md») */
+  {
+    sections: ['events'], type: 'talk',
+    id: 'vidnova-vitalis-2026', keyHash: '09e960beed9572499e1ba030273dfc4cd7f04a55d1b49f6b709212320041cc2c', status: 'на підтвердженні', title: 'VITALIS INTERNATIONAL — міжнародний онлайн-форум «Здоров’я · Краса · Мода»',
+    date: '2026-10-17',
+    canton: 'Zürich', address: '', online: true,
+    langs: ['українська'], level: 'для дорослих', price: '', commercial: true,
+    organizers: [{ org: 'vidnova-zurich', name: 'VIDNOVA' }, { name: 'Harmonia Akademie' }], link: 'https://forms.gle/A7zsoW7qQ6UL4BaH9',
+    about: 'Спікери зі Швейцарії, Ізраїлю, Іспанії та України говорять про здоров’я, красу, стиль, довголіття та якість життя. У програмі — виступи, практичні підходи й професійні кейси, а ще нові знайомства для співпраці. Форум проводять VIDNOVA і Harmonia Akademie. Участь — за попередньою реєстрацією, форма за посиланням.'
+  },
+  {
+    "sections": [
+      "events"
+    ],
+    "id": "rubin-beauty-studenty",
+    "keyHash": "61bdd3a84ac0066144160cf39b0ac3673b81c08d32efb9dc6332fd6a471d7a6e",
+    "status": "на підтвердженні",
+    "title": "Студентам знижка 10 % на всі послуги",
+    "type": "promo",
+    "promo": {
+      "kind": "percent",
+      "value": 10,
+      "what": "усі послуги салону — для студенток і студентів",
+      "group": true,
+      "cond": [
+        "book"
+      ],
+      "always": true
+    },
+    "date": "2026-10-12",
+    "dateEnd": "2027-10-11",
+    "canton": "Zug",
+    "address": "Suurstoffi 16, 6343 Rotkreuz",
+    "geo": [
+      47.1442162,
+      8.4370922
+    ],
+    "online": false,
+    "langs": [
+      "російська",
+      "румунська",
+      "німецька",
+      "англійська"
+    ],
+    "commercial": true,
+    "organizers": [
+      {
+        "org": "rubin-beauty-rotkreuz",
+        "name": "Rubin Beauty"
+      }
+    ],
+    "signup": "wa",
+    "contacts": {
+      "phone": "+41 79 626 89 18",
+      "whatsapp": "+41 79 626 89 18",
+      "instagram": "rubinbeauty"
+    },
+    "link": "https://www.rubinbeauty.ch",
+    "about": "Студенткам і студентам — знижка 10 % на всі послуги салону: манікюр і педикюр, вії та брови, догляд за обличчям, депіляція, масаж і стрижки. Знижка діє постійно, подробиці — під час запису."
+  },
+  /* пробная карточка SG-0021 «Алёна» (лид, 12.10.2026): её мастер-класс из поста в группе Facebook — уже прошёл, в предпросмотре стоит примером с пометкой «прошло» */
+  {
+    sections: ['kursy'], ktype: 'create', kind: 'once',
+    id: 'alena-botanical-relief-mk-2026-04', keyHash: '938a0e2512f863022d161db158254afb3add2f944fecd96070743835930b85bc', status: 'на підтвердженні', title: 'Майстер-клас із рельєфу, світла й композиції — Botanical Relief Series',
+    date: '2026-04-11', time: '12:00', timeEnd: '16:00',
+    canton: 'Zürich', address: 'INTWINE Conceptual Showroom, Heidbachstrasse 42, 8032 Zürich', online: false,
+    langs: ['російська'], level: 'для дорослих', price: '', commercial: true,
+    organizers: ['alena-botanical-relief'],
+    about: 'Декоративна рельєфна панель власноруч: ботанічний рельєф, робота зі світлом і композицією. Свою роботу забираєте із собою.'
+  },
+  {
+    "sections": [
+      "events"
+    ],
+    "id": "anastasia-dietikon-modeli",
+    "keyHash": "2bb16bd289419250682c72171264d47c3fd63694cb1adf046fc6e15ece4c3a25",
+    "status": "на підтвердженні",
+    "title": "Моделям — знижка 50 % на всі послуги салону",
+    "type": "promo",
+    "promo": {
+      "kind": "percent",
+      "value": 50,
+      "what": "усі послуги салону для моделей",
+      "group": true,
+      "cond": [
+        "book"
+      ]
+    },
+    "date": "2026-10-12",
+    "dateEnd": "2027-01-09",
+    "canton": "Zürich",
+    "address": "Neumattstrasse 12, 8953 Dietikon (салон Coiffeur Branka)",
+    "online": false,
+    "langs": [
+      "російська",
+      "німецька"
+    ],
+    "commercial": true,
+    "organizers": [
+      "anastasia-dietikon"
+    ],
+    "signup": "tel",
+    "contacts": {
+      "phone": "+41 44 740 03 13"
+    },
+    "link": "",
+    "about": "Я навчаюся на перукарку й завжди шукаю моделей. Для моделей — знижка 50 % на всі послуги салону: стрижка з миттям і укладанням, укладання феном, тонування та фарбування, чоловіча стрижка. Працюю під наглядом досвідченого майстра салону. Запис — за телефоном салону."
+  },
+  {
+    "sections": [
+      "events"
+    ],
+    "id": "maryna-geneva-gajd-stipendii",
+    "keyHash": "03c5aaf1152dc86720fe6171beb91a296913565ce8466092bf50e664057dcd44",
+    "status": "на підтвердженні",
+    "title": "Гайд «Стипендії у Швейцарії» в подарунок",
+    "type": "promo",
+    "promo": {
+      "kind": "gift",
+      "what": "гайд «Стипендії у Швейцарії» у PDF — для тих, хто планує навчатися у Швейцарії",
+      "cond": [
+        "online"
+      ],
+      "always": true
+    },
+    "date": "2026-10-12",
+    "dateEnd": "2027-10-11",
+    "canton": "Genève",
+    "address": "",
+    "online": true,
+    "langs": [
+      "російська"
+    ],
+    "commercial": true,
+    "organizers": [
+      "maryna-geneva"
+    ],
+    "signup": "tg",
+    "contacts": {
+      "telegram": "marynabakh",
+      "instagram": "marynabakh"
+    },
+    "link": "https://t.me/marynabakhmatova",
+    "about": "Дарую гайд «Стипендії у Швейцарії» у PDF — для тих, хто планує навчатися у Швейцарії та шукає, як оплатити навчання. Гайд закріплено в моєму Telegram-каналі «Education & Career Switzerland», а можна просто написати мені в особисті повідомлення — надішлю."
+  },
+  {
+    "sections": [
+      "events"
+    ],
+    "type": "talk",
+    "id": "maryna-geneva-efir-perevod-2026-09",
+    "keyHash": "03c5aaf1152dc86720fe6171beb91a296913565ce8466092bf50e664057dcd44",
+    "status": "на підтвердженні",
+    "title": "Як перевестися з університету в Україні до університету у Швейцарії — прямий ефір",
+    "date": "2026-09-28",
+    "canton": "Genève",
+    "address": "",
+    "online": true,
+    "langs": [
+      "російська"
+    ],
+    "level": "для дорослих",
+    "price": "",
+    "commercial": true,
+    "organizers": [
+      "maryna-geneva"
+    ],
+    "link": "https://t.me/marynabakhmatova",
+    "about": "Відповідаю на одне з найчастіших запитань. Як студентові, який зараз навчається в Україні, перевестися до університету у Швейцарії? І що робити, якщо навчання в Україні довелося перервати, — як поновитися й продовжити його вже тут. Розбираю можливі варіанти та важливі моменти."
+  },
+  {
+    "sections": [
+      "events"
+    ],
+    "type": "talk",
+    "id": "maryna-geneva-efir-ucheba-2026-09",
+    "keyHash": "03c5aaf1152dc86720fe6171beb91a296913565ce8466092bf50e664057dcd44",
+    "status": "на підтвердженні",
+    "title": "Плюси й мінуси навчання за кордоном — прямий ефір",
+    "date": "2026-09-24",
+    "canton": "Genève",
+    "address": "",
+    "online": true,
+    "langs": [
+      "російська"
+    ],
+    "level": "для дорослих",
+    "price": "",
+    "commercial": true,
+    "organizers": [
+      "maryna-geneva"
+    ],
+    "link": "https://t.me/marynabakhmatova",
+    "about": "Говоримо про плюси й мінуси навчання за кордоном — очного та онлайн. Головне питання не у форматі, а в меті: навіщо вам ця освіта і що має змінитися в житті після навчання. Коли зрозуміло, для чого, обрати формат набагато простіше."
+  },
+  {
+    "sections": [
+      "events"
+    ],
+    "type": "talk",
+    "id": "maryna-geneva-efir-linkedin-2026-09",
+    "keyHash": "03c5aaf1152dc86720fe6171beb91a296913565ce8466092bf50e664057dcd44",
+    "status": "на підтвердженні",
+    "title": "Як бути помітним у LinkedIn саме у Швейцарії — прямий ефір",
+    "date": "2026-09-07",
+    "canton": "Genève",
+    "address": "",
+    "online": true,
+    "langs": [
+      "російська"
+    ],
+    "level": "для дорослих",
+    "price": "",
+    "commercial": true,
+    "organizers": [
+      "maryna-geneva"
+    ],
+    "link": "https://t.me/marynabakhmatova",
+    "about": "Як створити й оформити сторінку в LinkedIn, щоб вона працювала на вас саме на швейцарському ринку."
+  },
+  {
+    "sections": [
+      "events"
+    ],
+    "id": "nora-zurich-modeli",
+    "keyHash": "409bbf753826dcdacf2a97f54e802d3ad3589504c278349fe28f30e55ee02429",
+    "status": "на підтвердженні",
+    "title": "Моделям для портфоліо — ламінування брів за особливою ціною",
+    "type": "promo",
+    "promo": {
+      "kind": "price",
+      "value": 30,
+      "what": "ламінування брів без фарбування для моделей у портфоліо, з фарбуванням — CHF 40",
+      "cond": [
+        "book"
+      ]
+    },
+    "date": "2026-10-12",
+    "dateEnd": "2027-01-09",
+    "canton": "Zürich",
+    "address": "",
+    "online": false,
+    "langs": [
+      "російська"
+    ],
+    "commercial": true,
+    "organizers": [
+      "nora-zurich"
+    ],
+    "signup": "wa",
+    "contacts": {},
+    "link": "",
+    "about": "Я поповнюю портфоліо і шукаю моделей на ламінування брів (Brow Lamination) у кантоні Цюрих. Для моделей особлива ціна: CHF 40 з фарбуванням і CHF 30 без фарбування. Записатися можна у WhatsApp."
   }
 ];

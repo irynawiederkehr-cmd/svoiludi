@@ -534,7 +534,7 @@ a.yours:hover{background:#EBD3A3}
 <main class="page">
   <section class="s-hero has-art" aria-labelledby="h1">
     <div class="hero-txt">
-      <!--evk--><nav class="evk" aria-label="Події, акції та курси"><a href="/uk/events/" aria-current="page">Події</a><a href="/uk/akcii/">Акції</a><a href="/uk/kursy/">Курси та заняття</a></nav><style>.evk{display:inline-flex;flex-wrap:wrap;gap:4px;background:var(--sage-soft,#E3E6D6);border-radius:12px;padding:4px;margin:0 0 14px;order:0;width:auto;align-self:flex-start;overflow:visible}.evk a{padding:7px 16px;border-radius:9px;font-weight:700;font-size:.9rem;text-decoration:none;color:var(--ink);background:none;border:0;box-shadow:none}.evk a[aria-current]{background:var(--paper,#FFFCF8);box-shadow:0 1px 4px rgba(0,0,0,.12);color:var(--ink)!important}@media (max-width:420px){.evk{gap:2px}.evk a{padding:7px 9px;font-size:.84rem}}@media (max-width:380px){.evk a{padding:7px 7px;font-size:.8rem}}</style><!--evk--><!--evk--><div class="eyebrow">Події · Свої люди у Швейцарії</div>
+      <!--evk--><nav class="evk" aria-label="Події, акції та курси"><a href="/uk/events/" aria-current="page">Події</a><a href="/uk/akcii/">Акції</a><a href="/uk/kursy/">Курси та заняття</a></nav><style>.evk{display:inline-flex;flex-wrap:wrap;gap:4px;background:var(--sage-soft,#E3E6D6);border-radius:12px;padding:4px;margin:0 0 14px;order:0;width:auto;align-self:flex-start;overflow:visible}.evk a{padding:7px 16px;border-radius:9px;font-weight:700;font-size:.9rem;text-decoration:none;color:var(--ink);background:none;border:0;box-shadow:none}.evk a[aria-current]{background:var(--paper,#FFFCF8);box-shadow:0 1px 4px rgba(0,0,0,.12);color:var(--ink)!important}@media (max-width:420px){.evk{gap:2px}.evk a{padding:7px 9px;font-size:.84rem}}@media (max-width:380px){.evk a{padding:7px 7px;font-size:.8rem}}</style><!--evk--><!--evk--><!--evk--><div class="eyebrow">Події · Свої люди у Швейцарії</div>
       <h1 id="h1">Зустрічі <em>поруч із тобою</em></h1>
       <p class="lead">Розмовні клуби, зустрічі мам, свята для дітей, лекції та ретрити твоєю мовою. Обери кантон і подивись, що буде цього тижня, цього місяця або протягом року. Будь-яку подію можна одразу додати у свій календар.</p>
     </div>
@@ -651,15 +651,16 @@ a.yours:hover{background:#EBD3A3}
 
 <dialog class="qm" id="qm" aria-labelledby="qmTitle"><div class="qm-card" id="qmCard"></div></dialog>
 
-<script src="/data/specialists.uk.js?v=2168f6b7"></script>
-<script src="/data/organizations.uk.js?v=817cafda"></script>
+<script src="/data/specialists.uk.js?v=88e847ac"></script>
+<script src="/data/organizations.uk.js?v=50c73718"></script>
 <script>
 window.IMG_BASE = '../img/';
 /* карточки специалистов — в /data/specialists.js (одна копия на весь сайт) */
 const SPECIALISTS = window.SPECIALISTS || [];
 
 </script>
-<script src="/data/afisha.uk.js?v=b7b06092"></script>
+<script src="/data/afisha.uk.js?v=faa72c95"></script>
+<script src="/assets/chernoviki.js"></script>
 <script>/* одна база афиши: здесь — записи раздела «События» */
 const EVENTS = (window.AFISHA || []).filter(e => (e.sections || []).includes('events'));</script>
 <script>
@@ -749,7 +750,10 @@ const AK = document.documentElement.dataset.mode === 'akcii';
 const PKINDS = { percent: 'Знижка у відсотках', amount: 'Знижка у франках', price: 'Акційна ціна', gift: 'Подарунок або бонус', free: 'Безкоштовне знайомство або пробне заняття' };
 const state = { canton: '', city: '', type: '', lang: '', when: '', hearts: false, view: 'list', month: today.slice(0, 7) };
 const kindOf = e => AK ? ((e.promo || {}).kind || '') : e.type;
-const pool = () => EVENTS.filter(e => e.status === 'активен' && live(e) && (AK ? isPromo(e) && lastDay(e) >= today : !isPromo(e)));
+/* черновики (правило Ирины 12.10.2026, 14:34): в режиме Ирины записи «на подтверждении» стоят в списке с пометкой «Черновик», у всех — нет */
+const isDraft = e => e.status === 'на підтвердженні' || e.status === 'черновик';
+let DRAFTS_ON = ADMIN && !!(window.SVL_DRAFTS && SVL_DRAFTS.showInList());
+const pool = () => EVENTS.filter(e => ((e.status === 'активен' && live(e)) || (DRAFTS_ON && isDraft(e))) && (AK ? isPromo(e) && lastDay(e) >= today : !isPromo(e)));
 const isRemote = e => e.online && !e.address;
 /* «Срок» на странице акций: какие заканчиваются на этой неделе или в этом месяце */
 const akWhen = e => { if (!state.when) return true; if (state.when === 'always') return isAlways(e); if (isAlways(e)) return false; const end = lastDay(e), d = D(today);
@@ -780,7 +784,7 @@ const orgNames = e => (e.organizers || []).map(o => { const s = orgOf(o); return
 function row(e, d){
   const k = TYPES[e.type] || TYPES.meet, dd = D(d);
   const where = isRemote(e) ? 'онлайн' : `${esc(city(e.address))} · ${esc(kt(e.canton))}${e.online ? ' · і онлайн' : ''}`;
-  return `<button class="ev" type="button" data-ev="${esc(e.id)}" data-d="${d}" style="--lc:${k.c}">${e.sample ? '<span class="sample">Зразок</span>' : ''}
+  return `<button class="ev" type="button" data-ev="${esc(e.id)}" data-d="${d}" style="--lc:${k.c}">${e.sample ? '<span class="sample">Зразок</span>' : isDraft(e) ? '<span class="sample draft">Чернетка · бачиш тільки ти</span>' : ''}
     <span class="ev-d"><small>${WD_S[dd.getUTCDay()]}</small><b>${dd.getUTCDate()}</b><small>${MON_S[dd.getUTCMonth()]}</small></span>
     <span class="ev-m">${e.sample ? `<span class="yours">Тут може бути ${isPromo(e) ? 'твоя акція' : 'твоя подія'}!</span>` : ''}<span class="ev-k">${isPromo(e) ? 'Акція фахівця <i class="ev-ad">Реклама</i>' : esc(k.t)}</span><span class="ev-t">${esc(e.title)}</span>
       <span class="ev-i">${timeStr(e) ? `<b>${esc(timeStr(e))}</b>` : e.dateEnd ? `<b>до ${D(e.dateEnd).getUTCDate()} ${MON_G[D(e.dateEnd).getUTCMonth()]}</b>` : ''}<span>${where}</span>${e.repeat ? `<span>${esc(repeatText(e))}</span>` : ''}<span>${esc((e.langs || []).join(', '))}</span></span>${orgFaces(e)}</span>
@@ -790,7 +794,7 @@ function row(e, d){
 function pcard(e){
   const o = offer(e), s = (e.organizers || []).map(cardOf).find(Boolean), role = s && s.role ? s.role : '', cl = condList(e.promo);
   const where = isRemote(e) ? 'онлайн' : `${esc(city(e.address))} · ${esc(kt(e.canton))}${e.online ? ' · і онлайн' : ''}`;
-  return `<div class="pcw"><button class="pcard" type="button" data-ev="${esc(e.id)}" data-d="${e.date}">${e.sample ? '<span class="sample">Зразок</span>' : ''}
+  return `<div class="pcw"><button class="pcard" type="button" data-ev="${esc(e.id)}" data-d="${e.date}">${e.sample ? '<span class="sample">Зразок</span>' : isDraft(e) ? '<span class="sample draft">Чернетка · бачиш тільки ти</span>' : ''}
     <span class="pc-big">${esc(o.big)}</span>
     <span class="pc-m">${e.sample ? '<span class="yours">Тут може бути твоя акція!</span>' : ''}<span class="ev-k">Акція <i class="ev-ad">Реклама</i>${isAlways(e) ? '<i class="pc-always">Постійна</i>' : ''}</span><span class="pc-t">${esc(e.title)}</span>
       <span class="pc-sub">${esc(o.sub || '')}${o.more.filter(x => x !== o.pay).length ? ' · ' + esc(o.more.filter(x => x !== o.pay).join('; ')) : ''}</span>${o.pay ? `<span class="pc-pay">${esc(o.pay)}</span>` : ''}
@@ -1103,6 +1107,13 @@ function offBox(e){
     <div class="pv-acts"><button class="btn" type="button" data-pv-send="ok">Зняти з сайту</button></div>
     <span class="pv-small" data-pv-msg data-online="Одне натискання — і готово.">${window.SVL_PV_ONLINE ? 'Одне натискання — і готово.' : (cm ? `Після натискання відкриється лист із вашої пошти. Надішліть його з адреси ${esc(cm)}: такі прохання ми приймаємо тільки з e-mail вашої картки.` : 'Після натискання відкриється лист із вашої пошти. Надішліть його.')}</span></div>`;
 }
+/* прошедший пример в пробной карточке лида (lidy-svoiludi.md, раздел 6): по ссылке из письма — без «Подтверждаю», с пояснением */
+const pastDraft = e => isDraft(e) && (isPromo(e) ? lastDay(e) < today : !nextDate(e));
+function pastBox(e){
+  return `<div class="pv-box"><b>${isPromo(e) ? 'Строк цієї акції вже минув, вона тут для прикладу' : 'Ця подія вже минула, вона тут для прикладу'}.</b><span>Ми розмістили ${isPromo(e) ? 'її' : 'її'}, щоб ви бачили, як ваші ${isPromo(e) ? 'акції' : 'події'} виглядатимуть на сайті. Підтверджувати ${isPromo(e) ? 'її' : 'її'} не потрібно, і для всіх ${isPromo(e) ? 'вона' : 'вона'} не з’явиться. Надішліть нам найближчі ${isPromo(e) ? 'акції' : 'події'} з коротким описом, датою, часом, місцем і ціною — ми розмістимо їх так само.</span></div>`;
+}
+/* запись лида: выйдет на сайт вместе с карточкой, после её подтверждения */
+const cardWait = e => (e.organizers || []).map(cardOf).some(c => c && c.status !== 'активен');
 function okBox(e){
   const who = orgNames(e), cm = cardMail(e), PR = isPromo(e);
   const W = PR ? { su: 'акцію', own: 'Це моя акція: я сам(а) її оголошую й виконую, або її виконує моя організація. Записи за інших я не розміщую.', law: 'Акція правдива, у моїй компетенції та відповідає законам Швейцарії, мого кантону й громади. Ціни й умови справжні, звичайна ціна (якщо вказана) — та, за якою я працював(-ла) щонайменше 30 днів поспіль безпосередньо до акції і працюю з іншими клієнтами; на запит підтверджу її прайс-листом або рахунками. Я виконаю акцію для всіх, хто підходить під умови, до останнього дня, а якщо місця закінчаться — одразу повідомлю. Акція не стосується спиртних напоїв, тютюну й вейпів, ліків, зброї та кредитів.', who: 'вашу акцію', ad: ' Я знаю, що на сайті акція має мітку «Реклама».' }
@@ -1110,7 +1121,7 @@ function okBox(e){
   const su = `Підтверджую ${W.su} — ${e.title}`, body = `Добрий день, Ірино!\n\nУсе правильно, підтверджую публікацію на сайті «Свої люди у Швейцарії».\n${W.own}\n${W.law}${W.ad}\nУмови розміщення (https://svoiludi.ch/uk/usloviya/) прочитав(ла) й приймаю.\n\n${okText(e)}\n\n${okUrl(e)}\n\n${who}`;
   const suf = `Виправлення — ${e.title}`, bodyf = `Добрий день, Ірино!\n\nБудь ласка, виправте:\n\n{text}\n\n${okUrl(e)}\n\n${who}`;
   return `<div class="pv-box" id="pvBox" data-pv-kind="event" data-pv-id="${esc(e.id)}" data-pv-key="${esc(OKKEY[e.id] || '')}" data-pv-lang="uk" data-mail="${MAIL}" data-su-ok="${esc(su)}" data-body-ok="${esc(body)}" data-su-fix="${esc(suf)}" data-body-fix="${esc(bodyf)}" data-t-sending="Надсилаю…" data-t-ok="Дякуємо! Підтвердження отримано {t}. Ми опублікуємо запис, зазвичай того ж дня." data-t-copy=" Копія прийде на ваш e-mail." data-t-fixok="Дякуємо! Виправлення отримано {t}. Ми внесемо їх і надішлемо посилання ще раз." data-t-empty="Напишіть, будь ласка, що виправити." data-t-fail="${cm ? 'Не вдалося надіслати. Будь ласка, {a} з адреси {c} на {m}.' : 'Не вдалося надіслати. Будь ласка, {a} ({m}).'}" data-t-mail="надішліть підтвердження листом" data-t-gmail="Відкрити лист у Gmail" data-pv-cmail="${esc(cm)}" data-t-letter="${cm ? 'Відкрився лист у вашій пошті. Надішліть його з адреси {c}: підтвердження ми приймаємо тільки з e-mail вашої картки. Лист не відкрився? {g} або напишіть з цієї адреси на {m}.' : 'Відкрився лист у вашій пошті. Надішліть його, це і є підтвердження. Лист не відкрився? {g} або напишіть на {m}.'}">
-    <b>Це попередній перегляд: так ${W.who} побачать на сайті.</b><span>Поки його бачите тільки ви. Перевірте назву, дату, місце, ціну й контакти. Якщо все правильно, позначте всі позначки й натисніть «Підтверджую». Якщо щось потрібно змінити, натисніть «Потрібно виправити».</span>
+    <b>Це попередній перегляд: так ${W.who} побачать на сайті.</b><span>Поки його бачите тільки ви. Перевірте назву, дату, місце, ціну й контакти. Якщо все правильно, поставте всі галочки й натисніть «Підтверджую». Якщо щось потрібно змінити, натисніть «Потрібно виправити».${cardWait(e) ? ` ${PR ? 'Акція з’явиться' : 'Подія з’явиться'} на сайті разом із вашою карткою, коли ви підтвердите і її.` : ''}</span>
     <label class="pv-ok"><input type="checkbox" data-pv-agree data-id="ok"> <span>Дані правильні, даю згоду на публікацію на svoiludi.ch. Запис, оплата й договір — тільки зі мною, «Свої люди» в них не беруть участі.</span></label>
     <label class="pv-ok"><input type="checkbox" data-pv-agree data-id="own"> <span>${W.own}</span></label>
     <label class="pv-ok"><input type="checkbox" data-pv-agree data-id="law"> <span>${PR ? W.law + W.ad : 'Подія в моїй компетенції: у мене є потрібні знання, досвід і дозволи. Вона відповідає законам Швейцарії, мого кантону й громади.'}</span></label>
@@ -1130,7 +1141,7 @@ function openEvent(id, d, pv){
     return `<${o.link ? `a href="${esc(o.link)}" ${ext}` : 'div'} class="org"><span class="ini">${esc((o.name || '?')[0])}</span><span><b>${esc(o.name || '')}</b><small>спільнота</small></span></${o.link ? 'a' : 'div'}>`; }).join('');
   const PR = isPromo(e), off = isOff(e), past = (e.repeat ? d < today : lastDay(e) < today) || off;
   box.innerHTML = `<div class="qm-top"><div class="qm-head">${e.sample ? `<span class="ev-k" style="color:var(--brown)">Зразок ${PR ? 'акції' : 'події'} · усе вигадане</span><a class="yours" href="/uk/events/#${PR ? 'akciya' : 'add'}">Тут може бути ${PR ? 'твоя акція' : 'твоя подія'}! Як додати →</a>` : ''}<span class="ev-k" style="color:${k.c}">${PR ? 'Акція фахівця <i class="ev-ad">Реклама</i>' : esc(k.t)}</span><h2 class="qm-title" id="qmTitle">${esc(e.title)}</h2></div><button class="qm-close" type="button" aria-label="Закрити">✕</button></div>
-    ${pv === 'off' ? offBox(e) : pv ? okBox(e) : ''}<div class="d-body">
+    ${pv === 'off' ? offBox(e) : pv === 'past' ? pastBox(e) : pv ? okBox(e) : ''}<div class="d-body">
       <div class="d-col">
         ${PR ? (() => { const o = offer(e); return `<div class="d-block"><h4>Пропозиція</h4><div class="pr-offer"><span class="pr-big">${esc(o.big)}</span><span class="pr-sub">${esc(o.sub || '')}</span>${o.more.map(x => `<span class="${x === o.pay ? 'pr-pay' : 'pr-more'}">${esc(x)}</span>`).join('')}${off ? '<span class="pr-end">Автор зняв цю акцію з сайту: вона більше не діє.</span>' : past ? '<span class="pr-end">Ця акція закінчилася.</span>' : `<span class="pr-days">${esc(promoDays(e))}</span>${promoUntil(e) ? `<span class="pr-until">${esc(promoUntil(e))}</span>` : ''}`}</div>${condList(e.promo).length ? `<ul class="pr-conds">${condList(e.promo).map(c => `<li>${esc(c)}</li>`).join('')}</ul>` : ''}</div>`; })() : ''}
         <div class="d-block"><h4>${PR ? 'Про акцію' : 'Про подію'}</h4><p>${esc(e.about)}</p></div>
@@ -1231,10 +1242,18 @@ if (addbtn) addbtn.href = AK ? `mailto:${MAIL}?subject=${encodeURIComponent('А�
 if (AK) document.querySelectorAll('#monthIcs,.viewsw').forEach(el => { el.style.display = 'none'; });
 fillSelects(); render();
 const fromHash = () => { let id = decodeURIComponent(location.hash.slice(1)); const wantFlyer = AK && /&flyer$/.test(id); id = id.replace(/&flyer$/, ''); if (id === 'digest'){ digest(); return; }
-  const e0 = EVENTS.find(x => x.id === id); if (!AK && e0 && isPromo(e0)){ location.replace('/uk/akcii/#' + encodeURIComponent(id)); return; } if (id.startsWith('ok=')){ const [eid, key] = id.slice(3).split('.'); const e = EVENTS.find(x => x.id === eid); keyOk(e, key).then(ok => { if (ok){ OKKEY[eid] = key; openEvent(eid, null, true); } }); return; }
+  const e0 = EVENTS.find(x => x.id === id); if (!AK && e0 && isPromo(e0)){ location.replace('/uk/akcii/#' + encodeURIComponent(id)); return; } if (id.startsWith('ok=')){ const [eid, key] = id.slice(3).split('.'); const e = EVENTS.find(x => x.id === eid); if (!AK && e && isPromo(e)){ location.replace('/uk/akcii/#' + encodeURIComponent(id)); return; } keyOk(e, key).then(ok => { if (ok){ OKKEY[eid] = key; if (ADMIN && window.SVL_DRAFTS) SVL_DRAFTS.keep(eid, key); openEvent(eid, null, pastDraft(e) ? 'past' : true); } }); return; }
   if (id.startsWith('off=')){ const [eid, key] = id.slice(4).split('.'); const e = EVENTS.find(x => x.id === eid); if (!AK && e && isPromo(e)){ location.replace('/uk/akcii/#' + encodeURIComponent(id)); return; } keyOk(e, key).then(ok => { if (ok){ OKKEY[eid] = key; openEvent(eid, null, 'off'); } }); return; }
   if (id && EVENTS.some(e => e.id === id && ((e.status === 'активен' && live(e)) || isOff(e) || ADMIN))){ openEvent(id); if (wantFlyer){ const e = EVENTS.find(x => x.id === id); if (isPromo(e) && (isOff(e) || lastDay(e) < today)) return; const go = () => window.SVL_FLYER ? SVL_FLYER.open(flyerOf(e)) : setTimeout(go, 200); setTimeout(go, 250); } } };
 fromHash(); addEventListener('hashchange', fromHash);
+/* черновики — только в режиме Ирины (assets/chernoviki.js) */
+if (ADMIN && window.SVL_DRAFTS) SVL_DRAFTS.init({ page: AK ? 'akcii' : 'events', okKey: OKKEY, keyOk,
+  items: EVENTS.filter(e => AK ? isPromo(e) : !isPromo(e)),
+  when: e => { if (isPromo(e)) return e.date > today && lastDay(e) >= today ? { d: e.date, lbl: 'з' } : { d: lastDay(e), past: lastDay(e) < today, lbl: lastDay(e) < today ? '' : 'до' }; const n = nextDate(e); return n ? { d: n } : { d: lastDay(e), past: true }; },
+  kind: e => isPromo(e) ? 'акція' : (TYPES[e.type] || TYPES.meet).t, who: e => orgNames(e),
+  url: (e, k) => k ? `https://svoiludi.ch/${isPromo(e) ? 'akcii' : 'events'}/#ok=${encodeURIComponent(e.id)}.${encodeURIComponent(k)}` : '',
+  open: (id, withKey) => { const e = EVENTS.find(x => x.id === id); if (!e) return; openEvent(id, null, withKey ? (pastDraft(e) ? 'past' : true) : false); },
+  toast, onToggle: on => { DRAFTS_ON = on; fillSelects(); render(); } });
 </script>
 <script>window.HELP = Object.assign(window.HELP || {}, {
   zpkind: '<p><b>Знижка у відсотках</b> — одне число, наприклад 20 %. Слова «до 50 %» не підходять: знижка має бути точною.</p><p><b>Знижка у франках</b> — на скільки CHF послуга дешевша.</p><p><b>Акційна ціна</b> — кінцева ціна на час акції.</p><p><b>Подарунок або бонус</b> — що людина отримає разом із послугою.</p><p><b>Безкоштовне знайомство</b> — коротка зустріч без оплати й без зобов’язань.</p><p>Для знижки у відсотках або франках на одну послугу впиши звичайну ціну: на сайті покажемо ціну, яку людина заплатить.</p><p>Розіграші й конкурси ми не розміщуємо: для них потрібні дозволи.</p><p>Не приймаємо акції на спиртні напої, тютюн і вейпи, ліки, зброю й кредити, а також акції лікарів, психотерапевтів, психологів та інших професій здоров’я: їм закон дозволяє лише стриману рекламу, без знижок і безкоштовних послуг.</p>',
