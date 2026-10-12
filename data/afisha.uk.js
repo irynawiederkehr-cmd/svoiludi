@@ -657,5 +657,54 @@ window.AFISHA = [
     "contacts": {},
     "link": "",
     "about": "Я поповнюю портфоліо і шукаю моделей на ламінування брів (Brow Lamination) у кантоні Цюрих. Для моделей особлива ціна: CHF 40 з фарбуванням і CHF 30 без фарбування. Записатися можна у WhatsApp."
+  },
+  /* Украинская греко-католическая миссия Цюрих (12.10.2026): занятия и события с их страницы forum-magazin.ch/ukrainische-mission — для примера в пробной карточке,
+     ждут подтверждения миссии (правило Ирины 12.10.2026, «lidy-svoiludi.md», разделы 6–7) */
+  {
+    sections: ['events'], type: 'meet',
+    id: 'ugcc-zurich-liturgiya', keyHash: '2c680732bc95c4dd38447e0ee83f36af69096eb505701d542378e008f0c90c0c', status: 'на підтвердженні', title: 'Божественна літургія українською в Цюриху',
+    date: '2026-10-18', time: '14:00', repeat: { freq: 'weekly', until: '2026-12-27' },
+    canton: 'Zürich', address: 'Krypta der Liebfrauenkirche, Weinbergstrasse 32, 8006 Zürich', online: false,
+    langs: ['українська'], level: 'для всіх, можна з дітьми', price: 'безкоштовно', commercial: false,
+    organizers: [{ org: 'ugcc-zurich', name: 'Українська греко-католицька місія Цюрих' }], link: 'https://www.forum-magazin.ch/ukrainische-mission/agenda/',
+    about: 'Щонеділі, крім п’ятої неділі місяця, місія служить Божественну літургію в крипті церкви Liebfrauen. Запрошують усіх християн і всіх, кому цікаво. Після служби — спілкування за чашкою кави у фоє.'
+  },
+  {
+    sections: ['kursy'], kind: 'regular', ktype: 'kids',
+    id: 'ugcc-zurich-katehizis', keyHash: '2c680732bc95c4dd38447e0ee83f36af69096eb505701d542378e008f0c90c0c', status: 'на підтвердженні', title: 'Катехизація для дітей і підлітків 3–15 років', type: 'kids',
+    date: '2026-10-18', time: '15:30', timeEnd: '17:00', repeat: { freq: 'weekly', until: '2026-12-27' },
+    canton: 'Zürich', address: 'Pfarreizentrum Liebfrauen, Weinbergstrasse 32, 8006 Zürich', online: false,
+    langs: ['українська'], level: 'діти й підлітки 3–15 років', price: 'безкоштовно', commercial: false,
+    organizers: [{ org: 'ugcc-zurich', name: 'Українська греко-католицька місія Цюрих' }], link: 'https://www.forum-magazin.ch/ukrainische-mission/updates/20251028-kinderkatechese/',
+    about: 'Після недільної літургії діти й підлітки від 3 до 15 років мають катехизацію в залах парафії Liebfrauen, зазвичай з 15:30 до 17:00.'
+  },
+  {
+    sections: ['events'], type: 'meet',
+    id: 'ugcc-zurich-bibleyskiy-chas', keyHash: '2c680732bc95c4dd38447e0ee83f36af69096eb505701d542378e008f0c90c0c', status: 'на підтвердженні', title: 'Біблійна година українською',
+    date: '2026-10-18', time: '16:00',
+    canton: 'Zürich', address: 'Foyer der Liebfrauenkirche, Weinbergstrasse 32, 8006 Zürich', online: false,
+    langs: ['українська'], level: 'для дорослих', price: 'безкоштовно', commercial: false,
+    organizers: [{ org: 'ugcc-zurich', name: 'Українська греко-католицька місія Цюрих' }], link: 'https://www.forum-magazin.ch/ukrainische-mission/updates/20251028-bibelstunde/',
+    about: 'У першу й третю неділю місяця після літургії, близько 16:00, у фоє церкви Liebfrauen разом читають і обговорюють недільне Євангеліє. Наступні зустрічі — 1 і 15 листопада.'
+  },
+  {
+    sections: ['events'], type: 'meet',
+    id: 'ugcc-zurich-einsiedeln', keyHash: '2c680732bc95c4dd38447e0ee83f36af69096eb505701d542378e008f0c90c0c', status: 'на підтвердженні', title: 'Паломництво до Айнзідельна — літургія й молитва за мир в Україні',
+    date: '2026-10-31', time: '14:00',
+    canton: 'Schwyz', address: 'Kloster Einsiedeln, 8840 Einsiedeln', online: false,
+    langs: ['українська'], level: 'для всіх', price: 'безкоштовно', commercial: false,
+    organizers: [{ org: 'ugcc-zurich', name: 'Українська греко-католицька місія Цюрих' }], link: 'https://www.forum-magazin.ch/ukrainische-mission/updates/20260203-gottliche-liturgie-und-gebet-fur-den-frieden-in-de/',
+    about: 'В останню суботу місяця місія вирушає до монастиря Айнзідельн. О 14:00 — Божественна літургія, зазвичай у каплиці Святої Магдалини, потім молитва за мир в Україні й у всьому світі та можливість сповідатися. Після — кава або невеликий перекус у кімнаті для паломників.'
+  },
+  /* Спортивная школа UA-DO (12.10.2026): будущих событий на их сайте нет (новости — до 12.2023), поэтому для примера — их последний открытый чемпионат, с пометкой «прошло»
+     (правило Ирины 12.10.2026, «lidy-svoiludi.md», раздел 6); на сайт для всех прошедшие не выходят никогда */
+  {
+    sections: ['events'], type: 'kids',
+    id: 'ua-do-open-2023', keyHash: '09de5945781020e152796fdec5fcf631c0debd478625a7f2e7305f29d38834cf', status: 'на підтвердженні', title: 'Відкритий чемпіонат UA-DO School для дітей до 14 років',
+    date: '2023-12-09', time: '10:00',
+    canton: 'Aargau', address: 'Sportcenter Bustelbach, Sportplatzweg 2, 4332 Stein AG', online: false,
+    langs: ['українська'], level: 'діти до 14 років', price: 'CHF 20', commercial: true,
+    organizers: [{ org: 'ua-do-kloten', name: 'Спортивна школа UA-DO' }], link: 'https://ua-do.ch/2023/12/01/ua-do-school/',
+    about: 'Спортивне свято для маленьких спортсменів до 14 років — веселі змагання в дисциплінах Rumble Do і Stiktug Do. Реєстрація учасників — з 9:00 до 10:00, початок змагань — о 10:00.'
   }
 ];
