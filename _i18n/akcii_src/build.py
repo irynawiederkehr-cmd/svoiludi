@@ -66,7 +66,8 @@ PLAY = ('<div class="ak-play" role="group" aria-label="Сердечки"><button
         '<button type="button" class="lnk" id="hclear" hidden>Очистить сердечки</button></div>\n'
         '  <p class="ak-note">«Мне повезёт» достанет для тебя случайную акцию из тех, что ты сейчас видишь. Сердечко на карточке сохраняет акцию в «Мои сердечки»: список хранится только на этом устройстве.</p>\n  ')
 rep('<div class="count"><span id="count"', PLAY + '<div class="count"><span id="count"')
-rep('<script defer src="/assets/napisat.js"></script>', '<script defer src="/assets/napisat.js"></script><script defer src="/assets/flyer.js"></script>')
+# assets/flyer.js с 12.10.2026 подключён прямо в events/index.html (карточка события PNG), второй раз не добавляем
+assert h.count('/assets/flyer.js') == 1
 # «Проводишь акции?» вместо «Проводишь встречи?» и форма заявки на акцию вместо формы события
 ADD = ('''  <section class="join" id="add" aria-labelledby="add-h">
     <div><h2 id="add-h">Проводишь акции?</h2><p style="max-width:62ch">Размести свою акцию здесь. Это бесплатно в период запуска, до конца 2027 года. Она будет видна на этой странице и сразу в твоей карточке: в справочнике специалистов или в разделе «Организации». Заполни <a href="#akciya">заявку прямо здесь, на сайте</a>, или напиши нам на <a href="mailto:voznesenskaya.iryna@gmail.com">voznesenskaya.iryna@gmail.com</a>. Мы проверим и опубликуем акцию, а ты получишь ссылку на неё.</p></div>

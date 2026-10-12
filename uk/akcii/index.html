@@ -1043,6 +1043,16 @@ function flyerOf(e){
     role: s ? (s.role || 'організація') : '', place: isRemote(e) ? 'Онлайн' : placeText(e), signup: e.signup && e.signup !== 'none' ? e.signup : '',
     c: { tel: c.tel, wa: c.wa, tg: c.tg, mail: c.mail, ig: c.ig, link: c.link }, url: evUrl(e), sample: !!e.sample };
 }
+/* карточка события PNG (assets/flyer.js, kind 'event'; решение Ирины 12.10.2026, 17:39: «когда мы открываем эвент, там тоже должна быть опция сохранить пнг о событии, карточка события»).
+   Всё, что на ней печатается, — из той же записи, что видит человек в окне события. */
+function evFlyerOf(e, d){
+  const c = chans(e), s = (e.organizers || []).map(cardOf).find(Boolean), x = D(d), pr = priceText(e).trim();
+  const conds = [pr ? 'Ціна: ' + pr : '', (e.langs || []).length ? 'Мови: ' + e.langs.join(', ') : '', (e.for || []).length ? 'Для кого: ' + e.for.join(', ') + (e.age ? ', ' + e.age : '') : '', e.seats ? 'Місць: ' + e.seats : ''].filter(Boolean);
+  return { id: e.id, kind: 'event', big: `${x.getUTCDate()} ${MON_G[x.getUTCMonth()]}`, title: e.title, sub: e.about || '', more: [], conds,
+    days: fmtFull(d) + (timeStr(e) ? ' · ' + timeStr(e) : ''), until: e.repeat ? 'Повторюється: ' + repeatText(e) : (e.dateEnd ? `До ${D(e.dateEnd).getUTCDate()} ${MON_G[D(e.dateEnd).getUTCMonth()]}` : ''),
+    who: orgNames(e), role: s ? (s.role || 'організація') : '', place: isRemote(e) ? 'Онлайн' : placeText(e), signup: e.signup && e.signup !== 'none' ? e.signup : '',
+    c: { tel: c.tel, wa: c.wa, tg: c.tg, mail: c.mail, ig: c.ig, link: c.link }, url: evUrl(e), sample: !!e.sample };
+}
 /* кнопка «Записаться»: готовое сообщение в выбранный организатором канал (assets/napisat.js, решение Ирины 10.10.2026, 22:18) */
 function wireWrite(box, o){
   const run = () => { const slot = box.querySelector('[data-wr-slot]'); if (slot && window.SVL_NAPISAT) SVL_NAPISAT(slot, o); };
@@ -1142,7 +1152,7 @@ function openEvent(id, d, pv){
         <div class="d-block"><h4>Де</h4>${isRemote(e) ? '<span>Онлайн, посилання надсилає організатор</span>' : `${e.venue ? `<b>${esc(e.venue)}</b><br>` : ''}<a class="addr" href="${maps(e.address)}" ${ext}>${esc(e.address)}</a><span class="note">кантон ${esc(ktRu(e.canton))}${e.online ? ' · можна й онлайн' : ''}</span>`}</div>
         ${PR ? '' : `<div class="d-block"><h4>Ціна</h4><span>${esc(priceText(e))}</span>${(e.disc || []).length ? `<small class="note">${esc(e.disc.join(' · '))}</small>` : ''}${(e.payhow || []).length ? `<small class="note">Оплата: ${esc(e.payhow.join(', ').toLowerCase())}</small>` : ''}${e.seats ? `<small class="note">Місць: ${esc(e.seats)}</small>` : ''}</div>`}
         ${past ? '' : '<div class="d-block" data-wr-slot></div>'}
-        <div class="acts">${PR && !past ? '<button class="btn flyer-btn" type="button" data-flyer>♥ Завантажити флаєр</button>' : ''}${PR ? `<button class="btn ghost heart-btn" type="button" data-heart="${esc(e.id)}" aria-pressed="${favGet().includes(e.id)}"><span class="hb-on">♥ У серденьках</span><span class="hb-off">♡ До серденьок</span></button>` : ''}<button class="btn ghost" type="button" data-share>Поділитися</button></div>${PR && !past ? '<p class="note flyer-note">Флаєр для телефона: акція, умови, строк і контакти автора. Покажи його під час запису чи візиту.</p>' : ''}
+        <div class="acts">${PR && !past ? '<button class="btn flyer-btn" type="button" data-flyer>♥ Завантажити флаєр</button>' : ''}${!PR && !past ? '<button class="btn ghost" type="button" data-flyer>Зберегти картку події (PNG)</button>' : ''}${PR ? `<button class="btn ghost heart-btn" type="button" data-heart="${esc(e.id)}" aria-pressed="${favGet().includes(e.id)}"><span class="hb-on">♥ У серденьках</span><span class="hb-off">♡ До серденьок</span></button>` : ''}<button class="btn ghost" type="button" data-share>Поділитися</button></div>${PR && !past ? '<p class="note flyer-note">Флаєр для телефона: акція, умови, строк і контакти автора. Покажи його під час запису чи візиту.</p>' : ''}${!PR && !past ? '<p class="note flyer-note">Картинка для телефона: дата, місце, ціна й контакти організатора. Збережи її або надішли подрузі.</p>' : ''}
         ${PR ? `<p class="note">Акцію оголошує й виконує сам фахівець. «Свої люди» не продають послугу, не беруть участі в угоді й не відповідають за умови акції: домовляйся напряму з фахівцем. Розміщення акції — реклама.</p>` : `<div class="d-block"><h4>Додати в календар</h4><div class="calmenu"><a href="${esc(gcalLink(e, d))}" ${ext}>Google Календар</a><button type="button" data-ics>Apple, Outlook, телефон (.ics)</button></div></div>`}
         <p class="note">${contactList(e).length ? `Запитання організатору: ${contactHtml(e)}. ` : ''}Знайшли помилку? <a href="mailto:${MAIL}?subject=${encodeURIComponent('Помилка в події: ' + e.title)}&body=${encodeURIComponent('Посилання: ' + evUrl(e) + '\n\nЩо виправити:\n')}">Повідомити</a></p>
       </div>
@@ -1155,7 +1165,7 @@ function openEvent(id, d, pv){
 document.getElementById('qmCard').addEventListener('click', async ev => {
   if (!OPEN) return;
   if (ev.target.closest('[data-ics]')) saveIcs(OPEN.e, OPEN.d);
-  const fl = ev.target.closest('[data-flyer]'); if (fl){ if (window.SVL_FLYER) SVL_FLYER.open(flyerOf(OPEN.e), fl); return; }
+  const fl = ev.target.closest('[data-flyer]'); if (fl){ if (window.SVL_FLYER) SVL_FLYER.open(isPromo(OPEN.e) ? flyerOf(OPEN.e) : evFlyerOf(OPEN.e, OPEN.d), fl); return; }
   const hb = ev.target.closest('[data-heart]'); if (hb){ toggleFav(hb.dataset.heart, hb); return; }
   if (ev.target.closest('[data-share]')){ const url = evUrl(OPEN.e), title = OPEN.e.title + ' — ' + fmtDay(OPEN.d);
     if (navigator.share){ try { await navigator.share({ title, text: title + ' · Свої люди у Швейцарії', url }); return; } catch (err){ if (err && err.name === 'AbortError') return; } }

@@ -1043,6 +1043,16 @@ function flyerOf(e){
     role: s ? (s.role || 'организация') : '', place: isRemote(e) ? 'Онлайн' : placeText(e), signup: e.signup && e.signup !== 'none' ? e.signup : '',
     c: { tel: c.tel, wa: c.wa, tg: c.tg, mail: c.mail, ig: c.ig, link: c.link }, url: evUrl(e), sample: !!e.sample };
 }
+/* карточка события PNG (assets/flyer.js, kind 'event'; решение Ирины 12.10.2026, 17:39: «когда мы открываем эвент, там тоже должна быть опция сохранить пнг о событии, карточка события»).
+   Всё, что на ней печатается, — из той же записи, что видит человек в окне события. */
+function evFlyerOf(e, d){
+  const c = chans(e), s = (e.organizers || []).map(cardOf).find(Boolean), x = D(d), pr = priceText(e).trim();
+  const conds = [pr ? 'Цена: ' + pr : '', (e.langs || []).length ? 'Языки: ' + e.langs.join(', ') : '', (e.for || []).length ? 'Для кого: ' + e.for.join(', ') + (e.age ? ', ' + e.age : '') : '', e.seats ? 'Мест: ' + e.seats : ''].filter(Boolean);
+  return { id: e.id, kind: 'event', big: `${x.getUTCDate()} ${MON_G[x.getUTCMonth()]}`, title: e.title, sub: e.about || '', more: [], conds,
+    days: fmtFull(d) + (timeStr(e) ? ' · ' + timeStr(e) : ''), until: e.repeat ? 'Повторяется: ' + repeatText(e) : (e.dateEnd ? `До ${D(e.dateEnd).getUTCDate()} ${MON_G[D(e.dateEnd).getUTCMonth()]}` : ''),
+    who: orgNames(e), role: s ? (s.role || 'организация') : '', place: isRemote(e) ? 'Онлайн' : placeText(e), signup: e.signup && e.signup !== 'none' ? e.signup : '',
+    c: { tel: c.tel, wa: c.wa, tg: c.tg, mail: c.mail, ig: c.ig, link: c.link }, url: evUrl(e), sample: !!e.sample };
+}
 /* кнопка «Записаться»: готовое сообщение в выбранный организатором канал (assets/napisat.js, решение Ирины 10.10.2026, 22:18) */
 function wireWrite(box, o){
   const run = () => { const slot = box.querySelector('[data-wr-slot]'); if (slot && window.SVL_NAPISAT) SVL_NAPISAT(slot, o); };
@@ -1142,7 +1152,7 @@ function openEvent(id, d, pv){
         <div class="d-block"><h4>Где</h4>${isRemote(e) ? '<span>Онлайн, ссылку присылает организатор</span>' : `${e.venue ? `<b>${esc(e.venue)}</b><br>` : ''}<a class="addr" href="${maps(e.address)}" ${ext}>${esc(e.address)}</a><span class="note">кантон ${esc(ktRu(e.canton))}${e.online ? ' · можно и онлайн' : ''}</span>`}</div>
         ${PR ? '' : `<div class="d-block"><h4>Цена</h4><span>${esc(priceText(e))}</span>${(e.disc || []).length ? `<small class="note">${esc(e.disc.join(' · '))}</small>` : ''}${(e.payhow || []).length ? `<small class="note">Оплата: ${esc(e.payhow.join(', ').toLowerCase())}</small>` : ''}${e.seats ? `<small class="note">Мест: ${esc(e.seats)}</small>` : ''}</div>`}
         ${past ? '' : '<div class="d-block" data-wr-slot></div>'}
-        <div class="acts">${PR && !past ? '<button class="btn flyer-btn" type="button" data-flyer>♥ Скачать флаер</button>' : ''}${PR ? `<button class="btn ghost heart-btn" type="button" data-heart="${esc(e.id)}" aria-pressed="${favGet().includes(e.id)}"><span class="hb-on">♥ В сердечках</span><span class="hb-off">♡ В сердечки</span></button>` : ''}<button class="btn ghost" type="button" data-share>Поделиться</button></div>${PR && !past ? '<p class="note flyer-note">Флаер для телефона: акция, условия, срок и контакты автора. Покажи его при записи или визите.</p>' : ''}
+        <div class="acts">${PR && !past ? '<button class="btn flyer-btn" type="button" data-flyer>♥ Скачать флаер</button>' : ''}${!PR && !past ? '<button class="btn ghost" type="button" data-flyer>Сохранить карточку события (PNG)</button>' : ''}${PR ? `<button class="btn ghost heart-btn" type="button" data-heart="${esc(e.id)}" aria-pressed="${favGet().includes(e.id)}"><span class="hb-on">♥ В сердечках</span><span class="hb-off">♡ В сердечки</span></button>` : ''}<button class="btn ghost" type="button" data-share>Поделиться</button></div>${PR && !past ? '<p class="note flyer-note">Флаер для телефона: акция, условия, срок и контакты автора. Покажи его при записи или визите.</p>' : ''}${!PR && !past ? '<p class="note flyer-note">Картинка для телефона: дата, место, цена и контакты организатора. Сохрани её или отправь подруге.</p>' : ''}
         ${PR ? `<p class="note">Акцию объявляет и выполняет сам специалист. «Свои люди» не продают услугу, не участвуют в сделке и не отвечают за условия акции: договаривайся напрямую со специалистом. Размещение акции — реклама.</p>` : `<div class="d-block"><h4>Добавить в календарь</h4><div class="calmenu"><a href="${esc(gcalLink(e, d))}" ${ext}>Google Календарь</a><button type="button" data-ics>Apple, Outlook, телефон (.ics)</button></div></div>`}
         <p class="note">${contactList(e).length ? `Вопросы организатору: ${contactHtml(e)}. ` : ''}Нашли ошибку? <a href="mailto:${MAIL}?subject=${encodeURIComponent('Ошибка в событии: ' + e.title)}&body=${encodeURIComponent('Ссылка: ' + evUrl(e) + '\n\nЧто исправить:\n')}">Сообщить</a></p>
       </div>
@@ -1155,7 +1165,7 @@ function openEvent(id, d, pv){
 document.getElementById('qmCard').addEventListener('click', async ev => {
   if (!OPEN) return;
   if (ev.target.closest('[data-ics]')) saveIcs(OPEN.e, OPEN.d);
-  const fl = ev.target.closest('[data-flyer]'); if (fl){ if (window.SVL_FLYER) SVL_FLYER.open(flyerOf(OPEN.e), fl); return; }
+  const fl = ev.target.closest('[data-flyer]'); if (fl){ if (window.SVL_FLYER) SVL_FLYER.open(isPromo(OPEN.e) ? flyerOf(OPEN.e) : evFlyerOf(OPEN.e, OPEN.d), fl); return; }
   const hb = ev.target.closest('[data-heart]'); if (hb){ toggleFav(hb.dataset.heart, hb); return; }
   if (ev.target.closest('[data-share]')){ const url = evUrl(OPEN.e), title = OPEN.e.title + ' — ' + fmtDay(OPEN.d);
     if (navigator.share){ try { await navigator.share({ title, text: title + ' · Свои люди в Швейцарии', url }); return; } catch (err){ if (err && err.name === 'AbortError') return; } }

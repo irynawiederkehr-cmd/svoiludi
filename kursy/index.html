@@ -417,6 +417,7 @@ a.bot:hover{color:#B98324}
 .addr{color:var(--ink);font-weight:600;text-decoration:underline;text-decoration-color:var(--lc);text-underline-offset:3px}
 .acts{display:flex;flex-wrap:wrap;gap:8px}
 .acts .btn{font-size:.86rem;padding:10px 16px}
+.flyer-note{margin:4px 0 0}
 .orgs{display:flex;flex-direction:column;gap:8px}
 .org{display:grid;grid-template-columns:52px 1fr;gap:12px;align-items:center;background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:8px 12px 8px 8px;text-decoration:none;color:var(--ink)}
 .org:hover{border-color:var(--lc)}
@@ -978,6 +979,18 @@ function okBox(e){
     <div class="pv-fix" hidden><textarea data-pv-text rows="4" maxlength="1500" placeholder="Что исправить: например, расписание, адрес или цену"></textarea><div class="pv-acts"><button class="btn" type="button" data-pv-send="fix">Отправить исправления</button></div></div>
     <span class="pv-small" data-pv-msg data-online="Одно нажатие — и готово. Копия придёт на ваш e-mail.">${window.SVL_PV_ONLINE ? 'Одно нажатие — и готово. Копия придёт на ваш e-mail.' : (cm ? `После нажатия откроется письмо из вашей почты. Отправьте его с адреса ${esc(cm)}: подтверждения мы принимаем только с e-mail вашей карточки.` : 'После нажатия откроется письмо из вашей почты. Отправьте его, это и есть подтверждение.')}</span></div>`;
 }
+/* карточка курса PNG (assets/flyer.js, kind 'kurs'; решение Ирины 12.10.2026, 17:39: «когда мы открываем эвент, там тоже должна быть опция сохранить пнг о событии, карточка события»).
+   Всё, что на ней печатается, — из той же записи, что видит человек в окне курса. */
+function kursFlyerOf(e){
+  const c = chans(e), s = (e.organizers || []).map(cardOf).find(Boolean), nd = nextDate(e), d0 = e.kind === 'course' && !started(e) ? e.date : (nd || e.date), x = D(d0);
+  const trial = e.trial === 'free' ? 'Пробное занятие бесплатно' : e.trial === 'disc' ? 'Пробное занятие со скидкой' : '';
+  const conds = ['Цена: ' + priceText(e), trial, (e.langs || []).length ? 'Языки: ' + e.langs.join(', ') : '', (e.for || []).length ? 'Для кого: ' + e.for.join(', ') + (e.age ? ', ' + e.age : '') : (e.level || ''), e.seats ? 'Мест в группе: ' + e.seats : ''].filter(Boolean);
+  const when = e.kind === 'once' ? fmtFull(e.date) : (e.repeat ? repeatText(e) : fmtFull(e.date));
+  return { id: e.id, kind: 'kurs', big: `${x.getUTCDate()} ${MON_G[x.getUTCMonth()]}`, title: e.title, sub: e.about || '', more: [kindName(e)], conds,
+    days: when + (timeStr(e) ? ' · ' + timeStr(e) : ''), until: e.kind === 'once' ? '' : kindLine(e) + (e.kind === 'course' && !started(e) ? '' : nd ? '. Ближайшее занятие: ' + fmtDay(nd) : ''),
+    who: orgNames(e), role: s ? (s.role || 'организация') : '', place: isRemote(e) ? 'Онлайн' : placeText(e), signup: e.signup && e.signup !== 'none' ? e.signup : '',
+    c: { tel: c.tel, wa: c.wa, tg: c.tg, mail: c.mail, ig: c.ig, link: c.link }, url: evUrl(e), sample: !!e.sample };
+}
 function openKurs(id, pv){
   const e = KURSY.find(x => x.id === id); if (!e) return;
   OPEN = e;
@@ -1002,7 +1015,7 @@ function openKurs(id, pv){
         <div class="d-block"><h4>Где</h4>${isRemote(e) ? '<span>Онлайн, ссылку присылает организатор</span>' : `${e.venue ? `<b>${esc(e.venue)}</b><br>` : ''}<a class="addr" href="${maps(e.address)}" ${ext}>${esc(e.address)}</a><span class="note">кантон ${esc(ktRu(e.canton))}${e.online ? ' · можно и онлайн' : ''}</span>`}</div>
         <div class="d-block"><h4>Цена</h4><span class="kprice">${esc(priceText(e))}</span>${e.priceNote ? `<span class="note">${esc(e.priceNote)}</span>` : ''}${e.trial ? `<span class="note">${esc(e.trial === 'free' ? 'Пробное занятие бесплатно' : e.trial === 'disc' ? 'Пробное занятие со скидкой' : '')}</span>` : ''}${(e.disc || []).length ? `<span class="note">${esc(e.disc.join(' · '))}</span>` : ''}${(e.payhow || []).length ? `<span class="note">Оплата: ${esc(e.payhow.join(', ').toLowerCase())}</span>` : ''}${e.seats ? `<span class="note">Мест в группе: ${esc(e.seats)}</span>` : ''}<span class="note">Цену указал организатор. Точные условия и оплата — у него.</span></div>
         ${lastDay(e) < today || isOff(e) ? '' : '<div class="d-block" data-wr-slot></div>'}
-        <div class="acts"><button class="btn ghost" type="button" data-share>Поделиться</button></div>
+        <div class="acts">${lastDay(e) < today || isOff(e) ? '' : '<button class="btn ghost" type="button" data-flyer>Сохранить карточку курса (PNG)</button>'}<button class="btn ghost" type="button" data-share>Поделиться</button></div>${lastDay(e) < today || isOff(e) ? '' : '<p class="note flyer-note">Картинка для телефона: расписание, место, цена и контакты организатора. Сохрани её или отправь подруге.</p>'}
         ${(e.date < today && e.kind === 'once') || isOff(e) ? '' : `<div class="d-block"><h4>Добавить в календарь</h4><div class="calmenu"><a href="${esc(gcalLink(e))}" ${ext}>Google Календарь</a><button type="button" data-ics>Apple, Outlook, телефон (.ics)</button></div></div>`}
         <p class="kdisc sm"><b>Курс проводит организатор.</b> Запись, оплата и договор — только с ним. «Свои люди» не продают курсы и не отвечают за содержание и проведение занятий.${e.type === 'body' ? ' Занятия не заменяют лечение. Если есть проблемы со здоровьем, сначала посоветуйся с врачом.' : ''}</p>
         <p class="note">${contactList(e).length ? `Вопросы организатору: ${contactHtml(e)}. ` : ''}Нашли ошибку? <a href="mailto:${MAIL}?subject=${encodeURIComponent('Ошибка в курсе: ' + e.title)}&body=${encodeURIComponent('Ссылка: ' + evUrl(e) + '\n\nЧто исправить:\n')}">Сообщить</a></p>
@@ -1016,6 +1029,7 @@ function openKurs(id, pv){
 document.getElementById('qmCard').addEventListener('click', async ev => {
   if (!OPEN) return;
   if (ev.target.closest('[data-ics]')) saveIcs(OPEN);
+  const fl = ev.target.closest('[data-flyer]'); if (fl){ if (window.SVL_FLYER) SVL_FLYER.open(kursFlyerOf(OPEN), fl); return; }
   if (ev.target.closest('[data-share]')){ const url = evUrl(OPEN), title = OPEN.title;
     if (navigator.share){ try { await navigator.share({ title, text: title + ' · Свои люди в Швейцарии', url }); return; } catch (err){ if (err && err.name === 'AbortError') return; } }
     const ok = await copyText(url); toast(ok ? 'Ссылка на курс скопирована.' : url); }
@@ -1072,7 +1086,7 @@ if (ADMIN && window.SVL_DRAFTS) SVL_DRAFTS.init({ page: 'kursy', okKey: OKKEY, k
 <script src="/assets/help.js" defer></script>
 <script defer src="/assets/plz.js"></script>
 <script defer src="/assets/zayavka.js"></script>
-<script defer src="/assets/napisat.js"></script>
+<script defer src="/assets/napisat.js"></script><script defer src="/assets/flyer.js"></script>
 <script defer src="/assets/podtverdit.js"></script>
 <script data-goatcounter="https://svoiludi.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 <script src="/assets/share.js" defer></script>

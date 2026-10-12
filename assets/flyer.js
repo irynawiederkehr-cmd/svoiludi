@@ -3,7 +3,8 @@
    Всё считается в браузере человека, на сервер ничего не уходит.
    window.SVL_FLYER.open(o)  — собирает PNG 1080×1920 (экран телефона) и показывает его в окне с кнопками «Скачать на телефон» и «Отправить подруге».
    window.SVL_FLYER.burst(el) — несколько сердечек из места нажатия (не показываются, если у человека включено «уменьшить движение»).
-   o: { id, big, title, sub, more[], conds[], days, until, who, role, place, signup, c:{tel,wa,tg,mail,ig,link}, url, sample, limited }
+   o: { id, kind, big, title, sub, more[], conds[], days, until, who, role, place, signup, c:{tel,wa,tg,mail,ig,link}, url, sample, limited }
+   kind — '' (акция, по умолчанию), 'event' (карточка события) или 'kurs' (карточка курса): свои заголовки и оговорка, без «Реклама» (12.10.2026)
    limited — у акции «первым N клиентам»: под QR-кодом «Проверь, что места ещё есть» (11.10.2026; места считает автор, на сайте — пометка «Места закончились»)
    Язык: по <html lang>. Знак «Свои люди · svoiludi.ch» и строка «Создано на сайте проекта «Свои люди»» — по правилу проекта для PNG svoiludi.ch.
    Изменить вид флаера — только здесь; после правки пересобрать превью «Копии» и (если меняется текст) проверить русский и украинский. */
@@ -37,7 +38,38 @@
       busy: 'Готую флаєр…', err: 'Не вдалося зібрати флаєр. Спробуй ще раз.', ok: 'Флаєр готовий. Покажи його під час запису ♡', fname: 'svoi-lyudi-akciya-'
     }
   };
+  /* Карточка события и курса PNG (решение Ирины 12.10.2026, 17:39: «когда мы открываем эвент, там тоже должна быть опция сохранить пнг о событии, карточка события»).
+     Тот же лист 1080×1920, что у флаера акции, но o.kind = 'event' или 'kurs': без пометки «Реклама» (это не реклама, а афиша),
+     свои слова заботы, «Когда», «Кто организует» / «Кто ведёт», оговорка организатора. Галочку G1 и номер не ставим — это афиша события (правило «Скачивание документов»). */
+  var TK = {
+    event: {
+      ru: { kicker: 'ПРИГЛАШАЕМ ТЕБЯ', ad: '', care: ['Приходи: свои рядом и будут тебе рады.', 'Хорошее время среди своих.', 'Ты не одна: здесь тебя ждут.', 'Возьми с собой подругу, вместе веселее.'],
+        cond: 'ВАЖНО ЗНАТЬ', term: 'КОГДА', by: 'КТО ОРГАНИЗУЕТ', show: 'Сохрани и приходи. Можно взять с собой друзей', check: 'Проверь дату и подробности', checkL: 'Проверь, что места ещё есть',
+        disc: 'Событие проводит его организатор. «Свои люди» не продают билеты и не отвечают за событие: детали уточни у организатора.',
+        h: 'Карточка события готова', p: 'Сохрани её на телефон или отправь подруге: в ней дата, место, цена и контакты организатора.',
+        busy: 'Готовлю карточку…', err: 'Не получилось собрать карточку. Попробуй ещё раз.', ok: 'Карточка события сохранена ♡', fname: 'svoi-lyudi-sobytie-' },
+      uk: { kicker: 'ЗАПРОШУЄМО ТЕБЕ', ad: '', care: ['Приходь: свої поруч і будуть тобі раді.', 'Гарний час серед своїх.', 'Ти не сама: тут на тебе чекають.', 'Візьми з собою подругу, разом веселіше.'],
+        cond: 'ВАЖЛИВО ЗНАТИ', term: 'КОЛИ', by: 'ХТО ОРГАНІЗОВУЄ', show: 'Збережи й приходь. Можна взяти з собою друзів', check: 'Перевір дату й подробиці', checkL: 'Перевір, чи є ще місця',
+        disc: 'Подію проводить її організатор. «Свої люди» не продають квитки й не відповідають за подію: деталі уточни в організатора.',
+        h: 'Картка події готова', p: 'Збережи її на телефон або надішли подрузі: у ній дата, місце, ціна й контакти організатора.',
+        busy: 'Готую картку…', err: 'Не вдалося зібрати картку. Спробуй ще раз.', ok: 'Картку події збережено ♡', fname: 'svoi-lyudi-podiya-' }
+    },
+    kurs: {
+      ru: { kicker: 'ЗАНЯТИЯ ДЛЯ ТЕБЯ', ad: '', care: ['Учиться среди своих легче и веселее.', 'Ты не одна: здесь тебя ждут.', 'Маленький шаг для себя — это уже много.', 'Найди своё занятие и своих людей.'],
+        cond: 'ВАЖНО ЗНАТЬ', term: 'КОГДА', by: 'КТО ВЕДЁТ', show: 'Сохрани и запишись на занятия', check: 'Проверь расписание и подробности', checkL: 'Проверь, что места ещё есть',
+        disc: 'Курс проводит организатор. Запись, оплата и договор — только с ним. «Свои люди» не продают курсы и не отвечают за занятия.',
+        h: 'Карточка курса готова', p: 'Сохрани её на телефон или отправь подруге: в ней расписание, место, цена и контакты организатора.',
+        busy: 'Готовлю карточку…', err: 'Не получилось собрать карточку. Попробуй ещё раз.', ok: 'Карточка курса сохранена ♡', fname: 'svoi-lyudi-kurs-' },
+      uk: { kicker: 'ЗАНЯТТЯ ДЛЯ ТЕБЕ', ad: '', care: ['Навчатися серед своїх легше й веселіше.', 'Ти не сама: тут на тебе чекають.', 'Маленький крок для себе — це вже багато.', 'Знайди своє заняття й своїх людей.'],
+        cond: 'ВАЖЛИВО ЗНАТИ', term: 'КОЛИ', by: 'ХТО ВЕДЕ', show: 'Збережи й запишися на заняття', check: 'Перевір розклад і подробиці', checkL: 'Перевір, чи є ще місця',
+        disc: 'Курс проводить організатор. Запис, оплата й договір — тільки з ним. «Свої люди» не продають курси й не відповідають за заняття.',
+        h: 'Картка курсу готова', p: 'Збережи її на телефон або надішли подрузі: у ній розклад, місце, ціна й контакти організатора.',
+        busy: 'Готую картку…', err: 'Не вдалося зібрати картку. Спробуй ще раз.', ok: 'Картку курсу збережено ♡', fname: 'svoi-lyudi-kurs-' }
+    }
+  };
   var lang = function(){ return /^uk/i.test(document.documentElement.lang || '') ? 'uk' : 'ru'; };
+  /* тексты листа: общие (акция) и, для события или курса, свои поверх них */
+  var tx = function(o){ var b = T[lang()], k = o && TK[o.kind] && TK[o.kind][lang()], r = {}, x; for (x in b) r[x] = b[x]; if (k) for (x in k) r[x] = k[x]; return r; };
   var FF = '"Forum","Cormorant Garamond",Georgia,serif', FB = '"Manrope","Segoe UI",system-ui,sans-serif';
 
   /* ---------- рисование ---------- */
@@ -139,7 +171,7 @@
   }
 
   function paint(o){
-    var t = T[lang()], cv = document.createElement('canvas'); cv.width = W; cv.height = H; var ctx = cv.getContext('2d');
+    var t = tx(o), cv = document.createElement('canvas'); cv.width = W; cv.height = H; var ctx = cv.getContext('2d');
     var h = 0; for (var i = 0; i < String(o.id || '').length; i++) h = (h * 31 + String(o.id).charCodeAt(i)) >>> 0; o.hash = h;
     /* фон и сердечки по краям */
     var g = ctx.createLinearGradient(0, 0, 0, H); g.addColorStop(0, '#F6F1E4'); g.addColorStop(0.55, '#F3EBDD'); g.addColorStop(1, '#F1DFD7'); ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
@@ -148,7 +180,7 @@
     /* шапка */
     heart(ctx, 100, 96, 20, C.rose, 1); ctx.fillStyle = C.sage; ctx.textBaseline = 'alphabetic'; ctx.font = '400 58px ' + FF; ctx.fillText(t.brand, 132, 112);
     ctx.font = '600 26px ' + FB; ctx.fillStyle = C.muted; ctx.fillText(t.brand2, 134, 148);
-    ctx.font = '800 26px ' + FB; var aw = ctx.measureText(t.ad).width + 40; rrect(ctx, W - 80 - aw, 70, aw, 52, 26); ctx.strokeStyle = C.red; ctx.lineWidth = 3; ctx.stroke(); ctx.fillStyle = C.red; ctx.textBaseline = 'middle'; ctx.fillText(t.ad, W - 80 - aw + 20, 97);
+    if (t.ad){ ctx.font = '800 26px ' + FB; var aw = ctx.measureText(t.ad).width + 40; rrect(ctx, W - 80 - aw, 70, aw, 52, 26); ctx.strokeStyle = C.red; ctx.lineWidth = 3; ctx.stroke(); ctx.fillStyle = C.red; ctx.textBaseline = 'middle'; ctx.fillText(t.ad, W - 80 - aw + 20, 97); }
     ctx.textBaseline = 'alphabetic'; ctx.font = '800 32px ' + FB; var kw = ctx.measureText(t.kicker).width; ctx.fillStyle = C.sage; ctx.fillText(t.kicker, (W - kw) / 2, 232);
     heart(ctx, (W - kw) / 2 - 40, 220, 16, C.rose, 1); heart(ctx, (W + kw) / 2 + 40, 220, 16, C.rose, 1);
     /* карточка: выбираем самый крупный размер, при котором всё помещается */
@@ -209,7 +241,7 @@
     Promise.all(p.concat([qr])).then(cb, cb);
   }
   function open(o, btn){
-    var t = T[lang()], old = btn && btn.textContent;
+    var t = tx(o), old = btn && btn.textContent;
     if (btn){ btn.disabled = true; btn.textContent = t.busy; }
     var done = function(){ if (btn){ btn.disabled = false; btn.textContent = old; } };
     ready(function(){
@@ -219,7 +251,7 @@
           done();
           if (!b){ if (window.toast) window.toast(t.err); return; }
           var d = dlg(), url = URL.createObjectURL(b); URLS.push(url);
-          var name = t.fname + String(o.id || 'akciya').replace(/[^a-z0-9\-]+/gi, '-') + '.png', file = null;
+          var name = t.fname + String(o.id || 'svoi-lyudi').replace(/[^a-z0-9\-]+/gi, '-') + '.png', file = null;
           try { file = new File([b], name, { type: 'image/png' }); } catch (e) {}
           d.querySelector('.slfl-h').textContent = t.h; d.querySelector('.slfl-p').textContent = t.p;
           var im = d.querySelector('img'); im.src = url; im.alt = o.title || '';
