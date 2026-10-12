@@ -22,6 +22,15 @@
     Проверить ключ из ссылки (например, из письма «Подтверждаю карточку»): совпадает ли его отпечаток с keyHash записи.
     Ничего не меняет.
 
+  python3 -I _i18n/pochta/klyuch.py --lead <id карточки> [<ключ или вся ссылка предпросмотра>]
+    Черновики лида (правило Ирины 12.10.2026, 14:34: «всё, что мы прописываем в лидах, должно быть в черновиках размещено на сайте,
+    и в письме на всё это ссылки как на образцы»): всем записям «на подтверждении» и «черновик», где эта карточка (специалист или
+    организация) — организатор или автор (события, курсы, акции в data/afisha.js, объявления в data/vacancies.js), ставит тот же
+    keyHash, что у карточки. Тогда одна ссылка из письма открывает и карточку, и каждую запись: …/events/#ok=<id>.<ключ карточки>,
+    kursy/#ok=…, akcii/#ok=…, vakansii/#ok=…. С ключом — проверяет его по отпечатку карточки и печатает все ссылки для письма.
+    Запускать после каждого нового черновика лида (Claude делает это сам, перед сборкой). Новый ключ карточки — klyuch.py <id карточки>,
+    потом снова --lead.
+
 Поле key (сам ключ) в данных запрещено: python3 _i18n/sync.py check и build останавливаются, если находят его.
 kartochka.py и zapis.py ставят новый ключ сами (через функции этого файла).
 """
@@ -131,7 +140,44 @@ def check(rid, k):
     return ok
 
 
+def lead(cid, k=''):
+    """Черновики лида получают ключ карточки; с ключом — печатаем все ссылки."""
+    import datetime
+    card, cfile = None, None
+    for f in (('spec', 'specialists.js', 'SPECIALISTS'), ('org', 'organizations.js', 'ORGANIZATIONS')):
+        for r in load(f):
+            if r.get('id') == cid: card, cfile = r, f
+    if not card: print(f'Нет карточки «{cid}» ни в specialists.js, ни в organizations.js.'); return False
+    h = card.get('keyHash')
+    if not h: print(f'У карточки «{cid}» нет keyHash: сначала klyuch.py {cid}.'); return False
+    mine = lambda o: o == cid or (isinstance(o, dict) and (o.get('org') == cid or o.get('spec') == cid))
+    draft = lambda r: r.get('status') in ('на подтверждении', 'черновик') and not r.get('sample')
+    today = datetime.date.today().isoformat()
+    out = []
+    for r in load(FILES[1]):
+        if draft(r) and any(mine(o) for o in (r.get('organizers') or [])): out.append(('afisha', r))
+    for r in load(FILES[2]):
+        if draft(r) and mine(r.get('author')): out.append(('vacancy', r))
+    changed = 0
+    for kind, r in out:
+        if r.get('keyHash') != h:
+            set_hash(os.path.join(ROOT, 'data', 'afisha.js' if kind == 'afisha' else 'vacancies.js'), r['id'], h); changed += 1
+    print(f"{card.get('name')} ({cid}): черновиков {len(out)}, ключ карточки поставлен {changed}.")
+    if k:
+        k = re.split(r'[.#=]', k.strip().rstrip('/'))[-1] if ('.' in k or '#' in k) else k.strip()
+        if sha(k) != h: print('Ключ НЕ совпадает с отпечатком карточки: ссылки не печатаем.'); return False
+        page = 'organizacii/' if cfile[0] == 'org' else ''
+        print(f"Карточка: https://svoiludi.ch/{page}#preview={cid}.{k}")
+        for kind, r in out:
+            last = (r.get('repeat') or {}).get('until') or r.get('dateEnd') or r.get('date') or r.get('until') or ''
+            past = ' (уже прошло — для примера)' if last and last < today and kind == 'afisha' else ''
+            print(f"{r.get('title')}{past}: {links(kind, r, k)['ok']}")
+    return True
+
+
 if __name__ == '__main__':
+    if len(sys.argv) in (3, 4) and sys.argv[1] == '--lead':
+        sys.exit(0 if lead(sys.argv[2], sys.argv[3] if len(sys.argv) == 4 else '') else 3)
     if len(sys.argv) == 4 and sys.argv[1] == '--check':
         sys.exit(0 if check(sys.argv[2], sys.argv[3]) else 3)
     ids = [x for x in sys.argv[1:] if not x.startswith('-')]

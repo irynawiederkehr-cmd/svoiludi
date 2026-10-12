@@ -27,6 +27,7 @@ body=open(S+'/vak_body.html',encoding='utf-8').read()
 scripts=f'''<script src="/data/specialists.js?v=7fef69e3"></script>
 <script src="/data/organizations.js"></script>
 <script src="/data/vacancies.js"></script>
+<script src="/assets/chernoviki.js"></script>
 <script>window.IMG_BASE = '../img/';</script>
 <script>
 {js}</script>

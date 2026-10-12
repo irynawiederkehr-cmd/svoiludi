@@ -320,7 +320,7 @@ window.AFISHA = [
   /* «Рідне Слово» (12.10.2026): расписание школы с её страницы — ждёт подтверждения школы вместе с карточкой организации (organizacii/#preview=…) */
   {
     sections: ['kursy'], kind: 'regular', ktype: 'kids',
-    id: 'ridne-slovo-zanyatiya', status: 'на подтверждении', title: 'Украинская субботняя школа «Рідне Слово»: занятия I семестра 2026–2027', type: 'kids',
+    id: 'ridne-slovo-zanyatiya', keyHash: '166a038502e1ad58594ee1333a0553f505f30f146afa54c2b34255c649ceb4ea', status: 'на подтверждении', title: 'Украинская субботняя школа «Рідне Слово»: занятия I семестра 2026–2027', type: 'kids',
     date: '2026-08-15', repeat: { freq: 'weekly', until: '2027-01-30', except: ['2026-09-19', '2026-09-26', '2026-10-03', '2026-10-10', '2026-12-26', '2027-01-02', '2027-01-09'] },
     canton: 'Bern', address: 'Gotthelfstrasse 40, 3013 Bern', online: false,
     langs: ['украинский'], level: 'дети: садик, дошкольники, младшая, средняя и старшая группы', price: '', commercial: true,
@@ -331,7 +331,7 @@ window.AFISHA = [
      Все уже прошли — в предпросмотре карточки они стоят с пометкой «прошло», для примера. Личные телефоны из постов не берём. */
   {
     sections: ['events'], type: 'retreat',
-    id: 'ridne-slovo-tabir-osin-2026', status: 'на подтверждении', title: 'Осенний лагерь «Мандрівка країнами світу» для подростков 13–16 лет в Мюмлисвиле',
+    id: 'ridne-slovo-tabir-osin-2026', keyHash: '166a038502e1ad58594ee1333a0553f505f30f146afa54c2b34255c649ceb4ea', status: 'на подтверждении', title: 'Осенний лагерь «Мандрівка країнами світу» для подростков 13–16 лет в Мюмлисвиле',
     date: '2026-09-20', dateEnd: '2026-09-26',
     canton: 'Solothurn', address: '4717 Mümliswil', online: false,
     langs: ['украинский'], level: 'подростки 13–16 лет', price: 'CHF 250', per: 'за неделю', commercial: true,
@@ -340,7 +340,7 @@ window.AFISHA = [
   },
   {
     sections: ['events'], type: 'culture',
-    id: 'ridne-slovo-kino-chervona-ruta', status: 'на подтверждении', title: 'Кино на украинском для подростков 14–17 лет: комедия «Потяг «Червона Рута» во Фрибуре',
+    id: 'ridne-slovo-kino-chervona-ruta', keyHash: '166a038502e1ad58594ee1333a0553f505f30f146afa54c2b34255c649ceb4ea', status: 'на подтверждении', title: 'Кино на украинском для подростков 14–17 лет: комедия «Потяг «Червона Рута» во Фрибуре',
     date: '2026-08-29', time: '17:00', timeEnd: '20:56',
     canton: 'Bern', address: 'Treffpunkt, Bahnhof Bern, 3011 Bern', online: false,
     langs: ['украинский'], level: 'подростки 14–17 лет', price: 'CHF 10', priceNote: 'благотворительный взнос', commercial: false,
@@ -349,7 +349,7 @@ window.AFISHA = [
   },
   {
     sections: ['events'], type: 'kids',
-    id: 'ridne-slovo-kozacki-zabavy', status: 'на подтверждении', title: '«Козацькі забави» — интеллектуальные игры для учеников школы «Рідне Слово»',
+    id: 'ridne-slovo-kozacki-zabavy', keyHash: '166a038502e1ad58594ee1333a0553f505f30f146afa54c2b34255c649ceb4ea', status: 'на подтверждении', title: '«Козацькі забави» — интеллектуальные игры для учеников школы «Рідне Слово»',
     date: '2026-09-12', time: '10:00',
     canton: 'Bern', address: 'Gotthelfstrasse 40, 3013 Bern', online: false,
     langs: ['украинский'], level: 'ученики школы, в рамках субботних занятий', price: '', commercial: true,
@@ -358,7 +358,7 @@ window.AFISHA = [
   },
   {
     sections: ['events'], type: 'culture',
-    id: 'jewish-culture-shabat', status: 'на подтверждении', title: 'Шабат в Берне — еженедельная встреча общины Jewish Culture Switzerland',
+    id: 'jewish-culture-shabat', keyHash: '75318fbbb1510d6477b59476d04f17fd965ae98df6b1ddbf9f2f89831d768fd5', status: 'на подтверждении', title: 'Шабат в Берне — еженедельная встреча общины Jewish Culture Switzerland',
     date: '2026-10-17', time: '11:00', timeEnd: '14:00', repeat: { freq: 'weekly', until: '2027-01-30' },
     canton: 'Bern', address: 'Marktgasse, Käfiggässchen 63, 3011 Bern', online: false,
     langs: ['украинский', 'русский', 'английский'], level: 'для всех, можно с детьми', price: 'бесплатно', commercial: false,
@@ -369,7 +369,7 @@ window.AFISHA = [
      прошедшие даты Claude заменяет следующими с их сайта перед каждым письмом (правило Ирины 12.10.2026, «lidy-svoiludi.md») */
   {
     sections: ['events'], type: 'meet',
-    id: 'jewish-culture-teens-tribe', status: 'на подтверждении', title: 'Teens Tribe & Youvin — вечер для молодёжи',
+    id: 'jewish-culture-teens-tribe', keyHash: '75318fbbb1510d6477b59476d04f17fd965ae98df6b1ddbf9f2f89831d768fd5', status: 'на подтверждении', title: 'Teens Tribe & Youvin — вечер для молодёжи',
     date: '2026-10-23', time: '18:30', timeEnd: '21:30',
     canton: 'Bern', address: 'Marktgasse, Käfiggässchen 63, 3011 Bern', online: false,
     langs: ['немецкий'], level: 'молодёжь', price: '', commercial: false,
@@ -378,7 +378,7 @@ window.AFISHA = [
   },
   {
     sections: ['events'], type: 'culture',
-    id: 'jewish-culture-erev-shabat', status: 'на подтверждении', title: 'Ерев Шабат — встречаем Шабат вместе',
+    id: 'jewish-culture-erev-shabat', keyHash: '75318fbbb1510d6477b59476d04f17fd965ae98df6b1ddbf9f2f89831d768fd5', status: 'на подтверждении', title: 'Ерев Шабат — встречаем Шабат вместе',
     date: '2026-10-30', time: '18:30', timeEnd: '20:30',
     canton: 'Bern', address: 'Marktgasse, Käfiggässchen 63, 3011 Bern', online: false,
     langs: ['немецкий', 'английский'], level: 'для всех', price: '', commercial: false,
@@ -387,7 +387,7 @@ window.AFISHA = [
   },
   {
     sections: ['kursy'], kind: 'regular', ktype: 'kids',
-    id: 'jewish-culture-kinder-club', status: 'на подтверждении', title: 'Kinder Club — вечер для детей 8–13 лет', type: 'kids',
+    id: 'jewish-culture-kinder-club', keyHash: '75318fbbb1510d6477b59476d04f17fd965ae98df6b1ddbf9f2f89831d768fd5', status: 'на подтверждении', title: 'Kinder Club — вечер для детей 8–13 лет', type: 'kids',
     date: '2026-10-15', time: '18:30', timeEnd: '20:00', repeat: { freq: 'weekly', until: '2026-12-03' },
     canton: 'Bern', address: 'Marktgasse, Käfiggässchen 63, 3011 Bern', online: false,
     langs: ['украинский'], level: 'дети 8–13 лет', price: '', commercial: false,
@@ -396,7 +396,7 @@ window.AFISHA = [
   },
   {
     sections: ['kursy'], kind: 'regular', ktype: 'lang',
-    id: 'jewish-culture-deutsch-club', status: 'на подтверждении', title: 'Deutsch Sprechclub — разговорный клуб немецкого', type: 'lang',
+    id: 'jewish-culture-deutsch-club', keyHash: '75318fbbb1510d6477b59476d04f17fd965ae98df6b1ddbf9f2f89831d768fd5', status: 'на подтверждении', title: 'Deutsch Sprechclub — разговорный клуб немецкого', type: 'lang',
     date: '2026-10-15', time: '18:30', timeEnd: '21:00', repeat: { freq: 'weekly', until: '2026-12-03' },
     canton: 'Bern', address: 'Marktgasse, Käfiggässchen 63, 3011 Bern', online: false,
     langs: ['немецкий'], level: '', price: '', commercial: false,
@@ -407,7 +407,7 @@ window.AFISHA = [
      (organizacii/#preview=vidnova-zurich…); прошедшее Claude заменяет следующим их событием перед каждым письмом (правило Ирины 12.10.2026, «lidy-svoiludi.md») */
   {
     sections: ['events'], type: 'talk',
-    id: 'vidnova-vitalis-2026', status: 'на подтверждении', title: 'VITALIS INTERNATIONAL — международный онлайн-форум «Здоровье · Красота · Мода»',
+    id: 'vidnova-vitalis-2026', keyHash: '09e960beed9572499e1ba030273dfc4cd7f04a55d1b49f6b709212320041cc2c', status: 'на подтверждении', title: 'VITALIS INTERNATIONAL — международный онлайн-форум «Здоровье · Красота · Мода»',
     date: '2026-10-17',
     canton: 'Zürich', address: '', online: true,
     langs: ['украинский'], level: 'для взрослых', price: '', commercial: false,
@@ -467,7 +467,7 @@ window.AFISHA = [
   /* пробная карточка SG-0021 «Алёна» (лид, 12.10.2026): её мастер-класс из поста в группе Facebook — уже прошёл, в предпросмотре стоит примером с пометкой «прошло» */
   {
     sections: ['kursy'], ktype: 'create', kind: 'once',
-    id: 'alena-botanical-relief-mk-2026-04', status: 'на подтверждении', title: 'Мастер-класс по рельефу, свету и композиции — Botanical Relief Series',
+    id: 'alena-botanical-relief-mk-2026-04', keyHash: '938a0e2512f863022d161db158254afb3add2f944fecd96070743835930b85bc', status: 'на подтверждении', title: 'Мастер-класс по рельефу, свету и композиции — Botanical Relief Series',
     date: '2026-04-11', time: '12:00', timeEnd: '16:00',
     canton: 'Zürich', address: 'INTWINE Conceptual Showroom, Heidbachstrasse 42, 8032 Zürich', online: false,
     langs: ['русский'], level: 'для взрослых', price: '', commercial: true,
@@ -555,6 +555,7 @@ window.AFISHA = [
     ],
     "type": "talk",
     "id": "maryna-geneva-efir-perevod-2026-09",
+    "keyHash": "03c5aaf1152dc86720fe6171beb91a296913565ce8466092bf50e664057dcd44",
     "status": "на подтверждении",
     "title": "Как перевестись из университета в Украине в университет в Швейцарии — прямой эфир",
     "date": "2026-09-28",
@@ -579,6 +580,7 @@ window.AFISHA = [
     ],
     "type": "talk",
     "id": "maryna-geneva-efir-ucheba-2026-09",
+    "keyHash": "03c5aaf1152dc86720fe6171beb91a296913565ce8466092bf50e664057dcd44",
     "status": "на подтверждении",
     "title": "Плюсы и минусы учёбы за границей — прямой эфир",
     "date": "2026-09-24",
@@ -603,6 +605,7 @@ window.AFISHA = [
     ],
     "type": "talk",
     "id": "maryna-geneva-efir-linkedin-2026-09",
+    "keyHash": "03c5aaf1152dc86720fe6171beb91a296913565ce8466092bf50e664057dcd44",
     "status": "на подтверждении",
     "title": "Как быть заметным в LinkedIn именно в Швейцарии — прямой эфир",
     "date": "2026-09-07",
@@ -620,5 +623,39 @@ window.AFISHA = [
     ],
     "link": "https://t.me/marynabakhmatova",
     "about": "Как создать и оформить страницу в LinkedIn, чтобы она работала на вас именно на швейцарском рынке."
+  },
+  {
+    "sections": [
+      "events"
+    ],
+    "id": "nora-zurich-modeli",
+    "keyHash": "409bbf753826dcdacf2a97f54e802d3ad3589504c278349fe28f30e55ee02429",
+    "status": "на подтверждении",
+    "title": "Моделям для портфолио — ламинирование бровей по особой цене",
+    "type": "promo",
+    "promo": {
+      "kind": "price",
+      "value": 30,
+      "what": "ламинирование бровей без окрашивания для моделей в портфолио, с окрашиванием — CHF 40",
+      "cond": [
+        "book"
+      ]
+    },
+    "date": "2026-10-12",
+    "dateEnd": "2027-01-09",
+    "canton": "Zürich",
+    "address": "",
+    "online": false,
+    "langs": [
+      "русский"
+    ],
+    "commercial": true,
+    "organizers": [
+      "nora-zurich"
+    ],
+    "signup": "wa",
+    "contacts": {},
+    "link": "",
+    "about": "Я пополняю портфолио и ищу моделей на ламинирование бровей (Brow Lamination) в кантоне Цюрих. Для моделей особая цена: CHF 40 с окрашиванием и CHF 30 без окрашивания. Записаться можно в WhatsApp."
   }
 ];

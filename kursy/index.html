@@ -655,14 +655,15 @@ a.yours:hover{background:#EBD3A3}
 
 <dialog class="qm" id="qm" aria-labelledby="qmTitle"><div class="qm-card" id="qmCard"></div></dialog>
 
-<script src="/data/specialists.js?v=42f85a0e"></script>
+<script src="/data/specialists.js?v=4939a3ea"></script>
 <script src="/data/organizations.js?v=c5a6d3be"></script>
 <script>
 window.IMG_BASE = '../img/';
 /* карточки специалистов — в /data/specialists.js (одна копия на весь сайт) */
 const SPECIALISTS = window.SPECIALISTS || [];
 </script>
-<script src="/data/afisha.js?v=c6c7b0b8"></script>
+<script src="/data/afisha.js?v=b12424ea"></script>
+<script src="/assets/chernoviki.js"></script>
 <script>/* одна база афиши: здесь — записи раздела «Курсы»; у записи в обеих вкладках направление курса в ktype */
 const KURSY = (window.AFISHA || []).filter(e => (e.sections || []).includes('kursy')).map(e => e.ktype ? Object.assign({}, e, { type: e.ktype }) : e);</script>
 <script>
@@ -762,7 +763,10 @@ function kindLine(e){
 
 /* ---------- фильтры ---------- */
 const state = { canton: '', city: '', type: '', lang: '', kind: '' };
-const pool = () => KURSY.filter(e => e.status === 'активен' && live(e) && (nextDate(e) || (e.kind === 'course' && lastDate(e) >= today)));
+/* черновики (правило Ирины 12.10.2026, 14:34): в режиме Ирины записи «на подтверждении» стоят в списке с пометкой «Черновик», у всех — нет */
+const isDraft = e => e.status === 'на подтверждении' || e.status === 'черновик';
+let DRAFTS_ON = ADMIN && !!(window.SVL_DRAFTS && SVL_DRAFTS.showInList());
+const pool = () => KURSY.filter(e => ((e.status === 'активен' && live(e)) || (DRAFTS_ON && isDraft(e))) && (nextDate(e) || (e.kind === 'course' && lastDate(e) >= today)));
 const isRemote = e => e.online && !e.address;
 function match(e, skip){
   if (skip !== 'type' && state.type && e.type !== state.type) return false;
@@ -780,7 +784,7 @@ const orgNames = e => (e.organizers || []).map(o => { const s = orgOf(o); return
 function row(e){
   const k = KTYPES[e.type] || KTYPES.life, d = nextDate(e) || e.date, dd = D(d);
   const where = isRemote(e) ? 'онлайн' : `${esc(city(e.address))} · ${esc(kt(e.canton))}${e.online ? ' · и онлайн' : ''}`;
-  return `<button class="ev" type="button" data-ev="${esc(e.id)}" style="--lc:${k.c}">${e.sample ? '<span class="sample">Образец</span>' : ''}
+  return `<button class="ev" type="button" data-ev="${esc(e.id)}" style="--lc:${k.c}">${e.sample ? '<span class="sample">Образец</span>' : isDraft(e) ? '<span class="sample draft">Черновик · видишь только ты</span>' : ''}
     <span class="ev-d"><small>${e.kind === 'course' && !started(e) ? 'начало' : WD_S[dd.getUTCDay()]}</small><b>${dd.getUTCDate()}</b><small>${MON_S[dd.getUTCMonth()]}</small></span>
     <span class="ev-m">${e.sample ? '<span class="yours">Здесь может быть твой курс!</span>' : ''}<span class="ev-k">${esc(k.t)} · ${esc(kindName(e))}</span><span class="ev-t">${esc(e.title)}</span>
       <span class="ev-i">${timeStr(e) ? `<b>${esc(timeStr(e))}</b>` : ''}<span>${e.repeat ? esc(repeatText(e)) : esc(fmtFull(d))}</span><span>${where}</span><span>${esc((e.langs || []).join(', '))}</span>${e.level ? `<span>${esc(e.level)}</span>` : ''}</span>${orgFaces(e)}</span>
@@ -953,12 +957,19 @@ function offBox(e){
     <div class="pv-acts"><button class="btn" type="button" data-pv-send="ok">Снять с сайта</button></div>
     <span class="pv-small" data-pv-msg data-online="Одно нажатие — и готово.">${window.SVL_PV_ONLINE ? 'Одно нажатие — и готово.' : (cm ? `После нажатия откроется письмо из вашей почты. Отправьте его с адреса ${esc(cm)}: такие просьбы мы принимаем только с e-mail вашей карточки.` : 'После нажатия откроется письмо из вашей почты. Отправьте его.')}</span></div>`;
 }
+/* прошедший пример в пробной карточке лида (lidy-svoiludi.md, раздел 6): по ссылке из письма — без «Подтверждаю», с пояснением */
+const pastDraft = e => isDraft(e) && !nextDate(e) && !(e.kind === 'course' && lastDate(e) >= today);
+function pastBox(e){
+  return `<div class="pv-box"><b>${e.kind === 'regular' ? 'Эти занятия уже закончились, они здесь для примера' : e.kind === 'course' ? 'Этот курс уже закончился, он здесь для примера' : 'Эта встреча уже прошла, она здесь для примера'}.</b><span>Мы поставили его, чтобы вы видели, как ваши курсы, мастер-классы и занятия будут выглядеть на сайте. Подтверждать его не нужно, и для всех он не появится. Пришлите нам ближайшие занятия с коротким описанием, датами, временем, местом и ценой — мы поставим их так же.</span></div>`;
+}
+/* запись лида: выйдет на сайт вместе с карточкой, после её подтверждения */
+const cardWait = e => (e.organizers || []).map(cardOf).some(c => c && c.status !== 'активен');
 function okBox(e){
   const who = orgNames(e), cm = cardMail(e);
   const su = `Подтверждаю курс — ${e.title}`, body = `Здравствуйте, Ирина!\n\nВсё верно, подтверждаю публикацию на сайте «Свои люди в Швейцарии».\nЭто мой курс: я сам(а) его веду, или его проводит моя организация. Записи за других я не размещаю.\nКурс в моей компетенции и соответствует законам Швейцарии, моего кантона и общины.\nУсловия размещения (https://svoiludi.ch/usloviya/) прочитал(а) и принимаю.\n\n${okText(e)}\n\n${okUrl(e)}\n\n${who}`;
   const suf = `Исправления — ${e.title}`, bodyf = `Здравствуйте, Ирина!\n\nПожалуйста, исправьте:\n\n{text}\n\n${okUrl(e)}\n\n${who}`;
   return `<div class="pv-box" id="pvBox" data-pv-kind="kurs" data-pv-id="${esc(e.id)}" data-pv-key="${esc(OKKEY[e.id] || '')}" data-pv-lang="ru" data-mail="${MAIL}" data-su-ok="${esc(su)}" data-body-ok="${esc(body)}" data-su-fix="${esc(suf)}" data-body-fix="${esc(bodyf)}" data-t-sending="Отправляю…" data-t-ok="Спасибо! Подтверждение получено {t}. Мы опубликуем запись, обычно в тот же день." data-t-copy=" Копия придёт на ваш e-mail." data-t-fixok="Спасибо! Исправления получены {t}. Мы внесём их и пришлём ссылку ещё раз." data-t-empty="Напишите, пожалуйста, что исправить." data-t-fail="${cm ? 'Не получилось отправить. Пожалуйста, {a} с адреса {c} на {m}.' : 'Не получилось отправить. Пожалуйста, {a} ({m}).'}" data-t-mail="отправьте подтверждение письмом" data-t-gmail="Открыть письмо в Gmail" data-pv-cmail="${esc(cm)}" data-t-letter="${cm ? 'Открылось письмо в вашей почте. Отправьте его с адреса {c}: подтверждения мы принимаем только с e-mail вашей карточки. Письмо не открылось? {g} или напишите с этого адреса на {m}.' : 'Открылось письмо в вашей почте. Отправьте его, это и есть подтверждение. Письмо не открылось? {g} или напишите на {m}.'}">
-    <b>Это предпросмотр: так ваш курс увидят на сайте.</b><span>Пока его видите только вы. Проверьте название, дату, место, цену и контакты. Если всё верно, отметьте все галочки и нажмите «Подтверждаю». Если что-то нужно поменять, нажмите «Нужно исправить».</span>
+    <b>Это предпросмотр: так ваш курс увидят на сайте.</b><span>Пока его видите только вы. Проверьте название, дату, место, цену и контакты. Если всё верно, отметьте все галочки и нажмите «Подтверждаю». Если что-то нужно поменять, нажмите «Нужно исправить».${cardWait(e) ? ' Курс появится на сайте вместе с вашей карточкой, когда вы подтвердите и её.' : ''}</span>
     <label class="pv-ok"><input type="checkbox" data-pv-agree data-id="ok"> <span>Данные верны, даю согласие на публикацию на svoiludi.ch. Запись, оплата и договор — только со мной, «Свои люди» в них не участвуют.</span></label>
     <label class="pv-ok"><input type="checkbox" data-pv-agree data-id="own"> <span>Это мой курс: я сам(а) его веду, или его проводит моя организация. Записи за других людей и организации я не размещаю.</span></label>
     <label class="pv-ok"><input type="checkbox" data-pv-agree data-id="law"> <span>Курс в моей компетенции: у меня есть нужная квалификация, опыт и разрешения, чтобы его вести. Он соответствует законам Швейцарии, моего кантона и общины.</span></label>
@@ -978,7 +989,7 @@ function openKurs(id, pv){
   const when = e.kind === 'once' ? `${esc(fmtFull(e.date))}${timeStr(e) ? ' · ' + esc(timeStr(e)) : ''}${e.date < today ? '<small>Эта встреча уже прошла.</small>' : ''}`
     : `${esc(e.repeat ? repeatText(e) : fmtFull(e.date))}${timeStr(e) ? ' · ' + esc(timeStr(e)) : ''}<small>${esc(kindLine(e))}${e.kind === 'course' && !started(e) ? '' : nd ? `. Ближайшее занятие: ${esc(fmtDay(nd))}` : ''}</small>${e.repeat && e.repeat.except && e.repeat.except.some(x => x >= today) ? `<small>Без занятий: ${e.repeat.except.filter(x => x >= today).map(fmtDate).join(', ')}</small>` : ''}`;
   box.innerHTML = `<div class="qm-top"><div class="qm-head">${e.sample ? '<span class="ev-k" style="color:var(--brown)">Образец курса · всё вымышленное</span><a class="yours" href="#add">Здесь может быть твой курс! Как добавить →</a>' : ''}<span class="ev-k" style="color:${k.c}">${esc(k.t)} · ${esc(kindName(e))}</span><h2 class="qm-title" id="qmTitle">${esc(e.title)}</h2></div><button class="qm-close" type="button" aria-label="Закрыть">✕</button></div>
-    ${pv === 'off' ? offBox(e) : pv ? okBox(e) : ''}<div class="d-body">
+    ${pv === 'off' ? offBox(e) : pv === 'past' ? pastBox(e) : pv ? okBox(e) : ''}<div class="d-body">
       <div class="d-col">
         <div class="d-block"><h4>О курсе</h4><p>${esc(e.about)}</p></div>
         ${e.level || (e.for || []).length ? `<div class="d-block"><h4>Для кого</h4>${(e.for || []).length ? `<div class="chips">${e.for.map(l => `<span>${esc(l)}</span>`).join('')}${e.age ? `<span>${esc(e.age)}</span>` : ''}</div>` : ''}${e.level ? `<p>${esc(e.level)}</p>` : ''}</div>` : ''}
@@ -1040,10 +1051,17 @@ document.getElementById('reset').addEventListener('click', () => { Object.assign
 document.getElementById('trial').hidden = !ADMIN;
 document.getElementById('addbtn').href = `mailto:${MAIL}?subject=${encodeURIComponent('Курс для «Свои люди в Швейцарии»')}&body=${encodeURIComponent(TEMPLATE)}`;
 fillSelects(); render();
-const fromHash = () => { const id = decodeURIComponent(location.hash.slice(1)); if (id === 'digest'){ digest(); return; } if (id.startsWith('ok=')){ const [eid, key] = id.slice(3).split('.'); const e = KURSY.find(x => x.id === eid); keyOk(e, key).then(ok => { if (ok){ OKKEY[eid] = key; openKurs(eid, true); } }); return; }
+const fromHash = () => { const id = decodeURIComponent(location.hash.slice(1)); if (id === 'digest'){ digest(); return; } if (id.startsWith('ok=')){ const [eid, key] = id.slice(3).split('.'); const e = KURSY.find(x => x.id === eid); keyOk(e, key).then(ok => { if (ok){ OKKEY[eid] = key; if (ADMIN && window.SVL_DRAFTS) SVL_DRAFTS.keep(eid, key); openKurs(eid, pastDraft(e) ? 'past' : true); } }); return; }
   if (id.startsWith('off=')){ const [eid, key] = id.slice(4).split('.'); const e = KURSY.find(x => x.id === eid); keyOk(e, key).then(ok => { if (ok){ OKKEY[eid] = key; openKurs(eid, 'off'); } }); return; }
   if (id && KURSY.some(e => e.id === id && ((e.status === 'активен' && live(e)) || isOff(e) || ADMIN))) openKurs(id); };
 fromHash(); addEventListener('hashchange', fromHash);
+/* черновики — только в режиме Ирины (assets/chernoviki.js) */
+if (ADMIN && window.SVL_DRAFTS) SVL_DRAFTS.init({ page: 'kursy', okKey: OKKEY, keyOk, items: KURSY,
+  when: e => { const n = nextDate(e); return n ? (e.kind === 'course' && e.date >= today ? { d: e.date, lbl: 'начало' } : { d: n }) : (e.kind === 'course' && lastDate(e) >= today ? { d: e.date, lbl: 'начало' } : { d: lastDate(e), past: true }); },
+  kind: e => kindName(e), who: e => orgNames(e),
+  url: (e, k) => k ? `https://svoiludi.ch/kursy/#ok=${encodeURIComponent(e.id)}.${encodeURIComponent(k)}` : '',
+  open: (id, withKey) => { const e = KURSY.find(x => x.id === id); if (!e) return; openKurs(id, withKey ? (pastDraft(e) ? 'past' : true) : false); },
+  toast, onToggle: on => { DRAFTS_ON = on; fillSelects(); render(); } });
 </script>
 <script>window.HELP = Object.assign(window.HELP || {}, {
   zfind: '<p><b>UID</b> — номер фирмы или самозанятого в реестре Швейцарии, вида CHE-123.456.789. Мы берём его, когда размещаем карточку, он есть в твоей карточке на сайте.</p><p><b>Номер карточки</b> — SG-0001 у специалистов, OR-0001 у организаций. Он есть в твоей карточке на сайте, внизу.</p><p>Данные из карточки мы уже проверили, поэтому вписывать их заново не нужно. Ссылку на подтверждение пришлём на e-mail из карточки: так никто не сможет разместить запись от твоего имени. Этот e-mail один для всех подтверждений, в заявке его не поменять. Если для записи нужен другой e-mail, впиши его в контактах: на сайте будет он.</p><p>Если карточка на паузе, ждёт подтверждения или закончился срок размещения, по номеру её не найти: записи размещаются только от активных карточек.</p><p>Номер никуда не отправляется: поиск идёт только по опубликованным карточкам, прямо на этой странице.</p>',

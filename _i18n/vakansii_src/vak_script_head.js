@@ -59,7 +59,10 @@ const confirmed = v => !!(v.confirm && v.confirm.date);
 const cardOfV = v => typeof v.author === 'string' ? SPECIALISTS.find(s => s.id === v.author) : (v.author && v.author.org ? (window.ORGANIZATIONS || []).find(o => o.id === v.author.org) : null);
 const liveV = v => { const a = v.author, c = cardOfV(v); if (typeof a === 'string') return !!c && c.status === 'активен' && !(c.paidUntil && c.paidUntil < today);
   if (a && a.org) return !!c && c.status === 'активен' && !!c.confirm; return true; };
-const pool = () => VACANCIES.filter(v => v.status === 'активен' && confirmed(v) && liveV(v) && (!v.until || v.until > today));
+/* черновики (правило Ирины 12.10.2026, 14:34): в режиме Ирины объявления «на подтверждении» стоят в списке с пометкой «Черновик», у всех — нет */
+const isDraft = v => v.status === 'на подтверждении' || v.status === 'черновик';
+let DRAFTS_ON = ADMIN && !!(window.SVL_DRAFTS && SVL_DRAFTS.showInList());
+const pool = () => VACANCIES.filter(v => ((v.status === 'активен' && confirmed(v) && liveV(v)) || (DRAFTS_ON && isDraft(v) && !v.sample)) && (!v.until || v.until > today));
 const state = { kind: '', cat: '', canton: '', lang: '', remote: '' };
 function match(v, skip){
   return (skip === 'kind' || !state.kind || v.kind === state.kind)
@@ -72,7 +75,7 @@ const where = v => [v.city, v.canton ? kt(v.canton) : ''].filter(Boolean).join('
 
 function row(v){
   const k = KINDS[v.kind] || KINDS.staff, a = authorOf(v);
-  return `<button class="ev vac" type="button" data-v="${esc(v.id)}" style="--lc:${k.c}">${v.sample ? '<span class="sample">Образец</span>' : ''}
+  return `<button class="ev vac" type="button" data-v="${esc(v.id)}" style="--lc:${k.c}">${v.sample ? '<span class="sample">Образец</span>' : isDraft(v) ? '<span class="sample draft">Черновик · видишь только ты</span>' : ''}
     <span class="ev-d vk"><b>${(typeof ICO !== 'undefined' && ICO[v.kind]) || (typeof ICO !== 'undefined' ? ICO.staff : '👋')}</b><small>${esc(k.t)}</small></span>
     <span class="ev-m">${v.sample ? '<span class="yours">Здесь может быть твоё объявление!</span>' : ''}<span class="ev-k">${esc(CATS[v.cat] || '')}</span><span class="ev-t">${esc(v.title)}</span>
       <span class="ev-i">${a ? `<b>${esc(a.name)}</b>` : ''}<span>${esc(where(v))}</span>${v.workload ? `<span>${esc(v.workload)}</span>` : ''}${v.salary ? `<span>${esc(v.salary)}</span>` : ''}<span>${esc((v.langs || []).join(', '))}</span></span>
