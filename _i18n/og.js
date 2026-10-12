@@ -25,11 +25,11 @@ const CARDS = [
     ru: { eb: EB.ru, title: 'Скидки и подарки от своих', desc: 'Акции специалистов и организаций по кантонам Швейцарии. Видны и в карточке специалиста.', chip: 'Реклама · по всем кантонам' },
     uk: { eb: EB.uk, title: 'Знижки та подарунки від своїх', desc: 'Акції фахівців і організацій по кантонах Швейцарії. Видно й у картці фахівця.', chip: 'Реклама · по всіх кантонах' } },
   { out: 'organizacii/og-image', url: '/organizacii/', sel: '#add .vac-add',
-    ru: { eb: EB.ru, title: 'Организации, которые помогают своим', desc: 'Центры помощи, школы выходного дня, общества, деловые сообщества и фирмы своих для украинцев и русскоязычных в Швейцарии.', chip: 'Помогаете бесплатно — бесплатно всегда' },
-    uk: { eb: EB.uk, title: 'Організації, які допомагають своїм', desc: 'Центри допомоги, школи вихідного дня, товариства, ділові спільноти й фірми своїх для українців і російськомовних у Швейцарії.', chip: 'Допомагаєте безкоштовно — безкоштовно завжди' } },
+    ru: { eb: EB.ru, title: 'Организации, которые помогают своим', desc: 'Центры помощи, школы выходного дня, общества, деловые сообщества и фирмы своих для украинцев и русскоязычных в Швейцарии.', chip: 'Помогаете бесплатно — бесплатно всегда', nk: 1 },
+    uk: { eb: EB.uk, title: 'Організації, які допомагають своїм', desc: 'Центри допомоги, школи вихідного дня, товариства, ділові спільноти й фірми своїх для українців і російськомовних у Швейцарії.', chip: 'Допомагаєте безкоштовно — безкоштовно завжди', nk: 1 } },
   { out: 'vakansii/og-image', url: '/vakansii/', sel: '#results',
-    ru: { eb: EB.ru, title: 'Вакансии и партнёрство', desc: 'Ищу сотрудника, ищу партнёра — объявления от своих. Бесплатно, для поддержки сообщества.', chip: 'Бесплатно · не коммерческая услуга' },
-    uk: { eb: EB.uk, title: 'Вакансії та партнерство', desc: 'Шукаю працівника, шукаю партнера — оголошення від своїх. Безкоштовно, для підтримки спільноти.', chip: 'Безкоштовно · не комерційна послуга' } },
+    ru: { eb: EB.ru, title: 'Вакансии и партнёрство', desc: 'Ищу сотрудника, ищу партнёра — объявления от своих. Бесплатно, для поддержки сообщества.', chip: 'Бесплатно · не коммерческая услуга', nk: 1 },
+    uk: { eb: EB.uk, title: 'Вакансії та партнерство', desc: 'Шукаю працівника, шукаю партнера — оголошення від своїх. Безкоштовно, для підтримки спільноти.', chip: 'Безкоштовно · не комерційна послуга', nk: 1 } },
   { out: 'kursy/og-image', url: '/kursy/', sel: '#results',
     ru: { eb: EB.ru, title: 'Курсы и занятия на своём языке', desc: 'Йога, немецкий, кружки для детей, мастер-классы и вебинары по кантонам Швейцарии.', chip: 'Видно, кто ведёт каждый курс' },
     uk: { eb: EB.uk, title: 'Курси й заняття своєю мовою', desc: 'Йога, німецька, гуртки для дітей, майстер-класи та вебінари по кантонах Швейцарії.', chip: 'Видно, хто веде кожен курс' } },
@@ -138,19 +138,21 @@ const MAIN = {
   ru: { eb: 'СПРАВОЧНИК · СООБЩЕСТВО', h1a: 'Свои люди', h1b: 'в Швейцарии', p: 'Врачи, юристы, психологи и мастера, которые говорят <nobr>по-русски</nobr> и <nobr>по-украински</nobr>. Рядом с вами, в каждом кантоне.', chips: ['26 кантонов', plural(N_DIRS, 'направление', 'направления', 'направлений'), 'встречи и события'], pins: ['Психолог', 'Юрист', 'Педиатр', 'Парикмахер', 'Массаж'] },
   uk: { eb: 'ДОВІДНИК · СПІЛЬНОТА', h1a: 'Свої люди', h1b: 'у Швейцарії', p: 'Лікарі, юристи, психологи й майстри, які говорять російською та українською. Поруч із вами, у кожному кантоні.', chips: ['26 кантонів', plural(N_DIRS, 'напрям', 'напрями', 'напрямів'), 'зустрічі й події'], pins: ['Психолог', 'Юрист', 'Педіатр', 'Перукар', 'Масаж'] },
 };
+/* «Некоммерческое» — зелёное сердечко (решение Ирины 12.10.2026), то же, что на сайте (_i18n/pwa.py, NK) */
+const NKH = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21.2C11.5 20.9 3 15.9 3 9.3 3 6.4 5.2 4.2 8 4.2c1.7 0 3.1.8 4 2.1.9-1.3 2.3-2.1 4-2.1 2.8 0 5 2.2 5 5.1 0 6.6-8.5 11.6-9 11.9z"/></svg>';
 const CSS = `<link rel="stylesheet" href="${BASE}/assets/fonts.css"><style>
 *{box-sizing:border-box;margin:0}body{width:1200px;height:630px;overflow:hidden;background:linear-gradient(135deg,#eef1e8,#e6ebdf);font-family:Manrope,system-ui,sans-serif;color:#2f2924;position:relative}
 .l{position:absolute;left:64px;top:0;bottom:0;width:520px;display:flex;flex-direction:column;justify-content:center}
 .eb{color:#B8862E;font-weight:600;font-size:19px;letter-spacing:.02em;margin-bottom:22px}
 h1{font-family:Forum,Georgia,serif;font-weight:400;font-size:62px;line-height:1.08;margin-bottom:22px}
 p{font-size:25px;line-height:1.45;color:#4F5E3E;font-weight:600;margin-bottom:28px}
-.chip{display:inline-block;border:2px solid #e3d6c3;background:#fffcf8;border-radius:999px;padding:10px 20px;font-size:20px;font-weight:600;align-self:flex-start}
+.chip svg{width:20px;height:20px;margin:0 8px -3px 0;fill:#4F5E3E}.chip{display:inline-block;border:2px solid #e3d6c3;background:#fffcf8;border-radius:999px;padding:10px 20px;font-size:20px;font-weight:600;align-self:flex-start}
 .foot{position:absolute;left:64px;bottom:40px;font-size:20px;color:#4F5E3E;font-weight:600}.foot:before{content:"";display:block;width:64px;height:5px;background:#B8862E;border-radius:3px;margin-bottom:18px}
 .shot{position:absolute;left:620px;top:90px;width:600px;height:460px;border-radius:18px;overflow:hidden;transform:rotate(2deg);box-shadow:0 18px 40px rgba(60,50,30,.18);border:6px solid #e7dccb;background:#fffcf8}
 .shot img{width:100%;display:block}
 .pg{position:absolute;width:330px;border-radius:6px;background:#fff;box-shadow:0 14px 34px rgba(60,50,30,.22);border:1px solid #e7dccb;overflow:hidden}.pg img{width:100%;display:block}</style>`;
 function cardHtml(t, visual) {
-  return `<html><head><meta charset="utf-8">${CSS}</head><body><div class="l"><div class="eb">${t.eb}</div><h1${t.title.length > 60 ? ' style="font-size:38px"' : t.title.length > 40 ? ' style="font-size:44px"' : t.title.length > 22 ? ' style="font-size:50px"' : ''}>${t.title}</h1><p${t.desc.length > 110 ? ' style="font-size:21px"' : ''}>${t.desc}</p>${t.chip ? `<span class="chip">${t.chip}</span>` : ''}</div><div class="foot">svoiludi.ch</div>${visual}</body></html>`;
+  return `<html><head><meta charset="utf-8">${CSS}</head><body><div class="l"><div class="eb">${t.eb}</div><h1${t.title.length > 60 ? ' style="font-size:38px"' : t.title.length > 40 ? ' style="font-size:44px"' : t.title.length > 22 ? ' style="font-size:50px"' : ''}>${t.title}</h1><p${t.desc.length > 110 ? ' style="font-size:21px"' : ''}>${t.desc}</p>${t.chip ? `<span class="chip">${t.nk ? NKH : ''}${t.chip}</span>` : ''}</div><div class="foot">svoiludi.ch</div>${visual}</body></html>`;
 }
 function fanHtml(imgs) {   // до трёх страниц PDF веером
   const pos = [[610, 115, -8], [725, 72, -1], [840, 100, 6]].slice(-imgs.length);

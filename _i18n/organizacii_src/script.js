@@ -175,7 +175,7 @@ function openO(id){
         ${o.join ? `<div class="d-block"><h4>Как прийти или записаться</h4><p>${esc(o.join)}</p></div>` : ''}
         ${(() => { const vs = vacsOf(o); if (!vs.length) return '';
           const grp = k => { const g = vs.filter(v => v.kind === k); return g.length ? `<h4>${VAC_KIND[k]}</h4><ul class="marks">${g.map(v => `<li><a href="../vakansii/#${esc(v.id)}">${esc(v.title)} →</a>${v.sample ? ' <small>образец</small>' : ''}</li>`).join('')}</ul>` : ''; };
-          return `<div class="d-block">${grp('staff')}${grp('partner')}<p class="note"><b>Бесплатно, для поддержки сообщества «Свои люди». Не коммерческая услуга.</b> Объявления размещает сама организация и отвечает за их содержание. «Свои люди» не участвуют в найме и сотрудничестве, договаривайтесь напрямую с автором.</p></div>`; })()}
+          return `<div class="d-block">${grp('staff')}${grp('partner')}<p class="note vac-note"><b>Бесплатно, для поддержки сообщества «Свои люди». Не коммерческая услуга.</b> Объявления размещает сама организация и отвечает за их содержание. «Свои люди» не участвуют в найме и сотрудничестве, договаривайтесь напрямую с автором.</p></div>`; })()}
         ${evs.length ? `<div class="d-block"><h4>События и курсы</h4>${evs.map(e => `<p><a href="../${(e.sections || []).includes('kursy') && !(e.sections || []).includes('events') ? 'kursy' : 'events'}/#${esc(e.id)}">${esc(e.title)} →</a></p>`).join('')}</div>` : ''}
       </div>
       <div class="d-side">
