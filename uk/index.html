@@ -436,7 +436,9 @@ a.bot:hover{color:#B98324}
 .d-col{display:flex;flex-direction:column;gap:18px;min-width:0}
 .d-block{display:flex;flex-direction:column;gap:8px}
 .d-block h4{font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--muted);margin:0}
-.chips.svc span{font-size:.88rem;padding:6px 12px}
+/* услуги — длинные строки в несколько строк: не «таблетка», а прямоугольник с закруглением, как кнопки сайта; текст не упирается в скругление (Ирина 12.10.2026, 21:57: «вид сбивается на голубом фоне») */
+.chips.svc{gap:7px}
+.chips.svc span{font-size:.88rem;line-height:1.42;padding:7px 14px;border-radius:14px;max-width:100%;box-sizing:border-box;overflow-wrap:anywhere}
 .chips{display:flex;flex-wrap:wrap;gap:6px}
 .chips span{font-size:.82rem;background:var(--lf);border-radius:999px;padding:4px 11px}
 .d-side{background:var(--lf);border-radius:20px;padding:20px;display:flex;flex-direction:column;gap:18px}
