@@ -52,11 +52,11 @@
       return `<div class="d-block"><h4>Форма<button type="button" class="qh" data-help="form" aria-label="Подсказка: ферайн и фонд" aria-expanded="false">?</button></h4><span>${nd.form ? UTQ : esc(FORMS[o.form] || o.form || '—')}</span></div>`
         + (o.fee ? `<div class="d-block"><h4>${o.kind === 'firm' ? 'Цены' : 'Взнос'}</h4><span>${esc(o.fee)}</span></div>` : '')
         + (nd.head ? `<div class="d-block"><h4>Руководитель<button type="button" class="qh" data-help="head" aria-label="Подсказка: руководитель" aria-expanded="false">?</button></h4>${UTQ}</div>` : '')
-        + (h.name && !nd.head ? `<div class="d-block"><h4>Руководитель<button type="button" class="qh" data-help="head" aria-label="Подсказка: руководитель" aria-expanded="false">?</button></h4><span>${esc(h.name)}${h.role ? ' · ' + esc(h.role) : ''}</span>${h.spec ? `<p><a href="../#${esc(h.spec)}">Карточка в справочнике специалистов →</a></p>` : ''}</div>` : '')
+        + (h.name && !nd.head ? `<div class="d-block"><h4>Руководитель<button type="button" class="qh" data-help="head" aria-label="Подсказка: руководитель" aria-expanded="false">?</button></h4><span>${esc(h.name)}${h.role ? ' · ' + esc(h.role) : ''}</span>${h.spec ? `<p><a href="../#${/^#preview=/.test(location.hash) && typeof OKKEY === 'object' && OKKEY[s.id] ? 'preview=' + esc(h.spec) + '.' + esc(OKKEY[s.id]) : esc(h.spec)}">Карточка в справочнике специалистов →</a></p>` : ''}</div>` : '')
         + `<div class="disc-box"><b>Важно</b><p>${esc(o.kind === 'firm' ? DISC_FIRM : DISC)}</p></div>`; },
     /* предпросмотр по ссылке (#preview=…): расписание и курсы организации, которые ждут подтверждения вместе с карточкой */
     main: s => { if (!/^#preview=/.test(location.hash) || location.hash.indexOf(s.id) < 0) return '';
-      const L = (window.AFISHA || []).filter(e => e.status === 'на подтверждении' && (e.organizers || []).some(x => x && typeof x === 'object' && x.org === s.id));
+      const L = (window.AFISHA || []).filter(e => e.status === 'на подтверждении' && e.type !== 'promo' && (e.organizers || []).some(x => x && typeof x === 'object' && x.org === s.id));
       if (!L.length) return '';
       const MON = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'];
       const days = e => { const r = e.repeat || {}, out = [], ex = r.except || []; let d = new Date(e.date + 'T12:00:00'); const end = new Date((r.until || e.dateEnd || e.date) + 'T12:00:00');

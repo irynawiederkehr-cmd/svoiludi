@@ -384,5 +384,55 @@ window.AFISHA = [
     langs: ['украинский'], level: 'для взрослых', price: '', commercial: false,
     organizers: [{ org: 'vidnova-zurich', name: 'VIDNOVA' }, { name: 'Harmonia Akademie' }], link: 'https://forms.gle/A7zsoW7qQ6UL4BaH9',
     about: 'Спикеры из Швейцарии, Израиля, Испании и Украины говорят о здоровье, красоте, стиле, долголетии и качестве жизни: выступления, практические подходы, профессиональные кейсы и новые знакомства для сотрудничества. Форум проводят VIDNOVA и Harmonia Akademie. Участие — по предварительной регистрации, форма по ссылке.'
+  },
+  {
+    "sections": [
+      "events"
+    ],
+    "id": "rubin-beauty-studenty",
+    "keyHash": "61bdd3a84ac0066144160cf39b0ac3673b81c08d32efb9dc6332fd6a471d7a6e",
+    "status": "на подтверждении",
+    "title": "Студентам скидка 10 % на все услуги",
+    "type": "promo",
+    "promo": {
+      "kind": "percent",
+      "value": 10,
+      "what": "все услуги салона — для студенток и студентов",
+      "group": true,
+      "cond": [
+        "book"
+      ],
+      "always": true
+    },
+    "date": "2026-10-12",
+    "dateEnd": "2027-10-11",
+    "canton": "Zug",
+    "address": "Suurstoffi 16, 6343 Rotkreuz",
+    "geo": [
+      47.1442162,
+      8.4370922
+    ],
+    "online": false,
+    "langs": [
+      "русский",
+      "румынский",
+      "немецкий",
+      "английский"
+    ],
+    "commercial": true,
+    "organizers": [
+      {
+        "org": "rubin-beauty-rotkreuz",
+        "name": "Rubin Beauty"
+      }
+    ],
+    "signup": "wa",
+    "contacts": {
+      "phone": "+41 79 626 89 18",
+      "whatsapp": "+41 79 626 89 18",
+      "instagram": "rubinbeauty"
+    },
+    "link": "https://www.rubinbeauty.ch",
+    "about": "Студенткам и студентам — скидка 10 % на все услуги салона: маникюр и педикюр, ресницы и брови, уход за лицом, депиляция, массаж и стрижки. Скидка действует постоянно, подробности — при записи."
   }
 ];

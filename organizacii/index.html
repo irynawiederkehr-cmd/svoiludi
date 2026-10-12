@@ -1008,9 +1008,9 @@ function ico(name, line = '#2E5A88', fill, size = 24){
 const AVATAR_SVG = '<svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="46" fill="#FFFCF8" stroke="#6E4F3C" stroke-width="3"/><g transform="rotate(22.5 50 50)"><path d="M50 50 C42 40 43 24 50 15 C57 24 58 40 50 50Z" fill="#E3E6D6" stroke="#66704F" stroke-width="2"/></g><g transform="rotate(67.5 50 50)"><path d="M50 50 C42 40 43 24 50 15 C57 24 58 40 50 50Z" fill="#E3E6D6" stroke="#66704F" stroke-width="2"/></g><g transform="rotate(112.5 50 50)"><path d="M50 50 C42 40 43 24 50 15 C57 24 58 40 50 50Z" fill="#E3E6D6" stroke="#66704F" stroke-width="2"/></g><g transform="rotate(157.5 50 50)"><path d="M50 50 C42 40 43 24 50 15 C57 24 58 40 50 50Z" fill="#E3E6D6" stroke="#66704F" stroke-width="2"/></g><g transform="rotate(202.5 50 50)"><path d="M50 50 C42 40 43 24 50 15 C57 24 58 40 50 50Z" fill="#E3E6D6" stroke="#66704F" stroke-width="2"/></g><g transform="rotate(247.5 50 50)"><path d="M50 50 C42 40 43 24 50 15 C57 24 58 40 50 50Z" fill="#E3E6D6" stroke="#66704F" stroke-width="2"/></g><g transform="rotate(292.5 50 50)"><path d="M50 50 C42 40 43 24 50 15 C57 24 58 40 50 50Z" fill="#E3E6D6" stroke="#66704F" stroke-width="2"/></g><g transform="rotate(337.5 50 50)"><path d="M50 50 C42 40 43 24 50 15 C57 24 58 40 50 50Z" fill="#E3E6D6" stroke="#66704F" stroke-width="2"/></g><g transform="rotate(0.0 50 50)"><path d="M50 50 C45 43 45 32 50 26 C55 32 55 43 50 50Z" fill="#EADFCF" stroke="#6E4F3C" stroke-width="2"/></g><g transform="rotate(45.0 50 50)"><path d="M50 50 C45 43 45 32 50 26 C55 32 55 43 50 50Z" fill="#EADFCF" stroke="#6E4F3C" stroke-width="2"/></g><g transform="rotate(90.0 50 50)"><path d="M50 50 C45 43 45 32 50 26 C55 32 55 43 50 50Z" fill="#EADFCF" stroke="#6E4F3C" stroke-width="2"/></g><g transform="rotate(135.0 50 50)"><path d="M50 50 C45 43 45 32 50 26 C55 32 55 43 50 50Z" fill="#EADFCF" stroke="#6E4F3C" stroke-width="2"/></g><g transform="rotate(180.0 50 50)"><path d="M50 50 C45 43 45 32 50 26 C55 32 55 43 50 50Z" fill="#EADFCF" stroke="#6E4F3C" stroke-width="2"/></g><g transform="rotate(225.0 50 50)"><path d="M50 50 C45 43 45 32 50 26 C55 32 55 43 50 50Z" fill="#EADFCF" stroke="#6E4F3C" stroke-width="2"/></g><g transform="rotate(270.0 50 50)"><path d="M50 50 C45 43 45 32 50 26 C55 32 55 43 50 50Z" fill="#EADFCF" stroke="#6E4F3C" stroke-width="2"/></g><g transform="rotate(315.0 50 50)"><path d="M50 50 C45 43 45 32 50 26 C55 32 55 43 50 50Z" fill="#EADFCF" stroke="#6E4F3C" stroke-width="2"/></g><circle cx="50" cy="50" r="7" fill="#B98324"/></svg>';
 
 </script>
-<script src="/data/specialists.js?v=9187b3ef"></script>
+<script src="/data/specialists.js?v=ff764a69"></script>
 <script src="/data/vacancies.js?v=4b6b6ac1"></script>
-<script src="/data/organizations.js?v=72fa6d91"></script>
+<script src="/data/organizations.js?v=d6a4afc7"></script>
 <script>
 window.IMG_BASE = '/img/org/';
 /* карточки специалистов — в /data/specialists.js (одна копия на весь сайт) */
@@ -1130,11 +1130,11 @@ window.SVL_ORG_ICONS = {
       return `<div class="d-block"><h4>Форма<button type="button" class="qh" data-help="form" aria-label="Подсказка: ферайн и фонд" aria-expanded="false">?</button></h4><span>${nd.form ? UTQ : esc(FORMS[o.form] || o.form || '—')}</span></div>`
         + (o.fee ? `<div class="d-block"><h4>${o.kind === 'firm' ? 'Цены' : 'Взнос'}</h4><span>${esc(o.fee)}</span></div>` : '')
         + (nd.head ? `<div class="d-block"><h4>Руководитель<button type="button" class="qh" data-help="head" aria-label="Подсказка: руководитель" aria-expanded="false">?</button></h4>${UTQ}</div>` : '')
-        + (h.name && !nd.head ? `<div class="d-block"><h4>Руководитель<button type="button" class="qh" data-help="head" aria-label="Подсказка: руководитель" aria-expanded="false">?</button></h4><span>${esc(h.name)}${h.role ? ' · ' + esc(h.role) : ''}</span>${h.spec ? `<p><a href="../#${esc(h.spec)}">Карточка в справочнике специалистов →</a></p>` : ''}</div>` : '')
+        + (h.name && !nd.head ? `<div class="d-block"><h4>Руководитель<button type="button" class="qh" data-help="head" aria-label="Подсказка: руководитель" aria-expanded="false">?</button></h4><span>${esc(h.name)}${h.role ? ' · ' + esc(h.role) : ''}</span>${h.spec ? `<p><a href="../#${/^#preview=/.test(location.hash) && typeof OKKEY === 'object' && OKKEY[s.id] ? 'preview=' + esc(h.spec) + '.' + esc(OKKEY[s.id]) : esc(h.spec)}">Карточка в справочнике специалистов →</a></p>` : ''}</div>` : '')
         + `<div class="disc-box"><b>Важно</b><p>${esc(o.kind === 'firm' ? DISC_FIRM : DISC)}</p></div>`; },
     /* предпросмотр по ссылке (#preview=…): расписание и курсы организации, которые ждут подтверждения вместе с карточкой */
     main: s => { if (!/^#preview=/.test(location.hash) || location.hash.indexOf(s.id) < 0) return '';
-      const L = (window.AFISHA || []).filter(e => e.status === 'на подтверждении' && (e.organizers || []).some(x => x && typeof x === 'object' && x.org === s.id));
+      const L = (window.AFISHA || []).filter(e => e.status === 'на подтверждении' && e.type !== 'promo' && (e.organizers || []).some(x => x && typeof x === 'object' && x.org === s.id));
       if (!L.length) return '';
       const MON = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'];
       const days = e => { const r = e.repeat || {}, out = [], ex = r.except || []; let d = new Date(e.date + 'T12:00:00'); const end = new Date((r.until || e.dateEnd || e.date) + 'T12:00:00');
@@ -1153,7 +1153,7 @@ window.SVL_ORG_ICONS = {
 const SPECIALISTS = window.SVL_ORG.items;   // организации в виде карточек справочника (adapter.js)
 
 </script>
-<script src="/data/afisha.js?v=21e65591"></script>
+<script src="/data/afisha.js?v=a8dd1b23"></script>
 <script>const AFISHA = window.AFISHA || [];</script>
 <script>
 const ADMIN = (() => {   // режим Ирины: svoiludi.ch/?ira=1 включает на этом устройстве, ?ira=0 выключает
@@ -1591,13 +1591,15 @@ const pShort = x => `${+x.slice(8)} ${MONTHS[+x.slice(5, 7) - 1]}`;
 /* постоянная акция (promo.always): «Действует постоянно», подтверждается владельцем раз в год (data/afisha.js) */
 const pAlways = e => !!(e.promo && e.promo.always);
 const pEnd = e => pAlways(e) ? 'постоянно' : 'до ' + pShort(e.dateEnd || e.date);
-const promoOf = s => AFISHA.filter(e => e.type === 'promo' && e.promo && e.status === 'активен' && (e.organizers || []).some(x => x && typeof x === 'object' && x.org === s.id) && e.date <= today && (e.dateEnd || e.date) >= today)
+/* пробная акция лида (12.10.2026, Ирина: «скидки сразу отмечать и в акции вносить»): акция «на подтверждении» видна только в предпросмотре своей карточки и в режиме Ирины */
+const pvOn = id => /^#preview=/.test(location.hash) && decodeURIComponent(location.hash.slice(9)).split('.')[0] === id;
+const promoOf = s => AFISHA.filter(e => e.type === 'promo' && e.promo && (e.status === 'активен' || (e.status === 'на подтверждении' && (pvOn(s.id) || ADMIN))) && (e.organizers || []).some(x => x && typeof x === 'object' && x.org === s.id) && e.date <= today && (e.dateEnd || e.date) >= today)
   .sort((a, b) => (a.dateEnd || a.date).localeCompare(b.dateEnd || b.date)).slice(0, 2);
 const promoChans = (e, s) => { const c = s.contacts || {}, x = e.contacts || {};
   return { wa: x.whatsapp || c.whatsapp || '', tg: x.telegram || c.telegram || '', mail: x.email || e.email || c.email || '', tel: x.phone || e.phone || c.phone || '', ig: x.instagram || c.instagram || '', link: e.link || '' }; };
 const promoStrip = s => { const L = promoOf(s); if (!L.length) return '';
   return `<div class="pr-strip" role="note"><div class="pr-hd"><b>${L.length > 1 ? 'Акции организации' : 'Акция организации'}</b><i class="pr-ad">Реклама</i></div>${L.map(e => { const o = pOffer(e), cl = pCondList(e.promo);
-    return `<div class="pr-one"><span class="pr-big">${esc(o.big)}</span><div class="pr-txt"><b>${esc(e.title)}</b><span>${esc(o.sub || '')}${o.more.length ? ' · ' + esc(o.more.join('; ')) : ''}</span><small>${pAlways(e) ? 'Действует постоянно' : 'До ' + esc(pShort(e.dateEnd || e.date))}${cl.length ? ' · ' + esc(cl.join(' · ')) : ''}${e.sample ? ' · образец' : ''}</small><a class="pr-fl" href="../akcii/#${esc(e.id)}&amp;flyer">♥ Скачать флаер</a></div><div class="pr-act" data-prw="${esc(e.id)}"></div></div>`; }).join('')}
+    return `<div class="pr-one"><span class="pr-big">${esc(o.big)}</span><div class="pr-txt"><b>${esc(e.title)}</b><span>${esc(o.sub || '')}${o.more.length ? ' · ' + esc(o.more.join('; ')) : ''}</span><small>${pAlways(e) ? 'Действует постоянно' : 'До ' + esc(pShort(e.dateEnd || e.date))}${cl.length ? ' · ' + esc(cl.join(' · ')) : ''}${e.sample ? ' · образец' : ''}</small><a class="pr-fl" href="../akcii/#${e.status !== 'активен' && OKKEY[s.id] ? 'ok=' + esc(e.id) + '.' + esc(OKKEY[s.id]) : esc(e.id) + '&amp;flyer'}">♥ Скачать флаер</a></div><div class="pr-act" data-prw="${esc(e.id)}"></div></div>`; }).join('')}
     <p class="pr-note">Акцию объявляет и выполняет сама организация. «Свои люди» не продают услугу и не отвечают за условия акции: договаривайся напрямую с организацией.</p></div>`; };
 const promoChip = s => { const L = promoOf(s); if (!L.length) return ''; const e = L[0], o = pOffer(e);
   return `<button type="button" class="pr-chip" data-open="${esc(s.id)}" aria-label="Акция: ${esc(o.chip || o.big)} ${esc(pEnd(e))}. Открыть карточку"><b>Акция</b> · ${esc(o.chip || o.big)} ${esc(pEnd(e))}<i>Реклама</i></button>`; };
@@ -1830,7 +1832,7 @@ function openCard(id){
         ${(() => { const vs = vacsOf(s); if (!vs.length) return '';
           const grp = kind => { const g = vs.filter(v => v.kind === kind); return g.length ? `<div class="vac-grp"><h4>${VAC_KIND[kind]}</h4><ul class="vacs">${g.map(v => `<li><a href="../vakansii/#${esc(v.id)}"><b>${esc(v.title)}</b><small>${esc([v.city, v.workload].filter(Boolean).join(' · '))}${v.sample ? ' · образец' : ''}</small></a></li>`).join('')}</ul></div>` : ''; };
           return `<div class="d-block vac-block">${grp('staff')}${grp('partner')}<p class="vac-note"><b>Бесплатно, для поддержки сообщества «Свои люди». Не коммерческая услуга.</b> Объявления размещает сама организация и отвечает за их содержание. «Свои люди» не участвуют в найме и сотрудничестве, договаривайтесь напрямую с автором.</p></div>`; })()}
-        ${(() => { const os = (window.ORGANIZATIONS || []).filter(o => o.head && o.head.spec === s.id && o.status === 'активен' && o.confirm && o.confirm.date); return os.length ? `<div class="d-block"><h4>Руководит</h4>${os.map(o => `<p><a href="organizacii/#${esc(o.id)}">${esc(o.name)} →</a></p>`).join('')}</div>` : ''; })()}
+        ${(() => { const os = (window.ORGANIZATIONS || []).filter(o => o.head && o.head.spec === s.id && ((o.status === 'активен' && o.confirm && o.confirm.date) || (o.status === 'на подтверждении' && (pvOn(s.id) || ADMIN)))); return os.length ? `<div class="d-block"><h4>Руководит</h4>${os.map(o => `<p><a href="organizacii/#${o.status !== 'активен' && OKKEY[s.id] ? 'preview=' + esc(o.id) + '.' + esc(OKKEY[s.id]) : esc(o.id)}">${esc(o.name)} →</a></p>`).join('')}</div>` : ''; })()}
         ${(() => { const af = afishaOf(s); if (!af.length) return ''; const has = k => af.some(x => (x.e.sections || []).includes(k));
           return `<div class="d-block"><h4>События и курсы</h4><ul class="evs">${af.map(({ e, d, start }) => `<li><a href="${esc(afHref(e))}"><span class="dt">${start ? '<small>начало</small>' : ''}<span>${+d.slice(8)}</span><small>${MONTHS[+d.slice(5, 7) - 1]}</small></span><span class="t"><i class="vid">${esc(VID(e))}</i>${esc(e.title)}<small>${e.time ? esc(e.time) + ' · ' : ''}${e.online && !e.address ? 'онлайн' : esc(city(e.address || ''))} · ${esc(e.price && e.price !== 'бесплатно' ? e.price + (e.per ? ' ' + e.per : '') : 'бесплатно')}${e.sample ? ' · образец' : ''}</small></span></a></li>`).join('')}</ul><p class="k-note">Проводит организатор. Запись, оплата и договор — только с ним.</p><span class="evs-links">${has('events') ? '<a class="evs-all" href="../events/">Все события →</a>' : ''}${has('kursy') ? '<a class="evs-all" href="../kursy/">Все курсы и вебинары →</a>' : ''}</span></div>`; })()}
       </div>
@@ -1874,7 +1876,13 @@ function pdfHead(sub){
   const av = (document.querySelector('.mark .av') || {}).innerHTML || '';
   return `<div class="pp-h"><span class="av">${av}</span><span><b>Свои люди в Швейцарии</b><small>Справочник Ирины Вознесенской${sub ? ' · ' + esc(sub) : ''}</small></span><span class="dt">${fmtDate(today)}</span></div>`;
 }
-const pdfImg = s => s.photo ? (s.sample ? `<span style="position:relative;display:block;align-self:start;width:190px;height:238px"><img src="${esc(photoSrc(s.photo))}" alt=""><span style="position:absolute;left:50%;bottom:9%;transform:translateX(-50%);background:rgba(255,252,248,.94);color:#4F5E3E;font-weight:700;font-size:15px;padding:6px 14px;border-radius:999px;white-space:nowrap">Ваше фото</span></span>` : `<img src="${esc(photoSrc(s.photo))}" alt="">`) : '<span class="noph"></span>';
+/* без фото (12.10.2026, Ирина: «чтобы все картинки скачивались»): у организации без логотипа на визитке и в PDF — медальон направления, как в окне карточки;
+   у пробной карточки специалиста без фото — «Здесь будет ваше фото», как в предпросмотре (цвета без color-mix: html2canvas его не понимает) */
+const phTint = (h, a) => { const n = parseInt(String(h || '#4F5E3E').slice(1), 16), m = x => Math.round(x * a + 255 * (1 - a)); return `rgb(${m(n >> 16)},${m(n >> 8 & 255)},${m(n & 255)})`; };
+const noPh = (s, w, h) => { if (window.SVL_ORG){ const k = CATS[s.cat] || {}, c = k.c || '#4F5E3E', d = Math.round(w * 0.78);
+    return `<span style="display:flex;align-items:center;justify-content:center;width:${w}px;height:${h}px;background:${phTint(c, .13)}"><span style="display:flex;align-items:center;justify-content:center;width:${d}px;height:${d}px;border-radius:50%;background:#FFFCF8;border:1px dashed ${phTint(c, .45)}">${ico(k.i || 'orgCommunity', c, null, Math.round(d * 0.5))}</span></span>`; }
+  return s.status && s.status !== 'активен' ? `<span style="display:flex;align-items:center;justify-content:center;width:${w}px;height:${h}px;padding:10px;box-sizing:border-box;text-align:center;font:600 ${w > 100 ? 14 : 10}px/1.3 Manrope,sans-serif;color:#7A6E62">Здесь будет ваше фото</span>` : ''; };
+const pdfImg = s => s.photo ? (s.sample ? `<span style="position:relative;display:block;align-self:start;width:190px;height:238px"><img src="${esc(photoSrc(s.photo))}" alt=""><span style="position:absolute;left:50%;bottom:9%;transform:translateX(-50%);background:rgba(255,252,248,.94);color:#4F5E3E;font-weight:700;font-size:15px;padding:6px 14px;border-radius:999px;white-space:nowrap">Ваше фото</span></span>` : `<img src="${esc(photoSrc(s.photo))}" alt="">`) : `<span class="noph" style="display:block;overflow:hidden">${noPh(s, 190, 238)}</span>`;
 const pdfContacts = (s, cls) => { const c = s.contacts || {}; return ['phone', 'email', 'site', 'site2', 'instagram', 'facebook', 'telegram', 'bot', 'whatsapp'].filter(x => c[x]).map(x => { const [t, h, v] = LINK[x](c[x]); return cls ? `<span><a data-href="${esc(h)}">${esc(v)}</a></span>` : `<span>${t}</span><a data-href="${esc(h)}">${esc(v)}</a>`; }).join(''); };
 const pdfFoot = `<div class="pp-f">Справочник носит информационный характер и проверяет только официальную регистрацию. Всё остальное в карточках указывают сами организации. Договорённости — напрямую с организацией. ${esc(PAGE_URL)}</div>`;
 function qrImg(text){   // QR-код (библиотека qrcode-generator); не вышло — без кода
@@ -1958,7 +1966,7 @@ function vizitkaNode(s, kind){
   // QR — короткая визитка (имя, фирма, профессия, телефон, e-mail, сайт): код крупнее и считывается даже с экрана
   const short = vcardShort(s);
   const sv = s.services || [];
-  const head = `<div class="vz-p${price ? ' sm' : ''}"><span class="vz-ph">${s.photo ? `<img src="${esc(photoSrc(s.photo))}" alt="">${s.sample ? '<i>Ваше фото</i>' : ''}` : ''}</span>
+  const head = `<div class="vz-p${price ? ' sm' : ''}"><span class="vz-ph">${s.photo ? `<img src="${esc(photoSrc(s.photo))}" alt="">${s.sample ? '<i>Ваше фото</i>' : ''}` : noPh(s, price ? 72 : 132, price ? 90 : 165)}</span>
         <div><div class="vz-cat" style="color:${k.c}">${esc(k.t)}</div><div class="vz-name">${esc(s.name)}</div><div class="vz-role">${esc(s.role)}</div>${s.firm ? `<div class="vz-firm">${esc(s.firm)}</div>` : ''}${price ? '' : `<div class="vz-lang"><b>Языки:</b> ${esc(s.langs.join(', '))}</div>`}</div></div>`;
   const body = price
     ? `<div class="vz-pt">Прайс-лист</div>
