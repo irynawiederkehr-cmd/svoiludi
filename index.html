@@ -868,7 +868,7 @@ const AVATAR_SVG = '<svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50
 </script>
 <script src="/data/specialists.js?v=ba82fd13"></script>
 <script src="/data/vacancies.js?v=4b6b6ac1"></script>
-<script src="/data/organizations.js?v=a1a71e3d"></script>
+<script src="/data/organizations.js?v=7ce4920b"></script>
 <script>
 window.IMG_BASE = 'img/';
 /* карточки специалистов — в /data/specialists.js (одна копия на весь сайт) */
@@ -1365,19 +1365,22 @@ const ADMKEYS = 'svoiludi-admin-keys';
 const admKeys = () => { try { return JSON.parse(localStorage.getItem(ADMKEYS) || '{}') || {}; } catch (e) { return {}; } };
 const keepKey = (id, k) => { if (!ADMIN) return; try { const o = admKeys(); if (k) o[id] = k; else delete o[id]; localStorage.setItem(ADMKEYS, JSON.stringify(o)); } catch (e) {} };
 if (ADMIN) { const o = admKeys(); Object.assign(OKKEY, o);
-  (async () => { for (const [id, k] of Object.entries(o)) { const r = (window.SPECIALISTS || []).find(x => x.id === id); if (!(await keyOk(r, k))) { delete OKKEY[id]; keepKey(id, ''); } } })(); }
+  /* ключи общие для справочника и «Организаций» (12.10.2026): проверяем только карточки этой страницы, чужие ключи не трогаем */
+  (async () => { for (const [id, k] of Object.entries(o)) { const r = SPECIALISTS.find(x => x.id === id); if (!r) continue; if (!(await keyOk(r, k))) { delete OKKEY[id]; keepKey(id, ''); } } })(); }
 const previewUrl = s => `${SITE}#preview=${encodeURIComponent(s.id)}.${encodeURIComponent(OKKEY[s.id] || '')}`;
 /* приглашение в WhatsApp для скрытой пробной карточки (12.10.2026, Ирина: «я буду оттуда отправлять сообщение, оно должно туда в кнопку вотсап вкладываться»).
-   У карточки поле invite = { seen: 'ваше объявление о …', by: 'по вашему объявлению', local: 'фраза про кантон' }. В режиме Ирины кнопка WhatsApp
+   У карточки поле invite = { seen: 'ваше объявление о …', by: 'по вашему объявлению', local: 'фраза про кантон' }; по желанию (12.10.2026, лично знакомым и фирмам)
+   hi — свой первый абзац вместо «Здравствуйте… Увидела…», free — своя строка об условиях вместо «До конца 2027 года всё бесплатно…».
+   У организации (s.org) в ссылках есть и «Организации». В режиме Ирины кнопка WhatsApp
    в контактах карточки и кнопка «Пригласить в WhatsApp» открывают чат специалиста с готовым сообщением и ссылкой на предпросмотр. Сайт ничего не отправляет. */
 const waDigits = v => { let d = String(v || '').replace(/[^\d+]/g, ''); if (/^00/.test(d)) d = d.slice(2); if (/^\+/.test(d)) d = d.slice(1); else if (/^0\d{9}$/.test(d)) d = '41' + d.slice(1); return d; };
 const waTo = s => (s.contacts || {}).whatsapp || (s.contacts || {}).phone || '';
 const inviteMsg = s => { const v = s.invite || {}, n = String(s.name || '').trim().split(/\s+/)[0];
-  return [`Здравствуйте${n ? ', ' + n : ''}! Меня зовут Ирина Вознесенская. ${v.seen ? `Увидела ${v.seen} и решила написать 🙂` : 'Решила вам написать 🙂'}`,
+  return [v.hi || `Здравствуйте${n ? ', ' + n : ''}! Меня зовут Ирина Вознесенская. ${v.seen ? `Увидела ${v.seen} и решила написать 🙂` : 'Решила вам написать 🙂'}`,
     'Я запустила проект 🌿 «Свои люди» — справочник специалистов и организаций, которые работают в Швейцарии на русском и украинском. Чтобы свои могли найти своих: и те, кто только приехал, и те, кто живёт здесь давно. Сейчас всё разбросано по чатам и группам, а здесь — в одном месте, по кантонам. Проект создан для того, чтобы сделать жизнь в Швейцарии максимально лёгкой и без стресса — и тем, кто ищет помощь, и тем, кто её предлагает.',
     `Чтобы вам было проще представить, как это выглядит, я подготовила пробную карточку ${v.by || 'по вашему объявлению'}. Пока её видите только вы, для всех она появится только с вашего согласия, и всё в ней можно поменять:\n👉 ${previewUrl(s)}`,
-    `${v.local ? v.local + ' ' : ''}До конца 2027 года всё бесплатно: карточка с фото и услугами, визитка и прайс-лист для телефона, ваши акции на сайте.`,
-    'Как справочник выглядит целиком:\n👥 Специалисты: https://svoiludi.ch/\n📅 События и курсы: https://svoiludi.ch/events/\n🎁 Акции: https://svoiludi.ch/akcii/\n💼 Вакансии и партнёрство: https://svoiludi.ch/vakansii/',
+    v.free || `${v.local ? v.local + ' ' : ''}До конца 2027 года всё бесплатно: карточка с фото и услугами, визитка и прайс-лист для телефона, ваши акции на сайте.`,
+    'Как справочник выглядит целиком:\n👥 Специалисты: https://svoiludi.ch/' + (s.org ? '\n🏢 Организации: https://svoiludi.ch/organizacii/' : '') + '\n📅 События и курсы: https://svoiludi.ch/events/\n🎁 Акции: https://svoiludi.ch/akcii/\n💼 Вакансии и партнёрство: https://svoiludi.ch/vakansii/',
     'Если интересно, просто напишите, что поправить или добавить, — и я помогу с остальным. А если сейчас не время, ничего делать не нужно 🤍'].join('\n\n'); };
 const inviteHref = s => `https://wa.me/${waDigits(waTo(s))}?text=${encodeURIComponent(inviteMsg(s))}`;
 const inviteOn = s => ADMIN && !!s.invite && !!OKKEY[s.id] && !!waTo(s);

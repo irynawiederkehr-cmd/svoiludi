@@ -177,6 +177,8 @@ DIRS = [
         ('Ремонт техники и телефонов', 'Reparaturservice', ''),
         ('Уборка', 'Reinigung', ''),
         ('Фото- и видеостудия', 'Fotostudio', ''),
+        ('Автосервис и шины', 'Autowerkstatt, Garage, Reifen', ''),   # 12.10.2026, Autocustom & Services GmbH (Biberist)
+        ('Помощь в покупке автомобиля', 'Autokauf, Autoauktion', ''),
     ]),
     ('transport', 'Перевозки и посылки', 'firmy', '#4F7FA8', 'orgTransport', [
         ('Посылки в Украину и обратно', 'Paketdienst Ukraine', ''),
