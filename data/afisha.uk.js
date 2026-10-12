@@ -82,6 +82,166 @@
    ВНИМАНИЕ: сейчас здесь только ВЫМЫШЛЕННЫЕ образцы (sample: true).
    ===================================================================== */
 window.AFISHA = [
+  {
+    "sections": [
+      "events"
+    ],
+    "type": "culture",
+    "id": "olga-tango-rapperswil-tango-bar-2026-10",
+    "keyHash": "d29dd445f9da4ff44dd3540fa0c88af2d75faaae04f04b1c7b606a2c6f3c27b7",
+    "status": "на підтвердженні",
+    "title": "Tango Bar у Рапперсвілі — шоу, воркшоп і практика аргентинського танго",
+    "date": "2026-10-25",
+    "time": "15:30",
+    "timeEnd": "19:30",
+    "canton": "St. Gallen",
+    "address": "Vinoteca Mi Tierra, Alpenstrasse 7, 8640 Rapperswil",
+    "geo": [
+      47.2261,
+      8.8173
+    ],
+    "online": false,
+    "langs": [],
+    "level": "для дорослих, можна без досвіду",
+    "price": "шоу та практика — безкоштовно; воркшоп — CHF 25 з людини, пара студентів — CHF 25 за двох",
+    "commercial": true,
+    "organizers": [
+      "olga-tango-rapperswil"
+    ],
+    "signup": "wa",
+    "contacts": {
+      "phone": "+41 76 346 52 60",
+      "whatsapp": "+41 76 346 52 60",
+      "email": "info@tangoparavos.ch",
+      "instagram": "tangoparavos"
+    },
+    "link": "https://tangoparavos.ch/",
+    "about": "Недільний вечір аргентинського танго в аргентинській винотеці Mi Tierra. О 15:30 — шоу, о 16:00 — воркшоп, з 17:00 до 19:30 — Tango Bar і практика (Practica — вільні танці, де можна спокійно потренуватися). Шоу та практика — вільний вхід. Приходьте разом потанцювати й провести чудовий вечір."
+  },
+  {
+    "sections": [
+      "kursy"
+    ],
+    "kind": "regular",
+    "ktype": "body",
+    "type": "body",
+    "id": "olga-tango-rapperswil-kurs-rapperswil",
+    "keyHash": "d29dd445f9da4ff44dd3540fa0c88af2d75faaae04f04b1c7b606a2c6f3c27b7",
+    "status": "на підтвердженні",
+    "title": "Аргентинське танго для початківців у Рапперсвілі",
+    "date": "2026-10-19",
+    "time": "19:00",
+    "timeEnd": "20:30",
+    "repeat": {
+      "freq": "weekly",
+      "until": "2026-12-21"
+    },
+    "canton": "St. Gallen",
+    "address": "Vinoteca Mi Tierra, Alpenstrasse 7, 8640 Rapperswil",
+    "geo": [
+      47.2261,
+      8.8173
+    ],
+    "online": false,
+    "langs": [],
+    "level": "початківці, дорослі",
+    "price": "CHF 25 за заняття, студентам CHF 12.50",
+    "commercial": true,
+    "organizers": [
+      "olga-tango-rapperswil"
+    ],
+    "signup": "wa",
+    "contacts": {
+      "phone": "+41 76 346 52 60",
+      "whatsapp": "+41 76 346 52 60",
+      "email": "info@tangoparavos.ch",
+      "instagram": "tangoparavos"
+    },
+    "link": "https://tangoparavos.ch/",
+    "about": "Група для початківців щопонеділка, з 19:00 до 20:30, в аргентинській винотеці Mi Tierra. Вчимося танцювати в парі так, щоб обом було комфортно й спокійно, — з увагою до себе та до партнера."
+  },
+  {
+    "sections": [
+      "kursy"
+    ],
+    "kind": "regular",
+    "ktype": "body",
+    "type": "body",
+    "id": "olga-tango-rapperswil-kurs-zug",
+    "keyHash": "d29dd445f9da4ff44dd3540fa0c88af2d75faaae04f04b1c7b606a2c6f3c27b7",
+    "status": "на підтвердженні",
+    "title": "Аргентинське танго для початківців у Цузі",
+    "date": "2026-10-13",
+    "time": "19:30",
+    "repeat": {
+      "freq": "weekly",
+      "until": "2026-12-22"
+    },
+    "canton": "Zug",
+    "address": "Loreto, Löberenstrasse 40, 6300 Zug",
+    "geo": [
+      47.171,
+      8.5231
+    ],
+    "online": false,
+    "langs": [],
+    "level": "початківці, дорослі",
+    "price": "CHF 330 за 13 відвідувань",
+    "commercial": true,
+    "organizers": [
+      "olga-tango-rapperswil"
+    ],
+    "signup": "wa",
+    "contacts": {
+      "phone": "+41 76 346 52 60",
+      "whatsapp": "+41 76 346 52 60",
+      "email": "info@tangoparavos.ch",
+      "instagram": "tangoparavos"
+    },
+    "link": "https://tangoparavos.ch/",
+    "about": "Група для початківців щовівторка, з 19:30, у Loreto в Цузі. Абонемент на 13 відвідувань. Вчимося танцювати в парі так, щоб обом було комфортно й спокійно, — з увагою до себе та до партнера."
+  },
+  {
+    "sections": [
+      "events"
+    ],
+    "type": "promo",
+    "id": "olga-tango-rapperswil-studenty",
+    "keyHash": "d29dd445f9da4ff44dd3540fa0c88af2d75faaae04f04b1c7b606a2c6f3c27b7",
+    "status": "на підтвердженні",
+    "title": "Студентам — курс танго в Рапперсвілі за пів ціни",
+    "promo": {
+      "kind": "price",
+      "value": 12.5,
+      "regular": 25,
+      "what": "заняття курсу аргентинського танго для початківців у Рапперсвілі — для студенток і студентів",
+      "cond": [],
+      "always": true
+    },
+    "date": "2026-10-12",
+    "dateEnd": "2027-10-11",
+    "canton": "St. Gallen",
+    "address": "Vinoteca Mi Tierra, Alpenstrasse 7, 8640 Rapperswil",
+    "geo": [
+      47.2261,
+      8.8173
+    ],
+    "online": false,
+    "langs": [],
+    "commercial": true,
+    "organizers": [
+      "olga-tango-rapperswil"
+    ],
+    "signup": "wa",
+    "contacts": {
+      "phone": "+41 76 346 52 60",
+      "whatsapp": "+41 76 346 52 60",
+      "email": "info@tangoparavos.ch",
+      "instagram": "tangoparavos"
+    },
+    "link": "https://tangoparavos.ch/",
+    "about": "Студенткам і студентам — заняття курсу для початківців у Рапперсвілі щопонеділка за CHF 12.50 замість CHF 25. А на воркшопі Tango Bar пара студентів платить CHF 25 за двох."
+  },
   /* ---------- события ---------- */
   {
     sample: true,
