@@ -205,7 +205,13 @@ def localize_assets(html, tr, missing):
         units = list(dict.fromkeys(js_units(code)))
         if not units: return m.group(0)
         miss = [u for u in units if u not in tr]
-        if miss: missing.extend(u for u in miss if u not in missing); return m.group(0)
+        if miss:
+            missing.extend(u for u in miss if u not in missing)
+            old = os.path.join(ROOT, folder, f'{name}.uk.js')
+            if os.path.exists(old):   # пауза переводов (12.10.2026): украинская страница остаётся на прежней украинской копии данных, а не переходит на русскую
+                prev = open(old, encoding='utf-8').read()
+                return f'{m.group(1)}/{folder}/{name}.uk.js' + (f'?v={ver(prev)}' if folder == 'data' else '') + '"'
+            return m.group(0)
         uk = js_apply(code, tr)
         open(os.path.join(ROOT, folder, f'{name}.uk.js'), 'w', encoding='utf-8').write(uk)
         v = f'?v={ver(uk)}' if folder == 'data' else ''
