@@ -124,6 +124,7 @@ DIRS = [
     ('work', 'Работа и карьера', 'ucheba', '#1F7A8C', 'dirWork', [
         ('Резюме и собеседование', 'Bewerbung, Lebenslauf', ''),
         ('Карьерный консультант', 'Laufbahnberatung', ''),
+        ('Поступление в университет и бизнес-школу', 'Studium, Hochschulzulassung, MBA', ''),
         ('Признание дипломов', 'Diplomanerkennung', ''),
         ('Переквалификация и профессиональные курсы', 'Weiterbildung, Umschulung', ''),
     ]),

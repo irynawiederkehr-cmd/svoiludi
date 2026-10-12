@@ -511,5 +511,114 @@ window.AFISHA = [
     },
     "link": "",
     "about": "Я учусь на парикмахера и всегда ищу моделей. Для моделей — скидка 50 % на все услуги салона: стрижка с мытьём и укладкой, укладка феном, тонирование и окрашивание, мужская стрижка. Работаю под присмотром опытного мастера салона. Запись — по телефону салона."
+  },
+  {
+    "sections": [
+      "events"
+    ],
+    "id": "maryna-geneva-gajd-stipendii",
+    "keyHash": "03c5aaf1152dc86720fe6171beb91a296913565ce8466092bf50e664057dcd44",
+    "status": "на подтверждении",
+    "title": "Гайд «Стипендии в Швейцарии» в подарок",
+    "type": "promo",
+    "promo": {
+      "kind": "gift",
+      "what": "гайд «Стипендии в Швейцарии» в PDF — для тех, кто планирует учиться в Швейцарии",
+      "cond": [
+        "online"
+      ],
+      "always": true
+    },
+    "date": "2026-10-12",
+    "dateEnd": "2027-10-11",
+    "canton": "Genève",
+    "address": "",
+    "online": true,
+    "langs": [
+      "русский"
+    ],
+    "commercial": true,
+    "organizers": [
+      "maryna-geneva"
+    ],
+    "signup": "tg",
+    "contacts": {
+      "telegram": "marynabakh",
+      "instagram": "marynabakh"
+    },
+    "link": "https://t.me/marynabakhmatova",
+    "about": "Дарю гайд «Стипендии в Швейцарии» в PDF — для тех, кто планирует учиться в Швейцарии и ищет, как оплатить учёбу. Гайд закреплён в моём Telegram-канале «Education & Career Switzerland», а можно просто написать мне в личные сообщения — пришлю."
+  },
+  {
+    "sections": [
+      "events"
+    ],
+    "type": "talk",
+    "id": "maryna-geneva-efir-perevod-2026-09",
+    "status": "на подтверждении",
+    "title": "Как перевестись из университета в Украине в университет в Швейцарии — прямой эфир",
+    "date": "2026-09-28",
+    "canton": "Genève",
+    "address": "",
+    "online": true,
+    "langs": [
+      "русский"
+    ],
+    "level": "для взрослых",
+    "price": "",
+    "commercial": true,
+    "organizers": [
+      "maryna-geneva"
+    ],
+    "link": "https://t.me/marynabakhmatova",
+    "about": "Отвечаю на один из самых частых вопросов. Как студенту, который сейчас учится в Украине, перевестись в университет в Швейцарии? И что делать, если учёбу в Украине пришлось прервать, — как восстановиться и продолжить её уже здесь. Разбираю возможные варианты и важные моменты."
+  },
+  {
+    "sections": [
+      "events"
+    ],
+    "type": "talk",
+    "id": "maryna-geneva-efir-ucheba-2026-09",
+    "status": "на подтверждении",
+    "title": "Плюсы и минусы учёбы за границей — прямой эфир",
+    "date": "2026-09-24",
+    "canton": "Genève",
+    "address": "",
+    "online": true,
+    "langs": [
+      "русский"
+    ],
+    "level": "для взрослых",
+    "price": "",
+    "commercial": true,
+    "organizers": [
+      "maryna-geneva"
+    ],
+    "link": "https://t.me/marynabakhmatova",
+    "about": "Говорим о плюсах и минусах учёбы за границей — очно и онлайн. Главный вопрос не в формате, а в цели: зачем вам это образование и что должно измениться в жизни после учёбы. Когда понятно, для чего, выбрать формат гораздо проще."
+  },
+  {
+    "sections": [
+      "events"
+    ],
+    "type": "talk",
+    "id": "maryna-geneva-efir-linkedin-2026-09",
+    "status": "на подтверждении",
+    "title": "Как быть заметным в LinkedIn именно в Швейцарии — прямой эфир",
+    "date": "2026-09-07",
+    "canton": "Genève",
+    "address": "",
+    "online": true,
+    "langs": [
+      "русский"
+    ],
+    "level": "для взрослых",
+    "price": "",
+    "commercial": true,
+    "organizers": [
+      "maryna-geneva"
+    ],
+    "link": "https://t.me/marynabakhmatova",
+    "about": "Как создать и оформить страницу в LinkedIn, чтобы она работала на вас именно на швейцарском рынке."
   }
 ];
