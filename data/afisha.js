@@ -373,5 +373,16 @@ window.AFISHA = [
     langs: ['немецкий'], level: '', price: '', commercial: false,
     organizers: [{ org: 'jewish-culture-bern', name: 'Jewish Culture Switzerland' }], link: 'https://jewishculture.ch/uk/workshops',
     about: 'Разговорный клуб немецкого по четвергам — место, где можно просто быть, чувствовать и получать удовольствие от процесса. Осенний сезон идёт с 17 сентября по 3 декабря 2026 года, запись — формой на сайте общины.'
+  },
+  /* VIDNOVA (12.10.2026): их ближайшее событие с их канала «Українці в Швейцарії» — для примера в пробной карточке, ждёт подтверждения вместе с карточкой
+     (organizacii/#preview=vidnova-zurich…); прошедшее Claude заменяет следующим их событием перед каждым письмом (правило Ирины 12.10.2026, «lidy-svoiludi.md») */
+  {
+    sections: ['events'], type: 'talk',
+    id: 'vidnova-vitalis-2026', status: 'на подтверждении', title: 'VITALIS INTERNATIONAL — международный онлайн-форум «Здоровье · Красота · Мода»',
+    date: '2026-10-17',
+    canton: 'Zürich', address: '', online: true,
+    langs: ['украинский'], level: 'для взрослых', price: '', commercial: false,
+    organizers: [{ org: 'vidnova-zurich', name: 'VIDNOVA' }, { name: 'Harmonia Akademie' }], link: 'https://forms.gle/A7zsoW7qQ6UL4BaH9',
+    about: 'Спикеры из Швейцарии, Израиля, Испании и Украины говорят о здоровье, красоте, стиле, долголетии и качестве жизни: выступления, практические подходы, профессиональные кейсы и новые знакомства для сотрудничества. Форум проводят VIDNOVA и Harmonia Akademie. Участие — по предварительной регистрации, форма по ссылке.'
   }
 ];
