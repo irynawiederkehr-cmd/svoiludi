@@ -1692,12 +1692,29 @@ const promoChip = s => { const L = promoOf(s); if (!L.length) return ''; const e
 const cardUrl = s => PAGE_URL + '#' + s.id;
 const reportLink = s => `mailto:${MAIL}?subject=${encodeURIComponent(`Ошибка в карточке ${s.num || ''} ${s.name}`.replace(/\s+/g, ' '))}&body=${encodeURIComponent(`Здравствуйте!\n\nКарточка: ${cardUrl(s)}\n\nЧто нужно исправить:\n`)}`;
 const copyText = t => { try { return navigator.clipboard.writeText(t).then(() => true, () => false); } catch (_) { return Promise.resolve(false); } };
-/* ---------- «В контакты»: визитка .vcf (vCard 3.0) — на телефоне открывается и предлагает сохранить контакт ---------- */
-function vcard(s, photoB64){
-  const c = s.contacts || {}, e = v => String(v).replace(/\\/g, '\\\\').replace(/\n/g, '\\n').replace(/([,;])/g, '\\$1');
-  const parts = s.name.trim().split(/\s+/), L = ['BEGIN:VCARD', 'VERSION:3.0', `N:${e(parts.slice(1).join(' '))};${e(parts[0])};;;`, `FN:${e(s.name)}`];
-  if (s.firm) L.push(`ORG:${e(s.firm)}`);
-  L.push(`TITLE:${e(s.role)}`);
+/* ---------- «В контакты»: визитка .vcf (vCard 3.0) — на телефоне открывается и предлагает сохранить контакт ----------
+   Пометка «Свои люди» (Ирина 12.10.2026: «чтобы контакты легко находились в записной книжке»; правило — «svoiludi-vizitka-png.md»):
+   · имя — «Анна Иванова 🌿 маникюр и педикюр»: 🌿 и первая категория карточки стоят в поле «суффикс» имени (N) и в FN, поэтому видны
+     прямо в списке контактов и находятся поиском по слову; имя и фамилия остаются в своих полях, сортировка не меняется;
+   · должность — «роль · 🌿 Свои люди в Швейцарии»; заметка — «🌿 Свои люди в Швейцарии · номер карточки», где найти в справочнике, ссылка;
+   · группа CATEGORIES:Свои люди — где телефон её понимает (часть Android), появится ярлык; iPhone группу из файла пропускает;
+   · организация (s.org) — название целиком в имени и в «Компании», не делим на имя и фамилию.
+   Тот же контакт — в QR «Сохрани контакт» на визитке PNG (vcardShort). */
+const VC_LEAF = '🌿', VC_PROJ = 'Свои люди в Швейцарии';
+const vcCat = s => { const x = String((s.specs || [])[0] || '').split(/:| — /)[0].trim(); return /^\p{Lu}\p{Ll}/u.test(x) ? x[0].toLowerCase() + x.slice(1) : x; };
+const vcTag = s => [VC_LEAF, vcCat(s)].filter(Boolean).join(' ');   // «🌿 маникюр и педикюр»
+const vcWhere = s => [s.cat, s.cat2].filter((v, i, a) => v && CATS[v] && a.indexOf(v) === i)
+  .map(d => { const sp = (s.specs || []).filter(x => (CATS[d].s || []).includes(x)); return CATS[d].t + (sp.length ? ': ' + sp.join(', ') : ''); }).join('; ');
+const vcFold = line => { let o = '', cur = '', n = 0;   // строки не длиннее 75 байт, символ (и 🌿) никогда не режется пополам
+  for (const ch of line){ const k = ch.codePointAt(0), b = k < 0x80 ? 1 : k < 0x800 ? 2 : k < 0x10000 ? 3 : 4; if (n + b > 74){ o += cur + '\r\n '; cur = ''; n = 1; } cur += ch; n += b; }
+  return o + cur; };
+function vcard(s, photoB64, short){   // short — для QR: в имени только 🌿, без категории, чтобы код оставался крупным
+  const c = s.contacts || {}, e = v => String(v).replace(/\\/g, '\\\\').replace(/\n/g, '\\n').replace(/([,;])/g, '\\$1'), tag = short ? VC_LEAF : vcTag(s), isOrg = !!s.org;
+  const parts = s.name.trim().split(/\s+/), L = ['BEGIN:VCARD', 'VERSION:3.0',
+    isOrg ? `N:;${e(s.name.trim())};;;${e(tag)}` : `N:${e(parts.slice(1).join(' '))};${e(parts[0])};;;${e(tag)}`, `FN:${e(s.name.trim() + ' ' + tag)}`];
+  if (isOrg || s.firm) L.push(`ORG:${e(isOrg ? s.name.trim() : s.firm)}`);
+  L.push(`TITLE:${e([s.role, VC_LEAF + ' ' + VC_PROJ].filter(Boolean).join(' · '))}`);
+  L.push(`CATEGORIES:${e('Свои люди')}`);
   if (c.phone) L.push(`TEL;TYPE=WORK,VOICE:${digits(c.phone)}`);
   if (c.whatsapp && digits(c.whatsapp) !== digits(c.phone || '')) L.push(`TEL;TYPE=CELL:${digits(c.whatsapp)}`);
   if (c.email) L.push(`EMAIL;TYPE=INTERNET,WORK:${c.email}`);
@@ -1706,10 +1723,11 @@ function vcard(s, photoB64){
   if (c.telegram) L.push(`X-SOCIALPROFILE;TYPE=telegram:${LINK.telegram(c.telegram)[1]}`);
   if (c.instagram) L.push(`X-SOCIALPROFILE;TYPE=instagram:${LINK.instagram(c.instagram)[1]}`);
   livePlaces(s).filter(p => !p.area).forEach(p => { const m = String(p.address).match(/^(.*?),?\s*(\d{4})\s+(.+)$/); L.push(`ADR;TYPE=WORK:;;${e(m ? m[1] : p.address)};${e(m ? m[3] : '')};;${m ? m[2] : ''};${e('Schweiz')}`); });
-  L.push(`NOTE:${e('Свои люди в Швейцарии: ' + cardUrl(s))}`);
+  const where = vcWhere(s);
+  L.push(`NOTE:${e([VC_LEAF + ' ' + VC_PROJ + (s.num || (s.org && s.org.num) ? ' · ' + (s.num || s.org.num) : ''), where ? 'Где найти в справочнике: ' + where : '', cardUrl(s)].filter(Boolean).join('\n'))}`);
   if (photoB64) L.push(`PHOTO;ENCODING=b;TYPE=JPEG:${photoB64}`);
   L.push('END:VCARD');
-  return L.map(line => { let o = '', x = line; while (x.length > 74){ o += x.slice(0, 74) + '\r\n '; x = x.slice(74); } return o + x; }).join('\r\n') + '\r\n';
+  return L.map(vcFold).join('\r\n') + '\r\n';
 }
 async function saveVcf(s){
   let b64 = '';
@@ -1717,7 +1735,7 @@ async function saveVcf(s){
   const url = URL.createObjectURL(new Blob([vcard(s, b64)], { type: 'text/vcard;charset=utf-8' }));
   const a = document.createElement('a'); a.href = url; a.download = s.name + '.vcf'; document.body.appendChild(a); a.click();
   setTimeout(() => { a.remove(); URL.revokeObjectURL(url); }, 4000);
-  track('vcf/' + s.id); toast('Визитка скачана: откройте файл, и телефон предложит сохранить контакт.');
+  track('vcf/' + s.id); toast(`Визитка скачана: открой файл, и телефон предложит сохранить контакт. В контактах он будет подписан «${vcTag(s)}» — по 🌿 или по слову его легко найти поиском.`);
 }
 async function shareCard(s){
   const url = cardUrl(s), title = `${s.name} — ${s.role}`;
@@ -1968,7 +1986,7 @@ function openCard(id){
       <div class="d-side">
         <div class="d-block"><h4>Где</h4><div style="display:flex;flex-direction:column;gap:10px">${livePlaces(s).map(placeFull).join('') || (needOf(s).place ? UT('Кантон и адрес') : '')}${s.online ? '<span>и онлайн по видеосвязи</span>' : ''}</div></div>
         <div class="d-block"><h4>Контакты</h4><ul class="ctl">${contacts}</ul></div>${SVL_ORG.side(s)}
-        <div class="card-acts">${likeBtn(s, true)}${s.sample ? '' : `<button type="button" class="vip-q" data-t="${esc(LIKE_TIP)}" aria-label="Что значит сердечко" aria-expanded="false">?</button>`}<button class="btn ghost svb" type="button" data-fav="${esc(s.id)}" aria-pressed="${FAV.has(s.id)}">${saveInner(s)}</button><button class="btn" type="button" data-vcf="${esc(s.id)}" data-tip="Сохранить телефон, e-mail и адрес в контакты телефона или компьютера">В контакты</button><button class="btn ghost" type="button" data-share="${esc(s.id)}">Поделиться</button><button class="btn ghost" type="button" data-png-card="${esc(s.id)}" data-tip="Визитка-картинка PNG: сохранится в галерею телефона, её удобно показать или переслать">Визитка PNG</button>${priceShown(s) ? `<button class="btn ghost" type="button" data-png-price="${esc(s.id)}" data-tip="Прайс-лист картинкой PNG: сохранится в галерею телефона">Прайс-лист PNG</button>` : ''}${feeRows(s).length ? `<button class="btn ghost" type="button" data-png-fees="${esc(s.id)}" data-tip="Взносы картинкой PNG: сохранится в галерею телефона">Взносы PNG</button>` : ''}<button class="btn ghost" type="button" data-pdf-card="${esc(s.id)}" data-tip="Полная карточка для печати и почты">PDF</button></div>
+        <div class="card-acts">${likeBtn(s, true)}${s.sample ? '' : `<button type="button" class="vip-q" data-t="${esc(LIKE_TIP)}" aria-label="Что значит сердечко" aria-expanded="false">?</button>`}<button class="btn ghost svb" type="button" data-fav="${esc(s.id)}" aria-pressed="${FAV.has(s.id)}">${saveInner(s)}</button><button class="btn" type="button" data-vcf="${esc(s.id)}" data-tip="Сохранить телефон, e-mail и адрес в контакты телефона или компьютера. Рядом с именем будет 🌿 и категория — по ним контакт легко найти поиском">В контакты</button><button class="btn ghost" type="button" data-share="${esc(s.id)}">Поделиться</button><button class="btn ghost" type="button" data-png-card="${esc(s.id)}" data-tip="Визитка-картинка PNG: сохранится в галерею телефона, её удобно показать или переслать">Визитка PNG</button>${priceShown(s) ? `<button class="btn ghost" type="button" data-png-price="${esc(s.id)}" data-tip="Прайс-лист картинкой PNG: сохранится в галерею телефона">Прайс-лист PNG</button>` : ''}${feeRows(s).length ? `<button class="btn ghost" type="button" data-png-fees="${esc(s.id)}" data-tip="Взносы картинкой PNG: сохранится в галерею телефона">Взносы PNG</button>` : ''}<button class="btn ghost" type="button" data-pdf-card="${esc(s.id)}" data-tip="Полная карточка для печати и почты">PDF</button></div>
         ${needOf(s).reg ? `<p class="d-need">${UT(NEED_T.reg[0].toUpperCase() + NEED_T.reg.slice(1))}</p>` : ''}
         <p class="d-note">${s.uid ? `Регистрационный номер ${s.firm ? 'фирмы ' : ''}(UID): <a class="uid" href="${uidUrl(s.uid)}" ${ext} data-tip="Открыть запись в официальном реестре предприятий Швейцарии (uid.admin.ch)">${esc(s.uid)}</a>. ` : ''}${s.checked ? `Данные проверены ${fmtDate(s.checked)}. ` : ''}${s.num ? `Номер карточки ${esc(s.num)}. ` : ''}Мы проверяем регистрацию организации: запись в торговом реестре (Zefix) или устав. Всё остальное в карточке указывает сама организация. Договорённости — напрямую с организацией.</p>
         <p class="report">Нашли ошибку в карточке? <a href="${esc(reportLink(s))}">Сообщить</a></p>
@@ -2086,7 +2104,10 @@ const VZ_CSS = `.vz{position:fixed;left:-10000px;top:0;width:540px;min-height:96
 .vz-smp{position:absolute;top:16px;right:18px;background:#6E4F3C;color:#fff;font:800 10.5px/1 Manrope,sans-serif;letter-spacing:.12em;text-transform:uppercase;padding:7px 11px;border-radius:999px}`;
 // услуги идут сплошным списком и показываются все (05.10.2026)
 // короткая визитка для QR (имя, фирма, профессия, телефон, e-mail, сайт): код крупнее и считывается даже с экрана
-const vcardShort = s => vcard(s).replace(/\r\n /g, '').split('\r\n').filter(l => !/^(NOTE|ADR|X-SOCIALPROFILE|PHOTO)/.test(l)).join('\r\n');
+/* QR «Сохрани контакт»: короткая визитка — без заметки, адреса, соцсетей, фото и группы; в имени только 🌿 (категория видна в должности),
+   «· 🌿 Свои люди в Швейцарии» в должности убираем — код остаётся таким же крупным, как раньше, и легко читается камерой */
+const vcardShort = s => vcard(s, '', true).replace(/\r\n /g, '').split('\r\n').filter(l => !/^(NOTE|ADR|X-SOCIALPROFILE|PHOTO|CATEGORIES)/.test(l))
+  .map(l => /^TITLE:/.test(l) ? l.replace(' · ' + VC_LEAF + ' ' + VC_PROJ, '') : l).join('\r\n');
 function vizitkaNode(s, kind){
   const fees = kind === 'fees', price = kind === 'price' || fees, k = CATS[s.cat] || CATS.status, c = s.contacts || {};
   const av = (document.querySelector('.mark .av') || {}).innerHTML || '';
