@@ -652,7 +652,7 @@ a.bot:hover{color:#B98324}
       <span><b>Свои люди</b><small>в Швейцарии</small></span>
     </a>
     <nav aria-label="Разделы">
-      <a href="./" aria-current="page">Специалисты</a>
+      <a href="./" aria-current="page" style="color:var(--ink)">Специалисты</a>
       <a href="events/">События и курсы</a>
       <a href="vakansii/">Вакансии и партнёрство</a>
       <a href="shveycariya/">Как устроена Швейцария</a>
@@ -876,7 +876,7 @@ const AVATAR_SVG = '<svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50
 </script>
 <script src="/data/specialists.js?v=e6771f01"></script>
 <script src="/data/vacancies.js?v=4b6b6ac1"></script>
-<script src="/data/organizations.js?v=e13f1884"></script>
+<script src="/data/organizations.js?v=bec50754"></script>
 <script>
 window.IMG_BASE = 'img/';
 /* карточки специалистов — в /data/specialists.js (одна копия на весь сайт) */
@@ -1025,13 +1025,19 @@ const ktRu = c => (CANTONS[c] || [, c])[1];
    и подписаны «уточняем». Видят только Ирина и сам человек в предпросмотре — на сайт такая карточка не выходит.
    Нужно для размещения: фото (у организаций — нет, там значок направления), кантон и адрес, e-mail для подтверждения, языки, формат работы,
    регистрация — UID или письмо кассы AHV (у карточки поле uid или ahv: 'ГГГГ-ММ-ДД' — когда мы видели письмо AHV; номер AHV не пишем никогда);
-   у организаций ещё руководитель и форма (ферайн, фонд, фирма). Новое обязательное поле — сразу сюда (needOf и NEED_T). */
+   у организаций ещё руководитель и форма (ферайн, фонд, фирма). Новое обязательное поле — сразу сюда (needOf и NEED_T).
+   Контакты (правило Ирины 12.10.2026, 14:09: «не во всех карточках отображается инстаграм, телефон, мейл — их нужно запрашивать, отображать»):
+   у такой карточки в контактах всегда есть строки «Телефон», «E-mail» и «Instagram»; пустая — «уточняем», и мы просим её во втором письме.
+   Телефон и Instagram без обязательности (NEED_OPT): карточка выйдет и без них, но мы их всегда спрашиваем. */
 const IS_ORG_PAGE = !!window.SVL_ORG;
 const needOf = s => { if (!s || s.sample || s.status === 'активен') return {}; const c = s.contacts || {}, p = (s.places || [])[0] || {};
   const h = IS_ORG_PAGE ? ((s.org || {}).head || {}) : {};
-  return { photo: !IS_ORG_PAGE && !s.photo, place: !p.canton, email: !c.email, langs: !(s.langs || []).length, format: !IS_ORG_PAGE && !String(s.format || '').trim(), reg: !s.uid && !s.ahv,
+  return { photo: !IS_ORG_PAGE && !s.photo, place: !p.canton, email: !c.email, langs: !(s.langs || []).length, format: !IS_ORG_PAGE && !String(s.format || '').trim(), reg: !s.uid && !s.ahv, phone: !c.phone, insta: !c.instagram,
     ...(IS_ORG_PAGE ? { head: !h.name || /уточн/i.test(h.name), form: !(s.org || {}).form } : {}) }; };
-const NEED_T = { photo: 'фото', place: 'кантон и адрес', email: 'e-mail (на него приходят подтверждения)', langs: 'языки', format: 'формат работы', reg: IS_ORG_PAGE ? 'регистрация (UID фирмы или устав ферайна)' : 'регистрация (UID или письмо кассы AHV)', head: 'руководитель', form: 'форма (ферайн, фонд, фирма)' };
+const NEED_T = { photo: 'фото', place: 'кантон и адрес', email: 'e-mail (на него приходят подтверждения)', langs: 'языки', format: 'формат работы', reg: IS_ORG_PAGE ? 'регистрация (UID фирмы или устав ферайна)' : 'регистрация (UID или письмо кассы AHV)', head: 'руководитель', form: 'форма (ферайн, фонд, фирма)', phone: 'телефон', insta: 'Instagram' };
+const NEED_OPT = ['phone', 'insta'];   // спрашиваем всегда, но без них карточка на сайт выйти может
+const needReq = s => Object.entries(needOf(s)).filter(([k, v]) => v && !NEED_OPT.includes(k)).map(([k]) => NEED_T[k]);
+const needOpt = s => Object.entries(needOf(s)).filter(([k, v]) => v && NEED_OPT.includes(k)).map(([k]) => NEED_T[k]);
 const needList = s => Object.entries(needOf(s)).filter(([, v]) => v).map(([k]) => NEED_T[k]);
 const UT = t => `<span class="need">${t ? esc(t) + ' — ' : ''}уточняем</span>`;
 
@@ -1453,7 +1459,7 @@ const fixLetter = s => ({ su: `Исправления в карточку — ${
   body: `Здравствуйте, Ирина!\n\nВ моей карточке, пожалуйста, исправьте\n\n— \n\n${previewUrl(s)}\n\n${s.name}` });
 function previewBox(s){
   return `<div class="pv-box" id="pvCard" data-pv="${esc(s.id)}"><b>Это предпросмотр вашей карточки.</b><span>Пока её видите только вы. Если всё верно, отметьте галочки и нажмите «Подтверждаю» — карточка появится на сайте. Если что-то нужно поменять, нажмите «Нужно исправить».</span>
-    ${needList(s).length ? `<span class="pv-need">Подсвеченные поля мы ещё уточняем: ${esc(needList(s).join(', '))}. Без них карточка на сайт не выйдет. Напишите нам эти данные в ответ на сообщение или нажмите «Нужно исправить».</span>` : ''}
+    ${needList(s).length ? `<span class="pv-need">Подсвеченные поля мы ещё уточняем: ${esc(needList(s).join(', '))}.${needReq(s).length ? ` Без ${needReq(s).length > 1 ? 'этих данных' : 'этого'} (${esc(needReq(s).join(', '))}) карточка на сайт не выйдет.` : ''}${needOpt(s).length ? ` ${esc(needOpt(s).join(' и ').replace(/^т/, 'Т'))} мы тоже просим, чтобы людям было проще с вами связаться.` : ''} Напишите нам эти данные в ответ на сообщение или нажмите «Нужно исправить».</span>` : ''}
     <label class="pv-ok"><input type="checkbox" data-pv-agree> <span>Данные в карточке верны. Я даю согласие на публикацию карточки и фото на сайте svoiludi.ch.</span></label>
     <label class="pv-ok"><input type="checkbox" data-pv-agree> <span>Я прочитал(а) <a href="https://svoiludi.ch/usloviya/" target="_blank" rel="noopener">условия размещения</a> и принимаю их, в том числе <a href="https://svoiludi.ch/usloviya/#isklyuchenie" target="_blank" rel="noopener">когда карточку снимают и за что исключают из проекта</a>. Перечитать их можно в любой момент.</span></label>
     <div class="pv-acts"><button class="btn" type="button" data-pv-send="card" disabled>Подтверждаю</button><button class="btn ghost" type="button" data-pv-fixopen>Нужно исправить</button></div>
@@ -1572,9 +1578,10 @@ let PREVIEW = '';   // id карточки, открытой по ссылке �
 function openCard(id){
   const s = SPECIALISTS.find(x => x.id === id); if (!s) return;
   const k = CATS[s.cat] || CATS.status, c = s.contacts || {};
-  const contacts = ['phone', 'email', 'site', 'site2', 'instagram', 'facebook', 'telegram', 'bot', 'whatsapp'].filter(x => c[x]).map(x => {
-    const [t, h0, v] = LINK[x](c[x]); const h = x === 'whatsapp' && inviteOn(s) ? inviteHref(s) : h0; return `<li><span>${t}</span><a href="${esc(h)}" ${x === 'phone' || x === 'email' ? '' : ext}>${esc(v)}</a></li>`; }).join('')
-    + (needOf(s).email ? `<li><span>E-mail</span>${UT()}</li>` : '');
+  const nd = needOf(s), NDK = { phone: 'phone', email: 'email', instagram: 'insta' };   // пустые телефон, e-mail, Instagram у карточки, которая ещё не на сайте, — «уточняем» (12.10.2026)
+  const contacts = ['phone', 'email', 'site', 'site2', 'instagram', 'facebook', 'telegram', 'bot', 'whatsapp'].filter(x => c[x] || nd[NDK[x]]).map(x => {
+    if (!c[x]) return `<li><span>${LINK[x]('')[0]}</span>${UT()}</li>`;
+    const [t, h0, v] = LINK[x](c[x]); const h = x === 'whatsapp' && inviteOn(s) ? inviteHref(s) : h0; return `<li><span>${t}</span><a href="${esc(h)}" ${x === 'phone' || x === 'email' ? '' : ext}>${esc(v)}</a></li>`; }).join('');
   const box = document.getElementById('qmCard');
   box.style.setProperty('--lc', k.c); box.style.setProperty('--lf', `color-mix(in srgb,${k.c} 13%,var(--paper))`);
   box.innerHTML = `<div class="qm-top"><div class="qm-ph">${photo(s)}</div><div class="qm-head">${s.sample ? '<span class="qm-sample">Образец карточки · специалист вымышленный</span>' : ''}<span class="sp-sub" style="color:${k.c}">${ico(k.i, k.c, null, 16)}${esc(k.t)}${(() => { const l = state.canton ? tierIn(s, state.canton) : tierBest(s); return l === 'vip' ? ` · ${tierName(s, 'vip')} (платное размещение)` : l === 'партнёр' ? ` · ${tierName(s, 'партнёр')} (платное размещение)` : ''; })()}</span>

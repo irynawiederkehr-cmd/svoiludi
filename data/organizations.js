@@ -628,7 +628,7 @@ window.ORGANIZATIONS = [
     "name_ru": "Украиноязычный автосервис · Biberist (SO)",
     "form": "GmbH",
     "kind": "firm",
-    "dir": "services",
+    "dir": "auto",
     "cats": [
       "Автосервис и шины",
       "Помощь в покупке автомобиля"
