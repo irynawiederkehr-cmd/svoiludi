@@ -874,7 +874,7 @@ function ico(name, line = '#2E5A88', fill, size = 24){
 const AVATAR_SVG = '<svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="46" fill="#FFFCF8" stroke="#6E4F3C" stroke-width="3"/><g transform="rotate(22.5 50 50)"><path d="M50 50 C42 40 43 24 50 15 C57 24 58 40 50 50Z" fill="#E3E6D6" stroke="#66704F" stroke-width="2"/></g><g transform="rotate(67.5 50 50)"><path d="M50 50 C42 40 43 24 50 15 C57 24 58 40 50 50Z" fill="#E3E6D6" stroke="#66704F" stroke-width="2"/></g><g transform="rotate(112.5 50 50)"><path d="M50 50 C42 40 43 24 50 15 C57 24 58 40 50 50Z" fill="#E3E6D6" stroke="#66704F" stroke-width="2"/></g><g transform="rotate(157.5 50 50)"><path d="M50 50 C42 40 43 24 50 15 C57 24 58 40 50 50Z" fill="#E3E6D6" stroke="#66704F" stroke-width="2"/></g><g transform="rotate(202.5 50 50)"><path d="M50 50 C42 40 43 24 50 15 C57 24 58 40 50 50Z" fill="#E3E6D6" stroke="#66704F" stroke-width="2"/></g><g transform="rotate(247.5 50 50)"><path d="M50 50 C42 40 43 24 50 15 C57 24 58 40 50 50Z" fill="#E3E6D6" stroke="#66704F" stroke-width="2"/></g><g transform="rotate(292.5 50 50)"><path d="M50 50 C42 40 43 24 50 15 C57 24 58 40 50 50Z" fill="#E3E6D6" stroke="#66704F" stroke-width="2"/></g><g transform="rotate(337.5 50 50)"><path d="M50 50 C42 40 43 24 50 15 C57 24 58 40 50 50Z" fill="#E3E6D6" stroke="#66704F" stroke-width="2"/></g><g transform="rotate(0.0 50 50)"><path d="M50 50 C45 43 45 32 50 26 C55 32 55 43 50 50Z" fill="#EADFCF" stroke="#6E4F3C" stroke-width="2"/></g><g transform="rotate(45.0 50 50)"><path d="M50 50 C45 43 45 32 50 26 C55 32 55 43 50 50Z" fill="#EADFCF" stroke="#6E4F3C" stroke-width="2"/></g><g transform="rotate(90.0 50 50)"><path d="M50 50 C45 43 45 32 50 26 C55 32 55 43 50 50Z" fill="#EADFCF" stroke="#6E4F3C" stroke-width="2"/></g><g transform="rotate(135.0 50 50)"><path d="M50 50 C45 43 45 32 50 26 C55 32 55 43 50 50Z" fill="#EADFCF" stroke="#6E4F3C" stroke-width="2"/></g><g transform="rotate(180.0 50 50)"><path d="M50 50 C45 43 45 32 50 26 C55 32 55 43 50 50Z" fill="#EADFCF" stroke="#6E4F3C" stroke-width="2"/></g><g transform="rotate(225.0 50 50)"><path d="M50 50 C45 43 45 32 50 26 C55 32 55 43 50 50Z" fill="#EADFCF" stroke="#6E4F3C" stroke-width="2"/></g><g transform="rotate(270.0 50 50)"><path d="M50 50 C45 43 45 32 50 26 C55 32 55 43 50 50Z" fill="#EADFCF" stroke="#6E4F3C" stroke-width="2"/></g><g transform="rotate(315.0 50 50)"><path d="M50 50 C45 43 45 32 50 26 C55 32 55 43 50 50Z" fill="#EADFCF" stroke="#6E4F3C" stroke-width="2"/></g><circle cx="50" cy="50" r="7" fill="#B98324"/></svg>';
 
 </script>
-<script src="/data/specialists.js?v=40cf0c59"></script>
+<script src="/data/specialists.js?v=eaea6ead"></script>
 <script src="/data/vacancies.js?v=4b6b6ac1"></script>
 <script src="/data/organizations.js?v=6ce0a0a7"></script>
 <script>
@@ -1406,14 +1406,16 @@ const inviteMsg = s => { const v = s.invite || {}, n = String(s.name || '').trim
     'Как справочник выглядит целиком:\n👥 Специалисты: https://svoiludi.ch/' + (s.org ? '\n🏢 Организации: https://svoiludi.ch/organizacii/' : '') + '\n📅 События и курсы: https://svoiludi.ch/events/\n🎁 Акции: https://svoiludi.ch/akcii/\n💼 Вакансии и партнёрство: https://svoiludi.ch/vakansii/',
     'Если интересно, просто напишите, что поправить или добавить, — и я помогу с остальным. А если сейчас не время, ничего делать не нужно 🤍'].join('\n\n'); };
 const inviteHref = s => `https://wa.me/${waDigits(waTo(s))}?text=${encodeURIComponent(inviteMsg(s))}`;
-const inviteOn = s => ADMIN && !!s.invite && !!OKKEY[s.id] && !!waTo(s);
+/* invite.via = 'facebook' (12.10.2026, Анастасия SG-0025): приглашаем через Facebook, даже если в карточке есть телефон (например, стационарный телефон салона) */
+const fbFirst = s => (s.invite || {}).via === 'facebook' || (!waTo(s) && !!(s.contacts || {}).facebook);
+const inviteOn = s => ADMIN && !!s.invite && !!OKKEY[s.id] && !!waTo(s) && !fbFirst(s);
 /* приглашение через Facebook (12.10.2026): если у пробной карточки нет WhatsApp и телефона, но есть профиль в Facebook (contacts.facebook),
    кнопка в режиме Ирины копирует тот же текст приглашения и открывает профиль: там «Написать» и вставить текст. Сайт ничего не отправляет. */
 const fbTo = s => (s.contacts || {}).facebook || '';
-const inviteFbOn = s => ADMIN && !!s.invite && !!OKKEY[s.id] && !waTo(s) && !!fbTo(s);
+const inviteFbOn = s => ADMIN && !!s.invite && !!OKKEY[s.id] && fbFirst(s);
 document.addEventListener('click', async e => { const b = e.target.closest('[data-copyinvite]'); if (!b) return;
   const s = SPECIALISTS.find(x => x.id === b.dataset.copyinvite); if (!s) return; const t = inviteMsg(s);
-  try { await navigator.clipboard.writeText(t); (b.querySelector('b') || b).textContent = 'Текст скопирован ✓ — вставь его в сообщение'; } catch (x) { e.preventDefault(); prompt('Скопируйте текст приглашения', t); window.open(b.href, '_blank', 'noopener'); } });
+  try { await navigator.clipboard.writeText(t); (b.querySelector('b') || b).textContent = 'Текст скопирован ✓ — вставь его в сообщение'; } catch (x) { e.preventDefault(); prompt('Скопируйте текст приглашения', t); if (b.href) window.open(b.href, '_blank', 'noopener'); } });
 const mailto = (to, su, body) => `mailto:${to}?subject=${encodeURIComponent(su)}&body=${encodeURIComponent(body)}`;
 const gmail = (to, su, body) => `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(to)}&su=${encodeURIComponent(su)}&body=${encodeURIComponent(body)}`;
 const ownerLetter = s => ({ su: 'Ваша карточка в «Своих людях в Швейцарии» — посмотрите, пожалуйста',
@@ -1525,8 +1527,10 @@ function adminBox(s){
     : `<div class="adm-act off"><b>Письмом не получится</b><span>У специалиста нет e-mail в карточке. Отправь ссылку через Telegram или WhatsApp.</span></div>`)
     + admAct(`data-copyprev="${esc(s.id)}"`, 'Скопировать ссылку для Telegram',
       'Текст со ссылкой на предпросмотр копируется в буфер. Вставь его специалисту в Telegram или WhatsApp. Подтверждение он сделает кнопкой на сайте — e-mail не нужен.');
-  const inv = !s.invite ? '' : !waTo(s) && fbTo(s) ? (inviteFbOn(s) ? admAct(`href="${esc(LINK.facebook(fbTo(s))[1])}" ${ext} data-copyinvite="${esc(s.id)}"`, 'Пригласить в Facebook — скопировать готовое сообщение',
+  const inv = !s.invite ? '' : fbFirst(s) ? (inviteFbOn(s) ? (fbTo(s) ? admAct(`href="${esc(LINK.facebook(fbTo(s))[1])}" ${ext} data-copyinvite="${esc(s.id)}"`, 'Пригласить в Facebook — скопировать готовое сообщение',
       'Текст приглашения со ссылкой на пробную карточку копируется в буфер, и открывается профиль в Facebook. Там нажми «Написать» (Message), вставь текст и отправь.', true)
+      : admAct(`data-copyinvite="${esc(s.id)}"`, 'Скопировать готовое сообщение для Facebook',
+      'Текст приглашения со ссылкой на пробную карточку копируется в буфер. Открой её пост или профиль в Facebook, нажми «Написать» (Message), вставь текст и отправь.', true))
     : `<div class="adm-act off"><b>Приглашение в Facebook</b><span>Открой карточку один раз по ссылке с ключом (её присылает Claude) — после этого здесь появится кнопка с готовым сообщением.</span></div>`)
     : inviteOn(s) ? admAct(`href="${esc(inviteHref(s))}" ${ext}`, 'Пригласить в WhatsApp — готовое сообщение',
       `Откроется чат с ${esc(waTo(s))} и готовый текст приглашения со ссылкой на пробную карточку. Остаётся нажать «Отправить». Тот же текст открывает кнопка WhatsApp в контактах карточки (только у тебя).`, true)
