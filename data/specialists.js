@@ -334,7 +334,7 @@ window.SPECIALISTS = [
     "places": [
       {
         "canton": "Zug",
-        "address": "Suurstoffi 16, 6343 Rotkreuz",
+        "address": "Suurstoffi 16, 6343 Risch-Rotkreuz",
         "geo": [
           47.1442162,
           8.4370922
@@ -361,6 +361,7 @@ window.SPECIALISTS = [
       "английский"
     ],
     "contacts": {
+      "email": "florearubin@mail.ru",
       "phone": "+41 79 626 89 18",
       "whatsapp": "+41 79 626 89 18",
       "site": "https://www.rubinbeauty.ch",

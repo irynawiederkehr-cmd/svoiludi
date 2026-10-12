@@ -436,7 +436,7 @@ window.AFISHA = [
     "date": "2026-10-12",
     "dateEnd": "2027-10-11",
     "canton": "Zug",
-    "address": "Suurstoffi 16, 6343 Rotkreuz",
+    "address": "Suurstoffi 16, 6343 Risch-Rotkreuz",
     "geo": [
       47.1442162,
       8.4370922
@@ -457,6 +457,7 @@ window.AFISHA = [
     ],
     "signup": "wa",
     "contacts": {
+      "email": "florearubin@mail.ru",
       "phone": "+41 79 626 89 18",
       "whatsapp": "+41 79 626 89 18",
       "instagram": "rubinbeauty"
