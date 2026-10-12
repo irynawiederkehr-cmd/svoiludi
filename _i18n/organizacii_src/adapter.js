@@ -37,7 +37,11 @@
     places: placesOf(o), online: !!o.online, onlineCH: o.onlineCH || '', onlineTier: o.onlineTier, tiers: o.tiers || [], paidUntil: o.paidUntil || '',
     langs: o.langs || [], about: o.about || '', services: o.offers || [], format: o.join || '', contacts: Object.assign({}, o.contacts || {}),
     prices: o.prices || [], pricesOk: !!o.pricesOk, pricesDate: o.pricesDate || '',
-    invite: o.invite, todo: o.todo || []   // приглашение в WhatsApp у скрытой пробной карточки и заметки — только в режиме Ирины (12.10.2026)
+    invite: o.invite, todo: o.todo || [],   // приглашение в WhatsApp у скрытой пробной карточки и заметки — только в режиме Ирины (12.10.2026)
+    /* взносы (правила Ирины 12.10.2026, 14:21 и 14:23): у всех, кроме фирм, — список fees [{ sum, name, per }] сразу под описанием, «Взносы PNG», в PDF и визитке;
+       всё бесплатно — «Взносов нет»; не знаем, берут ли деньги, — «Взносы — уточняем» (только у карточки, которая ещё не на сайте) */
+    ...(o.kind === 'firm' ? {} : { fees: (o.fees || []).slice(), feeFree: o.free === true, feeDonation: o.free === true && /пожертв/i.test(o.fee || ''),
+      feeText: o.free === true || (o.fees || []).length ? '' : (o.fee || ''), feeNeed: o.free !== true && !(o.fees || []).length && !o.fee })
   }));
   const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
   const DISC = 'Карточку заполнила сама организация, она отвечает за её содержание. «Свои люди» не участвуют в работе организации и не отвечают за её помощь, курсы и события. Обо всём договаривайся напрямую с организацией.';
@@ -50,14 +54,16 @@
     side: s => { const o = s.org, h = o.head || {};
       const nd = typeof needOf === 'function' ? needOf(s) : {}, UTQ = '<span class="need">уточняем</span>';   // «уточняем» у карточки, которая ещё не на сайте (12.10.2026)
       return `<div class="d-block"><h4>Форма<button type="button" class="qh" data-help="form" aria-label="Подсказка: ферайн и фонд" aria-expanded="false">?</button></h4><span>${nd.form ? UTQ : esc(FORMS[o.form] || o.form || '—')}</span></div>`
-        + (o.fee ? `<div class="d-block"><h4>${o.kind === 'firm' ? 'Цены' : 'Взнос'}</h4><span>${esc(o.fee)}</span></div>` : '')
+        + (o.fee && o.kind === 'firm' ? `<div class="d-block"><h4>Цены</h4><span>${esc(o.fee)}</span></div>` : '')   // взносы некоммерческих — блок «Взносы» под описанием (движок, feeBlock)
         + (nd.head ? `<div class="d-block"><h4>Руководитель<button type="button" class="qh" data-help="head" aria-label="Подсказка: руководитель" aria-expanded="false">?</button></h4>${UTQ}</div>` : '')
-        + (h.name && !nd.head ? `<div class="d-block"><h4>Руководитель<button type="button" class="qh" data-help="head" aria-label="Подсказка: руководитель" aria-expanded="false">?</button></h4><span>${esc(h.name)}${h.role ? ' · ' + esc(h.role) : ''}</span>${h.spec ? `<p><a href="../#${/^#preview=/.test(location.hash) && typeof OKKEY === 'object' && OKKEY[s.id] ? 'preview=' + esc(h.spec) + '.' + esc(OKKEY[s.id]) : esc(h.spec)}">Карточка в справочнике специалистов →</a></p>` : ''}</div>` : '')
+        + (h.name && !nd.head ? `<div class="d-block"><h4>Руководитель<button type="button" class="qh" data-help="head" aria-label="Подсказка: руководитель" aria-expanded="false">?</button></h4><span>${esc(h.name)}${nd.headSurname ? ' <span class="need">фамилия — уточняем</span>' : ''}${h.role ? ' · ' + esc(h.role) : ''}</span>${h.spec ? `<p><a href="../#${/^#preview=/.test(location.hash) && typeof OKKEY === 'object' && OKKEY[s.id] ? 'preview=' + esc(h.spec) + '.' + esc(OKKEY[s.id]) : esc(h.spec)}">Карточка в справочнике специалистов →</a></p>` : ''}</div>` : '')
         + `<div class="disc-box"><b>Важно</b><p>${esc(o.kind === 'firm' ? DISC_FIRM : DISC)}</p></div>`; },
     /* предпросмотр по ссылке и режим Ирины: занятия, события и мастер-классы пробной карточки показывает сам движок (pvAfisha в index.html, 12.10.2026) */
     main: s => '',
     /* на карточке в списке: руководитель фирмы и пометка «… · размещение бесплатно» с зелёным сердечком (знак «некоммерческое», 12.10.2026) */
     line: s => { const o = s.org, h = o.head || {}, b = badgeOf(o);
-      return (o.kind === 'firm' && h.name && !/уточн/i.test(h.name) ? `<div class="firm">руководитель: ${esc(h.name)}</div>` : '') + (b ? `<div class="free-line">${esc(b)}</div>` : ''); }
+      const fr = (o.fees || []).filter(f => f && f.name && isFinite(+f.sum) && f.sum !== '' && f.sum != null), min = fr.length ? Math.min(...fr.map(f => +f.sum)) : null;
+      return (o.kind === 'firm' && h.name && !/уточн/i.test(h.name) ? `<div class="firm">руководитель: ${esc(h.name)}</div>` : '') + (b ? `<div class="free-line">${esc(b)}</div>` : '')
+        + (o.kind !== 'firm' && fr.length ? `<div class="firm fee-line">${fr.length > 1 ? 'взносы от' : 'взнос'} ${typeof chf === 'function' ? chf(min) : 'CHF ' + min}${fr.length === 1 && fr[0].per ? ' ' + esc(fr[0].per) : ''}</div>` : ''); }
   };
 })();

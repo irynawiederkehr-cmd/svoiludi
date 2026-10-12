@@ -388,6 +388,7 @@ a.bot:hover{color:#B98324}
 /* «уточняем» — поля, без которых карточку не разместить (12.10.2026): подсвечены маркером, видят только Ирина и человек в предпросмотре */
 .need{display:inline-block;background:#FFEFB8;border:1.5px dashed #D9A43A;color:#6B4A10;border-radius:8px;padding:1px 8px;font-weight:700;font-size:.92em;line-height:1.4;white-space:normal}
 .place.need{display:inline-flex;align-items:center;gap:4px}
+:is(.qm-title,h3,.pp-name,.vz-name)>.need{font:700 .9rem/1.4 var(--body,Manrope,sans-serif);vertical-align:middle;margin-left:4px;letter-spacing:0}   /* «Фамилия — уточняем» у имени (12.10.2026) */
 .place.need b{color:#6B4A10}
 .ph.none.need-ph{background:#FFF6D6;border-color:#D9A43A;color:#6B4A10;align-content:center;gap:6px}
 .ph.none.need-ph .need{font-size:.85em;padding:0 6px}
@@ -613,6 +614,8 @@ a.bot:hover{color:#B98324}
 .pv-box button[disabled]{opacity:.5;cursor:not-allowed}
 .pv-box .pv-done{font-size:.98rem;font-weight:600;color:inherit;opacity:1}
 .pv-small{font-size:.8rem;color:var(--muted)}
+.fee-list{list-style:none;margin:0;padding:6px 14px;background:var(--paper,#FFFCF8);border:1px solid var(--line);border-radius:14px}.fee-list li{display:flex;gap:14px;align-items:baseline;padding:7px 0;border-bottom:1px dashed var(--line)}.fee-list li:last-child{border-bottom:0}.fee-list span{flex:1;min-width:0}.fee-list b{white-space:nowrap;font-family:var(--display);font-weight:400;font-size:1.1rem;text-align:right}.fee-list b small{display:inline;margin-left:5px;font-family:var(--body,inherit);font-size:.78rem;color:var(--muted);font-weight:600}
+.fee-acts{display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px}.fee-acts .btn{margin:0}.fee-acts small{color:var(--muted);font-size:.8rem;line-height:1.4;flex:1 1 220px}.fee-free{margin:0}
 .pv-pl{list-style:none;margin:0;padding:0;background:var(--paper,#FFFCF8);border-radius:12px;padding:6px 12px}.pv-pl li{display:flex;gap:12px;align-items:baseline;padding:6px 0;border-bottom:1px dashed var(--line)}.pv-pl li:last-child{border-bottom:0}.pv-pl span{flex:1}.pv-pl small{display:block;color:var(--muted);font-size:.8rem}.pv-pl b{white-space:nowrap;font-family:var(--display);font-weight:400;font-size:1.05rem}
 .adm-sec{display:flex;flex-direction:column;gap:6px;padding-top:6px}
 .adm-sec+.adm-sec{border-top:1px dashed #4F5E3E;margin-top:4px;padding-top:10px}
@@ -683,6 +686,17 @@ a.bot:hover{color:#B98324}
 .chk label.off{opacity:.45}
 .chk label{flex-wrap:nowrap}.chk input{flex:none}
 
+/* меню взносов в заявке (12.10.2026): строка «CHF сумма · название · как часто · ✕», на телефоне — по одному полю в строке */
+.fee-rows{display:flex;flex-direction:column;gap:10px}
+.fee-row{display:grid;grid-template-columns:150px minmax(0,1fr) 44px;gap:8px;align-items:stretch;padding:10px;border:1.5px dashed var(--line);border-radius:16px;background:var(--paper,#FFFCF8)}
+.fee-row .fee-x{border:1.5px solid var(--line);background:transparent;border-radius:12px;color:var(--muted);font-size:1rem;cursor:pointer;min-height:50px}
+.fee-row .fee-x:hover{color:#B8472E;border-color:#B8472E}
+.fee-row [data-fee=per]{grid-column:1/3;grid-row:2;max-width:300px}
+.fee-add{align-self:flex-start;margin:10px 0 2px}
+.f.miss .fee-row{border-color:#C8553D}
+@media (max-width:760px){.fee-row{grid-template-columns:minmax(0,1fr) 44px}.fee-row .zcur{grid-column:1;grid-row:1}.fee-row [data-fee=name]{grid-column:1/-1;grid-row:2}.fee-row [data-fee=per]{grid-column:1/-1;grid-row:3;max-width:none}.fee-row .fee-x{grid-column:2;grid-row:1}}
+.fee-line{color:var(--brown,#4F5E3E)!important;font-weight:700}
+
 /* плитка организации без логотипа (решение Ирины 12.10.2026: «отработай красивый дизайн»): медальон со значком направления на мягком фоне цвета направления */
 .ph.org-ico{position:relative;display:grid;place-items:center;overflow:hidden;border:1px solid color-mix(in srgb,var(--oc,#4F5E3E) 24%,#fff)!important;border-style:solid!important;
   background:radial-gradient(120% 90% at 85% 100%,color-mix(in srgb,var(--oc,#4F5E3E) 26%,#FFFCF8) 0%,transparent 60%),linear-gradient(160deg,color-mix(in srgb,var(--oc,#4F5E3E) 8%,#FFFCF8),color-mix(in srgb,var(--oc,#4F5E3E) 16%,#FFFCF8))!important}
@@ -691,7 +705,7 @@ a.bot:hover{color:#B98324}
 .ph.org-ico svg{position:relative;width:46%;height:46%}
 #qmCard>.free-line{margin:2px 0 14px;font-size:.88rem}
 </style>
-<!--i18n--><link rel="alternate" hreflang="ru" href="https://svoiludi.ch/organizacii/"><link rel="alternate" hreflang="uk" href="https://svoiludi.ch/uk/organizacii/"><script>(function(){try{if(localStorage.getItem('svoiludiLang')==='uk'&&!/[?&]lang=ru/.test(location.search))location.replace('/uk/organizacii/'+location.search+location.hash);}catch(e){}})();</script><!--i18n--></head>
+</head>
 <body>
 
 <style id="nav-chips">
@@ -852,8 +866,14 @@ a.bot:hover{color:#B98324}
       <div class="f"><label for="o-cities">Другие города, где вы встречаетесь</label><input id="o-cities" data-a="Другие города" placeholder="например: Винтертур, Баден"></div>
       <h3 class="zh3">Деньги</h3>
       <div class="f"><label for="o-feek">Что платят люди <s>*</s><button type="button" class="qh" data-help="feek" aria-label="Подсказка: что платят люди" aria-expanded="false">?</button></label><select id="o-feek" data-a="Что платят люди"></select></div>
-      <div class="f" data-zif="o-feek:member|lesson|course|ticket|prices" hidden><label for="o-fee">Сумма <s>*</s></label><div class="zcur"><span>CHF</span><input id="o-fee" type="number" min="0" step="0.5" inputmode="decimal" data-a="Сумма, CHF" placeholder="например: 30"></div><small>Конечная: со всеми обязательными расходами.</small></div>
-      <div class="f" data-zif="o-feek:member|lesson|course|ticket|prices" hidden><label for="o-feeper">За что <s>*</s></label><select id="o-feeper" data-a="За что"><option value="">Выберите</option><option>в год</option><option>в месяц</option><option>за занятие</option><option>за курс</option><option>за билет</option><option>от, за обед или блюдо</option><option>от, за услугу</option></select></div>
+      <div class="f fee-ed" id="o-feef" data-zif="o-feek:fees" hidden><label>Взносы и плата <s>*</s><button type="button" class="qh" data-help="feesForm" aria-label="Подсказка: взносы и плата" aria-expanded="false">?</button></label>
+        <div class="fee-rows" id="o-fees"></div>
+        <button class="btn ghost fee-add" type="button" id="o-feeadd">+ Добавить ещё взнос</button>
+        <small>Каждый взнос — отдельной строкой: сумма в франках («CHF» уже стоит) и как этот взнос у вас называется. Строк можно добавить сколько угодно. На карточке взносы будут списком, который можно скачать картинкой.</small>
+        <datalist id="o-feenames"><option value="Членский взнос"></option><option value="Семейный членский взнос"></option><option value="Вступительный взнос"></option><option value="Взнос для студентов и пенсионеров"></option><option value="Плата за занятие"></option><option value="Абонемент на месяц"></option><option value="Плата за учебный год"></option><option value="Взнос за семестр"></option><option value="Плата за курс"></option><option value="Плата за лагерь"></option><option value="Взнос за материалы"></option><option value="Билет на событие"></option><option value="Детский билет"></option><option value="Партнёрский пакет для фирм"></option></datalist>
+      </div>
+      <div class="f" data-zif="o-feek:prices" hidden><label for="o-fee">Сумма <s>*</s></label><div class="zcur"><span>CHF</span><input id="o-fee" type="number" min="0" step="0.5" inputmode="decimal" data-a="Сумма, CHF" placeholder="например: 30"></div><small>Конечная: со всеми обязательными расходами.</small></div>
+      <div class="f" data-zif="o-feek:prices" hidden><label for="o-feeper">За что <s>*</s></label><select id="o-feeper" data-a="За что"><option value="">Выберите</option><option>в год</option><option>в месяц</option><option>за занятие</option><option>за курс</option><option>за билет</option><option>от, за обед или блюдо</option><option>от, за услугу</option></select></div>
       <h3 class="zh3">Как прийти</h3>
       <div class="f"><label for="o-joink">Как прийти или записаться</label><select id="o-joink" data-a="Как прийти или записаться"><option value="">Выберите</option><option value="come">Просто приходите</option><option value="wa">Запись в WhatsApp</option><option value="tg">Запись в Telegram</option><option value="mail">Запись по e-mail</option><option value="tel">Запись по телефону</option><option value="site">Запись на сайте</option></select></div>
       <div class="f"><label>Дни встреч или работы</label><div class="chk" id="o-days" data-l="Дни"></div></div>
@@ -864,7 +884,7 @@ a.bot:hover{color:#B98324}
         <p class="zmsg" data-zl="msg" role="status" hidden></p>
         <div data-zl="prof" hidden></div>
       </div>
-      <div class="f"><label for="o-head">Руководитель: имя и должность<button type="button" class="qh" data-help="head" aria-label="Подсказка: руководитель" aria-expanded="false">?</button></label><input id="o-head" data-a="Руководитель (имя и должность)" data-zfill="name" placeholder="например: Ольга Коваленко, директор"><small>Для фирмы обязательно, имя и должность будут на карточке. Ферайну и фонду — по желанию.</small></div>
+      <div class="f"><label for="o-head">Руководитель: имя, фамилия и должность<button type="button" class="qh" data-help="head" aria-label="Подсказка: руководитель" aria-expanded="false">?</button></label><input id="o-head" data-a="Руководитель (имя и должность)" data-zfill="name" placeholder="например: Ольга Коваленко, владелица"><small>У фирмы обязательно: её владелец, имя и фамилия полностью, они будут на карточке. Ферайну и фонду — по желанию.</small></div>
       <div class="f" data-zcard hidden><label for="o-head-role">Должность руководителя</label><input id="o-head-role" data-a="Должность руководителя" placeholder="например: директор, председатель правления"></div>
       <div class="f" data-zcard hidden style="display:none"><label for="o-head-spec">Карточка руководителя в справочнике</label><textarea id="o-head-spec" data-a="Карточка руководителя в справочнике" data-zfill="ref" rows="2"></textarea></div>
       <div class="f"><label for="o-email">E-mail организации <s>*</s></label><input id="o-email" type="email" data-a="E-mail организации" autocomplete="email" placeholder="info@example.ch"></div>
@@ -874,10 +894,10 @@ a.bot:hover{color:#B98324}
       <div class="f"><label for="o-ig">Instagram</label><input id="o-ig" data-a="Instagram" placeholder="https://www.instagram.com/…"></div>
       <div class="f"><label for="o-fb">Facebook</label><input id="o-fb" data-a="Facebook" placeholder="https://www.facebook.com/…"></div>
       <div class="f"><label for="o-phone">Телефон</label><input id="o-phone" type="tel" data-a="Телефон" autocomplete="tel" placeholder="+41 …"></div>
-      <div class="f"><label for="o-board">Кто подтвердит карточку: член правления или руководитель фирмы <s>*</s><button type="button" class="qh" data-help="board" aria-label="Подсказка: кто подтверждает карточку" aria-expanded="false">?</button></label><input id="o-board" data-a="Кто подтвердит карточку" autocomplete="name" placeholder="имя и фамилия"></div>
+      <div class="f"><label for="o-board">Кто подтвердит карточку: владелец фирмы или член правления ферайна или фонда <s>*</s><button type="button" class="qh" data-help="board" aria-label="Подсказка: кто подтверждает карточку" aria-expanded="false">?</button></label><input id="o-board" data-a="Кто подтвердит карточку" autocomplete="name" placeholder="имя и фамилия полностью"></div>
       <div class="f"><label for="o-board-mail">E-mail того, кто подтвердит</label><input id="o-board-mail" type="email" data-a="E-mail того, кто подтвердит" placeholder="name@example.ch"><small>Только чтобы связаться с этим человеком. Подтверждение карточки и всех записей организации всегда идёт через e-mail организации, он один для всех подтверждений.</small></div>
     </div>
-    <div class="zok"><input type="checkbox" id="o-own"><label for="o-own">Мы подаём заявку только за свою организацию: я член правления, руководитель или сотрудник по её поручению. За другие организации, людей и фирмы заявки и записи мы не размещаем. Знаем: за это могут исключить из проекта (<a href="https://svoiludi.ch/usloviya/#vy">условия размещения</a>).</label></div>
+    <div class="zok"><input type="checkbox" id="o-own"><label for="o-own">Заявку подаёт хозяин организации: владелец фирмы или член правления ферайна или фонда. Наёмные сотрудники заявку не подают и как руководитель у нас не размещаются. Мы подаём заявку только за свою организацию. За другие организации, людей и фирмы заявки и записи мы не размещаем. Знаем: за это могут исключить из проекта (<a href="https://svoiludi.ch/usloviya/#vy">условия размещения</a>).</label></div>
     <div class="zok"><input type="checkbox" id="o-law"><label for="o-law">Деятельность организации законна. Всё, что мы будем размещать, — наша собственная деятельность и в нашей компетенции: у нас есть нужные знания, опыт и разрешения.</label></div>
     <div class="zok"><input type="checkbox" id="o-ok"><label for="o-ok">Даю согласие от имени организации, чтобы «Свои люди» (Alonira.ch AG) обработали данные из этой заявки, проверили организацию и после подтверждения письмом опубликовали карточку. Я вправе подать заявку от имени организации. Подробнее — в <a href="https://svoiludi.ch/privacy/">политике конфиденциальности</a>.</label></div>
     <div class="acts"><button class="btn" type="button" id="orgSend">Отправить заявку</button></div>
@@ -1008,7 +1028,7 @@ function ico(name, line = '#2E5A88', fill, size = 24){
 const AVATAR_SVG = '<svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="46" fill="#FFFCF8" stroke="#6E4F3C" stroke-width="3"/><g transform="rotate(22.5 50 50)"><path d="M50 50 C42 40 43 24 50 15 C57 24 58 40 50 50Z" fill="#E3E6D6" stroke="#66704F" stroke-width="2"/></g><g transform="rotate(67.5 50 50)"><path d="M50 50 C42 40 43 24 50 15 C57 24 58 40 50 50Z" fill="#E3E6D6" stroke="#66704F" stroke-width="2"/></g><g transform="rotate(112.5 50 50)"><path d="M50 50 C42 40 43 24 50 15 C57 24 58 40 50 50Z" fill="#E3E6D6" stroke="#66704F" stroke-width="2"/></g><g transform="rotate(157.5 50 50)"><path d="M50 50 C42 40 43 24 50 15 C57 24 58 40 50 50Z" fill="#E3E6D6" stroke="#66704F" stroke-width="2"/></g><g transform="rotate(202.5 50 50)"><path d="M50 50 C42 40 43 24 50 15 C57 24 58 40 50 50Z" fill="#E3E6D6" stroke="#66704F" stroke-width="2"/></g><g transform="rotate(247.5 50 50)"><path d="M50 50 C42 40 43 24 50 15 C57 24 58 40 50 50Z" fill="#E3E6D6" stroke="#66704F" stroke-width="2"/></g><g transform="rotate(292.5 50 50)"><path d="M50 50 C42 40 43 24 50 15 C57 24 58 40 50 50Z" fill="#E3E6D6" stroke="#66704F" stroke-width="2"/></g><g transform="rotate(337.5 50 50)"><path d="M50 50 C42 40 43 24 50 15 C57 24 58 40 50 50Z" fill="#E3E6D6" stroke="#66704F" stroke-width="2"/></g><g transform="rotate(0.0 50 50)"><path d="M50 50 C45 43 45 32 50 26 C55 32 55 43 50 50Z" fill="#EADFCF" stroke="#6E4F3C" stroke-width="2"/></g><g transform="rotate(45.0 50 50)"><path d="M50 50 C45 43 45 32 50 26 C55 32 55 43 50 50Z" fill="#EADFCF" stroke="#6E4F3C" stroke-width="2"/></g><g transform="rotate(90.0 50 50)"><path d="M50 50 C45 43 45 32 50 26 C55 32 55 43 50 50Z" fill="#EADFCF" stroke="#6E4F3C" stroke-width="2"/></g><g transform="rotate(135.0 50 50)"><path d="M50 50 C45 43 45 32 50 26 C55 32 55 43 50 50Z" fill="#EADFCF" stroke="#6E4F3C" stroke-width="2"/></g><g transform="rotate(180.0 50 50)"><path d="M50 50 C45 43 45 32 50 26 C55 32 55 43 50 50Z" fill="#EADFCF" stroke="#6E4F3C" stroke-width="2"/></g><g transform="rotate(225.0 50 50)"><path d="M50 50 C45 43 45 32 50 26 C55 32 55 43 50 50Z" fill="#EADFCF" stroke="#6E4F3C" stroke-width="2"/></g><g transform="rotate(270.0 50 50)"><path d="M50 50 C45 43 45 32 50 26 C55 32 55 43 50 50Z" fill="#EADFCF" stroke="#6E4F3C" stroke-width="2"/></g><g transform="rotate(315.0 50 50)"><path d="M50 50 C45 43 45 32 50 26 C55 32 55 43 50 50Z" fill="#EADFCF" stroke="#6E4F3C" stroke-width="2"/></g><circle cx="50" cy="50" r="7" fill="#B98324"/></svg>';
 
 </script>
-<script src="/data/specialists.js?v=4939a3ea"></script>
+<script src="/data/specialists.js?v=dd925aa4"></script>
 <script src="/data/vacancies.js?v=3527d207"></script>
 <script src="/data/organizations.js?v=c5a6d3be"></script>
 <script>
@@ -1117,7 +1137,11 @@ window.SVL_ORG_ICONS = {
     places: placesOf(o), online: !!o.online, onlineCH: o.onlineCH || '', onlineTier: o.onlineTier, tiers: o.tiers || [], paidUntil: o.paidUntil || '',
     langs: o.langs || [], about: o.about || '', services: o.offers || [], format: o.join || '', contacts: Object.assign({}, o.contacts || {}),
     prices: o.prices || [], pricesOk: !!o.pricesOk, pricesDate: o.pricesDate || '',
-    invite: o.invite, todo: o.todo || []   // приглашение в WhatsApp у скрытой пробной карточки и заметки — только в режиме Ирины (12.10.2026)
+    invite: o.invite, todo: o.todo || [],   // приглашение в WhatsApp у скрытой пробной карточки и заметки — только в режиме Ирины (12.10.2026)
+    /* взносы (правила Ирины 12.10.2026, 14:21 и 14:23): у всех, кроме фирм, — список fees [{ sum, name, per }] сразу под описанием, «Взносы PNG», в PDF и визитке;
+       всё бесплатно — «Взносов нет»; не знаем, берут ли деньги, — «Взносы — уточняем» (только у карточки, которая ещё не на сайте) */
+    ...(o.kind === 'firm' ? {} : { fees: (o.fees || []).slice(), feeFree: o.free === true, feeDonation: o.free === true && /пожертв/i.test(o.fee || ''),
+      feeText: o.free === true || (o.fees || []).length ? '' : (o.fee || ''), feeNeed: o.free !== true && !(o.fees || []).length && !o.fee })
   }));
   const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
   const DISC = 'Карточку заполнила сама организация, она отвечает за её содержание. «Свои люди» не участвуют в работе организации и не отвечают за её помощь, курсы и события. Обо всём договаривайся напрямую с организацией.';
@@ -1130,15 +1154,17 @@ window.SVL_ORG_ICONS = {
     side: s => { const o = s.org, h = o.head || {};
       const nd = typeof needOf === 'function' ? needOf(s) : {}, UTQ = '<span class="need">уточняем</span>';   // «уточняем» у карточки, которая ещё не на сайте (12.10.2026)
       return `<div class="d-block"><h4>Форма<button type="button" class="qh" data-help="form" aria-label="Подсказка: ферайн и фонд" aria-expanded="false">?</button></h4><span>${nd.form ? UTQ : esc(FORMS[o.form] || o.form || '—')}</span></div>`
-        + (o.fee ? `<div class="d-block"><h4>${o.kind === 'firm' ? 'Цены' : 'Взнос'}</h4><span>${esc(o.fee)}</span></div>` : '')
+        + (o.fee && o.kind === 'firm' ? `<div class="d-block"><h4>Цены</h4><span>${esc(o.fee)}</span></div>` : '')   // взносы некоммерческих — блок «Взносы» под описанием (движок, feeBlock)
         + (nd.head ? `<div class="d-block"><h4>Руководитель<button type="button" class="qh" data-help="head" aria-label="Подсказка: руководитель" aria-expanded="false">?</button></h4>${UTQ}</div>` : '')
-        + (h.name && !nd.head ? `<div class="d-block"><h4>Руководитель<button type="button" class="qh" data-help="head" aria-label="Подсказка: руководитель" aria-expanded="false">?</button></h4><span>${esc(h.name)}${h.role ? ' · ' + esc(h.role) : ''}</span>${h.spec ? `<p><a href="../#${/^#preview=/.test(location.hash) && typeof OKKEY === 'object' && OKKEY[s.id] ? 'preview=' + esc(h.spec) + '.' + esc(OKKEY[s.id]) : esc(h.spec)}">Карточка в справочнике специалистов →</a></p>` : ''}</div>` : '')
+        + (h.name && !nd.head ? `<div class="d-block"><h4>Руководитель<button type="button" class="qh" data-help="head" aria-label="Подсказка: руководитель" aria-expanded="false">?</button></h4><span>${esc(h.name)}${nd.headSurname ? ' <span class="need">фамилия — уточняем</span>' : ''}${h.role ? ' · ' + esc(h.role) : ''}</span>${h.spec ? `<p><a href="../#${/^#preview=/.test(location.hash) && typeof OKKEY === 'object' && OKKEY[s.id] ? 'preview=' + esc(h.spec) + '.' + esc(OKKEY[s.id]) : esc(h.spec)}">Карточка в справочнике специалистов →</a></p>` : ''}</div>` : '')
         + `<div class="disc-box"><b>Важно</b><p>${esc(o.kind === 'firm' ? DISC_FIRM : DISC)}</p></div>`; },
     /* предпросмотр по ссылке и режим Ирины: занятия, события и мастер-классы пробной карточки показывает сам движок (pvAfisha в index.html, 12.10.2026) */
     main: s => '',
     /* на карточке в списке: руководитель фирмы и пометка «… · размещение бесплатно» с зелёным сердечком (знак «некоммерческое», 12.10.2026) */
     line: s => { const o = s.org, h = o.head || {}, b = badgeOf(o);
-      return (o.kind === 'firm' && h.name && !/уточн/i.test(h.name) ? `<div class="firm">руководитель: ${esc(h.name)}</div>` : '') + (b ? `<div class="free-line">${esc(b)}</div>` : ''); }
+      const fr = (o.fees || []).filter(f => f && f.name && isFinite(+f.sum) && f.sum !== '' && f.sum != null), min = fr.length ? Math.min(...fr.map(f => +f.sum)) : null;
+      return (o.kind === 'firm' && h.name && !/уточн/i.test(h.name) ? `<div class="firm">руководитель: ${esc(h.name)}</div>` : '') + (b ? `<div class="free-line">${esc(b)}</div>` : '')
+        + (o.kind !== 'firm' && fr.length ? `<div class="firm fee-line">${fr.length > 1 ? 'взносы от' : 'взнос'} ${typeof chf === 'function' ? chf(min) : 'CHF ' + min}${fr.length === 1 && fr[0].per ? ' ' + esc(fr[0].per) : ''}</div>` : ''); }
   };
 })();
 
@@ -1294,16 +1320,46 @@ const ktRu = c => (CANTONS[c] || [, c])[1];
    у такой карточки в контактах всегда есть строки «Телефон», «E-mail» и «Instagram»; пустая — «уточняем», и мы просим её во втором письме.
    Телефон и Instagram без обязательности (NEED_OPT): карточка выйдет и без них, но мы их всегда спрашиваем. */
 const IS_ORG_PAGE = !!window.SVL_ORG;
+const oneWord = n => String(n || '').trim().split(/\s+/).filter(Boolean).length < 2;   // в имени нет фамилии
 const needOf = s => { if (!s || s.sample || s.status === 'активен') return {}; const c = s.contacts || {}, p = (s.places || [])[0] || {};
   const h = IS_ORG_PAGE ? ((s.org || {}).head || {}) : {};
   return { photo: !IS_ORG_PAGE && !s.photo, place: !p.canton, email: !c.email, langs: !(s.langs || []).length, format: !IS_ORG_PAGE && !String(s.format || '').trim(), reg: !s.uid && !s.ahv, phone: !c.phone, insta: !c.instagram,
-    ...(IS_ORG_PAGE ? { head: !h.name || /уточн/i.test(h.name), form: !(s.org || {}).form } : {}) }; };
-const NEED_T = { photo: 'фото', place: 'кантон и адрес', email: 'e-mail (на него приходят подтверждения)', langs: 'языки', format: 'формат работы', reg: IS_ORG_PAGE ? 'регистрация (UID фирмы или устав ферайна)' : 'регистрация (UID или письмо кассы AHV)', head: 'руководитель', form: 'форма (ферайн, фонд, фирма)', phone: 'телефон', insta: 'Instagram' };
+    surname: !IS_ORG_PAGE && oneWord(s.name),   // имя и фамилия обязательны (правило Ирины 12.10.2026, 14:25)
+    ...(IS_ORG_PAGE ? { head: !h.name || /уточн/i.test(h.name), headSurname: !!h.name && !/уточн/i.test(h.name) && oneWord(h.name), form: !(s.org || {}).form, fees: !!s.feeNeed } : {}) }; };
+const NEED_T = { photo: 'фото', place: 'кантон и адрес', email: 'e-mail (на него приходят подтверждения)', langs: 'языки', format: 'формат работы', reg: IS_ORG_PAGE ? 'регистрация (UID фирмы или устав ферайна)' : 'регистрация (UID или письмо кассы AHV)', head: 'руководитель', form: 'форма (ферайн, фонд, фирма)', phone: 'телефон', insta: 'Instagram', surname: 'фамилия', headSurname: 'фамилия руководителя', fees: 'взносы (сколько и за что платят люди или «для людей всё бесплатно»)' };
 const NEED_OPT = ['phone', 'insta'];   // спрашиваем всегда, но без них карточка на сайт выйти может
 const needReq = s => Object.entries(needOf(s)).filter(([k, v]) => v && !NEED_OPT.includes(k)).map(([k]) => NEED_T[k]);
 const needOpt = s => Object.entries(needOf(s)).filter(([k, v]) => v && NEED_OPT.includes(k)).map(([k]) => NEED_T[k]);
 const needList = s => Object.entries(needOf(s)).filter(([, v]) => v).map(([k]) => NEED_T[k]);
 const UT = t => `<span class="need">${t ? esc(t) + ' — ' : ''}уточняем</span>`;
+/* ссылки в тексте карточки (правило Ирины 12.10.2026, 14:27: «если человек указывает сервис для букинга, вставляй ссылку на сервис под название»):
+   в данных пишем [DIKIDI](https://dikidi.net/…) — на карточке и в PDF это ссылка под названием, в визитке, поиске и письмах — просто название */
+const MDL = /\[([^\]\n]+)\]\((https:\/\/[^)\s]+)\)/g;
+const plain = t => String(t ?? '').replace(MDL, '$1');
+const rich = t => esc(t).replace(MDL, (m, l, u) => `<a href="${u}" ${ext}>${l}</a>`);
+const richPdf = t => esc(t).replace(MDL, (m, l, u) => `<a data-href="${u}">${l}</a>`);
+/* ВЗНОСЫ ОРГАНИЗАЦИИ (правила Ирины 12.10.2026, 14:21 и 14:23): у ферайна, общества, школы — список взносов «CHF сумма · название · как часто»,
+   сколько угодно строк. На карточке — сразу под описанием, с кнопкой «Взносы PNG»; тот же список — в PDF карточки, визитке и письме «Подтверждаю».
+   Данные — s.fees [{ sum, name, per }] (adapter.js из data/organizations.js); s.feeFree — для людей всё бесплатно, s.feeDonation — можно пожертвование,
+   s.feeNeed — взносы не знаем (пробная карточка: «Взносы — уточняем»). У специалистов этих полей нет — ничего не рисуется. */
+const chf = n => 'CHF ' + Number(n).toLocaleString('de-CH', { minimumFractionDigits: Number.isInteger(+n) ? 0 : 2, maximumFractionDigits: 2 });
+const feeRows = s => (s.fees || []).filter(f => f && String(f.name || '').trim() && f.sum !== '' && f.sum != null && isFinite(+f.sum));
+const feeFrom = s => { const r = feeRows(s); return r.length ? Math.min(...r.map(f => +f.sum)) : null; };
+const FEE_NOTE = 'Суммы указала сама организация. Точные условия уточняй у организации.';
+const feeFreeTxt = s => 'Взносов нет: для людей всё бесплатно.' + (s.feeDonation ? ' Можно оставить пожертвование — только по желанию.' : '');
+const feeTxt = s => feeRows(s).map(f => `— ${plain(f.name)}: ${chf(f.sum)}${f.per ? ' ' + f.per : ''}`).join('\n');
+function feeBlock(s){
+  if (!('fees' in s)) return '';
+  const r = feeRows(s), h = `<h4>Взносы<button type="button" class="qh" data-help="fees" aria-label="Подсказка: взносы" aria-expanded="false">?</button></h4>`;
+  if (r.length) return `<div class="d-block fee-block">${h}<ul class="fee-list">${r.map(f => `<li><span>${rich(f.name)}</span><b>${chf(f.sum)}${f.per ? `<small>${esc(f.per)}</small>` : ''}</b></li>`).join('')}</ul>
+    <div class="fee-acts"><button class="btn ghost" type="button" data-png-fees="${esc(s.id)}" data-tip="Взносы картинкой PNG: сохранится в галерею телефона, удобно переслать">Взносы PNG</button><small>${FEE_NOTE}</small></div></div>`;
+  if (s.feeFree) return `<div class="d-block fee-block">${h}<p class="fee-free">${feeFreeTxt(s)}</p></div>`;
+  if (needOf(s).fees) return `<div class="d-block fee-block">${h}${UT()}</div>`;
+  return s.feeText ? `<div class="d-block fee-block">${h}<p>${rich(s.feeText)}</p></div>` : '';
+}
+const feePdf = s => { if (!('fees' in s)) return ''; const r = feeRows(s);
+  return r.length ? `<div class="pp-sec"><h4>Взносы</h4><div style="display:grid;grid-template-columns:1fr auto;gap:3px 18px;max-width:560px">${r.map(f => `<span>${richPdf(f.name)}</span><b style="white-space:nowrap">${chf(f.sum)}${f.per ? ' ' + esc(f.per) : ''}</b>`).join('')}</div><p style="font-size:11px;color:#7A6E62;margin-top:4px">${FEE_NOTE}</p></div>`
+    : s.feeFree ? `<div class="pp-sec"><h4>Взносы</h4><p>${feeFreeTxt(s)}</p></div>` : s.feeText ? `<div class="pp-sec"><h4>Взносы</h4><p>${richPdf(s.feeText)}</p></div>` : ''; };
 
 // что скрывает карточку с сайта (пусто — карточка видна)
 function hiddenReason(s){
@@ -1369,7 +1425,7 @@ const pool = () => SPECIALISTS.filter(s => state.hidden || !hiddenReason(s));
 // направления карточки: главное (cat) и второе (cat2, необязательно; 11.10.2026); немецкие слова категорий — для поиска
 const dirsOf = s => [s.cat, s.cat2].filter(Boolean);
 const deOf = sp => { for (const k of Object.values(CATS)){ const i = k.s.indexOf(sp); if (i >= 0) return (k.w || [])[i] || ''; } return ''; };
-const hay = s => norm([s.name, s.role, s.firm, s.about, s.format, ...(s.tags || []).map(t => TAGS[t]), ...dirsOf(s).map(d => CATS[d]?.t), ...(s.specs || []), ...(s.specs || []).map(deOf), ...(s.services || []), ...(s.langs || []), ...s.places.map(p => p.canton + ' ' + ktRu(p.canton) + ' ' + p.address)].join(' '));
+const hay = s => norm([s.name, s.role, s.firm, plain(s.about), plain(s.format), ...(s.tags || []).map(t => TAGS[t]), ...dirsOf(s).map(d => CATS[d]?.t), ...(s.specs || []), ...(s.specs || []).map(deOf), ...(s.services || []), ...(s.fees || []).map(f => f.name), ...(s.langs || []), ...s.places.map(p => p.canton + ' ' + ktRu(p.canton) + ' ' + p.address)].join(' '));
 // фильтр «Кантон → Город» (04.10.2026): город берётся из адреса; в списке городов только те, где в кантоне уже есть специалисты
 const inCanton = s => !state.canton || livePlaces(s).some(p => p.canton === state.canton && (!state.city || p.area || city(p.address) === state.city));
 // «Онлайн по кантону» (onlineCanton — оплачено до): виден во всех городах своего кантона; «Онлайн по всей Швейцарии» (onlineCH) — везде
@@ -1439,7 +1495,7 @@ function card(s, lvl = ''){
   return `<article class="sp${why ? ' off' : ''}${lvl === 'vip' ? ' vip' : lvl === 'партнёр' || lvl === 'vip+' ? ' partner' : ''}" style="--lc:${k.c}">
     ${s.sample ? '<span class="sample" title="Вымышленная организация — так будет выглядеть ваша карточка">Образец</span>' : ''}<div class="sp-sub">${ico(k.i, k.c, null, 16)}<span>${esc(k.t)}</span>${flag}${likeBtn(s)}</div><div class="sp-main">
     <div class="sp-id">${photo(s)}<div>
-      <h3>${esc(s.name)}${isNew(s) ? '<span class="new" title="Новый в справочнике">новый</span>' : ''}</h3>
+      <h3>${esc(s.name)}${needOf(s).surname ? ' ' + UT('Фамилия') : ''}${isNew(s) ? '<span class="new" title="Новый в справочнике">новый</span>' : ''}</h3>
       <div class="role">${esc(s.role)}</div>${s.firm ? `<div class="firm">${esc(s.firm)}</div>` : ''}${SVL_ORG.line(s)}${catsLine(s)}${promoChip(s)}${vacChips(s)}
     </div></div>
     <div class="facts">
@@ -1750,9 +1806,9 @@ document.addEventListener('click', async e => { const b = e.target.closest('[dat
 const mailto = (to, su, body) => `mailto:${to}?subject=${encodeURIComponent(su)}&body=${encodeURIComponent(body)}`;
 const gmail = (to, su, body) => `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(to)}&su=${encodeURIComponent(su)}&body=${encodeURIComponent(body)}`;
 const ownerLetter = s => ({ su: 'Ваша карточка в «Своих людях в Швейцарии» — посмотрите, пожалуйста',
-  body: `Здравствуйте!\n\nЯ подготовила карточку вашей организации для раздела «Организации» в «Своих людях в Швейцарии». Пока её видите только вы. Посмотрите, пожалуйста, всё ли верно: описание, что можно получить, адреса и контакты.\n\n${previewUrl(s)}\n\n${draftPara(s) ? draftPara(s) + '\n\n' : ''}Если всё верно, внизу карточки отметьте галочку и нажмите «Подтверждаю» — и я сразу опубликую карточку. Если что-то не так, нажмите «Нужно исправить» и напишите прямо там, что поменять.\n\nС теплом,\nИрина Вознесенская\n${MAIL}` });
+  body: `Здравствуйте!\n\nЯ подготовила карточку вашей организации для раздела «Организации» в «Своих людях в Швейцарии». Пока её видите только вы. Посмотрите, пожалуйста, всё ли верно: описание, что можно получить, взносы, адреса и контакты.\n\n${previewUrl(s)}\n\n${draftPara(s) ? draftPara(s) + '\n\n' : ''}Если всё верно, внизу карточки отметьте галочку и нажмите «Подтверждаю» — и я сразу опубликую карточку. Если что-то не так, нажмите «Нужно исправить» и напишите прямо там, что поменять.\n\nС теплом,\nИрина Вознесенская\n${MAIL}` });
 const confirmLetter = s => ({ su: `Подтверждаю карточку — ${s.name}${s.num ? ' (' + s.num + ')' : ''}`,
-  body: `Здравствуйте, Ирина!\n\nВсё верно, подтверждаю публикацию карточки нашей организации на сайте «Свои люди в Швейцарии».\nУсловия размещения (https://svoiludi.ch/usloviya/) прочитал(а) и принимаю, в том числе когда карточку снимают и за что исключают из проекта.\n\n${previewUrl(s)}\n\n${s.name}` });
+  body: `Здравствуйте, Ирина!\n\nВсё верно, подтверждаю публикацию карточки нашей организации на сайте «Свои люди в Швейцарии».\nУсловия размещения (https://svoiludi.ch/usloviya/) прочитал(а) и принимаю, в том числе когда карточку снимают и за что исключают из проекта.${feeRows(s).length ? '\n\nВзносы:\n' + feeTxt(s) : s.feeFree ? '\n\n' + feeFreeTxt(s) : ''}\n\n${previewUrl(s)}\n\n${s.name}` });
 const fixLetter = s => ({ su: `Исправления в карточку — ${s.name}${s.num ? ' (' + s.num + ')' : ''}`,
   body: `Здравствуйте, Ирина!\n\nВ моей карточке, пожалуйста, исправьте\n\n— \n\n${previewUrl(s)}\n\n${s.name}` });
 function previewBox(s){
@@ -1891,15 +1947,15 @@ function openCard(id){
   const box = document.getElementById('qmCard');
   box.style.setProperty('--lc', k.c); box.style.setProperty('--lf', `color-mix(in srgb,${k.c} 13%,var(--paper))`);
   box.innerHTML = `<div class="qm-top"><div class="qm-ph">${photo(s)}</div><div class="qm-head">${s.sample ? '<span class="qm-sample">Образец карточки · организация вымышленная</span>' : ''}<span class="sp-sub" style="color:${k.c}">${ico(k.i, k.c, null, 16)}${esc(k.t)}${(() => { const l = state.canton ? tierIn(s, state.canton) : tierBest(s); return l === 'vip' ? ` · ${tierName(s, 'vip')} (платное размещение)` : l === 'партнёр' ? ` · ${tierName(s, 'партнёр')} (платное размещение)` : ''; })()}</span>
-      <h2 class="qm-title" id="qmTitle">${esc(s.name)}</h2><div style="font-family:var(--display);font-size:1.25rem;color:var(--brown)">${esc(s.role)}</div>${s.firm ? `<div class="firm" style="font-size:.95rem;margin-top:4px">${esc(s.firm)}</div>` : ''}</div>
+      <h2 class="qm-title" id="qmTitle">${esc(s.name)}${needOf(s).surname ? ' ' + UT('Фамилия') : ''}</h2><div style="font-family:var(--display);font-size:1.25rem;color:var(--brown)">${esc(s.role)}</div>${s.firm ? `<div class="firm" style="font-size:.95rem;margin-top:4px">${esc(s.firm)}</div>` : ''}</div>
       <button class="qm-close" type="button" aria-label="Закрыть">✕</button></div>
     ${SVL_ORG.head(s)}${promoStrip(s)}
     <div class="d-body">
       <div class="d-col">
-        <div class="d-block"><h4>Что делает организация</h4><p>${esc(s.about)}</p></div>
+        <div class="d-block"><h4>Что делает организация</h4><p>${rich(s.about)}</p></div>${feeBlock(s)}
         <div class="d-block"><h4>Что можно получить</h4><div class="chips svc">${s.services.map(x => `<span>${esc(x)}</span>`).join('')}</div></div>
         ${whereBlock(s)}${SVL_ORG.main(s)}
-        <div class="d-block"><h4>Как прийти или записаться</h4><p>${needOf(s).format ? UT() : esc(s.format)}</p></div>
+        <div class="d-block"><h4>Как прийти или записаться</h4><p>${needOf(s).format ? UT() : rich(s.format)}</p></div>
         <div class="d-block"><h4>Языки</h4><div class="chips">${(s.langs || []).map(l => `<span>${esc(l)}</span>`).join('') || UT()}</div></div>
         ${(s.tags || []).length ? `<div class="d-block"><h4>Для кого и как</h4><div class="d-tags">${s.tags.filter(t => TAGS[t]).map(t => `<span>${esc(TAGS[t])}</span>`).join('')}</div></div>` : ''}
         ${(() => { const vs = vacsOf(s); if (!vs.length) return '';
@@ -1912,7 +1968,7 @@ function openCard(id){
       <div class="d-side">
         <div class="d-block"><h4>Где</h4><div style="display:flex;flex-direction:column;gap:10px">${livePlaces(s).map(placeFull).join('') || (needOf(s).place ? UT('Кантон и адрес') : '')}${s.online ? '<span>и онлайн по видеосвязи</span>' : ''}</div></div>
         <div class="d-block"><h4>Контакты</h4><ul class="ctl">${contacts}</ul></div>${SVL_ORG.side(s)}
-        <div class="card-acts">${likeBtn(s, true)}${s.sample ? '' : `<button type="button" class="vip-q" data-t="${esc(LIKE_TIP)}" aria-label="Что значит сердечко" aria-expanded="false">?</button>`}<button class="btn ghost svb" type="button" data-fav="${esc(s.id)}" aria-pressed="${FAV.has(s.id)}">${saveInner(s)}</button><button class="btn" type="button" data-vcf="${esc(s.id)}" data-tip="Сохранить телефон, e-mail и адрес в контакты телефона или компьютера">В контакты</button><button class="btn ghost" type="button" data-share="${esc(s.id)}">Поделиться</button><button class="btn ghost" type="button" data-png-card="${esc(s.id)}" data-tip="Визитка-картинка PNG: сохранится в галерею телефона, её удобно показать или переслать">Визитка PNG</button>${priceShown(s) ? `<button class="btn ghost" type="button" data-png-price="${esc(s.id)}" data-tip="Прайс-лист картинкой PNG: сохранится в галерею телефона">Прайс-лист PNG</button>` : ''}<button class="btn ghost" type="button" data-pdf-card="${esc(s.id)}" data-tip="Полная карточка для печати и почты">PDF</button></div>
+        <div class="card-acts">${likeBtn(s, true)}${s.sample ? '' : `<button type="button" class="vip-q" data-t="${esc(LIKE_TIP)}" aria-label="Что значит сердечко" aria-expanded="false">?</button>`}<button class="btn ghost svb" type="button" data-fav="${esc(s.id)}" aria-pressed="${FAV.has(s.id)}">${saveInner(s)}</button><button class="btn" type="button" data-vcf="${esc(s.id)}" data-tip="Сохранить телефон, e-mail и адрес в контакты телефона или компьютера">В контакты</button><button class="btn ghost" type="button" data-share="${esc(s.id)}">Поделиться</button><button class="btn ghost" type="button" data-png-card="${esc(s.id)}" data-tip="Визитка-картинка PNG: сохранится в галерею телефона, её удобно показать или переслать">Визитка PNG</button>${priceShown(s) ? `<button class="btn ghost" type="button" data-png-price="${esc(s.id)}" data-tip="Прайс-лист картинкой PNG: сохранится в галерею телефона">Прайс-лист PNG</button>` : ''}${feeRows(s).length ? `<button class="btn ghost" type="button" data-png-fees="${esc(s.id)}" data-tip="Взносы картинкой PNG: сохранится в галерею телефона">Взносы PNG</button>` : ''}<button class="btn ghost" type="button" data-pdf-card="${esc(s.id)}" data-tip="Полная карточка для печати и почты">PDF</button></div>
         ${needOf(s).reg ? `<p class="d-need">${UT(NEED_T.reg[0].toUpperCase() + NEED_T.reg.slice(1))}</p>` : ''}
         <p class="d-note">${s.uid ? `Регистрационный номер ${s.firm ? 'фирмы ' : ''}(UID): <a class="uid" href="${uidUrl(s.uid)}" ${ext} data-tip="Открыть запись в официальном реестре предприятий Швейцарии (uid.admin.ch)">${esc(s.uid)}</a>. ` : ''}${s.checked ? `Данные проверены ${fmtDate(s.checked)}. ` : ''}${s.num ? `Номер карточки ${esc(s.num)}. ` : ''}Мы проверяем регистрацию организации: запись в торговом реестре (Zefix) или устав. Всё остальное в карточке указывает сама организация. Договорённости — напрямую с организацией.</p>
         <p class="report">Нашли ошибку в карточке? <a href="${esc(reportLink(s))}">Сообщить</a></p>
@@ -1967,8 +2023,9 @@ function cardPage(s){
       <div><div class="pp-cat" style="color:${k.c}">${esc(k.t)}${s.specs && s.specs.length ? ' · ' + esc(s.specs.join(', ')) : ''}</div><div class="pp-name">${esc(s.name)}</div><div class="pp-role">${esc(s.role)}</div>${s.firm ? `<div style="font-size:13px;color:#7A6E62;margin-top:3px">${esc(s.firm)}</div>` : ''}</div>
       <div class="pp-sec"><h4>Где</h4>${livePlaces(s).map(p => p.area ? `<div>${areaTxt(p)}</div>` : `<div><a data-href="${esc(maps(p.address))}">${esc(p.address)}</a> · кантон ${esc(ktRu(p.canton))}</div>`).join('')}${s.online ? '<div>и онлайн по видеосвязи</div>' : ''}</div>
       <div class="pp-sec"><h4>Контакты</h4><div class="pp-ct">${pdfContacts(s)}</div></div></div></div>
-    <div class="pp-grid"><div class="pp-sec"><h4>Что делает организация</h4><p>${esc(s.about)}</p></div><div class="pp-sec"><h4>Что можно получить</h4><p>${esc(s.services.join(' · '))}</p></div>
-      <div class="pp-sec"><h4>Как прийти или записаться</h4><p>${esc(s.format)}</p></div><div class="pp-sec"><h4>Языки</h4><p>${esc(s.langs.join(', '))}</p></div></div>
+    <div class="pp-grid"><div class="pp-sec"><h4>Что делает организация</h4><p>${richPdf(s.about)}</p></div><div class="pp-sec"><h4>Что можно получить</h4><p>${esc(s.services.join(' · '))}</p></div>
+      <div class="pp-sec"><h4>Как прийти или записаться</h4><p>${richPdf(s.format)}</p></div><div class="pp-sec"><h4>Языки</h4><p>${esc(s.langs.join(', '))}</p></div></div>
+    ${feePdf(s)}
     ${s.uid ? `<div class="pp-sec"><h4>Регистрационный номер (UID)</h4><a data-href="${esc(uidUrl(s.uid))}">${esc(s.uid)}</a> · проверено ${fmtDate(s.checked)} на uid.admin.ch</div>` : ''}<div class="pp-qr">${qrImg(vcard(s))}<div class="pp-sec"><h4>Карточка на сайте</h4><a data-href="${esc(cardUrl(s))}">${esc(cardUrl(s))}</a><small>QR-код — визитка: наведите камеру телефона, чтобы сохранить контакт.</small></div></div>${pdfFoot}`;
 }
 async function makePdf(pages, file){
@@ -2031,7 +2088,7 @@ const VZ_CSS = `.vz{position:fixed;left:-10000px;top:0;width:540px;min-height:96
 // короткая визитка для QR (имя, фирма, профессия, телефон, e-mail, сайт): код крупнее и считывается даже с экрана
 const vcardShort = s => vcard(s).replace(/\r\n /g, '').split('\r\n').filter(l => !/^(NOTE|ADR|X-SOCIALPROFILE|PHOTO)/.test(l)).join('\r\n');
 function vizitkaNode(s, kind){
-  const price = kind === 'price', k = CATS[s.cat] || CATS.status, c = s.contacts || {};
+  const fees = kind === 'fees', price = kind === 'price' || fees, k = CATS[s.cat] || CATS.status, c = s.contacts || {};
   const av = (document.querySelector('.mark .av') || {}).innerHTML || '';
   const where = livePlaces(s).map(p => p.area ? areaTxt(p) : esc(p.address)).concat(s.online ? ['онлайн по видеосвязи'] : []);
   const ct = ['phone', 'whatsapp', 'email', 'telegram', 'bot', 'instagram', 'facebook', 'site', 'site2'].filter(x => c[x] && !(x === 'whatsapp' && digits(c.whatsapp) === digits(c.phone || ''))).map(x => { const [t, , v] = LINK[x](c[x]); return `<span>${t}</span><b>${esc(v)}</b>`; });
@@ -2041,13 +2098,20 @@ function vizitkaNode(s, kind){
   const sv = s.services || [];
   const head = `<div class="vz-p${price ? ' sm' : ''}"><span class="vz-ph">${s.photo ? `<img src="${esc(photoSrc(s.photo))}" alt="">${s.sample ? '<i>Ваше фото</i>' : ''}` : noPh(s, price ? 72 : 132, price ? 90 : 165)}</span>
         <div><div class="vz-cat" style="color:${k.c}">${esc(k.t)}</div><div class="vz-name">${esc(s.name)}</div><div class="vz-role">${esc(s.role)}</div>${s.firm ? `<div class="vz-firm">${esc(s.firm)}</div>` : ''}${price ? '' : `<div class="vz-lang"><b>Языки:</b> ${esc(s.langs.join(', '))}</div>`}</div></div>`;
-  const body = price
+  const fr = feeRows(s), feeList = `<div class="vz-pl">${fr.map(f => `<div><b>${esc(plain(f.name))}</b><span>${chf(f.sum)}${f.per ? `<small style="display:block;font:600 11px/1.2 Manrope,sans-serif;color:#7A6E62;text-align:right">${esc(f.per)}</small>` : ''}</span></div>`).join('')}</div>`;
+  const body = fees
+    ? `<div class="vz-pt">Взносы</div>
+      ${feeList}
+      <div class="vz-pn">${FEE_NOTE}</div>
+      <div class="vz-qr sm">${qrImg(short)}<div><b>Связаться</b><small>${ct.length ? ct.slice(0, 2).map(x => x.replace(/<span>.*?<\/span><b>(.*?)<\/b>/, '$1')).join('<br>') + '<br>' : ''}Наведи камеру — контакт сохранится.</small></div></div>`
+    : price
     ? `<div class="vz-pt">Прайс-лист</div>
       <div class="vz-pl">${(s.prices || []).map(r => `<div><b>${esc(r.t)}${r.n ? `<small>${esc(r.n)}</small>` : ''}</b><span>${esc(r.p)}</span></div>`).join('')}</div>
       <div class="vz-pn">Цены указала сама организация${s.pricesDate ? ` ${fmtDate(s.pricesDate)}` : ''}. Точную стоимость уточняйте при записи.</div>
       <div class="vz-qr sm">${qrImg(short)}<div><b>Записаться</b><small>${ct.length ? ct.slice(0, 2).map(x => x.replace(/<span>.*?<\/span><b>(.*?)<\/b>/, '$1')).join('<br>') + '<br>' : ''}Наведи камеру — контакт сохранится.</small></div></div>`
     : `${where.length ? `<div class="vz-s"><h4>Где</h4>${where.map(w => `<div>${w}</div>`).join('')}</div>` : ''}
       ${sv.length ? `<div class="vz-s"><h4>Что можно получить</h4><div class="vz-sv">${sv.map(x => `<span>${esc(x)}</span>`).join('')}</div></div>` : ''}
+      ${fr.length ? `<div class="vz-s"><h4>Взносы</h4>${feeList}</div>` : 'fees' in s && s.feeFree ? `<div class="vz-s"><h4>Взносы</h4><div>${feeFreeTxt(s)}</div></div>` : ''}
       <div class="vz-cq"><div class="vz-s"><h4>Контакты</h4><div class="vz-ct">${ct.join('')}</div></div>
         <div class="vz-q">${qrImg(short)}<b>Сохрани контакт</b><small>Наведи камеру — контакт сохранится</small></div></div>`;
   const node = document.createElement('div'); node.className = 'vz wm';
@@ -2068,7 +2132,7 @@ function vzFit(node){   // все услуги видны всегда, в дв�
 }
 async function cardPng(s, kind, opts){
   try { await loadLibs(); } catch (e){ toast('Картинка сохраняется на сайте. В этом просмотре скачивание недоступно.'); return; }
-  if (!opts) toast(kind === 'price' ? 'Готовлю прайс-лист…' : 'Готовлю визитку…');
+  if (!opts) toast(kind === 'price' ? 'Готовлю прайс-лист…' : kind === 'fees' ? 'Готовлю взносы…' : 'Готовлю визитку…');
   if (!document.getElementById('vzcss')){ const st = document.createElement('style'); st.id = 'vzcss'; st.textContent = VZ_CSS; document.head.appendChild(st); }
   const node = vizitkaNode(s, kind); document.body.appendChild(node);
   await Promise.all([...node.querySelectorAll('img')].map(im => im.complete ? 0 : new Promise(r => { im.onload = im.onerror = r; })));
@@ -2077,20 +2141,20 @@ async function cardPng(s, kind, opts){
   const canvas = await html2canvas(node, { scale: 1080 / 540, backgroundColor: '#FFFCF8', useCORS: true, logging: false });
   node.remove();
   if (opts && opts.dataUrl) return canvas.toDataURL('image/png');
-  const file = `${s.num || 'SG'} ${s.name} — ${kind === 'price' ? 'прайс-лист' : 'визитка'}.png`;
+  const file = `${s.num || 'SG'} ${s.name} — ${kind === 'price' ? 'прайс-лист' : kind === 'fees' ? 'взносы' : 'визитка'}.png`;
   const blob = await new Promise(r => canvas.toBlob(r, 'image/png'));
-  track((kind === 'price' ? 'price/' : 'png/') + s.id);
+  track((kind === 'price' ? 'price/' : kind === 'fees' ? 'fees/' : 'png/') + s.id);
   // на телефоне — системное окно: «Сохранить изображение» кладёт картинку прямо в галерею (Фото)
   try { const f = new File([blob], file, { type: 'image/png' }); if (navigator.canShare && navigator.canShare({ files: [f] }) && matchMedia('(pointer:coarse)').matches){ await navigator.share({ files: [f], title: s.name }); return; } } catch (e){ if (e && e.name === 'AbortError') return; }
   const url = URL.createObjectURL(blob), a = document.createElement('a'); a.href = url; a.download = file; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(url), 4000);
-  toast(kind === 'price' ? 'Прайс-лист сохранён картинкой.' : 'Визитка сохранена картинкой.');
+  toast(kind === 'price' ? 'Прайс-лист сохранён картинкой.' : kind === 'fees' ? 'Взносы сохранены картинкой.' : 'Визитка сохранена картинкой.');
 }
 // PDF всего списка намеренно нет: чтобы базу нельзя было скачать целиком (решение 03.10.2026)
 document.getElementById('qmCard').addEventListener('click', e => {
   const lk = e.target.closest('[data-like]'); if (lk){ toggleLike(lk.dataset.like); return; }
   const fv = e.target.closest('.svb[data-fav]'); if (fv){ toggleFav(fv.dataset.fav); paintSocial(); return; }
   const gc = e.target.closest('[data-gocat]'); if (gc){ qm.close(); state.fav = false; state.shared = null; state.cat = gc.dataset.gocat; state.spec = gc.dataset.gospec || ''; render(); const f = document.querySelector('.finder'); if (f) f.scrollIntoView({ behavior: 'smooth' }); return; }
-  const b = e.target.closest('[data-pdf-card]'); if (b) pdfCard(b.dataset.pdfCard); const g = e.target.closest('[data-png-card]'); if (g){ const s = SPECIALISTS.find(x => x.id === g.dataset.pngCard); if (s) cardPng(s); } const pr = e.target.closest('[data-png-price]'); if (pr){ const s = SPECIALISTS.find(x => x.id === pr.dataset.pngPrice); if (s) cardPng(s, 'price'); }
+  const b = e.target.closest('[data-pdf-card]'); if (b) pdfCard(b.dataset.pdfCard); const g = e.target.closest('[data-png-card]'); if (g){ const s = SPECIALISTS.find(x => x.id === g.dataset.pngCard); if (s) cardPng(s); } const pr = e.target.closest('[data-png-price]'); if (pr){ const s = SPECIALISTS.find(x => x.id === pr.dataset.pngPrice); if (s) cardPng(s, 'price'); } const fz = e.target.closest('[data-png-fees]'); if (fz){ const s = SPECIALISTS.find(x => x.id === fz.dataset.pngFees); if (s) cardPng(s, 'fees'); }
   const v = e.target.closest('[data-vcf]'); if (v){ const s = SPECIALISTS.find(x => x.id === v.dataset.vcf); if (s) saveVcf(s); }
   const sh = e.target.closest('[data-share]'); if (sh){ const s = SPECIALISTS.find(x => x.id === sh.dataset.share); if (s) shareCard(s); }
   const a = e.target.closest('a[href]'); if (a){ const id = (location.hash || '').slice(1), h = a.getAttribute('href');
@@ -2157,20 +2221,22 @@ const CANTONS = {
 };
 const LANG_FIRST = ['украинский', 'русский', 'немецкий', 'французский', 'итальянский', 'ретороманский', 'английский'];
 const HELP_ORG = {
-  feek: '<p><b>Ничего</b> или <b>только добровольные пожертвования</b> — организация размещается у нас бесплатно всегда. Её события и курсы тоже только бесплатные или с пожертвованием.</p><p><b>Членский взнос, плата за занятия, курс, школу, лагерь, билеты или цены</b> — размещение на тех же условиях, что у специалистов: до конца 2027 года бесплатно, потом платно.</p><p>Сумму пишите конечную, в швейцарских франках: «CHF» уже стоит, впишите только число и выберите, за что она.</p>',
+  feek: '<p><b>Ничего</b> или <b>только добровольные пожертвования</b> — организация размещается у нас бесплатно всегда. Её события и курсы тоже только бесплатные или с пожертвованием.</p><p><b>Членский взнос, плата за занятия, курс, школу, лагерь, билеты или цены</b> — размещение на тех же условиях, что у специалистов: до конца 2027 года бесплатно, потом платно.</p><p>Если люди платят взнос или плату, выберите «Взносы или плата» — ниже появится список: каждый взнос отдельной строкой, с суммой в франках и названием, строк сколько угодно. Фирма выбирает «Цены».</p>',
+  feesForm: '<p>Впишите <b>каждый взнос отдельной строкой</b>: сумму в швейцарских франках и название, как оно у вас принято, например «Членский взнос Start», «Семейный членский взнос», «Плата за учебный год». В поле «Как часто» выберите, в месяц, в год, за семестр или разово, — если это важно.</p><p>Сумму пишите конечную: со всеми обязательными расходами. Если у одного уровня есть и месячный, и годовой взнос, добавьте две строки. Строку можно удалить крестиком.</p><p>На карточке организации взносы стоят сразу под описанием, и их можно скачать картинкой. Добровольные пожертвования взносом не считаются, их сюда не пишите.</p>',
+  fees: '<p>Взносы указала сама организация: сколько и за что платят люди — членский взнос, плата за занятия, учебный год, курс или лагерь, билеты. Добровольные пожертвования — только по твоему желанию, они взносом не считаются.</p><p>Точные условия, скидки для семей и льготы уточняй у организации. Список можно сохранить картинкой кнопкой «Взносы PNG».</p>',
   zfindHead: '<p>Если руководитель организации или фирмы уже размещён в справочнике специалистов, найдите его карточку по номеру. <b>UID</b> — номер фирмы или самозанятого вида CHE-123.456.789, он есть в карточке. <b>Номер карточки</b> — SG-0001, он тоже есть в карточке, внизу.</p><p>Имя руководителя подставится из карточки, а его карточка и карточка организации будут ссылаться друг на друга. Номер никуда не отправляется: поиск идёт только по опубликованным карточкам, прямо на этой странице.</p>',
   dir: window.SVL_ORG_HELP_DIR || '',
   cats: '<p>Категория уточняет, чем именно вы занимаетесь: например, «Субботняя и воскресная школа» или «Курсы немецкого». Отметьте до трёх. По категориям люди находят вас в подборе «Категория».</p><p>Для некоторых категорий нужно разрешение кантона или ведомства, например для яслей, частной школы или ресторана. Тогда под списком появится подсказка: этот документ мы попросим, прежде чем поставить карточку на сайт.</p>',
   kind: '<p><b>Благотворительная организация</b> помогает людям без прибыли: центр помощи, фонд. <b>Некоммерческая</b> — ферайн или общество без прибыли: школа выходного дня, хор, клуб, деловое общество.</p><p><b>Фирма</b> — коммерческая организация: ресторан, кейтеринг, магазин, студия, частная школа.</p><p>Условия зависят от того, берёт ли организация деньги с людей. Кто всё делает для людей бесплатно, размещается бесплатно всегда. Кто берёт членский взнос, плату за занятия, билеты или цены, — на тех же условиях, что специалисты справочника: до конца 2027 года бесплатно, потом платно.</p>',
   firm: '<p>Фирма зарабатывает на своих товарах и услугах, а ферайн или школа со взносом или платой за занятия собирает деньги с людей. Поэтому они размещаются на тех же условиях, что специалисты справочника. В период запуска, до 31 декабря 2027 года, карточка бесплатна. Потом размещение платное, цены мы сообщим заранее, и ничего не продлевается само. VIP всегда платный и помечен «Платное размещение». Вакансии и поиск партнёров бесплатны для всех и всегда.</p>',
-  head: '<p>У фирмы на карточке всегда указан руководитель, чтобы людям было понятно, кто отвечает. Обычно это директор или владелец, как в торговом реестре Zefix. Он подтверждает карточку письмом с адреса фирмы. Если руководитель есть в справочнике специалистов, на обеих карточках будет ссылка друг на друга. Ферайну и фонду указывать руководителя не обязательно.</p>',
+  head: '<p>У фирмы на карточке всегда указан руководитель, чтобы людям было понятно, кто отвечает. Это её владелец (Inhaber, Inhaberin, Gesellschafter), как в торговом реестре Zefix, — имя и фамилия полностью. Наёмных сотрудников руководителем мы не размещаем. Он подтверждает карточку письмом с адреса фирмы. Если руководитель есть в справочнике специалистов, на обеих карточках будет ссылка друг на друга. Ферайну и фонду указывать руководителя не обязательно.</p>',
   who: '<p>Отметь, для кого ищешь. <b>Статус S</b> — защита для людей из Украины: временное право жить и работать в Швейцарии. Многие центры помощи работают именно для них.</p>',
   zefix: '<p><b>Zefix</b> — официальный торговый реестр Швейцарии, там видно название, адрес и правление организации. Фонд (Stiftung) записан в реестре всегда. Ферайну (Verein) запись нужна не всегда, тогда проверяем по уставу (Statuten) и протоколу собрания.</p>',
   badge: '<p>Организации, которые ничего не берут с людей, мы размещаем бесплатно всегда: помощь, консультации, занятия и события у них бесплатные, а живут они на добровольные пожертвования, гранты и труд добровольцев. Они работают для людей, а не ради денег. Проверка у всех одинаковая.</p>',
   money: '<p>Выберите «Да», если люди платят вам за что-нибудь: членский взнос, плату за занятия, школу, курс или лагерь, билеты на события, цены за товары и услуги. Добровольные пожертвования не считаются, а билеты на благотворительный концерт или ужин — считаются.</p><p>Кто ничего не берёт с людей, размещается бесплатно всегда. Кто берёт — на тех же условиях, что специалисты справочника: до конца 2027 года бесплатно, потом платно, цены мы сообщим заранее.</p>',
   form: '<p><b>Ферайн (Verein)</b> — объединение людей с общей целью: общество, клуб, школа, центр помощи. Для него хватает устава и собрания. <b>Фонд (Stiftung)</b> — организация с имуществом для определённой цели, всегда записана в торговом реестре и под надзором.</p><p><b>ООО (GmbH), АО (AG), ИП (Einzelunternehmen), кооператив (Genossenschaft)</b> — формы фирмы. Фирма записана в торговом реестре Zefix, там видно её название, адрес и руководство.</p>',
   whoForm: '<p>Отметьте, для кого вы работаете. По этим отметкам люди находят организацию в фильтре «Для кого». <b>Статус S</b> — защита для людей из Украины: временное право жить и работать в Швейцарии.</p>',
-  board: '<p>Карточку мы публикуем только с согласия самой организации. Поэтому её подтверждает член правления (Vorstand) ферайна или фонда или руководитель фирмы ответным письмом с адреса организации. Имя члена правления на сайте не показываем. Имя и должность руководителя фирмы стоят на её карточке.</p>'
+  board: '<p>Карточку мы публикуем только с согласия хозяина организации. Поэтому её подтверждает владелец фирмы или член правления (Vorstand) ферайна или фонда — ответным письмом с адреса организации. Наёмный сотрудник подтвердить карточку не может: если заявку заполнил сотрудник, впишите здесь владельца или члена правления, и мы напишем ему. Имя члена правления на сайте не показываем, имя и фамилия владельца фирмы стоят на её карточке.</p>'
 };
 const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 const kt = c => (CANTONS[c] || [c])[0];
@@ -2216,8 +2282,20 @@ const OFFERS = ['Помощь с письмами и документами', '�
   'Психологическая поддержка', 'Юридические консультации', 'Помощь с работой', 'Одежда, продукты, вещи', 'Помощь с жильём', 'Концерты, театр, выставки', 'Спорт', 'Еда: ресторан, кейтеринг', 'Магазин'];
 document.getElementById('o-offers').innerHTML = OFFERS.map(t => oChk('o-offer', t, t)).join('');
 document.getElementById('o-days').innerHTML = ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'].map(t => oChk('o-day', t, t)).join('');
-const FEEK = [['free', 'Ничего: всё бесплатно'], ['donation', 'Только добровольные пожертвования'], ['member', 'Членский взнос'], ['lesson', 'Плата за занятия'], ['course', 'Плата за курс, школу или лагерь'], ['ticket', 'Билеты на события'], ['prices', 'Цены: фирма, ресторан, магазин']];
+const FEEK = [['free', 'Ничего: всё бесплатно'], ['donation', 'Только добровольные пожертвования'], ['fees', 'Взносы или плата: членский взнос, занятия, школа, курс, лагерь, билеты'], ['prices', 'Цены: фирма, ресторан, магазин']];
 document.getElementById('o-feek').innerHTML = oOpt('', 'Выберите') + FEEK.map(([v, t]) => oOpt(v, t)).join('');
+/* меню взносов (правило Ирины 12.10.2026, 14:21): сколько угодно строк «CHF сумма · название взноса · как часто» — по ним строится список взносов на карточке */
+const FEEPER = ['в год', 'в месяц', 'за семестр', 'за учебный год', 'за занятие', 'за курс', 'разово', 'за билет'];
+const oFeeBox = document.getElementById('o-fees');
+const oFeeRow = (f = {}) => `<div class="fee-row"><div class="zcur"><span>CHF</span><input type="number" min="0" step="0.5" inputmode="decimal" data-fee="sum" value="${esc(f.sum ?? '')}" placeholder="например: 50" aria-label="Сумма взноса, CHF"></div>
+  <input data-fee="name" list="o-feenames" value="${esc(f.name || '')}" placeholder="Название взноса, например: членский взнос" aria-label="Название взноса">
+  <select data-fee="per" aria-label="Как часто платят"><option value="">Как часто платят — по желанию</option>${FEEPER.map(x => `<option${f.per === x ? ' selected' : ''}>${x}</option>`).join('')}</select>
+  <button type="button" class="fee-x" data-feex aria-label="Удалить этот взнос" title="Удалить этот взнос">✕</button></div>`;
+const oFeeGet = () => [...oFeeBox.querySelectorAll('.fee-row')].map(r => ({ sum: r.querySelector('[data-fee=sum]').value.trim(), name: r.querySelector('[data-fee=name]').value.trim(), per: r.querySelector('[data-fee=per]').value }));
+const oFeeSet = rows => { oFeeBox.innerHTML = (rows && rows.length ? rows : [{}]).map(oFeeRow).join(''); };
+oFeeSet([]);
+document.getElementById('o-feeadd').addEventListener('click', () => { oFeeBox.insertAdjacentHTML('beforeend', oFeeRow()); oFeeBox.lastElementChild.querySelector('input').focus(); oSave(); });
+oFeeBox.addEventListener('click', e => { if (!e.target.closest('[data-feex]')) return; const r = e.target.closest('.fee-row'); if (oFeeBox.children.length > 1) r.remove(); else oFeeSet([]); oSave(); });
 /* «Берёте ли деньги с людей?» — «нет»: только «ничего» и «пожертвования»; «да»: только платные варианты */
 function oFeeLock(){
   const m = document.getElementById('o-money').value, f = document.getElementById('o-feek');
@@ -2228,13 +2306,16 @@ document.getElementById('o-money').addEventListener('change', oFeeLock);
 document.getElementById('o-who').innerHTML = Object.entries(WHO).map(([, t]) => oChk('o-who', t, t)).join('');
 document.getElementById('o-langs').innerHTML = LANG_FIRST.map(l => oChk('o-lang', l, l[0].toUpperCase() + l.slice(1))).join('');
 const oChecked = name => [...oF.querySelectorAll(`input[name="${name}"]:checked`)].map(i => i.value);
-function oSave(){ try { const d = {}; oF.querySelectorAll('[data-a]').forEach(el => d[el.id] = el.value); d.who = oChecked('o-who'); d.langs = oChecked('o-lang'); d.offers = oChecked('o-offer'); d.days = oChecked('o-day'); d.cats = oChecked('o-cat'); localStorage.setItem(OKEY, JSON.stringify(d)); } catch (_) {} }
+function oSave(){ try { const d = {}; oF.querySelectorAll('[data-a]').forEach(el => d[el.id] = el.value); d.who = oChecked('o-who'); d.langs = oChecked('o-lang'); d.offers = oChecked('o-offer'); d.days = oChecked('o-day'); d.cats = oChecked('o-cat'); d.fees = oFeeGet(); localStorage.setItem(OKEY, JSON.stringify(d)); } catch (_) {} }
 try { const d = JSON.parse(localStorage.getItem(OKEY) || 'null'); if (d) {
   oF.querySelectorAll('[data-a]').forEach(el => { if (typeof d[el.id] === 'string') el.value = d[el.id]; });
   (d.who || []).forEach(v => { const i = oF.querySelector(`input[name="o-who"][value="${CSS.escape(v)}"]`); if (i) i.checked = true; });
   (d.langs || []).forEach(v => { const i = oF.querySelector(`input[name="o-lang"][value="${CSS.escape(v)}"]`); if (i) i.checked = true; });
   [['offers', 'o-offer'], ['days', 'o-day']].forEach(([k, n]) => (d[k] || []).forEach(v => { const i = oF.querySelector(`input[name="${n}"][value="${CSS.escape(v)}"]`); if (i) i.checked = true; }));
-  oDrawCats(d.cats || []); } } catch (_) {}
+  oDrawCats(d.cats || []);
+  if (/^(member|lesson|course|ticket)$/.test(d['o-feek'] || '')) document.getElementById('o-feek').value = 'fees';   // прежние варианты (до 12.10.2026) — теперь «Взносы или плата»
+  if (Array.isArray(d.fees)) oFeeSet(d.fees);
+  if (d['o-fee'] && !(d.fees || []).some(f => f.sum) && document.getElementById('o-feek').value === 'fees') oFeeSet([{ sum: d['o-fee'], name: '', per: d['o-feeper'] || '' }]); } } catch (_) {}
 oFeeLock();
 oF.addEventListener('input', oSave); oF.addEventListener('change', oSave);
 /* галочка согласия (вопрос Ирины 10.10.2026, 20:37): пока её нет, кнопка серая; в письмо — строка с датой и временем; в черновик не сохраняется */
@@ -2250,12 +2331,13 @@ oDraftIdle();
 oDraft.addEventListener('click', e => { const id = e.target.id;
   if (id === 'oWipe') oDraft.innerHTML = 'Удалить с этого устройства всё, что вы ввели в заявку? Вернуть это будет нельзя. <button class="lnk" type="button" id="oWipeYes">Да, удалить историю</button><button class="lnk" type="button" id="oWipeNo">Отмена</button>';
   if (id === 'oWipeNo') oDraftIdle();
-  if (id === 'oWipeYes'){ try { localStorage.removeItem(OKEY); } catch (_) {} oF.querySelectorAll('[data-a]').forEach(el => el.value = ''); oF.querySelectorAll('input[type=checkbox]').forEach(i => i.checked = false); oChecks().forEach(x => x.checked = false); oFeeLock(); oDrawCats([]); oPaint(); oF.dispatchEvent(new Event('zwipe')); oMsg.hidden = true; oDraftIdle(); toast('Вся история заявки удалена с этого устройства.'); }
+  if (id === 'oWipeYes'){ try { localStorage.removeItem(OKEY); } catch (_) {} oF.querySelectorAll('[data-a]').forEach(el => el.value = ''); oF.querySelectorAll('input[type=checkbox]').forEach(i => i.checked = false); oChecks().forEach(x => x.checked = false); oFeeSet([]); oFeeLock(); oDrawCats([]); oPaint(); oF.dispatchEvent(new Event('zwipe')); oMsg.hidden = true; oDraftIdle(); toast('Вся история заявки удалена с этого устройства.'); }
 });
 function oLetter(){
   const lines = [], name = document.getElementById('o-name').value.trim();
   oF.querySelectorAll('.f').forEach(f => {
     if (f.hidden) return;   // поля только для карточки из справочника (assets/zayavka.js) без карточки не видны
+    if (f.id === 'o-feef'){ const r = oFeeGet().filter(x => x.sum || x.name); if (r.length) lines.push('Взносы и плата:', ...r.map(x => `— ${x.name || 'без названия'}: CHF ${x.sum || '—'}${x.per ? ' ' + x.per : ''}`)); return; }
     const el = f.querySelector('[data-a]'), box = f.querySelector('.chk');
     if (el){ const x = el.tagName === 'SELECT' ? (el.value ? el.options[el.selectedIndex].text : '') : el.value.trim(); if (x) lines.push(`${el.dataset.a}: ${x}`); }
     else if (box){ const x = [...box.querySelectorAll('input:checked')].map(i => i.parentNode.textContent.trim()); if (x.length) lines.push(`${box.dataset.l}: ${x.join(', ')}`); }
@@ -2273,8 +2355,13 @@ document.getElementById('orgSend').addEventListener('click', () => {
     .concat([['o-addrshow', 'адрес встреч'], ['o-feek', 'что платят люди']])
     .concat(['o-street', 'o-city', 'o-fee', 'o-feeper'].filter(id => !document.getElementById(id).closest('.f').hidden).map(id => [id, { 'o-street': 'улицу и дом', 'o-city': 'город', 'o-fee': 'сумму', 'o-feeper': 'за что платят' }[id]]));
   const miss = need.filter(([id]) => !document.getElementById(id).value.trim());
+  const twoW = id => { const v = document.getElementById(id).value.trim(); return !v || v.split(/[\s,]+/).filter(Boolean).length >= 2; };   // имя и фамилия (правило Ирины 12.10.2026, 14:25)
+  [['o-board', 'имя и фамилию того, кто подтвердит, полностью'], ['o-head', 'имя и фамилию руководителя полностью']].forEach(([id, t]) => { if (!twoW(id) && !miss.some(m => m[0] === id)) miss.push([id, t]); });
+  const feeF = document.getElementById('o-feef');
+  if (!feeF.hidden){ const r = oFeeGet(), full = r.filter(x => x.sum !== '' && x.name), half = r.filter(x => (x.sum !== '') !== !!x.name);
+    if (!full.length || half.length) miss.push(['o-feef', half.length ? 'у каждого взноса сумму и название' : 'хотя бы один взнос: сумму и название']); }
   oF.querySelectorAll('.f').forEach(f => f.classList.remove('miss')); miss.forEach(([id]) => document.getElementById(id).closest('.f').classList.add('miss'));
-  if (miss.length){ oMsg.hidden = false; oMsg.textContent = 'Пожалуйста, заполните: ' + miss.map(m => m[1]).join(', ') + '.'; document.getElementById(miss[0][0]).focus(); return; }
+  if (miss.length){ oMsg.hidden = false; oMsg.textContent = 'Пожалуйста, заполните: ' + miss.map(m => m[1]).join(', ') + '.'; const m0 = document.getElementById(miss[0][0]); (m0.matches('input,select,textarea') ? m0 : m0.querySelector('input')).focus(); return; }
   const mailOk = x => !x || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(x);
   const badMail = ['o-email', 'o-board-mail'].find(id => !mailOk(document.getElementById(id).value.trim()));
   if (badMail){ document.getElementById(badMail).closest('.f').classList.add('miss'); oMsg.hidden = false; oMsg.textContent = 'Проверьте e-mail: в адресе не хватает знака @ или точки.'; document.getElementById(badMail).focus(); return; }
@@ -2299,5 +2386,5 @@ oMsg.addEventListener('click', async e => { if (e.target.id !== 'oCopy') return;
 <div id="napisat-t" hidden data-t-name="Как тебя зовут?" data-t-nameph="Имя, подставим его в сообщение" data-t-tone="Как обращаться" data-t-vy="На «вы»" data-t-ty="На «ты»" data-t-text="Готовое сообщение, его можно поправить" data-t-hi-vy="Здравствуйте!" data-t-hi-ty="Привет!" data-t-me="Меня зовут {n}." data-t-go-wa="Написать в WhatsApp" data-t-go-tg="Написать в Telegram" data-t-go-mail="Написать на e-mail" data-t-go-tel="Позвонить" data-t-go-sms="Написать SMS" data-t-go-ig="Написать в Instagram" data-t-go-link="Открыть страницу записи" data-t-or="Или другим способом:" data-t-copy="Скопировать сообщение" data-t-copied="Сообщение скопировано. Если оно не вставилось само, вставь его в чат." data-t-copied-ig="Сообщение скопировано. В Instagram вставь его в чат: долгое нажатие на поле, потом «Вставить»." data-t-copyfail="Не получилось скопировать. Выдели текст и скопируй его." data-t-note="Сообщение уйдёт организации напрямую из твоего мессенджера или почты. «Свои люди» его не видят и не хранят. Имя запоминается только на этом устройстве." data-t-btn-promo="Воспользоваться акцией" data-t-subj-promo="Акция «{title}»" data-t-msg-promo-join-vy="{hi}{name} На сайте проекта 🌿 «Свои люди» мне попалась ваша акция «{title}»{when}. Хочу ею воспользоваться. Подскажите, пожалуйста, как записаться и как применяется акция?" data-t-msg-promo-join-ty="{hi}{name} На сайте проекта 🌿 «Свои люди» мне попалась твоя акция «{title}»{when}. Хочу ею воспользоваться. Подскажи, пожалуйста, как записаться и как применяется акция?"></div>
 <script src="/assets/napisat.js" defer></script>
 <script src="/assets/samesite.js"></script>
-<!--i18n--><style>#langbar.langbar{position:fixed;bottom:14px;right:14px;z-index:60;display:flex;gap:2px;background:rgba(255,255,255,.92);border:1px solid rgba(0,0,0,.08);border-radius:999px;padding:3px;font:600 12px Manrope,system-ui,sans-serif;box-shadow:0 2px 8px rgba(0,0,0,.08)}#langbar.langbar a{color:#5d554d;padding:5px 9px;border-radius:999px;text-decoration:none;font:inherit;display:inline-block}#langbar.langbar a[aria-current="true"]{background:#2f2924;color:#fff}@media print{.langbar{display:none!important}}</style><div class="langbar" id="langbar" role="navigation" aria-label="Мова / Язык"><a href="/organizacii/" hreflang="ru" data-lang="ru" aria-current="true">RU</a><a href="/uk/organizacii/" hreflang="uk" data-lang="uk">UA</a></div><script>(function(){var b=document.getElementById('langbar');if(!b)return;b.addEventListener('click',function(e){var a=e.target.closest('a[data-lang]');if(a){try{localStorage.setItem('svoiludiLang',a.dataset.lang)}catch(x){}a.href=a.getAttribute('href').split('#')[0]+location.hash;}});})();</script><!--i18n--></body>
+</body>
 </html>

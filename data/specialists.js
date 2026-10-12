@@ -261,7 +261,7 @@ window.SPECIALISTS = [
     ],
     "photo": "",
     "online": false,
-    "format": "В своём салоне Beauty Paradise в Цюрихе. Записаться можно онлайн через DIKIDI или по телефону салона.",
+    "format": "В своём салоне Beauty Paradise в Цюрихе. Записаться можно онлайн через [DIKIDI](https://dikidi.net/en/profile/beauty_paradise_1169172/master/2566584) или по телефону салона.",
     "about": "Я владелица салона маникюра Beauty Paradise в Цюрихе и мастер с опытом больше 10 лет. Мои клиенты — мои друзья, а безопасность и сервис — главное в моей работе.",
     "services": [
       "Маникюр классический",

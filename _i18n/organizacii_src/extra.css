@@ -53,3 +53,14 @@
 @media (max-width:520px){.pr-one{grid-template-columns:1fr}.pr-big{font-size:1.7rem}}
 .chk label.off{opacity:.45}
 .chk label{flex-wrap:nowrap}.chk input{flex:none}
+
+/* меню взносов в заявке (12.10.2026): строка «CHF сумма · название · как часто · ✕», на телефоне — по одному полю в строке */
+.fee-rows{display:flex;flex-direction:column;gap:10px}
+.fee-row{display:grid;grid-template-columns:150px minmax(0,1fr) 44px;gap:8px;align-items:stretch;padding:10px;border:1.5px dashed var(--line);border-radius:16px;background:var(--paper,#FFFCF8)}
+.fee-row .fee-x{border:1.5px solid var(--line);background:transparent;border-radius:12px;color:var(--muted);font-size:1rem;cursor:pointer;min-height:50px}
+.fee-row .fee-x:hover{color:#B8472E;border-color:#B8472E}
+.fee-row [data-fee=per]{grid-column:1/3;grid-row:2;max-width:300px}
+.fee-add{align-self:flex-start;margin:10px 0 2px}
+.f.miss .fee-row{border-color:#C8553D}
+@media (max-width:760px){.fee-row{grid-template-columns:minmax(0,1fr) 44px}.fee-row .zcur{grid-column:1;grid-row:1}.fee-row [data-fee=name]{grid-column:1/-1;grid-row:2}.fee-row [data-fee=per]{grid-column:1/-1;grid-row:3;max-width:none}.fee-row .fee-x{grid-column:2;grid-row:1}}
+.fee-line{color:var(--brown,#4F5E3E)!important;font-weight:700}

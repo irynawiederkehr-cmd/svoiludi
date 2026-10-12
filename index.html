@@ -388,6 +388,7 @@ a.bot:hover{color:#B98324}
 /* «уточняем» — поля, без которых карточку не разместить (12.10.2026): подсвечены маркером, видят только Ирина и человек в предпросмотре */
 .need{display:inline-block;background:#FFEFB8;border:1.5px dashed #D9A43A;color:#6B4A10;border-radius:8px;padding:1px 8px;font-weight:700;font-size:.92em;line-height:1.4;white-space:normal}
 .place.need{display:inline-flex;align-items:center;gap:4px}
+:is(.qm-title,h3,.pp-name,.vz-name)>.need{font:700 .9rem/1.4 var(--body,Manrope,sans-serif);vertical-align:middle;margin-left:4px;letter-spacing:0}   /* «Фамилия — уточняем» у имени (12.10.2026) */
 .place.need b{color:#6B4A10}
 .ph.none.need-ph{background:#FFF6D6;border-color:#D9A43A;color:#6B4A10;align-content:center;gap:6px}
 .ph.none.need-ph .need{font-size:.85em;padding:0 6px}
@@ -613,6 +614,8 @@ a.bot:hover{color:#B98324}
 .pv-box button[disabled]{opacity:.5;cursor:not-allowed}
 .pv-box .pv-done{font-size:.98rem;font-weight:600;color:inherit;opacity:1}
 .pv-small{font-size:.8rem;color:var(--muted)}
+.fee-list{list-style:none;margin:0;padding:6px 14px;background:var(--paper,#FFFCF8);border:1px solid var(--line);border-radius:14px}.fee-list li{display:flex;gap:14px;align-items:baseline;padding:7px 0;border-bottom:1px dashed var(--line)}.fee-list li:last-child{border-bottom:0}.fee-list span{flex:1;min-width:0}.fee-list b{white-space:nowrap;font-family:var(--display);font-weight:400;font-size:1.1rem;text-align:right}.fee-list b small{display:inline;margin-left:5px;font-family:var(--body,inherit);font-size:.78rem;color:var(--muted);font-weight:600}
+.fee-acts{display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px}.fee-acts .btn{margin:0}.fee-acts small{color:var(--muted);font-size:.8rem;line-height:1.4;flex:1 1 220px}.fee-free{margin:0}
 .pv-pl{list-style:none;margin:0;padding:0;background:var(--paper,#FFFCF8);border-radius:12px;padding:6px 12px}.pv-pl li{display:flex;gap:12px;align-items:baseline;padding:6px 0;border-bottom:1px dashed var(--line)}.pv-pl li:last-child{border-bottom:0}.pv-pl span{flex:1}.pv-pl small{display:block;color:var(--muted);font-size:.8rem}.pv-pl b{white-space:nowrap;font-family:var(--display);font-weight:400;font-size:1.05rem}
 .adm-sec{display:flex;flex-direction:column;gap:6px;padding-top:6px}
 .adm-sec+.adm-sec{border-top:1px dashed #4F5E3E;margin-top:4px;padding-top:10px}
@@ -1030,16 +1033,46 @@ const ktRu = c => (CANTONS[c] || [, c])[1];
    у такой карточки в контактах всегда есть строки «Телефон», «E-mail» и «Instagram»; пустая — «уточняем», и мы просим её во втором письме.
    Телефон и Instagram без обязательности (NEED_OPT): карточка выйдет и без них, но мы их всегда спрашиваем. */
 const IS_ORG_PAGE = !!window.SVL_ORG;
+const oneWord = n => String(n || '').trim().split(/\s+/).filter(Boolean).length < 2;   // в имени нет фамилии
 const needOf = s => { if (!s || s.sample || s.status === 'активен') return {}; const c = s.contacts || {}, p = (s.places || [])[0] || {};
   const h = IS_ORG_PAGE ? ((s.org || {}).head || {}) : {};
   return { photo: !IS_ORG_PAGE && !s.photo, place: !p.canton, email: !c.email, langs: !(s.langs || []).length, format: !IS_ORG_PAGE && !String(s.format || '').trim(), reg: !s.uid && !s.ahv, phone: !c.phone, insta: !c.instagram,
-    ...(IS_ORG_PAGE ? { head: !h.name || /уточн/i.test(h.name), form: !(s.org || {}).form } : {}) }; };
-const NEED_T = { photo: 'фото', place: 'кантон и адрес', email: 'e-mail (на него приходят подтверждения)', langs: 'языки', format: 'формат работы', reg: IS_ORG_PAGE ? 'регистрация (UID фирмы или устав ферайна)' : 'регистрация (UID или письмо кассы AHV)', head: 'руководитель', form: 'форма (ферайн, фонд, фирма)', phone: 'телефон', insta: 'Instagram' };
+    surname: !IS_ORG_PAGE && oneWord(s.name),   // имя и фамилия обязательны (правило Ирины 12.10.2026, 14:25)
+    ...(IS_ORG_PAGE ? { head: !h.name || /уточн/i.test(h.name), headSurname: !!h.name && !/уточн/i.test(h.name) && oneWord(h.name), form: !(s.org || {}).form, fees: !!s.feeNeed } : {}) }; };
+const NEED_T = { photo: 'фото', place: 'кантон и адрес', email: 'e-mail (на него приходят подтверждения)', langs: 'языки', format: 'формат работы', reg: IS_ORG_PAGE ? 'регистрация (UID фирмы или устав ферайна)' : 'регистрация (UID или письмо кассы AHV)', head: 'руководитель', form: 'форма (ферайн, фонд, фирма)', phone: 'телефон', insta: 'Instagram', surname: 'фамилия', headSurname: 'фамилия руководителя', fees: 'взносы (сколько и за что платят люди или «для людей всё бесплатно»)' };
 const NEED_OPT = ['phone', 'insta'];   // спрашиваем всегда, но без них карточка на сайт выйти может
 const needReq = s => Object.entries(needOf(s)).filter(([k, v]) => v && !NEED_OPT.includes(k)).map(([k]) => NEED_T[k]);
 const needOpt = s => Object.entries(needOf(s)).filter(([k, v]) => v && NEED_OPT.includes(k)).map(([k]) => NEED_T[k]);
 const needList = s => Object.entries(needOf(s)).filter(([, v]) => v).map(([k]) => NEED_T[k]);
 const UT = t => `<span class="need">${t ? esc(t) + ' — ' : ''}уточняем</span>`;
+/* ссылки в тексте карточки (правило Ирины 12.10.2026, 14:27: «если человек указывает сервис для букинга, вставляй ссылку на сервис под название»):
+   в данных пишем [DIKIDI](https://dikidi.net/…) — на карточке и в PDF это ссылка под названием, в визитке, поиске и письмах — просто название */
+const MDL = /\[([^\]\n]+)\]\((https:\/\/[^)\s]+)\)/g;
+const plain = t => String(t ?? '').replace(MDL, '$1');
+const rich = t => esc(t).replace(MDL, (m, l, u) => `<a href="${u}" ${ext}>${l}</a>`);
+const richPdf = t => esc(t).replace(MDL, (m, l, u) => `<a data-href="${u}">${l}</a>`);
+/* ВЗНОСЫ ОРГАНИЗАЦИИ (правила Ирины 12.10.2026, 14:21 и 14:23): у ферайна, общества, школы — список взносов «CHF сумма · название · как часто»,
+   сколько угодно строк. На карточке — сразу под описанием, с кнопкой «Взносы PNG»; тот же список — в PDF карточки, визитке и письме «Подтверждаю».
+   Данные — s.fees [{ sum, name, per }] (adapter.js из data/organizations.js); s.feeFree — для людей всё бесплатно, s.feeDonation — можно пожертвование,
+   s.feeNeed — взносы не знаем (пробная карточка: «Взносы — уточняем»). У специалистов этих полей нет — ничего не рисуется. */
+const chf = n => 'CHF ' + Number(n).toLocaleString('de-CH', { minimumFractionDigits: Number.isInteger(+n) ? 0 : 2, maximumFractionDigits: 2 });
+const feeRows = s => (s.fees || []).filter(f => f && String(f.name || '').trim() && f.sum !== '' && f.sum != null && isFinite(+f.sum));
+const feeFrom = s => { const r = feeRows(s); return r.length ? Math.min(...r.map(f => +f.sum)) : null; };
+const FEE_NOTE = 'Суммы указала сама организация. Точные условия уточняй у организации.';
+const feeFreeTxt = s => 'Взносов нет: для людей всё бесплатно.' + (s.feeDonation ? ' Можно оставить пожертвование — только по желанию.' : '');
+const feeTxt = s => feeRows(s).map(f => `— ${plain(f.name)}: ${chf(f.sum)}${f.per ? ' ' + f.per : ''}`).join('\n');
+function feeBlock(s){
+  if (!('fees' in s)) return '';
+  const r = feeRows(s), h = `<h4>Взносы<button type="button" class="qh" data-help="fees" aria-label="Подсказка: взносы" aria-expanded="false">?</button></h4>`;
+  if (r.length) return `<div class="d-block fee-block">${h}<ul class="fee-list">${r.map(f => `<li><span>${rich(f.name)}</span><b>${chf(f.sum)}${f.per ? `<small>${esc(f.per)}</small>` : ''}</b></li>`).join('')}</ul>
+    <div class="fee-acts"><button class="btn ghost" type="button" data-png-fees="${esc(s.id)}" data-tip="Взносы картинкой PNG: сохранится в галерею телефона, удобно переслать">Взносы PNG</button><small>${FEE_NOTE}</small></div></div>`;
+  if (s.feeFree) return `<div class="d-block fee-block">${h}<p class="fee-free">${feeFreeTxt(s)}</p></div>`;
+  if (needOf(s).fees) return `<div class="d-block fee-block">${h}${UT()}</div>`;
+  return s.feeText ? `<div class="d-block fee-block">${h}<p>${rich(s.feeText)}</p></div>` : '';
+}
+const feePdf = s => { if (!('fees' in s)) return ''; const r = feeRows(s);
+  return r.length ? `<div class="pp-sec"><h4>Взносы</h4><div style="display:grid;grid-template-columns:1fr auto;gap:3px 18px;max-width:560px">${r.map(f => `<span>${richPdf(f.name)}</span><b style="white-space:nowrap">${chf(f.sum)}${f.per ? ' ' + esc(f.per) : ''}</b>`).join('')}</div><p style="font-size:11px;color:#7A6E62;margin-top:4px">${FEE_NOTE}</p></div>`
+    : s.feeFree ? `<div class="pp-sec"><h4>Взносы</h4><p>${feeFreeTxt(s)}</p></div>` : s.feeText ? `<div class="pp-sec"><h4>Взносы</h4><p>${richPdf(s.feeText)}</p></div>` : ''; };
 
 // что скрывает карточку с сайта (пусто — карточка видна)
 function hiddenReason(s){
@@ -1106,7 +1139,7 @@ const pool = () => SPECIALISTS.filter(s => state.hidden || !hiddenReason(s));
 // направления карточки: главное (cat) и второе (cat2, необязательно; 11.10.2026); немецкие слова категорий — для поиска
 const dirsOf = s => [s.cat, s.cat2].filter(Boolean);
 const deOf = sp => { for (const k of Object.values(CATS)){ const i = k.s.indexOf(sp); if (i >= 0) return (k.w || [])[i] || ''; } return ''; };
-const hay = s => norm([s.name, s.role, s.firm, s.about, s.format, ...(s.tags || []).map(t => TAGS[t]), ...dirsOf(s).map(d => CATS[d]?.t), ...(s.specs || []), ...(s.specs || []).map(deOf), ...(s.services || []), ...(s.langs || []), ...s.places.map(p => p.canton + ' ' + ktRu(p.canton) + ' ' + p.address)].join(' '));
+const hay = s => norm([s.name, s.role, s.firm, plain(s.about), plain(s.format), ...(s.tags || []).map(t => TAGS[t]), ...dirsOf(s).map(d => CATS[d]?.t), ...(s.specs || []), ...(s.specs || []).map(deOf), ...(s.services || []), ...(s.fees || []).map(f => f.name), ...(s.langs || []), ...s.places.map(p => p.canton + ' ' + ktRu(p.canton) + ' ' + p.address)].join(' '));
 // фильтр «Кантон → Город» (04.10.2026): город берётся из адреса; в списке городов только те, где в кантоне уже есть специалисты
 const inCanton = s => !state.canton || livePlaces(s).some(p => p.canton === state.canton && (!state.city || p.area || city(p.address) === state.city));
 // «Онлайн по кантону» (onlineCanton — оплачено до): виден во всех городах своего кантона; «Онлайн по всей Швейцарии» (onlineCH) — везде
@@ -1176,7 +1209,7 @@ function card(s, lvl = ''){
   return `<article class="sp${why ? ' off' : ''}${lvl === 'vip' ? ' vip' : lvl === 'партнёр' || lvl === 'vip+' ? ' partner' : ''}" style="--lc:${k.c}">
     ${s.sample ? '<span class="sample" title="Вымышленный специалист — так будет выглядеть ваша карточка">Образец</span>' : ''}<div class="sp-sub">${ico(k.i, k.c, null, 16)}<span>${esc(k.t)}</span>${flag}${likeBtn(s)}</div><div class="sp-main">
     <div class="sp-id">${photo(s)}<div>
-      <h3>${esc(s.name)}${isNew(s) ? '<span class="new" title="Новый в справочнике">новый</span>' : ''}</h3>
+      <h3>${esc(s.name)}${needOf(s).surname ? ' ' + UT('Фамилия') : ''}${isNew(s) ? '<span class="new" title="Новый в справочнике">новый</span>' : ''}</h3>
       <div class="role">${esc(s.role)}</div>${s.firm ? `<div class="firm">${esc(s.firm)}</div>` : ''}${catsLine(s)}${promoChip(s)}${vacChips(s)}
     </div></div>
     <div class="facts">
@@ -1489,7 +1522,7 @@ const gmail = (to, su, body) => `https://mail.google.com/mail/?view=cm&fs=1&to=$
 const ownerLetter = s => ({ su: 'Ваша карточка в «Своих людях в Швейцарии» — посмотрите, пожалуйста',
   body: `Здравствуйте!\n\nЯ подготовила вашу карточку для справочника «Свои люди в Швейцарии». Пока её видите только вы. Посмотрите, пожалуйста, всё ли верно: фото, профиль, услуги, адреса и контакты.\n\n${previewUrl(s)}\n\n${draftPara(s) ? draftPara(s) + '\n\n' : ''}Если всё верно, внизу карточки отметьте галочку и нажмите «Подтверждаю» — и я сразу опубликую карточку. Если что-то не так, нажмите «Нужно исправить» и напишите прямо там, что поменять.\n\nС теплом,\nИрина Вознесенская\n${MAIL}` });
 const confirmLetter = s => ({ su: `Подтверждаю карточку — ${s.name}${s.num ? ' (' + s.num + ')' : ''}`,
-  body: `Здравствуйте, Ирина!\n\nВсё верно, подтверждаю публикацию своей карточки на сайте «Свои люди в Швейцарии».\nУсловия размещения (https://svoiludi.ch/usloviya/) прочитал(а) и принимаю, в том числе когда карточку снимают и за что исключают из проекта.\n\n${previewUrl(s)}\n\n${s.name}` });
+  body: `Здравствуйте, Ирина!\n\nВсё верно, подтверждаю публикацию своей карточки на сайте «Свои люди в Швейцарии».\nУсловия размещения (https://svoiludi.ch/usloviya/) прочитал(а) и принимаю, в том числе когда карточку снимают и за что исключают из проекта.${feeRows(s).length ? '\n\nВзносы:\n' + feeTxt(s) : s.feeFree ? '\n\n' + feeFreeTxt(s) : ''}\n\n${previewUrl(s)}\n\n${s.name}` });
 const fixLetter = s => ({ su: `Исправления в карточку — ${s.name}${s.num ? ' (' + s.num + ')' : ''}`,
   body: `Здравствуйте, Ирина!\n\nВ моей карточке, пожалуйста, исправьте\n\n— \n\n${previewUrl(s)}\n\n${s.name}` });
 function previewBox(s){
@@ -1628,15 +1661,15 @@ function openCard(id){
   const box = document.getElementById('qmCard');
   box.style.setProperty('--lc', k.c); box.style.setProperty('--lf', `color-mix(in srgb,${k.c} 13%,var(--paper))`);
   box.innerHTML = `<div class="qm-top"><div class="qm-ph">${photo(s)}</div><div class="qm-head">${s.sample ? '<span class="qm-sample">Образец карточки · специалист вымышленный</span>' : ''}<span class="sp-sub" style="color:${k.c}">${ico(k.i, k.c, null, 16)}${esc(k.t)}${(() => { const l = state.canton ? tierIn(s, state.canton) : tierBest(s); return l === 'vip' ? ` · ${tierName(s, 'vip')} (платное размещение)` : l === 'партнёр' ? ` · ${tierName(s, 'партнёр')} (платное размещение)` : ''; })()}</span>
-      <h2 class="qm-title" id="qmTitle">${esc(s.name)}</h2><div style="font-family:var(--display);font-size:1.25rem;color:var(--brown)">${esc(s.role)}</div>${s.firm ? `<div class="firm" style="font-size:.95rem;margin-top:4px">${esc(s.firm)}</div>` : ''}</div>
+      <h2 class="qm-title" id="qmTitle">${esc(s.name)}${needOf(s).surname ? ' ' + UT('Фамилия') : ''}</h2><div style="font-family:var(--display);font-size:1.25rem;color:var(--brown)">${esc(s.role)}</div>${s.firm ? `<div class="firm" style="font-size:.95rem;margin-top:4px">${esc(s.firm)}</div>` : ''}</div>
       <button class="qm-close" type="button" aria-label="Закрыть">✕</button></div>
     ${promoStrip(s)}
     <div class="d-body">
       <div class="d-col">
-        <div class="d-block"><h4>Профиль</h4><p>${esc(s.about)}</p></div>
+        <div class="d-block"><h4>Профиль</h4><p>${rich(s.about)}</p></div>${feeBlock(s)}
         <div class="d-block"><h4>Услуги</h4><div class="chips svc">${s.services.map(x => `<span>${esc(x)}</span>`).join('')}</div></div>
         ${whereBlock(s)}
-        <div class="d-block"><h4>Формат</h4><p>${needOf(s).format ? UT() : esc(s.format)}</p></div>
+        <div class="d-block"><h4>Формат</h4><p>${needOf(s).format ? UT() : rich(s.format)}</p></div>
         <div class="d-block"><h4>Языки</h4><div class="chips">${(s.langs || []).map(l => `<span>${esc(l)}</span>`).join('') || UT()}</div></div>
         ${(s.tags || []).length ? `<div class="d-block"><h4>Особенности</h4><div class="d-tags">${s.tags.filter(t => TAGS[t]).map(t => `<span>${esc(TAGS[t])}</span>`).join('')}</div></div>` : ''}
         ${(() => { const vs = vacsOf(s); if (!vs.length) return '';
@@ -1649,7 +1682,7 @@ function openCard(id){
       <div class="d-side">
         <div class="d-block"><h4>Где принимает</h4><div style="display:flex;flex-direction:column;gap:10px">${livePlaces(s).map(placeFull).join('') || (needOf(s).place ? UT('Кантон и адрес') : '')}${s.online ? '<span>и онлайн по видеосвязи</span>' : ''}</div></div>
         <div class="d-block"><h4>Контакты</h4><ul class="ctl">${contacts}</ul></div>
-        <div class="card-acts">${likeBtn(s, true)}${s.sample ? '' : `<button type="button" class="vip-q" data-t="${esc(LIKE_TIP)}" aria-label="Что значит сердечко" aria-expanded="false">?</button>`}<button class="btn ghost svb" type="button" data-fav="${esc(s.id)}" aria-pressed="${FAV.has(s.id)}">${saveInner(s)}</button><button class="btn" type="button" data-vcf="${esc(s.id)}" data-tip="Сохранить телефон, e-mail и адрес в контакты телефона или компьютера">В контакты</button><button class="btn ghost" type="button" data-share="${esc(s.id)}">Поделиться</button><button class="btn ghost" type="button" data-png-card="${esc(s.id)}" data-tip="Визитка-картинка PNG: сохранится в галерею телефона, её удобно показать или переслать">Визитка PNG</button>${priceShown(s) ? `<button class="btn ghost" type="button" data-png-price="${esc(s.id)}" data-tip="Прайс-лист картинкой PNG: сохранится в галерею телефона">Прайс-лист PNG</button>` : ''}<button class="btn ghost" type="button" data-pdf-card="${esc(s.id)}" data-tip="Полная карточка для печати и почты">PDF</button></div>
+        <div class="card-acts">${likeBtn(s, true)}${s.sample ? '' : `<button type="button" class="vip-q" data-t="${esc(LIKE_TIP)}" aria-label="Что значит сердечко" aria-expanded="false">?</button>`}<button class="btn ghost svb" type="button" data-fav="${esc(s.id)}" aria-pressed="${FAV.has(s.id)}">${saveInner(s)}</button><button class="btn" type="button" data-vcf="${esc(s.id)}" data-tip="Сохранить телефон, e-mail и адрес в контакты телефона или компьютера">В контакты</button><button class="btn ghost" type="button" data-share="${esc(s.id)}">Поделиться</button><button class="btn ghost" type="button" data-png-card="${esc(s.id)}" data-tip="Визитка-картинка PNG: сохранится в галерею телефона, её удобно показать или переслать">Визитка PNG</button>${priceShown(s) ? `<button class="btn ghost" type="button" data-png-price="${esc(s.id)}" data-tip="Прайс-лист картинкой PNG: сохранится в галерею телефона">Прайс-лист PNG</button>` : ''}${feeRows(s).length ? `<button class="btn ghost" type="button" data-png-fees="${esc(s.id)}" data-tip="Взносы картинкой PNG: сохранится в галерею телефона">Взносы PNG</button>` : ''}<button class="btn ghost" type="button" data-pdf-card="${esc(s.id)}" data-tip="Полная карточка для печати и почты">PDF</button></div>
         ${needOf(s).reg ? `<p class="d-need">${UT(NEED_T.reg[0].toUpperCase() + NEED_T.reg.slice(1))}</p>` : ''}
         <p class="d-note">${s.uid ? `Регистрационный номер ${s.firm ? 'фирмы ' : ''}(UID): <a class="uid" href="${uidUrl(s.uid)}" ${ext} data-tip="Открыть запись в официальном реестре предприятий Швейцарии (uid.admin.ch)">${esc(s.uid)}</a>. ` : ''}${s.checked ? `Данные проверены ${fmtDate(s.checked)}. ` : ''}${s.num ? `Номер карточки ${esc(s.num)}. ` : ''}Справочник проверяет только официальную регистрацию. Дипломы и сертификаты указывает сам специалист. Договорённости — напрямую со специалистом.</p>
         <p class="report">Нашли ошибку в карточке? <a href="${esc(reportLink(s))}">Сообщить</a></p>
@@ -1704,8 +1737,9 @@ function cardPage(s){
       <div><div class="pp-cat" style="color:${k.c}">${esc(k.t)}${s.specs && s.specs.length ? ' · ' + esc(s.specs.join(', ')) : ''}</div><div class="pp-name">${esc(s.name)}</div><div class="pp-role">${esc(s.role)}</div>${s.firm ? `<div style="font-size:13px;color:#7A6E62;margin-top:3px">${esc(s.firm)}</div>` : ''}</div>
       <div class="pp-sec"><h4>Где принимает</h4>${livePlaces(s).map(p => p.area ? `<div>${areaTxt(p)}</div>` : `<div><a data-href="${esc(maps(p.address))}">${esc(p.address)}</a> · кантон ${esc(ktRu(p.canton))}</div>`).join('')}${s.online ? '<div>и онлайн по видеосвязи</div>' : ''}</div>
       <div class="pp-sec"><h4>Контакты</h4><div class="pp-ct">${pdfContacts(s)}</div></div></div></div>
-    <div class="pp-grid"><div class="pp-sec"><h4>Профиль</h4><p>${esc(s.about)}</p></div><div class="pp-sec"><h4>Услуги</h4><p>${esc(s.services.join(' · '))}</p></div>
-      <div class="pp-sec"><h4>Формат</h4><p>${esc(s.format)}</p></div><div class="pp-sec"><h4>Языки</h4><p>${esc(s.langs.join(', '))}</p></div></div>
+    <div class="pp-grid"><div class="pp-sec"><h4>Профиль</h4><p>${richPdf(s.about)}</p></div><div class="pp-sec"><h4>Услуги</h4><p>${esc(s.services.join(' · '))}</p></div>
+      <div class="pp-sec"><h4>Формат</h4><p>${richPdf(s.format)}</p></div><div class="pp-sec"><h4>Языки</h4><p>${esc(s.langs.join(', '))}</p></div></div>
+    ${feePdf(s)}
     ${s.uid ? `<div class="pp-sec"><h4>Регистрационный номер (UID)</h4><a data-href="${esc(uidUrl(s.uid))}">${esc(s.uid)}</a> · проверено ${fmtDate(s.checked)} на uid.admin.ch</div>` : ''}<div class="pp-qr">${qrImg(vcard(s))}<div class="pp-sec"><h4>Карточка на сайте</h4><a data-href="${esc(cardUrl(s))}">${esc(cardUrl(s))}</a><small>QR-код — визитка: наведите камеру телефона, чтобы сохранить контакт.</small></div></div>${pdfFoot}`;
 }
 async function makePdf(pages, file){
@@ -1768,7 +1802,7 @@ const VZ_CSS = `.vz{position:fixed;left:-10000px;top:0;width:540px;min-height:96
 // короткая визитка для QR (имя, фирма, профессия, телефон, e-mail, сайт): код крупнее и считывается даже с экрана
 const vcardShort = s => vcard(s).replace(/\r\n /g, '').split('\r\n').filter(l => !/^(NOTE|ADR|X-SOCIALPROFILE|PHOTO)/.test(l)).join('\r\n');
 function vizitkaNode(s, kind){
-  const price = kind === 'price', k = CATS[s.cat] || CATS.status, c = s.contacts || {};
+  const fees = kind === 'fees', price = kind === 'price' || fees, k = CATS[s.cat] || CATS.status, c = s.contacts || {};
   const av = (document.querySelector('.mark .av') || {}).innerHTML || '';
   const where = livePlaces(s).map(p => p.area ? areaTxt(p) : esc(p.address)).concat(s.online ? ['онлайн по видеосвязи'] : []);
   const ct = ['phone', 'whatsapp', 'email', 'telegram', 'bot', 'instagram', 'facebook', 'site', 'site2'].filter(x => c[x] && !(x === 'whatsapp' && digits(c.whatsapp) === digits(c.phone || ''))).map(x => { const [t, , v] = LINK[x](c[x]); return `<span>${t}</span><b>${esc(v)}</b>`; });
@@ -1778,13 +1812,20 @@ function vizitkaNode(s, kind){
   const sv = s.services || [];
   const head = `<div class="vz-p${price ? ' sm' : ''}"><span class="vz-ph">${s.photo ? `<img src="${esc(photoSrc(s.photo))}" alt="">${s.sample ? '<i>Ваше фото</i>' : ''}` : noPh(s, price ? 72 : 132, price ? 90 : 165)}</span>
         <div><div class="vz-cat" style="color:${k.c}">${esc(k.t)}</div><div class="vz-name">${esc(s.name)}</div><div class="vz-role">${esc(s.role)}</div>${s.firm ? `<div class="vz-firm">${esc(s.firm)}</div>` : ''}${price ? '' : `<div class="vz-lang"><b>Языки:</b> ${esc(s.langs.join(', '))}</div>`}</div></div>`;
-  const body = price
+  const fr = feeRows(s), feeList = `<div class="vz-pl">${fr.map(f => `<div><b>${esc(plain(f.name))}</b><span>${chf(f.sum)}${f.per ? `<small style="display:block;font:600 11px/1.2 Manrope,sans-serif;color:#7A6E62;text-align:right">${esc(f.per)}</small>` : ''}</span></div>`).join('')}</div>`;
+  const body = fees
+    ? `<div class="vz-pt">Взносы</div>
+      ${feeList}
+      <div class="vz-pn">${FEE_NOTE}</div>
+      <div class="vz-qr sm">${qrImg(short)}<div><b>Связаться</b><small>${ct.length ? ct.slice(0, 2).map(x => x.replace(/<span>.*?<\/span><b>(.*?)<\/b>/, '$1')).join('<br>') + '<br>' : ''}Наведи камеру — контакт сохранится.</small></div></div>`
+    : price
     ? `<div class="vz-pt">Прайс-лист</div>
       <div class="vz-pl">${(s.prices || []).map(r => `<div><b>${esc(r.t)}${r.n ? `<small>${esc(r.n)}</small>` : ''}</b><span>${esc(r.p)}</span></div>`).join('')}</div>
       <div class="vz-pn">Цены указал сам специалист${s.pricesDate ? ` ${fmtDate(s.pricesDate)}` : ''}. Точную стоимость уточняйте при записи.</div>
       <div class="vz-qr sm">${qrImg(short)}<div><b>Записаться</b><small>${ct.length ? ct.slice(0, 2).map(x => x.replace(/<span>.*?<\/span><b>(.*?)<\/b>/, '$1')).join('<br>') + '<br>' : ''}Наведи камеру — контакт сохранится.</small></div></div>`
     : `${where.length ? `<div class="vz-s"><h4>Где принимает</h4>${where.map(w => `<div>${w}</div>`).join('')}</div>` : ''}
       ${sv.length ? `<div class="vz-s"><h4>Услуги</h4><div class="vz-sv">${sv.map(x => `<span>${esc(x)}</span>`).join('')}</div></div>` : ''}
+      ${fr.length ? `<div class="vz-s"><h4>Взносы</h4>${feeList}</div>` : 'fees' in s && s.feeFree ? `<div class="vz-s"><h4>Взносы</h4><div>${feeFreeTxt(s)}</div></div>` : ''}
       <div class="vz-cq"><div class="vz-s"><h4>Контакты</h4><div class="vz-ct">${ct.join('')}</div></div>
         <div class="vz-q">${qrImg(short)}<b>Сохрани контакт</b><small>Наведи камеру — контакт сохранится</small></div></div>`;
   const node = document.createElement('div'); node.className = 'vz wm';
@@ -1805,7 +1846,7 @@ function vzFit(node){   // все услуги видны всегда, в дв�
 }
 async function cardPng(s, kind, opts){
   try { await loadLibs(); } catch (e){ toast('Картинка сохраняется на сайте. В этом просмотре скачивание недоступно.'); return; }
-  if (!opts) toast(kind === 'price' ? 'Готовлю прайс-лист…' : 'Готовлю визитку…');
+  if (!opts) toast(kind === 'price' ? 'Готовлю прайс-лист…' : kind === 'fees' ? 'Готовлю взносы…' : 'Готовлю визитку…');
   if (!document.getElementById('vzcss')){ const st = document.createElement('style'); st.id = 'vzcss'; st.textContent = VZ_CSS; document.head.appendChild(st); }
   const node = vizitkaNode(s, kind); document.body.appendChild(node);
   await Promise.all([...node.querySelectorAll('img')].map(im => im.complete ? 0 : new Promise(r => { im.onload = im.onerror = r; })));
@@ -1814,20 +1855,20 @@ async function cardPng(s, kind, opts){
   const canvas = await html2canvas(node, { scale: 1080 / 540, backgroundColor: '#FFFCF8', useCORS: true, logging: false });
   node.remove();
   if (opts && opts.dataUrl) return canvas.toDataURL('image/png');
-  const file = `${s.num || 'SG'} ${s.name} — ${kind === 'price' ? 'прайс-лист' : 'визитка'}.png`;
+  const file = `${s.num || 'SG'} ${s.name} — ${kind === 'price' ? 'прайс-лист' : kind === 'fees' ? 'взносы' : 'визитка'}.png`;
   const blob = await new Promise(r => canvas.toBlob(r, 'image/png'));
-  track((kind === 'price' ? 'price/' : 'png/') + s.id);
+  track((kind === 'price' ? 'price/' : kind === 'fees' ? 'fees/' : 'png/') + s.id);
   // на телефоне — системное окно: «Сохранить изображение» кладёт картинку прямо в галерею (Фото)
   try { const f = new File([blob], file, { type: 'image/png' }); if (navigator.canShare && navigator.canShare({ files: [f] }) && matchMedia('(pointer:coarse)').matches){ await navigator.share({ files: [f], title: s.name }); return; } } catch (e){ if (e && e.name === 'AbortError') return; }
   const url = URL.createObjectURL(blob), a = document.createElement('a'); a.href = url; a.download = file; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(url), 4000);
-  toast(kind === 'price' ? 'Прайс-лист сохранён картинкой.' : 'Визитка сохранена картинкой.');
+  toast(kind === 'price' ? 'Прайс-лист сохранён картинкой.' : kind === 'fees' ? 'Взносы сохранены картинкой.' : 'Визитка сохранена картинкой.');
 }
 // PDF всего списка намеренно нет: чтобы базу нельзя было скачать целиком (решение 03.10.2026)
 document.getElementById('qmCard').addEventListener('click', e => {
   const lk = e.target.closest('[data-like]'); if (lk){ toggleLike(lk.dataset.like); return; }
   const fv = e.target.closest('.svb[data-fav]'); if (fv){ toggleFav(fv.dataset.fav); paintSocial(); return; }
   const gc = e.target.closest('[data-gocat]'); if (gc){ qm.close(); state.fav = false; state.shared = null; state.cat = gc.dataset.gocat; state.spec = gc.dataset.gospec || ''; render(); const f = document.querySelector('.finder'); if (f) f.scrollIntoView({ behavior: 'smooth' }); return; }
-  const b = e.target.closest('[data-pdf-card]'); if (b) pdfCard(b.dataset.pdfCard); const g = e.target.closest('[data-png-card]'); if (g){ const s = SPECIALISTS.find(x => x.id === g.dataset.pngCard); if (s) cardPng(s); } const pr = e.target.closest('[data-png-price]'); if (pr){ const s = SPECIALISTS.find(x => x.id === pr.dataset.pngPrice); if (s) cardPng(s, 'price'); }
+  const b = e.target.closest('[data-pdf-card]'); if (b) pdfCard(b.dataset.pdfCard); const g = e.target.closest('[data-png-card]'); if (g){ const s = SPECIALISTS.find(x => x.id === g.dataset.pngCard); if (s) cardPng(s); } const pr = e.target.closest('[data-png-price]'); if (pr){ const s = SPECIALISTS.find(x => x.id === pr.dataset.pngPrice); if (s) cardPng(s, 'price'); } const fz = e.target.closest('[data-png-fees]'); if (fz){ const s = SPECIALISTS.find(x => x.id === fz.dataset.pngFees); if (s) cardPng(s, 'fees'); }
   const v = e.target.closest('[data-vcf]'); if (v){ const s = SPECIALISTS.find(x => x.id === v.dataset.vcf); if (s) saveVcf(s); }
   const sh = e.target.closest('[data-share]'); if (sh){ const s = SPECIALISTS.find(x => x.id === sh.dataset.share); if (s) shareCard(s); }
   const a = e.target.closest('a[href]'); if (a){ const id = (location.hash || '').slice(1), h = a.getAttribute('href');
