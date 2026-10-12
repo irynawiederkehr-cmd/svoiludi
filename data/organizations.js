@@ -1004,8 +1004,8 @@ window.ORGANIZATIONS = [
     "join": "Записаться на тренировку или задать вопрос — по телефону или e-mail школы.",
     "head": {
       "name": "Володимир Волков",
-      "role": "президент",
-      "spec": ""
+      "role": "президент и тренер",
+      "spec": "volodymyr-volkov-ua-do"
     },
     "contacts": {
       "phone": "+41 76 529 77 47",
