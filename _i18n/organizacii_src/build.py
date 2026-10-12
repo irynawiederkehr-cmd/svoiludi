@@ -187,11 +187,7 @@ SOFT = [('Дипломы и сертификаты указывает сам с�
         ('письмо специалисту со ссылкой', 'письмо организации со ссылкой')]
 for a, b in SOFT: rest = rest.replace(a, b)
 
-# контакты: Facebook у организаций
-a = "  bot:       v => ['Telegram-бот',"; need(rest, a)
-rest = rest.replace(a, "  facebook:  v => ['Facebook', /^https?:/.test(v) ? v : 'https://' + v, v.replace(/^https?:\\/\\/(www\\.)?/, '').replace(/\\/$/, '')],\n" + a)
-a = "['phone', 'email', 'site', 'site2', 'instagram', 'telegram', 'bot', 'whatsapp']"; need(rest, a, 0)
-rest = rest.replace(a, "['phone', 'email', 'site', 'site2', 'instagram', 'facebook', 'telegram', 'bot', 'whatsapp']")
+# контакты: Facebook — с 12.10.2026 есть в главной (LINK.facebook и списки контактов), здесь больше ничего не добавляем
 left = [m for m in re.findall(r'[^\n]{0,50}[Сс]пециалист[^\n]{0,30}', rest) if not re.match(r'\s*(//|/\*|\*)', m)]
 # форма заявки организации (своя, в отдельной области видимости), помощь «?», плашка поиска по номеру карточки
 forma = open(os.path.join(HERE, 'forma.js'), encoding='utf-8').read()
