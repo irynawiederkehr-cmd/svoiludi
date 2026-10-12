@@ -56,6 +56,51 @@
    ===================================================================== */
 window.SPECIALISTS = [
   {
+    "id": "linea-promo",
+    "keyHash": "a39f6bc0125661718fc53be20a00a54e1cf246ed53c9dc0e70e0351239b61648",
+    "num": "SG-0020",
+    "uid": "",
+    "status": "на подтверждении",
+    "paidUntil": "",
+    "tiers": [],
+    "onlineCH": "",
+    "tags": [],
+    "added": "2026-10-12",
+    "checked": "",
+    "name": "Юлия",
+    "role": "Коммуникации и производство рекламы",
+    "firm": "Linea Promo",
+    "cat": "biz",
+    "specs": [
+      "Маркетинг и соцсети",
+      "Дизайн и печать"
+    ],
+    "places": [
+      {
+        "canton": "",
+        "area": true,
+        "address": "",
+        "note": "Кантон и адрес уточним вместе с вами"
+      }
+    ],
+    "photo": "",
+    "online": false,
+    "format": "Формат работы уточним вместе с вами",
+    "about": "Linea Promo — агентство коммуникаций и производства рекламы (agence de communication & production publicitaire). Наш принцип — «Вместе ради результата»: объединяем силы, чтобы ваши цели становились победами. Для нас важны долгосрочное партнёрство, экспертиза, профессионализм, креативность и новые идеи.",
+    "services": [
+      "Рекламные коммуникации для бизнеса (communication)",
+      "Производство рекламы (production publicitaire)"
+    ],
+    "langs": [
+      "французский"
+    ],
+    "contacts": {
+      "phone": "+41 76 759 86 98",
+      "email": "julia@linea.promo",
+      "site": "linea.promo"
+    }
+  },
+  {
     "id": "lyudmila-montreux",
     "keyHash": "79ba68edcc6423b6ee7d0f2c76265eda01603f8b431133115dd2fbddd2cbb69c",
     "num": "SG-0019",
