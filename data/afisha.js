@@ -326,5 +326,14 @@ window.AFISHA = [
     langs: ['украинский'], level: 'дети: садик, дошкольники, младшая, средняя и старшая группы', price: '', commercial: true,
     organizers: [{ org: 'ridne-slovo-bern', name: 'Українська школа «Рідне Слово»' }], link: 'https://ridneslovo.ch/register/',
     about: 'Занятия по субботам по расписанию школы: украинский язык и литература, традиции, культура и история Украины. Запись ребёнка — анкетой для родителей на сайте школы.'
+  },
+  {
+    sections: ['events'], type: 'culture',
+    id: 'jewish-culture-shabat', status: 'на подтверждении', title: 'Шабат в Берне — еженедельная встреча общины Jewish Culture Switzerland',
+    date: '2026-10-17', time: '11:00', timeEnd: '14:00', repeat: { freq: 'weekly', until: '2027-01-30' },
+    canton: 'Bern', address: 'Marktgasse, Käfiggässchen 63, 3011 Bern', online: false,
+    langs: ['украинский', 'русский', 'английский'], level: 'для всех, можно с детьми', price: 'бесплатно', commercial: false,
+    organizers: [{ org: 'jewish-culture-bern', name: 'Jewish Culture Switzerland' }], link: 'https://jewishculture.ch/uk/events',
+    about: 'Каждую субботу община встречает Шабат: молитва и хвала, чтение Писания, общение и семейный стол. На украинском и русском с переводом на английский. Вход свободный.'
   }
 ];
