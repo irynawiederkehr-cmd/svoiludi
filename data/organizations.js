@@ -849,6 +849,11 @@ window.ORGANIZATIONS = [
     ],
     "address": "",
     "join": "Присоединиться к клубу — через Telegram-группу Unity Club Swiss или сообщением в Instagram.",
+    "head": {
+      "name": "Тетяна Лисенко",
+      "role": "основательница и президентка клуба",
+      "spec": ""
+    },
     "contacts": {
       "telegram": "UnityClub_Swiss",
       "instagram": "unity_club_swiss"
