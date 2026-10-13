@@ -5,6 +5,7 @@
   const mctx = document.createElement('canvas').getContext('2d');
   const tw = (s, b, size) => { mctx.font = (b ? '700 ' : '400 ') + size + 'px Manrope'; return mctx.measureText(s).width * PT; };
   function wrap(s, b, size, w){ const out = []; let line = ''; String(s || '').split(/\s+/).filter(Boolean).forEach(wd => { const t = line ? line + ' ' + wd : wd; if (tw(t, b, size) <= w || !line) line = t; else { out.push(line); line = wd; } }); if (line) out.push(line); return out; }
+  const pathD = d => d.map(s => s[0] + s.slice(1).map(v => +v.toFixed(3)).join(' ')).join(' ');
   const esc = s => String(s).replace(/[&<>"]/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'}[c]));
   function pal(bw){
     return bw ? {band: '#FFFFFF', bandTx: '#000000', bandLine: '#000000', ink: '#000000', mut: '#444444', line: '#999999', head: '#000000', soft: '#FFFFFF', zebra: '#F2F2F2', hi: '#E6E6E6', warn: '#000000',
@@ -16,10 +17,13 @@
   function page(w, h, C){
     const ops = [];
     const P = {w, h, ops, C, wm: true, wmMaxY: h, credit: true, creditY: h - 2.6,
-      text: (s, x, y, size, b, color, align, font) => { ops.push({t: 'text', s: String(s), x, y, size, b: !!b, color: color || C.ink, align: align || 'left', f: font || ''}); },
+      text: (s, x, y, size, b, color, align, font, cs) => { ops.push({t: 'text', s: String(s), x, y, size, b: !!b, color: color || C.ink, align: align || 'left', f: font || '', cs: cs || 0}); },   // cs — разрядка между буквами в мм (только с выравниванием влево)
       rect: (x, y, w2, h2, fill, stroke, r, dash) => ops.push({t: 'rect', x, y, w: w2, h: h2, fill: fill || null, stroke: stroke || null, r: r || 0, dash: !!dash}),
       line: (x1, y1, x2, y2, color, wd, dash) => ops.push({t: 'line', x1, y1, x2, y2, color: color || C.line, w: wd || 0.3, dash: !!dash}),
       tri: (p, fill) => ops.push({t: 'tri', p, fill}),
+      /* контур из отрезков и кривых (значки, 13.10.2026): d = [['M', x, y], ['L', x, y], ['C', x1, y1, x2, y2, x, y], ['Z']] в мм */
+      path: (d, fill, stroke, wd) => ops.push({t: 'path', d, fill: fill || null, stroke: stroke || null, w: wd || 0.25}),
+      circle: (cx, cy, r, fill, stroke, wd) => { const k = r * 0.5523; P.path([['M', cx + r, cy], ['C', cx + r, cy + k, cx + k, cy + r, cx, cy + r], ['C', cx - k, cy + r, cx - r, cy + k, cx - r, cy], ['C', cx - r, cy - k, cx - k, cy - r, cx, cy - r], ['C', cx + k, cy - r, cx + r, cy - k, cx + r, cy], ['Z']], fill, stroke, wd); },
       /* фото (dataURL JPEG, уже обрезанное под нужные пропорции) */
       img: (data, x, y, w2, h2) => { if (data) ops.push({t: 'img', data, x, y, w: w2, h: h2}); },
       arrowDown: (x, y1, y2, color) => { ops.push({t: 'line', x1: x, y1, x2: x, y2: y2 - 2, color, w: 0.6}); ops.push({t: 'tri', p: [[x, y2 - 0.3], [x - 1.3, y2 - 2.3], [x + 1.3, y2 - 2.3]], fill: color}); },
@@ -73,7 +77,8 @@
       else if (p.t === 'line') o += `<line x1="${p.x1}" y1="${p.y1}" x2="${p.x2}" y2="${p.y2}" stroke="${p.color}" stroke-width="${p.w}"${p.dash ? ' stroke-dasharray="1.2 0.9"' : ''}/>`;
       else if (p.t === 'tri') o += `<polygon points="${p.p.map(q => q.join(',')).join(' ')}" fill="${p.fill}"/>`;
       else if (p.t === 'img') o += `<image href="${p.data}" x="${p.x}" y="${p.y}" width="${p.w}" height="${p.h}" preserveAspectRatio="xMidYMid slice"/>`;
-      else o += `<text x="${p.x}" y="${p.y}" font-family="${p.f === 'h' ? 'Helvetica, Arial, sans-serif' : p.f === 'f' ? 'Forum, Georgia, serif' : 'Manrope'}" font-weight="${p.b ? 700 : 400}" font-size="${(p.size * PT).toFixed(3)}" fill="${p.color}" text-anchor="${p.align === 'right' ? 'end' : p.align === 'center' ? 'middle' : 'start'}">${esc(p.s)}</text>`;
+      else if (p.t === 'path') o += `<path d="${pathD(p.d)}" fill="${p.fill || 'none'}"${p.stroke ? ` stroke="${p.stroke}" stroke-width="${p.w}" stroke-linecap="round" stroke-linejoin="round"` : ''}/>`;
+      else o += `<text x="${p.x}" y="${p.y}"${p.cs ? ` letter-spacing="${p.cs}"` : ''} font-family="${p.f === 'h' ? 'Helvetica, Arial, sans-serif' : p.f === 'f' ? 'Forum, Georgia, serif' : 'Manrope'}" font-weight="${p.b ? 700 : 400}" font-size="${(p.size * PT).toFixed(3)}" fill="${p.color}" text-anchor="${p.align === 'right' ? 'end' : p.align === 'center' ? 'middle' : 'start'}">${esc(p.s)}</text>`;
     });
     const mk = marks(pg); if (mk.length) o += `<g fill="${WMC}" fill-opacity="${WMA}" font-family="Manrope" font-weight="700" font-size="${(WMS * PT).toFixed(3)}">` + mk.map(([x, y]) => `<text transform="translate(${x} ${y}) rotate(-24)">${esc(WMT)}</text>`).join('') + '</g>';
     if (showCredit(pg)) o += `<text x="${pg.w - 8}" y="${pg.creditY}" font-family="Manrope" font-size="${(4.6 * PT).toFixed(3)}" fill="#7A6E62" text-anchor="end">${esc(credit())}</text>`;
@@ -108,8 +113,10 @@
     const forum = pages.some(pg => pg.ops.some(o => o.t === 'text' && o.f === 'f'));
     const no = docNo(), F = await fonts(forum), doc = new window.jspdf.jsPDF({unit: 'mm', format: fmt(pages[0]), orientation: pages[0].w > pages[0].h ? 'l' : 'p', compress: true, putOnlyUsedFonts: true});   // в файле только шрифты, которые на самом деле стоят на листе (типографии проверяют, что все шрифты встроены)
     for (const [k, b64] of Object.entries(F)) { doc.addFileToVFS(k + '.ttf', b64); doc.addFont(k + '.ttf', k, 'normal'); }
+    let cs0 = 0;
     pages.forEach((pg, i) => {
       if (i) doc.addPage(fmt(pg), pg.w > pg.h ? 'l' : 'p');
+      cs0 = 0;
       pg.ops.forEach(o => {
         if (o.t === 'rect') {
           if (o.stroke) { doc.setDrawColor(...col(pg, o.stroke)); doc.setLineWidth(0.35); doc.setLineDashPattern(o.dash ? [1.4, 1] : [], 0); }
@@ -119,8 +126,15 @@
           doc.setLineDashPattern([], 0);
         } else if (o.t === 'line') { doc.setDrawColor(...col(pg, o.color)); doc.setLineWidth(o.w); doc.setLineDashPattern(o.dash ? [1.2, 0.9] : [], 0); doc.line(o.x1, o.y1, o.x2, o.y2); doc.setLineDashPattern([], 0); }
         else if (o.t === 'tri') { doc.setFillColor(...col(pg, o.fill)); doc.triangle(o.p[0][0], o.p[0][1], o.p[1][0], o.p[1][1], o.p[2][0], o.p[2][1], 'F'); }
+        else if (o.t === 'path') {
+          if (o.fill) doc.setFillColor(...col(pg, o.fill));
+          if (o.stroke) { doc.setDrawColor(...col(pg, o.stroke)); doc.setLineWidth(o.w); doc.setLineCap('round'); doc.setLineJoin('round'); doc.setLineDashPattern([], 0); }
+          o.d.forEach(s => { if (s[0] === 'M') doc.moveTo(s[1], s[2]); else if (s[0] === 'L') doc.lineTo(s[1], s[2]); else if (s[0] === 'C') doc.curveTo(s[1], s[2], s[3], s[4], s[5], s[6]); else if (s[0] === 'Z') doc.close(); });
+          if (o.fill && o.stroke) doc.fillStroke(); else if (o.fill) doc.fill(); else doc.stroke();
+          if (o.stroke) { doc.setLineCap('butt'); doc.setLineJoin('miter'); }
+        }
         else if (o.t === 'img') { try { doc.addImage(o.data, /^data:image\/png/.test(o.data) ? 'PNG' : 'JPEG', o.x, o.y, o.w, o.h, undefined, 'MEDIUM'); } catch (e) {} }
-        else { if (o.f === 'h') doc.setFont('helvetica', o.b ? 'bold' : 'normal'); else if (o.f === 'f') doc.setFont('Forum-Regular', 'normal'); else doc.setFont(o.b ? 'Manrope-Bold' : 'Manrope-Regular', 'normal'); doc.setFontSize(o.size); doc.setTextColor(...col(pg, o.color)); doc.text(o.s, o.x, o.y, {align: o.align}); }
+        else { if (o.f === 'h') doc.setFont('helvetica', o.b ? 'bold' : 'normal'); else if (o.f === 'f') doc.setFont('Forum-Regular', 'normal'); else doc.setFont(o.b ? 'Manrope-Bold' : 'Manrope-Regular', 'normal'); doc.setFontSize(o.size); doc.setTextColor(...col(pg, o.color)); const to = {align: o.align}; if (o.cs || cs0) to.charSpace = o.cs || 1e-6; cs0 = o.cs || 0; doc.text(o.s, o.x, o.y, to); }   // разрядка остаётся в PDF до следующего текста, поэтому после неё сбрасываем
       });
       const mk = marks(pg);
       if (mk.length) { const gs = doc.GState ? a => doc.setGState(new doc.GState({opacity: a})) : null; if (gs) gs(WMA); doc.setFont('Manrope-Bold', 'normal'); doc.setFontSize(WMS); doc.setTextColor(...(gs ? hex(WMC) : [240, 235, 228])); mk.forEach(([x, y]) => doc.text(WMT, x, y, {angle: 24})); if (gs) gs(1); }
@@ -144,6 +158,8 @@
       if (o.t === 'rect') { c.beginPath(); if (o.r && c.roundRect) c.roundRect(o.x, o.y, o.w, o.h, o.r); else c.rect(o.x, o.y, o.w, o.h); if (o.fill) { c.fillStyle = o.fill; c.fill(); } if (o.stroke) { c.strokeStyle = o.stroke; c.lineWidth = 0.35; c.setLineDash(o.dash ? [1.4, 1] : []); c.stroke(); c.setLineDash([]); } }
       else if (o.t === 'line') { c.beginPath(); c.moveTo(o.x1, o.y1); c.lineTo(o.x2, o.y2); c.strokeStyle = o.color; c.lineWidth = o.w; c.setLineDash(o.dash ? [1.2, 0.9] : []); c.stroke(); c.setLineDash([]); }
       else if (o.t === 'tri') { c.beginPath(); c.moveTo(o.p[0][0], o.p[0][1]); c.lineTo(o.p[1][0], o.p[1][1]); c.lineTo(o.p[2][0], o.p[2][1]); c.closePath(); c.fillStyle = o.fill; c.fill(); }
+      else if (o.t === 'path') { const p2 = new Path2D(pathD(o.d)); if (o.fill) { c.fillStyle = o.fill; c.fill(p2); } if (o.stroke) { c.strokeStyle = o.stroke; c.lineWidth = o.w; c.lineCap = 'round'; c.lineJoin = 'round'; c.setLineDash([]); c.stroke(p2); c.lineCap = 'butt'; c.lineJoin = 'miter'; } }
+      else if (o.cs) { c.font = (o.f === 'f' ? '400 ' : o.b ? '700 ' : '400 ') + (o.size * PT) + 'px ' + (o.f === 'f' ? 'Forum, Georgia, serif' : 'Manrope'); c.fillStyle = o.color; c.textAlign = 'left'; c.textBaseline = 'alphabetic'; let x = o.x; for (const ch of o.s) { c.fillText(ch, x, o.y); x += c.measureText(ch).width + o.cs; } }
       else { c.font = (o.f === 'f' ? '400 ' : o.b ? '700 ' : '400 ') + (o.size * PT) + 'px ' + (o.f === 'h' ? 'Helvetica, Arial, sans-serif' : o.f === 'f' ? 'Forum, Georgia, serif' : 'Manrope'); c.fillStyle = o.color; c.textAlign = o.align === 'right' ? 'right' : o.align === 'center' ? 'center' : 'left'; c.textBaseline = 'alphabetic'; c.fillText(o.s, o.x, o.y); }
     });
     const mk = marks(pg);

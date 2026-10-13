@@ -5,17 +5,17 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <link rel="icon" href="/fav/favicon.svg" type="image/svg+xml"><link rel="icon" href="/fav/icon-32.png" sizes="32x32"><link rel="apple-touch-icon" href="/fav/apple-touch-icon.png">
 <link rel="stylesheet" href="/assets/fonts.css">
-<meta name="description" content="Бесплатный конструктор визиток для Швейцарии (Visitenkarte): белая визитка 85 × 55 мм с именем, контактами, логотипом, обратной стороной на русском или украинском и QR-кодом. PDF для типографии с запасом на обрез и лист A4 на 10 визиток для печати дома.">
+<meta name="description" content="Бесплатный конструктор визиток для Швейцарии (Visitenkarte): семь простых белых видов, горизонтальная или вертикальная визитка 85 × 55, 90 × 50 или 55 × 55 мм с именем, контактами, логотипом, обратной стороной на русском или украинском и QR-кодом. PDF для типографии с запасом на обрез и лист A4 для печати дома.">
 <link rel="canonical" href="https://svoiludi.ch/instrumenty/vizitka/">
 <meta property="og:type" content="website"><meta property="og:locale" content="ru_RU"><meta property="og:site_name" content="Свои люди в Швейцарии">
-<meta property="og:title" content="Визитка для печати: файл для типографии и лист A4 для дома"><meta property="og:description" content="Белая визитка 85 × 55 мм: имя, контакты, логотип, обратная сторона по-русски или по-украински и QR-код. PDF для типографии и лист A4 для печати дома. Бесплатно.">
+<meta property="og:title" content="Визитка для печати: файл для типографии и лист A4 для дома"><meta property="og:description" content="Простая белая визитка: семь видов, горизонтальная или вертикальная, 85 × 55, 90 × 50 или 55 × 55 мм. Имя, контакты, логотип, обратная сторона по-русски или по-украински и QR-код. PDF для типографии и лист A4 для печати дома. Бесплатно.">
 <meta property="og:url" content="https://svoiludi.ch/instrumenty/vizitka/"><meta property="og:image" content="https://svoiludi.ch/instrumenty/vizitka/og-image.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="robots" content="noindex, nofollow">
 <title>Визитка для печати: файл для типографии и лист A4 для дома</title>
 <style>
 /* Визитка для печати (13.10.2026, решение Ирины «делай только белые, проще»): белая визитка 85×55, движок assets/shema.js.
-   Форма слева, живая визитка справа (на телефоне — сверху); PDF для типографии с запасом на обрез и лист A4 на 10 визиток для печати дома. */
+   Сверху выбор вида картинками (7 видов по образцам Ирины 13.10.2026), размер и положение; форма слева, живая визитка справа (на телефоне — сверху); PDF для типографии с запасом на обрез и лист A4 для печати дома. */
 :root{
   --bg:#F4EDE3; --paper:#FFFCF8; --ink:#2F2924; --muted:#7A6E62; --line:#E5D9C9; --soft:#EFE5D7;
   --brown:#6E4F3C; --mustard:#B98324; --mustard-soft:#F3E3C2; --sage:#4F5E3E; --sage-soft:#E3E8D6; --red:#A0523D;
@@ -51,7 +51,16 @@ select,input[type=text],input[type=tel],input[type=email],input[type=url]{font:i
 select:focus-visible,input:focus-visible,button:focus-visible,a:focus-visible{outline:2px solid var(--mustard);outline-offset:2px}
 ::placeholder{color:color-mix(in srgb,var(--muted) 70%,transparent)}
 input:disabled,select:disabled{opacity:.7}
-.setup{background:var(--paper);border:1.5px solid var(--line);border-radius:22px;padding:16px 18px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px 18px;align-items:start}
+.setup{background:var(--paper);border:1.5px solid var(--line);border-radius:22px;padding:16px 18px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px 18px;align-items:start}
+.setup .full{grid-column:1/-1}
+/* выбор вида миниатюрами (13.10.2026): у каждой — визитка с твоими данными */
+.tpls{display:grid;grid-template-columns:repeat(auto-fill,minmax(122px,1fr));gap:10px}
+.tpls button{font:inherit;font-size:.8rem;font-weight:700;line-height:1.25;color:var(--ink);background:var(--soft);border:1.5px solid var(--line);border-radius:12px;padding:8px 8px 9px;cursor:pointer;display:flex;flex-direction:column;align-items:stretch;gap:7px;min-width:0;text-align:center}
+.tpls .th{height:96px;display:flex;align-items:center;justify-content:center;min-width:0}
+.tpls .th>span{display:block;max-width:100%;max-height:100%;background:#fff;border-radius:2px;box-shadow:0 1px 2px rgba(40,30,20,.18),0 6px 14px -8px rgba(47,41,36,.5);overflow:hidden}
+.tpls .th svg{display:block;width:100%;height:100%}
+.tpls button[aria-pressed="true"]{border-color:var(--sage);box-shadow:inset 0 0 0 1.5px var(--sage);background:var(--sage-soft)}
+@media (max-width:560px){.tpls{grid-template-columns:repeat(2,minmax(0,1fr))}.tpls .th{height:84px}}
 @media (max-width:1000px){.setup{grid-template-columns:1fr 1fr}}
 @media (max-width:560px){.setup{grid-template-columns:1fr}}
 .fl{display:flex;flex-direction:column;gap:6px;min-width:0}
@@ -85,6 +94,7 @@ input:disabled,select:disabled{opacity:.7}
 @media (max-width:1040px){.cardbox{position:static}}
 .side-lb{font-size:.78rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);display:flex;justify-content:space-between;align-items:center;gap:8px}
 .card{background:#fff;border-radius:4px;box-shadow:0 1px 2px rgba(40,30,20,.14),0 16px 34px -18px rgba(47,41,36,.55);overflow:hidden;max-width:560px}
+.card.v{max-width:300px}.card.sq{max-width:360px}
 .card svg{display:block;width:100%;height:auto}
 .over{color:#8A3F2D;background:#F6E0D9;border-radius:12px;padding:10px 12px;font-size:.88rem;margin:0}
 .dl{background:var(--paper);border:1.5px solid var(--line);border-radius:20px;padding:14px 16px;display:flex;flex-direction:column;gap:10px}
@@ -147,18 +157,24 @@ input:disabled,select:disabled{opacity:.7}
     <p style="margin:0 0 14px"><a class="jump" href="https://svoiludi.ch/instrumenty/">← Все полезные инструменты · Свои люди в Швейцарии</a></p>
     <div class="eyebrow">Своё дело · визитки</div>
     <h1>Визитка для печати</h1>
-    <p class="lead">Белая визитка 85 × 55 мм, как принято в Швейцарии. Ты вписываешь имя, чем занимаешься и контакты, по желанию добавляешь логотип или фото, обратную сторону на русском или украинском и QR-код. Получаешь PDF, который примет любая типография, и лист A4 на 10 визиток, чтобы напечатать их дома. Бесплатно.</p>
+    <p class="lead">Простая белая визитка, как принято в Швейцарии. Выбираешь один из семи видов, горизонтальный или вертикальный, и размер: обычный 85 × 55, 90 × 50 или квадрат 55 × 55 мм. Вписываешь имя, чем занимаешься и контакты, по желанию добавляешь логотип или фото, обратную сторону на русском или украинском и QR-код. Получаешь PDF, который примет любая типография, и лист A4, чтобы напечатать визитки дома. Бесплатно.</p>
     <p class="jumps"><a class="jump" href="#guide">Зачем это тебе и как с этим работать ↓</a><a class="jump" href="#pechat">Где напечатать визитки ↓</a></p>
     <div class="privnote"><b>Твои данные только у тебя.</b> Всё, что ты вписываешь, и логотип хранятся только в твоём браузере на этом устройстве. Регистрация не нужна. Можно закрыть страницу и вернуться позже, всё останется.</div>
     <div data-fan="vizitka"></div>
   </header>
 
   <div class="setup">
-    <div class="fl"><span class="lb">Вид визитки<button type="button" class="qh" data-help="layout" aria-label="Подсказка: вид визитки" aria-expanded="false">?</button></span>
-      <div class="seg" data-seg="layout"><button type="button" data-v="classic" aria-pressed="false">Классика</button><button type="button" data-v="center" aria-pressed="false">По центру</button><button type="button" data-v="side" aria-pressed="false">Логотип слева</button></div></div>
+    <div class="fl full"><span class="lb">Вид визитки<small>нажми на картинку</small><button type="button" class="qh" data-help="layout" aria-label="Подсказка: вид визитки" aria-expanded="false">?</button></span>
+      <div class="tpls" id="tpls" aria-label="Вид визитки"></div></div>
+    <div class="fl"><span class="lb">Размер<button type="button" class="qh" data-help="size" aria-label="Подсказка: размер" aria-expanded="false">?</button></span>
+      <div class="seg" data-seg="size"><button type="button" data-v="85x55" aria-pressed="false">85 × 55 мм</button><button type="button" data-v="90x50" aria-pressed="false">90 × 50 мм</button><button type="button" data-v="55x55" aria-pressed="false">55 × 55 мм, квадрат</button></div></div>
+    <div class="fl"><span class="lb">Положение<button type="button" class="qh" data-help="orient" aria-label="Подсказка: положение" aria-expanded="false">?</button></span>
+      <div class="seg" data-seg="orient"><button type="button" data-v="h" aria-pressed="false">Горизонтальная</button><button type="button" data-v="v" aria-pressed="false">Вертикальная</button></div></div>
     <div class="fl"><span class="lb">Шрифт имени<button type="button" class="qh" data-help="font" aria-label="Подсказка: шрифт имени" aria-expanded="false">?</button></span>
       <div class="seg" data-seg="font"><button type="button" data-v="serif" aria-pressed="false">Изящный</button><button type="button" data-v="sans" aria-pressed="false">Строгий</button></div></div>
-    <div class="fl"><span class="lb">Подписи к контактам<button type="button" class="qh" data-help="lbl" aria-label="Подсказка: подписи к контактам" aria-expanded="false">?</button></span>
+    <div class="fl"><span class="lb">Перед контактами<button type="button" class="qh" data-help="cstyle" aria-label="Подсказка: что стоит перед контактами" aria-expanded="false">?</button></span>
+      <div class="seg" data-seg="cstyle"><button type="button" data-v="icon" aria-pressed="false">Значки</button><button type="button" data-v="text" aria-pressed="false">Слова</button><button type="button" data-v="none" aria-pressed="false">Ничего</button></div></div>
+    <div class="fl"><span class="lb">Язык подписей на визитке<button type="button" class="qh" data-help="lbl" aria-label="Подсказка: язык подписей" aria-expanded="false">?</button></span>
       <select id="lbl"><option value="de">Deutsch: Tel., E-Mail, Web</option><option value="fr">Français: Tél., E-mail, Web</option><option value="it">Italiano: Tel., E-mail, Web</option><option value="en">English: Phone, Email, Web</option><option value="none">Без подписей</option></select></div>
     <div class="fl"><span class="lb">Печать<button type="button" class="qh" data-help="bw" aria-label="Подсказка: без цвета" aria-expanded="false">?</button></span>
       <label class="tog"><input type="checkbox" id="bw"> Без цвета, для дешёвой печати</label></div>
@@ -178,6 +194,8 @@ input:disabled,select:disabled{opacity:.7}
         <div class="fl"><span class="lb">Имя и фамилия латиницей<button type="button" class="qh" data-help="name" aria-label="Подсказка: имя" aria-expanded="false">?</button></span><input type="text" data-k="f.name" placeholder="Anna Kovalenko" autocomplete="name"></div>
         <div class="fl"><span class="lb">Чем ты занимаешься<small>на языке подписей</small><button type="button" class="qh" data-help="role" aria-label="Подсказка: чем занимаешься" aria-expanded="false">?</button></span><input type="text" data-k="f.role" placeholder="Maniküre und Pediküre"></div>
         <div class="fl"><span class="lb">Фирма или студия<small>по желанию</small></span><input type="text" data-k="f.firm" placeholder="Studio Anna" autocomplete="organization"></div>
+        <div class="fl"><span class="lb">Слоган или короткая фраза<small>по желанию</small><button type="button" class="qh" data-help="tag" aria-label="Подсказка: слоган" aria-expanded="false">?</button></span><input type="text" data-k="f.tag" placeholder="Gepflegte Hände, gute Laune"></div>
+        <div class="fl"><span class="lb">Услуги одной строкой<small>по желанию</small><button type="button" class="qh" data-help="serv" aria-label="Подсказка: услуги" aria-expanded="false">?</button></span><input type="text" data-k="f.serv" placeholder="Maniküre · Pediküre · Nageldesign"></div>
         <div class="fl"><span class="lb">На каких языках ты работаешь<small>по желанию</small><button type="button" class="qh" data-help="langs" aria-label="Подсказка: языки" aria-expanded="false">?</button></span><div class="chips" id="langs"></div></div>
         <div class="fl"><span class="lb">Телефон</span><input type="tel" data-k="f.phone" placeholder="+41 79 000 00 00" autocomplete="tel"></div>
         <label class="tog"><input type="checkbox" data-k="f.wa"> По этому номеру можно писать в WhatsApp</label>
@@ -212,7 +230,7 @@ input:disabled,select:disabled{opacity:.7}
     </div>
 
     <div class="cardbox" id="cardBox" aria-label="Твоя визитка">
-      <div class="side-lb"><span>Лицевая сторона</span><button type="button" class="btn ghost sm" id="exOn">Посмотреть на примере</button></div>
+      <div class="side-lb"><span id="sideLb">Лицевая сторона</span><button type="button" class="btn ghost sm" id="exOn">Посмотреть на примере</button></div>
       <div class="card" id="cardFront"></div>
       <div class="side-lb" id="backLb" hidden><span>Обратная сторона</span></div>
       <div class="card" id="cardBack" hidden></div>
@@ -228,7 +246,8 @@ input:disabled,select:disabled{opacity:.7}
           <button type="button" class="btn ghost sm" data-png="back" hidden>Обратная сторона в PNG</button>
         </div>
         <div class="fl"><span class="lb">Запас на обрез в файле для типографии<button type="button" class="qh" data-help="bleed" aria-label="Подсказка: запас на обрез" aria-expanded="false">?</button></span>
-          <select id="bleed"><option value="3">3 мм: файл 91 × 61 мм (чаще всего)</option><option value="2">2 мм: файл 89 × 59 мм</option><option value="1">1 мм: файл 87 × 57 мм</option><option value="0">Без запаса: файл 85 × 55 мм</option></select></div>
+          <select id="bleed"><option value="3">3 мм: файл 91 × 61 мм (чаще всего)</option><option value="2">2 мм: файл 89 × 59 мм</option><option value="1">1 мм: файл 87 × 57 мм</option><option value="0">Без запаса: файл 85 × 55 мм</option></select></div>
+        <p class="hint" id="a4Note"></p>
         <div class="status" id="status" role="status"></div>
       </div>
     </div>
@@ -249,7 +268,7 @@ input:disabled,select:disabled{opacity:.7}
     </div>
     <ol class="steps" aria-labelledby="g-how">
       <li><span class="n">1</span><h3>Впиши данные</h3><p>Имя латиницей, как в документах, чем ты занимаешься на языке кантона и контакты. Если ты уже в «Своих людях», впиши номер карточки, и всё подставится само.</p></li>
-      <li><span class="n">2</span><h3>Выбери вид</h3><p>Три спокойных вида на белом фоне и шрифт имени. По желанию добавь логотип или фото: на белой визитке логотип с белым фоном выглядит хорошо.</p></li>
+      <li><span class="n">2</span><h3>Выбери вид и размер</h3><p>Семь простых белых видов: нажми на картинку, и визитка сразу поменяется. Выбери размер и положение: горизонтальная или вертикальная. По желанию добавь логотип или фото: на белой визитке логотип с белым фоном выглядит хорошо.</p></li>
       <li><span class="n">3</span><h3>Добавь обратную сторону</h3><p>Имя и чем ты занимаешься по-русски или по-украински, ещё одна строка и QR-код на сайт, Instagram или твою карточку в справочнике.</p></li>
       <li><span class="n">4</span><h3>Скачай и закажи</h3><p>PDF для типографии загрузи на её сайте. Лист A4 распечатай дома на плотной бумаге и разрежь по меткам или распечатай на готовых листах с визитками.</p></li>
     </ol>
@@ -259,7 +278,7 @@ input:disabled,select:disabled{opacity:.7}
       <h2 id="g-know">Что стоит знать</h2>
     </div>
     <ul class="facts" aria-labelledby="g-know">
-      <li>Обычный размер визитки в Швейцарии — 85 × 55 мм. Его делает любая типография.</li>
+      <li>Обычный размер визитки в Швейцарии — 85 × 55 мм, его делает любая типография, и горизонтально, и вертикально. Визитки 90 × 50 мм и квадратные 55 × 55 мм печатают не везде: перед заказом проверь размер на сайте типографии.</li>
       <li>Пиши на лицевой стороне на языке, на котором с тобой будут говорить клиенты. В немецкоязычных кантонах это немецкий, во франкоязычных — французский, в Тичино — итальянский. На обратной стороне то же самое можно повторить по-русски или по-украински.</li>
       <li>Имя на лицевой стороне пиши латиницей и так же, как в документах, на почтовом ящике и в договорах. Тогда клиент легко найдёт тебя в почте, в мессенджере и в реестре фирм.</li>
       <li class="attn"><i class="wi"></i>Некоторые звания в Швейцарии защищены законом: психолог (Psychologin), психотерапевт, врач (Ärztin), адвокат (Rechtsanwältin), медицинский массаж, «дипломированный» (dipl.) и другие. Пиши их на визитке, только если у тебя есть диплом или разрешение, признанные в Швейцарии. Без такого документа выбирай нейтральные слова, например «Beratung», «Coaching» или «Wellness-Massage». Подробно — в теме <a href="../../shveycariya/professii-konsultirovanie/">«Коучинг, консультирование, психология»</a>.</li>
@@ -275,23 +294,23 @@ input:disabled,select:disabled{opacity:.7}
     <p class="intro">Подойдёт любая типография, которая печатает визитки по твоему файлу. Ниже несколько швейцарских онлайн-типографий, один международный сервис и печать дома. Мы ни с кем из них не сотрудничаем и денег за эти ссылки не получаем. Цены, бумагу и сроки смотри на их сайтах.</p>
     <div class="order"><b>Что выбрать при заказе.</b>
       <ul>
-        <li>Размер 85 × 55 мм, обычная визитка (Standard, Visitenkarte).</li>
+        <li>Тот же размер, что ты выбрала здесь: 85 × 55 мм (Standard), 90 × 50 мм или квадрат 55 × 55 мм. Для вертикальной визитки выбери положение «hoch» (вертикально), если типография об этом спрашивает.</li>
         <li>Печать с одной стороны, если обратной стороны нет, или с двух сторон, если она есть.</li>
         <li>Плотная матовая бумага, 300–400 г/м²: на ней можно писать ручкой.</li>
         <li>Загрузи «PDF для типографии». Если типография просит другой запас на обрез, выбери его над кнопками скачивания.</li>
       </ul></div>
     <div class="shops">
       <div class="shop"><b><a href="https://www.flyerline.ch/de/drucksachen/visitenkarten.html" target="_blank" rel="noopener">Flyerline</a></b><span>Швейцарская онлайн-типография из Альтнау, кантон Тургау. Выбери классические визитки и загрузи свой PDF. Какой формат файла нужен, видно в конфигураторе заказа.</span></div>
-      <div class="shop"><b><a href="https://www.wir-machen-druck.ch/visitenkarten-gestalten-guenstig-drucken-lassen-schweiz-druckerei,category,9179.html" target="_blank" rel="noopener">WIRmachenDRUCK Schweiz</a></b><span>Онлайн-типография со стандартным размером 85 × 55 мм. Свой макет загружаешь при заказе. Просят запас 3 мм на обрез, как в нашем файле по умолчанию.</span></div>
-      <div class="shop"><b><a href="https://shop.rohnerspiller.ch/produkte/office-produkte/visitenkarten.html" target="_blank" rel="noopener">Rohner Spiller</a></b><span>Типография в Винтертуре с интернет-магазином. Визитки можно заказать со своим макетом, в их памятке к визиткам тоже запас 3 мм на обрез.</span></div>
+      <div class="shop"><b><a href="https://www.wir-machen-druck.ch/visitenkarten-gestalten-guenstig-drucken-lassen-schweiz-druckerei,category,9179.html" target="_blank" rel="noopener">WIRmachenDRUCK Schweiz</a></b><span>Онлайн-типография: визитки 85 × 55 мм, 90 × 50 мм и квадратные 55 × 55 мм. Свой макет загружаешь при заказе. Просят запас 3 мм на обрез, как в нашем файле по умолчанию.</span></div>
+      <div class="shop"><b><a href="https://shop.rohnerspiller.ch/produkte/office-produkte/visitenkarten.html" target="_blank" rel="noopener">Rohner Spiller</a></b><span>Типография в Винтертуре с интернет-магазином. Визитки 85 × 55 мм горизонтальные и вертикальные и квадратные 55 × 55 мм можно заказать со своим макетом, в их памятке к визиткам тоже запас 3 мм на обрез.</span></div>
       <div class="shop"><b><a href="https://www.vistaprint.ch/visitenkarten" target="_blank" rel="noopener">Vistaprint</a></b><span>Международный сервис с сайтом для Швейцарии. Нажми «Design hochladen» и загрузи свой готовый файл.</span></div>
-      <div class="shop"><b>Дома на своём принтере</b><span>Скачай «Лист A4 для печати дома». Распечатай его на плотной бумаге и разрежь по меткам или распечатай на готовых листах A4 с перфорированными визитками 85 × 55 мм, их продают, например, в <a href="https://shop.post.ch/en/stationery/paper-notebooks/craft-paper/sigel-visitenkarten-85x55mm-dp830-weiss-185g-doppels-150-stuck/p/818800" target="_blank" rel="noopener">магазине Почты</a>.</span><small>Сначала распечатай лист на обычной бумаге и приложи его к листу с визитками на просвет: края должны совпасть.</small></div>
+      <div class="shop"><b>Дома на своём принтере</b><span>Скачай «Лист A4 для печати дома». Распечатай его на плотной бумаге и разрежь по меткам. Для обычных горизонтальных визиток 85 × 55 мм есть готовые листы A4 с перфорацией, их продают, например, в <a href="https://shop.post.ch/en/stationery/paper-notebooks/craft-paper/sigel-visitenkarten-85x55mm-dp830-weiss-185g-doppels-150-stuck/p/818800" target="_blank" rel="noopener">магазине Почты</a>.</span><small>Сначала распечатай лист на обычной бумаге и приложи его к листу с визитками на просвет: края должны совпасть.</small></div>
       <div class="shop"><b>Копицентр рядом с домом</b><span>В копицентре (Copyshop) обычно можно распечатать PDF на плотной бумаге и сразу разрезать. Возьми с собой «Лист A4 для печати дома».</span></div>
     </div>
     <p class="checked">Проверено 13.10.2026.</p>
   </section>
 
-  <div class="share-slot" data-url="https://svoiludi.ch/instrumenty/vizitka/" data-lead="Перешли тем, кому нужны визитки. В ссылке нет твоих данных." data-text="Привет! Тут можно бесплатно сделать белую визитку для своего дела: PDF для типографии и лист A4, чтобы напечатать дома, с логотипом и QR-кодом. https://svoiludi.ch/instrumenty/vizitka/"></div>
+  <div class="share-slot" data-url="https://svoiludi.ch/instrumenty/vizitka/" data-lead="Перешли тем, кому нужны визитки. В ссылке нет твоих данных." data-text="Привет! Тут можно бесплатно сделать простую белую визитку для своего дела: семь видов, горизонтальная или вертикальная, с логотипом и QR-кодом. PDF для типографии и лист A4, чтобы напечатать дома. https://svoiludi.ch/instrumenty/vizitka/"></div>
   <p class="credit"><span>Свои люди в Швейцарии · svoiludi.ch</span><a href="../../o-proekte/">О проекте</a><a href="https://svoiludi.ch/privacy/">Политика конфиденциальности</a><a href="../../o-proekte/#otvetstvennost">Ограничение ответственности</a><a href="https://voznesenskaya.ch/impressum/">Выходные данные</a><a href="../../usloviya/">Условия размещения</a></p>
 </div>
 
@@ -301,32 +320,41 @@ input:disabled,select:disabled{opacity:.7}
 <script src="/assets/shema.js"></script>
 <script>
 window.HELP = {
-  layout: '<p><b>Классика</b> — имя и чем ты занимаешься вверху, контакты внизу, логотип в углу. <b>По центру</b> — всё ровно посередине, спокойно и празднично. <b>Логотип слева</b> — логотип или фото в левой колонке, текст справа; если логотипа нет, там будут твои инициалы.</p><p>Все виды белые: так визитка выглядит аккуратно и дёшево печатается.</p>',
-  font: '<p><b>Изящный</b> — имя шрифтом с засечками, как заголовки на этом сайте. Хорошо для красоты, творчества, праздников. <b>Строгий</b> — жирный шрифт без засечек, для мастерских, ремонта, консультаций. Остальной текст на визитке одинаковый.</p>',
-  lbl: '<p>Короткие подписи перед телефоном и e-mail: «Tel.», «E-Mail», «Web». Выбери язык, на котором с тобой будут говорить клиенты: в немецкоязычных кантонах — немецкий, в Женеве, Во, Невшателе, Юре, Фрибуре и Вале — французский, в Тичино — итальянский. Можно и без подписей: номер и e-mail и так узнают.</p>',
+  layout: '<p>Семь простых белых видов. <b>С линией</b> — ты и контакты слева, логотип справа за тонкой линией. <b>Значки в кружках</b> — контакты с чёрными кружками, справа логотип и фирма. <b>QR-код в углу</b> — имя крупно, QR-код в углу, контакты под линией. <b>Крупный слоган</b> — большая фраза сверху, внизу ты и как записаться. <b>Имя по центру</b> — фирма или имя по центру, контакты в два столбика. <b>Только QR-код</b> — почти пустая визитка: QR-код и пара строк. <b>Минимализм</b> — имя вразрядку и контакты в углу.</p><p>Любой вид можно сделать с логотипом и без, горизонтально и вертикально. Нажми на картинку, и визитка справа сразу поменяется.</p>',
+  size: '<p><b>85 × 55 мм</b> — обычная визитка в Швейцарии и Европе, её печатает любая типография. <b>90 × 50 мм</b> — чуть длиннее и уже. <b>55 × 55 мм</b> — квадрат. Не каждая типография печатает 90 × 50 и квадрат: перед заказом проверь размер на её сайте.</p>',
+  orient: '<p>Горизонтальная визитка привычнее. Вертикальная запоминается и хорошо подходит для QR-кода, красоты, творчества. В типографии выбирай тот же размер «hoch» (вертикально) или просто загрузи файл: по нему видно, как печатать.</p>',
+  font: '<p><b>Изящный</b> — имя или слоган шрифтом с засечками, как заголовки на этом сайте. Хорошо для красоты, творчества, праздников. <b>Строгий</b> — шрифт без засечек, для мастерских, ремонта, консультаций. Когда выбираешь вид, шрифт ставится сам, его можно поменять.</p>',
+  cstyle: '<p>Что стоит перед телефоном, e-mail и сайтом. <b>Значки</b> — маленькие рисунки: телефон, конверт, глобус, камера, бумажный самолётик, точка на карте. <b>Слова</b> — «Tel.», «E-Mail», «Web» на языке подписей. <b>Ничего</b> — только сами номера и адреса, как на самых простых визитках.</p>',
+  lbl: '<p>Язык коротких подписей на визитке: «Tel.», «E-Mail» и фраза «Termin vereinbaren» в виде «Крупный слоган». Выбери язык, на котором с тобой будут говорить клиенты: в немецкоязычных кантонах — немецкий, в Женеве, Во, Невшателе, Юре, Фрибуре и Вале — французский, в Тичино — итальянский.</p>',
   bw: '<p>Визитка и так белая с чёрным текстом. Эта галочка делает серым и твой логотип: удобно, если печатаешь дома на чёрно-белом принтере.</p>',
   find: '<p>Номер карточки стоит внизу твоей карточки на svoiludi.ch: SG-… у специалистов, OR-… у организаций. Можно вписать и UID фирмы (CHE-…). Подставляются данные только из карточек, которые уже открыты на сайте.</p><p>Имя на лицевой стороне и «чем ты занимаешься» на языке кантона впиши сама: в карточке они по-русски, и мы ставим их на обратную сторону.</p>',
   name: '<p>Латиницей и так же, как в паспорте или разрешении, на почтовом ящике и в договорах. Например «Anna Kovalenko». Так клиент легко найдёт тебя в почте и мессенджере.</p>',
   role: '<p>Коротко и понятно клиенту: «Maniküre und Pediküre», «Deutschunterricht für Kinder», «Renovationen und Umzüge». Пиши на языке подписей.</p><p>Звания вроде Psychologin, Ärztin, Physiotherapeutin, Rechtsanwältin и «dipl.» в Швейцарии защищены: пиши их, только если у тебя есть признанный здесь документ.</p>',
+  tag: '<p>Одна короткая фраза о том, что ты даёшь клиенту, например «Gepflegte Hände, gute Laune» или «Deutsch mit Freude». В виде «Крупный слоган» она стоит большими буквами сверху, в других видах — мелко под логотипом или названием фирмы. Если не впишешь, ничего страшного.</p>',
+  serv: '<p>Главные услуги через точку: «Maniküre · Pediküre · Nageldesign». Видны мелко под «чем ты занимаешься» в видах «С линией», «Значки в кружках» и «Крупный слоган».</p>',
   langs: '<p>На визитке будет строка с названиями языков на них самих: «Deutsch · Русский · Українська». Клиент сразу видит, что с тобой можно говорить на его языке.</p>',
   addr: '<p>Адрес, куда к тебе приходят клиенты: студия, кабинет, мастерская. Если ты работаешь дома или выезжаешь к клиентам, адрес можно не писать.</p>',
-  logo: '<p>Подойдёт картинка JPG или PNG. Визитка белая, поэтому логотип с белым фоном выглядит хорошо как есть, а лишние белые поля вокруг мы обрезаем сами. Прозрачный фон тоже подходит.</p><p>Для печати возьми картинку побольше, хотя бы 600 точек по ширине. Логотип хранится только в твоём браузере.</p>',
+  logo: '<p>Подойдёт картинка JPG или PNG. Визитка белая, поэтому логотип с белым фоном выглядит хорошо как есть, а лишние белые поля вокруг мы обрезаем сами. Прозрачный фон тоже подходит.</p><p>Для печати возьми картинку побольше, хотя бы 600 точек по ширине. Логотип хранится только в твоём браузере. Без логотипа на его месте будет название фирмы или твои инициалы.</p>',
   back: '<p>Обратная сторона — для своих: имя так, как тебе привычно, и чем ты занимаешься по-русски или по-украински. Можно добавить строку, например «Говорю по-русски и по-украински» или «Запись в WhatsApp», и QR-код.</p><p>Если обратная сторона пустая, визитка будет односторонней, и печать выйдет дешевле.</p>',
   qr: '<p>Квадратный код, который открывает страницу, если навести на него камеру телефона. Удобно для записи: человек сразу попадает на твой сайт, в Instagram или в твою карточку в «Своих людях», где есть все контакты и цены.</p><p>Перед печатью обязательно проверь QR-код камерой своего телефона.</p>',
-  bleed: '<p>Типография режет визитки ножом из большого листа, и нож может сдвинуться на долю миллиметра. Поэтому файл делают чуть больше визитки — это запас на обрез (Beschnitt). Чаще всего просят 3 мм с каждой стороны: файл 91 × 61 мм для визитки 85 × 55 мм.</p><p>Сколько нужно именно твоей типографии, написано на её странице визиток или в памятке к файлу (Datenblatt, «Datenformat»). Визитка белая, поэтому запас просто белый и ничего не испортит, а весь текст стоит не ближе 5 мм к краю.</p>',
-  a4: '<p>10 визиток 85 × 55 мм на листе A4, два столбика по пять, с метками, где резать. Если есть обратная сторона, второй лист — оборот: распечатай первый лист, переверни его по длинной стороне и распечатай второй. Дома оборот может сдвинуться на миллиметр, на белой визитке это почти не видно.</p>'
+  bleed: '<p>Типография режет визитки ножом из большого листа, и нож может сдвинуться на долю миллиметра. Поэтому файл делают чуть больше визитки — это запас на обрез (Beschnitt). Чаще всего просят 3 мм с каждой стороны: для визитки 85 × 55 мм файл 91 × 61 мм.</p><p>Сколько нужно именно твоей типографии, написано на её странице визиток или в памятке к файлу (Datenblatt, «Datenformat»). Визитка белая, поэтому запас просто белый и ничего не испортит, а весь текст стоит не ближе 5 мм к краю.</p>'
 };
 
 (function(){
 const KEY = 'vizitkaPechat.v1', KEYLOGO = 'vizitkaPechat.logo.v1';
 const BASE = window.PV_BASE || '/';
-const PT = SH.PT, SAFE = 5, CW = 85, CH = 55;
-const INK = '#000000', MID = '#383838', SOFT = '#666666', RULE = '#A8A8A8';
+const PT = SH.PT, SAFE = 5;
+const INK = '#000000', MID = '#383838', SOFT = '#666666', RULE = '#A8A8A8', GHOST = '#B0B0B0';
+/* размеры, которые печатают швейцарские типографии (проверено 13.10.2026: WIRmachenDRUCK — 85 × 55, 90 × 50, 55 × 55; Rohner Spiller — 85 × 55 горизонтально и вертикально, 55 × 55) */
+const SIZES = {'85x55': [85, 55], '90x50': [90, 50], '55x55': [55, 55]};
+/* виды по образцам Ирины (13.10.2026): [ключ, название, шрифт по умолчанию, подписи к контактам по умолчанию] */
+const TPL = [['line', 'С линией', 'sans', 'icon'], ['dots', 'Значки в кружках', 'sans', 'icon'], ['qr', 'QR-код в углу', 'sans', 'icon'], ['slogan', 'Крупный слоган', 'serif', 'none'], ['center', 'Имя по центру', 'serif', 'text'], ['onlyqr', 'Только QR-код', 'sans', 'none'], ['mini', 'Минимализм', 'sans', 'none']];
+const OLD = {classic: 'line', side: 'line'};
 const LBL = {
-  de: {tel: 'Tel.', mail: 'E-Mail', web: 'Web', ig: 'Instagram', tg: 'Telegram'},
-  fr: {tel: 'Tél.', mail: 'E-mail', web: 'Web', ig: 'Instagram', tg: 'Telegram'},
-  it: {tel: 'Tel.', mail: 'E-mail', web: 'Web', ig: 'Instagram', tg: 'Telegram'},
-  en: {tel: 'Phone', mail: 'Email', web: 'Web', ig: 'Instagram', tg: 'Telegram'}
+  de: {tel: 'Tel.', mail: 'E-Mail', web: 'Web', ig: 'Instagram', tg: 'Telegram', addr: 'Adresse', cta: 'Termin vereinbaren'},
+  fr: {tel: 'Tél.', mail: 'E-mail', web: 'Web', ig: 'Instagram', tg: 'Telegram', addr: 'Adresse', cta: 'Prendre rendez-vous'},
+  it: {tel: 'Tel.', mail: 'E-mail', web: 'Web', ig: 'Instagram', tg: 'Telegram', addr: 'Indirizzo', cta: 'Prenota un appuntamento'},
+  en: {tel: 'Phone', mail: 'Email', web: 'Web', ig: 'Instagram', tg: 'Telegram', addr: 'Address', cta: 'Book an appointment'}
 };
 const LANGS = [['de', 'Deutsch'], ['fr', 'Français'], ['it', 'Italiano'], ['en', 'English'], ['ru', 'Русский'], ['uk', 'Українська']];
 const LMAP = {'немецкий': 'de', 'французский': 'fr', 'итальянский': 'it', 'английский': 'en', 'русский': 'ru', 'украинский': 'uk'};
@@ -335,45 +363,71 @@ const $ = id => document.getElementById(id);
 function langOf(k){ const K = window.KANTONY || {}; return k && K[k] ? ({de: 'de', fr: 'fr', it: 'it'}[K[k].l] || 'de') : 'de'; }
 function blank(){
   let k = ''; try { k = localStorage.getItem('svoiludi.kanton') || ''; } catch (e) {}
-  return {layout: 'classic', font: 'serif', lbl: langOf(k), bleed: 3, bw: false,
-    f: {name: '', role: '', firm: '', phone: '', wa: false, email: '', web: '', ig: '', tg: '', street: '', city: '', langs: []},
+  return {layout: 'line', font: 'sans', cstyle: 'icon', size: '85x55', orient: 'h', lbl: langOf(k), bleed: 3, bw: false,
+    f: {name: '', role: '', firm: '', tag: '', serv: '', phone: '', wa: false, email: '', web: '', ig: '', tg: '', street: '', city: '', langs: []},
     back: {on: false, name: '', role: '', line: '', logo: true},
     qr: {where: 'none', to: 'web', url: ''}, card: null};
 }
 function merge(a, b){ Object.keys(b || {}).forEach(k => { if (a[k] && typeof a[k] === 'object' && !Array.isArray(a[k]) && b[k] && typeof b[k] === 'object') merge(a[k], b[k]); else if (b[k] !== undefined) a[k] = b[k]; }); return a; }
-function load(){ try { const s = JSON.parse(localStorage.getItem(KEY)); if (s && typeof s === 'object') return merge(blank(), s); } catch (e) {} return blank(); }
+function norm(s){ if (OLD[s.layout]) s.layout = OLD[s.layout]; if (!TPL.some(t => t[0] === s.layout)) s.layout = 'line'; if (!SIZES[s.size]) s.size = '85x55'; if (s.orient !== 'v') s.orient = 'h'; if (!['icon', 'text', 'none'].includes(s.cstyle)) s.cstyle = 'icon'; return s; }
+function load(){ try { const s = JSON.parse(localStorage.getItem(KEY)); if (s && typeof s === 'object') return norm(merge(blank(), s)); } catch (e) {} return blank(); }
 let S = load(), EX = null, LOGO = null, EXLOGO = null, EXNOLOGO = false;
 try { const l = JSON.parse(localStorage.getItem(KEYLOGO)); if (l && l.c) LOGO = l; } catch (e) {}
 function save(){ if (EX) return; try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} }
-const D = () => EX || S, LG = () => EX ? (EXNOLOGO ? null : EXLOGO) : LOGO;
+const D = () => EX || S;
+let LGX;   // логотип для миниатюр (подменяется на время их рисования)
+const LG = () => LGX !== undefined ? LGX : EX ? (EXNOLOGO ? null : EXLOGO) : LOGO;
 const get = (o, p) => p.split('.').reduce((a, k) => a == null ? a : a[k], o);
 const put = (o, p, v) => { const ks = p.split('.'), last = ks.pop(); ks.reduce((a, k) => a[k], o)[last] = v; };
+/* размер визитки в мм с учётом положения: [ширина, высота] */
+function dims(d){ const s = SIZES[d.size] || SIZES['85x55']; return d.orient === 'v' && s[0] !== s[1] ? [s[1], s[0]] : s.slice(); }
+const perSheet = d => { const [w, h] = dims(d); return Math.floor(190 / w) * Math.floor(277 / h); };
 
-/* ---------- текст: замер и перенос (Manrope или Forum) ---------- */
+/* ---------- текст: замер и перенос (Manrope или Forum), с разрядкой ---------- */
 const mc = document.createElement('canvas').getContext('2d');
-function tw(s, fn, size){ mc.font = fn === 'f' ? `400 ${size}px Forum` : `${fn === 'b' ? 700 : 400} ${size}px Manrope`; return mc.measureText(String(s)).width * PT; }
-function fit(s, fn, size, min, w){ while (size > min && tw(s, fn, size) > w) size -= 0.25; return size; }
-function wrap(s, fn, size, w, max){
+function tw(s, fn, size, cs){ s = String(s); mc.font = fn === 'f' ? `400 ${size}px Forum` : `${fn === 'b' ? 700 : 400} ${size}px Manrope`; return mc.measureText(s).width * PT + (cs ? cs * Math.max(0, [...s].length - 1) : 0); }
+/* перенос по пробелам и после дефиса (длинная двойная фамилия: «Konstantinopolskaya-Wiederkehr») */
+function wrap(s, fn, size, w, max, cs){
+  const toks = []; String(s || '').split(/\s+/).filter(Boolean).forEach(wd => wd.replace(/-(?=[^-])/g, '-\u0001').split('\u0001').forEach((t, i) => toks.push([t, i === 0])));
   const out = []; let line = '';
-  String(s || '').split(/\s+/).filter(Boolean).forEach(wd => { const t = line ? line + ' ' + wd : wd; if (tw(t, fn, size) <= w || !line) line = t; else { out.push(line); line = wd; } });
+  toks.forEach(([wd, sp]) => { const t = line ? line + (sp ? ' ' : '') + wd : wd; if (tw(t, fn, size, cs) <= w || !line) line = t; else { out.push(line); line = wd; } });
   if (line) out.push(line);
-  if (max && out.length > max) { const rest = out.slice(max - 1).join(' '); out.length = max - 1; let r = rest; while (r.length > 1 && tw(r + '…', fn, size) > w) r = r.slice(0, -1); out.push(r.trim() + '…'); }
+  if (max && out.length > max) { const rest = out.slice(max - 1).join(' '); out.length = max - 1; let r = rest; while (r.length > 1 && tw(r + '…', fn, size, cs) > w) r = r.slice(0, -1); out.push(r.trim() + '…'); }
   return out;
 }
-const T = (P, s, x, y, size, fn, color, align) => P.text(s, x, y, size, fn === 'b', color, align || 'left', fn === 'f' ? 'f' : '');
+/* текст на визитку; разрядку движок рисует только от левого края, поэтому центр и правый край считаем сами */
+const T = (P, s, x, y, size, fn, color, align, cs) => { align = align || 'left'; if (cs && align !== 'left') { const w = tw(s, fn, size, cs); x = align === 'center' ? x - w / 2 : x - w; align = 'left'; } P.text(s, x, y, size, fn === 'b', color, align, fn === 'f' ? 'f' : '', cs || 0); };
+/* строка или абзац до o.lines строк: o {x, y — верх, w, k, draw, size, fn, color, align, upper, csEm (разрядка в долях кегля), lines, lh, min} → нижняя граница */
+function text(P, s, o){
+  s = String(s || '').trim(); if (!s) return o.y;
+  const fn = o.fn || 'r', str = o.upper ? s.toUpperCase() : s, base = o.size * o.k, min = (o.min || o.size * 0.62) * Math.min(1, o.k + 0.15), maxL = o.lines || 1;
+  const cs = sz => o.csEm ? o.csEm * sz * PT : 0;
+  let sz = base, lines = [str];
+  while (true) { lines = tw(str, fn, sz, cs(sz)) <= o.w ? [str] : wrap(str, fn, sz, o.w, 0, cs(sz)); if ((lines.length <= maxL && lines.every(l => tw(l, fn, sz, cs(sz)) <= o.w)) || sz <= min) break; sz -= 0.25; }
+  if (lines.length > maxL) lines = wrap(str, fn, sz, o.w, maxL, cs(sz));
+  if (o.draw && lines.some(l => tw(l, fn, sz, cs(sz)) > o.w + 0.2)) P.wOver = true;   // слово не помещается даже мелко — покажем предупреждение
+  const ax = o.align === 'center' ? o.x + o.w / 2 : o.align === 'right' ? o.x + o.w : o.x;
+  let y = o.y + sz * PT * 0.76;
+  lines.forEach((l, i) => { if (o.draw) T(P, l, ax, y, sz, fn, o.color || INK, o.align, cs(sz)); if (i < lines.length - 1) y += sz * PT * (o.lh || 1.18); });
+  o.out = {size: sz, w: Math.max(...lines.map(l => tw(l, fn, sz, cs(sz)))), base: y};
+  return y + sz * PT * 0.3;
+}
 
 /* ---------- данные визитки ---------- */
 const clean = s => String(s == null ? '' : s).trim();
 const handle = s => clean(s).replace(/^https?:\/\/(www\.)?(instagram\.com|t\.me|telegram\.me)\//i, '').replace(/^@+/, '').replace(/[/?#].*$/, '');
 const site = s => clean(s).replace(/^https?:\/\//i, '').replace(/\/+$/, '');
-function rows(d){
-  const f = d.f, L = d.lbl === 'none' ? null : (LBL[d.lbl] || LBL.de), out = [];
-  const add = (k, v) => { v = clean(v); if (v) out.push([L ? L[k] : '', v]); };
-  if (clean(f.phone)) add('tel', clean(f.phone) + (f.wa ? ' · WhatsApp' : ''));
-  add('mail', f.email); add('web', site(f.web));
-  if (handle(f.ig)) add('ig', '@' + handle(f.ig));
-  if (handle(f.tg)) add('tg', '@' + handle(f.tg));
-  [f.street, f.city].map(clean).filter(Boolean).forEach(a => out.push(['', a]));
+const hfn = d => d.font === 'sans' ? 'b' : 'f';
+function nameOf(d, P){ const n = clean(d.f.name); return n ? {s: n, c: INK} : {s: P.preview ? 'Имя Фамилия' : '', c: GHOST}; }
+/* контакты строками: {k — вид, v — строки}; без подписей Telegram пишем ссылкой, чтобы его не спутать с Instagram */
+function rows(d, st){
+  const f = d.f, out = [];
+  if (clean(f.phone)) out.push({k: 'tel', v: [clean(f.phone) + (f.wa ? ' · WhatsApp' : '')]});
+  if (clean(f.email)) out.push({k: 'mail', v: [clean(f.email)]});
+  if (site(f.web)) out.push({k: 'web', v: [site(f.web)]});
+  if (handle(f.ig)) out.push({k: 'ig', v: ['@' + handle(f.ig)]});
+  if (handle(f.tg)) out.push({k: 'tg', v: [st === 'none' ? 't.me/' + handle(f.tg) : '@' + handle(f.tg)]});
+  const a = [clean(f.street), clean(f.city)].filter(Boolean); if (a.length) out.push({k: 'addr', v: a});
   return out;
 }
 const langLine = d => LANGS.filter(([k]) => (d.f.langs || []).includes(k)).map(x => x[1]).join(' · ');
@@ -391,9 +445,12 @@ function qrCap(d, url){
 }
 function initials(d){ const n = clean(d.f.name) || clean(d.back.name) || clean(d.f.firm); return n.split(/\s+/).filter(Boolean).slice(0, 2).map(w => w[0].toUpperCase()).join(''); }
 const hasBack = d => !!d.back.on && !!(clean(d.back.name) || clean(d.back.role) || clean(d.back.line) || (d.back.logo && LG()) || (d.qr.where === 'back' && qrLink(d)));
+/* QR на лицевой стороне: ссылка, а в предпросмотре без ссылки — серая заглушка, чтобы был виден вид визитки */
+const frontQr = (d, P) => d.qr.where !== 'front' ? '' : (qrLink(d) || (P && P.preview ? '#' : ''));
 
 /* ---------- рисование ---------- */
 function qrDraw(P, text, x, y, size){
+  if (text === '#') { P.rect(x, y, size, size, '#F1F1F1', '#C8C8C8'); T(P, 'QR', x + size / 2, y + size / 2 + size * 0.09, Math.max(6, size * 0.5), 'b', '#B5B5B5', 'center'); return true; }
   if (typeof qrcode !== 'function' || !text) return false;
   qrcode.stringToBytes = qrcode.stringToBytesFuncs['UTF-8'];
   const q = qrcode(0, 'M'); q.addData(text, 'Byte'); q.make();
@@ -403,123 +460,323 @@ function qrDraw(P, text, x, y, size){
 }
 function logoBox(lg, maxW, maxH){ if (!lg) return null; const r = lg.w / lg.h; let w = maxW, h = w / r; if (h > maxH) { h = maxH; w = h * r; } return {w, h}; }
 const logoData = (d, lg) => d.bw ? lg.g : lg.c;
-/* контакты: подписи серым в своей колонке, значения чёрным; возвращает высоту блока */
-function contacts(P, d, x, yBottom, w, k, draw, center){
-  const R = rows(d); if (!R.length) return 0;
-  let size = 6.4 * k; const lh = () => size * PT * 1.42;
-  const labW = () => Math.max(0, ...R.map(r => r[0] ? tw(r[0], 'r', size * 0.92) : 0)) + (R.some(r => r[0]) ? 2.2 : 0);
-  const fits = () => center ? R.every(r => tw((r[0] ? r[0] + '  ' : '') + r[1], 'r', size) <= w) : R.every(r => labW() + tw(r[1], 'r', size) <= w);
-  while (size > 5.2 && !fits()) size -= 0.2;
-  const h = R.length * lh(); if (!draw) return h;
-  let y = yBottom - h + size * PT * 1.02;
-  const lw = labW();
-  R.forEach(r => {
-    if (center) {
-      const a = r[0] ? r[0] + '  ' : '', wa = tw(a, 'r', size * 0.92), wv = tw(r[1], 'r', size), x0 = x + (w - wa - wv) / 2;
-      if (a) T(P, a, x0, y, size * 0.92, 'r', SOFT); T(P, r[1], x0 + wa, y, size, 'r', INK);
-    } else { if (r[0]) T(P, r[0], x, y, size * 0.92, 'r', SOFT); T(P, r[1], x + lw, y, size, 'r', INK); }   // адрес — в колонке значений, под телефоном
-    y += lh();
+
+/* свои значки контактов «Своих людей» (нарисованы 13.10.2026), сетка 24 × 24: телефон, конверт, глобус, фотоаппарат, бумажный самолётик, точка на карте */
+const RR = (x, y, w, h, r) => { const c = r * 0.45; return [['M', x + r, y], ['L', x + w - r, y], ['C', x + w - c, y, x + w, y + c, x + w, y + r], ['L', x + w, y + h - r], ['C', x + w, y + h - c, x + w - c, y + h, x + w - r, y + h], ['L', x + r, y + h], ['C', x + c, y + h, x, y + h - c, x, y + h - r], ['L', x, y + r], ['C', x, y + c, x + c, y, x + r, y], ['Z']]; };
+const OV = (cx, cy, rx, ry) => { ry = ry || rx; const a = rx * 0.5523, b = ry * 0.5523; return [['M', cx + rx, cy], ['C', cx + rx, cy + b, cx + a, cy + ry, cx, cy + ry], ['C', cx - a, cy + ry, cx - rx, cy + b, cx - rx, cy], ['C', cx - rx, cy - b, cx - a, cy - ry, cx, cy - ry], ['C', cx + a, cy - ry, cx + rx, cy - b, cx + rx, cy], ['Z']]; };
+const ICON = {
+  tel: [RR(6.8, 2.4, 10.4, 19.2, 2.3), [['M', 10.4, 18.3], ['L', 13.6, 18.3]]],
+  mail: [RR(2.8, 5.4, 18.4, 13.2, 1.7), [['M', 3.5, 6.5], ['L', 12, 12.9], ['L', 20.5, 6.5]]],
+  web: [OV(12, 12, 9.2), OV(12, 12, 3.9, 9.2), [['M', 2.8, 12], ['L', 21.2, 12]]],
+  ig: [RR(2.8, 7, 18.4, 12.8, 2.1), [['M', 8.1, 7], ['L', 9.5, 4.5], ['L', 14.5, 4.5], ['L', 15.9, 7]], OV(12, 13.3, 3.5)],
+  tg: [[['M', 21.3, 3.2], ['L', 2.8, 10.7], ['L', 9.7, 13.6], ['L', 12.6, 20.8], ['Z']], [['M', 9.7, 13.6], ['L', 21.3, 3.2]]],
+  addr: [[['M', 12, 21.6], ['C', 12, 21.6, 4.9, 14.9, 4.9, 9.6], ['C', 4.9, 5.7, 8.1, 2.5, 12, 2.5], ['C', 15.9, 2.5, 19.1, 5.7, 19.1, 9.6], ['C', 19.1, 14.9, 12, 21.6, 12, 21.6], ['Z']], OV(12, 9.6, 2.7)]
+};
+function icon(P, key, x, y, s, color){
+  const k = s / 24, tr = dd => dd.map(c => c[0] === 'Z' ? c : [c[0]].concat(c.slice(1).map((v, i) => i % 2 ? y + v * k : x + v * k)));
+  (ICON[key] || []).forEach(dd => P.path(tr(dd), null, color, Math.max(0.15, s * 0.075)));
+}
+/* какие подписи к контактам: значки (в виде «Значки в кружках» — в чёрных кружках), слова или ничего */
+const cst = (d, round) => d.cstyle === 'text' ? (d.lbl === 'none' ? 'none' : 'text') : d.cstyle === 'none' ? 'none' : round ? 'circle' : 'icon';
+/* блок контактов. o {x, y — верх, w, k, draw, style, align: 'left' | 'right' | 'group' (блок по центру, строки слева) | 'center', size, min, maxH, only, skip, col} → {h, w} */
+function cblock(P, d, o){
+  const st = o.style;
+  let R = rows(d, st); if (o.only) R = R.filter(r => o.only.includes(r.k)); if (o.skip) R = R.filter(r => !o.skip.includes(r.k));
+  if (!R.length) return {h: 0, w: 0};
+  const L = LBL[d.lbl] || LBL.de;
+  const geo = sz => {
+    const em = sz * PT, lh = em * 1.45, ic = st === 'circle' ? Math.max(3.3, em * 1.75) : st === 'icon' ? em * 1.12 : 0;
+    const lead = ic ? ic + (st === 'circle' ? 1.7 : 1.4) : st === 'text' ? Math.max(0, ...R.map(r => r.k !== 'addr' ? tw(L[r.k], 'r', sz * 0.88) : 0)) + 2.2 : 0;
+    const vw = Math.max(...R.map(r => Math.max(...r.v.map(s => tw(s, 'r', sz)))));
+    const rh = R.map(r => st === 'circle' ? Math.max(ic + 1.3, r.v.length * lh + 0.5) : r.v.length * lh + (st === 'icon' ? 0.3 : 0));
+    return {em, lh, ic, lead, w: lead + vw, rh, h: rh.reduce((a, b) => a + b, 0)};
+  };
+  let sz = (o.size || 6.2) * o.k, G = geo(sz); const min = o.min || 4.9;
+  while (sz > min && (G.w > o.w || (o.maxH && G.h > o.maxH))) { sz -= 0.2; G = geo(sz); }
+  if (!o.draw) return {h: G.h, w: G.w};
+  if (G.w > o.w + 0.2) P.wOver = true;
+  const bx = Math.max(o.x, o.align === 'right' ? o.x + o.w - G.w : o.align === 'group' ? o.x + (o.w - G.w) / 2 : o.x);
+  let y = o.y;
+  R.forEach((r, i) => {
+    const rh = G.rh[i], top = y + (rh - r.v.length * G.lh) / 2, cy = st === 'circle' ? y + rh / 2 : top + G.lh / 2;
+    if (st === 'circle') { const rr = G.ic / 2, s2 = G.ic * 0.6; P.circle(bx + rr, cy, rr, INK); icon(P, r.k, bx + rr - s2 / 2, cy - s2 / 2, s2, '#FFFFFF'); }
+    else if (st === 'icon') icon(P, r.k, bx, cy - G.ic / 2, G.ic, INK);
+    else if (st === 'text' && r.k !== 'addr') T(P, L[r.k], bx, top + G.lh / 2 + 0.36 * G.em, sz * 0.88, 'r', SOFT);
+    r.v.forEach((s, j) => {
+      const by = top + j * G.lh + G.lh / 2 + 0.36 * G.em;
+      if (st === 'none' && o.align === 'right') T(P, s, o.x + o.w, by, sz, 'r', o.col || INK, 'right');
+      else if (st === 'none' && o.align === 'center') T(P, s, o.x + o.w / 2, by, sz, 'r', o.col || INK, 'center');
+      else T(P, s, bx + G.lead, by, sz, 'r', o.col || INK);
+    });
+    y += rh;
   });
-  return h;
+  return {h: G.h, w: G.w};
 }
-/* верхний блок: имя, чем занимаешься, фирма, языки; возвращает нижнюю границу */
-function headBlock(P, d, x, y, w, k, draw, center, maxName){
-  const f = d.f, fn = d.font === 'sans' ? 'b' : 'f', ax = center ? x + w / 2 : x, al = center ? 'center' : 'left';
-  const name = clean(f.name) || (P.preview ? 'Имя Фамилия' : '');
-  if (name) {
-    const ns = fit(name, fn, (fn === 'f' ? 16 : 12.5) * k * (maxName || 1), 8, w);
-    const lines = tw(name, fn, ns) > w ? wrap(name, fn, ns, w, 2) : [name];
-    y += ns * PT * 0.78;
-    lines.forEach((l, i) => { if (draw) T(P, l, ax, y, ns, fn, clean(f.name) ? INK : '#B0B0B0', al); if (i < lines.length - 1) y += ns * PT * 1.08; });
-    y += ns * PT * 0.34;
+/* знак справа или сверху: логотип, или название фирмы, или инициалы в тонком круге. o {cx, y, w, h, k, draw, firmUnder, tag} → высота */
+function brand(P, d, o){
+  const lg = LG(), firm = clean(d.f.firm), fn = hfn(d), x = o.cx - o.w / 2;
+  let y = o.y;
+  if (lg) {
+    const lb = logoBox(lg, o.w, o.h); if (o.draw) P.img(logoData(d, lg), o.cx - lb.w / 2, y, lb.w, lb.h); y += lb.h;
+    if (o.firmUnder && firm) y = text(P, firm, {x, y: y + 1.8 * o.k, w: o.w, k: o.k, draw: o.draw, size: 6.4, fn: 'b', align: 'center', upper: true, csEm: 0.05, lines: 2});
+  } else if (firm) y = text(P, firm, {x, y, w: o.w, k: o.k, draw: o.draw, size: fn === 'f' ? 12.5 : 9, fn, align: 'center', upper: fn === 'b', csEm: fn === 'b' ? 0.04 : 0, lines: 2, lh: 1.08});
+  else {
+    const ini = initials(d); if (!ini) return 0;
+    const dm = Math.min(o.w, o.h, 17 * o.k), fs = Math.min(22, dm * 1.1);
+    if (o.draw) { P.circle(o.cx, y + dm / 2, dm / 2, null, INK, 0.25); T(P, ini, o.cx, y + dm / 2 + fs * PT * 0.34, fs, 'f', INK, 'center'); }
+    y += dm;
   }
-  const role = clean(f.role);
-  if (role) { const rs = 7.4 * k; wrap(role, 'r', rs, w, 2).forEach(l => { y += rs * PT * 1.25; if (draw) T(P, l, ax, y, rs, 'r', MID, al); }); }
-  const firm = clean(f.firm);
-  if (firm) { const fs = fit(firm, 'b', 6.6 * k, 5.4, w); y += fs * PT * 1.45; if (draw) T(P, firm, ax, y, fs, 'b', MID, al); }
-  const ll = langLine(d);
-  if (ll) { const ls = fit(ll, 'r', 5.8 * k, 4.8, w); y += ls * PT * 1.55; if (draw) T(P, ll, ax, y, ls, 'r', SOFT, al); }
-  return y + 0.6;
+  if (o.tag && clean(d.f.tag)) y = text(P, d.f.tag, {x, y: y + 1.4 * o.k, w: o.w, k: o.k, draw: o.draw, size: 5.6, color: SOFT, align: 'center', lines: 2, lh: 1.25});
+  return y - o.y;
 }
+/* блок человека: имя, чем занимаешься, услуги, языки, тонкая линия, контакты. o {x, y, w, k, draw, align: 'left' | 'group', round, rule, roleBold} → высота */
+function person(P, d, o){
+  const fn = hfn(d), nm = nameOf(d, P), al = o.align === 'group' ? 'center' : 'left', base = {x: o.x, w: o.w, k: o.k, draw: o.draw, align: al};
+  let y = o.y;
+  if (nm.s) y = text(P, nm.s, Object.assign({}, base, {y, size: fn === 'f' ? 15 : 11.5, fn, color: nm.c, upper: fn === 'b', csEm: fn === 'b' ? 0.02 : 0, lines: 2, lh: 1.05}));
+  if (clean(d.f.role)) y = text(P, d.f.role, Object.assign({}, base, {y: y + 1.2 * o.k, size: 6.8, fn: o.roleBold ? 'b' : 'r', color: o.roleBold ? INK : MID, lines: 2, lh: 1.25, min: 5.2}));
+  if (clean(d.f.serv)) y = text(P, d.f.serv, Object.assign({}, base, {y: y + 0.9 * o.k, size: 5.8, color: SOFT, lines: 2, lh: 1.25, min: 4.8}));
+  if (langLine(d)) y = text(P, langLine(d), Object.assign({}, base, {y: y + 0.9 * o.k, size: 5.5, color: SOFT, lines: 1, min: 4.6}));
+  if (o.rule) { y += 2 * o.k; if (o.draw) { if (al === 'center') P.line(o.x + o.w / 2 - 5, y, o.x + o.w / 2 + 5, y, RULE, 0.25); else P.line(o.x, y, o.x + Math.min(o.w, 34), y, RULE, 0.25); } y += 2.4 * o.k; } else y += 2.8 * o.k;
+  const c = {x: o.x, y, w: o.w, k: o.k, style: cst(d, o.round), align: o.align === 'group' ? 'group' : 'left'};
+  const ch = cblock(P, d, Object.assign({}, c, {draw: false})).h; if (ch && o.draw) cblock(P, d, Object.assign({}, c, {draw: true}));
+  return (ch ? y + ch : y - 2.6 * o.k) - o.y;
+}
+const vcenter = (Y, H, h) => Y + Math.max(0, (H - h) / 2);
+const isWide = (W, H) => W > H + 4;
+
+/* 1. С линией: ты и контакты слева, тонкая вертикальная линия, логотип справа */
+function tLine(P, d, X, Y, W, H, k, dr){
+  const url = frontQr(d, P);
+  if (isWide(W, H)) {
+    const Lw = W * 0.58, xd = X + Lw + 3.4, Rx = xd + 3.4, Rw = X + W - Rx, q = url ? Math.min(Rw * 0.66, H * 0.44) : 0;
+    const pb = {x: X, w: Lw, k, rule: true}, bb = {cx: Rx + Rw / 2, w: Rw, h: H * (q ? 0.34 : 0.6), k, tag: true};
+    const ph = person(P, d, Object.assign({y: 0, draw: false}, pb)), bh = brand(P, d, Object.assign({y: 0, draw: false}, bb)), rh = bh + (q ? (bh ? 3.2 : 0) + q : 0);
+    if (dr) { person(P, d, Object.assign({y: vcenter(Y, H, ph), draw: true}, pb)); const ry = vcenter(Y, H, rh); brand(P, d, Object.assign({y: ry, draw: true}, bb)); if (q) qrDraw(P, url, Rx + (Rw - q) / 2, ry + rh - q, q); if (rh) P.line(xd, Y + H * 0.08, xd, Y + H * 0.92, INK, 0.3); }
+    return ph <= H && rh <= H;
+  }
+  const q = url ? Math.min(W * 0.4, H * 0.22) : 0, bb = {cx: X + W / 2, w: W * 0.7, h: H * 0.2, k, tag: true}, pb = {x: X, w: W, k, rule: false, align: 'group'};
+  const bh = brand(P, d, Object.assign({y: 0, draw: false}, bb)), ph = person(P, d, Object.assign({y: 0, draw: false}, pb));
+  const gap = 4.2 * k, h = bh + (bh ? gap * 2 : 0) + ph + (q ? gap + q : 0);
+  if (dr) { let y = vcenter(Y, H, h); if (bh) { brand(P, d, Object.assign({y, draw: true}, bb)); y += bh + gap; P.line(X + W / 2 - 6, y, X + W / 2 + 6, y, INK, 0.3); y += gap; } person(P, d, Object.assign({y, draw: true}, pb)); y += ph; if (q) qrDraw(P, url, X + (W - q) / 2, y + gap, q); }
+  return h <= H;
+}
+/* 2. Значки в кружках: контакты с чёрными кружками слева, логотип и фирма справа */
+function tDots(P, d, X, Y, W, H, k, dr){
+  const url = frontQr(d, P);
+  if (isWide(W, H)) {
+    const Lw = W * 0.6, Rx = X + Lw + 3, Rw = X + W - Rx, q = url ? Math.min(Rw * 0.6, H * 0.4) : 0;
+    const pb = {x: X, w: Lw, k, round: true, roleBold: true}, bb = {cx: Rx + Rw / 2, w: Rw, h: H * (q ? 0.32 : 0.5), k, firmUnder: true, tag: true};
+    const ph = person(P, d, Object.assign({y: 0, draw: false}, pb)), bh = brand(P, d, Object.assign({y: 0, draw: false}, bb)), rh = bh + (q ? (bh ? 3 : 0) + q : 0);
+    if (dr) { person(P, d, Object.assign({y: vcenter(Y, H, ph), draw: true}, pb)); const ry = vcenter(Y, H, rh); brand(P, d, Object.assign({y: ry, draw: true}, bb)); if (q) qrDraw(P, url, Rx + (Rw - q) / 2, ry + rh - q, q); }
+    return ph <= H && rh <= H;
+  }
+  const q = url ? Math.min(W * 0.4, H * 0.22) : 0, bb = {cx: X + W / 2, w: W * 0.7, h: H * 0.2, k, firmUnder: true, tag: true}, pb = {x: X, w: W, k, round: true, roleBold: true, align: 'group'};
+  const bh = brand(P, d, Object.assign({y: 0, draw: false}, bb)), ph = person(P, d, Object.assign({y: 0, draw: false}, pb)), gap = 5 * k;
+  const h = bh + (bh ? gap : 0) + ph + (q ? gap + q : 0);
+  if (dr) { let y = vcenter(Y, H, h); if (bh) { brand(P, d, Object.assign({y, draw: true}, bb)); y += bh + gap; } person(P, d, Object.assign({y, draw: true}, pb)); y += ph; if (q) qrDraw(P, url, X + (W - q) / 2, y + gap, q); }
+  return h <= H;
+}
+/* имя: первое слово жирно, остальное тонко (как в образце с QR-кодом); если выбран шрифт с засечками — целиком им */
+function splitName(P, d, o){
+  const nm = nameOf(d, P); if (!nm.s) return o.y;
+  if (hfn(d) === 'f') return text(P, nm.s, Object.assign({size: 15, fn: 'f', color: nm.c, lines: 2, lh: 1.05}, o));
+  const ps = nm.s.toUpperCase().split(/\s+/), a = ps[0], b = ps.slice(1).join(' '), cs = sz => 0.03 * sz * PT;
+  const wd = sz => tw(a, 'b', sz, cs(sz)) + (b ? tw(' ', 'r', sz) + tw(b, 'r', sz, cs(sz)) : 0);
+  let sz = 11.5 * o.k; while (sz > 7 && wd(sz) > o.w) sz -= 0.25;
+  if (wd(sz) > o.w) return text(P, nm.s, Object.assign({size: 11.5, fn: 'b', color: nm.c, upper: true, lines: 2, lh: 1.05}, o));
+  const y = o.y + sz * PT * 0.76;
+  if (o.draw) { T(P, a, o.x, y, sz, 'b', nm.c, 'left', cs(sz)); if (b) T(P, b, o.x + tw(a, 'b', sz, cs(sz)) + tw(' ', 'r', sz), y, sz, 'r', nm.c, 'left', cs(sz)); }
+  return y + sz * PT * 0.3;
+}
+/* 3. QR-код в углу: имя крупно, чем занимаешься с линией до QR-кода, линия во всю ширину, контакты */
+function tQr(P, d, X, Y, W, H, k, dr){
+  const url = frontQr(d, P), lg = LG(), wide = isWide(W, H);
+  const q = url ? (wide ? Math.min(H * 0.4, 17) : Math.min(W * 0.36, 15)) : 0, lb = !q && lg ? logoBox(lg, wide ? 22 : W * 0.36, wide ? H * 0.3 : 11) : null;
+  const cw = q || (lb ? lb.w : 0), ch = q || (lb ? lb.h : 0), nw = wide ? W - (cw ? cw + 4 : 0) : W;
+  const go = draw => {
+    let y = wide ? Y : Y + (ch ? ch + 3.5 * k : 0);
+    if (draw) { if (q) qrDraw(P, url, wide ? X + W - q : X, Y, q); else if (lb) P.img(logoData(d, lg), wide ? X + W - lb.w : X, Y, lb.w, lb.h); }
+    y = splitName(P, d, {x: X, y, w: nw, k, draw});
+    const role = clean(d.f.role);
+    if (role) { const o = {x: X, y: y + 1.4 * k, w: nw - 8, k, draw, size: 5.6, color: MID, upper: true, csEm: 0.12, lines: 2, lh: 1.3}; y = text(P, role, o); if (draw && o.out.w + 3 < nw - 2) { const ly = o.out.base - o.out.size * PT * 0.3; P.line(X + o.out.w + 2.4, ly, X + nw - 1, ly, MID, 0.25); } }
+    if (langLine(d)) y = text(P, langLine(d), {x: X, y: y + 1 * k, w: nw, k, draw, size: 5.4, color: SOFT, min: 4.6});
+    y = (wide ? Math.max(y, Y + ch) : y) + 2.8 * k;
+    if (draw) P.line(X, y, X + W, y, INK, 0.3);
+    y += 2.8 * k;
+    const st = cst(d), right = ['web', 'ig', 'tg'], hasR = wide && rows(d, st).some(r => right.includes(r.k)), hasL = rows(d, st).some(r => !right.includes(r.k));
+    const cl = {x: X, y, w: hasR ? W * 0.56 : W, k, style: st, skip: hasR ? right : null}, cr = {x: X + W * 0.58, w: W * 0.42, k, style: st, align: 'right', only: right};
+    const hl = hasL || !hasR ? cblock(P, d, Object.assign({}, cl, {draw: false})).h : 0, hr = hasR ? cblock(P, d, Object.assign({}, cr, {y: 0, draw: false})).h : 0;
+    if (draw) { if (hl) cblock(P, d, Object.assign({}, cl, {y: wide ? y : Math.max(y, Y + H - hl), draw: true})); if (hr) cblock(P, d, Object.assign({}, cr, {y: Y + H - hr, draw: true})); }   // на вертикальной визитке контакты внизу
+    return Math.max(y + hl, hr ? y + hr : 0) - Y;
+  };
+  const h = go(false); if (dr) go(true);
+  return h <= H + 0.2;
+}
+/* 4. Крупный слоган: большая фраза сверху, внизу слева ты, справа «записаться» и контакты */
+function tSlogan(P, d, X, Y, W, H, k, dr){
+  const f = d.f, fn = hfn(d), lg = LG(), url = frontQr(d, P), wide = isWide(W, H);
+  const sl = clean(f.tag) || clean(f.firm) || clean(f.role) || (P.preview ? 'Твоя главная фраза' : '');
+  const L = d.lbl === 'none' ? null : (LBL[d.lbl] || LBL.de);
+  const cq = url ? (wide ? Math.min(H * 0.34, 14) : Math.min(W * 0.34, 13)) : 0, lb = !cq && lg ? logoBox(lg, wide ? 20 : W * 0.4, wide ? H * 0.26 : 10) : null;
+  const corner = cq ? {w: cq, h: cq} : lb;
+  const nm = nameOf(d, P), so = {size: fn === 'f' ? 17 : 13, fn, lines: 3, lh: 1.1, min: 9};
+  const leftItems = (x, y, w, draw) => {
+    if (nm.s) y = text(P, nm.s, {x, y, w, k, draw, size: 7.4, fn: 'b', color: nm.c, min: 5.6});
+    if (clean(f.role)) y = text(P, f.role, {x, y: y + 0.8 * k, w, k, draw, size: 6.2, color: MID, lines: 2, lh: 1.25, min: 5});
+    if (clean(f.serv)) y = text(P, f.serv, {x, y: y + 0.6 * k, w, k, draw, size: 5.8, color: MID, lines: 2, lh: 1.25, min: 4.8});
+    if (langLine(d)) y = text(P, langLine(d), {x, y: y + 0.6 * k, w, k, draw, size: 5.4, color: SOFT, min: 4.6});
+    return y;
+  };
+  /* «Termin vereinbaren» и контакты; без контактов фразы о записи нет */
+  const rightItems = (x, y, w, draw, align) => {
+    const o = {x, w, k, style: cst(d), align, only: ['tel', 'mail', 'web', 'ig', 'tg'], size: 6};
+    const h = cblock(P, d, Object.assign({}, o, {y: 0, draw: false})).h; if (!h) return y;
+    if (L) y = text(P, L.cta, {x, y, w, k, draw, size: 6.6, fn: 'b', align: align === 'right' ? 'right' : 'left', min: 5.2});
+    if (draw) cblock(P, d, Object.assign({}, o, {y: y + 1 * k, draw: true}));
+    return y + 1 * k + h;
+  };
+  if (wide) {
+    const sw = W - (corner ? corner.w + 4 : 0) - W * 0.06, lw = W * 0.54, rw = W * 0.44;
+    const sh = text(P, sl, Object.assign({x: X, y: Y, w: sw, k, draw: false}, so)) - Y;
+    const lh = leftItems(X, 0, lw, false), rh = rightItems(X + W - rw, 0, rw, false, 'right'), bh = Math.max(lh, rh);
+    if (dr) {
+      if (sl) text(P, sl, Object.assign({x: X, y: Y, w: sw, k, draw: true, color: clean(f.tag) || clean(f.firm) || clean(f.role) ? INK : GHOST}, so));
+      if (cq) qrDraw(P, url, X + W - cq, Y, cq); else if (lb) P.img(logoData(d, lg), X + W - lb.w, Y, lb.w, lb.h);
+      leftItems(X, Y + H - lh, lw, true); rightItems(X + W - rw, Y + H - rh, rw, true, 'right');
+    }
+    return Math.max(sh, corner ? corner.h : 0) + 3 * k + bh <= H;
+  }
+  const go = draw => {
+    let y = Y;
+    if (lb) { if (draw) P.img(logoData(d, lg), X, y, lb.w, lb.h); y += lb.h + 4 * k; }
+    if (sl) y = text(P, sl, Object.assign({x: X, y, w: W, k, draw, color: clean(f.tag) || clean(f.firm) || clean(f.role) ? INK : GHOST}, so));
+    const lh = leftItems(X, 0, W, false), rh = rightItems(X, 0, W - (cq ? cq + 3 : 0), false, 'left');
+    if (draw) { const ry = Y + H - rh; rightItems(X, ry, W - (cq ? cq + 3 : 0), true, 'left'); leftItems(X, ry - 3.4 * k - lh, W, true); if (cq) qrDraw(P, url, X + W - cq, Y + H - cq, cq); }
+    return y + 3.5 * k + lh + 3.4 * k + Math.max(rh, cq) - Y;
+  };
+  const h = go(false); if (dr) go(true);
+  return h <= H;
+}
+/* 5. Имя по центру: фирма или имя крупно, строка под ним, контакты в два столбика через тонкую линию */
+function tCenter(P, d, X, Y, W, H, k, dr){
+  const f = d.f, fn = hfn(d), lg = LG(), url = frontQr(d, P), wide = isWide(W, H), nm = nameOf(d, P);
+  const q = url ? (wide ? Math.min(H * 0.4, 15) : Math.min(W * 0.36, 14)) : 0, Wt = wide && q ? W - q - 4 : W;
+  const firm = clean(f.firm), ttl = firm || nm.s, tcol = firm ? INK : nm.c;
+  const subs = []; if (clean(f.tag)) subs.push(clean(f.tag)); if (firm) { const s = [clean(f.name), clean(f.role)].filter(Boolean).join(' · '); if (s) subs.push(s); } else if (clean(f.role)) subs.push(clean(f.role));
+  if (langLine(d)) subs.push(langLine(d));
+  const L = LBL[d.lbl] || LBL.de;
+  let st = cst(d);
+  const R = () => rows(d, st);
+  /* два столбика: слева подписи или значки (к линии), справа значения */
+  const cols = (cx, y, w, draw) => {
+    const rs = R(); if (!rs.length) return 0;
+    if (st === 'none') return cblock(P, d, {x: cx - w / 2, y, w, k, draw, style: 'none', align: 'center', size: 6}).h;
+    let sz = 6 * k, em, lh, lw, vw;
+    const geo = () => { em = sz * PT; lh = em * 1.45; lw = Math.max(...rs.map(r => st === 'icon' ? em * 1.12 : r.k === 'addr' ? 0 : tw(L[r.k], 'r', sz * 0.9))); vw = Math.max(...rs.map(r => Math.max(...r.v.map(s => tw(s, 'r', sz))))); };
+    geo(); while (sz > 4.9 && lw + vw + 5 > w) { sz -= 0.2; geo(); }
+    const h = rs.reduce((a, r) => a + r.v.length * lh, 0); if (!draw) return h;
+    const xr = cx - (lw + vw + 5) / 2 + lw + 2.5; let yy = y;
+    P.line(xr, y + lh * 0.12, xr, y + h - lh * 0.12, INK, 0.25);
+    rs.forEach(r => { const c = yy + lh / 2;
+      if (st === 'icon') icon(P, r.k, xr - 2.3 - em * 1.12, c - em * 0.56, em * 1.12, INK); else if (r.k !== 'addr') T(P, L[r.k], xr - 2.3, c + 0.36 * em, sz * 0.9, 'r', SOFT, 'right');
+      r.v.forEach((s, j) => T(P, s, xr + 2.3, yy + j * lh + lh / 2 + 0.36 * em, sz, 'r', INK)); yy += r.v.length * lh; });
+    return h;
+  };
+  const lb = lg ? logoBox(lg, Wt * 0.42, H * (wide ? 0.24 : 0.16)) : null;
+  const go = (draw, top) => {
+    let y = top; const cx = X + Wt / 2;
+    if (lb) { if (draw) P.img(logoData(d, lg), cx - lb.w / 2, y, lb.w, lb.h); y += lb.h + 3 * k; }
+    if (ttl) y = text(P, ttl, {x: X, y, w: Wt, k, draw, size: fn === 'f' ? 17 : 12, fn, color: tcol, align: 'center', upper: true, csEm: fn === 'f' ? 0.02 : 0.05, lines: 2, lh: 1.05});
+    subs.forEach((s, i) => { y = text(P, s, {x: X, y: y + (i ? 0.6 : 1.4) * k, w: Wt, k, draw, size: 5.8, color: i ? SOFT : MID, align: 'center', lines: 1, min: 4.6}); });
+    const ch = cols(cx, 0, Wt, false); if (ch) { y += 3.8 * k; cols(cx, y, Wt, draw); y += ch; }
+    return y - top;
+  };
+  const Hc = !wide && q ? H - q - 3 : H, h = go(false, 0);
+  if (dr) { go(true, vcenter(Y, Hc, h)); if (q) qrDraw(P, url, wide ? X + W - q : X + (W - q) / 2, wide ? vcenter(Y, H, q) : Y + H - q, q); }
+  return h <= Hc;
+}
+/* 6. Только QR-код: почти пустая визитка, QR-код и несколько строк мелкими заглавными */
+function tOnlyQr(P, d, X, Y, W, H, k, dr){
+  const f = d.f, url = frontQr(d, P), lg = LG(), wide = isWide(W, H), nm = nameOf(d, P);
+  const main = clean(f.firm) || nm.s, lines = [[main, 'b', clean(f.firm) ? INK : nm.c]];
+  if (clean(f.firm) && clean(f.name)) lines.push([clean(f.name), 'r', MID]);
+  [site(f.web), clean(f.email), clean(f.phone)].filter(Boolean).forEach(s => lines.push([s, 'r', MID]));
+  const ls = lines.filter(l => l[0]).slice(0, 4);
+  /* строки заглавными вразрядку; длинный e-mail или сайт, который так не помещается, — обычными буквами */
+  const block = (x, y, w, draw, align) => { ls.forEach((l, i) => { const sz = (i ? 5.4 : 6), up = tw(l[0].toUpperCase(), l[1], 4.4 * Math.min(1, k + 0.15), 0.14 * 4.4 * PT) <= w; y = text(P, l[0], {x, y: y + (i ? 1.1 * k : 0), w, k, draw, size: sz, fn: l[1], color: l[2], align, upper: up, csEm: up ? 0.14 : 0, min: 4.4}); }); return y; };
+  const slot = (x, y, s, draw) => { if (!draw) return; if (url) qrDraw(P, url, x, y, s); else if (lg) { const lb = logoBox(lg, s, s); P.img(logoData(d, lg), x + (s - lb.w) / 2, y + (s - lb.h) / 2, lb.w, lb.h); } else { const ini = initials(d); if (ini) { P.circle(x + s / 2, y + s / 2, s / 2, null, INK, 0.25); T(P, ini, x + s / 2, y + s / 2 + s * 0.17, s * 1.2, 'f', INK, 'center'); } } };
+  if (wide) {
+    const s = Math.min(H * 0.66, W * 0.3) * Math.min(1, k + 0.1), tx = X + s + 6, tw2 = W - s - 6, bh = block(tx, 0, tw2, false, 'left');
+    if (dr) { slot(X + 1, vcenter(Y, H, s), s, true); block(tx, vcenter(Y, H, bh), tw2, true, 'left'); }
+    return bh <= H;
+  }
+  const s = Math.min(W * 0.6, H * 0.46) * Math.min(1, k + 0.1), bh = block(X, 0, W, false, 'center'), h = s + 5 * k + bh;
+  if (dr) { const y = vcenter(Y, H, h) - (H > h + 8 ? 2 : 0); slot(X + (W - s) / 2, y, s, true); block(X, y + s + 5 * k, W, true, 'center'); }
+  return h <= H;
+}
+/* 7. Минимализм: имя заглавными вразрядку, короткая чёрточка, чем занимаешься; контакты в нижнем углу */
+function tMini(P, d, X, Y, W, H, k, dr){
+  const f = d.f, nm = nameOf(d, P), lg = LG(), url = frontQr(d, P), wide = isWide(W, H), fn = d.font === 'sans' ? 'r' : 'f';
+  const q = url ? Math.min(wide ? H * 0.36 : W * 0.32, 13) : 0, lb = lg ? logoBox(lg, wide ? 18 : W * 0.4, wide ? H * 0.22 : 9) : null;
+  const top = (x, y, w, draw) => {
+    if (nm.s) y = text(P, nm.s, {x, y, w, k, draw, size: fn === 'f' ? 13 : 9.6, fn, color: nm.c, upper: true, csEm: 0.24, lines: 2, lh: 1.35, min: 6.4});
+    y += 2.2 * k; if (draw) P.line(x, y, x + 2.6, y, INK, 0.35); y += 2.4 * k;
+    if (clean(f.role)) y = text(P, f.role, {x, y, w, k, draw, size: 5.8, color: MID, lines: 2, lh: 1.3, min: 4.8});
+    if (langLine(d)) y = text(P, langLine(d), {x, y: y + 0.6 * k, w, k, draw, size: 5.2, color: SOFT, min: 4.4});
+    return y;
+  };
+  const st = cst(d), cx = wide ? X + W * 0.46 : X, cw = wide ? W * 0.54 : W - (q ? q + 3 : 0);
+  const c = {x: cx, w: cw, k, style: st, size: 5.6, col: MID};
+  const ch = cblock(P, d, Object.assign({}, c, {y: 0, draw: false})).h;
+  const ty = wide ? Y + H * 0.14 : Y + (lb ? lb.h + 4 * k : 0), tw2 = wide ? W - (lb ? lb.w + 4 : 0) : W;
+  const tb = top(X + (wide ? W * 0.02 : 0), ty, tw2, false);
+  if (dr) {
+    if (lb) P.img(logoData(d, lg), wide ? X + W - lb.w : X, Y, lb.w, lb.h);
+    top(X + (wide ? W * 0.02 : 0), ty, tw2, true);
+    if (ch) cblock(P, d, Object.assign({}, c, {y: Y + H - ch, draw: true}));
+    if (q) qrDraw(P, url, wide ? X : X + W - q, Y + H - q, q);
+  }
+  return tb + 2.5 * k <= Y + H - Math.max(ch, wide ? 0 : q) && (!wide || !q || tb + 2 <= Y + H - q);
+}
+const TF = {line: tLine, dots: tDots, qr: tQr, slogan: tSlogan, center: tCenter, onlyqr: tOnlyQr, mini: tMini};
 function front(P, d, X, Y){
-  const lg = LG(), x0 = X + SAFE, y0 = Y + SAFE, W = CW - 2 * SAFE, H = CH - 2 * SAFE, url = d.qr.where === 'front' ? qrLink(d) : '';
-  let over = false;
-  for (let i = 0; i <= 4; i++) {
-    const k = 1 - i * 0.05, last = i === 4;
-    const draw = (dr) => {
-      if (d.layout === 'side') {
-        const LC = 24, x1 = x0 + LC + 5, W1 = W - LC - 5, q = url ? 15 : 0;
-        const lb = logoBox(lg, LC, url ? 17 : 30);
-        if (dr) {
-          if (lb) { const ly = url ? y0 : y0 + (H - lb.h) / 2; P.img(logoData(d, lg), x0 + (LC - lb.w) / 2, ly, lb.w, lb.h); }
-          else { const ini = initials(d), dm = 18, cy = url ? y0 : y0 + (H - dm) / 2; P.rect(x0 + (LC - dm) / 2, cy, dm, dm, null, RULE, dm / 2); if (ini) T(P, ini, x0 + LC / 2, cy + dm / 2 + 2.6, fit(ini, 'f', 21, 12, dm - 5), 'f', INK, 'center'); }
-          if (url) qrDraw(P, url, x0 + (LC - q) / 2, y0 + H - q, q);
-          P.line(x0 + LC + 2.5, y0 + 1, x0 + LC + 2.5, y0 + H - 1, RULE, 0.2);
-        }
-        const hb = headBlock(P, d, x1, y0, W1, k, dr, false, 0.9);
-        const ch = contacts(P, d, x1, y0 + H, W1, k, dr, false);
-        return hb <= y0 + H - ch - 2;
-      }
-      if (d.layout === 'center') {
-        const q = url ? 15 : 0, Wt = W - (q ? q + 3 : 0), lb = logoBox(lg, 34, 11 * k);
-        const parts = (dr2, top) => {
-          let y = top;
-          if (lb) { if (dr2) P.img(logoData(d, lg), x0 + (Wt - lb.w) / 2, y, lb.w, lb.h); y += lb.h + 3; }
-          y = headBlock(P, d, x0, y, Wt, k, dr2, true);
-          const ch = contacts(P, d, x0, 0, Wt, k, false, true);
-          if (ch) { y += 1.6; if (dr2) P.line(x0 + Wt / 2 - 5, y, x0 + Wt / 2 + 5, y, RULE, 0.2); y += 2.4; contacts(P, d, x0, y + ch, Wt, k, dr2, true); y += ch; }
-          return y;
-        };
-        const hgt = parts(false, 0); const top = y0 + Math.max(0, (H - hgt) / 2);
-        if (dr) { parts(true, top); if (url) qrDraw(P, url, x0 + W - q, y0 + (H - q) / 2, q); }
-        return hgt <= H;
-      }
-      // классика
-      const q = url ? 16 : 0, lb = logoBox(lg, 30, 11 * k);
-      let y = y0;
-      if (lb) { if (dr) P.img(logoData(d, lg), x0, y0, lb.w, lb.h); y += lb.h + 3.2; }
-      const hb = headBlock(P, d, x0, y, W, k, dr, false);
-      const ch = contacts(P, d, x0, y0 + H, W - (q ? q + 3 : 0), k, dr, false);
-      if (dr && url) qrDraw(P, url, x0 + W - q, y0 + H - q, q);
-      return hb <= y0 + H - Math.max(ch, q) - 2;
-    };
-    if (draw(false) || last) { draw(true); over = !draw(false); break; }
-  }
-  return over;
+  const [CW, CH] = dims(d), x0 = X + SAFE, y0 = Y + SAFE, W = CW - 2 * SAFE, H = CH - 2 * SAFE, f = TF[d.layout] || tLine;
+  for (let i = 0; i <= 5; i++) { const k = 1 - i * 0.05; if (f(P, d, x0, y0, W, H, k, false) || i === 5) { P.wOver = false; f(P, d, x0, y0, W, H, k, true); return !f(P, d, x0, y0, W, H, k, false) || P.wOver; } }
+  return false;
 }
 function back(P, d, X, Y){
-  const lg = d.back.logo ? LG() : null, x0 = X + SAFE, y0 = Y + SAFE, W = CW - 2 * SAFE, H = CH - 2 * SAFE, url = d.qr.where === 'back' ? qrLink(d) : '';
-  const fn = d.font === 'sans' ? 'b' : 'f', cx = x0 + W / 2;
+  const [CW, CH] = dims(d), lg = d.back.logo ? LG() : null, x0 = X + SAFE, y0 = Y + SAFE, W = CW - 2 * SAFE, H = CH - 2 * SAFE, url = d.qr.where === 'back' ? qrLink(d) : '';
+  const fn = hfn(d), cx = x0 + W / 2;
   const items = (k, dr, top) => {
     let y = top;
-    const lb = logoBox(lg, 40, 13 * k);
+    const lb = logoBox(lg, W * 0.5, H * 0.26 * k);
     if (lb) { if (dr) P.img(logoData(d, lg), cx - lb.w / 2, y, lb.w, lb.h); y += lb.h + 3.4; }
     const name = clean(d.back.name);
-    if (name) { const ns = fit(name, fn, (fn === 'f' ? 14.5 : 11.5) * k, 8, W); y += ns * PT * 0.78; if (dr) T(P, name, cx, y, ns, fn, INK, 'center'); y += ns * PT * 0.34; }
-    const role = clean(d.back.role);
-    if (role) { const rs = 7.4 * k; wrap(role, 'r', rs, W, 2).forEach(l => { y += rs * PT * 1.25; if (dr) T(P, l, cx, y, rs, 'r', MID, 'center'); }); }
-    const line = clean(d.back.line);
-    if (line) { const s2 = 6.6 * k; y += 1; wrap(line, 'r', s2, W, 2).forEach(l => { y += s2 * PT * 1.35; if (dr) T(P, l, cx, y, s2, 'r', MID, 'center'); }); }
-    if (url) { const q = 15 * Math.min(1, k + 0.1); y += (y > top ? 3.4 : 0); if (dr) qrDraw(P, url, cx - q / 2, y, q); y += q; const cap = qrCap(d, url); if (cap) { const cs = fit(cap, 'r', 5.4, 4.6, W); y += cs * PT * 1.45; if (dr) T(P, cap, cx, y, cs, 'r', SOFT, 'center'); } }
+    if (name) y = text(P, name, {x: x0, y, w: W, k, draw: dr, size: fn === 'f' ? 14.5 : 11, fn, align: 'center', lines: 2, lh: 1.05});
+    if (clean(d.back.role)) y = text(P, d.back.role, {x: x0, y: y + 1.2 * k, w: W, k, draw: dr, size: 7.2, color: MID, align: 'center', lines: 2, lh: 1.25, min: 5.2});
+    if (clean(d.back.line)) y = text(P, d.back.line, {x: x0, y: y + 1.6 * k, w: W, k, draw: dr, size: 6.4, color: MID, align: 'center', lines: 2, lh: 1.3, min: 5});
+    if (url) { const q = Math.min(15, W * 0.42) * Math.min(1, k + 0.1); y += (y > top ? 3.4 : 0); if (dr) qrDraw(P, url, cx - q / 2, y, q); y += q; const cap = qrCap(d, url); if (cap) y = text(P, cap, {x: x0, y: y + 1.2, w: W, k: 1, draw: dr, size: 5.4, color: SOFT, align: 'center', min: 4.6}); }
     return y - top;
   };
   let k = 1; while (k > 0.75 && items(k, false, 0) > H) k -= 0.05;
-  const h = items(k, false, 0); items(k, true, y0 + Math.max(0, (H - h) / 2));
-  return h > H;
+  const h = items(k, false, 0); P.wOver = false; items(k, true, vcenter(y0, H, h));
+  return h > H || P.wOver;
 }
 function newPage(w, h){ const P = SH.page(w, h, SH.pal(true)); P.wm = false; P.credit = false; P.kBlack = true; return P; }
 /* одна сторона визитки; bleed — запас на обрез в мм (0 — как визитка на экране) */
 function cardPage(d, side, bleed, preview){
-  const W = CW + 2 * bleed, H = CH + 2 * bleed, P = newPage(W, H); P.fmt = [W, H]; P.pngK = 12; P.preview = !!preview;
+  const [CW, CH] = dims(d), W = CW + 2 * bleed, H = CH + 2 * bleed, P = newPage(W, H); P.fmt = [W, H]; P.pngK = 12; P.preview = !!preview;
   P.over = (side === 'back' ? back : front)(P, d, bleed, bleed);
   return P;
 }
-/* лист A4: 2 × 5 визиток без промежутков, метки реза на полях; оборот — зеркально по столбцам, для печати с двух сторон */
+/* лист A4: сколько поместится визиток выбранного размера, без промежутков, метки реза на полях (не ближе 10 мм к краю листа);
+   для 85 × 55 это 2 × 5, как на готовых листах с перфорацией; оборот — зеркально по столбцам, для печати с двух сторон */
 function a4(d, side){
-  const P = newPage(210, 297), ox = 20, oy = 11;
-  for (let r = 0; r < 5; r++) for (let c = 0; c < 2; c++) { const cc = side === 'back' ? 1 - c : c; (side === 'back' ? back : front)(P, d, ox + cc * CW, oy + r * CH); }
-  [ox, ox + CW, ox + 2 * CW].forEach(x => { P.line(x, 1.5, x, oy - 2, '#8C8C8C', 0.2); P.line(x, oy + 5 * CH + 2, x, 295.5, '#8C8C8C', 0.2); });
-  for (let r = 0; r <= 5; r++) { const y = oy + r * CH; P.line(4, y, ox - 2, y, '#8C8C8C', 0.2); P.line(ox + 2 * CW + 2, y, 206, y, '#8C8C8C', 0.2); }
+  const [CW, CH] = dims(d), P = newPage(210, 297), cols = Math.max(1, Math.floor(190 / CW)), rws = Math.max(1, Math.floor(277 / CH)), ox = (210 - cols * CW) / 2, oy = (297 - rws * CH) / 2;
+  for (let r = 0; r < rws; r++) for (let c = 0; c < cols; c++) { const cc = side === 'back' ? cols - 1 - c : c; (side === 'back' ? back : front)(P, d, ox + cc * CW, oy + r * CH); }
+  for (let c = 0; c <= cols; c++) { const x = ox + c * CW; P.line(x, 1.5, x, oy - 2, '#8C8C8C', 0.2); P.line(x, oy + rws * CH + 2, x, 295.5, '#8C8C8C', 0.2); }
+  for (let r = 0; r <= rws; r++) { const y = oy + r * CH; P.line(4, y, ox - 2, y, '#8C8C8C', 0.2); P.line(ox + cols * CW + 2, y, 206, y, '#8C8C8C', 0.2); }
   return P;
 }
 
@@ -557,40 +814,61 @@ function exampleLogo(){ // вымышленный логотип для прим
 /* ---------- экран ---------- */
 const st = $('status'), say = t => { st.textContent = t || ''; };
 let tmr;
+/* миниатюры видов: с твоими данными, а пока имени нет — с вымышленным примером без логотипа */
+const THD = () => ({f: {name: 'Anna Kovalenko', role: 'Maniküre und Pediküre', firm: 'Studio Anna', tag: 'Gepflegte Hände, gute Laune', serv: '', phone: '+41 00 000 00 00', wa: false, email: 'anna@example.ch', web: 'www.example.ch', ig: '', tg: '', street: '', city: '', langs: []}, card: null, qr: {where: 'none', to: 'web', url: ''}});
+function variant(d, t){ const v = Object.assign({}, d, {layout: t[0], font: t[2], cstyle: t[3], qr: Object.assign({}, d.qr)}); if ((t[0] === 'qr' || t[0] === 'onlyqr') && v.qr.where !== 'front') v.qr.where = 'front'; return v; }
+function thumbs(){
+  const d = D(), mine = !!clean(d.f.name), base = mine ? d : Object.assign({}, d, THD()), [w, h] = dims(d);
+  if (!mine) LGX = null;
+  $('tpls').innerHTML = TPL.map(t => { const P = cardPage(variant(base, t), 'front', 0, true); return `<button type="button" data-tpl="${t[0]}" aria-pressed="${d.layout === t[0]}"><span class="th"><span style="${w >= h ? 'width:100%' : 'height:100%'};aspect-ratio:${w} / ${h}">${SH.svg(P)}</span></span>${t[1]}</button>`; }).join('');
+  LGX = undefined;
+}
 function render(){
-  const d = D();
-  const pf = cardPage(d, 'front', 0, true); $('cardFront').innerHTML = SH.svg(pf);
+  const d = D(), [w, h] = dims(d), cls = 'card' + (w < h ? ' v' : w === h ? ' sq' : '');
+  const pf = cardPage(d, 'front', 0, true); $('cardFront').className = cls; $('cardFront').innerHTML = SH.svg(pf);
   const hb = hasBack(d); $('cardBack').hidden = !hb; $('backLb').hidden = !hb; document.querySelector('[data-png="back"]').hidden = !hb;
   let over = pf.over;
-  if (hb) { const pb = cardPage(d, 'back', 0, true); $('cardBack').innerHTML = SH.svg(pb); over = over || pb.over; } else $('cardBack').innerHTML = '';
-  $('over').hidden = !over; $('over').textContent = over ? 'Текста получилось много, и он не помещается целиком. Убери логотип, адрес или часть контактов, сократи «чем ты занимаешься» или выбери другой вид.' : '';
+  if (hb) { const pb = cardPage(d, 'back', 0, true); $('cardBack').className = cls; $('cardBack').innerHTML = SH.svg(pb); over = over || pb.over; } else $('cardBack').innerHTML = '';
+  $('over').hidden = !over; $('over').textContent = over ? 'Текста получилось много, и он не помещается целиком. Убери логотип, адрес или часть контактов, сократи «чем ты занимаешься» или выбери другой вид или размер.' : '';
   const url = d.qr.where !== 'none' ? qrLink(d) : '';
   $('qrNote').textContent = d.qr.where === 'none' ? '' : url ? 'QR-код откроет: ' + url : d.qr.to === 'card' ? 'Сначала найди свою карточку по номеру вверху формы, тогда QR-код поведёт на неё.' : d.qr.to === 'web' ? 'Впиши сайт на лицевой стороне.' : d.qr.to === 'ig' ? 'Впиши Instagram на лицевой стороне.' : 'Впиши ссылку.';
+  $('sideLb').textContent = 'Лицевая сторона · ' + w + ' × ' + h + ' мм';
+  [...$('bleed').options].forEach(o => { const b = +o.value; o.textContent = b ? `${b} мм: файл ${w + 2 * b} × ${h + 2 * b} мм${b === 3 ? ' (чаще всего)' : ''}` : `Без запаса: файл ${w} × ${h} мм`; });
+  $('a4Note').textContent = 'На листе A4 поместится ' + perSheet(d) + ' визиток этого размера.' + (d.size === '85x55' && d.orient === 'h' ? ' Расположение совпадает с готовыми листами A4 с перфорированными визитками 85 × 55 мм (2 × 5).' : '');
+  thumbs();
 }
 const later = () => { clearTimeout(tmr); tmr = setTimeout(render, 250); };
 function fill(){
   const d = D(), dis = !!EX;
   document.querySelectorAll('[data-k]').forEach(el => { const v = get(d, el.dataset.k); if (el.type === 'checkbox') el.checked = !!v; else el.value = v == null ? '' : v; el.disabled = dis; });
-  document.querySelectorAll('[data-seg]').forEach(sg => sg.querySelectorAll('button').forEach(b => { b.setAttribute('aria-pressed', String(get(d, sg.dataset.seg) === b.dataset.v)); b.disabled = dis; }));
+  document.querySelectorAll('[data-seg]').forEach(sg => sg.querySelectorAll('button').forEach(b => { b.setAttribute('aria-pressed', String(get(d, sg.dataset.seg) === b.dataset.v)); b.disabled = (dis && !VIEW.includes(sg.dataset.seg)) || (sg.dataset.seg === 'orient' && d.size === '55x55'); }));
   $('langs').innerHTML = LANGS.map(([k, n]) => `<label><input type="checkbox" value="${k}" ${(d.f.langs || []).includes(k) ? 'checked' : ''} ${dis ? 'disabled' : ''}> ${n}</label>`).join('');
-  $('lbl').value = d.lbl; $('bw').checked = !!d.bw; $('bleed').value = String(d.bleed); $('lbl').disabled = $('bw').disabled = $('bleed').disabled = dis;
+  $('lbl').value = d.lbl; $('bw').checked = !!d.bw; $('bleed').value = String(d.bleed);
   $('backFields').hidden = !d.back.on; $('qrToBox').hidden = d.qr.where === 'none'; $('qrUrl').hidden = d.qr.to !== 'url';
   const card = $('qrTo').querySelector('option[value="card"]'); card.disabled = !d.card; card.textContent = d.card ? 'На мою карточку в «Своих людях» (' + d.card.num + ')' : 'На мою карточку в «Своих людях» (сначала найди её по номеру)';
-  const lg = LG(); $('logoImg').hidden = !lg; if (lg) $('logoImg').src = lg.c; $('logoDel').hidden = !lg || dis; $('logoPick').hidden = dis;
+  const lg = EX ? (EXNOLOGO ? null : EXLOGO) : LOGO; $('logoImg').hidden = !lg; if (lg) $('logoImg').src = lg.c; $('logoDel').hidden = !lg || dis; $('logoPick').hidden = dis;
   $('findQ').disabled = $('findBtn').disabled = dis; $('wipeBox').hidden = dis;
   $('exbar').hidden = !EX; $('exOn').hidden = !!EX;
   render();
 }
 document.addEventListener('input', e => { const x = e.target; if (EX || !x.dataset || !x.dataset.k || x.type === 'checkbox') return; put(S, x.dataset.k, x.value); save(); later(); });
 document.addEventListener('change', e => {
-  const x = e.target; if (EX) return;
+  const x = e.target;
+  /* вид визитки можно менять и в примере */
+  if (x.id === 'lbl' || x.id === 'bw' || x.id === 'bleed') { const t = EX || S; if (x.id === 'lbl') t.lbl = x.value; else if (x.id === 'bw') t.bw = x.checked; else t.bleed = +x.value; save(); render(); return; }
+  if (EX) return;
   if (x.dataset && x.dataset.k) { put(S, x.dataset.k, x.type === 'checkbox' ? x.checked : x.value); save(); fill(); return; }
   if (x.closest && x.closest('#langs')) { S.f.langs = [...document.querySelectorAll('#langs input:checked')].map(i => i.value); save(); render(); return; }
-  if (x.id === 'lbl') { S.lbl = x.value; save(); render(); }
-  if (x.id === 'bw') { S.bw = x.checked; save(); render(); }
-  if (x.id === 'bleed') { S.bleed = +x.value; save(); }
 });
-document.querySelectorAll('[data-seg]').forEach(sg => sg.addEventListener('click', e => { const b = e.target.closest('button'); if (!b || EX) return; put(S, sg.dataset.seg, b.dataset.v); if (sg.dataset.seg === 'qr.where' && b.dataset.v === 'back') S.back.on = true; save(); fill(); }));
+const VIEW = ['size', 'orient', 'font', 'cstyle'];   // настройки вида: работают и в примере
+document.querySelectorAll('[data-seg]').forEach(sg => sg.addEventListener('click', e => { const b = e.target.closest('button'); if (!b || b.disabled || (EX && !VIEW.includes(sg.dataset.seg))) return; const t = EX || S; put(t, sg.dataset.seg, b.dataset.v); if (sg.dataset.seg === 'size' && b.dataset.v === '55x55') t.orient = 'h'; if (sg.dataset.seg === 'qr.where' && b.dataset.v === 'back') S.back.on = true; save(); fill(); }));
+/* выбор вида: шрифт и подписи к контактам ставятся как в образце, их можно поменять; для видов с QR-кодом он сразу переходит на лицевую сторону */
+$('tpls').addEventListener('click', e => {
+  const b = e.target.closest('[data-tpl]'); if (!b) return; const t = TPL.find(x => x[0] === b.dataset.tpl); if (!t) return;
+  const tgt = EX || S; tgt.layout = t[0]; tgt.font = t[2]; tgt.cstyle = t[3]; if ((t[0] === 'qr' || t[0] === 'onlyqr') && tgt.qr.where !== 'front') tgt.qr.where = 'front';
+  save(); fill();
+  if (matchMedia('(max-width:1040px)').matches) $('cardBox').scrollIntoView({behavior: 'smooth', block: 'start'});
+});
 
 /* логотип */
 $('logoIn').addEventListener('change', e => {
@@ -678,12 +956,12 @@ function saveBlob(blob, name){ const a = document.createElement('a'); a.href = U
 const printPages = d => [cardPage(d, 'front', d.bleed)].concat(hasBack(d) ? [cardPage(d, 'back', d.bleed)] : []);
 const homePages = d => [a4(d, 'front')].concat(hasBack(d) ? [a4(d, 'back')] : []);
 async function pdf(kind, share){
-  const d = D(), btns = [$('pdf'), $('pdfA4'), $('share')]; btns.forEach(b => b.disabled = true); say('Готовлю PDF…');
+  const d = D(), [w, h] = dims(d), btns = [$('pdf'), $('pdfA4'), $('share')]; btns.forEach(b => b.disabled = true); say('Готовлю PDF…');
   try {
-    const pages = kind === 'a4' ? homePages(d) : printPages(d), name = 'Visitenkarte-' + slug() + (kind === 'a4' ? '-A4' : '-Druckerei') + '.pdf';
+    const pages = kind === 'a4' ? homePages(d) : printPages(d), name = 'Visitenkarte-' + slug() + '-' + w + 'x' + h + (kind === 'a4' ? '-A4' : '-Druckerei') + '.pdf';
     const blob = await SH.makePdf(pages, kind === 'a4' ? 'Visitenkarten A4' : 'Visitenkarte');
     if (share) { await navigator.share({files: [new File([blob], name, {type: 'application/pdf'})], title: name}); say('Готово.'); }
-    else { saveBlob(blob, name); say(kind === 'a4' ? 'Лист A4 скачан. Печатай в масштабе 100 % (без «вписать в страницу»), на плотной бумаге.' + (hasBack(d) ? ' Второй лист — обратная сторона: переверни бумагу по длинной стороне.' : '') : 'PDF скачан. Визитка 85 × 55 мм' + (d.bleed ? ', файл ' + (CW + 2 * d.bleed) + ' × ' + (CH + 2 * d.bleed) + ' мм с запасом на обрез ' + d.bleed + ' мм' : '') + (hasBack(d) ? ', две страницы: лицевая и обратная сторона.' : ', одна сторона.') + ' Загрузи его на сайте типографии.'); }
+    else { saveBlob(blob, name); say(kind === 'a4' ? 'Лист A4 скачан: ' + perSheet(d) + ' визиток. Печатай в масштабе 100 % (без «вписать в страницу»), на плотной бумаге.' + (hasBack(d) ? ' Второй лист — обратная сторона: переверни бумагу по длинной стороне.' : '') : 'PDF скачан. Визитка ' + w + ' × ' + h + ' мм' + (d.bleed ? ', файл ' + (w + 2 * d.bleed) + ' × ' + (h + 2 * d.bleed) + ' мм с запасом на обрез ' + d.bleed + ' мм' : '') + (hasBack(d) ? ', две страницы: лицевая и обратная сторона.' : ', одна сторона.') + ' Загрузи его на сайте типографии и выбери там такой же размер.'); }
   } catch (e) { if (e && e.name === 'AbortError') say(''); else say('Не получилось сделать PDF. Обнови страницу и попробуй ещё раз.'); }
   btns.forEach(b => b.disabled = false);
 }
@@ -697,21 +975,27 @@ document.querySelectorAll('[data-png]').forEach(b => b.addEventListener('click',
 try { if (navigator.canShare && navigator.canShare({files: [new File(['x'], 'x.pdf', {type: 'application/pdf'})]}) && matchMedia('(pointer:coarse)').matches) { $('share').hidden = false; $('share').addEventListener('click', () => pdf('print', true)); } } catch (e) {}
 
 /* пример */
-const EXD = () => ({layout: 'classic', font: 'serif', lbl: 'de', bleed: S.bleed, bw: S.bw,
-  f: {name: 'Anna Kovalenko', role: 'Maniküre, Pediküre und Nageldesign', firm: 'Studio Anna', phone: '+41 00 000 00 00', wa: true, email: 'anna@example.ch', web: 'www.example.ch', ig: 'example_studio', tg: '', street: 'Musterstrasse 12', city: '8000 Zürich', langs: ['de', 'ru', 'uk']},
+const EXD = () => ({layout: 'line', font: 'sans', cstyle: 'icon', size: S.size, orient: S.orient, lbl: 'de', bleed: S.bleed, bw: S.bw,
+  f: {name: 'Anna Kovalenko', role: 'Maniküre, Pediküre und Nageldesign', firm: 'Studio Anna', tag: 'Gepflegte Hände, gute Laune', serv: '', phone: '+41 00 000 00 00', wa: true, email: 'anna@example.ch', web: 'www.example.ch', ig: '', tg: '', street: 'Musterstrasse 12', city: '8000 Zürich', langs: []},
   back: {on: true, name: 'Анна Коваленко', role: 'Маникюр, педикюр и дизайн ногтей', line: 'Говорю по-русски и по-украински · запись в WhatsApp', logo: true},
   qr: {where: 'back', to: 'url', url: 'https://www.example.ch'}, card: null});
-async function exampleOn(opts, noLogo){ if (!noLogo && !EXLOGO) EXLOGO = await exampleLogo(); EXNOLOGO = !!noLogo; EX = merge(EXD(), opts || {}); fill(); }
-$('exOn').addEventListener('click', async () => { await exampleOn(); window.scrollTo({top: $('exbar').getBoundingClientRect().top + window.scrollY - 12, behavior: 'smooth'}); });
+async function exampleOn(opts, noLogo){ if (!noLogo && !EXLOGO) EXLOGO = await exampleLogo(); EXNOLOGO = !!noLogo; EX = norm(merge(EXD(), opts || {})); fill(); }
+$('exOn').addEventListener('click', async () => { await exampleOn({layout: S.layout, font: S.font, cstyle: S.cstyle, qr: (S.layout === 'qr' || S.layout === 'onlyqr') ? {where: 'front'} : {}}); window.scrollTo({top: $('exbar').getBoundingClientRect().top + window.scrollY - 12, behavior: 'smooth'}); });
 $('exOff').addEventListener('click', () => { EX = null; fill(); });
 
-/* ссылка вида ?n=SG-0014 — подставить карточку сразу; ?example — пример (для веера и превью) */
+/* ссылка вида ?n=SG-0014 — подставить карточку сразу; ?example — пример (для веера и превью: &layout=, &font=, &cstyle=, &lbl=, &size=85x55|90x50|55x55, &orient=v, &qr=front|back|none, &nologo) */
 const P0 = new URLSearchParams(location.search);
 fill();
 if (document.fonts && document.fonts.ready) document.fonts.ready.then(render);
-if (P0.has('example')) { const o = {}; ['layout', 'font', 'lbl'].forEach(k => { if (P0.get(k)) o[k] = P0.get(k); }); if (P0.get('qr')) o.qr = {where: P0.get('qr')}; exampleOn(o, P0.has('nologo')); }
+if (P0.has('example')) {
+  const o = {}, t = TPL.find(x => x[0] === P0.get('layout'));
+  if (t) Object.assign(o, {layout: t[0], font: t[2], cstyle: t[3]}, (t[0] === 'qr' || t[0] === 'onlyqr') ? {qr: {where: 'front'}} : {});
+  ['font', 'lbl', 'cstyle', 'size', 'orient'].forEach(k => { if (P0.get(k)) o[k] = P0.get(k); });
+  if (P0.get('qr')) o.qr = {where: P0.get('qr')};
+  exampleOn(o, P0.has('nologo'));
+}
 else if (P0.get('n')) { $('findQ').value = P0.get('n'); find(); }
-window.VIZ = {cardPage, a4, D, hasBack, printPages, homePages};
+window.VIZ = {cardPage, a4, D, hasBack, printPages, homePages, dims, TPL, variant};
 })();
 </script>
 <script src="/assets/help.js"></script>
