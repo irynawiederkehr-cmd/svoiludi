@@ -825,7 +825,7 @@ window.AFISHA = [
     id: 'ua-do-sisseln-pn', keyHash: '09de5945781020e152796fdec5fcf631c0debd478625a7f2e7305f29d38834cf', status: 'на подтверждении', title: 'Тренировки UA-DO в Зиссельне',
     date: '2026-10-19', time: '16:00', timeEnd: '19:00', repeat: { freq: 'weekly' },
     canton: 'Aargau', address: 'Schulhausstrasse 11, 4334 Sisseln', online: false,
-    langs: ['украинский'], level: 'дети, подростки и взрослые', price: '', commercial: true,
+    langs: ['украинский'], level: 'дети, подростки и взрослые', price: 'цену уточняем', commercial: true,
     organizers: [{ org: 'ua-do-sisseln', name: 'Спортивна школа UA-DO' }], link: 'https://ua-do.ch/',
     about: 'Регулярные тренировки спортивной школы UA-DO по украинскому единоборству UA-DO, «Козацькому двобою», дзюдо и джиу-джитсу. Расписание по данным 2024 года — уточняем у школы.'
   },
@@ -834,7 +834,7 @@ window.AFISHA = [
     id: 'ua-do-sisseln-sr', keyHash: '09de5945781020e152796fdec5fcf631c0debd478625a7f2e7305f29d38834cf', status: 'на подтверждении', title: 'Тренировки UA-DO в Зиссельне',
     date: '2026-10-14', time: '16:00', timeEnd: '19:00', repeat: { freq: 'weekly' },
     canton: 'Aargau', address: 'Schulhausstrasse 11, 4334 Sisseln', online: false,
-    langs: ['украинский'], level: 'дети, подростки и взрослые', price: '', commercial: true,
+    langs: ['украинский'], level: 'дети, подростки и взрослые', price: 'цену уточняем', commercial: true,
     organizers: [{ org: 'ua-do-sisseln', name: 'Спортивна школа UA-DO' }], link: 'https://ua-do.ch/',
     about: 'Регулярные тренировки спортивной школы UA-DO по украинскому единоборству UA-DO, «Козацькому двобою», дзюдо и джиу-джитсу. Расписание по данным 2024 года — уточняем у школы.'
   },
@@ -843,7 +843,7 @@ window.AFISHA = [
     id: 'ua-do-sisseln-pt', keyHash: '09de5945781020e152796fdec5fcf631c0debd478625a7f2e7305f29d38834cf', status: 'на подтверждении', title: 'Тренировки UA-DO в Зиссельне',
     date: '2026-10-16', time: '16:00', timeEnd: '19:00', repeat: { freq: 'weekly' },
     canton: 'Aargau', address: 'Schulhausstrasse 11, 4334 Sisseln', online: false,
-    langs: ['украинский'], level: 'дети, подростки и взрослые', price: '', commercial: true,
+    langs: ['украинский'], level: 'дети, подростки и взрослые', price: 'цену уточняем', commercial: true,
     organizers: [{ org: 'ua-do-sisseln', name: 'Спортивна школа UA-DO' }], link: 'https://ua-do.ch/',
     about: 'Регулярные тренировки спортивной школы UA-DO по украинскому единоборству UA-DO, «Козацькому двобою», дзюдо и джиу-джитсу. Расписание по данным 2024 года — уточняем у школы.'
   },
@@ -852,7 +852,7 @@ window.AFISHA = [
     id: 'ua-do-stein-vs', keyHash: '09de5945781020e152796fdec5fcf631c0debd478625a7f2e7305f29d38834cf', status: 'на подтверждении', title: 'Тренировки UA-DO в Штайне',
     date: '2026-10-18', time: '', repeat: { freq: 'weekly' },
     canton: 'Aargau', address: '4332 Stein AG', online: false,
-    langs: ['украинский'], level: 'дети, подростки и взрослые', price: '', commercial: true,
+    langs: ['украинский'], level: 'дети, подростки и взрослые', price: 'цену уточняем', commercial: true,
     organizers: [{ org: 'ua-do-stein', name: 'Спортивна школа UA-DO' }], link: 'https://ua-do.ch/',
     about: 'Регулярные тренировки спортивной школы UA-DO по украинскому единоборству UA-DO, «Козацькому двобою», дзюдо и джиу-джитсу. Расписание по данным 2024 года — уточняем у школы.'
   },
