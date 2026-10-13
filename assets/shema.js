@@ -106,8 +106,8 @@
   const hex = h => [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16));
   /* Размер листа: по умолчанию A4; страница может задать свой формат pg.fmt = [ширина, высота] в мм (визитка 91 × 61, 13.10.2026). */
   const fmt = pg => pg.fmt || 'a4';
-  /* pg.kBlack: серые и чёрный (#000000…#FFFFFF, где R = G = B) печатаются одной чёрной краской (CMYK, только K) — тонкий текст в типографии чёткий */
-  const col = (pg, h) => { const c = hex(h); return pg.kBlack && c[0] === c[1] && c[1] === c[2] ? [0, 0, 0, Math.round((1 - c[0] / 255) * 1000) / 1000] : c; };
+  /* pg.kBlack: серые, а также тёмные почти серые (тёплый текст визиток #2F2924, #7A6E62) — одной чёрной краской K; цветные и светлые тёплые (бежевая плашка) — в цвете (14.10.2026) */
+  const col = (pg, h) => { const c = hex(h), d = Math.max(...c) - Math.min(...c), v = (c[0] + c[1] + c[2]) / 3; return pg.kBlack && (d === 0 || (d <= 24 && v < 160)) ? [0, 0, 0, Math.round((1 - v / 255) * 1000) / 1000] : c; };
   async function makePdf(pages, title){
     if (!window.jspdf) throw new Error('lib'); if (!pages.length) throw new Error('empty');
     const forum = pages.some(pg => pg.ops.some(o => o.t === 'text' && o.f === 'f'));
