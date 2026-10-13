@@ -126,7 +126,7 @@
     if (c.phone) L.push(['Телефон', c.phone]); if (c.whatsapp && c.whatsapp !== c.phone) L.push(['WhatsApp', c.whatsapp]);
     if (c.email) L.push(['E-mail', c.email]); if (c.site) L.push([UK ? 'Сайт' : 'Сайт', c.site.replace(/^https?:\/\//, '').replace(/\/$/, '')]);
     if (c.instagram) L.push(['Instagram', '@' + String(c.instagram).replace(/^https?:\/\/(www\.)?instagram\.com\//, '').replace(/^@/, '').replace(/\/$/, '')]);
-    if (c.telegram){ var tg = String(c.telegram).replace(/^https?:\/\/t\.me\//, ''); L.push(['Telegram', /^\+\d/.test(tg) ? tg : /^\+/.test(tg) ? 't.me/' + tg : '@' + tg.replace(/^@/, '')]); }   // номер, ссылка-приглашение t.me/+… или ник
+    if (c.telegram){ var tg = String(c.telegram).replace(/^https?:\/\/t\.me\//, ''); L.push(['Telegram', /^\+\d/.test(tg) ? tg : /^\+|^joinchat\//.test(tg) ? (UK ? 'група в Telegram' : 'группа в Telegram') : '@' + tg.replace(/^@/, '')]); }   // номер, ссылка-приглашение t.me/+… или ник
     return L.slice(0, 5);
   }
   var url = function(id, key){ return 'https://svoiludi.ch/' + (UK ? 'uk/' : '') + 'events/#afisha=' + encodeURIComponent(id) + (key ? '.' + encodeURIComponent(key) : ''); };

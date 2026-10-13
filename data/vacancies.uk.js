@@ -174,5 +174,33 @@ window.VACANCIES = [
     "posted": "2026-10-07",
     "until": "2026-12-06",
     "keyHash": "7192ef6de40cfa04a535515ed8c99d2d7e1c70730b91d578d406973af9064c2f"
+  },
+  {
+    "id": "rubin-beauty-mastera",
+    "keyHash": "61bdd3a84ac0066144160cf39b0ac3673b81c08d32efb9dc6332fd6a471d7a6e",
+    "status": "на підтвердженні",
+    "kind": "partner",
+    "author": {
+      "org": "rubin-beauty-rotkreuz",
+      "name": "Rubin Beauty",
+      "role": "салон краси",
+      "contacts": {}
+    },
+    "title": "Майстри манікюру й педикюру та масажисти для салону в Роткройці",
+    "cat": "body",
+    "canton": "Zug",
+    "city": "Rotkreuz",
+    "online": false,
+    "workload": "",
+    "start": "за домовленістю",
+    "langs": [
+      "російська",
+      "німецька"
+    ],
+    "about": "Салон Rubin Beauty у Роткройці шукає майстрів манікюру й педикюру та масажистів (масаж для відпочинку й wellness). Ваші навички й наша база клієнтів — розвиваємося разом. Як саме співпрацювати, за наймом чи самостійно, уточнюємо разом із салоном.",
+    "offer": "База клієнтів салону й розвиток разом.",
+    "contact": "",
+    "posted": "2026-10-12",
+    "until": "2026-12-11"
   }
 ];

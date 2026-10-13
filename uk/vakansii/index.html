@@ -566,7 +566,7 @@ a.yours:hover{background:#EBD3A3}
       <!-- 11.10.2026, Ирина: «заодно и нажать на кнопку и разместить свою вакансию или объявление о поиске партнёра». Кнопка открывает заявку ниже и сразу выбирает «Кого ищешь» -->
       <span class="vak-top"><a class="btn" href="/uk/vakansii/#zayavka" data-vkind="staff"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10" cy="8" r="3.5" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M3.5 19.5c.8-3.4 3.4-5.3 6.5-5.3s5.7 1.9 6.5 5.3" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><path d="M18.5 7.5v5M16 10h5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>Розмістити вакансію</a><a class="btn" href="/uk/vakansii/#zayavka" data-vkind="partner"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 11.5l4-4 3.2 1.4L13 7l3.5 1.2 4.5 3.3-4.6 4.8" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round"/><path d="M7 15l2.2 2.2a1.4 1.4 0 0 0 2-2M10 13l2.6 2.6a1.4 1.4 0 0 0 2-2l-3-3" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>Розмістити пошук партнера</a></span>
       <script>document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('[data-vkind]');if(!a)return;var s=document.getElementById('z-v-kind');if(s){s.value=a.getAttribute('data-vkind');s.dispatchEvent(new Event('change',{bubbles:true}));}});</script>
-      <p class="free-badge"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-4.4-9.3-9A5.2 5.2 0 0 1 12 6.3 5.2 5.2 0 0 1 21.3 12C19 16.6 12 21 12 21z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>Безкоштовно, для підтримки спільноти «Свої люди». Не комерційна послуга.</p>
+      <p class="free-badge sl-nk">Безкоштовно, для підтримки спільноти «Свої люди». Не комерційна послуга.</p>
     </div>
   </section>
 
@@ -696,7 +696,7 @@ a.yours:hover{background:#EBD3A3}
   <section class="terms" id="terms" aria-labelledby="terms-h">
     <h2 id="terms-h">Умови розділу</h2>
     <h3>Безкоштовно й для спільноти</h3>
-    <p>Розміщення вакансій і пропозицій про партнерство безкоштовне й завжди залишиться безкоштовним. Ми робимо цей розділ для підтримки спільноти «Свої люди». Це не платна й не комерційна послуга, вона не входить у жоден пакет. Розмістити оголошення може кожен, хто шукає працівника або партнера у Швейцарії. Картка в довіднику й купівля пакета для цього не потрібні.</p>
+    <p>Розміщення вакансій і пропозицій про партнерство безкоштовне й завжди залишиться безкоштовним. <i class="sl-nk" aria-hidden="true"></i>Ми робимо цей розділ для підтримки спільноти «Свої люди». Це не платна й не комерційна послуга, вона не входить у жоден пакет. Розмістити оголошення може кожен, хто шукає працівника або партнера у Швейцарії. Картка в довіднику й купівля пакета для цього не потрібні.</p>
     <h3>Оголошення — інформація від їхніх авторів</h3>
     <p>Оголошення у «Своїх людях» розміщують самі роботодавці й фахівці, які шукають працівника або партнера. Вони відповідають за те, що в оголошенні написано: за умови роботи чи співпраці, оплату, оформлення, дозволи і за те, що оголошення справжнє.</p>
     <p>Проєкт «Свої люди» та його організатори лише показують цю інформацію. Ми не роботодавець, не посередник і не сторона договору, не беремо участі в переговорах, відборі й наймі та не перевіряємо умови оголошень. Чи відгукуватися, про що домовлятися і чи приймати пропозицію, вирішуєш ти сама. Усі питання про умови, договір і оплату вирішуй лише з автором оголошення.</p>
@@ -724,9 +724,10 @@ a.yours:hover{background:#EBD3A3}
 
 
 
-<script src="/data/specialists.uk.js?v=2168f6b7"></script>
-<script src="/data/organizations.uk.js?v=817cafda"></script>
-<script src="/data/vacancies.uk.js?v=49588a9e"></script>
+<script src="/data/specialists.uk.js?v=79c7e72a"></script>
+<script src="/data/organizations.uk.js?v=9a62adde"></script>
+<script src="/data/vacancies.uk.js?v=8b61da6f"></script>
+<script src="/assets/chernoviki.uk.js"></script>
 <script>window.IMG_BASE = '../img/';</script>
 <script>
 const ADMIN = (() => {   // режим Ирины: ?ira=1 включает на этом устройстве, ?ira=0 выключает
@@ -791,7 +792,10 @@ const confirmed = v => !!(v.confirm && v.confirm.date);
 const cardOfV = v => typeof v.author === 'string' ? SPECIALISTS.find(s => s.id === v.author) : (v.author && v.author.org ? (window.ORGANIZATIONS || []).find(o => o.id === v.author.org) : null);
 const liveV = v => { const a = v.author, c = cardOfV(v); if (typeof a === 'string') return !!c && c.status === 'активен' && !(c.paidUntil && c.paidUntil < today);
   if (a && a.org) return !!c && c.status === 'активен' && !!c.confirm; return true; };
-const pool = () => VACANCIES.filter(v => v.status === 'активен' && confirmed(v) && liveV(v) && (!v.until || v.until > today));
+/* черновики (правило Ирины 12.10.2026, 14:34): в режиме Ирины объявления «на подтверждении» стоят в списке с пометкой «Черновик», у всех — нет */
+const isDraft = v => v.status === 'на підтвердженні' || v.status === 'черновик';
+let DRAFTS_ON = ADMIN && !!(window.SVL_DRAFTS && SVL_DRAFTS.showInList());
+const pool = () => VACANCIES.filter(v => ((v.status === 'активен' && confirmed(v) && liveV(v)) || (DRAFTS_ON && isDraft(v) && !v.sample)) && (!v.until || v.until > today));
 const state = { kind: '', cat: '', canton: '', lang: '', remote: '' };
 function match(v, skip){
   return (skip === 'kind' || !state.kind || v.kind === state.kind)
@@ -804,7 +808,7 @@ const where = v => [v.city, v.canton ? kt(v.canton) : ''].filter(Boolean).join('
 
 function row(v){
   const k = KINDS[v.kind] || KINDS.staff, a = authorOf(v);
-  return `<button class="ev vac" type="button" data-v="${esc(v.id)}" style="--lc:${k.c}">${v.sample ? '<span class="sample">Зразок</span>' : ''}
+  return `<button class="ev vac" type="button" data-v="${esc(v.id)}" style="--lc:${k.c}">${v.sample ? '<span class="sample">Зразок</span>' : isDraft(v) ? '<span class="sample draft">Чернетка · бачиш тільки ти</span>' : ''}
     <span class="ev-d vk"><b>${ICO[v.kind] || ICO.staff}</b><small>${esc(k.t)}</small></span>
     <span class="ev-m">${v.sample ? '<span class="yours">Тут може бути твоє оголошення!</span>' : ''}<span class="ev-k">${esc(CATS[v.cat] || '')}</span><span class="ev-t">${esc(v.title)}</span>
       <span class="ev-i">${a ? `<b>${esc(a.name)}</b>` : ''}<span>${esc(where(v))}</span>${v.workload ? `<span>${esc(v.workload)}</span>` : ''}${v.salary ? `<span>${esc(v.salary)}</span>` : ''}<span>${esc((v.langs || []).join(', '))}</span></span>
@@ -1045,10 +1049,17 @@ document.getElementById('reset').addEventListener('click', () => { Object.keys(s
 document.getElementById('trial').hidden = !ADMIN;
 render();
 const fromHash = () => { const id = decodeURIComponent(location.hash.slice(1));
-  if (id.startsWith('ok=')){ const [vid, key] = id.slice(3).split('.'); const v = VACANCIES.find(x => x.id === vid); keyOk(v, key).then(ok => { if (ok){ OKKEY[vid] = key; confirmView(v); } }); return; }
+  if (id.startsWith('ok=')){ const [vid, key] = id.slice(3).split('.'); const v = VACANCIES.find(x => x.id === vid); keyOk(v, key).then(ok => { if (ok){ OKKEY[vid] = key; if (ADMIN && window.SVL_DRAFTS) SVL_DRAFTS.keep(vid, key); confirmView(v); } }); return; }
   if (id.startsWith('off=')){ const [vid, key] = id.slice(4).split('.'); const v = VACANCIES.find(x => x.id === vid); keyOk(v, key).then(ok => { if (ok){ OKKEY[vid] = key; offView(v); } }); return; }
   if (id && pool().some(v => v.id === id) || (ADMIN && VACANCIES.some(v => v.id === id))) openV(id); };
 fromHash(); addEventListener('hashchange', fromHash);
+/* черновики — только в режиме Ирины (assets/chernoviki.js) */
+if (ADMIN && window.SVL_DRAFTS) SVL_DRAFTS.init({ page: 'vakansii', okKey: OKKEY, keyOk, items: VACANCIES.filter(v => !v.sample),
+  when: v => ({ d: v.until || v.posted || '', past: !!(v.until && v.until <= today), lbl: v.until && v.until > today ? 'до' : '' }),
+  kind: v => (KINDS[v.kind] || KINDS.staff).t, who: v => { const a = authorOf(v); return a ? a.name : ''; },
+  url: (v, k) => k ? `https://svoiludi.ch/vakansii/#ok=${encodeURIComponent(v.id)}.${encodeURIComponent(k)}` : '',
+  open: (id, withKey) => { const v = VACANCIES.find(x => x.id === id); if (!v) return; if (withKey) confirmView(v); else openV(id); },
+  toast, onToggle: on => { DRAFTS_ON = on; render(); } });
 </script>
 <script src="/assets/help.uk.js" defer></script>
 <script defer src="/assets/plz.js"></script>

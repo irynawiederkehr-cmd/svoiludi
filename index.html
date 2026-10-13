@@ -1144,14 +1144,17 @@ const digits = p => String(p).replace(/[^\d+]/g, '');
 const LINK = {
   phone:     v => ['Телефон', 'tel:' + digits(v), v],
   whatsapp:  v => ['WhatsApp', 'https://wa.me/' + digits(v).replace('+', ''), v],
-  telegram:  v => ['Telegram', 'https://t.me/' + v.replace(/^@/, '').replace(/\s/g, ''), /^\+/.test(v) ? v : '@' + v.replace(/^@/, '')],   // ник или номер телефона (+380 …), 07.10.2026
+  telegram:  v => { const x = String(v).trim().replace(/^https?:\/\/t\.me\//, ''), inv = /^\+(?!\d)|^joinchat\//.test(x);   // ник, номер телефона (+380 …, 07.10.2026) или ссылка-приглашение t.me/+… — её прячем за текстом «группа в Telegram» (13.10.2026)
+    return ['Telegram', 'https://t.me/' + x.replace(/^@/, '').replace(/\s/g, ''), inv ? 'группа в Telegram' : /^\+/.test(x) ? x : '@' + x.replace(/^@/, '')]; },
   instagram: v => ['Instagram', 'https://www.instagram.com/' + v.replace(/^@/, '') + '/', '@' + v.replace(/^@/, '')],
   email:     v => ['E-mail', 'mailto:' + v, v],
   site:      v => [/(^|\/\/|\.)(youtube\.com|youtu\.be)\//i.test(v) ? 'YouTube' : 'Сайт', /^https?:/.test(v) ? v : 'https://' + v, v.replace(/^https?:\/\//, '')],   // ссылка на YouTube подписана «YouTube», а не «Сайт» (Ирина 13.10.2026)
   site2:     v => LINK.site(v),   // второй сайт (07.10.2026)
   bot:       v => ['Telegram-бот', 'https://t.me/' + v.replace(/^@/, ''), '@' + v.replace(/^@/, '')],   // свой Telegram-бот специалиста (07.10.2026)
   facebook:  v => { const u = /^https?:/.test(v) ? v : 'https://www.facebook.com/' + (/^\d+$/.test(v) ? 'profile.php?id=' + v : v.replace(/^@/, ''));   // профиль или страница в Facebook: имя, номер профиля или ссылка (12.10.2026)
-    const n = /^\d+$/.test(v) || /profile\.php/.test(v) ? 'профиль в Facebook' : /^https?:/.test(v) ? v.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '') : 'facebook.com/' + v.replace(/^@/, ''); return ['Facebook', u, n]; }
+    // длинные ссылки не показываем адресом, а прячем за текстом (Ирина 13.10.2026): /people/…, profile.php, группы, ссылки с номерами
+    const path = u.replace(/^https?:\/\/(www\.|m\.)?facebook\.com\//, '').replace(/[?#].*$/, '').replace(/\/$/, '');
+    const n = /^\d+$/.test(v) || /profile\.php/.test(v) ? 'профиль в Facebook' : /^groups\//.test(path) ? 'группа в Facebook' : (/^[\w.\-]{1,30}$/.test(path) ? 'facebook.com/' + path : 'страница в Facebook'); return ['Facebook', u, n]; }
 };
 const uidUrl = u => 'https://www.uid.admin.ch/Detail.aspx?uid_id=' + String(u).replace(/[^A-Z0-9]/gi, '').toUpperCase();
 const maps = a => 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(a);
