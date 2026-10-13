@@ -1096,7 +1096,7 @@ window.ORGANIZATIONS = [
     "name": "Спортивна школа UA-DO · Sisseln",
     "logo": "ua-do-kloten.jpg",
     "form": "",
-    "kind": "nonprofit",
+    "kind": "org",
     "dir": "sport",
     "dir2": "circles",
     "cats": [
@@ -1187,7 +1187,7 @@ window.ORGANIZATIONS = [
     "name": "Спортивна школа UA-DO · Kloten",
     "logo": "ua-do-kloten.jpg",
     "form": "",
-    "kind": "nonprofit",
+    "kind": "org",
     "dir": "sport",
     "dir2": "circles",
     "cats": [
@@ -1261,7 +1261,7 @@ window.ORGANIZATIONS = [
     "name": "Спортивна школа UA-DO · Stein",
     "logo": "ua-do-kloten.jpg",
     "form": "",
-    "kind": "nonprofit",
+    "kind": "org",
     "dir": "sport",
     "dir2": "circles",
     "cats": [

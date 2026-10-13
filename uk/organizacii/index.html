@@ -1082,7 +1082,7 @@ const AVATAR_SVG = '<svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50
 </script>
 <script src="/data/specialists.uk.js?v=79c7e72a"></script>
 <script src="/data/vacancies.uk.js?v=8b61da6f"></script>
-<script src="/data/organizations.uk.js?v=91c2631e"></script>
+<script src="/data/organizations.uk.js?v=2a0ddf11"></script>
 <script>
 window.IMG_BASE = '/img/org/';
 /* карточки специалистов — в /data/specialists.js (одна копия на весь сайт) */
@@ -1167,14 +1167,15 @@ window.SVL_ORG_ICONS = {
   const dirOf = k => DIRS[k] ? k : (OLD[k] && DIRS[OLD[k]] ? OLD[k] : 'community');
   const FORMS = { 'Verein': 'ферайн (Verein)', 'Stiftung': 'фонд (Stiftung)', 'неформальна група': 'неформальна група', 'GmbH': 'ТОВ (GmbH)', 'AG': 'АТ (AG)',
     'Einzelunternehmen': 'ФОП (Einzelunternehmen)', 'Genossenschaft': 'кооператив (Genossenschaft)', 'інше': 'інша форма' };
-  const KIND = { charity: 'Благодійна організація', nonprofit: 'Некомерційна організація', firm: 'Фірма' };
+  /* kind 'org' — вид ещё не подтверждён (нет UID и устава): под названием просто «Организация», без «некоммерческая» (Ирина 13.10.2026, 19:50: «почему это некоммерческая?») */
+  const KIND = { charity: 'Благодійна організація', nonprofit: 'Некомерційна організація', firm: 'Фірма', org: 'Організація' };
   const BADGE = { charity: 'Благодійна організація · розміщення безкоштовне', nonprofit: 'Некомерційна організація · розміщення безкоштовне' };
   const badgeOf = o => o.kind !== 'firm' && o.free === true ? (BADGE[o.kind] || BADGE.nonprofit) : '';
   const WHO = { S: 'Для людей зі статусом S', kids: 'Для дітей і підлітків', adults: 'Для дорослих', women: 'Для жінок', business: 'Для підприємців' };
   const tags = Object.assign({ free: 'Для людей безкоштовно' }, WHO, { firm: 'Фірма', npo: 'Благодійна або некомерційна' });
   const roleOf = o => [KIND[o.kind] || KIND.nonprofit, FORMS[o.form] || o.form].filter(Boolean).join(' · ');
   const tagsOf = o => { const w = o.for || [], t = (w.includes('all') ? Object.keys(WHO) : w.filter(x => WHO[x])).slice();
-    if (o.free === true) t.unshift('free'); t.push(o.kind === 'firm' ? 'firm' : 'npo'); return t; };
+    if (o.free === true) t.unshift('free'); if (o.kind === 'firm') t.push('firm'); else if (o.kind !== 'org') t.push('npo'); return t; };
   /* адреса: places (как у специалистов) или address «улица, индекс город · улица, индекс город»; без адреса — только кантон */
   const placesOf = o => {
     if ((o.places || []).length) return o.places;

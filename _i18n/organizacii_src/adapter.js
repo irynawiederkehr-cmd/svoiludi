@@ -15,14 +15,15 @@
   const dirOf = k => DIRS[k] ? k : (OLD[k] && DIRS[OLD[k]] ? OLD[k] : 'community');
   const FORMS = { 'Verein': 'ферайн (Verein)', 'Stiftung': 'фонд (Stiftung)', 'неформальная группа': 'неформальная группа', 'GmbH': 'ООО (GmbH)', 'AG': 'АО (AG)',
     'Einzelunternehmen': 'ИП (Einzelunternehmen)', 'Genossenschaft': 'кооператив (Genossenschaft)', 'другое': 'другая форма' };
-  const KIND = { charity: 'Благотворительная организация', nonprofit: 'Некоммерческая организация', firm: 'Фирма' };
+  /* kind 'org' — вид ещё не подтверждён (нет UID и устава): под названием просто «Организация», без «некоммерческая» (Ирина 13.10.2026, 19:50: «почему это некоммерческая?») */
+  const KIND = { charity: 'Благотворительная организация', nonprofit: 'Некоммерческая организация', firm: 'Фирма', org: 'Организация' };
   const BADGE = { charity: 'Благотворительная организация · размещение бесплатно', nonprofit: 'Некоммерческая организация · размещение бесплатно' };
   const badgeOf = o => o.kind !== 'firm' && o.free === true ? (BADGE[o.kind] || BADGE.nonprofit) : '';
   const WHO = { S: 'Для людей со статусом S', kids: 'Для детей и подростков', adults: 'Для взрослых', women: 'Для женщин', business: 'Для предпринимателей' };
   const tags = Object.assign({ free: 'Для людей бесплатно' }, WHO, { firm: 'Фирма', npo: 'Благотворительная или некоммерческая' });
   const roleOf = o => [KIND[o.kind] || KIND.nonprofit, FORMS[o.form] || o.form].filter(Boolean).join(' · ');
   const tagsOf = o => { const w = o.for || [], t = (w.includes('all') ? Object.keys(WHO) : w.filter(x => WHO[x])).slice();
-    if (o.free === true) t.unshift('free'); t.push(o.kind === 'firm' ? 'firm' : 'npo'); return t; };
+    if (o.free === true) t.unshift('free'); if (o.kind === 'firm') t.push('firm'); else if (o.kind !== 'org') t.push('npo'); return t; };
   /* адреса: places (как у специалистов) или address «улица, индекс город · улица, индекс город»; без адреса — только кантон */
   const placesOf = o => {
     if ((o.places || []).length) return o.places;
