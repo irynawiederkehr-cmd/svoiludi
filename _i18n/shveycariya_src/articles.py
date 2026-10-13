@@ -505,7 +505,7 @@ ARTICLES['iz-ukrainy'] = dict(
   <li>Если ты из области, куда возвращаться опасно, SEM проверяет, можешь ли ты жить в другой, безопасной части Украины.</li>
   <li>Если вернуть тебя нельзя или это неразумно, тебя временно принимают. Это <a href="../status-f/">статус F</a>.</li>
   <li>После отказа можно подать заявление на убежище (Asylgesuch). Это отдельная процедура, о ней — в теме «Статус N — пока идёт процедура убежища».</li>
-  <li class="attn">На решение можно подать жалобу в Федеральный административный суд. <i class="wi"></i>Срок короткий и указан в самом решении. В тот же день покажи решение бесплатному юристу. Образцы жалобы есть у <a href="https://www.fluechtlingshilfe.ch/hilfe-fuer-schutzsuchende/beschwerdeunterlagen-status-s">Швейцарской помощи беженцам (SFH)</a>.</li>
+  <li class="attn">На решение можно подать жалобу в Федеральный административный суд. <i class="wi"></i>Срок короткий и указан в самом решении. В тот же день покажи решение бесплатному юристу. Образцы жалобы с пояснениями на немецком, французском и английском есть у <a href="https://www.fluechtlingshilfe.ch/hilfe-fuer-schutzsuchende/beschwerdeunterlagen-status-s">Швейцарской помощи беженцам (SFH)</a>.</li>
 </ul>
 <p>На деле это выглядит так. Из тех же 573 человек из западных областей на конец февраля 2026 года 104 получили решение о выезде, 84 забрали заявление, 145 уехали сами, 20 получили статус S, остальные ещё ждали решения.</p>
 
@@ -566,7 +566,7 @@ ARTICLES['iz-ukrainy'] = dict(
 </ul>
 <h3>Дети</h3>
 <ul class="ul">
-  <li>Дети до 16 лет выезжают только со взрослым. Во время военного положения ребёнка может сопровождать один из родителей, бабушка или дедушка, совершеннолетние брат или сестра, мачеха или отчим. Нотариальное согласие второго родителя в этом случае не нужно. Возьми документы, по которым видно родство.</li>
+  <li>Дети до 16 лет выезжают только со взрослым. Во время военного положения ребёнка может сопровождать один из родителей, бабушка или дедушка, совершеннолетние брат или сестра, мачеха или отчим. Нотариальное согласие второго родителя в этом случае не нужно (<a href="https://www.ombudsman.gov.ua/news_details/viyizd-ditini-za-kordon-pid-chas-voyennogo-stanu-shcho-potribno-znati">Уполномоченный по правам человека Украины</a>). Возьми документы, по которым видно родство.</li>
   <li>С другим взрослым ребёнок выезжает по письменному заявлению одного из родителей, заверенному органом опеки и попечительства.</li>
   <li>С 16 лет можно выезжать самостоятельно, с заграничным паспортом.</li>
   <li>Документ ребёнка для выезда — заграничный паспорт. Во время военного положения подходит и свидетельство о рождении (<a href="https://www.kmu.gov.ua/news/vyizd-ditei-za-kordon-pid-chas-voiennoho-stanu-vymohy-ta-roziasnennia-mvs">разъяснение МВД</a>).</li>
@@ -703,6 +703,8 @@ ARTICLES['iz-ukrainy'] = dict(
         ('Минсоцполитики Украины — какие мужчины могут пересекать границу (18.04.2022)', 'https://www.kmu.gov.ua/news/minsocpolitiki-opublikuvalo-dovidnik-dlya-peretinannya-derzhavnogo-kordonu-cholovikami-prizovnogo-viku-yaki-suprovodzhuyut-ditej-ta-inshih-osib'),
         ('МВД Украины — документы для отца троих детей (25.07.2022)', 'https://www.kmu.gov.ua/news/mvs-ukrainy-roziasniuie-iaki-dokumenty-dlia-vyizdu-za-kordon-maiut-buty-u-batka-trokh-ditei-do-18-rokiv'),
         ('МВД Украины — выезд детей во время военного положения (23.02.2026)', 'https://www.kmu.gov.ua/news/vyizd-ditei-za-kordon-pid-chas-voiennoho-stanu-vymohy-ta-roziasnennia-mvs'),
+        ('Уполномоченный Верховной Рады по правам человека — выезд ребёнка во время военного положения (11.01.2024)', 'https://www.ombudsman.gov.ua/news_details/viyizd-ditini-za-kordon-pid-chas-voyennogo-stanu-shcho-potribno-znati'),
+        ('SFH — образцы жалобы на отказ в статусе S', 'https://www.fluechtlingshilfe.ch/hilfe-fuer-schutzsuchende/beschwerdeunterlagen-status-s'),
         ('Министерство обороны Украины — военный учёт 17-летних (11.07.2026)', 'https://mod.gov.ua/news/17-richni-yunaki-mozhut-stati-na-vijskovij-oblik-onlajn-do-31-lipnya-vklyuchno-yak-cze-zrobiti'),
         ('BLV — ввоз собак, кошек и хорьков', 'https://www.blv.admin.ch/de/reisen-heimtiere-hunde-katzen-frettchen'),
         ('BLV — страны по риску бешенства (06.2026)', 'https://www.blv.admin.ch/dam/de/sd-web/rGF02-RRaF0f/liste-laender-tollwut-de.pdf'),
