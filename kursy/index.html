@@ -708,6 +708,7 @@ const NTH_M = ['первый', 'второй', 'третий', 'четвёрты
 const ICS_WD = ['SU', 'MO', 'TU', 'WE', 'TH', 'FR', 'SA'];
 
 const today = (d => new Date(d.getTime() - d.getTimezoneOffset() * 6e4).toISOString().slice(0, 10))(new Date());   // дата по часам посетителя (копия 12.10.2026)
+const SHUF = {}; const shuf = e => SHUF[e.id || e.title] ??= Math.random();   // записи с одной датой и временем — в случайном порядке при каждом открытии, а не по алфавиту (решение Ирины 13.10.2026)
 const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 const kt = c => (CANTONS[c] || [c])[0];
 const ktRu = c => (CANTONS[c] || [, c])[1];
@@ -795,7 +796,7 @@ function row(e, on){   // on — день в календаре «Неделя»
     <span class="ev-p">${esc(priceText(e))}</span></button>`;
 }
 function listView(list){
-  const items = list.map(e => ({ e, d: nextDate(e) || e.date })).sort((a, b) => a.d.localeCompare(b.d) || (a.e.time || '').localeCompare(b.e.time || ''));
+  const items = list.map(e => ({ e, d: nextDate(e) || e.date })).sort((a, b) => a.d.localeCompare(b.d) || (a.e.time || '').localeCompare(b.e.time || '') || shuf(a.e) - shuf(b.e));
   const local = items.filter(x => inPlace(x.e) && !(state.canton && isRemote(x.e))), remote = state.canton ? items.filter(x => !inPlace(x.e)) : [];
   const rows = arr => arr.map(x => row(x.e)).join('');
   const empty = t => `<div class="empty"><b>${t}</b><span>Попробуй другое направление или убери часть выбора.</span></div>`;
@@ -1048,7 +1049,7 @@ qm.addEventListener('close', () => { if (location.hash) history.replaceState(nul
 
 /* ---------- подборка для Telegram (для Ирины): svoiludi.ch/kursy/#digest ---------- */
 function digest(){
-  const items = pool().slice().sort((a, b) => (nextDate(a) || a.date).localeCompare(nextDate(b) || b.date));
+  const items = pool().slice().sort((a, b) => (nextDate(a) || a.date).localeCompare(nextDate(b) || b.date) || shuf(a) - shuf(b));
   const groups = {}; items.forEach(e => { const g = isRemote(e) ? 'Онлайн' : `${ktRu(e.canton)} (${kt(e.canton)})`; (groups[g] = groups[g] || []).push(e); });
   const names = Object.keys(groups).sort((a, b) => a === 'Онлайн' ? 1 : b === 'Онлайн' ? -1 : a.localeCompare(b, 'ru'));
   let t = 'Свои люди в Швейцарии: курсы и занятия\n';

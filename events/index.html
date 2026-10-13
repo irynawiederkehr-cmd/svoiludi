@@ -693,6 +693,7 @@ const NTH_M = ['первый', 'второй', 'третий', 'четвёрты
 const ICS_WD = ['SU', 'MO', 'TU', 'WE', 'TH', 'FR', 'SA'];
 
 const today = (d => new Date(d.getTime() - d.getTimezoneOffset() * 6e4).toISOString().slice(0, 10))(new Date());   // дата по часам посетителя (копия 12.10.2026)
+const SHUF = {}; const shuf = e => SHUF[e.id || e.title] ??= Math.random();   // записи с одной датой и временем — в случайном порядке при каждом открытии, а не по алфавиту (решение Ирины 13.10.2026)
 const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 const kt = c => (CANTONS[c] || [c])[0];
 const ktRu = c => (CANTONS[c] || [, c])[1];
@@ -799,7 +800,7 @@ function pcard(e){
       ${cl.length ? `<span class="pc-c">${cl.map(c => `<i>${esc(c)}</i>`).join('')}</span>` : ''}</span></button>${heartBtn(e.id)}</div>`;
 }
 function promoView(list){
-  const items = list.slice().sort((a, b) => (a.date > today) - (b.date > today) || lastDay(a).localeCompare(lastDay(b)) || a.title.localeCompare(b.title, 'ru'));
+  const items = list.slice().sort((a, b) => (a.date > today) - (b.date > today) || lastDay(a).localeCompare(lastDay(b)) || shuf(a) - shuf(b));
   const local = items.filter(e => inPlace(e) && !(state.canton && isRemote(e))), remote = state.canton ? items.filter(e => !inPlace(e)) : [];
   const empty = t => `<div class="empty"><b>${t}</b><span>${state.hearts ? 'Нажми сердечко на карточке акции, и она появится здесь. Список хранится только на этом устройстве.' : 'Попробуй другой кантон или убери часть выбора. Акции появляются, когда специалисты и организации из справочника размещают их у нас.'}</span></div>`;
   const part = arr => { const now = arr.filter(e => e.date <= today), soon = arr.filter(e => e.date > today);
@@ -817,7 +818,7 @@ function promoView(list){
 }
 function listView(list){
   const [from, to] = range();
-  const items = list.map(e => ({ e, d: occurrences(e, from, to)[0] })).filter(x => x.d).sort((a, b) => a.d.localeCompare(b.d) || (a.e.time || '').localeCompare(b.e.time || ''));
+  const items = list.map(e => ({ e, d: occurrences(e, from, to)[0] })).filter(x => x.d).sort((a, b) => a.d.localeCompare(b.d) || (a.e.time || '').localeCompare(b.e.time || '') || shuf(a.e) - shuf(b.e));
   const local = items.filter(x => inPlace(x.e) && !(state.canton && isRemote(x.e))), remote = state.canton ? items.filter(x => !inPlace(x.e)) : [];
   const byMonth = arr => { let m = '', h = ''; arr.forEach(x => { const mm = x.d.slice(0, 7); if (mm !== m){ m = mm; h += `<div class="mh">${MON[+mm.slice(5) - 1]} ${mm.slice(0, 4)}</div>`; } h += row(x.e, x.d); }); return h; };
   const empty = t => `<div class="empty"><b>${t}</b><span>Попробуй другой период или убери часть выбора.</span></div>`;
@@ -839,7 +840,7 @@ function yearView(list){
   for (let i = 0; i < 12; i++){
     const y = d.getUTCFullYear() + Math.floor((d.getUTCMonth() + i) / 12), m = (d.getUTCMonth() + i) % 12, mm = `${y}-${String(m + 1).padStart(2, '0')}`;
     const from = i === 0 ? today : mm + '-01', to = iso(new Date(Date.UTC(y, m + 1, 0, 12)));
-    const items = list.flatMap(e => occurrences(e, from, to).map(x => ({ e, d: x }))).sort((a, b) => a.d.localeCompare(b.d)); total += items.length;
+    const items = list.flatMap(e => occurrences(e, from, to).map(x => ({ e, d: x }))).sort((a, b) => a.d.localeCompare(b.d) || shuf(a.e) - shuf(b.e)); total += items.length;
     const uniq = [...new Map(items.map(x => [x.e.id, x])).values()];
     html += `<button class="mo${items.length ? '' : ' none'}" type="button" data-month="${mm}"><b>${MON[m]} ${y !== d.getUTCFullYear() ? y : ''}</b><span class="n">${items.length ? `${items.length} ${plural(items.length, 'событие', 'события', 'событий')}` : 'пока ничего'}</span>
       <ul>${uniq.slice(0, 3).map(x => `<li style="--lc:${(TYPES[x.e.type] || TYPES.meet).c}"><i></i>${esc(x.e.title)}</li>`).join('')}${uniq.length > 3 ? `<li>и ещё ${uniq.length - 3}</li>` : ''}</ul></button>`;
@@ -932,7 +933,7 @@ function ics(e, d){
 /* весь месяц одним файлом: каждое событие месяца отдельной записью, с учётом выбранного кантона, города, типа и языка */
 function monthIcs(){
   const [y, m] = state.month.split('-').map(Number), from = [state.month + '-01', today].sort()[1], to = iso(new Date(Date.UTC(y, m, 0, 12)));
-  const items = pool().filter(shown).flatMap(e => occurrences(e, from, to).map(d => ({ e, d }))).sort((a, b) => a.d.localeCompare(b.d) || (a.e.time || '').localeCompare(b.e.time || ''));
+  const items = pool().filter(shown).flatMap(e => occurrences(e, from, to).map(d => ({ e, d }))).sort((a, b) => a.d.localeCompare(b.d) || (a.e.time || '').localeCompare(b.e.time || '') || shuf(a.e) - shuf(b.e));
   if (!items.length){ toast(`В ${MON_P[m - 1]} по твоему выбору событий пока нет.`); return; }
   const x = v => String(v).replace(/\\/g, '\\\\').replace(/\n/g, '\\n').replace(/([,;])/g, '\\$1');
   const stamp = new Date().toISOString().replace(/[-:]/g, '').slice(0, 15) + 'Z';
@@ -1180,7 +1181,7 @@ qm.addEventListener('close', () => { if (location.hash) history.replaceState(nul
 /* ---------- подборка на неделю для Telegram (для Ирины): svoiludi.ch/events/#digest ---------- */
 function digest(){
   const from = today, to = addDays(today, 9);
-  const items = pool().filter(e => !isPromo(e)).flatMap(e => occurrences(e, from, to).map(d => ({ e, d }))).sort((a, b) => a.d.localeCompare(b.d) || (a.e.time || '').localeCompare(b.e.time || ''));
+  const items = pool().filter(e => !isPromo(e)).flatMap(e => occurrences(e, from, to).map(d => ({ e, d }))).sort((a, b) => a.d.localeCompare(b.d) || (a.e.time || '').localeCompare(b.e.time || '') || shuf(a.e) - shuf(b.e));
   const groups = {}; items.forEach(x => { const g = isRemote(x.e) ? 'Онлайн' : `${ktRu(x.e.canton)} (${kt(x.e.canton)})`; (groups[g] = groups[g] || []).push(x); });
   const names = Object.keys(groups).sort((a, b) => a === 'Онлайн' ? 1 : b === 'Онлайн' ? -1 : a.localeCompare(b, 'ru'));
   let t = `Свои люди в Швейцарии: события с ${D(from).getUTCDate()} ${MON_G[D(from).getUTCMonth()]} по ${D(to).getUTCDate()} ${MON_G[D(to).getUTCMonth()]}\n`;
