@@ -897,14 +897,14 @@ const AVATAR_SVG = '<svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50
 </script>
 <script src="/data/specialists.js?v=aa2550d8"></script>
 <script src="/data/vacancies.js?v=3527d207"></script>
-<script src="/data/organizations.js?v=f27a044f"></script>
+<script src="/data/organizations.js?v=11fed7b5"></script>
 <script>
 window.IMG_BASE = 'img/';
 /* карточки специалистов — в /data/specialists.js (одна копия на весь сайт) */
 const SPECIALISTS = window.SPECIALISTS || [];
 
 </script>
-<script src="/data/afisha.js?v=77bf99f6"></script><script src="/assets/afisha-org.js"></script>
+<script src="/data/afisha.js?v=a792fcd9"></script><script src="/assets/afisha-org.js"></script>
 <script>const AFISHA = window.AFISHA || [];</script>
 <script>
 const ADMIN = (() => {   // режим Ирины: svoiludi.ch/?ira=1 включает на этом устройстве, ?ira=0 выключает
@@ -1461,7 +1461,9 @@ const headOrgs = s => (window.ORGANIZATIONS || []).filter(o => o.head && o.head.
 const orgHref = (o, s) => (/^uk/.test(document.documentElement.lang) ? 'uk/' : '') + 'organizacii/#' + (o.status !== 'активен' && OKKEY[s.id] ? 'preview=' + esc(o.id) + '.' + esc(OKKEY[s.id]) : esc(o.id));
 const firmLine = s => { if (IS_ORG_PAGE) return s.firm ? `<div class="firm" style="font-size:.95rem;margin-top:4px">${esc(s.firm)}</div>` : '';
   const os = headOrgs(s); if (!os.length) return s.firm ? `<div class="firm" style="font-size:.95rem;margin-top:4px">${esc(s.firm)}</div>` : '';
-  return `<div class="firm" style="font-size:.95rem;margin-top:4px">${os.map(o => `<a class="firm-a" href="${orgHref(o, s)}">${esc(o.name)}</a>`).join(' · ')}</div>`; };
+  /* филиалы одной школы (поле group) — название один раз, дальше города ссылками: «Спортивна школа UA-DO: Sisseln · Kloten · Stein» (13.10.2026) */
+  const parts = [], seen = {}; os.forEach(o => { const [nm, br] = String(o.name).split(' · '); if (o.group && br){ if (!seen[o.group]){ seen[o.group] = { nm, xs: [] }; parts.push(seen[o.group]); } seen[o.group].xs.push({ o, br }); } else parts.push({ one: o }); });
+  return `<div class="firm" style="font-size:.95rem;margin-top:4px">${parts.map(g => g.one ? `<a class="firm-a" href="${orgHref(g.one, s)}">${esc(g.one.name)}</a>` : `${esc(g.nm)}: ${g.xs.map(x => `<a class="firm-a" href="${orgHref(x.o, s)}">${esc(x.br)}</a>`).join(' · ')}`).join(' · ')}</div>`; };
 const pvOn = id => /^#preview=/.test(location.hash) && decodeURIComponent(location.hash.slice(9)).split('.')[0] === id;
 const promoOf = s => AFISHA.filter(e => e.type === 'promo' && e.promo && (e.status === 'активен' || (e.status === 'на подтверждении' && (pvOn(s.id) || ADMIN))) && (e.organizers || []).includes(s.id) && e.date <= today && (e.dateEnd || e.date) >= today)
   .sort((a, b) => (a.dateEnd || a.date).localeCompare(b.dateEnd || b.date)).slice(0, 2);

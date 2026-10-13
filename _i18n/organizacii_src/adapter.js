@@ -44,6 +44,21 @@
       feeText: o.free === true || (o.fees || []).length ? '' : (o.fee || ''), feeNeed: o.free !== true && !(o.fees || []).length && !o.fee })
   }));
   /* карточка руководителя уже на сайте (активна и подтверждена) — ссылка на неё без ключа предпросмотра */
+  /* ФИЛИАЛЫ (решение Ирины 13.10.2026, 19:11): залы и студии в разных городах — отдельные карточки с общим полем group.
+     В каждой — «Другие филиалы» ссылками; видны опубликованные, а в моём режиме и в предпросмотре по ключу — и пробные с тем же ключом. */
+  const sibVisible = (x, s) => x.status === 'активен' || (typeof ADMIN !== 'undefined' && ADMIN) || (/^#preview=/.test(location.hash) && typeof OKKEY === 'object' && OKKEY[s.id] && x.keyHash && x.keyHash === s.org.keyHash);
+  const sibHref = (x, s) => '#' + (x.status !== 'активен' && typeof OKKEY === 'object' && OKKEY[s.id] ? 'preview=' + esc(x.id) + '.' + esc(OKKEY[s.id]) : esc(x.id));
+  const branchesBlock = s => { const g = s.org.group; if (!g) return ''; const xs = (window.ORGANIZATIONS || []).filter(x => x.group === g && x.id !== s.id && sibVisible(x, s)); if (!xs.length) return '';
+    return `<div class="d-block"><h4>Другие филиалы</h4><p>${xs.map(x => `<a class="firm-a" href="${sibHref(x, s)}">${esc(x.name)}</a>`).join('<br>')}</p></div>`; };
+  /* «НАША КОМАНДА» (решение Ирины 13.10.2026, 19:16): карточки сотрудников живут только внутри карточки организации — без отдельной карточки
+     в справочнике, без VIP и без своих событий. Вносит и подтверждает организация, сотрудник согласен на публикацию. Карточка выделена рамкой
+     цвета направления и плашкой «Сотрудник · название». Данные — org.team [{ name, role, photo, services[], langs[], sample }]. */
+  const teamBlock = s => { const t = (s.org.team || []).filter(m => m && m.name); if (!t.length) return ''; const k = (typeof CATS === 'object' && CATS[s.cat]) || {}, c = k.c || '#4F5E3E';
+    const short = String(s.org.name || '').split(' · ')[0];
+    return `<div class="d-block team"><h4>Наша команда</h4><div class="team-l">${t.map(m => `<div class="tm" style="border-color:${c}">
+        <span class="tm-ph" style="background:${c}">${m.photo ? `<img src="/img/team/${esc(m.photo)}" alt="">` : esc(String(m.name).trim().split(/\s+/).map(w => w[0]).slice(0, 2).join(''))}</span>
+        <span class="tm-b"><span class="tm-tag" style="color:${c}" data-tip="Карточка из команды организации. Её вносит и подтверждает организация, сотрудник согласен на публикацию. Отдельной карточки в справочнике у сотрудника нет: записаться и задать вопрос — через контакты организации.">${m.sample ? 'Образец · всё вымышленное' : 'Сотрудник · ' + esc(short)}</span>
+        <b>${esc(m.name)}</b><small>${esc(m.role || '')}</small>${(m.services || []).length ? `<span class="tm-s">${m.services.map(x => esc(x)).join(' · ')}</span>` : ''}${(m.langs || []).length ? `<span class="tm-l">${esc(m.langs.join(', '))}</span>` : ''}</span></div>`).join('')}</div></div>`; };
   const specLive = id => { const x = (window.SPECIALISTS || []).find(r => r.id === id); return !!(x && x.status === 'активен'); };
   const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
   const DISC = 'Карточку заполнила сама организация, она отвечает за её содержание. «Свои люди» не участвуют в работе организации и не отвечают за её помощь, курсы и события. Обо всём договаривайся напрямую с организацией.';
@@ -62,9 +77,10 @@
         + (o.fee && o.kind === 'firm' && !(typeof priceShown === 'function' && priceShown(s)) ? `<div class="d-block"><h4>Цены</h4><span>${esc(o.fee)}</span></div>` : '')   // есть прайс-лист — коротко и весь список в блоке «Цены» после «Что можно получить» (движок, priceBlock, 12.10.2026); взносы некоммерческих — блок «Взносы» под описанием (feeBlock)
         + (nd.head ? `<div class="d-block"><h4>Руководитель<button type="button" class="qh" data-help="head" aria-label="Подсказка: руководитель" aria-expanded="false">?</button></h4>${UTQ}</div>` : '')
         + (h.name && !nd.head ? `<div class="d-block"><h4>Руководитель<button type="button" class="qh" data-help="head" aria-label="Подсказка: руководитель" aria-expanded="false">?</button></h4><span>${h.spec ? `<a class="firm-a" href="../#${specLive(h.spec) || !(/^#preview=/.test(location.hash) && typeof OKKEY === 'object' && OKKEY[s.id]) ? esc(h.spec) : 'preview=' + esc(h.spec) + '.' + esc(OKKEY[s.id])}">${esc(h.name)}</a>` : esc(h.name)}${nd.headSurname ? ' <span class="need">фамилия — уточняем</span>' : ''}${h.role ? ' · ' + esc(h.role) : ''}</span></div>` : '')   /* имя руководителя — ссылка на его карточку специалиста, без отдельной строки «Карточка в справочнике специалистов →» (Ирина 13.10.2026, 19:07) */
+        + branchesBlock(s)
         + `<div class="disc-box"><b>Важно</b><p>${esc(o.kind === 'firm' ? DISC_FIRM : DISC)}</p></div>`; },
     /* предпросмотр по ссылке и режим Ирины: занятия, события и мастер-классы пробной карточки показывает сам движок (pvAfisha в index.html, 12.10.2026) */
-    main: s => '',
+    main: s => teamBlock(s),
     /* на карточке в списке: руководитель фирмы и пометка «… · размещение бесплатно» с зелёным сердечком (знак «некоммерческое», 12.10.2026) */
     line: s => { const o = s.org, h = o.head || {}, b = badgeOf(o);
       const fr = (o.fees || []).filter(f => f && f.name && isFinite(+f.sum) && f.sum !== '' && f.sum != null), min = fr.length ? Math.min(...fr.map(f => +f.sum)) : null;

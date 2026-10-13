@@ -714,6 +714,11 @@ a.bot:hover{color:#B98324}
 @media (max-width:760px){.fee-row{grid-template-columns:minmax(0,1fr) 44px}.fee-row .zcur{grid-column:1;grid-row:1}.fee-row [data-fee=name]{grid-column:1/-1;grid-row:2}.fee-row [data-fee=per]{grid-column:1/-1;grid-row:3;max-width:none}.fee-row .fee-x{grid-column:2;grid-row:1}}
 .fee-line{color:var(--brown,#4F5E3E)!important;font-weight:700}
 
+/* «Наша команда» — карточки сотрудников внутри карточки организации (13.10.2026) */
+.team-l{display:flex;flex-direction:column;gap:10px}.tm{display:flex;gap:12px;align-items:flex-start;border:1.5px solid;border-left-width:5px;border-radius:14px;padding:10px 12px;background:#FFFCF8}
+.tm-ph{width:48px;height:48px;border-radius:50%;flex:none;display:flex;align-items:center;justify-content:center;color:#FFFCF8;font-weight:700;overflow:hidden}.tm-ph img{width:100%;height:100%;object-fit:cover}
+.tm-b{display:flex;flex-direction:column;gap:2px;min-width:0}.tm-b b{font-size:1rem}.tm-b small{color:var(--muted)}.tm-tag{font-size:.68rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;position:relative;align-self:flex-start;cursor:help}.tm-s{font-size:.85rem}.tm-l{font-size:.8rem;color:var(--muted)}
+
 /* плитка организации без логотипа (решение Ирины 12.10.2026: «отработай красивый дизайн»): медальон со значком направления на мягком фоне цвета направления */
 .ph.org-ico{position:relative;display:grid;place-items:center;overflow:hidden;border:1px solid color-mix(in srgb,var(--oc,#4F5E3E) 24%,#fff)!important;border-style:solid!important;
   background:radial-gradient(120% 90% at 85% 100%,color-mix(in srgb,var(--oc,#4F5E3E) 26%,#FFFCF8) 0%,transparent 60%),linear-gradient(160deg,color-mix(in srgb,var(--oc,#4F5E3E) 8%,#FFFCF8),color-mix(in srgb,var(--oc,#4F5E3E) 16%,#FFFCF8))!important}
@@ -849,6 +854,7 @@ a.bot:hover{color:#B98324}
           <li>Хозяин организации — владелец фирмы или член правления — подтверждает карточку кнопкой «Подтверждаю» по ссылке из нашего письма или ответным письмом с адреса организации. После этого карточка появится на сайте.</li>
           <li>У карточки на сайте есть номер, например OR-0001. Когда вы предлагаете <a href="../events/#zayavka">событие</a>, <a href="../kursy/#zayavka">курс</a> или <a href="../vakansii/#zayavka">объявление</a>, найдите в заявке свою организацию по UID или по этому номеру. Название, адрес и контакты подставятся сами, вписывать их заново не нужно.</li>
           <li>Что-то изменилось — напишите, и мы обновим карточку. Убрать карточку можно в любой момент, достаточно письма.</li>
+          <li>Хотите показать в карточке своих тренеров, мастеров или преподавателей? <a href="#sotrudnik">Добавьте сотрудника</a>: он появится в блоке «Наша команда» вашей карточки. Это дополнительная услуга для карточки организации.</li>
         </ol>
         <div class="acts"><a class="btn" href="#zayavka">Заполнить заявку на сайте</a><a class="btn ghost" href="mailto:voznesenskaya.iryna@gmail.com?subject=%D0%9E%D1%80%D0%B3%D0%B0%D0%BD%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D1%8F%20%D0%B2%20%C2%AB%D0%A1%D0%B2%D0%BE%D0%B8%D1%85%20%D0%BB%D1%8E%D0%B4%D1%8F%D1%85%C2%BB">Написать письмо</a><span class="note">voznesenskaya.iryna@gmail.com</span></div>
       </div>
@@ -921,6 +927,34 @@ a.bot:hover{color:#B98324}
     <div class="msg" id="orgMsg" role="status" hidden></div>
     <p class="draft" id="orgDraft"></p>
     <p class="note">Отправляя заявку, вы просите разместить организацию и соглашаетесь, чтобы после проверки мы опубликовали карточку. На сайте она появится только после того, как член правления или руководитель фирмы подтвердит её письмом с адреса организации. Как мы храним заявку — в <a href="https://svoiludi.ch/privacy/">политике конфиденциальности</a>.</p>
+  </section>
+
+  <!-- «Добавить сотрудника» (решение Ирины 13.10.2026, 19:16): по номеру организации подставляется организация, вписывается только сотрудник.
+       Карточка сотрудника живёт только внутри карточки организации (блок «Наша команда»): без своей карточки в справочнике, без VIP и событий. Движок — assets/zayavka.js -->
+  <section class="zform" id="sotrudnik" aria-labelledby="sotrudnik-h" data-zayavka="sotrudnik" data-zneedcard data-t-needcard="Сначала найдите карточку своей организации по номеру OR-… или UID. Сотрудника можно добавить только в карточку организации, которая уже на сайте." data-t-ok="Поставьте галочку согласия над кнопкой — без неё мы не можем принять заявку." data-t-okline="Согласие на обработку данных и публикацию: отмечено на сайте" data-mail="voznesenskaya.iryna@gmail.com" data-subject="Сотрудник в карточку организации — «Свои люди»" data-hello="Здравствуйте! Хотим добавить сотрудника в карточку нашей организации в «Свои люди в Швейцарии»." data-from="Заявка заполнена на странице" data-t-miss="Не заполнены обязательные поля: " data-t-mail="Проверьте e-mail: в адресе не хватает знака @ или точки." data-t-wiped="Вся история заявки удалена с этого устройства." data-t-copied="Заявка скопирована. Вставьте её в письмо на voznesenskaya.iryna@gmail.com." data-t-copyfail="Не получилось скопировать. Напишите нам на voznesenskaya.iryna@gmail.com.">
+    <h2 id="sotrudnik-h">Добавить сотрудника в карточку организации</h2>
+    <p class="zhint">Тренер, мастер, преподаватель или администратор вашей организации появится в карточке организации, в блоке «Наша команда». Своей отдельной карточки в справочнике у сотрудника нет: записываются к нему через контакты организации. Это дополнительная услуга для карточки организации. Найдите свою организацию по номеру — её данные подставятся сами, впишите только сотрудника.</p>
+    <div class="zlook" data-zlook data-kinds="org" data-t-kspec="Карточка в справочнике" data-t-korg="Карточка организации" data-t-sample="Образец" data-t-uid="UID" data-t-num="Номер карточки" data-t-addr="Адрес" data-t-phone="Телефон" data-t-mail="E-mail" data-t-site="Сайт" data-t-locked="Эти данные возьмём из карточки организации, в заявке их не поменять." data-t-to="Подтверждение — всегда через e-mail из карточки организации. Ссылку пришлём на" data-t-noemail="В карточке нет e-mail для подтверждений. Напишите нам: мы добавим его в карточку, без него сотрудника не подтвердить." data-t-change="Это не наша организация, ввести другой номер" data-t-empty="Впишите номер карточки организации или UID." data-t-format="Такой номер не найти. Номер карточки организации выглядит так: OR-0001, UID — так: CHE-123.456.789." data-t-none="Опубликованной карточки организации с этим номером нет. Проверьте номер." data-t-many="Под этим UID несколько карточек. Выберите свою:" data-t-auto="Этот номер уже есть. Мы подставили данные из карточки: проверьте их и нажмите «Отправить заявку» ещё раз." data-t-ref="Карточка организации" data-t-toletter="Ссылку на подтверждение прислать на" data-t-offwait="Карточка {n} ещё ждёт подтверждения. Подтвердите её по ссылке из нашего письма. Как только карточка появится на сайте, сюда можно будет добавить сотрудников." data-t-offpause="Карточка {n} сейчас не активна. Пока она не активна, сотрудников в неё не добавить. Напишите нам с e-mail карточки." data-t-offend="Срок размещения карточки {n} закончился {d}. Пока карточка не продлена, сотрудников в неё не добавить. Напишите нам с e-mail карточки.">
+      <div class="zf"><label for="z-t-find">Номер карточки вашей организации <s>*</s></label><div class="zlrow"><input id="z-t-find" data-zl="q" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="OR-0001 или UID"><button class="btn" type="button" data-zl="find">Найти</button></div><small>Номер стоит внизу карточки организации на сайте. Название, адрес и контакты подставятся сами.</small></div>
+      <p class="zmsg" data-zl="msg" role="status" hidden></p>
+      <div data-zl="prof" hidden></div>
+    </div>
+    <div class="zfg">
+      <h3 class="zh3">Сотрудник</h3>
+      <div class="zf"><label for="z-t-name">Имя и фамилия сотрудника <s>*</s></label><input id="z-t-name" data-a="Имя и фамилия сотрудника" data-req data-miss="имя и фамилия" placeholder="так, как писать на сайте"></div>
+      <div class="zf"><label for="z-t-role">Должность или роль <s>*</s></label><input id="z-t-role" data-a="Должность" data-req data-miss="должность" placeholder="например: тренер детских групп, мастер маникюра"></div>
+      <div class="zf"><label for="z-t-svc">Что делает: услуги, занятия, группы</label><textarea id="z-t-svc" data-a="Что делает" rows="3" placeholder="через запятую, например: занятия для малышей, подготовка к аттестации"></textarea><small>Защищённые звания и медицинские слова («терапевт», «психолог», «медицинский массаж» и другие) ставим только с документом, признанным в Швейцарии. Если он есть, пришлите его ответным письмом.</small></div>
+      <div class="zf"><label>Языки, на которых работает сотрудник</label><div class="zchk" data-l="Языки"><label><input type="checkbox" value="украинский">украинский</label><label><input type="checkbox" value="русский">русский</label><label><input type="checkbox" value="немецкий">немецкий</label><label><input type="checkbox" value="французский">французский</label><label><input type="checkbox" value="итальянский">итальянский</label><label><input type="checkbox" value="английский">английский</label></div></div>
+      <div class="zf"><label for="z-t-photo">Фото сотрудника</label><select id="z-t-photo" data-a="Фото"><option value="">Выберите</option><option>Пришлём фото ответным письмом</option><option>Без фото: на карточке будут инициалы</option></select></div>
+    </div>
+    <div class="zok"><input type="checkbox" id="z-t-own" data-zmust data-line="Заявку подаёт хозяин организации: отмечено на сайте" data-t-must="Поставьте галочку «Заявку подаёт хозяин организации»."><label for="z-t-own">Заявку подаёт хозяин организации: владелец фирмы или член правления ферайна или фонда. Сотрудник работает в нашей организации, и его услуги — часть нашей деятельности.</label></div>
+    <div class="zok"><input type="checkbox" id="z-t-agree" data-zmust data-line="Сотрудник согласен на публикацию: отмечено на сайте" data-t-must="Поставьте галочку «Сотрудник согласен на публикацию»."><label for="z-t-agree">Сотрудник знает об этой заявке и согласен, чтобы его имя, фамилия, должность, фото и языки были опубликованы в карточке организации. Если он передумает, мы уберём его из карточки по одному письму.</label></div>
+    <div class="zok"><input type="checkbox" id="z-t-ok" data-z="ok"><label for="z-t-ok">Даю согласие от имени организации, чтобы «Свои люди» (Alonira.ch AG) обработали данные из этой заявки и после подтверждения опубликовали сотрудника в карточке организации. Подробнее — в <a href="https://svoiludi.ch/privacy/">политике конфиденциальности</a>.</label></div>
+    <div class="acts"><button class="btn" type="button" data-z="send">Отправить заявку</button></div>
+    <p class="zmsg" data-z="msg" role="status" hidden></p>
+    <p class="zmsg" data-z="sent" hidden>Открылось письмо с заявкой на voznesenskaya.iryna@gmail.com. Проверьте его и нажмите «Отправить» в своей почте. Письмо не открылось? <a data-z="gmail" href="https://mail.google.com/" target="_blank" rel="noopener">Открыть в Gmail</a> или <button class="lnk" type="button" data-z="copy">скопировать заявку</button> и отправить её на voznesenskaya.iryna@gmail.com.</p>
+    <p class="zdraft" data-z="idle">Всё вписанное сохраняется только на этом устройстве, пока заявка не отправлена. <button class="lnk" type="button" data-z="wipe">Удалить историю</button></p>
+    <p class="zdraft" data-z="ask" hidden>Удалить с этого устройства всё, что вписано в заявку? Вернуть это будет нельзя. <button class="lnk" type="button" data-z="yes">Да, удалить историю</button><button class="lnk" type="button" data-z="no">Отмена</button></p>
   </section>
 
   <section class="terms" id="terms" aria-labelledby="terms-h">
@@ -1047,7 +1081,7 @@ const AVATAR_SVG = '<svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50
 </script>
 <script src="/data/specialists.js?v=aa2550d8"></script>
 <script src="/data/vacancies.js?v=3527d207"></script>
-<script src="/data/organizations.js?v=f27a044f"></script>
+<script src="/data/organizations.js?v=11fed7b5"></script>
 <script>
 window.IMG_BASE = '/img/org/';
 /* карточки специалистов — в /data/specialists.js (одна копия на весь сайт) */
@@ -1161,6 +1195,21 @@ window.SVL_ORG_ICONS = {
       feeText: o.free === true || (o.fees || []).length ? '' : (o.fee || ''), feeNeed: o.free !== true && !(o.fees || []).length && !o.fee })
   }));
   /* карточка руководителя уже на сайте (активна и подтверждена) — ссылка на неё без ключа предпросмотра */
+  /* ФИЛИАЛЫ (решение Ирины 13.10.2026, 19:11): залы и студии в разных городах — отдельные карточки с общим полем group.
+     В каждой — «Другие филиалы» ссылками; видны опубликованные, а в моём режиме и в предпросмотре по ключу — и пробные с тем же ключом. */
+  const sibVisible = (x, s) => x.status === 'активен' || (typeof ADMIN !== 'undefined' && ADMIN) || (/^#preview=/.test(location.hash) && typeof OKKEY === 'object' && OKKEY[s.id] && x.keyHash && x.keyHash === s.org.keyHash);
+  const sibHref = (x, s) => '#' + (x.status !== 'активен' && typeof OKKEY === 'object' && OKKEY[s.id] ? 'preview=' + esc(x.id) + '.' + esc(OKKEY[s.id]) : esc(x.id));
+  const branchesBlock = s => { const g = s.org.group; if (!g) return ''; const xs = (window.ORGANIZATIONS || []).filter(x => x.group === g && x.id !== s.id && sibVisible(x, s)); if (!xs.length) return '';
+    return `<div class="d-block"><h4>Другие филиалы</h4><p>${xs.map(x => `<a class="firm-a" href="${sibHref(x, s)}">${esc(x.name)}</a>`).join('<br>')}</p></div>`; };
+  /* «НАША КОМАНДА» (решение Ирины 13.10.2026, 19:16): карточки сотрудников живут только внутри карточки организации — без отдельной карточки
+     в справочнике, без VIP и без своих событий. Вносит и подтверждает организация, сотрудник согласен на публикацию. Карточка выделена рамкой
+     цвета направления и плашкой «Сотрудник · название». Данные — org.team [{ name, role, photo, services[], langs[], sample }]. */
+  const teamBlock = s => { const t = (s.org.team || []).filter(m => m && m.name); if (!t.length) return ''; const k = (typeof CATS === 'object' && CATS[s.cat]) || {}, c = k.c || '#4F5E3E';
+    const short = String(s.org.name || '').split(' · ')[0];
+    return `<div class="d-block team"><h4>Наша команда</h4><div class="team-l">${t.map(m => `<div class="tm" style="border-color:${c}">
+        <span class="tm-ph" style="background:${c}">${m.photo ? `<img src="/img/team/${esc(m.photo)}" alt="">` : esc(String(m.name).trim().split(/\s+/).map(w => w[0]).slice(0, 2).join(''))}</span>
+        <span class="tm-b"><span class="tm-tag" style="color:${c}" data-tip="Карточка из команды организации. Её вносит и подтверждает организация, сотрудник согласен на публикацию. Отдельной карточки в справочнике у сотрудника нет: записаться и задать вопрос — через контакты организации.">${m.sample ? 'Образец · всё вымышленное' : 'Сотрудник · ' + esc(short)}</span>
+        <b>${esc(m.name)}</b><small>${esc(m.role || '')}</small>${(m.services || []).length ? `<span class="tm-s">${m.services.map(x => esc(x)).join(' · ')}</span>` : ''}${(m.langs || []).length ? `<span class="tm-l">${esc(m.langs.join(', '))}</span>` : ''}</span></div>`).join('')}</div></div>`; };
   const specLive = id => { const x = (window.SPECIALISTS || []).find(r => r.id === id); return !!(x && x.status === 'активен'); };
   const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
   const DISC = 'Карточку заполнила сама организация, она отвечает за её содержание. «Свои люди» не участвуют в работе организации и не отвечают за её помощь, курсы и события. Обо всём договаривайся напрямую с организацией.';
@@ -1179,9 +1228,10 @@ window.SVL_ORG_ICONS = {
         + (o.fee && o.kind === 'firm' && !(typeof priceShown === 'function' && priceShown(s)) ? `<div class="d-block"><h4>Цены</h4><span>${esc(o.fee)}</span></div>` : '')   // есть прайс-лист — коротко и весь список в блоке «Цены» после «Что можно получить» (движок, priceBlock, 12.10.2026); взносы некоммерческих — блок «Взносы» под описанием (feeBlock)
         + (nd.head ? `<div class="d-block"><h4>Руководитель<button type="button" class="qh" data-help="head" aria-label="Подсказка: руководитель" aria-expanded="false">?</button></h4>${UTQ}</div>` : '')
         + (h.name && !nd.head ? `<div class="d-block"><h4>Руководитель<button type="button" class="qh" data-help="head" aria-label="Подсказка: руководитель" aria-expanded="false">?</button></h4><span>${h.spec ? `<a class="firm-a" href="../#${specLive(h.spec) || !(/^#preview=/.test(location.hash) && typeof OKKEY === 'object' && OKKEY[s.id]) ? esc(h.spec) : 'preview=' + esc(h.spec) + '.' + esc(OKKEY[s.id])}">${esc(h.name)}</a>` : esc(h.name)}${nd.headSurname ? ' <span class="need">фамилия — уточняем</span>' : ''}${h.role ? ' · ' + esc(h.role) : ''}</span></div>` : '')   /* имя руководителя — ссылка на его карточку специалиста, без отдельной строки «Карточка в справочнике специалистов →» (Ирина 13.10.2026, 19:07) */
+        + branchesBlock(s)
         + `<div class="disc-box"><b>Важно</b><p>${esc(o.kind === 'firm' ? DISC_FIRM : DISC)}</p></div>`; },
     /* предпросмотр по ссылке и режим Ирины: занятия, события и мастер-классы пробной карточки показывает сам движок (pvAfisha в index.html, 12.10.2026) */
-    main: s => '',
+    main: s => teamBlock(s),
     /* на карточке в списке: руководитель фирмы и пометка «… · размещение бесплатно» с зелёным сердечком (знак «некоммерческое», 12.10.2026) */
     line: s => { const o = s.org, h = o.head || {}, b = badgeOf(o);
       const fr = (o.fees || []).filter(f => f && f.name && isFinite(+f.sum) && f.sum !== '' && f.sum != null), min = fr.length ? Math.min(...fr.map(f => +f.sum)) : null;
@@ -1195,7 +1245,7 @@ window.SVL_ORG_ICONS = {
 const SPECIALISTS = window.SVL_ORG.items;   // организации в виде карточек справочника (adapter.js)
 
 </script>
-<script src="/data/afisha.js?v=77bf99f6"></script><script src="/assets/afisha-org.js"></script>
+<script src="/data/afisha.js?v=a792fcd9"></script><script src="/assets/afisha-org.js"></script>
 <script>const AFISHA = window.AFISHA || [];</script>
 <script>
 const ADMIN = (() => {   // режим Ирины: svoiludi.ch/?ira=1 включает на этом устройстве, ?ira=0 выключает
@@ -1751,7 +1801,9 @@ const headOrgs = s => (window.ORGANIZATIONS || []).filter(o => o.head && o.head.
 const orgHref = (o, s) => (/^uk/.test(document.documentElement.lang) ? 'uk/' : '') + 'organizacii/#' + (o.status !== 'активен' && OKKEY[s.id] ? 'preview=' + esc(o.id) + '.' + esc(OKKEY[s.id]) : esc(o.id));
 const firmLine = s => { if (IS_ORG_PAGE) return s.firm ? `<div class="firm" style="font-size:.95rem;margin-top:4px">${esc(s.firm)}</div>` : '';
   const os = headOrgs(s); if (!os.length) return s.firm ? `<div class="firm" style="font-size:.95rem;margin-top:4px">${esc(s.firm)}</div>` : '';
-  return `<div class="firm" style="font-size:.95rem;margin-top:4px">${os.map(o => `<a class="firm-a" href="${orgHref(o, s)}">${esc(o.name)}</a>`).join(' · ')}</div>`; };
+  /* филиалы одной школы (поле group) — название один раз, дальше города ссылками: «Спортивна школа UA-DO: Sisseln · Kloten · Stein» (13.10.2026) */
+  const parts = [], seen = {}; os.forEach(o => { const [nm, br] = String(o.name).split(' · '); if (o.group && br){ if (!seen[o.group]){ seen[o.group] = { nm, xs: [] }; parts.push(seen[o.group]); } seen[o.group].xs.push({ o, br }); } else parts.push({ one: o }); });
+  return `<div class="firm" style="font-size:.95rem;margin-top:4px">${parts.map(g => g.one ? `<a class="firm-a" href="${orgHref(g.one, s)}">${esc(g.one.name)}</a>` : `${esc(g.nm)}: ${g.xs.map(x => `<a class="firm-a" href="${orgHref(x.o, s)}">${esc(x.br)}</a>`).join(' · ')}`).join(' · ')}</div>`; };
 const pvOn = id => /^#preview=/.test(location.hash) && decodeURIComponent(location.hash.slice(9)).split('.')[0] === id;
 const promoOf = s => AFISHA.filter(e => e.type === 'promo' && e.promo && (e.status === 'активен' || (e.status === 'на подтверждении' && (pvOn(s.id) || ADMIN))) && (e.organizers || []).some(x => x && typeof x === 'object' && x.org === s.id) && e.date <= today && (e.dateEnd || e.date) >= today)
   .sort((a, b) => (a.dateEnd || a.date).localeCompare(b.dateEnd || b.date)).slice(0, 2);

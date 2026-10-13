@@ -826,7 +826,7 @@ window.AFISHA = [
     date: '2026-10-19', time: '16:00', timeEnd: '19:00', repeat: { freq: 'weekly' },
     canton: 'Aargau', address: 'Schulhausstrasse 11, 4334 Sisseln', online: false,
     langs: ['украинский'], level: 'дети, подростки и взрослые', price: '', commercial: true,
-    organizers: [{ org: 'ua-do-kloten', name: 'Спортивна школа UA-DO' }], link: 'https://ua-do.ch/',
+    organizers: [{ org: 'ua-do-sisseln', name: 'Спортивна школа UA-DO' }], link: 'https://ua-do.ch/',
     about: 'Регулярные тренировки спортивной школы UA-DO по украинскому единоборству UA-DO, «Козацькому двобою», дзюдо и джиу-джитсу. Расписание по данным 2024 года — уточняем у школы.'
   },
   {
@@ -835,7 +835,7 @@ window.AFISHA = [
     date: '2026-10-14', time: '16:00', timeEnd: '19:00', repeat: { freq: 'weekly' },
     canton: 'Aargau', address: 'Schulhausstrasse 11, 4334 Sisseln', online: false,
     langs: ['украинский'], level: 'дети, подростки и взрослые', price: '', commercial: true,
-    organizers: [{ org: 'ua-do-kloten', name: 'Спортивна школа UA-DO' }], link: 'https://ua-do.ch/',
+    organizers: [{ org: 'ua-do-sisseln', name: 'Спортивна школа UA-DO' }], link: 'https://ua-do.ch/',
     about: 'Регулярные тренировки спортивной школы UA-DO по украинскому единоборству UA-DO, «Козацькому двобою», дзюдо и джиу-джитсу. Расписание по данным 2024 года — уточняем у школы.'
   },
   {
@@ -844,7 +844,7 @@ window.AFISHA = [
     date: '2026-10-16', time: '16:00', timeEnd: '19:00', repeat: { freq: 'weekly' },
     canton: 'Aargau', address: 'Schulhausstrasse 11, 4334 Sisseln', online: false,
     langs: ['украинский'], level: 'дети, подростки и взрослые', price: '', commercial: true,
-    organizers: [{ org: 'ua-do-kloten', name: 'Спортивна школа UA-DO' }], link: 'https://ua-do.ch/',
+    organizers: [{ org: 'ua-do-sisseln', name: 'Спортивна школа UA-DO' }], link: 'https://ua-do.ch/',
     about: 'Регулярные тренировки спортивной школы UA-DO по украинскому единоборству UA-DO, «Козацькому двобою», дзюдо и джиу-джитсу. Расписание по данным 2024 года — уточняем у школы.'
   },
   {
@@ -853,7 +853,7 @@ window.AFISHA = [
     date: '2026-10-18', time: '', repeat: { freq: 'weekly' },
     canton: 'Aargau', address: '4332 Stein AG', online: false,
     langs: ['украинский'], level: 'дети, подростки и взрослые', price: '', commercial: true,
-    organizers: [{ org: 'ua-do-kloten', name: 'Спортивна школа UA-DO' }], link: 'https://ua-do.ch/',
+    organizers: [{ org: 'ua-do-stein', name: 'Спортивна школа UA-DO' }], link: 'https://ua-do.ch/',
     about: 'Регулярные тренировки спортивной школы UA-DO по украинскому единоборству UA-DO, «Козацькому двобою», дзюдо и джиу-джитсу. Расписание по данным 2024 года — уточняем у школы.'
   },
   /* Спортивная школа UA-DO (12.10.2026): будущих событий на их сайте нет (новости — до 12.2023), поэтому для примера — их последний открытый чемпионат, с пометкой «прошло»
@@ -864,7 +864,7 @@ window.AFISHA = [
     date: '2023-12-09', time: '10:00',
     canton: 'Aargau', address: 'Sportcenter Bustelbach, Sportplatzweg 2, 4332 Stein AG', online: false,
     langs: ['украинский'], level: 'дети до 14 лет', price: 'CHF 20', commercial: true,
-    organizers: [{ org: 'ua-do-kloten', name: 'Спортивна школа UA-DO' }], link: 'https://ua-do.ch/2023/12/01/ua-do-school/',
+    organizers: [{ org: 'ua-do-stein', name: 'Спортивна школа UA-DO' }], link: 'https://ua-do.ch/2023/12/01/ua-do-school/',
     about: 'Спортивный праздник для маленьких спортсменов до 14 лет — весёлые соревнования в дисциплинах Rumble Do и Stiktug Do. Регистрация участников — с 9:00 до 10:00, начало соревнований — в 10:00.'
   }
 ];
