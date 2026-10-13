@@ -258,3 +258,8 @@ nav.toc{display:block!important}
 .tm-sit .sit-card .tm-ic{flex:none}
 .tm-sit .sit-card b{display:block;font-family:var(--display);font-weight:400;font-size:1.12rem;line-height:1.2;margin-bottom:4px}
 .tm-sit .sit-card span span{display:block;font-size:.86rem;color:var(--muted);line-height:1.4}
+/* Оглавление «В этой статье» — тот же маркер «Росток», что во всех списках сайта (правило Ирины 12.10.2026: без стандартных чёрных точек); исправлено 14.10.2026 */
+nav.toc ul{list-style:none;padding-left:0}
+nav.toc li{position:relative;padding-left:1.7em}
+nav.toc li::marker{content:none}
+nav.toc li::before{content:"";position:absolute;left:.05em;top:.2em;width:1.15em;height:1.15em;background:var(--sl-bul-c,#66704F);-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none' stroke='%23000' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M10 18V9'/%3E%3Cpath d='M10 12C6 12 3.5 9.5 3.5 6 7 6 10 8.2 10 12Z' fill='%23000' fill-opacity='.3'/%3E%3Cpath d='M10 9.5C10 5.5 12.5 3 16.5 3 16.5 6.8 14 9.5 10 9.5Z' fill='%23000' fill-opacity='.3'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none' stroke='%23000' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M10 18V9'/%3E%3Cpath d='M10 12C6 12 3.5 9.5 3.5 6 7 6 10 8.2 10 12Z' fill='%23000' fill-opacity='.3'/%3E%3Cpath d='M10 9.5C10 5.5 12.5 3 16.5 3 16.5 6.8 14 9.5 10 9.5Z' fill='%23000' fill-opacity='.3'/%3E%3C/svg%3E") center/contain no-repeat}
