@@ -73,7 +73,7 @@
       else if (p.t === 'line') o += `<line x1="${p.x1}" y1="${p.y1}" x2="${p.x2}" y2="${p.y2}" stroke="${p.color}" stroke-width="${p.w}"${p.dash ? ' stroke-dasharray="1.2 0.9"' : ''}/>`;
       else if (p.t === 'tri') o += `<polygon points="${p.p.map(q => q.join(',')).join(' ')}" fill="${p.fill}"/>`;
       else if (p.t === 'img') o += `<image href="${p.data}" x="${p.x}" y="${p.y}" width="${p.w}" height="${p.h}" preserveAspectRatio="xMidYMid slice"/>`;
-      else o += `<text x="${p.x}" y="${p.y}" font-family="${p.f === 'h' ? 'Helvetica, Arial, sans-serif' : 'Manrope'}" font-weight="${p.b ? 700 : 400}" font-size="${(p.size * PT).toFixed(3)}" fill="${p.color}" text-anchor="${p.align === 'right' ? 'end' : p.align === 'center' ? 'middle' : 'start'}">${esc(p.s)}</text>`;
+      else o += `<text x="${p.x}" y="${p.y}" font-family="${p.f === 'h' ? 'Helvetica, Arial, sans-serif' : p.f === 'f' ? 'Forum, Georgia, serif' : 'Manrope'}" font-weight="${p.b ? 700 : 400}" font-size="${(p.size * PT).toFixed(3)}" fill="${p.color}" text-anchor="${p.align === 'right' ? 'end' : p.align === 'center' ? 'middle' : 'start'}">${esc(p.s)}</text>`;
     });
     const mk = marks(pg); if (mk.length) o += `<g fill="${WMC}" fill-opacity="${WMA}" font-family="Manrope" font-weight="700" font-size="${(WMS * PT).toFixed(3)}">` + mk.map(([x, y]) => `<text transform="translate(${x} ${y}) rotate(-24)">${esc(WMT)}</text>`).join('') + '</g>';
     if (showCredit(pg)) o += `<text x="${pg.w - 8}" y="${pg.creditY}" font-family="Manrope" font-size="${(4.6 * PT).toFixed(3)}" fill="#7A6E62" text-anchor="end">${esc(credit())}</text>`;
@@ -83,11 +83,14 @@
     return o + '</svg>';
   }
   const FONT_FILES = {'Manrope-Regular': '/assets/lib/fonts-pdf/Manrope-Regular.ttf', 'Manrope-Bold': '/assets/lib/fonts-pdf/Manrope-Bold.ttf'};
+  /* Forum (шрифт заголовков сайта) — только если страница его просит: текст с font 'f' (визитки, 13.10.2026) */
+  const FONT_EXTRA = {'Forum-Regular': '/assets/lib/fonts-pdf/Forum-Regular.ttf'};
   let fontCache = null;
-  async function fonts(){
-    if (fontCache) return fontCache;
-    const base = (window.PV_BASE || '/').replace(/\/$/, ''), out = {};
-    for (const [k, u] of Object.entries(FONT_FILES)) {
+  async function fonts(forum){
+    if (fontCache && (!forum || fontCache['Forum-Regular'])) return fontCache;
+    const base = (window.PV_BASE || '/').replace(/\/$/, ''), out = Object.assign({}, fontCache || {});
+    for (const [k, u] of Object.entries(Object.assign({}, FONT_FILES, forum ? FONT_EXTRA : {}))) {
+      if (out[k]) continue;
       const r = await fetch(window.PV_BASE ? base + u : u); if (!r.ok) throw new Error('font');
       const buf = new Uint8Array(await r.arrayBuffer()); let s = '';
       for (let i = 0; i < buf.length; i += 0x8000) s += String.fromCharCode.apply(null, buf.subarray(i, i + 0x8000));
@@ -96,23 +99,28 @@
     return fontCache = out;
   }
   const hex = h => [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16));
+  /* Размер листа: по умолчанию A4; страница может задать свой формат pg.fmt = [ширина, высота] в мм (визитка 91 × 61, 13.10.2026). */
+  const fmt = pg => pg.fmt || 'a4';
+  /* pg.kBlack: серые и чёрный (#000000…#FFFFFF, где R = G = B) печатаются одной чёрной краской (CMYK, только K) — тонкий текст в типографии чёткий */
+  const col = (pg, h) => { const c = hex(h); return pg.kBlack && c[0] === c[1] && c[1] === c[2] ? [0, 0, 0, Math.round((1 - c[0] / 255) * 1000) / 1000] : c; };
   async function makePdf(pages, title){
     if (!window.jspdf) throw new Error('lib'); if (!pages.length) throw new Error('empty');
-    const no = docNo(), F = await fonts(), doc = new window.jspdf.jsPDF({unit: 'mm', format: 'a4', orientation: pages[0].w > pages[0].h ? 'l' : 'p', compress: true});
+    const forum = pages.some(pg => pg.ops.some(o => o.t === 'text' && o.f === 'f'));
+    const no = docNo(), F = await fonts(forum), doc = new window.jspdf.jsPDF({unit: 'mm', format: fmt(pages[0]), orientation: pages[0].w > pages[0].h ? 'l' : 'p', compress: true, putOnlyUsedFonts: true});   // в файле только шрифты, которые на самом деле стоят на листе (типографии проверяют, что все шрифты встроены)
     for (const [k, b64] of Object.entries(F)) { doc.addFileToVFS(k + '.ttf', b64); doc.addFont(k + '.ttf', k, 'normal'); }
     pages.forEach((pg, i) => {
-      if (i) doc.addPage('a4', pg.w > pg.h ? 'l' : 'p');
+      if (i) doc.addPage(fmt(pg), pg.w > pg.h ? 'l' : 'p');
       pg.ops.forEach(o => {
         if (o.t === 'rect') {
-          if (o.stroke) { doc.setDrawColor(...hex(o.stroke)); doc.setLineWidth(0.35); doc.setLineDashPattern(o.dash ? [1.4, 1] : [], 0); }
-          if (o.fill) doc.setFillColor(...hex(o.fill));
+          if (o.stroke) { doc.setDrawColor(...col(pg, o.stroke)); doc.setLineWidth(0.35); doc.setLineDashPattern(o.dash ? [1.4, 1] : [], 0); }
+          if (o.fill) doc.setFillColor(...col(pg, o.fill));
           const st = o.fill && o.stroke ? 'FD' : o.fill ? 'F' : 'S';
           if (o.r) doc.roundedRect(o.x, o.y, o.w, o.h, o.r, o.r, st); else doc.rect(o.x, o.y, o.w, o.h, st);
           doc.setLineDashPattern([], 0);
-        } else if (o.t === 'line') { doc.setDrawColor(...hex(o.color)); doc.setLineWidth(o.w); doc.setLineDashPattern(o.dash ? [1.2, 0.9] : [], 0); doc.line(o.x1, o.y1, o.x2, o.y2); doc.setLineDashPattern([], 0); }
-        else if (o.t === 'tri') { doc.setFillColor(...hex(o.fill)); doc.triangle(o.p[0][0], o.p[0][1], o.p[1][0], o.p[1][1], o.p[2][0], o.p[2][1], 'F'); }
-        else if (o.t === 'img') { try { doc.addImage(o.data, 'JPEG', o.x, o.y, o.w, o.h, undefined, 'MEDIUM'); } catch (e) {} }
-        else { if (o.f === 'h') doc.setFont('helvetica', o.b ? 'bold' : 'normal'); else doc.setFont(o.b ? 'Manrope-Bold' : 'Manrope-Regular', 'normal'); doc.setFontSize(o.size); doc.setTextColor(...hex(o.color)); doc.text(o.s, o.x, o.y, {align: o.align}); }
+        } else if (o.t === 'line') { doc.setDrawColor(...col(pg, o.color)); doc.setLineWidth(o.w); doc.setLineDashPattern(o.dash ? [1.2, 0.9] : [], 0); doc.line(o.x1, o.y1, o.x2, o.y2); doc.setLineDashPattern([], 0); }
+        else if (o.t === 'tri') { doc.setFillColor(...col(pg, o.fill)); doc.triangle(o.p[0][0], o.p[0][1], o.p[1][0], o.p[1][1], o.p[2][0], o.p[2][1], 'F'); }
+        else if (o.t === 'img') { try { doc.addImage(o.data, /^data:image\/png/.test(o.data) ? 'PNG' : 'JPEG', o.x, o.y, o.w, o.h, undefined, 'MEDIUM'); } catch (e) {} }
+        else { if (o.f === 'h') doc.setFont('helvetica', o.b ? 'bold' : 'normal'); else if (o.f === 'f') doc.setFont('Forum-Regular', 'normal'); else doc.setFont(o.b ? 'Manrope-Bold' : 'Manrope-Regular', 'normal'); doc.setFontSize(o.size); doc.setTextColor(...col(pg, o.color)); doc.text(o.s, o.x, o.y, {align: o.align}); }
       });
       const mk = marks(pg);
       if (mk.length) { const gs = doc.GState ? a => doc.setGState(new doc.GState({opacity: a})) : null; if (gs) gs(WMA); doc.setFont('Manrope-Bold', 'normal'); doc.setFontSize(WMS); doc.setTextColor(...(gs ? hex(WMC) : [240, 235, 228])); mk.forEach(([x, y]) => doc.text(WMT, x, y, {angle: 24})); if (gs) gs(1); }
@@ -127,8 +135,8 @@
     return doc.output('blob');
   }
   async function pagePng(pg){
-    try { await Promise.all([document.fonts.load('400 20px Manrope'), document.fonts.load('700 20px Manrope')]); } catch (e) {}
-    const k = 8, cv = document.createElement('canvas'); cv.width = Math.round(pg.w * k); cv.height = Math.round(pg.h * k); cv.__svl = true;
+    try { await Promise.all([document.fonts.load('400 20px Manrope'), document.fonts.load('700 20px Manrope'), document.fonts.load('400 20px Forum')]); } catch (e) {}
+    const k = pg.pngK || 8, cv = document.createElement('canvas'); cv.width = Math.round(pg.w * k); cv.height = Math.round(pg.h * k); cv.__svl = true;
     const c = cv.getContext('2d'); c.scale(k, k); c.fillStyle = '#FFFFFF'; c.fillRect(0, 0, pg.w, pg.h);
     const IM = new Map(); await Promise.all(pg.ops.filter(o => o.t === 'img').map(o => new Promise(r => { const im = new Image(); im.onload = () => { IM.set(o, im); r(); }; im.onerror = r; im.src = o.data; })));
     pg.ops.forEach(o => {
@@ -136,7 +144,7 @@
       if (o.t === 'rect') { c.beginPath(); if (o.r && c.roundRect) c.roundRect(o.x, o.y, o.w, o.h, o.r); else c.rect(o.x, o.y, o.w, o.h); if (o.fill) { c.fillStyle = o.fill; c.fill(); } if (o.stroke) { c.strokeStyle = o.stroke; c.lineWidth = 0.35; c.setLineDash(o.dash ? [1.4, 1] : []); c.stroke(); c.setLineDash([]); } }
       else if (o.t === 'line') { c.beginPath(); c.moveTo(o.x1, o.y1); c.lineTo(o.x2, o.y2); c.strokeStyle = o.color; c.lineWidth = o.w; c.setLineDash(o.dash ? [1.2, 0.9] : []); c.stroke(); c.setLineDash([]); }
       else if (o.t === 'tri') { c.beginPath(); c.moveTo(o.p[0][0], o.p[0][1]); c.lineTo(o.p[1][0], o.p[1][1]); c.lineTo(o.p[2][0], o.p[2][1]); c.closePath(); c.fillStyle = o.fill; c.fill(); }
-      else { c.font = (o.b ? '700 ' : '400 ') + (o.size * PT) + 'px ' + (o.f === 'h' ? 'Helvetica, Arial, sans-serif' : 'Manrope'); c.fillStyle = o.color; c.textAlign = o.align === 'right' ? 'right' : o.align === 'center' ? 'center' : 'left'; c.textBaseline = 'alphabetic'; c.fillText(o.s, o.x, o.y); }
+      else { c.font = (o.f === 'f' ? '400 ' : o.b ? '700 ' : '400 ') + (o.size * PT) + 'px ' + (o.f === 'h' ? 'Helvetica, Arial, sans-serif' : o.f === 'f' ? 'Forum, Georgia, serif' : 'Manrope'); c.fillStyle = o.color; c.textAlign = o.align === 'right' ? 'right' : o.align === 'center' ? 'center' : 'left'; c.textBaseline = 'alphabetic'; c.fillText(o.s, o.x, o.y); }
     });
     const mk = marks(pg);
     if (mk.length) { c.save(); c.globalAlpha = WMA; c.fillStyle = WMC; c.font = '700 ' + (WMS * PT) + 'px Manrope'; c.textAlign = 'left'; mk.forEach(([x, y]) => { c.save(); c.translate(x, y); c.rotate(-24 * Math.PI / 180); c.fillText(WMT, 0, 0); c.restore(); }); c.restore(); }

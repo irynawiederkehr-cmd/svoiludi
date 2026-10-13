@@ -57,6 +57,7 @@ PAGES = [('index.html', '/'), ('events/index.html', '/events/'), ('akcii/index.h
          ('instrumenty/yazyk-trebovaniya/index.html', '/instrumenty/yazyk-trebovaniya/'),
          ('instrumenty/zhurnal-shuma/index.html', '/instrumenty/zhurnal-shuma/'),
          ('instrumenty/vse-fayly/index.html', '/instrumenty/vse-fayly/'),
+         ('instrumenty/vizitka/index.html', '/instrumenty/vizitka/'),
          ('shveycariya/index.html', '/shveycariya/'),
          ('shveycariya/arenda/index.html', '/shveycariya/arenda/'),
          ('shveycariya/bank/index.html', '/shveycariya/bank/'),
@@ -290,12 +291,17 @@ def build():
     for src, path in PAGES:
         sp = os.path.join(ROOT, src)
         ru = stamp_data(strip_injected(open(sp, encoding='utf-8').read()))
-        ru_out = head_inject(ru, MARK + alternates(path) + redirect_js(path) + MARK)
-        ru_out = body_inject(ru_out, MARK + switcher('ru', path) + MARK)
-        if ru_out != open(sp, encoding='utf-8').read(): open(sp, 'w', encoding='utf-8').write(ru_out)
         tr = dict(TM); tr.update(TMP.get(src, {}))
         units = list(dict.fromkeys(page_units(ru)))
         miss = [u for u in units if u not in tr]
+        dst = os.path.join(ROOT, 'uk', src)
+        # новая страница, которой ещё нет по-украински (переводы на паузе, 13.10.2026): без переключателя RU/UA и без перехода на /uk/,
+        # иначе тот, кто выбрал украинский, попадёт на несуществующую страницу. Когда перевод появится, блок встанет сам.
+        if miss and not os.path.exists(dst): ru_out = ru
+        else:
+            ru_out = head_inject(ru, MARK + alternates(path) + redirect_js(path) + MARK)
+            ru_out = body_inject(ru_out, MARK + switcher('ru', path) + MARK)
+        if ru_out != open(sp, encoding='utf-8').read(): open(sp, 'w', encoding='utf-8').write(ru_out)
         if miss: missing += [u for u in miss if u not in missing]; continue
         out = translate_page(ru, tr)
         out = out.replace('<html lang="ru"', '<html lang="uk"', 1).replace('content="ru_RU"', 'content="uk_UA"')
@@ -305,7 +311,6 @@ def build():
         out = post(out, src)
         out = head_inject(out, MARK + alternates(path) + MARK)
         out = body_inject(out, MARK + switcher('uk', path) + MARK)
-        dst = os.path.join(ROOT, 'uk', src)
         os.makedirs(os.path.dirname(dst), exist_ok=True)
         old = open(dst, encoding='utf-8').read() if os.path.exists(dst) else None
         if out != old: open(dst, 'w', encoding='utf-8').write(out)
