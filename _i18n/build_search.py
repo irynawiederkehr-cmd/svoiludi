@@ -106,6 +106,9 @@ uk = []
 for it in items:
     u = it['u']
     uu = '/uk' + u if not u.startswith('/uk') else u
+    # 14.10.2026: страница, которой ещё нет на украинском (пауза переводов), в украинском поиске не показывается — иначе ссылка вела бы в пустоту
+    p = uu.split('#')[0].split('?')[0].lstrip('/')
+    if p.startswith('uk/') and p.endswith('/') and not os.path.exists(p + 'index.html'): continue
     kk = tr(it.get('k', ''))
     uk.append({'g': tr(it['g']), 't': tr(it['t']), 'u': uu, 'd': tr(it.get('d', '')), 'k': (it.get('k', '') + ' ' + (kk if kk != it.get('k', '') else '') + ' ' + it.get('kf', '') + ' ' + it.get('kfu', '')).strip()})
 json.dump(sorted(set(todo)), open('_i18n/search_todo.json', 'w', encoding='utf-8'), ensure_ascii=False, indent=1)

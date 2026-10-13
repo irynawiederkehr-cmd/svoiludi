@@ -120,6 +120,8 @@ PAGES = [('index.html', '/'), ('events/index.html', '/events/'), ('akcii/index.h
          ('shveycariya/zhivotnye/index.html', '/shveycariya/zhivotnye/')]
 # «Устройство сайта» (09.10.2026): О проекте, Для специалистов, Что нового, Моя ситуация, тема «Адаптация»
 PAGES += [x for x in [('o-proekte/index.html', '/o-proekte/'), ('usloviya/index.html', '/usloviya/'), ('ceny/index.html', '/ceny/'), ('prilozhenie/index.html', '/prilozhenie/'), ('dlya-specialistov/index.html', '/dlya-specialistov/'), ('novosti/index.html', '/novosti/'), ('situacii/index.html', '/situacii/'), ('shveycariya/adaptaciya/index.html', '/shveycariya/adaptaciya/'), ('situacii/tolko-priehala/index.html', '/situacii/tolko-priehala/'), ('situacii/rabota/index.html', '/situacii/rabota/'), ('situacii/deti/index.html', '/situacii/deti/'), ('situacii/dengi/index.html', '/situacii/dengi/'), ('situacii/zhilye/index.html', '/situacii/zhilye/'), ('situacii/svoe-delo/index.html', '/situacii/svoe-delo/'), ('situacii/zdorovye/index.html', '/situacii/zdorovye/'), ('situacii/pismo-problema/index.html', '/situacii/pismo-problema/')] if x not in PAGES]
+# 14.10.2026: тема и маршрут для тех, кто ещё в Украине (переводы на паузе — украинского зеркала пока нет)
+PAGES += [x for x in [('shveycariya/iz-ukrainy/index.html', '/shveycariya/iz-ukrainy/'), ('situacii/iz-ukrainy/index.html', '/situacii/iz-ukrainy/')] if x not in PAGES]
 OWN = sorted({p for _, p in PAGES}, key=len, reverse=True)
 CODE_WORDS = ['ВСТРЕЧА', 'ОТЗЫВ', 'ЗАЯВКА', 'РАССЫЛКА', 'ПОРЯДОК']
 
@@ -290,12 +292,17 @@ def build():
     for src, path in PAGES:
         sp = os.path.join(ROOT, src)
         ru = stamp_data(strip_injected(open(sp, encoding='utf-8').read()))
-        ru_out = head_inject(ru, MARK + alternates(path) + redirect_js(path) + MARK)
-        ru_out = body_inject(ru_out, MARK + switcher('ru', path) + MARK)
-        if ru_out != open(sp, encoding='utf-8').read(): open(sp, 'w', encoding='utf-8').write(ru_out)
         tr = dict(TM); tr.update(TMP.get(src, {}))
         units = list(dict.fromkeys(page_units(ru)))
         miss = [u for u in units if u not in tr]
+        # 14.10.2026: у новой страницы, которой ещё нет на украинском (пауза переводов), нет и перехода на /uk/ —
+        # иначе посетитель, выбравший украинский язык, попал бы на несуществующую страницу. Переход появится, когда страницу переведут.
+        has_uk = os.path.exists(os.path.join(ROOT, 'uk', src)) or not miss
+        ru_out = ru
+        if has_uk:
+            ru_out = head_inject(ru_out, MARK + alternates(path) + redirect_js(path) + MARK)
+            ru_out = body_inject(ru_out, MARK + switcher('ru', path) + MARK)
+        if ru_out != open(sp, encoding='utf-8').read(): open(sp, 'w', encoding='utf-8').write(ru_out)
         if miss: missing += [u for u in miss if u not in missing]; continue
         out = translate_page(ru, tr)
         out = out.replace('<html lang="ru"', '<html lang="uk"', 1).replace('content="ru_RU"', 'content="uk_UA"')

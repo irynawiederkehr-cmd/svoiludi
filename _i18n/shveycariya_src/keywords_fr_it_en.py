@@ -4,6 +4,7 @@ KW2 = {
  'permit-b': ['permis b', 'permesso b', 'permit b switzerland'],
  'permit-c': ['permis c', 'permesso c', 'c permit switzerland'],
  'permit-g': ['permis g', 'permesso g', 'frontalier suisse'],
+ 'iz-ukrainy': ['demander statut s suisse', 'richiesta statuto s svizzera', 'apply status s switzerland'],
  'status-s': ['permis s', 'statut s', 'permesso s', 'status s switzerland'],
  'status-f': ['permis f', 'permesso f'],
  'status-n': ['permis n', 'asile suisse'],
