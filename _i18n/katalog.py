@@ -148,7 +148,7 @@ CSS = '''<style>
 .kat-q input{flex:1;border:0;background:none;font:inherit;font-size:1rem;outline:none;min-width:0}
 .kat-f{display:flex;flex-wrap:wrap;gap:8px}.kat-f button{font:600 .86rem/1.2 inherit;padding:8px 12px;border-radius:9px;border:1.5px solid var(--line,#E5DCCD);background:var(--paper,#FFFCF8);color:var(--ink,#2F2924);cursor:pointer}
 .kat-f button.on{background:var(--sage,#66704F);border-color:var(--sage,#66704F);color:#fff}
-.kat-nav{display:flex;flex-wrap:wrap;gap:6px 14px;margin:14px 0 4px;font-size:.92rem}.kat-nav a{color:var(--brown,#6E4F3C);text-underline-offset:3px}.kat-nav small{color:var(--muted,#6B635A)}
+.kat-nav{display:flex;flex-wrap:wrap;gap:6px 14px;margin:14px 0 4px;font-size:.92rem}.kat-nav a{white-space:normal;color:var(--brown,#6E4F3C);text-underline-offset:3px}.kat-nav small{color:var(--muted,#6B635A)}
 .kat-cnt{color:var(--muted,#6B635A);font-size:.9rem;margin:6px 0 0}
 .ks{margin:34px 0 0;scroll-margin-top:90px}.ks h2{margin:0 0 4px}.kd{margin:0 0 14px;color:var(--muted,#6B635A);max-width:70ch}
 .kg{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:16px}
