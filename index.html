@@ -382,6 +382,7 @@ a.bot:hover{color:#B98324}
 .ph-tag{position:absolute;left:50%;bottom:9%;transform:translateX(-50%);background:rgba(255,252,248,.94);color:#4F5E3E;font-weight:700;font-size:.68rem;line-height:1.2;letter-spacing:.03em;padding:4px 9px;border-radius:999px;white-space:nowrap;box-shadow:0 2px 8px rgba(40,50,30,.22);pointer-events:none}
 .qm-ph .ph-tag{font-size:.9rem;padding:6px 12px}
 .firm{font-size:.82rem;font-weight:600;color:var(--muted)}
+.firm-a{color:inherit;text-decoration:underline;text-decoration-color:#C9B8A4;text-underline-offset:3px}.firm-a:hover{color:var(--ink)}   /* название организации и имя руководителя — ссылки (13.10.2026) */
 /* водяной знак Ирины в полной карточке (решено 04.10.2026) */
 #qmCard{background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22460%22%20height%3D%22230%22%3E%3Ctext%20x%3D%2220%22%20y%3D%22130%22%20transform%3D%22rotate%28-24%20230%20115%29%22%20font-family%3D%22Manrope%2CArial%2Csans-serif%22%20font-size%3D%2213%22%20font-weight%3D%22700%22%20fill%3D%22%234F5E3E%22%20fill-opacity%3D%220.07%22%3E%D0%A1%D0%B2%D0%BE%D0%B8%20%D0%BB%D1%8E%D0%B4%D0%B8%20%C2%B7%20svoiludi.ch%20%C2%B7%20%D0%A1%D0%B2%D0%BE%D0%B8%20%D0%BB%D1%8E%D0%B4%D0%B8%20%C2%B7%20svoiludi.ch%3C%2Ftext%3E%3C%2Fsvg%3E");background-repeat:repeat}
 .ph.none{display:grid;place-items:center;font-size:.72rem;font-weight:700;color:var(--muted);text-align:center;border:1.5px dashed var(--line)}
@@ -1453,6 +1454,14 @@ const pEnd = e => pAlways(e) ? 'постоянно' : 'до ' + pShort(e.dateEnd
 const afOpt = s => ({ kind: IS_ORG_PAGE ? 'org' : 'spec', drafts: ADMIN || pvOn(s.id), sample: !!s.sample });
 const afBtn = s => afOn(s) ? `<button class="btn ghost" type="button" data-afisha-card="${esc(s.id)}" data-tip="Все занятия и ближайшие события на одном листе: PDF и PNG для печати, всё в календарь">Афиша и расписание</button>` : '';
 const afOn = s => { if (!window.SVL_AFISHA_ORG) return false; const L = SVL_AFISHA_ORG.list(s.id, afOpt(s)); return L.regular.length + L.upcoming.length > 0; };
+/* строка под именем в окне карточки (Ирина 13.10.2026, 19:07: «ссылки на профиль и на компанию должны быть спрятаны за этими названиями… чтобы не наставлять ничего лишнего»):
+   если специалист руководит организацией из «Организаций», её название под именем — ссылка на карточку организации; отдельного блока «Руководит» нет.
+   Обратная ссылка — имя руководителя в карточке организации (adapter.js). Так на всех карточках, включая будущие. */
+const headOrgs = s => (window.ORGANIZATIONS || []).filter(o => o.head && o.head.spec === s.id && ((o.status === 'активен' && o.confirm && o.confirm.date) || (o.status === 'на подтверждении' && (pvOn(s.id) || ADMIN))));
+const orgHref = (o, s) => (/^uk/.test(document.documentElement.lang) ? 'uk/' : '') + 'organizacii/#' + (o.status !== 'активен' && OKKEY[s.id] ? 'preview=' + esc(o.id) + '.' + esc(OKKEY[s.id]) : esc(o.id));
+const firmLine = s => { if (IS_ORG_PAGE) return s.firm ? `<div class="firm" style="font-size:.95rem;margin-top:4px">${esc(s.firm)}</div>` : '';
+  const os = headOrgs(s); if (!os.length) return s.firm ? `<div class="firm" style="font-size:.95rem;margin-top:4px">${esc(s.firm)}</div>` : '';
+  return `<div class="firm" style="font-size:.95rem;margin-top:4px">${os.map(o => `<a class="firm-a" href="${orgHref(o, s)}">${esc(o.name)}</a>`).join(' · ')}</div>`; };
 const pvOn = id => /^#preview=/.test(location.hash) && decodeURIComponent(location.hash.slice(9)).split('.')[0] === id;
 const promoOf = s => AFISHA.filter(e => e.type === 'promo' && e.promo && (e.status === 'активен' || (e.status === 'на подтверждении' && (pvOn(s.id) || ADMIN))) && (e.organizers || []).includes(s.id) && e.date <= today && (e.dateEnd || e.date) >= today)
   .sort((a, b) => (a.dateEnd || a.date).localeCompare(b.dateEnd || b.date)).slice(0, 2);
@@ -1758,7 +1767,7 @@ function openCard(id){
   const box = document.getElementById('qmCard');
   box.style.setProperty('--lc', k.c); box.style.setProperty('--lf', `color-mix(in srgb,${k.c} 13%,var(--paper))`);
   box.innerHTML = `<div class="qm-top"><div class="qm-ph">${photo(s)}</div><div class="qm-head">${s.sample ? '<span class="qm-sample">Образец карточки · специалист вымышленный</span>' : ''}<span class="sp-sub" style="color:${k.c}">${ico(k.i, k.c, null, 16)}${esc(k.t)}${(() => { const l = state.canton ? tierIn(s, state.canton) : tierBest(s); return l === 'vip' ? ` · ${tierName(s, 'vip')} (платное размещение)` : l === 'партнёр' ? ` · ${tierName(s, 'партнёр')} (платное размещение)` : ''; })()}</span>
-      <h2 class="qm-title" id="qmTitle">${esc(s.name)}${needOf(s).surname ? ' ' + UT('Фамилия') : ''}</h2><div style="font-family:var(--display);font-size:1.25rem;color:var(--brown)">${esc(s.role)}</div>${s.firm ? `<div class="firm" style="font-size:.95rem;margin-top:4px">${esc(s.firm)}</div>` : ''}</div>
+      <h2 class="qm-title" id="qmTitle">${esc(s.name)}${needOf(s).surname ? ' ' + UT('Фамилия') : ''}</h2><div style="font-family:var(--display);font-size:1.25rem;color:var(--brown)">${esc(s.role)}</div>${firmLine(s)}</div>
       <button class="qm-close" type="button" aria-label="Закрыть">✕</button></div>
     ${promoStrip(s)}
     <div class="d-body">
@@ -1772,7 +1781,6 @@ function openCard(id){
         ${(() => { const vs = vacsOf(s); if (!vs.length) return '';
           const grp = kind => { const g = vs.filter(v => v.kind === kind); return g.length ? `<div class="vac-grp"><h4>${VAC_KIND[kind]}</h4><ul class="vacs">${g.map(v => `<li><a href="vakansii/#${esc(v.id)}"><b>${esc(v.title)}</b><small>${esc([v.city, v.workload].filter(Boolean).join(' · '))}${v.sample ? ' · образец' : ''}</small></a></li>`).join('')}</ul></div>` : ''; };
           return `<div class="d-block vac-block">${grp('staff')}${grp('partner')}<p class="vac-note"><b>Бесплатно, для поддержки сообщества «Свои люди». Не коммерческая услуга.</b> Объявления размещает сам специалист и отвечает за их содержание. «Свои люди» не участвуют в найме и сотрудничестве, договаривайтесь напрямую с автором.</p></div>`; })()}
-        ${(() => { const os = (window.ORGANIZATIONS || []).filter(o => o.head && o.head.spec === s.id && ((o.status === 'активен' && o.confirm && o.confirm.date) || (o.status === 'на подтверждении' && (pvOn(s.id) || ADMIN)))); return os.length ? `<div class="d-block"><h4>Руководит</h4>${os.map(o => `<p><a href="organizacii/#${o.status !== 'активен' && OKKEY[s.id] ? 'preview=' + esc(o.id) + '.' + esc(OKKEY[s.id]) : esc(o.id)}">${esc(o.name)} →</a></p>`).join('')}</div>` : ''; })()}
         ${(() => { const af = afishaOf(s); if (!af.length) return ''; const has = k => af.some(x => (x.e.sections || []).includes(k));
           return `<div class="d-block"><h4>Встречи, курсы и вебинары</h4><ul class="evs">${af.map(({ e, d, start }) => `<li><a href="${esc(afHref(e))}"><span class="dt">${start ? '<small>начало</small>' : ''}<span>${+d.slice(8)}</span><small>${MONTHS[+d.slice(5, 7) - 1]}</small></span><span class="t"><i class="vid">${esc(VID(e))}</i>${esc(e.title)}<small>${e.time ? esc(e.time) + ' · ' : ''}${e.online && !e.address ? 'онлайн' : esc(city(e.address || ''))} · ${esc(e.price && e.price !== 'бесплатно' ? e.price + (e.per ? ' ' + e.per : '') : 'бесплатно')}${e.sample ? ' · образец' : ''}</small></span></a></li>`).join('')}</ul><p class="k-note">Проводит организатор. Запись, оплата и договор — только с ним.</p><span class="evs-links">${has('events') ? '<a class="evs-all" href="events/">Все события →</a>' : ''}${has('kursy') ? '<a class="evs-all" href="kursy/">Все курсы и вебинары →</a>' : ''}</span></div>`; })()}${pvAfisha(s)}
       </div>
