@@ -53,7 +53,7 @@
   /* «НАША КОМАНДА» (решение Ирины 13.10.2026, 19:16): карточки сотрудников живут только внутри карточки организации — без отдельной карточки
      в справочнике, без VIP и без своих событий. Вносит и подтверждает организация, сотрудник согласен на публикацию. Карточка выделена рамкой
      цвета направления и плашкой «Сотрудник · название». Данные — org.team [{ name, role, photo, services[], langs[], sample }]. */
-  const teamBlock = s => { const t = (s.org.team || []).filter(m => m && m.name); if (!t.length) return ''; const k = (typeof CATS === 'object' && CATS[s.cat]) || {}, c = k.c || '#4F5E3E';
+  const teamBlock = s => { const t = (s.org.team || []).filter(m => m && m.name && (!m.sample || (typeof ADMIN !== 'undefined' && ADMIN)));   /* образец сотрудника — только в моём режиме */ if (!t.length) return ''; const k = (typeof CATS === 'object' && CATS[s.cat]) || {}, c = k.c || '#4F5E3E';
     const short = String(s.org.name || '').split(' · ')[0];
     return `<div class="d-block team"><h4>Наша команда</h4><div class="team-l">${t.map(m => `<div class="tm" style="border-color:${c}">
         <span class="tm-ph" style="background:${c}">${m.photo ? `<img src="/img/team/${esc(m.photo)}" alt="">` : esc(String(m.name).trim().split(/\s+/).map(w => w[0]).slice(0, 2).join(''))}</span>

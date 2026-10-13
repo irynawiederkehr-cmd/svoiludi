@@ -172,3 +172,6 @@ oMsg.addEventListener('click', async e => { if (e.target.id !== 'oCopy') return;
   toast((await copyText(L.su + '\n\n' + L.body)) ? 'Заявка скопирована. Вставьте её в письмо на ' + MAIL + '.' : 'Не получилось скопировать. Напишите нам на ' + MAIL + '.'); });
 
 })();
+
+/* «Скрыто на сайте» (13.10.2026): форма «Добавить сотрудника» и строка о ней видны пока только в моём режиме (?ira=1), до «публикуй» Ирины */
+try { if (localStorage.getItem('svoiludi-admin') === '1' || /[?&]ira=1/.test(location.search)) document.querySelectorAll('[data-ira-only]').forEach(el => { el.hidden = false; }); } catch (_) {}
