@@ -96,6 +96,7 @@ input:disabled,select:disabled{opacity:.7}
 .card{background:#fff;border-radius:4px;box-shadow:0 1px 2px rgba(40,30,20,.14),0 16px 34px -18px rgba(47,41,36,.55);overflow:hidden;max-width:560px}
 .card.v{max-width:300px}.card.sq{max-width:360px}
 .card svg{display:block;width:100%;height:auto}
+.goldtog{display:flex;align-items:center;gap:8px;margin:0}
 .over{color:#8A3F2D;background:#F6E0D9;border-radius:12px;padding:10px 12px;font-size:.88rem;margin:0}
 .dl{background:var(--paper);border:1.5px solid var(--line);border-radius:20px;padding:14px 16px;display:flex;flex-direction:column;gap:10px}
 .dl .acts .btn{flex:1 1 220px}
@@ -157,7 +158,7 @@ input:disabled,select:disabled{opacity:.7}
     <p style="margin:0 0 14px"><a class="jump" href="https://svoiludi.ch/instrumenty/">← Все полезные инструменты · Свои люди в Швейцарии</a></p>
     <div class="eyebrow">Своё дело · визитки</div>
     <h1>Визитка для печати</h1>
-    <p class="lead">Простая белая визитка, как принято в Швейцарии. Выбираешь один из семи видов, горизонтальный или вертикальный, и размер: обычный 85 × 55, 90 × 50 или квадрат 55 × 55 мм. Вписываешь имя, чем занимаешься и контакты, по желанию добавляешь логотип или фото, обратную сторону на русском или украинском и QR-код. Получаешь PDF, который примет любая типография, и лист A4, чтобы напечатать визитки дома. Бесплатно.</p>
+    <p class="lead">Простая белая визитка, как принято в Швейцарии, выстроенная по золотому сечению. Выбираешь один из семи видов, горизонтальный или вертикальный, и размер: обычный 85 × 55, 90 × 50 или квадрат 55 × 55 мм. Вписываешь имя, чем занимаешься и контакты, по желанию добавляешь логотип или фото, обратную сторону на русском или украинском и QR-код. Получаешь PDF, который примет любая типография, и лист A4, чтобы напечатать визитки дома. Бесплатно.</p>
     <p class="jumps"><a class="jump" href="#guide">Зачем это тебе и как с этим работать ↓</a><a class="jump" href="#pechat">Где напечатать визитки ↓</a></p>
     <div class="privnote"><b>Твои данные только у тебя.</b> Всё, что ты вписываешь, и логотип хранятся только в твоём браузере на этом устройстве. Регистрация не нужна. Можно закрыть страницу и вернуться позже, всё останется.</div>
     <div data-fan="vizitka"></div>
@@ -235,6 +236,7 @@ input:disabled,select:disabled{opacity:.7}
       <div class="side-lb" id="backLb" hidden><span>Обратная сторона</span></div>
       <div class="card" id="cardBack" hidden></div>
       <p class="over" id="over" hidden></p>
+      <p class="goldtog"><label class="tog"><input type="checkbox" id="gold"> Показать золотые пропорции</label><button type="button" class="qh" data-help="gold" aria-label="Подсказка: золотые пропорции" aria-expanded="false">?</button></p>
       <div class="dl" id="dlBox">
         <div class="acts">
           <button type="button" class="btn gold" id="pdf">PDF для типографии</button>
@@ -320,7 +322,7 @@ input:disabled,select:disabled{opacity:.7}
 <script src="/assets/shema.js"></script>
 <script>
 window.HELP = {
-  layout: '<p>Семь простых белых видов. <b>С линией</b> — ты и контакты слева, логотип справа за тонкой линией. <b>Значки в кружках</b> — контакты с чёрными кружками, справа логотип и фирма. <b>QR-код в углу</b> — имя крупно, QR-код в углу, контакты под линией. <b>Крупный слоган</b> — большая фраза сверху, внизу ты и как записаться. <b>Имя по центру</b> — фирма или имя по центру, контакты в два столбика. <b>Только QR-код</b> — почти пустая визитка: QR-код и пара строк. <b>Минимализм</b> — имя вразрядку и контакты в углу.</p><p>Любой вид можно сделать с логотипом и без, горизонтально и вертикально. Нажми на картинку, и визитка справа сразу поменяется.</p>',
+  layout: '<p>Семь простых белых видов. <b>С линией</b> — ты и контакты слева, логотип справа за тонкой линией. <b>Значки в кружках</b> — значки контактов в тонких кружках, справа логотип и фирма. <b>QR-код в углу</b> — имя крупно, QR-код в углу, контакты под линией. <b>Крупный слоган</b> — большая фраза сверху, внизу ты и как записаться. <b>Имя по центру</b> — фирма или имя по центру, контакты в два столбика. <b>Только QR-код</b> — почти пустая визитка: QR-код и пара строк. <b>Минимализм</b> — имя вразрядку и контакты в углу.</p><p>Любой вид можно сделать с логотипом и без, горизонтально и вертикально. Нажми на картинку, и визитка справа сразу поменяется.</p><p>Все виды выстроены по золотому сечению: поля, размеры букв и расстояния связаны пропорцией 1 : 1,618, поэтому визитка выглядит спокойно и гармонично. Как это устроено, покажет галочка «Показать золотые пропорции» под визиткой.</p>',
   size: '<p><b>85 × 55 мм</b> — обычная визитка в Швейцарии и Европе, её печатает любая типография. <b>90 × 50 мм</b> — чуть длиннее и уже. <b>55 × 55 мм</b> — квадрат. Не каждая типография печатает 90 × 50 и квадрат: перед заказом проверь размер на её сайте.</p>',
   orient: '<p>Горизонтальная визитка привычнее. Вертикальная запоминается и хорошо подходит для QR-кода, красоты, творчества. В типографии выбирай тот же размер «hoch» (вертикально) или просто загрузи файл: по нему видно, как печатать.</p>',
   font: '<p><b>Изящный</b> — имя или слоган шрифтом с засечками, как заголовки на этом сайте. Хорошо для красоты, творчества, праздников. <b>Строгий</b> — шрифт без засечек, для мастерских, ремонта, консультаций. Когда выбираешь вид, шрифт ставится сам, его можно поменять.</p>',
@@ -337,6 +339,7 @@ window.HELP = {
   logo: '<p>Подойдёт картинка JPG или PNG. Визитка белая, поэтому логотип с белым фоном выглядит хорошо как есть, а лишние белые поля вокруг мы обрезаем сами. Прозрачный фон тоже подходит.</p><p>Для печати возьми картинку побольше, хотя бы 600 точек по ширине. Логотип хранится только в твоём браузере. Без логотипа на его месте будет название фирмы или твои инициалы.</p>',
   back: '<p>Обратная сторона — для своих: имя так, как тебе привычно, и чем ты занимаешься по-русски или по-украински. Можно добавить строку, например «Говорю по-русски и по-украински» или «Запись в WhatsApp», и QR-код.</p><p>Если обратная сторона пустая, визитка будет односторонней, и печать выйдет дешевле.</p>',
   qr: '<p>Квадратный код, который открывает страницу, если навести на него камеру телефона. Удобно для записи: человек сразу попадает на твой сайт, в Instagram или в твою карточку в «Своих людях», где есть все контакты и цены.</p><p>Перед печатью обязательно проверь QR-код камерой своего телефона.</p>',
+  gold: '<p>Каждая визитка выстроена по золотому сечению (1 : 1,618): поля, размеры букв и расстояния между строками связаны этой пропорцией, а главное — имя, крупная фраза или QR-код — стоит там, где закручивается золотая спираль. Так визитка выглядит спокойно и гармонично, без лишнего.</p><p>Галочка рисует поверх визитки тонкие золотые квадраты и спираль, чтобы было видно, как всё расставлено. В файлы для печати они не попадают.</p>',
   bleed: '<p>Типография режет визитки ножом из большого листа, и нож может сдвинуться на долю миллиметра. Поэтому файл делают чуть больше визитки — это запас на обрез (Beschnitt). Чаще всего просят 3 мм с каждой стороны: для визитки 85 × 55 мм файл 91 × 61 мм.</p><p>Сколько нужно именно твоей типографии, написано на её странице визиток или в памятке к файлу (Datenblatt, «Datenformat»). Визитка белая, поэтому запас просто белый и ничего не испортит, а весь текст стоит не ближе 5 мм к краю.</p>'
 };
 
@@ -363,13 +366,13 @@ const $ = id => document.getElementById(id);
 function langOf(k){ const K = window.KANTONY || {}; return k && K[k] ? ({de: 'de', fr: 'fr', it: 'it'}[K[k].l] || 'de') : 'de'; }
 function blank(){
   let k = ''; try { k = localStorage.getItem('svoiludi.kanton') || ''; } catch (e) {}
-  return {layout: 'line', font: 'sans', cstyle: 'icon', size: '85x55', orient: 'h', lbl: langOf(k), bleed: 3, bw: false,
+  return {layout: 'line', font: 'sans', cstyle: 'icon', size: '85x55', orient: 'h', lbl: langOf(k), bleed: 3, bw: false, gold: false,
     f: {name: '', role: '', firm: '', tag: '', serv: '', phone: '', wa: false, email: '', web: '', ig: '', tg: '', street: '', city: '', langs: []},
     back: {on: false, name: '', role: '', line: '', logo: true},
     qr: {where: 'none', to: 'web', url: ''}, card: null};
 }
 function merge(a, b){ Object.keys(b || {}).forEach(k => { if (a[k] && typeof a[k] === 'object' && !Array.isArray(a[k]) && b[k] && typeof b[k] === 'object') merge(a[k], b[k]); else if (b[k] !== undefined) a[k] = b[k]; }); return a; }
-function norm(s){ if (OLD[s.layout]) s.layout = OLD[s.layout]; if (!TPL.some(t => t[0] === s.layout)) s.layout = 'line'; if (!SIZES[s.size]) s.size = '85x55'; if (s.orient !== 'v') s.orient = 'h'; if (!['icon', 'text', 'none'].includes(s.cstyle)) s.cstyle = 'icon'; return s; }
+function norm(s){ if (OLD[s.layout]) s.layout = OLD[s.layout]; if (!TPL.some(t => t[0] === s.layout)) s.layout = 'line'; if (!SIZES[s.size]) s.size = '85x55'; if (s.orient !== 'v') s.orient = 'h'; if (!['icon', 'text', 'none'].includes(s.cstyle)) s.cstyle = 'icon'; s.gold = !!s.gold; return s; }
 function load(){ try { const s = JSON.parse(localStorage.getItem(KEY)); if (s && typeof s === 'object') return norm(merge(blank(), s)); } catch (e) {} return blank(); }
 let S = load(), EX = null, LOGO = null, EXLOGO = null, EXNOLOGO = false;
 try { const l = JSON.parse(localStorage.getItem(KEYLOGO)); if (l && l.c) LOGO = l; } catch (e) {}
@@ -388,11 +391,12 @@ const mc = document.createElement('canvas').getContext('2d');
 function tw(s, fn, size, cs){ s = String(s); mc.font = fn === 'f' ? `400 ${size}px Forum` : `${fn === 'b' ? 700 : 400} ${size}px Manrope`; return mc.measureText(s).width * PT + (cs ? cs * Math.max(0, [...s].length - 1) : 0); }
 /* перенос по пробелам; после дефиса — только если слово целиком не помещается (длинная двойная фамилия: «Konstantinopolskaya-Wiederkehr»), «по-украински» не рвём */
 function wrap(s, fn, size, w, max, cs){
-  const toks = []; String(s || '').split(/\s+/).filter(Boolean).forEach(wd => (tw(wd, fn, size, cs) <= w ? [wd] : wd.replace(/-(?=[^-])/g, '-\u0001').split('\u0001')).forEach((t, i) => toks.push([t, i === 0])));
+  s = String(s || '').replace(/(^|[ \u00A0(«"])([A-Za-zА-Яа-яЁёІіЇїЄєҐґ]{1,2}) /g, '$1$2\u00A0').replace(/(^|[ \u00A0(«"])([A-Za-zА-Яа-яЁёІіЇїЄєҐґ]{1,2}) /g, '$1$2\u00A0');   // «и», «в», «на» не висят в конце строки
+  const toks = []; s.split(/[ \t\r\n]+/).filter(Boolean).forEach(wd => (tw(wd, fn, size, cs) <= w ? [wd] : wd.replace(/-(?=[^-])/g, '-\u0001').split('\u0001')).forEach((t, i) => toks.push([t, i === 0])));
   const out = []; let line = '';
   toks.forEach(([wd, sp]) => { const t = line ? line + (sp ? ' ' : '') + wd : wd; if (tw(t, fn, size, cs) <= w || !line) line = t; else { out.push(line); line = wd; } });
   if (line) out.push(line);
-  for (let i = 0; i < out.length; i++) out[i] = out[i].replace(/\s+[·|]$/, '').replace(/^[·|]\s+/, '');   // разделитель «·» не висит в конце или начале строки
+  for (let i = 0; i < out.length; i++) out[i] = out[i].replace(/\u00A0/g, ' ').replace(/\s+[·|]$/, '').replace(/^[·|]\s+/, '');   // разделитель «·» не висит в конце или начале строки
   if (max && out.length > max) { const rest = out.slice(max - 1).reduce((a, l) => a ? a + (/-$/.test(a) ? '' : ' ') + l : l, ''); out.length = max - 1; let r = rest; while (r.length > 1 && tw(r + '…', fn, size, cs) > w) r = r.slice(0, -1); out.push(r.trim() + '…'); }
   return out;
 }
@@ -478,243 +482,357 @@ const ICON = {
   tg: [[['M', 21.3, 3.2], ['L', 2.8, 10.7], ['L', 9.7, 13.6], ['L', 12.6, 20.8], ['Z']], [['M', 9.7, 13.6], ['L', 21.3, 3.2]]],
   addr: [[['M', 12, 21.6], ['C', 12, 21.6, 4.9, 14.9, 4.9, 9.6], ['C', 4.9, 5.7, 8.1, 2.5, 12, 2.5], ['C', 15.9, 2.5, 19.1, 5.7, 19.1, 9.6], ['C', 19.1, 14.9, 12, 21.6, 12, 21.6], ['Z']], OV(12, 9.6, 2.7)]
 };
-function icon(P, key, x, y, s, color){
+function icon(P, key, x, y, s, color, wd){
   const k = s / 24, tr = dd => dd.map(c => c[0] === 'Z' ? c : [c[0]].concat(c.slice(1).map((v, i) => i % 2 ? y + v * k : x + v * k)));
-  (ICON[key] || []).forEach(dd => P.path(tr(dd), null, color, Math.max(0.15, s * 0.075)));
+  (ICON[key] || []).forEach(dd => P.path(tr(dd), null, color, wd || Math.max(0.15, s * 0.075)));
 }
-/* какие подписи к контактам: значки (в виде «Значки в кружках» — в чёрных кружках), слова или ничего */
+/* какие подписи к контактам: значки (в виде «Значки в кружках» — в тонких кружках), слова или ничего */
 const cst = (d, round) => d.cstyle === 'text' ? (d.lbl === 'none' ? 'none' : 'text') : d.cstyle === 'none' ? 'none' : round ? 'circle' : 'icon';
-/* блок контактов. o {x, y — верх, w, k, draw, style, align: 'left' | 'right' | 'group' (блок по центру, строки слева) | 'center', size, min, maxH, only, skip, col} → {h, w} */
+
+/* ---------- золотые пропорции (Ирина, 14.10.2026: «нужна пропорциональная гармония по золотой спирали, ничего наляпистого») ----------
+   φ = 1,618. Поля — короткая сторона визитки / φ⁴ (8 мм у 55 мм). Шрифты — три ступени через φ: 6,2 → 10 → 16,2 pt.
+   Шаги между строками и блоками — тоже через φ. Главное (имя, фраза, QR-код) стоит в «глазу» золотой спирали,
+   границы блоков — на линиях золотого сечения (38,2 % и 61,8 %). Линии тонкие и серые, чёрных заливок нет. */
+const PHI = (1 + Math.sqrt(5)) / 2;
+const S0 = 6.2, S1 = S0 * PHI, S2 = S1 * PHI;   // pt: контакты и «чем занимаешься» · имя · крупная строка
+const HAIR = 0.15;                               // тонкая линия, мм
+const capC = sz => 0.41 * sz * PT;               // от верха строки до середины заглавных букв, мм
+/* золотой прямоугольник внутри визитки и спираль в нём; eye — где «глаз» спирали: 'tl', 'tr', 'bl' или 'br' */
+function gold(X, Y, CW, CH, eye){
+  const land = CW >= CH; let gw, gh;
+  if (land) { gw = CW; gh = CW / PHI; if (gh > CH) { gh = CH; gw = CH * PHI; } }
+  else { gh = CH; gw = CH / PHI; if (gw > CW) { gw = CW; gh = CW * PHI; } }
+  const gx = X + (CW - gw) / 2, gy = Y + (CH - gh) / 2;
+  /* квадраты в прямоугольнике φ × 1: режем слева, снизу, справа, сверху; у каждого четверть окружности [начало, конец, центр] */
+  const sq = []; let r = [0, 0, PHI, 1];
+  for (let i = 0; i < 14; i++) {
+    const s = 'LBRT'[i % 4], [x, y, w, h] = r;
+    if (s === 'L') { sq.push({q: [x, y, h], a: [[x, y], [x + h, y + h], [x + h, y]]}); r = [x + h, y, w - h, h]; }
+    else if (s === 'B') { sq.push({q: [x, y + h - w, w], a: [[x, y + h], [x + w, y + h - w], [x, y + h - w]]}); r = [x, y, w, h - w]; }
+    else if (s === 'R') { sq.push({q: [x + w - h, y, h], a: [[x + w, y + h], [x + w - h, y], [x + w - h, y + h]]}); r = [x, y, w - h, h]; }
+    else { sq.push({q: [x, y, w], a: [[x + w, y], [x, y + w], [x + w, y + w]]}); r = [x, y + w, w, h - w]; }
+  }
+  const e0 = [r[0] + r[2] / 2, r[1] + r[3] / 2];
+  /* в мм визитки: у вертикальной — повернуть, потом отразить так, чтобы «глаз» оказался в нужном углу */
+  const raw = ([u, v]) => land ? [u / PHI, v] : [v, u / PHI];
+  const er = raw(e0), flipX = (er[0] > 0.5) !== (eye[1] === 'r'), flipY = (er[1] > 0.5) !== (eye[0] === 'b');
+  const map = p => { let [a, b] = raw(p); if (flipX) a = 1 - a; if (flipY) b = 1 - b; return [gx + a * gw, gy + b * gh]; };
+  return {eye: map(e0), rect: [gx, gy, gw, gh],
+    sq: sq.map(({q: [x, y, s]}) => [[x, y], [x + s, y], [x + s, y + s], [x, y + s]].map(map)),
+    arcs: sq.map(({a}) => a.map(map))};
+}
+/* только на экране, по галочке «Показать золотые пропорции»: квадраты, спираль и её «глаз»; в PDF и PNG не попадает */
+function goldDraw(P, X, Y, CW, CH, eye){
+  const C1 = '#B8893A', C2 = '#E3C995';
+  if (eye === 'lines') {   // симметричный вид: линии золотого сечения по ширине и высоте
+    [1 / PHI, 1 - 1 / PHI].forEach(f => { P.line(X + CW * f, Y, X + CW * f, Y + CH, C1, 0.15); P.line(X, Y + CH * f, X + CW, Y + CH * f, C1, 0.15); });
+    return;
+  }
+  const g = gold(X, Y, CW, CH, eye), K = 0.5523;
+  [1 / PHI, 1 - 1 / PHI].forEach(f => { P.line(X + CW * f, Y, X + CW * f, Y + CH, C2, 0.12, true); P.line(X, Y + CH * f, X + CW, Y + CH * f, C2, 0.12, true); });   // линии сечения 38,2 % и 61,8 % — пунктиром
+  g.sq.slice(0, 8).forEach(c => P.path([['M', c[0][0], c[0][1]], ['L', c[1][0], c[1][1]], ['L', c[2][0], c[2][1]], ['L', c[3][0], c[3][1]], ['Z']], null, C2, 0.12));
+  const p = [];
+  g.arcs.forEach(([S, E, C], i) => { if (!i) p.push(['M', S[0], S[1]]); p.push(['C', S[0] + K * (E[0] - C[0]), S[1] + K * (E[1] - C[1]), E[0] + K * (S[0] - C[0]), E[1] + K * (S[1] - C[1]), E[0], E[1]]); });
+  P.path(p, null, C1, 0.22);
+  P.circle(g.eye[0], g.eye[1], 0.55, C1);
+}
+/* поля и шаги визитки: t — поля золотые (1) или минимальные 5 мм (0), k — масштаб шрифтов */
+function geo(X, Y, CW, CH, k, t){
+  const s = Math.min(CW, CH), m = SAFE + Math.max(0, s / PHI ** 4 - SAFE) * t, u = S0 * PT * k;
+  return {X, Y, CW, CH, k, m, x0: X + m, y0: Y + m, x1: X + CW - m, y1: Y + CH - m, W: CW - 2 * m, H: CH - 2 * m,
+    wide: CW > CH + 4, u, g1: u / PHI, g2: u * PHI, g3: u * PHI * PHI,
+    gx: f => X + CW * f, gy: f => Y + CH * f};
+}
+/* столбик блоков сверху вниз: items [{h, gap — после блока, off — точка-якорь от верха}]; пустые (h = 0) пропускаются.
+   Блок ai ставим так, чтобы его точка off легла на линию ay (без ai — весь столбик по центру), но целиком между полями. */
+function stack(c, items, ai, ay){
+  let y = 0, last = -1; const tops = [];
+  items.forEach((it, i) => { tops.push(y); if (it.h) { y += it.h + (it.gap || 0); last = i; } });
+  const H = last < 0 ? 0 : tops[last] + items[last].h;
+  const t0 = ai == null || !items[ai].h ? c.y0 + (c.H - H) / 2 : ay - tops[ai] - (items[ai].off || 0);
+  const top = Math.max(c.y0, Math.min(t0, c.y1 - H));
+  return {H, tops: tops.map(t => top + t), fits: H <= c.H + 0.05};
+}
+
+/* контакты строками с шагом φ от кегля. o {x, y — верх, w, k, draw, style, align: 'left' | 'right' | 'rblock' (блок у правого края, строки слева) | 'group' (блок по центру) | 'center', size, min, only, skip, col} → {h, w} */
 function cblock(P, d, o){
   const st = o.style;
   let R = rows(d, st); if (o.only) R = R.filter(r => o.only.includes(r.k)); if (o.skip) R = R.filter(r => !o.skip.includes(r.k));
   if (!R.length) return {h: 0, w: 0};
   const L = LBL[d.lbl] || LBL.de;
-  const geo = sz => {
-    const em = sz * PT, lh = em * 1.45, ic = st === 'circle' ? Math.max(3.3, em * 1.75) : st === 'icon' ? em * 1.12 : 0;
-    const lead = ic ? ic + (st === 'circle' ? 1.7 : 1.4) : st === 'text' ? Math.max(0, ...R.map(r => tw(L[r.k], 'r', sz * 0.88))) + 2.2 : 0;
+  const G = sz => {
+    const em = sz * PT, li = em * 1.32, pitch = st === 'circle' ? em * 1.95 : em * (o.pitch || PHI);
+    const dc = em * 1.42, ic = st === 'icon' ? em * 0.98 : 0;
+    const lead = st === 'circle' ? dc + em * 1.05 : st === 'icon' ? ic + em * 0.95 : st === 'text' ? Math.max(...R.map(r => tw(L[r.k], 'r', sz * 0.86))) + em * 1.1 : 0;
     const vw = Math.max(...R.map(r => Math.max(...r.v.map(s => tw(s, 'r', sz)))));
-    const rh = R.map(r => st === 'circle' ? Math.max(ic + 1.3, r.v.length * lh + 0.5) : r.v.length * lh + (st === 'icon' ? 0.3 : 0));
-    return {em, lh, ic, lead, w: lead + vw, rh, h: rh.reduce((a, b) => a + b, 0)};
+    const h = R.reduce((a, r) => a + pitch + (r.v.length - 1) * li, 0) - pitch + em * 1.05;
+    return {em, li, pitch, dc, ic, lead, w: lead + vw, h};
   };
-  let sz = (o.size || 6.2) * o.k, G = geo(sz); const min = o.min || 4.9;
-  while (sz > min && (G.w > o.w || (o.maxH && G.h > o.maxH))) { sz -= 0.2; G = geo(sz); }
-  if (!o.draw) return {h: G.h, w: G.w};
-  if (G.w > o.w + 0.2) P.wOver = true;
-  const bx = Math.max(o.x, o.align === 'right' || o.align === 'rblock' ? o.x + o.w - G.w : o.align === 'group' ? o.x + (o.w - G.w) / 2 : o.x);
-  let y = o.y;
-  R.forEach((r, i) => {
-    const rh = G.rh[i], top = y + (rh - r.v.length * G.lh) / 2, cy = st === 'circle' ? y + rh / 2 : top + G.lh / 2;
-    if (st === 'circle') { const rr = G.ic / 2, s2 = G.ic * 0.6; P.circle(bx + rr, cy, rr, INK); icon(P, r.k, bx + rr - s2 / 2, cy - s2 / 2, s2, '#FFFFFF'); }
-    else if (st === 'icon') icon(P, r.k, bx, cy - G.ic / 2, G.ic, INK);
-    else if (st === 'text') T(P, L[r.k], bx, top + G.lh / 2 + 0.36 * G.em, sz * 0.88, 'r', SOFT);
+  let sz = (o.size || S0) * o.k, g = G(sz); const min = o.min || 4.9;
+  while (sz > min && g.w > o.w) { sz -= 0.1; g = G(sz); }
+  if (!o.draw) return {h: g.h, w: g.w};
+  if (g.w > o.w + 0.2) P.wOver = true;
+  const bx = o.align === 'right' || o.align === 'rblock' ? o.x + o.w - g.w : o.align === 'group' ? o.x + (o.w - g.w) / 2 : o.x;
+  let b = o.y + 0.8 * g.em;
+  R.forEach(r => {
+    const cy = b - 0.36 * g.em;
+    if (st === 'circle') { P.circle(bx + g.dc / 2, cy, g.dc / 2, null, INK, 0.12); const s2 = g.dc * 0.56; icon(P, r.k, bx + g.dc / 2 - s2 / 2, cy - s2 / 2, s2, INK, 0.11); }
+    else if (st === 'icon') icon(P, r.k, bx, cy - g.ic / 2, g.ic, MID, 0.13);
+    else if (st === 'text') T(P, L[r.k], bx, b, sz * 0.86, 'r', SOFT);
     r.v.forEach((s, j) => {
-      const by = top + j * G.lh + G.lh / 2 + 0.36 * G.em;
+      const by = b + j * g.li;
       if (st === 'none' && o.align === 'right') T(P, s, o.x + o.w, by, sz, 'r', o.col || INK, 'right');
       else if (st === 'none' && o.align === 'center') T(P, s, o.x + o.w / 2, by, sz, 'r', o.col || INK, 'center');
-      else T(P, s, bx + G.lead, by, sz, 'r', o.col || INK);
+      else T(P, s, bx + g.lead, by, sz, 'r', o.col || INK);
     });
-    y += rh;
+    b += g.pitch + (r.v.length - 1) * g.li;
   });
-  return {h: G.h, w: G.w};
+  return {h: g.h, w: g.w};
 }
-/* знак справа или сверху: логотип, или название фирмы, или инициалы в тонком круге. o {cx, y, w, h, k, draw, firmUnder, tag} → высота */
+/* знак: логотип, или название фирмы, или инициалы в тонком круге; под ним — фирма (если просили) и короткая фраза. o {cx, y, w, h, k, draw, firmUnder, tag} → высота */
 function brand(P, d, o){
-  const lg = LG(), firm = clean(d.f.firm), fn = hfn(d), x = o.cx - o.w / 2;
+  const lg = LG(), firm = clean(d.f.firm), fn = hfn(d), x = o.cx - o.w / 2, u = S0 * PT * o.k;
+  const caps = sz => Math.max(...firm.split(/\s+/).map(w => tw(w.toUpperCase(), 'r', sz * 0.8 * Math.min(1, o.k + 0.15), 0.2 * sz * 0.8 * PT))) <= o.w;   // длинное слово заглавными вразрядку не помещается — пишем обычными буквами
   let y = o.y;
   if (lg) {
     const lb = logoBox(lg, o.w, o.h); if (o.draw) P.img(logoData(d, lg), o.cx - lb.w / 2, y, lb.w, lb.h); y += lb.h;
-    if (o.firmUnder && firm) y = text(P, firm, {x, y: y + 1.8 * o.k, w: o.w, k: o.k, draw: o.draw, size: 6.4, fn: 'b', align: 'center', upper: true, csEm: 0.05, lines: 2});
-  } else if (firm) y = text(P, firm, {x, y, w: o.w, k: o.k, draw: o.draw, size: fn === 'f' ? 12.5 : 9, fn, align: 'center', upper: fn === 'b', csEm: fn === 'b' ? 0.04 : 0, lines: 2, lh: 1.08});
+    if (o.firmUnder && firm) { const up = caps(S0 * 0.92); y = text(P, firm, {x, y: y + u, w: o.w, k: o.k, draw: o.draw, size: S0 * 0.92, align: 'center', upper: up, csEm: up ? 0.2 : 0, lines: 2, lh: 1.4, min: 4.8}); }
+  } else if (firm) { const up = fn !== 'f' && caps(S0 * 1.1); y = text(P, firm, fn === 'f' ? {x, y, w: o.w, k: o.k, draw: o.draw, size: S1 * 1.15, fn: 'f', align: 'center', lines: 2, lh: 1.08} : {x, y, w: o.w, k: o.k, draw: o.draw, size: S0 * 1.1, align: 'center', upper: up, csEm: up ? 0.22 : 0, lines: 3, lh: 1.4, min: 5}); }
   else {
     const ini = initials(d); if (!ini) return 0;
-    const dm = Math.min(o.w, o.h, 17 * o.k), fs = Math.min(22, dm * 1.1);
-    if (o.draw) { P.circle(o.cx, y + dm / 2, dm / 2, null, INK, 0.25); T(P, ini, o.cx, y + dm / 2 + fs * PT * 0.34, fs, 'f', INK, 'center'); }
+    const dm = Math.min(o.w, o.h, 13 * o.k), fs = dm * 1.2;
+    if (o.draw) { P.circle(o.cx, y + dm / 2, dm / 2, null, INK, HAIR); T(P, ini, o.cx, y + dm / 2 + fs * PT * 0.34, fs, 'f', INK, 'center'); }
     y += dm;
   }
-  if (o.tag && clean(d.f.tag)) y = text(P, d.f.tag, {x, y: y + 1.4 * o.k, w: o.w, k: o.k, draw: o.draw, size: 5.6, color: SOFT, align: 'center', lines: 2, lh: 1.25});
+  if (o.tag && clean(d.f.tag)) y = text(P, d.f.tag, {x, y: y + u / PHI + 0.5, w: o.w, k: o.k, draw: o.draw, size: S0 * 0.92, color: SOFT, align: 'center', lines: 2, lh: 1.35, min: 4.8});
   return y - o.y;
 }
-/* блок человека: имя, чем занимаешься, услуги, языки, тонкая линия, контакты. o {x, y, w, k, draw, align: 'left' | 'group', round, rule, roleBold} → высота */
+/* блок человека: имя, чем занимаешься, услуги, языки, короткая линия, контакты. o {x, y, w, k, draw, align: 'left' | 'group', round, rule} → {h, off — середина имени от верха блока} */
 function person(P, d, o){
-  const fn = hfn(d), nm = nameOf(d, P), al = o.align === 'group' ? 'center' : 'left', base = {x: o.x, w: o.w, k: o.k, draw: o.draw, align: al};
-  let y = o.y, wMax = 0;
-  const put2 = (s2, oo) => { y = text(P, s2, oo); if (oo.out) wMax = Math.max(wMax, oo.out.w); };
-  if (nm.s) put2(nm.s, Object.assign({}, base, {y, size: fn === 'f' ? 15 : 11.5, fn, color: nm.c, upper: fn === 'b', csEm: fn === 'b' ? 0.02 : 0, lines: 3, lh: 1.05}));
-  if (clean(d.f.role)) put2(d.f.role, Object.assign({}, base, {y: y + 1.2 * o.k, size: 6.8, fn: o.roleBold ? 'b' : 'r', color: o.roleBold ? INK : MID, lines: 2, lh: 1.25, min: 5.2}));
-  if (clean(d.f.serv)) y = text(P, d.f.serv, Object.assign({}, base, {y: y + 0.9 * o.k, size: 5.8, color: SOFT, lines: 2, lh: 1.25, min: 4.8}));
-  if (langLine(d)) y = text(P, langLine(d), Object.assign({}, base, {y: y + 0.9 * o.k, size: 5.5, color: SOFT, lines: 1, min: 4.6}));
-  if (o.rule) { y += 2 * o.k; if (o.draw) { if (al === 'center') P.line(o.x + o.w / 2 - 5, y, o.x + o.w / 2 + 5, y, RULE, 0.25); else P.line(o.x, y, o.x + Math.min(o.w, Math.max(wMax, 12)), y, RULE, 0.25); } y += 2.4 * o.k; } else y += 2.8 * o.k;   // линия длиной с имя
-  const c = {x: o.x, y, w: o.w, k: o.k, style: cst(d, o.round), align: o.align === 'group' ? 'group' : 'left'};
-  const ch = cblock(P, d, Object.assign({}, c, {draw: false})).h; if (ch && o.draw) cblock(P, d, Object.assign({}, c, {draw: true}));
-  return (ch ? y + ch : y - 2.6 * o.k) - o.y;
+  const fn = hfn(d), nm = nameOf(d, P), al = o.align === 'group' ? 'center' : 'left', u = S0 * PT * o.k;
+  const base = {x: o.x, w: o.w, k: o.k, draw: o.draw, align: al};
+  let y = o.y, off = 0;
+  const put = (s, ex) => { const oo = Object.assign({}, base, ex); y = text(P, s, oo); return oo; };
+  if (nm.s) { const oo = put(nm.s, fn === 'f' ? {y, size: S1 * 1.2, fn: 'f', color: nm.c, lines: 3, lh: 1.05} : {y, size: S1 * 0.92, fn: 'b', color: nm.c, upper: true, csEm: 0.06, lines: 3, lh: 1.12}); off = capC(oo.out ? oo.out.size : S1); }
+  if (clean(d.f.role)) put(d.f.role, {y: y + u / PHI, size: S0 * 1.08, color: MID, lines: 2, lh: 1.3, min: 5});
+  if (clean(d.f.serv)) put(d.f.serv, {y: y + u / PHI / PHI, size: S0 * 0.95, color: SOFT, lines: 2, lh: 1.3, min: 4.8});
+  if (langLine(d)) put(langLine(d), {y: y + u / PHI / PHI, size: S0 * 0.9, color: SOFT, lines: 1, min: 4.6});
+  const cc = {x: o.x, w: o.w, k: o.k, style: cst(d, o.round), align: o.align === 'group' ? 'group' : 'left'};
+  const ch = cblock(P, d, Object.assign({}, cc, {y: 0, draw: false})).h;
+  if (o.rule && ch) { y += u * 0.95; if (o.draw) { const L = u * PHI ** 3; if (al === 'center') P.line(o.x + o.w / 2 - L / 2, y, o.x + o.w / 2 + L / 2, y, RULE, HAIR); else P.line(o.x, y, o.x + L, y, RULE, HAIR); } y += u * 1.15; }
+  else if (ch) y += u * PHI;
+  if (ch) { if (o.draw) cblock(P, d, Object.assign({}, cc, {y, draw: true})); y += ch; }
+  return {h: y - o.y, off};
 }
-const vcenter = (Y, H, h) => Y + Math.max(0, (H - h) / 2);
-const isWide = (W, H) => W > H + 4;
+const clampY = (c, y, h) => Math.max(c.y0, Math.min(y, c.y1 - h));
 
-/* 1. С линией: ты и контакты слева, тонкая вертикальная линия, логотип справа */
-function tLine(P, d, X, Y, W, H, k, dr){
-  const url = frontQr(d, P);
-  if (isWide(W, H)) {
-    const Lw = W * 0.58, xd = X + Lw + 3.4, Rx = xd + 3.4, Rw = X + W - Rx, q = url ? Math.min(Rw * 0.66, H * 0.44) : 0;
-    const pb = {x: X, w: Lw, k, rule: true}, bb = {cx: Rx + Rw / 2, w: Rw, h: H * (q ? 0.34 : 0.6), k, tag: true};
-    const ph = person(P, d, Object.assign({y: 0, draw: false}, pb)), bh = brand(P, d, Object.assign({y: 0, draw: false}, bb)), rh = bh + (q ? (bh ? 3.2 : 0) + q : 0);
-    if (dr) { person(P, d, Object.assign({y: vcenter(Y, H, ph), draw: true}, pb)); const ry = vcenter(Y, H, rh); brand(P, d, Object.assign({y: ry, draw: true}, bb)); if (q) qrDraw(P, url, Rx + (Rw - q) / 2, ry + rh - q, q); if (rh) P.line(xd, Y + H * 0.12, xd, Y + H * 0.88, INK, 0.25); }
-    return ph <= H && rh <= H;
+/* 1. С линией: ты и контакты слева, имя — в «глазу» спирали; тонкая линия на золотом сечении ширины; логотип справа */
+function tLine(P, d, c, dr){
+  const url = frontQr(d, P), E = gold(c.X, c.Y, c.CW, c.CH, 'tl').eye;
+  if (c.wide) {
+    const xs = c.gx(1 / PHI), pb = {x: c.x0, w: xs - c.x0 - c.g3, k: c.k, rule: true};
+    const pm = person(P, d, Object.assign({y: 0, draw: false}, pb));
+    const rx = xs + c.g3, rw = c.x1 - rx, q = url ? Math.min(rw * 0.8, c.CH / PHI ** 3) : 0;
+    const bb = {cx: rx + rw / 2, w: rw, h: c.CH / PHI ** 3 * (q ? 0.7 : 1), k: c.k, tag: true};
+    const bh = brand(P, d, Object.assign({y: 0, draw: false}, bb)), rh = bh + (q ? (bh ? c.g2 : 0) + q : 0);
+    const hasC = rows(d, cst(d)).length > 0, S = stack(c, [{h: pm.h, off: pm.off}], hasC ? 0 : null, E[1]), py = S.tops[0], ry = clampY(c, py + pm.h / 2 - rh / 2, rh);   // без контактов (оборот) — всё по середине высоты
+    if (dr) {
+      P.eyeAt = hasC ? 'tl' : 'lines';
+      person(P, d, Object.assign({y: py, draw: true}, pb));
+      if (bh) brand(P, d, Object.assign({y: ry, draw: true}, bb)); if (q) qrDraw(P, url, rx + (rw - q) / 2, ry + rh - q, q);
+      if (rh && pm.h) P.line(xs, Math.min(py, ry), xs, Math.max(py + pm.h, ry + rh), RULE, HAIR);
+    }
+    return S.fits && rh <= c.H + 0.05;
   }
-  const q = url ? Math.min(W * 0.4, H * 0.22) : 0, bb = {cx: X + W / 2, w: W * 0.7, h: H * 0.2, k, tag: true}, pb = {x: X, w: W, k, rule: false, align: 'group'};
-  const bh = brand(P, d, Object.assign({y: 0, draw: false}, bb)), ph = person(P, d, Object.assign({y: 0, draw: false}, pb));
-  const gap = 4.2 * k, h = bh + (bh ? gap * 2 : 0) + ph + (q ? gap + q : 0);
-  if (dr) { let y = vcenter(Y, H, h); if (bh) { brand(P, d, Object.assign({y, draw: true}, bb)); y += bh + gap; P.line(X + W / 2 - 6, y, X + W / 2 + 6, y, INK, 0.3); y += gap; } person(P, d, Object.assign({y, draw: true}, pb)); y += ph; if (q) qrDraw(P, url, X + (W - q) / 2, y + gap, q); }
-  return h <= H;
-}
-/* 2. Значки в кружках: контакты с чёрными кружками слева, логотип и фирма справа */
-function tDots(P, d, X, Y, W, H, k, dr){
-  const url = frontQr(d, P);
-  if (isWide(W, H)) {
-    const Lw = W * 0.6, Rx = X + Lw + 3, Rw = X + W - Rx, q = url ? Math.min(Rw * 0.6, H * 0.4) : 0;
-    const pb = {x: X, w: Lw, k, round: true, roleBold: true}, bb = {cx: Rx + Rw / 2, w: Rw, h: H * (q ? 0.32 : 0.5), k, firmUnder: true, tag: true};
-    const ph = person(P, d, Object.assign({y: 0, draw: false}, pb)), bh = brand(P, d, Object.assign({y: 0, draw: false}, bb)), rh = bh + (q ? (bh ? 3 : 0) + q : 0);
-    if (dr) { person(P, d, Object.assign({y: vcenter(Y, H, ph), draw: true}, pb)); const ry = vcenter(Y, H, rh); brand(P, d, Object.assign({y: ry, draw: true}, bb)); if (q) qrDraw(P, url, Rx + (Rw - q) / 2, ry + rh - q, q); }
-    return ph <= H && rh <= H;
+  /* вертикальная и квадратная: знак в «глазу» спирали, короткая линия, ниже ты и контакты, QR-код внизу */
+  const cx = c.X + c.CW / 2, q = url ? Math.min(c.W / PHI, c.CW / PHI ** 3) : 0;
+  const bb = {cx, w: c.W * 0.8, h: c.CW / PHI ** 3, k: c.k, tag: true}, pb = {x: c.x0, w: c.W, k: c.k, align: 'group'};
+  const bh = brand(P, d, Object.assign({y: 0, draw: false}, bb)), pm = person(P, d, Object.assign({y: 0, draw: false}, pb));
+  const S = stack(c, [{h: bh, gap: c.g3, off: bh / 2}, {h: bh && pm.h ? 0.001 : 0, gap: c.g3}, {h: pm.h, gap: c.g3, off: pm.off}, {h: q}], bh ? 0 : 2, bh ? E[1] : c.gy(1 - 1 / PHI));
+  if (dr) {
+    P.eyeAt = bh ? 'tl' : 'lines';
+    if (bh) brand(P, d, Object.assign({y: S.tops[0], draw: true}, bb));
+    if (bh && pm.h) { const L = c.u * PHI ** 3; P.line(cx - L / 2, S.tops[1], cx + L / 2, S.tops[1], RULE, HAIR); }
+    person(P, d, Object.assign({y: S.tops[2], draw: true}, pb));
+    if (q) qrDraw(P, url, cx - q / 2, S.tops[3], q);
   }
-  const q = url ? Math.min(W * 0.4, H * 0.22) : 0, bb = {cx: X + W / 2, w: W * 0.7, h: H * 0.2, k, firmUnder: true, tag: true}, pb = {x: X, w: W, k, round: true, roleBold: true, align: 'group'};
-  const bh = brand(P, d, Object.assign({y: 0, draw: false}, bb)), ph = person(P, d, Object.assign({y: 0, draw: false}, pb)), gap = 5 * k;
-  const h = bh + (bh ? gap : 0) + ph + (q ? gap + q : 0);
-  if (dr) { let y = vcenter(Y, H, h); if (bh) { brand(P, d, Object.assign({y, draw: true}, bb)); y += bh + gap; } person(P, d, Object.assign({y, draw: true}, pb)); y += ph; if (q) qrDraw(P, url, X + (W - q) / 2, y + gap, q); }
-  return h <= H;
+  return S.fits;
 }
-/* имя: первое слово жирно, остальное тонко (как в образце с QR-кодом); если выбран шрифт с засечками — целиком им */
+/* 2. Значки в кружках: имя в «глазу» спирали, контакты в тонких кружках; справа — логотип, фирма и фраза */
+function tDots(P, d, c, dr){
+  const url = frontQr(d, P), E = gold(c.X, c.Y, c.CW, c.CH, 'tl').eye;
+  if (c.wide) {
+    const rx = c.gx(1 / PHI), rw = c.x1 - rx, pb = {x: c.x0, w: rx - c.x0 - c.g2, k: c.k, round: true};
+    const pm = person(P, d, Object.assign({y: 0, draw: false}, pb)), q = url ? Math.min(rw * 0.7, c.CH / PHI ** 3) : 0;
+    const bb = {cx: rx + rw / 2, w: rw, h: c.CH / PHI ** 3 * (q ? 0.7 : 1), k: c.k, firmUnder: true, tag: true};
+    const bh = brand(P, d, Object.assign({y: 0, draw: false}, bb)), rh = bh + (q ? (bh ? c.g2 : 0) + q : 0);
+    const hasC = rows(d, cst(d, true)).length > 0, S = stack(c, [{h: pm.h, off: pm.off}], hasC ? 0 : null, E[1]), py = S.tops[0], ry = clampY(c, py + pm.h / 2 - rh / 2, rh);
+    if (dr) { P.eyeAt = hasC ? 'tl' : 'lines'; person(P, d, Object.assign({y: py, draw: true}, pb)); if (bh) brand(P, d, Object.assign({y: ry, draw: true}, bb)); if (q) qrDraw(P, url, rx + (rw - q) / 2, ry + rh - q, q); }
+    return S.fits && rh <= c.H + 0.05;
+  }
+  const cx = c.X + c.CW / 2, q = url ? Math.min(c.W / PHI, c.CW / PHI ** 3) : 0;
+  const bb = {cx, w: c.W * 0.8, h: c.CW / PHI ** 3, k: c.k, firmUnder: true, tag: true}, pb = {x: c.x0, w: c.W, k: c.k, round: true, align: 'group'};
+  const bh = brand(P, d, Object.assign({y: 0, draw: false}, bb)), pm = person(P, d, Object.assign({y: 0, draw: false}, pb));
+  const S = stack(c, [{h: bh, gap: c.g3 * 1.2, off: bh / 2}, {h: pm.h, gap: c.g3, off: pm.off}, {h: q}], bh ? 0 : 1, bh ? E[1] : c.gy(1 - 1 / PHI));
+  if (dr) { P.eyeAt = bh ? 'tl' : 'lines'; if (bh) brand(P, d, Object.assign({y: S.tops[0], draw: true}, bb)); person(P, d, Object.assign({y: S.tops[1], draw: true}, pb)); if (q) qrDraw(P, url, cx - q / 2, S.tops[2], q); }
+  return S.fits;
+}
+/* имя: первое слово жирно, остальное тонко (как в образце с QR-кодом); если выбран шрифт с засечками — целиком им. o.off — середина имени от верха */
 function splitName(P, d, o){
   const nm = nameOf(d, P); if (!nm.s) return o.y;
-  if (hfn(d) === 'f') return text(P, nm.s, Object.assign({size: 15, fn: 'f', color: nm.c, lines: 2, lh: 1.05}, o));
-  const ps = nm.s.toUpperCase().split(/\s+/), a = ps[0], b = ps.slice(1).join(' '), cs = sz => 0.03 * sz * PT;
+  if (hfn(d) === 'f') { const oo = Object.assign({size: S1 * 1.2, fn: 'f', color: nm.c, lines: 2, lh: 1.05}, o); const y = text(P, nm.s, oo); o.off = capC(oo.out ? oo.out.size : S1); return y; }
+  const ps = nm.s.toUpperCase().split(/\s+/), a = ps[0], b = ps.slice(1).join(' '), cs = sz => 0.05 * sz * PT;
   const wd = sz => tw(a, 'b', sz, cs(sz)) + (b ? tw(' ', 'r', sz) + tw(b, 'r', sz, cs(sz)) : 0);
-  let sz = 11.5 * o.k; while (sz > 7 && wd(sz) > o.w) sz -= 0.25;
-  if (wd(sz) > o.w) return text(P, nm.s, Object.assign({size: 11.5, fn: 'b', color: nm.c, upper: true, lines: 2, lh: 1.05}, o));
+  let sz = S1 * o.k; while (sz > 6.4 && wd(sz) > o.w) sz -= 0.2;
+  if (wd(sz) > o.w) { const oo = Object.assign({size: S1, fn: 'b', color: nm.c, upper: true, csEm: 0.04, lines: 2, lh: 1.1}, o); const y = text(P, nm.s, oo); o.off = capC(oo.out ? oo.out.size : S1); return y; }
   const y = o.y + sz * PT * 0.76;
   if (o.draw) { T(P, a, o.x, y, sz, 'b', nm.c, 'left', cs(sz)); if (b) T(P, b, o.x + tw(a, 'b', sz, cs(sz)) + tw(' ', 'r', sz), y, sz, 'r', nm.c, 'left', cs(sz)); }
+  o.off = capC(sz);
   return y + sz * PT * 0.3;
 }
-/* 3. QR-код в углу: имя крупно, чем занимаешься с линией до QR-кода, линия во всю ширину, контакты */
-function tQr(P, d, X, Y, W, H, k, dr){
-  const url = frontQr(d, P), lg = LG(), wide = isWide(W, H);
-  const q = url ? (wide ? Math.min(H * 0.4, 17) : Math.min(W * 0.36, 15)) : 0, lb = !q && lg ? logoBox(lg, wide ? 22 : W * 0.36, wide ? H * 0.3 : 11) : null;
-  const cw = q || (lb ? lb.w : 0), ch = q || (lb ? lb.h : 0), nw = wide ? W - (cw ? cw + 4 : 0) : W;
-  const go = (draw, off) => {
-    const Y0 = Y + off;
-    let y = wide ? Y0 : Y0 + (ch ? ch + 3.5 * k : 0);
-    if (draw) { if (q) qrDraw(P, url, wide ? X + W - q : X, Y0, q); else if (lb) P.img(logoData(d, lg), wide ? X + W - lb.w : X, Y0, lb.w, lb.h); }
-    y = splitName(P, d, {x: X, y, w: nw, k, draw});
+/* 3. QR-код в углу: имя в «глазу» спирали, чем занимаешься с тонкой линией до QR-кода, линия во всю ширину, контакты */
+function tQr(P, d, c, dr){
+  const url = frontQr(d, P), lg = LG(), E = gold(c.X, c.Y, c.CW, c.CH, 'tl').eye, st = cst(d), right = ['web', 'ig', 'tg'];
+  const q = url ? Math.min(c.CW, c.CH) / PHI ** 3 * (c.wide ? 1 : 1.1) : 0;
+  const lb = !q && lg ? logoBox(lg, c.wide ? c.CW / PHI ** 3 : c.W / PHI, Math.min(c.CW, c.CH) / PHI ** 3 * 0.8) : null;
+  const cw = q || (lb ? lb.w : 0), chh = q || (lb ? lb.h : 0), nw = c.wide ? c.W - (cw ? cw + c.g3 : 0) : c.W;
+  const corner = (x, y) => { if (q) qrDraw(P, url, x, y, q); else if (lb) P.img(logoData(d, lg), x, y, lb.w, lb.h); };
+  const head = (y, draw) => {   // имя, чем занимаешься, строка, языки → {y — низ, off}
+    const so = {x: c.x0, y, w: nw, k: c.k, draw}; y = splitName(P, d, so);
     const role = clean(d.f.role);
-    if (role) { const o = {x: X, y: y + 1.4 * k, w: nw - 8, k, draw, size: 5.6, color: MID, upper: true, csEm: 0.12, lines: 2, lh: 1.3}; y = text(P, role, o); if (draw && o.out.lastW + 7 < nw) { const ly = o.out.base - o.out.size * PT * 0.3; P.line(X + o.out.lastW + 2.4, ly, X + nw - 1, ly, MID, 0.25); } }   // линия — после последней строки
-    if (clean(d.f.note)) y = text(P, d.f.note, {x: X, y: y + 1.2 * k, w: nw, k, draw, size: 5.8, color: MID, lines: 2, lh: 1.3, min: 4.8});
-    if (langLine(d)) y = text(P, langLine(d), {x: X, y: y + 1 * k, w: nw, k, draw, size: 5.4, color: SOFT, min: 4.6});
-    const st = cst(d);
-    if (!rows(d, st).length) return Math.max(y, wide ? Y0 + ch : y) - Y0;   // без контактов (обратная сторона) — без линии
-    y = (wide ? Math.max(y, Y0 + ch) : y) + 2.8 * k;
-    if (draw) P.line(X, y, X + W, y, INK, 0.25);
-    y += 2.8 * k;
-    const right = ['web', 'ig', 'tg'], hasL = rows(d, st).some(r => !right.includes(r.k));
-    const hasR = wide && rows(d, st).some(r => right.includes(r.k)) && cblock(P, d, {x: 0, y: 0, w: W * 0.42, k, style: st, align: 'right', only: right, draw: false}).w <= W * 0.42 + 0.2;   // длинный сайт справа не помещается — все контакты слева
-    const cl = {x: X, y, w: hasR ? W * 0.56 : W, k, style: st, skip: hasR ? right : null}, cr = {x: X + W * 0.58, w: W * 0.42, k, style: st, align: 'right', only: right};
-    const hl = hasL || !hasR ? cblock(P, d, Object.assign({}, cl, {draw: false})).h : 0, hr = hasR ? cblock(P, d, Object.assign({}, cr, {y: 0, draw: false})).h : 0;
-    if (draw) { if (hl) cblock(P, d, Object.assign({}, cl, {y, draw: true})); if (hr) cblock(P, d, Object.assign({}, cr, {y: Y + H - hr, draw: true})); }
-    return Math.max(y + hl, hr ? y + hr : 0) - Y0;
+    if (role) { const o = {x: c.x0, y: y + c.g1, w: nw - 9, k: c.k, draw, size: S0 * 0.92, color: MID, upper: true, csEm: 0.16, lines: 2, lh: 1.45, min: 4.8}; y = text(P, role, o); if (draw && o.out && o.out.lastW + 8 < nw) { const ly = o.out.base - o.out.size * PT * 0.32; P.line(c.x0 + o.out.lastW + 2.5, ly, c.x0 + nw, ly, RULE, HAIR); } }
+    if (clean(d.f.note)) y = text(P, d.f.note, {x: c.x0, y: y + c.g1, w: nw, k: c.k, draw, size: S0, color: MID, lines: 2, lh: 1.3, min: 4.8});
+    if (langLine(d)) y = text(P, langLine(d), {x: c.x0, y: y + c.g1, w: nw, k: c.k, draw, size: S0 * 0.9, color: SOFT, min: 4.6});
+    return {y, off: so.off || 0};
   };
-  /* вертикальная визитка: весь блок по центру высоты, без пустоты посередине */
-  const h = go(false, 0); if (dr) go(true, wide && rows(d, cst(d)).length ? 0 : Math.max(0, (H - h) / 2));
-  return h <= H + 0.2;
+  const hm = head(0, false), hh = hm.y, rowsAll = rows(d, st);
+  /* контакты: в горизонтальной сайт и соцсети справа, если помещаются */
+  const hasR = c.wide && rowsAll.some(r => right.includes(r.k)) && cblock(P, d, {x: 0, y: 0, w: c.W * 0.42, k: c.k, style: st, align: 'right', only: right, draw: false}).w <= c.W * 0.42 + 0.2;
+  const cl = {x: c.x0, w: hasR ? c.W * 0.56 : c.W, k: c.k, style: st, skip: hasR ? right : null}, cr = {x: c.x0 + c.W * 0.58, w: c.W * 0.42, k: c.k, style: st, align: 'rblock', only: right};
+  const hl = rowsAll.some(r => !hasR || !right.includes(r.k)) ? cblock(P, d, Object.assign({}, cl, {y: 0, draw: false})).h : 0, hr = hasR ? cblock(P, d, Object.assign({}, cr, {y: 0, draw: false})).h : 0, hc = Math.max(hl, hr);
+  let hy, top, cTop, cx;
+  if (c.wide) {
+    /* имя — в «глазу», угол — по середине высоты имени и строки; линия под ними */
+    top = hc ? Math.max(c.y0, E[1] - hm.off) : c.Y + (c.CH - Math.max(hh, chh)) / 2 + (Math.max(hh, chh) - hh) / 2; cTop = Math.max(c.y0, top + hh / 2 - chh / 2); cx = c.x1 - cw;
+    const need = Math.max(top + hh, cTop + chh) + (hc ? 2 * c.g2 + hc : 0);
+    if (need > c.y1) { const sh = Math.min(need - c.y1, Math.min(top, cTop) - c.y0); top -= sh; cTop -= sh; }
+    hy = Math.max(top + hh, cTop + chh) + c.g2;
+  } else {
+    /* вертикальная: угол — в «глазу», имя стоит на линии золотого сечения высоты, под линией контакты */
+    cx = c.x0; cTop = Math.max(c.y0, E[1] - chh / 2);
+    hy = Math.max(c.gy(1 / PHI), (chh ? cTop + chh + c.g3 : c.y0) + hh + c.g2);
+    const need = hy + (hc ? c.g2 + hc : 0);
+    if (need > c.y1) { const sh = Math.min(need - c.y1, Math.max(0, Math.min(chh ? cTop : hy - c.g2 - hh, hy - c.g2 - hh) - c.y0)); hy -= sh; cTop -= sh; }
+    top = hy - c.g2 - hh; if (chh) cTop = Math.max(c.y0, Math.min(cTop, top - c.g3 - chh));
+  }
+  if (dr) {
+    P.eyeAt = c.wide ? (hc ? 'tl' : 'lines') : (chh ? 'tl' : 'lines');
+    corner(cx, cTop); head(top, true);
+    if (hc) { P.line(c.x0, hy, c.x1, hy, RULE, HAIR); if (hl) cblock(P, d, Object.assign({}, cl, {y: hy + c.g2, draw: true})); if (hr) cblock(P, d, Object.assign({}, cr, {y: hy + c.g2, draw: true})); }
+  }
+  return top >= c.y0 - 0.05 && cTop >= c.y0 - 0.05 && (hc ? hy + c.g2 + hc : Math.max(top + hh, cTop + chh)) <= c.y1 + 0.05;
 }
-/* 4. Крупный слоган: большая фраза сверху, внизу слева ты, справа «записаться» и контакты */
-function tSlogan(P, d, X, Y, W, H, k, dr){
-  const f = d.f, fn = hfn(d), lg = LG(), url = frontQr(d, P), wide = isWide(W, H);
+/* 4. Крупный слоган: большая фраза в «глазу» спирали, до золотого сечения ширины; внизу ты, запись и контакты */
+function tSlogan(P, d, c, dr){
+  const f = d.f, fn = hfn(d), lg = LG(), url = frontQr(d, P), E = gold(c.X, c.Y, c.CW, c.CH, 'tl').eye;
   const sl = clean(f.tag) || clean(f.firm) || clean(f.role) || (P.preview && !d.noGhost ? 'Твоя главная фраза' : '');
+  const slc = clean(f.tag) || clean(f.firm) || clean(f.role) ? INK : GHOST;
   const L = d.lbl === 'none' ? null : (LBL[d.lbl] || LBL.de);
-  const cq = url ? (wide ? Math.min(H * 0.34, 14) : Math.min(W * 0.34, 13)) : 0, lb = !cq && lg ? logoBox(lg, wide ? 20 : W * 0.4, wide ? H * 0.26 : 10) : null;
-  const corner = cq ? {w: cq, h: cq} : lb;
-  const nm = nameOf(d, P), so = {size: fn === 'f' ? 17 : 13, fn, lines: 3, lh: 1.1, min: 9};
+  const so = fn === 'f' ? {size: S2, fn: 'f', lines: 3, lh: 1.1, min: 10} : {size: S2 * 0.8, fn: 'r', lines: 3, lh: 1.16, min: 8};
+  const nm = nameOf(d, P), qs = Math.min(c.CW, c.CH) / PHI ** 3;
+  const cq = url ? qs : 0, lb = !cq && lg ? logoBox(lg, c.wide ? c.CW / PHI ** 3 : c.W * 0.4, qs * 0.8) : null, corner = cq ? {w: cq, h: cq} : lb;
+  const drawCorner = (x, y) => { if (cq) qrDraw(P, url, x, y, cq); else if (lb) P.img(logoData(d, lg), x, y, lb.w, lb.h); };
   const leftItems = (x, y, w, draw) => {
-    if (nm.s) y = text(P, nm.s, {x, y, w, k, draw, size: 7.4, fn: 'b', color: nm.c, min: 5.6, lines: 2, lh: 1.1});
-    if (clean(f.role)) y = text(P, f.role, {x, y: y + 0.8 * k, w, k, draw, size: 6.2, color: MID, lines: 2, lh: 1.25, min: 5});
-    if (clean(f.serv)) y = text(P, f.serv, {x, y: y + 0.6 * k, w, k, draw, size: 5.8, color: MID, lines: 2, lh: 1.25, min: 4.8});
-    if (langLine(d)) y = text(P, langLine(d), {x, y: y + 0.6 * k, w, k, draw, size: 5.4, color: SOFT, min: 4.6});
+    if (nm.s) y = text(P, nm.s, {x, y, w, k: c.k, draw, size: S0 * 1.2, fn: 'b', color: nm.c, min: 5.6, lines: 2, lh: 1.15});
+    if (clean(f.role)) y = text(P, f.role, {x, y: y + c.g1 * 0.6, w, k: c.k, draw, size: S0, color: MID, lines: 2, lh: 1.3, min: 4.9});
+    if (clean(f.serv)) y = text(P, f.serv, {x, y: y + c.g1 * 0.4, w, k: c.k, draw, size: S0 * 0.95, color: SOFT, lines: 2, lh: 1.3, min: 4.8});
+    if (langLine(d)) y = text(P, langLine(d), {x, y: y + c.g1 * 0.4, w, k: c.k, draw, size: S0 * 0.9, color: SOFT, min: 4.6});
     return y;
   };
-  /* «Termin vereinbaren» и контакты; без контактов фразы о записи нет */
+  /* «Termin vereinbaren» мелкими заглавными и контакты; без контактов фразы о записи нет */
+  const cfg = (x, w, align) => ({x, w, k: c.k, style: cst(d), align, only: ['tel', 'mail', 'web', 'ig', 'tg'], size: S0});
   const rightItems = (x, y, w, draw, align) => {
-    const o = {x, w, k, style: cst(d), align, only: ['tel', 'mail', 'web', 'ig', 'tg'], size: 6};
-    const h = cblock(P, d, Object.assign({}, o, {y: 0, draw: false})).h; if (!h) return y;
-    if (L) y = text(P, L.cta, {x, y, w, k, draw, size: 6.6, fn: 'b', align: align === 'right' ? 'right' : 'left', min: 5.2});
-    if (draw) cblock(P, d, Object.assign({}, o, {y: y + 1 * k, draw: true}));
-    return y + 1 * k + h;
+    const o = cfg(x, w, align), h = cblock(P, d, Object.assign({}, o, {y: 0, draw: false})).h; if (!h) return y;
+    if (L) y = text(P, L.cta, {x, y, w, k: c.k, draw, size: S0 * 0.88, upper: true, csEm: 0.16, color: MID, align: align === 'right' ? 'right' : 'left', min: 4.8}) + c.g1;
+    if (draw) cblock(P, d, Object.assign({}, o, {y, draw: true}));
+    return y + h;
   };
-  if (wide) {
-    const sw = W - (corner ? corner.w + 4 : 0) - W * 0.06;
-    const sh = text(P, sl, Object.assign({x: X, y: Y, w: sw, k, draw: false}, so)) - Y;
-    const cw = cblock(P, d, {x: 0, y: 0, w: W * 0.44, k, style: cst(d), align: 'right', only: ['tel', 'mail', 'web', 'ig', 'tg'], size: 6, draw: false}).w, side = cw <= W * 0.44 + 0.2;
-    const lw = side ? W * 0.54 : W, rw = side ? W * 0.44 : W, gap = side ? 0 : 3 * k;
-    const lh = leftItems(X, 0, lw, false), rh = rightItems(side ? X + W - rw : X, 0, rw, false, side ? 'right' : 'left'), bh = side ? Math.max(lh, rh) : lh + gap + rh;
+  if (c.wide) {
+    const sw = c.gx(1 / PHI) - c.x0 + (corner ? 0 : c.W * 0.1);
+    const sh = text(P, sl, Object.assign({x: c.x0, y: 0, w: sw, k: c.k, draw: false}, so));
+    const sTop = clampY(c, E[1] - sh / 2, sh);   // фраза — серединой в «глазу» спирали
+    const cw = cblock(P, d, Object.assign(cfg(0, c.W * 0.5, 'right'), {y: 0, draw: false})).w, ctaW = L ? tw(L.cta.toUpperCase(), 'r', S0 * 0.88 * c.k, 0.16 * S0 * 0.88 * c.k * PT) : 0;
+    const rwN = Math.max(cw, ctaW), side = rwN <= c.W * 0.5 + 0.2;
+    const rw = side ? Math.max(rwN, c.W * 0.3) : c.W, lw = side ? c.W - rw - c.g3 : c.W;
+    const lh = leftItems(c.x0, 0, lw, false), rh = rightItems(c.x0, 0, rw, false, side ? 'right' : 'left'), bh = side ? Math.max(lh, rh) : lh + (rh ? c.g2 + rh : 0);
     if (dr) {
-      if (sl) text(P, sl, Object.assign({x: X, y: Y, w: sw, k, draw: true, color: clean(f.tag) || clean(f.firm) || clean(f.role) ? INK : GHOST}, so));
-      if (cq) qrDraw(P, url, X + W - cq, Y, cq); else if (lb) P.img(logoData(d, lg), X + W - lb.w, Y, lb.w, lb.h);
-      if (side) { leftItems(X, Y + H - lh, lw, true); rightItems(X + W - rw, Y + H - rh, rw, true, 'right'); }
-      else { leftItems(X, Y + H - bh, lw, true); rightItems(X, Y + H - rh, rw, true, 'left'); }   // длинный e-mail или сайт: контакты под именем, во всю ширину
+      P.eyeAt = 'tl';
+      if (sl) text(P, sl, Object.assign({x: c.x0, y: sTop, w: sw, k: c.k, draw: true, color: slc}, so));
+      if (corner) drawCorner(c.x1 - corner.w, c.y0);
+      if (side) { leftItems(c.x0, c.y1 - lh, lw, true); rightItems(c.x1 - rw, c.y1 - rh, rw, true, 'right'); }
+      else { leftItems(c.x0, c.y1 - bh, lw, true); rightItems(c.x0, c.y1 - rh, rw, true, 'left'); }
     }
-    return Math.max(sh, corner ? corner.h : 0) + 3 * k + bh <= H;
+    return sTop + sh + c.g3 <= c.y1 - bh + 0.05 && (!corner || c.y0 + corner.h + c.g2 <= c.y1 - (side ? rh : bh) + 0.05);
   }
-  const go = draw => {
-    let y = Y;
-    if (lb) { if (draw) P.img(logoData(d, lg), X, y, lb.w, lb.h); y += lb.h + 4 * k; }
-    if (sl) y = text(P, sl, Object.assign({x: X, y, w: W, k, draw, color: clean(f.tag) || clean(f.firm) || clean(f.role) ? INK : GHOST}, so));
-    const lh = leftItems(X, 0, W, false), rh = rightItems(X, 0, W - (cq ? cq + 3 : 0), false, 'left');
-    if (draw) { const ry = Y + H - rh; rightItems(X, ry, W - (cq ? cq + 3 : 0), true, 'left'); leftItems(X, ry - 3.4 * k - lh, W, true); if (cq) qrDraw(P, url, X + W - cq, Y + H - cq, cq); }
-    return y + 3.5 * k + lh + 3.4 * k + Math.max(rh, cq) - Y;
-  };
-  const h = go(false); if (dr) go(true);
-  return h <= H;
+  /* вертикальная: логотип сверху, фраза в «глазу» спирали, внизу ты, запись и контакты, QR-код в правом нижнем углу */
+  const lt = !cq && lb ? lb : null, cw2 = c.W - (cq ? cq + c.g2 : 0);
+  const sh = text(P, sl, Object.assign({x: c.x0, y: 0, w: c.W, k: c.k, draw: false}, so));
+  let sTop = Math.max(lt ? c.y0 + lt.h + c.g3 : c.y0, E[1] - sh / 2);
+  const lh = leftItems(c.x0, 0, c.W, false), rh = rightItems(c.x0, 0, cw2, false, 'left'), bh = lh + (rh ? c.g2 + rh : 0);
+  if (sTop + sh + c.g3 > c.y1 - Math.max(bh, cq)) sTop = Math.max(lt ? c.y0 + lt.h + c.g3 : c.y0, c.y1 - Math.max(bh, cq) - c.g3 - sh);
+  if (dr) {
+    P.eyeAt = 'tl';
+    if (lt) P.img(logoData(d, lg), c.x0, c.y0, lt.w, lt.h);
+    if (sl) text(P, sl, Object.assign({x: c.x0, y: sTop, w: c.W, k: c.k, draw: true, color: slc}, so));
+    const by = c.y1 - bh; leftItems(c.x0, by, c.W, true); if (rh) rightItems(c.x0, c.y1 - rh, cw2, true, 'left');
+    if (cq) qrDraw(P, url, c.x1 - cq, c.y1 - cq, cq);
+  }
+  return sTop + sh + c.g3 <= c.y1 - Math.max(bh, cq) + 0.05;
 }
-/* 5. Имя по центру: фирма или имя крупно, строка под ним, контакты в два столбика через тонкую линию */
-function tCenter(P, d, X, Y, W, H, k, dr){
-  const f = d.f, fn = hfn(d), lg = LG(), url = frontQr(d, P), wide = isWide(W, H), nm = nameOf(d, P);
-  const q = url ? (wide ? Math.min(H * 0.4, 15) : Math.min(W * 0.36, 14)) : 0, Wt = wide && q ? W - q - 4 : W;
+/* 5. Имя по центру: фирма или имя на линии золотого сечения высоты, строка под ним, контакты в два столбика через тонкую линию */
+function tCenter(P, d, c, dr){
+  const f = d.f, fn = hfn(d), lg = LG(), url = frontQr(d, P), nm = nameOf(d, P);
+  const q = url ? Math.min(c.CW, c.CH) / PHI ** 3 : 0, Wt = c.wide && q ? c.W - q - c.g3 : c.W, cx = c.x0 + Wt / 2;
   const firm = clean(f.firm), ttl = firm || nm.s, tcol = firm ? INK : nm.c;
   const subs = []; if (clean(f.tag)) subs.push(clean(f.tag)); if (firm) { const s = [clean(f.name), clean(f.role)].filter(Boolean).join(' · '); if (s) subs.push(s); } else if (clean(f.role)) subs.push(clean(f.role));
   if (langLine(d)) subs.push(langLine(d));
-  const L = LBL[d.lbl] || LBL.de;
-  let st = cst(d);
-  const R = () => rows(d, st);
+  const L = LBL[d.lbl] || LBL.de, st = cst(d);
+  const tso = fn === 'f' ? {size: S2 * 0.92, fn: 'f', upper: true, csEm: 0.06, lines: 2, lh: 1.05, min: 9} : {size: S1 * 0.95, fn: 'r', upper: true, csEm: 0.24, lines: 2, lh: 1.3, min: 7};
   /* два столбика: слева подписи или значки (к линии), справа значения */
-  const cols = (cx, y, w, draw) => {
-    const rs = R(); if (!rs.length) return 0;
-    if (st === 'none') return cblock(P, d, {x: cx - w / 2, y, w, k, draw, style: 'none', align: 'center', size: 6}).h;
-    let sz = 6 * k, em, lh, lw, vw;
-    const geo = () => { em = sz * PT; lh = em * 1.45; lw = Math.max(...rs.map(r => st === 'icon' ? em * 1.12 : tw(L[r.k], 'r', sz * 0.9))); vw = Math.max(...rs.map(r => Math.max(...r.v.map(s => tw(s, 'r', sz))))); };
-    geo(); while (sz > 4.9 && lw + vw + 5 > w) { sz -= 0.2; geo(); }
-    const h = rs.reduce((a, r) => a + r.v.length * lh, 0); if (!draw) return h;
-    const xr = cx - (lw + vw + 5) / 2 + lw + 2.5; let yy = y;
-    P.line(xr, y + lh * 0.12, xr, y + h - lh * 0.12, INK, 0.25);
-    rs.forEach(r => { const c = yy + lh / 2;
-      if (st === 'icon') icon(P, r.k, xr - 2.3 - em * 1.12, c - em * 0.56, em * 1.12, INK); else T(P, L[r.k], xr - 2.3, c + 0.36 * em, sz * 0.9, 'r', SOFT, 'right');
-      r.v.forEach((s, j) => T(P, s, xr + 2.3, yy + j * lh + lh / 2 + 0.36 * em, sz, 'r', INK)); yy += r.v.length * lh; });
+  const cols = (y, draw) => {
+    const rs = rows(d, st); if (!rs.length) return 0;
+    if (st === 'none') return cblock(P, d, {x: c.x0, y, w: Wt, k: c.k, draw, style: 'none', align: 'center', size: S0, pitch: 1.5}).h;
+    let sz = S0 * c.k, em, lh, li, lw, vw;
+    const g = () => { em = sz * PT; lh = em * 1.5; li = em * 1.32; lw = Math.max(...rs.map(r => st === 'icon' ? em * 0.98 : tw(L[r.k], 'r', sz * 0.86))); vw = Math.max(...rs.map(r => Math.max(...r.v.map(s => tw(s, 'r', sz))))); };
+    g(); while (sz > 4.9 && lw + vw + 5 > Wt) { sz -= 0.1; g(); }
+    const h = rs.reduce((a, r) => a + lh + (r.v.length - 1) * li, 0) - lh + em * 1.05; if (!draw) return h;
+    if (lw + vw + 5 > Wt + 0.2) P.wOver = true;
+    const xr = cx - (lw + vw + 5) / 2 + lw + 2.5; let b = y + 0.8 * em;
+    P.line(xr, y, xr, y + h, RULE, HAIR);
+    rs.forEach(r => {
+      if (st === 'icon') icon(P, r.k, xr - 2.3 - em * 0.98, b - 0.36 * em - em * 0.49, em * 0.98, MID, 0.13); else T(P, L[r.k], xr - 2.3, b, sz * 0.86, 'r', SOFT, 'right');
+      r.v.forEach((s, j) => T(P, s, xr + 2.3, b + j * li, sz, 'r', INK)); b += lh + (r.v.length - 1) * li; });
     return h;
   };
-  const lb = lg ? logoBox(lg, Wt * 0.42, H * (wide ? 0.24 : 0.16)) : null;
-  const go = (draw, top) => {
-    let y = top; const cx = X + Wt / 2;
-    if (lb) { if (draw) P.img(logoData(d, lg), cx - lb.w / 2, y, lb.w, lb.h); y += lb.h + 3 * k; }
-    if (ttl) y = text(P, ttl, {x: X, y, w: Wt, k, draw, size: fn === 'f' ? 17 : 12, fn, color: tcol, align: 'center', upper: true, csEm: fn === 'f' ? 0.02 : 0.05, lines: 2, lh: 1.05});
-    subs.forEach((s, i) => { y = text(P, s, {x: X, y: y + (i ? 0.6 : 1.4) * k, w: Wt, k, draw, size: 5.8, color: i ? SOFT : MID, align: 'center', lines: 1, min: 4.6}); });
-    const ch = cols(cx, 0, Wt, false); if (ch) { y += 3.8 * k; cols(cx, y, Wt, draw); y += ch; }
-    return y - top;
-  };
-  const Hc = !wide && q ? H - q - 3 : H, h = go(false, 0);
-  if (dr) { go(true, vcenter(Y, Hc, h)); if (q) qrDraw(P, url, wide ? X + W - q : X + (W - q) / 2, wide ? vcenter(Y, H, q) : Y + H - q, q); }
-  return h <= Hc;
+  const lb = lg ? logoBox(lg, Wt * 0.5, Math.min(c.CW, c.CH) / PHI ** 3 * 0.8) : null;
+  const tTop = y => text(P, ttl, Object.assign({x: c.x0, y, w: Wt, k: c.k, draw: false, color: tcol, align: 'center'}, tso)) - y;
+  const subsH = () => { let y = 0; subs.forEach((s, i) => { y = text(P, s, {x: c.x0, y: y + (i ? c.g1 * 0.5 : 0), w: Wt, k: c.k, draw: false, size: S0 * (i ? 0.92 : 1), color: i ? SOFT : MID, align: 'center', lines: 2, lh: 1.3, min: 4.6}); }); return y; };
+  const th = ttl ? tTop(0) : 0, shh = subs.length ? subsH() : 0, chh = cols(0, false);
+  const items = [{h: lb ? lb.h : 0, gap: c.g2}, {h: th, gap: c.g1 * 1.4, off: capC(tso.size * c.k)}, {h: shh, gap: c.g3}, {h: chh, gap: c.g3}, {h: !c.wide ? q : 0}];
+  const S = stack(c, items, th ? 1 : null, c.gy(1 - 1 / PHI));
+  if (dr) {
+    P.eyeAt = 'lines';
+    if (lb) P.img(logoData(d, lg), cx - lb.w / 2, S.tops[0], lb.w, lb.h);
+    if (th) text(P, ttl, Object.assign({x: c.x0, y: S.tops[1], w: Wt, k: c.k, draw: true, color: tcol, align: 'center'}, tso));
+    let y = S.tops[2]; subs.forEach((s, i) => { y = text(P, s, {x: c.x0, y: y + (i ? c.g1 * 0.5 : 0), w: Wt, k: c.k, draw: true, size: S0 * (i ? 0.92 : 1), color: i ? SOFT : MID, align: 'center', lines: 2, lh: 1.3, min: 4.6}); });
+    if (chh) cols(S.tops[3], true);
+    if (q) qrDraw(P, url, c.wide ? c.x1 - q : c.X + (c.CW - q) / 2, c.wide ? c.Y + (c.CH - q) / 2 : S.tops[4], q);
+  }
+  return S.fits;
 }
-/* 6. Только QR-код: почти пустая визитка, QR-код и несколько строк мелкими заглавными */
-function tOnlyQr(P, d, X, Y, W, H, k, dr){
-  const f = d.f, url = frontQr(d, P), lg = LG(), wide = isWide(W, H), nm = nameOf(d, P);
+/* 6. Только QR-код: QR-код на золотом сечении и несколько строк заглавными вразрядку */
+function tOnlyQr(P, d, c, dr){
+  const f = d.f, url = frontQr(d, P), lg = LG(), nm = nameOf(d, P), E = gold(c.X, c.Y, c.CW, c.CH, 'tl').eye;
   const main = clean(f.firm) || nm.s, lines = [[main, 'b', clean(f.firm) ? INK : nm.c]];
   if (clean(f.firm) && clean(f.name)) lines.push([clean(f.name), 'r', MID]);
   if (clean(f.role) && d.noGhost) lines.push([clean(f.role), 'r', MID, 2]);
@@ -723,49 +841,64 @@ function tOnlyQr(P, d, X, Y, W, H, k, dr){
   const ls = lines.filter(l => l[0]).slice(0, 4);
   /* строки заглавными вразрядку; длинный e-mail или сайт, который так не помещается, — обычными буквами */
   let bw = 0;
-  const block = (x, y, w, draw, align) => { bw = 0; ls.forEach((l, i) => { const sz = (i ? 5.4 : 6), up = tw(l[0].toUpperCase(), l[1], 4.4 * Math.min(1, k + 0.15), 0.14 * 4.4 * PT) <= w; const o = {x, y: y + (i ? 1.1 * k : 0), w, k, draw, size: sz, fn: l[1], color: l[2], align, upper: up, csEm: up ? 0.14 : 0, min: 4.4, lines: l[3] || 1, lh: 1.3}; y = text(P, l[0], o); if (o.out) bw = Math.max(bw, o.out.w); }); return y; };
-  const slot = (x, y, s, draw) => { if (!draw) return; if (url) qrDraw(P, url, x, y, s); else if (lg) { const lb = logoBox(lg, s, s); P.img(logoData(d, lg), x + (s - lb.w) / 2, y + (s - lb.h) / 2, lb.w, lb.h); } else { const ini = initials(d); if (ini) { P.circle(x + s / 2, y + s / 2, s / 2, null, INK, 0.25); T(P, ini, x + s / 2, y + s / 2 + s * 0.17, s * 1.2, 'f', INK, 'center'); } } };
-  if (wide) {
-    const s = Math.min(H * 0.66, W * 0.3) * Math.min(1, k + 0.1), tw2 = W - s - 6, bh = block(X + s + 6, 0, tw2, false, 'left');
-    /* QR-код и строки — одной группой по центру карточки */
-    const sh = Math.max(0, (W - (s + 6 + bw)) / 2 - 1), tx = X + s + 6 + sh;
-    if (dr) { slot(X + sh, vcenter(Y, H, s), s, true); block(tx, vcenter(Y, H, bh), tw2, true, 'left'); }
-    return bh <= H;
+  const block = (x, y, w, draw, align) => { bw = 0; ls.forEach((l, i) => { const sz = i ? S0 * 0.9 : S0, up = tw(l[0].toUpperCase(), l[1], 4.4 * Math.min(1, c.k + 0.15), 0.16 * 4.4 * PT) <= w; const o = {x, y: y + (i ? c.g1 : 0), w, k: c.k, draw, size: sz, fn: l[1], color: l[2], align, upper: up, csEm: up ? 0.16 : 0, min: 4.4, lines: l[3] || 1, lh: 1.35}; y = text(P, l[0], o); if (o.out) bw = Math.max(bw, o.out.w); }); return y; };
+  const slot = (x, y, s) => { if (url) qrDraw(P, url, x, y, s); else if (lg) { const lb = logoBox(lg, s, s); P.img(logoData(d, lg), x + (s - lb.w) / 2, y + (s - lb.h) / 2, lb.w, lb.h); } else { const ini = initials(d); if (ini) { P.circle(x + s / 2, y + s / 2, s / 2, null, INK, HAIR); T(P, ini, x + s / 2, y + s / 2 + s * 0.17, s * 1.2, 'f', INK, 'center'); } } };
+  if (c.wide) {
+    /* QR-код: высота — поле / φ, правый край — на золотом сечении ширины (38,2 %); строки — справа, всё по середине высоты */
+    const s = Math.min(c.H / PHI, c.gx(1 - 1 / PHI) - c.x0) * Math.min(1, c.k + 0.1), qx = c.gx(1 - 1 / PHI) - s, tx = qx + s + c.g3, tw2 = c.x1 - tx, bh = block(tx, 0, tw2, false, 'left');
+    if (dr) { P.eyeAt = 'lines'; slot(qx, c.Y + (c.CH - s) / 2, s); block(tx, c.Y + (c.CH - bh) / 2, tw2, true, 'left'); }
+    return bh <= c.H + 0.05 && s <= c.H + 0.05;
   }
-  const s = Math.min(W * 0.6, H * 0.46) * Math.min(1, k + 0.1), bh = block(X, 0, W, false, 'center'), h = s + 5 * k + bh;
-  if (dr) { const y = vcenter(Y, H, h) - (H > h + 8 ? 2 : 0); slot(X + (W - s) / 2, y, s, true); block(X, y + s + 5 * k, W, true, 'center'); }
-  return h <= H;
+  const s = Math.min(c.W / PHI, c.H / PHI) * Math.min(1, c.k + 0.1), bh = block(c.x0, 0, c.W, false, 'center');
+  const S = stack(c, [{h: s, gap: c.g3, off: s / 2}, {h: bh}], 0, c.gy(1 - 1 / PHI));
+  if (dr) { P.eyeAt = 'lines'; slot(c.X + (c.CW - s) / 2, S.tops[0], s); block(c.x0, S.tops[1], c.W, true, 'center'); }
+  return S.fits;
 }
-/* 7. Минимализм: имя заглавными вразрядку, короткая чёрточка, чем занимаешься; контакты в нижнем углу */
-function tMini(P, d, X, Y, W, H, k, dr){
-  const f = d.f, nm = nameOf(d, P), lg = LG(), url = frontQr(d, P), wide = isWide(W, H), fn = d.font === 'sans' ? 'r' : 'f';
-  const q = url ? Math.min(wide ? H * 0.36 : W * 0.32, 13) : 0, lb = lg ? logoBox(lg, wide ? 18 : W * 0.4, wide ? H * 0.22 : 9) : null;
+/* 7. Минимализм: имя заглавными вразрядку в «глазу» спирали, короткая чёрточка, чем занимаешься; контакты в нижнем углу */
+function tMini(P, d, c, dr){
+  const f = d.f, nm = nameOf(d, P), lg = LG(), url = frontQr(d, P), fn = d.font === 'sans' ? 'r' : 'f', E = gold(c.X, c.Y, c.CW, c.CH, 'tl').eye;
+  const q = url ? Math.min(c.CW, c.CH) / PHI ** 3 * 0.95 : 0, lb = lg ? logoBox(lg, c.wide ? c.CW / PHI ** 3 : c.W * 0.4, Math.min(c.CW, c.CH) / PHI ** 4 * 1.25) : null;
+  let off = 0, tW = 0;
   const top = (x, y, w, draw) => {
-    if (nm.s) y = text(P, nm.s, {x, y, w, k, draw, size: fn === 'f' ? 13 : 9.6, fn, color: nm.c, upper: true, csEm: 0.24, lines: 2, lh: 1.35, min: 6.4});
-    y += 2.2 * k; if (draw) P.line(x, y, x + 2.6, y, INK, 0.35); y += 2.4 * k;
-    if (clean(f.role)) y = text(P, f.role, {x, y, w, k, draw, size: 5.8, color: MID, lines: 2, lh: 1.3, min: 4.8});
-    if (clean(f.note)) y = text(P, f.note, {x, y: y + 0.8 * k, w, k, draw, size: 5.4, color: MID, lines: 2, lh: 1.3, min: 4.6});
-    if (langLine(d)) y = text(P, langLine(d), {x, y: y + 0.6 * k, w, k, draw, size: 5.2, color: SOFT, min: 4.4});
+    tW = 0; const wd = o => { if (o.out) tW = Math.max(tW, o.out.w); return o; };
+    if (nm.s) { const o = {x, y, w, k: c.k, draw, size: fn === 'f' ? S1 * 1.25 : S1 * 0.92, fn, color: nm.c, upper: true, csEm: 0.26, lines: 2, lh: 1.4, min: 6.4}; y = text(P, nm.s, o); wd(o); off = capC(o.out ? o.out.size : S1); }
+    y += c.g2 * 0.8; if (draw) P.line(x, y, x + c.g2, y, INK, 0.2); y += c.g2 * 0.8;
+    const put = (s2, o) => { y = text(P, s2, o); wd(o); };
+    if (clean(f.role)) put(f.role, {x, y, w, k: c.k, draw, size: S0, color: MID, lines: 2, lh: 1.3, min: 4.8});
+    if (clean(f.note)) put(f.note, {x, y: y + c.g1 * 0.6, w, k: c.k, draw, size: S0 * 0.92, color: MID, lines: 2, lh: 1.3, min: 4.6});
+    if (langLine(d)) put(langLine(d), {x, y: y + c.g1 * 0.6, w, k: c.k, draw, size: S0 * 0.88, color: SOFT, min: 4.4});
     return y;
   };
-  const st = cst(d), cx = wide ? X + W * 0.46 : X, cw = wide ? W * 0.54 : W - (q ? q + 3 : 0);
-  const c = {x: cx, w: cw, k, style: st, size: 5.6, col: MID, align: wide ? 'rblock' : 'left'};
-  const ch = cblock(P, d, Object.assign({}, c, {y: 0, draw: false})).h;
-  const ty = wide ? Y + H * 0.14 : Y + (lb ? lb.h + 4 * k : 0), tw2 = wide ? W - (lb ? lb.w + 4 : 0) : W;
-  const tb = top(X + (wide ? W * 0.02 : 0), ty, tw2, false);
-  if (dr) {
-    if (lb) P.img(logoData(d, lg), wide ? X + W - lb.w : X, Y, lb.w, lb.h);
-    top(X + (wide ? W * 0.02 : 0), ty, tw2, true);
-    if (ch) cblock(P, d, Object.assign({}, c, {y: Y + H - ch, draw: true}));
-    if (q) qrDraw(P, url, wide ? X : X + W - q, Y + H - q, q);
+  const st = cst(d);
+  if (c.wide) {
+    const tw2 = c.W - (lb ? lb.w + c.g3 : 0), cc = {x: c.x0 + c.W * (1 - 1 / PHI), w: c.W / PHI, k: c.k, style: st, size: S0 * 0.95, col: MID, align: 'rblock'};
+    const cm = cblock(P, d, Object.assign({}, cc, {y: 0, draw: false})), ch = cm.h, tb = top(c.x0, 0, tw2, false), apart = tW + c.g3 <= c.W - cm.w;   // имя и контакты не пересекаются по ширине
+    const ty = clampY(c, E[1] - off, tb);
+    if (dr) { P.eyeAt = 'tl'; if (lb) P.img(logoData(d, lg), c.x1 - lb.w, c.y0, lb.w, lb.h); top(c.x0, ty, tw2, true); if (ch) cblock(P, d, Object.assign({}, cc, {y: c.y1 - ch, draw: true})); if (q) qrDraw(P, url, c.x0, c.y1 - q, q); }
+    return ty + tb + c.g3 <= c.y1 - Math.max(apart ? 0 : ch, q) + 0.05 && ch <= c.H - (lb ? lb.h + c.g2 : 0) + 0.05;
   }
-  return tb + 2.5 * k <= Y + H - Math.max(ch, wide ? 0 : q) && (!wide || !q || tb + 2 <= Y + H - q);
+  const cc = {x: c.x0, w: c.W - (q ? q + c.g2 : 0), k: c.k, style: st, size: S0 * 0.95, col: MID};
+  const ch = cblock(P, d, Object.assign({}, cc, {y: 0, draw: false})).h, tb = top(c.x0, 0, c.W, false);
+  const ty = Math.max(lb ? c.y0 + lb.h + c.g3 : c.y0, Math.min(c.gy(1 - 1 / PHI) - off, c.y1 - Math.max(ch, q) - c.g3 - tb));
+  if (dr) { P.eyeAt = 'lines'; if (lb) P.img(logoData(d, lg), c.x0, c.y0, lb.w, lb.h); top(c.x0, ty, c.W, true); if (ch) cblock(P, d, Object.assign({}, cc, {y: c.y1 - ch, draw: true})); if (q) qrDraw(P, url, c.x1 - q, c.y1 - q, q); }
+  return ty + tb + c.g3 <= c.y1 - Math.max(ch, q) + 0.05;
 }
 const TF = {line: tLine, dots: tDots, qr: tQr, slogan: tSlogan, center: tCenter, onlyqr: tOnlyQr, mini: tMini};
-function front(P, d, X, Y){
-  const [CW, CH] = dims(d), x0 = X + SAFE, y0 = Y + SAFE, W = CW - 2 * SAFE, H = CH - 2 * SAFE, f = TF[d.layout] || tLine;
-  for (let i = 0; i <= 5; i++) { const k = 1 - i * 0.05; if (f(P, d, x0, y0, W, H, k, false) || i === 5) { P.wOver = false; f(P, d, x0, y0, W, H, k, true); return !f(P, d, x0, y0, W, H, k, false) || P.wOver; } }
+/* шаги подгонки: сначала поля сужаются от золотых до 5 мм, потом мельче шрифт [масштаб шрифтов, поля] */
+const STEPS = [[1, 1], [1, 0.6], [1, 0.25], [0.95, 0], [0.9, 0], [0.85, 0], [0.8, 0]];
+function fitDraw(P, X, Y, CW, CH, f){
+  for (let i = 0; i < STEPS.length; i++) {
+    const c = geo(X, Y, CW, CH, STEPS[i][0], STEPS[i][1]), last = i === STEPS.length - 1;
+    if (!last && !f(c, false)) continue;
+    const n = P.ops.length; P.wOver = false; f(c, true);
+    if (P.wOver && !last) { P.ops.length = n; continue; }   // слово всё же не поместилось — пробуем следующий шаг
+    return !f(c, false) || P.wOver;
+  }
   return false;
+}
+function front(P, d, X, Y){
+  const [CW, CH] = dims(d), t = TF[d.layout] || tLine;
+  return fitDraw(P, X, Y, CW, CH, (c, dr) => t(P, d, c, dr));
 }
 /* обратная сторона в том же виде, что и лицевая: имя и чем занимаешься по-русски или по-украински, строка, QR-код, логотип (13.10.2026, «как сделать красивее») */
 function backData(d){
@@ -781,30 +914,31 @@ function back(P, d, X, Y){
   const keep = LGX; if (!d.back.logo) LGX = null;
   try { return front(P, backData(d), X, Y); } finally { LGX = keep; }
 }
-/* оборот без имени и рода занятий: логотип, строка и QR-код по центру */
+/* оборот без имени и рода занятий: логотип, строка и QR-код по центру, на линии золотого сечения высоты */
 function backSimple(P, d, X, Y){
-  const [CW, CH] = dims(d), lg = d.back.logo ? LG() : null, x0 = X + SAFE, y0 = Y + SAFE, W = CW - 2 * SAFE, H = CH - 2 * SAFE, url = d.qr.where === 'back' ? qrLink(d) : '';
-  const fn = hfn(d), cx = x0 + W / 2;
-  const items = (k, dr, top) => {
-    let y = top;
-    const lb = logoBox(lg, W * 0.5, H * 0.26 * k);
-    if (lb) { if (dr) P.img(logoData(d, lg), cx - lb.w / 2, y, lb.w, lb.h); y += lb.h + 3.4; }
-    const name = clean(d.back.name);
-    if (name) y = text(P, name, {x: x0, y, w: W, k, draw: dr, size: fn === 'f' ? 14.5 : 11, fn, align: 'center', lines: 2, lh: 1.05});
-    if (clean(d.back.role)) y = text(P, d.back.role, {x: x0, y: y + 1.2 * k, w: W, k, draw: dr, size: 7.2, color: MID, align: 'center', lines: 2, lh: 1.25, min: 5.2});
-    if (clean(d.back.line)) y = text(P, d.back.line, {x: x0, y: y + 1.6 * k, w: W, k, draw: dr, size: 6.4, color: MID, align: 'center', lines: 2, lh: 1.3, min: 5});
-    if (url) { const q = Math.min(15, W * 0.42) * Math.min(1, k + 0.1); y += (y > top ? 3.4 : 0); if (dr) qrDraw(P, url, cx - q / 2, y, q); y += q; const cap = qrCap(d, url); if (cap) y = text(P, cap, {x: x0, y: y + 1.2, w: W, k: 1, draw: dr, size: 5.4, color: SOFT, align: 'center', min: 4.6}); }
-    return y - top;
-  };
-  let k = 1; while (k > 0.75 && items(k, false, 0) > H) k -= 0.05;
-  const h = items(k, false, 0); P.wOver = false; items(k, true, vcenter(y0, H, h));
-  return h > H || P.wOver;
+  const [CW, CH] = dims(d), lg = d.back.logo ? LG() : null, url = d.qr.where === 'back' ? qrLink(d) : '';
+  return fitDraw(P, X, Y, CW, CH, (c, dr) => {
+    const cx = c.X + c.CW / 2, s = Math.min(c.CW, c.CH);
+    const lb = logoBox(lg, c.W / PHI, s / PHI ** 3 * 1.1), line = clean(d.back.line), q = url ? s / PHI ** 2.6 * Math.min(1, c.k + 0.1) : 0, cap = url ? qrCap(d, url) : '';
+    const lo = {x: c.x0, w: c.W, k: c.k, size: S0 * 1.08, color: MID, align: 'center', lines: 2, lh: 1.3, min: 5}, co = {x: c.x0, w: c.W, k: 1, size: S0 * 0.88, color: SOFT, align: 'center', min: 4.6, upper: true, csEm: 0.14};
+    const lh = line ? text(P, line, Object.assign({y: 0, draw: false}, lo)) : 0, caph = cap ? text(P, cap, Object.assign({y: 0, draw: false}, co)) : 0;
+    const S = stack(c, [{h: lb ? lb.h : 0, gap: c.g3}, {h: lh, gap: c.g3}, {h: q, gap: c.g1}, {h: caph}], lb ? 0 : null, c.gy(1 - 1 / PHI) - (lb ? lb.h / 2 : 0));
+    if (dr) {
+      P.eyeAt = 'lines';
+      if (lb) P.img(logoData(d, lg), cx - lb.w / 2, S.tops[0], lb.w, lb.h);
+      if (lh) text(P, line, Object.assign({y: S.tops[1], draw: true}, lo));
+      if (q) qrDraw(P, url, cx - q / 2, S.tops[2], q);
+      if (caph) text(P, cap, Object.assign({y: S.tops[3], draw: true}, co));
+    }
+    return S.fits;
+  });
 }
 function newPage(w, h){ const P = SH.page(w, h, SH.pal(true)); P.wm = false; P.credit = false; P.kBlack = true; return P; }
 /* одна сторона визитки; bleed — запас на обрез в мм (0 — как визитка на экране) */
 function cardPage(d, side, bleed, preview){
   const [CW, CH] = dims(d), W = CW + 2 * bleed, H = CH + 2 * bleed, P = newPage(W, H); P.fmt = [W, H]; P.pngK = 12; P.preview = !!preview;
   P.over = (side === 'back' ? back : front)(P, d, bleed, bleed);
+  if (preview && d.gold && P.eyeAt) goldDraw(P, bleed, bleed, CW, CH, P.eyeAt);   // золотые пропорции — только на экране
   return P;
 }
 /* лист A4: сколько поместится визиток выбранного размера, без промежутков, метки реза на полях (не ближе 10 мм к краю листа);
@@ -857,7 +991,7 @@ function variant(d, t){ const v = Object.assign({}, d, {layout: t[0], font: t[2]
 function thumbs(){
   const d = D(), mine = !!clean(d.f.name), base = mine ? d : Object.assign({}, d, THD()), [w, h] = dims(d);
   if (!mine) LGX = null;
-  $('tpls').innerHTML = TPL.map(t => { const P = cardPage(variant(base, t), 'front', 0, true); return `<button type="button" data-tpl="${t[0]}" aria-pressed="${d.layout === t[0]}"><span class="th"><span style="${w >= h ? 'width:100%' : 'height:100%'};aspect-ratio:${w} / ${h}">${SH.svg(P)}</span></span>${t[1]}</button>`; }).join('');
+  $('tpls').innerHTML = TPL.map(t => { const P = cardPage(Object.assign(variant(base, t), {gold: false}), 'front', 0, true); return `<button type="button" data-tpl="${t[0]}" aria-pressed="${d.layout === t[0]}"><span class="th"><span style="${w >= h ? 'width:100%' : 'height:100%'};aspect-ratio:${w} / ${h}">${SH.svg(P)}</span></span>${t[1]}</button>`; }).join('');
   LGX = undefined;
 }
 function render(){
@@ -880,7 +1014,7 @@ function fill(){
   document.querySelectorAll('[data-k]').forEach(el => { const v = get(d, el.dataset.k); if (el.type === 'checkbox') el.checked = !!v; else el.value = v == null ? '' : v; el.disabled = dis; });
   document.querySelectorAll('[data-seg]').forEach(sg => sg.querySelectorAll('button').forEach(b => { b.setAttribute('aria-pressed', String(get(d, sg.dataset.seg) === b.dataset.v)); b.disabled = (dis && !VIEW.includes(sg.dataset.seg)) || (sg.dataset.seg === 'orient' && d.size === '55x55'); }));
   $('langs').innerHTML = LANGS.map(([k, n]) => `<label><input type="checkbox" value="${k}" ${(d.f.langs || []).includes(k) ? 'checked' : ''} ${dis ? 'disabled' : ''}> ${n}</label>`).join('');
-  $('lbl').value = d.lbl; $('bw').checked = !!d.bw; $('bleed').value = String(d.bleed);
+  $('lbl').value = d.lbl; $('bw').checked = !!d.bw; $('bleed').value = String(d.bleed); $('gold').checked = !!d.gold;
   $('backFields').hidden = !d.back.on; $('qrToBox').hidden = d.qr.where === 'none'; $('qrUrl').hidden = d.qr.to !== 'url';
   const card = $('qrTo').querySelector('option[value="card"]'); card.disabled = !d.card; card.textContent = d.card ? 'На мою карточку в «Своих людях» (' + d.card.num + ')' : 'На мою карточку в «Своих людях» (сначала найди её по номеру)';
   const lg = EX ? (EXNOLOGO ? null : EXLOGO) : LOGO; $('logoImg').hidden = !lg; if (lg) $('logoImg').src = lg.c; $('logoDel').hidden = !lg || dis; $('logoPick').hidden = dis;
@@ -892,7 +1026,7 @@ document.addEventListener('input', e => { const x = e.target; if (EX || !x.datas
 document.addEventListener('change', e => {
   const x = e.target;
   /* вид визитки можно менять и в примере */
-  if (x.id === 'lbl' || x.id === 'bw' || x.id === 'bleed') { const t = EX || S; if (x.id === 'lbl') t.lbl = x.value; else if (x.id === 'bw') t.bw = x.checked; else t.bleed = +x.value; save(); render(); return; }
+  if (x.id === 'lbl' || x.id === 'bw' || x.id === 'bleed' || x.id === 'gold') { const t = EX || S; if (x.id === 'lbl') t.lbl = x.value; else if (x.id === 'bw') t.bw = x.checked; else if (x.id === 'gold') t.gold = x.checked; else t.bleed = +x.value; save(); render(); return; }
   if (EX) return;
   if (x.dataset && x.dataset.k) { put(S, x.dataset.k, x.type === 'checkbox' ? x.checked : x.value); save(); fill(); return; }
   if (x.closest && x.closest('#langs')) { S.f.langs = [...document.querySelectorAll('#langs input:checked')].map(i => i.value); save(); render(); return; }
@@ -1020,7 +1154,7 @@ async function exampleOn(opts, noLogo){ if (!noLogo && !EXLOGO) EXLOGO = await e
 $('exOn').addEventListener('click', async () => { await exampleOn({layout: S.layout, font: S.font, cstyle: S.cstyle, qr: (S.layout === 'qr' || S.layout === 'onlyqr') ? {where: 'front'} : {}}); window.scrollTo({top: $('exbar').getBoundingClientRect().top + window.scrollY - 12, behavior: 'smooth'}); });
 $('exOff').addEventListener('click', () => { EX = null; fill(); });
 
-/* ссылка вида ?n=SG-0014 — подставить карточку сразу; ?example — пример (для веера и превью: &layout=, &font=, &cstyle=, &lbl=, &size=85x55|90x50|55x55, &orient=v, &qr=front|back|none, &nologo) */
+/* ссылка вида ?n=SG-0014 — подставить карточку сразу; ?example — пример (для веера и превью: &layout=, &font=, &cstyle=, &lbl=, &size=85x55|90x50|55x55, &orient=v, &qr=front|back|none, &nologo, &gold — золотые пропорции поверх) */
 const P0 = new URLSearchParams(location.search);
 fill();
 if (document.fonts && document.fonts.ready) document.fonts.ready.then(render);
@@ -1029,6 +1163,7 @@ if (P0.has('example')) {
   if (t) Object.assign(o, {layout: t[0], font: t[2], cstyle: t[3]}, (t[0] === 'qr' || t[0] === 'onlyqr') ? {qr: {where: 'front'}} : {});
   ['font', 'lbl', 'cstyle', 'size', 'orient'].forEach(k => { if (P0.get(k)) o[k] = P0.get(k); });
   if (P0.get('qr')) o.qr = {where: P0.get('qr')};
+  if (P0.has('gold')) o.gold = true;
   exampleOn(o, P0.has('nologo'));
 }
 else if (P0.get('n')) { $('findQ').value = P0.get('n'); find(); }
