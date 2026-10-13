@@ -1082,7 +1082,7 @@ const AVATAR_SVG = '<svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50
 </script>
 <script src="/data/specialists.js?v=aa2550d8"></script>
 <script src="/data/vacancies.js?v=3527d207"></script>
-<script src="/data/organizations.js?v=09438ef8"></script>
+<script src="/data/organizations.js?v=c7132a43"></script>
 <script>
 window.IMG_BASE = '/img/org/';
 /* карточки специалистов — в /data/specialists.js (одна копия на весь сайт) */
@@ -1492,7 +1492,7 @@ const LINK = {
     return ['Telegram', 'https://t.me/' + x.replace(/^@/, '').replace(/\s/g, ''), inv ? 'группа в Telegram' : /^\+/.test(x) ? x : '@' + x.replace(/^@/, '')]; },
   instagram: v => ['Instagram', 'https://www.instagram.com/' + v.replace(/^@/, '') + '/', '@' + v.replace(/^@/, '')],
   email:     v => ['E-mail', 'mailto:' + v, v],
-  site:      v => [/(^|\/\/|\.)(youtube\.com|youtu\.be)\//i.test(v) ? 'YouTube' : 'Сайт', /^https?:/.test(v) ? v : 'https://' + v, v.replace(/^https?:\/\//, '')],   // ссылка на YouTube подписана «YouTube», а не «Сайт» (Ирина 13.10.2026)
+  site:      v => [/(^|\/\/|\.)(youtube\.com|youtu\.be)\//i.test(v) ? 'YouTube' : /(^|\/\/|\.)(dikidi\.net|treatwell\.|booksy\.com|fresha\.com|calendly\.com|beautybooking\.)/i.test(v) ? 'Онлайн-запись' : 'Сайт', /^https?:/.test(v) ? v : 'https://' + v, v.replace(/^https?:\/\//, '')],   // ссылка на YouTube подписана «YouTube», а не «Сайт» (Ирина 13.10.2026); сервис записи (DIKIDI, Treatwell, Booksy…) — «Онлайн-запись» (ревизия 13.10.2026)
   site2:     v => LINK.site(v),   // второй сайт (07.10.2026)
   bot:       v => ['Telegram-бот', 'https://t.me/' + v.replace(/^@/, ''), '@' + v.replace(/^@/, '')],   // свой Telegram-бот специалиста (07.10.2026)
   facebook:  v => { const u = /^https?:/.test(v) ? v : 'https://www.facebook.com/' + (/^\d+$/.test(v) ? 'profile.php?id=' + v : v.replace(/^@/, ''));   // профиль или страница в Facebook: имя, номер профиля или ссылка (12.10.2026)
