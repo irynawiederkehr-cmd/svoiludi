@@ -819,6 +819,43 @@ window.AFISHA = [
     organizers: [{ org: 'ugcc-zurich', name: 'Українська греко-католицька місія в Цюриху' }], link: 'https://www.forum-magazin.ch/ukrainische-mission/updates/20260203-gottliche-liturgie-und-gebet-fur-den-frieden-in-de/',
     about: 'В последнюю субботу месяца миссия едет в монастырь Айнзидельн. В 14:00 — Божественная литургия, обычно в капелле Святой Магдалины, потом молитва о мире в Украине и во всём мире и возможность исповедаться. После — кофе или небольшой перекус в комнате для паломников.'
   },
+  /* UA-DO (13.10.2026, черновик для афиши): расписание по fricktal.info (05.2024) — Зиссельн пн, ср, пт 16–19, Штайн по воскресеньям; уточняем у Володимира */
+  {
+    sections: ['kursy'], type: 'kids', kind: 'regular',
+    id: 'ua-do-sisseln-pn', keyHash: '09de5945781020e152796fdec5fcf631c0debd478625a7f2e7305f29d38834cf', status: 'на подтверждении', title: 'Тренировки UA-DO в Зиссельне',
+    date: '2026-10-19', time: '16:00', timeEnd: '19:00', repeat: { freq: 'weekly' },
+    canton: 'Aargau', address: 'Schulhausstrasse 11, 4334 Sisseln', online: false,
+    langs: ['украинский'], level: 'дети, подростки и взрослые', price: '', commercial: true,
+    organizers: [{ org: 'ua-do-kloten', name: 'Спортивна школа UA-DO' }], link: 'https://ua-do.ch/',
+    about: 'Регулярные тренировки спортивной школы UA-DO по украинскому единоборству UA-DO, «Козацькому двобою», дзюдо и джиу-джитсу. Расписание по данным 2024 года — уточняем у школы.'
+  },
+  {
+    sections: ['kursy'], type: 'kids', kind: 'regular',
+    id: 'ua-do-sisseln-sr', keyHash: '09de5945781020e152796fdec5fcf631c0debd478625a7f2e7305f29d38834cf', status: 'на подтверждении', title: 'Тренировки UA-DO в Зиссельне',
+    date: '2026-10-14', time: '16:00', timeEnd: '19:00', repeat: { freq: 'weekly' },
+    canton: 'Aargau', address: 'Schulhausstrasse 11, 4334 Sisseln', online: false,
+    langs: ['украинский'], level: 'дети, подростки и взрослые', price: '', commercial: true,
+    organizers: [{ org: 'ua-do-kloten', name: 'Спортивна школа UA-DO' }], link: 'https://ua-do.ch/',
+    about: 'Регулярные тренировки спортивной школы UA-DO по украинскому единоборству UA-DO, «Козацькому двобою», дзюдо и джиу-джитсу. Расписание по данным 2024 года — уточняем у школы.'
+  },
+  {
+    sections: ['kursy'], type: 'kids', kind: 'regular',
+    id: 'ua-do-sisseln-pt', keyHash: '09de5945781020e152796fdec5fcf631c0debd478625a7f2e7305f29d38834cf', status: 'на подтверждении', title: 'Тренировки UA-DO в Зиссельне',
+    date: '2026-10-16', time: '16:00', timeEnd: '19:00', repeat: { freq: 'weekly' },
+    canton: 'Aargau', address: 'Schulhausstrasse 11, 4334 Sisseln', online: false,
+    langs: ['украинский'], level: 'дети, подростки и взрослые', price: '', commercial: true,
+    organizers: [{ org: 'ua-do-kloten', name: 'Спортивна школа UA-DO' }], link: 'https://ua-do.ch/',
+    about: 'Регулярные тренировки спортивной школы UA-DO по украинскому единоборству UA-DO, «Козацькому двобою», дзюдо и джиу-джитсу. Расписание по данным 2024 года — уточняем у школы.'
+  },
+  {
+    sections: ['kursy'], type: 'kids', kind: 'regular',
+    id: 'ua-do-stein-vs', keyHash: '09de5945781020e152796fdec5fcf631c0debd478625a7f2e7305f29d38834cf', status: 'на подтверждении', title: 'Тренировки UA-DO в Штайне',
+    date: '2026-10-18', time: '', repeat: { freq: 'weekly' },
+    canton: 'Aargau', address: '4332 Stein AG', online: false,
+    langs: ['украинский'], level: 'дети, подростки и взрослые', price: '', commercial: true,
+    organizers: [{ org: 'ua-do-kloten', name: 'Спортивна школа UA-DO' }], link: 'https://ua-do.ch/',
+    about: 'Регулярные тренировки спортивной школы UA-DO по украинскому единоборству UA-DO, «Козацькому двобою», дзюдо и джиу-джитсу. Расписание по данным 2024 года — уточняем у школы.'
+  },
   /* Спортивная школа UA-DO (12.10.2026): будущих событий на их сайте нет (новости — до 12.2023), поэтому для примера — их последний открытый чемпионат, с пометкой «прошло»
      (правило Ирины 12.10.2026, «lidy-svoiludi.md», раздел 6); на сайт для всех прошедшие не выходят никогда */
   {

@@ -819,6 +819,43 @@ window.AFISHA = [
     organizers: [{ org: 'ugcc-zurich', name: 'Українська греко-католицька місія в Цюриху' }], link: 'https://www.forum-magazin.ch/ukrainische-mission/updates/20260203-gottliche-liturgie-und-gebet-fur-den-frieden-in-de/',
     about: 'В останню суботу місяця місія вирушає до монастиря Айнзідельн. О 14:00 — Божественна літургія, зазвичай у каплиці Святої Магдалини, потім молитва за мир в Україні й у всьому світі та можливість сповідатися. Після — кава або невеликий перекус у кімнаті для паломників.'
   },
+  /* UA-DO (13.10.2026, черновик для афиши): расписание по fricktal.info (05.2024) — Зиссельн пн, ср, пт 16–19, Штайн по воскресеньям; уточняем у Володимира */
+  {
+    sections: ['kursy'], type: 'kids', kind: 'regular',
+    id: 'ua-do-sisseln-pn', keyHash: '09de5945781020e152796fdec5fcf631c0debd478625a7f2e7305f29d38834cf', status: 'на підтвердженні', title: 'Тренування UA-DO у Зіссельні',
+    date: '2026-10-19', time: '16:00', timeEnd: '19:00', repeat: { freq: 'weekly' },
+    canton: 'Aargau', address: 'Schulhausstrasse 11, 4334 Sisseln', online: false,
+    langs: ['українська'], level: 'діти, підлітки й дорослі', price: '', commercial: true,
+    organizers: [{ org: 'ua-do-kloten', name: 'Спортивна школа UA-DO' }], link: 'https://ua-do.ch/',
+    about: 'Регулярні тренування спортивної школи UA-DO з українського єдиноборства UA-DO, «Козацького двобою», дзюдо та джиу-джитсу. Розклад за даними 2024 року — уточнюємо в школи.'
+  },
+  {
+    sections: ['kursy'], type: 'kids', kind: 'regular',
+    id: 'ua-do-sisseln-sr', keyHash: '09de5945781020e152796fdec5fcf631c0debd478625a7f2e7305f29d38834cf', status: 'на підтвердженні', title: 'Тренування UA-DO у Зіссельні',
+    date: '2026-10-14', time: '16:00', timeEnd: '19:00', repeat: { freq: 'weekly' },
+    canton: 'Aargau', address: 'Schulhausstrasse 11, 4334 Sisseln', online: false,
+    langs: ['українська'], level: 'діти, підлітки й дорослі', price: '', commercial: true,
+    organizers: [{ org: 'ua-do-kloten', name: 'Спортивна школа UA-DO' }], link: 'https://ua-do.ch/',
+    about: 'Регулярні тренування спортивної школи UA-DO з українського єдиноборства UA-DO, «Козацького двобою», дзюдо та джиу-джитсу. Розклад за даними 2024 року — уточнюємо в школи.'
+  },
+  {
+    sections: ['kursy'], type: 'kids', kind: 'regular',
+    id: 'ua-do-sisseln-pt', keyHash: '09de5945781020e152796fdec5fcf631c0debd478625a7f2e7305f29d38834cf', status: 'на підтвердженні', title: 'Тренування UA-DO у Зіссельні',
+    date: '2026-10-16', time: '16:00', timeEnd: '19:00', repeat: { freq: 'weekly' },
+    canton: 'Aargau', address: 'Schulhausstrasse 11, 4334 Sisseln', online: false,
+    langs: ['українська'], level: 'діти, підлітки й дорослі', price: '', commercial: true,
+    organizers: [{ org: 'ua-do-kloten', name: 'Спортивна школа UA-DO' }], link: 'https://ua-do.ch/',
+    about: 'Регулярні тренування спортивної школи UA-DO з українського єдиноборства UA-DO, «Козацького двобою», дзюдо та джиу-джитсу. Розклад за даними 2024 року — уточнюємо в школи.'
+  },
+  {
+    sections: ['kursy'], type: 'kids', kind: 'regular',
+    id: 'ua-do-stein-vs', keyHash: '09de5945781020e152796fdec5fcf631c0debd478625a7f2e7305f29d38834cf', status: 'на підтвердженні', title: 'Тренування UA-DO в Штайні',
+    date: '2026-10-18', time: '', repeat: { freq: 'weekly' },
+    canton: 'Aargau', address: '4332 Stein AG', online: false,
+    langs: ['українська'], level: 'діти, підлітки й дорослі', price: '', commercial: true,
+    organizers: [{ org: 'ua-do-kloten', name: 'Спортивна школа UA-DO' }], link: 'https://ua-do.ch/',
+    about: 'Регулярні тренування спортивної школи UA-DO з українського єдиноборства UA-DO, «Козацького двобою», дзюдо та джиу-джитсу. Розклад за даними 2024 року — уточнюємо в школи.'
+  },
   /* Спортивная школа UA-DO (12.10.2026): будущих событий на их сайте нет (новости — до 12.2023), поэтому для примера — их последний открытый чемпионат, с пометкой «прошло»
      (правило Ирины 12.10.2026, «lidy-svoiludi.md», раздел 6); на сайт для всех прошедшие не выходят никогда */
   {

@@ -664,7 +664,7 @@ window.IMG_BASE = '../img/';
 /* карточки специалистов — в /data/specialists.js (одна копия на весь сайт) */
 const SPECIALISTS = window.SPECIALISTS || [];
 </script>
-<script src="/data/afisha.js?v=ff6bfcc2"></script>
+<script src="/data/afisha.js?v=77bf99f6"></script><script src="/assets/afisha-org.js"></script>
 <script src="/assets/chernoviki.js"></script>
 <script src="/assets/kalendar.js"></script>
 <script>/* одна база афиши: здесь — записи раздела «Курсы»; у записи в обеих вкладках направление курса в ktype */
@@ -911,6 +911,11 @@ const isOff = e => e.status === 'снято';
 const offUrl = e => `https://svoiludi.ch/kursy/#off=${encodeURIComponent(e.id)}.${encodeURIComponent(OKKEY[e.id] || '')}`;
 /* контакт для вопросов: свой у записи (другой телефон или e-mail из заявки) или телефон и e-mail из карточки организатора */
 /* карточка организатора из справочника: специалист (id) или организация ({ org }) */
+/* «Все занятия организатора» (13.10.2026, assets/afisha-org.js) */
+const afOrgRef = e => { const o = (e.organizers || []).find(x => typeof x === 'string' ? SPECIALISTS.some(s => s.id === x) : x && x.org && (window.ORGANIZATIONS || []).some(z => z.id === x.org)); return o ? (typeof o === 'string' ? { id: o, kind: 'spec' } : { id: o.org, kind: 'org' }) : null; };
+const afOrgOpt = (r, e) => ({ kind: r.kind, drafts: ADMIN || !!OKKEY[e.id], sample: !!e.sample });
+const AF_BTN = '<button class="btn ghost" type="button" data-afisha-org>Все занятия организатора — афиша PDF и PNG</button>';
+const afOrg = e => { const r = afOrgRef(e); if (!r || !window.SVL_AFISHA_ORG) return null; const L = SVL_AFISHA_ORG.list(r.id, afOrgOpt(r, e)); return L.regular.length + L.upcoming.length ? r : null; };
 const cardOf = o => typeof o === 'string' ? SPECIALISTS.find(s => s.id === o) : (o && o.org ? (window.ORGANIZATIONS || []).find(x => x.id === o.org) : null);
 /* e-mail карточки — один для всех подтверждений (решение Ирины 10.10.2026): ссылка уходит только на него, письмо-подтверждение принимаем только с него */
 const cardMail = e => { const s = (e.organizers || []).map(cardOf).find(Boolean); return (s && s.contacts && s.contacts.email) || ''; };
@@ -1025,7 +1030,7 @@ function openKurs(id, pv){
         <div class="d-block"><h4>Где</h4>${isRemote(e) ? '<span>Онлайн, ссылку присылает организатор</span>' : `${e.venue ? `<b>${esc(e.venue)}</b><br>` : ''}<a class="addr" href="${maps(e.address)}" ${ext}>${esc(e.address)}</a><span class="note">кантон ${esc(ktRu(e.canton))}${e.online ? ' · можно и онлайн' : ''}</span>`}</div>
         <div class="d-block"><h4>Цена</h4><span class="kprice">${esc(priceText(e))}</span>${e.priceNote ? `<span class="note">${esc(e.priceNote)}</span>` : ''}${e.trial ? `<span class="note">${esc(e.trial === 'free' ? 'Пробное занятие бесплатно' : e.trial === 'disc' ? 'Пробное занятие со скидкой' : '')}</span>` : ''}${(e.disc || []).length ? `<span class="note">${esc(e.disc.join(' · '))}</span>` : ''}${(e.payhow || []).length ? `<span class="note">Оплата: ${esc(e.payhow.join(', ').toLowerCase())}</span>` : ''}${e.seats ? `<span class="note">Мест в группе: ${esc(e.seats)}</span>` : ''}<span class="note">Цену указал организатор. Точные условия и оплата — у него.</span></div>
         ${lastDay(e) < today || isOff(e) ? '' : '<div class="d-block" data-wr-slot></div>'}
-        <div class="acts">${lastDay(e) < today || isOff(e) ? '' : '<button class="btn ghost" type="button" data-flyer>Сохранить карточку курса (PNG)</button>'}<button class="btn ghost" type="button" data-share>Поделиться</button></div>${lastDay(e) < today || isOff(e) ? '' : '<p class="note flyer-note">Картинка для телефона: расписание, место, цена и контакты организатора. Сохрани её или отправь подруге.</p>'}
+        <div class="acts">${(lastDay(e) < today || isOff(e) ? '' : '<button class="btn ghost" type="button" data-flyer>Сохранить карточку курса (PNG)</button>') + (afOrg(e) ? AF_BTN : '')}<button class="btn ghost" type="button" data-share>Поделиться</button></div>${lastDay(e) < today || isOff(e) ? '' : '<p class="note flyer-note">Картинка для телефона: расписание, место, цена и контакты организатора. Сохрани её или отправь подруге.</p>'}
         ${(e.date < today && e.kind === 'once') || isOff(e) ? '' : `<div class="d-block"><h4>Добавить в календарь</h4><div class="calmenu"><a href="${esc(gcalLink(e))}" ${ext}>Google Календарь</a><button type="button" data-ics>Apple, Outlook, телефон (.ics)</button></div></div>`}
         <p class="kdisc sm"><b>Курс проводит организатор.</b> Запись, оплата и договор — только с ним. «Свои люди» не продают курсы и не отвечают за содержание и проведение занятий.${e.type === 'body' ? ' Занятия не заменяют лечение. Если есть проблемы со здоровьем, сначала посоветуйся с врачом.' : ''}</p>
         <p class="note">${contactList(e).length ? `Вопросы организатору: ${contactHtml(e)}. ` : ''}Нашли ошибку? <a href="mailto:${MAIL}?subject=${encodeURIComponent('Ошибка в курсе: ' + e.title)}&body=${encodeURIComponent('Ссылка: ' + evUrl(e) + '\n\nЧто исправить:\n')}">Сообщить</a></p>
@@ -1039,6 +1044,7 @@ function openKurs(id, pv){
 document.getElementById('qmCard').addEventListener('click', async ev => {
   if (!OPEN) return;
   if (ev.target.closest('[data-ics]')) saveIcs(OPEN);
+  if (ev.target.closest('[data-afisha-org]') && OPEN){ const r = afOrgRef(OPEN); if (r) SVL_AFISHA_ORG.open(r.id, afOrgOpt(r, OPEN)); return; }
   const fl = ev.target.closest('[data-flyer]'); if (fl){ if (window.SVL_FLYER) SVL_FLYER.open(kursFlyerOf(OPEN), fl); return; }
   if (ev.target.closest('[data-share]')){ const url = evUrl(OPEN), title = OPEN.title;
     if (navigator.share){ try { await navigator.share({ title, text: title + ' · Свои люди в Швейцарии', url }); return; } catch (err){ if (err && err.name === 'AbortError') return; } }

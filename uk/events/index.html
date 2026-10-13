@@ -651,7 +651,7 @@ window.IMG_BASE = '../img/';
 const SPECIALISTS = window.SPECIALISTS || [];
 
 </script>
-<script src="/data/afisha.uk.js?v=58bdbcb4"></script>
+<script src="/data/afisha.uk.js?v=986ae4f3"></script><script src="/assets/afisha-org.js"></script>
 <script src="/assets/chernoviki.uk.js"></script>
 <script src="/assets/kalendar.uk.js"></script>
 <script>/* одна база афиши: здесь — записи раздела «События» */
@@ -1132,6 +1132,11 @@ function okBox(e){
     <div class="pv-fix" hidden><textarea data-pv-text rows="4" maxlength="1500" placeholder="Що виправити: наприклад, час, адресу чи ціну"></textarea><div class="pv-acts"><button class="btn" type="button" data-pv-send="fix">Надіслати виправлення</button></div></div>
     <span class="pv-small" data-pv-msg data-online="Одне натискання — і готово. Копія прийде на ваш e-mail.">${window.SVL_PV_ONLINE ? 'Одне натискання — і готово. Копія прийде на ваш e-mail.' : (cm ? `Після натискання відкриється лист із вашої пошти. Надішліть його з адреси ${esc(cm)}: підтвердження ми приймаємо тільки з e-mail вашої картки.` : 'Після натискання відкриється лист із вашої пошти. Надішліть його, це і є підтвердження.')}</span></div>`;
 }
+/* «Все события организатора» (13.10.2026, assets/afisha-org.js): одна афиша на организацию или специалиста — PDF, PNG и всё в календарь */
+const afOrgRef = e => { const o = (e.organizers || []).find(x => typeof x === 'string' ? SPECIALISTS.some(s => s.id === x) : x && x.org && (window.ORGANIZATIONS || []).some(z => z.id === x.org)); return o ? (typeof o === 'string' ? { id: o, kind: 'spec' } : { id: o.org, kind: 'org' }) : null; };
+const afOrgOpt = (r, e) => ({ kind: r.kind, drafts: ADMIN || !!OKKEY[e.id], sample: !!e.sample });
+const AF_BTN = '<button class="btn ghost" type="button" data-afisha-org>Усі події організатора — афіша PDF і PNG</button>';
+const afOrg = e => { const r = afOrgRef(e); if (!r || !window.SVL_AFISHA_ORG) return null; const L = SVL_AFISHA_ORG.list(r.id, afOrgOpt(r, e)); return L.regular.length + L.upcoming.length ? r : null; };
 function openEvent(id, d, pv){
   const e = EVENTS.find(x => x.id === id); if (!e) return;
   d = d || nextDate(e) || e.date; OPEN = { e, d };
@@ -1156,7 +1161,7 @@ function openEvent(id, d, pv){
         <div class="d-block"><h4>Де</h4>${isRemote(e) ? '<span>Онлайн, посилання надсилає організатор</span>' : `${e.venue ? `<b>${esc(e.venue)}</b><br>` : ''}<a class="addr" href="${maps(e.address)}" ${ext}>${esc(e.address)}</a><span class="note">кантон ${esc(ktRu(e.canton))}${e.online ? ' · можна й онлайн' : ''}</span>`}</div>
         ${PR ? '' : `<div class="d-block"><h4>Ціна</h4><span>${esc(priceText(e))}</span>${(e.disc || []).length ? `<small class="note">${esc(e.disc.join(' · '))}</small>` : ''}${(e.payhow || []).length ? `<small class="note">Оплата: ${esc(e.payhow.join(', ').toLowerCase())}</small>` : ''}${e.seats ? `<small class="note">Місць: ${esc(e.seats)}</small>` : ''}</div>`}
         ${past ? '' : '<div class="d-block" data-wr-slot></div>'}
-        <div class="acts">${PR && !past ? '<button class="btn flyer-btn" type="button" data-flyer>♥ Завантажити флаєр</button>' : ''}${!PR && !past ? '<button class="btn ghost" type="button" data-flyer>Зберегти картку події (PNG)</button>' : ''}${PR ? `<button class="btn ghost heart-btn" type="button" data-heart="${esc(e.id)}" aria-pressed="${favGet().includes(e.id)}"><span class="hb-on">♥ У серденьках</span><span class="hb-off">♡ До серденьок</span></button>` : ''}<button class="btn ghost" type="button" data-share>Поділитися</button></div>${PR && !past ? '<p class="note flyer-note">Флаєр для телефона: акція, умови, строк і контакти автора. Покажи його під час запису чи візиту.</p>' : ''}${!PR && !past ? '<p class="note flyer-note">Картинка для телефона: дата, місце, ціна й контакти організатора. Збережи її або надішли подрузі.</p>' : ''}
+        <div class="acts">${PR && !past ? '<button class="btn flyer-btn" type="button" data-flyer>♥ Завантажити флаєр</button>' : ''}${(!PR && !past ? '<button class="btn ghost" type="button" data-flyer>Зберегти картку події (PNG)</button>' : '') + (!PR && afOrg(e) ? AF_BTN : '')}${PR ? `<button class="btn ghost heart-btn" type="button" data-heart="${esc(e.id)}" aria-pressed="${favGet().includes(e.id)}"><span class="hb-on">♥ У серденьках</span><span class="hb-off">♡ До серденьок</span></button>` : ''}<button class="btn ghost" type="button" data-share>Поділитися</button></div>${PR && !past ? '<p class="note flyer-note">Флаєр для телефона: акція, умови, строк і контакти автора. Покажи його під час запису чи візиту.</p>' : ''}${!PR && !past ? '<p class="note flyer-note">Картинка для телефона: дата, місце, ціна й контакти організатора. Збережи її або надішли подрузі.</p>' : ''}
         ${PR ? `<p class="note">Акцію оголошує й виконує сам фахівець. «Свої люди» не продають послугу, не беруть участі в угоді й не відповідають за умови акції: домовляйся напряму з фахівцем. Розміщення акції — реклама.</p>` : `<div class="d-block"><h4>Додати в календар</h4><div class="calmenu"><a href="${esc(gcalLink(e, d))}" ${ext}>Google Календар</a><button type="button" data-ics>Apple, Outlook, телефон (.ics)</button></div></div>`}
         <p class="note">${contactList(e).length ? `Запитання організатору: ${contactHtml(e)}. ` : ''}Знайшли помилку? <a href="mailto:${MAIL}?subject=${encodeURIComponent('Помилка в події: ' + e.title)}&body=${encodeURIComponent('Посилання: ' + evUrl(e) + '\n\nЩо виправити:\n')}">Повідомити</a></p>
       </div>
@@ -1169,6 +1174,7 @@ function openEvent(id, d, pv){
 document.getElementById('qmCard').addEventListener('click', async ev => {
   if (!OPEN) return;
   if (ev.target.closest('[data-ics]')) saveIcs(OPEN.e, OPEN.d);
+  if (ev.target.closest('[data-afisha-org]') && OPEN){ const r = afOrgRef(OPEN.e || OPEN); if (r) SVL_AFISHA_ORG.open(r.id, afOrgOpt(r, OPEN.e || OPEN)); return; }
   const fl = ev.target.closest('[data-flyer]'); if (fl){ if (window.SVL_FLYER) SVL_FLYER.open(isPromo(OPEN.e) ? flyerOf(OPEN.e) : evFlyerOf(OPEN.e, OPEN.d), fl); return; }
   const hb = ev.target.closest('[data-heart]'); if (hb){ toggleFav(hb.dataset.heart, hb); return; }
   if (ev.target.closest('[data-share]')){ const url = evUrl(OPEN.e), title = OPEN.e.title + ' — ' + fmtDay(OPEN.d);
