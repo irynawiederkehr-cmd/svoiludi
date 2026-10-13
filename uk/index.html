@@ -1818,7 +1818,7 @@ const PDF_CSS = `.pp{background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%
 .pp-card{display:grid;grid-template-columns:190px 1fr;gap:26px}.pp-card img,.pp-card .noph{width:190px;height:238px;object-fit:cover;border-radius:16px;background:#EADFCF}
 .pp-cat{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase}.pp-name{font:400 34px/1.05 Forum,Georgia,serif;margin:4px 0}.pp-role{font:400 18px/1.3 Forum,Georgia,serif;color:#6E4F3C}
 .pp-sec h4{margin:0 0 5px;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:#7A6E62}.pp-sec p,.pp-sec ul{margin:0}.pp-sec ul{padding-left:18px}
-.pp-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px 26px}.pp-ab.l{columns:2;column-gap:30px}.pp-sec ul.pp-li{list-style:none;padding:0}.pp-li.c2{columns:2;column-gap:30px}.pp-li li{position:relative;padding-left:16px;margin:0 0 3px;break-inside:avoid}.pp-li .mk{position:absolute;left:2px;top:7px;width:6px;height:6px;background:#8A9A72;transform:rotate(45deg)}.pp-ct{display:grid;grid-template-columns:86px 1fr;gap:4px 10px}.pp-ct span{color:#7A6E62;font-size:12.5px}
+.pp-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px 26px}.pp-ab.l{columns:2;column-gap:30px}.pp-sec ul.pp-li{list-style:none;padding:0}.pp-li.c2{columns:2;column-gap:30px}.pp-li li{position:relative;padding-left:22px;margin:0 0 3px;break-inside:avoid}.pp-li .mk{position:absolute;left:0;top:2px;width:16px;height:16px}.pp-ct{display:grid;grid-template-columns:86px 1fr;gap:4px 10px}.pp-ct span{color:#7A6E62;font-size:12.5px}
 .pp-f{margin-top:auto;border-top:1px solid #E5D9C9;padding-top:10px;font-size:11px;color:#7A6E62}
 .pp-qr{display:flex;gap:16px;align-items:center}.pp-qr img{width:104px;height:104px;flex:none;image-rendering:pixelated}.pp-qr small{display:block;color:#7A6E62;font-size:11.5px;margin-top:3px}
 .pp-row b{font:400 19px/1.1 Forum,Georgia,serif}.pp-row .r{color:#6E4F3C;font-family:Forum,Georgia,serif;font-size:15px}.pp-row .m{font-size:12.5px;color:#4A413A}.pp-row .c{font-size:12.5px;display:flex;flex-wrap:wrap;gap:2px 14px}`;
@@ -1842,7 +1842,8 @@ function qrImg(text){   // QR-код (библиотека qrcode-generator); н
   try { qrcode.stringToBytes = qrcode.stringToBytesFuncs['UTF-8']; const q = qrcode(0, 'L'); q.addData(text, 'Byte'); q.make(); return `<img src="${q.createDataURL(4, 0)}" alt="">`; } catch (_) { return ''; }
 }
 /* PDF карточки (13.10.2026, Ирина: «текст как-то некрасиво размещён»): длинный профиль — на всю ширину, в две колонки; услуги — списком со своими маркерами, в две колонки, а не строкой через «·» */
-const pdfList = a => `<ul class="pp-li${a.length > 3 ? ' c2' : ''}">${a.map(x => `<li><span class="mk"></span>${esc(String(x).charAt(0).toUpperCase() + String(x).slice(1))}</li>`).join('')}</ul>`;
+const SPROUT = '<svg class="mk" viewBox="0 0 20 20" fill="none" stroke="#66704F" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M10 18V9"/><path d="M10 12C6 12 3.5 9.5 3.5 6 7 6 10 8.2 10 12Z" fill="#66704F" fill-opacity=".3"/><path d="M10 9.5C10 5.5 12.5 3 16.5 3 16.5 6.8 14 9.5 10 9.5Z" fill="#66704F" fill-opacity=".3"/></svg>';   // маркер «Росток», как в списках сайта (html2canvas не рисует mask, поэтому значок встроен)
+const pdfList = a => `<ul class="pp-li${a.length > 3 ? ' c2' : ''}">${a.map(x => `<li>${SPROUT}${esc(String(x).charAt(0).toUpperCase() + String(x).slice(1))}</li>`).join('')}</ul>`;
 function cardPage(s){
   const k = CATS[s.cat] || CATS.status;
   return `${pdfHead(s.sample ? 'ЗРАЗОК — фахівець вигаданий' : '')}<div class="pp-card">${pdfImg(s)}<div style="display:flex;flex-direction:column;gap:14px">
@@ -1892,7 +1893,7 @@ const VZ_CSS = `.vz{position:fixed;left:-10000px;top:0;width:540px;min-height:96
 .vz-name{font:400 34px/1.02 Forum,Georgia,serif;margin:6px 0 6px}.vz-role{font:400 18px/1.22 Forum,Georgia,serif;color:#6E4F3C}.vz-firm{font-size:12.5px;color:#7A6E62;margin-top:5px}
 .vz-s h4{margin:0 0 6px;font-size:10px;font-weight:800;letter-spacing:.15em;text-transform:uppercase;color:#7A6E62}.vz-s>div{font-size:14px}
 .vz-ct{display:grid;grid-template-columns:70px 1fr;gap:4px 8px}.vz-ct b{font-size:13px !important}.vz-ct span{color:#7A6E62;font-size:12.5px;padding-top:1px}.vz-ct b{font-weight:600;font-size:14px;word-break:break-word}
-.vz-sv{column-count:2;column-gap:22px;font-size:12.5px;line-height:1.3;color:#2F2924}.vz-sv span{display:block;position:relative;padding:0 0 0 14px;margin:0 0 5px;break-inside:avoid}.vz-sv span::before{content:"";position:absolute;left:1px;top:.42em;width:5px;height:5px;background:#B9A58E;transform:rotate(45deg)}
+.vz-sv{column-count:2;column-gap:22px;font-size:12.5px;line-height:1.3;color:#2F2924}.vz-sv span{display:block;position:relative;padding:0 0 0 18px;margin:0 0 5px;break-inside:avoid}.vz-sv span .mk{position:absolute;left:0;top:.05em;width:14px;height:14px}
 .vz-ln{height:1.5px;background:#E5D9C9;flex:none}.vz-c.pr{gap:8px}.vz-c.pr .vz-pt{font-size:27px;margin-top:2px}
 .vz-pt{font:400 30px/1 Forum,Georgia,serif;color:#2F2924;display:flex;align-items:baseline;gap:10px}.vz-pt small{font:600 12px/1 Manrope,sans-serif;color:#7A6E62}
 .vz-pl{display:flex;flex-direction:column}.vz-pl div{display:flex;align-items:baseline;gap:10px;padding:5px 0;border-bottom:1px dashed #E5D9C9}.vz-pl div:last-child{border-bottom:0}
@@ -1939,7 +1940,7 @@ function vizitkaNode(s, kind){
       <div class="vz-pn">Ціни вказав сам фахівець${s.pricesDate ? ` ${fmtDate(s.pricesDate)}` : ''}. Точну вартість уточнюйте під час запису.</div>
       <div class="vz-qr sm">${qrImg(short)}<div><b>Записатися</b><small>${ct.length ? ct.slice(0, 2).map(x => x.replace(/<span>.*?<\/span><b>(.*?)<\/b>/, '$1')).join('<br>') + '<br>' : ''}Наведи камеру — контакт збережеться.</small></div></div>`
     : `${where.length ? `<div class="vz-s"><h4>Де приймає</h4>${where.map(w => `<div>${w}</div>`).join('')}</div>` : ''}
-      ${sv.length ? `<div class="vz-s"><h4>Послуги</h4><div class="vz-sv">${sv.map(x => `<span>${esc(String(x).charAt(0).toUpperCase() + String(x).slice(1))}</span>`).join('')}</div></div>` : ''}
+      ${sv.length ? `<div class="vz-s"><h4>Послуги</h4><div class="vz-sv">${sv.map(x => `<span>${SPROUT}${esc(String(x).charAt(0).toUpperCase() + String(x).slice(1))}</span>`).join('')}</div></div>` : ''}
       ${fr.length ? `<div class="vz-s"><h4>Внески</h4>${feeList}</div>` : 'fees' in s && s.feeFree ? `<div class="vz-s"><h4>Внески</h4><div>${feeFreeTxt(s)}</div></div>` : ''}
       <div class="vz-cq"><div class="vz-s"><h4>Контакти</h4><div class="vz-ct">${ct.join('')}</div></div>
         <div class="vz-q">${qrImg(short)}<b>Збережи контакт</b><small>Наведи камеру — контакт збережеться</small></div></div>`;
