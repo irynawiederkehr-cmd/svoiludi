@@ -1147,7 +1147,7 @@ const LINK = {
   telegram:  v => ['Telegram', 'https://t.me/' + v.replace(/^@/, '').replace(/\s/g, ''), /^\+/.test(v) ? v : '@' + v.replace(/^@/, '')],   // ник или номер телефона (+380 …), 07.10.2026
   instagram: v => ['Instagram', 'https://www.instagram.com/' + v.replace(/^@/, '') + '/', '@' + v.replace(/^@/, '')],
   email:     v => ['E-mail', 'mailto:' + v, v],
-  site:      v => ['Сайт', /^https?:/.test(v) ? v : 'https://' + v, v.replace(/^https?:\/\//, '')],
+  site:      v => [/(^|\/\/|\.)(youtube\.com|youtu\.be)\//i.test(v) ? 'YouTube' : 'Сайт', /^https?:/.test(v) ? v : 'https://' + v, v.replace(/^https?:\/\//, '')],   // ссылка на YouTube подписана «YouTube», а не «Сайт» (Ирина 13.10.2026)
   site2:     v => LINK.site(v),   // второй сайт (07.10.2026)
   bot:       v => ['Telegram-бот', 'https://t.me/' + v.replace(/^@/, ''), '@' + v.replace(/^@/, '')],   // свой Telegram-бот специалиста (07.10.2026)
   facebook:  v => { const u = /^https?:/.test(v) ? v : 'https://www.facebook.com/' + (/^\d+$/.test(v) ? 'profile.php?id=' + v : v.replace(/^@/, ''));   // профиль или страница в Facebook: имя, номер профиля или ссылка (12.10.2026)
