@@ -386,13 +386,14 @@ const perSheet = d => { const [w, h] = dims(d); return Math.floor(190 / w) * Mat
 /* ---------- текст: замер и перенос (Manrope или Forum), с разрядкой ---------- */
 const mc = document.createElement('canvas').getContext('2d');
 function tw(s, fn, size, cs){ s = String(s); mc.font = fn === 'f' ? `400 ${size}px Forum` : `${fn === 'b' ? 700 : 400} ${size}px Manrope`; return mc.measureText(s).width * PT + (cs ? cs * Math.max(0, [...s].length - 1) : 0); }
-/* перенос по пробелам и после дефиса (длинная двойная фамилия: «Konstantinopolskaya-Wiederkehr») */
+/* перенос по пробелам; после дефиса — только если слово целиком не помещается (длинная двойная фамилия: «Konstantinopolskaya-Wiederkehr»), «по-украински» не рвём */
 function wrap(s, fn, size, w, max, cs){
-  const toks = []; String(s || '').split(/\s+/).filter(Boolean).forEach(wd => wd.replace(/-(?=[^-])/g, '-\u0001').split('\u0001').forEach((t, i) => toks.push([t, i === 0])));
+  const toks = []; String(s || '').split(/\s+/).filter(Boolean).forEach(wd => (tw(wd, fn, size, cs) <= w ? [wd] : wd.replace(/-(?=[^-])/g, '-\u0001').split('\u0001')).forEach((t, i) => toks.push([t, i === 0])));
   const out = []; let line = '';
   toks.forEach(([wd, sp]) => { const t = line ? line + (sp ? ' ' : '') + wd : wd; if (tw(t, fn, size, cs) <= w || !line) line = t; else { out.push(line); line = wd; } });
   if (line) out.push(line);
-  if (max && out.length > max) { const rest = out.slice(max - 1).join(' '); out.length = max - 1; let r = rest; while (r.length > 1 && tw(r + '…', fn, size, cs) > w) r = r.slice(0, -1); out.push(r.trim() + '…'); }
+  for (let i = 0; i < out.length; i++) out[i] = out[i].replace(/\s+[·|]$/, '').replace(/^[·|]\s+/, '');   // разделитель «·» не висит в конце или начале строки
+  if (max && out.length > max) { const rest = out.slice(max - 1).reduce((a, l) => a ? a + (/-$/.test(a) ? '' : ' ') + l : l, ''); out.length = max - 1; let r = rest; while (r.length > 1 && tw(r + '…', fn, size, cs) > w) r = r.slice(0, -1); out.push(r.trim() + '…'); }
   return out;
 }
 /* текст на визитку; разрядку движок рисует только от левого края, поэтому центр и правый край считаем сами */
@@ -405,11 +406,16 @@ function text(P, s, o){
   let sz = base, lines = [str];
   while (true) { lines = tw(str, fn, sz, cs(sz)) <= o.w ? [str] : wrap(str, fn, sz, o.w, 0, cs(sz)); if ((lines.length <= maxL && lines.every(l => tw(l, fn, sz, cs(sz)) <= o.w)) || sz <= min) break; sz -= 0.25; }
   if (lines.length > maxL) lines = wrap(str, fn, sz, o.w, maxL, cs(sz));
+  /* ровные строки: при переносе строки примерно одной длины (как text-wrap: balance), без одинокого слова на второй строке */
+  else if (lines.length > 1 && o.balance !== false) {
+    const n = lines.length, fitW = ww => { const L2 = wrap(str, fn, sz, ww, 0, cs(sz)); return L2.length <= n && L2.every(l => tw(l, fn, sz, cs(sz)) <= ww + 0.01) ? L2 : null; };
+    let lo = 0, hi = o.w; for (let it = 0; it < 12; it++) { const mid = (lo + hi) / 2, r = fitW(mid); if (r) { hi = mid; lines = r; } else lo = mid; }
+  }
   if (o.draw && lines.some(l => tw(l, fn, sz, cs(sz)) > o.w + 0.2)) P.wOver = true;   // слово не помещается даже мелко — покажем предупреждение
   const ax = o.align === 'center' ? o.x + o.w / 2 : o.align === 'right' ? o.x + o.w : o.x;
   let y = o.y + sz * PT * 0.76;
   lines.forEach((l, i) => { if (o.draw) T(P, l, ax, y, sz, fn, o.color || INK, o.align, cs(sz)); if (i < lines.length - 1) y += sz * PT * (o.lh || 1.18); });
-  o.out = {size: sz, w: Math.max(...lines.map(l => tw(l, fn, sz, cs(sz)))), base: y};
+  o.out = {size: sz, w: Math.max(...lines.map(l => tw(l, fn, sz, cs(sz)))), lastW: tw(lines[lines.length - 1], fn, sz, cs(sz)), base: y};
   return y + sz * PT * 0.3;
 }
 
@@ -418,7 +424,7 @@ const clean = s => String(s == null ? '' : s).trim();
 const handle = s => clean(s).replace(/^https?:\/\/(www\.)?(instagram\.com|t\.me|telegram\.me)\//i, '').replace(/^@+/, '').replace(/[/?#].*$/, '');
 const site = s => clean(s).replace(/^https?:\/\//i, '').replace(/\/+$/, '');
 const hfn = d => d.font === 'sans' ? 'b' : 'f';
-function nameOf(d, P){ const n = clean(d.f.name); return n ? {s: n, c: INK} : {s: P.preview ? 'Имя Фамилия' : '', c: GHOST}; }
+function nameOf(d, P){ const n = clean(d.f.name); return n ? {s: n, c: INK} : {s: P.preview && !d.noGhost ? 'Имя Фамилия' : '', c: GHOST}; }
 /* контакты строками: {k — вид, v — строки}; без подписей Telegram пишем ссылкой, чтобы его не спутать с Instagram */
 function rows(d, st){
   const f = d.f, out = [];
@@ -486,7 +492,7 @@ function cblock(P, d, o){
   const L = LBL[d.lbl] || LBL.de;
   const geo = sz => {
     const em = sz * PT, lh = em * 1.45, ic = st === 'circle' ? Math.max(3.3, em * 1.75) : st === 'icon' ? em * 1.12 : 0;
-    const lead = ic ? ic + (st === 'circle' ? 1.7 : 1.4) : st === 'text' ? Math.max(0, ...R.map(r => r.k !== 'addr' ? tw(L[r.k], 'r', sz * 0.88) : 0)) + 2.2 : 0;
+    const lead = ic ? ic + (st === 'circle' ? 1.7 : 1.4) : st === 'text' ? Math.max(0, ...R.map(r => tw(L[r.k], 'r', sz * 0.88))) + 2.2 : 0;
     const vw = Math.max(...R.map(r => Math.max(...r.v.map(s => tw(s, 'r', sz)))));
     const rh = R.map(r => st === 'circle' ? Math.max(ic + 1.3, r.v.length * lh + 0.5) : r.v.length * lh + (st === 'icon' ? 0.3 : 0));
     return {em, lh, ic, lead, w: lead + vw, rh, h: rh.reduce((a, b) => a + b, 0)};
@@ -495,13 +501,13 @@ function cblock(P, d, o){
   while (sz > min && (G.w > o.w || (o.maxH && G.h > o.maxH))) { sz -= 0.2; G = geo(sz); }
   if (!o.draw) return {h: G.h, w: G.w};
   if (G.w > o.w + 0.2) P.wOver = true;
-  const bx = Math.max(o.x, o.align === 'right' ? o.x + o.w - G.w : o.align === 'group' ? o.x + (o.w - G.w) / 2 : o.x);
+  const bx = Math.max(o.x, o.align === 'right' || o.align === 'rblock' ? o.x + o.w - G.w : o.align === 'group' ? o.x + (o.w - G.w) / 2 : o.x);
   let y = o.y;
   R.forEach((r, i) => {
     const rh = G.rh[i], top = y + (rh - r.v.length * G.lh) / 2, cy = st === 'circle' ? y + rh / 2 : top + G.lh / 2;
     if (st === 'circle') { const rr = G.ic / 2, s2 = G.ic * 0.6; P.circle(bx + rr, cy, rr, INK); icon(P, r.k, bx + rr - s2 / 2, cy - s2 / 2, s2, '#FFFFFF'); }
     else if (st === 'icon') icon(P, r.k, bx, cy - G.ic / 2, G.ic, INK);
-    else if (st === 'text' && r.k !== 'addr') T(P, L[r.k], bx, top + G.lh / 2 + 0.36 * G.em, sz * 0.88, 'r', SOFT);
+    else if (st === 'text') T(P, L[r.k], bx, top + G.lh / 2 + 0.36 * G.em, sz * 0.88, 'r', SOFT);
     r.v.forEach((s, j) => {
       const by = top + j * G.lh + G.lh / 2 + 0.36 * G.em;
       if (st === 'none' && o.align === 'right') T(P, s, o.x + o.w, by, sz, 'r', o.col || INK, 'right');
@@ -532,12 +538,13 @@ function brand(P, d, o){
 /* блок человека: имя, чем занимаешься, услуги, языки, тонкая линия, контакты. o {x, y, w, k, draw, align: 'left' | 'group', round, rule, roleBold} → высота */
 function person(P, d, o){
   const fn = hfn(d), nm = nameOf(d, P), al = o.align === 'group' ? 'center' : 'left', base = {x: o.x, w: o.w, k: o.k, draw: o.draw, align: al};
-  let y = o.y;
-  if (nm.s) y = text(P, nm.s, Object.assign({}, base, {y, size: fn === 'f' ? 15 : 11.5, fn, color: nm.c, upper: fn === 'b', csEm: fn === 'b' ? 0.02 : 0, lines: 2, lh: 1.05}));
-  if (clean(d.f.role)) y = text(P, d.f.role, Object.assign({}, base, {y: y + 1.2 * o.k, size: 6.8, fn: o.roleBold ? 'b' : 'r', color: o.roleBold ? INK : MID, lines: 2, lh: 1.25, min: 5.2}));
+  let y = o.y, wMax = 0;
+  const put2 = (s2, oo) => { y = text(P, s2, oo); if (oo.out) wMax = Math.max(wMax, oo.out.w); };
+  if (nm.s) put2(nm.s, Object.assign({}, base, {y, size: fn === 'f' ? 15 : 11.5, fn, color: nm.c, upper: fn === 'b', csEm: fn === 'b' ? 0.02 : 0, lines: 3, lh: 1.05}));
+  if (clean(d.f.role)) put2(d.f.role, Object.assign({}, base, {y: y + 1.2 * o.k, size: 6.8, fn: o.roleBold ? 'b' : 'r', color: o.roleBold ? INK : MID, lines: 2, lh: 1.25, min: 5.2}));
   if (clean(d.f.serv)) y = text(P, d.f.serv, Object.assign({}, base, {y: y + 0.9 * o.k, size: 5.8, color: SOFT, lines: 2, lh: 1.25, min: 4.8}));
   if (langLine(d)) y = text(P, langLine(d), Object.assign({}, base, {y: y + 0.9 * o.k, size: 5.5, color: SOFT, lines: 1, min: 4.6}));
-  if (o.rule) { y += 2 * o.k; if (o.draw) { if (al === 'center') P.line(o.x + o.w / 2 - 5, y, o.x + o.w / 2 + 5, y, RULE, 0.25); else P.line(o.x, y, o.x + Math.min(o.w, 34), y, RULE, 0.25); } y += 2.4 * o.k; } else y += 2.8 * o.k;
+  if (o.rule) { y += 2 * o.k; if (o.draw) { if (al === 'center') P.line(o.x + o.w / 2 - 5, y, o.x + o.w / 2 + 5, y, RULE, 0.25); else P.line(o.x, y, o.x + Math.min(o.w, Math.max(wMax, 12)), y, RULE, 0.25); } y += 2.4 * o.k; } else y += 2.8 * o.k;   // линия длиной с имя
   const c = {x: o.x, y, w: o.w, k: o.k, style: cst(d, o.round), align: o.align === 'group' ? 'group' : 'left'};
   const ch = cblock(P, d, Object.assign({}, c, {draw: false})).h; if (ch && o.draw) cblock(P, d, Object.assign({}, c, {draw: true}));
   return (ch ? y + ch : y - 2.6 * o.k) - o.y;
@@ -552,7 +559,7 @@ function tLine(P, d, X, Y, W, H, k, dr){
     const Lw = W * 0.58, xd = X + Lw + 3.4, Rx = xd + 3.4, Rw = X + W - Rx, q = url ? Math.min(Rw * 0.66, H * 0.44) : 0;
     const pb = {x: X, w: Lw, k, rule: true}, bb = {cx: Rx + Rw / 2, w: Rw, h: H * (q ? 0.34 : 0.6), k, tag: true};
     const ph = person(P, d, Object.assign({y: 0, draw: false}, pb)), bh = brand(P, d, Object.assign({y: 0, draw: false}, bb)), rh = bh + (q ? (bh ? 3.2 : 0) + q : 0);
-    if (dr) { person(P, d, Object.assign({y: vcenter(Y, H, ph), draw: true}, pb)); const ry = vcenter(Y, H, rh); brand(P, d, Object.assign({y: ry, draw: true}, bb)); if (q) qrDraw(P, url, Rx + (Rw - q) / 2, ry + rh - q, q); if (rh) P.line(xd, Y + H * 0.08, xd, Y + H * 0.92, INK, 0.3); }
+    if (dr) { person(P, d, Object.assign({y: vcenter(Y, H, ph), draw: true}, pb)); const ry = vcenter(Y, H, rh); brand(P, d, Object.assign({y: ry, draw: true}, bb)); if (q) qrDraw(P, url, Rx + (Rw - q) / 2, ry + rh - q, q); if (rh) P.line(xd, Y + H * 0.12, xd, Y + H * 0.88, INK, 0.25); }
     return ph <= H && rh <= H;
   }
   const q = url ? Math.min(W * 0.4, H * 0.22) : 0, bb = {cx: X + W / 2, w: W * 0.7, h: H * 0.2, k, tag: true}, pb = {x: X, w: W, k, rule: false, align: 'group'};
@@ -594,35 +601,41 @@ function tQr(P, d, X, Y, W, H, k, dr){
   const url = frontQr(d, P), lg = LG(), wide = isWide(W, H);
   const q = url ? (wide ? Math.min(H * 0.4, 17) : Math.min(W * 0.36, 15)) : 0, lb = !q && lg ? logoBox(lg, wide ? 22 : W * 0.36, wide ? H * 0.3 : 11) : null;
   const cw = q || (lb ? lb.w : 0), ch = q || (lb ? lb.h : 0), nw = wide ? W - (cw ? cw + 4 : 0) : W;
-  const go = draw => {
-    let y = wide ? Y : Y + (ch ? ch + 3.5 * k : 0);
-    if (draw) { if (q) qrDraw(P, url, wide ? X + W - q : X, Y, q); else if (lb) P.img(logoData(d, lg), wide ? X + W - lb.w : X, Y, lb.w, lb.h); }
+  const go = (draw, off) => {
+    const Y0 = Y + off;
+    let y = wide ? Y0 : Y0 + (ch ? ch + 3.5 * k : 0);
+    if (draw) { if (q) qrDraw(P, url, wide ? X + W - q : X, Y0, q); else if (lb) P.img(logoData(d, lg), wide ? X + W - lb.w : X, Y0, lb.w, lb.h); }
     y = splitName(P, d, {x: X, y, w: nw, k, draw});
     const role = clean(d.f.role);
-    if (role) { const o = {x: X, y: y + 1.4 * k, w: nw - 8, k, draw, size: 5.6, color: MID, upper: true, csEm: 0.12, lines: 2, lh: 1.3}; y = text(P, role, o); if (draw && o.out.w + 3 < nw - 2) { const ly = o.out.base - o.out.size * PT * 0.3; P.line(X + o.out.w + 2.4, ly, X + nw - 1, ly, MID, 0.25); } }
+    if (role) { const o = {x: X, y: y + 1.4 * k, w: nw - 8, k, draw, size: 5.6, color: MID, upper: true, csEm: 0.12, lines: 2, lh: 1.3}; y = text(P, role, o); if (draw && o.out.lastW + 7 < nw) { const ly = o.out.base - o.out.size * PT * 0.3; P.line(X + o.out.lastW + 2.4, ly, X + nw - 1, ly, MID, 0.25); } }   // линия — после последней строки
+    if (clean(d.f.note)) y = text(P, d.f.note, {x: X, y: y + 1.2 * k, w: nw, k, draw, size: 5.8, color: MID, lines: 2, lh: 1.3, min: 4.8});
     if (langLine(d)) y = text(P, langLine(d), {x: X, y: y + 1 * k, w: nw, k, draw, size: 5.4, color: SOFT, min: 4.6});
-    y = (wide ? Math.max(y, Y + ch) : y) + 2.8 * k;
-    if (draw) P.line(X, y, X + W, y, INK, 0.3);
+    const st = cst(d);
+    if (!rows(d, st).length) return Math.max(y, wide ? Y0 + ch : y) - Y0;   // без контактов (обратная сторона) — без линии
+    y = (wide ? Math.max(y, Y0 + ch) : y) + 2.8 * k;
+    if (draw) P.line(X, y, X + W, y, INK, 0.25);
     y += 2.8 * k;
-    const st = cst(d), right = ['web', 'ig', 'tg'], hasR = wide && rows(d, st).some(r => right.includes(r.k)), hasL = rows(d, st).some(r => !right.includes(r.k));
+    const right = ['web', 'ig', 'tg'], hasL = rows(d, st).some(r => !right.includes(r.k));
+    const hasR = wide && rows(d, st).some(r => right.includes(r.k)) && cblock(P, d, {x: 0, y: 0, w: W * 0.42, k, style: st, align: 'right', only: right, draw: false}).w <= W * 0.42 + 0.2;   // длинный сайт справа не помещается — все контакты слева
     const cl = {x: X, y, w: hasR ? W * 0.56 : W, k, style: st, skip: hasR ? right : null}, cr = {x: X + W * 0.58, w: W * 0.42, k, style: st, align: 'right', only: right};
     const hl = hasL || !hasR ? cblock(P, d, Object.assign({}, cl, {draw: false})).h : 0, hr = hasR ? cblock(P, d, Object.assign({}, cr, {y: 0, draw: false})).h : 0;
-    if (draw) { if (hl) cblock(P, d, Object.assign({}, cl, {y: wide ? y : Math.max(y, Y + H - hl), draw: true})); if (hr) cblock(P, d, Object.assign({}, cr, {y: Y + H - hr, draw: true})); }   // на вертикальной визитке контакты внизу
-    return Math.max(y + hl, hr ? y + hr : 0) - Y;
+    if (draw) { if (hl) cblock(P, d, Object.assign({}, cl, {y, draw: true})); if (hr) cblock(P, d, Object.assign({}, cr, {y: Y + H - hr, draw: true})); }
+    return Math.max(y + hl, hr ? y + hr : 0) - Y0;
   };
-  const h = go(false); if (dr) go(true);
+  /* вертикальная визитка: весь блок по центру высоты, без пустоты посередине */
+  const h = go(false, 0); if (dr) go(true, wide && rows(d, cst(d)).length ? 0 : Math.max(0, (H - h) / 2));
   return h <= H + 0.2;
 }
 /* 4. Крупный слоган: большая фраза сверху, внизу слева ты, справа «записаться» и контакты */
 function tSlogan(P, d, X, Y, W, H, k, dr){
   const f = d.f, fn = hfn(d), lg = LG(), url = frontQr(d, P), wide = isWide(W, H);
-  const sl = clean(f.tag) || clean(f.firm) || clean(f.role) || (P.preview ? 'Твоя главная фраза' : '');
+  const sl = clean(f.tag) || clean(f.firm) || clean(f.role) || (P.preview && !d.noGhost ? 'Твоя главная фраза' : '');
   const L = d.lbl === 'none' ? null : (LBL[d.lbl] || LBL.de);
   const cq = url ? (wide ? Math.min(H * 0.34, 14) : Math.min(W * 0.34, 13)) : 0, lb = !cq && lg ? logoBox(lg, wide ? 20 : W * 0.4, wide ? H * 0.26 : 10) : null;
   const corner = cq ? {w: cq, h: cq} : lb;
   const nm = nameOf(d, P), so = {size: fn === 'f' ? 17 : 13, fn, lines: 3, lh: 1.1, min: 9};
   const leftItems = (x, y, w, draw) => {
-    if (nm.s) y = text(P, nm.s, {x, y, w, k, draw, size: 7.4, fn: 'b', color: nm.c, min: 5.6});
+    if (nm.s) y = text(P, nm.s, {x, y, w, k, draw, size: 7.4, fn: 'b', color: nm.c, min: 5.6, lines: 2, lh: 1.1});
     if (clean(f.role)) y = text(P, f.role, {x, y: y + 0.8 * k, w, k, draw, size: 6.2, color: MID, lines: 2, lh: 1.25, min: 5});
     if (clean(f.serv)) y = text(P, f.serv, {x, y: y + 0.6 * k, w, k, draw, size: 5.8, color: MID, lines: 2, lh: 1.25, min: 4.8});
     if (langLine(d)) y = text(P, langLine(d), {x, y: y + 0.6 * k, w, k, draw, size: 5.4, color: SOFT, min: 4.6});
@@ -637,13 +650,16 @@ function tSlogan(P, d, X, Y, W, H, k, dr){
     return y + 1 * k + h;
   };
   if (wide) {
-    const sw = W - (corner ? corner.w + 4 : 0) - W * 0.06, lw = W * 0.54, rw = W * 0.44;
+    const sw = W - (corner ? corner.w + 4 : 0) - W * 0.06;
     const sh = text(P, sl, Object.assign({x: X, y: Y, w: sw, k, draw: false}, so)) - Y;
-    const lh = leftItems(X, 0, lw, false), rh = rightItems(X + W - rw, 0, rw, false, 'right'), bh = Math.max(lh, rh);
+    const cw = cblock(P, d, {x: 0, y: 0, w: W * 0.44, k, style: cst(d), align: 'right', only: ['tel', 'mail', 'web', 'ig', 'tg'], size: 6, draw: false}).w, side = cw <= W * 0.44 + 0.2;
+    const lw = side ? W * 0.54 : W, rw = side ? W * 0.44 : W, gap = side ? 0 : 3 * k;
+    const lh = leftItems(X, 0, lw, false), rh = rightItems(side ? X + W - rw : X, 0, rw, false, side ? 'right' : 'left'), bh = side ? Math.max(lh, rh) : lh + gap + rh;
     if (dr) {
       if (sl) text(P, sl, Object.assign({x: X, y: Y, w: sw, k, draw: true, color: clean(f.tag) || clean(f.firm) || clean(f.role) ? INK : GHOST}, so));
       if (cq) qrDraw(P, url, X + W - cq, Y, cq); else if (lb) P.img(logoData(d, lg), X + W - lb.w, Y, lb.w, lb.h);
-      leftItems(X, Y + H - lh, lw, true); rightItems(X + W - rw, Y + H - rh, rw, true, 'right');
+      if (side) { leftItems(X, Y + H - lh, lw, true); rightItems(X + W - rw, Y + H - rh, rw, true, 'right'); }
+      else { leftItems(X, Y + H - bh, lw, true); rightItems(X, Y + H - rh, rw, true, 'left'); }   // длинный e-mail или сайт: контакты под именем, во всю ширину
     }
     return Math.max(sh, corner ? corner.h : 0) + 3 * k + bh <= H;
   }
@@ -673,13 +689,13 @@ function tCenter(P, d, X, Y, W, H, k, dr){
     const rs = R(); if (!rs.length) return 0;
     if (st === 'none') return cblock(P, d, {x: cx - w / 2, y, w, k, draw, style: 'none', align: 'center', size: 6}).h;
     let sz = 6 * k, em, lh, lw, vw;
-    const geo = () => { em = sz * PT; lh = em * 1.45; lw = Math.max(...rs.map(r => st === 'icon' ? em * 1.12 : r.k === 'addr' ? 0 : tw(L[r.k], 'r', sz * 0.9))); vw = Math.max(...rs.map(r => Math.max(...r.v.map(s => tw(s, 'r', sz))))); };
+    const geo = () => { em = sz * PT; lh = em * 1.45; lw = Math.max(...rs.map(r => st === 'icon' ? em * 1.12 : tw(L[r.k], 'r', sz * 0.9))); vw = Math.max(...rs.map(r => Math.max(...r.v.map(s => tw(s, 'r', sz))))); };
     geo(); while (sz > 4.9 && lw + vw + 5 > w) { sz -= 0.2; geo(); }
     const h = rs.reduce((a, r) => a + r.v.length * lh, 0); if (!draw) return h;
     const xr = cx - (lw + vw + 5) / 2 + lw + 2.5; let yy = y;
     P.line(xr, y + lh * 0.12, xr, y + h - lh * 0.12, INK, 0.25);
     rs.forEach(r => { const c = yy + lh / 2;
-      if (st === 'icon') icon(P, r.k, xr - 2.3 - em * 1.12, c - em * 0.56, em * 1.12, INK); else if (r.k !== 'addr') T(P, L[r.k], xr - 2.3, c + 0.36 * em, sz * 0.9, 'r', SOFT, 'right');
+      if (st === 'icon') icon(P, r.k, xr - 2.3 - em * 1.12, c - em * 0.56, em * 1.12, INK); else T(P, L[r.k], xr - 2.3, c + 0.36 * em, sz * 0.9, 'r', SOFT, 'right');
       r.v.forEach((s, j) => T(P, s, xr + 2.3, yy + j * lh + lh / 2 + 0.36 * em, sz, 'r', INK)); yy += r.v.length * lh; });
     return h;
   };
@@ -701,14 +717,19 @@ function tOnlyQr(P, d, X, Y, W, H, k, dr){
   const f = d.f, url = frontQr(d, P), lg = LG(), wide = isWide(W, H), nm = nameOf(d, P);
   const main = clean(f.firm) || nm.s, lines = [[main, 'b', clean(f.firm) ? INK : nm.c]];
   if (clean(f.firm) && clean(f.name)) lines.push([clean(f.name), 'r', MID]);
+  if (clean(f.role) && d.noGhost) lines.push([clean(f.role), 'r', MID, 2]);
+  if (clean(f.note)) lines.push([clean(f.note), 'r', MID, 2]);
   [site(f.web), clean(f.email), clean(f.phone)].filter(Boolean).forEach(s => lines.push([s, 'r', MID]));
   const ls = lines.filter(l => l[0]).slice(0, 4);
   /* строки заглавными вразрядку; длинный e-mail или сайт, который так не помещается, — обычными буквами */
-  const block = (x, y, w, draw, align) => { ls.forEach((l, i) => { const sz = (i ? 5.4 : 6), up = tw(l[0].toUpperCase(), l[1], 4.4 * Math.min(1, k + 0.15), 0.14 * 4.4 * PT) <= w; y = text(P, l[0], {x, y: y + (i ? 1.1 * k : 0), w, k, draw, size: sz, fn: l[1], color: l[2], align, upper: up, csEm: up ? 0.14 : 0, min: 4.4}); }); return y; };
+  let bw = 0;
+  const block = (x, y, w, draw, align) => { bw = 0; ls.forEach((l, i) => { const sz = (i ? 5.4 : 6), up = tw(l[0].toUpperCase(), l[1], 4.4 * Math.min(1, k + 0.15), 0.14 * 4.4 * PT) <= w; const o = {x, y: y + (i ? 1.1 * k : 0), w, k, draw, size: sz, fn: l[1], color: l[2], align, upper: up, csEm: up ? 0.14 : 0, min: 4.4, lines: l[3] || 1, lh: 1.3}; y = text(P, l[0], o); if (o.out) bw = Math.max(bw, o.out.w); }); return y; };
   const slot = (x, y, s, draw) => { if (!draw) return; if (url) qrDraw(P, url, x, y, s); else if (lg) { const lb = logoBox(lg, s, s); P.img(logoData(d, lg), x + (s - lb.w) / 2, y + (s - lb.h) / 2, lb.w, lb.h); } else { const ini = initials(d); if (ini) { P.circle(x + s / 2, y + s / 2, s / 2, null, INK, 0.25); T(P, ini, x + s / 2, y + s / 2 + s * 0.17, s * 1.2, 'f', INK, 'center'); } } };
   if (wide) {
-    const s = Math.min(H * 0.66, W * 0.3) * Math.min(1, k + 0.1), tx = X + s + 6, tw2 = W - s - 6, bh = block(tx, 0, tw2, false, 'left');
-    if (dr) { slot(X + 1, vcenter(Y, H, s), s, true); block(tx, vcenter(Y, H, bh), tw2, true, 'left'); }
+    const s = Math.min(H * 0.66, W * 0.3) * Math.min(1, k + 0.1), tw2 = W - s - 6, bh = block(X + s + 6, 0, tw2, false, 'left');
+    /* QR-код и строки — одной группой по центру карточки */
+    const sh = Math.max(0, (W - (s + 6 + bw)) / 2 - 1), tx = X + s + 6 + sh;
+    if (dr) { slot(X + sh, vcenter(Y, H, s), s, true); block(tx, vcenter(Y, H, bh), tw2, true, 'left'); }
     return bh <= H;
   }
   const s = Math.min(W * 0.6, H * 0.46) * Math.min(1, k + 0.1), bh = block(X, 0, W, false, 'center'), h = s + 5 * k + bh;
@@ -723,11 +744,12 @@ function tMini(P, d, X, Y, W, H, k, dr){
     if (nm.s) y = text(P, nm.s, {x, y, w, k, draw, size: fn === 'f' ? 13 : 9.6, fn, color: nm.c, upper: true, csEm: 0.24, lines: 2, lh: 1.35, min: 6.4});
     y += 2.2 * k; if (draw) P.line(x, y, x + 2.6, y, INK, 0.35); y += 2.4 * k;
     if (clean(f.role)) y = text(P, f.role, {x, y, w, k, draw, size: 5.8, color: MID, lines: 2, lh: 1.3, min: 4.8});
+    if (clean(f.note)) y = text(P, f.note, {x, y: y + 0.8 * k, w, k, draw, size: 5.4, color: MID, lines: 2, lh: 1.3, min: 4.6});
     if (langLine(d)) y = text(P, langLine(d), {x, y: y + 0.6 * k, w, k, draw, size: 5.2, color: SOFT, min: 4.4});
     return y;
   };
   const st = cst(d), cx = wide ? X + W * 0.46 : X, cw = wide ? W * 0.54 : W - (q ? q + 3 : 0);
-  const c = {x: cx, w: cw, k, style: st, size: 5.6, col: MID};
+  const c = {x: cx, w: cw, k, style: st, size: 5.6, col: MID, align: wide ? 'rblock' : 'left'};
   const ch = cblock(P, d, Object.assign({}, c, {y: 0, draw: false})).h;
   const ty = wide ? Y + H * 0.14 : Y + (lb ? lb.h + 4 * k : 0), tw2 = wide ? W - (lb ? lb.w + 4 : 0) : W;
   const tb = top(X + (wide ? W * 0.02 : 0), ty, tw2, false);
@@ -745,7 +767,22 @@ function front(P, d, X, Y){
   for (let i = 0; i <= 5; i++) { const k = 1 - i * 0.05; if (f(P, d, x0, y0, W, H, k, false) || i === 5) { P.wOver = false; f(P, d, x0, y0, W, H, k, true); return !f(P, d, x0, y0, W, H, k, false) || P.wOver; } }
   return false;
 }
+/* обратная сторона в том же виде, что и лицевая: имя и чем занимаешься по-русски или по-украински, строка, QR-код, логотип (13.10.2026, «как сделать красивее») */
+function backData(d){
+  const b = d.back, L = d.layout, line = clean(b.line), role = clean(b.role), url = d.qr.where === 'back' ? qrLink(d) : '';
+  const f = {name: clean(b.name), role, firm: '', tag: '', serv: '', note: '', phone: '', wa: false, email: '', web: '', ig: '', tg: '', street: '', city: '', langs: []};
+  if (L === 'slogan' || L === 'center') { f.tag = role; f.role = line; }   // крупно или под именем — чем занимаешься, ниже — строка
+  else if (L === 'line' || L === 'dots') f.serv = line;
+  else f.note = line;
+  return Object.assign({}, d, {f, noGhost: true, card: null, qr: url ? {where: 'front', to: 'url', url} : {where: 'none', to: 'url', url: ''}});
+}
 function back(P, d, X, Y){
+  if (!clean(d.back.name) && !clean(d.back.role)) return backSimple(P, d, X, Y);
+  const keep = LGX; if (!d.back.logo) LGX = null;
+  try { return front(P, backData(d), X, Y); } finally { LGX = keep; }
+}
+/* оборот без имени и рода занятий: логотип, строка и QR-код по центру */
+function backSimple(P, d, X, Y){
   const [CW, CH] = dims(d), lg = d.back.logo ? LG() : null, x0 = X + SAFE, y0 = Y + SAFE, W = CW - 2 * SAFE, H = CH - 2 * SAFE, url = d.qr.where === 'back' ? qrLink(d) : '';
   const fn = hfn(d), cx = x0 + W / 2;
   const items = (k, dr, top) => {
