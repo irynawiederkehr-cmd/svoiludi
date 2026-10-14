@@ -895,7 +895,7 @@ function ico(name, line = '#2E5A88', fill, size = 24){
 const AVATAR_SVG = '<svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="46" fill="#FFFCF8" stroke="#6E4F3C" stroke-width="3"/><g transform="rotate(22.5 50 50)"><path d="M50 50 C42 40 43 24 50 15 C57 24 58 40 50 50Z" fill="#E3E6D6" stroke="#66704F" stroke-width="2"/></g><g transform="rotate(67.5 50 50)"><path d="M50 50 C42 40 43 24 50 15 C57 24 58 40 50 50Z" fill="#E3E6D6" stroke="#66704F" stroke-width="2"/></g><g transform="rotate(112.5 50 50)"><path d="M50 50 C42 40 43 24 50 15 C57 24 58 40 50 50Z" fill="#E3E6D6" stroke="#66704F" stroke-width="2"/></g><g transform="rotate(157.5 50 50)"><path d="M50 50 C42 40 43 24 50 15 C57 24 58 40 50 50Z" fill="#E3E6D6" stroke="#66704F" stroke-width="2"/></g><g transform="rotate(202.5 50 50)"><path d="M50 50 C42 40 43 24 50 15 C57 24 58 40 50 50Z" fill="#E3E6D6" stroke="#66704F" stroke-width="2"/></g><g transform="rotate(247.5 50 50)"><path d="M50 50 C42 40 43 24 50 15 C57 24 58 40 50 50Z" fill="#E3E6D6" stroke="#66704F" stroke-width="2"/></g><g transform="rotate(292.5 50 50)"><path d="M50 50 C42 40 43 24 50 15 C57 24 58 40 50 50Z" fill="#E3E6D6" stroke="#66704F" stroke-width="2"/></g><g transform="rotate(337.5 50 50)"><path d="M50 50 C42 40 43 24 50 15 C57 24 58 40 50 50Z" fill="#E3E6D6" stroke="#66704F" stroke-width="2"/></g><g transform="rotate(0.0 50 50)"><path d="M50 50 C45 43 45 32 50 26 C55 32 55 43 50 50Z" fill="#EADFCF" stroke="#6E4F3C" stroke-width="2"/></g><g transform="rotate(45.0 50 50)"><path d="M50 50 C45 43 45 32 50 26 C55 32 55 43 50 50Z" fill="#EADFCF" stroke="#6E4F3C" stroke-width="2"/></g><g transform="rotate(90.0 50 50)"><path d="M50 50 C45 43 45 32 50 26 C55 32 55 43 50 50Z" fill="#EADFCF" stroke="#6E4F3C" stroke-width="2"/></g><g transform="rotate(135.0 50 50)"><path d="M50 50 C45 43 45 32 50 26 C55 32 55 43 50 50Z" fill="#EADFCF" stroke="#6E4F3C" stroke-width="2"/></g><g transform="rotate(180.0 50 50)"><path d="M50 50 C45 43 45 32 50 26 C55 32 55 43 50 50Z" fill="#EADFCF" stroke="#6E4F3C" stroke-width="2"/></g><g transform="rotate(225.0 50 50)"><path d="M50 50 C45 43 45 32 50 26 C55 32 55 43 50 50Z" fill="#EADFCF" stroke="#6E4F3C" stroke-width="2"/></g><g transform="rotate(270.0 50 50)"><path d="M50 50 C45 43 45 32 50 26 C55 32 55 43 50 50Z" fill="#EADFCF" stroke="#6E4F3C" stroke-width="2"/></g><g transform="rotate(315.0 50 50)"><path d="M50 50 C45 43 45 32 50 26 C55 32 55 43 50 50Z" fill="#EADFCF" stroke="#6E4F3C" stroke-width="2"/></g><circle cx="50" cy="50" r="7" fill="#B98324"/></svg>';
 
 </script>
-<script src="/data/specialists.js?v=1e7801a2"></script>
+<script src="/data/specialists.js?v=0da9cb52"></script>
 <script src="/data/vacancies.js?v=3527d207"></script>
 <script src="/data/organizations.js?v=c7132a43"></script>
 <script>
@@ -904,7 +904,11 @@ window.IMG_BASE = 'img/';
 const SPECIALISTS = window.SPECIALISTS || [];
 
 </script>
-<script src="/data/afisha.js?v=5f74d4f4"></script><script src="/assets/afisha-org.js"></script>
+<<<<<<< ours
+<script src="/data/afisha.js?v=61c183b1"></script><script src="/assets/afisha-org.js"></script>
+=======
+<script src="/data/afisha.js?v=61c183b1"></script><script src="/assets/afisha-org.js"></script>
+>>>>>>> theirs
 <script>const AFISHA = window.AFISHA || [];</script>
 <script>
 const ADMIN = (() => {   // режим Ирины: svoiludi.ch/?ira=1 включает на этом устройстве, ?ira=0 выключает
@@ -1606,6 +1610,22 @@ const inviteMsg = s => { const v = s.invite || {}, n = String(s.name || '').trim
     'Как справочник выглядит целиком:\n👥 Специалисты: https://svoiludi.ch/' + (s.org ? '\n🏢 Организации: https://svoiludi.ch/organizacii/' : '') + '\n📅 События и курсы: https://svoiludi.ch/events/\n🎁 Акции: https://svoiludi.ch/akcii/\n💼 Вакансии и партнёрство: https://svoiludi.ch/vakansii/',
     'А если сейчас не время — ничего страшного, делать ничего не нужно. Спасибо вам за ваше дело!\nС теплом, Ирина 🤍'].filter(Boolean).join('\n\n'); };
 const inviteHref = s => `https://wa.me/${waDigits(waTo(s))}?text=${encodeURIComponent(inviteMsg(s))}`;
+/* короткое приглашение для Instagram Direct (14.10.2026, лиды из Instagram SG-0033…SG-0039): в Direct одно сообщение — не больше 1000 знаков,
+   поэтому тот же смысл короче — пробная карточка из того, что человек сам разместил, ни к чему не обязывает; почему мы сделали её сами;
+   от человека — только ответить (правило Ирины 12.10.2026, 17:05). Фраза про кантон (invite.local) — только если помещается. */
+const IG_MAX = 1000;
+const inviteMsgIg = s => { const v = s.invite || {}, n = String(s.name || '').trim().split(/\s+/)[0], D = draftLines(s);
+  const build = (local, full) => [v.hi || `Здравствуйте${n ? ', ' + n : ''}! Меня зовут Ирина Вознесенская. ${v.seen ? `Увидела ${v.seen} и решила вам написать 🙂` : 'Решила вам написать 🙂'}`,
+    'Я запустила 🌿 «Свои люди» — справочник специалистов, которые работают в Швейцарии на русском и украинском. Чтобы свои находили своих в одном месте, а не в разных чатах.',
+    `Я подготовила для вас пробную карточку ${v.by || 'по вашему профилю'}. Она собрана только из того, что вы сами разместили в интернете, и ни к чему не обязывает. Пока её видите только вы:\n👉 ${previewUrl(s)}`,
+    priceAskOn(s) ? '💶 Цены я тоже внесла — посмотрите, пожалуйста, всё ли актуально.' : '',
+    !D.length ? '' : full ? `Для примера добавила и ваши записи:\n${D.join('\n')}` : `Для примера добавила и ваши записи (${D.length}) — каждая открывается прямо из карточки.`,
+    'Мы ценим ваше время, поэтому для первых участников делаем карточки сами. От вас — только ответ: что поправить, а если всё верно, так и напишите. И скоро вы станете частью нашего сообщества.',
+    `${local && v.local ? v.local + ' ' : ''}До конца 2027 года всё бесплатно. Весь справочник: https://svoiludi.ch/`,
+    'Если сейчас не время — ничего делать не нужно. С теплом, Ирина 🤍'].filter(Boolean).join('\n\n');
+  /* не помещается — сначала без фразы про кантон, потом записи без ссылок (их ссылки «Открыть, как на сайте» стоят в самой пробной карточке) */
+  return [[true, true], [false, true], [true, false], [false, false]].map(([l, f]) => build(l, f)).find(t => t.length <= IG_MAX) || build(false, false); };
+const inviteText = s => dmVia(s) === 'instagram' ? inviteMsgIg(s) : inviteMsg(s);
 /* invite.via = 'facebook' (12.10.2026, Анастасия SG-0025): приглашаем через Facebook, даже если в карточке есть телефон (например, стационарный телефон салона) */
 const fbFirst = s => (s.invite || {}).via === 'facebook' || (!waTo(s) && !!(s.contacts || {}).facebook);
 const inviteOn = s => ADMIN && !!s.invite && !!OKKEY[s.id] && !!waTo(s) && !fbFirst(s);
@@ -1621,7 +1641,7 @@ const dmName = v => v === 'telegram' ? 'Telegram' : 'Instagram';
 const dmHref = s => { const v = dmVia(s), n = String((s.contacts || {})[v] || '').replace(/^@/, '').replace(/\s/g, ''); return v === 'telegram' ? LINK.telegram(n)[1] : 'https://ig.me/m/' + n; };
 const inviteDmOn = s => ADMIN && !!s.invite && !!OKKEY[s.id] && !!dmVia(s);
 document.addEventListener('click', async e => { const b = e.target.closest('[data-copyinvite]'); if (!b) return;
-  const s = SPECIALISTS.find(x => x.id === b.dataset.copyinvite); if (!s) return; const t = inviteMsg(s);
+  const s = SPECIALISTS.find(x => x.id === b.dataset.copyinvite); if (!s) return; const t = inviteText(s);
   try { await navigator.clipboard.writeText(t); (b.querySelector('b') || b).textContent = 'Текст скопирован ✓ — вставь его в сообщение'; } catch (x) { e.preventDefault(); prompt('Скопируйте текст приглашения', t); if (b.href) window.open(b.href, '_blank', 'noopener'); } });
 const mailto = (to, su, body) => `mailto:${to}?subject=${encodeURIComponent(su)}&body=${encodeURIComponent(body)}`;
 const gmail = (to, su, body) => `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(to)}&su=${encodeURIComponent(su)}&body=${encodeURIComponent(body)}`;
@@ -1737,7 +1757,7 @@ function adminBox(s){
     + admAct(`data-copyprev="${esc(s.id)}"`, 'Скопировать ссылку для Telegram',
       'Текст со ссылкой на предпросмотр копируется в буфер. Вставь его специалисту в Telegram или WhatsApp. Подтверждение он сделает кнопкой на сайте — e-mail не нужен.');
   const inv = !s.invite ? '' : dmVia(s) ? (inviteDmOn(s) ? admAct(`href="${esc(dmHref(s))}" ${ext} data-copyinvite="${esc(s.id)}"`, `Пригласить в ${dmName(dmVia(s))} — скопировать готовое сообщение`,
-      `Текст приглашения со ссылкой на пробную карточку копируется в буфер, и открывается чат с ${esc(LINK[dmVia(s)](s.contacts[dmVia(s)])[2])} в ${dmName(dmVia(s))}. Вставь текст и отправь.`, true)
+      `Текст приглашения со ссылкой на пробную карточку копируется в буфер, и открывается чат с ${esc(LINK[dmVia(s)](s.contacts[dmVia(s)])[2])} в ${dmName(dmVia(s))}.${dmVia(s) === 'instagram' ? ' Для Instagram текст короче: одно сообщение в Direct — не больше 1000 знаков.' : ''} Вставь текст и отправь.`, true)
     : `<div class="adm-act off"><b>Приглашение в ${dmName(dmVia(s))}</b><span>Открой карточку один раз по ссылке с ключом (её присылает Claude) — после этого здесь появится кнопка с готовым сообщением.</span></div>`)
     : fbFirst(s) ? (inviteFbOn(s) ? (fbTo(s) ? admAct(`href="${esc(LINK.facebook(fbTo(s))[1])}" ${ext} data-copyinvite="${esc(s.id)}"`, 'Пригласить в Facebook — скопировать готовое сообщение',
       'Текст приглашения со ссылкой на пробную карточку копируется в буфер, и открывается профиль в Facebook. Там нажми «Написать» (Message), вставь текст и отправь.', true)

@@ -875,5 +875,25 @@ window.AFISHA = [
     langs: ['українська'], level: 'діти до 14 років', price: 'CHF 20', commercial: true,
     organizers: [{ org: 'ua-do-stein', name: 'Спортивна школа UA-DO' }], link: 'https://ua-do.ch/2023/12/01/ua-do-school/',
     about: 'Спортивне свято для маленьких спортсменів до 14 років — веселі змагання в дисциплінах Rumble Do і Stiktug Do. Реєстрація учасників — з 9:00 до 10:00, початок змагань — о 10:00.'
+  },
+  /* пробная карточка SG-0037 «Стас» (лид из Instagram, 14.10.2026): его туры из Telegram-канала t.me/stanych — оба уже прошли,
+     в предпросмотре стоят примером с пометкой «прошло» («lidy-svoiludi.md», раздел 6); на сайт для всех прошедшие не выходят никогда */
+  {
+    sections: ['events'], type: 'retreat',
+    id: 'stas-tur-mayringen-2026-08', keyHash: 'b3fc6034f3e116862423a76c7e188c45e70773453bca757c427e1c2f1e1fb8fa', status: 'на підтвердженні', title: 'Тур на вихідні в Майрінген: шале, водоспади й гори',
+    date: '2026-08-14', dateEnd: '2026-08-16',
+    canton: 'Bern', address: '3860 Meiringen', online: false,
+    langs: ['російська'], level: 'для дорослих', price: 'CHF 600', priceNote: 'за тур: 3 дні та 2 ночі', commercial: true,
+    organizers: ['stas-gid-zurich'], link: 'https://t.me/stanych/305',
+    about: 'Три дні та дві ночі в Альпах. Живемо в триповерховому шале, ходимо до Райхенбахського водоспаду, в ущелину Розенлауї та в долину Лаутербруннен, піднімаємося на Хардер-Кульм і Бріенцер-Ротгорн. Вечорами — борщ на вогнищі, млинці, картопля з м’ясом і фондю, ігри та історії. Група — до 20 людей.'
+  },
+  {
+    sections: ['events'], type: 'retreat',
+    id: 'stas-pohod-appenzell-2026-09', keyHash: 'b3fc6034f3e116862423a76c7e188c45e70773453bca757c427e1c2f1e1fb8fa', status: 'на підтвердженні', title: 'Осінній похід у горах Аппенцелля',
+    date: '2026-09-12',
+    canton: 'Appenzell Innerrhoden', address: 'Bahnhof Appenzell, 9050 Appenzell', online: false,
+    langs: ['російська'], level: 'для дорослих', price: '', commercial: true,
+    organizers: ['stas-gid-zurich'], link: 'https://t.me/stanych/309',
+    about: 'Вересень, жовтень і травень — найкращий час для походів у гори. Зустрічаємося на вокзалі Аппенцелля й ідемо осінніми стежками. Запитання про похід — в особистих повідомленнях.'
   }
 ];
