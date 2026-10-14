@@ -18,6 +18,7 @@ const OWN = /^\/(events|akcii|kursy|join|opros|badge|instrumenty)?\/?/;
     p.on('pageerror', e => errs.push('js: ' + e.message));
     p.on('response', r => { if (r.status() >= 400 && r.url().startsWith(BASE)) errs.push('http ' + r.status() + ' ' + r.url().replace(BASE, '')); });
     const url = (lang === 'uk' ? '/uk' : '') + pg;
+    if (lang === 'uk' && !require('fs').existsSync(path.join(ROOT, url, 'index.html'))) { await ctx.close(); continue; }   // переводы на паузе (12.10.2026): страницы без украинской версии не проверяем на UA
     await p.goto(BASE + url); await p.waitForTimeout(1500);
     const info = await p.evaluate(() => ({
       path: location.pathname,
