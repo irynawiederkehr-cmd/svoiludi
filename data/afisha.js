@@ -83,6 +83,26 @@
    ===================================================================== */
 window.AFISHA = [
   {
+    sections: ['kursy'], type: 'pro', ktype: 'pro', kind: 'once',
+    id: 'iryna-pani-nail-bern-progel-kombi-2026-10-28', keyHash: 'e0be0590cd26f08a41e51a25606fc901bb0d39e762f209798bdb637958d910e1', status: 'на подтверждении', title: 'Курс повышения квалификации «ProGel + Комби» — живой курс в Берне',
+    date: '2026-10-28', time: '09:00', timeEnd: '19:00',
+    canton: 'Bern', address: 'Spitalgasse 34, 3011 Bern', online: false,
+    langs: ['русский'], level: 'для мастеров маникюра после базового курса и с опытом',
+    price: 'CHF 470', per: 'за курс (1 день)', priceNote: '2 модели, сертификат и 2 месяца онлайн-уроков с обратной связью', commercial: true,
+    organizers: ['iryna-pani-nail-bern'], link: 'https://iilschool.com/downloads/kurs-povysheniya-kvalifikaczii-progel-kombi/',
+    about: 'Один день с 9:00 до 19:00 и две модели — квадрат и овал. Утром теория: гели, архитектура ногтя и причины отслоек. Потом практика: снятие «на готовность», подготовка без пилки, опил по схеме, быстрые дизайны и покрытие под кутикулу без лайнера. Разбираем именно ваш запрос и исправляем ошибки.'
+  },
+  {
+    sections: ['kursy'], type: 'pro', ktype: 'pro', kind: 'once',
+    id: 'iryna-pani-nail-bern-progel-kombi-2026-12-19', keyHash: 'e0be0590cd26f08a41e51a25606fc901bb0d39e762f209798bdb637958d910e1', status: 'на подтверждении', title: 'Курс повышения квалификации «ProGel + Комби» — живой курс в Берне',
+    date: '2026-12-19', time: '09:00', timeEnd: '19:00',
+    canton: 'Bern', address: 'Spitalgasse 34, 3011 Bern', online: false,
+    langs: ['русский'], level: 'для мастеров маникюра после базового курса и с опытом',
+    price: 'CHF 470', per: 'за курс (1 день)', priceNote: '2 модели, сертификат и 2 месяца онлайн-уроков с обратной связью', commercial: true,
+    organizers: ['iryna-pani-nail-bern'], link: 'https://iilschool.com/downloads/kurs-povysheniya-kvalifikaczii-progel-kombi/',
+    about: 'Один день с 9:00 до 19:00 и две модели — квадрат и овал. Утром теория: гели, архитектура ногтя и причины отслоек. Потом практика: снятие «на готовность», подготовка без пилки, опил по схеме, быстрые дизайны и покрытие под кутикулу без лайнера. Разбираем именно ваш запрос и исправляем ошибки.'
+  },
+  {
     "sections": [
       "events"
     ],
@@ -162,13 +182,13 @@ window.AFISHA = [
     "about": "Напишите мне — бесплатно и без обязательств обсудим вашу будущую фотосессию: идею, образы, реквизит и место, дома или на швейцарской природе. Такая консультация входит и в каждый пакет."
   },
   {
-    sections: ['events'], type: 'culture',
-    id: 'slava-photographer-luzern-korabl-2026-09', keyHash: '144a048c0c63ee28246cfb3c9b2b7563290a57fd5d326855e9f95fb1de9f9c0c', status: 'на подтверждении', title: 'Фотосессия на историческом корабле — Люцерн',
+    sections: ['events'], type: 'meet',
+    id: 'slava-photographer-luzern-korabl-2026-09', keyHash: '144a048c0c63ee28246cfb3c9b2b7563290a57fd5d326855e9f95fb1de9f9c0c', status: 'на подтверждении', title: 'Фотосессия на историческом пароходе Schiller — Люцерн',
     date: '2026-09-27',
-    canton: 'Luzern', address: 'Люцерн, Фирвальдштетское озеро', online: false,
-    langs: ['русский'], level: 'для взрослых', price: '', commercial: true,
+    canton: 'Luzern', address: 'Люцерн, Фирвальдштетское озеро, пароход Schiller', online: false,
+    langs: ['русский'], level: 'для женщин', price: 'CHF 289', priceNote: 'всё включено: прогулка, обед и фотосессия', commercial: true,
     organizers: ['slava-photographer-luzern'],
-    about: 'Фотосессия, которую не повторить: озеро, Альпы, исторический корабль — и вы в центре этой красоты. Съёмка прошла на борту во время встречи Nova Power Woman Europe.'
+    about: 'Пять часов на историческом пароходе Schiller 1906 года по озёрам вокруг Люцерна: первый класс, швейцарская кухня, знакомства с женщинами из Швейцарии и Германии и профессиональная фотосессия на фоне Альп. Встречу женского сообщества организовали вместе с Power Woman Europa.'
   },
   {
     "sections": [
