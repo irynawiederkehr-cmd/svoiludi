@@ -980,13 +980,14 @@ const KEYPAID = 'vizitkaPechat.paket.v1';
 const svlHash = async k => { try { const b = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(String(k || ''))); return Array.from(new Uint8Array(b), x => x.toString(16).padStart(2, '0')).join(''); } catch (x) { return ''; } };
 const isoToday = () => new Date().toISOString().slice(0, 10);
 const ddmm = iso => iso.split('-').reverse().join('.');
+/* платные пакеты: «VIP-партнёр», «VIP-партнёр ТОП» (tiers), онлайн-пакеты (onlineTier) и онлайн-показ (onlineCH, onlineCanton).
+   Базовая и после периода запуска остаётся со знаком — как «Визитка PNG» (решение Ирины 11.10.2026) */
 function paidPkg(r){
   const t = isoToday(), L = {vip: '«VIP-партнёр ТОП»', 'партнёр': '«VIP-партнёр»', online: '«Онлайн базовый»', 'vip-online': '«VIP-онлайн»', 'vip-online-top': '«VIP-онлайн ТОП»'}, all = [];
   (r.tiers || []).forEach(x => { if (x && x.until && x.until >= t) all.push({name: L[x.level] || '«VIP-партнёр»', until: x.until}); });
   if (r.onlineTier && r.onlineTier.until && r.onlineTier.until >= t) all.push({name: L[r.onlineTier.level] || 'онлайн-пакет', until: r.onlineTier.until});
   if (r.onlineCH && r.onlineCH >= t) all.push({name: 'онлайн-показ по всей Швейцарии', until: r.onlineCH});
   if (r.onlineCanton && r.onlineCanton >= t) all.push({name: 'онлайн-показ по кантону', until: r.onlineCanton});
-  if (t >= '2028-01-01' && r.paidUntil && r.paidUntil >= t) all.push({name: 'Базовая', until: r.paidUntil});   // после периода запуска платная и Базовая
   return all.sort((a, b) => a.until < b.until ? 1 : -1)[0] || null;
 }
 async function checkPaid(id, k, fillData){
