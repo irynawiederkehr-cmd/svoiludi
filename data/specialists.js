@@ -78,6 +78,7 @@ window.SPECIALISTS = [
     "added": "2026-10-14",
     "checked": "",
     "invite": {
+      "hi": "Здравствуйте, Анна! Меня зовут Ирина Вознесенская. Увидела ваш профиль AFD Consulting в Instagram и ваш сайт и решила вам написать 🙂",
       "seen": "ваш профиль AFD Consulting в Instagram и ваш сайт",
       "by": "по вашему сайту и профилю в Instagram",
       "local": "В направлении «Налоги, бухгалтерия и деньги» людей ищут чаще всего — особенно весной, когда подходит срок налоговой декларации."
@@ -173,6 +174,7 @@ window.SPECIALISTS = [
     "added": "2026-10-14",
     "checked": "",
     "invite": {
+      "hi": "Здравствуйте, Олена! Меня зовут Ирина Вознесенская. Увидела ваш профиль family.photographe в Instagram и решила вам написать 🙂",
       "via": "instagram",
       "seen": "ваш профиль family.photographe в Instagram",
       "by": "по вашему сайту и профилю в Instagram",
@@ -323,6 +325,7 @@ window.SPECIALISTS = [
     "added": "2026-10-14",
     "checked": "",
     "invite": {
+      "hi": "Здравствуйте, Юлия! Меня зовут Ирина Вознесенская. Увидела ваш профиль julia.marusich в Instagram и решила вам написать 🙂",
       "via": "instagram",
       "seen": "ваш профиль julia.marusich в Instagram",
       "by": "по вашему профилю в Instagram",

@@ -78,6 +78,7 @@ window.SPECIALISTS = [
     "added": "2026-10-14",
     "checked": "",
     "invite": {
+      "hi": "Добрий день, Анно! Мене звати Ірина Вознесенська. Побачила ваш профіль AFD Consulting в Instagram і ваш сайт і вирішила вам написати 🙂",
       "seen": "ваш профіль AFD Consulting в Instagram і ваш сайт",
       "by": "за вашим сайтом і профілем в Instagram",
       "local": "У напрямі «Податки, бухгалтерія і гроші» людей шукають найчастіше — особливо навесні, коли наближається строк податкової декларації."
@@ -173,6 +174,7 @@ window.SPECIALISTS = [
     "added": "2026-10-14",
     "checked": "",
     "invite": {
+      "hi": "Добрий день, Олено! Мене звати Ірина Вознесенська. Побачила ваш профіль family.photographe в Instagram і вирішила вам написати 🙂",
       "via": "instagram",
       "seen": "ваш профіль family.photographe в Instagram",
       "by": "за вашим сайтом і профілем в Instagram",
@@ -323,6 +325,7 @@ window.SPECIALISTS = [
     "added": "2026-10-14",
     "checked": "",
     "invite": {
+      "hi": "Добрий день, Юліє! Мене звати Ірина Вознесенська. Побачила ваш профіль julia.marusich в Instagram і вирішила вам написати 🙂",
       "via": "instagram",
       "seen": "ваш профіль julia.marusich в Instagram",
       "by": "за вашим профілем в Instagram",
