@@ -979,6 +979,15 @@ window.AFISHA = [
      в предпросмотре стоят примером с пометкой «прошло» («lidy-svoiludi.md», раздел 6); на сайт для всех прошедшие не выходят никогда */
   {
     sections: ['events'], type: 'retreat',
+    id: 'stas-lauterbrunnen-2026-07', keyHash: 'b3fc6034f3e116862423a76c7e188c45e70773453bca757c427e1c2f1e1fb8fa', status: 'на подтверждении', title: 'Две стороны Лаутербруннена: два дня с палатками, водопадами и ледниками',
+    date: '2026-07-18', dateEnd: '2026-07-19',
+    canton: 'Bern', address: '3822 Lauterbrunnen', online: false,
+    langs: ['русский'], level: 'для взрослых', price: '', commercial: true,
+    organizers: ['stas-gid-zurich'], link: 'https://t.me/stanych/293',
+    about: 'Два дня в одной из самых красивых долин Швейцарии. В первый день — водопад Штауббах и поход из Штехельберга к смотровой площадке с видом на водопады Шмадрибах и ледники, вечером в кемпинге — мясо на гриле и борщ в казане. Во второй — подъём в Мюррен и панорамная тропа North Face Trail с видом на Эйгер, Мёнх и Юнгфрау, спуск через Гиммельвальд. В тур входят кемпинг, ужин и сопровождение на всём маршруте.'
+  },
+  {
+    sections: ['events'], type: 'retreat',
     id: 'stas-tur-mayringen-2026-08', keyHash: 'b3fc6034f3e116862423a76c7e188c45e70773453bca757c427e1c2f1e1fb8fa', status: 'на подтверждении', title: 'Тур на выходные в Майринген: шале, водопады и горы',
     date: '2026-08-14', dateEnd: '2026-08-16',
     canton: 'Bern', address: '3860 Meiringen', online: false,
