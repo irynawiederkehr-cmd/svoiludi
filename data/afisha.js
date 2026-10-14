@@ -927,33 +927,33 @@ window.AFISHA = [
     organizers: [{ org: 'ugcc-zurich', name: 'Українська греко-католицька місія в Цюриху' }], link: 'https://www.forum-magazin.ch/ukrainische-mission/updates/20260203-gottliche-liturgie-und-gebet-fur-den-frieden-in-de/',
     about: 'В последнюю субботу месяца миссия едет в монастырь Айнзидельн. В 14:00 — Божественная литургия, обычно в капелле Святой Магдалины, потом молитва о мире в Украине и во всём мире и возможность исповедаться. После — кофе или небольшой перекус в комнате для паломников.'
   },
-  /* UA-DO (13.10.2026, черновик для афиши): расписание по fricktal.info (05.2024) — Зиссельн пн, ср, пт 16–19; уточняем у Володимира (Штайн убран 14.10.2026: филиала нет) */
+  /* UA-DO (13.10.2026, черновик для афиши): расписание по fricktal.info (05.2024) — с 14.10.2026 — по списку ферайнов общины Зиссельн (пн, ср 16:30–19:00, пт 16:00–18:00), Володимир подтверждает в карточке; Штайн убран 14.10.2026: филиала нет */
   {
     sections: ['kursy'], type: 'kids', kind: 'regular',
     id: 'ua-do-sisseln-pn', keyHash: '09de5945781020e152796fdec5fcf631c0debd478625a7f2e7305f29d38834cf', status: 'на подтверждении', title: 'Тренировки UA-DO в Зиссельне',
-    date: '2026-10-19', time: '16:00', timeEnd: '19:00', repeat: { freq: 'weekly' },
+    date: '2026-10-19', time: '16:30', timeEnd: '19:00', repeat: { freq: 'weekly' },
     canton: 'Aargau', address: 'Schulhausstrasse 11, 4334 Sisseln', online: false,
     langs: ['украинский'], level: 'дети, подростки и взрослые', price: 'цену уточняем', commercial: true,
     organizers: [{ org: 'ua-do-sisseln', name: 'Спортивна школа UA-DO' }], link: 'https://ua-do.ch/',
-    about: 'Регулярные тренировки спортивной школы UA-DO по украинскому единоборству UA-DO, «Козацькому двобою», дзюдо и джиу-джитсу. Расписание по данным 2024 года — уточняем у школы.'
+    about: 'Регулярные тренировки спортивной школы UA-DO по украинскому единоборству UA-DO, «Козацькому двобою», дзюдо и джиу-джитсу.'
   },
   {
     sections: ['kursy'], type: 'kids', kind: 'regular',
     id: 'ua-do-sisseln-sr', keyHash: '09de5945781020e152796fdec5fcf631c0debd478625a7f2e7305f29d38834cf', status: 'на подтверждении', title: 'Тренировки UA-DO в Зиссельне',
-    date: '2026-10-14', time: '16:00', timeEnd: '19:00', repeat: { freq: 'weekly' },
+    date: '2026-10-14', time: '16:30', timeEnd: '19:00', repeat: { freq: 'weekly' },
     canton: 'Aargau', address: 'Schulhausstrasse 11, 4334 Sisseln', online: false,
     langs: ['украинский'], level: 'дети, подростки и взрослые', price: 'цену уточняем', commercial: true,
     organizers: [{ org: 'ua-do-sisseln', name: 'Спортивна школа UA-DO' }], link: 'https://ua-do.ch/',
-    about: 'Регулярные тренировки спортивной школы UA-DO по украинскому единоборству UA-DO, «Козацькому двобою», дзюдо и джиу-джитсу. Расписание по данным 2024 года — уточняем у школы.'
+    about: 'Регулярные тренировки спортивной школы UA-DO по украинскому единоборству UA-DO, «Козацькому двобою», дзюдо и джиу-джитсу.'
   },
   {
     sections: ['kursy'], type: 'kids', kind: 'regular',
     id: 'ua-do-sisseln-pt', keyHash: '09de5945781020e152796fdec5fcf631c0debd478625a7f2e7305f29d38834cf', status: 'на подтверждении', title: 'Тренировки UA-DO в Зиссельне',
-    date: '2026-10-16', time: '16:00', timeEnd: '19:00', repeat: { freq: 'weekly' },
+    date: '2026-10-16', time: '16:00', timeEnd: '18:00', repeat: { freq: 'weekly' },
     canton: 'Aargau', address: 'Schulhausstrasse 11, 4334 Sisseln', online: false,
     langs: ['украинский'], level: 'дети, подростки и взрослые', price: 'цену уточняем', commercial: true,
     organizers: [{ org: 'ua-do-sisseln', name: 'Спортивна школа UA-DO' }], link: 'https://ua-do.ch/',
-    about: 'Регулярные тренировки спортивной школы UA-DO по украинскому единоборству UA-DO, «Козацькому двобою», дзюдо и джиу-джитсу. Расписание по данным 2024 года — уточняем у школы.'
+    about: 'Регулярные тренировки спортивной школы UA-DO по украинскому единоборству UA-DO, «Козацькому двобою», дзюдо и джиу-джитсу.'
   },
   /* Спортивная школа UA-DO (12.10.2026): будущих событий на их сайте нет (новости — до 12.2023), поэтому для примера — их последний открытый чемпионат, с пометкой «прошло»
      (правило Ирины 12.10.2026, «lidy-svoiludi.md», раздел 6); на сайт для всех прошедшие не выходят никогда */
