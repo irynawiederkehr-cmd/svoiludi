@@ -614,7 +614,23 @@ function sign(P, d, o){
   return g.h;
 }
 /* логотип на белой скруглённой плашке (в шапке) или просто на белом поле */
+/* логотип «Свои люди» в примере (lg.svl) рисуем сами, прямо на фоне, без белой плашки (Ирина 14.10.2026, 22:33: «надпись «Свои люди» должна быть на фоне,
+   но без рамок»): кружок «своих» и рядом «Свои люди» и «в Швейцарии»; на шалфейной шапке — светлым, на белом поле — тёмным */
+const SVL_SUB = 'в Швейцарии';
+const svlRatio = () => { const H = 10, n = 0.5 * H / PT, u = 0.27 * H / PT; return 1.2 + Math.max(tw(SIGN.name, 'f', n), tw(SVL_SUB, 'r', u)) / H + 0.02; };
+function svlLogo(P, d, x, y, w, h, band){
+  const H = Math.min(h, w / svlRatio()), y0 = y + (h - H) / 2, x0 = x + (w - H * svlRatio()) / 2;
+  markIcon(P, x0, y0, H, d.bw);
+  const tx = x0 + H * 1.2, big = band ? C.BTX : (d.bw ? C.INK : '#3E4A31'), sub = band ? C.BSUB : C.MUT;
+  T(P, SIGN.name, tx, y0 + H * 0.56, 0.5 * H / PT, 'f', big);
+  T(P, SVL_SUB, tx, y0 + H * 0.86, 0.27 * H / PT, 'r', sub);
+}
+/* картинка логотипа в рамке x, y, w, h (рамка уже по пропорциям логотипа) */
+function logoImg(P, d, lg, x, y, w, h, band){ if (lg.svl) svlLogo(P, d, x, y, w, h, band); else P.img(logoData(d, lg), x, y, w, h); }
+/* белая плашка под логотипом — только у настоящих логотипов (у логотипа «Свои люди» её нет) */
+const plate = (P, lg, x, y, w, h, r) => { if (!lg.svl) P.rect(x, y, w, h, '#FFFFFF', null, r); };
 function logoAt(P, d, lg, x, y, w, h, plate){
+  if (lg.svl) { const lb = logoBox(lg, w, h); svlLogo(P, d, x + (w - lb.w) / 2, y + (h - lb.h) / 2, lb.w, lb.h, plate); return; }
   if (plate) { P.rect(x, y, w, h, '#FFFFFF', null, Math.min(w, h) * 0.12); const p = Math.min(w, h) * 0.12, lb = logoBox(lg, w - 2 * p, h - 2 * p); P.img(logoData(d, lg), x + (w - lb.w) / 2, y + (h - lb.h) / 2, lb.w, lb.h); }
   else { const lb = logoBox(lg, w, h); P.img(logoData(d, lg), x + (w - lb.w) / 2, y + (h - lb.h) / 2, lb.w, lb.h); }
 }
@@ -676,7 +692,7 @@ function tBandC(P, d, c, dr){
   if (dr) {
     bandRect(P, c, 0, hb);
     let y = c.Y + (hb - ih - (lph ? lph + c.g1 * 2 : 0)) / 2;
-    if (lb) { P.rect(c.X + (c.CW - lpw) / 2, y, lpw, lph, '#FFFFFF', null, 1.2); P.img(logoData(d, lg), c.X + (c.CW - lb.w) / 2, y + 1.1, lb.w, lb.h); y += lph + c.g1 * 2; }
+    if (lb) { plate(P, lg, c.X + (c.CW - lpw) / 2, y, lpw, lph, 1.2); logoImg(P, d, lg, c.X + (c.CW - lb.w) / 2, y + 1.1, lb.w, lb.h, true); y += lph + c.g1 * 2; }
     ident(P, d, {x: c.x0, y, w: c.W, k: c.k, draw: true, band: true, align: 'center'});
     const xc = cx0;
     if (c.wide) {   // контакты по центру, фраза и знак — внизу по центру, QR-код — в правом нижнем углу
@@ -703,7 +719,7 @@ function tPanel(P, d, c, dr){
     const MH = c.y1 - cy - (fh || q ? c.g2 + Math.max(fh, q) : 0), ch = contacts(P, d, {x: c.x0, y: 0, w: c.W, k: c.k, style: st, draw: false, maxH: MH}).h;
     if (dr) {
       bandRect(P, c, 0, hb);
-      if (lb) { P.rect(c.x0, c.Y + pad, lpw, lph, '#FFFFFF', null, 1.2); P.img(logoData(d, lg), c.x0 + 1.2, c.Y + pad + 1.1, lb.w, lb.h); }
+      if (lb) { plate(P, lg, c.x0, c.Y + pad, lpw, lph, 1.2); logoImg(P, d, lg, c.x0 + (lg.svl ? 0 : 1.2), c.Y + pad + 1.1, lb.w, lb.h, true); }
       ident(P, d, {x: c.x0, y: lb ? c.Y + hb - pad - ih : c.Y + (hb - ih) / 2, w: c.W, k: c.k, draw: true, band: true});
       if (ch) contacts(P, d, {x: c.x0, y: cy, w: c.W, k: c.k, style: st, draw: true, maxH: MH});
       if (fh) foot(P, d, {x: c.x0, y: c.y1 - fh, w: fw, k: c.k, draw: true, side: !q});
@@ -719,7 +735,7 @@ function tPanel(P, d, c, dr){
   const need = ch + (fh || q ? c.g2 + Math.max(fh, q) : 0);
   if (dr) {
     P.rect(c.X - bl, c.Y - bl, pw + bl, c.CH + 2 * bl, C.BAND);
-    if (lb) { P.rect(px, c.y0, lpw, lph, '#FFFFFF', null, 1.2); P.img(logoData(d, lg), px + 1.2, c.y0 + 1.1, lb.w, lb.h); }
+    if (lb) { plate(P, lg, px, c.y0, lpw, lph, 1.2); logoImg(P, d, lg, px + (lg.svl ? 0 : 1.2), c.y0 + 1.1, lb.w, lb.h, true); }
     ident(P, d, {x: px, y: lb ? c.y1 - ih : vmid(c.y0, c.y1, ih), w: iwp, k: c.k, draw: true, band: true});
     const br = Math.max(fh, q), fb = br ? c.g2 + br : 0;   // внизу справа: фраза и знак слева, QR-код в правом нижнем углу
     if (ch) contacts(P, d, {x: rx, y: vmid(c.y0, c.y1 - fb, ch), w: rw, k: c.k, style: st, draw: true, maxH: MH});
@@ -740,7 +756,7 @@ function tSheet(P, d, c, dr){
   const need = ch + (fh ? (ch ? c.g2 : 0) + fh : 0);
   if (dr) {
     bandRect(P, c, 0, sh);
-    if (lb) P.img(logoData(d, lg), c.wide ? c.x1 - lb.w : c.x0, top, lb.w, lb.h);
+    if (lb) logoImg(P, d, lg, c.wide ? c.x1 - lb.w : c.x0, top, lb.w, lb.h, false);
     ident(P, d, {x: c.x0, y: iy, w: iw, k: c.k, draw: true});
     P.line(c.x0, hy, c.x1, hy, C.LINE, 0.25);
     if (ch) contacts(P, d, {x: c.x0, y: cy, w: cw, k: c.k, style: st, draw: true, maxH: MH});
@@ -784,7 +800,7 @@ function back(P, d, X, Y){
     if (dr) {
       P.rect(c.X - (P.bl || 0), c.Y - (P.bl || 0), c.CW + 2 * (P.bl || 0), c.CH + 2 * (P.bl || 0), C.BAND);
       let y = vmid(c.y0, c.y1, H);
-      if (lb) { P.rect(cx - lpw / 2, y, lpw, lph, '#FFFFFF', null, 1.2); P.img(logoData(d, lg), cx - lb.w / 2, y + 1.1, lb.w, lb.h); y += lph + (ih ? c.g2 : 0); }
+      if (lb) { plate(P, lg, cx - lpw / 2, y, lpw, lph, 1.2); logoImg(P, d, lg, cx - lb.w / 2, y + 1.1, lb.w, lb.h, true); y += lph + (ih ? c.g2 : 0); }
       if (ih) { ident(P, bd, {x: c.x0, y, w: tw2, k: c.k, draw: true, band: true, align: 'center'}); y += ih; }
       if (q) qrAt(P, url, c.wide ? c.x1 - q : cx - q / 2, c.wide ? vmid(c.y0, c.y1, q) : y + (lph || ih ? c.g3 : 0), q, true);
     }
@@ -851,7 +867,8 @@ async function exampleLogo(){
   c.restore();
   c.fillStyle = '#3E4A31'; c.font = '400 118px Forum, Georgia, serif'; c.fillText('Свои люди', 320, 158);
   c.fillStyle = '#7A6E62'; c.font = '600 46px Manrope, sans-serif'; c.fillText('в Швейцарии', 324, 228);
-  const img = new Image(); img.src = cv.toDataURL('image/png'); return new Promise(r => { img.onload = () => r(prepLogo(img)); img.onerror = () => r(null); });
+  const img = new Image(); img.src = cv.toDataURL('image/png');
+  return new Promise(r => { img.onload = () => { const lg = prepLogo(img); if (lg) { lg.svl = true; lg.h = 1000; lg.w = Math.round(1000 * svlRatio()); } r(lg); }; img.onerror = () => r(null); });   // на визитке рисуется векторно (svlLogo), картинка — для поля «Логотип» в форме
 }
 
 /* ---------- экран ---------- */
