@@ -1,0 +1,67 @@
+<!-- @dsCard group="Блоки" height=1100 subtitle="Форма заявки на сайте и галочка согласия" -->
+<!-- Снято с сайта скриптом _i18n/stil/svoi/grab.js (/events/); правится не здесь, а на сайте, потом node _i18n/stil/svoi/grab.js ApplicationForm -->
+<div class="ds-wrap">
+<div class="dsx-ApplicationForm" style="width:390px;max-width:100%;box-sizing:border-box;padding:12px;background:var(--bg);border:1px solid var(--line);border-radius:18px">
+<main class="page" style=";position:static;display:block;inset:auto;transform:none;max-height:none;overflow:visible;margin:0;width:auto;max-width:100%;height:auto;border:0;padding:0;background:none;box-shadow:none"><section class="zform zok-off" id="zayavka" aria-labelledby="zayavka-h" data-zayavka="event" data-t-ok="Поставь галочку согласия над кнопкой — без неё мы не можем принять заявку." data-t-okline="Согласие на обработку данных и публикацию: отмечено на сайте" data-mail="voznesenskaya.iryna@gmail.com" data-subject="Событие для «Свои люди в Швейцарии»" data-hello="Здравствуйте! Хочу разместить событие в «Свои люди в Швейцарии»." data-from="Заявка заполнена на странице" data-t-miss="Не заполнены обязательные поля: " data-t-mail="Проверь e-mail: в адресе не хватает знака @ или точки." data-t-any="Укажи хотя бы один контакт: телефон, WhatsApp, Telegram, e-mail или Instagram." data-t-need="Для записи выбран этот способ. Заполни поле «{f}»." data-t-dpast="Эта дата уже прошла. Выбери сегодняшнюю или будущую дату." data-t-dorder="Последний день не может быть раньше первого." data-t-dmax="Объявление показывается не дольше {n} дней. Выбери дату окончания раньше." data-t-wiped="Вся история заявки удалена с этого устройства." data-t-copied="Заявка скопирована. Вставь её в письмо на voznesenskaya.iryna@gmail.com." data-t-copyfail="Не получилось скопировать. Напиши нам на voznesenskaya.iryna@gmail.com.">
+    <h2 id="zayavka-h">Заявка на размещение события</h2>
+    <p class="zhint">Почти всё выбирается из списков и галочками. Обязательные поля отмечены звёздочкой. Остальное мы уточним, когда будем готовить запись.</p>
+    
+    <div class="zfg">
+      <h3 class="zh3">О событии</h3>
+      <div class="zf"><label for="z-ev-title">Название события <s>*</s></label><input id="z-ev-title" data-a="Название" data-title="" data-req="" placeholder="например: Разговорный клуб по-немецки"></div>
+      <div class="zf"><label for="z-ev-type">Вид события <s>*</s></label><select id="z-ev-type" data-a="Вид события" data-req="" data-miss="вид события"><option value="">Выбери вид</option><option value="meet">Встречи и общение</option><option value="lang">Разговорные клубы и тандемы</option><option value="kids">Дети и семья</option><option value="retreat">Ретриты и выезды</option><option value="culture">Праздники и культура</option><option value="talk">Лекции и мастер-классы</option></select></div>
+      <div class="zf"><label>Для кого <s>*</s></label><div class="zchk" id="z-ev-for" data-l="Для кого" data-req=""><label><input type="checkbox" value="adults">Взрослые</label><label><input type="checkbox" value="kids">Дети</label><label><input type="checkbox" value="teens">Подростки</label><label><input type="checkbox" value="family">Семьи с детьми</label><label><input type="checkbox" value="women">Женщины</label><label><input type="checkbox" value="seniors">Пожилые</label><label><input type="checkbox" value="business">Предприниматели</label><label><input type="checkbox" value="all">Все желающие</label></div></div>
+      <div class="zf" data-zif="z-ev-for:kids|teens|family" hidden=""><label for="z-ev-age">Возраст детей</label><select id="z-ev-age" data-a="Возраст детей"><option value="">Выбери возраст</option><option value="any">Любой возраст</option><option value="0-3">до 3 лет</option><option value="3-6">3–6 лет</option><option value="6-12">6–12 лет</option><option value="12-18">12–18 лет</option></select></div>
+      <div class="zf"><label>Язык <s>*</s></label><div class="zchk" id="z-ev-langs" data-l="Язык" data-req="" data-zlangs=""><label><input type="checkbox" value="ru">Русский</label><label><input type="checkbox" value="uk">Украинский</label><label><input type="checkbox" value="de">Немецкий</label><label><input type="checkbox" value="fr">Французский</label><label><input type="checkbox" value="it">Итальянский</label><label><input type="checkbox" value="en">Английский</label></div></div>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </div>
+    
+    
+    <div class="zok"><input type="checkbox" id="z-ev-ok" data-z="ok"><label for="z-ev-ok">Даю согласие, чтобы «Свои люди» (Alonira.ch AG) обработали данные из этой заявки, при необходимости связались со мной и после проверки опубликовали событие. Я вправе разместить эти данные, в том числе контакты для записи и вопросов. Подробнее — в <a href="#">политике конфиденциальности</a>.</label></div>
+    <div class="acts"><button class="btn" type="button" data-z="send">Отправить заявку</button></div>
+    <p class="zmsg" data-z="msg" role="status" hidden=""></p>
+    
+    
+    
+    <p class="note">Отправляя заявку, ты просишь разместить событие и соглашаешься, чтобы после проверки мы его опубликовали. Как мы храним заявку — в <a href="#">политике конфиденциальности</a>.</p>
+  </section></main>
+</div>
+</div>

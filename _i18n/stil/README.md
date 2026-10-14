@@ -4,7 +4,7 @@
 
 | Что | Где исходники | Готовая страница у Ирины |
 |---|---|---|
-| svoiludi.ch («Свои люди», шалфейный) | `svoi/project/` — тот же набор, что у закрытой страницы «Стиль «Свои люди»» в claude.ai (https://claude.ai/artifact/LwP5ZCSfGJxxRitYA2U5EZ, тип Design System): tokens.json, components/bundle.css, 19 элементов (README.md + preview.html) | `08_Стиль сайтов\01 Стиль «Свои люди» — открыть.html` |
+| svoiludi.ch («Свои люди», шалфейный) | `svoi/project/` — тот же набор, что у закрытой страницы «Стиль «Свои люди»» в claude.ai (https://claude.ai/artifact/LwP5ZCSfGJxxRitYA2U5EZ, тип Design System): tokens.json, components/bundle.css, 31 элемент (README.md + preview.html) | `08_Стиль сайтов\01 Стиль «Свои люди» — открыть.html` |
 | voznesenskaya.ch (коучинг, коричневый) | `vz/elements.js` (какие элементы и где их снимать), `vz/texts.js` (что это, когда брать, классы), цвета берутся прямо из CSS сайта | `08_Стиль сайтов\voznesenskaya.ch — коучинг\01 Стиль voznesenskaya.ch — открыть.html` |
 
 ## Пересобрать
@@ -15,6 +15,7 @@ bash _i18n/stil/run.sh ../tests /tmp/stil-out
 - voznesenskaya.ch: `vz/shots.js` снимает каждый элемент настоящего сайта (телефон 390 px и компьютер 1280 px, светлая и тёмная тема; сайт отдаётся локально из папки репозитория tests), `vz/build.js` собирает страницу: цвета и палитры из `index.html` и `assets/brand.css`, снимки, тексты. Отчёт снимков — `vz/shots/_report.txt` (строки FAIL — элемент не нашёлся: поменялся класс или блок убран).
 
 ## Как дописать элемент
+- svoiludi.ch, элемент, который уже есть на сайте: строка в `svoi/grab-spec.js` (страница, какой блок, что нажать) и `node _i18n/stil/svoi/grab.js <Имя>` — скрипт сам снимает разметку и только нужные правила CSS с сайта (с приставкой `.dsx-<Имя>`, раздел `@grab <Имя>` в bundle.css); README.md элемента пишется руками. Так сняты FreeBanner, SectionSwitch, DirectoryCard, OrgCard, CardWindow, AfishaCalendar, ApplicationForm, Reviews (14.10.2026); при еженедельном обновлении их пересняли — `node _i18n/stil/svoi/grab.js`.
 - svoiludi.ch: новый элемент — папка в `svoi/project/components/<Имя>/` (README.md с правилами и preview.html с разметкой сайта, первой строкой `<!-- @dsCard group="…" height=… subtitle="…" -->`), стили — в `svoi/project/components/bundle.css`. Опубликовать то же на закрытой странице в claude.ai (Artifact, url выше) и дописать в документ проекта «stil-elementov.md».
 - voznesenskaya.ch: строка в `vz/elements.js` (страница, селектор, телефон/компьютер, темы) и описание в `vz/texts.js`. Документ проекта — «stil-voznesenskaya.md».
 
