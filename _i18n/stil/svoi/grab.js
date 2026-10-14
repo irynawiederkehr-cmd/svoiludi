@@ -104,6 +104,8 @@ function extract(arg) {
       if (s.trim) await p.evaluate(s.trim);
       const r = await p.evaluate(extract, { name: s.name, tokens: TOKENS });
       r.css = r.css.replace(/(\d*\.?\d+)vw\b/g, (m, n) => +(n * width / 100).toFixed(1) + 'px'); // vw — как на ширине снимка
+      // небольшие картинки — прямо в разметку, чтобы они были видны и на закрытой странице в claude.ai
+      r.html = r.html.replace(/\/_repo\/([\w.\/-]+\.(png|jpe?g|svg))/g, (m, f, ext) => { const fp = path.join(REPO, f); if (!fs.existsSync(fp) || fs.statSync(fp).size > 60000) return m; return 'data:' + ({ png: 'image/png', jpg: 'image/jpeg', jpeg: 'image/jpeg', svg: 'image/svg+xml' })[ext] + ';base64,' + fs.readFileSync(fp).toString('base64'); });
       const dir = path.join(COMP, s.name); fs.mkdirSync(dir, { recursive: true });
       const box = width < 700 ? `<div class="dsx-${s.name}" style="width:${width}px;max-width:100%;box-sizing:border-box;padding:12px;background:var(--bg);border:1px solid var(--line);border-radius:18px">` : `<div class="dsx-${s.name}" style="width:100%">`;
       fs.writeFileSync(path.join(dir, 'preview.html'), `<!-- @dsCard group="${s.group}" height=${s.height || 600} subtitle="${s.subtitle}" -->\n<!-- Снято с сайта скриптом _i18n/stil/svoi/grab.js (${s.page}); правится не здесь, а на сайте, потом node _i18n/stil/svoi/grab.js ${s.name} -->\n<div class="ds-wrap">\n${s.cap ? `<span class="ds-cap">${s.cap}</span>\n` : ''}${box}\n${r.html}\n</div>\n</div>\n`);
