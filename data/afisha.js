@@ -83,6 +83,44 @@
    ===================================================================== */
 window.AFISHA = [
   {
+    "sections": [
+      "events"
+    ],
+    "type": "promo",
+    "id": "vika-foto-glarus-konsultaciya",
+    "keyHash": "ef425914d53422cb49025d347bdfad17b144d4e5971b462cd5e265bf726142fd",
+    "status": "на подтверждении",
+    "title": "Бесплатная консультация перед фотосессией",
+    "promo": {
+      "kind": "free",
+      "what": "индивидуальная консультация перед фотосессией — идея, образы, реквизит, место и мудборд",
+      "cond": [
+        "new"
+      ],
+      "always": true
+    },
+    "date": "2026-10-14",
+    "dateEnd": "2027-10-13",
+    "canton": "Glarus",
+    "address": "",
+    "online": false,
+    "langs": [
+      "украинский",
+      "немецкий"
+    ],
+    "commercial": true,
+    "organizers": [
+      "vika-foto-glarus"
+    ],
+    "signup": "mail",
+    "contacts": {
+      "email": "vikafotoch@gmail.com",
+      "instagram": "vikafoto.ch"
+    },
+    "link": "https://vikafoto.ch/uk/contact",
+    "about": "Напишите мне — бесплатно и без обязательств обсудим вашу будущую фотосессию: идею, образы, реквизит и место, дома или на швейцарской природе. Такая консультация входит и в каждый пакет."
+  },
+  {
     sections: ['events'], type: 'culture',
     id: 'slava-photographer-luzern-korabl-2026-09', keyHash: '144a048c0c63ee28246cfb3c9b2b7563290a57fd5d326855e9f95fb1de9f9c0c', status: 'на подтверждении', title: 'Фотосессия на историческом корабле — Люцерн',
     date: '2026-09-27',
