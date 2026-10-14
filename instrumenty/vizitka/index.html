@@ -184,7 +184,7 @@ input:disabled,select:disabled{opacity:.7}
       <p class="hint" id="markNote"></p></div>
   </div>
 
-  <div class="exbar" id="exbar" hidden><span>Это пример, всё в нём вымышленное. Так будет выглядеть твоя визитка.</span><button type="button" class="btn sm" id="exOff">Вернуться к моим данным</button></div>
+  <div class="exbar" id="exbar" hidden><span>Это пример: имя и контакты вымышленные, на месте логотипа — логотип «Свои люди». Так будет выглядеть твоя визитка.</span><button type="button" class="btn sm" id="exOff">Вернуться к моим данным</button></div>
 
   <div class="work">
     <div class="form" id="fields">
@@ -664,7 +664,7 @@ function tBand(P, d, c, dr){
 /* 2. Шапка по центру: логотип, имя и чем занимаешься по центру шапки; ниже контакты по центру */
 function tBandC(P, d, c, dr){
   const url = frontQr(d, P), lg = LG(), st = cst(d), pad = c.m * 0.85 * c.k;
-  const lb = lg ? logoBox(lg, c.W * 0.4, c.CH * (c.wide ? 0.13 : 0.09)) : null, lph = lb ? lb.h + 2 * 1.1 : 0, lpw = lb ? lb.w + 2 * 1.6 : 0;
+  const lb = lg ? logoBox(lg, c.W * 0.4, c.CH * (c.wide ? 0.13 : 0.09) * c.k) : null, lph = lb ? lb.h + 2 * 1.1 : 0, lpw = lb ? lb.w + 2 * 1.6 : 0;   // логотип мельчает вместе со шрифтом
   const ih = ident(P, d, {x: c.x0, y: 0, w: c.W, k: c.k, draw: false, band: true, align: 'center'});
   const hb = Math.max(c.CH * (c.wide ? 0.38 : 0.32) * c.k, ih + (lph ? lph + c.g1 * 2 : 0) + 2 * pad);
   const q = url ? (c.wide ? Math.min(c.CH - hb - 2 * pad, 15 * c.k) : Math.min(c.W * 0.4, 16 * c.k)) : 0;
@@ -831,14 +831,26 @@ function prepLogo(img){
   const g = o.getImageData(0, 0, cw, ch), gd = g.data; for (let i = 0; i < gd.length; i += 4) { const v = Math.round(gd[i] * 0.299 + gd[i + 1] * 0.587 + gd[i + 2] * 0.114); gd[i] = gd[i + 1] = gd[i + 2] = v; } o.putImageData(g, 0, 0);
   return {c: col, g: enc(), w: cw, h: ch, small: Math.max(img.naturalWidth, img.naturalHeight) < 500};
 }
-function exampleLogo(){ // вымышленный логотип для примера: росток в круге и подпись
-  const cv = document.createElement('canvas'); cv.width = 760; cv.height = 300; const c = cv.getContext('2d');
-  c.fillStyle = '#fff'; c.fillRect(0, 0, 760, 300);
-  c.strokeStyle = '#6E8B5E'; c.lineWidth = 10; c.beginPath(); c.arc(150, 150, 120, 0, Math.PI * 2); c.stroke();
-  c.fillStyle = '#A8BE95'; c.beginPath(); c.moveTo(150, 200); c.bezierCurveTo(95, 200, 70, 160, 72, 112); c.bezierCurveTo(120, 112, 150, 145, 150, 200); c.fill();
-  c.fillStyle = '#6E8B5E'; c.beginPath(); c.moveTo(150, 168); c.bezierCurveTo(150, 115, 180, 80, 232, 82); c.bezierCurveTo(232, 135, 200, 168, 150, 168); c.fill();
-  c.strokeStyle = '#4F5E3E'; c.lineWidth = 9; c.lineCap = 'round'; c.beginPath(); c.moveTo(150, 236); c.lineTo(150, 150); c.stroke();
-  c.fillStyle = '#3E4A31'; c.font = '400 92px Forum, Georgia, serif'; c.fillText('Studio', 300, 145); c.font = '700 44px Manrope, sans-serif'; c.fillStyle = '#6E8B5E'; c.fillText('NAILS · BEAUTY', 304, 210);
+/* логотип в примере — логотип «Свои люди», как в шапке сайта: кружок «своих» и надпись (Ирина 14.10.2026, 12:42: «я это не хочу, там должны быть свои люди»;
+   раньше был вымышленный «Studio NAILS · BEAUTY» с ростком) */
+async function exampleLogo(){
+  try { await Promise.all([document.fonts.load('400 120px Forum'), document.fonts.load('600 40px Manrope')]); } catch (e) {}
+  const cv = document.createElement('canvas'); cv.width = 900; cv.height = 300; const c = cv.getContext('2d');
+  c.fillStyle = '#fff'; c.fillRect(0, 0, 900, 300);
+  const R = 135, cx = 150, cy = 150, k = R / 46;   // круг логотипа: viewBox 100, радиус 46
+  c.save(); c.translate(cx, cy); c.scale(k, k); c.translate(-50, -50);
+  c.beginPath(); c.arc(50, 50, 46, 0, Math.PI * 2); c.fillStyle = '#FFFCF8'; c.fill(); c.lineWidth = 3; c.strokeStyle = '#4F5E3E'; c.stroke();
+  const petal = new Path2D('M50 47 C42 41 40.5 33 44 31 C47 29.5 53 29.5 56 31 C59.5 33 58 41 50 47Z');
+  for (let i = 0; i < 6; i++) {
+    c.save(); c.translate(50, 50); c.rotate(i * Math.PI / 3); c.translate(-50, -50);
+    c.fillStyle = '#E3E8D6'; c.fill(petal); c.lineWidth = 2; c.strokeStyle = '#5E6B48'; c.stroke(petal);
+    c.beginPath(); c.arc(50, 24, 6.2, 0, Math.PI * 2); c.fillStyle = '#5E6B48'; c.fill();
+    c.restore();
+  }
+  c.beginPath(); c.arc(50, 50, 7, 0, Math.PI * 2); c.fillStyle = '#B98324'; c.fill();
+  c.restore();
+  c.fillStyle = '#3E4A31'; c.font = '400 118px Forum, Georgia, serif'; c.fillText('Свои люди', 320, 158);
+  c.fillStyle = '#7A6E62'; c.font = '600 46px Manrope, sans-serif'; c.fillText('в Швейцарии', 324, 228);
   const img = new Image(); img.src = cv.toDataURL('image/png'); return new Promise(r => { img.onload = () => r(prepLogo(img)); img.onerror = () => r(null); });
 }
 
