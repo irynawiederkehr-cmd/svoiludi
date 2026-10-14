@@ -42,6 +42,8 @@
       if (rc.top - 8 - h >= 8) top = rc.top - 8 - h;               // не помещается под кнопкой, но помещается над ней
       else shift = Math.min(below + h - (vh - 8), Math.max(0, rc.top - 8));   // иначе прокрутить страницу, чтобы окошко было видно под кнопкой
     }
+    /* в открытом окне карточки (dialog поверх страницы) окошко живёт внутри окна и стоит по экрану: иначе его закрывает окно (14.10.2026, Ирина: «вопросительные знаки на карточках не открываются») */
+    if (qPop.parentNode !== document.body){ qPop.style.position = 'fixed'; qPop.style.left = left + 'px'; qPop.style.top = Math.max(8, Math.min(top, vh - 8 - h)) + 'px'; return; }
     qPop.style.left = (left + window.scrollX) + 'px'; qPop.style.top = (top + window.scrollY) + 'px';
     if (shift > 0) window.scrollBy(0, shift);
   }
@@ -53,7 +55,7 @@
       qPop = document.createElement('div'); qPop.className = 'qpop'; qPop.setAttribute('role', 'dialog');
       if (b.getAttribute('aria-label')) qPop.setAttribute('aria-label', b.getAttribute('aria-label'));
       qPop.innerHTML = text(b.dataset.help) + '<button type="button" class="qclose" aria-label="' + CLOSE + '">✕</button>';
-      document.body.appendChild(qPop);
+      var dlg = b.closest('dialog[open]'); (dlg || document.body).appendChild(qPop);
       place(b);
       qBtn = b; b.setAttribute('aria-expanded', 'true'); return;
     }

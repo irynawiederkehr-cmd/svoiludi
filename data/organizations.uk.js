@@ -53,6 +53,11 @@
    join    — как записаться или прийти
    contacts — { site, email, telegram, instagram, facebook, phone } — только официальные, как на сайте организации
    zefix   — номер UID (CHE-…) или 'устав' — чем проверили; checked — дата проверки 'ГГГГ-ММ-ДД'
+   gemeinde — ФЕРАЙН В СПИСКЕ ОБЩИНЫ вместо UID (правило Ирины 14.10.2026: «для ферайнов вместо регистрации — ссылки с сайтов гемайнде»):
+             [{ name: 'Kloten', verein: 'Schule UA-DO', url: 'https://www.kloten.ch/vereinsliste/90308', checked: 'ГГГГ-ММ-ДД' }, …] — по записи
+             на каждую общину, где ферайн есть в списке ферайнов на официальном сайте общины. На карточке (если нет UID): «Ферайн «…» есть в списке
+             ферайнов общины Kloten» и ссылка под строкой; в PDF — то же. Закрывает «регистрация — уточняем». name — название общины по-немецки,
+             verein — название ферайна, как в списке общины. Ссылку открываем перед тем, как внести; у руководителя в справочнике — то же поле.
    confirm — { date: 'ГГГГ-ММ-ДД', by: 'роль, имя', via: 'письмо с адреса организации' } — ставится ТОЛЬКО после подтверждения
    События и курсы организации подтягиваются сами из data/afisha.js (organizers: [{ name, link, org: '<id>' }]),
    вакансии и поиск партнёров — из data/vacancies.js (author: { org: '<id>', name, role, contacts }), бесплатно всегда.
@@ -1156,6 +1161,20 @@ window.ORGANIZATIONS = [
       "facebook": "100085216347032"
     },
     "zefix": "",
+    "gemeinde": [
+      {
+        "name": "Sisseln",
+        "verein": "Sportclub UA-DO",
+        "url": "https://www.sisseln.ch/vereinsliste/85291",
+        "checked": "2026-10-14"
+      },
+      {
+        "name": "Kloten",
+        "verein": "Schule UA-DO",
+        "url": "https://www.kloten.ch/vereinsliste/90308",
+        "checked": "2026-10-14"
+      }
+    ],
     "checked": "",
     "added": "2026-10-12",
     "team": [
@@ -1174,6 +1193,7 @@ window.ORGANIZATIONS = [
       }
     ],
     "todo": [
+      "Ферайн у списках громад (перевірено 14.10.2026): Kloten — «Schule UA-DO», https://www.kloten.ch/vereinsliste/90308; Sisseln — «Sportclub UA-DO» (за статутом «Schule UA-Do Sisseln», окремий ферайн із місцезнаходженням у Sisseln, тренування пн, ср 16:30–19:00, пт 16:00–18:00, адреса в списку — Schulhausstrasse 7), https://www.sisseln.ch/vereinsliste/85291; у списках Stein AG і Frick школи немає. У картці замість UID (правило Ірини 14.10.2026)",
       "Форма: ферайн «Schule UA-DO» (президент Volkov Vladimir) — у списку ферайнів міста Клотен із витягом зі статуту, https://www.kloten.ch/vereinsliste/90308 (перевірено 13.10.2026); у Zefix немає — для ферайну це нормально; членські внески на сторінці не вказані — уточнити",
       "Гроші з людей: цін на сайті немає, участь у відкритому чемпіонаті 2023 — 20 CHF → умови як для фахівців; уточнити плату за тренування",
       "Відповів 12.10.2026: засновник школи — він сам; події — щомісяця, новини — у місцевій пресі fricktal.info, у Facebook і YouTube",
@@ -1248,9 +1268,24 @@ window.ORGANIZATIONS = [
       "facebook": "100085216347032"
     },
     "zefix": "",
+    "gemeinde": [
+      {
+        "name": "Kloten",
+        "verein": "Schule UA-DO",
+        "url": "https://www.kloten.ch/vereinsliste/90308",
+        "checked": "2026-10-14"
+      },
+      {
+        "name": "Sisseln",
+        "verein": "Sportclub UA-DO",
+        "url": "https://www.sisseln.ch/vereinsliste/85291",
+        "checked": "2026-10-14"
+      }
+    ],
     "checked": "",
     "added": "2026-10-12",
     "todo": [
+      "Ферайн у списках громад (перевірено 14.10.2026): Kloten — «Schule UA-DO», https://www.kloten.ch/vereinsliste/90308; Sisseln — «Sportclub UA-DO» (за статутом «Schule UA-Do Sisseln», окремий ферайн із місцезнаходженням у Sisseln, тренування пн, ср 16:30–19:00, пт 16:00–18:00, адреса в списку — Schulhausstrasse 7), https://www.sisseln.ch/vereinsliste/85291; у списках Stein AG і Frick школи немає. У картці замість UID (правило Ірини 14.10.2026)",
       "Форма: ферайн «Schule UA-DO» (президент Volkov Vladimir) — у списку ферайнів міста Клотен із витягом зі статуту, https://www.kloten.ch/vereinsliste/90308 (перевірено 13.10.2026); у Zefix немає — для ферайну це нормально; членські внески на сторінці не вказані — уточнити",
       "Гроші з людей: цін на сайті немає, участь у відкритому чемпіонаті 2023 — 20 CHF → умови як для фахівців; уточнити плату за тренування",
       "Відповів 12.10.2026: засновник школи — він сам; події — щомісяця, новини — у місцевій пресі fricktal.info, у Facebook і YouTube",
@@ -1323,9 +1358,24 @@ window.ORGANIZATIONS = [
       "facebook": "100085216347032"
     },
     "zefix": "",
+    "gemeinde": [
+      {
+        "name": "Sisseln",
+        "verein": "Sportclub UA-DO",
+        "url": "https://www.sisseln.ch/vereinsliste/85291",
+        "checked": "2026-10-14"
+      },
+      {
+        "name": "Kloten",
+        "verein": "Schule UA-DO",
+        "url": "https://www.kloten.ch/vereinsliste/90308",
+        "checked": "2026-10-14"
+      }
+    ],
     "checked": "",
     "added": "2026-10-12",
     "todo": [
+      "Ферайн у списках громад (перевірено 14.10.2026): Kloten — «Schule UA-DO», https://www.kloten.ch/vereinsliste/90308; Sisseln — «Sportclub UA-DO» (за статутом «Schule UA-Do Sisseln», окремий ферайн із місцезнаходженням у Sisseln, тренування пн, ср 16:30–19:00, пт 16:00–18:00, адреса в списку — Schulhausstrasse 7), https://www.sisseln.ch/vereinsliste/85291; у списках Stein AG і Frick школи немає. У картці замість UID (правило Ірини 14.10.2026)",
       "Форма: ферайн «Schule UA-DO» (президент Volkov Vladimir) — у списку ферайнів міста Клотен із витягом зі статуту, https://www.kloten.ch/vereinsliste/90308 (перевірено 13.10.2026); у Zefix немає — для ферайну це нормально; членські внески на сторінці не вказані — уточнити",
       "Гроші з людей: цін на сайті немає, участь у відкритому чемпіонаті 2023 — 20 CHF → умови як для фахівців; уточнити плату за тренування",
       "Відповів 12.10.2026: засновник школи — він сам; події — щомісяця, новини — у місцевій пресі fricktal.info, у Facebook і YouTube",

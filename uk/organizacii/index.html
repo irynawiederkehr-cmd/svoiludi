@@ -394,6 +394,7 @@ a.bot:hover{color:#B98324}
 .ph.none.need-ph{background:#FFF6D6;border-color:#D9A43A;color:#6B4A10;align-content:center;gap:6px}
 .ph.none.need-ph .need{font-size:.85em;padding:0 6px}
 .d-need{margin:0 0 6px;font-size:.88rem}
+.d-gem{margin-bottom:0}.d-gem a{font-weight:600}  /* ферайн в списке общины (14.10.2026) */
 .pv-need,.adm-need{background:#FFEFB8;border:1.5px dashed #D9A43A;border-radius:10px;padding:8px 10px;color:#6B4A10}
 .sp h3{font-size:1.45rem;line-height:1.1}
 .sp .role{font-family:var(--display);font-size:1.02rem;color:var(--brown);line-height:1.3}
@@ -444,6 +445,7 @@ a.bot:hover{color:#B98324}
 .chips span{font-size:.82rem;background:var(--lf);border-radius:999px;padding:4px 11px}
 .d-side{background:var(--lf);border-radius:20px;padding:20px;display:flex;flex-direction:column;gap:18px}
 .d-side .place{flex-wrap:wrap}
+.d-side{min-width:0}.d-side :is(.adm-box,.adm-todo li,.d-note,.d-gem){overflow-wrap:anywhere}  /* длинная ссылка в заметке не растягивает окно карточки на телефоне (14.10.2026) */
 .ctl{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
 .ctl li{display:grid;grid-template-columns:96px 1fr;gap:10px;align-items:baseline;font-size:.94rem}
 .ctl li span{color:var(--muted);font-size:.84rem}
@@ -1080,9 +1082,9 @@ function ico(name, line = '#2E5A88', fill, size = 24){
 const AVATAR_SVG = '<svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="46" fill="#FFFCF8" stroke="#6E4F3C" stroke-width="3"/><g transform="rotate(22.5 50 50)"><path d="M50 50 C42 40 43 24 50 15 C57 24 58 40 50 50Z" fill="#E3E6D6" stroke="#66704F" stroke-width="2"/></g><g transform="rotate(67.5 50 50)"><path d="M50 50 C42 40 43 24 50 15 C57 24 58 40 50 50Z" fill="#E3E6D6" stroke="#66704F" stroke-width="2"/></g><g transform="rotate(112.5 50 50)"><path d="M50 50 C42 40 43 24 50 15 C57 24 58 40 50 50Z" fill="#E3E6D6" stroke="#66704F" stroke-width="2"/></g><g transform="rotate(157.5 50 50)"><path d="M50 50 C42 40 43 24 50 15 C57 24 58 40 50 50Z" fill="#E3E6D6" stroke="#66704F" stroke-width="2"/></g><g transform="rotate(202.5 50 50)"><path d="M50 50 C42 40 43 24 50 15 C57 24 58 40 50 50Z" fill="#E3E6D6" stroke="#66704F" stroke-width="2"/></g><g transform="rotate(247.5 50 50)"><path d="M50 50 C42 40 43 24 50 15 C57 24 58 40 50 50Z" fill="#E3E6D6" stroke="#66704F" stroke-width="2"/></g><g transform="rotate(292.5 50 50)"><path d="M50 50 C42 40 43 24 50 15 C57 24 58 40 50 50Z" fill="#E3E6D6" stroke="#66704F" stroke-width="2"/></g><g transform="rotate(337.5 50 50)"><path d="M50 50 C42 40 43 24 50 15 C57 24 58 40 50 50Z" fill="#E3E6D6" stroke="#66704F" stroke-width="2"/></g><g transform="rotate(0.0 50 50)"><path d="M50 50 C45 43 45 32 50 26 C55 32 55 43 50 50Z" fill="#EADFCF" stroke="#6E4F3C" stroke-width="2"/></g><g transform="rotate(45.0 50 50)"><path d="M50 50 C45 43 45 32 50 26 C55 32 55 43 50 50Z" fill="#EADFCF" stroke="#6E4F3C" stroke-width="2"/></g><g transform="rotate(90.0 50 50)"><path d="M50 50 C45 43 45 32 50 26 C55 32 55 43 50 50Z" fill="#EADFCF" stroke="#6E4F3C" stroke-width="2"/></g><g transform="rotate(135.0 50 50)"><path d="M50 50 C45 43 45 32 50 26 C55 32 55 43 50 50Z" fill="#EADFCF" stroke="#6E4F3C" stroke-width="2"/></g><g transform="rotate(180.0 50 50)"><path d="M50 50 C45 43 45 32 50 26 C55 32 55 43 50 50Z" fill="#EADFCF" stroke="#6E4F3C" stroke-width="2"/></g><g transform="rotate(225.0 50 50)"><path d="M50 50 C45 43 45 32 50 26 C55 32 55 43 50 50Z" fill="#EADFCF" stroke="#6E4F3C" stroke-width="2"/></g><g transform="rotate(270.0 50 50)"><path d="M50 50 C45 43 45 32 50 26 C55 32 55 43 50 50Z" fill="#EADFCF" stroke="#6E4F3C" stroke-width="2"/></g><g transform="rotate(315.0 50 50)"><path d="M50 50 C45 43 45 32 50 26 C55 32 55 43 50 50Z" fill="#EADFCF" stroke="#6E4F3C" stroke-width="2"/></g><circle cx="50" cy="50" r="7" fill="#B98324"/></svg>';
 
 </script>
-<script src="/data/specialists.uk.js?v=b5f95ebb"></script>
+<script src="/data/specialists.uk.js?v=a1716d5a"></script>
 <script src="/data/vacancies.uk.js?v=8b61da6f"></script>
-<script src="/data/organizations.uk.js?v=dc4a0053"></script>
+<script src="/data/organizations.uk.js?v=3326dcfd"></script>
 <script>
 window.IMG_BASE = '/img/org/';
 /* карточки специалистов — в /data/specialists.js (одна копия на весь сайт) */
@@ -1186,7 +1188,7 @@ window.SVL_ORG_ICONS = {
   };
   const items = ORGS.map(o => ({
     org: o, id: o.id, sample: !!o.sample, status: o.status === 'активен' && !(o.confirm && o.confirm.date) && !o.sample ? 'на підтвердженні' : o.status,
-    keyHash: o.keyHash || '', num: o.num || '', uid: /^CHE/.test(o.zefix || '') ? o.zefix : '', checked: o.checked || '', added: o.added || '',
+    keyHash: o.keyHash || '', num: o.num || '', uid: /^CHE/.test(o.zefix || '') ? o.zefix : '', checked: o.checked || '', added: o.added || '', gemeinde: (o.gemeinde || []).slice(),   /* ферайн в списке общины вместо UID (правило Ирины 14.10.2026) */
     name: o.name, role: roleOf(o), firm: '' /* строки под ролью у организаций нет (Ирина 12.10.2026, 16:47: «убери»); название из реестра, если отличается, — regName, внизу у UID */, regName: o.regName || '', photo: o.logo || '', cat: dirOf(o.dir), cat2: o.dir2 ? dirOf(o.dir2) : '', specs: (o.cats || []).slice(0, 3), tags: tagsOf(o),
     places: placesOf(o), online: !!o.online, onlineCH: o.onlineCH || '', onlineTier: o.onlineTier, tiers: o.tiers || [], paidUntil: o.paidUntil || '',
     langs: o.langs || [], about: o.about || '', services: o.offers || [], format: o.join || '', contacts: Object.assign({}, o.contacts || {}),
@@ -1215,8 +1217,9 @@ window.SVL_ORG_ICONS = {
         <b>${esc(m.name)}</b><small>${esc(m.role || '')}</small>${(m.services || []).length ? `<span class="tm-s">${m.services.map(x => esc(x)).join(' · ')}</span>` : ''}${(m.langs || []).length ? `<span class="tm-l">${esc(m.langs.join(', '))}</span>` : ''}</span></div>`).join('')}</div></div>`; };
   const specLive = id => { const x = (window.SPECIALISTS || []).find(r => r.id === id); return !!(x && x.status === 'активен'); };
   const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
-  const DISC = 'Картку заповнила сама організація, вона відповідає за її зміст. «Свої люди» не беруть участі в роботі організації й не відповідають за її допомогу, курси й події. Про все домовляйся напряму з організацією.';
-  const DISC_FIRM = 'Картку заповнила сама фірма, вона відповідає за її зміст. «Свої люди» не беруть участі в роботі фірми й не відповідають за її товари, послуги й ціни. Про все домовляйся напряму з фірмою.';
+  /* «Важно»: карточку проверяет и подтверждает её хозяин (правило Ирины 14.10.2026: «нужно так же писать, что карточку верифицирует сам хозяин карточки») */
+  const DISC = 'Картку заповнила сама організація, а перевірив і підтвердив її господар картки — власник або член правління. Організація відповідає за зміст картки. «Свої люди» не беруть участі в роботі організації й не відповідають за її допомогу, курси й події. Про все домовляйся напряму з організацією.';
+  const DISC_FIRM = 'Картку заповнила сама фірма, а перевірив і підтвердив її господар картки — власник фірми. Фірма відповідає за зміст картки. «Свої люди» не беруть участі в роботі фірми й не відповідають за її товари, послуги й ціни. Про все домовляйся напряму з фірмою.';
   window.SVL_ORG = {
     items, cats, groups: window.SVL_ORG_GROUPS || {}, tags,
     /* в окне карточки: пометка «размещение бесплатно» под названием */
@@ -1394,11 +1397,19 @@ const ktRu = c => (CANTONS[c] || [, c])[1];
    Контакты (правило Ирины 12.10.2026, 14:09: «не во всех карточках отображается инстаграм, телефон, мейл — их нужно запрашивать, отображать»):
    у такой карточки в контактах всегда есть строки «Телефон», «E-mail» и «Instagram»; пустая — «уточняем», и мы просим её во втором письме.
    Телефон и Instagram без обязательности (NEED_OPT): карточка выйдет и без них, но мы их всегда спрашиваем. */
+/* ФЕРАЙН В СПИСКЕ ОБЩИНЫ (правило Ирины 14.10.2026: «для ферайнов вместо регистрации вставить ссылки с сайтов гемайнде»).
+   Ферайну регистрация в торговом реестре нужна не всегда, UID у него часто нет. Тогда вместо UID в карточке — запись ферайна в списке ферайнов
+   на официальном сайте общины (Vereinsliste), по строке на каждую общину и ссылка под ней. У ферайна и у его руководителя в справочнике одинаково.
+   Пишем «есть в списке ферайнов общины», а не «зарегистрирован»: община ферайны не регистрирует, это её список на сайте.
+   Данные — s.gemeinde [{ name: 'Kloten', verein: 'Schule UA-DO', url: 'https://www.kloten.ch/vereinsliste/90308', checked: 'ГГГГ-ММ-ДД' }]
+   (у организаций — то же поле в data/organizations.js). Ссылку берём только с официального сайта общины и открываем перед тем, как внести. */
+const gemList = s => (s.gemeinde || []).filter(g => g && g.name && g.verein && /^https:\/\//.test(g.url || ''));
+const gemHost = u => String(u).replace(/^https:\/\/(www\.)?/, '').replace(/\/$/, '');
 const IS_ORG_PAGE = !!window.SVL_ORG;
 const oneWord = n => String(n || '').trim().split(/\s+/).filter(Boolean).length < 2;   // в имени нет фамилии
 const needOf = s => { if (!s || s.sample || s.status === 'активен') return {}; const c = s.contacts || {}, p = (s.places || [])[0] || {};
   const h = IS_ORG_PAGE ? ((s.org || {}).head || {}) : {};
-  return { photo: !IS_ORG_PAGE && !s.photo, place: !p.canton, email: !c.email, langs: !(s.langs || []).length, format: !IS_ORG_PAGE && !String(s.format || '').trim(), reg: !s.uid && !s.ahv, phone: !c.phone, insta: !c.instagram,
+  return { photo: !IS_ORG_PAGE && !s.photo, place: !p.canton, email: !c.email, langs: !(s.langs || []).length, format: !IS_ORG_PAGE && !String(s.format || '').trim(), reg: !s.uid && !s.ahv && !gemList(s).length, phone: !c.phone, insta: !c.instagram,
     surname: !IS_ORG_PAGE && oneWord(s.name),   // имя и фамилия обязательны (правило Ирины 12.10.2026, 14:25)
     ...(IS_ORG_PAGE ? { head: !h.name || /уточн/i.test(h.name), headSurname: !!h.name && !/уточн/i.test(h.name) && oneWord(h.name), form: !(s.org || {}).form, fees: !!s.feeNeed } : {}) }; };
 const NEED_T = { photo: 'фото', place: 'кантон і адреса', email: 'e-mail (на нього приходять підтвердження)', langs: 'мови', format: 'формат роботи', reg: IS_ORG_PAGE ? 'реєстрація (UID фірми або статут ферайну)' : 'реєстрація (UID або лист каси AHV)', head: 'керівник', form: 'форма (ферайн, фонд, фірма)', phone: 'телефон', insta: 'Instagram', surname: 'прізвище', headSurname: 'прізвище керівника', fees: 'внески (скільки й за що платять люди або «для людей усе безкоштовно»)' };
@@ -1949,6 +1960,23 @@ const inviteMsg = s => { const v = s.invite || {}, n = String(s.name || '').trim
     'Як довідник виглядає повністю:\n👥 Фахівці: https://svoiludi.ch/uk/' + (s.org ? '\n🏢 Організації: https://svoiludi.ch/uk/organizacii/' : '') + '\n📅 Події та курси: https://svoiludi.ch/uk/events/\n🎁 Акції: https://svoiludi.ch/uk/akcii/\n💼 Вакансії та партнерство: https://svoiludi.ch/uk/vakansii/',
     'А якщо зараз не час — нічого страшного, робити нічого не потрібно. Дякую вам за те, що ви робите!\nЗ теплом, Ірина 🤍'].filter(Boolean).join('\n\n'); };
 const inviteHref = s => `https://wa.me/${waDigits(waTo(s))}?text=${encodeURIComponent(inviteMsg(s))}`;
+/* короткое приглашение для Instagram Direct (14.10.2026, лиды из Instagram SG-0033…SG-0039): в Direct одно сообщение — не больше 1000 знаков,
+   поэтому тот же смысл короче — пробная карточка из того, что человек сам разместил, ни к чему не обязывает; почему мы сделали её сами;
+   от человека — только ответить (правило Ирины 12.10.2026, 17:05). Фраза про кантон (invite.local) — только если помещается. */
+const IG_MAX = 1000;
+const inviteMsgIg = s => { const v = s.invite || {}, n = String(s.name || '').trim().split(/\s+/)[0], D = draftLines(s);
+  const build = (local, full, price = true) => [v.hi || `Добрий день${n ? ', ' + n : ''}! Мене звати Ірина Вознесенська. ${v.seen ? `Побачила ${v.seen} і вирішила вам написати 🙂` : 'Вирішила вам написати 🙂'}`,
+    'Я запустила 🌿 «Свої люди» — довідник фахівців, які працюють у Швейцарії російською та українською. Щоб свої знаходили своїх в одному місці, а не в різних чатах.',
+    `Я підготувала для вас пробну картку ${v.by || 'за вашим профілем'}. Вона зібрана лише з того, що ви самі розмістили в інтернеті, і ні до чого не зобов’язує. Поки її бачите тільки ви:\n👉 ${previewUrl(s)}`,
+    price && priceAskOn(s) ? '💶 Ціни я теж внесла — подивіться, будь ласка, чи все актуально.' : '',
+    !D.length ? '' : full ? `Для прикладу додала й ваші записи:\n${D.join('\n')}` : `Для прикладу додала й ваші записи (${D.length}) — кожен відкривається просто з картки.`,
+    'Ми цінуємо ваш час, тому для перших учасників робимо картки самі. Від вас — лише відповідь: що виправити, а якщо все правильно, так і напишіть. І скоро ви станете частиною нашої спільноти.',
+    `${local && v.local ? v.local + ' ' : ''}До кінця 2027 року все безкоштовно. Весь довідник: https://svoiludi.ch/uk/`,
+    'Якщо зараз не час — нічого робити не потрібно. З теплом, Ірина 🤍'].filter(Boolean).join('\n\n');
+  /* не помещается — сначала без фразы про кантон, потом записи без ссылок (их ссылки «Открыть, как на сайте» стоят в самой пробной карточке) */
+  /* украинский текст длиннее: если и так не помещается — без строки о ценах (просьба проверить цены есть в самой карточке), 14.10.2026 */
+  return [[true, true], [false, true], [true, false], [false, false], [false, false, false]].map(([l, f, pr]) => build(l, f, pr)).find(t => t.length <= IG_MAX) || build(false, false, false); };
+const inviteText = s => dmVia(s) === 'instagram' ? inviteMsgIg(s) : inviteMsg(s);
 /* invite.via = 'facebook' (12.10.2026, Анастасия SG-0025): приглашаем через Facebook, даже если в карточке есть телефон (например, стационарный телефон салона) */
 const fbFirst = s => (s.invite || {}).via === 'facebook' || (!waTo(s) && !!(s.contacts || {}).facebook);
 const inviteOn = s => ADMIN && !!s.invite && !!OKKEY[s.id] && !!waTo(s) && !fbFirst(s);
@@ -1964,7 +1992,7 @@ const dmName = v => v === 'telegram' ? 'Telegram' : 'Instagram';
 const dmHref = s => { const v = dmVia(s), n = String((s.contacts || {})[v] || '').replace(/^@/, '').replace(/\s/g, ''); return v === 'telegram' ? LINK.telegram(n)[1] : 'https://ig.me/m/' + n; };
 const inviteDmOn = s => ADMIN && !!s.invite && !!OKKEY[s.id] && !!dmVia(s);
 document.addEventListener('click', async e => { const b = e.target.closest('[data-copyinvite]'); if (!b) return;
-  const s = SPECIALISTS.find(x => x.id === b.dataset.copyinvite); if (!s) return; const t = inviteMsg(s);
+  const s = SPECIALISTS.find(x => x.id === b.dataset.copyinvite); if (!s) return; const t = inviteText(s);
   try { await navigator.clipboard.writeText(t); (b.querySelector('b') || b).textContent = 'Текст скопійовано ✓ — встав його в повідомлення'; } catch (x) { e.preventDefault(); prompt('Скопіюйте текст запрошення', t); if (b.href) window.open(b.href, '_blank', 'noopener'); } });
 const mailto = (to, su, body) => `mailto:${to}?subject=${encodeURIComponent(su)}&body=${encodeURIComponent(body)}`;
 const gmail = (to, su, body) => `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(to)}&su=${encodeURIComponent(su)}&body=${encodeURIComponent(body)}`;
@@ -2080,7 +2108,7 @@ function adminBox(s){
     + admAct(`data-copyprev="${esc(s.id)}"`, 'Скопіювати посилання для Telegram',
       'Текст із посиланням на попередній перегляд копіюється в буфер. Встав його організації в Telegram або WhatsApp. Підтвердження вона зробить кнопкою на сайті — e-mail не потрібен.');
   const inv = !s.invite ? '' : dmVia(s) ? (inviteDmOn(s) ? admAct(`href="${esc(dmHref(s))}" ${ext} data-copyinvite="${esc(s.id)}"`, `Запросити у ${dmName(dmVia(s))} — скопіювати готове повідомлення`,
-      `Текст запрошення з посиланням на пробну картку копіюється в буфер, і відкривається чат із ${esc(LINK[dmVia(s)](s.contacts[dmVia(s)])[2])} у ${dmName(dmVia(s))}. Встав текст і надішли.`, true)
+      `Текст запрошення з посиланням на пробну картку копіюється в буфер, і відкривається чат із ${esc(LINK[dmVia(s)](s.contacts[dmVia(s)])[2])} у ${dmName(dmVia(s))}.${dmVia(s) === 'instagram' ? ' Для Instagram текст коротший: одне повідомлення в Direct — не більше 1000 знаків.' : ''} Встав текст і надішли.`, true)
     : `<div class="adm-act off"><b>Запрошення у ${dmName(dmVia(s))}</b><span>Відкрий картку один раз за посиланням із ключем (його надсилає Claude) — після цього тут з’явиться кнопка з готовим повідомленням.</span></div>`)
     : fbFirst(s) ? (inviteFbOn(s) ? (fbTo(s) ? admAct(`href="${esc(LINK.facebook(fbTo(s))[1])}" ${ext} data-copyinvite="${esc(s.id)}"`, 'Запросити у Facebook — скопіювати готове повідомлення',
       'Текст запрошення з посиланням на пробну картку копіюється в буфер, і відкривається профіль у Facebook. Там натисни «Написати» (Message), встав текст і надішли.', true)
@@ -2134,6 +2162,7 @@ function openCard(id){
         <div class="d-block"><h4>Контакти</h4><ul class="ctl">${contacts}</ul></div>${SVL_ORG.side(s)}
         <div class="card-acts">${likeBtn(s, true)}${s.sample ? '' : `<button type="button" class="vip-q" data-t="${esc(LIKE_TIP)}" aria-label="Що означає сердечко" aria-expanded="false">?</button>`}<button class="btn ghost svb" type="button" data-fav="${esc(s.id)}" aria-pressed="${FAV.has(s.id)}">${saveInner(s)}</button><button class="btn" type="button" data-vcf="${esc(s.id)}" data-tip="Зберегти телефон, e-mail і адресу в контакти телефона або комп’ютера. Поруч з іменем буде 🌿 і категорія — за ними контакт легко знайти пошуком">У контакти</button><button class="btn ghost" type="button" data-share="${esc(s.id)}">Поділитися</button><button class="btn ghost" type="button" data-png-card="${esc(s.id)}" data-tip="Візитка-картинка PNG: збережеться в галерею телефона, її зручно показати або переслати">Візитка PNG</button>${priceShown(s) ? `<button class="btn ghost" type="button" data-png-price="${esc(s.id)}" data-tip="Прайс-лист картинкою PNG: збережеться в галерею телефона">Прайс-лист PNG</button>` : ''}${(feeRows(s).length ? `<button class="btn ghost" type="button" data-png-fees="${esc(s.id)}" data-tip="Внески картинкою PNG: збережеться в галерею телефона">Внески PNG</button>` : '') + afBtn(s)}<button class="btn ghost" type="button" data-pdf-card="${esc(s.id)}" data-tip="Повна картка для друку й пошти">PDF</button></div>
         ${needOf(s).reg ? `<p class="d-need">${UT(NEED_T.reg[0].toUpperCase() + NEED_T.reg.slice(1))}</p>` : ''}
+        ${!s.uid ? gemList(s).map(g => `<p class="d-note d-gem">Ферайн «${esc(g.verein)}» є в списку ферайнів громади ${esc(g.name)}${g.checked ? ` (перевірено ${fmtDate(g.checked)})` : ''}.<br><a href="${esc(g.url)}" ${ext} data-tip="Відкрити запис ферайну на офіційному сайті громади">Запис ферайну на сайті громади ${esc(g.name)}</a></p>`).join('') : ''}
         <p class="d-note">${s.uid ? `Реєстраційний номер ${s.firm ? 'фірми ' : ''}(UID): <a class="uid" href="${uidUrl(s.uid)}" ${ext} data-tip="Відкрити запис в офіційному реєстрі підприємств Швейцарії (uid.admin.ch)">${esc(s.uid)}</a>. ${s.regName ? `Назва в реєстрі: ${esc(s.regName)}. ` : ''}` : ''}${s.checked ? `Дані перевірено ${fmtDate(s.checked)}. ` : ''}${s.num ? `Номер картки ${esc(s.num)}. ` : ''}Ми перевіряємо реєстрацію організації: запис у торговому реєстрі (Zefix) або статут. Усе інше в картці вказує сама організація. Домовленості — напряму з організацією.</p>
         <p class="report">Знайшли помилку в картці? <a href="${esc(reportLink(s))}">Повідомити</a></p>
         ${PREVIEW === s.id ? previewBox(s) : ''}${PRICEVIEW === s.id ? priceBox(s) : ''}${ADMIN ? adminBox(s) : ''}
@@ -2196,7 +2225,7 @@ function cardPage(s){
     <div class="pp-sec"><h4>Що робить організація</h4><p class="pp-ab${(s.about || '').length > 520 ? ' l' : ''}">${richPdf(s.about)}</p></div><div class="pp-sec"><h4>Що можна отримати</h4>${pdfList(s.services)}</div>
     <div class="pp-grid"><div class="pp-sec"><h4>Як прийти або записатися</h4><p>${richPdf(s.format)}</p></div><div class="pp-sec"><h4>Мови</h4><p>${esc(s.langs.join(', '))}</p></div></div>
     ${feePdf(s)}${pricePdf(s)}
-    ${s.uid ? `<div class="pp-sec"><h4>Реєстраційний номер (UID)</h4><a data-href="${esc(uidUrl(s.uid))}">${esc(s.uid)}</a> · перевірено${fmtDate(s.checked)} на uid.admin.ch</div>` : ''}<div class="pp-qr">${qrImg(vcard(s))}<div class="pp-sec"><h4>Картка на сайті</h4><a data-href="${esc(cardUrl(s))}">${esc(cardUrl(s))}</a><small>QR-код — візитка: наведіть камеру телефона, щоб зберегти контакт.</small></div></div>${pdfFoot}`;
+    ${!s.uid && gemList(s).length ? `<div class="pp-sec"><h4>Ферайн у списку громади</h4>${gemList(s).map(g => `«${esc(g.verein)}» — Gemeinde ${esc(g.name)}: <a data-href="${esc(g.url)}">${esc(gemHost(g.url))}</a>`).join('<br>')}</div>` : ''}${s.uid ? `<div class="pp-sec"><h4>Реєстраційний номер (UID)</h4><a data-href="${esc(uidUrl(s.uid))}">${esc(s.uid)}</a> · перевірено${fmtDate(s.checked)} на uid.admin.ch</div>` : ''}<div class="pp-qr">${qrImg(vcard(s))}<div class="pp-sec"><h4>Картка на сайті</h4><a data-href="${esc(cardUrl(s))}">${esc(cardUrl(s))}</a><small>QR-код — візитка: наведіть камеру телефона, щоб зберегти контакт.</small></div></div>${pdfFoot}`;
 }
 async function makePdf(pages, file){
   try { await loadLibs(); } catch(e){ toast('PDF зберігається на сайті. У цьому перегляді завантаження недоступне.'); return; }

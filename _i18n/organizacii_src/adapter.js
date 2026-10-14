@@ -34,7 +34,7 @@
   };
   const items = ORGS.map(o => ({
     org: o, id: o.id, sample: !!o.sample, status: o.status === 'активен' && !(o.confirm && o.confirm.date) && !o.sample ? 'на подтверждении' : o.status,
-    keyHash: o.keyHash || '', num: o.num || '', uid: /^CHE/.test(o.zefix || '') ? o.zefix : '', checked: o.checked || '', added: o.added || '',
+    keyHash: o.keyHash || '', num: o.num || '', uid: /^CHE/.test(o.zefix || '') ? o.zefix : '', checked: o.checked || '', added: o.added || '', gemeinde: (o.gemeinde || []).slice(),   /* ферайн в списке общины вместо UID (правило Ирины 14.10.2026) */
     name: o.name, role: roleOf(o), firm: '' /* строки под ролью у организаций нет (Ирина 12.10.2026, 16:47: «убери»); название из реестра, если отличается, — regName, внизу у UID */, regName: o.regName || '', photo: o.logo || '', cat: dirOf(o.dir), cat2: o.dir2 ? dirOf(o.dir2) : '', specs: (o.cats || []).slice(0, 3), tags: tagsOf(o),
     places: placesOf(o), online: !!o.online, onlineCH: o.onlineCH || '', onlineTier: o.onlineTier, tiers: o.tiers || [], paidUntil: o.paidUntil || '',
     langs: o.langs || [], about: o.about || '', services: o.offers || [], format: o.join || '', contacts: Object.assign({}, o.contacts || {}),
@@ -63,8 +63,9 @@
         <b>${esc(m.name)}</b><small>${esc(m.role || '')}</small>${(m.services || []).length ? `<span class="tm-s">${m.services.map(x => esc(x)).join(' · ')}</span>` : ''}${(m.langs || []).length ? `<span class="tm-l">${esc(m.langs.join(', '))}</span>` : ''}</span></div>`).join('')}</div></div>`; };
   const specLive = id => { const x = (window.SPECIALISTS || []).find(r => r.id === id); return !!(x && x.status === 'активен'); };
   const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
-  const DISC = 'Карточку заполнила сама организация, она отвечает за её содержание. «Свои люди» не участвуют в работе организации и не отвечают за её помощь, курсы и события. Обо всём договаривайся напрямую с организацией.';
-  const DISC_FIRM = 'Карточку заполнила сама фирма, она отвечает за её содержание. «Свои люди» не участвуют в работе фирмы и не отвечают за её товары, услуги и цены. Обо всём договаривайся напрямую с фирмой.';
+  /* «Важно»: карточку проверяет и подтверждает её хозяин (правило Ирины 14.10.2026: «нужно так же писать, что карточку верифицирует сам хозяин карточки») */
+  const DISC = 'Карточку заполнила сама организация, а проверил и подтвердил её хозяин карточки — владелец или член правления. Организация отвечает за содержание карточки. «Свои люди» не участвуют в работе организации и не отвечают за её помощь, курсы и события. Обо всём договаривайся напрямую с организацией.';
+  const DISC_FIRM = 'Карточку заполнила сама фирма, а проверил и подтвердил её хозяин карточки — владелец фирмы. Фирма отвечает за содержание карточки. «Свои люди» не участвуют в работе фирмы и не отвечают за её товары, услуги и цены. Обо всём договаривайся напрямую с фирмой.';
   window.SVL_ORG = {
     items, cats, groups: window.SVL_ORG_GROUPS || {}, tags,
     /* в окне карточки: пометка «размещение бесплатно» под названием */
