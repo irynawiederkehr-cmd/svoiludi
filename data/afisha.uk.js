@@ -83,6 +83,26 @@
    ===================================================================== */
 window.AFISHA = [
   {
+    sections: ['kursy'], type: 'pro', ktype: 'pro', kind: 'once',
+    id: 'iryna-pani-nail-bern-progel-kombi-2026-10-28', keyHash: 'e0be0590cd26f08a41e51a25606fc901bb0d39e762f209798bdb637958d910e1', status: 'на підтвердженні', title: 'Курс підвищення кваліфікації «ProGel + Комбі» — живий курс у Берні',
+    date: '2026-10-28', time: '09:00', timeEnd: '19:00',
+    canton: 'Bern', address: 'Spitalgasse 34, 3011 Bern', online: false,
+    langs: ['російська'], level: 'для майстрів манікюру після базового курсу та з досвідом',
+    price: 'CHF 470', per: 'за курс (1 день)', priceNote: '2 моделі, сертифікат і 2 місяці онлайн-уроків зі зворотним зв’язком', commercial: true,
+    organizers: ['iryna-pani-nail-bern'], link: 'https://iilschool.com/downloads/kurs-povysheniya-kvalifikaczii-progel-kombi/',
+    about: 'Один день із 9:00 до 19:00 і дві моделі — квадрат і овал. Зранку теорія: гелі, архітектура нігтя та причини відшарувань. Потім практика: зняття «на готовність», підготовка без пилки, опил за схемою, швидкі дизайни й покриття під кутикулу без лайнера. Розбираємо саме ваш запит і виправляємо помилки.'
+  },
+  {
+    sections: ['kursy'], type: 'pro', ktype: 'pro', kind: 'once',
+    id: 'iryna-pani-nail-bern-progel-kombi-2026-12-19', keyHash: 'e0be0590cd26f08a41e51a25606fc901bb0d39e762f209798bdb637958d910e1', status: 'на підтвердженні', title: 'Курс підвищення кваліфікації «ProGel + Комбі» — живий курс у Берні',
+    date: '2026-12-19', time: '09:00', timeEnd: '19:00',
+    canton: 'Bern', address: 'Spitalgasse 34, 3011 Bern', online: false,
+    langs: ['російська'], level: 'для майстрів манікюру після базового курсу та з досвідом',
+    price: 'CHF 470', per: 'за курс (1 день)', priceNote: '2 моделі, сертифікат і 2 місяці онлайн-уроків зі зворотним зв’язком', commercial: true,
+    organizers: ['iryna-pani-nail-bern'], link: 'https://iilschool.com/downloads/kurs-povysheniya-kvalifikaczii-progel-kombi/',
+    about: 'Один день із 9:00 до 19:00 і дві моделі — квадрат і овал. Зранку теорія: гелі, архітектура нігтя та причини відшарувань. Потім практика: зняття «на готовність», підготовка без пилки, опил за схемою, швидкі дизайни й покриття під кутикулу без лайнера. Розбираємо саме ваш запит і виправляємо помилки.'
+  },
+  {
     "sections": [
       "events"
     ],
@@ -162,13 +182,13 @@ window.AFISHA = [
     "about": "Напишіть мені — безкоштовно й без зобов’язань обговоримо вашу майбутню фотосесію: ідею, образи, реквізит і місце, вдома чи на швейцарській природі. Така консультація входить і в кожен пакет."
   },
   {
-    sections: ['events'], type: 'culture',
-    id: 'slava-photographer-luzern-korabl-2026-09', keyHash: '144a048c0c63ee28246cfb3c9b2b7563290a57fd5d326855e9f95fb1de9f9c0c', status: 'на підтвердженні', title: 'Фотосесія на історичному кораблі — Люцерн',
+    sections: ['events'], type: 'meet',
+    id: 'slava-photographer-luzern-korabl-2026-09', keyHash: '144a048c0c63ee28246cfb3c9b2b7563290a57fd5d326855e9f95fb1de9f9c0c', status: 'на підтвердженні', title: 'Фотосесія на історичному пароплаві Schiller — Люцерн',
     date: '2026-09-27',
-    canton: 'Luzern', address: 'Люцерн, Фірвальдштетське озеро', online: false,
-    langs: ['російська'], level: 'для дорослих', price: '', commercial: true,
+    canton: 'Luzern', address: 'Люцерн, Фірвальдштетське озеро, пароплав Schiller', online: false,
+    langs: ['російська'], level: 'для жінок', price: 'CHF 289', priceNote: 'усе включено: прогулянка, обід і фотосесія', commercial: true,
     organizers: ['slava-photographer-luzern'],
-    about: 'Фотосесія, яку не повторити: озеро, Альпи, історичний корабель — і ви в центрі цієї краси. Зйомка відбулася на борту під час зустрічі Nova Power Woman Europe.'
+    about: 'П’ять годин на історичному пароплаві Schiller 1906 року озерами довкола Люцерна: перший клас, швейцарська кухня, знайомства з жінками зі Швейцарії та Німеччини й професійна фотосесія на тлі Альп. Зустріч жіночої спільноти організували разом із Power Woman Europa.'
   },
   {
     "sections": [
@@ -907,7 +927,7 @@ window.AFISHA = [
     organizers: [{ org: 'ugcc-zurich', name: 'Українська греко-католицька місія в Цюриху' }], link: 'https://www.forum-magazin.ch/ukrainische-mission/updates/20260203-gottliche-liturgie-und-gebet-fur-den-frieden-in-de/',
     about: 'В останню суботу місяця місія вирушає до монастиря Айнзідельн. О 14:00 — Божественна літургія, зазвичай у каплиці Святої Магдалини, потім молитва за мир в Україні й у всьому світі та можливість сповідатися. Після — кава або невеликий перекус у кімнаті для паломників.'
   },
-  /* UA-DO (13.10.2026, черновик для афиши): расписание по fricktal.info (05.2024) — Зиссельн пн, ср, пт 16–19, Штайн по воскресеньям; уточняем у Володимира */
+  /* UA-DO (13.10.2026, черновик для афиши): расписание по fricktal.info (05.2024) — Зиссельн пн, ср, пт 16–19; уточняем у Володимира (Штайн убран 14.10.2026: филиала нет) */
   {
     sections: ['kursy'], type: 'kids', kind: 'regular',
     id: 'ua-do-sisseln-pn', keyHash: '09de5945781020e152796fdec5fcf631c0debd478625a7f2e7305f29d38834cf', status: 'на підтвердженні', title: 'Тренування UA-DO у Зіссельні',
@@ -935,15 +955,6 @@ window.AFISHA = [
     organizers: [{ org: 'ua-do-sisseln', name: 'Спортивна школа UA-DO' }], link: 'https://ua-do.ch/',
     about: 'Регулярні тренування спортивної школи UA-DO з українського єдиноборства UA-DO, «Козацького двобою», дзюдо та джиу-джитсу. Розклад за даними 2024 року — уточнюємо в школи.'
   },
-  {
-    sections: ['kursy'], type: 'kids', kind: 'regular',
-    id: 'ua-do-stein-vs', keyHash: '09de5945781020e152796fdec5fcf631c0debd478625a7f2e7305f29d38834cf', status: 'на підтвердженні', title: 'Тренування UA-DO в Штайні',
-    date: '2026-10-18', time: '', repeat: { freq: 'weekly' },
-    canton: 'Aargau', address: '4332 Stein AG', online: false,
-    langs: ['українська'], level: 'діти, підлітки й дорослі', price: 'ціну уточнюємо', commercial: true,
-    organizers: [{ org: 'ua-do-stein', name: 'Спортивна школа UA-DO' }], link: 'https://ua-do.ch/',
-    about: 'Регулярні тренування спортивної школи UA-DO з українського єдиноборства UA-DO, «Козацького двобою», дзюдо та джиу-джитсу. Розклад за даними 2024 року — уточнюємо в школи.'
-  },
   /* Спортивная школа UA-DO (12.10.2026): будущих событий на их сайте нет (новости — до 12.2023), поэтому для примера — их последний открытый чемпионат, с пометкой «прошло»
      (правило Ирины 12.10.2026, «lidy-svoiludi.md», раздел 6); на сайт для всех прошедшие не выходят никогда */
   {
@@ -952,7 +963,7 @@ window.AFISHA = [
     date: '2023-12-09', time: '10:00',
     canton: 'Aargau', address: 'Sportcenter Bustelbach, Sportplatzweg 2, 4332 Stein AG', online: false,
     langs: ['українська'], level: 'діти до 14 років', price: 'CHF 20', commercial: true,
-    organizers: [{ org: 'ua-do-stein', name: 'Спортивна школа UA-DO' }], link: 'https://ua-do.ch/2023/12/01/ua-do-school/',
+    organizers: [{ org: 'ua-do-sisseln', name: 'Спортивна школа UA-DO' }], link: 'https://ua-do.ch/2023/12/01/ua-do-school/',
     about: 'Спортивне свято для маленьких спортсменів до 14 років — веселі змагання в дисциплінах Rumble Do і Stiktug Do. Реєстрація учасників — з 9:00 до 10:00, початок змагань — о 10:00.'
   },
   /* пробная карточка SG-0037 «Стас» (лид из Instagram, 14.10.2026): его туры из Telegram-канала t.me/stanych — оба уже прошли,
