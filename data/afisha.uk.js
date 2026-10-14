@@ -87,6 +87,47 @@ window.AFISHA = [
       "events"
     ],
     "type": "promo",
+    "id": "diana-lupanova-konsultaciya",
+    "keyHash": "92b7de7ac2cfc337884e545ad094ac45ea53fb64a45947d6c18ec62eb73d2fed",
+    "status": "на підтвердженні",
+    "title": "Безкоштовна консультація перед перманентним макіяжем",
+    "promo": {
+      "kind": "free",
+      "what": "консультація перед перманентним макіяжем — форма, техніка й підбір відтінку",
+      "cond": [
+        "book"
+      ],
+      "always": true
+    },
+    "date": "2026-10-14",
+    "dateEnd": "2027-10-13",
+    "canton": "Solothurn",
+    "address": "4632 Trimbach",
+    "geo": [
+      47.3653,
+      7.8862
+    ],
+    "online": false,
+    "langs": [
+      "українська",
+      "німецька"
+    ],
+    "commercial": true,
+    "organizers": [
+      "diana-lupanova-trimbach"
+    ],
+    "signup": "ig",
+    "contacts": {
+      "instagram": "diana.lupanova.pmu"
+    },
+    "link": "",
+    "about": "Напишіть мені в особисті повідомлення в Instagram — безкоштовно й без зобов’язань розповім, як проходить перманентний макіяж, і разом підберемо форму, техніку та відтінок для брів, губ чи міжвійкової стрілки. Консультація — до запису на процедуру."
+  },
+  {
+    "sections": [
+      "events"
+    ],
+    "type": "promo",
     "id": "vika-foto-glarus-konsultaciya",
     "keyHash": "ef425914d53422cb49025d347bdfad17b144d4e5971b462cd5e265bf726142fd",
     "status": "на підтвердженні",
