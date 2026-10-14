@@ -12,7 +12,7 @@ ASSETS = ['assets/fonts.css', 'assets/wm.css', 'assets/help.js', 'assets/share.j
           'assets/lib/html2canvas.min.js', 'assets/lib/jspdf.umd.min.js', 'assets/lib/qrcode.js', 'assets/lib/jszip.min.js',
           'assets/lib/leaflet/leaflet.css', 'assets/lib/leaflet/leaflet.js', 'data/specialists.js', 'data/vacancies.js', 'fav/favicon.svg']
 ASSETS += ['assets/fonts/' + f for f in os.listdir(os.path.join(REPO, 'assets/fonts'))]
-ASSETS += ['img/' + f for f in os.listdir(os.path.join(REPO, 'img'))]
+ASSETS += ['img/' + f for f in os.listdir(os.path.join(REPO, 'img')) if os.path.isfile(os.path.join(REPO, 'img', f))]   # только файлы: в img/ есть папки (img/org)
 BANNER = ('<div style="position:sticky;top:0;z-index:999;background:#2f2924;color:#FFFCF8;font:600 13px/1.45 Manrope,system-ui,sans-serif;'
           'padding:8px 16px;text-align:center">Предпросмотр КОПИИ · на сайт не выложено · {date}. Карты и часть ссылок здесь не работают.</div>')
 
