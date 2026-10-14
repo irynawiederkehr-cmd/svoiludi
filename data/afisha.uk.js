@@ -83,6 +83,15 @@
    ===================================================================== */
 window.AFISHA = [
   {
+    sections: ['events'], type: 'culture',
+    id: 'slava-photographer-luzern-korabl-2026-09', keyHash: '144a048c0c63ee28246cfb3c9b2b7563290a57fd5d326855e9f95fb1de9f9c0c', status: 'на підтвердженні', title: 'Фотосесія на історичному кораблі — Люцерн',
+    date: '2026-09-27',
+    canton: 'Luzern', address: 'Люцерн, Фірвальдштетське озеро', online: false,
+    langs: ['російська'], level: 'для дорослих', price: '', commercial: true,
+    organizers: ['slava-photographer-luzern'],
+    about: 'Фотосесія, яку не повторити: озеро, Альпи, історичний корабель — і ви в центрі цієї краси. Зйомка відбулася на борту під час зустрічі Nova Power Woman Europe.'
+  },
+  {
     "sections": [
       "events"
     ],
