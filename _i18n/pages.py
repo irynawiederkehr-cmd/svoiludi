@@ -245,7 +245,7 @@ def post(html, src):
         html = html.replace('href="rss.xml"', 'href="/uk/novosti/rss.xml"').replace('svoiludi.ch/novosti/rss.xml', 'svoiludi.ch/uk/novosti/rss.xml')
     if src == 'opros/index.html':
         html = opros_keep_russian_payload(html)
-    if src == 'index.html':   # подтверждение карточки/прайс-листа: ответ специалисту — на языке страницы (как на сайте с 05.10.2026)
+    if src in ('index.html', 'organizacii/index.html'):   # подтверждение карточки/прайс-листа: ответ — на языке страницы (с 05.10.2026; «Организации» — с 15.10.2026)
         html = html.replace('&lang=ru${text', '&lang=uk${text')
     if src == 'prilozhenie/index.html':   # галерея «Как установить приложение»: украинские картинки (scratchpad gal/mock.js, 10.10.2026)
         html = html.replace('src="img/ru/', 'src="img/uk/')

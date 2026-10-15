@@ -39,7 +39,7 @@
     places: placesOf(o), online: !!o.online, onlineCH: o.onlineCH || '', onlineTier: o.onlineTier, tiers: o.tiers || [], paidUntil: o.paidUntil || '',
     langs: o.langs || [], about: o.about || '', services: o.offers || [], format: o.join || '', contacts: Object.assign({}, o.contacts || {}),
     prices: o.prices || [], pricesOk: !!o.pricesOk, pricesDate: o.pricesDate || '', priceSum: o.kind === 'firm' ? o.fee || '' : '',   // priceSum — короткая строка цен над прайс-листом в блоке «Цены» (12.10.2026)
-    invite: o.invite, todo: o.todo || [],   // приглашение в WhatsApp у скрытой пробной карточки и заметки — только в режиме Ирины (12.10.2026)
+    invite: o.invite, todo: o.todo || [], none: (o.none || []).slice(),   /* контакты, которых нет (15.10.2026) */   // приглашение в WhatsApp у скрытой пробной карточки и заметки — только в режиме Ирины (12.10.2026)
     /* взносы (правила Ирины 12.10.2026, 14:21 и 14:23): у всех, кроме фирм, — список fees [{ sum, name, per }] сразу под описанием, «Взносы PNG», в PDF и визитке;
        всё бесплатно — «Взносов нет»; не знаем, берут ли деньги, — «Взносы — уточняем» (только у карточки, которая ещё не на сайте) */
     ...(o.kind === 'firm' ? {} : { fees: (o.fees || []).slice(), feeFree: o.free === true, feeDonation: o.free === true && /пожертв/i.test(o.fee || ''),

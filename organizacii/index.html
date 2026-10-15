@@ -1102,9 +1102,9 @@ function ico(name, line = '#2E5A88', fill, size = 24){
 const AVATAR_SVG = '<svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="46" fill="#FFFCF8" stroke="#6E4F3C" stroke-width="3"/><g transform="rotate(22.5 50 50)"><path d="M50 50 C42 40 43 24 50 15 C57 24 58 40 50 50Z" fill="#E3E6D6" stroke="#66704F" stroke-width="2"/></g><g transform="rotate(67.5 50 50)"><path d="M50 50 C42 40 43 24 50 15 C57 24 58 40 50 50Z" fill="#E3E6D6" stroke="#66704F" stroke-width="2"/></g><g transform="rotate(112.5 50 50)"><path d="M50 50 C42 40 43 24 50 15 C57 24 58 40 50 50Z" fill="#E3E6D6" stroke="#66704F" stroke-width="2"/></g><g transform="rotate(157.5 50 50)"><path d="M50 50 C42 40 43 24 50 15 C57 24 58 40 50 50Z" fill="#E3E6D6" stroke="#66704F" stroke-width="2"/></g><g transform="rotate(202.5 50 50)"><path d="M50 50 C42 40 43 24 50 15 C57 24 58 40 50 50Z" fill="#E3E6D6" stroke="#66704F" stroke-width="2"/></g><g transform="rotate(247.5 50 50)"><path d="M50 50 C42 40 43 24 50 15 C57 24 58 40 50 50Z" fill="#E3E6D6" stroke="#66704F" stroke-width="2"/></g><g transform="rotate(292.5 50 50)"><path d="M50 50 C42 40 43 24 50 15 C57 24 58 40 50 50Z" fill="#E3E6D6" stroke="#66704F" stroke-width="2"/></g><g transform="rotate(337.5 50 50)"><path d="M50 50 C42 40 43 24 50 15 C57 24 58 40 50 50Z" fill="#E3E6D6" stroke="#66704F" stroke-width="2"/></g><g transform="rotate(0.0 50 50)"><path d="M50 50 C45 43 45 32 50 26 C55 32 55 43 50 50Z" fill="#EADFCF" stroke="#6E4F3C" stroke-width="2"/></g><g transform="rotate(45.0 50 50)"><path d="M50 50 C45 43 45 32 50 26 C55 32 55 43 50 50Z" fill="#EADFCF" stroke="#6E4F3C" stroke-width="2"/></g><g transform="rotate(90.0 50 50)"><path d="M50 50 C45 43 45 32 50 26 C55 32 55 43 50 50Z" fill="#EADFCF" stroke="#6E4F3C" stroke-width="2"/></g><g transform="rotate(135.0 50 50)"><path d="M50 50 C45 43 45 32 50 26 C55 32 55 43 50 50Z" fill="#EADFCF" stroke="#6E4F3C" stroke-width="2"/></g><g transform="rotate(180.0 50 50)"><path d="M50 50 C45 43 45 32 50 26 C55 32 55 43 50 50Z" fill="#EADFCF" stroke="#6E4F3C" stroke-width="2"/></g><g transform="rotate(225.0 50 50)"><path d="M50 50 C45 43 45 32 50 26 C55 32 55 43 50 50Z" fill="#EADFCF" stroke="#6E4F3C" stroke-width="2"/></g><g transform="rotate(270.0 50 50)"><path d="M50 50 C45 43 45 32 50 26 C55 32 55 43 50 50Z" fill="#EADFCF" stroke="#6E4F3C" stroke-width="2"/></g><g transform="rotate(315.0 50 50)"><path d="M50 50 C45 43 45 32 50 26 C55 32 55 43 50 50Z" fill="#EADFCF" stroke="#6E4F3C" stroke-width="2"/></g><circle cx="50" cy="50" r="7" fill="#B98324"/></svg>';
 
 </script>
-<script src="/data/specialists.js?v=524bdb39"></script>
+<script src="/data/specialists.js?v=8dde446b"></script>
 <script src="/data/vacancies.js?v=3527d207"></script>
-<script src="/data/organizations.js?v=56249141"></script>
+<script src="/data/organizations.js?v=0d93b3ae"></script>
 <script>
 window.IMG_BASE = '/img/org/';
 /* карточки специалистов — в /data/specialists.js (одна копия на весь сайт) */
@@ -1213,7 +1213,7 @@ window.SVL_ORG_ICONS = {
     places: placesOf(o), online: !!o.online, onlineCH: o.onlineCH || '', onlineTier: o.onlineTier, tiers: o.tiers || [], paidUntil: o.paidUntil || '',
     langs: o.langs || [], about: o.about || '', services: o.offers || [], format: o.join || '', contacts: Object.assign({}, o.contacts || {}),
     prices: o.prices || [], pricesOk: !!o.pricesOk, pricesDate: o.pricesDate || '', priceSum: o.kind === 'firm' ? o.fee || '' : '',   // priceSum — короткая строка цен над прайс-листом в блоке «Цены» (12.10.2026)
-    invite: o.invite, todo: o.todo || [],   // приглашение в WhatsApp у скрытой пробной карточки и заметки — только в режиме Ирины (12.10.2026)
+    invite: o.invite, todo: o.todo || [], none: (o.none || []).slice(),   /* контакты, которых нет (15.10.2026) */   // приглашение в WhatsApp у скрытой пробной карточки и заметки — только в режиме Ирины (12.10.2026)
     /* взносы (правила Ирины 12.10.2026, 14:21 и 14:23): у всех, кроме фирм, — список fees [{ sum, name, per }] сразу под описанием, «Взносы PNG», в PDF и визитке;
        всё бесплатно — «Взносов нет»; не знаем, берут ли деньги, — «Взносы — уточняем» (только у карточки, которая ещё не на сайте) */
     ...(o.kind === 'firm' ? {} : { fees: (o.fees || []).slice(), feeFree: o.free === true, feeDonation: o.free === true && /пожертв/i.test(o.fee || ''),
@@ -1271,7 +1271,7 @@ window.SVL_ORG_ICONS = {
 const SPECIALISTS = window.SVL_ORG.items;   // организации в виде карточек справочника (adapter.js)
 
 </script>
-<script src="/data/afisha.js?v=5fea78cf"></script><script src="/assets/afisha-org.js"></script>
+<script src="/data/afisha.js?v=12a51fd6"></script><script src="/assets/afisha-org.js"></script>
 <script>const AFISHA = window.AFISHA || [];</script>
 <script>
 const ADMIN = (() => {   // режим Ирины: svoiludi.ch/?ira=1 включает на этом устройстве, ?ira=0 выключает
@@ -1427,9 +1427,11 @@ const gemList = s => (s.gemeinde || []).filter(g => g && g.name && g.verein && /
 const gemHost = u => String(u).replace(/^https:\/\/(www\.)?/, '').replace(/\/$/, '');
 const IS_ORG_PAGE = !!window.SVL_ORG;
 const oneWord = n => String(n || '').trim().split(/\s+/).filter(Boolean).length < 2;   // в имени нет фамилии
+/* s.none — контакты, которых у человека нет (например, Instagram, который он так и не подтвердил, — Ирина 15.10.2026: «инстаграм он так и не подтвердил, значит его нет»): строки «уточняем» для них не рисуем и не просим */
+const noneOf = (s, k) => (s.none || []).includes(k);
 const needOf = s => { if (!s || s.sample || s.status === 'активен') return {}; const c = s.contacts || {}, p = (s.places || [])[0] || {};
   const h = IS_ORG_PAGE ? ((s.org || {}).head || {}) : {};
-  return { photo: !IS_ORG_PAGE && !s.photo, place: !p.canton, email: !c.email, langs: !(s.langs || []).length, format: !IS_ORG_PAGE && !String(s.format || '').trim(), reg: !s.uid && !s.ahv && !gemList(s).length, phone: !c.phone, insta: !c.instagram,
+  return { photo: !IS_ORG_PAGE && !s.photo, place: !p.canton, email: !c.email, langs: !(s.langs || []).length, format: !IS_ORG_PAGE && !String(s.format || '').trim(), reg: !s.uid && !s.ahv && !gemList(s).length, phone: !c.phone && !noneOf(s, 'phone'), insta: !c.instagram && !noneOf(s, 'instagram'),
     surname: !IS_ORG_PAGE && oneWord(s.name),   // имя и фамилия обязательны (правило Ирины 12.10.2026, 14:25)
     ...(IS_ORG_PAGE ? { head: !h.name || /уточн/i.test(h.name), headSurname: !!h.name && !/уточн/i.test(h.name) && oneWord(h.name), form: !(s.org || {}).form, fees: !!s.feeNeed } : {}) }; };
 const NEED_T = { photo: 'фото', place: 'кантон и адрес', email: 'e-mail (на него приходят подтверждения)', langs: 'языки', format: 'формат работы', reg: IS_ORG_PAGE ? 'регистрация (UID фирмы или устав ферайна)' : 'регистрация (UID или письмо кассы AHV)', head: 'руководитель', form: 'форма (ферайн, фонд, фирма)', phone: 'телефон', insta: 'Instagram', surname: 'фамилия', headSurname: 'фамилия руководителя', fees: 'взносы (сколько и за что платят люди или «для людей всё бесплатно»)' };
@@ -2049,7 +2051,7 @@ function previewBox(s){
     ${pvRecs(s).length ? `<span class="pv-need">📅 Вместе с карточкой вы подтверждаете и ${pvRecs(s).length > 1 ? `ваши занятия и события (${pvRecs(s).length})` : 'ваше занятие или событие'} из блока «Занятия и события» выше — отдельно подтверждать не нужно. Если там что-то не так, нажмите «Нужно исправить» и напишите, что поменять.</span>` : ''}
     ${needList(s).length ? `<span class="pv-need">Подсвеченные поля мы ещё уточняем: ${esc(needList(s).join(', '))}.${needReq(s).length ? ` Без ${needReq(s).length > 1 ? 'этих данных' : 'этого'} (${esc(needReq(s).join(', '))}) карточка на сайт не выйдет.` : ''}${needOpt(s).length ? ` ${esc(needOpt(s).join(' и ').replace(/^т/, 'Т'))} мы тоже просим, чтобы людям было проще с вами связаться.` : ''} Напишите нам эти данные в ответ на сообщение или нажмите «Нужно исправить».</span>` : ''}
     ${pvPriceCheck(s) ? `<span class="pv-need">💶 Цены — тоже часть карточки. Весь прайс-лист открыт выше, в блоке «Цены». Если какая-то цена изменилась или услуги больше нет, нажмите «Нужно исправить» и напишите, что поменять.</span>` : ''}
-    <label class="pv-ok"><input type="checkbox" data-pv-agree> <span>Данные в карточке верны${pvPriceCheck(s) ? ', в том числе услуги и цены в прайс-листе' : ''}${pvRecs(s).length ? ', занятия и события' : ''}. От имени организации я даю согласие на публикацию карточки на сайте svoiludi.ch.</span></label>
+    <label class="pv-ok"><input type="checkbox" data-pv-agree> <span>Данные в карточке верны${pvPriceCheck(s) ? ', в том числе услуги и цены в прайс-листе' : ''}${pvRecs(s).length ? ', занятия и события' : ''}. От имени организации я даю согласие на публикацию карточки на сайте svoiludi.ch, а также на хранение и обработку данных из неё, как описано в <a href="https://svoiludi.ch/privacy/" target="_blank" rel="noopener">политике конфиденциальности</a>.</span></label>
     ${pvRecs(s).length ? `<label class="pv-ok"><input type="checkbox" data-pv-agree> <span>Это мои занятия и события: я сам(а) их организую, или их проводит моя организация. Записи за других я не размещаю.</span></label>
     <label class="pv-ok"><input type="checkbox" data-pv-agree> <span>Они в моей компетенции: у меня есть нужные знания, опыт и разрешения. Они соответствуют законам Швейцарии, моего кантона и общины. Запись, оплата и договор — только со мной, «Свои люди» в них не участвуют.</span></label>` : ''}
     <label class="pv-ok"><input type="checkbox" data-pv-agree> <span>Я прочитал(а) <a href="https://svoiludi.ch/usloviya/" target="_blank" rel="noopener">условия размещения</a> и принимаю их, в том числе <a href="https://svoiludi.ch/usloviya/#isklyuchenie" target="_blank" rel="noopener">когда карточку снимают и за что исключают из проекта</a>. Перечитать их можно в любой момент.</span></label>
