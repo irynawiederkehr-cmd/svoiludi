@@ -196,6 +196,7 @@ DIRS = [
         ('Бухгалтерская фирма и Treuhand', 'Treuhandbüro', ''),
         ('Страховое агентство', 'Versicherungsagentur', 'посредник — запись в реестре FINMA'),
         ('Агентство недвижимости', 'Immobilienagentur', ''),
+        ('Маркетинговое и рекламное агентство', 'Marketingagentur, Werbeagentur, Social Media', ''),   # 15.10.2026, Upliftus Marketing Agency (Zürich), просьба Ирины
         ('IT и веб-студия', 'Webagentur, IT-Firma', ''),
     ]),
 ]
