@@ -184,7 +184,7 @@ input:disabled,select:disabled{opacity:.7}
       <p class="hint" id="markNote"></p></div>
   </div>
 
-  <div class="exbar" id="exbar" hidden><span>Это пример: имя и контакты вымышленные, на месте логотипа — логотип «Свои люди». Так будет выглядеть твоя визитка.</span><button type="button" class="btn sm" id="exOff">Вернуться к моим данным</button></div>
+  <div class="exbar" id="exbar" hidden><span>Это пример, всё в нём вымышленное. Так будет выглядеть твоя визитка, свой логотип можно добавить в поле «Логотип или фото».</span><button type="button" class="btn sm" id="exOff">Вернуться к моим данным</button></div>
 
   <div class="work">
     <div class="form" id="fields">
@@ -383,12 +383,14 @@ function blank(){
 function merge(a, b){ Object.keys(b || {}).forEach(k => { if (a[k] && typeof a[k] === 'object' && !Array.isArray(a[k]) && b[k] && typeof b[k] === 'object') merge(a[k], b[k]); else if (b[k] !== undefined) a[k] = b[k]; }); return a; }
 function norm(s){ if (OLD[s.layout]) s.layout = OLD[s.layout]; if (!TPL.some(t => t[0] === s.layout)) s.layout = 'band'; if (!SIZES[s.size]) s.size = '85x55'; if (s.orient !== 'v') s.orient = 'h'; if (!['icon', 'text', 'none'].includes(s.cstyle)) s.cstyle = 'icon'; s.nomark = !!s.nomark; return s; }
 function load(){ try { const s = JSON.parse(localStorage.getItem(KEY)); if (s && typeof s === 'object') return norm(merge(blank(), s)); } catch (e) {} return blank(); }
-let S = load(), EX = null, LOGO = null, EXLOGO = null, EXNOLOGO = false, PAID = null, PAIDMSG = '';   // PAID — проверенный платный пакет (без знака «Свои люди»)
+let S = load(), EX = null, LOGO = null, PAID = null, PAIDMSG = '';   // PAID — проверенный платный пакет (без знака «Свои люди»)
 try { const l = JSON.parse(localStorage.getItem(KEYLOGO)); if (l && l.c) LOGO = l; } catch (e) {}
 function save(){ if (EX) return; try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} }
 const D = () => EX || S;
 let LGX;   // логотип для миниатюр (подменяется на время их рисования)
-const LG = () => LGX !== undefined ? LGX : EX ? (EXNOLOGO ? null : EXLOGO) : LOGO;
+/* в примере логотипа нет: «Свои люди» на визитке — только знак внизу (Ирина 15.10.2026, 18:12: «свои люди только 1 раз, вверху убери»;
+   до этого на месте логотипа был логотип «Свои люди», а ещё раньше — вымышленный «Studio NAILS · BEAUTY») */
+const LG = () => LGX !== undefined ? LGX : EX ? null : LOGO;
 const get = (o, p) => p.split('.').reduce((a, k) => a == null ? a : a[k], o);
 const put = (o, p, v) => { const ks = p.split('.'), last = ks.pop(); ks.reduce((a, k) => a[k], o)[last] = v; };
 /* размер визитки в мм с учётом положения: [ширина, высота] */
@@ -614,23 +616,11 @@ function sign(P, d, o){
   return g.h;
 }
 /* логотип на белой скруглённой плашке (в шапке) или просто на белом поле */
-/* логотип «Свои люди» в примере (lg.svl) рисуем сами, прямо на фоне, без белой плашки (Ирина 14.10.2026, 22:33: «надпись «Свои люди» должна быть на фоне,
-   но без рамок»): кружок «своих» и рядом «Свои люди» и «в Швейцарии»; на шалфейной шапке — светлым, на белом поле — тёмным */
-const SVL_SUB = 'в Швейцарии';
-const svlRatio = () => { const H = 10, n = 0.5 * H / PT, u = 0.27 * H / PT; return 1.2 + Math.max(tw(SIGN.name, 'f', n), tw(SVL_SUB, 'r', u)) / H + 0.02; };
-function svlLogo(P, d, x, y, w, h, band){
-  const H = Math.min(h, w / svlRatio()), y0 = y + (h - H) / 2, x0 = x + (w - H * svlRatio()) / 2;
-  markIcon(P, x0, y0, H, d.bw);
-  const tx = x0 + H * 1.2, big = band ? C.BTX : (d.bw ? C.INK : '#3E4A31'), sub = band ? C.BSUB : C.MUT;
-  T(P, SIGN.name, tx, y0 + H * 0.56, 0.5 * H / PT, 'f', big);
-  T(P, SVL_SUB, tx, y0 + H * 0.86, 0.27 * H / PT, 'r', sub);
-}
 /* картинка логотипа в рамке x, y, w, h (рамка уже по пропорциям логотипа) */
-function logoImg(P, d, lg, x, y, w, h, band){ if (lg.svl) svlLogo(P, d, x, y, w, h, band); else P.img(logoData(d, lg), x, y, w, h); }
-/* белая плашка под логотипом — только у настоящих логотипов (у логотипа «Свои люди» её нет) */
-const plate = (P, lg, x, y, w, h, r) => { if (!lg.svl) P.rect(x, y, w, h, '#FFFFFF', null, r); };
+function logoImg(P, d, lg, x, y, w, h){ P.img(logoData(d, lg), x, y, w, h); }
+/* белая плашка под логотипом в шапке */
+const plate = (P, lg, x, y, w, h, r) => P.rect(x, y, w, h, '#FFFFFF', null, r);
 function logoAt(P, d, lg, x, y, w, h, plate){
-  if (lg.svl) { const lb = logoBox(lg, w, h); svlLogo(P, d, x + (w - lb.w) / 2, y + (h - lb.h) / 2, lb.w, lb.h, plate); return; }
   if (plate) { P.rect(x, y, w, h, '#FFFFFF', null, Math.min(w, h) * 0.12); const p = Math.min(w, h) * 0.12, lb = logoBox(lg, w - 2 * p, h - 2 * p); P.img(logoData(d, lg), x + (w - lb.w) / 2, y + (h - lb.h) / 2, lb.w, lb.h); }
   else { const lb = logoBox(lg, w, h); P.img(logoData(d, lg), x + (w - lb.w) / 2, y + (h - lb.h) / 2, lb.w, lb.h); }
 }
@@ -692,7 +682,7 @@ function tBandC(P, d, c, dr){
   if (dr) {
     bandRect(P, c, 0, hb);
     let y = c.Y + (hb - ih - (lph ? lph + c.g1 * 2 : 0)) / 2;
-    if (lb) { plate(P, lg, c.X + (c.CW - lpw) / 2, y, lpw, lph, 1.2); logoImg(P, d, lg, c.X + (c.CW - lb.w) / 2, y + 1.1, lb.w, lb.h, true); y += lph + c.g1 * 2; }
+    if (lb) { plate(P, lg, c.X + (c.CW - lpw) / 2, y, lpw, lph, 1.2); logoImg(P, d, lg, c.X + (c.CW - lb.w) / 2, y + 1.1, lb.w, lb.h); y += lph + c.g1 * 2; }
     ident(P, d, {x: c.x0, y, w: c.W, k: c.k, draw: true, band: true, align: 'center'});
     const xc = cx0;
     if (c.wide) {   // контакты по центру, фраза и знак — внизу по центру, QR-код — в правом нижнем углу
@@ -719,7 +709,7 @@ function tPanel(P, d, c, dr){
     const MH = c.y1 - cy - (fh || q ? c.g2 + Math.max(fh, q) : 0), ch = contacts(P, d, {x: c.x0, y: 0, w: c.W, k: c.k, style: st, draw: false, maxH: MH}).h;
     if (dr) {
       bandRect(P, c, 0, hb);
-      if (lb) { plate(P, lg, c.x0, c.Y + pad, lpw, lph, 1.2); logoImg(P, d, lg, c.x0 + (lg.svl ? 0 : 1.2), c.Y + pad + 1.1, lb.w, lb.h, true); }
+      if (lb) { plate(P, lg, c.x0, c.Y + pad, lpw, lph, 1.2); logoImg(P, d, lg, c.x0 + 1.2, c.Y + pad + 1.1, lb.w, lb.h); }
       ident(P, d, {x: c.x0, y: lb ? c.Y + hb - pad - ih : c.Y + (hb - ih) / 2, w: c.W, k: c.k, draw: true, band: true});
       if (ch) contacts(P, d, {x: c.x0, y: cy, w: c.W, k: c.k, style: st, draw: true, maxH: MH});
       if (fh) foot(P, d, {x: c.x0, y: c.y1 - fh, w: fw, k: c.k, draw: true, side: !q});
@@ -735,7 +725,7 @@ function tPanel(P, d, c, dr){
   const need = ch + (fh || q ? c.g2 + Math.max(fh, q) : 0);
   if (dr) {
     P.rect(c.X - bl, c.Y - bl, pw + bl, c.CH + 2 * bl, C.BAND);
-    if (lb) { plate(P, lg, px, c.y0, lpw, lph, 1.2); logoImg(P, d, lg, px + (lg.svl ? 0 : 1.2), c.y0 + 1.1, lb.w, lb.h, true); }
+    if (lb) { plate(P, lg, px, c.y0, lpw, lph, 1.2); logoImg(P, d, lg, px + 1.2, c.y0 + 1.1, lb.w, lb.h); }
     ident(P, d, {x: px, y: lb ? c.y1 - ih : vmid(c.y0, c.y1, ih), w: iwp, k: c.k, draw: true, band: true});
     const br = Math.max(fh, q), fb = br ? c.g2 + br : 0;   // внизу справа: фраза и знак слева, QR-код в правом нижнем углу
     if (ch) contacts(P, d, {x: rx, y: vmid(c.y0, c.y1 - fb, ch), w: rw, k: c.k, style: st, draw: true, maxH: MH});
@@ -756,7 +746,7 @@ function tSheet(P, d, c, dr){
   const need = ch + (fh ? (ch ? c.g2 : 0) + fh : 0);
   if (dr) {
     bandRect(P, c, 0, sh);
-    if (lb) logoImg(P, d, lg, c.wide ? c.x1 - lb.w : c.x0, top, lb.w, lb.h, false);
+    if (lb) logoImg(P, d, lg, c.wide ? c.x1 - lb.w : c.x0, top, lb.w, lb.h);
     ident(P, d, {x: c.x0, y: iy, w: iw, k: c.k, draw: true});
     P.line(c.x0, hy, c.x1, hy, C.LINE, 0.25);
     if (ch) contacts(P, d, {x: c.x0, y: cy, w: cw, k: c.k, style: st, draw: true, maxH: MH});
@@ -800,7 +790,7 @@ function back(P, d, X, Y){
     if (dr) {
       P.rect(c.X - (P.bl || 0), c.Y - (P.bl || 0), c.CW + 2 * (P.bl || 0), c.CH + 2 * (P.bl || 0), C.BAND);
       let y = vmid(c.y0, c.y1, H);
-      if (lb) { plate(P, lg, cx - lpw / 2, y, lpw, lph, 1.2); logoImg(P, d, lg, cx - lb.w / 2, y + 1.1, lb.w, lb.h, true); y += lph + (ih ? c.g2 : 0); }
+      if (lb) { plate(P, lg, cx - lpw / 2, y, lpw, lph, 1.2); logoImg(P, d, lg, cx - lb.w / 2, y + 1.1, lb.w, lb.h); y += lph + (ih ? c.g2 : 0); }
       if (ih) { ident(P, bd, {x: c.x0, y, w: tw2, k: c.k, draw: true, band: true, align: 'center'}); y += ih; }
       if (q) qrAt(P, url, c.wide ? c.x1 - q : cx - q / 2, c.wide ? vmid(c.y0, c.y1, q) : y + (lph || ih ? c.g3 : 0), q, true);
     }
@@ -847,29 +837,6 @@ function prepLogo(img){
   const g = o.getImageData(0, 0, cw, ch), gd = g.data; for (let i = 0; i < gd.length; i += 4) { const v = Math.round(gd[i] * 0.299 + gd[i + 1] * 0.587 + gd[i + 2] * 0.114); gd[i] = gd[i + 1] = gd[i + 2] = v; } o.putImageData(g, 0, 0);
   return {c: col, g: enc(), w: cw, h: ch, small: Math.max(img.naturalWidth, img.naturalHeight) < 500};
 }
-/* логотип в примере — логотип «Свои люди», как в шапке сайта: кружок «своих» и надпись (Ирина 14.10.2026, 12:42: «я это не хочу, там должны быть свои люди»;
-   раньше был вымышленный «Studio NAILS · BEAUTY» с ростком) */
-async function exampleLogo(){
-  try { await Promise.all([document.fonts.load('400 120px Forum'), document.fonts.load('600 40px Manrope')]); } catch (e) {}
-  const cv = document.createElement('canvas'); cv.width = 900; cv.height = 300; const c = cv.getContext('2d');
-  c.fillStyle = '#fff'; c.fillRect(0, 0, 900, 300);
-  const R = 135, cx = 150, cy = 150, k = R / 46;   // круг логотипа: viewBox 100, радиус 46
-  c.save(); c.translate(cx, cy); c.scale(k, k); c.translate(-50, -50);
-  c.beginPath(); c.arc(50, 50, 46, 0, Math.PI * 2); c.fillStyle = '#FFFCF8'; c.fill(); c.lineWidth = 3; c.strokeStyle = '#4F5E3E'; c.stroke();
-  const petal = new Path2D('M50 47 C42 41 40.5 33 44 31 C47 29.5 53 29.5 56 31 C59.5 33 58 41 50 47Z');
-  for (let i = 0; i < 6; i++) {
-    c.save(); c.translate(50, 50); c.rotate(i * Math.PI / 3); c.translate(-50, -50);
-    c.fillStyle = '#E3E8D6'; c.fill(petal); c.lineWidth = 2; c.strokeStyle = '#5E6B48'; c.stroke(petal);
-    c.beginPath(); c.arc(50, 24, 6.2, 0, Math.PI * 2); c.fillStyle = '#5E6B48'; c.fill();
-    c.restore();
-  }
-  c.beginPath(); c.arc(50, 50, 7, 0, Math.PI * 2); c.fillStyle = '#B98324'; c.fill();
-  c.restore();
-  c.fillStyle = '#3E4A31'; c.font = '400 118px Forum, Georgia, serif'; c.fillText('Свои люди', 320, 158);
-  c.fillStyle = '#7A6E62'; c.font = '600 46px Manrope, sans-serif'; c.fillText('в Швейцарии', 324, 228);
-  const img = new Image(); img.src = cv.toDataURL('image/png');
-  return new Promise(r => { img.onload = () => { const lg = prepLogo(img); if (lg) { lg.svl = true; lg.h = 1000; lg.w = Math.round(1000 * svlRatio()); } r(lg); }; img.onerror = () => r(null); });   // на визитке рисуется векторно (svlLogo), картинка — для поля «Логотип» в форме
-}
 
 /* ---------- экран ---------- */
 const st = $('status'), say = t => { st.textContent = t || ''; };
@@ -909,7 +876,7 @@ function fill(){
   $('markNote').textContent = EX ? 'В примере знак «Свои люди» стоит всегда.' : PAID ? `Пакет ${PAID.pkg} по карточке ${PAID.num} действует до ${ddmm(PAID.until)}: визитку можно скачать без знака.` : (PAIDMSG ? PAIDMSG + ' ' : '') + 'Внизу визитки — маленький знак «Свои люди». Убрать его можно с любым платным пакетом.';
   $('backFields').hidden = !d.back.on; $('qrToBox').hidden = d.qr.where === 'none'; $('qrUrl').hidden = d.qr.to !== 'url';
   const card = $('qrTo').querySelector('option[value="card"]'); card.disabled = !d.card; card.textContent = d.card ? 'На мою карточку в «Своих людях» (' + d.card.num + ')' : 'На мою карточку в «Своих людях» (сначала найди её по номеру)';
-  const lg = EX ? (EXNOLOGO ? null : EXLOGO) : LOGO; $('logoImg').hidden = !lg; if (lg) $('logoImg').src = lg.c; $('logoDel').hidden = !lg || dis; $('logoPick').hidden = dis;
+  const lg = EX ? null : LOGO; $('logoImg').hidden = !lg; if (lg) $('logoImg').src = lg.c; $('logoDel').hidden = !lg || dis; $('logoPick').hidden = dis;
   $('findQ').disabled = $('findBtn').disabled = dis; $('wipeBox').hidden = dis;
   $('exbar').hidden = !EX; $('exOn').hidden = !!EX;
   render();
@@ -1091,11 +1058,11 @@ const EXD = () => ({layout: 'band', font: 'sans', cstyle: 'text', size: S.size, 
   f: {name: 'Anna Kovalenko', role: 'Maniküre, Pediküre und Nageldesign', firm: 'Studio Anna', tag: 'Gepflegte Hände, gute Laune', serv: '', phone: '+41 00 000 00 00', wa: true, email: 'anna@example.ch', web: 'www.example.ch', ig: '', tg: '', street: 'Musterstrasse 12', city: '8000 Zürich', langs: []},
   back: {on: true, name: 'Анна Коваленко', role: 'Маникюр, педикюр и дизайн ногтей', line: 'Говорю по-русски и по-украински · запись в WhatsApp', logo: true},
   qr: {where: 'front', to: 'url', url: 'https://www.example.ch'}, card: null, nomark: false});
-async function exampleOn(opts, noLogo){ if (!noLogo && !EXLOGO) EXLOGO = await exampleLogo(); EXNOLOGO = !!noLogo; EX = norm(merge(EXD(), opts || {})); fill(); }
+async function exampleOn(opts){ EX = norm(merge(EXD(), opts || {})); fill(); }
 $('exOn').addEventListener('click', async () => { await exampleOn({layout: S.layout, font: S.font, cstyle: S.cstyle, qr: (S.layout === 'qr' || S.layout === 'onlyqr') ? {where: 'front'} : {}}); window.scrollTo({top: $('exbar').getBoundingClientRect().top + window.scrollY - 12, behavior: 'smooth'}); });
 $('exOff').addEventListener('click', () => { EX = null; fill(); });
 
-/* ссылка вида ?n=SG-0014 — подставить карточку сразу; ?example — пример (для веера и превью: &layout=, &font=, &cstyle=, &lbl=, &size=85x55|90x50|55x55, &orient=v, &qr=front|back|none, &nologo) */
+/* ссылка вида ?n=SG-0014 — подставить карточку сразу; ?example — пример (для веера и превью: &layout=, &font=, &cstyle=, &lbl=, &size=85x55|90x50|55x55, &orient=v, &qr=front|back|none) */
 const P0 = new URLSearchParams(location.search);
 fill();
 if (document.fonts && document.fonts.ready) document.fonts.ready.then(render);
@@ -1104,7 +1071,7 @@ if (P0.has('example')) {
   if (t) Object.assign(o, {layout: t[0], font: t[2], cstyle: t[3]}, (t[0] === 'qr' || t[0] === 'onlyqr') ? {qr: {where: 'front'}} : {});
   ['font', 'lbl', 'cstyle', 'size', 'orient'].forEach(k => { if (P0.get(k)) o[k] = P0.get(k); });
   if (P0.get('qr')) o.qr = {where: P0.get('qr')};
-  exampleOn(o, P0.has('nologo'));
+  exampleOn(o);
 }
 else if (P0.get('n')) { $('findQ').value = P0.get('n'); find(); }
 window.VIZ = {cardPage, a4, D, hasBack, printPages, homePages, dims, TPL, variant};
