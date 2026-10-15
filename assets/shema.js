@@ -162,7 +162,8 @@
   function mount(cfg){
     CFG = cfg;
     const $ = id => document.getElementById(id), st = $('status'), say = t => { if (st) st.textContent = t; };
-    const render = () => { const pages = cfg.build(); $('sheet').innerHTML = pages.map((p, i) => `<div class="sheet">${svg(p)}</div><div class="acts"><button type="button" class="btn ghost sm" data-png="${i}">Эту страницу в PNG</button></div>`).join('') || '<p class="hint">Отметь, что должно быть в PDF.</p>'; };
+    /* cfg.preview — необязательно: что показать на странице, если в PDF много листов (у листа p.ix — его номер в PDF для кнопки PNG; счёт с QR, 15.10.2026) */
+    const render = () => { const pages = cfg.preview ? cfg.preview() : cfg.build(); $('sheet').innerHTML = pages.map((p, i) => `<div class="sheet">${svg(p)}</div><div class="acts"><button type="button" class="btn ghost sm" data-png="${p.ix != null ? p.ix : i}">Эту страницу в PNG</button></div>`).join('') || '<p class="hint">Отметь, что должно быть в PDF.</p>'; };
     async function pdf(btns, share){
       btns.forEach(b => b.disabled = true); say('Готовлю PDF…');
       try { const blob = await makePdf(cfg.build(), cfg.title), name = cfg.name() + '.pdf';
