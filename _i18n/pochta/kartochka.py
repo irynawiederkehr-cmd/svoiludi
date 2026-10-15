@@ -64,6 +64,7 @@ def main():
     card.setdefault('status', 'на подтверждении')
     card.pop('key', None); card.pop('keyHash', None)
     key = klyuch.new_key(); card['keyHash'] = klyuch.sha(key)   # в открытых данных только отпечаток ключа (11.10.2026)
+    klyuch.zapomnit(cid, key)   # «Тайна»: после переезда — и в файл ключей (_i18n/tajna/README.md)
     card.setdefault('added', today); card['checked'] = card.get('checked') or today
     card['photo'] = f'{cid}.jpg'
     for k, v in (('paidUntil', ''), ('tiers', []), ('onlineCH', ''), ('tags', [])):

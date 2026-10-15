@@ -50,6 +50,27 @@ def sha(k):
     return hashlib.sha256(k.encode('utf-8')).hexdigest()
 
 
+TAJNA = os.path.join(ROOT, '_i18n', 'tajna', 'klyuchi.json')
+
+
+def zapomnit(rid, k):
+    """«Тайна» (15.10.2026): ключ ссылки — ещё и в файл ключей, по нему опубликованная копия сайта открывает запись по ссылке письма
+    (_i18n/tajna/README.md). Файл появляется только после переезда, когда репозиторий закрыт; пока его нет — ничего не делаем,
+    ключ живёт в письме и в папке приглашения, как раньше."""
+    if not k or not rid or not os.path.exists(TAJNA): return False
+    d = json.load(open(TAJNA, encoding='utf-8'))
+    d.setdefault('klyuchi', {})[rid] = k
+    open(TAJNA, 'w', encoding='utf-8').write(json.dumps(d, ensure_ascii=False, indent=1) + '\n')
+    return True
+
+
+def izvestnyj(rid, h):
+    """Ключ из файла ключей «Тайны», если он есть и совпадает с отпечатком h."""
+    if not os.path.exists(TAJNA): return ''
+    k = (json.load(open(TAJNA, encoding='utf-8')).get('klyuchi') or {}).get(rid, '')
+    return k if k and sha(k) == h else ''
+
+
 def load(name):
     js = ("global.window={};new Function('window',require('fs').readFileSync(process.argv[1],'utf8'))(window);"
           "console.log(JSON.stringify(window[process.argv[2]]||[]))")
@@ -126,7 +147,7 @@ def find(rid):
 def rekey(rid):
     f, r = find(rid)
     if not f: print(f'Нет записи с id «{rid}» ни в одном из файлов данных.'); return None
-    k = new_key(); set_hash(os.path.join(ROOT, 'data', f[1]), rid, sha(k))
+    k = new_key(); set_hash(os.path.join(ROOT, 'data', f[1]), rid, sha(k)); zapomnit(rid, k)
     who = (r.get('name') or r.get('title') or rid) + (f" ({r['num']})" if r.get('num') else '')
     to = ((r.get('contacts') or {}).get('email') or '') if f[0] in ('spec', 'org') else ''
     res = {'id': rid, 'kind': f[0], 'who': who, 'status': r.get('status'), 'sample': bool(r.get('sample')), 'links': links(f[0], r, k)}
@@ -166,6 +187,13 @@ def lead(cid, k=''):
         if r.get('keyHash') != h:
             set_hash(os.path.join(ROOT, 'data', 'afisha.js' if kind == 'afisha' else 'vacancies.js'), r['id'], h); changed += 1
     print(f"{card.get('name')} ({cid}): черновиков {len(out)}, ключ карточки поставлен {changed}.")
+    kk = izvestnyj(cid, h)
+    if not kk and k:
+        kk = re.split(r'[.#=]', k.strip().rstrip('/'))[-1] if ('.' in k or '#' in k) else k.strip()
+        kk = kk if sha(kk) == h else ''
+    if kk:
+        zapomnit(cid, kk)
+        for kind, r in out: zapomnit(r['id'], kk)
     if k:
         k = re.split(r'[.#=]', k.strip().rstrip('/'))[-1] if ('.' in k or '#' in k) else k.strip()
         if sha(k) != h: print('Ключ НЕ совпадает с отпечатком карточки: ссылки не печатаем.'); return False
@@ -188,4 +216,4 @@ if __name__ == '__main__':
     for rid in ids:
         res = rekey(rid)
         if res: print(json.dumps(res, ensure_ascii=False, indent=1))
-    print('\nКлюч нигде не сохранён: ссылку — сразу в черновик письма (на e-mail из карточки). Дальше: sync.py build, smoke, commit, push.')
+    print('\n' + ('Ключ записан и в файл ключей «Тайны». ' if os.path.exists(TAJNA) else 'Ключ нигде не сохранён: ') + 'ссылку — сразу в черновик письма (на e-mail из карточки). Дальше: sync.py build, smoke, commit, push.')

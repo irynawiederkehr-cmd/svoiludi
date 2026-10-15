@@ -229,6 +229,7 @@ def main():
         body = json.dumps(e, ensure_ascii=False, indent=2).replace('\n', '\n  ')
         s = s.replace(var, var + '  ' + body + ',\n', 1); open(p, 'w', encoding='utf-8').write(s)
         print(f'Записано первой строкой в data/{data} (на сайте скрыта).')
+        klyuch.zapomnit(e['id'], key)   # «Тайна»: после переезда — и в файл ключей (_i18n/tajna/README.md)
 
 if __name__ == '__main__':
     main()
