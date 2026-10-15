@@ -48,9 +48,11 @@
     if (!window.AFISHA) need.push(load(uk ? 'data/afisha.uk.js' : 'data/afisha.js'));
     loading = Promise.all(need).then(function(){
       var L = (window.SVL_SEARCH || []).slice();
-      (window.SPECIALISTS || []).forEach(function(s){ if (!s || !s.name) return; if (s.status && /удал|архив|скрыт/i.test(s.status)) return;
+      var today = new Date().toISOString().slice(0, 10), byId = {}; (window.SPECIALISTS || []).forEach(function(s){ if (s && s.id) byId[s.id] = s; });
+      /* в поиске — только то, что посетитель видит в списках: карточки «активен» с фото и оплаченным сроком (и образцы), события «активен» (15.10.2026: раньше в поиск попадали и скрытые пробные карточки) */
+      (window.SPECIALISTS || []).forEach(function(s){ if (!s || !s.name) return; if (!s.sample && !(s.status === 'активен' && s.photo && !(s.paidUntil && s.paidUntil < today))) return;
         L.push({g: T.spec, t: s.name + (s.role ? ' — ' + s.role : ''), u: '/#' + s.id, d: [].concat(s.specs || []).join(', ').slice(0, 140), k: [s.cat, (s.tags || []).join(' '), JSON.stringify(s.places || ''), (s.langs || []).join(' '), s.about || ''].join(' ')}); });
-      (window.AFISHA || []).forEach(function(e){ if (!e || !e.title) return; var sec = (e.sections && e.sections[0]) || 'events';
+      (window.AFISHA || []).forEach(function(e){ if (!e || !e.title) return; if (e.status !== 'активен') return; if ((e.organizers || []).some(function(o){ var c = typeof o === 'string' && byId[o]; return c && !c.sample && c.status !== 'активен'; })) return; var sec = (e.sections && e.sections[0]) || 'events';
         L.push({g: T.ev, t: e.title, u: '/' + (sec === 'kursy' ? 'kursy' : 'events') + '/#' + e.id, d: [e.date, e.canton, e.online ? 'онлайн' : ''].filter(Boolean).join(' · '), k: [e.type, e.address, e.about, (e.langs || []).join(' ')].join(' ')}); });
       L.forEach(function(it){ it._t = norm(it.t); it._a = norm([it.t, it.d, it.k].join(' ')); });
       IDX = L; return L;
