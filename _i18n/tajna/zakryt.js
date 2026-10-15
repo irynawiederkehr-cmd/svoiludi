@@ -118,6 +118,8 @@ function build(out, keys) {
 
   fs.rmSync(out, { recursive: true, force: true });
   copyTree(ROOT, out);
+  /* заголовки безопасности для Cloudflare (X-Frame-Options, nosniff, Referrer-Policy и др.) */
+  if (fs.existsSync(path.join(__dirname, '_headers'))) fs.copyFileSync(path.join(__dirname, '_headers'), path.join(out, '_headers'));
 
   /* 1. читаем все файлы данных */
   const files = [];
