@@ -969,16 +969,16 @@ window.AFISHA = [
     id: 'ua-do-sisseln-pn', keyHash: '09de5945781020e152796fdec5fcf631c0debd478625a7f2e7305f29d38834cf', status: 'на підтвердженні', title: 'Тренування UA-DO у Зіссельні',
     date: '2026-10-19', time: '16:30', timeEnd: '19:00', repeat: { freq: 'weekly' },
     canton: 'Aargau', address: 'Schulhausstrasse 11, 4334 Sisseln', online: false,
-    langs: ['українська'], level: 'діти, підлітки й дорослі', price: 'ціну уточнюємо', commercial: true,
+    langs: ['українська'], level: 'діти, підлітки й дорослі', price: 'безкоштовно', commercial: false,
     organizers: [{ org: 'ua-do-sisseln', name: 'Спортивна школа UA-DO' }], link: 'https://ua-do.ch/',
     about: 'Регулярні тренування спортивної школи UA-DO з українського єдиноборства UA-DO, «Козацького двобою», дзюдо та джиу-джитсу.'
   },
   {
     sections: ['kursy'], type: 'kids', kind: 'regular',
     id: 'ua-do-sisseln-sr', keyHash: '09de5945781020e152796fdec5fcf631c0debd478625a7f2e7305f29d38834cf', status: 'на підтвердженні', title: 'Тренування UA-DO у Зіссельні',
-    date: '2026-10-14', time: '16:30', timeEnd: '19:00', repeat: { freq: 'weekly' },
+    date: '2026-10-21', time: '16:30', timeEnd: '19:00', repeat: { freq: 'weekly' },
     canton: 'Aargau', address: 'Schulhausstrasse 11, 4334 Sisseln', online: false,
-    langs: ['українська'], level: 'діти, підлітки й дорослі', price: 'ціну уточнюємо', commercial: true,
+    langs: ['українська'], level: 'діти, підлітки й дорослі', price: 'безкоштовно', commercial: false,
     organizers: [{ org: 'ua-do-sisseln', name: 'Спортивна школа UA-DO' }], link: 'https://ua-do.ch/',
     about: 'Регулярні тренування спортивної школи UA-DO з українського єдиноборства UA-DO, «Козацького двобою», дзюдо та джиу-джитсу.'
   },
@@ -987,9 +987,19 @@ window.AFISHA = [
     id: 'ua-do-sisseln-pt', keyHash: '09de5945781020e152796fdec5fcf631c0debd478625a7f2e7305f29d38834cf', status: 'на підтвердженні', title: 'Тренування UA-DO у Зіссельні',
     date: '2026-10-16', time: '16:00', timeEnd: '18:00', repeat: { freq: 'weekly' },
     canton: 'Aargau', address: 'Schulhausstrasse 11, 4334 Sisseln', online: false,
-    langs: ['українська'], level: 'діти, підлітки й дорослі', price: 'ціну уточнюємо', commercial: true,
+    langs: ['українська'], level: 'діти, підлітки й дорослі', price: 'безкоштовно', commercial: false,
     organizers: [{ org: 'ua-do-sisseln', name: 'Спортивна школа UA-DO' }], link: 'https://ua-do.ch/',
     about: 'Регулярні тренування спортивної школи UA-DO з українського єдиноборства UA-DO, «Козацького двобою», дзюдо та джиу-джитсу.'
+  },
+  /* UA-DO (15.10.2026): праздник из ответа Володимира 14.10.2026 («День всіх святих 30 жовтня Зіссельн 16-00, для всіх бажаючих — безкоштовно»); адрес — зал школы, подтверждает он */
+  {
+    sections: ['events'], type: 'culture',
+    id: 'ua-do-sisseln-2026-10-30', keyHash: '09de5945781020e152796fdec5fcf631c0debd478625a7f2e7305f29d38834cf', status: 'на підтвердженні', title: 'Свято «День усіх святих» у школі UA-DO',
+    date: '2026-10-30', time: '16:00',
+    canton: 'Aargau', address: 'Schulhausstrasse 11, 4334 Sisseln', online: false,
+    langs: ['українська'], level: 'для всіх охочих', price: 'безкоштовно', commercial: false,
+    organizers: [{ org: 'ua-do-sisseln', name: 'Спортивна школа UA-DO' }], link: 'https://ua-do.ch/',
+    about: 'Спортивна школа UA-DO запрошує на свято «День усіх святих» у Зіссельні. Прийти може кожен, участь безкоштовна.'
   },
   /* Спортивная школа UA-DO (12.10.2026): будущих событий на их сайте нет (новости — до 12.2023), поэтому для примера — их последний открытый чемпионат, с пометкой «прошло»
      (правило Ирины 12.10.2026, «lidy-svoiludi.md», раздел 6); на сайт для всех прошедшие не выходят никогда */
