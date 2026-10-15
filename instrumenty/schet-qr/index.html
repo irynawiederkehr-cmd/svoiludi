@@ -65,6 +65,11 @@ select:focus-visible,input:focus-visible,button:focus-visible,textarea:focus-vis
 .g2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 @media (max-width:560px){.g2{grid-template-columns:1fr}}
 .hint{font-size:.84rem;color:var(--muted);margin:0}
+/* номер карточки «Свои люди» — данные подставляются сами (15.10.2026), как в «Визитке для печати» */
+.find-sec{margin:0 0 16px}.find-sec .row2{max-width:560px}
+.row2{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;align-items:center}
+.found{background:var(--sage-soft);border-radius:12px;padding:10px 12px;font-size:.88rem}
+.found.err{background:color-mix(in srgb,#C0392B 9%,var(--paper));border:1.5px solid color-mix(in srgb,#C0392B 30%,var(--line))}
 .chk{display:flex;flex-direction:column;gap:8px}
 .chk label{display:flex;gap:10px;align-items:baseline;font-size:.92rem;cursor:pointer}
 .chk input{flex:none;width:18px;height:18px;accent-color:var(--sage);transform:translateY(3px)}
@@ -133,6 +138,11 @@ select:focus-visible,input:focus-visible,button:focus-visible,textarea:focus-vis
     <div class="fl"><span class="lb">Печать</span><label class="tog"><input type="checkbox" id="perf"> Бумага с перфорацией (без пунктира и ножниц)</label></div>
     <div class="fl"><span class="lb">Новый счёт</span><button type="button" class="btn ghost sm" id="newInv">Следующий номер, очистить услуги</button></div>
   </div>
+  <section class="sec find-sec" aria-labelledby="h-find"><h2 id="h-find">Ты уже в справочнике «Свои люди»?<button type="button" class="qh" data-help="find" aria-label="Подсказка: номер карточки" aria-expanded="false">?</button></h2>
+    <p class="hint">Впиши номер своей карточки (SG-… или OR-…, он стоит внизу карточки на сайте) или UID фирмы. Имя или фирма, адрес, телефон и e-mail подставятся сами. IBAN впиши сама, его в карточке нет.</p>
+    <div class="row2"><input type="text" id="findQ" placeholder="SG-0014 или CHE-123.456.789" autocomplete="off" aria-label="Номер карточки или UID"><button type="button" class="btn sm" id="findBtn">Подставить</button></div>
+    <div class="found" id="found" role="status" hidden></div>
+  </section>
   <div class="exbar" id="exbar" hidden><span>Это пример. Так будет выглядеть твой файл.</span><button type="button" class="btn sm" id="exOff">Вернуться к моим данным</button></div>
   <div class="work">
     <div class="form" id="fields"></div>
@@ -165,7 +175,8 @@ window.HELP = {
   mwst: '<p>Только если ты зарегистрирована плательщиком НДС (обычно с оборота 100 000 франков в год). Номер выглядит так: CHE-123.456.789 MWST. Если не платишь НДС — оставь пустым и выбери «без НДС».</p>',
   nr: '<p>Номер счёта — подряд, без пропусков: так проще учёт и налоговая. Кнопка «Следующий номер» прибавит единицу.</p>',
   ref: '<p>Номер-ссылка в QR-коде помогает узнать, какой счёт оплачен. С QR-IBAN он обязателен (QR-Referenz), с обычным IBAN — по желанию (номер RF). Собирается сам из номера счёта.</p>',
-  msg: '<p>Короткий текст, который клиент увидит в квитанции и в банке, например «Счёт 2026-014, коучинг октябрь». До 140 знаков.</p>'
+  msg: '<p>Короткий текст, который клиент увидит в квитанции и в банке, например «Счёт 2026-014, коучинг октябрь». До 140 знаков.</p>',
+  find: '<p>Номер стоит внизу твоей карточки на svoiludi.ch. У специалистов он начинается с SG-…, у организаций — с OR-…. Можно вписать и UID фирмы (CHE-…). Подставляются данные только из карточек, которые уже открыты на сайте.</p><p>В счёте и QR-коде можно только латинские буквы. Если имя в карточке написано по-русски, впиши его латиницей сама. IBAN и номер НДС тоже впиши сама, их в карточке нет.</p>'
 };
 const KEY = 'schetQr.v1';
 const LBL = {
@@ -297,7 +308,7 @@ function renderForm(){
   </section>`;
 }
 let UI, tmr;
-function fill(){ const d = D(); if (typeof qrState === 'function') qrState(); $('lang').value = d.lang; $('perf').checked = !!d.perf; renderForm(); $('exbar').hidden = !EX; $('exOn').hidden = !!EX; if (UI) UI.render(); }
+function fill(){ const d = D(); if (typeof qrState === 'function') qrState(); $('findQ').disabled = $('findBtn').disabled = !!EX; $('lang').value = d.lang; $('perf').checked = !!d.perf; renderForm(); $('exbar').hidden = !EX; $('exOn').hidden = !!EX; if (UI) UI.render(); }
 const setPath = (o, path, v) => { const k = path.split('.'); if (k.length === 2) o[k[0]][k[1]] = v; else o[k[0]] = v; };
 $('lang').addEventListener('change', e => { S.lang = e.target.value; if (EX) EX.lang = S.lang; save(); fill(); });
 $('perf').addEventListener('change', e => { S.perf = e.target.checked; if (EX) EX.perf = S.perf; save(); fill(); });
@@ -317,6 +328,61 @@ document.addEventListener('click', e => {
   const del = e.target.closest && e.target.closest('[data-del]'); if (del) { S.pos.splice(+del.dataset.del, 1); if (!S.pos.length) S.pos.push({d: '', q: 1, p: 0}); save(); fill(); }
 });
 $('newInv').addEventListener('click', () => { if (EX) return; const m = String(S.nr).match(/^(.*?)(\d+)$/); S.nr = m ? m[1] + String(+m[2] + 1).padStart(m[2].length, '0') : S.nr + '-2'; S.pos = [{d: '', q: 1, p: 0}]; S.date = TODAY; S.msg = ''; save(); fill(); });
+/* номер карточки «Свои люди» или UID фирмы — данные из открытой карточки подставляются сами (Ирина 15.10.2026: «Для счета можно сделать»).
+   Ищем только карточки «активен» (у организаций — подтверждённые), образцы не подставляем. Данные сайта грузятся только по нажатию. */
+function loadCards(){
+  const root = document.body.getAttribute('data-root') || '/';
+  const need = [['SPECIALISTS', 'data/specialists.js'], ['ORGANIZATIONS', 'data/organizations.js']].filter(([g]) => !window[g]);
+  return Promise.all(need.map(([, src]) => new Promise(r => { const s = document.createElement('script'); s.src = root + src; s.onload = r; s.onerror = r; document.head.appendChild(s); })));
+}
+const tidy = s => String(s || '').replace(/\s+/g, ' ').trim();
+const digs = s => String(s || '').replace(/\D/g, '');
+const isCyr = s => /[Ѐ-ӿ]/.test(s || '');
+function parseQ(q){
+  q = String(q || '').toUpperCase().replace(/\s+/g, '');
+  const m = q.match(/^(SG|OR)-?0*(\d{1,5})$/); if (m) return {num: m[1] + '-' + ('0000' + m[2]).slice(-4)};
+  const dd = digs(q); if (dd.length === 9) return {uid: dd};
+  return null;
+}
+function splitAddr(a){   // «Limmatquai 118, 8001 Zürich (вход через салон)» → улица, номер, индекс, город
+  a = tidy(String(a || '').replace(/\(.*?\)/g, ' '));
+  const i = a.lastIndexOf(','), st = i > 0 ? a.slice(0, i).trim() : '', pc = i > 0 ? a.slice(i + 1).trim() : a;
+  const m = st.match(/^(.*?)\s+(\d+\s?[a-zA-Z]?)$/), p = pc.match(/^(\d{4})\s+(.+)$/);
+  return {street: m ? m[1] : st, no: m ? m[2].replace(/\s/g, '') : '', plz: p ? p[1] : '', city: p ? p[2] : (/^\d/.test(pc) ? '' : pc)};
+}
+const andList = a => a.length > 1 ? a.slice(0, -1).join(', ') + ' и ' + a[a.length - 1] : (a[0] || '');
+async function findCard(){
+  if (EX) return;
+  const box = $('found'), q = parseQ($('findQ').value);
+  const show = (t, err) => { box.hidden = false; box.className = 'found' + (err ? ' err' : ''); box.innerHTML = t; };
+  if (!q) return show('Впиши номер карточки, например SG-0014 или OR-0004, или UID фирмы вида CHE-123.456.789.', true);
+  show('Ищу карточку…');
+  await loadCards();
+  const today = new Date().toISOString().slice(0, 10);
+  const specs = (window.SPECIALISTS || []).map(s => ({t: 'spec', r: s, num: s.num || '', uid: s.uid || '', ok: s.status === 'активен' && !(s.paidUntil && s.paidUntil < today), sample: !!s.sample}));
+  const orgs = (window.ORGANIZATIONS || []).map(o => ({t: 'org', r: o, num: o.num || '', uid: /CHE/i.test(o.zefix || '') ? o.zefix : (o.uid || ''), ok: o.status === 'активен' && !!o.confirm, sample: !!o.sample}));
+  const hit = specs.concat(orgs).filter(x => q.num ? x.num.toUpperCase() === q.num : digs(x.uid) === q.uid);
+  if (!hit.length) return show('Такой карточки нет. Проверь номер, он стоит внизу твоей карточки на svoiludi.ch.', true);
+  const h = hit.find(x => x.ok && !x.sample) || hit[0];
+  if (h.sample) return show('Это образец, в нём всё вымышленное. Впиши номер своей карточки.', true);
+  if (!h.ok) return show('Эта карточка сейчас не открыта на сайте. Она ждёт подтверждения, стоит на паузе или у неё закончился срок. Пока заполни поля сама.', true);
+  const r = h.r, c = r.contacts || {}, m = S.me, got = [], todo = [];
+  const prev = S.fromCard || {};   // что подставила прошлая карточка и ещё не меняли руками — убираем, чтобы не смешать две карточки
+  ['name', 'street', 'no', 'plz', 'city', 'tel', 'mail'].forEach(k => { if (prev[k] && m[k] === prev[k]) m[k] = ''; });
+  const name = (h.t === 'spec' ? [r.firm, r.regName, r.name] : [r.name, r.regName]).map(tidy).find(x => x && !isCyr(x)) || '';
+  if (name) { m.name = name; got.push(h.t === 'spec' && name !== tidy(r.name) ? 'фирму' : h.t === 'org' ? 'название' : 'имя'); }
+  const pl = h.t === 'spec' ? ((r.places || []).find(p => p && p.address && !p.area) || {}).address : r.address;
+  if (pl && !isCyr(String(pl).replace(/\(.*?\)/g, ''))) { const a = splitAddr(pl); Object.assign(m, {street: a.street, no: a.no, plz: a.plz, city: a.city}); got.push('адрес'); if (!a.street) todo.push('улицу с номером дома'); }
+  else todo.push('адрес');
+  const ph = tidy(c.phone || c.whatsapp); if (ph) { m.tel = ph; got.push('телефон'); }
+  if (c.email) { m.mail = tidy(c.email); got.push('e-mail'); }
+  if (!clean(m.iban)) todo.push('IBAN');
+  S.fromCard = {num: r.num, name: m.name, street: m.street, no: m.no, plz: m.plz, city: m.city, tel: m.tel, mail: m.mail};
+  save(); fill();
+  show(`Нашлась карточка «${esc(r.name)}» (${esc(r.num)}).${got.length ? ' Подставили ' + andList(got) + ', проверь их.' : ''}${name ? '' : ' Имя в карточке написано по-русски, а в счёте нужна латиница, поэтому впиши его сама.'}${todo.length ? ' Ещё впиши ' + andList(todo) + '.' : ''}`);
+}
+$('findBtn').addEventListener('click', findCard);
+$('findQ').addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); findCard(); } });
 const EXD = () => ({lang: 'de', perf: false, me: {name: 'Olena Kovalenko', street: 'Musterstrasse', no: '12', plz: '8000', city: 'Zürich', tel: '079 123 45 67', mail: 'olena.k@example.ch', iban: 'CH93 0076 2011 6238 5295 7', mwst: ''}, cl: {name: 'Anna Müller', street: 'Bahnhofstrasse', no: '5', plz: '8001', city: 'Zürich', country: 'CH'}, nr: '2026-014', date: TODAY, days: 30, vat: 0, msg: 'Rechnung 2026-014, Coaching Oktober', useRef: true, pos: [{d: 'Coaching-Sitzung 60 Min.', q: 4, p: 150}, {d: 'Zusammenfassung und Übungen (PDF)', q: 1, p: 40}]});
 $('exOn').addEventListener('click', () => { EX = EXD(); fill(); window.scrollTo({top: $('exbar').offsetTop - 12, behavior: 'smooth'}); });
 $('exOff').addEventListener('click', () => { EX = null; fill(); });
