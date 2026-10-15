@@ -450,6 +450,23 @@ a.bot:hover{color:#B98324}
 .ctl li{display:grid;grid-template-columns:96px 1fr;gap:10px;align-items:baseline;font-size:.94rem}
 .ctl li span{color:var(--muted);font-size:.84rem}
 .ctl a{color:var(--ink);font-weight:600;text-decoration:underline;text-decoration-color:var(--lc);text-underline-offset:3px;overflow-wrap:anywhere}
+/* значки связи в открытой карточке (15.10.2026): один цвет, круг 46 px как у цветов-мандал, подпись под значком */
+.d-side{--cti:var(--brown);--ctf:var(--soft)}
+.ctl li.cti-row{display:block;margin-top:4px}
+.cti-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(60px,1fr));gap:12px 4px}
+.ctl .cti{display:flex;flex-direction:column;align-items:center;gap:6px;min-width:0;text-align:center;padding:0;border:0;background:none;color:var(--ink);font:inherit;text-decoration:none;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.ctl .cti-c{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;background:var(--paper);color:var(--cti);border:1.5px solid var(--cti);box-shadow:0 4px 10px -6px color-mix(in srgb,var(--cti) 60%,transparent);transition:background .15s,transform .15s}
+.ctl .cti small{font-size:.74rem;font-weight:600;color:var(--muted);line-height:1.2}
+@media (max-width:380px){.cti-list{grid-template-columns:repeat(auto-fill,minmax(56px,1fr));gap:12px 2px}.ctl .cti small{font-size:.69rem}}   /* 360 px: четыре значка в ряд */
+.cti .cf{fill:var(--ctf)} .cti .cw{fill:var(--paper)}
+.ctl .cti:hover .cti-c,.ctl .cti.on .cti-c{background:var(--ctf);transform:translateY(-1px)}
+.ctl .cti:focus-visible{outline:none}.ctl .cti:focus-visible .cti-c{outline:2px solid var(--cti);outline-offset:3px}
+.ct-mail{margin-top:14px;padding:14px;border-radius:14px;background:var(--paper);border:1px solid var(--line);display:flex;flex-direction:column;gap:12px}
+.ct-mail[hidden]{display:none}
+.ct-addr{font-weight:700;color:var(--ink);overflow-wrap:break-word}
+.ct-acts{display:flex;flex-wrap:wrap;gap:8px}
+.ct-acts .btn{padding:10px 16px;font-size:.88rem}
+.ctl .ct-acts a.btn{color:var(--paper);text-decoration:none}
 .d-note{font-size:.82rem;color:var(--muted)}
 .d-note a.uid{color:var(--ink);font-weight:600;white-space:nowrap;text-decoration:underline;text-decoration-color:var(--lc);text-underline-offset:3px}
 
@@ -842,6 +859,9 @@ const ICONS = {
   telegram: (c, f, s) => `<path d="M3.2 11.4L20.2 4.3C20.8 4.1 21.3 4.6 21.2 5.2L18.4 19C18.3 19.6 17.6 19.9 17.1 19.5L12.6 16.2L10.2 18.6C9.9 18.9 9.4 18.7 9.4 18.3V14.8L17 7.8L7.6 13.4L3.4 12.2C2.8 12 2.7 11.6 3.2 11.4Z" fill="${f}" stroke="${c}" ${s}/>`,
   instagram:(c, f, s) => `<rect x="3.5" y="3.5" width="17" height="17" rx="5" fill="${f}" stroke="${c}" ${s}/><circle cx="12" cy="12" r="4" fill="#fff" stroke="${c}" ${s}/><circle cx="16.9" cy="7.1" r="1.1" fill="${c}"/>`,
   mail:     (c, f, s) => `<rect x="3" y="5.5" width="18" height="13" rx="2.5" fill="${f}" stroke="${c}" ${s}/><path d="M3.8 7L12 12.8L20.2 7" fill="none" stroke="${c}" ${s}/>`,
+  /* значки связи в карточке (15.10.2026): WhatsApp — облачко с трубкой, Facebook — круг с «f»; в той же сетке 24 × 24, что telegram, instagram, mail */
+  whatsapp: (c, f, s) => `<path d="M12 3.4a8.6 8.6 0 0 0-7.4 13L3.4 20.6l4.3-1.1A8.6 8.6 0 1 0 12 3.4Z" fill="${f}" stroke="${c}" ${s}/><path d="M9.3 7.9c.4-.3.8-.2 1 .2l.8 1.7c.1.3 0 .6-.2.8l-.6.6c.6 1.3 1.6 2.3 2.9 2.9l.6-.6c.2-.2.5-.3.8-.2l1.7.8c.4.2.5.6.2 1-.6.8-1.6 1.2-2.5 1-2.6-.6-4.6-2.6-5.2-5.2-.2-.9.2-1.9.5-2Z" fill="${c}"/>`,
+  facebook: (c, f, s) => `<circle cx="12" cy="12" r="8.6" fill="${f}" stroke="${c}" ${s}/><path d="M13.1 20.4v-7.3h2.4M10.3 13.1h2.8M13.1 13.1v-2.6c0-1.5.8-2.3 2.2-2.3h1" fill="none" stroke="${c}" ${s}/>`,
   megaphone:(c, f, s) => `<path d="M4 10V14H7L15 18.5V5.5L7 10Z" fill="${f}" stroke="${c}" ${s}/><path d="M7 14L8.2 19H10.4L9.6 14" fill="none" stroke="${c}" ${s}/><path d="M18 9.5C19 10.2 19.5 11 19.5 12S19 13.8 18 14.5" fill="none" stroke="${c}" ${s}/>`,
   chatbot:  (c, f, s) => `<path d="M5 5H19A2 2 0 0 1 21 7V15A2 2 0 0 1 19 17H11L6.5 20.5V17H5A2 2 0 0 1 3 15V7A2 2 0 0 1 5 5Z" fill="${f}" stroke="${c}" ${s}/><circle cx="8.5" cy="11" r="1.2" fill="${c}"/><circle cx="12" cy="11" r="1.2" fill="${c}"/><circle cx="15.5" cy="11" r="1.2" fill="${c}"/>`,
   swissguide:(c, f, s) => `<path d="M2.8 10.6L19.6 3.4C20.3 3.1 20.9 3.7 20.7 4.4L17.2 18.2C17 18.9 16.2 19.1 15.7 18.6L11.4 14.8L9 17.5C8.6 17.9 8 17.6 8 17.1V13.6L16.4 6.2L6.7 12.4L3 11.6C2.4 11.4 2.3 10.8 2.8 10.6Z" fill="${f}" stroke="${c}" ${s}/><path d="M18 22.4C18 22.4 13.4 19.7 13.4 16.9A2.3 2.3 0 0 1 18 15.9A2.3 2.3 0 0 1 22.6 16.9C22.6 19.7 18 22.4 18 22.4Z" fill="#D52B1E" stroke="#fff" stroke-width="1"/><path d="M18 16.6V20M16.3 18.3H19.7" stroke="#fff" stroke-width="1.3" stroke-linecap="round"/>`,
@@ -1799,14 +1819,35 @@ document.addEventListener('click', async e => { const b = e.target.closest('[dat
 document.addEventListener('click', async e => { const b = e.target.closest('[data-copyprev]'); if (!b) return;
   const s = SPECIALISTS.find(x => x.id === b.dataset.copyprev); const t = `Добрий день! Я підготувала вашу картку для довідника «Свої люди у Швейцарії». Поки її бачите тільки ви. Перегляньте, будь ласка, чи все правильно.\n\n${previewUrl(s)}\n\n${priceAskOn(s) ? PRICE_ASK + '\n\n' : ''}${draftPara(s) ? draftPara(s) + '\n\n' : ''}Якщо все правильно, внизу картки поставте галочку й натисніть «Підтверджую» — це одне натискання. Якщо щось не так, натисніть «Потрібно виправити» й напишіть прямо там. Дякую!`;
   try { await navigator.clipboard.writeText(t); (b.querySelector('b') || b).textContent = 'Скопійовано ✓'; } catch (x) { prompt('Скопіюйте текст', t); } });
+/* значки связи в открытой карточке (15.10.2026): один цвет сайта (--cti), бумажный круг с кольцом, как цветы-мандалы; подпись под значком */
+const CT_ICO = [['email', 'mail', 'E-mail'], ['whatsapp', 'whatsapp', 'WhatsApp'], ['telegram', 'telegram', 'Telegram'], ['bot', 'chatbot', 'Telegram-бот'], ['instagram', 'instagram', 'Instagram'], ['facebook', 'facebook', 'Facebook']];
+const CT_SUBJ = 'Питання щодо вашої картки у 🌿 «Свої люди»';
+const CT_HELLO = 'Добрий день! Пишу щодо вашої картки в довіднику 🌿 «Свої люди» https://svoiludi.ch/uk/';
+const ctIco = n => ico(n, '#010203', '#020304', 26).replace(/stroke="#010203"/g, 'stroke="currentColor"').replace(/fill="#010203"/g, 'fill="currentColor"').replace(/fill="#020304"/g, 'class="cf"').replace(/fill="#fff"/gi, 'class="cw"');
+function ctIcons(s){
+  const c = s.contacts || {}, items = CT_ICO.filter(([k]) => c[k]); if (!items.length) return '';
+  return `<li class="cti-row"><div class="cti-list">${items.map(([k, i, t]) => {
+    if (k === 'email') return `<button type="button" class="cti" data-ctmail="${esc(s.id)}" aria-expanded="false" aria-label="E-mail: показати адресу й написати листа"><span class="cti-c">${ctIco(i)}</span><small>${t}</small></button>`;
+    const h = k === 'whatsapp' ? (inviteOn(s) ? inviteHref(s) : LINK.whatsapp(c.whatsapp)[1] + '?text=' + encodeURIComponent(CT_HELLO)) : LINK[k](c[k])[1];
+    return `<a class="cti" href="${esc(h)}" ${ext} aria-label="${t}: відкрити"><span class="cti-c">${ctIco(i)}</span><small>${t}</small></a>`; }).join('')}</div><div class="ct-mail" hidden></div></li>`;
+}
+document.addEventListener('click', e => { const b = e.target.closest('[data-ctmail]'); if (!b) return;
+  const s = SPECIALISTS.find(x => x.id === b.dataset.ctmail), m = s && (s.contacts || {}).email; if (!m) return;
+  const p = b.closest('.cti-row').querySelector('.ct-mail'), open = p.hidden;
+  if (open) p.innerHTML = `<div class="ct-addr">${esc(m).replace('@', '@<wbr>')}</div><div class="ct-acts"><a class="btn" href="${esc('mailto:' + m + '?subject=' + encodeURIComponent(CT_SUBJ) + '&body=' + encodeURIComponent(CT_HELLO + '\n\n'))}">Написати листа</a><button type="button" class="btn ghost" data-copy="${esc(m)}">Скопіювати адресу</button></div>`;
+  p.hidden = !open; b.setAttribute('aria-expanded', String(open)); b.classList.toggle('on', open); });
 let PREVIEW = '';   // id карточки, открытой по ссылке предпросмотра
 function openCard(id){
   const s = SPECIALISTS.find(x => x.id === id); if (!s) return;
   const k = CATS[s.cat] || CATS.status, c = s.contacts || {};
   const nd = needOf(s), NDK = { phone: 'phone', email: 'email', instagram: 'insta' };   // пустые телефон, e-mail, Instagram у карточки, которая ещё не на сайте, — «уточняем» (12.10.2026)
-  const contacts = ['phone', 'email', 'site', 'site2', 'instagram', 'facebook', 'telegram', 'bot', 'whatsapp'].filter(x => c[x] || nd[NDK[x]]).map(x => {
+  /* контакты (15.10.2026, просьба Ирины «иконками в одном цвете… телефон пусть будет открыт… сайт тоже может быть открыт»):
+     телефон и сайты — строками, как раньше; e-mail, WhatsApp, Telegram, бот, Instagram, Facebook — значками в одном цвете.
+     Адрес e-mail в карточке не стоит: он появляется по нажатию на значок («Написать письмо», «Скопировать адрес»).
+     Пустые телефон, e-mail, Instagram у карточки, которая ещё не на сайте, — по-прежнему строкой «уточняем». */
+  const contacts = ['phone', 'site', 'site2', 'email', 'instagram'].filter(x => c[x] ? !CT_ICO.some(i => i[0] === x) : nd[NDK[x]]).map(x => {
     if (!c[x]) return `<li><span>${LINK[x]('')[0]}</span>${UT()}</li>`;
-    const [t, h0, v] = LINK[x](c[x]); const h = x === 'whatsapp' && inviteOn(s) ? inviteHref(s) : h0; return `<li><span>${t}</span><a href="${esc(h)}" ${x === 'phone' || x === 'email' ? '' : ext}>${esc(v)}</a></li>`; }).join('');
+    const [t, h, v] = LINK[x](c[x]); return `<li><span>${t}</span><a href="${esc(h)}" ${x === 'phone' ? '' : ext}>${esc(v)}</a></li>`; }).join('') + ctIcons(s);
   const box = document.getElementById('qmCard');
   box.style.setProperty('--lc', k.c); box.style.setProperty('--lf', `color-mix(in srgb,${k.c} 13%,var(--paper))`);
   box.innerHTML = `<div class="qm-top"><div class="qm-ph">${photo(s)}</div><div class="qm-head">${s.sample ? '<span class="qm-sample">Зразок картки · фахівець вигаданий</span>' : ''}<span class="sp-sub" style="color:${k.c}">${ico(k.i, k.c, null, 16)}${esc(k.t)}${(() => { const l = state.canton ? tierIn(s, state.canton) : tierBest(s); return l === 'vip' ? ` · ${tierName(s, 'vip')} (платне розміщення)` : l === 'партнёр' ? ` · ${tierName(s, 'партнёр')} (платне розміщення)` : ''; })()}</span>

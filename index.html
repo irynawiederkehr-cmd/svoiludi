@@ -450,7 +450,7 @@ a.bot:hover{color:#B98324}
 .ctl li{display:grid;grid-template-columns:96px 1fr;gap:10px;align-items:baseline;font-size:.94rem}
 .ctl li span{color:var(--muted);font-size:.84rem}
 .ctl a{color:var(--ink);font-weight:600;text-decoration:underline;text-decoration-color:var(--lc);text-underline-offset:3px;overflow-wrap:anywhere}
-/* значки связи в открытой карточке (КОПИЯ 15.10.2026): один цвет, круг 46 px как у цветов-мандал, подпись под значком */
+/* значки связи в открытой карточке (15.10.2026): один цвет, круг 46 px как у цветов-мандал, подпись под значком */
 .d-side{--cti:var(--brown);--ctf:var(--soft)}
 .ctl li.cti-row{display:block;margin-top:4px}
 .cti-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(60px,1fr));gap:12px 4px}
@@ -1819,7 +1819,7 @@ document.addEventListener('click', async e => { const b = e.target.closest('[dat
 document.addEventListener('click', async e => { const b = e.target.closest('[data-copyprev]'); if (!b) return;
   const s = SPECIALISTS.find(x => x.id === b.dataset.copyprev); const t = `Здравствуйте! Я подготовила вашу карточку для справочника «Свои люди в Швейцарии». Пока её видите только вы. Посмотрите, пожалуйста, всё ли верно.\n\n${previewUrl(s)}\n\n${priceAskOn(s) ? PRICE_ASK + '\n\n' : ''}${draftPara(s) ? draftPara(s) + '\n\n' : ''}Если всё верно, внизу карточки отметьте галочку и нажмите «Подтверждаю» — это одно нажатие. Если что-то не так, нажмите «Нужно исправить» и напишите прямо там. Спасибо!`;
   try { await navigator.clipboard.writeText(t); (b.querySelector('b') || b).textContent = 'Скопировано ✓'; } catch (x) { prompt('Скопируйте текст', t); } });
-/* значки связи в открытой карточке (КОПИЯ 15.10.2026): один цвет сайта (--cti), бумажный круг с кольцом, как цветы-мандалы; подпись под значком */
+/* значки связи в открытой карточке (15.10.2026): один цвет сайта (--cti), бумажный круг с кольцом, как цветы-мандалы; подпись под значком */
 const CT_ICO = [['email', 'mail', 'E-mail'], ['whatsapp', 'whatsapp', 'WhatsApp'], ['telegram', 'telegram', 'Telegram'], ['bot', 'chatbot', 'Telegram-бот'], ['instagram', 'instagram', 'Instagram'], ['facebook', 'facebook', 'Facebook']];
 const CT_SUBJ = 'Вопрос по вашей карточке в 🌿 «Свои люди»';
 const CT_HELLO = 'Здравствуйте! Пишу по вашей карточке в справочнике 🌿 «Свои люди» https://svoiludi.ch/';
@@ -1841,7 +1841,7 @@ function openCard(id){
   const s = SPECIALISTS.find(x => x.id === id); if (!s) return;
   const k = CATS[s.cat] || CATS.status, c = s.contacts || {};
   const nd = needOf(s), NDK = { phone: 'phone', email: 'email', instagram: 'insta' };   // пустые телефон, e-mail, Instagram у карточки, которая ещё не на сайте, — «уточняем» (12.10.2026)
-  /* контакты (КОПИЯ 15.10.2026, просьба Ирины «иконками в одном цвете… телефон пусть будет открыт… сайт тоже может быть открыт»):
+  /* контакты (15.10.2026, просьба Ирины «иконками в одном цвете… телефон пусть будет открыт… сайт тоже может быть открыт»):
      телефон и сайты — строками, как раньше; e-mail, WhatsApp, Telegram, бот, Instagram, Facebook — значками в одном цвете.
      Адрес e-mail в карточке не стоит: он появляется по нажатию на значок («Написать письмо», «Скопировать адрес»).
      Пустые телефон, e-mail, Instagram у карточки, которая ещё не на сайте, — по-прежнему строкой «уточняем». */
