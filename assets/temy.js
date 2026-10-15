@@ -72,7 +72,19 @@
         return '<a class="kt-link" href="' + esc(c.u[x]) + '" target="_blank" rel="noopener"><b>' + LBL[x][0] + '</b><span>' + (fb ? 'сайт кантона, в поиске набери «' + LBL[x][li] + '»' : LBL[x][li] + ' · ' + esc(c.n)) + ' ↗</span></a>';
       }).join('') + (keys.includes('einbuergerung') && c.einb ? '<p class="kt-note"><b>Кантон ' + esc(c.n) + ' добавляет:</b> ' + esc(c.einb) + '.</p>' : '') +
         (keys.includes('fz') && f ? '<p class="kt-note"><b>Семейные пособия · ' + esc(c.n) + ', 2026:</b> ' + ('на ребёнка до 16 лет ' + esc(f.k) + ' в месяц, на учащегося с 16 до 25 лет ' + esc(f.a) + ' в месяц' + (f.g ? ', при рождении один раз ' + esc(f.g) : '')).replace(/\.?$/, '.') + '</p>' : '') +
+        (keys.includes('verein') ? verein(k, c) : '') +
         '<p class="kt-hint">Если что-то в статье расходится со страницей кантона, верь кантону.</p>';
+    };
+    /* Ферайны (15.10.2026): налог ферайна в кантоне, лотерейный фонд, интеграция, торговый реестр. Данные — window.KANTONY_VEREIN в assets/kantony.js */
+    const VL = {steuer: ['Налоговая: ферайны и освобождение от налога', 'Vereine, Steuerbefreiung', 'associations, exonération', 'associazioni, esenzione'],
+      lotto: ['Лотерейный фонд кантона: деньги на проекты', '', '', ''], integ: ['Интеграция: деньги на проекты', 'Integrationsprojekte', 'projets d’intégration', 'progetti d’integrazione'],
+      hreg: ['Торговый реестр кантона', 'Handelsregisteramt', 'registre du commerce', 'registro di commercio']};
+    const verein = (k, c) => {
+      const v = (window.KANTONY_VEREIN || {})[k]; if (!v) return '';
+      const li = LI2[c.l] || 1;
+      const links = ['steuer', 'lotto', 'integ', 'hreg'].filter(x => v.u && v.u[x]).map(x => '<a class="kt-link" href="' + esc(v.u[x]) + '" target="_blank" rel="noopener"><b>' + VL[x][0] + '</b><span>' + esc(x === 'lotto' ? (v.ln || 'Lotteriefonds') : VL[x][li]) + ' · ' + esc(c.n) + ' ↗</span></a>').join('');
+      const tax = [v.g ? 'прибыль ' + v.g : '', v.c ? 'имущество (капитал) ' + v.c : ''].filter(Boolean).join('; ');
+      return links + (tax ? '<p class="kt-note"><b>Налог ферайна · ' + esc(c.n) + ':</b> ' + esc(tax).replace(/\.?$/, '.') + (v.n ? ' ' + esc(v.n) : '') + '</p>' : '');
     };
     kt.forEach(box => {
       box.innerHTML = '<div class="kt-h"><b>Твой кантон</b><select aria-label="Твой кантон">' + opts + '</select></div><div class="kt-out"></div>';
