@@ -83,6 +83,42 @@
    ===================================================================== */
 window.AFISHA = [
   {
+    "sections": [
+      "events"
+    ],
+    "type": "promo",
+    "id": "olga-sofitness-myagkiy-start",
+    "keyHash": "b6d2518b93b31cf9f0f58c5c30bef26c74750cda58ee9cf8a5fb1caec8bfd3ca",
+    "status": "на підтвердженні",
+    "title": "Безкоштовний онлайн-марафон «М’який старт»",
+    "promo": {
+      "kind": "free",
+      "what": "онлайн-марафон «М’який старт» — 10 хвилин ранкової розминки, легкої розтяжки й дихання щодня",
+      "cond": [
+        "online"
+      ]
+    },
+    "date": "2026-10-15",
+    "dateEnd": "2027-01-12",
+    "canton": "Genève",
+    "address": "",
+    "online": true,
+    "langs": [
+      "російська"
+    ],
+    "commercial": true,
+    "organizers": [
+      "olga-sofitness-geneve"
+    ],
+    "signup": "link",
+    "contacts": {
+      "phone": "+41 76 476 47 26",
+      "email": "info@sofitness.ch"
+    },
+    "link": "https://www.sofitness.ch/challenges",
+    "about": "Ранкові тренування, які м’яко будять тіло: розминка після сну, легка розтяжка й дихання — без поспіху й без навантаження. 10 хвилин на день допомагають стати гнучкішою, покращити поставу й почати день спокійно та з турботою про себе. Брати участь безкоштовно — на моєму сайті, у розділі «Марафони»."
+  },
+  {
     sections: ['kursy'], type: 'pro', ktype: 'pro', kind: 'once',
     id: 'iryna-pani-nail-bern-progel-kombi-2026-10-28', keyHash: 'e0be0590cd26f08a41e51a25606fc901bb0d39e762f209798bdb637958d910e1', status: 'на підтвердженні', title: 'Курс підвищення кваліфікації «ProGel + Комбі» — живий курс у Берні',
     date: '2026-10-28', time: '09:00', timeEnd: '19:00',
