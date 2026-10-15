@@ -176,7 +176,7 @@ window.HELP = {
   nr: '<p>Номер счёта — подряд, без пропусков: так проще учёт и налоговая. Кнопка «Следующий номер» прибавит единицу.</p>',
   ref: '<p>Номер-ссылка в QR-коде помогает узнать, какой счёт оплачен. С QR-IBAN он обязателен (QR-Referenz), с обычным IBAN — по желанию (номер RF). Собирается сам из номера счёта.</p>',
   msg: '<p>Короткий текст, который клиент увидит в квитанции и в банке, например «Счёт 2026-014, коучинг октябрь». До 140 знаков.</p>',
-  find: '<p>Номер стоит внизу твоей карточки на svoiludi.ch. У специалистов он начинается с SG-…, у организаций — с OR-…. Можно вписать и UID фирмы (CHE-…). Подставляются данные только из карточек, которые уже открыты на сайте.</p><p>В счёте и QR-коде можно только латинские буквы. Если имя в карточке написано по-русски, впиши его латиницей сама. IBAN и номер НДС тоже впиши сама, их в карточке нет.</p>'
+  find: '<p>Номер стоит внизу твоей карточки на svoiludi.ch. У специалистов он начинается с SG-…, у организаций — с OR-…. Можно вписать и UID фирмы (CHE-…). Подставляются данные только из карточек, которые уже открыты на сайте.</p><p>В счёте и QR-коде можно только латинские буквы. Если имя в карточке написано кириллицей, впиши его латиницей сама. IBAN и номер НДС тоже впиши сама, их в карточке нет.</p>'
 };
 const KEY = 'schetQr.v1';
 const LBL = {
@@ -333,7 +333,7 @@ $('newInv').addEventListener('click', () => { if (EX) return; const m = String(S
 function loadCards(){
   const k = document.querySelector('script[src*="assets/kantony.js"]'), root = k ? k.src.replace(/assets\/kantony\.js.*$/, '') : '/';   // корень сайта — и на сайте, и в копии
   const need = [['SPECIALISTS', 'data/specialists.js'], ['ORGANIZATIONS', 'data/organizations.js']].filter(([g]) => !window[g]);
-  return Promise.all(need.map(([, src]) => new Promise(r => { const s = document.createElement('script'); s.src = root + src; s.onload = r; s.onerror = r; document.head.appendChild(s); })));
+  return Promise.all(need.map(([, src]) => new Promise(r => { const s = document.createElement('script'); s.src = root + (document.documentElement.lang === 'uk' ? src.replace(/\.js$/, '.uk.js') : src); s.onload = r; s.onerror = r; document.head.appendChild(s); })));
 }
 const tidy = s => String(s || '').replace(/\s+/g, ' ').trim();
 const digs = s => String(s || '').replace(/\D/g, '');
@@ -370,16 +370,16 @@ async function findCard(){
   const prev = S.fromCard || {};   // что подставила прошлая карточка и ещё не меняли руками — убираем, чтобы не смешать две карточки
   ['name', 'street', 'no', 'plz', 'city', 'tel', 'mail'].forEach(k => { if (prev[k] && m[k] === prev[k]) m[k] = ''; });
   const name = (h.t === 'spec' ? [r.firm, r.regName, r.name] : [r.name, r.regName]).map(tidy).find(x => x && !isCyr(x)) || '';
-  if (name) { m.name = name; got.push(h.t === 'spec' && name !== tidy(r.name) ? 'фирму' : h.t === 'org' ? 'название' : 'имя'); }
+  if (name) { m.name = name; got.push(h.t === 'spec' && name !== tidy(r.name) ? 'фирма' : h.t === 'org' ? 'название' : 'имя'); }
   const pl = h.t === 'spec' ? ((r.places || []).find(p => p && p.address && !p.area) || {}).address : r.address;
   if (pl && !isCyr(String(pl).replace(/\(.*?\)/g, ''))) { const a = splitAddr(pl); Object.assign(m, {street: a.street, no: a.no, plz: a.plz, city: a.city}); got.push('адрес'); if (!a.street) todo.push('улицу с номером дома'); }
-  else todo.push('адрес');
+  else todo.push('адрес полностью');
   const ph = tidy(c.phone || c.whatsapp); if (ph) { m.tel = ph; got.push('телефон'); }
   if (c.email) { m.mail = tidy(c.email); got.push('e-mail'); }
   if (!clean(m.iban)) todo.push('IBAN');
   S.fromCard = {num: r.num, name: m.name, street: m.street, no: m.no, plz: m.plz, city: m.city, tel: m.tel, mail: m.mail};
   save(); fill();
-  show(`Нашлась карточка «${esc(r.name)}» (${esc(r.num)}).${got.length ? ' Подставили ' + andList(got) + ', проверь их.' : ''}${name ? '' : ' Имя в карточке написано по-русски, а в счёте нужна латиница, поэтому впиши его сама.'}${todo.length ? ' Ещё впиши ' + andList(todo) + '.' : ''}`);
+  show(`Нашлась карточка «${esc(r.name)}» (${esc(r.num)}).${got.length ? ' Сами подставились ' + andList(got) + '. Проверь их.' : ''}${name ? '' : ' Имя в карточке написано кириллицей, а в счёте нужна латиница, поэтому впиши его сама.'}${todo.length ? ' Ещё впиши ' + andList(todo) + '.' : ''}`);
 }
 $('findBtn').addEventListener('click', findCard);
 $('findQ').addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); findCard(); } });
