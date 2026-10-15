@@ -1271,7 +1271,7 @@ window.SVL_ORG_ICONS = {
 const SPECIALISTS = window.SVL_ORG.items;   // организации в виде карточек справочника (adapter.js)
 
 </script>
-<script src="/data/afisha.uk.js?v=022db8f1"></script><script src="/assets/afisha-org.js"></script>
+<script src="/data/afisha.uk.js?v=5dc58b05"></script><script src="/assets/afisha-org.js"></script>
 <script>const AFISHA = window.AFISHA || [];</script>
 <script>
 const ADMIN = (() => {   // режим Ирины: svoiludi.ch/?ira=1 включает на этом устройстве, ?ira=0 выключает
@@ -1780,6 +1780,13 @@ const afHref = e => ((e.sections || [])[0] === 'kursy' ? '/uk/kursy/#' : '/uk/ev
    в её карточке, хотя бы одна… если эвенты или мастер-классы есть, встраивай все»). Для всех они появятся только после подтверждения. */
 const pvMine = (e, s) => (e.organizers || []).some(x => x === s.id || (x && typeof x === 'object' && (x.org === s.id || x.spec === s.id)));
 const PV_WD = ['по неділях', 'по понеділках', 'по вівторках', 'по середах', 'по четвергах', 'по п’ятницях', 'по суботах'];
+/* одно «Подтверждаю» (решение Ирины 15.10.2026, 15:26: «зачем ему подтверждать каждое событие отдельно?»): будущие занятия и события
+   карточки, которые ждут подтверждения с тем же ключом (черновики лида, кроме акций и объявлений), подтверждаются вместе с карточкой — как цены.
+   Ссылка …/#ok= у такой записи — только посмотреть; свою кнопку «Подтверждаю» получают записи, добавленные, когда карточка уже на сайте. */
+const pvRecs = s => s.status === 'активен' || !s.keyHash ? [] : AFISHA.filter(e => e.status === 'на підтвердженні' && e.type !== 'promo' && e.keyHash === s.keyHash && pvMine(e, s) && nextDate(e));
+const recTxt = e => { const r = e.repeat || {}, wd = new Date(e.date + 'T12:00:00').getDay();
+  const when = r.freq === 'weekly' ? PV_WD[wd] + (r.until ? ' до ' + fmtDate(r.until) : '') : fmtDate(e.date);
+  return `— ${e.title}: ${when}${e.time ? ', ' + e.time + (e.timeEnd ? '–' + e.timeEnd : '') : ''}${e.price ? ', ' + e.price : ''}`; };
 function pvAfisha(s){
   const pv = PREVIEW === s.id || (/^#preview=/.test(location.hash) && location.hash.indexOf(s.id) > 0);
   if (!pv && !(ADMIN && s.status !== 'активен')) return '';
@@ -1801,7 +1808,7 @@ function pvAfisha(s){
   const up = rows.filter(r => !r.past), was = rows.filter(r => r.past);
   const sec = k => up.some(r => (r.e.sections || []).includes(k)), ev = sec('events'), ku = sec('kursy');
   const tabs = ev && ku ? 'заняття й події з’являться у вкладках «Події» та «Курси»' : ku ? 'заняття з’являться у вкладці «Курси»' : ev ? 'події з’являться у вкладці «Події»' : 'ваші заняття й події з’являться у вкладках «Події» та «Курси»';
-  return `<div class="d-block pv-af"><h4>Заняття й події — з’являться після підтвердження</h4>${up.length ? `<ul class="evs">${up.map(li).join('')}</ul>` : ''}${was.length ? `<p class="k-note"><b>Уже минули.</b> Ми показуємо їх для прикладу: так ваші події виглядатимуть на сайті.</p><ul class="evs">${was.map(li).join('')}</ul>` : ''}<p class="d-note">Це бачите тільки ви. Після підтвердження ${tabs} і тут, у картці. Кожен запис можна відкрити й підтвердити окремо за посиланням «Відкрити, як на сайті». Надішліть нам найближчі події, майстер-класи та свята з коротким описом — ми поставимо їх сюди.</p></div>${vblock}`;
+  return `<div class="d-block pv-af"><h4>${up.length && pvRecs(s).length ? 'Заняття й події — підтверджуються разом із карткою' : 'Заняття й події — з’являться після підтвердження'}</h4>${up.length ? `<ul class="evs">${up.map(li).join('')}</ul>` : ''}${was.length ? `<p class="k-note"><b>Уже минули.</b> Ми показуємо їх для прикладу: так ваші події виглядатимуть на сайті.</p><ul class="evs">${was.map(li).join('')}</ul>` : ''}<p class="d-note">Це бачите тільки ви. ${pvRecs(s).length ? 'Підтверджувати їх окремо не потрібно: натискаючи «Підтверджую» внизу картки, ви підтверджуєте і їх. Після цього' : 'Після підтвердження'} ${tabs} і тут, у картці. Кожен запис можна відкрити за посиланням «Відкрити, як на сайті» й подивитися, як його побачать усі. Надішліть нам найближчі події, майстер-класи та свята з коротким описом — ми поставимо їх сюди.</p></div>${vblock}`;
 }
 
 /* ---------- акции специалиста (решение Ирины 11.10.2026): вид события type: 'promo', описание в e.promo (data/afisha.js) ----------
@@ -1944,7 +1951,8 @@ function draftsOf(s){
 }
 /* строки для письма или сообщения: название и ссылка; прошедшие — «уже прошло, для примера» */
 const draftLines = s => draftsOf(s).filter(x => x.url).map(x => `${DR_ICO[x.kind]} ${x.r.title}${x.past ? ' (вже минуло — для прикладу)' : ''}:\n${x.url}`);
-const draftPara = s => { const L = draftLines(s); return L.length ? `Для прикладу я додала й те, що ви публікуєте самі. Це теж поки бачите тільки ви, кожен запис можна відкрити окремо:\n${L.join('\n')}` : ''; };
+const draftPara = s => { const L = draftLines(s), sep = draftsOf(s).some(x => x.url && !x.past && (x.kind === 'promo' || x.kind === 'vac'));
+  return L.length ? `Для прикладу я додала й те, що ви самі публікуєте. Це теж поки бачите тільки ви. Кожен запис можна відкрити й подивитися, як він виглядатиме на сайті. Заняття й події окремо підтверджувати не потрібно: вони підтверджуються разом із карткою, одним «Підтверджую»${sep ? ', а акції та оголошення — кожне за своїм посиланням' : ''}:\n${L.join('\n')}` : ''; };
 /* приглашение в WhatsApp для скрытой пробной карточки (12.10.2026, Ирина: «я буду оттуда отправлять сообщение, оно должно туда в кнопку вотсап вкладываться»).
    У карточки поле invite = { seen: 'ваше объявление о …', by: 'по вашему объявлению', local: 'фраза про кантон' }; по желанию (12.10.2026, лично знакомым и фирмам)
    hi — свой первый абзац вместо «Здравствуйте… Увидела…», free — своя строка об условиях вместо «До конца 2027 года всё бесплатно…».
@@ -2019,7 +2027,7 @@ const gmail = (to, su, body) => `https://mail.google.com/mail/?view=cm&fs=1&to=$
 const ownerLetter = s => ({ su: 'Ваша картка у «Своїх людях у Швейцарії» — перегляньте, будь ласка',
   body: `Добрий день!\n\nЯ підготувала картку вашої організації для розділу «Організації» у «Своїх людях у Швейцарії». Поки її бачите тільки ви. Перегляньте, будь ласка, чи все правильно: опис, що можна отримати, внески, адреси й контакти.\n\n${previewUrl(s)}\n\n${priceAskOn(s) ? PRICE_ASK + '\n\n' : ''}${draftPara(s) ? draftPara(s) + '\n\n' : ''}Якщо все правильно, внизу картки поставте галочку й натисніть «Підтверджую» — і я одразу опублікую картку. Якщо щось не так, натисніть «Потрібно виправити» й напишіть прямо там, що змінити.\n\nЗ теплом,\nІрина Вознесенська\n${MAIL}` });
 const confirmLetter = s => ({ su: `Підтверджую картку — ${s.name}${s.num ? ' (' + s.num + ')' : ''}`,
-  body: `Добрий день, Ірино!\n\nУсе правильно, підтверджую публікацію картки нашої організації на сайті «Свої люди у Швейцарії».\nУмови розміщення (https://svoiludi.ch/uk/usloviya/) прочитав(ла) і приймаю, зокрема коли картку знімають і за що виключають із проєкту.${feeRows(s).length ? '\n\nВнески:\n' + feeTxt(s) : s.feeFree ? '\n\n' + feeFreeTxt(s) : ''}${pvPriceCheck(s) ? '\n\nПрайс-лист:\n' + priceTxt(s) : ''}\n\n${previewUrl(s)}\n\n${s.name}` });
+  body: `Добрий день, Ірино!\n\nУсе правильно, підтверджую публікацію картки нашої організації на сайті «Свої люди у Швейцарії».\nУмови розміщення (https://svoiludi.ch/uk/usloviya/) прочитав(ла) і приймаю, зокрема коли картку знімають і за що виключають із проєкту.${feeRows(s).length ? '\n\nВнески:\n' + feeTxt(s) : s.feeFree ? '\n\n' + feeFreeTxt(s) : ''}${pvPriceCheck(s) ? '\n\nПрайс-лист:\n' + priceTxt(s) : ''}${pvRecs(s).length ? '\n\nЗаняття й події — підтверджую разом із карткою. Це мої заняття й події, вони в моїй компетенції та відповідають законам Швейцарії, кантону й громади:\n' + pvRecs(s).map(recTxt).join('\n') : ''}\n\n${previewUrl(s)}\n\n${s.name}` });
 const fixLetter = s => ({ su: `Виправлення до картки — ${s.name}${s.num ? ' (' + s.num + ')' : ''}`,
   body: `Добрий день, Ірино!\n\nУ моїй картці, будь ласка, виправте\n\n— \n\n${previewUrl(s)}\n\n${s.name}` });
 /* Пока карточка не готова — только посмотреть (правила Ирины 14.10.2026, 17:50: «карточки без налоговой регистрации подтвердить нельзя.
@@ -2038,9 +2046,12 @@ function previewBoxView(s){
 function previewBox(s){
   if (needReq(s).length) return previewBoxView(s);
   return `<div class="pv-box" id="pvCard" data-pv="${esc(s.id)}"><b>Це попередній перегляд вашої картки.</b><span>Поки її бачите тільки ви. Якщо все правильно, поставте галочки й натисніть «Підтверджую» — картка з’явиться на сайті. Якщо щось потрібно змінити, натисніть «Потрібно виправити».</span>
+    ${pvRecs(s).length ? `<span class="pv-need">📅 Разом із карткою ви підтверджуєте і ${pvRecs(s).length > 1 ? `ваші заняття й події (${pvRecs(s).length})` : 'ваше заняття чи подію'} з блоку «Заняття й події» вище — окремо підтверджувати не потрібно. Якщо там щось не так, натисніть «Потрібно виправити» й напишіть, що змінити.</span>` : ''}
     ${needList(s).length ? `<span class="pv-need">Підсвічені поля ми ще уточнюємо: ${esc(needList(s).join(', '))}.${needReq(s).length ? ` Без ${needReq(s).length > 1 ? 'цих даних' : 'цього'} (${esc(needReq(s).join(', '))}) картка на сайт не вийде.` : ''}${needOpt(s).length ? ` ${esc(needOpt(s).join(' і ').replace(/^т/, 'Т'))} ми теж просимо, щоб людям було простіше з вами зв’язатися.` : ''} Напишіть нам ці дані у відповідь на повідомлення або натисніть «Потрібно виправити».</span>` : ''}
     ${pvPriceCheck(s) ? `<span class="pv-need">💶 Ціни — теж частина картки. Увесь прайс-лист відкритий вище, у блоці «Ціни». Якщо якась ціна змінилася або послуги більше немає, натисніть «Потрібно виправити» й напишіть, що змінити.</span>` : ''}
-    <label class="pv-ok"><input type="checkbox" data-pv-agree> <span>Дані в картці правильні${pvPriceCheck(s) ? ', зокрема послуги й ціни в прайс-листі' : ''}. Від імені організації я даю згоду на публікацію картки на сайті svoiludi.ch.</span></label>
+    <label class="pv-ok"><input type="checkbox" data-pv-agree> <span>Дані в картці правильні${pvPriceCheck(s) ? ', зокрема послуги й ціни в прайс-листі' : ''}${pvRecs(s).length ? ', заняття й події' : ''}. Від імені організації я даю згоду на публікацію картки на сайті svoiludi.ch.</span></label>
+    ${pvRecs(s).length ? `<label class="pv-ok"><input type="checkbox" data-pv-agree> <span>Це мої заняття й події: я сам(а) їх організовую, або їх проводить моя організація. Записи за інших я не розміщую.</span></label>
+    <label class="pv-ok"><input type="checkbox" data-pv-agree> <span>Вони в моїй компетенції: у мене є потрібні знання, досвід і дозволи. Вони відповідають законам Швейцарії, мого кантону й громади. Запис, оплата й договір — тільки зі мною, «Свої люди» в них не беруть участі.</span></label>` : ''}
     <label class="pv-ok"><input type="checkbox" data-pv-agree> <span>Я прочитав(ла) <a href="https://svoiludi.ch/uk/usloviya/" target="_blank" rel="noopener">умови розміщення</a> і приймаю їх, зокрема <a href="https://svoiludi.ch/uk/usloviya/#isklyuchenie" target="_blank" rel="noopener">коли картку знімають і за що виключають із проєкту</a>. Перечитати їх можна будь-коли.</span></label>
     <div class="pv-acts"><button class="btn" type="button" data-pv-send="card" disabled>Підтверджую</button><button class="btn ghost" type="button" data-pv-fixopen>Потрібно виправити</button></div>
     <div class="pv-fix" hidden><textarea data-pv-text rows="4" maxlength="1500" placeholder="${pvPriceCheck(s) ? 'Що виправити: наприклад, телефон, адресу, послугу або ціну' : 'Що виправити: наприклад, телефон, адресу або послугу'}"></textarea><div class="pv-acts"><button class="btn" type="button" data-pv-send="fix">Надіслати виправлення</button></div></div>
@@ -2087,7 +2098,7 @@ document.addEventListener('click', async e => {
   if (fix && !text){ msg.textContent = PV_T.empty; return; }
   b.disabled = true; msg.textContent = PV_T.sending;
   try {
-    const u = `${CONFIRM_URL}?what=confirm&kind=${kind}&type=org&id=${encodeURIComponent(s.id)}&key=${encodeURIComponent(OKKEY[s.id] || '')}&lang=ru${text ? '&text=' + encodeURIComponent(text) : ''}`;
+    const u = `${CONFIRM_URL}?what=confirm&kind=${kind}&type=org&id=${encodeURIComponent(s.id)}&key=${encodeURIComponent(OKKEY[s.id] || '')}${kind === 'card' && pvRecs(s).length ? '&ev=' + encodeURIComponent(pvRecs(s).map(e => e.id).join(',')) : ''}&lang=ru${text ? '&text=' + encodeURIComponent(text) : ''}`;
     const j = await (await fetch(u)).json(); if (!j.ok) throw new Error(j.error || 'error');
     box.querySelectorAll('.pv-ok,.pv-acts,.pv-fix').forEach(x => x.hidden = true);
     msg.textContent = fix ? PV_T.fixok(j.time) : PV_T.ok(j.time, j.copy); msg.classList.add('pv-done');

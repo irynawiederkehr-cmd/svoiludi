@@ -664,7 +664,7 @@ window.IMG_BASE = '../img/';
 /* карточки специалистов — в /data/specialists.js (одна копия на весь сайт) */
 const SPECIALISTS = window.SPECIALISTS || [];
 </script>
-<script src="/data/afisha.uk.js?v=022db8f1"></script><script src="/assets/afisha-org.js"></script>
+<script src="/data/afisha.uk.js?v=5dc58b05"></script><script src="/assets/afisha-org.js"></script>
 <script src="/assets/chernoviki.uk.js"></script>
 <script src="/assets/kalendar.uk.js"></script>
 <script>/* одна база афиши: здесь — записи раздела «Курсы»; у записи в обеих вкладках направление курса в ktype */
@@ -980,7 +980,19 @@ function pastBox(e){
 }
 /* запись лида: выйдет на сайт вместе с карточкой, после её подтверждения */
 const cardWait = e => (e.organizers || []).map(cardOf).some(c => c && c.status !== 'активен');
+/* одно «Подтверждаю» (решение Ирины 15.10.2026, 15:26: «зачем ему подтверждать каждое событие отдельно?»): запись лида, чья карточка
+   ещё ждёт подтверждения с тем же ключом, подтверждается вместе с карточкой — в карточке блок «Занятия и события» и галочки о них.
+   Здесь — только посмотреть и ссылка на карточку. Свою кнопку «Подтверждаю» получают записи, добавленные, когда карточка уже на сайте. */
+const cardWith = e => (e.organizers || []).map(cardOf).find(c => c && c.status !== 'активен' && c.keyHash && c.keyHash === e.keyHash);
+function withCardBox(e, c){
+  const LP = location.pathname.startsWith('/uk/') ? '/uk' : '', isOrg = (window.ORGANIZATIONS || []).includes(c);
+  const url = `${LP}${isOrg ? '/organizacii/' : '/'}#preview=${encodeURIComponent(c.id)}.${encodeURIComponent(OKKEY[e.id] || '')}`;
+  return `<div class="pv-box" id="pvBox"><b>Це попередній перегляд: так ваш курс побачать на сайті.</b><span>Поки його бачите тільки ви. Підтверджувати його окремо не потрібно: він підтверджується разом із вашою карткою. Відкрийте картку, перевірте все й натисніть там «Підтверджую» — курс вийде на сайт разом із нею.</span>
+    <div class="pv-acts"><a class="btn" href="${esc(url)}">Відкрити картку й підтвердити</a></div>
+    <span class="pv-small">Якщо тут щось не так, натисніть у картці «Потрібно виправити» й напишіть, що змінити.</span></div>`;
+}
 function okBox(e){
+  const cw = cardWith(e); if (cw) return withCardBox(e, cw);
   const who = orgNames(e), cm = cardMail(e);
   const su = `Підтверджую курс — ${e.title}`, body = `Добрий день, Ірино!\n\nУсе правильно, підтверджую публікацію на сайті «Свої люди у Швейцарії».\nЦе мій курс: я сам(а) його веду, або його проводить моя організація. Записи за інших я не розміщую.\nКурс у моїй компетенції та відповідає законам Швейцарії, мого кантону й громади.\nУмови розміщення (https://svoiludi.ch/uk/usloviya/) прочитав(ла) й приймаю.\n\n${okText(e)}\n\n${okUrl(e)}\n\n${who}`;
   const suf = `Виправлення — ${e.title}`, bodyf = `Добрий день, Ірино!\n\nБудь ласка, виправте:\n\n{text}\n\n${okUrl(e)}\n\n${who}`;
