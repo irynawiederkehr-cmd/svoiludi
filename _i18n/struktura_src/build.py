@@ -195,7 +195,7 @@ def dlya_specialistov():
     # инструменты. Вакансии здесь — одна карточка в конце со ссылкой на вкладку. В меню страницы нет: подвал, «Ещё» приложения, «Как разместиться».
     title = 'Для специалистов и организаций: размещение в справочнике «Свои люди», курсы, события, значок, инструменты для своего дела'
     desc = 'Всё для специалистов и организаций в «Своих людях в Швейцарии»: карточка в справочнике (в период запуска, до конца 2027 года, бесплатно), организация, курс или событие, значок для сайта и бесплатные инструменты для своего дела на русском и украинском.'
-    tools = ['schet-qr', 'dohody-rashody', 'chasy-po-klientam', 'uchet-vremeni', 'anketa-klienta', 'zarplata', 'etiketka-eda', 'zhurnal-perederzhki', 'statuty-fereyna']
+    tools = ['vizitka', 'schet-qr', 'dohody-rashody', 'chasy-po-klientam', 'uchet-vremeni', 'anketa-klienta', 'zarplata', 'etiketka-eda', 'zhurnal-perederzhki', 'statuty-fereyna']
     cards = ''.join(f'<a class="tool tpv" href="../instrumenty/{x}/">{fan(x, "../")}<span class="ttxt"><b>{TOOLNAMES.get(x, x)}</b><em>Бесплатно · открыть →</em></span></a>' for x in tools if HAS(x))
     vak = VAK_OPEN and os.path.isfile('vakansii/index.html')
     main = '<main class="page">\n' + hero('Для специалистов и организаций · Свои люди в Швейцарии', 'Для специалистов <em>и организаций</em>',

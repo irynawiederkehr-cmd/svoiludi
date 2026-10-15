@@ -1,0 +1,1085 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<link rel="icon" href="/fav/favicon.svg" type="image/svg+xml"><link rel="icon" href="/fav/icon-32.png" sizes="32x32"><link rel="apple-touch-icon" href="/fav/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/fonts.css">
+<meta name="description" content="Бесплатный конструктор визиток для Швейцарии (Visitenkarte): четыре вида в стиле документов «Своих людей» (шалфейная шапка с именем), горизонтальная или вертикальная визитка 85 × 55, 90 × 50 или 55 × 55 мм с именем, контактами, логотипом, обратной стороной на русском или украинском и QR-кодом. PDF для типографии с запасом на обрез и лист A4 для печати дома.">
+<link rel="canonical" href="https://svoiludi.ch/instrumenty/vizitka/">
+<meta property="og:type" content="website"><meta property="og:locale" content="ru_RU"><meta property="og:site_name" content="Свои люди в Швейцарии">
+<meta property="og:title" content="Визитка для печати: файл для типографии и лист A4 для дома"><meta property="og:description" content="Визитка в стиле документов «Своих людей»: четыре вида, горизонтальная или вертикальная, 85 × 55, 90 × 50 или 55 × 55 мм. Имя, контакты, логотип, обратная сторона по-русски или по-украински и QR-код. PDF для типографии и лист A4 для печати дома. Бесплатно.">
+<meta property="og:url" content="https://svoiludi.ch/instrumenty/vizitka/"><meta property="og:image" content="https://svoiludi.ch/instrumenty/vizitka/og-image.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="robots" content="noindex, nofollow">
+<title>Визитка для печати: файл для типографии и лист A4 для дома</title>
+<style>
+/* Визитка для печати (13.10.2026, решение Ирины «делай только белые, проще»; 14.10.2026 «сделай в дизайне сайта» — цвета, шрифты и «Росток» сайта): белая визитка, движок assets/shema.js.
+   Сверху выбор вида картинками (7 видов по образцам Ирины 13.10.2026), размер и положение; форма слева, живая визитка справа (на телефоне — сверху); PDF для типографии с запасом на обрез и лист A4 для печати дома. */
+:root{
+  --bg:#F4EDE3; --paper:#FFFCF8; --ink:#2F2924; --muted:#7A6E62; --line:#E5D9C9; --soft:#EFE5D7;
+  --brown:#6E4F3C; --mustard:#B98324; --mustard-soft:#F3E3C2; --sage:#4F5E3E; --sage-soft:#E3E8D6; --red:#A0523D;
+  --display:"Forum","Georgia",serif; --sans:"Manrope","Segoe UI",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#221D19; --paper:#2C2621; --ink:#F1E9DF; --muted:#B4A796; --line:#3E362F; --soft:#352E28;
+  --brown:#E1C2A6; --mustard:#E2B45C; --mustard-soft:#3D321F; --sage:#B4BF97; --sage-soft:#2E3226; --red:#E39A85; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#221D19; --paper:#2C2621; --ink:#F1E9DF; --muted:#B4A796; --line:#3E362F; --soft:#352E28;
+  --brown:#E1C2A6; --mustard:#E2B45C; --mustard-soft:#3D321F; --sage:#B4BF97; --sage-soft:#2E3226; --red:#E39A85; color-scheme:dark}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--ink);font:15px/1.55 var(--sans);margin:0}
+.wrap{max-width:1280px;margin:0 auto;padding-inline:16px;padding-block:28px 48px;display:flex;flex-direction:column;gap:24px}
+.eyebrow{font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+h1{font-family:var(--display);font-weight:400;font-size:clamp(2.4rem,6vw,3.6rem);line-height:1;margin:4px 0 10px;text-wrap:balance}
+h2{font-family:var(--display);font-weight:400;font-size:1.55rem;margin:0;text-wrap:balance}
+h3{font-family:var(--display);font-weight:400;font-size:1.22rem;line-height:1.2;margin:0}
+.lead{max-width:66ch;color:var(--muted);margin:0}
+.jump{font-weight:700;color:var(--brown);text-underline-offset:4px}
+.jumps{display:flex;flex-wrap:wrap;gap:6px 22px;margin:10px 0 0}
+.privnote{margin-top:14px;background:var(--sage-soft);border-radius:16px;padding:12px 16px;font-size:.9rem;max-width:90ch}
+.status{font-size:.86rem;color:var(--muted);min-height:1.3em}
+.btn{font:inherit;font-weight:700;font-size:.9rem;border:0;border-radius:999px;padding:10px 18px;cursor:pointer;color:#fff;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:6px;background:#6E4F3C;box-shadow:0 8px 18px -8px rgba(110,79,60,.6);text-align:center}
+.btn.gold{background:#B98324;box-shadow:0 8px 18px -8px rgba(185,131,36,.7)}
+.btn.free{background:#4F5E3E;box-shadow:0 8px 18px -8px rgba(79,94,62,.6)}
+.btn.ghost{background:transparent;color:var(--brown);border:1.5px solid var(--line);box-shadow:none}
+.btn.sm{font-size:.82rem;padding:7px 13px}
+.btn[disabled]{background:var(--soft);color:var(--muted);box-shadow:none;cursor:wait}
+.lnk{font:inherit;font-weight:700;color:var(--brown);background:none;border:0;padding:0;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+select,input[type=text],input[type=tel],input[type=email],input[type=url]{font:inherit;font-size:.95rem;color:var(--ink);background:var(--paper);border:1.5px solid var(--line);border-radius:12px;padding:9px 12px;width:100%;min-width:0}
+select:focus-visible,input:focus-visible,button:focus-visible,a:focus-visible{outline:2px solid var(--mustard);outline-offset:2px}
+::placeholder{color:color-mix(in srgb,var(--muted) 70%,transparent)}
+input:disabled,select:disabled{opacity:.7}
+.setup{background:var(--paper);border:1.5px solid var(--line);border-radius:22px;padding:16px 18px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px 18px;align-items:start}
+.setup .full{grid-column:1/-1}
+/* выбор вида миниатюрами (13.10.2026): у каждой — визитка с твоими данными */
+.tpls{display:grid;grid-template-columns:repeat(auto-fill,minmax(122px,1fr));gap:10px}
+.tpls button{font:inherit;font-size:.8rem;font-weight:700;line-height:1.25;color:var(--ink);background:var(--soft);border:1.5px solid var(--line);border-radius:12px;padding:8px 8px 9px;cursor:pointer;display:flex;flex-direction:column;align-items:stretch;gap:7px;min-width:0;text-align:center}
+.tpls .th{height:96px;display:flex;align-items:center;justify-content:center;min-width:0}
+.tpls .th>span{display:block;max-width:100%;max-height:100%;background:#fff;border-radius:2px;box-shadow:0 1px 2px rgba(40,30,20,.18),0 6px 14px -8px rgba(47,41,36,.5);overflow:hidden}
+.tpls .th svg{display:block;width:100%;height:100%}
+.tpls button[aria-pressed="true"]{border-color:var(--sage);box-shadow:inset 0 0 0 1.5px var(--sage);background:var(--sage-soft)}
+@media (max-width:560px){.tpls{grid-template-columns:repeat(2,minmax(0,1fr))}.tpls .th{height:84px}}
+@media (max-width:1000px){.setup{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.setup{grid-template-columns:1fr}}
+.fl{display:flex;flex-direction:column;gap:6px;min-width:0}
+.fl>.lb{font-size:.8rem;font-weight:700;color:var(--muted);display:flex;align-items:center;flex-wrap:wrap}
+.fl>.lb small{font-weight:600;margin-left:6px}
+.seg{display:flex;flex-wrap:wrap;gap:6px}
+.seg button{font:inherit;font-size:.84rem;font-weight:700;border:1.5px solid var(--line);background:var(--paper);color:var(--ink);border-radius:999px;padding:6px 12px;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--sage);border-color:var(--sage);color:#fff}
+.seg button:disabled{opacity:.5;cursor:default}
+.tog{display:flex;gap:10px;align-items:center;font-size:.92rem;cursor:pointer}
+.tog input{width:18px;height:18px;accent-color:var(--sage);flex:none}
+.tog.off{opacity:.55;cursor:default}
+.acts{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.exbar{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;background:var(--mustard-soft);border-radius:16px;padding:10px 14px;font-size:.9rem;font-weight:600}
+.work{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:22px;align-items:start}
+@media (max-width:1040px){.work{grid-template-columns:1fr}.cardbox{order:-1}}
+.form{display:flex;flex-direction:column;gap:14px;min-width:0}
+.sec{background:var(--paper);border:1.5px solid var(--line);border-radius:20px;padding:16px 18px;display:flex;flex-direction:column;gap:12px}
+.sec>h2{font-size:1.3rem;display:flex;align-items:center;flex-wrap:wrap}
+.hint{font-size:.84rem;color:var(--muted);margin:0}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chips label{display:inline-flex;align-items:center;gap:7px;border:1.5px solid var(--line);background:var(--paper);border-radius:12px;padding:6px 11px;font-size:.88rem;font-weight:600;cursor:pointer}
+.chips input{width:16px;height:16px;accent-color:var(--sage);margin:0}
+.row2{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;align-items:center}
+.found{background:var(--sage-soft);border-radius:12px;padding:10px 12px;font-size:.88rem}
+.found.err{background:color-mix(in srgb,#C0392B 9%,var(--paper));border:1.5px solid color-mix(in srgb,#C0392B 30%,var(--line))}
+.logo-row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.logo-row img{height:44px;max-width:120px;object-fit:contain;background:#fff;border:1.5px solid var(--line);border-radius:8px;padding:3px}
+.file-btn{position:relative;overflow:hidden}
+.file-btn input{position:absolute;inset:0;opacity:0;cursor:pointer}
+.cardbox{position:sticky;top:12px;display:flex;flex-direction:column;gap:12px;min-width:0}
+@media (max-width:1040px){.cardbox{position:static}}
+.side-lb{font-size:.78rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);display:flex;justify-content:space-between;align-items:center;gap:8px}
+.card{background:#fff;border-radius:4px;box-shadow:0 1px 2px rgba(40,30,20,.14),0 16px 34px -18px rgba(47,41,36,.55);overflow:hidden;max-width:560px}
+.card.v{max-width:300px}.card.sq{max-width:360px}
+.card svg{display:block;width:100%;height:auto}
+.over{color:#8A3F2D;background:#F6E0D9;border-radius:12px;padding:10px 12px;font-size:.88rem;margin:0}
+.dl{background:var(--paper);border:1.5px solid var(--line);border-radius:20px;padding:14px 16px;display:flex;flex-direction:column;gap:10px}
+.dl .acts .btn{flex:1 1 220px}
+.imp{background:var(--paper);border:1.5px dashed color-mix(in srgb,var(--sage) 55%,transparent);border-radius:16px;padding:14px 18px;font-size:.88rem;max-width:90ch;margin:0}
+.imp b{color:var(--sage)}
+.qh{font:700 .72rem/1 var(--sans);width:20px;height:20px;border-radius:50%;border:1.5px solid var(--line);background:var(--paper);color:var(--brown);cursor:pointer;margin-left:6px;padding:0;flex:none}
+.wipe{font-size:.86rem;color:var(--muted);margin:0}
+.tocard{display:none;margin:0}
+@media (max-width:1040px){.tocard{display:block}}
+.cardbox{scroll-margin-top:12px}
+.wipe .lnk{margin-left:4px}
+.guide{display:flex;flex-direction:column;gap:28px;padding-top:8px}
+.guide h2{font-size:clamp(1.7rem,3.6vw,2.3rem);text-wrap:balance}
+.guide .intro{max-width:64ch;font-size:1.02rem;margin:0}
+.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px}
+.steps li{background:var(--paper);border:1.5px solid var(--line);border-radius:20px;padding:16px 18px;display:flex;flex-direction:column;gap:6px}
+.steps .n{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;border:2px solid var(--mustard);color:var(--mustard);font-family:var(--display);font-size:1.4rem;margin-bottom:4px}
+.steps h3{font-size:1.25rem;line-height:1.2}
+.steps p{margin:0;font-size:.93rem;color:var(--muted)}
+.facts{margin:0;display:flex;flex-direction:column;gap:8px;max-width:80ch}
+.facts li{font-size:.93rem}
+.wi{display:inline-block;width:1.2em;height:1.1em;vertical-align:-.17em;margin:0 .28em 0 .05em;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 22'%3E%3Cpath d='M10.27 2.5a2 2 0 0 1 3.46 0l8.66 15a2 2 0 0 1-1.73 3H3.34a2 2 0 0 1-1.73-3z' fill='%23FDECEA' stroke='%23D32F2F' stroke-width='1.8' stroke-linejoin='round'/%3E%3Cpath d='M12 7.8v5.2' stroke='%23D32F2F' stroke-width='2.4' stroke-linecap='round'/%3E%3Ccircle cx='12' cy='16.5' r='1.35' fill='%23D32F2F'/%3E%3C/svg%3E") center/contain no-repeat}
+.shops{display:flex;flex-direction:column;gap:10px;max-width:90ch}
+.shop{background:var(--paper);border:1.5px solid var(--line);border-radius:18px;padding:14px 16px;display:flex;flex-direction:column;gap:4px}
+.shop b{font-size:1.02rem}
+.shop b a{color:var(--brown);text-underline-offset:3px}
+.shop span{font-size:.92rem}
+.shop small{color:var(--muted);font-size:.84rem}
+.order{background:var(--mustard-soft);border-radius:16px;padding:12px 16px;font-size:.92rem;max-width:90ch}
+.order ul{margin:6px 0 0}
+.checked{font-size:.82rem;color:var(--muted);margin:0}
+.credit{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:.8rem;color:var(--muted)}
+.credit a{color:var(--muted)}
+</style>
+
+<!--pwa--><link rel="manifest" href="/fav/site.webmanifest"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Свои люди"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="theme-color" content="#4F5E3E"><style id="sl-top">/* единая шапка svoiludi.ch (09.10.2026), собирается _i18n/topnav.py */header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:40;background:color-mix(in srgb,var(--bg,#EEF1E6) 92%,transparent);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border-bottom:1px solid var(--line,#D9DFCB);font-family:"Manrope","Segoe UI",system-ui,sans-serif;line-height:1.5;margin:0}header.top .page{max-width:1120px;margin:0 auto;padding-inline:20px;display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:12px;box-sizing:border-box;width:auto}header.top .mark{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink,#2F2924)}header.top .mono{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;flex:none}header.top .mono.av{border:none;padding:0}header.top .mono.av svg{width:100%;height:100%;display:block}header.top .mark b{font-family:"Forum","Cormorant Garamond",Georgia,serif;font-weight:400;font-size:1.25rem;line-height:1;color:var(--ink,#2F2924)}header.top .mark small{display:block;font-size:.72rem;color:var(--muted,#7A6E62);letter-spacing:.04em;margin-top:3px}header.top nav{display:flex;gap:22px;font-size:.88rem;font-weight:600;margin:0;padding:0}header.top nav a{text-decoration:none;color:var(--muted,#7A6E62)}header.top nav a:hover{color:var(--ink,#2F2924)}header.top nav a[aria-current="page"]{color:var(--ink,#2F2924)}header.top .navcta{font-size:.86rem;font-weight:700;text-decoration:none;border:1.5px solid #4F5E3E;color:#4F5E3E;background:transparent;border-radius:12px;padding:8px 16px;white-space:nowrap}@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) header.top .navcta{border-color:#B9C69F;color:#B9C69F}}:root[data-theme="dark"] header.top .navcta{border-color:#B9C69F;color:#B9C69F}@media (max-width:1100px){header.top{position:static}}@media (max-width:420px){header.top .page{padding-block:8px;gap:8px}header.top .mono{width:32px;height:32px}header.top .mark{gap:8px}header.top .mark b{font-size:1.06rem}header.top .mark small{display:none}header.top .navcta{font-size:.8rem;padding:6px 11px}}@media (max-width:380px){header.top .page{gap:6px;padding-inline:14px}header.top .mark b{font-size:1rem}header.top .navcta{font-size:.74rem;padding:6px 8px}}header.top .sl-free{background:#4F5E3E;color:#FFFCF8;font-size:.86rem;line-height:1.45;box-shadow:inset 0 -1px 0 rgba(0,0,0,.18)}header.top .sl-free p{max-width:1340px;margin:0 auto;padding:9px 20px;display:flex;align-items:flex-start;justify-content:center;gap:10px;box-sizing:border-box}header.top .sl-free svg{width:19px;height:19px;flex:none;margin-top:0;fill:none;stroke:#F3E3C2;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}header.top .sl-free b{font-weight:800;color:#FFFFFF}header.top .sl-free a{color:#F3E3C2;font-weight:700;text-decoration:underline;text-underline-offset:3px;white-space:nowrap}header.top .sl-free a:hover{color:#FFFFFF}@media (max-width:700px){header.top .sl-free{font-size:.82rem;line-height:1.42}header.top .sl-free p{justify-content:flex-start;padding:9px 16px}}html:not(.sl-ira) header.top a[data-ira]{display:none!important}@media print{header.top{display:none!important}}</style><style id="pa-tiles">/* верхнее меню на телефоне и планшете: прямоугольные плитки с закруглением в два ряда, иконки ставит pwa-app.js (08.10.2026) */html header.top nav[aria-label] a .pa-ni{display:none}@media (max-width:1100px){html header.top .page{flex-wrap:wrap;row-gap:8px}html header.top nav[aria-label]{order:3;width:100%;display:grid!important;grid-template-columns:repeat(var(--pa-cols,3),minmax(0,1fr));gap:8px;overflow:visible;padding:4px 0 12px;margin:0}html header.top nav[aria-label] a{display:flex!important;flex-direction:column;align-items:center;justify-content:center;gap:5px;min-height:62px;padding:9px 6px;border-radius:14px;background:var(--paper,#FFFCF8);border:1px solid color-mix(in srgb,var(--sage,#66704F) 30%,transparent);box-shadow:0 3px 10px -6px rgba(60,70,40,.45);color:var(--ink,#2F2924)!important;font:600 .78rem/1.18 var(--body,system-ui);text-align:center;white-space:normal;text-decoration:none;-webkit-tap-highlight-color:transparent}html header.top nav[aria-label] a::after{content:none!important}html header.top nav[aria-label] a.pa-dup{display:none!important}html header.top nav[aria-label] a .pa-ni{display:block;width:22px;height:22px;fill:none;stroke:var(--sage,#66704F);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}html header.top nav[aria-label] a[aria-current="page"]{background:var(--sage,#66704F);border-color:var(--sage,#66704F);color:var(--paper,#FFFCF8)!important;box-shadow:0 4px 12px -6px rgba(60,70,40,.6)}html header.top nav[aria-label] a[aria-current="page"] .pa-ni{stroke:var(--paper,#FFFCF8)}html header.top nav[aria-label] a:active{transform:scale(.97)}}/* компьютер — как на сайте Ирины (решение 09.10.2026): на широком экране одна строка «логотип · меню · поиск · кнопка», пункты простым текстом, текущий — тёмным и жирным; на узком ноутбуке (1101–1359 px) меню переносится отдельной строкой под логотип, без переносов внутри пунктов */@media (min-width:1101px){html header.top .page{flex-wrap:wrap;row-gap:0;column-gap:14px}html header.top .mark{flex:none}html header.top .mark b,html header.top .mark small{white-space:nowrap}html header.top .page>.ss-btn{margin-left:auto}html header.top nav[aria-label]{order:3;flex:1 0 100%;display:flex!important;flex-wrap:nowrap;justify-content:center;gap:4px;overflow:visible;margin:8px 0 -2px;padding:6px 0 0;border-top:1px solid color-mix(in srgb,var(--sage,#66704F) 22%,transparent);font-size:.92rem}html header.top nav[aria-label] a{white-space:nowrap;padding:6px 10px;color:var(--muted,#6B635A);font-weight:500;text-decoration:none}html header.top nav[aria-label] a:hover{color:var(--ink,#2F2924)}html header.top nav[aria-label] a[aria-current="page"]{color:var(--ink,#2F2924)!important;font-weight:700}}@media (min-width:1360px){html header.top .page{flex-wrap:nowrap;max-width:1340px}html header.top nav[aria-label]{order:0;flex:0 1 auto;margin:0 auto;padding:0;border-top:0;gap:2px}html header.top nav[aria-label] a{padding:6px 9px}html header.top .page>.ss-btn{margin-left:0}html header.top .page>.ss-btn span{display:none}}/* кнопки сайта — прямоугольные с закруглением, как плитки меню (решение Ирины 08.10.2026); значки-метки (образец, теги, «?») остаются круглыми */:is(.navcta,.btn,.shr-btn,.pl-act a,.pl-act button,.qa,.more,.listbar button,.leaflet-popup-content button,.calmenu a,.calmenu button,.go-free,.find,.confirm,.monthics,.addb,.mbtn,.example,.viewsw,#langbar.langbar,.pa-go,.pa-x,.pa-foot){border-radius:12px!important}:is(.viewsw button,.seg button,.chips button,#langbar.langbar a,.cal-nav button){border-radius:9px!important}</style><style id="sl-nk-css">/* «Некоммерческое» — зелёное сердечко (12.10.2026), собирается _i18n/pwa.py */:is(.sl-nk,.free-line,.vac-note>b:first-child)::before{content:"";display:inline-block;flex:none;width:.95em;height:.95em;margin:0 .32em -.13em 0;background:var(--brown,#4F5E3E);-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 21.2C11.5 20.9 3 15.9 3 9.3 3 6.4 5.2 4.2 8 4.2c1.7 0 3.1.8 4 2.1.9-1.3 2.3-2.1 4-2.1 2.8 0 5 2.2 5 5.1 0 6.6-8.5 11.6-9 11.9z'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 21.2C11.5 20.9 3 15.9 3 9.3 3 6.4 5.2 4.2 8 4.2c1.7 0 3.1.8 4 2.1.9-1.3 2.3-2.1 4-2.1 2.8 0 5 2.2 5 5.1 0 6.6-8.5 11.6-9 11.9z'/%3E%3C/svg%3E") center/contain no-repeat}i.sl-nk{font-style:normal}i.sl-nk::before{margin-right:.28em}.free-badge.sl-nk::before{margin:0;width:1.05em;height:1.05em}</style><style id="sl-bul-css">/* «Росток» — единый маркер списков (12.10.2026), собирается _i18n/pwa.py */:root{--sl-bul-c:#66704F}@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--sl-bul-c:#A9B98F}}:root[data-theme="dark"]{--sl-bul-c:#A9B98F}:where(:is(ul.ul,ul.marks,ul.facts,ul.k-rules,ul.effects,ul.regdoc,ul.big,ul.svplan,ul.sl-bul,ul.adm-todo,.tool ul,ul:not([class]):not([id])):not(nav ul,header ul,footer ul,button ul,[role=navigation] ul,.pa-tabs ul,.cn-free ul,.mc ul,.no-bul)){list-style:none!important;padding-left:0!important}:where(:is(ul.ul,ul.marks,ul.facts,ul.k-rules,ul.effects,ul.regdoc,ul.big,ul.svplan,ul.sl-bul,ul.adm-todo,.tool ul,ul:not([class]):not([id])):not(nav ul,header ul,footer ul,button ul,[role=navigation] ul,.pa-tabs ul,.cn-free ul,.mc ul,.no-bul))>li{list-style:none!important;position:relative!important;padding-left:1.7em!important}:where(:is(ul.ul,ul.marks,ul.facts,ul.k-rules,ul.effects,ul.regdoc,ul.big,ul.svplan,ul.sl-bul,ul.adm-todo,.tool ul,ul:not([class]):not([id])):not(nav ul,header ul,footer ul,button ul,[role=navigation] ul,.pa-tabs ul,.cn-free ul,.mc ul,.no-bul))>li::marker{content:none}:where(:is(ul.ul,ul.marks,ul.facts,ul.k-rules,ul.effects,ul.regdoc,ul.big,ul.svplan,ul.sl-bul,ul.adm-todo,.tool ul,ul:not([class]):not([id])):not(nav ul,header ul,footer ul,button ul,[role=navigation] ul,.pa-tabs ul,.cn-free ul,.mc ul,.no-bul))>li::before{content:""!important;display:block!important;position:absolute!important;left:.05em!important;top:.2em!important;width:1.15em!important;height:1.15em!important;margin:0!important;border:0!important;border-radius:0!important;transform:none!important;box-shadow:none!important;background:var(--sl-bul-c)!important;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none' stroke='%23000' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M10 18V9'/%3E%3Cpath d='M10 12C6 12 3.5 9.5 3.5 6 7 6 10 8.2 10 12Z' fill='%23000' fill-opacity='.3'/%3E%3Cpath d='M10 9.5C10 5.5 12.5 3 16.5 3 16.5 6.8 14 9.5 10 9.5Z' fill='%23000' fill-opacity='.3'/%3E%3C/svg%3E") center/contain no-repeat!important;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none' stroke='%23000' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M10 18V9'/%3E%3Cpath d='M10 12C6 12 3.5 9.5 3.5 6 7 6 10 8.2 10 12Z' fill='%23000' fill-opacity='.3'/%3E%3Cpath d='M10 9.5C10 5.5 12.5 3 16.5 3 16.5 6.8 14 9.5 10 9.5Z' fill='%23000' fill-opacity='.3'/%3E%3C/svg%3E") center/contain no-repeat!important}.tool ul>li::before{background:var(--c,var(--sl-bul-c))!important}@media print{:is(ul.ul,ul.marks,ul.facts,ul.k-rules,ul.effects,ul.regdoc,ul.big,ul.svplan,ul.sl-bul,ul.adm-todo,.tool ul,ul:not([class]):not([id])):not(nav ul,header ul,footer ul,button ul,[role=navigation] ul,.pa-tabs ul,.cn-free ul,.mc ul,.no-bul)>li::before{-webkit-print-color-adjust:exact;print-color-adjust:exact}}</style><script src="/assets/pwa-app.js" defer></script><!--pwa--></head>
+<body>
+<header class="top">
+  <div class="sl-free" role="note"><p><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21.5V10"/><path d="M12 15.5c-4 0-6.6-2.6-6.6-6.6 4 0 6.6 2.6 6.6 6.6z"/><path d="M12 11.5c0-3.6 2.4-6.4 6.6-6.4 0 3.8-2.6 6.4-6.6 6.4z"/></svg><span><b>Разместить карточку в справочнике — бесплатно до конца 2027 года.</b> Дополнительные услуги платные, цены на них сейчас уточняются. <a href="../../usloviya/#besplatno">Что бесплатно и что платно&nbsp;→</a></span></p></div>
+  <div class="page">
+    <a class="mark" href="../../" aria-label="Свои люди в Швейцарии — в начало">
+      <span class="mono av"><svg aria-hidden="true" viewBox="0 0 100 100"><circle cx="50" cy="50" r="46" fill="#FFFCF8" stroke="#4F5E3E" stroke-width="3"/><g transform="rotate(0.0 50 50)"><path d="M50 47 C42 41 40.5 33 44 31 C47 29.5 53 29.5 56 31 C59.5 33 58 41 50 47Z" fill="#E3E8D6" stroke="#5E6B48" stroke-width="2"/><circle cx="50" cy="24" r="6.2" fill="#5E6B48"/></g><g transform="rotate(60.0 50 50)"><path d="M50 47 C42 41 40.5 33 44 31 C47 29.5 53 29.5 56 31 C59.5 33 58 41 50 47Z" fill="#E3E8D6" stroke="#5E6B48" stroke-width="2"/><circle cx="50" cy="24" r="6.2" fill="#5E6B48"/></g><g transform="rotate(120.0 50 50)"><path d="M50 47 C42 41 40.5 33 44 31 C47 29.5 53 29.5 56 31 C59.5 33 58 41 50 47Z" fill="#E3E8D6" stroke="#5E6B48" stroke-width="2"/><circle cx="50" cy="24" r="6.2" fill="#5E6B48"/></g><g transform="rotate(180.0 50 50)"><path d="M50 47 C42 41 40.5 33 44 31 C47 29.5 53 29.5 56 31 C59.5 33 58 41 50 47Z" fill="#E3E8D6" stroke="#5E6B48" stroke-width="2"/><circle cx="50" cy="24" r="6.2" fill="#5E6B48"/></g><g transform="rotate(240.0 50 50)"><path d="M50 47 C42 41 40.5 33 44 31 C47 29.5 53 29.5 56 31 C59.5 33 58 41 50 47Z" fill="#E3E8D6" stroke="#5E6B48" stroke-width="2"/><circle cx="50" cy="24" r="6.2" fill="#5E6B48"/></g><g transform="rotate(300.0 50 50)"><path d="M50 47 C42 41 40.5 33 44 31 C47 29.5 53 29.5 56 31 C59.5 33 58 41 50 47Z" fill="#E3E8D6" stroke="#5E6B48" stroke-width="2"/><circle cx="50" cy="24" r="6.2" fill="#5E6B48"/></g><circle cx="50" cy="50" r="7" fill="#B98324"/></svg></span>
+      <span><b>Свои люди</b><small>в Швейцарии</small></span>
+    </a>
+    <nav aria-label="Разделы">
+      <a href="../../">Специалисты</a>
+      <a href="../../events/">События и курсы</a>
+      <a href="../../vakansii/">Вакансии и партнёрство</a>
+      <a href="../../shveycariya/">Как устроена Швейцария</a>
+      <a href="../../instrumenty/" aria-current="page" style="color:var(--ink)">Полезные инструменты</a>
+      <a href="../../novosti/">Что нового</a>
+    </nav>
+    <a class="navcta" href="../../join/">Подать заявку</a>
+  </div>
+</header>
+
+<div class="wrap">
+  <header>
+    <p style="margin:0 0 14px"><a class="jump" href="https://svoiludi.ch/instrumenty/">← Все полезные инструменты · Свои люди в Швейцарии</a></p>
+    <div class="eyebrow">Своё дело · визитки</div>
+    <h1>Визитка для печати</h1>
+    <p class="lead">Визитка в стиле документов «Своих людей»: шалфейная шапка с твоим именем, белое поле и контакты с подписями — как в PDF наших инструментов. Выбираешь один из четырёх видов, горизонтальный или вертикальный, и размер: обычный 85 × 55, 90 × 50 или квадрат 55 × 55 мм. Вписываешь имя, чем занимаешься и контакты, по желанию добавляешь логотип или фото и обратную сторону на русском или украинском. QR-код на твой сайт, Instagram или карточку в справочнике сам встаёт в правый нижний угол. Получаешь PDF, который примет любая типография, и лист A4, чтобы напечатать визитки дома. Бесплатно: внизу визитки стоит маленький знак «Свои люди», а без него визитку можно скачать с любым платным пакетом «Своих людей».</p>
+    <p class="jumps"><a class="jump" href="#guide">Зачем это тебе и как с этим работать ↓</a><a class="jump" href="#pechat">Где напечатать визитки ↓</a></p>
+    <div class="privnote"><b>Твои данные только у тебя.</b> Всё, что ты вписываешь, и логотип хранятся только в твоём браузере на этом устройстве. Регистрация не нужна. Можно закрыть страницу и вернуться позже, всё останется.</div>
+    <div data-fan="vizitka"></div>
+  </header>
+
+  <div class="setup">
+    <div class="fl full"><span class="lb">Вид визитки<small>нажми на картинку</small><button type="button" class="qh" data-help="layout" aria-label="Подсказка: вид визитки" aria-expanded="false">?</button></span>
+      <div class="tpls" id="tpls" aria-label="Вид визитки"></div></div>
+    <div class="fl"><span class="lb">Размер<button type="button" class="qh" data-help="size" aria-label="Подсказка: размер" aria-expanded="false">?</button></span>
+      <div class="seg" data-seg="size"><button type="button" data-v="85x55" aria-pressed="false">85 × 55 мм</button><button type="button" data-v="90x50" aria-pressed="false">90 × 50 мм</button><button type="button" data-v="55x55" aria-pressed="false">55 × 55 мм, квадрат</button></div></div>
+    <div class="fl"><span class="lb">Положение<button type="button" class="qh" data-help="orient" aria-label="Подсказка: положение" aria-expanded="false">?</button></span>
+      <div class="seg" data-seg="orient"><button type="button" data-v="h" aria-pressed="false">Горизонтальная</button><button type="button" data-v="v" aria-pressed="false">Вертикальная</button></div></div>
+    <div class="fl"><span class="lb">Шрифт имени<button type="button" class="qh" data-help="font" aria-label="Подсказка: шрифт имени" aria-expanded="false">?</button></span>
+      <div class="seg" data-seg="font"><button type="button" data-v="serif" aria-pressed="false">Изящный</button><button type="button" data-v="sans" aria-pressed="false">Строгий</button></div></div>
+    <div class="fl"><span class="lb">Перед контактами<button type="button" class="qh" data-help="cstyle" aria-label="Подсказка: что стоит перед контактами" aria-expanded="false">?</button></span>
+      <div class="seg" data-seg="cstyle"><button type="button" data-v="icon" aria-pressed="false">Значки</button><button type="button" data-v="text" aria-pressed="false">Слова</button><button type="button" data-v="none" aria-pressed="false">Ничего</button></div></div>
+    <div class="fl"><span class="lb">Язык подписей на визитке<button type="button" class="qh" data-help="lbl" aria-label="Подсказка: язык подписей" aria-expanded="false">?</button></span>
+      <select id="lbl"><option value="de">Deutsch: Tel., E-Mail, Web</option><option value="fr">Français: Tél., E-mail, Web</option><option value="it">Italiano: Tel., E-mail, Web</option><option value="en">English: Phone, Email, Web</option><option value="none">Без подписей</option></select></div>
+    <div class="fl"><span class="lb">Печать<button type="button" class="qh" data-help="bw" aria-label="Подсказка: без цвета" aria-expanded="false">?</button></span>
+      <label class="tog"><input type="checkbox" id="bw"> Без цвета, для дешёвой печати</label></div>
+    <div class="fl"><span class="lb">Знак «Свои люди»<button type="button" class="qh" data-help="mark" aria-label="Подсказка: знак «Свои люди»" aria-expanded="false">?</button></span>
+      <label class="tog off" id="markTog"><input type="checkbox" id="nomark" disabled> Без знака «Свои люди»</label>
+      <p class="hint" id="markNote"></p></div>
+  </div>
+
+  <div class="exbar" id="exbar" hidden><span>Это пример, всё в нём вымышленное. Так будет выглядеть твоя визитка, свой логотип можно добавить в поле «Логотип или фото».</span><button type="button" class="btn sm" id="exOff">Вернуться к моим данным</button></div>
+
+  <div class="work">
+    <div class="form" id="fields">
+      <section class="sec" aria-labelledby="h-find"><h2 id="h-find">Ты уже в справочнике «Свои люди»?<button type="button" class="qh" data-help="find" aria-label="Подсказка: номер карточки" aria-expanded="false">?</button></h2>
+        <p class="hint">Впиши номер своей карточки (SG-… или OR-…, он стоит внизу карточки на сайте) или UID фирмы. Данные из карточки подставятся сами. Если карточки нет, просто заполни поля ниже.</p>
+        <div class="row2"><input type="text" id="findQ" placeholder="SG-0014 или CHE-123.456.789" autocomplete="off"><button type="button" class="btn sm" id="findBtn">Подставить</button></div>
+        <div class="found" id="found" role="status" hidden></div>
+      </section>
+
+      <section class="sec" aria-labelledby="h-front"><h2 id="h-front">Лицевая сторона</h2>
+        <div class="fl"><span class="lb">Имя и фамилия латиницей<button type="button" class="qh" data-help="name" aria-label="Подсказка: имя" aria-expanded="false">?</button></span><input type="text" data-k="f.name" placeholder="Anna Kovalenko" autocomplete="name"></div>
+        <div class="fl"><span class="lb">Чем ты занимаешься<small>на языке подписей</small><button type="button" class="qh" data-help="role" aria-label="Подсказка: чем занимаешься" aria-expanded="false">?</button></span><input type="text" data-k="f.role" placeholder="Maniküre und Pediküre"></div>
+        <div class="fl"><span class="lb">Фирма или студия<small>по желанию</small></span><input type="text" data-k="f.firm" placeholder="Studio Anna" autocomplete="organization"></div>
+        <div class="fl"><span class="lb">Слоган или короткая фраза<small>по желанию</small><button type="button" class="qh" data-help="tag" aria-label="Подсказка: слоган" aria-expanded="false">?</button></span><input type="text" data-k="f.tag" placeholder="Gepflegte Hände, gute Laune"></div>
+        <div class="fl"><span class="lb">Услуги одной строкой<small>по желанию</small><button type="button" class="qh" data-help="serv" aria-label="Подсказка: услуги" aria-expanded="false">?</button></span><input type="text" data-k="f.serv" placeholder="Maniküre · Pediküre · Nageldesign"></div>
+        <div class="fl"><span class="lb">На каких языках ты работаешь<small>по желанию</small><button type="button" class="qh" data-help="langs" aria-label="Подсказка: языки" aria-expanded="false">?</button></span><div class="chips" id="langs"></div></div>
+        <div class="fl"><span class="lb">Телефон</span><input type="tel" data-k="f.phone" placeholder="+41 79 000 00 00" autocomplete="tel"></div>
+        <label class="tog"><input type="checkbox" data-k="f.wa"> По этому номеру можно писать в WhatsApp</label>
+        <div class="fl"><span class="lb">E-mail</span><input type="email" data-k="f.email" placeholder="anna@example.ch" autocomplete="email"></div>
+        <div class="fl"><span class="lb">Сайт<small>по желанию</small></span><input type="url" data-k="f.web" placeholder="www.example.ch" autocomplete="url"></div>
+        <div class="fl"><span class="lb">Instagram<small>по желанию</small></span><input type="text" data-k="f.ig" placeholder="@studio_anna"></div>
+        <div class="fl"><span class="lb">Telegram<small>по желанию</small></span><input type="text" data-k="f.tg" placeholder="@anna"></div>
+        <div class="fl"><span class="lb">Адрес, где ты принимаешь<small>по желанию</small><button type="button" class="qh" data-help="addr" aria-label="Подсказка: адрес" aria-expanded="false">?</button></span><input type="text" data-k="f.street" placeholder="Musterstrasse 12" autocomplete="address-line1"><input type="text" data-k="f.city" placeholder="8000 Zürich" autocomplete="address-level2"></div>
+        <div class="fl"><span class="lb">Логотип или фото<small>по желанию</small><button type="button" class="qh" data-help="logo" aria-label="Подсказка: логотип" aria-expanded="false">?</button></span>
+          <div class="logo-row"><img id="logoImg" alt="Твой логотип" hidden><span class="btn ghost sm file-btn" id="logoPick">Выбрать картинку<input type="file" id="logoIn" accept="image/*" aria-label="Выбрать логотип или фото"></span><button type="button" class="btn ghost sm" id="logoDel" hidden>Убрать</button></div>
+          <p class="hint" id="logoNote" hidden></p></div>
+      </section>
+
+      <section class="sec" aria-labelledby="h-back"><h2 id="h-back">Обратная сторона<button type="button" class="qh" data-help="back" aria-label="Подсказка: обратная сторона" aria-expanded="false">?</button></h2>
+        <label class="tog"><input type="checkbox" data-k="back.on"> Сделать обратную сторону</label>
+        <div id="backFields" class="form">
+          <div class="fl"><span class="lb">Имя так, как тебе привычно</span><input type="text" data-k="back.name" placeholder="Анна Коваленко"></div>
+          <div class="fl"><span class="lb">Чем ты занимаешься, по-русски или по-украински</span><input type="text" data-k="back.role" placeholder="Маникюр и педикюр"></div>
+          <div class="fl"><span class="lb">Ещё строка<small>по желанию</small></span><input type="text" data-k="back.line" placeholder="Говорю по-русски и по-украински"></div>
+          <label class="tog"><input type="checkbox" data-k="back.logo"> Логотип и на обратной стороне</label>
+        </div>
+      </section>
+
+      <section class="sec" aria-labelledby="h-qr"><h2 id="h-qr">QR-код<button type="button" class="qh" data-help="qr" aria-label="Подсказка: QR-код" aria-expanded="false">?</button></h2>
+        <div class="fl"><span class="lb">Где поставить</span><div class="seg" data-seg="qr.where"><button type="button" data-v="none" aria-pressed="false">Без QR-кода</button><button type="button" data-v="front" aria-pressed="false">На лицевой стороне</button><button type="button" data-v="back" aria-pressed="false">На обратной стороне</button></div></div>
+        <div class="fl" id="qrToBox"><span class="lb">Куда он ведёт</span><select data-k="qr.to" id="qrTo"><option value="web">На мой сайт</option><option value="ig">На мой Instagram</option><option value="card">На мою карточку в «Своих людях»</option><option value="url">На другую ссылку</option></select>
+          <input type="url" data-k="qr.url" id="qrUrl" placeholder="https://…" hidden>
+          <p class="hint" id="qrNote"></p></div>
+      </section>
+      <p class="tocard"><a class="jump" href="#cardBox">Готово? К визитке и скачиванию ↑</a></p>
+      <p class="wipe" id="wipeBox">Твои записи хранятся только на этом устройстве. <button type="button" class="lnk" id="wipe">Удалить историю</button></p>
+    </div>
+
+    <div class="cardbox" id="cardBox" aria-label="Твоя визитка">
+      <div class="side-lb"><span id="sideLb">Лицевая сторона</span><button type="button" class="btn ghost sm" id="exOn">Посмотреть на примере</button></div>
+      <div class="card" id="cardFront"></div>
+      <div class="side-lb" id="backLb" hidden><span>Обратная сторона</span></div>
+      <div class="card" id="cardBack" hidden></div>
+      <p class="over" id="over" hidden></p>
+      <div class="dl" id="dlBox">
+        <div class="acts">
+          <button type="button" class="btn gold" id="pdf">PDF для типографии</button>
+          <button type="button" class="btn" id="pdfA4">Лист A4 для печати дома</button>
+        </div>
+        <div class="acts">
+          <button type="button" class="btn ghost sm" id="share" hidden>Отправить PDF</button>
+          <button type="button" class="btn ghost sm" data-png="front">Лицевая сторона в PNG</button>
+          <button type="button" class="btn ghost sm" data-png="back" hidden>Обратная сторона в PNG</button>
+        </div>
+        <div class="fl"><span class="lb">Запас на обрез в файле для типографии<button type="button" class="qh" data-help="bleed" aria-label="Подсказка: запас на обрез" aria-expanded="false">?</button></span>
+          <select id="bleed"><option value="3">3 мм: файл 91 × 61 мм (чаще всего)</option><option value="2">2 мм: файл 89 × 59 мм</option><option value="1">1 мм: файл 87 × 57 мм</option><option value="0">Без запаса: файл 85 × 55 мм</option></select></div>
+        <p class="hint" id="a4Note"></p>
+        <div class="status" id="status" role="status"></div>
+      </div>
+    </div>
+  </div>
+
+  <p class="imp"><b>Важно.</b> Это помощник для личного использования, а не официальный документ и не консультация. Перед тем как заказать тираж, перепроверь телефон, e-mail, адрес и наведи камеру телефона на QR-код: он должен открыть нужную страницу. Автор не несёт ответственности за достоверность данных. Это образец для примера и личного использования, а не официальный документ.</p>
+
+  <section class="guide" id="guide" aria-labelledby="g-why">
+    <div>
+      <div class="eyebrow">Зачем это тебе</div>
+      <h2 id="g-why">Визитка, по которой тебя легко найти</h2>
+    </div>
+    <p class="intro">В Швейцарии визитками по-прежнему обмениваются: на ресепшене у мастера, на выставке, в ферайне, на родительском собрании, после пробного занятия. Белая визитка на языке кантона выглядит профессионально и спокойно, в ней только то, что нужно, чтобы тебе позвонили или написали. Обратная сторона на родном языке и QR-код помогают своим сразу узнать тебя и записаться.</p>
+
+    <div>
+      <div class="eyebrow">Как с этим работать</div>
+      <h2 id="g-how">Четыре шага до готовой визитки</h2>
+    </div>
+    <ol class="steps" aria-labelledby="g-how">
+      <li><span class="n">1</span><h3>Впиши данные</h3><p>Имя латиницей, как в документах, чем ты занимаешься на языке кантона и контакты. Если ты уже в «Своих людях», впиши номер карточки, и всё подставится само.</p></li>
+      <li><span class="n">2</span><h3>Выбери вид и размер</h3><p>Четыре вида, как документы «Своих людей»: нажми на картинку, и визитка сразу поменяется. Выбери размер и положение: горизонтальная или вертикальная. По желанию добавь логотип или фото: на белой визитке логотип с белым фоном выглядит хорошо.</p></li>
+      <li><span class="n">3</span><h3>Добавь обратную сторону и QR-код</h3><p>На обратной стороне — имя и чем ты занимаешься по-русски или по-украински и ещё одна строка. QR-код на сайт, Instagram или твою карточку в справочнике стоит на лицевой стороне в правом нижнем углу. Его можно перенести на обратную сторону.</p></li>
+      <li><span class="n">4</span><h3>Скачай и закажи</h3><p>PDF для типографии загрузи на её сайте. Лист A4 распечатай дома на плотной бумаге и разрежь по меткам или распечатай на готовых листах с визитками.</p></li>
+    </ol>
+
+    <div>
+      <div class="eyebrow">Перед тем как печатать</div>
+      <h2 id="g-know">Что стоит знать</h2>
+    </div>
+    <ul class="facts" aria-labelledby="g-know">
+      <li>Обычный размер визитки в Швейцарии — 85 × 55 мм, его делает любая типография, и горизонтально, и вертикально. Визитки 90 × 50 мм и квадратные 55 × 55 мм печатают не везде: перед заказом проверь размер на сайте типографии.</li>
+      <li>Пиши на лицевой стороне на языке, на котором с тобой будут говорить клиенты. В немецкоязычных кантонах это немецкий, во франкоязычных — французский, в Тичино — итальянский. На обратной стороне то же самое можно повторить по-русски или по-украински.</li>
+      <li>Имя на лицевой стороне пиши латиницей и так же, как в документах, на почтовом ящике и в договорах. Тогда клиент легко найдёт тебя в почте, в мессенджере и в реестре фирм.</li>
+      <li class="attn"><i class="wi"></i>Некоторые звания в Швейцарии защищены законом: психолог (Psychologin), психотерапевт, врач (Ärztin), адвокат (Rechtsanwältin), медицинский массаж, «дипломированный» (dipl.) и другие. Пиши их на визитке, только если у тебя есть диплом или разрешение, признанные в Швейцарии. Без такого документа выбирай нейтральные слова, например «Beratung», «Coaching» или «Wellness-Massage». Подробно — в теме <a href="../../shveycariya/professii-konsultirovanie/">«Коучинг, консультирование, психология»</a>.</li>
+      <li>Внизу лицевой стороны стоит маленький знак «Свои люди» с адресом svoiludi.ch. С ним визитка бесплатна, а земляки, которые её получат, узнают, где искать своих. Убрать знак можно с любым платным пакетом «Своих людей»: владелец карточки с пакетом получает от нас личную ссылку на этот инструмент.</li>
+      <li>Перед большим тиражом закажи несколько штук или распечатай один лист дома. Проверь, что в номере и e-mail нет ошибок, а QR-код открывается камерой телефона.</li>
+    </ul>
+  </section>
+
+  <section class="guide" id="pechat" aria-labelledby="g-print">
+    <div>
+      <div class="eyebrow">Где напечатать</div>
+      <h2 id="g-print">Типографии, которые принимают готовый PDF</h2>
+    </div>
+    <p class="intro">Подойдёт любая типография, которая печатает визитки по твоему файлу. Ниже несколько швейцарских онлайн-типографий, один международный сервис и печать дома. Мы ни с кем из них не сотрудничаем и денег за эти ссылки не получаем. Цены, бумагу и сроки смотри на их сайтах.</p>
+    <div class="order"><b>Что выбрать при заказе.</b>
+      <ul>
+        <li>Тот же размер, что ты выбрала здесь: 85 × 55 мм (Standard), 90 × 50 мм или квадрат 55 × 55 мм. Для вертикальной визитки выбери положение «hoch» (вертикально), если типография об этом спрашивает.</li>
+        <li>Печать с одной стороны, если обратной стороны нет, или с двух сторон, если она есть.</li>
+        <li>Плотная матовая бумага, 300–400 г/м²: на ней можно писать ручкой.</li>
+        <li>Загрузи «PDF для типографии». Если типография просит другой запас на обрез, выбери его над кнопками скачивания.</li>
+      </ul></div>
+    <div class="shops">
+      <div class="shop"><b><a href="https://www.flyerline.ch/de/drucksachen/visitenkarten.html" target="_blank" rel="noopener">Flyerline</a></b><span>Швейцарская онлайн-типография из Альтнау, кантон Тургау. Выбери классические визитки и загрузи свой PDF. Какой формат файла нужен, видно в конфигураторе заказа.</span></div>
+      <div class="shop"><b><a href="https://www.wir-machen-druck.ch/visitenkarten-gestalten-guenstig-drucken-lassen-schweiz-druckerei,category,9179.html" target="_blank" rel="noopener">WIRmachenDRUCK Schweiz</a></b><span>Онлайн-типография: визитки 85 × 55 мм, 90 × 50 мм и квадратные 55 × 55 мм. Свой макет загружаешь при заказе. Просят запас 3 мм на обрез, как в нашем файле по умолчанию.</span></div>
+      <div class="shop"><b><a href="https://shop.rohnerspiller.ch/produkte/office-produkte/visitenkarten.html" target="_blank" rel="noopener">Rohner Spiller</a></b><span>Типография в Винтертуре с интернет-магазином. Визитки 85 × 55 мм горизонтальные и вертикальные и квадратные 55 × 55 мм можно заказать со своим макетом, в их памятке к визиткам тоже запас 3 мм на обрез.</span></div>
+      <div class="shop"><b><a href="https://www.vistaprint.ch/visitenkarten" target="_blank" rel="noopener">Vistaprint</a></b><span>Международный сервис с сайтом для Швейцарии. Нажми «Design hochladen» и загрузи свой готовый файл.</span></div>
+      <div class="shop"><b>Дома на своём принтере</b><span>Скачай «Лист A4 для печати дома». Распечатай его на плотной бумаге и разрежь по меткам. Для обычных горизонтальных визиток 85 × 55 мм есть готовые листы A4 с перфорацией, их продают, например, в <a href="https://shop.post.ch/en/stationery/paper-notebooks/craft-paper/sigel-visitenkarten-85x55mm-dp830-weiss-185g-doppels-150-stuck/p/818800" target="_blank" rel="noopener">магазине Почты</a>.</span><small>Сначала распечатай лист на обычной бумаге и приложи его к листу с визитками на просвет: края должны совпасть.</small></div>
+      <div class="shop"><b>Копицентр рядом с домом</b><span>В копицентре (Copyshop) обычно можно распечатать PDF на плотной бумаге и сразу разрезать. Возьми с собой «Лист A4 для печати дома».</span></div>
+    </div>
+    <p class="checked">Проверено 13.10.2026.</p>
+  </section>
+
+  <div class="share-slot" data-url="https://svoiludi.ch/instrumenty/vizitka/" data-lead="Перешли тем, кому нужны визитки. В ссылке нет твоих данных." data-text="Привет! Тут можно бесплатно сделать простую белую визитку для своего дела в стиле «Своих людей»: четыре вида, горизонтальная или вертикальная, с логотипом и QR-кодом. PDF для типографии и лист A4, чтобы напечатать дома. https://svoiludi.ch/instrumenty/vizitka/"></div>
+  <p class="credit"><span>Свои люди в Швейцарии · svoiludi.ch</span><a href="../../o-proekte/">О проекте</a><a href="https://svoiludi.ch/privacy/">Политика конфиденциальности</a><a href="../../o-proekte/#otvetstvennost">Ограничение ответственности</a><a href="https://voznesenskaya.ch/impressum/">Выходные данные</a><a href="../../usloviya/">Условия размещения</a></p>
+</div>
+
+<script src="/assets/kantony.js"></script>
+<script src="/assets/lib/jspdf.umd.min.js"></script>
+<script src="/assets/lib/qrcode.js"></script>
+<script src="/assets/shema.js"></script>
+<script>
+window.HELP = {
+  mark: '<p>Внизу лицевой стороны стоит маленький знак проекта — зелёная плашка, как значок «Я в справочнике»: наш кружок «Свои люди», надпись «Свои люди» и адрес svoiludi.ch. С ним визитка бесплатна: делай и печатай сколько угодно. А земляки, которые получат твою визитку, узнают, где искать «Своих людей».</p><p>Убрать знак можно с любым платным пакетом «Своих людей», например «VIP-партнёр» или «VIP-партнёр ТОП». Владелец карточки с пакетом получает от нас личную ссылку на этот инструмент. Открой визитку по ней, и галочка «Без знака «Свои люди»» станет доступной, пока действует пакет. Ссылка запоминается только на этом устройстве.</p>',
+  layout: '<p>Четыре вида — как документы «Своих людей» (PDF наших инструментов): шалфейная шапка с белым заголовком, белое поле, подписи полей жирным, шрифт Manrope. <b>Шапка</b> — имя и чем ты занимаешься в шалфейной полосе сверху, логотип на белой плашке, ниже контакты. <b>Шапка по центру</b> — то же, всё по центру. <b>Панель слева</b> — шалфейная полоса слева с логотипом и именем, контакты справа. <b>Лист</b> — тонкая шалфейная полоса сверху, как у бланка, имя тёмным, тонкая линия и контакты.</p><p>Любой вид можно сделать с логотипом и без, горизонтально и вертикально. QR-код стоит в правом нижнем углу, внизу — маленький знак «Свои люди». Обратная сторона — вся шалфейная. Нажми на картинку, и визитка справа сразу поменяется.</p>',
+  size: '<p><b>85 × 55 мм</b> — обычная визитка в Швейцарии и Европе, её печатает любая типография. <b>90 × 50 мм</b> — чуть длиннее и уже. <b>55 × 55 мм</b> — квадрат. Не каждая типография печатает 90 × 50 и квадрат: перед заказом проверь размер на её сайте.</p>',
+  orient: '<p>Горизонтальная визитка привычнее. Вертикальная запоминается и хорошо подходит для QR-кода, красоты, творчества. В типографии выбирай тот же размер «hoch» (вертикально) или просто загрузи файл: по нему видно, как печатать.</p>',
+  font: '<p><b>Строгий</b> — шрифт Manrope, как во всех документах «Своих людей». <b>Изящный</b> — имя шрифтом с засечками, как заголовки на сайте: хорошо для красоты, творчества, праздников.</p>',
+  cstyle: '<p>Что стоит перед телефоном, e-mail и сайтом. <b>Значки</b> — маленькие рисунки: телефон, конверт, глобус, камера, бумажный самолётик, точка на карте. <b>Слова</b> — «Tel.», «E-Mail», «Web» на языке подписей. <b>Ничего</b> — только сами номера и адреса, как на самых простых визитках.</p>',
+  lbl: '<p>Язык коротких подписей на визитке: «Tel.», «E-Mail», «Web», «Adresse». Выбери язык, на котором с тобой будут говорить клиенты: в немецкоязычных кантонах — немецкий, в Женеве, Во, Невшателе, Юре, Фрибуре и Вале — французский, в Тичино — итальянский.</p>',
+  bw: '<p>Обычно шапка визитки шалфейная, а имя в ней белое — как в документах «Своих людей». Эта галочка делает шапку светло-серой, текст чёрным, а логотип серым: удобно, если печатаешь дома на чёрно-белом принтере.</p>',
+  find: '<p>Номер карточки стоит внизу твоей карточки на svoiludi.ch: SG-… у специалистов, OR-… у организаций. Можно вписать и UID фирмы (CHE-…). Подставляются данные только из карточек, которые уже открыты на сайте.</p><p>Имя на лицевой стороне и «чем ты занимаешься» на языке кантона впиши сама: в карточке они по-русски, и мы ставим их на обратную сторону.</p>',
+  name: '<p>Латиницей и так же, как в паспорте или разрешении, на почтовом ящике и в договорах. Например «Anna Kovalenko». Так клиент легко найдёт тебя в почте и мессенджере.</p>',
+  role: '<p>Коротко и понятно клиенту: «Maniküre und Pediküre», «Deutschunterricht für Kinder», «Renovationen und Umzüge». Пиши на языке подписей.</p><p>Звания вроде Psychologin, Ärztin, Physiotherapeutin, Rechtsanwältin и «dipl.» в Швейцарии защищены: пиши их, только если у тебя есть признанный здесь документ.</p>',
+  tag: '<p>Одна короткая фраза о том, что ты даёшь клиенту, например «Gepflegte Hände, gute Laune» или «Deutsch mit Freude». Она стоит внизу визитки шалфейным цветом. Если не впишешь, ничего страшного.</p>',
+  serv: '<p>Главные услуги через точку: «Maniküre · Pediküre · Nageldesign». Видны мелко под «чем ты занимаешься».</p>',
+  langs: '<p>На визитке будет строка с названиями языков на них самих: «Deutsch · Русский · Українська». Клиент сразу видит, что с тобой можно говорить на его языке.</p>',
+  addr: '<p>Адрес, куда к тебе приходят клиенты: студия, кабинет, мастерская. Если ты работаешь дома или выезжаешь к клиентам, адрес можно не писать.</p>',
+  logo: '<p>Подойдёт картинка JPG или PNG. Визитка белая, поэтому логотип с белым фоном выглядит хорошо как есть, а лишние белые поля вокруг мы обрезаем сами. Прозрачный фон тоже подходит.</p><p>Для печати возьми картинку побольше, хотя бы 600 точек по ширине. Логотип хранится только в твоём браузере. Без логотипа визитка тоже выглядит законченной: в шапке остаются фирма и имя.</p>',
+  back: '<p>Обратная сторона — для своих: имя так, как тебе привычно, и чем ты занимаешься по-русски или по-украински. Можно добавить строку, например «Говорю по-русски и по-украински» или «Запись в WhatsApp», и QR-код.</p><p>Если обратная сторона пустая, визитка будет односторонней, и печать выйдет дешевле.</p>',
+  qr: '<p>Квадратный код, который открывает страницу, если навести на него камеру телефона. Удобно для записи: человек сразу попадает на твой сайт, в Instagram или в твою карточку в «Своих людях», где есть все контакты и цены.</p><p>Сначала QR-код стоит на лицевой стороне, в правом нижнем углу. Если рядом с текстом для него не хватает места, его там не будет, а под визиткой появится подсказка: перенеси его на обратную сторону, выбери другой вид или размер или сократи текст.</p><p>Перед печатью обязательно проверь QR-код камерой своего телефона.</p>',
+  bleed: '<p>Типография режет визитки ножом из большого листа, и нож может сдвинуться на долю миллиметра. Поэтому файл делают чуть больше визитки — это запас на обрез (Beschnitt). Чаще всего просят 3 мм с каждой стороны: для визитки 85 × 55 мм файл 91 × 61 мм.</p><p>Сколько нужно именно твоей типографии, написано на её странице визиток или в памятке к файлу (Datenblatt, «Datenformat»). Визитка белая, поэтому запас просто белый и ничего не испортит, а весь текст стоит не ближе 5 мм к краю.</p>'
+};
+
+(function(){
+const KEY = 'vizitkaPechat.v1', KEYLOGO = 'vizitkaPechat.logo.v1';
+const BASE = window.PV_BASE || '/';
+const PT = SH.PT, SAFE = 5;
+/* оформление как у документов «Своих людей» (Ирина 14.10.2026, 00:44: «Сделай дизайн с нуля так, как у нас все документы оформлены»):
+   шалфейная шапка с белым заголовком, как в PDF инструментов, белое поле, шрифт Manrope, подписи полей жирным, тонкие тёплые линии.
+   «Без цвета» — светло-серая шапка и чёрный текст */
+const DOC = {BAND: '#4F5E3E', BTX: '#FFFFFF', BSUB: '#DCE4CE', BGHOST: '#A3AF92', INK: '#2F2924', MUT: '#7A6E62', LINE: '#C9BBA8', HEAD: '#4F5E3E', GHOST: '#BDB2A4'};
+const DOCG = {BAND: '#E6E6E6', BTX: '#000000', BSUB: '#333333', BGHOST: '#9A9A9A', INK: '#000000', MUT: '#555555', LINE: '#9E9E9E', HEAD: '#000000', GHOST: '#B0B0B0'};
+let C = DOC, INK = DOC.INK, GHOST = DOC.GHOST;
+const setPal = d => { C = d && d.bw ? DOCG : DOC; INK = C.INK; GHOST = C.GHOST; };
+/* размеры, которые печатают швейцарские типографии (проверено 13.10.2026: WIRmachenDRUCK — 85 × 55, 90 × 50, 55 × 55; Rohner Spiller — 85 × 55 горизонтально и вертикально, 55 × 55) */
+const SIZES = {'85x55': [85, 55], '90x50': [90, 50], '55x55': [55, 55]};
+/* виды по образцам Ирины (13.10.2026): [ключ, название, шрифт по умолчанию, подписи к контактам по умолчанию] */
+const TPL = [['band', 'Шапка', 'sans', 'text'], ['bandc', 'Шапка по центру', 'sans', 'text'], ['panel', 'Панель слева', 'sans', 'text'], ['sheet', 'Лист', 'sans', 'text']];   // как документы «Своих людей» (14.10.2026)
+const OLD = {classic: 'band', side: 'panel', line: 'band', dots: 'band', qr: 'band', slogan: 'bandc', center: 'bandc', onlyqr: 'bandc', mini: 'sheet'};
+const LBL = {
+  de: {tel: 'Tel.', mail: 'E-Mail', web: 'Web', ig: 'Instagram', tg: 'Telegram', addr: 'Adresse', cta: 'Termin vereinbaren'},
+  fr: {tel: 'Tél.', mail: 'E-mail', web: 'Web', ig: 'Instagram', tg: 'Telegram', addr: 'Adresse', cta: 'Prendre rendez-vous'},
+  it: {tel: 'Tel.', mail: 'E-mail', web: 'Web', ig: 'Instagram', tg: 'Telegram', addr: 'Indirizzo', cta: 'Prenota un appuntamento'},
+  en: {tel: 'Phone', mail: 'Email', web: 'Web', ig: 'Instagram', tg: 'Telegram', addr: 'Address', cta: 'Book an appointment'}
+};
+const LANGS = [['de', 'Deutsch'], ['fr', 'Français'], ['it', 'Italiano'], ['en', 'English'], ['ru', 'Русский'], ['uk', 'Українська']];
+const LMAP = {'немецкий': 'de', 'французский': 'fr', 'итальянский': 'it', 'английский': 'en', 'русский': 'ru', 'украинский': 'uk'};
+const $ = id => document.getElementById(id);
+
+function langOf(k){ const K = window.KANTONY || {}; return k && K[k] ? ({de: 'de', fr: 'fr', it: 'it'}[K[k].l] || 'de') : 'de'; }
+function blank(){
+  let k = ''; try { k = localStorage.getItem('svoiludi.kanton') || ''; } catch (e) {}
+  return {layout: 'band', font: 'sans', cstyle: 'text', size: '85x55', orient: 'h', lbl: langOf(k), bleed: 3, bw: false,
+    f: {name: '', role: '', firm: '', tag: '', serv: '', phone: '', wa: false, email: '', web: '', ig: '', tg: '', street: '', city: '', langs: []},
+    back: {on: false, name: '', role: '', line: '', logo: true},
+    qr: {where: 'front', to: 'web', url: ''}, card: null, nomark: false};   // QR-код по умолчанию на лицевой стороне, в правом нижнем углу (Ирина 14.10.2026, 11:56)
+}
+function merge(a, b){ Object.keys(b || {}).forEach(k => { if (a[k] && typeof a[k] === 'object' && !Array.isArray(a[k]) && b[k] && typeof b[k] === 'object') merge(a[k], b[k]); else if (b[k] !== undefined) a[k] = b[k]; }); return a; }
+function norm(s){ if (OLD[s.layout]) s.layout = OLD[s.layout]; if (!TPL.some(t => t[0] === s.layout)) s.layout = 'band'; if (!SIZES[s.size]) s.size = '85x55'; if (s.orient !== 'v') s.orient = 'h'; if (!['icon', 'text', 'none'].includes(s.cstyle)) s.cstyle = 'icon'; s.nomark = !!s.nomark; return s; }
+function load(){ try { const s = JSON.parse(localStorage.getItem(KEY)); if (s && typeof s === 'object') return norm(merge(blank(), s)); } catch (e) {} return blank(); }
+let S = load(), EX = null, LOGO = null, PAID = null, PAIDMSG = '';   // PAID — проверенный платный пакет (без знака «Свои люди»)
+try { const l = JSON.parse(localStorage.getItem(KEYLOGO)); if (l && l.c) LOGO = l; } catch (e) {}
+function save(){ if (EX) return; try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} }
+const D = () => EX || S;
+let LGX;   // логотип для миниатюр (подменяется на время их рисования)
+/* в примере логотипа нет: «Свои люди» на визитке — только знак внизу (Ирина 15.10.2026, 18:12: «свои люди только 1 раз, вверху убери»;
+   до этого на месте логотипа был логотип «Свои люди», а ещё раньше — вымышленный «Studio NAILS · BEAUTY») */
+const LG = () => LGX !== undefined ? LGX : EX ? null : LOGO;
+const get = (o, p) => p.split('.').reduce((a, k) => a == null ? a : a[k], o);
+const put = (o, p, v) => { const ks = p.split('.'), last = ks.pop(); ks.reduce((a, k) => a[k], o)[last] = v; };
+/* размер визитки в мм с учётом положения: [ширина, высота] */
+function dims(d){ const s = SIZES[d.size] || SIZES['85x55']; return d.orient === 'v' && s[0] !== s[1] ? [s[1], s[0]] : s.slice(); }
+const perSheet = d => { const [w, h] = dims(d); return Math.floor(190 / w) * Math.floor(277 / h); };
+
+/* ---------- текст: замер и перенос (Manrope или Forum), с разрядкой ---------- */
+const mc = document.createElement('canvas').getContext('2d');
+function tw(s, fn, size, cs){ s = String(s); mc.font = fn === 'f' ? `400 ${size}px Forum` : `${fn === 'b' ? 700 : 400} ${size}px Manrope`; return mc.measureText(s).width * PT + (cs ? cs * Math.max(0, [...s].length - 1) : 0); }
+/* перенос по пробелам; после дефиса — только если слово целиком не помещается (длинная двойная фамилия: «Konstantinopolskaya-Wiederkehr»), «по-украински» не рвём */
+function wrap(s, fn, size, w, max, cs){
+  s = String(s || '').replace(/(^|[ \u00A0(«"])([A-Za-zА-Яа-яЁёІіЇїЄєҐґ]{1,2}) /g, '$1$2\u00A0').replace(/(^|[ \u00A0(«"])([A-Za-zА-Яа-яЁёІіЇїЄєҐґ]{1,2}) /g, '$1$2\u00A0');   // «и», «в», «на» не висят в конце строки
+  const toks = []; s.split(/[ \t\r\n]+/).filter(Boolean).forEach(wd => (tw(wd, fn, size, cs) <= w ? [wd] : wd.replace(/-(?=[^-])/g, '-\u0001').split('\u0001')).forEach((t, i) => toks.push([t, i === 0])));
+  const out = []; let line = '';
+  toks.forEach(([wd, sp]) => { const t = line ? line + (sp ? ' ' : '') + wd : wd; if (tw(t, fn, size, cs) <= w || !line) line = t; else { out.push(line); line = wd; } });
+  if (line) out.push(line);
+  for (let i = 0; i < out.length; i++) out[i] = out[i].replace(/\u00A0/g, ' ').replace(/\s+[·|]$/, '').replace(/^[·|]\s+/, '');   // разделитель «·» не висит в конце или начале строки
+  if (max && out.length > max) { const rest = out.slice(max - 1).reduce((a, l) => a ? a + (/-$/.test(a) ? '' : ' ') + l : l, ''); out.length = max - 1; let r = rest; while (r.length > 1 && tw(r + '…', fn, size, cs) > w) r = r.slice(0, -1); out.push(r.trim() + '…'); }
+  return out;
+}
+/* текст на визитку; разрядку движок рисует только от левого края, поэтому центр и правый край считаем сами */
+const T = (P, s, x, y, size, fn, color, align, cs) => { align = align || 'left'; if (cs && align !== 'left') { const w = tw(s, fn, size, cs); x = align === 'center' ? x - w / 2 : x - w; align = 'left'; } P.text(s, x, y, size, fn === 'b', color, align, fn === 'f' ? 'f' : '', cs || 0); };
+/* строка или абзац до o.lines строк: o {x, y — верх, w, k, draw, size, fn, color, align, upper, csEm (разрядка в долях кегля), lines, lh, min} → нижняя граница */
+function text(P, s, o){
+  s = String(s || '').trim(); if (!s) return o.y;
+  const fn = o.fn || 'r', str = o.upper ? s.toUpperCase() : s, base = o.size * o.k, min = (o.min || o.size * 0.62) * Math.min(1, o.k + 0.15), maxL = o.lines || 1;
+  const cs = sz => o.csEm ? o.csEm * sz * PT : 0;
+  let sz = base, lines = [str];
+  while (true) { lines = tw(str, fn, sz, cs(sz)) <= o.w ? [str] : wrap(str, fn, sz, o.w, 0, cs(sz)); if ((lines.length <= maxL && lines.every(l => tw(l, fn, sz, cs(sz)) <= o.w)) || sz <= min) break; sz -= 0.25; }
+  if (lines.length > maxL) lines = wrap(str, fn, sz, o.w, maxL, cs(sz));
+  /* ровные строки: при переносе строки примерно одной длины (как text-wrap: balance), без одинокого слова на второй строке */
+  else if (lines.length > 1 && o.balance !== false) {
+    const n = lines.length, fitW = ww => { const L2 = wrap(str, fn, sz, ww, 0, cs(sz)); return L2.length <= n && L2.every(l => tw(l, fn, sz, cs(sz)) <= ww + 0.01) ? L2 : null; };
+    let lo = 0, hi = o.w; for (let it = 0; it < 12; it++) { const mid = (lo + hi) / 2, r = fitW(mid); if (r) { hi = mid; lines = r; } else lo = mid; }
+  }
+  if (o.draw && lines.some(l => tw(l, fn, sz, cs(sz)) > o.w + 0.2)) P.wOver = true;   // слово не помещается даже мелко — покажем предупреждение
+  const ax = o.align === 'center' ? o.x + o.w / 2 : o.align === 'right' ? o.x + o.w : o.x;
+  let y = o.y + sz * PT * 0.76;
+  lines.forEach((l, i) => { if (o.draw) T(P, l, ax, y, sz, fn, o.color || INK, o.align, cs(sz)); if (i < lines.length - 1) y += sz * PT * (o.lh || 1.18); });
+  o.out = {size: sz, w: Math.max(...lines.map(l => tw(l, fn, sz, cs(sz)))), lastW: tw(lines[lines.length - 1], fn, sz, cs(sz)), base: y};
+  return y + sz * PT * 0.3;
+}
+
+/* ---------- данные визитки ---------- */
+const clean = s => String(s == null ? '' : s).trim();
+const handle = s => clean(s).replace(/^https?:\/\/(www\.)?(instagram\.com|t\.me|telegram\.me)\//i, '').replace(/^@+/, '').replace(/[/?#].*$/, '');
+const site = s => clean(s).replace(/^https?:\/\//i, '').replace(/\/+$/, '');
+const hfn = d => d.font === 'sans' ? 'b' : 'f';
+function nameOf(d, P){ const n = clean(d.f.name); return n ? {s: n, c: INK} : {s: P.preview && !d.noGhost ? 'Имя Фамилия' : '', c: GHOST}; }
+/* контакты строками: {k — вид, v — строки}; без подписей Telegram пишем ссылкой, чтобы его не спутать с Instagram */
+function rows(d, st){
+  const f = d.f, out = [];
+  if (clean(f.phone)) out.push({k: 'tel', v: [clean(f.phone) + (f.wa ? ' · WhatsApp' : '')]});
+  if (clean(f.email)) out.push({k: 'mail', v: [clean(f.email)]});
+  if (site(f.web)) out.push({k: 'web', v: [site(f.web)]});
+  if (handle(f.ig)) out.push({k: 'ig', v: ['@' + handle(f.ig)]});
+  if (handle(f.tg)) out.push({k: 'tg', v: [st === 'none' ? 't.me/' + handle(f.tg) : '@' + handle(f.tg)]});
+  const a = [clean(f.street), clean(f.city)].filter(Boolean); if (a.length) out.push({k: 'addr', v: a});
+  return out;
+}
+const langLine = d => LANGS.filter(([k]) => (d.f.langs || []).includes(k)).map(x => x[1]).join(' · ');
+function qrLink(d){
+  const q = d.qr;
+  if (q.to === 'web') { const s = site(d.f.web); return s ? 'https://' + s.replace(/^\/+/, '') : ''; }
+  if (q.to === 'ig') { const h = handle(d.f.ig); return h ? 'https://instagram.com/' + h : ''; }
+  if (q.to === 'card') return d.card && d.card.url || '';
+  const u = clean(q.url); return u ? (/^[a-z]+:\/\//i.test(u) ? u : 'https://' + u) : '';
+}
+function qrCap(d, url){
+  if (d.qr.to === 'ig') return '@' + handle(d.f.ig);
+  if (d.qr.to === 'card') return 'svoiludi.ch';
+  return url.replace(/^https?:\/\//i, '').replace(/^www\./i, '').replace(/\/.*$/, '');
+}
+function initials(d){ const n = clean(d.f.name) || clean(d.back.name) || clean(d.f.firm); return n.split(/\s+/).filter(Boolean).slice(0, 2).map(w => w[0].toUpperCase()).join(''); }
+const hasBack = d => !!d.back.on && !!(clean(d.back.name) || clean(d.back.role) || clean(d.back.line) || (d.back.logo && LG()) || (d.qr.where === 'back' && qrLink(d)));
+/* QR на лицевой стороне: ссылка, а в предпросмотре без ссылки — серая заглушка, чтобы был виден вид визитки */
+const frontQr = (d, P) => d.qr.where !== 'front' ? '' : (qrLink(d) || (P && P.preview ? '#' : ''));
+
+/* ---------- рисование ---------- */
+function qrDraw(P, text, x, y, size){
+  if (text === '#') { P.rect(x, y, size, size, '#F1F1F1', '#C8C8C8'); T(P, 'QR', x + size / 2, y + size / 2 + size * 0.09, Math.max(6, size * 0.5), 'b', '#B5B5B5', 'center'); return true; }
+  if (typeof qrcode !== 'function' || !text) return false;
+  qrcode.stringToBytes = qrcode.stringToBytesFuncs['UTF-8'];
+  const q = qrcode(0, 'M'); q.addData(text, 'Byte'); q.make();
+  const n = q.getModuleCount(), m = size / n;
+  for (let r = 0; r < n; r++) { let c = 0; while (c < n) { if (q.isDark(r, c)) { let e = c; while (e + 1 < n && q.isDark(r, e + 1)) e++; P.rect(x + c * m, y + r * m, (e - c + 1) * m + 0.02, m + 0.02, INK); c = e + 1; } else c++; } }
+  return true;
+}
+function logoBox(lg, maxW, maxH){ if (!lg) return null; const r = lg.w / lg.h; let w = maxW, h = w / r; if (h > maxH) { h = maxH; w = h * r; } return {w, h}; }
+const logoData = (d, lg) => d.bw ? lg.g : lg.c;
+
+/* свои значки контактов «Своих людей» (нарисованы 13.10.2026), сетка 24 × 24: телефон, конверт, глобус, фотоаппарат, бумажный самолётик, точка на карте */
+const RR = (x, y, w, h, r) => { const c = r * 0.45; return [['M', x + r, y], ['L', x + w - r, y], ['C', x + w - c, y, x + w, y + c, x + w, y + r], ['L', x + w, y + h - r], ['C', x + w, y + h - c, x + w - c, y + h, x + w - r, y + h], ['L', x + r, y + h], ['C', x + c, y + h, x, y + h - c, x, y + h - r], ['L', x, y + r], ['C', x, y + c, x + c, y, x + r, y], ['Z']]; };
+const OV = (cx, cy, rx, ry) => { ry = ry || rx; const a = rx * 0.5523, b = ry * 0.5523; return [['M', cx + rx, cy], ['C', cx + rx, cy + b, cx + a, cy + ry, cx, cy + ry], ['C', cx - a, cy + ry, cx - rx, cy + b, cx - rx, cy], ['C', cx - rx, cy - b, cx - a, cy - ry, cx, cy - ry], ['C', cx + a, cy - ry, cx + rx, cy - b, cx + rx, cy], ['Z']]; };
+const ICON = {
+  tel: [RR(6.8, 2.4, 10.4, 19.2, 2.3), [['M', 10.4, 18.3], ['L', 13.6, 18.3]]],
+  mail: [RR(2.8, 5.4, 18.4, 13.2, 1.7), [['M', 3.5, 6.5], ['L', 12, 12.9], ['L', 20.5, 6.5]]],
+  web: [OV(12, 12, 9.2), OV(12, 12, 3.9, 9.2), [['M', 2.8, 12], ['L', 21.2, 12]]],
+  ig: [RR(2.8, 7, 18.4, 12.8, 2.1), [['M', 8.1, 7], ['L', 9.5, 4.5], ['L', 14.5, 4.5], ['L', 15.9, 7]], OV(12, 13.3, 3.5)],
+  tg: [[['M', 21.3, 3.2], ['L', 2.8, 10.7], ['L', 9.7, 13.6], ['L', 12.6, 20.8], ['Z']], [['M', 9.7, 13.6], ['L', 21.3, 3.2]]],
+  addr: [[['M', 12, 21.6], ['C', 12, 21.6, 4.9, 14.9, 4.9, 9.6], ['C', 4.9, 5.7, 8.1, 2.5, 12, 2.5], ['C', 15.9, 2.5, 19.1, 5.7, 19.1, 9.6], ['C', 19.1, 14.9, 12, 21.6, 12, 21.6], ['Z']], OV(12, 9.6, 2.7)]
+};
+function icon(P, key, x, y, s, color, wd){
+  const k = s / 24, tr = dd => dd.map(c => c[0] === 'Z' ? c : [c[0]].concat(c.slice(1).map((v, i) => i % 2 ? y + v * k : x + v * k)));
+  (ICON[key] || []).forEach(dd => P.path(tr(dd), null, color, wd || Math.max(0.15, s * 0.075)));
+}
+/* что стоит перед контактами: слова (как подписи полей в документах), значки или ничего */
+const cst = d => d.cstyle === 'text' ? (d.lbl === 'none' ? 'none' : 'text') : d.cstyle === 'none' ? 'none' : 'icon';
+const S0 = 6.2, S1 = 10.2;                     // pt: контакты и подписи · имя (как заголовки в документах)
+/* поля визитки: 5,8 мм, при нехватке места — 5 мм (t), потом мельче шрифт (k) */
+function geo(X, Y, CW, CH, k, t){
+  const m = SAFE + 0.8 * t, u = S0 * PT * k;
+  return {X, Y, CW, CH, k, m, x0: X + m, y0: Y + m, x1: X + CW - m, y1: Y + CH - m, W: CW - 2 * m, H: CH - 2 * m, wide: CW > CH + 4, u, g1: u * 0.6, g2: u * 1.6, g3: u * 2.6};
+}
+/* контакты, как строки в документах: подпись жирным мелко, значение обычным. o {x, y — верх, w, k, draw, style, align: 'left' | 'center' | 'right', only, skip} → {h, w} */
+function clist(P, d, o){
+  const st = o.style, L = LBL[d.lbl] || LBL.de;
+  let R = rows(d, st); if (o.only) R = R.filter(r => o.only.includes(r.k)); if (o.skip) R = R.filter(r => !o.skip.includes(r.k));
+  if (!R.length) return {h: 0, w: 0};
+  const G = sz => {
+    const em = sz * PT, li = em * 1.3, pitch = em * 1.62, ic = em * 1.02;
+    const lw = st === 'text' ? Math.max(...R.map(r => tw(L[r.k], 'b', sz * 0.8))) : st === 'icon' ? ic : 0, gap = st === 'none' ? 0 : em * 0.95;
+    const vw = Math.max(...R.map(r => Math.max(...r.v.map(s => tw(s, 'r', sz)))));
+    return {em, li, pitch, ic, lw, gap, w: lw + gap + vw, h: R.reduce((a, r) => a + pitch + (r.v.length - 1) * li, 0) - pitch + em * 1.05};
+  };
+  let sz = (o.size || S0) * o.k, g = G(sz);
+  while (sz > 4.9 && g.w > o.w) { sz -= 0.1; g = G(sz); }
+  if (!o.draw) return {h: g.h, w: g.w};
+  if (g.w > o.w + 0.2) P.wOver = true;
+  const bx = o.align === 'center' ? o.x + (o.w - g.w) / 2 : o.align === 'right' ? o.x + o.w - g.w : o.x;
+  let b = o.y + 0.8 * g.em;
+  R.forEach(r => {
+    if (st === 'text') T(P, L[r.k], bx, b, sz * 0.8, 'b', C.INK);
+    else if (st === 'icon') icon(P, r.k, bx, b - 0.36 * g.em - g.ic / 2, g.ic, C.HEAD, 0.14);
+    r.v.forEach((s, j) => T(P, s, bx + g.lw + g.gap, b + j * g.li, sz, 'r', C.INK));
+    b += g.pitch + (r.v.length - 1) * g.li;
+  });
+  return {h: g.h, w: g.w};
+}
+/* контакты: если в один столбик не помещаются по высоте (o.maxH), — в два столбика рядом: каждый своей ширины, шрифт у обоих один */
+function contacts(P, d, o){
+  const one = clist(P, d, Object.assign({}, o, {draw: false})), R = rows(d, o.style);
+  if (!o.maxH || one.h <= o.maxH + 0.05 || R.length < 3) { if (o.draw) clist(P, d, o); return one; }
+  const half = Math.ceil(R.length / 2), A = R.slice(0, half).map(r => r.k), B = R.slice(half).map(r => r.k), gap = 3 * o.k;
+  const two = sz => { const a = clist(P, d, Object.assign({}, o, {w: 999, only: A, size: sz, draw: false})), b = clist(P, d, Object.assign({}, o, {w: 999, only: B, size: sz, draw: false})); return {a, b, w: a.w + gap + b.w, h: Math.max(a.h, b.h)}; };
+  let sz = o.size || S0, t = two(sz);
+  while (t.w > o.w && sz * o.k > 4.9) { sz -= 0.1; t = two(sz); }
+  if (t.w > o.w + 0.2) { if (o.draw) clist(P, d, o); return one; }   // и в два столбика не помещается по ширине — один столбик (подгонка возьмёт шрифт мельче)
+  if (o.draw) {
+    if (t.w > o.w + 0.2) P.wOver = true;
+    const x = o.align === 'center' ? o.x + Math.max(0, (o.w - t.w) / 2) : o.align === 'right' ? o.x + o.w - t.w : o.x;
+    clist(P, d, Object.assign({}, o, {x, w: 999, only: A, size: sz, align: 'left'})); clist(P, d, Object.assign({}, o, {x: x + t.a.w + gap, w: 999, only: B, size: sz, align: 'left'}));
+  }
+  return {h: t.h, w: Math.min(t.w, o.w)};
+}
+/* имя, чем занимаешься, услуги (на обороте — строка): в шапке белым, на белом поле — тёмным и шалфейным. o {x, y, w, k, draw, band, align} → высота */
+function ident(P, d, o){
+  const nm = nameOf(d, P), fn = hfn(d), al = o.align || 'left', base = {x: o.x, w: o.w, k: o.k, draw: o.draw, align: al};
+  const ghost = !clean(d.f.name);
+  let y = o.y;
+  if (clean(d.f.firm)) { const up = tw(clean(d.f.firm).toUpperCase(), 'b', S0 * 0.82 * o.k, 0.12 * S0 * 0.82 * o.k * PT) <= o.w; y = text(P, d.f.firm, Object.assign({}, base, {y, size: S0 * 0.82, fn: 'b', upper: up, csEm: up ? 0.12 : 0, color: o.band ? C.BSUB : C.HEAD, lines: 2, lh: 1.3, min: 4.6})) + 0.9 * o.k; }   // фирма — мелкими заглавными над именем
+  if (nm.s) y = text(P, nm.s, Object.assign({}, base, {y, size: fn === 'f' ? S1 * 1.3 : S1, fn: fn === 'f' ? 'f' : 'b', color: o.band ? (ghost ? C.BGHOST : C.BTX) : nm.c, lines: 2, lh: 1.1, min: 7}));
+  if (clean(d.f.role)) y = text(P, d.f.role, Object.assign({}, base, {y: y + 1.1 * o.k, size: S0 * 1.12, color: o.band ? C.BTX : C.HEAD, lines: 2, lh: 1.25, min: 5}));
+  const sub = [clean(d.f.serv), clean(d.f.note)].filter(Boolean).join(' · ');
+  if (sub) y = text(P, sub, Object.assign({}, base, {y: y + 0.6 * o.k, size: S0 * 0.92, color: o.band ? C.BSUB : C.MUT, lines: 2, lh: 1.25, min: 4.8}));
+  return y - o.y;
+}
+/* низ: фраза и языки мелко, как примечания в документах → высота */
+function footStack(P, d, o){
+  let y = o.y; const base = {x: o.x, w: o.w, k: o.k, draw: o.draw, align: o.align || 'left', lines: 2, lh: 1.25};
+  if (clean(d.f.tag)) y = text(P, d.f.tag, Object.assign({}, base, {y, size: S0 * 0.92, fn: 'b', color: o.band ? C.BTX : C.HEAD, min: 4.8}));
+  if (langLine(d)) y = text(P, langLine(d), Object.assign({}, base, {y: y + (y > o.y ? 0.5 : 0), size: S0 * 0.85, color: o.band ? C.BSUB : C.MUT, lines: 1, min: 4.4}));
+  if (signOn(d)) { if (y > o.y) y += 1.7 * o.k; y += sign(P, d, {x: o.x, y, w: o.w, k: o.k, draw: o.draw, align: o.align, band: o.band}); }   // знак «Свои люди» — последней строкой
+  return y - o.y;
+}
+/* низ визитки, когда рядом нет QR-кода (o.side): фраза и языки слева, знак «Свои люди» справа в той же строке — так визитка не теряет строку по высоте */
+function foot(P, d, o){
+  if (!o.side || !signOn(d) || !(clean(d.f.tag) || langLine(d))) return footStack(P, d, o);
+  const g = signGeo(o.k), gap = 3 * o.k, tw0 = o.w - g.w - gap;
+  if (tw0 < 22 * o.k) return footStack(P, d, o);
+  const oo = Object.assign({}, o, {w: tw0, side: false, draw: false}), th = footStack(P, Object.assign({}, d, {noSignHere: true}), oo), H = Math.max(th, g.h);
+  if (o.draw) { footStack(P, Object.assign({}, d, {noSignHere: true}), Object.assign({}, oo, {y: o.y + H - th, draw: true})); sign(P, d, {x: o.x + o.w - g.w, y: o.y + H - g.h, w: g.w, k: o.k, draw: true, band: o.band}); }
+  return H;
+}
+/* знак «Свои люди» (решение Ирины 14.10.2026, 11:57: «добавь на них логотип «Свои люди» с надписью… они могут пользоваться ими и скачивать бесплатно,
+   а без «Своих людей» — только при платных пакетах, любых»; 12:33: «мой кружочек на зелёном фоне с надписью «Свои люди»»):
+   шалфейная плашка, как тёмный значок «Я в справочнике» (badge/), — слева круг «своих» из шапки сайта, справа «Свои люди» и svoiludi.ch светлым.
+   Стоит внизу лицевой стороны последней строкой. Без знака — только с платным пакетом: галочка «Без знака», личная ссылка #paket=<id>.<ключ> */
+const SIGN = {name: 'Свои люди', url: 'svoiludi.ch'};
+const signOn = d => !d.noSignHere && !(d.nomark && PAID && !EX);
+const PETAL = [['M', 50, 47], ['C', 42, 41, 40.5, 33, 44, 31], ['C', 47, 29.5, 53, 29.5, 56, 31], ['C', 59.5, 33, 58, 41, 50, 47], ['Z']];
+let SC = false;   // компактный знак в одну строку — когда места мало (шаги подгонки fitDraw)
+/* размеры плашки, мм: h — высота, s — круг, pad — поля, n и u — кегль «Свои люди» и svoiludi.ch */
+const signGeo = k => {
+  if (SC) { const h = 4.6 * k, pad = 0.65 * k, s = h - 2 * pad, n = 7.4 * k, u = 5 * k, gap = 1 * k, tx = tw(SIGN.name, 'f', n) + tw(' · ' + SIGN.url, 'r', u); return {h, pad, s, n, u, gap, one: true, w: pad + s + gap + tx + pad * 2.2}; }
+  const h = 6.8 * k, pad = 0.85 * k, s = h - 2 * pad, n = 8.8 * k, u = 5.2 * k, gap = 1.3 * k, tx = Math.max(tw(SIGN.name, 'f', n), tw(SIGN.url, 'r', u));
+  return {h, pad, s, n, u, gap, w: pad + s + gap + tx + pad * 2.2};
+};
+/* круг «своих», как в логотипе сайта (fav/logo-svoi-ludi.svg): светлый круг с кольцом, шесть человечков вокруг золотой середины */
+function markIcon(P, x, y, s, bw){
+  const k = s / 100, cx = x + 50 * k, cy = y + 50 * k;
+  const ring = bw ? '#000000' : '#4F5E3E', leaf = bw ? '#E4E4E4' : '#E3E8D6', dk = bw ? '#4A4A4A' : '#5E6B48', gold = bw ? '#8C8C8C' : '#B98324';
+  P.circle(cx, cy, 46 * k, bw ? '#FFFFFF' : '#FFFCF8', ring, Math.max(0.12, 3 * k));
+  for (let i = 0; i < 6; i++) {
+    const a = i * Math.PI / 3, co = Math.cos(a), si = Math.sin(a), tr = (px, py) => [cx + ((px - 50) * co - (py - 50) * si) * k, cy + ((px - 50) * si + (py - 50) * co) * k];
+    P.path(PETAL.map(c => { if (c[0] === 'Z') return c; const out = [c[0]]; for (let j = 1; j < c.length; j += 2) out.push(...tr(c[j], c[j + 1])); return out; }), leaf, dk, Math.max(0.08, 2 * k));
+    const h = tr(50, 24); P.circle(h[0], h[1], 6.2 * k, dk, null);
+  }
+  P.circle(cx, cy, 7 * k, gold, null);
+}
+/* знак целиком: шалфейная плашка (без цвета — светло-серая), круг и надпись. o {x, y — верх, w — ширина места, k, draw, align} → высота */
+function sign(P, d, o){
+  let g = signGeo(o.k); if (g.w > o.w) g = signGeo(o.k * o.w / g.w);
+  const x = o.align === 'center' ? o.x + (o.w - g.w) / 2 : o.align === 'right' ? o.x + o.w - g.w : o.x;
+  if (o.draw) {
+    const bg = d.bw ? '#E6E6E6' : '#4F5E3E', big = d.bw ? '#000000' : '#FFFCF8', dom = d.bw ? '#333333' : '#E3E8D6';
+    P.rect(x, o.y, g.w, g.h, bg, null, g.h * 0.2);
+    markIcon(P, x + g.pad, o.y + g.pad, g.s, d.bw);
+    const tx = x + g.pad + g.s + g.gap;
+    if (g.one) { const b = o.y + g.h * 0.66; T(P, SIGN.name, tx, b, g.n, 'f', big); T(P, ' · ' + SIGN.url, tx + tw(SIGN.name, 'f', g.n), b, g.u, 'r', dom); }
+    else { T(P, SIGN.name, tx, o.y + g.h * 0.5, g.n, 'f', big); T(P, SIGN.url, tx, o.y + g.h * 0.8, g.u, 'r', dom); }
+  }
+  return g.h;
+}
+/* логотип на белой скруглённой плашке (в шапке) или просто на белом поле */
+/* картинка логотипа в рамке x, y, w, h (рамка уже по пропорциям логотипа) */
+function logoImg(P, d, lg, x, y, w, h){ P.img(logoData(d, lg), x, y, w, h); }
+/* белая плашка под логотипом в шапке */
+const plate = (P, lg, x, y, w, h, r) => P.rect(x, y, w, h, '#FFFFFF', null, r);
+function logoAt(P, d, lg, x, y, w, h, plate){
+  if (plate) { P.rect(x, y, w, h, '#FFFFFF', null, Math.min(w, h) * 0.12); const p = Math.min(w, h) * 0.12, lb = logoBox(lg, w - 2 * p, h - 2 * p); P.img(logoData(d, lg), x + (w - lb.w) / 2, y + (h - lb.h) / 2, lb.w, lb.h); }
+  else { const lb = logoBox(lg, w, h); P.img(logoData(d, lg), x + (w - lb.w) / 2, y + (h - lb.h) / 2, lb.w, lb.h); }
+}
+/* QR-код; на шалфейном фоне — на белой плашке */
+function qrAt(P, url, x, y, s, plate){
+  if (!plate) { qrDraw(P, url, x, y, s); return; }
+  P.rect(x, y, s, s, '#FFFFFF', null, s * 0.08); const p = s * 0.09; qrDraw(P, url, x + p, y + p, s - 2 * p);
+}
+/* шапка во всю ширину, с запасом на обрез */
+const bandRect = (P, c, y0, h) => P.rect(c.X - (P.bl || 0), c.Y - (P.bl || 0) + y0, c.CW + 2 * (P.bl || 0), h + (y0 ? 0 : P.bl || 0), C.BAND);
+const vmid = (a, b, h) => a + Math.max(0, (b - a - h) / 2);
+
+/* 1. Шапка: шалфейная полоса сверху с именем, как в документах; ниже контакты, справа QR-код, логотип — на белой плашке в шапке */
+function tBand(P, d, c, dr){
+  const url = frontQr(d, P), lg = LG(), st = cst(d), pad = c.m * 0.85 * c.k;
+  if (c.wide) {
+    const lw = lg ? Math.min(c.CW * 0.27, 23) : 0, iw = c.W - (lw ? lw + c.g2 : 0), ih = ident(P, d, {x: c.x0, y: 0, w: iw, k: c.k, draw: false, band: true});
+    const hb = Math.max(c.CH * 0.38 * c.k, ih + 2 * pad), lph = lw ? Math.min(hb - 2 * pad, lw / 1.6) : 0, by0 = c.Y + hb + pad;
+    const q = url ? Math.min(c.y1 - by0, 15 * c.k) : 0, cw = c.W - (q ? q + c.g2 : 0);
+    const fh = foot(P, d, {x: c.x0, y: 0, w: cw, k: c.k, draw: false, side: !q}), fb = fh ? c.g2 + fh : 0, MH = c.y1 - by0 - fb, ch = contacts(P, d, {x: c.x0, y: 0, w: cw, k: c.k, style: st, draw: false, maxH: MH}).h;
+    const need = ch + (fh ? (ch ? c.g2 : 0) + fh : 0);
+    if (dr) {
+      bandRect(P, c, 0, hb);
+      ident(P, d, {x: c.x0, y: c.Y + (hb - ih) / 2, w: iw, k: c.k, draw: true, band: true});
+      if (lw) logoAt(P, d, lg, c.x1 - lw, c.Y + (hb - lph) / 2, lw, lph, true);
+      if (ch) contacts(P, d, {x: c.x0, y: vmid(by0, c.y1 - fb, ch), w: cw, k: c.k, style: st, draw: true, maxH: MH});
+      if (fh) foot(P, d, {x: c.x0, y: c.y1 - fh, w: cw, k: c.k, draw: true, side: !q});
+      if (q) qrAt(P, url, c.x1 - q, c.y1 - q, q, false);   // QR-код — в правом нижнем углу
+    }
+    return by0 + Math.max(need, q) <= c.y1 + 0.05;
+  }
+  /* вертикальная: шапка с именем; ниже логотип и контакты по середине, внизу фраза слева и QR-код справа */
+  const ih = ident(P, d, {x: c.x0, y: 0, w: c.W, k: c.k, draw: false, band: true}), hb = Math.max(c.CH * 0.3, ih + 2 * pad), by0 = c.Y + hb + pad;
+  const lgB = lg ? logoBox(lg, c.W * 0.5, c.CH * 0.11) : null, lgH = lgB ? lgB.h + c.g2 : 0;
+  const q = url ? Math.min(c.W * 0.36, 15 * c.k) : 0, fw = c.W - (q ? q + c.g2 : 0), fh = foot(P, d, {x: c.x0, y: 0, w: fw, k: c.k, draw: false, side: !q}), bh = Math.max(fh, q);
+  const MH = c.y1 - (bh ? bh + c.g2 : 0) - by0 - lgH, ch = contacts(P, d, {x: c.x0, y: 0, w: c.W, k: c.k, style: st, draw: false, maxH: MH}).h, g0 = vmid(by0, c.y1 - (bh ? bh + c.g2 : 0), lgH + ch);
+  if (dr) {
+    bandRect(P, c, 0, hb);
+    ident(P, d, {x: c.x0, y: c.Y + (hb - ih) / 2, w: c.W, k: c.k, draw: true, band: true});
+    if (lgB) logoAt(P, d, lg, c.x0, g0, lgB.w, lgB.h, false);
+    if (ch) contacts(P, d, {x: c.x0, y: g0 + lgH, w: c.W, k: c.k, style: st, draw: true, maxH: MH});
+    if (fh) foot(P, d, {x: c.x0, y: c.y1 - fh, w: fw, k: c.k, draw: true, side: !q});
+    if (q) qrAt(P, url, c.x1 - q, c.y1 - q, q, false);
+  }
+  return by0 + lgH + ch + (bh ? c.g2 + bh : 0) <= c.y1 + 0.05;
+}
+/* 2. Шапка по центру: логотип, имя и чем занимаешься по центру шапки; ниже контакты по центру */
+function tBandC(P, d, c, dr){
+  const url = frontQr(d, P), lg = LG(), st = cst(d), pad = c.m * 0.85 * c.k;
+  const lb = lg ? logoBox(lg, c.W * 0.4, c.CH * (c.wide ? 0.13 : 0.09) * c.k) : null, lph = lb ? lb.h + 2 * 1.1 : 0, lpw = lb ? lb.w + 2 * 1.6 : 0;   // логотип мельчает вместе со шрифтом
+  const ih = ident(P, d, {x: c.x0, y: 0, w: c.W, k: c.k, draw: false, band: true, align: 'center'});
+  const hb = Math.max(c.CH * (c.wide ? 0.38 : 0.32) * c.k, ih + (lph ? lph + c.g1 * 2 : 0) + 2 * pad);
+  const q = url ? (c.wide ? Math.min(c.CH - hb - 2 * pad, 15 * c.k) : Math.min(c.W * 0.4, 16 * c.k)) : 0;
+  /* горизонтальная с QR-кодом: контакты по центру визитки, если помещаются между полями одной ширины; иначе — по центру места слева от QR-кода */
+  let cw = c.W, cx0 = c.x0;
+  if (c.wide && q) { const sym = c.W - 2 * (q + c.g2); if (clist(P, d, {x: 0, y: 0, w: 999, k: c.k, style: st, draw: false}).w <= sym) { cw = sym; cx0 = c.x0 + q + c.g2; } else cw = c.W - q - c.g2; }
+  const fh = foot(P, d, {x: c.x0, y: 0, w: cw, k: c.k, draw: false, align: 'center'}), MH = c.y1 - (c.Y + hb + pad) - (fh ? c.g2 + fh : 0) - (!c.wide && q ? c.g2 + q : 0), ch = contacts(P, d, {x: c.x0, y: 0, w: cw, k: c.k, style: st, draw: false, maxH: MH}).h;
+  const need = ch + (fh ? (ch ? c.g2 : 0) + fh : 0) + (!c.wide && q ? c.g2 + q : 0), by0 = c.Y + hb + pad;
+  if (dr) {
+    bandRect(P, c, 0, hb);
+    let y = c.Y + (hb - ih - (lph ? lph + c.g1 * 2 : 0)) / 2;
+    if (lb) { plate(P, lg, c.X + (c.CW - lpw) / 2, y, lpw, lph, 1.2); logoImg(P, d, lg, c.X + (c.CW - lb.w) / 2, y + 1.1, lb.w, lb.h); y += lph + c.g1 * 2; }
+    ident(P, d, {x: c.x0, y, w: c.W, k: c.k, draw: true, band: true, align: 'center'});
+    const xc = cx0;
+    if (c.wide) {   // контакты по центру, фраза и знак — внизу по центру, QR-код — в правом нижнем углу
+      const fb = fh ? c.g2 + fh : 0;
+      if (ch) contacts(P, d, {x: xc, y: vmid(by0, c.y1 - fb, ch), w: cw, k: c.k, style: st, draw: true, align: 'center', maxH: MH});
+      if (fh) foot(P, d, {x: xc, y: c.y1 - fh, w: cw, k: c.k, draw: true, align: 'center'});
+      if (q) qrAt(P, url, c.x1 - q, c.y1 - q, q, false);
+    } else {
+      const ty = vmid(by0, c.y1, need);
+      if (ch) contacts(P, d, {x: xc, y: ty, w: cw, k: c.k, style: st, draw: true, align: 'center', maxH: MH});
+      if (fh) foot(P, d, {x: xc, y: ty + ch + (ch ? c.g2 : 0), w: cw, k: c.k, draw: true, align: 'center'});
+      if (q) qrAt(P, url, c.X + (c.CW - q) / 2, ty + need - q, q, false);
+    }
+  }
+  return by0 + Math.max(need, c.wide ? q : 0) <= c.y1 + 0.05;
+}
+/* 3. Панель слева: шалфейная полоса слева (38 % ширины) с логотипом и именем; справа контакты. Вертикальная — полоса сверху */
+function tPanel(P, d, c, dr){
+  const url = frontQr(d, P), lg = LG(), st = cst(d), bl = P.bl || 0;
+  if (!c.wide) {
+    const lb = lg ? logoBox(lg, c.W * 0.55, c.CH * 0.09) : null, lpw = lb ? lb.w + 2.4 : 0, lph = lb ? lb.h + 2.2 : 0, pad = c.m * 0.9 * c.k;
+    const ih = ident(P, d, {x: c.x0, y: 0, w: c.W, k: c.k, draw: false, band: true}), hb = Math.max(c.CH * (c.CH > c.CW + 4 ? 0.44 : 0.36) * c.k, pad + (lb ? lph + c.g3 : 0) + ih + pad);   // у квадрата шапка ниже
+    const q = url ? Math.min(c.W * 0.4, 16 * c.k) : 0, fw = c.W - (q ? q + c.g2 : 0), fh = foot(P, d, {x: c.x0, y: 0, w: fw, k: c.k, draw: false, side: !q}), cy = c.Y + hb + pad + c.g1;
+    const MH = c.y1 - cy - (fh || q ? c.g2 + Math.max(fh, q) : 0), ch = contacts(P, d, {x: c.x0, y: 0, w: c.W, k: c.k, style: st, draw: false, maxH: MH}).h;
+    if (dr) {
+      bandRect(P, c, 0, hb);
+      if (lb) { plate(P, lg, c.x0, c.Y + pad, lpw, lph, 1.2); logoImg(P, d, lg, c.x0 + 1.2, c.Y + pad + 1.1, lb.w, lb.h); }
+      ident(P, d, {x: c.x0, y: lb ? c.Y + hb - pad - ih : c.Y + (hb - ih) / 2, w: c.W, k: c.k, draw: true, band: true});
+      if (ch) contacts(P, d, {x: c.x0, y: cy, w: c.W, k: c.k, style: st, draw: true, maxH: MH});
+      if (fh) foot(P, d, {x: c.x0, y: c.y1 - fh, w: fw, k: c.k, draw: true, side: !q});
+      if (q) qrAt(P, url, c.x1 - q, c.y1 - q, q, false);
+    }
+    return cy + ch + (fh || q ? c.g2 + Math.max(fh, q) : 0) <= c.y1 + 0.05;
+  }
+  const pw = c.CW * 0.382, px = c.x0;
+  const iwp = pw - c.m - c.m * 0.85, lb = lg ? logoBox(lg, iwp - 2.4, c.CH * 0.16) : null, lpw = lb ? lb.w + 2.4 : 0, lph = lb ? lb.h + 2.2 : 0;
+  const ih = ident(P, d, {x: px, y: 0, w: iwp, k: c.k, draw: false, band: true});
+  const rx = c.X + pw + c.m, rw = c.x1 - rx, q = url ? Math.min(rw * 0.42, c.H * 0.46, 15 * c.k) : 0;
+  const fh = foot(P, d, {x: rx, y: 0, w: q ? rw - q - c.g2 : rw, k: c.k, draw: false, side: !q}), MH = c.H - (fh || q ? c.g2 + Math.max(fh, q) : 0), ch = contacts(P, d, {x: rx, y: 0, w: rw, k: c.k, style: st, draw: false, maxH: MH}).h;
+  const need = ch + (fh || q ? c.g2 + Math.max(fh, q) : 0);
+  if (dr) {
+    P.rect(c.X - bl, c.Y - bl, pw + bl, c.CH + 2 * bl, C.BAND);
+    if (lb) { plate(P, lg, px, c.y0, lpw, lph, 1.2); logoImg(P, d, lg, px + 1.2, c.y0 + 1.1, lb.w, lb.h); }
+    ident(P, d, {x: px, y: lb ? c.y1 - ih : vmid(c.y0, c.y1, ih), w: iwp, k: c.k, draw: true, band: true});
+    const br = Math.max(fh, q), fb = br ? c.g2 + br : 0;   // внизу справа: фраза и знак слева, QR-код в правом нижнем углу
+    if (ch) contacts(P, d, {x: rx, y: vmid(c.y0, c.y1 - fb, ch), w: rw, k: c.k, style: st, draw: true, maxH: MH});
+    if (fh) foot(P, d, {x: rx, y: c.y1 - fh, w: q ? rw - q - c.g2 : rw, k: c.k, draw: true, side: !q});
+    if (q) qrAt(P, url, c.x1 - q, c.y1 - q, q, false);
+  }
+  return need <= c.H + 0.05 && ih + (lb ? lph + c.g2 : 0) <= c.H + 0.05;
+}
+/* 4. Лист: тонкая шалфейная полоса сверху, как у бланка; имя жирным, чем занимаешься шалфейным, тонкая линия, контакты */
+function tSheet(P, d, c, dr){
+  const url = frontQr(d, P), lg = LG(), st = cst(d), sh = 2.4, top = c.Y + sh + c.m * 0.9;
+  const lb = lg ? logoBox(lg, c.wide ? c.CW * 0.26 : c.W * 0.45, c.CH * (c.wide ? 0.17 : 0.1)) : null;
+  const iw = c.wide ? c.W - (lb ? lb.w + c.g2 : 0) : c.W, ih = ident(P, d, {x: c.x0, y: 0, w: iw, k: c.k, draw: false});
+  const iy = c.wide ? top : top + (lb ? lb.h + c.g2 : 0), hy = iy + Math.max(ih, c.wide && lb ? lb.h : 0) + c.g1 * 2.2;
+  const q = url ? Math.min(c.wide ? c.y1 - hy - c.g2 : c.W * 0.4, (c.wide ? 15 : 17) * c.k) : 0, cw = c.wide ? c.W - (q ? q + c.g2 : 0) : c.W;
+  const fh = foot(P, d, {x: c.x0, y: 0, w: c.wide ? cw : c.W - (q ? q + c.g2 : 0), k: c.k, draw: false, side: !q}), cy = hy + c.g2;
+  const MH = c.y1 - cy - (c.wide ? (fh ? c.g2 + fh : 0) : (fh || q ? c.g2 + Math.max(fh, q) : 0)), ch = contacts(P, d, {x: c.x0, y: 0, w: cw, k: c.k, style: st, draw: false, maxH: MH}).h;
+  const need = ch + (fh ? (ch ? c.g2 : 0) + fh : 0);
+  if (dr) {
+    bandRect(P, c, 0, sh);
+    if (lb) logoImg(P, d, lg, c.wide ? c.x1 - lb.w : c.x0, top, lb.w, lb.h);
+    ident(P, d, {x: c.x0, y: iy, w: iw, k: c.k, draw: true});
+    P.line(c.x0, hy, c.x1, hy, C.LINE, 0.25);
+    if (ch) contacts(P, d, {x: c.x0, y: cy, w: cw, k: c.k, style: st, draw: true, maxH: MH});
+    if (fh) foot(P, d, {x: c.x0, y: c.y1 - fh, w: c.wide ? cw : c.W - (q ? q + c.g2 : 0), k: c.k, draw: true, side: !q});
+    if (q) qrAt(P, url, c.x1 - q, c.y1 - q, q, false);
+  }
+  return cy + need <= c.y1 + 0.05 && (!q || c.wide || cy + ch + c.g2 + q <= c.y1 + 0.05);
+}
+const TF = {band: tBand, bandc: tBandC, panel: tPanel, sheet: tSheet};
+/* шаги подгонки: сначала поля 5,8 → 5 мм, потом знак «Свои люди» в одну строку, потом мельче шрифт [масштаб шрифтов, поля, знак в одну строку] */
+const STEPS = [[1, 1, 0], [1, 0, 0], [1, 0, 1], [0.95, 0, 1], [0.9, 0, 1], [0.85, 0, 1], [0.8, 0, 1]];
+function fitDraw(P, X, Y, CW, CH, f){
+  for (let i = 0; i < STEPS.length; i++) {
+    const c = geo(X, Y, CW, CH, STEPS[i][0], STEPS[i][1]), last = i === STEPS.length - 1; SC = !!STEPS[i][2];
+    if (!last && !f(c, false)) continue;
+    const n = P.ops.length; P.wOver = false; f(c, true);
+    if (P.wOver && !last) { P.ops.length = n; continue; }   // слово всё же не поместилось — пробуем следующий шаг
+    return !f(c, false) || P.wOver;
+  }
+  return false;
+}
+/* лицевая сторона. QR-код ставим там, где есть место (Ирина 14.10.2026, 11:56): если с ним текст не помещается даже мелким шрифтом,
+   визитка рисуется без QR-кода, а под ней подсказка перенести его на обратную сторону (P.qrDrop) */
+function front(P, d, X, Y){
+  const [CW, CH] = dims(d), t = TF[d.layout] || tBand, n = P.ops.length, draw = dd => fitDraw(P, X, Y, CW, CH, (c, dr) => t(P, dd, c, dr));
+  const over = draw(d);
+  if (!over || !frontQr(d, P)) return over;
+  P.ops.length = n;
+  const d2 = Object.assign({}, d, {qr: Object.assign({}, d.qr, {where: 'none'})});
+  P.qrDrop = true; return draw(d2);   // и без QR-кода не помещается — визитка без него (иначе он лёг бы на текст) и предупреждение о длинном тексте
+}
+/* обратная сторона — вся шалфейная, как шапка документов: логотип на белой плашке, имя и чем занимаешься по-русски или по-украински, строка, QR-код на белой плашке */
+function back(P, d, X, Y){
+  const [CW, CH] = dims(d), lg = d.back.logo ? LG() : null, url = d.qr.where === 'back' ? qrLink(d) : '';
+  const bd = Object.assign({}, d, {f: {name: clean(d.back.name), role: clean(d.back.role), serv: '', note: clean(d.back.line), tag: '', firm: '', langs: []}, noGhost: true});
+  return fitDraw(P, X, Y, CW, CH, (c, dr) => {
+    const q = url ? Math.min(c.wide ? c.H * 0.62 : c.W * 0.46, 20) : 0, tw2 = c.wide && q ? c.W - q - c.g3 : c.W, cx = c.x0 + tw2 / 2;
+    const lb = lg ? logoBox(lg, tw2 * 0.45, c.CH * (c.wide ? 0.16 : 0.1)) : null, lpw = lb ? lb.w + 3.2 : 0, lph = lb ? lb.h + 2.2 : 0;
+    const hasT = clean(bd.f.name) || clean(bd.f.role) || clean(bd.f.note), ih = hasT ? ident(P, bd, {x: c.x0, y: 0, w: tw2, k: c.k, draw: false, band: true, align: 'center'}) : 0;
+    const H = lph + (lph && ih ? c.g2 : 0) + ih + (!c.wide && q ? (lph || ih ? c.g3 : 0) + q : 0);
+    if (dr) {
+      P.rect(c.X - (P.bl || 0), c.Y - (P.bl || 0), c.CW + 2 * (P.bl || 0), c.CH + 2 * (P.bl || 0), C.BAND);
+      let y = vmid(c.y0, c.y1, H);
+      if (lb) { plate(P, lg, cx - lpw / 2, y, lpw, lph, 1.2); logoImg(P, d, lg, cx - lb.w / 2, y + 1.1, lb.w, lb.h); y += lph + (ih ? c.g2 : 0); }
+      if (ih) { ident(P, bd, {x: c.x0, y, w: tw2, k: c.k, draw: true, band: true, align: 'center'}); y += ih; }
+      if (q) qrAt(P, url, c.wide ? c.x1 - q : cx - q / 2, c.wide ? vmid(c.y0, c.y1, q) : y + (lph || ih ? c.g3 : 0), q, true);
+    }
+    return H <= c.H + 0.05 && (!c.wide || q <= c.H + 0.05);
+  });
+}
+function newPage(w, h){ const P = SH.page(w, h, SH.pal(true)); P.wm = false; P.credit = false; P.kBlack = true; return P; }
+/* одна сторона визитки; bleed — запас на обрез в мм (0 — как визитка на экране) */
+function cardPage(d, side, bleed, preview){
+  setPal(d);
+  const [CW, CH] = dims(d), W = CW + 2 * bleed, H = CH + 2 * bleed, P = newPage(W, H); P.fmt = [W, H]; P.pngK = 12; P.preview = !!preview;
+  P.bl = bleed;   // шапка и фон оборота уходят в запас на обрез
+  P.over = (side === 'back' ? back : front)(P, d, bleed, bleed);
+  return P;
+}
+/* лист A4: сколько поместится визиток выбранного размера, без промежутков, метки реза на полях (не ближе 10 мм к краю листа);
+   для 85 × 55 это 2 × 5, как на готовых листах с перфорацией; оборот — зеркально по столбцам, для печати с двух сторон */
+function a4(d, side){
+  setPal(d);
+  const [CW, CH] = dims(d), P = newPage(210, 297), cols = Math.max(1, Math.floor(190 / CW)), rws = Math.max(1, Math.floor(277 / CH)), ox = (210 - cols * CW) / 2, oy = (297 - rws * CH) / 2;
+  for (let r = 0; r < rws; r++) for (let c = 0; c < cols; c++) { const cc = side === 'back' ? cols - 1 - c : c; (side === 'back' ? back : front)(P, d, ox + cc * CW, oy + r * CH); }
+  for (let c = 0; c <= cols; c++) { const x = ox + c * CW; P.line(x, 1.5, x, oy - 2, '#8C8C8C', 0.2); P.line(x, oy + rws * CH + 2, x, 295.5, '#8C8C8C', 0.2); }
+  for (let r = 0; r <= rws; r++) { const y = oy + r * CH; P.line(4, y, ox - 2, y, '#8C8C8C', 0.2); P.line(ox + cols * CW + 2, y, 206, y, '#8C8C8C', 0.2); }
+  return P;
+}
+
+/* ---------- логотип: на белый фон, без лишних белых полей, цветной и серый ---------- */
+function prepLogo(img){
+  const max = 1000, sc = Math.min(1, max / Math.max(img.naturalWidth, img.naturalHeight));
+  const w = Math.max(1, Math.round(img.naturalWidth * sc)), h = Math.max(1, Math.round(img.naturalHeight * sc));
+  const cv = document.createElement('canvas'); cv.width = w; cv.height = h; const c = cv.getContext('2d');
+  c.fillStyle = '#FFFFFF'; c.fillRect(0, 0, w, h); c.drawImage(img, 0, 0, w, h);
+  const px = c.getImageData(0, 0, w, h).data; let x1 = w, y1 = h, x2 = -1, y2 = -1;
+  for (let y = 0; y < h; y++) for (let x = 0; x < w; x++) { const i = (y * w + x) * 4; if (px[i] < 242 || px[i + 1] < 242 || px[i + 2] < 242) { if (x < x1) x1 = x; if (x > x2) x2 = x; if (y < y1) y1 = y; if (y > y2) y2 = y; } }
+  if (x2 < 0) return null;
+  const pad = Math.round(Math.max(x2 - x1, y2 - y1) * 0.02), cx = Math.max(0, x1 - pad), cy = Math.max(0, y1 - pad), cw = Math.min(w, x2 + pad + 1) - cx, ch = Math.min(h, y2 + pad + 1) - cy;
+  const out = document.createElement('canvas'); out.width = cw; out.height = ch; const o = out.getContext('2d');
+  o.fillStyle = '#FFFFFF'; o.fillRect(0, 0, cw, ch); o.drawImage(cv, cx, cy, cw, ch, 0, 0, cw, ch);
+  // почти белое — в чистый белый, чтобы на белой визитке не было серой «коробки» вокруг логотипа
+  const im = o.getImageData(0, 0, cw, ch), dd = im.data; for (let i = 0; i < dd.length; i += 4) if (dd[i] > 246 && dd[i + 1] > 246 && dd[i + 2] > 246) dd[i] = dd[i + 1] = dd[i + 2] = 255; o.putImageData(im, 0, 0);
+  // JPEG высокого качества: чисто белый фон остаётся чисто белым, а PNG с прозрачностью в PDF давал еле заметную серую рамку
+  const enc = () => out.toDataURL('image/jpeg', 0.95);
+  const col = enc();
+  const g = o.getImageData(0, 0, cw, ch), gd = g.data; for (let i = 0; i < gd.length; i += 4) { const v = Math.round(gd[i] * 0.299 + gd[i + 1] * 0.587 + gd[i + 2] * 0.114); gd[i] = gd[i + 1] = gd[i + 2] = v; } o.putImageData(g, 0, 0);
+  return {c: col, g: enc(), w: cw, h: ch, small: Math.max(img.naturalWidth, img.naturalHeight) < 500};
+}
+
+/* ---------- экран ---------- */
+const st = $('status'), say = t => { st.textContent = t || ''; };
+let tmr;
+/* миниатюры видов: с твоими данными, а пока имени нет — с вымышленным примером без логотипа */
+const THD = () => ({f: {name: 'Anna Kovalenko', role: 'Maniküre und Pediküre', firm: 'Studio Anna', tag: 'Gepflegte Hände, gute Laune', serv: '', phone: '+41 00 000 00 00', wa: false, email: 'anna@example.ch', web: 'www.example.ch', ig: '', tg: '', street: '', city: '', langs: []}, card: null, qr: {where: 'front', to: 'web', url: ''}});
+function variant(d, t){ const v = Object.assign({}, d, {layout: t[0], font: t[2], cstyle: t[3], qr: Object.assign({}, d.qr)}); if ((t[0] === 'qr' || t[0] === 'onlyqr') && v.qr.where !== 'front') v.qr.where = 'front'; return v; }
+function thumbs(){
+  const d = D(), mine = !!clean(d.f.name), base = mine ? d : Object.assign({}, d, THD()), [w, h] = dims(d);
+  if (!mine) LGX = null;
+  $('tpls').innerHTML = TPL.map(t => { const P = cardPage(variant(base, t), 'front', 0, true); return `<button type="button" data-tpl="${t[0]}" aria-pressed="${d.layout === t[0]}"><span class="th"><span style="${w >= h ? 'width:100%' : 'height:100%'};aspect-ratio:${w} / ${h}">${SH.svg(P)}</span></span>${t[1]}</button>`; }).join('');
+  LGX = undefined;
+}
+function render(){
+  const d = D(), [w, h] = dims(d), cls = 'card' + (w < h ? ' v' : w === h ? ' sq' : '');
+  const pf = cardPage(d, 'front', 0, true); $('cardFront').className = cls; $('cardFront').innerHTML = SH.svg(pf);
+  const hb = hasBack(d); $('cardBack').hidden = !hb; $('backLb').hidden = !hb; document.querySelector('[data-png="back"]').hidden = !hb;
+  let over = pf.over;
+  if (hb) { const pb = cardPage(d, 'back', 0, true); $('cardBack').className = cls; $('cardBack').innerHTML = SH.svg(pb); over = over || pb.over; } else $('cardBack').innerHTML = '';
+  const qd = !over && pf.qrDrop, msg = over ? 'Текста получилось много, и он не помещается целиком. Убери логотип, адрес или часть контактов, сократи «чем ты занимаешься» или выбери другой вид или размер.' + (pf.qrDrop ? ' QR-код тоже не поместился, поэтому на лицевой стороне его пока нет: его можно перенести на обратную сторону.' : '') : qd ? 'QR-код не поместился на лицевую сторону рядом с текстом, поэтому его там нет. Перенеси его на обратную сторону (раздел «QR-код»), выбери другой вид или размер или сократи текст.' : '';
+  $('over').hidden = !msg; $('over').textContent = msg;
+  const url = d.qr.where !== 'none' ? qrLink(d) : '';
+  $('qrNote').textContent = d.qr.where === 'none' ? '' : url ? 'QR-код откроет: ' + url : d.qr.to === 'card' ? 'Сначала найди свою карточку по номеру вверху формы, тогда QR-код поведёт на неё.' : d.qr.to === 'web' ? 'Впиши сайт на лицевой стороне.' : d.qr.to === 'ig' ? 'Впиши Instagram на лицевой стороне.' : 'Впиши ссылку.';
+  $('sideLb').textContent = 'Лицевая сторона · ' + w + ' × ' + h + ' мм';
+  [...$('bleed').options].forEach(o => { const b = +o.value; o.textContent = b ? `${b} мм: файл ${w + 2 * b} × ${h + 2 * b} мм${b === 3 ? ' (чаще всего)' : ''}` : `Без запаса: файл ${w} × ${h} мм`; });
+  $('a4Note').textContent = 'На листе A4 поместится ' + perSheet(d) + ' визиток этого размера.' + (d.size === '85x55' && d.orient === 'h' ? ' Расположение совпадает с готовыми листами A4 с перфорированными визитками 85 × 55 мм (2 × 5).' : '');
+  thumbs();
+}
+const later = () => { clearTimeout(tmr); tmr = setTimeout(render, 250); };
+function fill(){
+  const d = D(), dis = !!EX;
+  document.querySelectorAll('[data-k]').forEach(el => { const v = get(d, el.dataset.k); if (el.type === 'checkbox') el.checked = !!v; else el.value = v == null ? '' : v; el.disabled = dis; });
+  document.querySelectorAll('[data-seg]').forEach(sg => sg.querySelectorAll('button').forEach(b => { b.setAttribute('aria-pressed', String(get(d, sg.dataset.seg) === b.dataset.v)); b.disabled = (dis && !VIEW.includes(sg.dataset.seg)) || (sg.dataset.seg === 'orient' && d.size === '55x55'); }));
+  $('langs').innerHTML = LANGS.map(([k, n]) => `<label><input type="checkbox" value="${k}" ${(d.f.langs || []).includes(k) ? 'checked' : ''} ${dis ? 'disabled' : ''}> ${n}</label>`).join('');
+  $('lbl').value = d.lbl; $('bw').checked = !!d.bw; $('bleed').value = String(d.bleed);
+  const can = !!PAID && !EX; $('nomark').disabled = !can; $('nomark').checked = can && !!d.nomark; $('markTog').classList.toggle('off', !can);
+  $('markNote').textContent = EX ? 'В примере знак «Свои люди» стоит всегда.' : PAID ? `Пакет ${PAID.pkg} по карточке ${PAID.num} действует до ${ddmm(PAID.until)}: визитку можно скачать без знака.` : (PAIDMSG ? PAIDMSG + ' ' : '') + 'Внизу визитки — маленький знак «Свои люди». Убрать его можно с любым платным пакетом.';
+  $('backFields').hidden = !d.back.on; $('qrToBox').hidden = d.qr.where === 'none'; $('qrUrl').hidden = d.qr.to !== 'url';
+  const card = $('qrTo').querySelector('option[value="card"]'); card.disabled = !d.card; card.textContent = d.card ? 'На мою карточку в «Своих людях» (' + d.card.num + ')' : 'На мою карточку в «Своих людях» (сначала найди её по номеру)';
+  const lg = EX ? null : LOGO; $('logoImg').hidden = !lg; if (lg) $('logoImg').src = lg.c; $('logoDel').hidden = !lg || dis; $('logoPick').hidden = dis;
+  $('findQ').disabled = $('findBtn').disabled = dis; $('wipeBox').hidden = dis;
+  $('exbar').hidden = !EX; $('exOn').hidden = !!EX;
+  render();
+}
+document.addEventListener('input', e => { const x = e.target; if (EX || !x.dataset || !x.dataset.k || x.type === 'checkbox') return; put(S, x.dataset.k, x.value); save(); later(); });
+document.addEventListener('change', e => {
+  const x = e.target;
+  /* вид визитки можно менять и в примере */
+  if (x.id === 'nomark') { if (!EX && PAID) { S.nomark = x.checked; save(); } fill(); return; }
+  if (x.id === 'lbl' || x.id === 'bw' || x.id === 'bleed') { const t = EX || S; if (x.id === 'lbl') t.lbl = x.value; else if (x.id === 'bw') t.bw = x.checked; else t.bleed = +x.value; save(); render(); return; }
+  if (EX) return;
+  if (x.dataset && x.dataset.k) { put(S, x.dataset.k, x.type === 'checkbox' ? x.checked : x.value); save(); fill(); return; }
+  if (x.closest && x.closest('#langs')) { S.f.langs = [...document.querySelectorAll('#langs input:checked')].map(i => i.value); save(); render(); return; }
+});
+const VIEW = ['size', 'orient', 'font', 'cstyle'];   // настройки вида: работают и в примере
+document.querySelectorAll('[data-seg]').forEach(sg => sg.addEventListener('click', e => { const b = e.target.closest('button'); if (!b || b.disabled || (EX && !VIEW.includes(sg.dataset.seg))) return; const t = EX || S; put(t, sg.dataset.seg, b.dataset.v); if (sg.dataset.seg === 'size' && b.dataset.v === '55x55') t.orient = 'h'; if (sg.dataset.seg === 'qr.where' && b.dataset.v === 'back') S.back.on = true; save(); fill(); }));
+/* выбор вида: шрифт и подписи к контактам ставятся как в образце, их можно поменять; для видов с QR-кодом он сразу переходит на лицевую сторону */
+$('tpls').addEventListener('click', e => {
+  const b = e.target.closest('[data-tpl]'); if (!b) return; const t = TPL.find(x => x[0] === b.dataset.tpl); if (!t) return;
+  const tgt = EX || S; tgt.layout = t[0]; tgt.font = t[2]; tgt.cstyle = t[3]; if ((t[0] === 'qr' || t[0] === 'onlyqr') && tgt.qr.where !== 'front') tgt.qr.where = 'front';
+  save(); fill();
+  if (matchMedia('(max-width:1040px)').matches) $('cardBox').scrollIntoView({behavior: 'smooth', block: 'start'});
+});
+
+/* логотип */
+$('logoIn').addEventListener('change', e => {
+  const file = e.target.files && e.target.files[0]; e.target.value = ''; if (!file) return;
+  const rd = new FileReader();
+  rd.onload = () => { const img = new Image(); img.onload = () => {
+      const lg = prepLogo(img); if (!lg) { $('logoNote').hidden = false; $('logoNote').textContent = 'На картинке ничего не нашлось, кроме белого фона. Выбери другую.'; return; }
+      LOGO = lg; let kept = true; try { localStorage.setItem(KEYLOGO, JSON.stringify(lg)); } catch (err) { kept = false; }
+      $('logoNote').hidden = !(lg.small || !kept);
+      $('logoNote').textContent = [lg.small ? 'Картинка маленькая, в печати она может выйти размытой. Если есть, возьми побольше.' : '', kept ? '' : 'Логотип большой и не сохранится на этом устройстве: после закрытия страницы его нужно будет выбрать снова.'].filter(Boolean).join(' ');
+      fill(); };
+    img.onerror = () => { $('logoNote').hidden = false; $('logoNote').textContent = 'Эту картинку не получилось открыть. Подойдёт JPG или PNG.'; };
+    img.src = rd.result; };
+  rd.readAsDataURL(file);
+});
+$('logoDel').addEventListener('click', () => { LOGO = null; try { localStorage.removeItem(KEYLOGO); } catch (e) {} $('logoNote').hidden = true; fill(); });
+
+/* поиск карточки по номеру или UID — только открытые на сайте карточки */
+function loadData(){
+  const need = [['SPECIALISTS', 'data/specialists.js'], ['ORGANIZATIONS', 'data/organizations.js']].filter(([g]) => !window[g]);
+  return Promise.all(need.map(([, src]) => new Promise(r => { const s = document.createElement('script'); s.src = BASE + src; s.onload = r; s.onerror = r; document.head.appendChild(s); })));
+}
+const digits = s => String(s || '').replace(/\D/g, '');
+function parseQ(q){
+  q = String(q || '').toUpperCase().replace(/\s+/g, '');
+  const m = q.match(/^(SG|OR)-?0*(\d{1,5})$/); if (m) return {num: m[1] + '-' + ('0000' + m[2]).slice(-4)};
+  const dd = digits(q); if (dd.length === 9) return {uid: dd};
+  return null;
+}
+const isCyr = s => /[А-Яа-яЁёІіЇїЄєҐґ]/.test(s || '');
+function splitAddr(a){ a = clean(a).replace(/\s*\(.*?\)\s*/g, ' ').trim(); const i = a.lastIndexOf(','); return i > 0 ? [a.slice(0, i).trim(), a.slice(i + 1).trim()] : [a, '']; }
+async function find(){
+  const box = $('found'), q = parseQ($('findQ').value);
+  const show = (t, err) => { box.hidden = false; box.className = 'found' + (err ? ' err' : ''); box.innerHTML = t; };
+  if (!q) return show('Впиши номер карточки, например SG-0014 или OR-0004, или UID фирмы вида CHE-123.456.789.', true);
+  show('Ищу карточку…');
+  await loadData();
+  const today = new Date().toISOString().slice(0, 10);
+  const specs = (window.SPECIALISTS || []).map(s => ({t: 'spec', r: s, num: s.num || '', uid: s.uid || '', ok: s.status === 'активен' && !(s.paidUntil && s.paidUntil < today), sample: !!s.sample}));
+  const orgs = (window.ORGANIZATIONS || []).map(o => ({t: 'org', r: o, num: o.num || '', uid: /CHE/i.test(o.zefix || '') ? o.zefix : '', ok: o.status === 'активен' && !!o.confirm, sample: !!o.sample}));
+  const hit = specs.concat(orgs).filter(x => q.num ? x.num.toUpperCase() === q.num : digits(x.uid) === q.uid);
+  if (!hit.length) return show('Такой карточки нет. Проверь номер: он стоит внизу твоей карточки на svoiludi.ch.', true);
+  const h = hit.find(x => x.ok && !x.sample) || hit[0];
+  if (h.sample) return show('Это образец, в нём всё вымышленное. Впиши номер своей карточки.', true);
+  if (!h.ok) return show('Эта карточка сейчас не открыта на сайте: она ждёт подтверждения, стоит на паузе или закончился срок. Данные подставятся, когда она снова будет на сайте. Пока заполни поля сама.', true);
+  useCard(h);
+  const r = h.r, f = S.f;
+  const todo = [!clean(f.name) ? 'имя латиницей' : '', !clean(f.role) ? '«чем ты занимаешься» на языке подписей' : ''].filter(Boolean);
+  show(`Нашлась карточка «${SH.esc(r.name)}» (${SH.esc(r.num)}). Данные подставлены, проверь их. ${todo.length ? 'Осталось вписать на лицевой стороне: ' + todo.join(' и ') + '.' : ''} Имя и чем ты занимаешься по-русски стоят на обратной стороне${S.qr.to === 'card' ? ', QR-код ведёт на твою карточку' : ''}.`);
+}
+/* подставить данные карточки (поиск по номеру и личная ссылка с пакетом) */
+function useCard(h){
+  const r = h.r, c = r.contacts || {}, f = S.f;
+  const ph = clean(c.phone || c.whatsapp);
+  if (h.t === 'spec') {
+    if (clean(r.name) && !isCyr(r.name)) f.name = clean(r.name);
+    S.back.name = clean(r.name); S.back.role = clean(r.role);
+    f.firm = clean(r.firm) || f.firm;
+    const pl = (r.places || []).find(p => p.address && !p.area); if (pl) [f.street, f.city] = splitAddr(pl.address);
+    S.card = {num: r.num, name: r.name, url: 'https://svoiludi.ch/#' + r.id};
+  } else {
+    f.firm = clean(r.name);
+    if (r.head && r.head.name) { S.back.name = clean(r.head.name); if (!isCyr(r.head.name)) f.name = clean(r.head.name); }
+    S.back.role = clean((r.cats || []).join(', '));
+    if (r.address) [f.street, f.city] = splitAddr(r.address);
+    S.card = {num: r.num, name: r.name, url: 'https://svoiludi.ch/organizacii/#' + r.id};
+  }
+  if (ph) f.phone = ph; f.wa = !!(c.whatsapp && digits(c.whatsapp) === digits(ph));
+  if (c.email) f.email = clean(c.email); if (c.site) f.web = site(c.site);
+  if (c.instagram) f.ig = handle(c.instagram); if (c.telegram) f.tg = handle(c.telegram);
+  const ls = (r.langs || []).map(x => LMAP[String(x).toLowerCase()]).filter(Boolean); if (ls.length) f.langs = [...new Set(ls)];
+  S.back.on = true; if (!qrLink(S)) S.qr.to = 'card';   // нет своего сайта — QR-код ведёт на карточку в «Своих людях»
+  save(); fill();
+}
+/* без знака «Свои люди» — только с любым платным пакетом (решение Ирины 14.10.2026, 11:57). Владелец карточки с пакетом получает личную ссылку
+   https://svoiludi.ch/instrumenty/vizitka/#paket=<id карточки>.<ключ> — ключ тот же, что в ссылке предпросмотра карточки (_i18n/pochta/klyuch.py);
+   в открытых данных только его отпечаток keyHash. Ключ запоминается только на этом устройстве и при каждом открытии проверяется заново:
+   пакет закончился — знак возвращается сам */
+const KEYPAID = 'vizitkaPechat.paket.v1';
+const svlHash = async k => { try { const b = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(String(k || ''))); return Array.from(new Uint8Array(b), x => x.toString(16).padStart(2, '0')).join(''); } catch (x) { return ''; } };
+const isoToday = () => new Date().toISOString().slice(0, 10);
+const ddmm = iso => iso.split('-').reverse().join('.');
+/* платные пакеты: «VIP-партнёр», «VIP-партнёр ТОП» (tiers), онлайн-пакеты (onlineTier) и онлайн-показ (onlineCH, onlineCanton).
+   Базовая и после периода запуска остаётся со знаком — как «Визитка PNG» (решение Ирины 11.10.2026) */
+function paidPkg(r){
+  const t = isoToday(), L = {vip: '«VIP-партнёр ТОП»', 'партнёр': '«VIP-партнёр»', online: '«Онлайн базовый»', 'vip-online': '«VIP-онлайн»', 'vip-online-top': '«VIP-онлайн ТОП»'}, all = [];
+  (r.tiers || []).forEach(x => { if (x && x.until && x.until >= t) all.push({name: L[x.level] || '«VIP-партнёр»', until: x.until}); });
+  if (r.onlineTier && r.onlineTier.until && r.onlineTier.until >= t) all.push({name: L[r.onlineTier.level] || 'онлайн-пакет', until: r.onlineTier.until});
+  if (r.onlineCH && r.onlineCH >= t) all.push({name: 'онлайн-показ по всей Швейцарии', until: r.onlineCH});
+  if (r.onlineCanton && r.onlineCanton >= t) all.push({name: 'онлайн-показ по кантону', until: r.onlineCanton});
+  return all.sort((a, b) => a.until < b.until ? 1 : -1)[0] || null;
+}
+async function checkPaid(id, k, fillData){
+  await loadData();
+  const recs = (window.SPECIALISTS || []).map(r => ['spec', r]).concat((window.ORGANIZATIONS || []).map(r => ['org', r]));
+  const hit = recs.find(x => x[1] && x[1].id === id);
+  if (!hit || !hit[1].keyHash || !k || (await svlHash(k)) !== hit[1].keyHash) return 'key';
+  const [t, r] = hit, ok = !r.sample && r.status === 'активен' && (t === 'spec' ? !(r.paidUntil && r.paidUntil < isoToday()) : !!r.confirm), p = ok ? paidPkg(r) : null;
+  if (!p) return 'nopkg';
+  PAID = {num: r.num, name: r.name, pkg: p.name, until: p.until};
+  if (fillData) useCard({t, r});
+  return 'ok';
+}
+const PAIDERR = {key: 'Личная ссылка не подошла: ключ в ней устарел. Напиши нам на voznesenskaya.iryna@gmail.com, и мы пришлём новую.', nopkg: 'По этой карточке сейчас нет действующего платного пакета, поэтому знак «Свои люди» остаётся на визитке.'};
+function paketLink(){
+  const m = location.hash.match(/^#paket=([^.]+)\.(.+)$/);
+  if (m) {
+    const id = decodeURIComponent(m[1]), k = decodeURIComponent(m[2]);
+    try { history.replaceState(null, '', location.pathname + location.search); } catch (e) {}   // ключ не остаётся в адресной строке
+    checkPaid(id, k, true).then(r => { if (r === 'ok') { try { localStorage.setItem(KEYPAID, JSON.stringify({id, k})); } catch (e) {} S.nomark = true; save(); } else PAIDMSG = PAIDERR[r]; fill(); });
+    return;
+  }
+  let v = null; try { v = JSON.parse(localStorage.getItem(KEYPAID)); } catch (e) {}
+  if (v && v.id) checkPaid(v.id, v.k, false).then(r => { if (r !== 'ok') { try { localStorage.removeItem(KEYPAID); } catch (e) {} if (S.nomark) PAIDMSG = PAIDERR[r]; } fill(); });
+}
+paketLink();
+window.addEventListener('hashchange', () => { if (/^#paket=/.test(location.hash)) paketLink(); });
+$('findBtn').addEventListener('click', find);
+$('findQ').addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); find(); } });
+
+/* удалить историю */
+function askWipe(){
+  $('wipeBox').innerHTML = 'Удалить всё, что ты вписала, и логотип с этого устройства? <button type="button" class="lnk" id="wipeYes">Да, удалить</button> <button type="button" class="lnk" id="wipeNo">Нет</button>';
+  $('wipeYes').onclick = () => { try { localStorage.removeItem(KEY); localStorage.removeItem(KEYLOGO); localStorage.removeItem(KEYPAID); } catch (e) {} PAID = null; PAIDMSG = ''; S = blank(); LOGO = null; $('found').hidden = true; $('findQ').value = ''; resetWipe(); fill(); say('История удалена.'); };
+  $('wipeNo').onclick = resetWipe;
+}
+function resetWipe(){ $('wipeBox').innerHTML = 'Твои записи хранятся только на этом устройстве. <button type="button" class="lnk" id="wipe">Удалить историю</button>'; $('wipe').addEventListener('click', askWipe); }
+$('wipe').addEventListener('click', askWipe);
+
+/* скачать */
+const slug = () => (clean(D().f.name) || clean(D().back.name) || 'Visitenkarte').replace(/[^\p{L}\p{N}]+/gu, '-').replace(/^-|-$/g, '').slice(0, 40);
+function saveBlob(blob, name){ const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = name; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 4000); }
+const printPages = d => [cardPage(d, 'front', d.bleed)].concat(hasBack(d) ? [cardPage(d, 'back', d.bleed)] : []);
+const homePages = d => [a4(d, 'front')].concat(hasBack(d) ? [a4(d, 'back')] : []);
+async function pdf(kind, share){
+  const d = D(), [w, h] = dims(d), btns = [$('pdf'), $('pdfA4'), $('share')]; btns.forEach(b => b.disabled = true); say('Готовлю PDF…');
+  try {
+    const pages = kind === 'a4' ? homePages(d) : printPages(d), name = 'Visitenkarte-' + slug() + '-' + w + 'x' + h + (kind === 'a4' ? '-A4' : '-Druckerei') + '.pdf';
+    const blob = await SH.makePdf(pages, kind === 'a4' ? 'Visitenkarten A4' : 'Visitenkarte');
+    if (share) { await navigator.share({files: [new File([blob], name, {type: 'application/pdf'})], title: name}); say('Готово.'); }
+    else { saveBlob(blob, name); say(kind === 'a4' ? 'Лист A4 скачан: ' + perSheet(d) + ' визиток. Печатай в масштабе 100 % (без «вписать в страницу»), на плотной бумаге.' + (hasBack(d) ? ' Второй лист — обратная сторона: переверни бумагу по длинной стороне.' : '') : 'PDF скачан. Визитка ' + w + ' × ' + h + ' мм' + (d.bleed ? ', файл ' + (w + 2 * d.bleed) + ' × ' + (h + 2 * d.bleed) + ' мм с запасом на обрез ' + d.bleed + ' мм' : '') + (hasBack(d) ? ', две страницы: лицевая и обратная сторона.' : ', одна сторона.') + ' Загрузи его на сайте типографии и выбери там такой же размер.'); }
+  } catch (e) { if (e && e.name === 'AbortError') say(''); else say('Не получилось сделать PDF. Обнови страницу и попробуй ещё раз.'); }
+  btns.forEach(b => b.disabled = false);
+}
+$('pdf').addEventListener('click', () => pdf('print'));
+$('pdfA4').addEventListener('click', () => pdf('a4'));
+document.querySelectorAll('[data-png]').forEach(b => b.addEventListener('click', async () => {
+  const d = D(), side = b.dataset.png; if (side === 'back' && !hasBack(d)) return; say('Готовлю PNG…');
+  try { saveBlob(await SH.pagePng(cardPage(d, side, d.bleed)), 'Visitenkarte-' + slug() + (side === 'back' ? '-Rueckseite' : '') + '.png'); say('PNG скачан. Его можно загрузить в типографии, которая принимает картинки, или отправить в мессенджере.'); }
+  catch (e) { say('Не получилось сделать PNG. Попробуй ещё раз.'); }
+}));
+try { if (navigator.canShare && navigator.canShare({files: [new File(['x'], 'x.pdf', {type: 'application/pdf'})]}) && matchMedia('(pointer:coarse)').matches) { $('share').hidden = false; $('share').addEventListener('click', () => pdf('print', true)); } } catch (e) {}
+
+/* пример */
+const EXD = () => ({layout: 'band', font: 'sans', cstyle: 'text', size: S.size, orient: S.orient, lbl: 'de', bleed: S.bleed, bw: S.bw,
+  f: {name: 'Anna Kovalenko', role: 'Maniküre, Pediküre und Nageldesign', firm: 'Studio Anna', tag: 'Gepflegte Hände, gute Laune', serv: '', phone: '+41 00 000 00 00', wa: true, email: 'anna@example.ch', web: 'www.example.ch', ig: '', tg: '', street: 'Musterstrasse 12', city: '8000 Zürich', langs: []},
+  back: {on: true, name: 'Анна Коваленко', role: 'Маникюр, педикюр и дизайн ногтей', line: 'Говорю по-русски и по-украински · запись в WhatsApp', logo: true},
+  qr: {where: 'front', to: 'url', url: 'https://www.example.ch'}, card: null, nomark: false});
+async function exampleOn(opts){ EX = norm(merge(EXD(), opts || {})); fill(); }
+$('exOn').addEventListener('click', async () => { await exampleOn({layout: S.layout, font: S.font, cstyle: S.cstyle, qr: (S.layout === 'qr' || S.layout === 'onlyqr') ? {where: 'front'} : {}}); window.scrollTo({top: $('exbar').getBoundingClientRect().top + window.scrollY - 12, behavior: 'smooth'}); });
+$('exOff').addEventListener('click', () => { EX = null; fill(); });
+
+/* ссылка вида ?n=SG-0014 — подставить карточку сразу; ?example — пример (для веера и превью: &layout=, &font=, &cstyle=, &lbl=, &size=85x55|90x50|55x55, &orient=v, &qr=front|back|none) */
+const P0 = new URLSearchParams(location.search);
+fill();
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(render);
+if (P0.has('example')) {
+  const o = {}, t = TPL.find(x => x[0] === P0.get('layout'));
+  if (t) Object.assign(o, {layout: t[0], font: t[2], cstyle: t[3]}, (t[0] === 'qr' || t[0] === 'onlyqr') ? {qr: {where: 'front'}} : {});
+  ['font', 'lbl', 'cstyle', 'size', 'orient'].forEach(k => { if (P0.get(k)) o[k] = P0.get(k); });
+  if (P0.get('qr')) o.qr = {where: P0.get('qr')};
+  exampleOn(o);
+}
+else if (P0.get('n')) { $('findQ').value = P0.get('n'); find(); }
+window.VIZ = {cardPage, a4, D, hasBack, printPages, homePages, dims, TPL, variant};
+})();
+</script>
+<script src="/assets/help.js"></script>
+<script src="/assets/pdffan.js" defer></script>
+<script src="/assets/share.js" defer></script>
+<script src="/assets/samesite.js"></script>
+</body>
+</html>
