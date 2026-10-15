@@ -83,8 +83,8 @@
       const v = (window.KANTONY_VEREIN || {})[k]; if (!v) return '';
       const li = LI2[c.l] || 1;
       const links = ['steuer', 'lotto', 'integ', 'hreg'].filter(x => v.u && v.u[x]).map(x => '<a class="kt-link" href="' + esc(v.u[x]) + '" target="_blank" rel="noopener"><b>' + VL[x][0] + '</b><span>' + esc(x === 'lotto' ? (v.ln || 'Lotteriefonds') : VL[x][li]) + ' · ' + esc(c.n) + ' ↗</span></a>').join('');
-      const tax = [v.g ? 'прибыль ' + v.g : '', v.c ? 'имущество (капитал) ' + v.c : ''].filter(Boolean).join('; ');
-      return links + (tax ? '<p class="kt-note"><b>Налог ферайна · ' + esc(c.n) + ':</b> ' + esc(tax).replace(/\.?$/, '.') + (v.n ? ' ' + esc(v.n) : '') + '</p>' : '');
+      const tax = [v.g ? 'Прибыль: ' + v.g : '', v.c ? 'Имущество: ' + v.c : '', v.n || ''].filter(Boolean).map(x => esc(x).replace(/\.?$/, '.')).join(' ');
+      return links + (tax ? '<p class="kt-note"><b>Налог ферайна · ' + esc(c.n) + '.</b> ' + tax + '</p>' : '');
     };
     kt.forEach(box => {
       box.innerHTML = '<div class="kt-h"><b>Твой кантон</b><select aria-label="Твой кантон">' + opts + '</select></div><div class="kt-out"></div>';
