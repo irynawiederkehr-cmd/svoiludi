@@ -434,7 +434,7 @@ function build(){
   const A = articles(L, d), Ar = R || E ? articles('ru', d) : null, t = TT[L], tr = TT.ru;
   const pages = []; let P, y; const X = 20, Wd = 170, BOT = 278;
   const STL = [[{de: 'MUSTER', fr: 'MODÈLE', it: 'MODELLO'}[L] + ' · ЗРАЗОК', 13, true], [{de: 'Vorlage, keine Rechtsberatung', fr: 'Modèle, pas un conseil juridique', it: 'Modello, non una consulenza legale'}[L], 6, false], ['Ми не юристи: перевір у юриста', 6, false], ['або в спілці орендарів', 6, false]];
-  const np = () => { const first = !pages.length; P = SH.page(210, 297, C); P.stamp = {cx: 160, cy: first ? 24 : 15, a: 7, color: d.bw ? '#000000' : '#B03A2E', lines: STL}; pages.push(P); y = first ? 22 : 36; };
+  const np = () => { const first = !pages.length; P = SH.page(210, 297, C); pages.push(P); y = SH.stamp(P, STL, d.bw ? '#000000' : '#B03A2E') + (first ? 7 : 10); };
   const need = h => { if (y + h > BOT) np(); };
   const para = (s, size, b, col, lh, x) => { SH.wrap(s, b, size, Wd - ((x || X) - X)).forEach(l => { need(lh); P.text(l, x || X, y, size, b, col); y += lh; }); };
   np();

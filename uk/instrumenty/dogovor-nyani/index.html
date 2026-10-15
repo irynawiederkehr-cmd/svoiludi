@@ -272,7 +272,7 @@ function build(){
   const pages = []; let P, y; const X = 20, W = 170, BOT = 278;
   /* штамп «ОБРАЗЕЦ» на каждой странице: мы не юристы (просьба Ирины 08.10.2026) */
   const STL = [[{de: 'MUSTER', fr: 'MODÈLE', it: 'MODELLO'}[L] + (R ? ' · ЗРАЗОК' : ''), 13, true], [{de: 'Vorlage, keine Rechtsberatung', fr: 'Modèle, pas un conseil juridique', it: 'Modello, non una consulenza legale'}[L], 6, false]].concat(R ? [['Ми не юристи: перевір у юриста або в профспілці', 6, false]] : []);
-  const np = () => { const first = !pages.length; P = SH.page(210, 297, C); P.stamp = {cx: 162, cy: first ? 23 : 14, a: 7, color: d.bw ? '#000000' : '#B03A2E', lines: STL}; pages.push(P); y = first ? 22 : 33; };
+  const np = () => { const first = !pages.length; P = SH.page(210, 297, C); pages.push(P); y = SH.stamp(P, STL, d.bw ? '#000000' : '#B03A2E') + (first ? 7 : 10); };
   const need = h => { if (y + h > BOT) np(); };
   const para = (s, size, b, col, lh) => { const lines = SH.wrap(s, b, size, W); lines.forEach(l => { need(lh); P.text(l, X, y, size, b, col); y += lh; }); };
   np();
