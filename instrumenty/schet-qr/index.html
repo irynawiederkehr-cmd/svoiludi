@@ -331,7 +331,7 @@ $('newInv').addEventListener('click', () => { if (EX) return; const m = String(S
 /* номер карточки «Свои люди» или UID фирмы — данные из открытой карточки подставляются сами (Ирина 15.10.2026: «Для счета можно сделать»).
    Ищем только карточки «активен» (у организаций — подтверждённые), образцы не подставляем. Данные сайта грузятся только по нажатию. */
 function loadCards(){
-  const root = document.body.getAttribute('data-root') || '/';
+  const k = document.querySelector('script[src*="assets/kantony.js"]'), root = k ? k.src.replace(/assets\/kantony\.js.*$/, '') : '/';   // корень сайта — и на сайте, и в копии
   const need = [['SPECIALISTS', 'data/specialists.js'], ['ORGANIZATIONS', 'data/organizations.js']].filter(([g]) => !window[g]);
   return Promise.all(need.map(([, src]) => new Promise(r => { const s = document.createElement('script'); s.src = root + src; s.onload = r; s.onerror = r; document.head.appendChild(s); })));
 }
