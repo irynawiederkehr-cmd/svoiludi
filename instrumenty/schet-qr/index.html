@@ -5,10 +5,10 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <link rel="icon" href="/fav/favicon.svg" type="image/svg+xml"><link rel="icon" href="/fav/icon-32.png" sizes="32x32"><link rel="apple-touch-icon" href="/fav/apple-touch-icon.png">
 <link rel="stylesheet" href="/assets/fonts.css">
-<meta name="description" content="Бесплатно сделать счёт клиенту с QR-кодом по швейцарскому стандарту (QR-Rechnung): твои данные и IBAN, клиент, услуги и цены, НДС по желанию, срок оплаты, квитанция с QR-кодом внизу листа на немецком, французском, итальянском или английском. PDF и PNG, данные только у тебя.">
+<meta name="description" content="Бесплатно сделать счёт клиенту с QR-кодом по швейцарскому стандарту (QR-Rechnung): твои данные и IBAN, клиент, услуги и цены, НДС по желанию, срок оплаты, квитанция с QR-кодом внизу листа на немецком, французском, итальянском или английском. Для ферайна — счета за членские взносы всем членам одним PDF, отметки об оплате, напоминания и список для кассира. PDF и PNG, данные только у тебя.">
 <link rel="canonical" href="https://svoiludi.ch/instrumenty/schet-qr/">
 <meta property="og:type" content="website"><meta property="og:locale" content="ru_RU"><meta property="og:site_name" content="Свои люди в Швейцарии">
-<meta property="og:title" content="Счёт клиенту с QR-квитанцией для оплаты · бесплатно, по швейцарскому стандарту"><meta property="og:description" content="Счёт клиенту с QR-квитанцией: заполни на русском, получи PDF на немецком, французском, итальянском или английском. Данные только у тебя.">
+<meta property="og:title" content="Счёт клиенту с QR-квитанцией для оплаты · бесплатно, по швейцарскому стандарту"><meta property="og:description" content="Счёт клиенту с QR-квитанцией, а для ферайна — счета за членские взносы всем членам: заполни на русском, получи PDF на немецком, французском, итальянском или английском. Данные только у тебя.">
 <meta property="og:url" content="https://svoiludi.ch/instrumenty/schet-qr/"><meta property="og:image" content="https://svoiludi.ch/instrumenty/schet-qr/og-image.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="robots" content="noindex, nofollow">
@@ -118,20 +118,22 @@ select:focus-visible,input:focus-visible,button:focus-visible,textarea:focus-vis
   </div>
 </header>
 
-<style>.qrcheck{background:#FFF6DF;border:1.5px solid #B98324;border-radius:16px;padding:12px 14px;margin:0 0 12px;font-size:.9rem}.qrcheck.ok{background:#E2F0E2;border-color:#3A8A48}.qrcheck.warn{box-shadow:0 0 0 3px #F3E3C2}.qrcheck ol{margin:6px 0 8px;padding-left:20px}.qrcheck li{margin-bottom:4px}.qrst{margin:4px 0 0;font-size:.85rem}.pos{display:grid;grid-template-columns:minmax(0,1fr) 70px 100px 34px;gap:6px;align-items:end;margin-bottom:6px}.pos input{width:100%}.pos .del{font:inherit;border:1.5px solid var(--line);background:var(--paper);border-radius:10px;height:42px;cursor:pointer}.chk-err{color:#A0523D;font-size:.88rem;margin:4px 0 0}.chk-ok{color:#3A8A48;font-size:.88rem;margin:4px 0 0}#fields input:not([type=checkbox]),#fields select{width:100%}@media (max-width:560px){.pos{grid-template-columns:1fr 60px 84px 34px}}</style>
+<style>.qrcheck{background:#FFF6DF;border:1.5px solid #B98324;border-radius:16px;padding:12px 14px;margin:0 0 12px;font-size:.9rem}.qrcheck.ok{background:#E2F0E2;border-color:#3A8A48}.qrcheck.warn{box-shadow:0 0 0 3px #F3E3C2}.qrcheck ol{margin:6px 0 8px;padding-left:20px}.qrcheck li{margin-bottom:4px}.qrst{margin:4px 0 0;font-size:.85rem}.pos{display:grid;grid-template-columns:minmax(0,1fr) 70px 100px 34px;gap:6px;align-items:end;margin-bottom:6px}.pos input{width:100%}.pos .del{font:inherit;border:1.5px solid var(--line);background:var(--paper);border-radius:10px;height:42px;cursor:pointer}.chk-err{color:#A0523D;font-size:.88rem;margin:4px 0 0}.chk-ok{color:#3A8A48;font-size:.88rem;margin:4px 0 0}#fields input:not([type=checkbox]),#fields select{width:100%}@media (max-width:560px){.pos{grid-template-columns:1fr 60px 84px 34px}}.fees{display:flex;flex-direction:column;gap:6px}.fee{display:grid;grid-template-columns:minmax(0,1fr) 92px auto 34px;gap:6px;align-items:center}.fee span{font-size:.84rem;color:var(--muted)}.fee .del{font:inherit;border:1.5px solid var(--line);background:var(--paper);border-radius:10px;height:42px;cursor:pointer}.mems{display:flex;flex-direction:column;gap:8px}.mem{display:flex;gap:10px;align-items:flex-start;background:var(--bg);border:1.5px solid var(--line);border-radius:14px;padding:9px 12px}.mem.paid{border-color:color-mix(in srgb,var(--sage) 55%,transparent)}.mem details{flex:1;min-width:0}.mem summary{cursor:pointer;font-size:.92rem;line-height:1.4;overflow-wrap:anywhere}.mem summary small{color:var(--muted)}.mem details[open] summary{margin-bottom:10px}.mem details .btn{margin-top:10px}.mpaid{display:flex;flex-direction:column;align-items:center;gap:2px;font-size:.66rem;color:var(--muted);cursor:pointer;flex:none;width:58px;text-align:center}.mpaid input{width:20px;height:20px;accent-color:var(--sage)}.paste{border-top:1px solid var(--line);padding-top:10px}.paste summary{cursor:pointer;font-weight:700;color:var(--brown)}.paste textarea{margin-top:8px}.paste .acts{margin-top:8px}.who{display:flex;flex-direction:column;gap:8px;padding-left:28px}#fields input[type=radio]{width:18px;height:18px;flex:none;accent-color:var(--sage);margin:0}.cnt{font:700 .78rem/1 var(--sans);border:1.5px solid var(--line);border-radius:999px;padding:3px 9px;color:var(--ink);margin-right:2px}.confirm{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:.9rem;background:var(--mustard-soft);border-radius:14px;padding:10px 12px}.vznote{background:var(--sage-soft);border-radius:14px;padding:10px 14px;margin:0}textarea{resize:vertical}@media (max-width:560px){.fee{grid-template-columns:minmax(0,1fr) 76px auto 34px}.mem{padding:8px 10px;gap:8px}.mpaid{width:50px}.who{padding-left:0}}</style>
 <div class="wrap">
   <header>
     <p style="margin:0 0 14px"><a class="jump" href="https://svoiludi.ch/instrumenty/">← Все полезные инструменты · Свои люди в Швейцарии</a></p>
-    <div class="eyebrow">Своё дело · счёт клиенту</div>
+    <div class="eyebrow">Своё дело и ферайн · счёт с QR-кодом</div>
     <h1>Счёт клиенту с QR-квитанцией для оплаты</h1>
     <p class="lead">Заполни на русском — получишь счёт клиенту по швейцарскому стандарту: твои данные, услуги и цены, НДС, если ты его платишь, срок оплаты и квитанция с QR-кодом внизу листа. Клиент сканирует код приложением банка, и все данные платежа заполняются сами. Счёт — на немецком, французском, итальянском или английском. PDF и PNG бесплатно.</p>
-    <div class="privnote"><b>Твои данные только у тебя.</b> Твои данные, IBAN и данные клиентов хранятся только в твоём браузере на этом устройстве. Счёт собирается прямо на устройстве. Регистрация не нужна.</div>
+    <p class="lead" style="margin-top:10px"><b>Для ферайна</b> — <a class="jump" href="#vznosy" id="vzJump">счета за членские взносы</a>: каждому члену свой счёт с QR-кодом, все в одном PDF, отметки, кто уже оплатил, напоминание тем, кто не оплатил, и список для кассира.</p>
+    <div class="privnote"><b>Твои данные только у тебя.</b> Твои данные, IBAN, данные клиентов и списки членов ферайна хранятся только в твоём браузере на этом устройстве. Счёт собирается прямо на устройстве. Регистрация не нужна.</div>
     <div data-fan="schet-qr"></div>
   </header>
   <div class="setup">
+    <div class="fl" id="vznosy"><span class="lb">Что выставляем<button type="button" class="qh" data-help="mode" aria-label="Подсказка: что выставляем" aria-expanded="false">?</button></span><div class="seg" id="modeSeg"><button type="button" data-mode="client" aria-pressed="true">Счёт клиенту</button><button type="button" data-mode="verein" aria-pressed="false">Взносы членов ферайна</button></div></div>
     <div class="fl"><span class="lb">Язык счёта<button type="button" class="qh" data-help="lang" aria-label="Подсказка: язык счёта" aria-expanded="false">?</button></span><select id="lang"><option value="de">Deutsch</option><option value="fr">Français</option><option value="it">Italiano</option><option value="en">English</option></select></div>
     <div class="fl"><span class="lb">Печать</span><label class="tog"><input type="checkbox" id="perf"> Бумага с перфорацией (без пунктира и ножниц)</label></div>
-    <div class="fl"><span class="lb">Новый счёт</span><button type="button" class="btn ghost sm" id="newInv">Следующий номер, очистить услуги</button></div>
+    <div class="fl" id="newInvFl"><span class="lb">Новый счёт</span><button type="button" class="btn ghost sm" id="newInv">Следующий номер, очистить услуги</button></div>
   </div>
   <div class="exbar" id="exbar" hidden><span>Это пример. Так будет выглядеть твой файл.</span><button type="button" class="btn sm" id="exOff">Вернуться к моим данным</button></div>
   <div class="work">
@@ -145,11 +147,12 @@ select:focus-visible,input:focus-visible,button:focus-visible,textarea:focus-vis
         <label class="tog"><input type="checkbox" id="qrok"> Я проверила QR-код в банковском приложении</label>
         <p class="qrst" id="qrst"></p></div>
       <div class="acts"><button type="button" class="btn gold" id="pdf">Скачать PDF</button><button type="button" class="btn ghost sm" id="share" hidden>Отправить</button><button type="button" class="btn ghost sm" id="exOn">Посмотреть на примере</button></div>
+      <p class="hint vznote" id="vzNote" hidden></p>
       <div class="sheets" id="sheet" aria-label="Предпросмотр листов"></div>
       <div class="status" id="status" role="status"></div>
     </div>
   </div>
-  <p class="imp"><b>Важно.</b> QR-код собирается по стандарту SIX (QR-счёт, версия 2.3, адреса раздельными полями). Перед отправкой клиенту обязательно проверь QR-код: отсканируй его своим банковским приложением и сверь данные, а перед первым счётом оплати себе 1 франк. Проверь снова, если поменяла IBAN, имя или адрес. Если ты не платишь НДС, не указывай его в счёте. Это помощь, а не бухгалтерская программа; правила для твоего дела уточняй у бухгалтера. Автор не несёт ответственности за ошибки в счёте.</p>
+  <p class="imp"><b>Важно.</b> QR-код собирается по стандарту SIX (QR-счёт, версия 2.3, адреса раздельными полями). Перед отправкой клиенту обязательно проверь QR-код: отсканируй его своим банковским приложением и сверь данные, а перед первым счётом оплати себе 1 франк. Проверь снова, если поменяла IBAN, имя или адрес. Если ты не платишь НДС, не указывай его в счёте. Членские взносы по уставу НДС не облагаются, а требовать их ферайн может, только если они есть в уставе. Список членов — личные данные людей: храни его бережно и не оставляй на чужом устройстве. Это помощь, а не бухгалтерская программа; правила для твоего дела уточняй у бухгалтера. Автор не несёт ответственности за ошибки в счёте.</p>
   <div class="share-slot" data-url="https://svoiludi.ch/instrumenty/schet-qr/" data-lead="Перешли тем, кто работает на себя. В ссылке нет твоих данных." data-text="Привет! Тут можно бесплатно сделать счёт клиенту с QR-кодом по швейцарскому стандарту: заполняешь на русском, получаешь PDF на немецком, французском или итальянском. Данные остаются у тебя. https://svoiludi.ch/instrumenty/schet-qr/"></div>
   <p class="credit"><span>Свои люди в Швейцарии · svoiludi.ch</span><a href="../../o-proekte/">О проекте</a><a href="https://svoiludi.ch/privacy/">Политика конфиденциальности</a><a href="../../o-proekte/#otvetstvennost">Ограничение ответственности</a><a href="https://voznesenskaya.ch/impressum/">Выходные данные</a></p>
 </div>
@@ -160,12 +163,25 @@ select:focus-visible,input:focus-visible,button:focus-visible,textarea:focus-vis
 <script src="/assets/lib/qrcode.js"></script>
 <script>
 window.HELP = {
+  mode: '<p><b>Счёт клиенту</b> — один счёт за услуги или товары.</p><p><b>Взносы членов ферайна</b> — счёт за членский взнос сразу каждому члену ферайна, всё в одном PDF: у каждого свой номер и свой QR-код. Можно отмечать, кто уже оплатил, сделать напоминание тем, кто не оплатил, и список для кассира.</p>',
   lang: '<p>На каком языке счёт и квитанция. Пиши на языке клиента: в Цюрихе и Берне — немецкий, в Женеве и Лозанне — французский, в Тичино — итальянский.</p>',
   iban: '<p>IBAN твоего счёта: CH и 19 знаков. Если в e-banking есть <b>QR-IBAN</b> (5-я–9-я цифры от 30000 до 31999), можно вписать его — тогда в счёте будет номер-ссылка (QR-Referenz) и банк сам разнесёт оплаты по счетам. С обычным IBAN тоже всё работает.</p>',
   mwst: '<p>Только если ты зарегистрирована плательщиком НДС (обычно с оборота 100 000 франков в год). Номер выглядит так: CHE-123.456.789 MWST. Если не платишь НДС — оставь пустым и выбери «без НДС».</p>',
   nr: '<p>Номер счёта — подряд, без пропусков: так проще учёт и налоговая. Кнопка «Следующий номер» прибавит единицу.</p>',
   ref: '<p>Номер-ссылка в QR-коде помогает узнать, какой счёт оплачен. С QR-IBAN он обязателен (QR-Referenz), с обычным IBAN — по желанию (номер RF). Собирается сам из номера счёта.</p>',
-  msg: '<p>Короткий текст, который клиент увидит в квитанции и в банке, например «Счёт 2026-014, коучинг октябрь». До 140 знаков.</p>'
+  msg: '<p>Короткий текст, который клиент увидит в квитанции и в банке, например «Счёт 2026-014, коучинг октябрь». До 140 знаков.</p>',
+  vzName: '<p>Название ферайна точно как в уставе, латиницей, например «Verein Ukrainische Schule Zürich». Счёт выставляет ферайн, а не ты лично.</p><p>Телефон и e-mail — того, кто отвечает на вопросы о взносах, обычно кассира. Их можно не писать.</p>',
+  vzIban: '<p>IBAN счёта ферайна: CH и 19 знаков. Взносы лучше получать на счёт ферайна, а не на личный счёт кассира: так видно, что это деньги ферайна, и проще отчитаться на собрании.</p><p>Если банк дал ферайну <b>QR-IBAN</b> (5-я–9-я цифры от 30000 до 31999), в каждом счёте будет свой номер-ссылка (QR-Referenz), и банк сам покажет, кто заплатил.</p>',
+  vzYear: '<p>За какой год взнос. Год стоит в заголовке счёта и в номерах счетов: 2027-M001, 2027-M002 и так далее. У каждого члена свой номер, по нему и по номеру-ссылке в выписке банка видно, кто заплатил.</p>',
+  vzTitle: '<p>Что напечатать заголовком счёта и в квитанции, например «Jahresbeitrag 2027». Если оставить пустым, будет «Mitgliederbeitrag 2027» на языке счёта.</p>',
+  vzFees: '<p>Взносы, которые утвердило собрание: например, для одного человека, для семьи, для детей и студентов. Требовать взносы можно, только если они есть в уставе (ZGB ст. 71).</p><p>Сумма 0 — «сумма на выбор», например для благотворителей (Gönner): в QR-коде тогда нет суммы, человек впишет её сам.</p><p>Членские взносы по уставу НДС не облагаются (закон об НДС, MWSTG ст. 21), поэтому НДС в этих счетах нет.</p>',
+  vzText: '<p>Короткое письмо над суммой. Пиши на языке счёта и латиницей. Если оставить пустым, будет готовый вежливый текст со сроком оплаты на языке счёта.</p><p>Каждая строка — с новой строки в счёте. В счёт входят первые 8 строк.</p>',
+  vzMembers: '<p>Список хранится только в браузере на этом устройстве, как и всё в этом инструменте. Это личные данные людей: не оставляй список на чужом или общем компьютере, сохраняй резервную копию и удаляй историю, если устройство не твоё.</p><p>Можно вписать членов по одному или вставить сразу весь список из таблицы.</p>',
+  vzPaste: '<p>Скопируй строки из таблицы (Excel, Google Таблицы) или напиши по одной строке на человека: имя; улица и номер дома; индекс и город; вид взноса. Например:</p><p>Olena Kovalenko; Musterstrasse 12; 8000 Zürich; Familie</p><p>Вид взноса можно не писать — тогда будет первый из списка. Имя всегда в первом столбце.</p>',
+  vzPaid: '<p>Когда взнос пришёл на счёт ферайна, отметь «оплачено»: дата поставится сегодняшняя, её можно поменять в карточке члена. Сверяй по номеру-ссылке или номеру счёта в выписке банка.</p><p>Отметки нужны для напоминаний и для списка для кассира.</p>',
+  vzRemind: '<p>Вместо счёта — вежливое напоминание с тем же номером, тем же номером-ссылкой и новым сроком оплаты. Обычно его отправляют через несколько недель после срока тем, кто ещё не оплатил. Поставь сегодняшнюю дату счёта, чтобы новый срок считался от неё.</p>',
+  vzList: '<p>Таблица для кассира: кто сколько должен, номер счёта и номер-ссылка, кто уже оплатил и когда, итоги. Её удобно показать правлению, ревизорам и на собрании.</p>',
+  vzNew: '<p>Для взносов следующего года: год станет следующим, отметки об оплате снимутся, номера счетов пойдут с новым годом. Члены, виды взносов и тексты останутся.</p><p>Перед этим скачай список для кассира за этот год и сохрани резервную копию.</p>'
 };
 const KEY = 'schetQr.v1';
 const LBL = {
@@ -174,12 +190,33 @@ const LBL = {
   it: {rec: 'Ricevuta', pay: 'Sezione pagamento', acc: 'Conto / Pagabile a', ref: 'Riferimento', add: 'Informazioni supplementari', by: 'Pagabile da', byE: 'Pagabile da (nome/indirizzo)', cur: 'Valuta', amt: 'Importo', acpt: 'Punto di accettazione', inv: 'Fattura', nr: 'Fattura n.', date: 'Data', due: 'Pagabile entro il', pos: 'Descrizione', qty: 'Quantità', price: 'Prezzo', total: 'Totale', sub: 'Subtotale', vat: 'IVA', sum: 'Totale CHF', terms: d => `Pagabile entro ${d} giorni. Grazie per la fiducia.`, sep: 'Da staccare prima del versamento'},
   en: {rec: 'Receipt', pay: 'Payment part', acc: 'Account / Payable to', ref: 'Reference', add: 'Additional information', by: 'Payable by', byE: 'Payable by (name/address)', cur: 'Currency', amt: 'Amount', acpt: 'Acceptance point', inv: 'Invoice', nr: 'Invoice no.', date: 'Date', due: 'Payable by', pos: 'Description', qty: 'Qty', price: 'Price', total: 'Total', sub: 'Subtotal', vat: 'VAT', sum: 'Total CHF', terms: d => `Payable within ${d} days. Thank you for your business.`, sep: 'Separate before paying in'}
 };
+/* взносы членов ферайна (просьба Ирины 15.10.2026): подписи и готовые тексты на языке счёта */
+const VZ = {
+  de: {t: 'Mitgliederbeitrag', rem: 'Zahlungserinnerung', list: 'Beitragsliste', fee: 'Beitrag', free: 'Betrag nach Wahl', mem: 'Mitglied', paidOn: 'Bezahlt am', open: 'Offen', paid: 'Bezahlt', count: 'Mitglieder', asOf: 'Stand', file: 'Mitgliederbeitraege',
+    fees: {single: 'Einzelmitglied', family: 'Familie', youth: 'Jugendliche bis 18 Jahre'},
+    text: due => `Liebes Mitglied\nHerzlichen Dank für Ihre Mitgliedschaft und Ihre Unterstützung. Wir bitten Sie, den Beitrag bis zum ${due} zu bezahlen. Am einfachsten scannen Sie den QR-Code unten mit der App Ihrer Bank.\nFreundliche Grüsse\nDer Vorstand`,
+    rtext: due => `Liebes Mitglied\nGemäss unseren Unterlagen ist Ihr Mitgliederbeitrag noch nicht eingegangen. Wir bitten Sie, ihn bis zum ${due} zu bezahlen. Falls Sie in der Zwischenzeit bezahlt haben, betrachten Sie dieses Schreiben bitte als gegenstandslos.\nFreundliche Grüsse\nDer Vorstand`},
+  fr: {t: 'Cotisation', rem: 'Rappel de paiement', list: 'Liste des cotisations', fee: 'Cotisation', free: 'Montant libre', mem: 'Membre', paidOn: 'Payé le', open: 'Impayé', paid: 'Payé', count: 'Membres', asOf: 'État au', file: 'Cotisations',
+    fees: {single: 'Membre individuel', family: 'Famille', youth: 'Jeunes jusqu’à 18 ans'},
+    text: due => `Chère membre, cher membre\nMerci pour votre adhésion et votre soutien. Nous vous prions de régler la cotisation d’ici au ${due}. Le plus simple est de scanner le code QR ci-dessous avec l’application de votre banque.\nAvec nos meilleures salutations\nLe comité`,
+    rtext: due => `Chère membre, cher membre\nSauf erreur de notre part, votre cotisation ne nous est pas encore parvenue. Nous vous prions de la régler d’ici au ${due}. Si vous avez payé entre-temps, veuillez ne pas tenir compte de ce rappel.\nAvec nos meilleures salutations\nLe comité`},
+  it: {t: 'Quota sociale', rem: 'Promemoria di pagamento', list: 'Elenco delle quote', fee: 'Quota', free: 'Importo a scelta', mem: 'Socio', paidOn: 'Pagato il', open: 'Da pagare', paid: 'Pagato', count: 'Soci', asOf: 'Stato al', file: 'Quote-sociali',
+    fees: {single: 'Socio individuale', family: 'Famiglia', youth: 'Giovani fino a 18 anni'},
+    text: due => `Cara socia, caro socio\nGrazie per la Sua adesione e il Suo sostegno. La preghiamo di pagare la quota entro il ${due}. Il modo più semplice è scansionare il codice QR qui sotto con l’app della Sua banca.\nCordiali saluti\nIl comitato`,
+    rtext: due => `Cara socia, caro socio\nSalvo errore da parte nostra, la Sua quota non ci è ancora pervenuta. La preghiamo di pagarla entro il ${due}. Se nel frattempo ha già pagato, consideri nullo questo promemoria.\nCordiali saluti\nIl comitato`},
+  en: {t: 'Membership fee', rem: 'Payment reminder', list: 'Membership fee list', fee: 'Fee', free: 'Amount of your choice', mem: 'Member', paidOn: 'Paid on', open: 'Outstanding', paid: 'Paid', count: 'Members', asOf: 'As of', file: 'Membership-fees',
+    fees: {single: 'Individual member', family: 'Family', youth: 'Young people up to 18'},
+    text: due => `Dear member\nThank you for your membership and your support. Please pay the fee by ${due}. The easiest way is to scan the QR code below with your banking app.\nKind regards\nThe board`,
+    rtext: due => `Dear member\nAccording to our records, your membership fee has not yet been received. Please pay it by ${due}. If you have paid in the meantime, please disregard this reminder.\nKind regards\nThe board`}
+};
 const TODAY = new Date().toISOString().slice(0, 10);
+function vzBlank(){ return {year: new Date().getFullYear(), title: '', text: '', rtext: '', fees: [{id: 1, k: 'single', n: '', a: 50}, {id: 2, k: 'family', n: '', a: 80}, {id: 3, k: 'youth', n: '', a: 20}], fseq: 3, members: [], seq: 0, bills: true, who: 'all', one: '', remind: false, list: true}; }
+function blank(){ return {mode: 'client', lang: 'de', perf: false, me: {name: '', street: '', no: '', plz: '', city: '', tel: '', mail: '', iban: '', mwst: ''}, cl: {name: '', street: '', no: '', plz: '', city: '', country: 'CH'}, nr: new Date().getFullYear() + '-001', date: TODAY, days: 30, vat: 0, msg: '', useRef: true, pos: [{d: '', q: 1, p: 0}], vz: vzBlank()}; }
+function load(){ try { const s = JSON.parse(localStorage.getItem(KEY)); if (s && typeof s === 'object') { const o = Object.assign(blank(), s); o.vz = Object.assign(vzBlank(), s.vz || {}); return o; } } catch (e) {} return blank(); }
 let S = load(), EX = null;
-function blank(){ return {lang: 'de', perf: false, me: {name: '', street: '', no: '', plz: '', city: '', tel: '', mail: '', iban: '', mwst: ''}, cl: {name: '', street: '', no: '', plz: '', city: '', country: 'CH'}, nr: new Date().getFullYear() + '-001', date: TODAY, days: 30, vat: 0, msg: '', useRef: true, pos: [{d: '', q: 1, p: 0}]}; }
-function load(){ try { const s = JSON.parse(localStorage.getItem(KEY)); if (s && typeof s === 'object') return Object.assign(blank(), s); } catch (e) {} return blank(); }
 function save(){ if (EX) return; try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} }
 const D = () => EX || S;
+if (/^#vznosy/.test(location.hash) && S.mode !== 'verein') { S.mode = 'verein'; save(); }
 
 /* ---------- проверки и номера ---------- */
 const clean = s => String(s || '').replace(/\s+/g, '').toUpperCase();
@@ -194,13 +231,32 @@ const money = n => { const [a, b] = (Math.round(n * 100) / 100).toFixed(2).split
 const dmy = iso => { const [y, m, d] = String(iso || TODAY).split('-'); return `${d}.${m}.${y}`; };
 function addDays(iso, n){ const t = new Date((iso || TODAY) + 'T12:00:00'); t.setDate(t.getDate() + n); return t.toISOString().slice(0, 10); }
 function totals(d){ const sub = d.pos.reduce((a, p) => a + (+p.q || 0) * (+p.p || 0), 0); const vat = d.vat ? Math.round(sub * d.vat) / 100 : 0; return {sub, vat, total: Math.round((sub + vat) * 100) / 100}; }
-function refOf(d){ const iban = clean(d.me.iban); if (isQrIban(iban)) return ['QRR', qrrRef(d.nr)]; if (d.useRef) return ['SCOR', scorRef(d.nr)]; return ['NON', '']; }
+/* у счёта взноса номер вида 2027-M001; в номере-ссылке M становится 9, чтобы ссылки взносов не совпали со ссылками обычных счетов 2027-001 */
+function refOf(d){ const iban = clean(d.me.iban), nr = d.refNr || d.nr; if (isQrIban(iban)) return ['QRR', qrrRef(nr)]; if (d.useRef) return ['SCOR', scorRef(nr)]; return ['NON', '']; }
 function payload(d){
   const t = totals(d), [rt, rf] = refOf(d), m = d.me, c = d.cl, cut = (s, n) => String(s || '').trim().slice(0, n);
   const deb = c.name ? ['S', cut(c.name, 70), cut(c.street, 70), cut(c.no, 16), cut(c.plz, 16), cut(c.city, 35), c.country || 'CH'] : ['', '', '', '', '', '', ''];
   return ['SPC', '0200', '1', clean(m.iban), 'S', cut(m.name, 70), cut(m.street, 70), cut(m.no, 16), cut(m.plz, 16), cut(m.city, 35), 'CH', '', '', '', '', '', '', '', t.total > 0 ? t.total.toFixed(2) : '', 'CHF', ...deb, rt, rf, cut(d.msg, 140), 'EPD'].join('\n');
 }
 function qrMatrix(text){ if (!window.qrcode) return null; qrcode.stringToBytes = qrcode.stringToBytesFuncs['UTF-8']; const q = qrcode(0, 'M'); q.addData(text, 'Byte'); q.make(); const n = q.getModuleCount(), M = []; for (let r = 0; r < n; r++) { M.push([]); for (let k = 0; k < n; k++) M[r].push(q.isDark(r, k)); } return M; }
+
+/* ---------- взносы: помощники ---------- */
+const VL = d => VZ[d.lang] || VZ.de;
+const feeName = (f, lang) => f ? (f.n || (f.k ? (VZ[lang] || VZ.de).fees[f.k] : '') || '') : '';
+const feeOf = (v, m) => v.fees.find(f => f.id === +m.fee) || v.fees[0];
+const vzYear = v => +v.year || new Date().getFullYear();
+const vzTitle = d => String(d.vz.title || '').trim() || VL(d).t + ' ' + vzYear(d.vz);
+const mNr = (v, m) => vzYear(v) + '-M' + String(m.k).padStart(3, '0');
+const mAmt = (v, m) => { const f = feeOf(v, m); return f ? +f.a || 0 : 0; };
+const named = v => v.members.filter(m => String(m.name || '').trim());
+function vzPick(d){ const v = d.vz, all = named(v); if (v.who === 'open') return all.filter(m => !m.paid); if (v.who === 'one') return all.filter(m => String(m.k) === String(v.one)); return all; }
+const vzText = d => { const v = d.vz, due = dmy(addDays(d.date, +d.days)), own = String((v.remind ? v.rtext : v.text) || '').trim(); return own || (v.remind ? VL(d).rtext(due) : VL(d).text(due)); };
+function vzBill(d, m){
+  const v = d.vz, f = feeOf(v, m), a = f ? +f.a || 0 : 0, nr = mNr(v, m), title = vzTitle(d);
+  return {lang: d.lang, perf: d.perf, me: d.me, cl: {name: m.name, street: m.street, no: m.no, plz: m.plz, city: m.city, country: m.country || 'CH'}, nr, refNr: nr.replace('M', '9'), date: d.date, days: d.days, vat: 0, msg: title, useRef: d.useRef,
+    pos: [{d: title + (f && feeName(f, d.lang) ? ' – ' + feeName(f, d.lang) : ''), q: 1, p: a}], head: v.remind ? VL(d).rem + (d.lang === 'fr' ? ' : ' : ': ') + title : title, intro: vzText(d).split('\n'), simple: true};
+}
+const plural = (n, a, b, c) => { const m10 = n % 10, m100 = n % 100; return n + ' ' + (m10 === 1 && m100 !== 11 ? a : m10 >= 2 && m10 <= 4 && (m100 < 12 || m100 > 14) ? b : c); };
 
 /* ---------- лист: счёт сверху, QR-квитанция внизу (105 мм) ---------- */
 function sheet(d){
@@ -214,22 +270,35 @@ function sheet(d){
   let yc = 50;
   [c.name, [c.street, c.no].filter(Boolean).join(' '), [c.country && c.country !== 'CH' ? c.country + '-' : '', c.plz, ' ', c.city].join('').trim()].filter(s => s && s.trim()).forEach((s, i) => { tx(s, 118, yc, 10, i === 0); yc += 5; });
   // заголовок
-  y = 92; tx(L.inv + ' ' + (d.nr || ''), 20, y, 15, true);
-  y += 8; tx(L.date + ': ' + dmy(d.date), 20, y, 9, false); tx(L.due + ': ' + dmy(addDays(d.date, +d.days)), 80, y, 9, false);
+  y = 92;
+  if (d.head) {
+    // счёт взноса: заголовок, номер и даты одной строкой, короткое письмо (до 8 строк)
+    tx(d.head, 20, y, 14, true); y += 6.5;
+    tx(L.nr + ' ' + d.nr, 20, y, 9, false); tx(L.date + ': ' + dmy(d.date), 72, y, 9, false); tx(L.due + ': ' + dmy(addDays(d.date, +d.days)), 122, y, 9, false);
+    y += 9; let n = 0;
+    for (const par of d.intro) { if (n >= 8) break; const ls = par.trim() ? SH.wrap(par.trim(), false, 9, 165) : []; for (const l of ls) { if (n >= 8) break; tx(l, 20, y, 9, false); y += 4.2; n++; } if (ls.length) y += 0.9; }
+    y -= 8;
+  } else {
+    tx(L.inv + ' ' + (d.nr || ''), 20, y, 15, true);
+    y += 8; tx(L.date + ': ' + dmy(d.date), 20, y, 9, false); tx(L.due + ': ' + dmy(addDays(d.date, +d.days)), 80, y, 9, false);
+  }
   // позиции
   y += 10; P.line(20, y, 190, y, '#000000', 0.3); y += 5;
-  tx(L.pos, 20, y, 8.5, true); tx(L.qty, 130, y, 8.5, true, 'right'); tx(L.price, 160, y, 8.5, true, 'right'); tx(L.total, 190, y, 8.5, true, 'right');
+  if (d.simple) { tx(L.pos, 20, y, 8.5, true); tx(L.amt + ' CHF', 190, y, 8.5, true, 'right'); }
+  else { tx(L.pos, 20, y, 8.5, true); tx(L.qty, 130, y, 8.5, true, 'right'); tx(L.price, 160, y, 8.5, true, 'right'); tx(L.total, 190, y, 8.5, true, 'right'); }
   y += 3; P.line(20, y, 190, y, '#000000', 0.2); y += 5.5;
   d.pos.filter(p => p.d || +p.p).slice(0, 12).forEach(p => {
-    const lines = SH.wrap(p.d || '', false, 9, 95);
+    const lines = SH.wrap(p.d || '', false, 9, d.simple ? 125 : 95);
     lines.forEach((l, i) => tx(l, 20, y + i * 4.2, 9, false));
-    tx(String(+p.q || 0), 130, y, 9, false, 'right'); tx(money(+p.p || 0), 160, y, 9, false, 'right'); tx(money((+p.q || 0) * (+p.p || 0)), 190, y, 9, false, 'right');
+    if (d.simple) tx(+p.p > 0 ? money(+p.p) : VZ[d.lang].free, 190, y, 9, false, 'right');
+    else { tx(String(+p.q || 0), 130, y, 9, false, 'right'); tx(money(+p.p || 0), 160, y, 9, false, 'right'); tx(money((+p.q || 0) * (+p.p || 0)), 190, y, 9, false, 'right'); }
     y += Math.max(1, lines.length) * 4.2 + 2;
   });
   P.line(120, y, 190, y, '#000000', 0.2); y += 5;
   if (d.vat) { tx(L.sub, 160, y, 9, false, 'right'); tx(money(t.sub), 190, y, 9, false, 'right'); y += 5; tx(L.vat + ' ' + String(d.vat).replace('.', ',') + ' %', 160, y, 9, false, 'right'); tx(money(t.vat), 190, y, 9, false, 'right'); y += 5; }
-  tx(L.sum, 160, y, 10, true, 'right'); tx(money(t.total), 190, y, 10, true, 'right'); y += 10;
-  tx(L.terms(d.days), 20, Math.min(y, 180), 9, false);
+  if (!(d.simple && !(t.total > 0))) { tx(L.sum, 160, y, 10, true, 'right'); tx(money(t.total), 190, y, 10, true, 'right'); }
+  y += 10;
+  if (!d.head) tx(L.terms(d.days), 20, Math.min(y, 180), 9, false);
   // ---- платёжная часть ----
   const Y = 192;
   if (!d.perf) { P.line(0, Y, 210, Y, '#000000', 0.2, true); P.line(62, Y, 62, 297, '#000000', 0.2, true); tx(L.sep, 105, Y - 1.5, 6.5, false, 'center'); }
@@ -262,73 +331,237 @@ function sheet(d){
   return P;
 }
 function cornerBox(P, x, y, w, h){ const k = 3, col = '#000000', lw = 0.3; [[x, y, x + k, y], [x, y, x, y + k], [x + w, y, x + w - k, y], [x + w, y, x + w, y + k], [x, y + h, x + k, y + h], [x, y + h, x, y + h - k], [x + w, y + h, x + w - k, y + h], [x + w, y + h, x + w, y + h - k]].forEach(l => P.line(l[0], l[1], l[2], l[3], col, lw)); }
-function build(){ return [sheet(D())]; }
+
+/* ---------- список для кассира: все члены, номер, номер-ссылка, взнос, кто оплатил, итоги ---------- */
+function vzList(d){
+  const v = d.vz, L = LBL[d.lang], L2 = VL(d), ms = named(v), title = vzTitle(d), ink = '#000000', mut = '#555555', H = 'h', out = [];
+  const tot = {all: 0, paid: 0, open: 0, np: 0, no: 0};
+  ms.forEach(m => { const a = mAmt(v, m); tot.all += a; if (m.paid) { tot.paid += a; tot.np++; } else { tot.open += a; tot.no++; } });
+  const per = 21;
+  let P, tx, y;
+  const start = () => {
+    P = SH.page(210, 297, SH.pal(false)); tx = (s, x, yy, size, b, align, col) => P.text(s, x, yy, size, b, col || ink, align, H); out.push(P);
+    tx(L2.list + ' – ' + title, 20, 20, 14, true);
+    tx([d.me.name, L2.asOf + ' ' + dmy(TODAY)].filter(Boolean).join(' · '), 20, 26.5, 9, false, 'left', mut);
+    y = 37; P.line(20, y, 190, y, ink, 0.3); y += 4.6;
+    tx('Nr.', 20, y, 8, true); tx(L2.mem, 44, y, 8, true); tx(L2.fee, 112, y, 8, true); tx(L.amt + ' CHF', 164, y, 8, true, 'right'); tx(L2.paidOn, 168, y, 8, true);
+    y += 2.6; P.line(20, y, 190, y, ink, 0.2); y += 5;
+  };
+  start();
+  ms.forEach((m, i) => {
+    if (i && i % per === 0) start();
+    const f = feeOf(v, m), a = +f.a || 0, dd = vzBill(d, m), [rt, rf] = refOf(dd);
+    tx(mNr(v, m), 20, y, 8.5, false); tx(SH.wrap(m.name, true, 8.5, 64)[0] || '', 44, y, 8.5, true);
+    tx(SH.wrap(feeName(f, d.lang), false, 8, 48)[0] || '', 112, y, 8, false); tx(a > 0 ? money(a) : '—', 164, y, 8.5, false, 'right');
+    if (m.paid) tx(dmy(m.paid), 168, y, 8.5, false); else P.rect(168, y - 3, 3.4, 3.4, null, ink, 0);
+    tx(rf ? L.ref + ' ' + fmtRef(rt, rf) : [[m.street, m.no].filter(Boolean).join(' '), [m.plz, m.city].filter(Boolean).join(' ')].filter(Boolean).join(', '), 44, y + 3.6, 6.5, false, 'left', mut);
+    y += 6; P.line(20, y, 190, y, '#BBBBBB', 0.15); y += 4.4;
+  });
+  if (y > 250) start();
+  y += 3; P.line(20, y, 190, y, ink, 0.3); y += 6;
+  const row = (a, b) => { tx(a, 20, y, 9.5, true); tx(b, 190, y, 9.5, false, 'right'); y += 5.5; };
+  row(L2.count, String(ms.length));
+  row(L.total, money(tot.all) + ' CHF');
+  row(L2.paid + ' (' + tot.np + ')', money(tot.paid) + ' CHF');
+  row(L2.open + ' (' + tot.no + ')', money(tot.open) + ' CHF');
+  if (out.length > 1) out.forEach((pg, i) => pg.text((i + 1) + ' / ' + out.length, 190, 26.5, 8, false, mut, 'right', H));
+  return out;
+}
+
+/* ---------- что попадает в PDF и в предпросмотр ---------- */
+function vzPages(d, lim){ const v = d.vz, out = []; if (v.bills) vzPick(d).slice(0, lim).forEach(m => out.push(sheet(vzBill(d, m)))); if (v.list && named(v).length) out.push(...vzList(d)); return out; }
+function build(){ const d = D(); return d.mode === 'verein' ? vzPages(d, Infinity) : [sheet(d)]; }
+/* предпросмотр взносов: первые три счёта и первая страница списка, в PDF — все (тяжёлый список не рисуем целиком при каждом вводе) */
+function preview(){
+  const d = D(), note = $('vzNote');
+  if (d.mode !== 'verein') { note.hidden = true; return [sheet(d)]; }
+  const v = d.vz, pick = v.bills ? vzPick(d) : [], nb = pick.length, show = Math.min(nb, 3), out = [];
+  pick.slice(0, show).forEach((m, i) => { const p = sheet(vzBill(d, m)); p.ix = i; out.push(p); });
+  let lp = []; if (v.list && named(v).length) { lp = vzList(d); lp[0].ix = nb; out.push(lp[0]); }
+  const parts = []; if (nb) parts.push(plural(nb, 'счёт', 'счёта', 'счетов') + (v.remind ? ' (напоминания)' : '')); if (lp.length) parts.push('список для кассира' + (lp.length > 1 ? ' (' + plural(lp.length, 'страница', 'страницы', 'страниц') + ')' : ''));
+  note.hidden = false;
+  note.innerHTML = !named(v).length ? 'Добавь членов ферайна — тогда здесь появятся их счета.' : !parts.length ? 'Отметь, что должно быть в PDF: счета членам или список для кассира.' : '<b>В PDF: ' + parts.join(' и ') + '.</b>' + (nb > show || lp.length > 1 ? ' Здесь показаны ' + (show ? 'первые ' + plural(show, 'счёт', 'счёта', 'счетов') : '') + (show && lp.length ? ' и ' : '') + (lp.length ? 'первая страница списка' : '') + ', в PDF будет всё.' : '');
+  return out;
+}
 
 /* ---------- форма ---------- */
 const $ = id => document.getElementById(id);
 const esc = s => SH.esc(String(s == null ? '' : s));
-const inp = (path, label, val, help, attrs) => `<div class="fl"><span class="lb">${label}${help ? `<button type="button" class="qh" data-help="${help}" aria-label="Подсказка" aria-expanded="false">?</button>` : ''}</span><input type="text" data-k="${path}" value="${esc(val)}" ${attrs || ''} ${EX ? 'disabled' : ''}></div>`;
+const qb = (k, t) => `<button type="button" class="qh" data-help="${k}" aria-label="Подсказка${t ? ': ' + t : ''}" aria-expanded="false">?</button>`;
+const inp = (path, label, val, help, attrs) => `<div class="fl"><span class="lb">${label}${help ? qb(help) : ''}</span><input type="text" data-k="${path}" value="${esc(val)}" ${attrs || ''} ${EX ? 'disabled' : ''}></div>`;
+const ibanMsg = ib => !ib ? '' : ibanOk(ib) ? `<p class="chk-ok">IBAN в порядке${isQrIban(ib) ? ' — это QR-IBAN, в счёте будет QR-Referenz' : ''}.</p>` : '<p class="chk-err">Проверь IBAN: CH и 19 знаков, без ошибок.</p>';
+const cyrNote = data => /[Ѐ-ӿ]/.test(JSON.stringify(data)) ? '<p class="chk-err" style="margin:0 0 10px">В счёте и QR-коде можно только латинские буквы: напиши имена, адреса и услуги латиницей (Olena, Zürich, Coaching).</p>' : '';
+const COUNTRIES = ['CH', 'LI', 'DE', 'FR', 'IT', 'AT'];
 function renderForm(){
+  if (D().mode === 'verein') return renderVz();
   const d = D(), m = d.me, c = d.cl, ib = clean(m.iban);
-  const ibMsg = !ib ? '' : ibanOk(ib) ? `<p class="chk-ok">IBAN в порядке${isQrIban(ib) ? ' — это QR-IBAN, в счёте будет QR-Referenz' : ''}.</p>` : '<p class="chk-err">Проверь IBAN: CH и 19 знаков, без ошибок.</p>';
-  const cyr = /[\u0400-\u04FF]/.test(JSON.stringify([m, c, d.msg, d.pos]));
-  $('fields').innerHTML = (cyr ? '<p class="chk-err" style="margin:0 0 10px">В счёте и QR-коде можно только латинские буквы: напиши имена, адреса и услуги латиницей (Olena, Zürich, Coaching).</p>' : '') + `
+  $('fields').innerHTML = cyrNote([m, c, d.msg, d.pos]) + `
   <section class="sec"><h2>Я — кто выставляет счёт</h2><div class="g2">
     ${inp('me.name', 'Имя и фамилия или фирма', m.name)}${inp('me.street', 'Улица', m.street)}${inp('me.no', 'Номер дома', m.no)}${inp('me.plz', 'Индекс', m.plz, '', 'inputmode="numeric"')}${inp('me.city', 'Город', m.city)}${inp('me.tel', 'Телефон', m.tel)}${inp('me.mail', 'E-mail', m.mail)}${inp('me.mwst', 'Номер НДС (если есть)', m.mwst, 'mwst')}
-  </div>${inp('me.iban', 'IBAN', m.iban, 'iban')}${ibMsg}</section>
+  </div>${inp('me.iban', 'IBAN', m.iban, 'iban')}${ibanMsg(ib)}</section>
   <section class="sec"><h2>Клиент</h2><div class="g2">
     ${inp('cl.name', 'Имя и фамилия или фирма', c.name)}${inp('cl.street', 'Улица', c.street)}${inp('cl.no', 'Номер дома', c.no)}${inp('cl.plz', 'Индекс', c.plz, '', 'inputmode="numeric"')}${inp('cl.city', 'Город', c.city)}
-    <div class="fl"><span class="lb">Страна</span><select data-k="cl.country" ${EX ? 'disabled' : ''}>${['CH', 'LI', 'DE', 'FR', 'IT', 'AT'].map(x => `<option${x === c.country ? ' selected' : ''}>${x}</option>`).join('')}</select></div>
+    <div class="fl"><span class="lb">Страна</span><select data-k="cl.country" ${EX ? 'disabled' : ''}>${COUNTRIES.map(x => `<option${x === c.country ? ' selected' : ''}>${x}</option>`).join('')}</select></div>
   </div></section>
   <section class="sec"><h2>Счёт</h2><div class="g2">
     ${inp('nr', 'Номер счёта', d.nr, 'nr')}
     <div class="fl"><span class="lb">Дата</span><input type="date" data-k="date" value="${esc(d.date)}" ${EX ? 'disabled' : ''}></div>
     <div class="fl"><span class="lb">Срок оплаты</span><select data-k="days" ${EX ? 'disabled' : ''}>${[10, 14, 20, 30, 45, 60].map(x => `<option value="${x}"${x === +d.days ? ' selected' : ''}>${x} дней</option>`).join('')}</select></div>
-    <div class="fl"><span class="lb">НДС<button type="button" class="qh" data-help="mwst" aria-label="Подсказка" aria-expanded="false">?</button></span><select data-k="vat" ${EX ? 'disabled' : ''}>${[[0, 'без НДС'], [8.1, '8,1 % — обычная ставка'], [2.6, '2,6 % — пониженная'], [3.8, '3,8 % — проживание']].map(([v, t]) => `<option value="${v}"${v === +d.vat ? ' selected' : ''}>${t}</option>`).join('')}</select></div>
+    <div class="fl"><span class="lb">НДС${qb('mwst')}</span><select data-k="vat" ${EX ? 'disabled' : ''}>${[[0, 'без НДС'], [8.1, '8,1 % — обычная ставка'], [2.6, '2,6 % — пониженная'], [3.8, '3,8 % — проживание']].map(([v, t]) => `<option value="${v}"${v === +d.vat ? ' selected' : ''}>${t}</option>`).join('')}</select></div>
   </div>
   ${inp('msg', 'Текст в квитанции', d.msg, 'msg', 'maxlength="140"')}
-  <label class="tog"><input type="checkbox" data-k="useRef" ${d.useRef ? 'checked' : ''} ${EX ? 'disabled' : ''}> Номер-ссылка в QR-коде<button type="button" class="qh" data-help="ref" aria-label="Подсказка" aria-expanded="false">?</button></label>
+  <label class="tog"><input type="checkbox" data-k="useRef" ${d.useRef ? 'checked' : ''} ${EX ? 'disabled' : ''}> Номер-ссылка в QR-коде${qb('ref')}</label>
   </section>
   <section class="sec"><h2>Услуги и товары</h2>
     <div class="pos" style="font-size:.82rem;color:var(--muted)"><span>Что</span><span>Кол-во</span><span>Цена, CHF</span><span></span></div>
     ${d.pos.map((p, i) => `<div class="pos"><input type="text" data-pos="${i}" data-f="d" value="${esc(p.d)}" placeholder="например, Coaching 60 Min." ${EX ? 'disabled' : ''}><input type="number" min="0" step="0.25" data-pos="${i}" data-f="q" value="${esc(p.q)}" ${EX ? 'disabled' : ''}><input type="number" min="0" step="0.05" data-pos="${i}" data-f="p" value="${esc(p.p)}" ${EX ? 'disabled' : ''}><button type="button" class="del" data-del="${i}" aria-label="Удалить строку" ${EX ? 'disabled' : ''}>×</button></div>`).join('')}
     <button type="button" class="btn ghost sm" id="addPos" ${EX || d.pos.length >= 12 ? 'disabled' : ''}>+ строка</button>
     <p class="hint">Итого: <b>${money(totals(d).total)} CHF</b>${d.vat ? ` (в том числе НДС ${money(totals(d).vat)})` : ''}. Срок оплаты: ${dmy(addDays(d.date, +d.days))}.</p>
-  </section>`;
+  </section>` + wipeBox();
 }
+let openMem = null;
+const memSum = (d, x) => { const v = d.vz, f = feeOf(v, x), a = f ? +f.a || 0 : 0; return `<b>${esc(mNr(v, x))}</b> ${String(x.name || '').trim() ? esc(x.name) : '<i>без имени</i>'} <small>· ${esc(feeName(f, d.lang) || '—')} · ${a > 0 ? money(a) + ' CHF' : 'сумма на выбор'}${x.paid ? ' · оплачено ' + dmy(x.paid) : ''}</small>`; };
+function vzSumText(d){ const v = d.vz, ms = named(v); if (!ms.length) return 'Пока никого нет.'; let pa = 0, op = 0, np = 0; ms.forEach(m => { const a = mAmt(v, m); if (m.paid) { pa += a; np++; } else op += a; }); return `Оплатили <b>${np} из ${ms.length}</b> · получено <b>${money(pa)} CHF</b> · ждём <b>${money(op)} CHF</b>`; }
+function textLines(d){ let n = 0; vzText(d).split('\n').forEach(p => { n += p.trim() ? SH.wrap(p.trim(), false, 9, 165).length : 0; }); return n; }
+function renderVz(){
+  const d = D(), v = d.vz, m = d.me, ib = clean(m.iban), dis = EX ? 'disabled' : '', ms = named(v), open = ms.filter(x => !x.paid).length;
+  const feeOpts = sel => v.fees.map(f => `<option value="${f.id}"${f.id === +sel ? ' selected' : ''}>${esc(feeName(f, d.lang) || '—')} · ${+f.a > 0 ? money(+f.a) + ' CHF' : 'сумма на выбор'}</option>`).join('');
+  const minp = (i, f, label, val, attrs) => `<div class="fl"><span class="lb">${label}</span><input type="text" data-mem="${i}" data-f="${f}" value="${esc(val)}" ${attrs || ''} ${dis}></div>`;
+  const mems = v.members.map((x, i) => `<div class="mem${x.paid ? ' paid' : ''}"><label class="mpaid"><input type="checkbox" data-paid="${i}" ${x.paid ? 'checked' : ''} ${dis}><span>оплачено</span></label><details data-mk="${x.k}"${openMem === x.k ? ' open' : ''}><summary id="ms-${i}">${memSum(d, x)}</summary><div class="g2">
+    ${minp(i, 'name', 'Имя и фамилия', x.name)}${minp(i, 'street', 'Улица', x.street)}${minp(i, 'no', 'Номер дома', x.no)}${minp(i, 'plz', 'Индекс', x.plz, 'inputmode="numeric"')}${minp(i, 'city', 'Город', x.city)}
+    <div class="fl"><span class="lb">Страна</span><select data-mem="${i}" data-f="country" ${dis}>${COUNTRIES.map(c => `<option${c === (x.country || 'CH') ? ' selected' : ''}>${c}</option>`).join('')}</select></div>
+    <div class="fl"><span class="lb">Взнос</span><select data-mem="${i}" data-f="fee" ${dis}>${feeOpts(x.fee)}</select></div>
+    <div class="fl"><span class="lb">Оплачено${qb('vzPaid')}</span><input type="date" data-mem="${i}" data-f="paid" value="${esc(x.paid || '')}" ${dis}></div>
+  </div><button type="button" class="btn ghost sm" data-mdel="${i}" ${dis}>Удалить из списка</button></details></div>`).join('');
+  const tl = textLines(d), tKey = v.remind ? 'vz.rtext' : 'vz.text', due = dmy(addDays(d.date, +d.days));
+  $('fields').innerHTML = cyrNote([m, v.title, v.text, v.rtext, v.fees, v.members]) + `
+  <section class="sec"><h2>Ферайн — кто выставляет счёт${qb('vzName')}</h2><div class="g2">
+    ${inp('me.name', 'Название ферайна', m.name)}${inp('me.street', 'Улица', m.street)}${inp('me.no', 'Номер дома', m.no)}${inp('me.plz', 'Индекс', m.plz, '', 'inputmode="numeric"')}${inp('me.city', 'Город', m.city)}${inp('me.tel', 'Телефон кассира', m.tel)}${inp('me.mail', 'E-mail ферайна или кассира', m.mail)}
+  </div>${inp('me.iban', 'IBAN ферайна', m.iban, 'vzIban')}${ibanMsg(ib)}</section>
+  <section class="sec"><h2>Взнос</h2><div class="g2">
+    <div class="fl"><span class="lb">Год взносов${qb('vzYear')}</span><input type="number" min="2020" max="2099" step="1" data-k="vz.year" value="${esc(vzYear(v))}" ${dis}></div>
+    ${inp('vz.title', 'Заголовок счёта', v.title, 'vzTitle', `placeholder="${esc(VL(d).t + ' ' + vzYear(v))}" maxlength="60"`)}
+    <div class="fl"><span class="lb">Дата счёта</span><input type="date" data-k="date" value="${esc(d.date)}" ${dis}></div>
+    <div class="fl"><span class="lb">Срок оплаты</span><select data-k="days" ${dis}>${[10, 14, 20, 30, 45, 60, 90].map(x => `<option value="${x}"${x === +d.days ? ' selected' : ''}>${x} дней — до ${dmy(addDays(d.date, x))}</option>`).join('')}</select></div>
+  </div>
+  <div class="fl"><span class="lb">Виды взносов${qb('vzFees')}</span>
+    <div class="fees">${v.fees.map((f, i) => `<div class="fee"><input type="text" data-fee="${i}" data-f="n" value="${esc(feeName(f, d.lang))}" placeholder="например, Einzelmitglied" aria-label="Вид взноса" ${dis}><input type="number" min="0" step="1" data-fee="${i}" data-f="a" value="${esc(f.a)}" aria-label="Сумма, CHF" ${dis}><span>CHF</span><button type="button" class="del" data-fdel="${f.id}" aria-label="Удалить вид взноса" ${dis || v.fees.length < 2 ? 'disabled' : ''}>×</button></div>`).join('')}</div>
+    <button type="button" class="btn ghost sm" id="addFee" ${dis || v.fees.length >= 8 ? 'disabled' : ''}>+ вид взноса</button>
+  </div>
+  <div class="fl"><span class="lb">${v.remind ? 'Текст напоминания' : 'Текст письма'}${qb('vzText')}</span><textarea data-k="${tKey}" rows="6" maxlength="900" placeholder="${esc(v.remind ? VL(d).rtext(due) : VL(d).text(due))}" ${dis}>${esc(v.remind ? v.rtext : v.text)}</textarea>
+    <p class="hint" id="vzTl">${tl > 8 ? '<span class="chk-err">Текст длинный: в счёт войдут первые 8 строк.</span>' : 'Пусто — будет готовый текст на языке счёта (он виден серым).'}</p></div>
+  <label class="tog"><input type="checkbox" data-k="useRef" ${d.useRef ? 'checked' : ''} ${dis}> Номер-ссылка в QR-коде${qb('ref')}</label>
+  <p class="hint">НДС в счетах взносов нет: членские взносы по уставу им не облагаются.</p>
+  </section>
+  <section class="sec"><h2>Члены ферайна&nbsp;<span class="cnt">${ms.length}</span>${qb('vzMembers')}</h2>
+    <p class="hint" id="vzSum">${vzSumText(d)}</p>
+    <div class="mems">${mems || ''}</div>
+    <div class="acts"><button type="button" class="btn ghost sm" id="addMem" ${dis || v.members.length >= 500 ? 'disabled' : ''}>+ член ферайна</button></div>
+    <details class="paste"><summary>Вставить список из таблицы</summary>
+      <p class="hint" style="margin-top:8px">По одной строке на человека: имя; улица и номер; индекс и город; вид взноса.${qb('vzPaste')}</p>
+      <textarea id="vzPaste" rows="5" placeholder="Olena Kovalenko; Musterstrasse 12; 8000 Zürich; Familie" ${dis}></textarea>
+      <div class="acts"><button type="button" class="btn ghost sm" id="vzPasteGo" ${dis}>Добавить в список</button></div><p class="hint" id="vzPasteMsg"></p>
+    </details>
+  </section>
+  <section class="sec"><h2>Что будет в PDF</h2>
+    <label class="tog"><input type="checkbox" data-k="vz.bills" ${v.bills ? 'checked' : ''} ${dis}> Счета членам</label>
+    <div class="who"${v.bills ? '' : ' hidden'}>
+      <label class="tog"><input type="radio" name="vzwho" data-k="vz.who" value="all" ${v.who === 'all' ? 'checked' : ''} ${dis}> Всем: ${ms.length}</label>
+      <label class="tog"><input type="radio" name="vzwho" data-k="vz.who" value="open" ${v.who === 'open' ? 'checked' : ''} ${dis}> Только тем, кто ещё не оплатил: ${open}</label>
+      <label class="tog"><input type="radio" name="vzwho" data-k="vz.who" value="one" ${v.who === 'one' ? 'checked' : ''} ${dis}> Одному человеку</label>
+      ${v.who === 'one' ? `<select data-k="vz.one" aria-label="Кому" ${dis}><option value="">— выбери —</option>${ms.map(x => `<option value="${x.k}"${String(x.k) === String(v.one) ? ' selected' : ''}>${esc(mNr(v, x) + ' · ' + x.name)}</option>`).join('')}</select>` : ''}
+      <label class="tog"><input type="checkbox" data-k="vz.remind" ${v.remind ? 'checked' : ''} ${dis}> Напоминание об оплате вместо счёта${qb('vzRemind')}</label>
+    </div>
+    <label class="tog"><input type="checkbox" data-k="vz.list" ${v.list ? 'checked' : ''} ${dis}> Список для кассира${qb('vzList')}</label>
+    <div class="acts" id="vzNewBox"><button type="button" class="btn ghost sm" id="vzNew" ${dis}>Взносы следующего года</button>${qb('vzNew')}</div>
+  </section>` + wipeBox();
+}
+function wipeBox(){ return `<div class="acts" id="clearBox"><button type="button" class="btn ghost sm" id="wipeBtn" ${EX ? 'disabled' : ''}>Удалить историю</button></div>`; }
+function vzRefresh(){ const d = D(); d.vz.members.forEach((x, i) => { const s = $('ms-' + i); if (s) s.innerHTML = memSum(d, x); }); const su = $('vzSum'); if (su) su.innerHTML = vzSumText(d); const tl = $('vzTl'); if (tl) tl.innerHTML = textLines(d) > 8 ? '<span class="chk-err">Текст длинный: в счёт войдут первые 8 строк.</span>' : 'Пусто — будет готовый текст на языке счёта (он виден серым).'; }
 let UI, tmr;
-function fill(){ const d = D(); if (typeof qrState === 'function') qrState(); $('lang').value = d.lang; $('perf').checked = !!d.perf; renderForm(); $('exbar').hidden = !EX; $('exOn').hidden = !!EX; if (UI) UI.render(); }
+function fill(){ const d = D(); if (typeof qrState === 'function') qrState(); $('lang').value = d.lang; $('perf').checked = !!d.perf;
+  document.querySelectorAll('#modeSeg [data-mode]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.mode === (d.mode || 'client'))));
+  $('newInvFl').hidden = d.mode === 'verein';
+  renderForm(); $('exbar').hidden = !EX; $('exOn').hidden = !!EX; if (UI) UI.render(); }
 const setPath = (o, path, v) => { const k = path.split('.'); if (k.length === 2) o[k[0]][k[1]] = v; else o[k[0]] = v; };
 $('lang').addEventListener('change', e => { S.lang = e.target.value; if (EX) EX.lang = S.lang; save(); fill(); });
 $('perf').addEventListener('change', e => { S.perf = e.target.checked; if (EX) EX.perf = S.perf; save(); fill(); });
+$('modeSeg').addEventListener('click', e => { const b = e.target.closest('[data-mode]'); if (!b) return; S.mode = b.dataset.mode; save(); if (EX) EX = S.mode === 'verein' ? EXV() : EXD(); fill(); });
+window.addEventListener('hashchange', () => { if (/^#vznosy/.test(location.hash) && S.mode !== 'verein') { S.mode = 'verein'; save(); if (EX) EX = EXV(); fill(); } });
+const later = () => { clearTimeout(tmr); tmr = setTimeout(() => UI && UI.render(), 450); };
 document.addEventListener('input', e => {
   const t = e.target; if (EX) return;
-  if (t.dataset.k && t.type !== 'checkbox' && t.tagName !== 'SELECT') { setPath(S, t.dataset.k, t.value); save(); qrState(); clearTimeout(tmr); tmr = setTimeout(() => { if (t.dataset.k === 'me.iban') { const pos = t.selectionStart; renderForm(); const n = document.querySelector('[data-k="me.iban"]'); if (n) { n.focus(); try { n.setSelectionRange(pos, pos); } catch (x) {} } } UI && UI.render(); }, 450); }
-  if (t.dataset.pos) { S.pos[+t.dataset.pos][t.dataset.f] = t.dataset.f === 'd' ? t.value : +t.value; save(); clearTimeout(tmr); tmr = setTimeout(() => UI && UI.render(), 450); }
+  if (t.dataset.k && t.type !== 'checkbox' && t.type !== 'radio' && t.tagName !== 'SELECT') {
+    setPath(S, t.dataset.k, t.dataset.k === 'vz.year' ? (+t.value || '') : t.value); save(); qrState(); if (t.dataset.k.startsWith('vz.') || S.mode === 'verein') vzRefresh();
+    clearTimeout(tmr); tmr = setTimeout(() => { if (t.dataset.k === 'me.iban') { const pos = t.selectionStart; renderForm(); const n = document.querySelector('[data-k="me.iban"]'); if (n) { n.focus(); try { n.setSelectionRange(pos, pos); } catch (x) {} } } UI && UI.render(); }, 450); }
+  if (t.dataset.pos) { S.pos[+t.dataset.pos][t.dataset.f] = t.dataset.f === 'd' ? t.value : +t.value; save(); later(); }
+  if (t.dataset.fee && t.tagName === 'INPUT') { const f = S.vz.fees[+t.dataset.fee]; if (f) { if (t.dataset.f === 'a') f.a = Math.max(0, +t.value || 0); else { f.n = t.value; if (!t.value.trim()) f.k = ''; } save(); vzRefresh(); later(); } }
+  if (t.dataset.mem && t.tagName === 'INPUT' && t.type === 'text') { const x = S.vz.members[+t.dataset.mem]; if (x) { x[t.dataset.f] = t.value; save(); vzRefresh(); later(); } }
 });
 document.addEventListener('change', e => {
   const t = e.target; if (EX || !t.dataset) return;
-  if (t.dataset.k && (t.tagName === 'SELECT' || t.type === 'checkbox' || t.type === 'date')) { setPath(S, t.dataset.k, t.type === 'checkbox' ? t.checked : (t.dataset.k === 'days' || t.dataset.k === 'vat') ? +t.value : t.value); save(); fill(); }
+  if (t.dataset.k && (t.tagName === 'SELECT' || t.type === 'checkbox' || t.type === 'radio' || t.type === 'date')) {
+    const k = t.dataset.k; setPath(S, k, t.type === 'checkbox' ? t.checked : (k === 'days' || k === 'vat') ? +t.value : t.value);
+    if (k === 'vz.remind' && t.checked && S.vz.who === 'all') S.vz.who = 'open';
+    if (k === 'vz.who' && t.value === 'one' && !S.vz.one) { const f = named(S.vz)[0]; if (f) S.vz.one = String(f.k); }
+    save(); fill(); }
   if (t.dataset.pos) fill();
+  if (t.dataset.mem && (t.tagName === 'SELECT' || t.type === 'date')) { const x = S.vz.members[+t.dataset.mem]; if (x) { x[t.dataset.f] = t.dataset.f === 'fee' ? +t.value : t.value; save(); fill(); } }
+  if (t.dataset.paid) { const x = S.vz.members[+t.dataset.paid]; if (x) { x.paid = t.checked ? (x.paid || TODAY) : ''; save(); fill(); } }
 });
+document.addEventListener('toggle', e => { const dt = e.target; if (dt.dataset && dt.dataset.mk) { const k = +dt.dataset.mk; if (dt.open) openMem = k; else if (openMem === k) openMem = null; } }, true);
+const nextK = () => Math.max(+S.vz.seq || 0, 0, ...S.vz.members.map(x => +x.k || 0)) + 1;
+/* разбор строк из таблицы: имя; улица и номер; индекс и город; вид взноса (столбцы через Tab или «;») */
+function parseLine(line, v, lang){
+  const c = line.split(/\t|;/).map(s => s.trim()); if (!c[0] || /^(name|vorname|nom|nome|имя|ім'я)$/i.test(c[0])) return null;
+  const x = {name: c[0], street: '', no: '', plz: '', city: '', country: 'CH', fee: v.fees[0] ? v.fees[0].id : 1, paid: ''}; let rest = c.slice(1).filter(Boolean);
+  if (rest.length) { const last = rest[rest.length - 1].toLowerCase(), f = v.fees.find(f => feeName(f, lang).toLowerCase() === last); if (f) { x.fee = f.id; rest.pop(); } }
+  const pi = rest.findIndex(s => /^\d{4,5}(\s|$)/.test(s));
+  if (pi >= 0) { const mm = rest[pi].match(/^(\d{4,5})\s*(.*)$/); x.plz = mm[1]; x.city = mm[2] || (rest[pi + 1] || ''); }
+  const sc = pi >= 0 ? rest.slice(0, pi) : rest.slice(0, 1);
+  if (sc.length >= 2 && /^\d+\s*[a-zA-Z]?$/.test(sc[1])) { x.street = sc[0]; x.no = sc[1].replace(/\s+/g, ''); }
+  else if (sc.length) { const mm = sc[0].match(/^(.*?)\s+(\d+\s*[a-zA-Z]?)$/); if (mm) { x.street = mm[1]; x.no = mm[2].replace(/\s+/g, ''); } else x.street = sc[0]; }
+  return x;
+}
 document.addEventListener('click', e => {
-  if (EX) return;
-  if (e.target.id === 'addPos') { S.pos.push({d: '', q: 1, p: 0}); save(); fill(); }
-  const del = e.target.closest && e.target.closest('[data-del]'); if (del) { S.pos.splice(+del.dataset.del, 1); if (!S.pos.length) S.pos.push({d: '', q: 1, p: 0}); save(); fill(); }
+  const t = e.target; if (EX) return;
+  if (t.id === 'addPos') { S.pos.push({d: '', q: 1, p: 0}); save(); fill(); }
+  const del = t.closest && t.closest('[data-del]'); if (del) { S.pos.splice(+del.dataset.del, 1); if (!S.pos.length) S.pos.push({d: '', q: 1, p: 0}); save(); fill(); }
+  if (t.id === 'addFee') { S.vz.fseq = Math.max(+S.vz.fseq || 0, ...S.vz.fees.map(f => +f.id || 0)) + 1; S.vz.fees.push({id: S.vz.fseq, k: '', n: '', a: 0}); save(); fill(); }
+  const fd = t.closest && t.closest('[data-fdel]'); if (fd && S.vz.fees.length > 1) { const id = +fd.dataset.fdel; S.vz.fees = S.vz.fees.filter(f => f.id !== id); S.vz.members.forEach(x => { if (+x.fee === id) x.fee = S.vz.fees[0].id; }); save(); fill(); }
+  if (t.id === 'addMem') { S.vz.seq = nextK(); S.vz.members.push({k: S.vz.seq, name: '', street: '', no: '', plz: '', city: '', country: 'CH', fee: S.vz.fees[0] ? S.vz.fees[0].id : 1, paid: ''}); openMem = S.vz.seq; save(); fill(); const n = document.querySelector(`details[data-mk="${S.vz.seq}"] input`); if (n) n.focus(); }
+  const md = t.closest && t.closest('[data-mdel]'); if (md) { S.vz.members.splice(+md.dataset.mdel, 1); save(); fill(); }
+  if (t.id === 'vzPasteGo') { const ta = $('vzPaste'), lines = String(ta.value || '').split(/\r?\n/).map(s => s.trim()).filter(Boolean); let n = 0;
+    lines.forEach(l => { if (S.vz.members.length >= 500) return; const x = parseLine(l, S.vz, S.lang); if (x) { S.vz.seq = nextK(); x.k = S.vz.seq; S.vz.members.push(x); n++; } });
+    save(); fill(); const msg = $('vzPasteMsg'); if (msg) msg.textContent = n ? 'Добавлено: ' + plural(n, 'человек', 'человека', 'человек') + '. Проверь адреса в списке.' : 'Не нашла строк с именем. Имя должно быть в первом столбце.'; const p = document.querySelector('details.paste'); if (p && n) p.open = true; }
+  if (t.id === 'vzNew') $('vzNewBox').innerHTML = `<span class="confirm">Начать взносы ${vzYear(S.vz) + 1} года? Отметки об оплате снимутся, члены и виды взносов останутся.<button type="button" class="btn sm" id="vzNewYes">Да, ${vzYear(S.vz) + 1} год</button><button type="button" class="btn ghost sm" id="vzNewNo">Отмена</button></span>`;
+  if (t.id === 'vzNewNo') fill();
+  if (t.id === 'vzNewYes') { const y = vzYear(S.vz); S.vz.year = y + 1; if (S.vz.title) S.vz.title = S.vz.title.replace(String(y), String(y + 1)); S.vz.members.forEach(x => { x.paid = ''; }); S.vz.remind = false; S.vz.who = 'all'; S.date = TODAY; save(); fill(); UI && UI.say('Готово: взносы ' + (y + 1) + ' года, отметки об оплате сняты.'); }
+  if (t.id === 'wipeBtn') $('clearBox').innerHTML = '<span class="confirm">Удалить с этого устройства все данные этого инструмента: твои данные, IBAN, клиентов, членов ферайна и отметки об оплате? Вернуть их можно будет только из резервной копии.<button type="button" class="btn sm" id="wipeYes">Да, удалить историю</button><button type="button" class="btn ghost sm" id="wipeNo">Отмена</button></span>';
+  if (t.id === 'wipeNo') fill();
+  if (t.id === 'wipeYes') { const mode = S.mode; try { localStorage.removeItem(KEY); } catch (err) {} S = blank(); S.mode = mode; openMem = null; fill(); UI && UI.say('История удалена. В браузере больше нет данных этого инструмента.'); }
 });
 $('newInv').addEventListener('click', () => { if (EX) return; const m = String(S.nr).match(/^(.*?)(\d+)$/); S.nr = m ? m[1] + String(+m[2] + 1).padStart(m[2].length, '0') : S.nr + '-2'; S.pos = [{d: '', q: 1, p: 0}]; S.date = TODAY; S.msg = ''; save(); fill(); });
-const EXD = () => ({lang: 'de', perf: false, me: {name: 'Olena Kovalenko', street: 'Musterstrasse', no: '12', plz: '8000', city: 'Zürich', tel: '079 123 45 67', mail: 'olena.k@example.ch', iban: 'CH93 0076 2011 6238 5295 7', mwst: ''}, cl: {name: 'Anna Müller', street: 'Bahnhofstrasse', no: '5', plz: '8001', city: 'Zürich', country: 'CH'}, nr: '2026-014', date: TODAY, days: 30, vat: 0, msg: 'Rechnung 2026-014, Coaching Oktober', useRef: true, pos: [{d: 'Coaching-Sitzung 60 Min.', q: 4, p: 150}, {d: 'Zusammenfassung und Übungen (PDF)', q: 1, p: 40}]});
-$('exOn').addEventListener('click', () => { EX = EXD(); fill(); window.scrollTo({top: $('exbar').offsetTop - 12, behavior: 'smooth'}); });
+const EXD = () => ({mode: 'client', lang: 'de', perf: false, me: {name: 'Olena Kovalenko', street: 'Musterstrasse', no: '12', plz: '8000', city: 'Zürich', tel: '079 123 45 67', mail: 'olena.k@example.ch', iban: 'CH93 0076 2011 6238 5295 7', mwst: ''}, cl: {name: 'Anna Müller', street: 'Bahnhofstrasse', no: '5', plz: '8001', city: 'Zürich', country: 'CH'}, nr: '2026-014', date: TODAY, days: 30, vat: 0, msg: 'Rechnung 2026-014, Coaching Oktober', useRef: true, pos: [{d: 'Coaching-Sitzung 60 Min.', q: 4, p: 150}, {d: 'Zusammenfassung und Übungen (PDF)', q: 1, p: 40}], vz: vzBlank()});
+/* пример взносов: ферайн и члены вымышленные */
+const EXV = () => { const lang = S.lang || 'de', mk = (k, name, street, no, plz, city, fee, paid) => ({k, name, street, no, plz, city, country: 'CH', fee, paid: paid ? addDays(TODAY, -paid) : ''});
+  return Object.assign(EXD(), {mode: 'verein', lang, me: {name: 'Verein Musterkultur Zürich', street: 'Musterstrasse', no: '1', plz: '8000', city: 'Zürich', tel: '', mail: 'kasse@musterkultur.ch', iban: 'CH93 0076 2011 6238 5295 7', mwst: ''}, nr: '', msg: '', pos: [],
+    vz: Object.assign(vzBlank(), {fees: [{id: 1, k: 'single', n: '', a: 50}, {id: 2, k: 'family', n: '', a: 80}, {id: 3, k: 'youth', n: '', a: 20}, {id: 4, k: '', n: 'Gönner', a: 0}], fseq: 4, seq: 6,
+      members: [mk(1, 'Olena Kovalenko', 'Bahnhofstrasse', '5', '8001', 'Zürich', 1, 12), mk(2, 'Familie Petrenko', 'Seestrasse', '48', '8800', 'Thalwil', 2, 0), mk(3, 'Anna Müller', 'Dorfstrasse', '3', '8302', 'Kloten', 1, 6), mk(4, 'Maksym Bondar', 'Hauptstrasse', '17', '8400', 'Winterthur', 3, 0), mk(5, 'Natalia Schmid', 'Rosenweg', '9', '8610', 'Uster', 4, 0), mk(6, 'Familie Weber-Ivanenko', 'Gartenstrasse', '21', '8152', 'Glattbrugg', 2, 3)]})}); };
+const exNow = () => S.mode === 'verein' ? EXV() : EXD();
+$('exOn').addEventListener('click', () => { EX = exNow(); fill(); window.scrollTo({top: $('exbar').offsetTop - 12, behavior: 'smooth'}); });
 $('exOff').addEventListener('click', () => { EX = null; fill(); });
-if (/[?&]example\b/.test(location.search)) EX = EXD();
+if (/[?&]vznosy\b/.test(location.search)) S.mode = 'verein';
+if (/[?&]example\b/.test(location.search)) { const lg = (location.search.match(/[?&]lang=(de|fr|it|en)\b/) || [])[1]; if (lg) S.lang = lg; EX = exNow(); if (/[?&]remind\b/.test(location.search) && EX.vz) { EX.vz.remind = true; EX.vz.who = 'open'; } }
 
 /* проверка QR-кода в банковском приложении (просьба Ирины 08.10.2026): отметка действует, пока не поменялись IBAN, имя и адрес */
 const qrSig = d => clean(d.me.iban) + '|' + [d.me.name, d.me.street, d.me.no, d.me.plz, d.me.city].join('|');
 function qrState(){ const d = D(), ok = !EX && S.qrok === qrSig(d) && !!clean(d.me.iban); $('qrok').checked = ok; $('qrok').disabled = !!EX; $('qrcheck').classList.toggle('ok', ok);
   $('qrst').textContent = EX ? 'В примере проверка не нужна.' : ok ? 'Проверено для этого IBAN, имени и адреса. Если что-то из этого поменяешь, проверь снова.' : S.qrok ? 'Ты поменяла IBAN, имя или адрес — проверь QR-код ещё раз.' : 'Ещё не проверено.'; }
 $('qrok').addEventListener('change', e => { S.qrok = e.target.checked ? qrSig(S) : ''; save(); qrState(); });
-$('pdf').addEventListener('click', () => { if (!EX && S.qrok !== qrSig(S)) { $('qrcheck').classList.add('warn'); setTimeout(() => { const st = $('status'); if (st) st.textContent = 'PDF скачан. Перед отправкой клиенту отсканируй QR-код своим банковским приложением и сверь данные — шаги в жёлтом блоке.'; }, 1500); } });
-UI = SH.mount({build, lang: () => D().lang, title: 'Счёт с QR-кодом', name: () => 'Rechnung-' + String(D().nr || '').replace(/[^\w-]/g, '')});
+$('pdf').addEventListener('click', () => { if (!EX && S.qrok !== qrSig(S)) { $('qrcheck').classList.add('warn'); setTimeout(() => { const st = $('status'); if (st) st.textContent = 'PDF скачан. Перед отправкой отсканируй QR-код своим банковским приложением и сверь данные — шаги в жёлтом блоке.'; }, 1500); } });
+const fileName = () => { const d = D(); if (d.mode !== 'verein') return 'Rechnung-' + String(d.nr || '').replace(/[^\w-]/g, ''); const v = d.vz, one = v.bills && v.who === 'one' ? named(v).find(x => String(x.k) === String(v.one)) : null; return VL(d).file + '-' + vzYear(v) + (v.remind && v.bills ? '-' + VL(d).rem.replace(/\s+/g, '-') : '') + (one ? '-' + mNr(v, one) : ''); };
+UI = SH.mount({build, preview, lang: () => D().lang, title: 'Счёт с QR-кодом', name: () => fileName().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^\w-]/g, '')});
 fill();
 
 </script>

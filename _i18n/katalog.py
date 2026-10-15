@@ -119,18 +119,20 @@ for key, name, lead, slugs in CATS:
 
 chips = '<button type="button" class="on" data-f="">Все</button>' + ''.join(f'<button type="button" data-f="{k}">{n}</button>' for k, n in KINDS)
 ntools = len(TOOL)
+# числа со словом по-русски: 141 файл, 142 файла, 145 файлов (15.10.2026)
+pl = lambda n, a, b, c: f'{n} ' + (a if n % 10 == 1 and n % 100 != 11 else b if 2 <= n % 10 <= 4 and not 12 <= n % 100 <= 14 else c)
 
 # --- шапка и подвал как на вкладке «Полезные инструменты»
 src = re.sub(r'<!--i18n-->.*?<!--i18n-->', '', ih, flags=re.S)
 TITLE = 'Все бесплатные файлы и инструменты по темам: письма, договоры, схемы, расчёты · Свои люди'
-DESC = (f'Полный список: {ntools} бесплатных инструментов svoiludi.ch и {nfiles} файлов и листов, которые они делают — письма управляющей и продавцу, '
+DESC = (f'Полный список: {pl(ntools, 'бесплатный инструмент', 'бесплатных инструмента', 'бесплатных инструментов')} svoiludi.ch и {pl(nfiles, 'файл и лист', 'файла и листа', 'файлов и листов')}, которые они делают — письма управляющей и продавцу, '
         'образцы договоров, протоколы, схемы, расчёты, карточки и планеры. По темам, с поиском по слову и ссылками. PDF бесплатно.')
 head = src[:src.index('</head>')]
 head = re.sub(r'<title>.*?</title>', f'<title>{html.escape(TITLE)}</title>', head)
 head = re.sub(r'<link rel="canonical" href="[^"]*">', f'<link rel="canonical" href="{URL}">', head)
 head = re.sub(r'<meta name="description" content="[^"]*">', f'<meta name="description" content="{html.escape(DESC)}">', head)
 head = re.sub(r'<meta property="og:title" content="[^"]*">', '<meta property="og:title" content="Все бесплатные файлы и инструменты по темам">', head)
-head = re.sub(r'<meta property="og:description" content="[^"]*">', f'<meta property="og:description" content="{ntools} инструментов и {nfiles} файлов: письма, договоры, схемы, расчёты и распечатки. По темам, с поиском.">', head)
+head = re.sub(r'<meta property="og:description" content="[^"]*">', f'<meta property="og:description" content="{pl(ntools, 'инструмент', 'инструмента', 'инструментов')} и {pl(nfiles, 'файл', 'файла', 'файлов')}: письма, договоры, схемы, расчёты и распечатки. По темам, с поиском.">', head)
 head = re.sub(r'<meta property="og:url" content="[^"]*">', f'<meta property="og:url" content="{URL}">', head)
 head = head.replace('https://svoiludi.ch/instrumenty/og-image.jpg', URL + 'og-image.jpg')
 head = head.replace('href="../', 'href="../../')
@@ -186,7 +188,7 @@ main = f'''<main class="page" id="start">
     <p style="margin:0 0 12px"><a class="jump" href="../">← Все полезные инструменты</a></p>
     <div class="eyebrow">Полезные инструменты · Свои люди в Швейцарии</div>
     <h1 id="h1">Все файлы и инструменты <em>по темам</em></h1>
-    <p class="lead">Здесь списком всё, что можно бесплатно сделать и скачать на сайте: {ntools} инструментов и {nfiles} файлов и листов. Многие инструменты делают сразу несколько документов, например письмо на языке кантона и перевод для себя. Здесь видно каждый файл, поэтому нужное найти проще. Нажми на инструмент, впиши свои данные и скачай PDF. Всё хранится только у тебя на устройстве, регистрация не нужна.</p>
+    <p class="lead">Здесь списком всё, что можно бесплатно сделать и скачать на сайте: {pl(ntools, 'инструмент', 'инструмента', 'инструментов')} и {pl(nfiles, 'файл и лист', 'файла и листа', 'файлов и листов')}. Многие инструменты делают сразу несколько документов, например письмо на языке кантона и перевод для себя. Здесь видно каждый файл, поэтому нужное найти проще. Нажми на инструмент, впиши свои данные и скачай PDF. Всё хранится только у тебя на устройстве, регистрация не нужна.</p>
     <div class="kat-tools">
       <label class="kat-q"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg><input id="katq" type="search" placeholder="Одно слово: залог, расторжение, няня, QR, налоги" aria-label="Найти файл или инструмент по слову"></label>
       <div class="kat-f" role="group" aria-label="Вид файла">{chips}</div>
