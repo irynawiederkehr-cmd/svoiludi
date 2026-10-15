@@ -122,6 +122,8 @@ PAGES = [('index.html', '/'), ('events/index.html', '/events/'), ('akcii/index.h
 PAGES += [x for x in [('o-proekte/index.html', '/o-proekte/'), ('usloviya/index.html', '/usloviya/'), ('ceny/index.html', '/ceny/'), ('prilozhenie/index.html', '/prilozhenie/'), ('dlya-specialistov/index.html', '/dlya-specialistov/'), ('novosti/index.html', '/novosti/'), ('situacii/index.html', '/situacii/'), ('shveycariya/adaptaciya/index.html', '/shveycariya/adaptaciya/'), ('situacii/tolko-priehala/index.html', '/situacii/tolko-priehala/'), ('situacii/rabota/index.html', '/situacii/rabota/'), ('situacii/deti/index.html', '/situacii/deti/'), ('situacii/dengi/index.html', '/situacii/dengi/'), ('situacii/zhilye/index.html', '/situacii/zhilye/'), ('situacii/svoe-delo/index.html', '/situacii/svoe-delo/'), ('situacii/zdorovye/index.html', '/situacii/zdorovye/'), ('situacii/pismo-problema/index.html', '/situacii/pismo-problema/')] if x not in PAGES]
 # 14.10.2026: тема и маршрут для тех, кто ещё в Украине (переводы на паузе — украинского зеркала пока нет)
 PAGES += [x for x in [('shveycariya/iz-ukrainy/index.html', '/shveycariya/iz-ukrainy/'), ('situacii/iz-ukrainy/index.html', '/situacii/iz-ukrainy/')] if x not in PAGES]
+# 15.10.2026: тема «Ферайн: как создать, налоги и деньги» (переводы на паузе — украинского зеркала пока нет)
+PAGES += [x for x in [('shveycariya/ferajn/index.html', '/shveycariya/ferajn/')] if x not in PAGES]
 OWN = sorted({p for _, p in PAGES}, key=len, reverse=True)
 CODE_WORDS = ['ВСТРЕЧА', 'ОТЗЫВ', 'ЗАЯВКА', 'РАССЫЛКА', 'ПОРЯДОК']
 
