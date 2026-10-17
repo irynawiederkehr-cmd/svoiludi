@@ -73,7 +73,26 @@
       }).join('') + (keys.includes('einbuergerung') && c.einb ? '<p class="kt-note"><b>Кантон ' + esc(c.n) + ' добавляет:</b> ' + esc(c.einb) + '.</p>' : '') +
         (keys.includes('fz') && f ? '<p class="kt-note"><b>Семейные пособия · ' + esc(c.n) + ', 2026:</b> ' + ('на ребёнка до 16 лет ' + esc(f.k) + ' в месяц, на учащегося с 16 до 25 лет ' + esc(f.a) + ' в месяц' + (f.g ? ', при рождении один раз ' + esc(f.g) : '')).replace(/\.?$/, '.') + '</p>' : '') +
         (keys.includes('verein') ? verein(k, c) : '') +
+        ['ryba', 'griby', 'ohota'].filter(x => keys.includes(x)).map(x => priroda(x, k, c)).join('') +
+        (keys.some(x => ['ryba', 'griby', 'ohota'].includes(x)) && window.KANTONY_PRIRODA_CHECKED ? '<p class="kt-hint">Проверено ' + esc(window.KANTONY_PRIRODA_CHECKED) + '.</p>' : '') +
         '<p class="kt-hint">Если что-то в статье расходится со страницей кантона, верь кантону.</p>';
+    };
+    /* Природа (17.10.2026): рыбалка, грибы и охота в кантоне. Данные — window.KANTONY_PRIRODA в assets/kantony.js (только проверенные ссылки) */
+    const PL = {ryba: ['Рыбалка в кантоне: патенты и правила', 'Fischerei', 'pêche', 'pesca'], buy: ['Купить рыболовный патент', 'Fischereipatent', 'permis de pêche', 'patente di pesca'],
+      griby: ['Правила сбора грибов в кантоне', 'Pilze sammeln', 'cueillette des champignons', 'raccolta dei funghi'], kontrolle: ['Где проверить грибы бесплатно', 'Pilzkontrolle', 'contrôle des champignons', 'controllo dei funghi'],
+      ohota: ['Управление охоты кантона', 'Jagdverwaltung', 'service de la chasse', 'ufficio della caccia'], exam: ['Экзамен на охотника', 'Jagdprüfung', 'examen de chasse', 'esame di caccia'],
+      wild: ['Сбил дикое животное или нашёл раненое', 'Wildunfall', 'accident avec la faune', 'incidente con la selvaggina']};
+    const PSYS = {patent: 'Охота по патенту: охотник покупает патент кантона и охотится по всему кантону, кроме охраняемых зон.', revier: 'Охота в угодьях: община сдаёт право охоты обществу охотников, охотиться можно членом или гостем такого общества.', none: 'Охоты для любителей нет: численность диких животных регулируют егеря кантона.'};
+    const priroda = (x, k, c) => {
+      const p = ((window.KANTONY_PRIRODA || {})[k] || {})[x]; if (!p) return '';
+      const li = LI2[c.l] || 1;
+      // ссылка: lbl — подпись из PL, f — поле с адресом (u — главная страница темы в кантоне)
+      const a = (lbl, f) => p[f] ? '<a class="kt-link" href="' + esc(p[f]) + '" target="_blank" rel="noopener"><b>' + PL[lbl][0] + '</b><span>' + PL[lbl][li] + ' · ' + esc(c.n) + ' ↗</span></a>' : '';
+      const note = (h, parts) => { parts = parts.filter(Boolean); return parts.length ? '<p class="kt-note"><b>' + h + ' · ' + esc(c.n) + '.</b> ' + parts.map(s => esc(s).replace(/\.?$/, '.')).join(' ') + '</p>' : ''; };
+      if (x === 'ryba') return a('ryba', 'u') + a('buy', 'buy') + note('Рыбалка', [p.free, p.note]);
+      if (x === 'griby') return a('griby', 'u') + a('kontrolle', 'kontrolle') + note('Грибы', [p.limit, p.days, p.other]);
+      if (x === 'ohota') return a('ohota', 'u') + a('exam', 'exam') + a('wild', 'wild') + note('Охота', [PSYS[p.sys], p.note]);
+      return '';
     };
     /* Ферайны (15.10.2026): налог ферайна в кантоне, лотерейный фонд, интеграция, торговый реестр. Данные — window.KANTONY_VEREIN в assets/kantony.js */
     const VL = {steuer: ['Налоговая: ферайны и освобождение от налога', 'Vereine, Steuerbefreiung', 'associations, exonération', 'associazioni, esenzione'],
