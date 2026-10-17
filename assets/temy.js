@@ -84,8 +84,9 @@
       wild: ['Сбил дикое животное или нашёл раненое', 'Wildunfall', 'accident avec la faune', 'incidente con la selvaggina']};
     const PSYS = {patent: 'Охота по патенту: охотник покупает патент кантона и охотится по всему кантону, кроме охраняемых зон.', revier: 'Охота в угодьях: община сдаёт право охоты обществу охотников, охотиться можно членом или гостем такого общества.', none: 'Охоты для любителей нет: численность диких животных регулируют егеря кантона.'};
     const priroda = (x, k, c) => {
-      const p = ((window.KANTONY_PRIRODA || {})[k] || {})[x]; if (!p) return '';
-      const li = LI2[c.l] || 1;
+      const p = ((window.KANTONY_PRIRODA || {})[k] || {})[x], li = LI2[c.l] || 1;
+      const H = {ryba: 'Рыбалка', griby: 'Грибы', ohota: 'Охота'}[x];
+      if (!p) return '<p class="kt-note"><b>' + H + ' · ' + esc(c.n) + '.</b> Страницу кантона по этой теме мы ещё проверяем. На сайте кантона набери в поиске «' + PL[x][li] + '».</p>';
       // ссылка: lbl — подпись из PL, f — поле с адресом (u — главная страница темы в кантоне)
       const a = (lbl, f) => p[f] ? '<a class="kt-link" href="' + esc(p[f]) + '" target="_blank" rel="noopener"><b>' + PL[lbl][0] + '</b><span>' + PL[lbl][li] + ' · ' + esc(c.n) + ' ↗</span></a>' : '';
       const note = (h, parts) => { parts = parts.filter(Boolean); return parts.length ? '<p class="kt-note"><b>' + h + ' · ' + esc(c.n) + '.</b> ' + parts.map(s => esc(s).replace(/\.?$/, '.')).join(' ') + '</p>' : ''; };

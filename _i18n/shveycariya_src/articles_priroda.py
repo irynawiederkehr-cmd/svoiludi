@@ -13,6 +13,163 @@ def add(ARTICLES):
     ARTICLES['yagody-travy'] = YAGODY
     ARTICLES['griby'] = GRIBY
     ARTICLES['ohota'] = OHOTA
+    ARTICLES['rybalka'] = RYBALKA
+
+
+BGF = 'https://www.fedlex.admin.ch/eli/cc/1991/2259_2259_2259/de'
+TSCHV = 'https://www.fedlex.admin.ch/eli/cc/2008/416/de'
+ZH_FISH = 'https://www.zh.ch/de/umwelt-tiere/tiere/fischerei/wie-und-wo-fischen-im-kanton-zuerich.html'
+ZH_PRICES = 'https://www.zh.ch/content/dam/zhweb/bilder-dokumente/themen/umwelt-tiere/tiere/fischerei-und-jagd/fischerei/fischereipatente-beziehen/preise_f%C3%BCr_fischereipatente_ab_2026.pdf'
+ANGLER_FAQ = 'https://www.anglerausbildung.ch/fragen-antworten'
+VOLLZUG = 'https://www.bafu.admin.ch/dam/fr/sd-web/7rNRq0qInwqf/vollzugshilfe_angelfischerei.pdf'
+RYBALKA = dict(
+    upd=UPD,
+    kanton=['ryba'],
+    h1='Рыбалка в Швейцарии: <em>патент, сертификат SaNa и где ловить без патента</em>',
+    seo='Рыбалка в Швейцарии: рыболовный патент (Fischereipatent), сертификат SaNa, где ловить без патента и цены 2026 года',
+    desc='Рыбалка в Швейцарии простыми словами на русском: какой нужен патент (Fischereipatent) и сколько он стоит в 2026 году, где купить онлайн, когда нужен сертификат SaNa и как пройти курс, на каких озёрах можно ловить с берега без патента (Цюрихское, Тунское, Бриенцское, Бильское, Боденское, Женевское, Невшательское, Цугское, Фирвальдштетское), запрет живой рыбки, крючков с бородкой и «поймал-отпустил», как правильно убить рыбу, мойка лодок, дети, штрафы. По-французски permis de pêche, attestation de compétence SaNa, по-итальянски patente di pesca, attestato di competenza.',
+    lead='Рыбачить в Швейцарии можно почти везде, но почти везде нужен патент кантона. На многих больших озёрах с берега можно ловить и без него, а для патента на год понадобится короткий курс SaNa. Здесь — какой патент выбрать, сколько он стоит, где его купить и какие правила действуют на воде. Выбери свой кантон — и увидишь его страницы и цены.',
+    body='''
+<nav class="toc" aria-label="Содержание"><b>В этой статье</b>
+<ul>
+  <li><a href="#kto">Кто разрешает рыбалку</a></li>
+  <li><a href="#patent">Патент: какой выбрать и сколько стоит</a></li>
+  <li><a href="#sana">Сертификат SaNa</a></li>
+  <li><a href="#bez-patenta">Где можно ловить без патента</a></li>
+  <li><a href="#pravila">Правила на воде</a></li>
+  <li><a href="#ryba">Что делать с пойманной рыбой</a></li>
+  <li><a href="#chuzhie">Чужие виды и мойка лодок</a></li>
+  <li><a href="#deti">Дети на рыбалке</a></li>
+  <li><a href="#shtrafy">Что будет за нарушения</a></li>
+</ul></nav>
+
+<h2 id="kto">Кто разрешает рыбалку</h2>
+<ul class="ul">
+  <li>Рыбалку в Швейцарии регулирует кантон (<a href="''' + BGF + '''#art_3">федеральный закон о рыболовстве BGF, ст. 3</a>). Право ловить рыбу в озёрах и реках принадлежит кантону, и он продаёт разрешение — <b>рыболовный патент</b> (Fischereipatent, permis de pêche, patente di pesca). Поэтому правила, цены и места в каждом кантоне свои.</li>
+  <li>На многих реках и ручьях право ловить сдано в аренду обществам рыбаков или частным людям (Pachtrevier, lot affermé). Там разрешение на день, неделю или год продаёт арендатор участка. Например, в Аппенцелле-Ауссерродене все 26 участков сданы в аренду, а в Базеле-Ланде право ловли в основном у общин (<a href="https://ar.ch/verwaltung/departement-bau-und-volkswirtschaft/amt-fuer-umwelt/fischerei/fischen-in-appenzell-ausserrhoden/">кантон Аппенцелль-Ауссерроден</a>, <a href="https://www.ag.ch/de/themen/landwirtschaft-tiere/wild-wassertiere/fischerei/fischerei-im-kanton-aargau">кантон Аргау</a>).</li>
+  <li>Ссылки на страницу рыбалки и магазин патентов твоего кантона — в блоке «Твой кантон» вверху.</li>
+</ul>
+
+<h2 id="patent">Патент: какой выбрать и сколько стоит</h2>
+<ul class="ul">
+  <li>Патенты бывают на день, несколько дней, неделю, месяц и год, на одно озеро, на все озёра или на реки. Для начала обычно хватает дневного патента: он дешёвый, и для него почти везде не нужен сертификат SaNa.</li>
+  <li><b>Примеры цен 2026 года для взрослых.</b> Цюрих: дневной на одно озеро — 30 франков, для молодёжи 10–18 лет — 12, годовой — от 100 до 170 франков, бумажный патент — на 10 франков дороже (<a href="''' + ZH_PRICES + '''">кантон Цюрих</a>). Берн: день — 32 франка, 7 дней — 100, 30 дней — 180, год — 250 и 50 франков взноса на рыбное хозяйство (<a href="https://www.weu.be.ch/de/start/themen/jagd-fischerei/fischerei/fischen-kanton-bern/fischereipatente-preise.html">кантон Берн</a>). Граубюнден: день — 36 франков, сезон — 235 (<a href="https://www.gr.ch/DE/institutionen/verwaltung/diem/ajf/fischerei/Documents/Fischen%20in%20Graub%c3%bcnden/Fischereipatente/Preisliste%20Fischereipatente%202026.pdf">кантон Граубюнден</a>). Во: день на Женевском озере — 10 франков, на реках — 20 (<a href="https://www.vd.ch/fileadmin/user_upload/themes/environnement/biodiversite/fichiers_pdf/P%C3%AAche/Comment_obtenir_un_permis_de_p%C3%AAche__/Prix_permis_2026_Internet_20251225.pdf">кантон Во</a>). Женева: день на озере — 10 франков, до 16 лет — 5 (<a href="https://www.ge.ch/permis-peche/categories-permis-tarifs">кантон Женева</a>).</li>
+  <li>Тем, кто живёт в другом кантоне или за границей, патент часто стоит дороже, иногда вдвое (<a href="https://www.sg.ch/umwelt-natur/jagd-fischerei/fischerei/fischereipatente.html">кантон Санкт-Галлен</a>, <a href="https://www.weu.be.ch/de/start/themen/jagd-fischerei/fischerei/fischen-kanton-bern/fischereipatente-preise.html">кантон Берн</a>).</li>
+  <li><b>Где купить.</b> Почти во всех кантонах патент покупают онлайн или в приложении и сразу могут им пользоваться. Например, в Цюрихе — в <a href="https://webshop.efj.zh.ch">веб-магазине кантона</a> или в приложении eFJ-Mobile (<a href="''' + ZH_FISH + '''">кантон Цюрих</a>), в Берне — в <a href="https://www.weu.be.ch/de/start/themen/jagd-fischerei/fischerei/fischen-kanton-bern/fischereipatent-beziehen.html">магазине кантона и в приложении «Fischen Bern»</a>. Покупай патент только на сайте кантона или по ссылке с него.</li>
+  <li class="attn"><i class="wi"></i><b>Патент всегда носи с собой</b> и показывай по требованию рыбнадзора. В Берне при себе должны быть ещё учёт улова и удостоверение личности с фото (<a href="https://www.weu.be.ch/de/start/themen/jagd-fischerei/fischerei/fischen-kanton-bern/fischereipatent-beziehen.html">кантон Берн</a>). Учёт улова (Fangstatistik) ведут сразу после поимки и в конце сезона отправляют в кантон. В Цюрихе за опоздание или отсутствие статистики берут 50 франков (<a href="https://www.zh.ch/content/dam/zhweb/bilder-dokumente/themen/umwelt-tiere/tiere/fischerei-und-jagd/fischerei/verf%C3%BCgungen/fischereivorschriften_auszug_fuer_die_angelfischerei_202603.pdf">кантон Цюрих, выписка правил 03.2026</a>).</li>
+</ul>
+
+<h2 id="sana">Сертификат SaNa</h2>
+<ul class="ul">
+  <li><b>SaNa</b> (Sachkunde-Nachweis, attestation de compétence, attestato di competenza) — это подтверждение, что ты знаешь рыб и правила и умеешь ловить и убивать рыбу без лишних мучений. Его получают после короткого курса.</li>
+  <li class="attn"><i class="wi"></i>По федеральному закону без SaNa можно ловить только там, где патент не нужен, или с коротким патентом сроком не больше месяца (<a href="''' + TSCHV + '''#art_97">постановление о защите животных TSchV, ст. 97</a>). Многие кантоны строже: в Берне и Граубюндене SaNa нужен уже для патента на 30 дней, в Ури — для патента на 3 дня, в Цуге — для всех, кроме дневного и гостевого, в Золотурне — даже для дневного, в Санкт-Галлене — для любого патента (<a href="https://www.weu.be.ch/de/start/themen/jagd-fischerei/fischerei/fischen-kanton-bern/fischereipatente-preise.html">Берн</a>, <a href="https://www.gr.ch/DE/institutionen/verwaltung/diem/ajf/fischerei/Fischen-in-Graubuenden/Seiten/Sachkundenachweis.aspx">Граубюнден</a>, <a href="https://www.ur.ch/fischerei">Ури</a>, <a href="https://zg.ch/de/natur-umwelt-tiere/wasser-und-gewaesser/fischen">Цуг</a>, <a href="https://so.ch/verwaltung/volkswirtschaftsdepartement/amt-fuer-wald-jagd-und-fischerei/fischerei/fischen-im-kanton-solothurn/">Золотурн</a>, <a href="https://www.sg.ch/umwelt-natur/jagd-fischerei/fischerei/fischereipatente.html">Санкт-Галлен</a>). Годовой патент без SaNa не дают нигде.</li>
+  <li class="attn"><i class="wi"></i>С коротким патентом без SaNa нельзя ловить на крючок с бородкой и на живую рыбку и нельзя держать пойманную рыбу живой (<a href="https://www.anglerausbildung.ch/kurzzeitpatent">Netzwerk Anglerausbildung</a>, <a href="https://www.vd.ch/fileadmin/user_upload/themes/environnement/biodiversite/fichiers_pdf/P%C3%AAche/Formation___comment_obtenir_une_attestation_SaNa__/INFO_PECHEURS_SaNa_v14__20251215.pdf">кантон Во</a>).</li>
+  <li><b>Курс.</b> Он длится не меньше 5 часов, обычно это один день. Курс стоит обычно 60–90 франков, ещё 36 франков — сама карта SaNa (с 2026 года), учебник покупают отдельно. Записаться можно на сайте швейцарской сети обучения рыбаков: <a href="https://www.anglerausbildung.ch/sana-kurse/komplette-kurse">anglerausbildung.ch</a> (по-немецки), <a href="https://www.formation-pecheurs.ch">formation-pecheurs.ch</a> (по-французски) или <a href="https://www.formazione-pescatori.ch/">formazione-pescatori.ch</a> (по-итальянски) (<a href="''' + ANGLER_FAQ + '''">Netzwerk Anglerausbildung</a>). В Женеве курс нужен всем с 14 лет, кто покупает не только дневные патенты, и стоит около 100 франков (<a href="https://www.ge.ch/permis-peche/attestation-competence-peche-sana">кантон Женева</a>).</li>
+  <li>Документ рыбака из другой страны SaNa не заменяет. Признают только экзаменационные свидетельства Германии, Австрии, Лихтенштейна и Южного Тироля, остальным нужно пройти курс (<a href="https://www.anglerausbildung.ch/auslaendischer-fischereiausweis">Netzwerk Anglerausbildung</a>).</li>
+</ul>
+
+<h2 id="bez-patenta">Где можно ловить без патента</h2>
+<p>На многих больших озёрах с берега можно ловить без патента (Freiangelrecht, pêche sans permis). Снасти при этом простые, а сроки запрета, минимальные размеры и дневная норма действуют так же, как с патентом. Ловят всегда с берега, мостов и причалов, а не с лодки.</p>
+<ul class="ul">
+  <li><b>Цюрих</b> — Цюрихское озеро, Грайфензее, Пфеффикерзее и Тюрлерзее: одна удочка, один простой крючок без бородки, без рыбки-наживки (<a href="''' + ZH_FISH + '''">кантон Цюрих</a>).</li>
+  <li><b>Берн</b> — Бриенцское, Тунское и Бильское озёра: одна удочка, один крючок без бородки, без рыбки-наживки. Перед ловлей нужно прочитать памятку кантона о видах, размерах и сроках. У устьев рек и в заповедниках ловить нельзя (<a href="https://www.weu.be.ch/de/start/themen/jagd-fischerei/fischerei/fischen-kanton-bern/fischen-ohne-angelpatent.html">кантон Берн</a>).</li>
+  <li><b>Санкт-Галлен</b> — Боденское озеро, Валензее, Цюрихское озеро и Оберзее: одна удочка, без живой рыбки (<a href="https://www.sg.ch/umwelt-natur/jagd-fischerei/fischerei/fischereipatente/freiangelrecht.html">кантон Санкт-Галлен</a>). <b>Тургау</b> — Боденское озеро и Рейн: удочка с поплавком, крючок без бородки, без искусственных приманок; пойманную рыбу сразу убить (<a href="https://jfv.tg.ch/fischerei/freiangelei.html/8656">кантон Тургау</a>).</li>
+  <li><b>Фирвальдштетское озеро</b> (Vierwaldstättersee) — со стороны Люцерна, Нидвальдена и Ури с общедоступного берега можно бесплатно: одна удочка, крючок без бородки, натуральная наживка. В Люцерне ночью ловить нельзя (<a href="https://lawa.lu.ch/fischerei/angelfischerei/fischereiausuebung_vierwaldstaettersee">кантон Люцерн</a>). В Обвальдене так можно на Зарнерзее и Альпнахерзее с 1 апреля по 15 октября (<a href="https://www.ow.ch/_doc/435695">кантон Обвальден</a>). <b>Цугское озеро</b> — со стороны Цуга удочка с поплавком, крючок без бородки, натуральная наживка (<a href="https://zg.ch/de/natur-umwelt-tiere/wasser-und-gewaesser/fischen">кантон Цуг</a>).</li>
+  <li class="attn"><b>Швиц.</b> <i class="wi"></i>На швицких берегах Фирвальдштетского, Цугского и Цюрихского озёр без патента можно только с картой Freiangelkarte, а для неё нужен SaNa; крючок с бородкой с берега запрещён (<a href="https://www.sz.ch/verwaltung/umweltdepartement/amt-fuer-gewaesser/fischerei/haeufig-gestellte-fragen.html/8756-8758-8802-9447-9450-10713-10821">кантон Швиц</a>).</li>
+  <li><b>Женевское, Невшательское и Муртенское озёра</b> — с берега одной удочкой с поплавком и одним крючком; на Невшательском — до трёх удочек и можно с лодки (<a href="https://www.ge.ch/permis-peche/conditions-pecher-sans-permis">кантон Женева</a>, <a href="https://www.vd.ch/fileadmin/user_upload/themes/environnement/biodiversite/fichiers_pdf/P%C3%AAche/D%C3%A9couvrez_la_p%C3%AAche_dans_le_canton_de_Vaud__/DGE_Reglement_2026_Leman_Def.pdf">кантон Во</a>, <a href="https://www.ne.ch/sites/default/files/2025-11/Reglement%20p%C3%AAche%20lac%20NE.pdf">кантон Невшатель</a>).</li>
+  <li class="attn"><i class="wi"></i><b>Тичино</b> — на Лаго-Маджоре и Луганском озере патент нужен и для ловли с берега (<a href="https://www4.ti.ch/dt/da/ucp/temi/pesca/per-saperne-di-piu/domande-frequenti">кантон Тичино</a>). <b>Аргау</b> — на Хальвилерзее и участках рек «свободная» ловля только с картой за 50 франков и с SaNa, с 12 лет (<a href="https://www.ag.ch/de/themen/landwirtschaft-tiere/wild-wassertiere/fischerei/fischerei-im-kanton-aargau/freianglerrecht">кантон Аргау</a>).</li>
+</ul>
+
+<h2 id="pravila">Правила на воде</h2>
+<ul class="ul">
+  <li class="attn"><i class="wi"></i><b>«Поймал и отпустил»</b> ради удовольствия запрещено: нельзя ловить рыбу с намерением сразу её отпустить. <i class="wi"></i>Нельзя ловить на живую рыбку и на крючки с бородкой — исключения разрешает только кантон, обычно тем, у кого есть SaNa (<a href="''' + TSCHV + '''#art_23">TSchV, ст. 23</a>). Например, на Женевском озере держателям патента можно ловить на живую рыбку, прицепленную за рот (<a href="https://www.vd.ch/fileadmin/user_upload/themes/environnement/biodiversite/fichiers_pdf/P%C3%AAche/D%C3%A9couvrez_la_p%C3%AAche_dans_le_canton_de_Vaud__/DGE_Reglement_2026_Leman_Def.pdf">кантон Во</a>).</li>
+  <li class="attn">Рыбу меньше минимального размера, пойманную в период запрета, и охраняемые виды нужно, наоборот, <b>сразу и бережно отпустить</b> (<a href="''' + VOLLZUG + '''">BAFU и BLV, памятка для рыбаков</a>). <i class="wi"></i>Сроки запрета (Schonzeit), минимальный размер (Fangmindestmass) и дневная норма у каждого вида и в каждом кантоне свои и меняются. Каждый год скачивай свежую памятку своего кантона.</li>
+  <li><b>Ночью и в запретных местах.</b> Во многих местах ночью ловить нельзя: например, на Фирвальдштетском озере со стороны Люцерна ловят только с часа до восхода до часа после заката (<a href="https://lawa.lu.ch/fischerei/angelfischerei/fischereiausuebung_vierwaldstaettersee">кантон Люцерн</a>). Нельзя ловить в рыбоходах, а в Цюрихе ещё с 16 ноября по 31 января ближе 100 м от устьев некоторых притоков и ближе 50 м от сетей профессиональных рыбаков (<a href="https://www.zh.ch/content/dam/zhweb/bilder-dokumente/themen/umwelt-tiere/tiere/fischerei-und-jagd/fischerei/verf%C3%BCgungen/fischereivorschriften_auszug_fuer_die_angelfischerei_202603.pdf">кантон Цюрих</a>).</li>
+  <li><b>С лодки.</b> Для рыбалки с лодки часто нужен отдельный патент или добавка к годовому. Например, в Цюрихе добавка «Boot» стоит 160 франков, а дневной патент на одно озеро уже включает лодку (<a href="''' + ZH_PRICES + '''">кантон Цюрих</a>). Сколько удочек можно, тоже решает кантон: на Цюрихском озере с берега — две, с лодки — три (<a href="https://www.zh.ch/content/dam/zhweb/bilder-dokumente/themen/umwelt-tiere/tiere/fischerei-und-jagd/fischerei/verf%C3%BCgungen/fischereivorschriften_auszug_fuer_die_angelfischerei_202603.pdf">кантон Цюрих</a>).</li>
+</ul>
+
+<h2 id="ryba">Что делать с пойманной рыбой</h2>
+<ul class="ul">
+  <li class="attn"><i class="wi"></i>Рыбу, которую берёшь себе, нужно сразу оглушить и убить (<a href="''' + TSCHV + '''#art_100">TSchV, ст. 100</a>). Оглушают сильным ударом по голове колотушкой. Рыбу длиной от 22 см после этого сразу обескровливают — надрезают жабры — или потрошат (<a href="''' + VOLLZUG + '''">BAFU и BLV, памятка для рыбаков</a>). Крючок вынимай уже после оглушения, а если его не вынуть без травмы — обрежь леску.</li>
+  <li class="attn"><i class="wi"></i>Живую рыбу нельзя перевозить на льду или в ледяной воде (<a href="''' + TSCHV + '''#art_23">TSchV, ст. 23</a>). На Женевском озере голову и хвост рыбы до дома не отрезают, чтобы рыбнадзор мог проверить размер (<a href="https://www.vd.ch/fileadmin/user_upload/themes/environnement/biodiversite/fichiers_pdf/P%C3%AAche/D%C3%A9couvrez_la_p%C3%AAche_dans_le_canton_de_Vaud__/DGE_Reglement_2026_Leman_Def.pdf">кантон Во</a>).</li>
+  <li class="attn"><i class="wi"></i>Щуку и окуня из Цугского озера можно есть только самому и нельзя отдавать другим: в них найдены вещества PFAS (<a href="https://zg.ch/de/natur-umwelt-tiere/wasser-und-gewaesser/fischen">кантон Цуг</a>). Для Хальвилерзее кантон Аргау даёт советы, как часто такую рыбу можно есть (<a href="https://www.ag.ch/de/themen/landwirtschaft-tiere/wild-wassertiere/fischerei/fischerei-im-kanton-aargau">кантон Аргау</a>).</li>
+</ul>
+
+<h2 id="chuzhie">Чужие виды и мойка лодок</h2>
+<ul class="ul">
+  <li>Квагга-мидия, американские раки и рыба-бычок (Schwarzmundgrundel) вытесняют местных животных, а раки переносят рачью чуму. <i class="wi"></i>Не выпускай в воду рыбу, раков и растения из аквариума или из другого водоёма. Пойманного бычка не используй как наживку и сообщи о нём в кантон (<a href="https://www.zh.ch/de/umwelt-tiere/umweltschutz/gebietsfremde-arten/aquatische-neobiota-als-unbemerkte-fracht.html">кантон Цюрих</a>).</li>
+  <li class="attn"><i class="wi"></i>Лодку с номером перед спуском в другое озеро нужно заранее заявить и помыть на признанной станции: в Цюрихе — с 1 апреля 2025 года, в Центральной Швейцарии (Люцерн, Нидвальден, Обвальден, Швиц, Ури, Цуг) — с августа 2024 года, в Берне — с 23 сентября 2024 года (<a href="https://www.zh.ch/de/umwelt-tiere/umweltschutz/gebietsfremde-arten/aquatische-neobiota-als-unbemerkte-fracht.html">кантон Цюрих</a>, <a href="https://umwelt-zentralschweiz.ch/schiffsreinigungspflicht">кантоны Центральной Швейцарии</a>). SUP, каноэ, снасти и сапоги перед другим водоёмом тоже мой, лучше горячей водой, и давай им полностью высохнуть.</li>
+</ul>
+
+<h2 id="deti">Дети на рыбалке</h2>
+<ul class="ul">
+  <li>Детям во многих кантонах можно рыбачить бесплатно или почти бесплатно вместе со взрослым. В Берне с 2026 года до двух детей младше 12 лет ловят бесплатно вместе с держателем годового патента, каждый одной удочкой, улов идёт в счёт взрослого (<a href="https://www.weu.be.ch/de/start/themen/jagd-fischerei/fischerei/fischen-kanton-bern/fischereipatente-preise.html">кантон Берн</a>). В Женеве на реках дети до 14 лет ловят без разрешения, но с удостоверением личности (<a href="https://www.ge.ch/permis-peche/conditions-pecher-sans-permis">кантон Женева</a>). В Тичино дети до 8 лет ловят бесплатно со взрослым, а с 9 до 13 лет получают бесплатную лицензию с согласия родителей (<a href="https://www4.ti.ch/dt/da/ucp/temi/pesca/per-saperne-di-piu/domande-frequenti">кантон Тичино</a>).</li>
+  <li>Свободная ловля с берега в Цюрихе открыта для всех, без возраста, а молодёжный патент там стоит в несколько раз дешевле взрослого (<a href="''' + ZH_FISH + '''">кантон Цюрих</a>). Сеть обучения рыбаков советует проходить курс SaNa не раньше 10 лет (<a href="''' + ANGLER_FAQ + '''">Netzwerk Anglerausbildung</a>).</li>
+</ul>
+
+<h2 id="shtrafy">Что будет за нарушения</h2>
+<ul class="ul">
+  <li class="attn"><i class="wi"></i>Рыбнадзор (Fischereiaufsicht, garde-pêche) проверяет патенты, снасти и улов. За ловлю без патента наказывает кантон. Например, в Граубюндене штраф на месте — 500 франков за ловлю без действующего патента, 100 — за ловлю ночью и 50 — если не можешь показать патент, удостоверение личности или SaNa (<a href="https://www.gr-lex.gr.ch/frontend/annex_document_dictionaries/6583">кантон Граубюнден</a>).</li>
+  <li class="attn"><i class="wi"></i>За нарушение сроков запрета и минимальных размеров и за продажу незаконно пойманной рыбы федеральный закон грозит штрафом до 20 000 франков (<a href="''' + BGF + '''#art_17">BGF, ст. 17</a>). За вред рыбным запасам, например за выпуск чужих видов, — денежное наказание (<a href="''' + BGF + '''#art_16">BGF, ст. 16</a>). Суд может запретить человеку рыбачить до 5 лет (<a href="''' + BGF + '''#art_19">BGF, ст. 19</a>). Приговор может повлиять и на пермит — подробно в теме «<a href="../shtrafy/">Штрафы и полиция</a>».</li>
+</ul>
+''',
+    steps=[
+        'Выбери вверху свой кантон и открой его страницу рыбалки: там места, цены и магазин патентов.',
+        'Для начала купи дневной патент онлайн или лови с берега там, где патент не нужен. Патент носи с собой.',
+        'Если хочешь рыбачить часто, запишись на курс SaNa на anglerausbildung.ch — без него не дадут годовой патент.',
+        'Лови на крючки без бородки и без живой рыбки, каждый год скачивай свежую памятку кантона о сроках запрета и размерах.',
+        'Пойманную рыбу, которую берёшь себе, сразу оглуши и убей; мелкую и пойманную в период запрета бережно отпусти.',
+        'Перед рыбалкой в другом озере вымой и высуши снасти, сапоги и лодку.',
+    ],
+    tools={'plan-pohoda': 'Идёшь на рыбалку без компании, на дальний берег или в горы — оставь близким маршрут и время возвращения на русском и языке кантона.',
+           'ekstrennye-nomera': 'Скорая помощь 144, полиция 117, Rega 1414 и дежурный врач твоего кантона — на одной карточке в рюкзак.'},
+    tabs={'events': 'Выезды на рыбалку и на природу с группой на русском и украинском — во встречах рядом с тобой.'},
+    related=['rybalka-griby-ohota', 'priroda', 'zhivotnye', 'shtrafy'],
+    sources=[
+        ('Федеральный закон о рыболовстве (BGF), ст. 3, 16, 17, 19', BGF),
+        ('Постановление о защите животных (TSchV), ст. 23, 97, 100', TSCHV),
+        ('BAFU и BLV — памятка о защите животных при ловле рыбы удочкой, 2014', VOLLZUG),
+        ('Netzwerk Anglerausbildung — вопросы и ответы о SaNa', ANGLER_FAQ),
+        ('Netzwerk Anglerausbildung — короткий патент без SaNa', 'https://www.anglerausbildung.ch/kurzzeitpatent'),
+        ('Netzwerk Anglerausbildung — курсы SaNa', 'https://www.anglerausbildung.ch/sana-kurse/komplette-kurse'),
+        ('Netzwerk Anglerausbildung — иностранные документы рыбака', 'https://www.anglerausbildung.ch/auslaendischer-fischereiausweis'),
+        ('Кантон Цюрих — как и где рыбачить', ZH_FISH),
+        ('Кантон Цюрих — цены патентов с 2026 года', ZH_PRICES),
+        ('Кантон Цюрих — выписка правил для рыбаков, 03.2026', 'https://www.zh.ch/content/dam/zhweb/bilder-dokumente/themen/umwelt-tiere/tiere/fischerei-und-jagd/fischerei/verf%C3%BCgungen/fischereivorschriften_auszug_fuer_die_angelfischerei_202603.pdf'),
+        ('Кантон Цюрих — чужие виды в воде, мойка лодок', 'https://www.zh.ch/de/umwelt-tiere/umweltschutz/gebietsfremde-arten/aquatische-neobiota-als-unbemerkte-fracht.html'),
+        ('Кантон Берн — патенты и цены', 'https://www.weu.be.ch/de/start/themen/jagd-fischerei/fischerei/fischen-kanton-bern/fischereipatente-preise.html'),
+        ('Кантон Берн — как купить патент', 'https://www.weu.be.ch/de/start/themen/jagd-fischerei/fischerei/fischen-kanton-bern/fischereipatent-beziehen.html'),
+        ('Кантон Берн — рыбалка без патента', 'https://www.weu.be.ch/de/start/themen/jagd-fischerei/fischerei/fischen-kanton-bern/fischen-ohne-angelpatent.html'),
+        ('Кантон Граубюнден — цены патентов 2026', 'https://www.gr.ch/DE/institutionen/verwaltung/diem/ajf/fischerei/Documents/Fischen%20in%20Graub%c3%bcnden/Fischereipatente/Preisliste%20Fischereipatente%202026.pdf'),
+        ('Кантон Граубюнден — сертификат SaNa', 'https://www.gr.ch/DE/institutionen/verwaltung/diem/ajf/fischerei/Fischen-in-Graubuenden/Seiten/Sachkundenachweis.aspx'),
+        ('Кантон Граубюнден — штрафы на месте', 'https://www.gr-lex.gr.ch/frontend/annex_document_dictionaries/6583'),
+        ('Кантон Санкт-Галлен — рыболовные патенты', 'https://www.sg.ch/umwelt-natur/jagd-fischerei/fischerei/fischereipatente.html'),
+        ('Кантон Санкт-Галлен — ловля без патента', 'https://www.sg.ch/umwelt-natur/jagd-fischerei/fischerei/fischereipatente/freiangelrecht.html'),
+        ('Кантон Швиц — вопросы о рыбалке', 'https://www.sz.ch/verwaltung/umweltdepartement/amt-fuer-gewaesser/fischerei/haeufig-gestellte-fragen.html/8756-8758-8802-9447-9450-10713-10821'),
+        ('Кантон Люцерн — рыбалка на Фирвальдштетском озере', 'https://lawa.lu.ch/fischerei/angelfischerei/fischereiausuebung_vierwaldstaettersee'),
+        ('Кантон Обвальден — памятка о рыбалке, 2026', 'https://www.ow.ch/_doc/435695'),
+        ('Кантон Ури — рыбалка', 'https://www.ur.ch/fischerei'),
+        ('Кантон Цуг — рыбалка', 'https://zg.ch/de/natur-umwelt-tiere/wasser-und-gewaesser/fischen'),
+        ('Кантон Золотурн — рыбалка в кантоне', 'https://so.ch/verwaltung/volkswirtschaftsdepartement/amt-fuer-wald-jagd-und-fischerei/fischerei/fischen-im-kanton-solothurn/'),
+        ('Кантон Тургау — ловля без патента', 'https://jfv.tg.ch/fischerei/freiangelei.html/8656'),
+        ('Кантон Аргау — рыбалка в кантоне', 'https://www.ag.ch/de/themen/landwirtschaft-tiere/wild-wassertiere/fischerei/fischerei-im-kanton-aargau'),
+        ('Кантон Аргау — карта для свободной ловли', 'https://www.ag.ch/de/themen/landwirtschaft-tiere/wild-wassertiere/fischerei/fischerei-im-kanton-aargau/freianglerrecht'),
+        ('Кантон Аппенцелль-Ауссерроден — рыбалка', 'https://ar.ch/verwaltung/departement-bau-und-volkswirtschaft/amt-fuer-umwelt/fischerei/fischen-in-appenzell-ausserrhoden/'),
+        ('Кантон Во — цены разрешений 2026', 'https://www.vd.ch/fileadmin/user_upload/themes/environnement/biodiversite/fichiers_pdf/P%C3%AAche/Comment_obtenir_un_permis_de_p%C3%AAche__/Prix_permis_2026_Internet_20251225.pdf'),
+        ('Кантон Во — правила рыбалки на Женевском озере 2026', 'https://www.vd.ch/fileadmin/user_upload/themes/environnement/biodiversite/fichiers_pdf/P%C3%AAche/D%C3%A9couvrez_la_p%C3%AAche_dans_le_canton_de_Vaud__/DGE_Reglement_2026_Leman_Def.pdf'),
+        ('Кантон Во — SaNa, памятка 15.12.2025', 'https://www.vd.ch/fileadmin/user_upload/themes/environnement/biodiversite/fichiers_pdf/P%C3%AAche/Formation___comment_obtenir_une_attestation_SaNa__/INFO_PECHEURS_SaNa_v14__20251215.pdf'),
+        ('Кантон Женева — категории разрешений и цены', 'https://www.ge.ch/permis-peche/categories-permis-tarifs'),
+        ('Кантон Женева — где можно без разрешения', 'https://www.ge.ch/permis-peche/conditions-pecher-sans-permis'),
+        ('Кантон Женева — сертификат SaNa', 'https://www.ge.ch/permis-peche/attestation-competence-peche-sana'),
+        ('Кантон Невшатель — правила рыбалки на Невшательском озере 2025–2027', 'https://www.ne.ch/sites/default/files/2025-11/Reglement%20p%C3%AAche%20lac%20NE.pdf'),
+        ('Кантон Тичино — вопросы о рыбалке', 'https://www4.ti.ch/dt/da/ucp/temi/pesca/per-saperne-di-piu/domande-frequenti'),
+        ('Кантоны Центральной Швейцарии — заявка и мойка лодок', 'https://umwelt-zentralschweiz.ch/schiffsreinigungspflicht'),
+    ],
+    terms=[('Deutsch', 'Fischerei, Angelfischerei, Fischereipatent, Tagespatent, Wochenpatent, Jahrespatent, Kurzzeitpatent, Freiangelrecht, Freiangelkarte, Sachkunde-Nachweis (SaNa), Pachtrevier, Fischereiaufsicht, Fangstatistik, Schonzeit, Fangmindestmass, Fanglimite, Widerhaken, lebender Köderfisch, Naturköder, Zapfen, Schleppfischerei, Uferfischerei, Bootsfischerei, betäuben, töten, Fischtöter, Schongebiet, Schiffsreinigungspflicht, gebietsfremde Arten, Schwarzmundgrundel, Quaggamuschel'),
+           ('Français', 'pêche, permis de pêche, permis journalier, permis annuel, permis de courte durée, pêche sans permis, attestation de compétence (SaNa), lot de pêche affermé, garde-pêche, statistique de pêche, période de protection, taille minimale de capture, quota journalier, ardillon, poisson d’appât vivant, appât naturel, flotteur, pêche à la traîne, pêche depuis la rive, étourdir, mettre à mort, assommoir, réserve de pêche, obligation de nettoyage des bateaux, espèces exotiques envahissantes, gobie à taches noires, moule quagga'),
+           ('Italiano', 'pesca, patente di pesca, patente giornaliera, patente annuale, patente turistica, pesca senza patente, attestato di competenza (SaNa), riserva in affitto, guardapesca, statistica delle catture, periodo di divieto, misura minima, limite di cattura giornaliero, ardiglione, pesce esca vivo, esca naturale, galleggiante, pesca alla traina, pesca da riva, stordire, uccidere, zona di protezione, obbligo di pulizia delle barche, specie esotiche invasive, cozza quagga'),
+           ('English', 'fishing, fishing licence, day licence, annual licence, short-term licence, free fishing from the shore, certificate of competence (SaNa), leased fishing area, fishing warden, catch record, closed season, minimum size, daily limit, barbed hook, live bait fish, natural bait, float, trolling, shore fishing, boat fishing, stun, kill, priest, boat cleaning obligation, invasive species, round goby, quagga mussel')],
+)
 
 
 JSG = 'https://www.fedlex.admin.ch/eli/cc/1988/506_506_506/de'
