@@ -9,7 +9,130 @@ UPD = '17.10.2026'
 
 
 def add(ARTICLES):
+    ARTICLES['rybalka-griby-ohota'] = NA_PRIRODE   # прежняя общая тема: тот же адрес, теперь короткая страница со ссылками
     ARTICLES['yagody-travy'] = YAGODY
+
+
+NA_PRIRODE = dict(
+    upd=UPD,
+    updw='рыбалка, грибы, ягоды и охота теперь — отдельные подробные темы, здесь коротко о главном',
+    h1='На природе в Швейцарии: <em>что можно в лесу, на озере и в горах</em>',
+    seo='Природа в Швейцарии: рыбалка, грибы, ягоды, охота, костёр и собака в лесу — что можно и где нужно разрешение',
+    desc='Что можно на природе в Швейцарии простыми словами на русском: лес открыт для всех, ягоды и грибы для себя — без разрешения, рыбалка и охота — с разрешением кантона, костёр и гриль при опасности лесных пожаров, собака на поводке весной (с 1 апреля по 31 июля или по 15 июля), зоны покоя дичи и национальный парк, штраф за мусор с 1 августа 2026 года и экстренные номера. Подробные темы: рыбалка, грибы, ягоды и травы, охота. По-немецки Waldbrandgefahr, Feuerverbot, Leinenpflicht, Wildruhezone, по-французски danger d’incendie, obligation de tenir les chiens en laisse, zone de tranquillité, по-итальянски pericolo d’incendi, obbligo del guinzaglio, zona di tranquillità.',
+    lead='Лес, озёра и горы в Швейцарии открыты для всех. Ягоды и грибы для себя можно собирать без бумаг, а рыбачить и охотиться — только с разрешением кантона. Здесь коротко о главном и о правилах, которые касаются каждого, кто идёт в лес: костёр, собака, зоны покоя и мусор.',
+    body='''
+<nav class="toc" aria-label="Содержание"><b>В этой статье</b>
+<ul>
+  <li><a href="#temy">Рыбалка, грибы, ягоды и охота</a></li>
+  <li><a href="#les">Лес и пастбища открыты для всех</a></li>
+  <li><a href="#koster">Костёр и гриль: опасность лесных пожаров</a></li>
+  <li><a href="#sobaka">Собака на поводке весной</a></li>
+  <li><a href="#zony">Зоны покоя дичи, заповедники и национальный парк</a></li>
+  <li><a href="#musor">Мусор и ночёвка в палатке</a></li>
+  <li><a href="#nomera">Если что-то случилось</a></li>
+</ul></nav>
+
+<h2 id="temy">Рыбалка, грибы, ягоды и охота</h2>
+<p>У каждой темы есть своя подробная статья: что можно без разрешения, где его получить, правила твоего кантона и что будет за нарушение.</p>
+<div class="pm-g">
+  <a class="pm-c" href="../rybalka/"><b>Рыбалка: патент и SaNa</b><span>Почти везде нужен патент кантона, а для годового патента — сертификат SaNa. На некоторых больших озёрах с берега можно ловить без патента.</span><em>Читать →</em></a>
+  <a class="pm-c" href="../griby/"><b>Грибы: лимиты и грибной контроль</b><span>Сколько можно собрать, в какие дни нельзя и где бесплатно проверить корзину. В каждом кантоне свои правила.</span><em>Читать →</em></a>
+  <a class="pm-c" href="../yagody-travy/"><b>Ягоды, травы и цветы</b><span>Что можно собирать для себя, черемша и её ядовитые двойники, охраняемые растения и эдельвейс.</span><em>Читать →</em></a>
+  <a class="pm-c" href="../ohota/"><b>Охота и дикие животные</b><span>Как стать охотником, патент или угодья, оружие, а ещё — что делать, если сбил косулю или нашёл раненое животное.</span><em>Читать →</em></a>
+</div>
+
+<h2 id="les">Лес и пастбища открыты для всех</h2>
+<ul class="ul">
+  <li>В Швейцарии любой человек может ходить по лесу и пастбищам и собирать дикие ягоды и грибы в обычном для этой местности количестве, даже если земля частная. Так написано в Гражданском кодексе (<a href="https://www.fedlex.admin.ch/eli/cc/24/233_245_233/de#art_699">ZGB, ст. 699</a>). Власти могут закрыть для сбора отдельные места, например молодой лес.</li>
+  <li class="attn"><i class="wi"></i>Рыба и дикие животные в это свободное право не входят. Ловить рыбу и охотиться можно только по разрешению кантона — подробно в темах «<a href="../rybalka/">Рыбалка</a>» и «<a href="../ohota/">Охота</a>».</li>
+  <li>Сколько грибов и ягод можно взять и в какие дни, решают кантоны и общины, поэтому правила в разных местах разные. Если едешь в соседний кантон, проверь и его правила.</li>
+</ul>
+
+<h2 id="koster">Костёр и гриль: опасность лесных пожаров</h2>
+<ul class="ul">
+  <li>Летом в засуху кантоны объявляют уровень опасности лесных пожаров (Waldbrandgefahr, danger d’incendie de forêt, pericolo d’incendi boschivi). Карта на сегодня для всей Швейцарии — на портале Федерального ведомства окружающей среды <a href="https://www.waldbrandgefahr.ch/">waldbrandgefahr.ch</a>. Запрет огня в лесу объявляет кантон, а общины могут добавить свои правила (<a href="https://www.gr.ch/DE/institutionen/verwaltung/diem/awn/htm/waldbrandgefahr.htm">кантон Граубюнден</a>, <a href="https://www.zh.ch/de/umwelt-tiere/wald/waldbrandgefahr.html">кантон Цюрих</a>). Например, летом 2018 года 18 кантонов запретили разводить огонь в лесу и рядом с ним (<a href="https://www.admin.ch/de/nsb?id=71708">Федеральный совет, 30.07.2018</a>).</li>
+  <li>У опасности пять уровней. При низкой не бросай окурки и спички. При умеренной следи за огнём и сразу туши искры. При значительной жарь только в готовых кострищах и слушай местные власти (<a href="https://www.gr.ch/DE/institutionen/verwaltung/diem/awn/htm/waldbrandgefahr.htm">кантон Граубюнден</a>).</li>
+  <li class="attn"><i class="wi"></i>При большой опасности костры под открытым небом, как правило, запрещены, а при очень большой и при полном запрете (absolutes Feuerverbot) запрещён любой огонь вне домов, даже в кострищах (<a href="https://www.gr.ch/DE/institutionen/verwaltung/diem/awn/htm/waldbrandgefahr.htm">кантон Граубюнден</a>). Например, в Цуге в августе 2026 года при высшем уровне были запрещены все кострища, угольные и одноразовые грили и фейерверки; можно было только газовый или электрический гриль на твёрдом покрытии (<a href="https://zg.ch/de/news/2026/August/hoechste-waldbrandgefahr-absolutes-feuerverbot-im-freien">кантон Цуг</a>).</li>
+  <li>Перед пикником с грилем летом посмотри уровень опасности на карте и на сайте своего кантона.</li>
+</ul>
+
+<h2 id="sobaka">Собака на поводке весной</h2>
+<ul class="ul">
+  <li>Весной и в начале лета у диких животных и птиц появляются детёныши (Brut- und Setzzeit). В это время во многих кантонах собаку в лесу нужно вести на поводке (Leinenpflicht, obligation de tenir les chiens en laisse, obbligo del guinzaglio).</li>
+  <li><b>С 1 апреля по 31 июля</b> — в кантонах Цюрих, Люцерн, Ури, Цуг, Аргау, Золотурн, оба Базеля и Тургау, обычно в лесу и у опушки (в Цюрихе и Люцерне — до 50 м от леса) (<a href="https://www.zh.ch/de/news-uebersicht/medienmitteilungen/2022/11/neues-jagdgesetz-beim-schutz-der-wildtiere-ist-auch-die-bevoelkerung-gefragt.html">Цюрих</a>, <a href="https://opendata.swiss/en/dataset/hundeleinenpflicht-im-wald">Люцерн</a>, <a href="https://www.ur.ch/_doc/374215">Ури</a>, <a href="https://zg.ch/news/news~_2025_3_hundeleinenpflicht-im-wald-und-am-waldrand-von-april-bis-juli~.html">Цуг</a>, <a href="https://www.ag.ch/de/verwaltung/bvu/wald/erholungsraum-wald/leinenpflicht">Аргау</a>, <a href="https://so.ch/verwaltung/volkswirtschaftsdepartement/amt-fuer-wald-jagd-und-fischerei/wildtiere/mit-hund-im-wald-leinenpflicht/">Золотурн</a>, <a href="https://www.bs.ch/medienmitteilungen/wsu/2026-ab-1-april-wieder-leinenpflicht-zum-schutz-der-wildtiere">Базель</a>, <a href="https://frauenfeld.ch/public/upload/assets/44181/Merkblatt%20Leinenpflicht%202024.pdf?fp=1">Тургау</a>).</li>
+  <li><b>С 1 апреля по 15 июля</b> — во Фрибуре, Женеве и Во (<a href="https://www.fr.ch/diaf/sfn/actualites/obligation-de-tenir-les-chiens-en-laisse-en-foret-1">Фрибур</a>, <a href="https://www.ge.ch/cohabiter-avec-faune-sauvage/se-promener-avec-chien-dans-nature">Женева</a>, <a href="https://vd.ch/fileadmin/user_upload/themes/environnement/faune_nature/fichiers_pdf/Bonnes_pratiques/01_Chiens_en_laisse_ou_quand_et_pourquoi/Flyer_chien_en_laisse_DEF.PDF">Во</a>). В Во поводок нужен ещё и на лугах у леса, а в заповедниках для дичи — весь год.</li>
+  <li>В остальных кантонах сроки и места свои, а в зонах покоя дичи поводок часто нужен и зимой. Смотри таблички у входа в лес и правила кантона и общины.</li>
+  <li class="attn"><i class="wi"></i>За собаку без поводка в это время штрафуют, даже если она никого не тронула: например, в Цюрихе — 60 франков на месте (<a href="https://www.zh.ch/de/news-uebersicht/medienmitteilungen/2022/11/neues-jagdgesetz-beim-schutz-der-wildtiere-ist-auch-die-bevoelkerung-gefragt.html">кантон Цюрих</a>). <i class="wi"></i>Если собака поранит или загрызёт дикое животное, за ущерб отвечает её владелец (<a href="https://www.fedlex.admin.ch/eli/cc/27/317_321_377/de#art_56">OR, ст. 56</a>). О таком случае нужно сразу сообщить егерю или в полицию по номеру 117 (<a href="https://www.tierimrecht.org/documents/10009/Zeitlupe-2025-04-10-Leinenpflicht-waehrend-der-Setz-und-Brutzeit.pdf">Tier im Recht, 10.04.2025</a>). Подробно о собаках — в теме «<a href="../zhivotnye/">Животные</a>».</li>
+</ul>
+
+<h2 id="zony">Зоны покоя дичи, заповедники и национальный парк</h2>
+<ul class="ul">
+  <li class="attn"><b>Зоны покоя дичи</b> (Wildruhezone, zone de tranquillité, zona di tranquillità) — места в горах, где зимой и весной животных нельзя тревожить, обычно с 15 декабря по 30 апреля. Там ходят только по отмеченным тропам и маршрутам, а собаку ведут на поводке. <i class="wi"></i>Правила написаны на табличках, за нарушение штрафуют (<a href="https://www.bafu.admin.ch/dam/bafu/de/dokumente/biodiversitaet/uv-umwelt-vollzug/wildruhezonen_markierungshandbuch.pdf.download.pdf/wildruhezonen_markierungshandbuch.pdf">BAFU</a>). Все зоны покоя на одной карте — слой «Wildruhezonen» на <a href="https://map.geo.admin.ch/?lang=de&amp;layers=ch.bafu.wrz-wildruhezonen_portal">map.geo.admin.ch</a>, а подробнее — на портале <a href="https://www.wildruhezonen.ch/">wildruhezonen.ch</a>. Посмотри карту перед зимним походом на снегоступах или лыжах вне трасс.</li>
+  <li><b>Заповедники</b> (Naturschutzgebiet, réserve naturelle, riserva naturale). У каждого свои правила, они написаны на табличках у входа. Часто там нельзя сходить с тропы, рвать растения и отпускать собаку.</li>
+  <li class="attn"><b>Швейцарский национальный парк</b> в Граубюндене охраняется строже всего. Ходить можно только по размеченным тропам и только днём, нельзя брать собаку (даже на поводке), разводить огонь, ночевать, рвать цветы, собирать ягоды и грибы и уносить камни (<a href="https://www.gr-lex.gr.ch/api/de/versions/2411/pdf_file">правила национального парка</a>, <a href="https://nationalpark.ch/wp-content/uploads/2024/04/2024_SNP_Basisprospekt_Deutsch_k.pdf">буклет парка</a>). <i class="wi"></i>Смотрители штрафуют на месте: за то, что сошёл с тропы, — 250 франков, за огонь — 300, за ночёвку — 200, за собаку — 200, за сорванные цветы или ягоды — 150, за мусор — 100 франков (<a href="https://gr.lexwork.naz.ch/de/dta/498.210.pdf">список штрафов национального парка</a>).</li>
+</ul>
+
+<h2 id="musor">Мусор и ночёвка в палатке</h2>
+<ul class="ul">
+  <li class="attn"><i class="wi"></i><b>Мусор.</b> С 1 августа 2026 года штраф за брошенный мусор одинаковый по всей Швейцарии: за окурок или одну мелочь — 80 франков, за несколько мелочей — 100, за пакет до 35 литров — 150, за большой мешок — 250 франков. Детям до 15 лет штраф не выписывают (<a href="https://www.bafu.admin.ch/dam/de/sd-web/VaJjizZsf40B/Faktenblatt%20Abfall%20-%20Schweizweit%20einheitliche%20Littering-Busse.pdf">BAFU, памятка об едином штрафе</a>). Забирай мусор с пикника с собой. Подробно — в теме «<a href="../musor/">Мусор и сортировка</a>».</li>
+  <li><b>Палатка.</b> Единого федерального правила нет, решают кантоны и общины. Например, в Цюрихе в лесу на одну ночь палатку поставить можно, а дольше — только с согласия владельца участка (<a href="https://www.zh.ch/content/dam/zhweb/bilder-dokumente/themen/umwelt-tiere/wald/merkblaetter/merkblatt_2_besucher_im_wald_2017.pdf">кантон Цюрих</a>). В Во вне кемпингов — только с согласия владельца земли (<a href="https://vd.ch/fileadmin/user_upload/organisation/gc/fichiers_pdf/2022-2027/24_INT_58_TexteCE.pdf">кантон Во</a>). <i class="wi"></i>В заповедниках, национальном парке и зонах покоя дичи ночевать почти везде запрещено (<a href="https://www.ur.ch/_doc/433504">кантон Ури</a>). Подробнее — в теме «<a href="../priroda/">Горы, хайкинг и безопасность</a>».</li>
+</ul>
+
+<h2 id="nomera">Если что-то случилось</h2>
+<ul class="ul">
+  <li>Скорая помощь — <b>144</b>, полиция — <b>117</b>, пожарные — <b>118</b>, общий европейский номер — <b>112</b>. Вертолёт Rega в горах — <b>1414</b>, из-за границы +41 333 333 333 (<a href="https://www.ag.ch/de/themen/sicherheit/bevoelkerungsschutz/verhaltensempfehlungen">кантон Аргау</a>, <a href="https://www.rega.ch/">Rega</a>).</li>
+  <li>Отравление грибами, ягодами или растениями — токсикологический центр Tox Info Suisse, <b>145</b>, круглосуточно и бесплатно, из-за границы +41 44 251 51 51 (<a href="https://www.toxinfo.ch/">Tox Info Suisse</a>).</li>
+  <li>Если видишь дым или огонь в лесу, сразу звони пожарным по номеру 118.</li>
+</ul>
+''',
+    steps=[
+        'Перед прогулкой летом посмотри на waldbrandgefahr.ch, можно ли сегодня жарить, и разводи огонь только в готовых кострищах.',
+        'С апреля по июль веди собаку в лесу на поводке, а в зонах покоя и заповедниках — всегда, когда это написано на табличке.',
+        'Мусор с пикника забирай с собой: за брошенный окурок штраф 80 франков.',
+        'Если идёшь на рыбалку, за грибами, ягодами или на охоту, прочитай подробную тему и правила своего кантона.',
+        'Сохрани в телефоне номера 144, 1414, 117, 118 и 145.',
+    ],
+    tools={'ekstrennye-nomera': 'Tox Info 145, скорая помощь 144, Rega 1414 и дежурный врач твоего кантона — на одной карточке в рюкзак.',
+           'plan-pohoda': 'Идёшь в лес, на озеро или в горы — оставь близким маршрут и время возвращения на русском и языке кантона.'},
+    tabs={'events': 'Прогулки, походы за грибами и выезды на природу с группой на русском и украинском — во встречах рядом с тобой.'},
+    related=['rybalka', 'griby', 'yagody-travy', 'ohota', 'priroda', 'zhivotnye'],
+    sources=[
+        ('Гражданский кодекс (ZGB), ст. 699 — доступ в лес и на пастбища', 'https://www.fedlex.admin.ch/eli/cc/24/233_245_233/de#art_699'),
+        ('Кодекс обязательственного права (OR), ст. 56 — ответственность владельца животного', 'https://www.fedlex.admin.ch/eli/cc/27/317_321_377/de#art_56'),
+        ('BAFU — карта опасности лесных пожаров', 'https://www.waldbrandgefahr.ch/'),
+        ('Кантон Граубюнден — опасность лесных пожаров и запрет огня', 'https://www.gr.ch/DE/institutionen/verwaltung/diem/awn/htm/waldbrandgefahr.htm'),
+        ('Кантон Цюрих — опасность лесных пожаров', 'https://www.zh.ch/de/umwelt-tiere/wald/waldbrandgefahr.html'),
+        ('Кантон Цуг — высшая опасность лесных пожаров, 11.08.2026', 'https://zg.ch/de/news/2026/August/hoechste-waldbrandgefahr-absolutes-feuerverbot-im-freien'),
+        ('Федеральный совет — запреты огня в 18 кантонах, 30.07.2018', 'https://www.admin.ch/de/nsb?id=71708'),
+        ('Кантон Цюрих — поводок для собак весной, 03.11.2022', 'https://www.zh.ch/de/news-uebersicht/medienmitteilungen/2022/11/neues-jagdgesetz-beim-schutz-der-wildtiere-ist-auch-die-bevoelkerung-gefragt.html'),
+        ('Кантон Люцерн — поводок в лесу (открытые данные)', 'https://opendata.swiss/en/dataset/hundeleinenpflicht-im-wald'),
+        ('Кантон Ури — поводок весной, 25.03.2024', 'https://www.ur.ch/_doc/374215'),
+        ('Кантон Цуг — поводок в лесу и у опушки с апреля по июль, 27.03.2025', 'https://zg.ch/news/news~_2025_3_hundeleinenpflicht-im-wald-und-am-waldrand-von-april-bis-juli~.html'),
+        ('Кантон Аргау — поводок в лесу', 'https://www.ag.ch/de/verwaltung/bvu/wald/erholungsraum-wald/leinenpflicht'),
+        ('Кантон Золотурн — с собакой в лесу', 'https://so.ch/verwaltung/volkswirtschaftsdepartement/amt-fuer-wald-jagd-und-fischerei/wildtiere/mit-hund-im-wald-leinenpflicht/'),
+        ('Кантон Базель-Штадт — поводок с 1 апреля, 30.03.2026', 'https://www.bs.ch/medienmitteilungen/wsu/2026-ab-1-april-wieder-leinenpflicht-zum-schutz-der-wildtiere'),
+        ('Город Фрауэнфельд — памятка о поводке по закону Тургау, 2024', 'https://frauenfeld.ch/public/upload/assets/44181/Merkblatt%20Leinenpflicht%202024.pdf?fp=1'),
+        ('Кантон Фрибур — поводок в лесу, 30.03.2026', 'https://www.fr.ch/diaf/sfn/actualites/obligation-de-tenir-les-chiens-en-laisse-en-foret-1'),
+        ('Кантон Женева — прогулка с собакой на природе', 'https://www.ge.ch/cohabiter-avec-faune-sauvage/se-promener-avec-chien-dans-nature'),
+        ('Кантон Во — когда собака должна быть на поводке', 'https://vd.ch/fileadmin/user_upload/themes/environnement/faune_nature/fichiers_pdf/Bonnes_pratiques/01_Chiens_en_laisse_ou_quand_et_pourquoi/Flyer_chien_en_laisse_DEF.PDF'),
+        ('Tier im Recht — поводок весной по кантонам, 10.04.2025', 'https://www.tierimrecht.org/documents/10009/Zeitlupe-2025-04-10-Leinenpflicht-waehrend-der-Setz-und-Brutzeit.pdf'),
+        ('BAFU — разметка зон покоя дичи', 'https://www.bafu.admin.ch/dam/bafu/de/dokumente/biodiversitaet/uv-umwelt-vollzug/wildruhezonen_markierungshandbuch.pdf.download.pdf/wildruhezonen_markierungshandbuch.pdf'),
+        ('map.geo.admin.ch — карта зон покоя дичи', 'https://map.geo.admin.ch/?lang=de&layers=ch.bafu.wrz-wildruhezonen_portal'),
+        ('Правила Швейцарского национального парка (Nationalparkordnung)', 'https://www.gr-lex.gr.ch/api/de/versions/2411/pdf_file'),
+        ('Список штрафов национального парка (OBVN, 498.210)', 'https://gr.lexwork.naz.ch/de/dta/498.210.pdf'),
+        ('Швейцарский национальный парк — буклет для посетителей, 2024', 'https://nationalpark.ch/wp-content/uploads/2024/04/2024_SNP_Basisprospekt_Deutsch_k.pdf'),
+        ('BAFU — единый штраф за мусор с 01.08.2026', 'https://www.bafu.admin.ch/dam/de/sd-web/VaJjizZsf40B/Faktenblatt%20Abfall%20-%20Schweizweit%20einheitliche%20Littering-Busse.pdf'),
+        ('Кантон Цюрих — памятка «Посетители в лесу»', 'https://www.zh.ch/content/dam/zhweb/bilder-dokumente/themen/umwelt-tiere/wald/merkblaetter/merkblatt_2_besucher_im_wald_2017.pdf'),
+        ('Кантон Во — ответ правительства о палатках вне кемпингов, 20.11.2024', 'https://vd.ch/fileadmin/user_upload/organisation/gc/fichiers_pdf/2022-2027/24_INT_58_TexteCE.pdf'),
+        ('Кантон Ури — ответ правительства о ночёвке на природе, 04.11.2025', 'https://www.ur.ch/_doc/433504'),
+        ('Кантон Аргау — экстренные номера', 'https://www.ag.ch/de/themen/sicherheit/bevoelkerungsschutz/verhaltensempfehlungen'),
+        ('Tox Info Suisse — 145', 'https://www.toxinfo.ch/'),
+    ],
+    terms=[('Deutsch', 'Wald und Weide, im ortsüblichen Umfang, Waldbrandgefahr, Feuerverbot, absolutes Feuerverbot, Feuerstelle, Waldrand, Leinenpflicht, Brut- und Setzzeit, Wildruhezone, Wildruhegebiet, eidgenössisches Jagdbanngebiet, Naturschutzgebiet, Schweizerischer Nationalpark, Ordnungsbusse, Littering, Wildcampieren, Biwak, Notruf'),
+           ('Français', 'forêts et pâturages, selon l’usage local, danger d’incendie de forêt, interdiction de faire du feu, foyer, lisière, obligation de tenir les chiens en laisse, période de reproduction, zone de tranquillité pour la faune, district franc fédéral, réserve naturelle, Parc national suisse, amende d’ordre, littering, camping sauvage, bivouac, appel d’urgence'),
+           ('Italiano', 'boschi e pascoli, secondo l’uso locale, pericolo d’incendi boschivi, divieto di accendere fuochi, focolare, margine del bosco, obbligo del guinzaglio, periodo di riproduzione, zona di tranquillità per la fauna, bandita federale di caccia, riserva naturale, Parco Nazionale Svizzero, multa disciplinare, littering, campeggio libero, bivacco, chiamata d’emergenza'),
+           ('English', 'forest access, forest fire danger, fire ban, fire pit, leash requirement, breeding season, wildlife rest area, federal game reserve, nature reserve, Swiss National Park, on-the-spot fine, littering, wild camping, bivouac, emergency call')],
+)
 
 
 YAGODY = dict(
