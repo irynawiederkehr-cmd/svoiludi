@@ -12,6 +12,166 @@ def add(ARTICLES):
     ARTICLES['rybalka-griby-ohota'] = NA_PRIRODE   # прежняя общая тема: тот же адрес, теперь короткая страница со ссылками
     ARTICLES['yagody-travy'] = YAGODY
     ARTICLES['griby'] = GRIBY
+    ARTICLES['ohota'] = OHOTA
+
+
+JSG = 'https://www.fedlex.admin.ch/eli/cc/1988/506_506_506/de'
+CHCH_JAGD = 'https://ch.ch/de/sicherheit-und-recht/jagd'
+BAFU_JAGD = 'https://www.bafu.admin.ch/de/jagd'
+OHOTA = dict(
+    upd=UPD,
+    kanton=['ohota'],
+    h1='Охота в Швейцарии: <em>как стать охотником, оружие и что делать с дикими животными</em>',
+    seo='Охота в Швейцарии: экзамен на охотника (Jagdprüfung), патент или угодья, оружие и что делать, если сбил косулю (Wildunfall)',
+    desc='Охота в Швейцарии простыми словами на русском: охотиться можно только после экзамена кантона (Jagdprüfung), подготовка от года до трёх лет, сколько это стоит в разных кантонах, охота по патенту и в угодьях, Женева без охоты, обязательная страховка, оружие для иностранцев (Waffenerwerbsschein), наказания. И для всех: что делать, если сбил косулю на дороге (позвонить 117), нашёл детёныша дикого животного или встретил волка или медведя. По-немецки Jagd, Jagdprüfung, Jagdpatent, Wildunfall, по-французски chasse, examen de chasse, accident avec la faune, по-итальянски caccia, esame di caccia, incidente con la selvaggina.',
+    lead='Охотиться в Швейцарии можно и тем, кто приехал недавно, но путь долгий: сначала курс и экзамен кантона, а подготовка длится от года до трёх лет. А если охотиться ты не собираешься, здесь полезное для каждого: что делать, если сбил косулю на дороге, нашёл детёныша в траве или встретил волка.',
+    body='''
+<nav class="toc" aria-label="Содержание"><b>В этой статье</b>
+<ul>
+  <li><a href="#razreshenie">Охотиться можно только с разрешением кантона</a></li>
+  <li><a href="#sistemy">Патент или угодья</a></li>
+  <li><a href="#ekzamen">Как стать охотником</a></li>
+  <li><a href="#oruzhie">Оружие</a></li>
+  <li><a href="#nakazaniya">Что будет за охоту без разрешения</a></li>
+  <li><a href="#sezon">Сезон охоты и прогулки в лесу</a></li>
+  <li><a href="#wildunfall">Если сбил дикое животное</a></li>
+  <li><a href="#detenysh">Если нашёл раненое животное или детёныша</a></li>
+  <li><a href="#volk">Волк, медведь и собаки у стада</a></li>
+  <li><a href="#myaso">Мясо дичи</a></li>
+</ul></nav>
+
+<h2 id="razreshenie">Охотиться можно только с разрешением кантона</h2>
+<ul class="ul">
+  <li class="attn"><i class="wi"></i>Кто хочет охотиться, должен получить разрешение кантона (Jagdberechtigung). Его дают только тем, кто сдал экзамен кантона (<a href="''' + JSG + '''">закон об охоте JSG, ст. 4</a>). Своя земля права охотиться не даёт (<a href="''' + BAFU_JAGD + '''">BAFU</a>).</li>
+  <li>Кантон может выдать разрешение на отдельные дни гостям-охотникам и тем, кто готовится к экзамену (<a href="''' + JSG + '''">JSG, ст. 4</a>). Подготовку к экзамену каждый кантон устраивает по-своему, она длится до трёх лет. Часть кантонов признаёт экзамены других кантонов (<a href="''' + CHCH_JAGD + '''">ch.ch</a>).</li>
+  <li class="attn"><i class="wi"></i>В федеральных и кантональных заповедниках охотиться нельзя (<a href="''' + CHCH_JAGD + '''">ch.ch</a>).</li>
+</ul>
+
+<h2 id="sistemy">Патент или угодья</h2>
+<ul class="ul">
+  <li><b>Охота по патенту</b> (Patentjagd, chasse à patente, caccia a patente) — в кантонах Берн, Ури, Швиц, Обвальден, Нидвальден, Гларус, Цуг, Фрибур, оба Аппенцелля, Граубюнден, Тичино, Во, Вале, Невшатель и Юра. Охотник покупает патент кантона и может охотиться по всему кантону, кроме охраняемых зон, обычно несколько недель осенью (<a href="''' + BAFU_JAGD + '''">BAFU</a>). Патент для жителей кантона обычно дешевле: например, в Швице патент на крупную дичь стоит 600 франков для жителей и 2400 для приезжих (<a href="https://www.sz.ch/verwaltung/umweltdepartement/amt-fuer-wald-und-natur/jagd-und-wildtiere/jagd.html/8756-8758-8802-9447-9454-9460-10682">кантон Швиц</a>).</li>
+  <li><b>Охота в угодьях</b> (Revierjagd, chasse affermée) — в кантонах Цюрих, Люцерн, Золотурн, оба Базеля, Шаффхаузен, Санкт-Галлен, Аргау и Тургау. Общины сдают право охоты обществам охотников (Jagdgesellschaft) в аренду, обычно на 8 лет. Охотиться можно членом или гостем такого общества (<a href="''' + BAFU_JAGD + '''">BAFU</a>). Например, в Цюрихе нынешний период аренды — 2025–2033 годы (<a href="https://www.zh.ch/de/umwelt-tiere/tiere/jagd/jagdreviere.html">кантон Цюрих</a>).</li>
+  <li><b>Женева</b> — кантон без охоты. Её отменили на народном голосовании в 1974 году, численность диких животных при необходимости регулируют профессиональные сотрудники кантона (<a href="https://www.ge.ch/cohabiter-avec-faune-sauvage/canton-sans-chasse">кантон Женева</a>).</li>
+</ul>
+
+<h2 id="ekzamen">Как стать охотником</h2>
+<ul class="ul">
+  <li>Курс и экзамен проводит кантон. Обычно это теория (дикие животные, лес, законы, гигиена мяса дичи), стрельба и практика в угодье. Многие кантоны берут за основу учебник «Jagen in der Schweiz» («Chasser en Suisse»). Экзамен сдают в кантоне, где хотят охотиться; часть кантонов признаёт экзамены других. Условия и сроки записи своего кантона смотри в блоке «Твой кантон» вверху.</li>
+  <li><b>Кого допускают.</b> Возраст — обычно с 17–18 лет (<a href="https://www.vd.ch/fileadmin/user_upload/themes/environnement/faune_nature/fichiers_pdf/Chasse/06_legislation/Directive_Examen_chasse_2021.pdf">Во</a>, <a href="https://www.vs.ch/web/scpf/formation-jeunes-chasseurs">Вале</a>, <a href="https://www4.ti.ch/dt/da/ucp/temi/caccia/sportello/domanda-per-lottenimento-del-certificato-di-abilitazione-alla-caccia">Тичино</a>). Во многих кантонах нужна выписка из реестра судимостей. <i class="wi"></i>Есть ограничения по статусу: в Тичино на курс берут только граждан Швейцарии и иностранцев с пермитом C или B, а в Аппенцелле-Ауссерродене патент дают только гражданам Швейцарии и людям с пермитом C (<a href="https://ar.ch/verwaltung/departement-bau-und-volkswirtschaft/amt-fuer-raum-und-wald/abteilung-natur-und-wildtiere/jagd/jagdpruefung/">кантон Аппенцелль-Ауссерроден</a>).</li>
+  <li><b>Сколько длится и сколько стоит.</b> В Цюрихе после теории и стрельбы нужно не меньше двух лет быть кандидатом в цюрихском угодье (<a href="https://www.zh.ch/de/umwelt-tiere/tiere/jagd/jagdausbildung-im-kanton-zuerich.html">кантон Цюрих</a>). В Во курс длится год или два и стоит около 1050 франков (<a href="https://www.vd.ch/environnement/biodiversite-et-paysage/chasse-1">кантон Во</a>), в Вале — два года и 750 франков, в Обвальдене — 15 месяцев, курс 900 и экзамен 400 франков (<a href="https://www.ow.ch/dienstleistungen/2163">кантон Обвальден</a>). В Санкт-Галлене курс 2027–2029 годов обойдётся примерно в 2200 франков без учебника и снаряжения (<a href="https://www.sg.ch/umwelt-natur/jagd-fischerei/jagd/jagdausbildung-2025/ausbildung-zur-jaegerin-jaeger.html">кантон Санкт-Галлен</a>). В Берне до экзамена нужно 80 часов работы по уходу за угодьями (Hegestunden), сам экзамен стоит 350 франков и 100 за стрельбище (<a href="https://www.weu.be.ch/content/dam/weu/dokumente/lanat/de/jagd/02%20Daten%20Jagdpr%C3%BCfung%202027%20de.pdf">кантон Берн</a>).</li>
+  <li class="attn"><b>Сроки записи.</b> <i class="wi"></i>Курсы начинаются не каждый год, а мест мало. Например, в Во запись на следующий курс — до 31 октября 2026 года, в Золотурне — до 15 ноября 2026 года, в Тургау запись на курс 2027/28 откроется 2 ноября 2026 года и мест не больше 50 (<a href="https://www.vd.ch/environnement/biodiversite-et-paysage/chasse-1">Во</a>, <a href="https://so.ch/verwaltung/volkswirtschaftsdepartement/amt-fuer-wald-jagd-und-fischerei/jagd/jagen-im-kanton-so/jagdausbildung-jagdpruefung/">Золотурн</a>, <a href="https://jfv.tg.ch/jagd/jaegerpruefung.html/8712">Тургау</a>).</li>
+  <li class="attn"><b>Страховка и меткость.</b> <i class="wi"></i>Каждый охотник обязан иметь страховку ответственности (Jagdhaftpflichtversicherung) не меньше чем на 2 миллиона франков (<a href="https://www.fedlex.admin.ch/filestore/fedlex.data.admin.ch/eli/cc/1988/517_517_517/20250201/de/pdf-a/fedlex-data-admin-ch-eli-cc-1988-517_517_517-20250201-de-pdf-a.pdf">постановление об охоте JSV, ст. 14</a>, <a href="''' + JSG + '''">JSG, ст. 16</a>). Меткость нужно регулярно подтверждать на стрельбище (Treffsicherheitsnachweis), в большинстве кантонов — каждый год (<a href="''' + CHCH_JAGD + '''">ch.ch</a>).</li>
+  <li><b>Экзамен из другой страны.</b> Некоторые кантоны признают иностранные экзамены. Например, Берн признаёт экзамены Германии, Австрии, Италии и ещё ряда стран, если человек прожил в этой стране не меньше двух лет. Экзаменов Украины и России в этом списке нет (<a href="https://www.weu.be.ch/content/dam/weu/dokumente/lanat/de/jagd/Liste-anerkannten-Jagdpruefungen-DE.pdf">кантон Берн, список от 01.09.2026</a>).</li>
+</ul>
+
+<h2 id="oruzhie">Оружие</h2>
+<ul class="ul">
+  <li class="attn"><i class="wi"></i>Если у тебя нет швейцарского гражданства или пермита C, для покупки <b>любого</b> оружия, в том числе охотничьего ружья, нужно разрешение на покупку оружия (Waffenerwerbsschein, permis d’acquisition d’armes) — каждый раз заново. К заявлению прикладывают официальную справку из страны гражданства, что там тебе можно купить такое оружие (<a href="https://www.zh.ch/de/sicherheit-justiz/delikte-praevention/waffen.html">кантон Цюрих</a>, <a href="https://www.sg.ch/content/dam/sgch/sicherheit/kantonspolizei/waffen/Waffenerwerb%20durch%20Personen%20ohne%20Schweizer%20%20Staatsangeh%C3%B6rigkeit%20.pdf">кантон Санкт-Галлен</a>).</li>
+  <li class="attn"><i class="wi"></i>Граждане Сербии, Боснии и Герцеговины, Косово, Северной Македонии, Турции, Шри-Ланки, Алжира и Албании не могут в Швейцарии покупать, иметь и носить оружие (<a href="https://www.zh.ch/de/sicherheit-justiz/delikte-praevention/waffen.html">кантон Цюрих</a>). Украины и России в этом списке нет.</li>
+  <li class="attn"><i class="wi"></i>Оружие перевозят только незаряженным: патронов не должно быть ни в оружии, ни в магазинах (<a href="https://www.zh.ch/de/sicherheit-justiz/delikte-praevention/waffen.html">кантон Цюрих</a>).</li>
+  <li><b>Своё ружьё из-за границы.</b> Охотнику из страны Шенгенского пространства, который едет на охоту в Швейцарию, достаточно Европейского паспорта огнестрельного оружия и приглашения на охоту (<a href="https://www.ejpd.admin.ch/fedpol/en/home/sicherheit/waffen/einfuhr.html">fedpol</a>). <i class="wi"></i>Чтобы ввезти ружьё насовсем, например при переезде, нужно разрешение федеральной полиции fedpol и разрешение на покупку оружия своего кантона, оружие декларируют на таможне и потом маркируют (<a href="https://www.ejpd.admin.ch/fedpol/en/home/sicherheit/waffen/einfuhr.html">fedpol</a>).</li>
+</ul>
+
+<h2 id="nakazaniya">Что будет за охоту без разрешения</h2>
+<ul class="ul">
+  <li class="attn"><i class="wi"></i>Охота без разрешения — преступление. Кто нарочно охотится без права или убивает дикое животное, тому грозит до года лишения свободы или денежное наказание (<a href="''' + JSG + '''">JSG, ст. 17</a>). За более лёгкие нарушения, например если на охоте нет при себе нужных документов, — штраф до 20 000 франков (<a href="''' + JSG + '''">JSG, ст. 18</a>). Суд может запретить человеку охотиться на срок от 1 года до 10 лет по всей Швейцарии (<a href="''' + JSG + '''">JSG, ст. 20</a>). Приговор может повлиять и на пермит — подробно в теме «<a href="../shtrafy/">Штрафы и полиция</a>».</li>
+  <li>Закон об охоте пересмотрели в 2022 году. Правила о регулировании волков действуют с декабря 2023 года, остальные новые правила и новое постановление об охоте — с 1 февраля 2025 года (<a href="https://www.fedlex.admin.ch/filestore/fedlex.data.admin.ch/eli/cc/1988/506_506_506/20250201/de/pdf-a/fedlex-data-admin-ch-eli-cc-1988-506_506_506-20250201-de-pdf-a.pdf">JSG, редакция от 01.02.2025</a>).</li>
+</ul>
+
+<h2 id="sezon">Сезон охоты и прогулки в лесу</h2>
+<ul class="ul">
+  <li>Сроки охоты задаёт федеральный закон, а кантоны их сокращают. Охота по патенту обычно идёт несколько недель осенью, на отдельных животных — дольше. Например, во Фрибуре сезон 2026/27 длится с 1 сентября 2026 года по 28 февраля 2027 года (<a href="https://www.fr.ch/diaf/sfn/chasse">кантон Фрибур</a>).</li>
+  <li>Охотники обязаны соблюдать правила безопасности: в ряде кантонов на охоте они носят яркую сигнальную одежду, а стрелять в сторону людей, домов, дорог и тропинок нельзя (<a href="https://www.sz.ch/verwaltung/umweltdepartement/amt-fuer-wald-und-natur/jagd-und-wildtiere/jagd.html/8756-8758-8802-9447-9454-9460-10682">кантон Швиц</a>, <a href="https://www4.ti.ch/dt/da/ucp/temi/caccia">кантон Тичино</a>).</li>
+  <li>Осенью гуляй по тропам, особенно с собакой, и держи собаку рядом. Если видишь охотников в ярких жилетах или слышишь выстрелы, оставайся на тропе и дай о себе знать голосом.</li>
+</ul>
+
+<h2 id="wildunfall">Если сбил дикое животное</h2>
+<ul class="ul">
+  <li class="attn"><i class="wi"></i><b>Сразу звони в полицию по номеру 117</b>, даже если животное убежало или кажется целым. Так требует закон о дорожном движении: о каждом столкновении с животным нужно без промедления сообщить полиции (<a href="https://www.fedlex.admin.ch/eli/cc/1959/679_705_685/de#art_51">SVG, ст. 51</a>, <a href="https://so.ch/verwaltung/volkswirtschaftsdepartement/amt-fuer-wald-jagd-und-fischerei/jagd/wildunfaelle/">кантон Золотурн</a>). Кто уезжает, не сообщив, совершает наказуемое нарушение (<a href="https://www.zh.ch/de/umwelt-tiere/tiere/jagd/umgang-mit-wildtieren-im-siedlungsraum.html">кантон Цюрих</a>). Раненое животное прячется и может мучиться несколько дней, поэтому полиция вызывает охотника или егеря, чтобы его найти.</li>
+  <li><b>Что делать на месте.</b> Остановись, включи аварийку, надень светоотражающий жилет и поставь знак аварийной остановки. Запомни, куда убежало животное. К раненому животному не подходи и не трогай его: оно может сильно поранить. Дождись полиции или егеря — они выдадут подтверждение для страховки (<a href="https://www.sg.ch/umwelt-natur/jagd-fischerei/jagd/wildtiere.html">кантон Санкт-Галлен</a>, <a href="https://so.ch/verwaltung/volkswirtschaftsdepartement/amt-fuer-wald-jagd-und-fischerei/jagd/wildunfaelle/">кантон Золотурн</a>).</li>
+  <li class="attn"><i class="wi"></i><b>Мёртвое животное себе не забирай</b> — это считается браконьерством (<a href="https://so.ch/verwaltung/volkswirtschaftsdepartement/amt-fuer-wald-jagd-und-fischerei/jagd/wildunfaelle/">кантон Золотурн</a>). Только в некоторых кантонах, например в Во, водителю могут отдать сбитое животное, и только после рапорта и осмотра (<a href="https://www.vd.ch/fileadmin/user_upload/themes/environnement/faune_nature/fichiers_pdf/Chasse/06_legislation/Directive_gibier_p%C3%A9ri_VFINALE_2019.04.16.pdf">кантон Во</a>).</li>
+  <li>Ремонт машины обычно оплачивает каско (Teilkasko или Vollkasko), если оно у тебя есть. Для страховой нужно подтверждение полиции или егеря (<a href="https://so.ch/verwaltung/volkswirtschaftsdepartement/amt-fuer-wald-jagd-und-fischerei/jagd/wildunfaelle/">кантон Золотурн</a>). Условия смотри в своём договоре страховки.</li>
+</ul>
+
+<h2 id="detenysh">Если нашёл раненое животное или детёныша</h2>
+<ul class="ul">
+  <li>Детёныш, который лежит один в траве или в лесу, чаще всего не брошен: мать рядом и вернётся. Не трогай его и не уноси, а лучше уйди и понаблюдай издалека. Помощь нужна только явно раненым и страдающим животным (<a href="https://www.sz.ch/verwaltung/umweltdepartement/amt-fuer-wald-und-natur/jagd-und-wildtiere/wildtiere.html/8756-8758-8802-9447-9454-9460-10683">кантон Швиц</a>, <a href="https://www.ge.ch/cohabiter-avec-faune-sauvage/oisillons-animaux-sauvages-morts-detresse">кантон Женева</a>). Птенец на земле — тоже часто норма.</li>
+  <li class="attn"><i class="wi"></i>Если животное ранено или ему грозит опасность, не забирай его домой, а звони в полицию по номеру 117 или егерю (Wildhut, garde-faune) своего кантона. Мёртвое животное не трогай голыми руками (<a href="https://www.ge.ch/cohabiter-avec-faune-sauvage/oisillons-animaux-sauvages-morts-detresse">кантон Женева</a>). Держать диких животных у себя без разрешения нельзя.</li>
+  <li>Если у тебя луг, который весной косят, косулят перед покосом можно найти дроном с тепловизором. В Цуге это бесплатно, участок нужно заранее заявить в кантональное ведомство леса и диких животных (<a href="https://zg.ch/de/natur-umwelt-tiere/arten-und-lebensraeume/wildtierunfaelle">кантон Цуг</a>).</li>
+</ul>
+
+<h2 id="volk">Волк, медведь и собаки у стада</h2>
+<ul class="ul">
+  <li><b>Волк</b> — охраняемое животное. На 1 февраля 2026 года в Швейцарии жили 30 волчьих стай, ещё 10 — на границе с соседними странами (<a href="https://www.bafu.admin.ch/de/wolf">BAFU</a>). Регулировать стаи кантоны могут только с согласия BAFU и в определённые сроки (<a href="''' + JSG + '''">JSG, ст. 7a</a>). С тех пор как волк вернулся в Швейцарию, нападений на людей не было (<a href="https://lawa.lu.ch/jagd/Konflikte_mit_Wildtieren/Wolf">кантон Люцерн</a>).</li>
+  <li class="attn"><b>Если встретил волка</b>, остановись и не беги. Если он тебя не заметил, хлопни в ладоши или скажи что-нибудь. Уходи медленно. Если волк идёт следом, шуми и сделай шаг к нему. <i class="wi"></i>Собаку держи на поводке, волков не корми и не преследуй. О встрече сообщи егерю (<a href="https://so.ch/fileadmin/internet/vwd/vwd-awjf-jagd/pdf/Wildtiere_pdf_HP_neu/Flyer___Begegnungen_mit_dem_Wolf__.pdf">памятка KORA на сайте кантона Золотурн</a>).</li>
+  <li class="attn"><b>Медведь</b> иногда заходит в Швейцарию из Италии, но не остаётся. Если встретил медведя, остановись и громко говори, чтобы он тебя заметил. Не подходи и не убегай, а медленно отходи. <i class="wi"></i>Никогда не корми медведя (<a href="https://www.bafu.admin.ch/de/braunbaer">BAFU</a>).</li>
+  <li><b>Собаки, которые охраняют стадо</b> (Herdenschutzhunde), летом встречаются на горных пастбищах. Успокойся, держись подальше от стада, свою собаку возьми на поводок и обойди стадо по широкой дуге или поверни назад (<a href="https://ur.ch/_doc/164855">кантон Ури</a>).</li>
+</ul>
+
+<h2 id="myaso">Мясо дичи</h2>
+<ul class="ul">
+  <li>Продавать можно только безупречное мясо дичи, и происхождение каждой туши должно прослеживаться. Охотник передаёт дичь покупателю или мастерской вместе с сопроводительным документом, а если на туше есть отклонения, мясо сначала официально проверяют (<a href="https://www.zh.ch/de/umwelt-tiere/tiere/jagd/fachinformationen-jagdberechtigte.html">кантон Цюрих</a>, <a href="https://www.ne.ch/sites/default/files/2025-11/Formulaire_examen_sanitaire_gibier.pdf">кантон Невшатель</a>).</li>
+  <li>Дичь из стран вне ЕС ввозить нельзя. Из ЕС, Норвегии и Исландии для себя можно без ограничения количества, но с учётом лимитов по НДС (<a href="https://www.bazg.admin.ch/de/jagdreisen-ins-ausland-waffen-wildfleisch-trophaeen">BAZG</a>). Подробно — в теме «<a href="../tamozhnya/">Таможня и посылки</a>».</li>
+</ul>
+''',
+    steps=[
+        'Сохрани в телефоне номер полиции 117: он нужен, если сбил дикое животное, даже если оно убежало.',
+        'Если нашёл детёныша дикого животного, не трогай его и понаблюдай издалека. Раненое животное — звони 117 или егерю.',
+        'При встрече с волком или медведем не беги, а медленно отходи. Собаку держи на поводке.',
+        'Если хочешь охотиться, выбери вверху свой кантон, открой страницу об экзамене и запишись на курс заранее: мест мало, курсы начинаются не каждый год.',
+        'Если у тебя нет пермита C, до покупки ружья узнай в кантональной полиции, какие документы нужны для разрешения на покупку оружия.',
+    ],
+    tools={'ekstrennye-nomera': 'Полиция 117, скорая помощь 144, Rega 1414 и дежурный врач твоего кантона — на одной карточке в машину и в рюкзак.'},
+    tabs={},
+    related=['rybalka-griby-ohota', 'priroda', 'transport', 'shtrafy'],
+    sources=[
+        ('Закон об охоте (JSG), ст. 4, 7a, 15–20', JSG),
+        ('Закон об охоте (JSG), редакция от 01.02.2025 (PDF)', 'https://www.fedlex.admin.ch/filestore/fedlex.data.admin.ch/eli/cc/1988/506_506_506/20250201/de/pdf-a/fedlex-data-admin-ch-eli-cc-1988-506_506_506-20250201-de-pdf-a.pdf'),
+        ('Постановление об охоте (JSV), ст. 2 и 14, редакция от 01.02.2025 (PDF)', 'https://www.fedlex.admin.ch/filestore/fedlex.data.admin.ch/eli/cc/1988/517_517_517/20250201/de/pdf-a/fedlex-data-admin-ch-eli-cc-1988-517_517_517-20250201-de-pdf-a.pdf'),
+        ('Закон о дорожном движении (SVG), ст. 51', 'https://www.fedlex.admin.ch/eli/cc/1959/679_705_685/de#art_51'),
+        ('ch.ch — охота', CHCH_JAGD),
+        ('BAFU — охота', BAFU_JAGD),
+        ('BAFU — волк', 'https://www.bafu.admin.ch/de/wolf'),
+        ('BAFU — бурый медведь', 'https://www.bafu.admin.ch/de/braunbaer'),
+        ('Кантон Женева — кантон без охоты', 'https://www.ge.ch/cohabiter-avec-faune-sauvage/canton-sans-chasse'),
+        ('Кантон Женева — птенцы, раненые и мёртвые дикие животные', 'https://www.ge.ch/cohabiter-avec-faune-sauvage/oisillons-animaux-sauvages-morts-detresse'),
+        ('Кантон Цюрих — охотничьи угодья', 'https://www.zh.ch/de/umwelt-tiere/tiere/jagd/jagdreviere.html'),
+        ('Кантон Цюрих — подготовка охотников', 'https://www.zh.ch/de/umwelt-tiere/tiere/jagd/jagdausbildung-im-kanton-zuerich.html'),
+        ('Кантон Цюрих — дикие животные рядом с домом и столкновения на дороге', 'https://www.zh.ch/de/umwelt-tiere/tiere/jagd/umgang-mit-wildtieren-im-siedlungsraum.html'),
+        ('Кантон Цюрих — информация для охотников (мясо дичи)', 'https://www.zh.ch/de/umwelt-tiere/tiere/jagd/fachinformationen-jagdberechtigte.html'),
+        ('Кантон Цюрих — оружие', 'https://www.zh.ch/de/sicherheit-justiz/delikte-praevention/waffen.html'),
+        ('Кантон Санкт-Галлен — покупка оружия без швейцарского гражданства', 'https://www.sg.ch/content/dam/sgch/sicherheit/kantonspolizei/waffen/Waffenerwerb%20durch%20Personen%20ohne%20Schweizer%20%20Staatsangeh%C3%B6rigkeit%20.pdf'),
+        ('fedpol — ввоз оружия', 'https://www.ejpd.admin.ch/fedpol/en/home/sicherheit/waffen/einfuhr.html'),
+        ('Кантон Санкт-Галлен — подготовка охотников', 'https://www.sg.ch/umwelt-natur/jagd-fischerei/jagd/jagdausbildung-2025/ausbildung-zur-jaegerin-jaeger.html'),
+        ('Кантон Санкт-Галлен — дикие животные и столкновения на дороге', 'https://www.sg.ch/umwelt-natur/jagd-fischerei/jagd/wildtiere.html'),
+        ('Кантон Берн — даты экзамена на охотника 2027', 'https://www.weu.be.ch/content/dam/weu/dokumente/lanat/de/jagd/02%20Daten%20Jagdpr%C3%BCfung%202027%20de.pdf'),
+        ('Кантон Берн — признанные иностранные экзамены, 01.09.2026', 'https://www.weu.be.ch/content/dam/weu/dokumente/lanat/de/jagd/Liste-anerkannten-Jagdpruefungen-DE.pdf'),
+        ('Кантон Во — охота', 'https://www.vd.ch/environnement/biodiversite-et-paysage/chasse-1'),
+        ('Кантон Во — правила экзамена на охотника, 2021', 'https://www.vd.ch/fileadmin/user_upload/themes/environnement/faune_nature/fichiers_pdf/Chasse/06_legislation/Directive_Examen_chasse_2021.pdf'),
+        ('Кантон Во — сбитые и павшие дикие животные, 2019', 'https://www.vd.ch/fileadmin/user_upload/themes/environnement/faune_nature/fichiers_pdf/Chasse/06_legislation/Directive_gibier_p%C3%A9ri_VFINALE_2019.04.16.pdf'),
+        ('Кантон Вале — подготовка молодых охотников', 'https://www.vs.ch/web/scpf/formation-jeunes-chasseurs'),
+        ('Кантон Тичино — охота', 'https://www4.ti.ch/dt/da/ucp/temi/caccia'),
+        ('Кантон Тичино — допуск к экзамену на охотника', 'https://www4.ti.ch/dt/da/ucp/temi/caccia/sportello/domanda-per-lottenimento-del-certificato-di-abilitazione-alla-caccia'),
+        ('Кантон Обвальден — экзамен на охотника', 'https://www.ow.ch/dienstleistungen/2163'),
+        ('Кантон Аппенцелль-Ауссерроден — экзамен на охотника', 'https://ar.ch/verwaltung/departement-bau-und-volkswirtschaft/amt-fuer-raum-und-wald/abteilung-natur-und-wildtiere/jagd/jagdpruefung/'),
+        ('Кантон Швиц — охота', 'https://www.sz.ch/verwaltung/umweltdepartement/amt-fuer-wald-und-natur/jagd-und-wildtiere/jagd.html/8756-8758-8802-9447-9454-9460-10682'),
+        ('Кантон Швиц — дикие животные', 'https://www.sz.ch/verwaltung/umweltdepartement/amt-fuer-wald-und-natur/jagd-und-wildtiere/wildtiere.html/8756-8758-8802-9447-9454-9460-10683'),
+        ('Кантон Золотурн — подготовка и экзамен', 'https://so.ch/verwaltung/volkswirtschaftsdepartement/amt-fuer-wald-jagd-und-fischerei/jagd/jagen-im-kanton-so/jagdausbildung-jagdpruefung/'),
+        ('Кантон Золотурн — столкновения с дикими животными', 'https://so.ch/verwaltung/volkswirtschaftsdepartement/amt-fuer-wald-jagd-und-fischerei/jagd/wildunfaelle/'),
+        ('Кантон Золотурн — памятка KORA «Встреча с волком»', 'https://so.ch/fileadmin/internet/vwd/vwd-awjf-jagd/pdf/Wildtiere_pdf_HP_neu/Flyer___Begegnungen_mit_dem_Wolf__.pdf'),
+        ('Кантон Тургау — экзамен на охотника', 'https://jfv.tg.ch/jagd/jaegerpruefung.html/8712'),
+        ('Кантон Фрибур — охота', 'https://www.fr.ch/diaf/sfn/chasse'),
+        ('Кантон Люцерн — волк', 'https://lawa.lu.ch/jagd/Konflikte_mit_Wildtieren/Wolf'),
+        ('Кантон Цуг — дикие животные и дорога, спасение косулят', 'https://zg.ch/de/natur-umwelt-tiere/arten-und-lebensraeume/wildtierunfaelle'),
+        ('Кантон Ури — собаки, охраняющие стадо', 'https://ur.ch/_doc/164855'),
+        ('Кантон Невшатель — проверка мяса дичи', 'https://www.ne.ch/sites/default/files/2025-11/Formulaire_examen_sanitaire_gibier.pdf'),
+        ('BAZG — охота за границей: оружие, мясо дичи, трофеи', 'https://www.bazg.admin.ch/de/jagdreisen-ins-ausland-waffen-wildfleisch-trophaeen'),
+    ],
+    terms=[('Deutsch', 'Jagd, Jagdberechtigung, Jagdprüfung, Jagdfähigkeitsausweis, Jagdlehrgang, Hegestunden, Patentjagd, Jagdpatent, Revierjagd, Jagdrevier, Jagdgesellschaft, Gästekarte, Wildhut, Jagdhaftpflichtversicherung, Treffsicherheitsnachweis, Waffenerwerbsschein, Europäischer Feuerwaffenpass, Jagdzeit, Schonzeit, Signalbekleidung, Wildunfall, Fallwild, Nachsuche, Wilderei, Jagdbanngebiet, Wildruhezone, Rehkitz, Herdenschutzhund, Wildfleisch'),
+           ('Français', 'chasse, autorisation de chasser, examen de chasse, certificat d’aptitude, formation des candidats chasseurs, chasse à patente, permis de chasse, chasse affermée, société de chasse, permis d’invité, garde-faune, assurance responsabilité civile, attestation de sûreté du tir, permis d’acquisition d’armes, carte européenne d’arme à feu, période de chasse, accident avec la faune, gibier péri, recherche au sang, braconnage, district franc fédéral, faon, chien de protection des troupeaux, viande de gibier'),
+           ('Italiano', 'caccia, autorizzazione di caccia, esame di caccia, certificato di abilitazione alla caccia, caccia a patente, patente di caccia, caccia in riserva, società di caccia, permesso per ospiti, guardiacaccia, assicurazione RC, prova di tiro, permesso d’acquisto di armi, carta europea d’arma da fuoco, periodo di caccia, incidente con la selvaggina, selvaggina perita, bracconaggio, bandita federale di caccia, piccolo di capriolo, cane da protezione del bestiame, carne di selvaggina'),
+           ('English', 'hunting, hunting licence, hunting exam, licence hunting, district hunting, hunting association, guest permit, game warden, hunter liability insurance, shooting proficiency test, weapon acquisition permit, European Firearms Pass, hunting season, collision with wildlife, poaching, federal game reserve, fawn, livestock guardian dog, game meat')],
+)
 
 
 VAPKO_FIND = 'https://www.vapko.ch/index.php/de/eine-pilzkontrollstelle-finden'

@@ -125,7 +125,7 @@ PAGES += [x for x in [('shveycariya/iz-ukrainy/index.html', '/shveycariya/iz-ukr
 # 15.10.2026: тема «Ферайн: как создать, налоги и деньги» (переводы на паузе — украинского зеркала пока нет)
 PAGES += [x for x in [('shveycariya/ferajn/index.html', '/shveycariya/ferajn/')] if x not in PAGES]
 # 17.10.2026: рыбалка, грибы, ягоды и травы, охота — отдельные темы (переводы на паузе — украинского зеркала пока нет)
-PAGES += [x for x in [('shveycariya/griby/index.html', '/shveycariya/griby/'), ('shveycariya/yagody-travy/index.html', '/shveycariya/yagody-travy/')] if x not in PAGES]
+PAGES += [x for x in [('shveycariya/griby/index.html', '/shveycariya/griby/'), ('shveycariya/yagody-travy/index.html', '/shveycariya/yagody-travy/'), ('shveycariya/ohota/index.html', '/shveycariya/ohota/')] if x not in PAGES]
 OWN = sorted({p for _, p in PAGES}, key=len, reverse=True)
 CODE_WORDS = ['ВСТРЕЧА', 'ОТЗЫВ', 'ЗАЯВКА', 'РАССЫЛКА', 'ПОРЯДОК']
 
