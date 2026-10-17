@@ -79,7 +79,7 @@
     };
     /* Природа (17.10.2026): рыбалка, грибы и охота в кантоне. Данные — window.KANTONY_PRIRODA в assets/kantony.js (только проверенные ссылки) */
     const PL = {ryba: ['Рыбалка в кантоне: патенты и правила', 'Fischerei', 'pêche', 'pesca'], buy: ['Купить рыболовный патент', 'Fischereipatent', 'permis de pêche', 'patente di pesca'],
-      griby: ['Правила сбора грибов в кантоне', 'Pilze sammeln', 'cueillette des champignons', 'raccolta dei funghi'], kontrolle: ['Где проверить грибы бесплатно', 'Pilzkontrolle', 'contrôle des champignons', 'controllo dei funghi'],
+      griby: ['Правила сбора грибов в кантоне', 'Pilze sammeln', 'cueillette des champignons', 'raccolta dei funghi'], kontrolle: ['Где проверить грибы', 'Pilzkontrolle', 'contrôle des champignons', 'controllo dei funghi'],
       ohota: ['Управление охоты кантона', 'Jagdverwaltung', 'service de la chasse', 'ufficio della caccia'], exam: ['Экзамен на охотника', 'Jagdprüfung', 'examen de chasse', 'esame di caccia'],
       wild: ['Сбил дикое животное или нашёл раненое', 'Wildunfall', 'accident avec la faune', 'incidente con la selvaggina']};
     const PSYS = {patent: 'Охота по патенту: охотник покупает патент кантона и охотится по всему кантону, кроме охраняемых зон.', revier: 'Охота в угодьях: община сдаёт право охоты обществу охотников, охотиться можно членом или гостем такого общества.', none: 'Охоты для любителей нет: численность диких животных регулируют егеря кантона.'};
