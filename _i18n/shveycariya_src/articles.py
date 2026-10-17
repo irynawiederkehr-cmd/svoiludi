@@ -6224,3 +6224,7 @@ ARTICLES['perederzhka'] = dict(
     terms=[('Deutsch', 'gewerbsmässige Tierbetreuung, Tierbetreuungsdienst, Tierpension, Pflegeplätze, Hundesitter, Katzensitter, Hundespaziergang, Bewilligung, Veterinäramt, Veterinärdienst, FBA (fachspezifische berufsunabhängige Ausbildung), Tierpflegerin EFZ, Tierhalterhaftung, Betriebshaftpflicht, Obhutsschäden, Ausgleichskasse'), ('Français', 'garde d’animaux à titre professionnel, pension pour animaux, promenade de chiens, pet-sitter, autorisation, service vétérinaire cantonal, formation spécifique indépendante d’une profession (FSIP), gardien d’animaux CFC, responsabilité civile entreprise'), ('Italiano', 'custodia professionale di animali, pensione per animali, dog sitter, autorizzazione, servizio veterinario cantonale, formazione specifica indipendente dalla professione (FSIP), guardiano di animali AFC, responsabilità civile aziendale'), ('English', 'pet sitting, pet boarding, dog walking, licence, cantonal veterinary office, animal keeper, business liability insurance')],
     post='Это заявление на разрешение в ветеринарную службу кантона и просьба к управляющей разрешить животных в квартире.',
 )
+
+# «На природе»: рыбалка, грибы, ягоды и травы, охота — отдельные темы (17.10.2026) — отдельный файл
+import articles_priroda as _AP
+_AP.add(ARTICLES)

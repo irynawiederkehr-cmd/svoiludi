@@ -153,6 +153,9 @@ def hub():
 # Данные — pomosh.py; в браузер уходят как assets/pomosh.js (блок «Твой кантон» и инструмент «Куда обратиться за помощью»).
 import pomosh as PM
 open('assets/pomosh.js', 'w', encoding='utf-8').write('/* Собирается _i18n/shveycariya_src/build.py из pomosh.py — руками не править. Проверено ' + PM.CHECKED + '. */\nwindow.POMOSH = ' + json.dumps({'checked': PM.CHECKED, 'areas': PM.AREAS, 'info': PM.AREA_INFO, 'orgs': PM.ORGS, 'kant': PM.KANT}, ensure_ascii=False, separators=(',', ':')) + ';\n')
+# «Твой кантон» для рыбалки, грибов и охоты (17.10.2026): window.KANTONY_PRIRODA в assets/kantony.js — из priroda_kantony.py
+import priroda_kantony as _PK
+_PK.write()
 def _host(u):
     m = re.match(r'https?://(?:www\.)?([^/]+)', u); return m.group(1) if m else u
 def pm_org(o):

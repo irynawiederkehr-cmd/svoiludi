@@ -11,6 +11,136 @@ UPD = '17.10.2026'
 def add(ARTICLES):
     ARTICLES['rybalka-griby-ohota'] = NA_PRIRODE   # прежняя общая тема: тот же адрес, теперь короткая страница со ссылками
     ARTICLES['yagody-travy'] = YAGODY
+    ARTICLES['griby'] = GRIBY
+
+
+VAPKO_FIND = 'https://www.vapko.ch/index.php/de/eine-pilzkontrollstelle-finden'
+GRIBY = dict(
+    upd=UPD,
+    kanton=['griby'],
+    h1='Грибы в Швейцарии: <em>сколько можно собрать, дни запрета и грибной контроль</em>',
+    seo='Грибы в Швейцарии: сколько можно собрать в твоём кантоне, дни запрета и бесплатный грибной контроль (Pilzkontrolle)',
+    desc='Грибы в Швейцарии простыми словами на русском: сколько можно собрать в каждом кантоне (1, 2 или 3 кг в день), где нельзя собирать с 1 по 10 число, в какие часы можно, охраняемые грибы, бесплатный грибной контроль и как найти ближайший пункт, что делать при отравлении (Tox Info 145), можно ли продавать грибы. По-немецки Pilze sammeln, Pilzkontrolle, Schontage, Pilzschutz, по-французски cueillette des champignons, contrôle des champignons, по-итальянски raccolta di funghi, controllo dei funghi.',
+    lead='Собирать грибы в Швейцарии можно, но в каждом кантоне свои правила: где-то не больше килограмма в день, где-то с 1 по 10 число собирать нельзя совсем. И одно правило для всех: каждую корзину покажи на бесплатном грибном контроле, прежде чем готовить. Выбери свой кантон — и увидишь его правила.',
+    body='''
+<nav class="toc" aria-label="Содержание"><b>В этой статье</b>
+<ul>
+  <li><a href="#kto">Кто устанавливает правила</a></li>
+  <li><a href="#limity">Сколько и когда можно: примеры кантонов</a></li>
+  <li><a href="#nelzya">Что нельзя почти везде</a></li>
+  <li><a href="#kontrol">Бесплатный грибной контроль</a></li>
+  <li><a href="#otravlenie">Если отравился грибами</a></li>
+  <li><a href="#kak">Как собирать и хранить</a></li>
+  <li><a href="#prodazha">Можно ли продавать грибы</a></li>
+</ul></nav>
+
+<h2 id="kto">Кто устанавливает правила</h2>
+<ul class="ul">
+  <li>В лес может зайти каждый, и дикие грибы там можно собирать в обычном для этой местности количестве (<a href="https://www.fedlex.admin.ch/eli/cc/24/233_245_233/de#art_699">ZGB, ст. 699</a>). Единого закона о грибах на всю Швейцарию нет.</li>
+  <li>Сколько и когда можно собирать, решает кантон своими правилами об охране природы. В некоторых кантонах, например в Санкт-Галлене, правила вводят общины (<a href="https://www.sg.ch/umwelt-natur/natur-landschaft/biodiversitaet/artenvielfalt/pilze.html">кантон Санкт-Галлен</a>). Поэтому в соседнем кантоне правила могут быть совсем другими.</li>
+  <li>Сводная таблица правил всех кантонов и общин — у объединения официальных грибных контролёров VAPKO (<a href="https://www.vapko.ch/index.php/de/oekologie/kantonale-und-kommunale-pilzsammelbestimmungen">VAPKO, версия 08.02.2026</a>). Правила твоего кантона — в блоке «Твой кантон» вверху этой страницы.</li>
+</ul>
+
+<h2 id="limity">Сколько и когда можно: примеры кантонов</h2>
+<ul class="ul">
+  <li class="attn"><b>Нельзя с 1 по 10 число каждого месяца.</b> <i class="wi"></i>В Цюрихе в остальные дни можно собрать не больше 1 кг на человека в день, за нарушение — штраф до 1000 франков (<a href="https://www.zh.ch/de/news-uebersicht/mitteilungen/2025/gesundheit/lebensmittel/pilze-sicher-geniessen.html">кантон Цюрих</a>). В Граубюндене и Гларусе — не больше 2 кг (<a href="https://www.gr-lex.gr.ch/api/de/versions/3456/pdf_file">Граубюнден, KNHV ст. 12</a>, <a href="https://gl.lexwork.naz.ch/de/dta/IV-G.3.3.pdf">Гларус</a>). В Граубюндене ещё нельзя ходить за грибами группой больше трёх человек, если вы не одна семья, и пользоваться граблями и похожими инструментами. Те же дни запрета действуют во многих общинах на юге Санкт-Галлена.</li>
+  <li class="attn"><b>Нельзя с 1 по 7 число.</b> <i class="wi"></i>В Люцерне можно собрать не больше 2 кг, из них сморчков и лисичек вместе — не больше 0,5 кг; штраф — до 2000 франков (<a href="https://srl.lu.ch/api/de/versions/418/pdf_file">Люцерн, постановление об охране грибов</a>). В Обвальдене — не больше 2 кг, сморчков не больше 500 г, и только при дневном свете (<a href="https://gdb.ow.ch/frontend/versions/165/download_pdf_file">Обвальден</a>).</li>
+  <li><b>Можно каждый день, но только днём.</b> В Во и во Фрибуре — с 7 до 20 часов, не больше 2 кг (<a href="https://www.vd.ch/environnement/biodiversite-et-paysage/recolte-des-champignons">Во</a>, <a href="https://www.fr.ch/energie-agriculture-et-environnement/faune-et-biodiversite/champignons">Фрибур</a>). В Во прежний запрет с 1 по 7 число отменили с 1 января 2025 года. В Тичино — не больше 3 кг, нельзя с 20 до 7 часов, грабли и совки запрещены, штраф — до 10 000 франков (<a href="https://m3.ti.ch/CAN/RLeggi/public/index.php/raccolta-leggi/legge/num/553">закон Тичино о сборе грибов</a>).</li>
+  <li><b>Без дней запрета, но с лимитом.</b> В Берне — 2 кг на человека в день, дней запрета нет с 2012 года (<a href="https://www.belex.sites.be.ch/api/de/versions/2696/pdf_file">Берн, NSchV ст. 23</a>). В Швице — 2 кг, сморчков не больше 1 кг (<a href="https://www.sz.ch/umweltdepartement/amt-fuer-wald-und-natur/natur-und-landschaft/artenschutz/pilz-und-beerensammeln.html/8756-8758-8802-9447-9454-9459-10665-10668/print/html">Швиц</a>). В Нидвальдене и Тургау — 1 кг (<a href="https://www.nw.ch/fsnaturlandschaftdienste/8086">Нидвальден</a>, <a href="https://raumentwicklung.tg.ch/themen/natur/pilze.html/4229">Тургау</a>). В Юре с 1 января 2026 года — 3 кг всех грибов вместе (<a href="https://rsju.jura.ch/fr/viewdocument.html?idn=20085&amp;id=39311&amp;download=1">Юра</a>).</li>
+  <li><b>Без своих цифр.</b> В Аргау, Цуге, Золотурне, обоих Базелях, Вале и Невшателе кантон не задаёт количество, действует общее правило — в обычном для местности количестве (<a href="https://www.ag.ch/de/themen/umwelt-natur/wald/erholungsraum-wald/sammeln-von-beeren-pilzen-und-holz">Аргау</a>, <a href="https://www.vapko.ch/index.php/de/oekologie/kantonale-und-kommunale-pilzsammelbestimmungen">VAPKO</a>). Разумно ориентироваться на 1–2 кг, как в соседних кантонах.</li>
+  <li class="attn">Лимит считают на человека, а не на семью. В Обвальдене, например, дети до 12 лет собирают только вместе со взрослым и в счёт его нормы. <i class="wi"></i>За лишние килограммы во многих кантонах грибы забирают и выписывают штраф.</li>
+</ul>
+
+<h2 id="nelzya">Что нельзя почти везде</h2>
+<ul class="ul">
+  <li class="attn"><b>Заповедники.</b> <i class="wi"></i>В заповедниках грибы собирать нельзя, а в Швейцарском национальном парке нельзя собирать и повреждать никакие растения и грибы (<a href="https://www.vapko.ch/index.php/de/oekologie/kantonale-und-kommunale-pilzsammelbestimmungen">VAPKO</a>, <a href="https://www.gr-lex.gr.ch/api/de/versions/2411/pdf_file">правила национального парка</a>).</li>
+  <li class="attn"><b>Охраняемые грибы.</b> <i class="wi"></i>12 видов грибов охраняются по всей Швейцарии, их собирать нельзя нигде, например королевский боровик (Königsröhrling) и рядовка ряженая (Krokodil-Ritterling) (<a href="https://www.fedlex.admin.ch/eli/cc/1991/249_249_249/de#art_20">NHV, ст. 20 и приложение 2</a>, <a href="https://www.vapko.ch/de/oekologie/geschutzte-pilze-in-der-schweiz">список VAPKO</a>). В Тургау и Во нельзя собирать и грибы из Красного списка (<a href="https://raumentwicklung.tg.ch/themen/natur/pilze.html/4229">Тургау</a>, <a href="https://www.vd.ch/environnement/biodiversite-et-paysage/recolte-des-champignons">Во</a>).</li>
+  <li><b>Инструменты и порча.</b> Грабли, мотыги и совки, которые портят лесную почву, во многих кантонах запрещены. Несъедобные и ядовитые грибы не сбивай и не топчи: они нужны лесу, а в некоторых кантонах нарочно портить грибы запрещено законом (<a href="https://www.gr-lex.gr.ch/api/de/versions/3456/pdf_file">Граубюнден</a>, <a href="https://m3.ti.ch/CAN/RLeggi/public/index.php/raccolta-leggi/legge/num/553">Тичино</a>).</li>
+  <li><b>Организованные сборы.</b> «Грибные походы» группой ради урожая во многих кантонах запрещены, разрешены только учебные экскурсии клубов и школ (<a href="https://www.belex.sites.be.ch/api/de/versions/2696/pdf_file">Берн, NSchV ст. 23</a>, <a href="https://srl.lu.ch/api/de/versions/418/pdf_file">Люцерн</a>).</li>
+</ul>
+
+<h2 id="kontrol">Бесплатный грибной контроль</h2>
+<ul class="ul">
+  <li><b>Грибной контроль</b> (Pilzkontrolle, contrôle des champignons, controllo dei funghi) — это пункт, где официальный контролёр проверяет каждый гриб из твоей корзины и откладывает несъедобные и ядовитые. Обычно это бесплатно. Федеральное ведомство безопасности пищевых продуктов BLV советует показывать на контроле <b>все</b> собранные грибы (<a href="https://www.blv.admin.ch/dam/de/sd-web/KfZiCQXXccw6/merkblatt-pilze-de.pdf">BLV</a>).</li>
+  <li>Это не формальность. В Цюрихе контролёры отбраковывают примерно 15 % принесённых грибов как несъедобные или испорченные, а около 3 % оказываются ядовитыми, в том числе смертельно (<a href="https://www.zh.ch/content/dam/zhweb/bilder-dokumente/themen/gesundheit/lebensmittelkontrollen/MD-00134.pdf">памятка кантона Цюрих, 2026</a>).</li>
+  <li><b>Как найти пункт.</b> Ближайший пункт можно найти на сайте VAPKO по названию общины (<a href="https://www.vapko.ch/index.php/de/eine-pilzkontrollstelle-finden">поиск VAPKO</a>). В Цюрихе каждая община обязана дать жителям возможность проверить грибы, и в памятке кантона написано, какой пункт отвечает за твою общину (<a href="https://www.zh.ch/content/dam/zhweb/bilder-dokumente/themen/gesundheit/lebensmittelkontrollen/MD-00134.pdf">кантон Цюрих</a>). Во Фрибуре — 13 пунктов (<a href="https://www.fr.ch/document/50976">кантон Фрибур</a>).</li>
+  <li class="attn"><i class="wi"></i>Многие пункты работают примерно с начала августа до середины ноября и только в определённые часы, а некоторые закрыты в дни запрета сбора. Перед походом посмотри часы своего пункта. В кантоне Швиц своих пунктов не осталось, грибы проверяют в соседних кантонах (<a href="https://www.srf.ch/radio-srf-1/start-der-pilzsaison-essbar-oder-giftig-verband-fordert-mehr-pilzkontrollstellen">SRF, 28.08.2025</a>).</li>
+  <li>На контроль приноси грибы целыми, разложенными по видам, в корзине. Незнакомые грибы возьми 2–3 штуки для определения и положи отдельно (<a href="https://www.vapko.ch/index.php/de/fragen-rund-um-pilze/empfehlungen-fur-das-pilzsammeln">VAPKO</a>).</li>
+</ul>
+
+<h2 id="otravlenie">Если отравился грибами</h2>
+<ul class="ul">
+  <li class="attn"><i class="wi"></i><b>Если после грибов стало плохо</b>, сразу звони в токсикологический центр <a href="https://www.toxinfo.ch">Tox Info Suisse</a> по номеру <b>145</b>, круглосуточно и бесплатно, из-за границы — +41 44 251 51 51. Если человек теряет сознание или ему очень плохо, звони в скорую помощь по номеру <b>144</b>. Остатки грибов и блюда сохрани: по ним определят гриб.</li>
+  <li class="attn"><i class="wi"></i>Признаки отравления самым опасным грибом — бледной поганкой (Grüner Knollenblätterpilz) — появляются только через 6–24 часа, когда яд уже действует. Её яд не разрушается ни при варке, ни при сушке, ни при заморозке. «Проверка серебряной ложкой или луком» и правило «если грибы погрызли улитки, их можно есть» — мифы. Надёжно определить гриб может только официальный контролёр (<a href="https://www.toxinfo.ch/ammenmaerchen_pilze_blog">Tox Info Suisse, июль 2026</a>).</li>
+  <li>В 2025 году в Tox Info Suisse обратились из-за грибов в 674 случаях, из них 227 — с детьми; тяжёлых отравлений среди случаев с отзывом врача было пять. Даже сморчки из магазина в редких случаях вызывали тяжёлые отравления (<a href="https://www.toxinfo.ch/customer/files/1241/977_012601-Tox-Jahresbericht-2025-DE-Web-150dpi.pdf">годовой отчёт Tox Info Suisse за 2025 год</a>).</li>
+  <li class="attn"><i class="wi"></i>Не угощай других грибами, которые не проверял контролёр, и не подавай гостям блюдо из непроверенных грибов (<a href="https://www.bern.ch/themen/gesundheit-alter-und-soziales/gesundheitsvorsorge/pilzkontrolle/downloads/merkblatt-pilzesammeln.pdf/download">город Берн</a>). Не полагайся на советы знакомых и на свой опыт с родины: в Швейцарии растут и похожие, но ядовитые виды.</li>
+</ul>
+
+<h2 id="kak">Как собирать и хранить</h2>
+<ul class="ul">
+  <li>Собирай только грибы, которые точно знаешь. Срывай руками и аккуратно, молодые грибы оставь расти.</li>
+  <li>Неси грибы в открытой корзине, а не в пластиковом пакете: в пакете они быстро портятся. Сырыми грибы не ешь (<a href="https://www.blv.admin.ch/dam/de/sd-web/KfZiCQXXccw6/merkblatt-pilze-de.pdf">BLV</a>).</li>
+  <li>Свежие грибы готовь и ешь быстро. Остатки готового блюда ненадолго убери в холодильник и потом хорошо разогрей (<a href="https://www.blv.admin.ch/dam/de/sd-web/KfZiCQXXccw6/merkblatt-pilze-de.pdf">BLV</a>).</li>
+  <li>Грибы с земли мой, а лучше хорошо проваривай: так советует Федеральное ведомство здравоохранения из-за лисьего цепня (<a href="https://www.bag.admin.ch/de/fuchsbandwurm-echinokokkose">BAG</a>).</li>
+</ul>
+
+<h2 id="prodazha">Можно ли продавать грибы</h2>
+<ul class="ul">
+  <li class="attn"><i class="wi"></i>Собирать грибы на продажу можно только там, где кантон это разрешает, и только с его разрешением. Например, в Берне такое разрешение стоит 150 франков в год и позволяет собирать до 6 кг в день, а каждую продажу нужно записывать (<a href="https://www.weu.be.ch/content/dam/weu/dokumente/lanat/de/umwelt/naturschutz/Merkblatt_Pilze_D.pdf">кантон Берн</a>). В Во нужно ещё пройти курс VAPKO (<a href="https://www.vd.ch/environnement/biodiversite-et-paysage/recolte-des-champignons">кантон Во</a>). В Люцерне и Обвальдене собирать грибы на продажу запрещено.</li>
+  <li>Кто продаёт грибы, угощает ими в ресторане или на заказ, отвечает за то, что они безопасны, — это правило о продуктах питания. Грибы для торговли должен проверить квалифицированный грибной специалист (<a href="https://www.vapko.ch/index.php/de/der-pilzhandel/merkblatt-betreffend-die-vermarktung-und-die-kontrolle-von-wild-gewachsenen-speisepilzen">памятка VAPKO</a>, <a href="https://www.blv.admin.ch/de/speisepilze">BLV</a>). Подробнее о еде на продажу — в теме «<a href="../professii-dom/">Уборка, кейтеринг, домашняя кухня</a>».</li>
+</ul>
+''',
+    steps=[
+        'Перед походом за грибами выбери вверху свой кантон и посмотри лимит и дни запрета. Если идёшь в соседний кантон, проверь и его правила.',
+        'Найди ближайший пункт грибного контроля на сайте VAPKO и посмотри часы работы.',
+        'Собирай руками в открытую корзину, незнакомые грибы клади отдельно.',
+        'Всю корзину покажи на грибном контроле, прежде чем готовить или угощать.',
+        'Запиши в телефон номер Tox Info Suisse 145 и звони сразу, если после грибов стало плохо.',
+    ],
+    tools={'ekstrennye-nomera': 'Tox Info 145, скорая помощь 144, Rega 1414 и дежурный врач твоего кантона — на одной карточке в рюкзак.',
+           'plan-pohoda': 'Идёшь за грибами в незнакомый лес — оставь близким маршрут и время возвращения на русском и языке кантона.'},
+    tabs={'events': 'Прогулки и походы за грибами с группой на русском и украинском — во встречах рядом с тобой.'},
+    related=['rybalka-griby-ohota', 'yagody-travy', 'priroda', 'bolezn-travma'],
+    sources=[
+        ('Гражданский кодекс (ZGB), ст. 699 — лес, ягоды и грибы', 'https://www.fedlex.admin.ch/eli/cc/24/233_245_233/de#art_699'),
+        ('Постановление об охране природы (NHV), ст. 20 и приложение 2 — охраняемые грибы', 'https://www.fedlex.admin.ch/eli/cc/1991/249_249_249/de#art_20'),
+        ('VAPKO — правила сбора грибов в кантонах и общинах, версия 08.02.2026', 'https://www.vapko.ch/index.php/de/oekologie/kantonale-und-kommunale-pilzsammelbestimmungen'),
+        ('VAPKO — охраняемые грибы в Швейцарии', 'https://www.vapko.ch/de/oekologie/geschutzte-pilze-in-der-schweiz'),
+        ('VAPKO — найти пункт грибного контроля', VAPKO_FIND),
+        ('VAPKO — советы грибникам', 'https://www.vapko.ch/index.php/de/fragen-rund-um-pilze/empfehlungen-fur-das-pilzsammeln'),
+        ('VAPKO — памятка о продаже диких грибов', 'https://www.vapko.ch/index.php/de/der-pilzhandel/merkblatt-betreffend-die-vermarktung-und-die-kontrolle-von-wild-gewachsenen-speisepilzen'),
+        ('BLV — памятка «Собирать грибы»', 'https://www.blv.admin.ch/dam/de/sd-web/KfZiCQXXccw6/merkblatt-pilze-de.pdf'),
+        ('BLV — съедобные грибы', 'https://www.blv.admin.ch/de/speisepilze'),
+        ('Кантон Цюрих — грибы без риска, 11.08.2025', 'https://www.zh.ch/de/news-uebersicht/mitteilungen/2025/gesundheit/lebensmittel/pilze-sicher-geniessen.html'),
+        ('Кантон Цюрих — памятка «Грибы и грибной контроль» (MD-00134), с 18.03.2026', 'https://www.zh.ch/content/dam/zhweb/bilder-dokumente/themen/gesundheit/lebensmittelkontrollen/MD-00134.pdf'),
+        ('Кантон Граубюнден — постановление об охране природы (KNHV), ст. 12', 'https://www.gr-lex.gr.ch/api/de/versions/3456/pdf_file'),
+        ('Кантон Гларус — постановление об охране грибов', 'https://gl.lexwork.naz.ch/de/dta/IV-G.3.3.pdf'),
+        ('Кантон Санкт-Галлен — грибы', 'https://www.sg.ch/umwelt-natur/natur-landschaft/biodiversitaet/artenvielfalt/pilze.html'),
+        ('Кантон Люцерн — постановление об охране грибов (SRL 715c)', 'https://srl.lu.ch/api/de/versions/418/pdf_file'),
+        ('Кантон Обвальден — постановление об охране грибов', 'https://gdb.ow.ch/frontend/versions/165/download_pdf_file'),
+        ('Кантон Во — сбор грибов', 'https://www.vd.ch/environnement/biodiversite-et-paysage/recolte-des-champignons'),
+        ('Кантон Фрибур — грибы', 'https://www.fr.ch/energie-agriculture-et-environnement/faune-et-biodiversite/champignons'),
+        ('Кантон Фрибур — пункты грибного контроля, 09.10.2026', 'https://www.fr.ch/document/50976'),
+        ('Кантон Тичино — закон о сборе грибов (RL 483.100)', 'https://m3.ti.ch/CAN/RLeggi/public/index.php/raccolta-leggi/legge/num/553'),
+        ('Кантон Берн — постановление об охране природы (NSchV), ст. 22–23', 'https://www.belex.sites.be.ch/api/de/versions/2696/pdf_file'),
+        ('Кантон Берн — памятка о грибах и разрешении на продажу', 'https://www.weu.be.ch/content/dam/weu/dokumente/lanat/de/umwelt/naturschutz/Merkblatt_Pilze_D.pdf'),
+        ('Город Берн — памятка грибника', 'https://www.bern.ch/themen/gesundheit-alter-und-soziales/gesundheitsvorsorge/pilzkontrolle/downloads/merkblatt-pilzesammeln.pdf/download'),
+        ('Кантон Швиц — сбор грибов и ягод', 'https://www.sz.ch/umweltdepartement/amt-fuer-wald-und-natur/natur-und-landschaft/artenschutz/pilz-und-beerensammeln.html/8756-8758-8802-9447-9454-9459-10665-10668/print/html'),
+        ('Кантон Нидвальден — сбор грибов', 'https://www.nw.ch/fsnaturlandschaftdienste/8086'),
+        ('Кантон Тургау — грибы', 'https://raumentwicklung.tg.ch/themen/natur/pilze.html/4229'),
+        ('Кантон Юра — постановление об охране природы (OPNP) с 01.01.2026', 'https://rsju.jura.ch/fr/viewdocument.html?idn=20085&id=39311&download=1'),
+        ('Кантон Аргау — сбор ягод, грибов и дров', 'https://www.ag.ch/de/themen/umwelt-natur/wald/erholungsraum-wald/sammeln-von-beeren-pilzen-und-holz'),
+        ('SRF — пунктов грибного контроля становится меньше, 28.08.2025', 'https://www.srf.ch/radio-srf-1/start-der-pilzsaison-essbar-oder-giftig-verband-fordert-mehr-pilzkontrollstellen'),
+        ('Tox Info Suisse — мифы о грибах, июль 2026', 'https://www.toxinfo.ch/ammenmaerchen_pilze_blog'),
+        ('Tox Info Suisse — годовой отчёт 2025', 'https://www.toxinfo.ch/customer/files/1241/977_012601-Tox-Jahresbericht-2025-DE-Web-150dpi.pdf'),
+        ('BAG — лисий цепень', 'https://www.bag.admin.ch/de/fuchsbandwurm-echinokokkose'),
+        ('Правила Швейцарского национального парка (Nationalparkordnung)', 'https://www.gr-lex.gr.ch/api/de/versions/2411/pdf_file'),
+    ],
+    terms=[('Deutsch', 'Pilze sammeln, Pilzkontrolle, Pilzkontrollstelle, amtliche Pilzkontrolleurin, Schontage, Schonzeit, pro Person und Tag, Pilzschutzverordnung, Pilzschutzgebiet, geschützte Pilze, Rote Liste, organisiertes Sammeln, gewerbsmässiges Sammeln, Bewilligung, Busse, Speisepilz, Giftpilz, Grüner Knollenblätterpilz, Steinpilz, Eierschwamm, Morchel'),
+           ('Français', 'cueillette des champignons, contrôle des champignons, poste de contrôle, contrôleur officiel des champignons, jours d’interdiction, par personne et par jour, réserve mycologique, espèces protégées, Liste rouge, cueillette organisée, cueillette à des fins commerciales, autorisation, amende, champignon comestible, champignon vénéneux, amanite phalloïde, cèpe, chanterelle, morille'),
+           ('Italiano', 'raccolta di funghi, controllo dei funghi, ufficio di controllo dei funghi, controllore ufficiale, periodo di divieto, per persona al giorno, zona di protezione dei funghi, specie protette, Lista rossa, raccolta organizzata, raccolta a scopo di lucro, autorizzazione, multa, fungo commestibile, fungo velenoso, tignosa verdognola, porcino, gallinaccio, spugnola'),
+           ('English', 'mushroom picking, mushroom inspection, inspection point, official mushroom inspector, closed days, per person per day, protected mushrooms, Red List, commercial picking, permit, fine, edible mushroom, poisonous mushroom, death cap, porcini, chanterelle, morel')],
+)
 
 
 NA_PRIRODE = dict(
